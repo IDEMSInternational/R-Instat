@@ -314,7 +314,8 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
     if(convert_to_character) {
       decimal_places = self$get_variables_metadata(property = signif_figures_label, column = names(out), error_if_no_property = FALSE)
       decimal_places[is.na(decimal_places)] <- 0
-      return(convert_to_character_matrix(out, TRUE, decimal_places))
+      scientific_notation = self$get_variables_metadata(property = scientific_label, column = names(out), error_if_no_property = FALSE)
+      return(convert_to_character_matrix(data = out, format_decimal_places =  TRUE, decimal_places =  decimal_places, is_scientific = scientific_notation))
     }
     else return(out)
   }
@@ -476,8 +477,19 @@ DataSheet$set("public", "get_calculations", function() {
 }
 )
 
-DataSheet$set("public", "get_calculation_names", function() {
-  return(names(private$calculations))
+DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, excluded_items = c()) {
+  out = names(private$calculations)
+  if(length(excluded_items) > 0) {
+    ex_ind = which(out %in% excluded_items)
+    if(length(ex_ind) != length(excluded_items)) warning("Some of the excluded_items were not found in the list of calculations")
+    if(length(ex_ind) > 0) out = out[-ex_ind]
+  }
+  if(!as_list) {
+    return(out)
+  }
+  lst = list()
+  lst[[self$get_metadata(data_name_label)]] <- out
+  return(lst)
 }
 )
 
@@ -490,6 +502,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
       num_cols = ncol(col_data)
     }
     else num_cols = 1
+    if(tibble::is_tibble(col_data)) col_data <- data.frame(col_data)
   }
   else {
     if(missing(col_data)) col_data = replicate(num_cols, rep(NA, self$get_data_frame_length()))
@@ -1455,7 +1468,7 @@ DataSheet$set("public", "set_protected_columns", function(col_names) {
 }
 )
 
-DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE, is_no_filter = FALSE) {
+DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE, is_no_filter = FALSE, and_or = "&") {
   if(missing(filter)) stop("filter is required")
   if(filter_name == "") filter_name = next_default_item("Filter", names(private$filters))
   
@@ -1470,7 +1483,7 @@ DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace
   }
   else {
     if(filter_name %in% names(private$filters)) message("A filter named ", filter_name, " already exists. It will be replaced by the new filter.")
-    filter_calc = calculation$new(type = "filter", filter_conditions = filter, name = filter_name, parameters = list(na.rm = na.rm, is_no_filter = is_no_filter))
+    filter_calc = calculation$new(type = "filter", filter_conditions = filter, name = filter_name, parameters = list(na.rm = na.rm, is_no_filter = is_no_filter, and_or = and_or))
     private$filters[[filter_name]] <- filter_calc
     self$append_to_changes(list(Added_filter, filter_name))
     if(set_as_current) {
@@ -1480,6 +1493,13 @@ DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace
   }
 }
 )
+
+DataSheet$set("public","add_filter_as_levels", function(filter_levels, column){
+  for (i in seq_along(filter_levels)) {
+    filter_cond <- list(C0 = list(column = column, operation = "==", value = filter_levels[i]))
+    self$add_filter(filter = filter_cond, filter_name = filter_levels[i])
+  }
+})
 
 DataSheet$set("public", "get_current_filter", function() {
   return(private$.current_filter)
@@ -1537,7 +1557,11 @@ DataSheet$set("public", "get_filter_as_logical", function(filter_name) {
       }
       i = i + 1
     }
-    out <- apply(result, 1, all)
+    and_or <- curr_filter$parameters[["and_or"]] 
+    if(is.null(and_or)) and_or <- "&"
+    if(and_or == "&") out <- apply(result, 1, all) 
+    else if (and_or == "|") out <- apply(result, 1, any)
+    else stop(and_or, " should be & or |.")
     out[is.na(out)] <- !curr_filter$parameters[["na.rm"]]
   }
   return(out)
@@ -1577,7 +1601,7 @@ DataSheet$set("public", "filter_string", function(filter_name) {
   out = "("
   i = 1
   for(condition in curr_filter$filter_conditions) {
-    if(i != 1) out = paste(out, "&")
+    if(i != 1) out = paste(out, curr_filter$parameters[["and_or"]])
     out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
     if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(paste0("'", condition[["value"]], "'"), collapse = ","), ")")
     else out = paste(out, condition[["value"]])
@@ -1679,17 +1703,44 @@ DataSheet$set("public", "get_last_graph", function() {
 }
 )
 
-DataSheet$set("public", "rename_object", function(object_name, new_name) {
-  if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
-  if(new_name %in% names(private$objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
-  names(private$objects)[names(private$objects) == object_name] <- new_name
+DataSheet$set("public", "rename_object", function(object_name, new_name, object_type = "object") {
+  if(!object_type %in% c("object", "filter", "calculation", "graph", "table","model")) stop(object_type, " must be either object (graph, table or model), filter or a calculation.")
+  #Temp fix:: added graph, table and model so as to distinguish this when implementing it in the dialog. Otherwise they remain as objects
+  if (object_type %in% c("object", "graph", "table","model")){
+    if(!object_name %in% names(private$objects)) stop(object_name, " not found in objects list")
+    if(new_name %in% names(private$objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
+    names(private$objects)[names(private$objects) == object_name] <- new_name
+  } 
+  else if (object_type == "filter"){
+    if(!object_name %in% names(private$filters)) stop(object_name, " not found in filters list")
+    if(new_name %in% names(private$filters)) stop(new_name, " is already a filter name. Cannot rename ", object_name, " to ", new_name)
+    if("no_filter" == object_name) stop("Renaming no_filter is not allowed.")
+    names(private$filters)[names(private$filters) == object_name] <- new_name
+    if(private$.current_filter$name == object_name){private$.current_filter$name <- new_name}
+  } 
+  else if (object_type == "calculation") {
+    if(!object_name %in% names(private$calculations)) stop(object_name, " not found in calculations list")
+    if(new_name %in% names(private$calculations)) stop(new_name, " is already a calculation name. Cannot rename ", object_name, " to ", new_name)
+    names(private$calculations)[names(private$calculations) == object_name] <- new_name
+  }
 }
 )
 
-DataSheet$set("public", "delete_objects", function(object_names) {
-  if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in objects list")
-  private$objects[names(private$objects) == object_names] <- NULL
-  if(!is.null(private$.last_graph) && private$.last_graph %in% object_names) {
+DataSheet$set("public", "delete_objects", function(data_name, object_names, object_type = "object") {
+  if(!object_type %in% c("object", "graph", "table","model","filter", "calculation")) stop(object_type, " must be either object (graph, table or model), filter or a calculation.")
+  if(any(object_type == c("object", "graph", "table","model"))){
+      if(!all(object_names %in% names(private$objects))) stop("Not all object_names found in overall objects list.")
+      private$objects[names(private$objects) %in% object_names] <- NULL
+    }else if(object_type == "filter"){
+      if(!all(object_names %in% names(private$filters))) stop(object_names, " not found in filters list.")
+      if("no_filter" %in% object_names) stop("no_filter cannot be deleted.")
+      if(any(private$.current_filter$name %in% object_names))stop(private$.current_filter$name, " is currently in use and cannot be deleted.")
+      private$filters[names(private$filters) %in% object_names] <- NULL
+    }else if(object_type == "calculation"){
+      if(!object_names %in% names(private$calculations)) stop(object_names, " not found in calculations list.")
+      private$calculations[names(private$calculations) %in% object_names] <- NULL
+    }
+  if(!is.null(private$.last_graph) && length(private$.last_graph) == 2 && private$.last_graph[1] == data_name && private$.last_graph[2] %in% object_names) {
     private$.last_graph <- NULL
   }
 }

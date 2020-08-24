@@ -23,6 +23,15 @@ Public Class ucrCheck
     Private strValueIfChecked As String = "TRUE"
     Private strValueIfUnchecked As String = "FALSE"
 
+    Public Overrides Property Text() As String
+        Get
+            Return chkCheck.Text
+        End Get
+        Set(value As String)
+            chkCheck.Text = value
+        End Set
+    End Property
+
     Public Sub SetValueIfChecked(strNewValueIfChecked As String)
         Dim clsTempCond As New Condition
 

@@ -26,6 +26,7 @@ Public Class dlgRestrict
     Public strDefaultDataframe As String = ""
     Public strDefaultColumn As String = ""
     Public bAutoOpenSubDialog As Boolean = False
+    Private bResetSubdialog = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -68,10 +69,10 @@ Public Class dlgRestrict
         'rdoApplyAsSubset.Enabled = False
 
         ' ucrSave
-        ucrNewDataFrameName.SetIsTextBox()
         ucrNewDataFrameName.SetSaveTypeAsDataFrame()
         ucrNewDataFrameName.SetLabelText("New Data Frame Name:")
         ucrNewDataFrameName.SetDataFrameSelector(ucrSelectorFilter.ucrAvailableDataFrames)
+        ucrNewDataFrameName.SetIsTextBox()
     End Sub
 
     Private Sub SetDefaults()
@@ -80,6 +81,7 @@ Public Class dlgRestrict
         SetDefaultNewDataFrameName()
         SetFilterSubsetStatus()
         SetDefaultDataFrame()
+        bResetSubdialog = True
         'ucrNewDataFrameName.Visible = False 'temporarily while we have disabled the option to get a new dataframe
         'lblNewDataFrameName.Visible = False 'temporarily while we have disabled the option to get a new dataframe
     End Sub
@@ -210,5 +212,12 @@ Public Class dlgRestrict
 
     Private Sub ucrNewDataFrameName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlValueChanged
         SetBaseFunction()
+    End Sub
+
+    Private Sub cmdFilterFromFactors_Click(sender As Object, e As EventArgs) Handles cmdFilterFromFactors.Click
+        sdgFiltersFromFactor.SetRcodeAndDefaultDataFrame(ucrSelectorFilter, bReset:=bResetSubdialog)
+        sdgFiltersFromFactor.ShowDialog()
+        bResetSubdialog = False
+        ucrSelectorFilter.LoadList()
     End Sub
 End Class

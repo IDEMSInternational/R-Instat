@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 76</value>
+    <value>252, 76</value>
   </data>
   <data name="lblVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 226</value>
+    <value>252, 226</value>
   </data>
   <data name="lblByFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 13</value>
@@ -340,7 +340,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 276</value>
+    <value>252, 176</value>
   </data>
   <data name="lblPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -361,44 +361,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblPosition.ZOrder" xml:space="preserve">
-
-    <value>4</value>
-  </data>
-  <data name="rdoColumnChart.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoColumnChart.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoColumnChart.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoColumnChart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 10</value>
-  </data>
-  <data name="rdoColumnChart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 28</value>
-  </data>
-  <data name="rdoColumnChart.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="rdoColumnChart.Text" xml:space="preserve">
-    <value>Column Chart</value>
-  </data>
-  <data name="rdoColumnChart.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoColumnChart.Name" xml:space="preserve">
-    <value>rdoColumnChart</value>
-  </data>
-  <data name="&gt;&gt;rdoColumnChart.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoColumnChart.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoColumnChart.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="lblYvariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -407,7 +370,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblYvariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 176</value>
+    <value>252, 176</value>
   </data>
   <data name="lblYvariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -457,41 +420,14 @@
   <data name="&gt;&gt;cmdColumnChartOptions.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 411</value>
-  </data>
-  <data name="ucrInputYValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 141</value>
-  </data>
-  <data name="ucrInputYValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 21</value>
-  </data>
-  <data name="ucrInputYValue.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYValue.Name" xml:space="preserve">
-    <value>ucrInputYValue</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYValue.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYValue.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputYValue.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="lblYValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblYValue.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblYValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 126</value>
+    <value>252, 126</value>
   </data>
   <data name="lblYValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -514,10 +450,38 @@
   <data name="&gt;&gt;lblYValue.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrInputYValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>255, 142</value>
+  </data>
+  <data name="ucrInputYValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 21</value>
+  </data>
+  <data name="ucrInputYValue.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYValue.Name" xml:space="preserve">
+    <value>ucrInputYValue</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYValue.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputYValue.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>415, 411</value>
+  </data>
   <data name="ucrInputBarChartPosition.Location" type="System.Drawing.Point, System.Drawing">
-
-    <value>257, 189</value>
-
+    <value>255, 190</value>
   </data>
   <data name="ucrInputBarChartPosition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>21, 17, 21, 17</value>
@@ -586,7 +550,7 @@
     <value>8</value>
   </data>
   <data name="ucrReceiverByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 241</value>
+    <value>255, 239</value>
   </data>
   <data name="ucrReceiverByFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -610,7 +574,7 @@
     <value>14</value>
   </data>
   <data name="ucrReceiverFirst.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 91</value>
+    <value>255, 89</value>
   </data>
   <data name="ucrReceiverFirst.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -697,9 +661,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
-
-    <value>19</value>
-
+    <value>20</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -714,15 +676,13 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverY.Location" type="System.Drawing.Point, System.Drawing">
-
-    <value>255, 189</value>
-
+    <value>255, 190</value>
   </data>
   <data name="ucrReceiverY.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverY.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>120, 21</value>
   </data>
   <data name="ucrReceiverY.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>

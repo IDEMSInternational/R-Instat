@@ -19,6 +19,7 @@ Public Class ucrScript
     Private strComment As String = "Code run from Script Window"
     Private strCurrentDirectory As String = ""
     Public strRInstatLogFilesFolderPath As String = Path.Combine(Path.GetFullPath(FileIO.SpecialDirectories.MyDocuments), "R-Instat_Log_files")
+    Private bUserTextChanged As Boolean = False
 
     Public Sub CopyText()
         txtScript.Copy()
@@ -55,6 +56,7 @@ Public Class ucrScript
         If txtScript.TextLength > 0 Then
             If MessageBox.Show("Are you sure you want to clear the contents of the script window?" & Me.Text,
                                "Clear " & Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                bUserTextChanged = True
                 'This was preferred over txtScript.Clear() , to support undo
                 txtScript.Focus()
                 txtScript.SelectAll()
@@ -70,10 +72,14 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuRunCurrentLine_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLine.Click
+        Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
+
         If txtScript.TextLength > 0 Then
             Dim lineNum As Integer = txtScript.GetLineFromCharIndex(txtScript.GetFirstCharIndexOfCurrentLine())
             If lineNum < txtScript.Lines.Length Then
-                RunText(txtScript.Lines(lineNum))
+                'add the new text to any unexecuted script remaining from previous calls to this function
+                strScriptCmd &= vbCrLf & txtScript.Lines(lineNum) 'insert carriage return to ensure that new text starts on new line
+                strScriptCmd = RunText(strScriptCmd)
                 If lineNum < txtScript.Lines.Length - 1 Then
                     txtScript.SelectionStart = txtScript.GetFirstCharIndexFromLine(lineNum + 1)
                     txtScript.ScrollToCaret()
@@ -82,11 +88,12 @@ Public Class ucrScript
         End If
     End Sub
 
-    Private Sub RunText(strText As String)
+    Private Function RunText(strText As String) As String
         If strText <> "" Then
-            frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
+            strText = frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
         End If
-    End Sub
+        Return strText
+    End Function
 
     Private Sub mnuOpenScript_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptasFile.Click
         Dim strScriptFilename As String = ""
@@ -150,12 +157,16 @@ Public Class ucrScript
 
     Private Sub mnuCut_Click(sender As Object, e As EventArgs) Handles mnuCut.Click
         If txtScript.SelectionLength > 0 Then
+            bUserTextChanged = False
+            mnuUndo.Enabled = True
             CutText()
         End If
     End Sub
 
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
         If Clipboard.ContainsData(DataFormats.Text) Then
+            bUserTextChanged = False
+            mnuUndo.Enabled = True
             txtScript.Paste()
         Else
             MessageBox.Show("You can only paste text data on the script window", "Paste to Script Window", MessageBoxButtons.OK)
@@ -166,10 +177,7 @@ Public Class ucrScript
         mnuRunCurrentLine.ShortcutKeys = Keys.Enter Or Keys.Control
         txtScript.WordWrap = False
         cmdRun.Enabled = (txtScript.TextLength > 0)
-    End Sub
-
-    Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
-        cmdRun.Enabled = (txtScript.TextLength > 0)
+        mnuRedo.Enabled = False 'this is only enabled when undo operation is done.
     End Sub
 
     Private Sub mnuContextScript_Opening(sender As Object, e As EventArgs) Handles mnuContextScript.Opening
@@ -199,14 +207,47 @@ Public Class ucrScript
 
     End Sub
 
-    Private Sub Menu_Undo(sender As Object, e As EventArgs) Handles mnuUndo.Click
+    Private Sub mnuUndo_Click(sender As Object, e As EventArgs) Handles mnuUndo.Click
         'Determine if last operation can be undone in text box.   
         If txtScript.CanUndo Then
-            'Undo the last operation.
-            txtScript.Undo()
-            'Clear the undo buffer to prevent last action from being redone.
-            txtScript.ClearUndo()
+            bUserTextChanged = False
+            txtScript.Undo() 'Undo the last operation.
+            mnuUndo.Enabled = False
+            mnuRedo.Enabled = True
         End If
+    End Sub
+
+    Private Sub mnuRedo_Click(sender As Object, e As EventArgs) Handles mnuRedo.Click
+
+        'Determine if last operation can be undone in text box.   
+        If txtScript.CanUndo Then
+            bUserTextChanged = False
+            'This is an equivalent of redo in this case. 
+            'because calling undo twice gets the last undone text to be redone
+            txtScript.Undo()
+            mnuUndo.Enabled = True
+            mnuRedo.Enabled = False
+        End If
+    End Sub
+
+    Private Sub txtScript_KeyDown(sender As Object, e As KeyEventArgs) Handles txtScript.KeyDown
+        'Ignore the Ctrl, Shift commands. It could be a redo action which we want to ignore.
+        If Not (e.Control OrElse e.Shift OrElse e.Modifiers = (Keys.Control OrElse Keys.Shift)) Then
+            bUserTextChanged = True
+        End If
+    End Sub
+
+    Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
+        cmdRun.Enabled = (txtScript.TextLength > 0)
+        'Only enabled undo if the text was changed directly by the user.  
+
+        If bUserTextChanged AndAlso Not mnuUndo.Enabled Then
+            txtScript.ClearUndo() 'Clear undo, because this is now a new text input by the user.
+
+            mnuUndo.Enabled = True
+            mnuRedo.Enabled = False
+        End If
+        bUserTextChanged = False 'reset flag
     End Sub
 
     Private Sub mnuRunAllText_Click(sender As Object, e As EventArgs) Handles mnuRunAllText.Click
@@ -216,4 +257,5 @@ Public Class ucrScript
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
+
 End Class

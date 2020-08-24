@@ -487,7 +487,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdnls.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 101</value>
+    <value>4, 101</value>
   </data>
   <data name="cmdnls.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -961,7 +961,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDisplayOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 390</value>
+    <value>331, 354</value>
   </data>
   <data name="cmdDisplayOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 23</value>
@@ -991,7 +991,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdPredict.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 390</value>
+    <value>448, 354</value>
   </data>
   <data name="cmdPredict.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 23</value>
@@ -1018,7 +1018,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdfevd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 14</value>
+    <value>4, 14</value>
   </data>
   <data name="cmdfevd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1048,13 +1048,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdlevd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 14</value>
+    <value>72, 14</value>
   </data>
   <data name="cmdlevd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="cmdlevd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 30</value>
+    <value>69, 30</value>
   </data>
   <data name="cmdlevd.TabIndex" type="System.Int32, mscorlib">
     <value>129</value>
@@ -1078,7 +1078,7 @@
     <value>292, 68</value>
   </data>
   <data name="grpextRemes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 53</value>
+    <value>154, 49</value>
   </data>
   <data name="grpextRemes.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -1162,7 +1162,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdglmer.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 14</value>
+    <value>4, 14</value>
   </data>
   <data name="cmdglmer.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1222,7 +1222,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdloglm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 14</value>
+    <value>140, 14</value>
   </data>
   <data name="cmdloglm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1252,7 +1252,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdpolr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 43</value>
+    <value>4, 43</value>
   </data>
   <data name="cmdpolr.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1282,7 +1282,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdglmmPQL.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 14</value>
+    <value>72, 14</value>
   </data>
   <data name="cmdglmmPQL.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1312,7 +1312,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdglmnb.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 14</value>
+    <value>4, 14</value>
   </data>
   <data name="cmdglmnb.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1372,7 +1372,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdqda.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 72</value>
+    <value>140, 72</value>
   </data>
   <data name="cmdqda.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1402,7 +1402,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdmca.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 72</value>
+    <value>4, 72</value>
   </data>
   <data name="cmdmca.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1462,7 +1462,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdlda.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 43</value>
+    <value>140, 43</value>
   </data>
   <data name="cmdlda.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1489,7 +1489,7 @@
     <value>3</value>
   </data>
   <data name="grpMASS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 68</value>
+    <value>292, 68</value>
   </data>
   <data name="grpMASS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1498,7 +1498,7 @@
     <value>2, 3, 2, 3</value>
   </data>
   <data name="grpMASS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>212, 106</value>
+    <value>213, 106</value>
   </data>
   <data name="grpMASS.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -1576,7 +1576,7 @@
     <value>5</value>
   </data>
   <data name="ucrTryModelling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>31, 347</value>
+    <value>4, 314</value>
   </data>
   <data name="ucrTryModelling.Size" type="System.Drawing.Size, System.Drawing">
     <value>480, 33</value>
@@ -1618,7 +1618,7 @@
     <value>4</value>
   </data>
   <data name="ucrSaveResult.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 388</value>
+    <value>13, 355</value>
   </data>
   <data name="ucrSaveResult.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1669,7 +1669,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>667, 486</value>
+    <value>562, 442</value>
   </data>
   <data name="ucrSelectorModelling.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 66</value>
@@ -1696,7 +1696,7 @@
     <value>15</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 418</value>
+    <value>13, 387</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>

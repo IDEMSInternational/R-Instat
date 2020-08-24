@@ -438,8 +438,8 @@ DataBook$set("public", "get_calculations", function(data_name) {
 } 
 )
 
-DataBook$set("public", "get_calculation_names", function(data_name) {
-  return(self$get_data_objects(data_name)$get_calculation_names())
+DataBook$set("public", "get_calculation_names", function(data_name, as_list = FALSE, excluded_items = c()) {
+  return(self$get_data_objects(data_name)$get_calculation_names(as_list = as_list, excluded_items = excluded_items))
 } 
 )
 
@@ -588,25 +588,21 @@ DataBook$set("public", "get_object_names", function(data_name, include_overall =
 }
 )
 
-DataBook$set("public", "rename_object", function(data_name, object_name, new_name) {
+DataBook$set("public", "rename_object", function(data_name, object_name, new_name, object_type = "object") {
   if(missing(data_name) || data_name == overall_label) {
     if(!object_name %in% names(private$.objects)) stop(object_name, " not found in overall objects list")
     if(new_name %in% names(private$.objects)) stop(new_name, " is already an object name. Cannot rename ", object_name, " to ", new_name)
     names(private$.objects)[names(private$.objects) == object_name] <- new_name
   }
-  else self$get_data_objects(data_name)$rename_object(object_name = object_name, new_name = new_name)
+  else self$get_data_objects(data_name)$rename_object(object_name = object_name, new_name = new_name, object_type = object_type)
 }
 )
 
-DataBook$set("public", "delete_objects", function(data_name, object_names) {
+DataBook$set("public", "delete_objects", function(data_name, object_names, object_type = "object") {
   if(missing(data_name) || data_name == overall_label) {
     if(!all(object_names %in% names(private$.objects))) stop("Not all object_names found in overall objects list")
-    private$.objects[names(private$.objects) == object_names] <- NULL
   }
-  else self$get_data_objects(data_name)$delete_objects(object_names = object_names)
-  if(!is.null(private$.last_graph) && length(private$.last_graph) == 2 && private$.last_graph[1] == data_name && private$.last_graph[2] %in% object_names) {
-    private$.last_graph <- NULL
-  }
+  else self$get_data_objects(data_name)$delete_objects(object_names = object_names, object_type = object_type)
 }
 )
 
@@ -716,11 +712,16 @@ DataBook$set("public", "get_table_names", function(data_name, include_overall = 
 }
 )
 
-DataBook$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE, na.rm = TRUE, is_no_filter = FALSE) {
+DataBook$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE, na.rm = TRUE, is_no_filter = FALSE, and_or = "&") {
   if(missing(filter)) stop("filter is required")
-  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter, na.rm = na.rm, is_no_filter = is_no_filter)
+  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter, na.rm = na.rm, is_no_filter = is_no_filter, and_or = and_or)
 }
 ) 
+
+DataBook$set("public","add_filter_as_levels", function(data_name, filter_levels, column){
+  self$get_data_objects(data_name)$add_filter_as_levels(filter_levels, column)
+})
+
 
 DataBook$set("public", "current_filter", function(data_name) {
   return(self$get_data_objects(data_name)$current_filter)

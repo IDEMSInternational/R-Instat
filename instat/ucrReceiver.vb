@@ -407,6 +407,8 @@ Public Class ucrReceiver
                 strItemsParameterNameInRFunction = "link_name"
             Case "object"
                 strItemsParameterNameInRFunction = "object_name"
+            Case "calculation"
+                strItemsParameterNameInRFunction = "calculation_name"
         End Select
         If IsCurrentReceiver() Then
             Selector.LoadList()
