@@ -623,6 +623,11 @@ Public Class dlgClimaticCheckDataTemperature
         StrTmaxCol = frmMain.clsRLink.GetClimaticColumnOfType(StrDataFrame, "tmax_label")
         StrTminCol = frmMain.clsRLink.GetClimaticColumnOfType(StrDataFrame, "tmin_label")
 
+        If StrTmaxCol <> "" AndAlso StrTminCol <> "" Then
+            ucrReceiverElement1.Add(StrTmaxCol, StrDataFrame)
+            ucrReceiverElement2.Add(StrTminCol, StrDataFrame)
+        End If
+
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
