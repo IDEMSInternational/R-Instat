@@ -107,6 +107,7 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement1.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
         ucrReceiverElement1.SetParameterIsString()
         ucrReceiverElement1.bWithQuotes = False
+        ucrReceiverElement1.bAutoFill = True
         ucrReceiverElement1.SetMeAsReceiver()
 
         ucrReceiverElement2.Selector = ucrSelectorTemperature
