@@ -107,12 +107,14 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement1.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
         ucrReceiverElement1.SetParameterIsString()
         ucrReceiverElement1.bWithQuotes = False
+        ucrReceiverElement1.SetClimaticType("temp_max")
         ucrReceiverElement1.bAutoFill = True
         ucrReceiverElement1.SetMeAsReceiver()
 
         ucrReceiverElement2.Selector = ucrSelectorTemperature
         ucrReceiverElement2.SetParameter(New RParameter("x", 1, bNewIncludeArgumentName:=False))
         ucrReceiverElement2.SetParameterIsString()
+        ucrReceiverElement2.SetClimaticType("temp_min")
         ucrReceiverElement2.bAutoFill = True
         ucrReceiverElement2.bWithQuotes = False
 
@@ -612,22 +614,6 @@ Public Class dlgClimaticCheckDataTemperature
 
     Private Sub ucrSelectorTemperature_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTemperature.ControlValueChanged
         strCurrDataFrame = Chr(34) & ucrSelectorTemperature.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
-    End Sub
-
-    Private Sub AutoFillTemColumns()
-        Dim StrTmaxCol As String
-        Dim StrTminCol As String
-        Dim StrDataFrame As String
-
-        StrDataFrame = ucrSelectorTemperature.ucrAvailableDataFrames.cboAvailableDataFrames.Text
-        StrTmaxCol = frmMain.clsRLink.GetClimaticColumnOfType(StrDataFrame, "tmax_label")
-        StrTminCol = frmMain.clsRLink.GetClimaticColumnOfType(StrDataFrame, "tmin_label")
-
-        If StrTmaxCol <> "" AndAlso StrTminCol <> "" Then
-            ucrReceiverElement1.Add(StrTmaxCol, StrDataFrame)
-            ucrReceiverElement2.Add(StrTminCol, StrDataFrame)
-        End If
-
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
