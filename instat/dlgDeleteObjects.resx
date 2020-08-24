@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblObjectsToDelete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 45</value>
+    <value>251, 24</value>
   </data>
   <data name="lblObjectsToDelete.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 13</value>
@@ -144,7 +144,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblObjectsToDelete.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -154,6 +154,54 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>416, 260</value>
+  </data>
+  <data name="lblType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>251, 149</value>
+  </data>
+  <data name="lblType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 13</value>
+  </data>
+  <data name="lblType.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblType.Text" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="&gt;&gt;lblType.Name" xml:space="preserve">
+    <value>lblType</value>
+  </data>
+  <data name="&gt;&gt;lblType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblType.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputComboType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>254, 165</value>
+  </data>
+  <data name="ucrInputComboType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 21</value>
+  </data>
+  <data name="ucrInputComboType.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboType.Name" xml:space="preserve">
+    <value>ucrInputComboType</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboType.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboType.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrSelectorDeleteObject.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -178,7 +226,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorDeleteObject.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 204</value>
@@ -187,7 +235,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -199,7 +247,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -214,7 +262,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverObjectsToDelete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 60</value>
+    <value>254, 39</value>
   </data>
   <data name="ucrReceiverObjectsToDelete.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -235,6 +283,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverObjectsToDelete.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
 </root>

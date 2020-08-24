@@ -31,6 +31,8 @@ Public Class dlgDescribeTwoVarGraph
     Private clsYScaleContinuousFunction As New RFunction
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
+    Private clsXScaleDateFunction As New RFunction
+    Private clsYScaleDateFunction As New RFunction
 
     ' Use this aes for numeric by numeric graphs e.g. scatter and line plots
     Private clsAesNumericByNumeric As RFunction
@@ -183,6 +185,8 @@ Public Class dlgDescribeTwoVarGraph
         clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
         clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
+        clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
+        clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
 
         clsGeomBoxplot = New RFunction
         clsGeomJitter = New RFunction
@@ -633,7 +637,7 @@ Public Class dlgDescribeTwoVarGraph
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsGlobalAes, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacet, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, ucrNewBaseSelector:=ucrSelectorTwoVarGraph, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsGlobalAes, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacet, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrSelectorTwoVarGraph, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.tbpFacet.Enabled = False
         sdgPlots.ShowDialog()
         sdgPlots.tbpFacet.Enabled = True

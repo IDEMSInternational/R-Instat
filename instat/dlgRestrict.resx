@@ -225,9 +225,6 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>418, 388</value>
   </data>
-  <data name="cmdFilterFromFactors.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="cmdFilterFromFactors.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -361,7 +358,7 @@
     <value>10, 197</value>
   </data>
   <data name="grpApplyOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>378, 53</value>
+    <value>396, 53</value>
   </data>
   <data name="grpApplyOptions.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -382,10 +379,10 @@
     <value>3</value>
   </data>
   <data name="ucrInputFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 284</value>
+    <value>129, 284</value>
   </data>
   <data name="ucrInputFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 42</value>
+    <value>277, 43</value>
   </data>
   <data name="ucrInputFilterPreview.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -406,7 +403,7 @@
     <value>10, 285</value>
   </data>
   <data name="lblFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 13</value>
+    <value>118, 22</value>
   </data>
   <data name="lblFilterPreview.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
