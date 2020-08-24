@@ -616,11 +616,12 @@ Public Class dlgClimaticCheckDataTemperature
 
     Private Sub AutoFillTemColumns()
         Dim StrTmaxCol As String
-        Dim StrTmin As String
+        Dim StrTminCol As String
         Dim StrDataFrame As String
 
         StrDataFrame = ucrSelectorTemperature.ucrAvailableDataFrames.cboAvailableDataFrames.Text
         StrTmaxCol = frmMain.clsRLink.GetClimaticColumnOfType(StrDataFrame, "tmax_label")
+        StrTminCol = frmMain.clsRLink.GetClimaticColumnOfType(StrDataFrame, "tmin_label")
 
     End Sub
 
