@@ -614,6 +614,16 @@ Public Class dlgClimaticCheckDataTemperature
         strCurrDataFrame = Chr(34) & ucrSelectorTemperature.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
     End Sub
 
+    Private Sub AutoFillTemColumns()
+        Dim StrTmaxCol As String
+        Dim StrTmin As String
+        Dim StrDataFrame As String
+
+        StrDataFrame = ucrSelectorTemperature.ucrAvailableDataFrames.cboAvailableDataFrames.Text
+        StrTmaxCol = frmMain.clsRLink.GetClimaticColumnOfType(StrDataFrame, "tmax_label")
+
+    End Sub
+
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         GroupByOptions()
     End Sub
