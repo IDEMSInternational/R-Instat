@@ -44,7 +44,6 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub SetDefaults()
-        ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
         ucrCalc.ucrInputCalOptions.SetName("Basic")
         ucrCalc.Reset()
         ucrCalc.chkShowParameters.Checked = False
@@ -72,10 +71,10 @@ Public Class dlgCalculator
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
         ucrBase.clsRsyntax.SetCommandString("")
+        ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
         ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
         ucrCalc.ucrSaveResultInto.SetIsTextBox()
         ucrCalc.ucrSaveResultInto.SetLabelText("Save Result Into:")
-        ucrCalc.ucrSaveResultInto.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
