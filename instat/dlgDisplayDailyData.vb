@@ -220,7 +220,7 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboMissing, ucrChkMissing}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboTrace, ucrChkTrace}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboZero, ucrChkZero}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkSum, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkSum, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoGraphByYear}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkNumberOfColumns.AddToLinkedControls(ucrNudNumberOfColumns, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrNudNumberOfColumns.SetLinkedDisplayControl(lblNumberOfColumns)
@@ -258,6 +258,7 @@ Public Class dlgDisplayDailyData
         clsLabelWrapGenFunction = New RFunction
 
         ucrNudNumberOfColumns.SetText("1")
+        ucrSaveGraph.Reset()
 
         clsStationElemFacetOperator.SetOperation("~")
 
@@ -359,6 +360,8 @@ Public Class dlgDisplayDailyData
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("date_col", 2), iAdditionalPairNo:=1)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsIdVarsFunction, New RParameter("date", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
+        ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsDisplayDailyGraphFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
+
         ucrChkSum.SetRCode(clsConcFunction, bReset)
         ucrChkMax.SetRCode(clsConcFunction, bReset)
         ucrChkMin.SetRCode(clsConcFunction, bReset)
@@ -453,7 +456,6 @@ Public Class dlgDisplayDailyData
     End Sub
 
     Private Sub ucrSelectorDisplayDailyClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDisplayDailyClimaticData.ControlValueChanged, ucrReceiverStations.ControlValueChanged
-        clsDisplayDailyGraphFunction.AddParameter("data_name", Chr(34) & ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
         StackingFunction()
     End Sub
     '''--------------------------------------------------------------------------------------------
