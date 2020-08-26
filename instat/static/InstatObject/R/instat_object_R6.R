@@ -712,11 +712,16 @@ DataBook$set("public", "get_table_names", function(data_name, include_overall = 
 }
 )
 
-DataBook$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE, na.rm = TRUE, is_no_filter = FALSE) {
+DataBook$set("public", "add_filter", function(data_name, filter, filter_name = "", replace = TRUE, set_as_current_filter = FALSE, na.rm = TRUE, is_no_filter = FALSE, and_or = "&") {
   if(missing(filter)) stop("filter is required")
-  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter, na.rm = na.rm, is_no_filter = is_no_filter)
+  self$get_data_objects(data_name)$add_filter(filter, filter_name, replace, set_as_current_filter, na.rm = na.rm, is_no_filter = is_no_filter, and_or = and_or)
 }
 ) 
+
+DataBook$set("public","add_filter_as_levels", function(data_name, filter_levels, column){
+  self$get_data_objects(data_name)$add_filter_as_levels(filter_levels, column)
+})
+
 
 DataBook$set("public", "current_filter", function(data_name) {
   return(self$get_data_objects(data_name)$current_filter)
