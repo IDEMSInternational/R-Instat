@@ -15,11 +15,32 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.IO
+
+'''--------------------------------------------------------------------------------------------
+''' <summary>
+''' An object of this class represents a file path custom control that inherits System.Windows.Forms.UserControl
+''' and is used to select the file name and path to be used in saving a file
+''' <list type="bullet">
+''' <item><description>
+''' set the parameter of the path control
+''' </description></item>
+''' <item><description>
+''' set the R code structure of the path control
+''' </description></item>
+''' <item><description>
+''' Optional. Set a default suggestive name
+''' </description></item>
+''' </list>
+''' </summary>
 Public Class ucrFilePath
-    'event raised when the file path contents has changed
+    ''' <summary>
+    ''' event raised when the file path contents has changed
+    ''' </summary>
     Public Event FilePathChanged()
 
-    'gets and sets the text propert of the browse button.
+    ''' <summary>
+    ''' gets and sets the text property value of the browse button.
+    ''' </summary>
     Public Property FilePathBrowseText() As String
         Get
             Return btnBrowse.Text
@@ -29,7 +50,9 @@ Public Class ucrFilePath
         End Set
     End Property
 
-    'gets and sets the label of the input textbox
+    ''' <summary>
+    ''' gets and sets the label text property value of the input textbox
+    ''' </summary>
     Public Property FilePathLabel() As String
         Get
             Return lblName.Text
@@ -39,16 +62,24 @@ Public Class ucrFilePath
         End Set
     End Property
 
-    'used to set the title of the SaveFileDialog prompt
+    ''' <summary>
+    ''' used to set the title of the SaveFileDialog prompt
+    ''' </summary> 
     Public Property FilePathDialogTitle As String = "Save As"
 
     'used to set the allowed file filters or file extensions
     Public Property FilePathDialogFilter As String = "All Files *.*"
 
-    'used to set the suggestive name if no file name was set before
+    ''' <summary>
+    ''' used to set the suggestive name if no file name was set before
+    ''' </summary>
+    ''' <returns></returns>
     Public Property DefaultFileSuggestionName As String = ""
 
-    'gets or sets the input file path
+    ''' <summary>
+    ''' gets or sets the input file path
+    ''' Used by the SaveFileDiaolog prompt to 'remember' last selected file name and directory
+    ''' </summary> 
     Public Property FilePath() As String
         Get
             Return GetPathControl().GetText()
@@ -59,6 +90,13 @@ Public Class ucrFilePath
             RaiseEvent FilePathChanged()
         End Set
     End Property
+
+    ''' <summary>
+    ''' gets or sets the last selected filter index.
+    ''' used by the SaveFileDiaolog prompt to 'remember' last selected file type filter
+    ''' this is used internally only
+    ''' </summary>
+    Private iFileFilterIndex As Integer
 
     ''' <summary>
     ''' gets the control that contains the input file path and name
@@ -101,6 +139,12 @@ Public Class ucrFilePath
         FilePath = ""
     End Sub
 
+    ''' <summary>
+    ''' opens a SaveFileDialog prompt thats allows user to specify file name and path 
+    ''' to be used in saving a file
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = FilePathDialogTitle
@@ -113,9 +157,11 @@ Public Class ucrFilePath
                 Dim strFilePathInWindowsFormat As String = FilePath.Replace("/", "\")
                 dlgSave.FileName = Path.GetFileName(strFilePathInWindowsFormat)
                 dlgSave.InitialDirectory = Path.GetDirectoryName(strFilePathInWindowsFormat)
+                dlgSave.FilterIndex = iFileFilterIndex
             End If
             If DialogResult.OK = dlgSave.ShowDialog() Then
                 FilePath = dlgSave.FileName
+                iFileFilterIndex = dlgSave.FilterIndex
             End If
         End Using
     End Sub
