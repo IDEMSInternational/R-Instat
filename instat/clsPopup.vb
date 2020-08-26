@@ -13,19 +13,51 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+'''--------------------------------------------------------------------------------------------
+''' <summary>
+''' An object of this class represents a popup component that's used and displayed as a control.
+''' <list type="bullet">
+'''     <item><description>
+'''                  set contents control of the popup
+'''     </description></item>
+'''     <item><description>
+'''                  set size of the popup
+'''     </description></item>
+'''     <item><description>
+'''                  specify the display position of the popup relative to the owner. Default is top
+'''     </description></item>
+'''     <item><description>
+'''                  attach the owner control and show the popup
+'''     </description></item>
+'''  </list>
+''' </summary>
+'''--------------------------------------------------------------------------------------------
 Public Class clsPopup
-    ''' <summary> Event raised when the contents control loses focus. 
-    '''           This indicates that the popup is closing. </summary>
+    ''' <summary> 
+    ''' Event raised when the contents control loses focus. 
+    ''' This indicates that the popup is closing. 
+    '''</summary>
     Public Event Closing()
 
+    ''' <summary>
+    ''' Container used as the 'frame' of the popup component
+    ''' </summary>
     Private ReadOnly frm As Form
-    'specifies if the popup should hide automatically on lost focus or not
+
+    ''' <summary>
+    ''' specifies if the popup should hide automatically on lost focus or not
+    ''' </summary>
     Public Property AutoHide As Boolean
 
-    'specifies the position of the popup relative to the owner(control)
+    ''' <summary>
+    ''' specifies the position of the popup relative to the owner(control)
+    ''' </summary> 
     Public Property Position As PopupPosition
 
-    'enumeration of allowable popup positions
+    ''' <summary>
+    ''' enumeration of allowable popup positions
+    ''' </summary>
     Public Enum PopupPosition
         Top
         Below

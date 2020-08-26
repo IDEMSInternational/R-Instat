@@ -291,6 +291,11 @@ Public Class dlgEnter
         SaveResults()
     End Sub
 
+    ''' <summary>
+    ''' displays a popup with example commands just above the input receiver
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub btnExample_Click(sender As Object, e As EventArgs) Handles btnExample.Click
         Dim objPopup As New clsPopup
         Dim lstView As New ListView With {
