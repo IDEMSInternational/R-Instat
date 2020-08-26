@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Imports RDotNet
 
@@ -237,6 +236,10 @@ Public Class dlgFromLibrary
         SetParameterValues()
     End Sub
 
+    ''' <summary>
+    ''' sets the R parameters and functions used by the main import function
+    ''' in importing datasets of different R types 
+    ''' </summary>
     Private Sub SetParameterValues()
         Dim strSelectedDataName As String
         Dim strVecOutput As CharacterVector
@@ -262,37 +265,38 @@ Public Class dlgFromLibrary
             Dim clsListFunction As New RFunction 'defines the list function. list(x=x)
             Dim clsListParameterFunction As New RFunction 'defines the function that act as list parameters e.g list(y=fortify.zoo(x))
             clsListFunction.SetRCommand("list")
-            If strRClass = "zoo" Then
-                'this is the recommended command for converting zoo object types to data frames.
-                'In R-Instat the data.frame doesn't convert this object type well. See issue #5649
-                clsListParameterFunction.SetPackageName("zoo")
-                clsListParameterFunction.SetRCommand("fortify.zoo")
-                clsListParameterFunction.AddParameter("model", strParameterValue:=strSelectedDataName)
-                clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
-            ElseIf strRClass = "spatialpolygonsdataframe" Then
-                'for some reason, objects of this type have to be explicitly coerced to data.frame 
-                'before being imported by import R-Instat function
-                clsListParameterFunction.SetRCommand("data.frame")
-                clsListParameterFunction.AddParameter("x", strParameterValue:=strSelectedDataName)
-                clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
-            ElseIf strRClass = "dgcmatrix" OrElse strRClass = "dscmatrix" Then
-                'this if block is used for dgcmatrix,dscmatrix.
-                'The R summary() function returns an object of type data.frame if given a matrix. Used here to coerce it to data.frame
-                'todo. this needs to be investigated further on the best(correct) command for coercing this type of data. 
-                'the data.frame command is unable to coerce data of this class type hence it's own block form the matrix command
-                clsListParameterFunction.SetRCommand("summary")
-                clsListParameterFunction.AddParameter("object", strParameterValue:=strSelectedDataName)
-                clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
-            ElseIf strRClass = "matrix" Then
-                'this if block is used for matrix type 
-                'this has been done in it's own block in anticipation of a correct way of coercing matrix to data frame
-                'currently this command loses data(some columns) of the matrix once it's coerced. See issue #5649
-                clsListParameterFunction.SetRCommand("data.frame")
-                clsListParameterFunction.AddParameter("x", strParameterValue:=strSelectedDataName)
-                clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
-            Else
-                clsListFunction.AddParameter(ucrNewDataFrameName.GetText, strParameterValue:=strSelectedDataName)
-            End If
+            Select Case strRClass
+                Case "zoo"
+                    'this is the recommended command for converting zoo object types to data frames.
+                    'In R-Instat the data.frame doesn't convert this object type well. See issue #5649
+                    clsListParameterFunction.SetPackageName("zoo")
+                    clsListParameterFunction.SetRCommand("fortify.zoo")
+                    clsListParameterFunction.AddParameter("model", strParameterValue:=strSelectedDataName)
+                    clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
+                Case "spatialpolygonsdataframe"
+                    'for some reason, objects of this type have to be explicitly coerced to data.frame 
+                    'before being imported by import R-Instat function
+                    clsListParameterFunction.SetRCommand("data.frame")
+                    clsListParameterFunction.AddParameter("x", strParameterValue:=strSelectedDataName)
+                    clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
+                Case "dgcmatrix", "dscmatrix"
+                    'this if block is used for dgcmatrix,dscmatrix.
+                    'The R summary() function returns an object of type data.frame if given a matrix. Used here to coerce it to data.frame
+                    'todo. this needs to be investigated further on the best(correct) command for coercing this type of data. 
+                    'the data.frame command is unable to coerce data of this class type hence it's own block form the matrix command
+                    clsListParameterFunction.SetRCommand("summary")
+                    clsListParameterFunction.AddParameter("object", strParameterValue:=strSelectedDataName)
+                    clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
+                Case "matrix"
+                    'this if block is used for matrix type 
+                    'this has been done in it's own block in anticipation of a correct way of coercing matrix to data frame
+                    'currently this command loses data(some columns) of the matrix once it's coerced. See issue #5649
+                    clsListParameterFunction.SetRCommand("data.frame")
+                    clsListParameterFunction.AddParameter("x", strParameterValue:=strSelectedDataName)
+                    clsListFunction.AddParameter(ucrNewDataFrameName.GetText, clsRFunctionParameter:=clsListParameterFunction)
+                Case Else
+                    clsListFunction.AddParameter(ucrNewDataFrameName.GetText, strParameterValue:=strSelectedDataName)
+            End Select
             clsImportFunction.AddParameter("data_tables", clsRFunctionParameter:=clsListFunction)
         End If
     End Sub
