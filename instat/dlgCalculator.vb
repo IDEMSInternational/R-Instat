@@ -40,21 +40,14 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrCalc.ucrReceiverForCalculation.IsEmpty Then
-            If ucrCalc.ucrSaveResultInto.IsComplete Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrCalc.ucrReceiverForCalculation.IsEmpty AndAlso ucrCalc.ucrSaveResultInto.IsComplete)
     End Sub
 
     Private Sub SetDefaults()
-        ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
         ucrCalc.ucrInputCalOptions.SetName("Basic")
         ucrCalc.Reset()
+        ucrCalc.ucrSelectorForCalculations.Reset()
+        ucrCalc.ucrSaveResultInto.Reset()
         ucrCalc.chkShowParameters.Checked = False
         ucrCalc.ucrSaveResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
         SaveResults()
@@ -80,12 +73,11 @@ Public Class dlgCalculator
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
         ucrBase.clsRsyntax.SetCommandString("")
+        ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
         ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
         ucrCalc.ucrSaveResultInto.SetIsTextBox()
         ucrCalc.ucrSaveResultInto.SetLabelText("Save Result Into:")
-        ucrCalc.ucrSaveResultInto.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
-        ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
     End Sub
 
