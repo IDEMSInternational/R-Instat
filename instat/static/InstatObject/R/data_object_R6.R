@@ -2176,6 +2176,22 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     col_name <- next_default_item(prefix = "leap_year", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = leap_year_vector)
   }
+    if(year_val) {
+    if(s_shift) {
+      col_name <- next_default_item(prefix = "s_year", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = temp_s_year_num)
+      self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted year starting on day", s_start_day))
+    }
+    else {
+      year_vector <- lubridate::year(col_data)
+      col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = year_vector)
+    }
+    if(is_climatic && is.null(self$get_climatic_column_name(year_label))) {
+      self$append_climatic_types(types = c(year = col_name))
+    }
+    self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
+  }
   if(year_name) {
     if(s_shift) {
       col_name <- next_default_item(prefix = "s_year", existing_names = self$get_column_names(), include_index = FALSE)
@@ -2189,22 +2205,6 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
       year_vector <- lubridate::year(col_data)
       col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
       self$add_columns_to_data(col_name = col_name, col_data = factor(year_vector))
-    }
-    if(is_climatic && is.null(self$get_climatic_column_name(year_label))) {
-      self$append_climatic_types(types = c(year = col_name))
-    }
-    self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
-  }
-  if(year_val) {
-    if(s_shift) {
-      col_name <- next_default_item(prefix = "s_year", existing_names = self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name = col_name, col_data = temp_s_year_num)
-      self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted year starting on day", s_start_day))
-    }
-    else {
-      year_vector <- lubridate::year(col_data)
-      col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name = col_name, col_data = year_vector)
     }
     if(is_climatic && is.null(self$get_climatic_column_name(year_label))) {
       self$append_climatic_types(types = c(year = col_name))
