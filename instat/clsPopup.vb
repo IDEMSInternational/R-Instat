@@ -14,7 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Public Class clsPopup
-    'event raised when the contents control loses focus. Indeicates that the popup is closing
+    ''' <summary> Event raised when the contents control loses focus. 
+    '''           This indicates that the popup is closing. </summary>
     Public Event Closing()
 
     Private ReadOnly frm As Form
