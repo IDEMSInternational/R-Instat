@@ -200,6 +200,7 @@ Partial Class dlgSurvivalObject
         'ucrSaveObject
         '
         Me.ucrSaveObject.Location = New System.Drawing.Point(10, 247)
+        Me.ucrSaveObject.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveObject.Name = "ucrSaveObject"
         Me.ucrSaveObject.Size = New System.Drawing.Size(266, 24)
         Me.ucrSaveObject.TabIndex = 11
@@ -271,7 +272,7 @@ Partial Class dlgSurvivalObject
         Me.ucrModifyEventNumeric.AddQuotesIfUnrecognised = True
         Me.ucrModifyEventNumeric.IsMultiline = False
         Me.ucrModifyEventNumeric.IsReadOnly = False
-        Me.ucrModifyEventNumeric.Location = New System.Drawing.Point(440, 213)
+        Me.ucrModifyEventNumeric.Location = New System.Drawing.Point(427, 210)
         Me.ucrModifyEventNumeric.Name = "ucrModifyEventNumeric"
         Me.ucrModifyEventNumeric.Size = New System.Drawing.Size(120, 26)
         Me.ucrModifyEventNumeric.TabIndex = 25
@@ -280,7 +281,7 @@ Partial Class dlgSurvivalObject
         '
         Me.lblSelectLevels.AutoSize = True
         Me.lblSelectLevels.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectLevels.Location = New System.Drawing.Point(439, 197)
+        Me.lblSelectLevels.Location = New System.Drawing.Point(426, 194)
         Me.lblSelectLevels.Name = "lblSelectLevels"
         Me.lblSelectLevels.Size = New System.Drawing.Size(176, 13)
         Me.lblSelectLevels.TabIndex = 24
@@ -291,7 +292,7 @@ Partial Class dlgSurvivalObject
         Me.ucrModifyEventFactor.AutoSize = True
         Me.ucrModifyEventFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrModifyEventFactor.clsReceiver = Nothing
-        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(440, 213)
+        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(427, 210)
         Me.ucrModifyEventFactor.Name = "ucrModifyEventFactor"
         Me.ucrModifyEventFactor.shtCurrSheet = Nothing
         Me.ucrModifyEventFactor.Size = New System.Drawing.Size(197, 116)
@@ -302,7 +303,7 @@ Partial Class dlgSurvivalObject
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(646, 339)
+        Me.ClientSize = New System.Drawing.Size(638, 335)
         Me.Controls.Add(Me.ucrModifyEventNumeric)
         Me.Controls.Add(Me.lblSelectLevels)
         Me.Controls.Add(Me.ucrModifyEventFactor)
