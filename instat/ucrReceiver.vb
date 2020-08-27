@@ -625,7 +625,11 @@ Public Class ucrReceiver
                 clsGetItems.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
                 clsIncludeList.SetRCommand("list")
                 For Each kvpInclude In lstIncludedAutoFillProperties
-                    clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList(), bWithQuotes:=False))
+                    If kvpInclude.Value.ToList().Count = 1 Then
+                        clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList(), bWithQuotes:=False))
+                    Else
+                        clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList()))
+                    End If
                 Next
                 clsGetItems.AddParameter("include", clsRFunctionParameter:=clsIncludeList)
                 clsGetItems.AddParameter("data_name", Chr(34) & Selector.strCurrentDataFrame & Chr(34))
