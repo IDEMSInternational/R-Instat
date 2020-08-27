@@ -18,8 +18,6 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgCalculator
-    Dim strCalcHistory As List(Of String)
-    Dim dataset As DataFrame
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
@@ -87,7 +85,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub SaveResults()
-        If ucrCalc.ucrSaveResultInto.Iscomplete Then
+        If ucrCalc.ucrSaveResultInto.IsComplete Then
             ucrBase.clsRsyntax.SetAssignTo(ucrCalc.ucrSaveResultInto.GetText(), strTempColumn:=ucrCalc.ucrSaveResultInto.GetText(), strTempDataframe:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
