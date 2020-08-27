@@ -636,14 +636,14 @@ Public Class ucrReceiver
                 expItems = frmMain.clsRLink.RunInternalScriptGetValue(clsGetItems.ToScript(), bSilent:=True)
                 If expItems IsNot Nothing AndAlso Not expItems.Type = Internals.SymbolicExpressionType.Null Then
                     chrColumns = expItems.AsCharacter
-                    If chrColumns.Count = 1 Then
-                        For Each lviTempVariable As ListViewItem In Selector.lstAvailableVariable.Items
-                            If lviTempVariable.Text = chrColumns(0) Then
+                    For Each lviTempVariable As ListViewItem In Selector.lstAvailableVariable.Items
+                        For i = 0 To chrColumns.Count - 1
+                            If lviTempVariable.Text = chrColumns(i) Then
                                 Add(lviTempVariable.Text, Selector.strCurrentDataFrame)
                                 Exit For
                             End If
                         Next
-                    End If
+                    Next
                 End If
             End If
         End If
