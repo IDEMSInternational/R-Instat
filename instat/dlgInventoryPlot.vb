@@ -52,6 +52,7 @@ Public Class dlgInventoryPlot
         ucrReceiverElements.Selector = ucrInventoryPlotSelector
         ucrReceiverElements.SetParameterIsString()
         ucrReceiverElements.strSelectorHeading = "Numerics"
+        ucrReceiverElements.SetClimaticType({"rain", "temp_min", "temp_max", "sunshine_hours", "cloud_cover", "wind_speed", "wind_direction", "radiation"})
 
         ucrReceiverStation.SetParameter(New RParameter("station_col", 3))
         ucrReceiverStation.Selector = ucrInventoryPlotSelector
