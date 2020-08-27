@@ -524,6 +524,12 @@ Public Class ucrReceiver
         SetIncludedAutoFillProperties(dctTemp)
     End Sub
 
+    Public Sub SetClimaticType(lstStrTemp As String())
+        Dim dctTemp As New Dictionary(Of String, String())
+        dctTemp.Add("Climatic_Type", lstStrTemp)
+        SetIncludedAutoFillProperties(dctTemp)
+    End Sub
+
     Public Sub SetOptionsByContextType(strSingleType As String, Optional strQuotes As String = Chr(34))
         AddIncludedMetadataProperty("O_by_C_Type", {strQuotes & strSingleType & strQuotes})
     End Sub
