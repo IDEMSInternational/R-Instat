@@ -623,6 +623,9 @@ Partial Class frmMain
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCompare = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareCalculation = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareSummary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator66 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3950,8 +3953,24 @@ Partial Class frmMain
         '
         'mnuClimaticCompare
         '
+        Me.mnuClimaticCompare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCompareCalculation, Me.mnuClimaticCompareSummary, Me.ToolStripSeparator66})
         Me.mnuClimaticCompare.Name = "mnuClimaticCompare"
         resources.ApplyResources(Me.mnuClimaticCompare, "mnuClimaticCompare")
+        '
+        'mnuClimaticCompareCalculation
+        '
+        Me.mnuClimaticCompareCalculation.Name = "mnuClimaticCompareCalculation"
+        resources.ApplyResources(Me.mnuClimaticCompareCalculation, "mnuClimaticCompareCalculation")
+        '
+        'mnuClimaticCompareSummary
+        '
+        Me.mnuClimaticCompareSummary.Name = "mnuClimaticCompareSummary"
+        resources.ApplyResources(Me.mnuClimaticCompareSummary, "mnuClimaticCompareSummary")
+        '
+        'ToolStripSeparator66
+        '
+        Me.ToolStripSeparator66.Name = "ToolStripSeparator66"
+        resources.ApplyResources(Me.ToolStripSeparator66, "ToolStripSeparator66")
         '
         'frmMain
         '
@@ -4583,4 +4602,7 @@ Partial Class frmMain
     Friend WithEvents mnuPrepareCheckDataVisualiseData As ToolStripMenuItem
     Friend WithEvents mnuClimaticTidyandExamineVisualiseData As ToolStripMenuItem
     Friend WithEvents mnuClimaticCompare As ToolStripMenuItem
+    Friend WithEvents mnuClimaticCompareCalculation As ToolStripMenuItem
+    Friend WithEvents mnuClimaticCompareSummary As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator66 As ToolStripSeparator
 End Class
