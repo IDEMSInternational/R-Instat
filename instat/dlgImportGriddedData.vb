@@ -35,18 +35,8 @@ Public Class dlgImportGriddedData
         TestOkEnabled()
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-    End Sub
-
     Private Sub InitialiseDialog()
-        dctDownloadPairs = New Dictionary(Of String, String)
-
         ucrBase.iHelpTopicID = 526
-
-        'temporary until working
-        cmdBrowse.Enabled = False
-        ucrInputExportFile.Enabled = False
 
         ucrInputDownloadFrom.SetParameter(New RParameter("download_from", 0))
         dctDownloadPairs.Add("CHIRPS_V2P0", Chr(34) & "CHIRPS_V2P0" & Chr(34))
@@ -63,50 +53,6 @@ Public Class dlgImportGriddedData
         ucrInputDownloadFrom.SetDropDownStyleAsNonEditable()
 
         ucrInputDataFile.SetParameter(New RParameter("data_file", 1))
-
-        ucrInputMainDataName.SetParameter(New RParameter("data_frame_name", 2))
-        ucrInputMainDataName.SetParameterIncludeArgumentName(False)
-        ucrInputLocDataName.SetParameter(New RParameter("location_data_name", 3))
-        ucrInputLocDataName.SetParameterIncludeArgumentName(False)
-
-        'ucrInputExportFile.SetParameter(New RParameter("path", 4))
-
-        ucrPnlGetArea.SetParameter(New RParameter("get_area_point", 5))
-        ucrPnlGetArea.AddRadioButton(rdoArea, Chr(34) & "area" & Chr(34))
-        ucrPnlGetArea.AddRadioButton(rdoPoint, Chr(34) & "point" & Chr(34))
-        ucrPnlGetArea.SetRDefault(Chr(34) & "area" & Chr(34))
-
-        ucrPnlGetArea.AddToLinkedControls({ucrNudMaxLat, ucrNudMaxLon}, {rdoArea}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrNudMinLon.SetParameter(New RParameter("X1", 6))
-        ucrNudMinLon.SetMinMax(-180, 180)
-        ucrNudMinLon.DecimalPlaces = 4
-        ucrNudMinLon.Increment = 0.0001
-        ucrNudMinLon.SetLinkedDisplayControl(lblMinLon)
-        ucrNudMaxLon.SetParameter(New RParameter("X2", 7))
-        ucrNudMaxLon.SetMinMax(-180, 180)
-        ucrNudMaxLon.DecimalPlaces = 4
-        ucrNudMaxLon.Increment = 0.0001
-        ucrNudMaxLon.SetLinkedDisplayControl(lblMaxLon)
-        ucrNudMinLat.SetParameter(New RParameter("Y1", 8))
-        ucrNudMinLat.SetMinMax(-50, 50)
-        ucrNudMinLat.DecimalPlaces = 4
-        ucrNudMinLat.Increment = 0.0001
-        ucrNudMinLat.SetLinkedDisplayControl(lblMinLat)
-        ucrNudMaxLat.SetParameter(New RParameter("Y2", 9))
-        ucrNudMaxLat.SetMinMax(-50, 50)
-        ucrNudMaxLat.DecimalPlaces = 4
-        ucrNudMaxLat.Increment = 0.0001
-        ucrNudMaxLat.SetLinkedDisplayControl(lblMaxLat)
-    End Sub
-
-    Private Sub SetDefaults()
-        clsRDefaultFunction = New RFunction
-
-        'ucrInputExportFile.IsReadOnly = True
-        'ucrInputExportFile.SetName("")
-
-        dctFiles = New Dictionary(Of String, String)
         dctFiles.Add("Daily 0p05", Chr(34) & "daily_0p05" & Chr(34))
         dctFiles.Add("Daily 0p25", Chr(34) & "daily_0p25" & Chr(34))
         dctFiles.Add("Daily Improved 0p05", Chr(34) & "daily_improved_0p05" & Chr(34))
@@ -118,6 +64,44 @@ Public Class dlgImportGriddedData
         dctFiles.Add("Monthly Precipitation", Chr(34) & "monthly_prcp" & Chr(34))
         ucrInputDataFile.SetItems(dctFiles)
         ucrInputDataFile.SetDropDownStyleAsNonEditable()
+
+        ucrInputMainDataName.SetParameter(New RParameter("data_frame_name", 2))
+
+        ucrPnlGetArea.SetParameter(New RParameter("get_area_point", 5))
+        ucrPnlGetArea.AddRadioButton(rdoArea, Chr(34) & "area" & Chr(34))
+        ucrPnlGetArea.AddRadioButton(rdoPoint, Chr(34) & "point" & Chr(34))
+        ucrPnlGetArea.SetRDefault(Chr(34) & "area" & Chr(34))
+
+        ucrPnlGetArea.AddToLinkedControls({ucrInputMaxLat, ucrInputMaxLon}, {rdoArea}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkTempLocation.AddToLinkedControls({ucrInputExportFile, ucrChkDontImportData}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkDontImportData.AddToLinkedControls({ucrInputMainDataName}, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputMinLon.SetLinkedDisplayControl(lblMinLon)
+        ucrInputMinLon.SetLinkedDisplayControl(lblMinLon)
+        ucrInputMaxLon.SetLinkedDisplayControl(lblMaxLon)
+        ucrInputMinLat.SetLinkedDisplayControl(lblMinLat)
+        ucrInputMaxLat.SetLinkedDisplayControl(lblMaxLat)
+        ucrInputExportFile.SetLinkedDisplayControl(cmdBrowse)
+        ucrInputMainDataName.SetLinkedDisplayControl(lblMainDataName)
+
+        ucrInputMinLon.SetParameter(New RParameter("X1", 6))
+        ucrInputMinLon.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
+
+        ucrInputMaxLon.SetParameter(New RParameter("X2", 7))
+        ucrInputMaxLon.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
+
+        ucrInputMinLat.SetParameter(New RParameter("Y1", 8))
+        ucrInputMinLat.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
+
+        ucrInputMaxLat.SetParameter(New RParameter("Y2", 9))
+        ucrInputMaxLat.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
+
+        ucrChkTempLocation.SetText("Save Downloaded File:")
+
+        ucrChkDontImportData.SetText("Don't import data after downloading")
+    End Sub
+
+    Private Sub SetDefaults()
+        clsRDefaultFunction = New RFunction
 
         clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_iri")
         clsRDefaultFunction.AddParameter("download_from", Chr(34) & "CHIRPS_V2P0" & Chr(34))
@@ -131,6 +115,10 @@ Public Class dlgImportGriddedData
         clsRDefaultFunction.AddParameter("Y1", 10)
         clsRDefaultFunction.AddParameter("Y2", 10.5)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -148,11 +136,7 @@ Public Class dlgImportGriddedData
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputMainDataName.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
-    Private Sub pnlControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetArea.ControlContentsChanged
+    Private Sub ucrPnlGetArea_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetArea.ControlContentsChanged
         If rdoArea.Checked Then
             lblMinLat.Text = "Minimum Latitude:"
             lblMinLon.Text = "Minimum Longitude:"
@@ -162,16 +146,8 @@ Public Class dlgImportGriddedData
         End If
     End Sub
 
-    Private Sub nudControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDownloadFrom.ControlContentsChanged
-        DataSettings()
-    End Sub
-
-    Private Sub DataSettings()
+    Private Sub ucrInputDownloadFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDownloadFrom.ControlContentsChanged
         If ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS_V2P0" Then
-            ucrNudMinLon.SetMinMax(-180, 180)
-            ucrNudMaxLon.SetMinMax(-180, 180)
-            ucrNudMinLat.SetMinMax(-50, 50)
-            ucrNudMaxLat.SetMinMax(-50, 50)
             dctFiles = New Dictionary(Of String, String)
             dctFiles.Add("Daily 0p05", Chr(34) & "daily_0p05" & Chr(34))
             dctFiles.Add("Daily 0p25", Chr(34) & "daily_0p25" & Chr(34))
@@ -185,10 +161,6 @@ Public Class dlgImportGriddedData
             ucrInputDataFile.SetItems(dctFiles)
             ucrInputDataFile.cboInput.SelectedItem = "Daily 0p05"
         Else
-            ucrNudMinLon.SetMinMax(-20, 55)
-            ucrNudMaxLon.SetMinMax(-20, 55)
-            ucrNudMinLat.SetMinMax(-40, 40)
-            ucrNudMaxLat.SetMinMax(-40, 40)
             If ucrInputDownloadFrom.cboInput.SelectedItem = "TAMSAT" Then
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Rainfall Estimates", Chr(34) & "rainfall_estimates" & Chr(34))
@@ -254,4 +226,8 @@ Public Class dlgImportGriddedData
     'Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
     '    cmdBrowse_Click(sender, e)
     'End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputMainDataName.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
 End Class
