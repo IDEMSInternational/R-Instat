@@ -2166,4 +2166,8 @@ Public Class frmMain
     Private Sub mnuClimaticCompareScatterplot_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareScatterplot.Click
         dlgScatterPlot.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticCompareDensityPlot_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareDensityPlot.Click
+        dlgHistogram.ShowDialog()
+    End Sub
 End Class

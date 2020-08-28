@@ -1104,13 +1104,13 @@
     <value>189, 22</value>
   </data>
   <data name="mnuClimaticCompareDensityPlot.Text" xml:space="preserve">
-    <value>Density Plot</value>
+    <value>Density Plot...</value>
   </data>
   <data name="mnuClimaticCompareConditionalQuantiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
+    <value>198, 22</value>
   </data>
   <data name="mnuClimaticCompareConditionalQuantiles.Text" xml:space="preserve">
-    <value>Conditional Quantiles</value>
+    <value>Conditional Quantiles...</value>
   </data>
   <data name="mnuClimaticCompareTaylorDiagram.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 22</value>
