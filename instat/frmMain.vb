@@ -2135,10 +2135,6 @@ Public Class frmMain
         dlgCircular.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticPrepareCompareTaylor_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompareTaylor.Click
-        dlgTaylorDiagram.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticCheckDataFillMissingValues_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataFillMissingValues.Click
         dlgInfillMissingValues.ShowDialog()
     End Sub
@@ -2157,5 +2153,9 @@ Public Class frmMain
 
     Private Sub mnuClimaticCompareSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareSummary.Click
         dlgCompareSummary.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCompareTaylorDiagram_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareTaylorDiagram.Click
+        dlgTaylorDiagram.ShowDialog()
     End Sub
 End Class
