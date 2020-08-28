@@ -232,7 +232,6 @@ Partial Class frmMain
         Me.mnuClimaticPrepareSpells = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareExtremes = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator64 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuClimaticPrepareCompareCalculation = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareCompareSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareCompareTaylor = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator46 = New System.Windows.Forms.ToolStripSeparator()
@@ -265,6 +264,17 @@ Partial Class frmMain
         Me.mnuCMSAF = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCMSAFPlotRegion = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCMSAFExporttoCMSAFRToolbox = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompare = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareCalculation = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareSummary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator66 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticCompareCorrelations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareScatterplot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareTimeSeriesPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareSeasonalPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareDensityPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareConditionalQuantiles = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareTaylorDiagram = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticMapping = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModelsExtremes = New System.Windows.Forms.ToolStripMenuItem()
@@ -622,17 +632,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticCompare = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticCompareCalculation = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticCompareSummary = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator66 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuClimaticCompareCorrelations = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticCompareScatterplot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticCompareTimeSeriesPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticCompareSeasonalPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticCompareDensityPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticCompareConditionalQuantiles = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticCompareTaylorDiagram = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1654,7 +1653,7 @@ Partial Class frmMain
         '
         'mnuClimaticPrepare
         '
-        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticPrepareTransform, Me.mnuClimaticPrepareConversions, Me.ToolStripSeparator37, Me.mnuClimaticPrepareClimaticSummaries, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareEndOfRains, Me.mnuClimaticPrepareLengthOfSeason, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.ToolStripSeparator64, Me.mnuClimaticPrepareCompareCalculation, Me.mnuClimaticPrepareCompareSummary, Me.mnuClimaticPrepareCompareTaylor, Me.ToolStripSeparator46, Me.mnuClimaticPrepareClimdex, Me.mnuClimaticPrepareSPI, Me.ToolStripSeparator51, Me.mnuClimaticPrepareEvapotranspiration, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
+        Me.mnuClimaticPrepare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCimaticPrepareTransform, Me.mnuClimaticPrepareConversions, Me.ToolStripSeparator37, Me.mnuClimaticPrepareClimaticSummaries, Me.mnuClimaticPrepareStartoftheRains, Me.mnuClimaticPrepareEndOfRains, Me.mnuClimaticPrepareLengthOfSeason, Me.mnuClimaticPrepareSpells, Me.mnuClimaticPrepareExtremes, Me.ToolStripSeparator64, Me.mnuClimaticPrepareCompareSummary, Me.mnuClimaticPrepareCompareTaylor, Me.ToolStripSeparator46, Me.mnuClimaticPrepareClimdex, Me.mnuClimaticPrepareSPI, Me.ToolStripSeparator51, Me.mnuClimaticPrepareEvapotranspiration, Me.mnuClimaticPrepareSummary, Me.mnuClimaticPrepareNewWorksheet, Me.mnuClimaticPrepareImportDailyData, Me.mnuClimaticPrepareMakeFactor, Me.mnuClimaticPrepareShiftDailyData, Me.mnuClimaticPrepareUnstackDailyData, Me.mnuClimaticPrepareStackDailyData})
         Me.mnuClimaticPrepare.Name = "mnuClimaticPrepare"
         resources.ApplyResources(Me.mnuClimaticPrepare, "mnuClimaticPrepare")
         Me.mnuClimaticPrepare.Tag = "Prepare"
@@ -1708,11 +1707,6 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator64.Name = "ToolStripSeparator64"
         resources.ApplyResources(Me.ToolStripSeparator64, "ToolStripSeparator64")
-        '
-        'mnuClimaticPrepareCompareCalculation
-        '
-        Me.mnuClimaticPrepareCompareCalculation.Name = "mnuClimaticPrepareCompareCalculation"
-        resources.ApplyResources(Me.mnuClimaticPrepareCompareCalculation, "mnuClimaticPrepareCompareCalculation")
         '
         'mnuClimaticPrepareCompareSummary
         '
@@ -1883,6 +1877,62 @@ Partial Class frmMain
         '
         Me.mnuClimaticCMSAFExporttoCMSAFRToolbox.Name = "mnuClimaticCMSAFExporttoCMSAFRToolbox"
         resources.ApplyResources(Me.mnuClimaticCMSAFExporttoCMSAFRToolbox, "mnuClimaticCMSAFExporttoCMSAFRToolbox")
+        '
+        'mnuClimaticCompare
+        '
+        Me.mnuClimaticCompare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCompareCalculation, Me.mnuClimaticCompareSummary, Me.ToolStripSeparator66, Me.mnuClimaticCompareCorrelations, Me.mnuClimaticCompareScatterplot, Me.mnuClimaticCompareTimeSeriesPlot, Me.mnuClimaticCompareSeasonalPlot, Me.mnuClimaticCompareDensityPlot, Me.mnuClimaticCompareConditionalQuantiles, Me.mnuClimaticCompareTaylorDiagram})
+        Me.mnuClimaticCompare.Name = "mnuClimaticCompare"
+        resources.ApplyResources(Me.mnuClimaticCompare, "mnuClimaticCompare")
+        '
+        'mnuClimaticCompareCalculation
+        '
+        Me.mnuClimaticCompareCalculation.Name = "mnuClimaticCompareCalculation"
+        resources.ApplyResources(Me.mnuClimaticCompareCalculation, "mnuClimaticCompareCalculation")
+        '
+        'mnuClimaticCompareSummary
+        '
+        Me.mnuClimaticCompareSummary.Name = "mnuClimaticCompareSummary"
+        resources.ApplyResources(Me.mnuClimaticCompareSummary, "mnuClimaticCompareSummary")
+        '
+        'ToolStripSeparator66
+        '
+        Me.ToolStripSeparator66.Name = "ToolStripSeparator66"
+        resources.ApplyResources(Me.ToolStripSeparator66, "ToolStripSeparator66")
+        '
+        'mnuClimaticCompareCorrelations
+        '
+        Me.mnuClimaticCompareCorrelations.Name = "mnuClimaticCompareCorrelations"
+        resources.ApplyResources(Me.mnuClimaticCompareCorrelations, "mnuClimaticCompareCorrelations")
+        '
+        'mnuClimaticCompareScatterplot
+        '
+        Me.mnuClimaticCompareScatterplot.Name = "mnuClimaticCompareScatterplot"
+        resources.ApplyResources(Me.mnuClimaticCompareScatterplot, "mnuClimaticCompareScatterplot")
+        '
+        'mnuClimaticCompareTimeSeriesPlot
+        '
+        Me.mnuClimaticCompareTimeSeriesPlot.Name = "mnuClimaticCompareTimeSeriesPlot"
+        resources.ApplyResources(Me.mnuClimaticCompareTimeSeriesPlot, "mnuClimaticCompareTimeSeriesPlot")
+        '
+        'mnuClimaticCompareSeasonalPlot
+        '
+        Me.mnuClimaticCompareSeasonalPlot.Name = "mnuClimaticCompareSeasonalPlot"
+        resources.ApplyResources(Me.mnuClimaticCompareSeasonalPlot, "mnuClimaticCompareSeasonalPlot")
+        '
+        'mnuClimaticCompareDensityPlot
+        '
+        Me.mnuClimaticCompareDensityPlot.Name = "mnuClimaticCompareDensityPlot"
+        resources.ApplyResources(Me.mnuClimaticCompareDensityPlot, "mnuClimaticCompareDensityPlot")
+        '
+        'mnuClimaticCompareConditionalQuantiles
+        '
+        Me.mnuClimaticCompareConditionalQuantiles.Name = "mnuClimaticCompareConditionalQuantiles"
+        resources.ApplyResources(Me.mnuClimaticCompareConditionalQuantiles, "mnuClimaticCompareConditionalQuantiles")
+        '
+        'mnuClimaticCompareTaylorDiagram
+        '
+        Me.mnuClimaticCompareTaylorDiagram.Name = "mnuClimaticCompareTaylorDiagram"
+        resources.ApplyResources(Me.mnuClimaticCompareTaylorDiagram, "mnuClimaticCompareTaylorDiagram")
         '
         'mnuClimaticMapping
         '
@@ -3958,62 +4008,6 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
-        'mnuClimaticCompare
-        '
-        Me.mnuClimaticCompare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCompareCalculation, Me.mnuClimaticCompareSummary, Me.ToolStripSeparator66, Me.mnuClimaticCompareCorrelations, Me.mnuClimaticCompareScatterplot, Me.mnuClimaticCompareTimeSeriesPlot, Me.mnuClimaticCompareSeasonalPlot, Me.mnuClimaticCompareDensityPlot, Me.mnuClimaticCompareConditionalQuantiles, Me.mnuClimaticCompareTaylorDiagram})
-        Me.mnuClimaticCompare.Name = "mnuClimaticCompare"
-        resources.ApplyResources(Me.mnuClimaticCompare, "mnuClimaticCompare")
-        '
-        'mnuClimaticCompareCalculation
-        '
-        Me.mnuClimaticCompareCalculation.Name = "mnuClimaticCompareCalculation"
-        resources.ApplyResources(Me.mnuClimaticCompareCalculation, "mnuClimaticCompareCalculation")
-        '
-        'mnuClimaticCompareSummary
-        '
-        Me.mnuClimaticCompareSummary.Name = "mnuClimaticCompareSummary"
-        resources.ApplyResources(Me.mnuClimaticCompareSummary, "mnuClimaticCompareSummary")
-        '
-        'ToolStripSeparator66
-        '
-        Me.ToolStripSeparator66.Name = "ToolStripSeparator66"
-        resources.ApplyResources(Me.ToolStripSeparator66, "ToolStripSeparator66")
-        '
-        'mnuClimaticCompareCorrelations
-        '
-        Me.mnuClimaticCompareCorrelations.Name = "mnuClimaticCompareCorrelations"
-        resources.ApplyResources(Me.mnuClimaticCompareCorrelations, "mnuClimaticCompareCorrelations")
-        '
-        'mnuClimaticCompareScatterplot
-        '
-        Me.mnuClimaticCompareScatterplot.Name = "mnuClimaticCompareScatterplot"
-        resources.ApplyResources(Me.mnuClimaticCompareScatterplot, "mnuClimaticCompareScatterplot")
-        '
-        'mnuClimaticCompareTimeSeriesPlot
-        '
-        Me.mnuClimaticCompareTimeSeriesPlot.Name = "mnuClimaticCompareTimeSeriesPlot"
-        resources.ApplyResources(Me.mnuClimaticCompareTimeSeriesPlot, "mnuClimaticCompareTimeSeriesPlot")
-        '
-        'mnuClimaticCompareSeasonalPlot
-        '
-        Me.mnuClimaticCompareSeasonalPlot.Name = "mnuClimaticCompareSeasonalPlot"
-        resources.ApplyResources(Me.mnuClimaticCompareSeasonalPlot, "mnuClimaticCompareSeasonalPlot")
-        '
-        'mnuClimaticCompareDensityPlot
-        '
-        Me.mnuClimaticCompareDensityPlot.Name = "mnuClimaticCompareDensityPlot"
-        resources.ApplyResources(Me.mnuClimaticCompareDensityPlot, "mnuClimaticCompareDensityPlot")
-        '
-        'mnuClimaticCompareConditionalQuantiles
-        '
-        Me.mnuClimaticCompareConditionalQuantiles.Name = "mnuClimaticCompareConditionalQuantiles"
-        resources.ApplyResources(Me.mnuClimaticCompareConditionalQuantiles, "mnuClimaticCompareConditionalQuantiles")
-        '
-        'mnuClimaticCompareTaylorDiagram
-        '
-        Me.mnuClimaticCompareTaylorDiagram.Name = "mnuClimaticCompareTaylorDiagram"
-        resources.ApplyResources(Me.mnuClimaticCompareTaylorDiagram, "mnuClimaticCompareTaylorDiagram")
-        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4636,7 +4630,6 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredClimatic As ToolStripMenuItem
     Friend WithEvents mnuStructuredProcurement As ToolStripMenuItem
     Friend WithEvents mnuStructuredOptionByContext As ToolStripMenuItem
-    Friend WithEvents mnuClimaticPrepareCompareCalculation As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator64 As ToolStripSeparator
     Friend WithEvents mnuClimaticPrepareCompareTaylor As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataFillMissingValues As ToolStripMenuItem
