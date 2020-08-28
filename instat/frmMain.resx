@@ -1548,43 +1548,61 @@
     <value>CM SAF</value>
   </data>
   <data name="mnuClimaticCompareCalculation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>189, 22</value>
   </data>
   <data name="mnuClimaticCompareCalculation.Text" xml:space="preserve">
     <value>Calculation...</value>
   </data>
   <data name="mnuClimaticCompareSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>189, 22</value>
   </data>
   <data name="mnuClimaticCompareSummary.Text" xml:space="preserve">
     <value>Summary...</value>
   </data>
   <data name="ToolStripSeparator66.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>186, 6</value>
   </data>
   <data name="mnuClimaticCompareCorrelations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>189, 22</value>
   </data>
   <data name="mnuClimaticCompareCorrelations.Text" xml:space="preserve">
     <value>Correlations</value>
   </data>
   <data name="mnuClimaticCompareScatterplot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>189, 22</value>
   </data>
   <data name="mnuClimaticCompareScatterplot.Text" xml:space="preserve">
     <value>Scatterplot</value>
   </data>
   <data name="mnuClimaticCompareTimeSeriesPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>189, 22</value>
   </data>
   <data name="mnuClimaticCompareTimeSeriesPlot.Text" xml:space="preserve">
     <value>Time Series Plot...</value>
   </data>
   <data name="mnuClimaticCompareSeasonalPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>189, 22</value>
   </data>
   <data name="mnuClimaticCompareSeasonalPlot.Text" xml:space="preserve">
     <value>Seasonal Plot...</value>
+  </data>
+  <data name="mnuClimaticCompareDensityPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticCompareDensityPlot.Text" xml:space="preserve">
+    <value>Density Plot</value>
+  </data>
+  <data name="mnuClimaticCompareConditionalQuantiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticCompareConditionalQuantiles.Text" xml:space="preserve">
+    <value>Conditional Quantiles</value>
+  </data>
+  <data name="mnuClimaticCompareTaylorDiagram.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticCompareTaylorDiagram.Text" xml:space="preserve">
+    <value>Taylor Diagram</value>
   </data>
   <data name="mnuClimaticCompare.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
@@ -9745,6 +9763,24 @@
     <value>mnuClimaticCompareSeasonalPlot</value>
   </data>
   <data name="&gt;&gt;mnuClimaticCompareSeasonalPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareDensityPlot.Name" xml:space="preserve">
+    <value>mnuClimaticCompareDensityPlot</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareDensityPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareConditionalQuantiles.Name" xml:space="preserve">
+    <value>mnuClimaticCompareConditionalQuantiles</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareConditionalQuantiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareTaylorDiagram.Name" xml:space="preserve">
+    <value>mnuClimaticCompareTaylorDiagram</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareTaylorDiagram.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
