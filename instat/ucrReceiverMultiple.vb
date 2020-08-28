@@ -509,4 +509,13 @@ Public Class ucrReceiverMultiple
     Public Overrides Function GetItemsDataFrames() As List(Of String)
         Return GetCurrGroupNames()
     End Function
+
+    Private Sub Selector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
+        CheckAutoFill()
+    End Sub
+
+    Protected Overrides Sub Selector_ResetAll()
+        MyBase.Selector_ResetAll()
+        CheckAutoFill()
+    End Sub
 End Class
