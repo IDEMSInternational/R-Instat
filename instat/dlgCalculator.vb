@@ -142,12 +142,14 @@ Public Class dlgCalculator
             Case "Transform"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.35, Me.Height)
                 ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.35, Me.Height)
             Case "Circular"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.36, Me.Height)
                 ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case "Wakefield"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.7, Me.Height * 1.1)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY + 60)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.7, Me.Height)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY + 50)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.7, Me.Height + 10)
             Case "Modifier"
                 Me.Size = New Size(iBasicWidth * 1.39, Me.Height)
                 ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
