@@ -1559,6 +1559,15 @@
   <data name="mnuClimaticCompareSummary.Text" xml:space="preserve">
     <value>Summary...</value>
   </data>
+  <data name="ToolStripSeparator66.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 6</value>
+  </data>
+  <data name="mnuClimaticCompareCorrelations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuClimaticCompareCorrelations.Text" xml:space="preserve">
+    <value>Correlations...</value>
+  </data>
   <data name="mnuClimaticCompare.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
   </data>
@@ -9688,6 +9697,18 @@
     <value>mnuClimaticCompareSummary</value>
   </data>
   <data name="&gt;&gt;mnuClimaticCompareSummary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator66.Name" xml:space="preserve">
+    <value>ToolStripSeparator66</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator66.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareCorrelations.Name" xml:space="preserve">
+    <value>mnuClimaticCompareCorrelations</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareCorrelations.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
