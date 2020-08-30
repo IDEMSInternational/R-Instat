@@ -1568,6 +1568,24 @@
   <data name="mnuClimaticCompareCorrelations.Text" xml:space="preserve">
     <value>Correlations...</value>
   </data>
+  <data name="mnuClimaticCompareScatterplot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuClimaticCompareScatterplot.Text" xml:space="preserve">
+    <value>Scatterplot...</value>
+  </data>
+  <data name="mnuClimaticCompareTimeSeriesPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuClimaticCompareTimeSeriesPlot.Text" xml:space="preserve">
+    <value>Time Series Plot...</value>
+  </data>
+  <data name="mnuClimaticCompareSeasonalPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuClimaticCompareSeasonalPlot.Text" xml:space="preserve">
+    <value>Seasonal Plot...</value>
+  </data>
   <data name="mnuClimaticCompare.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
   </data>
@@ -9709,6 +9727,24 @@
     <value>mnuClimaticCompareCorrelations</value>
   </data>
   <data name="&gt;&gt;mnuClimaticCompareCorrelations.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareScatterplot.Name" xml:space="preserve">
+    <value>mnuClimaticCompareScatterplot</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareScatterplot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareTimeSeriesPlot.Name" xml:space="preserve">
+    <value>mnuClimaticCompareTimeSeriesPlot</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareTimeSeriesPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareSeasonalPlot.Name" xml:space="preserve">
+    <value>mnuClimaticCompareSeasonalPlot</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareSeasonalPlot.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

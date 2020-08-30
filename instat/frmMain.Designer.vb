@@ -627,6 +627,9 @@ Partial Class frmMain
         Me.mnuClimaticCompareSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator66 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticCompareCorrelations = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareScatterplot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareTimeSeriesPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareSeasonalPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3954,7 +3957,7 @@ Partial Class frmMain
         '
         'mnuClimaticCompare
         '
-        Me.mnuClimaticCompare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCompareCalculation, Me.mnuClimaticCompareSummary, Me.ToolStripSeparator66, Me.mnuClimaticCompareCorrelations})
+        Me.mnuClimaticCompare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCompareCalculation, Me.mnuClimaticCompareSummary, Me.ToolStripSeparator66, Me.mnuClimaticCompareCorrelations, Me.mnuClimaticCompareScatterplot, Me.mnuClimaticCompareTimeSeriesPlot, Me.mnuClimaticCompareSeasonalPlot})
         Me.mnuClimaticCompare.Name = "mnuClimaticCompare"
         resources.ApplyResources(Me.mnuClimaticCompare, "mnuClimaticCompare")
         '
@@ -3977,6 +3980,21 @@ Partial Class frmMain
         '
         Me.mnuClimaticCompareCorrelations.Name = "mnuClimaticCompareCorrelations"
         resources.ApplyResources(Me.mnuClimaticCompareCorrelations, "mnuClimaticCompareCorrelations")
+        '
+        'mnuClimaticCompareScatterplot
+        '
+        Me.mnuClimaticCompareScatterplot.Name = "mnuClimaticCompareScatterplot"
+        resources.ApplyResources(Me.mnuClimaticCompareScatterplot, "mnuClimaticCompareScatterplot")
+        '
+        'mnuClimaticCompareTimeSeriesPlot
+        '
+        Me.mnuClimaticCompareTimeSeriesPlot.Name = "mnuClimaticCompareTimeSeriesPlot"
+        resources.ApplyResources(Me.mnuClimaticCompareTimeSeriesPlot, "mnuClimaticCompareTimeSeriesPlot")
+        '
+        'mnuClimaticCompareSeasonalPlot
+        '
+        Me.mnuClimaticCompareSeasonalPlot.Name = "mnuClimaticCompareSeasonalPlot"
+        resources.ApplyResources(Me.mnuClimaticCompareSeasonalPlot, "mnuClimaticCompareSeasonalPlot")
         '
         'frmMain
         '
@@ -4612,4 +4630,7 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticCompareSummary As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator66 As ToolStripSeparator
     Friend WithEvents mnuClimaticCompareCorrelations As ToolStripMenuItem
+    Friend WithEvents mnuClimaticCompareScatterplot As ToolStripMenuItem
+    Friend WithEvents mnuClimaticCompareTimeSeriesPlot As ToolStripMenuItem
+    Friend WithEvents mnuClimaticCompareSeasonalPlot As ToolStripMenuItem
 End Class
