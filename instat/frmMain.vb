@@ -2158,4 +2158,12 @@ Public Class frmMain
     Private Sub mnuClimaticCompareTaylorDiagram_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareTaylorDiagram.Click
         dlgTaylorDiagram.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticCompareCorrelations_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareCorrelations.Click
+        dlgCorrelation.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCompareScatterplot_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareScatterplot.Click
+        dlgScatterPlot.ShowDialog()
+    End Sub
 End Class

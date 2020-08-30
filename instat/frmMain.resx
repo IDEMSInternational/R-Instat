@@ -1034,165 +1034,6 @@
   <data name="mnuClimaticCheckData.Text" xml:space="preserve">
     <value>Check Data</value>
   </data>
-  <data name="mnuCimaticPrepareTransform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuCimaticPrepareTransform.Text" xml:space="preserve">
-    <value>Transform...</value>
-  </data>
-  <data name="mnuClimaticPrepareConversions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareConversions.Text" xml:space="preserve">
-    <value>Conversions...</value>
-  </data>
-  <data name="ToolStripSeparator37.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 6</value>
-  </data>
-  <data name="mnuClimaticPrepareClimaticSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareClimaticSummaries.Text" xml:space="preserve">
-    <value>Climatic Summaries...</value>
-  </data>
-  <data name="mnuClimaticPrepareStartoftheRains.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareStartoftheRains.Text" xml:space="preserve">
-    <value>Start of the Rains...</value>
-  </data>
-  <data name="mnuClimaticPrepareEndOfRains.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareEndOfRains.Text" xml:space="preserve">
-    <value>End of Rains...</value>
-  </data>
-  <data name="mnuClimaticPrepareLengthOfSeason.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareLengthOfSeason.Text" xml:space="preserve">
-    <value>Length of Season...</value>
-  </data>
-  <data name="mnuClimaticPrepareSpells.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareSpells.Text" xml:space="preserve">
-    <value>Spells...</value>
-  </data>
-  <data name="mnuClimaticPrepareExtremes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareExtremes.Text" xml:space="preserve">
-    <value>Extremes...</value>
-  </data>
-  <data name="ToolStripSeparator64.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 6</value>
-  </data>
-  <data name="mnuClimaticPrepareClimdex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareClimdex.Text" xml:space="preserve">
-    <value>Climdex...</value>
-  </data>
-  <data name="mnuClimaticPrepareSPI.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareSPI.Text" xml:space="preserve">
-    <value>SPI...</value>
-  </data>
-  <data name="ToolStripSeparator51.Size" type="System.Drawing.Size, System.Drawing">
-    <value>186, 6</value>
-  </data>
-  <data name="mnuClimaticPrepareEvapotranspiration.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareEvapotranspiration.Text" xml:space="preserve">
-    <value>Evapotranspiration...</value>
-  </data>
-  <data name="mnuClimaticPrepareSummary.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticPrepareSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareSummary.Text" xml:space="preserve">
-    <value>Summary...</value>
-  </data>
-  <data name="mnuClimaticPrepareSummary.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticPrepareNewWorksheet.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticPrepareNewWorksheet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareNewWorksheet.Text" xml:space="preserve">
-    <value>New Worksheet...</value>
-  </data>
-  <data name="mnuClimaticPrepareNewWorksheet.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticPrepareImportDailyData.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticPrepareImportDailyData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareImportDailyData.Text" xml:space="preserve">
-    <value>Import daily Data...</value>
-  </data>
-  <data name="mnuClimaticPrepareImportDailyData.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticPrepareMakeFactor.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticPrepareMakeFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareMakeFactor.Text" xml:space="preserve">
-    <value>Make Factor...</value>
-  </data>
-  <data name="mnuClimaticPrepareMakeFactor.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticPrepareShiftDailyData.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticPrepareShiftDailyData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareShiftDailyData.Text" xml:space="preserve">
-    <value>Shift Daily Data...</value>
-  </data>
-  <data name="mnuClimaticPrepareShiftDailyData.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticPrepareUnstackDailyData.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticPrepareUnstackDailyData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareUnstackDailyData.Text" xml:space="preserve">
-    <value>Unstack Daily Data...</value>
-  </data>
-  <data name="mnuClimaticPrepareUnstackDailyData.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticPrepareStackDailyData.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticPrepareStackDailyData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 22</value>
-  </data>
-  <data name="mnuClimaticPrepareStackDailyData.Text" xml:space="preserve">
-    <value>Stack Daily data...</value>
-  </data>
-  <data name="mnuClimaticPrepareStackDailyData.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuClimaticPrepare.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
   </data>
@@ -1219,6 +1060,63 @@
   </data>
   <data name="mnuCMSAF.Text" xml:space="preserve">
     <value>CM SAF</value>
+  </data>
+  <data name="mnuClimaticCompareCalculation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
+  <data name="mnuClimaticCompareCalculation.Text" xml:space="preserve">
+    <value>Calculation...</value>
+  </data>
+  <data name="mnuClimaticCompareSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
+  <data name="mnuClimaticCompareSummary.Text" xml:space="preserve">
+    <value>Summary...</value>
+  </data>
+  <data name="ToolStripSeparator66.Size" type="System.Drawing.Size, System.Drawing">
+    <value>195, 6</value>
+  </data>
+  <data name="mnuClimaticCompareCorrelations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
+  <data name="mnuClimaticCompareCorrelations.Text" xml:space="preserve">
+    <value>Correlations...</value>
+  </data>
+  <data name="mnuClimaticCompareScatterplot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
+  <data name="mnuClimaticCompareScatterplot.Text" xml:space="preserve">
+    <value>Scatterplot...</value>
+  </data>
+  <data name="mnuClimaticCompareTimeSeriesPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
+  <data name="mnuClimaticCompareTimeSeriesPlot.Text" xml:space="preserve">
+    <value>Time Series Plot...</value>
+  </data>
+  <data name="mnuClimaticCompareSeasonalPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
+  <data name="mnuClimaticCompareSeasonalPlot.Text" xml:space="preserve">
+    <value>Seasonal Plot...</value>
+  </data>
+  <data name="mnuClimaticCompareDensityPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
+  <data name="mnuClimaticCompareDensityPlot.Text" xml:space="preserve">
+    <value>Density Plot...</value>
+  </data>
+  <data name="mnuClimaticCompareConditionalQuantiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
+  <data name="mnuClimaticCompareConditionalQuantiles.Text" xml:space="preserve">
+    <value>Conditional Quantiles...</value>
+  </data>
+  <data name="mnuClimaticCompareTaylorDiagram.Size" type="System.Drawing.Size, System.Drawing">
+    <value>198, 22</value>
+  </data>
+  <data name="mnuClimaticCompareTaylorDiagram.Text" xml:space="preserve">
+    <value>Taylor Diagram...</value>
   </data>
   <data name="mnuClimaticCompare.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
@@ -1475,6 +1373,165 @@
   <data name="mnuClimaticCheckDataHomogenization.Text" xml:space="preserve">
     <value>Homogenization...</value>
   </data>
+  <data name="mnuCimaticPrepareTransform.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuCimaticPrepareTransform.Text" xml:space="preserve">
+    <value>Transform...</value>
+  </data>
+  <data name="mnuClimaticPrepareConversions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareConversions.Text" xml:space="preserve">
+    <value>Conversions...</value>
+  </data>
+  <data name="ToolStripSeparator37.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 6</value>
+  </data>
+  <data name="mnuClimaticPrepareClimaticSummaries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareClimaticSummaries.Text" xml:space="preserve">
+    <value>Climatic Summaries...</value>
+  </data>
+  <data name="mnuClimaticPrepareStartoftheRains.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareStartoftheRains.Text" xml:space="preserve">
+    <value>Start of the Rains...</value>
+  </data>
+  <data name="mnuClimaticPrepareEndOfRains.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareEndOfRains.Text" xml:space="preserve">
+    <value>End of Rains...</value>
+  </data>
+  <data name="mnuClimaticPrepareLengthOfSeason.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareLengthOfSeason.Text" xml:space="preserve">
+    <value>Length of Season...</value>
+  </data>
+  <data name="mnuClimaticPrepareSpells.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareSpells.Text" xml:space="preserve">
+    <value>Spells...</value>
+  </data>
+  <data name="mnuClimaticPrepareExtremes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareExtremes.Text" xml:space="preserve">
+    <value>Extremes...</value>
+  </data>
+  <data name="ToolStripSeparator64.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 6</value>
+  </data>
+  <data name="mnuClimaticPrepareClimdex.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareClimdex.Text" xml:space="preserve">
+    <value>Climdex...</value>
+  </data>
+  <data name="mnuClimaticPrepareSPI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareSPI.Text" xml:space="preserve">
+    <value>SPI...</value>
+  </data>
+  <data name="ToolStripSeparator51.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 6</value>
+  </data>
+  <data name="mnuClimaticPrepareEvapotranspiration.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareEvapotranspiration.Text" xml:space="preserve">
+    <value>Evapotranspiration...</value>
+  </data>
+  <data name="mnuClimaticPrepareSummary.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareSummary.Text" xml:space="preserve">
+    <value>Summary...</value>
+  </data>
+  <data name="mnuClimaticPrepareSummary.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareNewWorksheet.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareNewWorksheet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareNewWorksheet.Text" xml:space="preserve">
+    <value>New Worksheet...</value>
+  </data>
+  <data name="mnuClimaticPrepareNewWorksheet.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareImportDailyData.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareImportDailyData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareImportDailyData.Text" xml:space="preserve">
+    <value>Import daily Data...</value>
+  </data>
+  <data name="mnuClimaticPrepareImportDailyData.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareMakeFactor.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareMakeFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareMakeFactor.Text" xml:space="preserve">
+    <value>Make Factor...</value>
+  </data>
+  <data name="mnuClimaticPrepareMakeFactor.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareShiftDailyData.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareShiftDailyData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareShiftDailyData.Text" xml:space="preserve">
+    <value>Shift Daily Data...</value>
+  </data>
+  <data name="mnuClimaticPrepareShiftDailyData.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareUnstackDailyData.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareUnstackDailyData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareUnstackDailyData.Text" xml:space="preserve">
+    <value>Unstack Daily Data...</value>
+  </data>
+  <data name="mnuClimaticPrepareUnstackDailyData.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareStackDailyData.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticPrepareStackDailyData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 22</value>
+  </data>
+  <data name="mnuClimaticPrepareStackDailyData.Text" xml:space="preserve">
+    <value>Stack Daily data...</value>
+  </data>
+  <data name="mnuClimaticPrepareStackDailyData.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="mnuClimaticDescribeRainfall.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -1567,63 +1624,6 @@
   </data>
   <data name="mnuClimaticCMSAFExporttoCMSAFRToolbox.Text" xml:space="preserve">
     <value>Export to CM SAF R Toolbox...</value>
-  </data>
-  <data name="mnuClimaticCompareCalculation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 22</value>
-  </data>
-  <data name="mnuClimaticCompareCalculation.Text" xml:space="preserve">
-    <value>Calculation...</value>
-  </data>
-  <data name="mnuClimaticCompareSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 22</value>
-  </data>
-  <data name="mnuClimaticCompareSummary.Text" xml:space="preserve">
-    <value>Summary...</value>
-  </data>
-  <data name="ToolStripSeparator66.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 6</value>
-  </data>
-  <data name="mnuClimaticCompareCorrelations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 22</value>
-  </data>
-  <data name="mnuClimaticCompareCorrelations.Text" xml:space="preserve">
-    <value>Correlations...</value>
-  </data>
-  <data name="mnuClimaticCompareScatterplot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 22</value>
-  </data>
-  <data name="mnuClimaticCompareScatterplot.Text" xml:space="preserve">
-    <value>Scatterplot...</value>
-  </data>
-  <data name="mnuClimaticCompareTimeSeriesPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 22</value>
-  </data>
-  <data name="mnuClimaticCompareTimeSeriesPlot.Text" xml:space="preserve">
-    <value>Time Series Plot...</value>
-  </data>
-  <data name="mnuClimaticCompareSeasonalPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 22</value>
-  </data>
-  <data name="mnuClimaticCompareSeasonalPlot.Text" xml:space="preserve">
-    <value>Seasonal Plot...</value>
-  </data>
-  <data name="mnuClimaticCompareDensityPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 22</value>
-  </data>
-  <data name="mnuClimaticCompareDensityPlot.Text" xml:space="preserve">
-    <value>Density Plot...</value>
-  </data>
-  <data name="mnuClimaticCompareConditionalQuantiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 22</value>
-  </data>
-  <data name="mnuClimaticCompareConditionalQuantiles.Text" xml:space="preserve">
-    <value>Conditional Quantiles...</value>
-  </data>
-  <data name="mnuClimaticCompareTaylorDiagram.Size" type="System.Drawing.Size, System.Drawing">
-    <value>198, 22</value>
-  </data>
-  <data name="mnuClimaticCompareTaylorDiagram.Text" xml:space="preserve">
-    <value>Taylor Diagram...</value>
   </data>
   <data name="mnuClimaticModelsExtremes.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
