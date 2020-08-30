@@ -1553,6 +1553,12 @@
   <data name="mnuClimaticCompareCalculation.Text" xml:space="preserve">
     <value>Calculation...</value>
   </data>
+  <data name="mnuClimaticCompareSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuClimaticCompareSummary.Text" xml:space="preserve">
+    <value>Summary...</value>
+  </data>
   <data name="mnuClimaticCompare.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
   </data>
@@ -9676,6 +9682,12 @@
     <value>mnuClimaticCompareCalculation</value>
   </data>
   <data name="&gt;&gt;mnuClimaticCompareCalculation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareSummary.Name" xml:space="preserve">
+    <value>mnuClimaticCompareSummary</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCompareSummary.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

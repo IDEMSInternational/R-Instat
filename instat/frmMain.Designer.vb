@@ -624,6 +624,7 @@ Partial Class frmMain
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCompare = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCompareCalculation = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3951,7 +3952,7 @@ Partial Class frmMain
         '
         'mnuClimaticCompare
         '
-        Me.mnuClimaticCompare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCompareCalculation})
+        Me.mnuClimaticCompare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCompareCalculation, Me.mnuClimaticCompareSummary})
         Me.mnuClimaticCompare.Name = "mnuClimaticCompare"
         resources.ApplyResources(Me.mnuClimaticCompare, "mnuClimaticCompare")
         '
@@ -3959,6 +3960,11 @@ Partial Class frmMain
         '
         Me.mnuClimaticCompareCalculation.Name = "mnuClimaticCompareCalculation"
         resources.ApplyResources(Me.mnuClimaticCompareCalculation, "mnuClimaticCompareCalculation")
+        '
+        'mnuClimaticCompareSummary
+        '
+        Me.mnuClimaticCompareSummary.Name = "mnuClimaticCompareSummary"
+        resources.ApplyResources(Me.mnuClimaticCompareSummary, "mnuClimaticCompareSummary")
         '
         'frmMain
         '
@@ -4591,4 +4597,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticTidyandExamineVisualiseData As ToolStripMenuItem
     Friend WithEvents mnuClimaticCompare As ToolStripMenuItem
     Friend WithEvents mnuClimaticCompareCalculation As ToolStripMenuItem
+    Friend WithEvents mnuClimaticCompareSummary As ToolStripMenuItem
 End Class
