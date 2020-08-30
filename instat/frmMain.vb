@@ -2131,20 +2131,8 @@ Public Class frmMain
         dlgHomogenization.ShowDialog() 'partially working now
     End Sub
 
-    Private Sub mnuClimaticPrepareCompareCalculation_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompareCalculation.Click
-        dlgCompare.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticPrepareCompareSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompareSummary.Click
-        dlgCompareSummary.ShowDialog()
-    End Sub
-
     Private Sub mnuStructuredCircularDefine_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularDefine.Click
         dlgCircular.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticPrepareCompareTaylor_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareCompareTaylor.Click
-        dlgTaylorDiagram.ShowDialog()
     End Sub
 
     Private Sub mnuClimaticCheckDataFillMissingValues_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataFillMissingValues.Click
@@ -2161,5 +2149,13 @@ Public Class frmMain
 
     Private Sub mnuClimaticCompareCalculation_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareCalculation.Click
         dlgCompare.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCompareSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareSummary.Click
+        dlgCompareSummary.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCompareTaylorDiagram_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareTaylorDiagram.Click
+        dlgTaylorDiagram.ShowDialog()
     End Sub
 End Class
