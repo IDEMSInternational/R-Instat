@@ -2158,4 +2158,8 @@ Public Class frmMain
     Private Sub mnuPrepareCheckDataVisualiseData_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataVisualiseData.Click
         dlgVisualizeData.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticCompareCalculation_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareCalculation.Click
+        dlgCompare.ShowDialog()
+    End Sub
 End Class
