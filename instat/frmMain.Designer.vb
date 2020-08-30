@@ -630,6 +630,7 @@ Partial Class frmMain
         Me.mnuClimaticCompareScatterplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCompareTimeSeriesPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCompareSeasonalPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCompareDensityPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3957,7 +3958,7 @@ Partial Class frmMain
         '
         'mnuClimaticCompare
         '
-        Me.mnuClimaticCompare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCompareCalculation, Me.mnuClimaticCompareSummary, Me.ToolStripSeparator66, Me.mnuClimaticCompareCorrelations, Me.mnuClimaticCompareScatterplot, Me.mnuClimaticCompareTimeSeriesPlot, Me.mnuClimaticCompareSeasonalPlot})
+        Me.mnuClimaticCompare.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCompareCalculation, Me.mnuClimaticCompareSummary, Me.ToolStripSeparator66, Me.mnuClimaticCompareCorrelations, Me.mnuClimaticCompareScatterplot, Me.mnuClimaticCompareTimeSeriesPlot, Me.mnuClimaticCompareSeasonalPlot, Me.mnuClimaticCompareDensityPlot})
         Me.mnuClimaticCompare.Name = "mnuClimaticCompare"
         resources.ApplyResources(Me.mnuClimaticCompare, "mnuClimaticCompare")
         '
@@ -3995,6 +3996,11 @@ Partial Class frmMain
         '
         Me.mnuClimaticCompareSeasonalPlot.Name = "mnuClimaticCompareSeasonalPlot"
         resources.ApplyResources(Me.mnuClimaticCompareSeasonalPlot, "mnuClimaticCompareSeasonalPlot")
+        '
+        'mnuClimaticCompareDensityPlot
+        '
+        Me.mnuClimaticCompareDensityPlot.Name = "mnuClimaticCompareDensityPlot"
+        resources.ApplyResources(Me.mnuClimaticCompareDensityPlot, "mnuClimaticCompareDensityPlot")
         '
         'frmMain
         '
@@ -4633,4 +4639,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticCompareScatterplot As ToolStripMenuItem
     Friend WithEvents mnuClimaticCompareTimeSeriesPlot As ToolStripMenuItem
     Friend WithEvents mnuClimaticCompareSeasonalPlot As ToolStripMenuItem
+    Friend WithEvents mnuClimaticCompareDensityPlot As ToolStripMenuItem
 End Class
