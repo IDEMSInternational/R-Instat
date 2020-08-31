@@ -823,24 +823,16 @@ Public Class dlgImportDataset
         If chrSheets IsNot Nothing AndAlso chrSheets.Count > 0 Then
             clbSheets.Items.AddRange(chrSheets.ToArray())
             'if there were previously checked items then restore them
-            If lstCheckedItems.Count > 0 Then
+            For Each strSelected As String In lstCheckedItems
                 For i As Integer = 0 To clbSheets.Items.Count - 1
-                    For Each strSelected As String In lstCheckedItems
-                        If strSelected = clbSheets.Items(i).ToString Then
-                            clbSheets.SetItemChecked(i, True)
-                        End If
-                    Next
+                    If strSelected = clbSheets.Items(i).ToString Then
+                        clbSheets.SetItemChecked(i, True)
+                        'sheet names are expected to be unique so exit inner for loop
+                        Exit For
+                    End If
                 Next
-            End If
+            Next
         End If
-
-        'ucrInputNamedRegions.cboInput.Items.Clear()
-        'If chrRegions IsNot Nothing AndAlso chrRegions.Count > 0 Then
-        '    For i = 0 To chrRegions.Count - 1
-        '        ucrInputNamedRegions.cboInput.Items.Add(chrRegions(i))
-        '    Next
-        'End If
-        'ucrInputNamedRegions.SetName("")
     End Sub
 
     Private Sub lblRowVector_Click(sender As Object, e As EventArgs)
