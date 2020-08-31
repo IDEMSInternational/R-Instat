@@ -51,7 +51,8 @@ Public Class dlgExportDataset
 
         ucrAvailableSheets.Reset()
         ucrFilePath.ResetPathControl()
-        ucrFilePath.DefaultFileSuggestionName = ucrAvailableSheets.strCurrDataFrame 'set suggestive name from selected data frame
+        ucrFilePath.DefaultFileSuggestionName = ucrAvailableSheets.strCurrDataFrame 'set default suggested name from selected data frame
+
 
         clsDefaultFunction.SetPackageName("rio")
         clsDefaultFunction.SetRCommand("export")
