@@ -75,7 +75,7 @@ Public Class dlgExportGraphAsImage
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectedGraphReceiver.ControlContentsChanged
-        'give a suggestive name from the receiver
+        'give a default suggested name from the receiver
         ucrFilePath.DefaultFileSuggestionName = ucrSelectedGraphReceiver.GetVariableNames(bWithQuotes:=False)
         TestOkEnabled()
     End Sub

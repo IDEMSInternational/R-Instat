@@ -28,7 +28,7 @@ Imports System.IO
 ''' set the R code structure of the path control
 ''' </description></item>
 ''' <item><description>
-''' Optional. Set a default suggestive name
+''' Optional. Set a default suggested name
 ''' </description></item>
 ''' </list>
 ''' </summary>
@@ -71,14 +71,14 @@ Public Class ucrFilePath
     Public Property FilePathDialogFilter As String = "All Files *.*"
 
     ''' <summary>
-    ''' used to set the suggestive name if no file name was set before
+    ''' used to set the suggested name if no file name was set before
     ''' </summary>
     ''' <returns></returns>
     Public Property DefaultFileSuggestionName As String = ""
 
     ''' <summary>
-    ''' gets or sets the input file path
-    ''' Used by the SaveFileDiaolog prompt to 'remember' last selected file name and directory
+    ''' gets or sets the input file path used by the SaveFileDiaolog prompt to 'remember' the 
+    ''' last selected file name and directory
     ''' </summary> 
     Public Property FilePath() As String
         Get

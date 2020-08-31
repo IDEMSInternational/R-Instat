@@ -91,7 +91,7 @@ Public Class dlgExportRWorkspace
     End Sub
 
     Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverMultiple.ControlContentsChanged
-        'ucrReceiverMultiple is a multireceiver. So give a suggestive name if it has 1 item only
+        'ucrReceiverMultiple is a multireceiver. So give a default suggested name if it has 1 item only
         ucrFilePath.DefaultFileSuggestionName = If(ucrReceiverMultiple.GetVariableNamesList().Length = 1, ucrReceiverMultiple.GetVariableNames(bWithQuotes:=False), "")
         TestOkEnabled()
     End Sub
