@@ -82,11 +82,11 @@ Public Class ucrFilePath
     ''' </summary> 
     Public Property FilePath() As String
         Get
-            Return GetPathControl().GetText()
+            Return PathControl().GetText()
         End Get
         Set(ByVal value As String)
             'first replace backward slashed with forward slashes cause of R path formats
-            GetPathControl().SetName(value.Replace("\", "/"))
+            PathControl().SetName(value.Replace("\", "/"))
             RaiseEvent FilePathChanged()
         End Set
     End Property
@@ -102,16 +102,18 @@ Public Class ucrFilePath
     ''' gets the control that contains the input file path and name
     ''' </summary>
     ''' <returns>ucrInputTextBox</returns>    
-    Public Function GetPathControl() As ucrInputTextBox
-        Return ucrInputFilePath
-    End Function
+    Public ReadOnly Property PathControl() As ucrInputTextBox
+        Get
+            Return ucrInputFilePath
+        End Get
+    End Property
 
     ''' <summary>
     ''' Sets the R parameter to the path control
     ''' </summary>
     ''' <param name="rParamter"></param>
     Public Sub SetPathControlParameter(rParamter As RParameter)
-        GetPathControl().SetParameter(rParamter)
+        PathControl().SetParameter(rParamter)
     End Sub
 
     ''' <summary>
@@ -120,14 +122,14 @@ Public Class ucrFilePath
     ''' <param name="clsNewCodeStructure"></param>
     ''' <param name="bReset"></param>
     Public Sub SetPathControlRcode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False)
-        GetPathControl().SetRCode(clsNewCodeStructure, bReset)
+        PathControl().SetRCode(clsNewCodeStructure, bReset)
     End Sub
 
     ''' <summary>
     ''' resets the path control and and the file path
     ''' </summary>
     Public Sub ResetPathControl()
-        GetPathControl().Reset()
+        PathControl().Reset()
         Clear()
     End Sub
 
