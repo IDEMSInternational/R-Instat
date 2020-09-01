@@ -260,9 +260,7 @@ Public Class dlgExtremes
 
     Private Sub control_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputExtremes.ControlValueChanged, ucrReceiverVariable.ControlValueChanged, ucrChkExplanatoryModelForLocationParameter.ControlValueChanged, ucrInputThresholdforLocation.ControlValueChanged
         ParameterControl()
-        ucrTryModelling.ucrInputTryMessage.SetName("")
-        ucrTryModelling.ucrInputTryMessage.txtInput.BackColor = Color.White
-        ucrTryModelling.ucrInputTryMessage.txtInput.Controls.Clear()
+        ucrTryModelling.ResetInputTryMessage()
     End Sub
 
     Private Sub ParameterControl()
