@@ -226,6 +226,18 @@
     <Compile Include="dlgTaylorDiagram.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgExtremesDisplayOptions.Designer.vb">
+      <DependentUpon>sdgExtremesDisplayOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgExtremesDisplayOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgExtremesMethod.Designer.vb">
+      <DependentUpon>sdgExtremesMethod.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgExtremesMethod.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgFiltersFromFactor.Designer.vb">
       <DependentUpon>sdgFiltersFromFactor.vb</DependentUpon>
     </Compile>
@@ -1698,6 +1710,12 @@
     <Compile Include="ucrElementRectControl.vb">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="ucrFilePath.Designer.vb">
+      <DependentUpon>ucrFilePath.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFilePath.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucrFilter.Designer.vb">
       <DependentUpon>ucrFilter.vb</DependentUpon>
     </Compile>
@@ -2536,6 +2554,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTaylorDiagram.resx">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgExtremesDisplayOptions.resx">
+      <DependentUpon>sdgExtremesDisplayOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgExtremesMethod.resx">
+      <DependentUpon>sdgExtremesMethod.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFiltersFromFactor.resx">
       <DependentUpon>sdgFiltersFromFactor.vb</DependentUpon>
@@ -4421,6 +4445,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFactor.sw-KE.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFilePath.resx">
+      <DependentUpon>ucrFilePath.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFilter.resx">
       <DependentUpon>ucrFilter.vb</DependentUpon>
