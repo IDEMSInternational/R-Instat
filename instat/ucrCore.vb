@@ -997,9 +997,6 @@ Public Class ucrCore
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-
-    ''' <summary> Set visible a control. </summary>
-    ''' <param name="bVisible"> If true then set a control visible property. </param>
     ''' <summary>
     ''' For each control (display) linked to this control, set the visibility to 
     ''' <paramref name="bVisible"/> If none of these linked controls is a group box then set
