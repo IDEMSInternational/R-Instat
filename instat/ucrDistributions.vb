@@ -204,6 +204,9 @@ Public Class ucrDistributions
         Dim clsGammaWithShapeandScale As New Distribution
         Dim clsGammaWithShapeandMean As New Distribution
         Dim clsGammaWithShapeandRate As New Distribution
+        Dim clsGeneralExtremeValueDist As New Distribution
+        Dim clsGeneralizedParetoDist As New Distribution
+        Dim clsGumbelDist As New Distribution
         Dim clsInverseGaussianDist As New Distribution
         Dim clsQuasiDist As New Distribution
         Dim clsQuasibinomialDist As New Distribution
@@ -519,6 +522,43 @@ Public Class ucrDistributions
         clsGammaWithZerosDist.AddParameter("shape", "Shape", 1)
         clsGammaWithZerosDist.AddParameter("rate", "Rate")
         lstAllDistributions.Add(clsGammaWithZerosDist)
+
+        'Generalized Extreme Value Distribution
+        clsGeneralExtremeValueDist.strNameTag = "Generalized_Extreme_Value"
+        clsGeneralExtremeValueDist.strRName = "GEV"
+        clsGeneralExtremeValueDist.strPackagName = "extRemes"
+        clsGeneralExtremeValueDist.strRFunctionName = "rgev"
+        clsGeneralExtremeValueDist.strPFunctionName = "pgev"
+        clsGeneralExtremeValueDist.strQFunctionName = "qgev"
+        clsGeneralExtremeValueDist.strDFunctionName = "dgev"
+        clsGeneralExtremeValueDist.AddParameter("shape", "Shape", 0)
+        clsGeneralExtremeValueDist.AddParameter("loc", "Loc", 0)
+        clsGeneralExtremeValueDist.AddParameter("scale", "Scale", "1")
+        lstAllDistributions.Add(clsGeneralExtremeValueDist)
+
+        'Generalized Pareto distribution
+        clsGeneralizedParetoDist.strNameTag = "Generalized_Pareto_Distribution"
+        clsGeneralizedParetoDist.strRName = "GP"
+        clsGeneralizedParetoDist.strPackagName = "extRemes"
+        clsGeneralizedParetoDist.strRFunctionName = "rgpd"
+        clsGeneralizedParetoDist.strPFunctionName = "pgpd"
+        clsGeneralizedParetoDist.strQFunctionName = "qgpdl"
+        clsGeneralizedParetoDist.strDFunctionName = "dgpd"
+        clsGeneralizedParetoDist.AddParameter("loc", "Loc", 0)
+        clsGeneralizedParetoDist.AddParameter("scale", "Scale", "1")
+        lstAllDistributions.Add(clsGeneralizedParetoDist)
+
+        'Gumbel Distribution
+        clsGumbelDist.strNameTag = "Gumbel"
+        clsGumbelDist.strRName = "Gumbel"
+        clsGumbelDist.strPackagName = "extRemes"
+        clsGumbelDist.strRFunctionName = "rgumbel"
+        clsGumbelDist.strPFunctionName = "pgumbel"
+        clsGumbelDist.strQFunctionName = "qgumbel"
+        clsGumbelDist.strDFunctionName = "dgumbel"
+        clsGumbelDist.AddParameter("loc", "Loc", 0)
+        clsGumbelDist.AddParameter("scale", "Scale", "1")
+        lstAllDistributions.Add(clsGumbelDist)
 
         'Inverse Gaussian distribution
         clsInverseGaussianDist.strNameTag = "Inverse_Gaussian"
