@@ -582,39 +582,6 @@ Public Class dlgOneVarFitModel
         TestOKEnabled()
     End Sub
 
-    Private Sub ResponseConvert()
-        If Not ucrReceiverVariable.IsEmpty Then
-            ucrDistributionChoice.RecieverDatatype(ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverVariable.GetVariableNames(bWithQuotes:=False))
-            If ucrReceiverVariable.strCurrDataType = "numeric" Then
-                ucrChkConvertVariate.Checked = False
-                ucrChkConvertVariate.Visible = False
-            Else
-                ucrChkConvertVariate.Visible = True
-            End If
-            If ucrChkConvertVariate.Checked Then
-                clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-            Else
-                'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
-                If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Geometric" Then
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger, iPosition:=0)
-                Else
-                    clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
-                End If
-                If ucrDistributionChoice.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Hypergeometric" Then
-                    ' TODO llplot() no longer works with starting values. However, the mle's will not plot without starting values for these variables
-                End If
-            End If
-        Else
-            ucrChkConvertVariate.Visible = False
-        End If
-        If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverVariable.IsEmpty() Then
-            ucrDistributionChoice.Enabled = False
-            ucrDistributionChoice.ucrInputDistributions.SetName("")
-        Else
-            ucrDistributionChoice.Enabled = True
-        End If
-        TestOKEnabled()
-    End Sub
 
     Private Sub StartParameterValues()
         If ucrDistributionChoice.clsCurrDistribution.strNameTag = "von_mises" Then
@@ -695,9 +662,37 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
+    Private Sub EnableDisableConvertVariate()
+        If ucrReceiverVariable.strCurrDataType = "numeric" Then
+            ucrChkConvertVariate.Checked = False
+            ucrChkConvertVariate.Visible = False
+        Else
+            ucrChkConvertVariate.Visible = True
+        End If
+    End Sub
+
+    Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged, ucrChkConvertVariate.ControlValueChanged
         PlotResiduals()
-        ResponseConvert()
+        EnableDisableConvertVariate()
+        If Not ucrReceiverVariable.IsEmpty Then
+            ucrDistributionChoice.RecieverDatatype(ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverVariable.GetVariableNames(bWithQuotes:=False))
+            If ucrChkConvertVariate.Checked Then
+                clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                'TODO This is needed because fitdist checks is.vector on data which is FALSE when data has attributes
+            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Poisson" OrElse ucrDistributionChoice.clsCurrDistribution.strNameTag = "Geometric" Then
+                clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertInteger, iPosition:=0)
+            ElseIf ucrDistributionChoice.clsCurrDistribution.strNameTag = "Extreme_Value" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Binomial" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Bernouli" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Students_t" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Chi_Square" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "F" Or ucrDistributionChoice.clsCurrDistribution.strNameTag = "Hypergeometric" Then
+                ' TODO llplot() no longer works with starting values. However, the mle's will not plot without starting values for these variables
+            Else
+                clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
+            End If
+        End If
+    End Sub
+
+    Private Sub AddAsNumeric()
+        If ucrInputComboTests.GetText = "sign"  AndAlso ucrChkConvertVariate.Checked Then
+            clsSignTestFunction.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+        End If
     End Sub
 
     Private Sub SetTestEstimateBaseFunction()
@@ -762,6 +757,7 @@ Public Class dlgOneVarFitModel
 
     Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboTests.ControlValueChanged, ucrInputComboEstimate.ControlValueChanged
         SetTestEstimateBaseFunction()
+        AddAsNumeric()
     End Sub
 
     Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlContentsChanged, ucrReceiverVariable.ControlContentsChanged
