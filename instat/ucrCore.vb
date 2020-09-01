@@ -996,6 +996,7 @@ Public Class ucrCore
         clsTempCond.SetRSyntaxContainsCode(bNewIsPositive:=bNewIsPositive)
         AddCondition(objControlState, clsTempCond)
     End Sub
+
     ''' <summary>
     ''' For each control (display) linked to this control, set the visibility to 
     ''' <paramref name="bVisible"/> If none of these linked controls is a group box then set
