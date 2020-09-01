@@ -130,8 +130,8 @@ Public Class dlgCalculator
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.43, iBaseHeight)
                 ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case "Strings (Character Columns)"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.47, iBaseHeight)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.47, iBaseHeight * 1.13)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY * 1.13)
             Case "Factor"
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, iBaseHeight)
                 ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
@@ -148,8 +148,8 @@ Public Class dlgCalculator
                 Me.Size = New System.Drawing.Size(iBasicWidth * 1.36, iBaseHeight)
                 ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case "Wakefield"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.7, iBaseHeight * 1.2)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY * 1.2)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.7, iBaseHeight * 1.18)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY * 1.18)
             Case "Modifier"
                 Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
                 ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
