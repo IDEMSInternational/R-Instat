@@ -19,9 +19,11 @@ Imports instat.Translations
 Public Class dlgImportGriddedData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsRDefaultFunction As New RFunction
+    Private clsDownloadFromIRIFunction As New RFunction
+    Private clsDefaultStartDate, clsDefaultEndDate As New RFunction
     Private dctDownloadPairs, dctFiles As New Dictionary(Of String, String)
     Private Sub dlgImportGriddedData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -31,14 +33,15 @@ Public Class dlgImportGriddedData
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 526
+        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        ucrInputDownloadFrom.SetParameter(New RParameter("download_from", 0))
+        ucrInputSource.SetParameter(New RParameter("source", 0))
         dctDownloadPairs.Add("CHIRPS_V2P0", Chr(34) & "CHIRPS_V2P0" & Chr(34))
         dctDownloadPairs.Add("TAMSAT", Chr(34) & "TAMSAT" & Chr(34))
         dctDownloadPairs.Add("NOAA_ARC2", Chr(34) & "NOAA_ARC2" & Chr(34))
@@ -49,84 +52,115 @@ Public Class dlgImportGriddedData
         'dctDownloadPairs.Add("NOAA_CMORPH_PENTAD", Chr(34) & "NOAA_CMORPH_PENTAD" & Chr(34))
         'dctDownloadPairs.Add("NOAA_CMORPH_V0PX", Chr(34) & "NOAA_CMORPH_V0PX" & Chr(34))
         dctDownloadPairs.Add("NASA_TRMM_3B42", Chr(34) & "NASA_TRMM_3B42" & Chr(34))
-        ucrInputDownloadFrom.SetItems(dctDownloadPairs)
-        ucrInputDownloadFrom.SetDropDownStyleAsNonEditable()
+        ucrInputSource.SetItems(dctDownloadPairs)
+        ucrInputSource.SetDropDownStyleAsNonEditable()
 
-        ucrInputDataFile.SetParameter(New RParameter("data_file", 1))
-        dctFiles.Add("Daily 0p05", Chr(34) & "daily_0p05" & Chr(34))
-        dctFiles.Add("Daily 0p25", Chr(34) & "daily_0p25" & Chr(34))
-        dctFiles.Add("Daily Improved 0p05", Chr(34) & "daily_improved_0p05" & Chr(34))
-        dctFiles.Add("Daily Improved 0p25", Chr(34) & "daily_improved_0p25" & Chr(34))
+        ucrInputData.SetParameter(New RParameter("data", 1))
+        dctFiles.Add("Daily_0p05", Chr(34) & "daily_0p05" & Chr(34))
+        dctFiles.Add("Daily_0p25", Chr(34) & "daily_0p25" & Chr(34))
+        dctFiles.Add("Daily_Improved 0p05", Chr(34) & "daily_improved_0p05" & Chr(34))
+        dctFiles.Add("Daily_Improved 0p25", Chr(34) & "daily_improved_0p25" & Chr(34))
         dctFiles.Add("Dekad", Chr(34) & "dekad" & Chr(34))
-        dctFiles.Add("Monthly c8113", Chr(34) & "monthly_c8113" & Chr(34))
-        dctFiles.Add("Monthly deg1p0", Chr(34) & "monthly_deg1p0" & Chr(34))
-        dctFiles.Add("Monthly NMME deg1p0", Chr(34) & "monthly_NMME_deg1p0" & Chr(34))
-        dctFiles.Add("Monthly Precipitation", Chr(34) & "monthly_prcp" & Chr(34))
-        ucrInputDataFile.SetItems(dctFiles)
-        ucrInputDataFile.SetDropDownStyleAsNonEditable()
+        dctFiles.Add("Monthly_c8113", Chr(34) & "monthly_c8113" & Chr(34))
+        dctFiles.Add("Monthly_deg1p0", Chr(34) & "monthly_deg1p0" & Chr(34))
+        dctFiles.Add("Monthly_NMME_deg1p0", Chr(34) & "monthly_NMME_deg1p0" & Chr(34))
+        dctFiles.Add("Monthly_Precipitation", Chr(34) & "monthly_prcp" & Chr(34))
+        ucrInputData.SetItems(dctFiles)
+        ucrInputData.SetDropDownStyleAsNonEditable()
 
-        ucrInputMainDataName.SetParameter(New RParameter("data_frame_name", 2))
+        ucrInputFilePath.IsReadOnly = True
 
-        ucrPnlGetArea.SetParameter(New RParameter("get_area_point", 5))
-        ucrPnlGetArea.AddRadioButton(rdoArea, Chr(34) & "area" & Chr(34))
-        ucrPnlGetArea.AddRadioButton(rdoPoint, Chr(34) & "point" & Chr(34))
-        ucrPnlGetArea.SetRDefault(Chr(34) & "area" & Chr(34))
+        ucrInputMinLon.SetParameter(New RParameter("min_lon", 3))
+        ucrInputMinLon.AddQuotesIfUnrecognised = False
+        ucrInputMinLon.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
 
-        ucrPnlGetArea.AddToLinkedControls({ucrInputMaxLat, ucrInputMaxLon}, {rdoArea}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTempLocation.AddToLinkedControls({ucrInputExportFile, ucrChkDontImportData}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkDontImportData.AddToLinkedControls({ucrInputMainDataName}, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputMaxLon.SetParameter(New RParameter("max_lon", 4))
+        ucrInputMaxLon.AddQuotesIfUnrecognised = False
+        ucrInputMaxLon.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
+
+        ucrInputMinLat.SetParameter(New RParameter("min_lat", 5))
+        ucrInputMinLat.AddQuotesIfUnrecognised = False
+        ucrInputMinLat.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
+
+        ucrInputMaxLat.SetParameter(New RParameter("max_lat", 6))
+        ucrInputMaxLat.AddQuotesIfUnrecognised = False
+        ucrInputMaxLat.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
+
+        ucrDtpMinDate.SetParameter(New RParameter("min_date", 7))
+
+        ucrDtpMaxDate.SetParameter(New RParameter("max_date", 8))
+
+        ucrInputNewDataFrameName.SetParameter(New RParameter("name", 9))
+
+        ucrPnlDownloadType.SetParameter(New RParameter("download_type", 10))
+        ucrPnlDownloadType.AddRadioButton(rdoArea, Chr(34) & "area" & Chr(34))
+        ucrPnlDownloadType.AddRadioButton(rdoPoint, Chr(34) & "point" & Chr(34))
+
+        ucrChkDontImportData.SetParameter(New RParameter("import", 11))
+        ucrChkDontImportData.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
+        ucrChkDontImportData.SetText("Don' t import data after downloading")
+        ucrChkDontImportData.SetRDefault("TRUE")
+
+        ucrPnlDownloadType.AddToLinkedControls({ucrInputMaxLat, ucrInputMaxLon}, {rdoArea}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSaveFileLocation.AddToLinkedControls(ucrChkDontImportData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSaveFileLocation.AddToLinkedControls(ucrInputFilePath, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkWholeRange.AddToLinkedControls({ucrDtpMinDate, ucrDtpMaxDate}, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMinLon.SetLinkedDisplayControl(lblMinLon)
         ucrInputMinLon.SetLinkedDisplayControl(lblMinLon)
         ucrInputMaxLon.SetLinkedDisplayControl(lblMaxLon)
         ucrInputMinLat.SetLinkedDisplayControl(lblMinLat)
         ucrInputMaxLat.SetLinkedDisplayControl(lblMaxLat)
-        ucrInputExportFile.SetLinkedDisplayControl(cmdBrowse)
-        ucrInputMainDataName.SetLinkedDisplayControl(lblMainDataName)
+        ucrInputFilePath.SetLinkedDisplayControl(cmdBrowse)
+        ucrDtpMinDate.SetLinkedDisplayControl(lblFrom)
+        ucrDtpMaxDate.SetLinkedDisplayControl(lblTo)
 
-        ucrInputMinLon.SetParameter(New RParameter("X1", 6))
-        ucrInputMinLon.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
+        ucrChkSaveFileLocation.SetText("Save Downloaded File:")
+        ucrChkSaveFileLocation.AddParameterPresentCondition(True, "path")
+        ucrChkSaveFileLocation.AddParameterPresentCondition(False, "path", False)
 
-        ucrInputMaxLon.SetParameter(New RParameter("X2", 7))
-        ucrInputMaxLon.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
+        ucrChkWholeRange.SetText("Whole range")
+        ucrChkWholeRange.AddParameterPresentCondition(True, {"min_date", "max_date"})
+        ucrChkWholeRange.AddParameterPresentCondition(False, {"min_date", "max_date"}, False)
 
-        ucrInputMinLat.SetParameter(New RParameter("Y1", 8))
-        ucrInputMinLat.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
+        clsDefaultStartDate = New RFunction
+        clsDefaultStartDate.SetRCommand("as.Date")
+        clsDefaultStartDate.AddParameter("x", Chr(34) & "1981/01/01" & Chr(34))
 
-        ucrInputMaxLat.SetParameter(New RParameter("Y2", 9))
-        ucrInputMaxLat.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
-
-        ucrChkTempLocation.SetText("Save Downloaded File:")
-
-        ucrChkDontImportData.SetText("Don't import data after downloading")
+        clsDefaultEndDate = New RFunction
+        clsDefaultEndDate.SetRCommand("as.Date")
+        clsDefaultEndDate.AddParameter("x", ucrDtpMaxDate.CurrentDate())
     End Sub
 
     Private Sub SetDefaults()
-        clsRDefaultFunction = New RFunction
+        clsDownloadFromIRIFunction = New RFunction
 
-        clsRDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_iri")
-        clsRDefaultFunction.AddParameter("download_from", Chr(34) & "CHIRPS_V2P0" & Chr(34))
-        clsRDefaultFunction.AddParameter("data_file", Chr(34) & "daily_0p05" & Chr(34))
-        clsRDefaultFunction.AddParameter("data_frame_name", "IRI_Library_Data")
-        clsRDefaultFunction.AddParameter("location_data_name", "Lat_Lon_Data")
-        clsRDefaultFunction.AddParameter("path", Chr(34) & System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_IRI_Download").Replace("\", "/") & Chr(34))
+        clsDownloadFromIRIFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$download_from_IRI")
+        clsDownloadFromIRIFunction.AddParameter("source", Chr(34) & "CHIRPS_V2P0" & Chr(34), iPosition:=0)
+        clsDownloadFromIRIFunction.AddParameter("data", Chr(34) & "daily_0p05" & Chr(34), iPosition:=1)
+        'clsDownloadFromIRIFunction.AddParameter("path", Chr(34) & System.IO.Path.Combine(System.IO.Path.GetTempPath()).Replace("\", "/") & Chr(34), iPosition:=2)
         'opted to set this as default location since it has data for all sources
-        clsRDefaultFunction.AddParameter("X1", 10)
-        clsRDefaultFunction.AddParameter("X2", 10.5)
-        clsRDefaultFunction.AddParameter("Y1", 10)
-        clsRDefaultFunction.AddParameter("Y2", 10.5)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRDefaultFunction)
+        clsDownloadFromIRIFunction.AddParameter("min_lon", 10, iPosition:=3)
+        clsDownloadFromIRIFunction.AddParameter("max_lon", 10.5, iPosition:=4)
+        clsDownloadFromIRIFunction.AddParameter("min_lat", 10, iPosition:=5)
+        clsDownloadFromIRIFunction.AddParameter("max_lat", 10.5, iPosition:=6)
+        clsDownloadFromIRIFunction.AddParameter("min_date", clsRFunctionParameter:=clsDefaultStartDate, iPosition:=7)
+        clsDownloadFromIRIFunction.AddParameter("max_date", clsRFunctionParameter:=clsDefaultEndDate, iPosition:=8)
+        clsDownloadFromIRIFunction.AddParameter("download_type", Chr(34) & "area" & Chr(34), iPosition:=10)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDownloadFromIRIFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        If bReset Then
+            SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
-        'download from and datafile should be added to test ok
-        If (ucrInputMainDataName.Text <> "") Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrInputNewDataFrameName.IsEmpty OrElse (rdoPoint.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty)) OrElse (rdoArea.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty OrElse ucrInputMaxLon.IsEmpty OrElse ucrInputMaxLat.IsEmpty)) OrElse (ucrChkSaveFileLocation.Checked AndAlso ucrInputFilePath.IsEmpty) Then
             ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -136,7 +170,7 @@ Public Class dlgImportGriddedData
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrPnlGetArea_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlGetArea.ControlContentsChanged
+    Private Sub ucrPnlDownloadType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDownloadType.ControlValueChanged
         If rdoArea.Checked Then
             lblMinLat.Text = "Minimum Latitude:"
             lblMinLon.Text = "Minimum Longitude:"
@@ -146,88 +180,96 @@ Public Class dlgImportGriddedData
         End If
     End Sub
 
-    Private Sub ucrInputDownloadFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDownloadFrom.ControlContentsChanged
-        If ucrInputDownloadFrom.cboInput.SelectedItem = "CHIRPS_V2P0" Then
-            dctFiles = New Dictionary(Of String, String)
-            dctFiles.Add("Daily 0p05", Chr(34) & "daily_0p05" & Chr(34))
-            dctFiles.Add("Daily 0p25", Chr(34) & "daily_0p25" & Chr(34))
-            dctFiles.Add("Daily Improved 0p05", Chr(34) & "daily_improved_0p05" & Chr(34))
-            dctFiles.Add("Daily Improved 0p25", Chr(34) & "daily_improved_0p25" & Chr(34))
-            dctFiles.Add("Dekad", Chr(34) & "Dekad" & Chr(34))
-            dctFiles.Add("Monthly c8113", Chr(34) & "monthly_c8113" & Chr(34))
-            dctFiles.Add("Monthly deg1p0", Chr(34) & "monthly_deg1p0" & Chr(34))
-            dctFiles.Add("Monthly NMME deg1p0", Chr(34) & "monthly_NMME_deg1p0" & Chr(34))
-            dctFiles.Add("Monthly Precipitation", Chr(34) & "monthly_prcp" & Chr(34))
-            ucrInputDataFile.SetItems(dctFiles)
-            ucrInputDataFile.cboInput.SelectedItem = "Daily 0p05"
-        Else
-            If ucrInputDownloadFrom.cboInput.SelectedItem = "TAMSAT" Then
+    Private Sub ucrInputSource_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSource.ControlValueChanged
+        Select Case ucrInputSource.GetText
+            Case "CHIRPS_V2P0"
                 dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("Rainfall Estimates", Chr(34) & "rainfall_estimates" & Chr(34))
-                dctFiles.Add("Reconstructed Rainfall Anomaly", Chr(34) & "reconstructed_rainfall_anomaly" & Chr(34))
-                dctFiles.Add("Sahel Dry Mask", Chr(34) & "sahel_dry_mask" & Chr(34))
-                dctFiles.Add("Standard Precipitation Index 1-dekad", Chr(34) & "SPI_1_dekad" & Chr(34))
+                dctFiles.Add("Daily_0p05", Chr(34) & "daily_0p05" & Chr(34))
+                dctFiles.Add("Daily_0p25", Chr(34) & "daily_0p25" & Chr(34))
+                dctFiles.Add("Daily_Improved_0p05", Chr(34) & "daily_improved_0p05" & Chr(34))
+                dctFiles.Add("Daily_Improved_0p25", Chr(34) & "daily_improved_0p25" & Chr(34))
+                dctFiles.Add("Dekad", Chr(34) & "dekad" & Chr(34))
+                dctFiles.Add("Monthly_c8113", Chr(34) & "monthly_c8113" & Chr(34))
+                dctFiles.Add("Monthly_deg1p0", Chr(34) & "monthly_deg1p0" & Chr(34))
+                dctFiles.Add("Monthly_NMME_deg1p0", Chr(34) & "monthly_NMME_deg1p0" & Chr(34))
+                dctFiles.Add("Monthly_Precipitation", Chr(34) & "monthly_prcp" & Chr(34))
+                ucrInputData.SetItems(dctFiles)
+                ucrInputData.cboInput.SelectedItem = "Daily_0p05"
+            Case "TAMSAT"
+                dctFiles = New Dictionary(Of String, String)
+                dctFiles.Add("Rainfall_Estimates", Chr(34) & "rainfall_estimates" & Chr(34))
+                dctFiles.Add("Reconstructed_Rainfall_Anomaly", Chr(34) & "reconstructed_rainfall_anomaly" & Chr(34))
+                dctFiles.Add("Sahel_Dry_Mask", Chr(34) & "sahel_dry_mask" & Chr(34))
+                dctFiles.Add("Standard_Precipitation_Index_1-dekad", Chr(34) & "SPI_1_dekad" & Chr(34))
                 'monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
-                ucrInputDataFile.SetItems(dctFiles)
-                ucrInputDataFile.cboInput.SelectedItem = "Rainfall Estimates"
-            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_ARC2" Then
+                ucrInputData.SetItems(dctFiles)
+                ucrInputData.cboInput.SelectedItem = "Rainfall_Estimates"
+            Case "NOAA_ARC2"
                 dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("Daily Est. Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
-                dctFiles.Add("Monthly Average Est. Prcp.", Chr(34) & "monthly_average_estimated_prcp" & Chr(34))
+                dctFiles.Add("Daily_Est._Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
+                dctFiles.Add("Monthly_Average_Est._Prcp.", Chr(34) & "monthly_average_estimated_prcp" & Chr(34))
                 'monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
-                ucrInputDataFile.SetItems(dctFiles)
-                ucrInputDataFile.cboInput.SelectedItem = "Daily Est. Prcp."
-            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_RFE2" Then
+                ucrInputData.SetItems(dctFiles)
+                ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
+            Case "NOAA_RFE2"
                 dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("Daily Est. Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
-                ucrInputDataFile.SetItems(dctFiles)
-                ucrInputDataFile.cboInput.SelectedItem = "Daily Est. Prcp."
-            ElseIf (ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_DAILY" OrElse ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_3HOURLY" OrElse ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_DAILY_CALCULATED") Then
+                dctFiles.Add("Daily_Est._Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
+                ucrInputData.SetItems(dctFiles)
+                ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
+            Case "NOAA_CMORPH_DAILY", "NOAA_CMORPH_3HOURLY", "NOAA_CMORPH_DAILY_CALCULATED"
                 dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("Mean Microwave Only Est. Prcp.", Chr(34) & "mean_microwave_only_est_prcp" & Chr(34))
-                dctFiles.Add("Mean Morphed Est. Prcp.", Chr(34) & "mean_morphed_est_prcp" & Chr(34))
-                dctFiles.Add("Orignames Mean Microwave Only Est. Prcp.", Chr(34) & "orignames_mean_microwave_only_est_prcp" & Chr(34))
-                dctFiles.Add("Orignames Mean Morphed Est. Prcp.", Chr(34) & "orignames_mean_morphed_est_prcp" & Chr(34))
-                dctFiles.Add("Renamed102015 Mean Microwave Only Est. Prcp.", Chr(34) & "renamed102015_mean_microwave_only_est_prcp" & Chr(34))
-                dctFiles.Add("Renamed102015 Mean Morphed Est. Prcp.", Chr(34) & "renamed102015_mean_morphed_est_prcp" & Chr(34))
-                ucrInputDataFile.SetItems(dctFiles)
-                ucrInputDataFile.cboInput.SelectedItem = "Mean Morphed Est. Prcp."
-
+                dctFiles.Add("Mean_Microwave_Only_Est._Prcp.", Chr(34) & "mean_microwave_only_est_prcp" & Chr(34))
+                dctFiles.Add("Mean_Morphed_Est._Prcp.", Chr(34) & "mean_morphed_est_prcp" & Chr(34))
+                dctFiles.Add("Orignames_Mean_Microwave_Only_Est._Prcp.", Chr(34) & "orignames_mean_microwave_only_est_prcp" & Chr(34))
+                dctFiles.Add("Orignames_Mean_Morphed_Est._Prcp.", Chr(34) & "orignames_mean_morphed_est_prcp" & Chr(34))
+                dctFiles.Add("Renamed102015_Mean_Microwave_Only_Est._Prcp.", Chr(34) & "renamed102015_mean_microwave_only_est_prcp" & Chr(34))
+                dctFiles.Add("Renamed102015_Mean_Morphed_Est._Prcp.", Chr(34) & "renamed102015_mean_morphed_est_prcp" & Chr(34))
+                ucrInputData.SetItems(dctFiles)
+                ucrInputData.cboInput.SelectedItem = "Mean_Morphed_Est._Prcp."
                 'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_PENTAD" Then
                 'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_V0PX" Then
-            ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NASA_TRMM_3B42" Then
+            Case "NASA_TRMM_3B42"
                 dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("Daily Est. Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
-                dctFiles.Add("3-Hourly Est. Prcp.", Chr(34) & "3_hourly_estimated_prcp" & Chr(34))
-                dctFiles.Add("3-Hourly Pre-gauge Adjusted Infrared Est. Prcp.", Chr(34) & "3_hourly_pre_gauge_adjusted_infrared_est_prcp" & Chr(34))
-                dctFiles.Add("3-Hourly Pre-gauge Adjusted Microwave Est. Prcp.", Chr(34) & "3_hourly_pre_gauge_adjusted_microwave_est_prcp" & Chr(34))
-                ucrInputDataFile.SetItems(dctFiles)
-                ucrInputDataFile.cboInput.SelectedItem = "Daily Est. Prcp."
+                dctFiles.Add("Daily_Est._Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
+                dctFiles.Add("3-Hourly_Est._Prcp.", Chr(34) & "3_hourly_estimated_prcp" & Chr(34))
+                dctFiles.Add("3-Hourly_Pre-gauge_Adjusted_Infrared_Est._Prcp.", Chr(34) & "3_hourly_pre_gauge_adjusted_infrared_est_prcp" & Chr(34))
+                dctFiles.Add("3-Hourly_Pre-gauge_Adjusted_Microwave_Est._Prcp.", Chr(34) & "3_hourly_pre_gauge_adjusted_microwave_est_prcp" & Chr(34))
+                ucrInputData.SetItems(dctFiles)
+                ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
+        End Select
+        'other data sources to be added here.
+    End Sub
+
+    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
+        Dim strPath As String
+
+        Using dlgFolder As New FolderBrowserDialog
+            dlgFolder.Description = "Choose Folder"
+            If dlgFolder.ShowDialog() = DialogResult.OK Then
+                ucrInputFilePath.SetName("")
+                strPath = dlgFolder.SelectedPath
+                ucrInputFilePath.SetName(Replace(strPath, "\", "/"))
             End If
-            'other data sources to be added here.
+        End Using
+    End Sub
+
+    Private Sub ucrInputData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputData.ControlValueChanged, ucrInputSource.ControlValueChanged
+        ucrInputNewDataFrameName.SetName(ucrInputSource.GetText & "_" & ucrInputData.GetText)
+    End Sub
+
+    Private Sub ucrInputDownloadFrom_ControlValueChanged(ucrChangedControl As ucrCore)
+
+    End Sub
+
+    Private Sub ucrInputFilePath_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlValueChanged, ucrChkSaveFileLocation.ControlValueChanged
+        If ucrChkSaveFileLocation.Checked AndAlso ucrInputFilePath.GetText <> "" Then
+            clsDownloadFromIRIFunction.AddParameter("path", Chr(34) & ucrInputFilePath.GetText & Chr(34), iPosition:=2)
+        Else
+            clsDownloadFromIRIFunction.RemoveParameterByName("path")
         End If
     End Sub
 
-    'Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-    '    Dim dlgSave As New FolderBrowserDialog
-    '    Dim strTempDownloadDirectory As String
-    '    'dlgSave. = "Create Temporary Directory"
-    '    strTempDownloadDirectory = System.IO.Path.Combine(System.IO.Path.GetTempPath() & "R_Instat_Temp_IRI_Download")
-    '    dlgSave.RootFolder = strTempDownloadDirectory
-    '    'frmMain.clsInstatOptions.strWorkingDirectory
-    '    'dlgSave.Filter = "Text separated file (*.txt)|*.txt"
-    '    If dlgSave.ShowDialog = DialogResult.OK Then
-    '        If dlgSave.RootFolder <> "" Then
-    '            ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.RootFolder).ToString.Replace("\", "/"))
-    '        End If
-    '    End If
-    'End Sub
-
-    'Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
-    '    cmdBrowse_Click(sender, e)
-    'End Sub
-
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputMainDataName.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewDataFrameName.ControlContentsChanged, ucrPnlDownloadType.ControlContentsChanged, ucrInputMinLon.ControlContentsChanged, ucrInputMaxLon.ControlContentsChanged, ucrInputMinLat.ControlContentsChanged, ucrInputMaxLat.ControlContentsChanged, ucrChkSaveFileLocation.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
