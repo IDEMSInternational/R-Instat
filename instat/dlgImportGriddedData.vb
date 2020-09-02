@@ -38,14 +38,12 @@ Public Class dlgImportGriddedData
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 526
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrInputSource.SetParameter(New RParameter("source", 0))
+        dctDownloadPairs.Add("NOAA_RFE2", Chr(34) & "NOAA_RFE2" & Chr(34))
         dctDownloadPairs.Add("CHIRPS_V2P0", Chr(34) & "CHIRPS_V2P0" & Chr(34))
         dctDownloadPairs.Add("TAMSAT", Chr(34) & "TAMSAT" & Chr(34))
         dctDownloadPairs.Add("NOAA_ARC2", Chr(34) & "NOAA_ARC2" & Chr(34))
-        dctDownloadPairs.Add("NOAA_RFE2", Chr(34) & "NOAA_RFE2" & Chr(34))
         dctDownloadPairs.Add("NOAA_CMORPH_DAILY", Chr(34) & "NOAA_CMORPH_DAILY" & Chr(34))
         dctDownloadPairs.Add("NOAA_CMORPH_3HOURLY", Chr(34) & "NOAA_CMORPH_3HOURLY" & Chr(34))
         dctDownloadPairs.Add("NOAA_CMORPH_DAILY_CALCULATED", Chr(34) & "NOAA_CMORPH_DAILY_CALCULATED" & Chr(34))
@@ -56,15 +54,7 @@ Public Class dlgImportGriddedData
         ucrInputSource.SetDropDownStyleAsNonEditable()
 
         ucrInputData.SetParameter(New RParameter("data", 1))
-        dctFiles.Add("Daily_0p05", Chr(34) & "daily_0p05" & Chr(34))
-        dctFiles.Add("Daily_0p25", Chr(34) & "daily_0p25" & Chr(34))
-        dctFiles.Add("Daily_Improved 0p05", Chr(34) & "daily_improved_0p05" & Chr(34))
-        dctFiles.Add("Daily_Improved 0p25", Chr(34) & "daily_improved_0p25" & Chr(34))
-        dctFiles.Add("Dekad", Chr(34) & "dekad" & Chr(34))
-        dctFiles.Add("Monthly_c8113", Chr(34) & "monthly_c8113" & Chr(34))
-        dctFiles.Add("Monthly_deg1p0", Chr(34) & "monthly_deg1p0" & Chr(34))
-        dctFiles.Add("Monthly_NMME_deg1p0", Chr(34) & "monthly_NMME_deg1p0" & Chr(34))
-        dctFiles.Add("Monthly_Precipitation", Chr(34) & "monthly_prcp" & Chr(34))
+        dctFiles.Add("Daily_Est._Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
         ucrInputData.SetItems(dctFiles)
         ucrInputData.SetDropDownStyleAsNonEditable()
 
@@ -119,8 +109,8 @@ Public Class dlgImportGriddedData
         ucrChkSaveFileLocation.AddParameterPresentCondition(False, "path", False)
 
         ucrChkWholeRange.SetText("Whole range")
-        ucrChkWholeRange.AddParameterPresentCondition(True, {"min_date", "max_date"})
-        ucrChkWholeRange.AddParameterPresentCondition(False, {"min_date", "max_date"}, False)
+        ucrChkWholeRange.AddParameterPresentCondition(False, {"min_date", "max_date"})
+        ucrChkWholeRange.AddParameterPresentCondition(True, {"min_date", "max_date"}, False)
 
         clsDefaultStartDate = New RFunction
         clsDefaultStartDate.SetRCommand("as.Date")
@@ -135,8 +125,8 @@ Public Class dlgImportGriddedData
         clsDownloadFromIRIFunction = New RFunction
 
         clsDownloadFromIRIFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$download_from_IRI")
-        clsDownloadFromIRIFunction.AddParameter("source", Chr(34) & "CHIRPS_V2P0" & Chr(34), iPosition:=0)
-        clsDownloadFromIRIFunction.AddParameter("data", Chr(34) & "daily_0p05" & Chr(34), iPosition:=1)
+        clsDownloadFromIRIFunction.AddParameter("source", Chr(34) & "NOAA_RFE2" & Chr(34), iPosition:=0)
+        clsDownloadFromIRIFunction.AddParameter("data", Chr(34) & "daily_estimated_prcp" & Chr(34), iPosition:=1)
         'clsDownloadFromIRIFunction.AddParameter("path", Chr(34) & System.IO.Path.Combine(System.IO.Path.GetTempPath()).Replace("\", "/") & Chr(34), iPosition:=2)
         'opted to set this as default location since it has data for all sources
         clsDownloadFromIRIFunction.AddParameter("min_lon", 10, iPosition:=3)
@@ -182,6 +172,11 @@ Public Class dlgImportGriddedData
 
     Private Sub ucrInputSource_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSource.ControlValueChanged
         Select Case ucrInputSource.GetText
+            Case "NOAA_RFE2"
+                dctFiles = New Dictionary(Of String, String)
+                dctFiles.Add("Daily_Est._Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
+                ucrInputData.SetItems(dctFiles)
+                ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
             Case "CHIRPS_V2P0"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Daily_0p05", Chr(34) & "daily_0p05" & Chr(34))
@@ -209,11 +204,6 @@ Public Class dlgImportGriddedData
                 dctFiles.Add("Daily_Est._Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
                 dctFiles.Add("Monthly_Average_Est._Prcp.", Chr(34) & "monthly_average_estimated_prcp" & Chr(34))
                 'monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
-                ucrInputData.SetItems(dctFiles)
-                ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
-            Case "NOAA_RFE2"
-                dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("Daily_Est._Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
             Case "NOAA_CMORPH_DAILY", "NOAA_CMORPH_3HOURLY", "NOAA_CMORPH_DAILY_CALCULATED"
@@ -255,10 +245,6 @@ Public Class dlgImportGriddedData
 
     Private Sub ucrInputData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputData.ControlValueChanged, ucrInputSource.ControlValueChanged
         ucrInputNewDataFrameName.SetName(ucrInputSource.GetText & "_" & ucrInputData.GetText)
-    End Sub
-
-    Private Sub ucrInputDownloadFrom_ControlValueChanged(ucrChangedControl As ucrCore)
-
     End Sub
 
     Private Sub ucrInputFilePath_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlValueChanged, ucrChkSaveFileLocation.ControlValueChanged
