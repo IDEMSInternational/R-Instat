@@ -48,17 +48,26 @@ Public Class sdgImportFromClimSoft
 
         'host e.g 127.0.0.1
         ucrTxtHost.SetParameter(New RParameter("host", 1))
-        ucrTxtHost.AddQuotesIfUnrecognised = False
+
 
         'ports
         dctPorts.Add("3308", Chr(34) & "3308" & Chr(34))
         dctPorts.Add("3306", Chr(34) & "3306" & Chr(34))
         ucrComboBoxPort.SetParameter(New RParameter("port", 2))
         ucrComboBoxPort.SetItems(dctPorts)
+        ucrComboBoxPort.AddQuotesIfUnrecognised = False
         ucrComboBoxPort.bAllowNonConditionValues = True
 
         'user name
         ucrTxtUserName.SetParameter(New RParameter("user", 3))
+
+
+        'ucrInputHost.SetParameter(New RParameter("host", 1))
+        'ucrInputPort.SetParameter(New RParameter("port", 2))
+        'ucrInputPort.AddQuotesIfUnrecognised = False
+
+
+
 
     End Sub
 
