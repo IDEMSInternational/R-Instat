@@ -1282,3 +1282,37 @@ summary_sample <- function(x, size, replace = FALSE){
   else if(length(x)==1){return(x)}
   else{sample(x = x, size = size, replace = replace)}
 }
+
+add_xy_area_range <- function(path, min_lon, max_lon, min_lat, max_lat) {
+  paste0(path, "/X", "/",
+         "(", ifelse(min_lon < 0, paste0(abs(min_lon), "W"), paste0(min_lon, "E")), ")", "/",
+         "(", ifelse(max_lon < 0, paste0(abs(max_lon), "W"), paste0(max_lon, "E")), ")", "/",
+         "RANGEEDGES", "/",
+         "Y", "/",
+         "(", ifelse(min_lat < 0, paste0(abs(min_lat), "S"), paste0(min_lat, "N")), ")", "/",
+         "(", ifelse(max_lat < 0, paste0(abs(max_lat), "S"), paste0(max_lat, "N")), ")", "/",
+         "RANGEEDGES", "/")
+}
+
+add_xy_point_range <- function(path, min_lon, min_lat) {
+  paste0(path, "/X", "/",
+         "(", ifelse(min_lon < 0, paste0(abs(min_lon), "W"), paste0(min_lon, "E")), ")", "/",
+         "VALUES", "/",
+         "Y", "/",
+         "(", ifelse(min_lat < 0, paste0(abs(min_lat), "S"), paste0(min_lat, "N")), ")", "/",
+         "VALUES", "/")
+}
+
+add_t_range <- function(path, min_date, max_date) {
+  paste0(path, "T", "/",
+         "(", lubridate::day(min_date), "%20", lubridate::month(min_date, label = TRUE), 
+         "%20", lubridate::year(min_date), ")", "/",
+         "(", lubridate::day(max_date), "%20", lubridate::month(max_date, label = TRUE), 
+         "%20", lubridate::year(max_date), ")", "/",
+         "RANGEEDGES", "/"
+  )
+}
+
+add_nc <- function(path) {
+  paste0(path, "data.nc")
+}
