@@ -2087,3 +2087,65 @@ DataBook$set("public","package_check", function(package) {
   }
 }
 )
+
+DataBook$set("public", "download_from_IRI", function(source, data, path = tempdir(), min_lon, max_lon, min_lat, max_lat, min_date, max_date, name, download_type = "point", import = TRUE){
+  init_URL <- "https://iridl.ldeo.columbia.edu/"
+  if(source == "CHIRPS_V2P0"){prexyaddress <- paste0(init_URL, "SOURCES/.UCSB/.CHIRPS/.v2p0")
+  if(data == "daily_0p05") {extension <- ".daily/.global/.0p05/.prcp"}
+  else if(data == "daily_0p25") {extension <- ".daily/.global/.0p25/.prcp"}
+  else if(data == "daily_improved_0p05") {extension <- ".daily-improved/.global/.0p05/.prcp"}
+  else if(data == "daily_improved_0p25") {extension <- ".daily-improved/.global/.0p25/.prcp"}
+  else if(data == "dekad") {extension <- ".dekad/.prcp"}
+  else if(data == "monthly_c8113") {extension <- ".monthly/.global/.c8113/.precipitation"}
+  else if(data == "monthly_deg1p0") {extension <- ".monthly/.global/.deg1p0/.precipitation"}
+  else if(data == "monthly_NMME_deg1p0") {extension <- ".monthly/.global/.NMME_deg1p0/.precipitation"}
+  else if(data == "monthly_prcp") {extension <- ".monthly/.global/.precipitation"}
+  else stop("Data file does not exist for CHIRPS V2P0 data")
+  #Annual and 2Monthly and 3monthly does not exist for CHIRPS_V2P0
+  }else if(source == "TAMSAT") {prexyaddress <-paste0(init_URL, "home/.remic/.Reading/.Meteorology/.TAMSAT")
+  if(data == "rainfall_estimates") {extension <- ".TAMSAT-RFE/.rfe"}
+  else if(data == "reconstructed_rainfall_anomaly") {extension <- ".TAMSAT-RFE/.rfediff"}
+  else if(data == "sahel_dry_mask") {extension <- ".TAMSAT-RFE/.sahel_drymask"}
+  else if(data == "SPI_1_dekad") {extension <- ".TAMSAT-RFE/.SPI-rfe_1-dekad_Sahel"}
+  else stop("Data file does not exist for TAMSAT data")
+  #monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
+  }else if(source == "NOAA_ARC2") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.ARC2")
+  if(data == "daily_estimated_prcp") {extension <- ".daily/.est_prcp"}
+  else if(data == "monthly_average_estimated_prcp") {extension <- ".monthly/.est_prcp"}
+  else stop("Data file does not exist for NOAA ARC2 data")
+  }else if(source=="NOAA_RFE2") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa")
+  if(data == "daily_estimated_prcp"){extension <- ".DAILY/.RFEv2/.est_prcp"}
+  else stop("Data file does not exist for NOAA RFE2 data")
+  }else if(source=="NOAA_CMORPH_DAILY" || source=="NOAA_CMORPH_3HOURLY" || source=="NOAA_CMORPH_DAILY_CALCULATED") {
+    if(source=="NOAA_CMORPH_DAILY") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily")}
+    else if(source == "NOAA_CMORPH_3HOURLY") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.3-hourly")}
+    if(source == "NOAA_CMORPH_DAILY_CALCULATED") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily_calculated")}
+    if(data == "mean_microwave_only_est_prcp") {extension <- ".mean/.microwave-only/.comb"}
+    else if(data == "mean_morphed_est_prcp") {extension <- ".mean/.morphed/.cmorph"}
+    if(data == "orignames_mean_microwave_only_est_prcp") {extension <- ".orignames/.mean/.microwave-only/.comb"}
+    else if(data == "orignames_mean_morphed_est_prcp") {extension <- ".orignames/.mean/.morphed/.cmorph"}
+    if(data == "renamed102015_mean_microwave_only_est_prcp") {extension <- ".renamed102015/.mean/.microwave-only/.comb"}
+    else if(data == "renamed102015_mean_morphed_est_prcp") {extension <- ".renamed102015/.mean/.morphed/.cmorph"}
+    else stop("Data file does not exist for NOAA CMORPH data")
+  }else if(source=="NASA_TRMM_3B42") {prexyaddress <- paste0(init_URL, "SOURCES/.NASA/.GES-DAAC/.TRMM_L3/.TRMM_3B42/.v7")
+  if(data == "daily_estimated_prcp") {extension <- ".daily/.precipitation"}
+  else if(data == "3_hourly_estimated_prcp") {extension <- ".three-hourly/.precipitation"}
+  else if(data == "3_hourly_pre_gauge_adjusted_infrared_est_prcp") {extension <- ".three-hourly/.IRprecipitation"}
+  else if(data == "3_hourly_pre_gauge_adjusted_microwave_est_prcp") {extension <- ".three-hourly/.HQprecipitation"}
+  else stop("Data file does not exist for NASA TRMM 3B42 data")
+  }else{stop("Source not specified correctly.")}
+  prexyaddress <- paste(prexyaddress, extension, sep="/")
+  if(download_type == "area"){URL <- add_xy_area_range(path = prexyaddress, min_lon = min_lon, min_lat = min_lat, max_lon = max_lon, max_lat = max_lat)}
+  else if(download_type == "point"){URL <- add_xy_point_range(path = prexyaddress, min_lon = min_lon, min_lat = min_lat)}
+  if(!missing(min_date)&!missing(max_date)){URL <- URL %>% add_t_range(min_date = min_date, max_date = max_date)}
+  URL <- URL %>%  add_nc()
+  file_name <- tempfile(name, tmpdir = path, fileext = ".nc")
+  result <- download.file(url = URL, destfile =  file_name, method = "auto", mode = "wb", cacheOK = FALSE)
+  if(import & result == 0) {
+    nc <- ncdf4::nc_open(filename = file_name)
+    self$import_NetCDF(nc = nc, name = name)
+    ncdf4::nc_close(nc=nc)
+  }else if(result != 0){stop("No file downloaded please check your internet connection")}
+  if(missing(path)) {file.remove(file_name)}
+}
+)
