@@ -305,6 +305,7 @@ Public Class dlgOneVarFitModel
         clsRConvertNumeric.SetRCommand("as.numeric")
         clsRConvertNumeric.AddParameter("x", clsRFunctionParameter:=clsNaExclude, iPosition:=0)
 
+
         clsRConvertInteger.SetRCommand("as.integer")
         clsRConvertInteger.AddParameter("x", clsRFunctionParameter:=clsNaExclude, iPosition:=0)
 
@@ -671,7 +672,7 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged, ucrChkConvertVariate.ControlValueChanged
+    Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged, ucrChkConvertVariate.ControlValueChanged, ucrInputComboTests.ControlValueChanged
         PlotResiduals()
         EnableDisableConvertVariate()
         If Not ucrReceiverVariable.IsEmpty Then
@@ -686,14 +687,29 @@ Public Class dlgOneVarFitModel
             Else
                 clsROneVarFitModel.AddParameter("data", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
             End If
+            If ucrInputComboTests.GetText() = "sign" AndAlso ucrChkConvertVariate.Checked Then
+                clsSignTestFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsSignTestFunction.AddParameter("mu", "0", iPosition:=1)
+            End If
+            If ucrInputComboTests.GetText() = "t" AndAlso ucrChkConvertVariate.Checked Then
+                clsTtestFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsTtestFunction.AddParameter("mu", "0", iPosition:=1)
+            End If
+            If ucrInputComboTests.GetText() = "wicoxon" AndAlso ucrChkConvertVariate.Checked Then
+                clsWilcoxonFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsWilcoxonFunction.AddParameter("mu", "0", iPosition:=1)
+            End If
         End If
     End Sub
 
-    Private Sub AddAsNumeric()
-        If ucrInputComboTests.GetText = "sign"  AndAlso ucrChkConvertVariate.Checked Then
-            clsSignTestFunction.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-        End If
-    End Sub
+    'Private Sub AddAsNumeric()
+    '    If ucrInputComboTests.GetText = "sign" Then
+    '        clsSignTestFunction.AddParameter("data", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+    '    End If
+    'End Sub
 
     Private Sub SetTestEstimateBaseFunction()
         If rdoGeneralCase.Checked Then
@@ -757,7 +773,8 @@ Public Class dlgOneVarFitModel
 
     Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboTests.ControlValueChanged, ucrInputComboEstimate.ControlValueChanged
         SetTestEstimateBaseFunction()
-        AddAsNumeric()
+        ucrSaveModel.Reset()
+        'AddAsNumeric()
     End Sub
 
     Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlContentsChanged, ucrReceiverVariable.ControlContentsChanged
