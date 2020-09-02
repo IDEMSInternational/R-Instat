@@ -283,7 +283,7 @@
     <value>132, 17</value>
   </data>
   <data name="chkRememberCredentials.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>5</value>
   </data>
   <data name="chkRememberCredentials.Text" xml:space="preserve">
     <value>Remember Credentials</value>
@@ -310,7 +310,7 @@
     <value>76, 22</value>
   </data>
   <data name="btnConnect.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>6</value>
   </data>
   <data name="btnConnect.Text" xml:space="preserve">
     <value>Connect</value>
@@ -334,7 +334,7 @@
     <value>153, 21</value>
   </data>
   <data name="ucrComboBoxPort.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrComboBoxPort.Name" xml:space="preserve">
     <value>ucrComboBoxPort</value>
@@ -355,7 +355,7 @@
     <value>153, 21</value>
   </data>
   <data name="ucrComboBoxDatabaseName.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrComboBoxDatabaseName.Name" xml:space="preserve">
     <value>ucrComboBoxDatabaseName</value>
@@ -370,13 +370,13 @@
     <value>1</value>
   </data>
   <data name="ucrBaseSdgClimSoft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 191</value>
+    <value>103, 189</value>
   </data>
   <data name="ucrBaseSdgClimSoft.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 30</value>
   </data>
   <data name="ucrBaseSdgClimSoft.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrBaseSdgClimSoft.Name" xml:space="preserve">
     <value>ucrBaseSdgClimSoft</value>
@@ -397,7 +397,7 @@
     <value>153, 21</value>
   </data>
   <data name="ucrTxtUserName.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrTxtUserName.Name" xml:space="preserve">
     <value>ucrTxtUserName</value>
@@ -418,7 +418,7 @@
     <value>153, 21</value>
   </data>
   <data name="ucrTxtHost.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrTxtHost.Name" xml:space="preserve">
     <value>ucrTxtHost</value>
@@ -439,10 +439,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>268, 231</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>268, 225</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

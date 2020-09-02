@@ -130,7 +130,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="btnEstablishConnection.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="btnEstablishConnection.Text" xml:space="preserve">
     <value>Establish Connection..</value>
@@ -274,13 +274,13 @@
     <value>17, 17</value>
   </metadata>
   <data name="ucrChkElements.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 241</value>
+    <value>13, 215</value>
   </data>
   <data name="ucrChkElements.Size" type="System.Drawing.Size, System.Drawing">
     <value>178, 20</value>
   </data>
   <data name="ucrChkElements.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>8</value>
   </data>
   <data name="ucrChkElements.ToolTip" xml:space="preserve">
     <value>Select Observation Data Date Range</value>
@@ -297,6 +297,54 @@
   <data name="&gt;&gt;ucrChkElements.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkDateRange.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 266</value>
+  </data>
+  <data name="ucrChkDateRange.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 20</value>
+  </data>
+  <data name="ucrChkDateRange.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="ucrChkDateRange.ToolTip" xml:space="preserve">
+    <value>Select Observation Data Date Range</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDateRange.Name" xml:space="preserve">
+    <value>ucrChkDateRange</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDateRange.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDateRange.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDateRange.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrChkData.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 188</value>
+  </data>
+  <data name="ucrChkData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>178, 20</value>
+  </data>
+  <data name="ucrChkData.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="ucrChkData.ToolTip" xml:space="preserve">
+    <value>Select Observation Data Date Range</value>
+  </data>
+  <data name="&gt;&gt;ucrChkData.Name" xml:space="preserve">
+    <value>ucrChkData</value>
+  </data>
+  <data name="&gt;&gt;ucrChkData.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkData.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkData.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
   <data name="ucrComboBoxElements.Location" type="System.Drawing.Point, System.Drawing">
     <value>263, 210</value>
   </data>
@@ -304,7 +352,7 @@
     <value>137, 21</value>
   </data>
   <data name="ucrComboBoxElements.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrComboBoxElements.Name" xml:space="preserve">
     <value>ucrComboBoxElements</value>
@@ -325,7 +373,7 @@
     <value>137, 21</value>
   </data>
   <data name="ucrComboBoxStations.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrComboBoxStations.Name" xml:space="preserve">
     <value>ucrComboBoxStations</value>
@@ -339,38 +387,14 @@
   <data name="&gt;&gt;ucrComboBoxStations.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrChkDateRange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 266</value>
-  </data>
-  <data name="ucrChkDateRange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 20</value>
-  </data>
-  <data name="ucrChkDateRange.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="ucrChkDateRange.ToolTip" xml:space="preserve">
-    <value>Select Observation Data Date Range</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDateRange.Name" xml:space="preserve">
-    <value>ucrChkDateRange</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDateRange.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDateRange.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDateRange.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="ucrChkUnstackData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 187</value>
+    <value>13, 240</value>
   </data>
   <data name="ucrChkUnstackData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 20</value>
+    <value>168, 20</value>
   </data>
   <data name="ucrChkUnstackData.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrChkUnstackData.Name" xml:space="preserve">
     <value>ucrChkUnstackData</value>
@@ -391,7 +415,7 @@
     <value>163, 20</value>
   </data>
   <data name="UcrDtpEndDate.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;UcrDtpEndDate.Name" xml:space="preserve">
     <value>UcrDtpEndDate</value>
@@ -412,7 +436,7 @@
     <value>163, 20</value>
   </data>
   <data name="ucrDtpStartdate.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrDtpStartdate.Name" xml:space="preserve">
     <value>ucrDtpStartdate</value>
@@ -426,30 +450,6 @@
   <data name="&gt;&gt;ucrDtpStartdate.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="ucrChkData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 214</value>
-  </data>
-  <data name="ucrChkData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 20</value>
-  </data>
-  <data name="ucrChkData.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="ucrChkData.ToolTip" xml:space="preserve">
-    <value>Select Observation Data Date Range</value>
-  </data>
-  <data name="&gt;&gt;ucrChkData.Name" xml:space="preserve">
-    <value>ucrChkData</value>
-  </data>
-  <data name="&gt;&gt;ucrChkData.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkData.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkData.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
   <data name="ucrSelectorForClimSoft.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 43</value>
   </data>
@@ -460,7 +460,7 @@
     <value>216, 147</value>
   </data>
   <data name="ucrSelectorForClimSoft.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrSelectorForClimSoft.Name" xml:space="preserve">
     <value>ucrSelectorForClimSoft</value>
@@ -523,7 +523,7 @@
     <value>131, 100</value>
   </data>
   <data name="ucrReceiverMultipleStations.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMultipleStations.Name" xml:space="preserve">
     <value>ucrReceiverMultipleStations</value>
@@ -544,7 +544,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -586,7 +586,7 @@
     <value>131, 100</value>
   </data>
   <data name="ucrReceiverMultipleElements.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMultipleElements.Name" xml:space="preserve">
     <value>ucrReceiverMultipleElements</value>

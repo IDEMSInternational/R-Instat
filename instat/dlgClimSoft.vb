@@ -20,8 +20,6 @@ Imports instat.Translations
 Public Class dlgClimSoft
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
-    Public bConnectionActive As Boolean = False
     Private clsRImportFromClimsoft As New RFunction
 
     'the 2 dictionaries hold data for the station and elements comboboxes
@@ -43,9 +41,8 @@ Public Class dlgClimSoft
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        'TestOKEnabled() todo. delete this
-        autoTranslate(Me)
         bIgnoreReceiverChanges = False
+        'autoTranslate(Me) ' temporary commented, affects the connected text by overwriting on it
     End Sub
 
     Private Sub InitialiseDialog()
@@ -83,9 +80,6 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.strSelectorHeading = "Elements"
         ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
 
-        ucrChkUnstackData.Text = "Unstack Data"
-        ucrChkUnstackData.Enabled = False
-
         ucrChkData.SetParameter(New RParameter("include_observation_data", 4))
         ucrChkData.Text = "Include Observation Data"
         ucrChkData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -95,6 +89,10 @@ Public Class dlgClimSoft
         ucrChkElements.Text = "Include Elements Metadata Data"
         ucrChkElements.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkElements.SetRDefault("FALSE")
+
+        ucrChkUnstackData.Text = "Unstack Data"
+        'ucrChkUnstackData.Enabled = False
+        ucrChkUnstackData.Visible = False
 
         ucrChkDateRange.Text = "Select Date Range"
         ucrChkDateRange.SetDefaultState(False) 'todo delete this
@@ -148,18 +146,14 @@ Public Class dlgClimSoft
 
     Private Sub btnEstablishConnection_Click(sender As Object, e As EventArgs) Handles btnEstablishConnection.Click
         sdgImportFromClimSoft.ShowDialog()
-
-        bConnectionActive = sdgImportFromClimSoft.ConnectionActive()
-        If bConnectionActive Then
+        If sdgImportFromClimSoft.ConnectionActive() Then
             lblConnection.Text = "Connected"
             lblConnection.ForeColor = Color.Green
-            'btnEstablishConnection.Text = "Disconnect"
-            ucrReceiverMultipleStations.Clear()
         Else
             lblConnection.Text = "No Connection"
             lblConnection.ForeColor = Color.Red
-            'btnEstablishConnection.Text = "Establish Connection"
         End If
+        ucrReceiverMultipleStations.Clear()
         ucrReceiverMultipleStations.SetMeAsReceiver()
     End Sub
 

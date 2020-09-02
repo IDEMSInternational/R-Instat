@@ -49,10 +49,9 @@ Public Class sdgImportFromClimSoft
         'host e.g 127.0.0.1
         ucrTxtHost.SetParameter(New RParameter("host", 1))
 
-
         'ports
-        dctPorts.Add("3308", Chr(34) & "3308" & Chr(34))
-        dctPorts.Add("3306", Chr(34) & "3306" & Chr(34))
+        dctPorts.Add("3308", "3308")
+        dctPorts.Add("3306", "3306")
         ucrComboBoxPort.SetParameter(New RParameter("port", 2))
         ucrComboBoxPort.SetItems(dctPorts)
         ucrComboBoxPort.AddQuotesIfUnrecognised = False
@@ -61,21 +60,12 @@ Public Class sdgImportFromClimSoft
         'user name
         ucrTxtUserName.SetParameter(New RParameter("user", 3))
 
-
-        'ucrInputHost.SetParameter(New RParameter("host", 1))
-        'ucrInputPort.SetParameter(New RParameter("port", 2))
-        'ucrInputPort.AddQuotesIfUnrecognised = False
-
-
-
-
     End Sub
 
     Private Sub SetDefaults()
         clsRDatabaseConnect = New RFunction
         clsRDatabaseDisconnect = New RFunction
         clsHasConnection = New RFunction
-
 
         'set database connect R command and it's parameter values(from previous set values if available)
         clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
@@ -138,11 +128,7 @@ Public Class sdgImportFromClimSoft
             'will display an R password input prompt, to enter password and attempt connecting to database
             frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsHasConnection.ToScript())
-            If Not expTemp.Type = Internals.SymbolicExpressionType.Null Then
-                bConnected = expTemp.AsLogical(0)
-            Else
-                bConnected = False
-            End If
+            bConnected = (Not expTemp.Type = Internals.SymbolicExpressionType.Null) AndAlso expTemp.AsLogical(0)
         End If
         UpdateConnectionState()
         btnConnect.Enabled = True
@@ -166,6 +152,5 @@ Public Class sdgImportFromClimSoft
         End If
         btnConnect.Enabled = Not ucrTxtHost.IsEmpty AndAlso Not ucrTxtUserName.IsEmpty AndAlso Not ucrComboBoxPort.IsEmpty AndAlso Not ucrComboBoxDatabaseName.IsEmpty
     End Sub
-
 
 End Class

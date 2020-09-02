@@ -81,6 +81,8 @@ Partial Class sdgImportFromClimSoft
         'chkRememberCredentials
         '
         resources.ApplyResources(Me.chkRememberCredentials, "chkRememberCredentials")
+        Me.chkRememberCredentials.Checked = True
+        Me.chkRememberCredentials.CheckState = System.Windows.Forms.CheckState.Checked
         Me.chkRememberCredentials.Name = "chkRememberCredentials"
         Me.chkRememberCredentials.UseVisualStyleBackColor = True
         '

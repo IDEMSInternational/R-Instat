@@ -47,13 +47,13 @@ Partial Class dlgClimSoft
         Me.lblEndDate = New System.Windows.Forms.Label()
         Me.ttClimsoft = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrChkElements = New instat.ucrCheck()
+        Me.ucrChkDateRange = New instat.ucrCheck()
+        Me.ucrChkData = New instat.ucrCheck()
         Me.ucrComboBoxElements = New instat.ucrInputComboBox()
         Me.ucrComboBoxStations = New instat.ucrInputComboBox()
-        Me.ucrChkDateRange = New instat.ucrCheck()
         Me.ucrChkUnstackData = New instat.ucrCheck()
         Me.UcrDtpEndDate = New instat.ucrDateTimePicker()
         Me.ucrDtpStartdate = New instat.ucrDateTimePicker()
-        Me.ucrChkData = New instat.ucrCheck()
         Me.ucrSelectorForClimSoft = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMultipleStations = New instat.ucrReceiverMultiple()
@@ -94,6 +94,20 @@ Partial Class dlgClimSoft
         Me.ucrChkElements.Name = "ucrChkElements"
         Me.ttClimsoft.SetToolTip(Me.ucrChkElements, resources.GetString("ucrChkElements.ToolTip"))
         '
+        'ucrChkDateRange
+        '
+        Me.ucrChkDateRange.Checked = True
+        resources.ApplyResources(Me.ucrChkDateRange, "ucrChkDateRange")
+        Me.ucrChkDateRange.Name = "ucrChkDateRange"
+        Me.ttClimsoft.SetToolTip(Me.ucrChkDateRange, resources.GetString("ucrChkDateRange.ToolTip"))
+        '
+        'ucrChkData
+        '
+        Me.ucrChkData.Checked = False
+        resources.ApplyResources(Me.ucrChkData, "ucrChkData")
+        Me.ucrChkData.Name = "ucrChkData"
+        Me.ttClimsoft.SetToolTip(Me.ucrChkData, resources.GetString("ucrChkData.ToolTip"))
+        '
         'ucrComboBoxElements
         '
         Me.ucrComboBoxElements.AddQuotesIfUnrecognised = True
@@ -109,13 +123,6 @@ Partial Class dlgClimSoft
         Me.ucrComboBoxStations.IsReadOnly = False
         resources.ApplyResources(Me.ucrComboBoxStations, "ucrComboBoxStations")
         Me.ucrComboBoxStations.Name = "ucrComboBoxStations"
-        '
-        'ucrChkDateRange
-        '
-        Me.ucrChkDateRange.Checked = True
-        resources.ApplyResources(Me.ucrChkDateRange, "ucrChkDateRange")
-        Me.ucrChkDateRange.Name = "ucrChkDateRange"
-        Me.ttClimsoft.SetToolTip(Me.ucrChkDateRange, resources.GetString("ucrChkDateRange.ToolTip"))
         '
         'ucrChkUnstackData
         '
@@ -136,13 +143,6 @@ Partial Class dlgClimSoft
         Me.ucrDtpStartdate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDtpStartdate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.ucrDtpStartdate.Name = "ucrDtpStartdate"
-        '
-        'ucrChkData
-        '
-        Me.ucrChkData.Checked = False
-        resources.ApplyResources(Me.ucrChkData, "ucrChkData")
-        Me.ucrChkData.Name = "ucrChkData"
-        Me.ttClimsoft.SetToolTip(Me.ucrChkData, resources.GetString("ucrChkData.ToolTip"))
         '
         'ucrSelectorForClimSoft
         '
