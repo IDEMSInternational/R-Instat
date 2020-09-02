@@ -1581,8 +1581,6 @@ DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "s
     }
   }
 
-
-
   #if true get observation data
   if(include_observation_data){
   
@@ -1631,13 +1629,12 @@ DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "s
       }
 
 	  if(include_elements_info){
-		  data_list <- list(db_station_info, db_elements_info, db_observation_data)
-          names(data_list) = c("stations_info", "elements_info", "observation_data")
+		data_list <- list(db_station_info, db_elements_info, db_observation_data)
+        names(data_list) = c("stations_info", "elements_info", "observation_data")
 	  }else{
-		  data_list <- list(db_station_info, db_observation_data)
-          names(data_list) = c("stations_info","observation_data")
-	  }
-      
+	    data_list <- list(db_station_info, db_observation_data)
+        names(data_list) = c("stations_info","observation_data")
+	  }  
   }else{
        data_list <- list(db_station_info)
        names(data_list) = "stations_info"
