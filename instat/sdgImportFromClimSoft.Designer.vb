@@ -47,10 +47,10 @@ Partial Class sdgImportFromClimSoft
         Me.chkRememberCredentials = New System.Windows.Forms.CheckBox()
         Me.btnConnect = New System.Windows.Forms.Button()
         Me.ucrComboBoxPort = New instat.ucrInputComboBox()
+        Me.ucrTxtHost = New instat.ucrInputTextBox()
         Me.ucrComboBoxDatabaseName = New instat.ucrInputComboBox()
         Me.ucrBaseSdgClimSoft = New instat.ucrButtonsSubdialogue()
         Me.ucrTxtUserName = New instat.ucrInputTextBox()
-        Me.ucrTxtHost = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblDatabaseName
@@ -94,11 +94,19 @@ Partial Class sdgImportFromClimSoft
         '
         'ucrComboBoxPort
         '
-        Me.ucrComboBoxPort.AddQuotesIfUnrecognised = True
+        Me.ucrComboBoxPort.AddQuotesIfUnrecognised = False
         Me.ucrComboBoxPort.GetSetSelectedIndex = -1
         Me.ucrComboBoxPort.IsReadOnly = False
         resources.ApplyResources(Me.ucrComboBoxPort, "ucrComboBoxPort")
         Me.ucrComboBoxPort.Name = "ucrComboBoxPort"
+        '
+        'ucrTxtHost
+        '
+        Me.ucrTxtHost.AddQuotesIfUnrecognised = True
+        Me.ucrTxtHost.IsMultiline = False
+        Me.ucrTxtHost.IsReadOnly = False
+        resources.ApplyResources(Me.ucrTxtHost, "ucrTxtHost")
+        Me.ucrTxtHost.Name = "ucrTxtHost"
         '
         'ucrComboBoxDatabaseName
         '
@@ -121,19 +129,12 @@ Partial Class sdgImportFromClimSoft
         resources.ApplyResources(Me.ucrTxtUserName, "ucrTxtUserName")
         Me.ucrTxtUserName.Name = "ucrTxtUserName"
         '
-        'ucrTxtHost
-        '
-        Me.ucrTxtHost.AddQuotesIfUnrecognised = True
-        Me.ucrTxtHost.IsMultiline = False
-        Me.ucrTxtHost.IsReadOnly = False
-        resources.ApplyResources(Me.ucrTxtHost, "ucrTxtHost")
-        Me.ucrTxtHost.Name = "ucrTxtHost"
-        '
         'sdgImportFromClimSoft
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrComboBoxPort)
+        Me.Controls.Add(Me.ucrTxtHost)
         Me.Controls.Add(Me.ucrComboBoxDatabaseName)
         Me.Controls.Add(Me.btnConnect)
         Me.Controls.Add(Me.chkRememberCredentials)
@@ -142,7 +143,6 @@ Partial Class sdgImportFromClimSoft
         Me.Controls.Add(Me.lblUserName)
         Me.Controls.Add(Me.ucrTxtUserName)
         Me.Controls.Add(Me.lblPort)
-        Me.Controls.Add(Me.ucrTxtHost)
         Me.Controls.Add(Me.lblHost)
         Me.Controls.Add(Me.lblDatabaseName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -155,7 +155,6 @@ Partial Class sdgImportFromClimSoft
     End Sub
     Friend WithEvents lblDatabaseName As Label
     Friend WithEvents lblHost As Label
-    Friend WithEvents ucrTxtHost As ucrInputTextBox
     Friend WithEvents lblPort As Label
     Friend WithEvents ucrTxtUserName As ucrInputTextBox
     Friend WithEvents lblUserName As Label
@@ -164,5 +163,6 @@ Partial Class sdgImportFromClimSoft
     Friend WithEvents chkRememberCredentials As CheckBox
     Friend WithEvents btnConnect As Button
     Friend WithEvents ucrComboBoxDatabaseName As ucrInputComboBox
+    Friend WithEvents ucrTxtHost As ucrInputTextBox
     Friend WithEvents ucrComboBoxPort As ucrInputComboBox
 End Class

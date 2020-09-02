@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 
 Public Class dlgClimSoft
@@ -27,6 +26,9 @@ Public Class dlgClimSoft
     'these are declared here to be used in getting the selected value
     Private dctStationColumns As New Dictionary(Of String, String)
     Private dctElementsColumns As New Dictionary(Of String, String)
+
+    'flag used by elements receiver to determine when not to clear itself and change its sql query 
+    'useful when form is reloaded, to let the elements reciever retain the elements selected
     Private bIgnoreReceiverChanges As Boolean = False
 
     Private Sub dlgClimSoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -42,7 +44,7 @@ Public Class dlgClimSoft
         SetRCodeForControls(bReset)
         bReset = False
         bIgnoreReceiverChanges = False
-        'autoTranslate(Me) ' temporary commented, affects the connected text by overwriting on it
+        'autoTranslate(Me) ' temporary commented, affects the connected text by overwriting it with wrong text
     End Sub
 
     Private Sub InitialiseDialog()
@@ -80,10 +82,10 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.strSelectorHeading = "Elements"
         ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
 
-        ucrChkData.SetParameter(New RParameter("include_observation_data", 4))
-        ucrChkData.Text = "Include Observation Data"
-        ucrChkData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkData.SetRDefault("FALSE")
+        ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 4))
+        ucrChkObservationData.Text = "Include Observation Data"
+        ucrChkObservationData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkObservationData.SetRDefault("FALSE")
 
         ucrChkElements.SetParameter(New RParameter("include_elements_info", 5))
         ucrChkElements.Text = "Include Elements Metadata Data"
@@ -91,12 +93,12 @@ Public Class dlgClimSoft
         ucrChkElements.SetRDefault("FALSE")
 
         ucrChkUnstackData.Text = "Unstack Data"
-        'ucrChkUnstackData.Enabled = False
-        ucrChkUnstackData.Visible = False
+        ucrChkUnstackData.Visible = False 'hiddent until the feature is implemented
 
         ucrChkDateRange.Text = "Select Date Range"
         ucrChkDateRange.SetDefaultState(False) 'todo delete this
 
+        'todo. dates have a problem of defaults
         ucrDtpStartdate.SetParameter(New RParameter("start_date", 6))
         ucrDtpStartdate.SetParameterIsRDate()
         ucrDtpStartdate.SetLinkedDisplayControl(lblStartDate)
@@ -105,22 +107,17 @@ Public Class dlgClimSoft
         UcrDtpEndDate.SetParameterIsRDate()
         UcrDtpEndDate.SetLinkedDisplayControl(lblEndDate)
 
-        ucrChkData.AddToLinkedControls({ucrChkElements, ucrComboBoxElements, ucrReceiverMultipleElements}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkObservationData.AddToLinkedControls({ucrChkElements, ucrComboBoxElements, ucrReceiverMultipleElements}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'todo. we have a problem with how we will link this control. check on dlgImportDataSet??
-        ucrChkData.AddToLinkedControls({ucrChkDateRange}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkObservationData.AddToLinkedControls({ucrChkDateRange}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkDateRange.AddToLinkedControls({ucrDtpStartdate, UcrDtpEndDate}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
         clsRImportFromClimsoft = New RFunction
-
         clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_climsoft")
-        'ucrBase.clsRsyntax.AddParameter("include_observation_data", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRImportFromClimsoft)
-
-        'frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.")
-
         ucrReceiverMultipleStations.SetMeAsReceiver()
         ucrSelectorForClimSoft.Reset()
     End Sub
@@ -130,12 +127,7 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub TestOKEnabled()
-        'todo. include also validation of the dates
-        If (Not ucrReceiverMultipleStations.IsEmpty() AndAlso Not ucrChkData.Checked) OrElse (Not ucrReceiverMultipleElements.IsEmpty() AndAlso ucrChkData.Checked) Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled((Not ucrReceiverMultipleStations.IsEmpty() AndAlso Not ucrChkObservationData.Checked) OrElse (Not ucrReceiverMultipleElements.IsEmpty() AndAlso ucrChkObservationData.Checked))
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -145,6 +137,7 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub btnEstablishConnection_Click(sender As Object, e As EventArgs) Handles btnEstablishConnection.Click
+        'shows the database connect sub dialog and checks if connection has been established
         sdgImportFromClimSoft.ShowDialog()
         If sdgImportFromClimSoft.ConnectionActive() Then
             lblConnection.Text = "Connected"
@@ -157,6 +150,9 @@ Public Class dlgClimSoft
         ucrReceiverMultipleStations.SetMeAsReceiver()
     End Sub
 
+    ''' <summary>
+    ''' constructs and sets the stations reciver SQL query
+    ''' </summary>
     Private Sub SetStationsReceiverQuery()
         If dctStationColumns.Count < 1 Then
             Exit Sub
@@ -173,6 +169,9 @@ Public Class dlgClimSoft
         ucrReceiverMultipleStations.strDatabaseQuery = strQuery
     End Sub
 
+    ''' <summary>
+    ''' constructs and sets elements receiver SQL query
+    ''' </summary>
     Private Sub SetElementsRecieverQuery()
         If dctElementsColumns.Count < 1 Then
             Exit Sub
@@ -200,14 +199,13 @@ Public Class dlgClimSoft
 
     Private Sub ucrComboBoxStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxStations.ControlValueChanged
         SetStationsReceiverQuery()
-        ucrReceiverMultipleStations.SetMeAsReceiver() 'will also execute the sql query
+        ucrReceiverMultipleStations.SetMeAsReceiver() 'will also execute the receiver's sql query
     End Sub
 
     Private Sub ucrComboBoxElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxElements.ControlValueChanged
         SetElementsRecieverQuery()
-        ucrReceiverMultipleElements.SetMeAsReceiver() 'will also execute sql the query
+        ucrReceiverMultipleElements.SetMeAsReceiver() 'will also execute receiver's sql the query
     End Sub
-
 
     Private Sub ucrReceiverMultipleStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlValueChanged
         If bIgnoreReceiverChanges Then
@@ -216,12 +214,12 @@ Public Class dlgClimSoft
         SetElementsRecieverQuery()
     End Sub
 
-    Private Sub ucrControlsContents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlContentsChanged, ucrReceiverMultipleElements.ControlContentsChanged, ucrChkData.ControlContentsChanged
+    Private Sub ucrControlsContents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlContentsChanged, ucrReceiverMultipleElements.ControlContentsChanged, ucrChkObservationData.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrChkObservationData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkData.ControlValueChanged
-        If ucrChkData.Checked Then
+    Private Sub ucrChkObservationData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkObservationData.ControlValueChanged
+        If ucrChkObservationData.Checked Then
             ucrReceiverMultipleElements.SetMeAsReceiver()
         Else
             ucrReceiverMultipleStations.SetMeAsReceiver()

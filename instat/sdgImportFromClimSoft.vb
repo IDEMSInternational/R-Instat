@@ -140,12 +140,12 @@ Public Class sdgImportFromClimSoft
         End If
         'temporily save credentials before returning
         frmMain.clsInstatOptions.SetClimsoftDatabaseName(ucrComboBoxDatabaseName.GetText())
-        frmMain.clsInstatOptions.SetClimsoftHost(ucrComboBoxPort.GetText())
-        frmMain.clsInstatOptions.SetClimsoftPort(ucrTxtHost.GetText())
+        frmMain.clsInstatOptions.SetClimsoftHost(ucrTxtHost.GetText())
+        frmMain.clsInstatOptions.SetClimsoftPort(ucrComboBoxPort.GetText())
         frmMain.clsInstatOptions.SetClimsoftUsername(ucrTxtUserName.GetText())
     End Sub
 
-    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxPort.ControlContentsChanged, ucrTxtHost.ControlContentsChanged, ucrTxtUserName.ControlContentsChanged
+    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrTxtUserName.ControlContentsChanged
         'if not already connected, check if it's valid to attempt connecting to database
         If bConnected Then
             Exit Sub
