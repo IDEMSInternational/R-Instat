@@ -1532,7 +1532,9 @@ DataBook$set("public", "has_database_connection", function() {
 )
 
 DataBook$set("public", "database_connect", function(dbname, user, host, port, drv = RMySQL::MySQL()) {
- password <- getPass::getPass(paste0(user, " password:"))
+  #launches an input box prompt for entering password. 
+  #Done this way so that password characters are not displayed in the output window
+  password <- getPass::getPass(paste0(user, " password:"))
   out <- NULL
   out <- DBI::dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
   if(!is.null(out)) {
@@ -1559,51 +1561,93 @@ DataBook$set("public", "database_disconnect", function() {
 }
 )
 
-DataBook$set("public", "import_from_climsoft", function(stations = c(), elements = c(), include_observation_data = FALSE, start_date = NULL, end_date = NULL) {
+DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "stationId", stations = c(), elementfiltercolumn = "elementId", elements = c(), include_observation_data = FALSE, include_elements_info = FALSE, start_date = NULL, end_date = NULL) {
   #need to perform checks here
   con = self$get_database_connection()
-  if(!is.null(stations)){
-    my_stations = paste0("(", paste(paste0("'", stations, "'"), collapse=", "), ")")
-    station_info <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
-  }
-  date_bounds=""
-  if(!is.null(start_date)) {
-    if(!lubridate::is.Date(start_date)) stop("start_date must be of type Date.")
-    start_date <- format(start_date, format = "%Y-%m-%d")
-    date_bounds = paste0(date_bounds, " AND obsDatetime >",sQuote(start_date))
-  }
-  if(!is.null(end_date)) {
-    if(!lubridate::is.Date(end_date)) stop("end_date must be of type Date.")
-    end_date <- format(end_date, format = "%Y-%m-%d")
-    date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
+
+  #get stations database data and station ids values
+  if(length(stations) > 0 ){
+	#construct a string of station values from the passed station vector eg of result ('191','122')
+	passed_station_values = paste0("(", paste0("'", stations, "'", collapse=", "), ")")
+	
+	#get the station info of the passed station values
+    db_station_info <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE ", stationfiltercolumn," IN ", passed_station_values, ";"))
+	
+	#set values of station ids only
+    if(stationfiltercolumn == "stationId"){
+        station_ids_values = passed_station_values
+    }else{
+        station_ids_values = paste0("(", paste0("'", db_station_info$stationId, "'", collapse=", "), ")")  
+    }
   }
 
-  if (length(elements) > 0){
-    my_elements = paste0("(", paste0(sprintf("'%s'", elements), collapse = ", "), ")")
-    element_ids = DBI::dbGetQuery(con, paste0("SELECT elementID FROM obselement WHERE elementName in", my_elements,";"))
-    element_id_vec = paste0("(", paste0(sprintf("%d", element_ids$elementID), collapse = ", "), ")")
-  }
+
+
+  #if true get observation data
   if(include_observation_data){
-    if(!is.null(stations)){
-      station_data <-  DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.recordedFrom IN", my_stations, "AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
-    }
-    else{
-      station_data <-  DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, observationfinal.describedBy, obselement.abbreviation, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM obselement,observationfinal WHERE obselement.elementId=observationfinal.describedBy AND observationfinal.describedBy IN", element_id_vec, date_bounds, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
-      my_stations = paste0("(", paste(as.character(unique(station_data$recordedFrom)), collapse=", "), ")")
-      station_info <-  DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
-    }
-
-    data_list <- list(station_info, station_data)
-    names(data_list) = c("station_info","station_data")
-  }
-  else{
-    data_list <- list(station_info)
-    names(data_list) = "station_info"
-  }
-  self$import_data(data_tables = data_list)
   
-  self$add_key("station_info", c("stationId"))
-  if(include_observation_data)(self$add_link(from_data_frame = "station_data", to_data_frame = "station_info", link_pairs = c(recordedFrom = "stationId"), type = keyed_link_label))
+      #if there are no elements passed then stop and throw error
+      if(length(elements) < 1) stop("start_date must be of type Date.")
+   
+      #set values of element ids only
+      if(elementfiltercolumn == "elementId"){
+	      #get element id values directly from passed data
+		  element_ids_values = paste0("(", paste0( elements, collapse=", "), ")")
+	  }else{
+	      #get element id values from the database
+		  passed_element_values = paste0("(", paste0("'", elements, "'", collapse=", "), ")")
+          db_elements_ids = DBI::dbGetQuery(con, paste0("SELECT elementId FROM obselement WHERE ", elementfiltercolumn, " IN ", passed_element_values,";"))
+		  element_ids_values = paste0("(", paste0(sprintf("%d", db_elements_ids$elementId), collapse = ", "), ")")
+	  }
+
+	  if(include_elements_info){
+	      db_elements_info = DBI::dbGetQuery(con, paste0("SELECT elementId, elementName, abbreviation, description FROM obselement WHERE elementId ", " IN ", element_ids_values,";"))
+	  }
+
+	  #get databounds filter query if dates have been passed
+      date_bounds_filter=""
+      if(!is.null(start_date)) {
+           if(!lubridate::is.Date(start_date)) stop("start_date must be of type Date.")
+           start_date <- format(start_date, format = "%Y-%m-%d")
+           date_bounds_filter = paste0(date_bounds_filter, " AND obsDatetime >= ",sQuote(start_date))
+       }
+       if(!is.null(end_date)) {
+           if(!lubridate::is.Date(end_date)) stop("end_date must be of type Date.")
+           end_date <- format(end_date, format = "%Y-%m-%d")
+           date_bounds_filter = paste0(date_bounds_filter, " AND obsDatetime <=",sQuote(end_date))
+       }
+       
+	  #construct observation data sql query and get data from database
+      if(length(stations) > 0){
+          #if stations passed get observation data of selected elements of passed stations 
+          db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, obselement.abbreviation AS element, obselement.elementName,observationfinal.obsDatetime,observationfinal.obsValue FROM observationfinal INNER JOIN obselement ON observationfinal.describedBy = obselement.elementId WHERE observationfinal.recordedFrom IN ", station_ids_values, " AND observationfinal.describedBy IN ", element_ids_values, date_bounds_filter, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+      }else{
+          #if stations have not been passed get observation data of passed elements of all stations
+	      db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom, obselement.abbreviation AS element, obselement.elementName, observationfinal.obsDatetime, observationfinal.obsValue FROM observationfinal INNER JOIN obselement ON observationfinal.describedBy = obselement.elementId WHERE observationfinal.describedBy IN ", element_ids_values, date_bounds_filter, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+	 
+	      #then get the stations ids (uniquely) from the observation data and use the ids to get station info
+	      station_ids_values = paste0("(", paste0("'",as.character(unique(db_observation_data$recordedFrom)),"'", collapse=", "), ")")
+	      db_station_info <- DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationId IN ", station_ids_values, ";"))
+      }
+
+	  if(include_elements_info){
+		  data_list <- list(db_station_info, db_elements_info, db_observation_data)
+          names(data_list) = c("stations_info", "elements_info", "observation_data")
+	  }else{
+		  data_list <- list(db_station_info, db_observation_data)
+          names(data_list) = c("stations_info","observation_data")
+	  }
+      
+  }else{
+       data_list <- list(db_station_info)
+       names(data_list) = "stations_info"
+  }
+  #import the data as separate data frames
+  self$import_data(data_tables = data_list)
+  #add relationship key between the observation data and station data linked by stationId and recordedFrom columns
+  self$add_key("stations_info", c("stationId"))
+  if(include_observation_data)(self$add_link(from_data_frame = "observation_data", to_data_frame = "stations_info", link_pairs = c(recordedFrom = "stationId"), type = keyed_link_label))
+  #todo. should we also include the elements key, if elements data is available? will the describedBy column be required
 }
 )
 

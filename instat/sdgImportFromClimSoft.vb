@@ -21,50 +21,112 @@ Public Class sdgImportFromClimSoft
     Private clsRDatabaseConnect As RFunction
     Private clsRDatabaseDisconnect As RFunction
     Private clsHasConnection As New RFunction
-    Private bControlsInitialised As Boolean = False
+    Private bFirstLoad As Boolean = True
     Private bConnected As Boolean = False
-    Private strConnected As String = "Connected"
-    Private strNoConnection As String = "No Connection"
 
     Private Sub sdgImportFromClimSoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
-        If Not bControlsInitialised Then
-            InitialiseControls()
+        If bFirstLoad Then
+            InitialiseDialog()
+            SetDefaults()
+            bFirstLoad = False
         End If
-        CheckConnection()
+        SetRCodeForControls()
+        UpdateConnectionState()
     End Sub
 
-    Private Sub InitialiseControls()
-        ucrInputDatabaseName.SetParameter(New RParameter("dbname", 0))
-        ucrInputHost.SetParameter(New RParameter("host", 1))
-        ucrInputPort.SetParameter(New RParameter("port", 2))
-        ucrInputPort.AddQuotesIfUnrecognised = False
-        ucrInputUserName.SetParameter(New RParameter("user", 3))
-        cmdEnterPassword.Enabled = False
-        bControlsInitialised = True
+    Private Sub InitialiseDialog()
+        Dim dctDatabaseNames As New Dictionary(Of String, String)
+        Dim dctPorts As New Dictionary(Of String, String)
+
+        'database names
+        dctDatabaseNames.Add("mariadb_climsoft_db_v4", Chr(34) & "mariadb_climsoft_db_v4" & Chr(34))
+        dctDatabaseNames.Add("mariadb_climsoft_test_db_v4", Chr(34) & "mariadb_climsoft_test_db_v4" & Chr(34))
+        ucrComboBoxDatabaseName.SetParameter(New RParameter("dbname", 0))
+        ucrComboBoxDatabaseName.SetItems(dctDatabaseNames)
+        ucrComboBoxDatabaseName.bAllowNonConditionValues = True
+
+        'host e.g 127.0.0.1
+        ucrTxtHost.SetParameter(New RParameter("host", 1))
+        ucrTxtHost.AddQuotesIfUnrecognised = False
+
+        'ports
+        dctPorts.Add("3308", Chr(34) & "3308" & Chr(34))
+        dctPorts.Add("3306", Chr(34) & "3306" & Chr(34))
+        ucrComboBoxPort.SetParameter(New RParameter("port", 2))
+        ucrComboBoxPort.SetItems(dctPorts)
+        ucrComboBoxPort.bAllowNonConditionValues = True
+
+        'user name
+        ucrTxtUserName.SetParameter(New RParameter("user", 3))
+
     End Sub
 
-    Public Function GetConnectionActiveStatus() As Boolean
+    Private Sub SetDefaults()
+        clsRDatabaseConnect = New RFunction
+        clsRDatabaseDisconnect = New RFunction
+        clsHasConnection = New RFunction
+
+
+        'set database connect R command and it's parameter values(from previous set values if available)
+        clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
+        clsRDatabaseConnect.AddParameter("dbname", frmMain.clsInstatOptions.strClimsoftDatabaseName, iPosition:=0)
+        clsRDatabaseConnect.AddParameter("host", frmMain.clsInstatOptions.strClimsoftHost, iPosition:=1)
+        clsRDatabaseConnect.AddParameter("port", frmMain.clsInstatOptions.strClimsoftPort, iPosition:=2)
+        clsRDatabaseConnect.AddParameter("user", frmMain.clsInstatOptions.strClimsoftUsername, iPosition:=3)
+
+        'set database disconnect R command
+        clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
+
+        'set has connection R command
+        clsHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
+
+    End Sub
+
+    Private Sub SetRCodeForControls()
+        SetRCode(Me, clsRDatabaseConnect, False)
+    End Sub
+
+    Public Function ConnectionActive() As Boolean
         Return bConnected
     End Function
 
-    Public Sub SetRDatabaseConnection(clsNewRDatabaseConnect As RFunction, clsNewRDatabaseDisconnect As RFunction, clsNewHasConnection As RFunction, Optional bConnectionActive As Boolean = False, Optional bReset As Boolean = False)
-        clsRDatabaseConnect = clsNewRDatabaseConnect
-        clsRDatabaseDisconnect = clsNewRDatabaseDisconnect
-        clsHasConnection = clsNewHasConnection
-        If Not bControlsInitialised Then
-            InitialiseControls()
+    Private Sub UpdateConnectionState()
+        If bConnected Then
+            lblConnection.Text = "Connected"
+            lblConnection.ForeColor = Color.Green
+            btnConnect.Text = "Disconnect"
+
+            'disable all other controls. Entry allowed only when there is no existing connection
+            ucrComboBoxDatabaseName.Enabled = False
+            ucrComboBoxPort.Enabled = False
+            ucrTxtHost.Enabled = False
+            ucrTxtUserName.Enabled = False
+            chkRememberCredentials.Enabled = False
+        Else
+            lblConnection.Text = "No Connection"
+            lblConnection.ForeColor = Color.Red
+            btnConnect.Text = "Connect"
+
+            'enable all other controls to allow entry of connection details
+            ucrComboBoxDatabaseName.Enabled = True
+            ucrComboBoxPort.Enabled = True
+            ucrTxtHost.Enabled = True
+            ucrTxtUserName.Enabled = True
+            chkRememberCredentials.Enabled = True
         End If
-        SetRCode(Me, clsRDatabaseConnect, bReset)
     End Sub
 
-    Private Sub cmdEnterPassword_Click(sender As Object, e As EventArgs) Handles cmdEnterPassword.Click
+    Private Sub btnConnect_Click(sender As Object, e As EventArgs) Handles btnConnect.Click
         Dim expTemp As SymbolicExpression
-        cmdEnterPassword.Enabled = False
+        btnConnect.Enabled = False 'temporary disable 
+
+        'if was already connected, then user action is meant to disconnect else, try connecting to database
         If bConnected Then
             frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
             bConnected = False
         Else
+            'will display an R password input prompt, to enter password and attempt connecting to database
             frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsHasConnection.ToScript())
             If Not expTemp.Type = Internals.SymbolicExpressionType.Null Then
@@ -73,70 +135,28 @@ Public Class sdgImportFromClimSoft
                 bConnected = False
             End If
         End If
-        CheckConnection()
-        cmdEnterPassword.Enabled = True
+        UpdateConnectionState()
+        btnConnect.Enabled = True
     End Sub
 
-    Private Sub CheckConnection()
+    Private Sub ucrBaseSdgClimSoft_ClickReturn(sender As Object, e As EventArgs) Handles ucrBaseSdgClimSoft.ClickReturn
+        If Not chkRememberCredentials.Checked Then
+            Exit Sub
+        End If
+        'temporily save credentials before returning
+        frmMain.clsInstatOptions.SetClimsoftDatabaseName(ucrComboBoxDatabaseName.GetText())
+        frmMain.clsInstatOptions.SetClimsoftHost(ucrComboBoxPort.GetText())
+        frmMain.clsInstatOptions.SetClimsoftPort(ucrTxtHost.GetText())
+        frmMain.clsInstatOptions.SetClimsoftUsername(ucrTxtUserName.GetText())
+    End Sub
+
+    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxPort.ControlContentsChanged, ucrTxtHost.ControlContentsChanged, ucrTxtUserName.ControlContentsChanged
+        'if not already connected, check if it's valid to attempt connecting to database
         If bConnected Then
-            lblConnection.Text = strConnected
-            lblConnection.ForeColor = Color.Green
-            cmdEnterPassword.Text = "Disconnnect"
-        Else
-            lblConnection.Text = strNoConnection
-            lblConnection.ForeColor = Color.Red
-            cmdEnterPassword.Text = "Enter Password"
+            Exit Sub
         End If
+        btnConnect.Enabled = Not ucrTxtHost.IsEmpty AndAlso Not ucrTxtUserName.IsEmpty AndAlso Not ucrComboBoxPort.IsEmpty AndAlso Not ucrComboBoxDatabaseName.IsEmpty
     End Sub
 
-    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputDatabaseName.ControlContentsChanged, ucrInputHost.ControlContentsChanged, ucrInputPort.ControlContentsChanged, ucrInputUserName.ControlContentsChanged
-        Dim strHost As String = ""
-        Dim strUser As String = ""
-        Dim strPort As String = ""
-        Dim strDatabaseName As String = ""
 
-        If ucrInputPort.GetText() <> "" AndAlso ucrInputUserName.GetText() <> "" AndAlso ucrInputHost.GetText() <> "" AndAlso ucrInputDatabaseName.GetText() <> "" Then
-            cmdEnterPassword.Enabled = True
-        Else
-            cmdEnterPassword.Enabled = False
-        End If
-
-        If clsRDatabaseConnect IsNot Nothing Then
-            If clsRDatabaseConnect.ContainsParameter("host") Then
-                strHost = clsRDatabaseConnect.GetParameter("host").strArgumentValue
-            End If
-            If clsRDatabaseConnect.ContainsParameter("user") Then
-                strUser = clsRDatabaseConnect.GetParameter("user").strArgumentValue
-            End If
-            If clsRDatabaseConnect.ContainsParameter("port") Then
-                strPort = clsRDatabaseConnect.GetParameter("port").strArgumentValue
-            End If
-            If clsRDatabaseConnect.ContainsParameter("dbname") Then
-                strDatabaseName = clsRDatabaseConnect.GetParameter("dbname").strArgumentValue
-            End If
-        End If
-        If bConnected AndAlso (strPort <> ucrInputPort.GetText() OrElse strDatabaseName <> Chr(34) & ucrInputDatabaseName.GetText() & Chr(34) OrElse strHost <> Chr(34) & ucrInputHost.GetText() & Chr(34) OrElse strUser <> Chr(34) & ucrInputUserName.GetText() & Chr(34)) Then
-            frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.")
-            lblConnection.Text = strNoConnection
-            bConnected = False
-        End If
-        If bConnected Then
-            lblConnection.Text = strConnected
-            cmdEnterPassword.Text = "Disconnnect"
-        Else
-            lblConnection.Text = strNoConnection
-            cmdEnterPassword.Text = "Enter Password"
-        End If
-    End Sub
-
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-
-        frmMain.clsInstatOptions.SetClimsoftDatabaseName(ucrInputDatabaseName.GetText())
-        frmMain.clsInstatOptions.SetClimsoftHost(ucrInputHost.GetText())
-        frmMain.clsInstatOptions.SetClimsoftPort(ucrInputPort.GetText())
-        frmMain.clsInstatOptions.SetClimsoftUsername(ucrInputUserName.GetText())
-
-        Dim msgSetDefaults = MsgBox("Climsoft defaults updated", MessageBoxButtons.OK, "Climsoft defaults")
-
-    End Sub
 End Class
