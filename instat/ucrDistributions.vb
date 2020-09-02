@@ -527,10 +527,10 @@ Public Class ucrDistributions
         clsGeneralExtremeValueDist.strNameTag = "Generalized_Extreme_Value"
         clsGeneralExtremeValueDist.strRName = "GEV"
         clsGeneralExtremeValueDist.strPackagName = "extRemes"
-        clsGeneralExtremeValueDist.strRFunctionName = "rgev"
-        clsGeneralExtremeValueDist.strPFunctionName = "pgev"
-        clsGeneralExtremeValueDist.strQFunctionName = "qgev"
-        clsGeneralExtremeValueDist.strDFunctionName = "dgev"
+        clsGeneralExtremeValueDist.strRFunctionName = "revd"
+        clsGeneralExtremeValueDist.strPFunctionName = "pevd"
+        clsGeneralExtremeValueDist.strQFunctionName = "qevd"
+        clsGeneralExtremeValueDist.strDFunctionName = "devd"
         clsGeneralExtremeValueDist.AddParameter("shape", "Shape", 0)
         clsGeneralExtremeValueDist.AddParameter("loc", "Loc", 0)
         clsGeneralExtremeValueDist.AddParameter("scale", "Scale", "1")
@@ -540,10 +540,11 @@ Public Class ucrDistributions
         clsGeneralizedParetoDist.strNameTag = "Generalized_Pareto_Distribution"
         clsGeneralizedParetoDist.strRName = "GP"
         clsGeneralizedParetoDist.strPackagName = "extRemes"
-        clsGeneralizedParetoDist.strRFunctionName = "rgpd"
-        clsGeneralizedParetoDist.strPFunctionName = "pgpd"
-        clsGeneralizedParetoDist.strQFunctionName = "qgpdl"
-        clsGeneralizedParetoDist.strDFunctionName = "dgpd"
+        clsGeneralizedParetoDist.strRFunctionName = "revd"
+        clsGeneralizedParetoDist.strPFunctionName = "pevd"
+        clsGeneralizedParetoDist.strQFunctionName = "qevd"
+        clsGeneralizedParetoDist.strDFunctionName = "devd"
+        clsGeneralizedParetoDist.AddParameter("shape", "Shape", 0)
         clsGeneralizedParetoDist.AddParameter("loc", "Loc", 0)
         clsGeneralizedParetoDist.AddParameter("scale", "Scale", "1")
         lstAllDistributions.Add(clsGeneralizedParetoDist)
