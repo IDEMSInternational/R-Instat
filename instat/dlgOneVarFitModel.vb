@@ -697,10 +697,70 @@ Public Class dlgOneVarFitModel
             Else
                 clsTtestFunction.AddParameter("mu", "0", iPosition:=1)
             End If
-            If ucrInputComboTests.GetText() = "wicoxon" AndAlso ucrChkConvertVariate.Checked Then
+            If ucrInputComboTests.GetText() = "Wicoxon" AndAlso ucrChkConvertVariate.Checked Then
                 clsWilcoxonFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
             Else
                 clsWilcoxonFunction.AddParameter("mu", "0", iPosition:=1)
+            End If
+            If ucrInputComboTests.GetText() = "Z" AndAlso ucrChkConvertVariate.Checked Then
+                clsZTestFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsZTestFunction.AddParameter("sd_pop", "1", iPosition:=2)
+            End If
+            If ucrInputComboTests.GetText() = "Bartel" AndAlso ucrChkConvertVariate.Checked Then
+                clsBartelFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsBartelFunction.AddParameter("method", Chr(34) & "normal" & Chr(34), iPosition:=1)
+            End If
+            If ucrInputComboTests.GetText() = "br" AndAlso ucrChkConvertVariate.Checked Then
+                clsBrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsBrFunction.AddParameter("m", "20000", iPosition:=1)
+            End If
+            If ucrInputComboTests.GetText() = "runs" AndAlso ucrChkConvertVariate.Checked Then
+                clsRunsFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsRunsFunction.AddParameter("x", iPosition:=0)
+            End If
+            If ucrInputComboTests.GetText() = "Sen" AndAlso ucrChkConvertVariate.Checked Then
+                clsSenFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsSenFunction.AddParameter("x", iPosition:=0)
+            End If
+            If ucrInputComboTests.GetText() = "serial corr" AndAlso ucrChkConvertVariate.Checked Then
+                clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsSerialCorrFunction.AddParameter("test", Chr(34) & "rank.von.Neumann" & Chr(34), iPosition:=1)
+            End If
+            If ucrInputComboTests.GetText() = "snh" AndAlso ucrChkConvertVariate.Checked Then
+                clsSnhFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsSenFunction.AddParameter("x", iPosition:=0)
+            End If
+            If ucrInputComboTests.GetText() = "cvm" AndAlso ucrChkConvertVariate.Checked Then
+                clsCvmFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsCvmFunction.AddParameter("x", iPosition:=0)
+            End If
+            If ucrInputComboTests.GetText() = "lillie" AndAlso ucrChkConvertVariate.Checked Then
+                clsLillieFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsLillieFunction.AddParameter("x", iPosition:=0)
+            End If
+            If ucrInputComboTests.GetText() = "pearson" AndAlso ucrChkConvertVariate.Checked Then
+                clsPearsonFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsPearsonFunction.AddParameter("x", iPosition:=0)
+            End If
+            If ucrInputComboTests.GetText() = "sf" AndAlso ucrChkConvertVariate.Checked Then
+                clsSfFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsSfFunction.AddParameter("x", iPosition:=0)
+            End If
+            If ucrInputComboTests.GetText() = "ad" AndAlso ucrChkConvertVariate.Checked Then
+                clsAdFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+            Else
+                clsAdFunction.AddParameter("x", iPosition:=0)
             End If
         End If
     End Sub
