@@ -20,7 +20,6 @@ Public Class dlgShowModel
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
     Private clsProbabilities, clsQuantiles As New RFunction
-    Private clsExtremesDistribution As New RFunction
     Private clsLoadLibrary As New RFunction
     Private Sub dlgTablePlus_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -62,7 +61,7 @@ Public Class dlgShowModel
         ucrReceiverExpressionForTablePlus.SetParameter(New RParameter("p", 1))
         ucrReceiverExpressionForTablePlus.SetParameterIsRFunction()
 
-        ucrDistributionsFOrTablePlus.SetRDistributions()
+        ucrDistributionsFOrTablePlus.SetPDistributions()
         ucrDistributionsFOrTablePlus.SetParameters()
 
         ucrChkEnterValues.SetText("Enter value(s)")
@@ -81,13 +80,10 @@ Public Class dlgShowModel
     Private Sub SetDefaults()
         clsQuantiles = New RFunction
         clsProbabilities = New RFunction
-        clsExtremesDistribution = New RFunction
 
         ucrSelectorForDataFrame.Reset()
         ucrInputProbabilities.Reset()
         ucrSaveGraphResults.Reset()
-
-        clsExtremesDistribution = ucrDistributionsFOrTablePlus.clsCurrRFunction
 
         clsProbabilities.SetPackageName("mosaic")
         clsQuantiles.SetPackageName("mosaic")
@@ -168,7 +164,7 @@ Public Class dlgShowModel
     Private Sub PqParameters()
         If rdoProbabilities.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsProbabilities)
-            clsProbabilities.AddParameter("q", "c(" & ucrInputProbabilities.GetText & ")")
+            clsProbabilities.AddParameter("q", "c(" & ucrInputProbabilities.GetText & ")", iPosition:=2)
             clsQuantiles.RemoveParameterByName("p")
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsQuantiles)
@@ -180,14 +176,24 @@ Public Class dlgShowModel
     Private Sub receiverlabels()
         If rdoProbabilities.Checked Then
             clsProbabilities.ClearParameters()
-            clsProbabilities.AddParameter("dist", Chr(34) & ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName & Chr(34))
+            If ucrDistributionsFOrTablePlus.ucrInputDistributions.GetText() = "Generalized Extreme Value" OrElse ucrDistributionsFOrTablePlus.ucrInputDistributions.GetText() = "Generalized Pareto Distribution" OrElse ucrDistributionsFOrTablePlus.ucrInputDistributions.GetText() = "Gumbel" Then
+                clsProbabilities.AddParameter("dist", Chr(34) & "evd" & Chr(34), iPosition:=0)
+                clsProbabilities.AddParameter("Type", Chr(34) & ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName & Chr(34), iPosition:=3)
+            Else
+                clsProbabilities.AddParameter("dist", Chr(34) & ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName & Chr(34), iPosition:=0)
+            End If
             PqParameters()
             For Each clstempparam In ucrDistributionsFOrTablePlus.clsCurrRFunction.clsParameters
                 clsProbabilities.AddParameter(clstempparam.Clone())
             Next
         Else
             clsQuantiles.ClearParameters()
-            clsQuantiles.AddParameter("dist", Chr(34) & ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName & Chr(34))
+            If ucrDistributionsFOrTablePlus.ucrInputDistributions.GetText() = "Generalized Extreme Value" OrElse ucrDistributionsFOrTablePlus.ucrInputDistributions.GetText() = "Generalized Pareto Distribution" OrElse ucrDistributionsFOrTablePlus.ucrInputDistributions.GetText() = "Gumbel" Then
+                clsQuantiles.AddParameter("dist", Chr(34) & "evd" & Chr(34), iPosition:=0)
+                clsQuantiles.AddParameter("Type", Chr(34) & ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName & Chr(34), iPosition:=3)
+            Else
+                clsQuantiles.AddParameter("dist", Chr(34) & ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName & Chr(34), iPosition:=0)
+            End If
             PqParameters()
             For Each clstempparam In ucrDistributionsFOrTablePlus.clsCurrRFunction.clsParameters
                 clsQuantiles.AddParameter(clstempparam.Clone())
@@ -202,7 +208,7 @@ Public Class dlgShowModel
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsLoadLibrary)
         End If
-        ChangeBetweenExtremesProbalityAndQuantileDist()
+
         TestOKEnabled()
     End Sub
 
@@ -246,7 +252,6 @@ Public Class dlgShowModel
     End Sub
 
     Private Sub ucrDistributionsFOrTablePlus_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDistributionsFOrTablePlus.ControlContentsChanged
-        ChangeBetweenExtremesProbalityAndQuantileDist()
         receiverlabels()
         TestOKEnabled()
     End Sub
@@ -259,32 +264,12 @@ Public Class dlgShowModel
 
     Private Sub ucrPnlDistTypes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDistTypes.ControlValueChanged
         receiverlabels()
-        ChangeBetweenExtremesProbalityAndQuantileDist()
     End Sub
 
     Private Sub ucrInputProbabilities_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputProbabilities.ControlValueChanged
         PqParameters()
     End Sub
 
-    Private Sub ChangeBetweenExtremesProbalityAndQuantileDist()
-        If ucrDistributionsFOrTablePlus.ucrInputDistributions.GetText = "Generalized Extreme Value" Or ucrDistributionsFOrTablePlus.ucrInputDistributions.GetText = "Generalized Pareto Distribution" Or ucrDistributionsFOrTablePlus.ucrInputDistributions.GetText = "Gumbel" Then
-            If rdoProbabilities.Checked Then
-                ucrDistributionsFOrTablePlus.SetDDistributions()
-                clsExtremesDistribution.RemoveParameterByName("q")
-                clsExtremesDistribution.AddParameter("x", ucrSelectorForDataFrame.ucrAvailableDataFrames.strCurrDataFrame, iPosition:=0)
-            ElseIf rdoQuantiles.Checked Then
-                ucrDistributionsFOrTablePlus.SetQDistributions()
-                clsExtremesDistribution.RemoveParameterByName("x")
-                clsExtremesDistribution.AddParameter("q", ucrSelectorForDataFrame.ucrAvailableDataFrames.strCurrDataFrame, iPosition:=0)
-            End If
-            clsExtremesDistribution.AddParameter("type", ucrDistributionsFOrTablePlus.clsCurrDistribution.strRName, iPosition:=5)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsExtremesDistribution)
-        Else
-            ucrDistributionsFOrTablePlus.SetRDistributions()
-            ucrBase.clsRsyntax.SetBaseRFunction(clsQuantiles)
-        End If
-
-    End Sub
     Private Sub ucrReceiverExpressionForTablePlus_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionForTablePlus.ControlContentsChanged, ucrInputProbabilities.ControlContentsChanged
         TestOKEnabled()
     End Sub

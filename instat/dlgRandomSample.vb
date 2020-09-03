@@ -79,7 +79,7 @@ Public Class dlgRandomSample
 
         clsDistributionFunction = ucrDistWithParameters.clsCurrRFunction
 
-        clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistributionFunction)
+        clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistributionFunction, iPosition:=1)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSamples.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSamples.GetText, bAssignToIsPrefix:=True)
@@ -129,10 +129,15 @@ Public Class dlgRandomSample
 
     Private Sub SetDataFrameAndDistributionParameters()
         If ucrDistWithParameters.clsCurrDistribution.strRName = "hyper" Then
-            clsDistributionFunction.AddParameter("nn", ucrSelectorRandomSamples.iDataFrameLength)
+            clsDistributionFunction.AddParameter("nn", ucrSelectorRandomSamples.iDataFrameLength, iPosition:=2)
         Else
             clsDistributionFunction.RemoveParameterByName("nn")
-            clsDistributionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength)
+            clsDistributionFunction.AddParameter("n", ucrSelectorRandomSamples.iDataFrameLength, iPosition:=0)
+        End If
+        If ucrDistWithParameters.ucrInputDistributions.GetText = "Generalized Pareto Distribution" Or ucrDistWithParameters.ucrInputDistributions.GetText = "Generalized Extreme Value" Then
+            clsDistributionFunction.AddParameter("type", Chr(34) & ucrDistWithParameters.clsCurrDistribution.strRName & Chr(34), iPosition:=3)
+        Else
+            clsDistributionFunction.RemoveParameterByName("type")
         End If
     End Sub
 

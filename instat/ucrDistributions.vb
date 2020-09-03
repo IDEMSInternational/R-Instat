@@ -532,7 +532,7 @@ Public Class ucrDistributions
         clsGeneralExtremeValueDist.strQFunctionName = "qevd"
         clsGeneralExtremeValueDist.strDFunctionName = "devd"
         clsGeneralExtremeValueDist.AddParameter("shape", "Shape", 0)
-        clsGeneralExtremeValueDist.AddParameter("loc", "Loc", 0)
+        clsGeneralExtremeValueDist.AddParameter("loc", "Location", 0)
         clsGeneralExtremeValueDist.AddParameter("scale", "Scale", "1")
         lstAllDistributions.Add(clsGeneralExtremeValueDist)
 
@@ -545,7 +545,7 @@ Public Class ucrDistributions
         clsGeneralizedParetoDist.strQFunctionName = "qevd"
         clsGeneralizedParetoDist.strDFunctionName = "devd"
         clsGeneralizedParetoDist.AddParameter("shape", "Shape", 0)
-        clsGeneralizedParetoDist.AddParameter("loc", "Loc", 0)
+        clsGeneralizedParetoDist.AddParameter("loc", "Location", 0)
         clsGeneralizedParetoDist.AddParameter("scale", "Scale", "1")
         lstAllDistributions.Add(clsGeneralizedParetoDist)
 
@@ -553,11 +553,9 @@ Public Class ucrDistributions
         clsGumbelDist.strNameTag = "Gumbel"
         clsGumbelDist.strRName = "Gumbel"
         clsGumbelDist.strPackagName = "extRemes"
-        clsGumbelDist.strRFunctionName = "rgumbel"
-        clsGumbelDist.strPFunctionName = "pgumbel"
-        clsGumbelDist.strQFunctionName = "qgumbel"
-        clsGumbelDist.strDFunctionName = "dgumbel"
-        clsGumbelDist.AddParameter("loc", "Loc", 0)
+        clsGumbelDist.strPFunctionName = "pevd"
+        clsGumbelDist.strQFunctionName = "qevd"
+        clsGumbelDist.AddParameter("loc", "Location", 0)
         clsGumbelDist.AddParameter("scale", "Scale", "1")
         lstAllDistributions.Add(clsGumbelDist)
 

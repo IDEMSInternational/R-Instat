@@ -1282,3 +1282,40 @@ summary_sample <- function(x, size, replace = FALSE){
   else if(length(x)==1){return(x)}
   else{sample(x = x, size = size, replace = replace)}
 }
+
+
+qevd <- function (p, loc = 0, scale = 1, shape = 0, threshold = 0, Type = c("GEV", 
+                                                                            "GP", "PP", "Gumbel", "Frechet", 
+                                                                            "Weibull", "Exponential", "Beta", "Pareto"), 
+                  lower.tail = TRUE) 
+{
+  Type <- match.arg(Type)
+  Type <- tolower(Type)
+  if (scale <= 0) 
+    stop("qevd: invalid scale argument.  Must be > 0.")
+  #if (min(p, na.rm = TRUE) <= 0 || max(p, na.rm = TRUE) >= 1) stop("qevd: invalid p argument.  Must have 0 < p < 1.")
+  if (length(loc) > 1 || length(scale) > 1 || length(shape) > 
+      1) 
+    stop("qevd: invalid parameter arguments.  Each must have length 1 only.")
+  if (Type == "pp") 
+    scale <- scale + shape * (threshold - loc)
+  if (is.element(Type, c("gev", "gumbel", "frechet", 
+                         "weibull"))) {
+    if (!lower.tail) 
+      p <- 1 - p
+    if (shape == 0 || Type == "gumbel") 
+      q <- loc - scale * log(-log(p))
+    else q <- loc + scale * ((-log(p))^(-shape) - 1)/shape
+  }
+  else if (is.element(Type, c("pp", "gp", "beta", 
+                              "exponential", "pareto"))) {
+    if (lower.tail) 
+      p <- 1 - p
+    if (shape == 0 || Type == "exponential") 
+      q <- threshold - scale * log(p)
+    else q <- threshold + scale * (p^(-shape) - 1)/shape
+  }
+  else stop("qevd: invalid Type argument.")
+  return(q)
+}
+
