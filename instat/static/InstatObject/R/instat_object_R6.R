@@ -1618,10 +1618,10 @@ DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "s
 	  #construct observation data sql query and get data from database
       if(length(stations) > 0){
           #if stations passed get observation data of selected elements of passed stations 
-          db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom As station, obselement.abbreviation AS element, observationfinal.obsDatetime AS obsdatetime,observationfinal.obsValue AS obsvalue FROM observationfinal INNER JOIN obselement ON observationfinal.describedBy = obselement.elementId WHERE observationfinal.recordedFrom IN ", station_ids_values, " AND observationfinal.describedBy IN ", element_ids_values, date_bounds_filter, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+          db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom As station, obselement.abbreviation AS element, observationfinal.obsDatetime AS datetime,observationfinal.obsValue AS obsvalue FROM observationfinal INNER JOIN obselement ON observationfinal.describedBy = obselement.elementId WHERE observationfinal.recordedFrom IN ", station_ids_values, " AND observationfinal.describedBy IN ", element_ids_values, date_bounds_filter, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
       }else{
           #if stations have not been passed get observation data of passed elements of all stations
-	      db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom As station, obselement.abbreviation AS element, observationfinal.obsDatetime AS obsdatetime, observationfinal.obsValue AS obsvalue FROM observationfinal INNER JOIN obselement ON observationfinal.describedBy = obselement.elementId WHERE observationfinal.describedBy IN ", element_ids_values, date_bounds_filter, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
+	      db_observation_data <- DBI::dbGetQuery(con, paste0("SELECT observationfinal.recordedFrom As station, obselement.abbreviation AS element, observationfinal.obsDatetime AS datetime, observationfinal.obsValue AS obsvalue FROM observationfinal INNER JOIN obselement ON observationfinal.describedBy = obselement.elementId WHERE observationfinal.describedBy IN ", element_ids_values, date_bounds_filter, " ORDER BY observationfinal.recordedFrom, observationfinal.describedBy;"))
 	 
 	      #then get the stations ids (uniquely) from the observation data and use the ids to get station info
 	      station_ids_values = paste0("(", paste0("'",as.character(unique(db_observation_data$station)),"'", collapse=", "), ")")
@@ -1655,8 +1655,8 @@ DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "s
 	   #convert elements in observation data to factors
 	   self$convert_column_to_type(data_name="observation_data", col_names="element", to_type="factor")
 	   #create a plain date column from the observation data datetime column values 
-	   obsdate <- self$get_columns_from_data(data_name="observation_data", col_names="obsdatetime", use_current_filter=FALSE)
-       self$add_columns_to_data(data_name="observation_data", col_name="obsdate", col_data=as.Date(x=obsdate), before=FALSE, adjacent_column="obsdatetime")
+	   obsdate <- self$get_columns_from_data(data_name="observation_data", col_names="datetime", use_current_filter=FALSE)
+       self$add_columns_to_data(data_name="observation_data", col_name="date", col_data=as.Date(x=obsdate), before=FALSE, adjacent_column="datetime")
    }
  
 
