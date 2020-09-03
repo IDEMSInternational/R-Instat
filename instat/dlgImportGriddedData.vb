@@ -109,12 +109,12 @@ Public Class dlgImportGriddedData
         ucrChkSaveFileLocation.AddParameterPresentCondition(False, "path", False)
 
         ucrChkWholeRange.SetText("Whole range")
-        ucrChkWholeRange.AddParameterPresentCondition(False, {"min_date", "max_date"})
-        ucrChkWholeRange.AddParameterPresentCondition(True, {"min_date", "max_date"}, False)
+        ucrChkWholeRange.AddParameterPresentCondition(True, {"min_date", "max_date"})
+        ucrChkWholeRange.AddParameterPresentCondition(False, {"min_date", "max_date"}, False)
 
         clsDefaultStartDate = New RFunction
         clsDefaultStartDate.SetRCommand("as.Date")
-        clsDefaultStartDate.AddParameter("x", Chr(34) & "1981/01/01" & Chr(34))
+        clsDefaultStartDate.AddParameter("x", Chr(34) & "2000/10/31" & Chr(34))
 
         clsDefaultEndDate = New RFunction
         clsDefaultEndDate.SetRCommand("as.Date")
