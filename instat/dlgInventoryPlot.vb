@@ -109,8 +109,8 @@ Public Class dlgInventoryPlot
         ' ucrChkSecond.SetRDefault("FALSE")
 
         ucrPnlOrder.SetParameter(New RParameter("order", 6))
-        ucrPnlOrder.AddRadioButton(rdoDateOrder, "FALSE")
-        ucrPnlOrder.AddRadioButton(rdoElementOrder, "TRUE")
+        ucrPnlOrder.AddRadioButton(rdoDateOrder, "TRUE")
+        ucrPnlOrder.AddRadioButton(rdoElementOrder, "FALSE")
         ucrPnlOrder.SetRDefault("FALSE")
 
         ucrPnls.AddRadioButton(rdoSummary)
@@ -124,7 +124,6 @@ Public Class dlgInventoryPlot
         ucrChkDay.SetLinkedDisplayControl(pnlDetails)
         ucrChkSummary.SetLinkedDisplayControl(pnlSummary)
 
-        rdoSummary.Checked = True
 
         Dim dctFacetByPairs As New Dictionary(Of String, String)
 
@@ -151,7 +150,7 @@ Public Class dlgInventoryPlot
         clsDefaultRFunction.AddParameter("facet_by", "NULL")
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsClimaticSummary.SetRCommand("climatic.summary")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsClimaticSummary)
 
         TestOkEnabled()
     End Sub
@@ -169,7 +168,7 @@ Public Class dlgInventoryPlot
         ucrChkOmitEnd.SetRCode(clsClimaticSummary, bReset)
         ucrChkOmitStart.SetRCode(clsClimaticSummary, bReset)
         ucrPnlOrder.SetRCode(clsClimaticSummary, bReset)
-
+        ucrPnls.SetRCode(clsClimaticSummary, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
