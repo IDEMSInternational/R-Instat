@@ -196,6 +196,12 @@
     <Compile Include="dlgCircular.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimsoftWizard.Designer.vb">
+      <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimsoftWizard.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCompareSummary.Designer.vb">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </Compile>
@@ -2538,6 +2544,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimsoftWizard.resx">
+      <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareSummary.resx">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
