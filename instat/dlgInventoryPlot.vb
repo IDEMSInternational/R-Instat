@@ -115,7 +115,6 @@ Public Class dlgInventoryPlot
 
         ucrPnls.AddRadioButton(rdoSummary)
         ucrPnls.AddRadioButton(rdoGraph)
-
         ucrPnls.AddFunctionNamesCondition(rdoSummary, "climatic.summary")
         ucrPnls.AddFunctionNamesCondition(rdoGraph, frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         ucrPnls.AddToLinkedControls(ucrChkSummary, {rdoSummary}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
