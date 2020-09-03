@@ -1282,3 +1282,186 @@ summary_sample <- function(x, size, replace = FALSE){
   else if(length(x)==1){return(x)}
   else{sample(x = x, size = size, replace = replace)}
 }
+
+climatic.summary <- function(data, date, elements = ..., stations, summary = TRUE, details = FALSE,
+                             order = FALSE,
+                             day = TRUE,
+                             month = FALSE,
+                             year = FALSE, start = TRUE, end = FALSE){
+  
+  # if there are no stations, set it as 1
+  # (can otherwise just run the function without stations present in that brackets)
+  if (missing(stations)){
+    data %>% mutate(stations = 1)
+  }
+  
+  if (missing(date)){
+    stop('argument "date" is missing, with no default')
+  }
+  
+  if (missing(elements)){
+    stop('argument "elements" is missing, with no default')
+  }
+  
+  i <- 0
+  list_tables <- NULL
+  
+  # stack data
+  data.stack <- data %>% 
+  tidyr::pivot_longer(cols = c({{ elements }}),
+                 names_to = "Element",
+                 values_to = "value")
+  
+  # sort start/end times
+  
+  # for summary == TRUE
+  if (summary == TRUE){
+    i = i + 1
+    # set start date
+    if (start == TRUE){
+      data.stack <- data.stack %>%
+        dplyr::group_by({{ stations }}, Element) %>%
+        dplyr::mutate(start = ({{ date }})[which.min(is.na( value ))])
+      
+    }else{
+      data.stack <- data.stack %>% group_by({{ stations }}) %>% mutate(start = dplyr::first( {{ date }} ))
+    }
+    
+    # set end date
+    if (end == TRUE){
+      data.stack <- data.stack %>%
+        group_by({{ stations }}, Element ) %>%
+        dplyr::mutate(end = ({{ date }} )[dplyr::last(which(!is.na( value )))])
+    }else{
+      data.stack <- data.stack %>% group_by({{ stations }} ) %>% mutate(end = dplyr::last({{ date }}))
+    }
+    
+    # number and percentage missing
+    summary.data <- data.frame(data.stack %>%
+                                 group_by({{stations}}, Element) %>%
+                                 filter(({{date}}) >= start & ({{date}}) <= end) %>%
+                                 summarise(From = dplyr::first(start),
+                                           To = dplyr::last(end),
+                                           Missing = sum(is.na(value)),
+                                           Percentage = sum(is.na(value))/n()*100))
+    
+    # complete years
+    complete.years <- data.stack %>%
+      group_by({{stations}}) %>%
+      filter(({{date}}) >= start & ({{date}}) <= end) %>%
+      group_by(lubridate::year({{date}}), {{stations}}, Element) %>%
+      summarise(count = sum(is.na(value)))
+    complete.years <- complete.years %>%
+      group_by({{stations}}, Element) %>%
+      summarise(Complete.Years = sum(count == 0))
+    
+  
+    # bind together
+    summary.data <- merge(summary.data, complete.years)
+    
+    if (missing(stations)){
+      summary.data$stations <- NULL
+    }
+    
+    #  }
+    #print(summary.data)
+    list_tables[[i]] <- summary.data
+  }
+  
+
+  
+  if (details == TRUE){
+    
+    if (day != TRUE & month != TRUE & year != TRUE){
+      warning('At least one of day, month, year need to be selected if details == TRUE')
+    }
+    
+    if (day == TRUE){
+      i = i + 1
+      detail.table.day = data.stack %>%
+        group_by({{stations}}, Element) %>%
+        mutate(element.na = data.table::rleid(value)) %>%
+        filter(is.na(value)) %>%
+        group_by(element.na, {{stations}}, Element) %>%
+        summarise(From = dplyr::first({{date}}),
+                  To = dplyr::last({{date}}),
+                  Count = n())
+      
+       if (order == TRUE){
+         detail.table.day <- detail.table.day %>% arrange(From)
+       } else {
+         detail.table.day <- detail.table.day %>% arrange(Element)
+         }
+      
+      detail.table.day <- detail.table.day %>% ungroup() %>% dplyr::select(-c("element.na"))
+      list_tables[[i]] <- detail.table.day
+      
+    }
+    
+    if (month == TRUE){
+      i = i + 1
+      detail.table.month <- data.stack %>%
+        mutate(Date.ym = zoo::as.yearmon({{date}}))  %>%
+        group_by(Date.ym, {{stations}}, Element)
+      
+      detail.table.month <- detail.table.month %>%
+        summarise(no = n(),
+                  na = sum(is.na(value)),
+                  From = dplyr::first({{date}}),
+                  To = dplyr::last({{date}})) %>%
+        mutate(is.complete = ifelse(no == na, 1, 0)) # 0 if all are missing
+
+      detail.table.month <- detail.table.month %>%
+        group_by({{stations}}, Element) %>%
+        mutate(element.na = data.table::rleid(is.complete)) %>%
+        filter(is.complete == 1) %>%
+        group_by(element.na, {{stations}}, Element) %>%
+        summarise(From = dplyr::first(From),
+                  To = dplyr::last(To),
+                  Count = n())
+      
+       if (order == TRUE){
+         detail.table.month <- detail.table.month %>% arrange(From)
+       } else {
+         detail.table.month <- detail.table.month %>% arrange(Element)
+       }
+      
+      detail.table.month <- detail.table.month %>% ungroup() %>% dplyr::select(-c("element.na"))
+      list_tables[[i]] <- detail.table.month
+    }
+    
+    if (year == TRUE) {
+      i = i + 1
+      detail.table.year <- data.stack %>%
+        mutate(Date.y = lubridate::year({{date}}))  %>%
+        group_by(Date.y, {{stations}}, Element)
+      
+      detail.table.year <- detail.table.year %>%
+        summarise(no = n(),
+                  na = sum(is.na(value)),
+                  From = dplyr::first({{date}}),
+                  To = dplyr::last({{date}})) %>%
+        mutate(is.complete = ifelse(no == na, 1, 0)) # 0 if all are missing
+      
+      detail.table.year <- detail.table.year %>%
+        group_by({{stations}}, Element) %>%
+        mutate(element.na = data.table::rleid(is.complete)) %>%
+        filter(is.complete == 1) %>%
+        group_by(element.na, {{stations}}, Element) %>%
+        summarise(From = dplyr::first(From),
+                  To = dplyr::last(To),
+                  Count = n())
+      
+       if (order == TRUE){
+         detail.table.year <- detail.table.year %>% arrange(From)
+       } else {
+         detail.table.year <- detail.table.year %>% arrange(Element)
+       }
+      
+      detail.table.year <- detail.table.year %>% ungroup() %>% dplyr::select(-c("element.na"))
+      list_tables[[i]] <- detail.table.year
+    }
+  }
+  
+  return(list_tables)
+}
