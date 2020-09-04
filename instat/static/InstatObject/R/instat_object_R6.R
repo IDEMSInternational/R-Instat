@@ -2091,10 +2091,10 @@ DataBook$set("public","package_check", function(package) {
 DataBook$set("public", "download_from_IRI", function(source, data, path = tempdir(), min_lon, max_lon, min_lat, max_lat, min_date, max_date, name, download_type = "point", import = TRUE){
   init_URL <- "https://iridl.ldeo.columbia.edu/"
   if(source == "CHIRPS_V2P0"){prexyaddress <- paste0(init_URL, "SOURCES/.UCSB/.CHIRPS/.v2p0")
-  if(data == "daily_0p05") {extension <- ".daily/.global/.0p05/.prcp"}
-  else if(data == "daily_0p25") {extension <- ".daily/.global/.0p25/.prcp"}
-  else if(data == "daily_improved_0p05") {extension <- ".daily-improved/.global/.0p05/.prcp"}
+  if(data == "daily_0p25") {extension <- ".daily/.global/.0p25/.prcp"}  
   else if(data == "daily_improved_0p25") {extension <- ".daily-improved/.global/.0p25/.prcp"}
+  else if (data == "daily_0p05") {extension <- ".daily/.global/.0p05/.prcp"}
+  else if(data == "daily_improved_0p05") {extension <- ".daily-improved/.global/.0p05/.prcp"}
   else if(data == "dekad") {extension <- ".dekad/.prcp"}
   else if(data == "monthly_c8113") {extension <- ".monthly/.global/.c8113/.precipitation"}
   else if(data == "monthly_deg1p0") {extension <- ".monthly/.global/.deg1p0/.precipitation"}
@@ -2104,6 +2104,7 @@ DataBook$set("public", "download_from_IRI", function(source, data, path = tempdi
   #Annual and 2Monthly and 3monthly does not exist for CHIRPS_V2P0
   }else if(source == "TAMSAT") {prexyaddress <-paste0(init_URL, "home/.remic/.Reading/.Meteorology/.TAMSAT")
   if(data == "rainfall_estimates") {extension <- ".TAMSAT-RFE/.rfe"}
+  else if(data == "rainfall_estimates_0p1") {extension <- ".TAMSAT-RFE_0p1/.rfe"}
   else if(data == "reconstructed_rainfall_anomaly") {extension <- ".TAMSAT-RFE/.rfediff"}
   else if(data == "sahel_dry_mask") {extension <- ".TAMSAT-RFE/.sahel_drymask"}
   else if(data == "SPI_1_dekad") {extension <- ".TAMSAT-RFE/.SPI-rfe_1-dekad_Sahel"}
@@ -2119,12 +2120,12 @@ DataBook$set("public", "download_from_IRI", function(source, data, path = tempdi
   }else if(source=="NOAA_CMORPH_DAILY" || source=="NOAA_CMORPH_3HOURLY" || source=="NOAA_CMORPH_DAILY_CALCULATED") {
     if(source=="NOAA_CMORPH_DAILY") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily")}
     else if(source == "NOAA_CMORPH_3HOURLY") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.3-hourly")}
-    if(source == "NOAA_CMORPH_DAILY_CALCULATED") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily_calculated")}
+    else if(source == "NOAA_CMORPH_DAILY_CALCULATED") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily_calculated")}
     if(data == "mean_microwave_only_est_prcp") {extension <- ".mean/.microwave-only/.comb"}
     else if(data == "mean_morphed_est_prcp") {extension <- ".mean/.morphed/.cmorph"}
-    if(data == "orignames_mean_microwave_only_est_prcp") {extension <- ".orignames/.mean/.microwave-only/.comb"}
+    else if(data == "orignames_mean_microwave_only_est_prcp") {extension <- ".orignames/.mean/.microwave-only/.comb"}
     else if(data == "orignames_mean_morphed_est_prcp") {extension <- ".orignames/.mean/.morphed/.cmorph"}
-    if(data == "renamed102015_mean_microwave_only_est_prcp") {extension <- ".renamed102015/.mean/.microwave-only/.comb"}
+    else if(data == "renamed102015_mean_microwave_only_est_prcp") {extension <- ".renamed102015/.mean/.microwave-only/.comb"}
     else if(data == "renamed102015_mean_morphed_est_prcp") {extension <- ".renamed102015/.mean/.morphed/.cmorph"}
     else stop("Data file does not exist for NOAA CMORPH data")
   }else if(source=="NASA_TRMM_3B42") {prexyaddress <- paste0(init_URL, "SOURCES/.NASA/.GES-DAAC/.TRMM_L3/.TRMM_3B42/.v7")
@@ -2140,7 +2141,7 @@ DataBook$set("public", "download_from_IRI", function(source, data, path = tempdi
   if(!missing(min_date)&!missing(max_date)){URL <- URL %>% add_t_range(min_date = min_date, max_date = max_date)}
   URL <- URL %>%  add_nc()
   file_name <- tempfile(name, tmpdir = path, fileext = ".nc")
-  result <- download.file(url = URL, destfile =  file_name, method = "auto", mode = "wb", cacheOK = FALSE)
+  result <- download.file(url = URL, destfile =  file_name, method = "libcurl", mode = "wb", cacheOK = FALSE)
   if(import & result == 0) {
     nc <- ncdf4::nc_open(filename = file_name)
     self$import_NetCDF(nc = nc, name = name)
