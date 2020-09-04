@@ -51,7 +51,7 @@ Public Class dlgShowModel
         ucrSaveGraphResults.SetSaveTypeAsGraph()
         ucrSaveGraphResults.SetIsComboBox()
         ucrSaveGraphResults.SetDataFrameSelector(ucrSelectorForDataFrame.ucrAvailableDataFrames)
-        ucrSaveGraphResults.SetCheckBoxText("Save Graph  Result:")
+        ucrSaveGraphResults.SetCheckBoxText("Save Graph:")
         ucrSaveGraphResults.SetAssignToIfUncheckedValue("last_graph")
 
         ucrInputProbabilities.SetParameter(New RParameter("p", 1))
