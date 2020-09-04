@@ -38,6 +38,7 @@ Partial Class dlgOneVarFitModel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.LblVariable = New System.Windows.Forms.Label()
         Me.rdoTest = New System.Windows.Forms.RadioButton()
         Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
@@ -86,6 +87,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputConfidenceInterval = New instat.ucrInputComboBox()
         Me.lblConfidenceLevel = New System.Windows.Forms.Label()
+        Me.tttests = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'LblVariable
@@ -312,6 +314,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboQMethod
         '
         Me.ucrInputComboQMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboQMethod.GetSetSelectedIndex = -1
         Me.ucrInputComboQMethod.IsReadOnly = False
         Me.ucrInputComboQMethod.Location = New System.Drawing.Point(350, 225)
         Me.ucrInputComboQMethod.Margin = New System.Windows.Forms.Padding(5)
@@ -364,6 +367,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboConfidenceLevel
         '
         Me.ucrInputComboConfidenceLevel.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboConfidenceLevel.GetSetSelectedIndex = -1
         Me.ucrInputComboConfidenceLevel.IsReadOnly = False
         Me.ucrInputComboConfidenceLevel.Location = New System.Drawing.Point(351, 140)
         Me.ucrInputComboConfidenceLevel.Margin = New System.Windows.Forms.Padding(5)
@@ -384,6 +388,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboQuantilCI
         '
         Me.ucrInputComboQuantilCI.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboQuantilCI.GetSetSelectedIndex = -1
         Me.ucrInputComboQuantilCI.IsReadOnly = False
         Me.ucrInputComboQuantilCI.Location = New System.Drawing.Point(350, 166)
         Me.ucrInputComboQuantilCI.Margin = New System.Windows.Forms.Padding(5)
@@ -394,6 +399,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboMedianCI
         '
         Me.ucrInputComboMedianCI.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMedianCI.GetSetSelectedIndex = -1
         Me.ucrInputComboMedianCI.IsReadOnly = False
         Me.ucrInputComboMedianCI.Location = New System.Drawing.Point(350, 166)
         Me.ucrInputComboMedianCI.Margin = New System.Windows.Forms.Padding(5)
@@ -404,6 +410,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboVarianceCI
         '
         Me.ucrInputComboVarianceCI.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboVarianceCI.GetSetSelectedIndex = -1
         Me.ucrInputComboVarianceCI.IsReadOnly = False
         Me.ucrInputComboVarianceCI.Location = New System.Drawing.Point(350, 166)
         Me.ucrInputComboVarianceCI.Margin = New System.Windows.Forms.Padding(5)
@@ -414,6 +421,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboMethod
         '
         Me.ucrInputComboMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMethod.GetSetSelectedIndex = -1
         Me.ucrInputComboMethod.IsReadOnly = False
         Me.ucrInputComboMethod.Location = New System.Drawing.Point(350, 195)
         Me.ucrInputComboMethod.Name = "ucrInputComboMethod"
@@ -423,6 +431,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputCIMethods
         '
         Me.ucrInputCIMethods.AddQuotesIfUnrecognised = True
+        Me.ucrInputCIMethods.GetSetSelectedIndex = -1
         Me.ucrInputCIMethods.IsReadOnly = False
         Me.ucrInputCIMethods.Location = New System.Drawing.Point(350, 195)
         Me.ucrInputCIMethods.Name = "ucrInputCIMethods"
@@ -432,6 +441,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputMeanCIMethod
         '
         Me.ucrInputMeanCIMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMeanCIMethod.GetSetSelectedIndex = -1
         Me.ucrInputMeanCIMethod.IsReadOnly = False
         Me.ucrInputMeanCIMethod.Location = New System.Drawing.Point(350, 166)
         Me.ucrInputMeanCIMethod.Margin = New System.Windows.Forms.Padding(5)
@@ -453,6 +463,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboEstimate
         '
         Me.ucrInputComboEstimate.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboEstimate.GetSetSelectedIndex = -1
         Me.ucrInputComboEstimate.IsReadOnly = False
         Me.ucrInputComboEstimate.Location = New System.Drawing.Point(66, 252)
         Me.ucrInputComboEstimate.Margin = New System.Windows.Forms.Padding(5)
@@ -463,6 +474,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputComboTests
         '
         Me.ucrInputComboTests.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboTests.GetSetSelectedIndex = -1
         Me.ucrInputComboTests.IsReadOnly = False
         Me.ucrInputComboTests.Location = New System.Drawing.Point(45, 252)
         Me.ucrInputComboTests.Margin = New System.Windows.Forms.Padding(5)
@@ -546,6 +558,7 @@ Partial Class dlgOneVarFitModel
         'ucrInputConfidenceInterval
         '
         Me.ucrInputConfidenceInterval.AddQuotesIfUnrecognised = True
+        Me.ucrInputConfidenceInterval.GetSetSelectedIndex = -1
         Me.ucrInputConfidenceInterval.IsReadOnly = False
         Me.ucrInputConfidenceInterval.Location = New System.Drawing.Point(351, 140)
         Me.ucrInputConfidenceInterval.Margin = New System.Windows.Forms.Padding(5)
@@ -561,6 +574,9 @@ Partial Class dlgOneVarFitModel
         Me.lblConfidenceLevel.Size = New System.Drawing.Size(93, 13)
         Me.lblConfidenceLevel.TabIndex = 86
         Me.lblConfidenceLevel.Text = "Confidence Level:"
+        '
+        'tttests
+        '
         '
         'dlgOneVarFitModel
         '
@@ -675,4 +691,5 @@ Partial Class dlgOneVarFitModel
     Friend WithEvents ucrInputComboQMethod As ucrInputComboBox
     Friend WithEvents lblConfidenceLevel As Label
     Friend WithEvents ucrInputConfidenceInterval As ucrInputComboBox
+    Friend WithEvents tttests As ToolTip
 End Class
