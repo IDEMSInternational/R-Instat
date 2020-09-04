@@ -47,8 +47,6 @@ Public Class dlgImportGriddedData
         dctDownloadPairs.Add("NOAA_CMORPH_DAILY", Chr(34) & "NOAA_CMORPH_DAILY" & Chr(34))
         dctDownloadPairs.Add("NOAA_CMORPH_3HOURLY", Chr(34) & "NOAA_CMORPH_3HOURLY" & Chr(34))
         dctDownloadPairs.Add("NOAA_CMORPH_DAILY_CALCULATED", Chr(34) & "NOAA_CMORPH_DAILY_CALCULATED" & Chr(34))
-        'dctDownloadPairs.Add("NOAA_CMORPH_PENTAD", Chr(34) & "NOAA_CMORPH_PENTAD" & Chr(34))
-        'dctDownloadPairs.Add("NOAA_CMORPH_V0PX", Chr(34) & "NOAA_CMORPH_V0PX" & Chr(34))
         dctDownloadPairs.Add("NASA_TRMM_3B42", Chr(34) & "NASA_TRMM_3B42" & Chr(34))
         ucrInputSource.SetItems(dctDownloadPairs)
         ucrInputSource.SetDropDownStyleAsNonEditable()
@@ -179,24 +177,24 @@ Public Class dlgImportGriddedData
                 ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
             Case "CHIRPS_V2P0"
                 dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("Daily_0p05", Chr(34) & "daily_0p05" & Chr(34))
                 dctFiles.Add("Daily_0p25", Chr(34) & "daily_0p25" & Chr(34))
-                dctFiles.Add("Daily_Improved_0p05", Chr(34) & "daily_improved_0p05" & Chr(34))
                 dctFiles.Add("Daily_Improved_0p25", Chr(34) & "daily_improved_0p25" & Chr(34))
+                dctFiles.Add("Daily_0p05", Chr(34) & "daily_0p05" & Chr(34))
+                dctFiles.Add("Daily_Improved_0p05", Chr(34) & "daily_improved_0p05" & Chr(34))
                 dctFiles.Add("Dekad", Chr(34) & "dekad" & Chr(34))
                 dctFiles.Add("Monthly_c8113", Chr(34) & "monthly_c8113" & Chr(34))
                 dctFiles.Add("Monthly_deg1p0", Chr(34) & "monthly_deg1p0" & Chr(34))
                 dctFiles.Add("Monthly_NMME_deg1p0", Chr(34) & "monthly_NMME_deg1p0" & Chr(34))
                 dctFiles.Add("Monthly_Precipitation", Chr(34) & "monthly_prcp" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
-                ucrInputData.cboInput.SelectedItem = "Daily_0p05"
+                ucrInputData.cboInput.SelectedItem = "Daily_0p25"
             Case "TAMSAT"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Rainfall_Estimates", Chr(34) & "rainfall_estimates" & Chr(34))
+                dctFiles.Add("Rainfall_Estimates_0p1", Chr(34) & "rainfall_estimates_0p1" & Chr(34))
                 dctFiles.Add("Reconstructed_Rainfall_Anomaly", Chr(34) & "reconstructed_rainfall_anomaly" & Chr(34))
                 dctFiles.Add("Sahel_Dry_Mask", Chr(34) & "sahel_dry_mask" & Chr(34))
                 dctFiles.Add("Standard_Precipitation_Index_1-dekad", Chr(34) & "SPI_1_dekad" & Chr(34))
-                'monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Rainfall_Estimates"
             Case "NOAA_ARC2"
@@ -208,16 +206,14 @@ Public Class dlgImportGriddedData
                 ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
             Case "NOAA_CMORPH_DAILY", "NOAA_CMORPH_3HOURLY", "NOAA_CMORPH_DAILY_CALCULATED"
                 dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("Mean_Microwave_Only_Est._Prcp.", Chr(34) & "mean_microwave_only_est_prcp" & Chr(34))
                 dctFiles.Add("Mean_Morphed_Est._Prcp.", Chr(34) & "mean_morphed_est_prcp" & Chr(34))
+                dctFiles.Add("Mean_Microwave_Only_Est._Prcp.", Chr(34) & "mean_microwave_only_est_prcp" & Chr(34))
                 dctFiles.Add("Orignames_Mean_Microwave_Only_Est._Prcp.", Chr(34) & "orignames_mean_microwave_only_est_prcp" & Chr(34))
                 dctFiles.Add("Orignames_Mean_Morphed_Est._Prcp.", Chr(34) & "orignames_mean_morphed_est_prcp" & Chr(34))
                 dctFiles.Add("Renamed102015_Mean_Microwave_Only_Est._Prcp.", Chr(34) & "renamed102015_mean_microwave_only_est_prcp" & Chr(34))
                 dctFiles.Add("Renamed102015_Mean_Morphed_Est._Prcp.", Chr(34) & "renamed102015_mean_morphed_est_prcp" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Mean_Morphed_Est._Prcp."
-                'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_PENTAD" Then
-                'ElseIf ucrInputDownloadFrom.cboInput.SelectedItem = "NOAA_CMORPH_V0PX" Then
             Case "NASA_TRMM_3B42"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Daily_Est._Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
@@ -227,7 +223,6 @@ Public Class dlgImportGriddedData
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
         End Select
-        'other data sources to be added here.
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
