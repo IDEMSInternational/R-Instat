@@ -1209,46 +1209,46 @@
     <value>Check Data</value>
   </data>
   <data name="mnuClimaticCheckDataInventory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>178, 22</value>
   </data>
   <data name="mnuClimaticCheckDataInventory.Text" xml:space="preserve">
     <value>Inventory...</value>
   </data>
   <data name="mnuClimaticCheckDataFillMissingValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>178, 22</value>
   </data>
   <data name="mnuClimaticCheckDataFillMissingValues.Text" xml:space="preserve">
     <value>Fill Missing Values...</value>
   </data>
   <data name="ToolStripSeparator65.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>175, 6</value>
   </data>
   <data name="mnuClimaticCheckDataDisplayDaily.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>178, 22</value>
   </data>
   <data name="mnuClimaticCheckDataDisplayDaily.Text" xml:space="preserve">
     <value>Display Daily...</value>
   </data>
   <data name="mnuClimaticCheckDataBoxplot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>178, 22</value>
   </data>
   <data name="mnuClimaticCheckDataBoxplot.Text" xml:space="preserve">
     <value>Boxplot...</value>
   </data>
   <data name="mnuClimaticCheckDataQCTemperatures.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>178, 22</value>
   </data>
   <data name="mnuClimaticCheckDataQCTemperatures.Text" xml:space="preserve">
     <value>QC Temperatures...</value>
   </data>
   <data name="mnuClimaticCheckDataQCRainfall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>178, 22</value>
   </data>
   <data name="mnuClimaticCheckDataQCRainfall.Text" xml:space="preserve">
     <value>QC Rainfall...</value>
   </data>
   <data name="mnuClimaticCheckDataHomogenization.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>178, 22</value>
   </data>
   <data name="mnuClimaticCheckDataHomogenization.Text" xml:space="preserve">
     <value>Homogenization...</value>
@@ -2604,99 +2604,6 @@
   <data name="mnuPrepareDataFrame.Text" xml:space="preserve">
     <value>Data Frame</value>
   </data>
-  <data name="mnuPrepareCheckDataVisualiseData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="mnuPrepareCheckDataVisualiseData.Text" xml:space="preserve">
-    <value>Visualise Data</value>
-  </data>
-  <data name="mnuPrepareCheckDataDuplicates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="mnuPrepareCheckDataDuplicates.Text" xml:space="preserve">
-    <value>Duplicates...</value>
-  </data>
-  <data name="mnuPrepareCheckDataCompareColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="mnuPrepareCheckDataCompareColumns.Text" xml:space="preserve">
-    <value>Compare Columns...</value>
-  </data>
-  <data name="mnuPrepareCheckDataNonNumericCases.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="mnuPrepareCheckDataNonNumericCases.Text" xml:space="preserve">
-    <value>Non-numeric Cases...</value>
-  </data>
-  <data name="ToolStripSeparator49.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 6</value>
-  </data>
-  <data name="mnuPrepareCheckDataBoxplot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="mnuPrepareCheckDataBoxplot.Text" xml:space="preserve">
-    <value>Boxplot...</value>
-  </data>
-  <data name="mnuPrepareCheckDataOneVariableSummarise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="mnuPrepareCheckDataOneVariableSummarise.Text" xml:space="preserve">
-    <value>One Variable Summarise...</value>
-  </data>
-  <data name="mnuPrepareCheckDataOneVariableGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="mnuPrepareCheckDataOneVariableGraph.Text" xml:space="preserve">
-    <value>One Variable Graph...</value>
-  </data>
-  <data name="mnuPrepareCheckDataOneWayFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="mnuPrepareCheckDataOneWayFrequencies.Text" xml:space="preserve">
-    <value>One Variable Frequencies...</value>
-  </data>
-  <data name="ToolStripSeparator41.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 6</value>
-  </data>
-  <data name="mnuPrepareCheckDataExportOpenRefine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="mnuPrepareCheckDataExportOpenRefine.Text" xml:space="preserve">
-    <value>Export To OpenRefine...</value>
-  </data>
-  <data name="mnuPrepareCheckDataImportOpenRefine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="mnuPrepareCheckDataImportOpenRefine.Text" xml:space="preserve">
-    <value>Import From OpenRefine...</value>
-  </data>
-  <data name="ToolStripSeparator40.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 6</value>
-  </data>
-  <data name="mnuPreparePrepareToShareJitter.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuPreparePrepareToShareJitter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="mnuPreparePrepareToShareJitter.Text" xml:space="preserve">
-    <value>Jitter...</value>
-  </data>
-  <data name="mnuPrepareCheckDataPrePareToShareSdcPackage.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuPrepareCheckDataPrePareToShareSdcPackage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="mnuPrepareCheckDataPrePareToShareSdcPackage.Text" xml:space="preserve">
-    <value>Prepare to Share (sdc package)...</value>
-  </data>
-  <data name="mnuPrepareCheckDataAnonymiseIDColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 22</value>
-  </data>
-  <data name="mnuPrepareCheckDataAnonymiseIDColumn.Text" xml:space="preserve">
-    <value>Anonymise ID Column...</value>
-  </data>
   <data name="mnuPrepareCheckData.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
@@ -2759,6 +2666,84 @@
   </data>
   <data name="mnuPrepareKeysAndLinks.Text" xml:space="preserve">
     <value>Keys and Links</value>
+  </data>
+  <data name="mnuPrepareDataObjectDataFrameMetadata.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuPrepareDataObjectDataFrameMetadata.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
+  </data>
+  <data name="mnuPrepareDataObjectDataFrameMetadata.Text" xml:space="preserve">
+    <value>Data Frame Metadata...</value>
+  </data>
+  <data name="mnuPrepareDataObjectRenameDataFrame.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
+  </data>
+  <data name="mnuPrepareDataObjectRenameDataFrame.Text" xml:space="preserve">
+    <value>Rename Data Frame...</value>
+  </data>
+  <data name="mnuPrepareDataObjectReorderDataFrames.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuPrepareDataObjectReorderDataFrames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
+  </data>
+  <data name="mnuPrepareDataObjectReorderDataFrames.Text" xml:space="preserve">
+    <value>Reorder Data Frames...</value>
+  </data>
+  <data name="mnuPrepareDataObjectCopyDataFrame.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
+  </data>
+  <data name="mnuPrepareDataObjectCopyDataFrame.Text" xml:space="preserve">
+    <value>Copy Data Frame...</value>
+  </data>
+  <data name="mnuPrepareDataObjectDeleteDataFrame.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
+  </data>
+  <data name="mnuPrepareDataObjectDeleteDataFrame.Text" xml:space="preserve">
+    <value>Delete Data Frames...</value>
+  </data>
+  <data name="ToolStripSeparator21.Size" type="System.Drawing.Size, System.Drawing">
+    <value>193, 6</value>
+  </data>
+  <data name="mnuPrepareDataObjectHideDataframes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 22</value>
+  </data>
+  <data name="mnuPrepareDataObjectHideDataframes.Text" xml:space="preserve">
+    <value>Hide/Show Data Frames...</value>
+  </data>
+  <data name="mnuPrepareDataObjectMetadata.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
+  </data>
+  <data name="mnuPrepareDataObjectMetadata.Text" xml:space="preserve">
+    <value>Metadata...</value>
+  </data>
+  <data name="mnuPrepareDataObjectRenameMetadata.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuPrepareDataObjectRenameMetadata.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
+  </data>
+  <data name="mnuPrepareDataObjectRenameMetadata.Text" xml:space="preserve">
+    <value>Rename Metadata...</value>
+  </data>
+  <data name="mnuPrepareDataObjectReorderMetadata.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuPrepareDataObjectReorderMetadata.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
+  </data>
+  <data name="mnuPrepareDataObjectReorderMetadata.Text" xml:space="preserve">
+    <value>Reorder Metadata...</value>
+  </data>
+  <data name="mnuPrepareDataObjectDeleteMetadata.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuPrepareDataObjectDeleteMetadata.Size" type="System.Drawing.Size, System.Drawing">
+    <value>196, 22</value>
+  </data>
+  <data name="mnuPrepareDataObjectDeleteMetadata.Text" xml:space="preserve">
+    <value>Delete Metadata...</value>
   </data>
   <data name="mnuPrepareDataObject.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
@@ -3044,6 +3029,99 @@
   </data>
   <data name="mnuPrepareDataframeColourByProperty.Text" xml:space="preserve">
     <value>Colour by Property...</value>
+  </data>
+  <data name="mnuPrepareCheckDataVisualiseData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataVisualiseData.Text" xml:space="preserve">
+    <value>Visualise Data</value>
+  </data>
+  <data name="mnuPrepareCheckDataDuplicates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataDuplicates.Text" xml:space="preserve">
+    <value>Duplicates...</value>
+  </data>
+  <data name="mnuPrepareCheckDataCompareColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataCompareColumns.Text" xml:space="preserve">
+    <value>Compare Columns...</value>
+  </data>
+  <data name="mnuPrepareCheckDataNonNumericCases.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataNonNumericCases.Text" xml:space="preserve">
+    <value>Non-numeric Cases...</value>
+  </data>
+  <data name="ToolStripSeparator49.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 6</value>
+  </data>
+  <data name="mnuPrepareCheckDataBoxplot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataBoxplot.Text" xml:space="preserve">
+    <value>Boxplot...</value>
+  </data>
+  <data name="mnuPrepareCheckDataOneVariableSummarise.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataOneVariableSummarise.Text" xml:space="preserve">
+    <value>One Variable Summarise...</value>
+  </data>
+  <data name="mnuPrepareCheckDataOneVariableGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataOneVariableGraph.Text" xml:space="preserve">
+    <value>One Variable Graph...</value>
+  </data>
+  <data name="mnuPrepareCheckDataOneWayFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataOneWayFrequencies.Text" xml:space="preserve">
+    <value>One Variable Frequencies...</value>
+  </data>
+  <data name="ToolStripSeparator41.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 6</value>
+  </data>
+  <data name="mnuPrepareCheckDataExportOpenRefine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataExportOpenRefine.Text" xml:space="preserve">
+    <value>Export To OpenRefine...</value>
+  </data>
+  <data name="mnuPrepareCheckDataImportOpenRefine.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataImportOpenRefine.Text" xml:space="preserve">
+    <value>Import From OpenRefine...</value>
+  </data>
+  <data name="ToolStripSeparator40.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 6</value>
+  </data>
+  <data name="mnuPreparePrepareToShareJitter.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuPreparePrepareToShareJitter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPreparePrepareToShareJitter.Text" xml:space="preserve">
+    <value>Jitter...</value>
+  </data>
+  <data name="mnuPrepareCheckDataPrePareToShareSdcPackage.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuPrepareCheckDataPrePareToShareSdcPackage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataPrePareToShareSdcPackage.Text" xml:space="preserve">
+    <value>Prepare to Share (sdc package)...</value>
+  </data>
+  <data name="mnuPrepareCheckDataAnonymiseIDColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>245, 22</value>
+  </data>
+  <data name="mnuPrepareCheckDataAnonymiseIDColumn.Text" xml:space="preserve">
+    <value>Anonymise ID Column...</value>
   </data>
   <data name="mnuPrepareColumnGenerateRegularSequence.Size" type="System.Drawing.Size, System.Drawing">
     <value>179, 22</value>
@@ -3371,84 +3449,6 @@
   </data>
   <data name="mnuPrepareKeysAndLinksAddComment.Text" xml:space="preserve">
     <value>Add Comment...</value>
-  </data>
-  <data name="mnuPrepareDataObjectDataFrameMetadata.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuPrepareDataObjectDataFrameMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
-  </data>
-  <data name="mnuPrepareDataObjectDataFrameMetadata.Text" xml:space="preserve">
-    <value>Data Frame Metadata...</value>
-  </data>
-  <data name="mnuPrepareDataObjectRenameDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
-  </data>
-  <data name="mnuPrepareDataObjectRenameDataFrame.Text" xml:space="preserve">
-    <value>Rename Data Frame...</value>
-  </data>
-  <data name="mnuPrepareDataObjectReorderDataFrames.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuPrepareDataObjectReorderDataFrames.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
-  </data>
-  <data name="mnuPrepareDataObjectReorderDataFrames.Text" xml:space="preserve">
-    <value>Reorder Data Frames...</value>
-  </data>
-  <data name="mnuPrepareDataObjectCopyDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
-  </data>
-  <data name="mnuPrepareDataObjectCopyDataFrame.Text" xml:space="preserve">
-    <value>Copy Data Frame...</value>
-  </data>
-  <data name="mnuPrepareDataObjectDeleteDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
-  </data>
-  <data name="mnuPrepareDataObjectDeleteDataFrame.Text" xml:space="preserve">
-    <value>Delete Data Frames...</value>
-  </data>
-  <data name="ToolStripSeparator21.Size" type="System.Drawing.Size, System.Drawing">
-    <value>193, 6</value>
-  </data>
-  <data name="mnuPrepareDataObjectHideDataframes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
-  </data>
-  <data name="mnuPrepareDataObjectHideDataframes.Text" xml:space="preserve">
-    <value>Hide Dataframes...</value>
-  </data>
-  <data name="mnuPrepareDataObjectMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
-  </data>
-  <data name="mnuPrepareDataObjectMetadata.Text" xml:space="preserve">
-    <value>Metadata...</value>
-  </data>
-  <data name="mnuPrepareDataObjectRenameMetadata.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuPrepareDataObjectRenameMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
-  </data>
-  <data name="mnuPrepareDataObjectRenameMetadata.Text" xml:space="preserve">
-    <value>Rename Metadata...</value>
-  </data>
-  <data name="mnuPrepareDataObjectReorderMetadata.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuPrepareDataObjectReorderMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
-  </data>
-  <data name="mnuPrepareDataObjectReorderMetadata.Text" xml:space="preserve">
-    <value>Reorder Metadata...</value>
-  </data>
-  <data name="mnuPrepareDataObjectDeleteMetadata.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuPrepareDataObjectDeleteMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
-  </data>
-  <data name="mnuPrepareDataObjectDeleteMetadata.Text" xml:space="preserve">
-    <value>Delete Metadata...</value>
   </data>
   <data name="mnuPrepareRObjectsView.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 22</value>

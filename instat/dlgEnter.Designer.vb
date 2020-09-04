@@ -78,6 +78,7 @@ Partial Class dlgEnter
         Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrTryModelling = New instat.ucrTry()
+        Me.btnExample = New System.Windows.Forms.Button()
         Me.grpEnterKeybord1.SuspendLayout()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.SuspendLayout()
@@ -351,10 +352,17 @@ Partial Class dlgEnter
         resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
         Me.ucrTryModelling.Name = "ucrTryModelling"
         '
+        'btnExample
+        '
+        resources.ApplyResources(Me.btnExample, "btnExample")
+        Me.btnExample.Name = "btnExample"
+        Me.btnExample.UseVisualStyleBackColor = True
+        '
         'dlgEnter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.btnExample)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.grpEnterKeyboard2)
         Me.Controls.Add(Me.ucrSaveEnterResultInto)
@@ -415,4 +423,5 @@ Partial Class dlgEnter
     Friend WithEvents cmdColon As Button
     Friend WithEvents grpEnterKeyboard2 As GroupBox
     Friend WithEvents ucrTryModelling As ucrTry
+    Friend WithEvents btnExample As Button
 End Class
