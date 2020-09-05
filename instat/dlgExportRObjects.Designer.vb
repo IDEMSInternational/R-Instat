@@ -40,16 +40,27 @@ Partial Class dlgExportRObjects
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportRObjects))
         Me.lblObjects = New System.Windows.Forms.Label()
+        Me.ucrFilePath = New instat.ucrFilePath()
         Me.ucrReceiverObjects = New instat.ucrReceiverMultiple()
         Me.ucrSelectorObjects = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrFilePath = New instat.ucrFilePath()
         Me.SuspendLayout()
         '
         'lblObjects
         '
         resources.ApplyResources(Me.lblObjects, "lblObjects")
         Me.lblObjects.Name = "lblObjects"
+        '
+        'ucrFilePath
+        '
+        Me.ucrFilePath.DefaultFileSuggestionName = ""
+        Me.ucrFilePath.FilePath = ""
+        Me.ucrFilePath.FilePathBrowseText = "Browse"
+        Me.ucrFilePath.FilePathDialogFilter = "Saved R objects (*.RData)|*.RData|Serialized R Objects (*.rds)|*.rds"
+        Me.ucrFilePath.FilePathDialogTitle = "Export R Objects"
+        Me.ucrFilePath.FilePathLabel = "Export File:"
+        resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
+        Me.ucrFilePath.Name = "ucrFilePath"
         '
         'ucrReceiverObjects
         '
@@ -72,17 +83,6 @@ Partial Class dlgExportRObjects
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrFilePath
-        '
-        Me.ucrFilePath.DefaultFileSuggestionName = ""
-        Me.ucrFilePath.FilePath = ""
-        Me.ucrFilePath.FilePathBrowseText = "Browse"
-        Me.ucrFilePath.FilePathDialogFilter = "Serialized R Objects (*.rds)|*.rds"
-        Me.ucrFilePath.FilePathDialogTitle = "Export R Objects"
-        Me.ucrFilePath.FilePathLabel = "Export File:"
-        resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
-        Me.ucrFilePath.Name = "ucrFilePath"
         '
         'dlgExportRObjects
         '

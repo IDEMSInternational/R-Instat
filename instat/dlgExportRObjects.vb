@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgExportRObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGetObjectsFunction, clsSaveRDS As New RFunction
+    Private clsExport As RFunction
 
     Private Sub dlgExportRObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -37,37 +37,33 @@ Public Class dlgExportRObjects
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 554
 
-        ucrSelectorObjects.SetParameter(New RParameter("data_name", 1))
-        ucrSelectorObjects.ucrAvailableDataFrames.SetParameterIsString()
-
-        ucrReceiverObjects.SetParameter(New RParameter("object_name", 2))
-        ucrReceiverObjects.SetParameterIsString()
+        'multiple reciever control that holds selected objects
+        ucrReceiverObjects.SetParameter(New RParameter("x", 0))
+        ucrReceiverObjects.SetParameterIsRFunction()
         ucrReceiverObjects.Selector = ucrSelectorObjects
         ucrReceiverObjects.SetMeAsReceiver()
         ucrReceiverObjects.strSelectorHeading = "Objects"
         ucrReceiverObjects.SetItemType("object")
-
-        ucrFilePath.SetPathControlParameter(New RParameter("file", 0))
-
+        'file path control that holds the file path and name
+        ucrFilePath.SetPathControlParameter(New RParameter("file", 1))
     End Sub
 
     Private Sub SetDefaults()
-        clsGetObjectsFunction = New RFunction
-        clsSaveRDS = New RFunction
+        clsExport = New RFunction
 
+        'reset controls
         ucrSelectorObjects.Reset()
         ucrFilePath.ResetPathControl()
 
-        clsGetObjectsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
-        clsSaveRDS.SetRCommand("saveRDS")
-        clsSaveRDS.AddParameter("object", clsRFunctionParameter:=clsGetObjectsFunction)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSaveRDS)
+        'set R command and base function
+        clsExport.SetPackageName("rio")
+        clsExport.SetRCommand("export")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsExport)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorObjects.SetRCode(clsGetObjectsFunction, bReset)
-        ucrReceiverObjects.SetRCode(clsGetObjectsFunction, bReset)
-        ucrFilePath.SetPathControlRcode(clsSaveRDS, bReset)
+        ucrReceiverObjects.SetRCode(clsExport, bReset)
+        ucrFilePath.SetPathControlRcode(clsExport, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
