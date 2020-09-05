@@ -38,6 +38,7 @@ Partial Class ucrFilter
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ucrFilter))
         Me.lblSelectLevels = New System.Windows.Forms.Label()
         Me.cmdAddCondition = New System.Windows.Forms.Button()
@@ -78,7 +79,8 @@ Partial Class ucrFilter
         Me.ucrFactorLevels = New instat.ucrFactor()
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.cmdCombineWithAndOr = New System.Windows.Forms.Button()
+        Me.ttpCombineWithAndOr = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpNumeric.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -295,6 +297,7 @@ Partial Class ucrFilter
         'ucrLogicalCombobox
         '
         Me.ucrLogicalCombobox.AddQuotesIfUnrecognised = True
+        Me.ucrLogicalCombobox.GetSetSelectedIndex = -1
         Me.ucrLogicalCombobox.IsReadOnly = False
         resources.ApplyResources(Me.ucrLogicalCombobox, "ucrLogicalCombobox")
         Me.ucrLogicalCombobox.Name = "ucrLogicalCombobox"
@@ -309,6 +312,7 @@ Partial Class ucrFilter
         'ucrInputFilterName
         '
         Me.ucrInputFilterName.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterName.GetSetSelectedIndex = -1
         Me.ucrInputFilterName.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputFilterName, "ucrInputFilterName")
         Me.ucrInputFilterName.Name = "ucrInputFilterName"
@@ -324,6 +328,7 @@ Partial Class ucrFilter
         'ucrFilterOperation
         '
         Me.ucrFilterOperation.AddQuotesIfUnrecognised = True
+        Me.ucrFilterOperation.GetSetSelectedIndex = -1
         Me.ucrFilterOperation.IsReadOnly = False
         resources.ApplyResources(Me.ucrFilterOperation, "ucrFilterOperation")
         Me.ucrFilterOperation.Name = "ucrFilterOperation"
@@ -354,18 +359,18 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.ucrSelectorForFitler, "ucrSelectorForFitler")
         Me.ucrSelectorForFitler.Name = "ucrSelectorForFitler"
         '
-        'Button1
+        'cmdCombineWithAndOr
         '
-        resources.ApplyResources(Me.Button1, "Button1")
-        Me.Button1.Name = "Button1"
-        Me.Button1.Tag = "Clear_Conditions"
-        Me.Button1.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdCombineWithAndOr, "cmdCombineWithAndOr")
+        Me.cmdCombineWithAndOr.Name = "cmdCombineWithAndOr"
+        Me.cmdCombineWithAndOr.Tag = "Clear_Conditions"
+        Me.cmdCombineWithAndOr.UseVisualStyleBackColor = True
         '
         'ucrFilter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.cmdCombineWithAndOr)
         Me.Controls.Add(Me.ucrReceiverExpression)
         Me.Controls.Add(Me.grpNumeric)
         Me.Controls.Add(Me.ucrLogicalCombobox)
@@ -432,5 +437,6 @@ Partial Class ucrFilter
     Friend WithEvents cmd0 As Button
     Friend WithEvents cmd1 As Button
     Friend WithEvents ucrReceiverExpression As ucrReceiverExpression
-    Friend WithEvents Button1 As Button
+    Friend WithEvents cmdCombineWithAndOr As Button
+    Friend WithEvents ttpCombineWithAndOr As ToolTip
 End Class
