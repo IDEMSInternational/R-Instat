@@ -258,8 +258,14 @@ Public Class dlgClimsoftWizard
             frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
         End Sub
 
-        Private Sub OnBtnConnect_Click()
+        Private Function HasConnection() As Boolean
             Dim expTemp As SymbolicExpression
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsRHasConnection.ToScript())
+            Return (Not expTemp.Type = Internals.SymbolicExpressionType.Null) AndAlso expTemp.AsLogical(0)
+        End Function
+
+        Private Sub OnBtnConnect_Click()
+
             parentControls.btnConnect.Enabled = False 'temporary disable 
 
             'if was already connected, then user action is meant to disconnect else, try connecting to database
@@ -269,8 +275,7 @@ Public Class dlgClimsoftWizard
             Else
                 'will display an R password input prompt, to enter password and attempt connecting to database
                 frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
-                expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsRHasConnection.ToScript())
-                bConnected = (Not expTemp.Type = Internals.SymbolicExpressionType.Null) AndAlso expTemp.AsLogical(0)
+                bConnected = HasConnection()
             End If
             UpdateConnectionState()
             parentControls.btnConnect.Enabled = True
@@ -313,13 +318,11 @@ Public Class dlgClimsoftWizard
             'set has connection R command
             clsRHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
 
-            'disconnect if was already connected
-            'todo. run the has connection  command
-            If bConnected Then
+            'disconnect if was already connected 
+            If HasConnection() Then
                 Disconnect()
-                bConnected = False
             End If
-
+            bConnected = False
             UpdateConnectionState()
 
         End Sub
@@ -394,7 +397,6 @@ Public Class dlgClimsoftWizard
             'include observation data checkbox
             parentControls.ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 4))
             parentControls.ucrChkObservationData.Text = "Include Observation Data"
-            parentControls.ucrChkObservationData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
             parentControls.ucrChkObservationData.SetRDefault("FALSE")
 
         End Sub
@@ -520,7 +522,7 @@ Public Class dlgClimsoftWizard
             'elements metadata checkbox
             parentControls.ucrChkElements.SetParameter(New RParameter("include_elements_info", 5))
             parentControls.ucrChkElements.Text = "Include Elements Metadata Data"
-            parentControls.ucrChkElements.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+            'parentControls.ucrChkElements.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
             parentControls.ucrChkElements.SetRDefault("FALSE")
 
             'unstack data checkbox
@@ -531,23 +533,22 @@ Public Class dlgClimsoftWizard
             parentControls.ucrChkDateRange.Text = "Select Date Range"
 
             'todo. datepicker control have a problem of default date. 
-            'Its Not set by defaultuntil the user changes current select date
+            'Its NOT set by defaultuntil the user changes current select date
 
             'start date datepicker
             parentControls.ucrDtpStartdate.SetParameter(New RParameter("start_date", 6))
             parentControls.ucrDtpStartdate.SetParameterIsRDate()
             parentControls.ucrDtpStartdate.SetLinkedDisplayControl(parentControls.lblStartDate)
-            'parentControls.ucrDtpStartdate.OnControlValueChanged() 'todo test this
 
             'end date datepicker
             parentControls.ucrDtpEndDate.SetParameter(New RParameter("end_date", 7))
             parentControls.ucrDtpEndDate.SetParameterIsRDate()
             parentControls.ucrDtpEndDate.SetLinkedDisplayControl(parentControls.lblEndDate)
-            'parentControls.ucrDtpEndDate.OnControlValueChanged() 'todo test this
 
             'linking datepickers
             parentControls.ucrChkDateRange.AddToLinkedControls({parentControls.ucrDtpStartdate, parentControls.ucrDtpEndDate}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-            'parentControls.ucrChkDateRange.OnControlValueChanged() 'todo test this
+            'This control has no R code, so we force event raise here
+            parentControls.ucrChkDateRange.OnControlValueChanged()
         End Sub
 
         Public Sub SetDefaults()

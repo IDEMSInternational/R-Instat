@@ -80,6 +80,11 @@ Public Class sdgImportFromClimSoft
         'set has connection R command
         clsRHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
 
+        'disconnect if was already connected 
+        If HasConnection() Then
+            Disconnect()
+        End If
+        bConnected = False
         UpdateConnectionState()
     End Sub
 
@@ -117,19 +122,27 @@ Public Class sdgImportFromClimSoft
         End If
     End Sub
 
-    Private Sub btnConnect_Click(sender As Object, e As EventArgs) Handles btnConnect.Click
+    Private Sub Disconnect()
+        frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
+    End Sub
+
+    Private Function HasConnection() As Boolean
         Dim expTemp As SymbolicExpression
+        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsRHasConnection.ToScript())
+        Return (Not expTemp.Type = Internals.SymbolicExpressionType.Null) AndAlso expTemp.AsLogical(0)
+    End Function
+
+    Private Sub btnConnect_Click(sender As Object, e As EventArgs) Handles btnConnect.Click
         btnConnect.Enabled = False 'temporary disable 
 
         'if was already connected, then user action is meant to disconnect else, try connecting to database
         If bConnected Then
-            frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
+            Disconnect()
             bConnected = False
         Else
             'will display an R password input prompt, to enter password and attempt connecting to database
             frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsRHasConnection.ToScript())
-            bConnected = (Not expTemp.Type = Internals.SymbolicExpressionType.Null) AndAlso expTemp.AsLogical(0)
+            bConnected = HasConnection()
         End If
         UpdateConnectionState()
         btnConnect.Enabled = True
