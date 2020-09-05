@@ -71,8 +71,10 @@ Public Class dlgBarAndPieChart
 
         ucrPnlOptions.AddRadioButton(rdoBarChart)
         ucrPnlOptions.AddRadioButton(rdoPieChart)
-        ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coord_polar")
-        ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coord_polar", False)
+
+        'commented out because the parameter can be present in both radio buttons option. See issue #5950 
+        'ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coord_polar")
+        'ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coord_polar", False)
 
         ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrInputBarChartPosition, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -155,6 +157,7 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
         ucrReceiverFirst.SetMeAsReceiver()
         ucrSaveBar.Reset()
+        rdoBarChart.Checked = True 'done manually here because the ucrPanel has no set R code
         bResetSubdialog = True
         bResetBarLayerSubdialog = True
 
@@ -205,7 +208,11 @@ Public Class dlgBarAndPieChart
         ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
         ucrSaveBar.SetRCode(clsBaseOperator, bReset)
         ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
-        ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
+
+        'commented until when there is unique parameters that can be used as parameter present condition setting
+        'for determining the radio button that will be checked. Currently its done manually. See issue #5950
+        'ucrPnlOptions.SetRCode(clsBaseOperator, bReset) 
+
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrInputBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
         ucrInputYValue.SetRCode(clsRgeomBarFunction, bReset)
