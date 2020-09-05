@@ -50,6 +50,7 @@ Public Class dlgClimSoft
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 329
 
+        'stations combobox
         dctStationColumns.Add("Station IDs", Chr(34) & "stationId" & Chr(34))
         dctStationColumns.Add("Station Names", Chr(34) & "stationName" & Chr(34))
         ucrComboBoxStations.SetParameter(New RParameter("stationfiltercolumn", 0))
@@ -58,13 +59,15 @@ Public Class dlgClimSoft
         ucrComboBoxStations.bAllowNonConditionValues = False
         ucrComboBoxStations.SetDropDownStyleAsNonEditable()
 
+        'stations receiver
         ucrReceiverMultipleStations.SetParameter(New RParameter("stations", 1))
         ucrReceiverMultipleStations.SetParameterIsString()
         ucrReceiverMultipleStations.Selector = ucrSelectorForClimSoft
         ucrReceiverMultipleStations.SetItemType("database_variables")
         ucrReceiverMultipleStations.strSelectorHeading = "Stations"
-        ucrReceiverMultipleElements.SetLinkedDisplayControl(lblStations)
+        ucrReceiverMultipleStations.SetLinkedDisplayControl(lblStations)
 
+        'elements combobox
         dctElementsColumns.Add("Element IDs", Chr(34) & "elementId" & Chr(34))
         dctElementsColumns.Add("Element Names", Chr(34) & "elementName" & Chr(34))
         dctElementsColumns.Add("Element Abbreviation", Chr(34) & "abbreviation" & Chr(34))
@@ -75,6 +78,7 @@ Public Class dlgClimSoft
         ucrComboBoxElements.bAllowNonConditionValues = False
         ucrComboBoxElements.SetDropDownStyleAsNonEditable()
 
+        'elements receiver
         ucrReceiverMultipleElements.SetParameter(New RParameter("elements", 3))
         ucrReceiverMultipleElements.SetParameterIsString()
         ucrReceiverMultipleElements.Selector = ucrSelectorForClimSoft
@@ -82,36 +86,47 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.strSelectorHeading = "Elements"
         ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
 
+        'include observation data checkbox
         ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 4))
         ucrChkObservationData.Text = "Include Observation Data"
-        ucrChkObservationData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkObservationData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkObservationData.SetRDefault("FALSE")
 
+        'elements metadata checkbox
         ucrChkElements.SetParameter(New RParameter("include_elements_info", 5))
         ucrChkElements.Text = "Include Elements Metadata Data"
-        ucrChkElements.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkElements.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkElements.SetRDefault("FALSE")
 
+        'unstack data checkbox
         ucrChkUnstackData.Text = "Unstack Data"
         ucrChkUnstackData.Visible = False 'hiddent until the feature is implemented
 
+        'date range checkbox
         ucrChkDateRange.Text = "Select Date Range"
-        ucrChkDateRange.SetDefaultState(False) 'todo delete this
+        'ucrChkDateRange.SetDefaultState(False) 'todo delete this
 
-        'todo. dates have a problem of defaults
+        'todo. datepicker control have a problem of default date. 
+        'Its Not set by defaultuntil the user changes current select date
+
+        'start date datepicker
         ucrDtpStartdate.SetParameter(New RParameter("start_date", 6))
         ucrDtpStartdate.SetParameterIsRDate()
         ucrDtpStartdate.SetLinkedDisplayControl(lblStartDate)
 
-        UcrDtpEndDate.SetParameter(New RParameter("end_date", 7))
-        UcrDtpEndDate.SetParameterIsRDate()
-        UcrDtpEndDate.SetLinkedDisplayControl(lblEndDate)
+        'end date datepicker
+        ucrDtpEndDate.SetParameter(New RParameter("end_date", 7))
+        ucrDtpEndDate.SetParameterIsRDate()
+        ucrDtpEndDate.SetLinkedDisplayControl(lblEndDate)
 
+        'linking observation data related controls  to include observation data checkbox
         ucrChkObservationData.AddToLinkedControls({ucrChkElements, ucrComboBoxElements, ucrReceiverMultipleElements}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'todo. we have a problem with how we will link this control. check on dlgImportDataSet??
         ucrChkObservationData.AddToLinkedControls({ucrChkDateRange}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkDateRange.AddToLinkedControls({ucrDtpStartdate, UcrDtpEndDate}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'linking datepickers to date range checkbox
+        ucrChkDateRange.AddToLinkedControls({ucrDtpStartdate, ucrDtpEndDate}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -120,6 +135,7 @@ Public Class dlgClimSoft
         ucrBase.clsRsyntax.SetBaseRFunction(clsRImportFromClimsoft)
         ucrReceiverMultipleStations.SetMeAsReceiver()
         ucrSelectorForClimSoft.Reset()
+        ucrChkDateRange.Checked = False
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -153,9 +169,10 @@ Public Class dlgClimSoft
     ''' <summary>
     ''' constructs and sets the stations reciver SQL query
     ''' </summary>
-    Private Sub SetStationsReceiverQuery()
+    ''' <returns>returns true if receivers query was changed</returns>
+    Private Function SetStationsReceiverQuery() As Boolean
         If dctStationColumns.Count < 1 Then
-            Exit Sub
+            Return False
         End If
 
         'sql query to get station values of the selected column from station table
@@ -163,18 +180,20 @@ Public Class dlgClimSoft
         strQuery = "SELECT " & dctStationColumns.Item(ucrComboBoxStations.GetText).Trim("""") & " FROM station;"
 
         If ucrReceiverMultipleStations.strDatabaseQuery = strQuery Then
-            Exit Sub
+            Return False
         End If
         ucrReceiverMultipleStations.Clear()
         ucrReceiverMultipleStations.strDatabaseQuery = strQuery
-    End Sub
+        Return True
+    End Function
 
     ''' <summary>
     ''' constructs and sets elements receiver SQL query
     ''' </summary>
-    Private Sub SetElementsRecieverQuery()
+    ''' <returns>returns true if receivers query was changed</returns>
+    Private Function SetElementsRecieverQuery() As Boolean
         If dctElementsColumns.Count < 1 Then
-            Exit Sub
+            Return False
         End If
 
         'sql query to get distinct element values of the selected column(obselement TABLE COLUMN) from the observationfinal table
@@ -191,27 +210,31 @@ Public Class dlgClimSoft
         strQuery &= ";"
 
         If ucrReceiverMultipleElements.strDatabaseQuery = strQuery Then
-            Exit Sub
+            Return False
         End If
         ucrReceiverMultipleElements.Clear()
         ucrReceiverMultipleElements.strDatabaseQuery = strQuery
-    End Sub
+        Return True
+    End Function
 
     Private Sub ucrComboBoxStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxStations.ControlValueChanged
-        SetStationsReceiverQuery()
-        ucrReceiverMultipleStations.SetMeAsReceiver() 'will also execute the receiver's sql query
+        If SetStationsReceiverQuery() Then
+            'set as selected receiver. will also execute the receiver's sql query
+            ucrReceiverMultipleStations.SetMeAsReceiver()
+        End If
     End Sub
-
-    Private Sub ucrComboBoxElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxElements.ControlValueChanged
-        SetElementsRecieverQuery()
-        ucrReceiverMultipleElements.SetMeAsReceiver() 'will also execute receiver's sql the query
-    End Sub
-
     Private Sub ucrReceiverMultipleStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlValueChanged
         If bIgnoreReceiverChanges Then
             Exit Sub
         End If
         SetElementsRecieverQuery()
+    End Sub
+
+    Private Sub ucrComboBoxElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxElements.ControlValueChanged
+        If SetElementsRecieverQuery() Then
+            'set as selected receiver. will also execute receiver's sql the query
+            ucrReceiverMultipleElements.SetMeAsReceiver()
+        End If
     End Sub
 
     Private Sub ucrControlsContents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlContentsChanged, ucrReceiverMultipleElements.ControlContentsChanged, ucrChkObservationData.ControlContentsChanged
@@ -226,5 +249,9 @@ Public Class dlgClimSoft
         End If
     End Sub
 
-
+    'todo. this is is a temporary event. To be delete after testing
+    Private Sub btnWizard_Click(sender As Object, e As EventArgs) Handles btnWizard.Click
+        Hide()
+        dlgClimsoftWizard.ShowDialog()
+    End Sub
 End Class

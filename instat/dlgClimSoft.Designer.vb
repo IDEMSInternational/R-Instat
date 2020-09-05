@@ -49,16 +49,17 @@ Partial Class dlgClimSoft
         Me.ucrChkElements = New instat.ucrCheck()
         Me.ucrChkDateRange = New instat.ucrCheck()
         Me.ucrChkObservationData = New instat.ucrCheck()
+        Me.ucrDtpEndDate = New instat.ucrDateTimePicker()
+        Me.ucrDtpStartdate = New instat.ucrDateTimePicker()
         Me.ucrComboBoxElements = New instat.ucrInputComboBox()
         Me.ucrComboBoxStations = New instat.ucrInputComboBox()
         Me.ucrChkUnstackData = New instat.ucrCheck()
-        Me.UcrDtpEndDate = New instat.ucrDateTimePicker()
-        Me.ucrDtpStartdate = New instat.ucrDateTimePicker()
         Me.ucrSelectorForClimSoft = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMultipleStations = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblConnection = New System.Windows.Forms.Label()
+        Me.btnWizard = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnEstablishConnection
@@ -96,7 +97,7 @@ Partial Class dlgClimSoft
         '
         'ucrChkDateRange
         '
-        Me.ucrChkDateRange.Checked = True
+        Me.ucrChkDateRange.Checked = False
         resources.ApplyResources(Me.ucrChkDateRange, "ucrChkDateRange")
         Me.ucrChkDateRange.Name = "ucrChkDateRange"
         Me.ttClimsoft.SetToolTip(Me.ucrChkDateRange, resources.GetString("ucrChkDateRange.ToolTip"))
@@ -107,6 +108,22 @@ Partial Class dlgClimSoft
         resources.ApplyResources(Me.ucrChkObservationData, "ucrChkObservationData")
         Me.ucrChkObservationData.Name = "ucrChkObservationData"
         Me.ttClimsoft.SetToolTip(Me.ucrChkObservationData, resources.GetString("ucrChkObservationData.ToolTip"))
+        '
+        'ucrDtpEndDate
+        '
+        resources.ApplyResources(Me.ucrDtpEndDate, "ucrDtpEndDate")
+        Me.ucrDtpEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpEndDate.Name = "ucrDtpEndDate"
+        Me.ttClimsoft.SetToolTip(Me.ucrDtpEndDate, resources.GetString("ucrDtpEndDate.ToolTip"))
+        '
+        'ucrDtpStartdate
+        '
+        resources.ApplyResources(Me.ucrDtpStartdate, "ucrDtpStartdate")
+        Me.ucrDtpStartdate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpStartdate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpStartdate.Name = "ucrDtpStartdate"
+        Me.ttClimsoft.SetToolTip(Me.ucrDtpStartdate, resources.GetString("ucrDtpStartdate.ToolTip"))
         '
         'ucrComboBoxElements
         '
@@ -129,22 +146,6 @@ Partial Class dlgClimSoft
         Me.ucrChkUnstackData.Checked = False
         resources.ApplyResources(Me.ucrChkUnstackData, "ucrChkUnstackData")
         Me.ucrChkUnstackData.Name = "ucrChkUnstackData"
-        '
-        'UcrDtpEndDate
-        '
-        resources.ApplyResources(Me.UcrDtpEndDate, "UcrDtpEndDate")
-        Me.UcrDtpEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.UcrDtpEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.UcrDtpEndDate.Name = "UcrDtpEndDate"
-        Me.ttClimsoft.SetToolTip(Me.UcrDtpEndDate, resources.GetString("UcrDtpEndDate.ToolTip"))
-        '
-        'ucrDtpStartdate
-        '
-        resources.ApplyResources(Me.ucrDtpStartdate, "ucrDtpStartdate")
-        Me.ucrDtpStartdate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDtpStartdate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDtpStartdate.Name = "ucrDtpStartdate"
-        Me.ttClimsoft.SetToolTip(Me.ucrDtpStartdate, resources.GetString("ucrDtpStartdate.ToolTip"))
         '
         'ucrSelectorForClimSoft
         '
@@ -178,19 +179,27 @@ Partial Class dlgClimSoft
         'lblConnection
         '
         resources.ApplyResources(Me.lblConnection, "lblConnection")
+        Me.lblConnection.ForeColor = System.Drawing.Color.Red
         Me.lblConnection.Name = "lblConnection"
+        '
+        'btnWizard
+        '
+        resources.ApplyResources(Me.btnWizard, "btnWizard")
+        Me.btnWizard.Name = "btnWizard"
+        Me.btnWizard.UseVisualStyleBackColor = True
         '
         'dlgClimSoft
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.btnWizard)
         Me.Controls.Add(Me.lblConnection)
         Me.Controls.Add(Me.ucrChkElements)
         Me.Controls.Add(Me.ucrComboBoxElements)
         Me.Controls.Add(Me.ucrComboBoxStations)
         Me.Controls.Add(Me.ucrChkDateRange)
         Me.Controls.Add(Me.ucrChkUnstackData)
-        Me.Controls.Add(Me.UcrDtpEndDate)
+        Me.Controls.Add(Me.ucrDtpEndDate)
         Me.Controls.Add(Me.ucrDtpStartdate)
         Me.Controls.Add(Me.ucrChkObservationData)
         Me.Controls.Add(Me.lblEndDate)
@@ -222,7 +231,7 @@ Partial Class dlgClimSoft
     Friend WithEvents lblEndDate As Label
     Friend WithEvents ttClimsoft As ToolTip
     Friend WithEvents ucrChkUnstackData As ucrCheck
-    Friend WithEvents UcrDtpEndDate As ucrDateTimePicker
+    Friend WithEvents ucrDtpEndDate As ucrDateTimePicker
     Friend WithEvents ucrDtpStartdate As ucrDateTimePicker
     Friend WithEvents ucrChkObservationData As ucrCheck
     Friend WithEvents ucrChkDateRange As ucrCheck
@@ -230,4 +239,5 @@ Partial Class dlgClimSoft
     Friend WithEvents ucrComboBoxElements As ucrInputComboBox
     Friend WithEvents ucrChkElements As ucrCheck
     Friend WithEvents lblConnection As Label
+    Friend WithEvents btnWizard As Button
 End Class

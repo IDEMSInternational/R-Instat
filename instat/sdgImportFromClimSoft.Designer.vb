@@ -76,6 +76,7 @@ Partial Class sdgImportFromClimSoft
         'lblConnection
         '
         resources.ApplyResources(Me.lblConnection, "lblConnection")
+        Me.lblConnection.ForeColor = System.Drawing.Color.Red
         Me.lblConnection.Name = "lblConnection"
         '
         'chkRememberCredentials
