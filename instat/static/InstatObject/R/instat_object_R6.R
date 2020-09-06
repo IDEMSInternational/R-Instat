@@ -2088,8 +2088,8 @@ DataBook$set("public","package_check", function(package) {
 }
 )
 
-DataBook$set("public","patch_climate_element", function(data_name, date_col_name = "", var = "",  vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name) {
-  self$get_data_objects(data_name)$patch_climate_element(date_col_name = date_col_name,var = var, vars = vars, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, column_name = column_name)
+DataBook$set("public","patch_climate_element", function(data_name, date_col_name = "", var = "",  vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name, station_col_name = station_col_name) {
+  self$get_data_objects(data_name)$patch_climate_element(date_col_name = date_col_name,var = var, vars = vars, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, column_name = column_name, station_col_name = station_col_name)
 }
 )
 

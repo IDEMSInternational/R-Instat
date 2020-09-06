@@ -3628,25 +3628,53 @@ DataSheet$set("public", "get_variable_sets", function(set_names, force_as_list) 
 }
 )
 
-DataSheet$set("public", "patch_climate_element", function(date_col_name = "", var = "",  vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name){
+DataSheet$set("public", "patch_climate_element", function(date_col_name = "", var = "",  vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name, station_col_name){
   if(missing(date_col_name))stop("date is missing with no default")
   if(missing(var))stop("var is missing with no default")
   if(missing(vars))stop("vars is missing with no default")
   date_col <- self$get_columns_from_data(date_col_name, use_current_filter = FALSE)
   if(!lubridate::is.Date(date_col)) stop("This column must be a date or time!")
-  var_col <- self$get_columns_from_data(var, use_current_filter = FALSE)
-  Year <- lubridate::year(date_col); Month <- lubridate::month(date_col); Day <- lubridate::day(date_col)
-  weather <- data.frame(Year, Month, Day, var_col)
-  colnames(weather)[4] <- var
-  patch_weather <- list()
-  for (i in seq_along(vars)) {
-    col <- self$get_columns_from_data(vars[i], use_current_filter = FALSE)
-    patch_weather[[i]] <- data.frame(Year, Month, Day, col)
-    colnames(patch_weather[[i]])[4] <- var
+  curr_data <- self$get_data_frame()
+  if(!missing(station_col_name)) {
+    station_col <- self$get_columns_from_data(station_col_name, use_current_filter = FALSE)
+    station_names <- unique(station_col)
+    list_out <- list()
+    for (i in seq_along(station_names)) {
+      temp_data <- curr_data[station_col==station_names[i],] 
+      var_col <- temp_data[,var]
+      date_col <- temp_data[,date_col_name]
+      Year <- lubridate::year(date_col); Month <- lubridate::month(date_col); Day <- lubridate::day(date_col)
+      weather <- data.frame(Year, Month, Day, var_col)
+      colnames(weather)[4] <- var
+      patch_weather <- list()
+    for (j in seq_along(vars)) {
+      col <- temp_data[,vars[j]]
+      patch_weather[[j]] <- data.frame(Year, Month, Day, col)
+      colnames(patch_weather[[j]])[4] <- var
+    }
+  out <- chillR::patch_daily_temperatures(weather = weather, patch_weather = patch_weather, vars = var, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias)
+  list_out[[i]] <- out[[1]][,var]
+  print(out[[2]])
+    }
+  }else{
+    var_col <- self$get_columns_from_data(var, use_current_filter = FALSE)
+    Year <- lubridate::year(date_col); Month <- lubridate::month(date_col); Day <- lubridate::day(date_col)
+    weather <- data.frame(Year, Month, Day, var_col)
+    colnames(weather)[4] <- var
+    patch_weather <- list()
+    for (i in seq_along(vars)) {
+      col <- self$get_columns_from_data(vars[i], use_current_filter = FALSE)
+      patch_weather[[i]] <- data.frame(Year, Month, Day, col)
+      colnames(patch_weather[[i]])[4] <- var
+    }
   }
-  out <-  chillR::patch_daily_temperatures(weather = weather, patch_weather = patch_weather, vars = var, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias)
-  self$add_columns_to_data(col_name = column_name, col_data = out[[1]][,var])
-  return(out[[2]])
+  if(!missing(station_col_name)) {col <- unlist(list_out)}
+  else{
+    out <- chillR::patch_daily_temperatures(weather = weather, patch_weather = patch_weather, vars = var, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias)
+    col <- out[[1]][,var]
+    print(out[[2]])
+    }
+  self$add_columns_to_data(col_name = column_name, col_data = col)
 }
 )
 
@@ -3663,38 +3691,31 @@ DataSheet$set("public", "visualize_element_na", function(element_col_name, eleme
         temp_data <- curr_data[station_col==station_names[i],] 
         plt_list[[i]] <- imputeTS::ggplot_na_distribution(x = temp_data[,element_col_name], x_axis_labels = temp_data[,x_axis_labels_col_name], title = station_names[i], xlab = xlab, ylab = ylab) 
       }
-    }else{
-      imputeTS::ggplot_na_distribution(x = element_col, x_axis_labels = curr_data[,x_axis_labels_col_name], xlab = xlab, ylab = ylab) 
-    }
+    }else{plt <- imputeTS::ggplot_na_distribution(x = element_col, x_axis_labels = curr_data[,x_axis_labels_col_name], xlab = xlab, ylab = ylab)}
   }else if (type == "gapsize"){
     if(!missing(station_col_name)){
       for (i in seq_along(station_names)) {
         temp_data <- curr_data[station_col==station_names[i],] 
         plt_list[[i]] <- imputeTS::ggplot_na_gapsize(x = temp_data[,element_col_name], include_total = TRUE, title =paste0(station_names[i], ":Occurrence of gap sizes"), xlab = xlab, ylab = ylab, legend = legend, orientation = orientation) 
       }
-    }else{
-      imputeTS::ggplot_na_gapsize(x = element_col, include_total = TRUE, xlab = xlab, ylab = ylab, legend = legend, orientation = orientation) 
-    }
+    }else{plt <- imputeTS::ggplot_na_gapsize(x = element_col, include_total = TRUE, xlab = xlab, ylab = ylab, legend = legend, orientation = orientation)}
   }else if(type == "interval"){
       if(!missing(station_col_name)){
         for (i in seq_along(station_names)) {
           temp_data <- curr_data[station_col==station_names[i],] 
           plt_list[[i]] <- imputeTS::ggplot_na_intervals(x = temp_data[,element_col_name], title = paste0(station_names[i], ":Missing Values per Interval"), ylab = ylab, interval_size = interval_size) 
         }
-      }else{
-        imputeTS::ggplot_na_intervals(x = element_col, ylab = ylab, interval_size = interval_size) 
-      }
+      }else{plt <- imputeTS::ggplot_na_intervals(x = element_col, ylab = ylab, interval_size = interval_size)}
   }else if (type == "imputation"){
     if(!missing(station_col_name)){
       for (i in seq_along(station_names)) {
         temp_data <- curr_data[station_col==station_names[i],] 
         plt_list[[i]] <- imputeTS::ggplot_na_imputations(x_with_na = temp_data[,element_col_name], x_with_imputations = temp_data[,element_col_name_imputed], x_axis_labels = temp_data[,x_axis_labels_col_name], title = station_names[i], xlab = xlab, ylab = ylab, legend = legend) 
       }
-    }else{
-      imputeTS::ggplot_na_imputations(x_with_na = element_col, x_with_imputations = element_imputed_col, x_axis_labels = curr_data[,x_axis_labels_col_name], xlab = xlab, ylab = ylab, legend = legend) 
-    }
+    }else{plt <- imputeTS::ggplot_na_imputations(x_with_na = element_col, x_with_imputations = element_imputed_col, x_axis_labels = curr_data[,x_axis_labels_col_name], xlab = xlab, ylab = ylab, legend = legend)}
   }
-  if(!missing(station_col_name)) gridExtra::grid.arrange(grobs = plt_list, ncol = ncol)
+  if(!missing(station_col_name)) {gridExtra::grid.arrange(grobs = plt_list, ncol = ncol)}
+  else{return(plt)}
 }
 )
 
