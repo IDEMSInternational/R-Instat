@@ -30,8 +30,8 @@ Partial Class dlgInfillMissingValues
         Me.rdoNaAggregate = New System.Windows.Forms.RadioButton()
         Me.rdoNaApproximate = New System.Windows.Forms.RadioButton()
         Me.lblElement = New System.Windows.Forms.Label()
-        Me.rdoSingle = New System.Windows.Forms.RadioButton()
-        Me.rdoMultiple = New System.Windows.Forms.RadioButton()
+        Me.rdoFitSingle = New System.Windows.Forms.RadioButton()
+        Me.rdoFitMultiple = New System.Windows.Forms.RadioButton()
         Me.grpMethods = New System.Windows.Forms.GroupBox()
         Me.ucrPnlMethods = New instat.UcrPanel()
         Me.grpStartEnd = New System.Windows.Forms.GroupBox()
@@ -47,6 +47,18 @@ Partial Class dlgInfillMissingValues
         Me.lblObserved = New System.Windows.Forms.Label()
         Me.lblMultipleStation = New System.Windows.Forms.Label()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
+        Me.rdoDisplay = New System.Windows.Forms.RadioButton()
+        Me.rdoShow = New System.Windows.Forms.RadioButton()
+        Me.lblFacetColumns = New System.Windows.Forms.Label()
+        Me.lblImputed = New System.Windows.Forms.Label()
+        Me.lblDisplayElement = New System.Windows.Forms.Label()
+        Me.lblDisplayDate = New System.Windows.Forms.Label()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrNudFacetColumns = New instat.ucrNud()
+        Me.ucrReceiverImputed = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDisplayObserved = New instat.ucrReceiverSingle()
+        Me.ucrReceiverDisplayShowDate = New instat.ucrReceiverSingle()
+        Me.ucrInputNewColumnName = New instat.ucrInputTextBox()
         Me.ucrReceiverMultipleStation = New instat.ucrReceiverSingle()
         Me.ucrInputStdBias = New instat.ucrInputTextBox()
         Me.ucrInputMeanBias = New instat.ucrInputTextBox()
@@ -70,7 +82,13 @@ Partial Class dlgInfillMissingValues
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorInfillMissing = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrInputNewColumnName = New instat.ucrInputTextBox()
+        Me.ucrChkAddLegend = New instat.ucrCheck()
+        Me.ucrInputComboType = New instat.ucrInputComboBox()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.ucrChkFlipCordinates = New instat.ucrCheck()
+        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
+        Me.ucrInputIntervalSize = New instat.ucrInputTextBox()
+        Me.lblIntervalSize = New System.Windows.Forms.Label()
         Me.grpMethods.SuspendLayout()
         Me.grpStartEnd.SuspendLayout()
         Me.SuspendLayout()
@@ -122,25 +140,25 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.lblElement, "lblElement")
         Me.lblElement.Name = "lblElement"
         '
-        'rdoSingle
+        'rdoFitSingle
         '
-        resources.ApplyResources(Me.rdoSingle, "rdoSingle")
-        Me.rdoSingle.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSingle.FlatAppearance.BorderSize = 2
-        Me.rdoSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSingle.Name = "rdoSingle"
-        Me.rdoSingle.TabStop = True
-        Me.rdoSingle.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoFitSingle, "rdoFitSingle")
+        Me.rdoFitSingle.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFitSingle.FlatAppearance.BorderSize = 2
+        Me.rdoFitSingle.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFitSingle.Name = "rdoFitSingle"
+        Me.rdoFitSingle.TabStop = True
+        Me.rdoFitSingle.UseVisualStyleBackColor = True
         '
-        'rdoMultiple
+        'rdoFitMultiple
         '
-        resources.ApplyResources(Me.rdoMultiple, "rdoMultiple")
-        Me.rdoMultiple.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultiple.FlatAppearance.BorderSize = 2
-        Me.rdoMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoMultiple.Name = "rdoMultiple"
-        Me.rdoMultiple.TabStop = True
-        Me.rdoMultiple.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoFitMultiple, "rdoFitMultiple")
+        Me.rdoFitMultiple.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFitMultiple.FlatAppearance.BorderSize = 2
+        Me.rdoFitMultiple.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFitMultiple.Name = "rdoFitMultiple"
+        Me.rdoFitMultiple.TabStop = True
+        Me.rdoFitMultiple.UseVisualStyleBackColor = True
         '
         'grpMethods
         '
@@ -232,6 +250,96 @@ Partial Class dlgInfillMissingValues
         '
         resources.ApplyResources(Me.lblNewColumnName, "lblNewColumnName")
         Me.lblNewColumnName.Name = "lblNewColumnName"
+        '
+        'rdoDisplay
+        '
+        resources.ApplyResources(Me.rdoDisplay, "rdoDisplay")
+        Me.rdoDisplay.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDisplay.FlatAppearance.BorderSize = 2
+        Me.rdoDisplay.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDisplay.Name = "rdoDisplay"
+        Me.rdoDisplay.TabStop = True
+        Me.rdoDisplay.UseVisualStyleBackColor = True
+        '
+        'rdoShow
+        '
+        resources.ApplyResources(Me.rdoShow, "rdoShow")
+        Me.rdoShow.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoShow.FlatAppearance.BorderSize = 2
+        Me.rdoShow.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoShow.Name = "rdoShow"
+        Me.rdoShow.TabStop = True
+        Me.rdoShow.UseVisualStyleBackColor = True
+        '
+        'lblFacetColumns
+        '
+        resources.ApplyResources(Me.lblFacetColumns, "lblFacetColumns")
+        Me.lblFacetColumns.Name = "lblFacetColumns"
+        '
+        'lblImputed
+        '
+        resources.ApplyResources(Me.lblImputed, "lblImputed")
+        Me.lblImputed.Name = "lblImputed"
+        '
+        'lblDisplayElement
+        '
+        resources.ApplyResources(Me.lblDisplayElement, "lblDisplayElement")
+        Me.lblDisplayElement.Name = "lblDisplayElement"
+        '
+        'lblDisplayDate
+        '
+        resources.ApplyResources(Me.lblDisplayDate, "lblDisplayDate")
+        Me.lblDisplayDate.Name = "lblDisplayDate"
+        '
+        'ucrSaveGraph
+        '
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        '
+        'ucrNudFacetColumns
+        '
+        Me.ucrNudFacetColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFacetColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudFacetColumns, "ucrNudFacetColumns")
+        Me.ucrNudFacetColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFacetColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFacetColumns.Name = "ucrNudFacetColumns"
+        Me.ucrNudFacetColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrReceiverImputed
+        '
+        Me.ucrReceiverImputed.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverImputed, "ucrReceiverImputed")
+        Me.ucrReceiverImputed.Name = "ucrReceiverImputed"
+        Me.ucrReceiverImputed.Selector = Nothing
+        Me.ucrReceiverImputed.strNcFilePath = ""
+        Me.ucrReceiverImputed.ucrSelector = Nothing
+        '
+        'ucrReceiverDisplayObserved
+        '
+        Me.ucrReceiverDisplayObserved.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDisplayObserved, "ucrReceiverDisplayObserved")
+        Me.ucrReceiverDisplayObserved.Name = "ucrReceiverDisplayObserved"
+        Me.ucrReceiverDisplayObserved.Selector = Nothing
+        Me.ucrReceiverDisplayObserved.strNcFilePath = ""
+        Me.ucrReceiverDisplayObserved.ucrSelector = Nothing
+        '
+        'ucrReceiverDisplayShowDate
+        '
+        Me.ucrReceiverDisplayShowDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDisplayShowDate, "ucrReceiverDisplayShowDate")
+        Me.ucrReceiverDisplayShowDate.Name = "ucrReceiverDisplayShowDate"
+        Me.ucrReceiverDisplayShowDate.Selector = Nothing
+        Me.ucrReceiverDisplayShowDate.strNcFilePath = ""
+        Me.ucrReceiverDisplayShowDate.ucrSelector = Nothing
+        '
+        'ucrInputNewColumnName
+        '
+        Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewColumnName.IsMultiline = False
+        Me.ucrInputNewColumnName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNewColumnName, "ucrInputNewColumnName")
+        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
         '
         'ucrReceiverMultipleStation
         '
@@ -407,18 +515,72 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
-        'ucrInputNewColumnName
+        'ucrChkAddLegend
         '
-        Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
-        Me.ucrInputNewColumnName.IsMultiline = False
-        Me.ucrInputNewColumnName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNewColumnName, "ucrInputNewColumnName")
-        Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
+        Me.ucrChkAddLegend.Checked = False
+        resources.ApplyResources(Me.ucrChkAddLegend, "ucrChkAddLegend")
+        Me.ucrChkAddLegend.Name = "ucrChkAddLegend"
+        '
+        'ucrInputComboType
+        '
+        Me.ucrInputComboType.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboType.GetSetSelectedIndex = -1
+        Me.ucrInputComboType.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboType, "ucrInputComboType")
+        Me.ucrInputComboType.Name = "ucrInputComboType"
+        '
+        'lblType
+        '
+        resources.ApplyResources(Me.lblType, "lblType")
+        Me.lblType.Name = "lblType"
+        '
+        'ucrChkFlipCordinates
+        '
+        Me.ucrChkFlipCordinates.Checked = False
+        resources.ApplyResources(Me.ucrChkFlipCordinates, "ucrChkFlipCordinates")
+        Me.ucrChkFlipCordinates.Name = "ucrChkFlipCordinates"
+        '
+        'cmdDisplayOptions
+        '
+        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
+        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
+        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
+        '
+        'ucrInputIntervalSize
+        '
+        Me.ucrInputIntervalSize.AddQuotesIfUnrecognised = True
+        Me.ucrInputIntervalSize.IsMultiline = False
+        Me.ucrInputIntervalSize.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputIntervalSize, "ucrInputIntervalSize")
+        Me.ucrInputIntervalSize.Name = "ucrInputIntervalSize"
+        '
+        'lblIntervalSize
+        '
+        resources.ApplyResources(Me.lblIntervalSize, "lblIntervalSize")
+        Me.lblIntervalSize.Name = "lblIntervalSize"
         '
         'dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblIntervalSize)
+        Me.Controls.Add(Me.ucrInputIntervalSize)
+        Me.Controls.Add(Me.cmdDisplayOptions)
+        Me.Controls.Add(Me.ucrChkFlipCordinates)
+        Me.Controls.Add(Me.lblType)
+        Me.Controls.Add(Me.ucrInputComboType)
+        Me.Controls.Add(Me.ucrChkAddLegend)
+        Me.Controls.Add(Me.ucrSaveGraph)
+        Me.Controls.Add(Me.lblDisplayDate)
+        Me.Controls.Add(Me.lblDisplayElement)
+        Me.Controls.Add(Me.lblImputed)
+        Me.Controls.Add(Me.lblFacetColumns)
+        Me.Controls.Add(Me.ucrNudFacetColumns)
+        Me.Controls.Add(Me.ucrReceiverImputed)
+        Me.Controls.Add(Me.ucrReceiverDisplayObserved)
+        Me.Controls.Add(Me.ucrReceiverDisplayShowDate)
+        Me.Controls.Add(Me.rdoShow)
+        Me.Controls.Add(Me.rdoDisplay)
         Me.Controls.Add(Me.ucrInputNewColumnName)
         Me.Controls.Add(Me.lblMultipleStation)
         Me.Controls.Add(Me.lblNewColumnName)
@@ -449,8 +611,8 @@ Partial Class dlgInfillMissingValues
         Me.Controls.Add(Me.lblFunction)
         Me.Controls.Add(Me.ucrSaveNewColumn)
         Me.Controls.Add(Me.ucrInputComboFunction)
-        Me.Controls.Add(Me.rdoMultiple)
-        Me.Controls.Add(Me.rdoSingle)
+        Me.Controls.Add(Me.rdoFitMultiple)
+        Me.Controls.Add(Me.rdoFitSingle)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrBase)
@@ -480,8 +642,8 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents rdoNaLocf As RadioButton
     Friend WithEvents rdoNaStructTS As RadioButton
     Friend WithEvents lblElement As Label
-    Friend WithEvents rdoMultiple As RadioButton
-    Friend WithEvents rdoSingle As RadioButton
+    Friend WithEvents rdoFitMultiple As RadioButton
+    Friend WithEvents rdoFitSingle As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents ucrPnlMethods As UcrPanel
     Friend WithEvents grpMethods As GroupBox
@@ -518,4 +680,22 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrReceiverMultipleStation As ucrReceiverSingle
     Friend WithEvents ucrInputNewColumnName As ucrInputTextBox
     Friend WithEvents lblNewColumnName As Label
+    Friend WithEvents rdoShow As RadioButton
+    Friend WithEvents rdoDisplay As RadioButton
+    Friend WithEvents ucrReceiverDisplayObserved As ucrReceiverSingle
+    Friend WithEvents ucrReceiverDisplayShowDate As ucrReceiverSingle
+    Friend WithEvents ucrReceiverImputed As ucrReceiverSingle
+    Friend WithEvents ucrNudFacetColumns As ucrNud
+    Friend WithEvents lblFacetColumns As Label
+    Friend WithEvents lblImputed As Label
+    Friend WithEvents lblDisplayDate As Label
+    Friend WithEvents lblDisplayElement As Label
+    Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrChkAddLegend As ucrCheck
+    Friend WithEvents lblType As Label
+    Friend WithEvents ucrInputComboType As ucrInputComboBox
+    Friend WithEvents ucrChkFlipCordinates As ucrCheck
+    Friend WithEvents cmdDisplayOptions As Button
+    Friend WithEvents lblIntervalSize As Label
+    Friend WithEvents ucrInputIntervalSize As ucrInputTextBox
 End Class
