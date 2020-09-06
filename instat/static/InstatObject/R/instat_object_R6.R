@@ -2093,7 +2093,7 @@ DataBook$set("public","patch_climate_element", function(data_name, date_col_name
 }
 )
 
-DataBook$set("public","visualize_element_na", function(data_name, element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = interval_size) {
-  self$get_data_objects(data_name)$visualize_element_na(element_col_name = element_col_name, element_col_name_imputed =element_col_name_imputed, station_col_name = station_col_name, x_axis_labels_col_name = x_axis_labels_col_name, ncol = ncol, type = type, xlab = xlab, ylab = ylab, legend = legend, orientation = orientation, interval_size = interval_size)
+DataBook$set("public","visualize_element_na", function(data_name, element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = interval_size, x_with_truth = NULL) {
+  self$get_data_objects(data_name)$visualize_element_na(element_col_name = element_col_name, element_col_name_imputed =element_col_name_imputed, station_col_name = station_col_name, x_axis_labels_col_name = x_axis_labels_col_name, ncol = ncol, type = type, xlab = xlab, ylab = ylab, legend = legend, orientation = orientation, interval_size = interval_size, x_with_truth = x_with_truth)
 }
 )
