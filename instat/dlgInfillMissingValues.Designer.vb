@@ -45,7 +45,6 @@ Partial Class dlgInfillMissingValues
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblEstimated = New System.Windows.Forms.Label()
         Me.lblObserved = New System.Windows.Forms.Label()
-        Me.lblMultipleStation = New System.Windows.Forms.Label()
         Me.lblNewColumnName = New System.Windows.Forms.Label()
         Me.rdoDisplay = New System.Windows.Forms.RadioButton()
         Me.rdoShow = New System.Windows.Forms.RadioButton()
@@ -59,7 +58,6 @@ Partial Class dlgInfillMissingValues
         Me.ucrReceiverDisplayObserved = New instat.ucrReceiverSingle()
         Me.ucrReceiverDisplayShowDate = New instat.ucrReceiverSingle()
         Me.ucrInputNewColumnName = New instat.ucrInputTextBox()
-        Me.ucrReceiverMultipleStation = New instat.ucrReceiverSingle()
         Me.ucrInputStdBias = New instat.ucrInputTextBox()
         Me.ucrInputMeanBias = New instat.ucrInputTextBox()
         Me.ucrChkStdBias = New instat.ucrCheck()
@@ -89,6 +87,8 @@ Partial Class dlgInfillMissingValues
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.ucrInputIntervalSize = New instat.ucrInputTextBox()
         Me.lblIntervalSize = New System.Windows.Forms.Label()
+        Me.ucrReceiverDispMultShowStation = New instat.ucrReceiverSingle()
+        Me.lblDispMultShowStation = New System.Windows.Forms.Label()
         Me.grpMethods.SuspendLayout()
         Me.grpStartEnd.SuspendLayout()
         Me.SuspendLayout()
@@ -241,11 +241,6 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.lblObserved, "lblObserved")
         Me.lblObserved.Name = "lblObserved"
         '
-        'lblMultipleStation
-        '
-        resources.ApplyResources(Me.lblMultipleStation, "lblMultipleStation")
-        Me.lblMultipleStation.Name = "lblMultipleStation"
-        '
         'lblNewColumnName
         '
         resources.ApplyResources(Me.lblNewColumnName, "lblNewColumnName")
@@ -340,15 +335,6 @@ Partial Class dlgInfillMissingValues
         Me.ucrInputNewColumnName.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputNewColumnName, "ucrInputNewColumnName")
         Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
-        '
-        'ucrReceiverMultipleStation
-        '
-        Me.ucrReceiverMultipleStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultipleStation, "ucrReceiverMultipleStation")
-        Me.ucrReceiverMultipleStation.Name = "ucrReceiverMultipleStation"
-        Me.ucrReceiverMultipleStation.Selector = Nothing
-        Me.ucrReceiverMultipleStation.strNcFilePath = ""
-        Me.ucrReceiverMultipleStation.ucrSelector = Nothing
         '
         'ucrInputStdBias
         '
@@ -559,10 +545,26 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.lblIntervalSize, "lblIntervalSize")
         Me.lblIntervalSize.Name = "lblIntervalSize"
         '
+        'ucrReceiverDispMultShowStation
+        '
+        Me.ucrReceiverDispMultShowStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDispMultShowStation, "ucrReceiverDispMultShowStation")
+        Me.ucrReceiverDispMultShowStation.Name = "ucrReceiverDispMultShowStation"
+        Me.ucrReceiverDispMultShowStation.Selector = Nothing
+        Me.ucrReceiverDispMultShowStation.strNcFilePath = ""
+        Me.ucrReceiverDispMultShowStation.ucrSelector = Nothing
+        '
+        'lblDispMultShowStation
+        '
+        resources.ApplyResources(Me.lblDispMultShowStation, "lblDispMultShowStation")
+        Me.lblDispMultShowStation.Name = "lblDispMultShowStation"
+        '
         'dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblDispMultShowStation)
+        Me.Controls.Add(Me.ucrReceiverDispMultShowStation)
         Me.Controls.Add(Me.lblIntervalSize)
         Me.Controls.Add(Me.ucrInputIntervalSize)
         Me.Controls.Add(Me.cmdDisplayOptions)
@@ -582,9 +584,7 @@ Partial Class dlgInfillMissingValues
         Me.Controls.Add(Me.rdoShow)
         Me.Controls.Add(Me.rdoDisplay)
         Me.Controls.Add(Me.ucrInputNewColumnName)
-        Me.Controls.Add(Me.lblMultipleStation)
         Me.Controls.Add(Me.lblNewColumnName)
-        Me.Controls.Add(Me.ucrReceiverMultipleStation)
         Me.Controls.Add(Me.ucrInputStdBias)
         Me.Controls.Add(Me.ucrInputMeanBias)
         Me.Controls.Add(Me.ucrChkStdBias)
@@ -676,8 +676,6 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrChkMeanBias As ucrCheck
     Friend WithEvents ucrInputStdBias As ucrInputTextBox
     Friend WithEvents ucrInputMeanBias As ucrInputTextBox
-    Friend WithEvents lblMultipleStation As Label
-    Friend WithEvents ucrReceiverMultipleStation As ucrReceiverSingle
     Friend WithEvents ucrInputNewColumnName As ucrInputTextBox
     Friend WithEvents lblNewColumnName As Label
     Friend WithEvents rdoShow As RadioButton
@@ -698,4 +696,6 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents cmdDisplayOptions As Button
     Friend WithEvents lblIntervalSize As Label
     Friend WithEvents ucrInputIntervalSize As ucrInputTextBox
+    Friend WithEvents lblDispMultShowStation As Label
+    Friend WithEvents ucrReceiverDispMultShowStation As ucrReceiverSingle
 End Class
