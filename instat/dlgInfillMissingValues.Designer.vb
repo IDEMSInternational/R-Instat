@@ -89,6 +89,8 @@ Partial Class dlgInfillMissingValues
         Me.lblIntervalSize = New System.Windows.Forms.Label()
         Me.ucrReceiverDispMultShowStation = New instat.ucrReceiverSingle()
         Me.lblDispMultShowStation = New System.Windows.Forms.Label()
+        Me.ucrReceiverTrueValues = New instat.ucrReceiverSingle()
+        Me.lblTrueValues = New System.Windows.Forms.Label()
         Me.grpMethods.SuspendLayout()
         Me.grpStartEnd.SuspendLayout()
         Me.SuspendLayout()
@@ -559,10 +561,26 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.lblDispMultShowStation, "lblDispMultShowStation")
         Me.lblDispMultShowStation.Name = "lblDispMultShowStation"
         '
+        'ucrReceiverTrueValues
+        '
+        Me.ucrReceiverTrueValues.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverTrueValues, "ucrReceiverTrueValues")
+        Me.ucrReceiverTrueValues.Name = "ucrReceiverTrueValues"
+        Me.ucrReceiverTrueValues.Selector = Nothing
+        Me.ucrReceiverTrueValues.strNcFilePath = ""
+        Me.ucrReceiverTrueValues.ucrSelector = Nothing
+        '
+        'lblTrueValues
+        '
+        resources.ApplyResources(Me.lblTrueValues, "lblTrueValues")
+        Me.lblTrueValues.Name = "lblTrueValues"
+        '
         'dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverTrueValues)
+        Me.Controls.Add(Me.lblTrueValues)
         Me.Controls.Add(Me.lblDispMultShowStation)
         Me.Controls.Add(Me.ucrReceiverDispMultShowStation)
         Me.Controls.Add(Me.lblIntervalSize)
@@ -698,4 +716,6 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrInputIntervalSize As ucrInputTextBox
     Friend WithEvents lblDispMultShowStation As Label
     Friend WithEvents ucrReceiverDispMultShowStation As ucrReceiverSingle
+    Friend WithEvents lblTrueValues As Label
+    Friend WithEvents ucrReceiverTrueValues As ucrReceiverSingle
 End Class
