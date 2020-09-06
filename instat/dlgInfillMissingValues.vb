@@ -164,6 +164,11 @@ Public Class dlgInfillMissingValues
         ucrReceiverImputed.SetParameterIsString()
         ucrReceiverImputed.SetDataType("numeric", bStrict:=True)
 
+        ucrReceiverTrueValues.SetParameter(New RParameter("x_with_truth", 12))
+        ucrReceiverTrueValues.Selector = ucrSelectorInfillMissing
+        ucrReceiverTrueValues.SetParameterIsRFunction()
+        ucrReceiverTrueValues.SetDataType("numeric", bStrict:=True)
+
         ucrPnlStartEnd.AddToLinkedControls(ucrInputConstant, {rdoLeaveAsMissing, rdoExtendFill}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrInputComboFunction, {rdoNaAggregate}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMethods.AddToLinkedControls(ucrReceiverStation, {rdoNaApproximate, rdoNaFill, rdoNaSpline, rdoNaLocf, rdoNaStructTS}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -180,7 +185,7 @@ Public Class dlgInfillMissingValues
         ucrChkStdBias.AddToLinkedControls(ucrInputStdBias, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2.5)
         ucrPnlOptions.AddToLinkedControls({ucrSaveGraph, ucrReceiverDisplayShowDate, ucrReceiverDisplayObserved}, {rdoDisplay, rdoShow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverDispMultShowStation}, {rdoDisplay, rdoFitMultiple, rdoShow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverImputed}, {rdoShow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverImputed, ucrReceiverTrueValues}, {rdoShow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrInputComboType}, {rdoDisplay}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboType.AddToLinkedControls({ucrChkFlipCordinates}, {"Gap size"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboType.AddToLinkedControls({ucrInputIntervalSize}, {"Intervals"}, bNewLinkedHideIfParameterMissing:=True)
@@ -201,6 +206,7 @@ Public Class dlgInfillMissingValues
         ucrInputComboType.SetLinkedDisplayControl(lblType)
         ucrInputIntervalSize.SetLinkedDisplayControl(lblIntervalSize)
         ucrReceiverDispMultShowStation.SetLinkedDisplayControl(lblDispMultShowStation)
+        ucrReceiverTrueValues.SetLinkedDisplayControl(lblTrueValues)
 
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
         ucrSaveNewColumn.SetSaveTypeAsColumn()
@@ -246,7 +252,7 @@ Public Class dlgInfillMissingValues
         ucrInputIntervalSize.SetValidationTypeAsNumeric()
         ucrInputIntervalSize.AddQuotesIfUnrecognised = False
 
-        ucrSaveGraph.SetPrefix("lineplot")
+        ucrSaveGraph.SetPrefix("missingplot")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
         ucrSaveGraph.SetCheckBoxText("Save Graph")
@@ -369,6 +375,7 @@ Public Class dlgInfillMissingValues
         ucrChkFlipCordinates.SetRCode(clsVisualizeElementNa, bReset)
         ucrInputIntervalSize.SetRCode(clsVisualizeElementNa, bReset)
         ucrReceiverDispMultShowStation.SetRCode(clsVisualizeElementNa, bReset)
+        ucrReceiverTrueValues.SetRCode(clsVisualizeElementNa, bReset)
 
         ucrSaveNewColumn.AddAdditionalRCode(clsAggregateFunction, iAdditionalPairNo:=1)
 
@@ -453,8 +460,8 @@ Public Class dlgInfillMissingValues
         If rdoDisplay.Checked OrElse rdoShow.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsVisualizeElementNa)
             ucrBase.clsRsyntax.iCallType = 3
-            Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight * 0.72)
-            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.5)
+            Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight * 0.8)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.33)
             ucrReceiverDisplayObserved.SetMeAsReceiver()
             If rdoDisplay.Checked Then
                 Select Case ucrInputComboType.GetText
