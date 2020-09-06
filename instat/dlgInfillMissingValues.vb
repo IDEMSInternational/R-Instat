@@ -42,10 +42,6 @@ Public Class dlgInfillMissingValues
         Dim dctFunctionNames As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
-        'TODO:Enabled once working, added now for display purposes and therefore show the intention!
-        ucrReceiverMultipleStation.Enabled = False
-        lblMultipleStation.Enabled = False
-
         ucrPnlOptions.AddRadioButton(rdoDisplay)
         ucrPnlOptions.AddRadioButton(rdoFitSingle)
         ucrPnlOptions.AddRadioButton(rdoFitMultiple)
@@ -88,6 +84,13 @@ Public Class dlgInfillMissingValues
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bUseFilteredData = False
         ucrReceiverStation.bAutoFill = True
+
+        ucrReceiverDispMultShowStation.SetParameter(New RParameter("station_col_name", 3))
+        ucrReceiverDispMultShowStation.Selector = ucrSelectorInfillMissing
+        ucrReceiverDispMultShowStation.SetParameterIsString()
+        ucrReceiverDispMultShowStation.SetClimaticType("station")
+        ucrReceiverDispMultShowStation.bUseFilteredData = False
+        ucrReceiverDispMultShowStation.bAutoFill = True
 
         ucrInputConstant.SetValidationTypeAsNumeric()
         ucrInputConstant.AddQuotesIfUnrecognised = False
@@ -171,11 +174,12 @@ Public Class dlgInfillMissingValues
         ucrChkMaxGap.AddToLinkedControls(ucrNudMaximum, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboFunction.AddToLinkedControls(ucrChkSetSeed, {"Sample"}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSetSeed.AddToLinkedControls(ucrNudSetSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverDate, ucrChkMeanBias, ucrChkStdBias, ucrReceiverObserved, ucrInputNewColumnName, ucrReceiverEstimatedElements, ucrReceiverMultipleStation}, {rdoFitMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverDate, ucrChkMeanBias, ucrChkStdBias, ucrReceiverObserved, ucrInputNewColumnName, ucrReceiverEstimatedElements}, {rdoFitMultiple}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkBy, ucrChkMaxGap, ucrPnlMethods, ucrReceiverElement, ucrSaveNewColumn}, {rdoFitSingle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkMeanBias.AddToLinkedControls(ucrInputMeanBias, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
         ucrChkStdBias.AddToLinkedControls(ucrInputStdBias, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2.5)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverStation, ucrSaveGraph, ucrReceiverDisplayShowDate, ucrReceiverDisplayObserved}, {rdoDisplay, rdoShow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrSaveGraph, ucrReceiverDisplayShowDate, ucrReceiverDisplayObserved}, {rdoDisplay, rdoShow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverDispMultShowStation}, {rdoDisplay, rdoFitMultiple, rdoShow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverImputed}, {rdoShow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrInputComboType}, {rdoDisplay}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboType.AddToLinkedControls({ucrChkFlipCordinates}, {"Gap size"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -190,13 +194,13 @@ Public Class dlgInfillMissingValues
         ucrReceiverElement.SetLinkedDisplayControl(lblElement)
         ucrPnlMethods.SetLinkedDisplayControl(grpMethods)
         ucrReceiverObserved.SetLinkedDisplayControl(lblObserved)
-        ucrReceiverMultipleStation.SetLinkedDisplayControl(lblMultipleStation)
         ucrInputNewColumnName.SetLinkedDisplayControl(lblNewColumnName)
         ucrReceiverDisplayShowDate.SetLinkedDisplayControl(lblDisplayDate)
         ucrReceiverDisplayObserved.SetLinkedDisplayControl(lblDisplayElement)
         ucrReceiverImputed.SetLinkedDisplayControl(lblImputed)
         ucrInputComboType.SetLinkedDisplayControl(lblType)
         ucrInputIntervalSize.SetLinkedDisplayControl(lblIntervalSize)
+        ucrReceiverDispMultShowStation.SetLinkedDisplayControl(lblDispMultShowStation)
 
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
         ucrSaveNewColumn.SetSaveTypeAsColumn()
@@ -336,6 +340,7 @@ Public Class dlgInfillMissingValues
         ucrNudMaximum.AddAdditionalCodeParameterPair(clsNaLocfFunction, ucrNudMaximum.GetParameter(), iAdditionalPairNo:=3)
         ucrNudMaximum.AddAdditionalCodeParameterPair(clsNaFillFunction, ucrNudMaximum.GetParameter(), iAdditionalPairNo:=4)
         ucrNudMaximum.AddAdditionalCodeParameterPair(clsStructTSFunction, ucrNudMaximum.GetParameter(), iAdditionalPairNo:=5)
+        ucrReceiverDispMultShowStation.AddAdditionalCodeParameterPair(clsPatchClimateElementFunction, New RParameter("station_col_name", 7), iAdditionalPairNo:=1)
 
         ucrReceiverElement.SetRCode(clsAveFunction, bReset)
         ucrReceiverStation.SetRCode(clsAveFunction, bReset)
@@ -363,6 +368,7 @@ Public Class dlgInfillMissingValues
         ucrChkAddLegend.SetRCode(clsVisualizeElementNa, bReset)
         ucrChkFlipCordinates.SetRCode(clsVisualizeElementNa, bReset)
         ucrInputIntervalSize.SetRCode(clsVisualizeElementNa, bReset)
+        ucrReceiverDispMultShowStation.SetRCode(clsVisualizeElementNa, bReset)
 
         ucrSaveNewColumn.AddAdditionalRCode(clsAggregateFunction, iAdditionalPairNo:=1)
 
@@ -482,6 +488,7 @@ Public Class dlgInfillMissingValues
         ElseIf rdoFitMultiple.Checked Then
             ucrChkAddLegend.Visible = False
             cmdDisplayOptions.Visible = False
+            ucrReceiverStation.Visible = True
             ucrBase.clsRsyntax.SetBaseRFunction(clsPatchClimateElementFunction)
             ucrBase.clsRsyntax.iCallType = 2
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight * 0.8)
@@ -496,20 +503,12 @@ Public Class dlgInfillMissingValues
         End If
     End Sub
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
-        If Not ucrReceiverStation.IsEmpty Then
-            clsVisualizeElementNa.AddParameter("station_col_name", ucrReceiverStation.GetVariableNames(), iPosition:=3)
-        Else
-            clsVisualizeElementNa.RemoveParameterByName("station_col_name")
-        End If
-    End Sub
-
     Private Sub ucrSelectorInfillMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorInfillMissing.ControlValueChanged
         clsVisualizeElementNa.AddParameter("data_name", Chr(34) & ucrSelectorInfillMissing.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
     End Sub
 
-    Private Sub ucrReceiverStation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
-        If (rdoDisplay.Checked OrElse rdoShow.Checked) AndAlso Not ucrReceiverStation.IsEmpty Then
+    Private Sub ucrReceiverDispMultShowStation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDispMultShowStation.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+        If (rdoDisplay.Checked OrElse rdoShow.Checked) AndAlso Not ucrReceiverDispMultShowStation.IsEmpty Then
             ucrNudFacetColumns.Visible = True
             lblFacetColumns.Visible = True
         Else
