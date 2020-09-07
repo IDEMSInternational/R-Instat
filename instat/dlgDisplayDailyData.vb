@@ -105,18 +105,18 @@ Public Class dlgDisplayDailyData
         ucrNudUpperYaxis.SetMinMax(0, Integer.MaxValue)
 
 
-        ucrInputGRugColur.SetParameter(New RParameter("colour", 1))
+        ucrInputGraphRugColur.SetParameter(New RParameter("colour", 1))
         dctGRugColour.Add("Blue", Chr(34) & "blue" & Chr(34))
         dctGRugColour.Add("Red", Chr(34) & "red" & Chr(34))
         dctGRugColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
         dctGRugColour.Add("Green", Chr(34) & "green" & Chr(34))
         dctGRugColour.Add("Violet", Chr(34) & "violet" & Chr(34))
-        ucrInputGRugColur.SetItems(dctGRugColour)
+        ucrInputGraphRugColur.SetItems(dctGRugColour)
 
 
         ucrInputBarColour.SetParameter(New RParameter("bar_colour", 7))
-        dctBarColour.Add("Blue", Chr(34) & "blue" & Chr(34))
         dctBarColour.Add("Red", Chr(34) & "red" & Chr(34))
+        dctBarColour.Add("Blue", Chr(34) & "blue" & Chr(34))
         dctBarColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
         dctBarColour.Add("Green", Chr(34) & "green" & Chr(34))
         dctBarColour.Add("Violet", Chr(34) & "violet" & Chr(34))
@@ -156,7 +156,7 @@ Public Class dlgDisplayDailyData
 
         ucrChkNumberOfColumns.AddParameterPresentCondition(True, "ncol")
         ucrChkNumberOfColumns.AddParameterPresentCondition(False, "ncol", False)
-        ucrChkNumberOfColumns.SetText("Number of Columns")
+        ucrChkNumberOfColumns.SetText("Number of Column(s):")
 
         ucrInputScale.SetParameter(New RParameter("scales", 0))
         dctScale.Add("Free_y", Chr(34) & "free_y" & Chr(34))
@@ -216,18 +216,20 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, "daily_table")
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraphByYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrReceiverMultipleElements, ucrInputFacetBy, ucrChkNumberOfColumns}, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputScale, ucrInputGRugColur}, {rdoGraph}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputScale, ucrInputGraphRugColur}, {rdoGraph}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboMissing, ucrChkMissing}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboTrace, ucrChkTrace}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboZero, ucrChkZero}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkSum, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoGraphByYear}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkNumberOfColumns.AddToLinkedControls(ucrNudNumberOfColumns, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrNudNumberOfColumns.SetLinkedDisplayControl(lblNumberOfColumns)
         ucrChkSum.SetLinkedDisplayControl(grpSummary)
         ucrInputScale.SetLinkedDisplayControl(grpFacet)
         ucrInputScale.SetLinkedDisplayControl(lblScales)
-        ucrInputGRugColur.SetLinkedDisplayControl(lblGRugColour)
+        ucrInputGraphRugColur.SetLinkedDisplayControl(lblGRugColour)
+        ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
+        ucrReceiverElement.SetLinkedDisplayControl(lblElement)
+
 
         ucrChkMissing.AddToLinkedControls({ucrInputComboMissing}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTrace.AddToLinkedControls({ucrInputComboTrace}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="tr")
@@ -392,7 +394,7 @@ Public Class dlgDisplayDailyData
         ucrInputScale.SetRCode(clsFacetFunction, bReset)
         ucrNudNumberOfColumns.SetRCode(clsFacetFunction, bReset)
         ucrChkNumberOfColumns.SetRCode(clsFacetFunction, bReset)
-        ucrInputGRugColur.SetRCode(clsGeomRugFunction, bReset)
+        ucrInputGraphRugColur.SetRCode(clsGeomRugFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -415,9 +417,9 @@ Public Class dlgDisplayDailyData
 
     Private Sub DialogSize()
         If rdoGraphByYear.Checked Then
-            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.86)
-            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.2)
-            ucrSaveGraph.Location = New Point(ucrSaveGraph.Location.X, iSaveYLocation / 1.2)
+            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.93)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.1)
+            ucrSaveGraph.Location = New Point(ucrSaveGraph.Location.X, iSaveYLocation / 1.1)
         ElseIf rdoTable.Checked OrElse rdoGraph.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)

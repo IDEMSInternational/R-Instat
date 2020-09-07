@@ -55,10 +55,10 @@ Partial Class dlgDisplayDailyData
         Me.grpFacet = New System.Windows.Forms.GroupBox()
         Me.lblScales = New System.Windows.Forms.Label()
         Me.lblFacetby = New System.Windows.Forms.Label()
-        Me.lblNumberOfColumns = New System.Windows.Forms.Label()
         Me.rdoGraphByYear = New System.Windows.Forms.RadioButton()
         Me.lblGRugColour = New System.Windows.Forms.Label()
-        Me.ucrInputGRugColur = New instat.ucrInputComboBox()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrInputGraphRugColur = New instat.ucrInputComboBox()
         Me.ucrChkSumMissing = New instat.ucrCheck()
         Me.ucrChkMax = New instat.ucrCheck()
         Me.ucrChkIQR = New instat.ucrCheck()
@@ -69,7 +69,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrInputComboZero = New instat.ucrInputComboBox()
-        Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrInputRugColour = New instat.ucrInputComboBox()
         Me.ucrInputBarColour = New instat.ucrInputComboBox()
         Me.ucrNudUpperYaxis = New instat.ucrNud()
@@ -192,7 +191,6 @@ Partial Class dlgDisplayDailyData
         Me.grpFacet.Controls.Add(Me.lblFacetby)
         Me.grpFacet.Controls.Add(Me.ucrNudNumberOfColumns)
         Me.grpFacet.Controls.Add(Me.ucrInputFacetBy)
-        Me.grpFacet.Controls.Add(Me.lblNumberOfColumns)
         Me.grpFacet.Controls.Add(Me.ucrChkNumberOfColumns)
         resources.ApplyResources(Me.grpFacet, "grpFacet")
         Me.grpFacet.Name = "grpFacet"
@@ -207,11 +205,6 @@ Partial Class dlgDisplayDailyData
         '
         resources.ApplyResources(Me.lblFacetby, "lblFacetby")
         Me.lblFacetby.Name = "lblFacetby"
-        '
-        'lblNumberOfColumns
-        '
-        resources.ApplyResources(Me.lblNumberOfColumns, "lblNumberOfColumns")
-        Me.lblNumberOfColumns.Name = "lblNumberOfColumns"
         '
         'rdoGraphByYear
         '
@@ -228,12 +221,17 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.lblGRugColour, "lblGRugColour")
         Me.lblGRugColour.Name = "lblGRugColour"
         '
-        'ucrInputGRugColur
+        'ucrSaveGraph
         '
-        Me.ucrInputGRugColur.AddQuotesIfUnrecognised = True
-        Me.ucrInputGRugColur.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputGRugColur, "ucrInputGRugColur")
-        Me.ucrInputGRugColur.Name = "ucrInputGRugColur"
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        '
+        'ucrInputGraphRugColur
+        '
+        Me.ucrInputGraphRugColur.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphRugColur.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputGraphRugColur, "ucrInputGraphRugColur")
+        Me.ucrInputGraphRugColur.Name = "ucrInputGraphRugColur"
         '
         'ucrChkSumMissing
         '
@@ -301,11 +299,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrInputComboZero.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboZero, "ucrInputComboZero")
         Me.ucrInputComboZero.Name = "ucrInputComboZero"
-        '
-        'ucrSaveGraph
-        '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
         '
         'ucrInputRugColour
         '
@@ -461,15 +454,15 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrSaveGraph)
-        Me.Controls.Add(Me.ucrInputGRugColur)
+        Me.Controls.Add(Me.ucrInputGraphRugColur)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.lblGRugColour)
         Me.Controls.Add(Me.ucrReceiverMultipleElements)
         Me.Controls.Add(Me.rdoGraphByYear)
         Me.Controls.Add(Me.lblElements)
+        Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrInputComboZero)
-        Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.grpFacet)
         Me.Controls.Add(Me.ucrInputComboMissing)
         Me.Controls.Add(Me.ucrInputComboTrace)
@@ -550,10 +543,9 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrInputFacetBy As ucrInputComboBox
     Friend WithEvents ucrChkNumberOfColumns As ucrCheck
     Friend WithEvents ucrNudNumberOfColumns As ucrNud
-    Friend WithEvents lblNumberOfColumns As Label
     Friend WithEvents grpFacet As GroupBox
     Friend WithEvents lblScales As Label
     Friend WithEvents ucrInputScale As ucrInputComboBox
     Friend WithEvents lblGRugColour As Label
-    Friend WithEvents ucrInputGRugColur As ucrInputComboBox
+    Friend WithEvents ucrInputGraphRugColur As ucrInputComboBox
 End Class
