@@ -723,6 +723,7 @@ Public Class dlgOneVarFitModel
                     clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "snh" Then
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Standard Normal Homogeinity Test (SNHT) for Change-Point Detection")
                     clsSnhFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "cvm" Then
@@ -763,6 +764,7 @@ Public Class dlgOneVarFitModel
                     clsBrFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "Sen" Then
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Sen 's slope for linear rate of change")
                     clsSenFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "serial corr" Then
