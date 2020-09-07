@@ -19,7 +19,7 @@ Partial Class dlgExportDataset
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,26 +36,23 @@ Partial Class dlgExportDataset
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportDataset))
         Me.lblConfirm = New System.Windows.Forms.Label()
-        Me.ucrAvailableSheets = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFilePath = New instat.ucrFilePath()
+        Me.ucrSelectorDataFrames = New instat.ucrSelectorAddRemove()
+        Me.lblDataFrames = New System.Windows.Forms.Label()
+        Me.lblSelectedDataFrames = New System.Windows.Forms.Label()
+        Me.ucrReceiverMultipleDataFrames = New instat.ucrReceiverMultiple()
+        Me.ucrChkSaveAsSingleFile = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblConfirm
         '
         resources.ApplyResources(Me.lblConfirm, "lblConfirm")
         Me.lblConfirm.Name = "lblConfirm"
-        '
-        'ucrAvailableSheets
-        '
-        Me.ucrAvailableSheets.bDropUnusedFilterLevels = False
-        Me.ucrAvailableSheets.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrAvailableSheets, "ucrAvailableSheets")
-        Me.ucrAvailableSheets.Name = "ucrAvailableSheets"
         '
         'ucrBase
         '
@@ -73,13 +70,48 @@ Partial Class dlgExportDataset
         resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
         Me.ucrFilePath.Name = "ucrFilePath"
         '
+        'ucrSelectorDataFrames
+        '
+        Me.ucrSelectorDataFrames.bShowHiddenColumns = False
+        resources.ApplyResources(Me.ucrSelectorDataFrames, "ucrSelectorDataFrames")
+        Me.ucrSelectorDataFrames.Name = "ucrSelectorDataFrames"
+        '
+        'lblDataFrames
+        '
+        resources.ApplyResources(Me.lblDataFrames, "lblDataFrames")
+        Me.lblDataFrames.Name = "lblDataFrames"
+        '
+        'lblSelectedDataFrames
+        '
+        resources.ApplyResources(Me.lblSelectedDataFrames, "lblSelectedDataFrames")
+        Me.lblSelectedDataFrames.Name = "lblSelectedDataFrames"
+        '
+        'ucrReceiverMultipleDataFrames
+        '
+        Me.ucrReceiverMultipleDataFrames.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleDataFrames, "ucrReceiverMultipleDataFrames")
+        Me.ucrReceiverMultipleDataFrames.Name = "ucrReceiverMultipleDataFrames"
+        Me.ucrReceiverMultipleDataFrames.Selector = Nothing
+        Me.ucrReceiverMultipleDataFrames.strNcFilePath = ""
+        Me.ucrReceiverMultipleDataFrames.ucrSelector = Nothing
+        '
+        'ucrChkSaveAsSingleFile
+        '
+        Me.ucrChkSaveAsSingleFile.Checked = True
+        resources.ApplyResources(Me.ucrChkSaveAsSingleFile, "ucrChkSaveAsSingleFile")
+        Me.ucrChkSaveAsSingleFile.Name = "ucrChkSaveAsSingleFile"
+        '
         'dlgExportDataset
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkSaveAsSingleFile)
+        Me.Controls.Add(Me.ucrReceiverMultipleDataFrames)
+        Me.Controls.Add(Me.lblSelectedDataFrames)
+        Me.Controls.Add(Me.lblDataFrames)
+        Me.Controls.Add(Me.ucrSelectorDataFrames)
         Me.Controls.Add(Me.ucrFilePath)
         Me.Controls.Add(Me.lblConfirm)
-        Me.Controls.Add(Me.ucrAvailableSheets)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -92,7 +124,11 @@ Partial Class dlgExportDataset
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrAvailableSheets As ucrDataFrame
     Friend WithEvents lblConfirm As Label
     Friend WithEvents ucrFilePath As ucrFilePath
+    Friend WithEvents ucrSelectorDataFrames As ucrSelectorAddRemove
+    Friend WithEvents lblDataFrames As Label
+    Friend WithEvents lblSelectedDataFrames As Label
+    Friend WithEvents ucrReceiverMultipleDataFrames As ucrReceiverMultiple
+    Friend WithEvents ucrChkSaveAsSingleFile As ucrCheck
 End Class

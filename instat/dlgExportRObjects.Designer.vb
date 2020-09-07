@@ -41,7 +41,7 @@ Partial Class dlgExportRObjects
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportRObjects))
         Me.lblObjects = New System.Windows.Forms.Label()
         Me.ucrFilePath = New instat.ucrFilePath()
-        Me.ucrReceiverObjects = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverMultipleObjects = New instat.ucrReceiverMultiple()
         Me.ucrSelectorObjects = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
@@ -62,14 +62,14 @@ Partial Class dlgExportRObjects
         resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
         Me.ucrFilePath.Name = "ucrFilePath"
         '
-        'ucrReceiverObjects
+        'ucrReceiverMultipleObjects
         '
-        Me.ucrReceiverObjects.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverObjects, "ucrReceiverObjects")
-        Me.ucrReceiverObjects.Name = "ucrReceiverObjects"
-        Me.ucrReceiverObjects.Selector = Nothing
-        Me.ucrReceiverObjects.strNcFilePath = ""
-        Me.ucrReceiverObjects.ucrSelector = Nothing
+        Me.ucrReceiverMultipleObjects.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverMultipleObjects, "ucrReceiverMultipleObjects")
+        Me.ucrReceiverMultipleObjects.Name = "ucrReceiverMultipleObjects"
+        Me.ucrReceiverMultipleObjects.Selector = Nothing
+        Me.ucrReceiverMultipleObjects.strNcFilePath = ""
+        Me.ucrReceiverMultipleObjects.ucrSelector = Nothing
         '
         'ucrSelectorObjects
         '
@@ -90,7 +90,7 @@ Partial Class dlgExportRObjects
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrFilePath)
         Me.Controls.Add(Me.lblObjects)
-        Me.Controls.Add(Me.ucrReceiverObjects)
+        Me.Controls.Add(Me.ucrReceiverMultipleObjects)
         Me.Controls.Add(Me.ucrSelectorObjects)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -103,7 +103,7 @@ Partial Class dlgExportRObjects
     End Sub
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorObjects As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverObjects As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverMultipleObjects As ucrReceiverMultiple
     Friend WithEvents lblObjects As Label
     Friend WithEvents ucrFilePath As ucrFilePath
 End Class

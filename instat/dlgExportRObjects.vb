@@ -38,12 +38,12 @@ Public Class dlgExportRObjects
         ucrBase.iHelpTopicID = 554
 
         'multiple reciever control that holds selected objects
-        ucrReceiverObjects.SetParameter(New RParameter("x", 0))
-        ucrReceiverObjects.SetParameterIsRFunction()
-        ucrReceiverObjects.Selector = ucrSelectorObjects
-        ucrReceiverObjects.SetMeAsReceiver()
-        ucrReceiverObjects.strSelectorHeading = "Objects"
-        ucrReceiverObjects.SetItemType("object")
+        ucrReceiverMultipleObjects.SetParameter(New RParameter("x", 0))
+        ucrReceiverMultipleObjects.SetParameterIsRFunction()
+        ucrReceiverMultipleObjects.Selector = ucrSelectorObjects
+        ucrReceiverMultipleObjects.SetMeAsReceiver()
+        ucrReceiverMultipleObjects.strSelectorHeading = "Objects"
+        ucrReceiverMultipleObjects.SetItemType("object")
         'file path control that holds the file path and name
         ucrFilePath.SetPathControlParameter(New RParameter("file", 1))
     End Sub
@@ -62,12 +62,12 @@ Public Class dlgExportRObjects
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverObjects.SetRCode(clsExport, bReset)
+        ucrReceiverMultipleObjects.SetRCode(clsExport, bReset)
         ucrFilePath.SetPathControlRcode(clsExport, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        ucrBase.OKEnabled(Not ucrFilePath.IsEmpty AndAlso Not ucrReceiverObjects.IsEmpty AndAlso Not String.IsNullOrEmpty(ucrSelectorObjects.strCurrentDataFrame))
+        ucrBase.OKEnabled(Not ucrFilePath.IsEmpty AndAlso Not ucrReceiverMultipleObjects.IsEmpty AndAlso Not String.IsNullOrEmpty(ucrSelectorObjects.strCurrentDataFrame))
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -76,9 +76,9 @@ Public Class dlgExportRObjects
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverObjects.ControlContentsChanged, ucrSelectorObjects.ControlContentsChanged
+    Private Sub ucrReceiverMultipleObjects_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverMultipleObjects.ControlContentsChanged
         'ucrReceiverObjects is a multireceiver. So give a default suggested name if it has 1 item only
-        ucrFilePath.DefaultFileSuggestionName = If(ucrReceiverObjects.GetVariableNamesList().Length = 1, ucrReceiverObjects.GetVariableNames(bWithQuotes:=False), "")
+        ucrFilePath.DefaultFileSuggestionName = If(ucrReceiverMultipleObjects.GetVariableNamesList().Length = 1, ucrReceiverMultipleObjects.GetVariableNames(bWithQuotes:=False), "")
         TestOkEnabled()
     End Sub
 

@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblObjects.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 45</value>
+    <value>263, 45</value>
   </data>
   <data name="lblObjects.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 13</value>
@@ -228,9 +228,6 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -243,28 +240,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrReceiverObjects.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrReceiverMultipleObjects.Location" type="System.Drawing.Point, System.Drawing">
     <value>267, 60</value>
   </data>
-  <data name="ucrReceiverObjects.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverMultipleObjects.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverObjects.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverMultipleObjects.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 100</value>
   </data>
-  <data name="ucrReceiverObjects.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrReceiverMultipleObjects.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverObjects.Name" xml:space="preserve">
-    <value>ucrReceiverObjects</value>
+  <data name="&gt;&gt;ucrReceiverMultipleObjects.Name" xml:space="preserve">
+    <value>ucrReceiverMultipleObjects</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverObjects.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverMultipleObjects.Type" xml:space="preserve">
     <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverObjects.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverMultipleObjects.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverObjects.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverMultipleObjects.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
 </root>

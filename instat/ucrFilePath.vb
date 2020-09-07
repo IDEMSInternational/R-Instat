@@ -94,9 +94,9 @@ Public Class ucrFilePath
     ''' <summary>
     ''' gets or sets the last selected filter index.
     ''' used by the SaveFileDiaolog prompt to 'remember' last selected file type filter
-    ''' this is used internally only
+    ''' and by dialogs to know selected filter index
     ''' </summary>
-    Private iFileFilterIndex As Integer
+    Public SelectedFileFilterIndex As Integer
 
     ''' <summary>
     ''' gets the control that contains the input file path and name
@@ -159,11 +159,11 @@ Public Class ucrFilePath
                 Dim strFilePathInWindowsFormat As String = FilePath.Replace("/", "\")
                 dlgSave.FileName = Path.GetFileName(strFilePathInWindowsFormat)
                 dlgSave.InitialDirectory = Path.GetDirectoryName(strFilePathInWindowsFormat)
-                dlgSave.FilterIndex = iFileFilterIndex
+                dlgSave.FilterIndex = SelectedFileFilterIndex
             End If
             If DialogResult.OK = dlgSave.ShowDialog() Then
                 FilePath = dlgSave.FileName
-                iFileFilterIndex = dlgSave.FilterIndex
+                SelectedFileFilterIndex = dlgSave.FilterIndex
             End If
         End Using
     End Sub
