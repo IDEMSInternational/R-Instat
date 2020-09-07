@@ -703,12 +703,14 @@ Public Class dlgOneVarFitModel
                     clsZTestFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "Bartel" Then
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Bartels Rank Test of Randomness")
                     clsBartelFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "Wilcoxon" Then
                     clsWilcoxonFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "br" Then
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Buishand Range Test for Change-Point Detection")
                     clsBrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "runs" Then
