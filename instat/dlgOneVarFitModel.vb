@@ -485,12 +485,6 @@ Public Class dlgOneVarFitModel
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsMeanCIFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsMedianCIFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsNormCIFunction, New RParameter("x", 0), iAdditionalPairNo:=5)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsQuantileCIFunction, New RParameter("x", 0), iAdditionalPairNo:=6)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsSdCIFunction, New RParameter("x", 0), iAdditionalPairNo:=7)
-        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsVarCIFunction, New RParameter("x", 0), iAdditionalPairNo:=8)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsMedianCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsVarCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=2)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsSdCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=3)
@@ -703,14 +697,12 @@ Public Class dlgOneVarFitModel
                     clsZTestFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "Bartel" Then
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Bartels Rank Test of Randomness")
                     clsBartelFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "Wilcoxon" Then
                     clsWilcoxonFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "br" Then
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Buishand Range Test for Change-Point Detection")
                     clsBrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "runs" Then
@@ -723,7 +715,6 @@ Public Class dlgOneVarFitModel
                     clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "snh" Then
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Standard Normal Homogeinity Test (SNHT) for Change-Point Detection")
                     clsSnhFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "cvm" Then
@@ -764,7 +755,6 @@ Public Class dlgOneVarFitModel
                     clsBrFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "Sen" Then
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Sen 's slope for linear rate of change")
                     clsSenFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "serial corr" Then
@@ -857,26 +847,35 @@ Public Class dlgOneVarFitModel
                 Case "Z"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsZTestFunction)
                 Case "Bartel"
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Bartels Rank Test of Randomness")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBartelFunction)
                 Case "br"
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Buishand Range Test for Change-Point Detection")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBrFunction)
                 Case "runs"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsRunsFunction)
                 Case "Sen"
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Sen 's slope for linear rate of change")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSenFunction)
                 Case "serial corr"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSerialCorrFunction)
                 Case "snh"
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Standard Normal Homogeinity Test (SNHT) for Change-Point Detection")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSnhFunction)
                 Case "ad"
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Anderson-Darling test for normality")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsAdFunction)
                 Case "cvm"
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Cramer-von Mises test for normality")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsCvmFunction)
                 Case "lillie"
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Lilliefors (Kolmogorov-Smirnov) test for normality")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLillieFunction)
                 Case "pearson"
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Pearson chi-square test for normality")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsPearsonFunction)
                 Case "sf"
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Shapiro-Francia test for normality")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSfFunction)
 
             End Select
