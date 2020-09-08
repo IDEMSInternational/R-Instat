@@ -3472,16 +3472,91 @@
     <value>183, 6</value>
   </data>
   <data name="mnuStructuredCircularDefine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="mnuStructuredCircularDefine.Text" xml:space="preserve">
     <value>Define...</value>
   </data>
   <data name="mnuStructuredCircularCalculator.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>192, 22</value>
   </data>
   <data name="mnuStructuredCircularCalculator.Text" xml:space="preserve">
     <value>Calculator...</value>
+  </data>
+  <data name="mnuStructuredCircularSummaries.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuStructuredCircularSummaries.Text" xml:space="preserve">
+    <value>Summaries...</value>
+  </data>
+  <data name="ToolStripSeparator46.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 6</value>
+  </data>
+  <data name="mnuStructuredCircularScatterPlot.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuStructuredCircularScatterPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuStructuredCircularScatterPlot.Text" xml:space="preserve">
+    <value>Scatter Plot...</value>
+  </data>
+  <data name="mnuStructuredCircularDensityPlot.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuStructuredCircularDensityPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuStructuredCircularDensityPlot.Text" xml:space="preserve">
+    <value>Density Plot...</value>
+  </data>
+  <data name="mnuStructuredCircularRosePlot.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuStructuredCircularRosePlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuStructuredCircularRosePlot.Text" xml:space="preserve">
+    <value>Rose Plot...</value>
+  </data>
+  <data name="ToolStripSeparator67.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 6</value>
+  </data>
+  <data name="mnuStructuredCircularWindRose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuStructuredCircularWindRose.Text" xml:space="preserve">
+    <value>Wind Rose...</value>
+  </data>
+  <data name="mnuStructuredCircularWindPollutionRose.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuStructuredCircularWindPollutionRose.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuStructuredCircularWindPollutionRose.Text" xml:space="preserve">
+    <value>Wind/Pollution Rose...</value>
+  </data>
+  <data name="mnuStructuredCircularOtherRosePlots.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuStructuredCircularOtherRosePlots.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuStructuredCircularOtherRosePlots.Text" xml:space="preserve">
+    <value>Other Rose Plots...</value>
+  </data>
+  <data name="ToolStripSeparator68.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 6</value>
+  </data>
+  <data name="mnuStructuredCircularCirclize.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuStructuredCircularCirclize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>192, 22</value>
+  </data>
+  <data name="mnuStructuredCircularCirclize.Text" xml:space="preserve">
+    <value>Circlize...</value>
   </data>
   <data name="mnuStructuredCircular.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 22</value>
@@ -6284,6 +6359,9 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>
@@ -9748,6 +9826,72 @@
     <value>mnuStructuredCircularCalculator</value>
   </data>
   <data name="&gt;&gt;mnuStructuredCircularCalculator.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularSummaries.Name" xml:space="preserve">
+    <value>mnuStructuredCircularSummaries</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularSummaries.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator46.Name" xml:space="preserve">
+    <value>ToolStripSeparator46</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator46.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularScatterPlot.Name" xml:space="preserve">
+    <value>mnuStructuredCircularScatterPlot</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularScatterPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularDensityPlot.Name" xml:space="preserve">
+    <value>mnuStructuredCircularDensityPlot</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularDensityPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularRosePlot.Name" xml:space="preserve">
+    <value>mnuStructuredCircularRosePlot</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularRosePlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator67.Name" xml:space="preserve">
+    <value>ToolStripSeparator67</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator67.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularWindRose.Name" xml:space="preserve">
+    <value>mnuStructuredCircularWindRose</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularWindRose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularWindPollutionRose.Name" xml:space="preserve">
+    <value>mnuStructuredCircularWindPollutionRose</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularWindPollutionRose.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularOtherRosePlots.Name" xml:space="preserve">
+    <value>mnuStructuredCircularOtherRosePlots</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularOtherRosePlots.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator68.Name" xml:space="preserve">
+    <value>ToolStripSeparator68</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator68.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularCirclize.Name" xml:space="preserve">
+    <value>mnuStructuredCircularCirclize</value>
+  </data>
+  <data name="&gt;&gt;mnuStructuredCircularCirclize.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

@@ -25,6 +25,7 @@ Public Class dlgCalculator
     Public bFirstLoad As Boolean = True
     Public iHelpCalcID As Integer
     Private iBasicWidth As Integer
+    Public strDefaultItem As String
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -53,7 +54,7 @@ Public Class dlgCalculator
 
     Private Sub SetDefaults()
         ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
-        ucrCalc.ucrInputCalOptions.SetName("Basic")
+        ucrCalc.ucrInputCalOptions.SetName(strDefaultItem)
         ucrCalc.Reset()
         ucrCalc.chkShowParameters.Checked = False
         ucrCalc.chkSaveResultInto.Checked = True

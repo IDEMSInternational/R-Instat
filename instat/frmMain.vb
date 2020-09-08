@@ -559,6 +559,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareRechapeColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuPrepareColumnReshapeColumnSummaries.Click
+        sdgSummaries.iIndex = 0
         dlgColumnStats.ShowDialog()
     End Sub
 
@@ -1101,6 +1102,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuDescribeGeneralColumnSummaries_Click(sender As Object, e As EventArgs) Handles mnuDescribeGeneralColumnSummaries.Click
+        sdgSummaries.iIndex = 0
         dlgColumnStats.ShowDialog()
     End Sub
 
@@ -1492,6 +1494,7 @@ Public Class frmMain
             dlgColumnStats.strDefaultVariables = Nothing
             dlgColumnStats.strDefaultFactors = Nothing
         End If
+        sdgSummaries.iIndex = 0
         dlgColumnStats.ShowDialog()
     End Sub
 
@@ -1644,6 +1647,7 @@ Public Class frmMain
             dlgColumnStats.strDefaultVariables = Nothing
             dlgColumnStats.strDefaultFactors = Nothing
         End If
+        sdgSummaries.iIndex = 0
         dlgColumnStats.ShowDialog()
     End Sub
 
@@ -1670,6 +1674,7 @@ Public Class frmMain
             dlgColumnStats.strDefaultVariables = Nothing
             dlgColumnStats.strDefaultFactors = Nothing
         End If
+        sdgSummaries.iIndex = 0
         dlgColumnStats.ShowDialog()
     End Sub
 
@@ -2002,6 +2007,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareCalculateCalculations_Click(sender As Object, e As EventArgs) Handles mnuPrepareCalculator.Click
+        dlgCalculator.strDefaultItem = "Basic"
         dlgCalculator.ShowDialog()
     End Sub
 
@@ -2169,5 +2175,19 @@ Public Class frmMain
 
     Private Sub mnuClimaticCompareDensityPlot_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareDensityPlot.Click
         dlgHistogram.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularSummaries_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularSummaries.Click
+        sdgSummaries.iIndex = 5
+        dlgColumnStats.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularWindRose_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularWindRose.Click
+        dlgWindrose.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularCalculator_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularCalculator.Click
+        dlgCalculator.strDefaultItem = "Circular"
+        dlgCalculator.ShowDialog()
     End Sub
 End Class
