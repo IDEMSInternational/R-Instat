@@ -91,6 +91,8 @@ Partial Class dlgInfillMissingValues
         Me.lblDispMultShowStation = New System.Windows.Forms.Label()
         Me.ucrReceiverTrueValues = New instat.ucrReceiverSingle()
         Me.lblTrueValues = New System.Windows.Forms.Label()
+        Me.ucrInputComboMeasure = New instat.ucrInputComboBox()
+        Me.lblPercentCount = New System.Windows.Forms.Label()
         Me.grpMethods.SuspendLayout()
         Me.grpStartEnd.SuspendLayout()
         Me.SuspendLayout()
@@ -575,10 +577,25 @@ Partial Class dlgInfillMissingValues
         resources.ApplyResources(Me.lblTrueValues, "lblTrueValues")
         Me.lblTrueValues.Name = "lblTrueValues"
         '
+        'ucrInputComboMeasure
+        '
+        Me.ucrInputComboMeasure.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMeasure.GetSetSelectedIndex = -1
+        Me.ucrInputComboMeasure.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboMeasure, "ucrInputComboMeasure")
+        Me.ucrInputComboMeasure.Name = "ucrInputComboMeasure"
+        '
+        'lblPercentCount
+        '
+        resources.ApplyResources(Me.lblPercentCount, "lblPercentCount")
+        Me.lblPercentCount.Name = "lblPercentCount"
+        '
         'dlgInfillMissingValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblPercentCount)
+        Me.Controls.Add(Me.ucrInputComboMeasure)
         Me.Controls.Add(Me.ucrReceiverTrueValues)
         Me.Controls.Add(Me.lblTrueValues)
         Me.Controls.Add(Me.lblDispMultShowStation)
@@ -718,4 +735,6 @@ Partial Class dlgInfillMissingValues
     Friend WithEvents ucrReceiverDispMultShowStation As ucrReceiverSingle
     Friend WithEvents lblTrueValues As Label
     Friend WithEvents ucrReceiverTrueValues As ucrReceiverSingle
+    Friend WithEvents ucrInputComboMeasure As ucrInputComboBox
+    Friend WithEvents lblPercentCount As Label
 End Class
