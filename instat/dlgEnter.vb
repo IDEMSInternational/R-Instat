@@ -65,7 +65,7 @@ Public Class dlgEnter
         ucrDataFrameEnter.Reset()
         ucrReceiverForEnterCalculation.Clear()
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
-        ucrSaveEnterResultInto.SetRCode(ucrBase.clsRsyntax.SetCommandString(""), bReset:=False)
+        ucrSaveEnterResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
     End Sub
     Private Sub ReopenDialog()
         SaveResults()
@@ -116,59 +116,12 @@ Public Class dlgEnter
         SetDefaults()
         TestOKEnabled()
     End Sub
-    Private Sub cmd0_Click(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("0")
-        TestOKEnabled()
-    End Sub
-    Private Sub cmd1_Click(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("1")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub md2_Click(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("2")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmd3_Click(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("3")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmd4_Click(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("4")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmd5_Click(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("5")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmd6_Click(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("6")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmd7_Click(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("7")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmd8_Click(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("8")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmd9_Click(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("9")
-        TestOKEnabled()
-    End Sub
 
     Private Sub cmdColon_Click(sender As Object, e As EventArgs) Handles cmdColon.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(":")
         TestOKEnabled()
     End Sub
+
     Private Sub cmdMissingValues_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("NA")
         TestOKEnabled()
@@ -178,15 +131,12 @@ Public Class dlgEnter
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("( )", 2)
         TestOKEnabled()
     End Sub
+
     Private Sub cmdMinus_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("-")
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdDelete_Click_1(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.Backspace()
-        TestOKEnabled()
-    End Sub
     Private Sub cmdPi_Click(sender As Object, e As EventArgs) Handles cmdPi.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("pi")
         TestOKEnabled()
@@ -230,10 +180,6 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdClear_Click_1(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.Clear()
-        TestOKEnabled()
-    End Sub
 
     Private Sub cmdLETTERS_Click(sender As Object, e As EventArgs) Handles cmdLETTERS.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("LETTERS")
