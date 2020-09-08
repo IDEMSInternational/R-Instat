@@ -396,4 +396,24 @@ Public Class dlgEnter
             ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.date('')", 3)
         End If
     End Sub
+
+    Private Sub cmdDay_Click(sender As Object, e As EventArgs) Handles cmdDay.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("'day'")
+    End Sub
+
+    Private Sub cmdFactor_Click(sender As Object, e As EventArgs) Handles cmdFactor.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("factor( )", 2)
+    End Sub
+
+    Private Sub cmdMonth_Click(sender As Object, e As EventArgs) Handles cmdMonth.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("'month'")
+    End Sub
+
+    Private Sub cmdRnorm_Click(sender As Object, e As EventArgs) Handles cmdRnorm.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(" rnorm( )", 2)
+    End Sub
+
+    Private Sub cmdRunif_Click(sender As Object, e As EventArgs) Handles cmdRunif.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(" runif( )", 2)
+    End Sub
 End Class
