@@ -22,20 +22,13 @@ Partial Class sdgExtremesMethod
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.rdoLmoments = New System.Windows.Forms.RadioButton()
         Me.rdoBayesian = New System.Windows.Forms.RadioButton()
         Me.rdoGMLE = New System.Windows.Forms.RadioButton()
         Me.rdoMLE = New System.Windows.Forms.RadioButton()
+        Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.ucrPanelExtreme = New instat.UcrPanel()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(41, 136)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
-        Me.ucrBase.TabIndex = 14
         '
         'rdoLmoments
         '
@@ -43,10 +36,10 @@ Partial Class sdgExtremesMethod
         Me.rdoLmoments.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.rdoLmoments.Location = New System.Drawing.Point(12, 101)
         Me.rdoLmoments.Name = "rdoLmoments"
-        Me.rdoLmoments.Size = New System.Drawing.Size(73, 17)
-        Me.rdoLmoments.TabIndex = 13
+        Me.rdoLmoments.Size = New System.Drawing.Size(76, 17)
+        Me.rdoLmoments.TabIndex = 4
         Me.rdoLmoments.TabStop = True
-        Me.rdoLmoments.Text = "Lmoments"
+        Me.rdoLmoments.Text = "L-moments"
         Me.rdoLmoments.UseVisualStyleBackColor = True
         '
         'rdoBayesian
@@ -56,7 +49,7 @@ Partial Class sdgExtremesMethod
         Me.rdoBayesian.Location = New System.Drawing.Point(12, 78)
         Me.rdoBayesian.Name = "rdoBayesian"
         Me.rdoBayesian.Size = New System.Drawing.Size(68, 17)
-        Me.rdoBayesian.TabIndex = 12
+        Me.rdoBayesian.TabIndex = 3
         Me.rdoBayesian.TabStop = True
         Me.rdoBayesian.Text = "Bayesian"
         Me.rdoBayesian.UseVisualStyleBackColor = True
@@ -68,7 +61,7 @@ Partial Class sdgExtremesMethod
         Me.rdoGMLE.Location = New System.Drawing.Point(12, 42)
         Me.rdoGMLE.Name = "rdoGMLE"
         Me.rdoGMLE.Size = New System.Drawing.Size(206, 30)
-        Me.rdoGMLE.TabIndex = 11
+        Me.rdoGMLE.TabIndex = 2
         Me.rdoGMLE.TabStop = True
         Me.rdoGMLE.Text = "General Maximum Likelihood Estimator" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(GMLE)"
         Me.rdoGMLE.UseVisualStyleBackColor = True
@@ -80,23 +73,30 @@ Partial Class sdgExtremesMethod
         Me.rdoMLE.Location = New System.Drawing.Point(12, 19)
         Me.rdoMLE.Name = "rdoMLE"
         Me.rdoMLE.Size = New System.Drawing.Size(151, 17)
-        Me.rdoMLE.TabIndex = 10
+        Me.rdoMLE.TabIndex = 1
         Me.rdoMLE.TabStop = True
         Me.rdoMLE.Text = "Maximum Likelihood (MLE)"
         Me.rdoMLE.UseVisualStyleBackColor = True
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(44, 124)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBase.TabIndex = 5
         '
         'ucrPanelExtreme
         '
         Me.ucrPanelExtreme.Location = New System.Drawing.Point(5, 11)
         Me.ucrPanelExtreme.Name = "ucrPanelExtreme"
         Me.ucrPanelExtreme.Size = New System.Drawing.Size(213, 119)
-        Me.ucrPanelExtreme.TabIndex = 9
+        Me.ucrPanelExtreme.TabIndex = 0
         '
         'sdgExtremesMethod
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(230, 174)
+        Me.ClientSize = New System.Drawing.Size(230, 160)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.rdoLmoments)
         Me.Controls.Add(Me.rdoBayesian)
@@ -108,7 +108,7 @@ Partial Class sdgExtremesMethod
         Me.MinimizeBox = False
         Me.Name = "sdgExtremesMethod"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "sdgExtremesMethod"
+        Me.Text = "Extremes Method"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
