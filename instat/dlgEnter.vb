@@ -248,7 +248,7 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdMonthMinus_Click(sender As Object, e As EventArgs) Handles cmdMonthMinus.Click
+    Private Sub cmdMonthMinus_Click(sender As Object, e As EventArgs) Handles cmdMonths.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("month.abb")
         TestOKEnabled()
     End Sub

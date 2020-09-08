@@ -50,7 +50,7 @@ Partial Class dlgEnter
         Me.cmdLETTERS = New System.Windows.Forms.Button()
         Me.cmdPi = New System.Windows.Forms.Button()
         Me.cmdLetters2 = New System.Windows.Forms.Button()
-        Me.cmdMonthMinus = New System.Windows.Forms.Button()
+        Me.cmdMonths = New System.Windows.Forms.Button()
         Me.cmdColon = New System.Windows.Forms.Button()
         Me.grpEnterKeyboard2 = New System.Windows.Forms.GroupBox()
         Me.cmdFactor = New System.Windows.Forms.Button()
@@ -80,7 +80,10 @@ Partial Class dlgEnter
         Me.cmd2 = New System.Windows.Forms.Button()
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.cmdDate = New System.Windows.Forms.Button()
+        Me.cmdDay = New System.Windows.Forms.Button()
+        Me.cmdMonth = New System.Windows.Forms.Button()
+        Me.cmdRunif = New System.Windows.Forms.Button()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.grpBasic.SuspendLayout()
         Me.SuspendLayout()
@@ -152,11 +155,11 @@ Partial Class dlgEnter
         Me.cmdLetters2.Name = "cmdLetters2"
         Me.cmdLetters2.UseVisualStyleBackColor = True
         '
-        'cmdMonthMinus
+        'cmdMonths
         '
-        resources.ApplyResources(Me.cmdMonthMinus, "cmdMonthMinus")
-        Me.cmdMonthMinus.Name = "cmdMonthMinus"
-        Me.cmdMonthMinus.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdMonths, "cmdMonths")
+        Me.cmdMonths.Name = "cmdMonths"
+        Me.cmdMonths.UseVisualStyleBackColor = True
         '
         'cmdColon
         '
@@ -166,10 +169,13 @@ Partial Class dlgEnter
         '
         'grpEnterKeyboard2
         '
-        Me.grpEnterKeyboard2.Controls.Add(Me.Button3)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRunif)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdMonth)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdDay)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdDate)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdFactor)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdColon)
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdMonthMinus)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdMonths)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdLetters2)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdPi)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdLETTERS)
@@ -367,11 +373,29 @@ Partial Class dlgEnter
         Me.cmd1.Name = "cmd1"
         Me.cmd1.UseVisualStyleBackColor = True
         '
-        'Button3
+        'cmdDate
         '
-        resources.ApplyResources(Me.Button3, "Button3")
-        Me.Button3.Name = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdDate, "cmdDate")
+        Me.cmdDate.Name = "cmdDate"
+        Me.cmdDate.UseVisualStyleBackColor = True
+        '
+        'cmdDay
+        '
+        resources.ApplyResources(Me.cmdDay, "cmdDay")
+        Me.cmdDay.Name = "cmdDay"
+        Me.cmdDay.UseVisualStyleBackColor = True
+        '
+        'cmdMonth
+        '
+        resources.ApplyResources(Me.cmdMonth, "cmdMonth")
+        Me.cmdMonth.Name = "cmdMonth"
+        Me.cmdMonth.UseVisualStyleBackColor = True
+        '
+        'cmdRunif
+        '
+        resources.ApplyResources(Me.cmdRunif, "cmdRunif")
+        Me.cmdRunif.Name = "cmdRunif"
+        Me.cmdRunif.UseVisualStyleBackColor = True
         '
         'dlgEnter
         '
@@ -414,7 +438,7 @@ Partial Class dlgEnter
     Friend WithEvents cmdLETTERS As Button
     Friend WithEvents cmdPi As Button
     Friend WithEvents cmdLetters2 As Button
-    Friend WithEvents cmdMonthMinus As Button
+    Friend WithEvents cmdMonths As Button
     Friend WithEvents cmdColon As Button
     Friend WithEvents grpEnterKeyboard2 As GroupBox
     Friend WithEvents ucrTryModelling As ucrTry
@@ -440,5 +464,8 @@ Partial Class dlgEnter
     Friend WithEvents cmd0 As Button
     Friend WithEvents cmd1 As Button
     Friend WithEvents cmdFactor As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents cmdDate As Button
+    Friend WithEvents cmdDay As Button
+    Friend WithEvents cmdMonth As Button
+    Friend WithEvents cmdRunif As Button
 End Class
