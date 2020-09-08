@@ -40,6 +40,7 @@ Public Class ucrAdditionalLayers
         SetLayersList()
         strGlobalDataFrame = strNewGlobalDataFrame
         strMainDialogGeomNames = strMainDialogGeomParameterNames
+        SetEditDeleteEnabled()
     End Sub
 
     Private Sub SetLayersList()
