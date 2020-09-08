@@ -176,10 +176,6 @@ Public Class dlgEnter
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("NA")
         TestOKEnabled()
     End Sub
-    Private Sub cmdDot_Click(sender As Object, e As EventArgs) Handles cmdDot.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(".")
-        TestOKEnabled()
-    End Sub
 
     Private Sub cmdBrackets_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("( )", 2)
@@ -190,10 +186,6 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdComma_Click(sender As Object, e As EventArgs) Handles cmdComma.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(",")
-        TestOKEnabled()
-    End Sub
     Private Sub cmdDelete_Click_1(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.Backspace()
         TestOKEnabled()
@@ -241,14 +233,6 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdSequence2_Click_1(sender As Object, e As EventArgs) Handles cmdSequence2.Click
-        Dim length As Integer = ucrDataFrameEnter.iDataFrameLength
-        If chkShowEnterArguments.Checked Then
-            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("seq(from= ,to= ,length= )", 15)
-        Else ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("seq( )", 2)
-        End If
-        TestOKEnabled()
-    End Sub
     Private Sub cmdClear_Click_1(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.Clear()
         TestOKEnabled()
@@ -266,11 +250,6 @@ Public Class dlgEnter
 
     Private Sub cmdMonthMinus_Click(sender As Object, e As EventArgs) Handles cmdMonthMinus.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("month.abb")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub cmdMonthPlus_Click(sender As Object, e As EventArgs) Handles cmdMonthPlus.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("month.name")
         TestOKEnabled()
     End Sub
 

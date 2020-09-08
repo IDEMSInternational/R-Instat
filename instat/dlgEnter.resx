@@ -205,7 +205,7 @@
     <value>5</value>
   </data>
   <data name="cmdMissingValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 14</value>
+    <value>134, 7</value>
   </data>
   <data name="cmdMissingValues.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -229,13 +229,13 @@
     <value>grpEnterKeyboard2</value>
   </data>
   <data name="&gt;&gt;cmdMissingValues.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="cmdExponential.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="cmdExponential.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 109</value>
+    <value>46, 7</value>
   </data>
   <data name="cmdExponential.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -259,10 +259,10 @@
     <value>grpEnterKeyboard2</value>
   </data>
   <data name="&gt;&gt;cmdExponential.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="cmdConcantenateFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 14</value>
+    <value>90, 7</value>
   </data>
   <data name="cmdConcantenateFunction.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -286,43 +286,13 @@
     <value>grpEnterKeyboard2</value>
   </data>
   <data name="&gt;&gt;cmdConcantenateFunction.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="cmdSequence2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="cmdSequence2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 109</value>
-  </data>
-  <data name="cmdSequence2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="cmdSequence2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 30</value>
-  </data>
-  <data name="cmdSequence2.TabIndex" type="System.Int32, mscorlib">
-    <value>146</value>
-  </data>
-  <data name="cmdSequence2.Text" xml:space="preserve">
-    <value>seq2</value>
-  </data>
-  <data name="&gt;&gt;cmdSequence2.Name" xml:space="preserve">
-    <value>cmdSequence2</value>
-  </data>
-  <data name="&gt;&gt;cmdSequence2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdSequence2.Parent" xml:space="preserve">
-    <value>grpEnterKeyboard2</value>
-  </data>
-  <data name="&gt;&gt;cmdSequence2.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="cmdSequenceFunction.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="cmdSequenceFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 77</value>
+    <value>46, 36</value>
   </data>
   <data name="cmdSequenceFunction.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -346,13 +316,13 @@
     <value>grpEnterKeyboard2</value>
   </data>
   <data name="&gt;&gt;cmdSequenceFunction.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="cmdRepelicationFunction.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="cmdRepelicationFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 45</value>
+    <value>2, 36</value>
   </data>
   <data name="cmdRepelicationFunction.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -376,22 +346,22 @@
     <value>grpEnterKeyboard2</value>
   </data>
   <data name="&gt;&gt;cmdRepelicationFunction.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="cmdLETTERS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>154, 14</value>
+    <value>2, 65</value>
   </data>
   <data name="cmdLETTERS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="cmdLETTERS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 61</value>
+    <value>74, 27</value>
   </data>
   <data name="cmdLETTERS.TabIndex" type="System.Int32, mscorlib">
     <value>149</value>
   </data>
   <data name="cmdLETTERS.Text" xml:space="preserve">
-    <value>LTRS</value>
+    <value>LETTERS</value>
   </data>
   <data name="&gt;&gt;cmdLETTERS.Name" xml:space="preserve">
     <value>cmdLETTERS</value>
@@ -403,10 +373,10 @@
     <value>grpEnterKeyboard2</value>
   </data>
   <data name="&gt;&gt;cmdLETTERS.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="cmdPi.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 45</value>
+    <value>90, 36</value>
   </data>
   <data name="cmdPi.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -430,76 +400,22 @@
     <value>grpEnterKeyboard2</value>
   </data>
   <data name="&gt;&gt;cmdPi.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="cmdDot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 14</value>
-  </data>
-  <data name="cmdDot.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="cmdDot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 30</value>
-  </data>
-  <data name="cmdDot.TabIndex" type="System.Int32, mscorlib">
-    <value>149</value>
-  </data>
-  <data name="cmdDot.Text" xml:space="preserve">
-    <value>.</value>
-  </data>
-  <data name="&gt;&gt;cmdDot.Name" xml:space="preserve">
-    <value>cmdDot</value>
-  </data>
-  <data name="&gt;&gt;cmdDot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdDot.Parent" xml:space="preserve">
-    <value>grpEnterKeyboard2</value>
-  </data>
-  <data name="&gt;&gt;cmdDot.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="cmdMonthPlus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 108</value>
-  </data>
-  <data name="cmdMonthPlus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="cmdMonthPlus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 30</value>
-  </data>
-  <data name="cmdMonthPlus.TabIndex" type="System.Int32, mscorlib">
-    <value>150</value>
-  </data>
-  <data name="cmdMonthPlus.Text" xml:space="preserve">
-    <value>mon+</value>
-  </data>
-  <data name="&gt;&gt;cmdMonthPlus.Name" xml:space="preserve">
-    <value>cmdMonthPlus</value>
-  </data>
-  <data name="&gt;&gt;cmdMonthPlus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdMonthPlus.Parent" xml:space="preserve">
-    <value>grpEnterKeyboard2</value>
-  </data>
-  <data name="&gt;&gt;cmdMonthPlus.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="cmdLetters2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>154, 77</value>
+    <value>75, 65</value>
   </data>
   <data name="cmdLetters2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="cmdLetters2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 61</value>
+    <value>61, 26</value>
   </data>
   <data name="cmdLetters2.TabIndex" type="System.Int32, mscorlib">
     <value>152</value>
   </data>
   <data name="cmdLetters2.Text" xml:space="preserve">
-    <value>ltrs</value>
+    <value>letters</value>
   </data>
   <data name="&gt;&gt;cmdLetters2.Name" xml:space="preserve">
     <value>cmdLetters2</value>
@@ -511,49 +427,22 @@
     <value>grpEnterKeyboard2</value>
   </data>
   <data name="&gt;&gt;cmdLetters2.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="cmdComma.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 45</value>
-  </data>
-  <data name="cmdComma.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="cmdComma.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 30</value>
-  </data>
-  <data name="cmdComma.TabIndex" type="System.Int32, mscorlib">
-    <value>152</value>
-  </data>
-  <data name="cmdComma.Text" xml:space="preserve">
-    <value>,</value>
-  </data>
-  <data name="&gt;&gt;cmdComma.Name" xml:space="preserve">
-    <value>cmdComma</value>
-  </data>
-  <data name="&gt;&gt;cmdComma.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdComma.Parent" xml:space="preserve">
-    <value>grpEnterKeyboard2</value>
-  </data>
-  <data name="&gt;&gt;cmdComma.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="cmdMonthMinus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>106, 77</value>
+    <value>134, 36</value>
   </data>
   <data name="cmdMonthMinus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="cmdMonthMinus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 30</value>
+    <value>53, 30</value>
   </data>
   <data name="cmdMonthMinus.TabIndex" type="System.Int32, mscorlib">
     <value>151</value>
   </data>
   <data name="cmdMonthMinus.Text" xml:space="preserve">
-    <value>mon-</value>
+    <value>months </value>
   </data>
   <data name="&gt;&gt;cmdMonthMinus.Name" xml:space="preserve">
     <value>cmdMonthMinus</value>
@@ -565,10 +454,10 @@
     <value>grpEnterKeyboard2</value>
   </data>
   <data name="&gt;&gt;cmdMonthMinus.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="cmdColon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 77</value>
+    <value>2, 7</value>
   </data>
   <data name="cmdColon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -592,10 +481,76 @@
     <value>grpEnterKeyboard2</value>
   </data>
   <data name="&gt;&gt;cmdColon.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="Button3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="Button3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="Button3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>53, 97</value>
+  </data>
+  <data name="Button3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="Button3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="Button3.TabIndex" type="System.Int32, mscorlib">
+    <value>154</value>
+  </data>
+  <data name="Button3.Text" xml:space="preserve">
+    <value>factor </value>
+  </data>
+  <data name="&gt;&gt;Button3.Name" xml:space="preserve">
+    <value>Button3</value>
+  </data>
+  <data name="&gt;&gt;Button3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;Button3.Parent" xml:space="preserve">
+    <value>grpEnterKeyboard2</value>
+  </data>
+  <data name="&gt;&gt;Button3.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="cmdFactor.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="cmdFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 98</value>
+  </data>
+  <data name="cmdFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="cmdFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>153</value>
+  </data>
+  <data name="cmdFactor.Text" xml:space="preserve">
+    <value>factor </value>
+  </data>
+  <data name="&gt;&gt;cmdFactor.Name" xml:space="preserve">
+    <value>cmdFactor</value>
+  </data>
+  <data name="&gt;&gt;cmdFactor.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdFactor.Parent" xml:space="preserve">
+    <value>grpEnterKeyboard2</value>
+  </data>
+  <data name="&gt;&gt;cmdFactor.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="grpEnterKeyboard2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>364, 48</value>
+    <value>382, 48</value>
   </data>
   <data name="grpEnterKeyboard2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -676,7 +631,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>573, 336</value>
+    <value>593, 336</value>
   </data>
   <data name="cmdClear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1270,7 +1225,7 @@
     <value>18</value>
   </data>
   <data name="grpBasic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>160, 57</value>
+    <value>172, 46</value>
   </data>
   <data name="grpBasic.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>

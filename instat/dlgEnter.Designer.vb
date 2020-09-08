@@ -45,18 +45,15 @@ Partial Class dlgEnter
         Me.cmdMissingValues = New System.Windows.Forms.Button()
         Me.cmdExponential = New System.Windows.Forms.Button()
         Me.cmdConcantenateFunction = New System.Windows.Forms.Button()
-        Me.cmdSequence2 = New System.Windows.Forms.Button()
         Me.cmdSequenceFunction = New System.Windows.Forms.Button()
         Me.cmdRepelicationFunction = New System.Windows.Forms.Button()
         Me.cmdLETTERS = New System.Windows.Forms.Button()
         Me.cmdPi = New System.Windows.Forms.Button()
-        Me.cmdDot = New System.Windows.Forms.Button()
-        Me.cmdMonthPlus = New System.Windows.Forms.Button()
         Me.cmdLetters2 = New System.Windows.Forms.Button()
-        Me.cmdComma = New System.Windows.Forms.Button()
         Me.cmdMonthMinus = New System.Windows.Forms.Button()
         Me.cmdColon = New System.Windows.Forms.Button()
         Me.grpEnterKeyboard2 = New System.Windows.Forms.GroupBox()
+        Me.cmdFactor = New System.Windows.Forms.Button()
         Me.ucrSaveEnterResultInto = New instat.ucrInputComboBox()
         Me.ucrDataFrameEnter = New instat.ucrDataFrame()
         Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
@@ -83,6 +80,7 @@ Partial Class dlgEnter
         Me.cmd2 = New System.Windows.Forms.Button()
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.grpBasic.SuspendLayout()
         Me.SuspendLayout()
@@ -123,12 +121,6 @@ Partial Class dlgEnter
         Me.cmdConcantenateFunction.Name = "cmdConcantenateFunction"
         Me.cmdConcantenateFunction.UseVisualStyleBackColor = True
         '
-        'cmdSequence2
-        '
-        resources.ApplyResources(Me.cmdSequence2, "cmdSequence2")
-        Me.cmdSequence2.Name = "cmdSequence2"
-        Me.cmdSequence2.UseVisualStyleBackColor = True
-        '
         'cmdSequenceFunction
         '
         resources.ApplyResources(Me.cmdSequenceFunction, "cmdSequenceFunction")
@@ -154,30 +146,11 @@ Partial Class dlgEnter
         Me.cmdPi.Name = "cmdPi"
         Me.cmdPi.UseVisualStyleBackColor = True
         '
-        'cmdDot
-        '
-        resources.ApplyResources(Me.cmdDot, "cmdDot")
-        Me.cmdDot.Name = "cmdDot"
-        Me.cmdDot.UseVisualStyleBackColor = True
-        '
-        'cmdMonthPlus
-        '
-        resources.ApplyResources(Me.cmdMonthPlus, "cmdMonthPlus")
-        Me.cmdMonthPlus.Name = "cmdMonthPlus"
-        Me.cmdMonthPlus.UseVisualStyleBackColor = True
-        '
         'cmdLetters2
         '
         resources.ApplyResources(Me.cmdLetters2, "cmdLetters2")
         Me.cmdLetters2.Name = "cmdLetters2"
         Me.cmdLetters2.UseVisualStyleBackColor = True
-        '
-        'cmdComma
-        '
-        resources.ApplyResources(Me.cmdComma, "cmdComma")
-        Me.cmdComma.Name = "cmdComma"
-        Me.cmdComma.Tag = ""
-        Me.cmdComma.UseVisualStyleBackColor = True
         '
         'cmdMonthMinus
         '
@@ -193,23 +166,27 @@ Partial Class dlgEnter
         '
         'grpEnterKeyboard2
         '
+        Me.grpEnterKeyboard2.Controls.Add(Me.Button3)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdFactor)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdColon)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdMonthMinus)
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdComma)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdLetters2)
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdMonthPlus)
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdDot)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdPi)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdLETTERS)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdRepelicationFunction)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdSequenceFunction)
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdSequence2)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdConcantenateFunction)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdExponential)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdMissingValues)
         resources.ApplyResources(Me.grpEnterKeyboard2, "grpEnterKeyboard2")
         Me.grpEnterKeyboard2.Name = "grpEnterKeyboard2"
         Me.grpEnterKeyboard2.TabStop = False
+        '
+        'cmdFactor
+        '
+        resources.ApplyResources(Me.cmdFactor, "cmdFactor")
+        Me.cmdFactor.Name = "cmdFactor"
+        Me.cmdFactor.UseVisualStyleBackColor = True
         '
         'ucrSaveEnterResultInto
         '
@@ -390,6 +367,12 @@ Partial Class dlgEnter
         Me.cmd1.Name = "cmd1"
         Me.cmd1.UseVisualStyleBackColor = True
         '
+        'Button3
+        '
+        resources.ApplyResources(Me.Button3, "Button3")
+        Me.Button3.Name = "Button3"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'dlgEnter
         '
         resources.ApplyResources(Me, "$this")
@@ -426,15 +409,11 @@ Partial Class dlgEnter
     Friend WithEvents cmdMissingValues As Button
     Friend WithEvents cmdExponential As Button
     Friend WithEvents cmdConcantenateFunction As Button
-    Friend WithEvents cmdSequence2 As Button
     Friend WithEvents cmdSequenceFunction As Button
     Friend WithEvents cmdRepelicationFunction As Button
     Friend WithEvents cmdLETTERS As Button
     Friend WithEvents cmdPi As Button
-    Friend WithEvents cmdDot As Button
-    Friend WithEvents cmdMonthPlus As Button
     Friend WithEvents cmdLetters2 As Button
-    Friend WithEvents cmdComma As Button
     Friend WithEvents cmdMonthMinus As Button
     Friend WithEvents cmdColon As Button
     Friend WithEvents grpEnterKeyboard2 As GroupBox
@@ -460,4 +439,6 @@ Partial Class dlgEnter
     Friend WithEvents cmd2 As Button
     Friend WithEvents cmd0 As Button
     Friend WithEvents cmd1 As Button
+    Friend WithEvents cmdFactor As Button
+    Friend WithEvents Button3 As Button
 End Class
