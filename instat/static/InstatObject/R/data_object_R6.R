@@ -3634,7 +3634,7 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
   if(missing(vars))stop("vars is missing with no default")
   date_col <- self$get_columns_from_data(date_col_name, use_current_filter = FALSE)
   if(!lubridate::is.Date(date_col)) stop("This column must be a date or time!")
-  curr_data <- self$get_data_frame()
+  curr_data <- self$get_data_frame(use_current_filter = FALSE)
   if(!missing(station_col_name)) {
     station_col <- self$get_columns_from_data(station_col_name, use_current_filter = FALSE)
     station_names <- unique(station_col)
@@ -3678,7 +3678,7 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
 }
 )
 
-DataSheet$set("public", "visualize_element_na", function(element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = 1461, x_with_truth = NULL){
+DataSheet$set("public", "visualize_element_na", function(element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = 1461, x_with_truth = NULL, measure = "percent"){
   curr_data <- self$get_data_frame()
   if(!missing(station_col_name)){station_col <- self$get_columns_from_data(station_col_name);station_names <- unique(station_col)}
   if(!missing(element_col_name)){element_col <- self$get_columns_from_data(element_col_name)}
@@ -3703,9 +3703,9 @@ DataSheet$set("public", "visualize_element_na", function(element_col_name, eleme
       if(!missing(station_col_name)){
         for (i in seq_along(station_names)) {
           temp_data <- curr_data[station_col==station_names[i],] 
-          plt_list[[i]] <- imputeTS::ggplot_na_intervals(x = temp_data[,element_col_name], title = paste0(station_names[i], ":Missing Values per Interval"), ylab = ylab, interval_size = interval_size) 
+          plt_list[[i]] <- imputeTS::ggplot_na_intervals(x = temp_data[,element_col_name], title = paste0(station_names[i], ":Missing Values per Interval"), ylab = ylab, interval_size = interval_size, measure = measure) 
         }
-      }else{plt <- imputeTS::ggplot_na_intervals(x = element_col, ylab = ylab, interval_size = interval_size)}
+      }else{plt <- imputeTS::ggplot_na_intervals(x = element_col, ylab = ylab, interval_size = interval_size, measure = measure)}
   }else if (type == "imputation"){
     if(!missing(station_col_name)){
       for (i in seq_along(station_names)) {
