@@ -84,6 +84,7 @@ Partial Class dlgEnter
         Me.cmdDay = New System.Windows.Forms.Button()
         Me.cmdMonth = New System.Windows.Forms.Button()
         Me.cmdRunif = New System.Windows.Forms.Button()
+        Me.cmdRnorm = New System.Windows.Forms.Button()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.grpBasic.SuspendLayout()
         Me.SuspendLayout()
@@ -169,6 +170,7 @@ Partial Class dlgEnter
         '
         'grpEnterKeyboard2
         '
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRnorm)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdRunif)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdMonth)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdDay)
@@ -397,6 +399,12 @@ Partial Class dlgEnter
         Me.cmdRunif.Name = "cmdRunif"
         Me.cmdRunif.UseVisualStyleBackColor = True
         '
+        'cmdRnorm
+        '
+        resources.ApplyResources(Me.cmdRnorm, "cmdRnorm")
+        Me.cmdRnorm.Name = "cmdRnorm"
+        Me.cmdRnorm.UseVisualStyleBackColor = True
+        '
         'dlgEnter
         '
         resources.ApplyResources(Me, "$this")
@@ -468,4 +476,5 @@ Partial Class dlgEnter
     Friend WithEvents cmdDay As Button
     Friend WithEvents cmdMonth As Button
     Friend WithEvents cmdRunif As Button
+    Friend WithEvents cmdRnorm As Button
 End Class
