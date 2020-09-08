@@ -718,6 +718,11 @@ DataBook$set("public", "add_filter", function(data_name, filter, filter_name = "
 }
 ) 
 
+DataBook$set("public","add_filter_as_levels", function(data_name, filter_levels, column){
+  self$get_data_objects(data_name)$add_filter_as_levels(filter_levels, column)
+})
+
+
 DataBook$set("public", "current_filter", function(data_name) {
   return(self$get_data_objects(data_name)$current_filter)
 }

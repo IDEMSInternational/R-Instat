@@ -126,14 +126,14 @@
     <value>10, 197</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>119, 23</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="cmdOptions.Text" xml:space="preserve">
-    <value>Options</value>
+    <value>Plot Options</value>
   </data>
   <data name="&gt;&gt;cmdOptions.Name" xml:space="preserve">
     <value>cmdOptions</value>
