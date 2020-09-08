@@ -3686,35 +3686,35 @@ DataSheet$set("public", "visualize_element_na", function(element_col_name, eleme
   if(!(type %in% c("distribution", "gapsize", "interval", "imputation"))) stop(type, " must be either distribution, gapsize or imputation")
   plt_list <- list()
   if(type == "distribution"){
-    if(!missing(station_col_name)){
+    if(!missing(station_col_name) && dplyr::n_distinct(station_names)>1){
       for (i in seq_along(station_names)) {
         temp_data <- curr_data[station_col==station_names[i],] 
         plt_list[[i]] <- imputeTS::ggplot_na_distribution(x = temp_data[,element_col_name], x_axis_labels = temp_data[,x_axis_labels_col_name], title = station_names[i], xlab = xlab, ylab = ylab) 
       }
     }else{plt <- imputeTS::ggplot_na_distribution(x = element_col, x_axis_labels = curr_data[,x_axis_labels_col_name], xlab = xlab, ylab = ylab)}
   }else if (type == "gapsize"){
-    if(!missing(station_col_name)){
+    if(!missing(station_col_name) && dplyr::n_distinct(station_names)>1){
       for (i in seq_along(station_names)) {
         temp_data <- curr_data[station_col==station_names[i],] 
         plt_list[[i]] <- imputeTS::ggplot_na_gapsize(x = temp_data[,element_col_name], include_total = TRUE, title =paste0(station_names[i], ":Occurrence of gap sizes"), xlab = xlab, ylab = ylab, legend = legend, orientation = orientation) 
       }
     }else{plt <- imputeTS::ggplot_na_gapsize(x = element_col, include_total = TRUE, xlab = xlab, ylab = ylab, legend = legend, orientation = orientation)}
   }else if(type == "interval"){
-      if(!missing(station_col_name)){
+      if(!missing(station_col_name) && dplyr::n_distinct(station_names)>1){
         for (i in seq_along(station_names)) {
           temp_data <- curr_data[station_col==station_names[i],] 
           plt_list[[i]] <- imputeTS::ggplot_na_intervals(x = temp_data[,element_col_name], title = paste0(station_names[i], ":Missing Values per Interval"), ylab = ylab, interval_size = interval_size, measure = measure) 
         }
       }else{plt <- imputeTS::ggplot_na_intervals(x = element_col, ylab = ylab, interval_size = interval_size, measure = measure)}
   }else if (type == "imputation"){
-    if(!missing(station_col_name)){
+    if(!missing(station_col_name) && dplyr::n_distinct(station_names)>1){
       for (i in seq_along(station_names)) {
         temp_data <- curr_data[station_col==station_names[i],] 
         plt_list[[i]] <- imputeTS::ggplot_na_imputations(x_with_na = temp_data[,element_col_name], x_with_imputations = temp_data[,element_col_name_imputed], x_axis_labels = temp_data[,x_axis_labels_col_name], title = station_names[i], xlab = xlab, ylab = ylab, legend = legend, x_with_truth = x_with_truth) 
       }
     }else{plt <- imputeTS::ggplot_na_imputations(x_with_na = element_col, x_with_imputations = element_imputed_col, x_axis_labels = curr_data[,x_axis_labels_col_name], xlab = xlab, ylab = ylab, legend = legend, x_with_truth = x_with_truth)}
   }
-  if(!missing(station_col_name)) {gridExtra::grid.arrange(grobs = plt_list, ncol = ncol)}
+  if(!missing(station_col_name) && dplyr::n_distinct(station_names)>1) {gridExtra::grid.arrange(grobs = plt_list, ncol = ncol)}
   else{return(plt)}
 }
 )
