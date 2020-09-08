@@ -629,6 +629,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularCalculator = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3342,7 +3343,7 @@ Partial Class frmMain
         '
         'mnuStructuredCircular
         '
-        Me.mnuStructuredCircular.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularDefine})
+        Me.mnuStructuredCircular.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularDefine, Me.mnuStructuredCircularCalculator})
         Me.mnuStructuredCircular.Name = "mnuStructuredCircular"
         resources.ApplyResources(Me.mnuStructuredCircular, "mnuStructuredCircular")
         '
@@ -3990,6 +3991,11 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
+        'mnuStructuredCircularCalculator
+        '
+        Me.mnuStructuredCircularCalculator.Name = "mnuStructuredCircularCalculator"
+        resources.ApplyResources(Me.mnuStructuredCircularCalculator, "mnuStructuredCircularCalculator")
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4626,4 +4632,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticCompareDensityPlot As ToolStripMenuItem
     Friend WithEvents mnuClimaticCompareConditionalQuantiles As ToolStripMenuItem
     Friend WithEvents mnuClimaticCompareTaylorDiagram As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularCalculator As ToolStripMenuItem
 End Class
