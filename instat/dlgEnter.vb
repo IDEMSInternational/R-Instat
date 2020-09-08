@@ -253,15 +253,15 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrSaveEnterResultInto_NameChanged() Handles ucrSaveEnterResultInto.NameChanged
+    Private Sub ucrSaveEnterResultInto_NameChanged()
         SaveResults()
     End Sub
 
-    Private Sub ucrSaveEnterResultInto_ContentsChanged() Handles ucrSaveEnterResultInto.ContentsChanged
+    Private Sub ucrSaveEnterResultInto_ContentsChanged()
         TestOKEnabled()
     End Sub
 
-    Private Sub chkSaveEnterResultInto_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveEnterResultInto.CheckedChanged
+    Private Sub chkSaveEnterResultInto_CheckedChanged(sender As Object, e As EventArgs)
         If chkSaveEnterResultInto.Checked Then
             ucrSaveEnterResultInto.Visible = True
         Else

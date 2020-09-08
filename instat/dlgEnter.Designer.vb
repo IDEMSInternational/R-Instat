@@ -41,7 +41,6 @@ Partial Class dlgEnter
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgEnter))
         Me.chkShowEnterArguments = New System.Windows.Forms.CheckBox()
         Me.lblData = New System.Windows.Forms.Label()
-        Me.chkSaveEnterResultInto = New System.Windows.Forms.CheckBox()
         Me.cmdMissingValues = New System.Windows.Forms.Button()
         Me.cmdExponential = New System.Windows.Forms.Button()
         Me.cmdConcantenateFunction = New System.Windows.Forms.Button()
@@ -54,7 +53,6 @@ Partial Class dlgEnter
         Me.cmdColon = New System.Windows.Forms.Button()
         Me.grpEnterKeyboard2 = New System.Windows.Forms.GroupBox()
         Me.cmdFactor = New System.Windows.Forms.Button()
-        Me.ucrSaveEnterResultInto = New instat.ucrInputComboBox()
         Me.ucrDataFrameEnter = New instat.ucrDataFrame()
         Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
         Me.ucrBase = New instat.ucrButtons()
@@ -85,6 +83,7 @@ Partial Class dlgEnter
         Me.cmdMonth = New System.Windows.Forms.Button()
         Me.cmdRunif = New System.Windows.Forms.Button()
         Me.cmdRnorm = New System.Windows.Forms.Button()
+        Me.UcrSave1 = New instat.ucrSave()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.grpBasic.SuspendLayout()
         Me.SuspendLayout()
@@ -100,12 +99,6 @@ Partial Class dlgEnter
         resources.ApplyResources(Me.lblData, "lblData")
         Me.lblData.Name = "lblData"
         Me.lblData.Tag = "Data"
-        '
-        'chkSaveEnterResultInto
-        '
-        resources.ApplyResources(Me.chkSaveEnterResultInto, "chkSaveEnterResultInto")
-        Me.chkSaveEnterResultInto.Name = "chkSaveEnterResultInto"
-        Me.chkSaveEnterResultInto.UseVisualStyleBackColor = True
         '
         'cmdMissingValues
         '
@@ -195,14 +188,6 @@ Partial Class dlgEnter
         resources.ApplyResources(Me.cmdFactor, "cmdFactor")
         Me.cmdFactor.Name = "cmdFactor"
         Me.cmdFactor.UseVisualStyleBackColor = True
-        '
-        'ucrSaveEnterResultInto
-        '
-        Me.ucrSaveEnterResultInto.AddQuotesIfUnrecognised = True
-        Me.ucrSaveEnterResultInto.GetSetSelectedIndex = -1
-        Me.ucrSaveEnterResultInto.IsReadOnly = False
-        resources.ApplyResources(Me.ucrSaveEnterResultInto, "ucrSaveEnterResultInto")
-        Me.ucrSaveEnterResultInto.Name = "ucrSaveEnterResultInto"
         '
         'ucrDataFrameEnter
         '
@@ -405,16 +390,20 @@ Partial Class dlgEnter
         Me.cmdRnorm.Name = "cmdRnorm"
         Me.cmdRnorm.UseVisualStyleBackColor = True
         '
+        'UcrSave1
+        '
+        resources.ApplyResources(Me.UcrSave1, "UcrSave1")
+        Me.UcrSave1.Name = "UcrSave1"
+        '
         'dlgEnter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.UcrSave1)
         Me.Controls.Add(Me.grpBasic)
         Me.Controls.Add(Me.btnExample)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.grpEnterKeyboard2)
-        Me.Controls.Add(Me.ucrSaveEnterResultInto)
-        Me.Controls.Add(Me.chkSaveEnterResultInto)
         Me.Controls.Add(Me.ucrDataFrameEnter)
         Me.Controls.Add(Me.chkShowEnterArguments)
         Me.Controls.Add(Me.lblData)
@@ -436,8 +425,6 @@ Partial Class dlgEnter
     Friend WithEvents lblData As Label
     Friend WithEvents ucrReceiverForEnterCalculation As ucrReceiverExpression
     Friend WithEvents ucrDataFrameEnter As ucrDataFrame
-    Friend WithEvents ucrSaveEnterResultInto As ucrInputComboBox
-    Friend WithEvents chkSaveEnterResultInto As CheckBox
     Friend WithEvents cmdMissingValues As Button
     Friend WithEvents cmdExponential As Button
     Friend WithEvents cmdConcantenateFunction As Button
@@ -477,4 +464,5 @@ Partial Class dlgEnter
     Friend WithEvents cmdMonth As Button
     Friend WithEvents cmdRunif As Button
     Friend WithEvents cmdRnorm As Button
+    Friend WithEvents UcrSave1 As ucrSave
 End Class
