@@ -188,7 +188,7 @@ Public Class dlgInfillMissingValues
         ucrPnlOptions.AddToLinkedControls({ucrReceiverImputed, ucrReceiverTrueValues}, {rdoShow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrInputComboType}, {rdoDisplay}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboType.AddToLinkedControls({ucrChkFlipCordinates}, {"Gap size"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboType.AddToLinkedControls({ucrInputIntervalSize}, {"Intervals"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboType.AddToLinkedControls({ucrInputIntervalSize, ucrInputComboMeasure}, {"Intervals"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboFunction.SetLinkedDisplayControl(lblFunction)
         ucrPnlStartEnd.SetLinkedDisplayControl(grpStartEnd)
         ucrNudMaximum.SetLinkedDisplayControl(lblRows)
@@ -207,6 +207,7 @@ Public Class dlgInfillMissingValues
         ucrInputIntervalSize.SetLinkedDisplayControl(lblIntervalSize)
         ucrReceiverDispMultShowStation.SetLinkedDisplayControl(lblDispMultShowStation)
         ucrReceiverTrueValues.SetLinkedDisplayControl(lblTrueValues)
+        ucrInputComboMeasure.SetLinkedDisplayControl(lblPercentCount)
 
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorInfillMissing.ucrAvailableDataFrames)
         ucrSaveNewColumn.SetSaveTypeAsColumn()
@@ -251,6 +252,13 @@ Public Class dlgInfillMissingValues
         ucrInputIntervalSize.SetParameter(New RParameter("interval_size", 11))
         ucrInputIntervalSize.SetValidationTypeAsNumeric()
         ucrInputIntervalSize.AddQuotesIfUnrecognised = False
+
+        ucrInputComboMeasure.SetParameter(New RParameter("measure", 12))
+        Dim dctMeasures As New Dictionary(Of String, String)
+        dctMeasures.Add("Percentages", Chr(34) & "percent" & Chr(34))
+        dctMeasures.Add("Counts", Chr(34) & "count" & Chr(34))
+        ucrInputComboMeasure.SetItems(dctMeasures)
+        ucrInputComboMeasure.SetDropDownStyleAsNonEditable()
 
         ucrSaveGraph.SetPrefix("missingplot")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -331,6 +339,7 @@ Public Class dlgInfillMissingValues
         clsVisualizeElementNa.AddParameter("data_name", Chr(34) & ucrSelectorInfillMissing.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
         clsVisualizeElementNa.AddParameter("type", Chr(34) & "distribution" & Chr(34), iPosition:=8)
         clsVisualizeElementNa.AddParameter("interval_size", 1461, iPosition:=11)
+        clsVisualizeElementNa.AddParameter("measure", Chr(34) & "percent" & Chr(34), iPosition:=12)
         clsVisualizeElementNa.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorInfillMissing.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsVisualizeElementNa.AddParameter("ncol", 1, iPosition:=4)
 
@@ -376,6 +385,7 @@ Public Class dlgInfillMissingValues
         ucrInputIntervalSize.SetRCode(clsVisualizeElementNa, bReset)
         ucrReceiverDispMultShowStation.SetRCode(clsVisualizeElementNa, bReset)
         ucrReceiverTrueValues.SetRCode(clsVisualizeElementNa, bReset)
+        ucrInputComboMeasure.SetRCode(clsVisualizeElementNa, bReset)
 
         ucrSaveNewColumn.AddAdditionalRCode(clsAggregateFunction, iAdditionalPairNo:=1)
 
