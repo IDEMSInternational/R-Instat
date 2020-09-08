@@ -93,7 +93,7 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
-        ucrInputComboTests.SetItems({"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", "Bartel", "br", "runs", "Sen", "serial corr", "snh", "ad", "cvm", "lillie", "pearson", "sf"})
+        ucrInputComboTests.SetItems({"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", "---------------------", "Bartel", "br", "runs", "Sen", "serial corr", "snh", "---------------------", "ad", "cvm", "lillie", "pearson", "sf"})
         ucrInputComboTests.SetDropDownStyleAsNonEditable()
 
         ucrInputComboEstimate.SetItems({"mean", "median", "normal", "quantile", "sd", "variance"})
@@ -904,6 +904,9 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.Reset()
         AddAsNumeric()
         EstimatesAsNumeric()
+        If ucrInputComboTests.GetText = "---------------------" Then
+            ucrInputComboTests.cboInput.SelectedIndex = 0
+        End If
     End Sub
 
     Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlContentsChanged, ucrReceiverVariable.ControlContentsChanged
