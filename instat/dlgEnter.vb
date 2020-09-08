@@ -388,4 +388,12 @@ Public Class dlgEnter
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
         ucrReceiverForEnterCalculation.Clear()
     End Sub
+
+    Private Sub cmdDate_Click(sender As Object, e As EventArgs) Handles cmdDate.Click
+        If chkShowEnterArguments.Checked Then
+            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.date('')")
+        Else
+            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.date('')", 3)
+        End If
+    End Sub
 End Class
