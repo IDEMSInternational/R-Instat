@@ -51,38 +51,35 @@ Public Class dlgEnter
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.SetCommandString("")
-        ucrSaveEnterResultInto.SetItemsTypeAsColumns()
-        ucrSaveEnterResultInto.SetDefaultTypeAsColumn()
+        ucrSaveEnterResultInto.SetSaveTypeAsColumn()
+        ucrSaveEnterResultInto.SetPrefix("Enter")
+        ucrSaveEnterResultInto.SetIsTextBox()
         ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
-        ucrSaveEnterResultInto.SetValidationTypeAsRVariable()
+        ucrSaveEnterResultInto.SetLabelText("Enter Result Into:")
+
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
     End Sub
     Private Sub SetDefaults()
         chkShowEnterArguments.Checked = False
         ucrDataFrameEnter.Reset()
-        chkSaveEnterResultInto.Checked = True
-        ucrSaveEnterResultInto.SetPrefix("Enter")
         ucrReceiverForEnterCalculation.Clear()
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
+        ucrSaveEnterResultInto.SetRCode(ucrBase.clsRsyntax.SetCommandString(""), bReset:=False)
     End Sub
     Private Sub ReopenDialog()
         SaveResults()
     End Sub
     Private Sub TestOKEnabled()
-        If Not ucrReceiverForEnterCalculation.IsEmpty Then
-            If chkSaveEnterResultInto.Checked AndAlso Not ucrSaveEnterResultInto.IsEmpty Then
-                ucrBase.OKEnabled(True)
-            Else
-                ucrBase.OKEnabled(False)
-            End If
+        If Not ucrReceiverForEnterCalculation.IsEmpty AndAlso ucrSaveEnterResultInto.IsComplete Then
+            ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
     Private Sub SaveResults()
-        If chkSaveEnterResultInto.Checked Then
+        If ucrSaveEnterResultInto.IsComplete Then
             ucrBase.clsRsyntax.SetAssignTo(ucrSaveEnterResultInto.GetText(), strTempColumn:=ucrSaveEnterResultInto.GetText(), strTempDataframe:=ucrDataFrameEnter.cboAvailableDataFrames.Text, bRequireCorrectLength:=False)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
@@ -259,15 +256,6 @@ Public Class dlgEnter
 
     Private Sub ucrSaveEnterResultInto_ContentsChanged()
         TestOKEnabled()
-    End Sub
-
-    Private Sub chkSaveEnterResultInto_CheckedChanged(sender As Object, e As EventArgs)
-        If chkSaveEnterResultInto.Checked Then
-            ucrSaveEnterResultInto.Visible = True
-        Else
-            ucrSaveEnterResultInto.Visible = False
-        End If
-        SaveResults()
     End Sub
 
     ''' <summary>

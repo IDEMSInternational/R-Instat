@@ -83,7 +83,7 @@ Partial Class dlgEnter
         Me.cmdMonth = New System.Windows.Forms.Button()
         Me.cmdRunif = New System.Windows.Forms.Button()
         Me.cmdRnorm = New System.Windows.Forms.Button()
-        Me.UcrSave1 = New instat.ucrSave()
+        Me.ucrSaveEnterResultInto = New instat.ucrSave()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.grpBasic.SuspendLayout()
         Me.SuspendLayout()
@@ -390,16 +390,16 @@ Partial Class dlgEnter
         Me.cmdRnorm.Name = "cmdRnorm"
         Me.cmdRnorm.UseVisualStyleBackColor = True
         '
-        'UcrSave1
+        'ucrSaveEnterResultInto
         '
-        resources.ApplyResources(Me.UcrSave1, "UcrSave1")
-        Me.UcrSave1.Name = "UcrSave1"
+        resources.ApplyResources(Me.ucrSaveEnterResultInto, "ucrSaveEnterResultInto")
+        Me.ucrSaveEnterResultInto.Name = "ucrSaveEnterResultInto"
         '
         'dlgEnter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.UcrSave1)
+        Me.Controls.Add(Me.ucrSaveEnterResultInto)
         Me.Controls.Add(Me.grpBasic)
         Me.Controls.Add(Me.btnExample)
         Me.Controls.Add(Me.ucrTryModelling)
@@ -464,5 +464,5 @@ Partial Class dlgEnter
     Friend WithEvents cmdMonth As Button
     Friend WithEvents cmdRunif As Button
     Friend WithEvents cmdRnorm As Button
-    Friend WithEvents UcrSave1 As ucrSave
+    Friend WithEvents ucrSaveEnterResultInto As ucrSave
 End Class
