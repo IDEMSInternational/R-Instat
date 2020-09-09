@@ -356,11 +356,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdDate_Click(sender As Object, e As EventArgs) Handles cmdDate.Click
-        If chkShowEnterArguments.Checked Then
-            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.date('')")
-        Else
-            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.date('')", 3)
-        End If
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.date('')", 2)
     End Sub
 
     Private Sub cmdDay_Click(sender As Object, e As EventArgs) Handles cmdDay.Click

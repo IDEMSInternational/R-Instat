@@ -58,10 +58,6 @@ Partial Class dlgEnter
         Me.cmdDay = New System.Windows.Forms.Button()
         Me.cmdDate = New System.Windows.Forms.Button()
         Me.cmdFactor = New System.Windows.Forms.Button()
-        Me.ucrDataFrameEnter = New instat.ucrDataFrame()
-        Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrTryModelling = New instat.ucrTry()
         Me.btnExample = New System.Windows.Forms.Button()
         Me.grpBasic = New System.Windows.Forms.GroupBox()
         Me.cmdClear = New System.Windows.Forms.Button()
@@ -84,6 +80,10 @@ Partial Class dlgEnter
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
         Me.ucrSaveEnterResultInto = New instat.ucrSave()
+        Me.ucrTryModelling = New instat.ucrTry()
+        Me.ucrDataFrameEnter = New instat.ucrDataFrame()
+        Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.grpBasic.SuspendLayout()
         Me.SuspendLayout()
@@ -218,32 +218,6 @@ Partial Class dlgEnter
         resources.ApplyResources(Me.cmdFactor, "cmdFactor")
         Me.cmdFactor.Name = "cmdFactor"
         Me.cmdFactor.UseVisualStyleBackColor = True
-        '
-        'ucrDataFrameEnter
-        '
-        Me.ucrDataFrameEnter.bDropUnusedFilterLevels = False
-        Me.ucrDataFrameEnter.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrDataFrameEnter, "ucrDataFrameEnter")
-        Me.ucrDataFrameEnter.Name = "ucrDataFrameEnter"
-        '
-        'ucrReceiverForEnterCalculation
-        '
-        Me.ucrReceiverForEnterCalculation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverForEnterCalculation, "ucrReceiverForEnterCalculation")
-        Me.ucrReceiverForEnterCalculation.Name = "ucrReceiverForEnterCalculation"
-        Me.ucrReceiverForEnterCalculation.Selector = Nothing
-        Me.ucrReceiverForEnterCalculation.strNcFilePath = ""
-        Me.ucrReceiverForEnterCalculation.ucrSelector = Nothing
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrTryModelling
-        '
-        resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
-        Me.ucrTryModelling.Name = "ucrTryModelling"
         '
         'btnExample
         '
@@ -394,6 +368,32 @@ Partial Class dlgEnter
         '
         resources.ApplyResources(Me.ucrSaveEnterResultInto, "ucrSaveEnterResultInto")
         Me.ucrSaveEnterResultInto.Name = "ucrSaveEnterResultInto"
+        '
+        'ucrTryModelling
+        '
+        resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
+        Me.ucrTryModelling.Name = "ucrTryModelling"
+        '
+        'ucrDataFrameEnter
+        '
+        Me.ucrDataFrameEnter.bDropUnusedFilterLevels = False
+        Me.ucrDataFrameEnter.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrDataFrameEnter, "ucrDataFrameEnter")
+        Me.ucrDataFrameEnter.Name = "ucrDataFrameEnter"
+        '
+        'ucrReceiverForEnterCalculation
+        '
+        Me.ucrReceiverForEnterCalculation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverForEnterCalculation, "ucrReceiverForEnterCalculation")
+        Me.ucrReceiverForEnterCalculation.Name = "ucrReceiverForEnterCalculation"
+        Me.ucrReceiverForEnterCalculation.Selector = Nothing
+        Me.ucrReceiverForEnterCalculation.strNcFilePath = ""
+        Me.ucrReceiverForEnterCalculation.ucrSelector = Nothing
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgEnter
         '
