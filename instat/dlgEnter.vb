@@ -238,7 +238,21 @@ Public Class dlgEnter
         lstView.Items.Item(4).ToolTipText = "A single number repeated for the data frame" 'todo. sensible tooltip here.
 
         lstView.Items.Add(New ListViewItem({"'Nairobi'"}))
-        lstView.Items.Item(5).ToolTipText = "a single text repeated for the data frame"
+        lstView.Items.Item(5).ToolTipText = "a single text repeated for the data frame" 'todo. Sensible tooltip here.
+
+        lstView.Items.Add(New ListViewItem({"c(2,3,4)*1.5E02"}))
+        lstView.Items.Item(6).ToolTipText = "gives 300, 450, 600 then repeated for the data frame" 'todo. Sensible tooltip here
+
+        lstView.Items.Add(New ListViewItem({"factor(c(1,2,3))"}))
+        lstView.Items.Item(7).ToolTipText = "values 1 to 3 with the variable made into a factor" 'todo. Sensible tooltip here
+
+        lstView.Items.Add(New ListViewItem({"factor(rep(LETTERS[1:4],c(4,3,1,1)))"}))
+        lstView.Items.Item(8).ToolTipText = "Gives A,A,A,A, B,B,B,C,D as a factor"
+
+        lstView.Items.Add(New ListViewItem({"factor(rep(c(month.abb[4:7],NA),c(2,1,2,1,2)))"}))
+        lstView.Items.Item(9).ToolTipText = "Gives Apr, Apr, May, Jun, Jun, Jul, NA, NA"
+
+
 
 
         AddHandler lstView.DoubleClick, Sub()
