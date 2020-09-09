@@ -234,6 +234,12 @@ Public Class dlgEnter
         lstView.Items.Add(New ListViewItem({"month.abb"}))
         lstView.Items.Item(3).ToolTipText = "month.abb" 'todo. sensible tooltip here.
 
+        lstView.Items.Add(New ListViewItem({"4.5"}))
+        lstView.Items.Item(4).ToolTipText = "A single number repeated for the data frame" 'todo. sensible tooltip here.
+
+        lstView.Items.Add(New ListViewItem({"'Nairobi'"}))
+        lstView.Items.Item(5).ToolTipText = "a single text repeated for the data frame"
+
 
         AddHandler lstView.DoubleClick, Sub()
                                             If lstView.SelectedItems.Count > 0 Then

@@ -52,6 +52,11 @@ Partial Class dlgEnter
         Me.cmdMonths = New System.Windows.Forms.Button()
         Me.cmdColon = New System.Windows.Forms.Button()
         Me.grpEnterKeyboard2 = New System.Windows.Forms.GroupBox()
+        Me.cmdRnorm = New System.Windows.Forms.Button()
+        Me.cmdRunif = New System.Windows.Forms.Button()
+        Me.cmdMonth = New System.Windows.Forms.Button()
+        Me.cmdDay = New System.Windows.Forms.Button()
+        Me.cmdDate = New System.Windows.Forms.Button()
         Me.cmdFactor = New System.Windows.Forms.Button()
         Me.ucrDataFrameEnter = New instat.ucrDataFrame()
         Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
@@ -78,11 +83,6 @@ Partial Class dlgEnter
         Me.cmd2 = New System.Windows.Forms.Button()
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
-        Me.cmdDate = New System.Windows.Forms.Button()
-        Me.cmdDay = New System.Windows.Forms.Button()
-        Me.cmdMonth = New System.Windows.Forms.Button()
-        Me.cmdRunif = New System.Windows.Forms.Button()
-        Me.cmdRnorm = New System.Windows.Forms.Button()
         Me.ucrSaveEnterResultInto = New instat.ucrSave()
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.grpBasic.SuspendLayout()
@@ -182,6 +182,36 @@ Partial Class dlgEnter
         resources.ApplyResources(Me.grpEnterKeyboard2, "grpEnterKeyboard2")
         Me.grpEnterKeyboard2.Name = "grpEnterKeyboard2"
         Me.grpEnterKeyboard2.TabStop = False
+        '
+        'cmdRnorm
+        '
+        resources.ApplyResources(Me.cmdRnorm, "cmdRnorm")
+        Me.cmdRnorm.Name = "cmdRnorm"
+        Me.cmdRnorm.UseVisualStyleBackColor = True
+        '
+        'cmdRunif
+        '
+        resources.ApplyResources(Me.cmdRunif, "cmdRunif")
+        Me.cmdRunif.Name = "cmdRunif"
+        Me.cmdRunif.UseVisualStyleBackColor = True
+        '
+        'cmdMonth
+        '
+        resources.ApplyResources(Me.cmdMonth, "cmdMonth")
+        Me.cmdMonth.Name = "cmdMonth"
+        Me.cmdMonth.UseVisualStyleBackColor = True
+        '
+        'cmdDay
+        '
+        resources.ApplyResources(Me.cmdDay, "cmdDay")
+        Me.cmdDay.Name = "cmdDay"
+        Me.cmdDay.UseVisualStyleBackColor = True
+        '
+        'cmdDate
+        '
+        resources.ApplyResources(Me.cmdDate, "cmdDate")
+        Me.cmdDate.Name = "cmdDate"
+        Me.cmdDate.UseVisualStyleBackColor = True
         '
         'cmdFactor
         '
@@ -359,36 +389,6 @@ Partial Class dlgEnter
         resources.ApplyResources(Me.cmd1, "cmd1")
         Me.cmd1.Name = "cmd1"
         Me.cmd1.UseVisualStyleBackColor = True
-        '
-        'cmdDate
-        '
-        resources.ApplyResources(Me.cmdDate, "cmdDate")
-        Me.cmdDate.Name = "cmdDate"
-        Me.cmdDate.UseVisualStyleBackColor = True
-        '
-        'cmdDay
-        '
-        resources.ApplyResources(Me.cmdDay, "cmdDay")
-        Me.cmdDay.Name = "cmdDay"
-        Me.cmdDay.UseVisualStyleBackColor = True
-        '
-        'cmdMonth
-        '
-        resources.ApplyResources(Me.cmdMonth, "cmdMonth")
-        Me.cmdMonth.Name = "cmdMonth"
-        Me.cmdMonth.UseVisualStyleBackColor = True
-        '
-        'cmdRunif
-        '
-        resources.ApplyResources(Me.cmdRunif, "cmdRunif")
-        Me.cmdRunif.Name = "cmdRunif"
-        Me.cmdRunif.UseVisualStyleBackColor = True
-        '
-        'cmdRnorm
-        '
-        resources.ApplyResources(Me.cmdRnorm, "cmdRnorm")
-        Me.cmdRnorm.Name = "cmdRnorm"
-        Me.cmdRnorm.UseVisualStyleBackColor = True
         '
         'ucrSaveEnterResultInto
         '

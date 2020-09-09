@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="chkShowEnterArguments.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 18</value>
+    <value>303, 18</value>
   </data>
   <data name="chkShowEnterArguments.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 17</value>
@@ -459,6 +459,27 @@
   <data name="&gt;&gt;cmdColon.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="cmdRnorm.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="cmdRnorm.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdRnorm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>66, 97</value>
+  </data>
+  <data name="cmdRnorm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdRnorm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 30</value>
+  </data>
+  <data name="cmdRnorm.TabIndex" type="System.Int32, mscorlib">
+    <value>158</value>
+  </data>
+  <data name="cmdRnorm.Text" xml:space="preserve">
+    <value>rnorm </value>
+  </data>
   <data name="&gt;&gt;cmdRnorm.Name" xml:space="preserve">
     <value>cmdRnorm</value>
   </data>
@@ -470,6 +491,27 @@
   </data>
   <data name="&gt;&gt;cmdRnorm.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="cmdRunif.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="cmdRunif.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdRunif.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 97</value>
+  </data>
+  <data name="cmdRunif.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdRunif.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 30</value>
+  </data>
+  <data name="cmdRunif.TabIndex" type="System.Int32, mscorlib">
+    <value>157</value>
+  </data>
+  <data name="cmdRunif.Text" xml:space="preserve">
+    <value>runif </value>
   </data>
   <data name="&gt;&gt;cmdRunif.Name" xml:space="preserve">
     <value>cmdRunif</value>
@@ -483,6 +525,27 @@
   <data name="&gt;&gt;cmdRunif.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="cmdMonth.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="cmdMonth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdMonth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 68</value>
+  </data>
+  <data name="cmdMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdMonth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 30</value>
+  </data>
+  <data name="cmdMonth.TabIndex" type="System.Int32, mscorlib">
+    <value>156</value>
+  </data>
+  <data name="cmdMonth.Text" xml:space="preserve">
+    <value>month </value>
+  </data>
   <data name="&gt;&gt;cmdMonth.Name" xml:space="preserve">
     <value>cmdMonth</value>
   </data>
@@ -494,6 +557,27 @@
   </data>
   <data name="&gt;&gt;cmdMonth.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="cmdDay.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="cmdDay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdDay.Location" type="System.Drawing.Point, System.Drawing">
+    <value>194, 10</value>
+  </data>
+  <data name="cmdDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdDay.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 30</value>
+  </data>
+  <data name="cmdDay.TabIndex" type="System.Int32, mscorlib">
+    <value>155</value>
+  </data>
+  <data name="cmdDay.Text" xml:space="preserve">
+    <value>day </value>
   </data>
   <data name="&gt;&gt;cmdDay.Name" xml:space="preserve">
     <value>cmdDay</value>
@@ -507,6 +591,27 @@
   <data name="&gt;&gt;cmdDay.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="cmdDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="cmdDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 10</value>
+  </data>
+  <data name="cmdDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 30</value>
+  </data>
+  <data name="cmdDate.TabIndex" type="System.Int32, mscorlib">
+    <value>154</value>
+  </data>
+  <data name="cmdDate.Text" xml:space="preserve">
+    <value>date </value>
+  </data>
   <data name="&gt;&gt;cmdDate.Name" xml:space="preserve">
     <value>cmdDate</value>
   </data>
@@ -518,6 +623,27 @@
   </data>
   <data name="&gt;&gt;cmdDate.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="cmdFactor.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="cmdFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>66, 39</value>
+  </data>
+  <data name="cmdFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 30</value>
+  </data>
+  <data name="cmdFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>153</value>
+  </data>
+  <data name="cmdFactor.Text" xml:space="preserve">
+    <value>factor </value>
   </data>
   <data name="&gt;&gt;cmdFactor.Name" xml:space="preserve">
     <value>cmdFactor</value>
@@ -558,39 +684,6 @@
   <data name="&gt;&gt;grpEnterKeyboard2.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="cmdFactor.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="cmdFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 39</value>
-  </data>
-  <data name="cmdFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="cmdFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 30</value>
-  </data>
-  <data name="cmdFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>153</value>
-  </data>
-  <data name="cmdFactor.Text" xml:space="preserve">
-    <value>factor </value>
-  </data>
-  <data name="&gt;&gt;cmdFactor.Name" xml:space="preserve">
-    <value>cmdFactor</value>
-  </data>
-  <data name="&gt;&gt;cmdFactor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdFactor.Parent" xml:space="preserve">
-    <value>grpEnterKeyboard2</value>
-  </data>
-  <data name="&gt;&gt;cmdFactor.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="ucrDataFrameEnter.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 55</value>
   </data>
@@ -625,13 +718,13 @@
     <value>648, 336</value>
   </data>
   <data name="ucrSaveEnterResultInto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 236</value>
+    <value>13, 243</value>
   </data>
   <data name="ucrSaveEnterResultInto.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveEnterResultInto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>351, 34</value>
+    <value>306, 23</value>
   </data>
   <data name="ucrSaveEnterResultInto.TabIndex" type="System.Int32, mscorlib">
     <value>181</value>
@@ -647,369 +740,6 @@
   </data>
   <data name="&gt;&gt;ucrSaveEnterResultInto.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;cmdClear.Name" xml:space="preserve">
-    <value>cmdClear</value>
-  </data>
-  <data name="&gt;&gt;cmdClear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdClear.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmdClear.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;Button1.Name" xml:space="preserve">
-    <value>Button1</value>
-  </data>
-  <data name="&gt;&gt;Button1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button1.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;Button1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cmdBrackets.Name" xml:space="preserve">
-    <value>cmdBrackets</value>
-  </data>
-  <data name="&gt;&gt;cmdBrackets.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdBrackets.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmdBrackets.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;cmdPower.Name" xml:space="preserve">
-    <value>cmdPower</value>
-  </data>
-  <data name="&gt;&gt;cmdPower.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdPower.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmdPower.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;cmdDivide.Name" xml:space="preserve">
-    <value>cmdDivide</value>
-  </data>
-  <data name="&gt;&gt;cmdDivide.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdDivide.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmdDivide.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;cmdPlus.Name" xml:space="preserve">
-    <value>cmdPlus</value>
-  </data>
-  <data name="&gt;&gt;cmdPlus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdPlus.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmdPlus.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;cmdMinus.Name" xml:space="preserve">
-    <value>cmdMinus</value>
-  </data>
-  <data name="&gt;&gt;cmdMinus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdMinus.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmdMinus.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;cmdMultiply.Name" xml:space="preserve">
-    <value>cmdMultiply</value>
-  </data>
-  <data name="&gt;&gt;cmdMultiply.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdMultiply.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmdMultiply.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;Button2.Name" xml:space="preserve">
-    <value>Button2</value>
-  </data>
-  <data name="&gt;&gt;Button2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;Button2.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;Button2.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;cmd9.Name" xml:space="preserve">
-    <value>cmd9</value>
-  </data>
-  <data name="&gt;&gt;cmd9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmd9.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmd9.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;cmd8.Name" xml:space="preserve">
-    <value>cmd8</value>
-  </data>
-  <data name="&gt;&gt;cmd8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmd8.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmd8.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;cmd7.Name" xml:space="preserve">
-    <value>cmd7</value>
-  </data>
-  <data name="&gt;&gt;cmd7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmd7.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmd7.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;cmd6.Name" xml:space="preserve">
-    <value>cmd6</value>
-  </data>
-  <data name="&gt;&gt;cmd6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmd6.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmd6.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;cmd5.Name" xml:space="preserve">
-    <value>cmd5</value>
-  </data>
-  <data name="&gt;&gt;cmd5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmd5.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmd5.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;cmd4.Name" xml:space="preserve">
-    <value>cmd4</value>
-  </data>
-  <data name="&gt;&gt;cmd4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmd4.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmd4.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;cmd3.Name" xml:space="preserve">
-    <value>cmd3</value>
-  </data>
-  <data name="&gt;&gt;cmd3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmd3.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmd3.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;cmd2.Name" xml:space="preserve">
-    <value>cmd2</value>
-  </data>
-  <data name="&gt;&gt;cmd2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmd2.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmd2.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="&gt;&gt;cmd0.Name" xml:space="preserve">
-    <value>cmd0</value>
-  </data>
-  <data name="&gt;&gt;cmd0.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmd0.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmd0.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;cmd1.Name" xml:space="preserve">
-    <value>cmd1</value>
-  </data>
-  <data name="&gt;&gt;cmd1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmd1.Parent" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;cmd1.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="grpBasic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 46</value>
-  </data>
-  <data name="grpBasic.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="grpBasic.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="grpBasic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>205, 134</value>
-  </data>
-  <data name="grpBasic.TabIndex" type="System.Int32, mscorlib">
-    <value>180</value>
-  </data>
-  <data name="&gt;&gt;grpBasic.Name" xml:space="preserve">
-    <value>grpBasic</value>
-  </data>
-  <data name="&gt;&gt;grpBasic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpBasic.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpBasic.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="btnExample.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="btnExample.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 16</value>
-  </data>
-  <data name="btnExample.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="btnExample.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 22</value>
-  </data>
-  <data name="btnExample.TabIndex" type="System.Int32, mscorlib">
-    <value>161</value>
-  </data>
-  <data name="btnExample.Text" xml:space="preserve">
-    <value>Examples</value>
-  </data>
-  <data name="&gt;&gt;btnExample.Name" xml:space="preserve">
-    <value>btnExample</value>
-  </data>
-  <data name="&gt;&gt;btnExample.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;btnExample.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;btnExample.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrTryModelling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 202</value>
-  </data>
-  <data name="ucrTryModelling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 33</value>
-  </data>
-  <data name="ucrTryModelling.TabIndex" type="System.Int32, mscorlib">
-    <value>160</value>
-  </data>
-  <data name="&gt;&gt;ucrTryModelling.Name" xml:space="preserve">
-    <value>ucrTryModelling</value>
-  </data>
-  <data name="&gt;&gt;ucrTryModelling.Type" xml:space="preserve">
-    <value>instat.ucrTry, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrTryModelling.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrTryModelling.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 278</value>
-  </data>
-  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>452, 52</value>
-  </data>
-  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
-    <value>ucrBase</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
-    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Enter</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgEnter</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ucrReceiverForEnterCalculation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 16</value>
-  </data>
-  <data name="ucrReceiverForEnterCalculation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="ucrReceiverForEnterCalculation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 28</value>
-  </data>
-  <data name="ucrReceiverForEnterCalculation.TabIndex" type="System.Int32, mscorlib">
-    <value>153</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverForEnterCalculation.Name" xml:space="preserve">
-    <value>ucrReceiverForEnterCalculation</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverForEnterCalculation.Type" xml:space="preserve">
-    <value>instat.ucrReceiverExpression, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverForEnterCalculation.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverForEnterCalculation.ZOrder" xml:space="preserve">
-    <value>8</value>
   </data>
   <data name="cmdClear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1602,169 +1332,139 @@
   <data name="&gt;&gt;cmd1.ZOrder" xml:space="preserve">
     <value>18</value>
   </data>
-  <data name="cmdDate.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+  <data name="grpBasic.Location" type="System.Drawing.Point, System.Drawing">
+    <value>172, 46</value>
   </data>
-  <data name="cmdDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 10</value>
-  </data>
-  <data name="cmdDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="grpBasic.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
-  <data name="cmdDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 30</value>
-  </data>
-  <data name="cmdDate.TabIndex" type="System.Int32, mscorlib">
-    <value>154</value>
-  </data>
-  <data name="cmdDate.Text" xml:space="preserve">
-    <value>date </value>
-  </data>
-  <data name="&gt;&gt;cmdDate.Name" xml:space="preserve">
-    <value>cmdDate</value>
-  </data>
-  <data name="&gt;&gt;cmdDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdDate.Parent" xml:space="preserve">
-    <value>grpEnterKeyboard2</value>
-  </data>
-  <data name="&gt;&gt;cmdDate.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="cmdDay.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="cmdDay.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 10</value>
-  </data>
-  <data name="cmdDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="grpBasic.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
-  <data name="cmdDay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 30</value>
+  <data name="grpBasic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>205, 134</value>
   </data>
-  <data name="cmdDay.TabIndex" type="System.Int32, mscorlib">
-    <value>155</value>
+  <data name="grpBasic.TabIndex" type="System.Int32, mscorlib">
+    <value>180</value>
   </data>
-  <data name="cmdDay.Text" xml:space="preserve">
-    <value>day </value>
+  <data name="&gt;&gt;grpBasic.Name" xml:space="preserve">
+    <value>grpBasic</value>
   </data>
-  <data name="&gt;&gt;cmdDay.Name" xml:space="preserve">
-    <value>cmdDay</value>
+  <data name="&gt;&gt;grpBasic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmdDay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;grpBasic.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;cmdDay.Parent" xml:space="preserve">
-    <value>grpEnterKeyboard2</value>
-  </data>
-  <data name="&gt;&gt;cmdDay.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="cmdMonth.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="cmdMonth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 68</value>
-  </data>
-  <data name="cmdMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="cmdMonth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 30</value>
-  </data>
-  <data name="cmdMonth.TabIndex" type="System.Int32, mscorlib">
-    <value>156</value>
-  </data>
-  <data name="cmdMonth.Text" xml:space="preserve">
-    <value>month </value>
-  </data>
-  <data name="&gt;&gt;cmdMonth.Name" xml:space="preserve">
-    <value>cmdMonth</value>
-  </data>
-  <data name="&gt;&gt;cmdMonth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdMonth.Parent" xml:space="preserve">
-    <value>grpEnterKeyboard2</value>
-  </data>
-  <data name="&gt;&gt;cmdMonth.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="cmdRunif.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="cmdRunif.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdRunif.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 97</value>
-  </data>
-  <data name="cmdRunif.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="cmdRunif.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 30</value>
-  </data>
-  <data name="cmdRunif.TabIndex" type="System.Int32, mscorlib">
-    <value>157</value>
-  </data>
-  <data name="cmdRunif.Text" xml:space="preserve">
-    <value>runif </value>
-  </data>
-  <data name="&gt;&gt;cmdRunif.Name" xml:space="preserve">
-    <value>cmdRunif</value>
-  </data>
-  <data name="&gt;&gt;cmdRunif.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdRunif.Parent" xml:space="preserve">
-    <value>grpEnterKeyboard2</value>
-  </data>
-  <data name="&gt;&gt;cmdRunif.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;grpBasic.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="cmdRnorm.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="cmdRnorm.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="btnExample.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdRnorm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 97</value>
+  <data name="btnExample.Location" type="System.Drawing.Point, System.Drawing">
+    <value>419, 13</value>
   </data>
-  <data name="cmdRnorm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
+  <data name="btnExample.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
   </data>
-  <data name="cmdRnorm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 30</value>
+  <data name="btnExample.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 22</value>
   </data>
-  <data name="cmdRnorm.TabIndex" type="System.Int32, mscorlib">
-    <value>158</value>
+  <data name="btnExample.TabIndex" type="System.Int32, mscorlib">
+    <value>161</value>
   </data>
-  <data name="cmdRnorm.Text" xml:space="preserve">
-    <value>rnorm </value>
+  <data name="btnExample.Text" xml:space="preserve">
+    <value>Examples</value>
   </data>
-  <data name="&gt;&gt;cmdRnorm.Name" xml:space="preserve">
-    <value>cmdRnorm</value>
+  <data name="&gt;&gt;btnExample.Name" xml:space="preserve">
+    <value>btnExample</value>
   </data>
-  <data name="&gt;&gt;cmdRnorm.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnExample.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmdRnorm.Parent" xml:space="preserve">
-    <value>grpEnterKeyboard2</value>
+  <data name="&gt;&gt;btnExample.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="&gt;&gt;cmdRnorm.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnExample.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrTryModelling.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 202</value>
+  </data>
+  <data name="ucrTryModelling.Size" type="System.Drawing.Size, System.Drawing">
+    <value>480, 33</value>
+  </data>
+  <data name="ucrTryModelling.TabIndex" type="System.Int32, mscorlib">
+    <value>160</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.Name" xml:space="preserve">
+    <value>ucrTryModelling</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.Type" xml:space="preserve">
+    <value>instat.ucrTry, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 278</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>452, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtons, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Enter</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgEnter</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrReceiverForEnterCalculation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>44, 16</value>
+  </data>
+  <data name="ucrReceiverForEnterCalculation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="ucrReceiverForEnterCalculation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>254, 28</value>
+  </data>
+  <data name="ucrReceiverForEnterCalculation.TabIndex" type="System.Int32, mscorlib">
+    <value>153</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverForEnterCalculation.Name" xml:space="preserve">
+    <value>ucrReceiverForEnterCalculation</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverForEnterCalculation.Type" xml:space="preserve">
+    <value>instat.ucrReceiverExpression, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverForEnterCalculation.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverForEnterCalculation.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
 </root>
