@@ -21,8 +21,13 @@ Public Class dlgInventoryPlot
     Private clsDefaultRFunction As New RFunction
     Private clsClimaticSummary As New RFunction
 
+    Private iPnlSummaryY As Integer
+    Private iPnlDetailsY As Integer
+
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
+            iPnlSummaryY = pnlSummary.Location.Y
+            iPnlDetailsY = pnlDetails.Location.Y
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -97,6 +102,10 @@ Public Class dlgInventoryPlot
         ucrChkDay.SetRDefault("TRUE")
 
         ' ucrChkHour.SetParameter(New RParameter("", 13))
+        ucrChkSaveDetails.SetText("Save Details")
+        ' ucrChkHour.SetRDefault("FALSE")
+
+        ' ucrChkHour.SetParameter(New RParameter("", 13))
         ucrChkHour.SetText("Hour")
         ' ucrChkHour.SetRDefault("FALSE")
 
@@ -113,12 +122,12 @@ Public Class dlgInventoryPlot
         ucrPnlOrder.AddRadioButton(rdoElementOrder, "FALSE")
         ucrPnlOrder.SetRDefault("FALSE")
 
-        ucrPnls.AddRadioButton(rdoSummary)
+        ucrPnls.AddRadioButton(rdoMissing)
         ucrPnls.AddRadioButton(rdoGraph)
-        ucrPnls.AddFunctionNamesCondition(rdoSummary, "climatic.summary")
+        ucrPnls.AddFunctionNamesCondition(rdoMissing, "climatic_missing")
         ucrPnls.AddFunctionNamesCondition(rdoGraph, frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
-        ucrPnls.AddToLinkedControls(ucrChkSummary, {rdoSummary}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnls.AddToLinkedControls(ucrChkDetails, {rdoSummary}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnls.AddToLinkedControls(ucrChkSummary, {rdoMissing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnls.AddToLinkedControls(ucrChkDetails, {rdoMissing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDetails.AddToLinkedControls({ucrChkDay}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDay.SetLinkedDisplayControl(pnlDetails)
         ucrChkSummary.SetLinkedDisplayControl(pnlSummary)
@@ -148,8 +157,8 @@ Public Class dlgInventoryPlot
         clsDefaultRFunction.AddParameter("year_doy_plot", "FALSE")
         clsDefaultRFunction.AddParameter("facet_by", "NULL")
         clsDefaultRFunction.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        clsClimaticSummary.SetRCommand("climatic.summary")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsClimaticSummary)
+        clsClimaticSummary.SetRCommand("climatic_missing")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
 
         TestOkEnabled()
     End Sub
@@ -167,7 +176,7 @@ Public Class dlgInventoryPlot
         ucrChkOmitEnd.SetRCode(clsClimaticSummary, bReset)
         ucrChkOmitStart.SetRCode(clsClimaticSummary, bReset)
         ucrPnlOrder.SetRCode(clsClimaticSummary, bReset)
-        ucrPnls.SetRCode(clsClimaticSummary, bReset)
+        ucrPnls.SetRCode(clsDefaultRFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -178,7 +187,7 @@ Public Class dlgInventoryPlot
         End If
     End Sub
 
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs)
         'there needs to be work on sdgplots before this could be linked 
         'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
         'sdgPlots.ShowDialog()
@@ -211,12 +220,18 @@ Public Class dlgInventoryPlot
     End Sub
 
     Private Sub ucrPnls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnls.ControlValueChanged
-        If rdoSummary.Checked Then
+        If rdoMissing.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsClimaticSummary)
             ucrBase.clsRsyntax.iCallType = 2
+            pnlSummary.Location = New Point(pnlSummary.Location.X, iPnlSummaryY / 1.12)
+            pnlDetails.Location = New Point(pnlDetails.Location.X, iPnlDetailsY / 1.09)
+            cmdInventoryPlotOptions.Visible = False
+            cmdOptions.Visible = False
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
             ucrBase.clsRsyntax.iCallType = 3
+            cmdInventoryPlotOptions.Visible = True
+            cmdOptions.Visible = True
         End If
     End Sub
 End Class

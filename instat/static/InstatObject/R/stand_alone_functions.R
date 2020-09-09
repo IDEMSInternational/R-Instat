@@ -1283,7 +1283,7 @@ summary_sample <- function(x, size, replace = FALSE){
   else{sample(x = x, size = size, replace = replace)}
 }
 
-climatic.summary <- function(data, date, elements = ..., stations, summary = TRUE, details = FALSE,
+climatic_missing <- function(data, date, elements = ..., stations, summary = TRUE, details = FALSE,
                              order = FALSE,
                              day = TRUE,
                              month = FALSE,
@@ -1315,10 +1315,10 @@ climatic.summary <- function(data, date, elements = ..., stations, summary = TRU
   # sort start/end times
   
   # for summary == TRUE
-  if (summary == TRUE){
+  if (summary){
     i = i + 1
     # set start date
-    if (start == TRUE){
+    if (start){
       data.stack <- data.stack %>%
         dplyr::group_by({{ stations }}, Element) %>%
         dplyr::mutate(start = ({{ date }})[which.min(is.na( value ))])
@@ -1328,9 +1328,9 @@ climatic.summary <- function(data, date, elements = ..., stations, summary = TRU
     }
     
     # set end date
-    if (end == TRUE){
+    if (end){
       data.stack <- data.stack %>%
-        group_by({{ stations }}, Element ) %>%
+       dplyr::group_by({{ stations }}, Element ) %>%
         dplyr::mutate(end = ({{ date }} )[dplyr::last(which(!is.na( value )))])
     }else{
       data.stack <- data.stack %>% group_by({{ stations }} ) %>% mutate(end = dplyr::last({{ date }}))
@@ -1363,20 +1363,18 @@ climatic.summary <- function(data, date, elements = ..., stations, summary = TRU
       summary.data$stations <- NULL
     }
     
-    #  }
-    #print(summary.data)
     list_tables[[i]] <- summary.data
   }
   
 
   
-  if (details == TRUE){
+  if (details){
     
     if (day != TRUE & month != TRUE & year != TRUE){
       warning('At least one of day, month, year need to be selected if details == TRUE')
     }
     
-    if (day == TRUE){
+    if (day){
       i = i + 1
       detail.table.day = data.stack %>%
         group_by({{stations}}, Element) %>%
@@ -1387,7 +1385,7 @@ climatic.summary <- function(data, date, elements = ..., stations, summary = TRU
                   To = dplyr::last({{date}}),
                   Count = n())
       
-       if (order == TRUE){
+       if (order){
          detail.table.day <- detail.table.day %>% arrange(From)
        } else {
          detail.table.day <- detail.table.day %>% arrange(Element)
@@ -1398,7 +1396,7 @@ climatic.summary <- function(data, date, elements = ..., stations, summary = TRU
       
     }
     
-    if (month == TRUE){
+    if (month){
       i = i + 1
       detail.table.month <- data.stack %>%
         mutate(Date.ym = zoo::as.yearmon({{date}}))  %>%
@@ -1420,7 +1418,7 @@ climatic.summary <- function(data, date, elements = ..., stations, summary = TRU
                   To = dplyr::last(To),
                   Count = n())
       
-       if (order == TRUE){
+       if (order){
          detail.table.month <- detail.table.month %>% arrange(From)
        } else {
          detail.table.month <- detail.table.month %>% arrange(Element)
@@ -1430,7 +1428,7 @@ climatic.summary <- function(data, date, elements = ..., stations, summary = TRU
       list_tables[[i]] <- detail.table.month
     }
     
-    if (year == TRUE) {
+    if (year) {
       i = i + 1
       detail.table.year <- data.stack %>%
         mutate(Date.y = lubridate::year({{date}}))  %>%
@@ -1452,7 +1450,7 @@ climatic.summary <- function(data, date, elements = ..., stations, summary = TRU
                   To = dplyr::last(To),
                   Count = n())
       
-       if (order == TRUE){
+       if (order){
          detail.table.year <- detail.table.year %>% arrange(From)
        } else {
          detail.table.year <- detail.table.year %>% arrange(Element)

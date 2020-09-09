@@ -39,43 +39,38 @@ Partial Class dlgInventoryPlot
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgInventoryPlot))
-        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.cmdInventoryPlotOptions = New System.Windows.Forms.Button()
         Me.lblElement = New System.Windows.Forms.Label()
         Me.rdoElementOrder = New System.Windows.Forms.RadioButton()
         Me.rdoDateOrder = New System.Windows.Forms.RadioButton()
         Me.pnlDetails = New System.Windows.Forms.Panel()
-        Me.pnlSummary = New System.Windows.Forms.Panel()
-        Me.ucrChkOmitStart = New instat.ucrCheck()
-        Me.ucrChkSummary = New instat.ucrCheck()
-        Me.ucrChkDetails = New instat.ucrCheck()
-        Me.ucrChkOmitEnd = New instat.ucrCheck()
-        Me.ucrPnlOrder = New instat.UcrPanel()
+        Me.ucrChkSaveDetails = New instat.ucrCheck()
         Me.ucrChkMinute = New instat.ucrCheck()
         Me.ucrChkSecond = New instat.ucrCheck()
         Me.ucrChkYear = New instat.ucrCheck()
         Me.ucrChkMonth = New instat.ucrCheck()
         Me.ucrChkDay = New instat.ucrCheck()
         Me.ucrChkHour = New instat.ucrCheck()
+        Me.pnlSummary = New System.Windows.Forms.Panel()
+        Me.ucrChkOmitStart = New instat.ucrCheck()
+        Me.ucrChkSummary = New instat.ucrCheck()
+        Me.ucrChkDetails = New instat.ucrCheck()
+        Me.ucrChkOmitEnd = New instat.ucrCheck()
+        Me.ucrPnlOrder = New instat.UcrPanel()
+        Me.rdoMissing = New System.Windows.Forms.RadioButton()
+        Me.rdoGraph = New System.Windows.Forms.RadioButton()
         Me.ucrPnls = New instat.UcrPanel()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrInventoryPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.rdoSummary = New System.Windows.Forms.RadioButton()
-        Me.rdoGraph = New System.Windows.Forms.RadioButton()
+        Me.cmdInventoryPlotOptions = New System.Windows.Forms.Button()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.pnlDetails.SuspendLayout()
         Me.pnlSummary.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'cmdOptions
-        '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblDate
         '
@@ -86,12 +81,6 @@ Partial Class dlgInventoryPlot
         '
         resources.ApplyResources(Me.lblStation, "lblStation")
         Me.lblStation.Name = "lblStation"
-        '
-        'cmdInventoryPlotOptions
-        '
-        resources.ApplyResources(Me.cmdInventoryPlotOptions, "cmdInventoryPlotOptions")
-        Me.cmdInventoryPlotOptions.Name = "cmdInventoryPlotOptions"
-        Me.cmdInventoryPlotOptions.UseVisualStyleBackColor = True
         '
         'lblElement
         '
@@ -114,6 +103,7 @@ Partial Class dlgInventoryPlot
         '
         'pnlDetails
         '
+        Me.pnlDetails.Controls.Add(Me.ucrChkSaveDetails)
         Me.pnlDetails.Controls.Add(Me.ucrChkMinute)
         Me.pnlDetails.Controls.Add(Me.ucrChkSecond)
         Me.pnlDetails.Controls.Add(Me.ucrChkYear)
@@ -122,6 +112,48 @@ Partial Class dlgInventoryPlot
         Me.pnlDetails.Controls.Add(Me.ucrChkHour)
         resources.ApplyResources(Me.pnlDetails, "pnlDetails")
         Me.pnlDetails.Name = "pnlDetails"
+        '
+        'ucrChkSaveDetails
+        '
+        Me.ucrChkSaveDetails.Checked = False
+        resources.ApplyResources(Me.ucrChkSaveDetails, "ucrChkSaveDetails")
+        Me.ucrChkSaveDetails.Name = "ucrChkSaveDetails"
+        '
+        'ucrChkMinute
+        '
+        Me.ucrChkMinute.Checked = False
+        resources.ApplyResources(Me.ucrChkMinute, "ucrChkMinute")
+        Me.ucrChkMinute.Name = "ucrChkMinute"
+        '
+        'ucrChkSecond
+        '
+        Me.ucrChkSecond.Checked = False
+        resources.ApplyResources(Me.ucrChkSecond, "ucrChkSecond")
+        Me.ucrChkSecond.Name = "ucrChkSecond"
+        '
+        'ucrChkYear
+        '
+        Me.ucrChkYear.Checked = False
+        resources.ApplyResources(Me.ucrChkYear, "ucrChkYear")
+        Me.ucrChkYear.Name = "ucrChkYear"
+        '
+        'ucrChkMonth
+        '
+        Me.ucrChkMonth.Checked = False
+        resources.ApplyResources(Me.ucrChkMonth, "ucrChkMonth")
+        Me.ucrChkMonth.Name = "ucrChkMonth"
+        '
+        'ucrChkDay
+        '
+        Me.ucrChkDay.Checked = False
+        resources.ApplyResources(Me.ucrChkDay, "ucrChkDay")
+        Me.ucrChkDay.Name = "ucrChkDay"
+        '
+        'ucrChkHour
+        '
+        Me.ucrChkHour.Checked = False
+        resources.ApplyResources(Me.ucrChkHour, "ucrChkHour")
+        Me.ucrChkHour.Name = "ucrChkHour"
         '
         'pnlSummary
         '
@@ -164,41 +196,23 @@ Partial Class dlgInventoryPlot
         resources.ApplyResources(Me.ucrPnlOrder, "ucrPnlOrder")
         Me.ucrPnlOrder.Name = "ucrPnlOrder"
         '
-        'ucrChkMinute
+        'rdoMissing
         '
-        Me.ucrChkMinute.Checked = False
-        resources.ApplyResources(Me.ucrChkMinute, "ucrChkMinute")
-        Me.ucrChkMinute.Name = "ucrChkMinute"
+        resources.ApplyResources(Me.rdoMissing, "rdoMissing")
+        Me.rdoMissing.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMissing.FlatAppearance.BorderSize = 2
+        Me.rdoMissing.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMissing.Name = "rdoMissing"
+        Me.rdoMissing.UseVisualStyleBackColor = True
         '
-        'ucrChkSecond
+        'rdoGraph
         '
-        Me.ucrChkSecond.Checked = False
-        resources.ApplyResources(Me.ucrChkSecond, "ucrChkSecond")
-        Me.ucrChkSecond.Name = "ucrChkSecond"
-        '
-        'ucrChkYear
-        '
-        Me.ucrChkYear.Checked = False
-        resources.ApplyResources(Me.ucrChkYear, "ucrChkYear")
-        Me.ucrChkYear.Name = "ucrChkYear"
-        '
-        'ucrChkMonth
-        '
-        Me.ucrChkMonth.Checked = False
-        resources.ApplyResources(Me.ucrChkMonth, "ucrChkMonth")
-        Me.ucrChkMonth.Name = "ucrChkMonth"
-        '
-        'ucrChkDay
-        '
-        Me.ucrChkDay.Checked = False
-        resources.ApplyResources(Me.ucrChkDay, "ucrChkDay")
-        Me.ucrChkDay.Name = "ucrChkDay"
-        '
-        'ucrChkHour
-        '
-        Me.ucrChkHour.Checked = False
-        resources.ApplyResources(Me.ucrChkHour, "ucrChkHour")
-        Me.ucrChkHour.Name = "ucrChkHour"
+        resources.ApplyResources(Me.rdoGraph, "rdoGraph")
+        Me.rdoGraph.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGraph.FlatAppearance.BorderSize = 2
+        Me.rdoGraph.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGraph.Name = "rdoGraph"
+        Me.rdoGraph.UseVisualStyleBackColor = True
         '
         'ucrPnls
         '
@@ -245,39 +259,33 @@ Partial Class dlgInventoryPlot
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'rdoSummary
+        'cmdInventoryPlotOptions
         '
-        resources.ApplyResources(Me.rdoSummary, "rdoSummary")
-        Me.rdoSummary.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSummary.FlatAppearance.BorderSize = 2
-        Me.rdoSummary.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoSummary.Name = "rdoSummary"
-        Me.rdoSummary.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdInventoryPlotOptions, "cmdInventoryPlotOptions")
+        Me.cmdInventoryPlotOptions.Name = "cmdInventoryPlotOptions"
+        Me.cmdInventoryPlotOptions.UseVisualStyleBackColor = True
         '
-        'rdoGraph
+        'cmdOptions
         '
-        resources.ApplyResources(Me.rdoGraph, "rdoGraph")
-        Me.rdoGraph.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGraph.FlatAppearance.BorderSize = 2
-        Me.rdoGraph.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGraph.Name = "rdoGraph"
-        Me.rdoGraph.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'dlgInventoryPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdInventoryPlotOptions)
+        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.rdoGraph)
-        Me.Controls.Add(Me.rdoSummary)
+        Me.Controls.Add(Me.rdoMissing)
         Me.Controls.Add(Me.pnlSummary)
         Me.Controls.Add(Me.pnlDetails)
         Me.Controls.Add(Me.ucrPnls)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.ucrReceiverDate)
-        Me.Controls.Add(Me.cmdInventoryPlotOptions)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverElements)
-        Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrInventoryPlotSelector)
@@ -296,12 +304,10 @@ Partial Class dlgInventoryPlot
     End Sub
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrInventoryPlotSelector As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents cmdOptions As Button
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverElements As ucrReceiverMultiple
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
-    Friend WithEvents cmdInventoryPlotOptions As Button
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblElement As Label
     Friend WithEvents ucrPnls As UcrPanel
@@ -321,5 +327,8 @@ Partial Class dlgInventoryPlot
     Friend WithEvents ucrChkHour As ucrCheck
     Friend WithEvents pnlSummary As Panel
     Friend WithEvents rdoGraph As RadioButton
-    Friend WithEvents rdoSummary As RadioButton
+    Friend WithEvents rdoMissing As RadioButton
+    Friend WithEvents ucrChkSaveDetails As ucrCheck
+    Friend WithEvents cmdInventoryPlotOptions As Button
+    Friend WithEvents cmdOptions As Button
 End Class
