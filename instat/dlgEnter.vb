@@ -252,6 +252,12 @@ Public Class dlgEnter
         lstView.Items.Add(New ListViewItem({"factor(rep(c(month.abb[4:7],NA),c(2,1,2,1,2)))"}))
         lstView.Items.Item(9).ToolTipText = "Gives Apr, Apr, May, Jun, Jun, Jul, NA, NA"
 
+        lstView.Items.Add(New ListViewItem({"c(1:4,10,rep(15,3),20)"}))
+        lstView.Items.Item(10).ToolTipText = "A sequence of values 1,2,3,4,10,15,15,15,20"
+
+        lstView.Items.Item(New ListViewItem({"c(0,seq(1,5,2 ),seq(10,12),15)"}))
+        lstView.Items.Item(11).ToolTipText = "A set of sequences, giving 1,3,5 10,11,12, 15"
+
 
 
 
