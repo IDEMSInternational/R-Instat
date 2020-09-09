@@ -746,36 +746,45 @@ Public Class dlgOneVarFitModel
                     clsZTestFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "Bartel" Then
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Bartels Rank Test of Randomness")
                     clsBartelFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "runs" Then
                     clsRunsFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "br" Then
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Buishand Range Test for Change-Point Detection")
                     clsBrFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "Sen" Then
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Sen 's slope for linear rate of change")
                     clsSenFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "serial corr" Then
                     clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "snh" Then
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Standard Normal Homogeinity Test (SNHT) for Change-Point Detection")
                     clsSnhFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "cvm" Then
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Cramer-von Mises test for normality")
                     clsCvmFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "lillie" Then
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Lilliefors (Kolmogorov-Smirnov) test for normality")
                     clsLillieFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "pearson" Then
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Pearson chi-square test for normality")
                     clsPearsonFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "sf" Then
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Shapiro-Francia test for normality")
                     clsSfFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "ad" Then
+                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Anderson-Darling test for normality")
                     clsAdFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
             End If
@@ -847,35 +856,26 @@ Public Class dlgOneVarFitModel
                 Case "Z"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsZTestFunction)
                 Case "Bartel"
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Bartels Rank Test of Randomness")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBartelFunction)
                 Case "br"
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Buishand Range Test for Change-Point Detection")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBrFunction)
                 Case "runs"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsRunsFunction)
                 Case "Sen"
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Sen 's slope for linear rate of change")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSenFunction)
                 Case "serial corr"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSerialCorrFunction)
                 Case "snh"
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Standard Normal Homogeinity Test (SNHT) for Change-Point Detection")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSnhFunction)
                 Case "ad"
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Anderson-Darling test for normality")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsAdFunction)
                 Case "cvm"
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Cramer-von Mises test for normality")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsCvmFunction)
                 Case "lillie"
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Lilliefors (Kolmogorov-Smirnov) test for normality")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsLillieFunction)
                 Case "pearson"
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Pearson chi-square test for normality")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsPearsonFunction)
                 Case "sf"
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Shapiro-Francia test for normality")
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSfFunction)
 
             End Select
@@ -898,8 +898,14 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboTests.ControlValueChanged, ucrInputComboEstimate.ControlValueChanged
+    Private Sub tooltip()
+        If ucrInputComboTests.GetText() = "binomial" Then
+            tttests.RemoveAll()
+        End If
+    End Sub
 
+    Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboTests.ControlValueChanged, ucrInputComboEstimate.ControlValueChanged
+        tooltip()
         SetTestEstimateBaseFunction()
         ucrSaveModel.Reset()
         AddAsNumeric()
