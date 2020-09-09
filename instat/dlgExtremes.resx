@@ -154,7 +154,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdLog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 42</value>
+    <value>4, 40</value>
   </data>
   <data name="cmdLog.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -184,7 +184,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdTan.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 74</value>
+    <value>60, 70</value>
   </data>
   <data name="cmdTan.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -214,7 +214,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdExp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 74</value>
+    <value>4, 70</value>
   </data>
   <data name="cmdExp.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -241,13 +241,13 @@
     <value>5</value>
   </data>
   <data name="ucrInputThresholdforLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 234</value>
+    <value>79, 231</value>
   </data>
   <data name="ucrInputThresholdforLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 21</value>
+    <value>79, 21</value>
   </data>
   <data name="ucrInputThresholdforLocation.TabIndex" type="System.Int32, mscorlib">
-    <value>64</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrInputThresholdforLocation.Name" xml:space="preserve">
     <value>ucrInputThresholdforLocation</value>
@@ -268,16 +268,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblThreshold.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 242</value>
+    <value>10, 235</value>
   </data>
   <data name="lblThreshold.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 13</value>
+    <value>57, 13</value>
   </data>
   <data name="lblThreshold.TabIndex" type="System.Int32, mscorlib">
-    <value>63</value>
+    <value>9</value>
   </data>
   <data name="lblThreshold.Text" xml:space="preserve">
-    <value>Threshold</value>
+    <value>Threshold:</value>
   </data>
   <data name="&gt;&gt;lblThreshold.Name" xml:space="preserve">
     <value>lblThreshold</value>
@@ -292,13 +292,13 @@
     <value>1</value>
   </data>
   <data name="ucrTryModelling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 261</value>
+    <value>1, 258</value>
   </data>
   <data name="ucrTryModelling.Size" type="System.Drawing.Size, System.Drawing">
     <value>388, 33</value>
   </data>
   <data name="ucrTryModelling.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrTryModelling.Name" xml:space="preserve">
     <value>ucrTryModelling</value>
@@ -316,7 +316,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 42</value>
+    <value>60, 40</value>
   </data>
   <data name="cmdSin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -342,11 +342,44 @@
   <data name="&gt;&gt;cmdSin.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="&gt;&gt;cmdCos.Name" xml:space="preserve">
+    <value>cmdCos</value>
+  </data>
+  <data name="&gt;&gt;cmdCos.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdCos.Parent" xml:space="preserve">
+    <value>grpSecondCalc</value>
+  </data>
+  <data name="&gt;&gt;cmdCos.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="grpSecondCalc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>390, 139</value>
+  </data>
+  <data name="grpSecondCalc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 104</value>
+  </data>
+  <data name="grpSecondCalc.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;grpSecondCalc.Name" xml:space="preserve">
+    <value>grpSecondCalc</value>
+  </data>
+  <data name="&gt;&gt;grpSecondCalc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpSecondCalc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpSecondCalc.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="cmdCos.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdCos.Location" type="System.Drawing.Point, System.Drawing">
-    <value>61, 10</value>
+    <value>60, 10</value>
   </data>
   <data name="cmdCos.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -372,26 +405,158 @@
   <data name="&gt;&gt;cmdCos.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="grpSecondCalc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>395, 139</value>
+  <data name="&gt;&gt;cmdMultiply.Name" xml:space="preserve">
+    <value>cmdMultiply</value>
   </data>
-  <data name="grpSecondCalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>126, 111</value>
+  <data name="&gt;&gt;cmdMultiply.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="grpSecondCalc.TabIndex" type="System.Int32, mscorlib">
-    <value>61</value>
+  <data name="&gt;&gt;cmdMultiply.Parent" xml:space="preserve">
+    <value>grpFirstCalc</value>
   </data>
-  <data name="&gt;&gt;grpSecondCalc.Name" xml:space="preserve">
-    <value>grpSecondCalc</value>
+  <data name="&gt;&gt;cmdMultiply.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;grpSecondCalc.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdColon.Name" xml:space="preserve">
+    <value>cmdColon</value>
+  </data>
+  <data name="&gt;&gt;cmdColon.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdColon.Parent" xml:space="preserve">
+    <value>grpFirstCalc</value>
+  </data>
+  <data name="&gt;&gt;cmdColon.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;cmdPlus.Name" xml:space="preserve">
+    <value>cmdPlus</value>
+  </data>
+  <data name="&gt;&gt;cmdPlus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdPlus.Parent" xml:space="preserve">
+    <value>grpFirstCalc</value>
+  </data>
+  <data name="&gt;&gt;cmdPlus.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;cmdPower.Name" xml:space="preserve">
+    <value>cmdPower</value>
+  </data>
+  <data name="&gt;&gt;cmdPower.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdPower.Parent" xml:space="preserve">
+    <value>grpFirstCalc</value>
+  </data>
+  <data name="&gt;&gt;cmdPower.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;cmdClosingBracket.Name" xml:space="preserve">
+    <value>cmdClosingBracket</value>
+  </data>
+  <data name="&gt;&gt;cmdClosingBracket.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdClosingBracket.Parent" xml:space="preserve">
+    <value>grpFirstCalc</value>
+  </data>
+  <data name="&gt;&gt;cmdClosingBracket.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;cmdOpeningBracket.Name" xml:space="preserve">
+    <value>cmdOpeningBracket</value>
+  </data>
+  <data name="&gt;&gt;cmdOpeningBracket.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdOpeningBracket.Parent" xml:space="preserve">
+    <value>grpFirstCalc</value>
+  </data>
+  <data name="&gt;&gt;cmdOpeningBracket.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;cmdDiv.Name" xml:space="preserve">
+    <value>cmdDiv</value>
+  </data>
+  <data name="&gt;&gt;cmdDiv.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdDiv.Parent" xml:space="preserve">
+    <value>grpFirstCalc</value>
+  </data>
+  <data name="&gt;&gt;cmdDiv.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;cmdDoubleBracket.Name" xml:space="preserve">
+    <value>cmdDoubleBracket</value>
+  </data>
+  <data name="&gt;&gt;cmdDoubleBracket.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdDoubleBracket.Parent" xml:space="preserve">
+    <value>grpFirstCalc</value>
+  </data>
+  <data name="&gt;&gt;cmdDoubleBracket.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;cmdClear.Name" xml:space="preserve">
+    <value>cmdClear</value>
+  </data>
+  <data name="&gt;&gt;cmdClear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdClear.Parent" xml:space="preserve">
+    <value>grpFirstCalc</value>
+  </data>
+  <data name="&gt;&gt;cmdClear.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;cmdZero.Name" xml:space="preserve">
+    <value>cmdZero</value>
+  </data>
+  <data name="&gt;&gt;cmdZero.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdZero.Parent" xml:space="preserve">
+    <value>grpFirstCalc</value>
+  </data>
+  <data name="&gt;&gt;cmdZero.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;cmdMinus.Name" xml:space="preserve">
+    <value>cmdMinus</value>
+  </data>
+  <data name="&gt;&gt;cmdMinus.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdMinus.Parent" xml:space="preserve">
+    <value>grpFirstCalc</value>
+  </data>
+  <data name="&gt;&gt;cmdMinus.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="grpFirstCalc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>258, 139</value>
+  </data>
+  <data name="grpFirstCalc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 104</value>
+  </data>
+  <data name="grpFirstCalc.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;grpFirstCalc.Name" xml:space="preserve">
+    <value>grpFirstCalc</value>
+  </data>
+  <data name="&gt;&gt;grpFirstCalc.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;grpSecondCalc.Parent" xml:space="preserve">
+  <data name="&gt;&gt;grpFirstCalc.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;grpSecondCalc.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;grpFirstCalc.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="cmdMultiply.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
@@ -400,7 +565,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMultiply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 10</value>
+    <value>64, 10</value>
   </data>
   <data name="cmdMultiply.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -433,7 +598,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdColon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 10</value>
+    <value>35, 10</value>
   </data>
   <data name="cmdColon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -499,13 +664,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdPower.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 41</value>
+    <value>93, 40</value>
   </data>
   <data name="cmdPower.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="cmdPower.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 32</value>
+    <value>29, 30</value>
   </data>
   <data name="cmdPower.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -532,13 +697,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdClosingBracket.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 41</value>
+    <value>64, 40</value>
   </data>
   <data name="cmdClosingBracket.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="cmdClosingBracket.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 32</value>
+    <value>29, 30</value>
   </data>
   <data name="cmdClosingBracket.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -565,13 +730,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdOpeningBracket.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 41</value>
+    <value>35, 40</value>
   </data>
   <data name="cmdOpeningBracket.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="cmdOpeningBracket.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 32</value>
+    <value>29, 30</value>
   </data>
   <data name="cmdOpeningBracket.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -598,7 +763,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDiv.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 10</value>
+    <value>93, 10</value>
   </data>
   <data name="cmdDiv.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -631,13 +796,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDoubleBracket.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 41</value>
+    <value>6, 40</value>
   </data>
   <data name="cmdDoubleBracket.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="cmdDoubleBracket.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 32</value>
+    <value>29, 30</value>
   </data>
   <data name="cmdDoubleBracket.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -661,13 +826,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdClear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 74</value>
+    <value>64, 70</value>
   </data>
   <data name="cmdClear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="cmdClear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 30</value>
+    <value>58, 30</value>
   </data>
   <data name="cmdClear.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -694,7 +859,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdZero.Location" type="System.Drawing.Point, System.Drawing">
-    <value>36, 74</value>
+    <value>35, 70</value>
   </data>
   <data name="cmdZero.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -727,7 +892,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMinus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 74</value>
+    <value>6, 70</value>
   </data>
   <data name="cmdMinus.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -753,35 +918,14 @@
   <data name="&gt;&gt;cmdMinus.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="grpFirstCalc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 139</value>
-  </data>
-  <data name="grpFirstCalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 111</value>
-  </data>
-  <data name="grpFirstCalc.TabIndex" type="System.Int32, mscorlib">
-    <value>60</value>
-  </data>
-  <data name="&gt;&gt;grpFirstCalc.Name" xml:space="preserve">
-    <value>grpFirstCalc</value>
-  </data>
-  <data name="&gt;&gt;grpFirstCalc.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpFirstCalc.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpFirstCalc.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
   <data name="ucrChkExplanatoryModelForLocationParameter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 88</value>
+    <value>258, 85</value>
   </data>
   <data name="ucrChkExplanatoryModelForLocationParameter.Size" type="System.Drawing.Size, System.Drawing">
     <value>231, 17</value>
   </data>
   <data name="ucrChkExplanatoryModelForLocationParameter.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrChkExplanatoryModelForLocationParameter.Name" xml:space="preserve">
     <value>ucrChkExplanatoryModelForLocationParameter</value>
@@ -802,7 +946,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>526, 404</value>
+    <value>520, 378</value>
   </data>
   <data name="lblFevdType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -811,16 +955,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblFevdType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 204</value>
+    <value>10, 207</value>
   </data>
   <data name="lblFevdType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 13</value>
+    <value>62, 13</value>
   </data>
   <data name="lblFevdType.TabIndex" type="System.Int32, mscorlib">
-    <value>57</value>
+    <value>7</value>
   </data>
   <data name="lblFevdType.Text" xml:space="preserve">
-    <value>Distributions</value>
+    <value>Distribution:</value>
   </data>
   <data name="&gt;&gt;lblFevdType.Name" xml:space="preserve">
     <value>lblFevdType</value>
@@ -835,13 +979,13 @@
     <value>7</value>
   </data>
   <data name="ucrInputExtremes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 204</value>
+    <value>79, 204</value>
   </data>
   <data name="ucrInputExtremes.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 21</value>
   </data>
   <data name="ucrInputExtremes.TabIndex" type="System.Int32, mscorlib">
-    <value>56</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrInputExtremes.Name" xml:space="preserve">
     <value>ucrInputExtremes</value>
@@ -856,16 +1000,16 @@
     <value>8</value>
   </data>
   <data name="ucrSaveExtremes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 303</value>
+    <value>10, 292</value>
   </data>
   <data name="ucrSaveExtremes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveExtremes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>301, 21</value>
+    <value>255, 21</value>
   </data>
   <data name="ucrSaveExtremes.TabIndex" type="System.Int32, mscorlib">
-    <value>55</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrSaveExtremes.Name" xml:space="preserve">
     <value>ucrSaveExtremes</value>
@@ -883,13 +1027,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDisplayOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>401, 301</value>
+    <value>401, 290</value>
   </data>
   <data name="cmdDisplayOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 23</value>
   </data>
   <data name="cmdDisplayOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
+    <value>14</value>
   </data>
   <data name="cmdDisplayOptions.Text" xml:space="preserve">
     <value>Display Options</value>
@@ -916,7 +1060,7 @@
     <value>108, 23</value>
   </data>
   <data name="cmdFittingOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>53</value>
+    <value>12</value>
   </data>
   <data name="cmdFittingOptions.Text" xml:space="preserve">
     <value>Fitting Options</value>
@@ -934,7 +1078,7 @@
     <value>11</value>
   </data>
   <data name="ucrSelectorExtremes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 9</value>
+    <value>10, 10</value>
   </data>
   <data name="ucrSelectorExtremes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -943,7 +1087,7 @@
     <value>210, 180</value>
   </data>
   <data name="ucrSelectorExtremes.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrSelectorExtremes.Name" xml:space="preserve">
     <value>ucrSelectorExtremes</value>
@@ -964,13 +1108,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblDataToFit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 50</value>
+    <value>258, 45</value>
   </data>
   <data name="lblDataToFit.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
   </data>
   <data name="lblDataToFit.TabIndex" type="System.Int32, mscorlib">
-    <value>51</value>
+    <value>1</value>
   </data>
   <data name="lblDataToFit.Text" xml:space="preserve">
     <value>Variable:</value>
@@ -988,7 +1132,7 @@
     <value>13</value>
   </data>
   <data name="ucrReceiverVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 63</value>
+    <value>258, 60</value>
   </data>
   <data name="ucrReceiverVariable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -997,7 +1141,7 @@
     <value>127, 22</value>
   </data>
   <data name="ucrReceiverVariable.TabIndex" type="System.Int32, mscorlib">
-    <value>50</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrReceiverVariable.Name" xml:space="preserve">
     <value>ucrReceiverVariable</value>
@@ -1012,13 +1156,13 @@
     <value>14</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 332</value>
+    <value>10, 321</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>400, 51</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -1031,9 +1175,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>15</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -1048,13 +1189,13 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverExpressionExplanatoryModelForLocParam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 111</value>
+    <value>258, 108</value>
   </data>
   <data name="ucrReceiverExpressionExplanatoryModelForLocParam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 22</value>
+    <value>251, 22</value>
   </data>
   <data name="ucrReceiverExpressionExplanatoryModelForLocParam.TabIndex" type="System.Int32, mscorlib">
-    <value>58</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrReceiverExpressionExplanatoryModelForLocParam.Name" xml:space="preserve">
     <value>ucrReceiverExpressionExplanatoryModelForLocParam</value>
