@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat.Translations
 Public Class sdgExtremesDisplayOptions
-    Public clsFevdPlotFunction As New RFunction
+    Public clsPlotFunction As New RFunction
     Public clsRsyntax As New RSyntax
     Public bControlsInitialised As Boolean = False
     Private Sub sdgExtremeDisplayOtions(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -58,24 +58,24 @@ Public Class sdgExtremesDisplayOptions
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewFevdPlotFunction As RFunction, clsNewRSyntax As RSyntax, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewPlotFunction As RFunction, clsNewRSyntax As RSyntax, Optional bReset As Boolean = False)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
 
         clsRsyntax = clsNewRSyntax
-        clsFevdPlotFunction = clsNewFevdPlotFunction
+        clsPlotFunction = clsNewPlotFunction
 
-        ucrPnlExtreme.SetRCode(clsFevdPlotFunction, bReset, bCloneIfNeeded:=True)
-        ucrSavePlots.SetRCode(clsFevdPlotFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlExtreme.SetRCode(clsPlotFunction, bReset, bCloneIfNeeded:=True)
+        ucrSavePlots.SetRCode(clsPlotFunction, bReset, bCloneIfNeeded:=True)
     End Sub
 
     Private Sub ucrPnlExtreme_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlExtreme.ControlValueChanged
         If rdoNoPlot.Checked Then
-            clsFevdPlotFunction.RemoveParameterByName("type")
-            clsRsyntax.RemoveFromAfterCodes(clsFevdPlotFunction)
+            clsPlotFunction.RemoveParameterByName("type")
+            clsRsyntax.RemoveFromAfterCodes(clsPlotFunction)
         Else
-            clsRsyntax.AddToAfterCodes(clsFevdPlotFunction, iPosition:=0)
+            clsRsyntax.AddToAfterCodes(clsPlotFunction, iPosition:=0)
         End If
     End Sub
 End Class

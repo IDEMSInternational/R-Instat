@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgExtremes
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
-    Private clsFevdFunction, clsNaExclude, clsConvertVector, clsFevdPlotsFunction As New RFunction
+    Private clsFevdFunction, clsNaExclude, clsPlotsFunction As New RFunction
     'clsLocationScaleResetOperator is not run but affects reset of the check box.Any better method of implementation?
     Private clsLocationScaleResetOperator As New ROperator
     Private clsLocationParamOperator As New ROperator
@@ -98,9 +98,8 @@ Public Class dlgExtremes
 
     Private Sub SetDefaults()
         clsFevdFunction = New RFunction
-        clsFevdPlotsFunction = New RFunction
+        clsPlotsFunction = New RFunction
         clsNaExclude = New RFunction
-        clsConvertVector = New RFunction
         clsLocationParamOperator = New ROperator
         clsLocationScaleResetOperator = New ROperator
 
@@ -121,25 +120,20 @@ Public Class dlgExtremes
         clsNaExclude.SetPackageName("stats")
         clsNaExclude.SetRCommand("na.exclude")
 
-        clsFevdPlotsFunction.SetPackageName("extRemes")
-        clsFevdPlotsFunction.SetRCommand("plot.fevd")
-        clsFevdPlotsFunction.iCallType = 3
-        clsFevdPlotsFunction.bExcludeAssignedFunctionOutput = False
+        clsPlotsFunction.SetRCommand("plot")
+        clsPlotsFunction.iCallType = 3
+        clsPlotsFunction.bExcludeAssignedFunctionOutput = False
 
         clsFevdFunction.SetPackageName("extRemes")
         clsFevdFunction.SetRCommand("fevd")
 
-
-        clsConvertVector.SetRCommand("as.vector")
-        clsConvertVector.AddParameter("x", clsRFunctionParameter:=clsNaExclude)
-
-        clsFevdFunction.AddParameter("x", clsRFunctionParameter:=clsConvertVector, iPosition:=0)
+        clsFevdFunction.AddParameter("x", clsRFunctionParameter:=clsNaExclude, iPosition:=0)
         clsFevdFunction.AddParameter("type", Chr(34) & "GEV" & Chr(34), iPosition:=1)
         clsFevdFunction.AddParameter("method", Chr(34) & "MLE" & Chr(34), iPosition:=2)
 
         clsFevdFunction.SetAssignTo(ucrSaveExtremes.GetText(), strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
-        clsFevdPlotsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        clsFevdPlotsFunction.AddParameter("x", clsRFunctionParameter:=clsFevdFunction, iPosition:=0)
+        clsPlotsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsPlotsFunction.AddParameter("x", clsRFunctionParameter:=clsFevdFunction, iPosition:=0)
 
         clsAttach.SetRCommand("attach")
         clsDetach.SetRCommand("detach")
@@ -170,7 +164,7 @@ Public Class dlgExtremes
     End Sub
 
     Private Sub cmdDisplayOptions_Click(sender As Object, e As EventArgs) Handles cmdDisplayOptions.Click
-        sdgExtremesDisplayOptions.SetRCode(clsNewFevdPlotFunction:=clsFevdPlotsFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
+        sdgExtremesDisplayOptions.SetRCode(clsNewPlotFunction:=clsPlotsFunction, clsNewRSyntax:=ucrBase.clsRsyntax)
         sdgExtremesDisplayOptions.ShowDialog()
     End Sub
 
