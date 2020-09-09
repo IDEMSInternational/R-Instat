@@ -758,7 +758,7 @@ Public Class dlgOneVarFitModel
                     clsSenFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "serial corr" Then
-                    clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
                 End If
                 If ucrInputComboTests.GetText() = "snh" Then
                     clsSnhFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
