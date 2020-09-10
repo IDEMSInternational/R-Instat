@@ -186,6 +186,7 @@ Public Class dlgOneVarFitModel
 
         ucrInputTxtSd.SetParameter(New RParameter("sd_pop", 2))
         ucrInputTxtSd.SetValidationTypeAsNumeric(dcmMin:=0, bIncludeMin:=False)
+        ucrInputTxtSd.SetDefaultState(1)
         ucrInputTxtSd.AddQuotesIfUnrecognised = False
 
 
