@@ -71,7 +71,6 @@ Public Class dlgBarAndPieChart
 
         ucrPnlOptions.AddRadioButton(rdoBarChart)
         ucrPnlOptions.AddRadioButton(rdoPieChart)
-
         ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coordpolar")
         ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coordpolar", False)
 
