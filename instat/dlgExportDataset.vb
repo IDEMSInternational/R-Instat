@@ -142,7 +142,6 @@ Public Class dlgExportDataset
         ucrFilePath.FolderBrowse = False 'set file path control to open default SaveFileDialog prompt
         ucrFilePath.DefaultFileSuggestionName = ""
         ucrFilePath.FilePathDialogFilter = ""
-        ucrFilePath.SelectedFileFilterIndex = 0
 
         'if its a single data frame selected. Just set file path settings to defaults and exit sub
         If ucrReceiverMultipleDataFrames.GetVariableNamesList().Length <= 1 Then

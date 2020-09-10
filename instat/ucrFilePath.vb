@@ -34,6 +34,7 @@ Imports System.IO
 ''' </summary>
 Public Class ucrFilePath
     Private bFirstLoad As Boolean = True
+    Private strFilePathDialogFilter As String = "All Files *.*"
 
     ''' <summary>
     ''' event raised when the file path contents has changed
@@ -78,7 +79,17 @@ Public Class ucrFilePath
     ''' <summary>
     ''' used to set the allowed file filters or file extensions 
     ''' </summary> 
-    Public Property FilePathDialogFilter As String = "All Files *.*"
+    Public Property FilePathDialogFilter As String
+        Get
+            Return strFilePathDialogFilter
+        End Get
+        Set(ByVal value As String)
+            strFilePathDialogFilter = value
+            'reset the filter index(start index is 1). 
+            'its safer To, just incase number of filters set are different from previously set
+            SelectedFileFilterIndex = 1
+        End Set
+    End Property
 
     ''' <summary>
     ''' gets or sets the last selected filter index.
@@ -162,7 +173,6 @@ Public Class ucrFilePath
         FilePath = ""
     End Sub
 
-
     Private Sub ucrFilePath_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             AddButtonInFilePathControlTextbox()
@@ -223,6 +233,9 @@ Public Class ucrFilePath
         btnBrowse.PerformClick()
     End Sub
 
+    ''' <summary>
+    ''' adds the button for showing popup used to view the whole file path
+    ''' </summary>
     Private Sub AddButtonInFilePathControlTextbox()
         Dim btnViewMore As New Button
         'add the button to the comment textbox first
