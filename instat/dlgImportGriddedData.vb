@@ -68,11 +68,11 @@ Public Class dlgImportGriddedData
 
         ucrInputMinLat.SetParameter(New RParameter("min_lat", 5))
         ucrInputMinLat.AddQuotesIfUnrecognised = False
-        ucrInputMinLat.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
+        ucrInputMinLat.SetValidationTypeAsNumeric(dcmMin:=-90, dcmMax:=90)
 
         ucrInputMaxLat.SetParameter(New RParameter("max_lat", 6))
         ucrInputMaxLat.AddQuotesIfUnrecognised = False
-        ucrInputMaxLat.SetValidationTypeAsNumeric(dcmMin:=-180, dcmMax:=180)
+        ucrInputMaxLat.SetValidationTypeAsNumeric(dcmMin:=-90, dcmMax:=90)
 
         ucrDtpMinDate.SetParameter(New RParameter("min_date", 7))
 
