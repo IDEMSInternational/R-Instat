@@ -33,6 +33,8 @@ Imports System.IO
 ''' </list>
 ''' </summary>
 Public Class ucrFilePath
+    Private bFirstLoad As Boolean = True
+
     ''' <summary>
     ''' event raised when the file path contents has changed
     ''' </summary>
@@ -51,6 +53,12 @@ Public Class ucrFilePath
     End Property
 
     ''' <summary>
+    ''' flag used to determine whether the opened dialog prompt will be 
+    ''' FolderBrowserDialog or SaveFileDialog
+    ''' </summary>
+    Public Property FolderBrowse As Boolean = False
+
+    ''' <summary>
     ''' gets and sets the label text property value of the input textbox
     ''' </summary>
     Public Property FilePathLabel() As String
@@ -67,8 +75,17 @@ Public Class ucrFilePath
     ''' </summary> 
     Public Property FilePathDialogTitle As String = "Save As"
 
-    'used to set the allowed file filters or file extensions
+    ''' <summary>
+    ''' used to set the allowed file filters or file extensions 
+    ''' </summary> 
     Public Property FilePathDialogFilter As String = "All Files *.*"
+
+    ''' <summary>
+    ''' gets or sets the last selected filter index.
+    ''' used by the SaveFileDiaolog prompt to 'remember' last selected file type filter
+    ''' and by dialogs to know selected filter index
+    ''' </summary>
+    Public Property SelectedFileFilterIndex As Integer
 
     ''' <summary>
     ''' used to set the suggested name if no file name was set before
@@ -77,8 +94,8 @@ Public Class ucrFilePath
     Public Property DefaultFileSuggestionName As String = ""
 
     ''' <summary>
-    ''' gets or sets the input file path used by the SaveFileDiaolog prompt to 'remember' the 
-    ''' last selected file name and directory
+    ''' gets or sets the input file path used by the FolderBrowseDialog or SaveFileDialog prompt 
+    ''' also sets PreviousSelectedWindowsFilePath to 'remember' the last selected file name and directory
     ''' </summary> 
     Public Property FilePath() As String
         Get
@@ -87,16 +104,20 @@ Public Class ucrFilePath
         Set(ByVal value As String)
             'first replace backward slashed with forward slashes cause of R path formats
             PathControl().SetName(value.Replace("\", "/"))
+            If value <> "" Then
+                'to be safe, always replace the forward slashes with back slashes. values will be used by vb.net sialog prompts
+                PreviousSelectedWindowsFilePath = value.Replace("/", "\")
+            End If
             RaiseEvent FilePathChanged()
         End Set
     End Property
 
     ''' <summary>
-    ''' gets or sets the last selected filter index.
-    ''' used by the SaveFileDiaolog prompt to 'remember' last selected file type filter
-    ''' and by dialogs to know selected filter index
-    ''' </summary>
-    Public SelectedFileFilterIndex As Integer
+    ''' gets or sets the previously set path. This is never cleared when sub clear() is called.
+    ''' its used internally to set initial directories of the folder or save dialogs prompts even when path was extenally cleared
+    ''' the path will always be in windows backslash convention format i.e uses "\" instead of "/"
+    ''' </summary> 
+    Private Property PreviousSelectedWindowsFilePath As String = ""
 
     ''' <summary>
     ''' gets the control that contains the input file path and name
@@ -141,6 +162,14 @@ Public Class ucrFilePath
         FilePath = ""
     End Sub
 
+
+    Private Sub ucrFilePath_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If bFirstLoad Then
+            AddButtonInFilePathControlTextbox()
+            bFirstLoad = False
+        End If
+    End Sub
+
     ''' <summary>
     ''' opens a SaveFileDialog prompt thats allows user to specify file name and path 
     ''' to be used in saving a file
@@ -148,28 +177,98 @@ Public Class ucrFilePath
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = FilePathDialogTitle
-            dlgSave.Filter = FilePathDialogFilter
-            If IsEmpty() Then
-                dlgSave.FileName = DefaultFileSuggestionName
-                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            Else
-                'use the file path in windows backslash convention format
-                Dim strFilePathInWindowsFormat As String = FilePath.Replace("/", "\")
-                dlgSave.FileName = Path.GetFileName(strFilePathInWindowsFormat)
-                dlgSave.InitialDirectory = Path.GetDirectoryName(strFilePathInWindowsFormat)
-                dlgSave.FilterIndex = SelectedFileFilterIndex
-            End If
-            If DialogResult.OK = dlgSave.ShowDialog() Then
-                FilePath = dlgSave.FileName
-                SelectedFileFilterIndex = dlgSave.FilterIndex
-            End If
-        End Using
+        If FolderBrowse Then
+            Using dlgFolderBrowse As New FolderBrowserDialog
+                If String.IsNullOrEmpty(PreviousSelectedWindowsFilePath) Then
+                    dlgFolderBrowse.SelectedPath = frmMain.clsInstatOptions.strWorkingDirectory
+                Else
+                    'use the file path in windows backslash convention format 
+                    dlgFolderBrowse.SelectedPath = Path.GetDirectoryName(PreviousSelectedWindowsFilePath)
+                End If
+                If DialogResult.OK = dlgFolderBrowse.ShowDialog() Then
+                    FilePath = dlgFolderBrowse.SelectedPath
+                    'reset the filter index(start index is 1). its safer to, just incase save dialog is used later
+                    SelectedFileFilterIndex = 1
+                End If
+            End Using
+        Else
+            Using dlgSaveFile As New SaveFileDialog
+                dlgSaveFile.Title = FilePathDialogTitle
+                dlgSaveFile.Filter = FilePathDialogFilter
+                If String.IsNullOrEmpty(PreviousSelectedWindowsFilePath) Then
+                    dlgSaveFile.FileName = DefaultFileSuggestionName
+                    dlgSaveFile.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
+                Else
+                    'if there is no current file path and there is a default suggested name, then use the default suggestion
+                    'else check if previous selected path has an extension to determine if the previous path included a file name and use it
+                    If IsEmpty() AndAlso Not String.IsNullOrEmpty(DefaultFileSuggestionName) Then
+                        dlgSaveFile.FileName = DefaultFileSuggestionName
+                    ElseIf Not String.IsNullOrEmpty(Path.GetExtension(PreviousSelectedWindowsFilePath)) Then
+                        dlgSaveFile.FileName = Path.GetFileNameWithoutExtension(PreviousSelectedWindowsFilePath)
+                    End If
+
+                    dlgSaveFile.InitialDirectory = Path.GetDirectoryName(PreviousSelectedWindowsFilePath)
+                    dlgSaveFile.FilterIndex = SelectedFileFilterIndex
+
+                End If
+                If DialogResult.OK = dlgSaveFile.ShowDialog() Then
+                    FilePath = dlgSaveFile.FileName
+                    SelectedFileFilterIndex = dlgSaveFile.FilterIndex
+                End If
+            End Using
+        End If
     End Sub
 
     Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
         btnBrowse.PerformClick()
     End Sub
+
+    Private Sub AddButtonInFilePathControlTextbox()
+        Dim btnViewMore As New Button
+        'add the button to the comment textbox first
+        'PathControl.txtInput.Controls.Clear()
+        PathControl.txtInput.Controls.Add(btnViewMore)
+
+        'then set the  button properties
+        btnViewMore.Text = ":::" 'temp. This will be shown as centered.
+        btnViewMore.Size = New Size(25, PathControl.txtInput.ClientSize.Height + 2)
+        btnViewMore.TextAlign = ContentAlignment.TopCenter
+        btnViewMore.FlatStyle = FlatStyle.Standard
+        btnViewMore.FlatAppearance.BorderSize = 0
+        btnViewMore.Cursor = Cursors.Default
+        btnViewMore.Dock = DockStyle.Right
+        btnViewMore.BackColor = btnBrowse.BackColor
+        btnViewMore.UseVisualStyleBackColor = True
+
+        'set the button event handler
+        AddHandler btnViewMore.Click, Sub()
+                                          'shows a popup that displays the whole file path
+                                          Dim objPopup As New clsPopup
+                                          Dim txtShowFilePath As New TextBox With {
+                                                    .Multiline = True,
+                                                    .ScrollBars = ScrollBars.Vertical,
+                                                    .WordWrap = False
+                                             }
+
+                                          'attach event handlers that allow editing of the poped up text
+                                          AddHandler txtShowFilePath.LostFocus, Sub()
+                                                                                    FilePath = txtShowFilePath.Text
+                                                                                End Sub
+                                          AddHandler txtShowFilePath.KeyDown, Sub(sender As Object, e As KeyEventArgs)
+                                                                                  If e.Control AndAlso e.KeyCode = Keys.Enter Then
+                                                                                      FilePath = txtShowFilePath.Text
+                                                                                      objPopup.Hide()
+                                                                                  End If
+                                                                              End Sub
+                                          'set the contents control and show the popup
+                                          objPopup.SetContentControl(txtShowFilePath)
+                                          objPopup.SetSize(ucrInputFilePath.Width, ucrInputFilePath.Height + 100)
+                                          objPopup.Show(ucrInputFilePath)
+                                          txtShowFilePath.Text = FilePath
+                                          txtShowFilePath.SelectionStart = FilePath.Length
+                                      End Sub
+
+    End Sub
+
 
 End Class

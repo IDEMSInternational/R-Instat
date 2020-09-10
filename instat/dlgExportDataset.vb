@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgExportDataset
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsDefaultFunction As RFunction
 
     Private Sub dlgExportDataset_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -32,16 +32,9 @@ Public Class dlgExportDataset
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-
-        'ucrAvailableSheets.SetParameter(New RParameter("x", 0))
-        'ucrAvailableSheets.SetParameterIsRFunction()
-        'ucrAvailableSheets.SetText("Data Frame to Export:")
-
-
         'multiple reciever control that holds selected objects
         ucrReceiverMultipleDataFrames.SetParameter(New RParameter("x", 0))
         ucrReceiverMultipleDataFrames.SetParameterIsRFunction()
@@ -50,23 +43,20 @@ Public Class dlgExportDataset
         ucrReceiverMultipleDataFrames.strSelectorHeading = "Data Frames"
         ucrReceiverMultipleDataFrames.SetItemType("dataframe")
 
-
+        'file path control 
         ucrFilePath.SetPathControlParameter(New RParameter("file", 1))
 
-        ucrChkSaveAsSingleFile.Text = "Save as single file"
-
-        lblConfirm.Visible = False
-        lblConfirm.ForeColor = Color.Green
     End Sub
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
 
         ucrSelectorDataFrames.Reset()
-        ucrChkSaveAsSingleFile.Checked = True
-        ucrChkSaveAsSingleFile.Visible = False
+        chkSaveAsSingleFile.Checked = True
+        chkSaveAsSingleFile.Visible = False
+        cboFileExtension.SelectedIndex = 0
+        lblConfirm.Visible = False
         ucrFilePath.ResetPathControl()
-
 
         clsDefaultFunction.SetPackageName("rio")
         clsDefaultFunction.SetRCommand("export")
@@ -75,8 +65,12 @@ Public Class dlgExportDataset
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverMultipleDataFrames.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrFilePath.SetPathControlRcode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'done this way because, the selected base function could be a command string or clsDefaultFunction.
+        'so we don't want to reset the controls if command string was the base function on reloading the form
+        If bReset Then
+            ucrReceiverMultipleDataFrames.SetRCode(clsDefaultFunction, bReset)
+            ucrFilePath.SetPathControlRcode(clsDefaultFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
@@ -87,33 +81,97 @@ Public Class dlgExportDataset
             ucrBase.OKEnabled(False)
             lblConfirm.Visible = False
         End If
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOkEnabled()
     End Sub
 
     Private Sub ucrReceiverMultipleDataFrames_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverMultipleDataFrames.ControlContentsChanged
-        'give a suggestive name from selected data frame and change the file filter accordingly
-        If ucrReceiverMultipleDataFrames.GetVariableNamesList().Length = 1 Then
-            ucrChkSaveAsSingleFile.Visible = False
-            ucrFilePath.DefaultFileSuggestionName = ucrReceiverMultipleDataFrames.GetVariableNames(bWithQuotes:=False)
-            ucrFilePath.FilePathDialogFilter = "Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html"
-        Else
-            ucrChkSaveAsSingleFile.Visible = True
-            ucrFilePath.DefaultFileSuggestionName = ""
-            ucrFilePath.FilePathDialogFilter = "Excel files (*.xlsx)|*.xlsx|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|HTML(*.html)|*.html"
-        End If
-
-        'clear the file path contents. 
-        ucrFilePath.Clear()
+        chkSaveAsSingleFile.Visible = ucrReceiverMultipleDataFrames.GetVariableNamesList().Length > 1
+        SetSaveAsSeparateFilesControlsVisibilty()
+        ucrFilePath.Clear() 'will raise event FilePathChanged
+        ChangeFilePathControlSettings()
     End Sub
 
+    ''' <summary>
+    ''' this event will always be called when changes happen to the core controls of the form;
+    ''' receiver, file path, save as single checkbox
+    ''' </summary>
     Private Sub ucrFilePath_FilePathChanged() Handles ucrFilePath.FilePathChanged
+        'if no or single data frame selected or save as single checked then just set the base function to the default
+        If ucrReceiverMultipleDataFrames.GetVariableNamesList().Length <= 1 OrElse chkSaveAsSingleFile.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        Else
+            'else, create a string command for exporting separate files to a directory.
+            'note, as of 09/09/2020 rio didn't support exporting separate files in 1 command see issue ##5590
+            Dim lstItems As String() = ucrReceiverMultipleDataFrames.GetVariableNamesList(bWithQuotes:=False)
+            Dim strCommand As String = ""
+            For Each strItem In lstItems
+                strCommand = strCommand & "rio::export( x = data_book$get_data_frame(data_name=""" & strItem & """), file = """ & ucrFilePath.FilePath & "/" & strItem & cboFileExtension.Text & """)" & Environment.NewLine
+            Next
+            ucrBase.clsRsyntax.SetCommandString(strCommand)
+        End If
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrMultipleFilesControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleDataFrames.ControlContentsChanged
+        SetSaveAsSeparateFilesControlsVisibilty()
+        ChangeFilePathControlSettings()
+        ucrFilePath.Clear() 'will raise event FilePathChanged
+    End Sub
+
+    Private Sub chkSaveAsSingleFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveAsSingleFile.CheckedChanged
+        SetSaveAsSeparateFilesControlsVisibilty()
+        ChangeFilePathControlSettings()
+        ucrFilePath.Clear() 'will raise event FilePathChanged
+    End Sub
+
+    Private Sub cboFileExtension_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFileExtension.SelectedIndexChanged
+        ChangeFilePathControlSettings()
+        ucrFilePath.Clear() 'will raise event FilePathChanged
+    End Sub
+
+    ''' <summary>
+    ''' changes the file path control settings; 
+    ''' FolderBrowse, DefaultFileSuggestionName, FilePathDialogFilter
+    ''' the changed settings determine the behaviour of the file path contro
+    ''' </summary>
+    Private Sub ChangeFilePathControlSettings()
+        ucrFilePath.FolderBrowse = False 'set file path control to open default SaveFileDialog prompt
+        ucrFilePath.DefaultFileSuggestionName = ""
+        ucrFilePath.FilePathDialogFilter = ""
+        ucrFilePath.SelectedFileFilterIndex = 0
+
+        'if its a single data frame selected. Just set file path settings to defaults and exit sub
+        If ucrReceiverMultipleDataFrames.GetVariableNamesList().Length <= 1 Then
+            ucrFilePath.DefaultFileSuggestionName = ucrReceiverMultipleDataFrames.GetVariableNames(bWithQuotes:=False)
+            ucrFilePath.FilePathDialogFilter = "Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html"
+            Exit Sub
+        End If
+
+        'if multiple data frames have been selected then do the following
+        If chkSaveAsSingleFile.Checked Then
+            'if checkbox is visible and checked, set the file extension filter to  3 file types; .xlsx,rds,rData
+            ucrFilePath.FilePathDialogFilter = "Excel files (*.xlsx)|*.xlsx|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|HTML(*.html)|*.html"
+        Else
+            'if checkbox not checked, set file path control to open folder browser dialog prompt instead of save file dialog prompt
+            ucrFilePath.FolderBrowse = True
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' changes the visibilty of the save as separate files controls; lblFileExtension, cboFileExtension
+    ''' </summary>
+    Private Sub SetSaveAsSeparateFilesControlsVisibilty()
+        lblFileExtension.Visible = False
+        cboFileExtension.Visible = False
+        If ucrReceiverMultipleDataFrames.GetVariableNamesList().Length > 1 AndAlso Not chkSaveAsSingleFile.Checked Then
+            lblFileExtension.Visible = True
+            cboFileExtension.Visible = True
+        End If
+    End Sub
+
 
 End Class

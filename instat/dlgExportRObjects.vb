@@ -31,7 +31,7 @@ Public Class dlgExportRObjects
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        TestOkEnabled()
+        'TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -52,7 +52,7 @@ Public Class dlgExportRObjects
         clsExport = New RFunction
 
         'reset controls
-        ucrSelectorObjects.Reset()
+        ucrSelectorObjects.Reset() 'will also reset the reciever
         ucrFilePath.ResetPathControl()
 
         'set R command and base function
@@ -73,11 +73,11 @@ Public Class dlgExportRObjects
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        TestOkEnabled()
+        'TestOkEnabled()
     End Sub
 
     Private Sub ucrReceiverMultipleObjects_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverMultipleObjects.ControlContentsChanged
-        'ucrReceiverObjects is a multireceiver. So give a default suggested name if it has 1 item only
+        'give a default suggested name if only a single object is selected object
         ucrFilePath.DefaultFileSuggestionName = If(ucrReceiverMultipleObjects.GetVariableNamesList().Length = 1, ucrReceiverMultipleObjects.GetVariableNames(bWithQuotes:=False), "")
         TestOkEnabled()
     End Sub
