@@ -1292,7 +1292,7 @@ climatic_missing <- function(data, date, elements = ..., stations, summary = TRU
   # if there are no stations, set it as 1
   # (can otherwise just run the function without stations present in that brackets)
   if (missing(stations)){
-    data %>% mutate(stations = 1)
+    data %>% dplyr::mutate(stations = 1)
   }
   
   if (missing(date)){
@@ -1324,7 +1324,7 @@ climatic_missing <- function(data, date, elements = ..., stations, summary = TRU
         dplyr::mutate(start = ({{ date }})[which.min(is.na( value ))])
       
     }else{
-      data.stack <- data.stack %>% group_by({{ stations }}) %>% mutate(start = dplyr::first( {{ date }} ))
+      data.stack <- data.stack %>% dplyr::group_by({{ stations }}) %>% dplyr::mutate(start = dplyr::first( {{ date }} ))
     }
     
     # set end date
@@ -1333,27 +1333,27 @@ climatic_missing <- function(data, date, elements = ..., stations, summary = TRU
        dplyr::group_by({{ stations }}, Element ) %>%
         dplyr::mutate(end = ({{ date }} )[dplyr::last(which(!is.na( value )))])
     }else{
-      data.stack <- data.stack %>% group_by({{ stations }} ) %>% mutate(end = dplyr::last({{ date }}))
+      data.stack <- data.stack %>% dplyr::group_by({{ stations }} ) %>% dplyr::mutate(end = dplyr::last({{ date }}))
     }
     
     # number and percentage missing
     summary.data <- data.frame(data.stack %>%
-                                 group_by({{stations}}, Element) %>%
-                                 filter(({{date}}) >= start & ({{date}}) <= end) %>%
-                                 summarise(From = dplyr::first(start),
+                                 dplyr::group_by({{stations}}, Element) %>%
+                                 dplyr::filter(({{date}}) >= start & ({{date}}) <= end) %>%
+                                 dplyr::summarise(From = dplyr::first(start),
                                            To = dplyr::last(end),
                                            Missing = sum(is.na(value)),
                                            Percentage = sum(is.na(value))/n()*100))
     
     # complete years
     complete.years <- data.stack %>%
-      group_by({{stations}}) %>%
-      filter(({{date}}) >= start & ({{date}}) <= end) %>%
-      group_by(lubridate::year({{date}}), {{stations}}, Element) %>%
-      summarise(count = sum(is.na(value)))
+      dplyr::group_by({{stations}}) %>%
+      dplyr::filter(({{date}}) >= start & ({{date}}) <= end) %>%
+      dplyr::group_by(lubridate::year({{date}}), {{stations}}, Element) %>%
+      dplyr::summarise(count = sum(is.na(value)))
     complete.years <- complete.years %>%
-      group_by({{stations}}, Element) %>%
-      summarise(Complete.Years = sum(count == 0))
+      dplyr::group_by({{stations}}, Element) %>%
+      dplyr::summarise(Complete.Years = sum(count == 0))
     
   
     # bind together
@@ -1377,18 +1377,18 @@ climatic_missing <- function(data, date, elements = ..., stations, summary = TRU
     if (day){
       i = i + 1
       detail.table.day = data.stack %>%
-        group_by({{stations}}, Element) %>%
-        mutate(element.na = data.table::rleid(value)) %>%
-        filter(is.na(value)) %>%
-        group_by(element.na, {{stations}}, Element) %>%
-        summarise(From = dplyr::first({{date}}),
+        dplyr::group_by({{stations}}, Element) %>%
+        dplyr::mutate(element.na = data.table::rleid(value)) %>%
+        dplyr::filter(is.na(value)) %>%
+        dplyr::group_by(element.na, {{stations}}, Element) %>%
+        dplyr::summarise(From = dplyr::first({{date}}),
                   To = dplyr::last({{date}}),
                   Count = n())
       
        if (order){
-         detail.table.day <- detail.table.day %>% arrange(From)
+         detail.table.day <- detail.table.day %>% dplyr::arrange(From)
        } else {
-         detail.table.day <- detail.table.day %>% arrange(Element)
+         detail.table.day <- detail.table.day %>% dplyr::arrange(Element)
          }
       
       detail.table.day <- detail.table.day %>% ungroup() %>% dplyr::select(-c("element.na"))
@@ -1399,29 +1399,29 @@ climatic_missing <- function(data, date, elements = ..., stations, summary = TRU
     if (month){
       i = i + 1
       detail.table.month <- data.stack %>%
-        mutate(Date.ym = zoo::as.yearmon({{date}}))  %>%
-        group_by(Date.ym, {{stations}}, Element)
+        dplyr::mutate(Date.ym = zoo::as.yearmon({{date}}))  %>%
+        dplyr::group_by(Date.ym, {{stations}}, Element)
       
       detail.table.month <- detail.table.month %>%
-        summarise(no = n(),
+        dplyr::summarise(no = n(),
                   na = sum(is.na(value)),
                   From = dplyr::first({{date}}),
                   To = dplyr::last({{date}})) %>%
-        mutate(is.complete = ifelse(no == na, 1, 0)) # 0 if all are missing
+        dplyr::mutate(is.complete = ifelse(no == na, 1, 0)) # 0 if all are missing
 
       detail.table.month <- detail.table.month %>%
-        group_by({{stations}}, Element) %>%
-        mutate(element.na = data.table::rleid(is.complete)) %>%
-        filter(is.complete == 1) %>%
-        group_by(element.na, {{stations}}, Element) %>%
-        summarise(From = dplyr::first(From),
+        dplyr::group_by({{stations}}, Element) %>%
+        dplyr::mutate(element.na = data.table::rleid(is.complete)) %>%
+        dplyr::filter(is.complete == 1) %>%
+        dplyr::group_by(element.na, {{stations}}, Element) %>%
+        dplyr::summarise(From = dplyr::first(From),
                   To = dplyr::last(To),
                   Count = n())
       
        if (order){
-         detail.table.month <- detail.table.month %>% arrange(From)
+         detail.table.month <- detail.table.month %>% dplyr::arrange(From)
        } else {
-         detail.table.month <- detail.table.month %>% arrange(Element)
+         detail.table.month <- detail.table.month %>% dplyr::arrange(Element)
        }
       
       detail.table.month <- detail.table.month %>% ungroup() %>% dplyr::select(-c("element.na"))
@@ -1431,29 +1431,29 @@ climatic_missing <- function(data, date, elements = ..., stations, summary = TRU
     if (year) {
       i = i + 1
       detail.table.year <- data.stack %>%
-        mutate(Date.y = lubridate::year({{date}}))  %>%
-        group_by(Date.y, {{stations}}, Element)
+        dplyr::mutate(Date.y = lubridate::year({{date}}))  %>%
+        dplyr::group_by(Date.y, {{stations}}, Element)
       
       detail.table.year <- detail.table.year %>%
-        summarise(no = n(),
+        dplyr::summarise(no = n(),
                   na = sum(is.na(value)),
                   From = dplyr::first({{date}}),
                   To = dplyr::last({{date}})) %>%
-        mutate(is.complete = ifelse(no == na, 1, 0)) # 0 if all are missing
+        dplyr::mutate(is.complete = ifelse(no == na, 1, 0)) # 0 if all are missing
       
       detail.table.year <- detail.table.year %>%
-        group_by({{stations}}, Element) %>%
-        mutate(element.na = data.table::rleid(is.complete)) %>%
-        filter(is.complete == 1) %>%
-        group_by(element.na, {{stations}}, Element) %>%
-        summarise(From = dplyr::first(From),
+        dplyr::group_by({{stations}}, Element) %>%
+        dplyr::mutate(element.na = data.table::rleid(is.complete)) %>%
+        dplyr::filter(is.complete == 1) %>%
+        dplyr::group_by(element.na, {{stations}}, Element) %>%
+        dplyr::summarise(From = dplyr::first(From),
                   To = dplyr::last(To),
                   Count = n())
       
        if (order){
-         detail.table.year <- detail.table.year %>% arrange(From)
+         detail.table.year <- detail.table.year %>% dplyr::arrange(From)
        } else {
-         detail.table.year <- detail.table.year %>% arrange(Element)
+         detail.table.year <- detail.table.year %>% dplyr::arrange(Element)
        }
       
       detail.table.year <- detail.table.year %>% ungroup() %>% dplyr::select(-c("element.na"))
