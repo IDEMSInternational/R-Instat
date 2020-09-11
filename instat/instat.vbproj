@@ -1188,6 +1188,12 @@
     <Compile Include="sdgThemes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgTimeSeries.Designer.vb">
+      <DependentUpon>sdgTimeSeries.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgTimeSeries.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgTwoWayFrequencies.Designer.vb">
       <DependentUpon>sdgTwoWayFrequencies.vb</DependentUpon>
     </Compile>
@@ -4349,6 +4355,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgThemes.sw-KE.resx">
       <DependentUpon>sdgThemes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgTimeSeries.resx">
+      <DependentUpon>sdgTimeSeries.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgTwoWayFrequencies.resx">
       <DependentUpon>sdgTwoWayFrequencies.vb</DependentUpon>
