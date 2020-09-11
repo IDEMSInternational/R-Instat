@@ -188,6 +188,7 @@ Public Class dlgRegularSequence
         'Set to base function so that control is set correctly
         'After then set to nothing so that updating is done manually
         ucrNewColumnName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrNewColumnName.SetRCode(Nothing, bReset:=False, bUpdate:=False)
 
         ucrPnlSequenceType.SetRCode(clsRepFunction, bReset)
         ucrInputFrom.SetRCode(clsSeqFunction, bReset)
