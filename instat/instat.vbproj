@@ -208,6 +208,12 @@
     <Compile Include="dlgCompareSummary.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgConditionalQuantilePlot.Designer.vb">
+      <DependentUpon>dlgConditionalQuantilePlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgConditionalQuantilePlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDisplayTopN.Designer.vb">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
     </Compile>
@@ -230,6 +236,12 @@
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgOtherRosePlots.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSeasonalPlot.Designer.vb">
+      <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSeasonalPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgTaylorDiagram.Designer.vb">
@@ -2569,6 +2581,9 @@
     <EmbeddedResource Include="dlgCompareSummary.resx">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgConditionalQuantilePlot.resx">
+      <DependentUpon>dlgConditionalQuantilePlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayTopN.resx">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -2581,6 +2596,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSeasonalPlot.resx">
+      <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTaylorDiagram.resx">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>

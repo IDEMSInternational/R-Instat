@@ -2202,4 +2202,12 @@ Public Class frmMain
     Private Sub mnuClimaticCompareTimeSeriesPlot_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareTimeSeriesPlot.Click
         dlgTimeSeriesPlot.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticCompareSeasonalPlot_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareSeasonalPlot.Click
+        dlgSeasonalPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCompareConditionalQuantiles_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareConditionalQuantiles.Click
+        dlgConditionalQuantilePlot.ShowDialog()
+    End Sub
 End Class
