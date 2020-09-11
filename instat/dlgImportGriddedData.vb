@@ -226,14 +226,11 @@ Public Class dlgImportGriddedData
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-        Dim strPath As String
-
-        Using dlgFolder As New FolderBrowserDialog
-            dlgFolder.Description = "Choose Folder"
-            If dlgFolder.ShowDialog() = DialogResult.OK Then
-                ucrInputFilePath.SetName("")
-                strPath = dlgFolder.SelectedPath
-                ucrInputFilePath.SetName(Replace(strPath, "\", "/"))
+        Using dlgSave As New SaveFileDialog
+            dlgSave.Title = "Import from IRI Data Library Dialog"
+            dlgSave.Filter = "NetCDF files|*.nc"
+            If dlgSave.ShowDialog() = DialogResult.OK Then
+                ucrInputFilePath.SetName(dlgSave.FileName.Replace("\", "/"))
             End If
         End Using
     End Sub
