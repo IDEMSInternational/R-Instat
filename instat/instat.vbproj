@@ -226,10 +226,22 @@
     <Compile Include="dlgInfillMissingValues.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOtherRosePlots.Designer.vb">
+      <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOtherRosePlots.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTaylorDiagram.Designer.vb">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTaylorDiagram.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTimeSeriesPlot.Designer.vb">
+      <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTimeSeriesPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgWindPollutionRose.Designer.vb">
@@ -2567,8 +2579,14 @@
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgOtherRosePlots.resx">
+      <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTaylorDiagram.resx">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTimeSeriesPlot.resx">
+      <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
