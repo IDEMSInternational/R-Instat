@@ -2190,4 +2190,8 @@ Public Class frmMain
         dlgCalculator.strDefaultItem = "Circular"
         dlgCalculator.ShowDialog()
     End Sub
+
+    Private Sub mnuStructuredCircularWindPollutionRose_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularWindPollutionRose.Click
+        dlgWindPollutionRose.ShowDialog()
+    End Sub
 End Class
