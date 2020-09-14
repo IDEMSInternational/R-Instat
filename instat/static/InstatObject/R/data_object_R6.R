@@ -3714,7 +3714,7 @@ DataSheet$set("public", "visualize_element_na", function(element_col_name, eleme
       }
     }else{plt <- imputeTS::ggplot_na_imputations(x_with_na = element_col, x_with_imputations = element_imputed_col, x_axis_labels = curr_data[,x_axis_labels_col_name], xlab = xlab, ylab = ylab, legend = legend, x_with_truth = x_with_truth)}
   }
-  if(!missing(station_col_name) && dplyr::n_distinct(station_names)>1) {gridExtra::grid.arrange(grobs = plt_list, ncol = ncol)}
+  if(!missing(station_col_name) && dplyr::n_distinct(station_names)>1) {patchwork::wrap_plots(plt_list, ncol = ncol)}
   else{return(plt)}
 }
 )
