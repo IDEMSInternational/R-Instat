@@ -2089,38 +2089,38 @@ DataBook$set("public","package_check", function(package) {
 )
 
 DataBook$set("public", "download_from_IRI", function(source, data, path, min_lon, max_lon, min_lat, max_lat, min_date, max_date, name, download_type = "point", import = TRUE){
-  init_URL <- "https://iridl.ldeo.columbia.edu/"
-  if(source == "CHIRPS_V2P0"){prexyaddress <- paste0(init_URL, "SOURCES/.UCSB/.CHIRPS/.v2p0")
-  if(data == "daily_0p25") {extension <- ".daily/.global/.0p25/.prcp"}  
-  else if(data == "daily_improved_0p25") {extension <- ".daily-improved/.global/.0p25/.prcp"}
-  else if (data == "daily_0p05") {extension <- ".daily/.global/.0p05/.prcp"}
-  else if(data == "daily_improved_0p05") {extension <- ".daily-improved/.global/.0p05/.prcp"}
-  else if(data == "dekad") {extension <- ".dekad/.prcp"}
-  else if(data == "monthly_c8113") {extension <- ".monthly/.global/.c8113/.precipitation"}
-  else if(data == "monthly_deg1p0") {extension <- ".monthly/.global/.deg1p0/.precipitation"}
-  else if(data == "monthly_NMME_deg1p0") {extension <- ".monthly/.global/.NMME_deg1p0/.precipitation"}
-  else if(data == "monthly_prcp") {extension <- ".monthly/.global/.precipitation"}
+  init_URL <- "https://iridl.ldeo.columbia.edu/SOURCES/"
+  if(source == "CHIRPS_V2P0"){prexyaddress <- paste0(init_URL, ".UCSB/.CHIRPS/.v2p0")
+  if(data == "daily_0p25") {extension <- ".daily/.global/.0p25/.prcp"}  #1 Jan 1981 to 30 Nov 2015
+  else if(data == "daily_improved_0p25") {extension <- ".daily-improved/.global/.0p25/.prcp"}#1 Jan 1981 to 31 Jul 2020
+  else if (data == "daily_0p05") {extension <- ".daily/.global/.0p05/.prcp"}# Jan 1981 to 30 Nov 2015
+  else if(data == "daily_improved_0p05") {extension <- ".daily-improved/.global/.0p05/.prcp"}#1 Jan 1981 to 31 Jul 2020
+  else if(data == "dekad") {extension <- ".dekad/.prcp"}#(days since 1960-01-01) ordered [ (1-10 Jan 1981) (11-20 Jan 1981) (21-31 Jan 1981) ... (21-31 Aug 2020)] 
+  else if(data == "monthly_c8113") {extension <- ".monthly/.global/.c8113/.precipitation"}#months since 01-Jan) periodic (Jan) to (Dec)
+  else if(data == "monthly_deg1p0") {extension <- ".monthly/.global/.deg1p0/.precipitation"}#months since 1960-01-01) ordered (Jan 1981) to (Jul 2020)
+  else if(data == "monthly_NMME_deg1p0") {extension <- ".monthly/.global/.NMME_deg1p0/.precipitation"}#months since 1960-01-01) ordered (Jan 1981) to (Jul 2020) 
+  else if(data == "monthly_prcp") {extension <- ".monthly/.global/.precipitation"}#months since 1960-01-01) ordered (Jan 1981) to (Jul 2020)
   else stop("Data file does not exist for CHIRPS V2P0 data")
   #Annual and 2Monthly and 3monthly does not exist for CHIRPS_V2P0
   }else if(source == "TAMSAT") {prexyaddress <-paste0(init_URL, "home/.remic/.Reading/.Meteorology/.TAMSAT")
-  if(data == "rainfall_estimates") {extension <- ".TAMSAT-RFE/.rfe"}
-  else if(data == "rainfall_estimates_0p1") {extension <- ".TAMSAT-RFE_0p1/.rfe"}
-  else if(data == "reconstructed_rainfall_anomaly") {extension <- ".TAMSAT-RFE/.rfediff"}
-  else if(data == "sahel_dry_mask") {extension <- ".TAMSAT-RFE/.sahel_drymask"}
-  else if(data == "SPI_1_dekad") {extension <- ".TAMSAT-RFE/.SPI-rfe_1-dekad_Sahel"}
+  if(data == "rainfall_estimates") {extension <- ".TAMSAT-RFE/.rfe"}#days since 1960-01-01) ordered [ (11-20 Jan 1983) (21-31 Jan 1983) (1-10 Feb 1983) ... (11-20 Sep 2020)] 
+  else if(data == "rainfall_estimates_0p1") {extension <- ".TAMSAT-RFE_0p1/.rfe"}#(days since 1960-01-01) ordered [ (11-20 Jan 1983) (21-31 Jan 1983) (1-10 Feb 1983) ... (11-20 Sep 2020)] 
+  else if(data == "reconstructed_rainfall_anomaly") {extension <- ".TAMSAT-RFE/.rfediff"}#(days since 1960-01-01) ordered [ (11-20 Jan 1983) (21-31 Jan 1983) (1-10 Feb 1983) ... (11-20 Sep 2020)]
+  else if(data == "sahel_dry_mask") {extension <- ".TAMSAT-RFE/.sahel_drymask"}#(days since 1960-01-01) ordered [ (11-20 Jan 1983) (21-31 Jan 1983) (1-10 Feb 1983) ... (11-20 Sep 2020)] 
+  else if(data == "SPI_1_dekad") {extension <- ".TAMSAT-RFE/.SPI-rfe_1-dekad_Sahel"}#(days since 1960-01-01) ordered [ (11-20 Jan 1983) (21-31 Jan 1983) (1-10 Feb 1983) ... (11-20 Sep 2020)]
   else stop("Data file does not exist for TAMSAT data")
   #monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
-  }else if(source == "NOAA_ARC2") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.ARC2")
-  if(data == "daily_estimated_prcp") {extension <- ".daily/.est_prcp"}
-  else if(data == "monthly_average_estimated_prcp") {extension <- ".monthly/.est_prcp"}
+  }else if(source == "NOAA_ARC2") {prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.ARC2")
+  if(data == "daily_estimated_prcp") {extension <- ".daily/.est_prcp"}#(days since 1960-01-01 12:00:00) ordered (1 Jan 1983) to (12 Sep 2020)
+  else if(data == "monthly_average_estimated_prcp") {extension <- ".monthly/.est_prcp"}#(months since 1960-01-01) ordered (Jan 1983) to (Aug 2020)
   else stop("Data file does not exist for NOAA ARC2 data")
-  }else if(source=="NOAA_RFE2") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.FEWS/.Africa")
-  if(data == "daily_estimated_prcp"){extension <- ".DAILY/.RFEv2/.est_prcp"}
+  }else if(source=="NOAA_RFE2") {prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.FEWS/.Africa")
+  if(data == "daily_estimated_prcp"){extension <- ".DAILY/.RFEv2/.est_prcp"}#(days since 2000-10-31 12:00:00) ordered (31 Oct 2000) to (12 Sep 2020)
   else stop("Data file does not exist for NOAA RFE2 data")
   }else if(source=="NOAA_CMORPH_DAILY" || source=="NOAA_CMORPH_3HOURLY" || source=="NOAA_CMORPH_DAILY_CALCULATED") {
-    if(source=="NOAA_CMORPH_DAILY") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily")}
-    else if(source == "NOAA_CMORPH_3HOURLY") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.3-hourly")}
-    else if(source == "NOAA_CMORPH_DAILY_CALCULATED") {prexyaddress <- paste0(init_URL, "SOURCES/.NOAA/.NCEP/.CPC/.CMORPH/.daily_calculated")}
+    if(source=="NOAA_CMORPH_DAILY") {prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.CMORPH/.daily")}
+    else if(source == "NOAA_CMORPH_3HOURLY") {prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.CMORPH/.3-hourly")}
+    else if(source == "NOAA_CMORPH_DAILY_CALCULATED") {prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.CMORPH/.daily_calculated")}
     if(data == "mean_microwave_only_est_prcp") {extension <- ".mean/.microwave-only/.comb"}
     else if(data == "mean_morphed_est_prcp") {extension <- ".mean/.morphed/.cmorph"}
     else if(data == "orignames_mean_microwave_only_est_prcp") {extension <- ".orignames/.mean/.microwave-only/.comb"}
@@ -2128,11 +2128,11 @@ DataBook$set("public", "download_from_IRI", function(source, data, path, min_lon
     else if(data == "renamed102015_mean_microwave_only_est_prcp") {extension <- ".renamed102015/.mean/.microwave-only/.comb"}
     else if(data == "renamed102015_mean_morphed_est_prcp") {extension <- ".renamed102015/.mean/.morphed/.cmorph"}
     else stop("Data file does not exist for NOAA CMORPH data")
-  }else if(source=="NASA_TRMM_3B42") {prexyaddress <- paste0(init_URL, "SOURCES/.NASA/.GES-DAAC/.TRMM_L3/.TRMM_3B42/.v7")
-  if(data == "daily_estimated_prcp") {extension <- ".daily/.precipitation"}
-  else if(data == "3_hourly_estimated_prcp") {extension <- ".three-hourly/.precipitation"}
-  else if(data == "3_hourly_pre_gauge_adjusted_infrared_est_prcp") {extension <- ".three-hourly/.IRprecipitation"}
-  else if(data == "3_hourly_pre_gauge_adjusted_microwave_est_prcp") {extension <- ".three-hourly/.HQprecipitation"}
+  }else if(source=="NASA_TRMM_3B42") {prexyaddress <- paste0(init_URL, ".NASA/.GES-DAAC/.TRMM_L3/.TRMM_3B42/.v7")
+  if(data == "daily_estimated_prcp") {extension <- ".daily/.precipitation"}#(days since 1998-01-01 00:00:00) ordered (1 Jan 1998) to (31 May 2015)
+  else if(data == "3_hourly_estimated_prcp") {extension <- ".three-hourly/.precipitation"}#(days since 1998-01-01 00:00:00) ordered (2230 31 Dec 1997 - 0130 1 Jan 1998) to (2230 30 May 2015 - 0130 31 May 2015) 
+  else if(data == "3_hourly_pre_gauge_adjusted_infrared_est_prcp") {extension <- ".three-hourly/.IRprecipitation"}#(days since 1998-01-01 00:00:00) ordered (2230 31 Dec 1997 - 0130 1 Jan 1998) to (2230 30 May 2015 - 0130 31 May 2015) 
+  else if(data == "3_hourly_pre_gauge_adjusted_microwave_est_prcp") {extension <- ".three-hourly/.HQprecipitation"}#(days since 1998-01-01 00:00:00) ordered (2230 31 Dec 1997 - 0130 1 Jan 1998) to (2230 30 May 2015 - 0130 31 May 2015)
   else stop("Data file does not exist for NASA TRMM 3B42 data")
   }else{stop("Source not specified correctly.")}
   prexyaddress <- paste(prexyaddress, extension, sep="/")

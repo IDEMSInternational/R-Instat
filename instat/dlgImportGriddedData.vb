@@ -175,6 +175,7 @@ Public Class dlgImportGriddedData
                 dctFiles.Add("Daily_Est._Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
+                ucrDtpMinDate.MinDate = New Date(2000, 10, 31)
             Case "CHIRPS_V2P0"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Daily_0p25", Chr(34) & "daily_0p25" & Chr(34))
@@ -188,6 +189,7 @@ Public Class dlgImportGriddedData
                 dctFiles.Add("Monthly_Precipitation", Chr(34) & "monthly_prcp" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Daily_0p25"
+                ucrDtpMinDate.MinDate = New Date(1981, 1, 1)
             Case "TAMSAT"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Rainfall_Estimates", Chr(34) & "rainfall_estimates" & Chr(34))
@@ -197,6 +199,7 @@ Public Class dlgImportGriddedData
                 dctFiles.Add("Standard_Precipitation_Index_1-dekad", Chr(34) & "SPI_1_dekad" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Rainfall_Estimates"
+                ucrDtpMinDate.MinDate = New Date(1983, 1, 11)
             Case "NOAA_ARC2"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Daily_Est._Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
@@ -204,6 +207,7 @@ Public Class dlgImportGriddedData
                 'monthly,climatology and TAMSAT RFE 0p1 are yet to be implemented.
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
+                ucrDtpMinDate.MinDate = New Date(1983, 1, 1)
             Case "NOAA_CMORPH_DAILY", "NOAA_CMORPH_3HOURLY", "NOAA_CMORPH_DAILY_CALCULATED"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Mean_Morphed_Est._Prcp.", Chr(34) & "mean_morphed_est_prcp" & Chr(34))
@@ -214,6 +218,7 @@ Public Class dlgImportGriddedData
                 dctFiles.Add("Renamed102015_Mean_Morphed_Est._Prcp.", Chr(34) & "renamed102015_mean_morphed_est_prcp" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Mean_Morphed_Est._Prcp."
+                'ucrDtpMinDate.MinDate = New Date(2000, 10, 31) This source(CMORPH) is currently not available seems to have been moved elsewhere!
             Case "NASA_TRMM_3B42"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Daily_Est._Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
@@ -222,6 +227,7 @@ Public Class dlgImportGriddedData
                 dctFiles.Add("3-Hourly_Pre-gauge_Adjusted_Microwave_Est._Prcp.", Chr(34) & "3_hourly_pre_gauge_adjusted_microwave_est_prcp" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
+                ucrDtpMinDate.MinDate = New Date(1998, 1, 1)
         End Select
     End Sub
 
