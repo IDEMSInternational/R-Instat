@@ -176,6 +176,7 @@ Public Class dlgImportGriddedData
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
                 ucrDtpMinDate.MinDate = New Date(2000, 10, 31)
+                ucrDtpMaxDate.MinDate = New Date(2000, 10, 31)
             Case "CHIRPS_V2P0"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Daily_0p25", Chr(34) & "daily_0p25" & Chr(34))
@@ -190,6 +191,7 @@ Public Class dlgImportGriddedData
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Daily_0p25"
                 ucrDtpMinDate.MinDate = New Date(1981, 1, 1)
+                ucrDtpMaxDate.MinDate = New Date(1981, 1, 1)
             Case "TAMSAT"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Rainfall_Estimates", Chr(34) & "rainfall_estimates" & Chr(34))
@@ -200,6 +202,7 @@ Public Class dlgImportGriddedData
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Rainfall_Estimates"
                 ucrDtpMinDate.MinDate = New Date(1983, 1, 11)
+                ucrDtpMaxDate.MinDate = New Date(1983, 1, 11)
             Case "NOAA_ARC2"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Daily_Est._Prcp.", Chr(34) & "daily_estimated_prcp" & Chr(34))
@@ -208,6 +211,7 @@ Public Class dlgImportGriddedData
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
                 ucrDtpMinDate.MinDate = New Date(1983, 1, 1)
+                ucrDtpMaxDate.MinDate = New Date(1983, 1, 1)
             Case "NOAA_CMORPH_DAILY", "NOAA_CMORPH_3HOURLY", "NOAA_CMORPH_DAILY_CALCULATED"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Mean_Morphed_Est._Prcp.", Chr(34) & "mean_morphed_est_prcp" & Chr(34))
@@ -228,6 +232,7 @@ Public Class dlgImportGriddedData
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Daily_Est._Prcp."
                 ucrDtpMinDate.MinDate = New Date(1998, 1, 1)
+                ucrDtpMaxDate.MinDate = New Date(1998, 1, 1)
         End Select
     End Sub
 
