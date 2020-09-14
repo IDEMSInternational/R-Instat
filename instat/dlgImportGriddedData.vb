@@ -19,6 +19,7 @@ Imports instat.Translations
 Public Class dlgImportGriddedData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bShowMessageBox As Boolean
     Private clsDownloadFromIRIFunction As New RFunction
     Private clsDefaultStartDate, clsDefaultEndDate As New RFunction
     Private dctDownloadPairs, dctFiles As New Dictionary(Of String, String)
@@ -114,13 +115,12 @@ Public Class dlgImportGriddedData
         clsDefaultStartDate.SetRCommand("as.Date")
         clsDefaultStartDate.AddParameter("x", Chr(34) & "2000/10/31" & Chr(34))
 
-        clsDefaultEndDate = New RFunction
-        clsDefaultEndDate.SetRCommand("as.Date")
-        clsDefaultEndDate.AddParameter("x", ucrDtpMaxDate.CurrentDate())
+        clsDefaultEndDate = ucrDtpMaxDate.ValueAsRDate
     End Sub
 
     Private Sub SetDefaults()
         clsDownloadFromIRIFunction = New RFunction
+        bShowMessageBox = True
 
         clsDownloadFromIRIFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$download_from_IRI")
         clsDownloadFromIRIFunction.AddParameter("source", Chr(34) & "NOAA_RFE2" & Chr(34), iPosition:=0)
@@ -254,8 +254,9 @@ Public Class dlgImportGriddedData
     End Sub
 
     Private Sub ucrDtpMaxDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDtpMaxDate.ControlValueChanged, ucrDtpMinDate.ControlValueChanged
-        If ucrDtpMinDate.DateValue > ucrDtpMaxDate.DateValue Then
+        If ucrDtpMinDate.DateValue > ucrDtpMaxDate.DateValue AndAlso bShowMessageBox Then
             MsgBox("From date is greater than To date. Ok will Not be enabled on the dialog.", Title:="Date bounds", Buttons:=MsgBoxStyle.Information)
+            bShowMessageBox = False
         End If
     End Sub
 

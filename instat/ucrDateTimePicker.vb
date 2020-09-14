@@ -185,12 +185,4 @@ Public Class ucrDateTimePicker
     Public Function DateValue() As Date
         Return dtpDateTime.Value
     End Function
-
-    Public Function CurrentDate(Optional bWithQuotes As Boolean = True) As String
-        Dim strCurrDate As String = dtpDateTime.Value.Year & "/" & dtpDateTime.Value.Month & "/" & dtpDateTime.Value.Day
-        If bWithQuotes Then
-            strCurrDate = Chr(34) & strCurrDate & Chr(34)
-        End If
-        Return strCurrDate
-    End Function
 End Class
