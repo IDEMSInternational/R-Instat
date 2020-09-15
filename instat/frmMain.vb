@@ -2007,7 +2007,6 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuPrepareCalculateCalculations_Click(sender As Object, e As EventArgs) Handles mnuPrepareCalculator.Click
-        dlgCalculator.strDefaultItem = "Basic"
         dlgCalculator.ShowDialog()
     End Sub
 
@@ -2187,7 +2186,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuStructuredCircularCalculator_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularCalculator.Click
-        dlgCalculator.strDefaultItem = "Circular"
+        dlgCalculator.SetDefaultKeyboard("Circular")
         dlgCalculator.ShowDialog()
     End Sub
 
