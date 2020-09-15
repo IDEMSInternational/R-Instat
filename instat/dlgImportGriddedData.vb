@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.IO
 Imports instat.Translations
 Public Class dlgImportGriddedData
     Private bFirstLoad As Boolean = True
@@ -57,6 +56,7 @@ Public Class dlgImportGriddedData
         ucrInputData.SetItems(dctFiles)
         ucrInputData.SetDropDownStyleAsNonEditable()
 
+        ucrInputFilePath.SetParameter(New RParameter("path", 2))
         ucrInputFilePath.IsReadOnly = True
 
         ucrInputMinLon.SetParameter(New RParameter("min_lon", 3))
@@ -81,35 +81,27 @@ Public Class dlgImportGriddedData
 
         ucrInputNewDataFrameName.SetParameter(New RParameter("name", 9))
 
-        ucrPnlDownloadType.SetParameter(New RParameter("download_type", 10))
-        ucrPnlDownloadType.AddRadioButton(rdoArea, Chr(34) & "area" & Chr(34))
-        ucrPnlDownloadType.AddRadioButton(rdoPoint, Chr(34) & "point" & Chr(34))
+        ucrPnlLocationRange.SetParameter(New RParameter("download_type", 10))
+        ucrPnlLocationRange.AddRadioButton(rdoArea, Chr(34) & "area" & Chr(34))
+        ucrPnlLocationRange.AddRadioButton(rdoPoint, Chr(34) & "point" & Chr(34))
+
+        ucrPnlDateRange.AddRadioButton(rdoEntireRange)
+        ucrPnlDateRange.AddRadioButton(rdoCustomRange)
+        ucrPnlDateRange.AddParameterPresentCondition(rdoCustomRange, {"min_date", "max_date"})
+        ucrPnlDateRange.AddParameterPresentCondition(rdoArea, {"min_date", "max_date"}, False)
 
         ucrChkDontImportData.SetParameter(New RParameter("import", 11))
         ucrChkDontImportData.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
         ucrChkDontImportData.SetText("Don' t import data after downloading")
         ucrChkDontImportData.SetRDefault("TRUE")
 
-        ucrPnlDownloadType.AddToLinkedControls({ucrInputMaxLat, ucrInputMaxLon}, {rdoArea}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkSaveFileLocation.AddToLinkedControls(ucrChkDontImportData, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkSaveFileLocation.AddToLinkedControls(ucrInputFilePath, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkWholeRange.AddToLinkedControls({ucrDtpMinDate, ucrDtpMaxDate}, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputMinLon.SetLinkedDisplayControl(lblMinLon)
-        ucrInputMinLon.SetLinkedDisplayControl(lblMinLon)
+        ucrPnlLocationRange.AddToLinkedControls({ucrInputMaxLat, ucrInputMaxLon}, {rdoArea}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlDateRange.AddToLinkedControls({ucrDtpMinDate, ucrDtpMaxDate}, {rdoCustomRange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMaxLon.SetLinkedDisplayControl(lblMaxLon)
-        ucrInputMinLat.SetLinkedDisplayControl(lblMinLat)
+        ucrInputMinLat.SetLinkedDisplayControl(lblLat)
         ucrInputMaxLat.SetLinkedDisplayControl(lblMaxLat)
-        ucrInputFilePath.SetLinkedDisplayControl(cmdBrowse)
         ucrDtpMinDate.SetLinkedDisplayControl(lblFrom)
         ucrDtpMaxDate.SetLinkedDisplayControl(lblTo)
-
-        ucrChkSaveFileLocation.SetText("Save Downloaded File:")
-        ucrChkSaveFileLocation.AddParameterPresentCondition(True, "path")
-        ucrChkSaveFileLocation.AddParameterPresentCondition(False, "path", False)
-
-        ucrChkWholeRange.SetText("Whole range")
-        ucrChkWholeRange.AddParameterPresentCondition(True, {"min_date", "max_date"})
-        ucrChkWholeRange.AddParameterPresentCondition(False, {"min_date", "max_date"}, False)
 
         clsDefaultStartDate = New RFunction
         clsDefaultStartDate.SetRCommand("as.Date")
@@ -122,10 +114,13 @@ Public Class dlgImportGriddedData
         clsDownloadFromIRIFunction = New RFunction
         bShowMessageBox = True
 
+        'temp fix
+        rdoEntireRange.Checked = True
+
         clsDownloadFromIRIFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$download_from_IRI")
         clsDownloadFromIRIFunction.AddParameter("source", Chr(34) & "NOAA_RFE2" & Chr(34), iPosition:=0)
         clsDownloadFromIRIFunction.AddParameter("data", Chr(34) & "daily_estimated_prcp" & Chr(34), iPosition:=1)
-        'clsDownloadFromIRIFunction.AddParameter("path", Chr(34) & System.IO.Path.Combine(System.IO.Path.GetTempPath()).Replace("\", "/") & Chr(34), iPosition:=2)
+        clsDownloadFromIRIFunction.AddParameter("path", (Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) & "\Downloads").Replace("\", "/"), iPosition:=2)
         'opted to set this as default location since it has data for all sources
         clsDownloadFromIRIFunction.AddParameter("min_lon", 10, iPosition:=3)
         clsDownloadFromIRIFunction.AddParameter("max_lon", 10.5, iPosition:=4)
@@ -145,7 +140,7 @@ Public Class dlgImportGriddedData
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrInputNewDataFrameName.IsEmpty OrElse (rdoPoint.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty)) OrElse (rdoArea.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty OrElse ucrInputMaxLon.IsEmpty OrElse ucrInputMaxLat.IsEmpty)) OrElse (ucrChkSaveFileLocation.Checked AndAlso ucrInputFilePath.IsEmpty) OrElse (Not ucrChkWholeRange.Checked AndAlso ucrDtpMinDate.DateValue > ucrDtpMaxDate.DateValue) Then
+        If ucrInputNewDataFrameName.IsEmpty OrElse (rdoPoint.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty)) OrElse (rdoArea.Checked AndAlso (ucrInputMinLon.IsEmpty OrElse ucrInputMinLat.IsEmpty OrElse ucrInputMaxLon.IsEmpty OrElse ucrInputMaxLat.IsEmpty)) OrElse ucrInputFilePath.IsEmpty OrElse (Not rdoCustomRange.Checked AndAlso ucrDtpMinDate.DateValue > ucrDtpMaxDate.DateValue) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -156,16 +151,6 @@ Public Class dlgImportGriddedData
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrPnlDownloadType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDownloadType.ControlValueChanged
-        If rdoArea.Checked Then
-            lblMinLat.Text = "Minimum Latitude:"
-            lblMinLon.Text = "Minimum Longitude:"
-        ElseIf rdoPoint.Checked Then
-            lblMinLat.Text = "Latitude:"
-            lblMinLon.Text = "Longitude:"
-        End If
     End Sub
 
     Private Sub ucrInputSource_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSource.ControlValueChanged
@@ -237,25 +222,20 @@ Public Class dlgImportGriddedData
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Import from IRI Data Library Dialog"
-            dlgSave.Filter = "NetCDF files|*.nc"
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                ucrInputFilePath.SetName(dlgSave.FileName.Replace("\", "/"))
+        Dim strPath As String
+
+        Using dlgFolder As New FolderBrowserDialog
+            dlgFolder.Description = "Choose Folder"
+            If dlgFolder.ShowDialog() = DialogResult.OK Then
+                ucrInputFilePath.SetName("")
+                strPath = dlgFolder.SelectedPath
+                ucrInputFilePath.SetName(Replace(strPath, "\", "/"))
             End If
         End Using
     End Sub
 
-    Private Sub ucrInputData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputData.ControlValueChanged, ucrInputSource.ControlValueChanged
-        ucrInputNewDataFrameName.SetName(ucrInputSource.GetText & "_" & ucrInputData.GetText)
-    End Sub
-
-    Private Sub ucrInputFilePath_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlValueChanged, ucrChkSaveFileLocation.ControlValueChanged
-        If ucrChkSaveFileLocation.Checked AndAlso ucrInputFilePath.GetText <> "" Then
-            clsDownloadFromIRIFunction.AddParameter("path", Chr(34) & ucrInputFilePath.GetText & Chr(34), iPosition:=2)
-        Else
-            clsDownloadFromIRIFunction.RemoveParameterByName("path")
-        End If
+    Private Sub ucrInputData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputData.ControlValueChanged, ucrInputSource.ControlValueChanged, ucrDtpMinDate.ControlContentsChanged, ucrDtpMaxDate.ControlContentsChanged
+        ucrInputNewDataFrameName.SetName(ucrInputSource.GetText & "_" & ucrInputData.GetText & "_" & (ucrDtpMinDate.DateValue & "_" & ucrDtpMaxDate.DateValue).Replace("/", "_"))
     End Sub
 
     Private Sub ucrDtpMaxDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDtpMaxDate.ControlValueChanged, ucrDtpMinDate.ControlValueChanged
@@ -265,7 +245,17 @@ Public Class dlgImportGriddedData
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewDataFrameName.ControlContentsChanged, ucrPnlDownloadType.ControlContentsChanged, ucrInputMinLon.ControlContentsChanged, ucrInputMaxLon.ControlContentsChanged, ucrInputMinLat.ControlContentsChanged, ucrInputMaxLat.ControlContentsChanged, ucrChkSaveFileLocation.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrChkWholeRange.ControlContentsChanged, ucrDtpMinDate.ControlContentsChanged, ucrDtpMaxDate.ControlContentsChanged
+    Private Sub ucrPnlLocationRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLocationRange.ControlValueChanged
+        If rdoArea.Checked Then
+            lblMinLon.Visible = True
+            lblMinLat.Visible = True
+        ElseIf rdoPoint.Checked Then
+            lblMinLon.Visible = False
+            lblMinLat.Visible = False
+        End If
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputNewDataFrameName.ControlContentsChanged, ucrInputMinLon.ControlContentsChanged, ucrInputMaxLon.ControlContentsChanged, ucrInputMinLat.ControlContentsChanged, ucrInputMaxLat.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrDtpMinDate.ControlContentsChanged, ucrDtpMaxDate.ControlContentsChanged, ucrPnlDateRange.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

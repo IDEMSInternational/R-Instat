@@ -2088,7 +2088,7 @@ DataBook$set("public","package_check", function(package) {
 }
 )
 
-DataBook$set("public", "download_from_IRI", function(source, data, path, min_lon, max_lon, min_lat, max_lat, min_date, max_date, name, download_type = "point", import = TRUE){
+DataBook$set("public", "download_from_IRI", function(source, data, path = tempdir(), min_lon, max_lon, min_lat, max_lat, min_date, max_date, name, download_type = "point", import = TRUE){
   init_URL <- "https://iridl.ldeo.columbia.edu/SOURCES/"
   if(source == "CHIRPS_V2P0"){prexyaddress <- paste0(init_URL, ".UCSB/.CHIRPS/.v2p0")
   if(data == "daily_0p25") {extension <- ".daily/.global/.0p25/.prcp"}  #1 Jan 1981 to 30 Nov 2015
@@ -2140,10 +2140,9 @@ DataBook$set("public", "download_from_IRI", function(source, data, path, min_lon
   else if(download_type == "point"){URL <- add_xy_point_range(path = prexyaddress, min_lon = min_lon, min_lat = min_lat)}
   if(!missing(min_date)&!missing(max_date)){URL <- URL %>% add_t_range(min_date = min_date, max_date = max_date)}
   URL <- URL %>%  add_nc()
-  if(missing(path)){file_name <- tempfile(name, fileext = ".nc")}
-  else{file_name <- path}
+  file_name <- tempfile(name, tmpdir = path, fileext = ".nc")
   result <- download.file(url = URL, destfile =  file_name, method = "libcurl", mode = "wb", cacheOK = FALSE)
-  if(import & result == 0) {
+  if(import && result == 0) {
     nc <- ncdf4::nc_open(filename = file_name)
     self$import_NetCDF(nc = nc, name = name)
     ncdf4::nc_close(nc=nc)
