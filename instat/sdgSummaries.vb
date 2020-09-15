@@ -26,7 +26,7 @@ Public Class sdgSummaries
     Private strWeightLabel As String
     Public bEnable2VariableTab As Boolean = True
     Public bOkEnabled As Boolean = True
-
+    Public iIndex As Integer
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         tbTwoVariables.Enabled = bEnable2VariableTab
@@ -363,6 +363,7 @@ Public Class sdgSummaries
     Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewConcFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strNewWeightLabel As String = Nothing)
         If Not bControlsInitialised Then
             InitialiseControls()
+
         End If
         clsListFunction = clsNewRFunction
         clsDefaultFunction = clsNewDefaultFunction
@@ -481,7 +482,7 @@ Public Class sdgSummaries
         ucrChkVolumetricEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
-            tbSummaries.SelectedIndex = 0
+            tbSummaries.SelectedIndex = iIndex
             ucrSelectorSecondVariable.Reset()
             ucrSelectorOrderBy.Reset()
         End If
