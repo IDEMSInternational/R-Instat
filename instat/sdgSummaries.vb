@@ -26,7 +26,7 @@ Public Class sdgSummaries
     Private strWeightLabel As String
     Public bEnable2VariableTab As Boolean = True
     Public bOkEnabled As Boolean = True
-    Public iIndex As Integer
+
     Private Sub sdgDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         tbTwoVariables.Enabled = bEnable2VariableTab
@@ -360,7 +360,9 @@ Public Class sdgSummaries
         OrderByCheckEnabled()
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewConcFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strNewWeightLabel As String = Nothing)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewConcFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strNewWeightLabel As String = Nothing, Optional strDefaultTab As String = "")
+        Dim bTabFound As Boolean = False
+
         If Not bControlsInitialised Then
             InitialiseControls()
 
@@ -482,9 +484,23 @@ Public Class sdgSummaries
         ucrChkVolumetricEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
-            tbSummaries.SelectedIndex = iIndex
             ucrSelectorSecondVariable.Reset()
             ucrSelectorOrderBy.Reset()
+            If strDefaultTab <> "" Then
+                For i As Integer = 0 To tbSummaries.TabPages.Count - 1
+                    If tbSummaries.TabPages(i).Text = strDefaultTab Then
+                        tbSummaries.SelectedIndex = i
+                        bTabFound = True
+                        Exit For
+                    End If
+                Next
+                ' Could give a developer error here as it means strDefaultTab was not recognised.
+                If Not bTabFound Then
+                    tbSummaries.SelectedIndex = 0
+                End If
+            Else
+                tbSummaries.SelectedIndex = 0
+            End If
         End If
     End Sub
 

@@ -73,10 +73,6 @@ Public Class dlgCalculator
 
     Private Sub ReopenDialog()
         SaveResults()
-        If strDefaultKeyboard <> "" Then
-            ucrCalc.ucrInputCalOptions.SetName(strDefaultKeyboard)
-            strDefaultKeyboard = ""
-        End If
     End Sub
 
     Private Sub InitialiseDialog()

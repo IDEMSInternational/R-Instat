@@ -516,9 +516,20 @@ Partial Class frmMain
         Me.mnuPrepareRObjectsReorder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructured = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuStructuredCircular = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredCircularDefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularCalculator = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularSummaries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator46 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuStructuredCircularScatterPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularDensityPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularRosePlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator67 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuStructuredCircularWindRose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularWindPollutionRose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularOtherRosePlots = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator68 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuStructuredCircularCirclize = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredLow_Flow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredLow_FlowDefine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredSurvival = New System.Windows.Forms.ToolStripMenuItem()
@@ -615,32 +626,20 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
+        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
         Me.splLogScript = New System.Windows.Forms.SplitContainer()
+        Me.ucrLogWindow = New instat.ucrLog()
+        Me.ucrScriptWindow = New instat.ucrScript()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
+        Me.ucrDataViewer = New instat.ucrDataView()
+        Me.ucrOutput = New instat.ucrOutputWindow()
         Me.mnuRViewer = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPlotly = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularCalculator = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularSummaries = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator46 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuStructuredCircularScatterPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularDensityPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularRosePlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator67 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuStructuredCircularWindRose = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularWindPollutionRose = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularOtherRosePlots = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator68 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuStructuredCircularCirclize = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
-        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.ucrLogWindow = New instat.ucrLog()
-        Me.ucrScriptWindow = New instat.ucrScript()
-        Me.ucrDataViewer = New instat.ucrDataView()
-        Me.ucrOutput = New instat.ucrOutputWindow()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -3343,14 +3342,9 @@ Partial Class frmMain
         '
         'mnuStructured
         '
-        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries, Me.ToolStripSeparator63, Me.mnuStructuredClimatic, Me.mnuStructuredProcurement, Me.mnuStructuredOptionByContext})
+        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries, Me.ToolStripSeparator63, Me.mnuStructuredClimatic, Me.mnuStructuredProcurement, Me.mnuStructuredOptionByContext})
         Me.mnuStructured.Name = "mnuStructured"
         resources.ApplyResources(Me.mnuStructured, "mnuStructured")
-        '
-        'ToolStripSeparator20
-        '
-        Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
-        resources.ApplyResources(Me.ToolStripSeparator20, "ToolStripSeparator20")
         '
         'mnuStructuredCircular
         '
@@ -3362,6 +3356,66 @@ Partial Class frmMain
         '
         Me.mnuStructuredCircularDefine.Name = "mnuStructuredCircularDefine"
         resources.ApplyResources(Me.mnuStructuredCircularDefine, "mnuStructuredCircularDefine")
+        '
+        'mnuStructuredCircularCalculator
+        '
+        Me.mnuStructuredCircularCalculator.Name = "mnuStructuredCircularCalculator"
+        resources.ApplyResources(Me.mnuStructuredCircularCalculator, "mnuStructuredCircularCalculator")
+        '
+        'mnuStructuredCircularSummaries
+        '
+        Me.mnuStructuredCircularSummaries.Name = "mnuStructuredCircularSummaries"
+        resources.ApplyResources(Me.mnuStructuredCircularSummaries, "mnuStructuredCircularSummaries")
+        '
+        'ToolStripSeparator46
+        '
+        Me.ToolStripSeparator46.Name = "ToolStripSeparator46"
+        resources.ApplyResources(Me.ToolStripSeparator46, "ToolStripSeparator46")
+        '
+        'mnuStructuredCircularScatterPlot
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularScatterPlot, "mnuStructuredCircularScatterPlot")
+        Me.mnuStructuredCircularScatterPlot.Name = "mnuStructuredCircularScatterPlot"
+        '
+        'mnuStructuredCircularDensityPlot
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularDensityPlot, "mnuStructuredCircularDensityPlot")
+        Me.mnuStructuredCircularDensityPlot.Name = "mnuStructuredCircularDensityPlot"
+        '
+        'mnuStructuredCircularRosePlot
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularRosePlot, "mnuStructuredCircularRosePlot")
+        Me.mnuStructuredCircularRosePlot.Name = "mnuStructuredCircularRosePlot"
+        '
+        'ToolStripSeparator67
+        '
+        Me.ToolStripSeparator67.Name = "ToolStripSeparator67"
+        resources.ApplyResources(Me.ToolStripSeparator67, "ToolStripSeparator67")
+        '
+        'mnuStructuredCircularWindRose
+        '
+        Me.mnuStructuredCircularWindRose.Name = "mnuStructuredCircularWindRose"
+        resources.ApplyResources(Me.mnuStructuredCircularWindRose, "mnuStructuredCircularWindRose")
+        '
+        'mnuStructuredCircularWindPollutionRose
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularWindPollutionRose, "mnuStructuredCircularWindPollutionRose")
+        Me.mnuStructuredCircularWindPollutionRose.Name = "mnuStructuredCircularWindPollutionRose"
+        '
+        'mnuStructuredCircularOtherRosePlots
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlots, "mnuStructuredCircularOtherRosePlots")
+        Me.mnuStructuredCircularOtherRosePlots.Name = "mnuStructuredCircularOtherRosePlots"
+        '
+        'ToolStripSeparator68
+        '
+        Me.ToolStripSeparator68.Name = "ToolStripSeparator68"
+        resources.ApplyResources(Me.ToolStripSeparator68, "ToolStripSeparator68")
+        '
+        'mnuStructuredCircularCirclize
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularCirclize, "mnuStructuredCircularCirclize")
+        Me.mnuStructuredCircularCirclize.Name = "mnuStructuredCircularCirclize"
         '
         'mnuStructuredLow_Flow
         '
@@ -3901,6 +3955,18 @@ Partial Class frmMain
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
         '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -3917,6 +3983,19 @@ Partial Class frmMain
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
         '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Tag = "Script_Window"
+        '
         'splDataOutput
         '
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
@@ -3932,6 +4011,20 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
+        '
+        'ucrDataViewer
+        '
+        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
+        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataViewer, "ucrDataViewer")
+        Me.ucrDataViewer.Name = "ucrDataViewer"
+        Me.ucrDataViewer.Tag = "Data_View"
+        '
+        'ucrOutput
+        '
+        Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrOutput, "ucrOutput")
+        Me.ucrOutput.Name = "ucrOutput"
         '
         'mnuRViewer
         '
@@ -3962,105 +4055,6 @@ Partial Class frmMain
         '
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
-        '
-        'mnuStructuredCircularCalculator
-        '
-        Me.mnuStructuredCircularCalculator.Name = "mnuStructuredCircularCalculator"
-        resources.ApplyResources(Me.mnuStructuredCircularCalculator, "mnuStructuredCircularCalculator")
-        '
-        'mnuStructuredCircularSummaries
-        '
-        Me.mnuStructuredCircularSummaries.Name = "mnuStructuredCircularSummaries"
-        resources.ApplyResources(Me.mnuStructuredCircularSummaries, "mnuStructuredCircularSummaries")
-        '
-        'ToolStripSeparator46
-        '
-        Me.ToolStripSeparator46.Name = "ToolStripSeparator46"
-        resources.ApplyResources(Me.ToolStripSeparator46, "ToolStripSeparator46")
-        '
-        'mnuStructuredCircularScatterPlot
-        '
-        resources.ApplyResources(Me.mnuStructuredCircularScatterPlot, "mnuStructuredCircularScatterPlot")
-        Me.mnuStructuredCircularScatterPlot.Name = "mnuStructuredCircularScatterPlot"
-        '
-        'mnuStructuredCircularDensityPlot
-        '
-        resources.ApplyResources(Me.mnuStructuredCircularDensityPlot, "mnuStructuredCircularDensityPlot")
-        Me.mnuStructuredCircularDensityPlot.Name = "mnuStructuredCircularDensityPlot"
-        '
-        'mnuStructuredCircularRosePlot
-        '
-        resources.ApplyResources(Me.mnuStructuredCircularRosePlot, "mnuStructuredCircularRosePlot")
-        Me.mnuStructuredCircularRosePlot.Name = "mnuStructuredCircularRosePlot"
-        '
-        'ToolStripSeparator67
-        '
-        Me.ToolStripSeparator67.Name = "ToolStripSeparator67"
-        resources.ApplyResources(Me.ToolStripSeparator67, "ToolStripSeparator67")
-        '
-        'mnuStructuredCircularWindRose
-        '
-        Me.mnuStructuredCircularWindRose.Name = "mnuStructuredCircularWindRose"
-        resources.ApplyResources(Me.mnuStructuredCircularWindRose, "mnuStructuredCircularWindRose")
-        '
-        'mnuStructuredCircularWindPollutionRose
-        '
-        resources.ApplyResources(Me.mnuStructuredCircularWindPollutionRose, "mnuStructuredCircularWindPollutionRose")
-        Me.mnuStructuredCircularWindPollutionRose.Name = "mnuStructuredCircularWindPollutionRose"
-        '
-        'mnuStructuredCircularOtherRosePlots
-        '
-        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlots, "mnuStructuredCircularOtherRosePlots")
-        Me.mnuStructuredCircularOtherRosePlots.Name = "mnuStructuredCircularOtherRosePlots"
-        '
-        'ToolStripSeparator68
-        '
-        Me.ToolStripSeparator68.Name = "ToolStripSeparator68"
-        resources.ApplyResources(Me.ToolStripSeparator68, "ToolStripSeparator68")
-        '
-        'mnuStructuredCircularCirclize
-        '
-        resources.ApplyResources(Me.mnuStructuredCircularCirclize, "mnuStructuredCircularCirclize")
-        Me.mnuStructuredCircularCirclize.Name = "mnuStructuredCircularCirclize"
-        '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Tag = "Script_Window"
-        '
-        'ucrDataViewer
-        '
-        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
-        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataViewer, "ucrDataViewer")
-        Me.ucrDataViewer.Name = "ucrDataViewer"
-        Me.ucrDataViewer.Tag = "Data_View"
-        '
-        'ucrOutput
-        '
-        Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrOutput, "ucrOutput")
-        Me.ucrOutput.Name = "ucrOutput"
         '
         'frmMain
         '
@@ -4660,7 +4654,6 @@ Partial Class frmMain
     Friend WithEvents mnuModelFitModelHypothesisTestsKeyboard As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataHomogenization As ToolStripMenuItem
     Friend WithEvents mnuStructured As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
     Friend WithEvents mnuStructuredCircular As ToolStripMenuItem
     Friend WithEvents mnuStructuredCircularDefine As ToolStripMenuItem
     Friend WithEvents mnuStructuredLow_Flow As ToolStripMenuItem
