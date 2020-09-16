@@ -100,8 +100,9 @@ Public Class dlgCalculator
         If Not strKeyboards.Contains(strNewDefaultKeyboard) Then
             MsgBox("Developer error: there is no Calculator keyboard called" & Chr(34) & strNewDefaultKeyboard & Chr(34) & vbNewLine & "Default keyboard will be selected.")
             strDefaultKeyboard = ""
+        Else
+            strDefaultKeyboard = strNewDefaultKeyboard
         End If
-        strDefaultKeyboard = strNewDefaultKeyboard
     End Sub
 
     Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged

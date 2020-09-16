@@ -494,8 +494,8 @@ Public Class sdgSummaries
                         Exit For
                     End If
                 Next
-                ' Could give a developer error here as it means strDefaultTab was not recognised.
                 If Not bTabFound Then
+                    MsgBox("Developer error: there is no Summary tab called" & Chr(34) & strDefaultTab & Chr(34) & vbNewLine & "Default tab will be selected.")
                     tbSummaries.SelectedIndex = 0
                 End If
             Else
