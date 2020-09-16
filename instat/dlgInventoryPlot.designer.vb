@@ -50,9 +50,10 @@ Partial Class dlgInventoryPlot
         Me.rdoElementOrder = New System.Windows.Forms.RadioButton()
         Me.rdoDateOrder = New System.Windows.Forms.RadioButton()
         Me.pnlSummary = New System.Windows.Forms.Panel()
+        Me.pnlOmit = New System.Windows.Forms.Panel()
         Me.ucrChkOmitStart = New instat.ucrCheck()
-        Me.ucrChkSummary = New instat.ucrCheck()
         Me.ucrChkOmitEnd = New instat.ucrCheck()
+        Me.ucrChkSummary = New instat.ucrCheck()
         Me.ucrChkDetails = New instat.ucrCheck()
         Me.ucrPnlOrder = New instat.UcrPanel()
         Me.ucrSaveDetails = New instat.ucrSave()
@@ -70,6 +71,7 @@ Partial Class dlgInventoryPlot
         Me.ucrBase = New instat.ucrButtons()
         Me.pnlDetails.SuspendLayout()
         Me.pnlSummary.SuspendLayout()
+        Me.pnlOmit.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblDate
@@ -145,15 +147,21 @@ Partial Class dlgInventoryPlot
         '
         'pnlSummary
         '
-        Me.pnlSummary.Controls.Add(Me.ucrChkOmitStart)
+        Me.pnlSummary.Controls.Add(Me.pnlOmit)
         Me.pnlSummary.Controls.Add(Me.ucrChkSummary)
         Me.pnlSummary.Controls.Add(Me.rdoElementOrder)
-        Me.pnlSummary.Controls.Add(Me.ucrChkOmitEnd)
         Me.pnlSummary.Controls.Add(Me.ucrChkDetails)
         Me.pnlSummary.Controls.Add(Me.rdoDateOrder)
         Me.pnlSummary.Controls.Add(Me.ucrPnlOrder)
         resources.ApplyResources(Me.pnlSummary, "pnlSummary")
         Me.pnlSummary.Name = "pnlSummary"
+        '
+        'pnlOmit
+        '
+        Me.pnlOmit.Controls.Add(Me.ucrChkOmitStart)
+        Me.pnlOmit.Controls.Add(Me.ucrChkOmitEnd)
+        resources.ApplyResources(Me.pnlOmit, "pnlOmit")
+        Me.pnlOmit.Name = "pnlOmit"
         '
         'ucrChkOmitStart
         '
@@ -161,17 +169,17 @@ Partial Class dlgInventoryPlot
         resources.ApplyResources(Me.ucrChkOmitStart, "ucrChkOmitStart")
         Me.ucrChkOmitStart.Name = "ucrChkOmitStart"
         '
-        'ucrChkSummary
-        '
-        Me.ucrChkSummary.Checked = False
-        resources.ApplyResources(Me.ucrChkSummary, "ucrChkSummary")
-        Me.ucrChkSummary.Name = "ucrChkSummary"
-        '
         'ucrChkOmitEnd
         '
         Me.ucrChkOmitEnd.Checked = False
         resources.ApplyResources(Me.ucrChkOmitEnd, "ucrChkOmitEnd")
         Me.ucrChkOmitEnd.Name = "ucrChkOmitEnd"
+        '
+        'ucrChkSummary
+        '
+        Me.ucrChkSummary.Checked = False
+        resources.ApplyResources(Me.ucrChkSummary, "ucrChkSummary")
+        Me.ucrChkSummary.Name = "ucrChkSummary"
         '
         'ucrChkDetails
         '
@@ -297,6 +305,7 @@ Partial Class dlgInventoryPlot
         Me.pnlDetails.ResumeLayout(False)
         Me.pnlSummary.ResumeLayout(False)
         Me.pnlSummary.PerformLayout()
+        Me.pnlOmit.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -330,4 +339,5 @@ Partial Class dlgInventoryPlot
     Friend WithEvents pnlSummary As Panel
     Friend WithEvents ucrChkOmitEnd As ucrCheck
     Friend WithEvents ucrChkOmitStart As ucrCheck
+    Friend WithEvents pnlOmit As Panel
 End Class

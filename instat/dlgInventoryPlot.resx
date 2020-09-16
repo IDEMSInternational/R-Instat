@@ -370,7 +370,7 @@
     <value>6</value>
   </data>
   <data name="pnlDetails.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 319</value>
+    <value>2, 321</value>
   </data>
   <data name="pnlDetails.Size" type="System.Drawing.Size, System.Drawing">
     <value>402, 100</value>
@@ -532,7 +532,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoElementOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 28</value>
+    <value>245, 29</value>
   </data>
   <data name="rdoElementOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 17</value>
@@ -562,7 +562,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoDateOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 28</value>
+    <value>123, 29</value>
   </data>
   <data name="rdoDateOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>77, 17</value>
@@ -583,10 +583,10 @@
     <value>pnlSummary</value>
   </data>
   <data name="&gt;&gt;rdoDateOrder.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="ucrChkOmitStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 3</value>
+    <value>3, 7</value>
   </data>
   <data name="ucrChkOmitStart.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -601,9 +601,51 @@
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrChkOmitStart.Parent" xml:space="preserve">
-    <value>pnlSummary</value>
+    <value>pnlOmit</value>
   </data>
   <data name="&gt;&gt;ucrChkOmitStart.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkOmitEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>125, 7</value>
+  </data>
+  <data name="ucrChkOmitEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkOmitEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitEnd.Name" xml:space="preserve">
+    <value>ucrChkOmitEnd</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitEnd.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitEnd.Parent" xml:space="preserve">
+    <value>pnlOmit</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitEnd.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="pnlOmit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 1</value>
+  </data>
+  <data name="pnlOmit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>250, 28</value>
+  </data>
+  <data name="pnlOmit.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="&gt;&gt;pnlOmit.Name" xml:space="preserve">
+    <value>pnlOmit</value>
+  </data>
+  <data name="&gt;&gt;pnlOmit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlOmit.Parent" xml:space="preserve">
+    <value>pnlSummary</value>
+  </data>
+  <data name="&gt;&gt;pnlOmit.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ucrChkSummary.Location" type="System.Drawing.Point, System.Drawing">
@@ -627,29 +669,8 @@
   <data name="&gt;&gt;ucrChkSummary.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ucrChkOmitEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 3</value>
-  </data>
-  <data name="ucrChkOmitEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkOmitEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitEnd.Name" xml:space="preserve">
-    <value>ucrChkOmitEnd</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitEnd.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitEnd.Parent" xml:space="preserve">
-    <value>pnlSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitEnd.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="ucrChkDetails.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 28</value>
+    <value>7, 29</value>
   </data>
   <data name="ucrChkDetails.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -667,7 +688,7 @@
     <value>pnlSummary</value>
   </data>
   <data name="&gt;&gt;ucrChkDetails.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="ucrPnlOrder.Location" type="System.Drawing.Point, System.Drawing">
     <value>114, 25</value>
@@ -688,10 +709,10 @@
     <value>pnlSummary</value>
   </data>
   <data name="&gt;&gt;ucrPnlOrder.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="pnlSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 266</value>
+    <value>4, 270</value>
   </data>
   <data name="pnlSummary.Size" type="System.Drawing.Size, System.Drawing">
     <value>376, 50</value>
@@ -833,9 +854,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>14</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
