@@ -210,92 +210,35 @@
   <data name="&gt;&gt;lblElement.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="rdoElementOrder.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
+  <data name="ucrSaveDetails.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 76</value>
   </data>
-  <data name="rdoElementOrder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+  <data name="ucrSaveDetails.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
-  <data name="rdoElementOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 31</value>
+  <data name="ucrSaveDetails.Size" type="System.Drawing.Size, System.Drawing">
+    <value>262, 23</value>
   </data>
-  <data name="rdoElementOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 17</value>
-  </data>
-  <data name="rdoElementOrder.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="rdoElementOrder.Text" xml:space="preserve">
-    <value>Element Order</value>
-  </data>
-  <data name="&gt;&gt;rdoElementOrder.Name" xml:space="preserve">
-    <value>rdoElementOrder</value>
-  </data>
-  <data name="&gt;&gt;rdoElementOrder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoElementOrder.Parent" xml:space="preserve">
-    <value>pnlSummary</value>
-  </data>
-  <data name="&gt;&gt;rdoElementOrder.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="rdoDateOrder.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoDateOrder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoDateOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 31</value>
-  </data>
-  <data name="rdoDateOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 17</value>
-  </data>
-  <data name="rdoDateOrder.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="rdoDateOrder.Text" xml:space="preserve">
-    <value>Date Order</value>
-  </data>
-  <data name="&gt;&gt;rdoDateOrder.Name" xml:space="preserve">
-    <value>rdoDateOrder</value>
-  </data>
-  <data name="&gt;&gt;rdoDateOrder.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoDateOrder.Parent" xml:space="preserve">
-    <value>pnlSummary</value>
-  </data>
-  <data name="&gt;&gt;rdoDateOrder.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrChkSaveDetails.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 70</value>
-  </data>
-  <data name="ucrChkSaveDetails.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkSaveDetails.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrSaveDetails.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
   </data>
-  <data name="&gt;&gt;ucrChkSaveDetails.Name" xml:space="preserve">
-    <value>ucrChkSaveDetails</value>
+  <data name="&gt;&gt;ucrSaveDetails.Name" xml:space="preserve">
+    <value>ucrSaveDetails</value>
   </data>
-  <data name="&gt;&gt;ucrChkSaveDetails.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrSaveDetails.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkSaveDetails.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrSaveDetails.Parent" xml:space="preserve">
     <value>pnlDetails</value>
   </data>
-  <data name="&gt;&gt;ucrChkSaveDetails.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrSaveDetails.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ucrChkMinute.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="ucrChkMinute.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 41</value>
+    <value>248, 29</value>
   </data>
   <data name="ucrChkMinute.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -319,7 +262,7 @@
     <value>False</value>
   </data>
   <data name="ucrChkSecond.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 70</value>
+    <value>248, 53</value>
   </data>
   <data name="ucrChkSecond.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -340,7 +283,7 @@
     <value>2</value>
   </data>
   <data name="ucrChkYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 13</value>
+    <value>126, 5</value>
   </data>
   <data name="ucrChkYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -361,7 +304,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 41</value>
+    <value>126, 29</value>
   </data>
   <data name="ucrChkMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -382,7 +325,7 @@
     <value>4</value>
   </data>
   <data name="ucrChkDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 70</value>
+    <value>126, 55</value>
   </data>
   <data name="ucrChkDay.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -406,7 +349,7 @@
     <value>False</value>
   </data>
   <data name="ucrChkHour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 13</value>
+    <value>248, 5</value>
   </data>
   <data name="ucrChkHour.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -427,10 +370,10 @@
     <value>6</value>
   </data>
   <data name="pnlDetails.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 325</value>
+    <value>2, 319</value>
   </data>
   <data name="pnlDetails.Size" type="System.Drawing.Size, System.Drawing">
-    <value>402, 92</value>
+    <value>402, 100</value>
   </data>
   <data name="pnlDetails.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -446,132 +389,6 @@
   </data>
   <data name="&gt;&gt;pnlDetails.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="ucrChkOmitStart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 3</value>
-  </data>
-  <data name="ucrChkOmitStart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkOmitStart.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitStart.Name" xml:space="preserve">
-    <value>ucrChkOmitStart</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitStart.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitStart.Parent" xml:space="preserve">
-    <value>pnlSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitStart.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 3</value>
-  </data>
-  <data name="ucrChkSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkSummary.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSummary.Name" xml:space="preserve">
-    <value>ucrChkSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSummary.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSummary.Parent" xml:space="preserve">
-    <value>pnlSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSummary.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrChkDetails.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 31</value>
-  </data>
-  <data name="ucrChkDetails.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkDetails.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDetails.Name" xml:space="preserve">
-    <value>ucrChkDetails</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDetails.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDetails.Parent" xml:space="preserve">
-    <value>pnlSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkDetails.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrChkOmitEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 3</value>
-  </data>
-  <data name="ucrChkOmitEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkOmitEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitEnd.Name" xml:space="preserve">
-    <value>ucrChkOmitEnd</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitEnd.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitEnd.Parent" xml:space="preserve">
-    <value>pnlSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOmitEnd.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrPnlOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 22</value>
-  </data>
-  <data name="ucrPnlOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 25</value>
-  </data>
-  <data name="ucrPnlOrder.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOrder.Name" xml:space="preserve">
-    <value>ucrPnlOrder</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOrder.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOrder.Parent" xml:space="preserve">
-    <value>pnlSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlOrder.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="pnlSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 271</value>
-  </data>
-  <data name="pnlSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>376, 52</value>
-  </data>
-  <data name="pnlSummary.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;pnlSummary.Name" xml:space="preserve">
-    <value>pnlSummary</value>
-  </data>
-  <data name="&gt;&gt;pnlSummary.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;pnlSummary.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;pnlSummary.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="rdoMissing.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -648,36 +465,6 @@
   <data name="&gt;&gt;rdoGraph.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="ucrPnls.Location" type="System.Drawing.Point, System.Drawing">
-    <value>76, 3</value>
-  </data>
-  <data name="ucrPnls.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 35</value>
-  </data>
-  <data name="ucrPnls.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;ucrPnls.Name" xml:space="preserve">
-    <value>ucrPnls</value>
-  </data>
-  <data name="&gt;&gt;ucrPnls.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnls.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrPnls.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>423, 475</value>
-  </data>
   <data name="cmdInventoryPlotOptions.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
@@ -715,7 +502,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 241</value>
+    <value>10, 240</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 23</value>
@@ -737,6 +524,222 @@
   </data>
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="rdoElementOrder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoElementOrder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoElementOrder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 28</value>
+  </data>
+  <data name="rdoElementOrder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 17</value>
+  </data>
+  <data name="rdoElementOrder.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="rdoElementOrder.Text" xml:space="preserve">
+    <value>Element Order</value>
+  </data>
+  <data name="&gt;&gt;rdoElementOrder.Name" xml:space="preserve">
+    <value>rdoElementOrder</value>
+  </data>
+  <data name="&gt;&gt;rdoElementOrder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoElementOrder.Parent" xml:space="preserve">
+    <value>pnlSummary</value>
+  </data>
+  <data name="&gt;&gt;rdoElementOrder.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rdoDateOrder.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDateOrder.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoDateOrder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 28</value>
+  </data>
+  <data name="rdoDateOrder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 17</value>
+  </data>
+  <data name="rdoDateOrder.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="rdoDateOrder.Text" xml:space="preserve">
+    <value>Date Order</value>
+  </data>
+  <data name="&gt;&gt;rdoDateOrder.Name" xml:space="preserve">
+    <value>rdoDateOrder</value>
+  </data>
+  <data name="&gt;&gt;rdoDateOrder.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDateOrder.Parent" xml:space="preserve">
+    <value>pnlSummary</value>
+  </data>
+  <data name="&gt;&gt;rdoDateOrder.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrChkOmitStart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>123, 3</value>
+  </data>
+  <data name="ucrChkOmitStart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkOmitStart.TabIndex" type="System.Int32, mscorlib">
+    <value>39</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitStart.Name" xml:space="preserve">
+    <value>ucrChkOmitStart</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitStart.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitStart.Parent" xml:space="preserve">
+    <value>pnlSummary</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitStart.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 3</value>
+  </data>
+  <data name="ucrChkSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSummary.Name" xml:space="preserve">
+    <value>ucrChkSummary</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSummary.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSummary.Parent" xml:space="preserve">
+    <value>pnlSummary</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSummary.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkOmitEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 3</value>
+  </data>
+  <data name="ucrChkOmitEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkOmitEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitEnd.Name" xml:space="preserve">
+    <value>ucrChkOmitEnd</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitEnd.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitEnd.Parent" xml:space="preserve">
+    <value>pnlSummary</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitEnd.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkDetails.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 28</value>
+  </data>
+  <data name="ucrChkDetails.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkDetails.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDetails.Name" xml:space="preserve">
+    <value>ucrChkDetails</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDetails.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDetails.Parent" xml:space="preserve">
+    <value>pnlSummary</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDetails.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrPnlOrder.Location" type="System.Drawing.Point, System.Drawing">
+    <value>114, 25</value>
+  </data>
+  <data name="ucrPnlOrder.Size" type="System.Drawing.Size, System.Drawing">
+    <value>242, 20</value>
+  </data>
+  <data name="ucrPnlOrder.TabIndex" type="System.Int32, mscorlib">
+    <value>38</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOrder.Name" xml:space="preserve">
+    <value>ucrPnlOrder</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOrder.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOrder.Parent" xml:space="preserve">
+    <value>pnlSummary</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOrder.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="pnlSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 266</value>
+  </data>
+  <data name="pnlSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>376, 50</value>
+  </data>
+  <data name="pnlSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;pnlSummary.Name" xml:space="preserve">
+    <value>pnlSummary</value>
+  </data>
+  <data name="&gt;&gt;pnlSummary.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;pnlSummary.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;pnlSummary.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrPnls.Location" type="System.Drawing.Point, System.Drawing">
+    <value>76, 3</value>
+  </data>
+  <data name="ucrPnls.Size" type="System.Drawing.Size, System.Drawing">
+    <value>277, 35</value>
+  </data>
+  <data name="ucrPnls.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;ucrPnls.Name" xml:space="preserve">
+    <value>ucrPnls</value>
+  </data>
+  <data name="&gt;&gt;ucrPnls.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnls.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnls.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>423, 475</value>
   </data>
   <data name="ucrReceiverElements.Location" type="System.Drawing.Point, System.Drawing">
     <value>263, 96</value>
@@ -811,7 +814,7 @@
     <value>13</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 421</value>
+    <value>7, 421</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 53</value>
@@ -830,6 +833,9 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
