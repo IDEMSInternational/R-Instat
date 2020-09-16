@@ -119,7 +119,7 @@ Public Class dlgImportGriddedData
         clsDownloadFromIRIFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$download_from_IRI")
         clsDownloadFromIRIFunction.AddParameter("source", Chr(34) & "NASA_TRMM_3B42" & Chr(34), iPosition:=0)
         clsDownloadFromIRIFunction.AddParameter("data", Chr(34) & "3_hourly_estimated_prcp" & Chr(34), iPosition:=1)
-        clsDownloadFromIRIFunction.AddParameter("path", (Environment.GetFolderPath(Environment.SpecialFolder.UserProfile) & "\Downloads").Replace("\", "/"), iPosition:=2)
+        clsDownloadFromIRIFunction.AddParameter("path", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\", "/"), iPosition:=2)
         'opted to set this as default location since it has data for all sources
         clsDownloadFromIRIFunction.AddParameter("min_lon", 10, iPosition:=3)
         clsDownloadFromIRIFunction.AddParameter("max_lon", 10.5, iPosition:=4)
