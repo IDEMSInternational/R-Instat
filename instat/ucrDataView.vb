@@ -889,7 +889,6 @@ Public Class ucrDataView
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub grdCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforePaste
-
         Dim lstAllCurrentColumns As String()
         Dim lstSelectedColumnNames As New List(Of String)
         Dim iStartRowPos As Integer
@@ -903,9 +902,6 @@ Public Class ucrDataView
         iStartRowPos = Integer.Parse(grdData.CurrentWorksheet.RowHeaders.Item(e.Range.Row).Text)
         PasteValuesToDataFrame(lstSelectedColumnNames, iStartRowPos, False)
         e.IsCancelled = True
-    End Sub
-    Private Sub grdCurrSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles grdCurrSheet.AfterPaste
-
     End Sub
 
     ''' <summary>
