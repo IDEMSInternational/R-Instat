@@ -40,17 +40,17 @@ Public Class dlgImportGriddedData
         ucrBase.iHelpTopicID = 526
 
         ucrInputSource.SetParameter(New RParameter("source", 0))
-        dctDownloadPairs.Add("NASA", Chr(34) & "NASA_TRMM_3B42" & Chr(34))
-        dctDownloadPairs.Add("NOAA", Chr(34) & "NOAA_RFE2" & Chr(34))
+        dctDownloadPairs.Add("NASA", Chr(34) & "NASA" & Chr(34))
+        dctDownloadPairs.Add("NOAA", Chr(34) & "NOAA" & Chr(34))
         dctDownloadPairs.Add("TAMSAT", Chr(34) & "TAMSAT" & Chr(34))
-        dctDownloadPairs.Add("UCSB CHIRPS", Chr(34) & "CHIRPS_V2P0" & Chr(34))
+        dctDownloadPairs.Add("UCSB_CHIRPS", Chr(34) & "UCSB_CHIRPS" & Chr(34))
         ucrInputSource.SetItems(dctDownloadPairs)
         ucrInputSource.SetDropDownStyleAsNonEditable()
 
         ucrInputData.SetParameter(New RParameter("data", 1))
         dctFiles = New Dictionary(Of String, String)
-        dctFiles.Add("TRMM 3B42 3-Hourly Precipitation", Chr(34) & "3_hourly_estimated_prcp" & Chr(34))
-        dctFiles.Add("TRMM 3B42 Daily Precipitation", Chr(34) & "daily_estimated_prcp" & Chr(34))
+        dctFiles.Add("TRMM 3B42 3-Hourly Precipitation", Chr(34) & "3_hourly_prcp" & Chr(34))
+        dctFiles.Add("TRMM 3B42 Daily Precipitation", Chr(34) & "daily_prcp" & Chr(34))
         ucrInputData.SetItems(dctFiles)
         ucrInputData.cboInput.SelectedItem = "TRMM 3B42 3-Hourly Precipitation"
         ucrInputData.SetDropDownStyleAsNonEditable()
@@ -81,8 +81,8 @@ Public Class dlgImportGriddedData
         ucrInputNewDataFrameName.SetParameter(New RParameter("name", 9))
 
         ucrPnlLocationRange.SetParameter(New RParameter("download_type", 10))
-        ucrPnlLocationRange.AddRadioButton(rdoArea, Chr(34) & "area" & Chr(34))
-        ucrPnlLocationRange.AddRadioButton(rdoPoint, Chr(34) & "point" & Chr(34))
+        ucrPnlLocationRange.AddRadioButton(rdoArea, Chr(34) & "Area" & Chr(34))
+        ucrPnlLocationRange.AddRadioButton(rdoPoint, Chr(34) & "Point" & Chr(34))
 
         ucrPnlDateRange.AddRadioButton(rdoEntireRange)
         ucrPnlDateRange.AddRadioButton(rdoCustomRange)
@@ -96,11 +96,13 @@ Public Class dlgImportGriddedData
 
         ucrPnlLocationRange.AddToLinkedControls({ucrInputMaxLat, ucrInputMaxLon}, {rdoArea}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlDateRange.AddToLinkedControls({ucrDtpMinDate, ucrDtpMaxDate}, {rdoCustomRange}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkDontImportData.AddToLinkedControls(ucrInputNewDataFrameName, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputMaxLon.SetLinkedDisplayControl(lblMaxLon)
         ucrInputMinLat.SetLinkedDisplayControl(lblLat)
         ucrInputMaxLat.SetLinkedDisplayControl(lblMaxLat)
         ucrDtpMinDate.SetLinkedDisplayControl(lblFrom)
         ucrDtpMaxDate.SetLinkedDisplayControl(lblTo)
+        ucrInputNewDataFrameName.SetLinkedDisplayControl(lblNewDataFrameName)
 
         clsDefaultStartDate = New RFunction
         clsDefaultStartDate.SetRCommand("as.Date")
@@ -117,17 +119,16 @@ Public Class dlgImportGriddedData
         rdoEntireRange.Checked = True
 
         clsDownloadFromIRIFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$download_from_IRI")
-        clsDownloadFromIRIFunction.AddParameter("source", Chr(34) & "NASA_TRMM_3B42" & Chr(34), iPosition:=0)
-        clsDownloadFromIRIFunction.AddParameter("data", Chr(34) & "3_hourly_estimated_prcp" & Chr(34), iPosition:=1)
+        clsDownloadFromIRIFunction.AddParameter("source", Chr(34) & "NASA" & Chr(34), iPosition:=0)
+        clsDownloadFromIRIFunction.AddParameter("data", Chr(34) & "3_hourly_prcp" & Chr(34), iPosition:=1)
         clsDownloadFromIRIFunction.AddParameter("path", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\", "/"), iPosition:=2)
-        'opted to set this as default location since it has data for all sources
-        clsDownloadFromIRIFunction.AddParameter("min_lon", 10, iPosition:=3)
-        clsDownloadFromIRIFunction.AddParameter("max_lon", 10.5, iPosition:=4)
-        clsDownloadFromIRIFunction.AddParameter("min_lat", 10, iPosition:=5)
-        clsDownloadFromIRIFunction.AddParameter("max_lat", 10.5, iPosition:=6)
+        clsDownloadFromIRIFunction.AddParameter("min_lon", 34.58, iPosition:=3)
+        clsDownloadFromIRIFunction.AddParameter("max_lon", 35.08, iPosition:=4)
+        clsDownloadFromIRIFunction.AddParameter("min_lat", 0, iPosition:=5)
+        clsDownloadFromIRIFunction.AddParameter("max_lat", 0.5, iPosition:=6)
         clsDownloadFromIRIFunction.AddParameter("min_date", clsRFunctionParameter:=clsDefaultStartDate, iPosition:=7)
         clsDownloadFromIRIFunction.AddParameter("max_date", clsRFunctionParameter:=clsDefaultEndDate, iPosition:=8)
-        clsDownloadFromIRIFunction.AddParameter("download_type", Chr(34) & "area" & Chr(34), iPosition:=10)
+        clsDownloadFromIRIFunction.AddParameter("download_type", Chr(34) & "Point" & Chr(34), iPosition:=10)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDownloadFromIRIFunction)
     End Sub
@@ -156,43 +157,44 @@ Public Class dlgImportGriddedData
         Select Case ucrInputSource.GetText
             Case "NASA"
                 dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("TRMM 3B42 3-Hourly Precipitation", Chr(34) & "3_hourly_estimated_prcp" & Chr(34))
-                dctFiles.Add("TRMM 3B42 Daily Precipitation", Chr(34) & "daily_estimated_prcp" & Chr(34))
+                dctFiles.Add("TRMM 3B42 3-Hourly Precipitation", Chr(34) & "daily_prcp" & Chr(34))
+                dctFiles.Add("TRMM 3B42 Daily Precipitation", Chr(34) & "3_hourly_prcp" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "TRMM 3B42 3-Hourly Precipitation"
                 ucrDtpMinDate.MinDate = New Date(1998, 1, 1)
                 ucrDtpMaxDate.MinDate = New Date(1998, 1, 1)
             Case "NOAA"
                 dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("RFE2 Daily Precipitation", Chr(34) & "daily_estimated_prcp" & Chr(34))
-                dctFiles.Add("RFE2 10-day Precipitation", Chr(34) & "10day_estimated_prcp" & Chr(34))
+                dctFiles.Add("RFE2 Daily Precipitation", Chr(34) & "daily_rfev2_est_prcp" & Chr(34))
+                dctFiles.Add("RFE2 10-day Precipitation", Chr(34) & "10day_rfev2_est_prcp" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "RFE2 Daily Precipitation"
                 ucrDtpMinDate.MinDate = New Date(2000, 10, 31)
                 ucrDtpMaxDate.MinDate = New Date(2000, 10, 31)
             Case "TAMSAT"
                 dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("v3.1 Daily Rainfall", Chr(34) & "daily_rainfall_estimates" & Chr(34))
-                dctFiles.Add("v3.1 Daily Rainfall Complete (Filled)", Chr(34) & "daily_recovered_rainfall_estimate" & Chr(34))
-                dctFiles.Add("v3.1 Dekadal Rainfall", Chr(34) & "dekadal_rainfall_estimates" & Chr(34))
-                dctFiles.Add("v3.1 Dekadal Rainfall Complete (Filled)", Chr(34) & "dekadal_recovered_rainfall_estimate" & Chr(34))
-                dctFiles.Add("v3.1 Monthly Rainfall", Chr(34) & "monthly_rainfall_estimates" & Chr(34))
-                dctFiles.Add("v3.1 Monthly Rainfall Complete (Filled)", Chr(34) & "monthly_recovered_rainfall_estimate" & Chr(34))
+                dctFiles.Add("v3.1 Daily Rainfall", Chr(34) & "daily_rfe" & Chr(34))
+                dctFiles.Add("v3.1 Daily Rainfall Complete (Filled)", Chr(34) & "daily_rfe_filled" & Chr(34))
+                dctFiles.Add("v3.1 Dekadal Rainfall", Chr(34) & "dekadal_rfe" & Chr(34))
+                dctFiles.Add("v3.1 Dekadal Rainfall Complete (Filled)", Chr(34) & "dekadal_rfe_filled" & Chr(34))
+                dctFiles.Add("v3.1 Monthly Rainfall", Chr(34) & "monthly_rfe" & Chr(34))
+                dctFiles.Add("v3.1 Monthly Rainfall Complete (Filled)", Chr(34) & "monthly_rfe_filled" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "v3.1 Daily Rainfall"
                 ucrDtpMinDate.MinDate = New Date(1983, 1, 1)
                 ucrDtpMaxDate.MinDate = New Date(1983, 1, 1)
-            Case "UCSB CHIRPS"
+            Case "UCSB_CHIRPS"
                 dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("Daily Precipitation 0.25 degree", Chr(34) & "daily_improved_0p25" & Chr(34))
-                dctFiles.Add("Daily Precipitation 0.05 degree", Chr(34) & "daily_improved_0p05" & Chr(34))
-                dctFiles.Add("Dekad Precipitation 0.05 degree", Chr(34) & "dekad" & Chr(34))
-                dctFiles.Add("Monthly Precipitation 0.05 degree", Chr(34) & "monthly" & Chr(34))
+                dctFiles.Add("Daily Precipitation 0.25 degree", Chr(34) & "daily_improved_global_0p25_prcp" & Chr(34))
+                dctFiles.Add("Daily Precipitation 0.05 degree", Chr(34) & "daily_improved_global_0p05_prcp" & Chr(34))
+                dctFiles.Add("Dekad Precipitation 0.05 degree", Chr(34) & "dekad_prcp" & Chr(34))
+                dctFiles.Add("Monthly Precipitation 0.05 degree", Chr(34) & "monthly_global_prcp" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Daily Precipitation 0.25 degree"
                 ucrDtpMinDate.MinDate = New Date(1981, 1, 1)
                 ucrDtpMaxDate.MinDate = New Date(1981, 1, 1)
         End Select
+        ucrInputNewDataFrameName.SetPrefix(ucrInputSource.GetText.ToLower)
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
@@ -206,10 +208,6 @@ Public Class dlgImportGriddedData
                 ucrInputFilePath.SetName(Replace(strPath, "\", "/"))
             End If
         End Using
-    End Sub
-
-    Private Sub ucrInputData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputData.ControlValueChanged, ucrInputSource.ControlValueChanged, ucrDtpMinDate.ControlContentsChanged, ucrDtpMaxDate.ControlContentsChanged
-        ucrInputNewDataFrameName.SetName(ucrInputSource.GetText & "_" & ucrInputData.GetText & "_" & (ucrDtpMinDate.DateValue & "_" & ucrDtpMaxDate.DateValue).Replace("/", "_"))
     End Sub
 
     Private Sub ucrDtpMaxDate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDtpMaxDate.ControlValueChanged, ucrDtpMinDate.ControlValueChanged
