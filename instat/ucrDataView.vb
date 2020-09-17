@@ -888,6 +888,7 @@ Public Class ucrDataView
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     Private Sub grdCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforePaste
+        e.IsCancelled = True 'prevents pasted data from being added directly into the data view 
         Dim arrAllCurrentColumns As String()
         Dim lstSelectedColumnNames As New List(Of String)
         Dim iStartRowPos As Integer
@@ -900,7 +901,6 @@ Public Class ucrDataView
         'get starting row position then paste clipboard values
         iStartRowPos = Integer.Parse(grdData.CurrentWorksheet.RowHeaders.Item(e.Range.Row).Text)
         PasteValuesToDataFrame(lstSelectedColumnNames, iStartRowPos, False)
-        e.IsCancelled = True 'prevents pasted data from being added directly into the data view 
     End Sub
 
     ''' <summary>
