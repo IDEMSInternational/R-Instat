@@ -36,7 +36,7 @@ Partial Class dlgTimeSeriesPlot
         Me.ucrChkIncludeMeanLines = New instat.ucrCheck()
         Me.ucrChkIncludePoints = New instat.ucrCheck()
         Me.cmdSummaries = New System.Windows.Forms.Button()
-        Me.ucrSavePlot = New instat.ucrSaveGraph()
+        Me.ucrSavePlot = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -177,9 +177,10 @@ Partial Class dlgTimeSeriesPlot
         'ucrSavePlot
         '
         Me.ucrSavePlot.Location = New System.Drawing.Point(10, 385)
+        Me.ucrSavePlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlot.Name = "ucrSavePlot"
-        Me.ucrSavePlot.Size = New System.Drawing.Size(265, 20)
-        Me.ucrSavePlot.TabIndex = 13
+        Me.ucrSavePlot.Size = New System.Drawing.Size(403, 34)
+        Me.ucrSavePlot.TabIndex = 15
         '
         'dlgTimeSeriesPlot
         '
@@ -216,7 +217,6 @@ Partial Class dlgTimeSeriesPlot
     Friend WithEvents ucrSelectorTimeSeriesPlots As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblReferenceValues As Label
     Friend WithEvents ucrReceiverReference As ucrReceiverSingle
-    Friend WithEvents ucrSavePlot As ucrSaveGraph
     Friend WithEvents cmdSummaries As Button
     Friend WithEvents ucrChkIncludePoints As ucrCheck
     Friend WithEvents ucrChkIncludeMeanLines As ucrCheck
@@ -227,4 +227,5 @@ Partial Class dlgTimeSeriesPlot
     Friend WithEvents lblTime As Label
     Friend WithEvents lblEstimates As Label
     Friend WithEvents ucrReceiverEstimates As ucrReceiverSingle
+    Friend WithEvents ucrSavePlot As ucrSave
 End Class

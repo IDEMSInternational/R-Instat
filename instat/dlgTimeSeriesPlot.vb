@@ -22,13 +22,14 @@ Public Class dlgTimeSeriesPlot
     Private bReset As Boolean = True
 
     ' Constants
-    Private strReference As String = "reference"
-    Private strEstimates As String = "estimates"
+    Private strReference As String = ""
+    Private strEstimates As String = ""
     Private strData As String = "data"
     Private strValue As String = "value"
 
     ' Adjust NA values
     Private clsAdjustNAOperator As ROperator
+    Private clsAdjustNAMutateParameter As RParameter
     Private clsAdjustNAMutate As RFunction
     Private clsIfElseReference As RFunction
     Private clsIsNaReference As RFunction
@@ -38,12 +39,42 @@ Public Class dlgTimeSeriesPlot
     ' Stack data
     Private clsStackOperator As ROperator
     Private clsPivotLonger As RFunction
+    Private clsPivotCFunction As RFunction
 
     ' Calculate means
     Private clsMeansOperator As ROperator
     Private clsMeansGroupBy As RFunction
     Private clsMeansSummarise As RFunction
     Private clsMeanFunction As RFunction
+
+    ' Calculate Text Summaries
+
+    ' ggplot functions
+    Private clsGgplotOperator As ROperator
+    Private clsGgplotFunction As RFunction
+    Private clsGgplotAes As RFunction
+    Private clsGeomLine As RFunction
+    Private clsGeomPoint As RFunction
+    Private clsGeomHLine As RFunction
+    Private clsGeomHLineAes As RFunction
+    Private clsGeomText As RFunction
+    Private clsGeomTextAes As RFunction
+
+    Private clsLabsFunction As New RFunction
+    Private clsXlabsFunction As New RFunction
+    Private clsYlabFunction As New RFunction
+    Private clsXScaleContinuousFunction As New RFunction
+    Private clsYScaleContinuousFunction As New RFunction
+    Private clsFacetFunction As New RFunction
+    Private clsThemeFunction As New RFunction
+    Private dctThemeFunctions As Dictionary(Of String, RFunction)
+
+    'Parameter names for geoms
+    Private strGeomLineParameterName As String = "geom_line"
+    Private strGeomPointParameterName As String = "geom_point"
+    Private strGeomHLineParameterName As String = "geom_hline"
+    Private strGeomTextParameterName As String = "geom_text"
+    Private strGeomParameterNames() As String = {strGeomLineParameterName, strGeomPointParameterName, strGeomHLineParameterName, strGeomTextParameterName}
 
     Private Sub dlgTimeSeriesPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -56,6 +87,7 @@ Public Class dlgTimeSeriesPlot
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -74,7 +106,7 @@ Public Class dlgTimeSeriesPlot
         ucrReceiverEstimates.SetParameterIsString()
         ucrReceiverEstimates.bWithQuotes = False
 
-        ucrReceiverTime.SetParameter(New RParameter("", 1))
+        ucrReceiverTime.SetParameter(New RParameter("x", 0))
         ucrReceiverTime.Selector = ucrSelectorTimeSeriesPlots
 
         ucrReceiverStation.SetParameter(New RParameter("0", 0))
@@ -82,10 +114,45 @@ Public Class dlgTimeSeriesPlot
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.bWithQuotes = False
 
+        clsAdjustNAMutate = New RFunction
+        clsAdjustNAMutateParameter = New RParameter("1", clsAdjustNAMutate, iNewPosition:=1)
+        ucrChkNAValues.SetText("Remove rows with any missing values")
+        ucrChkNAValues.SetParameter(clsAdjustNAMutateParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrSavePlot.SetPrefix("line")
+        ucrSavePlot.SetIsComboBox()
+        ucrSavePlot.SetCheckBoxText("Save Graph")
+        ucrSavePlot.SetSaveTypeAsGraph()
+        ucrSavePlot.SetDataFrameSelector(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames)
+        ucrSavePlot.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
+        clsAdjustNAOperator = New ROperator
+        clsIfElseReference = New RFunction
+        clsIfElseEstimates = New RFunction
+        clsIsNaReference = New RFunction
+        clsIsNaEstimates = New RFunction
+
+        clsStackOperator = New ROperator
+        clsPivotLonger = New RFunction
+        clsPivotCFunction = New RFunction
+
+        clsMeansOperator = New ROperator
+        clsMeansGroupBy = New RFunction
+        clsMeansSummarise = New RFunction
+        clsMeanFunction = New RFunction
+
+        clsGgplotOperator = New ROperator
+        clsGgplotFunction = New RFunction
+        clsGgplotAes = New RFunction
+        clsGeomLine = New RFunction
+        clsGeomPoint = New RFunction
+        clsGeomHLine = New RFunction
+        clsGeomText = New RFunction
+
         ucrSelectorTimeSeriesPlots.Reset()
+        ucrSelectorTimeSeriesPlots.SetGgplotFunction(clsGgplotOperator)
 
         ' Adjust NA values
 
@@ -93,17 +160,16 @@ Public Class dlgTimeSeriesPlot
         clsAdjustNAOperator.SetOperation("%>%")
         clsAdjustNAOperator.AddParameter("1", clsRFunctionParameter:=clsAdjustNAMutate, iPosition:=1)
 
+        clsAdjustNAMutate.Clear()
         clsAdjustNAMutate.SetPackageName("dplyr")
         clsAdjustNAMutate.SetRCommand("mutate")
-        clsAdjustNAMutate.AddParameter(strReference, clsRFunctionParameter:=clsIfElseReference, iPosition:=0)
-        clsAdjustNAMutate.AddParameter(strEstimates, clsRFunctionParameter:=clsIfElseEstimates, iPosition:=1)
 
         clsIfElseReference.SetRCommand("ifelse")
-        clsIfElseReference.AddParameter("test", clsRFunctionParameter:=clsIsNaReference, iPosition:=0)
+        clsIfElseReference.AddParameter("test", clsRFunctionParameter:=clsIsNaEstimates, iPosition:=0)
         clsIfElseReference.AddParameter("yes", "NA", iPosition:=1)
 
         clsIfElseEstimates.SetRCommand("ifelse")
-        clsIfElseEstimates.AddParameter("test", clsRFunctionParameter:=clsIsNaEstimates, iPosition:=0)
+        clsIfElseEstimates.AddParameter("test", clsRFunctionParameter:=clsIsNaReference, iPosition:=0)
         clsIfElseEstimates.AddParameter("yes", "NA", iPosition:=1)
 
         clsIsNaReference.SetRCommand("is.na")
@@ -117,9 +183,11 @@ Public Class dlgTimeSeriesPlot
 
         clsPivotLonger.SetPackageName("tidyr")
         clsPivotLonger.SetRCommand("pivot_longer")
-        clsPivotLonger.AddParameter("cols", "c(" & strReference & ", " & strEstimates & ")", iPosition:=1)
+        clsPivotLonger.AddParameter("cols", clsRFunctionParameter:=clsPivotCFunction, iPosition:=1)
         clsPivotLonger.AddParameter("names_to", Chr(34) & strData & Chr(34), iPosition:=2)
         clsPivotLonger.AddParameter("values_to", Chr(34) & strValue & Chr(34), iPosition:=8)
+
+        clsPivotCFunction.SetRCommand("c")
 
         ' Calculate means
 
@@ -140,31 +208,132 @@ Public Class dlgTimeSeriesPlot
         clsMeanFunction.AddParameter("x", strValue, iPosition:=0)
         clsMeanFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
 
-        'ucrBase.clsRsyntax.SetBaseRFunction()
+        ' Ggplot functions
+
+        clsGgplotOperator.SetOperation("+")
+        clsGgplotOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, iPosition:=0)
+        clsGgplotOperator.AddParameter(strGeomLineParameterName, clsRFunctionParameter:=clsGeomLine, iPosition:=1)
+        clsGgplotOperator.AddParameter(strGeomPointParameterName, clsRFunctionParameter:=clsGeomPoint, iPosition:=2)
+        clsGgplotOperator.AddParameter(strGeomHLineParameterName, clsRFunctionParameter:=clsGeomHLine, iPosition:=3)
+
+        clsGgplotFunction.SetPackageName("ggplot2")
+        clsGgplotFunction.SetRCommand("ggplot")
+        clsGgplotFunction.AddParameter("data", clsROperatorParameter:=clsStackOperator, iPosition:=0)
+        clsGgplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAes, iPosition:=1)
+
+        clsGgplotAes.SetPackageName("ggplot2")
+        clsGgplotAes.SetRCommand("aes")
+        clsGgplotAes.AddParameter("y", strValue, iPosition:=1)
+        clsGgplotAes.AddParameter("colour", strData, iPosition:=2)
+
+        clsGeomLine.SetPackageName("ggplot2")
+        clsGeomLine.SetRCommand("geom_line")
+
+        clsGeomPoint.SetPackageName("ggplot2")
+        clsGeomPoint.SetRCommand("geom_point")
+
+        clsGeomHLine.SetPackageName("ggplot2")
+        clsGeomHLine.SetRCommand("geom_hline")
+        clsGeomHLine.AddParameter("data", clsROperatorParameter:=clsMeansOperator, iPosition:=0)
+        clsGeomHLine.AddParameter("mapping", clsRFunctionParameter:=clsGeomHLineAes, iPosition:=1)
+
+        clsGeomHLineAes.SetPackageName("ggplot2")
+        clsGeomHLineAes.SetRCommand("aes")
+        clsGeomHLineAes.AddParameter("yintercept", "mean", iPosition:=0)
+        clsGeomHLineAes.AddParameter("colour", strData, iPosition:=1)
+
+        clsGeomText.SetPackageName("ggplot2")
+        clsGeomText.SetRCommand("geom_text")
+        'clsGeomText.AddParameter("data", clsROperatorParameter:=, iPosition:=0)
+        clsGeomText.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextAes, iPosition:=1)
+
+        clsGgplotOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        clsFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsGgplotOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseROperator(clsGgplotOperator)
+
+        TestOkEnabled()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverReference.AddAdditionalCodeParameterPair(clsIfElseReference, New RParameter("no", 2), iAdditionalPairNo:=1)
+        ucrReceiverReference.AddAdditionalCodeParameterPair(clsPivotCFunction, New RParameter("0", 0), iAdditionalPairNo:=2)
         ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsIfElseEstimates, New RParameter("no", 2), iAdditionalPairNo:=1)
+        ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsPivotCFunction, New RParameter("1", 1), iAdditionalPairNo:=2)
 
         ucrSelectorTimeSeriesPlots.SetRCode(clsAdjustNAOperator, bReset)
         ucrReceiverReference.SetRCode(clsIsNaReference, bReset)
         ucrReceiverEstimates.SetRCode(clsIsNaEstimates, bReset)
         ucrReceiverStation.SetRCode(clsMeansGroupBy, bReset)
+        ucrReceiverTime.SetRCode(clsGgplotAes, bReset)
+    End Sub
 
+    Private Sub TestOkEnabled()
+        If Not ucrReceiverEstimates.IsEmpty And Not ucrReceiverReference.IsEmpty AndAlso ucrSavePlot.IsComplete Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub SetDataFrameAssignTo()
         If ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso clsAdjustNAOperator.clsParameters.Count > 1 Then
-            clsAdjustNAOperator.SetAssignTo(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            If ucrChkNAValues.Checked Then
+                clsAdjustNAOperator.SetAssignTo(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            Else
+                clsAdjustNAOperator.RemoveAssignTo()
+            End If
             clsStackOperator.SetAssignTo(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stack")
+            clsMeansOperator.SetAssignTo(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_mean")
         Else
             clsAdjustNAOperator.RemoveAssignTo()
             clsStackOperator.RemoveAssignTo()
+            clsMeansOperator.RemoveAssignTo()
         End If
     End Sub
 
     Private Sub ucrSelectorTimeSeriesPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTimeSeriesPlots.ControlValueChanged
         SetDataFrameAssignTo()
+    End Sub
+
+    Private Sub ucrReceiverEstimates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimates.ControlValueChanged
+        If ucrReceiverEstimates.IsEmpty Then
+            If strEstimates <> "" Then
+                clsAdjustNAMutate.RemoveParameterByName(strEstimates)
+                strEstimates = ""
+            End If
+        Else
+            strEstimates = ucrReceiverEstimates.GetVariableNames(False)
+            clsAdjustNAMutate.AddParameter(strEstimates, clsRFunctionParameter:=clsIfElseEstimates, iPosition:=1)
+        End If
+    End Sub
+
+    Private Sub ucrReceiverReference_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReference.ControlValueChanged
+        If ucrReceiverReference.IsEmpty Then
+            If strReference <> "" Then
+                clsAdjustNAMutate.RemoveParameterByName(strReference)
+                strReference = ""
+            End If
+        Else
+            strReference = ucrReceiverReference.GetVariableNames(False)
+            clsAdjustNAMutate.AddParameter(strReference, clsRFunctionParameter:=clsIfElseReference, iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimates.ControlContentsChanged, ucrReceiverReference.ControlContentsChanged, ucrSavePlot.ControlContentsChanged
+
     End Sub
 End Class
