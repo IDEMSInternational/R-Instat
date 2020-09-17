@@ -291,6 +291,7 @@ Public Class dlgSeasonalPlot
         clsGeomSmoothFunction.AddParameter("method", Chr(34) & "glm" & Chr(34), iPosition:=0)
         clsGeomLineAesFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
         clsGeomSmoothFunction.AddParameter("se", "FALSE", iPosition:=3)
+        clsGeomSmoothFunction.AddParameter("span", 0.5, iPosition:=4)
 
         clsGgPlotAesFunction.SetPackageName("ggplot2")
         clsGgPlotAesFunction.SetRCommand("aes")
@@ -325,11 +326,12 @@ Public Class dlgSeasonalPlot
 
         clsPbsFunction.SetPackageName("pbs")
         clsPbsFunction.SetRCommand("pbs")
-        clsPbsFunction.AddParameter("x", "x", bIncludeArgumentName:=False, iPosition:=0)
+        clsPbsFunction.AddParameter("df", 6, iPosition:=1)
 
         clsNsFunction.SetPackageName("splines")
         clsNsFunction.SetRCommand("ns")
         clsNsFunction.AddParameter("x", "x", bIncludeArgumentName:=False, iPosition:=0)
+        clsNsFunction.AddParameter("df", 6, iPosition:=1)
 
         clsPipeOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorSeasonalityComparisons.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
