@@ -22,40 +22,22 @@ Partial Class dlgTimeSeriesPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorTimeSeriesPlots = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblReferenceValues = New System.Windows.Forms.Label()
-        Me.ucrReceiverReference = New instat.ucrReceiverSingle()
-        Me.ucrReceiverEstimates = New instat.ucrReceiverSingle()
         Me.lblEstimates = New System.Windows.Forms.Label()
         Me.lblTime = New System.Windows.Forms.Label()
-        Me.ucrReceiverTime = New instat.ucrReceiverSingle()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
-        Me.ucrChkNAValues = New instat.ucrCheck()
-        Me.ucrChkIncludeMeanLines = New instat.ucrCheck()
-        Me.ucrChkIncludePoints = New instat.ucrCheck()
         Me.cmdSummaries = New System.Windows.Forms.Button()
         Me.ucrSavePlot = New instat.ucrSave()
+        Me.ucrChkIncludePoints = New instat.ucrCheck()
+        Me.ucrChkIncludeMeanLines = New instat.ucrCheck()
+        Me.ucrChkNAValues = New instat.ucrCheck()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverTime = New instat.ucrReceiverSingle()
+        Me.ucrReceiverEstimates = New instat.ucrReceiverSingle()
+        Me.ucrReceiverReference = New instat.ucrReceiverSingle()
+        Me.ucrSelectorTimeSeriesPlots = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 428)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 14
-        '
-        'ucrSelectorTimeSeriesPlots
-        '
-        Me.ucrSelectorTimeSeriesPlots.bDropUnusedFilterLevels = False
-        Me.ucrSelectorTimeSeriesPlots.bShowHiddenColumns = False
-        Me.ucrSelectorTimeSeriesPlots.bUseCurrentFilter = True
-        Me.ucrSelectorTimeSeriesPlots.Location = New System.Drawing.Point(12, 9)
-        Me.ucrSelectorTimeSeriesPlots.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorTimeSeriesPlots.Name = "ucrSelectorTimeSeriesPlots"
-        Me.ucrSelectorTimeSeriesPlots.Size = New System.Drawing.Size(218, 180)
-        Me.ucrSelectorTimeSeriesPlots.TabIndex = 0
         '
         'lblReferenceValues
         '
@@ -65,30 +47,6 @@ Partial Class dlgTimeSeriesPlot
         Me.lblReferenceValues.Size = New System.Drawing.Size(95, 13)
         Me.lblReferenceValues.TabIndex = 1
         Me.lblReferenceValues.Text = "Reference Values:"
-        '
-        'ucrReceiverReference
-        '
-        Me.ucrReceiverReference.frmParent = Me
-        Me.ucrReceiverReference.Location = New System.Drawing.Point(286, 39)
-        Me.ucrReceiverReference.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverReference.Name = "ucrReceiverReference"
-        Me.ucrReceiverReference.Selector = Nothing
-        Me.ucrReceiverReference.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverReference.strNcFilePath = ""
-        Me.ucrReceiverReference.TabIndex = 2
-        Me.ucrReceiverReference.ucrSelector = Nothing
-        '
-        'ucrReceiverEstimates
-        '
-        Me.ucrReceiverEstimates.frmParent = Me
-        Me.ucrReceiverEstimates.Location = New System.Drawing.Point(286, 86)
-        Me.ucrReceiverEstimates.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverEstimates.Name = "ucrReceiverEstimates"
-        Me.ucrReceiverEstimates.Selector = Nothing
-        Me.ucrReceiverEstimates.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverEstimates.strNcFilePath = ""
-        Me.ucrReceiverEstimates.TabIndex = 4
-        Me.ucrReceiverEstimates.ucrSelector = Nothing
         '
         'lblEstimates
         '
@@ -108,18 +66,6 @@ Partial Class dlgTimeSeriesPlot
         Me.lblTime.TabIndex = 5
         Me.lblTime.Text = "Time (X axis):"
         '
-        'ucrReceiverTime
-        '
-        Me.ucrReceiverTime.frmParent = Me
-        Me.ucrReceiverTime.Location = New System.Drawing.Point(286, 133)
-        Me.ucrReceiverTime.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverTime.Name = "ucrReceiverTime"
-        Me.ucrReceiverTime.Selector = Nothing
-        Me.ucrReceiverTime.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverTime.strNcFilePath = ""
-        Me.ucrReceiverTime.TabIndex = 6
-        Me.ucrReceiverTime.ucrSelector = Nothing
-        '
         'lblStation
         '
         Me.lblStation.AutoSize = True
@@ -128,42 +74,6 @@ Partial Class dlgTimeSeriesPlot
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 7
         Me.lblStation.Text = "Station:"
-        '
-        'ucrReceiverStation
-        '
-        Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(286, 180)
-        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 8
-        Me.ucrReceiverStation.ucrSelector = Nothing
-        '
-        'ucrChkNAValues
-        '
-        Me.ucrChkNAValues.Checked = False
-        Me.ucrChkNAValues.Location = New System.Drawing.Point(10, 242)
-        Me.ucrChkNAValues.Name = "ucrChkNAValues"
-        Me.ucrChkNAValues.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkNAValues.TabIndex = 9
-        '
-        'ucrChkIncludeMeanLines
-        '
-        Me.ucrChkIncludeMeanLines.Checked = False
-        Me.ucrChkIncludeMeanLines.Location = New System.Drawing.Point(10, 316)
-        Me.ucrChkIncludeMeanLines.Name = "ucrChkIncludeMeanLines"
-        Me.ucrChkIncludeMeanLines.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkIncludeMeanLines.TabIndex = 11
-        '
-        'ucrChkIncludePoints
-        '
-        Me.ucrChkIncludePoints.Checked = False
-        Me.ucrChkIncludePoints.Location = New System.Drawing.Point(10, 279)
-        Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
-        Me.ucrChkIncludePoints.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkIncludePoints.TabIndex = 10
         '
         'cmdSummaries
         '
@@ -181,6 +91,96 @@ Partial Class dlgTimeSeriesPlot
         Me.ucrSavePlot.Name = "ucrSavePlot"
         Me.ucrSavePlot.Size = New System.Drawing.Size(403, 34)
         Me.ucrSavePlot.TabIndex = 15
+        '
+        'ucrChkIncludePoints
+        '
+        Me.ucrChkIncludePoints.Checked = False
+        Me.ucrChkIncludePoints.Location = New System.Drawing.Point(10, 279)
+        Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
+        Me.ucrChkIncludePoints.Size = New System.Drawing.Size(147, 20)
+        Me.ucrChkIncludePoints.TabIndex = 10
+        '
+        'ucrChkIncludeMeanLines
+        '
+        Me.ucrChkIncludeMeanLines.Checked = False
+        Me.ucrChkIncludeMeanLines.Location = New System.Drawing.Point(10, 316)
+        Me.ucrChkIncludeMeanLines.Name = "ucrChkIncludeMeanLines"
+        Me.ucrChkIncludeMeanLines.Size = New System.Drawing.Size(147, 20)
+        Me.ucrChkIncludeMeanLines.TabIndex = 11
+        '
+        'ucrChkNAValues
+        '
+        Me.ucrChkNAValues.Checked = False
+        Me.ucrChkNAValues.Location = New System.Drawing.Point(10, 242)
+        Me.ucrChkNAValues.Name = "ucrChkNAValues"
+        Me.ucrChkNAValues.Size = New System.Drawing.Size(272, 20)
+        Me.ucrChkNAValues.TabIndex = 9
+        '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.frmParent = Me
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(286, 180)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 8
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrReceiverTime
+        '
+        Me.ucrReceiverTime.frmParent = Me
+        Me.ucrReceiverTime.Location = New System.Drawing.Point(286, 133)
+        Me.ucrReceiverTime.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverTime.Name = "ucrReceiverTime"
+        Me.ucrReceiverTime.Selector = Nothing
+        Me.ucrReceiverTime.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverTime.strNcFilePath = ""
+        Me.ucrReceiverTime.TabIndex = 6
+        Me.ucrReceiverTime.ucrSelector = Nothing
+        '
+        'ucrReceiverEstimates
+        '
+        Me.ucrReceiverEstimates.frmParent = Me
+        Me.ucrReceiverEstimates.Location = New System.Drawing.Point(286, 86)
+        Me.ucrReceiverEstimates.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverEstimates.Name = "ucrReceiverEstimates"
+        Me.ucrReceiverEstimates.Selector = Nothing
+        Me.ucrReceiverEstimates.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverEstimates.strNcFilePath = ""
+        Me.ucrReceiverEstimates.TabIndex = 4
+        Me.ucrReceiverEstimates.ucrSelector = Nothing
+        '
+        'ucrReceiverReference
+        '
+        Me.ucrReceiverReference.frmParent = Me
+        Me.ucrReceiverReference.Location = New System.Drawing.Point(286, 39)
+        Me.ucrReceiverReference.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverReference.Name = "ucrReceiverReference"
+        Me.ucrReceiverReference.Selector = Nothing
+        Me.ucrReceiverReference.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverReference.strNcFilePath = ""
+        Me.ucrReceiverReference.TabIndex = 2
+        Me.ucrReceiverReference.ucrSelector = Nothing
+        '
+        'ucrSelectorTimeSeriesPlots
+        '
+        Me.ucrSelectorTimeSeriesPlots.bDropUnusedFilterLevels = False
+        Me.ucrSelectorTimeSeriesPlots.bShowHiddenColumns = False
+        Me.ucrSelectorTimeSeriesPlots.bUseCurrentFilter = True
+        Me.ucrSelectorTimeSeriesPlots.Location = New System.Drawing.Point(12, 9)
+        Me.ucrSelectorTimeSeriesPlots.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorTimeSeriesPlots.Name = "ucrSelectorTimeSeriesPlots"
+        Me.ucrSelectorTimeSeriesPlots.Size = New System.Drawing.Size(218, 180)
+        Me.ucrSelectorTimeSeriesPlots.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 428)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 14
         '
         'dlgTimeSeriesPlot
         '

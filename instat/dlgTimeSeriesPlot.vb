@@ -66,6 +66,7 @@ Public Class dlgTimeSeriesPlot
     Private clsXScaleContinuousFunction As New RFunction
     Private clsYScaleContinuousFunction As New RFunction
     Private clsFacetFunction As New RFunction
+    Private clsFacetOperator As New ROperator
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
 
@@ -92,6 +93,8 @@ Public Class dlgTimeSeriesPlot
 
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID =
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 3
 
         ucrSelectorTimeSeriesPlots.SetParameter(New RParameter("0", 0))
         ucrSelectorTimeSeriesPlots.SetParameterIsrfunction()
@@ -108,8 +111,10 @@ Public Class dlgTimeSeriesPlot
 
         ucrReceiverTime.SetParameter(New RParameter("x", 0))
         ucrReceiverTime.Selector = ucrSelectorTimeSeriesPlots
+        ucrReceiverTime.SetParameterIsString()
+        ucrReceiverTime.bWithQuotes = False
 
-        ucrReceiverStation.SetParameter(New RParameter("0", 0))
+        ucrReceiverStation.SetParameter(New RParameter("0", 0, bNewIncludeArgumentName:=False))
         ucrReceiverStation.Selector = ucrSelectorTimeSeriesPlots
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.bWithQuotes = False
@@ -118,6 +123,12 @@ Public Class dlgTimeSeriesPlot
         clsAdjustNAMutateParameter = New RParameter("1", clsAdjustNAMutate, iNewPosition:=1)
         ucrChkNAValues.SetText("Remove rows with any missing values")
         ucrChkNAValues.SetParameter(clsAdjustNAMutateParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrChkIncludePoints.SetText("Include Points")
+        ucrChkIncludePoints.Enabled = False
+
+        ucrChkIncludeMeanLines.SetText("Include Mean Lines")
+        ucrChkIncludeMeanLines.Enabled = False
 
         ucrSavePlot.SetPrefix("line")
         ucrSavePlot.SetIsComboBox()
@@ -149,16 +160,19 @@ Public Class dlgTimeSeriesPlot
         clsGeomLine = New RFunction
         clsGeomPoint = New RFunction
         clsGeomHLine = New RFunction
+        clsGeomHLineAes = New RFunction
         clsGeomText = New RFunction
+        clsGeomTextAes = New RFunction
 
         ucrSelectorTimeSeriesPlots.Reset()
         ucrSelectorTimeSeriesPlots.SetGgplotFunction(clsGgplotOperator)
 
+        ucrReceiverReference.SetMeAsReceiver()
+
         ' Adjust NA values
 
-        SetDataFrameAssignTo()
         clsAdjustNAOperator.SetOperation("%>%")
-        clsAdjustNAOperator.AddParameter("1", clsRFunctionParameter:=clsAdjustNAMutate, iPosition:=1)
+        clsAdjustNAOperator.AddParameter(clsAdjustNAMutateParameter)
 
         clsAdjustNAMutate.Clear()
         clsAdjustNAMutate.SetPackageName("dplyr")
@@ -180,6 +194,7 @@ Public Class dlgTimeSeriesPlot
         clsStackOperator.SetOperation("%>%")
         clsStackOperator.AddParameter("0", clsROperatorParameter:=clsAdjustNAOperator, iPosition:=0)
         clsStackOperator.AddParameter("1", clsRFunctionParameter:=clsPivotLonger, iPosition:=1)
+        clsStackOperator.bBrackets = False
 
         clsPivotLonger.SetPackageName("tidyr")
         clsPivotLonger.SetRCommand("pivot_longer")
@@ -192,13 +207,14 @@ Public Class dlgTimeSeriesPlot
         ' Calculate means
 
         clsMeansOperator.SetOperation("%>%")
-        clsMeansOperator.AddParameter("0", clsRFunctionParameter:=clsPivotLonger, iPosition:=0)
+        clsMeansOperator.AddParameter("0", clsROperatorParameter:=clsStackOperator, iPosition:=0)
         clsMeansOperator.AddParameter("1", clsRFunctionParameter:=clsMeansGroupBy, iPosition:=1)
-        clsMeansOperator.AddParameter("1", clsRFunctionParameter:=clsMeansSummarise, iPosition:=2)
+        clsMeansOperator.AddParameter("2", clsRFunctionParameter:=clsMeansSummarise, iPosition:=2)
+        clsMeansOperator.bBrackets = False
 
         clsMeansGroupBy.SetPackageName("dplyr")
         clsMeansGroupBy.SetRCommand("group_by")
-        clsMeansGroupBy.AddParameter("1", strData, iPosition:=1)
+        clsMeansGroupBy.AddParameter("1", strData, iPosition:=1, bIncludeArgumentName:=False)
 
         clsMeansSummarise.SetPackageName("dplyr")
         clsMeansSummarise.SetRCommand("summarise")
@@ -247,15 +263,22 @@ Public Class dlgTimeSeriesPlot
         'clsGeomText.AddParameter("data", clsROperatorParameter:=, iPosition:=0)
         clsGeomText.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextAes, iPosition:=1)
 
+        clsFacetFunction.SetPackageName("ggplot2")
+        clsFacetFunction.SetRCommand("facet_wrap")
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
+
+        clsFacetOperator.SetOperation("~")
+        clsFacetOperator.bForceIncludeOperation = True
+
         clsGgplotOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
         clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
-        clsFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+
         clsGgplotOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsGgplotOperator)
 
@@ -264,15 +287,19 @@ Public Class dlgTimeSeriesPlot
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverReference.AddAdditionalCodeParameterPair(clsIfElseReference, New RParameter("no", 2), iAdditionalPairNo:=1)
-        ucrReceiverReference.AddAdditionalCodeParameterPair(clsPivotCFunction, New RParameter("0", 0), iAdditionalPairNo:=2)
+        ucrReceiverReference.AddAdditionalCodeParameterPair(clsPivotCFunction, New RParameter("0", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsIfElseEstimates, New RParameter("no", 2), iAdditionalPairNo:=1)
-        ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsPivotCFunction, New RParameter("1", 1), iAdditionalPairNo:=2)
+        ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsPivotCFunction, New RParameter("1", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverStation.AddAdditionalCodeParameterPair(clsFacetOperator, New RParameter("1", 1), iAdditionalPairNo:=1)
 
         ucrSelectorTimeSeriesPlots.SetRCode(clsAdjustNAOperator, bReset)
         ucrReceiverReference.SetRCode(clsIsNaReference, bReset)
         ucrReceiverEstimates.SetRCode(clsIsNaEstimates, bReset)
         ucrReceiverStation.SetRCode(clsMeansGroupBy, bReset)
         ucrReceiverTime.SetRCode(clsGgplotAes, bReset)
+        ucrChkNAValues.SetRCode(clsAdjustNAOperator, bReset)
+
+        SetDataFrameAssignTo()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -284,7 +311,7 @@ Public Class dlgTimeSeriesPlot
     End Sub
 
     Private Sub SetDataFrameAssignTo()
-        If ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" AndAlso clsAdjustNAOperator.clsParameters.Count > 1 Then
+        If ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             If ucrChkNAValues.Checked Then
                 clsAdjustNAOperator.SetAssignTo(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             Else
@@ -299,7 +326,7 @@ Public Class dlgTimeSeriesPlot
         End If
     End Sub
 
-    Private Sub ucrSelectorTimeSeriesPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTimeSeriesPlots.ControlValueChanged
+    Private Sub ucrSelectorTimeSeriesPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTimeSeriesPlots.ControlValueChanged, ucrChkNAValues.ControlValueChanged
         SetDataFrameAssignTo()
     End Sub
 
@@ -334,6 +361,14 @@ Public Class dlgTimeSeriesPlot
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimates.ControlContentsChanged, ucrReceiverReference.ControlContentsChanged, ucrSavePlot.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
 
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+        If ucrReceiverStation.IsEmpty AndAlso clsFacetOperator.clsParameters.Count = 0 Then
+            clsGgplotOperator.RemoveParameterByName("facets")
+        Else
+            clsGgplotOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, iPosition:=30)
+        End If
     End Sub
 End Class
