@@ -59,6 +59,8 @@ Public Class dlgSeasonalPlot
         ucrReceiverSeasonality.SetParameter(New RParameter("seasonality", 2, bNewIncludeArgumentName:=False))
         ucrReceiverSeasonality.Selector = ucrSelectorSeasonalityComparisons
         ucrReceiverSeasonality.SetParameterIsRFunction()
+        ucrReceiverSeasonality.SetClimaticType("doy")
+        ucrReceiverSeasonality.bAutoFill = True
 
         ucrReceiverStation.SetParameter(New RParameter("station", 0, bNewIncludeArgumentName:=False))
         ucrReceiverStation.Selector = ucrSelectorSeasonalityComparisons
@@ -142,6 +144,7 @@ Public Class dlgSeasonalPlot
         clsEstLessOperator = New ROperator
         clsDivideOperator = New ROperator
 
+        clsPlusOperator = New ROperator
         clsFacetWrapTildeOperator = New ROperator
         clsPbsSplinesTildeOperator = New ROperator
 
@@ -177,8 +180,8 @@ Public Class dlgSeasonalPlot
 
         ucrSelectorSeasonalityComparisons.Reset()
         ucrReceiverReference.SetMeAsReceiver()
-        ucrInputEstimateSummary.cboInput.SelectedItem = "Prop Above"
-        ucrInputReferenceSummary.cboInput.SelectedItem = "Prop Above"
+        ucrInputEstimateSummary.cboInput.SelectedItem = "Mean"
+        ucrInputReferenceSummary.cboInput.SelectedItem = "Mean"
         ucrInputSmoothing.cboInput.SelectedItem = "Fourier Series"
 
         clsPipeOperator.SetOperation("%>%")
@@ -271,6 +274,7 @@ Public Class dlgSeasonalPlot
 
         clsPlusOperator.SetOperation("+")
         clsPlusOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, iPosition:=0)
+        clsPlusOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLineFunction, iPosition:=2)
         clsPlusOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunction, iPosition:=3)
 
         clsFacetWrapTildeOperator.SetOperation("~")
@@ -289,7 +293,7 @@ Public Class dlgSeasonalPlot
         clsGeomSmoothFunction.SetPackageName("ggplot2")
         clsGeomSmoothFunction.SetRCommand("geom_smooth")
         clsGeomSmoothFunction.AddParameter("method", Chr(34) & "glm" & Chr(34), iPosition:=0)
-        clsGeomLineAesFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
+        clsGeomSmoothFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
         clsGeomSmoothFunction.AddParameter("se", "FALSE", iPosition:=3)
         clsGeomSmoothFunction.AddParameter("span", 0.5, iPosition:=4)
 
@@ -435,7 +439,7 @@ Public Class dlgSeasonalPlot
         If ucrChkPoints.Checked Then
             clsPlusOperator.AddParameter("geom_point", clsRFunctionParameter:=clsGeomPointFunction, iPosition:=1)
         Else
-            clsPlusOperator.RemoveParameterByName("ggplot")
+            clsPlusOperator.RemoveParameterByName("geom_point")
         End If
     End Sub
 
@@ -443,18 +447,18 @@ Public Class dlgSeasonalPlot
         Select Case ucrInputSmoothing.GetText
             Case "Fourier Series"
                 clsGeomSmoothFunction.AddParameter("method", Chr(34) & "glm" & Chr(34), iPosition:=0)
-                clsGeomLineAesFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
+                clsGeomSmoothFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
                 clsGeomSmoothFunction.AddParameter("formula", clsRFunctionParameter:=clsAsFormulaFunction, iPosition:=1)
             Case "Periodic Splines"
                 clsGeomSmoothFunction.AddParameter("method", Chr(34) & "glm" & Chr(34), iPosition:=0)
-                clsGeomLineAesFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
+                clsGeomSmoothFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
                 clsPbsSplinesTildeOperator.AddParameter("pbs", clsRFunctionParameter:=clsPbsFunction, iPosition:=1)
                 clsPbsSplinesTildeOperator.RemoveParameterByName("ns")
                 clsPbsSplinesTildeOperator.RemoveParameterByName("x")
                 clsGeomSmoothFunction.AddParameter("formula", clsROperatorParameter:=clsPbsSplinesTildeOperator, iPosition:=1)
             Case "Natural Splines"
                 clsGeomSmoothFunction.AddParameter("method", Chr(34) & "glm" & Chr(34), iPosition:=0)
-                clsGeomLineAesFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
+                clsGeomSmoothFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
                 clsPbsSplinesTildeOperator.RemoveParameterByName("pbs")
                 clsPbsSplinesTildeOperator.RemoveParameterByName("x")
                 clsPbsSplinesTildeOperator.AddParameter("ns", clsRFunctionParameter:=clsNsFunction, iPosition:=1)

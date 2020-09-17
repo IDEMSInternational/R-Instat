@@ -151,7 +151,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrInputN.AddQuotesIfUnrecognised = True
         Me.ucrInputN.IsMultiline = False
         Me.ucrInputN.IsReadOnly = False
-        Me.ucrInputN.Location = New System.Drawing.Point(167, 41)
+        Me.ucrInputN.Location = New System.Drawing.Point(149, 41)
         Me.ucrInputN.Name = "ucrInputN"
         Me.ucrInputN.Size = New System.Drawing.Size(47, 21)
         Me.ucrInputN.TabIndex = 23
@@ -159,7 +159,7 @@ Partial Class dlgSeasonalPlot
         'lblN
         '
         Me.lblN.AutoSize = True
-        Me.lblN.Location = New System.Drawing.Point(148, 45)
+        Me.lblN.Location = New System.Drawing.Point(130, 43)
         Me.lblN.Name = "lblN"
         Me.lblN.Size = New System.Drawing.Size(16, 13)
         Me.lblN.TabIndex = 21
@@ -178,20 +178,20 @@ Partial Class dlgSeasonalPlot
         Me.ucrChkMovingAverage.Checked = False
         Me.ucrChkMovingAverage.Location = New System.Drawing.Point(8, 41)
         Me.ucrChkMovingAverage.Name = "ucrChkMovingAverage"
-        Me.ucrChkMovingAverage.Size = New System.Drawing.Size(134, 20)
+        Me.ucrChkMovingAverage.Size = New System.Drawing.Size(121, 20)
         Me.ucrChkMovingAverage.TabIndex = 7
         '
         'grpSmoothing
         '
         Me.grpSmoothing.Controls.Add(Me.ucrNudSpan)
         Me.grpSmoothing.Controls.Add(Me.lblSpan)
-        Me.grpSmoothing.Controls.Add(Me.lblDf)
-        Me.grpSmoothing.Controls.Add(Me.lblPeriod)
         Me.grpSmoothing.Controls.Add(Me.ucrNudDf)
         Me.grpSmoothing.Controls.Add(Me.lblHarmonics)
-        Me.grpSmoothing.Controls.Add(Me.ucrNudPeriod)
+        Me.grpSmoothing.Controls.Add(Me.lblDf)
         Me.grpSmoothing.Controls.Add(Me.ucrNudHarmonics)
         Me.grpSmoothing.Controls.Add(Me.ucrInputSmoothing)
+        Me.grpSmoothing.Controls.Add(Me.lblPeriod)
+        Me.grpSmoothing.Controls.Add(Me.ucrNudPeriod)
         Me.grpSmoothing.Location = New System.Drawing.Point(12, 317)
         Me.grpSmoothing.Name = "grpSmoothing"
         Me.grpSmoothing.Size = New System.Drawing.Size(243, 75)
@@ -203,7 +203,7 @@ Partial Class dlgSeasonalPlot
         '
         Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSpan.Location = New System.Drawing.Point(53, 45)
+        Me.ucrNudSpan.Location = New System.Drawing.Point(45, 49)
         Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSpan.Name = "ucrNudSpan"
@@ -214,7 +214,7 @@ Partial Class dlgSeasonalPlot
         'lblSpan
         '
         Me.lblSpan.AutoSize = True
-        Me.lblSpan.Location = New System.Drawing.Point(15, 49)
+        Me.lblSpan.Location = New System.Drawing.Point(7, 52)
         Me.lblSpan.Name = "lblSpan"
         Me.lblSpan.Size = New System.Drawing.Size(35, 13)
         Me.lblSpan.TabIndex = 23
@@ -223,7 +223,7 @@ Partial Class dlgSeasonalPlot
         'lblDf
         '
         Me.lblDf.AutoSize = True
-        Me.lblDf.Location = New System.Drawing.Point(12, 49)
+        Me.lblDf.Location = New System.Drawing.Point(6, 51)
         Me.lblDf.Name = "lblDf"
         Me.lblDf.Size = New System.Drawing.Size(103, 13)
         Me.lblDf.TabIndex = 24
@@ -232,17 +232,17 @@ Partial Class dlgSeasonalPlot
         'lblPeriod
         '
         Me.lblPeriod.AutoSize = True
-        Me.lblPeriod.Location = New System.Drawing.Point(128, 49)
+        Me.lblPeriod.Location = New System.Drawing.Point(123, 52)
         Me.lblPeriod.Name = "lblPeriod"
-        Me.lblPeriod.Size = New System.Drawing.Size(45, 13)
+        Me.lblPeriod.Size = New System.Drawing.Size(40, 13)
         Me.lblPeriod.TabIndex = 18
-        Me.lblPeriod.Text = "Periods:"
+        Me.lblPeriod.Text = "Period:"
         '
         'ucrNudDf
         '
         Me.ucrNudDf.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDf.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDf.Location = New System.Drawing.Point(117, 46)
+        Me.ucrNudDf.Location = New System.Drawing.Point(110, 49)
         Me.ucrNudDf.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudDf.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudDf.Name = "ucrNudDf"
@@ -253,7 +253,7 @@ Partial Class dlgSeasonalPlot
         'lblHarmonics
         '
         Me.lblHarmonics.AutoSize = True
-        Me.lblHarmonics.Location = New System.Drawing.Point(12, 49)
+        Me.lblHarmonics.Location = New System.Drawing.Point(6, 52)
         Me.lblHarmonics.Name = "lblHarmonics"
         Me.lblHarmonics.Size = New System.Drawing.Size(60, 13)
         Me.lblHarmonics.TabIndex = 19
@@ -263,7 +263,7 @@ Partial Class dlgSeasonalPlot
         '
         Me.ucrNudPeriod.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPeriod.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPeriod.Location = New System.Drawing.Point(176, 45)
+        Me.ucrNudPeriod.Location = New System.Drawing.Point(166, 49)
         Me.ucrNudPeriod.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPeriod.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPeriod.Name = "ucrNudPeriod"
@@ -275,7 +275,7 @@ Partial Class dlgSeasonalPlot
         '
         Me.ucrNudHarmonics.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHarmonics.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHarmonics.Location = New System.Drawing.Point(74, 46)
+        Me.ucrNudHarmonics.Location = New System.Drawing.Point(70, 49)
         Me.ucrNudHarmonics.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudHarmonics.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudHarmonics.Name = "ucrNudHarmonics"
@@ -288,7 +288,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrInputSmoothing.AddQuotesIfUnrecognised = True
         Me.ucrInputSmoothing.GetSetSelectedIndex = -1
         Me.ucrInputSmoothing.IsReadOnly = False
-        Me.ucrInputSmoothing.Location = New System.Drawing.Point(10, 20)
+        Me.ucrInputSmoothing.Location = New System.Drawing.Point(7, 20)
         Me.ucrInputSmoothing.Name = "ucrInputSmoothing"
         Me.ucrInputSmoothing.Size = New System.Drawing.Size(119, 21)
         Me.ucrInputSmoothing.TabIndex = 0
