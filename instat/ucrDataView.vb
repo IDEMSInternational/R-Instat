@@ -857,220 +857,84 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-        If grdData.CurrentWorksheet.SelectionRange.Cols > 1 Then
-            MsgBox("Pasting into cells in different columns is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try pasting into one cell at a time.", MsgBoxStyle.Information, "Cannot paste multiple cells in different columns")
-            Exit Sub
-        End If
-        'paste into selected column on column toolstrip click
-        'get selected column and paste clipboard values to the data grid, starting row position 1
-        PasteFromClipboard(SelectedColumnsAsArray()(0), 1)
+        PasteValuesToDataFrame(SelectedColumnsAsArray(), 1, True)
     End Sub
 
+    ''' <summary>
+    ''' event raised on menu toolstrip click
+    ''' paste data starting from selected cells
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub mnuCellPasteRange_Click(sender As Object, e As EventArgs) Handles mnuCellPasteRange.Click
-        If grdData.CurrentWorksheet.SelectionRange.Cols > 1 Then
-            MsgBox("Pasting into cells in different columns is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try pasting into one cell at a time.", MsgBoxStyle.Information, "Cannot paste multiple cells in different columns")
-            Exit Sub
-        End If
-
-        'paste into selected cell on cell toolstrip click
-        Dim strSelectedColumn As String
+        Dim lstAllCurrentColumns As String()
+        Dim lstSelectedColumnNames As New List(Of String)
         Dim iStartRowPos As Integer
-
-        'get selected column and row position then paste clipboard values
-        strSelectedColumn = lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value(grdData.CurrentWorksheet.SelectionRange.Col)
-        iStartRowPos = Integer.Parse(grdData.CurrentWorksheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text)
-        PasteFromClipboard(strSelectedColumn, iStartRowPos)
-    End Sub
-
-    Private Sub grdCurrSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles grdCurrSheet.AfterPaste
-        If e.Range.Cols > 1 Then
-            MsgBox("Pasting into cells in different columns is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try pasting into one cell at a time.", MsgBoxStyle.Information, "Cannot paste multiple cells in different columns")
-            Exit Sub
-        End If
-        'paste into selected cell on Ctrl + V keys pressed
-        Dim strSelectedColumn As String
-        Dim iStartRowPos As Integer
-
-        'get selected column and row position 
-        strSelectedColumn = lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value(e.Range.Col)
-        iStartRowPos = Integer.Parse(grdData.CurrentWorksheet.RowHeaders.Item(e.Range.Row).Text)
-        PasteFromClipboard(strSelectedColumn, iStartRowPos)
-    End Sub
-
-    ''' <summary>
-    ''' gets text from clipboard and saves it to selected data frame
-    ''' </summary>
-    ''' <param name="strSelectedColumn">selected column to paste data into</param>
-    ''' <param name="iStartRowPos">starting position, to start pasting of values</param>
-    Private Sub PasteFromClipboard(strSelectedColumn As String, iStartRowPos As Integer)
-        Dim strClipBoardText As String = My.Computer.Clipboard.GetText
-        If String.IsNullOrEmpty(strClipBoardText) Then
-            Exit Sub
-        End If
-
-        Dim arrPasteValues As String()
-        Dim lstRowPositions As New List(Of Integer)
-
-        'split the text to be pasted into multiple lines and remove empty entries cause by the return line
-        arrPasteValues = strClipBoardText.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
-
-        'set row positions and trim all the values
-        For index As Integer = 0 To arrPasteValues.Count - 1
-            lstRowPositions.Add(iStartRowPos + index)
-            arrPasteValues(index) = arrPasteValues(index).Trim
+        'get all columns of current selected data frame
+        lstAllCurrentColumns = lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value
+        'get columns selected
+        For colIndex As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.EndCol
+            lstSelectedColumnNames.Add(lstAllCurrentColumns(colIndex))
         Next
-        'replace values for the selected columns
-        ReplaceValuesInDataFrame(strSelectedColumn, lstRowPositions, arrPasteValues)
+
+        'get starting row position then paste clipboard values
+        iStartRowPos = Integer.Parse(grdData.CurrentWorksheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text)
+        PasteValuesToDataFrame(lstSelectedColumnNames, iStartRowPos, False)
     End Sub
 
     ''' <summary>
-    ''' replaces values of the given row positions with the new values in the selected column
+    ''' event raised on Ctr + V
+    ''' paste data starting from selected cells 
     ''' </summary>
-    ''' <param name="strCurrentColumn">selected value to replace values</param>
-    ''' <param name="lstRowPositions">row positions to replace the values</param>
-    ''' <param name="lstNewValues">new values to replace the old values</param>
-    Private Sub ReplaceValuesInDataFrame(strCurrentColumn As String, lstRowPositions As IEnumerable(Of Integer), lstNewValues As IEnumerable(Of String))
-        Dim bValid As Boolean
-        Dim strRowPositions As String
-        Dim strNewValues As String
-        Dim clsGetVariablesMetadata As New RFunction
-        Dim strColDataType As String
-        Dim index As Integer
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub grdCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforePaste
 
-        'get column data type
-        clsGetVariablesMetadata.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_variables_metadata")
-        clsGetVariablesMetadata.AddParameter("data_name", Chr(34) & grdData.CurrentWorksheet.Name & Chr(34))
-        clsGetVariablesMetadata.AddParameter("column", Chr(34) & strCurrentColumn & Chr(34))
-        clsGetVariablesMetadata.AddParameter("property", "data_type_label")
-        strColDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVariablesMetadata.ToScript(), bSilent:=True).AsCharacter(0)
+        Dim lstAllCurrentColumns As String()
+        Dim lstSelectedColumnNames As New List(Of String)
+        Dim iStartRowPos As Integer
+        'get all columns of current selected data frame
+        lstAllCurrentColumns = lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value
+        'get selected columns
+        For colIndex As Integer = e.Range.Col To e.Range.EndCol
+            lstSelectedColumnNames.Add(lstAllCurrentColumns(colIndex))
+        Next
+        'get starting row position then paste clipboard values
+        iStartRowPos = Integer.Parse(grdData.CurrentWorksheet.RowHeaders.Item(e.Range.Row).Text)
+        PasteValuesToDataFrame(lstSelectedColumnNames, iStartRowPos, False)
+        e.IsCancelled = True
+    End Sub
+    Private Sub grdCurrSheet_AfterPaste(sender As Object, e As RangeEventArgs) Handles grdCurrSheet.AfterPaste
 
-        bValid = True
-        strNewValues = ""
-        index = 0
-        'allow pasting of values based on the column data type
-        Select Case strColDataType
-            Case "factor"
-                'if factor, only allow pasting if all values are in the list of factor levels
-                Dim clsGetFactorLevels As New RFunction
-                Dim chrCurrentFactorLevels As CharacterVector
-                clsGetFactorLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
-                clsGetFactorLevels.AddParameter("data_name", Chr(34) & grdData.CurrentWorksheet.Name & Chr(34))
-                clsGetFactorLevels.AddParameter("col_name", Chr(34) & strCurrentColumn & Chr(34))
-                chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevels.ToScript()).AsCharacter
+    End Sub
 
-                For Each str As String In lstNewValues
-                    If Not chrCurrentFactorLevels.Contains(str) Then
-                        MsgBox("Invalid value: '" & str & "'" & Environment.NewLine & "This column is factor. All values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
-                        bValid = False
-                        Exit For
-                    End If
+    ''' <summary>
+    ''' pastes data from clipboard
+    ''' </summary>
+    ''' <param name="lstColumnNames">column names to paste data into</param>
+    ''' <param name="startRowPos">starting row position. This starts at postion 1</param>
+    ''' <param name="firstClipRowHeader">flag indicating whether first row of clipboard data is a header</param>
+    Private Sub PasteValuesToDataFrame(lstColumnNames As IEnumerable(Of String), startRowPos As String, firstClipRowHeader As Boolean)
+        Dim clsPasteValues As New RFunction
+        Dim strColNamesVec As String = ""
+        For i As Integer = 0 To lstColumnNames.Count - 1
+            strColNamesVec = strColNamesVec & Chr(34) & lstColumnNames(i) & Chr(34)
+            If i = lstColumnNames.Count - 1 Then
+                Exit For
+            End If
+            strColNamesVec = strColNamesVec & ", "
+        Next
 
-                    If String.IsNullOrWhiteSpace(str) OrElse str = "NA" Then
-                        strNewValues &= "NA"
-                    Else
-                        strNewValues = strNewValues & Chr(34) & str & Chr(34)
-                    End If
+        'construct R vector command for new row values
+        strColNamesVec = "c(" & strColNamesVec & ")"
 
-                    If index = lstNewValues.Count - 1 Then
-                        Exit For
-                    End If
-                    strNewValues = strNewValues & ", "
-                    index += 1
-                Next
-            Case "numeric"
-                'if numeric, only allow pasting if all values are numeric 
-                Dim dblValue As Double
-                For Each str As String In lstNewValues
-                    If str <> "NA" AndAlso Not Double.TryParse(str, dblValue) Then
-                        MsgBox("Invalid value: '" & str & "'" & Environment.NewLine & "This column is numeric. All values must be numerics.", MsgBoxStyle.Exclamation, "Invalid Value")
-                        bValid = False
-                        Exit For
-                    End If
-
-                    strNewValues = strNewValues & str
-                    If index = lstNewValues.Count - 1 Then
-                        Exit For
-                    End If
-                    strNewValues = strNewValues & ", "
-                    index += 1
-                Next
-            Case "integer"
-                'if integer, only allow pasting if all values are integers
-                Dim iValue As Integer
-                For Each str As String In lstNewValues
-                    If str <> "NA" AndAlso Not Integer.TryParse(str, iValue) Then
-                        MsgBox("Invalid value: '" & str & "'" & Environment.NewLine & "This column is integer. All values must be integers.", MsgBoxStyle.Exclamation, "Invalid Value")
-                        bValid = False
-                        Exit For
-                    End If
-
-                    strNewValues = strNewValues & str
-                    If index = lstNewValues.Count - 1 Then
-                        Exit For
-                    End If
-                    strNewValues &= ", "
-                    index += 1
-                Next
-            Case "logical"
-                'if logical, only allow pasting if all values are logical; TRUE or FALSE
-                Dim bValue As Boolean
-                For Each str As String In lstNewValues
-                    If str <> "NA" AndAlso Not Boolean.TryParse(str, bValue) Then
-                        MsgBox("Invalid value: '" & str & "'" & Environment.NewLine & "This column is logical. All values must be logicals (either TRUE or FALSE).", MsgBoxStyle.Exclamation, "Invalid Value")
-                        bValid = False
-                        Exit For
-                    End If
-
-                    strNewValues = strNewValues & str
-                    If index = lstNewValues.Count - 1 Then
-                        Exit For
-                    End If
-                    strNewValues = strNewValues & ", "
-                    index += 1
-                Next
-            Case "character"
-                'if character, allow all types of values
-                For Each str As String In lstNewValues
-                    If String.IsNullOrWhiteSpace(str) OrElse str = "NA" Then
-                        strNewValues = strNewValues & "NA"
-                    Else
-                        strNewValues = strNewValues & Chr(34) & str & Chr(34)
-                    End If
-
-                    If index = lstNewValues.Count - 1 Then
-                        Exit For
-                    End If
-                    strNewValues = strNewValues & ", "
-                    index += 1
-                Next
-            Case Else
-                bValid = False
-        End Select
-
-        If bValid Then
-            're-initialise the index variable
-            index = 0
-            'construct R vector command for row positions
-            strRowPositions = "c("
-            For Each rowPos As Integer In lstRowPositions
-                strRowPositions = strRowPositions & rowPos
-                If index = lstRowPositions.Count - 1 Then
-                    Exit For
-                End If
-                strRowPositions = strRowPositions & ", "
-                index += 1
-            Next
-            strRowPositions = strRowPositions & ")"
-
-            'construct R vector command for new row values
-            strNewValues = "c(" & strNewValues & ")"
-
-            'add R parameters and run the command
-            clsReplaceValue.AddParameter("col_name", Chr(34) & strCurrentColumn & Chr(34))
-            clsReplaceValue.AddParameter("rows", strRowPositions)
-            clsReplaceValue.AddParameter("new_value", strNewValues)
-            RunScriptFromDataView(clsReplaceValue.ToScript(), strComment:="Replace Value in Data")
-        End If
+        'add R parameters and run the command
+        clsPasteValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$paste_from_clipboard")
+        clsPasteValues.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+        clsPasteValues.AddParameter("col_names", strColNamesVec)
+        clsPasteValues.AddParameter("start_row_pos", startRowPos)
+        clsPasteValues.AddParameter("first_clip_row_is_header", If(firstClipRowHeader, "TRUE", "FALSE"))
+        RunScriptFromDataView(clsPasteValues.ToScript(), strComment:="Paste values in Data")
     End Sub
 
 
