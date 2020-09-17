@@ -35,7 +35,11 @@ Partial Class dlgSeasonalPlot
         Me.ucrChkPoints = New instat.ucrCheck()
         Me.ucrChkMovingAverage = New instat.ucrCheck()
         Me.grpSmoothing = New System.Windows.Forms.GroupBox()
+        Me.ucrNudSpan = New instat.ucrNud()
+        Me.lblSpan = New System.Windows.Forms.Label()
+        Me.lblDf = New System.Windows.Forms.Label()
         Me.lblPeriod = New System.Windows.Forms.Label()
+        Me.ucrNudDf = New instat.ucrNud()
         Me.lblHarmonics = New System.Windows.Forms.Label()
         Me.ucrNudPeriod = New instat.ucrNud()
         Me.ucrNudHarmonics = New instat.ucrNud()
@@ -51,10 +55,6 @@ Partial Class dlgSeasonalPlot
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblReference = New System.Windows.Forms.Label()
         Me.lblEstimate = New System.Windows.Forms.Label()
-        Me.ucrNudSpan = New instat.ucrNud()
-        Me.ucrNudDf = New instat.ucrNud()
-        Me.lblSpan = New System.Windows.Forms.Label()
-        Me.lblDf = New System.Windows.Forms.Label()
         Me.grpValues.SuspendLayout()
         Me.grpSmoothing.SuspendLayout()
         Me.SuspendLayout()
@@ -64,7 +64,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrBase.Location = New System.Drawing.Point(12, 429)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.ucrBase.TabIndex = 19
         '
         'ucrSelectorSeasonalityComparisons
         '
@@ -75,7 +75,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrSelectorSeasonalityComparisons.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorSeasonalityComparisons.Name = "ucrSelectorSeasonalityComparisons"
         Me.ucrSelectorSeasonalityComparisons.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorSeasonalityComparisons.TabIndex = 1
+        Me.ucrSelectorSeasonalityComparisons.TabIndex = 0
         '
         'ucrReceiverReference
         '
@@ -98,7 +98,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 3
+        Me.ucrReceiverStation.TabIndex = 14
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrReceiverSeasonality
@@ -110,7 +110,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrReceiverSeasonality.Selector = Nothing
         Me.ucrReceiverSeasonality.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverSeasonality.strNcFilePath = ""
-        Me.ucrReceiverSeasonality.TabIndex = 4
+        Me.ucrReceiverSeasonality.TabIndex = 12
         Me.ucrReceiverSeasonality.ucrSelector = Nothing
         '
         'ucrReceiverEstimate
@@ -122,7 +122,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrReceiverEstimate.Selector = Nothing
         Me.ucrReceiverEstimate.Size = New System.Drawing.Size(143, 20)
         Me.ucrReceiverEstimate.strNcFilePath = ""
-        Me.ucrReceiverEstimate.TabIndex = 5
+        Me.ucrReceiverEstimate.TabIndex = 7
         Me.ucrReceiverEstimate.ucrSelector = Nothing
         '
         'ucrChkRemoveMissing
@@ -131,7 +131,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrChkRemoveMissing.Location = New System.Drawing.Point(22, 219)
         Me.ucrChkRemoveMissing.Name = "ucrChkRemoveMissing"
         Me.ucrChkRemoveMissing.Size = New System.Drawing.Size(197, 20)
-        Me.ucrChkRemoveMissing.TabIndex = 6
+        Me.ucrChkRemoveMissing.TabIndex = 15
         '
         'grpValues
         '
@@ -142,7 +142,7 @@ Partial Class dlgSeasonalPlot
         Me.grpValues.Location = New System.Drawing.Point(12, 242)
         Me.grpValues.Name = "grpValues"
         Me.grpValues.Size = New System.Drawing.Size(232, 71)
-        Me.grpValues.TabIndex = 7
+        Me.grpValues.TabIndex = 16
         Me.grpValues.TabStop = False
         Me.grpValues.Text = "Values"
         '
@@ -195,9 +195,39 @@ Partial Class dlgSeasonalPlot
         Me.grpSmoothing.Location = New System.Drawing.Point(12, 317)
         Me.grpSmoothing.Name = "grpSmoothing"
         Me.grpSmoothing.Size = New System.Drawing.Size(243, 75)
-        Me.grpSmoothing.TabIndex = 8
+        Me.grpSmoothing.TabIndex = 17
         Me.grpSmoothing.TabStop = False
         Me.grpSmoothing.Text = "Smoothing"
+        '
+        'ucrNudSpan
+        '
+        Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSpan.Location = New System.Drawing.Point(53, 45)
+        Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Name = "ucrNudSpan"
+        Me.ucrNudSpan.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSpan.TabIndex = 20
+        Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSpan
+        '
+        Me.lblSpan.AutoSize = True
+        Me.lblSpan.Location = New System.Drawing.Point(15, 49)
+        Me.lblSpan.Name = "lblSpan"
+        Me.lblSpan.Size = New System.Drawing.Size(35, 13)
+        Me.lblSpan.TabIndex = 23
+        Me.lblSpan.Text = "Span:"
+        '
+        'lblDf
+        '
+        Me.lblDf.AutoSize = True
+        Me.lblDf.Location = New System.Drawing.Point(12, 49)
+        Me.lblDf.Name = "lblDf"
+        Me.lblDf.Size = New System.Drawing.Size(103, 13)
+        Me.lblDf.TabIndex = 24
+        Me.lblDf.Text = "Degrees of freedom:"
         '
         'lblPeriod
         '
@@ -207,6 +237,18 @@ Partial Class dlgSeasonalPlot
         Me.lblPeriod.Size = New System.Drawing.Size(45, 13)
         Me.lblPeriod.TabIndex = 18
         Me.lblPeriod.Text = "Periods:"
+        '
+        'ucrNudDf
+        '
+        Me.ucrNudDf.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDf.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudDf.Location = New System.Drawing.Point(117, 46)
+        Me.ucrNudDf.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDf.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDf.Name = "ucrNudDf"
+        Me.ucrNudDf.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudDf.TabIndex = 21
+        Me.ucrNudDf.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblHarmonics
         '
@@ -257,7 +299,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 29)
-        Me.ucrSaveGraph.TabIndex = 9
+        Me.ucrSaveGraph.TabIndex = 18
         '
         'ucrInputEstimateSummary
         '
@@ -267,7 +309,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrInputEstimateSummary.Location = New System.Drawing.Point(266, 175)
         Me.ucrInputEstimateSummary.Name = "ucrInputEstimateSummary"
         Me.ucrInputEstimateSummary.Size = New System.Drawing.Size(93, 21)
-        Me.ucrInputEstimateSummary.TabIndex = 10
+        Me.ucrInputEstimateSummary.TabIndex = 9
         '
         'ucrInputReferenceSummary
         '
@@ -277,7 +319,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrInputReferenceSummary.Location = New System.Drawing.Point(266, 82)
         Me.ucrInputReferenceSummary.Name = "ucrInputReferenceSummary"
         Me.ucrInputReferenceSummary.Size = New System.Drawing.Size(89, 21)
-        Me.ucrInputReferenceSummary.TabIndex = 11
+        Me.ucrInputReferenceSummary.TabIndex = 4
         '
         'ucrInputReferenceThreshold
         '
@@ -287,7 +329,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrInputReferenceThreshold.Location = New System.Drawing.Point(356, 82)
         Me.ucrInputReferenceThreshold.Name = "ucrInputReferenceThreshold"
         Me.ucrInputReferenceThreshold.Size = New System.Drawing.Size(53, 21)
-        Me.ucrInputReferenceThreshold.TabIndex = 12
+        Me.ucrInputReferenceThreshold.TabIndex = 5
         '
         'ucrInputEstimateThreshold
         '
@@ -297,7 +339,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrInputEstimateThreshold.Location = New System.Drawing.Point(361, 175)
         Me.ucrInputEstimateThreshold.Name = "ucrInputEstimateThreshold"
         Me.ucrInputEstimateThreshold.Size = New System.Drawing.Size(48, 21)
-        Me.ucrInputEstimateThreshold.TabIndex = 13
+        Me.ucrInputEstimateThreshold.TabIndex = 10
         '
         'lblRefSummary
         '
@@ -305,7 +347,7 @@ Partial Class dlgSeasonalPlot
         Me.lblRefSummary.Location = New System.Drawing.Point(266, 66)
         Me.lblRefSummary.Name = "lblRefSummary"
         Me.lblRefSummary.Size = New System.Drawing.Size(53, 13)
-        Me.lblRefSummary.TabIndex = 14
+        Me.lblRefSummary.TabIndex = 3
         Me.lblRefSummary.Text = "Summary:"
         '
         'lblEstSummary
@@ -314,7 +356,7 @@ Partial Class dlgSeasonalPlot
         Me.lblEstSummary.Location = New System.Drawing.Point(266, 159)
         Me.lblEstSummary.Name = "lblEstSummary"
         Me.lblEstSummary.Size = New System.Drawing.Size(53, 13)
-        Me.lblEstSummary.TabIndex = 15
+        Me.lblEstSummary.TabIndex = 8
         Me.lblEstSummary.Text = "Summary:"
         '
         'lblSeasonality
@@ -323,7 +365,7 @@ Partial Class dlgSeasonalPlot
         Me.lblSeasonality.Location = New System.Drawing.Point(266, 206)
         Me.lblSeasonality.Name = "lblSeasonality"
         Me.lblSeasonality.Size = New System.Drawing.Size(64, 13)
-        Me.lblSeasonality.TabIndex = 16
+        Me.lblSeasonality.TabIndex = 11
         Me.lblSeasonality.Text = "Seasonality:"
         '
         'lblStation
@@ -332,7 +374,7 @@ Partial Class dlgSeasonalPlot
         Me.lblStation.Location = New System.Drawing.Point(266, 252)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 17
+        Me.lblStation.TabIndex = 13
         Me.lblStation.Text = "Station:"
         '
         'lblReference
@@ -341,7 +383,7 @@ Partial Class dlgSeasonalPlot
         Me.lblReference.Location = New System.Drawing.Point(266, 20)
         Me.lblReference.Name = "lblReference"
         Me.lblReference.Size = New System.Drawing.Size(60, 13)
-        Me.lblReference.TabIndex = 20
+        Me.lblReference.TabIndex = 1
         Me.lblReference.Text = "Reference:"
         '
         'lblEstimate
@@ -350,50 +392,8 @@ Partial Class dlgSeasonalPlot
         Me.lblEstimate.Location = New System.Drawing.Point(266, 113)
         Me.lblEstimate.Name = "lblEstimate"
         Me.lblEstimate.Size = New System.Drawing.Size(50, 13)
-        Me.lblEstimate.TabIndex = 22
+        Me.lblEstimate.TabIndex = 6
         Me.lblEstimate.Text = "Estimate:"
-        '
-        'ucrNudSpan
-        '
-        Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSpan.Location = New System.Drawing.Point(53, 45)
-        Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSpan.Name = "ucrNudSpan"
-        Me.ucrNudSpan.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSpan.TabIndex = 20
-        Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudDf
-        '
-        Me.ucrNudDf.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDf.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDf.Location = New System.Drawing.Point(117, 46)
-        Me.ucrNudDf.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDf.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDf.Name = "ucrNudDf"
-        Me.ucrNudDf.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudDf.TabIndex = 21
-        Me.ucrNudDf.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblSpan
-        '
-        Me.lblSpan.AutoSize = True
-        Me.lblSpan.Location = New System.Drawing.Point(15, 49)
-        Me.lblSpan.Name = "lblSpan"
-        Me.lblSpan.Size = New System.Drawing.Size(35, 13)
-        Me.lblSpan.TabIndex = 23
-        Me.lblSpan.Text = "Span:"
-        '
-        'lblDf
-        '
-        Me.lblDf.AutoSize = True
-        Me.lblDf.Location = New System.Drawing.Point(12, 49)
-        Me.lblDf.Name = "lblDf"
-        Me.lblDf.Size = New System.Drawing.Size(103, 13)
-        Me.lblDf.TabIndex = 24
-        Me.lblDf.Text = "Degrees of freedom:"
         '
         'dlgSeasonalPlot
         '
