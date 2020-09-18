@@ -2088,58 +2088,136 @@ DataBook$set("public","package_check", function(package) {
 }
 )
 
-DataBook$set("public", "download_from_IRI", function(source, data, path = tempdir(), min_lon, max_lon, min_lat, max_lat, min_date, max_date, name, download_type = "Point", import = TRUE){
+DataBook$set("public", "download_from_IRI", function(source, data, path = tempdir(), min_lon, max_lon, min_lat, max_lat, min_date, max_date, name, download_type = "Point", import = TRUE) {
   init_URL <- "https://iridl.ldeo.columbia.edu/SOURCES/"
-  if(source == "UCSB_CHIRPS"){prexyaddress <- paste0(init_URL, ".UCSB/.CHIRPS/.v2p0")
-   if(data == "daily_improved_global_0p25_prcp") {extension <- ".daily-improved/.global/.0p25/.prcp"}#1 Jan 1981 to 31 Jul 2020
-    else if(data == "daily_improved_global_0p05_prcp") {extension <- ".daily-improved/.global/.0p05/.prcp"}#1 Jan 1981 to 31 Jul 2020
-    else if(data == "dekad_prcp") {extension <- ".dekad/.prcp"}#(days since 1960-01-01) ordered [ (1-10 Jan 1981) (11-20 Jan 1981) (21-31 Jan 1981) ... (21-31 Aug 2020)] 
-    else if(data == "monthly_global_prcp") {extension <- ".monthly/.global/.precipitation"}#grid: /T (months since 1960-01-01) ordered (Jan 1981) to (Jul 2020) by 1.0 N= 475 pts :grid
-    else stop("Data file does not exist for CHIRPS V2P0 data")
-  }else if(source == "TAMSAT") {prexyaddress <-paste0(init_URL, ".Reading/.Meteorology/.TAMSAT/.TARCAT/.v3p1")
-   if(data == "daily_rfe") {extension <- ".daily/.rfe"}#grid: /T (julian_day) ordered (1 Jan 1983) to (10 Sep 2020) by 1.0 N= 13768 pts :grid 
-    else if(data == "daily_rfe_filled") {extension <- ".daily/.rfe_filled/"}#grid: /T (julian_day) ordered (1 Jan 1983) to (10 Sep 2020) by 1.0 N= 13768 pts :grid 
-    else if(data == "dekadal_rfe") {extension <- ".dekadal/.rfe/"}#grid: /T (days since 1960-01-01) ordered [ (1-10 Jan 1983) (11-20 Jan 1983) (21-31 Jan 1983) ... (1-10 Sep 2020)] N= 1357 pts :grid
-    else if(data == "dekadal_rfe_filled") {extension <- ".dekadal/.rfe_filled/"}#grid: /T (days since 1960-01-01) ordered [ (1-10 Jan 1983) (11-20 Jan 1983) (21-31 Jan 1983) ... (1-10 Sep 2020)] N= 1357 pts :grid
-    else if(data == "monthly_rfe") {extension <- ".monthly/.rfe/"}#grid: /T (months since 1960-01-01) ordered (Jan 1983) to (Aug 2020) by 1.0 N= 452 pts :grid
-    else if(data == "monthly_rfe_filled") {extension <- ".monthly/.rfe_filled/"}#grid: /T (months since 1960-01-01) ordered (Jan 1983) to (Aug 2020) by 1.0 N= 452 pts :grid
-    else stop("Data file does not exist for TAMSAT data")
-  }else if(source == "NOAA_ARC2") {prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.ARC2")
-   if(data == "daily_est_prcp") {extension <- ".daily/.est_prcp"}#(days since 1960-01-01 12:00:00) ordered (1 Jan 1983) to (12 Sep 2020)
-    else if(data == "monthly_est_prcp") {extension <- ".monthly/.est_prcp"}#(months since 1960-01-01) ordered (Jan 1983) to (Aug 2020)
-    else stop("Data file does not exist for NOAA ARC2 data")
-  }else if(source=="NOAA") {prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.FEWS/.Africa")
-      if(data == "daily_rfev2_est_prcp"){extension <- ".DAILY/.RFEv2/.est_prcp"}#(days since 2000-10-31 12:00:00) ordered (31 Oct 2000) to (12 Sep 2020)
-      else if(data == "10day_rfev2_est_prcp"){extension <- ".TEN-DAY/.RFEv2/.est_prcp"}#grid: /T (days since 1960-01-01) ordered [ (1-10 Dec 1999) (11-20 Dec 1999) (21-31 Dec 1999) ... (1-10 Sep 2020)] N= 748 pts :grid
-      else stop("Data file does not exist for NOAA RFE2 data")
-  }else if(source=="NOAA_CMORPH_DAILY" || source=="NOAA_CMORPH_3HOURLY" || source=="NOAA_CMORPH_DAILY_CALCULATED") {
-    if(source=="NOAA_CMORPH_DAILY") {prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.CMORPH/.daily")}
-      else if(source == "NOAA_CMORPH_3HOURLY") {prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.CMORPH/.3-hourly")}
-      else if(source == "NOAA_CMORPH_DAILY_CALCULATED") {prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.CMORPH/.daily_calculated")}
-      if(data == "mean_microwave_only_est_prcp") {extension <- ".mean/.microwave-only/.comb"}
-      else if(data == "mean_morphed_est_prcp") {extension <- ".mean/.morphed/.cmorph"}
-      else if(data == "orignames_mean_microwave_only_est_prcp") {extension <- ".orignames/.mean/.microwave-only/.comb"}
-      else if(data == "orignames_mean_morphed_est_prcp") {extension <- ".orignames/.mean/.morphed/.cmorph"}
-      else if(data == "renamed102015_mean_microwave_only_est_prcp") {extension <- ".renamed102015/.mean/.microwave-only/.comb"}
-      else if(data == "renamed102015_mean_morphed_est_prcp") {extension <- ".renamed102015/.mean/.morphed/.cmorph"}
-      else stop("Data file does not exist for NOAA CMORPH data")
-     }else if(source=="NASA") {prexyaddress <- paste0(init_URL, ".NASA/.GES-DAAC/.TRMM_L3/.TRMM_3B42/.v7")
-  if(data == "daily_prcp") {extension <- ".daily/.precipitation"}#(days since 1998-01-01 00:00:00) ordered (1 Jan 1998) to (31 May 2015)
-      else if(data == "3_hourly_prcp") {extension <- ".three-hourly/.precipitation"}#(days since 1998-01-01 00:00:00) ordered (2230 31 Dec 1997 - 0130 1 Jan 1998) to (2230 30 May 2015 - 0130 31 May 2015) 
-      else stop("Data file does not exist for NASA TRMM 3B42 data")
-  }else{stop("Source not specified correctly.")}
-  prexyaddress <- paste(prexyaddress, extension, sep="/")
-  if(download_type == "Area"){URL <- add_xy_area_range(path = prexyaddress, min_lon = min_lon, min_lat = min_lat, max_lon = max_lon, max_lat = max_lat)}
-    else if(download_type == "Point"){URL <- add_xy_point_range(path = prexyaddress, min_lon = min_lon, min_lat = min_lat)}
-  if(!missing(min_date)&!missing(max_date)){URL <- URL %>% add_t_range(min_date = min_date, max_date = max_date)}
-  URL <- URL %>%  add_nc()
+  if (source == "UCSB_CHIRPS") {
+    prexyaddress <- paste0(init_URL, ".UCSB/.CHIRPS/.v2p0")
+    if (data == "daily_improved_global_0p25_prcp") {
+      extension <- ".daily-improved/.global/.0p25/.prcp"
+    } # 1 Jan 1981 to 31 Jul 2020
+    else if (data == "daily_improved_global_0p05_prcp") {
+      extension <- ".daily-improved/.global/.0p05/.prcp"
+    } # 1 Jan 1981 to 31 Jul 2020
+    else if (data == "dekad_prcp") {
+      extension <- ".dekad/.prcp"
+    } # (days since 1960-01-01) ordered [ (1-10 Jan 1981) (11-20 Jan 1981) (21-31 Jan 1981) ... (21-31 Aug 2020)]
+    else if (data == "monthly_global_prcp") {
+      extension <- ".monthly/.global/.precipitation"
+    } # grid: /T (months since 1960-01-01) ordered (Jan 1981) to (Jul 2020) by 1.0 N= 475 pts :grid
+    else {
+      stop("Data file does not exist for CHIRPS V2P0 data")
+    }
+  } else if (source == "TAMSAT") {
+    prexyaddress <- paste0(init_URL, ".Reading/.Meteorology/.TAMSAT/.TARCAT/.v3p1")
+    if (data == "daily_rfe") {
+      extension <- ".daily/.rfe"
+    } # grid: /T (julian_day) ordered (1 Jan 1983) to (10 Sep 2020) by 1.0 N= 13768 pts :grid
+    else if (data == "daily_rfe_filled") {
+      extension <- ".daily/.rfe_filled/"
+    } # grid: /T (julian_day) ordered (1 Jan 1983) to (10 Sep 2020) by 1.0 N= 13768 pts :grid
+    else if (data == "dekadal_rfe") {
+      extension <- ".dekadal/.rfe/"
+    } # grid: /T (days since 1960-01-01) ordered [ (1-10 Jan 1983) (11-20 Jan 1983) (21-31 Jan 1983) ... (1-10 Sep 2020)] N= 1357 pts :grid
+    else if (data == "dekadal_rfe_filled") {
+      extension <- ".dekadal/.rfe_filled/"
+    } # grid: /T (days since 1960-01-01) ordered [ (1-10 Jan 1983) (11-20 Jan 1983) (21-31 Jan 1983) ... (1-10 Sep 2020)] N= 1357 pts :grid
+    else if (data == "monthly_rfe") {
+      extension <- ".monthly/.rfe/"
+    } # grid: /T (months since 1960-01-01) ordered (Jan 1983) to (Aug 2020) by 1.0 N= 452 pts :grid
+    else if (data == "monthly_rfe_filled") {
+      extension <- ".monthly/.rfe_filled/"
+    } # grid: /T (months since 1960-01-01) ordered (Jan 1983) to (Aug 2020) by 1.0 N= 452 pts :grid
+    else {
+      stop("Data file does not exist for TAMSAT data")
+    }
+  } else if (source == "NOAA_ARC2") {
+    prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.ARC2")
+    if (data == "daily_est_prcp") {
+      extension <- ".daily/.est_prcp"
+    } # (days since 1960-01-01 12:00:00) ordered (1 Jan 1983) to (12 Sep 2020)
+    else if (data == "monthly_est_prcp") {
+      extension <- ".monthly/.est_prcp"
+    } # (months since 1960-01-01) ordered (Jan 1983) to (Aug 2020)
+    else {
+      stop("Data file does not exist for NOAA ARC2 data")
+    }
+  } else if (source == "NOAA") {
+    prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.FEWS/.Africa")
+    if (data == "daily_rfev2_est_prcp") {
+      extension <- ".DAILY/.RFEv2/.est_prcp"
+    } # (days since 2000-10-31 12:00:00) ordered (31 Oct 2000) to (12 Sep 2020)
+    else if (data == "10day_rfev2_est_prcp") {
+      extension <- ".TEN-DAY/.RFEv2/.est_prcp"
+    } # grid: /T (days since 1960-01-01) ordered [ (1-10 Dec 1999) (11-20 Dec 1999) (21-31 Dec 1999) ... (1-10 Sep 2020)] N= 748 pts :grid
+    else {
+      stop("Data file does not exist for NOAA RFE2 data")
+    }
+  } else if (source == "NOAA_CMORPH_DAILY" || source == "NOAA_CMORPH_3HOURLY" || source == "NOAA_CMORPH_DAILY_CALCULATED") {
+    if (source == "NOAA_CMORPH_DAILY") {
+      prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.CMORPH/.daily")
+    }
+    else if (source == "NOAA_CMORPH_3HOURLY") {
+      prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.CMORPH/.3-hourly")
+    }
+    else if (source == "NOAA_CMORPH_DAILY_CALCULATED") {
+      prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.CMORPH/.daily_calculated")
+    }
+    if (data == "mean_microwave_only_est_prcp") {
+      extension <- ".mean/.microwave-only/.comb"
+    }
+    else if (data == "mean_morphed_est_prcp") {
+      extension <- ".mean/.morphed/.cmorph"
+    }
+    else if (data == "orignames_mean_microwave_only_est_prcp") {
+      extension <- ".orignames/.mean/.microwave-only/.comb"
+    }
+    else if (data == "orignames_mean_morphed_est_prcp") {
+      extension <- ".orignames/.mean/.morphed/.cmorph"
+    }
+    else if (data == "renamed102015_mean_microwave_only_est_prcp") {
+      extension <- ".renamed102015/.mean/.microwave-only/.comb"
+    }
+    else if (data == "renamed102015_mean_morphed_est_prcp") {
+      extension <- ".renamed102015/.mean/.morphed/.cmorph"
+    }
+    else {
+      stop("Data file does not exist for NOAA CMORPH data")
+    }
+  } else if (source == "NASA") {
+    prexyaddress <- paste0(init_URL, ".NASA/.GES-DAAC/.TRMM_L3/.TRMM_3B42/.v7")
+    if (data == "daily_prcp") {
+      extension <- ".daily/.precipitation"
+    } # (days since 1998-01-01 00:00:00) ordered (1 Jan 1998) to (31 May 2015)
+    else if (data == "3_hourly_prcp") {
+      extension <- ".three-hourly/.precipitation"
+    } # (days since 1998-01-01 00:00:00) ordered (2230 31 Dec 1997 - 0130 1 Jan 1998) to (2230 30 May 2015 - 0130 31 May 2015)
+    else {
+      stop("Data file does not exist for NASA TRMM 3B42 data")
+    }
+  } else {
+    stop("Source not specified correctly.")
+  }
+  prexyaddress <- paste(prexyaddress, extension, sep = "/")
+  if (download_type == "Area") {
+    URL <- add_xy_area_range(path = prexyaddress, min_lon = min_lon, min_lat = min_lat, max_lon = max_lon, max_lat = max_lat)
+  }
+  else if (download_type == "Point") {
+    URL <- add_xy_point_range(path = prexyaddress, min_lon = min_lon, min_lat = min_lat)
+  }
+  if (!missing(min_date) & !missing(max_date)) {
+    URL <- URL %>% add_t_range(min_date = min_date, max_date = max_date)
+  }
+  URL <- URL %>% add_nc()
   file_name <- tempfile(pattern = tolower(source), tmpdir = path, fileext = ".nc")
-  result <- download.file(url = URL, destfile =  file_name, method = "libcurl", mode = "wb", cacheOK = FALSE)
-  if(import && result == 0) {
+  result <- download.file(url = URL, destfile = file_name, method = "libcurl", mode = "wb", cacheOK = FALSE)
+  if (import && result == 0) {
     nc <- ncdf4::nc_open(filename = file_name)
     self$import_NetCDF(nc = nc, name = name)
-    ncdf4::nc_close(nc=nc)
-  }else if(result != 0){stop("No file downloaded please check your internet connection")}
-  if(missing(path)) {file.remove(file_name)}
-}
-)
+    ncdf4::nc_close(nc = nc)
+  } else if (result != 0) {
+    stop("No file downloaded please check your internet connection")
+  }
+  if (missing(path)) {
+    file.remove(file_name)
+  }
+})
