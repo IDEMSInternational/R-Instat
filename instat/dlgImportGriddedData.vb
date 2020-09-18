@@ -157,8 +157,8 @@ Public Class dlgImportGriddedData
         Select Case ucrInputSource.GetText
             Case "NASA"
                 dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("TRMM 3B42 3-Hourly Precipitation", Chr(34) & "daily_prcp" & Chr(34))
-                dctFiles.Add("TRMM 3B42 Daily Precipitation", Chr(34) & "3_hourly_prcp" & Chr(34))
+                dctFiles.Add("TRMM 3B42 3-Hourly Precipitation", Chr(34) & "3_hourly_prcp" & Chr(34))
+                dctFiles.Add("TRMM 3B42 Daily Precipitation", Chr(34) & "daily_prcp" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "TRMM 3B42 3-Hourly Precipitation"
                 ucrDtpMinDate.MinDate = New Date(1998, 1, 1)
@@ -194,7 +194,7 @@ Public Class dlgImportGriddedData
                 ucrDtpMinDate.MinDate = New Date(1981, 1, 1)
                 ucrDtpMaxDate.MinDate = New Date(1981, 1, 1)
         End Select
-        ucrInputNewDataFrameName.SetPrefix(ucrInputSource.GetText.ToLower)
+        ucrInputNewDataFrameName.SetName(ucrInputSource.GetText.ToLower)
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
