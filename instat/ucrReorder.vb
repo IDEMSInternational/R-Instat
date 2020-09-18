@@ -60,7 +60,7 @@ Public Class ucrReorder
     End Sub
 
     ''' <summary>
-    ''' reorders the items in the listview based on the direction option given
+    ''' reorders the items in the listview based on the direction option given and raises reorder event
     ''' opted to use string parameter because the sub is used inside this class only and by 4 events
     ''' </summary>
     ''' <param name="strDirection">direction, allowed values; top,up,down,bottom.</param>
@@ -116,7 +116,6 @@ Public Class ucrReorder
         lstAvailableData.Select()
         'scroll to the selected items if necessary
         dctSelectedItems.Values.LastOrDefault().EnsureVisible()
-        'selectedListViewItem.EnsureVisible()
         'notify order changed
         RaiseEvent OrderChanged()
     End Sub
