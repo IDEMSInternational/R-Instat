@@ -184,7 +184,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   # sub_calculations are independant of each other (the order does not affect the output)
   if(!missing(curr_data_list)) {
     sub_calc_results <- curr_data_list
-    curr_groups <- groups(curr_data_list[[c_data_label]])
+    curr_groups <- dplyr::group_vars(curr_data_list[[c_data_label]])
   }
   else curr_groups <- c()
   first_sub_calc <- TRUE
@@ -351,10 +351,18 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   
   #TODO investigate better way to do this
   #     Any case where we don't want this?
+
+  #class(curr_groups)
+
+ # if (!is.null(curr_groups)) {
+ #  curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by(dplyr::across({{ curr_groups }}), add = TRUE)
+ #  }
+
   for(var in curr_groups) {
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by_(var, add = TRUE)
-  }
-  
+ curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by_(var, add = TRUE)
+#  curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by(dplyr::across({{ var }}), add = TRUE)
+}
+
 
   # Names of the data frames required for the calculation
   data_names <- unique(as.vector(names(calc$calculated_from)))
@@ -431,11 +439,14 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
       }
       if(join_into_overall) curr_data_list[[c_data_label]] <- dplyr::full_join(curr_data_list[[c_data_label]], self$get_data_frame(data_frame_name, use_current_filter = FALSE), by = by)
       else {
-        curr_groups <- dplyr::groups(curr_data_list[[c_data_label]])
+        curr_groups <- dplyr::group_vars(curr_data_list[[c_data_label]])
         curr_data_list[[c_data_label]] <- dplyr::full_join(self$get_data_frame(data_frame_name, use_current_filter = FALSE), curr_data_list[[c_data_label]], by = by)
         #TODO investigate better way to do this
         #     Any case where we don't want this?
-        for(var in curr_groups) {
+
+       # todo: change groups to be group_vars for this one a few lines above.
+       #  curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(dplyr::across({{ curr_groups }}), add = TRUE)
+       for(var in curr_groups) {
           curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by_(var, add = TRUE)
         }
         # The overall data is joined into the current sub calc, so the curr_data_list is "reset" to default values
@@ -449,6 +460,8 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
     i = i + 1
   }
   
+  calc_from_names <- as.character(calc$calculated_from)
+
   # this type is adding a column to the data
   # the data is at the same "level" so the link is unchanged
   if(calc$type == "calculation") {
@@ -460,25 +473,35 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   # A merge is now required because the data is at a different "level"
   else if(calc$type == "summary") {
     curr_data_list[[c_link_label]][["link_cols"]] <- as.character(dplyr::groups(curr_data_list[[c_data_label]]))
+    # TODO: change to group_vars??
+
+    #print(calc$function_exp)
+    
     curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+    #curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise(.dots = setNames(across({{ calc$function_exp }}, calc$result_name))
+
     curr_data_list[[c_has_summary_label]] <- TRUE
   }
   # This type is grouping the data
   # The data remains unchanged so link and require merge remain unchanged
   else if(calc$type == "by") {
     # link unchanged
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by_(.dots = col_names_exp, add = TRUE)
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(dplyr::across({{ calc_from_names }}), add = TRUE)
   }
   # This type is sorting the data
   # The rows are now in a different order so a merge is required
   else if(calc$type == "sort") {
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::arrange_(.dots = col_names_exp)
-    curr_data_list[[c_has_filter_label]] <- TRUE
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::arrange(dplyr::across({{ calc_from_names }}))
+  curr_data_list[[c_has_filter_label]] <- TRUE
   }
   # This type is filtering the data
   # The data is at the same "level" so the link is unchanged
   # The rows are now different so a merge is required
   else if(calc$type == "filter") {
+
+#  print(calc$function_exp)
+#  print(as.formula(paste0("~", calc$function_exp)))
+
     curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::filter_(.dots = as.formula(paste0("~", calc$function_exp)))
     curr_data_list[[c_has_filter_label]] <- TRUE
   }
