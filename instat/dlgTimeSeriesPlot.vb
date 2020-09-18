@@ -48,17 +48,46 @@ Public Class dlgTimeSeriesPlot
     Private clsMeanFunction As RFunction
 
     ' Calculate Text Summaries
+    Private clsSummaryOperator As ROperator
+    Private clsSummaryGroupBy As RFunction
+    Private clsSummarise As RFunction
+    Private clsN As RFunction
+    Private clsCor As RFunction
+    Private clsMe As RFunction
+    Private clsMae As RFunction
+    Private clsRmse As RFunction
+    Private clsPbias As RFunction
+    Private clsRSd As RFunction
+    Private clsKge As RFunction
+    Private clsPasteN As RFunction
+    Private clsPasteCor As RFunction
+    Private clsPasteMe As RFunction
+    Private clsPasteMae As RFunction
+    Private clsPasteRmse As RFunction
+    Private clsPastePbias As RFunction
+    Private clsPasteRSd As RFunction
+    Private clsPasteKge As RFunction
+    Private clsRoundCor As RFunction
+    Private clsSignifMe As RFunction
+    Private clsSignifMae As RFunction
+    Private clsSignifRmse As RFunction
+    Private clsRoundPbias As RFunction
+    Private clsRoundRSd As RFunction
+    Private clsRoundKge As RFunction
 
     ' ggplot functions
     Private clsGgplotOperator As ROperator
     Private clsGgplotFunction As RFunction
     Private clsGgplotAes As RFunction
     Private clsGeomLine As RFunction
+    Private clsGeomPointParameter As RParameter
     Private clsGeomPoint As RFunction
+    Private clsGeomHLineParameter As RParameter
     Private clsGeomHLine As RFunction
     Private clsGeomHLineAes As RFunction
     Private clsGeomText As RFunction
     Private clsGeomTextAes As RFunction
+    Private clsPasteLabel As RFunction
 
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
@@ -103,32 +132,44 @@ Public Class dlgTimeSeriesPlot
         ucrReceiverReference.Selector = ucrSelectorTimeSeriesPlots
         ucrReceiverReference.SetParameterIsString()
         ucrReceiverReference.bWithQuotes = False
+        ucrReceiverReference.SetDataType("numeric")
 
         ucrReceiverEstimates.SetParameter(New RParameter("x", 0))
         ucrReceiverEstimates.Selector = ucrSelectorTimeSeriesPlots
         ucrReceiverEstimates.SetParameterIsString()
         ucrReceiverEstimates.bWithQuotes = False
+        ucrReceiverEstimates.SetDataType("numeric")
 
         ucrReceiverTime.SetParameter(New RParameter("x", 0))
         ucrReceiverTime.Selector = ucrSelectorTimeSeriesPlots
         ucrReceiverTime.SetParameterIsString()
         ucrReceiverTime.bWithQuotes = False
+        ucrReceiverTime.SetClimaticType("year")
+        ucrReceiverTime.bAutoFill = True
 
         ucrReceiverStation.SetParameter(New RParameter("0", 0, bNewIncludeArgumentName:=False))
         ucrReceiverStation.Selector = ucrSelectorTimeSeriesPlots
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.bWithQuotes = False
+        ucrReceiverStation.SetDataType("factor")
+        ucrReceiverStation.SetClimaticType("station")
+        ucrReceiverStation.bAutoFill = True
 
         clsAdjustNAMutate = New RFunction
         clsAdjustNAMutateParameter = New RParameter("1", clsAdjustNAMutate, iNewPosition:=1)
         ucrChkNAValues.SetText("Remove rows with any missing values")
         ucrChkNAValues.SetParameter(clsAdjustNAMutateParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
+        clsGeomPoint = New RFunction
+        clsGeomPointParameter = New RParameter(strGeomPointParameterName, clsGeomPoint, iNewPosition:=2)
         ucrChkIncludePoints.SetText("Include Points")
-        ucrChkIncludePoints.Enabled = False
+        ucrChkIncludePoints.SetParameter(clsGeomPointParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
+        clsGeomHLine = New RFunction
+        clsGeomHLineAes = New RFunction
+        clsGeomHLineParameter = New RParameter(strGeomHLineParameterName, clsGeomHLine, iNewPosition:=3)
         ucrChkIncludeMeanLines.SetText("Include Mean Lines")
-        ucrChkIncludeMeanLines.Enabled = False
+        ucrChkIncludeMeanLines.SetParameter(clsGeomHLineParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrSavePlot.SetPrefix("line")
         ucrSavePlot.SetIsComboBox()
@@ -154,19 +195,46 @@ Public Class dlgTimeSeriesPlot
         clsMeansSummarise = New RFunction
         clsMeanFunction = New RFunction
 
+        clsSummaryGroupBy = New RFunction
+        clsSummarise = New RFunction
+        clsN = New RFunction
+        clsCor = New RFunction
+        clsMe = New RFunction
+        clsMae = New RFunction
+        clsRmse = New RFunction
+        clsPbias = New RFunction
+        clsRSd = New RFunction
+        clsKge = New RFunction
+        clsPasteN = New RFunction
+        clsPasteCor = New RFunction
+        clsPasteMe = New RFunction
+        clsPasteMae = New RFunction
+        clsPasteRmse = New RFunction
+        clsPastePbias = New RFunction
+        clsPasteRSd = New RFunction
+        clsPasteKge = New RFunction
+        clsRoundCor = New RFunction
+        clsSignifMe = New RFunction
+        clsSignifMae = New RFunction
+        clsSignifRmse = New RFunction
+        clsRoundPbias = New RFunction
+        clsRoundRSd = New RFunction
+        clsRoundKge = New RFunction
+
         clsGgplotOperator = New ROperator
         clsGgplotFunction = New RFunction
         clsGgplotAes = New RFunction
         clsGeomLine = New RFunction
-        clsGeomPoint = New RFunction
-        clsGeomHLine = New RFunction
-        clsGeomHLineAes = New RFunction
+        clsGeomPoint.Clear()
+        clsGeomHLine.Clear()
+        clsGeomHLineAes.Clear()
         clsGeomText = New RFunction
         clsGeomTextAes = New RFunction
+        clsPasteLabel = New RFunction
 
         ucrSelectorTimeSeriesPlots.Reset()
         ucrSelectorTimeSeriesPlots.SetGgplotFunction(clsGgplotOperator)
-
+        ucrSavePlot.Reset()
         ucrReceiverReference.SetMeAsReceiver()
 
         ' Adjust NA values
@@ -224,12 +292,46 @@ Public Class dlgTimeSeriesPlot
         clsMeanFunction.AddParameter("x", strValue, iPosition:=0)
         clsMeanFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
 
+        ' Calculate summaries
+        clsSummaryOperator.SetOperation("%>%")
+        clsSummaryOperator.AddParameter("2", clsRFunctionParameter:=clsSummarise, iPosition:=2)
+
+        clsSummaryGroupBy.SetPackageName("dplyr")
+        clsSummaryGroupBy.SetRCommand("group_by")
+
+        clsSummarise.SetPackageName("dplyr")
+        clsSummarise.SetRCommand("summarise")
+
+        clsN.SetPackageName("dplyr")
+        clsN.SetRCommand("n")
+
+        clsCor.SetRCommand("cor")
+        clsCor.AddParameter("use", Chr(34) & "na.or.complete")
+
+        clsMe.SetPackageName("hydroGOF")
+        clsMe.SetRCommand("me")
+
+        clsMae.SetPackageName("hydroGOF")
+        clsMae.SetRCommand("mae")
+
+        clsRmse.SetPackageName("hydroGOF")
+        clsRmse.SetRCommand("rmse")
+
+        clsPbias.SetPackageName("hydroGOF")
+        clsPbias.SetRCommand("pbias")
+
+        clsRSd.SetPackageName("hydroGOF")
+        clsRSd.SetRCommand("rSD")
+
+        clsKge.SetPackageName("hydroGOF")
+        clsKge.SetRCommand("KGE")
+
         ' Ggplot functions
 
         clsGgplotOperator.SetOperation("+")
         clsGgplotOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, iPosition:=0)
         clsGgplotOperator.AddParameter(strGeomLineParameterName, clsRFunctionParameter:=clsGeomLine, iPosition:=1)
-        clsGgplotOperator.AddParameter(strGeomPointParameterName, clsRFunctionParameter:=clsGeomPoint, iPosition:=2)
+        clsGgplotOperator.AddParameter(clsGeomPointParameter)
         clsGgplotOperator.AddParameter(strGeomHLineParameterName, clsRFunctionParameter:=clsGeomHLine, iPosition:=3)
 
         clsGgplotFunction.SetPackageName("ggplot2")
@@ -260,8 +362,75 @@ Public Class dlgTimeSeriesPlot
 
         clsGeomText.SetPackageName("ggplot2")
         clsGeomText.SetRCommand("geom_text")
-        'clsGeomText.AddParameter("data", clsROperatorParameter:=, iPosition:=0)
+        clsGeomText.AddParameter("data", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
         clsGeomText.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextAes, iPosition:=1)
+        clsGeomText.AddParameter("inherit.aes", "FALSE", iPosition:=10)
+
+        clsGeomTextAes.SetPackageName("ggplot2")
+        clsGeomTextAes.SetRCommand("aes")
+        clsGeomTextAes.AddParameter("label", clsRFunctionParameter:=clsPasteLabel, iPosition:=0)
+
+        clsPasteLabel.SetRCommand("paste")
+
+        clsPasteN.SetRCommand("paste")
+        clsPasteN.AddParameter("0", Chr(34) & "n" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsPasteN.AddParameter("1", clsRFunctionParameter:=clsN, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsPasteCor.SetRCommand("paste")
+        clsPasteCor.AddParameter("0", Chr(34) & "cor" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsPasteCor.AddParameter("1", clsRFunctionParameter:=clsRoundCor, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsRoundCor.SetRCommand("round")
+        clsRoundCor.AddParameter("x", "cor", iPosition:=0)
+        clsRoundCor.AddParameter("digits", "2", iPosition:=1)
+
+        clsPasteMe.SetRCommand("paste")
+        clsPasteMe.AddParameter("0", Chr(34) & "me" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsPasteMe.AddParameter("1", clsRFunctionParameter:=clsSignifMe, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsSignifMe.SetRCommand("signif")
+        clsSignifMe.AddParameter("x", "me", iPosition:=0)
+        clsSignifMe.AddParameter("digits", "2", iPosition:=1)
+
+        clsPasteMae.SetRCommand("paste")
+        clsPasteMae.AddParameter("0", Chr(34) & "mae" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsPasteMae.AddParameter("1", clsRFunctionParameter:=clsSignifMae, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsSignifMae.SetRCommand("signif")
+        clsSignifMae.AddParameter("x", "mae", iPosition:=0)
+        clsSignifMae.AddParameter("digits", "2", iPosition:=1)
+
+        clsPasteRmse.SetRCommand("paste")
+        clsPasteRmse.AddParameter("0", Chr(34) & "rmse" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsPasteRmse.AddParameter("1", clsRFunctionParameter:=clsSignifRmse, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsSignifRmse.SetRCommand("signif")
+        clsSignifRmse.AddParameter("x", "rmse", iPosition:=0)
+        clsSignifRmse.AddParameter("digits", "2", iPosition:=1)
+
+        clsPastePbias.SetRCommand("paste")
+        clsPastePbias.AddParameter("0", Chr(34) & "%bias" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsPastePbias.AddParameter("1", clsRFunctionParameter:=clsRoundPbias, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsRoundPbias.SetRCommand("round")
+        clsRoundPbias.AddParameter("x", "pbias", iPosition:=0)
+        clsRoundPbias.AddParameter("digits", "2", iPosition:=1)
+
+        clsPasteRSd.SetRCommand("paste")
+        clsPasteRSd.AddParameter("0", Chr(34) & "rSD" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsPasteRSd.AddParameter("1", clsRFunctionParameter:=clsRoundRSd, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsRoundRSd.SetRCommand("round")
+        clsRoundRSd.AddParameter("x", "rsd", iPosition:=0)
+        clsRoundRSd.AddParameter("digits", "2", iPosition:=1)
+
+        clsPasteKge.SetRCommand("paste")
+        clsPasteKge.AddParameter("0", Chr(34) & "KGE" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsPasteKge.AddParameter("1", clsRFunctionParameter:=clsRoundKge, iPosition:=1, bIncludeArgumentName:=False)
+
+        clsRoundKge.SetRCommand("round")
+        clsRoundKge.AddParameter("x", "kge", iPosition:=0)
+        clsRoundKge.AddParameter("digits", "2", iPosition:=1)
 
         clsFacetFunction.SetPackageName("ggplot2")
         clsFacetFunction.SetRCommand("facet_wrap")
@@ -288,9 +457,24 @@ Public Class dlgTimeSeriesPlot
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverReference.AddAdditionalCodeParameterPair(clsIfElseReference, New RParameter("no", 2), iAdditionalPairNo:=1)
         ucrReceiverReference.AddAdditionalCodeParameterPair(clsPivotCFunction, New RParameter("0", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverReference.AddAdditionalCodeParameterPair(clsCor, New RParameter("y", 1), iAdditionalPairNo:=3)
+        ucrReceiverReference.AddAdditionalCodeParameterPair(clsMe, New RParameter("obs", 1), iAdditionalPairNo:=4)
+        ucrReceiverReference.AddAdditionalCodeParameterPair(clsMae, New RParameter("obs", 1), iAdditionalPairNo:=5)
+        ucrReceiverReference.AddAdditionalCodeParameterPair(clsRmse, New RParameter("obs", 1), iAdditionalPairNo:=6)
+        ucrReceiverReference.AddAdditionalCodeParameterPair(clsPbias, New RParameter("obs", 1), iAdditionalPairNo:=7)
+        ucrReceiverReference.AddAdditionalCodeParameterPair(clsRSd, New RParameter("obs", 1), iAdditionalPairNo:=8)
+        ucrReceiverReference.AddAdditionalCodeParameterPair(clsKge, New RParameter("obs", 1), iAdditionalPairNo:=9)
         ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsIfElseEstimates, New RParameter("no", 2), iAdditionalPairNo:=1)
         ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsPivotCFunction, New RParameter("1", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsCor, New RParameter("x", 1), iAdditionalPairNo:=3)
+        ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsMe, New RParameter("sim", 1), iAdditionalPairNo:=4)
+        ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsMae, New RParameter("sim", 1), iAdditionalPairNo:=5)
+        ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsRmse, New RParameter("sim", 1), iAdditionalPairNo:=6)
+        ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsPbias, New RParameter("sim", 1), iAdditionalPairNo:=7)
+        ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsRSd, New RParameter("sim", 1), iAdditionalPairNo:=8)
+        ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsKge, New RParameter("sim", 1), iAdditionalPairNo:=9)
         ucrReceiverStation.AddAdditionalCodeParameterPair(clsFacetOperator, New RParameter("1", 1), iAdditionalPairNo:=1)
+        ucrReceiverStation.AddAdditionalCodeParameterPair(clsSummaryGroupBy, New RParameter("0", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
         ucrSelectorTimeSeriesPlots.SetRCode(clsAdjustNAOperator, bReset)
         ucrReceiverReference.SetRCode(clsIsNaReference, bReset)
@@ -298,6 +482,8 @@ Public Class dlgTimeSeriesPlot
         ucrReceiverStation.SetRCode(clsMeansGroupBy, bReset)
         ucrReceiverTime.SetRCode(clsGgplotAes, bReset)
         ucrChkNAValues.SetRCode(clsAdjustNAOperator, bReset)
+        ucrChkIncludePoints.SetRCode(clsGgplotOperator, bReset)
+        ucrChkIncludeMeanLines.SetRCode(clsGgplotOperator, bReset)
 
         SetDataFrameAssignTo()
     End Sub
@@ -319,6 +505,7 @@ Public Class dlgTimeSeriesPlot
             End If
             clsStackOperator.SetAssignTo(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stack")
             clsMeansOperator.SetAssignTo(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_mean")
+            clsSummaryOperator.SetAssignTo(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_summary")
         Else
             clsAdjustNAOperator.RemoveAssignTo()
             clsStackOperator.RemoveAssignTo()
@@ -369,6 +556,12 @@ Public Class dlgTimeSeriesPlot
             clsGgplotOperator.RemoveParameterByName("facets")
         Else
             clsGgplotOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, iPosition:=30)
+        End If
+
+        If ucrReceiverStation.IsEmpty Then
+            clsSummaryOperator.RemoveParameterByName("0")
+        Else
+            clsSummaryOperator.AddParameter("0", clsRFunctionParameter:=clsSummaryGroupBy, iPosition:=0)
         End If
     End Sub
 End Class
