@@ -779,10 +779,6 @@ Public Class ucrDataView
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
     End Sub
 
-    Private Sub lblHeader_Click(sender As Object, e As EventArgs) Handles lblHeader.Click
-
-    End Sub
-
     Private Sub mnuRenameColumn_Click(sender As Object, e As EventArgs) Handles mnuRenameColumn.Click
         dlgName.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
         dlgName.ShowDialog()
