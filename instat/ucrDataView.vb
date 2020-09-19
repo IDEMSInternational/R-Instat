@@ -894,6 +894,13 @@ Public Class ucrDataView
         Dim iStartRowPos As Integer
         'get all columns of current selected data frame
         arrAllCurrentColumns = GetCurrentWorkSheetColumnNames()
+        'validate columns
+        If e.Range.EndCol >= arrAllCurrentColumns.Length Then
+            'this happens when Ctrl + V is pressed and the data to be pasted has more columns
+            'than columns between start and end column 
+            MsgBox("Columns copied are more than the current data frame columns.", MsgBoxStyle.Critical, "Excess Columns")
+            Exit Sub
+        End If
         'get selected columns
         For colIndex As Integer = e.Range.Col To e.Range.EndCol
             lstSelectedColumnNames.Add(arrAllCurrentColumns(colIndex))
@@ -912,6 +919,19 @@ Public Class ucrDataView
     Private Sub PasteValuesToDataFrame(lstColumnNames As IEnumerable(Of String), startRowPos As String, firstClipRowHeader As Boolean)
         Dim clsPasteValues As New RFunction
         Dim strColNamesVec As String = ""
+        Dim strClipBoardText As String = My.Computer.Clipboard.GetText
+
+        If String.IsNullOrEmpty(strClipBoardText) Then
+            MsgBox("No data available for pasting.", MsgBoxStyle.Information, "No Data")
+            Exit Sub
+        End If
+        'warn user action cannot be undone
+        If DialogResult.No = MsgBox("Are you sure you want to paste to these column(s)?" & Environment.NewLine &
+                            "This action cannot be undone.", MessageBoxButtons.YesNo, "Paste Data") Then
+            Exit Sub
+        End If
+
+        'construct R vector command for new row values
         For i As Integer = 0 To lstColumnNames.Count - 1
             strColNamesVec = strColNamesVec & Chr(34) & lstColumnNames(i) & Chr(34)
             If i = lstColumnNames.Count - 1 Then
@@ -919,8 +939,6 @@ Public Class ucrDataView
             End If
             strColNamesVec = strColNamesVec & ", "
         Next
-
-        'construct R vector command for new row values
         strColNamesVec = "c(" & strColNamesVec & ")"
 
         'add R parameters and run the command
@@ -929,6 +947,7 @@ Public Class ucrDataView
         clsPasteValues.AddParameter("col_names", strColNamesVec)
         clsPasteValues.AddParameter("start_row_pos", startRowPos)
         clsPasteValues.AddParameter("first_clip_row_is_header", If(firstClipRowHeader, "TRUE", "FALSE"))
+        clsPasteValues.AddParameter("clip_board_text", Chr(34) & strClipBoardText & Chr(34))
         RunScriptFromDataView(clsPasteValues.ToScript(), strComment:="Paste values in Data")
     End Sub
 

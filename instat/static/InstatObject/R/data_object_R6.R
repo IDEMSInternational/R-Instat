@@ -844,10 +844,10 @@ DataSheet$set("public", "replace_value_in_data", function(col_names, rows, old_v
 }
 )
 
-DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_pos = 1, first_clip_row_is_header = TRUE) {
+DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_pos = 1, first_clip_row_is_header = TRUE, clip_board_text) {
   #reads data from clipboard and saves it to selected columns
   #get the clipboard text contents as a data frame
-  clip_tbl <- clipr::read_clip_tbl(header = first_clip_row_is_header)
+  clip_tbl <- clipr::read_clip_tbl(x = clip_board_text, header = first_clip_row_is_header)
   current_tbl <- self$get_data_frame(use_current_filter = FALSE)
 
   #check if number of copied columns and selected columns are equal
@@ -891,6 +891,10 @@ DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_po
 	 new_values <- clip_tbl[,index]
 	 #replace the old values with new values
 	 self$replace_value_in_data(col_names = col_names[index], rows = rows_to_replace, new_value = new_values)
+	 #rename header if first row of clip data is header. 
+	 if(first_clip_row_is_header){
+		self$rename_column_in_data(curr_col_name = col_names[index], new_col_name = colnames(clip_tbl)[index]) 
+	 }
   }#end for loop
 }
 )#end function

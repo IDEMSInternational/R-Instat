@@ -784,8 +784,8 @@ DataBook$set("public", "replace_value_in_data", function(data_name, col_names, r
 }
 )
 
-DataBook$set("public", "paste_from_clipboard", function(data_name, col_names, start_row_pos = 1, first_clip_row_is_header = TRUE) {
-  self$get_data_objects(data_name)$paste_from_clipboard(col_names, start_row_pos, first_clip_row_is_header)
+DataBook$set("public", "paste_from_clipboard", function(data_name, col_names, start_row_pos = 1, first_clip_row_is_header = TRUE, clip_board_text) {
+  self$get_data_objects(data_name)$paste_from_clipboard(col_names, start_row_pos, first_clip_row_is_header, clip_board_text)
 }
 )
 
