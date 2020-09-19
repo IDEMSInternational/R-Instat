@@ -20,6 +20,7 @@ Public Class dlgTimeSeriesPlot
 
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = True
 
     ' Constants
     Private strReference As String = ""
@@ -74,6 +75,8 @@ Public Class dlgTimeSeriesPlot
     Private clsRoundPbias As RFunction
     Private clsRoundRSd As RFunction
     Private clsRoundKge As RFunction
+
+    Private dctSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
 
     ' ggplot functions
     Private clsGgplotOperator As ROperator
@@ -195,31 +198,42 @@ Public Class dlgTimeSeriesPlot
         clsMeansSummarise = New RFunction
         clsMeanFunction = New RFunction
 
+        clsSummaryOperator = New ROperator
         clsSummaryGroupBy = New RFunction
         clsSummarise = New RFunction
         clsN = New RFunction
         clsCor = New RFunction
+        clsPbias = New RFunction
+        clsRSd = New RFunction
         clsMe = New RFunction
         clsMae = New RFunction
         clsRmse = New RFunction
-        clsPbias = New RFunction
-        clsRSd = New RFunction
         clsKge = New RFunction
         clsPasteN = New RFunction
         clsPasteCor = New RFunction
+        clsPastePbias = New RFunction
+        clsPasteRSd = New RFunction
         clsPasteMe = New RFunction
         clsPasteMae = New RFunction
         clsPasteRmse = New RFunction
-        clsPastePbias = New RFunction
-        clsPasteRSd = New RFunction
         clsPasteKge = New RFunction
         clsRoundCor = New RFunction
+        clsRoundPbias = New RFunction
+        clsRoundRSd = New RFunction
         clsSignifMe = New RFunction
         clsSignifMae = New RFunction
         clsSignifRmse = New RFunction
-        clsRoundPbias = New RFunction
-        clsRoundRSd = New RFunction
         clsRoundKge = New RFunction
+
+        dctSummaries = New Dictionary(Of String, Tuple(Of RFunction, RFunction))
+        dctSummaries.Add("n", New Tuple(Of RFunction, RFunction)(clsN, clsPasteN))
+        dctSummaries.Add("cor", New Tuple(Of RFunction, RFunction)(clsCor, clsPasteCor))
+        dctSummaries.Add("pbias", New Tuple(Of RFunction, RFunction)(clsPbias, clsPastePbias))
+        dctSummaries.Add("rsd", New Tuple(Of RFunction, RFunction)(clsRSd, clsPasteRSd))
+        dctSummaries.Add("me", New Tuple(Of RFunction, RFunction)(clsMe, clsPasteMe))
+        dctSummaries.Add("mae", New Tuple(Of RFunction, RFunction)(clsMae, clsPasteMae))
+        dctSummaries.Add("rmse", New Tuple(Of RFunction, RFunction)(clsRmse, clsPasteRmse))
+        dctSummaries.Add("kge", New Tuple(Of RFunction, RFunction)(clsKge, clsPasteKge))
 
         clsGgplotOperator = New ROperator
         clsGgplotFunction = New RFunction
@@ -294,6 +308,7 @@ Public Class dlgTimeSeriesPlot
 
         ' Calculate summaries
         clsSummaryOperator.SetOperation("%>%")
+        clsSummaryOperator.AddParameter("0", clsROperatorParameter:=clsAdjustNAOperator, iPosition:=0)
         clsSummaryOperator.AddParameter("2", clsRFunctionParameter:=clsSummarise, iPosition:=2)
 
         clsSummaryGroupBy.SetPackageName("dplyr")
@@ -306,7 +321,7 @@ Public Class dlgTimeSeriesPlot
         clsN.SetRCommand("n")
 
         clsCor.SetRCommand("cor")
-        clsCor.AddParameter("use", Chr(34) & "na.or.complete")
+        clsCor.AddParameter("use", Chr(34) & "na.or.complete" & Chr(34))
 
         clsMe.SetPackageName("hydroGOF")
         clsMe.SetRCommand("me")
@@ -364,6 +379,11 @@ Public Class dlgTimeSeriesPlot
         clsGeomText.SetRCommand("geom_text")
         clsGeomText.AddParameter("data", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
         clsGeomText.AddParameter("mapping", clsRFunctionParameter:=clsGeomTextAes, iPosition:=1)
+        clsGeomText.AddParameter("x", "-Inf", iPosition:=3)
+        clsGeomText.AddParameter("y", "Inf", iPosition:=4)
+        clsGeomText.AddParameter("hjust", "0", iPosition:=5)
+        clsGeomText.AddParameter("vjust", "1", iPosition:=6)
+        clsGeomText.AddParameter("size", "5", iPosition:=7)
         clsGeomText.AddParameter("inherit.aes", "FALSE", iPosition:=10)
 
         clsGeomTextAes.SetPackageName("ggplot2")
@@ -374,7 +394,7 @@ Public Class dlgTimeSeriesPlot
 
         clsPasteN.SetRCommand("paste")
         clsPasteN.AddParameter("0", Chr(34) & "n" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        clsPasteN.AddParameter("1", clsRFunctionParameter:=clsN, iPosition:=1, bIncludeArgumentName:=False)
+        clsPasteN.AddParameter("1", "n", iPosition:=1, bIncludeArgumentName:=False)
 
         clsPasteCor.SetRCommand("paste")
         clsPasteCor.AddParameter("0", Chr(34) & "cor" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
@@ -510,6 +530,7 @@ Public Class dlgTimeSeriesPlot
             clsAdjustNAOperator.RemoveAssignTo()
             clsStackOperator.RemoveAssignTo()
             clsMeansOperator.RemoveAssignTo()
+            clsSummaryOperator.RemoveAssignTo()
         End If
     End Sub
 
@@ -557,11 +578,16 @@ Public Class dlgTimeSeriesPlot
         Else
             clsGgplotOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, iPosition:=30)
         End If
-
         If ucrReceiverStation.IsEmpty Then
-            clsSummaryOperator.RemoveParameterByName("0")
+            clsSummaryOperator.RemoveParameterByName("1")
         Else
-            clsSummaryOperator.AddParameter("0", clsRFunctionParameter:=clsSummaryGroupBy, iPosition:=0)
+            clsSummaryOperator.AddParameter("1", clsRFunctionParameter:=clsSummaryGroupBy, iPosition:=1)
         End If
+    End Sub
+
+    Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
+        sdgTimeSeries.SetRCode(clsNewSummarise:=clsSummarise, dctNewSummaries:=dctSummaries, clsNewGgplotOperator:=clsGgplotOperator, clsNewGeomText:=clsGeomText, clsNewPasteLabel:=clsPasteLabel, bReset:=bResetSubdialog)
+        sdgTimeSeries.ShowDialog()
+        bResetSubdialog = False
     End Sub
 End Class
