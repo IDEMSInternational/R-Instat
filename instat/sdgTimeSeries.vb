@@ -22,27 +22,16 @@ Public Class sdgTimeSeries
 
     Private strGeomTextParameterName As String = "geom_text"
 
+    Private strTopLeft As String = "Top Left"
+    Private strTopRight As String = "Top Right"
+    Private strBottomLeft As String = "Bottom Left"
+    Private strBottomRight As String = "Bottom Right"
+
     Private clsSummarise As RFunction
-    Private clsN As RFunction
-    Private clsCor As RFunction
-    Private clsPbias As RFunction
-    Private clsRSd As RFunction
-    Private clsMe As RFunction
-    Private clsMae As RFunction
-    Private clsRmse As RFunction
-    Private clsKge As RFunction
 
     Private clsGgplotOperator As ROperator
     Private clsGeomText As RFunction
     Private clsPasteLabel As RFunction
-    Private clsPasteN As RFunction
-    Private clsPasteCor As RFunction
-    Private clsPastePbias As RFunction
-    Private clsPasteRSd As RFunction
-    Private clsPasteMe As RFunction
-    Private clsPasteMae As RFunction
-    Private clsPasteRmse As RFunction
-    Private clsPasteKge As RFunction
 
     Private dctSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
 
@@ -82,6 +71,24 @@ Public Class sdgTimeSeries
         ucrChkKge.SetText("KGE")
         ucrChkKge.AddParameterPresentCondition(True, "kge")
         ucrChkKge.AddParameterPresentCondition(False, "kge", bNewIsPositive:=False)
+
+        ucrInputPosition.SetItems({"Top Left", "Top Right", "Bottom Left", "Bottom Right"})
+        ucrInputPosition.SetDropDownStyleAsNonEditable()
+        ucrInputPosition.AddParameterValuesCondition(strTopLeft, "x", "-Inf")
+        ucrInputPosition.AddParameterValuesCondition(strTopLeft, "y", "Inf")
+        ucrInputPosition.AddParameterValuesCondition(strTopRight, "x", "Inf")
+        ucrInputPosition.AddParameterValuesCondition(strTopRight, "y", "Inf")
+        ucrInputPosition.AddParameterValuesCondition(strBottomLeft, "x", "-Inf")
+        ucrInputPosition.AddParameterValuesCondition(strBottomLeft, "y", "-Inf")
+        ucrInputPosition.AddParameterValuesCondition(strBottomRight, "x", "Inf")
+        ucrInputPosition.AddParameterValuesCondition(strBottomRight, "y", "-Inf")
+
+        ucrInputSeparator.SetParameter(New RParameter("sep", iNewPosition:=8))
+
+        ucrInputFontSize.SetParameter(New RParameter("size", iNewPosition:=8))
+        ucrInputFontSize.SetValidationTypeAsNumeric()
+        ucrInputFontSize.AddQuotesIfUnrecognised = False
+
     End Sub
 
     Public Sub SetRCode(clsNewSummarise As RFunction, dctNewSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction)), clsNewGgplotOperator As ROperator, clsNewGeomText As RFunction, clsNewPasteLabel As RFunction, Optional bReset As Boolean = False)
@@ -106,8 +113,13 @@ Public Class sdgTimeSeries
         ucrChkRmse.SetRCode(clsSummarise, bReset, bCloneIfNeeded:=True)
         ucrChkKge.SetRCode(clsSummarise, bReset, bCloneIfNeeded:=True)
 
+        ucrInputPosition.SetRCode(clsGeomText, bReset, bCloneIfNeeded:=True)
+        ucrInputSeparator.SetRCode(clsPasteLabel, bReset, bCloneIfNeeded:=True)
+        ucrInputFontSize.SetRCode(clsGeomText, bReset, bCloneIfNeeded:=True)
+
         bRCodeSet = True
         CheckBoxesCheck()
+        TextPosition()
     End Sub
 
     Private Sub ucrChk_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkN.ControlValueChanged, ucrChkCor.ControlValueChanged, ucrChkPBias.ControlValueChanged, ucrChkRSd.ControlValueChanged, ucrChkMe.ControlValueChanged, ucrChkMae.ControlValueChanged, ucrChkRmse.ControlValueChanged, ucrChkKge.ControlValueChanged
@@ -201,6 +213,36 @@ Public Class sdgTimeSeries
         Else
             clsSummarise.RemoveParameterByName("kge")
             clsPasteLabel.RemoveParameterByName("kge")
+        End If
+    End Sub
+
+    Private Sub ucrInputPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPosition.ControlValueChanged
+        TextPosition()
+    End Sub
+
+    Private Sub TextPosition()
+        If bRCodeSet Then
+            If ucrInputPosition.GetText() = strTopLeft Then
+                clsGeomText.AddParameter("x", "-Inf", iPosition:=3)
+                clsGeomText.AddParameter("y", "Inf", iPosition:=4)
+                clsGeomText.AddParameter("hjust", "0", iPosition:=5)
+                clsGeomText.AddParameter("vjust", "1", iPosition:=6)
+            ElseIf ucrInputPosition.GetText() = strTopRight Then
+                clsGeomText.AddParameter("x", "Inf", iPosition:=3)
+                clsGeomText.AddParameter("y", "Inf", iPosition:=4)
+                clsGeomText.AddParameter("hjust", "1", iPosition:=5)
+                clsGeomText.AddParameter("vjust", "1", iPosition:=6)
+            ElseIf ucrInputPosition.GetText() = strBottomLeft Then
+                clsGeomText.AddParameter("x", "-Inf", iPosition:=3)
+                clsGeomText.AddParameter("y", "-Inf", iPosition:=4)
+                clsGeomText.AddParameter("hjust", "0", iPosition:=5)
+                clsGeomText.AddParameter("vjust", "0", iPosition:=6)
+            ElseIf ucrInputPosition.GetText() = strBottomRight Then
+                clsGeomText.AddParameter("x", "Inf", iPosition:=3)
+                clsGeomText.AddParameter("y", "-Inf", iPosition:=4)
+                clsGeomText.AddParameter("hjust", "1", iPosition:=5)
+                clsGeomText.AddParameter("vjust", "0", iPosition:=6)
+            End If
         End If
     End Sub
 End Class

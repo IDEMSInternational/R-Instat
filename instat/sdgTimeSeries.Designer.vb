@@ -31,13 +31,13 @@ Partial Class sdgTimeSeries
         Me.ucrChkPBias = New instat.ucrCheck()
         Me.ucrChkCor = New instat.ucrCheck()
         Me.ucrChkN = New instat.ucrCheck()
-        Me.ucrInputSeparator = New System.Windows.Forms.TextBox()
         Me.lblSeparator = New System.Windows.Forms.Label()
         Me.lblPosition = New System.Windows.Forms.Label()
         Me.lblFontSize = New System.Windows.Forms.Label()
         Me.ucrInputPosition = New instat.ucrInputComboBox()
-        Me.ucrInputFontSize = New System.Windows.Forms.TextBox()
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
+        Me.ucrInputSeparator = New instat.ucrInputTextBox()
+        Me.ucrInputFontSize = New instat.ucrInputTextBox()
         Me.grpSummaries.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -53,15 +53,15 @@ Partial Class sdgTimeSeries
         Me.grpSummaries.Controls.Add(Me.ucrChkN)
         Me.grpSummaries.Location = New System.Drawing.Point(11, 13)
         Me.grpSummaries.Name = "grpSummaries"
-        Me.grpSummaries.Size = New System.Drawing.Size(294, 112)
+        Me.grpSummaries.Size = New System.Drawing.Size(294, 95)
         Me.grpSummaries.TabIndex = 0
         Me.grpSummaries.TabStop = False
-        Me.grpSummaries.Text = "Annotated Summaries"
+        Me.grpSummaries.Text = "Summaries"
         '
         'ucrChkKge
         '
         Me.ucrChkKge.Checked = False
-        Me.ucrChkKge.Location = New System.Drawing.Point(224, 67)
+        Me.ucrChkKge.Location = New System.Drawing.Point(224, 61)
         Me.ucrChkKge.Name = "ucrChkKge"
         Me.ucrChkKge.Size = New System.Drawing.Size(60, 20)
         Me.ucrChkKge.TabIndex = 10
@@ -69,7 +69,7 @@ Partial Class sdgTimeSeries
         'ucrChkRmse
         '
         Me.ucrChkRmse.Checked = False
-        Me.ucrChkRmse.Location = New System.Drawing.Point(153, 67)
+        Me.ucrChkRmse.Location = New System.Drawing.Point(153, 61)
         Me.ucrChkRmse.Name = "ucrChkRmse"
         Me.ucrChkRmse.Size = New System.Drawing.Size(60, 20)
         Me.ucrChkRmse.TabIndex = 9
@@ -77,7 +77,7 @@ Partial Class sdgTimeSeries
         'ucrChkMae
         '
         Me.ucrChkMae.Checked = False
-        Me.ucrChkMae.Location = New System.Drawing.Point(82, 67)
+        Me.ucrChkMae.Location = New System.Drawing.Point(82, 61)
         Me.ucrChkMae.Name = "ucrChkMae"
         Me.ucrChkMae.Size = New System.Drawing.Size(60, 20)
         Me.ucrChkMae.TabIndex = 8
@@ -85,7 +85,7 @@ Partial Class sdgTimeSeries
         'ucrChkMe
         '
         Me.ucrChkMe.Checked = False
-        Me.ucrChkMe.Location = New System.Drawing.Point(11, 67)
+        Me.ucrChkMe.Location = New System.Drawing.Point(11, 61)
         Me.ucrChkMe.Name = "ucrChkMe"
         Me.ucrChkMe.Size = New System.Drawing.Size(60, 20)
         Me.ucrChkMe.TabIndex = 7
@@ -122,17 +122,10 @@ Partial Class sdgTimeSeries
         Me.ucrChkN.Size = New System.Drawing.Size(60, 20)
         Me.ucrChkN.TabIndex = 0
         '
-        'ucrInputSeparator
-        '
-        Me.ucrInputSeparator.Location = New System.Drawing.Point(89, 136)
-        Me.ucrInputSeparator.Name = "ucrInputSeparator"
-        Me.ucrInputSeparator.Size = New System.Drawing.Size(43, 20)
-        Me.ucrInputSeparator.TabIndex = 1
-        '
         'lblSeparator
         '
         Me.lblSeparator.AutoSize = True
-        Me.lblSeparator.Location = New System.Drawing.Point(11, 140)
+        Me.lblSeparator.Location = New System.Drawing.Point(11, 125)
         Me.lblSeparator.Name = "lblSeparator"
         Me.lblSeparator.Size = New System.Drawing.Size(56, 13)
         Me.lblSeparator.TabIndex = 2
@@ -141,7 +134,7 @@ Partial Class sdgTimeSeries
         'lblPosition
         '
         Me.lblPosition.AutoSize = True
-        Me.lblPosition.Location = New System.Drawing.Point(11, 171)
+        Me.lblPosition.Location = New System.Drawing.Point(11, 156)
         Me.lblPosition.Name = "lblPosition"
         Me.lblPosition.Size = New System.Drawing.Size(47, 13)
         Me.lblPosition.TabIndex = 3
@@ -150,7 +143,7 @@ Partial Class sdgTimeSeries
         'lblFontSize
         '
         Me.lblFontSize.AutoSize = True
-        Me.lblFontSize.Location = New System.Drawing.Point(11, 203)
+        Me.lblFontSize.Location = New System.Drawing.Point(11, 188)
         Me.lblFontSize.Name = "lblFontSize"
         Me.lblFontSize.Size = New System.Drawing.Size(54, 13)
         Me.lblFontSize.TabIndex = 4
@@ -161,45 +154,58 @@ Partial Class sdgTimeSeries
         Me.ucrInputPosition.AddQuotesIfUnrecognised = True
         Me.ucrInputPosition.GetSetSelectedIndex = -1
         Me.ucrInputPosition.IsReadOnly = False
-        Me.ucrInputPosition.Location = New System.Drawing.Point(89, 167)
+        Me.ucrInputPosition.Location = New System.Drawing.Point(89, 152)
         Me.ucrInputPosition.Name = "ucrInputPosition"
         Me.ucrInputPosition.Size = New System.Drawing.Size(100, 21)
         Me.ucrInputPosition.TabIndex = 5
         '
-        'ucrInputFontSize
-        '
-        Me.ucrInputFontSize.Location = New System.Drawing.Point(89, 199)
-        Me.ucrInputFontSize.Name = "ucrInputFontSize"
-        Me.ucrInputFontSize.Size = New System.Drawing.Size(100, 20)
-        Me.ucrInputFontSize.TabIndex = 6
-        '
         'ucrButtonsSummaries
         '
-        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(82, 241)
+        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(82, 228)
         Me.ucrButtonsSummaries.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         Me.ucrButtonsSummaries.Size = New System.Drawing.Size(150, 31)
         Me.ucrButtonsSummaries.TabIndex = 7
         '
+        'ucrInputSeparator
+        '
+        Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparator.IsMultiline = False
+        Me.ucrInputSeparator.IsReadOnly = False
+        Me.ucrInputSeparator.Location = New System.Drawing.Point(89, 121)
+        Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        Me.ucrInputSeparator.Size = New System.Drawing.Size(40, 21)
+        Me.ucrInputSeparator.TabIndex = 8
+        '
+        'ucrInputFontSize
+        '
+        Me.ucrInputFontSize.AddQuotesIfUnrecognised = True
+        Me.ucrInputFontSize.IsMultiline = False
+        Me.ucrInputFontSize.IsReadOnly = False
+        Me.ucrInputFontSize.Location = New System.Drawing.Point(89, 184)
+        Me.ucrInputFontSize.Name = "ucrInputFontSize"
+        Me.ucrInputFontSize.Size = New System.Drawing.Size(40, 21)
+        Me.ucrInputFontSize.TabIndex = 9
+        '
         'sdgTimeSeries
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(315, 276)
-        Me.Controls.Add(Me.ucrButtonsSummaries)
+        Me.ClientSize = New System.Drawing.Size(315, 265)
         Me.Controls.Add(Me.ucrInputFontSize)
+        Me.Controls.Add(Me.ucrInputSeparator)
+        Me.Controls.Add(Me.ucrButtonsSummaries)
         Me.Controls.Add(Me.ucrInputPosition)
         Me.Controls.Add(Me.lblFontSize)
         Me.Controls.Add(Me.lblPosition)
         Me.Controls.Add(Me.lblSeparator)
-        Me.Controls.Add(Me.ucrInputSeparator)
         Me.Controls.Add(Me.grpSummaries)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "sdgTimeSeries"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Summaries"
+        Me.Text = "Summary Annotations"
         Me.grpSummaries.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -210,16 +216,16 @@ Partial Class sdgTimeSeries
     Friend WithEvents ucrChkPBias As ucrCheck
     Friend WithEvents ucrChkCor As ucrCheck
     Friend WithEvents ucrChkN As ucrCheck
-    Friend WithEvents ucrInputSeparator As TextBox
     Friend WithEvents lblSeparator As Label
     Friend WithEvents lblPosition As Label
     Friend WithEvents lblFontSize As Label
     Friend WithEvents ucrInputPosition As ucrInputComboBox
-    Friend WithEvents ucrInputFontSize As TextBox
     Friend WithEvents ucrButtonsSummaries As ucrButtonsSubdialogue
     Friend WithEvents ucrChkKge As ucrCheck
     Friend WithEvents ucrChkRmse As ucrCheck
     Friend WithEvents ucrChkMae As ucrCheck
     Friend WithEvents ucrChkMe As ucrCheck
     Friend WithEvents ucrChkRSd As ucrCheck
+    Friend WithEvents ucrInputSeparator As ucrInputTextBox
+    Friend WithEvents ucrInputFontSize As ucrInputTextBox
 End Class

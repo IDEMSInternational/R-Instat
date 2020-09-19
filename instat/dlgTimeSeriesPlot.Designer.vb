@@ -79,9 +79,9 @@ Partial Class dlgTimeSeriesPlot
         '
         Me.cmdSummaries.Location = New System.Drawing.Point(9, 345)
         Me.cmdSummaries.Name = "cmdSummaries"
-        Me.cmdSummaries.Size = New System.Drawing.Size(75, 23)
+        Me.cmdSummaries.Size = New System.Drawing.Size(120, 23)
         Me.cmdSummaries.TabIndex = 12
-        Me.cmdSummaries.Text = "Summaries"
+        Me.cmdSummaries.Text = "Summary Annotations"
         Me.cmdSummaries.UseVisualStyleBackColor = True
         '
         'ucrSavePlot

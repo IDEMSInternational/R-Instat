@@ -136,12 +136,14 @@ Public Class dlgTimeSeriesPlot
         ucrReceiverReference.SetParameterIsString()
         ucrReceiverReference.bWithQuotes = False
         ucrReceiverReference.SetDataType("numeric")
+        ucrReceiverReference.strSelectorHeading = "Numerics"
 
         ucrReceiverEstimates.SetParameter(New RParameter("x", 0))
         ucrReceiverEstimates.Selector = ucrSelectorTimeSeriesPlots
         ucrReceiverEstimates.SetParameterIsString()
         ucrReceiverEstimates.bWithQuotes = False
         ucrReceiverEstimates.SetDataType("numeric")
+        ucrReceiverEstimates.strSelectorHeading = "Numerics"
 
         ucrReceiverTime.SetParameter(New RParameter("x", 0))
         ucrReceiverTime.Selector = ucrSelectorTimeSeriesPlots
@@ -157,6 +159,7 @@ Public Class dlgTimeSeriesPlot
         ucrReceiverStation.SetDataType("factor")
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
+        ucrReceiverStation.strSelectorHeading = "Factors"
 
         clsAdjustNAMutate = New RFunction
         clsAdjustNAMutateParameter = New RParameter("1", clsAdjustNAMutate, iNewPosition:=1)
@@ -310,6 +313,7 @@ Public Class dlgTimeSeriesPlot
         clsSummaryOperator.SetOperation("%>%")
         clsSummaryOperator.AddParameter("0", clsROperatorParameter:=clsAdjustNAOperator, iPosition:=0)
         clsSummaryOperator.AddParameter("2", clsRFunctionParameter:=clsSummarise, iPosition:=2)
+        clsSummaryOperator.bBrackets = False
 
         clsSummaryGroupBy.SetPackageName("dplyr")
         clsSummaryGroupBy.SetRCommand("group_by")
@@ -391,6 +395,7 @@ Public Class dlgTimeSeriesPlot
         clsGeomTextAes.AddParameter("label", clsRFunctionParameter:=clsPasteLabel, iPosition:=0)
 
         clsPasteLabel.SetRCommand("paste")
+        clsPasteLabel.AddParameter("sep", Chr(34) & " ; " & Chr(34), iPosition:=8)
 
         clsPasteN.SetRCommand("paste")
         clsPasteN.AddParameter("0", Chr(34) & "n" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
@@ -405,7 +410,7 @@ Public Class dlgTimeSeriesPlot
         clsRoundCor.AddParameter("digits", "2", iPosition:=1)
 
         clsPasteMe.SetRCommand("paste")
-        clsPasteMe.AddParameter("0", Chr(34) & "me" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsPasteMe.AddParameter("0", Chr(34) & "ME" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsPasteMe.AddParameter("1", clsRFunctionParameter:=clsSignifMe, iPosition:=1, bIncludeArgumentName:=False)
 
         clsSignifMe.SetRCommand("signif")
@@ -413,7 +418,7 @@ Public Class dlgTimeSeriesPlot
         clsSignifMe.AddParameter("digits", "2", iPosition:=1)
 
         clsPasteMae.SetRCommand("paste")
-        clsPasteMae.AddParameter("0", Chr(34) & "mae" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsPasteMae.AddParameter("0", Chr(34) & "MAE" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsPasteMae.AddParameter("1", clsRFunctionParameter:=clsSignifMae, iPosition:=1, bIncludeArgumentName:=False)
 
         clsSignifMae.SetRCommand("signif")
@@ -421,7 +426,7 @@ Public Class dlgTimeSeriesPlot
         clsSignifMae.AddParameter("digits", "2", iPosition:=1)
 
         clsPasteRmse.SetRCommand("paste")
-        clsPasteRmse.AddParameter("0", Chr(34) & "rmse" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsPasteRmse.AddParameter("0", Chr(34) & "RMSE" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsPasteRmse.AddParameter("1", clsRFunctionParameter:=clsSignifRmse, iPosition:=1, bIncludeArgumentName:=False)
 
         clsSignifRmse.SetRCommand("signif")
@@ -429,7 +434,7 @@ Public Class dlgTimeSeriesPlot
         clsSignifRmse.AddParameter("digits", "2", iPosition:=1)
 
         clsPastePbias.SetRCommand("paste")
-        clsPastePbias.AddParameter("0", Chr(34) & "%bias" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsPastePbias.AddParameter("0", Chr(34) & "% Bias" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         clsPastePbias.AddParameter("1", clsRFunctionParameter:=clsRoundPbias, iPosition:=1, bIncludeArgumentName:=False)
 
         clsRoundPbias.SetRCommand("round")
@@ -504,6 +509,7 @@ Public Class dlgTimeSeriesPlot
         ucrChkNAValues.SetRCode(clsAdjustNAOperator, bReset)
         ucrChkIncludePoints.SetRCode(clsGgplotOperator, bReset)
         ucrChkIncludeMeanLines.SetRCode(clsGgplotOperator, bReset)
+        ucrSavePlot.SetRCode(clsGgplotOperator, bReset)
 
         SetDataFrameAssignTo()
     End Sub
