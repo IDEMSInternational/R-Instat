@@ -222,27 +222,28 @@ Public Class sdgTimeSeries
 
     Private Sub TextPosition()
         If bRCodeSet Then
-            If ucrInputPosition.GetText() = strTopLeft Then
-                clsGeomText.AddParameter("x", "-Inf", iPosition:=3)
-                clsGeomText.AddParameter("y", "Inf", iPosition:=4)
-                clsGeomText.AddParameter("hjust", "0", iPosition:=5)
-                clsGeomText.AddParameter("vjust", "1", iPosition:=6)
-            ElseIf ucrInputPosition.GetText() = strTopRight Then
-                clsGeomText.AddParameter("x", "Inf", iPosition:=3)
-                clsGeomText.AddParameter("y", "Inf", iPosition:=4)
-                clsGeomText.AddParameter("hjust", "1", iPosition:=5)
-                clsGeomText.AddParameter("vjust", "1", iPosition:=6)
-            ElseIf ucrInputPosition.GetText() = strBottomLeft Then
-                clsGeomText.AddParameter("x", "-Inf", iPosition:=3)
-                clsGeomText.AddParameter("y", "-Inf", iPosition:=4)
-                clsGeomText.AddParameter("hjust", "0", iPosition:=5)
-                clsGeomText.AddParameter("vjust", "0", iPosition:=6)
-            ElseIf ucrInputPosition.GetText() = strBottomRight Then
-                clsGeomText.AddParameter("x", "Inf", iPosition:=3)
-                clsGeomText.AddParameter("y", "-Inf", iPosition:=4)
-                clsGeomText.AddParameter("hjust", "1", iPosition:=5)
-                clsGeomText.AddParameter("vjust", "0", iPosition:=6)
-            End If
+            Select Case ucrInputPosition.GetText()
+                Case strTopLeft
+                    clsGeomText.AddParameter("x", "-Inf", iPosition:=3)
+                    clsGeomText.AddParameter("y", "Inf", iPosition:=4)
+                    clsGeomText.AddParameter("hjust", "0", iPosition:=5)
+                    clsGeomText.AddParameter("vjust", "1", iPosition:=6)
+                Case strTopRight
+                    clsGeomText.AddParameter("x", "Inf", iPosition:=3)
+                    clsGeomText.AddParameter("y", "Inf", iPosition:=4)
+                    clsGeomText.AddParameter("hjust", "1", iPosition:=5)
+                    clsGeomText.AddParameter("vjust", "1", iPosition:=6)
+                Case strBottomLeft
+                    clsGeomText.AddParameter("x", "-Inf", iPosition:=3)
+                    clsGeomText.AddParameter("y", "-Inf", iPosition:=4)
+                    clsGeomText.AddParameter("hjust", "0", iPosition:=5)
+                    clsGeomText.AddParameter("vjust", "0", iPosition:=6)
+                Case strBottomRight
+                    clsGeomText.AddParameter("x", "Inf", iPosition:=3)
+                    clsGeomText.AddParameter("y", "-Inf", iPosition:=4)
+                    clsGeomText.AddParameter("hjust", "1", iPosition:=5)
+                    clsGeomText.AddParameter("vjust", "0", iPosition:=6)
+            End Select
         End If
     End Sub
 End Class
