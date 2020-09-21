@@ -107,11 +107,15 @@ Public Class dlgClimaticCheckDataTemperature
         ucrReceiverElement1.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
         ucrReceiverElement1.SetParameterIsString()
         ucrReceiverElement1.bWithQuotes = False
+        ucrReceiverElement1.SetClimaticType("temp_max")
+        ucrReceiverElement1.bAutoFill = True
         ucrReceiverElement1.SetMeAsReceiver()
 
         ucrReceiverElement2.Selector = ucrSelectorTemperature
         ucrReceiverElement2.SetParameter(New RParameter("x", 1, bNewIncludeArgumentName:=False))
         ucrReceiverElement2.SetParameterIsString()
+        ucrReceiverElement2.SetClimaticType("temp_min")
+        ucrReceiverElement2.bAutoFill = True
         ucrReceiverElement2.bWithQuotes = False
 
         'Checkboxes for options
@@ -610,6 +614,8 @@ Public Class dlgClimaticCheckDataTemperature
 
     Private Sub ucrSelectorTemperature_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTemperature.ControlValueChanged
         strCurrDataFrame = Chr(34) & ucrSelectorTemperature.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34)
+        GroupByOptions()
+        FilterFunc()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
