@@ -2088,12 +2088,10 @@ DataBook$set("public","package_check", function(package) {
 }
 )
 
-DataBook$set("public","patch_climate_element", function(data_name, date_col_name = "", var = "",  vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name, station_col_name = station_col_name) {
-  self$get_data_objects(data_name)$patch_climate_element(date_col_name = date_col_name,var = var, vars = vars, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, column_name = column_name, station_col_name = station_col_name)
-}
-)
+DataBook$set("public", "patch_climate_element", function(data_name, date_col_name = "", var = "", vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name, station_col_name = station_col_name) {
+  self$get_data_objects(data_name)$patch_climate_element(date_col_name = date_col_name, var = var, vars = vars, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, column_name = column_name, station_col_name = station_col_name)
+})
 
-DataBook$set("public","visualize_element_na", function(data_name, element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = interval_size, x_with_truth = NULL, measure = "percent") {
-  self$get_data_objects(data_name)$visualize_element_na(element_col_name = element_col_name, element_col_name_imputed =element_col_name_imputed, station_col_name = station_col_name, x_axis_labels_col_name = x_axis_labels_col_name, ncol = ncol, type = type, xlab = xlab, ylab = ylab, legend = legend, orientation = orientation, interval_size = interval_size, x_with_truth = x_with_truth, measure = measure)
-}
-)
+DataBook$set("public", "visualize_element_na", function(data_name, element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = interval_size, x_with_truth = NULL, measure = "percent") {
+  self$get_data_objects(data_name)$visualize_element_na(element_col_name = element_col_name, element_col_name_imputed = element_col_name_imputed, station_col_name = station_col_name, x_axis_labels_col_name = x_axis_labels_col_name, ncol = ncol, type = type, xlab = xlab, ylab = ylab, legend = legend, orientation = orientation, interval_size = interval_size, x_with_truth = x_with_truth, measure = measure)
+})
