@@ -19,8 +19,8 @@ Public Class dlgImportGriddedData
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bShowMessageBox As Boolean
-    Private clsDownloadFromIRIFunction As New RFunction
-    Private clsDefaultStartDate, clsDefaultEndDate As New RFunction
+    Private clsDownloadFromIRIFunction As RFunction
+    Private clsDefaultStartDate, clsDefaultEndDate As RFunction
     Private dctDownloadPairs, dctFiles As New Dictionary(Of String, String)
     Private Sub dlgImportGriddedData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -48,11 +48,6 @@ Public Class dlgImportGriddedData
         ucrInputSource.SetDropDownStyleAsNonEditable()
 
         ucrInputData.SetParameter(New RParameter("data", 1))
-        dctFiles = New Dictionary(Of String, String)
-        dctFiles.Add("TRMM 3B42 3-Hourly Precipitation", Chr(34) & "3_hourly_prcp" & Chr(34))
-        dctFiles.Add("TRMM 3B42 Daily Precipitation", Chr(34) & "daily_prcp" & Chr(34))
-        ucrInputData.SetItems(dctFiles)
-        ucrInputData.cboInput.SelectedItem = "TRMM 3B42 3-Hourly Precipitation"
         ucrInputData.SetDropDownStyleAsNonEditable()
 
         ucrInputFilePath.SetParameter(New RParameter("path", 2))
@@ -117,6 +112,11 @@ Public Class dlgImportGriddedData
 
         'temp fix
         rdoEntireRange.Checked = True
+
+        dctFiles = New Dictionary(Of String, String)
+        dctFiles.Add("TRMM 3B42 3-Hourly Precipitation", Chr(34) & "3_hourly_prcp" & Chr(34))
+        dctFiles.Add("TRMM 3B42 Daily Precipitation", Chr(34) & "daily_prcp" & Chr(34))
+        ucrInputData.SetItems(dctFiles)
 
         clsDownloadFromIRIFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$download_from_IRI")
         clsDownloadFromIRIFunction.AddParameter("source", Chr(34) & "NASA" & Chr(34), iPosition:=0)

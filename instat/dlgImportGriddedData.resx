@@ -357,6 +357,114 @@
   <data name="&gt;&gt;cmdBrowse.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="&gt;&gt;rdoCustomRange.Name" xml:space="preserve">
+    <value>rdoCustomRange</value>
+  </data>
+  <data name="&gt;&gt;rdoCustomRange.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCustomRange.Parent" xml:space="preserve">
+    <value>grpDateRange</value>
+  </data>
+  <data name="&gt;&gt;rdoCustomRange.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rdoEntireRange.Name" xml:space="preserve">
+    <value>rdoEntireRange</value>
+  </data>
+  <data name="&gt;&gt;rdoEntireRange.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoEntireRange.Parent" xml:space="preserve">
+    <value>grpDateRange</value>
+  </data>
+  <data name="&gt;&gt;rdoEntireRange.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Name" xml:space="preserve">
+    <value>lblTo</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Parent" xml:space="preserve">
+    <value>grpDateRange</value>
+  </data>
+  <data name="&gt;&gt;lblTo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Name" xml:space="preserve">
+    <value>lblFrom</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Parent" xml:space="preserve">
+    <value>grpDateRange</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMinDate.Name" xml:space="preserve">
+    <value>ucrDtpMinDate</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMinDate.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMinDate.Parent" xml:space="preserve">
+    <value>grpDateRange</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMinDate.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMaxDate.Name" xml:space="preserve">
+    <value>ucrDtpMaxDate</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMaxDate.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMaxDate.Parent" xml:space="preserve">
+    <value>grpDateRange</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMaxDate.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDateRange.Name" xml:space="preserve">
+    <value>ucrPnlDateRange</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDateRange.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDateRange.Parent" xml:space="preserve">
+    <value>grpDateRange</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDateRange.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="grpDateRange.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 57</value>
+  </data>
+  <data name="grpDateRange.Size" type="System.Drawing.Size, System.Drawing">
+    <value>408, 117</value>
+  </data>
+  <data name="grpDateRange.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="grpDateRange.Text" xml:space="preserve">
+    <value>Date Range</value>
+  </data>
+  <data name="&gt;&gt;grpDateRange.Name" xml:space="preserve">
+    <value>grpDateRange</value>
+  </data>
+  <data name="&gt;&gt;grpDateRange.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpDateRange.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpDateRange.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="rdoCustomRange.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
@@ -489,93 +597,6 @@
   <data name="&gt;&gt;lblFrom.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrDtpMinDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>48, 65</value>
-  </data>
-  <data name="ucrDtpMinDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 20</value>
-  </data>
-  <data name="ucrDtpMinDate.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpMinDate.Name" xml:space="preserve">
-    <value>ucrDtpMinDate</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpMinDate.Type" xml:space="preserve">
-    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpMinDate.Parent" xml:space="preserve">
-    <value>grpDateRange</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpMinDate.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrDtpMaxDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>48, 90</value>
-  </data>
-  <data name="ucrDtpMaxDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 20</value>
-  </data>
-  <data name="ucrDtpMaxDate.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpMaxDate.Name" xml:space="preserve">
-    <value>ucrDtpMaxDate</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpMaxDate.Type" xml:space="preserve">
-    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpMaxDate.Parent" xml:space="preserve">
-    <value>grpDateRange</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpMaxDate.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrPnlDateRange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 20</value>
-  </data>
-  <data name="ucrPnlDateRange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 37</value>
-  </data>
-  <data name="ucrPnlDateRange.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDateRange.Name" xml:space="preserve">
-    <value>ucrPnlDateRange</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDateRange.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDateRange.Parent" xml:space="preserve">
-    <value>grpDateRange</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlDateRange.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="grpDateRange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 57</value>
-  </data>
-  <data name="grpDateRange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>408, 117</value>
-  </data>
-  <data name="grpDateRange.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="grpDateRange.Text" xml:space="preserve">
-    <value>Date Range</value>
-  </data>
-  <data name="&gt;&gt;grpDateRange.Name" xml:space="preserve">
-    <value>grpDateRange</value>
-  </data>
-  <data name="&gt;&gt;grpDateRange.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpDateRange.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpDateRange.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="rdoPoint.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
@@ -652,7 +673,7 @@
     <value>103, 16</value>
   </data>
   <data name="ucrPnlLocationRange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 37</value>
+    <value>214, 37</value>
   </data>
   <data name="ucrPnlLocationRange.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -909,6 +930,69 @@
   <data name="&gt;&gt;ucrChkDontImportData.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrDtpMinDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 65</value>
+  </data>
+  <data name="ucrDtpMinDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 20</value>
+  </data>
+  <data name="ucrDtpMinDate.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMinDate.Name" xml:space="preserve">
+    <value>ucrDtpMinDate</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMinDate.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMinDate.Parent" xml:space="preserve">
+    <value>grpDateRange</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMinDate.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrDtpMaxDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>48, 90</value>
+  </data>
+  <data name="ucrDtpMaxDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 20</value>
+  </data>
+  <data name="ucrDtpMaxDate.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMaxDate.Name" xml:space="preserve">
+    <value>ucrDtpMaxDate</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMaxDate.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMaxDate.Parent" xml:space="preserve">
+    <value>grpDateRange</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpMaxDate.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrPnlDateRange.Location" type="System.Drawing.Point, System.Drawing">
+    <value>101, 20</value>
+  </data>
+  <data name="ucrPnlDateRange.Size" type="System.Drawing.Size, System.Drawing">
+    <value>206, 37</value>
+  </data>
+  <data name="ucrPnlDateRange.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDateRange.Name" xml:space="preserve">
+    <value>ucrPnlDateRange</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDateRange.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDateRange.Parent" xml:space="preserve">
+    <value>grpDateRange</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlDateRange.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="ucrInputFilePath.Location" type="System.Drawing.Point, System.Drawing">
     <value>150, 297</value>
   </data>
@@ -1001,6 +1085,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>420, 424</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
