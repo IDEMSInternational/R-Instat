@@ -20,7 +20,6 @@ Public Class dlgImportGriddedData
     Private bReset As Boolean = True
     Private bShowMessageBox As Boolean
     Private clsDownloadFromIRIFunction As RFunction
-    Private clsDefaultStartDate, clsDefaultEndDate As RFunction
     Private dctDownloadPairs, dctFiles As New Dictionary(Of String, String)
     Private Sub dlgImportGriddedData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -82,7 +81,7 @@ Public Class dlgImportGriddedData
         ucrPnlDateRange.AddRadioButton(rdoEntireRange)
         ucrPnlDateRange.AddRadioButton(rdoCustomRange)
         ucrPnlDateRange.AddParameterPresentCondition(rdoCustomRange, {"min_date", "max_date"})
-        ucrPnlDateRange.AddParameterPresentCondition(rdoArea, {"min_date", "max_date"}, False)
+        ucrPnlDateRange.AddParameterPresentCondition(rdoEntireRange, {"min_date", "max_date"}, False)
 
         ucrChkDontImportData.SetParameter(New RParameter("import", 11))
         ucrChkDontImportData.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
@@ -98,20 +97,11 @@ Public Class dlgImportGriddedData
         ucrDtpMinDate.SetLinkedDisplayControl(lblFrom)
         ucrDtpMaxDate.SetLinkedDisplayControl(lblTo)
         ucrInputNewDataFrameName.SetLinkedDisplayControl(lblNewDataFrameName)
-
-        clsDefaultStartDate = New RFunction
-        clsDefaultStartDate.SetRCommand("as.Date")
-        clsDefaultStartDate.AddParameter("x", Chr(34) & "2000/10/31" & Chr(34))
-
-        clsDefaultEndDate = ucrDtpMaxDate.ValueAsRDate
     End Sub
 
     Private Sub SetDefaults()
         clsDownloadFromIRIFunction = New RFunction
         bShowMessageBox = True
-
-        'temp fix
-        rdoEntireRange.Checked = True
 
         dctFiles = New Dictionary(Of String, String)
         dctFiles.Add("TRMM 3B42 3-Hourly Precipitation", Chr(34) & "3_hourly_prcp" & Chr(34))
@@ -126,8 +116,6 @@ Public Class dlgImportGriddedData
         clsDownloadFromIRIFunction.AddParameter("max_lon", 35.08, iPosition:=4)
         clsDownloadFromIRIFunction.AddParameter("min_lat", 0, iPosition:=5)
         clsDownloadFromIRIFunction.AddParameter("max_lat", 0.5, iPosition:=6)
-        clsDownloadFromIRIFunction.AddParameter("min_date", clsRFunctionParameter:=clsDefaultStartDate, iPosition:=7)
-        clsDownloadFromIRIFunction.AddParameter("max_date", clsRFunctionParameter:=clsDefaultEndDate, iPosition:=8)
         clsDownloadFromIRIFunction.AddParameter("download_type", Chr(34) & "Point" & Chr(34), iPosition:=10)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDownloadFromIRIFunction)
@@ -224,6 +212,16 @@ Public Class dlgImportGriddedData
         ElseIf rdoPoint.Checked Then
             lblMinLon.Visible = False
             lblMinLat.Visible = False
+        End If
+    End Sub
+
+    Private Sub ucrPnlDateRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDateRange.ControlValueChanged
+        If rdoCustomRange.Checked Then
+            clsDownloadFromIRIFunction.AddParameter("min_date", clsRFunctionParameter:=ucrDtpMinDate.ValueAsRDate, iPosition:=7)
+            clsDownloadFromIRIFunction.AddParameter("max_date", clsRFunctionParameter:=ucrDtpMaxDate.ValueAsRDate, iPosition:=8)
+        ElseIf rdoEntireRange.Checked Then
+            clsDownloadFromIRIFunction.RemoveParameterByName("min_date")
+            clsDownloadFromIRIFunction.RemoveParameterByName("max_date")
         End If
     End Sub
 
