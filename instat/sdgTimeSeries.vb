@@ -40,6 +40,11 @@ Public Class sdgTimeSeries
     End Sub
 
     Public Sub InitialiseControls()
+        ucrPnlSummaries.AddRadioButton(rdoComparison)
+        ucrPnlSummaries.AddRadioButton(rdoIndividual)
+
+        ucrPnlSummaries.AddToLinkedControls(ucrInputPositionEstimates, {rdoComparison}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+
         ucrChkN.SetText("N")
         ucrChkN.AddParameterPresentCondition(True, "n")
         ucrChkN.AddParameterPresentCondition(False, "n", bNewIsPositive:=False)
@@ -72,16 +77,28 @@ Public Class sdgTimeSeries
         ucrChkKge.AddParameterPresentCondition(True, "kge")
         ucrChkKge.AddParameterPresentCondition(False, "kge", bNewIsPositive:=False)
 
-        ucrInputPosition.SetItems({"Top Left", "Top Right", "Bottom Left", "Bottom Right"})
-        ucrInputPosition.SetDropDownStyleAsNonEditable()
-        ucrInputPosition.AddParameterValuesCondition(strTopLeft, "x", "-Inf")
-        ucrInputPosition.AddParameterValuesCondition(strTopLeft, "y", "Inf")
-        ucrInputPosition.AddParameterValuesCondition(strTopRight, "x", "Inf")
-        ucrInputPosition.AddParameterValuesCondition(strTopRight, "y", "Inf")
-        ucrInputPosition.AddParameterValuesCondition(strBottomLeft, "x", "-Inf")
-        ucrInputPosition.AddParameterValuesCondition(strBottomLeft, "y", "-Inf")
-        ucrInputPosition.AddParameterValuesCondition(strBottomRight, "x", "Inf")
-        ucrInputPosition.AddParameterValuesCondition(strBottomRight, "y", "-Inf")
+        ucrInputPositionReference.SetItems({"Top Left", "Top Right", "Bottom Left", "Bottom Right"})
+        ucrInputPositionReference.SetDropDownStyleAsNonEditable()
+        ucrInputPositionReference.AddParameterValuesCondition(strTopLeft, "x", "-Inf")
+        ucrInputPositionReference.AddParameterValuesCondition(strTopLeft, "y", "Inf")
+        ucrInputPositionReference.AddParameterValuesCondition(strTopRight, "x", "Inf")
+        ucrInputPositionReference.AddParameterValuesCondition(strTopRight, "y", "Inf")
+        ucrInputPositionReference.AddParameterValuesCondition(strBottomLeft, "x", "-Inf")
+        ucrInputPositionReference.AddParameterValuesCondition(strBottomLeft, "y", "-Inf")
+        ucrInputPositionReference.AddParameterValuesCondition(strBottomRight, "x", "Inf")
+        ucrInputPositionReference.AddParameterValuesCondition(strBottomRight, "y", "-Inf")
+
+        ucrInputPositionEstimates.SetLinkedDisplayControl(lblPositionReference)
+        ucrInputPositionEstimates.SetItems({"Top Left", "Top Right", "Bottom Left", "Bottom Right"})
+        ucrInputPositionEstimates.SetDropDownStyleAsNonEditable()
+        ucrInputPositionEstimates.AddParameterValuesCondition(strTopLeft, "x", "-Inf")
+        ucrInputPositionEstimates.AddParameterValuesCondition(strTopLeft, "y", "Inf")
+        ucrInputPositionEstimates.AddParameterValuesCondition(strTopRight, "x", "Inf")
+        ucrInputPositionEstimates.AddParameterValuesCondition(strTopRight, "y", "Inf")
+        ucrInputPositionEstimates.AddParameterValuesCondition(strBottomLeft, "x", "-Inf")
+        ucrInputPositionEstimates.AddParameterValuesCondition(strBottomLeft, "y", "-Inf")
+        ucrInputPositionEstimates.AddParameterValuesCondition(strBottomRight, "x", "Inf")
+        ucrInputPositionEstimates.AddParameterValuesCondition(strBottomRight, "y", "-Inf")
 
         ucrInputSeparator.SetParameter(New RParameter("sep", iNewPosition:=8))
 
@@ -113,7 +130,7 @@ Public Class sdgTimeSeries
         ucrChkRmse.SetRCode(clsSummarise, bReset, bCloneIfNeeded:=True)
         ucrChkKge.SetRCode(clsSummarise, bReset, bCloneIfNeeded:=True)
 
-        ucrInputPosition.SetRCode(clsGeomText, bReset, bCloneIfNeeded:=True)
+        ucrInputPositionReference.SetRCode(clsGeomText, bReset, bCloneIfNeeded:=True)
         ucrInputSeparator.SetRCode(clsPasteLabel, bReset, bCloneIfNeeded:=True)
         ucrInputFontSize.SetRCode(clsGeomText, bReset, bCloneIfNeeded:=True)
 
@@ -216,13 +233,13 @@ Public Class sdgTimeSeries
         End If
     End Sub
 
-    Private Sub ucrInputPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPosition.ControlValueChanged
+    Private Sub ucrInputPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPositionReference.ControlValueChanged
         TextPosition()
     End Sub
 
     Private Sub TextPosition()
         If bRCodeSet Then
-            Select Case ucrInputPosition.GetText()
+            Select Case ucrInputPositionReference.GetText()
                 Case strTopLeft
                     clsGeomText.AddParameter("x", "-Inf", iPosition:=3)
                     clsGeomText.AddParameter("y", "Inf", iPosition:=4)
@@ -244,6 +261,22 @@ Public Class sdgTimeSeries
                     clsGeomText.AddParameter("hjust", "1", iPosition:=5)
                     clsGeomText.AddParameter("vjust", "0", iPosition:=6)
             End Select
+        End If
+    End Sub
+
+    Private Sub ucrPnlSummaries_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSummaries.ControlValueChanged
+        SummariesDisplay()
+    End Sub
+
+    Private Sub SummariesDisplay()
+        If bRCodeSet Then
+            If rdoComparison.Checked Then
+                grpComparisonSummaries.Visible = True
+                grpIndividualSummaries.Visible = False
+            ElseIf rdoIndividual.Checked Then
+                grpComparisonSummaries.Visible = False
+                grpIndividualSummaries.Visible = True
+            End If
         End If
     End Sub
 End Class
