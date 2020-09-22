@@ -554,8 +554,7 @@ DataBook$set("public", "get_objects", function(data_name, object_name, include_o
 DataBook$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
   if(type == "") overall_object_names = names(private$.objects)
   else {
-    if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "
-	", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
+    if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
     else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair") %in% class(x)))]
     else if(type == surv_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("Surv") %in% class(x)))]
     else if(type == table_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("htmlTable") %in% class(x)))]
