@@ -31,7 +31,7 @@ Partial Class dlgTimeSeriesPlot
         Me.ucrChkIncludePoints = New instat.ucrCheck()
         Me.ucrChkIncludeMeanLines = New instat.ucrCheck()
         Me.ucrChkNAValues = New instat.ucrCheck()
-        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverFacetBy = New instat.ucrReceiverSingle()
         Me.ucrReceiverTime = New instat.ucrReceiverSingle()
         Me.ucrReceiverEstimates = New instat.ucrReceiverSingle()
         Me.ucrReceiverReference = New instat.ucrReceiverSingle()
@@ -71,9 +71,9 @@ Partial Class dlgTimeSeriesPlot
         Me.lblStation.AutoSize = True
         Me.lblStation.Location = New System.Drawing.Point(286, 165)
         Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(43, 13)
+        Me.lblStation.Size = New System.Drawing.Size(94, 13)
         Me.lblStation.TabIndex = 7
-        Me.lblStation.Text = "Station:"
+        Me.lblStation.Text = "Facet By (Station):"
         '
         'cmdSummaries
         '
@@ -116,17 +116,17 @@ Partial Class dlgTimeSeriesPlot
         Me.ucrChkNAValues.Size = New System.Drawing.Size(272, 20)
         Me.ucrChkNAValues.TabIndex = 9
         '
-        'ucrReceiverStation
+        'ucrReceiverFacetBy
         '
-        Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(286, 180)
-        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverStation.Name = "ucrReceiverStation"
-        Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 8
-        Me.ucrReceiverStation.ucrSelector = Nothing
+        Me.ucrReceiverFacetBy.frmParent = Me
+        Me.ucrReceiverFacetBy.Location = New System.Drawing.Point(286, 180)
+        Me.ucrReceiverFacetBy.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacetBy.Name = "ucrReceiverFacetBy"
+        Me.ucrReceiverFacetBy.Selector = Nothing
+        Me.ucrReceiverFacetBy.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFacetBy.strNcFilePath = ""
+        Me.ucrReceiverFacetBy.TabIndex = 8
+        Me.ucrReceiverFacetBy.ucrSelector = Nothing
         '
         'ucrReceiverTime
         '
@@ -192,7 +192,7 @@ Partial Class dlgTimeSeriesPlot
         Me.Controls.Add(Me.ucrChkIncludePoints)
         Me.Controls.Add(Me.ucrChkIncludeMeanLines)
         Me.Controls.Add(Me.ucrChkNAValues)
-        Me.Controls.Add(Me.ucrReceiverStation)
+        Me.Controls.Add(Me.ucrReceiverFacetBy)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverTime)
         Me.Controls.Add(Me.lblTime)
@@ -221,7 +221,7 @@ Partial Class dlgTimeSeriesPlot
     Friend WithEvents ucrChkIncludePoints As ucrCheck
     Friend WithEvents ucrChkIncludeMeanLines As ucrCheck
     Friend WithEvents ucrChkNAValues As ucrCheck
-    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents ucrReceiverFacetBy As ucrReceiverSingle
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverTime As ucrReceiverSingle
     Friend WithEvents lblTime As Label

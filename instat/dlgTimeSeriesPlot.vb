@@ -23,12 +23,20 @@ Public Class dlgTimeSeriesPlot
     Private bResetSubdialog As Boolean = True
 
     ' Constants
-    Private strReference As String = ""
+    ' These store the names of the selected columns. This is used to ensure old parameters are correctly removed from dplyr::mutate when selected columns are changed.
+    ' See ucrReceiverEstimates.ControlValueChanged and ucrReceiverReference.ControlValueChanged event handles for their use.
     Private strEstimates As String = ""
+    Private strReference As String = ""
+    ' The name of the "names" column when the data is stacked
     Private strData As String = "data"
+    ' The name of the "values" column when the data is stacked
     Private strValue As String = "value"
 
     ' Adjust NA values
+    ' These functions construct the R code below if ucrChkNAValues is checked. This ensures the two columns have the same missing values.
+    ' df <- df %>% 
+    '   mutate(gauge = ifelse(is.na(estimate), NA, gauge),
+    '          estimate = ifelse(is.na(gauge), NA, estimate))
     Private clsAdjustNAOperator As ROperator
     Private clsAdjustNAMutateParameter As RParameter
     Private clsAdjustNAMutate As RFunction
@@ -38,17 +46,31 @@ Public Class dlgTimeSeriesPlot
     Private clsIsNaEstimates As RFunction
 
     ' Stack data
+    ' These functions construct the R code below. This stacks the two columns which is needed for plotting.
+    ' df_stack <- df %>% 
+    '   pivot_longer(cols = c(gauge, estimate), names_to = "data", values_to = "value")
     Private clsStackOperator As ROperator
     Private clsPivotLonger As RFunction
     Private clsPivotCFunction As RFunction
 
     ' Calculate means
+    ' These functions construct the R code below if mean lines are added.
+    ' df_mean <- df_stack %>%
+    '   group_by(station, data) %>%
+    '   summarise(mean = mean(value, na.rm = TRUE))
     Private clsMeansOperator As ROperator
     Private clsMeansGroupBy As RFunction
     Private clsMeansSummarise As RFunction
     Private clsMeanFunction As RFunction
 
     ' Calculate Text Summaries
+    ' These functions construct the R code below if annotated summaries are added.
+    '  df_summary <- df %>%
+    '    group_by(station) %>%
+    '    summarise(n = n(),
+    '              cor = cor(estimate, gauge, use = "na.or.complete"),
+    '              me = hydroGOF : Me(estimate, gauge),
+    '              mae = hydroGOF:mae(estimate, gauge))
     Private clsSummaryOperator As ROperator
     Private clsSummaryGroupBy As RFunction
     Private clsSummarise As RFunction
@@ -76,6 +98,9 @@ Public Class dlgTimeSeriesPlot
     Private clsRoundRSd As RFunction
     Private clsRoundKge As RFunction
 
+    ' A dictionary of the summary functions above. The key is the summary name in lower case e.g. "bias"
+    ' The value is a tuple of two RFunctions. Item1 is the summary function. Item2 is the paste function containing the summary.
+    ' This dictionary is created to avoid passing all the RFunctions to the sub dialog individually.
     Private dctSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
 
     ' ggplot functions
@@ -149,17 +174,15 @@ Public Class dlgTimeSeriesPlot
         ucrReceiverTime.Selector = ucrSelectorTimeSeriesPlots
         ucrReceiverTime.SetParameterIsString()
         ucrReceiverTime.bWithQuotes = False
-        ucrReceiverTime.SetClimaticType("year")
-        ucrReceiverTime.bAutoFill = True
 
-        ucrReceiverStation.SetParameter(New RParameter("0", 0, bNewIncludeArgumentName:=False))
-        ucrReceiverStation.Selector = ucrSelectorTimeSeriesPlots
-        ucrReceiverStation.SetParameterIsString()
-        ucrReceiverStation.bWithQuotes = False
-        ucrReceiverStation.SetDataType("factor")
-        ucrReceiverStation.SetClimaticType("station")
-        ucrReceiverStation.bAutoFill = True
-        ucrReceiverStation.strSelectorHeading = "Factors"
+        ucrReceiverFacetBy.SetParameter(New RParameter("0", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverFacetBy.Selector = ucrSelectorTimeSeriesPlots
+        ucrReceiverFacetBy.SetParameterIsString()
+        ucrReceiverFacetBy.bWithQuotes = False
+        ucrReceiverFacetBy.SetDataType("factor")
+        ucrReceiverFacetBy.SetClimaticType("station")
+        ucrReceiverFacetBy.bAutoFill = True
+        ucrReceiverFacetBy.strSelectorHeading = "Factors"
 
         clsAdjustNAMutate = New RFunction
         clsAdjustNAMutateParameter = New RParameter("1", clsAdjustNAMutate, iNewPosition:=1)
@@ -310,6 +333,7 @@ Public Class dlgTimeSeriesPlot
         clsMeanFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
 
         ' Calculate summaries
+
         clsSummaryOperator.SetOperation("%>%")
         clsSummaryOperator.AddParameter("0", clsROperatorParameter:=clsAdjustNAOperator, iPosition:=0)
         clsSummaryOperator.AddParameter("2", clsRFunctionParameter:=clsSummarise, iPosition:=2)
@@ -498,13 +522,13 @@ Public Class dlgTimeSeriesPlot
         ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsPbias, New RParameter("sim", 1), iAdditionalPairNo:=7)
         ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsRSd, New RParameter("sim", 1), iAdditionalPairNo:=8)
         ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsKge, New RParameter("sim", 1), iAdditionalPairNo:=9)
-        ucrReceiverStation.AddAdditionalCodeParameterPair(clsFacetOperator, New RParameter("1", 1), iAdditionalPairNo:=1)
-        ucrReceiverStation.AddAdditionalCodeParameterPair(clsSummaryGroupBy, New RParameter("0", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverFacetBy.AddAdditionalCodeParameterPair(clsFacetOperator, New RParameter("1", 1), iAdditionalPairNo:=1)
+        ucrReceiverFacetBy.AddAdditionalCodeParameterPair(clsSummaryGroupBy, New RParameter("0", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
         ucrSelectorTimeSeriesPlots.SetRCode(clsAdjustNAOperator, bReset)
         ucrReceiverReference.SetRCode(clsIsNaReference, bReset)
         ucrReceiverEstimates.SetRCode(clsIsNaEstimates, bReset)
-        ucrReceiverStation.SetRCode(clsMeansGroupBy, bReset)
+        ucrReceiverFacetBy.SetRCode(clsMeansGroupBy, bReset)
         ucrReceiverTime.SetRCode(clsGgplotAes, bReset)
         ucrChkNAValues.SetRCode(clsAdjustNAOperator, bReset)
         ucrChkIncludePoints.SetRCode(clsGgplotOperator, bReset)
@@ -522,6 +546,10 @@ Public Class dlgTimeSeriesPlot
         End If
     End Sub
 
+    ''' <summary>
+    ''' Assigns the ROperators that correspond to a calculated data frame a standard assignment name based on the selected data frame. 
+    ''' This makes the R code more readable and shorter.
+    ''' </summary>
     Private Sub SetDataFrameAssignTo()
         If ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
             If ucrChkNAValues.Checked Then
@@ -545,6 +573,8 @@ Public Class dlgTimeSeriesPlot
     End Sub
 
     Private Sub ucrReceiverEstimates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimates.ControlValueChanged
+        ' This ensures clsAdjustNAMutate has the correct parameters. Unlike in most functions, in dplyr::mutate, the parameter name is the selected variable.
+        ' Storing and then removing strEstimates as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
         If ucrReceiverEstimates.IsEmpty Then
             If strEstimates <> "" Then
                 clsAdjustNAMutate.RemoveParameterByName(strEstimates)
@@ -557,6 +587,8 @@ Public Class dlgTimeSeriesPlot
     End Sub
 
     Private Sub ucrReceiverReference_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReference.ControlValueChanged
+        ' This ensures clsAdjustNAMutate has the correct parameters. Unlike in most functions, in dplyr::mutate, the parameter name is the selected variable.
+        ' Storing and then removing strReference as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
         If ucrReceiverReference.IsEmpty Then
             If strReference <> "" Then
                 clsAdjustNAMutate.RemoveParameterByName(strReference)
@@ -578,13 +610,15 @@ Public Class dlgTimeSeriesPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
-        If ucrReceiverStation.IsEmpty AndAlso clsFacetOperator.clsParameters.Count = 0 Then
+    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged
+        ' Facets are handles manually since they could also be managed on a sub dialog.
+        ' The check for clsFacetOperator.clsParameters.Count = 0 ensures that facets added on a subdialog are not removed when ucrReceiverFacetBy is empty.
+        If ucrReceiverFacetBy.IsEmpty AndAlso clsFacetOperator.clsParameters.Count = 0 Then
             clsGgplotOperator.RemoveParameterByName("facets")
         Else
             clsGgplotOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, iPosition:=30)
         End If
-        If ucrReceiverStation.IsEmpty Then
+        If ucrReceiverFacetBy.IsEmpty Then
             clsSummaryOperator.RemoveParameterByName("1")
         Else
             clsSummaryOperator.AddParameter("1", clsRFunctionParameter:=clsSummaryGroupBy, iPosition:=1)
