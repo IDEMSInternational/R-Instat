@@ -24,6 +24,16 @@ Public Class ucrReorder
     Public bIsDataType As Boolean = True
     Public Event SelectedIndexChanged(sender As Object, e As EventArgs)
 
+    ''' <summary>
+    ''' represents the allowed direction values of reordering the contents of the ListView  
+    ''' </summary>
+    Private Enum Direction
+        Up
+        Down
+        Top
+        Bottom
+    End Enum
+
     Public Sub setDataType(strType As String)
         strDataType = strType
         lstAvailableData.Clear()
@@ -44,27 +54,26 @@ Public Class ucrReorder
     End Sub
 
     Private Sub cmdUp_Click(sender As Object, e As EventArgs) Handles cmdUp.Click
-        ReorderListViewItems("up")
+        ReorderListViewItems(Direction.Up)
     End Sub
 
     Private Sub cmdDown_click(sender As Object, e As EventArgs) Handles cmdDown.Click
-        ReorderListViewItems("down")
+        ReorderListViewItems(Direction.Down)
     End Sub
 
     Private Sub cmdBottom_Click(sender As Object, e As EventArgs) Handles cmdBottom.Click
-        ReorderListViewItems("bottom")
+        ReorderListViewItems(Direction.Bottom)
     End Sub
 
     Private Sub cmdTop_Click(sender As Object, e As EventArgs) Handles cmdTop.Click
-        ReorderListViewItems("top")
+        ReorderListViewItems(Direction.Top)
     End Sub
 
     ''' <summary>
     ''' reorders the items in the listview based on the direction option given and raises reorder event
-    ''' opted to use string parameter because the sub is used inside this class only and by 4 events
     ''' </summary>
-    ''' <param name="strDirection">direction, allowed values; top,up,down,bottom.</param>
-    Private Sub ReorderListViewItems(strDirection As String)
+    ''' <param name="enumDirection">direction, allowed values; top,up,down,bottom.</param>
+    Private Sub ReorderListViewItems(enumDirection As Direction)
         'if no data selection just exit reorder
         If lstAvailableData.SelectedItems.Count = 0 Then
             Exit Sub
@@ -83,34 +92,27 @@ Public Class ucrReorder
         Next
 
         'reorder the items in the list view based on the option given
-        Select Case strDirection
-            Case "top"
-                For Each kvpItem As KeyValuePair(Of Integer, ListViewItem) In dctSelectedItems
+        For Each kvpItem As KeyValuePair(Of Integer, ListViewItem) In dctSelectedItems
+            Select Case enumDirection
+                Case Direction.Top
                     lstAvailableData.Items.Insert(iStartindex, kvpItem.Value)
                     iStartindex = iStartindex + 1
-                Next
-            Case "up"
-                For Each kvpItem As KeyValuePair(Of Integer, ListViewItem) In dctSelectedItems
+                Case Direction.Up
                     If kvpItem.Key = 0 Then
                         lstAvailableData.Items.Insert(0, kvpItem.Value)
                     Else
                         lstAvailableData.Items.Insert(kvpItem.Key - 1, kvpItem.Value)
                     End If
-                Next
-            Case "down"
-                For Each kvpItem As KeyValuePair(Of Integer, ListViewItem) In dctSelectedItems
+                Case Direction.Down
                     If kvpItem.Key >= lstAvailableData.Items.Count - 1 Then
                         lstAvailableData.Items.Add(kvpItem.Value)
                     Else
                         lstAvailableData.Items.Insert(kvpItem.Key + 1, kvpItem.Value)
                     End If
-                Next
-            Case "bottom"
-                For Each kvpItem As KeyValuePair(Of Integer, ListViewItem) In dctSelectedItems
+                Case Direction.Bottom
                     lstAvailableData.Items.Add(kvpItem.Value)
-                    iStartindex = iStartindex + 1
-                Next
-        End Select
+            End Select
+        Next
 
         'change focus to the listview 
         lstAvailableData.Select()
