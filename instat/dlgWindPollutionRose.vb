@@ -4,6 +4,7 @@ Public Class dlgWindPollutionRose
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsPollutionRose As New RFunction
+    Private clsTypeParamFunc As New RFunction
     Private Sub dlgWindrose_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -50,6 +51,16 @@ Public Class dlgWindPollutionRose
         ucrReceiverWindSpeed2.strSelectorHeading = "Numerics"
         ucrReceiverWindSpeed2.SetIncludedDataTypes({"numeric"})
 
+        ucrReceiverFacet.SetParameter(New RParameter("facet1", iNewPosition:=0, bNewIncludeArgumentName:=False))
+        ucrReceiverFacet.SetParameterIsString()
+        ucrReceiverFacet.Selector = ucrWindPollutionRoseSelector
+        ucrReceiverFacet.SetIncludedDataTypes({"numeric", "factor"})
+
+        ucrReceiverFacet2.SetParameter(New RParameter("facet2", iNewPosition:=1, bNewIncludeArgumentName:=False))
+        ucrReceiverFacet2.SetParameterIsString()
+        ucrReceiverFacet2.Selector = ucrWindPollutionRoseSelector
+        ucrReceiverFacet2.SetIncludedDataTypes({"numeric", "factor"})
+
         ucrChkCompare.SetText("Compare")
         ucrChkCompare.AddParameterPresentCondition(True, "wd2", True)
 
@@ -90,6 +101,9 @@ Public Class dlgWindPollutionRose
         ucrReceiverWindSpeed.SetMeAsReceiver()
 
         clsPollutionRose = New RFunction
+        clsTypeParamFunc = New RFunction
+
+        clsTypeParamFunc.SetRCommand("c")
 
         clsPollutionRose.SetPackageName("openair")
         clsPollutionRose.SetRCommand("pollutionRose")
@@ -111,6 +125,8 @@ Public Class dlgWindPollutionRose
         ucrInputSummary.SetRCode(clsPollutionRose, bReset)
         ucrSaveGraph.SetRCode(clsPollutionRose, bReset)
         ucrWindPollutionRoseSelector.SetRCode(clsPollutionRose, bReset)
+        ucrReceiverFacet.SetRCode(clsTypeParamFunc, bReset)
+        ucrReceiverFacet2.SetRCode(clsTypeParamFunc, bReset)
     End Sub
     Private Sub TestOkEnabled()
         If Not ucrReceiverWindSpeed.IsEmpty AndAlso Not ucrReceiverWindDirection.IsEmpty AndAlso ucrSaveGraph.IsComplete Then
@@ -129,5 +145,17 @@ Public Class dlgWindPollutionRose
 
     Private Sub controlsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindDirection.ControlValueChanged, ucrReceiverWindDirection2.ControlValueChanged, ucrReceiverWindSpeed.ControlValueChanged, ucrReceiverWindSpeed2.ControlValueChanged, ucrChkCompare.ControlValueChanged, ucrChkNormalise.ControlValueChanged, ucrChkPaddle.ControlValueChanged, ucrInputSummary.ControlValueChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub FacetReceivers_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacet.ControlValueChanged, ucrReceiverFacet2.ControlValueChanged
+        If (Not ucrReceiverFacet.IsEmpty) AndAlso (Not ucrReceiverFacet2.IsEmpty) Then
+            clsPollutionRose.AddParameter("type", clsRFunctionParameter:=clsTypeParamFunc, iPosition:=8)
+        ElseIf (Not ucrReceiverFacet.IsEmpty) AndAlso ucrReceiverFacet2.IsEmpty Then
+            clsPollutionRose.AddParameter("type", ucrReceiverFacet.GetParameter.strArgumentValue, iPosition:=8)
+        ElseIf (Not ucrReceiverFacet2.IsEmpty) AndAlso ucrReceiverFacet.IsEmpty Then
+            clsPollutionRose.AddParameter("type", ucrReceiverFacet2.GetParameter.strArgumentValue, iPosition:=8)
+        Else
+            clsPollutionRose.RemoveParameterByName("type")
+        End If
     End Sub
 End Class

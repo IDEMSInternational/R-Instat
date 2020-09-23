@@ -224,9 +224,9 @@ Partial Class dlgWindPollutionRose
         Me.lblFacet.AutoSize = True
         Me.lblFacet.Location = New System.Drawing.Point(265, 222)
         Me.lblFacet.Name = "lblFacet"
-        Me.lblFacet.Size = New System.Drawing.Size(37, 13)
+        Me.lblFacet.Size = New System.Drawing.Size(83, 13)
         Me.lblFacet.TabIndex = 21
-        Me.lblFacet.Text = "Facet:"
+        Me.lblFacet.Text = "Facet(OPtional):"
         '
         'ucrReceiverFacet2
         '
@@ -245,9 +245,9 @@ Partial Class dlgWindPollutionRose
         Me.lblFacet2.AutoSize = True
         Me.lblFacet2.Location = New System.Drawing.Point(265, 257)
         Me.lblFacet2.Name = "lblFacet2"
-        Me.lblFacet2.Size = New System.Drawing.Size(37, 13)
+        Me.lblFacet2.Size = New System.Drawing.Size(103, 13)
         Me.lblFacet2.TabIndex = 23
-        Me.lblFacet2.Text = "Facet:"
+        Me.lblFacet2.Text = "2nd Facet(Optional):"
         '
         'dlgWindPollutionRose
         '
