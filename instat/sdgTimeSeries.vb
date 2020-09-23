@@ -20,20 +20,35 @@ Public Class sdgTimeSeries
     Private bRCodeSet As Boolean = False
     Private bControlsInitialised As Boolean = False
 
-    Private strGeomTextParameterName As String = "geom_text"
+    Private strGeomTextReferenceParameterName As String = "reference_geom_text"
+    Private strGeomTextEstimatesParameterName As String = "estimates_geom_text"
+    Private strGeomTextComparisonParameterName As String = "comparison_geom_text"
 
     Private strTopLeft As String = "Top Left"
     Private strTopRight As String = "Top Right"
     Private strBottomLeft As String = "Bottom Left"
     Private strBottomRight As String = "Bottom Right"
 
-    Private clsSummarise As RFunction
+    Private clsComparisonSummariesSummarise As RFunction
+    Private clsIndividualSummariesSummarise As RFunction
 
     Private clsGgplotOperator As ROperator
-    Private clsGeomText As RFunction
-    Private clsPasteLabel As RFunction
+    Private clsComparisonGeomText As RFunction
+    Private clsReferenceGeomText As RFunction
+    Private clsEstimatesGeomText As RFunction
 
-    Private dctSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
+    Private clsComparisonPasteLabel As RFunction
+    Private clsReferencePasteLabel As RFunction
+    Private clsEstimatesPasteLabel As RFunction
+
+    ' A dictionary of the comparison/individual summary functions above. 
+    ' The key is the summary name in lower case e.g. "bias"
+    ' The value is a tuple of two RFunctions. 
+    ' Item1 is the summary function. 
+    ' Item2 is the paste function containing the summary.
+    ' This dictionary is created to avoid passing all the RFunctions to the sub dialog individually.
+    Private dctComparisonSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
+    Private dctIndividualSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
 
     Private Sub sdgTimeSeries_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -43,7 +58,30 @@ Public Class sdgTimeSeries
         ucrPnlSummaries.AddRadioButton(rdoComparison)
         ucrPnlSummaries.AddRadioButton(rdoIndividual)
 
-        ucrPnlSummaries.AddToLinkedControls(ucrInputPositionEstimates, {rdoComparison}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlSummaries.AddParameterPresentCondition(rdoIndividual, strGeomTextReferenceParameterName)
+        ucrPnlSummaries.AddParameterPresentCondition(rdoComparison, strGeomTextReferenceParameterName, bNewIsPositive:=False)
+
+        ucrPnlSummaries.AddToLinkedControls(ucrInputPositionEstimates, {rdoIndividual}, bNewLinkedAddRemoveParameter:=False, bNewLinkedHideIfParameterMissing:=True)
+
+        ' Individual summaries
+
+        ucrChkNIndividual.SetText("N")
+        ucrChkNIndividual.AddParameterPresentCondition(True, "n")
+        ucrChkNIndividual.AddParameterPresentCondition(False, "n", bNewIsPositive:=False)
+
+        ucrChkMeanIndividual.SetText("Mean")
+        ucrChkMeanIndividual.AddParameterPresentCondition(True, "n")
+        ucrChkMeanIndividual.AddParameterPresentCondition(False, "n", bNewIsPositive:=False)
+
+        ucrChkSdIndividual.SetText("Sd")
+        ucrChkSdIndividual.AddParameterPresentCondition(True, "n")
+        ucrChkSdIndividual.AddParameterPresentCondition(False, "n", bNewIsPositive:=False)
+
+        ucrChkSlopeIndividual.SetText("Slope")
+        ucrChkSlopeIndividual.AddParameterPresentCondition(True, "n")
+        ucrChkSlopeIndividual.AddParameterPresentCondition(False, "n", bNewIsPositive:=False)
+
+        ' Comparison summaries
 
         ucrChkN.SetText("N")
         ucrChkN.AddParameterPresentCondition(True, "n")
@@ -88,7 +126,7 @@ Public Class sdgTimeSeries
         ucrInputPositionReference.AddParameterValuesCondition(strBottomRight, "x", "Inf")
         ucrInputPositionReference.AddParameterValuesCondition(strBottomRight, "y", "-Inf")
 
-        ucrInputPositionEstimates.SetLinkedDisplayControl(lblPositionReference)
+        ucrInputPositionEstimates.SetLinkedDisplayControl(lblPositionEstimates)
         ucrInputPositionEstimates.SetItems({"Top Left", "Top Right", "Bottom Left", "Bottom Right"})
         ucrInputPositionEstimates.SetDropDownStyleAsNonEditable()
         ucrInputPositionEstimates.AddParameterValuesCondition(strTopLeft, "x", "-Inf")
@@ -106,140 +144,242 @@ Public Class sdgTimeSeries
         ucrInputFontSize.SetValidationTypeAsNumeric()
         ucrInputFontSize.AddQuotesIfUnrecognised = False
 
+        bControlsInitialised = True
     End Sub
 
-    Public Sub SetRCode(clsNewSummarise As RFunction, dctNewSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction)), clsNewGgplotOperator As ROperator, clsNewGeomText As RFunction, clsNewPasteLabel As RFunction, Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsNewComparisonSummariesSummarise As RFunction, dctNewComparisonSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction)), clsNewIndividualSummariesSummarise As RFunction, dctNewIndividualSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction)), clsNewGgplotOperator As ROperator, clsNewComparisonGeomText As RFunction, clsNewReferenceGeomText As RFunction, clsNewEstimatesGeomText As RFunction, clsNewComparisonPasteLabel As RFunction, clsNewReferencePasteLabel As RFunction, clsNewEstimatesPasteLabel As RFunction, Optional bReset As Boolean = False)
         bRCodeSet = False
 
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
 
-        clsSummarise = clsNewSummarise
-        dctSummaries = dctNewSummaries
+        clsComparisonSummariesSummarise = clsNewComparisonSummariesSummarise
+        dctComparisonSummaries = dctNewComparisonSummaries
+        clsIndividualSummariesSummarise = clsNewIndividualSummariesSummarise
+        dctIndividualSummaries = dctNewIndividualSummaries
+
         clsGgplotOperator = clsNewGgplotOperator
-        clsGeomText = clsNewGeomText
-        clsPasteLabel = clsNewPasteLabel
+        clsComparisonGeomText = clsNewComparisonGeomText
+        clsReferenceGeomText = clsNewReferenceGeomText
+        clsEstimatesGeomText = clsNewEstimatesGeomText
 
-        ucrChkN.SetRCode(clsSummarise, bReset, bCloneIfNeeded:=True)
-        ucrChkCor.SetRCode(clsSummarise, bReset, bCloneIfNeeded:=True)
-        ucrChkPBias.SetRCode(clsSummarise, bReset, bCloneIfNeeded:=True)
-        ucrChkRSd.SetRCode(clsSummarise, bReset, bCloneIfNeeded:=True)
-        ucrChkMe.SetRCode(clsSummarise, bReset, bCloneIfNeeded:=True)
-        ucrChkMae.SetRCode(clsSummarise, bReset, bCloneIfNeeded:=True)
-        ucrChkRmse.SetRCode(clsSummarise, bReset, bCloneIfNeeded:=True)
-        ucrChkKge.SetRCode(clsSummarise, bReset, bCloneIfNeeded:=True)
+        clsComparisonPasteLabel = clsNewComparisonPasteLabel
+        clsReferencePasteLabel = clsNewReferencePasteLabel
+        clsEstimatesPasteLabel = clsNewEstimatesPasteLabel
 
-        ucrInputPositionReference.SetRCode(clsGeomText, bReset, bCloneIfNeeded:=True)
-        ucrInputSeparator.SetRCode(clsPasteLabel, bReset, bCloneIfNeeded:=True)
-        ucrInputFontSize.SetRCode(clsGeomText, bReset, bCloneIfNeeded:=True)
+        ucrInputSeparator.AddAdditionalCodeParameterPair(clsReferencePasteLabel, New RParameter("sep", iNewPosition:=8), iAdditionalPairNo:=1)
+        ucrInputSeparator.AddAdditionalCodeParameterPair(clsEstimatesPasteLabel, New RParameter("sep", iNewPosition:=8), iAdditionalPairNo:=2)
+
+        ucrInputFontSize.AddAdditionalCodeParameterPair(clsReferenceGeomText, New RParameter("size", iNewPosition:=8), iAdditionalPairNo:=1)
+        ucrInputFontSize.AddAdditionalCodeParameterPair(clsEstimatesGeomText, New RParameter("size", iNewPosition:=8), iAdditionalPairNo:=2)
+
+        ucrPnlSummaries.SetRCode(clsGgplotOperator, bReset, bCloneIfNeeded:=True)
+
+        ucrChkN.SetRCode(clsComparisonSummariesSummarise, bReset, bCloneIfNeeded:=True)
+        ucrChkCor.SetRCode(clsComparisonSummariesSummarise, bReset, bCloneIfNeeded:=True)
+        ucrChkPBias.SetRCode(clsComparisonSummariesSummarise, bReset, bCloneIfNeeded:=True)
+        ucrChkRSd.SetRCode(clsComparisonSummariesSummarise, bReset, bCloneIfNeeded:=True)
+        ucrChkMe.SetRCode(clsComparisonSummariesSummarise, bReset, bCloneIfNeeded:=True)
+        ucrChkMae.SetRCode(clsComparisonSummariesSummarise, bReset, bCloneIfNeeded:=True)
+        ucrChkRmse.SetRCode(clsComparisonSummariesSummarise, bReset, bCloneIfNeeded:=True)
+        ucrChkKge.SetRCode(clsComparisonSummariesSummarise, bReset, bCloneIfNeeded:=True)
+
+        ucrChkNIndividual.SetRCode(clsIndividualSummariesSummarise, bReset, bCloneIfNeeded:=True)
+        ucrChkMeanIndividual.SetRCode(clsIndividualSummariesSummarise, bReset, bCloneIfNeeded:=True)
+        ucrChkSdIndividual.SetRCode(clsIndividualSummariesSummarise, bReset, bCloneIfNeeded:=True)
+        ucrChkSlopeIndividual.SetRCode(clsIndividualSummariesSummarise, bReset, bCloneIfNeeded:=True)
+
+        ucrInputPositionReference.SetRCode(clsComparisonGeomText, bReset, bCloneIfNeeded:=True)
+        ucrInputPositionEstimates.SetRCode(clsEstimatesGeomText, bReset, bCloneIfNeeded:=True)
+
+        ucrInputSeparator.SetRCode(clsComparisonPasteLabel, bReset, bCloneIfNeeded:=True)
+        ucrInputFontSize.SetRCode(clsComparisonGeomText, bReset, bCloneIfNeeded:=True)
 
         bRCodeSet = True
-        CheckBoxesCheck()
-        TextPosition()
+        ComparisonCheckBoxesCheck()
+        IndividualCheckBoxesCheck()
+        TextPosition(clsComparisonGeomText, ucrInputPositionReference.GetText())
+        TextPosition(clsReferenceGeomText, ucrInputPositionReference.GetText())
+        TextPosition(clsEstimatesGeomText, ucrInputPositionEstimates.GetText())
+        SummariesDisplay()
     End Sub
 
-    Private Sub ucrChk_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkN.ControlValueChanged, ucrChkCor.ControlValueChanged, ucrChkPBias.ControlValueChanged, ucrChkRSd.ControlValueChanged, ucrChkMe.ControlValueChanged, ucrChkMae.ControlValueChanged, ucrChkRmse.ControlValueChanged, ucrChkKge.ControlValueChanged
-        CheckBoxesCheck()
+    Private Sub ucrChkIndividual_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNIndividual.ControlValueChanged, ucrChkMeanIndividual.ControlValueChanged, ucrChkSdIndividual.ControlValueChanged, ucrChkSlopeIndividual.ControlValueChanged
+        IndividualCheckBoxesCheck()
     End Sub
 
-    Private Sub CheckBoxesCheck()
+    Private Sub IndividualCheckBoxesCheck()
         If bRCodeSet Then
-            If Not ucrChkN.Checked AndAlso Not ucrChkCor.Checked AndAlso Not ucrChkPBias.Checked AndAlso Not ucrChkRSd.Checked AndAlso Not ucrChkMe.Checked AndAlso Not ucrChkMae.Checked AndAlso Not ucrChkRmse.Checked AndAlso Not ucrChkKge.Checked Then
-                clsGgplotOperator.RemoveParameterByName(strGeomTextParameterName)
+            If rdoComparison.Checked OrElse (Not ucrChkNIndividual.Checked AndAlso Not ucrChkMeanIndividual.Checked AndAlso Not ucrChkSdIndividual.Checked AndAlso Not ucrChkSlopeIndividual.Checked) Then
+                clsGgplotOperator.RemoveParameterByName(strGeomTextReferenceParameterName)
+                clsGgplotOperator.RemoveParameterByName(strGeomTextEstimatesParameterName)
             Else
-                clsGgplotOperator.AddParameter(strGeomTextParameterName, clsRFunctionParameter:=clsGeomText, iPosition:=4)
+                clsGgplotOperator.AddParameter(strGeomTextReferenceParameterName, clsRFunctionParameter:=clsReferenceGeomText, iPosition:=4)
+                clsGgplotOperator.AddParameter(strGeomTextEstimatesParameterName, clsRFunctionParameter:=clsEstimatesGeomText, iPosition:=5)
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrChkComparison_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkN.ControlValueChanged, ucrChkCor.ControlValueChanged, ucrChkPBias.ControlValueChanged, ucrChkRSd.ControlValueChanged, ucrChkMe.ControlValueChanged, ucrChkMae.ControlValueChanged, ucrChkRmse.ControlValueChanged, ucrChkKge.ControlValueChanged
+        ComparisonCheckBoxesCheck()
+    End Sub
+
+    Private Sub ComparisonCheckBoxesCheck()
+        If bRCodeSet Then
+            If rdoIndividual.Checked OrElse (Not ucrChkN.Checked AndAlso Not ucrChkCor.Checked AndAlso Not ucrChkPBias.Checked AndAlso Not ucrChkRSd.Checked AndAlso Not ucrChkMe.Checked AndAlso Not ucrChkMae.Checked AndAlso Not ucrChkRmse.Checked AndAlso Not ucrChkKge.Checked) Then
+                clsGgplotOperator.RemoveParameterByName(strGeomTextComparisonParameterName)
+            Else
+                clsGgplotOperator.AddParameter(strGeomTextComparisonParameterName, clsRFunctionParameter:=clsComparisonGeomText, iPosition:=4)
             End If
         End If
     End Sub
 
     Private Sub ucrChkN_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkN.ControlValueChanged
         If ucrChkN.Checked Then
-            clsSummarise.AddParameter("n", clsRFunctionParameter:=dctSummaries("n").Item1, iPosition:=0)
-            clsPasteLabel.AddParameter("n", clsRFunctionParameter:=dctSummaries("n").Item2, iPosition:=0)
+            clsComparisonSummariesSummarise.AddParameter("n", clsRFunctionParameter:=dctComparisonSummaries("n").Item1, iPosition:=0)
+            clsComparisonPasteLabel.AddParameter("n", clsRFunctionParameter:=dctComparisonSummaries("n").Item2, iPosition:=0)
         Else
-            clsSummarise.RemoveParameterByName("n")
-            clsPasteLabel.RemoveParameterByName("n")
+            clsComparisonSummariesSummarise.RemoveParameterByName("n")
+            clsComparisonPasteLabel.RemoveParameterByName("n")
         End If
     End Sub
 
     Private Sub ucrChkCor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkCor.ControlValueChanged
         If ucrChkCor.Checked Then
-            clsSummarise.AddParameter("cor", clsRFunctionParameter:=dctSummaries("cor").Item1, iPosition:=1)
-            clsPasteLabel.AddParameter("cor", clsRFunctionParameter:=dctSummaries("cor").Item2, iPosition:=1)
+            clsComparisonSummariesSummarise.AddParameter("cor", clsRFunctionParameter:=dctComparisonSummaries("cor").Item1, iPosition:=1)
+            clsComparisonPasteLabel.AddParameter("cor", clsRFunctionParameter:=dctComparisonSummaries("cor").Item2, iPosition:=1)
         Else
-            clsSummarise.RemoveParameterByName("cor")
-            clsPasteLabel.RemoveParameterByName("cor")
+            clsComparisonSummariesSummarise.RemoveParameterByName("cor")
+            clsComparisonPasteLabel.RemoveParameterByName("cor")
         End If
     End Sub
 
     Private Sub ucrChkPBias_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPBias.ControlValueChanged
         If ucrChkPBias.Checked Then
-            clsSummarise.AddParameter("pbias", clsRFunctionParameter:=dctSummaries("pbias").Item1, iPosition:=2)
-            clsPasteLabel.AddParameter("pbias", clsRFunctionParameter:=dctSummaries("pbias").Item2, iPosition:=2)
+            clsComparisonSummariesSummarise.AddParameter("pbias", clsRFunctionParameter:=dctComparisonSummaries("pbias").Item1, iPosition:=2)
+            clsComparisonPasteLabel.AddParameter("pbias", clsRFunctionParameter:=dctComparisonSummaries("pbias").Item2, iPosition:=2)
         Else
-            clsSummarise.RemoveParameterByName("pbias")
-            clsPasteLabel.RemoveParameterByName("pbias")
+            clsComparisonSummariesSummarise.RemoveParameterByName("pbias")
+            clsComparisonPasteLabel.RemoveParameterByName("pbias")
         End If
     End Sub
 
     Private Sub ucrChkRSd_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRSd.ControlValueChanged
         If ucrChkRSd.Checked Then
-            clsSummarise.AddParameter("rsd", clsRFunctionParameter:=dctSummaries("rsd").Item1, iPosition:=3)
-            clsPasteLabel.AddParameter("rsd", clsRFunctionParameter:=dctSummaries("rsd").Item2, iPosition:=3)
+            clsComparisonSummariesSummarise.AddParameter("rsd", clsRFunctionParameter:=dctComparisonSummaries("rsd").Item1, iPosition:=3)
+            clsComparisonPasteLabel.AddParameter("rsd", clsRFunctionParameter:=dctComparisonSummaries("rsd").Item2, iPosition:=3)
         Else
-            clsSummarise.RemoveParameterByName("rsd")
-            clsPasteLabel.RemoveParameterByName("rsd")
+            clsComparisonSummariesSummarise.RemoveParameterByName("rsd")
+            clsComparisonPasteLabel.RemoveParameterByName("rsd")
         End If
     End Sub
 
     Private Sub ucrChkMe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMe.ControlValueChanged
         If ucrChkMe.Checked Then
-            clsSummarise.AddParameter("me", clsRFunctionParameter:=dctSummaries("me").Item1, iPosition:=4)
-            clsPasteLabel.AddParameter("me", clsRFunctionParameter:=dctSummaries("me").Item2, iPosition:=4)
+            clsComparisonSummariesSummarise.AddParameter("me", clsRFunctionParameter:=dctComparisonSummaries("me").Item1, iPosition:=4)
+            clsComparisonPasteLabel.AddParameter("me", clsRFunctionParameter:=dctComparisonSummaries("me").Item2, iPosition:=4)
         Else
-            clsSummarise.RemoveParameterByName("me")
-            clsPasteLabel.RemoveParameterByName("me")
+            clsComparisonSummariesSummarise.RemoveParameterByName("me")
+            clsComparisonPasteLabel.RemoveParameterByName("me")
         End If
     End Sub
 
     Private Sub ucrChkMae_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMae.ControlValueChanged
         If ucrChkMae.Checked Then
-            clsSummarise.AddParameter("mae", clsRFunctionParameter:=dctSummaries("mae").Item1, iPosition:=5)
-            clsPasteLabel.AddParameter("mae", clsRFunctionParameter:=dctSummaries("mae").Item2, iPosition:=5)
+            clsComparisonSummariesSummarise.AddParameter("mae", clsRFunctionParameter:=dctComparisonSummaries("mae").Item1, iPosition:=5)
+            clsComparisonPasteLabel.AddParameter("mae", clsRFunctionParameter:=dctComparisonSummaries("mae").Item2, iPosition:=5)
         Else
-            clsSummarise.RemoveParameterByName("mae")
-            clsPasteLabel.RemoveParameterByName("mae")
+            clsComparisonSummariesSummarise.RemoveParameterByName("mae")
+            clsComparisonPasteLabel.RemoveParameterByName("mae")
         End If
     End Sub
 
     Private Sub ucrChkRmse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRmse.ControlValueChanged
         If ucrChkRmse.Checked Then
-            clsSummarise.AddParameter("rmse", clsRFunctionParameter:=dctSummaries("rmse").Item1, iPosition:=6)
-            clsPasteLabel.AddParameter("rmse", clsRFunctionParameter:=dctSummaries("rmse").Item2, iPosition:=6)
+            clsComparisonSummariesSummarise.AddParameter("rmse", clsRFunctionParameter:=dctComparisonSummaries("rmse").Item1, iPosition:=6)
+            clsComparisonPasteLabel.AddParameter("rmse", clsRFunctionParameter:=dctComparisonSummaries("rmse").Item2, iPosition:=6)
         Else
-            clsSummarise.RemoveParameterByName("rmse")
-            clsPasteLabel.RemoveParameterByName("rmse")
+            clsComparisonSummariesSummarise.RemoveParameterByName("rmse")
+            clsComparisonPasteLabel.RemoveParameterByName("rmse")
         End If
     End Sub
 
     Private Sub ucrChkKge_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkKge.ControlValueChanged
         If ucrChkKge.Checked Then
-            clsSummarise.AddParameter("kge", clsRFunctionParameter:=dctSummaries("kge").Item1, iPosition:=7)
-            clsPasteLabel.AddParameter("kge", clsRFunctionParameter:=dctSummaries("kge").Item2, iPosition:=7)
+            clsComparisonSummariesSummarise.AddParameter("kge", clsRFunctionParameter:=dctComparisonSummaries("kge").Item1, iPosition:=7)
+            clsComparisonPasteLabel.AddParameter("kge", clsRFunctionParameter:=dctComparisonSummaries("kge").Item2, iPosition:=7)
         Else
-            clsSummarise.RemoveParameterByName("kge")
-            clsPasteLabel.RemoveParameterByName("kge")
+            clsComparisonSummariesSummarise.RemoveParameterByName("kge")
+            clsComparisonPasteLabel.RemoveParameterByName("kge")
+        End If
+    End Sub
+
+    Private Sub ucrChkNIndividual_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNIndividual.ControlValueChanged
+        If ucrChkNIndividual.Checked Then
+            clsIndividualSummariesSummarise.AddParameter("n", clsRFunctionParameter:=dctIndividualSummaries("n").Item1, iPosition:=0)
+            clsReferencePasteLabel.AddParameter("n", clsRFunctionParameter:=dctIndividualSummaries("n").Item2, iPosition:=1)
+            clsEstimatesPasteLabel.AddParameter("n", clsRFunctionParameter:=dctIndividualSummaries("n").Item2, iPosition:=1)
+        Else
+            clsIndividualSummariesSummarise.RemoveParameterByName("n")
+            clsReferencePasteLabel.RemoveParameterByName("n")
+            clsEstimatesPasteLabel.RemoveParameterByName("n")
+        End If
+    End Sub
+
+    Private Sub ucrChkMeanIndividual_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMeanIndividual.ControlValueChanged
+        If ucrChkMeanIndividual.Checked Then
+            clsIndividualSummariesSummarise.AddParameter("mean", clsRFunctionParameter:=dctIndividualSummaries("mean").Item1, iPosition:=1)
+            clsReferencePasteLabel.AddParameter("mean", clsRFunctionParameter:=dctIndividualSummaries("mean").Item2, iPosition:=2)
+            clsEstimatesPasteLabel.AddParameter("mean", clsRFunctionParameter:=dctIndividualSummaries("mean").Item2, iPosition:=2)
+        Else
+            clsIndividualSummariesSummarise.RemoveParameterByName("mean")
+            clsReferencePasteLabel.RemoveParameterByName("mean")
+            clsEstimatesPasteLabel.RemoveParameterByName("mean")
+        End If
+    End Sub
+
+    Private Sub ucrChkSdIndividual_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSdIndividual.ControlValueChanged
+        If ucrChkSdIndividual.Checked Then
+            clsIndividualSummariesSummarise.AddParameter("sd", clsRFunctionParameter:=dctIndividualSummaries("sd").Item1, iPosition:=2)
+            clsReferencePasteLabel.AddParameter("sd", clsRFunctionParameter:=dctIndividualSummaries("sd").Item2, iPosition:=3)
+            clsEstimatesPasteLabel.AddParameter("sd", clsRFunctionParameter:=dctIndividualSummaries("sd").Item2, iPosition:=3)
+        Else
+            clsIndividualSummariesSummarise.RemoveParameterByName("sd")
+            clsReferencePasteLabel.RemoveParameterByName("sd")
+            clsEstimatesPasteLabel.RemoveParameterByName("sd")
+        End If
+    End Sub
+
+    Private Sub ucrChkSlopeIndividual_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSlopeIndividual.ControlValueChanged
+        If ucrChkSlopeIndividual.Checked Then
+            clsIndividualSummariesSummarise.AddParameter("slope", clsRFunctionParameter:=dctIndividualSummaries("slope").Item1, iPosition:=3)
+            clsReferencePasteLabel.AddParameter("slope", clsRFunctionParameter:=dctIndividualSummaries("slope").Item2, iPosition:=4)
+            clsEstimatesPasteLabel.AddParameter("slope", clsRFunctionParameter:=dctIndividualSummaries("slope").Item2, iPosition:=4)
+        Else
+            clsIndividualSummariesSummarise.RemoveParameterByName("slope")
+            clsReferencePasteLabel.RemoveParameterByName("slope")
+            clsEstimatesPasteLabel.RemoveParameterByName("slope")
         End If
     End Sub
 
     Private Sub ucrInputPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPositionReference.ControlValueChanged
-        TextPosition()
+        TextPosition(clsComparisonGeomText, ucrInputPositionReference.GetText())
+        TextPosition(clsReferenceGeomText, ucrInputPositionReference.GetText())
     End Sub
 
-    Private Sub TextPosition()
+    Private Sub ucrInputPositionEstimates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPositionEstimates.ControlValueChanged
+        TextPosition(clsEstimatesGeomText, ucrInputPositionEstimates.GetText())
+    End Sub
+
+    ''' <summary>
+    ''' Sets the x, y, hjust and vjust parameter values in clsGeomText based on the position given in strPosition.
+    ''' </summary>
+    ''' <param name="clsGeomText">The RFunction reprsenting the geom_text function to be updated.</param>
+    ''' <param name="strPosition">The position of the text for clsGeomText, usually coming from a textbox. Must be one of the four recognised positions.</param>
+    Private Sub TextPosition(clsGeomText As RFunction, strPosition As String)
         If bRCodeSet Then
-            Select Case ucrInputPositionReference.GetText()
+            Select Case strPosition
                 Case strTopLeft
                     clsGeomText.AddParameter("x", "-Inf", iPosition:=3)
                     clsGeomText.AddParameter("y", "Inf", iPosition:=4)
@@ -273,10 +413,14 @@ Public Class sdgTimeSeries
             If rdoComparison.Checked Then
                 grpComparisonSummaries.Visible = True
                 grpIndividualSummaries.Visible = False
+                lblPositionReference.Text = "Position"
             ElseIf rdoIndividual.Checked Then
                 grpComparisonSummaries.Visible = False
                 grpIndividualSummaries.Visible = True
+                lblPositionReference.Text = "Position - Reference"
             End If
+            IndividualCheckBoxesCheck()
+            ComparisonCheckBoxesCheck()
         End If
     End Sub
 End Class

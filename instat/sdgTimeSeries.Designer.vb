@@ -44,7 +44,7 @@ Partial Class sdgTimeSeries
         Me.ucrInputPositionEstimates = New instat.ucrInputComboBox()
         Me.lblPositionEstimates = New System.Windows.Forms.Label()
         Me.grpIndividualSummaries = New System.Windows.Forms.GroupBox()
-        Me.ucrChkTrend = New instat.ucrCheck()
+        Me.ucrChkSlopeIndividual = New instat.ucrCheck()
         Me.ucrChkSdIndividual = New instat.ucrCheck()
         Me.ucrChkMeanIndividual = New instat.ucrCheck()
         Me.ucrChkNIndividual = New instat.ucrCheck()
@@ -260,7 +260,7 @@ Partial Class sdgTimeSeries
         '
         'grpIndividualSummaries
         '
-        Me.grpIndividualSummaries.Controls.Add(Me.ucrChkTrend)
+        Me.grpIndividualSummaries.Controls.Add(Me.ucrChkSlopeIndividual)
         Me.grpIndividualSummaries.Controls.Add(Me.ucrChkSdIndividual)
         Me.grpIndividualSummaries.Controls.Add(Me.ucrChkMeanIndividual)
         Me.grpIndividualSummaries.Controls.Add(Me.ucrChkNIndividual)
@@ -271,13 +271,13 @@ Partial Class sdgTimeSeries
         Me.grpIndividualSummaries.TabStop = False
         Me.grpIndividualSummaries.Text = "Individual Summaries"
         '
-        'ucrChkTrend
+        'ucrChkSlopeIndividual
         '
-        Me.ucrChkTrend.Checked = False
-        Me.ucrChkTrend.Location = New System.Drawing.Point(224, 29)
-        Me.ucrChkTrend.Name = "ucrChkTrend"
-        Me.ucrChkTrend.Size = New System.Drawing.Size(60, 20)
-        Me.ucrChkTrend.TabIndex = 6
+        Me.ucrChkSlopeIndividual.Checked = False
+        Me.ucrChkSlopeIndividual.Location = New System.Drawing.Point(224, 29)
+        Me.ucrChkSlopeIndividual.Name = "ucrChkSlopeIndividual"
+        Me.ucrChkSlopeIndividual.Size = New System.Drawing.Size(60, 20)
+        Me.ucrChkSlopeIndividual.TabIndex = 6
         '
         'ucrChkSdIndividual
         '
@@ -357,7 +357,7 @@ Partial Class sdgTimeSeries
     Friend WithEvents ucrInputPositionEstimates As ucrInputComboBox
     Friend WithEvents lblPositionEstimates As Label
     Friend WithEvents grpIndividualSummaries As GroupBox
-    Friend WithEvents ucrChkTrend As ucrCheck
+    Friend WithEvents ucrChkSlopeIndividual As ucrCheck
     Friend WithEvents ucrChkSdIndividual As ucrCheck
     Friend WithEvents ucrChkMeanIndividual As ucrCheck
     Friend WithEvents ucrChkNIndividual As ucrCheck

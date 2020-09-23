@@ -74,7 +74,6 @@ Public Class dlgTimeSeriesPlot
     Private clsRoundSd As RFunction
     Private clsSignifSlope As RFunction
 
-
     ' Calculate Comparison Summaries
     ' These functions construct the R code below if annotated comparison summaries are added.
     '  df_comparison <- df %>%
@@ -83,9 +82,9 @@ Public Class dlgTimeSeriesPlot
     '              cor = cor(estimate, gauge, use = "na.or.complete"),
     '              me = hydroGOF : Me(estimate, gauge),
     '              mae = hydroGOF:mae(estimate, gauge))
-    Private clsSummaryOperator As ROperator
-    Private clsSummaryGroupBy As RFunction
-    Private clsSummarise As RFunction
+    Private clsComparisonSummariesOperator As ROperator
+    Private clsComparisonSummariesGroupBy As RFunction
+    Private clsComparisonSummariesSummarise As RFunction
     Private clsNComparison As RFunction
     Private clsCor As RFunction
     Private clsMe As RFunction
@@ -110,10 +109,14 @@ Public Class dlgTimeSeriesPlot
     Private clsRoundRSd As RFunction
     Private clsRoundKge As RFunction
 
-    ' A dictionary of the summary functions above. The key is the summary name in lower case e.g. "bias"
-    ' The value is a tuple of two RFunctions. Item1 is the summary function. Item2 is the paste function containing the summary.
+    ' A dictionary of the comparison/individual summary functions above. 
+    ' The key is the summary name in lower case e.g. "bias"
+    ' The value is a tuple of two RFunctions. 
+    ' Item1 is the summary function. 
+    ' Item2 is the paste function containing the summary.
     ' This dictionary is created to avoid passing all the RFunctions to the sub dialog individually.
     Private dctComparisonSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
+    Private dctIndividualSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
 
     ' ggplot functions
     Private clsGgplotOperator As ROperator
@@ -128,6 +131,8 @@ Public Class dlgTimeSeriesPlot
     Private clsComparisonGeomText As RFunction
     Private clsComparisonGeomTextAes As RFunction
     Private clsComparisonPasteLabel As RFunction
+    Private clsGeomSmoothParameter As RParameter
+    Private clsGeomSmooth As RFunction
 
     Private clsReferenceGeomText As RFunction
     Private clsReferenceGeomTextAes As RFunction
@@ -152,8 +157,11 @@ Public Class dlgTimeSeriesPlot
     Private strGeomLineParameterName As String = "geom_line"
     Private strGeomPointParameterName As String = "geom_point"
     Private strGeomHLineParameterName As String = "geom_hline"
-    Private strGeomTextParameterName As String = "geom_text"
-    Private strGeomParameterNames() As String = {strGeomLineParameterName, strGeomPointParameterName, strGeomHLineParameterName, strGeomTextParameterName}
+    Private strGeomTextReferenceParameterName As String = "reference_geom_text"
+    Private strGeomTextEstimatesParameterName As String = "estimates_geom_text"
+    Private strGeomTextComparisonParameterName As String = "comparison_geom_text"
+    Private strGeomSmoothParameterName As String = "geom_smooth"
+    Private strGeomParameterNames() As String = {strGeomLineParameterName, strGeomPointParameterName, strGeomHLineParameterName, strGeomTextReferenceParameterName, strGeomTextEstimatesParameterName, strGeomTextComparisonParameterName}
 
     Private Sub dlgTimeSeriesPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -221,6 +229,17 @@ Public Class dlgTimeSeriesPlot
         ucrChkIncludeMeanLines.SetText("Include Mean Lines")
         ucrChkIncludeMeanLines.SetParameter(clsGeomHLineParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
+        clsGeomSmooth = New RFunction
+        clsGeomSmoothParameter = New RParameter(strGeomSmoothParameterName, clsGeomSmooth, iNewPosition:=4)
+        ucrChkIncludeLineOfBestFit.SetText("Include Line of Best Fit")
+        ucrChkIncludeLineOfBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkIncludeLineOfBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkWithSE.SetText("With Standard Error")
+        ucrChkWithSE.SetParameter(New RParameter("se", 1))
+        ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkWithSE.SetRDefault("TRUE")
+
         ucrSavePlot.SetPrefix("line")
         ucrSavePlot.SetIsComboBox()
         ucrSavePlot.SetCheckBoxText("Save Graph")
@@ -251,10 +270,13 @@ Public Class dlgTimeSeriesPlot
         clsPasteMean = New RFunction
         clsPasteSd = New RFunction
         clsPasteSlope = New RFunction
+        clsSignifMean = New RFunction
+        clsRoundSd = New RFunction
+        clsSignifSlope = New RFunction
 
-        clsSummaryOperator = New ROperator
-        clsSummaryGroupBy = New RFunction
-        clsSummarise = New RFunction
+        clsComparisonSummariesOperator = New ROperator
+        clsComparisonSummariesGroupBy = New RFunction
+        clsComparisonSummariesSummarise = New RFunction
         clsNComparison = New RFunction
         clsCor = New RFunction
         clsPbias = New RFunction
@@ -279,16 +301,6 @@ Public Class dlgTimeSeriesPlot
         clsSignifRmse = New RFunction
         clsRoundKge = New RFunction
 
-        dctComparisonSummaries = New Dictionary(Of String, Tuple(Of RFunction, RFunction))
-        dctComparisonSummaries.Add("n", New Tuple(Of RFunction, RFunction)(clsNComparison, clsPasteN))
-        dctComparisonSummaries.Add("cor", New Tuple(Of RFunction, RFunction)(clsCor, clsPasteCor))
-        dctComparisonSummaries.Add("pbias", New Tuple(Of RFunction, RFunction)(clsPbias, clsPastePbias))
-        dctComparisonSummaries.Add("rsd", New Tuple(Of RFunction, RFunction)(clsRSd, clsPasteRSd))
-        dctComparisonSummaries.Add("me", New Tuple(Of RFunction, RFunction)(clsMe, clsPasteMe))
-        dctComparisonSummaries.Add("mae", New Tuple(Of RFunction, RFunction)(clsMae, clsPasteMae))
-        dctComparisonSummaries.Add("rmse", New Tuple(Of RFunction, RFunction)(clsRmse, clsPasteRmse))
-        dctComparisonSummaries.Add("kge", New Tuple(Of RFunction, RFunction)(clsKge, clsPasteKge))
-
         clsGgplotOperator = New ROperator
         clsGgplotFunction = New RFunction
         clsGgplotAes = New RFunction
@@ -296,6 +308,7 @@ Public Class dlgTimeSeriesPlot
         clsGeomPoint.Clear()
         clsGeomHLine.Clear()
         clsGeomHLineAes.Clear()
+        clsGeomSmooth.Clear()
         clsComparisonGeomText = New RFunction
         clsComparisonGeomTextAes = New RFunction
         clsComparisonPasteLabel = New RFunction
@@ -308,6 +321,22 @@ Public Class dlgTimeSeriesPlot
         clsEstimatesGeomTextAes = New RFunction
         clsEstimatesPasteLabel = New RFunction
         clsEstimatesFilter = New RFunction
+
+        dctComparisonSummaries = New Dictionary(Of String, Tuple(Of RFunction, RFunction))
+        dctComparisonSummaries.Add("n", New Tuple(Of RFunction, RFunction)(clsNComparison, clsPasteN))
+        dctComparisonSummaries.Add("cor", New Tuple(Of RFunction, RFunction)(clsCor, clsPasteCor))
+        dctComparisonSummaries.Add("pbias", New Tuple(Of RFunction, RFunction)(clsPbias, clsPastePbias))
+        dctComparisonSummaries.Add("rsd", New Tuple(Of RFunction, RFunction)(clsRSd, clsPasteRSd))
+        dctComparisonSummaries.Add("me", New Tuple(Of RFunction, RFunction)(clsMe, clsPasteMe))
+        dctComparisonSummaries.Add("mae", New Tuple(Of RFunction, RFunction)(clsMae, clsPasteMae))
+        dctComparisonSummaries.Add("rmse", New Tuple(Of RFunction, RFunction)(clsRmse, clsPasteRmse))
+        dctComparisonSummaries.Add("kge", New Tuple(Of RFunction, RFunction)(clsKge, clsPasteKge))
+
+        dctIndividualSummaries = New Dictionary(Of String, Tuple(Of RFunction, RFunction))
+        dctIndividualSummaries.Add("n", New Tuple(Of RFunction, RFunction)(clsNIndividual, clsPasteNIndividual))
+        dctIndividualSummaries.Add("mean", New Tuple(Of RFunction, RFunction)(clsMean, clsPasteMean))
+        dctIndividualSummaries.Add("sd", New Tuple(Of RFunction, RFunction)(clsSd, clsPasteSd))
+        dctIndividualSummaries.Add("slope", New Tuple(Of RFunction, RFunction)(clsSlope, clsPasteSlope))
 
         ucrSelectorTimeSeriesPlots.Reset()
         ucrSelectorTimeSeriesPlots.SetGgplotFunction(clsGgplotOperator)
@@ -349,7 +378,7 @@ Public Class dlgTimeSeriesPlot
 
         clsPivotCFunction.SetRCommand("c")
 
-        ' Calculate means
+        ' Calculate individual summaries
 
         clsIndividualSummariesOperator.SetOperation("%>%")
         clsIndividualSummariesOperator.AddParameter("0", clsROperatorParameter:=clsStackOperator, iPosition:=0)
@@ -376,21 +405,21 @@ Public Class dlgTimeSeriesPlot
         clsSd.AddParameter("x", strValue, iPosition:=0)
         clsSd.AddParameter("na.rm", "TRUE", iPosition:=1)
 
-        clsSlope.SetRCommand("mean")
+        clsSlope.SetRCommand("slope")
         clsSlope.AddParameter("y", strValue, iPosition:=0)
 
-        ' Calculate summaries
+        ' Calculate comparison summaries
 
-        clsSummaryOperator.SetOperation("%>%")
-        clsSummaryOperator.AddParameter("0", clsROperatorParameter:=clsAdjustNAOperator, iPosition:=0)
-        clsSummaryOperator.AddParameter("2", clsRFunctionParameter:=clsSummarise, iPosition:=2)
-        clsSummaryOperator.bBrackets = False
+        clsComparisonSummariesOperator.SetOperation("%>%")
+        clsComparisonSummariesOperator.AddParameter("0", clsROperatorParameter:=clsAdjustNAOperator, iPosition:=0)
+        clsComparisonSummariesOperator.AddParameter("2", clsRFunctionParameter:=clsComparisonSummariesSummarise, iPosition:=2)
+        clsComparisonSummariesOperator.bBrackets = False
 
-        clsSummaryGroupBy.SetPackageName("dplyr")
-        clsSummaryGroupBy.SetRCommand("group_by")
+        clsComparisonSummariesGroupBy.SetPackageName("dplyr")
+        clsComparisonSummariesGroupBy.SetRCommand("group_by")
 
-        clsSummarise.SetPackageName("dplyr")
-        clsSummarise.SetRCommand("summarise")
+        clsComparisonSummariesSummarise.SetPackageName("dplyr")
+        clsComparisonSummariesSummarise.SetRCommand("summarise")
 
         clsNComparison.SetPackageName("dplyr")
         clsNComparison.SetRCommand("n")
@@ -422,7 +451,6 @@ Public Class dlgTimeSeriesPlot
         clsGgplotOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, iPosition:=0)
         clsGgplotOperator.AddParameter(strGeomLineParameterName, clsRFunctionParameter:=clsGeomLine, iPosition:=1)
         clsGgplotOperator.AddParameter(clsGeomPointParameter)
-        clsGgplotOperator.AddParameter(strGeomHLineParameterName, clsRFunctionParameter:=clsGeomHLine, iPosition:=3)
 
         clsGgplotFunction.SetPackageName("ggplot2")
         clsGgplotFunction.SetRCommand("ggplot")
@@ -450,11 +478,17 @@ Public Class dlgTimeSeriesPlot
         clsGeomHLineAes.AddParameter("yintercept", "mean", iPosition:=0)
         clsGeomHLineAes.AddParameter("colour", strName, iPosition:=1)
 
+        clsGeomSmooth.SetPackageName("ggplot2")
+        clsGeomSmooth.SetRCommand("geom_smooth")
+        clsGeomSmooth.AddParameter("data", clsROperatorParameter:=clsStackOperator, iPosition:=0)
+        clsGeomSmooth.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=5)
+        clsGeomSmooth.AddParameter("se", "FALSE", iPosition:=7)
+
         ' Comparison summaries
 
         clsComparisonGeomText.SetPackageName("ggplot2")
         clsComparisonGeomText.SetRCommand("geom_text")
-        clsComparisonGeomText.AddParameter("data", clsROperatorParameter:=clsSummaryOperator, iPosition:=0)
+        clsComparisonGeomText.AddParameter("data", clsROperatorParameter:=clsComparisonSummariesOperator, iPosition:=0)
         clsComparisonGeomText.AddParameter("mapping", clsRFunctionParameter:=clsComparisonGeomTextAes, iPosition:=1)
         clsComparisonGeomText.AddParameter("x", "-Inf", iPosition:=3)
         clsComparisonGeomText.AddParameter("y", "Inf", iPosition:=4)
@@ -535,7 +569,7 @@ Public Class dlgTimeSeriesPlot
         clsReferenceGeomText.SetPackageName("ggplot2")
         clsReferenceGeomText.SetRCommand("geom_text")
         clsReferenceGeomText.AddParameter("data", clsRFunctionParameter:=clsReferenceFilter, iPosition:=0)
-        clsReferenceGeomText.AddParameter("mapping", clsRFunctionParameter:=clsComparisonGeomTextAes, iPosition:=1)
+        clsReferenceGeomText.AddParameter("mapping", clsRFunctionParameter:=clsReferenceGeomTextAes, iPosition:=1)
         clsReferenceGeomText.AddParameter("x", "-Inf", iPosition:=3)
         clsReferenceGeomText.AddParameter("y", "Inf", iPosition:=4)
         clsReferenceGeomText.AddParameter("hjust", "0", iPosition:=5)
@@ -560,15 +594,15 @@ Public Class dlgTimeSeriesPlot
 
         clsPasteMean.SetRCommand("paste")
         clsPasteMean.AddParameter("0", Chr(34) & "mean" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        clsPasteMean.AddParameter("1", "mean", iPosition:=1, bIncludeArgumentName:=False)
+        clsPasteMean.AddParameter("1", clsRFunctionParameter:=clsSignifMean, iPosition:=1, bIncludeArgumentName:=False)
 
         clsSignifMean.SetRCommand("signif")
         clsSignifMean.AddParameter("x", "mean", iPosition:=0)
-        clsSignifMean.AddParameter("digits", "2", iPosition:=1)
+        clsSignifMean.AddParameter("digits", "3", iPosition:=1)
 
         clsPasteSd.SetRCommand("paste")
         clsPasteSd.AddParameter("0", Chr(34) & "sd" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        clsPasteSd.AddParameter("1", "sd", iPosition:=1, bIncludeArgumentName:=False)
+        clsPasteSd.AddParameter("1", clsRFunctionParameter:=clsRoundSd, iPosition:=1, bIncludeArgumentName:=False)
 
         clsRoundSd.SetRCommand("round")
         clsRoundSd.AddParameter("x", "sd", iPosition:=0)
@@ -576,7 +610,7 @@ Public Class dlgTimeSeriesPlot
 
         clsPasteSlope.SetRCommand("paste")
         clsPasteSlope.AddParameter("0", Chr(34) & "slope" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-        clsPasteSlope.AddParameter("1", "slope", iPosition:=1, bIncludeArgumentName:=False)
+        clsPasteSlope.AddParameter("1", clsRFunctionParameter:=clsSignifSlope, iPosition:=1, bIncludeArgumentName:=False)
 
         clsSignifSlope.SetRCommand("signif")
         clsSignifSlope.AddParameter("x", "slope", iPosition:=0)
@@ -585,7 +619,7 @@ Public Class dlgTimeSeriesPlot
         clsEstimatesGeomText.SetPackageName("ggplot2")
         clsEstimatesGeomText.SetRCommand("geom_text")
         clsEstimatesGeomText.AddParameter("data", clsRFunctionParameter:=clsEstimatesFilter, iPosition:=0)
-        clsEstimatesGeomText.AddParameter("mapping", clsRFunctionParameter:=clsComparisonGeomTextAes, iPosition:=1)
+        clsEstimatesGeomText.AddParameter("mapping", clsRFunctionParameter:=clsEstimatesGeomTextAes, iPosition:=1)
         clsEstimatesGeomText.AddParameter("x", "Inf", iPosition:=3)
         clsEstimatesGeomText.AddParameter("y", "-Inf", iPosition:=4)
         clsEstimatesGeomText.AddParameter("hjust", "1", iPosition:=5)
@@ -648,8 +682,8 @@ Public Class dlgTimeSeriesPlot
         ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsRSd, New RParameter("sim", 1), iAdditionalPairNo:=8)
         ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsKge, New RParameter("sim", 1), iAdditionalPairNo:=9)
         ucrReceiverFacetBy.AddAdditionalCodeParameterPair(clsFacetOperator, New RParameter("1", 1), iAdditionalPairNo:=1)
-        ucrReceiverFacetBy.AddAdditionalCodeParameterPair(clsSummaryGroupBy, New RParameter("0", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        ucrReceiverTime.AddAdditionalCodeParameterPair(clsIndividualSummariesSummarise, New RParameter("x", 1), iAdditionalPairNo:=1)
+        ucrReceiverFacetBy.AddAdditionalCodeParameterPair(clsComparisonSummariesGroupBy, New RParameter("0", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverTime.AddAdditionalCodeParameterPair(clsSlope, New RParameter("x", 1), iAdditionalPairNo:=1)
 
         ucrSelectorTimeSeriesPlots.SetRCode(clsAdjustNAOperator, bReset)
         ucrReceiverReference.SetRCode(clsIsNaReference, bReset)
@@ -659,6 +693,8 @@ Public Class dlgTimeSeriesPlot
         ucrChkNAValues.SetRCode(clsAdjustNAOperator, bReset)
         ucrChkIncludePoints.SetRCode(clsGgplotOperator, bReset)
         ucrChkIncludeMeanLines.SetRCode(clsGgplotOperator, bReset)
+        ucrChkIncludeLineOfBestFit.SetRCode(clsGgplotOperator, bReset)
+        ucrChkWithSE.SetRCode(clsGeomSmooth, bReset)
         ucrSavePlot.SetRCode(clsGgplotOperator, bReset)
 
         SetDataFrameAssignTo()
@@ -685,12 +721,12 @@ Public Class dlgTimeSeriesPlot
             End If
             clsStackOperator.SetAssignTo(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stack")
             clsIndividualSummariesOperator.SetAssignTo(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_individual")
-            clsSummaryOperator.SetAssignTo(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_comparison")
+            clsComparisonSummariesOperator.SetAssignTo(ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_comparison")
         Else
             clsAdjustNAOperator.RemoveAssignTo()
             clsStackOperator.RemoveAssignTo()
             clsIndividualSummariesOperator.RemoveAssignTo()
-            clsSummaryOperator.RemoveAssignTo()
+            clsComparisonSummariesOperator.RemoveAssignTo()
         End If
     End Sub
 
@@ -705,10 +741,12 @@ Public Class dlgTimeSeriesPlot
             clsAdjustNAMutate.RemoveParameterByName(strEstimates)
             strEstimates = ""
             clsEstimatesFilter.RemoveParameterByName("1")
+            clsEstimatesPasteLabel.RemoveParameterByName("0")
         Else
             strEstimates = ucrReceiverEstimates.GetVariableNames(False)
             clsAdjustNAMutate.AddParameter(strEstimates, clsRFunctionParameter:=clsIfElseEstimates, iPosition:=1)
-            clsEstimatesFilter.AddParameter("1", strValue & "==" & ucrReceiverEstimates.GetVariableNames(True), iPosition:=1)
+            clsEstimatesFilter.AddParameter("1", strName & "==" & ucrReceiverEstimates.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
+            clsEstimatesPasteLabel.AddParameter("0", Chr(34) & strEstimates & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         End If
     End Sub
 
@@ -719,10 +757,12 @@ Public Class dlgTimeSeriesPlot
             clsAdjustNAMutate.RemoveParameterByName(strReference)
             strReference = ""
             clsReferenceFilter.RemoveParameterByName("1")
+            clsReferencePasteLabel.RemoveParameterByName("0")
         Else
             strReference = ucrReceiverReference.GetVariableNames(False)
             clsAdjustNAMutate.AddParameter(strReference, clsRFunctionParameter:=clsIfElseReference, iPosition:=0)
-            clsReferenceFilter.AddParameter("1", strValue & "==" & ucrReceiverReference.GetVariableNames(True), iPosition:=1)
+            clsReferenceFilter.AddParameter("1", strName & "==" & ucrReceiverReference.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
+            clsReferencePasteLabel.AddParameter("0", Chr(34) & strReference & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         End If
     End Sub
 
@@ -745,14 +785,14 @@ Public Class dlgTimeSeriesPlot
             clsGgplotOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, iPosition:=30)
         End If
         If ucrReceiverFacetBy.IsEmpty Then
-            clsSummaryOperator.RemoveParameterByName("1")
+            clsComparisonSummariesOperator.RemoveParameterByName("1")
         Else
-            clsSummaryOperator.AddParameter("1", clsRFunctionParameter:=clsSummaryGroupBy, iPosition:=1)
+            clsComparisonSummariesOperator.AddParameter("1", clsRFunctionParameter:=clsComparisonSummariesGroupBy, iPosition:=1)
         End If
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgTimeSeries.SetRCode(clsNewSummarise:=clsSummarise, dctNewSummaries:=dctComparisonSummaries, clsNewGgplotOperator:=clsGgplotOperator, clsNewGeomText:=clsComparisonGeomText, clsNewPasteLabel:=clsComparisonPasteLabel, bReset:=bResetSubdialog)
+        sdgTimeSeries.SetRCode(clsNewComparisonSummariesSummarise:=clsComparisonSummariesSummarise, dctNewComparisonSummaries:=dctComparisonSummaries, clsNewIndividualSummariesSummarise:=clsIndividualSummariesSummarise, dctNewIndividualSummaries:=dctIndividualSummaries, clsNewGgplotOperator:=clsGgplotOperator, clsNewComparisonGeomText:=clsComparisonGeomText, clsNewReferenceGeomText:=clsReferenceGeomText, clsNewEstimatesGeomText:=clsEstimatesGeomText, clsNewComparisonPasteLabel:=clsComparisonPasteLabel, clsNewReferencePasteLabel:=clsReferencePasteLabel, clsNewEstimatesPasteLabel:=clsEstimatesPasteLabel, bReset:=bResetSubdialog)
         sdgTimeSeries.ShowDialog()
         bResetSubdialog = False
     End Sub
