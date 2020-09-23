@@ -28,7 +28,7 @@ Public Class dlgTimeSeriesPlot
     Private strEstimates As String = ""
     Private strReference As String = ""
     ' The name of the "names" column when the data is stacked
-    Private strData As String = "data"
+    Private strName As String = "data"
     ' The name of the "values" column when the data is stacked
     Private strValue As String = "value"
 
@@ -344,7 +344,7 @@ Public Class dlgTimeSeriesPlot
         clsPivotLonger.SetPackageName("tidyr")
         clsPivotLonger.SetRCommand("pivot_longer")
         clsPivotLonger.AddParameter("cols", clsRFunctionParameter:=clsPivotCFunction, iPosition:=1)
-        clsPivotLonger.AddParameter("names_to", Chr(34) & strData & Chr(34), iPosition:=2)
+        clsPivotLonger.AddParameter("names_to", Chr(34) & strName & Chr(34), iPosition:=2)
         clsPivotLonger.AddParameter("values_to", Chr(34) & strValue & Chr(34), iPosition:=8)
 
         clsPivotCFunction.SetRCommand("c")
@@ -359,7 +359,7 @@ Public Class dlgTimeSeriesPlot
 
         clsIndividualSummariesGroupBy.SetPackageName("dplyr")
         clsIndividualSummariesGroupBy.SetRCommand("group_by")
-        clsIndividualSummariesGroupBy.AddParameter("1", strData, iPosition:=1, bIncludeArgumentName:=False)
+        clsIndividualSummariesGroupBy.AddParameter("1", strName, iPosition:=1, bIncludeArgumentName:=False)
 
         clsIndividualSummariesSummarise.SetPackageName("dplyr")
         clsIndividualSummariesSummarise.SetRCommand("summarise")
@@ -432,7 +432,7 @@ Public Class dlgTimeSeriesPlot
         clsGgplotAes.SetPackageName("ggplot2")
         clsGgplotAes.SetRCommand("aes")
         clsGgplotAes.AddParameter("y", strValue, iPosition:=1)
-        clsGgplotAes.AddParameter("colour", strData, iPosition:=2)
+        clsGgplotAes.AddParameter("colour", strName, iPosition:=2)
 
         clsGeomLine.SetPackageName("ggplot2")
         clsGeomLine.SetRCommand("geom_line")
@@ -448,7 +448,7 @@ Public Class dlgTimeSeriesPlot
         clsGeomHLineAes.SetPackageName("ggplot2")
         clsGeomHLineAes.SetRCommand("aes")
         clsGeomHLineAes.AddParameter("yintercept", "mean", iPosition:=0)
-        clsGeomHLineAes.AddParameter("colour", strData, iPosition:=1)
+        clsGeomHLineAes.AddParameter("colour", strName, iPosition:=1)
 
         ' Comparison summaries
 
@@ -702,10 +702,8 @@ Public Class dlgTimeSeriesPlot
         ' This ensures clsAdjustNAMutate has the correct parameters. Unlike in most functions, in dplyr::mutate, the parameter name is the selected variable.
         ' Storing and then removing strEstimates as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
         If ucrReceiverEstimates.IsEmpty Then
-            If strEstimates <> "" Then
-                clsAdjustNAMutate.RemoveParameterByName(strEstimates)
-                strEstimates = ""
-            End If
+            clsAdjustNAMutate.RemoveParameterByName(strEstimates)
+            strEstimates = ""
             clsEstimatesFilter.RemoveParameterByName("1")
         Else
             strEstimates = ucrReceiverEstimates.GetVariableNames(False)
@@ -718,10 +716,8 @@ Public Class dlgTimeSeriesPlot
         ' This ensures clsAdjustNAMutate has the correct parameters. Unlike in most functions, in dplyr::mutate, the parameter name is the selected variable.
         ' Storing and then removing strReference as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
         If ucrReceiverReference.IsEmpty Then
-            If strReference <> "" Then
-                clsAdjustNAMutate.RemoveParameterByName(strReference)
-                strReference = ""
-            End If
+            clsAdjustNAMutate.RemoveParameterByName(strReference)
+            strReference = ""
             clsReferenceFilter.RemoveParameterByName("1")
         Else
             strReference = ucrReceiverReference.GetVariableNames(False)
