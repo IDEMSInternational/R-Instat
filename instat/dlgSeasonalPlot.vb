@@ -399,6 +399,7 @@ Public Class dlgSeasonalPlot
 
         clsPbsFunction.SetPackageName("pbs")
         clsPbsFunction.SetRCommand("pbs")
+        clsPbsFunction.AddParameter("x", "x", bIncludeArgumentName:=False, iPosition:=0)
         clsPbsFunction.AddParameter("df", 6, iPosition:=1)
 
         clsNsFunction.SetPackageName("splines")
