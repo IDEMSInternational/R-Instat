@@ -20,11 +20,54 @@ Public Class dlgSeasonalPlot
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     'summary functions + operators
-    Private clsPipeOperator, clsAndOperator, clsRefGreaterOperator, clsEstGreaterOperator, clsRefLessOperator, clsEstLessOperator, clsDivideOperator As New ROperator
-    Private clsFilterFunction, clsRefIsNotNaFunction, clsEstIsNotNaFunction, clsMutateFunction, clsPivotLongerFunction, clsGroupByFunction, clsSummariseFunction, clsMovingMutateFunction, clsMovingFunction, clsNSumFunction, clsPropSumFunction, clsNotIsNaThreshFunction, clsMeanFunction As New RFunction
+    Private clsPipeOperator As ROperator
+    Private clsAndOperator As ROperator
+    Private clsRefGreaterOperator As ROperator
+    Private clsEst1GreaterOperator As ROperator
+    Private clsRefLessOperator As ROperator
+    Private clsEst1LessOperator As ROperator
+    Private clsDivideOperator As ROperator
+    Private clsLessOperator As ROperator
+    Private clsGreaterOperator As ROperator
+    Private clsEst2GreaterOperator As ROperator
+    Private clsEst2LessOperator As ROperator
+
+    Private clsMissingFilterFunction As RFunction
+    Private clsRefIsNotNaFunction As RFunction
+    Private clsEstIsNotNaFunction As RFunction
+    Private clsMutateFunction As RFunction
+    Private clsPivotLongerFunction As RFunction
+    Private clsGroupByFunction As RFunction
+    Private clsSummariseFunction As RFunction
+    Private clsMovingMutateFunction As RFunction
+    Private clsMovingFunction As RFunction
+    Private clsNSumFunction As RFunction
+    Private clsPropSumFunction As RFunction
+    Private clsNotIsNaThreshFunction As RFunction
+    Private clsMeanFunction As RFunction
+    Private clsMeanFilterFunction As RFunction
+    Private clsStdFunction As RFunction
+
     'ggplot functions + operators
-    Private clsPlusOperator, clsFacetWrapTildeOperator, clsPbsSplinesTildeOperator As New ROperator
-    Private clsGgplotFunction, clsGeomPointFunction, clsGeomLineFunction, clsGeomSmoothFunction, clsGgPlotAesFunction, clsGeomLineAesFunction, clsFacetWrapFunction, clsAsFormulaFunction, clsPasteFunction, clsFourierSeriesFunction, clsListFunction, clsBinomialFunction, clsPbsFunction, clsNsFunction As New RFunction
+    Private clsPlusOperator As ROperator
+    Private clsFacetWrapTildeOperator As ROperator
+    Private clsPbsSplinesTildeOperator As ROperator
+
+    Private clsGgplotFunction As RFunction
+    Private clsGeomPointFunction As RFunction
+    Private clsGeomLineFunction As RFunction
+    Private clsGeomSmoothFunction As RFunction
+    Private clsGgPlotAesFunction As RFunction
+    Private clsGeomLineAesFunction As RFunction
+    Private clsFacetWrapFunction As RFunction
+    Private clsAsFormulaFunction As RFunction
+    Private clsPasteFunction As RFunction
+    Private clsFourierSeriesFunction As RFunction
+    Private clsListFunction As RFunction
+    Private clsBinomialFunction As RFunction
+    Private clsPbsFunction As RFunction
+    Private clsNsFunction As RFunction
+    Private clsYlabFunction As RFunction
 
     Private Sub dlgSeasonalPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -68,10 +111,10 @@ Public Class dlgSeasonalPlot
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
 
-        ucrInputReferenceSummary.SetItems({"Prop Above", "Prop Below", "Mean"})
+        ucrInputReferenceSummary.SetItems({"Mean", "Mean Above", "Mean Below", "Prop Above", "Prop Below", "Std.dev"})
         ucrInputReferenceSummary.SetDropDownStyleAsNonEditable()
 
-        ucrInputEstimateSummary.SetItems({"Prop Above", "Prop Below", "Mean"})
+        ucrInputEstimateSummary.SetItems({"Prop Above", "Prop Below"})
         ucrInputEstimateSummary.SetDropDownStyleAsNonEditable()
 
         ucrInputReferenceThreshold.SetParameter(New RParameter("value", 1))
@@ -90,17 +133,20 @@ Public Class dlgSeasonalPlot
         ucrChkRemoveMissing.AddParameterPresentCondition(True, "filter")
         ucrChkRemoveMissing.AddParameterPresentCondition(False, "filter", False)
 
-        ucrInputReferenceSummary.AddToLinkedControls(ucrInputReferenceThreshold, {"Prop Above", "Prop Below"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputEstimateSummary.AddToLinkedControls(ucrInputEstimateThreshold, {"Prop Above", "Prop Below"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkOptionalSummary.SetText("Different summary for estimate")
+
+        ucrInputReferenceSummary.AddToLinkedControls(ucrInputReferenceThreshold, {"Prop Above", "Prop Below", "Mean Above", "Mean Below"}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkMovingAverage.AddToLinkedControls(ucrInputN, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSmoothing.AddToLinkedControls({ucrNudHarmonics, ucrNudPeriod}, {"Fourier Series"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSmoothing.AddToLinkedControls(ucrNudSpan, {"LOESS"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSmoothing.AddToLinkedControls(ucrNudDf, {"Periodic Splines", "Natural Splines"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkOptionalSummary.AddToLinkedControls(ucrInputEstimateSummary, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputN.SetLinkedDisplayControl(lblN)
         ucrNudHarmonics.SetLinkedDisplayControl(lblHarmonics)
         ucrNudPeriod.SetLinkedDisplayControl(lblPeriod)
         ucrNudSpan.SetLinkedDisplayControl(lblSpan)
         ucrNudDf.SetLinkedDisplayControl(lblDf)
+        ucrInputEstimateSummary.SetLinkedDisplayControl(ucrInputEstimateThreshold)
 
         ucrChkPoints.SetText("Points")
         ucrChkPoints.AddParameterPresentCondition(True, "geom_point")
@@ -139,19 +185,22 @@ Public Class dlgSeasonalPlot
         clsPipeOperator = New ROperator
         clsAndOperator = New ROperator
         clsRefGreaterOperator = New ROperator
-        clsEstGreaterOperator = New ROperator
+        clsEst1GreaterOperator = New ROperator
         clsRefLessOperator = New ROperator
-        clsEstLessOperator = New ROperator
+        clsEst1LessOperator = New ROperator
         clsDivideOperator = New ROperator
+        clsLessOperator = New ROperator
+        clsGreaterOperator = New ROperator
+        clsEst2GreaterOperator = New ROperator
+        clsEst2LessOperator = New ROperator
 
         clsPlusOperator = New ROperator
         clsFacetWrapTildeOperator = New ROperator
         clsPbsSplinesTildeOperator = New ROperator
 
-        clsFilterFunction = New RFunction
+        clsMissingFilterFunction = New RFunction
         clsRefIsNotNaFunction = New RFunction
         clsEstIsNotNaFunction = New RFunction
-        clsMutateFunction = New RFunction
         clsMutateFunction = New RFunction
         clsPivotLongerFunction = New RFunction
         clsGroupByFunction = New RFunction
@@ -162,6 +211,8 @@ Public Class dlgSeasonalPlot
         clsPropSumFunction = New RFunction
         clsNotIsNaThreshFunction = New RFunction
         clsMeanFunction = New RFunction
+        clsMeanFilterFunction = New RFunction
+        clsStdFunction = New RFunction
 
         clsGgplotFunction = New RFunction
         clsGeomPointFunction = New RFunction
@@ -177,21 +228,22 @@ Public Class dlgSeasonalPlot
         clsBinomialFunction = New RFunction
         clsPbsFunction = New RFunction
         clsNsFunction = New RFunction
+        clsYlabFunction = New RFunction
 
         ucrSelectorSeasonalityComparisons.Reset()
         ucrReceiverReference.SetMeAsReceiver()
-        ucrInputEstimateSummary.cboInput.SelectedItem = "Mean"
+        ucrInputEstimateSummary.cboInput.SelectedItem = "Prop Above"
         ucrInputReferenceSummary.cboInput.SelectedItem = "Mean"
         ucrInputSmoothing.cboInput.SelectedItem = "Fourier Series"
 
         clsPipeOperator.SetOperation("%>%")
-        clsPipeOperator.AddParameter("filter", clsRFunctionParameter:=clsFilterFunction, iPosition:=1)
+        clsPipeOperator.AddParameter("filter", clsRFunctionParameter:=clsMissingFilterFunction, iPosition:=1)
         clsPipeOperator.AddParameter("mutate", clsRFunctionParameter:=clsMutateFunction, iPosition:=2)
         clsPipeOperator.AddParameter("pivot_longer", clsRFunctionParameter:=clsPivotLongerFunction, iPosition:=3)
-        clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=4)
-        clsPipeOperator.AddParameter("summarise", clsRFunctionParameter:=clsSummariseFunction, iPosition:=5)
-        clsPipeOperator.AddParameter("moving_mutate", clsRFunctionParameter:=clsMovingMutateFunction, iPosition:=6)
-        clsPipeOperator.AddParameter("ggplot", clsROperatorParameter:=clsPlusOperator, iPosition:=7)
+        clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=5)
+        clsPipeOperator.AddParameter("summarise", clsRFunctionParameter:=clsSummariseFunction, iPosition:=6)
+        clsPipeOperator.AddParameter("moving_mutate", clsRFunctionParameter:=clsMovingMutateFunction, iPosition:=7)
+        clsPipeOperator.AddParameter("ggplot", clsROperatorParameter:=clsPlusOperator, iPosition:=8)
 
 
         clsAndOperator.SetOperation("&")
@@ -201,21 +253,21 @@ Public Class dlgSeasonalPlot
         clsRefGreaterOperator.SetOperation(">")
         clsRefGreaterOperator.AddParameter("value", 0.85, iPosition:=1)
 
-        clsEstGreaterOperator.SetOperation(">")
-        clsEstGreaterOperator.AddParameter("value", 0.85, iPosition:=1)
+        clsEst1GreaterOperator.SetOperation(">")
+        clsEst1GreaterOperator.AddParameter("value", 0.85, iPosition:=1)
 
         clsRefLessOperator.SetOperation("<")
 
-        clsEstLessOperator.SetOperation("<")
+        clsEst1LessOperator.SetOperation("<")
 
         clsDivideOperator.SetOperation("/")
         clsDivideOperator.bSpaceAroundOperation = False
         clsDivideOperator.AddParameter("sum", clsRFunctionParameter:=clsPropSumFunction, iPosition:=0)
         clsDivideOperator.AddParameter("n", "n", iPosition:=1)
 
-        clsFilterFunction.SetPackageName("dplyr")
-        clsFilterFunction.SetRCommand("filter")
-        clsFilterFunction.AddParameter("and", clsROperatorParameter:=clsAndOperator, bIncludeArgumentName:=False, iPosition:=0)
+        clsMissingFilterFunction.SetPackageName("dplyr")
+        clsMissingFilterFunction.SetRCommand("filter")
+        clsMissingFilterFunction.AddParameter("and", clsROperatorParameter:=clsAndOperator, bIncludeArgumentName:=False, iPosition:=0)
 
         clsRefIsNotNaFunction.SetRCommand("!is.na")
 
@@ -224,8 +276,7 @@ Public Class dlgSeasonalPlot
         clsMutateFunction.SetPackageName("dplyr")
         clsMutateFunction.SetRCommand("mutate")
         clsMutateFunction.AddParameter("reference", clsROperatorParameter:=clsRefGreaterOperator, iPosition:=0)
-        clsMutateFunction.AddParameter("estimate", clsROperatorParameter:=clsEstGreaterOperator, iPosition:=1)
-
+        clsMutateFunction.AddParameter("estimate", clsROperatorParameter:=clsEst1GreaterOperator, iPosition:=1)
 
         clsPivotLongerFunction.SetPackageName("tidyr")
         clsPivotLongerFunction.SetRCommand("pivot_longer")
@@ -267,6 +318,23 @@ Public Class dlgSeasonalPlot
         clsMeanFunction.AddParameter("value", "value", bIncludeArgumentName:=False, iPosition:=0)
         clsMeanFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
 
+        clsMeanFilterFunction.SetPackageName("dplyr")
+        clsMeanFilterFunction.SetRCommand("filter")
+
+        clsLessOperator.SetOperation("<")
+        clsLessOperator.AddParameter("0", "value", iPosition:=0)
+
+        clsGreaterOperator.SetOperation(">")
+        clsGreaterOperator.AddParameter("1", "value", iPosition:=0)
+
+        clsEst2GreaterOperator.SetOperation(">")
+
+        clsEst2LessOperator.SetOperation("<")
+
+        clsStdFunction.SetRCommand("sd")
+        clsStdFunction.AddParameter("value", "value", bIncludeArgumentName:=False, iPosition:=0)
+        clsStdFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
+
         'ggplot functions + operators
         clsGgplotFunction.SetPackageName("ggplot2")
         clsGgplotFunction.SetRCommand("ggplot")
@@ -276,6 +344,7 @@ Public Class dlgSeasonalPlot
         clsPlusOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, iPosition:=0)
         clsPlusOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLineFunction, iPosition:=2)
         clsPlusOperator.AddParameter("geom_smooth", clsRFunctionParameter:=clsGeomSmoothFunction, iPosition:=3)
+        clsPlusOperator.AddParameter("ylab", clsRFunctionParameter:=clsYlabFunction, iPosition:=4)
 
         clsFacetWrapTildeOperator.SetOperation("~")
         clsFacetWrapTildeOperator.AddParameter("", "", iPosition:=0)
@@ -337,6 +406,9 @@ Public Class dlgSeasonalPlot
         clsNsFunction.AddParameter("x", "x", bIncludeArgumentName:=False, iPosition:=0)
         clsNsFunction.AddParameter("df", 6, iPosition:=1)
 
+        clsYlabFunction.SetPackageName("ggplot2")
+        clsYlabFunction.SetRCommand("ylab")
+
         clsPipeOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorSeasonalityComparisons.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
     End Sub
@@ -345,12 +417,18 @@ Public Class dlgSeasonalPlot
         ucrReceiverReference.AddAdditionalCodeParameterPair(clsRefGreaterOperator, ucrReceiverReference.GetParameter, iAdditionalPairNo:=1)
         ucrReceiverReference.AddAdditionalCodeParameterPair(clsRefLessOperator, ucrReceiverReference.GetParameter, iAdditionalPairNo:=2)
 
-        ucrReceiverEstimate.AddAdditionalCodeParameterPair(clsEstGreaterOperator, ucrReceiverEstimate.GetParameter, iAdditionalPairNo:=1)
-        ucrReceiverEstimate.AddAdditionalCodeParameterPair(clsEstLessOperator, ucrReceiverEstimate.GetParameter, iAdditionalPairNo:=2)
+        ucrReceiverEstimate.AddAdditionalCodeParameterPair(clsEst1GreaterOperator, ucrReceiverEstimate.GetParameter, iAdditionalPairNo:=1)
+        ucrReceiverEstimate.AddAdditionalCodeParameterPair(clsEst1LessOperator, ucrReceiverEstimate.GetParameter, iAdditionalPairNo:=2)
+        ucrReceiverEstimate.AddAdditionalCodeParameterPair(clsEst2GreaterOperator, ucrReceiverEstimate.GetParameter, iAdditionalPairNo:=3)
+        ucrReceiverEstimate.AddAdditionalCodeParameterPair(clsEst2LessOperator, ucrReceiverEstimate.GetParameter, iAdditionalPairNo:=4)
 
         ucrInputReferenceThreshold.AddAdditionalCodeParameterPair(clsRefLessOperator, ucrInputReferenceThreshold.GetParameter, iAdditionalPairNo:=1)
+        ucrInputReferenceThreshold.AddAdditionalCodeParameterPair(clsLessOperator, ucrInputReferenceThreshold.GetParameter, iAdditionalPairNo:=2)
+        ucrInputReferenceThreshold.AddAdditionalCodeParameterPair(clsGreaterOperator, ucrInputReferenceThreshold.GetParameter, iAdditionalPairNo:=3)
+        ucrInputReferenceThreshold.AddAdditionalCodeParameterPair(clsEst2GreaterOperator, ucrInputReferenceThreshold.GetParameter, iAdditionalPairNo:=4)
+        ucrInputReferenceThreshold.AddAdditionalCodeParameterPair(clsEst2LessOperator, ucrInputReferenceThreshold.GetParameter, iAdditionalPairNo:=5)
 
-        ucrInputEstimateThreshold.AddAdditionalCodeParameterPair(clsEstLessOperator, ucrInputEstimateThreshold.GetParameter, iAdditionalPairNo:=1)
+        ucrInputEstimateThreshold.AddAdditionalCodeParameterPair(clsEst1LessOperator, ucrInputEstimateThreshold.GetParameter, iAdditionalPairNo:=1)
 
         ucrReceiverSeasonality.AddAdditionalCodeParameterPair(clsGgPlotAesFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
 
@@ -362,7 +440,7 @@ Public Class dlgSeasonalPlot
         ucrReceiverEstimate.SetRCode(clsEstIsNotNaFunction, bReset)
         ucrReceiverReference.SetRCode(clsRefIsNotNaFunction, bReset)
         ucrInputReferenceThreshold.SetRCode(clsRefGreaterOperator, bReset)
-        ucrInputEstimateThreshold.SetRCode(clsEstGreaterOperator, bReset)
+        ucrInputEstimateThreshold.SetRCode(clsEst1GreaterOperator, bReset)
         ucrReceiverStation.SetRCode(clsGroupByFunction, bReset)
         ucrReceiverSeasonality.SetRCode(clsGroupByFunction, bReset)
         ucrInputN.SetRCode(clsMovingFunction, bReset)
@@ -374,10 +452,11 @@ Public Class dlgSeasonalPlot
         ucrNudDf.SetRCode(clsNsFunction, bReset)
         ucrNudHarmonics.SetRCode(clsFourierSeriesFunction, bReset)
         ucrNudPeriod.SetRCode(clsFourierSeriesFunction, bReset)
+        ucrChkOptionalSummary.SetRCode(clsEst1GreaterOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverReference.IsEmpty OrElse ucrReceiverEstimate.IsEmpty OrElse ucrReceiverSeasonality.IsEmpty OrElse (ucrChkMovingAverage.Checked AndAlso ucrInputN.IsEmpty) OrElse ((ucrInputReferenceSummary.GetText = "Prop Above" OrElse ucrInputReferenceSummary.GetText = "Prop Below") AndAlso ucrInputReferenceThreshold.IsEmpty) OrElse ((ucrInputEstimateSummary.GetText = "Prop Above" OrElse ucrInputEstimateSummary.GetText = "Prop Below") AndAlso ucrInputEstimateThreshold.IsEmpty) OrElse Not ucrSaveGraph.IsComplete OrElse (ucrInputSmoothing.GetText = "Fourier Series" AndAlso (ucrNudHarmonics.GetText = "" OrElse ucrNudPeriod.GetText = "")) OrElse (ucrInputSmoothing.GetText = "LOESS" AndAlso ucrNudSpan.GetText = "") OrElse ((ucrInputSmoothing.GetText = "Periodic Splines" OrElse ucrInputSmoothing.GetText = "Natural Splines") AndAlso ucrNudDf.GetText = "") Then
+        If ucrReceiverReference.IsEmpty OrElse ucrReceiverEstimate.IsEmpty OrElse ucrReceiverSeasonality.IsEmpty OrElse (ucrChkMovingAverage.Checked AndAlso ucrInputN.IsEmpty) OrElse ((ucrInputReferenceSummary.GetText = "Prop Above" OrElse ucrInputReferenceSummary.GetText = "Prop Below") AndAlso ucrInputReferenceThreshold.IsEmpty) OrElse (ucrChkOptionalSummary.Checked AndAlso (ucrInputEstimateSummary.GetText = "Prop Above" OrElse ucrInputEstimateSummary.GetText = "Prop Below") AndAlso ucrInputEstimateThreshold.IsEmpty) OrElse Not ucrSaveGraph.IsComplete OrElse (ucrInputSmoothing.GetText = "Fourier Series" AndAlso (ucrNudHarmonics.GetText = "" OrElse ucrNudPeriod.GetText = "")) OrElse (ucrInputSmoothing.GetText = "LOESS" AndAlso ucrNudSpan.GetText = "") OrElse ((ucrInputSmoothing.GetText = "Periodic Splines" OrElse ucrInputSmoothing.GetText = "Natural Splines") AndAlso ucrNudDf.GetText = "") Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -390,34 +469,107 @@ Public Class dlgSeasonalPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrInputReferenceSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputReferenceSummary.ControlValueChanged, ucrReceiverReference.ControlValueChanged, ucrReceiverEstimate.ControlValueChanged
+    Private Sub UpdateSummaryParameters()
         Select Case ucrInputReferenceSummary.GetText
             Case "Prop Above"
+                clsPipeOperator.RemoveParameterByName("filter2")
                 clsMutateFunction.AddParameter("reference", clsROperatorParameter:=clsRefGreaterOperator, iPosition:=0)
+                clsMutateFunction.AddParameter("estimate", clsROperatorParameter:=clsEst2GreaterOperator, iPosition:=1)
+                clsSummariseFunction.AddParameter("calc_summary", clsROperatorParameter:=clsDivideOperator, iPosition:=3)
             Case "Prop Below"
+                clsPipeOperator.RemoveParameterByName("filter2")
                 clsMutateFunction.AddParameter("reference", clsROperatorParameter:=clsRefLessOperator, iPosition:=0)
+                clsMutateFunction.AddParameter("estimate", clsROperatorParameter:=clsEst2LessOperator, iPosition:=1)
+                clsSummariseFunction.AddParameter("calc_summary", clsROperatorParameter:=clsDivideOperator, iPosition:=3)
             Case "Mean"
+                clsPipeOperator.RemoveParameterByName("filter2")
                 clsMutateFunction.AddParameter("reference", clsRFunctionParameter:=ucrReceiverReference.GetVariables, iPosition:=0)
-                clsSummariseFunction.AddParameter("calc_summary", clsRFunctionParameter:=clsMeanFunction, iPosition:=3)
-        End Select
-
-    End Sub
-
-    Private Sub ucrInputEstimateSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEstimateSummary.ControlValueChanged, ucrReceiverReference.ControlValueChanged, ucrReceiverEstimate.ControlValueChanged
-        Select Case ucrInputEstimateSummary.GetText
-            Case "Prop Above"
-                clsMutateFunction.AddParameter("estimate", clsROperatorParameter:=clsEstGreaterOperator, iPosition:=1)
-            Case "Prop Below"
-                clsMutateFunction.AddParameter("estimate", clsROperatorParameter:=clsEstLessOperator, iPosition:=1)
-            Case "Mean"
                 clsMutateFunction.AddParameter("estimate", clsRFunctionParameter:=ucrReceiverEstimate.GetVariables, iPosition:=1)
                 clsSummariseFunction.AddParameter("calc_summary", clsRFunctionParameter:=clsMeanFunction, iPosition:=3)
+            Case "Mean Above"
+                clsMutateFunction.AddParameter("reference", clsRFunctionParameter:=ucrReceiverReference.GetVariables, iPosition:=0)
+                clsMutateFunction.AddParameter("estimate", clsRFunctionParameter:=ucrReceiverEstimate.GetVariables, iPosition:=1)
+                clsMeanFilterFunction.AddParameter("operator", clsROperatorParameter:=clsGreaterOperator, bIncludeArgumentName:=False, iPosition:=0)
+                clsPipeOperator.AddParameter("filter2", clsRFunctionParameter:=clsMeanFilterFunction, iPosition:=4)
+                clsSummariseFunction.AddParameter("calc_summary", clsRFunctionParameter:=clsMeanFunction, iPosition:=3)
+            Case "Mean Below"
+                clsMutateFunction.AddParameter("reference", clsRFunctionParameter:=ucrReceiverReference.GetVariables, iPosition:=0)
+                clsMutateFunction.AddParameter("estimate", clsRFunctionParameter:=ucrReceiverEstimate.GetVariables, iPosition:=1)
+                clsMeanFilterFunction.AddParameter("operator", clsROperatorParameter:=clsLessOperator, bIncludeArgumentName:=False, iPosition:=0)
+                clsPipeOperator.AddParameter("filter2", clsRFunctionParameter:=clsMeanFilterFunction, iPosition:=4)
+                clsSummariseFunction.AddParameter("calc_summary", clsRFunctionParameter:=clsMeanFunction, iPosition:=3)
+            Case "Std.dev"
+                clsPipeOperator.RemoveParameterByName("filter2")
+                clsMutateFunction.AddParameter("reference", clsRFunctionParameter:=ucrReceiverReference.GetVariables, iPosition:=0)
+                clsMutateFunction.AddParameter("estimate", clsRFunctionParameter:=ucrReceiverEstimate.GetVariables, iPosition:=1)
+                clsSummariseFunction.AddParameter("calc_summary", clsRFunctionParameter:=clsStdFunction, iPosition:=3)
         End Select
+    End Sub
+
+    Private Sub ucrInputReferenceSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputReferenceSummary.ControlValueChanged, ucrReceiverReference.ControlValueChanged, ucrReceiverEstimate.ControlValueChanged, ucrInputSmoothing.ControlValueChanged
+        UpdateSummaryParameters()
+        Select Case ucrInputSmoothing.GetText
+            Case "Fourier Series"
+                clsGeomSmoothFunction.AddParameter("formula", clsRFunctionParameter:=clsAsFormulaFunction, iPosition:=1)
+            Case "Periodic Splines"
+                clsPbsSplinesTildeOperator.AddParameter("pbs", clsRFunctionParameter:=clsPbsFunction, iPosition:=1)
+                clsPbsSplinesTildeOperator.RemoveParameterByName("ns")
+                clsPbsSplinesTildeOperator.RemoveParameterByName("x")
+                clsGeomSmoothFunction.AddParameter("formula", clsROperatorParameter:=clsPbsSplinesTildeOperator, iPosition:=1)
+            Case "Natural Splines"
+                clsPbsSplinesTildeOperator.RemoveParameterByName("pbs")
+                clsPbsSplinesTildeOperator.RemoveParameterByName("x")
+                clsPbsSplinesTildeOperator.AddParameter("ns", clsRFunctionParameter:=clsNsFunction, iPosition:=1)
+                clsGeomSmoothFunction.AddParameter("formula", clsROperatorParameter:=clsPbsSplinesTildeOperator, iPosition:=1)
+            Case "LOESS"
+                clsPbsSplinesTildeOperator.RemoveParameterByName("pbs")
+                clsPbsSplinesTildeOperator.RemoveParameterByName("ns")
+                clsPbsSplinesTildeOperator.AddParameter("x", "x", iPosition:=1)
+                clsGeomSmoothFunction.AddParameter("formula", clsROperatorParameter:=clsPbsSplinesTildeOperator, iPosition:=1)
+        End Select
+
+        If ucrInputSmoothing.GetText = "LOESS" Then
+            clsGeomSmoothFunction.AddParameter("method", Chr(34) & "loess" & Chr(34), iPosition:=0)
+            clsGeomSmoothFunction.RemoveParameterByName("method.args")
+        Else
+            Select Case ucrInputReferenceSummary.GetText
+                Case "Prop Above", "Prop Below"
+                    clsGeomSmoothFunction.AddParameter("method", Chr(34) & "glm" & Chr(34), iPosition:=0)
+                    clsGeomSmoothFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
+                    clsYlabFunction.AddParameter("label", "Prop")
+                Case "Mean", "Mean Above", "Mean Below", "Std.dev"
+                    clsGeomSmoothFunction.AddParameter("method", Chr(34) & "lm" & Chr(34), iPosition:=0)
+                    clsGeomSmoothFunction.RemoveParameterByName("method.args")
+                    clsYlabFunction.AddParameter("label", "Std.dev")
+            End Select
+        End If
+
+        Select Case ucrInputReferenceSummary.GetText
+            Case "Prop Above", "Prop Below"
+                clsYlabFunction.AddParameter("label", Chr(34) & "Prop" & Chr(34))
+            Case "Mean", "Mean Above", "Mean Below"
+                clsYlabFunction.AddParameter("label", Chr(34) & "Mean" & Chr(34))
+            Case "Std.dev"
+                clsYlabFunction.AddParameter("label", Chr(34) & "Std.dev" & Chr(34))
+        End Select
+    End Sub
+
+    Private Sub ucrInputEstimateSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputEstimateSummary.ControlValueChanged, ucrReceiverReference.ControlValueChanged, ucrReceiverEstimate.ControlValueChanged, ucrChkOptionalSummary.ControlValueChanged
+        If ucrChkOptionalSummary.Checked Then
+            Select Case ucrInputEstimateSummary.GetText
+                Case "Prop Above"
+                    clsMutateFunction.AddParameter("estimate", clsROperatorParameter:=clsEst1GreaterOperator, iPosition:=1)
+                Case "Prop Below"
+                    clsMutateFunction.AddParameter("estimate", clsROperatorParameter:=clsEst1LessOperator, iPosition:=1)
+            End Select
+        Else
+            UpdateSummaryParameters()
+        End If
     End Sub
 
     Private Sub ucrChkRemoveMissing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRemoveMissing.ControlValueChanged
         If ucrChkRemoveMissing.Checked Then
-            clsPipeOperator.AddParameter("filter", clsRFunctionParameter:=clsFilterFunction, iPosition:=1)
+            clsPipeOperator.AddParameter("filter", clsRFunctionParameter:=clsMissingFilterFunction, iPosition:=1)
         Else
             clsPipeOperator.RemoveParameterByName("filter")
         End If
@@ -425,7 +577,7 @@ Public Class dlgSeasonalPlot
 
     Private Sub ucrChkMovingAverage_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMovingAverage.ControlValueChanged
         If ucrChkMovingAverage.Checked Then
-            clsPipeOperator.AddParameter("moving_mutate", clsRFunctionParameter:=clsMovingMutateFunction, iPosition:=6)
+            clsPipeOperator.AddParameter("moving_mutate", clsRFunctionParameter:=clsMovingMutateFunction, iPosition:=7)
             clsPlusOperator.AddParameter("geom_line", clsRFunctionParameter:=clsGeomLineFunction, iPosition:=2)
             clsGeomLineAesFunction.AddParameter("y", "moving", iPosition:=0)
         Else
@@ -443,46 +595,15 @@ Public Class dlgSeasonalPlot
         End If
     End Sub
 
-    Private Sub ucrInputSmoothing_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSmoothing.ControlValueChanged
-        Select Case ucrInputSmoothing.GetText
-            Case "Fourier Series"
-                clsGeomSmoothFunction.AddParameter("method", Chr(34) & "glm" & Chr(34), iPosition:=0)
-                clsGeomSmoothFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
-                clsGeomSmoothFunction.AddParameter("formula", clsRFunctionParameter:=clsAsFormulaFunction, iPosition:=1)
-            Case "Periodic Splines"
-                clsGeomSmoothFunction.AddParameter("method", Chr(34) & "glm" & Chr(34), iPosition:=0)
-                clsGeomSmoothFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
-                clsPbsSplinesTildeOperator.AddParameter("pbs", clsRFunctionParameter:=clsPbsFunction, iPosition:=1)
-                clsPbsSplinesTildeOperator.RemoveParameterByName("ns")
-                clsPbsSplinesTildeOperator.RemoveParameterByName("x")
-                clsGeomSmoothFunction.AddParameter("formula", clsROperatorParameter:=clsPbsSplinesTildeOperator, iPosition:=1)
-            Case "Natural Splines"
-                clsGeomSmoothFunction.AddParameter("method", Chr(34) & "glm" & Chr(34), iPosition:=0)
-                clsGeomSmoothFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
-                clsPbsSplinesTildeOperator.RemoveParameterByName("pbs")
-                clsPbsSplinesTildeOperator.RemoveParameterByName("x")
-                clsPbsSplinesTildeOperator.AddParameter("ns", clsRFunctionParameter:=clsNsFunction, iPosition:=1)
-                clsGeomSmoothFunction.AddParameter("formula", clsROperatorParameter:=clsPbsSplinesTildeOperator, iPosition:=1)
-            Case "LOESS"
-                clsGeomSmoothFunction.AddParameter("method", Chr(34) & "loess" & Chr(34), iPosition:=0)
-                clsPbsSplinesTildeOperator.RemoveParameterByName("pbs")
-                clsPbsSplinesTildeOperator.RemoveParameterByName("ns")
-                clsPbsSplinesTildeOperator.AddParameter("x", "x", iPosition:=1)
-                clsGeomSmoothFunction.RemoveParameterByName("method.args")
-                clsGeomSmoothFunction.AddParameter("formula", clsROperatorParameter:=clsPbsSplinesTildeOperator, iPosition:=1)
-        End Select
-
-    End Sub
-
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
         If Not ucrReceiverStation.IsEmpty Then
-            clsPlusOperator.AddParameter("facet_wrap", clsRFunctionParameter:=clsFacetWrapFunction, iPosition:=4)
+            clsPlusOperator.AddParameter("facet_wrap", clsRFunctionParameter:=clsFacetWrapFunction, iPosition:=5)
         Else
             clsPlusOperator.RemoveParameterByName("facet_wrap")
         End If
     End Sub
 
-    Private Sub ucrReceiverReference_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReference.ControlContentsChanged, ucrReceiverEstimate.ControlContentsChanged, ucrReceiverSeasonality.ControlContentsChanged, ucrChkMovingAverage.ControlContentsChanged, ucrInputN.ControlContentsChanged, ucrInputReferenceSummary.ControlContentsChanged, ucrInputReferenceThreshold.ControlContentsChanged, ucrInputEstimateSummary.ControlContentsChanged, ucrInputEstimateThreshold.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrInputSmoothing.ControlContentsChanged, ucrNudHarmonics.ControlContentsChanged, ucrNudPeriod.ControlContentsChanged, ucrNudSpan.ControlContentsChanged, ucrNudDf.ControlContentsChanged
+    Private Sub ucrReceiverReference_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReference.ControlContentsChanged, ucrReceiverEstimate.ControlContentsChanged, ucrReceiverSeasonality.ControlContentsChanged, ucrChkMovingAverage.ControlContentsChanged, ucrInputN.ControlContentsChanged, ucrInputReferenceSummary.ControlContentsChanged, ucrInputReferenceThreshold.ControlContentsChanged, ucrInputEstimateSummary.ControlContentsChanged, ucrInputEstimateThreshold.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrInputSmoothing.ControlContentsChanged, ucrNudHarmonics.ControlContentsChanged, ucrNudPeriod.ControlContentsChanged, ucrNudSpan.ControlContentsChanged, ucrNudDf.ControlContentsChanged, ucrChkOptionalSummary.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
