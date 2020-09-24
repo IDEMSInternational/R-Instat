@@ -465,21 +465,17 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   # this type is adding a column to the data
   # the data is at the same "level" so the link is unchanged
   if(calc$type == "calculation") {
-    if(calc$result_name %in% names(curr_data_list[[c_data_label]])) warning(calc$result_name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::mutate_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
+    if(calc$result_name %in% names(curr_data_list[[c_data_label]])) warning(calc$result_name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")    
+    calc_result_name <- calc$result_name
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::mutate({{ calc_result_name }} := !!rlang::parse_expr(calc$function_exp))
   }
   # this type performs a summary
   # the data is not at a different "level" so the link is changed and link columns are the groups of the data before summarising
   # A merge is now required because the data is at a different "level"
   else if(calc$type == "summary") {
     curr_data_list[[c_link_label]][["link_cols"]] <- as.character(dplyr::groups(curr_data_list[[c_data_label]]))
-    # TODO: change to group_vars??
-
-    #print(calc$function_exp)
-    
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise_(.dots = setNames(list(as.formula(paste0("~", calc$function_exp))), calc$result_name))
-    #curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise(.dots = setNames(across({{ calc$function_exp }}, calc$result_name))
-
+    calc_result_name <- calc$result_name
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::summarise({{ calc_result_name }} := !!rlang::parse_expr(calc$function_exp))
     curr_data_list[[c_has_summary_label]] <- TRUE
   }
   # This type is grouping the data
@@ -498,11 +494,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   # The data is at the same "level" so the link is unchanged
   # The rows are now different so a merge is required
   else if(calc$type == "filter") {
-
-#  print(calc$function_exp)
-#  print(as.formula(paste0("~", calc$function_exp)))
-
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::filter_(.dots = as.formula(paste0("~", calc$function_exp)))
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::filter(!!rlang::parse_expr(calc$function_exp))
     curr_data_list[[c_has_filter_label]] <- TRUE
   }
   # This type is when there is no main calculation but some sub_calculations
