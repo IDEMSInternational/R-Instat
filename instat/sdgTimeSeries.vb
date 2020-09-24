@@ -70,16 +70,16 @@ Public Class sdgTimeSeries
         ucrChkNIndividual.AddParameterPresentCondition(False, "n", bNewIsPositive:=False)
 
         ucrChkMeanIndividual.SetText("Mean")
-        ucrChkMeanIndividual.AddParameterPresentCondition(True, "n")
-        ucrChkMeanIndividual.AddParameterPresentCondition(False, "n", bNewIsPositive:=False)
+        ucrChkMeanIndividual.AddParameterPresentCondition(True, "mean")
+        ucrChkMeanIndividual.AddParameterPresentCondition(False, "mean", bNewIsPositive:=False)
 
         ucrChkSdIndividual.SetText("Sd")
-        ucrChkSdIndividual.AddParameterPresentCondition(True, "n")
-        ucrChkSdIndividual.AddParameterPresentCondition(False, "n", bNewIsPositive:=False)
+        ucrChkSdIndividual.AddParameterPresentCondition(True, "sd")
+        ucrChkSdIndividual.AddParameterPresentCondition(False, "sd", bNewIsPositive:=False)
 
         ucrChkSlopeIndividual.SetText("Slope")
-        ucrChkSlopeIndividual.AddParameterPresentCondition(True, "n")
-        ucrChkSlopeIndividual.AddParameterPresentCondition(False, "n", bNewIsPositive:=False)
+        ucrChkSlopeIndividual.AddParameterPresentCondition(True, "slope")
+        ucrChkSlopeIndividual.AddParameterPresentCondition(False, "slope", bNewIsPositive:=False)
 
         ' Comparison summaries
 
@@ -185,10 +185,10 @@ Public Class sdgTimeSeries
         ucrChkRmse.SetRCode(clsComparisonSummariesSummarise, bReset, bCloneIfNeeded:=True)
         ucrChkKge.SetRCode(clsComparisonSummariesSummarise, bReset, bCloneIfNeeded:=True)
 
-        ucrChkNIndividual.SetRCode(clsIndividualSummariesSummarise, bReset, bCloneIfNeeded:=True)
-        ucrChkMeanIndividual.SetRCode(clsIndividualSummariesSummarise, bReset, bCloneIfNeeded:=True)
-        ucrChkSdIndividual.SetRCode(clsIndividualSummariesSummarise, bReset, bCloneIfNeeded:=True)
-        ucrChkSlopeIndividual.SetRCode(clsIndividualSummariesSummarise, bReset, bCloneIfNeeded:=True)
+        ucrChkNIndividual.SetRCode(clsReferencePasteLabel, bReset, bCloneIfNeeded:=True)
+        ucrChkMeanIndividual.SetRCode(clsReferencePasteLabel, bReset, bCloneIfNeeded:=True)
+        ucrChkSdIndividual.SetRCode(clsReferencePasteLabel, bReset, bCloneIfNeeded:=True)
+        ucrChkSlopeIndividual.SetRCode(clsReferencePasteLabel, bReset, bCloneIfNeeded:=True)
 
         ucrInputPositionReference.SetRCode(clsComparisonGeomText, bReset, bCloneIfNeeded:=True)
         ucrInputPositionEstimates.SetRCode(clsEstimatesGeomText, bReset, bCloneIfNeeded:=True)
@@ -413,11 +413,11 @@ Public Class sdgTimeSeries
             If rdoComparison.Checked Then
                 grpComparisonSummaries.Visible = True
                 grpIndividualSummaries.Visible = False
-                lblPositionReference.Text = "Position"
+                lblPositionReference.Text = "Position:"
             ElseIf rdoIndividual.Checked Then
                 grpComparisonSummaries.Visible = False
                 grpIndividualSummaries.Visible = True
-                lblPositionReference.Text = "Position - Reference"
+                lblPositionReference.Text = "Position - Reference:"
             End If
             IndividualCheckBoxesCheck()
             ComparisonCheckBoxesCheck()
