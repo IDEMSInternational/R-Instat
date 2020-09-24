@@ -360,9 +360,12 @@ Public Class sdgSummaries
         OrderByCheckEnabled()
     End Sub
 
-    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewConcFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strNewWeightLabel As String = Nothing)
+    Public Sub SetRFunction(clsNewRFunction As RFunction, clsNewDefaultFunction As RFunction, clsNewConcFunction As RFunction, Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False, Optional strNewWeightLabel As String = Nothing, Optional strDefaultTab As String = "")
+        Dim bTabFound As Boolean = False
+
         If Not bControlsInitialised Then
             InitialiseControls()
+
         End If
         clsListFunction = clsNewRFunction
         clsDefaultFunction = clsNewDefaultFunction
@@ -481,9 +484,23 @@ Public Class sdgSummaries
         ucrChkVolumetricEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
-            tbSummaries.SelectedIndex = 0
             ucrSelectorSecondVariable.Reset()
             ucrSelectorOrderBy.Reset()
+            If strDefaultTab <> "" Then
+                For i As Integer = 0 To tbSummaries.TabPages.Count - 1
+                    If tbSummaries.TabPages(i).Text = strDefaultTab Then
+                        tbSummaries.SelectedIndex = i
+                        bTabFound = True
+                        Exit For
+                    End If
+                Next
+                If Not bTabFound Then
+                    MsgBox("Developer error: there is no Summary tab called" & Chr(34) & strDefaultTab & Chr(34) & vbNewLine & "Default tab will be selected.")
+                    tbSummaries.SelectedIndex = 0
+                End If
+            Else
+                tbSummaries.SelectedIndex = 0
+            End If
         End If
     End Sub
 

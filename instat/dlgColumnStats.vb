@@ -25,6 +25,7 @@ Public Class dlgColumnStats
     Public strDefaultDataFrame As String = ""
     Public strDefaultVariables() As String
     Public strDefaultFactors() As String
+    Private strDefaultTab As String = ""
 
     Private Sub dlgColumnStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -151,6 +152,10 @@ Public Class dlgColumnStats
         strDefaultFactors = Nothing
     End Sub
 
+    Public Sub SetDefaultTab(strNewDefaultTab As String)
+        strDefaultTab = strNewDefaultTab
+    End Sub
+
     Public Sub TestOKEnabled()
         If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0) AndAlso sdgSummaries.bOkEnabled Then
             ucrBase.OKEnabled(True)
@@ -166,9 +171,10 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsNewRFunction:=clsSummariesList, clsNewDefaultFunction:=clsDefaultFunction, clsNewConcFunction:=clsConcFunction, ucrNewBaseSelector:=ucrSelectorForColumnStatistics, bReset:=bResetSubdialog, strNewWeightLabel:=strWeightLabel)
+        sdgSummaries.SetRFunction(clsNewRFunction:=clsSummariesList, clsNewDefaultFunction:=clsDefaultFunction, clsNewConcFunction:=clsConcFunction, ucrNewBaseSelector:=ucrSelectorForColumnStatistics, bReset:=bResetSubdialog, strNewWeightLabel:=strWeightLabel, strDefaultTab:=strDefaultTab)
         sdgSummaries.ShowDialog()
         bResetSubdialog = False
+        strDefaultTab = ""
         TestOKEnabled()
     End Sub
 
