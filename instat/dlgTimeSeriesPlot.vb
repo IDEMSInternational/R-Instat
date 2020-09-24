@@ -701,7 +701,7 @@ Public Class dlgTimeSeriesPlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverEstimates.IsEmpty And Not ucrReceiverReference.IsEmpty AndAlso ucrSavePlot.IsComplete Then
+        If Not ucrReceiverEstimates.IsEmpty And Not ucrReceiverReference.IsEmpty And Not ucrReceiverTime.IsEmpty AndAlso ucrSavePlot.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -772,7 +772,7 @@ Public Class dlgTimeSeriesPlot
         TestOkEnabled()
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimates.ControlContentsChanged, ucrReceiverReference.ControlContentsChanged, ucrSavePlot.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimates.ControlContentsChanged, ucrReceiverReference.ControlContentsChanged, ucrReceiverTime.ControlContentsChanged, ucrSavePlot.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
