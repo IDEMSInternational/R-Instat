@@ -114,7 +114,7 @@ Public Class dlgTimeSeriesPlot
     ' The value is a tuple of two RFunctions. 
     ' Item1 is the summary function. 
     ' Item2 is the paste function containing the summary.
-    ' This dictionary is created to avoid passing all the RFunctions to the sub dialog individually.
+    ' These dictionary are created to avoid passing all the RFunctions to the sub dialog individually.
     Private dctComparisonSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
     Private dctIndividualSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
 
@@ -735,7 +735,7 @@ Public Class dlgTimeSeriesPlot
     End Sub
 
     Private Sub ucrReceiverEstimates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEstimates.ControlValueChanged
-        ' This ensures clsAdjustNAMutate has the correct parameters. Unlike in most functions, in dplyr::mutate, the parameter name is the selected variable.
+        ' This ensures clsAdjustNAMutate has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
         ' Storing and then removing strEstimates as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
         If ucrReceiverEstimates.IsEmpty Then
             clsAdjustNAMutate.RemoveParameterByName(strEstimates)
@@ -751,7 +751,7 @@ Public Class dlgTimeSeriesPlot
     End Sub
 
     Private Sub ucrReceiverReference_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReference.ControlValueChanged
-        ' This ensures clsAdjustNAMutate has the correct parameters. Unlike in most functions, in dplyr::mutate, the parameter name is the selected variable.
+        ' This ensures clsAdjustNAMutate has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
         ' Storing and then removing strReference as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
         If ucrReceiverReference.IsEmpty Then
             clsAdjustNAMutate.RemoveParameterByName(strReference)

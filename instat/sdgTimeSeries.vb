@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports instat.Translations
 
 Public Class sdgTimeSeries
@@ -46,7 +47,7 @@ Public Class sdgTimeSeries
     ' The value is a tuple of two RFunctions. 
     ' Item1 is the summary function. 
     ' Item2 is the paste function containing the summary.
-    ' This dictionary is created to avoid passing all the RFunctions to the sub dialog individually.
+    ' These dictionary are created to avoid passing all the RFunctions to the sub dialog individually.
     Private dctComparisonSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
     Private dctIndividualSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
 
@@ -58,6 +59,8 @@ Public Class sdgTimeSeries
         ucrPnlSummaries.AddRadioButton(rdoComparison)
         ucrPnlSummaries.AddRadioButton(rdoIndividual)
 
+        ' Setting the conditions in this way ensures that at least one radio button is always selected as there may be no geom_text present.
+        ' This set up also ensures rdoComparison is selected by default before any selection has been made.
         ucrPnlSummaries.AddParameterPresentCondition(rdoIndividual, strGeomTextReferenceParameterName)
         ucrPnlSummaries.AddParameterPresentCondition(rdoComparison, strGeomTextReferenceParameterName, bNewIsPositive:=False)
 
@@ -364,6 +367,7 @@ Public Class sdgTimeSeries
     End Sub
 
     Private Sub ucrInputPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPositionReference.ControlValueChanged
+        ' ucrInputPositionReference defines the position for both clsComparisonGeomText and clsReferenceGeomText hence two calls here.
         TextPosition(clsComparisonGeomText, ucrInputPositionReference.GetText())
         TextPosition(clsReferenceGeomText, ucrInputPositionReference.GetText())
     End Sub
@@ -408,6 +412,9 @@ Public Class sdgTimeSeries
         SummariesDisplay()
     End Sub
 
+    ''' <summary>
+    ''' Show and hide the groups boxes and adjust a label's text based on radio button selection.
+    ''' </summary>
     Private Sub SummariesDisplay()
         If bRCodeSet Then
             If rdoComparison.Checked Then
@@ -421,6 +428,13 @@ Public Class sdgTimeSeries
             End If
             IndividualCheckBoxesCheck()
             ComparisonCheckBoxesCheck()
+        End If
+    End Sub
+
+    ' In case font size is left empty, set to default value, otherwise geom_text will include 'size=' and give an error.
+    Private Sub sdgTimeSeries_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        If ucrInputFontSize.GetText() = "" Then
+            ucrInputFontSize.SetName("5")
         End If
     End Sub
 End Class
