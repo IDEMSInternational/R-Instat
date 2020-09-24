@@ -231,7 +231,7 @@ Public Class dlgTimeSeriesPlot
 
         clsGeomSmooth = New RFunction
         clsGeomSmoothParameter = New RParameter(strGeomSmoothParameterName, clsGeomSmooth, iNewPosition:=4)
-        ucrChkIncludeLineOfBestFit.SetText("Include Line of Best Fit")
+        ucrChkIncludeLineOfBestFit.SetText("Include Lines of Best Fit")
         ucrChkIncludeLineOfBestFit.SetParameter(clsGeomSmoothParameter, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkIncludeLineOfBestFit.AddToLinkedControls(ucrChkWithSE, {True}, bNewLinkedHideIfParameterMissing:=True)
 
