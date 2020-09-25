@@ -106,12 +106,14 @@ Public Class dlgDisplayDailyData
 
 
         ucrInputGraphRugColur.SetParameter(New RParameter("colour", 1))
-        dctGRugColour.Add("Blue", Chr(34) & "blue" & Chr(34))
         dctGRugColour.Add("Red", Chr(34) & "red" & Chr(34))
+        dctGRugColour.Add("Black", Chr(34) & "black" & Chr(34))
+        dctGRugColour.Add("Blue", Chr(34) & "blue" & Chr(34))
         dctGRugColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
         dctGRugColour.Add("Green", Chr(34) & "green" & Chr(34))
         dctGRugColour.Add("Violet", Chr(34) & "violet" & Chr(34))
         ucrInputGraphRugColur.SetItems(dctGRugColour)
+        ucrInputGraphRugColur.bAllowNonConditionValues = True
 
 
         ucrInputBarColour.SetParameter(New RParameter("bar_colour", 7))
@@ -129,6 +131,7 @@ Public Class dlgDisplayDailyData
         dctRugColour.Add("Green", Chr(34) & "green" & Chr(34))
         dctRugColour.Add("Violet", Chr(34) & "violet" & Chr(34))
         ucrInputRugColour.SetItems(dctRugColour)
+        ucrInputRugColour.bAllowNonConditionValues = True
 
         ucrChkSum.SetParameter(New RParameter("sum", 0), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "sum" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSum.SetText("Sum")
@@ -162,6 +165,7 @@ Public Class dlgDisplayDailyData
         dctScale.Add("Free_y", Chr(34) & "free_y" & Chr(34))
         dctScale.Add("Free_x", Chr(34) & "free_x" & Chr(34))
         dctScale.Add("Free", Chr(34) & "free" & Chr(34))
+        dctScale.Add("Fixed", Chr(34) & "fixed" & Chr(34))
         ucrInputScale.SetItems(dctScale)
         ucrInputScale.SetDropDownStyleAsNonEditable()
 
