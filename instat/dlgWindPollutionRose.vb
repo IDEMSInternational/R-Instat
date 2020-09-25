@@ -110,6 +110,7 @@ Public Class dlgWindPollutionRose
         clsPollutionRose.AddParameter("paddle", "TRUE", iPosition:=5)
         clsPollutionRose.AddParameter("normalise", "FALSE", iPosition:=6)
         clsPollutionRose.AddParameter("statistic", Chr(34) & "prop.count" & Chr(34), iPosition:=7)
+        clsPollutionRose.AddParameter("pollutant", Chr(34) & "ws" & Chr(34), iPosition:=9)
         clsPollutionRose.SetAssignTo(strTemp:="last_graph", strTempDataframe:=ucrWindPollutionRoseSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsPollutionRose)
     End Sub
