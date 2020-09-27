@@ -42,36 +42,47 @@ Partial Class dlgInventoryPlot
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblElement = New System.Windows.Forms.Label()
-        Me.pnlDetails = New System.Windows.Forms.Panel()
         Me.rdoMissing = New System.Windows.Forms.RadioButton()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
         Me.cmdInventoryPlotOptions = New System.Windows.Forms.Button()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.rdoElementOrder = New System.Windows.Forms.RadioButton()
         Me.rdoDateOrder = New System.Windows.Forms.RadioButton()
-        Me.pnlSummary = New System.Windows.Forms.Panel()
-        Me.pnlOmit = New System.Windows.Forms.Panel()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkOmitStart = New instat.ucrCheck()
         Me.ucrChkOmitEnd = New instat.ucrCheck()
-        Me.ucrChkSummary = New instat.ucrCheck()
         Me.ucrChkDetails = New instat.ucrCheck()
         Me.ucrPnlOrder = New instat.UcrPanel()
-        Me.ucrSaveDetails = New instat.ucrSave()
+        Me.ucrChkSummary = New instat.ucrCheck()
+        Me.grpDetailsOptions = New System.Windows.Forms.GroupBox()
         Me.ucrChkMinute = New instat.ucrCheck()
+        Me.ucrSaveDetails = New instat.ucrSave()
         Me.ucrChkSecond = New instat.ucrCheck()
-        Me.ucrChkYear = New instat.ucrCheck()
         Me.ucrChkMonth = New instat.ucrCheck()
-        Me.ucrChkDay = New instat.ucrCheck()
         Me.ucrChkHour = New instat.ucrCheck()
-        Me.ucrPnls = New instat.UcrPanel()
+        Me.ucrChkYear = New instat.ucrCheck()
+        Me.ucrChkDay = New instat.ucrCheck()
+        Me.lblGraphTitle = New System.Windows.Forms.Label()
+        Me.grpPlotType = New System.Windows.Forms.GroupBox()
+        Me.rdoyear_doy_plot = New System.Windows.Forms.RadioButton()
+        Me.rdoDatePlot = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlPlotType = New instat.UcrPanel()
+        Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.ucrChkDisplayRainDays = New instat.ucrCheck()
+        Me.ucrInputFacetBy = New instat.ucrInputComboBox()
+        Me.ucrInputTitle = New instat.ucrInputTextBox()
+        Me.ucrChkShowNonMissing = New instat.ucrCheck()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrChkFlipCoordinates = New instat.ucrCheck()
+        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrInventoryPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.pnlDetails.SuspendLayout()
-        Me.pnlSummary.SuspendLayout()
-        Me.pnlOmit.SuspendLayout()
+        Me.grpOptions.SuspendLayout()
+        Me.grpDetailsOptions.SuspendLayout()
+        Me.grpPlotType.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblDate
@@ -88,18 +99,6 @@ Partial Class dlgInventoryPlot
         '
         resources.ApplyResources(Me.lblElement, "lblElement")
         Me.lblElement.Name = "lblElement"
-        '
-        'pnlDetails
-        '
-        Me.pnlDetails.Controls.Add(Me.ucrSaveDetails)
-        Me.pnlDetails.Controls.Add(Me.ucrChkMinute)
-        Me.pnlDetails.Controls.Add(Me.ucrChkSecond)
-        Me.pnlDetails.Controls.Add(Me.ucrChkYear)
-        Me.pnlDetails.Controls.Add(Me.ucrChkMonth)
-        Me.pnlDetails.Controls.Add(Me.ucrChkDay)
-        Me.pnlDetails.Controls.Add(Me.ucrChkHour)
-        resources.ApplyResources(Me.pnlDetails, "pnlDetails")
-        Me.pnlDetails.Name = "pnlDetails"
         '
         'rdoMissing
         '
@@ -145,23 +144,18 @@ Partial Class dlgInventoryPlot
         Me.rdoDateOrder.TabStop = True
         Me.rdoDateOrder.UseVisualStyleBackColor = True
         '
-        'pnlSummary
+        'grpOptions
         '
-        Me.pnlSummary.Controls.Add(Me.pnlOmit)
-        Me.pnlSummary.Controls.Add(Me.ucrChkSummary)
-        Me.pnlSummary.Controls.Add(Me.rdoElementOrder)
-        Me.pnlSummary.Controls.Add(Me.ucrChkDetails)
-        Me.pnlSummary.Controls.Add(Me.rdoDateOrder)
-        Me.pnlSummary.Controls.Add(Me.ucrPnlOrder)
-        resources.ApplyResources(Me.pnlSummary, "pnlSummary")
-        Me.pnlSummary.Name = "pnlSummary"
-        '
-        'pnlOmit
-        '
-        Me.pnlOmit.Controls.Add(Me.ucrChkOmitStart)
-        Me.pnlOmit.Controls.Add(Me.ucrChkOmitEnd)
-        resources.ApplyResources(Me.pnlOmit, "pnlOmit")
-        Me.pnlOmit.Name = "pnlOmit"
+        Me.grpOptions.Controls.Add(Me.ucrChkOmitStart)
+        Me.grpOptions.Controls.Add(Me.rdoElementOrder)
+        Me.grpOptions.Controls.Add(Me.ucrChkOmitEnd)
+        Me.grpOptions.Controls.Add(Me.rdoDateOrder)
+        Me.grpOptions.Controls.Add(Me.ucrChkDetails)
+        Me.grpOptions.Controls.Add(Me.ucrPnlOrder)
+        Me.grpOptions.Controls.Add(Me.ucrChkSummary)
+        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.TabStop = False
         '
         'ucrChkOmitStart
         '
@@ -175,12 +169,6 @@ Partial Class dlgInventoryPlot
         resources.ApplyResources(Me.ucrChkOmitEnd, "ucrChkOmitEnd")
         Me.ucrChkOmitEnd.Name = "ucrChkOmitEnd"
         '
-        'ucrChkSummary
-        '
-        Me.ucrChkSummary.Checked = False
-        resources.ApplyResources(Me.ucrChkSummary, "ucrChkSummary")
-        Me.ucrChkSummary.Name = "ucrChkSummary"
-        '
         'ucrChkDetails
         '
         Me.ucrChkDetails.Checked = False
@@ -192,10 +180,24 @@ Partial Class dlgInventoryPlot
         resources.ApplyResources(Me.ucrPnlOrder, "ucrPnlOrder")
         Me.ucrPnlOrder.Name = "ucrPnlOrder"
         '
-        'ucrSaveDetails
+        'ucrChkSummary
         '
-        resources.ApplyResources(Me.ucrSaveDetails, "ucrSaveDetails")
-        Me.ucrSaveDetails.Name = "ucrSaveDetails"
+        Me.ucrChkSummary.Checked = False
+        resources.ApplyResources(Me.ucrChkSummary, "ucrChkSummary")
+        Me.ucrChkSummary.Name = "ucrChkSummary"
+        '
+        'grpDetailsOptions
+        '
+        Me.grpDetailsOptions.Controls.Add(Me.ucrChkMinute)
+        Me.grpDetailsOptions.Controls.Add(Me.ucrSaveDetails)
+        Me.grpDetailsOptions.Controls.Add(Me.ucrChkSecond)
+        Me.grpDetailsOptions.Controls.Add(Me.ucrChkMonth)
+        Me.grpDetailsOptions.Controls.Add(Me.ucrChkHour)
+        Me.grpDetailsOptions.Controls.Add(Me.ucrChkYear)
+        Me.grpDetailsOptions.Controls.Add(Me.ucrChkDay)
+        resources.ApplyResources(Me.grpDetailsOptions, "grpDetailsOptions")
+        Me.grpDetailsOptions.Name = "grpDetailsOptions"
+        Me.grpDetailsOptions.TabStop = False
         '
         'ucrChkMinute
         '
@@ -203,17 +205,16 @@ Partial Class dlgInventoryPlot
         resources.ApplyResources(Me.ucrChkMinute, "ucrChkMinute")
         Me.ucrChkMinute.Name = "ucrChkMinute"
         '
+        'ucrSaveDetails
+        '
+        resources.ApplyResources(Me.ucrSaveDetails, "ucrSaveDetails")
+        Me.ucrSaveDetails.Name = "ucrSaveDetails"
+        '
         'ucrChkSecond
         '
         Me.ucrChkSecond.Checked = False
         resources.ApplyResources(Me.ucrChkSecond, "ucrChkSecond")
         Me.ucrChkSecond.Name = "ucrChkSecond"
-        '
-        'ucrChkYear
-        '
-        Me.ucrChkYear.Checked = False
-        resources.ApplyResources(Me.ucrChkYear, "ucrChkYear")
-        Me.ucrChkYear.Name = "ucrChkYear"
         '
         'ucrChkMonth
         '
@@ -221,22 +222,105 @@ Partial Class dlgInventoryPlot
         resources.ApplyResources(Me.ucrChkMonth, "ucrChkMonth")
         Me.ucrChkMonth.Name = "ucrChkMonth"
         '
-        'ucrChkDay
-        '
-        Me.ucrChkDay.Checked = False
-        resources.ApplyResources(Me.ucrChkDay, "ucrChkDay")
-        Me.ucrChkDay.Name = "ucrChkDay"
-        '
         'ucrChkHour
         '
         Me.ucrChkHour.Checked = False
         resources.ApplyResources(Me.ucrChkHour, "ucrChkHour")
         Me.ucrChkHour.Name = "ucrChkHour"
         '
-        'ucrPnls
+        'ucrChkYear
         '
-        resources.ApplyResources(Me.ucrPnls, "ucrPnls")
-        Me.ucrPnls.Name = "ucrPnls"
+        Me.ucrChkYear.Checked = False
+        resources.ApplyResources(Me.ucrChkYear, "ucrChkYear")
+        Me.ucrChkYear.Name = "ucrChkYear"
+        '
+        'ucrChkDay
+        '
+        Me.ucrChkDay.Checked = False
+        resources.ApplyResources(Me.ucrChkDay, "ucrChkDay")
+        Me.ucrChkDay.Name = "ucrChkDay"
+        '
+        'lblGraphTitle
+        '
+        resources.ApplyResources(Me.lblGraphTitle, "lblGraphTitle")
+        Me.lblGraphTitle.Name = "lblGraphTitle"
+        '
+        'grpPlotType
+        '
+        Me.grpPlotType.Controls.Add(Me.rdoyear_doy_plot)
+        Me.grpPlotType.Controls.Add(Me.rdoDatePlot)
+        Me.grpPlotType.Controls.Add(Me.ucrPnlPlotType)
+        resources.ApplyResources(Me.grpPlotType, "grpPlotType")
+        Me.grpPlotType.Name = "grpPlotType"
+        Me.grpPlotType.TabStop = False
+        '
+        'rdoyear_doy_plot
+        '
+        resources.ApplyResources(Me.rdoyear_doy_plot, "rdoyear_doy_plot")
+        Me.rdoyear_doy_plot.Name = "rdoyear_doy_plot"
+        Me.rdoyear_doy_plot.TabStop = True
+        Me.rdoyear_doy_plot.UseVisualStyleBackColor = True
+        '
+        'rdoDatePlot
+        '
+        resources.ApplyResources(Me.rdoDatePlot, "rdoDatePlot")
+        Me.rdoDatePlot.Name = "rdoDatePlot"
+        Me.rdoDatePlot.TabStop = True
+        Me.rdoDatePlot.UseVisualStyleBackColor = True
+        '
+        'ucrPnlPlotType
+        '
+        resources.ApplyResources(Me.ucrPnlPlotType, "ucrPnlPlotType")
+        Me.ucrPnlPlotType.Name = "ucrPnlPlotType"
+        '
+        'lblFacetBy
+        '
+        resources.ApplyResources(Me.lblFacetBy, "lblFacetBy")
+        Me.lblFacetBy.Name = "lblFacetBy"
+        '
+        'ucrChkDisplayRainDays
+        '
+        Me.ucrChkDisplayRainDays.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplayRainDays, "ucrChkDisplayRainDays")
+        Me.ucrChkDisplayRainDays.Name = "ucrChkDisplayRainDays"
+        '
+        'ucrInputFacetBy
+        '
+        Me.ucrInputFacetBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputFacetBy.GetSetSelectedIndex = -1
+        Me.ucrInputFacetBy.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFacetBy, "ucrInputFacetBy")
+        Me.ucrInputFacetBy.Name = "ucrInputFacetBy"
+        '
+        'ucrInputTitle
+        '
+        Me.ucrInputTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputTitle.IsMultiline = False
+        Me.ucrInputTitle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTitle, "ucrInputTitle")
+        Me.ucrInputTitle.Name = "ucrInputTitle"
+        '
+        'ucrChkShowNonMissing
+        '
+        Me.ucrChkShowNonMissing.Checked = False
+        resources.ApplyResources(Me.ucrChkShowNonMissing, "ucrChkShowNonMissing")
+        Me.ucrChkShowNonMissing.Name = "ucrChkShowNonMissing"
+        '
+        'ucrSaveGraph
+        '
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        '
+        'ucrChkFlipCoordinates
+        '
+        Me.ucrChkFlipCoordinates.Checked = False
+        resources.ApplyResources(Me.ucrChkFlipCoordinates, "ucrChkFlipCoordinates")
+        Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
+        '
+        'ucrPnlOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
         'ucrReceiverDate
         '
@@ -282,13 +366,22 @@ Partial Class dlgInventoryPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblGraphTitle)
+        Me.Controls.Add(Me.ucrChkDisplayRainDays)
+        Me.Controls.Add(Me.grpPlotType)
+        Me.Controls.Add(Me.lblFacetBy)
+        Me.Controls.Add(Me.ucrInputFacetBy)
+        Me.Controls.Add(Me.ucrInputTitle)
+        Me.Controls.Add(Me.ucrChkShowNonMissing)
+        Me.Controls.Add(Me.ucrSaveGraph)
+        Me.Controls.Add(Me.ucrChkFlipCoordinates)
+        Me.Controls.Add(Me.grpDetailsOptions)
+        Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.cmdInventoryPlotOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.rdoGraph)
         Me.Controls.Add(Me.rdoMissing)
-        Me.Controls.Add(Me.pnlSummary)
-        Me.Controls.Add(Me.pnlDetails)
-        Me.Controls.Add(Me.ucrPnls)
+        Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.lblDate)
@@ -302,10 +395,11 @@ Partial Class dlgInventoryPlot
         Me.MinimizeBox = False
         Me.Name = "dlgInventoryPlot"
         Me.Tag = "Inventory_Plot"
-        Me.pnlDetails.ResumeLayout(False)
-        Me.pnlSummary.ResumeLayout(False)
-        Me.pnlSummary.PerformLayout()
-        Me.pnlOmit.ResumeLayout(False)
+        Me.grpOptions.ResumeLayout(False)
+        Me.grpOptions.PerformLayout()
+        Me.grpDetailsOptions.ResumeLayout(False)
+        Me.grpPlotType.ResumeLayout(False)
+        Me.grpPlotType.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -318,8 +412,7 @@ Partial Class dlgInventoryPlot
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblElement As Label
-    Friend WithEvents ucrPnls As UcrPanel
-    Friend WithEvents pnlDetails As Panel
+    Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents ucrChkMinute As ucrCheck
     Friend WithEvents ucrChkSecond As ucrCheck
     Friend WithEvents ucrChkYear As ucrCheck
@@ -336,8 +429,20 @@ Partial Class dlgInventoryPlot
     Friend WithEvents ucrPnlOrder As UcrPanel
     Friend WithEvents ucrChkDetails As ucrCheck
     Friend WithEvents ucrChkSummary As ucrCheck
-    Friend WithEvents pnlSummary As Panel
-    Friend WithEvents ucrChkOmitEnd As ucrCheck
+    Friend WithEvents grpOptions As GroupBox
+    Friend WithEvents grpDetailsOptions As GroupBox
+    Friend WithEvents lblGraphTitle As Label
+    Friend WithEvents ucrChkDisplayRainDays As ucrCheck
+    Friend WithEvents grpPlotType As GroupBox
+    Friend WithEvents rdoyear_doy_plot As RadioButton
+    Friend WithEvents rdoDatePlot As RadioButton
+    Friend WithEvents ucrPnlPlotType As UcrPanel
+    Friend WithEvents lblFacetBy As Label
+    Friend WithEvents ucrInputFacetBy As ucrInputComboBox
+    Friend WithEvents ucrInputTitle As ucrInputTextBox
+    Friend WithEvents ucrChkShowNonMissing As ucrCheck
+    Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrChkFlipCoordinates As ucrCheck
     Friend WithEvents ucrChkOmitStart As ucrCheck
-    Friend WithEvents pnlOmit As Panel
+    Friend WithEvents ucrChkOmitEnd As ucrCheck
 End Class
