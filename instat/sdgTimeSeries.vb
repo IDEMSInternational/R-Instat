@@ -25,10 +25,10 @@ Public Class sdgTimeSeries
     Private strGeomTextEstimatesParameterName As String = "estimates_geom_text"
     Private strGeomTextComparisonParameterName As String = "comparison_geom_text"
 
-    Private strTopLeft As String = "Top Left"
-    Private strTopRight As String = "Top Right"
-    Private strBottomLeft As String = "Bottom Left"
-    Private strBottomRight As String = "Bottom Right"
+    Private Const strTopLeft As String = "Top Left"
+    Private Const strTopRight As String = "Top Right"
+    Private Const strBottomLeft As String = "Bottom Left"
+    Private Const strBottomRight As String = "Bottom Right"
 
     Private clsComparisonSummariesSummarise As RFunction
     Private clsIndividualSummariesSummarise As RFunction

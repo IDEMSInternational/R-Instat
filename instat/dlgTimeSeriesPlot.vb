@@ -22,15 +22,20 @@ Public Class dlgTimeSeriesPlot
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = True
 
-    ' Constants
-    ' These store the names of the selected columns. This is used to ensure old parameters are correctly removed from dplyr::mutate when selected columns are changed.
+    ' These store the names of the selected reference/estimates columns. 
+    ' This is used to ensure old parameters are correctly removed from dplyr::mutate when selected columns are changed.
     ' See ucrReceiverEstimates.ControlValueChanged and ucrReceiverReference.ControlValueChanged event handles for their use.
-    Private strEstimates As String = ""
+    ''' <summary> Store the name of the selected reference column. </summary>
     Private strReference As String = ""
-    ' The name of the "names" column when the data is stacked
-    Private strName As String = "data"
-    ' The name of the "values" column when the data is stacked
-    Private strValue As String = "value"
+    ''' <summary> Store the name of the selected estimates column. </summary>
+    Private strEstimates As String = ""
+
+    ' Constants
+    ' 
+    ''' <summary> The name of the "names" column when the data is stacked </summary>
+    Private Const strName As String = "data"
+    ''' <summary> The name of the "values" column when the data is stacked </summary>
+    Private Const strValue As String = "value"
 
     ' Adjust NA values
     ' These functions construct the R code below if ucrChkNAValues is checked. This ensures the two columns have the same missing values.
@@ -109,13 +114,19 @@ Public Class dlgTimeSeriesPlot
     Private clsRoundRSd As RFunction
     Private clsRoundKge As RFunction
 
-    ' A dictionary of the comparison/individual summary functions above. 
+    ' Dictionaries of the comparison/individual summary functions above. 
     ' The key is the summary name in lower case e.g. "bias"
     ' The value is a tuple of two RFunctions. 
     ' Item1 is the summary function. 
     ' Item2 is the paste function containing the summary.
     ' These dictionary are created to avoid passing all the RFunctions to the sub dialog individually.
+    ''' <summary>
+    ''' A dictionary of the comparison summary functions. The key is the summary name in lower case e.g. "bias". The value is a tuple of two RFunctions: the summary function and it's paste function. 
+    ''' </summary>
     Private dctComparisonSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
+    ''' <summary>
+    ''' A dictionary of the individual summary functions. The key is the summary name in lower case e.g. "mean". The value is a tuple of two RFunctions: the summary function and it's paste function. 
+    ''' </summary>
     Private dctIndividualSummaries As Dictionary(Of String, Tuple(Of RFunction, RFunction))
 
     ' ggplot functions
@@ -143,15 +154,16 @@ Public Class dlgTimeSeriesPlot
     Private clsEstimatesPasteLabel As RFunction
     Private clsEstimatesFilter As RFunction
 
-    Private clsLabsFunction As New RFunction
-    Private clsXlabsFunction As New RFunction
-    Private clsYlabFunction As New RFunction
-    Private clsXScaleContinuousFunction As New RFunction
-    Private clsYScaleContinuousFunction As New RFunction
+    ' These will be needed when the dialog implements the Plot Options subdialog
+    'Private clsLabsFunction As New RFunction
+    'Private clsXlabsFunction As New RFunction
+    'Private clsYlabFunction As New RFunction
+    'Private clsXScaleContinuousFunction As New RFunction
+    'Private clsYScaleContinuousFunction As New RFunction
     Private clsFacetFunction As New RFunction
     Private clsFacetOperator As New ROperator
-    Private clsThemeFunction As New RFunction
-    Private dctThemeFunctions As Dictionary(Of String, RFunction)
+    'Private clsThemeFunction As New RFunction
+    'Private dctThemeFunctions As Dictionary(Of String, RFunction)
 
     'Parameter names for geoms
     Private strGeomLineParameterName As String = "geom_line"
@@ -161,7 +173,8 @@ Public Class dlgTimeSeriesPlot
     Private strGeomTextEstimatesParameterName As String = "estimates_geom_text"
     Private strGeomTextComparisonParameterName As String = "comparison_geom_text"
     Private strGeomSmoothParameterName As String = "geom_smooth"
-    Private strGeomParameterNames() As String = {strGeomLineParameterName, strGeomPointParameterName, strGeomHLineParameterName, strGeomTextReferenceParameterName, strGeomTextEstimatesParameterName, strGeomTextComparisonParameterName}
+    ' This will be needed when the dialog implements the Plot Options subdialog
+    'Private strGeomParameterNames() As String = {strGeomLineParameterName, strGeomPointParameterName, strGeomHLineParameterName, strGeomTextReferenceParameterName, strGeomTextEstimatesParameterName, strGeomTextComparisonParameterName}
 
     Private Sub dlgTimeSeriesPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -648,13 +661,14 @@ Public Class dlgTimeSeriesPlot
         clsFacetOperator.bForceIncludeOperation = True
 
         clsGgplotOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
-        clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
-        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
-        clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
-        clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
-        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
-        clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
-        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        ' Commented until Plot Options subdialog is implemented.
+        'clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        'clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        'clsXScaleContinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        'clsYScaleContinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
+        'clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone
+        'clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()
+        'dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
 
         clsGgplotOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTimeSeriesPlots.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsGgplotOperator)
