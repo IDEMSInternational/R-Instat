@@ -15,24 +15,21 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports RDotNet
 
 Public Class dlgCalculator
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
     Public iHelpCalcID As Integer
+
+    'holds the original width of the form
     Private iBasicWidth As Integer
-    Private iBaseY As Integer
-    Private iBaseHeight As Integer
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             iBasicWidth = Me.Width
-            iBaseHeight = Me.Height
-            iBaseY = ucrBase.Location.Y
             SetDefaults()
             bFirstLoad = False
         Else
@@ -121,47 +118,33 @@ Public Class dlgCalculator
     Private Sub CalculationsOptions()
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Maths"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.38, iBaseHeight)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Width = iBasicWidth * 1.38
             Case "Logical and Symbols"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, iBaseHeight)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Width = iBasicWidth * 1.4
             Case "Summary"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.43, iBaseHeight)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Width = iBasicWidth * 1.43
             Case "Strings (Character Columns)"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.47, iBaseHeight * 1.13)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY * 1.13)
+                Me.Width = iBasicWidth * 1.47
             Case "Factor"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, iBaseHeight)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Width = iBasicWidth * 1.4
             Case "Probability"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.5, iBaseHeight)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Width = iBasicWidth * 1.5
             Case "Dates"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.3, iBaseHeight)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Width = iBasicWidth * 1.3
             Case "Transform"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.35, iBaseHeight)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Width = iBasicWidth * 1.35
             Case "Circular"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.36, iBaseHeight)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Width = iBasicWidth * 1.36
             Case "Wakefield"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.7, iBaseHeight * 1.18)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY * 1.18)
+                Me.Width = iBasicWidth * 1.7
             Case "Modifier"
-                Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Width = iBasicWidth * 1.39
             Case "Symbols"
-                Me.Size = New Size(iBasicWidth * 2.56, iBaseHeight)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Width = iBasicWidth * 2.56
             Case "hydroGOF"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.27, iBaseHeight)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Width = iBasicWidth * 1.27
             Case Else
-                Me.Size = New System.Drawing.Size(iBasicWidth, iBaseHeight)
-                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
+                Me.Width = iBasicWidth
         End Select
     End Sub
 
