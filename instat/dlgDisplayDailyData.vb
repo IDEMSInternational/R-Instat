@@ -500,14 +500,23 @@ Public Class dlgDisplayDailyData
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary> 
-    ''' If the station receiver is not empty and the multiple element receiver  has more one element  the 
-    '''  facet combobox text is set to  "Station-Element "  and "Element - station"
-    '''If the station receiver is not empty and the multiple element receiver  has no or one element  the facet combobox
-    ''' text is set to  "Station" 
-    ''' If the station receiver is empty and the multiple element receiver  has more than one element  the facet combobox
-    ''' text is set to  "Element" 
-    '''  If the station receiver is empty and the multiple element receiver  has no element  the facet combobox
-    ''' text is set to  "No Facets"
+    ''' Sets the facet combobox text:
+    ''' <list type="bullet">
+    '''     <item><description>
+    '''             If the station receiver is not empty and the multiple element receiver has more 
+    '''             one element then sets the facet combobox text to "Station-Element " and 
+    '''             "Element - station"
+    '''     </description></item><item><description>
+    '''             If the station receiver is not empty and the multiple element receiver has 
+    '''             less than 2 elements then sets the facet combobox text to "Station"
+    '''     </description></item><item><description>
+    '''             If the station receiver is empty and the multiple element receiver has 2 or 
+    '''             more elements then sets the facet combobox text to "Element"
+    '''     </description></item><item><description>
+    '''             If the station receiver is empty and the multiple element receiver has no 
+    '''             elements then sets the facet combobox text to "No Facets"
+    '''     </description></item>
+    ''' </list>   
     ''' </summary>
     '''--------------------------------------------------------------------------------------------
     Private Sub SetFacetItems()
