@@ -2467,7 +2467,7 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
     if(is.null(year_col)) {
       if(is_climatic) {
         if(is.null(self$get_climatic_column_name(year_label))) {
-          self$split_date(col_name = date_col, year = TRUE)
+          self$split_date(col_name = date_col, year_val = TRUE)
         }
         year_col <- self$get_climatic_column_name(year_label)
       }
