@@ -18,19 +18,21 @@ Imports instat.Translations
 Imports RDotNet
 
 Public Class dlgCalculator
-    Dim strCalcHistory As List(Of String)
-    Dim dataset As DataFrame
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
     Public iHelpCalcID As Integer
     Private iBasicWidth As Integer
+    Private iBaseY As Integer
+    Private iBaseHeight As Integer
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             iBasicWidth = Me.Width
+            iBaseHeight = Me.Height
+            iBaseY = ucrBase.Location.Y
             SetDefaults()
             bFirstLoad = False
         Else
@@ -87,7 +89,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub SaveResults()
-        If ucrCalc.ucrSaveResultInto.Iscomplete Then
+        If ucrCalc.ucrSaveResultInto.IsComplete Then
             ucrBase.clsRsyntax.SetAssignTo(ucrCalc.ucrSaveResultInto.GetText(), strTempColumn:=ucrCalc.ucrSaveResultInto.GetText(), strTempDataframe:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
@@ -119,33 +121,47 @@ Public Class dlgCalculator
     Private Sub CalculationsOptions()
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Maths"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.38, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.38, iBaseHeight)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case "Logical and Symbols"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, iBaseHeight)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case "Summary"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.43, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.43, iBaseHeight)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case "Strings (Character Columns)"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.47, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.47, iBaseHeight * 1.13)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY * 1.13)
             Case "Factor"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, iBaseHeight)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case "Probability"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.5, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.5, iBaseHeight)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case "Dates"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.3, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.3, iBaseHeight)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case "Transform"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.35, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.35, iBaseHeight)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case "Circular"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.36, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.36, iBaseHeight)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case "Wakefield"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.7, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.7, iBaseHeight * 1.18)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY * 1.18)
             Case "Modifier"
-                Me.Size = New Size(iBasicWidth * 1.39, Me.Height)
+                Me.Size = New Size(iBasicWidth * 1.39, iBaseHeight)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case "Symbols"
-                Me.Size = New Size(iBasicWidth * 2.56, Me.Height)
+                Me.Size = New Size(iBasicWidth * 2.56, iBaseHeight)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case "hydroGOF"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.27, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth * 1.27, iBaseHeight)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
             Case Else
-                Me.Size = New System.Drawing.Size(iBasicWidth, Me.Height)
+                Me.Size = New System.Drawing.Size(iBasicWidth, iBaseHeight)
+                ucrBase.Location = New Point(ucrBase.Location.X, iBaseY)
         End Select
     End Sub
 
