@@ -20,9 +20,9 @@ Imports RDotNet
 Public Class sdgImportFromClimSoft
     Private clsRDatabaseConnect As RFunction
     Private clsRDatabaseDisconnect As RFunction
-    Private clsRHasConnection As RFunction
+
     Private bFirstLoad As Boolean = True
-    Private bConnected As Boolean = False
+    Private bConnected As Boolean
 
     Private Sub sdgImportFromClimSoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -32,6 +32,7 @@ Public Class sdgImportFromClimSoft
             bFirstLoad = False
         End If
         SetRCodeForControls()
+        bConnected = CheckIfConnectionIsActive()
         UpdateConnectionState()
     End Sub
 
@@ -59,13 +60,11 @@ Public Class sdgImportFromClimSoft
 
         'user name
         ucrTxtUserName.SetParameter(New RParameter("user", 3))
-
     End Sub
 
     Private Sub SetDefaults()
         clsRDatabaseConnect = New RFunction
         clsRDatabaseDisconnect = New RFunction
-        clsRHasConnection = New RFunction
 
         'set database connect R command and it's parameter values(from previous set values if available)
         clsRDatabaseConnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_connect")
@@ -77,24 +76,17 @@ Public Class sdgImportFromClimSoft
         'set database disconnect R command
         clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
 
-        'set has connection R command
-        clsRHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
-
         'disconnect if was already connected 
-        If HasConnection() Then
-            Disconnect()
-        End If
-        bConnected = False
+        'If CheckIfConnectionIsActive() Then
+        'Disconnect()
+        'End If
+        bConnected = CheckIfConnectionIsActive()
         UpdateConnectionState()
     End Sub
 
     Private Sub SetRCodeForControls()
         SetRCode(Me, clsRDatabaseConnect, False)
     End Sub
-
-    Public Function ConnectionActive() As Boolean
-        Return bConnected
-    End Function
 
     Private Sub UpdateConnectionState()
         If bConnected Then
@@ -122,19 +114,25 @@ Public Class sdgImportFromClimSoft
         End If
     End Sub
 
-    Private Sub Disconnect()
-        frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
-    End Sub
-
-    Private Function HasConnection() As Boolean
+    ''' <summary>
+    ''' checks if there is an active database connection
+    ''' </summary>
+    ''' <returns>true if connected to database, false if not</returns>
+    Public Function CheckIfConnectionIsActive() As Boolean
+        Dim clsRHasConnection As New RFunction
         Dim expTemp As SymbolicExpression
+        'set has connection R command
+        clsRHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsRHasConnection.ToScript())
         Return (Not expTemp.Type = Internals.SymbolicExpressionType.Null) AndAlso expTemp.AsLogical(0)
     End Function
 
+    Private Sub Disconnect()
+        frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
+    End Sub
+
     Private Sub btnConnect_Click(sender As Object, e As EventArgs) Handles btnConnect.Click
         btnConnect.Enabled = False 'temporary disable 
-
         'if was already connected, then user action is meant to disconnect else, try connecting to database
         If bConnected Then
             Disconnect()
@@ -142,19 +140,18 @@ Public Class sdgImportFromClimSoft
         Else
             'will display an R password input prompt, to enter password and attempt connecting to database
             frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
-            bConnected = HasConnection()
+            bConnected = CheckIfConnectionIsActive()
         End If
         UpdateConnectionState()
         btnConnect.Enabled = True
 
         If chkRememberCredentials.Checked AndAlso bConnected Then
-            'save credentials before
+            'save credentials
             frmMain.clsInstatOptions.SetClimsoftDatabaseName(ucrComboBoxDatabaseName.GetText())
             frmMain.clsInstatOptions.SetClimsoftHost(ucrTxtHost.GetText())
             frmMain.clsInstatOptions.SetClimsoftPort(ucrComboBoxPort.GetText())
             frmMain.clsInstatOptions.SetClimsoftUsername(ucrTxtUserName.GetText())
         End If
-
     End Sub
 
     Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxDatabaseName.ControlContentsChanged, ucrTxtHost.ControlContentsChanged, ucrComboBoxPort.ControlContentsChanged, ucrTxtUserName.ControlContentsChanged
@@ -164,5 +161,4 @@ Public Class sdgImportFromClimSoft
         End If
         btnConnect.Enabled = Not ucrTxtHost.IsEmpty AndAlso Not ucrTxtUserName.IsEmpty AndAlso Not ucrComboBoxPort.IsEmpty AndAlso Not ucrComboBoxDatabaseName.IsEmpty
     End Sub
-
 End Class

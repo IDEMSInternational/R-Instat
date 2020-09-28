@@ -44,6 +44,7 @@ Public Class dlgClimSoft
         SetRCodeForControls(bReset)
         bReset = False
         bIgnoreReceiverChanges = False
+        CheckAndUpdateConnectionStatus()
         'autoTranslate(Me) ' temporary commented, affects the connected text by overwriting it with wrong text
     End Sub
 
@@ -87,40 +88,39 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
 
         'include observation data checkbox
-        ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 4))
         ucrChkObservationData.Text = "Include Observation Data"
-        'ucrChkObservationData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 4))
         ucrChkObservationData.SetRDefault("FALSE")
 
-        'elements metadata checkbox
-        ucrChkElements.SetParameter(New RParameter("include_elements_info", 5))
-        ucrChkElements.Text = "Include Elements Metadata Data"
-        'ucrChkElements.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkElements.SetRDefault("FALSE")
+        'include flags data checkbox
+        ucrChkFlagsData.Text = "Include Observation Flags"
+        ucrChkFlagsData.SetParameter(New RParameter("include_observation_flags", 5))
+        ucrChkFlagsData.SetRDefault("FALSE")
 
-        'unstack data checkbox
-        ucrChkUnstackData.Text = "Unstack Data"
-        ucrChkUnstackData.Visible = False 'hiddent until the feature is implemented
+        'include elements metadata checkbox
+        ucrChkElements.Text = "Include Elements Metadata Data"
+        ucrChkElements.SetParameter(New RParameter("include_elements_info", 6))
+        ucrChkElements.SetRDefault("FALSE")
 
         'date range checkbox
         ucrChkDateRange.Text = "Select Date Range"
         'ucrChkDateRange.SetDefaultState(False) 'todo delete this
 
         'todo. datepicker control have a problem of default date. 
-        'Its Not set by defaultuntil the user changes current select date
+        'Its Not set by default until the user changes current select date
 
         'start date datepicker
-        ucrDtpStartdate.SetParameter(New RParameter("start_date", 6))
+        ucrDtpStartdate.SetParameter(New RParameter("start_date", 7))
         ucrDtpStartdate.SetParameterIsRDate()
         ucrDtpStartdate.SetLinkedDisplayControl(lblStartDate)
 
         'end date datepicker
-        ucrDtpEndDate.SetParameter(New RParameter("end_date", 7))
+        ucrDtpEndDate.SetParameter(New RParameter("end_date", 8))
         ucrDtpEndDate.SetParameterIsRDate()
         ucrDtpEndDate.SetLinkedDisplayControl(lblEndDate)
 
         'linking observation data related controls  to include observation data checkbox
-        ucrChkObservationData.AddToLinkedControls({ucrChkElements, ucrComboBoxElements, ucrReceiverMultipleElements}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkObservationData.AddToLinkedControls({ucrChkFlagsData, ucrChkElements, ucrComboBoxElements, ucrReceiverMultipleElements}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'todo. we have a problem with how we will link this control. check on dlgImportDataSet??
         ucrChkObservationData.AddToLinkedControls({ucrChkDateRange}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -155,13 +155,7 @@ Public Class dlgClimSoft
     Private Sub btnEstablishConnection_Click(sender As Object, e As EventArgs) Handles btnEstablishConnection.Click
         'shows the database connect sub dialog and checks if connection has been established
         sdgImportFromClimSoft.ShowDialog()
-        If sdgImportFromClimSoft.ConnectionActive() Then
-            lblConnection.Text = "Connected"
-            lblConnection.ForeColor = Color.Green
-        Else
-            lblConnection.Text = "No Connection"
-            lblConnection.ForeColor = Color.Red
-        End If
+        CheckAndUpdateConnectionStatus()
         ucrReceiverMultipleStations.Clear()
         ucrReceiverMultipleStations.SetMeAsReceiver()
     End Sub
@@ -246,6 +240,17 @@ Public Class dlgClimSoft
             ucrReceiverMultipleElements.SetMeAsReceiver()
         Else
             ucrReceiverMultipleStations.SetMeAsReceiver()
+        End If
+    End Sub
+
+    Private Sub CheckAndUpdateConnectionStatus()
+        If sdgImportFromClimSoft.CheckIfConnectionIsActive() Then
+            lblConnection.Text = "Connected"
+            lblConnection.ForeColor = Color.Green
+        Else
+            lblConnection.Text = "No Connection"
+            lblConnection.ForeColor = Color.Red
+            ucrReceiverMultipleStations.Clear()
         End If
     End Sub
 

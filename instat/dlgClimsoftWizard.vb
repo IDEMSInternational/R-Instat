@@ -258,14 +258,13 @@ Public Class dlgClimsoftWizard
             frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
         End Sub
 
-        Private Function HasConnection() As Boolean
+        Private Function CheckIfConnectionIsActive() As Boolean
             Dim expTemp As SymbolicExpression
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsRHasConnection.ToScript())
             Return (Not expTemp.Type = Internals.SymbolicExpressionType.Null) AndAlso expTemp.AsLogical(0)
         End Function
 
         Private Sub OnBtnConnect_Click()
-
             parentControls.btnConnect.Enabled = False 'temporary disable 
 
             'if was already connected, then user action is meant to disconnect else, try connecting to database
@@ -275,7 +274,7 @@ Public Class dlgClimsoftWizard
             Else
                 'will display an R password input prompt, to enter password and attempt connecting to database
                 frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
-                bConnected = HasConnection()
+                bConnected = CheckIfConnectionIsActive()
             End If
             UpdateConnectionState()
             parentControls.btnConnect.Enabled = True
@@ -319,7 +318,7 @@ Public Class dlgClimsoftWizard
             clsRHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
 
             'disconnect if was already connected 
-            If HasConnection() Then
+            If CheckIfConnectionIsActive() Then
                 Disconnect()
             End If
             bConnected = False
@@ -499,7 +498,6 @@ Public Class dlgClimsoftWizard
         End Sub
 
         Private Sub InitialiseControls()
-
             'elements combobox
             dctElementsColumns.Add("Element IDs", Chr(34) & "elementId" & Chr(34))
             dctElementsColumns.Add("Element Names", Chr(34) & "elementName" & Chr(34))
@@ -519,15 +517,15 @@ Public Class dlgClimsoftWizard
             parentControls.ucrReceiverMultipleElements.strSelectorHeading = "Elements"
             parentControls.ucrReceiverMultipleElements.SetLinkedDisplayControl(parentControls.lblElements)
 
+            'include flags data checkbox
+            parentControls.ucrChkFlagsData.Text = "Include Observation Flags"
+            parentControls.ucrChkFlagsData.SetParameter(New RParameter("include_observation_flags", 4))
+            parentControls.ucrChkFlagsData.SetRDefault("FALSE")
+
             'elements metadata checkbox
             parentControls.ucrChkElements.SetParameter(New RParameter("include_elements_info", 5))
             parentControls.ucrChkElements.Text = "Include Elements Metadata Data"
-            'parentControls.ucrChkElements.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
             parentControls.ucrChkElements.SetRDefault("FALSE")
-
-            'unstack data checkbox
-            parentControls.ucrChkUnstackData.Text = "Unstack Data"
-            parentControls.ucrChkUnstackData.Visible = False 'hiddent until the feature is implemented
 
             'date range checkbox
             parentControls.ucrChkDateRange.Text = "Select Date Range"
@@ -562,6 +560,7 @@ Public Class dlgClimsoftWizard
         Public Sub SetRCodeForControls(bReset As Boolean)
             parentControls.ucrComboBoxElements.SetRCode(parentControls.clsRImportFromClimsoft, bReset)
             parentControls.ucrReceiverMultipleElements.SetRCode(parentControls.clsRImportFromClimsoft, bReset)
+            parentControls.ucrChkFlagsData.SetRCode(parentControls.clsRImportFromClimsoft, bReset)
             parentControls.ucrChkElements.SetRCode(parentControls.clsRImportFromClimsoft, bReset)
             parentControls.ucrDtpStartdate.SetRCode(parentControls.clsRImportFromClimsoft, bReset)
             parentControls.ucrDtpEndDate.SetRCode(parentControls.clsRImportFromClimsoft, bReset)
@@ -634,7 +633,6 @@ Public Class dlgClimsoftWizard
         Private Function CanMoveNext() As Boolean Implements IWizStep.CanMoveNext
             Return Not parentControls.ucrReceiverMultipleElements.IsEmpty()
         End Function
-
     End Class
 
 

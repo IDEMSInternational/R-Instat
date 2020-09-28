@@ -45,9 +45,9 @@ Partial Class dlgClimsoftWizard
         Me.lblStations = New System.Windows.Forms.Label()
         Me.ucrReceiverMultipleStations = New instat.ucrReceiverMultiple()
         Me.panelElementsData = New System.Windows.Forms.Panel()
+        Me.ucrChkFlagsData = New instat.ucrCheck()
         Me.ucrChkElements = New instat.ucrCheck()
         Me.ucrChkDateRange = New instat.ucrCheck()
-        Me.ucrChkUnstackData = New instat.ucrCheck()
         Me.ucrDtpEndDate = New instat.ucrDateTimePicker()
         Me.ucrDtpStartdate = New instat.ucrDateTimePicker()
         Me.lblEndDate = New System.Windows.Forms.Label()
@@ -88,6 +88,7 @@ Partial Class dlgClimsoftWizard
         Me.ucrComboBoxPort.GetSetSelectedIndex = -1
         Me.ucrComboBoxPort.IsReadOnly = False
         Me.ucrComboBoxPort.Location = New System.Drawing.Point(94, 118)
+        Me.ucrComboBoxPort.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrComboBoxPort.Name = "ucrComboBoxPort"
         Me.ucrComboBoxPort.Size = New System.Drawing.Size(153, 21)
         Me.ucrComboBoxPort.TabIndex = 15
@@ -98,6 +99,7 @@ Partial Class dlgClimsoftWizard
         Me.ucrTxtHost.IsMultiline = False
         Me.ucrTxtHost.IsReadOnly = False
         Me.ucrTxtHost.Location = New System.Drawing.Point(94, 88)
+        Me.ucrTxtHost.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrTxtHost.Name = "ucrTxtHost"
         Me.ucrTxtHost.Size = New System.Drawing.Size(153, 21)
         Me.ucrTxtHost.TabIndex = 13
@@ -108,6 +110,7 @@ Partial Class dlgClimsoftWizard
         Me.ucrComboBoxDatabaseName.GetSetSelectedIndex = -1
         Me.ucrComboBoxDatabaseName.IsReadOnly = False
         Me.ucrComboBoxDatabaseName.Location = New System.Drawing.Point(94, 56)
+        Me.ucrComboBoxDatabaseName.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrComboBoxDatabaseName.Name = "ucrComboBoxDatabaseName"
         Me.ucrComboBoxDatabaseName.Size = New System.Drawing.Size(153, 21)
         Me.ucrComboBoxDatabaseName.TabIndex = 12
@@ -162,6 +165,7 @@ Partial Class dlgClimsoftWizard
         Me.ucrTxtUserName.IsMultiline = False
         Me.ucrTxtUserName.IsReadOnly = False
         Me.ucrTxtUserName.Location = New System.Drawing.Point(94, 147)
+        Me.ucrTxtUserName.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrTxtUserName.Name = "ucrTxtUserName"
         Me.ucrTxtUserName.Size = New System.Drawing.Size(153, 21)
         Me.ucrTxtUserName.TabIndex = 16
@@ -208,7 +212,7 @@ Partial Class dlgClimsoftWizard
         '
         'btnNext
         '
-        Me.btnNext.Location = New System.Drawing.Point(87, 331)
+        Me.btnNext.Location = New System.Drawing.Point(87, 344)
         Me.btnNext.Name = "btnNext"
         Me.btnNext.Size = New System.Drawing.Size(75, 23)
         Me.btnNext.TabIndex = 50
@@ -217,7 +221,7 @@ Partial Class dlgClimsoftWizard
         '
         'btnBack
         '
-        Me.btnBack.Location = New System.Drawing.Point(10, 331)
+        Me.btnBack.Location = New System.Drawing.Point(10, 344)
         Me.btnBack.Name = "btnBack"
         Me.btnBack.Size = New System.Drawing.Size(75, 23)
         Me.btnBack.TabIndex = 52
@@ -232,7 +236,7 @@ Partial Class dlgClimsoftWizard
         Me.panelStations.Controls.Add(Me.ucrSelectorStations)
         Me.panelStations.Controls.Add(Me.lblStations)
         Me.panelStations.Controls.Add(Me.ucrReceiverMultipleStations)
-        Me.panelStations.Location = New System.Drawing.Point(112, 12)
+        Me.panelStations.Location = New System.Drawing.Point(90, 12)
         Me.panelStations.Name = "panelStations"
         Me.panelStations.Size = New System.Drawing.Size(386, 288)
         Me.panelStations.TabIndex = 2
@@ -240,7 +244,8 @@ Partial Class dlgClimsoftWizard
         'ucrChkObservationData
         '
         Me.ucrChkObservationData.Checked = False
-        Me.ucrChkObservationData.Location = New System.Drawing.Point(10, 231)
+        Me.ucrChkObservationData.Location = New System.Drawing.Point(7, 212)
+        Me.ucrChkObservationData.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkObservationData.Name = "ucrChkObservationData"
         Me.ucrChkObservationData.Size = New System.Drawing.Size(178, 20)
         Me.ucrChkObservationData.TabIndex = 10
@@ -261,7 +266,8 @@ Partial Class dlgClimsoftWizard
         Me.ucrComboBoxStations.AddQuotesIfUnrecognised = True
         Me.ucrComboBoxStations.GetSetSelectedIndex = -1
         Me.ucrComboBoxStations.IsReadOnly = False
-        Me.ucrComboBoxStations.Location = New System.Drawing.Point(7, 55)
+        Me.ucrComboBoxStations.Location = New System.Drawing.Point(7, 37)
+        Me.ucrComboBoxStations.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrComboBoxStations.Name = "ucrComboBoxStations"
         Me.ucrComboBoxStations.Size = New System.Drawing.Size(148, 21)
         Me.ucrComboBoxStations.TabIndex = 7
@@ -269,7 +275,7 @@ Partial Class dlgClimsoftWizard
         'ucrSelectorStations
         '
         Me.ucrSelectorStations.bShowHiddenColumns = False
-        Me.ucrSelectorStations.Location = New System.Drawing.Point(7, 79)
+        Me.ucrSelectorStations.Location = New System.Drawing.Point(7, 61)
         Me.ucrSelectorStations.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorStations.Name = "ucrSelectorStations"
         Me.ucrSelectorStations.Size = New System.Drawing.Size(216, 139)
@@ -279,7 +285,7 @@ Partial Class dlgClimsoftWizard
         '
         Me.lblStations.AutoSize = True
         Me.lblStations.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStations.Location = New System.Drawing.Point(231, 63)
+        Me.lblStations.Location = New System.Drawing.Point(231, 45)
         Me.lblStations.Name = "lblStations"
         Me.lblStations.Size = New System.Drawing.Size(93, 13)
         Me.lblStations.TabIndex = 6
@@ -289,7 +295,7 @@ Partial Class dlgClimsoftWizard
         'ucrReceiverMultipleStations
         '
         Me.ucrReceiverMultipleStations.frmParent = Me
-        Me.ucrReceiverMultipleStations.Location = New System.Drawing.Point(234, 79)
+        Me.ucrReceiverMultipleStations.Location = New System.Drawing.Point(234, 61)
         Me.ucrReceiverMultipleStations.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleStations.Name = "ucrReceiverMultipleStations"
         Me.ucrReceiverMultipleStations.Selector = Nothing
@@ -300,9 +306,9 @@ Partial Class dlgClimsoftWizard
         '
         'panelElementsData
         '
+        Me.panelElementsData.Controls.Add(Me.ucrChkFlagsData)
         Me.panelElementsData.Controls.Add(Me.ucrChkElements)
         Me.panelElementsData.Controls.Add(Me.ucrChkDateRange)
-        Me.panelElementsData.Controls.Add(Me.ucrChkUnstackData)
         Me.panelElementsData.Controls.Add(Me.ucrDtpEndDate)
         Me.panelElementsData.Controls.Add(Me.ucrDtpStartdate)
         Me.panelElementsData.Controls.Add(Me.lblEndDate)
@@ -314,36 +320,40 @@ Partial Class dlgClimsoftWizard
         Me.panelElementsData.Controls.Add(Me.ucrSelectorElements)
         Me.panelElementsData.Location = New System.Drawing.Point(60, 10)
         Me.panelElementsData.Name = "panelElementsData"
-        Me.panelElementsData.Size = New System.Drawing.Size(443, 292)
+        Me.panelElementsData.Size = New System.Drawing.Size(443, 315)
         Me.panelElementsData.TabIndex = 3
+        '
+        'ucrChkFlagsData
+        '
+        Me.ucrChkFlagsData.Checked = False
+        Me.ucrChkFlagsData.Location = New System.Drawing.Point(50, 199)
+        Me.ucrChkFlagsData.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
+        Me.ucrChkFlagsData.Name = "ucrChkFlagsData"
+        Me.ucrChkFlagsData.Size = New System.Drawing.Size(212, 20)
+        Me.ucrChkFlagsData.TabIndex = 19
         '
         'ucrChkElements
         '
         Me.ucrChkElements.Checked = False
-        Me.ucrChkElements.Location = New System.Drawing.Point(50, 201)
+        Me.ucrChkElements.Location = New System.Drawing.Point(50, 223)
+        Me.ucrChkElements.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkElements.Name = "ucrChkElements"
-        Me.ucrChkElements.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkElements.Size = New System.Drawing.Size(212, 20)
         Me.ucrChkElements.TabIndex = 13
         '
         'ucrChkDateRange
         '
         Me.ucrChkDateRange.Checked = False
-        Me.ucrChkDateRange.Location = New System.Drawing.Point(50, 228)
+        Me.ucrChkDateRange.Location = New System.Drawing.Point(50, 246)
+        Me.ucrChkDateRange.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrChkDateRange.Name = "ucrChkDateRange"
-        Me.ucrChkDateRange.Size = New System.Drawing.Size(149, 20)
+        Me.ucrChkDateRange.Size = New System.Drawing.Size(203, 20)
         Me.ucrChkDateRange.TabIndex = 15
-        '
-        'ucrChkUnstackData
-        '
-        Me.ucrChkUnstackData.Checked = False
-        Me.ucrChkUnstackData.Location = New System.Drawing.Point(282, 200)
-        Me.ucrChkUnstackData.Name = "ucrChkUnstackData"
-        Me.ucrChkUnstackData.Size = New System.Drawing.Size(121, 20)
-        Me.ucrChkUnstackData.TabIndex = 14
         '
         'ucrDtpEndDate
         '
-        Me.ucrDtpEndDate.Location = New System.Drawing.Point(245, 265)
+        Me.ucrDtpEndDate.Location = New System.Drawing.Point(245, 283)
+        Me.ucrDtpEndDate.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrDtpEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDtpEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.ucrDtpEndDate.Name = "ucrDtpEndDate"
@@ -352,7 +362,8 @@ Partial Class dlgClimsoftWizard
         '
         'ucrDtpStartdate
         '
-        Me.ucrDtpStartdate.Location = New System.Drawing.Point(74, 266)
+        Me.ucrDtpStartdate.Location = New System.Drawing.Point(74, 284)
+        Me.ucrDtpStartdate.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrDtpStartdate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDtpStartdate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.ucrDtpStartdate.Name = "ucrDtpStartdate"
@@ -363,7 +374,7 @@ Partial Class dlgClimsoftWizard
         '
         Me.lblEndDate.AutoSize = True
         Me.lblEndDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblEndDate.Location = New System.Drawing.Point(243, 249)
+        Me.lblEndDate.Location = New System.Drawing.Point(243, 267)
         Me.lblEndDate.Name = "lblEndDate"
         Me.lblEndDate.Size = New System.Drawing.Size(55, 13)
         Me.lblEndDate.TabIndex = 18
@@ -373,7 +384,7 @@ Partial Class dlgClimsoftWizard
         '
         Me.lblStartDate.AutoSize = True
         Me.lblStartDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStartDate.Location = New System.Drawing.Point(70, 251)
+        Me.lblStartDate.Location = New System.Drawing.Point(70, 269)
         Me.lblStartDate.Name = "lblStartDate"
         Me.lblStartDate.Size = New System.Drawing.Size(58, 13)
         Me.lblStartDate.TabIndex = 14
@@ -385,6 +396,7 @@ Partial Class dlgClimsoftWizard
         Me.ucrComboBoxElements.GetSetSelectedIndex = -1
         Me.ucrComboBoxElements.IsReadOnly = False
         Me.ucrComboBoxElements.Location = New System.Drawing.Point(50, 37)
+        Me.ucrComboBoxElements.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrComboBoxElements.Name = "ucrComboBoxElements"
         Me.ucrComboBoxElements.Size = New System.Drawing.Size(149, 21)
         Me.ucrComboBoxElements.TabIndex = 10
@@ -415,7 +427,7 @@ Partial Class dlgClimsoftWizard
         '
         Me.lblElementsTitle.AutoSize = True
         Me.lblElementsTitle.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblElementsTitle.Location = New System.Drawing.Point(131, 11)
+        Me.lblElementsTitle.Location = New System.Drawing.Point(124, 11)
         Me.lblElementsTitle.Name = "lblElementsTitle"
         Me.lblElementsTitle.Size = New System.Drawing.Size(213, 13)
         Me.lblElementsTitle.TabIndex = 9
@@ -433,7 +445,8 @@ Partial Class dlgClimsoftWizard
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(166, 305)
+        Me.ucrBase.Location = New System.Drawing.Point(166, 318)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 51
@@ -442,20 +455,21 @@ Partial Class dlgClimsoftWizard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(577, 361)
+        Me.ClientSize = New System.Drawing.Size(583, 375)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.btnBack)
         Me.Controls.Add(Me.btnNext)
         Me.Controls.Add(Me.panelElementsData)
         Me.Controls.Add(Me.panelStations)
         Me.Controls.Add(Me.panelConnectDatabase)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgClimsoftWizard"
         Me.ShowIcon = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Import From Climsoft"
+        Me.Text = "Import From ClimSoft"
         Me.panelConnectDatabase.ResumeLayout(False)
         Me.panelConnectDatabase.PerformLayout()
         Me.panelStations.ResumeLayout(False)
@@ -496,10 +510,10 @@ Partial Class dlgClimsoftWizard
     Friend WithEvents lblElements As Label
     Friend WithEvents ucrChkElements As ucrCheck
     Friend WithEvents ucrChkDateRange As ucrCheck
-    Friend WithEvents ucrChkUnstackData As ucrCheck
     Friend WithEvents ucrDtpEndDate As ucrDateTimePicker
     Friend WithEvents ucrDtpStartdate As ucrDateTimePicker
     Friend WithEvents lblEndDate As Label
     Friend WithEvents lblStartDate As Label
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrChkFlagsData As ucrCheck
 End Class

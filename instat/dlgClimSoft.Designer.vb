@@ -51,9 +51,9 @@ Partial Class dlgClimSoft
         Me.ucrChkObservationData = New instat.ucrCheck()
         Me.ucrDtpEndDate = New instat.ucrDateTimePicker()
         Me.ucrDtpStartdate = New instat.ucrDateTimePicker()
+        Me.ucrChkFlagsData = New instat.ucrCheck()
         Me.ucrComboBoxElements = New instat.ucrInputComboBox()
         Me.ucrComboBoxStations = New instat.ucrInputComboBox()
-        Me.ucrChkUnstackData = New instat.ucrCheck()
         Me.ucrSelectorForClimSoft = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMultipleStations = New instat.ucrReceiverMultiple()
@@ -125,6 +125,13 @@ Partial Class dlgClimSoft
         Me.ucrDtpStartdate.Name = "ucrDtpStartdate"
         Me.ttClimsoft.SetToolTip(Me.ucrDtpStartdate, resources.GetString("ucrDtpStartdate.ToolTip"))
         '
+        'ucrChkFlagsData
+        '
+        Me.ucrChkFlagsData.Checked = False
+        resources.ApplyResources(Me.ucrChkFlagsData, "ucrChkFlagsData")
+        Me.ucrChkFlagsData.Name = "ucrChkFlagsData"
+        Me.ttClimsoft.SetToolTip(Me.ucrChkFlagsData, resources.GetString("ucrChkFlagsData.ToolTip"))
+        '
         'ucrComboBoxElements
         '
         Me.ucrComboBoxElements.AddQuotesIfUnrecognised = True
@@ -140,12 +147,6 @@ Partial Class dlgClimSoft
         Me.ucrComboBoxStations.IsReadOnly = False
         resources.ApplyResources(Me.ucrComboBoxStations, "ucrComboBoxStations")
         Me.ucrComboBoxStations.Name = "ucrComboBoxStations"
-        '
-        'ucrChkUnstackData
-        '
-        Me.ucrChkUnstackData.Checked = False
-        resources.ApplyResources(Me.ucrChkUnstackData, "ucrChkUnstackData")
-        Me.ucrChkUnstackData.Name = "ucrChkUnstackData"
         '
         'ucrSelectorForClimSoft
         '
@@ -192,13 +193,13 @@ Partial Class dlgClimSoft
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkFlagsData)
         Me.Controls.Add(Me.btnWizard)
         Me.Controls.Add(Me.lblConnection)
         Me.Controls.Add(Me.ucrChkElements)
         Me.Controls.Add(Me.ucrComboBoxElements)
         Me.Controls.Add(Me.ucrComboBoxStations)
         Me.Controls.Add(Me.ucrChkDateRange)
-        Me.Controls.Add(Me.ucrChkUnstackData)
         Me.Controls.Add(Me.ucrDtpEndDate)
         Me.Controls.Add(Me.ucrDtpStartdate)
         Me.Controls.Add(Me.ucrChkObservationData)
@@ -230,7 +231,6 @@ Partial Class dlgClimSoft
     Friend WithEvents ucrSelectorForClimSoft As ucrSelectorAddRemove
     Friend WithEvents lblEndDate As Label
     Friend WithEvents ttClimsoft As ToolTip
-    Friend WithEvents ucrChkUnstackData As ucrCheck
     Friend WithEvents ucrDtpEndDate As ucrDateTimePicker
     Friend WithEvents ucrDtpStartdate As ucrDateTimePicker
     Friend WithEvents ucrChkObservationData As ucrCheck
@@ -240,4 +240,5 @@ Partial Class dlgClimSoft
     Friend WithEvents ucrChkElements As ucrCheck
     Friend WithEvents lblConnection As Label
     Friend WithEvents btnWizard As Button
+    Friend WithEvents ucrChkFlagsData As ucrCheck
 End Class
