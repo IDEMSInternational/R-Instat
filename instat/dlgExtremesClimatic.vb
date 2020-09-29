@@ -154,10 +154,27 @@ Public Class dlgExtremesClimatic
         ucrPnlExtremesType.AddToLinkedControls(ucrChkFirstDate, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrChkLastDate, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrChkNDates, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkDecluster.AddToLinkedControls(ucrNudDeclusterThreshold, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlCountsRunLength.AddToLinkedControls({ucrInputFrom, ucrInputTo, ucrInputSteps}, {rdoRunLength}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlMaxMin.SetLinkedDisplayControl(lblNewColName)
+        ucrChkMissingValues.SetLinkedDisplayControl(grpMinMaxOptions)
+        ucrInputThresholdValue.SetLinkedDisplayControl(grpPeakOptions)
+        ucrInputThresholdOperator.SetLinkedDisplayControl(grpPlotOptions)
+        ucrInputFrom.SetLinkedDisplayControl(lblFrom)
+        ucrInputTo.SetLinkedDisplayControl(lblTo)
+        ucrInputSteps.SetLinkedDisplayControl(lblSteps)
 
         ucrInputFilterPreview.IsReadOnly = True
+
+        ucrPnlCountsRunLength.AddRadioButton(rdoCounts)
+        ucrPnlCountsRunLength.AddRadioButton(rdoRunLength)
+
+        ucrChkDecluster.SetText("Decluster")
+
+        ucrChkMrlPlot.SetText("Mrl Plot")
+
+        ucrChkTcPlot.SetText("Tc Plot")
     End Sub
 
     Private Sub SetDefaults()
