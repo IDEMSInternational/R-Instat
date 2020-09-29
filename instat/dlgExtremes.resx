@@ -342,39 +342,6 @@
   <data name="&gt;&gt;cmdSin.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;cmdCos.Name" xml:space="preserve">
-    <value>cmdCos</value>
-  </data>
-  <data name="&gt;&gt;cmdCos.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdCos.Parent" xml:space="preserve">
-    <value>grpSecondCalc</value>
-  </data>
-  <data name="&gt;&gt;cmdCos.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="grpSecondCalc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>390, 139</value>
-  </data>
-  <data name="grpSecondCalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 104</value>
-  </data>
-  <data name="grpSecondCalc.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;grpSecondCalc.Name" xml:space="preserve">
-    <value>grpSecondCalc</value>
-  </data>
-  <data name="&gt;&gt;grpSecondCalc.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpSecondCalc.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpSecondCalc.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="cmdCos.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -405,158 +372,29 @@
   <data name="&gt;&gt;cmdCos.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;cmdMultiply.Name" xml:space="preserve">
-    <value>cmdMultiply</value>
+  <data name="grpSecondCalc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>390, 139</value>
   </data>
-  <data name="&gt;&gt;cmdMultiply.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="grpSecondCalc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 104</value>
   </data>
-  <data name="&gt;&gt;cmdMultiply.Parent" xml:space="preserve">
-    <value>grpFirstCalc</value>
-  </data>
-  <data name="&gt;&gt;cmdMultiply.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cmdColon.Name" xml:space="preserve">
-    <value>cmdColon</value>
-  </data>
-  <data name="&gt;&gt;cmdColon.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdColon.Parent" xml:space="preserve">
-    <value>grpFirstCalc</value>
-  </data>
-  <data name="&gt;&gt;cmdColon.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cmdPlus.Name" xml:space="preserve">
-    <value>cmdPlus</value>
-  </data>
-  <data name="&gt;&gt;cmdPlus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdPlus.Parent" xml:space="preserve">
-    <value>grpFirstCalc</value>
-  </data>
-  <data name="&gt;&gt;cmdPlus.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;cmdPower.Name" xml:space="preserve">
-    <value>cmdPower</value>
-  </data>
-  <data name="&gt;&gt;cmdPower.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdPower.Parent" xml:space="preserve">
-    <value>grpFirstCalc</value>
-  </data>
-  <data name="&gt;&gt;cmdPower.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;cmdClosingBracket.Name" xml:space="preserve">
-    <value>cmdClosingBracket</value>
-  </data>
-  <data name="&gt;&gt;cmdClosingBracket.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdClosingBracket.Parent" xml:space="preserve">
-    <value>grpFirstCalc</value>
-  </data>
-  <data name="&gt;&gt;cmdClosingBracket.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;cmdOpeningBracket.Name" xml:space="preserve">
-    <value>cmdOpeningBracket</value>
-  </data>
-  <data name="&gt;&gt;cmdOpeningBracket.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdOpeningBracket.Parent" xml:space="preserve">
-    <value>grpFirstCalc</value>
-  </data>
-  <data name="&gt;&gt;cmdOpeningBracket.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;cmdDiv.Name" xml:space="preserve">
-    <value>cmdDiv</value>
-  </data>
-  <data name="&gt;&gt;cmdDiv.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdDiv.Parent" xml:space="preserve">
-    <value>grpFirstCalc</value>
-  </data>
-  <data name="&gt;&gt;cmdDiv.ZOrder" xml:space="preserve">
+  <data name="grpSecondCalc.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;cmdDoubleBracket.Name" xml:space="preserve">
-    <value>cmdDoubleBracket</value>
+  <data name="grpSecondCalc.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
-  <data name="&gt;&gt;cmdDoubleBracket.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;grpSecondCalc.Name" xml:space="preserve">
+    <value>grpSecondCalc</value>
   </data>
-  <data name="&gt;&gt;cmdDoubleBracket.Parent" xml:space="preserve">
-    <value>grpFirstCalc</value>
-  </data>
-  <data name="&gt;&gt;cmdDoubleBracket.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;cmdClear.Name" xml:space="preserve">
-    <value>cmdClear</value>
-  </data>
-  <data name="&gt;&gt;cmdClear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdClear.Parent" xml:space="preserve">
-    <value>grpFirstCalc</value>
-  </data>
-  <data name="&gt;&gt;cmdClear.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;cmdZero.Name" xml:space="preserve">
-    <value>cmdZero</value>
-  </data>
-  <data name="&gt;&gt;cmdZero.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdZero.Parent" xml:space="preserve">
-    <value>grpFirstCalc</value>
-  </data>
-  <data name="&gt;&gt;cmdZero.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;cmdMinus.Name" xml:space="preserve">
-    <value>cmdMinus</value>
-  </data>
-  <data name="&gt;&gt;cmdMinus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdMinus.Parent" xml:space="preserve">
-    <value>grpFirstCalc</value>
-  </data>
-  <data name="&gt;&gt;cmdMinus.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="grpFirstCalc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 139</value>
-  </data>
-  <data name="grpFirstCalc.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 104</value>
-  </data>
-  <data name="grpFirstCalc.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;grpFirstCalc.Name" xml:space="preserve">
-    <value>grpFirstCalc</value>
-  </data>
-  <data name="&gt;&gt;grpFirstCalc.Type" xml:space="preserve">
+  <data name="&gt;&gt;grpSecondCalc.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;grpFirstCalc.Parent" xml:space="preserve">
+  <data name="&gt;&gt;grpSecondCalc.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;grpFirstCalc.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;grpSecondCalc.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="cmdMultiply.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
@@ -917,6 +755,30 @@
   </data>
   <data name="&gt;&gt;cmdMinus.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="grpFirstCalc.Location" type="System.Drawing.Point, System.Drawing">
+    <value>258, 139</value>
+  </data>
+  <data name="grpFirstCalc.Size" type="System.Drawing.Size, System.Drawing">
+    <value>127, 104</value>
+  </data>
+  <data name="grpFirstCalc.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="grpFirstCalc.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;grpFirstCalc.Name" xml:space="preserve">
+    <value>grpFirstCalc</value>
+  </data>
+  <data name="&gt;&gt;grpFirstCalc.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpFirstCalc.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpFirstCalc.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="ucrChkExplanatoryModelForLocationParameter.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 85</value>

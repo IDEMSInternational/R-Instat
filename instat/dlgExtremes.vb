@@ -42,9 +42,6 @@ Public Class dlgExtremes
     End Sub
 
     Private Sub InitialiseDialog()
-        grpFirstCalc.Visible = False
-        grpSecondCalc.Visible = False
-
         Dim dctFevdTypes As New Dictionary(Of String, String)
 
         ucrReceiverVariable.Selector = ucrSelectorExtremes
@@ -102,6 +99,8 @@ Public Class dlgExtremes
         clsNaExclude = New RFunction
         clsLocationParamOperator = New ROperator
         clsLocationScaleResetOperator = New ROperator
+        clsAttach = New RFunction
+        clsDetach = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -159,7 +158,6 @@ Public Class dlgExtremes
         bResettingDialogue = True
         SetDefaults()
         SetRCodeForControls(True)
-        TestOkEnabled()
         bResettingDialogue = False
     End Sub
 
@@ -257,6 +255,16 @@ Public Class dlgExtremes
         ucrTryModelling.ResetInputTryMessage()
     End Sub
 
+    ''' <summary> 
+    ''' <list type="bullet">
+    '''If the text selected in the extremes combobox is "GP","PP"or "Exponential" the Threshold for Location  textbox is 
+    ''' made visible else its made invisible
+    ''' If the text selected in the extremes combobox  "GP","PP"or "Exponential" the ."scale.fun" parameter is added
+    ''' to the fevd function and the "location.fun" parameter is removed from the fevd function
+    ''' If the text selected in the extremes combobox  "Gumbel" or "GEV" the ."location.fun" parameter is added
+    ''' to the fevd function and the "scale.fun" parameter is removed from the fevd function
+    ''' </list>   
+    ''' </summary>	   
     Private Sub ParameterControl()
         If ucrInputExtremes.GetText() = "GP" OrElse ucrInputExtremes.GetText() = "PP" OrElse ucrInputExtremes.GetText() = "Exponential" Then
             ucrInputThresholdforLocation.Visible = True
@@ -266,13 +274,14 @@ Public Class dlgExtremes
             clsFevdFunction.RemoveParameterByName("threshold")
         End If
         If ucrChkExplanatoryModelForLocationParameter.Checked Then
-            If (ucrInputExtremes.GetText() = "GP" OrElse ucrInputExtremes.GetText() = "PP" OrElse ucrInputExtremes.GetText() = "Exponential") Then
-                clsFevdFunction.AddParameter("scale.fun", clsROperatorParameter:=clsLocationParamOperator, iPosition:=3)
-                clsFevdFunction.RemoveParameterByName("location.fun")
-            ElseIf (ucrInputExtremes.GetText() = "Gumbel" OrElse ucrInputExtremes.GetText() = "GEV") Then
-                clsFevdFunction.AddParameter("location.fun", clsROperatorParameter:=clsLocationParamOperator, iPosition:=5)
-                clsFevdFunction.RemoveParameterByName("scale.fun")
-            End If
+            Select Case ucrInputExtremes.GetText()
+                Case "GP", "PP", "Exponential"
+                    clsFevdFunction.AddParameter("scale.fun", clsROperatorParameter:=clsLocationParamOperator, iPosition:=3)
+                    clsFevdFunction.RemoveParameterByName("location.fun")
+                Case "Gumbel", "GEV"
+                    clsFevdFunction.AddParameter("location.fun", clsROperatorParameter:=clsLocationParamOperator, iPosition:=5)
+                    clsFevdFunction.RemoveParameterByName("scale.fun")
+            End Select
             If Not bResettingDialogue Then
                 clsLocationScaleResetOperator.AddParameter("scaleLocation", clsROperatorParameter:=clsLocationParamOperator, iPosition:=0)
             End If
@@ -286,12 +295,9 @@ Public Class dlgExtremes
     End Sub
 
     Private Sub HideAndShowKeyboard()
-        If ucrChkExplanatoryModelForLocationParameter.Checked Then
-            grpFirstCalc.Visible = True
-            grpSecondCalc.Visible = True
-        Else
-            grpFirstCalc.Visible = False
-            grpSecondCalc.Visible = False
-        End If
+        With ucrChkExplanatoryModelForLocationParameter
+            grpFirstCalc.Visible = .Checked
+            grpSecondCalc.Visible = .Checked
+        End With
     End Sub
 End Class
