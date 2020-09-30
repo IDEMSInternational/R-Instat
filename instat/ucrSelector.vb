@@ -43,6 +43,12 @@ Public Class ucrSelector
 
     Protected bSilentDataFrameChange As Boolean = False
 
+    '''<summary> The list of receivers listening to this selector. 
+    '''          The receivers are ordered by tab index. This list is used to automatically switch 
+    '''          focus to the next receiver whenever this selector changes selection.
+    '''</summary>
+    Private lstOrderedReceivers As New List(Of ucrReceiver)
+
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -187,7 +193,12 @@ Public Class ucrSelector
     Public Sub Add()
         If CurrentReceiver IsNot Nothing AndAlso (lstAvailableVariable.SelectedItems.Count > 0) Then
             CurrentReceiver.AddSelected()
+            'sets current focus enabling correct tab navigation
             CurrentReceiver.Focus()
+            'check if autoswitching from the receiver is allowed before doing an autoswitch. 
+            If CurrentReceiver.bAutoSwitchFromReceiver Then
+                AutoSwitchCurrentReceiver(CurrentReceiver)
+            End If
         End If
     End Sub
 
@@ -440,4 +451,67 @@ Public Class ucrSelector
     Public Overridable Sub SetPrimaryDataFrameOptions(strNewPrimaryDataFrame As String, bNewOnlyLinkedToPrimaryDataFrames As Boolean, Optional bNewIncludePrimaryDataFrameAsLinked As Boolean = False)
 
     End Sub
+
+
+    ''' <summary>
+    ''' if <paramref name="ucrNewReceiver"/> is not yet in the list of receivers listening to 
+    ''' this selector, then inserts the receiver into the list. This list is ordered by tab index.
+    ''' If <paramref name="ucrNewReceiver"/> is already in the list then the receiver is not inserted.
+    ''' </summary>
+    ''' <param name="ucrNewReceiver"> The receiver to insert into the list.</param>
+    Public Overridable Sub AddReceiver(ucrNewReceiver As ucrReceiver)
+        AddReceivers({ucrNewReceiver})
+    End Sub
+
+    ''' <summary>
+    ''' For each reciever in <paramref name="ucrNewReceivers"/>, if the receiver is not yet in 
+    ''' the list of receivers listening to this selector, then inserts the receiver into the list.  
+    ''' This list is ordered by tab index.
+    ''' If the receiver is already in the list then the receiver is not inserted.
+    ''' </summary>
+    ''' <param name="ucrNewReceivers"> The receivers to insert into the list.</param>
+    Public Overridable Sub AddReceivers(ucrNewReceivers As IEnumerable(Of ucrReceiver))
+        'add the receiver to the list if it's not already added
+        For Each ucr As ucrReceiver In ucrNewReceivers
+            If Not lstOrderedReceivers.Contains(ucr) Then
+                lstOrderedReceivers.Add(ucr)
+            End If
+        Next
+        'then order them by tab index. This will return an IOrderedEnumerable from which we get the list.
+        lstOrderedReceivers = (From ucr In lstOrderedReceivers Order By ucr.TabIndex).ToList
+    End Sub
+
+
+    ''' <summary>
+    ''' Removes the first occurrence of the passed receiver if found. 
+    ''' </summary>
+    ''' <param name="ucrReceiver"></param>
+    ''' <returns>true if item is successfully removed; otherwise, false. also returns false if item was not found in the list</returns>
+    Public Overridable Function RemoveReceiver(ucrReceiver As ucrReceiver) As Boolean
+        Return lstOrderedReceivers.Remove(ucrReceiver)
+    End Function
+
+    ''' <summary>
+    ''' This subroutine is used to automatically switch focus to the next receiver whenever this 
+    ''' selector changes selection. 
+    ''' This subroutine sets the current receiver to be the next visible/enabled receiver in the 
+    ''' list of receivers listening to this selector.  This list is ordered by tab index. 
+    ''' </summary>
+    ''' <param name="FromSelectedReceiver"> The receiver that has the current focus.</param>
+    Private Sub AutoSwitchCurrentReceiver(FromSelectedReceiver As ucrReceiver)
+        Dim ucrNewCurrentReceiver As ucrReceiver
+        For i As Integer = 0 To lstOrderedReceivers.Count - 2
+            If lstOrderedReceivers.Item(i) Is FromSelectedReceiver Then
+                ucrNewCurrentReceiver = lstOrderedReceivers.Item(i + 1)
+                If ucrNewCurrentReceiver.Visible AndAlso ucrNewCurrentReceiver.Enabled Then
+                    ucrNewCurrentReceiver.Focus() 'sets current focus enabling correct tab navigation
+                    SetCurrentReceiver(ucrNewCurrentReceiver)
+                Else
+                    AutoSwitchCurrentReceiver(ucrNewCurrentReceiver)
+                End If
+                Exit For
+            End If
+        Next
+    End Sub
+
 End Class
