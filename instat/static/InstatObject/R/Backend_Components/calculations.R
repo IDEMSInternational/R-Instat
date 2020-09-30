@@ -352,16 +352,9 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   #TODO investigate better way to do this
   #     Any case where we don't want this?
 
-  #class(curr_groups)
-
- # if (!is.null(curr_groups)) {
- #  curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by(dplyr::across({{ curr_groups }}), add = TRUE)
- #  }
-
   for(var in curr_groups) {
- curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by_(var, add = TRUE)
-#  curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% group_by(dplyr::across({{ var }}), add = TRUE)
-}
+  curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(!!rlang::parse_expr(var), add = TRUE)
+  }
 
 
   # Names of the data frames required for the calculation
@@ -444,10 +437,8 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
         #TODO investigate better way to do this
         #     Any case where we don't want this?
 
-       # todo: change groups to be group_vars for this one a few lines above.
-       #  curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(dplyr::across({{ curr_groups }}), add = TRUE)
-       for(var in curr_groups) {
-          curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by_(var, add = TRUE)
+        for(var in curr_groups) {
+        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(!!rlang::parse_expr(var), add = TRUE)
         }
         # The overall data is joined into the current sub calc, so the curr_data_list is "reset" to default values
         curr_data_list[[c_link_label]] <- list(from_data_frame = data_frame_name, link_cols = c())
@@ -467,7 +458,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   if(calc$type == "calculation") {
     if(calc$result_name %in% names(curr_data_list[[c_data_label]])) warning(calc$result_name, " is already a column in the existing data. The column will be replaced. This may have unintended consequences for the calculation")    
     calc_result_name <- calc$result_name
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::mutate({{ calc_result_name }} := !!rlang::parse_expr(calc$function_exp))
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::mutate({{ calc_result_name }} := !!rlang::parse_expr(calc$function_exp))  
   }
   # this type performs a summary
   # the data is not at a different "level" so the link is changed and link columns are the groups of the data before summarising
