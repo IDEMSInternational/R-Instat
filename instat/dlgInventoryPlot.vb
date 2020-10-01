@@ -99,16 +99,16 @@ Public Class dlgInventoryPlot
         ucrSaveDetails.SetIsComboBox()
         ' ucrSaveDetails.SetAssignToIfUncheckedValue("last_details")
 
-        ' ucrChkHour.SetParameter(New RParameter("", 13))
-        ucrChkHour.SetText("Hour")
+        ' ucrChkHour.SetParameter(New RParameter("", ))
+        ucrChkHour.SetText("Hour")  ' this currently has no parameter associated with it
         ' ucrChkHour.SetRDefault("FALSE")
 
-        ' ucrChkMinute.SetParameter(New RParameter("", 13))
-        ucrChkMinute.SetText("Minute")
+        ' ucrChkMinute.SetParameter(New RParameter("", ))
+        ucrChkMinute.SetText("Minute")  ' this currently has no parameter associated with it
         ' ucrChkMinute.SetRDefault("FALSE")
 
-        ' ucrChkSecond.SetParameter(New RParameter("", 13))
-        ucrChkSecond.SetText("Second")
+        ' ucrChkSecond.SetParameter(New RParameter("", ))
+        ucrChkSecond.SetText("Second")  ' this currently has no parameter associated with it
         ' ucrChkSecond.SetRDefault("FALSE")
 
         ucrPnlOrder.SetParameter(New RParameter("order", 4))
@@ -192,7 +192,6 @@ Public Class dlgInventoryPlot
         clsInventoryPlot.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         clsClimaticMissing.SetRCommand("climatic_missing")
-
         clsClimaticDetails.SetRCommand("climatic_details")
         clsClimaticDetails.SetAssignTo("last_details", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_details")
 

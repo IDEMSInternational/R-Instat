@@ -1332,13 +1332,13 @@ climatic_missing <- function(data, date, elements = ..., stations,
     }
     
     # number and percentage missing
-    summary.data <- data.frame(data.stack %>%
+    summary.data <- data.stack %>%
                                  dplyr::group_by({{ stations }}, Element) %>%
                                  dplyr::filter(({{ date }}) >= start & ({{ date }}) <= end) %>%
                                  dplyr::summarise(From = dplyr::first(start),
                                                   To = dplyr::last(end),
                                                   Missing = sum(is.na(value)),
-                                                  Percentage = sum(is.na(value))/n()*100))
+                                                  `%` = sum(is.na(value))/n()*100)
     
     # complete years
     complete.years <- data.stack %>%
