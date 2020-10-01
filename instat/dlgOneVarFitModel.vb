@@ -19,15 +19,6 @@ Public Class dlgOneVarFitModel
     Private clsROneVarFitModel, clsRLogLikFunction, clsRfitdist, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric, clsNaExclude As New RFunction
     Private clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As New RFunction
     Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction, clsBartelFunction, clsBrFunction, clsRunsFunction, clsSenFunction, clsSerialCorrFunction, clsSnhFunction, clsAdFunction, clsCvmFunction, clsLillieFunction, clsPearsonFunction, clsSfFunction As New RFunction
-
-    Private Sub ToolTip2_Popup(sender As Object, e As PopupEventArgs)
-
-    End Sub
-
-    Private Sub ToolTip1_Popup(sender As Object, e As PopupEventArgs) Handles tttests.Popup
-
-    End Sub
-
     Private clsMeanCIFunction, clsMedianCIFunction, clsNormCIFunction, clsQuantileCIFunction, clsSdCIFunction, clsVarCIFunction As New RFunction
     Private WithEvents ucrDistribution As ucrDistributions
     Private bFirstload As Boolean = True
@@ -81,7 +72,6 @@ Public Class dlgOneVarFitModel
         ucrChkConvertVariate.SetText("Convert to Numeric")
         ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(True, "data", "as.numeric", True)
         ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(False, "data", "as.numeric", False)
-        ucrChkConvertVariate.AddParameterValueFunctionNamesCondition(False, "data", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data", True)
 
         ucrDistribution = ucrDistributionChoice
         ucrDistributionChoice.SetGLMDistributions()
@@ -268,8 +258,6 @@ Public Class dlgOneVarFitModel
         clsRLogLikFunction = New RFunction
 
         ucrDistribution = New ucrDistributions
-        ucrChkOmitMissing.Checked = True
-
 
         clsRfitdist = New RFunction
         clsRConvertVector = New RFunction
@@ -688,106 +676,81 @@ Public Class dlgOneVarFitModel
     Private Sub AddAsNumeric()
         If rdoTest.Checked Then
             If ucrChkConvertVariate.Checked Then
-                If ucrInputComboTests.GetText() = "sign" Then
-                    clsSignTestFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "t" Then
-                    clsTtestFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "Z" Then
-                    clsZTestFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "Bartel" Then
-                    clsBartelFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "Wilcoxon" Then
-                    clsWilcoxonFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "br" Then
-                    clsBrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "runs" Then
-                    clsRunsFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "Sen" Then
-                    clsSenFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "serial corr" Then
-                    clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "snh" Then
-                    clsSnhFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "cvm" Then
-                    clsCvmFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "lillie" Then
-                    clsLillieFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "pearson" Then
-                    clsPearsonFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "sf" Then
-                    clsSfFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "ad" Then
-                    clsAdFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
+                Select Case ucrInputComboTests.GetText()
+                    Case "sign"
+                        clsSignTestFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "t"
+                        clsTtestFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "Z"
+                        clsZTestFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "Bartel"
+                        clsBartelFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "Wilcoxon"
+                        clsWilcoxonFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "br"
+                        clsBrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "runs"
+                        clsRunsFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "Sen"
+                        clsSenFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "serial corr"
+                        clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "snh"
+                        clsSnhFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "cvm"
+                        clsCvmFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "lillie"
+                        clsLillieFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "pearson"
+                        clsPearsonFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "sf"
+                        clsSfFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "ad"
+                        clsAdFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                End Select
             Else
-                If ucrInputComboTests.GetText() = "sign" Then
-                    clsSignTestFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "t" Then
-                    clsTtestFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "Wilcoxon" Then
-                    clsWilcoxonFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "Z" Then
-                    clsZTestFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "Bartel" Then
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Bartels Rank Test of Randomness")
-                    clsBartelFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "runs" Then
-                    clsRunsFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "br" Then
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Buishand Range Test for Change-Point Detection")
-                    clsBrFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "Sen" Then
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Sen 's slope for linear rate of change")
-                    clsSenFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "serial corr" Then
-                    clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "snh" Then
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Standard Normal Homogeinity Test (SNHT) for Change-Point Detection")
-                    clsSnhFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "cvm" Then
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Cramer-von Mises test for normality")
-                    clsCvmFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "lillie" Then
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Lilliefors (Kolmogorov-Smirnov) test for normality")
-                    clsLillieFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "pearson" Then
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Pearson chi-square test for normality")
-                    clsPearsonFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "sf" Then
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Shapiro-Francia test for normality")
-                    clsSfFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboTests.GetText() = "ad" Then
-                    tttests.SetToolTip(ucrInputComboTests.cboInput, "Anderson-Darling test for normality")
-                    clsAdFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
+                Select Case ucrInputComboTests.GetText()
+                    Case "sign"
+                        clsSignTestFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "t"
+                        clsTtestFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "Wilcoxon"
+                        clsWilcoxonFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "Z"
+                        clsZTestFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "Bartel"
+                        tttests.SetToolTip(ucrInputComboTests.cboInput, "Bartels Rank Test of Randomness")
+                        clsBartelFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "runs"
+                        clsRunsFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "br"
+                        tttests.SetToolTip(ucrInputComboTests.cboInput, "Buishand Range Test for Change-Point Detection")
+                        clsBrFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "Sen"
+                        tttests.SetToolTip(ucrInputComboTests.cboInput, "Sen 's slope for linear rate of change")
+                        clsSenFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "serial corr"
+                        clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
+
+                    Case "snh"
+                        tttests.SetToolTip(ucrInputComboTests.cboInput, "Standard Normal Homogeinity Test (SNHT) for Change-Point Detection")
+                        clsSnhFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "cvm"
+                        tttests.SetToolTip(ucrInputComboTests.cboInput, "Cramer-von Mises test for normality")
+                        clsCvmFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "lillie"
+                        tttests.SetToolTip(ucrInputComboTests.cboInput, "Lilliefors (Kolmogorov-Smirnov) test for normality")
+                        clsLillieFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "pearson"
+                        tttests.SetToolTip(ucrInputComboTests.cboInput, "Pearson chi-square test for normality")
+                        clsPearsonFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "sf"
+                        tttests.SetToolTip(ucrInputComboTests.cboInput, "Shapiro-Francia test for normality")
+                        clsSfFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "ad"
+                        tttests.SetToolTip(ucrInputComboTests.cboInput, "Anderson-Darling test for normality")
+                        clsAdFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                End Select
             End If
         End If
     End Sub
@@ -795,46 +758,37 @@ Public Class dlgOneVarFitModel
     Private Sub EstimatesAsNumeric()
         If rdoEstimate.Checked Then
             If ucrChkConvertVariate.Checked Then
-                If ucrInputComboEstimate.GetText() = "mean" Then
-                    clsMeanCIFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboEstimate.GetText() = "median" Then
-                    clsMedianCIFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboEstimate.GetText() = "normal" Then
-                    clsNormCIFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboEstimate.GetText() = "quantile" Then
-                    clsQuantileCIFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboEstimate.GetText() = "sd" Then
-                    clsSdCIFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
-                If ucrInputComboEstimate.GetText() = "variance" Then
-                    clsVarCIFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
-                End If
+                Select Case ucrInputComboEstimate.GetText()
+                    Case "mean"
+                        clsMeanCIFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "median"
+                        clsMedianCIFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "normal"
+                        clsNormCIFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "quantile"
+                        clsQuantileCIFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "sd"
+                        clsSdCIFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                    Case "variance"
+                        clsVarCIFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertNumeric, iPosition:=0)
+                End Select
             Else
-                If ucrInputComboEstimate.GetText() = "mean" Then
-                    clsMeanCIFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboEstimate.GetText() = "median" Then
-                    clsMedianCIFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboEstimate.GetText() = "normal" Then
-                    clsNormCIFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                End If
-                If ucrInputComboEstimate.GetText() = "quantile" Then
+                Select Case ucrInputComboEstimate.GetText()
+                    Case "mean"
+                        clsMeanCIFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "median"
+                        clsMedianCIFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "normal"
+                        clsNormCIFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "quantile"
                         clsQuantileCIFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                    End If
-                    If ucrInputComboEstimate.GetText() = "sd" Then
-                            clsSdCIFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-                        End If
-                        If ucrInputComboEstimate.GetText() = "variance" Then
+                    Case "sd"
+                        clsSdCIFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+                    Case "variance"
                         clsVarCIFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
-
-                    End If
+                End Select
             End If
-            End If
+        End If
     End Sub
 
     Private Sub SetTestEstimateBaseFunction()
@@ -899,14 +853,7 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub tooltip()
-        If ucrInputComboTests.GetText() = "binomial" Then
-            tttests.RemoveAll()
-        End If
-    End Sub
-
     Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboTests.ControlValueChanged, ucrInputComboEstimate.ControlValueChanged
-        tooltip()
         SetTestEstimateBaseFunction()
         ucrSaveModel.Reset()
         AddAsNumeric()
@@ -919,4 +866,5 @@ Public Class dlgOneVarFitModel
     Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlContentsChanged, ucrReceiverVariable.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
 End Class
