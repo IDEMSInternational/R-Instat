@@ -1282,3 +1282,8 @@ summary_sample <- function(x, size, replace = FALSE){
   else if(length(x)==1){return(x)}
   else{sample(x = x, size = size, replace = replace)}
 }
+
+slope <- function(y, x) {
+  x <- as.numeric(x)
+  lm(y ~ x)$coefficients[2]
+}
