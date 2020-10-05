@@ -1315,7 +1315,8 @@ add_t_range <- function(path, min_date, max_date) {
 
 add_nc <- function(path) {
   paste0(path, "data.nc")
-  
+}
+
 slope <- function(y, x) {
   x <- as.numeric(x)
   lm(y ~ x)$coefficients[2]
