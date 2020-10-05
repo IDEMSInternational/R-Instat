@@ -1290,3 +1290,8 @@ fourier_series <- function(x, n, period) {
          "cos(", x, " * ", h, " * ", p2, " / ", period, ")", 
          collapse = " + ")
 }
+
+slope <- function(y, x) {
+  x <- as.numeric(x)
+  lm(y ~ x)$coefficients[2]
+}
