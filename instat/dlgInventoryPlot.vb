@@ -33,6 +33,7 @@ Public Class dlgInventoryPlot
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+
     End Sub
 
     Private Sub InitialiseDialog()
@@ -159,7 +160,7 @@ Public Class dlgInventoryPlot
         ucrPnlOptions.AddRSyntaxContainsFunctionNamesCondition(rdoGraph, {frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot"})
 
         ucrPnlOptions.AddToLinkedControls({ucrChkDisplayRainDays, ucrChkFlipCoordinates, ucrChkShowNonMissing, ucrPnlPlotType, ucrSaveGraph, ucrInputTitle, ucrInputFacetBy}, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrChkSummary, ucrChkDetails}, {rdoMissing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkSummary}, {rdoMissing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDetails.AddToLinkedControls({ucrChkDay}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDetails.AddToLinkedControls({ucrPnlOrder}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSummary.AddToLinkedControls({ucrChkOmitStart, ucrChkOmitEnd}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -193,7 +194,7 @@ Public Class dlgInventoryPlot
 
         clsClimaticMissing.SetRCommand("climatic_missing")
         clsClimaticDetails.SetRCommand("climatic_details")
-        clsClimaticDetails.SetAssignTo("last_details", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_details")
+        clsClimaticDetails.SetAssignTo("last_details", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strDataFrameNames:="last_details")
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsInventoryPlot, iPosition:=0)
@@ -257,8 +258,7 @@ Public Class dlgInventoryPlot
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
-
-    Private Sub ucrPnls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoMissing.Checked Then
             ucrReceiverDate.SetParameterIsRFunction()
             ucrInventoryPlotSelector.SetParameterIsrfunction()
@@ -272,7 +272,6 @@ Public Class dlgInventoryPlot
             clsInventoryPlot.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
-
     Private Sub ucrChkSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummary.ControlValueChanged
         If ucrChkSummary.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticMissing, iPosition:=1)
@@ -303,7 +302,14 @@ Public Class dlgInventoryPlot
         End If
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrChkSummary.ControlContentsChanged, ucrChkDetails.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkHour.ControlContentsChanged, ucrChkMinute.ControlContentsChanged, ucrChkSecond.ControlContentsChanged, ucrPnlOptions.ControlValueChanged
+    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrSaveDetails.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrChkSummary.ControlContentsChanged, ucrChkDetails.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkHour.ControlContentsChanged, ucrChkMinute.ControlContentsChanged, ucrChkSecond.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrBase_ClickClose(sender As Object, e As EventArgs) Handles ucrBase.ClickClose
+        If rdoMissing.Checked AndAlso Not ucrChkSummary.Checked AndAlso Not ucrChkDetails.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticMissing, iPosition:=1)
+            clsClimaticDetails.iCallType = 2
+        End If
     End Sub
 End Class
