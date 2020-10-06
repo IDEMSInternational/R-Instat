@@ -37,24 +37,24 @@ Partial Class dlgSeasonalPlot
         Me.ucrInputSmoothing = New instat.ucrInputComboBox()
         Me.lblPeriod = New System.Windows.Forms.Label()
         Me.ucrNudPeriod = New instat.ucrNud()
-        Me.lblRefSummary = New System.Windows.Forms.Label()
+        Me.lblReferenceSummary = New System.Windows.Forms.Label()
         Me.lblSeasonality = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblReference = New System.Windows.Forms.Label()
-        Me.lblEstimate = New System.Windows.Forms.Label()
-        Me.ucrChkOptionalSummary = New instat.ucrCheck()
-        Me.ucrInputEstimateThreshold = New instat.ucrInputTextBox()
+        Me.lblEstimates = New System.Windows.Forms.Label()
+        Me.ucrInputEstimatesThreshold = New instat.ucrInputTextBox()
         Me.ucrInputReferenceThreshold = New instat.ucrInputTextBox()
         Me.ucrInputReferenceSummary = New instat.ucrInputComboBox()
-        Me.ucrInputEstimateSummary = New instat.ucrInputComboBox()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrChkRemoveMissing = New instat.ucrCheck()
-        Me.ucrReceiverEstimate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverEstimates = New instat.ucrReceiverSingle()
         Me.ucrReceiverSeasonality = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverReference = New instat.ucrReceiverSingle()
         Me.ucrSelectorSeasonalityComparisons = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblEstimatesSummary = New System.Windows.Forms.Label()
+        Me.ucrInputEstimatesSummary = New instat.ucrInputTextBox()
         Me.grpValues.SuspendLayout()
         Me.grpSmoothing.SuspendLayout()
         Me.SuspendLayout()
@@ -65,19 +65,19 @@ Partial Class dlgSeasonalPlot
         Me.grpValues.Controls.Add(Me.lblN)
         Me.grpValues.Controls.Add(Me.ucrChkPoints)
         Me.grpValues.Controls.Add(Me.ucrChkMovingAverage)
-        Me.grpValues.Location = New System.Drawing.Point(12, 242)
+        Me.grpValues.Location = New System.Drawing.Point(12, 343)
         Me.grpValues.Name = "grpValues"
-        Me.grpValues.Size = New System.Drawing.Size(232, 71)
+        Me.grpValues.Size = New System.Drawing.Size(243, 71)
         Me.grpValues.TabIndex = 16
         Me.grpValues.TabStop = False
-        Me.grpValues.Text = "Values"
+        Me.grpValues.Text = "Display Values As"
         '
         'ucrInputN
         '
         Me.ucrInputN.AddQuotesIfUnrecognised = True
         Me.ucrInputN.IsMultiline = False
         Me.ucrInputN.IsReadOnly = False
-        Me.ucrInputN.Location = New System.Drawing.Point(149, 41)
+        Me.ucrInputN.Location = New System.Drawing.Point(149, 45)
         Me.ucrInputN.Name = "ucrInputN"
         Me.ucrInputN.Size = New System.Drawing.Size(47, 21)
         Me.ucrInputN.TabIndex = 23
@@ -85,7 +85,7 @@ Partial Class dlgSeasonalPlot
         'lblN
         '
         Me.lblN.AutoSize = True
-        Me.lblN.Location = New System.Drawing.Point(130, 43)
+        Me.lblN.Location = New System.Drawing.Point(130, 47)
         Me.lblN.Name = "lblN"
         Me.lblN.Size = New System.Drawing.Size(16, 13)
         Me.lblN.TabIndex = 21
@@ -94,7 +94,7 @@ Partial Class dlgSeasonalPlot
         'ucrChkPoints
         '
         Me.ucrChkPoints.Checked = False
-        Me.ucrChkPoints.Location = New System.Drawing.Point(8, 15)
+        Me.ucrChkPoints.Location = New System.Drawing.Point(8, 19)
         Me.ucrChkPoints.Name = "ucrChkPoints"
         Me.ucrChkPoints.Size = New System.Drawing.Size(155, 20)
         Me.ucrChkPoints.TabIndex = 8
@@ -102,7 +102,7 @@ Partial Class dlgSeasonalPlot
         'ucrChkMovingAverage
         '
         Me.ucrChkMovingAverage.Checked = False
-        Me.ucrChkMovingAverage.Location = New System.Drawing.Point(8, 41)
+        Me.ucrChkMovingAverage.Location = New System.Drawing.Point(8, 45)
         Me.ucrChkMovingAverage.Name = "ucrChkMovingAverage"
         Me.ucrChkMovingAverage.Size = New System.Drawing.Size(121, 20)
         Me.ucrChkMovingAverage.TabIndex = 7
@@ -118,12 +118,12 @@ Partial Class dlgSeasonalPlot
         Me.grpSmoothing.Controls.Add(Me.ucrInputSmoothing)
         Me.grpSmoothing.Controls.Add(Me.lblPeriod)
         Me.grpSmoothing.Controls.Add(Me.ucrNudPeriod)
-        Me.grpSmoothing.Location = New System.Drawing.Point(12, 317)
+        Me.grpSmoothing.Location = New System.Drawing.Point(12, 253)
         Me.grpSmoothing.Name = "grpSmoothing"
         Me.grpSmoothing.Size = New System.Drawing.Size(243, 75)
         Me.grpSmoothing.TabIndex = 17
         Me.grpSmoothing.TabStop = False
-        Me.grpSmoothing.Text = "Smoothing"
+        Me.grpSmoothing.Text = "Smoothing Curves"
         '
         'ucrNudSpan
         '
@@ -219,19 +219,19 @@ Partial Class dlgSeasonalPlot
         Me.ucrNudPeriod.TabIndex = 2
         Me.ucrNudPeriod.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblRefSummary
+        'lblReferenceSummary
         '
-        Me.lblRefSummary.AutoSize = True
-        Me.lblRefSummary.Location = New System.Drawing.Point(275, 73)
-        Me.lblRefSummary.Name = "lblRefSummary"
-        Me.lblRefSummary.Size = New System.Drawing.Size(53, 13)
-        Me.lblRefSummary.TabIndex = 3
-        Me.lblRefSummary.Text = "Summary:"
+        Me.lblReferenceSummary.AutoSize = True
+        Me.lblReferenceSummary.Location = New System.Drawing.Point(275, 73)
+        Me.lblReferenceSummary.Name = "lblReferenceSummary"
+        Me.lblReferenceSummary.Size = New System.Drawing.Size(53, 13)
+        Me.lblReferenceSummary.TabIndex = 3
+        Me.lblReferenceSummary.Text = "Summary:"
         '
         'lblSeasonality
         '
         Me.lblSeasonality.AutoSize = True
-        Me.lblSeasonality.Location = New System.Drawing.Point(275, 227)
+        Me.lblSeasonality.Location = New System.Drawing.Point(275, 218)
         Me.lblSeasonality.Name = "lblSeasonality"
         Me.lblSeasonality.Size = New System.Drawing.Size(64, 13)
         Me.lblSeasonality.TabIndex = 11
@@ -240,7 +240,7 @@ Partial Class dlgSeasonalPlot
         'lblStation
         '
         Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(275, 273)
+        Me.lblStation.Location = New System.Drawing.Point(275, 264)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 13
@@ -251,45 +251,37 @@ Partial Class dlgSeasonalPlot
         Me.lblReference.AutoSize = True
         Me.lblReference.Location = New System.Drawing.Point(275, 27)
         Me.lblReference.Name = "lblReference"
-        Me.lblReference.Size = New System.Drawing.Size(60, 13)
+        Me.lblReference.Size = New System.Drawing.Size(95, 13)
         Me.lblReference.TabIndex = 1
-        Me.lblReference.Text = "Reference:"
+        Me.lblReference.Text = "Reference Values:"
         '
-        'lblEstimate
+        'lblEstimates
         '
-        Me.lblEstimate.AutoSize = True
-        Me.lblEstimate.Location = New System.Drawing.Point(275, 120)
-        Me.lblEstimate.Name = "lblEstimate"
-        Me.lblEstimate.Size = New System.Drawing.Size(50, 13)
-        Me.lblEstimate.TabIndex = 6
-        Me.lblEstimate.Text = "Estimate:"
+        Me.lblEstimates.AutoSize = True
+        Me.lblEstimates.Location = New System.Drawing.Point(275, 120)
+        Me.lblEstimates.Name = "lblEstimates"
+        Me.lblEstimates.Size = New System.Drawing.Size(55, 13)
+        Me.lblEstimates.TabIndex = 6
+        Me.lblEstimates.Text = "Estimates:"
         '
-        'ucrChkOptionalSummary
+        'ucrInputEstimatesThreshold
         '
-        Me.ucrChkOptionalSummary.Checked = False
-        Me.ucrChkOptionalSummary.Location = New System.Drawing.Point(274, 169)
-        Me.ucrChkOptionalSummary.Name = "ucrChkOptionalSummary"
-        Me.ucrChkOptionalSummary.Size = New System.Drawing.Size(189, 20)
-        Me.ucrChkOptionalSummary.TabIndex = 8
-        '
-        'ucrInputEstimateThreshold
-        '
-        Me.ucrInputEstimateThreshold.AddQuotesIfUnrecognised = True
-        Me.ucrInputEstimateThreshold.IsMultiline = False
-        Me.ucrInputEstimateThreshold.IsReadOnly = False
-        Me.ucrInputEstimateThreshold.Location = New System.Drawing.Point(370, 192)
-        Me.ucrInputEstimateThreshold.Name = "ucrInputEstimateThreshold"
-        Me.ucrInputEstimateThreshold.Size = New System.Drawing.Size(48, 21)
-        Me.ucrInputEstimateThreshold.TabIndex = 10
+        Me.ucrInputEstimatesThreshold.AddQuotesIfUnrecognised = True
+        Me.ucrInputEstimatesThreshold.IsMultiline = False
+        Me.ucrInputEstimatesThreshold.IsReadOnly = False
+        Me.ucrInputEstimatesThreshold.Location = New System.Drawing.Point(373, 181)
+        Me.ucrInputEstimatesThreshold.Name = "ucrInputEstimatesThreshold"
+        Me.ucrInputEstimatesThreshold.Size = New System.Drawing.Size(40, 21)
+        Me.ucrInputEstimatesThreshold.TabIndex = 10
         '
         'ucrInputReferenceThreshold
         '
         Me.ucrInputReferenceThreshold.AddQuotesIfUnrecognised = True
         Me.ucrInputReferenceThreshold.IsMultiline = False
         Me.ucrInputReferenceThreshold.IsReadOnly = False
-        Me.ucrInputReferenceThreshold.Location = New System.Drawing.Point(365, 89)
+        Me.ucrInputReferenceThreshold.Location = New System.Drawing.Point(373, 89)
         Me.ucrInputReferenceThreshold.Name = "ucrInputReferenceThreshold"
-        Me.ucrInputReferenceThreshold.Size = New System.Drawing.Size(53, 21)
+        Me.ucrInputReferenceThreshold.Size = New System.Drawing.Size(40, 21)
         Me.ucrInputReferenceThreshold.TabIndex = 5
         '
         'ucrInputReferenceSummary
@@ -302,19 +294,9 @@ Partial Class dlgSeasonalPlot
         Me.ucrInputReferenceSummary.Size = New System.Drawing.Size(89, 21)
         Me.ucrInputReferenceSummary.TabIndex = 4
         '
-        'ucrInputEstimateSummary
-        '
-        Me.ucrInputEstimateSummary.AddQuotesIfUnrecognised = True
-        Me.ucrInputEstimateSummary.GetSetSelectedIndex = -1
-        Me.ucrInputEstimateSummary.IsReadOnly = False
-        Me.ucrInputEstimateSummary.Location = New System.Drawing.Point(275, 192)
-        Me.ucrInputEstimateSummary.Name = "ucrInputEstimateSummary"
-        Me.ucrInputEstimateSummary.Size = New System.Drawing.Size(93, 21)
-        Me.ucrInputEstimateSummary.TabIndex = 9
-        '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(12, 400)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(12, 430)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 29)
@@ -328,26 +310,26 @@ Partial Class dlgSeasonalPlot
         Me.ucrChkRemoveMissing.Size = New System.Drawing.Size(197, 20)
         Me.ucrChkRemoveMissing.TabIndex = 15
         '
-        'ucrReceiverEstimate
+        'ucrReceiverEstimates
         '
-        Me.ucrReceiverEstimate.frmParent = Me
-        Me.ucrReceiverEstimate.Location = New System.Drawing.Point(275, 136)
-        Me.ucrReceiverEstimate.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverEstimate.Name = "ucrReceiverEstimate"
-        Me.ucrReceiverEstimate.Selector = Nothing
-        Me.ucrReceiverEstimate.Size = New System.Drawing.Size(143, 20)
-        Me.ucrReceiverEstimate.strNcFilePath = ""
-        Me.ucrReceiverEstimate.TabIndex = 7
-        Me.ucrReceiverEstimate.ucrSelector = Nothing
+        Me.ucrReceiverEstimates.frmParent = Me
+        Me.ucrReceiverEstimates.Location = New System.Drawing.Point(275, 136)
+        Me.ucrReceiverEstimates.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverEstimates.Name = "ucrReceiverEstimates"
+        Me.ucrReceiverEstimates.Selector = Nothing
+        Me.ucrReceiverEstimates.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverEstimates.strNcFilePath = ""
+        Me.ucrReceiverEstimates.TabIndex = 7
+        Me.ucrReceiverEstimates.ucrSelector = Nothing
         '
         'ucrReceiverSeasonality
         '
         Me.ucrReceiverSeasonality.frmParent = Me
-        Me.ucrReceiverSeasonality.Location = New System.Drawing.Point(275, 243)
+        Me.ucrReceiverSeasonality.Location = New System.Drawing.Point(275, 234)
         Me.ucrReceiverSeasonality.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSeasonality.Name = "ucrReceiverSeasonality"
         Me.ucrReceiverSeasonality.Selector = Nothing
-        Me.ucrReceiverSeasonality.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverSeasonality.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverSeasonality.strNcFilePath = ""
         Me.ucrReceiverSeasonality.TabIndex = 12
         Me.ucrReceiverSeasonality.ucrSelector = Nothing
@@ -355,11 +337,11 @@ Partial Class dlgSeasonalPlot
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(275, 289)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(275, 280)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
         Me.ucrReceiverStation.TabIndex = 14
         Me.ucrReceiverStation.ucrSelector = Nothing
@@ -371,7 +353,7 @@ Partial Class dlgSeasonalPlot
         Me.ucrReceiverReference.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverReference.Name = "ucrReceiverReference"
         Me.ucrReceiverReference.Selector = Nothing
-        Me.ucrReceiverReference.Size = New System.Drawing.Size(143, 20)
+        Me.ucrReceiverReference.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverReference.strNcFilePath = ""
         Me.ucrReceiverReference.TabIndex = 2
         Me.ucrReceiverReference.ucrSelector = Nothing
@@ -389,31 +371,50 @@ Partial Class dlgSeasonalPlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(12, 429)
+        Me.ucrBase.Location = New System.Drawing.Point(12, 468)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 19
+        '
+        'lblEstimatesSummary
+        '
+        Me.lblEstimatesSummary.AutoSize = True
+        Me.lblEstimatesSummary.Location = New System.Drawing.Point(275, 165)
+        Me.lblEstimatesSummary.Name = "lblEstimatesSummary"
+        Me.lblEstimatesSummary.Size = New System.Drawing.Size(53, 13)
+        Me.lblEstimatesSummary.TabIndex = 20
+        Me.lblEstimatesSummary.Text = "Summary:"
+        '
+        'ucrInputEstimatesSummary
+        '
+        Me.ucrInputEstimatesSummary.AddQuotesIfUnrecognised = True
+        Me.ucrInputEstimatesSummary.IsMultiline = False
+        Me.ucrInputEstimatesSummary.IsReadOnly = False
+        Me.ucrInputEstimatesSummary.Location = New System.Drawing.Point(275, 181)
+        Me.ucrInputEstimatesSummary.Name = "ucrInputEstimatesSummary"
+        Me.ucrInputEstimatesSummary.Size = New System.Drawing.Size(89, 21)
+        Me.ucrInputEstimatesSummary.TabIndex = 21
         '
         'dlgSeasonalPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(466, 491)
-        Me.Controls.Add(Me.ucrChkOptionalSummary)
-        Me.Controls.Add(Me.lblEstimate)
+        Me.ClientSize = New System.Drawing.Size(439, 521)
+        Me.Controls.Add(Me.ucrInputEstimatesSummary)
+        Me.Controls.Add(Me.lblEstimatesSummary)
+        Me.Controls.Add(Me.lblEstimates)
         Me.Controls.Add(Me.lblReference)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.lblSeasonality)
-        Me.Controls.Add(Me.lblRefSummary)
-        Me.Controls.Add(Me.ucrInputEstimateThreshold)
+        Me.Controls.Add(Me.lblReferenceSummary)
+        Me.Controls.Add(Me.ucrInputEstimatesThreshold)
         Me.Controls.Add(Me.ucrInputReferenceThreshold)
         Me.Controls.Add(Me.ucrInputReferenceSummary)
-        Me.Controls.Add(Me.ucrInputEstimateSummary)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.grpSmoothing)
         Me.Controls.Add(Me.grpValues)
         Me.Controls.Add(Me.ucrChkRemoveMissing)
-        Me.Controls.Add(Me.ucrReceiverEstimate)
+        Me.Controls.Add(Me.ucrReceiverEstimates)
         Me.Controls.Add(Me.ucrReceiverSeasonality)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrReceiverReference)
@@ -443,21 +444,20 @@ Partial Class dlgSeasonalPlot
     Friend WithEvents ucrChkPoints As ucrCheck
     Friend WithEvents ucrChkMovingAverage As ucrCheck
     Friend WithEvents ucrChkRemoveMissing As ucrCheck
-    Friend WithEvents ucrReceiverEstimate As ucrReceiverSingle
+    Friend WithEvents ucrReceiverEstimates As ucrReceiverSingle
     Friend WithEvents ucrReceiverSeasonality As ucrReceiverSingle
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrNudPeriod As ucrNud
     Friend WithEvents ucrNudHarmonics As ucrNud
     Friend WithEvents ucrInputSmoothing As ucrInputComboBox
-    Friend WithEvents ucrInputEstimateThreshold As ucrInputTextBox
+    Friend WithEvents ucrInputEstimatesThreshold As ucrInputTextBox
     Friend WithEvents ucrInputReferenceThreshold As ucrInputTextBox
     Friend WithEvents ucrInputReferenceSummary As ucrInputComboBox
-    Friend WithEvents ucrInputEstimateSummary As ucrInputComboBox
-    Friend WithEvents lblEstimate As Label
+    Friend WithEvents lblEstimates As Label
     Friend WithEvents lblReference As Label
     Friend WithEvents lblStation As Label
     Friend WithEvents lblSeasonality As Label
-    Friend WithEvents lblRefSummary As Label
+    Friend WithEvents lblReferenceSummary As Label
     Friend WithEvents lblPeriod As Label
     Friend WithEvents lblHarmonics As Label
     Friend WithEvents ucrInputN As ucrInputTextBox
@@ -466,5 +466,6 @@ Partial Class dlgSeasonalPlot
     Friend WithEvents ucrNudDf As ucrNud
     Friend WithEvents lblDf As Label
     Friend WithEvents lblSpan As Label
-    Friend WithEvents ucrChkOptionalSummary As ucrCheck
+    Friend WithEvents lblEstimatesSummary As Label
+    Friend WithEvents ucrInputEstimatesSummary As ucrInputTextBox
 End Class
