@@ -32,18 +32,18 @@ Partial Class dlgSurvivalObject
         Me.rdoCounting = New System.Windows.Forms.RadioButton()
         Me.rdoMstate = New System.Windows.Forms.RadioButton()
         Me.rdoInterval2 = New System.Windows.Forms.RadioButton()
+        Me.lblSelectLevels = New System.Windows.Forms.Label()
+        Me.ucrModifyEventNumeric = New instat.ucrInputTextBox()
+        Me.ucrModifyEventFactor = New instat.ucrFactor()
+        Me.ucrChkModifyEvent = New instat.ucrCheck()
         Me.ucrInputOrigin = New instat.ucrInputTextBox()
         Me.ucrPnlType = New instat.UcrPanel()
         Me.ucrSaveObject = New instat.ucrSave()
         Me.ucrReceiverEvent = New instat.ucrReceiverSingle()
-        Me.ucrReceiverTime2 = New instat.ucrReceiverSingle()
-        Me.ucrReceiverTime1 = New instat.ucrReceiverSingle()
+        Me.ucrReceiverExit = New instat.ucrReceiverSingle()
+        Me.ucrReceiverEntry = New instat.ucrReceiverSingle()
         Me.ucrSelectorFitObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkModifyEvent = New instat.ucrCheck()
-        Me.ucrModifyEventNumeric = New instat.ucrInputTextBox()
-        Me.lblSelectLevels = New System.Windows.Forms.Label()
-        Me.ucrModifyEventFactor = New instat.ucrFactor()
         Me.SuspendLayout()
         '
         'lblEntryTime
@@ -180,6 +180,46 @@ Partial Class dlgSurvivalObject
         Me.rdoInterval2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.rdoInterval2.UseVisualStyleBackColor = True
         '
+        'lblSelectLevels
+        '
+        Me.lblSelectLevels.AutoSize = True
+        Me.lblSelectLevels.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSelectLevels.Location = New System.Drawing.Point(426, 194)
+        Me.lblSelectLevels.Name = "lblSelectLevels"
+        Me.lblSelectLevels.Size = New System.Drawing.Size(176, 13)
+        Me.lblSelectLevels.TabIndex = 24
+        Me.lblSelectLevels.Text = "Event occurs when variable equals:"
+        '
+        'ucrModifyEventNumeric
+        '
+        Me.ucrModifyEventNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrModifyEventNumeric.IsMultiline = False
+        Me.ucrModifyEventNumeric.IsReadOnly = False
+        Me.ucrModifyEventNumeric.Location = New System.Drawing.Point(427, 210)
+        Me.ucrModifyEventNumeric.Name = "ucrModifyEventNumeric"
+        Me.ucrModifyEventNumeric.Size = New System.Drawing.Size(120, 26)
+        Me.ucrModifyEventNumeric.TabIndex = 25
+        '
+        'ucrModifyEventFactor
+        '
+        Me.ucrModifyEventFactor.AutoSize = True
+        Me.ucrModifyEventFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.ucrModifyEventFactor.clsReceiver = Nothing
+        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(427, 210)
+        Me.ucrModifyEventFactor.Name = "ucrModifyEventFactor"
+        Me.ucrModifyEventFactor.shtCurrSheet = Nothing
+        Me.ucrModifyEventFactor.Size = New System.Drawing.Size(197, 116)
+        Me.ucrModifyEventFactor.TabIndex = 23
+        Me.ucrModifyEventFactor.ucrChkLevels = Nothing
+        '
+        'ucrChkModifyEvent
+        '
+        Me.ucrChkModifyEvent.Checked = False
+        Me.ucrChkModifyEvent.Location = New System.Drawing.Point(319, 193)
+        Me.ucrChkModifyEvent.Name = "ucrChkModifyEvent"
+        Me.ucrChkModifyEvent.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkModifyEvent.TabIndex = 22
+        '
         'ucrInputOrigin
         '
         Me.ucrInputOrigin.AddQuotesIfUnrecognised = True
@@ -217,29 +257,29 @@ Partial Class dlgSurvivalObject
         Me.ucrReceiverEvent.TabIndex = 6
         Me.ucrReceiverEvent.ucrSelector = Nothing
         '
-        'ucrReceiverTime2
+        'ucrReceiverExit
         '
-        Me.ucrReceiverTime2.frmParent = Me
-        Me.ucrReceiverTime2.Location = New System.Drawing.Point(281, 123)
-        Me.ucrReceiverTime2.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverTime2.Name = "ucrReceiverTime2"
-        Me.ucrReceiverTime2.Selector = Nothing
-        Me.ucrReceiverTime2.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverTime2.strNcFilePath = ""
-        Me.ucrReceiverTime2.TabIndex = 4
-        Me.ucrReceiverTime2.ucrSelector = Nothing
+        Me.ucrReceiverExit.frmParent = Me
+        Me.ucrReceiverExit.Location = New System.Drawing.Point(281, 123)
+        Me.ucrReceiverExit.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverExit.Name = "ucrReceiverExit"
+        Me.ucrReceiverExit.Selector = Nothing
+        Me.ucrReceiverExit.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverExit.strNcFilePath = ""
+        Me.ucrReceiverExit.TabIndex = 4
+        Me.ucrReceiverExit.ucrSelector = Nothing
         '
-        'ucrReceiverTime1
+        'ucrReceiverEntry
         '
-        Me.ucrReceiverTime1.frmParent = Me
-        Me.ucrReceiverTime1.Location = New System.Drawing.Point(281, 76)
-        Me.ucrReceiverTime1.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverTime1.Name = "ucrReceiverTime1"
-        Me.ucrReceiverTime1.Selector = Nothing
-        Me.ucrReceiverTime1.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverTime1.strNcFilePath = ""
-        Me.ucrReceiverTime1.TabIndex = 2
-        Me.ucrReceiverTime1.ucrSelector = Nothing
+        Me.ucrReceiverEntry.frmParent = Me
+        Me.ucrReceiverEntry.Location = New System.Drawing.Point(281, 76)
+        Me.ucrReceiverEntry.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverEntry.Name = "ucrReceiverEntry"
+        Me.ucrReceiverEntry.Selector = Nothing
+        Me.ucrReceiverEntry.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverEntry.strNcFilePath = ""
+        Me.ucrReceiverEntry.TabIndex = 2
+        Me.ucrReceiverEntry.ucrSelector = Nothing
         '
         'ucrSelectorFitObject
         '
@@ -258,46 +298,6 @@ Partial Class dlgSurvivalObject
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 12
-        '
-        'ucrChkModifyEvent
-        '
-        Me.ucrChkModifyEvent.Checked = False
-        Me.ucrChkModifyEvent.Location = New System.Drawing.Point(319, 193)
-        Me.ucrChkModifyEvent.Name = "ucrChkModifyEvent"
-        Me.ucrChkModifyEvent.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkModifyEvent.TabIndex = 22
-        '
-        'ucrModifyEventNumeric
-        '
-        Me.ucrModifyEventNumeric.AddQuotesIfUnrecognised = True
-        Me.ucrModifyEventNumeric.IsMultiline = False
-        Me.ucrModifyEventNumeric.IsReadOnly = False
-        Me.ucrModifyEventNumeric.Location = New System.Drawing.Point(427, 210)
-        Me.ucrModifyEventNumeric.Name = "ucrModifyEventNumeric"
-        Me.ucrModifyEventNumeric.Size = New System.Drawing.Size(120, 26)
-        Me.ucrModifyEventNumeric.TabIndex = 25
-        '
-        'lblSelectLevels
-        '
-        Me.lblSelectLevels.AutoSize = True
-        Me.lblSelectLevels.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectLevels.Location = New System.Drawing.Point(426, 194)
-        Me.lblSelectLevels.Name = "lblSelectLevels"
-        Me.lblSelectLevels.Size = New System.Drawing.Size(176, 13)
-        Me.lblSelectLevels.TabIndex = 24
-        Me.lblSelectLevels.Text = "Event occurs when variable equals:"
-        '
-        'ucrModifyEventFactor
-        '
-        Me.ucrModifyEventFactor.AutoSize = True
-        Me.ucrModifyEventFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.ucrModifyEventFactor.clsReceiver = Nothing
-        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(427, 210)
-        Me.ucrModifyEventFactor.Name = "ucrModifyEventFactor"
-        Me.ucrModifyEventFactor.shtCurrSheet = Nothing
-        Me.ucrModifyEventFactor.Size = New System.Drawing.Size(197, 116)
-        Me.ucrModifyEventFactor.TabIndex = 23
-        Me.ucrModifyEventFactor.ucrChkLevels = Nothing
         '
         'dlgSurvivalObject
         '
@@ -322,8 +322,8 @@ Partial Class dlgSurvivalObject
         Me.Controls.Add(Me.lblExitTime2)
         Me.Controls.Add(Me.ucrReceiverEvent)
         Me.Controls.Add(Me.lblEntryTime)
-        Me.Controls.Add(Me.ucrReceiverTime2)
-        Me.Controls.Add(Me.ucrReceiverTime1)
+        Me.Controls.Add(Me.ucrReceiverExit)
+        Me.Controls.Add(Me.ucrReceiverEntry)
         Me.Controls.Add(Me.ucrSelectorFitObject)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -336,8 +336,8 @@ Partial Class dlgSurvivalObject
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents ucrReceiverTime2 As ucrReceiverSingle
-    Friend WithEvents ucrReceiverTime1 As ucrReceiverSingle
+    Friend WithEvents ucrReceiverExit As ucrReceiverSingle
+    Friend WithEvents ucrReceiverEntry As ucrReceiverSingle
     Friend WithEvents ucrSelectorFitObject As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrReceiverEvent As ucrReceiverSingle

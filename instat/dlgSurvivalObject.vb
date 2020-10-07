@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgSurvivalObject
     Private bFirstLoad As Boolean = True
@@ -22,9 +21,7 @@ Public Class dlgSurvivalObject
     Private clsDefaultFunction As New RFunction
     Private clsRightLeftFunction As New RFunction
     Private clsStartEndFunction As New RFunction
-    Private clsModifyFunction As New RFunction
     Private clsModifyOperation As New ROperator
-    Private clsModifyFunction2 As New RParameter
     Private clsCFunction As New RFunction
 
     Private Sub dlgSurvivalObject_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -53,7 +50,7 @@ Public Class dlgSurvivalObject
         ucrPnlType.AddRadioButton(rdoInterval, Chr(34) & "interval" & Chr(34))
         ucrPnlType.AddRadioButton(rdoInterval2, Chr(34) & "interval2" & Chr(34))
         ucrPnlType.AddRadioButton(rdoMstate, Chr(34) & "mstate" & Chr(34))
-        ucrPnlType.SetRDefault(Chr(34) & "right" & Chr(34))
+        ucrPnlType.SetDefaultState(Chr(34) & "right" & Chr(34))
         ' Note that this is the default in R when the status is not a factor
         ' if status is a factor, then mstate is the new default (and it runs mstate even if you type in type = "right" - and consequently does not work in places where right censored data usually works, such as coxph model
         ' so the option "right" cannot be chosen if status is a factor
@@ -62,32 +59,37 @@ Public Class dlgSurvivalObject
         ' exit time is time or time2 depending if rdoright, left are selected, or one of the other four are
         ' attach to different classes for time and time2 to get around this
 
-        ucrPnlType.AddToLinkedControls(ucrReceiverTime1, {rdoCounting, rdoInterval, rdoInterval2, rdoMstate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlType.AddToLinkedControls(ucrReceiverEntry, {rdoCounting, rdoInterval, rdoInterval2, rdoMstate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlType.AddToLinkedControls(ucrReceiverEvent, {rdoRight, rdoLeft, rdoCounting, rdoInterval, rdoMstate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlType.AddToLinkedControls(ucrInputOrigin, {rdoCounting}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
         'ucrSelector
         ucrSelectorFitObject.SetParameter(New RParameter("data", 0))
         ucrSelectorFitObject.SetParameterIsrfunction()
 
-        'ucrReceiver
-        ucrReceiverTime1.SetParameter(New RParameter("time", 0))
-        ucrReceiverTime1.SetParameterIsRFunction()
-        ucrReceiverTime1.Selector = ucrSelectorFitObject
+        'ucrReceiver:
+        ' ENTRY: `time` agrument only. Only visible for c, i, i2, ms
+        ucrReceiverEntry.SetParameter(New RParameter("time", 0))
+        ucrReceiverEntry.SetParameterIsRFunction()
+        ucrReceiverEntry.Selector = ucrSelectorFitObject
         ' allows numeric or logical, but not factor
-        ucrReceiverTime1.SetIncludedDataTypes({"numeric"})
-        ucrReceiverTime1.SetLinkedDisplayControl(lblEntryTime)
+        ucrReceiverEntry.SetIncludedDataTypes({"numeric"})
+        ucrReceiverEntry.SetLinkedDisplayControl(lblEntryTime)
 
-        ucrReceiverTime2.SetParameter(New RParameter("time", 1))
-        ucrReceiverTime2.SetParameterIsRFunction()
-        ucrReceiverTime2.Selector = ucrSelectorFitObject
-        ucrReceiverTime2.SetMeAsReceiver()
-        ucrReceiverTime2.SetIncludedDataTypes({"numeric"})
-        ucrReceiverTime2.SetLinkedDisplayControl(lblExitTime2)
+        ' EXIT: `time` arg for r, l
+        '       `time2` for c, i, i2, ms
+        ucrReceiverExit.SetParameter(New RParameter("time", 1))
+        ucrReceiverExit.SetParameterIsRFunction()
+        ucrReceiverExit.Selector = ucrSelectorFitObject
+        ucrReceiverExit.SetMeAsReceiver()
+        ucrReceiverExit.SetIncludedDataTypes({"numeric"})
+        ucrReceiverExit.SetLinkedDisplayControl(lblExitTime2)
 
         ucrReceiverEvent.SetParameter(New RParameter("event", 0, bNewIncludeArgumentName:=False))
         ucrReceiverEvent.SetParameterIsRFunction()
         ucrReceiverEvent.Selector = ucrSelectorFitObject
         ucrReceiverEvent.SetIncludedDataTypes({"numeric"})
+        ucrReceiverEvent.SetLinkedDisplayControl(lblEvent)
 
         ' only display if counting is selected
         ucrInputOrigin.SetParameter(New RParameter("origin", 4))
@@ -137,8 +139,6 @@ Public Class dlgSurvivalObject
         clsDefaultFunction = New RFunction
         clsRightLeftFunction = New RFunction
         clsStartEndFunction = New RFunction
-        clsModifyFunction = New RFunction
-        clsModifyFunction2 = New RParameter
         clsModifyOperation = New ROperator
         clsCFunction = New RFunction
 
@@ -170,14 +170,12 @@ Public Class dlgSurvivalObject
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrReceiverTime2.AddAdditionalCodeParameterPair(clsStartEndFunction, New RParameter("time2", 1), iAdditionalPairNo:=1)
-        'ucrReceiverEvent.AddAdditionalCodeParameterPair(clsStartEndFunction, New RParameter("event", 2), iAdditionalPairNo:=1)
-        'ucrReceiverEvent.AddAdditionalCodeParameterPair(clsRightLeftFunction, New RParameter("event", 2), iAdditionalPairNo:=2)
+        ucrReceiverExit.AddAdditionalCodeParameterPair(clsStartEndFunction, New RParameter("time2", 1), iAdditionalPairNo:=1)
         ucrPnlType.AddAdditionalCodeParameterPair(clsStartEndFunction, New RParameter("type", 3), iAdditionalPairNo:=1)
 
         ucrSelectorFitObject.SetRCode(clsDefaultFunction, bReset)
-        ucrReceiverTime1.SetRCode(clsStartEndFunction, bReset)
-        ucrReceiverTime2.SetRCode(clsRightLeftFunction, bReset)
+        ucrReceiverEntry.SetRCode(clsStartEndFunction, bReset)
+        ucrReceiverExit.SetRCode(clsRightLeftFunction, bReset)
         ucrPnlType.SetRCode(clsRightLeftFunction, bReset)
         ucrInputOrigin.SetRCode(clsStartEndFunction, bReset)
         ucrSaveObject.SetRCode(clsDefaultFunction, bReset)
@@ -189,10 +187,10 @@ Public Class dlgSurvivalObject
 
     Private Sub TestOkEnabled()
 
-        If ucrReceiverTime2.IsEmpty() OrElse ucrReceiverEvent.IsEmpty() OrElse Not ucrSaveObject.IsComplete() OrElse ((ucrReceiverEvent.strCurrDataType = "numeric" OrElse ucrReceiverEvent.strCurrDataType = "integer") AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventNumeric.GetText = "") OrElse (ucrReceiverEvent.strCurrDataType = "factor" AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventFactor.GetSelectedLevels = "") Then
+        If ucrReceiverExit.IsEmpty() OrElse ucrReceiverEvent.IsEmpty() OrElse Not ucrSaveObject.IsComplete() OrElse ((ucrReceiverEvent.strCurrDataType = "numeric" OrElse ucrReceiverEvent.strCurrDataType = "integer") AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventNumeric.GetText = "") OrElse (ucrReceiverEvent.strCurrDataType = "factor" AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventFactor.GetSelectedLevels = "") Then
             ucrBase.OKEnabled(False)
         Else
-            If (rdoMstate.Checked OrElse rdoCounting.Checked OrElse rdoInterval.Checked OrElse rdoInterval2.Checked) AndAlso ucrReceiverTime1.IsEmpty() Then
+            If (rdoMstate.Checked OrElse rdoCounting.Checked OrElse rdoInterval.Checked OrElse rdoInterval2.Checked) AndAlso ucrReceiverEntry.IsEmpty() Then
                 ucrBase.OKEnabled(False)
             Else
                 If rdoCounting.Checked AndAlso ucrInputOrigin.IsEmpty() Then
@@ -300,7 +298,7 @@ Public Class dlgSurvivalObject
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrCoreControls(ucrChangedControl As ucrCore) Handles ucrReceiverTime1.ControlContentsChanged, ucrReceiverTime2.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged, ucrModifyEventFactor.ControlContentsChanged, ucrModifyEventNumeric.ControlContentsChanged, ucrChkModifyEvent.ControlContentsChanged
+    Private Sub ucrCoreControls(ucrChangedControl As ucrCore) Handles ucrReceiverEntry.ControlContentsChanged, ucrReceiverExit.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged, ucrModifyEventFactor.ControlContentsChanged, ucrModifyEventNumeric.ControlContentsChanged, ucrChkModifyEvent.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
