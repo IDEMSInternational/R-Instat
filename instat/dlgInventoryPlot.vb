@@ -255,6 +255,9 @@ Public Class dlgInventoryPlot
             If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso ucrChkSummary.Checked AndAlso ucrChkDetails.Checked AndAlso Not ucrSaveDetails.IsComplete Then
                 ucrBase.OKEnabled(False)
             End If
+            If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso ucrChkDetails.Checked AndAlso Not ucrSaveDetails.IsComplete Then
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
