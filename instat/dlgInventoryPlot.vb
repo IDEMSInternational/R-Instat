@@ -242,20 +242,18 @@ Public Class dlgInventoryPlot
             If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso ucrChkDetails.Checked AndAlso ucrChkSummary.Checked AndAlso ucrSaveDetails.IsComplete Then
                 If ucrChkYear.Checked OrElse ucrChkMonth.Checked OrElse ucrChkDay.Checked OrElse ucrChkHour.Checked OrElse ucrChkMinute.Checked OrElse ucrChkSecond.Checked Then
                     ucrBase.OKEnabled(True)
-                    Exit Sub
                 Else
                     ucrBase.OKEnabled(False)
-                    Exit Sub
                 End If
             ElseIf Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso (ucrChkDetails.Checked AndAlso ucrSaveDetails.IsComplete AndAlso (ucrChkYear.Checked OrElse ucrChkMonth.Checked OrElse ucrChkDay.Checked OrElse ucrChkHour.Checked OrElse ucrChkMinute.Checked OrElse ucrChkSecond.Checked)) Then
                 ucrBase.OKEnabled(True)
-                Exit Sub
             ElseIf Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso ucrChkSummary.Checked Then
                 ucrBase.OKEnabled(True)
-                Exit Sub
             Else
                 ucrBase.OKEnabled(False)
-                Exit Sub
+            End If
+            If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso ucrChkSummary.Checked AndAlso ucrChkDetails.Checked AndAlso Not ucrSaveDetails.IsComplete Then
+                ucrBase.OKEnabled(False)
             End If
         End If
     End Sub
