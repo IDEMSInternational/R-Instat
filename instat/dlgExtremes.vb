@@ -291,10 +291,7 @@ Public Class dlgExtremes
             clsFevdFunction.RemoveParameterByName("location.fun")
             clsLocationScaleResetOperator.RemoveParameterByName("scaleLocation")
         End If
-        HideAndShowKeyboard()
-    End Sub
 
-    Private Sub HideAndShowKeyboard()
         With ucrChkExplanatoryModelForLocationParameter
             grpFirstCalc.Visible = .Checked
             grpSecondCalc.Visible = .Checked
