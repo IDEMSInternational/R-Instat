@@ -239,10 +239,23 @@ Public Class dlgInventoryPlot
                 ucrBase.OKEnabled(False)
             End If
         Else
-            If (Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso (ucrChkSummary.Checked OrElse (ucrChkDetails.Checked AndAlso ucrSaveDetails.IsComplete AndAlso (ucrChkYear.Checked OrElse ucrChkMonth.Checked OrElse ucrChkDay.Checked OrElse ucrChkHour.Checked OrElse ucrChkMinute.Checked OrElse ucrChkSecond.Checked)))) AndAlso (ucrChkSummary.Checked OrElse ucrChkDetails.Checked) Then
+            If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso ucrChkDetails.Checked AndAlso ucrChkSummary.Checked AndAlso ucrSaveDetails.IsComplete Then
+                If ucrChkYear.Checked OrElse ucrChkMonth.Checked OrElse ucrChkDay.Checked OrElse ucrChkHour.Checked OrElse ucrChkMinute.Checked OrElse ucrChkSecond.Checked Then
+                    ucrBase.OKEnabled(True)
+                    Exit Sub
+                Else
+                    ucrBase.OKEnabled(False)
+                    Exit Sub
+                End If
+            ElseIf Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso (ucrChkDetails.Checked AndAlso ucrSaveDetails.IsComplete AndAlso (ucrChkYear.Checked OrElse ucrChkMonth.Checked OrElse ucrChkDay.Checked OrElse ucrChkHour.Checked OrElse ucrChkMinute.Checked OrElse ucrChkSecond.Checked)) Then
                 ucrBase.OKEnabled(True)
+                Exit Sub
+            ElseIf Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso ucrChkSummary.Checked Then
+                ucrBase.OKEnabled(True)
+                Exit Sub
             Else
                 ucrBase.OKEnabled(False)
+                Exit Sub
             End If
         End If
     End Sub
