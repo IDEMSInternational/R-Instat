@@ -32,12 +32,18 @@ Public Class dlgSeasonalPlot
     Private clsGreaterOperator As ROperator
     Private clsEst2GreaterOperator As ROperator
     Private clsEst2LessOperator As ROperator
+    ''' <summary> Dummy ROperator set to either clsRefGreaterOperator or clsRefLessOperator depending on summary option. This is used in SetRCode for ucrInputReferenceSummary. </summary>
+    Private clsRefGreaterOrLessOperator As ROperator
 
     Private clsMissingFilterFunction As RFunction
     Private clsRefIsNotNaFunction As RFunction
     Private clsEstIsNotNaFunction As RFunction
     Private clsMutateFunction As RFunction
     Private clsPivotLongerFunction As RFunction
+    Private clsPivotCFunction As RFunction
+    Private clsPivotListFunction As RFunction
+    Private clsPivotFactorFunction As RFunction
+    Private clsPivotFactorLevelsCFunction As New RFunction
     Private clsGroupByFunction As RFunction
     Private clsSummariseFunction As RFunction
     Private clsMovingMutateFunction As RFunction
@@ -225,6 +231,10 @@ Public Class dlgSeasonalPlot
         clsEstIsNotNaFunction = New RFunction
         clsMutateFunction = New RFunction
         clsPivotLongerFunction = New RFunction
+        clsPivotCFunction = New RFunction
+        clsPivotListFunction = New RFunction
+        clsPivotFactorFunction = New RFunction
+        clsPivotFactorLevelsCFunction = New RFunction
         clsGroupByFunction = New RFunction
         clsSummariseFunction = New RFunction
         clsMovingMutateFunction = New RFunction
@@ -261,13 +271,11 @@ Public Class dlgSeasonalPlot
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.AddParameter("filter", clsRFunctionParameter:=clsMissingFilterFunction, iPosition:=1)
-        clsPipeOperator.AddParameter("mutate", clsRFunctionParameter:=clsMutateFunction, iPosition:=2)
         clsPipeOperator.AddParameter("pivot_longer", clsRFunctionParameter:=clsPivotLongerFunction, iPosition:=3)
         clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=5)
         clsPipeOperator.AddParameter("summarise", clsRFunctionParameter:=clsSummariseFunction, iPosition:=6)
         clsPipeOperator.AddParameter("moving_mutate", clsRFunctionParameter:=clsMovingMutateFunction, iPosition:=7)
         clsPipeOperator.AddParameter("ggplot", clsROperatorParameter:=clsPlusOperator, iPosition:=8)
-
 
         clsAndOperator.SetOperation("&")
         clsAndOperator.AddParameter("ref", clsRFunctionParameter:=clsRefIsNotNaFunction, iPosition:=0)
@@ -303,9 +311,20 @@ Public Class dlgSeasonalPlot
 
         clsPivotLongerFunction.SetPackageName("tidyr")
         clsPivotLongerFunction.SetRCommand("pivot_longer")
-        clsPivotLongerFunction.AddParameter("cols", "c(reference, estimates)", iPosition:=0)
+        clsPivotLongerFunction.AddParameter("cols", clsRFunctionParameter:=clsPivotCFunction, iPosition:=0)
         clsPivotLongerFunction.AddParameter("names_to", Chr(34) & "data" & Chr(34), iPosition:=1)
         clsPivotLongerFunction.AddParameter("values_to", Chr(34) & "value" & Chr(34), iPosition:=2)
+        clsPivotLongerFunction.AddParameter("names_ptypes", clsRFunctionParameter:=clsPivotListFunction, iPosition:=6)
+
+        clsPivotCFunction.SetRCommand("c")
+
+        clsPivotListFunction.SetRCommand("list")
+        clsPivotListFunction.AddParameter("data", clsRFunctionParameter:=clsPivotFactorFunction, iPosition:=0)
+
+        clsPivotFactorFunction.SetRCommand("factor")
+        clsPivotFactorFunction.AddParameter("levels", clsRFunctionParameter:=clsPivotFactorLevelsCFunction, iPosition:=1)
+
+        clsPivotFactorLevelsCFunction.SetRCommand("c")
 
         clsGroupByFunction.SetPackageName("dplyr")
         clsGroupByFunction.SetRCommand("group_by")
@@ -443,11 +462,13 @@ Public Class dlgSeasonalPlot
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverReference.AddAdditionalCodeParameterPair(clsRefGreaterOperator, ucrReceiverReference.GetParameter, iAdditionalPairNo:=1)
         ucrReceiverReference.AddAdditionalCodeParameterPair(clsRefLessOperator, ucrReceiverReference.GetParameter, iAdditionalPairNo:=2)
+        ucrReceiverReference.AddAdditionalCodeParameterPair(clsPivotCFunction, New RParameter("0", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
 
         ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsEst1GreaterOperator, ucrReceiverEstimates.GetParameter, iAdditionalPairNo:=1)
         ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsEst1LessOperator, ucrReceiverEstimates.GetParameter, iAdditionalPairNo:=2)
         ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsEst2GreaterOperator, ucrReceiverEstimates.GetParameter, iAdditionalPairNo:=3)
         ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsEst2LessOperator, ucrReceiverEstimates.GetParameter, iAdditionalPairNo:=4)
+        ucrReceiverEstimates.AddAdditionalCodeParameterPair(clsPivotCFunction, New RParameter("1", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=5)
 
         ucrInputReferenceThreshold.AddAdditionalCodeParameterPair(clsRefLessOperator, ucrInputReferenceThreshold.GetParameter, iAdditionalPairNo:=1)
         ucrInputReferenceThreshold.AddAdditionalCodeParameterPair(clsLessOperator, ucrInputReferenceThreshold.GetParameter, iAdditionalPairNo:=2)
@@ -490,16 +511,31 @@ Public Class dlgSeasonalPlot
     ''' <param name="bReset">True if the dialog is being reset.</param>
     Private Sub ReferenceSummarySetRCode(bReset As Boolean)
         Dim clsTempParam As RParameter
-        Dim clsTempROp As ROperator
         Dim clsTempRFunc As RFunction
+        Dim strReferenceName As String = ""
+        Dim strEstimatesName As String = ""
+
+        strReferenceName = ucrReceiverReference.GetVariableNames(False)
+        strEstimatesName = ucrReceiverEstimates.GetVariableNames(False)
 
         ' Used to return a developer error if R Code cannot be set.
         Dim ReferenceSummaryDevError = Sub()
                                            MsgBox("Developer error: in " & ucrInputReferenceSummary.Name & ". Cannot determine how to set the control from the RCode. Modify conditions so that only one state can satisfy its conditions.")
                                        End Sub
 
-        ' filter2 is used in clsPipeOperator to filter the data to for "Mean Above" or "Mean Below" calculation
-        If clsPipeOperator.ContainsParameter("filter2") Then
+        ' mutate is used in clsPipeOperator to calculate proportions for "Prop Above" and "Prop Below" summaries
+        If clsPipeOperator.ContainsParameter("mutate") Then
+            ' If the "reference" parameter in clsMutateFunction has clsRefGreaterOperator as its value then the summary is "Prop Above"
+            ' clsRefGreaterOrLessOperator is the reference parameter in clsMutateFunction
+            If clsRefGreaterOrLessOperator IsNot Nothing AndAlso clsRefGreaterOrLessOperator.Equals(clsRefGreaterOperator) Then
+                ucrInputReferenceSummary.SetName("Prop Above")
+            ElseIf clsRefGreaterOrLessOperator IsNot Nothing AndAlso clsRefGreaterOrLessOperator.Equals(clsRefLessOperator) Then
+                ucrInputReferenceSummary.SetName("Prop Below")
+            Else
+                ReferenceSummaryDevError()
+            End If
+            ' filter2 is used in clsPipeOperator to filter the data to for "Mean Above" or "Mean Below" summaries
+        ElseIf clsPipeOperator.ContainsParameter("filter2") Then
             ' If clsMeanFilterFunction contains an "operator" parameter and its value is clsGreaterOperator then the summary is "Mean Above"
             If clsMeanFilterFunction.ContainsParameter("operator") AndAlso clsMeanFilterFunction.GetParameter("operator").clsArgumentCodeStructure IsNot Nothing AndAlso clsMeanFilterFunction.GetParameter("operator").clsArgumentCodeStructure.Equals(clsGreaterOperator) Then
                 ucrInputReferenceSummary.SetName("Mean Above")
@@ -509,25 +545,13 @@ Public Class dlgSeasonalPlot
             Else
                 ReferenceSummaryDevError()
             End If
-            ' If filter2 is not in clsPipeOperator then the summary is one of the other four summaries and can be determined by "summary" parameter in clsSummariseFunction
+            ' If filter2 is not in clsPipeOperator then the summary is either "Mean" or "Std.dev" and can be determined by the "summary" parameter in clsSummariseFunction
         ElseIf clsSummariseFunction.ContainsParameter("summary") Then
             clsTempParam = clsSummariseFunction.GetParameter("summary")
-            clsTempROp = TryCast(clsTempParam.clsArgumentCodeStructure, ROperator)
             clsTempRFunc = TryCast(clsTempParam.clsArgumentCodeStructure, RFunction)
-            ' If "summary" parameter contains an ROperator then it is either for "Prop Above" or "Prop Below"
-            If clsTempROp IsNot Nothing Then
-                ' If "reference" parameter in clsMutateFunction has clsRefGreaterOperator as its value then the summary is "Prop Above"
-                If clsMutateFunction.ContainsParameter("reference") AndAlso clsMutateFunction.GetParameter("reference").clsArgumentCodeStructure IsNot Nothing AndAlso clsMutateFunction.GetParameter("reference").clsArgumentCodeStructure.Equals(clsRefGreaterOperator) Then
-                    ucrInputReferenceSummary.SetName("Prop Above")
-                    ' If "reference" parameter in clsMutateFunction has clsRefLessOperator as its value then the summary is "Prop Below"
-                ElseIf clsMutateFunction.ContainsParameter("reference") AndAlso clsMutateFunction.GetParameter("reference").clsArgumentCodeStructure IsNot Nothing AndAlso clsMutateFunction.GetParameter("reference").clsArgumentCodeStructure.Equals(clsRefLessOperator) Then
-                    ucrInputReferenceSummary.SetName("Prop Below")
-                Else
-                    ReferenceSummaryDevError()
-                End If
-                ' If "summary" parameter contains an RFunction then it is either for "Mean" or "Std.dev"
-                ' Check the name of the RFunction to confirm which one.
-            ElseIf clsTempRFunc IsNot Nothing Then
+            ' If "summary" parameter contains an RFunction then it is either for "Mean" or "Std.dev"
+            ' Check the name of the RFunction to confirm which one.
+            If clsTempRFunc IsNot Nothing Then
                 If clsTempRFunc.strRCommand = "mean" Then
                     ucrInputReferenceSummary.SetName("Mean")
                 ElseIf clsTempRFunc.strRCommand = "sd" Then
@@ -559,38 +583,47 @@ Public Class dlgSeasonalPlot
     End Sub
 
     Private Sub UpdateSummaryParameters()
+        Dim strReferenceName As String = ""
+        Dim strEstimatesName As String = ""
+
+        strReferenceName = ucrReceiverReference.GetVariableNames(False)
+        strEstimatesName = ucrReceiverEstimates.GetVariableNames(False)
+
+        If clsMutateFunction IsNot Nothing Then
+            clsMutateFunction.ClearParameters()
+        End If
         Select Case ucrInputReferenceSummary.GetText
             Case "Prop Above"
                 clsPipeOperator.RemoveParameterByName("filter2")
-                clsMutateFunction.AddParameter("reference", clsROperatorParameter:=clsRefGreaterOperator, iPosition:=0)
-                clsMutateFunction.AddParameter("estimates", clsROperatorParameter:=clsEst2GreaterOperator, iPosition:=1)
+                clsMutateFunction.AddParameter(strReferenceName, clsROperatorParameter:=clsRefGreaterOperator, iPosition:=0)
+                clsMutateFunction.AddParameter(strEstimatesName, clsROperatorParameter:=clsEst2GreaterOperator, iPosition:=1)
                 clsSummariseFunction.AddParameter("summary", clsROperatorParameter:=clsDivideOperator, iPosition:=3)
+                clsPipeOperator.AddParameter("mutate", clsRFunctionParameter:=clsMutateFunction, iPosition:=2)
+                clsRefGreaterOrLessOperator = clsRefGreaterOperator
             Case "Prop Below"
                 clsPipeOperator.RemoveParameterByName("filter2")
-                clsMutateFunction.AddParameter("reference", clsROperatorParameter:=clsRefLessOperator, iPosition:=0)
-                clsMutateFunction.AddParameter("estimates", clsROperatorParameter:=clsEst2LessOperator, iPosition:=1)
+                clsMutateFunction.AddParameter(strReferenceName, clsROperatorParameter:=clsRefLessOperator, iPosition:=0)
+                clsMutateFunction.AddParameter(strEstimatesName, clsROperatorParameter:=clsEst2LessOperator, iPosition:=1)
                 clsSummariseFunction.AddParameter("summary", clsROperatorParameter:=clsDivideOperator, iPosition:=3)
+                clsPipeOperator.AddParameter("mutate", clsRFunctionParameter:=clsMutateFunction, iPosition:=2)
+                clsRefGreaterOrLessOperator = clsRefLessOperator
             Case "Mean"
                 clsPipeOperator.RemoveParameterByName("filter2")
-                clsMutateFunction.AddParameter("reference", ucrReceiverReference.GetVariableNames(False), iPosition:=0)
-                clsMutateFunction.AddParameter("estimates", ucrReceiverEstimates.GetVariableNames(False), iPosition:=1)
+                clsPipeOperator.RemoveParameterByName("mutate")
                 clsSummariseFunction.AddParameter("summary", clsRFunctionParameter:=clsMeanFunction, iPosition:=3)
             Case "Mean Above"
-                clsMutateFunction.AddParameter("reference", ucrReceiverReference.GetVariableNames(False), iPosition:=0)
-                clsMutateFunction.AddParameter("estimates", ucrReceiverEstimates.GetVariableNames(False), iPosition:=1)
+                clsPipeOperator.RemoveParameterByName("mutate")
                 clsMeanFilterFunction.AddParameter("operator", clsROperatorParameter:=clsGreaterOperator, bIncludeArgumentName:=False, iPosition:=0)
                 clsPipeOperator.AddParameter("filter2", clsRFunctionParameter:=clsMeanFilterFunction, iPosition:=4)
                 clsSummariseFunction.AddParameter("summary", clsRFunctionParameter:=clsMeanFunction, iPosition:=3)
             Case "Mean Below"
-                clsMutateFunction.AddParameter("reference", ucrReceiverReference.GetVariableNames(False), iPosition:=0)
-                clsMutateFunction.AddParameter("estimates", ucrReceiverEstimates.GetVariableNames(False), iPosition:=1)
+                clsPipeOperator.RemoveParameterByName("mutate")
                 clsMeanFilterFunction.AddParameter("operator", clsROperatorParameter:=clsLessOperator, bIncludeArgumentName:=False, iPosition:=0)
                 clsPipeOperator.AddParameter("filter2", clsRFunctionParameter:=clsMeanFilterFunction, iPosition:=4)
                 clsSummariseFunction.AddParameter("summary", clsRFunctionParameter:=clsMeanFunction, iPosition:=3)
             Case "Std.dev"
                 clsPipeOperator.RemoveParameterByName("filter2")
-                clsMutateFunction.AddParameter("reference", ucrReceiverReference.GetVariableNames(False), iPosition:=0)
-                clsMutateFunction.AddParameter("estimates", ucrReceiverEstimates.GetVariableNames(False), iPosition:=1)
+                clsPipeOperator.RemoveParameterByName("mutate")
                 clsSummariseFunction.AddParameter("summary", clsRFunctionParameter:=clsStdFunction, iPosition:=3)
         End Select
     End Sub
@@ -638,6 +671,16 @@ Public Class dlgSeasonalPlot
     End Sub
 
     Private Sub Summary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputReferenceSummary.ControlValueChanged, ucrReceiverReference.ControlValueChanged, ucrReceiverEstimates.ControlValueChanged
+        If ucrReceiverReference.IsEmpty Then
+            clsPivotFactorLevelsCFunction.RemoveParameterByName("0")
+        Else
+            clsPivotFactorLevelsCFunction.AddParameter("0", ucrReceiverReference.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
+        End If
+        If ucrReceiverEstimates.IsEmpty Then
+            clsPivotFactorLevelsCFunction.RemoveParameterByName("1")
+        Else
+            clsPivotFactorLevelsCFunction.AddParameter("1", ucrReceiverEstimates.GetVariableNames(), iPosition:=1, bIncludeArgumentName:=False)
+        End If
         UpdateSummaryParameters()
     End Sub
 

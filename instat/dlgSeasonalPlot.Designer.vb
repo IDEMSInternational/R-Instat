@@ -23,29 +23,31 @@ Partial Class dlgSeasonalPlot
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.grpValues = New System.Windows.Forms.GroupBox()
-        Me.ucrInputN = New instat.ucrInputTextBox()
         Me.lblN = New System.Windows.Forms.Label()
-        Me.ucrChkPoints = New instat.ucrCheck()
-        Me.ucrChkMovingAverage = New instat.ucrCheck()
         Me.grpSmoothing = New System.Windows.Forms.GroupBox()
-        Me.ucrNudSpan = New instat.ucrNud()
         Me.lblSpan = New System.Windows.Forms.Label()
-        Me.ucrNudDf = New instat.ucrNud()
         Me.lblHarmonics = New System.Windows.Forms.Label()
         Me.lblDf = New System.Windows.Forms.Label()
-        Me.ucrNudHarmonics = New instat.ucrNud()
-        Me.ucrInputSmoothing = New instat.ucrInputComboBox()
         Me.lblPeriod = New System.Windows.Forms.Label()
-        Me.ucrNudPeriod = New instat.ucrNud()
         Me.lblReferenceSummary = New System.Windows.Forms.Label()
         Me.lblSeasonality = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblReference = New System.Windows.Forms.Label()
         Me.lblEstimates = New System.Windows.Forms.Label()
+        Me.lblEstimatesSummary = New System.Windows.Forms.Label()
+        Me.ucrInputEstimatesSummary = New instat.ucrInputTextBox()
         Me.ucrInputEstimatesThreshold = New instat.ucrInputTextBox()
         Me.ucrInputReferenceThreshold = New instat.ucrInputTextBox()
         Me.ucrInputReferenceSummary = New instat.ucrInputComboBox()
         Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrNudSpan = New instat.ucrNud()
+        Me.ucrNudDf = New instat.ucrNud()
+        Me.ucrNudHarmonics = New instat.ucrNud()
+        Me.ucrInputSmoothing = New instat.ucrInputComboBox()
+        Me.ucrNudPeriod = New instat.ucrNud()
+        Me.ucrInputN = New instat.ucrInputTextBox()
+        Me.ucrChkPoints = New instat.ucrCheck()
+        Me.ucrChkMovingAverage = New instat.ucrCheck()
         Me.ucrChkRemoveMissing = New instat.ucrCheck()
         Me.ucrReceiverEstimates = New instat.ucrReceiverSingle()
         Me.ucrReceiverSeasonality = New instat.ucrReceiverSingle()
@@ -53,8 +55,6 @@ Partial Class dlgSeasonalPlot
         Me.ucrReceiverReference = New instat.ucrReceiverSingle()
         Me.ucrSelectorSeasonalityComparisons = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblEstimatesSummary = New System.Windows.Forms.Label()
-        Me.ucrInputEstimatesSummary = New instat.ucrInputTextBox()
         Me.grpValues.SuspendLayout()
         Me.grpSmoothing.SuspendLayout()
         Me.SuspendLayout()
@@ -65,22 +65,12 @@ Partial Class dlgSeasonalPlot
         Me.grpValues.Controls.Add(Me.lblN)
         Me.grpValues.Controls.Add(Me.ucrChkPoints)
         Me.grpValues.Controls.Add(Me.ucrChkMovingAverage)
-        Me.grpValues.Location = New System.Drawing.Point(12, 343)
+        Me.grpValues.Location = New System.Drawing.Point(12, 308)
         Me.grpValues.Name = "grpValues"
         Me.grpValues.Size = New System.Drawing.Size(243, 71)
         Me.grpValues.TabIndex = 16
         Me.grpValues.TabStop = False
         Me.grpValues.Text = "Display Values As"
-        '
-        'ucrInputN
-        '
-        Me.ucrInputN.AddQuotesIfUnrecognised = True
-        Me.ucrInputN.IsMultiline = False
-        Me.ucrInputN.IsReadOnly = False
-        Me.ucrInputN.Location = New System.Drawing.Point(149, 45)
-        Me.ucrInputN.Name = "ucrInputN"
-        Me.ucrInputN.Size = New System.Drawing.Size(47, 21)
-        Me.ucrInputN.TabIndex = 23
         '
         'lblN
         '
@@ -90,22 +80,6 @@ Partial Class dlgSeasonalPlot
         Me.lblN.Size = New System.Drawing.Size(16, 13)
         Me.lblN.TabIndex = 21
         Me.lblN.Text = "n:"
-        '
-        'ucrChkPoints
-        '
-        Me.ucrChkPoints.Checked = False
-        Me.ucrChkPoints.Location = New System.Drawing.Point(8, 19)
-        Me.ucrChkPoints.Name = "ucrChkPoints"
-        Me.ucrChkPoints.Size = New System.Drawing.Size(155, 20)
-        Me.ucrChkPoints.TabIndex = 8
-        '
-        'ucrChkMovingAverage
-        '
-        Me.ucrChkMovingAverage.Checked = False
-        Me.ucrChkMovingAverage.Location = New System.Drawing.Point(8, 45)
-        Me.ucrChkMovingAverage.Name = "ucrChkMovingAverage"
-        Me.ucrChkMovingAverage.Size = New System.Drawing.Size(121, 20)
-        Me.ucrChkMovingAverage.TabIndex = 7
         '
         'grpSmoothing
         '
@@ -118,24 +92,12 @@ Partial Class dlgSeasonalPlot
         Me.grpSmoothing.Controls.Add(Me.ucrInputSmoothing)
         Me.grpSmoothing.Controls.Add(Me.lblPeriod)
         Me.grpSmoothing.Controls.Add(Me.ucrNudPeriod)
-        Me.grpSmoothing.Location = New System.Drawing.Point(12, 253)
+        Me.grpSmoothing.Location = New System.Drawing.Point(12, 221)
         Me.grpSmoothing.Name = "grpSmoothing"
         Me.grpSmoothing.Size = New System.Drawing.Size(243, 75)
         Me.grpSmoothing.TabIndex = 17
         Me.grpSmoothing.TabStop = False
         Me.grpSmoothing.Text = "Smoothing Curves"
-        '
-        'ucrNudSpan
-        '
-        Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSpan.Location = New System.Drawing.Point(45, 49)
-        Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSpan.Name = "ucrNudSpan"
-        Me.ucrNudSpan.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSpan.TabIndex = 20
-        Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblSpan
         '
@@ -145,18 +107,6 @@ Partial Class dlgSeasonalPlot
         Me.lblSpan.Size = New System.Drawing.Size(35, 13)
         Me.lblSpan.TabIndex = 23
         Me.lblSpan.Text = "Span:"
-        '
-        'ucrNudDf
-        '
-        Me.ucrNudDf.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDf.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDf.Location = New System.Drawing.Point(110, 49)
-        Me.ucrNudDf.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDf.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDf.Name = "ucrNudDf"
-        Me.ucrNudDf.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudDf.TabIndex = 21
-        Me.ucrNudDf.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblHarmonics
         '
@@ -176,28 +126,6 @@ Partial Class dlgSeasonalPlot
         Me.lblDf.TabIndex = 24
         Me.lblDf.Text = "Degrees of freedom:"
         '
-        'ucrNudHarmonics
-        '
-        Me.ucrNudHarmonics.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHarmonics.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHarmonics.Location = New System.Drawing.Point(70, 49)
-        Me.ucrNudHarmonics.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudHarmonics.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHarmonics.Name = "ucrNudHarmonics"
-        Me.ucrNudHarmonics.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudHarmonics.TabIndex = 1
-        Me.ucrNudHarmonics.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputSmoothing
-        '
-        Me.ucrInputSmoothing.AddQuotesIfUnrecognised = True
-        Me.ucrInputSmoothing.GetSetSelectedIndex = -1
-        Me.ucrInputSmoothing.IsReadOnly = False
-        Me.ucrInputSmoothing.Location = New System.Drawing.Point(7, 20)
-        Me.ucrInputSmoothing.Name = "ucrInputSmoothing"
-        Me.ucrInputSmoothing.Size = New System.Drawing.Size(119, 21)
-        Me.ucrInputSmoothing.TabIndex = 0
-        '
         'lblPeriod
         '
         Me.lblPeriod.AutoSize = True
@@ -206,18 +134,6 @@ Partial Class dlgSeasonalPlot
         Me.lblPeriod.Size = New System.Drawing.Size(40, 13)
         Me.lblPeriod.TabIndex = 18
         Me.lblPeriod.Text = "Period:"
-        '
-        'ucrNudPeriod
-        '
-        Me.ucrNudPeriod.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPeriod.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPeriod.Location = New System.Drawing.Point(166, 49)
-        Me.ucrNudPeriod.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPeriod.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPeriod.Name = "ucrNudPeriod"
-        Me.ucrNudPeriod.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudPeriod.TabIndex = 2
-        Me.ucrNudPeriod.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblReferenceSummary
         '
@@ -264,6 +180,25 @@ Partial Class dlgSeasonalPlot
         Me.lblEstimates.TabIndex = 6
         Me.lblEstimates.Text = "Estimates:"
         '
+        'lblEstimatesSummary
+        '
+        Me.lblEstimatesSummary.AutoSize = True
+        Me.lblEstimatesSummary.Location = New System.Drawing.Point(275, 165)
+        Me.lblEstimatesSummary.Name = "lblEstimatesSummary"
+        Me.lblEstimatesSummary.Size = New System.Drawing.Size(53, 13)
+        Me.lblEstimatesSummary.TabIndex = 20
+        Me.lblEstimatesSummary.Text = "Summary:"
+        '
+        'ucrInputEstimatesSummary
+        '
+        Me.ucrInputEstimatesSummary.AddQuotesIfUnrecognised = True
+        Me.ucrInputEstimatesSummary.IsMultiline = False
+        Me.ucrInputEstimatesSummary.IsReadOnly = False
+        Me.ucrInputEstimatesSummary.Location = New System.Drawing.Point(275, 181)
+        Me.ucrInputEstimatesSummary.Name = "ucrInputEstimatesSummary"
+        Me.ucrInputEstimatesSummary.Size = New System.Drawing.Size(89, 21)
+        Me.ucrInputEstimatesSummary.TabIndex = 21
+        '
         'ucrInputEstimatesThreshold
         '
         Me.ucrInputEstimatesThreshold.AddQuotesIfUnrecognised = True
@@ -302,10 +237,94 @@ Partial Class dlgSeasonalPlot
         Me.ucrSaveGraph.Size = New System.Drawing.Size(255, 29)
         Me.ucrSaveGraph.TabIndex = 18
         '
+        'ucrNudSpan
+        '
+        Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSpan.Location = New System.Drawing.Point(45, 49)
+        Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Name = "ucrNudSpan"
+        Me.ucrNudSpan.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSpan.TabIndex = 20
+        Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudDf
+        '
+        Me.ucrNudDf.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDf.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudDf.Location = New System.Drawing.Point(110, 49)
+        Me.ucrNudDf.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDf.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDf.Name = "ucrNudDf"
+        Me.ucrNudDf.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudDf.TabIndex = 21
+        Me.ucrNudDf.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudHarmonics
+        '
+        Me.ucrNudHarmonics.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHarmonics.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudHarmonics.Location = New System.Drawing.Point(70, 49)
+        Me.ucrNudHarmonics.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudHarmonics.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudHarmonics.Name = "ucrNudHarmonics"
+        Me.ucrNudHarmonics.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudHarmonics.TabIndex = 1
+        Me.ucrNudHarmonics.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputSmoothing
+        '
+        Me.ucrInputSmoothing.AddQuotesIfUnrecognised = True
+        Me.ucrInputSmoothing.GetSetSelectedIndex = -1
+        Me.ucrInputSmoothing.IsReadOnly = False
+        Me.ucrInputSmoothing.Location = New System.Drawing.Point(7, 20)
+        Me.ucrInputSmoothing.Name = "ucrInputSmoothing"
+        Me.ucrInputSmoothing.Size = New System.Drawing.Size(119, 21)
+        Me.ucrInputSmoothing.TabIndex = 0
+        '
+        'ucrNudPeriod
+        '
+        Me.ucrNudPeriod.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPeriod.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPeriod.Location = New System.Drawing.Point(166, 49)
+        Me.ucrNudPeriod.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPeriod.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPeriod.Name = "ucrNudPeriod"
+        Me.ucrNudPeriod.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudPeriod.TabIndex = 2
+        Me.ucrNudPeriod.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputN
+        '
+        Me.ucrInputN.AddQuotesIfUnrecognised = True
+        Me.ucrInputN.IsMultiline = False
+        Me.ucrInputN.IsReadOnly = False
+        Me.ucrInputN.Location = New System.Drawing.Point(149, 45)
+        Me.ucrInputN.Name = "ucrInputN"
+        Me.ucrInputN.Size = New System.Drawing.Size(47, 21)
+        Me.ucrInputN.TabIndex = 23
+        '
+        'ucrChkPoints
+        '
+        Me.ucrChkPoints.Checked = False
+        Me.ucrChkPoints.Location = New System.Drawing.Point(8, 19)
+        Me.ucrChkPoints.Name = "ucrChkPoints"
+        Me.ucrChkPoints.Size = New System.Drawing.Size(155, 20)
+        Me.ucrChkPoints.TabIndex = 8
+        '
+        'ucrChkMovingAverage
+        '
+        Me.ucrChkMovingAverage.Checked = False
+        Me.ucrChkMovingAverage.Location = New System.Drawing.Point(8, 45)
+        Me.ucrChkMovingAverage.Name = "ucrChkMovingAverage"
+        Me.ucrChkMovingAverage.Size = New System.Drawing.Size(121, 20)
+        Me.ucrChkMovingAverage.TabIndex = 7
+        '
         'ucrChkRemoveMissing
         '
         Me.ucrChkRemoveMissing.Checked = False
-        Me.ucrChkRemoveMissing.Location = New System.Drawing.Point(22, 219)
+        Me.ucrChkRemoveMissing.Location = New System.Drawing.Point(12, 396)
         Me.ucrChkRemoveMissing.Name = "ucrChkRemoveMissing"
         Me.ucrChkRemoveMissing.Size = New System.Drawing.Size(197, 20)
         Me.ucrChkRemoveMissing.TabIndex = 15
@@ -375,25 +394,6 @@ Partial Class dlgSeasonalPlot
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 19
-        '
-        'lblEstimatesSummary
-        '
-        Me.lblEstimatesSummary.AutoSize = True
-        Me.lblEstimatesSummary.Location = New System.Drawing.Point(275, 165)
-        Me.lblEstimatesSummary.Name = "lblEstimatesSummary"
-        Me.lblEstimatesSummary.Size = New System.Drawing.Size(53, 13)
-        Me.lblEstimatesSummary.TabIndex = 20
-        Me.lblEstimatesSummary.Text = "Summary:"
-        '
-        'ucrInputEstimatesSummary
-        '
-        Me.ucrInputEstimatesSummary.AddQuotesIfUnrecognised = True
-        Me.ucrInputEstimatesSummary.IsMultiline = False
-        Me.ucrInputEstimatesSummary.IsReadOnly = False
-        Me.ucrInputEstimatesSummary.Location = New System.Drawing.Point(275, 181)
-        Me.ucrInputEstimatesSummary.Name = "ucrInputEstimatesSummary"
-        Me.ucrInputEstimatesSummary.Size = New System.Drawing.Size(89, 21)
-        Me.ucrInputEstimatesSummary.TabIndex = 21
         '
         'dlgSeasonalPlot
         '
