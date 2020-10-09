@@ -41,22 +41,18 @@ Partial Class dlgEnter
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgEnter))
         Me.chkShowEnterArguments = New System.Windows.Forms.CheckBox()
         Me.lblData = New System.Windows.Forms.Label()
-        Me.cmdMissingValues = New System.Windows.Forms.Button()
+        Me.cmdQuotes = New System.Windows.Forms.Button()
         Me.cmdExponential = New System.Windows.Forms.Button()
         Me.cmdConcantenateFunction = New System.Windows.Forms.Button()
         Me.cmdSequenceFunction = New System.Windows.Forms.Button()
         Me.cmdRepelicationFunction = New System.Windows.Forms.Button()
-        Me.cmdLETTERS = New System.Windows.Forms.Button()
+        Me.cmdLogical = New System.Windows.Forms.Button()
         Me.cmdPi = New System.Windows.Forms.Button()
         Me.cmdLetters2 = New System.Windows.Forms.Button()
         Me.cmdMonths = New System.Windows.Forms.Button()
         Me.cmdColon = New System.Windows.Forms.Button()
         Me.grpEnterKeyboard2 = New System.Windows.Forms.GroupBox()
-        Me.cmdRnorm = New System.Windows.Forms.Button()
-        Me.cmdRunif = New System.Windows.Forms.Button()
-        Me.cmdMonth = New System.Windows.Forms.Button()
         Me.cmdDay = New System.Windows.Forms.Button()
-        Me.cmdDate = New System.Windows.Forms.Button()
         Me.cmdFactor = New System.Windows.Forms.Button()
         Me.btnExample = New System.Windows.Forms.Button()
         Me.grpBasic = New System.Windows.Forms.GroupBox()
@@ -100,11 +96,11 @@ Partial Class dlgEnter
         Me.lblData.Name = "lblData"
         Me.lblData.Tag = "Data"
         '
-        'cmdMissingValues
+        'cmdQuotes
         '
-        resources.ApplyResources(Me.cmdMissingValues, "cmdMissingValues")
-        Me.cmdMissingValues.Name = "cmdMissingValues"
-        Me.cmdMissingValues.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdQuotes, "cmdQuotes")
+        Me.cmdQuotes.Name = "cmdQuotes"
+        Me.cmdQuotes.UseVisualStyleBackColor = True
         '
         'cmdExponential
         '
@@ -131,11 +127,11 @@ Partial Class dlgEnter
         Me.cmdRepelicationFunction.Name = "cmdRepelicationFunction"
         Me.cmdRepelicationFunction.UseVisualStyleBackColor = True
         '
-        'cmdLETTERS
+        'cmdLogical
         '
-        resources.ApplyResources(Me.cmdLETTERS, "cmdLETTERS")
-        Me.cmdLETTERS.Name = "cmdLETTERS"
-        Me.cmdLETTERS.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdLogical, "cmdLogical")
+        Me.cmdLogical.Name = "cmdLogical"
+        Me.cmdLogical.UseVisualStyleBackColor = True
         '
         'cmdPi
         '
@@ -163,55 +159,27 @@ Partial Class dlgEnter
         '
         'grpEnterKeyboard2
         '
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRnorm)
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdRunif)
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdMonth)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdDay)
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdDate)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdFactor)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdColon)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdMonths)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdLetters2)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdPi)
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdLETTERS)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdLogical)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdRepelicationFunction)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdSequenceFunction)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdConcantenateFunction)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdExponential)
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdMissingValues)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdQuotes)
         resources.ApplyResources(Me.grpEnterKeyboard2, "grpEnterKeyboard2")
         Me.grpEnterKeyboard2.Name = "grpEnterKeyboard2"
         Me.grpEnterKeyboard2.TabStop = False
-        '
-        'cmdRnorm
-        '
-        resources.ApplyResources(Me.cmdRnorm, "cmdRnorm")
-        Me.cmdRnorm.Name = "cmdRnorm"
-        Me.cmdRnorm.UseVisualStyleBackColor = True
-        '
-        'cmdRunif
-        '
-        resources.ApplyResources(Me.cmdRunif, "cmdRunif")
-        Me.cmdRunif.Name = "cmdRunif"
-        Me.cmdRunif.UseVisualStyleBackColor = True
-        '
-        'cmdMonth
-        '
-        resources.ApplyResources(Me.cmdMonth, "cmdMonth")
-        Me.cmdMonth.Name = "cmdMonth"
-        Me.cmdMonth.UseVisualStyleBackColor = True
         '
         'cmdDay
         '
         resources.ApplyResources(Me.cmdDay, "cmdDay")
         Me.cmdDay.Name = "cmdDay"
         Me.cmdDay.UseVisualStyleBackColor = True
-        '
-        'cmdDate
-        '
-        resources.ApplyResources(Me.cmdDate, "cmdDate")
-        Me.cmdDate.Name = "cmdDate"
-        Me.cmdDate.UseVisualStyleBackColor = True
         '
         'cmdFactor
         '
@@ -425,12 +393,12 @@ Partial Class dlgEnter
     Friend WithEvents lblData As Label
     Friend WithEvents ucrReceiverForEnterCalculation As ucrReceiverExpression
     Friend WithEvents ucrDataFrameEnter As ucrDataFrame
-    Friend WithEvents cmdMissingValues As Button
+    Friend WithEvents cmdQuotes As Button
     Friend WithEvents cmdExponential As Button
     Friend WithEvents cmdConcantenateFunction As Button
     Friend WithEvents cmdSequenceFunction As Button
     Friend WithEvents cmdRepelicationFunction As Button
-    Friend WithEvents cmdLETTERS As Button
+    Friend WithEvents cmdLogical As Button
     Friend WithEvents cmdPi As Button
     Friend WithEvents cmdLetters2 As Button
     Friend WithEvents cmdMonths As Button
@@ -459,10 +427,6 @@ Partial Class dlgEnter
     Friend WithEvents cmd0 As Button
     Friend WithEvents cmd1 As Button
     Friend WithEvents cmdFactor As Button
-    Friend WithEvents cmdDate As Button
     Friend WithEvents cmdDay As Button
-    Friend WithEvents cmdMonth As Button
-    Friend WithEvents cmdRunif As Button
-    Friend WithEvents cmdRnorm As Button
     Friend WithEvents ucrSaveEnterResultInto As ucrSave
 End Class

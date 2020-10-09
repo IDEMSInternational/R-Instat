@@ -142,8 +142,8 @@ Public Class dlgEnter
         TestOKEnabled()
     End Sub
 
-    Private Sub cmdMissingValues_Click_1(sender As Object, e As EventArgs) Handles cmdMissingValues.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("NA")
+    Private Sub cmdMissingValues_Click_1(sender As Object, e As EventArgs) Handles cmdQuotes.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("""")
     End Sub
 
     Private Sub cmdSquareBrackets_Click_1(sender As Object, e As EventArgs)
@@ -181,8 +181,8 @@ Public Class dlgEnter
     End Sub
 
 
-    Private Sub cmdLETTERS_Click(sender As Object, e As EventArgs) Handles cmdLETTERS.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("LETTERS")
+    Private Sub cmdLETTERS_Click(sender As Object, e As EventArgs) Handles cmdLogical.Click
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.logical(c( ))")
         TestOKEnabled()
     End Sub
 
@@ -343,7 +343,7 @@ Public Class dlgEnter
         ucrReceiverForEnterCalculation.Clear()
     End Sub
 
-    Private Sub cmdDate_Click(sender As Object, e As EventArgs) Handles cmdDate.Click
+    Private Sub cmdDate_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.date('')", 2)
     End Sub
 
@@ -355,15 +355,15 @@ Public Class dlgEnter
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("factor( )", 2)
     End Sub
 
-    Private Sub cmdMonth_Click(sender As Object, e As EventArgs) Handles cmdMonth.Click
+    Private Sub cmdMonth_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("'month'")
     End Sub
 
-    Private Sub cmdRnorm_Click(sender As Object, e As EventArgs) Handles cmdRnorm.Click
+    Private Sub cmdRnorm_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(" rnorm( )", 2)
     End Sub
 
-    Private Sub cmdRunif_Click(sender As Object, e As EventArgs) Handles cmdRunif.Click
+    Private Sub cmdRunif_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(" runif( )", 2)
     End Sub
 End Class
