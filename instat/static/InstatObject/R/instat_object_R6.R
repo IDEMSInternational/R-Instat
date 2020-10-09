@@ -1685,9 +1685,11 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   plant_day_name <- "plant_day"
   plant_length_name <- "plant_length"
   rain_total_name <- "rain_total"
+  
+  is_station <- !missing(station)
 
   if(missing(year)) stop("Year column must be specified.")
-  if(missing(station)) by <- year
+  if(!is_station) by <- year
   else by <- c(year, station)
   if(missing(season_data_name)) season_data_name <- data_name
   if(season_data_name != data_name) {
@@ -1712,7 +1714,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   expand_list[[length(expand_list) + 1]] <- unique_year
   names_list[length(names_list) + 1] <- year
   
-  if(!missing(station)) {
+  if(is_station) {
     station_col <- self$get_columns_from_data(data_name, station)
     unique_station <- na.omit(unique(station_col))
     expand_list[[length(expand_list) + 1]] <- unique_station
@@ -1749,7 +1751,10 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   # Rain total condition
   df[["rain_total_actual"]] <- sapply(1:nrow(df), 
                                       function(x) {
-                                        rain_values <- daily_data[[rain]][daily_data[[year]] == df[[year]][x] & daily_data[[day]] >= df[[plant_day_name]][x] & daily_data[[day]] < df[[plant_day_name]][x] + df[[plant_length_name]][x]]
+                                        ind <- daily_data[[year]] == df[[year]][x] & daily_data[[day]] >= df[[plant_day_name]][x] & 
+                                          daily_data[[day]] < (df[[plant_day_name]][x] + df[[plant_length_name]][x])
+                                        if(is_station) ind <- ind & (daily_data[[station]] == df[[station]][x])
+                                        rain_values <- daily_data[[rain]][ind]
                                         sum_rain <- sum(rain_values, na.rm = TRUE)
                                         # TODO + 1 is needed because of non leap years
                                         # if period include 29 Feb then period is 1 less than required length
