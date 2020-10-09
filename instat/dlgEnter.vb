@@ -156,7 +156,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdMissingValues_Click_1(sender As Object, e As EventArgs) Handles cmdQuotes.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("""""", 3)
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("""", 2)
     End Sub
 
     Private Sub cmdSquareBrackets_Click_1(sender As Object, e As EventArgs)
@@ -236,34 +236,34 @@ Public Class dlgEnter
 
         'add rows of sample commands
         lstView.Items.Add(New ListViewItem({"4.5"}))
-        lstView.Items.Item(4).ToolTipText = "A single number repeated for the data frame" 'todo. sensible tooltip here.
+        lstView.Items.Item(0).ToolTipText = "A single number repeated for the data frame" 'todo. sensible tooltip here.
 
         lstView.Items.Add(New ListViewItem({"'Nairobi'"}))
-        lstView.Items.Item(5).ToolTipText = "a single text repeated for the data frame" 'todo. Sensible tooltip here.
+        lstView.Items.Item(1).ToolTipText = "a single text repeated for the data frame" 'todo. Sensible tooltip here.
 
         lstView.Items.Add(New ListViewItem({"c(2,3,4)*1.5E02"}))
-        lstView.Items.Item(6).ToolTipText = "gives 300, 450, 600 then repeated for the data frame" 'todo. Sensible tooltip here
+        lstView.Items.Item(2).ToolTipText = "gives 300, 450, 600 then repeated for the data frame" 'todo. Sensible tooltip here
 
         lstView.Items.Add(New ListViewItem({"factor(c(1,2,3))"}))
-        lstView.Items.Item(7).ToolTipText = "values 1 to 3 with the variable made into a factor" 'todo. Sensible tooltip here
+        lstView.Items.Item(3).ToolTipText = "values 1 to 3 with the variable made into a factor" 'todo. Sensible tooltip here
 
         lstView.Items.Add(New ListViewItem({" forcats::as_factor(rep(LETTERS[4:1],c(4,3,1,1)))"}))
-        lstView.Items.Item(8).ToolTipText = "Gives D,D,D,D,C,C,C,B,A as a fa ctor"
+        lstView.Items.Item(4).ToolTipText = "Gives D,D,D,D,C,C,C,B,A as a fa ctor"
 
         lstView.Items.Add(New ListViewItem({"factor(rep(c(month.abb[4:7],NA),c(2,1,2,1,2)))"}))
-        lstView.Items.Item(9).ToolTipText = "Gives Apr, Apr, May, Jun, Jun, Jul, NA, NA"
+        lstView.Items.Item(5).ToolTipText = "Gives Apr, Apr, May, Jun, Jun, Jul, NA, NA"
 
         lstView.Items.Add(New ListViewItem({"c(1:4,10,rep(15,3),20)"}))
-        lstView.Items.Item(10).ToolTipText = "A sequence of values 1,2,3,4,10,15,15,15,20"
+        lstView.Items.Item(6).ToolTipText = "A sequence of values 1,2,3,4,10,15,15,15,20"
 
         lstView.Items.Add(New ListViewItem({"c(0,seq(1,5,2 ),seq(10,12),15)"}))
-        lstView.Items.Item(11).ToolTipText = "A set of sequences, giving 1,3,5 10,11,12, 15"
+        lstView.Items.Item(7).ToolTipText = "A set of sequences, giving 1,3,5 10,11,12, 15"
 
         lstView.Items.Add(New ListViewItem({"runif(3,c(0,5,10),c(1,10,20))"}))
-        lstView.Items.Item(12).ToolTipText = "Random uniform data from 3 different uniform distributions)"
+        lstView.Items.Item(8).ToolTipText = "Random uniform data from 3 different uniform distributions)"
 
         lstView.Items.Add(New ListViewItem({"seq(as.Date('1935/3/1'),as.Date('1940/12/1'),'quarter')"}))
-        lstView.Items.Item(13).ToolTipText = "A sequence of dates from 1935/3/1, 1935/6/1 ...)"
+        lstView.Items.Item(9).ToolTipText = "A sequence of dates from 1935/3/1, 1935/6/1 ...)"
 
 
 
