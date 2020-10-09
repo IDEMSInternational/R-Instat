@@ -59,7 +59,7 @@ Public Class dlgEnter
 
         'Adding tooltips for the buttons
         ttEnter.SetToolTip(cmdColon, "A subset, e.g. letters[1:4] gives a, b, c, d.")
-        ttEnter.SetToolTip(cmdLetters2, "he letters, e.g. letters[1:4] gives a, b, c, d. Type LETTERS[1:4] for A, B, C, D.")
+        ttEnter.SetToolTip(cmdLetters2, "The letters, e.g. letters[1:4] gives a, b, c, d. Type LETTERS[1:4] for A, B, C, D.")
         ttEnter.SetToolTip(cmdFactor, "e.g. forcats::as_factor(""B"",""c"",""A"") to make the contents into a factor variable with the levels in the order as entered, so here B is the lowest level.")
         ttEnter.SetToolTip(cmdRepelicationFunction, "Repeat of a sequence, e.g. rep(c(2,3,4), each=2) gives 2,2,3,3,4,4.")
         ttEnter.SetToolTip(cmdMonths, "month.abb[1:4] is ""Jan2"", ""Feb"", ""Mar"", ""Apr"". Type month.name for full month names.")
@@ -187,7 +187,7 @@ Public Class dlgEnter
 
     Private Sub cmdSequenceFunction_Click_1(sender As Object, e As EventArgs) Handles cmdSequenceFunction.Click
         If chkShowEnterArguments.Checked Then
-            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("seq(from= ,to= ,by= )", 11)
+            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("seq(from= ,to= ,by= ,length =  )", 22)
         Else ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("seq( )", 2)
         End If
         TestOKEnabled()
@@ -195,7 +195,7 @@ Public Class dlgEnter
 
 
     Private Sub cmdLETTERS_Click(sender As Object, e As EventArgs) Handles cmdLogical.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.logical(c( ))", 4)
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.logical(c( ))", 3)
         TestOKEnabled()
     End Sub
 
@@ -356,12 +356,8 @@ Public Class dlgEnter
         ucrReceiverForEnterCalculation.Clear()
     End Sub
 
-    Private Sub cmdDate_Click(sender As Object, e As EventArgs)
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.date('')", 2)
-    End Sub
-
     Private Sub cmdDay_Click(sender As Object, e As EventArgs) Handles cmdText.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.character(c( ))")
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.character(c( ))", 2)
     End Sub
 
     Private Sub cmdFactor_Click(sender As Object, e As EventArgs) Handles cmdFactor.Click
@@ -378,9 +374,5 @@ Public Class dlgEnter
 
     Private Sub cmdRunif_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(" runif( )", 2)
-    End Sub
-
-    Private Sub ToolTip1_Popup(sender As Object, e As PopupEventArgs) Handles ttEnter.Popup
-
     End Sub
 End Class
