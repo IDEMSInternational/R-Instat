@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMissingValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 68</value>
+    <value>130, 100</value>
   </data>
   <data name="cmdMissingValues.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -220,7 +220,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdExponential.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 39</value>
+    <value>2, 72</value>
   </data>
   <data name="cmdExponential.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -250,7 +250,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdConcantenateFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 10</value>
+    <value>66, 44</value>
   </data>
   <data name="cmdConcantenateFunction.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -283,7 +283,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSequenceFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 97</value>
+    <value>194, 131</value>
   </data>
   <data name="cmdSequenceFunction.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -316,7 +316,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdRepelicationFunction.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 97</value>
+    <value>2, 131</value>
   </data>
   <data name="cmdRepelicationFunction.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -346,7 +346,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdLETTERS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 39</value>
+    <value>130, 72</value>
   </data>
   <data name="cmdLETTERS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -376,7 +376,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdPi.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 68</value>
+    <value>194, 100</value>
   </data>
   <data name="cmdPi.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -406,7 +406,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdLetters2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 39</value>
+    <value>66, 7</value>
   </data>
   <data name="cmdLetters2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -436,7 +436,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMonths.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 68</value>
+    <value>66, 100</value>
   </data>
   <data name="cmdMonths.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -463,13 +463,13 @@
     <value>7</value>
   </data>
   <data name="cmdColon.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14.25pt</value>
+    <value>Microsoft Sans Serif, 8.25pt</value>
   </data>
   <data name="cmdColon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdColon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 10</value>
+    <value>2, 7</value>
   </data>
   <data name="cmdColon.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -481,7 +481,7 @@
     <value>151</value>
   </data>
   <data name="cmdColon.Text" xml:space="preserve">
-    <value>:</value>
+    <value>[:]</value>
   </data>
   <data name="&gt;&gt;cmdColon.Name" xml:space="preserve">
     <value>cmdColon</value>
@@ -502,7 +502,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdRnorm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 97</value>
+    <value>66, 131</value>
   </data>
   <data name="cmdRnorm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -535,7 +535,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdRunif.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 97</value>
+    <value>130, 131</value>
   </data>
   <data name="cmdRunif.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -568,7 +568,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 68</value>
+    <value>2, 100</value>
   </data>
   <data name="cmdMonth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -601,7 +601,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 10</value>
+    <value>194, 68</value>
   </data>
   <data name="cmdDay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -634,7 +634,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 10</value>
+    <value>130, 44</value>
   </data>
   <data name="cmdDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -667,7 +667,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>66, 39</value>
+    <value>130, 7</value>
   </data>
   <data name="cmdFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -703,7 +703,7 @@
     <value>2, 3, 2, 3</value>
   </data>
   <data name="grpEnterKeyboard2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>263, 134</value>
+    <value>264, 170</value>
   </data>
   <data name="grpEnterKeyboard2.TabIndex" type="System.Int32, mscorlib">
     <value>159</value>
@@ -1466,6 +1466,9 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>9</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
