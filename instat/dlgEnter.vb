@@ -61,7 +61,10 @@ Public Class dlgEnter
         ttEnter.SetToolTip(cmdColon, "A subset, e.g. letters[1:4] gives a, b, c, d.")
         ttEnter.SetToolTip(cmdLetters2, "he letters, e.g. letters[1:4] gives a, b, c, d. Type LETTERS[1:4] for A, B, C, D.")
         ttEnter.SetToolTip(cmdFactor, "e.g. forcats::as_factor(""B"",""c"",""A"") to make the contents into a factor variable with the levels in the order as entered, so here B is the lowest level.")
-
+        ttEnter.SetToolTip(cmdRepelicationFunction, "Repeat of a sequence, e.g. rep(c(2,3,4), each=2) gives 2,2,3,3,4,4.")
+        ttEnter.SetToolTip(cmdMonths, "month.abb[1:4] is ""Jan2"", ""Feb"", ""Mar"", ""Apr"". Type month.name for full month names.")
+        ttEnter.SetToolTip(cmdText, "Define a character variable, e.g. as.character(c(3,5,""a"",""b"")).")
+        ttEnter.SetToolTip(cmdSequenceFunction, "Sequences, given either as seq(1,5,2) to give 1,3,5 or as seq(1,5,length=3) to give the same.")
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
     End Sub
@@ -352,7 +355,7 @@ Public Class dlgEnter
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.date('')", 2)
     End Sub
 
-    Private Sub cmdDay_Click(sender As Object, e As EventArgs) Handles cmdDay.Click
+    Private Sub cmdDay_Click(sender As Object, e As EventArgs) Handles cmdText.Click
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.character(c( ))")
     End Sub
 

@@ -53,7 +53,7 @@ Partial Class dlgEnter
         Me.cmdMonths = New System.Windows.Forms.Button()
         Me.cmdColon = New System.Windows.Forms.Button()
         Me.grpEnterKeyboard2 = New System.Windows.Forms.GroupBox()
-        Me.cmdDay = New System.Windows.Forms.Button()
+        Me.cmdText = New System.Windows.Forms.Button()
         Me.cmdFactor = New System.Windows.Forms.Button()
         Me.btnExample = New System.Windows.Forms.Button()
         Me.grpBasic = New System.Windows.Forms.GroupBox()
@@ -161,7 +161,7 @@ Partial Class dlgEnter
         '
         'grpEnterKeyboard2
         '
-        Me.grpEnterKeyboard2.Controls.Add(Me.cmdDay)
+        Me.grpEnterKeyboard2.Controls.Add(Me.cmdText)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdFactor)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdColon)
         Me.grpEnterKeyboard2.Controls.Add(Me.cmdMonths)
@@ -177,11 +177,11 @@ Partial Class dlgEnter
         Me.grpEnterKeyboard2.Name = "grpEnterKeyboard2"
         Me.grpEnterKeyboard2.TabStop = False
         '
-        'cmdDay
+        'cmdText
         '
-        resources.ApplyResources(Me.cmdDay, "cmdDay")
-        Me.cmdDay.Name = "cmdDay"
-        Me.cmdDay.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdText, "cmdText")
+        Me.cmdText.Name = "cmdText"
+        Me.cmdText.UseVisualStyleBackColor = True
         '
         'cmdFactor
         '
@@ -432,7 +432,7 @@ Partial Class dlgEnter
     Friend WithEvents cmd0 As Button
     Friend WithEvents cmd1 As Button
     Friend WithEvents cmdFactor As Button
-    Friend WithEvents cmdDay As Button
+    Friend WithEvents cmdText As Button
     Friend WithEvents ucrSaveEnterResultInto As ucrSave
     Friend WithEvents ttEnter As ToolTip
 End Class
