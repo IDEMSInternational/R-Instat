@@ -65,6 +65,11 @@ Public Class dlgEnter
         ttEnter.SetToolTip(cmdMonths, "month.abb[1:4] is ""Jan2"", ""Feb"", ""Mar"", ""Apr"". Type month.name for full month names.")
         ttEnter.SetToolTip(cmdText, "Define a character variable, e.g. as.character(c(3,5,""a"",""b"")).")
         ttEnter.SetToolTip(cmdSequenceFunction, "Sequences, given either as seq(1,5,2) to give 1,3,5 or as seq(1,5,length=3) to give the same.")
+        ttEnter.SetToolTip(cmdPi, "The number pi = 3.14.")
+        ttEnter.SetToolTip(cmdLogical, " Define a logical variable, e.g. as.logical(0,1,0,10,-5) gives FALSE, TRUE, FALSE, TRUE, TRUE.")
+        ttEnter.SetToolTip(cmdConcantenateFunction, "Combines arguments to form a single vector, e.g. c(1:3 8) is 1, 2, 3, 8.")
+        ttEnter.SetToolTip(cmdExponential, "For scientific notation, e.g. 1.5E-1 = 0.15.")
+
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
     End Sub
