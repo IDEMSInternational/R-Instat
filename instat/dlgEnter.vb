@@ -57,6 +57,9 @@ Public Class dlgEnter
         ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
         ucrSaveEnterResultInto.SetLabelText("Enter Result Into:")
 
+        'Adding tooltips for the buttons
+        ttEnter.SetToolTip(cmdColon, "A subset, e.g. letters[1:4] gives a, b, c, d.")
+
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
     End Sub
@@ -118,7 +121,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdColon_Click(sender As Object, e As EventArgs) Handles cmdColon.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(":")
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("[:]", 3)
         TestOKEnabled()
     End Sub
 
@@ -365,5 +368,9 @@ Public Class dlgEnter
 
     Private Sub cmdRunif_Click(sender As Object, e As EventArgs)
         ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(" runif( )", 2)
+    End Sub
+
+    Private Sub ToolTip1_Popup(sender As Object, e As PopupEventArgs) Handles ttEnter.Popup
+
     End Sub
 End Class

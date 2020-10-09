@@ -38,6 +38,7 @@ Partial Class dlgEnter
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgEnter))
         Me.chkShowEnterArguments = New System.Windows.Forms.CheckBox()
         Me.lblData = New System.Windows.Forms.Label()
@@ -80,6 +81,7 @@ Partial Class dlgEnter
         Me.ucrDataFrameEnter = New instat.ucrDataFrame()
         Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ttEnter = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.grpBasic.SuspendLayout()
         Me.SuspendLayout()
@@ -363,6 +365,9 @@ Partial Class dlgEnter
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ttEnter
+        '
+        '
         'dlgEnter
         '
         resources.ApplyResources(Me, "$this")
@@ -429,4 +434,5 @@ Partial Class dlgEnter
     Friend WithEvents cmdFactor As Button
     Friend WithEvents cmdDay As Button
     Friend WithEvents ucrSaveEnterResultInto As ucrSave
+    Friend WithEvents ttEnter As ToolTip
 End Class
