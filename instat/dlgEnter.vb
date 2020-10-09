@@ -143,7 +143,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdMissingValues_Click_1(sender As Object, e As EventArgs) Handles cmdQuotes.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("""")
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("""""", 3)
     End Sub
 
     Private Sub cmdSquareBrackets_Click_1(sender As Object, e As EventArgs)
@@ -182,7 +182,7 @@ Public Class dlgEnter
 
 
     Private Sub cmdLETTERS_Click(sender As Object, e As EventArgs) Handles cmdLogical.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.logical(c( ))")
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.logical(c( ))", 4)
         TestOKEnabled()
     End Sub
 
@@ -352,7 +352,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdFactor_Click(sender As Object, e As EventArgs) Handles cmdFactor.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("factor( )", 2)
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("forcats::as_factor( )", 2)
     End Sub
 
     Private Sub cmdMonth_Click(sender As Object, e As EventArgs)
