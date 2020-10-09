@@ -59,6 +59,8 @@ Public Class dlgEnter
 
         'Adding tooltips for the buttons
         ttEnter.SetToolTip(cmdColon, "A subset, e.g. letters[1:4] gives a, b, c, d.")
+        ttEnter.SetToolTip(cmdLetters2, "he letters, e.g. letters[1:4] gives a, b, c, d. Type LETTERS[1:4] for A, B, C, D.")
+        ttEnter.SetToolTip(cmdFactor, "e.g. forcats::as_factor(""B"",""c"",""A"") to make the contents into a factor variable with the levels in the order as entered, so here B is the lowest level.")
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
