@@ -234,8 +234,8 @@ Public Class dlgEnter
         lstView.Items.Add(New ListViewItem({"factor(c(1,2,3))"}))
         lstView.Items.Item(7).ToolTipText = "values 1 to 3 with the variable made into a factor" 'todo. Sensible tooltip here
 
-        lstView.Items.Add(New ListViewItem({"factor(rep(LETTERS[1:4],c(4,3,1,1)))"}))
-        lstView.Items.Item(8).ToolTipText = "Gives A,A,A,A, B,B,B,C,D as a factor"
+        lstView.Items.Add(New ListViewItem({" forcats::as_factor(rep(LETTERS[4:1],c(4,3,1,1)))"}))
+        lstView.Items.Item(8).ToolTipText = "Gives D,D,D,D,C,C,C,B,A as a fa ctor"
 
         lstView.Items.Add(New ListViewItem({"factor(rep(c(month.abb[4:7],NA),c(2,1,2,1,2)))"}))
         lstView.Items.Item(9).ToolTipText = "Gives Apr, Apr, May, Jun, Jun, Jul, NA, NA"
