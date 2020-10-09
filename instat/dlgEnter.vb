@@ -348,7 +348,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdDay_Click(sender As Object, e As EventArgs) Handles cmdDay.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("'day'")
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("as.character(c( ))")
     End Sub
 
     Private Sub cmdFactor_Click(sender As Object, e As EventArgs) Handles cmdFactor.Click
