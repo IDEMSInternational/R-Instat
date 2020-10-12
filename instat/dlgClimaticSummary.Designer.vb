@@ -49,14 +49,15 @@ Partial Class dlgClimaticSummary
         Me.cmdSummary = New System.Windows.Forms.Button()
         Me.lblWithinYear = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.cmdDoyRange = New System.Windows.Forms.Button()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.cmdMissingOptions = New System.Windows.Forms.Button()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkAddDateColumn = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkPrintOutput = New instat.ucrCheck()
         Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
-        Me.cmdDoyRange = New System.Windows.Forms.Button()
-        Me.lblYear = New System.Windows.Forms.Label()
-        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
@@ -133,6 +134,7 @@ Partial Class dlgClimaticSummary
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.cmdMissingOptions)
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
         Me.grpOptions.Controls.Add(Me.ucrChkAddDateColumn)
         Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
@@ -141,6 +143,33 @@ Partial Class dlgClimaticSummary
         resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
+        '
+        'cmdDoyRange
+        '
+        resources.ApplyResources(Me.cmdDoyRange, "cmdDoyRange")
+        Me.cmdDoyRange.Name = "cmdDoyRange"
+        Me.cmdDoyRange.Tag = ""
+        Me.cmdDoyRange.UseVisualStyleBackColor = True
+        '
+        'lblYear
+        '
+        resources.ApplyResources(Me.lblYear, "lblYear")
+        Me.lblYear.Name = "lblYear"
+        '
+        'cmdMissingOptions
+        '
+        resources.ApplyResources(Me.cmdMissingOptions, "cmdMissingOptions")
+        Me.cmdMissingOptions.Name = "cmdMissingOptions"
+        Me.cmdMissingOptions.Tag = "MissingOptions"
+        Me.cmdMissingOptions.UseVisualStyleBackColor = True
+        '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputFilterPreview, "ucrInputFilterPreview")
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         '
         'ucrChkOmitMissing
         '
@@ -171,26 +200,6 @@ Partial Class dlgClimaticSummary
         Me.ucrChkDropUnusedLevels.Checked = False
         resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
         Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
-        '
-        'cmdDoyRange
-        '
-        resources.ApplyResources(Me.cmdDoyRange, "cmdDoyRange")
-        Me.cmdDoyRange.Name = "cmdDoyRange"
-        Me.cmdDoyRange.Tag = ""
-        Me.cmdDoyRange.UseVisualStyleBackColor = True
-        '
-        'lblYear
-        '
-        resources.ApplyResources(Me.lblYear, "lblYear")
-        Me.lblYear.Name = "lblYear"
-        '
-        'ucrInputFilterPreview
-        '
-        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilterPreview.IsMultiline = False
-        Me.ucrInputFilterPreview.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputFilterPreview, "ucrInputFilterPreview")
-        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         '
         'ucrSelectorVariable
         '
@@ -327,4 +336,5 @@ Partial Class dlgClimaticSummary
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents ucrChkAddDateColumn As ucrCheck
     Friend WithEvents ucrChkOmitMissing As ucrCheck
+    Friend WithEvents cmdMissingOptions As Button
 End Class

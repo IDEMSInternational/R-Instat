@@ -53,6 +53,7 @@ Public Class dlgClimaticSummary
         ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 510
         ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
+        cmdMissingOptions.Enabled = False
 
         ucrSelectorVariable.SetParameter(New RParameter("data_name", 0))
         ucrSelectorVariable.SetParameterIsString()
@@ -210,7 +211,6 @@ Public Class dlgClimaticSummary
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
-        bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -296,6 +296,13 @@ Public Class dlgClimaticSummary
         Else
             clsDefaultFunction.RemoveParameterByName("use")
         End If
+        cmdMissingOptions.Enabled = ucrChkOmitMissing.Checked
+    End Sub
+
+    Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click
+        sdgMissingOptions.SetRFunction(clsNewSummaryFunction:=clsDefaultFunction, clsNewConcFunction:=clsConcFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgMissingOptions.ShowDialog()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrSelectorVariable.ControlValueChanged, ucrChkAddDateColumn.ControlValueChanged, ucrReceiverDate.ControlValueChanged
@@ -329,10 +336,6 @@ Public Class dlgClimaticSummary
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged, ucrPnlAnnualWithin.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrSelectorVariable_DataFrameChanged() Handles ucrSelectorVariable.DataFrameChanged
         clsDayFilterCalcFromList.ClearParameters()
     End Sub
@@ -347,13 +350,11 @@ Public Class dlgClimaticSummary
 
     Private Sub SetFactors()
         If bRCodeSet Then
-
-
             If Not ucrReceiverStation.IsEmpty Then
-                    clsDefaultFactors.AddParameter(ucrReceiverStation.GetParameter())
-                Else
-                    clsDefaultFactors.RemoveParameterByName("station")
-                End If
+                clsDefaultFactors.AddParameter(ucrReceiverStation.GetParameter())
+            Else
+                clsDefaultFactors.RemoveParameterByName("station")
+            End If
 
             If rdoAnnual.Checked Then
                 clsDefaultFactors.RemoveParameterByName("within_variable")
@@ -365,9 +366,9 @@ Public Class dlgClimaticSummary
                 clsDefaultFactors.RemoveParameterByName("year")
                 clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
             End If
-
         End If
     End Sub
+
     Private Sub ucrChkAddDateColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddDateColumn.ControlValueChanged
         If ucrChkAddDateColumn.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddDateFunction, iPosition:=0)
@@ -375,7 +376,12 @@ Public Class dlgClimaticSummary
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddDateFunction)
         End If
     End Sub
+
     Private Sub Receivers_controlValueChanged(ucrChangedControl As Control) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverElement.ControlValueChanged, ucrReceiverDOY.ControlValueChanged, ucrReceiverDate.ControlValueChanged
         SetFactors()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged, ucrPnlAnnualWithin.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
