@@ -173,10 +173,10 @@ Public Class dlgImportGriddedData
                 ucrDtpMaxDate.MinDate = New Date(1983, 1, 1)
             Case "UCSB_CHIRPS"
                 dctFiles = New Dictionary(Of String, String)
-                dctFiles.Add("Daily Precipitation 0.25 degree", Chr(34) & "daily_improved_global_0p25_prcp" & Chr(34))
                 dctFiles.Add("Daily Precipitation 0.05 degree", Chr(34) & "daily_improved_global_0p05_prcp" & Chr(34))
                 dctFiles.Add("Dekad Precipitation 0.05 degree", Chr(34) & "dekad_prcp" & Chr(34))
                 dctFiles.Add("Monthly Precipitation 0.05 degree", Chr(34) & "monthly_global_prcp" & Chr(34))
+                dctFiles.Add("Daily Precipitation 0.25 degree", Chr(34) & "daily_improved_global_0p25_prcp" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "Daily Precipitation 0.25 degree"
                 ucrDtpMinDate.MinDate = New Date(1981, 1, 1)
