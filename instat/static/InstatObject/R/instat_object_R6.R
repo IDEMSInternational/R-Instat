@@ -2130,17 +2130,6 @@ DataBook$set("public", "download_from_IRI", function(source, data, path = tempdi
     else {
       stop("Data file does not exist for TAMSAT data")
     }
-  } else if (source == "NOAA_ARC2") {
-    prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.FEWS/.Africa/.DAILY/.ARC2")
-    if (data == "daily_est_prcp") {
-      extension <- ".daily/.est_prcp"
-    } # (days since 1960-01-01 12:00:00) ordered (1 Jan 1983) to (12 Sep 2020)
-    else if (data == "monthly_est_prcp") {
-      extension <- ".monthly/.est_prcp"
-    } # (months since 1960-01-01) ordered (Jan 1983) to (Aug 2020)
-    else {
-      stop("Data file does not exist for NOAA ARC2 data")
-    }
   } else if (source == "NOAA") {
     prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.FEWS/.Africa")
     if (data == "daily_rfev2_est_prcp") {
@@ -2149,6 +2138,12 @@ DataBook$set("public", "download_from_IRI", function(source, data, path = tempdi
     else if (data == "10day_rfev2_est_prcp") {
       extension <- ".TEN-DAY/.RFEv2/.est_prcp"
     } # grid: /T (days since 1960-01-01) ordered [ (1-10 Dec 1999) (11-20 Dec 1999) (21-31 Dec 1999) ... (1-10 Sep 2020)] N= 748 pts :grid
+    else if (data == "daily_est_prcp") {
+      extension <- ".DAILY/.ARC2/.daily/.est_prcp"
+    } # (days since 1960-01-01 12:00:00) ordered (1 Jan 1983) to (12 Sep 2020)
+    else if (data == "monthly_est_prcp") {
+      extension <- ".DAILY/.ARC2/.monthly/.est_prcp"
+    } # (months since 1960-01-01) ordered (Jan 1983) to (Aug 2020)
     else {
       stop("Data file does not exist for NOAA RFE2 data")
     }
