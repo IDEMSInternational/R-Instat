@@ -2145,7 +2145,7 @@ DataBook$set("public", "download_from_IRI", function(source, data, path = tempdi
       extension <- ".DAILY/.ARC2/.monthly/.est_prcp"
     } # (months since 1960-01-01) ordered (Jan 1983) to (Aug 2020)
     else {
-      stop("Data file does not exist for NOAA RFE2 data")
+      stop("Data file does not exist for NOAA data")
     }
   } else if (source == "NOAA_CMORPH_DAILY" || source == "NOAA_CMORPH_3HOURLY" || source == "NOAA_CMORPH_DAILY_CALCULATED") {
     if (source == "NOAA_CMORPH_DAILY") {
