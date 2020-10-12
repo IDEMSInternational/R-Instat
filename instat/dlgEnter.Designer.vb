@@ -76,12 +76,12 @@ Partial Class dlgEnter
         Me.cmd2 = New System.Windows.Forms.Button()
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
+        Me.ttEnter = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrSaveEnterResultInto = New instat.ucrSave()
         Me.ucrTryModelling = New instat.ucrTry()
         Me.ucrDataFrameEnter = New instat.ucrDataFrame()
         Me.ucrReceiverForEnterCalculation = New instat.ucrReceiverExpression()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ttEnter = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpEnterKeyboard2.SuspendLayout()
         Me.grpBasic.SuspendLayout()
         Me.SuspendLayout()
@@ -364,9 +364,6 @@ Partial Class dlgEnter
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ttEnter
-        '
         '
         'dlgEnter
         '

@@ -131,7 +131,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdColon_Click(sender As Object, e As EventArgs) Handles cmdColon.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("[:]", 3)
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("[:]", 1)
         TestOKEnabled()
     End Sub
 
@@ -156,7 +156,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdMissingValues_Click_1(sender As Object, e As EventArgs) Handles cmdQuotes.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("""", 2)
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition(Chr(34) & "" & Chr(34), 1)
     End Sub
 
     Private Sub cmdSquareBrackets_Click_1(sender As Object, e As EventArgs)
@@ -235,10 +235,10 @@ Public Class dlgEnter
         lstView.Columns.Add("Commands", 450)
 
         'add rows of sample commands
-        lstView.Items.Add(New ListViewItem({"4.5"}))
+        lstView.Items.Add(New ListViewItem({"c(4.5)"}))
         lstView.Items.Item(0).ToolTipText = "A single number repeated for the data frame" 'todo. sensible tooltip here.
 
-        lstView.Items.Add(New ListViewItem({"'Nairobi'"}))
+        lstView.Items.Add(New ListViewItem({"c('Nairobi')"}))
         lstView.Items.Item(1).ToolTipText = "a single text repeated for the data frame" 'todo. Sensible tooltip here.
 
         lstView.Items.Add(New ListViewItem({"c(2,3,4)*1.5E02"}))
