@@ -506,7 +506,8 @@ Public Class dlgSeasonalPlot
     End Sub
 
     ''' <summary>
-    ''' Sets the R Code for ucrInputReferenceSummary. This is done manually by this Sub instead of through conditions because of the complex checks on multiple functions required.
+    ''' Sets the R Code for ucrInputReferenceSummary. This is done manually by this sub instead of 
+    ''' through conditions because of the complex checks on multiple functions required.
     ''' </summary>
     ''' <param name="bReset">True if the dialog is being reset.</param>
     Private Sub ReferenceSummarySetRCode(bReset As Boolean)
