@@ -157,13 +157,13 @@
     <value>10, 236</value>
   </data>
   <data name="cmdPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 25</value>
+    <value>119, 23</value>
   </data>
   <data name="cmdPlotOptions.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="cmdPlotOptions.Text" xml:space="preserve">
-    <value>Options</value>
+    <value>Plot Options</value>
   </data>
   <data name="&gt;&gt;cmdPlotOptions.Name" xml:space="preserve">
     <value>cmdPlotOptions</value>

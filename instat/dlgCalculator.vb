@@ -24,6 +24,10 @@ Public Class dlgCalculator
 
     'holds the original width of the form
     Private iBasicWidth As Integer
+    Private strDefaultKeyboard As String
+    ' Note: This list needs to be updated when a new keyboard is added.
+    Private strKeyboards() As String = {"Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Factor", "Probability", "Dates", "Transform", "Circular", "Wakefield", "Modifier", "Symbols", "HydroGOF"}
+
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -43,7 +47,9 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub SetDefaults()
+
         ucrCalc.ucrInputCalOptions.SetName("Basic")
+
         ucrCalc.Reset()
         ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrSaveResultInto.Reset()
@@ -78,6 +84,15 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetLabelText("Save Result Into:")
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
+    End Sub
+
+    Public Sub SetDefaultKeyboard(strNewDefaultKeyboard As String)
+        If Not strKeyboards.Contains(strNewDefaultKeyboard) Then
+            MsgBox("Developer error: there is no Calculator keyboard called" & Chr(34) & strNewDefaultKeyboard & Chr(34) & vbNewLine & "Default keyboard will be selected.")
+            strDefaultKeyboard = ""
+        Else
+            strDefaultKeyboard = strNewDefaultKeyboard
+        End If
     End Sub
 
     Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged
@@ -153,3 +168,5 @@ Public Class dlgCalculator
         SaveResults()
     End Sub
 End Class
+
+    

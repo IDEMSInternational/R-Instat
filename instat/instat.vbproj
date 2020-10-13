@@ -196,10 +196,22 @@
     <Compile Include="dlgCircular.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimsoftWizard.Designer.vb">
+      <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimsoftWizard.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgCompareSummary.Designer.vb">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCompareSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgConditionalQuantilePlot.Designer.vb">
+      <DependentUpon>dlgConditionalQuantilePlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgConditionalQuantilePlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgDisplayTopN.Designer.vb">
@@ -220,10 +232,34 @@
     <Compile Include="dlgInfillMissingValues.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgOtherRosePlots.Designer.vb">
+      <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgOtherRosePlots.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSeasonalPlot.Designer.vb">
+      <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSeasonalPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTaylorDiagram.Designer.vb">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTaylorDiagram.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgTimeSeriesPlot.Designer.vb">
+      <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgTimeSeriesPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgWindPollutionRose.Designer.vb">
+      <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgWindPollutionRose.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgExtremesDisplayOptions.Designer.vb">
@@ -302,6 +338,12 @@
       <DependentUpon>dlgTreemap.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTreemap.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgMissingOptions.Designer.vb">
+      <DependentUpon>sdgMissingOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgMissingOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgThemesSub.Designer.vb">
@@ -1152,6 +1194,12 @@
     <Compile Include="sdgThemes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgTimeSeries.Designer.vb">
+      <DependentUpon>sdgTimeSeries.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgTimeSeries.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgTwoWayFrequencies.Designer.vb">
       <DependentUpon>sdgTwoWayFrequencies.vb</DependentUpon>
     </Compile>
@@ -1708,6 +1756,12 @@
       <DependentUpon>ucrElementRectControl.vb</DependentUpon>
     </Compile>
     <Compile Include="ucrElementRectControl.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucrFilePath.Designer.vb">
+      <DependentUpon>ucrFilePath.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ucrFilePath.vb">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucrFilter.Designer.vb">
@@ -2533,8 +2587,14 @@
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimsoftWizard.resx">
+      <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgCompareSummary.resx">
       <DependentUpon>dlgCompareSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgConditionalQuantilePlot.resx">
+      <DependentUpon>dlgConditionalQuantilePlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayTopN.resx">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
@@ -2546,8 +2606,26 @@
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgOtherRosePlots.resx">
+      <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSeasonalPlot.resx">
+      <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTaylorDiagram.resx">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgTimeSeriesPlot.resx">
+      <DependentUpon>dlgTimeSeriesPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgWindPollutionRose.resx">
+      <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgExtremesDisplayOptions.resx">
+      <DependentUpon>sdgExtremesDisplayOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgExtremesMethod.resx">
+      <DependentUpon>sdgExtremesMethod.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgFiltersFromFactor.resx">
       <DependentUpon>sdgFiltersFromFactor.vb</DependentUpon>
@@ -2581,6 +2659,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMissingOptions.resx">
+      <DependentUpon>sdgMissingOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgThemesSub.resx">
       <DependentUpon>sdgThemesSub.vb</DependentUpon>
@@ -4284,6 +4365,9 @@
     <EmbeddedResource Include="sdgThemes.sw-KE.resx">
       <DependentUpon>sdgThemes.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgTimeSeries.resx">
+      <DependentUpon>sdgTimeSeries.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgTwoWayFrequencies.resx">
       <DependentUpon>sdgTwoWayFrequencies.vb</DependentUpon>
     </EmbeddedResource>
@@ -4433,6 +4517,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFactor.sw-KE.resx">
       <DependentUpon>ucrFactor.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucrFilePath.resx">
+      <DependentUpon>ucrFilePath.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrFilter.resx">
       <DependentUpon>ucrFilter.vb</DependentUpon>

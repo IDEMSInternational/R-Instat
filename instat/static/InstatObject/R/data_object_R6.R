@@ -1468,7 +1468,7 @@ DataSheet$set("public", "set_protected_columns", function(col_names) {
 }
 )
 
-DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE, is_no_filter = FALSE) {
+DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE, is_no_filter = FALSE, and_or = "&") {
   if(missing(filter)) stop("filter is required")
   if(filter_name == "") filter_name = next_default_item("Filter", names(private$filters))
   
@@ -1483,7 +1483,7 @@ DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace
   }
   else {
     if(filter_name %in% names(private$filters)) message("A filter named ", filter_name, " already exists. It will be replaced by the new filter.")
-    filter_calc = calculation$new(type = "filter", filter_conditions = filter, name = filter_name, parameters = list(na.rm = na.rm, is_no_filter = is_no_filter))
+    filter_calc = calculation$new(type = "filter", filter_conditions = filter, name = filter_name, parameters = list(na.rm = na.rm, is_no_filter = is_no_filter, and_or = and_or))
     private$filters[[filter_name]] <- filter_calc
     self$append_to_changes(list(Added_filter, filter_name))
     if(set_as_current) {
@@ -1493,6 +1493,13 @@ DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace
   }
 }
 )
+
+DataSheet$set("public","add_filter_as_levels", function(filter_levels, column){
+  for (i in seq_along(filter_levels)) {
+    filter_cond <- list(C0 = list(column = column, operation = "==", value = filter_levels[i]))
+    self$add_filter(filter = filter_cond, filter_name = filter_levels[i])
+  }
+})
 
 DataSheet$set("public", "get_current_filter", function() {
   return(private$.current_filter)
@@ -1550,7 +1557,11 @@ DataSheet$set("public", "get_filter_as_logical", function(filter_name) {
       }
       i = i + 1
     }
-    out <- apply(result, 1, all)
+    and_or <- curr_filter$parameters[["and_or"]] 
+    if(is.null(and_or)) and_or <- "&"
+    if(and_or == "&") out <- apply(result, 1, all) 
+    else if (and_or == "|") out <- apply(result, 1, any)
+    else stop(and_or, " should be & or |.")
     out[is.na(out)] <- !curr_filter$parameters[["na.rm"]]
   }
   return(out)
@@ -1590,7 +1601,7 @@ DataSheet$set("public", "filter_string", function(filter_name) {
   out = "("
   i = 1
   for(condition in curr_filter$filter_conditions) {
-    if(i != 1) out = paste(out, "&")
+    if(i != 1) out = paste(out, curr_filter$parameters[["and_or"]])
     out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
     if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(paste0("'", condition[["value"]], "'"), collapse = ","), ")")
     else out = paste(out, condition[["value"]])
@@ -1637,7 +1648,7 @@ DataSheet$set("public", "add_object", function(object, object_name) {
   if(object_name %in% names(private$objects)) message("An object called ", object_name, " already exists. It will be replaced.")
   private$objects[[object_name]] <- object
   self$append_to_changes(list(Added_object, object_name))
-  if(any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot") %in% class(object))) {
+  if(any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair") %in% class(object))) {
     private$.last_graph <- object_name
   }
 }
@@ -1661,7 +1672,7 @@ DataSheet$set("public", "get_object_names", function(type = "", as_list = FALSE,
   if(type == "") out = names(private$objects)
   else {
     if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
-    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot") %in% class(x)))]
+    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair") %in% class(x)))]
     else if(type == surv_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("Surv") %in% class(x)))]
     else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame", "list") %in% class(x)))]
     else stop("type: ", type, " not recognised")
@@ -2456,7 +2467,7 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
     if(is.null(year_col)) {
       if(is_climatic) {
         if(is.null(self$get_climatic_column_name(year_label))) {
-          self$split_date(col_name = date_col, year = TRUE)
+          self$split_date(col_name = date_col, year_val = TRUE)
         }
         year_col <- self$get_climatic_column_name(year_label)
       }
