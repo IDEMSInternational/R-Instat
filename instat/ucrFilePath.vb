@@ -260,7 +260,7 @@ Public Class ucrFilePath
                                           Dim txtShowFilePath As New TextBox With {
                                                     .Multiline = True,
                                                     .ScrollBars = ScrollBars.Vertical,
-                                                    .WordWrap = False
+                                                    .WordWrap = True
                                              }
 
                                           'attach event handlers that allow editing of the poped up text
