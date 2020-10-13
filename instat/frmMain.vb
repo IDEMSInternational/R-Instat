@@ -1199,6 +1199,10 @@ Public Class frmMain
         dlgClimSoft.ShowDialog()
     End Sub
 
+    Private Sub mnuClimateFileImportFromClimSoftWizard_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportFromClimSoftWizard.Click
+        dlgClimsoftWizard.ShowDialog()
+    End Sub
+
     Private Sub mnuClimaticFileImportFromCliData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromCliData.Click
         dlgCliData.ShowDialog()
     End Sub
