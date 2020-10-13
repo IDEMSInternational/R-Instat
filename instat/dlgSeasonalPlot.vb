@@ -32,7 +32,10 @@ Public Class dlgSeasonalPlot
     Private clsGreaterOperator As ROperator
     Private clsEst2GreaterOperator As ROperator
     Private clsEst2LessOperator As ROperator
-    ''' <summary> Dummy ROperator set to either clsRefGreaterOperator or clsRefLessOperator depending on summary option. This is used in SetRCode for ucrInputReferenceSummary. </summary>
+    ''' <summary> 
+    ''' Dummy ROperator set to either clsRefGreaterOperator or clsRefLessOperator depending on 
+    ''' summary option. This is used in SetRCode for ucrInputReferenceSummary. 
+    ''' </summary>
     Private clsRefGreaterOrLessOperator As ROperator
 
     Private clsMissingFilterFunction As RFunction
@@ -506,7 +509,8 @@ Public Class dlgSeasonalPlot
     End Sub
 
     ''' <summary>
-    ''' Sets the R Code for ucrInputReferenceSummary. This is done manually by this Sub instead of through conditions because of the complex checks on multiple functions required.
+    ''' Sets the R Code for ucrInputReferenceSummary. This is done manually by this sub instead of 
+    ''' through conditions because of the complex checks on multiple functions required.
     ''' </summary>
     ''' <param name="bReset">True if the dialog is being reset.</param>
     Private Sub ReferenceSummarySetRCode(bReset As Boolean)
