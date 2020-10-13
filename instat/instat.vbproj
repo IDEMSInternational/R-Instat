@@ -340,6 +340,12 @@
     <Compile Include="dlgTreemap.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgMissingOptions.Designer.vb">
+      <DependentUpon>sdgMissingOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgMissingOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgThemesSub.Designer.vb">
       <DependentUpon>sdgThemesSub.vb</DependentUpon>
     </Compile>
@@ -2653,6 +2659,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMissingOptions.resx">
+      <DependentUpon>sdgMissingOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgThemesSub.resx">
       <DependentUpon>sdgThemesSub.vb</DependentUpon>
