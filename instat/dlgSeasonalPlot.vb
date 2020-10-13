@@ -693,11 +693,8 @@ Public Class dlgSeasonalPlot
     End Sub
 
     Private Sub ucrInputReferenceThreshold_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputReferenceThreshold.ControlContentsChanged
-        UpdateEstimatesThresholdParameter()
-    End Sub
-
-    Private Sub UpdateEstimatesThresholdParameter()
-        ' By default estimates has the same threshold as reference values, unless the user has already typed in ucrInputEstimatesThreshold to make them different.
+        ' By default estimates has the same threshold as reference values, unless the user has 
+        ' already typed in ucrInputEstimatesThreshold to make them different.
         If Not ucrInputEstimatesThreshold.UserTyped Then
             ucrInputEstimatesThreshold.SetName(ucrInputReferenceThreshold.GetText())
         End If
