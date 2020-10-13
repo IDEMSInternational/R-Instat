@@ -2214,6 +2214,4 @@ Public Class frmMain
     Private Sub mnuClimaticCompareConditionalQuantiles_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareConditionalQuantiles.Click
         dlgConditionalQuantilePlot.ShowDialog()
     End Sub
-
-
 End Class
