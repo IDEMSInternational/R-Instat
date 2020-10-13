@@ -32,7 +32,10 @@ Public Class dlgSeasonalPlot
     Private clsGreaterOperator As ROperator
     Private clsEst2GreaterOperator As ROperator
     Private clsEst2LessOperator As ROperator
-    ''' <summary> Dummy ROperator set to either clsRefGreaterOperator or clsRefLessOperator depending on summary option. This is used in SetRCode for ucrInputReferenceSummary. </summary>
+    ''' <summary> 
+    ''' Dummy ROperator set to either clsRefGreaterOperator or clsRefLessOperator depending on 
+    ''' summary option. This is used in SetRCode for ucrInputReferenceSummary. 
+    ''' </summary>
     Private clsRefGreaterOrLessOperator As ROperator
 
     Private clsMissingFilterFunction As RFunction
