@@ -997,16 +997,13 @@ Public Class ucrCore
         AddCondition(objControlState, clsTempCond)
     End Sub
 
-
-    ''' <summary> Set visible a control. </summary>
-    ''' <param name="bVisible"> If true then set a control visible property. </param>
     ''' <summary>
     ''' For each control (display) linked to this control, set the visibility to 
     ''' <paramref name="bVisible"/> If none of these linked controls is a group box then set
     '''                             'Visible' to 'bVisible'.
     ''' </summary>
     ''' <param name="bVisible"> If true then make the linked controls visible, else make them
-    '''                         not visible. </param>```
+    '''                         not visible. </param>
     Public Sub SetVisible(bVisible As Boolean)
         'TODO: check how this should behave with linked group boxes
         If Not SetLinkedDisplayControlVisibilityAndReturnContainsGroupBox(bVisible) Then

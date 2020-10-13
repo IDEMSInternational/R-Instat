@@ -19,6 +19,7 @@ Imports instat.Translations
 Public Class dlgDisplayDailyData
     Private iBasicHeight As Integer
     Private iBaseMaxY As Integer
+    Private iSaveYLocation As Integer
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private lstCheckboxes As New List(Of ucrCheck)
@@ -26,13 +27,15 @@ Public Class dlgDisplayDailyData
     Private clsGGplotFunction, clsGeomLineFunction, clsGeomRugFunction, clsThemeFunction, clsThemeGreyFunction As New RFunction
     Private clsIdVarsFunction, clsFacetFunction, clsGgplotAesFunction, clsGGplotElementText, clsXLabFunction As New RFunction
     Private clsGgPlotOperator, clsDisplayDailyGraphOperator, clsDisplayDailyTableOperator, clsNAFilterOperator As New ROperator
-    Private clsFacetOperator As New ROperator
+    Private clsStationElemFacetOperator As New ROperator
+    Private clsLabelWrapGenFunction As New RFunction
 
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
             iBasicHeight = Me.Height
             iBaseMaxY = ucrBase.Location.Y
+            iSaveYLocation = ucrSaveGraph.Location.Y
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -50,10 +53,12 @@ Public Class dlgDisplayDailyData
 
         Dim dctBarColour As New Dictionary(Of String, String)
         Dim dctRugColour As New Dictionary(Of String, String)
+        Dim dctGRugColour As New Dictionary(Of String, String)
         Dim dctSummary As New Dictionary(Of String, String)
         Dim dctMissingvalues As New Dictionary(Of String, String)
         Dim dctTracevalues As New Dictionary(Of String, String)
         Dim dctZeroValues As New Dictionary(Of String, String)
+        Dim dctScale As New Dictionary(Of String, String)
         lstCheckboxes = New List(Of ucrCheck)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -99,9 +104,21 @@ Public Class dlgDisplayDailyData
         ucrNudUpperYaxis.SetParameter(New RParameter("upper_limit", 9))
         ucrNudUpperYaxis.SetMinMax(0, Integer.MaxValue)
 
+
+        ucrInputGraphRugColur.SetParameter(New RParameter("colour", 1))
+        dctGRugColour.Add("Red", Chr(34) & "red" & Chr(34))
+        dctGRugColour.Add("Black", Chr(34) & "black" & Chr(34))
+        dctGRugColour.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctGRugColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctGRugColour.Add("Green", Chr(34) & "green" & Chr(34))
+        dctGRugColour.Add("Violet", Chr(34) & "violet" & Chr(34))
+        ucrInputGraphRugColur.SetItems(dctGRugColour)
+        ucrInputGraphRugColur.bAllowNonConditionValues = True
+
+
         ucrInputBarColour.SetParameter(New RParameter("bar_colour", 7))
-        dctBarColour.Add("Blue", Chr(34) & "blue" & Chr(34))
         dctBarColour.Add("Red", Chr(34) & "red" & Chr(34))
+        dctBarColour.Add("Blue", Chr(34) & "blue" & Chr(34))
         dctBarColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
         dctBarColour.Add("Green", Chr(34) & "green" & Chr(34))
         dctBarColour.Add("Violet", Chr(34) & "violet" & Chr(34))
@@ -114,6 +131,7 @@ Public Class dlgDisplayDailyData
         dctRugColour.Add("Green", Chr(34) & "green" & Chr(34))
         dctRugColour.Add("Violet", Chr(34) & "violet" & Chr(34))
         ucrInputRugColour.SetItems(dctRugColour)
+        ucrInputRugColour.bAllowNonConditionValues = True
 
         ucrChkSum.SetParameter(New RParameter("sum", 0), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "sum" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSum.SetText("Sum")
@@ -136,8 +154,21 @@ Public Class dlgDisplayDailyData
         ucrChkSumMissing.SetParameter(New RParameter("summary_count_missing", 6), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_count_missing" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSumMissing.SetText("N Missing")
 
-        ucrChkFreeYScales.SetParameter(New RParameter("scales", 2), bNewChangeParameterValue:=False)
-        ucrChkFreeYScales.SetText("Free y Scale")
+        ucrNudNumberOfColumns.SetParameter(New RParameter("ncol", 1))
+        ucrNudNumberOfColumns.SetMinMax(1, Integer.MaxValue)
+
+        ucrChkNumberOfColumns.AddParameterPresentCondition(True, "ncol")
+        ucrChkNumberOfColumns.AddParameterPresentCondition(False, "ncol", False)
+        ucrChkNumberOfColumns.SetText("Number of Column(s):")
+
+        ucrInputScale.SetParameter(New RParameter("scales", 0))
+        dctScale.Add("Free_y", Chr(34) & "free_y" & Chr(34))
+        dctScale.Add("Free_x", Chr(34) & "free_x" & Chr(34))
+        dctScale.Add("Free", Chr(34) & "free" & Chr(34))
+        dctScale.Add("Fixed", Chr(34) & "fixed" & Chr(34))
+        ucrInputScale.SetItems(dctScale)
+        ucrInputScale.SetDropDownStyleAsNonEditable()
+
 
         lstCheckboxes.AddRange({ucrChkSum, ucrChkMax, ucrChkMin, ucrChkMean, ucrChkMedian, ucrChkIQR, ucrChkSumMissing})
 
@@ -171,6 +202,9 @@ Public Class dlgDisplayDailyData
         ucrInputComboZero.SetItems(dctZeroValues)
         ucrInputComboZero.bAllowNonConditionValues = True
 
+        ucrInputFacetBy.SetLinkedDisplayControl(lblFacetby)
+        ucrInputFacetBy.SetDropDownStyleAsNonEditable()
+
         ucrSaveGraph.SetPrefix("Graph")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames)
@@ -185,12 +219,21 @@ Public Class dlgDisplayDailyData
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoGraphByYear, "daily_graph")
         ucrPnlFrequencyDisplay.AddParameterPresentCondition(rdoTable, "daily_table")
         ucrPnlFrequencyDisplay.AddToLinkedControls(ucrNudUpperYaxis, {rdoGraphByYear}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=100)
-        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrReceiverMultipleElements, ucrChkFreeYScales}, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrReceiverMultipleElements, ucrInputFacetBy, ucrChkNumberOfColumns}, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputScale, ucrInputGraphRugColur}, {rdoGraph}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboMissing, ucrChkMissing}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboTrace, ucrChkTrace}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencyDisplay.AddToLinkedControls({ucrInputComboZero, ucrChkZero}, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkSum, {rdoTable}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrChkSum, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlFrequencyDisplay.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoGraphByYear}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkNumberOfColumns.AddToLinkedControls(ucrNudNumberOfColumns, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkSum.SetLinkedDisplayControl(grpSummary)
+        ucrInputScale.SetLinkedDisplayControl(grpFacet)
+        ucrInputScale.SetLinkedDisplayControl(lblScales)
+        ucrInputGraphRugColur.SetLinkedDisplayControl(lblGRugColour)
+        ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
+        ucrReceiverElement.SetLinkedDisplayControl(lblElement)
+
 
         ucrChkMissing.AddToLinkedControls({ucrInputComboMissing}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTrace.AddToLinkedControls({ucrInputComboTrace}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="tr")
@@ -217,31 +260,44 @@ Public Class dlgDisplayDailyData
         clsNAFilterOperator = New ROperator
         clsFacetFunction = New RFunction
         clsXLabFunction = New RFunction
-        clsFacetOperator = New ROperator
+        clsStationElemFacetOperator = New ROperator
+        clsLabelWrapGenFunction = New RFunction
+
+        ucrNudNumberOfColumns.SetText("1")
+        ucrSaveGraph.Reset()
+
+        clsStationElemFacetOperator.SetOperation("~")
 
         clsXLabFunction.SetPackageName("ggplot2")
         clsXLabFunction.SetRCommand("xlab")
-        clsXLabFunction.AddParameter("label", Chr(34) & "" & Chr(34),, iPosition:=0, bIncludeArgumentName:=False)
+        clsXLabFunction.AddParameter("label", "NULL", iPosition:=0, bIncludeArgumentName:=False)
+
+        clsLabelWrapGenFunction.SetRCommand("label_wrap_gen")
+        clsLabelWrapGenFunction.AddParameter("multi_line", "FALSE", iPosition:=0)
 
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetFunction.SetRCommand("facet_grid")
+        clsFacetFunction.SetRCommand("facet_wrap")
         clsFacetFunction.AddParameter("scales", Chr(34) & "free_y" & Chr(34), iPosition:=0)
+        clsFacetFunction.AddParameter("ncol", 1, iPosition:=1)
+        clsFacetFunction.AddParameter("facet", clsROperatorParameter:=clsStationElemFacetOperator, iPosition:=2)
 
         clsNAFilterOperator.SetOperation("%>%")
         clsNAFilterOperator.AddParameter("filter", "filter(is.na(value))", iPosition:=1)
+        clsNAFilterOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         clsDisplayDailyGraphOperator.SetOperation("")
         clsDisplayDailyTableOperator.SetOperation("")
 
 
         ucrSelectorDisplayDailyClimaticData.Reset()
-        ucrReceiverElement.SetMeAsReceiver()
+        ucrReceiverMultipleElements.SetMeAsReceiver()
 
         clsIdVarsFunction.SetRCommand("c")
         clsGGplotFunction.SetPackageName("ggplot2")
         clsGGplotFunction.SetRCommand("ggplot")
         clsGGplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsGgplotAesFunction)
+        clsGGplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         clsGgplotAesFunction.SetPackageName("ggplot2")
         clsGgplotAesFunction.SetRCommand("aes")
@@ -251,13 +307,10 @@ Public Class dlgDisplayDailyData
         clsGeomLineFunction.SetPackageName("ggplot2")
         clsGeomLineFunction.SetRCommand("geom_line")
 
-        clsFacetOperator.SetOperation("~")
-        clsFacetOperator.AddParameter("variable", "variable", bIncludeArgumentName:=False, iPosition:=0)
-
         clsGeomRugFunction.SetPackageName("ggplot2")
         clsGeomRugFunction.SetRCommand("geom_rug")
         clsGeomRugFunction.AddParameter("data", clsROperatorParameter:=clsNAFilterOperator, iPosition:=0)
-        clsGeomRugFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=1)
+        clsGeomRugFunction.AddParameter("colour", Chr(34) & "red" & Chr(34), iPosition:=1)
 
         clsThemeGreyFunction.SetRCommand("theme_grey")
 
@@ -293,7 +346,9 @@ Public Class dlgDisplayDailyData
         clsDisplayDailyGraphOperator.AddParameter("daily_graph", clsRFunctionParameter:=clsDisplayDailyGraphFunction)
         clsDisplayDailyTableOperator.AddParameter("daily_table", clsRFunctionParameter:=clsDisplayDailyTable)
 
-        ucrBase.clsRsyntax.SetBaseROperator(clsDisplayDailyTableOperator)
+        ucrBase.clsRsyntax.SetBaseROperator(clsGgPlotOperator)
+
+        SetFacetItems()
 
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
@@ -311,8 +366,7 @@ Public Class dlgDisplayDailyData
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsDisplayDailyTable, New RParameter("date_col", 2), iAdditionalPairNo:=1)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsIdVarsFunction, New RParameter("date", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
 
-        ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsGGplotFunction, New RParameter("data", iNewPosition:=0), iAdditionalPairNo:=1)
-        ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsNAFilterOperator, New RParameter("data", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrSelectorDisplayDailyClimaticData.AddAdditionalCodeParameterPair(clsDisplayDailyGraphFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
 
         ucrChkSum.SetRCode(clsConcFunction, bReset)
         ucrChkMax.SetRCode(clsConcFunction, bReset)
@@ -339,8 +393,12 @@ Public Class dlgDisplayDailyData
         ucrReceiverElement.SetRCode(clsDisplayDailyTable, bReset)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsDisplayDailyGraphFunction, New RParameter("climatic_element", 1), iAdditionalPairNo:=1)
         ucrSaveGraph.SetRCode(clsDisplayDailyGraphFunction, bReset)
+        ucrSaveGraph.AddAdditionalRCode(clsGgPlotOperator)
         ucrPnlFrequencyDisplay.SetRCode(ucrBase.clsRsyntax.clsBaseOperator, bReset)
-        ucrChkFreeYScales.SetRCode(clsFacetFunction, bReset)
+        ucrInputScale.SetRCode(clsFacetFunction, bReset)
+        ucrNudNumberOfColumns.SetRCode(clsFacetFunction, bReset)
+        ucrChkNumberOfColumns.SetRCode(clsFacetFunction, bReset)
+        ucrInputGraphRugColur.SetRCode(clsGeomRugFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -363,16 +421,25 @@ Public Class dlgDisplayDailyData
 
     Private Sub DialogSize()
         If rdoGraphByYear.Checked Then
-            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.86)
-            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.2)
-        ElseIf rdoTable.Checked Then
+            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.93)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.1)
+            ucrSaveGraph.Location = New Point(ucrSaveGraph.Location.X, iSaveYLocation / 1.1)
+        ElseIf rdoTable.Checked OrElse rdoGraph.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
+            If rdoGraph.Checked Then
+                ucrSaveGraph.Location = New Point(ucrSaveGraph.Location.X, iSaveYLocation)
+            End If
         End If
     End Sub
 
     Private Sub ucrPnlFrequencyDisplay_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlFrequencyDisplay.ControlValueChanged
         DialogSize()
+        If rdoGraphByYear.Checked Then
+            ucrSaveGraph.SetPrefix("Graph_by_Year")
+        ElseIf rdoGraph.checked Then
+            ucrSaveGraph.SetPrefix("Graph")
+        End If
         If rdoGraph.Checked Then
             ucrBase.clsRsyntax.iCallType = 3
             ucrReceiverMultipleElements.SetMeAsReceiver()
@@ -382,6 +449,7 @@ Public Class dlgDisplayDailyData
         Else
             ucrSelectorDisplayDailyClimaticData.SetParameterIsString()
             If rdoGraphByYear.Checked Then
+                ucrReceiverElement.SetMeAsReceiver()
                 ucrBase.clsRsyntax.iCallType = 3
                 ucrBase.clsRsyntax.SetBaseROperator(clsDisplayDailyGraphOperator)
             Else
@@ -391,13 +459,10 @@ Public Class dlgDisplayDailyData
             End If
         End If
         StackingFunction()
-        FacetControl()
     End Sub
 
-    Private Sub ucrSelectorDisplayDailyClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDisplayDailyClimaticData.ControlValueChanged
-        clsDisplayDailyGraphFunction.AddParameter("data_name", Chr(34) & ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+    Private Sub ucrSelectorDisplayDailyClimaticData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDisplayDailyClimaticData.ControlValueChanged, ucrReceiverStations.ControlValueChanged
         StackingFunction()
-        FacetControl()
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary> 
@@ -421,27 +486,8 @@ Public Class dlgDisplayDailyData
         End If
     End Sub
 
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary> 
-    ''' If the Graph radio button is checked, adds the rows, facets and space parameters to the 
-    ''' facet function.
-    ''' If the radio button is unchecked, it removes these parameters.
-    ''' </summary>
-    '''--------------------------------------------------------------------------------------------
-    Private Sub FacetControl()
-        If rdoGraph.Checked AndAlso Not ucrReceiverStations.IsEmpty Then
-            clsFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), bIncludeArgumentName:=False, iPosition:=1)
-            clsFacetFunction.RemoveParameterByName("rows")
-            clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=1)
-            clsFacetFunction.AddParameter("space", Chr(34) & "fixed" & Chr(34), iPosition:=2)
-        Else
-            clsFacetFunction.RemoveParameterByName("facets")
-            clsFacetFunction.RemoveParameterByName("space")
-            clsFacetFunction.AddParameter("rows", "vars(variable)", iPosition:=1)
-        End If
-
-    End Sub
-    Private Sub ucrReceiverMultipleElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleElements.ControlValueChanged
+    Private Sub ucrReceiverMultipleElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleElements.ControlValueChanged, ucrReceiverStations.ControlValueChanged
+        SetFacetItems()
         StackingFunction()
     End Sub
 
@@ -449,7 +495,72 @@ Public Class dlgDisplayDailyData
         clsGgplotAesFunction.AddParameter("x", ucrReceiverDate.GetVariableNames(False), iPosition:=0)
     End Sub
 
-    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrReceiverMultipleElements.ControlValueChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrChkSum.ControlContentsChanged, ucrChkMax.ControlContentsChanged, ucrChkMin.ControlContentsChanged, ucrChkMean.ControlContentsChanged, ucrChkMedian.ControlContentsChanged, ucrChkIQR.ControlContentsChanged, ucrChkSumMissing.ControlContentsChanged
+    Private Sub ucrReceiverDate_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverStations.ControlContentsChanged, ucrReceiverDayOfYear.ControlContentsChanged, ucrReceiverMultipleElements.ControlContentsChanged, ucrNudUpperYaxis.ControlContentsChanged, ucrInputRugColour.ControlContentsChanged, ucrInputBarColour.ControlContentsChanged, ucrPnlFrequencyDisplay.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrChkSum.ControlContentsChanged, ucrChkMax.ControlContentsChanged, ucrChkMin.ControlContentsChanged, ucrChkMean.ControlContentsChanged, ucrChkMedian.ControlContentsChanged, ucrChkIQR.ControlContentsChanged, ucrChkSumMissing.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary> 
+    ''' Sets the facet combobox text:
+    ''' <list type="bullet">
+    '''     <item><description>
+    '''             If the station receiver is not empty and the multiple element receiver has more 
+    '''             one element then sets the facet combobox text to "Station-Element " and 
+    '''             "Element - station"
+    '''     </description></item><item><description>
+    '''             If the station receiver is not empty and the multiple element receiver has 
+    '''             less than 2 elements then sets the facet combobox text to "Station"
+    '''     </description></item><item><description>
+    '''             If the station receiver is empty and the multiple element receiver has 2 or 
+    '''             more elements then sets the facet combobox text to "Element"
+    '''     </description></item><item><description>
+    '''             If the station receiver is empty and the multiple element receiver has no 
+    '''             elements then sets the facet combobox text to "No Facets"
+    '''     </description></item>
+    ''' </list>   
+    ''' </summary>
+    '''--------------------------------------------------------------------------------------------
+    Private Sub SetFacetItems()
+        If Not ucrReceiverStations.IsEmpty AndAlso ucrReceiverMultipleElements.GetCount > 1 Then
+            ucrInputFacetBy.SetItems({"Station-Element", "Element-Station"})
+            ucrInputFacetBy.SetText("Station-Element")
+        ElseIf Not ucrReceiverStations.IsEmpty AndAlso ucrReceiverMultipleElements.GetCount <= 1 Then
+            ucrInputFacetBy.SetItems({"Station"})
+            ucrInputFacetBy.SetText("Station")
+        ElseIf ucrReceiverStations.IsEmpty AndAlso ucrReceiverMultipleElements.GetCount >= 1 Then
+            ucrInputFacetBy.SetItems({"Element"})
+            ucrInputFacetBy.SetText("Element")
+        Else
+            ucrInputFacetBy.SetItems({"No Facets"})
+            ucrInputFacetBy.SetText("No Facets")
+        End If
+    End Sub
+
+    Private Sub ucrInputFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFacetBy.ControlValueChanged
+        clsStationElemFacetOperator.ClearParameters()
+        Select Case ucrInputFacetBy.GetText()
+            Case "Station-Element"
+                clsStationElemFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=0)
+                clsStationElemFacetOperator.AddParameter("variable", "variable", iPosition:=1)
+            Case "Element-Station"
+                clsStationElemFacetOperator.AddParameter("variable", "variable", iPosition:=0)
+                clsStationElemFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=1)
+            Case "Station"
+                clsStationElemFacetOperator.AddParameter("First", "", iPosition:=0)
+                clsStationElemFacetOperator.AddParameter("station", ucrReceiverStations.GetVariableNames(False), iPosition:=1)
+            Case "Element"
+                clsStationElemFacetOperator.AddParameter("variable", "variable", iPosition:=1)
+                clsStationElemFacetOperator.AddParameter("First", "", iPosition:=0)
+        End Select
+
+        If ucrInputFacetBy.GetText() = "Station-Element" OrElse ucrInputFacetBy.GetText() = "Element-Station" Then
+            clsFacetFunction.AddParameter("labeller", clsRFunctionParameter:=clsLabelWrapGenFunction, iPosition:=3)
+        Else
+            clsFacetFunction.RemoveParameterByName("labeller")
+        End If
+    End Sub
+
+    Private Sub ucrSelectorDisplayDailyClimaticData_DataFrameChanged() Handles ucrSelectorDisplayDailyClimaticData.DataFrameChanged
+        clsGGplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsNAFilterOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
     End Sub
 End Class
