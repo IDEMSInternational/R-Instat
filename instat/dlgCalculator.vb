@@ -137,9 +137,9 @@ Public Class dlgCalculator
             Case "Logical and Symbols"
                 Me.Width = iBasicWidth * 1.4
             Case "Summary"
-                Me.Width = iBasicWidth * 1.43
+                Me.Width = iBasicWidth * 1.46
             Case "Strings (Character Columns)"
-                Me.Width = iBasicWidth * 1.47
+                Me.Width = iBasicWidth * 1.49
             Case "Factor"
                 Me.Width = iBasicWidth * 1.4
             Case "Probability"
@@ -147,11 +147,11 @@ Public Class dlgCalculator
             Case "Dates"
                 Me.Width = iBasicWidth * 1.3
             Case "Transform"
-                Me.Width = iBasicWidth * 1.35
+                Me.Width = iBasicWidth * 1.37
             Case "Circular"
                 Me.Width = iBasicWidth * 1.36
             Case "Wakefield"
-                Me.Width = iBasicWidth * 1.7
+                Me.Width = iBasicWidth * 1.73
             Case "Modifier"
                 Me.Width = iBasicWidth * 1.39
             Case "Symbols"
