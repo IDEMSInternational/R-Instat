@@ -583,8 +583,8 @@ Public Class dlgSeasonalPlot
     End Sub
 
     Private Sub UpdateSummaryParameters()
-        Dim strReferenceName As String = ""
-        Dim strEstimatesName As String = ""
+        Dim strReferenceName As String
+        Dim strEstimatesName As String
 
         strReferenceName = ucrReceiverReference.GetVariableNames(False)
         strEstimatesName = ucrReceiverEstimates.GetVariableNames(False)
