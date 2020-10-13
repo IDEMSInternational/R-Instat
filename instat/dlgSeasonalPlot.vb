@@ -729,8 +729,9 @@ Public Class dlgSeasonalPlot
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
-        ' Facets are handles manually since they could also be managed on a sub dialog.
-        ' The check for clsFacetWrapTildeOperator.clsParameters.Count = 0 ensures that facets added on a subdialog are not removed when ucrReceiverStation is empty.
+        ' Facets are handled manually since they could also be managed on a sub dialog.
+        ' The check for clsFacetWrapTildeOperator.clsParameters.Count = 0 ensures that facets added 
+        ' on a subdialog are not removed when ucrReceiverStation is empty.
         If ucrReceiverStation.IsEmpty AndAlso clsFacetWrapTildeOperator.clsParameters.Count = 0 Then
             clsPlusOperator.RemoveParameterByName("facets")
         Else
