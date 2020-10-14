@@ -23,7 +23,8 @@ Public Class dlgVisualizeData
     Private clsVisMissFunction As New RFunction
     Private clsVisGuessFunction As New RFunction
     Private clsCurrBaseFunction As New RFunction
-    Private dctPalette As Dictionary(Of String, String)
+    Dim dctPalette As New Dictionary(Of String, String)
+    Dim dctPaletteGuess As New Dictionary(Of String, String)
 
     Private Sub dlgVisualizeData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -74,11 +75,15 @@ Public Class dlgVisualizeData
         dctPalette.Add("default", Chr(34) & "default" & Chr(34))
         dctPalette.Add("qual", Chr(34) & "qual" & Chr(34))
         dctPalette.Add("cb_safe", Chr(34) & "cb_safe" & Chr(34))
+        ucrInputComboboxPalette.SetDropDownStyleAsNonEditable()
+        ucrInputComboboxPalette.SetItems(dctPalette)
 
         ucrInputComboboxPaletteGuess.SetParameter(New RParameter("palette", 1))
         dctPaletteGuess.Add("default", Chr(34) & "default" & Chr(34))
         dctPaletteGuess.Add("qual", Chr(34) & "qual" & Chr(34))
         dctPaletteGuess.Add("cb_safe", Chr(34) & "cb_safe" & Chr(34))
+        ucrInputComboboxPaletteGuess.SetDropDownStyleAsNonEditable()
+        ucrInputComboboxPaletteGuess.SetItems(dctPaletteGuess)
 
         ucrReceiverVisualizeData.SetParameter(New RParameter("x", 0))
         ucrReceiverVisualizeData.SetParameterIsRFunction()
@@ -147,6 +152,8 @@ Public Class dlgVisualizeData
         ucrSaveGraph.SetRCode(clsVisDatFunction, bReset)
         ucrChkSortVariables.SetRCode(clsVisDatFunction, bReset)
         ucrChkSortMiss.SetRCode(clsVisMissFunction, bReset)
+        ucrInputComboboxPalette.SetRCode(clsVisDatFunction, bReset)
+        ucrInputComboboxPaletteGuess.SetRCode(clsVisGuessFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
