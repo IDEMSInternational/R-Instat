@@ -40,6 +40,7 @@ Partial Class dlgVisualizeData
         Me.ucrSelectorVisualizeData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkSortMiss = New instat.ucrCheck()
+        Me.ucrInputComboboxPaletteGuess = New instat.ucrInputComboBox()
         CType(Me.ucrNudMaximumSize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -225,11 +226,22 @@ Partial Class dlgVisualizeData
         Me.ucrChkSortMiss.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkSortMiss.TabIndex = 19
         '
+        'ucrInputComboboxPaletteGuess
+        '
+        Me.ucrInputComboboxPaletteGuess.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboboxPaletteGuess.GetSetSelectedIndex = -1
+        Me.ucrInputComboboxPaletteGuess.IsReadOnly = False
+        Me.ucrInputComboboxPaletteGuess.Location = New System.Drawing.Point(51, 272)
+        Me.ucrInputComboboxPaletteGuess.Name = "ucrInputComboboxPaletteGuess"
+        Me.ucrInputComboboxPaletteGuess.Size = New System.Drawing.Size(72, 21)
+        Me.ucrInputComboboxPaletteGuess.TabIndex = 20
+        '
         'dlgVisualizeData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 413)
+        Me.Controls.Add(Me.ucrInputComboboxPaletteGuess)
         Me.Controls.Add(Me.ucrChkSortMiss)
         Me.Controls.Add(Me.ucrChkSortVariables)
         Me.Controls.Add(Me.lblMillionDataPoints)
@@ -278,4 +290,5 @@ Partial Class dlgVisualizeData
     Friend WithEvents ucrNudMaximumSize As NumericUpDown
     Friend WithEvents ucrChkSortVariables As ucrCheck
     Friend WithEvents ucrChkSortMiss As ucrCheck
+    Friend WithEvents ucrInputComboboxPaletteGuess As ucrInputComboBox
 End Class
