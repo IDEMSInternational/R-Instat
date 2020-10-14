@@ -23,6 +23,7 @@ Public Class dlgVisualizeData
     Private clsVisMissFunction As New RFunction
     Private clsVisGuessFunction As New RFunction
     Private clsCurrBaseFunction As New RFunction
+    Private dctPalette As Dictionary(Of String, String)
 
     Private Sub dlgVisualizeData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -65,6 +66,10 @@ Public Class dlgVisualizeData
         ucrChkSortVariables.SetText("Sort Variables:")
         ucrChkSortVariables.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
+        ucrChkSortMiss.SetParameter(New RParameter("sort_miss", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
+        ucrChkSortMiss.SetText("Sort Variables:")
+        ucrChkSortMiss.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
 
         ucrReceiverVisualizeData.SetParameter(New RParameter("x", 0))
         ucrReceiverVisualizeData.SetParameterIsRFunction()
@@ -73,6 +78,7 @@ Public Class dlgVisualizeData
         ucrReceiverVisualizeData.SetMeAsReceiver()
 
         ucrInputComboboxPalette.SetLinkedDisplayControl(lblPalette)
+        ucrInputComboboxPaletteGuess.SetLinkedDisplayControl(lblPaltte)
 
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -123,7 +129,6 @@ Public Class dlgVisualizeData
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0), 1)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0), 2)
-        ucrChkSortVariables.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("sort_miss", 2), 1)
         ucrSaveGraph.AddAdditionalRCode(clsVisMissFunction, iAdditionalPairNo:=1)
         ucrSaveGraph.AddAdditionalRCode(clsVisGuessFunction, iAdditionalPairNo:=2)
 
@@ -132,6 +137,7 @@ Public Class dlgVisualizeData
         ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
         ucrSaveGraph.SetRCode(clsVisDatFunction, bReset)
         ucrChkSortVariables.SetRCode(clsVisDatFunction, bReset)
+        ucrChkSortMiss.SetRCode(clsVisMissFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()

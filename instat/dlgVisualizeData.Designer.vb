@@ -31,6 +31,8 @@ Partial Class dlgVisualizeData
         Me.ucrNudMaximumSize = New System.Windows.Forms.NumericUpDown()
         Me.lblMaximumSize = New System.Windows.Forms.Label()
         Me.lblMillionDataPoints = New System.Windows.Forms.Label()
+        Me.ucrInputComboboxPaletteGuess = New instat.ucrInputComboBox()
+        Me.ucrChkSortMiss = New instat.ucrCheck()
         Me.ucrChkSortVariables = New instat.ucrCheck()
         Me.ucrInputComboboxPalette = New instat.ucrInputComboBox()
         Me.ucrReceiverVisualizeData = New instat.ucrReceiverMultiple()
@@ -39,8 +41,7 @@ Partial Class dlgVisualizeData
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrSelectorVisualizeData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkSortMiss = New instat.ucrCheck()
-        Me.ucrInputComboboxPaletteGuess = New instat.ucrInputComboBox()
+        Me.lblPaltte = New System.Windows.Forms.Label()
         CType(Me.ucrNudMaximumSize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -148,6 +149,24 @@ Partial Class dlgVisualizeData
         Me.lblMillionDataPoints.TabIndex = 16
         Me.lblMillionDataPoints.Text = "Million Data Points"
         '
+        'ucrInputComboboxPaletteGuess
+        '
+        Me.ucrInputComboboxPaletteGuess.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboboxPaletteGuess.GetSetSelectedIndex = -1
+        Me.ucrInputComboboxPaletteGuess.IsReadOnly = False
+        Me.ucrInputComboboxPaletteGuess.Location = New System.Drawing.Point(51, 272)
+        Me.ucrInputComboboxPaletteGuess.Name = "ucrInputComboboxPaletteGuess"
+        Me.ucrInputComboboxPaletteGuess.Size = New System.Drawing.Size(72, 21)
+        Me.ucrInputComboboxPaletteGuess.TabIndex = 20
+        '
+        'ucrChkSortMiss
+        '
+        Me.ucrChkSortMiss.Checked = False
+        Me.ucrChkSortMiss.Location = New System.Drawing.Point(10, 247)
+        Me.ucrChkSortMiss.Name = "ucrChkSortMiss"
+        Me.ucrChkSortMiss.Size = New System.Drawing.Size(145, 20)
+        Me.ucrChkSortMiss.TabIndex = 19
+        '
         'ucrChkSortVariables
         '
         Me.ucrChkSortVariables.Checked = False
@@ -218,29 +237,21 @@ Partial Class dlgVisualizeData
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
         '
-        'ucrChkSortMiss
+        'lblPaltte
         '
-        Me.ucrChkSortMiss.Checked = False
-        Me.ucrChkSortMiss.Location = New System.Drawing.Point(10, 247)
-        Me.ucrChkSortMiss.Name = "ucrChkSortMiss"
-        Me.ucrChkSortMiss.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkSortMiss.TabIndex = 19
-        '
-        'ucrInputComboboxPaletteGuess
-        '
-        Me.ucrInputComboboxPaletteGuess.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboboxPaletteGuess.GetSetSelectedIndex = -1
-        Me.ucrInputComboboxPaletteGuess.IsReadOnly = False
-        Me.ucrInputComboboxPaletteGuess.Location = New System.Drawing.Point(51, 272)
-        Me.ucrInputComboboxPaletteGuess.Name = "ucrInputComboboxPaletteGuess"
-        Me.ucrInputComboboxPaletteGuess.Size = New System.Drawing.Size(72, 21)
-        Me.ucrInputComboboxPaletteGuess.TabIndex = 20
+        Me.lblPaltte.AutoSize = True
+        Me.lblPaltte.Location = New System.Drawing.Point(4, 277)
+        Me.lblPaltte.Name = "lblPaltte"
+        Me.lblPaltte.Size = New System.Drawing.Size(43, 13)
+        Me.lblPaltte.TabIndex = 21
+        Me.lblPaltte.Text = "Palette:"
         '
         'dlgVisualizeData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 413)
+        Me.Controls.Add(Me.lblPaltte)
         Me.Controls.Add(Me.ucrInputComboboxPaletteGuess)
         Me.Controls.Add(Me.ucrChkSortMiss)
         Me.Controls.Add(Me.ucrChkSortVariables)
@@ -291,4 +302,5 @@ Partial Class dlgVisualizeData
     Friend WithEvents ucrChkSortVariables As ucrCheck
     Friend WithEvents ucrChkSortMiss As ucrCheck
     Friend WithEvents ucrInputComboboxPaletteGuess As ucrInputComboBox
+    Friend WithEvents lblPaltte As Label
 End Class
