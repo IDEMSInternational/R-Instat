@@ -33,7 +33,9 @@ Partial Class dlgVisualizeData
         Me.rdoWholeDataFrame = New System.Windows.Forms.RadioButton()
         Me.rdoSelectedColumn = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverVisualizeData = New instat.ucrReceiverMultiple()
-        Me.UcrCheck1 = New instat.ucrCheck()
+        Me.ucrChkSortValues = New instat.ucrCheck()
+        Me.ucrInputComboboxPalette = New instat.ucrInputComboBox()
+        Me.lblPalette = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -158,20 +160,41 @@ Partial Class dlgVisualizeData
         Me.ucrReceiverVisualizeData.TabIndex = 8
         Me.ucrReceiverVisualizeData.ucrSelector = Nothing
         '
-        'UcrCheck1
+        'ucrChkSortValues
         '
-        Me.UcrCheck1.Checked = False
-        Me.UcrCheck1.Location = New System.Drawing.Point(10, 243)
-        Me.UcrCheck1.Name = "UcrCheck1"
-        Me.UcrCheck1.Size = New System.Drawing.Size(125, 20)
-        Me.UcrCheck1.TabIndex = 11
+        Me.ucrChkSortValues.Checked = False
+        Me.ucrChkSortValues.Location = New System.Drawing.Point(10, 243)
+        Me.ucrChkSortValues.Name = "ucrChkSortValues"
+        Me.ucrChkSortValues.Size = New System.Drawing.Size(125, 20)
+        Me.ucrChkSortValues.TabIndex = 11
+        '
+        'ucrInputComboboxPalette
+        '
+        Me.ucrInputComboboxPalette.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboboxPalette.GetSetSelectedIndex = -1
+        Me.ucrInputComboboxPalette.IsReadOnly = False
+        Me.ucrInputComboboxPalette.Location = New System.Drawing.Point(52, 273)
+        Me.ucrInputComboboxPalette.Name = "ucrInputComboboxPalette"
+        Me.ucrInputComboboxPalette.Size = New System.Drawing.Size(103, 21)
+        Me.ucrInputComboboxPalette.TabIndex = 12
+        '
+        'lblPalette
+        '
+        Me.lblPalette.AutoSize = True
+        Me.lblPalette.Location = New System.Drawing.Point(4, 276)
+        Me.lblPalette.Name = "lblPalette"
+        Me.lblPalette.Size = New System.Drawing.Size(43, 13)
+        Me.lblPalette.TabIndex = 13
+        Me.lblPalette.Text = "Palette:"
         '
         'dlgVisualizeData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 415)
-        Me.Controls.Add(Me.UcrCheck1)
+        Me.Controls.Add(Me.lblPalette)
+        Me.Controls.Add(Me.ucrInputComboboxPalette)
+        Me.Controls.Add(Me.ucrChkSortValues)
         Me.Controls.Add(Me.ucrReceiverVisualizeData)
         Me.Controls.Add(Me.rdoSelectedColumn)
         Me.Controls.Add(Me.rdoWholeDataFrame)
@@ -205,5 +228,7 @@ Partial Class dlgVisualizeData
     Friend WithEvents rdoWholeDataFrame As RadioButton
     Friend WithEvents rdoSelectedColumn As RadioButton
     Friend WithEvents ucrReceiverVisualizeData As ucrReceiverMultiple
-    Friend WithEvents UcrCheck1 As ucrCheck
+    Friend WithEvents ucrChkSortValues As ucrCheck
+    Friend WithEvents ucrInputComboboxPalette As ucrInputComboBox
+    Friend WithEvents lblPalette As Label
 End Class

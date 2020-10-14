@@ -172,8 +172,4 @@ Public Class dlgVisualizeData
     Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrSelectorVisualizeData.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged
         AddRemoveDataHideOptionsButtons()
     End Sub
-
-    Private Sub rdoVisDat_CheckedChanged(sender As Object, e As EventArgs) Handles rdoVisDat.CheckedChanged
-
-    End Sub
 End Class
