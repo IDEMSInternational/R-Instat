@@ -28,9 +28,9 @@ Partial Class dlgVisualizeData
         Me.rdoWholeDataFrame = New System.Windows.Forms.RadioButton()
         Me.rdoSelectedColumn = New System.Windows.Forms.RadioButton()
         Me.lblPalette = New System.Windows.Forms.Label()
-        Me.ucrNudMaximumSize = New System.Windows.Forms.NumericUpDown()
         Me.lblMaximumSize = New System.Windows.Forms.Label()
         Me.lblMillionDataPoints = New System.Windows.Forms.Label()
+        Me.lblPaltte = New System.Windows.Forms.Label()
         Me.ucrInputComboboxPaletteGuess = New instat.ucrInputComboBox()
         Me.ucrChkSortMiss = New instat.ucrCheck()
         Me.ucrChkSortVariables = New instat.ucrCheck()
@@ -41,8 +41,7 @@ Partial Class dlgVisualizeData
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrSelectorVisualizeData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblPaltte = New System.Windows.Forms.Label()
-        CType(Me.ucrNudMaximumSize, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ucrNudMaximumSize = New instat.ucrNud()
         Me.SuspendLayout()
         '
         'rdoVisDat
@@ -124,13 +123,6 @@ Partial Class dlgVisualizeData
         Me.lblPalette.TabIndex = 13
         Me.lblPalette.Text = "Palette:"
         '
-        'ucrNudMaximumSize
-        '
-        Me.ucrNudMaximumSize.Location = New System.Drawing.Point(86, 301)
-        Me.ucrNudMaximumSize.Name = "ucrNudMaximumSize"
-        Me.ucrNudMaximumSize.Size = New System.Drawing.Size(58, 20)
-        Me.ucrNudMaximumSize.TabIndex = 14
-        '
         'lblMaximumSize
         '
         Me.lblMaximumSize.AutoSize = True
@@ -148,6 +140,15 @@ Partial Class dlgVisualizeData
         Me.lblMillionDataPoints.Size = New System.Drawing.Size(94, 13)
         Me.lblMillionDataPoints.TabIndex = 16
         Me.lblMillionDataPoints.Text = "Million Data Points"
+        '
+        'lblPaltte
+        '
+        Me.lblPaltte.AutoSize = True
+        Me.lblPaltte.Location = New System.Drawing.Point(4, 277)
+        Me.lblPaltte.Name = "lblPaltte"
+        Me.lblPaltte.Size = New System.Drawing.Size(43, 13)
+        Me.lblPaltte.TabIndex = 21
+        Me.lblPaltte.Text = "Palette:"
         '
         'ucrInputComboboxPaletteGuess
         '
@@ -237,27 +238,30 @@ Partial Class dlgVisualizeData
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
         '
-        'lblPaltte
+        'ucrNudMaximumSize
         '
-        Me.lblPaltte.AutoSize = True
-        Me.lblPaltte.Location = New System.Drawing.Point(4, 277)
-        Me.lblPaltte.Name = "lblPaltte"
-        Me.lblPaltte.Size = New System.Drawing.Size(43, 13)
-        Me.lblPaltte.TabIndex = 21
-        Me.lblPaltte.Text = "Palette:"
+        Me.ucrNudMaximumSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaximumSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudMaximumSize.Location = New System.Drawing.Point(79, 302)
+        Me.ucrNudMaximumSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMaximumSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMaximumSize.Name = "ucrNudMaximumSize"
+        Me.ucrNudMaximumSize.Size = New System.Drawing.Size(63, 20)
+        Me.ucrNudMaximumSize.TabIndex = 22
+        Me.ucrNudMaximumSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgVisualizeData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 413)
+        Me.Controls.Add(Me.ucrNudMaximumSize)
         Me.Controls.Add(Me.lblPaltte)
         Me.Controls.Add(Me.ucrInputComboboxPaletteGuess)
         Me.Controls.Add(Me.ucrChkSortMiss)
         Me.Controls.Add(Me.ucrChkSortVariables)
         Me.Controls.Add(Me.lblMillionDataPoints)
         Me.Controls.Add(Me.lblMaximumSize)
-        Me.Controls.Add(Me.ucrNudMaximumSize)
         Me.Controls.Add(Me.lblPalette)
         Me.Controls.Add(Me.ucrInputComboboxPalette)
         Me.Controls.Add(Me.ucrReceiverVisualizeData)
@@ -277,7 +281,6 @@ Partial Class dlgVisualizeData
         Me.Name = "dlgVisualizeData"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Visualise Data"
-        CType(Me.ucrNudMaximumSize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -298,9 +301,9 @@ Partial Class dlgVisualizeData
     Friend WithEvents lblPalette As Label
     Friend WithEvents lblMillionDataPoints As Label
     Friend WithEvents lblMaximumSize As Label
-    Friend WithEvents ucrNudMaximumSize As NumericUpDown
     Friend WithEvents ucrChkSortVariables As ucrCheck
     Friend WithEvents ucrChkSortMiss As ucrCheck
     Friend WithEvents ucrInputComboboxPaletteGuess As ucrInputComboBox
     Friend WithEvents lblPaltte As Label
+    Friend WithEvents ucrNudMaximumSize As ucrNud
 End Class

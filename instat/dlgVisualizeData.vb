@@ -67,6 +67,7 @@ Public Class dlgVisualizeData
         ucrChkSortVariables.SetText("Sort Variables:")
         ucrChkSortVariables.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
+
         ucrChkSortMiss.SetParameter(New RParameter("sort_miss", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
         ucrChkSortMiss.SetText("Sort Variables:")
         ucrChkSortMiss.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -85,14 +86,16 @@ Public Class dlgVisualizeData
         ucrInputComboboxPaletteGuess.SetDropDownStyleAsNonEditable()
         ucrInputComboboxPaletteGuess.SetItems(dctPaletteGuess)
 
+        ucrNudMaximumSize.SetParameter(New RParameter("large_data_size", 4))
+
         ucrReceiverVisualizeData.SetParameter(New RParameter("x", 0))
         ucrReceiverVisualizeData.SetParameterIsRFunction()
         ucrReceiverVisualizeData.Selector = ucrSelectorVisualizeData
         ucrReceiverVisualizeData.bForceAsDataFrame = True
         ucrReceiverVisualizeData.SetMeAsReceiver()
 
-        ucrInputComboboxPalette.SetLinkedDisplayControl(lblPalette)
-        ucrInputComboboxPaletteGuess.SetLinkedDisplayControl(lblPaltte)
+        ucrInputComboboxPalette.SetLinkedDisplayControl(lblPaltte)
+        ucrInputComboboxPaletteGuess.SetLinkedDisplayControl(lblPalette)
 
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -143,6 +146,8 @@ Public Class dlgVisualizeData
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0), 1)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0), 2)
+        ucrNudMaximumSize.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("large_data_size", 5), iAdditionalPairNo:=1)
+        ucrNudMaximumSize.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("large_data_size"))
         ucrSaveGraph.AddAdditionalRCode(clsVisMissFunction, iAdditionalPairNo:=1)
         ucrSaveGraph.AddAdditionalRCode(clsVisGuessFunction, iAdditionalPairNo:=2)
 
@@ -154,6 +159,7 @@ Public Class dlgVisualizeData
         ucrChkSortMiss.SetRCode(clsVisMissFunction, bReset)
         ucrInputComboboxPalette.SetRCode(clsVisDatFunction, bReset)
         ucrInputComboboxPaletteGuess.SetRCode(clsVisGuessFunction, bReset)
+        ucrNudMaximumSize.SetRCode(clsVisDatFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
