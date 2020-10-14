@@ -96,6 +96,7 @@ Partial Class dlgExportDataset
         Me.ucrFilePath.FolderBrowse = False
         resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
         Me.ucrFilePath.Name = "ucrFilePath"
+        Me.ucrFilePath.SelectedFileFilterIndex = 1
         '
         'ucrSelectorDataFrames
         '
