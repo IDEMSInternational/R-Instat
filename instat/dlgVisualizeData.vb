@@ -70,6 +70,15 @@ Public Class dlgVisualizeData
         ucrChkSortMiss.SetText("Sort Variables:")
         ucrChkSortMiss.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
+        ucrInputComboboxPalette.SetParameter(New RParameter("palette", 2))
+        dctPalette.Add("default", Chr(34) & "default" & Chr(34))
+        dctPalette.Add("qual", Chr(34) & "qual" & Chr(34))
+        dctPalette.Add("cb_safe", Chr(34) & "cb_safe" & Chr(34))
+
+        ucrInputComboboxPaletteGuess.SetParameter(New RParameter("palette", 1))
+        dctPaletteGuess.Add("default", Chr(34) & "default" & Chr(34))
+        dctPaletteGuess.Add("qual", Chr(34) & "qual" & Chr(34))
+        dctPaletteGuess.Add("cb_safe", Chr(34) & "cb_safe" & Chr(34))
 
         ucrReceiverVisualizeData.SetParameter(New RParameter("x", 0))
         ucrReceiverVisualizeData.SetParameterIsRFunction()
