@@ -50,9 +50,9 @@ Public Class dlgVisualizeData
         ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisMiss, "vis_miss")
         ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisGuess, "vis_guess")
 
-        ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortVariables, ucrInputComboboxPalette, ucrNudMaximumSize, {rdoVisDat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortVariables, ucrNudMaximumSize, {rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlVisualizeData.AddToLinkedControls(({ucrInputComboboxPalette, ucrNudMaximumSize}), {rdoVisGuess}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortVariables, {rdoVisDat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlVisualizeData.AddToLinkedControls(ucrInputComboboxPalette, {rdoVisDat, rdoVisGuess}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortMiss, {rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
         ucrPnlSelectData.AddRadioButton(rdoSelectedColumn)
@@ -60,7 +60,10 @@ Public Class dlgVisualizeData
         ucrPnlSelectData.AddParameterPresentCondition(rdoWholeDataFrame, "data")
         ucrPnlSelectData.AddParameterPresentCondition(rdoSelectedColumn, "x")
 
+        ucrChkSortVariables.SetParameter(New RParameter("sort_type", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
         ucrChkSortVariables.SetText("Sort Variables:")
+        ucrChkSortVariables.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
 
         ucrReceiverVisualizeData.SetParameter(New RParameter("x", 0))
         ucrReceiverVisualizeData.SetParameterIsRFunction()
@@ -92,7 +95,7 @@ Public Class dlgVisualizeData
         clsVisDatFunction.SetPackageName("visdat")
         clsVisDatFunction.SetRCommand("vis_dat")
         clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-        clsVisDatFunction.AddParameter("sort_type", "TRUE", iPosition:=1)
+        clsVisDatFunction.AddParameter("sort_type", "FALSE", iPosition:=1)
         clsVisDatFunction.AddParameter("palette", Chr(34) & "default" & Chr(34), iPosition:=2)
         clsVisDatFunction.AddParameter("warn_large_data", "TRUE", iPosition:=3)
         clsVisDatFunction.AddParameter("large_data_size", 900000, iPosition:=4)
@@ -119,6 +122,7 @@ Public Class dlgVisualizeData
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0), 1)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0), 2)
+        ucrChkSortVariables.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("sort_miss", 2), 1)
         ucrSaveGraph.AddAdditionalRCode(clsVisMissFunction, iAdditionalPairNo:=1)
         ucrSaveGraph.AddAdditionalRCode(clsVisGuessFunction, iAdditionalPairNo:=2)
 
@@ -126,6 +130,7 @@ Public Class dlgVisualizeData
         ucrPnlVisualizeData.SetRCode(clsCurrBaseFunction, bReset)
         ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
         ucrSaveGraph.SetRCode(clsVisDatFunction, bReset)
+        ucrChkSortVariables.SetRCode(clsVisDatFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()

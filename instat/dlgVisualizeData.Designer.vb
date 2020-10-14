@@ -31,7 +31,7 @@ Partial Class dlgVisualizeData
         Me.ucrNudMaximumSize = New System.Windows.Forms.NumericUpDown()
         Me.lblMaximumSize = New System.Windows.Forms.Label()
         Me.lblMillionDataPoints = New System.Windows.Forms.Label()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.ucrChkSortVariables = New instat.ucrCheck()
         Me.ucrInputComboboxPalette = New instat.ucrInputComboBox()
         Me.ucrReceiverVisualizeData = New instat.ucrReceiverMultiple()
         Me.ucrPnlSelectData = New instat.UcrPanel()
@@ -39,9 +39,8 @@ Partial Class dlgVisualizeData
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrSelectorVisualizeData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkSortVariables = New instat.ucrCheck()
+        Me.ucrChkSortMiss = New instat.ucrCheck()
         CType(Me.ucrNudMaximumSize, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'rdoVisDat
@@ -125,7 +124,7 @@ Partial Class dlgVisualizeData
         '
         'ucrNudMaximumSize
         '
-        Me.ucrNudMaximumSize.Location = New System.Drawing.Point(87, 300)
+        Me.ucrNudMaximumSize.Location = New System.Drawing.Point(86, 301)
         Me.ucrNudMaximumSize.Name = "ucrNudMaximumSize"
         Me.ucrNudMaximumSize.Size = New System.Drawing.Size(58, 20)
         Me.ucrNudMaximumSize.TabIndex = 14
@@ -142,27 +141,28 @@ Partial Class dlgVisualizeData
         'lblMillionDataPoints
         '
         Me.lblMillionDataPoints.AutoSize = True
-        Me.lblMillionDataPoints.Location = New System.Drawing.Point(71, 328)
+        Me.lblMillionDataPoints.Location = New System.Drawing.Point(148, 304)
         Me.lblMillionDataPoints.Name = "lblMillionDataPoints"
-        Me.lblMillionDataPoints.Size = New System.Drawing.Size(97, 13)
+        Me.lblMillionDataPoints.Size = New System.Drawing.Size(94, 13)
         Me.lblMillionDataPoints.TabIndex = 16
-        Me.lblMillionDataPoints.Text = "Million Data Points:"
+        Me.lblMillionDataPoints.Text = "Million Data Points"
         '
-        'NumericUpDown1
+        'ucrChkSortVariables
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(7, 323)
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(58, 20)
-        Me.NumericUpDown1.TabIndex = 17
+        Me.ucrChkSortVariables.Checked = False
+        Me.ucrChkSortVariables.Location = New System.Drawing.Point(10, 247)
+        Me.ucrChkSortVariables.Name = "ucrChkSortVariables"
+        Me.ucrChkSortVariables.Size = New System.Drawing.Size(145, 20)
+        Me.ucrChkSortVariables.TabIndex = 18
         '
         'ucrInputComboboxPalette
         '
         Me.ucrInputComboboxPalette.AddQuotesIfUnrecognised = True
         Me.ucrInputComboboxPalette.GetSetSelectedIndex = -1
         Me.ucrInputComboboxPalette.IsReadOnly = False
-        Me.ucrInputComboboxPalette.Location = New System.Drawing.Point(52, 273)
+        Me.ucrInputComboboxPalette.Location = New System.Drawing.Point(51, 272)
         Me.ucrInputComboboxPalette.Name = "ucrInputComboboxPalette"
-        Me.ucrInputComboboxPalette.Size = New System.Drawing.Size(103, 21)
+        Me.ucrInputComboboxPalette.Size = New System.Drawing.Size(72, 21)
         Me.ucrInputComboboxPalette.TabIndex = 12
         '
         'ucrReceiverVisualizeData
@@ -193,7 +193,7 @@ Partial Class dlgVisualizeData
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(4, 346)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(4, 330)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(264, 24)
@@ -212,26 +212,26 @@ Partial Class dlgVisualizeData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(4, 374)
+        Me.ucrBase.Location = New System.Drawing.Point(4, 358)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
         '
-        'ucrChkSortVariables
+        'ucrChkSortMiss
         '
-        Me.ucrChkSortVariables.Checked = False
-        Me.ucrChkSortVariables.Location = New System.Drawing.Point(10, 247)
-        Me.ucrChkSortVariables.Name = "ucrChkSortVariables"
-        Me.ucrChkSortVariables.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkSortVariables.TabIndex = 18
+        Me.ucrChkSortMiss.Checked = False
+        Me.ucrChkSortMiss.Location = New System.Drawing.Point(10, 247)
+        Me.ucrChkSortMiss.Name = "ucrChkSortMiss"
+        Me.ucrChkSortMiss.Size = New System.Drawing.Size(145, 20)
+        Me.ucrChkSortMiss.TabIndex = 19
         '
         'dlgVisualizeData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 427)
+        Me.ClientSize = New System.Drawing.Size(417, 413)
+        Me.Controls.Add(Me.ucrChkSortMiss)
         Me.Controls.Add(Me.ucrChkSortVariables)
-        Me.Controls.Add(Me.NumericUpDown1)
         Me.Controls.Add(Me.lblMillionDataPoints)
         Me.Controls.Add(Me.lblMaximumSize)
         Me.Controls.Add(Me.ucrNudMaximumSize)
@@ -255,7 +255,6 @@ Partial Class dlgVisualizeData
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Visualise Data"
         CType(Me.ucrNudMaximumSize, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -274,9 +273,9 @@ Partial Class dlgVisualizeData
     Friend WithEvents ucrReceiverVisualizeData As ucrReceiverMultiple
     Friend WithEvents ucrInputComboboxPalette As ucrInputComboBox
     Friend WithEvents lblPalette As Label
-    Friend WithEvents NumericUpDown1 As NumericUpDown
     Friend WithEvents lblMillionDataPoints As Label
     Friend WithEvents lblMaximumSize As Label
     Friend WithEvents ucrNudMaximumSize As NumericUpDown
     Friend WithEvents ucrChkSortVariables As ucrCheck
+    Friend WithEvents ucrChkSortMiss As ucrCheck
 End Class
