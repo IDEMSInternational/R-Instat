@@ -50,8 +50,9 @@ Public Class dlgVisualizeData
         ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisMiss, "vis_miss")
         ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisGuess, "vis_guess")
 
-        ucrPnlVisualizeData.AddToLinkedControls(({ucrChkSortVariables, ucrInputComboboxPalette, ucrNudMaximumSize}), {rdoVisDat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        'ucrPnlVisualizeData.AddToLinkedControls(({ucrChkSortVariables, ucrInputComboboxPalette, ucrNudMaximumSize}), {rdoVisDat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(({ucrChkSortVariables, ucrNudMaximumSize}), {rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlVisualizeData.AddToLinkedControls(({ucrInputComboboxPalette, ucrNudMaximumSize}), {rdoVisGuess}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
         ucrPnlSelectData.AddRadioButton(rdoSelectedColumn)
@@ -66,6 +67,8 @@ Public Class dlgVisualizeData
         ucrReceiverVisualizeData.Selector = ucrSelectorVisualizeData
         ucrReceiverVisualizeData.bForceAsDataFrame = True
         ucrReceiverVisualizeData.SetMeAsReceiver()
+
+        ucrInputComboboxPalette.SetLinkedDisplayControl(lblPalette)
 
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 

@@ -22,60 +22,27 @@ Partial Class dlgVisualizeData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorVisualizeData = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrSaveGraph = New instat.ucrSave()
-        Me.ucrPnlVisualizeData = New instat.UcrPanel()
         Me.rdoVisDat = New System.Windows.Forms.RadioButton()
         Me.rdoVisMiss = New System.Windows.Forms.RadioButton()
         Me.rdoVisGuess = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlSelectData = New instat.UcrPanel()
         Me.rdoWholeDataFrame = New System.Windows.Forms.RadioButton()
         Me.rdoSelectedColumn = New System.Windows.Forms.RadioButton()
-        Me.ucrReceiverVisualizeData = New instat.ucrReceiverMultiple()
-        Me.ucrChkSortVariables = New instat.ucrCheck()
-        Me.ucrInputComboboxPalette = New instat.ucrInputComboBox()
         Me.lblPalette = New System.Windows.Forms.Label()
         Me.ucrNudMaximumSize = New System.Windows.Forms.NumericUpDown()
         Me.lblMaximumSize = New System.Windows.Forms.Label()
         Me.lblMillionDataPoints = New System.Windows.Forms.Label()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.ucrInputComboboxPalette = New instat.ucrInputComboBox()
+        Me.ucrReceiverVisualizeData = New instat.ucrReceiverMultiple()
+        Me.ucrPnlSelectData = New instat.UcrPanel()
+        Me.ucrPnlVisualizeData = New instat.UcrPanel()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrSelectorVisualizeData = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkSortVariables = New instat.ucrCheck()
         CType(Me.ucrNudMaximumSize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(4, 374)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
-        '
-        'ucrSelectorVisualizeData
-        '
-        Me.ucrSelectorVisualizeData.bDropUnusedFilterLevels = False
-        Me.ucrSelectorVisualizeData.bShowHiddenColumns = False
-        Me.ucrSelectorVisualizeData.bUseCurrentFilter = True
-        Me.ucrSelectorVisualizeData.Location = New System.Drawing.Point(10, 50)
-        Me.ucrSelectorVisualizeData.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorVisualizeData.Name = "ucrSelectorVisualizeData"
-        Me.ucrSelectorVisualizeData.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorVisualizeData.TabIndex = 4
-        '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(4, 346)
-        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(264, 24)
-        Me.ucrSaveGraph.TabIndex = 9
-        '
-        'ucrPnlVisualizeData
-        '
-        Me.ucrPnlVisualizeData.Location = New System.Drawing.Point(44, 1)
-        Me.ucrPnlVisualizeData.Name = "ucrPnlVisualizeData"
-        Me.ucrPnlVisualizeData.Size = New System.Drawing.Size(324, 46)
-        Me.ucrPnlVisualizeData.TabIndex = 0
         '
         'rdoVisDat
         '
@@ -125,13 +92,6 @@ Partial Class dlgVisualizeData
         Me.rdoVisGuess.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoVisGuess.UseVisualStyleBackColor = True
         '
-        'ucrPnlSelectData
-        '
-        Me.ucrPnlSelectData.Location = New System.Drawing.Point(235, 80)
-        Me.ucrPnlSelectData.Name = "ucrPnlSelectData"
-        Me.ucrPnlSelectData.Size = New System.Drawing.Size(133, 40)
-        Me.ucrPnlSelectData.TabIndex = 5
-        '
         'rdoWholeDataFrame
         '
         Me.rdoWholeDataFrame.AutoSize = True
@@ -153,36 +113,6 @@ Partial Class dlgVisualizeData
         Me.rdoSelectedColumn.TabStop = True
         Me.rdoSelectedColumn.Text = "Selected Variables"
         Me.rdoSelectedColumn.UseVisualStyleBackColor = True
-        '
-        'ucrReceiverVisualizeData
-        '
-        Me.ucrReceiverVisualizeData.frmParent = Me
-        Me.ucrReceiverVisualizeData.Location = New System.Drawing.Point(243, 130)
-        Me.ucrReceiverVisualizeData.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverVisualizeData.Name = "ucrReceiverVisualizeData"
-        Me.ucrReceiverVisualizeData.Selector = Nothing
-        Me.ucrReceiverVisualizeData.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverVisualizeData.strNcFilePath = ""
-        Me.ucrReceiverVisualizeData.TabIndex = 8
-        Me.ucrReceiverVisualizeData.ucrSelector = Nothing
-        '
-        'ucrChkSortVariables
-        '
-        Me.ucrChkSortVariables.Checked = False
-        Me.ucrChkSortVariables.Location = New System.Drawing.Point(10, 243)
-        Me.ucrChkSortVariables.Name = "ucrChkSortVariables"
-        Me.ucrChkSortVariables.Size = New System.Drawing.Size(125, 20)
-        Me.ucrChkSortVariables.TabIndex = 11
-        '
-        'ucrInputComboboxPalette
-        '
-        Me.ucrInputComboboxPalette.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboboxPalette.GetSetSelectedIndex = -1
-        Me.ucrInputComboboxPalette.IsReadOnly = False
-        Me.ucrInputComboboxPalette.Location = New System.Drawing.Point(52, 273)
-        Me.ucrInputComboboxPalette.Name = "ucrInputComboboxPalette"
-        Me.ucrInputComboboxPalette.Size = New System.Drawing.Size(103, 21)
-        Me.ucrInputComboboxPalette.TabIndex = 12
         '
         'lblPalette
         '
@@ -225,18 +155,88 @@ Partial Class dlgVisualizeData
         Me.NumericUpDown1.Size = New System.Drawing.Size(58, 20)
         Me.NumericUpDown1.TabIndex = 17
         '
+        'ucrInputComboboxPalette
+        '
+        Me.ucrInputComboboxPalette.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboboxPalette.GetSetSelectedIndex = -1
+        Me.ucrInputComboboxPalette.IsReadOnly = False
+        Me.ucrInputComboboxPalette.Location = New System.Drawing.Point(52, 273)
+        Me.ucrInputComboboxPalette.Name = "ucrInputComboboxPalette"
+        Me.ucrInputComboboxPalette.Size = New System.Drawing.Size(103, 21)
+        Me.ucrInputComboboxPalette.TabIndex = 12
+        '
+        'ucrReceiverVisualizeData
+        '
+        Me.ucrReceiverVisualizeData.frmParent = Me
+        Me.ucrReceiverVisualizeData.Location = New System.Drawing.Point(243, 130)
+        Me.ucrReceiverVisualizeData.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverVisualizeData.Name = "ucrReceiverVisualizeData"
+        Me.ucrReceiverVisualizeData.Selector = Nothing
+        Me.ucrReceiverVisualizeData.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverVisualizeData.strNcFilePath = ""
+        Me.ucrReceiverVisualizeData.TabIndex = 8
+        Me.ucrReceiverVisualizeData.ucrSelector = Nothing
+        '
+        'ucrPnlSelectData
+        '
+        Me.ucrPnlSelectData.Location = New System.Drawing.Point(235, 80)
+        Me.ucrPnlSelectData.Name = "ucrPnlSelectData"
+        Me.ucrPnlSelectData.Size = New System.Drawing.Size(133, 40)
+        Me.ucrPnlSelectData.TabIndex = 5
+        '
+        'ucrPnlVisualizeData
+        '
+        Me.ucrPnlVisualizeData.Location = New System.Drawing.Point(44, 1)
+        Me.ucrPnlVisualizeData.Name = "ucrPnlVisualizeData"
+        Me.ucrPnlVisualizeData.Size = New System.Drawing.Size(324, 46)
+        Me.ucrPnlVisualizeData.TabIndex = 0
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(4, 346)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(264, 24)
+        Me.ucrSaveGraph.TabIndex = 9
+        '
+        'ucrSelectorVisualizeData
+        '
+        Me.ucrSelectorVisualizeData.bDropUnusedFilterLevels = False
+        Me.ucrSelectorVisualizeData.bShowHiddenColumns = False
+        Me.ucrSelectorVisualizeData.bUseCurrentFilter = True
+        Me.ucrSelectorVisualizeData.Location = New System.Drawing.Point(10, 50)
+        Me.ucrSelectorVisualizeData.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorVisualizeData.Name = "ucrSelectorVisualizeData"
+        Me.ucrSelectorVisualizeData.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorVisualizeData.TabIndex = 4
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(4, 374)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 10
+        '
+        'ucrChkSortVariables
+        '
+        Me.ucrChkSortVariables.Checked = False
+        Me.ucrChkSortVariables.Location = New System.Drawing.Point(10, 247)
+        Me.ucrChkSortVariables.Name = "ucrChkSortVariables"
+        Me.ucrChkSortVariables.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSortVariables.TabIndex = 18
+        '
         'dlgVisualizeData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(417, 427)
+        Me.Controls.Add(Me.ucrChkSortVariables)
         Me.Controls.Add(Me.NumericUpDown1)
         Me.Controls.Add(Me.lblMillionDataPoints)
         Me.Controls.Add(Me.lblMaximumSize)
         Me.Controls.Add(Me.ucrNudMaximumSize)
         Me.Controls.Add(Me.lblPalette)
         Me.Controls.Add(Me.ucrInputComboboxPalette)
-        Me.Controls.Add(Me.ucrChkSortVariables)
         Me.Controls.Add(Me.ucrReceiverVisualizeData)
         Me.Controls.Add(Me.rdoSelectedColumn)
         Me.Controls.Add(Me.rdoWholeDataFrame)
@@ -272,11 +272,11 @@ Partial Class dlgVisualizeData
     Friend WithEvents rdoWholeDataFrame As RadioButton
     Friend WithEvents rdoSelectedColumn As RadioButton
     Friend WithEvents ucrReceiverVisualizeData As ucrReceiverMultiple
-    Friend WithEvents ucrChkSortVariables As ucrCheck
     Friend WithEvents ucrInputComboboxPalette As ucrInputComboBox
     Friend WithEvents lblPalette As Label
     Friend WithEvents NumericUpDown1 As NumericUpDown
     Friend WithEvents lblMillionDataPoints As Label
     Friend WithEvents lblMaximumSize As Label
     Friend WithEvents ucrNudMaximumSize As NumericUpDown
+    Friend WithEvents ucrChkSortVariables As ucrCheck
 End Class
