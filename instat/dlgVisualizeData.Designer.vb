@@ -33,11 +33,12 @@ Partial Class dlgVisualizeData
         Me.rdoWholeDataFrame = New System.Windows.Forms.RadioButton()
         Me.rdoSelectedColumn = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverVisualizeData = New instat.ucrReceiverMultiple()
+        Me.UcrCheck1 = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 267)
+        Me.ucrBase.Location = New System.Drawing.Point(4, 359)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
@@ -55,7 +56,7 @@ Partial Class dlgVisualizeData
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 238)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(4, 330)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(264, 24)
@@ -157,11 +158,20 @@ Partial Class dlgVisualizeData
         Me.ucrReceiverVisualizeData.TabIndex = 8
         Me.ucrReceiverVisualizeData.ucrSelector = Nothing
         '
+        'UcrCheck1
+        '
+        Me.UcrCheck1.Checked = False
+        Me.UcrCheck1.Location = New System.Drawing.Point(10, 243)
+        Me.UcrCheck1.Name = "UcrCheck1"
+        Me.UcrCheck1.Size = New System.Drawing.Size(125, 20)
+        Me.UcrCheck1.TabIndex = 11
+        '
         'dlgVisualizeData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 324)
+        Me.ClientSize = New System.Drawing.Size(417, 415)
+        Me.Controls.Add(Me.UcrCheck1)
         Me.Controls.Add(Me.ucrReceiverVisualizeData)
         Me.Controls.Add(Me.rdoSelectedColumn)
         Me.Controls.Add(Me.rdoWholeDataFrame)
@@ -195,4 +205,5 @@ Partial Class dlgVisualizeData
     Friend WithEvents rdoWholeDataFrame As RadioButton
     Friend WithEvents rdoSelectedColumn As RadioButton
     Friend WithEvents ucrReceiverVisualizeData As ucrReceiverMultiple
+    Friend WithEvents UcrCheck1 As ucrCheck
 End Class
