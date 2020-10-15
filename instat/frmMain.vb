@@ -122,6 +122,7 @@ Public Class frmMain
 
             'Sets up the Recent items
             clsRecentItems.setToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs, sepStart, sepEnd)
+            clsRecentItems.SetDataViewWindow(ucrDataViewer)
             'checks existence of MRU list
             clsRecentItems.checkOnLoad()
             Cursor = Cursors.Default
