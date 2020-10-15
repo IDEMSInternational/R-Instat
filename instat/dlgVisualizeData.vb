@@ -57,7 +57,7 @@ Public Class dlgVisualizeData
         ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortMiss, {rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrInputComboboxPaletteGuess, {rdoVisGuess}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrNudMaximumSize, {rdoVisDat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.9)
-        ucrPnlVisualizeData.AddToLinkedControls(ucrNudMaximum, {rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlVisualizeData.AddToLinkedControls(ucrNudMaximum, {rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.9)
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
         ucrPnlSelectData.AddRadioButton(rdoSelectedColumn)
 
@@ -65,12 +65,12 @@ Public Class dlgVisualizeData
         ucrPnlSelectData.AddParameterPresentCondition(rdoSelectedColumn, "x")
 
         ucrChkSortVariables.SetParameter(New RParameter("sort_type", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
-        ucrChkSortVariables.SetText("Sort Variables:")
+        ucrChkSortVariables.SetText("Sort Variables")
         ucrChkSortVariables.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
 
         ucrChkSortMiss.SetParameter(New RParameter("sort_miss", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
-        ucrChkSortMiss.SetText("Sort Variables:")
+        ucrChkSortMiss.SetText("Sort Variables")
         ucrChkSortMiss.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrInputComboboxPalette.SetParameter(New RParameter("palette", 2))
@@ -87,6 +87,7 @@ Public Class dlgVisualizeData
         ucrInputComboboxPaletteGuess.SetDropDownStyleAsNonEditable()
         ucrInputComboboxPaletteGuess.SetItems(dctPaletteGuess)
 
+        ucrNudMaximumSize.SetParameter(New RParameter("large_data_size", 4))
         ucrNudMaximumSize.DecimalPlaces = 1
         ucrNudMaximumSize.Increment = 0.1
         ucrNudMaximumSize.SetMinMax(0.1, Integer.MaxValue)
@@ -94,9 +95,7 @@ Public Class dlgVisualizeData
         ucrNudMaximum.SetParameter(New RParameter("large_data_size", 5))
         ucrNudMaximum.DecimalPlaces = 1
         ucrNudMaximum.Increment = 0.1
-        ucrNudMaximum.Minimum = 0.1
-        ucrNudMaximum.SetRDefault(0.9)
-
+        ucrNudMaximum.SetMinMax(0.1, Integer.MaxValue)
 
         ucrReceiverVisualizeData.SetParameter(New RParameter("x", 0))
         ucrReceiverVisualizeData.SetParameterIsRFunction()
@@ -144,7 +143,6 @@ Public Class dlgVisualizeData
         clsVisMissFunction.AddParameter("sort_miss", "FALSE", iPosition:=2)
         clsVisMissFunction.AddParameter("show_perc", "TRUE", iPosition:=3)
         clsVisMissFunction.AddParameter("show_perc_col", "TRUE", iPosition:=4)
-        clsVisMissFunction.AddParameter("large_data_size", 900000, iPosition:=5)
         clsVisMissFunction.AddParameter("warn_large_data", "TRUE", iPosition:=6)
 
         clsVisGuessFunction.SetPackageName("visdat")
@@ -230,5 +228,12 @@ Public Class dlgVisualizeData
         Dim strLargeDataSizeParamVal As Integer = Value * 1000000
 
         clsVisDatFunction.AddParameter("large_data_size", strParameterValue:=strLargeDataSizeParamVal, iPosition:=4)
+    End Sub
+
+    Private Sub ucrNudMaximum_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudMaximum.ControlValueChanged
+        Dim Value As Decimal = System.Convert.ToDecimal(ucrNudMaximum.GetText())
+        Dim strLargeDataSizeParamVal As Integer = Value * 1000000
+
+        clsVisMissFunction.AddParameter("large_data_size", strParameterValue:=strLargeDataSizeParamVal, iPosition:=5)
     End Sub
 End Class
