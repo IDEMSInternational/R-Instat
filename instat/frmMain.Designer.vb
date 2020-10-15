@@ -3442,8 +3442,8 @@ Partial Class frmMain
         '
         'mnuStructuredCircularOtherRosePlotsPolarCluster
         '
-        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarCluster, "mnuStructuredCircularOtherRosePlotsPolarCluster")
         Me.mnuStructuredCircularOtherRosePlotsPolarCluster.Name = "mnuStructuredCircularOtherRosePlotsPolarCluster"
+        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarCluster, "mnuStructuredCircularOtherRosePlotsPolarCluster")
         '
         'mnuStructuredCircularOtherRosePlotsPolarAnnulus
         '
