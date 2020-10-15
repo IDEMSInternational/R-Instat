@@ -32,6 +32,9 @@ Partial Class dlgVisualizeData
         Me.lblMillionDataPoints = New System.Windows.Forms.Label()
         Me.lblPaltte = New System.Windows.Forms.Label()
         Me.lblMaximumS = New System.Windows.Forms.Label()
+        Me.lblDataPoints = New System.Windows.Forms.Label()
+        Me.lblSampling = New System.Windows.Forms.Label()
+        Me.ucrNudSamplingFunction = New instat.ucrNud()
         Me.ucrNudMaximum = New instat.ucrNud()
         Me.ucrNudMaximumSize = New instat.ucrNud()
         Me.ucrInputComboboxPaletteGuess = New instat.ucrInputComboBox()
@@ -44,9 +47,6 @@ Partial Class dlgVisualizeData
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrSelectorVisualizeData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblDataPoints = New System.Windows.Forms.Label()
-        Me.ucrNudSamplingFunction = New instat.ucrNud()
-        Me.lblSampling = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'rdoVisDat
@@ -164,6 +164,38 @@ Partial Class dlgVisualizeData
         Me.lblMaximumS.TabIndex = 24
         Me.lblMaximumS.Text = "Maximum Size:"
         '
+        'lblDataPoints
+        '
+        Me.lblDataPoints.AutoSize = True
+        Me.lblDataPoints.Location = New System.Drawing.Point(154, 305)
+        Me.lblDataPoints.Name = "lblDataPoints"
+        Me.lblDataPoints.Size = New System.Drawing.Size(94, 13)
+        Me.lblDataPoints.TabIndex = 25
+        Me.lblDataPoints.Text = "Million Data Points"
+        '
+        'lblSampling
+        '
+        Me.lblSampling.AutoSize = True
+        Me.lblSampling.Enabled = False
+        Me.lblSampling.Location = New System.Drawing.Point(213, 268)
+        Me.lblSampling.Name = "lblSampling"
+        Me.lblSampling.Size = New System.Drawing.Size(94, 13)
+        Me.lblSampling.TabIndex = 27
+        Me.lblSampling.Text = "Sampling Fraction:"
+        '
+        'ucrNudSamplingFunction
+        '
+        Me.ucrNudSamplingFunction.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSamplingFunction.Enabled = False
+        Me.ucrNudSamplingFunction.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSamplingFunction.Location = New System.Drawing.Point(313, 265)
+        Me.ucrNudSamplingFunction.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSamplingFunction.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSamplingFunction.Name = "ucrNudSamplingFunction"
+        Me.ucrNudSamplingFunction.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudSamplingFunction.TabIndex = 26
+        Me.ucrNudSamplingFunction.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrNudMaximum
         '
         Me.ucrNudMaximum.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -275,38 +307,6 @@ Partial Class dlgVisualizeData
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
-        '
-        'lblDataPoints
-        '
-        Me.lblDataPoints.AutoSize = True
-        Me.lblDataPoints.Location = New System.Drawing.Point(154, 305)
-        Me.lblDataPoints.Name = "lblDataPoints"
-        Me.lblDataPoints.Size = New System.Drawing.Size(94, 13)
-        Me.lblDataPoints.TabIndex = 25
-        Me.lblDataPoints.Text = "Million Data Points"
-        '
-        'ucrNudSamplingFunction
-        '
-        Me.ucrNudSamplingFunction.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSamplingFunction.Enabled = False
-        Me.ucrNudSamplingFunction.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSamplingFunction.Location = New System.Drawing.Point(313, 265)
-        Me.ucrNudSamplingFunction.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSamplingFunction.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSamplingFunction.Name = "ucrNudSamplingFunction"
-        Me.ucrNudSamplingFunction.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudSamplingFunction.TabIndex = 26
-        Me.ucrNudSamplingFunction.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblSampling
-        '
-        Me.lblSampling.AutoSize = True
-        Me.lblSampling.Enabled = False
-        Me.lblSampling.Location = New System.Drawing.Point(213, 268)
-        Me.lblSampling.Name = "lblSampling"
-        Me.lblSampling.Size = New System.Drawing.Size(94, 13)
-        Me.lblSampling.TabIndex = 27
-        Me.lblSampling.Text = "Sampling Fraction:"
         '
         'dlgVisualizeData
         '
