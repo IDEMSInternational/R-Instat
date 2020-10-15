@@ -79,6 +79,7 @@ Public Class dlgVisualizeData
         dctPalette.Add("cb_safe", Chr(34) & "cb_safe" & Chr(34))
         ucrInputComboboxPalette.SetDropDownStyleAsNonEditable()
         ucrInputComboboxPalette.SetItems(dctPalette)
+        ucrInputComboboxPalette.bAllowNonConditionValues = True
 
         ucrInputComboboxPaletteGuess.SetParameter(New RParameter("palette", 1))
         dctPaletteGuess.Add("default", Chr(34) & "default" & Chr(34))
@@ -86,6 +87,7 @@ Public Class dlgVisualizeData
         dctPaletteGuess.Add("cb_safe", Chr(34) & "cb_safe" & Chr(34))
         ucrInputComboboxPaletteGuess.SetDropDownStyleAsNonEditable()
         ucrInputComboboxPaletteGuess.SetItems(dctPaletteGuess)
+        ucrInputComboboxPaletteGuess.bAllowNonConditionValues = True
 
         ucrNudMaximumSize.SetParameter(New RParameter("large_data_size", 4))
         ucrNudMaximumSize.DecimalPlaces = 1
@@ -126,7 +128,6 @@ Public Class dlgVisualizeData
         clsVisGuessFunction = New RFunction
         ucrSelectorVisualizeData.Reset()
         ucrSaveGraph.Reset()
-
 
         clsCurrBaseFunction = clsVisDatFunction
 
