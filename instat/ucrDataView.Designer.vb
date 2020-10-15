@@ -104,11 +104,11 @@ Partial Class ucrDataView
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.pnlDataContainer = New System.Windows.Forms.Panel()
         Me.panelAllMenuItems = New System.Windows.Forms.Panel()
-        Me.linkNewsletter = New System.Windows.Forms.LinkLabel()
-        Me.linkGithub = New System.Windows.Forms.LinkLabel()
-        Me.linkProductDoc = New System.Windows.Forms.LinkLabel()
-        Me.linkHelpTipsTricks = New System.Windows.Forms.LinkLabel()
-        Me.linkHelpVideos = New System.Windows.Forms.LinkLabel()
+        Me.linkHelpMoreToCome = New System.Windows.Forms.LinkLabel()
+        Me.linkHelpInstructionVideos = New System.Windows.Forms.LinkLabel()
+        Me.linkHelpRInstatWebsite = New System.Windows.Forms.LinkLabel()
+        Me.linkHelpRpackages = New System.Windows.Forms.LinkLabel()
+        Me.linkHelpIntroduction = New System.Windows.Forms.LinkLabel()
         Me.panelRecentMenuItems = New System.Windows.Forms.Panel()
         Me.linkStartOpenLibrary = New System.Windows.Forms.LinkLabel()
         Me.linkStartOpenFile = New System.Windows.Forms.LinkLabel()
@@ -561,11 +561,11 @@ Partial Class ucrDataView
         '
         'panelAllMenuItems
         '
-        Me.panelAllMenuItems.Controls.Add(Me.linkNewsletter)
-        Me.panelAllMenuItems.Controls.Add(Me.linkGithub)
-        Me.panelAllMenuItems.Controls.Add(Me.linkProductDoc)
-        Me.panelAllMenuItems.Controls.Add(Me.linkHelpTipsTricks)
-        Me.panelAllMenuItems.Controls.Add(Me.linkHelpVideos)
+        Me.panelAllMenuItems.Controls.Add(Me.linkHelpMoreToCome)
+        Me.panelAllMenuItems.Controls.Add(Me.linkHelpInstructionVideos)
+        Me.panelAllMenuItems.Controls.Add(Me.linkHelpRInstatWebsite)
+        Me.panelAllMenuItems.Controls.Add(Me.linkHelpRpackages)
+        Me.panelAllMenuItems.Controls.Add(Me.linkHelpIntroduction)
         Me.panelAllMenuItems.Controls.Add(Me.panelRecentMenuItems)
         Me.panelAllMenuItems.Controls.Add(Me.linkStartOpenLibrary)
         Me.panelAllMenuItems.Controls.Add(Me.linkStartOpenFile)
@@ -580,70 +580,72 @@ Partial Class ucrDataView
         Me.panelAllMenuItems.TabIndex = 7
         Me.panelAllMenuItems.Visible = False
         '
-        'linkNewsletter
+        'linkHelpMoreToCome
         '
-        Me.linkNewsletter.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkNewsletter.AutoSize = True
-        Me.linkNewsletter.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkNewsletter.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkNewsletter.Location = New System.Drawing.Point(30, 409)
-        Me.linkNewsletter.Name = "linkNewsletter"
-        Me.linkNewsletter.Size = New System.Drawing.Size(95, 13)
-        Me.linkNewsletter.TabIndex = 11
-        Me.linkNewsletter.TabStop = True
-        Me.linkNewsletter.Text = "Join our newsletter"
+        Me.linkHelpMoreToCome.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkHelpMoreToCome.AutoSize = True
+        Me.linkHelpMoreToCome.Enabled = False
+        Me.linkHelpMoreToCome.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkHelpMoreToCome.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkHelpMoreToCome.Location = New System.Drawing.Point(30, 409)
+        Me.linkHelpMoreToCome.Name = "linkHelpMoreToCome"
+        Me.linkHelpMoreToCome.Size = New System.Drawing.Size(72, 13)
+        Me.linkHelpMoreToCome.TabIndex = 11
+        Me.linkHelpMoreToCome.TabStop = True
+        Me.linkHelpMoreToCome.Text = "More to come"
         '
-        'linkGithub
+        'linkHelpInstructionVideos
         '
-        Me.linkGithub.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkGithub.AutoSize = True
-        Me.linkGithub.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkGithub.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkGithub.Location = New System.Drawing.Point(30, 390)
-        Me.linkGithub.Name = "linkGithub"
-        Me.linkGithub.Size = New System.Drawing.Size(88, 13)
-        Me.linkGithub.TabIndex = 10
-        Me.linkGithub.TabStop = True
-        Me.linkGithub.Text = "GitHub repository"
+        Me.linkHelpInstructionVideos.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkHelpInstructionVideos.AutoSize = True
+        Me.linkHelpInstructionVideos.Enabled = False
+        Me.linkHelpInstructionVideos.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkHelpInstructionVideos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkHelpInstructionVideos.Location = New System.Drawing.Point(30, 390)
+        Me.linkHelpInstructionVideos.Name = "linkHelpInstructionVideos"
+        Me.linkHelpInstructionVideos.Size = New System.Drawing.Size(98, 13)
+        Me.linkHelpInstructionVideos.TabIndex = 10
+        Me.linkHelpInstructionVideos.TabStop = True
+        Me.linkHelpInstructionVideos.Text = "Instructional videos"
         '
-        'linkProductDoc
+        'linkHelpRInstatWebsite
         '
-        Me.linkProductDoc.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkProductDoc.AutoSize = True
-        Me.linkProductDoc.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkProductDoc.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkProductDoc.Location = New System.Drawing.Point(30, 371)
-        Me.linkProductDoc.Name = "linkProductDoc"
-        Me.linkProductDoc.Size = New System.Drawing.Size(117, 13)
-        Me.linkProductDoc.TabIndex = 9
-        Me.linkProductDoc.TabStop = True
-        Me.linkProductDoc.Text = "Product documentation"
+        Me.linkHelpRInstatWebsite.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkHelpRInstatWebsite.AutoSize = True
+        Me.linkHelpRInstatWebsite.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkHelpRInstatWebsite.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkHelpRInstatWebsite.Location = New System.Drawing.Point(30, 371)
+        Me.linkHelpRInstatWebsite.Name = "linkHelpRInstatWebsite"
+        Me.linkHelpRInstatWebsite.Size = New System.Drawing.Size(83, 13)
+        Me.linkHelpRInstatWebsite.TabIndex = 9
+        Me.linkHelpRInstatWebsite.TabStop = True
+        Me.linkHelpRInstatWebsite.Text = "R-Instat website"
         '
-        'linkHelpTipsTricks
+        'linkHelpRpackages
         '
-        Me.linkHelpTipsTricks.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkHelpTipsTricks.AutoSize = True
-        Me.linkHelpTipsTricks.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkHelpTipsTricks.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkHelpTipsTricks.Location = New System.Drawing.Point(30, 352)
-        Me.linkHelpTipsTricks.Name = "linkHelpTipsTricks"
-        Me.linkHelpTipsTricks.Size = New System.Drawing.Size(80, 13)
-        Me.linkHelpTipsTricks.TabIndex = 8
-        Me.linkHelpTipsTricks.TabStop = True
-        Me.linkHelpTipsTricks.Text = "Tips and Tricks"
+        Me.linkHelpRpackages.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkHelpRpackages.AutoSize = True
+        Me.linkHelpRpackages.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkHelpRpackages.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkHelpRpackages.Location = New System.Drawing.Point(30, 352)
+        Me.linkHelpRpackages.Name = "linkHelpRpackages"
+        Me.linkHelpRpackages.Size = New System.Drawing.Size(116, 13)
+        Me.linkHelpRpackages.TabIndex = 8
+        Me.linkHelpRpackages.TabStop = True
+        Me.linkHelpRpackages.Text = "R-packages in R-Instat"
         '
-        'linkHelpVideos
+        'linkHelpIntroduction
         '
-        Me.linkHelpVideos.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkHelpVideos.AutoSize = True
-        Me.linkHelpVideos.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkHelpVideos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkHelpVideos.Location = New System.Drawing.Point(30, 333)
-        Me.linkHelpVideos.Name = "linkHelpVideos"
-        Me.linkHelpVideos.Size = New System.Drawing.Size(97, 13)
-        Me.linkHelpVideos.TabIndex = 7
-        Me.linkHelpVideos.TabStop = True
-        Me.linkHelpVideos.Text = "Introductory videos"
+        Me.linkHelpIntroduction.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkHelpIntroduction.AutoSize = True
+        Me.linkHelpIntroduction.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkHelpIntroduction.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkHelpIntroduction.Location = New System.Drawing.Point(30, 333)
+        Me.linkHelpIntroduction.Name = "linkHelpIntroduction"
+        Me.linkHelpIntroduction.Size = New System.Drawing.Size(63, 13)
+        Me.linkHelpIntroduction.TabIndex = 7
+        Me.linkHelpIntroduction.TabStop = True
+        Me.linkHelpIntroduction.Text = "Introduction"
         '
         'panelRecentMenuItems
         '
@@ -663,10 +665,10 @@ Partial Class ucrDataView
         Me.linkStartOpenLibrary.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkStartOpenLibrary.Location = New System.Drawing.Point(30, 87)
         Me.linkStartOpenLibrary.Name = "linkStartOpenLibrary"
-        Me.linkStartOpenLibrary.Size = New System.Drawing.Size(98, 13)
+        Me.linkStartOpenLibrary.Size = New System.Drawing.Size(95, 13)
         Me.linkStartOpenLibrary.TabIndex = 5
         Me.linkStartOpenLibrary.TabStop = True
-        Me.linkStartOpenLibrary.Text = "Open from library ..."
+        Me.linkStartOpenLibrary.Text = "Open from library..."
         '
         'linkStartOpenFile
         '
@@ -676,10 +678,10 @@ Partial Class ucrDataView
         Me.linkStartOpenFile.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkStartOpenFile.Location = New System.Drawing.Point(30, 68)
         Me.linkStartOpenFile.Name = "linkStartOpenFile"
-        Me.linkStartOpenFile.Size = New System.Drawing.Size(84, 13)
+        Me.linkStartOpenFile.Size = New System.Drawing.Size(81, 13)
         Me.linkStartOpenFile.TabIndex = 4
         Me.linkStartOpenFile.TabStop = True
-        Me.linkStartOpenFile.Text = "Open from file ..."
+        Me.linkStartOpenFile.Text = "Open from file..."
         '
         'linkStartNewDataFrame
         '
@@ -689,10 +691,10 @@ Partial Class ucrDataView
         Me.linkStartNewDataFrame.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkStartNewDataFrame.Location = New System.Drawing.Point(30, 49)
         Me.linkStartNewDataFrame.Name = "linkStartNewDataFrame"
-        Me.linkStartNewDataFrame.Size = New System.Drawing.Size(87, 13)
+        Me.linkStartNewDataFrame.Size = New System.Drawing.Size(96, 13)
         Me.linkStartNewDataFrame.TabIndex = 3
         Me.linkStartNewDataFrame.TabStop = True
-        Me.linkStartNewDataFrame.Text = "New Data Frame"
+        Me.linkStartNewDataFrame.Text = "New Data Frame..."
         '
         'lblHelp
         '
@@ -819,9 +821,9 @@ Partial Class ucrDataView
     Friend WithEvents lblRecent As Label
     Friend WithEvents lblStart As Label
     Friend WithEvents panelRecentMenuItems As Panel
-    Friend WithEvents linkNewsletter As LinkLabel
-    Friend WithEvents linkGithub As LinkLabel
-    Friend WithEvents linkProductDoc As LinkLabel
-    Friend WithEvents linkHelpTipsTricks As LinkLabel
-    Friend WithEvents linkHelpVideos As LinkLabel
+    Friend WithEvents linkHelpMoreToCome As LinkLabel
+    Friend WithEvents linkHelpInstructionVideos As LinkLabel
+    Friend WithEvents linkHelpRInstatWebsite As LinkLabel
+    Friend WithEvents linkHelpRpackages As LinkLabel
+    Friend WithEvents linkHelpIntroduction As LinkLabel
 End Class

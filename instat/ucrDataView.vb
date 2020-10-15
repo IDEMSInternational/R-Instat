@@ -917,4 +917,16 @@ Public Class ucrDataView
         panelRecentMenuItems.Controls.Add(linkMenuItem)
         panelRecentMenuItems.Controls.Add(lblMenuItemPath)
     End Sub
+
+    Private Sub linkHelpIntroduction_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpIntroduction.LinkClicked
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "0")
+    End Sub
+
+    Private Sub linkHelpRpackages_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRpackages.LinkClicked
+        dlgHelpVignettes.ShowDialog()
+    End Sub
+
+    Private Sub linkHelpRInstatWebsite_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRInstatWebsite.LinkClicked
+        Process.Start("http://r-instat.org/")
+    End Sub
 End Class
