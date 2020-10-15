@@ -105,10 +105,11 @@ Public Class dlgVisualizeData
 
         ucrInputComboboxPalette.SetLinkedDisplayControl(lblPaltte)
         ucrInputComboboxPaletteGuess.SetLinkedDisplayControl(lblPalette)
-        ucrNudMaximum.SetLinkedDisplayControl(lblMaximum)
+        ucrNudMaximum.SetLinkedDisplayControl(lblMaximumS)
         ucrNudMaximumSize.SetLinkedDisplayControl(lblMaximumSize)
         ucrNudMaximumSize.SetLinkedDisplayControl(lblMillionDataPoints)
         ucrNudMaximum.SetLinkedDisplayControl(lblDataPoints)
+        ucrNudSamplingFunction.SetLinkedDisplayControl(lblSampling)
 
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 

@@ -31,7 +31,7 @@ Partial Class dlgVisualizeData
         Me.lblMaximumSize = New System.Windows.Forms.Label()
         Me.lblMillionDataPoints = New System.Windows.Forms.Label()
         Me.lblPaltte = New System.Windows.Forms.Label()
-        Me.lblMaximum = New System.Windows.Forms.Label()
+        Me.lblMaximumS = New System.Windows.Forms.Label()
         Me.ucrNudMaximum = New instat.ucrNud()
         Me.ucrNudMaximumSize = New instat.ucrNud()
         Me.ucrInputComboboxPaletteGuess = New instat.ucrInputComboBox()
@@ -155,14 +155,14 @@ Partial Class dlgVisualizeData
         Me.lblPaltte.TabIndex = 21
         Me.lblPaltte.Text = "Palette:"
         '
-        'lblMaximum
+        'lblMaximumS
         '
-        Me.lblMaximum.AutoSize = True
-        Me.lblMaximum.Location = New System.Drawing.Point(5, 305)
-        Me.lblMaximum.Name = "lblMaximum"
-        Me.lblMaximum.Size = New System.Drawing.Size(77, 13)
-        Me.lblMaximum.TabIndex = 24
-        Me.lblMaximum.Text = "Maximum Size:"
+        Me.lblMaximumS.AutoSize = True
+        Me.lblMaximumS.Location = New System.Drawing.Point(5, 305)
+        Me.lblMaximumS.Name = "lblMaximumS"
+        Me.lblMaximumS.Size = New System.Drawing.Size(77, 13)
+        Me.lblMaximumS.TabIndex = 24
+        Me.lblMaximumS.Text = "Maximum Size:"
         '
         'ucrNudMaximum
         '
@@ -288,6 +288,7 @@ Partial Class dlgVisualizeData
         'ucrNudSamplingFunction
         '
         Me.ucrNudSamplingFunction.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSamplingFunction.Enabled = False
         Me.ucrNudSamplingFunction.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudSamplingFunction.Location = New System.Drawing.Point(313, 265)
         Me.ucrNudSamplingFunction.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
@@ -300,6 +301,7 @@ Partial Class dlgVisualizeData
         'lblSampling
         '
         Me.lblSampling.AutoSize = True
+        Me.lblSampling.Enabled = False
         Me.lblSampling.Location = New System.Drawing.Point(213, 268)
         Me.lblSampling.Name = "lblSampling"
         Me.lblSampling.Size = New System.Drawing.Size(94, 13)
@@ -314,7 +316,7 @@ Partial Class dlgVisualizeData
         Me.Controls.Add(Me.lblSampling)
         Me.Controls.Add(Me.ucrNudSamplingFunction)
         Me.Controls.Add(Me.lblDataPoints)
-        Me.Controls.Add(Me.lblMaximum)
+        Me.Controls.Add(Me.lblMaximumS)
         Me.Controls.Add(Me.ucrNudMaximum)
         Me.Controls.Add(Me.ucrNudMaximumSize)
         Me.Controls.Add(Me.lblPaltte)
@@ -368,7 +370,7 @@ Partial Class dlgVisualizeData
     Friend WithEvents lblPaltte As Label
     Friend WithEvents ucrNudMaximumSize As ucrNud
     Friend WithEvents ucrNudMaximum As ucrNud
-    Friend WithEvents lblMaximum As Label
+    Friend WithEvents lblMaximumS As Label
     Friend WithEvents lblDataPoints As Label
     Friend WithEvents lblSampling As Label
     Friend WithEvents ucrNudSamplingFunction As ucrNud
