@@ -56,7 +56,8 @@ Public Class dlgVisualizeData
         ucrPnlVisualizeData.AddToLinkedControls(ucrInputComboboxPalette, {rdoVisDat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortMiss, {rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrInputComboboxPaletteGuess, {rdoVisGuess}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrPnlVisualizeData.AddToLinkedControls(ucrNudMaximumSize, {rdoVisDat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlVisualizeData.AddToLinkedControls(ucrNudMaximum, {rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
         ucrPnlSelectData.AddRadioButton(rdoSelectedColumn)
 
@@ -88,6 +89,7 @@ Public Class dlgVisualizeData
 
         ucrNudMaximumSize.SetParameter(New RParameter("large_data_size", 4))
 
+
         ucrReceiverVisualizeData.SetParameter(New RParameter("x", 0))
         ucrReceiverVisualizeData.SetParameterIsRFunction()
         ucrReceiverVisualizeData.Selector = ucrSelectorVisualizeData
@@ -96,6 +98,10 @@ Public Class dlgVisualizeData
 
         ucrInputComboboxPalette.SetLinkedDisplayControl(lblPaltte)
         ucrInputComboboxPaletteGuess.SetLinkedDisplayControl(lblPalette)
+        ucrNudMaximum.SetLinkedDisplayControl(lblMaximum)
+        ucrNudMaximumSize.SetLinkedDisplayControl(lblMaximumSize)
+        ucrNudMaximumSize.SetLinkedDisplayControl(lblMillionDataPoints)
+        ucrNudMaximum.SetLinkedDisplayControl(lblDataPoints)
 
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
