@@ -56,9 +56,9 @@ Public Class dlgVisualizeData
         ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisGuess, "vis_guess")
 
         ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortVariables, {rdoVisDat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlVisualizeData.AddToLinkedControls(ucrInputComboboxPalette, {rdoVisDat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlVisualizeData.AddToLinkedControls(ucrInputComboboxPalette, {rdoVisDat}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortMiss, {rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlVisualizeData.AddToLinkedControls(ucrInputComboboxPaletteGuess, {rdoVisGuess}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlVisualizeData.AddToLinkedControls(ucrInputComboboxPaletteGuess, {rdoVisGuess}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrNudMaximumSize, {rdoVisDat}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.9)
         ucrPnlVisualizeData.AddToLinkedControls(ucrNudMaximum, {rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.9)
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)

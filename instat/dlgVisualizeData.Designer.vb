@@ -100,7 +100,7 @@ Partial Class dlgVisualizeData
         'rdoWholeDataFrame
         '
         Me.rdoWholeDataFrame.AutoSize = True
-        Me.rdoWholeDataFrame.Location = New System.Drawing.Point(243, 80)
+        Me.rdoWholeDataFrame.Location = New System.Drawing.Point(268, 69)
         Me.rdoWholeDataFrame.Name = "rdoWholeDataFrame"
         Me.rdoWholeDataFrame.Size = New System.Drawing.Size(80, 17)
         Me.rdoWholeDataFrame.TabIndex = 6
@@ -111,7 +111,7 @@ Partial Class dlgVisualizeData
         'rdoSelectedColumn
         '
         Me.rdoSelectedColumn.AutoSize = True
-        Me.rdoSelectedColumn.Location = New System.Drawing.Point(243, 103)
+        Me.rdoSelectedColumn.Location = New System.Drawing.Point(268, 92)
         Me.rdoSelectedColumn.Name = "rdoSelectedColumn"
         Me.rdoSelectedColumn.Size = New System.Drawing.Size(113, 17)
         Me.rdoSelectedColumn.TabIndex = 7
@@ -122,7 +122,7 @@ Partial Class dlgVisualizeData
         'lblPalette
         '
         Me.lblPalette.AutoSize = True
-        Me.lblPalette.Location = New System.Drawing.Point(22, 272)
+        Me.lblPalette.Location = New System.Drawing.Point(10, 269)
         Me.lblPalette.Name = "lblPalette"
         Me.lblPalette.Size = New System.Drawing.Size(43, 13)
         Me.lblPalette.TabIndex = 13
@@ -131,7 +131,7 @@ Partial Class dlgVisualizeData
         'lblMaximumSize
         '
         Me.lblMaximumSize.AutoSize = True
-        Me.lblMaximumSize.Location = New System.Drawing.Point(5, 305)
+        Me.lblMaximumSize.Location = New System.Drawing.Point(10, 296)
         Me.lblMaximumSize.Name = "lblMaximumSize"
         Me.lblMaximumSize.Size = New System.Drawing.Size(77, 13)
         Me.lblMaximumSize.TabIndex = 15
@@ -140,7 +140,7 @@ Partial Class dlgVisualizeData
         'lblMillionDataPoints
         '
         Me.lblMillionDataPoints.AutoSize = True
-        Me.lblMillionDataPoints.Location = New System.Drawing.Point(154, 305)
+        Me.lblMillionDataPoints.Location = New System.Drawing.Point(149, 296)
         Me.lblMillionDataPoints.Name = "lblMillionDataPoints"
         Me.lblMillionDataPoints.Size = New System.Drawing.Size(94, 13)
         Me.lblMillionDataPoints.TabIndex = 16
@@ -149,7 +149,7 @@ Partial Class dlgVisualizeData
         'lblPaltte
         '
         Me.lblPaltte.AutoSize = True
-        Me.lblPaltte.Location = New System.Drawing.Point(22, 272)
+        Me.lblPaltte.Location = New System.Drawing.Point(10, 269)
         Me.lblPaltte.Name = "lblPaltte"
         Me.lblPaltte.Size = New System.Drawing.Size(43, 13)
         Me.lblPaltte.TabIndex = 21
@@ -158,7 +158,7 @@ Partial Class dlgVisualizeData
         'lblMaximumS
         '
         Me.lblMaximumS.AutoSize = True
-        Me.lblMaximumS.Location = New System.Drawing.Point(5, 305)
+        Me.lblMaximumS.Location = New System.Drawing.Point(10, 296)
         Me.lblMaximumS.Name = "lblMaximumS"
         Me.lblMaximumS.Size = New System.Drawing.Size(77, 13)
         Me.lblMaximumS.TabIndex = 24
@@ -167,7 +167,7 @@ Partial Class dlgVisualizeData
         'lblDataPoints
         '
         Me.lblDataPoints.AutoSize = True
-        Me.lblDataPoints.Location = New System.Drawing.Point(154, 305)
+        Me.lblDataPoints.Location = New System.Drawing.Point(149, 296)
         Me.lblDataPoints.Name = "lblDataPoints"
         Me.lblDataPoints.Size = New System.Drawing.Size(94, 13)
         Me.lblDataPoints.TabIndex = 25
@@ -177,7 +177,7 @@ Partial Class dlgVisualizeData
         '
         Me.lblSampling.AutoSize = True
         Me.lblSampling.Enabled = False
-        Me.lblSampling.Location = New System.Drawing.Point(213, 268)
+        Me.lblSampling.Location = New System.Drawing.Point(238, 245)
         Me.lblSampling.Name = "lblSampling"
         Me.lblSampling.Size = New System.Drawing.Size(94, 13)
         Me.lblSampling.TabIndex = 27
@@ -188,7 +188,7 @@ Partial Class dlgVisualizeData
         Me.ucrNudSamplingFunction.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSamplingFunction.Enabled = False
         Me.ucrNudSamplingFunction.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudSamplingFunction.Location = New System.Drawing.Point(313, 265)
+        Me.ucrNudSamplingFunction.Location = New System.Drawing.Point(338, 242)
         Me.ucrNudSamplingFunction.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSamplingFunction.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSamplingFunction.Name = "ucrNudSamplingFunction"
@@ -200,7 +200,7 @@ Partial Class dlgVisualizeData
         '
         Me.ucrNudMaximum.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaximum.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaximum.Location = New System.Drawing.Point(98, 302)
+        Me.ucrNudMaximum.Location = New System.Drawing.Point(93, 293)
         Me.ucrNudMaximum.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaximum.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaximum.Name = "ucrNudMaximum"
@@ -212,7 +212,7 @@ Partial Class dlgVisualizeData
         '
         Me.ucrNudMaximumSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaximumSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaximumSize.Location = New System.Drawing.Point(98, 302)
+        Me.ucrNudMaximumSize.Location = New System.Drawing.Point(93, 293)
         Me.ucrNudMaximumSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMaximumSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMaximumSize.Name = "ucrNudMaximumSize"
@@ -225,15 +225,15 @@ Partial Class dlgVisualizeData
         Me.ucrInputComboboxPaletteGuess.AddQuotesIfUnrecognised = True
         Me.ucrInputComboboxPaletteGuess.GetSetSelectedIndex = -1
         Me.ucrInputComboboxPaletteGuess.IsReadOnly = False
-        Me.ucrInputComboboxPaletteGuess.Location = New System.Drawing.Point(97, 268)
+        Me.ucrInputComboboxPaletteGuess.Location = New System.Drawing.Point(58, 266)
         Me.ucrInputComboboxPaletteGuess.Name = "ucrInputComboboxPaletteGuess"
-        Me.ucrInputComboboxPaletteGuess.Size = New System.Drawing.Size(52, 21)
+        Me.ucrInputComboboxPaletteGuess.Size = New System.Drawing.Size(85, 21)
         Me.ucrInputComboboxPaletteGuess.TabIndex = 20
         '
         'ucrChkSortMiss
         '
         Me.ucrChkSortMiss.Checked = False
-        Me.ucrChkSortMiss.Location = New System.Drawing.Point(6, 244)
+        Me.ucrChkSortMiss.Location = New System.Drawing.Point(13, 242)
         Me.ucrChkSortMiss.Name = "ucrChkSortMiss"
         Me.ucrChkSortMiss.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkSortMiss.TabIndex = 19
@@ -241,7 +241,7 @@ Partial Class dlgVisualizeData
         'ucrChkSortVariables
         '
         Me.ucrChkSortVariables.Checked = False
-        Me.ucrChkSortVariables.Location = New System.Drawing.Point(6, 244)
+        Me.ucrChkSortVariables.Location = New System.Drawing.Point(13, 242)
         Me.ucrChkSortVariables.Name = "ucrChkSortVariables"
         Me.ucrChkSortVariables.Size = New System.Drawing.Size(145, 20)
         Me.ucrChkSortVariables.TabIndex = 18
@@ -251,15 +251,15 @@ Partial Class dlgVisualizeData
         Me.ucrInputComboboxPalette.AddQuotesIfUnrecognised = True
         Me.ucrInputComboboxPalette.GetSetSelectedIndex = -1
         Me.ucrInputComboboxPalette.IsReadOnly = False
-        Me.ucrInputComboboxPalette.Location = New System.Drawing.Point(97, 268)
+        Me.ucrInputComboboxPalette.Location = New System.Drawing.Point(58, 266)
         Me.ucrInputComboboxPalette.Name = "ucrInputComboboxPalette"
-        Me.ucrInputComboboxPalette.Size = New System.Drawing.Size(52, 21)
+        Me.ucrInputComboboxPalette.Size = New System.Drawing.Size(85, 21)
         Me.ucrInputComboboxPalette.TabIndex = 12
         '
         'ucrReceiverVisualizeData
         '
         Me.ucrReceiverVisualizeData.frmParent = Me
-        Me.ucrReceiverVisualizeData.Location = New System.Drawing.Point(243, 130)
+        Me.ucrReceiverVisualizeData.Location = New System.Drawing.Point(268, 119)
         Me.ucrReceiverVisualizeData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVisualizeData.Name = "ucrReceiverVisualizeData"
         Me.ucrReceiverVisualizeData.Selector = Nothing
@@ -270,9 +270,9 @@ Partial Class dlgVisualizeData
         '
         'ucrPnlSelectData
         '
-        Me.ucrPnlSelectData.Location = New System.Drawing.Point(235, 80)
+        Me.ucrPnlSelectData.Location = New System.Drawing.Point(256, 69)
         Me.ucrPnlSelectData.Name = "ucrPnlSelectData"
-        Me.ucrPnlSelectData.Size = New System.Drawing.Size(133, 40)
+        Me.ucrPnlSelectData.Size = New System.Drawing.Size(132, 49)
         Me.ucrPnlSelectData.TabIndex = 5
         '
         'ucrPnlVisualizeData
@@ -284,10 +284,10 @@ Partial Class dlgVisualizeData
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(4, 330)
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(13, 321)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(264, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(282, 24)
         Me.ucrSaveGraph.TabIndex = 9
         '
         'ucrSelectorVisualizeData
@@ -295,7 +295,7 @@ Partial Class dlgVisualizeData
         Me.ucrSelectorVisualizeData.bDropUnusedFilterLevels = False
         Me.ucrSelectorVisualizeData.bShowHiddenColumns = False
         Me.ucrSelectorVisualizeData.bUseCurrentFilter = True
-        Me.ucrSelectorVisualizeData.Location = New System.Drawing.Point(10, 50)
+        Me.ucrSelectorVisualizeData.Location = New System.Drawing.Point(13, 50)
         Me.ucrSelectorVisualizeData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorVisualizeData.Name = "ucrSelectorVisualizeData"
         Me.ucrSelectorVisualizeData.Size = New System.Drawing.Size(210, 180)
@@ -303,7 +303,7 @@ Partial Class dlgVisualizeData
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(4, 358)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 349)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
@@ -312,7 +312,7 @@ Partial Class dlgVisualizeData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 413)
+        Me.ClientSize = New System.Drawing.Size(417, 405)
         Me.Controls.Add(Me.lblSampling)
         Me.Controls.Add(Me.ucrNudSamplingFunction)
         Me.Controls.Add(Me.lblDataPoints)
