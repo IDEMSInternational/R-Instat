@@ -73,7 +73,7 @@ Public Class dlgPolarCluster
         ucrNudAngularScale.SetMinMax(0, 360)
 
         ucrNudNoOfClusters.SetParameter(New RParameter("n.clusters", 14))
-        ucrNudNoOfClusters.SetMinMax(0,)
+        ucrNudNoOfClusters.SetMinMax(1,)
 
     End Sub
     Private Sub SetDefaults()

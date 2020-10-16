@@ -40,7 +40,7 @@ Partial Class dlgPolarCluster
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(6, 253)
+        Me.ucrBase.Location = New System.Drawing.Point(6, 264)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -50,7 +50,7 @@ Partial Class dlgPolarCluster
         Me.ucrSelectorPolarCluster.bDropUnusedFilterLevels = False
         Me.ucrSelectorPolarCluster.bShowHiddenColumns = False
         Me.ucrSelectorPolarCluster.bUseCurrentFilter = True
-        Me.ucrSelectorPolarCluster.Location = New System.Drawing.Point(6, 4)
+        Me.ucrSelectorPolarCluster.Location = New System.Drawing.Point(15, 9)
         Me.ucrSelectorPolarCluster.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPolarCluster.Name = "ucrSelectorPolarCluster"
         Me.ucrSelectorPolarCluster.Size = New System.Drawing.Size(210, 180)
@@ -122,7 +122,7 @@ Partial Class dlgPolarCluster
         'lblAngularScale
         '
         Me.lblAngularScale.AutoSize = True
-        Me.lblAngularScale.Location = New System.Drawing.Point(240, 205)
+        Me.lblAngularScale.Location = New System.Drawing.Point(260, 205)
         Me.lblAngularScale.Name = "lblAngularScale"
         Me.lblAngularScale.Size = New System.Drawing.Size(76, 13)
         Me.lblAngularScale.TabIndex = 9
@@ -150,11 +150,11 @@ Partial Class dlgPolarCluster
         '
         Me.ucrNudNoOfClusters.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfClusters.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoOfClusters.Location = New System.Drawing.Point(103, 224)
+        Me.ucrNudNoOfClusters.Location = New System.Drawing.Point(138, 224)
         Me.ucrNudNoOfClusters.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoOfClusters.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfClusters.Name = "ucrNudNoOfClusters"
-        Me.ucrNudNoOfClusters.Size = New System.Drawing.Size(76, 20)
+        Me.ucrNudNoOfClusters.Size = New System.Drawing.Size(39, 20)
         Me.ucrNudNoOfClusters.TabIndex = 12
         Me.ucrNudNoOfClusters.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -162,11 +162,11 @@ Partial Class dlgPolarCluster
         '
         Me.ucrNudAngularScale.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAngularScale.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAngularScale.Location = New System.Drawing.Point(328, 201)
+        Me.ucrNudAngularScale.Location = New System.Drawing.Point(355, 201)
         Me.ucrNudAngularScale.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAngularScale.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAngularScale.Name = "ucrNudAngularScale"
-        Me.ucrNudAngularScale.Size = New System.Drawing.Size(67, 20)
+        Me.ucrNudAngularScale.Size = New System.Drawing.Size(40, 20)
         Me.ucrNudAngularScale.TabIndex = 13
         Me.ucrNudAngularScale.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -184,7 +184,7 @@ Partial Class dlgPolarCluster
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 313)
+        Me.ClientSize = New System.Drawing.Size(422, 332)
         Me.Controls.Add(Me.ucrInputColor)
         Me.Controls.Add(Me.ucrNudAngularScale)
         Me.Controls.Add(Me.ucrNudNoOfClusters)
