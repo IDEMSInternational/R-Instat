@@ -52,9 +52,12 @@ Public Class dlgTidyDailyData
         ucrPnlReshapeClimaticData.AddRadioButton(rdoMonth)
         ucrPnlReshapeClimaticData.AddRadioButton(rdoDay)
 
+        ttReshapeType.SetToolTip(rdoYear, "One column for each year")
+        ttReshapeType.SetToolTip(rdoMonth, "One column for each month (12)")
+        ttReshapeType.SetToolTip(rdoDay, "One column for each day in month (31), or alternative value/flag columns for each day in month (62)")
+
         ucrSelectorTidyDailyData.SetParameter(New RParameter("x", 0))
         ucrSelectorTidyDailyData.SetParameterIsrfunction()
-
 
         ucrReceiverStation.Selector = ucrSelectorTidyDailyData
         ucrReceiverMultipleStack.Selector = ucrSelectorTidyDailyData
@@ -66,7 +69,6 @@ Public Class dlgTidyDailyData
 
         ucrReceiverMultipleStack.SetParameter(New RParameter("stack_cols", 2))
         ucrReceiverMultipleStack.SetParameterIsString()
-
 
         ucrReceiverStation.SetParameter(New RParameter("station", 6))
         ucrReceiverStation.SetParameterIsString()
@@ -205,10 +207,13 @@ Public Class dlgTidyDailyData
     Private Sub ColumnstoStackText()
         If rdoYear.Checked Then
             lblColumnstoStack.Text = "Year Columns:"
+            ttReshapeType.SetToolTip(lblColumnstoStack, ttReshapeType.GetToolTip(rdoYear))
         ElseIf rdoMonth.Checked Then
             lblColumnstoStack.Text = "Month Columns (12):"
+            ttReshapeType.SetToolTip(lblColumnstoStack, ttReshapeType.GetToolTip(rdoMonth))
         Else
-            lblColumnstoStack.Text = "Day Columns (31):"
+            lblColumnstoStack.Text = "Day Columns (31/62):"
+            ttReshapeType.SetToolTip(lblColumnstoStack, ttReshapeType.GetToolTip(rdoDay))
         End If
     End Sub
 

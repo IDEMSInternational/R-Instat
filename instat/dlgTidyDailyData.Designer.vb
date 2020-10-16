@@ -22,6 +22,7 @@ Partial Class dlgTidyDailyData
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTidyDailyData))
         Me.lblColumnPer = New System.Windows.Forms.Label()
         Me.rdoDay = New System.Windows.Forms.RadioButton()
@@ -51,6 +52,7 @@ Partial Class dlgTidyDailyData
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputNewDataFrame = New instat.ucrInputTextBox()
         Me.lblNewDataFrameName = New System.Windows.Forms.Label()
+        Me.ttReshapeType = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpElements.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -319,4 +321,5 @@ Partial Class dlgTidyDailyData
     Friend WithEvents grpOptions As GroupBox
     Friend WithEvents lblNewDataFrameName As Label
     Friend WithEvents ucrInputNewDataFrame As ucrInputTextBox
+    Friend WithEvents ttReshapeType As ToolTip
 End Class

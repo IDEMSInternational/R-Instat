@@ -157,16 +157,16 @@
     <value>NoControl</value>
   </data>
   <data name="rdoDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>282, 30</value>
+    <value>284, 30</value>
   </data>
   <data name="rdoDay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 27</value>
+    <value>120, 27</value>
   </data>
   <data name="rdoDay.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="rdoDay.Text" xml:space="preserve">
-    <value>Day Columns (31)</value>
+    <value>Day Columns (31/62)</value>
   </data>
   <data name="rdoDay.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -193,10 +193,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 30</value>
+    <value>166, 30</value>
   </data>
   <data name="rdoMonth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 27</value>
+    <value>120, 27</value>
   </data>
   <data name="rdoMonth.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -229,10 +229,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 30</value>
+    <value>48, 30</value>
   </data>
   <data name="rdoYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 27</value>
+    <value>120, 27</value>
   </data>
   <data name="rdoYear.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -573,6 +573,15 @@
   <data name="&gt;&gt;ucrInputNewDataFrame.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkIgnoreInvalid.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 19</value>
+  </data>
+  <data name="ucrChkIgnoreInvalid.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 20</value>
+  </data>
+  <data name="ucrChkIgnoreInvalid.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
   <data name="&gt;&gt;ucrChkIgnoreInvalid.Name" xml:space="preserve">
     <value>ucrChkIgnoreInvalid</value>
   </data>
@@ -584,6 +593,15 @@
   </data>
   <data name="&gt;&gt;ucrChkIgnoreInvalid.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrChkSilent.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 53</value>
+  </data>
+  <data name="ucrChkSilent.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 20</value>
+  </data>
+  <data name="ucrChkSilent.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
   </data>
   <data name="&gt;&gt;ucrChkSilent.Name" xml:space="preserve">
     <value>ucrChkSilent</value>
@@ -718,10 +736,10 @@
     <value>12</value>
   </data>
   <data name="ucrPnlReshapeClimaticData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 26</value>
+    <value>41, 26</value>
   </data>
   <data name="ucrPnlReshapeClimaticData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 35</value>
+    <value>372, 35</value>
   </data>
   <data name="ucrPnlReshapeClimaticData.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -813,6 +831,12 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Tidy Daily Data</value>
   </data>
+  <data name="&gt;&gt;ttReshapeType.Name" xml:space="preserve">
+    <value>ttReshapeType</value>
+  </data>
+  <data name="&gt;&gt;ttReshapeType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgTidyDailyData</value>
   </data>
@@ -864,46 +888,7 @@
   <data name="&gt;&gt;grpElements.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrChkIgnoreInvalid.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 19</value>
-  </data>
-  <data name="ucrChkIgnoreInvalid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 20</value>
-  </data>
-  <data name="ucrChkIgnoreInvalid.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIgnoreInvalid.Name" xml:space="preserve">
-    <value>ucrChkIgnoreInvalid</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIgnoreInvalid.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIgnoreInvalid.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIgnoreInvalid.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkSilent.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 53</value>
-  </data>
-  <data name="ucrChkSilent.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 20</value>
-  </data>
-  <data name="ucrChkSilent.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSilent.Name" xml:space="preserve">
-    <value>ucrChkSilent</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSilent.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSilent.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSilent.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
+  <metadata name="ttReshapeType.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>
