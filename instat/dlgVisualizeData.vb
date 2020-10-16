@@ -23,8 +23,6 @@ Public Class dlgVisualizeData
     Private clsVisMissFunction As New RFunction
     Private clsVisGuessFunction As New RFunction
     Private clsCurrBaseFunction As New RFunction
-    Dim dctPalette As New Dictionary(Of String, String)
-    Dim dctPaletteGuess As New Dictionary(Of String, String)
 
     Private Sub dlgVisualizeData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -41,6 +39,11 @@ Public Class dlgVisualizeData
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim lstMaximumControls As New List(Of Control)
+        Dim lstMaximumSizeControls As New List(Of Control)
+        Dim dctPalette As New Dictionary(Of String, String)
+        Dim dctPaletteGuess As New Dictionary(Of String, String)
+
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
@@ -79,7 +82,6 @@ Public Class dlgVisualizeData
         dctPalette.Add("cb_safe", Chr(34) & "cb_safe" & Chr(34))
         ucrInputComboboxPalette.SetDropDownStyleAsNonEditable()
         ucrInputComboboxPalette.SetItems(dctPalette)
-        ucrInputComboboxPalette.bAllowNonConditionValues = True
 
         ucrInputComboboxPaletteGuess.SetParameter(New RParameter("palette", 1))
         dctPaletteGuess.Add("default", Chr(34) & "default" & Chr(34))
@@ -87,7 +89,6 @@ Public Class dlgVisualizeData
         dctPaletteGuess.Add("cb_safe", Chr(34) & "cb_safe" & Chr(34))
         ucrInputComboboxPaletteGuess.SetDropDownStyleAsNonEditable()
         ucrInputComboboxPaletteGuess.SetItems(dctPaletteGuess)
-        ucrInputComboboxPaletteGuess.bAllowNonConditionValues = True
 
         ucrNudMaximumSize.SetParameter(New RParameter("large_data_size", 4))
         ucrNudMaximumSize.DecimalPlaces = 1
@@ -107,10 +108,13 @@ Public Class dlgVisualizeData
 
         ucrInputComboboxPalette.SetLinkedDisplayControl(lblPaltte)
         ucrInputComboboxPaletteGuess.SetLinkedDisplayControl(lblPalette)
-        ucrNudMaximum.SetLinkedDisplayControl(lblMaximumS)
-        ucrNudMaximumSize.SetLinkedDisplayControl(lblMaximumSize)
-        ucrNudMaximumSize.SetLinkedDisplayControl(lblMillionDataPoints)
-        ucrNudMaximum.SetLinkedDisplayControl(lblDataPoints)
+        lstMaximumControls.Add(lblMaximumS)
+        lstMaximumControls.Add(lblDataPoints)
+        ucrNudMaximum.SetLinkedDisplayControl(lstMaximumControls)
+        lstMaximumSizeControls.Add(lblMillionDataPoints)
+        lstMaximumSizeControls.Add(lblMaximumSize)
+        ucrNudMaximumSize.SetLinkedDisplayControl(lstMaximumSizeControls)
+
         ucrNudSamplingFunction.SetLinkedDisplayControl(lblSampling)
 
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -184,6 +188,9 @@ Public Class dlgVisualizeData
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+        ' Temporary fix for resetting  the maximum value when the default is not  changed 
+        ConvertToDecimal()
+        MaximumDataPoint()
     End Sub
 
     Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVisualizeData.ControlContentsChanged, ucrSelectorVisualizeData.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
@@ -221,21 +228,29 @@ Public Class dlgVisualizeData
         End If
     End Sub
 
-    Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrSelectorVisualizeData.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged
+    Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrSelectorVisualizeData.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged, ucrInputComboboxPalette.ControlValueChanged, ucrInputComboboxPaletteGuess.ControlValueChanged
         AddRemoveDataHideOptionsButtons()
     End Sub
 
-    Private Sub ucrNudMaximumSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudMaximumSize.ControlValueChanged
+    Private Sub ConvertToDecimal()
         Dim Value As Decimal = System.Convert.ToDecimal(ucrNudMaximumSize.GetText())
         Dim strLargeDataSizeParamVal As Integer = Value * 1000000
 
         clsVisDatFunction.AddParameter("large_data_size", strParameterValue:=strLargeDataSizeParamVal, iPosition:=4)
     End Sub
 
-    Private Sub ucrNudMaximum_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudMaximum.ControlValueChanged
+    Private Sub MaximumDataPoint()
         Dim Value As Decimal = System.Convert.ToDecimal(ucrNudMaximum.GetText())
         Dim strLargeDataSizeParamVal As Integer = Value * 1000000
 
         clsVisMissFunction.AddParameter("large_data_size", strParameterValue:=strLargeDataSizeParamVal, iPosition:=5)
+    End Sub
+
+    Private Sub ucrNudMaximumSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudMaximumSize.ControlValueChanged
+        ConvertToDecimal()
+    End Sub
+
+    Private Sub ucrNudMaximum_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudMaximum.ControlValueChanged
+        MaximumDataPoint()
     End Sub
 End Class
