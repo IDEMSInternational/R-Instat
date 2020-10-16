@@ -43,7 +43,7 @@ Partial Class dlgPolarFrequency
         'lblPollutant
         '
         Me.lblPollutant.AutoSize = True
-        Me.lblPollutant.Location = New System.Drawing.Point(281, 24)
+        Me.lblPollutant.Location = New System.Drawing.Point(265, 24)
         Me.lblPollutant.Name = "lblPollutant"
         Me.lblPollutant.Size = New System.Drawing.Size(51, 13)
         Me.lblPollutant.TabIndex = 2
@@ -70,7 +70,7 @@ Partial Class dlgPolarFrequency
         'lblPosition
         '
         Me.lblPosition.AutoSize = True
-        Me.lblPosition.Location = New System.Drawing.Point(307, 258)
+        Me.lblPosition.Location = New System.Drawing.Point(300, 258)
         Me.lblPosition.Name = "lblPosition"
         Me.lblPosition.Size = New System.Drawing.Size(47, 13)
         Me.lblPosition.TabIndex = 5
@@ -88,7 +88,7 @@ Partial Class dlgPolarFrequency
         'lblMinimumBins
         '
         Me.lblMinimumBins.AutoSize = True
-        Me.lblMinimumBins.Location = New System.Drawing.Point(234, 216)
+        Me.lblMinimumBins.Location = New System.Drawing.Point(227, 216)
         Me.lblMinimumBins.Name = "lblMinimumBins"
         Me.lblMinimumBins.Size = New System.Drawing.Size(74, 13)
         Me.lblMinimumBins.TabIndex = 14
@@ -99,20 +99,20 @@ Partial Class dlgPolarFrequency
         Me.ucrInputType.AddQuotesIfUnrecognised = True
         Me.ucrInputType.GetSetSelectedIndex = -1
         Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(94, 208)
+        Me.ucrInputType.Location = New System.Drawing.Point(75, 208)
         Me.ucrInputType.Name = "ucrInputType"
-        Me.ucrInputType.Size = New System.Drawing.Size(91, 21)
+        Me.ucrInputType.Size = New System.Drawing.Size(80, 21)
         Me.ucrInputType.TabIndex = 13
         '
         'ucrNudMinimumBins
         '
         Me.ucrNudMinimumBins.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinimumBins.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinimumBins.Location = New System.Drawing.Point(354, 216)
+        Me.ucrNudMinimumBins.Location = New System.Drawing.Point(357, 216)
         Me.ucrNudMinimumBins.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMinimumBins.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinimumBins.Name = "ucrNudMinimumBins"
-        Me.ucrNudMinimumBins.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudMinimumBins.Size = New System.Drawing.Size(38, 20)
         Me.ucrNudMinimumBins.TabIndex = 12
         Me.ucrNudMinimumBins.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
@@ -121,9 +121,9 @@ Partial Class dlgPolarFrequency
         Me.ucrInputStatistic.AddQuotesIfUnrecognised = True
         Me.ucrInputStatistic.GetSetSelectedIndex = -1
         Me.ucrInputStatistic.IsReadOnly = False
-        Me.ucrInputStatistic.Location = New System.Drawing.Point(93, 232)
+        Me.ucrInputStatistic.Location = New System.Drawing.Point(75, 232)
         Me.ucrInputStatistic.Name = "ucrInputStatistic"
-        Me.ucrInputStatistic.Size = New System.Drawing.Size(92, 21)
+        Me.ucrInputStatistic.Size = New System.Drawing.Size(80, 21)
         Me.ucrInputStatistic.TabIndex = 11
         '
         'ucrInputColor
@@ -131,9 +131,9 @@ Partial Class dlgPolarFrequency
         Me.ucrInputColor.AddQuotesIfUnrecognised = True
         Me.ucrInputColor.GetSetSelectedIndex = -1
         Me.ucrInputColor.IsReadOnly = False
-        Me.ucrInputColor.Location = New System.Drawing.Point(93, 255)
+        Me.ucrInputColor.Location = New System.Drawing.Point(75, 255)
         Me.ucrInputColor.Name = "ucrInputColor"
-        Me.ucrInputColor.Size = New System.Drawing.Size(92, 21)
+        Me.ucrInputColor.Size = New System.Drawing.Size(80, 21)
         Me.ucrInputColor.TabIndex = 10
         '
         'ucrInputPosition
@@ -141,7 +141,7 @@ Partial Class dlgPolarFrequency
         Me.ucrInputPosition.AddQuotesIfUnrecognised = True
         Me.ucrInputPosition.GetSetSelectedIndex = -1
         Me.ucrInputPosition.IsReadOnly = False
-        Me.ucrInputPosition.Location = New System.Drawing.Point(354, 255)
+        Me.ucrInputPosition.Location = New System.Drawing.Point(345, 255)
         Me.ucrInputPosition.Name = "ucrInputPosition"
         Me.ucrInputPosition.Size = New System.Drawing.Size(50, 21)
         Me.ucrInputPosition.TabIndex = 9
@@ -149,7 +149,7 @@ Partial Class dlgPolarFrequency
         'ucrChkTransform
         '
         Me.ucrChkTransform.Checked = False
-        Me.ucrChkTransform.Location = New System.Drawing.Point(236, 233)
+        Me.ucrChkTransform.Location = New System.Drawing.Point(230, 235)
         Me.ucrChkTransform.Name = "ucrChkTransform"
         Me.ucrChkTransform.Size = New System.Drawing.Size(80, 20)
         Me.ucrChkTransform.TabIndex = 8
@@ -157,15 +157,15 @@ Partial Class dlgPolarFrequency
         'ucrChkKeyHeader
         '
         Me.ucrChkKeyHeader.Checked = False
-        Me.ucrChkKeyHeader.Location = New System.Drawing.Point(236, 256)
+        Me.ucrChkKeyHeader.Location = New System.Drawing.Point(231, 256)
         Me.ucrChkKeyHeader.Name = "ucrChkKeyHeader"
-        Me.ucrChkKeyHeader.Size = New System.Drawing.Size(72, 20)
+        Me.ucrChkKeyHeader.Size = New System.Drawing.Size(70, 20)
         Me.ucrChkKeyHeader.TabIndex = 7
         '
         'ucrReceiverPollutant
         '
         Me.ucrReceiverPollutant.frmParent = Me
-        Me.ucrReceiverPollutant.Location = New System.Drawing.Point(284, 44)
+        Me.ucrReceiverPollutant.Location = New System.Drawing.Point(268, 48)
         Me.ucrReceiverPollutant.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPollutant.Name = "ucrReceiverPollutant"
         Me.ucrReceiverPollutant.Selector = Nothing
@@ -179,7 +179,7 @@ Partial Class dlgPolarFrequency
         Me.ucrSelectorPolarFrequency.bDropUnusedFilterLevels = False
         Me.ucrSelectorPolarFrequency.bShowHiddenColumns = False
         Me.ucrSelectorPolarFrequency.bUseCurrentFilter = True
-        Me.ucrSelectorPolarFrequency.Location = New System.Drawing.Point(6, 5)
+        Me.ucrSelectorPolarFrequency.Location = New System.Drawing.Point(15, 9)
         Me.ucrSelectorPolarFrequency.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorPolarFrequency.Name = "ucrSelectorPolarFrequency"
         Me.ucrSelectorPolarFrequency.Size = New System.Drawing.Size(210, 180)
@@ -187,7 +187,7 @@ Partial Class dlgPolarFrequency
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 305)
+        Me.ucrBase.Location = New System.Drawing.Point(2, 305)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -196,7 +196,7 @@ Partial Class dlgPolarFrequency
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(426, 370)
+        Me.ClientSize = New System.Drawing.Size(407, 370)
         Me.Controls.Add(Me.lblMinimumBins)
         Me.Controls.Add(Me.ucrInputType)
         Me.Controls.Add(Me.ucrNudMinimumBins)
