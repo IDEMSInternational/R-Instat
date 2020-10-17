@@ -71,8 +71,8 @@ Public Class dlgBarAndPieChart
 
         ucrPnlOptions.AddRadioButton(rdoBarChart)
         ucrPnlOptions.AddRadioButton(rdoPieChart)
-        ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coord_polar")
-        ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coord_polar", False)
+        ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coordpolar")
+        ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coordpolar", False)
 
         ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrInputBarChartPosition, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -114,7 +114,7 @@ Public Class dlgBarAndPieChart
         clsRCoordPolarFunction.SetPackageName("ggplot2")
         clsRCoordPolarFunction.SetRCommand("coord_polar")
         clsRCoordPolarFunction.AddParameter("theta", Chr(34) & "y" & Chr(34))
-        clsRCoordPolarParam.SetArgumentName("coord_polar")
+        clsRCoordPolarParam.SetArgumentName("coordpolar")
         clsRCoordPolarParam.SetArgument(clsRCoordPolarFunction)
 
         clsCoordFlipFunc.SetPackageName("ggplot2")
