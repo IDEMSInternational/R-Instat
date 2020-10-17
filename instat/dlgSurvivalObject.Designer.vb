@@ -72,9 +72,9 @@ Partial Class dlgSurvivalObject
         '
         'lblOrigin
         '
-        Me.lblOrigin.Location = New System.Drawing.Point(281, 213)
+        Me.lblOrigin.Location = New System.Drawing.Point(281, 215)
         Me.lblOrigin.Name = "lblOrigin"
-        Me.lblOrigin.Size = New System.Drawing.Size(83, 15)
+        Me.lblOrigin.Size = New System.Drawing.Size(41, 19)
         Me.lblOrigin.TabIndex = 9
         Me.lblOrigin.Text = "Origin:"
         '
@@ -177,25 +177,25 @@ Partial Class dlgSurvivalObject
         Me.rdoInterval2.TabIndex = 19
         Me.rdoInterval2.TabStop = True
         Me.rdoInterval2.Text = "Interval2"
-        Me.rdoInterval2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.rdoInterval2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoInterval2.UseVisualStyleBackColor = True
         '
         'lblSelectLevels
         '
         Me.lblSelectLevels.AutoSize = True
         Me.lblSelectLevels.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectLevels.Location = New System.Drawing.Point(426, 194)
+        Me.lblSelectLevels.Location = New System.Drawing.Point(433, 195)
         Me.lblSelectLevels.Name = "lblSelectLevels"
-        Me.lblSelectLevels.Size = New System.Drawing.Size(176, 13)
+        Me.lblSelectLevels.Size = New System.Drawing.Size(173, 13)
         Me.lblSelectLevels.TabIndex = 24
-        Me.lblSelectLevels.Text = "Event occurs when variable equals:"
+        Me.lblSelectLevels.Text = "Event Occurs When Event Equals:"
         '
         'ucrModifyEventNumeric
         '
         Me.ucrModifyEventNumeric.AddQuotesIfUnrecognised = True
         Me.ucrModifyEventNumeric.IsMultiline = False
         Me.ucrModifyEventNumeric.IsReadOnly = False
-        Me.ucrModifyEventNumeric.Location = New System.Drawing.Point(427, 210)
+        Me.ucrModifyEventNumeric.Location = New System.Drawing.Point(434, 211)
         Me.ucrModifyEventNumeric.Name = "ucrModifyEventNumeric"
         Me.ucrModifyEventNumeric.Size = New System.Drawing.Size(120, 26)
         Me.ucrModifyEventNumeric.TabIndex = 25
@@ -205,7 +205,7 @@ Partial Class dlgSurvivalObject
         Me.ucrModifyEventFactor.AutoSize = True
         Me.ucrModifyEventFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrModifyEventFactor.clsReceiver = Nothing
-        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(427, 210)
+        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(434, 211)
         Me.ucrModifyEventFactor.Name = "ucrModifyEventFactor"
         Me.ucrModifyEventFactor.shtCurrSheet = Nothing
         Me.ucrModifyEventFactor.Size = New System.Drawing.Size(197, 116)
@@ -225,9 +225,9 @@ Partial Class dlgSurvivalObject
         Me.ucrInputOrigin.AddQuotesIfUnrecognised = True
         Me.ucrInputOrigin.IsMultiline = False
         Me.ucrInputOrigin.IsReadOnly = False
-        Me.ucrInputOrigin.Location = New System.Drawing.Point(281, 231)
+        Me.ucrInputOrigin.Location = New System.Drawing.Point(322, 213)
         Me.ucrInputOrigin.Name = "ucrInputOrigin"
-        Me.ucrInputOrigin.Size = New System.Drawing.Size(73, 21)
+        Me.ucrInputOrigin.Size = New System.Drawing.Size(79, 21)
         Me.ucrInputOrigin.TabIndex = 21
         '
         'ucrPnlType

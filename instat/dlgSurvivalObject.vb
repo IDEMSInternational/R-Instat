@@ -21,6 +21,7 @@ Public Class dlgSurvivalObject
     Private clsDefaultFunction As New RFunction
     Private clsRightLeftFunction As New RFunction
     Private clsStartEndFunction As New RFunction
+    Private clsInterval2Function As New RFunction
     Private clsModifyOperation As New ROperator
     Private clsCFunction As New RFunction
 
@@ -36,8 +37,12 @@ Public Class dlgSurvivalObject
         SetRCodeforControls(bReset)
         bReset = False
         TestOkEnabled()
-        DialogWidth()
     End Sub
+
+    ' TODO:
+    ' 1. Set receiver stuff. How to say, if this receiver is selected, etc etc etc
+    ' 2. If I do an "If" statement for "If X, then accept numerics/factors, else accept numerics". That works fine at first, until it's reduced to numerics only then there is an error
+    ' 3. Modify Event stuff.
 
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
@@ -50,15 +55,12 @@ Public Class dlgSurvivalObject
         ucrPnlType.AddRadioButton(rdoInterval, Chr(34) & "interval" & Chr(34))
         ucrPnlType.AddRadioButton(rdoInterval2, Chr(34) & "interval2" & Chr(34))
         ucrPnlType.AddRadioButton(rdoMstate, Chr(34) & "mstate" & Chr(34))
-        ucrPnlType.SetDefaultState(Chr(34) & "right" & Chr(34))
+        ucrPnlType.SetRDefault(Chr(34) & "right" & Chr(34))
         ' Note that this is the default in R when the status is not a factor
-        ' if status is a factor, then mstate is the new default (and it runs mstate even if you type in type = "right" - and consequently does not work in places where right censored data usually works, such as coxph model
-        ' so the option "right" cannot be chosen if status is a factor
+        ' but status should not be a factor variable for "right", hence this is the R default here.
 
         ' entry time always is time
         ' exit time is time or time2 depending if rdoright, left are selected, or one of the other four are
-        ' attach to different classes for time and time2 to get around this
-
         ucrPnlType.AddToLinkedControls(ucrReceiverEntry, {rdoCounting, rdoInterval, rdoInterval2, rdoMstate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlType.AddToLinkedControls(ucrReceiverEvent, {rdoRight, rdoLeft, rdoCounting, rdoInterval, rdoMstate}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlType.AddToLinkedControls(ucrInputOrigin, {rdoCounting}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
@@ -68,7 +70,7 @@ Public Class dlgSurvivalObject
         ucrSelectorFitObject.SetParameterIsrfunction()
 
         'ucrReceiver:
-        ' ENTRY: `time` agrument only. Only visible for c, i, i2, ms
+        ' ENTRY: `time` argument only. Only visible for c, i, i2, ms
         ucrReceiverEntry.SetParameter(New RParameter("time", 0))
         ucrReceiverEntry.SetParameterIsRFunction()
         ucrReceiverEntry.Selector = ucrSelectorFitObject
@@ -88,7 +90,7 @@ Public Class dlgSurvivalObject
         ucrReceiverEvent.SetParameter(New RParameter("event", 0, bNewIncludeArgumentName:=False))
         ucrReceiverEvent.SetParameterIsRFunction()
         ucrReceiverEvent.Selector = ucrSelectorFitObject
-        ucrReceiverEvent.SetIncludedDataTypes({"numeric"})
+        ucrReceiverEvent.SetIncludedDataTypes({"numeric", "factor"}, bStrict:=True)
         ucrReceiverEvent.SetLinkedDisplayControl(lblEvent)
 
         ' only display if counting is selected
@@ -101,16 +103,7 @@ Public Class dlgSurvivalObject
 
         'ucrChk
         ucrChkModifyEvent.SetText("Modify Event")
-        ' TODO: set up so we can add to linked controls
-        ' this can't currently be done (to my knowledge) because we need to specify if it is a factor or numeric
-        ' this is currently run manually in the Viewing modify options() sub
-
         'ucrReceiverEvent.AddToLinkedControls(ucrModifyEventNumeric, {"numeric"}, bNewLinkedHideIfParameterMissing:=True)
-
-        'ucrChkModifyEvent.AddToLinkedControls(ucrModifyEventNumeric, {True}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrChkModifyEvent.AddToLinkedControls(ucrModifyEventFactor, {True}, bNewLinkedHideIfParameterMissing:=True)
-
-        'ucrChkModifyEvent.AddParameterValuesCondition(False, "event", ucrReceiverEvent.GetVariables(), True)
         ucrChkModifyEvent.AddParameterIsROperatorCondition(True, "%in%", True)
         ucrChkModifyEvent.SetDefaultState(False)
 
@@ -139,6 +132,7 @@ Public Class dlgSurvivalObject
         clsDefaultFunction = New RFunction
         clsRightLeftFunction = New RFunction
         clsStartEndFunction = New RFunction
+        clsInterval2Function = New RFunction
         clsModifyOperation = New ROperator
         clsCFunction = New RFunction
 
@@ -151,6 +145,9 @@ Public Class dlgSurvivalObject
 
         clsStartEndFunction.SetPackageName("survival")
         clsStartEndFunction.SetRCommand("Surv")
+
+        clsInterval2Function.SetPackageName("survival")
+        clsInterval2Function.SetRCommand("Surv")
 
         ' TODO If I check several options in the factor dlg, then it runs c(c())
         clsCFunction.SetRCommand("c")
@@ -165,13 +162,16 @@ Public Class dlgSurvivalObject
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
 
-        DialogWidth()
+        SetBaseRFunction()
         ViewingModifyOptions()
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         ucrReceiverExit.AddAdditionalCodeParameterPair(clsStartEndFunction, New RParameter("time2", 1), iAdditionalPairNo:=1)
+        ucrReceiverExit.AddAdditionalCodeParameterPair(clsInterval2Function, New RParameter("time2", 1), iAdditionalPairNo:=2)
         ucrPnlType.AddAdditionalCodeParameterPair(clsStartEndFunction, New RParameter("type", 3), iAdditionalPairNo:=1)
+        ucrPnlType.AddAdditionalCodeParameterPair(clsInterval2Function, New RParameter("type", 3), iAdditionalPairNo:=2)
+        ucrReceiverEntry.AddAdditionalCodeParameterPair(clsInterval2Function, New RParameter("time", 2), iAdditionalPairNo:=1)
 
         ucrSelectorFitObject.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverEntry.SetRCode(clsStartEndFunction, bReset)
@@ -186,22 +186,37 @@ Public Class dlgSurvivalObject
     End Sub
 
     Private Sub TestOkEnabled()
-
-        If ucrReceiverExit.IsEmpty() OrElse ucrReceiverEvent.IsEmpty() OrElse Not ucrSaveObject.IsComplete() OrElse ((ucrReceiverEvent.strCurrDataType = "numeric" OrElse ucrReceiverEvent.strCurrDataType = "integer") AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventNumeric.GetText = "") OrElse (ucrReceiverEvent.strCurrDataType = "factor" AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventFactor.GetSelectedLevels = "") Then
+        If ucrReceiverExit.IsEmpty() OrElse Not ucrSaveObject.IsComplete() Then
             ucrBase.OKEnabled(False)
         Else
-            If (rdoMstate.Checked OrElse rdoCounting.Checked OrElse rdoInterval.Checked OrElse rdoInterval2.Checked) AndAlso ucrReceiverEntry.IsEmpty() Then
-                ucrBase.OKEnabled(False)
-            Else
-                If rdoCounting.Checked AndAlso ucrInputOrigin.IsEmpty() Then
+            If (rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoCounting.Checked OrElse rdoInterval.Checked OrElse rdoMstate.Checked) Then
+                If ucrReceiverEvent.IsEmpty() OrElse ((ucrReceiverEvent.strCurrDataType = "numeric" OrElse ucrReceiverEvent.strCurrDataType = "integer") AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventNumeric.GetText = "") OrElse (ucrReceiverEvent.strCurrDataType = "factor" AndAlso ucrChkModifyEvent.Checked AndAlso ucrModifyEventFactor.GetSelectedLevels = "") Then
+                    ucrBase.OKEnabled(False)
+                Else
+                    If (rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoMstate.Checked) Then
+                        ucrBase.OKEnabled(True)
+                    ElseIf (rdoCounting.Checked) Then
+                        If ucrInputOrigin.IsEmpty() OrElse ucrReceiverEntry.IsEmpty() Then
+                            ucrBase.OKEnabled(False)
+                        Else
+                            ucrBase.OKEnabled(True)
+                        End If
+                    Else 'rdoInterval.Checked
+                        If ucrReceiverEntry.IsEmpty() Then
+                            ucrBase.OKEnabled(False)
+                        Else
+                            ucrBase.OKEnabled(True)
+                        End If
+                    End If
+                End If
+            Else ' rdoInterval2.checked
+                If ucrReceiverEntry.IsEmpty() Then
                     ucrBase.OKEnabled(False)
                 Else
                     ucrBase.OKEnabled(True)
                 End If
             End If
         End If
-
-        ' TODO add chkbox stuff in here
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -211,84 +226,102 @@ Public Class dlgSurvivalObject
     End Sub
 
     Private Sub ucrPnl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlContentsChanged
-        ' exp = clsRightLeftFunction if right or left censoring occurs
-        ' otherwise exp = clsStartEndFunction if one Then Of the other four rdos are selected
 
-        If rdoRight.Checked = True OrElse rdoLeft.Checked = True Then
-            clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsRightLeftFunction)
+        ' issue: once factor/numeric is reduced to accepting numerics only, it doesnt then accept both again
+        If rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoInterval.Checked Then
+            ucrReceiverEvent.SetIncludedDataTypes({"numeric"}, bStrict:=True)
         Else
-            clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsStartEndFunction)
-
-            '            If ucrReceiverTime1.focused Then ' TODO what is the correct code for this line?
-            '            ucrReceiverTime2.SetMeAsReceiver()
-            '        End If
-
+            ucrReceiverEvent.SetIncludedDataTypes({"numeric", "factor"}, bStrict:=True)
         End If
 
-        ' mstate allows factors
-        If rdoMstate.Checked OrElse rdoCounting.Checked Then
-            ' todo: why doesn't this line work?
-            ucrReceiverEvent.SetIncludedDataTypes({"factor", "numeric"})
-        Else
-            ucrReceiverEvent.SetIncludedDataTypes({"numeric"})
-        End If
-
+        SetReceivers()
         ViewingModifyOptions()
+        SetBaseRFunction()
         TestOkEnabled()
     End Sub
 
-    Private Sub DialogWidth()
-        If ucrChkModifyEvent.Checked Then
-            Me.Size = New System.Drawing.Size(692, Me.Height)
+    Private Sub SetBaseRFunction()
+        ' exp = clsRightLeftFunction if right or left censoring occurs
+        ' otherwise exp = clsStartEndFunction if one of the other four rdos are selected
+        If rdoRight.Checked OrElse rdoLeft.Checked Then
+            clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsRightLeftFunction)
+        ElseIf rdoCounting.Checked OrElse rdoInterval.Checked Then
+            clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsStartEndFunction)
+        ElseIf rdoMstate.Checked Then
+            If ucrReceiverEntry.IsEmpty() Then
+                ' if no entry time, then mstate reads the "Exit Time" receiver as time.
+                ' if there is entry time, mstate reads the "Exit Time" receiver as time2; "Entry Time" receiver as time.
+                clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsRightLeftFunction)
+            Else
+                clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsStartEndFunction)
+            End If
         Else
-            Me.Size = New System.Drawing.Size(448, Me.Height)
+            clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsInterval2Function)
         End If
     End Sub
 
-    Private Sub ViewingModifyOptions()
-        If Not ucrReceiverEvent.IsEmpty Then
-            ucrChkModifyEvent.Enabled = True
-            If ucrChkModifyEvent.Checked Then
-                lblSelectLevels.Visible = True
+    Private Sub SetReceivers()
 
+        ' TODO: how to check if something is currently set as the receiver?
+        ' 1. if R, L, C, M, I are checked and "Event" is the receiver, then if I2 is checked, Exit should be the receiver
+        ' 2. if C, M, I, I2 are checked and "Entry" is the receiver, then if R or L is checked, Exit should be the receiver.
+
+        'If (rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoCounting.Checked OrElse rdoMstate.Checked OrElse rdoInterval.Checked) AndAlso ucrReceiverEvent.IsCurrentReceiver Then
+        If (rdoInterval2.Checked) Then
+            ucrReceiverExit.SetMeAsReceiver()
+        End If
+        'End If
+    End Sub
+
+    Private Sub ViewingModifyOptions()
+        If (rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoCounting.Checked OrElse rdoMstate.Checked OrElse rdoInterval.Checked) AndAlso Not ucrReceiverEvent.IsEmpty Then
+            ucrChkModifyEvent.Visible = True
+
+            If ucrChkModifyEvent.Checked Then
+                Me.Size = New System.Drawing.Size(692, Me.Height)
+                lblSelectLevels.Visible = True
                 clsRightLeftFunction.AddParameter("event", clsROperatorParameter:=clsModifyOperation, iPosition:=2)
                 clsStartEndFunction.AddParameter("event", clsROperatorParameter:=clsModifyOperation, iPosition:=2)
-
                 ' have to currently add these variables into the c() function manually
                 ' this is because the ucr that is added changed depending on the data type
                 ' and (to my knowledge) we can't yet do this in the automatic system
+
                 If ucrReceiverEvent.strCurrDataType = "numeric" OrElse ucrReceiverEvent.strCurrDataType = "integer" Then
                     ucrModifyEventNumeric.Visible = True
                     ucrModifyEventFactor.Visible = False
                     clsCFunction.RemoveParameterByName("y")
                     clsCFunction.AddParameter("x", ucrModifyEventNumeric.GetText(), bIncludeArgumentName:=False)
                 Else
-                    ' what if it is logic? Surely that should be treated in the "else" case
-                    ' does that work here?
                     ucrModifyEventNumeric.Visible = False
                     ucrModifyEventFactor.Visible = True
                     clsCFunction.RemoveParameterByName("x")
                     clsCFunction.AddParameter("y", ucrModifyEventFactor.GetSelectedLevels(), bIncludeArgumentName:=False)
                 End If
+
             Else
-                lblSelectLevels.Visible = False
+                Me.Size = New System.Drawing.Size(448, Me.Height)
                 ucrModifyEventNumeric.Visible = False
                 ucrModifyEventFactor.Visible = False
-
-                clsCFunction.RemoveParameterByName("x")
                 clsCFunction.RemoveParameterByName("y")
-
+                clsCFunction.RemoveParameterByName("x")
                 clsRightLeftFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
                 clsStartEndFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
             End If
 
         Else
-            ucrChkModifyEvent.Enabled = False
+            ucrChkModifyEvent.Visible = False
+            Me.Size = New System.Drawing.Size(448, Me.Height)
+            ucrModifyEventNumeric.Visible = False
+            ucrModifyEventFactor.Visible = False
+            clsCFunction.RemoveParameterByName("y")
+            clsCFunction.RemoveParameterByName("x")
+            clsRightLeftFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
+            clsStartEndFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
+            ' interval has its own function without this event parameter
         End If
     End Sub
 
     Private Sub ucrChkModifyEvent_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkModifyEvent.ControlContentsChanged
-        DialogWidth()
         TestOkEnabled()
         ViewingModifyOptions()
     End Sub
@@ -298,7 +331,13 @@ Public Class dlgSurvivalObject
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrCoreControls(ucrChangedControl As ucrCore) Handles ucrReceiverEntry.ControlContentsChanged, ucrReceiverExit.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged, ucrModifyEventFactor.ControlContentsChanged, ucrModifyEventNumeric.ControlContentsChanged, ucrChkModifyEvent.ControlContentsChanged
+    Private Sub ucrReceiverEntryControl(ucrChangedControl As ucrCore) Handles ucrReceiverEntry.ControlContentsChanged
+        SetBaseRFunction()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrCoreControls(ucrChangedControl As ucrCore) Handles ucrReceiverExit.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged, ucrModifyEventFactor.ControlContentsChanged, ucrModifyEventNumeric.ControlContentsChanged, ucrChkModifyEvent.ControlContentsChanged
+        SetReceivers()
         TestOkEnabled()
     End Sub
 End Class
