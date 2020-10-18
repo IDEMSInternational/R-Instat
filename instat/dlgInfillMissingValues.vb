@@ -479,6 +479,8 @@ Public Class dlgInfillMissingValues
                     Case "Intervals"
                         ucrChkAddLegend.Visible = True
                         clsVisualizeElementNa.AddParameter("type", Chr(34) & "interval" & Chr(34), iPosition:=8)
+                    Case Else
+                        MsgBox("Developer error: Parameter must be among the cases. Modify setup such that " & ucrInputComboType.GetText & " is included in the cases.")
                 End Select
             ElseIf rdoShow.Checked Then
                 ucrChkAddLegend.Visible = True
