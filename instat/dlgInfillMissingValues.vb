@@ -436,13 +436,8 @@ Public Class dlgInfillMissingValues
     End Sub
 
     Private Sub ucrInputComboFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboFunction.ControlValueChanged, ucrPnlMethods.ControlValueChanged, ucrChkSetSeed.ControlValueChanged, ucrPnlOptions.ControlValueChanged
-        If rdoFitSingle.Checked AndAlso rdoNaAggregate.Checked AndAlso ucrChkSetSeed.Checked Then
-            Select Case ucrInputComboFunction.GetValue()
-                Case "Sample"
-                    ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeedFunction, 0)
-                Case Else
-                    ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
-            End Select
+        If rdoFitSingle.Checked AndAlso rdoNaAggregate.Checked AndAlso ucrChkSetSeed.Checked AndAlso ucrInputComboFunction.GetText = "Sample" Then
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsSetSeedFunction, 0)
         Else
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeedFunction)
         End If
