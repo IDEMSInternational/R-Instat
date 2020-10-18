@@ -1283,6 +1283,14 @@ summary_sample <- function(x, size, replace = FALSE){
   else{sample(x = x, size = size, replace = replace)}
 }
 
+fourier_series <- function(x, n, period) {
+  p2 <- "2 * pi"
+  h <-  seq_len(n)
+  paste0("sin(", x, " * ", h, " * ", p2, " / ", period, ")", " + ", 
+         "cos(", x, " * ", h, " * ", p2, " / ", period, ")", 
+         collapse = " + ")
+}
+
 slope <- function(y, x) {
   x <- as.numeric(x)
   lm(y ~ x)$coefficients[2]
