@@ -59,7 +59,7 @@ Public Class dlgTimeSeriesPlot
     Private clsPivotCFunction As RFunction
     Private clsPivotListFunction As RFunction
     Private clsPivotFactorFunction As RFunction
-    Private clsPivotFactorLevelsCFunction As New RFunction
+    Private clsPivotFactorLevelsCFunction As RFunction
 
     ' Calculate Individual Summaries.
     ' These functions construct the R code below if mean lines and/or if annotated individual summaries are added.
