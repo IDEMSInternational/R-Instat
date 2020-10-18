@@ -33,7 +33,7 @@ Public Class dlgInfillMissingValues
         If bReset Then
             SetDefaults()
         End If
-        SetRcodeForControls(bReset)
+        SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
     End Sub
@@ -347,7 +347,7 @@ Public Class dlgInfillMissingValues
         ucrBase.clsRsyntax.SetBaseRFunction(clsVisualizeElementNa)
     End Sub
 
-    Private Sub SetRcodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsAggregateFunction, New RParameter("object", 0), iAdditionalPairNo:=1)
 
         ucrNudMaximum.AddAdditionalCodeParameterPair(clsAggregateFunction, ucrNudMaximum.GetParameter(), iAdditionalPairNo:=1)
@@ -457,7 +457,7 @@ Public Class dlgInfillMissingValues
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRcodeForControls(True)
+        SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
