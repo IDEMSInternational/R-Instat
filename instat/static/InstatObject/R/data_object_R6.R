@@ -3735,7 +3735,7 @@ DataSheet$set("public", "visualize_element_na", function(element_col_name, eleme
     }
   }
   if (!missing(station_col_name) && dplyr::n_distinct(station_names) > 1) {
-    patchwork::wrap_plots(plt_list, ncol = ncol)
+    return(patchwork::wrap_plots(plt_list, ncol = ncol))
   }
   else {
     return(plt)
