@@ -41,7 +41,8 @@ Public Class dlgImportGriddedData
         ucrInputSource.SetParameter(New RParameter("source", 0))
         dctDownloadPairs.Add("NASA", Chr(34) & "NASA" & Chr(34))
         dctDownloadPairs.Add("NOAA", Chr(34) & "NOAA" & Chr(34))
-        dctDownloadPairs.Add("TAMSAT", Chr(34) & "TAMSAT" & Chr(34))
+        dctDownloadPairs.Add("TAMSAT_v3.0", Chr(34) & "TAMSAT_v3.0" & Chr(34))
+        dctDownloadPairs.Add("TAMSAT_v3.1", Chr(34) & "TAMSAT_v3.1" & Chr(34))
         dctDownloadPairs.Add("UCSB_CHIRPS", Chr(34) & "UCSB_CHIRPS" & Chr(34))
         ucrInputSource.SetItems(dctDownloadPairs)
         ucrInputSource.SetDropDownStyleAsNonEditable()
@@ -163,7 +164,17 @@ Public Class dlgImportGriddedData
                 ucrInputData.cboInput.SelectedItem = "RFE2 Daily Precipitation"
                 ucrDtpMinDate.MinDate = New Date(2000, 10, 31)
                 ucrDtpMaxDate.MinDate = New Date(2000, 10, 31)
-            Case "TAMSAT"
+            Case "TAMSAT_v3.0"
+                dctFiles = New Dictionary(Of String, String)
+                dctFiles.Add("v3.0 Daily Rainfall", Chr(34) & "daily_rfe" & Chr(34))
+                dctFiles.Add("v3.0 Dekadal Rainfall", Chr(34) & "dekadal_rfe" & Chr(34))
+                dctFiles.Add("v3.0 Monthly Rainfall", Chr(34) & "monthly_rfe" & Chr(34))
+                dctFiles.Add("v3.0 Monthly Rainfall (Calculated)", Chr(34) & "monthly_rfe_calc" & Chr(34))
+                ucrInputData.SetItems(dctFiles)
+                ucrInputData.cboInput.SelectedItem = "v3.0 Daily Rainfall"
+                ucrDtpMinDate.MinDate = New Date(1983, 1, 1)
+                ucrDtpMaxDate.MinDate = New Date(1983, 1, 1)
+            Case "TAMSAT_v3.1"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("v3.1 Daily Rainfall", Chr(34) & "daily_rfe" & Chr(34))
                 dctFiles.Add("v3.1 Daily Rainfall Complete (Filled)", Chr(34) & "daily_rfe_filled" & Chr(34))
