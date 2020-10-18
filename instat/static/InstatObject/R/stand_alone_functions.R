@@ -1284,6 +1284,7 @@ summary_sample <- function(x, size, replace = FALSE){
 }
 
 
+
 climatic_missing <- function(data, date, elements = ..., stations,
                              start = TRUE, end = FALSE){
   
@@ -1491,10 +1492,13 @@ climatic_details <- function(data, date, elements = ..., stations,
   detail.table.all <- plyr::ldply(list_tables, data.frame)
   
   return(detail.table.all)
+
 }
 
 slope <- function(y, x) {
   x <- as.numeric(x)
   lm(y ~ x)$coefficients[2]
+
 }
+
 
