@@ -525,13 +525,8 @@ Public Class dlgInfillMissingValues
     End Sub
 
     Private Sub ucrReceiverDispMultShowStation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDispMultShowStation.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
-        If (rdoDisplay.Checked OrElse rdoShow.Checked) AndAlso Not ucrReceiverDispMultShowStation.IsEmpty Then
-            ucrNudFacetColumns.Visible = True
-            lblFacetColumns.Visible = True
-        Else
-            ucrNudFacetColumns.Visible = False
-            lblFacetColumns.Visible = False
-        End If
+        ucrNudFacetColumns.Visible = (rdoDisplay.Checked OrElse rdoShow.Checked) AndAlso Not ucrReceiverDispMultShowStation.IsEmpty
+        lblFacetColumns.Visible = ucrNudFacetColumns.Visible
     End Sub
 
     Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged, ucrPnlStartEnd.ControlContentsChanged, ucrInputConstant.ControlContentsChanged, ucrPnlMethods.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverObserved.ControlContentsChanged, ucrReceiverEstimatedElements.ControlContentsChanged, ucrChkMeanBias.ControlContentsChanged, ucrInputMeanBias.ControlContentsChanged, ucrChkStdBias.ControlContentsChanged, ucrInputStdBias.ControlContentsChanged, ucrInputNewColumnName.ControlContentsChanged, ucrReceiverImputed.ControlContentsChanged, ucrReceiverDisplayShowDate.ControlContentsChanged, ucrReceiverDisplayObserved.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
