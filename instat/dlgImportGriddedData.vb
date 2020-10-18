@@ -156,7 +156,8 @@ Public Class dlgImportGriddedData
                 dctFiles.Add("RFE2 Daily Precipitation", Chr(34) & "daily_rfev2_est_prcp" & Chr(34))
                 dctFiles.Add("RFE2 10-day Precipitation", Chr(34) & "10day_rfev2_est_prcp" & Chr(34))
                 dctFiles.Add("Daily estimated Precipitation", Chr(34) & "daily_est_prcp" & Chr(34))
-                dctFiles.Add("Monthly estimated Precipitation", Chr(34) & "monthly_est_prcp" & Chr(34))
+                dctFiles.Add("ARC2 Monthly Precipitation", Chr(34) & "monthly_est_prcp" & Chr(34))
+
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "RFE2 Daily Precipitation"
                 ucrDtpMinDate.MinDate = New Date(2000, 10, 31)
