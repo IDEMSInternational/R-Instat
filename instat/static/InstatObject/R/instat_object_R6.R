@@ -523,7 +523,7 @@ DataBook$set("public", "get_objects", function(data_name, object_name, include_o
       if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
     }
     if(!missing(object_name) && length(object_name) == 1) {
-      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot") %in% class(out)))) return(print(out))
+      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot", "openair") %in% class(out)))) return(print(out))
       else return(out)
     }
     else return(out)
@@ -544,7 +544,7 @@ DataBook$set("public", "get_objects", function(data_name, object_name, include_o
       return(lst)
     }
     else {
-      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot") %in% class(out)))) return(print(out))
+      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot", "openair") %in% class(out)))) return(print(out))
       else return(out)
     }
   }
@@ -555,7 +555,7 @@ DataBook$set("public", "get_object_names", function(data_name, include_overall =
   if(type == "") overall_object_names = names(private$.objects)
   else {
     if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
-    else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot") %in% class(x)))]
+    else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair") %in% class(x)))]
     else if(type == surv_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("Surv") %in% class(x)))]
     else if(type == table_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("htmlTable") %in% class(x)))]
     else stop("type: ", type, " not recognised")
