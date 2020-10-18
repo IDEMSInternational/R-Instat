@@ -1199,6 +1199,10 @@ Public Class frmMain
         dlgClimSoft.ShowDialog()
     End Sub
 
+    Private Sub mnuClimateFileImportFromClimSoftWizard_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportFromClimSoftWizard.Click
+        dlgClimsoftWizard.ShowDialog()
+    End Sub
+
     Private Sub mnuClimaticFileImportFromCliData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromCliData.Click
         dlgCliData.ShowDialog()
     End Sub
@@ -2195,10 +2199,6 @@ Public Class frmMain
         dlgWindPollutionRose.ShowDialog()
     End Sub
 
-    Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
-        dlgOtherRosePlots.ShowDialog()
-    End Sub
-
     Private Sub mnuClimaticCompareTimeSeriesPlot_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareTimeSeriesPlot.Click
         dlgTimeSeriesPlot.ShowDialog()
     End Sub
@@ -2209,5 +2209,21 @@ Public Class frmMain
 
     Private Sub mnuClimaticCompareConditionalQuantiles_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareConditionalQuantiles.Click
         dlgConditionalQuantilePlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularOtherRosePlotsPolarPlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarPlot.Click
+        dlgPolarPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularOtherRosePlotsPolarFrequency_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarFrequency.Click
+        dlgPolarFrequency.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularOtherRosePlotsPolarCluster_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarCluster.Click
+        dlgPolarCluster.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularOtherRosePlotsPolarAnnulus_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarAnnulus.Click
+        dlgPolarAnnulus.ShowDialog()
     End Sub
 End Class
