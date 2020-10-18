@@ -2090,6 +2090,9 @@ DataBook$set("public","package_check", function(package) {
 
 DataBook$set("public", "download_from_IRI", function(source, data, path = tempdir(), min_lon, max_lon, min_lat, max_lat, min_date, max_date, name, download_type = "Point", import = TRUE) {
   init_URL <- "https://iridl.ldeo.columbia.edu/SOURCES/"
+  dim_x <- "X"
+  dim_y <- "Y"
+  dim_t <- "T"
   if (source == "UCSB_CHIRPS") {
     prexyaddress <- paste0(init_URL, ".UCSB/.CHIRPS/.v2p0")
     if (data == "daily_improved_global_0p25_prcp") {
@@ -2107,28 +2110,50 @@ DataBook$set("public", "download_from_IRI", function(source, data, path = tempdi
     else {
       stop("Data file does not exist for CHIRPS V2P0 data")
     }
-  } else if (source == "TAMSAT") {
+  } else if (source == "TAMSAT_v3.0") {
+    dim_x <- "lon"
+    dim_y <- "lat"
+    prexyaddress <- paste0(init_URL, ".Reading/.Meteorology/.TAMSAT/.TARCAT/.v3p0")
+    if (data == "daily_rfe") {
+      dim_t <- "time"
+      extension <- ".daily/.rfe"
+    } # grid: /time (julian_day) ordered (1 Jan 1983) to (10 Sep 2020) by 1.0 N= 13768 pts :grid
+    else if (data == "dekadal_rfe") {
+      extension <- ".dekadal/.rfe"
+    } # grid: /T (days since 1960-01-01) ordered [ (1-10 Jan 1983) (11-20 Jan 1983) (21-31 Jan 1983) ... (1-10 Sep 2020)] N= 1357 pts :grid
+    else if (data == "monthly_rfe") {
+      dim_t <- "time"
+      extension <- ".monthly/.rfe"
+    } # grid: /time (months since 1960-01-01) ordered (Jan 1983) to (Aug 2020) by 1.0 N= 452 pts :grid
+    else if (data == "monthly_rfe_calc") {
+      dim_t <- "time"
+      extension <- ".monthly/.rfe_calc"
+    } # grid: /time (months since 1960-01-01) ordered (Feb 1983) to (Sep 2020) by 1.0 N= 452 pts :grid
+    else {
+      stop("Data file does not exist for TAMSAT_v3.0 data")
+    }
+  } else if (source == "TAMSAT_v3.1") {
     prexyaddress <- paste0(init_URL, ".Reading/.Meteorology/.TAMSAT/.TARCAT/.v3p1")
     if (data == "daily_rfe") {
       extension <- ".daily/.rfe"
     } # grid: /T (julian_day) ordered (1 Jan 1983) to (10 Sep 2020) by 1.0 N= 13768 pts :grid
     else if (data == "daily_rfe_filled") {
-      extension <- ".daily/.rfe_filled/"
+      extension <- ".daily/.rfe_filled"
     } # grid: /T (julian_day) ordered (1 Jan 1983) to (10 Sep 2020) by 1.0 N= 13768 pts :grid
     else if (data == "dekadal_rfe") {
-      extension <- ".dekadal/.rfe/"
+      extension <- ".dekadal/.rfe"
     } # grid: /T (days since 1960-01-01) ordered [ (1-10 Jan 1983) (11-20 Jan 1983) (21-31 Jan 1983) ... (1-10 Sep 2020)] N= 1357 pts :grid
     else if (data == "dekadal_rfe_filled") {
-      extension <- ".dekadal/.rfe_filled/"
+      extension <- ".dekadal/.rfe_filled"
     } # grid: /T (days since 1960-01-01) ordered [ (1-10 Jan 1983) (11-20 Jan 1983) (21-31 Jan 1983) ... (1-10 Sep 2020)] N= 1357 pts :grid
     else if (data == "monthly_rfe") {
-      extension <- ".monthly/.rfe/"
+      extension <- ".monthly/.rfe"
     } # grid: /T (months since 1960-01-01) ordered (Jan 1983) to (Aug 2020) by 1.0 N= 452 pts :grid
     else if (data == "monthly_rfe_filled") {
-      extension <- ".monthly/.rfe_filled/"
+      extension <- ".monthly/.rfe_filled"
     } # grid: /T (months since 1960-01-01) ordered (Jan 1983) to (Aug 2020) by 1.0 N= 452 pts :grid
     else {
-      stop("Data file does not exist for TAMSAT data")
+      stop("Data file does not exist for TAMSAT_v3.1 data")
     }
   } else if (source == "NOAA") {
     prexyaddress <- paste0(init_URL, ".NOAA/.NCEP/.CPC/.FEWS/.Africa")
@@ -2194,13 +2219,13 @@ DataBook$set("public", "download_from_IRI", function(source, data, path = tempdi
   }
   prexyaddress <- paste(prexyaddress, extension, sep = "/")
   if (download_type == "Area") {
-    URL <- add_xy_area_range(path = prexyaddress, min_lon = min_lon, min_lat = min_lat, max_lon = max_lon, max_lat = max_lat)
+    URL <- add_xy_area_range(path = prexyaddress, min_lon = min_lon, min_lat = min_lat, max_lon = max_lon, max_lat = max_lat, dim_x = dim_x, dim_y = dim_y)
   }
   else if (download_type == "Point") {
-    URL <- add_xy_point_range(path = prexyaddress, min_lon = min_lon, min_lat = min_lat)
+    URL <- add_xy_point_range(path = prexyaddress, min_lon = min_lon, min_lat = min_lat, dim_x = dim_x, dim_y = dim_y)
   }
   if (!missing(min_date) & !missing(max_date)) {
-    URL <- URL %>% add_t_range(min_date = min_date, max_date = max_date)
+    URL <- URL %>% add_t_range(min_date = min_date, max_date = max_date, dim_t = dim_t)
   }
   URL <- URL %>% add_nc()
   file_name <- tempfile(pattern = tolower(source), tmpdir = path, fileext = ".nc")
