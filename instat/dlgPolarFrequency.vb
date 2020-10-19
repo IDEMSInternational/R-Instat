@@ -120,7 +120,7 @@ Public Class dlgPolarFrequency
         ucrBase.clsRsyntax.SetBaseRFunction(clsPolarFrequencyFunction)
     End Sub
 
-    Private Sub SetRcodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
