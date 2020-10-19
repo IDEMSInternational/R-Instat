@@ -853,7 +853,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-        PasteValuesToDataFrame(SelectedColumnsAsArray(), 1, True)
+        PasteValuesToDataFrame(SelectedColumnsAsArray(), 1, False)
     End Sub
 
     ''' <summary>
