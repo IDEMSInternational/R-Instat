@@ -108,12 +108,11 @@ Public Class dlgClimaticSummary
         ucrReceiverDOY.strSelectorHeading = "Day Variables"
 
         ' summary
-        ucrReceiverElement.SetParameter(New RParameter("columns_to_summarise", 0))
-        ucrReceiverElement.SetParameterIsString()
-        ucrReceiverElement.strSelectorHeading = "Variables"
-        ucrReceiverElement.Selector = ucrSelectorVariable
-        ucrReceiverElement.SetIncludedDataTypes({"numeric"})
-        ucrReceiverElement.bAutoFill = True
+        ucrReceiverElements.SetParameter(New RParameter("columns_to_summarise", 0))
+        ucrReceiverElements.SetParameterIsString()
+        ucrReceiverElements.strSelectorHeading = "Variables"
+        ucrReceiverElements.Selector = ucrSelectorVariable
+        ucrReceiverElements.SetIncludedDataTypes({"numeric"})
 
         ' Other checkbox options
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
@@ -170,7 +169,7 @@ Public Class dlgClimaticSummary
 
         bResetSubdialog = True
         ucrSelectorVariable.Reset()
-        ucrReceiverElement.SetMeAsReceiver()
+        ucrReceiverElements.SetMeAsReceiver()
 
         'TODO: this changes to from >= receiver and to <= receiver if annual-variable is checekd.
         clsFromAndToConditionOperator.bToScriptAsRString = True
@@ -222,7 +221,7 @@ Public Class dlgClimaticSummary
         ucrChkAddDateColumn.SetRCode(clsAddDateFunction, bReset)
 
         ucrSelectorVariable.SetRCode(clsDefaultFunction, bReset)
-        ucrReceiverElement.SetRCode(clsDefaultFunction, bReset)
+        ucrReceiverElements.SetRCode(clsDefaultFunction, bReset)
         ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
         ucrChkPrintOutput.SetRCode(clsDefaultFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsDefaultFunction, bReset)
@@ -233,7 +232,7 @@ Public Class dlgClimaticSummary
 
     'TODO: run these things at the correct times
     Public Sub TestOKEnabled()
-        If Not clsSummariesList.clsParameters.Count = 0 AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso sdgSummaries.bOkEnabled Then
+        If Not clsSummariesList.clsParameters.Count = 0 AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso sdgSummaries.bOkEnabled Then
             If rdoAnnual.Checked Then
                 If Not ucrReceiverDOY.IsEmpty AndAlso (Not ucrReceiverYear.IsEmpty OrElse Not ucrReceiverStation.IsEmpty) Then
                     ucrBase.OKEnabled(True)
@@ -282,8 +281,8 @@ Public Class dlgClimaticSummary
 
     Private Sub WithinYearLabelReceiverLocation()
         If rdoWithinYear.Checked Then
-            lblWithinYear.Location = New Point(lblWithinYear.Location.X, iReceiverMaxY / 1.25)
-            ucrReceiverWithinYear.Location = New Point(ucrReceiverWithinYear.Location.X, iReceiverLabelMaxY / 1.11)
+            lblWithinYear.Location = New Point(lblWithinYear.Location.X, iReceiverMaxY / 1.19)
+            ucrReceiverWithinYear.Location = New Point(ucrReceiverWithinYear.Location.X, iReceiverLabelMaxY / 1.08)
         Else
             lblWithinYear.Location = New Point(lblWithinYear.Location.X, iReceiverLabelMaxY)
             ucrReceiverWithinYear.Location = New Point(ucrReceiverWithinYear.Location.X, iReceiverMaxY)
@@ -329,7 +328,7 @@ Public Class dlgClimaticSummary
         WithinYearLabelReceiverLocation()
         SetFactors()
         If (rdoWithinYear.Checked AndAlso (ucrSelectorVariable.CurrentReceiver Is ucrReceiverYear)) OrElse (rdoAnnual.Checked AndAlso (ucrSelectorVariable.CurrentReceiver Is ucrReceiverWithinYear)) Then
-            ucrReceiverElement.SetMeAsReceiver()
+            ucrReceiverElements.SetMeAsReceiver()
         End If
     End Sub
 
@@ -382,11 +381,11 @@ Public Class dlgClimaticSummary
         End If
     End Sub
 
-    Private Sub Receivers_controlValueChanged(ucrChangedControl As Control) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverElement.ControlValueChanged, ucrReceiverDOY.ControlValueChanged, ucrReceiverDate.ControlValueChanged
+    Private Sub Receivers_controlValueChanged(ucrChangedControl As Control) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverElements.ControlValueChanged, ucrReceiverDOY.ControlValueChanged, ucrReceiverDate.ControlValueChanged
         SetFactors()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged, ucrPnlAnnualWithin.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrReceiverWithinYear.ControlContentsChanged, ucrPnlAnnualWithin.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
