@@ -14,29 +14,25 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports RDotNet
 Public Class ucrReorder
     Public Event OrderChanged()
     Public WithEvents ucrDataFrameList As ucrDataFrame
     Public WithEvents ucrReceiver As ucrReceiverSingle
-    Private strDataType As String
-    Dim selectedListViewItem As ListViewItem
-    Dim selectedIndex As Integer
-    Dim itemsCount As Integer
+    Private strDataType As String = ""
     Public bWithQuotes As Boolean = True
     Public bIsDataType As Boolean = True
     Public Event SelectedIndexChanged(sender As Object, e As EventArgs)
 
-    Public Sub New()
-
-        ' This call is required by the designer.
-        InitializeComponent()
-
-        ' Add any initialization after the InitializeComponent() call.
-        strDataType = ""
-        selectedListViewItem = New ListViewItem
-    End Sub
+    ''' <summary>
+    ''' represents the allowed direction values of reordering the contents of the ListView  
+    ''' </summary>
+    Private Enum Direction
+        Up
+        Down
+        Top
+        Bottom
+    End Enum
 
     Public Sub setDataType(strType As String)
         strDataType = strType
@@ -58,77 +54,72 @@ Public Class ucrReorder
     End Sub
 
     Private Sub cmdUp_Click(sender As Object, e As EventArgs) Handles cmdUp.Click
-        If lstAvailableData.Items.Count > 0 And lstAvailableData.SelectedItems.Count > 0 Then
-            selectedListViewItem = lstAvailableData.SelectedItems(0)
-            selectedIndex = lstAvailableData.SelectedItems.Item(0).Index
-            itemsCount = lstAvailableData.Items.Count
-            'checks if the item is at the top, if true exits
-            If selectedIndex = 0 Then
-                Exit Sub
-            Else
-                lstAvailableData.Items.RemoveAt(selectedIndex)
-                lstAvailableData.Items.Insert(selectedIndex - 1, selectedListViewItem)
-
-            End If
-            selectedListViewItem.Selected = True
-            lstAvailableData.Select()
-            selectedListViewItem.EnsureVisible()
-            RaiseEvent OrderChanged()
-        End If
-
+        ReorderListViewItems(Direction.Up)
     End Sub
 
     Private Sub cmdDown_click(sender As Object, e As EventArgs) Handles cmdDown.Click
-        If lstAvailableData.Items.Count > 0 And lstAvailableData.SelectedItems.Count > 0 Then
-            selectedListViewItem = lstAvailableData.SelectedItems(0)
-            selectedIndex = selectedListViewItem.Index
-            itemsCount = lstAvailableData.Items.Count
-            'checks if the item is at the bottom, if true exits
-            If selectedIndex = itemsCount - 1 Then
-                Exit Sub
-            Else
-                lstAvailableData.Items.Remove(selectedListViewItem)
-                lstAvailableData.Items.Insert(selectedIndex + 1, selectedListViewItem)
-            End If
-            selectedListViewItem.Selected = True
-            lstAvailableData.Select()
-            selectedListViewItem.EnsureVisible()
-            RaiseEvent OrderChanged()
-        End If
+        ReorderListViewItems(Direction.Down)
     End Sub
 
     Private Sub cmdBottom_Click(sender As Object, e As EventArgs) Handles cmdBottom.Click
-        If lstAvailableData.Items.Count > 0 And lstAvailableData.SelectedItems.Count > 0 Then
-            selectedListViewItem = lstAvailableData.SelectedItems(0)
-            selectedIndex = selectedListViewItem.Index
-            itemsCount = lstAvailableData.Items.Count
-            'checks if the item is at the bottom, if not moves it to the bottom
-            If Not selectedIndex = itemsCount - 1 Then
-                lstAvailableData.Items.Remove(selectedListViewItem)
-                lstAvailableData.Items.Insert(itemsCount - 1, selectedListViewItem)
-            End If
-            selectedListViewItem.Selected = True
-            lstAvailableData.Select()
-            selectedListViewItem.EnsureVisible()
-            RaiseEvent OrderChanged()
-        End If
+        ReorderListViewItems(Direction.Bottom)
     End Sub
 
     Private Sub cmdTop_Click(sender As Object, e As EventArgs) Handles cmdTop.Click
-        If lstAvailableData.Items.Count > 0 And lstAvailableData.SelectedItems.Count > 0 Then
-            selectedListViewItem = lstAvailableData.SelectedItems(0)
-            selectedIndex = selectedListViewItem.Index
-            itemsCount = lstAvailableData.Items.Count
-            'checks if the item is at the top, if not moves it to the top
-            If Not selectedIndex = 0 Then
-                lstAvailableData.Items.Remove(selectedListViewItem)
-                lstAvailableData.Items.Insert(0, selectedListViewItem)
-            End If
-            selectedListViewItem.Selected = True
-            lstAvailableData.Select()
-            selectedListViewItem.EnsureVisible()
-            RaiseEvent OrderChanged()
+        ReorderListViewItems(Direction.Top)
+    End Sub
+
+    ''' <summary>
+    ''' reorders the items in the listview based on the direction option given and raises reorder event
+    ''' </summary>
+    ''' <param name="enumDirection">direction, allowed values; top,up,down,bottom.</param>
+    Private Sub ReorderListViewItems(enumDirection As Direction)
+        'if no data selection just exit reorder
+        If lstAvailableData.SelectedItems.Count = 0 Then
+            Exit Sub
         End If
+
+        Dim dctSelectedItems As New Dictionary(Of Integer, ListViewItem)
+        Dim iStartindex As Integer = 0
+        'get the selected listview items with their original indices 
+        For Each objItem As ListViewItem In lstAvailableData.SelectedItems
+            dctSelectedItems.Add(objItem.Index, objItem)
+        Next
+
+        'remove all selected items
+        For Each kvpItem As KeyValuePair(Of Integer, ListViewItem) In dctSelectedItems
+            lstAvailableData.Items.Remove(kvpItem.Value)
+        Next
+
+        'reorder the items in the list view based on the option given
+        For Each kvpItem As KeyValuePair(Of Integer, ListViewItem) In dctSelectedItems
+            Select Case enumDirection
+                Case Direction.Top
+                    lstAvailableData.Items.Insert(iStartindex, kvpItem.Value)
+                    iStartindex = iStartindex + 1
+                Case Direction.Up
+                    If kvpItem.Key = 0 Then
+                        lstAvailableData.Items.Insert(0, kvpItem.Value)
+                    Else
+                        lstAvailableData.Items.Insert(kvpItem.Key - 1, kvpItem.Value)
+                    End If
+                Case Direction.Down
+                    If kvpItem.Key >= lstAvailableData.Items.Count - 1 Then
+                        lstAvailableData.Items.Add(kvpItem.Value)
+                    Else
+                        lstAvailableData.Items.Insert(kvpItem.Key + 1, kvpItem.Value)
+                    End If
+                Case Direction.Bottom
+                    lstAvailableData.Items.Add(kvpItem.Value)
+            End Select
+        Next
+
+        'change focus to the listview 
+        lstAvailableData.Select()
+        'scroll to the selected items if necessary
+        dctSelectedItems.Values.LastOrDefault().EnsureVisible()
+        'notify order changed
+        RaiseEvent OrderChanged()
     End Sub
 
     Public Function GetVariableNames(Optional bWithQuotes As Boolean = True) As String
