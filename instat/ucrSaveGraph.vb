@@ -31,7 +31,9 @@ Public Class ucrSaveGraph
     Public Event ContentsChanged()
     Public bFirstLoad As Boolean
 
-    ''' <summary> Initialize component for the designer and any initialization after initializing component. </summary>
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary> Constructs and initializes this component. </summary>
+    '''--------------------------------------------------------------------------------------------
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
