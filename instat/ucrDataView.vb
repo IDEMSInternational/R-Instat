@@ -908,13 +908,16 @@ Public Class ucrDataView
         linkMenuItem.Location = New Point(0, position)
         linkMenuItem.Height = 13
         linkMenuItem.LinkBehavior = LinkBehavior.NeverUnderline
+        linkMenuItem.AutoSize = True
 
-        lblMenuItemPath.Text = linkMenuItem.Tag 'get file path from link tag
+        'add the link control. 
+        panelRecentMenuItems.Controls.Add(linkMenuItem)
+
+        'add the label control. will be besides each other on the same Y axis
+        lblMenuItemPath.Text = If(String.IsNullOrEmpty(linkMenuItem.Tag), "", Path.GetDirectoryName(linkMenuItem.Tag))
         lblMenuItemPath.Location = New Point(linkMenuItem.Width + 10, position)
         lblMenuItemPath.Height = 13
-
-        'add the controls. The link and and the label will be besides each other on the same Y axis
-        panelRecentMenuItems.Controls.Add(linkMenuItem)
+        lblMenuItemPath.AutoSize = True
         panelRecentMenuItems.Controls.Add(lblMenuItemPath)
     End Sub
 

@@ -147,9 +147,6 @@ Public Class clsRecentFiles
                 mnuFileIcon.DropDownItems.Remove(clsMenu)
             Next
 
-            'removes all the data view window recent file menu items
-            ucrDataViewWindow.ClearRecentFileMenuItems()
-
             'displays items (_in reverse order) for dialogs
             For icounter As Integer = mnuItems.Count - 1 To 0 Step -1
                 Dim dialog As Form = mnuItems(icounter)
@@ -162,7 +159,10 @@ Public Class clsRecentFiles
                 mnuTbShowLast10.DropDownItems.Insert(mnuTbShowLast10.DropDownItems.Count - 1, clsItem)
             Next
 
-            'displays items (_in reverse order) for recent files 
+            'remove all the data view window recent file menu items
+            ucrDataViewWindow.ClearRecentFileMenuItems()
+
+            'then displays items (_in reverse order) for recent files 
             Dim strPath As String
             Dim strFileName As String
             For iCounter As Integer = strListMRU.Count - 1 To 0 Step -1
@@ -191,11 +191,12 @@ Public Class clsRecentFiles
                     linkMenuItem.Tag = strPath 'path used when the link is clicked
 
                     ucrDataViewWindow.InsertRecentFileMenuItems(linkMenuItem)
+
                     'attach link click event handler for opening the file
                     AddHandler linkMenuItem.Click, AddressOf mnuFileMRU_Click
 
                     'if recent files are more than 5 then just the "more" link label and exit loop 
-                    If strListMRU.Count - iCounter >= 5 Then
+                    If strListMRU.Count - iCounter > 4 Then
                         linkMenuItem = New LinkLabel
                         linkMenuItem.Text = "More ..."
                         linkMenuItem.Tag = ""
