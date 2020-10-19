@@ -45,7 +45,8 @@ Public Class ucrSaveGraph
         bFirstLoad = True
     End Sub
     ''' <summary> Executes whenever this control loads.
-    '''           If this is the first time that the control has loaded then sets the control to the default state.
+    '''           If this is the first time that the control has loaded then sets the control to 
+    '''           the default state.
     '''           If the control has already been loaded then this function does nothing.
     ''' </summary>
     ''' <param name="sender"> Source of the event. </param>
