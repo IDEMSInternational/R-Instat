@@ -235,10 +235,10 @@ Public Class dlgEnter
         lstView.Columns.Add("Commands", 450)
 
         'add rows of sample commands
-        lstView.Items.Add(New ListViewItem({"c(4.5)"}))
+        lstView.Items.Add(New ListViewItem({"4.5"}))
         lstView.Items.Item(0).ToolTipText = "A single number repeated for the data frame" 'todo. sensible tooltip here.
 
-        lstView.Items.Add(New ListViewItem({"c('Nairobi')"}))
+        lstView.Items.Add(New ListViewItem({"'Nairobi'"}))
         lstView.Items.Item(1).ToolTipText = "a single text repeated for the data frame" 'todo. Sensible tooltip here.
 
         lstView.Items.Add(New ListViewItem({"c(2,3,4)*1.5E02"}))
