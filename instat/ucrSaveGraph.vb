@@ -92,7 +92,7 @@ Public Class ucrSaveGraph
     Private Sub ucrInputGraphName_ContentsChanged() Handles ucrInputGraphName.ContentsChanged
         RaiseEvent ContentsChanged()
     End Sub
-    ''' <summary> Save the graph when the check box save graph is checked. </summary>
+   ''' <summary> Returns the state of the save graph check box. </summary>
     ''' <returns> True if the check box is checked. </returns>
     Public ReadOnly Property bSaveGraph() As Boolean
         Get
