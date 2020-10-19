@@ -186,7 +186,6 @@ Public Class dlgRegularSequence
         ucrInputComboDatesBy.SetRCode(clsByDateOperator, bReset)
 
         'Set to base function so that control is set correctly
-        'After then set to nothing so that updating is done manually
         ucrNewColumnName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrPnlSequenceType.SetRCode(clsRepFunction, bReset)
