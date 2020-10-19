@@ -174,6 +174,7 @@ Public Class dlgInventoryPlot
         ucrInputFacetBy.SetLinkedDisplayControl(lblFacetBy)
         lstCmdControls.AddRange({cmdInventoryPlotOptions, cmdOptions})
         ucrChkFlipCoordinates.SetLinkedDisplayControl(lstCmdControls)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -198,6 +199,7 @@ Public Class dlgInventoryPlot
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsInventoryPlot, iPosition:=0)
+
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -229,6 +231,7 @@ Public Class dlgInventoryPlot
         ucrChkOmitEnd.SetRCode(clsClimaticMissing, bReset)
         ucrPnlOrder.SetRCode(clsClimaticDetails, bReset)
         ucrPnlOptions.SetRSyntax(ucrBase.clsRsyntax, bReset)
+
     End Sub
 
     Private Sub TestOkEnabled()
@@ -259,6 +262,7 @@ Public Class dlgInventoryPlot
                 ucrBase.OKEnabled(False)
             End If
         End If
+
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs)
@@ -271,7 +275,9 @@ Public Class dlgInventoryPlot
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
+
     End Sub
+
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoMissing.Checked Then
             ucrReceiverDate.SetParameterIsRFunction()
@@ -285,7 +291,9 @@ Public Class dlgInventoryPlot
             clsInventoryPlot.iCallType = 3
             clsInventoryPlot.bExcludeAssignedFunctionOutput = False
         End If
+
     End Sub
+
     Private Sub ucrChkSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSummary.ControlValueChanged
         If ucrChkSummary.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticMissing, iPosition:=1)
@@ -293,6 +301,7 @@ Public Class dlgInventoryPlot
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticMissing)
         End If
+
     End Sub
 
     Private Sub ucrChkDetails_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDetails.ControlValueChanged
@@ -302,6 +311,7 @@ Public Class dlgInventoryPlot
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsClimaticDetails)
         End If
+
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
@@ -314,16 +324,20 @@ Public Class dlgInventoryPlot
             clsClimaticDetails.RemoveParameterByName("station")
             clsClimaticMissing.RemoveParameterByName("station")
         End If
+
+    End Sub
+
+    Private Sub ucrBase_ClickClose(sender As Object, e As EventArgs) Handles ucrBase.ClickClose
+        If rdoMissing.Checked AndAlso Not (ucrChkSummary.Checked OrElse ucrChkDetails.Checked) Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticMissing, iPosition:=1)
+            clsClimaticDetails.iCallType = 2
+        End If
+
     End Sub
 
     Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrSaveDetails.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrChkSummary.ControlContentsChanged, ucrChkDetails.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkHour.ControlContentsChanged, ucrChkMinute.ControlContentsChanged, ucrChkSecond.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOkEnabled()
+
     End Sub
 
-    Private Sub ucrBase_ClickClose(sender As Object, e As EventArgs) Handles ucrBase.ClickClose
-        If rdoMissing.Checked AndAlso Not ucrChkSummary.Checked AndAlso Not ucrChkDetails.Checked Then
-            ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticMissing, iPosition:=1)
-            clsClimaticDetails.iCallType = 2
-        End If
-    End Sub
 End Class

@@ -1287,11 +1287,6 @@ summary_sample <- function(x, size, replace = FALSE){
 climatic_missing <- function(data, date, elements = ..., stations,
                              start = TRUE, end = FALSE){
   
-  # if there are no stations, set it as 1
-  # (can otherwise just run the function without stations present in that brackets)
-  if (missing(stations)){
-    data %>% mutate(stations = 1)
-  }
   
   if (missing(date)){
     stop('argument "date" is missing, with no default')
@@ -1370,11 +1365,6 @@ climatic_details <- function(data, date, elements = ..., stations,
                  month = FALSE,
                  year = FALSE, level = FALSE){
   
-  # if there are no stations, set it as 1
-  # (can otherwise just run the function without stations present in that brackets)
-  if (missing(stations)){
-    data %>% dplyr::mutate(stations = 1)
-  }
   
   if (missing(date)){
     stop('argument "date" is missing, with no default')
