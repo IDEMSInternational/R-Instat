@@ -125,11 +125,7 @@ Public Class dlgPolarFrequency
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverPollutant.IsEmpty Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
+            ucrBase.OKEnabled(ucrReceiverPollutant.IsEmpty)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
