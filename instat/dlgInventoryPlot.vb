@@ -202,6 +202,7 @@ Public Class dlgInventoryPlot
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsInventoryPlot, iPosition:=0)
         clsInventoryPlot.iCallType = 3
+        clsInventoryPlot.bExcludeAssignedFunctionOutput = False
 
     End Sub
 
@@ -321,19 +322,6 @@ Public Class dlgInventoryPlot
         End If
 
     End Sub
-
-    'Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
-    '    If Not ucrReceiverStation.IsEmpty Then
-    '        clsInventoryPlot.AddParameter("station_col", ucrReceiverStation.GetVariableNames, iPosition:=3)
-    '        clsClimaticDetails.AddParameter("station", clsRFunctionParameter:=ucrReceiverStation.GetVariables, iPosition:=3)
-    '        clsClimaticMissing.AddParameter("station", clsRFunctionParameter:=ucrReceiverStation.GetVariables, iPosition:=3)
-    '    Else
-    '        clsInventoryPlot.RemoveParameterByName("station_col")
-    '        clsClimaticDetails.RemoveParameterByName("station")
-    '        clsClimaticMissing.RemoveParameterByName("station")
-    '    End If
-
-    'End Sub
 
     Private Sub ucrBase_ClickClose(sender As Object, e As EventArgs) Handles ucrBase.ClickClose
         If rdoMissing.Checked AndAlso Not (ucrChkSummary.Checked OrElse ucrChkDetails.Checked) Then
