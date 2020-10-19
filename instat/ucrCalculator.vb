@@ -20,7 +20,6 @@ Public Class ucrCalculator
     Public Event SelectionChanged()
     Public Event SaveNameChanged()
     Public Event DataFrameChanged()
-    Public Event SaveResultsCheckedChanged()
     Public Event TryCommadClick()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
@@ -985,10 +984,6 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub chkSaveResultInto_CheckedChanged(sender As Object, e As EventArgs)
-        RaiseEvent SaveResultsCheckedChanged()
-    End Sub
-
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrSelectorForCalculations.DataFrameChanged
         ucrTryCalculator.ucrInputTryMessage.SetName("")
         RaiseEvent DataFrameChanged()
@@ -1230,10 +1225,6 @@ Public Class ucrCalculator
 
     Private Sub ucrReceiverForCalculation_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverForCalculation.SelectionChanged
         RaiseEvent SelectionChanged()
-    End Sub
-
-    Private Sub ucrSaveResultInto_NameChanged()
-        RaiseEvent SaveNameChanged()
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
