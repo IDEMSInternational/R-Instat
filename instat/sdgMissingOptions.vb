@@ -24,21 +24,22 @@ Public Class sdgMissingOptions
     End Sub
 
     Public Sub InitialiseControls()
+        Dim lstCheckboxes As New List(Of ucrCheck)
         ucrChkMaxNumMissing.AddToLinkedControls({ucrNudNumber}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkMaxPercMissing.AddToLinkedControls({ucrInputPercentage}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkMinNumNonMissing.AddToLinkedControls({ucrNudNumberNotMissing}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=340)
         ucrChkConsecutiveMissing.AddToLinkedControls({ucrNudConsecutive}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=4)
 
-        ucrChkMaxNumMissing.SetParameter(New RParameter("n", 1, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'n'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMaxNumMissing.SetParameter(New RParameter("n", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'n'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkMaxNumMissing.SetText("Maximum number of missing allowed")
 
-        ucrChkMinNumNonMissing.SetParameter(New RParameter("n_non_miss", 2, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'n_non_miss'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMinNumNonMissing.SetParameter(New RParameter("n_non_miss", 2), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'n_non_miss'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkMinNumNonMissing.SetText("Minimum number of non missing required")
 
-        ucrChkMaxPercMissing.SetParameter(New RParameter("prop", 3, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'prop'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkMaxPercMissing.SetParameter(New RParameter("prop", 3), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'prop'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkMaxPercMissing.SetText("Maximum percentage of missing allowed")
 
-        ucrChkConsecutiveMissing.SetParameter(New RParameter("con", 4, bNewIncludeArgumentName:=False), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'con'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkConsecutiveMissing.SetParameter(New RParameter("con", 4), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "'con'" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkConsecutiveMissing.SetText("Maximum number of consecutive missing allowed")
 
         ucrInputPercentage.SetParameter(New RParameter("na_max_prop", 10))
@@ -51,6 +52,12 @@ Public Class sdgMissingOptions
         ucrNudNumberNotMissing.SetMinMax(0, iNewMax:=Integer.MaxValue)
 
         ucrNudConsecutive.SetParameter(New RParameter("na_consecutive_n", 13))
+
+        lstCheckboxes.AddRange({ucrChkMaxNumMissing, ucrChkMinNumNonMissing, ucrChkMaxPercMissing, ucrChkConsecutiveMissing})
+        For Each ctrTemp As ucrCheck In lstCheckboxes
+            ctrTemp.SetParameterIncludeArgumentName(False)
+            ctrTemp.SetRDefault(Chr(34) & Chr(34))
+        Next
     End Sub
 
     Public Sub SetRFunction(clsNewSummaryFunction As RFunction, clsNewConcFunction As RFunction, Optional bReset As Boolean = False)
