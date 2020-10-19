@@ -192,6 +192,11 @@ Public Class dlgColumnStats
         Else
             clsDefaultFunction.RemoveParameterByName("use")
         End If
+        If Not ucrChkOmitMissing.Checked AndAlso clsDefaultFunction.ContainsParameter("na_type") Then
+            clsDefaultFunction.RemoveParameterByName("na_type")
+        Else
+            clsDefaultFunction.AddParameter("na_type", clsRFunctionParameter:=clsConcFunction, iPosition:=9)
+        End If
         cmdMissingOptions.Enabled = ucrChkOmitMissing.Checked
     End Sub
 
