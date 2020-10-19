@@ -59,6 +59,8 @@ Public Class dlgInventoryPlot
 
         ucrReceiverStation.Selector = ucrInventoryPlotSelector
         ucrReceiverStation.SetClimaticType("station")
+        ucrReceiverStation.SetParameter(New RParameter("station_col", 3))
+        ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.strSelectorHeading = "Factors"
 
@@ -199,6 +201,7 @@ Public Class dlgInventoryPlot
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.AddToBeforeCodes(clsInventoryPlot, iPosition:=0)
+        clsInventoryPlot.iCallType = 3
 
     End Sub
 
@@ -206,10 +209,12 @@ Public Class dlgInventoryPlot
         ucrInventoryPlotSelector.AddAdditionalCodeParameterPair(clsClimaticDetails, New RParameter("data", 0), iAdditionalPairNo:=1)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsClimaticDetails, New RParameter("date", 1), iAdditionalPairNo:=1)
         ucrReceiverElements.AddAdditionalCodeParameterPair(clsClimaticDetails, New RParameter("elements", 2), iAdditionalPairNo:=1)
+        ucrReceiverStation.AddAdditionalCodeParameterPair(clsClimaticDetails, New RParameter("station", 3), iAdditionalPairNo:=1)
 
         ucrInventoryPlotSelector.AddAdditionalCodeParameterPair(clsClimaticMissing, New RParameter("data", 0), iAdditionalPairNo:=2)
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsClimaticMissing, New RParameter("date", 1), iAdditionalPairNo:=2)
         ucrReceiverElements.AddAdditionalCodeParameterPair(clsClimaticMissing, New RParameter("elements", 2), iAdditionalPairNo:=2)
+        ucrReceiverStation.AddAdditionalCodeParameterPair(clsClimaticMissing, New RParameter("station", 3), iAdditionalPairNo:=2)
 
         ucrInventoryPlotSelector.SetRCode(clsInventoryPlot, bReset)
         ucrReceiverDate.SetRCode(clsInventoryPlot, bReset)
@@ -221,6 +226,7 @@ Public Class dlgInventoryPlot
         ucrPnlPlotType.SetRCode(clsInventoryPlot, bReset)
         ucrInputFacetBy.SetRCode(clsInventoryPlot, bReset)
         ucrSaveGraph.SetRCode(clsInventoryPlot, bReset)
+        ucrReceiverStation.SetRCode(clsInventoryPlot, bReset)
         ucrChkSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkDetails.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkYear.SetRCode(clsClimaticDetails, bReset)
@@ -280,10 +286,12 @@ Public Class dlgInventoryPlot
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoMissing.Checked Then
+            ucrReceiverStation.SetParameterIsRFunction()
             ucrReceiverDate.SetParameterIsRFunction()
             ucrInventoryPlotSelector.SetParameterIsrfunction()
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsInventoryPlot)
         ElseIf rdoGraph.Checked Then
+            ucrReceiverStation.SetParameterIsString()
             ucrReceiverDate.SetParameterIsString()
             ucrInventoryPlotSelector.SetParameterIsString()
             ucrBase.clsRsyntax.ClearCodes()
@@ -314,18 +322,18 @@ Public Class dlgInventoryPlot
 
     End Sub
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
-        If Not ucrReceiverStation.IsEmpty Then
-            clsInventoryPlot.AddParameter("station_col", ucrReceiverStation.GetVariableNames, iPosition:=3)
-            clsClimaticDetails.AddParameter("station", clsRFunctionParameter:=ucrReceiverStation.GetVariables, iPosition:=3)
-            clsClimaticMissing.AddParameter("station", clsRFunctionParameter:=ucrReceiverStation.GetVariables, iPosition:=3)
-        Else
-            clsInventoryPlot.RemoveParameterByName("station_col")
-            clsClimaticDetails.RemoveParameterByName("station")
-            clsClimaticMissing.RemoveParameterByName("station")
-        End If
+    'Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged
+    '    If Not ucrReceiverStation.IsEmpty Then
+    '        clsInventoryPlot.AddParameter("station_col", ucrReceiverStation.GetVariableNames, iPosition:=3)
+    '        clsClimaticDetails.AddParameter("station", clsRFunctionParameter:=ucrReceiverStation.GetVariables, iPosition:=3)
+    '        clsClimaticMissing.AddParameter("station", clsRFunctionParameter:=ucrReceiverStation.GetVariables, iPosition:=3)
+    '    Else
+    '        clsInventoryPlot.RemoveParameterByName("station_col")
+    '        clsClimaticDetails.RemoveParameterByName("station")
+    '        clsClimaticMissing.RemoveParameterByName("station")
+    '    End If
 
-    End Sub
+    'End Sub
 
     Private Sub ucrBase_ClickClose(sender As Object, e As EventArgs) Handles ucrBase.ClickClose
         If rdoMissing.Checked AndAlso Not (ucrChkSummary.Checked OrElse ucrChkDetails.Checked) Then

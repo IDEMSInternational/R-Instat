@@ -1335,7 +1335,7 @@ climatic_missing <- function(data, date, elements = ..., stations,
                                  dplyr::summarise(From = dplyr::first(start),
                                                   To = dplyr::last(end),
                                                   Missing = sum(is.na(value)),
-                                                  `%` = sum(is.na(value))/n()*100)
+                                                  `%` = round(sum(is.na(value))/n()*100, 1))
     
     # complete years
     complete.years <- data.stack %>%
@@ -1345,7 +1345,7 @@ climatic_missing <- function(data, date, elements = ..., stations,
       dplyr::summarise(count = sum(is.na(value)))
     complete.years <- complete.years %>%
       dplyr::group_by({{ stations }}, Element) %>%
-      dplyr::summarise(Complete.Years = sum(count == 0))
+      dplyr::summarise(Full_Years = sum(count == 0))
     
   
     # bind together
