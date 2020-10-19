@@ -44,6 +44,7 @@ Public Class ucrSaveGraph
         ucrInputGraphName.SetValidationTypeAsRVariable()
         bFirstLoad = True
     End Sub
+    '''--------------------------------------------------------------------------------------------
     ''' <summary> Executes whenever this control loads.
     '''           If this is the first time that the control has loaded then sets the control to 
     '''           the default state.
@@ -51,64 +52,78 @@ Public Class ucrSaveGraph
     ''' </summary>
     ''' <param name="sender"> Source of the event. </param>
     ''' <param name="e"> Event information. </param>
+    '''--------------------------------------------------------------------------------------------
     Private Sub ucrSaveGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             SetDefaults()
             bFirstLoad = False
         End If
     End Sub
-
+    '''--------------------------------------------------------------
     ''' <summary> Sets the control to its default state. </summary>
+    '''--------------------------------------------------------------
     Private Sub SetDefaults()
         chkSaveGraph.Checked = False
         ucrInputGraphName.Visible = False
     End Sub
-
+    '''------------------------------------------------------------------
     ''' <summary> Resets the control to its default state. </summary>
+    '''------------------------------------------------------------------
     Public Sub Reset()
         SetDefaults()
     End Sub
+    '''-------------------------------------------------------------------------------------------------
     ''' <summary> Sets the new data frame selector and links the selector to the combo box. </summary>
     ''' <param name="ucrNewDataFrameSelector"> The new data frame selector. </param>
+    '''-------------------------------------------------------------------------------------------------
     Public Sub SetDataFrameSelector(ucrNewDataFrameSelector As ucrDataFrame)
         ucrInputGraphName.SetDataFrameSelector(ucrNewDataFrameSelector)
     End Sub
-
+    '''----------------------------------------------------------------------------------------
     ''' <summary> Handles event triggered when the state of the check box changes. </summary>
     ''' <param name="sender"> Source of the event. </param>
     ''' <param name="e"> Event information. </param>
+    '''----------------------------------------------------------------------------------------
     Private Sub chkSaveGraph_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveGraph.CheckedChanged
         ucrInputGraphName.Enabled = chkSaveGraph.Checked
         ucrInputGraphName.Visible = chkSaveGraph.Checked
         RaiseEvent SaveGraphCheckedChanged()
     End Sub
+    '''--------------------------------------------------------------------------------
     ''' <summary> Handles event triggered when the combo box name changes. </summary>
+    '''--------------------------------------------------------------------------------
     Private Sub ucrInputGraphName_NameChanged() Handles ucrInputGraphName.NameChanged
         If chkSaveGraph.Checked Then
             RaiseEvent GraphNameChanged()
         End If
     End Sub
+    '''-----------------------------------------------------------------------------------
     ''' <summary> Handles event triggered when the combo box contents changes. </summary>
+    '''-----------------------------------------------------------------------------------
     Private Sub ucrInputGraphName_ContentsChanged() Handles ucrInputGraphName.ContentsChanged
         RaiseEvent ContentsChanged()
     End Sub
-   ''' <summary> Returns the state of the save graph check box. </summary>
+    '''----------------------------------------------------------------------
+    ''' <summary> Returns the state of the save graph check box. </summary>
     ''' <returns> True if the check box is checked. </returns>
+    '''----------------------------------------------------------------------
     Public ReadOnly Property bSaveGraph() As Boolean
         Get
             Return chkSaveGraph.Checked
         End Get
     End Property
-
+    '''---------------------------------------------------------------------
     ''' <summary> Sets the name of the graph in the combo box. </summary>
     ''' <returns> Return the name graph. </returns>
+    '''---------------------------------------------------------------------
     Public ReadOnly Property strGraphName() As String
         Get
             Return ucrInputGraphName.GetText()
         End Get
     End Property
-
+    '''---------------------------------------------------------------------------------
     ''' <summary> Sets the prefix for the combo box value to the new prefix. </summary>
+    '''---------------------------------------------------------------------------------
     Public WriteOnly Property strPrefix() As String
         Set(strNewPrefix As String)
             ucrInputGraphName.SetPrefix(strNewPrefix)
