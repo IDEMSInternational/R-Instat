@@ -40,21 +40,11 @@ Public Class dlgSurvivalObject
     End Sub
 
     ' TODO:
-
-    ' checkbox: %in% 
-    ' left (0) is event parameter
-    ' right (1) changes
-    '' if numerical: right is c(INPUT BOX STUFF) - so the clsCfunction
-    '' if factor: right is GET FACTOR LEVELS STUFF
-    '' if logical: right is GET VALUE FROM COMBO BOX
-
-    '1. combine subs - 352 into 296
-    '' Get factor and numerical working
     ' 2. get logical working
     ' 3. is logical showing up for mstate or counting
 
     ' consider what to do for interval:
-    '' could do four inputs and a big ifelse thing (ifelse(event == THING IN A, 0, event)) where thing in A corresponds to an input box next to word: right ccenosred if event is: ....
+    '' could do four inputs and a big ifelse thing (ifelse(event == THING IN A, 0, event)) where thing in A corresponds to an input box next to word: right ccent
     '' or tooltip
 
     Private Sub InitialiseDialog()
@@ -185,7 +175,7 @@ Public Class dlgSurvivalObject
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
 
         SetBaseRFunction()
-        ViewingModifyOptions()
+        ModifyOptions()
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -277,65 +267,70 @@ Public Class dlgSurvivalObject
         End If
     End Sub
 
-    Private Sub ViewingModifyOptions()
+    Private Sub ModifyOptions()
+
+        ' checkbox is %in% 
+        ' left (0) is event parameter
+        ' right (1) changes
+        '' if numerical: right is clsCfunction. With input box read in
+        '' if factor: right is from factor grid
+        '' if logical: right is value from combo box
+
         If (rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoCounting.Checked OrElse rdoMstate.Checked OrElse rdoInterval.Checked) AndAlso Not ucrReceiverEvent.IsEmpty Then
             ucrChkModifyEvent.Visible = True
 
             If ucrChkModifyEvent.Checked Then
                 Me.Size = New System.Drawing.Size(692, Me.Height)
                 lblSelectLevels.Visible = True
+                ' have to currently add these variables manually because the ucr that is added changed depending on the data type
+                ' and (to my knowledge) we can't yet do this in the automatic system
                 clsRightLeftFunction.AddParameter("event", clsROperatorParameter:=clsModifyOperation, iPosition:=2)
                 clsStartEndFunction.AddParameter("event", clsROperatorParameter:=clsModifyOperation, iPosition:=2)
-                ' have to currently add these variables into the c() function manually
-                ' this is because the ucr that is added changed depending on the data type
-                ' and (to my knowledge) we can't yet do this in the automatic system
 
-                If ucrReceiverEvent.strCurrDataType = "numeric" OrElse ucrReceiverEvent.strCurrDataType = "integer" Then
-                    ucrModifyEventNumeric.Visible = True
-                    ucrModifyEventFactor.Visible = False
-                    ucrModifyEventLogical.Visible = False
-                    clsCFunction.RemoveParameterByName("y")
-                    clsCFunction.RemoveParameterByName("z")
-                    clsCFunction.AddParameter("x", ucrModifyEventNumeric.GetText(), bIncludeArgumentName:=False)
-                ElseIf ucrReceiverEvent.strCurrDataType = "logical" Then
-                    ucrModifyEventNumeric.Visible = False
-                    ucrModifyEventFactor.Visible = False
-                    ucrModifyEventLogical.Visible = True
-                    clsCFunction.RemoveParameterByName("y")
-                    clsCFunction.RemoveParameterByName("x")
-                    clsCFunction.AddParameter("z", ucrModifyEventLogical.GetText(), bIncludeArgumentName:=False)
-                Else
+                If ucrReceiverEvent.strCurrDataType = "factor" Then
+                    clsModifyOperation.ClearParameters()
+                    clsModifyOperation.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, bIncludeArgumentName:=False, iPosition:=0)
+                    clsModifyOperation.AddParameter("factor_value", ucrModifyEventFactor.GetSelectedLevels(), bIncludeArgumentName:=False, iPosition:=1)
+
                     ucrModifyEventNumeric.Visible = False
                     ucrModifyEventFactor.Visible = True
                     ucrModifyEventLogical.Visible = False
-                    clsCFunction.RemoveParameterByName("x")
-                    clsCFunction.RemoveParameterByName("z")
-                    clsCFunction.AddParameter("y", ucrModifyEventFactor.GetSelectedLevels(), bIncludeArgumentName:=False)
-                End If
 
+                Else
+                    clsModifyOperation.RemoveParameterByName("factor_value")
+                    clsModifyOperation.AddParameter(clsRFunctionParameter:=clsCFunction, iPosition:=1)
+
+                    'If ucrReceiverEvent.strCurrDataType = "logical" Then
+                    '    clsCFunction.RemoveParameterByName("x")
+                    '    clsCFunction.AddParameter("z", ucrModifyEventLogical.GetText(), bIncludeArgumentName:=False)
+                    '    ucrModifyEventNumeric.Visible = False
+                    '    ucrModifyEventFactor.Visible = False
+                    '    ucrModifyEventLogical.Visible = True
+
+                    ' Else '(if numeric or integer)
+                    clsCFunction.RemoveParameterByName("z")
+                    clsCFunction.AddParameter("x", ucrModifyEventNumeric.GetText(), bIncludeArgumentName:=False)
+                    ucrModifyEventNumeric.Visible = True
+                    ucrModifyEventFactor.Visible = False
+                    ucrModifyEventLogical.Visible = False
+                End If
             Else
                 Me.Size = New System.Drawing.Size(448, Me.Height)
+                clsRightLeftFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
+                clsStartEndFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
                 ucrModifyEventNumeric.Visible = False
                 ucrModifyEventFactor.Visible = False
                 ucrModifyEventLogical.Visible = False
-                clsCFunction.RemoveParameterByName("y")
-                clsCFunction.RemoveParameterByName("x")
-                clsRightLeftFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
-                clsStartEndFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
             End If
 
         Else
-            ucrChkModifyEvent.Visible = False
             Me.Size = New System.Drawing.Size(448, Me.Height)
+            clsRightLeftFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
+            clsStartEndFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
+            ucrChkModifyEvent.Visible = False
             ucrModifyEventNumeric.Visible = False
             ucrModifyEventFactor.Visible = False
             ucrModifyEventLogical.Visible = False
-            clsCFunction.RemoveParameterByName("y")
-            clsCFunction.RemoveParameterByName("x")
-            clsCFunction.RemoveParameterByName("z")
-            clsRightLeftFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
-            clsStartEndFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
-            ' interval has its own function without this event parameter
         End If
     End Sub
 
@@ -355,35 +350,22 @@ Public Class dlgSurvivalObject
             End If
         End If
         SetReceivers()
-        ViewingModifyOptions()
+        ModifyOptions()
         SetBaseRFunction()
         TestOkEnabled()
     End Sub
 
     Private Sub ucrModifyEventFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrModifyEventFactor.ControlValueChanged
-        If {"factor"}.Contains(ucrReceiverEvent.strCurrDataType) Then ' check this is factors and not logicals
-            clsModifyOperation.ClearParameters()
-            clsModifyOperation.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, bIncludeArgumentName:=False, iPosition:=0)
-            clsModifyOperation.AddParameter("y", ucrModifyEventFactor.GetSelectedLevels(), bIncludeArgumentName:=False, iPosition:=1)
-        Else ' logical and numerics
-            ' if logical: just get the value. No need for c().
-            clsModifyOperation.RemoveParameterByName("y")
-            clsModifyOperation.AddParameter(clsRFunctionParameter:=clsCFunction, iPosition:=1)
-        End If
+        ModifyOptions()
     End Sub
 
     Private Sub ucrSelectorFitObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFitObject.ControlContentsChanged
         SetReceivers()
     End Sub
 
-    Private Sub ucrChkModifyEvent_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkModifyEvent.ControlContentsChanged
+    Private Sub ucrChkModifyEvent_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkModifyEvent.ControlContentsChanged, ucrReceiverEvent.ControlContentsChanged
         TestOkEnabled()
-        ViewingModifyOptions()
-    End Sub
-
-    Private Sub ucrReceiverEventControl(ucrChangedControl As ucrCore) Handles ucrReceiverEvent.ControlContentsChanged
-        ViewingModifyOptions()
-        TestOkEnabled()
+        ModifyOptions()
     End Sub
 
     Private Sub ucrReceiverEntryControl(ucrChangedControl As ucrCore) Handles ucrReceiverEntry.ControlContentsChanged
