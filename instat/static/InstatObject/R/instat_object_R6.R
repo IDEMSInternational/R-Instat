@@ -2074,7 +2074,7 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
   
   if(continue) {
     # Standard format of slowest varying structure variables first (station then element then date) followed by measurements
-    if(!missing(station)) z <- data.frame(station = y$station, date = y$date)
+    if(!missing(station)) z <- data.frame(station = forcats::as_factor(y$station), date = y$date)
     else z <- data.frame(date = y$date)
     if(!missing(element)) z$element <- y$element
     z[[element_name]] <- y[[element_name]]
@@ -2112,7 +2112,6 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     if(continue) {
       # Add this last to ensure date varies fastest
       id_cols <- c(id_cols, "date")
-      print(id_cols)
       # TODO Find a better way to do this. Update if there could be more the 3 id cols.
       if(length(id_cols) == 1) {
         z <- z %>% dplyr::arrange(.data[[id_cols[1]]])
