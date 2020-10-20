@@ -744,7 +744,7 @@
     <value>False</value>
   </data>
   <data name="mnuClimaticEvaporationSite.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticEvaporationSite.Text" xml:space="preserve">
     <value>Site...</value>
@@ -753,7 +753,7 @@
     <value>False</value>
   </data>
   <data name="mnuClimaticEvaporationPenman.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticEvaporationPenman.Text" xml:space="preserve">
     <value>Penman...</value>
@@ -1068,82 +1068,82 @@
     <value>209, 6</value>
   </data>
   <data name="mnuClimaticTidyandExamineVisualiseData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>215, 22</value>
   </data>
   <data name="mnuClimaticTidyandExamineVisualiseData.Text" xml:space="preserve">
-    <value>Visualise Data</value>
+    <value>Visualise Data...</value>
   </data>
   <data name="mnuClimaticTidyandExamineTidyDailyData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>215, 22</value>
   </data>
   <data name="mnuClimaticTidyandExamineTidyDailyData.Text" xml:space="preserve">
     <value>Tidy Daily Data...</value>
   </data>
   <data name="mnuClimaticTidyandExamineNonNumericCases.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>215, 22</value>
   </data>
   <data name="mnuClimaticTidyandExamineNonNumericCases.Text" xml:space="preserve">
     <value>Non-numeric Cases...</value>
   </data>
   <data name="mnuClimaticTidyandExamineReplaceValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>215, 22</value>
   </data>
   <data name="mnuClimaticTidyandExamineReplaceValues.Text" xml:space="preserve">
     <value>Replace Values...</value>
   </data>
   <data name="mnuClimaticTidyandExamineDuplicates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>215, 22</value>
   </data>
   <data name="mnuClimaticTidyandExamineDuplicates.Text" xml:space="preserve">
     <value>Duplicates...</value>
   </data>
   <data name="ToolStripSeparator54.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 6</value>
+    <value>212, 6</value>
   </data>
   <data name="mnuClimaticTidyandExamineStack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>215, 22</value>
   </data>
   <data name="mnuClimaticTidyandExamineStack.Text" xml:space="preserve">
     <value>Stack...</value>
   </data>
   <data name="mnuClimaticTidyandExamineUnstack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>215, 22</value>
   </data>
   <data name="mnuClimaticTidyandExamineUnstack.Text" xml:space="preserve">
     <value>Unstack...</value>
   </data>
   <data name="mnuClimaticTidyandExamineMerge.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>215, 22</value>
   </data>
   <data name="mnuClimaticTidyandExamineMerge.Text" xml:space="preserve">
     <value>Merge...</value>
   </data>
   <data name="mnuClimaticTidyandExamineAppend.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>215, 22</value>
   </data>
   <data name="mnuClimaticTidyandExamineAppend.Text" xml:space="preserve">
     <value>Append...</value>
   </data>
   <data name="ToolStripSeparator50.Size" type="System.Drawing.Size, System.Drawing">
-    <value>208, 6</value>
+    <value>212, 6</value>
   </data>
   <data name="mnuClimaticTidyandExamineOneVariableSummarize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>215, 22</value>
   </data>
   <data name="mnuClimaticTidyandExamineOneVariableSummarize.Text" xml:space="preserve">
     <value>One Variable Summarise...</value>
   </data>
   <data name="mnuClimaticTidyandExamineOneVariableGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>215, 22</value>
   </data>
   <data name="mnuClimaticTidyandExamineOneVariableGraph.Text" xml:space="preserve">
     <value>One Variable Graph...</value>
   </data>
   <data name="mnuClimaticTidyandExamineOneVariableFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>211, 22</value>
+    <value>215, 22</value>
   </data>
   <data name="mnuClimaticTidyandExamineOneVariableFrequencies.Text" xml:space="preserve">
-    <value>One Variable Frequencies</value>
+    <value>One Variable Frequencies...</value>
   </data>
   <data name="mnuClimaticTidyandExamine.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
@@ -1152,25 +1152,25 @@
     <value>Tidy and Examine</value>
   </data>
   <data name="mnuClimaticDatesGenerateDates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticDatesGenerateDates.Text" xml:space="preserve">
     <value>Generate Dates...</value>
   </data>
   <data name="mnuClimaticDatesMakeDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticDatesMakeDate.Text" xml:space="preserve">
     <value>Make Date...</value>
   </data>
   <data name="mnuClimaticDatesInfillMissingDates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticDatesInfillMissingDates.Text" xml:space="preserve">
     <value>Fill Date Gaps...</value>
   </data>
   <data name="mnuClimaticDatesUseDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticDatesUseDate.Text" xml:space="preserve">
     <value>Use Date...</value>
@@ -1179,7 +1179,7 @@
     <value>False</value>
   </data>
   <data name="mnuClimaticDatesMakeTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticDatesMakeTime.Text" xml:space="preserve">
     <value>Make Time...</value>
@@ -1188,7 +1188,7 @@
     <value>False</value>
   </data>
   <data name="mnuClimaticDatesUseTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticDatesUseTime.Text" xml:space="preserve">
     <value>Use Time...</value>
@@ -1206,46 +1206,46 @@
     <value>Define Climatic Data...</value>
   </data>
   <data name="mnuClimaticCheckDataInventory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticCheckDataInventory.Text" xml:space="preserve">
     <value>Inventory...</value>
   </data>
   <data name="mnuClimaticCheckDataFillMissingValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticCheckDataFillMissingValues.Text" xml:space="preserve">
     <value>Fill Missing Values...</value>
   </data>
   <data name="ToolStripSeparator65.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuClimaticCheckDataDisplayDaily.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticCheckDataDisplayDaily.Text" xml:space="preserve">
     <value>Display Daily...</value>
   </data>
   <data name="mnuClimaticCheckDataBoxplot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticCheckDataBoxplot.Text" xml:space="preserve">
     <value>Boxplot...</value>
   </data>
   <data name="mnuClimaticCheckDataQCTemperatures.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticCheckDataQCTemperatures.Text" xml:space="preserve">
     <value>QC Temperatures...</value>
   </data>
   <data name="mnuClimaticCheckDataQCRainfall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticCheckDataQCRainfall.Text" xml:space="preserve">
     <value>QC Rainfall...</value>
   </data>
   <data name="mnuClimaticCheckDataHomogenization.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuClimaticCheckDataHomogenization.Text" xml:space="preserve">
     <value>Homogenization...</value>
