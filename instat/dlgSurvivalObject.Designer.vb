@@ -44,6 +44,7 @@ Partial Class dlgSurvivalObject
         Me.ucrReceiverEntry = New instat.ucrReceiverSingle()
         Me.ucrSelectorFitObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrModifyEventLogical = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblEntryTime
@@ -299,11 +300,22 @@ Partial Class dlgSurvivalObject
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 12
         '
+        'ucrModifyEventLogical
+        '
+        Me.ucrModifyEventLogical.AddQuotesIfUnrecognised = True
+        Me.ucrModifyEventLogical.GetSetSelectedIndex = -1
+        Me.ucrModifyEventLogical.IsReadOnly = False
+        Me.ucrModifyEventLogical.Location = New System.Drawing.Point(434, 211)
+        Me.ucrModifyEventLogical.Name = "ucrModifyEventLogical"
+        Me.ucrModifyEventLogical.Size = New System.Drawing.Size(120, 21)
+        Me.ucrModifyEventLogical.TabIndex = 26
+        '
         'dlgSurvivalObject
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(638, 335)
+        Me.Controls.Add(Me.ucrModifyEventLogical)
         Me.Controls.Add(Me.ucrModifyEventNumeric)
         Me.Controls.Add(Me.lblSelectLevels)
         Me.Controls.Add(Me.ucrModifyEventFactor)
@@ -358,4 +370,5 @@ Partial Class dlgSurvivalObject
     Friend WithEvents ucrModifyEventNumeric As ucrInputTextBox
     Friend WithEvents lblSelectLevels As Label
     Friend WithEvents ucrModifyEventFactor As ucrFactor
+    Friend WithEvents ucrModifyEventLogical As ucrInputComboBox
 End Class
