@@ -292,7 +292,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdInventoryPlotOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 215</value>
+    <value>7, 215</value>
   </data>
   <data name="cmdInventoryPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 23</value>
@@ -322,7 +322,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 240</value>
+    <value>7, 240</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 23</value>
@@ -511,7 +511,7 @@
     <value>6</value>
   </data>
   <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 254</value>
+    <value>7, 254</value>
   </data>
   <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>381, 60</value>
@@ -694,7 +694,7 @@
     <value>6</value>
   </data>
   <data name="grpDetailsOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 316</value>
+    <value>7, 316</value>
   </data>
   <data name="grpDetailsOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>381, 114</value>
@@ -829,7 +829,7 @@
     <value>2</value>
   </data>
   <data name="grpPlotType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 269</value>
+    <value>7, 269</value>
   </data>
   <data name="grpPlotType.Size" type="System.Drawing.Size, System.Drawing">
     <value>201, 53</value>
@@ -1093,7 +1093,7 @@
     <value>21</value>
   </data>
   <data name="ucrInventoryPlotSelector.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 32</value>
+    <value>7, 32</value>
   </data>
   <data name="ucrInventoryPlotSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

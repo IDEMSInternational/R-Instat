@@ -163,14 +163,11 @@ Public Class dlgInventoryPlot
 
         ucrPnlOptions.AddToLinkedControls({ucrChkDisplayRainDays, ucrChkFlipCoordinates, ucrChkShowNonMissing, ucrPnlPlotType, ucrSaveGraph, ucrInputTitle, ucrInputFacetBy}, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkSummary, ucrChkDetails}, {rdoMissing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkDetails.AddToLinkedControls({ucrChkDay, ucrSaveDetails}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkDetails.AddToLinkedControls({ucrChkDay}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDetails.AddToLinkedControls({ucrPnlOrder}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSummary.AddToLinkedControls({ucrChkOmitStart, ucrChkOmitEnd}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDay.SetLinkedDisplayControl(grpDetailsOptions)
-        ucrChkSummary.SetLinkedDisplayControl(ucrPnlOrder)
         ucrChkSummary.SetLinkedDisplayControl(grpOptions)
-        ucrPnlOrder.SetLinkedDisplayControl(rdoDateOrder)
-        ucrPnlOrder.SetLinkedDisplayControl(rdoElementOrder)
         ucrPnlPlotType.SetLinkedDisplayControl(grpPlotType)
         ucrInputTitle.SetLinkedDisplayControl(lblGraphTitle)
         ucrInputFacetBy.SetLinkedDisplayControl(lblFacetBy)
@@ -190,9 +187,9 @@ Public Class dlgInventoryPlot
         ucrSaveDetails.Reset()
 
         clsInventoryPlot.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
-        clsInventoryPlot.AddParameter("coord_flip", "FALSE")
-        clsInventoryPlot.AddParameter("year_doy_plot", "FALSE")
-        clsInventoryPlot.AddParameter("facet_by", "NULL")
+        clsInventoryPlot.AddParameter("coord_flip", "FALSE", iPosition:=4)
+        clsInventoryPlot.AddParameter("year_doy_plot", "FALSE", iPosition:=6)
+        clsInventoryPlot.AddParameter("facet_by", "NULL", iPosition:=8)
         clsInventoryPlot.SetAssignTo("last_graph", strTempDataframe:=ucrInventoryPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         clsClimaticMissing.SetRCommand("climatic_missing")
@@ -323,7 +320,7 @@ Public Class dlgInventoryPlot
 
     End Sub
 
-    Private Sub ucrBase_ClickClose(sender As Object, e As EventArgs) Handles ucrBase.ClickClose
+    Private Sub ucrBase_ClickClose(sender As Object, e As EventArgs) Handles ucrBase.ClickClose, Me.Closing
         If rdoMissing.Checked AndAlso Not (ucrChkSummary.Checked OrElse ucrChkDetails.Checked) Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsClimaticMissing, iPosition:=1)
             clsClimaticDetails.iCallType = 2
