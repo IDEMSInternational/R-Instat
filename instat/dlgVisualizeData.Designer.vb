@@ -27,18 +27,12 @@ Partial Class dlgVisualizeData
         Me.rdoVisGuess = New System.Windows.Forms.RadioButton()
         Me.rdoWholeDataFrame = New System.Windows.Forms.RadioButton()
         Me.rdoSelectedColumn = New System.Windows.Forms.RadioButton()
-        Me.lblPalette = New System.Windows.Forms.Label()
         Me.lblMaximumSize = New System.Windows.Forms.Label()
         Me.lblMillionDataPoints = New System.Windows.Forms.Label()
         Me.lblPaltte = New System.Windows.Forms.Label()
-        Me.lblMaximumS = New System.Windows.Forms.Label()
-        Me.lblDataPoints = New System.Windows.Forms.Label()
         Me.lblSampling = New System.Windows.Forms.Label()
         Me.ucrNudSamplingFunction = New instat.ucrNud()
-        Me.ucrNudMaximum = New instat.ucrNud()
         Me.ucrNudMaximumSize = New instat.ucrNud()
-        Me.ucrInputComboboxPaletteGuess = New instat.ucrInputComboBox()
-        Me.ucrChkSortMiss = New instat.ucrCheck()
         Me.ucrChkSortVariables = New instat.ucrCheck()
         Me.ucrInputComboboxPalette = New instat.ucrInputComboBox()
         Me.ucrReceiverVisualizeData = New instat.ucrReceiverMultiple()
@@ -119,15 +113,6 @@ Partial Class dlgVisualizeData
         Me.rdoSelectedColumn.Text = "Selected Variables"
         Me.rdoSelectedColumn.UseVisualStyleBackColor = True
         '
-        'lblPalette
-        '
-        Me.lblPalette.AutoSize = True
-        Me.lblPalette.Location = New System.Drawing.Point(10, 269)
-        Me.lblPalette.Name = "lblPalette"
-        Me.lblPalette.Size = New System.Drawing.Size(43, 13)
-        Me.lblPalette.TabIndex = 13
-        Me.lblPalette.Text = "Palette:"
-        '
         'lblMaximumSize
         '
         Me.lblMaximumSize.AutoSize = True
@@ -155,24 +140,6 @@ Partial Class dlgVisualizeData
         Me.lblPaltte.TabIndex = 21
         Me.lblPaltte.Text = "Palette:"
         '
-        'lblMaximumS
-        '
-        Me.lblMaximumS.AutoSize = True
-        Me.lblMaximumS.Location = New System.Drawing.Point(10, 296)
-        Me.lblMaximumS.Name = "lblMaximumS"
-        Me.lblMaximumS.Size = New System.Drawing.Size(77, 13)
-        Me.lblMaximumS.TabIndex = 24
-        Me.lblMaximumS.Text = "Maximum Size:"
-        '
-        'lblDataPoints
-        '
-        Me.lblDataPoints.AutoSize = True
-        Me.lblDataPoints.Location = New System.Drawing.Point(149, 296)
-        Me.lblDataPoints.Name = "lblDataPoints"
-        Me.lblDataPoints.Size = New System.Drawing.Size(94, 13)
-        Me.lblDataPoints.TabIndex = 25
-        Me.lblDataPoints.Text = "Million Data Points"
-        '
         'lblSampling
         '
         Me.lblSampling.AutoSize = True
@@ -196,18 +163,6 @@ Partial Class dlgVisualizeData
         Me.ucrNudSamplingFunction.TabIndex = 26
         Me.ucrNudSamplingFunction.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudMaximum
-        '
-        Me.ucrNudMaximum.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaximum.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMaximum.Location = New System.Drawing.Point(93, 293)
-        Me.ucrNudMaximum.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaximum.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaximum.Name = "ucrNudMaximum"
-        Me.ucrNudMaximum.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMaximum.TabIndex = 23
-        Me.ucrNudMaximum.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrNudMaximumSize
         '
         Me.ucrNudMaximumSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -219,24 +174,6 @@ Partial Class dlgVisualizeData
         Me.ucrNudMaximumSize.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudMaximumSize.TabIndex = 22
         Me.ucrNudMaximumSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputComboboxPaletteGuess
-        '
-        Me.ucrInputComboboxPaletteGuess.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboboxPaletteGuess.GetSetSelectedIndex = -1
-        Me.ucrInputComboboxPaletteGuess.IsReadOnly = False
-        Me.ucrInputComboboxPaletteGuess.Location = New System.Drawing.Point(58, 266)
-        Me.ucrInputComboboxPaletteGuess.Name = "ucrInputComboboxPaletteGuess"
-        Me.ucrInputComboboxPaletteGuess.Size = New System.Drawing.Size(85, 21)
-        Me.ucrInputComboboxPaletteGuess.TabIndex = 20
-        '
-        'ucrChkSortMiss
-        '
-        Me.ucrChkSortMiss.Checked = False
-        Me.ucrChkSortMiss.Location = New System.Drawing.Point(13, 242)
-        Me.ucrChkSortMiss.Name = "ucrChkSortMiss"
-        Me.ucrChkSortMiss.Size = New System.Drawing.Size(145, 20)
-        Me.ucrChkSortMiss.TabIndex = 19
         '
         'ucrChkSortVariables
         '
@@ -315,17 +252,11 @@ Partial Class dlgVisualizeData
         Me.ClientSize = New System.Drawing.Size(417, 405)
         Me.Controls.Add(Me.lblSampling)
         Me.Controls.Add(Me.ucrNudSamplingFunction)
-        Me.Controls.Add(Me.lblDataPoints)
-        Me.Controls.Add(Me.lblMaximumS)
-        Me.Controls.Add(Me.ucrNudMaximum)
         Me.Controls.Add(Me.ucrNudMaximumSize)
         Me.Controls.Add(Me.lblPaltte)
-        Me.Controls.Add(Me.ucrInputComboboxPaletteGuess)
-        Me.Controls.Add(Me.ucrChkSortMiss)
         Me.Controls.Add(Me.ucrChkSortVariables)
         Me.Controls.Add(Me.lblMillionDataPoints)
         Me.Controls.Add(Me.lblMaximumSize)
-        Me.Controls.Add(Me.lblPalette)
         Me.Controls.Add(Me.ucrInputComboboxPalette)
         Me.Controls.Add(Me.ucrReceiverVisualizeData)
         Me.Controls.Add(Me.rdoSelectedColumn)
@@ -361,17 +292,11 @@ Partial Class dlgVisualizeData
     Friend WithEvents rdoSelectedColumn As RadioButton
     Friend WithEvents ucrReceiverVisualizeData As ucrReceiverMultiple
     Friend WithEvents ucrInputComboboxPalette As ucrInputComboBox
-    Friend WithEvents lblPalette As Label
     Friend WithEvents lblMillionDataPoints As Label
     Friend WithEvents lblMaximumSize As Label
     Friend WithEvents ucrChkSortVariables As ucrCheck
-    Friend WithEvents ucrChkSortMiss As ucrCheck
-    Friend WithEvents ucrInputComboboxPaletteGuess As ucrInputComboBox
     Friend WithEvents lblPaltte As Label
     Friend WithEvents ucrNudMaximumSize As ucrNud
-    Friend WithEvents ucrNudMaximum As ucrNud
-    Friend WithEvents lblMaximumS As Label
-    Friend WithEvents lblDataPoints As Label
     Friend WithEvents lblSampling As Label
     Friend WithEvents ucrNudSamplingFunction As ucrNud
 End Class
