@@ -1821,7 +1821,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
 #' @param ignore_invalid If TRUE, rows with non missing element values on invalid dates e.g. 31 Sep or 29 Feb in non leap years, will be removed.
 #' If FALSE (the default) an error will be given with details of where the values occur.
 #' Strongly recommended to first run with FALSE and then TRUE after examining or correcting any issues.
-#' @param silent If TRUE, rows with non missing element values on invalid dates will not be reported.
+#' @param silent If TRUE, detailed output, such as rows with non missing element values on invalid dates or duplicate values will be suppressed.
 #' @param unstack_elements If TRUE, when there are multiple elements there will be one column for each element (unstacked), otherwise there will be an element
 #' column and a value column. This also applies to flag columns if included.
 #' @param new_name Name for the new data frame.
@@ -1842,6 +1842,8 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
   if(!missing(year) && !year %in% names(x)) stop("year column not found in x.")
   if(!missing(station) && !station %in% names(x)) stop("station column not found in x.")
   if(!missing(element) && !element %in% names(x)) stop("element column not found in x.")
+  # Default to FALSE and updated if format == "days"
+  flags <- FALSE
   
   # check day column is valid (if specified)
   if(!missing(day)) {
@@ -2045,6 +2047,7 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
   if(sum(invalid_ind) > 0) {
     cat("There are:", sum(invalid_ind), "measurement values on invalid dates.\n")
     if(!silent) {
+      cat("\n*** Invalid dates ***\n\n")
       invalid_data <- dplyr::filter(y, invalid_ind)
       if(format == "days" || format == "months") {
         invalid_data_display <- invalid_data %>% select(year, month, day)
@@ -2063,8 +2066,8 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     }
     if(ignore_invalid) cat("Warning: These rows have been removed.\n")
     else {
-      # Don't use a stop here so that output can be displayed by R-Instat
-      cat("There are:", sum(invalid_ind), "measurement values on invalid dates. Correct these or specify ignore_invalid = TRUE to ignore them. See output for more details.")
+      # This should be a stop but then detailed output can't be displayed by R-Instat
+      cat("There are:", sum(invalid_ind), "measurement values on invalid dates. Correct these or specify ignore_invalid = TRUE to ignore them. See output for more details.\n")
       continue <- FALSE
     }
   }
@@ -2089,19 +2092,42 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
         # pivot_wider allows unstacking multiple column sets, used when flags included.
         values_from <- c(element_name)
         if(flags) values_from <- c(values_from, flag_name)
-        z <- tidyr::pivot_wider(z, names_from = element, values_from = tidyselect::all_of(values_from))
+        # first check for unique combinations to ensure no duplicates
+        z_dup <- duplicated(z %>% dplyr::select(-tidyselect::all_of(values_from)))
+        if(any(z_dup > 0)) {
+          # This should be a stop but then detailed output can't be displayed by R-Instat
+          cat("\nError: Cannot tidy data as some elements have multiple values on the same date. Check and resolve duplicates first.\n")
+          z_check <- z %>% filter(z_dup > 0)
+          if(!silent) {
+            cat("\n*** Duplicates ***\n\n")
+            print(z_check, row.names = FALSE)
+          }
+          continue <- FALSE
+        }
+        else z <- tidyr::pivot_wider(z, names_from = element, values_from = tidyselect::all_of(values_from))
       }
       # If not unstacking then need to sort by element column
       else id_cols <- c(id_cols, "element")
     }
-    # Add this last to ensure date varies fastest
-    id_cols <- c(id_cols, "date")
-    #z <- z %>% dplyr::arrange(tidyselect::all_of(id_cols))
-
-    if(missing(new_name) || new_name == "") new_name <- next_default_item("data", existing_names = self$get_data_names())
-    data_list <- list(z)
-    names(data_list) <- new_name
-    self$import_data(data_tables=data_list)
+    if(continue) {
+      # Add this last to ensure date varies fastest
+      id_cols <- c(id_cols, "date")
+      print(id_cols)
+      # TODO Find a better way to do this. Update if there could be more the 3 id cols.
+      if(length(id_cols) == 1) {
+        z <- z %>% dplyr::arrange(.data[[id_cols[1]]])
+      }
+      else if(length(id_cols) == 2) {
+        z <- z %>% dplyr::arrange(.data[[id_cols[1]]], .data[[id_cols[2]]])
+      }
+      else if(length(id_cols) == 3) {
+        z <- z %>% dplyr::arrange(.data[[id_cols[1]]], .data[[id_cols[2]]], .data[[id_cols[3]]])
+      }
+      if(missing(new_name) || new_name == "") new_name <- next_default_item("data", existing_names = self$get_data_names())
+      data_list <- list(z)
+      names(data_list) <- new_name
+      self$import_data(data_tables=data_list)
+    }
   }
 }
 )
