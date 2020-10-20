@@ -39,14 +39,6 @@ Public Class dlgSurvivalObject
         TestOkEnabled()
     End Sub
 
-    ' TODO:
-    ' 2. get logical working
-    ' 3. is logical showing up for mstate or counting
-
-    ' consider what to do for interval:
-    '' could do four inputs and a big ifelse thing (ifelse(event == THING IN A, 0, event)) where thing in A corresponds to an input box next to word: right ccent
-    '' or tooltip
-
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
 
@@ -138,6 +130,8 @@ Public Class dlgSurvivalObject
         ucrSaveObject.SetLabelText("Save Survival Object:")
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+
+        ttEventInterval.SetToolTip(ucrReceiverEvent, "When interval-censored, the 'Event' variable takes 0=right censored, 1=event at time, 2=left censored, 3=interval censored.")
     End Sub
 
     Private Sub SetDefaults()
@@ -269,14 +263,14 @@ Public Class dlgSurvivalObject
 
     Private Sub ModifyOptions()
 
-        ' checkbox is %in% 
-        ' left (0) is event parameter
+        ' checkbox corresponds to operation: %in% 
+        ' left (0) is always the event parameter
         ' right (1) changes
-        '' if numerical: right is clsCfunction. With input box read in
-        '' if factor: right is from factor grid
+        '' if numerical: right is clsCfunction. With value from input box read in
+        '' if factor: right is variables checked in factor grid
         '' if logical: right is value from combo box
 
-        If (rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoCounting.Checked OrElse rdoMstate.Checked OrElse rdoInterval.Checked) AndAlso Not ucrReceiverEvent.IsEmpty Then
+        If (rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoCounting.Checked OrElse rdoMstate.Checked) AndAlso Not ucrReceiverEvent.IsEmpty Then
             ucrChkModifyEvent.Visible = True
 
             If ucrChkModifyEvent.Checked Then
@@ -300,19 +294,20 @@ Public Class dlgSurvivalObject
                     clsModifyOperation.RemoveParameterByName("factor_value")
                     clsModifyOperation.AddParameter(clsRFunctionParameter:=clsCFunction, iPosition:=1)
 
-                    'If ucrReceiverEvent.strCurrDataType = "logical" Then
-                    '    clsCFunction.RemoveParameterByName("x")
-                    '    clsCFunction.AddParameter("z", ucrModifyEventLogical.GetText(), bIncludeArgumentName:=False)
-                    '    ucrModifyEventNumeric.Visible = False
-                    '    ucrModifyEventFactor.Visible = False
-                    '    ucrModifyEventLogical.Visible = True
+                    If ucrReceiverEvent.strCurrDataType = "logical" Then
+                        clsCFunction.RemoveParameterByName("x")
+                        clsCFunction.AddParameter("z", ucrModifyEventLogical.GetText(), bIncludeArgumentName:=False)
+                        ucrModifyEventNumeric.Visible = False
+                        ucrModifyEventFactor.Visible = False
+                        ucrModifyEventLogical.Visible = True
 
-                    ' Else '(if numeric or integer)
-                    clsCFunction.RemoveParameterByName("z")
-                    clsCFunction.AddParameter("x", ucrModifyEventNumeric.GetText(), bIncludeArgumentName:=False)
-                    ucrModifyEventNumeric.Visible = True
-                    ucrModifyEventFactor.Visible = False
-                    ucrModifyEventLogical.Visible = False
+                    Else '(if numeric or integer)
+                        clsCFunction.RemoveParameterByName("z")
+                        clsCFunction.AddParameter("x", ucrModifyEventNumeric.GetText(), bIncludeArgumentName:=False)
+                        ucrModifyEventNumeric.Visible = True
+                        ucrModifyEventFactor.Visible = False
+                        ucrModifyEventLogical.Visible = False
+                    End If
                 End If
             Else
                 Me.Size = New System.Drawing.Size(448, Me.Height)
@@ -323,7 +318,7 @@ Public Class dlgSurvivalObject
                 ucrModifyEventLogical.Visible = False
             End If
 
-        Else
+        Else 'if interval or interval2 checked
             Me.Size = New System.Drawing.Size(448, Me.Height)
             clsRightLeftFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
             clsStartEndFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
@@ -335,17 +330,27 @@ Public Class dlgSurvivalObject
     End Sub
 
     Private Sub ucrPnl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlContentsChanged
-        If rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoInterval.Checked Then
+        If rdoRight.Checked OrElse rdoLeft.Checked Then
             ucrReceiverEvent.RemoveIncludedMetadataProperty("class")
             ucrReceiverEvent.SetIncludedDataTypes({"numeric", "logical"}, bStrict:=True)
+        ElseIf rdoInterval.Checked Then
+            ucrReceiverEvent.RemoveIncludedMetadataProperty("class")
+            ucrReceiverEvent.SetIncludedDataTypes({"numeric"}, bStrict:=True)
         Else
             ucrReceiverEvent.RemoveIncludedMetadataProperty("class")
-            ucrReceiverEvent.SetIncludedDataTypes({"numeric", "factor"})
+            ucrReceiverEvent.SetIncludedDataTypes({"numeric", "factor", "logical"})
         End If
 
-        ' if the thing in the event receiver is factor variable, if you click left/right/i, clear it.
-        If {"factor"}.Contains(ucrReceiverEvent.strCurrDataType) Then
+        ' if the variable in the event receiver is factor variable, if you click left/right/i, clear it.
+        If ucrReceiverEvent.strCurrDataType = "factor" Then
             If rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoInterval.Checked Then
+                ucrReceiverEvent.Clear()
+            End If
+        End If
+
+        ' if the variable in the event receiver is logical and you click rdoInterval, clear it.
+        If ucrReceiverEvent.strCurrDataType = "logical" Then
+            If rdoInterval.Checked Then
                 ucrReceiverEvent.Clear()
             End If
         End If
@@ -355,12 +360,12 @@ Public Class dlgSurvivalObject
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrModifyEventFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrModifyEventFactor.ControlValueChanged
-        ModifyOptions()
-    End Sub
-
     Private Sub ucrSelectorFitObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFitObject.ControlContentsChanged
         SetReceivers()
+    End Sub
+
+    Private Sub ucrModifyEventFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrModifyEventFactor.ControlValueChanged, ucrModifyEventLogical.ControlValueChanged
+        ModifyOptions()
     End Sub
 
     Private Sub ucrChkModifyEvent_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkModifyEvent.ControlContentsChanged, ucrReceiverEvent.ControlContentsChanged
@@ -373,7 +378,7 @@ Public Class dlgSurvivalObject
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrCoreControls(ucrChangedControl As ucrCore) Handles ucrReceiverExit.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged, ucrModifyEventFactor.ControlContentsChanged, ucrModifyEventNumeric.ControlContentsChanged, ucrModifyEventLogical.ControlContentsChanged
+    Private Sub ucrCoreControls(ucrChangedControl As ucrCore) Handles ucrReceiverExit.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged, ucrModifyEventFactor.ControlContentsChanged, ucrModifyEventNumeric.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
