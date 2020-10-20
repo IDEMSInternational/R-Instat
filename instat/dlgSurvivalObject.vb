@@ -39,11 +39,6 @@ Public Class dlgSurvivalObject
         TestOkEnabled()
     End Sub
 
-    ' TODO:
-    ' 1. Set receiver stuff. How to say, if this receiver is selected, etc etc etc
-    ' 2. If I do an "If" statement for "If X, then accept numerics/factors, else accept numerics". That works fine at first, until it's reduced to numerics only then there is an error
-    ' 3. Modify Event stuff.
-
     Private Sub InitialiseDialog()
         'ucrBase.iHelpTopicID = 
 
@@ -87,7 +82,7 @@ Public Class dlgSurvivalObject
         ucrReceiverExit.SetIncludedDataTypes({"numeric"})
         ucrReceiverExit.SetLinkedDisplayControl(lblExitTime2)
 
-        ucrReceiverEvent.SetParameter(New RParameter("event", 0, bNewIncludeArgumentName:=False))
+        ucrReceiverEvent.SetParameter(New RParameter("event", 0, bNewIncludeArgumentName:=False)) ' to left of %in% operator
         ucrReceiverEvent.SetParameterIsRFunction()
         ucrReceiverEvent.Selector = ucrSelectorFitObject
         ucrReceiverEvent.SetIncludedDataTypes({"numeric", "factor"}, bStrict:=True)
@@ -115,8 +110,7 @@ Public Class dlgSurvivalObject
         ucrModifyEventNumeric.AddQuotesIfUnrecognised = False
 
         'ucrFactorLevels
-        ucrModifyEventFactor.SetParameter(New RParameter("y", bNewIncludeArgumentName:=False))
-        ucrModifyEventFactor.SetLinkedDisplayControl(lblSelectLevels)
+        ucrModifyEventFactor.strSelectorColumnName = "Event Occurs"
         ucrModifyEventFactor.SetReceiver(ucrReceiverEvent)
         ucrModifyEventFactor.SetAsMultipleSelector()
         ucrModifyEventFactor.SetIncludeLevels(False)
@@ -182,7 +176,6 @@ Public Class dlgSurvivalObject
         ucrReceiverEvent.SetRCode(clsModifyOperation, bReset)
 
         ucrModifyEventNumeric.SetRCode(clsCFunction, bReset)
-        ucrModifyEventFactor.SetRCode(clsCFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -225,21 +218,6 @@ Public Class dlgSurvivalObject
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrPnl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlContentsChanged
-
-        ' issue: once factor/numeric is reduced to accepting numerics only, it doesnt then accept both again
-        If rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoInterval.Checked Then
-            ucrReceiverEvent.SetIncludedDataTypes({"numeric"}, bStrict:=True)
-        Else
-            ucrReceiverEvent.SetIncludedDataTypes({"numeric", "factor"}, bStrict:=True)
-        End If
-
-        SetReceivers()
-        ViewingModifyOptions()
-        SetBaseRFunction()
-        TestOkEnabled()
-    End Sub
-
     Private Sub SetBaseRFunction()
         ' exp = clsRightLeftFunction if right or left censoring occurs
         ' otherwise exp = clsStartEndFunction if one of the other four rdos are selected
@@ -261,16 +239,15 @@ Public Class dlgSurvivalObject
     End Sub
 
     Private Sub SetReceivers()
-
-        ' TODO: how to check if something is currently set as the receiver?
-        ' 1. if R, L, C, M, I are checked and "Event" is the receiver, then if I2 is checked, Exit should be the receiver
-        ' 2. if C, M, I, I2 are checked and "Entry" is the receiver, then if R or L is checked, Exit should be the receiver.
-
-        'If (rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoCounting.Checked OrElse rdoMstate.Checked OrElse rdoInterval.Checked) AndAlso ucrReceiverEvent.IsCurrentReceiver Then
-        If (rdoInterval2.Checked) Then
-            ucrReceiverExit.SetMeAsReceiver()
+        If ucrSelectorFitObject.CurrentReceiver.Name Is "ucrReceiverEvent" Then
+            If (rdoInterval2.Checked) Then
+                ucrReceiverExit.SetMeAsReceiver()
+            End If
+        ElseIf ucrSelectorFitObject.CurrentReceiver.Name Is "ucrReceiverEntry" Then
+            If (rdoRight.Checked OrElse rdoLeft.Checked) Then
+                ucrReceiverExit.SetMeAsReceiver()
+            End If
         End If
-        'End If
     End Sub
 
     Private Sub ViewingModifyOptions()
@@ -321,6 +298,42 @@ Public Class dlgSurvivalObject
         End If
     End Sub
 
+    Private Sub ucrPnl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlContentsChanged
+        If rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoInterval.Checked Then
+            ucrReceiverEvent.RemoveIncludedMetadataProperty("class")
+            ucrReceiverEvent.SetIncludedDataTypes({"numeric"}, bStrict:=True)
+        Else
+            ucrReceiverEvent.RemoveIncludedMetadataProperty("class")
+            ucrReceiverEvent.SetIncludedDataTypes({"numeric", "factor"}, bStrict:=True)
+        End If
+
+        ' if the thing in the event receiver is factor variable, if you click left/right/i, clear it.
+        If {"factor"}.Contains(ucrReceiverEvent.strCurrDataType) Then
+            If rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoInterval.Checked Then
+                ucrReceiverEvent.Clear()
+            End If
+        End If
+        SetReceivers()
+        ViewingModifyOptions()
+        SetBaseRFunction()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrModifyEventFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrModifyEventFactor.ControlValueChanged
+        If {"factor"}.Contains(ucrReceiverEvent.strCurrDataType) Then
+            clsModifyOperation.ClearParameters()
+            clsModifyOperation.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, bIncludeArgumentName:=False, iPosition:=0)
+            clsModifyOperation.AddParameter("y", ucrModifyEventFactor.GetSelectedLevels(), bIncludeArgumentName:=False, iPosition:=1)
+        Else
+            clsModifyOperation.RemoveParameterByName("y")
+            clsModifyOperation.AddParameter(clsRFunctionParameter:=clsCFunction, iPosition:=1)
+        End If
+    End Sub
+
+    Private Sub ucrSelectorFitObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFitObject.ControlContentsChanged
+        SetReceivers()
+    End Sub
+
     Private Sub ucrChkModifyEvent_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkModifyEvent.ControlContentsChanged
         TestOkEnabled()
         ViewingModifyOptions()
@@ -336,8 +349,7 @@ Public Class dlgSurvivalObject
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrCoreControls(ucrChangedControl As ucrCore) Handles ucrReceiverExit.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged, ucrModifyEventFactor.ControlContentsChanged, ucrModifyEventNumeric.ControlContentsChanged, ucrChkModifyEvent.ControlContentsChanged
-        SetReceivers()
+    Private Sub ucrCoreControls(ucrChangedControl As ucrCore) Handles ucrReceiverExit.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged, ucrModifyEventFactor.ControlContentsChanged, ucrModifyEventNumeric.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
