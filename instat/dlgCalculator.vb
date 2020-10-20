@@ -78,7 +78,7 @@ Public Class dlgCalculator
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
         ucrBase.clsRsyntax.SetCommandString("")
-        ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
+        ucrCalc.ucrSaveResultInto.SetPrefix("calc")
         ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
         ucrCalc.ucrSaveResultInto.SetIsTextBox()
         ucrCalc.ucrSaveResultInto.SetLabelText("Save Result Into:")
