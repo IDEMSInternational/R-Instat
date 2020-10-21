@@ -151,6 +151,7 @@ Partial Class dlgHomogenization
         'ucrInputComboMeanVarDistribution
         '
         Me.ucrInputComboMeanVarDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMeanVarDistribution.GetSetSelectedIndex = -1
         Me.ucrInputComboMeanVarDistribution.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboMeanVarDistribution, "ucrInputComboMeanVarDistribution")
         Me.ucrInputComboMeanVarDistribution.Name = "ucrInputComboMeanVarDistribution"
@@ -158,6 +159,7 @@ Partial Class dlgHomogenization
         'ucrInputComboVarDistribution
         '
         Me.ucrInputComboVarDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboVarDistribution.GetSetSelectedIndex = -1
         Me.ucrInputComboVarDistribution.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboVarDistribution, "ucrInputComboVarDistribution")
         Me.ucrInputComboVarDistribution.Name = "ucrInputComboVarDistribution"
@@ -221,6 +223,7 @@ Partial Class dlgHomogenization
         'ucrInputComboMeanDistribution
         '
         Me.ucrInputComboMeanDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMeanDistribution.GetSetSelectedIndex = -1
         Me.ucrInputComboMeanDistribution.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboMeanDistribution, "ucrInputComboMeanDistribution")
         Me.ucrInputComboMeanDistribution.Name = "ucrInputComboMeanDistribution"
@@ -228,6 +231,7 @@ Partial Class dlgHomogenization
         'ucrInputComboMethod
         '
         Me.ucrInputComboMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMethod.GetSetSelectedIndex = -1
         Me.ucrInputComboMethod.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboMethod, "ucrInputComboMethod")
         Me.ucrInputComboMethod.Name = "ucrInputComboMethod"
@@ -235,6 +239,7 @@ Partial Class dlgHomogenization
         'ucrInputComboPenalty
         '
         Me.ucrInputComboPenalty.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboPenalty.GetSetSelectedIndex = -1
         Me.ucrInputComboPenalty.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboPenalty, "ucrInputComboPenalty")
         Me.ucrInputComboPenalty.Name = "ucrInputComboPenalty"
