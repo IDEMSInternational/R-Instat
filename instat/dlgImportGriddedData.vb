@@ -217,13 +217,8 @@ Public Class dlgImportGriddedData
     End Sub
 
     Private Sub ucrPnlLocationRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlLocationRange.ControlValueChanged
-        If rdoArea.Checked Then
-            lblMinLon.Visible = True
-            lblMinLat.Visible = True
-        ElseIf rdoPoint.Checked Then
-            lblMinLon.Visible = False
-            lblMinLat.Visible = False
-        End If
+        lblMinLon.Visible = rdoArea.Checked
+        lblMinLat.Visible = rdoArea.Checked
     End Sub
 
     Private Sub ucrPnlDateRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDateRange.ControlValueChanged
