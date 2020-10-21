@@ -1535,10 +1535,12 @@ DataBook$set("public", "database_connect", function(dbname, user, host, port, dr
   #launches an input box prompt for entering password. 
   #Done this way so that password characters are not displayed in the output window
   password <- getPass::getPass(paste0(user, " password:"))
-  out <- NULL
-  out <- DBI::dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
-  if(!is.null(out)) {
-    self$set_database_connection(out)
+  if(length(password) > 0){
+      out <- NULL
+	  out <- DBI::dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
+	  if(!is.null(out)) {
+	      self$set_database_connection(out)
+	  }
   }
 }
 )
@@ -1561,7 +1563,7 @@ DataBook$set("public", "database_disconnect", function() {
 }
 )
 
-DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "stationId", stations = c(), elementfiltercolumn = "elementId", elements = c(), include_observation_data = FALSE, include_observation_flags = FALSE, include_elements_info = FALSE, start_date = NULL, end_date = NULL) {
+DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "stationId", stations = c(), elementfiltercolumn = "elementId", elements = c(), include_observation_data = FALSE, include_observation_flags = FALSE, unstack_data = FALSE, include_elements_info = FALSE, start_date = NULL, end_date = NULL) {
   #need to perform checks here
   con = self$get_database_connection()
 
@@ -1657,7 +1659,7 @@ DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "s
        #add relationship key between the observation data and station data linked by stationId and recordedFrom columns
        self$add_key("stations_info", c("stationId"))
        if(include_observation_data)(self$add_link(from_data_frame = "observation_data", to_data_frame = "stations_info", link_pairs = c(recordedFrom = "stationId"), type = keyed_link_label))
-       #todo. should we also include the elements key, if elements data is available? will the describedBy column be required
+       #todo. should we also include the elements key, if elements data is available?
 
        #convert stations in observation data to factors
        self$convert_column_to_type(data_name = "observation_data", col_names = "station", to_type = "factor")
@@ -1666,6 +1668,12 @@ DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "s
 	   #create a plain date column from the observation data datetime column values 
 	   obsdate <- self$get_columns_from_data(data_name = "observation_data", col_names = "datetime", use_current_filter=FALSE)
        self$add_columns_to_data(data_name = "observation_data", col_name = "date", col_data=as.Date(x=obsdate), before=FALSE, adjacent_column = "datetime")
+
+	   if(unstack_data){
+	       observation_data <- self$get_data_frame(data_name = "observation_data")
+		   observation_data_unstacked <- reshape2::dcast(data = observation_data, formula = station + datetime + date ~ element, value.var="obsvalue")
+		   self$import_data(data_tables=list(observation_data_unstacked = observation_data_unstacked))
+	   }
    }
  
 

@@ -97,9 +97,14 @@ Public Class dlgClimSoft
         ucrChkFlagsData.SetParameter(New RParameter("include_observation_flags", 5))
         ucrChkFlagsData.SetRDefault("FALSE")
 
-        'include elements metadata checkbox
-        ucrChkElements.Text = "Include Elements Metadata Data"
-        ucrChkElements.SetParameter(New RParameter("include_elements_info", 6))
+        'include Unstack data checkbox. 
+        'parameter attached to it is determined by elements receiver no. of contents. Thus not directly set by the control 
+        ucrChkUnstackData.Text = "Unstack Data"
+        'ucrChkUnstackData.Checked = True
+
+        'include elements info checkbox
+        ucrChkElements.Text = "Include Elements Info"
+        ucrChkElements.SetParameter(New RParameter("include_elements_info", 7))
         ucrChkElements.SetRDefault("FALSE")
 
         'date range checkbox
@@ -110,17 +115,17 @@ Public Class dlgClimSoft
         'Its Not set by default until the user changes current select date
 
         'start date datepicker
-        ucrDtpStartdate.SetParameter(New RParameter("start_date", 7))
+        ucrDtpStartdate.SetParameter(New RParameter("start_date", 8))
         ucrDtpStartdate.SetParameterIsRDate()
         ucrDtpStartdate.SetLinkedDisplayControl(lblStartDate)
 
         'end date datepicker
-        ucrDtpEndDate.SetParameter(New RParameter("end_date", 8))
+        ucrDtpEndDate.SetParameter(New RParameter("end_date", 9))
         ucrDtpEndDate.SetParameterIsRDate()
         ucrDtpEndDate.SetLinkedDisplayControl(lblEndDate)
 
         'linking observation data related controls  to include observation data checkbox
-        ucrChkObservationData.AddToLinkedControls({ucrChkFlagsData, ucrChkElements, ucrComboBoxElements, ucrReceiverMultipleElements}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkObservationData.AddToLinkedControls({ucrChkFlagsData, ucrChkUnstackData, ucrChkElements, ucrComboBoxElements, ucrReceiverMultipleElements}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'todo. we have a problem with how we will link this control. check on dlgImportDataSet??
         ucrChkObservationData.AddToLinkedControls({ucrChkDateRange}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -149,6 +154,7 @@ Public Class dlgClimSoft
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        sdgImportFromClimSoft.Reset()
         TestOKEnabled()
     End Sub
 
@@ -231,16 +237,27 @@ Public Class dlgClimSoft
         End If
     End Sub
 
-    Private Sub ucrControlsContents_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlContentsChanged, ucrReceiverMultipleElements.ControlContentsChanged, ucrChkObservationData.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Sub ucrChkObservationData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkObservationData.ControlValueChanged
         If ucrChkObservationData.Checked Then
             ucrReceiverMultipleElements.SetMeAsReceiver()
         Else
             ucrReceiverMultipleStations.SetMeAsReceiver()
         End If
+    End Sub
+
+    Private Sub ucrUnstackDataControlsValueChanged_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUnstackData.ControlValueChanged, ucrReceiverMultipleElements.ControlValueChanged, ucrChkObservationData.ControlValueChanged
+        'unstack observation data only when more than 1 element is selected
+        If ucrChkObservationData.Checked AndAlso ucrReceiverMultipleElements.GetVariableNamesAsList.Count > 1 Then
+            ucrChkUnstackData.Enabled = True
+            clsRImportFromClimsoft.AddParameter("unstack_data", If(ucrChkUnstackData.Checked, "TRUE", "FALSE"), iPosition:=6)
+        Else
+            ucrChkUnstackData.Enabled = False
+            clsRImportFromClimsoft.RemoveParameterByName("unstack_data")
+        End If
+    End Sub
+
+    Private Sub ucrControlsContents_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlContentsChanged, ucrReceiverMultipleElements.ControlContentsChanged, ucrChkObservationData.ControlContentsChanged, ucrChkUnstackData.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 
     Private Sub CheckAndUpdateConnectionStatus()
@@ -254,9 +271,4 @@ Public Class dlgClimSoft
         End If
     End Sub
 
-    'todo. this is is a temporary event. To be delete after testing
-    Private Sub btnWizard_Click(sender As Object, e As EventArgs) Handles btnWizard.Click
-        Hide()
-        dlgClimsoftWizard.ShowDialog()
-    End Sub
 End Class

@@ -52,6 +52,7 @@ Partial Class dlgClimSoft
         Me.ucrDtpEndDate = New instat.ucrDateTimePicker()
         Me.ucrDtpStartdate = New instat.ucrDateTimePicker()
         Me.ucrChkFlagsData = New instat.ucrCheck()
+        Me.ucrChkUnstackData = New instat.ucrCheck()
         Me.ucrComboBoxElements = New instat.ucrInputComboBox()
         Me.ucrComboBoxStations = New instat.ucrInputComboBox()
         Me.ucrSelectorForClimSoft = New instat.ucrSelectorAddRemove()
@@ -59,7 +60,6 @@ Partial Class dlgClimSoft
         Me.ucrReceiverMultipleStations = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblConnection = New System.Windows.Forms.Label()
-        Me.btnWizard = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'btnEstablishConnection
@@ -132,6 +132,13 @@ Partial Class dlgClimSoft
         Me.ucrChkFlagsData.Name = "ucrChkFlagsData"
         Me.ttClimsoft.SetToolTip(Me.ucrChkFlagsData, resources.GetString("ucrChkFlagsData.ToolTip"))
         '
+        'ucrChkUnstackData
+        '
+        Me.ucrChkUnstackData.Checked = True
+        resources.ApplyResources(Me.ucrChkUnstackData, "ucrChkUnstackData")
+        Me.ucrChkUnstackData.Name = "ucrChkUnstackData"
+        Me.ttClimsoft.SetToolTip(Me.ucrChkUnstackData, resources.GetString("ucrChkUnstackData.ToolTip"))
+        '
         'ucrComboBoxElements
         '
         Me.ucrComboBoxElements.AddQuotesIfUnrecognised = True
@@ -183,18 +190,12 @@ Partial Class dlgClimSoft
         Me.lblConnection.ForeColor = System.Drawing.Color.Red
         Me.lblConnection.Name = "lblConnection"
         '
-        'btnWizard
-        '
-        resources.ApplyResources(Me.btnWizard, "btnWizard")
-        Me.btnWizard.Name = "btnWizard"
-        Me.btnWizard.UseVisualStyleBackColor = True
-        '
         'dlgClimSoft
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkUnstackData)
         Me.Controls.Add(Me.ucrChkFlagsData)
-        Me.Controls.Add(Me.btnWizard)
         Me.Controls.Add(Me.lblConnection)
         Me.Controls.Add(Me.ucrChkElements)
         Me.Controls.Add(Me.ucrComboBoxElements)
@@ -239,6 +240,6 @@ Partial Class dlgClimSoft
     Friend WithEvents ucrComboBoxElements As ucrInputComboBox
     Friend WithEvents ucrChkElements As ucrCheck
     Friend WithEvents lblConnection As Label
-    Friend WithEvents btnWizard As Button
     Friend WithEvents ucrChkFlagsData As ucrCheck
+    Friend WithEvents ucrChkUnstackData As ucrCheck
 End Class

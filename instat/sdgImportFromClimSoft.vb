@@ -31,7 +31,8 @@ Public Class sdgImportFromClimSoft
             SetDefaults()
             bFirstLoad = False
         End If
-        SetRCodeForControls()
+        SetRCodeForControls(False)
+        'could have been connected through the wizard. So check here
         bConnected = CheckIfConnectionIsActive()
         UpdateConnectionState()
     End Sub
@@ -57,6 +58,7 @@ Public Class sdgImportFromClimSoft
         ucrComboBoxPort.SetItems(dctPorts)
         ucrComboBoxPort.AddQuotesIfUnrecognised = False
         ucrComboBoxPort.bAllowNonConditionValues = True
+        ucrComboBoxPort.SetValidationTypeAsNumeric(dcmMin:=0)
 
         'user name
         ucrTxtUserName.SetParameter(New RParameter("user", 3))
@@ -78,14 +80,18 @@ Public Class sdgImportFromClimSoft
 
         'disconnect if was already connected 
         'If CheckIfConnectionIsActive() Then
-        'Disconnect()
+        '   Disconnect()
         'End If
+        'bConnected = False
         bConnected = CheckIfConnectionIsActive()
         UpdateConnectionState()
     End Sub
 
-    Private Sub SetRCodeForControls()
-        SetRCode(Me, clsRDatabaseConnect, False)
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrComboBoxDatabaseName.SetRCode(clsRDatabaseConnect, bReset)
+        ucrTxtHost.SetRCode(clsRDatabaseConnect, bReset)
+        ucrComboBoxPort.SetRCode(clsRDatabaseConnect, bReset)
+        ucrTxtUserName.SetRCode(clsRDatabaseConnect, bReset)
     End Sub
 
     Private Sub UpdateConnectionState()
@@ -129,6 +135,14 @@ Public Class sdgImportFromClimSoft
 
     Private Sub Disconnect()
         frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
+    End Sub
+
+    Public Sub Reset()
+        If Not bFirstLoad Then
+            Disconnect()
+            SetDefaults()
+            SetRCodeForControls(True)
+        End If
     End Sub
 
     Private Sub btnConnect_Click(sender As Object, e As EventArgs) Handles btnConnect.Click

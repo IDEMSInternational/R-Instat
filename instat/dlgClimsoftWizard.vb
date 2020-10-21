@@ -29,13 +29,15 @@ Public Class dlgClimsoftWizard
     'used to track the position of the selected wizard step
     Private iCurrentStep As Integer = 0
     Private Sub dlgClimsoftWizard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
+        'autoTranslate(Me) 'temporarily commented because it changes the ok button text. 
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
         lstWizardSteps.Item(iCurrentStep).Show()
+        'todo. temporary. probably the translation is changing the "Finish" to "Ok"
+        ucrBase.cmdOk.Text = "Finish"
     End Sub
 
     Private Sub InitialiseDialog()
@@ -178,6 +180,8 @@ Public Class dlgClimsoftWizard
     ''' it only manipulates controls in the panel connect to database of the form.
     ''' doesn't use the base function because its main purpose is simply to connect to the database.
     ''' the controls used also write to its own defined RFunctions
+    ''' todo. this class can be refactored to be a custom control in future.
+    ''' It could then be used by the sdgImportFromClimSoft subdialog and also here as a wizard step.
     ''' </summary>
     Private Class ConnectDatabase
         Implements IWizStep
@@ -223,6 +227,7 @@ Public Class dlgClimsoftWizard
             parentControls.ucrComboBoxPort.SetItems(dctPorts)
             parentControls.ucrComboBoxPort.AddQuotesIfUnrecognised = False
             parentControls.ucrComboBoxPort.bAllowNonConditionValues = True
+            parentControls.ucrComboBoxPort.SetValidationTypeAsNumeric(dcmMin:=0)
 
             'user name
             parentControls.ucrTxtUserName.SetParameter(New RParameter("user", 3))
@@ -317,11 +322,12 @@ Public Class dlgClimsoftWizard
             'set has connection R command
             clsRHasConnection.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_database_connection")
 
-            'disconnect if was already connected 
-            If CheckIfConnectionIsActive() Then
-                Disconnect()
-            End If
-            bConnected = False
+            'disconnect if was already connected. 
+            'If CheckIfConnectionIsActive() Then
+            '    Disconnect()
+            'End If
+            'bConnected = False
+            bConnected = CheckIfConnectionIsActive()
             UpdateConnectionState()
 
         End Sub
@@ -337,9 +343,13 @@ Public Class dlgClimsoftWizard
             parentControls.panelConnectDatabase.Visible = True
             If Reset Then
                 SetDefaults()
+                Disconnect()
             End If
             SetRCodeForControls(Reset)
             Reset = False
+            'could have been connected through the main dialog. So check if connection exists here
+            bConnected = CheckIfConnectionIsActive()
+            UpdateConnectionState()
         End Sub
 
         Public Sub Hide() Implements IWizStep.Hide
@@ -494,6 +504,8 @@ Public Class dlgClimsoftWizard
             Reset = True
             InitialiseControls()
             AddHandler parentControls.ucrComboBoxElements.ControlValueChanged, AddressOf OnUcrComboBoxElements_ControlValueChanged
+            AddHandler parentControls.ucrChkUnstackData.ControlValueChanged, AddressOf OnUcrUnstackDataControls_ControlValueChanged
+            AddHandler parentControls.ucrReceiverMultipleElements.ControlValueChanged, AddressOf OnUcrUnstackDataControls_ControlValueChanged
             AddHandler parentControls.ucrReceiverMultipleElements.ControlContentsChanged, AddressOf OnUcrControlsContents_ControlContentsChanged
         End Sub
 
@@ -522,16 +534,21 @@ Public Class dlgClimsoftWizard
             parentControls.ucrChkFlagsData.SetParameter(New RParameter("include_observation_flags", 4))
             parentControls.ucrChkFlagsData.SetRDefault("FALSE")
 
-            'elements metadata checkbox
+            'include Unstack data checkbox. 
+            'parameter attached to it is determined by elements receiver no. of contents. Thus not directly set by the control 
+            parentControls.ucrChkUnstackData.Text = "Unstack Data"
+            'parentControls.ucrChkUnstackData.Checked = True
+
+            'elements info checkbox
             parentControls.ucrChkElements.SetParameter(New RParameter("include_elements_info", 5))
-            parentControls.ucrChkElements.Text = "Include Elements Metadata Data"
+            parentControls.ucrChkElements.Text = "Include Elements Info"
             parentControls.ucrChkElements.SetRDefault("FALSE")
 
             'date range checkbox
             parentControls.ucrChkDateRange.Text = "Select Date Range"
 
             'todo. datepicker control have a problem of default date. 
-            'Its NOT set by defaultuntil the user changes current select date
+            'Its NOT set by default until the user changes current select date
 
             'start date datepicker
             parentControls.ucrDtpStartdate.SetParameter(New RParameter("start_date", 6))
@@ -570,6 +587,17 @@ Public Class dlgClimsoftWizard
             If SetElementsRecieverQuery() Then
                 'will also execute the receiver's sql query and also raise ControlsContents_ControlContentsChanged
                 parentControls.ucrReceiverMultipleElements.SetMeAsReceiver()
+            End If
+        End Sub
+
+        Private Sub OnUcrUnstackDataControls_ControlValueChanged()
+            'unstack observation data only when more than 1 element is selected
+            If parentControls.ucrReceiverMultipleElements.GetVariableNamesAsList.Count > 1 Then
+                parentControls.ucrChkUnstackData.Enabled = True
+                parentControls.clsRImportFromClimsoft.AddParameter("unstack_data", If(parentControls.ucrChkUnstackData.Checked, "TRUE", "FALSE"), iPosition:=6)
+            Else
+                parentControls.ucrChkUnstackData.Enabled = False
+                parentControls.clsRImportFromClimsoft.RemoveParameterByName("unstack_data")
             End If
         End Sub
 
