@@ -47,11 +47,13 @@ Public Class sdgMissingOptions
         ucrInputPercentage.AddQuotesIfUnrecognised = False
 
         ucrNudNumber.SetParameter(New RParameter("na_max_n", 11))
+        ucrNudNumber.SetMinMax(0, iNewMax:=Integer.MaxValue)
 
         ucrNudNumberNotMissing.SetParameter(New RParameter("na_min_n", 12))
         ucrNudNumberNotMissing.SetMinMax(0, iNewMax:=Integer.MaxValue)
 
         ucrNudConsecutive.SetParameter(New RParameter("na_consecutive_n", 13))
+        ucrNudConsecutive.SetMinMax(0, iNewMax:=Integer.MaxValue)
 
         lstCheckboxes.AddRange({ucrChkMaxNumMissing, ucrChkMinNumNonMissing, ucrChkMaxPercMissing, ucrChkConsecutiveMissing})
         For Each ctrTemp As ucrCheck In lstCheckboxes
