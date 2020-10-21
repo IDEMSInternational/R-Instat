@@ -189,7 +189,7 @@ Public Class dlgHomogenization
         clsRightBracketOperator = New ROperator
 
         ucrSelectorHomogenization.Reset()
-        ucrReceiverStation.SetMeAsReceiver()
+        ucrReceiverElement.SetMeAsReceiver()
         'ucrSaveResult.Reset()
         'TODO: Set conditions properly!
         rdoSnht.Checked = True
