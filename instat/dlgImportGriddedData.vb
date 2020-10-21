@@ -41,9 +41,9 @@ Public Class dlgImportGriddedData
         ucrInputSource.SetParameter(New RParameter("source", 0))
         dctDownloadPairs.Add("NASA", Chr(34) & "NASA" & Chr(34))
         dctDownloadPairs.Add("NOAA", Chr(34) & "NOAA" & Chr(34))
-        dctDownloadPairs.Add("TAMSAT_v3.0", Chr(34) & "TAMSAT_v3.0" & Chr(34))
-        dctDownloadPairs.Add("TAMSAT_v3.1", Chr(34) & "TAMSAT_v3.1" & Chr(34))
-        dctDownloadPairs.Add("UCSB_CHIRPS", Chr(34) & "UCSB_CHIRPS" & Chr(34))
+        dctDownloadPairs.Add("TAMSAT v3.0", Chr(34) & "TAMSAT_v3.0" & Chr(34))
+        dctDownloadPairs.Add("TAMSAT v3.1", Chr(34) & "TAMSAT_v3.1" & Chr(34))
+        dctDownloadPairs.Add("UCSB CHIRPS", Chr(34) & "UCSB_CHIRPS" & Chr(34))
         ucrInputSource.SetItems(dctDownloadPairs)
         ucrInputSource.SetDropDownStyleAsNonEditable()
 
@@ -160,7 +160,7 @@ Public Class dlgImportGriddedData
                 dctFiles.Add("ARC2 Monthly Precipitation", Chr(34) & "monthly_est_prcp" & Chr(34))
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "RFE2 Daily Precipitation"
-            Case "TAMSAT_v3.0"
+            Case "TAMSAT v3.0"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("v3.0 Daily Rainfall", Chr(34) & "daily_rfe" & Chr(34))
                 dctFiles.Add("v3.0 Dekadal Rainfall", Chr(34) & "dekadal_rfe" & Chr(34))
@@ -170,7 +170,7 @@ Public Class dlgImportGriddedData
                 ucrInputData.cboInput.SelectedItem = "v3.0 Daily Rainfall"
                 ucrDtpMinDate.MinDate = New Date(1983, 1, 1)
                 ucrDtpMaxDate.MinDate = New Date(1983, 1, 1)
-            Case "TAMSAT_v3.1"
+            Case "TAMSAT v3.1"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("v3.1 Daily Rainfall", Chr(34) & "daily_rfe" & Chr(34))
                 dctFiles.Add("v3.1 Daily Rainfall Complete (Filled)", Chr(34) & "daily_rfe_filled" & Chr(34))
@@ -182,7 +182,7 @@ Public Class dlgImportGriddedData
                 ucrInputData.cboInput.SelectedItem = "v3.1 Daily Rainfall"
                 ucrDtpMinDate.MinDate = New Date(1983, 1, 1)
                 ucrDtpMaxDate.MinDate = New Date(1983, 1, 1)
-            Case "UCSB_CHIRPS"
+            Case "UCSB CHIRPS"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("Daily Precipitation 0.05 degree", Chr(34) & "daily_improved_global_0p05_prcp" & Chr(34))
                 dctFiles.Add("Dekad Precipitation 0.05 degree", Chr(34) & "dekad_prcp" & Chr(34))
