@@ -2050,10 +2050,10 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
       cat("\n*** Invalid dates ***\n\n")
       invalid_data <- dplyr::filter(y, invalid_ind)
       if(format == "days" || format == "months") {
-        invalid_data_display <- invalid_data %>% select(year, month, day)
+        invalid_data_display <- invalid_data %>% dplyr::select(year, month, day)
       }
       else {
-        invalid_data_display <- invalid_data %>% select(year, doy)
+        invalid_data_display <- invalid_data %>% dplyr::select(year, doy)
       }
       if(!missing(station)) {
         invalid_data_display <- data.frame(station = invalid_data$station, invalid_data_display)
