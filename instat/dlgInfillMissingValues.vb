@@ -469,21 +469,23 @@ Public Class dlgInfillMissingValues
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.33)
             ucrReceiverDisplayObserved.SetMeAsReceiver()
             If rdoDisplay.Checked Then
-                Select Case ucrInputComboType.GetText
-                    Case "Distribution"
-                        ucrChkAddLegend.Visible = False
-                        clsVisualizeElementNa.AddParameter("type", Chr(34) & "distribution" & Chr(34), iPosition:=8)
-                    Case "Gap size"
-                        ucrChkAddLegend.Visible = True
-                        clsVisualizeElementNa.AddParameter("type", Chr(34) & "gapsize" & Chr(34), iPosition:=8)
-                    Case "Intervals"
-                        ucrChkAddLegend.Visible = True
-                        clsVisualizeElementNa.AddParameter("type", Chr(34) & "interval" & Chr(34), iPosition:=8)
-                    Case Else
-                        MsgBox("Developer error: Parameter must be among the cases. Modify setup such that " & ucrInputComboType.GetText & " is included in the cases.")
-                End Select
+                If ucrInputComboType.GetText <> "" Then
+                    Select Case ucrInputComboType.GetText
+                        Case "Distribution"
+                            ucrChkAddLegend.Visible = False
+                            clsVisualizeElementNa.AddParameter("type", Chr(34) & "distribution" & Chr(34), iPosition:=8)
+                        Case "Gap size"
+                            ucrChkAddLegend.Visible = True
+                            clsVisualizeElementNa.AddParameter("type", Chr(34) & "gapsize" & Chr(34), iPosition:=8)
+                        Case "Intervals"
+                            ucrChkAddLegend.Visible = True
+                            clsVisualizeElementNa.AddParameter("type", Chr(34) & "interval" & Chr(34), iPosition:=8)
+                        Case Else
+                            MsgBox("Developer error: Parameter must be among the cases. Modify setup such that " & ucrInputComboType.GetText & " is included among the cases.")
+                    End Select
+                End If
             ElseIf rdoShow.Checked Then
-                ucrChkAddLegend.Visible = True
+                    ucrChkAddLegend.Visible = True
                 clsVisualizeElementNa.AddParameter("type", Chr(34) & "imputation" & Chr(34), iPosition:=8)
             End If
             cmdDisplayOptions.Visible = True
