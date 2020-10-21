@@ -223,11 +223,10 @@ Public Class clsRecentFiles
             strFilePath = DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)
         ElseIf TypeOf sender Is LinkLabel Then
             'if tag is empty then its more link that was clicked
-            If String.IsNullOrEmpty(DirectCast(sender, LinkLabel).Tag.ToString()) Then
+            strFilePath = DirectCast(sender, LinkLabel).Tag.ToString()
+            If String.IsNullOrEmpty(strFilePath) Then
                 ShowAllRecentFiles()
                 Exit Sub
-            Else
-                strFilePath = DirectCast(sender, LinkLabel).Tag.ToString()
             End If
         End If
 
