@@ -161,6 +161,21 @@ Public Class ucrInputComboBox
         End If
     End Function
 
+    Public Property GetSetSelectedIndex As Integer
+        Get
+            Return cboInput.SelectedIndex
+        End Get
+        Set(value As Integer)
+            cboInput.SelectedIndex = value
+        End Set
+    End Property
+
+    Public ReadOnly Property GetItemsCount As Integer
+        Get
+            Return cboInput.Items.Count
+        End Get
+    End Property
+
     Public Sub SetItems(Optional strItems As String() = Nothing, Optional bClearExisting As Boolean = True, Optional bAddConditions As Boolean = False, Optional bAddQuotes As Boolean = True)
         Dim dctValues As New Dictionary(Of String, String)
         If bAddConditions Then
