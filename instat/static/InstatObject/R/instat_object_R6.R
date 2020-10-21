@@ -1676,7 +1676,7 @@ DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "s
 	   if(unstack_data){
 	       observation_data <- self$get_data_frame(data_name = "observation_data")
 		   observation_data_unstacked <- reshape2::dcast(data = observation_data, formula = station + datetime + date ~ element, value.var="obsvalue")
-		   self$import_data(data_tables=list(observation_data_unstacked = observation_data_unstacked))
+		   self$import_data(data_tables = list(observation_data_unstacked = observation_data_unstacked))
 	   }
    }
  

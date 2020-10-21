@@ -134,8 +134,10 @@ Public Class dlgClimSoft
         clsRImportFromClimsoft = New RFunction
         clsRImportFromClimsoft.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_climsoft")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRImportFromClimsoft)
+
         ucrReceiverMultipleStations.SetMeAsReceiver()
         ucrSelectorForClimSoft.Reset()
+        ucrChkUnstackData.Checked = True
         ucrChkDateRange.Checked = False
     End Sub
 

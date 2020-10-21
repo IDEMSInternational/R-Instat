@@ -28,15 +28,17 @@ Public Class dlgClimsoftWizard
 
     'used to track the position of the selected wizard step
     Private iCurrentStep As Integer = 0
-    Private Sub dlgClimsoftWizard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'autoTranslate(Me) 'temporarily commented because it changes the ok button text. 
+    Private Sub dlgClimsoftWizard_Load(sender As Object, e As EventArgs) Handles Me.Load
+        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
         lstWizardSteps.Item(iCurrentStep).Show()
-        'todo. temporary. probably the translation is changing the "Finish" to "Ok"
+    End Sub
+    Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
+        'todo. temporary. the translation is changing the "Finish" to "Ok"
         ucrBase.cmdOk.Text = "Finish"
     End Sub
 
@@ -134,9 +136,7 @@ Public Class dlgClimsoftWizard
         End If
 
         lstWizardSteps.Item(iCurrentStep).Show()
-
         TestOkAndChangeBaseButtonsState()
-
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -564,6 +564,7 @@ Public Class dlgClimsoftWizard
             'linking datepickers
             parentControls.ucrChkDateRange.AddToLinkedControls({parentControls.ucrDtpStartdate, parentControls.ucrDtpEndDate}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+            parentControls.ucrChkDateRange.OnControlValueChanged()
         End Sub
 
         Public Sub SetDefaults()
@@ -571,6 +572,7 @@ Public Class dlgClimsoftWizard
             parentControls.ucrComboBoxElements.Reset()
             SetElementsRecieverQuery()
             parentControls.ucrReceiverMultipleElements.SetMeAsReceiver()
+            parentControls.ucrChkUnstackData.Checked = True
             parentControls.ucrChkDateRange.Checked = False
         End Sub
 
