@@ -157,13 +157,9 @@ Public Class dlgImportGriddedData
                 dctFiles.Add("RFE2 Daily Precipitation", Chr(34) & "daily_rfev2_est_prcp" & Chr(34))
                 dctFiles.Add("RFE2 10-day Precipitation", Chr(34) & "10day_rfev2_est_prcp" & Chr(34))
                 dctFiles.Add("ARC2 Daily Precipitation", Chr(34) & "daily_est_prcp" & Chr(34))
-
                 dctFiles.Add("ARC2 Monthly Precipitation", Chr(34) & "monthly_est_prcp" & Chr(34))
-
                 ucrInputData.SetItems(dctFiles)
                 ucrInputData.cboInput.SelectedItem = "RFE2 Daily Precipitation"
-                ucrDtpMinDate.MinDate = New Date(2000, 10, 31)
-                ucrDtpMaxDate.MinDate = New Date(2000, 10, 31)
             Case "TAMSAT_v3.0"
                 dctFiles = New Dictionary(Of String, String)
                 dctFiles.Add("v3.0 Daily Rainfall", Chr(34) & "daily_rfe" & Chr(34))
@@ -237,6 +233,16 @@ Public Class dlgImportGriddedData
         ElseIf rdoEntireRange.Checked Then
             clsDownloadFromIRIFunction.RemoveParameterByName("min_date")
             clsDownloadFromIRIFunction.RemoveParameterByName("max_date")
+        End If
+    End Sub
+
+    Private Sub ucrInputData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputData.ControlValueChanged
+        If ucrInputData.GetText = "RFE2 Daily Precipitation" OrElse ucrInputData.GetText = "RFE2 10-day Precipitation" Then
+            ucrDtpMinDate.MinDate = New Date(2000, 10, 31)
+            ucrDtpMaxDate.MinDate = New Date(2000, 10, 31)
+        ElseIf ucrInputData.GetText = "ARC2 Daily Precipitation" OrElse ucrInputData.GetText = "ARC2 Monthly Precipitation" Then
+            ucrDtpMinDate.MinDate = New Date(1983, 1, 1)
+            ucrDtpMaxDate.MinDate = New Date(1983, 1, 1)
         End If
     End Sub
 
