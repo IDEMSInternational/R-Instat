@@ -31,7 +31,7 @@ Public Class dlgHomogenization
         If bReset Then
             SetDefaults()
         End If
-        SetRcodeForControls(bReset)
+        SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
     End Sub
@@ -253,7 +253,7 @@ Public Class dlgHomogenization
         AddPlotSummaryParameters()
     End Sub
 
-    Private Sub SetRcodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsCompleteCasesFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverElement.SetRCode(clsExcludeNAFunction, bReset)
 
@@ -383,7 +383,7 @@ Public Class dlgHomogenization
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRcodeForControls(True)
+        SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
