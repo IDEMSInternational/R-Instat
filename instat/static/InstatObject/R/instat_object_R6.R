@@ -1665,6 +1665,10 @@ DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "s
        self$convert_column_to_type(data_name = "observation_data", col_names = "station", to_type = "factor")
 	   #convert elements in observation data to factors
 	   self$convert_column_to_type(data_name = "observation_data", col_names = "element", to_type = "factor")
+	   #convert flags to factors if included
+	   if(include_observation_flags){
+	      self$convert_column_to_type(data_name = "observation_data", col_names = "flag", to_type = "factor")
+	   }
 	   #create a plain date column from the observation data datetime column values 
 	   obsdate <- self$get_columns_from_data(data_name = "observation_data", col_names = "datetime", use_current_filter=FALSE)
        self$add_columns_to_data(data_name = "observation_data", col_name = "date", col_data=as.Date(x=obsdate), before=FALSE, adjacent_column = "datetime")

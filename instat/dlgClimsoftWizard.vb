@@ -429,7 +429,7 @@ Public Class dlgClimsoftWizard
         End Sub
 
         Private Sub OnUcrControlsContents_ControlContentsChanged()
-            RaiseEvent StateChanged(Me) 'todo
+            RaiseEvent StateChanged(Me)
         End Sub
 
         ''' <summary>
@@ -470,8 +470,9 @@ Public Class dlgClimsoftWizard
 
             If Reset Then
                 SetDefaults()
+                SetRCodeForControls(Reset)
             End If
-            SetRCodeForControls(Reset)
+
             Reset = False
         End Sub
 
@@ -507,6 +508,7 @@ Public Class dlgClimsoftWizard
             AddHandler parentControls.ucrChkUnstackData.ControlValueChanged, AddressOf OnUcrUnstackDataControls_ControlValueChanged
             AddHandler parentControls.ucrReceiverMultipleElements.ControlValueChanged, AddressOf OnUcrUnstackDataControls_ControlValueChanged
             AddHandler parentControls.ucrReceiverMultipleElements.ControlContentsChanged, AddressOf OnUcrControlsContents_ControlContentsChanged
+            AddHandler parentControls.ucrChkDateRange.ControlValueChanged, AddressOf OnUcrChkDateRangeControl_ControlValueChanged
         End Sub
 
         Private Sub InitialiseControls()
@@ -537,18 +539,17 @@ Public Class dlgClimsoftWizard
             'include Unstack data checkbox. 
             'parameter attached to it is determined by elements receiver no. of contents. Thus not directly set by the control 
             parentControls.ucrChkUnstackData.Text = "Unstack Data"
-            'parentControls.ucrChkUnstackData.Checked = True
 
             'elements info checkbox
             parentControls.ucrChkElements.SetParameter(New RParameter("include_elements_info", 5))
-            parentControls.ucrChkElements.Text = "Include Elements Info"
+            parentControls.ucrChkElements.Text = "Include Elements Information"
             parentControls.ucrChkElements.SetRDefault("FALSE")
 
             'date range checkbox
             parentControls.ucrChkDateRange.Text = "Select Date Range"
 
             'todo. datepicker control have a problem of default date. 
-            'Its NOT set by default until the user changes current select date
+            'its NOT set by default until the user changes select date
 
             'start date datepicker
             parentControls.ucrDtpStartdate.SetParameter(New RParameter("start_date", 6))
@@ -562,8 +563,7 @@ Public Class dlgClimsoftWizard
 
             'linking datepickers
             parentControls.ucrChkDateRange.AddToLinkedControls({parentControls.ucrDtpStartdate, parentControls.ucrDtpEndDate}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-            'This control has no R code, so we force event raise here
-            parentControls.ucrChkDateRange.OnControlValueChanged()
+
         End Sub
 
         Public Sub SetDefaults()
@@ -598,6 +598,17 @@ Public Class dlgClimsoftWizard
             Else
                 parentControls.ucrChkUnstackData.Enabled = False
                 parentControls.clsRImportFromClimsoft.RemoveParameterByName("unstack_data")
+            End If
+        End Sub
+
+        Private Sub OnUcrChkDateRangeControl_ControlValueChanged()
+            'this forces the date pickers to write default parameter values to the Rfunction.
+            'date picker controls have a problem of default date. 
+            'its not set by default until the user changes selected date
+            'todo. in future, this may not be needed
+            If parentControls.ucrChkDateRange.Checked Then
+                parentControls.ucrDtpEndDate.OnControlValueChanged()
+                parentControls.ucrDtpStartdate.OnControlValueChanged()
             End If
         End Sub
 
@@ -644,13 +655,11 @@ Public Class dlgClimsoftWizard
             parentControls.panelElementsData.Visible = True
             If Reset Then
                 SetDefaults()
+                SetRCodeForControls(Reset)
             Else
                 'refresh the receiver query
                 SetElementsRecieverQuery()
-                'set as selected receiver. will also execute receiver's sql the query
-                'parentControls.ucrReceiverMultipleElements.SetMeAsReceiver()
             End If
-            SetRCodeForControls(Reset)
             Reset = False
         End Sub
 

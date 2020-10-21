@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 
 Public Class dlgClimSoft
@@ -103,16 +104,12 @@ Public Class dlgClimSoft
         'ucrChkUnstackData.Checked = True
 
         'include elements info checkbox
-        ucrChkElements.Text = "Include Elements Info"
+        ucrChkElements.Text = "Include Elements Information"
         ucrChkElements.SetParameter(New RParameter("include_elements_info", 7))
         ucrChkElements.SetRDefault("FALSE")
 
         'date range checkbox
         ucrChkDateRange.Text = "Select Date Range"
-        'ucrChkDateRange.SetDefaultState(False) 'todo delete this
-
-        'todo. datepicker control have a problem of default date. 
-        'Its Not set by default until the user changes current select date
 
         'start date datepicker
         ucrDtpStartdate.SetParameter(New RParameter("start_date", 8))
@@ -126,10 +123,9 @@ Public Class dlgClimSoft
 
         'linking observation data related controls  to include observation data checkbox
         ucrChkObservationData.AddToLinkedControls({ucrChkFlagsData, ucrChkUnstackData, ucrChkElements, ucrComboBoxElements, ucrReceiverMultipleElements}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'todo. we have a problem with how we will link this control. check on dlgImportDataSet??
+        'link date range checkbox
         ucrChkObservationData.AddToLinkedControls({ucrChkDateRange}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        'linking datepickers to date range checkbox
+        'linking date pickers to date range checkbox
         ucrChkDateRange.AddToLinkedControls({ucrDtpStartdate, ucrDtpEndDate}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
     End Sub
@@ -144,7 +140,15 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrComboBoxStations.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverMultipleStations.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrComboBoxElements.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverMultipleElements.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkObservationData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkFlagsData.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkElements.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrDtpStartdate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrDtpEndDate.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -155,6 +159,7 @@ Public Class dlgClimSoft
         SetDefaults()
         SetRCodeForControls(True)
         sdgImportFromClimSoft.Reset()
+        CheckAndUpdateConnectionStatus()
         TestOKEnabled()
     End Sub
 
@@ -271,4 +276,14 @@ Public Class dlgClimSoft
         End If
     End Sub
 
+    Private Sub ucrChkDateRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDateRange.ControlValueChanged
+        'this forces the date pickers to write default parameter values to the Rfunction.
+        'date picker controls have a problem of default date. 
+        'its not set by default until the user changes selected date
+        'todo. in future, this may not be needed
+        If ucrChkDateRange.Checked Then
+            ucrDtpEndDate.OnControlValueChanged()
+            ucrDtpStartdate.OnControlValueChanged()
+        End If
+    End Sub
 End Class
