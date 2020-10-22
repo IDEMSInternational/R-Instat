@@ -104,7 +104,6 @@ Partial Class ucrDataView
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.pnlDataContainer = New System.Windows.Forms.Panel()
         Me.panelAllMenuItems = New System.Windows.Forms.Panel()
-        Me.linkHelpMoreToCome = New System.Windows.Forms.LinkLabel()
         Me.linkHelpInstructionVideos = New System.Windows.Forms.LinkLabel()
         Me.linkHelpRInstatWebsite = New System.Windows.Forms.LinkLabel()
         Me.linkHelpRpackages = New System.Windows.Forms.LinkLabel()
@@ -561,7 +560,6 @@ Partial Class ucrDataView
         '
         'panelAllMenuItems
         '
-        Me.panelAllMenuItems.Controls.Add(Me.linkHelpMoreToCome)
         Me.panelAllMenuItems.Controls.Add(Me.linkHelpInstructionVideos)
         Me.panelAllMenuItems.Controls.Add(Me.linkHelpRInstatWebsite)
         Me.panelAllMenuItems.Controls.Add(Me.linkHelpRpackages)
@@ -580,20 +578,6 @@ Partial Class ucrDataView
         Me.panelAllMenuItems.TabIndex = 7
         Me.panelAllMenuItems.Visible = False
         '
-        'linkHelpMoreToCome
-        '
-        Me.linkHelpMoreToCome.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkHelpMoreToCome.AutoSize = True
-        Me.linkHelpMoreToCome.Enabled = False
-        Me.linkHelpMoreToCome.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkHelpMoreToCome.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkHelpMoreToCome.Location = New System.Drawing.Point(30, 409)
-        Me.linkHelpMoreToCome.Name = "linkHelpMoreToCome"
-        Me.linkHelpMoreToCome.Size = New System.Drawing.Size(72, 13)
-        Me.linkHelpMoreToCome.TabIndex = 11
-        Me.linkHelpMoreToCome.TabStop = True
-        Me.linkHelpMoreToCome.Text = "More to come"
-        '
         'linkHelpInstructionVideos
         '
         Me.linkHelpInstructionVideos.ActiveLinkColor = System.Drawing.Color.Blue
@@ -607,6 +591,7 @@ Partial Class ucrDataView
         Me.linkHelpInstructionVideos.TabIndex = 10
         Me.linkHelpInstructionVideos.TabStop = True
         Me.linkHelpInstructionVideos.Text = "Instructional videos"
+        Me.linkHelpInstructionVideos.Visible = False
         '
         'linkHelpRInstatWebsite
         '
@@ -632,7 +617,7 @@ Partial Class ucrDataView
         Me.linkHelpRpackages.Size = New System.Drawing.Size(116, 13)
         Me.linkHelpRpackages.TabIndex = 8
         Me.linkHelpRpackages.TabStop = True
-        Me.linkHelpRpackages.Text = "R-packages in R-Instat"
+        Me.linkHelpRpackages.Text = "R packages in R-Instat"
         '
         'linkHelpIntroduction
         '
@@ -821,7 +806,6 @@ Partial Class ucrDataView
     Friend WithEvents lblRecent As Label
     Friend WithEvents lblStart As Label
     Friend WithEvents panelRecentMenuItems As Panel
-    Friend WithEvents linkHelpMoreToCome As LinkLabel
     Friend WithEvents linkHelpInstructionVideos As LinkLabel
     Friend WithEvents linkHelpRInstatWebsite As LinkLabel
     Friend WithEvents linkHelpRpackages As LinkLabel
