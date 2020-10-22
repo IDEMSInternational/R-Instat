@@ -144,7 +144,7 @@ Partial Class dlgVisualizeData
         '
         Me.lblSampling.AutoSize = True
         Me.lblSampling.Enabled = False
-        Me.lblSampling.Location = New System.Drawing.Point(238, 245)
+        Me.lblSampling.Location = New System.Drawing.Point(238, 246)
         Me.lblSampling.Name = "lblSampling"
         Me.lblSampling.Size = New System.Drawing.Size(94, 13)
         Me.lblSampling.TabIndex = 27
@@ -152,7 +152,7 @@ Partial Class dlgVisualizeData
         '
         'ucrNudSamplingFunction
         '
-        Me.ucrNudSamplingFunction.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSamplingFunction.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
         Me.ucrNudSamplingFunction.Enabled = False
         Me.ucrNudSamplingFunction.Increment = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudSamplingFunction.Location = New System.Drawing.Point(338, 242)
@@ -161,7 +161,7 @@ Partial Class dlgVisualizeData
         Me.ucrNudSamplingFunction.Name = "ucrNudSamplingFunction"
         Me.ucrNudSamplingFunction.Size = New System.Drawing.Size(50, 20)
         Me.ucrNudSamplingFunction.TabIndex = 26
-        Me.ucrNudSamplingFunction.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSamplingFunction.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'ucrNudMaximumSize
         '

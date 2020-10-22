@@ -23,6 +23,7 @@ Public Class dlgVisualizeData
     Private clsVisMissFunction As New RFunction
     Private clsVisGuessFunction As New RFunction
     Private clsCurrBaseFunction As New RFunction
+    Private clsSamplingFraction As New RFunction
 
     Private Sub dlgVisualizeData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -76,11 +77,16 @@ Public Class dlgVisualizeData
         ucrInputComboboxPalette.SetItems(dctPalette)
 
         ucrNudMaximumSize.DecimalPlaces = 1
-
         ucrNudMaximumSize.Increment = 0.1
         ucrNudMaximumSize.Minimum = 0.1
         ucrNudMaximumSize.Maximum = Integer.MaxValue
-        ''ucrNudMaximumSize.SetMinMax(0.1, Integer.MaxValue)
+
+        ' Not yet implemented
+        ucrNudSamplingFunction.SetParameter(New RParameter("prop", 1))
+        ucrNudSamplingFunction.DecimalPlaces = 2
+        ucrNudSamplingFunction.Increment = 0.01
+        ucrNudSamplingFunction.Minimum = 0.01
+        ucrNudSamplingFunction.Maximum = 1
 
         ucrReceiverVisualizeData.SetParameter(New RParameter("x", 0))
         ucrReceiverVisualizeData.SetParameterIsRFunction()
@@ -94,7 +100,6 @@ Public Class dlgVisualizeData
         ucrNudMaximumSize.SetLinkedDisplayControl(lstMaximumSizeControls)
 
         ucrNudSamplingFunction.SetLinkedDisplayControl(lblSampling)
-
         ucrPnlSelectData.AddToLinkedControls(ucrReceiverVisualizeData, {rdoSelectedColumn}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSaveGraph.SetIsComboBox()
@@ -108,6 +113,7 @@ Public Class dlgVisualizeData
         clsVisDatFunction = New RFunction
         clsVisMissFunction = New RFunction
         clsVisGuessFunction = New RFunction
+        clsSamplingFraction = New RFunction
         ucrSelectorVisualizeData.Reset()
         ucrSaveGraph.Reset()
 
