@@ -1808,7 +1808,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
 #' @param stack_years when format = "years" stack_years specifies the years. Must be same length as stack_cols
 #' If not specified, the function will try to determine the years using the format "Xyyyy" where "X" is any character and "yyyy" is the year.
 #' @param stack_cols a character vector of columns to stack
-#' if format == "days" 31 columns (in order) for each day of the month are expected
+#' if format == "days" 31 columns (in order) for each day of the month are expected, or 62 with alternate value/flag columns
 #' if format == "months" 12 columns (in order) for each month are expected
 #' if format == "years" any number of year columns can be given. These should be named with format "Xyyyy"
 #' where "X" is any character and "yyyy" is the year
@@ -1919,6 +1919,7 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
   }
   
   if(format == "days") {
+    ndays <- 31
     # month column required in this case
     if(missing(month)) stop("month column is required when format == 'days'")
     
@@ -1926,14 +1927,14 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     if(missing(year)) stop("year column is required when format == 'days'")
     
     # stack column checks
-    if(length(stack_cols) != 31 && length(stack_cols) != 62) stop("You have specified: ", length(stack_cols), " stack columns\nThere must be exactly 31 or 62 stack columns when format == 'days'")
+    if(length(stack_cols) != ndays && length(stack_cols) != 2 * ndays) stop("You have specified: ", length(stack_cols), " stack columns\nThere must be exactly ", ndays, " or ", 2 * ndays, " stack columns when format == 'days'")
     
     # TRUE if flag columns are included
-    flags <- length(stack_cols) == 62
+    flags <- length(stack_cols) == 2 * ndays
     if(flags) {
       # We assume that value/flag columns alternate and are in correct order i.e. c(value1, flag1, value2, flag2, ..., value31, flag31)
-      val_col_names <- stack_cols[seq(1, 61, 2)]
-      flag_col_names <- stack_cols[seq(2, 62, 2)]
+      val_col_names <- stack_cols[seq(1, 2 * ndays - 1, 2)]
+      flag_col_names <- stack_cols[seq(2, 2 * ndays, 2)]
       if(!all(sapply(x[, val_col_names], function(col) is.numeric(col) || (is.logical(col) && all(is.na(col)))))) stop("Every other column must be numeric to represent values (starting with the first columns). \nThe following value columns are not numeric: ", paste(stack_cols[!sapply(x[, val_col_names], is.numeric)], collapse = ","))
       # Name of flag column
       flag_name <- "flag"
@@ -1951,17 +1952,18 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     if(flags) {
       # renaming the stack_cols with a consistent pattern makes it possible for pivot_longer to stack both sets of columns together and construct the day column correctly
       # This assumes stack_cols are in the correct order i.e. c(value1, flag1, value2, flag2, ..., value31, flag31)
-      new_stack_cols <- paste(c("value", "flag"), rep(1:31, each = 2), sep = "_")
+      new_stack_cols <- paste(c("value", "flag"), rep(1:ndays, each = 2), sep = "_")
       names(y)[names(y) %in% stack_cols] <- new_stack_cols
-      # ".value" is a special sentinel used in names_to ensure names of value columns come from the names of cols. See ?pivot_longer values_to section for details.
+      # ".value" is a special sentinel used in names_to to ensure names of value columns come from the names of cols. See ?pivot_longer values_to section for details.
       y <- tidyr::pivot_longer(y, cols = tidyselect::all_of(new_stack_cols), names_to = c(".value", "day"), names_sep = "_")
     }
     else {
       # renaming the stack_cols so that the day column can be constructed correctly
       # This assumes stack_cols are in the correct order i.e. 1 - 31
-      new_stack_cols <- paste0("day", 1:31)
+      new_stack_cols <- paste0("day", 1:ndays)
       names(y)[names(y) %in% stack_cols] <- new_stack_cols
       y <- tidyr::pivot_longer(y, cols = tidyselect::all_of(new_stack_cols), names_to = "day", values_to = element_name)
+      # extract day number from e.g. "day10"
       y$day <- substr(y$day, 4, 5)
     }
     
@@ -1990,7 +1992,8 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     new_stack_cols <- paste0("month", 1:12)
     names(y)[names(y) %in% stack_cols] <- new_stack_cols
     y <- tidyr::pivot_longer(y, cols = tidyselect::all_of(new_stack_cols), names_to = "month", values_to = element_name)
-    y$month <- substr(y$month, 6, 8)
+    # extract month number from e.g. "month10"
+    y$month <- substr(y$month, 6, 7)
     
     y$date <- as.Date(paste(y$year, y$month, y$day), format = paste(year_format, "%m", "%d"))
   }
