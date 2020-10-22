@@ -128,10 +128,6 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrInputCalOptions_NameChanged() Handles ucrCalc.NameChanged
-        CalculationsOptions()
-    End Sub
-
-    Private Sub CalculationsOptions()
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Maths"
                 Me.Width = iBasicWidth * 1.38
