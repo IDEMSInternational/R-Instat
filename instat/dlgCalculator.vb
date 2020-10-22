@@ -111,6 +111,7 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
+
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ucrCalc.SetCalculationHistory()
     End Sub
