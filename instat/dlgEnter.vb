@@ -60,13 +60,13 @@ Public Class dlgEnter
         'Adding tooltips for the buttons
         ttEnter.SetToolTip(cmdColon, "A subset, e.g. letters[1:4] gives a, b, c, d.")
         ttEnter.SetToolTip(cmdLetters2, "The letters, e.g. letters[1:4] gives a, b, c, d. Type LETTERS[1:4] for A, B, C, D.")
-        ttEnter.SetToolTip(cmdFactor, "e.g. forcats::as_factor(""B"",""c"",""A"") to make the contents into a factor variable with the levels in the order as entered, so here B is the lowest level.")
-        ttEnter.SetToolTip(cmdRepelicationFunction, "Repeat of a sequence, e.g. rep(c(2,3,4), each=2) gives 2,2,3,3,4,4.")
+        ttEnter.SetToolTip(cmdFactor, "e.g. forcats::as_factor(""B"", ""c"", ""A"") to make the contents into a factor variable with the levels in the order as entered, so here B is the lowest level.")
+        ttEnter.SetToolTip(cmdRepelicationFunction, "Repeat of a sequence, e.g. rep(c(2,3,4), each=2) gives 2, 2, 3, 3, 4, 4.")
         ttEnter.SetToolTip(cmdMonths, "month.abb[1:4] is ""Jan2"", ""Feb"", ""Mar"", ""Apr"". Type month.name for full month names.")
-        ttEnter.SetToolTip(cmdText, "Define a character variable, e.g. as.character(c(3,5,""a"",""b"")).")
-        ttEnter.SetToolTip(cmdSequenceFunction, "Sequences, given either as seq(1,5,2) to give 1,3,5 or as seq(1,5,length=3) to give the same.")
+        ttEnter.SetToolTip(cmdText, "Define a character variable, e.g. as.character(c(3, 5, ""a"", ""b"")).")
+        ttEnter.SetToolTip(cmdSequenceFunction, "Sequences, given either as seq(1, 5, 2) to give 1,3,5 or as seq(1,5,length=3) to give the same.")
         ttEnter.SetToolTip(cmdPi, "The number pi = 3.14.")
-        ttEnter.SetToolTip(cmdLogical, " Define a logical variable, e.g. as.logical(0,1,0,10,-5) gives FALSE, TRUE, FALSE, TRUE, TRUE.")
+        ttEnter.SetToolTip(cmdLogical, " Define a logical variable, e.g. as.logical(0, 1, 0, 10, -5) gives FALSE, TRUE, FALSE, TRUE, TRUE.")
         ttEnter.SetToolTip(cmdConcantenateFunction, "Combines arguments to form a single vector, e.g. c(1:3 8) is 1, 2, 3, 8.")
         ttEnter.SetToolTip(cmdExponential, "For scientific notation, e.g. 1.5E-1 = 0.15.")
 
@@ -131,7 +131,7 @@ Public Class dlgEnter
     End Sub
 
     Private Sub cmdColon_Click(sender As Object, e As EventArgs) Handles cmdColon.Click
-        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("[:]", 1)
+        ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("[:]", 2)
         TestOKEnabled()
     End Sub
 
@@ -241,28 +241,28 @@ Public Class dlgEnter
         lstView.Items.Add(New ListViewItem({"'Nairobi'"}))
         lstView.Items.Item(1).ToolTipText = "a single text repeated for the data frame" 'todo. Sensible tooltip here.
 
-        lstView.Items.Add(New ListViewItem({"c(2,3,4)*1.5E02"}))
+        lstView.Items.Add(New ListViewItem({"c(2, 3, 4)*1.5E02"}))
         lstView.Items.Item(2).ToolTipText = "gives 300, 450, 600 then repeated for the data frame" 'todo. Sensible tooltip here
 
-        lstView.Items.Add(New ListViewItem({"factor(c(1,2,3))"}))
+        lstView.Items.Add(New ListViewItem({"factor(c(1, 2, 3))"}))
         lstView.Items.Item(3).ToolTipText = "values 1 to 3 with the variable made into a factor" 'todo. Sensible tooltip here
 
-        lstView.Items.Add(New ListViewItem({" forcats::as_factor(rep(LETTERS[4:1],c(4,3,1,1)))"}))
-        lstView.Items.Item(4).ToolTipText = "Gives D,D,D,D,C,C,C,B,A as a fa ctor"
+        lstView.Items.Add(New ListViewItem({" forcats::as_factor(rep(LETTERS[4:1], c(4, 3, 1, 1)))"}))
+        lstView.Items.Item(4).ToolTipText = "Gives D, D, D, D, C, C, C, B, A as a factor"
 
-        lstView.Items.Add(New ListViewItem({"factor(rep(c(month.abb[4:7],NA),c(2,1,2,1,3)))"}))
+        lstView.Items.Add(New ListViewItem({"factor(rep(c(month.abb[4:7],NA), c(2, 1, 2, 1, 3)))"}))
         lstView.Items.Item(5).ToolTipText = "Gives Apr, Apr, May, Jun, Jun, Jul, NA, NA, NA"
 
-        lstView.Items.Add(New ListViewItem({"c(1:4,10,rep(15,3),20)"}))
-        lstView.Items.Item(6).ToolTipText = "A sequence of values 1,2,3,4,10,15,15,15,20"
+        lstView.Items.Add(New ListViewItem({"c(1:4, 10, rep(15, 3), 20)"}))
+        lstView.Items.Item(6).ToolTipText = "A sequence of values 1, 2, 3, 4, 10, 15, 15, 15, 20"
 
-        lstView.Items.Add(New ListViewItem({"c(0,seq(1,5,2 ),seq(10,12),15, 15)"}))
-        lstView.Items.Item(7).ToolTipText = "A set of sequences, giving 0,1,3,5,10,11,12, 15, 15"
+        lstView.Items.Add(New ListViewItem({"c(0,seq(1, 5, 2 ), seq(10, 12), 15, 15)"}))
+        lstView.Items.Item(7).ToolTipText = "A set of sequences, giving  0, 1, 3, 5, 10, 11, 12, 15, 15"
 
-        lstView.Items.Add(New ListViewItem({"runif(3,c(0,5,10),c(1,10,20))"}))
+        lstView.Items.Add(New ListViewItem({"runif(3, c(0, 5, 10), c(1, 10, 20))"}))
         lstView.Items.Item(8).ToolTipText = "Random uniform data from 3 different uniform distributions)"
 
-        lstView.Items.Add(New ListViewItem({"seq(as.Date('1935/3/1'),as.Date('1937/12/1'),'quarter')"}))
+        lstView.Items.Add(New ListViewItem({"seq(as.Date('1935/3/1'),as.Date('1937/12/1'), 'quarter')"}))
         lstView.Items.Item(9).ToolTipText = "A sequence of dates from 1935/3/1, 1935/6/1 ...)"
 
 
