@@ -14,12 +14,15 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgOneVarFitModel
     Private clsROneVarFitModel, clsRLogLikFunction, clsRfitdist, clsRConvertVector, clsRConvertInteger, clsRConvertNumeric, clsNaExclude As New RFunction
     Private clsRplotFunction, clsRplotPPComp, clsRplotCdfcomp, clsRplotQqComp, clsRplotDenscomp As New RFunction
     Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction, clsBartelFunction, clsBrFunction, clsRunsFunction, clsSenFunction, clsSerialCorrFunction, clsSnhFunction, clsAdFunction, clsCvmFunction, clsLillieFunction, clsPearsonFunction, clsSfFunction As New RFunction
     Private clsMeanCIFunction, clsMedianCIFunction, clsNormCIFunction, clsQuantileCIFunction, clsSdCIFunction, clsVarCIFunction As New RFunction
+    Private clsGetFactorLevel As New RFunction
     Private WithEvents ucrDistribution As ucrDistributions
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -63,6 +66,9 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoGeneralCase, "fitdist")
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoTest, {"binom.test", "prop.test", "SignTest", "t.test", "wilcox.test", "ZTest", "BartelsRankTest", "br.test", "RunsTest", "sens.slope", "serialCorrelationTest", "snh.test", "ad.test", "cvm.test", "lillie.test", "pearson.test", "sf.test"})
         ucrPnlGeneralExactCase.AddFunctionNamesCondition(rdoEstimate, {"MeanCI", "MedianCI ", "normCI", "quantileCI", "sdCI", "VarCI"})
+
+        ucrSelectorOneVarFitMod.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorOneVarFitMod.SetParameterIsString()
 
         ucrReceiverVariable.SetParameter(New RParameter("object", 0))
         ucrReceiverVariable.Selector = ucrSelectorOneVarFitMod
@@ -179,7 +185,6 @@ Public Class dlgOneVarFitModel
         ucrInputTxtSd.SetDefaultState(1)
         ucrInputTxtSd.AddQuotesIfUnrecognised = False
 
-
         ucrInputComboConfidenceLevel.SetParameter(New RParameter("conf.level", 2))
         dctConfidence.Add("0.900", "0.90")
         dctConfidence.Add("0.950", "0.95")
@@ -190,7 +195,6 @@ Public Class dlgOneVarFitModel
         ucrInputComboConfidenceLevel.AddQuotesIfUnrecognised = False
         ucrInputComboConfidenceLevel.SetValidationTypeAsNumeric(dcmMin:=0.0, bIncludeMin:=True, dcmMax:=1.0, bIncludeMax:=True)
         ucrInputComboConfidenceLevel.bAllowNonConditionValues = True
-
 
         ucrInputConfidenceInterval.SetParameter(New RParameter("conf.level", 2))
         dctConfidenceInterval.Add("0.900", "0.90")
@@ -208,21 +212,24 @@ Public Class dlgOneVarFitModel
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrInputComboEstimate, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Mean")
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrDistributionChoice, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlGeneralExactCase.AddToLinkedControls(ucrChkOmitMissing, {rdoEstimate}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrInputComboEstimate.AddToLinkedControls(ucrInputComboConfidenceLevel, {"mean", "median", "normal", "quantile", "sd", "variance"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrInputMeanCIMethod, {"mean"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrInputComboMedianCI, {"median"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrInputComboVarianceCI, {"variance"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboEstimate.AddToLinkedControls(ucrInputComboQuantilCI, {"quantile"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboEstimate.AddToLinkedControls(ucrNudQuantile, {"quantile"}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboQMethod, {"quantile"}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrInputComboTests.AddToLinkedControls(ucrInputCIMethods, {"binomial"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputComboMethod, {"Bartel"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputConfidenceInterval, {"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", "serial corr", "Sen"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputNullHypothesis, {"binomial", "proportion"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputTxtSd, {"Z"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboEstimate.AddToLinkedControls(ucrNudQuantile, {"quantile"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputTxtHypothesis, {"sign", "Wilcoxon"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputNulHypothesis, {"t", "Z"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboTests.AddToLinkedControls(ucrInputTextM, {"br", "snh"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputComboEstimate.AddToLinkedControls(ucrInputComboQMethod, {"quantile"}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrInputComboTests.SetLinkedDisplayControl(lblTests)
         ucrInputComboEstimate.SetLinkedDisplayControl(lblEstimate)
         ucrInputNullHypothesis.SetLinkedDisplayControl(lblNullHypothesis)
@@ -240,6 +247,7 @@ Public Class dlgOneVarFitModel
         ucrInputTextM.SetLinkedDisplayControl(lblMonteCarlo)
         ucrInputComboQMethod.SetLinkedDisplayControl(lblQMethod)
         ucrInputConfidenceInterval.SetLinkedDisplayControl(lblConfidenceLevel)
+        ucrInputSuccess.SetLinkedDisplayControl(lblSuccess)
 
         lstCommandButtons.AddRange({cmdDisplayOptions, cmdFittingOptions})
         ucrDistributionChoice.SetLinkedDisplayControl(lstCommandButtons)
@@ -289,10 +297,14 @@ Public Class dlgOneVarFitModel
         clsSdCIFunction = New RFunction
         clsVarCIFunction = New RFunction
 
+        clsGetFactorLevel = New RFunction
+
         ucrSelectorOneVarFitMod.Reset()
         ucrSaveModel.Reset()
 
         ucrChkConvertVariate.Visible = False 'hide convert to numeric checkbox by default
+
+        clsGetFactorLevel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
 
         'General Case
         clsROneVarFitModel.SetPackageName("fitdistrplus")
@@ -543,6 +555,7 @@ Public Class dlgOneVarFitModel
         ucrInputComboQMethod.SetRCode(clsQuantileCIFunction, bReset)
         ucrInputNulHypothesis.SetRCode(clsTtestFunction, bReset)
         ucrInputTextM.SetRCode(clsBrFunction)
+        ucrSelectorOneVarFitMod.SetRCode(clsGetFactorLevel, bReset)
 
         ucrSaveModel.SetRCode(clsROneVarFitModel, bReset)
 
@@ -632,6 +645,7 @@ Public Class dlgOneVarFitModel
         SetSaveLabelTextAndPrefix()
         AddAsNumeric()
         EstimatesAsNumeric()
+        AddFactorLevels()
     End Sub
 
     Private Sub ucrDistributions_cboDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
@@ -658,6 +672,7 @@ Public Class dlgOneVarFitModel
         EnableDisableConvertVariate()
         AddAsNumeric()
         EstimatesAsNumeric()
+        AddFactorLevels()
         If Not ucrReceiverVariable.IsEmpty Then
             ucrDistributionChoice.RecieverDatatype(ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverVariable.GetVariableNames(bWithQuotes:=False))
             If ucrChkConvertVariate.Checked Then
@@ -853,11 +868,31 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
+    Private Sub AddFactorLevels()
+        Dim chrCurrentFactorLevels As CharacterVector
+        Dim lstFactor As List(Of String) = New List(Of String)()
+        If Not ucrReceiverVariable.IsEmpty AndAlso rdoTest.Checked AndAlso (ucrReceiverVariable.strCurrDataType.ToLower = "logical" Or ucrReceiverVariable.strCurrDataType.ToLower = "factor") AndAlso (ucrInputComboTests.GetText() = "binomial" Or ucrInputComboTests.GetText() = "proportion") Then
+            clsGetFactorLevel.AddParameter("col_name", ucrReceiverVariable.GetVariableNames(), iPosition:=1)
+            chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevel.ToScript()).AsCharacter
+            For Each factor In chrCurrentFactorLevels
+                lstFactor.Add(Chr(34) & factor & Chr(34))
+            Next
+            ucrInputSuccess.SetItems(lstFactor.ToArray)
+            ucrInputSuccess.SetText(lstFactor(0))
+            ucrInputSuccess.Visible = True
+        Else
+            ucrInputSuccess.Visible = False
+            clsBionomialFunction.RemoveParameterByName("success")
+            clsProportionFunction.RemoveParameterByName("success")
+        End If
+    End Sub
+
     Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboTests.ControlValueChanged, ucrInputComboEstimate.ControlValueChanged
         SetTestEstimateBaseFunction()
         ucrSaveModel.Reset()
         AddAsNumeric()
         EstimatesAsNumeric()
+        AddFactorLevels()
         If ucrInputComboTests.GetText = "---------------------" Then
             ucrInputComboTests.cboInput.SelectedIndex = 0
         End If
@@ -867,4 +902,10 @@ Public Class dlgOneVarFitModel
         TestOKEnabled()
     End Sub
 
+    Private Sub ucrInputSuccess_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSuccess.ControlValueChanged
+        If ucrInputSuccess.Visible Then
+            clsBionomialFunction.AddParameter("success", ucrInputSuccess.GetText(), iPosition:=4)
+            clsProportionFunction.AddParameter("success", ucrInputSuccess.GetText(), iPosition:=4)
+        End If
+    End Sub
 End Class
