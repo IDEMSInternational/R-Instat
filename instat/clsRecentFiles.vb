@@ -28,7 +28,7 @@ Public Class clsRecentFiles
 
     ''' <summary>
     ''' stores reference to the  the data view window used in frmMain. 
-    ''' will be used to add recent files menu items to to it.
+    ''' will be used to add recent files menu items to it.
     ''' </summary>
     Private ucrDataViewWindow As ucrDataView
 
@@ -223,11 +223,10 @@ Public Class clsRecentFiles
             strFilePath = DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)
         ElseIf TypeOf sender Is LinkLabel Then
             'if tag is empty then its more link that was clicked
-            If String.IsNullOrEmpty(DirectCast(sender, LinkLabel).Tag.ToString()) Then
+            strFilePath = DirectCast(sender, LinkLabel).Tag.ToString()
+            If String.IsNullOrEmpty(strFilePath) Then
                 ShowAllRecentFiles()
                 Exit Sub
-            Else
-                strFilePath = DirectCast(sender, LinkLabel).Tag.ToString()
             End If
         End If
 
