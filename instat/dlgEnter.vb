@@ -257,7 +257,7 @@ Public Class dlgEnter
         lstView.Items.Item(6).ToolTipText = "A sequence of values 1,2,3,4,10,15,15,15,20"
 
         lstView.Items.Add(New ListViewItem({"c(0,seq(1,5,2 ),seq(10,12),15, 15)"}))
-        lstView.Items.Item(7).ToolTipText = "A set of sequences, giving 0,1,3,5 10,11,12, 15, 15"
+        lstView.Items.Item(7).ToolTipText = "A set of sequences, giving 0,1,3,5,10,11,12, 15, 15"
 
         lstView.Items.Add(New ListViewItem({"runif(3,c(0,5,10),c(1,10,20))"}))
         lstView.Items.Item(8).ToolTipText = "Random uniform data from 3 different uniform distributions)"
