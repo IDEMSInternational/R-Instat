@@ -2076,62 +2076,65 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     }
   }
   
-  if(continue) {
-    # Standard format of slowest varying structure variables first (station then element then date) followed by measurements
-    if(!missing(station)) z <- data.frame(station = forcats::as_factor(y$station), date = y$date)
-    else z <- data.frame(date = y$date)
-    if(!missing(element)) z$element <- y$element
-    z[[element_name]] <- y[[element_name]]
-    if(flags) z[[flag_name]] <- y[[flag_name]]
-    
-    # Initialise id columns used for sorting data
-    id_cols <- c()
-    if(!missing(station)) id_cols <- c(id_cols, "station")
-    
-    z <- dplyr::filter(z, !is.na(date))
-    
-    # If data contains multiple elements, optionally unstack the element column
-    if(!missing(element)) {
-      if(unstack_elements) {
-        # pivot_wider allows unstacking multiple column sets, used when flags included.
-        values_from <- c(element_name)
-        if(flags) values_from <- c(values_from, flag_name)
-        # first check for unique combinations to ensure no duplicates
-        z_dup <- duplicated(z %>% dplyr::select(-tidyselect::all_of(values_from)))
-        if(any(z_dup > 0)) {
-          # This should be a stop but then detailed output can't be displayed by R-Instat
-          cat("\nError: Cannot tidy data as some elements have multiple values on the same date. Check and resolve duplicates first.\n")
-          z_check <- z %>% filter(z_dup > 0)
-          if(!silent) {
-            cat("\n*** Duplicates ***\n\n")
-            print(z_check, row.names = FALSE)
-          }
-          continue <- FALSE
+  # This should have been a stop above but then detailed output can't be displayed by R-Instat
+  if(!continue) return()
+  
+  # Standard format of slowest varying structure variables first (station then element then date) followed by measurements
+  if(!missing(station)) z <- data.frame(station = forcats::as_factor(y$station), date = y$date)
+  else z <- data.frame(date = y$date)
+  if(!missing(element)) z$element <- y$element
+  z[[element_name]] <- y[[element_name]]
+  if(flags) z[[flag_name]] <- y[[flag_name]]
+  
+  # Initialise id columns used for sorting data
+  id_cols <- c()
+  if(!missing(station)) id_cols <- c(id_cols, "station")
+  
+  z <- dplyr::filter(z, !is.na(date))
+  
+  # If data contains multiple elements, optionally unstack the element column
+  if(!missing(element)) {
+    if(unstack_elements) {
+      # pivot_wider allows unstacking multiple column sets, used when flags included.
+      values_from <- c(element_name)
+      if(flags) values_from <- c(values_from, flag_name)
+      # first check for unique combinations to ensure no duplicates
+      z_dup <- duplicated(z %>% dplyr::select(-tidyselect::all_of(values_from)))
+      if(any(z_dup > 0)) {
+        # This should be a stop but then detailed output can't be displayed by R-Instat
+        cat("\nError: Cannot tidy data as some elements have multiple values on the same date. Check and resolve duplicates first.\n")
+        z_check <- z %>% filter(z_dup > 0)
+        if(!silent) {
+          cat("\n*** Duplicates ***\n\n")
+          print(z_check, row.names = FALSE)
         }
-        else z <- tidyr::pivot_wider(z, names_from = element, values_from = tidyselect::all_of(values_from))
+        continue <- FALSE
       }
-      # If not unstacking then need to sort by element column
-      else id_cols <- c(id_cols, "element")
+      else z <- tidyr::pivot_wider(z, names_from = element, values_from = tidyselect::all_of(values_from))
     }
-    if(continue) {
-      # Add this last to ensure date varies fastest
-      id_cols <- c(id_cols, "date")
-      # TODO Find a better way to do this. Update if there could be more the 3 id cols.
-      if(length(id_cols) == 1) {
-        z <- z %>% dplyr::arrange(.data[[id_cols[1]]])
-      }
-      else if(length(id_cols) == 2) {
-        z <- z %>% dplyr::arrange(.data[[id_cols[1]]], .data[[id_cols[2]]])
-      }
-      else if(length(id_cols) == 3) {
-        z <- z %>% dplyr::arrange(.data[[id_cols[1]]], .data[[id_cols[2]]], .data[[id_cols[3]]])
-      }
-      if(missing(new_name) || new_name == "") new_name <- next_default_item("data", existing_names = self$get_data_names())
-      data_list <- list(z)
-      names(data_list) <- new_name
-      self$import_data(data_tables=data_list)
-    }
+    # If not unstacking then need to sort by element column
+    else id_cols <- c(id_cols, "element")
   }
+  
+  # This should have been a stop above but then detailed output can't be displayed by R-Instat
+  if(!continue) return()
+  
+  # Add this last to ensure date varies fastest
+  id_cols <- c(id_cols, "date")
+  # TODO Find a better way to do this. Update if there could be more the 3 id cols.
+  if(length(id_cols) == 1) {
+    z <- z %>% dplyr::arrange(.data[[id_cols[1]]])
+  }
+  else if(length(id_cols) == 2) {
+    z <- z %>% dplyr::arrange(.data[[id_cols[1]]], .data[[id_cols[2]]])
+  }
+  else if(length(id_cols) == 3) {
+    z <- z %>% dplyr::arrange(.data[[id_cols[1]]], .data[[id_cols[2]]], .data[[id_cols[3]]])
+  }
+  if(missing(new_name) || new_name == "") new_name <- next_default_item("data", existing_names = self$get_data_names())
+  data_list <- list(z)
+  names(data_list) <- new_name
+  self$import_data(data_tables=data_list)
 }
 )
 
