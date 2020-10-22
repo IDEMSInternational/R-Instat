@@ -250,19 +250,19 @@ Public Class dlgEnter
         lstView.Items.Add(New ListViewItem({" forcats::as_factor(rep(LETTERS[4:1],c(4,3,1,1)))"}))
         lstView.Items.Item(4).ToolTipText = "Gives D,D,D,D,C,C,C,B,A as a fa ctor"
 
-        lstView.Items.Add(New ListViewItem({"factor(rep(c(month.abb[4:7],NA),c(2,1,2,1,2)))"}))
-        lstView.Items.Item(5).ToolTipText = "Gives Apr, Apr, May, Jun, Jun, Jul, NA, NA"
+        lstView.Items.Add(New ListViewItem({"factor(rep(c(month.abb[4:7],NA),c(2,1,2,1,3)))"}))
+        lstView.Items.Item(5).ToolTipText = "Gives Apr, Apr, May, Jun, Jun, Jul, NA, NA, NA"
 
         lstView.Items.Add(New ListViewItem({"c(1:4,10,rep(15,3),20)"}))
         lstView.Items.Item(6).ToolTipText = "A sequence of values 1,2,3,4,10,15,15,15,20"
 
-        lstView.Items.Add(New ListViewItem({"c(0,seq(1,5,2 ),seq(10,12),15)"}))
-        lstView.Items.Item(7).ToolTipText = "A set of sequences, giving 1,3,5 10,11,12, 15"
+        lstView.Items.Add(New ListViewItem({"c(0,seq(1,5,2 ),seq(10,12),15, 15)"}))
+        lstView.Items.Item(7).ToolTipText = "A set of sequences, giving 0,1,3,5 10,11,12, 15, 15"
 
         lstView.Items.Add(New ListViewItem({"runif(3,c(0,5,10),c(1,10,20))"}))
         lstView.Items.Item(8).ToolTipText = "Random uniform data from 3 different uniform distributions)"
 
-        lstView.Items.Add(New ListViewItem({"seq(as.Date('1935/3/1'),as.Date('1940/12/1'),'quarter')"}))
+        lstView.Items.Add(New ListViewItem({"seq(as.Date('1935/3/1'),as.Date('1937/12/1'),'quarter')"}))
         lstView.Items.Item(9).ToolTipText = "A sequence of dates from 1935/3/1, 1935/6/1 ...)"
 
 
