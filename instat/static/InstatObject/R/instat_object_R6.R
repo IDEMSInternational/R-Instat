@@ -1935,6 +1935,7 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
       # We assume that value/flag columns alternate and are in correct order i.e. c(value1, flag1, value2, flag2, ..., value31, flag31)
       val_col_names <- stack_cols[seq(1, 2 * ndays - 1, 2)]
       flag_col_names <- stack_cols[seq(2, 2 * ndays, 2)]
+      # TODO This should be a more global function
       if(!all(sapply(x[, val_col_names], function(col) is.numeric(col) || (is.logical(col) && all(is.na(col)))))) stop("Every other column must be numeric to represent values (starting with the first columns). \nThe following value columns are not numeric: ", paste(stack_cols[!sapply(x[, val_col_names], is.numeric)], collapse = ","))
       # Name of flag column
       flag_name <- "flag"
