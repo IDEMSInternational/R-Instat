@@ -585,7 +585,7 @@ Partial Class ucrDataView
         Me.linkHelpInstructionVideos.Enabled = False
         Me.linkHelpInstructionVideos.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.linkHelpInstructionVideos.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkHelpInstructionVideos.Location = New System.Drawing.Point(30, 390)
+        Me.linkHelpInstructionVideos.Location = New System.Drawing.Point(30, 391)
         Me.linkHelpInstructionVideos.Name = "linkHelpInstructionVideos"
         Me.linkHelpInstructionVideos.Size = New System.Drawing.Size(98, 13)
         Me.linkHelpInstructionVideos.TabIndex = 10
