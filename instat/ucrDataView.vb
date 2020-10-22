@@ -931,5 +931,6 @@ Public Class ucrDataView
 
     Private Sub linkHelpRInstatWebsite_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRInstatWebsite.LinkClicked
         Process.Start("http://r-instat.org/")
+        'commit
     End Sub
 End Class
