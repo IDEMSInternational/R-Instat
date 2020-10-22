@@ -65,7 +65,7 @@ Public Class dlgVisualizeData
         ucrPnlSelectData.AddParameterPresentCondition(rdoWholeDataFrame, "data")
         ucrPnlSelectData.AddParameterPresentCondition(rdoSelectedColumn, "x")
 
-        ucrChkSortVariables.SetParameter(New RParameter("sort_type", 1), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=False)
+        ucrChkSortVariables.SetParameter(New RParameter("sort_type", 1), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=False)
         ucrChkSortVariables.SetText("Sort Variables")
         ucrChkSortVariables.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
