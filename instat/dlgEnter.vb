@@ -170,7 +170,7 @@ Public Class dlgEnter
     End Sub
     Private Sub cmdConcantenateFunction_Click_1(sender As Object, e As EventArgs) Handles cmdConcantenateFunction.Click
         If chkShowEnterArguments.Checked Then
-            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("c( ,recursive = FALSE)", 19)
+            ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("c( , recursive = FALSE)", 20)
         Else
             ucrReceiverForEnterCalculation.AddToReceiverAtCursorPosition("c( )", 2)
         End If
@@ -238,7 +238,7 @@ Public Class dlgEnter
         lstView.Items.Add(New ListViewItem({"4.5"}))
         lstView.Items.Item(0).ToolTipText = "A single number repeated for the data frame." 'todo. sensible tooltip here.
 
-        lstView.Items.Add(New ListViewItem({"'Nairobi'"}))
+        lstView.Items.Add(New ListViewItem({"""Nairobi"""}))
         lstView.Items.Item(1).ToolTipText = "A single text repeated for the data frame." 'todo. Sensible tooltip here.
 
         lstView.Items.Add(New ListViewItem({"c(2, 3, 4)*1.5E02"}))
