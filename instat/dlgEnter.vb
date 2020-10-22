@@ -52,7 +52,7 @@ Public Class dlgEnter
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.SetCommandString("")
         ucrSaveEnterResultInto.SetSaveTypeAsColumn()
-        ucrSaveEnterResultInto.SetPrefix("Enter")
+        ucrSaveEnterResultInto.SetPrefix("enter")
         ucrSaveEnterResultInto.SetIsTextBox()
         ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
         ucrSaveEnterResultInto.SetLabelText("Enter Result Into:")
@@ -250,7 +250,7 @@ Public Class dlgEnter
         lstView.Items.Add(New ListViewItem({" forcats::as_factor(rep(LETTERS[4:1], c(4, 3, 1, 1)))"}))
         lstView.Items.Item(4).ToolTipText = "Gives D, D, D, D, C, C, C, B, A as a factor"
 
-        lstView.Items.Add(New ListViewItem({"factor(rep(c(month.abb[4:7],NA), c(2, 1, 2, 1, 3)))"}))
+        lstView.Items.Add(New ListViewItem({"factor(rep(c(month.abb[4:7], NA), c(2, 1, 2, 1, 3)))"}))
         lstView.Items.Item(5).ToolTipText = "Gives Apr, Apr, May, Jun, Jun, Jul, NA, NA, NA"
 
         lstView.Items.Add(New ListViewItem({"c(1:4, 10, rep(15, 3), 20)"}))
@@ -262,7 +262,7 @@ Public Class dlgEnter
         lstView.Items.Add(New ListViewItem({"runif(3, c(0, 5, 10), c(1, 10, 20))"}))
         lstView.Items.Item(8).ToolTipText = "Random uniform data from 3 different uniform distributions)"
 
-        lstView.Items.Add(New ListViewItem({"seq(as.Date('1935/3/1'),as.Date('1937/12/1'), 'quarter')"}))
+        lstView.Items.Add(New ListViewItem({"seq(as.Date('1935/3/1'), as.Date('1937/12/1'), 'quarter')"}))
         lstView.Items.Item(9).ToolTipText = "A sequence of dates from 1935/3/1, 1935/6/1 ...)"
 
 
