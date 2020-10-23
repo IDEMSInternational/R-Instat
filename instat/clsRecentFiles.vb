@@ -26,6 +26,12 @@ Public Class clsRecentFiles
     ' declare a variable to contain the most recent opened items
     Private strListMRU As New List(Of String)
 
+    ''' <summary>
+    ''' stores reference to the  the data view window used in frmMain. 
+    ''' will be used to add recent files menu items to it.
+    ''' </summary>
+    Private ucrDataViewWindow As ucrDataView
+
     Public Sub setToolStripItems(dfMnuFile As ToolStripMenuItem, dfMnuFileIcon As ToolStripSplitButton, dfMnuToolStripDropdown As ToolStripDropDownItem, dfSepStart As ToolStripSeparator, dfSepEnd As ToolStripSeparator)
         mnuFile = dfMnuFile
         mnuFileIcon = dfMnuFileIcon
@@ -34,6 +40,10 @@ Public Class clsRecentFiles
         sepEnd = dfSepEnd
         sepStart.Visible = False
         sepEnd.Visible = False
+    End Sub
+
+    Public Sub SetDataViewWindow(ucrDataViewWindow As ucrDataView)
+        Me.ucrDataViewWindow = ucrDataViewWindow
     End Sub
 
     Public Sub checkOnLoad()
@@ -90,9 +100,9 @@ Public Class clsRecentFiles
             If strListMRU.Contains(path) Then strListMRU.Remove(path)
             ' add to MRU list..
             strListMRU.Add(path)
-            ' make sure there are only ever 5 items...
-            'To add this to the general options on the number of recently files to show
-            While strListMRU.Count > 5
+            'make sure there are only ever 30 items...
+            'todo. add this to the general options on the number of recently files to show
+            While strListMRU.Count > 30
                 strListMRU.RemoveAt(0)
             End While
         End If
@@ -149,7 +159,10 @@ Public Class clsRecentFiles
                 mnuTbShowLast10.DropDownItems.Insert(mnuTbShowLast10.DropDownItems.Count - 1, clsItem)
             Next
 
-            'displays items (_in reverse order) for recent files 
+            'remove all the data view window recent file menu items
+            ucrDataViewWindow.ClearRecentFileMenuItems()
+
+            'then displays items (_in reverse order) for recent files 
             Dim strPath As String
             Dim strFileName As String
             For iCounter As Integer = strListMRU.Count - 1 To 0 Step -1
@@ -171,6 +184,26 @@ Public Class clsRecentFiles
                     ' insert into DropDownItems list...
                     mnuFile.DropDownItems.Insert(mnuFile.DropDownItems.Count - 1, clsItem)
                     mnuFileIcon.DropDownItems.Insert(mnuFileIcon.DropDownItems.Count, clsItemIcon)
+
+                    'set and insert the data view window recent files menu items
+                    Dim linkMenuItem As New LinkLabel
+                    linkMenuItem.Text = strFileName
+                    linkMenuItem.Tag = strPath 'path used when the link is clicked
+
+                    ucrDataViewWindow.InsertRecentFileMenuItems(linkMenuItem)
+
+                    'attach link click event handler for opening the file
+                    AddHandler linkMenuItem.Click, AddressOf mnuFileMRU_Click
+
+                    'if recent files are more than 5 then just the "more" link label and exit loop 
+                    If strListMRU.Count - iCounter > 4 Then
+                        linkMenuItem = New LinkLabel
+                        linkMenuItem.Text = "More ..."
+                        linkMenuItem.Tag = ""
+                        ucrDataViewWindow.InsertRecentFileMenuItems(linkMenuItem)
+                        AddHandler linkMenuItem.Click, AddressOf mnuFileMRU_Click
+                        Exit For
+                    End If
                 Catch ex As Exception
                     'TODO it would be good to remove the invalid line from the file in this case
                 End Try
@@ -184,18 +217,28 @@ Public Class clsRecentFiles
     End Sub
 
     Private Sub mnuFileMRU_Click(ByVal sender As Object, ByVal e As EventArgs)
-        Dim iResult As Integer
+        Dim strFilePath As String = ""
 
-        If File.Exists(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)) Then
+        If TypeOf sender Is ToolStripItem Then
+            strFilePath = DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)
+        ElseIf TypeOf sender Is LinkLabel Then
+            'if tag is empty then its more link that was clicked
+            strFilePath = DirectCast(sender, LinkLabel).Tag.ToString()
+            If String.IsNullOrEmpty(strFilePath) Then
+                ShowAllRecentFiles()
+                Exit Sub
+            End If
+        End If
+
+        If File.Exists(strFilePath) Then
             'dlgImportDataset.SetFilePath(DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4))
             'dlgImportDataset.SetDataName(Path.GetFileNameWithoutExtension(sender.ToString))
             'Not working as I would like because of the changes made to the Import Dataset
-            dlgImportDataset.strFileToOpenOn = DirectCast(sender, ToolStripItem).Tag.ToString().Substring(4)
+            dlgImportDataset.strFileToOpenOn = strFilePath
             dlgImportDataset.ShowDialog()
         Else
-            iResult = MessageBox.Show(frmMain, "File not accessible. It may have been renamed, moved or deleted." & Environment.NewLine & Environment.NewLine & "Would you like to remove this file from the list?", "Cannot access file", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation)
             'removes the path to the non existent file
-            If iResult = DialogResult.Yes Then
+            If DialogResult.Yes = MessageBox.Show(frmMain, "File not accessible. It may have been renamed, moved or deleted." & Environment.NewLine & Environment.NewLine & "Would you like to remove this file from the list?", "Cannot access file", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) Then
                 strListMRU.RemoveAt(strListMRU.FindLastIndex(Function(value As String)
                                                                  Return value.Contains(sender.ToString)
                                                              End Function))
@@ -211,6 +254,31 @@ Public Class clsRecentFiles
                 dfTemp.ShowDialog()
                 Exit Sub
             End If
+        Next
+    End Sub
+
+    ''' <summary>
+    ''' shows all the recent files menu items in the data view window 
+    ''' </summary>
+    Private Sub ShowAllRecentFiles()
+        'clear all menu items previously added 
+        ucrDataViewWindow.ClearRecentFileMenuItems()
+        'displays items (_in reverse order) for recent files 
+        Dim strPath As String
+        For iCounter As Integer = strListMRU.Count - 1 To 0 Step -1
+            strPath = strListMRU(iCounter)
+            Try
+                Dim linkMenuItem As New LinkLabel
+                linkMenuItem.Text = Path.GetFileName(strPath)
+                linkMenuItem.Tag = strPath 'path used when the link is clicked
+
+                ucrDataViewWindow.InsertRecentFileMenuItems(linkMenuItem)
+
+                'attach link event handler for opening the file
+                AddHandler linkMenuItem.Click, AddressOf mnuFileMRU_Click
+            Catch ex As Exception
+                'TODO it would be good to remove the invalid line from the file in this case
+            End Try
         Next
     End Sub
 End Class
