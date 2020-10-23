@@ -195,7 +195,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudSetSeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 88</value>
+    <value>359, 88</value>
   </data>
   <data name="ucrNudSetSeed.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -216,7 +216,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudNumberofColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>363, 117</value>
+    <value>359, 117</value>
   </data>
   <data name="ucrNudNumberofColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -237,10 +237,14 @@
     <value>2</value>
   </data>
   <data name="ucrSavePermute.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 199</value>
+    <value>10, 196</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrSavePermute.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSavePermute.Size" type="System.Drawing.Size, System.Drawing">
-    <value>294, 24</value>
+    <value>336, 24</value>
   </data>
   <data name="ucrSavePermute.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -269,7 +273,6 @@
   <data name="ucrPermuteRowsSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrPermuteRowsSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
