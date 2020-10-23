@@ -345,9 +345,14 @@ Public Class ucrDataView
                 lblRowDisplay.Text = lblRowDisplay.Text & " (" & frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, False) & ")"
             End If
             lblRowDisplay.Text = lblRowDisplay.Text & " | Showing " & grdCurrSheet.ColumnCount & " of " & iColumnCount & " columns"
+            'hide startup menu items
+            panelAllMenuItems.Visible = False
         Else
             frmMain.tstatus.Text = "No data loaded"
             lblRowDisplay.Text = ""
+            'show startup menu items
+            panelAllMenuItems.Visible = True
+            'todo. set the recent files list??
         End If
     End Sub
 
@@ -863,5 +868,68 @@ Public Class ucrDataView
 
     Private Sub mnuRemoveCurrentFilters_Click(sender As Object, e As EventArgs) Handles mnuRemoveCurrentFilters.Click
         RunScriptFromDataView(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
+    End Sub
+
+    Private Sub linkNewDataFrame_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartNewDataFrame.LinkClicked
+        dlgNewDataFrame.ShowDialog()
+    End Sub
+
+    Private Sub linkOpenFile_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenFile.LinkClicked
+        dlgImportDataset.ShowDialog()
+    End Sub
+
+    Private Sub linkOpenLibrary_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenLibrary.LinkClicked
+        dlgFromLibrary.ShowDialog()
+    End Sub
+
+    ''' <summary>
+    ''' clears all the added links label menu items from the recents panel of the data view
+    ''' </summary>
+    Public Sub ClearRecentFileMenuItems()
+        panelRecentMenuItems.Controls.Clear()
+    End Sub
+
+    ''' <summary>
+    ''' adds the link label as a menu item to the recents panel of the data view
+    ''' </summary>
+    ''' <param name="linkMenuItem">link label with file path set as its tag</param>
+    Public Sub InsertRecentFileMenuItems(linkMenuItem As LinkLabel)
+        'label used to display the path to the user
+        Dim lblMenuItemPath As New Label
+        Dim position As Integer = 1
+
+        'add subsequent links after each other, separating them by 19 pixels on the Y axis
+        If panelRecentMenuItems.Controls.Count > 0 Then
+            'get Y axis position of last control then add 19 pixels to be used as the new Y axis position.
+            position = panelRecentMenuItems.Controls.Item(panelRecentMenuItems.Controls.Count - 1).Location.Y
+            position = position + 19
+        End If
+
+        linkMenuItem.Location = New Point(0, position)
+        linkMenuItem.Height = 13
+        linkMenuItem.LinkBehavior = LinkBehavior.NeverUnderline
+        linkMenuItem.AutoSize = True
+
+        'add the link control. 
+        panelRecentMenuItems.Controls.Add(linkMenuItem)
+
+        'add the label control. will be besides each other on the same Y axis
+        lblMenuItemPath.Text = If(String.IsNullOrEmpty(linkMenuItem.Tag), "", Path.GetDirectoryName(linkMenuItem.Tag))
+        lblMenuItemPath.Location = New Point(linkMenuItem.Width + 10, position)
+        lblMenuItemPath.Height = 13
+        lblMenuItemPath.AutoSize = True
+        panelRecentMenuItems.Controls.Add(lblMenuItemPath)
+    End Sub
+
+    Private Sub linkHelpIntroduction_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpIntroduction.LinkClicked
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "0")
+    End Sub
+
+    Private Sub linkHelpRpackages_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRpackages.LinkClicked
+        dlgHelpVignettes.ShowDialog()
+    End Sub
+
+    Private Sub linkHelpRInstatWebsite_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRInstatWebsite.LinkClicked
+        Process.Start("http://r-instat.org/")
     End Sub
 End Class
