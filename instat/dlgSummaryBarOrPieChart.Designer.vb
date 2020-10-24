@@ -56,6 +56,8 @@ Partial Class dlgSummaryBarOrPieChart
         Me.ucrSummaryBarSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrInputBarChartPosition = New instat.ucrInputComboBox()
+        Me.lblPosition = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblYvariable
@@ -184,10 +186,26 @@ Partial Class dlgSummaryBarOrPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'ucrInputBarChartPosition
+        '
+        Me.ucrInputBarChartPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarChartPosition.GetSetSelectedIndex = -1
+        Me.ucrInputBarChartPosition.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputBarChartPosition, "ucrInputBarChartPosition")
+        Me.ucrInputBarChartPosition.Name = "ucrInputBarChartPosition"
+        '
+        'lblPosition
+        '
+        resources.ApplyResources(Me.lblPosition, "lblPosition")
+        Me.lblPosition.Name = "lblPosition"
+        Me.lblPosition.Tag = "Position:"
+        '
         'dlgSummaryBarOrPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblPosition)
+        Me.Controls.Add(Me.ucrInputBarChartPosition)
         Me.Controls.Add(Me.ucrChkLabel)
         Me.Controls.Add(Me.rdoTable)
         Me.Controls.Add(Me.rdoPieChart)
@@ -232,4 +250,6 @@ Partial Class dlgSummaryBarOrPieChart
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents rdoTable As RadioButton
     Friend WithEvents ucrChkLabel As ucrCheck
+    Friend WithEvents lblPosition As Label
+    Friend WithEvents ucrInputBarChartPosition As ucrInputComboBox
 End Class
