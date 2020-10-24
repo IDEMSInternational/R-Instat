@@ -58,6 +58,7 @@ Public Class dlgSummaryBarOrPieChart
 
     Private Sub InitialiseDialog()
         Dim clsRCoordPolarFunction As New RFunction
+        Dim dctPositionPairs As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 439
@@ -108,19 +109,36 @@ Public Class dlgSummaryBarOrPieChart
         clsRCoordPolarParam.SetArgumentName("coord_polar")
         clsRCoordPolarParam.SetArgument(clsRCoordPolarFunction)
 
+        ucrChkLabel.SetParameter(New RParameter("geom_label", clsLabelGeomFunction, iNewPosition:=2), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkLabel.SetText("Add Label")
         ucrChkLabel.AddParameterPresentCondition(True, "geom_label")
         ucrChkLabel.AddParameterPresentCondition(False, "geom_label", False)
+
+        ucrInputBarChartPosition.SetParameter(New RParameter("position", 1))
+        dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
+        dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
+        dctPositionPairs.Add("Dodge2", Chr(34) & "dodge2" & Chr(34))
+        dctPositionPairs.Add("Identity", Chr(34) & "identity" & Chr(34))
+        dctPositionPairs.Add("Jitter", Chr(34) & "jitter" & Chr(34))
+        dctPositionPairs.Add("Nudge", Chr(34) & "nudge" & Chr(34))
+        dctPositionPairs.Add("Fill", Chr(34) & "fill" & Chr(34))
+        dctPositionPairs.Add("Stack in reverse", "position_stack(reverse = TRUE)")
+        ucrInputBarChartPosition.SetItems(dctPositionPairs)
+        ucrInputBarChartPosition.SetDropDownStyleAsNonEditable()
+        ucrInputBarChartPosition.SetRDefault(Chr(34) & "stack" & Chr(34))
+
+        ucrPnlOptions.AddToLinkedControls({ucrInputBarChartPosition, ucrChkLabel}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputBarChartPosition.SetLinkedDisplayControl(lblPosition)
     End Sub
 
     Private Sub SetDefaults()
         clsBaseOperator = New ROperator
         clsRggplotFunction = New RFunction
         clsRgeomBarFunction = New RFunction
-        clsLabelGeomFunction = New RFunction
         clsRaesFunction = New RFunction
         clsAesFunction = New RFunction
         clsRoundFunction = New RFunction
+        clsLabelGeomFunction.Clear()
 
         ucrSummaryBarSelector.Reset()
         ucrSummaryBarSelector.SetGgplotFunction(clsBaseOperator)
@@ -131,7 +149,7 @@ Public Class dlgSummaryBarOrPieChart
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsRgeomBarFunction)
+        clsBaseOperator.AddParameter("geomfunc", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=1)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -149,7 +167,7 @@ Public Class dlgSummaryBarOrPieChart
 
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
-        clsRgeomBarFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34))
+        clsRgeomBarFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=0)
 
         clsLabelGeomFunction.SetPackageName("ggplot2")
         clsLabelGeomFunction.SetRCommand("geom_label")
@@ -184,6 +202,7 @@ Public Class dlgSummaryBarOrPieChart
         ucrSummaryBarSelector.SetRCode(clsRggplotFunction, bReset)
         ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
         ucrChkLabel.SetRCode(clsBaseOperator, bReset)
+        ucrInputBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
         SetDialogOptions()
     End Sub
 
@@ -263,12 +282,27 @@ Public Class dlgSummaryBarOrPieChart
         SetDialogOptions()
     End Sub
 
-    Private Sub ucrChkLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLabel.ControlValueChanged
-        If ucrChkLabel.Checked Then
-            clsBaseOperator.AddParameter("geom_label", clsRFunctionParameter:=clsLabelGeomFunction)
-        Else
-            clsBaseOperator.RemoveParameterByName("geom_label")
-        End If
+    Private Sub ucrInputBarChartPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputBarChartPosition.ControlValueChanged
+        Select Case ucrInputBarChartPosition.GetText
+            Case "Stack"
+                clsLabelGeomFunction.AddParameter("position", "position_stack(vjust=1)", iPosition:=1)
+            Case "Dodge"
+                clsLabelGeomFunction.AddParameter("position", "position_dodge(width=1)", iPosition:=1)
+            Case "Dodge2"
+                clsLabelGeomFunction.AddParameter("position", "position_dodge2(width=1)", iPosition:=1)
+            Case "identity"
+                clsLabelGeomFunction.AddParameter("position", "position_identity()", iPosition:=1)
+            Case "jitter"
+                clsLabelGeomFunction.AddParameter("position", "position_jitter(width=0)", iPosition:=1)
+            Case "Nudge"
+                clsLabelGeomFunction.AddParameter("position", "position_nudge()", iPosition:=1)
+            Case "Fill"
+                clsLabelGeomFunction.AddParameter("position", "position_fill()", iPosition:=1)
+            Case "Stack in reverse"
+                clsLabelGeomFunction.AddParameter("position", "position_stack()", iPosition:=1)
+            Case Else
+                clsLabelGeomFunction.RemoveParameterByName("position")
+        End Select
     End Sub
 
     Private Sub CoreControls_ContenctsChanged() Handles ucrReceiverYVariable.ControlContentsChanged, ucrReceiverFactor.ControlContentsChanged, ucrSaveSummaryBar.ControlContentsChanged
