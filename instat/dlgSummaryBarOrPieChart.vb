@@ -172,6 +172,7 @@ Public Class dlgSummaryBarOrPieChart
         clsLabelGeomFunction.SetPackageName("ggplot2")
         clsLabelGeomFunction.SetRCommand("geom_label")
         clsLabelGeomFunction.AddParameter("mapping", clsRFunctionParameter:=clsAesFunction, iPosition:=1)
+        clsLabelGeomFunction.AddParameter("show.legend", "FALSE", iPosition:=2)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
