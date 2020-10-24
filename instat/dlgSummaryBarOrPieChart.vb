@@ -115,8 +115,8 @@ Public Class dlgSummaryBarOrPieChart
         ucrChkLabel.AddParameterPresentCondition(False, "geom_label", False)
 
         ucrInputBarChartPosition.SetParameter(New RParameter("position", 1))
-        dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
         dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
+        dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
         dctPositionPairs.Add("Dodge2", Chr(34) & "dodge2" & Chr(34))
         dctPositionPairs.Add("Identity", Chr(34) & "identity" & Chr(34))
         dctPositionPairs.Add("Jitter", Chr(34) & "jitter" & Chr(34))
@@ -125,7 +125,6 @@ Public Class dlgSummaryBarOrPieChart
         dctPositionPairs.Add("Stack in reverse", "position_stack(reverse = TRUE)")
         ucrInputBarChartPosition.SetItems(dctPositionPairs)
         ucrInputBarChartPosition.SetDropDownStyleAsNonEditable()
-        ucrInputBarChartPosition.SetRDefault(Chr(34) & "stack" & Chr(34))
 
         ucrPnlOptions.AddToLinkedControls({ucrInputBarChartPosition, ucrChkLabel}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputBarChartPosition.SetLinkedDisplayControl(lblPosition)
@@ -168,6 +167,7 @@ Public Class dlgSummaryBarOrPieChart
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
         clsRgeomBarFunction.AddParameter("stat", Chr(34) & "identity" & Chr(34), iPosition:=0)
+        clsRgeomBarFunction.AddParameter("position", Chr(34) & "dodge" & Chr(34), iPosition:=1)
 
         clsLabelGeomFunction.SetPackageName("ggplot2")
         clsLabelGeomFunction.SetRCommand("geom_label")
