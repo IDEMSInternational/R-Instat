@@ -570,9 +570,23 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
   if(!replaced) {
     if(before && ind == 1) self$set_data(dplyr::select(self$get_data_frame(use_current_filter = FALSE) , c((previous_length + 1):(previous_length + num_cols), 1:previous_length)))
     else if(before || ind != previous_length + 1) self$set_data(dplyr::select(self$get_data_frame(use_current_filter = FALSE) , c(1:(ind - 1), (previous_length + 1):(previous_length + num_cols), ind:previous_length)))
-  }
-  else {
-    if(!missing(before) || !missing(adjacent_column)) warning("Cannot reposition when one or move new columns replaces an old column.")
+  }else {
+    #get the adjacent position to be used in appending the new column names 
+	if(before) {
+	   if(missing(adjacent_column)) adjacent_position = 0
+	   else adjacent_position = which(self$get_column_names() == adjacent_column) - 1
+	}else{
+	   if(missing(adjacent_column)) adjacent_position = self$get_column_count() 
+	   else adjacent_position = which(self$get_column_names() == adjacent_column)
+	}
+	#replace existing names with empty placeholders. Maintains the indices.
+	temp_all_col_names <- replace(self$get_column_names(), self$get_column_names() %in% new_col_names, "" )
+	#append the newly added column names after the set position
+	new_col_names_order <- append(temp_all_col_names, new_col_names, adjacent_position)
+	#remove all empty characters placeholders to get final reordered column names
+	new_col_names_order <- new_col_names_order[! new_col_names_order %in% c("")]
+	#only do reordering if the column names order differ
+	if(!all( all_col_names == new_col_list) ) self$reorder_columns_in_data(col_order=new_col_names_order)	
   }
 }
 )
