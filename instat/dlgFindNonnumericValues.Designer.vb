@@ -31,6 +31,7 @@ Partial Class dlgFindNonnumericValues
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputColumnName = New instat.ucrInputTextBox()
         Me.lblColumnName = New System.Windows.Forms.Label()
+        Me.ucrSaveColumn = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblColumn
@@ -85,10 +86,16 @@ Partial Class dlgFindNonnumericValues
         resources.ApplyResources(Me.lblColumnName, "lblColumnName")
         Me.lblColumnName.Name = "lblColumnName"
         '
+        'ucrSaveColumn
+        '
+        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
+        Me.ucrSaveColumn.Name = "ucrSaveColumn"
+        '
         'dlgFindNonnumericValues
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.ucrInputColumnName)
         Me.Controls.Add(Me.ucrChkFilterNonumerics)
         Me.Controls.Add(Me.ucrChkShowSummary)
@@ -113,4 +120,5 @@ Partial Class dlgFindNonnumericValues
     Friend WithEvents ucrChkFilterNonumerics As ucrCheck
     Friend WithEvents ucrInputColumnName As ucrInputTextBox
     Friend WithEvents lblColumnName As Label
+    Friend WithEvents ucrSaveColumn As ucrSave
 End Class
