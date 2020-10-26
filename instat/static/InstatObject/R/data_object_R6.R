@@ -586,7 +586,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
 	#remove all empty characters placeholders to get final reordered column names
 	new_col_names_order <- new_col_names_order[! new_col_names_order %in% c("")]
 	#only do reordering if the column names order differ
-	if(!all( all_col_names == new_col_list) ) self$reorder_columns_in_data(col_order=new_col_names_order)	
+	if(!all( self$get_column_names() == new_col_names_order) ) self$reorder_columns_in_data(col_order=new_col_names_order)	
   }
 }
 )
