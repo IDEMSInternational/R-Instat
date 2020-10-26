@@ -688,6 +688,10 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
+    ''' <summary> 
+    '''Converts the selected factor column for Test,in the variable receiver,to numeric
+    ''' </summary>
+
     Private Sub AddAsNumeric()
         If rdoTest.Checked Then
             If ucrChkConvertVariate.Checked Then
@@ -770,6 +774,10 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
+    ''' <summary> 
+    '''Converts the selected factor column for estimates,in the variable receiver,to numeric
+    ''' </summary>
+
     Private Sub EstimatesAsNumeric()
         If rdoEstimate.Checked Then
             If ucrChkConvertVariate.Checked Then
@@ -806,6 +814,9 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
+    ''' <summary> 
+    '''Sets the base RFunction depending on the selected Estimate function or the Test function
+    ''' </summary>
     Private Sub SetTestEstimateBaseFunction()
         If rdoGeneralCase.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsROneVarFitModel)
@@ -867,6 +878,10 @@ Public Class dlgOneVarFitModel
             End Select
         End If
     End Sub
+
+    ''' <summary> 
+    '''Lists the factor levels of the selected factor or logical column into the success combobox
+    ''' </summary>
 
     Private Sub AddFactorLevels()
         Dim chrCurrentFactorLevels As CharacterVector
