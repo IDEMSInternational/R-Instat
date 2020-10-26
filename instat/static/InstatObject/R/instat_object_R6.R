@@ -1813,7 +1813,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
 #' @param stack_years when format = "years" stack_years specifies the years. Must be same length as stack_cols
 #' If not specified, the function will try to determine the years using the format "Xyyyy" where "X" is any character and "yyyy" is the year.
 #' @param stack_cols a character vector of columns to stack
-#' if format == "days" 31 columns (in order) for each day of the month are expected
+#' if format == "days" 31 columns (in order) for each day of the month are expected, or 62 with alternate value/flag columns
 #' if format == "months" 12 columns (in order) for each month are expected
 #' if format == "years" any number of year columns can be given. These should be named with format "Xyyyy"
 #' where "X" is any character and "yyyy" is the year
@@ -1826,7 +1826,9 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
 #' @param ignore_invalid If TRUE, rows with non missing element values on invalid dates e.g. 31 Sep or 29 Feb in non leap years, will be removed.
 #' If FALSE (the default) an error will be given with details of where the values occur.
 #' Strongly recommended to first run with FALSE and then TRUE after examining or correcting any issues.
-#' @param silent If TRUE, rows with non missing element values on invalid dates will not be reported.
+#' @param silent If TRUE, detailed output, such as rows with non missing element values on invalid dates or duplicate values will be suppressed.
+#' @param unstack_elements If TRUE, when there are multiple elements there will be one column for each element (unstacked), otherwise there will be an element
+#' column and a value column. This also applies to flag columns if included.
 #' @param new_name Name for the new data frame.
 #' @export
 #' @examples
@@ -1836,16 +1838,17 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
 #' yearcols[60,4:6] <- NA
 #' tidy_climatic_data(x = yearcols, format = "years", stack_cols = c("X2000", "X2001", "X2002", "X2003"), element_name = "tmin")
 
-DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day, month, year, stack_years, station, element, element_name = "value", ignore_invalid = FALSE, silent = FALSE, new_name) {
+DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day, month, year, stack_years, station, element, element_name = "value", ignore_invalid = FALSE, silent = FALSE, unstack_elements = TRUE, new_name) {
   
   if(!format %in% c("days", "months", "years")) stop("format must be either 'days', 'months' or 'years'")
   if(!all(stack_cols %in% names(x))) stop("Some of the stack_cols were not found in x.")
-  if(!all(sapply(x[, stack_cols], function(col) is.numeric(col) || (is.logical(col) && all(is.na(col)))))) stop("All stack_cols must be numeric\nThe following stack_cols are not numeric: ", paste(stack_cols[!sapply(x[, stack_cols], is.numeric)], collapse = ","))
   if(!missing(day) && !day %in% names(x)) stop("day column not found in x.")
   if(!missing(month) && !month %in% names(x)) stop("month column not found in x.")
   if(!missing(year) && !year %in% names(x)) stop("year column not found in x.")
   if(!missing(station) && !station %in% names(x)) stop("station column not found in x.")
   if(!missing(element) && !element %in% names(x)) stop("element column not found in x.")
+  # Default to FALSE and updated if format == "days"
+  flags <- FALSE
   
   # check day column is valid (if specified)
   if(!missing(day)) {
@@ -1874,6 +1877,14 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
       # Month format will be used in as.Date()
       month_format <- "%m"
     }
+    # This case is for numeric months but stored as character e.g. c("1", "2")
+    else if(all(!is.na(as.numeric(month_data)))) {
+      if(all(as.numeric(month_data) %in% 1:12)) {
+        month_format <- "%m"
+        # This ensures format is correct and removes any spaces etc. e.g. "1 " -> 1
+        x[[month]] <- as.numeric(month_data)
+      }
+    }
     else {
       # Convert to title case to match month.name and month.abb
       month_data_title <- stringr::str_to_title(month_data)
@@ -1899,19 +1910,21 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
   if(!missing(year)) {
     year_data <- x[[year]]
     if(anyNA(year_data)) stop("year column contains: ", sum(is.na(year_data)), " missing values")
-    if(!is.numeric(year_data)) stop("year column must be numeric")
-    
     year_format <- ""
+    if(!is.numeric(year_data)) {
+      if(all(!is.na(as.numeric(year_data)))) {
+        x[[year]] <- as.numeric(year_data)
+        year_data <- x[[year]]
+      }
+      else stop("Cannot recognise years from year column. Try using a numeric year column.")
+    }
     if(all(stringr::str_length(year_data) == 4)) year_format <- "%Y"
     else if(all(stringr::str_length(year_data) == 2)) year_format <- "%y"
-    else {
-      stop("Inconsistent values found in year column. Year column must be column of four digit years or column of two digit years")
-    }
+    else stop("Inconsistent values found in year column. Year column must be column of four digit years or column of two digit years")
   }
   
-  
   if(format == "days") {
-    
+    ndays <- 31
     # month column required in this case
     if(missing(month)) stop("month column is required when format == 'days'")
     
@@ -1919,7 +1932,22 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     if(missing(year)) stop("year column is required when format == 'days'")
     
     # stack column checks
-    if(length(stack_cols) != 31) stop("You have specified: ", length(stack_cols), " stack columns\nThere must be exactly 31 stack columns when format == 'days'")
+    if(length(stack_cols) != ndays && length(stack_cols) != 2 * ndays) stop("You have specified: ", length(stack_cols), " stack columns\nThere must be exactly ", ndays, " or ", 2 * ndays, " stack columns when format == 'days'")
+    
+    # TRUE if flag columns are included
+    flags <- length(stack_cols) == 2 * ndays
+    if(flags) {
+      # We assume that value/flag columns alternate and are in correct order i.e. c(value1, flag1, value2, flag2, ..., value31, flag31)
+      val_col_names <- stack_cols[seq(1, 2 * ndays - 1, 2)]
+      flag_col_names <- stack_cols[seq(2, 2 * ndays, 2)]
+      # TODO This should be a more global function
+      if(!all(sapply(x[, val_col_names], function(col) is.numeric(col) || (is.logical(col) && all(is.na(col)))))) stop("Every other column must be numeric to represent values (starting with the first columns). \nThe following value columns are not numeric: ", paste(stack_cols[!sapply(x[, val_col_names], is.numeric)], collapse = ","))
+      # Name of flag column
+      flag_name <- "flag"
+    }
+    else {
+      if(!all(sapply(x[, stack_cols], function(col) is.numeric(col) || (is.logical(col) && all(is.na(col)))))) stop("All stack_cols must be numeric\nThe following stack_cols are not numeric: ", paste(stack_cols[!sapply(x[, stack_cols], is.numeric)], collapse = ","))
+    }
     
     # This ensures all other columns are dropped
     y <- data.frame(year = x[[year]], month = x[[month]], x[ , stack_cols])
@@ -1927,14 +1955,28 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     if(!missing(element)) y$element <- x[[element]]
     # In case element_name is the name of an existing column in y
     if(element_name %in% names(y)) element_name <- next_default_item(prefix = element_name, existing_names = names(y))
-    y <- reshape2::melt(y, measure.vars = stack_cols, value.name = element_name, variable.name = "day")
-    
-    # This assumes stack_cols are in the correct order i.e. 1 - 31
-    y$day <- as.numeric(y$day)
+    if(flags) {
+      # renaming the stack_cols with a consistent pattern makes it possible for pivot_longer to stack both sets of columns together and construct the day column correctly
+      # This assumes stack_cols are in the correct order i.e. c(value1, flag1, value2, flag2, ..., value31, flag31)
+      new_stack_cols <- paste(c("value", "flag"), rep(1:ndays, each = 2), sep = "_")
+      names(y)[names(y) %in% stack_cols] <- new_stack_cols
+      # ".value" is a special sentinel used in names_to to ensure names of value columns come from the names of cols. See ?pivot_longer values_to section for details.
+      y <- tidyr::pivot_longer(y, cols = tidyselect::all_of(new_stack_cols), names_to = c(".value", "day"), names_sep = "_")
+    }
+    else {
+      # renaming the stack_cols so that the day column can be constructed correctly
+      # This assumes stack_cols are in the correct order i.e. 1 - 31
+      new_stack_cols <- paste0("day", 1:ndays)
+      names(y)[names(y) %in% stack_cols] <- new_stack_cols
+      y <- tidyr::pivot_longer(y, cols = tidyselect::all_of(new_stack_cols), names_to = "day", values_to = element_name)
+      # extract day number from e.g. "day10"
+      y$day <- substr(y$day, 4, 5)
+    }
     
     y$date <- as.Date(paste(y$year, y$month, y$day), format = paste(year_format, month_format, "%d"))
   }
   else if(format == "months") {
+    if(!all(sapply(x[, stack_cols], function(col) is.numeric(col) || (is.logical(col) && all(is.na(col)))))) stop("All stack_cols must be numeric\nThe following stack_cols are not numeric: ", paste(stack_cols[!sapply(x[, stack_cols], is.numeric)], collapse = ","))
     
     # month column required in this case
     if(missing(day)) stop("day column is required when format == 'months'")
@@ -1951,14 +1993,18 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     if(!missing(element)) y$element <- x[[element]]
     # In case element_name is the name of an existing column in y
     if(element_name %in% names(y)) element_name <- next_default_item(prefix = element_name, existing_names = names(y))
-    y <- reshape2::melt(y, measure.vars = stack_cols, value.name = element_name, variable.name = "month")
-    
+    # renaming the stack_cols so that the day column can be constructed correctly
     # This assumes stack_cols are in the correct order i.e. 1 - 12
-    y$month <- as.numeric(y$month)
+    new_stack_cols <- paste0("month", 1:12)
+    names(y)[names(y) %in% stack_cols] <- new_stack_cols
+    y <- tidyr::pivot_longer(y, cols = tidyselect::all_of(new_stack_cols), names_to = "month", values_to = element_name)
+    # extract month number from e.g. "month10"
+    y$month <- substr(y$month, 6, 7)
     
     y$date <- as.Date(paste(y$year, y$month, y$day), format = paste(year_format, "%m", "%d"))
   }
   else if(format == "years") {
+    if(!all(sapply(x[, stack_cols], function(col) is.numeric(col) || (is.logical(col) && all(is.na(col)))))) stop("All stack_cols must be numeric\nThe following stack_cols are not numeric: ", paste(stack_cols[!sapply(x[, stack_cols], is.numeric)], collapse = ","))
     
     by_cols <- c()
     if(!missing(station)) by_cols <- c(by_cols, station)
@@ -1972,6 +2018,8 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     
     if(!missing(stack_years) && length(year_list) != length(stack_cols)) stop("stack_years must be the same length as stack_cols")
     
+    # stack_years allows to specify the years represented by stack_cols.
+    # If this is blank, attempt to infer stack_years by assuming stack_cols are in the format c("X1990", "X1991", ...)
     if(missing(stack_years)) {
       # Remove first character and convert to numeric
       stack_years <- as.numeric(stringr::str_sub(stack_cols, 2))
@@ -1988,12 +2036,11 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     if(!missing(element)) y$element <- x[[element]]
     # In case element_name is the name of an existing column in y
     if(element_name %in% names(y)) element_name <- next_default_item(prefix = element_name, existing_names = names(y))
-    y <- reshape2::melt(y, measure.vars = stack_cols, value.name = element_name, variable.name = "year")
+    y <- tidyr::pivot_longer(y, cols = tidyselect::all_of(stack_cols), names_to = "year", values_to = element_name)
     
     # This assumes stack_cols and stack_years are in the same order
     y$year <- plyr::mapvalues(y$year, stack_cols, stack_years)
-    y$year <- as.numeric(levels(y$year))[y$year]
-    
+
     # Replacing day 60 with 0 for non-leap years. This will result in NA dates.
     y$doy[(!lubridate::leap_year(y$year)) & y$doy == 60] <- 0
     y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] <- y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] - 1
@@ -2009,12 +2056,13 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
   if(sum(invalid_ind) > 0) {
     cat("There are:", sum(invalid_ind), "measurement values on invalid dates.\n")
     if(!silent) {
+      cat("\n*** Invalid dates ***\n\n")
       invalid_data <- dplyr::filter(y, invalid_ind)
       if(format == "days" || format == "months") {
-        invalid_data_display <- invalid_data %>% select(year, month, day)
+        invalid_data_display <- invalid_data %>% dplyr::select(year, month, day)
       }
       else {
-        invalid_data_display <- invalid_data %>% select(year, doy)
+        invalid_data_display <- invalid_data %>% dplyr::select(year, doy)
       }
       if(!missing(station)) {
         invalid_data_display <- data.frame(station = invalid_data$station, invalid_data_display)
@@ -2027,34 +2075,71 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     }
     if(ignore_invalid) cat("Warning: These rows have been removed.\n")
     else {
-      # Don't use a stop here so that output can be displayed by R-Instat
-      cat("There are:", sum(invalid_ind), "measurement values on invalid dates. Correct these or specify ignore_invalid = TRUE to ignore them. See output for more details.")
+      # This should be a stop but then detailed output can't be displayed by R-Instat
+      cat("There are:", sum(invalid_ind), "measurement values on invalid dates. Correct these or specify ignore_invalid = TRUE to ignore them. See output for more details.\n")
       continue <- FALSE
     }
   }
   
-  if(continue) {
-    # Standard format of slowest varying structure variables first (station then date) followed by measurements
-    if(!missing(station)) z <- data.frame(station = y$station, date = y$date)
-    else z <- data.frame(date = y$date)
-    z[[element_name]] <- y[[element_name]]
-    
-    if(!missing(element)) z$element <- y$element
-    
-    z <- dplyr::filter(z, !is.na(date))
-    
-    # If data contains multiple elements, unstack the element column
-    if(!missing(element)) {
-      z <- reshape2::dcast(z, ... ~ element, value.var = element_name)
+  # This should have been a stop above but then detailed output can't be displayed by R-Instat
+  if(!continue) return()
+  
+  # Standard format of slowest varying structure variables first (station then element then date) followed by measurements
+  if(!missing(station)) z <- data.frame(station = forcats::as_factor(y$station), date = y$date)
+  else z <- data.frame(date = y$date)
+  if(!missing(element)) z$element <- y$element
+  z[[element_name]] <- y[[element_name]]
+  if(flags) z[[flag_name]] <- y[[flag_name]]
+  
+  # Initialise id columns used for sorting data
+  id_cols <- c()
+  if(!missing(station)) id_cols <- c(id_cols, "station")
+  
+  z <- dplyr::filter(z, !is.na(date))
+  
+  # If data contains multiple elements, optionally unstack the element column
+  if(!missing(element)) {
+    if(unstack_elements) {
+      # pivot_wider allows unstacking multiple column sets, used when flags included.
+      values_from <- c(element_name)
+      if(flags) values_from <- c(values_from, flag_name)
+      # first check for unique combinations to ensure no duplicates
+      z_dup <- duplicated(z %>% dplyr::select(-tidyselect::all_of(values_from)))
+      if(any(z_dup > 0)) {
+        # This should be a stop but then detailed output can't be displayed by R-Instat
+        cat("\nError: Cannot tidy data as some elements have multiple values on the same date. Check and resolve duplicates first.\n")
+        z_check <- z %>% filter(z_dup > 0)
+        if(!silent) {
+          cat("\n*** Duplicates ***\n\n")
+          print(z_check, row.names = FALSE)
+        }
+        continue <- FALSE
+      }
+      else z <- tidyr::pivot_wider(z, names_from = element, values_from = tidyselect::all_of(values_from))
     }
-    if(!missing(station)) z <- z %>% dplyr::group_by(station) %>% dplyr::arrange(date, .by_group = TRUE) %>% ungroup()
-    else z <- z %>% dplyr::arrange(date)
-    
-    if(missing(new_name) || new_name == "") new_name <- next_default_item("data", existing_names = self$get_data_names())
-    data_list <- list(z)
-    names(data_list) <- new_name
-    self$import_data(data_tables=data_list)
+    # If not unstacking then need to sort by element column
+    else id_cols <- c(id_cols, "element")
   }
+  
+  # This should have been a stop above but then detailed output can't be displayed by R-Instat
+  if(!continue) return()
+  
+  # Add this last to ensure date varies fastest
+  id_cols <- c(id_cols, "date")
+  # TODO Find a better way to do this. Update if there could be more the 3 id cols.
+  if(length(id_cols) == 1) {
+    z <- z %>% dplyr::arrange(.data[[id_cols[1]]])
+  }
+  else if(length(id_cols) == 2) {
+    z <- z %>% dplyr::arrange(.data[[id_cols[1]]], .data[[id_cols[2]]])
+  }
+  else if(length(id_cols) == 3) {
+    z <- z %>% dplyr::arrange(.data[[id_cols[1]]], .data[[id_cols[2]]], .data[[id_cols[3]]])
+  }
+  if(missing(new_name) || new_name == "") new_name <- next_default_item("data", existing_names = self$get_data_names())
+  data_list <- list(z)
+  names(data_list) <- new_name
+  self$import_data(data_tables=data_list)
 }
 )
 

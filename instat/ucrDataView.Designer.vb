@@ -98,7 +98,6 @@ Partial Class ucrDataView
         Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lblNoData = New System.Windows.Forms.Label()
         Me.lblRowDisplay = New System.Windows.Forms.Label()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
@@ -494,18 +493,6 @@ Partial Class ucrDataView
         Me.ViewSheet.Size = New System.Drawing.Size(162, 22)
         Me.ViewSheet.Text = "View Data Frame"
         '
-        'lblNoData
-        '
-        Me.lblNoData.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblNoData.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!)
-        Me.lblNoData.Location = New System.Drawing.Point(0, 0)
-        Me.lblNoData.Name = "lblNoData"
-        Me.lblNoData.Size = New System.Drawing.Size(438, 454)
-        Me.lblNoData.TabIndex = 1
-        Me.lblNoData.Tag = "no_data_loaded"
-        Me.lblNoData.Text = "No Data Loaded"
-        Me.lblNoData.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'lblRowDisplay
         '
         Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Fill
@@ -551,7 +538,6 @@ Partial Class ucrDataView
         '
         Me.pnlDataContainer.Controls.Add(Me.panelAllMenuItems)
         Me.pnlDataContainer.Controls.Add(Me.grdData)
-        Me.pnlDataContainer.Controls.Add(Me.lblNoData)
         Me.pnlDataContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pnlDataContainer.Location = New System.Drawing.Point(3, 23)
         Me.pnlDataContainer.Name = "pnlDataContainer"
@@ -735,7 +721,6 @@ Partial Class ucrDataView
     End Sub
 
     Public WithEvents grdData As unvell.ReoGrid.ReoGridControl
-    Friend WithEvents lblNoData As Label
     Private WithEvents columnContextMenuStrip As ContextMenuStrip
     Private WithEvents mnuInsertColsBefore As ToolStripMenuItem
     Private WithEvents mnuDeleteCol As ToolStripMenuItem
