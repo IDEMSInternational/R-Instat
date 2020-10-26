@@ -28,6 +28,8 @@ Public Class ucrReceiverMultiple
                 lstSelectedVariables.Columns.Add("Selected Data")
                 lstSelectedVariables.Columns(0).Width = lstSelectedVariables.Width - 25
             End If
+            'by default multiple receivers will not be autoswitched on selection change
+            bAutoSwitchFromReceiver = False
             bFirstLoad = False
         End If
     End Sub
@@ -90,6 +92,7 @@ Public Class ucrReceiverMultiple
                 Selector.RemoveFromVariablesList(strTempItem)
             Next
             OnSelectionChanged()
+            MyBase.RemoveSelected()
         End If
     End Sub
 
@@ -101,7 +104,6 @@ Public Class ucrReceiverMultiple
             strItems.Add(lviVar.Text)
         Next
         Remove(strItems.ToArray())
-        'RemoveSelected()
     End Sub
 
     Public Overrides Function IsEmpty() As Boolean
