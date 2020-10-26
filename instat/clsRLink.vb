@@ -156,16 +156,16 @@ Public Class RLink
 
 
     ''' <summary>   The R version major required. </summary>
-    Private strRVersionMajorRequired As String = "3"
+    Private strRVersionMajorRequired As String = "4"
 
     ''' <summary>   The R version minor required. </summary>
-    Private strRVersionMinorRequired As String = "6"
+    Private strRVersionMinorRequired As String = "0"
 
     ''' <summary>   The R version required. </summary>
     Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0"
 
     ''' <summary>   The R bundled version. </summary>
-    Private strRBundledVersion As String = "3.6.2"
+    Private strRBundledVersion As String = "4.0.3"
 
 
     '''--------------------------------------------------------------------------------------------
