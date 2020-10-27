@@ -64,6 +64,10 @@ Partial Class ucrCalculator
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
         Me.grpDates = New System.Windows.Forms.GroupBox()
+        Me.cmdPm = New System.Windows.Forms.Button()
+        Me.cmdTime = New System.Windows.Forms.Button()
+        Me.cmdDateTime = New System.Windows.Forms.Button()
+        Me.cmdAsdate = New System.Windows.Forms.Button()
         Me.cmdQuarter = New System.Windows.Forms.Button()
         Me.cmdD_In_M = New System.Windows.Forms.Button()
         Me.cmdAm = New System.Windows.Forms.Button()
@@ -568,6 +572,10 @@ Partial Class ucrCalculator
         '
         'grpDates
         '
+        Me.grpDates.Controls.Add(Me.cmdPm)
+        Me.grpDates.Controls.Add(Me.cmdTime)
+        Me.grpDates.Controls.Add(Me.cmdDateTime)
+        Me.grpDates.Controls.Add(Me.cmdAsdate)
         Me.grpDates.Controls.Add(Me.cmdQuarter)
         Me.grpDates.Controls.Add(Me.cmdD_In_M)
         Me.grpDates.Controls.Add(Me.cmdAm)
@@ -589,6 +597,30 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpDates, "grpDates")
         Me.grpDates.Name = "grpDates"
         Me.grpDates.TabStop = False
+        '
+        'cmdPm
+        '
+        resources.ApplyResources(Me.cmdPm, "cmdPm")
+        Me.cmdPm.Name = "cmdPm"
+        Me.cmdPm.UseVisualStyleBackColor = True
+        '
+        'cmdTime
+        '
+        resources.ApplyResources(Me.cmdTime, "cmdTime")
+        Me.cmdTime.Name = "cmdTime"
+        Me.cmdTime.UseVisualStyleBackColor = True
+        '
+        'cmdDateTime
+        '
+        resources.ApplyResources(Me.cmdDateTime, "cmdDateTime")
+        Me.cmdDateTime.Name = "cmdDateTime"
+        Me.cmdDateTime.UseVisualStyleBackColor = True
+        '
+        'cmdAsdate
+        '
+        resources.ApplyResources(Me.cmdAsdate, "cmdAsdate")
+        Me.cmdAsdate.Name = "cmdAsdate"
+        Me.cmdAsdate.UseVisualStyleBackColor = True
         '
         'cmdQuarter
         '
@@ -2854,6 +2886,7 @@ Partial Class ucrCalculator
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputCalOptions.GetSetSelectedIndex = -1
         Me.ucrInputCalOptions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCalOptions, "ucrInputCalOptions")
         Me.ucrInputCalOptions.Name = "ucrInputCalOptions"
@@ -2879,20 +2912,20 @@ Partial Class ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrSaveResultInto)
         Me.Controls.Add(Me.grpHydroGOF)
-        Me.Controls.Add(Me.ucrTryCalculator)
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.ucrSaveResultInto)
+        Me.Controls.Add(Me.ucrTryCalculator)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpProbabilty)
+        Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.grpModifier)
-        Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.chkShowParameters)
@@ -3277,4 +3310,8 @@ Partial Class ucrCalculator
     Friend WithEvents cmdSsq As Button
     Friend WithEvents cmdRsr As Button
     Friend WithEvents ucrSaveResultInto As ucrSave
+    Friend WithEvents cmdTime As Button
+    Friend WithEvents cmdDateTime As Button
+    Friend WithEvents cmdAsdate As Button
+    Friend WithEvents cmdPm As Button
 End Class

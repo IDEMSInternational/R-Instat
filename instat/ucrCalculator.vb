@@ -2738,4 +2738,36 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::VE(sim = , obs = )", 10)
         End If
     End Sub
+
+    Private Sub cmdAsdate_Click(sender As Object, e As EventArgs) Handles cmdAsdate.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::as_date(x = , )", 3)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::as_date()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdDateTime_Click(sender As Object, e As EventArgs) Handles cmdDateTime.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::as_datetime(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::as_datetime()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdTime_Click(sender As Object, e As EventArgs) Handles cmdTime.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hms::hms(seconds = , minutes = , hours = , days = )", 32)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hms::hms()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdPm_Click(sender As Object, e As EventArgs) Handles cmdPm.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::pm(x = )", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::pm()", 1)
+        End If
+    End Sub
 End Class
