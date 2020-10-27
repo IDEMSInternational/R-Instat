@@ -434,7 +434,7 @@ Public Class dlgImportDataset
     'Loads the open dialog on load and click
     Public Sub GetFileFromOpenDialog()
         Using dlgOpen As New OpenFileDialog
-            dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html;*.dly|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html|DLY|*.html|All files|*.*"
+            dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html;*.dly|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html|DLY|*.dly|All files|*.*"
             dlgOpen.Multiselect = False
             If bFromLibrary Then
                 dlgOpen.Title = "Import from Library"
@@ -599,6 +599,8 @@ Public Class dlgImportDataset
             grpRDS.Show()
         ElseIf strFileExt = ".txt" Then
             strFileType = "TXT"
+            'add or change format parameter values
+            clsImportCSV.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
             'by default the textfiles will be imported using the function we use for csv
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
             ucrPanelFixedWidthText.Show()
@@ -606,13 +608,9 @@ Public Class dlgImportDataset
             grpCSV.Location = New System.Drawing.Point(9, 99) 'set the location of the groupbox to adjust gaps in the form UI
             grpCSV.Show()
         ElseIf strFileExt = ".csv" OrElse strFileExt = ".dly" Then
-            'treat dly files as csv. override the extension using format parameter 
             strFileType = "CSV"
-            If strFileExt = ".dly" Then
-                clsImportCSV.AddParameter("format", Chr(34) & "csv" & Chr(34))
-            Else
-                clsImportCSV.RemoveParameterByName("format")
-            End If
+            'add format. forces rio to treat dly files as csv 
+            clsImportCSV.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
             grpCSV.Text = "Import CSV Options"
             grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
@@ -891,9 +889,9 @@ Public Class dlgImportDataset
         ElseIf strFileType = "TXT" Then
             'for separator we use the function used for csv
             If rdoSeparatortext.Checked Then
-                clsImportCSV.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()))
+                clsImportCSV.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
             Else
-                clsImportFixedWidthText.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringText.GetText()))
+                clsImportFixedWidthText.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringText.GetText()), iPosition:=2)
             End If
         End If
         RefreshFrameView()
