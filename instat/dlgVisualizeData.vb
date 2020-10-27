@@ -139,6 +139,11 @@ Public Class dlgVisualizeData
         clsVisGuessFunction.SetRCommand("vis_guess")
         clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
 
+        clsSamplingFraction.SetPackageName("dplyr")
+        clsSamplingFraction.SetRCommand("slice_sample")
+        clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+        clsSamplingFraction.AddParameter("prop", "1.00", iPosition:=1)
+
         clsCurrBaseFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsCurrBaseFunction)
     End Sub

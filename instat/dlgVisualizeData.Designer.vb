@@ -152,9 +152,9 @@ Partial Class dlgVisualizeData
         '
         'ucrNudSamplingFunction
         '
-        Me.ucrNudSamplingFunction.DecimalPlaces = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.ucrNudSamplingFunction.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudSamplingFunction.Enabled = False
-        Me.ucrNudSamplingFunction.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudSamplingFunction.Increment = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSamplingFunction.Location = New System.Drawing.Point(338, 242)
         Me.ucrNudSamplingFunction.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSamplingFunction.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
