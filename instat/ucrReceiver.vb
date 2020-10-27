@@ -524,9 +524,12 @@ Public Class ucrReceiver
         SetIncludedAutoFillProperties(dctTemp)
     End Sub
 
-    Public Sub SetClimaticType(lstStrTemp As String())
+    Public Sub SetClimaticType(enumerableStrTemp As IEnumerable(Of String))
         Dim dctTemp As New Dictionary(Of String, String())
-        dctTemp.Add("Climatic_Type", lstStrTemp)
+        For Each strTemp As String In enumerableStrTemp
+            strTemp = Chr(34) & strTemp & Chr(34)
+        Next
+        dctTemp.Add("Climatic_Type", enumerableStrTemp.ToArray)
         SetIncludedAutoFillProperties(dctTemp)
     End Sub
 
@@ -626,8 +629,6 @@ Public Class ucrReceiver
                 clsIncludeList.SetRCommand("list")
                 For Each kvpInclude In lstIncludedAutoFillProperties
                     If kvpInclude.Value.ToList().Count = 1 Then
-                        clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList(), bWithQuotes:=False))
-                    Else
                         clsIncludeList.AddParameter(kvpInclude.Key, GetListAsRString(kvpInclude.Value.ToList()))
                     End If
                 Next
