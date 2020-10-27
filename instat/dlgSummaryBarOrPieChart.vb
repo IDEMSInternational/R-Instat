@@ -120,6 +120,7 @@ Public Class dlgSummaryBarOrPieChart
         dctPositionPairs.Add("Dodge2", Chr(34) & "dodge2" & Chr(34))
         dctPositionPairs.Add("Identity", Chr(34) & "identity" & Chr(34))
         dctPositionPairs.Add("Jitter", Chr(34) & "jitter" & Chr(34))
+        dctPositionPairs.Add("Jitter dodge", "position_jitterdodge()")
         dctPositionPairs.Add("Nudge", Chr(34) & "nudge" & Chr(34))
         dctPositionPairs.Add("Fill", Chr(34) & "fill" & Chr(34))
         dctPositionPairs.Add("Stack in reverse", "position_stack(reverse = TRUE)")
@@ -241,6 +242,8 @@ Public Class dlgSummaryBarOrPieChart
                 ucrReceiverSecondFactor.Add(clsParam.strArgumentValue)
             End If
         Next
+        'Syc position parameter
+        ucrInputBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
         TestOkEnabled()
     End Sub
 
@@ -291,10 +294,12 @@ Public Class dlgSummaryBarOrPieChart
                 clsLabelGeomFunction.AddParameter("position", "position_dodge(width=1)", iPosition:=1)
             Case "Dodge2"
                 clsLabelGeomFunction.AddParameter("position", "position_dodge2(width=1)", iPosition:=1)
-            Case "identity"
+            Case "Identity"
                 clsLabelGeomFunction.AddParameter("position", "position_identity()", iPosition:=1)
-            Case "jitter"
+            Case "Jitter"
                 clsLabelGeomFunction.AddParameter("position", "position_jitter(width=0)", iPosition:=1)
+            Case "Jitter dodge"
+                clsLabelGeomFunction.AddParameter("position", "position_jitterdodge()", iPosition:=1)
             Case "Nudge"
                 clsLabelGeomFunction.AddParameter("position", "position_nudge()", iPosition:=1)
             Case "Fill"
