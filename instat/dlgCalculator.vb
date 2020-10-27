@@ -15,15 +15,14 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports RDotNet
 
 Public Class dlgCalculator
-    Dim strCalcHistory As List(Of String)
-    Dim dataset As DataFrame
     Dim clsAttach As New RFunction
     Dim clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
     Public iHelpCalcID As Integer
+
+    'holds the original width of the form
     Private iBasicWidth As Integer
     Private strDefaultKeyboard As String
     ' Note: This list needs to be updated when a new keyboard is added.
@@ -44,28 +43,18 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrCalc.ucrReceiverForCalculation.IsEmpty Then
-            If ucrCalc.chkSaveResultInto.Checked AndAlso ucrCalc.ucrSaveResultInto.IsEmpty Then
-                ucrBase.OKEnabled(False)
-            Else
-                ucrBase.OKEnabled(True)
-            End If
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrCalc.ucrReceiverForCalculation.IsEmpty AndAlso ucrCalc.ucrSaveResultInto.IsComplete)
     End Sub
 
     Private Sub SetDefaults()
-        ucrCalc.ucrSaveResultInto.SetPrefix("Calc")
-        If strDefaultKeyboard <> "" Then
-            ucrCalc.ucrInputCalOptions.SetName(strDefaultKeyboard)
-            strDefaultKeyboard = ""
-        Else
-            ucrCalc.ucrInputCalOptions.SetName("Basic")
-        End If
+
+        ucrCalc.ucrInputCalOptions.SetName("Basic")
+
         ucrCalc.Reset()
+        ucrCalc.ucrSelectorForCalculations.Reset()
+        ucrCalc.ucrSaveResultInto.Reset()
         ucrCalc.chkShowParameters.Checked = False
-        ucrCalc.chkSaveResultInto.Checked = True
+        ucrCalc.ucrSaveResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
         ucrCalc.ucrTryCalculator.SetRSyntax(ucrBase.clsRsyntax)
@@ -89,11 +78,11 @@ Public Class dlgCalculator
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
         ucrBase.clsRsyntax.SetCommandString("")
-        ucrCalc.ucrSaveResultInto.SetItemsTypeAsColumns()
-        ucrCalc.ucrSaveResultInto.SetDefaultTypeAsColumn()
+        ucrCalc.ucrSaveResultInto.SetPrefix("calc")
+        ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
+        ucrCalc.ucrSaveResultInto.SetIsTextBox()
+        ucrCalc.ucrSaveResultInto.SetLabelText("Save Result Into:")
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
-        ucrCalc.ucrSelectorForCalculations.Reset()
-        ucrCalc.ucrSaveResultInto.SetValidationTypeAsRVariable()
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
     End Sub
 
@@ -112,7 +101,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub SaveResults()
-        If ucrCalc.chkSaveResultInto.Checked Then
+        If ucrCalc.ucrSaveResultInto.IsComplete Then
             ucrBase.clsRsyntax.SetAssignTo(ucrCalc.ucrSaveResultInto.GetText(), strTempColumn:=ucrCalc.ucrSaveResultInto.GetText(), strTempDataframe:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
@@ -122,6 +111,7 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
+
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ucrCalc.SetCalculationHistory()
     End Sub
@@ -138,57 +128,42 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub ucrInputCalOptions_NameChanged() Handles ucrCalc.NameChanged
-        CalculationsOptions()
-    End Sub
-
-    Private Sub CalculationsOptions()
         Select Case ucrCalc.ucrInputCalOptions.GetText
             Case "Maths"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.38, Me.Height)
+                Me.Width = iBasicWidth * 1.38
             Case "Logical and Symbols"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, Me.Height)
+                Me.Width = iBasicWidth * 1.4
             Case "Summary"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.43, Me.Height)
+                Me.Width = iBasicWidth * 1.46
             Case "Strings (Character Columns)"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.47, Me.Height)
+                Me.Width = iBasicWidth * 1.49
             Case "Factor"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.4, Me.Height)
+                Me.Width = iBasicWidth * 1.4
             Case "Probability"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.5, Me.Height)
+                Me.Width = iBasicWidth * 1.5
             Case "Dates"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.3, Me.Height)
+                Me.Width = iBasicWidth * 1.3
             Case "Transform"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.35, Me.Height)
+                Me.Width = iBasicWidth * 1.37
             Case "Circular"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.36, Me.Height)
+                Me.Width = iBasicWidth * 1.36
             Case "Wakefield"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.7, Me.Height)
+                Me.Width = iBasicWidth * 1.73
             Case "Modifier"
-                Me.Size = New Size(iBasicWidth * 1.39, Me.Height)
+                Me.Width = iBasicWidth * 1.39
             Case "Symbols"
-                Me.Size = New Size(iBasicWidth * 2.56, Me.Height)
+                Me.Width = iBasicWidth * 2.56
             Case "hydroGOF"
-                Me.Size = New System.Drawing.Size(iBasicWidth * 1.27, Me.Height)
+                Me.Width = iBasicWidth * 1.27
             Case Else
-                Me.Size = New System.Drawing.Size(iBasicWidth, Me.Height)
+                Me.Width = iBasicWidth
         End Select
-    End Sub
-
-    Private Sub chkSaveResultInto_CheckedChanged() Handles ucrCalc.SaveResultsCheckedChanged
-        SaveResults()
-        ShowControl()
     End Sub
 
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrCalc.DataFrameChanged
         ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
         SaveResults()
     End Sub
-
-    Private Sub ShowControl()
-        If ucrCalc.chkSaveResultInto.Checked Then
-            ucrCalc.ucrSaveResultInto.Visible = True
-        Else
-            ucrCalc.ucrSaveResultInto.Visible = False
-        End If
-    End Sub
 End Class
+
+    
