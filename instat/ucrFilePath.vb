@@ -215,6 +215,7 @@ Public Class ucrFilePath
                 Else
                     'if there is no current file path and there is a default suggested name, then use the default suggestion
                     'else check if previous selected path has an extension to determine if the previous path included a file name and use it
+                    'else leave the FileName as empty(it's the default)
                     If IsEmpty() AndAlso Not String.IsNullOrEmpty(DefaultFileSuggestionName) Then
                         dlgSaveFile.FileName = DefaultFileSuggestionName
                     ElseIf Not String.IsNullOrEmpty(Path.GetExtension(PreviousSelectedWindowsFilePath)) Then
