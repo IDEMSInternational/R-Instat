@@ -148,8 +148,8 @@ Public Class ucrFilePath
     ''' Sets the R parameter to the path control
     ''' </summary>
     ''' <param name="rParamter"></param>
-    Public Sub SetPathControlParameter(rParamter As RParameter)
-        PathControl().SetParameter(rParamter)
+    Public Sub SetPathControlParameter(rParameter As RParameter)
+        PathControl().SetParameter(rParameter)
     End Sub
 
     ''' <summary>
