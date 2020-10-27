@@ -18,20 +18,24 @@ Imports System.IO
 
 '''--------------------------------------------------------------------------------------------
 ''' <summary>
-''' An object of this class represents a file path custom control that inherits System.Windows.Forms.UserControl
-''' and is used to select the file name and path to be used in saving a file
+''' An object of this class represents a file path custom control that inherits 
+''' System.Windows.Forms.UserControl and is used to select the file name and path to be used in 
+''' saving a file.
+''' <para>
+''' This class provides methods and fields to:</para>
 ''' <list type="bullet">
 ''' <item><description>
-''' set the parameter of the path control
+''' Set the parameter of the path control
 ''' </description></item>
 ''' <item><description>
-''' set the R code structure of the path control
+''' Set the R code structure of the path control
 ''' </description></item>
 ''' <item><description>
 ''' Optional. Set a default suggested name
 ''' </description></item>
 ''' </list>
 ''' </summary>
+'''--------------------------------------------------------------------------------------------
 Public Class ucrFilePath
     Private bFirstLoad As Boolean = True
     Private strFilePathDialogFilter As String = "All Files *.*"
