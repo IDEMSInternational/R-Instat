@@ -181,10 +181,12 @@ Partial Class frmMain
         Me.mnuClimatic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileOpensst = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticFileOpenGriddedData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileImportfromIRIDataLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileImportandTidyNetCDF = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileOpenandTidyShapefile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimateFileImportFromClimSoft = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateFileImportFromClimSoftWizard = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileImportFromCliData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
@@ -516,9 +518,25 @@ Partial Class frmMain
         Me.mnuPrepareRObjectsReorder = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPrepareRObjectsDelete = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructured = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuStructuredCircular = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredCircularDefine = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularCalculator = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularSummaries = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator46 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuStructuredCircularScatterPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularDensityPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularRosePlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator67 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuStructuredCircularWindRose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularWindPollutionRose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularOtherRosePlots = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularOtherRosePlotsPercentileRose = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularOtherRosePlotsPolarPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularOtherRosePlotsPolarFrequency = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularOtherRosePlotsPolarCluster = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStructuredCircularOtherRosePlotsPolarAnnulus = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator68 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuStructuredCircularCirclize = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredLow_Flow = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredLow_FlowDefine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredSurvival = New System.Windows.Forms.ToolStripMenuItem()
@@ -1435,7 +1453,7 @@ Partial Class frmMain
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileOpenGriddedData, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileOpenandTidyShapefile, Me.mnuClimateFileImportFromClimSoft, Me.mnuClimaticFileImportFromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileOpenandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportFromClimSoft, Me.mnuClimateFileImportFromClimSoftWizard, Me.mnuClimaticFileImportFromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         resources.ApplyResources(Me.mnuClimaticFile, "mnuClimaticFile")
         '
@@ -1444,10 +1462,10 @@ Partial Class frmMain
         Me.mnuClimaticFileOpensst.Name = "mnuClimaticFileOpensst"
         resources.ApplyResources(Me.mnuClimaticFileOpensst, "mnuClimaticFileOpensst")
         '
-        'mnuClimaticFileOpenGriddedData
+        'mnuClimaticFileImportfromIRIDataLibrary
         '
-        Me.mnuClimaticFileOpenGriddedData.Name = "mnuClimaticFileOpenGriddedData"
-        resources.ApplyResources(Me.mnuClimaticFileOpenGriddedData, "mnuClimaticFileOpenGriddedData")
+        Me.mnuClimaticFileImportfromIRIDataLibrary.Name = "mnuClimaticFileImportfromIRIDataLibrary"
+        resources.ApplyResources(Me.mnuClimaticFileImportfromIRIDataLibrary, "mnuClimaticFileImportfromIRIDataLibrary")
         '
         'mnuClimaticFileImportandTidyNetCDF
         '
@@ -1459,10 +1477,20 @@ Partial Class frmMain
         Me.mnuClimaticFileOpenandTidyShapefile.Name = "mnuClimaticFileOpenandTidyShapefile"
         resources.ApplyResources(Me.mnuClimaticFileOpenandTidyShapefile, "mnuClimaticFileOpenandTidyShapefile")
         '
+        'ToolStripSeparator20
+        '
+        Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
+        resources.ApplyResources(Me.ToolStripSeparator20, "ToolStripSeparator20")
+        '
         'mnuClimateFileImportFromClimSoft
         '
         Me.mnuClimateFileImportFromClimSoft.Name = "mnuClimateFileImportFromClimSoft"
         resources.ApplyResources(Me.mnuClimateFileImportFromClimSoft, "mnuClimateFileImportFromClimSoft")
+        '
+        'mnuClimateFileImportFromClimSoftWizard
+        '
+        Me.mnuClimateFileImportFromClimSoftWizard.Name = "mnuClimateFileImportFromClimSoftWizard"
+        resources.ApplyResources(Me.mnuClimateFileImportFromClimSoftWizard, "mnuClimateFileImportFromClimSoftWizard")
         '
         'mnuClimaticFileImportFromCliData
         '
@@ -1604,7 +1632,7 @@ Partial Class frmMain
         '
         'mnuClimaticCheckData
         '
-        Me.mnuClimaticCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCheckDataInventory, Me.mnuClimaticCheckDataFillMissingValues, Me.ToolStripSeparator65, Me.mnuClimaticCheckDataDisplayDaily, Me.mnuClimaticCheckDataBoxplot, Me.mnuClimaticCheckDataQCTemperatures, Me.mnuClimaticCheckDataQCRainfall, Me.mnuClimaticCheckDataHomogenization})
+        Me.mnuClimaticCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCheckDataInventory, Me.mnuClimaticCheckDataDisplayDaily, Me.ToolStripSeparator65, Me.mnuClimaticCheckDataFillMissingValues, Me.mnuClimaticCheckDataBoxplot, Me.mnuClimaticCheckDataQCTemperatures, Me.mnuClimaticCheckDataQCRainfall, Me.mnuClimaticCheckDataHomogenization})
         Me.mnuClimaticCheckData.Name = "mnuClimaticCheckData"
         resources.ApplyResources(Me.mnuClimaticCheckData, "mnuClimaticCheckData")
         '
@@ -3331,18 +3359,13 @@ Partial Class frmMain
         '
         'mnuStructured
         '
-        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator20, Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries, Me.ToolStripSeparator63, Me.mnuStructuredClimatic, Me.mnuStructuredProcurement, Me.mnuStructuredOptionByContext})
+        Me.mnuStructured.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircular, Me.mnuStructuredLow_Flow, Me.mnuStructuredSurvival, Me.mnuStructuredTimeSeries, Me.ToolStripSeparator63, Me.mnuStructuredClimatic, Me.mnuStructuredProcurement, Me.mnuStructuredOptionByContext})
         Me.mnuStructured.Name = "mnuStructured"
         resources.ApplyResources(Me.mnuStructured, "mnuStructured")
         '
-        'ToolStripSeparator20
-        '
-        Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
-        resources.ApplyResources(Me.ToolStripSeparator20, "ToolStripSeparator20")
-        '
         'mnuStructuredCircular
         '
-        Me.mnuStructuredCircular.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularDefine})
+        Me.mnuStructuredCircular.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularDefine, Me.mnuStructuredCircularCalculator, Me.mnuStructuredCircularSummaries, Me.ToolStripSeparator46, Me.mnuStructuredCircularScatterPlot, Me.mnuStructuredCircularDensityPlot, Me.mnuStructuredCircularRosePlot, Me.ToolStripSeparator67, Me.mnuStructuredCircularWindRose, Me.mnuStructuredCircularWindPollutionRose, Me.mnuStructuredCircularOtherRosePlots, Me.ToolStripSeparator68, Me.mnuStructuredCircularCirclize})
         Me.mnuStructuredCircular.Name = "mnuStructuredCircular"
         resources.ApplyResources(Me.mnuStructuredCircular, "mnuStructuredCircular")
         '
@@ -3350,6 +3373,92 @@ Partial Class frmMain
         '
         Me.mnuStructuredCircularDefine.Name = "mnuStructuredCircularDefine"
         resources.ApplyResources(Me.mnuStructuredCircularDefine, "mnuStructuredCircularDefine")
+        '
+        'mnuStructuredCircularCalculator
+        '
+        Me.mnuStructuredCircularCalculator.Name = "mnuStructuredCircularCalculator"
+        resources.ApplyResources(Me.mnuStructuredCircularCalculator, "mnuStructuredCircularCalculator")
+        '
+        'mnuStructuredCircularSummaries
+        '
+        Me.mnuStructuredCircularSummaries.Name = "mnuStructuredCircularSummaries"
+        resources.ApplyResources(Me.mnuStructuredCircularSummaries, "mnuStructuredCircularSummaries")
+        '
+        'ToolStripSeparator46
+        '
+        Me.ToolStripSeparator46.Name = "ToolStripSeparator46"
+        resources.ApplyResources(Me.ToolStripSeparator46, "ToolStripSeparator46")
+        '
+        'mnuStructuredCircularScatterPlot
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularScatterPlot, "mnuStructuredCircularScatterPlot")
+        Me.mnuStructuredCircularScatterPlot.Name = "mnuStructuredCircularScatterPlot"
+        '
+        'mnuStructuredCircularDensityPlot
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularDensityPlot, "mnuStructuredCircularDensityPlot")
+        Me.mnuStructuredCircularDensityPlot.Name = "mnuStructuredCircularDensityPlot"
+        '
+        'mnuStructuredCircularRosePlot
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularRosePlot, "mnuStructuredCircularRosePlot")
+        Me.mnuStructuredCircularRosePlot.Name = "mnuStructuredCircularRosePlot"
+        '
+        'ToolStripSeparator67
+        '
+        Me.ToolStripSeparator67.Name = "ToolStripSeparator67"
+        resources.ApplyResources(Me.ToolStripSeparator67, "ToolStripSeparator67")
+        '
+        'mnuStructuredCircularWindRose
+        '
+        Me.mnuStructuredCircularWindRose.Name = "mnuStructuredCircularWindRose"
+        resources.ApplyResources(Me.mnuStructuredCircularWindRose, "mnuStructuredCircularWindRose")
+        '
+        'mnuStructuredCircularWindPollutionRose
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularWindPollutionRose, "mnuStructuredCircularWindPollutionRose")
+        Me.mnuStructuredCircularWindPollutionRose.Name = "mnuStructuredCircularWindPollutionRose"
+        '
+        'mnuStructuredCircularOtherRosePlots
+        '
+        Me.mnuStructuredCircularOtherRosePlots.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularOtherRosePlotsPercentileRose, Me.mnuStructuredCircularOtherRosePlotsPolarPlot, Me.mnuStructuredCircularOtherRosePlotsPolarFrequency, Me.mnuStructuredCircularOtherRosePlotsPolarCluster, Me.mnuStructuredCircularOtherRosePlotsPolarAnnulus})
+        Me.mnuStructuredCircularOtherRosePlots.Name = "mnuStructuredCircularOtherRosePlots"
+        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlots, "mnuStructuredCircularOtherRosePlots")
+        '
+        'mnuStructuredCircularOtherRosePlotsPercentileRose
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPercentileRose, "mnuStructuredCircularOtherRosePlotsPercentileRose")
+        Me.mnuStructuredCircularOtherRosePlotsPercentileRose.Name = "mnuStructuredCircularOtherRosePlotsPercentileRose"
+        '
+        'mnuStructuredCircularOtherRosePlotsPolarPlot
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarPlot, "mnuStructuredCircularOtherRosePlotsPolarPlot")
+        Me.mnuStructuredCircularOtherRosePlotsPolarPlot.Name = "mnuStructuredCircularOtherRosePlotsPolarPlot"
+        '
+        'mnuStructuredCircularOtherRosePlotsPolarFrequency
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarFrequency, "mnuStructuredCircularOtherRosePlotsPolarFrequency")
+        Me.mnuStructuredCircularOtherRosePlotsPolarFrequency.Name = "mnuStructuredCircularOtherRosePlotsPolarFrequency"
+        '
+        'mnuStructuredCircularOtherRosePlotsPolarCluster
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarCluster, "mnuStructuredCircularOtherRosePlotsPolarCluster")
+        Me.mnuStructuredCircularOtherRosePlotsPolarCluster.Name = "mnuStructuredCircularOtherRosePlotsPolarCluster"
+        '
+        'mnuStructuredCircularOtherRosePlotsPolarAnnulus
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarAnnulus, "mnuStructuredCircularOtherRosePlotsPolarAnnulus")
+        Me.mnuStructuredCircularOtherRosePlotsPolarAnnulus.Name = "mnuStructuredCircularOtherRosePlotsPolarAnnulus"
+        '
+        'ToolStripSeparator68
+        '
+        Me.ToolStripSeparator68.Name = "ToolStripSeparator68"
+        resources.ApplyResources(Me.ToolStripSeparator68, "ToolStripSeparator68")
+        '
+        'mnuStructuredCircularCirclize
+        '
+        resources.ApplyResources(Me.mnuStructuredCircularCirclize, "mnuStructuredCircularCirclize")
+        Me.mnuStructuredCircularCirclize.Name = "mnuStructuredCircularCirclize"
         '
         'mnuStructuredLow_Flow
         '
@@ -4403,7 +4512,7 @@ Partial Class frmMain
     Friend WithEvents ucrDataFrameMeta As ucrDataFrameMetadata
     Friend WithEvents ucrLogWindow As ucrLog
     Friend WithEvents ucrScriptWindow As ucrScript
-    Friend WithEvents mnuClimaticFileOpenGriddedData As ToolStripMenuItem
+    Friend WithEvents mnuClimaticFileImportfromIRIDataLibrary As ToolStripMenuItem
     Friend WithEvents mnuDescribeOneVariableRatingData As ToolStripMenuItem
     Friend WithEvents mnuPrepareFactorViewLabels As ToolStripMenuItem
     Friend WithEvents mnuDescribeViewGraph As ToolStripMenuItem
@@ -4588,7 +4697,6 @@ Partial Class frmMain
     Friend WithEvents mnuModelFitModelHypothesisTestsKeyboard As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckDataHomogenization As ToolStripMenuItem
     Friend WithEvents mnuStructured As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
     Friend WithEvents mnuStructuredCircular As ToolStripMenuItem
     Friend WithEvents mnuStructuredCircularDefine As ToolStripMenuItem
     Friend WithEvents mnuStructuredLow_Flow As ToolStripMenuItem
@@ -4626,4 +4734,23 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticCompareDensityPlot As ToolStripMenuItem
     Friend WithEvents mnuClimaticCompareConditionalQuantiles As ToolStripMenuItem
     Friend WithEvents mnuClimaticCompareTaylorDiagram As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularCalculator As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularSummaries As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator46 As ToolStripSeparator
+    Friend WithEvents mnuStructuredCircularScatterPlot As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularDensityPlot As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularRosePlot As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator67 As ToolStripSeparator
+    Friend WithEvents mnuStructuredCircularWindRose As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularWindPollutionRose As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularOtherRosePlots As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator68 As ToolStripSeparator
+    Friend WithEvents mnuStructuredCircularCirclize As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
+    Friend WithEvents mnuClimateFileImportFromClimSoftWizard As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularOtherRosePlotsPercentileRose As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarPlot As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarFrequency As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarCluster As ToolStripMenuItem
+    Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarAnnulus As ToolStripMenuItem
 End Class
