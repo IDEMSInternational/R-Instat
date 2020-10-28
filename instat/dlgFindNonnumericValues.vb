@@ -52,6 +52,8 @@ Public Class dlgFindNonnumericValues
         ucrReceiverColumn.bWithQuotes = False
         ucrReceiverColumn.SetIncludedDataTypes({"character"})
         ucrReceiverColumn.strSelectorHeading = "characters"
+        'makes the ucrSave control to position new column after selected column
+        ucrSaveColumn.setLinkedReceiver(ucrReceiverColumn)
 
         'save control
         ucrSaveColumn.SetPrefix("nonum")
