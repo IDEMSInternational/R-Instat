@@ -250,7 +250,7 @@ Public Class dlgEnter
         lstView.Items.Add(New ListViewItem({"forcats::as_factor(rep(LETTERS[4:1], c(4, 3, 1, 1)))"}))
         lstView.Items.Item(4).ToolTipText = "Gives D, D, D, D, C, C, C, B, A as a factor."
 
-        lstView.Items.Add(New ListViewItem({"factor(rep(c(month.abb[4:7], NA), c(2, 1, 2, 1, 3)))"}))
+        lstView.Items.Add(New ListViewItem({"forcats::as_factor(rep(c(month.abb[4:7], NA), c(2, 1, 2, 1, 3)))"}))
         lstView.Items.Item(5).ToolTipText = "Gives Apr, Apr, May, Jun, Jun, Jul, NA, NA, NA."
 
         lstView.Items.Add(New ListViewItem({"c(1:4, 10, rep(15, 3), 20)"}))
