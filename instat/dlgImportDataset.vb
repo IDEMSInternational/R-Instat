@@ -885,7 +885,7 @@ Public Class dlgImportDataset
             clsImportExcelMulti.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()))
             clsImportExcel.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()))
         ElseIf strFileType = "CSV" Then
-            clsImportCSV.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()))
+            clsImportCSV.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
         ElseIf strFileType = "TXT" Then
             'for separator we use the function used for csv
             If rdoSeparatortext.Checked Then
