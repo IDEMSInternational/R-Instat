@@ -122,6 +122,7 @@ Public Class frmMain
 
             'Sets up the Recent items
             clsRecentItems.setToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs, sepStart, sepEnd)
+            clsRecentItems.SetDataViewWindow(ucrDataViewer)
             'checks existence of MRU list
             clsRecentItems.checkOnLoad()
             Cursor = Cursors.Default
@@ -137,12 +138,14 @@ Public Class frmMain
     Public Sub TranslateFrmMainMenu()
         translateMenu(mnuBar.Items, Me)
     End Sub
+
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
         mnuFile.Enabled = bEnabled
         mnuEdit.Enabled = bEnabled
         mnuPrepare.Enabled = bEnabled
         mnuDescribe.Enabled = bEnabled
         mnuModel.Enabled = bEnabled
+        mnuStructured.Enabled = bEnabled
         mnuClimatic.Enabled = bEnabled
         mnuProcurement.Enabled = bEnabled
         mnuOptionsByContext.Enabled = bEnabled
@@ -1197,6 +1200,10 @@ Public Class frmMain
         dlgClimSoft.ShowDialog()
     End Sub
 
+    Private Sub mnuClimateFileImportFromClimSoftWizard_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportFromClimSoftWizard.Click
+        dlgClimsoftWizard.ShowDialog()
+    End Sub
+
     Private Sub mnuClimaticFileImportFromCliData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromCliData.Click
         dlgCliData.ShowDialog()
     End Sub
@@ -1402,7 +1409,7 @@ Public Class frmMain
         ctrActive = ucrDataFrameMeta
     End Sub
 
-    Private Sub mnuClimaticFileOpenGriddedData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileOpenGriddedData.Click
+    Private Sub mnuClimaticFileImportfromIRIDataLibrary_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportfromIRIDataLibrary.Click
         dlgImportGriddedData.ShowDialog()
     End Sub
 
@@ -2169,5 +2176,55 @@ Public Class frmMain
 
     Private Sub mnuClimaticCompareDensityPlot_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareDensityPlot.Click
         dlgHistogram.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularSummaries_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularSummaries.Click
+        If dlgColumnStats.bFirstLoad Then
+            dlgColumnStats.SetDefaultTab("Circular")
+        End If
+        dlgColumnStats.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularWindRose_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularWindRose.Click
+        dlgWindrose.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularCalculator_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularCalculator.Click
+        If dlgCalculator.bFirstLoad Then
+            dlgCalculator.SetDefaultKeyboard("Circular")
+        End If
+        dlgCalculator.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularWindPollutionRose_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularWindPollutionRose.Click
+        dlgWindPollutionRose.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCompareTimeSeriesPlot_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareTimeSeriesPlot.Click
+        dlgTimeSeriesPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCompareSeasonalPlot_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareSeasonalPlot.Click
+        dlgSeasonalPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCompareConditionalQuantiles_Click(sender As Object, e As EventArgs) Handles mnuClimaticCompareConditionalQuantiles.Click
+        dlgConditionalQuantilePlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularOtherRosePlotsPolarPlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarPlot.Click
+        dlgPolarPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularOtherRosePlotsPolarFrequency_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarFrequency.Click
+        dlgPolarFrequency.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularOtherRosePlotsPolarCluster_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarCluster.Click
+        dlgPolarCluster.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularOtherRosePlotsPolarAnnulus_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarAnnulus.Click
+        dlgPolarAnnulus.ShowDialog()
     End Sub
 End Class
