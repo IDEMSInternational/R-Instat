@@ -162,7 +162,6 @@ Public Class dlgVisualizeData
         ucrSaveGraph.SetRCode(clsVisDatFunction, bReset)
         ucrInputComboboxPalette.SetRCode(clsVisDatFunction, bReset)
         ucrChkSortVariables.SetRCode(clsVisDatFunction)
-        ucrNudSamplingFunction.SetRCode(clsSamplingFraction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -236,32 +235,5 @@ Public Class dlgVisualizeData
 
     Private Sub ucrNudMaximumSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudMaximumSize.ControlValueChanged
         MaximumDataPoint()
-    End Sub
-
-    Private Sub AddingXParameter()
-        If Not ucrReceiverVisualizeData.IsEmpty Then
-            If ucrNudSamplingFunction.Value = 1 AndAlso Not ucrReceiverVisualizeData.IsEmpty Then
-                clsVisDatFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, iPosition:=0)
-                clsVisGuessFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, iPosition:=0)
-                clsVisMissFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, iPosition:=0)
-            ElseIf ucrNudSamplingFunction.Value < 1 Then
-                clsVisDatFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
-                clsVisGuessFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
-                clsVisMissFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
-                'If rdoWholeDataFrame.Checked Then
-                '    clsCurrBaseFunction.RemoveParameterByName("x")
-                '    clsCurrBaseFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-                'ElseIf rdoSelectedColumn.Checked Then
-                '    clsCurrBaseFunction.RemoveParameterByName("data")
-                '    clsCurrBaseFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-                'ElseIf ucrNudSamplingFunction.Value < 1 Then
-                '    clsCurrBaseFunction.AddParameter(".data", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
-                'End If
-            End If
-        End If
-    End Sub
-
-    Private Sub ucrNudSamplingFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSamplingFunction.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged
-        AddingXParameter()
     End Sub
 End Class
