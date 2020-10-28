@@ -141,7 +141,7 @@ Public Class dlgVisualizeData
 
         clsSamplingFraction.SetPackageName("dplyr")
         clsSamplingFraction.SetRCommand("slice_sample")
-        clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+        clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsSamplingFraction.AddParameter("prop", "1.00", iPosition:=1)
 
         clsCurrBaseFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -162,6 +162,7 @@ Public Class dlgVisualizeData
         ucrSaveGraph.SetRCode(clsVisDatFunction, bReset)
         ucrInputComboboxPalette.SetRCode(clsVisDatFunction, bReset)
         ucrChkSortVariables.SetRCode(clsVisDatFunction)
+        ucrNudSamplingFunction.SetRCode(clsSamplingFraction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -202,12 +203,14 @@ Public Class dlgVisualizeData
     Private Sub AddRemoveDataHideOptionsButtons()
         If rdoWholeDataFrame.Checked Then
             clsCurrBaseFunction.RemoveParameterByName("x")
+            clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = False
             ucrSelectorVisualizeData.btnAdd.Visible = False
             ucrSelectorVisualizeData.btnDataOptions.Visible = False
             clsCurrBaseFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
         ElseIf rdoSelectedColumn.Checked Then
             clsCurrBaseFunction.RemoveParameterByName("data")
+            clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrReceiverVisualizeData.GetParameter.clsArgumentCodeStructure, iPosition:=0)
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = True
             ucrSelectorVisualizeData.btnAdd.Visible = True
             ucrSelectorVisualizeData.btnDataOptions.Visible = True
@@ -235,5 +238,19 @@ Public Class dlgVisualizeData
 
     Private Sub ucrNudMaximumSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudMaximumSize.ControlValueChanged
         MaximumDataPoint()
+    End Sub
+
+    Private Sub ucrNudSamplingFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSamplingFunction.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged
+        If Not ucrReceiverVisualizeData.IsEmpty Then
+            If ucrNudSamplingFunction.Value = 1 Then
+                clsVisDatFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, iPosition:=0)
+                clsVisGuessFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, iPosition:=0)
+                clsVisMissFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, iPosition:=0)
+            ElseIf ucrNudSamplingFunction.Value < 1 Then
+                clsVisDatFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
+                clsVisGuessFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
+                clsVisMissFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
+            End If
+        End If
     End Sub
 End Class
