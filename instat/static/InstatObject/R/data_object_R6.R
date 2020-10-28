@@ -493,7 +493,7 @@ DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, exclu
 }
 )
 
-DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols, require_correct_length = TRUE) {
+DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column, num_cols, require_correct_length = TRUE) {
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
@@ -532,16 +532,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
   replaced = FALSE
   previous_length = self$get_column_count()
   if(!missing(adjacent_column) && !adjacent_column %in% self$get_column_names()) stop(adjacent_column, "not found in the data")
-  
-  if(before) {
-    if(!missing(adjacent_column)) ind = which(self$get_column_names() == adjacent_column)
-    else ind = 1
-  }
-  else {
-    if(!missing(adjacent_column)) ind = which(self$get_column_names() == adjacent_column) + 1
-    else ind = previous_length + 1
-  }
-  
+ 
   new_col_names <- c()
   for(i in 1:num_cols) {
     if(num_cols == 1) {
@@ -568,10 +559,23 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
   }
   self$add_defaults_variables_metadata(new_col_names)
   if(!replaced) {
+    #if before and adjacent_column are missing then by default make before be false. This will make the new column be at the end. 
+	if(missing(before) && missing(adjacent_column)) return()
+	#get the adjacent position to be used in appending the new column names
+    if(before){
+	   if(!missing(adjacent_column)) ind = which(self$get_column_names() == adjacent_column)
+	   else ind = 1
+	}else{
+	   if(!missing(adjacent_column)) ind = which(self$get_column_names() == adjacent_column) + 1
+	   else ind = previous_length + 1
+	}
+	#reorder the columns .todo. this could be changed to use the reorder function 
     if(before && ind == 1) self$set_data(dplyr::select(self$get_data_frame(use_current_filter = FALSE) , c((previous_length + 1):(previous_length + num_cols), 1:previous_length)))
     else if(before || ind != previous_length + 1) self$set_data(dplyr::select(self$get_data_frame(use_current_filter = FALSE) , c(1:(ind - 1), (previous_length + 1):(previous_length + num_cols), ind:previous_length)))
   }else {
-    #get the adjacent position to be used in appending the new column names 
+    #if both before and adjacent_column are missing, no need to reorder existing columns
+	if(missing(before) && missing(adjacent_column)) return()
+	#get the adjacent position to be used in appending the new column names 
 	if(before) {
 	   if(missing(adjacent_column)) adjacent_position = 0
 	   else adjacent_position = which(self$get_column_names() == adjacent_column) - 1
@@ -579,6 +583,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
 	   if(missing(adjacent_column)) adjacent_position = self$get_column_count() 
 	   else adjacent_position = which(self$get_column_names() == adjacent_column)
 	}
+ 
 	#replace existing names with empty placeholders. Maintains the indices.
 	temp_all_col_names <- replace(self$get_column_names(), self$get_column_names() %in% new_col_names, "" )
 	#append the newly added column names after the set position
@@ -586,7 +591,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
 	#remove all empty characters placeholders to get final reordered column names
 	new_col_names_order <- new_col_names_order[! new_col_names_order %in% c("")]
 	#only do reordering if the column names order differ
-	if(!all( self$get_column_names() == new_col_names_order) ) self$reorder_columns_in_data(col_order=new_col_names_order)	
+	if( !all( self$get_column_names() == new_col_names_order) ) self$reorder_columns_in_data(col_order=new_col_names_order)	
   }
 }
 )
