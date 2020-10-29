@@ -3633,14 +3633,22 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
   if (missing(var)) stop("var is missing with no default")
   if (missing(vars)) stop("vars is missing with no default")
   date_col <- self$get_columns_from_data(date_col_name, use_current_filter = FALSE)
+  min_date <- min(date_col)
+  max_date <- max(date_col)
+  full_date_range <- seq(from = min_date, to = max_date, by = "day")
   if (!lubridate::is.Date(date_col)) stop("This column must be a date or time!")
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   if (!missing(station_col_name)) {
     station_col <- self$get_columns_from_data(station_col_name, use_current_filter = FALSE)
     station_names <- unique(station_col)
     list_out <- list()
+    date_lengths <- NULL
     for (i in seq_along(station_names)) {
       temp_data <- curr_data[station_col == station_names[i], ]
+      min_date <- min(temp_data[, date_col_name])
+      max_date <- max(temp_data[, date_col_name])
+      full_date_range <- seq(from = min_date, to = max_date, by = "day")
+      date_lengths[i] <- length(full_date_range)
       var_col <- temp_data[, var]
       date_col <- temp_data[, date_col_name]
       Year <- lubridate::year(date_col)
@@ -3658,7 +3666,9 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
       list_out[[i]] <- out[[1]][, var]
       print(out[[2]])
     }
+    gaps <- sum(date_lengths) - dim(curr_data)[[1]]
   } else {
+    gaps <- length(full_date_range) - length(date_col)
     var_col <- self$get_columns_from_data(var, use_current_filter = FALSE)
     Year <- lubridate::year(date_col)
     Month <- lubridate::month(date_col)
@@ -3671,6 +3681,9 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
       patch_weather[[i]] <- data.frame(Year, Month, Day, col)
       colnames(patch_weather[[i]])[4] <- var
     }
+  }
+  if (gaps != 0) {
+    stop(gaps, " rows for date gaps are missing, fill date gaps before proceeding.")
   }
   if (!missing(station_col_name)) {
     col <- unlist(list_out)
