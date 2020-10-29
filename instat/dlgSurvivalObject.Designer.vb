@@ -33,7 +33,8 @@ Partial Class dlgSurvivalObject
         Me.rdoCounting = New System.Windows.Forms.RadioButton()
         Me.rdoMstate = New System.Windows.Forms.RadioButton()
         Me.rdoInterval2 = New System.Windows.Forms.RadioButton()
-        Me.lblSelectLevels = New System.Windows.Forms.Label()
+        Me.ttEventInterval = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrModifyEventLogical = New instat.ucrInputComboBox()
         Me.ucrModifyEventNumeric = New instat.ucrInputTextBox()
         Me.ucrModifyEventFactor = New instat.ucrFactor()
         Me.ucrChkModifyEvent = New instat.ucrCheck()
@@ -45,8 +46,6 @@ Partial Class dlgSurvivalObject
         Me.ucrReceiverEntry = New instat.ucrReceiverSingle()
         Me.ucrSelectorFitObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrModifyEventLogical = New instat.ucrInputComboBox()
-        Me.ttEventInterval = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'lblEntryTime
@@ -183,24 +182,24 @@ Partial Class dlgSurvivalObject
         Me.rdoInterval2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoInterval2.UseVisualStyleBackColor = True
         '
-        'lblSelectLevels
+        'ucrModifyEventLogical
         '
-        Me.lblSelectLevels.AutoSize = True
-        Me.lblSelectLevels.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSelectLevels.Location = New System.Drawing.Point(433, 195)
-        Me.lblSelectLevels.Name = "lblSelectLevels"
-        Me.lblSelectLevels.Size = New System.Drawing.Size(148, 13)
-        Me.lblSelectLevels.TabIndex = 15
-        Me.lblSelectLevels.Text = "Event Occurs When Value Is:"
+        Me.ucrModifyEventLogical.AddQuotesIfUnrecognised = True
+        Me.ucrModifyEventLogical.GetSetSelectedIndex = -1
+        Me.ucrModifyEventLogical.IsReadOnly = False
+        Me.ucrModifyEventLogical.Location = New System.Drawing.Point(443, 193)
+        Me.ucrModifyEventLogical.Name = "ucrModifyEventLogical"
+        Me.ucrModifyEventLogical.Size = New System.Drawing.Size(127, 21)
+        Me.ucrModifyEventLogical.TabIndex = 16
         '
         'ucrModifyEventNumeric
         '
         Me.ucrModifyEventNumeric.AddQuotesIfUnrecognised = True
         Me.ucrModifyEventNumeric.IsMultiline = False
         Me.ucrModifyEventNumeric.IsReadOnly = False
-        Me.ucrModifyEventNumeric.Location = New System.Drawing.Point(434, 211)
+        Me.ucrModifyEventNumeric.Location = New System.Drawing.Point(443, 193)
         Me.ucrModifyEventNumeric.Name = "ucrModifyEventNumeric"
-        Me.ucrModifyEventNumeric.Size = New System.Drawing.Size(120, 26)
+        Me.ucrModifyEventNumeric.Size = New System.Drawing.Size(127, 26)
         Me.ucrModifyEventNumeric.TabIndex = 17
         '
         'ucrModifyEventFactor
@@ -208,19 +207,19 @@ Partial Class dlgSurvivalObject
         Me.ucrModifyEventFactor.AutoSize = True
         Me.ucrModifyEventFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrModifyEventFactor.clsReceiver = Nothing
-        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(434, 211)
+        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(443, 193)
         Me.ucrModifyEventFactor.Name = "ucrModifyEventFactor"
         Me.ucrModifyEventFactor.shtCurrSheet = Nothing
-        Me.ucrModifyEventFactor.Size = New System.Drawing.Size(197, 116)
+        Me.ucrModifyEventFactor.Size = New System.Drawing.Size(193, 112)
         Me.ucrModifyEventFactor.TabIndex = 18
         Me.ucrModifyEventFactor.ucrChkLevels = Nothing
         '
         'ucrChkModifyEvent
         '
         Me.ucrChkModifyEvent.Checked = False
-        Me.ucrChkModifyEvent.Location = New System.Drawing.Point(319, 193)
+        Me.ucrChkModifyEvent.Location = New System.Drawing.Point(281, 193)
         Me.ucrChkModifyEvent.Name = "ucrChkModifyEvent"
-        Me.ucrChkModifyEvent.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkModifyEvent.Size = New System.Drawing.Size(163, 20)
         Me.ucrChkModifyEvent.TabIndex = 14
         '
         'ucrInputOrigin
@@ -302,19 +301,6 @@ Partial Class dlgSurvivalObject
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 22
         '
-        'ucrModifyEventLogical
-        '
-        Me.ucrModifyEventLogical.AddQuotesIfUnrecognised = True
-        Me.ucrModifyEventLogical.GetSetSelectedIndex = -1
-        Me.ucrModifyEventLogical.IsReadOnly = False
-        Me.ucrModifyEventLogical.Location = New System.Drawing.Point(434, 211)
-        Me.ucrModifyEventLogical.Name = "ucrModifyEventLogical"
-        Me.ucrModifyEventLogical.Size = New System.Drawing.Size(120, 21)
-        Me.ucrModifyEventLogical.TabIndex = 16
-        '
-        'ttEventInterval
-        '
-        '
         'dlgSurvivalObject
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -322,9 +308,7 @@ Partial Class dlgSurvivalObject
         Me.ClientSize = New System.Drawing.Size(638, 335)
         Me.Controls.Add(Me.ucrModifyEventLogical)
         Me.Controls.Add(Me.ucrModifyEventNumeric)
-        Me.Controls.Add(Me.lblSelectLevels)
         Me.Controls.Add(Me.ucrModifyEventFactor)
-        Me.Controls.Add(Me.ucrChkModifyEvent)
         Me.Controls.Add(Me.ucrInputOrigin)
         Me.Controls.Add(Me.rdoMstate)
         Me.Controls.Add(Me.rdoInterval2)
@@ -343,6 +327,7 @@ Partial Class dlgSurvivalObject
         Me.Controls.Add(Me.ucrReceiverEntry)
         Me.Controls.Add(Me.ucrSelectorFitObject)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrChkModifyEvent)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -373,7 +358,6 @@ Partial Class dlgSurvivalObject
     Friend WithEvents ucrInputOrigin As ucrInputTextBox
     Friend WithEvents ucrChkModifyEvent As ucrCheck
     Friend WithEvents ucrModifyEventNumeric As ucrInputTextBox
-    Friend WithEvents lblSelectLevels As Label
     Friend WithEvents ucrModifyEventFactor As ucrFactor
     Friend WithEvents ucrModifyEventLogical As ucrInputComboBox
     Friend WithEvents ttEventInterval As ToolTip

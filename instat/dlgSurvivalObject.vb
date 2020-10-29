@@ -97,7 +97,7 @@ Public Class dlgSurvivalObject
         ucrInputOrigin.SetRDefault(0)
 
         'ucrChk
-        ucrChkModifyEvent.SetText("Modify Event")
+        ucrChkModifyEvent.SetText("Modify Event When Value is")
         'ucrReceiverEvent.AddToLinkedControls(ucrModifyEventNumeric, {"numeric"}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkModifyEvent.AddParameterIsROperatorCondition(True, "%in%", True)
         ucrChkModifyEvent.SetDefaultState(False)
@@ -106,12 +106,10 @@ Public Class dlgSurvivalObject
         ucrModifyEventNumeric.SetParameter(New RParameter("x", bNewIncludeArgumentName:=False))
         ucrModifyEventNumeric.SetValidationTypeAsNumericList(dcmMin:=Integer.MinValue,
                                                              dcmMax:=Integer.MaxValue)
-        ucrModifyEventNumeric.SetLinkedDisplayControl(lblSelectLevels)
         ucrModifyEventNumeric.AddQuotesIfUnrecognised = False
 
         'logical
         ucrModifyEventLogical.SetParameter(New RParameter("z", bNewIncludeArgumentName:=False))
-        ucrModifyEventLogical.SetLinkedDisplayControl(lblSelectLevels)
         Dim dctLogical As New Dictionary(Of String, String)
         dctLogical.Add("TRUE", "TRUE")
         dctLogical.Add("FALSE", "FALSE")
@@ -127,7 +125,7 @@ Public Class dlgSurvivalObject
 
         ucrSaveObject.SetSaveTypeAsSurv()
         ucrSaveObject.SetDataFrameSelector(ucrSelectorFitObject.ucrAvailableDataFrames)
-        ucrSaveObject.SetLabelText("Save Survival Object:")
+        ucrSaveObject.SetLabelText("Survival Object Name:")
         ucrSaveObject.SetIsComboBox()
         ucrSaveObject.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
 
@@ -274,8 +272,6 @@ Public Class dlgSurvivalObject
             ucrChkModifyEvent.Visible = True
 
             If ucrChkModifyEvent.Checked Then
-                Me.Size = New System.Drawing.Size(692, Me.Height)
-                lblSelectLevels.Visible = True
                 ' have to currently add these variables manually because the ucr that is added changed depending on the data type
                 ' and (to my knowledge) we can't yet do this in the automatic system
                 clsRightLeftFunction.AddParameter("event", clsROperatorParameter:=clsModifyOperation, iPosition:=2)
@@ -310,7 +306,6 @@ Public Class dlgSurvivalObject
                     End If
                 End If
             Else
-                Me.Size = New System.Drawing.Size(448, Me.Height)
                 clsRightLeftFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
                 clsStartEndFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
                 ucrModifyEventNumeric.Visible = False
@@ -319,7 +314,6 @@ Public Class dlgSurvivalObject
             End If
 
         Else 'if interval or interval2 checked
-            Me.Size = New System.Drawing.Size(448, Me.Height)
             clsRightLeftFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
             clsStartEndFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
             ucrChkModifyEvent.Visible = False
