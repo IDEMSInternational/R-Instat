@@ -530,10 +530,11 @@ Public Class ucrReceiver
 
     Public Sub SetClimaticType(enumerableStrTemp As IEnumerable(Of String))
         Dim dctTemp As New Dictionary(Of String, String())
-        For Each strTemp As String In enumerableStrTemp
-            strTemp = Chr(34) & strTemp & Chr(34)
+        Dim arrStrTemp() As String = enumerableStrTemp.ToArray
+        For i As Integer = 0 To arrStrTemp.Count - 1
+            arrStrTemp(i) = Chr(34) & arrStrTemp(i) & Chr(34)
         Next
-        dctTemp.Add("Climatic_Type", enumerableStrTemp.ToArray)
+        dctTemp.Add("Climatic_Type", arrStrTemp)
         SetIncludedAutoFillProperties(dctTemp)
     End Sub
 
