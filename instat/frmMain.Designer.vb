@@ -3427,18 +3427,18 @@ Partial Class frmMain
         '
         'mnuStructuredCircularOtherRosePlotsPercentileRose
         '
-        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPercentileRose, "mnuStructuredCircularOtherRosePlotsPercentileRose")
         Me.mnuStructuredCircularOtherRosePlotsPercentileRose.Name = "mnuStructuredCircularOtherRosePlotsPercentileRose"
+        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPercentileRose, "mnuStructuredCircularOtherRosePlotsPercentileRose")
         '
         'mnuStructuredCircularOtherRosePlotsPolarPlot
         '
-        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarPlot, "mnuStructuredCircularOtherRosePlotsPolarPlot")
         Me.mnuStructuredCircularOtherRosePlotsPolarPlot.Name = "mnuStructuredCircularOtherRosePlotsPolarPlot"
+        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarPlot, "mnuStructuredCircularOtherRosePlotsPolarPlot")
         '
         'mnuStructuredCircularOtherRosePlotsPolarFrequency
         '
-        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarFrequency, "mnuStructuredCircularOtherRosePlotsPolarFrequency")
         Me.mnuStructuredCircularOtherRosePlotsPolarFrequency.Name = "mnuStructuredCircularOtherRosePlotsPolarFrequency"
+        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarFrequency, "mnuStructuredCircularOtherRosePlotsPolarFrequency")
         '
         'mnuStructuredCircularOtherRosePlotsPolarCluster
         '
@@ -3447,8 +3447,8 @@ Partial Class frmMain
         '
         'mnuStructuredCircularOtherRosePlotsPolarAnnulus
         '
-        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarAnnulus, "mnuStructuredCircularOtherRosePlotsPolarAnnulus")
         Me.mnuStructuredCircularOtherRosePlotsPolarAnnulus.Name = "mnuStructuredCircularOtherRosePlotsPolarAnnulus"
+        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarAnnulus, "mnuStructuredCircularOtherRosePlotsPolarAnnulus")
         '
         'ToolStripSeparator68
         '
