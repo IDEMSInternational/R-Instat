@@ -242,26 +242,26 @@ Public Class dlgVisualizeData
             clsVisGuessFunction.RemoveParameterByName("data")
             clsVisMissFunction.RemoveParameterByName("data")
             If ucrNudSamplingFunction.Value = 1 Then
-                clsVisDatFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, iPosition:=0)
-                clsVisGuessFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, iPosition:=0)
-                clsVisMissFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, iPosition:=0)
+                clsVisDatFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisGuessFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisMissFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, bIncludeArgumentName:=False, iPosition:=0)
             ElseIf ucrNudSamplingFunction.Value < 1 Then
-                clsVisDatFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
-                clsVisGuessFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
-                clsVisMissFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
+                clsVisDatFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisGuessFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisMissFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, bIncludeArgumentName:=False, iPosition:=0)
             End If
         ElseIf rdoWholeDataFrame.Checked Then
             clsVisDatFunction.RemoveParameterByName("x")
             clsVisGuessFunction.RemoveParameterByName("x")
             clsVisMissFunction.RemoveParameterByName("x")
             If ucrNudSamplingFunction.Value = 1 Then
-                clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-                clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-                clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+                clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
             ElseIf ucrNudSamplingFunction.Value < 1 Then
-                clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
-                clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
-                clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
+                clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=clsSamplingFraction, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=clsSamplingFraction, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=clsSamplingFraction, bIncludeArgumentName:=False, iPosition:=0)
             End If
         End If
     End Sub
