@@ -51,13 +51,19 @@ Public Class dlgPolarFrequency
         ucrReceiverPollutant.Selector = ucrSelectorPolarFrequency
         ucrReceiverPollutant.SetParameterIsString()
 
-        ucrChkTransform.SetText("Transform")
-        ucrChkTransform.SetParameter(New RParameter("trans", 2))
-        'ucrChkTransform.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkTransform.AddParameterPresentCondition(True, "trans")
-        ucrChkTransform.AddParameterPresentCondition(False, "trans", False)
+        ucrReceiverWindDirection.SetParameter(New RParameter("wd_name", 2))
+        ucrReceiverWindDirection.Selector = ucrSelectorPolarFrequency
+        ucrReceiverWindDirection.SetParameterIsString()
 
-        ucrInputType.SetParameter(New RParameter("type", 3))
+        ucrReceiverWindSpeed.SetParameter(New RParameter("ws_name", 3))
+        ucrReceiverWindSpeed.Selector = ucrSelectorPolarFrequency
+        ucrReceiverWindSpeed.SetParameterIsString()
+
+        ucrChkTransform.SetText("Transform")
+        ucrChkTransform.SetParameter(New RParameter("trans", 4))
+        ucrChkTransform.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+        ucrInputType.SetParameter(New RParameter("type", 5))
         dctType.Add("Default", Chr(34) & "default" & Chr(34))
         dctType.Add("Year", Chr(34) & "year" & Chr(34))
         dctType.Add("Hour", Chr(34) & "hour" & Chr(34))
@@ -71,10 +77,10 @@ Public Class dlgPolarFrequency
         ucrInputType.SetItems(dctType)
         ucrInputType.SetDropDownStyleAsNonEditable()
 
-        ucrNudMinimumBins.SetParameter(New RParameter("min.bin", 4))
-        ucrNudMinimumBins.SetMinMax(1,)
+        ucrNudMinimumBins.SetParameter(New RParameter("min.bin", 6))
+        ucrNudMinimumBins.Minimum = 1
 
-        ucrInputPosition.SetParameter(New RParameter("key.position", 5))
+        ucrInputPosition.SetParameter(New RParameter("key.position", 7))
         dctPosition.Add("Top", Chr(34) & "top" & Chr(34))
         dctPosition.Add("Right", Chr(34) & "right" & Chr(34))
         dctPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
@@ -82,7 +88,7 @@ Public Class dlgPolarFrequency
         ucrInputPosition.SetItems(dctPosition)
         ucrInputPosition.SetDropDownStyleAsNonEditable()
 
-        ucrInputStatistic.SetParameter(New RParameter("statistic", 6))
+        ucrInputStatistic.SetParameter(New RParameter("statistic", 8))
         dctStatistic.Add("Frequency", Chr(34) & "frequency" & Chr(34))
         dctStatistic.Add("Mean", Chr(34) & "mean" & Chr(34))
         dctStatistic.Add("Median", Chr(34) & "median" & Chr(34))
@@ -92,7 +98,7 @@ Public Class dlgPolarFrequency
         ucrInputStatistic.SetItems(dctStatistic)
         ucrInputStatistic.SetDropDownStyleAsNonEditable()
 
-        ucrInputColor.SetParameter(New RParameter("cols", 7))
+        ucrInputColor.SetParameter(New RParameter("cols", 9))
         dctColor.Add("Default", Chr(34) & "default" & Chr(34))
         dctColor.Add("Increment", Chr(34) & "increment" & Chr(34))
         dctColor.Add("Heat", Chr(34) & "heat" & Chr(34))
@@ -103,17 +109,16 @@ Public Class dlgPolarFrequency
 
     Private Sub SetDefaults()
         clsPolarFrequencyFunction = New RFunction
-
-        clsPolarFrequencyFunction.AddParameter("statistic", Chr(34) & "frequency" & Chr(34), iPosition:=6)
-        clsPolarFrequencyFunction.AddParameter("type", Chr(34) & "default" & Chr(34), iPosition:=3)
-        clsPolarFrequencyFunction.AddParameter("key.position", Chr(34) & "right" & Chr(34), iPosition:=5)
-        clsPolarFrequencyFunction.AddParameter("cols", Chr(34) & "default" & Chr(34), iPosition:=7)
+        clsPolarFrequencyFunction.AddParameter("statistic", Chr(34) & "frequency" & Chr(34), iPosition:=8)
+        clsPolarFrequencyFunction.AddParameter("type", Chr(34) & "default" & Chr(34), iPosition:=5)
+        clsPolarFrequencyFunction.AddParameter("key.position", Chr(34) & "right" & Chr(34), iPosition:=7)
+        clsPolarFrequencyFunction.AddParameter("cols", Chr(34) & "default" & Chr(34), iPosition:=9)
+        clsPolarFrequencyFunction.AddParameter("trans", "TRUE", iPosition:=4)
 
         ucrSelectorPolarFrequency.Reset()
         ucrReceiverPollutant.SetMeAsReceiver()
 
-        clsPolarFrequencyFunction.SetPackageName("openair")
-        clsPolarFrequencyFunction.SetRCommand("polarFreq")
+        clsPolarFrequencyFunction.SetRCommand("polar_frequency")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsPolarFrequencyFunction)
     End Sub
@@ -123,7 +128,7 @@ Public Class dlgPolarFrequency
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverPollutant.IsEmpty Then
+        If ucrSelectorPolarFrequency.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -136,7 +141,7 @@ Public Class dlgPolarFrequency
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverPollutant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPollutant.ControlValueChanged
+    Private Sub ucrSelectorPolarFrequency_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPolarFrequency.ControlValueChanged
         TestOkEnabled()
     End Sub
 End Class

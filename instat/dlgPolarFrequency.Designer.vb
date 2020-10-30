@@ -22,146 +22,130 @@ Partial Class dlgPolarFrequency
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorPolarFrequency = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblPollutant = New System.Windows.Forms.Label()
         Me.lblColor = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.ucrReceiverPollutant = New instat.ucrReceiverSingle()
-        Me.ucrInputStatistic = New instat.ucrInputComboBox()
-        Me.ucrInputType = New instat.ucrInputComboBox()
-        Me.ucrInputPosition = New instat.ucrInputComboBox()
-        Me.ucrInputColor = New instat.ucrInputComboBox()
-        Me.ucrNudMinimumBins = New instat.ucrNud()
+        Me.lblWindSpeed = New System.Windows.Forms.Label()
+        Me.lblWindDirection = New System.Windows.Forms.Label()
+        Me.ucrReceiverWindDirection = New instat.ucrReceiverSingle()
+        Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.ucrChkTransform = New instat.ucrCheck()
+        Me.ucrNudMinimumBins = New instat.ucrNud()
+        Me.ucrInputColor = New instat.ucrInputComboBox()
+        Me.ucrInputPosition = New instat.ucrInputComboBox()
+        Me.ucrInputType = New instat.ucrInputComboBox()
+        Me.ucrInputStatistic = New instat.ucrInputComboBox()
+        Me.ucrReceiverPollutant = New instat.ucrReceiverSingle()
+        Me.ucrSelectorPolarFrequency = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 329)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
-        '
-        'ucrSelectorPolarFrequency
-        '
-        Me.ucrSelectorPolarFrequency.bDropUnusedFilterLevels = False
-        Me.ucrSelectorPolarFrequency.bShowHiddenColumns = False
-        Me.ucrSelectorPolarFrequency.bUseCurrentFilter = True
-        Me.ucrSelectorPolarFrequency.Location = New System.Drawing.Point(14, 1)
-        Me.ucrSelectorPolarFrequency.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorPolarFrequency.Name = "ucrSelectorPolarFrequency"
-        Me.ucrSelectorPolarFrequency.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorPolarFrequency.TabIndex = 1
         '
         'lblPollutant
         '
         Me.lblPollutant.AutoSize = True
-        Me.lblPollutant.Location = New System.Drawing.Point(280, 36)
+        Me.lblPollutant.Location = New System.Drawing.Point(280, 45)
         Me.lblPollutant.Name = "lblPollutant"
         Me.lblPollutant.Size = New System.Drawing.Size(48, 13)
-        Me.lblPollutant.TabIndex = 2
+        Me.lblPollutant.TabIndex = 1
         Me.lblPollutant.Text = "Pollutant"
         '
         'lblColor
         '
         Me.lblColor.AutoSize = True
-        Me.lblColor.Location = New System.Drawing.Point(12, 210)
+        Me.lblColor.Location = New System.Drawing.Point(13, 205)
         Me.lblColor.Name = "lblColor"
         Me.lblColor.Size = New System.Drawing.Size(34, 13)
-        Me.lblColor.TabIndex = 3
+        Me.lblColor.TabIndex = 7
         Me.lblColor.Text = "Color:"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(11, 231)
+        Me.Label3.Location = New System.Drawing.Point(11, 229)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(68, 13)
-        Me.Label3.TabIndex = 4
+        Me.Label3.TabIndex = 9
         Me.Label3.Text = "Key Position:"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(254, 210)
+        Me.Label4.Location = New System.Drawing.Point(254, 207)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(34, 13)
-        Me.Label4.TabIndex = 5
+        Me.Label4.TabIndex = 12
         Me.Label4.Text = "Type:"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(254, 257)
+        Me.Label5.Location = New System.Drawing.Point(254, 256)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(74, 13)
-        Me.Label5.TabIndex = 6
+        Me.Label5.TabIndex = 16
         Me.Label5.Text = "Minimum Bins:"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(254, 233)
+        Me.Label6.Location = New System.Drawing.Point(254, 231)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(47, 13)
-        Me.Label6.TabIndex = 7
+        Me.Label6.TabIndex = 14
         Me.Label6.Text = "Statistic:"
         '
-        'ucrReceiverPollutant
+        'lblWindSpeed
         '
-        Me.ucrReceiverPollutant.frmParent = Me
-        Me.ucrReceiverPollutant.Location = New System.Drawing.Point(283, 60)
-        Me.ucrReceiverPollutant.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverPollutant.Name = "ucrReceiverPollutant"
-        Me.ucrReceiverPollutant.Selector = Nothing
-        Me.ucrReceiverPollutant.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverPollutant.strNcFilePath = ""
-        Me.ucrReceiverPollutant.TabIndex = 8
-        Me.ucrReceiverPollutant.ucrSelector = Nothing
+        Me.lblWindSpeed.AutoSize = True
+        Me.lblWindSpeed.Location = New System.Drawing.Point(283, 135)
+        Me.lblWindSpeed.Name = "lblWindSpeed"
+        Me.lblWindSpeed.Size = New System.Drawing.Size(69, 13)
+        Me.lblWindSpeed.TabIndex = 5
+        Me.lblWindSpeed.Text = "Wind Speed:"
         '
-        'ucrInputStatistic
+        'lblWindDirection
         '
-        Me.ucrInputStatistic.AddQuotesIfUnrecognised = True
-        Me.ucrInputStatistic.GetSetSelectedIndex = -1
-        Me.ucrInputStatistic.IsReadOnly = False
-        Me.ucrInputStatistic.Location = New System.Drawing.Point(314, 229)
-        Me.ucrInputStatistic.Name = "ucrInputStatistic"
-        Me.ucrInputStatistic.Size = New System.Drawing.Size(85, 21)
-        Me.ucrInputStatistic.TabIndex = 9
+        Me.lblWindDirection.AutoSize = True
+        Me.lblWindDirection.Location = New System.Drawing.Point(284, 88)
+        Me.lblWindDirection.Name = "lblWindDirection"
+        Me.lblWindDirection.Size = New System.Drawing.Size(80, 13)
+        Me.lblWindDirection.TabIndex = 3
+        Me.lblWindDirection.Text = "Wind Direction:"
         '
-        'ucrInputType
+        'ucrReceiverWindDirection
         '
-        Me.ucrInputType.AddQuotesIfUnrecognised = True
-        Me.ucrInputType.GetSetSelectedIndex = -1
-        Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(314, 202)
-        Me.ucrInputType.Name = "ucrInputType"
-        Me.ucrInputType.Size = New System.Drawing.Size(85, 21)
-        Me.ucrInputType.TabIndex = 10
+        Me.ucrReceiverWindDirection.frmParent = Me
+        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(283, 103)
+        Me.ucrReceiverWindDirection.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
+        Me.ucrReceiverWindDirection.Selector = Nothing
+        Me.ucrReceiverWindDirection.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWindDirection.strNcFilePath = ""
+        Me.ucrReceiverWindDirection.TabIndex = 4
+        Me.ucrReceiverWindDirection.ucrSelector = Nothing
         '
-        'ucrInputPosition
+        'ucrReceiverWindSpeed
         '
-        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
-        Me.ucrInputPosition.GetSetSelectedIndex = -1
-        Me.ucrInputPosition.IsReadOnly = False
-        Me.ucrInputPosition.Location = New System.Drawing.Point(94, 228)
-        Me.ucrInputPosition.Name = "ucrInputPosition"
-        Me.ucrInputPosition.Size = New System.Drawing.Size(68, 21)
-        Me.ucrInputPosition.TabIndex = 11
+        Me.ucrReceiverWindSpeed.frmParent = Me
+        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(283, 150)
+        Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
+        Me.ucrReceiverWindSpeed.Selector = Nothing
+        Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWindSpeed.strNcFilePath = ""
+        Me.ucrReceiverWindSpeed.TabIndex = 6
+        Me.ucrReceiverWindSpeed.ucrSelector = Nothing
         '
-        'ucrInputColor
+        'ucrChkTransform
         '
-        Me.ucrInputColor.AddQuotesIfUnrecognised = True
-        Me.ucrInputColor.GetSetSelectedIndex = -1
-        Me.ucrInputColor.IsReadOnly = False
-        Me.ucrInputColor.Location = New System.Drawing.Point(94, 201)
-        Me.ucrInputColor.Name = "ucrInputColor"
-        Me.ucrInputColor.Size = New System.Drawing.Size(68, 21)
-        Me.ucrInputColor.TabIndex = 12
+        Me.ucrChkTransform.Checked = False
+        Me.ucrChkTransform.Location = New System.Drawing.Point(14, 257)
+        Me.ucrChkTransform.Name = "ucrChkTransform"
+        Me.ucrChkTransform.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkTransform.TabIndex = 11
         '
         'ucrNudMinimumBins
         '
@@ -172,22 +156,88 @@ Partial Class dlgPolarFrequency
         Me.ucrNudMinimumBins.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinimumBins.Name = "ucrNudMinimumBins"
         Me.ucrNudMinimumBins.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMinimumBins.TabIndex = 16
+        Me.ucrNudMinimumBins.TabIndex = 17
         Me.ucrNudMinimumBins.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrChkTransform
+        'ucrInputColor
         '
-        Me.ucrChkTransform.Checked = False
-        Me.ucrChkTransform.Location = New System.Drawing.Point(14, 257)
-        Me.ucrChkTransform.Name = "ucrChkTransform"
-        Me.ucrChkTransform.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkTransform.TabIndex = 17
+        Me.ucrInputColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputColor.GetSetSelectedIndex = -1
+        Me.ucrInputColor.IsReadOnly = False
+        Me.ucrInputColor.Location = New System.Drawing.Point(94, 201)
+        Me.ucrInputColor.Name = "ucrInputColor"
+        Me.ucrInputColor.Size = New System.Drawing.Size(68, 21)
+        Me.ucrInputColor.TabIndex = 8
+        '
+        'ucrInputPosition
+        '
+        Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.GetSetSelectedIndex = -1
+        Me.ucrInputPosition.IsReadOnly = False
+        Me.ucrInputPosition.Location = New System.Drawing.Point(94, 228)
+        Me.ucrInputPosition.Name = "ucrInputPosition"
+        Me.ucrInputPosition.Size = New System.Drawing.Size(68, 21)
+        Me.ucrInputPosition.TabIndex = 10
+        '
+        'ucrInputType
+        '
+        Me.ucrInputType.AddQuotesIfUnrecognised = True
+        Me.ucrInputType.GetSetSelectedIndex = -1
+        Me.ucrInputType.IsReadOnly = False
+        Me.ucrInputType.Location = New System.Drawing.Point(324, 202)
+        Me.ucrInputType.Name = "ucrInputType"
+        Me.ucrInputType.Size = New System.Drawing.Size(75, 21)
+        Me.ucrInputType.TabIndex = 13
+        '
+        'ucrInputStatistic
+        '
+        Me.ucrInputStatistic.AddQuotesIfUnrecognised = True
+        Me.ucrInputStatistic.GetSetSelectedIndex = -1
+        Me.ucrInputStatistic.IsReadOnly = False
+        Me.ucrInputStatistic.Location = New System.Drawing.Point(324, 229)
+        Me.ucrInputStatistic.Name = "ucrInputStatistic"
+        Me.ucrInputStatistic.Size = New System.Drawing.Size(75, 21)
+        Me.ucrInputStatistic.TabIndex = 15
+        '
+        'ucrReceiverPollutant
+        '
+        Me.ucrReceiverPollutant.frmParent = Me
+        Me.ucrReceiverPollutant.Location = New System.Drawing.Point(283, 60)
+        Me.ucrReceiverPollutant.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverPollutant.Name = "ucrReceiverPollutant"
+        Me.ucrReceiverPollutant.Selector = Nothing
+        Me.ucrReceiverPollutant.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverPollutant.strNcFilePath = ""
+        Me.ucrReceiverPollutant.TabIndex = 2
+        Me.ucrReceiverPollutant.ucrSelector = Nothing
+        '
+        'ucrSelectorPolarFrequency
+        '
+        Me.ucrSelectorPolarFrequency.bDropUnusedFilterLevels = False
+        Me.ucrSelectorPolarFrequency.bShowHiddenColumns = False
+        Me.ucrSelectorPolarFrequency.bUseCurrentFilter = True
+        Me.ucrSelectorPolarFrequency.Location = New System.Drawing.Point(14, 1)
+        Me.ucrSelectorPolarFrequency.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorPolarFrequency.Name = "ucrSelectorPolarFrequency"
+        Me.ucrSelectorPolarFrequency.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorPolarFrequency.TabIndex = 0
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 329)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 18
         '
         'dlgPolarFrequency
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(426, 396)
+        Me.Controls.Add(Me.ucrReceiverWindDirection)
+        Me.Controls.Add(Me.lblWindDirection)
+        Me.Controls.Add(Me.ucrReceiverWindSpeed)
+        Me.Controls.Add(Me.lblWindSpeed)
         Me.Controls.Add(Me.ucrChkTransform)
         Me.Controls.Add(Me.ucrNudMinimumBins)
         Me.Controls.Add(Me.ucrInputColor)
@@ -229,4 +279,8 @@ Partial Class dlgPolarFrequency
     Friend WithEvents ucrInputPosition As ucrInputComboBox
     Friend WithEvents ucrInputType As ucrInputComboBox
     Friend WithEvents ucrInputStatistic As ucrInputComboBox
+    Friend WithEvents ucrReceiverWindDirection As ucrReceiverSingle
+    Friend WithEvents lblWindDirection As Label
+    Friend WithEvents ucrReceiverWindSpeed As ucrReceiverSingle
+    Friend WithEvents lblWindSpeed As Label
 End Class
