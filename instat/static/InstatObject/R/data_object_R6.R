@@ -3664,7 +3664,6 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
       }
       out <- chillR::patch_daily_temperatures(weather = weather, patch_weather = patch_weather, vars = var, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias)
       list_out[[i]] <- out[[1]][, var]
-      print(out[[2]])
     }
     gaps <- sum(date_lengths) - dim(curr_data)[[1]]
   } else {
@@ -3682,18 +3681,23 @@ DataSheet$set("public", "patch_climate_element", function(date_col_name = "", va
       colnames(patch_weather[[i]])[4] <- var
     }
   }
-  if (gaps != 0) {
-    stop(gaps, " rows for date gaps are missing, fill date gaps before proceeding.")
-  }
   if (!missing(station_col_name)) {
     col <- unlist(list_out)
   }
   else {
     out <- chillR::patch_daily_temperatures(weather = weather, patch_weather = patch_weather, vars = var, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias)
     col <- out[[1]][, var]
-    print(out[[2]])
   }
+  if(length(col)==dim(curr_data)[[1]]){
+  gaps_remaining <- summary_count_missing(col)
+  gaps_filled <- (summary_count_missing(curr_data[, var])-gaps_remaining)
+  cat(gaps_filled, " gaps filled", gaps_remaining, " remaining.", "\n")
   self$add_columns_to_data(col_name = column_name, col_data = col)
+  }else{
+    if (gaps != 0) {
+      cat(gaps, " rows for date gaps are missing, fill date gaps before proceeding.", "\n")
+    }
+  }
 })
 
 DataSheet$set("public", "visualize_element_na", function(element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = 1461, x_with_truth = NULL, measure = "percent") {
