@@ -54,14 +54,12 @@ Public Class ucrCalculator
     End Sub
 
     Public Sub InitialiseControls()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Factor", "Probability", "Dates", "Transform", "Wakefield", "Circular", "hydroGOF"}) ' "Rows" is a temp. name
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
 
         clsHelp.SetPackageName("utils")
         clsHelp.SetRCommand("help")
-        cmdDoy.Enabled = False ' temp
-        cmdDek.Enabled = False ' temp
         'Temp disabled::Needs discussions to see if they are needed
         cmdAny.Enabled = False
         cmdAll.Enabled = False
@@ -381,7 +379,7 @@ Public Class ucrCalculator
                 grpHydroGOF.Visible = False
                 iHelpCalcID = 120
                 Me.Size = New Size(iBasicWidth * 1.57, iBaseHeight)
-            Case "Dates"
+            Case "Dates/Times"
                 grpDates.Visible = True
                 grpProbabilty.Visible = False
                 grpStrings.Visible = False
@@ -1094,16 +1092,16 @@ Public Class ucrCalculator
     End Sub
     Private Sub cmdMinutes_Click(sender As Object, e As EventArgs) Handles cmdminutes.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::min(x = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::minute(x = )", 1)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::min()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::minute()", 1)
         End If
     End Sub
     Private Sub cmdSec_Click(sender As Object, e As EventArgs) Handles cmdSec.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::sec(x = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::second(x = )", 1)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::sec()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::second()", 1)
         End If
     End Sub
     Private Sub cmdAm_Click(sender As Object, e As EventArgs) Handles cmdAm.Click
@@ -1126,14 +1124,6 @@ Public Class ucrCalculator
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::quarter()", 1)
         End If
-    End Sub
-
-    Private Sub cmdDoy_Click(sender As Object, e As EventArgs) Handles cmdDoy.Click
-
-    End Sub
-
-    Private Sub cmdDek_Click(sender As Object, e As EventArgs) Handles cmdDek.Click
-
     End Sub
 
     Private Sub cmdBrackets_Click(sender As Object, e As EventArgs) Handles cmdBrackets.Click
