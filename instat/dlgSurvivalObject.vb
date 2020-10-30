@@ -67,7 +67,8 @@ Public Class dlgSurvivalObject
         'ucrReceiver:
         ' ENTRY: `time` argument only. Only visible for c, i, i2, ms
         ucrReceiverEntry.SetParameter(New RParameter("time", 0))
-        ucrReceiverEntry.SetParameterIsRFunction()
+        ucrReceiverEntry.SetParameterIsString()
+        ucrReceiverEntry.bWithQuotes = False
         ucrReceiverEntry.Selector = ucrSelectorFitObject
         ' allows numeric or logical, but not factor
         ucrReceiverEntry.SetIncludedDataTypes({"numeric"})
@@ -76,14 +77,16 @@ Public Class dlgSurvivalObject
         ' EXIT: `time` arg for r, l
         '       `time2` for c, i, i2, ms
         ucrReceiverExit.SetParameter(New RParameter("time", 1))
-        ucrReceiverExit.SetParameterIsRFunction()
+        ucrReceiverExit.SetParameterIsString()
+        ucrReceiverExit.bWithQuotes = False
         ucrReceiverExit.Selector = ucrSelectorFitObject
         ucrReceiverExit.SetMeAsReceiver()
         ucrReceiverExit.SetIncludedDataTypes({"numeric"})
         ucrReceiverExit.SetLinkedDisplayControl(lblExitTime2)
 
         ucrReceiverEvent.SetParameter(New RParameter("event", 0, bNewIncludeArgumentName:=False)) ' to left of %in% operator
-        ucrReceiverEvent.SetParameterIsRFunction()
+        ucrReceiverEvent.SetParameterIsString()
+        ucrReceiverEvent.bWithQuotes = False
         ucrReceiverEvent.Selector = ucrSelectorFitObject
         ucrReceiverEvent.SetIncludedDataTypes({"numeric", "factor"}, bStrict:=True)
         ucrReceiverEvent.SetLinkedDisplayControl(lblEvent)
@@ -278,6 +281,7 @@ Public Class dlgSurvivalObject
                 clsStartEndFunction.AddParameter("event", clsROperatorParameter:=clsModifyOperation, iPosition:=2)
 
                 If ucrReceiverEvent.strCurrDataType = "factor" Then
+                    Me.Size = New System.Drawing.Size(662, Me.Height)
                     clsModifyOperation.ClearParameters()
                     clsModifyOperation.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, bIncludeArgumentName:=False, iPosition:=0)
                     clsModifyOperation.AddParameter("factor_value", ucrModifyEventFactor.GetSelectedLevels(), bIncludeArgumentName:=False, iPosition:=1)
@@ -287,6 +291,7 @@ Public Class dlgSurvivalObject
                     ucrModifyEventLogical.Visible = False
 
                 Else
+                    Me.Size = New System.Drawing.Size(458, Me.Height)
                     clsModifyOperation.RemoveParameterByName("factor_value")
                     clsModifyOperation.AddParameter(clsRFunctionParameter:=clsCFunction, iPosition:=1)
 
@@ -306,6 +311,7 @@ Public Class dlgSurvivalObject
                     End If
                 End If
             Else
+                Me.Size = New System.Drawing.Size(458, Me.Height)
                 clsRightLeftFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
                 clsStartEndFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
                 ucrModifyEventNumeric.Visible = False
@@ -314,6 +320,7 @@ Public Class dlgSurvivalObject
             End If
 
         Else 'if interval or interval2 checked
+            Me.Size = New System.Drawing.Size(458, Me.Height)
             clsRightLeftFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
             clsStartEndFunction.AddParameter("event", clsRFunctionParameter:=ucrReceiverEvent.GetVariables, iPosition:=2)
             ucrChkModifyEvent.Visible = False

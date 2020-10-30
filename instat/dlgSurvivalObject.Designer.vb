@@ -37,7 +37,6 @@ Partial Class dlgSurvivalObject
         Me.ucrModifyEventLogical = New instat.ucrInputComboBox()
         Me.ucrModifyEventNumeric = New instat.ucrInputTextBox()
         Me.ucrModifyEventFactor = New instat.ucrFactor()
-        Me.ucrChkModifyEvent = New instat.ucrCheck()
         Me.ucrInputOrigin = New instat.ucrInputTextBox()
         Me.ucrPnlType = New instat.UcrPanel()
         Me.ucrSaveObject = New instat.ucrSave()
@@ -46,6 +45,7 @@ Partial Class dlgSurvivalObject
         Me.ucrReceiverEntry = New instat.ucrReceiverSingle()
         Me.ucrSelectorFitObject = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkModifyEvent = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblEntryTime
@@ -74,7 +74,7 @@ Partial Class dlgSurvivalObject
         '
         'lblOrigin
         '
-        Me.lblOrigin.Location = New System.Drawing.Point(281, 215)
+        Me.lblOrigin.Location = New System.Drawing.Point(283, 248)
         Me.lblOrigin.Name = "lblOrigin"
         Me.lblOrigin.Size = New System.Drawing.Size(41, 19)
         Me.lblOrigin.TabIndex = 19
@@ -88,7 +88,7 @@ Partial Class dlgSurvivalObject
         Me.rdoRight.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRight.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRight.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRight.Location = New System.Drawing.Point(7, 14)
+        Me.rdoRight.Location = New System.Drawing.Point(13, 14)
         Me.rdoRight.Name = "rdoRight"
         Me.rdoRight.Size = New System.Drawing.Size(71, 27)
         Me.rdoRight.TabIndex = 1
@@ -105,7 +105,7 @@ Partial Class dlgSurvivalObject
         Me.rdoLeft.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLeft.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoLeft.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoLeft.Location = New System.Drawing.Point(76, 14)
+        Me.rdoLeft.Location = New System.Drawing.Point(82, 14)
         Me.rdoLeft.Name = "rdoLeft"
         Me.rdoLeft.Size = New System.Drawing.Size(71, 27)
         Me.rdoLeft.TabIndex = 2
@@ -122,7 +122,7 @@ Partial Class dlgSurvivalObject
         Me.rdoInterval.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoInterval.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoInterval.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoInterval.Location = New System.Drawing.Point(214, 14)
+        Me.rdoInterval.Location = New System.Drawing.Point(220, 14)
         Me.rdoInterval.Name = "rdoInterval"
         Me.rdoInterval.Size = New System.Drawing.Size(71, 27)
         Me.rdoInterval.TabIndex = 4
@@ -139,7 +139,7 @@ Partial Class dlgSurvivalObject
         Me.rdoCounting.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCounting.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCounting.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCounting.Location = New System.Drawing.Point(145, 14)
+        Me.rdoCounting.Location = New System.Drawing.Point(151, 14)
         Me.rdoCounting.Name = "rdoCounting"
         Me.rdoCounting.Size = New System.Drawing.Size(71, 27)
         Me.rdoCounting.TabIndex = 3
@@ -156,7 +156,7 @@ Partial Class dlgSurvivalObject
         Me.rdoMstate.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMstate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoMstate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoMstate.Location = New System.Drawing.Point(352, 14)
+        Me.rdoMstate.Location = New System.Drawing.Point(358, 14)
         Me.rdoMstate.Name = "rdoMstate"
         Me.rdoMstate.Size = New System.Drawing.Size(71, 27)
         Me.rdoMstate.TabIndex = 6
@@ -173,7 +173,7 @@ Partial Class dlgSurvivalObject
         Me.rdoInterval2.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoInterval2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoInterval2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoInterval2.Location = New System.Drawing.Point(283, 14)
+        Me.rdoInterval2.Location = New System.Drawing.Point(289, 14)
         Me.rdoInterval2.Name = "rdoInterval2"
         Me.rdoInterval2.Size = New System.Drawing.Size(71, 27)
         Me.rdoInterval2.TabIndex = 5
@@ -187,9 +187,9 @@ Partial Class dlgSurvivalObject
         Me.ucrModifyEventLogical.AddQuotesIfUnrecognised = True
         Me.ucrModifyEventLogical.GetSetSelectedIndex = -1
         Me.ucrModifyEventLogical.IsReadOnly = False
-        Me.ucrModifyEventLogical.Location = New System.Drawing.Point(443, 193)
+        Me.ucrModifyEventLogical.Location = New System.Drawing.Point(281, 215)
         Me.ucrModifyEventLogical.Name = "ucrModifyEventLogical"
-        Me.ucrModifyEventLogical.Size = New System.Drawing.Size(127, 21)
+        Me.ucrModifyEventLogical.Size = New System.Drawing.Size(120, 21)
         Me.ucrModifyEventLogical.TabIndex = 16
         '
         'ucrModifyEventNumeric
@@ -197,9 +197,9 @@ Partial Class dlgSurvivalObject
         Me.ucrModifyEventNumeric.AddQuotesIfUnrecognised = True
         Me.ucrModifyEventNumeric.IsMultiline = False
         Me.ucrModifyEventNumeric.IsReadOnly = False
-        Me.ucrModifyEventNumeric.Location = New System.Drawing.Point(443, 193)
+        Me.ucrModifyEventNumeric.Location = New System.Drawing.Point(281, 215)
         Me.ucrModifyEventNumeric.Name = "ucrModifyEventNumeric"
-        Me.ucrModifyEventNumeric.Size = New System.Drawing.Size(127, 26)
+        Me.ucrModifyEventNumeric.Size = New System.Drawing.Size(120, 26)
         Me.ucrModifyEventNumeric.TabIndex = 17
         '
         'ucrModifyEventFactor
@@ -207,34 +207,26 @@ Partial Class dlgSurvivalObject
         Me.ucrModifyEventFactor.AutoSize = True
         Me.ucrModifyEventFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrModifyEventFactor.clsReceiver = Nothing
-        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(443, 193)
+        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(443, 194)
         Me.ucrModifyEventFactor.Name = "ucrModifyEventFactor"
         Me.ucrModifyEventFactor.shtCurrSheet = Nothing
-        Me.ucrModifyEventFactor.Size = New System.Drawing.Size(193, 112)
+        Me.ucrModifyEventFactor.Size = New System.Drawing.Size(193, 135)
         Me.ucrModifyEventFactor.TabIndex = 18
         Me.ucrModifyEventFactor.ucrChkLevels = Nothing
-        '
-        'ucrChkModifyEvent
-        '
-        Me.ucrChkModifyEvent.Checked = False
-        Me.ucrChkModifyEvent.Location = New System.Drawing.Point(281, 193)
-        Me.ucrChkModifyEvent.Name = "ucrChkModifyEvent"
-        Me.ucrChkModifyEvent.Size = New System.Drawing.Size(163, 20)
-        Me.ucrChkModifyEvent.TabIndex = 14
         '
         'ucrInputOrigin
         '
         Me.ucrInputOrigin.AddQuotesIfUnrecognised = True
         Me.ucrInputOrigin.IsMultiline = False
         Me.ucrInputOrigin.IsReadOnly = False
-        Me.ucrInputOrigin.Location = New System.Drawing.Point(281, 232)
+        Me.ucrInputOrigin.Location = New System.Drawing.Point(322, 247)
         Me.ucrInputOrigin.Name = "ucrInputOrigin"
         Me.ucrInputOrigin.Size = New System.Drawing.Size(79, 21)
         Me.ucrInputOrigin.TabIndex = 20
         '
         'ucrPnlType
         '
-        Me.ucrPnlType.Location = New System.Drawing.Point(0, 10)
+        Me.ucrPnlType.Location = New System.Drawing.Point(6, 10)
         Me.ucrPnlType.Name = "ucrPnlType"
         Me.ucrPnlType.Size = New System.Drawing.Size(437, 36)
         Me.ucrPnlType.TabIndex = 0
@@ -301,11 +293,19 @@ Partial Class dlgSurvivalObject
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 22
         '
+        'ucrChkModifyEvent
+        '
+        Me.ucrChkModifyEvent.Checked = False
+        Me.ucrChkModifyEvent.Location = New System.Drawing.Point(281, 193)
+        Me.ucrChkModifyEvent.Name = "ucrChkModifyEvent"
+        Me.ucrChkModifyEvent.Size = New System.Drawing.Size(163, 20)
+        Me.ucrChkModifyEvent.TabIndex = 14
+        '
         'dlgSurvivalObject
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(638, 335)
+        Me.ClientSize = New System.Drawing.Size(642, 335)
         Me.Controls.Add(Me.ucrModifyEventLogical)
         Me.Controls.Add(Me.ucrModifyEventNumeric)
         Me.Controls.Add(Me.ucrModifyEventFactor)
