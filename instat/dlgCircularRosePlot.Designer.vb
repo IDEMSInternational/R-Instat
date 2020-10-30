@@ -27,7 +27,7 @@ Partial Class dlgCircularRosePlot
         '
         'UcrButtons1
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(6, 238)
+        Me.UcrButtons1.Location = New System.Drawing.Point(6, 240)
         Me.UcrButtons1.Name = "UcrButtons1"
         Me.UcrButtons1.Size = New System.Drawing.Size(406, 52)
         Me.UcrButtons1.TabIndex = 0

@@ -27,7 +27,7 @@ Partial Class dlgCircularScatterPlot
         '
         'UcrButtons1
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(5, 237)
+        Me.UcrButtons1.Location = New System.Drawing.Point(5, 239)
         Me.UcrButtons1.Name = "UcrButtons1"
         Me.UcrButtons1.Size = New System.Drawing.Size(410, 52)
         Me.UcrButtons1.TabIndex = 0
