@@ -196,6 +196,24 @@
     <Compile Include="dlgCircular.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCircularDensityPlot.Designer.vb">
+      <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCircularDensityPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCircularRosePlot.Designer.vb">
+      <DependentUpon>dlgCircularRosePlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCircularRosePlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCircularScatterPlot.Designer.vb">
+      <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCircularScatterPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimsoftWizard.Designer.vb">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </Compile>
@@ -2610,6 +2628,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCircularDensityPlot.resx">
+      <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCircularRosePlot.resx">
+      <DependentUpon>dlgCircularRosePlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCircularScatterPlot.resx">
+      <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
