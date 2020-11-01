@@ -485,7 +485,7 @@ Public Class dlgInfillMissingValues
                     End Select
                 End If
             ElseIf rdoShow.Checked Then
-                    ucrChkAddLegend.Visible = True
+                ucrChkAddLegend.Visible = True
                 clsVisualizeElementNa.AddParameter("type", Chr(34) & "imputation" & Chr(34), iPosition:=8)
             End If
             cmdDisplayOptions.Visible = True
