@@ -1,56 +1,56 @@
 DataBook <- R6::R6Class("DataBook",
-                         public = list(
-                           initialize = function(data_tables = list(), instat_obj_metadata = list(), 
-                                                 data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
-                                                 data_tables_metadata = rep(list(list()),length(data_tables)),
-                                                 data_tables_filters = rep(list(list()),length(data_tables)),
-                                                 imported_from = as.list(rep("",length(data_tables))),
-                                                 messages=TRUE, convert=TRUE, create=TRUE)
-                           { 
-                             self$set_meta(instat_obj_metadata)
-                             self$set_objects(list())
-                             
-                             if (missing(data_tables) || length(data_tables) == 0) {
-                               self$set_data_objects(list())
-                             }
-                             
-                             else {
-                               self$import_data(data_tables=data_tables, data_tables_variables_metadata=data_tables_variables_metadata, 
-                                                data_tables_metadata=data_tables_metadata, 
-                                                imported_from=imported_from, messages=messages, convert=convert, create=create, data_tables_filters = data_tables_filters)
-                             }
-                             
-                             private$.data_sheets_changed <- FALSE
-                           }
-                         ),
-                         private = list(
-                           .data_sheets = list(),
-                           .metadata = list(),
-                           .objects = list(),
-                           .links = list(),
-                           .data_sheets_changed = FALSE,
-                           .database_connection = NULL,
-                           .last_graph = NULL
-                         ),
-                         active = list(
-                           data_objects_changed = function(new_value) {
-                             if(missing(new_value)) return(private$.data_sheets_changed)
-                             else {
-                               if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
-                               private$.data_sheets_changed <- new_value
-                               #TODO is this behaviour we want?
-                               invisible(sapply(self$get_data_objects(), function(x) x$data_changed <- new_value))
-                             }
-                           }
-                         )
+                        public = list(
+                          initialize = function(data_tables = list(), instat_obj_metadata = list(), 
+                                                data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
+                                                data_tables_metadata = rep(list(list()),length(data_tables)),
+                                                data_tables_filters = rep(list(list()),length(data_tables)),
+                                                imported_from = as.list(rep("",length(data_tables))),
+                                                messages=TRUE, convert=TRUE, create=TRUE)
+                          { 
+                            self$set_meta(instat_obj_metadata)
+                            self$set_objects(list())
+                            
+                            if (missing(data_tables) || length(data_tables) == 0) {
+                              self$set_data_objects(list())
+                            }
+                            
+                            else {
+                              self$import_data(data_tables=data_tables, data_tables_variables_metadata=data_tables_variables_metadata, 
+                                               data_tables_metadata=data_tables_metadata, 
+                                               imported_from=imported_from, messages=messages, convert=convert, create=create, data_tables_filters = data_tables_filters)
+                            }
+                            
+                            private$.data_sheets_changed <- FALSE
+                          }
+                        ),
+                        private = list(
+                          .data_sheets = list(),
+                          .metadata = list(),
+                          .objects = list(),
+                          .links = list(),
+                          .data_sheets_changed = FALSE,
+                          .database_connection = NULL,
+                          .last_graph = NULL
+                        ),
+                        active = list(
+                          data_objects_changed = function(new_value) {
+                            if(missing(new_value)) return(private$.data_sheets_changed)
+                            else {
+                              if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
+                              private$.data_sheets_changed <- new_value
+                              #TODO is this behaviour we want?
+                              invisible(sapply(self$get_data_objects(), function(x) x$data_changed <- new_value))
+                            }
+                          }
+                        )
 )
 
 DataBook$set("public", "import_data", function(data_tables = list(), data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
-                                                    data_tables_metadata = rep(list(list()),length(data_tables)),
-                                                    data_tables_filters = rep(list(list()),length(data_tables)),
-                                                    imported_from = as.list(rep("",length(data_tables))), 
-                                                    data_names = NULL,
-                                                    messages=TRUE, convert=TRUE, create=TRUE)
+                                               data_tables_metadata = rep(list(list()),length(data_tables)),
+                                               data_tables_filters = rep(list(list()),length(data_tables)),
+                                               imported_from = as.list(rep("",length(data_tables))), 
+                                               data_names = NULL,
+                                               messages=TRUE, convert=TRUE, create=TRUE)
 {
   if (missing(data_tables) || length(data_tables) == 0) {
     stop("No data found. No data objects can be created.")
@@ -94,12 +94,12 @@ DataBook$set("public", "import_data", function(data_tables = list(), data_tables
       }
       
       new_data = DataSheet$new(data=data_tables[[i]], data_name = curr_name,
-                                 variables_metadata = data_tables_variables_metadata[[i]],
-                                 metadata = data_tables_metadata[[i]], 
-                                 imported_from = imported_from[[i]], 
-                                 start_point = i, 
-                                 messages = messages, convert = convert, create = create, 
-                                 filters = data_tables_filters[[i]])
+                               variables_metadata = data_tables_variables_metadata[[i]],
+                               metadata = data_tables_metadata[[i]], 
+                               imported_from = imported_from[[i]], 
+                               start_point = i, 
+                               messages = messages, convert = convert, create = create, 
+                               filters = data_tables_filters[[i]])
       # Add this new data object to our list of data objects
       self$append_data_object(new_data$get_metadata(data_name_label), new_data)
     }
@@ -140,7 +140,7 @@ DataBook$set("public", "copy_data_object", function(data_name, new_name, filter_
 
 
 DataBook$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, overwrite_existing = FALSE, include_objects = TRUE,
-                                                   include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE)
+                                              include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE)
   # TODO add include_calcuations options
 {
   # 'instat_object' is previously used class name, some files may have this name.
@@ -1532,7 +1532,7 @@ DataBook$set("public", "has_database_connection", function() {
 )
 
 DataBook$set("public", "database_connect", function(dbname, user, host, port, drv = RMySQL::MySQL()) {
- password <- getPass::getPass(paste0(user, " password:"))
+  password <- getPass::getPass(paste0(user, " password:"))
   out <- NULL
   out <- DBI::dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
   if(!is.null(out)) {
@@ -1577,7 +1577,7 @@ DataBook$set("public", "import_from_climsoft", function(stations = c(), elements
     end_date <- format(end_date, format = "%Y-%m-%d")
     date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
   }
-
+  
   if (length(elements) > 0){
     my_elements = paste0("(", paste0(sprintf("'%s'", elements), collapse = ", "), ")")
     element_ids = DBI::dbGetQuery(con, paste0("SELECT elementID FROM obselement WHERE elementName in", my_elements,";"))
@@ -1592,7 +1592,7 @@ DataBook$set("public", "import_from_climsoft", function(stations = c(), elements
       my_stations = paste0("(", paste(as.character(unique(station_data$recordedFrom)), collapse=", "), ")")
       station_info <-  DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
     }
-
+    
     data_list <- list(station_info, station_data)
     names(data_list) = c("station_info","station_data")
   }
@@ -1687,7 +1687,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   rain_total_name <- "rain_total"
   
   is_station <- !missing(station)
-
+  
   if(missing(year)) stop("Year column must be specified.")
   if(!is_station) by <- year
   else by <- c(year, station)
@@ -1739,7 +1739,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
                        !! rlang::sym(end_day) := dplyr::first(!! rlang::sym(end_day)))
     df <- dplyr::left_join(df, season_data, by = by)
   }
-
+  
   # Plant day condition
   if(start_check) {
     df$plant_day_cond <- (df[[start_day]] <= df[[plant_day_name]])
@@ -1747,7 +1747,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   
   # Plant length condition
   df$length_cond <- (df[[plant_day_name]] + df[[plant_length_name]] <= df[[end_day]])
-
+  
   # Rain total condition
   df[["rain_total_actual"]] <- sapply(1:nrow(df), 
                                       function(x) {
@@ -1766,7 +1766,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   
   # All three conditions met
   df$overall_cond <- ((if(start_check) df$plant_day_cond else TRUE) & df$length_cond & df$rain_cond)
-
+  
   crops_name <- "crop_def"
   crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
   data_tables <- list(df)
@@ -2040,7 +2040,7 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     
     # This assumes stack_cols and stack_years are in the same order
     y$year <- plyr::mapvalues(y$year, stack_cols, stack_years)
-
+    
     # Replacing day 60 with 0 for non-leap years. This will result in NA dates.
     y$doy[(!lubridate::leap_year(y$year)) & y$doy == 60] <- 0
     y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] <- y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] - 1
@@ -2178,14 +2178,6 @@ DataBook$set("public","package_check", function(package) {
 }
 )
 
-DataBook$set("public", "patch_climate_element", function(data_name, date_col_name = "", var = "", vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name, station_col_name = station_col_name) {
-  self$get_data_objects(data_name)$patch_climate_element(date_col_name = date_col_name, var = var, vars = vars, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, column_name = column_name, station_col_name = station_col_name)
-})
-
-DataBook$set("public", "visualize_element_na", function(data_name, element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = interval_size, x_with_truth = NULL, measure = "percent") {
-  self$get_data_objects(data_name)$visualize_element_na(element_col_name = element_col_name, element_col_name_imputed = element_col_name_imputed, station_col_name = station_col_name, x_axis_labels_col_name = x_axis_labels_col_name, ncol = ncol, type = type, xlab = xlab, ylab = ylab, legend = legend, orientation = orientation, interval_size = interval_size, x_with_truth = x_with_truth, measure = measure)
-})
-  
 DataBook$set("public", "download_from_IRI", function(source, data, path = tempdir(), min_lon, max_lon, min_lat, max_lat, min_date, max_date, name, download_type = "Point", import = TRUE) {
   init_URL <- "https://iridl.ldeo.columbia.edu/SOURCES/"
   dim_x <- "X"
@@ -2338,4 +2330,12 @@ DataBook$set("public", "download_from_IRI", function(source, data, path = tempdi
   if (missing(path)) {
     file.remove(file_name)
   }
+})
+
+DataBook$set("public", "patch_climate_element", function(data_name, date_col_name = "", var = "", vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name, station_col_name = station_col_name) {
+  self$get_data_objects(data_name)$patch_climate_element(date_col_name = date_col_name, var = var, vars = vars, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, column_name = column_name, station_col_name = station_col_name)
+})
+
+DataBook$set("public", "visualize_element_na", function(data_name, element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = interval_size, x_with_truth = NULL, measure = "percent") {
+  self$get_data_objects(data_name)$visualize_element_na(element_col_name = element_col_name, element_col_name_imputed = element_col_name_imputed, station_col_name = station_col_name, x_axis_labels_col_name = x_axis_labels_col_name, ncol = ncol, type = type, xlab = xlab, ylab = ylab, legend = legend, orientation = orientation, interval_size = interval_size, x_with_truth = x_with_truth, measure = measure)
 })
