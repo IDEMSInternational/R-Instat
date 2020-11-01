@@ -256,6 +256,18 @@
     <Compile Include="dlgOtherRosePlots.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPasteNewColumns.Designer.vb">
+      <DependentUpon>dlgPasteNewColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPasteNewColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPasteNewDataFrame.Designer.vb">
+      <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPasteNewDataFrame.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgPolarAnnulus.Designer.vb">
       <DependentUpon>dlgPolarAnnulus.vb</DependentUpon>
     </Compile>
@@ -2659,6 +2671,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPasteNewColumns.resx">
+      <DependentUpon>dlgPasteNewColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPasteNewDataFrame.resx">
+      <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPolarAnnulus.resx">
       <DependentUpon>dlgPolarAnnulus.vb</DependentUpon>
