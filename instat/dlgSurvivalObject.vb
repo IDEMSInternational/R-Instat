@@ -106,13 +106,13 @@ Public Class dlgSurvivalObject
         ucrChkModifyEvent.SetDefaultState(False)
 
         'ucrInput
-        ucrModifyEventNumeric.SetParameter(New RParameter("x", bNewIncludeArgumentName:=False))
+        ucrModifyEventNumeric.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
         ucrModifyEventNumeric.SetValidationTypeAsNumericList(dcmMin:=Integer.MinValue,
                                                              dcmMax:=Integer.MaxValue)
         ucrModifyEventNumeric.AddQuotesIfUnrecognised = False
 
         'logical
-        ucrModifyEventLogical.SetParameter(New RParameter("z", bNewIncludeArgumentName:=False))
+        ucrModifyEventLogical.SetParameter(New RParameter("z", 0, bNewIncludeArgumentName:=False))
         Dim dctLogical As New Dictionary(Of String, String)
         dctLogical.Add("TRUE", "TRUE")
         dctLogical.Add("FALSE", "FALSE")
@@ -156,20 +156,17 @@ Public Class dlgSurvivalObject
         clsInterval2Function.SetPackageName("survival")
         clsInterval2Function.SetRCommand("Surv")
 
-        ' TODO If I check several options in the factor dlg, then it runs c(c())
         clsCFunction.SetRCommand("c")
 
         clsModifyOperation.SetOperation("%in%")
         clsModifyOperation.AddParameter(clsRFunctionParameter:=clsCFunction, iPosition:=1)
 
         clsDefaultFunction.SetRCommand("with")
-        clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsRightLeftFunction)
-        ' TODO fix up the set assign to as currently it is always running surv()
+        clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsRightLeftFunction, iPosition:=1)
         clsDefaultFunction.SetAssignTo(strTemp:="surv", strTempDataframe:=ucrSelectorFitObject.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempSurv:="surv", bAssignToIsPrefix:=True)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
 
-        SetBaseRFunction()
         ModifyOptions()
     End Sub
 
@@ -230,35 +227,31 @@ Public Class dlgSurvivalObject
         TestOkEnabled()
     End Sub
 
-    Private Sub SetBaseRFunction()
+    Private Sub SetBaseExpression()
         ' exp = clsRightLeftFunction if right or left censoring occurs
         ' otherwise exp = clsStartEndFunction if one of the other four rdos are selected
         If rdoRight.Checked OrElse rdoLeft.Checked Then
-            clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsRightLeftFunction)
+            clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsRightLeftFunction, iPosition:=1)
         ElseIf rdoCounting.Checked OrElse rdoInterval.Checked Then
-            clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsStartEndFunction)
+            clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsStartEndFunction, iPosition:=1)
         ElseIf rdoMstate.Checked Then
             If ucrReceiverEntry.IsEmpty() Then
                 ' if no entry time, then mstate reads the "Exit Time" receiver as time.
-                ' if there is entry time, mstate reads the "Exit Time" receiver as time2; "Entry Time" receiver as time.
-                clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsRightLeftFunction)
+                ' if there is entry time, mstate reads te "Exit Time" receiver as time2; "Entry Time" receiver as time.
+                clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsRightLeftFunction, iPosition:=1)
             Else
-                clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsStartEndFunction)
+                clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsStartEndFunction, iPosition:=1)
             End If
         Else
-            clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsInterval2Function)
+            clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsInterval2Function, iPosition:=1)
         End If
     End Sub
 
-    Private Sub SetReceivers()
-        If ucrSelectorFitObject.CurrentReceiver.Name Is "ucrReceiverEvent" Then
-            If (rdoInterval2.Checked) Then
-                ucrReceiverExit.SetMeAsReceiver()
-            End If
-        ElseIf ucrSelectorFitObject.CurrentReceiver.Name Is "ucrReceiverEntry" Then
-            If (rdoRight.Checked OrElse rdoLeft.Checked) Then
-                ucrReceiverExit.SetMeAsReceiver()
-            End If
+    Private Sub SetCurrentReceiver()
+        If (ucrSelectorFitObject.CurrentReceiver Is ucrReceiverEvent()) AndAlso (rdoInterval2.Checked) Then
+            ucrReceiverExit.SetMeAsReceiver()
+        ElseIf (ucrSelectorFitObject.CurrentReceiver Is ucrReceiverEntry()) AndAlso (rdoRight.Checked OrElse rdoLeft.Checked) Then
+            ucrReceiverExit.SetMeAsReceiver()
         End If
     End Sub
 
@@ -297,14 +290,14 @@ Public Class dlgSurvivalObject
 
                     If ucrReceiverEvent.strCurrDataType = "logical" Then
                         clsCFunction.RemoveParameterByName("x")
-                        clsCFunction.AddParameter("z", ucrModifyEventLogical.GetText(), bIncludeArgumentName:=False)
+                        clsCFunction.AddParameter("z", ucrModifyEventLogical.GetText(), bIncludeArgumentName:=False, iPosition:=0)
                         ucrModifyEventNumeric.Visible = False
                         ucrModifyEventFactor.Visible = False
                         ucrModifyEventLogical.Visible = True
 
                     Else '(if numeric or integer)
                         clsCFunction.RemoveParameterByName("z")
-                        clsCFunction.AddParameter("x", ucrModifyEventNumeric.GetText(), bIncludeArgumentName:=False)
+                        clsCFunction.AddParameter("x", ucrModifyEventNumeric.GetText(), bIncludeArgumentName:=False, iPosition:=0)
                         ucrModifyEventNumeric.Visible = True
                         ucrModifyEventFactor.Visible = False
                         ucrModifyEventLogical.Visible = False
@@ -331,14 +324,12 @@ Public Class dlgSurvivalObject
     End Sub
 
     Private Sub ucrPnl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlContentsChanged
+        ucrReceiverEvent.RemoveIncludedMetadataProperty("class")
         If rdoRight.Checked OrElse rdoLeft.Checked Then
-            ucrReceiverEvent.RemoveIncludedMetadataProperty("class")
             ucrReceiverEvent.SetIncludedDataTypes({"numeric", "logical"}, bStrict:=True)
         ElseIf rdoInterval.Checked Then
-            ucrReceiverEvent.RemoveIncludedMetadataProperty("class")
             ucrReceiverEvent.SetIncludedDataTypes({"numeric"}, bStrict:=True)
         Else
-            ucrReceiverEvent.RemoveIncludedMetadataProperty("class")
             ucrReceiverEvent.SetIncludedDataTypes({"numeric", "factor", "logical"})
         End If
 
@@ -347,39 +338,31 @@ Public Class dlgSurvivalObject
             If rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoInterval.Checked Then
                 ucrReceiverEvent.Clear()
             End If
-        End If
-
-        ' if the variable in the event receiver is logical and you click rdoInterval, clear it.
-        If ucrReceiverEvent.strCurrDataType = "logical" Then
+            ' if the variable in the event receiver is logical and you click rdoInterval, clear it.
+        ElseIf ucrReceiverEvent.strCurrDataType = "logical" Then
             If rdoInterval.Checked Then
                 ucrReceiverEvent.Clear()
             End If
         End If
-        SetReceivers()
+        SetCurrentReceiver()
         ModifyOptions()
-        SetBaseRFunction()
+        SetBaseExpression()
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSelectorFitObject_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFitObject.ControlContentsChanged
-        SetReceivers()
+    Private Sub ucrSelectorFitObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFitObject.ControlValueChanged
+        SetCurrentReceiver()
     End Sub
 
-    Private Sub ucrModifyEventFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrModifyEventFactor.ControlValueChanged, ucrModifyEventLogical.ControlValueChanged
+    Private Sub ucrModifyEventFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrModifyEventFactor.ControlValueChanged, ucrModifyEventLogical.ControlValueChanged, ucrChkModifyEvent.ControlValueChanged, ucrReceiverEvent.ControlValueChanged
         ModifyOptions()
     End Sub
 
-    Private Sub ucrChkModifyEvent_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkModifyEvent.ControlContentsChanged, ucrReceiverEvent.ControlContentsChanged
-        TestOkEnabled()
-        ModifyOptions()
+    Private Sub ucrReceiverEntryControl(ucrChangedControl As ucrCore) Handles ucrReceiverEntry.ControlValueChanged
+        SetBaseExpression()
     End Sub
 
-    Private Sub ucrReceiverEntryControl(ucrChangedControl As ucrCore) Handles ucrReceiverEntry.ControlContentsChanged
-        SetBaseRFunction()
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrCoreControls(ucrChangedControl As ucrCore) Handles ucrReceiverExit.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged, ucrModifyEventFactor.ControlContentsChanged, ucrModifyEventNumeric.ControlContentsChanged
+    Private Sub ucrCoreControls(ucrChangedControl As ucrCore) Handles ucrReceiverExit.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged, ucrModifyEventFactor.ControlContentsChanged, ucrModifyEventNumeric.ControlContentsChanged, ucrReceiverEntry.ControlContentsChanged, ucrChkModifyEvent.ControlContentsChanged, ucrReceiverEvent.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
