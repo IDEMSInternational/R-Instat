@@ -323,7 +323,7 @@ Public Class dlgSurvivalObject
         End If
     End Sub
 
-    Private Sub ucrPnl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlContentsChanged
+    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlValueChanged
         ucrReceiverEvent.RemoveIncludedMetadataProperty("class")
         If rdoRight.Checked OrElse rdoLeft.Checked Then
             ucrReceiverEvent.SetIncludedDataTypes({"numeric", "logical"}, bStrict:=True)
@@ -334,20 +334,15 @@ Public Class dlgSurvivalObject
         End If
 
         ' if the variable in the event receiver is factor variable, if you click left/right/i, clear it.
-        If ucrReceiverEvent.strCurrDataType = "factor" Then
-            If rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoInterval.Checked Then
-                ucrReceiverEvent.Clear()
-            End If
+        If ucrReceiverEvent.strCurrDataType = "factor" AndAlso (rdoRight.Checked OrElse rdoLeft.Checked OrElse rdoInterval.Checked) Then
+            ucrReceiverEvent.Clear()
             ' if the variable in the event receiver is logical and you click rdoInterval, clear it.
-        ElseIf ucrReceiverEvent.strCurrDataType = "logical" Then
-            If rdoInterval.Checked Then
-                ucrReceiverEvent.Clear()
-            End If
+        ElseIf ucrReceiverEvent.strCurrDataType = "logical" AndAlso rdoInterval.Checked Then
+            ucrReceiverEvent.Clear()
         End If
         SetCurrentReceiver()
         ModifyOptions()
         SetBaseExpression()
-        TestOkEnabled()
     End Sub
 
     Private Sub ucrSelectorFitObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFitObject.ControlValueChanged
@@ -362,7 +357,7 @@ Public Class dlgSurvivalObject
         SetBaseExpression()
     End Sub
 
-    Private Sub ucrCoreControls(ucrChangedControl As ucrCore) Handles ucrReceiverExit.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged, ucrModifyEventFactor.ControlContentsChanged, ucrModifyEventNumeric.ControlContentsChanged, ucrReceiverEntry.ControlContentsChanged, ucrChkModifyEvent.ControlContentsChanged, ucrReceiverEvent.ControlContentsChanged
+    Private Sub ucrCoreControls(ucrChangedControl As ucrCore) Handles ucrReceiverExit.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged, ucrModifyEventFactor.ControlContentsChanged, ucrModifyEventNumeric.ControlContentsChanged, ucrReceiverEntry.ControlContentsChanged, ucrChkModifyEvent.ControlContentsChanged, ucrReceiverEvent.ControlContentsChanged, ucrPnlType.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
