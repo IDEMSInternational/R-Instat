@@ -159,7 +159,7 @@ Public Class dlgSurvivalObject
         clsCFunction.SetRCommand("c")
 
         clsModifyOperation.SetOperation("%in%")
-        clsModifyOperation.AddParameter(clsRFunctionParameter:=clsCFunction, iPosition:=1)
+        clsModifyOperation.AddParameter("c_function", clsRFunctionParameter:=clsCFunction, iPosition:=1)
 
         clsDefaultFunction.SetRCommand("with")
         clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsRightLeftFunction, iPosition:=1)
@@ -286,7 +286,7 @@ Public Class dlgSurvivalObject
                 Else
                     Me.Size = New System.Drawing.Size(458, Me.Height)
                     clsModifyOperation.RemoveParameterByName("factor_value")
-                    clsModifyOperation.AddParameter(clsRFunctionParameter:=clsCFunction, iPosition:=1)
+                    clsModifyOperation.AddParameter("c_function", clsRFunctionParameter:=clsCFunction, iPosition:=1)
 
                     If ucrReceiverEvent.strCurrDataType = "logical" Then
                         clsCFunction.RemoveParameterByName("x")
