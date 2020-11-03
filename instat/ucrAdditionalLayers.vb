@@ -163,7 +163,7 @@ Public Class ucrAdditionalLayers
             End If
 
             'Warning: sdgLayerOptions should not be setup using dlgGeneralForGraphics' fields !! These fields should be given through to the ucrAdditionalLayers (which should have all these) 
-            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsSelectedGeomFunction, clsNewGlobalAesFunc:=clsGlobalAesFunction, clsNewLocalAes:=clsLocalAes, bFixGeom:=True, strDataFrame:=strGlobalDataFrame, bApplyAesGlobally:=False, bReset:=False, iTabToDisplay:=0)
+            sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsGgplotFunction, clsNewGeomFunc:=clsSelectedGeomFunction, clsNewGlobalAesFunc:=clsGlobalAesFunction, clsNewLocalAes:=clsLocalAes, bFixGeom:=True, strDataFrame:=strGlobalDataFrame, bApplyAesGlobally:=False, bReset:=True, iTabToDisplay:=0)
             'It has been chosen to fix the value of bApplyAesGlobally to False as when a Layer is editted, the choice to apply the Aes globally should be reconsidered no matter what it has been during last edit.
             ParentForm.SendToBack() 'Otherwise sdgLayerOptions appears behind sdgPLotOptions
             sdgLayerOptions.ShowDialog()
