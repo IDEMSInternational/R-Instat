@@ -52,46 +52,62 @@ Public Class dlgTidyDailyData
         ucrPnlReshapeClimaticData.AddRadioButton(rdoMonth)
         ucrPnlReshapeClimaticData.AddRadioButton(rdoDay)
 
+        ttReshapeType.SetToolTip(rdoYear, "One column for each year")
+        ttReshapeType.SetToolTip(rdoMonth, "One column for each month (12)")
+        ttReshapeType.SetToolTip(rdoDay, "One column for each day in month (31), or alternative value/flag columns for each day in month (62)")
+
         ucrSelectorTidyDailyData.SetParameter(New RParameter("x", 0))
         ucrSelectorTidyDailyData.SetParameterIsrfunction()
 
-
         ucrReceiverStation.Selector = ucrSelectorTidyDailyData
-        ucrReceiverMultipleStack.Selector = ucrSelectorTidyDailyData
-        ucrReceiverElement.Selector = ucrSelectorTidyDailyData
-
-        ucrReceiverYear.Selector = ucrSelectorTidyDailyData
-        ucrReceiverMonth.Selector = ucrSelectorTidyDailyData
-        ucrReceiverDayofMonth.Selector = ucrSelectorTidyDailyData
-
-        ucrReceiverMultipleStack.SetParameter(New RParameter("stack_cols", 2))
-        ucrReceiverMultipleStack.SetParameterIsString()
-
-
         ucrReceiverStation.SetParameter(New RParameter("station", 6))
         ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.bExcludeFromSelector = True
+        ucrReceiverStation.SetLinkedDisplayControl(lblStation)
 
+        ucrReceiverMultipleStack.Selector = ucrSelectorTidyDailyData
+        ucrReceiverMultipleStack.SetParameter(New RParameter("stack_cols", 2))
+        ucrReceiverMultipleStack.SetParameterIsString()
+        ucrReceiverMultipleStack.bExcludeFromSelector = True
+
+        ucrReceiverElement.Selector = ucrSelectorTidyDailyData
         ucrReceiverElement.SetParameter(New RParameter("element", 7))
         ucrReceiverElement.SetParameterIsString()
+        ucrReceiverElement.bExcludeFromSelector = True
+        ucrReceiverElement.SetLinkedDisplayControl(lblMultipleElement)
 
         ucrTextBoxElementName.SetParameter(New RParameter("element_name", 8))
         ucrTextBoxElementName.SetRDefault(Chr(34) & "value" & Chr(34))
         ucrTextBoxElementName.SetValidationTypeAsRVariable()
+        ucrTextBoxElementName.SetLinkedDisplayControl(lblElementName)
+
+        ucrChkUnstackElements.SetText("Unstack elements")
+        ucrChkUnstackElements.SetParameter(New RParameter("unstack_elements", 12), bNewChangeParameterValue:=True)
+        ucrChkUnstackElements.SetRDefault("TRUE")
 
         'rdoYear
-        'TODO; Receivers for Station, Month and Day might be added later for the "Year Columns" format.
+        'TODO Receivers for Station, Month and Day might be added later for the "Year Columns" format but not currently needed from the "Instat" format.
 
         'rdoMonth
+        ucrReceiverYear.Selector = ucrSelectorTidyDailyData
         ucrReceiverYear.SetParameter(New RParameter("year", 5))
         ucrReceiverYear.SetParameterIsString()
+        ucrReceiverYear.bExcludeFromSelector = True
+        ucrReceiverYear.SetLinkedDisplayControl(lblYear)
 
+        ucrReceiverDayofMonth.Selector = ucrSelectorTidyDailyData
         ucrReceiverDayofMonth.SetParameter(New RParameter("day", 3))
         ucrReceiverDayofMonth.SetParameterIsString()
+        ucrReceiverDayofMonth.bExcludeFromSelector = True
+        ucrReceiverDayofMonth.SetLinkedDisplayControl(lblDayofMonth)
 
         'rdoDay
 
+        ucrReceiverMonth.Selector = ucrSelectorTidyDailyData
         ucrReceiverMonth.SetParameter(New RParameter("month", 4))
         ucrReceiverMonth.SetParameterIsString()
+        ucrReceiverMonth.bExcludeFromSelector = True
+        ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
 
         'Checkboxes
         ucrChkIgnoreInvalid.SetParameter(New RParameter("ignore_invalid", 9))
@@ -113,16 +129,6 @@ Public Class dlgTidyDailyData
         ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoYear, "format", Chr(34) & "years" & Chr(34))
         ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoMonth, "format", Chr(34) & "months" & Chr(34))
         ucrPnlReshapeClimaticData.AddParameterValuesCondition(rdoDay, "format", Chr(34) & "days" & Chr(34))
-
-        ucrReceiverStation.SetLinkedDisplayControl(lblStation)
-
-        ucrReceiverYear.SetLinkedDisplayControl(lblYear)
-        ucrReceiverDayofMonth.SetLinkedDisplayControl(lblDayofMonth)
-
-        ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
-
-        ucrReceiverElement.SetLinkedDisplayControl(lblMultipleElement)
-        ucrTextBoxElementName.SetLinkedDisplayControl(lblElementName)
 
         ucrInputNewDataFrame.SetParameter(New RParameter("new_name", iNewPosition:=12))
         ucrInputNewDataFrame.SetDefaultTypeAsDataFrame()
@@ -205,10 +211,13 @@ Public Class dlgTidyDailyData
     Private Sub ColumnstoStackText()
         If rdoYear.Checked Then
             lblColumnstoStack.Text = "Year Columns:"
+            ttReshapeType.SetToolTip(lblColumnstoStack, ttReshapeType.GetToolTip(rdoYear))
         ElseIf rdoMonth.Checked Then
             lblColumnstoStack.Text = "Month Columns (12):"
+            ttReshapeType.SetToolTip(lblColumnstoStack, ttReshapeType.GetToolTip(rdoMonth))
         Else
-            lblColumnstoStack.Text = "Day Columns (31):"
+            lblColumnstoStack.Text = "Day Columns (31/62):"
+            ttReshapeType.SetToolTip(lblColumnstoStack, ttReshapeType.GetToolTip(rdoDay))
         End If
     End Sub
 
@@ -228,9 +237,11 @@ Public Class dlgTidyDailyData
         If Not ucrReceiverElement.IsEmpty Then
             clsTidyClimaticFunction.RemoveParameterByName("element_name")
             ucrTextBoxElementName.Enabled = False
+            ucrChkUnstackElements.Visible = True
         Else
             clsTidyClimaticFunction.AddParameter("element_name", Chr(34) & ucrTextBoxElementName.GetText & Chr(34), iPosition:=8)
             ucrTextBoxElementName.Enabled = True
+            ucrChkUnstackElements.Visible = False
         End If
     End Sub
 
@@ -254,4 +265,7 @@ Public Class dlgTidyDailyData
         ElementAddRemoveParam()
     End Sub
 
+    Private Sub ucrReceiverMultipleStack_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStack.ControlValueChanged
+        lblNColumns.Text = "(" & ucrReceiverMultipleStack.lstSelectedVariables.Items.Count & ")"
+    End Sub
 End Class
