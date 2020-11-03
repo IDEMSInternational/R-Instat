@@ -844,25 +844,43 @@ DataSheet$set("public", "replace_value_in_data", function(col_names, rows, old_v
 }
 )
 
+#reads passed clipboard data and saves it to data frame
 DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_pos = 1, first_clip_row_is_header = FALSE, clip_board_text) {
-  #reads data from clipboard and saves it to selected columns
+
   #get the clipboard text contents as a data frame
   clip_tbl <- clipr::read_clip_tbl(x = clip_board_text, header = first_clip_row_is_header)
+  #get the selected data frame
   current_tbl <- self$get_data_frame(use_current_filter = FALSE)
+  
+  #check if copied data rows are more than current data rows
+  if( nrow(clip_tbl) > nrow(current_tbl) ){
+	stop(paste("rows copied cannot be more than number of rows in the data frame.",
+             "Current data frame rows:", nrow(current_tbl), ". Copied rows:", nrow(clip_tbl)) )
+  }
 
-  #check if number of copied columns and selected columns are equal
+  #if column names are mising then just add the clip data as new columns and quit function
+  if( missing(col_names) ){
+      #append missing values if rows are less than the selected data frame. 
+	  #new column rows should be equal to existing column rows
+      if( nrow(clip_tbl) < nrow(current_tbl) ){
+	     empty_values_df <- data.frame(data = matrix(data = NA, nrow = ( nrow(current_tbl) - nrow(clip_tbl) ), ncol = ncol(clip_tbl) ))
+		 names(empty_values_df) <- names(clip_tbl)
+		 clip_tbl <- rbind(clip_tbl, empty_values_df)
+	  }
+      new_col_names <- colnames(clip_tbl)
+	  for(index in seq_along(new_col_names)){
+	      self$add_columns_to_data(col_name = new_col_names[index], col_data = clip_tbl[, index])
+	  }
+	  return()
+  }
+
+  #if column names are not missing, check if number of copied columns and selected columns are equal
   if(ncol(clip_tbl) != length(col_names)){
     stop(paste("number of columns are not the same.",
              "Selected columns:", length(col_names), ". Copied columns:", ncol(clip_tbl)) )
   }
 
-  #check if copied data rows are more than current data rows
-  if( nrow(clip_tbl) > nrow(current_tbl)  ){
-	stop(paste("rows copied cannot be more than number of rows in the data frame.",
-             "Current data frame rows:", nrow(current_tbl), ". Copied rows:", nrow(clip_tbl)) )
-  } 
-
-  #check copied data integrity
+  #check copied data integrity in regards to columns that exist in the data frame
   for(index in seq_along(col_names)){
      col_data <- current_tbl[, col_names[index]]
 	 #get column type of column from the current table using column name
