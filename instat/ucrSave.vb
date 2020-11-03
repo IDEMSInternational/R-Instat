@@ -882,8 +882,8 @@ Public Class ucrSave
     ''' <summary>   Updates the control's R command's column position variables.
     '''             These variables specify the position of the new column in the data frame 
     '''             (start, end or before/after a specified column).<para>
-    '''             This subroutine is called automatically when the receiver (specifying a column name) linked to clsColPosFunction
-    '''             this control changes. </para><para>
+    '''             This subroutine is called automatically when the receiver (specifying a column name) linked to 
+    '''             clsColPosFunction changes. </para><para>
     '''             If the save object is not a column then this function does nothing.</para><para>
     '''             If the user has selected a column in the linked receiver, then sets the 
     '''             parameters to ensure that the new column is added directly after the receiver 
