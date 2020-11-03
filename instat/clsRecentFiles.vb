@@ -137,7 +137,7 @@ Public Class clsRecentFiles
             End If
         Next
 
-        'the add and displays menu items (_in reverse order) for dialogs
+        'then add and display menu items (in reverse order) for dialogs
         For icounter As Integer = lstRecentDialogs.Count - 1 To 0 Step -1
             'creates new toolstripitem, displaying name of the dialog
             Dim clsItem As New ToolStripMenuItem(lstRecentDialogs(icounter).Text)
