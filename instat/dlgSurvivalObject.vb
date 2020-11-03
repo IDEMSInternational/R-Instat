@@ -97,11 +97,10 @@ Public Class dlgSurvivalObject
         ucrInputOrigin.SetValidationTypeAsNumeric(dcmMin:=Integer.MinValue,
                                                   dcmMax:=Integer.MaxValue)
         ucrInputOrigin.AddQuotesIfUnrecognised = False
-        ucrInputOrigin.SetRDefault(0)
+        ucrInputOrigin.SetRDefault("0")
 
         'ucrChk
         ucrChkModifyEvent.SetText("Modify Event When Value is")
-        'ucrReceiverEvent.AddToLinkedControls(ucrModifyEventNumeric, {"numeric"}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkModifyEvent.AddParameterIsROperatorCondition(True, "%in%", True)
         ucrChkModifyEvent.SetDefaultState(False)
 
@@ -176,9 +175,8 @@ Public Class dlgSurvivalObject
         ucrPnlType.AddAdditionalCodeParameterPair(clsStartEndFunction, New RParameter("type", 3), iAdditionalPairNo:=1)
         ucrPnlType.AddAdditionalCodeParameterPair(clsInterval2Function, New RParameter("type", 3), iAdditionalPairNo:=2)
         ucrReceiverEntry.AddAdditionalCodeParameterPair(clsInterval2Function, New RParameter("time", 2), iAdditionalPairNo:=1)
-        ucrReceiverEvent.AddAdditionalCodeParameterPair(clsModifyOperation, New RParameter("event", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrReceiverEvent.AddAdditionalCodeParameterPair(clsRightLeftFunction, New RParameter("event", 2), iAdditionalPairNo:=2)
-        ucrReceiverEvent.AddAdditionalCodeParameterPair(clsStartEndFunction, New RParameter("event", 2), iAdditionalPairNo:=3)
+        ucrReceiverEvent.AddAdditionalCodeParameterPair(clsRightLeftFunction, New RParameter("event", 2), iAdditionalPairNo:=1)
+        ucrReceiverEvent.AddAdditionalCodeParameterPair(clsStartEndFunction, New RParameter("event", 2), iAdditionalPairNo:=2)
 
         ucrSelectorFitObject.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverEntry.SetRCode(clsStartEndFunction, bReset)
@@ -259,7 +257,6 @@ Public Class dlgSurvivalObject
     End Sub
 
     Private Sub ModifyOptions()
-
         ' checkbox corresponds to operation: %in% 
         ' left (0) is always the event parameter
         ' right (1) changes
@@ -278,8 +275,7 @@ Public Class dlgSurvivalObject
 
                 If ucrReceiverEvent.strCurrDataType = "factor" Then
                     Me.Size = New System.Drawing.Size(662, Me.Height)
-                    clsModifyOperation.ClearParameters()
-                    clsModifyOperation.AddParameter("event", strParameterValue:=ucrReceiverEvent.GetVariableNames(False), bIncludeArgumentName:=False, iPosition:=0)
+                    clsModifyOperation.RemoveParameterByName("c_function")
                     clsModifyOperation.AddParameter("factor_value", ucrModifyEventFactor.GetSelectedLevels(), bIncludeArgumentName:=False, iPosition:=1)
 
                     ucrModifyEventNumeric.Visible = False
@@ -307,6 +303,8 @@ Public Class dlgSurvivalObject
                     End If
                 End If
             Else
+                clsRightLeftFunction.AddParameter("event", strParameterValue:=ucrReceiverEvent.GetVariableNames(False), iPosition:=2)
+                clsStartEndFunction.AddParameter("event", strParameterValue:=ucrReceiverEvent.GetVariableNames(False), iPosition:=2)
                 Me.Size = New System.Drawing.Size(458, Me.Height)
                 ucrModifyEventNumeric.Visible = False
                 ucrModifyEventFactor.Visible = False
@@ -314,6 +312,8 @@ Public Class dlgSurvivalObject
             End If
 
         Else 'if interval or interval2 checked
+            clsRightLeftFunction.AddParameter("event", strParameterValue:=ucrReceiverEvent.GetVariableNames(False), iPosition:=2)
+            clsStartEndFunction.AddParameter("event", strParameterValue:=ucrReceiverEvent.GetVariableNames(False), iPosition:=2)
             Me.Size = New System.Drawing.Size(458, Me.Height)
             ucrChkModifyEvent.Visible = False
             ucrModifyEventNumeric.Visible = False
