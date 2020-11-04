@@ -43,6 +43,7 @@ Public Class dlgTaylorDiagram
         ucrReceiverSingleStation.SetParameter(New RParameter("type", 3))
         ucrReceiverSingleStation.Selector = ucrSelectorTaylorDiagram
         ucrReceiverSingleStation.SetParameterIsString()
+        ucrReceiverSingleStation.bExcludeFromSelector = True
         ucrReceiverSingleStation.SetClimaticType("station")
         ucrReceiverSingleStation.bAutoFill = True
 
@@ -60,6 +61,7 @@ Public Class dlgTaylorDiagram
         ucrReceiverMultipleGroup.Selector = ucrSelectorTaylorDiagram
         ucrReceiverMultipleGroup.SetParameterIsString()
         ucrReceiverMultipleGroup.SetIncludedDataTypes({"factor", "character"})
+        ucrReceiverMultipleGroup.bExcludeFromSelector = True
 
         ucrChkNormalise.SetParameter(New RParameter("normalise", 3))
         ucrChkNormalise.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
