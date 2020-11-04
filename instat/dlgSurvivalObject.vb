@@ -170,9 +170,10 @@ Public Class dlgSurvivalObject
 
         clsCreateObjectScript.SetRCommand("cat")
         clsCreateObjectScriptPaste.SetRCommand("paste")
-        clsCreateObjectScript.AddParameter("x", clsRFunctionParameter:=clsCreateObjectScriptPaste, bIncludeArgumentName:=False)
-        clsCreateObjectScriptPaste.AddParameter("after_cols", Chr(34) & "used to create the Survival Object:" & Chr(34), iPosition:=3, bIncludeArgumentName:=False)
-        clsCreateObjectScriptPaste.AddParameter("surv_name", Chr(34) & ucrSaveObject.ucrInputComboSave.GetText() & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
+        clsCreateObjectScriptPaste.AddParameter("sep", Chr(34) & ", " & Chr(34), iPosition:=3)
+        clsCreateObjectScript.AddParameter("x", clsRFunctionParameter:=clsCreateObjectScriptPaste, bIncludeArgumentName:=False, iPosition:=0)
+        clsCreateObjectScript.AddParameter("after_cols", Chr(34) & "used to create the Survival Object:" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        clsCreateObjectScript.AddParameter("surv_name", Chr(34) & ucrSaveObject.ucrInputComboSave.GetText() & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
 
@@ -335,22 +336,6 @@ Public Class dlgSurvivalObject
         End If
     End Sub
 
-    Private Sub CreateObjectOutput()
-        clsCreateObjectScriptPaste.AddParameter("col1", strParameterValue:=ucrReceiverExit.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=1)
-
-        If Not ucrReceiverEntry.IsEmpty AndAlso ucrReceiverEntry.Visible Then
-            clsCreateObjectScriptPaste.AddParameter("col0", strParameterValue:=ucrReceiverEntry.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=0)
-        Else
-            clsCreateObjectScriptPaste.RemoveParameterByName("col0")
-        End If
-
-        If ucrReceiverEvent.Visible Then
-            clsCreateObjectScriptPaste.AddParameter("col2", strParameterValue:=ucrReceiverEvent.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=2)
-        Else
-            clsCreateObjectScriptPaste.RemoveParameterByName("col2")
-        End If
-    End Sub
-
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlValueChanged
         ucrReceiverEvent.RemoveIncludedMetadataProperty("class")
         If rdoRight.Checked OrElse rdoLeft.Checked Then
@@ -371,33 +356,38 @@ Public Class dlgSurvivalObject
         SetCurrentReceiver()
         ModifyOptions()
         SetBaseExpression()
-        CreateObjectOutput()
+    End Sub
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+        clsCreateObjectScriptPaste.AddParameter("col1", strParameterValue:=ucrReceiverExit.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=1)
+
+        If Not ucrReceiverEntry.IsEmpty AndAlso ucrReceiverEntry.Visible Then
+            clsCreateObjectScriptPaste.AddParameter("col0", strParameterValue:=ucrReceiverEntry.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            clsCreateObjectScriptPaste.RemoveParameterByName("col0")
+        End If
+
+        If ucrReceiverEvent.Visible Then
+            clsCreateObjectScriptPaste.AddParameter("col2", strParameterValue:=ucrReceiverEvent.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=2)
+        Else
+            clsCreateObjectScriptPaste.RemoveParameterByName("col2")
+        End If
     End Sub
 
     Private Sub ucrSelectorFitObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFitObject.ControlValueChanged
         SetCurrentReceiver()
     End Sub
 
-    Private Sub ucrModifyEventControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrModifyEventFactor.ControlValueChanged, ucrModifyEventLogical.ControlValueChanged, ucrChkModifyEvent.ControlValueChanged
+    Private Sub ucrModifyEventControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrModifyEventFactor.ControlValueChanged, ucrModifyEventLogical.ControlValueChanged, ucrChkModifyEvent.ControlValueChanged, ucrReceiverEvent.ControlValueChanged
         ModifyOptions()
     End Sub
 
     Private Sub ucrSaveObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveObject.ControlValueChanged
-        clsCreateObjectScriptPaste.AddParameter("surv_name", Chr(34) & ucrSaveObject.ucrInputComboSave.GetText() & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
-    End Sub
-
-    Private Sub ucrReceiverEvent_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverEvent.ControlValueChanged
-        ModifyOptions()
-        CreateObjectOutput()
-    End Sub
-
-    Private Sub ucrReceiverExit_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExit.ControlValueChanged
-        CreateObjectOutput()
+        clsCreateObjectScript.AddParameter("surv_name", Chr(34) & ucrSaveObject.ucrInputComboSave.GetText() & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
     End Sub
 
     Private Sub ucrReceiverEntryControl(ucrChangedControl As ucrCore) Handles ucrReceiverEntry.ControlValueChanged
         SetBaseExpression()
-        CreateObjectOutput()
     End Sub
 
     Private Sub ucrCoreControls(ucrChangedControl As ucrCore) Handles ucrReceiverExit.ControlContentsChanged, ucrSaveObject.ControlContentsChanged, ucrInputOrigin.ControlContentsChanged, ucrModifyEventFactor.ControlContentsChanged, ucrModifyEventNumeric.ControlContentsChanged, ucrReceiverEntry.ControlContentsChanged, ucrChkModifyEvent.ControlContentsChanged, ucrReceiverEvent.ControlContentsChanged, ucrPnlType.ControlContentsChanged
