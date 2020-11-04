@@ -89,36 +89,38 @@ Public Class clsRecentFiles
     End Sub
 
     ''' <summary>
-    ''' adds the form or file path passed object to menu items
+    ''' adds the form to menu items
     ''' </summary>
-    ''' <param name="formOrFilePathObj">accepts objects of type Form or File Path</param>
-    Public Sub addToMenu(formOrFilePathObj As Object)
-        If TypeOf formOrFilePathObj Is Form Then
-            Dim frmDialog As Form = DirectCast(formOrFilePathObj, Form)
-            'Checks for existance, else add it to the beginning
-            If lstRecentDialogs.Contains(frmDialog) Then lstRecentDialogs.Remove(frmDialog)
-            'adds to the list
-            lstRecentDialogs.Add(frmDialog)
-            'checks that only 10 items are allowed
-            If lstRecentDialogs.Count > 10 Then
-                lstRecentDialogs.RemoveAt(0)
-            End If
-            'update recent dialogs menu items
-            UpdateRecentDialogsMenuItems()
-        Else
-            Dim strFilePath As String = formOrFilePathObj
-            'remove file if it exists(helps with making sure displayed file names are rearranged)
-            lstRecentOpenedFiles.Remove(strFilePath)
-            'add to recent opened files list..
-            lstRecentOpenedFiles.Add(strFilePath)
-            'make sure there are only ever 30 items...
-            'todo. add this to the general options on the number of recently files to show
-            While lstRecentOpenedFiles.Count > 30
-                lstRecentOpenedFiles.RemoveAt(0)
-            End While
-            'update recent files menu items
-            UpdateRecentFilesMenuItems()
+    ''' <param name="frmDialog">form to add to menu items</param>
+    Public Sub addToMenu(frmDialog As Form)
+        'Checks for existance, else add it to the beginning
+        If lstRecentDialogs.Contains(frmDialog) Then lstRecentDialogs.Remove(frmDialog)
+        'adds to the list
+        lstRecentDialogs.Add(frmDialog)
+        'checks that only 10 items are allowed
+        If lstRecentDialogs.Count > 10 Then
+            lstRecentDialogs.RemoveAt(0)
         End If
+        'update recent dialogs menu items
+        UpdateRecentDialogsMenuItems()
+    End Sub
+
+    ''' <summary>
+    ''' adds the file path to menu items
+    ''' </summary>
+    ''' <param name="strFilePath">file path to add to menu items</param>
+    Public Sub addToMenu(strFilePath As String)
+        'remove file if it exists(helps with making sure displayed file names are rearranged)
+        lstRecentOpenedFiles.Remove(strFilePath)
+        'add to recent opened files list..
+        lstRecentOpenedFiles.Add(strFilePath)
+        'make sure there are only ever 30 items...
+        'todo. add this to the general options on the number of recently files to show
+        While lstRecentOpenedFiles.Count > 30
+            lstRecentOpenedFiles.RemoveAt(0)
+        End While
+        'update recent files menu items
+        UpdateRecentFilesMenuItems()
     End Sub
 
     ''' <summary>
