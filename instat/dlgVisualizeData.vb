@@ -56,7 +56,7 @@ Public Class dlgVisualizeData
         ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisMiss, "vis_miss")
         ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisGuess, "vis_guess")
 
-        ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortVariables, {rdoVisDat, rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortVariables, {rdoVisDat, rdoVisMiss}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrInputComboboxPalette, {rdoVisDat, rdoVisGuess}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrNudMaximumSize, {rdoVisDat, rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.9)
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
@@ -236,7 +236,7 @@ Public Class dlgVisualizeData
         MaximumDataPoint()
     End Sub
 
-    Private Sub ucrNudSamplingFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSamplingFunction.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged
+    Private Sub ucrNudSamplingFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSamplingFunction.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged, ucrPnlSelectData.ControlValueChanged
         If rdoSelectedColumn.Checked AndAlso Not ucrReceiverVisualizeData.IsEmpty Then
             clsVisDatFunction.RemoveParameterByName("data")
             clsVisGuessFunction.RemoveParameterByName("data")
