@@ -301,7 +301,7 @@
     <value>14</value>
   </data>
   <data name="txtTextFilePreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 66</value>
+    <value>267, 65</value>
   </data>
   <data name="txtTextFilePreview.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -577,7 +577,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpCSV.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>16</value>
   </data>
   <data name="ucrNudMaxRowsCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 237</value>
@@ -1030,7 +1030,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpExcel.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="lblTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1525,7 +1525,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpRDS.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="ucrChkOverwriteRDS.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 175</value>
@@ -1705,7 +1705,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCannotImport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 289</value>
+    <value>652, 229</value>
   </data>
   <data name="lblCannotImport.Size" type="System.Drawing.Size, System.Drawing">
     <value>366, 36</value>
@@ -1745,7 +1745,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="lblNoPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 290</value>
+    <value>664, 319</value>
   </data>
   <data name="lblNoPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>302, 18</value>
@@ -1772,7 +1772,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblNoPreview.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="lblLinesToPreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1802,7 +1802,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLinesToPreview.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="cmdRefreshPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -1829,7 +1829,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdRefreshPreview.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrNudMaxRowsText.Name" xml:space="preserve">
     <value>ucrNudMaxRowsText</value>
@@ -1940,7 +1940,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpText.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="ucrNudMaxRowsText.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 104</value>
@@ -2235,7 +2235,7 @@ white spaces</value>
     <value>True</value>
   </data>
   <data name="clbSheets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 94</value>
+    <value>718, 65</value>
   </data>
   <data name="clbSheets.Size" type="System.Drawing.Size, System.Drawing">
     <value>255, 124</value>
@@ -2262,7 +2262,7 @@ white spaces</value>
     <value>NoControl</value>
   </data>
   <data name="lblSelectSheets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 50</value>
+    <value>392, 50</value>
   </data>
   <data name="lblSelectSheets.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
@@ -2292,7 +2292,7 @@ white spaces</value>
     <value>NoControl</value>
   </data>
   <data name="lblImportingSheets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 263</value>
+    <value>664, 357</value>
   </data>
   <data name="lblImportingSheets.Size" type="System.Drawing.Size, System.Drawing">
     <value>338, 114</value>
@@ -2319,7 +2319,7 @@ white spaces</value>
     <value>0</value>
   </data>
   <data name="ucrChkSheetsCheckAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>270, 66</value>
+    <value>718, 40</value>
   </data>
   <data name="ucrChkSheetsCheckAll.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -2364,7 +2364,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudPreviewLines.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="ucrPanelFixedWidthText.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 47</value>
@@ -2385,7 +2385,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPanelFixedWidthText.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="ucrSaveFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 411</value>
@@ -2409,7 +2409,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveFile.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="ucrInputFilePath.Location" type="System.Drawing.Point, System.Drawing">
     <value>47, 17</value>
@@ -2469,7 +2469,7 @@ white spaces</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>617, 502</value>
+    <value>1284, 502</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

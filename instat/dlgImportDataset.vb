@@ -403,15 +403,6 @@ Public Class dlgImportDataset
         ucrSaveFile.Hide()
     End Sub
 
-    'Private Sub ucrInputName_NameChanged() Handles ucrInputName.ControlValueChanged
-    '    If Not ucrInputName.IsEmpty AndAlso strFileType <> "RDS" Then
-    '        ucrBase.clsRsyntax.SetAssignTo(ucrInputName.GetText(), strTempDataframe:=ucrInputName.GetText())
-    '    Else
-    '        ucrBase.clsRsyntax.RemoveAssignTo()
-    '    End If
-    '    TestOkEnabled()
-    'End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)

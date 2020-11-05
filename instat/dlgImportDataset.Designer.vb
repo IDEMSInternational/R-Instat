@@ -250,6 +250,7 @@ Partial Class dlgImportDataset
         'ucrInputHeadersCSV
         '
         Me.ucrInputHeadersCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputHeadersCSV.GetSetSelectedIndex = -1
         Me.ucrInputHeadersCSV.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputHeadersCSV, "ucrInputHeadersCSV")
         Me.ucrInputHeadersCSV.Name = "ucrInputHeadersCSV"
@@ -265,6 +266,7 @@ Partial Class dlgImportDataset
         'ucrInputDecimalCSV
         '
         Me.ucrInputDecimalCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputDecimalCSV.GetSetSelectedIndex = -1
         Me.ucrInputDecimalCSV.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputDecimalCSV, "ucrInputDecimalCSV")
         Me.ucrInputDecimalCSV.Name = "ucrInputDecimalCSV"
@@ -272,6 +274,7 @@ Partial Class dlgImportDataset
         'ucrInputSeparatorCSV
         '
         Me.ucrInputSeparatorCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparatorCSV.GetSetSelectedIndex = -1
         Me.ucrInputSeparatorCSV.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSeparatorCSV, "ucrInputSeparatorCSV")
         Me.ucrInputSeparatorCSV.Name = "ucrInputSeparatorCSV"
@@ -279,6 +282,7 @@ Partial Class dlgImportDataset
         'ucrInputEncodingCSV
         '
         Me.ucrInputEncodingCSV.AddQuotesIfUnrecognised = True
+        Me.ucrInputEncodingCSV.GetSetSelectedIndex = -1
         Me.ucrInputEncodingCSV.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputEncodingCSV, "ucrInputEncodingCSV")
         Me.ucrInputEncodingCSV.Name = "ucrInputEncodingCSV"
@@ -390,6 +394,7 @@ Partial Class dlgImportDataset
         'ucrInputNamedRegions
         '
         Me.ucrInputNamedRegions.AddQuotesIfUnrecognised = True
+        Me.ucrInputNamedRegions.GetSetSelectedIndex = -1
         Me.ucrInputNamedRegions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputNamedRegions, "ucrInputNamedRegions")
         Me.ucrInputNamedRegions.Name = "ucrInputNamedRegions"
