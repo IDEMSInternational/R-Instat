@@ -405,31 +405,31 @@
   <data name="&gt;&gt;lblLinesToSkipCSV.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="cmdBrowse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="btnBrowse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdBrowse.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="btnBrowse.Location" type="System.Drawing.Point, System.Drawing">
     <value>470, 16</value>
   </data>
-  <data name="cmdBrowse.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="btnBrowse.Size" type="System.Drawing.Size, System.Drawing">
     <value>66, 23</value>
   </data>
-  <data name="cmdBrowse.TabIndex" type="System.Int32, mscorlib">
+  <data name="btnBrowse.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="cmdBrowse.Text" xml:space="preserve">
+  <data name="btnBrowse.Text" xml:space="preserve">
     <value>Browse</value>
   </data>
-  <data name="&gt;&gt;cmdBrowse.Name" xml:space="preserve">
-    <value>cmdBrowse</value>
+  <data name="&gt;&gt;btnBrowse.Name" xml:space="preserve">
+    <value>btnBrowse</value>
   </data>
-  <data name="&gt;&gt;cmdBrowse.Type" xml:space="preserve">
+  <data name="&gt;&gt;btnBrowse.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmdBrowse.Parent" xml:space="preserve">
+  <data name="&gt;&gt;btnBrowse.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cmdBrowse.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;btnBrowse.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
   <data name="&gt;&gt;ucrNudMaxRowsCSV.Name" xml:space="preserve">

@@ -49,7 +49,7 @@ Partial Class dlgImportDataset
         Me.grdDataPreview = New unvell.ReoGrid.ReoGridControl()
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
         Me.lblLinesToSkipCSV = New System.Windows.Forms.Label()
-        Me.cmdBrowse = New System.Windows.Forms.Button()
+        Me.btnBrowse = New System.Windows.Forms.Button()
         Me.grpCSV = New System.Windows.Forms.GroupBox()
         Me.ucrNudMaxRowsCSV = New instat.ucrNud()
         Me.ucrChkMaxRowsCSV = New instat.ucrCheck()
@@ -159,6 +159,7 @@ Partial Class dlgImportDataset
         '
         resources.ApplyResources(Me.txtTextFilePreview, "txtTextFilePreview")
         Me.txtTextFilePreview.Name = "txtTextFilePreview"
+        Me.txtTextFilePreview.ReadOnly = True
         '
         'grdDataPreview
         '
@@ -186,12 +187,12 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.lblLinesToSkipCSV, "lblLinesToSkipCSV")
         Me.lblLinesToSkipCSV.Name = "lblLinesToSkipCSV"
         '
-        'cmdBrowse
+        'btnBrowse
         '
-        resources.ApplyResources(Me.cmdBrowse, "cmdBrowse")
-        Me.cmdBrowse.Name = "cmdBrowse"
-        Me.cmdBrowse.Tag = "browse"
-        Me.cmdBrowse.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.btnBrowse, "btnBrowse")
+        Me.btnBrowse.Name = "btnBrowse"
+        Me.btnBrowse.Tag = "browse"
+        Me.btnBrowse.UseVisualStyleBackColor = True
         '
         'grpCSV
         '
@@ -604,7 +605,7 @@ Partial Class dlgImportDataset
         Me.ucrNudPreviewLines.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPreviewLines.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPreviewLines.Name = "ucrNudPreviewLines"
-        Me.ucrNudPreviewLines.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPreviewLines.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'ucrPanelFixedWidthText
         '
@@ -620,7 +621,7 @@ Partial Class dlgImportDataset
         '
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
-        Me.ucrInputFilePath.IsReadOnly = False
+        Me.ucrInputFilePath.IsReadOnly = True
         resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
         '
@@ -672,7 +673,7 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.ucrSaveFile)
         Me.Controls.Add(Me.grpCSV)
         Me.Controls.Add(Me.ucrInputFilePath)
-        Me.Controls.Add(Me.cmdBrowse)
+        Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.lblFileOpenPath)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -708,7 +709,7 @@ Partial Class dlgImportDataset
     Friend WithEvents grdDataPreview As unvell.ReoGrid.ReoGridControl
     Friend WithEvents lblFileOpenPath As Label
     Friend WithEvents lblLinesToSkipCSV As Label
-    Friend WithEvents cmdBrowse As Button
+    Friend WithEvents btnBrowse As Button
     Friend WithEvents grpCSV As GroupBox
     Friend WithEvents grpExcel As GroupBox
     Friend WithEvents lblRowToSkipExcel As Label
