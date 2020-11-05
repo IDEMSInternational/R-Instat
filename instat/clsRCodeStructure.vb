@@ -250,8 +250,7 @@ Public Class RCodeStructure
     '''                                             names of new data frames if data frame list is
     '''                                             not named. </param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempSurv As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True, Optional bDataFrameList As Boolean = False, Optional strDataFrameNames As String = "")
-
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempSurv As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True, Optional bDataFrameList As Boolean = False, Optional strDataFrameNames As String = "", Optional strAdjacentColumn As String = "")
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -277,10 +276,10 @@ Public Class RCodeStructure
         Me.bAssignToIsPrefix = bAssignToIsPrefix
         Me.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
         Me.bInsertColumnBefore = bInsertColumnBefore
+        Me.strAdjacentColumn = strAdjacentColumn
         Me.bRequireCorrectLength = bRequireCorrectLength
         Me.bDataFrameList = bDataFrameList
         Me.strDataFrameNames = strDataFrameNames
-
     End Sub
 
     '''--------------------------------------------------------------------------------------------
