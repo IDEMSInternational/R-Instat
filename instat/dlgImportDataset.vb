@@ -397,9 +397,7 @@ Public Class dlgImportDataset
         grpRDS.Hide()
         ExcelSheetPreviewVisible(False)
         TextPreviewVisible(False)
-        lblNoPreview.Hide()
-        lblCannotImport.Hide()
-        GridPreviewVisible(False)
+        GridPreviewVisible(False, "")
         ucrSaveFile.Hide()
     End Sub
 
@@ -532,21 +530,23 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub ExcelSheetPreviewVisible(bVisible As Boolean)
-        grpExcel.Visible = bVisible
-        clbSheets.Visible = bVisible
-        lblSelectSheets.Visible = bVisible
-        ucrChkSheetsCheckAll.Visible = bVisible
+        grpExcel.Visible = bVisible 'not sure about this
+        panelSheets.Visible = Visible
     End Sub
 
     Private Sub GridPreviewVisible(bVisible As Boolean, strGridText As String)
-        If String.IsNullOrEmpty(strGridText) Then
-
-        End If
-        panelGridPreview.Visible = bVisible
+        lblDataFramePreview.Visible = bVisible
+        lblLinesToPreview.Visible = bVisible
+        ucrNudPreviewLines.Visible = bVisible
         btnRefreshPreview.Visible = bVisible
+        grdDataPreview.Visible = bVisible
+        lblCannotImport.Visible = bVisible
+
+        If Not bVisible AndAlso Not String.IsNullOrEmpty(strGridText) Then
+            lblCannotImport.Visible = True
+            lblCannotImport.Text = strGridText
+        End If
     End Sub
-
-
 
     Public Sub SetControlsFromFile(strFilePath As String)
         Dim strFileExt As String
@@ -682,10 +682,6 @@ Public Class dlgImportDataset
             clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
             strTempDataFrameName = "temp"
             grdDataPreview.Worksheets.Clear()
-            grdDataPreview.Enabled = False
-            lblCannotImport.Hide()
-            lblImportingSheets.Hide()
-            lblImportingSheets.Text = ""
             bValid = False
             If {"TXT", "CSV", "XLSX", "XLS"}.Contains(strFileType) AndAlso Not ucrInputFilePath.IsEmpty() Then
                 If strFileType = "TXT" Then
@@ -704,11 +700,7 @@ Public Class dlgImportDataset
                 ElseIf strFileType = "XLSX" OrElse strFileType = "XLS" Then
                     If dctSelectedExcelSheets.Count = 0 Then
                         bCanImport = False
-                        lblCannotImport.Hide()
-                        lblNoPreview.Show()
-                        lblImportingSheets.Show()
-                        lblImportingSheets.Text = "No sheet selected."
-                        GridPreviewVisible(False)
+                        GridPreviewVisible(False, "No sheet selected.")
 
                         Cursor = Cursors.Default
                         TestOkEnabled()
@@ -716,11 +708,9 @@ Public Class dlgImportDataset
                         ' TODO temp until multi sheet preview implemented
                     ElseIf dctSelectedExcelSheets.Count > 1 Then
                         bCanImport = True
-                        lblCannotImport.Hide()
-                        lblNoPreview.Show()
                         lblImportingSheets.Show()
                         lblImportingSheets.Text = "Importing the following sheets:" & Environment.NewLine & String.Join(", ", dctSelectedExcelSheets.Values)
-                        GridPreviewVisible(False)
+                        GridPreviewVisible(False, "Importing the following sheets:" & Environment.NewLine & String.Join(", ", dctSelectedExcelSheets.Values))
 
                         Cursor = Cursors.Default
                         TestOkEnabled()
@@ -757,27 +747,18 @@ Public Class dlgImportDataset
                     End If
                 End If
                 If bValid Then
-                    GridPreviewVisible(True)
-                    lblNoPreview.Hide()
+                    GridPreviewVisible(True, "")
 
                 Else
-                    lblCannotImport.Show()
+                    GridPreviewVisible(False, "Preview not yet implemented for this type of file.")
                     bCanImport = False
                 End If
             ElseIf ucrInputFilePath.IsEmpty() Then
                 bCanImport = False
-                lblCannotImport.Hide()
-                lblNoPreview.Hide()
-                GridPreviewVisible(False)
-
-
+                GridPreviewVisible(False, "")
             Else
                 bCanImport = True
-                lblCannotImport.Hide()
-                lblNoPreview.Show()
-                GridPreviewVisible(False)
-
-
+                GridPreviewVisible(False, "Preview not yet implemented for this file type.")
             End If
             Cursor = Cursors.Default
             TestOkEnabled()

@@ -40,7 +40,7 @@ Partial Class dlgImportDataset
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgImportDataset))
         Me.lblTextFilePreview = New System.Windows.Forms.Label()
-        Me.lblDataFrame = New System.Windows.Forms.Label()
+        Me.lblDataFramePreview = New System.Windows.Forms.Label()
         Me.lblEncodingCSV = New System.Windows.Forms.Label()
         Me.lblHeadersCSV = New System.Windows.Forms.Label()
         Me.lblSeparatorCSV = New System.Windows.Forms.Label()
@@ -86,7 +86,6 @@ Partial Class dlgImportDataset
         Me.ucrChkImportMetadataRDS = New instat.ucrCheck()
         Me.ucrChkKeepExistingDataRDS = New instat.ucrCheck()
         Me.lblCannotImport = New System.Windows.Forms.Label()
-        Me.lblNoPreview = New System.Windows.Forms.Label()
         Me.lblLinesToPreview = New System.Windows.Forms.Label()
         Me.btnRefreshPreview = New System.Windows.Forms.Button()
         Me.grpText = New System.Windows.Forms.GroupBox()
@@ -127,11 +126,11 @@ Partial Class dlgImportDataset
         Me.lblTextFilePreview.Name = "lblTextFilePreview"
         Me.lblTextFilePreview.Tag = "Input_File_Preview"
         '
-        'lblDataFrame
+        'lblDataFramePreview
         '
-        resources.ApplyResources(Me.lblDataFrame, "lblDataFrame")
-        Me.lblDataFrame.Name = "lblDataFrame"
-        Me.lblDataFrame.Tag = "Data_Frame_Preview"
+        resources.ApplyResources(Me.lblDataFramePreview, "lblDataFramePreview")
+        Me.lblDataFramePreview.Name = "lblDataFramePreview"
+        Me.lblDataFramePreview.Tag = "Data_Frame_Preview"
         '
         'lblEncodingCSV
         '
@@ -475,11 +474,6 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.lblCannotImport, "lblCannotImport")
         Me.lblCannotImport.Name = "lblCannotImport"
         '
-        'lblNoPreview
-        '
-        resources.ApplyResources(Me.lblNoPreview, "lblNoPreview")
-        Me.lblNoPreview.Name = "lblNoPreview"
-        '
         'lblLinesToPreview
         '
         resources.ApplyResources(Me.lblLinesToPreview, "lblLinesToPreview")
@@ -658,11 +652,12 @@ Partial Class dlgImportDataset
         '
         'panelGridPreview
         '
-        Me.panelGridPreview.Controls.Add(Me.lblDataFrame)
+        Me.panelGridPreview.Controls.Add(Me.lblDataFramePreview)
         Me.panelGridPreview.Controls.Add(Me.grdDataPreview)
         Me.panelGridPreview.Controls.Add(Me.ucrNudPreviewLines)
         Me.panelGridPreview.Controls.Add(Me.lblLinesToPreview)
         Me.panelGridPreview.Controls.Add(Me.btnRefreshPreview)
+        Me.panelGridPreview.Controls.Add(Me.lblCannotImport)
         resources.ApplyResources(Me.panelGridPreview, "panelGridPreview")
         Me.panelGridPreview.Name = "panelGridPreview"
         '
@@ -682,10 +677,8 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.grpExcel)
         Me.Controls.Add(Me.grpRDS)
         Me.Controls.Add(Me.ucrSaveFile)
-        Me.Controls.Add(Me.lblNoPreview)
         Me.Controls.Add(Me.grpCSV)
         Me.Controls.Add(Me.ucrInputFilePath)
-        Me.Controls.Add(Me.lblCannotImport)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.lblFileOpenPath)
         Me.Controls.Add(Me.ucrBase)
@@ -708,12 +701,11 @@ Partial Class dlgImportDataset
         Me.panelGridPreview.ResumeLayout(False)
         Me.panelGridPreview.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents lblTextFilePreview As Label
-    Friend WithEvents lblDataFrame As Label
+    Friend WithEvents lblDataFramePreview As Label
     Friend WithEvents lblEncodingCSV As Label
     Friend WithEvents lblHeadersCSV As Label
     Friend WithEvents lblSeparatorCSV As Label
@@ -738,7 +730,6 @@ Partial Class dlgImportDataset
     Friend WithEvents ucrInputHeadersCSV As ucrInputComboBox
     Friend WithEvents lblMissingValueStringExcel As Label
     Friend WithEvents ucrInputMissingValueStringExcel As ucrInputTextBox
-    Friend WithEvents lblNoPreview As Label
     Friend WithEvents ucrNudRowsToSkipExcel As ucrNud
     Friend WithEvents grpRDS As GroupBox
     Friend WithEvents ucrChkTrimWSExcel As ucrCheck
