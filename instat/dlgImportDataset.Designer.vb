@@ -101,7 +101,6 @@ Partial Class dlgImportDataset
         Me.rdoFixedWidthWhiteSpacesText = New System.Windows.Forms.RadioButton()
         Me.clbSheets = New System.Windows.Forms.CheckedListBox()
         Me.lblSelectSheets = New System.Windows.Forms.Label()
-        Me.lblImportingSheets = New System.Windows.Forms.Label()
         Me.ucrChkSheetsCheckAll = New instat.ucrCheck()
         Me.ucrNudPreviewLines = New instat.ucrNud()
         Me.ucrPanelFixedWidthText = New instat.UcrPanel()
@@ -591,11 +590,6 @@ Partial Class dlgImportDataset
         Me.lblSelectSheets.Name = "lblSelectSheets"
         Me.lblSelectSheets.Tag = ""
         '
-        'lblImportingSheets
-        '
-        resources.ApplyResources(Me.lblImportingSheets, "lblImportingSheets")
-        Me.lblImportingSheets.Name = "lblImportingSheets"
-        '
         'ucrChkSheetsCheckAll
         '
         Me.ucrChkSheetsCheckAll.Checked = False
@@ -668,7 +662,6 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.panelGridPreview)
         Me.Controls.Add(Me.panelTextPreview)
         Me.Controls.Add(Me.panelSheets)
-        Me.Controls.Add(Me.lblImportingSheets)
         Me.Controls.Add(Me.rdoFixedWidthWhiteSpacesText)
         Me.Controls.Add(Me.rdoSeparatortext)
         Me.Controls.Add(Me.rdoFixedWidthText)
@@ -767,7 +760,6 @@ Partial Class dlgImportDataset
     Friend WithEvents clbSheets As CheckedListBox
     Friend WithEvents lblSelectSheets As Label
     Friend WithEvents ucrChkSheetsCheckAll As ucrCheck
-    Friend WithEvents lblImportingSheets As Label
     Friend WithEvents ucrChkRange As ucrCheck
     Friend WithEvents lblTo As Label
     Friend WithEvents lblFrom As Label

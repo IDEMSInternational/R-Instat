@@ -373,7 +373,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFileOpenPath.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="lblLinesToSkipCSV.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -430,7 +430,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdBrowse.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrNudMaxRowsCSV.Name" xml:space="preserve">
     <value>ucrNudMaxRowsCSV</value>
@@ -577,7 +577,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpCSV.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="ucrNudMaxRowsCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 237</value>
@@ -1030,7 +1030,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpExcel.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="lblTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1525,7 +1525,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpRDS.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="ucrChkOverwriteRDS.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 175</value>
@@ -1895,7 +1895,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpText.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="ucrNudMaxRowsText.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 104</value>
@@ -2111,7 +2111,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoSeparatortext.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="rdoFixedWidthText.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2147,7 +2147,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoFixedWidthText.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="rdoFixedWidthWhiteSpacesText.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2184,7 +2184,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoFixedWidthWhiteSpacesText.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="clbSheets.HorizontalScrollbar" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2239,36 +2239,6 @@ white spaces</value>
   </data>
   <data name="&gt;&gt;lblSelectSheets.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="lblImportingSheets.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 11.25pt</value>
-  </data>
-  <data name="lblImportingSheets.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblImportingSheets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>426, 426</value>
-  </data>
-  <data name="lblImportingSheets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>354, 84</value>
-  </data>
-  <data name="lblImportingSheets.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="lblImportingSheets.Text" xml:space="preserve">
-    <value>Importing the following sheets:</value>
-  </data>
-  <data name="&gt;&gt;lblImportingSheets.Name" xml:space="preserve">
-    <value>lblImportingSheets</value>
-  </data>
-  <data name="&gt;&gt;lblImportingSheets.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblImportingSheets.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblImportingSheets.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="ucrChkSheetsCheckAll.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 20</value>
@@ -2337,7 +2307,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPanelFixedWidthText.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="ucrSaveFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 416</value>
@@ -2361,7 +2331,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveFile.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="ucrInputFilePath.Location" type="System.Drawing.Point, System.Drawing">
     <value>47, 17</value>
@@ -2388,7 +2358,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputFilePath.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 445</value>
@@ -2412,7 +2382,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="panelSheets.Location" type="System.Drawing.Point, System.Drawing">
     <value>265, 47</value>

@@ -544,6 +544,12 @@ Public Class dlgImportDataset
 
         If Not bVisible AndAlso Not String.IsNullOrEmpty(strGridText) Then
             lblCannotImport.Visible = True
+            'todo. check if text is a multiline. if so change the alignement in the label
+            If dctSelectedExcelSheets.Count > 1 Then
+                lblCannotImport.TextAlign = ContentAlignment.TopLeft
+            Else
+                lblCannotImport.TextAlign = ContentAlignment.TopCenter
+            End If
             lblCannotImport.Text = strGridText
         End If
     End Sub
@@ -708,8 +714,6 @@ Public Class dlgImportDataset
                         ' TODO temp until multi sheet preview implemented
                     ElseIf dctSelectedExcelSheets.Count > 1 Then
                         bCanImport = True
-                        lblImportingSheets.Show()
-                        lblImportingSheets.Text = "Importing the following sheets:" & Environment.NewLine & String.Join(", ", dctSelectedExcelSheets.Values)
                         GridPreviewVisible(False, "Importing the following sheets:" & Environment.NewLine & String.Join(", ", dctSelectedExcelSheets.Values))
 
                         Cursor = Cursors.Default
