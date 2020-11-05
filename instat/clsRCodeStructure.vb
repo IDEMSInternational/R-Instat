@@ -410,19 +410,9 @@ Public Class RCodeStructure
                         clsAddColumns.AddParameter("use_col_name_as_prefix", "FALSE")
                     End If
                 End If
-
+                clsAddColumns.AddParameter("before", If(bInsertColumnBefore, "TRUE", "FALSE"))
                 If Not String.IsNullOrEmpty(strAdjacentColumn) Then
-                    clsAddColumns.AddParameter("before", If(bInsertColumnBefore, "TRUE", "FALSE"))
                     clsAddColumns.AddParameter("adjacent_column", strAdjacentColumn)
-                Else
-                    If bInsertColumnBefore Then
-                        clsAddColumns.AddParameter("before", "TRUE")
-                    Else
-                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                            clsAddColumns.AddParameter("before", "FALSE")
-                        End If
-
-                    End If
                 End If
                 If Not bRequireCorrectLength Then
                     clsAddColumns.AddParameter("require_correct_length", "FALSE")
