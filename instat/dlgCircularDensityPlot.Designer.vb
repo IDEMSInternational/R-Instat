@@ -28,6 +28,8 @@ Partial Class dlgCircularDensityPlot
         Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
         Me.lblDensity = New System.Windows.Forms.Label()
         Me.lblFactor = New System.Windows.Forms.Label()
+        Me.cmdDensityOptions = New System.Windows.Forms.Button()
+        Me.cmdPlotOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -90,11 +92,31 @@ Partial Class dlgCircularDensityPlot
         Me.lblFactor.TabIndex = 5
         Me.lblFactor.Text = "Factor:"
         '
+        'cmdDensityOptions
+        '
+        Me.cmdDensityOptions.Location = New System.Drawing.Point(5, 205)
+        Me.cmdDensityOptions.Name = "cmdDensityOptions"
+        Me.cmdDensityOptions.Size = New System.Drawing.Size(120, 25)
+        Me.cmdDensityOptions.TabIndex = 6
+        Me.cmdDensityOptions.Text = "Density Options"
+        Me.cmdDensityOptions.UseVisualStyleBackColor = True
+        '
+        'cmdPlotOptions
+        '
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(5, 243)
+        Me.cmdPlotOptions.Name = "cmdPlotOptions"
+        Me.cmdPlotOptions.Size = New System.Drawing.Size(120, 25)
+        Me.cmdPlotOptions.TabIndex = 7
+        Me.cmdPlotOptions.Text = "Plot Options"
+        Me.cmdPlotOptions.UseVisualStyleBackColor = True
+        '
         'dlgCircularDensityPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 346)
+        Me.Controls.Add(Me.cmdPlotOptions)
+        Me.Controls.Add(Me.cmdDensityOptions)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.lblDensity)
         Me.Controls.Add(Me.ucrReceiverFactor)
@@ -118,4 +140,6 @@ Partial Class dlgCircularDensityPlot
     Friend WithEvents lblFactor As Label
     Friend WithEvents lblDensity As Label
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
+    Friend WithEvents cmdPlotOptions As Button
+    Friend WithEvents cmdDensityOptions As Button
 End Class
