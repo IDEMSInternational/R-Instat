@@ -88,7 +88,7 @@ Partial Class dlgImportDataset
         Me.lblCannotImport = New System.Windows.Forms.Label()
         Me.lblNoPreview = New System.Windows.Forms.Label()
         Me.lblLinesToPreview = New System.Windows.Forms.Label()
-        Me.cmdRefreshPreview = New System.Windows.Forms.Button()
+        Me.btnRefreshPreview = New System.Windows.Forms.Button()
         Me.grpText = New System.Windows.Forms.GroupBox()
         Me.ucrNudMaxRowsText = New instat.ucrNud()
         Me.ucrChkMaxRowsText = New instat.ucrCheck()
@@ -109,10 +109,16 @@ Partial Class dlgImportDataset
         Me.ucrSaveFile = New instat.ucrSave()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.panelSheets = New System.Windows.Forms.Panel()
+        Me.panelTextPreview = New System.Windows.Forms.Panel()
+        Me.panelGridPreview = New System.Windows.Forms.Panel()
         Me.grpCSV.SuspendLayout()
         Me.grpExcel.SuspendLayout()
         Me.grpRDS.SuspendLayout()
         Me.grpText.SuspendLayout()
+        Me.panelSheets.SuspendLayout()
+        Me.panelTextPreview.SuspendLayout()
+        Me.panelGridPreview.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblTextFilePreview
@@ -479,11 +485,11 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.lblLinesToPreview, "lblLinesToPreview")
         Me.lblLinesToPreview.Name = "lblLinesToPreview"
         '
-        'cmdRefreshPreview
+        'btnRefreshPreview
         '
-        resources.ApplyResources(Me.cmdRefreshPreview, "cmdRefreshPreview")
-        Me.cmdRefreshPreview.Name = "cmdRefreshPreview"
-        Me.cmdRefreshPreview.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.btnRefreshPreview, "btnRefreshPreview")
+        Me.btnRefreshPreview.Name = "btnRefreshPreview"
+        Me.btnRefreshPreview.UseVisualStyleBackColor = True
         '
         'grpText
         '
@@ -635,21 +641,43 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'panelSheets
+        '
+        Me.panelSheets.Controls.Add(Me.clbSheets)
+        Me.panelSheets.Controls.Add(Me.lblSelectSheets)
+        Me.panelSheets.Controls.Add(Me.ucrChkSheetsCheckAll)
+        resources.ApplyResources(Me.panelSheets, "panelSheets")
+        Me.panelSheets.Name = "panelSheets"
+        '
+        'panelTextPreview
+        '
+        Me.panelTextPreview.Controls.Add(Me.lblTextFilePreview)
+        Me.panelTextPreview.Controls.Add(Me.txtTextFilePreview)
+        resources.ApplyResources(Me.panelTextPreview, "panelTextPreview")
+        Me.panelTextPreview.Name = "panelTextPreview"
+        '
+        'panelGridPreview
+        '
+        Me.panelGridPreview.Controls.Add(Me.lblDataFrame)
+        Me.panelGridPreview.Controls.Add(Me.grdDataPreview)
+        Me.panelGridPreview.Controls.Add(Me.ucrNudPreviewLines)
+        Me.panelGridPreview.Controls.Add(Me.lblLinesToPreview)
+        Me.panelGridPreview.Controls.Add(Me.btnRefreshPreview)
+        resources.ApplyResources(Me.panelGridPreview, "panelGridPreview")
+        Me.panelGridPreview.Name = "panelGridPreview"
+        '
         'dlgImportDataset
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.panelGridPreview)
+        Me.Controls.Add(Me.panelTextPreview)
+        Me.Controls.Add(Me.panelSheets)
         Me.Controls.Add(Me.lblImportingSheets)
-        Me.Controls.Add(Me.ucrChkSheetsCheckAll)
-        Me.Controls.Add(Me.lblSelectSheets)
-        Me.Controls.Add(Me.clbSheets)
         Me.Controls.Add(Me.rdoFixedWidthWhiteSpacesText)
         Me.Controls.Add(Me.rdoSeparatortext)
         Me.Controls.Add(Me.rdoFixedWidthText)
         Me.Controls.Add(Me.grpText)
-        Me.Controls.Add(Me.cmdRefreshPreview)
-        Me.Controls.Add(Me.lblLinesToPreview)
-        Me.Controls.Add(Me.ucrNudPreviewLines)
         Me.Controls.Add(Me.ucrPanelFixedWidthText)
         Me.Controls.Add(Me.grpExcel)
         Me.Controls.Add(Me.grpRDS)
@@ -660,11 +688,7 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.lblCannotImport)
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.lblFileOpenPath)
-        Me.Controls.Add(Me.grdDataPreview)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.txtTextFilePreview)
-        Me.Controls.Add(Me.lblDataFrame)
-        Me.Controls.Add(Me.lblTextFilePreview)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -677,6 +701,12 @@ Partial Class dlgImportDataset
         Me.grpRDS.ResumeLayout(False)
         Me.grpText.ResumeLayout(False)
         Me.grpText.PerformLayout()
+        Me.panelSheets.ResumeLayout(False)
+        Me.panelSheets.PerformLayout()
+        Me.panelTextPreview.ResumeLayout(False)
+        Me.panelTextPreview.PerformLayout()
+        Me.panelGridPreview.ResumeLayout(False)
+        Me.panelGridPreview.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -726,7 +756,7 @@ Partial Class dlgImportDataset
     Friend WithEvents lblNAStringsCSV As Label
     Friend WithEvents ucrNudPreviewLines As ucrNud
     Friend WithEvents lblLinesToPreview As Label
-    Friend WithEvents cmdRefreshPreview As Button
+    Friend WithEvents btnRefreshPreview As Button
     Friend WithEvents ucrChkColumnNamesExcel As ucrCheck
     Friend WithEvents grpText As GroupBox
     Friend WithEvents ucrChkColumnNamesText As ucrCheck
@@ -752,4 +782,7 @@ Partial Class dlgImportDataset
     Friend WithEvents lblFrom As Label
     Friend WithEvents ucrInputTextTo As ucrInputTextBox
     Friend WithEvents ucrInputTextFrom As ucrInputTextBox
+    Friend WithEvents panelSheets As Panel
+    Friend WithEvents panelTextPreview As Panel
+    Friend WithEvents panelGridPreview As Panel
 End Class

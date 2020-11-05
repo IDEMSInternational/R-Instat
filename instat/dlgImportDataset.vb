@@ -455,12 +455,9 @@ Public Class dlgImportDataset
                 If ucrInputFilePath.GetText() = "" Then
                     grpText.Hide()
                     grpCSV.Hide()
+                    TextPreviewVisible(False)
                     ExcelSheetPreviewVisible(False)
                     grpRDS.Hide()
-                    grdDataPreview.Hide()
-                    lblDataFrame.Hide()
-                    txtTextFilePreview.Hide()
-                    lblTextFilePreview.Hide()
                 End If
             End If
             TestOkEnabled()
@@ -531,18 +528,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub TextPreviewVisible(bVisible As Boolean)
-        txtTextFilePreview.Visible = bVisible
-        lblTextFilePreview.Visible = bVisible
-    End Sub
-
-    Private Sub GridPreviewVisible(bVisible As Boolean)
-        grdDataPreview.Visible = bVisible
-        lblDataFrame.Visible = bVisible
-    End Sub
-
-    Private Sub LinesToPreviewVisible(bVisible As Boolean)
-        lblLinesToPreview.Visible = bVisible
-        ucrNudPreviewLines.Visible = bVisible
+        panelTextPreview.Visible = bVisible
     End Sub
 
     Private Sub ExcelSheetPreviewVisible(bVisible As Boolean)
@@ -551,6 +537,16 @@ Public Class dlgImportDataset
         lblSelectSheets.Visible = bVisible
         ucrChkSheetsCheckAll.Visible = bVisible
     End Sub
+
+    Private Sub GridPreviewVisible(bVisible As Boolean, strGridText As String)
+        If String.IsNullOrEmpty(strGridText) Then
+
+        End If
+        panelGridPreview.Visible = bVisible
+        btnRefreshPreview.Visible = bVisible
+    End Sub
+
+
 
     Public Sub SetControlsFromFile(strFilePath As String)
         Dim strFileExt As String
@@ -713,8 +709,7 @@ Public Class dlgImportDataset
                         lblImportingSheets.Show()
                         lblImportingSheets.Text = "No sheet selected."
                         GridPreviewVisible(False)
-                        LinesToPreviewVisible(False)
-                        cmdRefreshPreview.Enabled = False
+
                         Cursor = Cursors.Default
                         TestOkEnabled()
                         Exit Sub
@@ -726,8 +721,7 @@ Public Class dlgImportDataset
                         lblImportingSheets.Show()
                         lblImportingSheets.Text = "Importing the following sheets:" & Environment.NewLine & String.Join(", ", dctSelectedExcelSheets.Values)
                         GridPreviewVisible(False)
-                        LinesToPreviewVisible(False)
-                        cmdRefreshPreview.Enabled = False
+
                         Cursor = Cursors.Default
                         TestOkEnabled()
                         Exit Sub
@@ -764,9 +758,8 @@ Public Class dlgImportDataset
                 End If
                 If bValid Then
                     GridPreviewVisible(True)
-                    LinesToPreviewVisible(True)
                     lblNoPreview.Hide()
-                    cmdRefreshPreview.Enabled = True
+
                 Else
                     lblCannotImport.Show()
                     bCanImport = False
@@ -776,15 +769,15 @@ Public Class dlgImportDataset
                 lblCannotImport.Hide()
                 lblNoPreview.Hide()
                 GridPreviewVisible(False)
-                LinesToPreviewVisible(False)
-                cmdRefreshPreview.Enabled = False
+
+
             Else
                 bCanImport = True
                 lblCannotImport.Hide()
                 lblNoPreview.Show()
                 GridPreviewVisible(False)
-                LinesToPreviewVisible(False)
-                cmdRefreshPreview.Enabled = False
+
+
             End If
             Cursor = Cursors.Default
             TestOkEnabled()
@@ -859,7 +852,7 @@ Public Class dlgImportDataset
         RefreshFrameView()
     End Sub
 
-    Private Sub cmdRefreshPreview_Click(sender As Object, e As EventArgs) Handles cmdRefreshPreview.Click
+    Private Sub btnRefreshPreview_Click(sender As Object, e As EventArgs) Handles btnRefreshPreview.Click
         RefreshFilePreview()
         RefreshFrameView()
     End Sub
