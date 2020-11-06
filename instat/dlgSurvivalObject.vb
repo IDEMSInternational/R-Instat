@@ -127,6 +127,7 @@ Public Class dlgSurvivalObject
         ucrModifyEventFactor.SetAsMultipleSelector()
         ucrModifyEventFactor.SetIncludeLevels(False)
 
+        ucrSaveObject.SetPrefix("surv")
         ucrSaveObject.SetSaveTypeAsSurv()
         ucrSaveObject.SetDataFrameSelector(ucrSelectorFitObject.ucrAvailableDataFrames)
         ucrSaveObject.SetLabelText("Survival Object Name:")
@@ -166,7 +167,7 @@ Public Class dlgSurvivalObject
 
         clsDefaultFunction.SetRCommand("with")
         clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsRightLeftFunction, iPosition:=1)
-        clsDefaultFunction.SetAssignTo(strTemp:="surv", strTempDataframe:=ucrSelectorFitObject.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempSurv:="surv", bAssignToIsPrefix:=True)
+        clsDefaultFunction.SetAssignTo(ucrSaveObject.GetText, strTempDataframe:=ucrSelectorFitObject.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempSurv:=ucrSaveObject.GetText)
 
         clsCreateObjectScript.SetRCommand("cat")
         clsCreateObjectScriptPaste.SetRCommand("paste")
