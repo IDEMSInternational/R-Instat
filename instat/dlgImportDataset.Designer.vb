@@ -651,7 +651,6 @@ Partial Class dlgImportDataset
         Me.panelGridPreview.Controls.Add(Me.grdDataPreview)
         Me.panelGridPreview.Controls.Add(Me.ucrNudPreviewLines)
         Me.panelGridPreview.Controls.Add(Me.lblLinesToPreview)
-        Me.panelGridPreview.Controls.Add(Me.btnRefreshPreview)
         Me.panelGridPreview.Controls.Add(Me.lblCannotImport)
         resources.ApplyResources(Me.panelGridPreview, "panelGridPreview")
         Me.panelGridPreview.Name = "panelGridPreview"
@@ -664,6 +663,7 @@ Partial Class dlgImportDataset
         Me.Controls.Add(Me.panelTextPreview)
         Me.Controls.Add(Me.panelSheets)
         Me.Controls.Add(Me.rdoFixedWidthWhiteSpacesText)
+        Me.Controls.Add(Me.btnRefreshPreview)
         Me.Controls.Add(Me.rdoSeparatortext)
         Me.Controls.Add(Me.rdoFixedWidthText)
         Me.Controls.Add(Me.grpText)

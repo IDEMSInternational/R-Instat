@@ -400,11 +400,9 @@ Public Class dlgImportDataset
 
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
+        'ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
-        strFilePathSystem = ""
-        enumFileType = Nothing
-
+        ucrSaveFile.Reset()
         dctSelectedExcelSheets.Clear()
         clbSheets.Items.Clear() 'reset this here. Not set by R code
         ucrInputMissingValueStringExcel.SetName("") 'reset this here. Not set by R code 
@@ -413,35 +411,36 @@ Public Class dlgImportDataset
 
         ucrNudPreviewLines.Value = 10
 
-        grpExcel.Visible = False
-        ucrPanelFixedWidthText.Hide()
-        grpText.Visible = False
-        grpCSV.Visible = False
-        grpRDS.Visible = False
-        ExcelSheetPreviewVisible(False)
-        TextPreviewVisible(False, "")
-        GridPreviewVisible(False, "")
-        ucrSaveFile.Visible = False
+        SetSelectedFileProperties()
+        SetControlsAndBaseFunction()
+
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        SetSelectedFileProperties()
-        SetControlsAndBaseFunction()
-        'RefreshGridPreview()
         TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
         If ucrInputFilePath.IsEmpty() Then
             ucrBase.OKEnabled(False)
-        ElseIf Not bCanImport AndAlso Not ucrSaveFile.IsComplete Then
-            ucrBase.OKEnabled(False)
         ElseIf enumFileType = FileType.RDS Then
             ucrBase.OKEnabled(True)
+        ElseIf enumFileType <> FileType.CSV OrElse enumFileType <> FileType.TXT Then
+            If RefreshFilePreview() AndAlso RefreshGridPreview() Then
+                ucrBase.OKEnabled(ucrSaveFile.IsComplete)
+            End If
         ElseIf enumFileType = FileType.XLSX OrElse enumFileType = FileType.XLS Then
-            ucrBase.OKEnabled(dctSelectedExcelSheets.Count > 0)
+            If RefreshGridPreview() Then
+                If dctSelectedExcelSheets.Count = 1 Then
+                    ucrBase.OKEnabled(ucrSaveFile.IsComplete)
+                Else
+                    ucrBase.OKEnabled(dctSelectedExcelSheets.Count > 0)
+                End If
+            End If
+        Else
+            ucrBase.OKEnabled(ucrSaveFile.IsComplete)
         End If
 
         'If (ucrSaveFile.IsComplete OrElse enumFileType = FileType.RDS) AndAlso bCanImport Then
@@ -849,17 +848,20 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub ucrNudPreviewLines_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudPreviewLines.ControlContentsChanged
-        RefreshFilePreview()
-        RefreshGridPreview()
+        TestOkEnabled()
+        'RefreshFilePreview()
+        'RefreshGridPreview()
     End Sub
 
     Private Sub btnRefreshPreview_Click(sender As Object, e As EventArgs) Handles btnRefreshPreview.Click
-        RefreshFilePreview()
-        RefreshGridPreview()
+        TestOkEnabled()
+        'RefreshFilePreview()
+        'RefreshGridPreview()
     End Sub
 
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkColumnNamesExcel.ControlValueChanged, ucrChkColumnNamesText.ControlValueChanged, ucrNudRowsToSkipText.ControlValueChanged, ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrNudMaxRowsExcel.ControlValueChanged, ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudRowsToSkipCSV.ControlValueChanged
-        RefreshGridPreview()
+        TestOkEnabled()
+        'RefreshGridPreview()
     End Sub
 
     Private Sub MissingValuesInputControls_ContentsChanged() Handles ucrInputMissingValueStringText.ContentsChanged, ucrInputMissingValueStringCSV.ContentsChanged, ucrInputMissingValueStringExcel.ContentsChanged
@@ -888,6 +890,7 @@ Public Class dlgImportDataset
             Exit Sub
         End If
 
+        'todo remove this here and push to set base control
         grpCSV.Visible = False
         grpText.Visible = False
         If rdoFixedWidthText.Checked OrElse rdoFixedWidthWhiteSpacesText.Checked Then
@@ -898,8 +901,6 @@ Public Class dlgImportDataset
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
             grpCSV.Visible = True
         End If
-
-
 
         'RefreshFilePreview()
         'RefreshGridPreview()
@@ -929,6 +930,7 @@ Public Class dlgImportDataset
             dctSelectedExcelSheets.Remove(e.Index + 1)
         End If
 
+        'tdodo. remove some of these and push to set base and cotrols subroutine
         If dctSelectedExcelSheets.Count = 0 Then
             clsImportExcel.RemoveParameterByName("which")
             clsImportExcelMulti.RemoveParameterByName("which")
@@ -1036,10 +1038,6 @@ Public Class dlgImportDataset
     ''' <param name="strFileExtension">File extension</param>
     ''' <returns></returns>
     Private Function GetFileType(strFileExtension As String) As FileType
-        If String.IsNullOrEmpty(strFileExtension) Then
-            Return Nothing
-        End If
-
         strFileExtension = strFileExtension.ToLower
         Select Case strFileExtension
             Case ".rds"
