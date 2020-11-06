@@ -26,14 +26,14 @@ Public Class dlgImportDataset
     Public bStartOpenDialog As Boolean
     Private strFilePathSystem As String
     Private strFilePathSystemTemp As String 'to hold and set back what was previously the path in the case of open from library
-    Private strFilePathR As String
+    'Private strFilePathR As String
     Private strCurrentDirectory As String
     Public strFileToOpenOn As String
     Private bDialogLoaded As Boolean
     Private iDataFrameCount As Integer
     Private bMultiFiles As Boolean
 
-    Private strFileName As String
+    'Private strFileName As String
 
     Private bSupressCheckAllSheets As Boolean = False
     Private bSupressSheetChange As Boolean = False
@@ -75,12 +75,13 @@ Public Class dlgImportDataset
         End If
         SetRCodeForControls(bReset)
         If strFileToOpenOn <> "" Then
-            If Not File.Exists(strFileToOpenOn) Then
-                MsgBox("File no longer exists: " & strFileToOpenOn)
-                SetControlsAndBaseFunction("")
+            If File.Exists(strFileToOpenOn) Then
+                SetFilePathName(strFileToOpenOn)
             Else
-                SetControlsAndBaseFunction(strFileToOpenOn)
+                MsgBox("File no longer exists: " & strFileToOpenOn)
+                SetFilePathName("")
             End If
+            SetControlsAndBaseFunction()
             bStartOpenDialog = False
             strFileToOpenOn = ""
             bDialogLoaded = True
@@ -94,13 +95,11 @@ Public Class dlgImportDataset
             RefreshGridPreview()
         Else
             'if none of the above then try setting the displayed values from the previous contents of ucrInputFilePath.
-            If Not String.IsNullOrEmpty(ucrInputFilePath.GetText()) AndAlso Not File.Exists(ucrInputFilePath.GetText()) Then
+            If Not String.IsNullOrEmpty(GetFilePathName()) AndAlso Not File.Exists(GetFilePathName(bInWindowsFormat:=True)) Then
                 MsgBox("File no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File No Longer Exists")
-                SetControlsAndBaseFunction("")
-            Else
-                SetControlsAndBaseFunction(ucrInputFilePath.GetText())
+                SetFilePathName("")
             End If
-
+            SetControlsAndBaseFunction()
             'still refresh the preview. Incase the dialog was previously opened from the library
             bDialogLoaded = True
             RefreshFilePreview()
@@ -113,6 +112,33 @@ Public Class dlgImportDataset
         bReset = False
         TestOkEnabled()
     End Sub
+
+    Private Function GetFilePathName(Optional bInWindowsFormat As Boolean = False) As String
+        Return If(bInWindowsFormat, Strings.Replace(ucrInputFilePath.GetText, "/", "\"), ucrInputFilePath.GetText)
+    End Function
+
+    Private Sub SetFilePathName(strFilePath As String)
+        'set file path in R format
+        ucrInputFilePath.SetName(Strings.Replace(strFilePath, "\", "/"))
+    End Sub
+
+    Private Function GetFileName() As String
+        Return Path.GetFileNameWithoutExtension(GetFilePathName(bInWindowsFormat:=True))
+    End Function
+
+    Private Function GetCleanFileName() As String
+        Dim strCleanFileName As String
+        strCleanFileName = System.Text.RegularExpressions.Regex.Replace(GetFileName(), "[^A-Za-z0-9_\-]", "")
+        If String.IsNullOrEmpty(strCleanFileName) Then
+            strCleanFileName = "defaultCleanFileName"
+        End If
+        Return strCleanFileName
+    End Function
+
+    Private Function GetFileExtension() As String
+        Return Path.GetExtension(GetFilePathName(bInWindowsFormat:=True))
+    End Function
+
 
     Private Sub InitialiseDialog()
         Dim dctucrInputSeparatorCSV As New Dictionary(Of String, String)
@@ -362,7 +388,6 @@ Public Class dlgImportDataset
 
         strFilePathSystem = ""
         strCurrentDirectory = ""
-        strFilePathR = ""
         enumFileType = Nothing
 
         dctSelectedExcelSheets.Clear()
@@ -419,7 +444,7 @@ Public Class dlgImportDataset
             dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html;*.dly|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html|DLY|*.dly|All files|*.*"
             dlgOpen.Multiselect = False
             If bFromLibrary Then
-                dlgOpen.Title = "Import from Library"
+                dlgOpen.Title = "Import from library"
                 dlgOpen.InitialDirectory = strLibraryPath
             Else
                 dlgOpen.Title = "Open Data from file"
@@ -428,32 +453,14 @@ Public Class dlgImportDataset
 
             If DialogResult.OK = dlgOpen.ShowDialog() Then
                 ucrSaveFile.Reset()
-                'TODO This is in place for when we allow multiple files selected.
-                bMultiFiles = (dlgOpen.FileNames.Count > 1)
-                If NumberOfFileTypes(dlgOpen.FileNames) > 1 Then
-                    MsgBox("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
-                    SetControlsAndBaseFunction("")
-                Else
-                    dctSelectedExcelSheets.Clear()
-                    SetControlsAndBaseFunction(dlgOpen.FileName)
-                End If
+                dctSelectedExcelSheets.Clear()
+                SetFilePathName(dlgOpen.FileName)
+                SetControlsAndBaseFunction()
             Else
-                If bFromLibrary Then
-                    'TODO something like this so that the Import dialog closes
-                    '     when using open from library but library dialog stays open
-                    'Me.Close()
-                End If
-                If ucrInputFilePath.GetText() = "" Then
-                    grpExcel.Visible = False
-                    grpText.Visible = False
-                    grpCSV.Visible = False
-                    grpRDS.Visible = False
-                    TextPreviewVisible(False, "")
-                    ExcelSheetPreviewVisible(False)
-                    ExcelSheetPreviewVisible(False)
+                If String.IsNullOrEmpty(GetFilePathName()) Then
+                    SetControlsAndBaseFunction()
                 End If
             End If
-
         End Using
     End Sub
 
@@ -526,8 +533,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub ExcelSheetPreviewVisible(bVisible As Boolean)
-        'grpExcel.Visible = bVisible 'todo. remove this
-        panelSheets.Visible = Visible
+        panelSheets.Visible = bVisible
     End Sub
 
     Private Sub GridPreviewVisible(bVisible As Boolean, strGridText As String)
@@ -550,8 +556,8 @@ Public Class dlgImportDataset
         End If
     End Sub
 
-    Private Sub SetControlsAndBaseFunction(strFilePath As String)
-        Dim strFileExt As String
+    Private Sub SetControlsAndBaseFunction()
+        'Dim strFilePath As String = GetFilePath(bInWindowsFormat:=true)
 
         grpExcel.Visible = False
         ucrPanelFixedWidthText.Hide()
@@ -563,29 +569,21 @@ Public Class dlgImportDataset
         GridPreviewVisible(False, "")
         ucrSaveFile.Visible = False
 
-        If String.IsNullOrEmpty(strFilePath) Then
-            strFileName = ""
-            strFileExt = ""
+        If String.IsNullOrEmpty(GetFilePathName()) Then
             strFilePathSystem = ""
-            strFilePathR = ""
+            strCurrentDirectory = ""
         Else
-            'get the name of the file (without extension), with any special characters removed
-            strFileName = GetCleanFileName(strFilePath)
-            strFileExt = Path.GetExtension(strFilePath).ToLower()
             If bFromLibrary Then
                 strFilePathSystemTemp = strFilePathSystem 'store what was there temporarily first 
             End If
-            strFilePathSystem = strFilePath
-            strFilePathR = Strings.Replace(strFilePath, "\", "/")
-            strCurrentDirectory = Path.GetDirectoryName(strFilePath)
+            strFilePathSystem = GetFilePathName(bInWindowsFormat:=True)
+            strCurrentDirectory = Path.GetDirectoryName(GetFilePathName(bInWindowsFormat:=True))
         End If
 
-        enumFileType = GetFileType(strFileExt)
+        enumFileType = GetFileType(GetFileExtension)
         If IsNothing(enumFileType) Then
             Exit Sub
         End If
-
-        ucrInputFilePath.SetName(strFilePathR)
 
         'TODO This needs to be different when RDS is a data frame
         'need to be able to detect RDS as data.frame/Instat Object
@@ -610,10 +608,11 @@ Public Class dlgImportDataset
             grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
             grpCSV.Visible = True
         ElseIf enumFileType = FileType.DAT Then
-            clsImportDAT.AddParameter("file", Chr(34) & strFilePathR & Chr(34))
+            clsImportDAT.AddParameter("file", Chr(34) & GetFilePathName() & Chr(34))
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportDAT)
         ElseIf enumFileType = FileType.XLSX OrElse enumFileType = FileType.XLS Then
             ucrBase.clsRsyntax.SetBaseRFunction(If(clbSheets.CheckedItems.Count > 1, clsImportExcelMulti, clsImportExcel))
+            grpExcel.Visible = True
             ExcelSheetPreviewVisible(True)
             FillExcelSheets()
         ElseIf enumFileType = FileType.OTHER Then
@@ -622,7 +621,7 @@ Public Class dlgImportDataset
 
         'make file names valid, overwrite if file name except for excel(done elsewhere) and rds files
         If enumFileType <> FileType.RDS AndAlso enumFileType <> FileType.XLSX AndAlso enumFileType AndAlso FileType.XLS Then
-            ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
+            ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(GetCleanFileName), bSilent:=True)
         End If
 
         'for rds and null file types hide ucrSave controls
@@ -638,7 +637,7 @@ Public Class dlgImportDataset
         Dim bValid As Boolean = False
         Dim strRead As String
         Dim iRowsToSkip As Integer = 0
-        Dim strFilePathWindowsSystem As String = ucrInputFilePath.GetText
+        Dim strFilePathWindowsSystem As String = GetFilePathName(bInWindowsFormat:=True)
 
         TextPreviewVisible(False, "")
 
@@ -775,11 +774,7 @@ Public Class dlgImportDataset
         Dim lstCheckedItems As New List(Of String)
 
         expSheet = frmMain.clsRLink.RunInternalScriptGetValue(clsGetExcelSheetNames.ToScript())
-        If expSheet IsNot Nothing Then
-            chrSheets = expSheet.AsCharacter
-        Else
-            chrSheets = Nothing
-        End If
+        chrSheets = expSheet?.AsCharacter
 
         'store the checked items first temporarily 
         For i As Integer = 0 To clbSheets.CheckedItems.Count - 1
@@ -806,11 +801,6 @@ Public Class dlgImportDataset
         bSupressCheckAllSheets = True
         ucrChkSheetsCheckAll.Checked = chrSheets IsNot Nothing AndAlso clbSheets.CheckedItems.Count = chrSheets.Count
         bSupressCheckAllSheets = False
-    End Sub
-
-    Private Sub lblRowVector_Click(sender As Object, e As EventArgs)
-        Me.Hide()
-        frmMetaData.Show()
     End Sub
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
@@ -859,7 +849,8 @@ Public Class dlgImportDataset
                 clsImportFixedWidthText.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringText.GetText()), iPosition:=2)
             End If
         End If
-        RefreshGridPreview()
+        'RefreshGridPreview()
+
     End Sub
 
     Private Sub UcrPanelFixedWidthText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPanelFixedWidthText.ControlValueChanged
@@ -878,19 +869,12 @@ Public Class dlgImportDataset
             grpCSV.Visible = True
         End If
 
-        RefreshFilePreview()
-        RefreshGridPreview()
+
+
+        'RefreshFilePreview()
+        'RefreshGridPreview()
 
     End Sub
-
-    Private Function NumberOfFileTypes(strFileNames As String()) As Integer
-        Dim lstExtensions As New List(Of String)
-
-        For Each strFile As String In strFileNames
-            lstExtensions.Add(Path.GetExtension(strFile))
-        Next
-        Return lstExtensions.Distinct.Count
-    End Function
 
     Private Sub clbSheets_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles clbSheets.ItemCheck
         Dim strSheetNumbers As String
@@ -923,7 +907,7 @@ Public Class dlgImportDataset
                 Else
                     strSheetNumbers = "c(" & String.Join(",", dctSelectedExcelSheets.Keys) & ")"
                     clsImportExcelMulti.AddParameter("which", strSheetNumbers)
-                    ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
+                    ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(GetCleanFileName), bSilent:=True)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcelMulti)
                     ucrSaveFile.Visible = False
                     ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=dctSelectedExcelSheets.Values.ToList())
@@ -962,19 +946,15 @@ Public Class dlgImportDataset
             bFromLibrary = False
             If String.IsNullOrEmpty(strFilePathSystemTemp) Then
                 strCurrentDirectory = ""
-                strFileName = ""
                 enumFileType = Nothing
                 strFilePathSystem = ""
-                strFilePathR = ""
-                ucrInputFilePath.SetName("")
+                SetFilePathName("")
             Else
+                SetFilePathName(strFilePathSystemTemp)
                 strCurrentDirectory = Path.GetDirectoryName(strFilePathSystemTemp)
-                'get the name of the file (without extension), with any special characters removed
-                strFileName = GetCleanFileName(strFilePathSystemTemp)
-                enumFileType = GetFileType(Path.GetExtension(strFilePathSystemTemp))
+                enumFileType = GetFileType(GetFileExtension)
                 strFilePathSystem = strFilePathSystemTemp
-                strFilePathR = Strings.Replace(strFilePathSystemTemp, "\", "/")
-                ucrInputFilePath.SetName(strFilePathR)
+
             End If
         End If
     End Sub
