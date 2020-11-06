@@ -30,11 +30,12 @@ Partial Class dlgCircularDensityPlot
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.cmdDensityOptions = New System.Windows.Forms.Button()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
+        Me.ucrSaveDensity = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(5, 287)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 300)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -103,18 +104,27 @@ Partial Class dlgCircularDensityPlot
         '
         'cmdPlotOptions
         '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(5, 243)
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(5, 229)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Size = New System.Drawing.Size(120, 25)
         Me.cmdPlotOptions.TabIndex = 7
         Me.cmdPlotOptions.Text = "Plot Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
+        'ucrSaveDensity
+        '
+        Me.ucrSaveDensity.Location = New System.Drawing.Point(5, 266)
+        Me.ucrSaveDensity.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveDensity.Name = "ucrSaveDensity"
+        Me.ucrSaveDensity.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveDensity.TabIndex = 16
+        '
         'dlgCircularDensityPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 346)
+        Me.ClientSize = New System.Drawing.Size(420, 355)
+        Me.Controls.Add(Me.ucrSaveDensity)
         Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.cmdDensityOptions)
         Me.Controls.Add(Me.lblFactor)
@@ -142,4 +152,5 @@ Partial Class dlgCircularDensityPlot
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents cmdPlotOptions As Button
     Friend WithEvents cmdDensityOptions As Button
+    Friend WithEvents ucrSaveDensity As ucrSave
 End Class
