@@ -238,6 +238,7 @@ Public Class dlgSurvivalObject
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsCreateObjectScript)
         SetDefaults()
         SetRCodeforControls(True)
         TestOkEnabled()
@@ -361,6 +362,7 @@ Public Class dlgSurvivalObject
 
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         clsCreateObjectScriptPaste.AddParameter("col1", strParameterValue:=ucrReceiverExit.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=1)
+        clsCreateObjectScript.AddParameter("surv_name", Chr(34) & ucrSaveObject.ucrInputComboSave.GetText() & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
 
         If Not ucrReceiverEntry.IsEmpty AndAlso ucrReceiverEntry.Visible Then
             clsCreateObjectScriptPaste.AddParameter("col0", strParameterValue:=ucrReceiverEntry.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=0)
@@ -381,10 +383,6 @@ Public Class dlgSurvivalObject
 
     Private Sub ucrModifyEventControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrModifyEventFactor.ControlValueChanged, ucrModifyEventLogical.ControlValueChanged, ucrChkModifyEvent.ControlValueChanged, ucrReceiverEvent.ControlValueChanged
         ModifyOptions()
-    End Sub
-
-    Private Sub ucrSaveObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveObject.ControlValueChanged
-        clsCreateObjectScript.AddParameter("surv_name", Chr(34) & ucrSaveObject.ucrInputComboSave.GetText() & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
     End Sub
 
     Private Sub ucrReceiverEntryControl(ucrChangedControl As ucrCore) Handles ucrReceiverEntry.ControlValueChanged
