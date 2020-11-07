@@ -99,7 +99,7 @@ Partial Class dlgImportDataset
         Me.rdoSeparatortext = New System.Windows.Forms.RadioButton()
         Me.rdoFixedWidthText = New System.Windows.Forms.RadioButton()
         Me.rdoFixedWidthWhiteSpacesText = New System.Windows.Forms.RadioButton()
-        Me.clbSheets = New System.Windows.Forms.CheckedListBox()
+        Me.chkListBoxSheetNames = New System.Windows.Forms.CheckedListBox()
         Me.lblSelectSheets = New System.Windows.Forms.Label()
         Me.ucrChkSheetsCheckAll = New instat.ucrCheck()
         Me.ucrNudPreviewLines = New instat.ucrNud()
@@ -578,12 +578,12 @@ Partial Class dlgImportDataset
         Me.rdoFixedWidthWhiteSpacesText.TabStop = True
         Me.rdoFixedWidthWhiteSpacesText.UseVisualStyleBackColor = True
         '
-        'clbSheets
+        'chkListBoxSheetNames
         '
-        Me.clbSheets.CheckOnClick = True
-        Me.clbSheets.FormattingEnabled = True
-        resources.ApplyResources(Me.clbSheets, "clbSheets")
-        Me.clbSheets.Name = "clbSheets"
+        Me.chkListBoxSheetNames.CheckOnClick = True
+        Me.chkListBoxSheetNames.FormattingEnabled = True
+        resources.ApplyResources(Me.chkListBoxSheetNames, "chkListBoxSheetNames")
+        Me.chkListBoxSheetNames.Name = "chkListBoxSheetNames"
         '
         'lblSelectSheets
         '
@@ -632,7 +632,7 @@ Partial Class dlgImportDataset
         '
         'panelSheets
         '
-        Me.panelSheets.Controls.Add(Me.clbSheets)
+        Me.panelSheets.Controls.Add(Me.chkListBoxSheetNames)
         Me.panelSheets.Controls.Add(Me.lblSelectSheets)
         Me.panelSheets.Controls.Add(Me.ucrChkSheetsCheckAll)
         resources.ApplyResources(Me.panelSheets, "panelSheets")
@@ -758,7 +758,7 @@ Partial Class dlgImportDataset
     Friend WithEvents rdoSeparatortext As RadioButton
     Friend WithEvents rdoFixedWidthText As RadioButton
     Friend WithEvents rdoFixedWidthWhiteSpacesText As RadioButton
-    Friend WithEvents clbSheets As CheckedListBox
+    Friend WithEvents chkListBoxSheetNames As CheckedListBox
     Friend WithEvents lblSelectSheets As Label
     Friend WithEvents ucrChkSheetsCheckAll As ucrCheck
     Friend WithEvents ucrChkRange As ucrCheck

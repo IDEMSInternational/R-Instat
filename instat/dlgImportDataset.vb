@@ -143,7 +143,7 @@ Public Class dlgImportDataset
     '''             If the cleaned name is an empty string then returns 'defaultCleanFileName'.
     ''' </returns>
     '''--------------------------------------------------------------------------------------------
-    Private Function GetCleanFileName() As String
+    Private Function GetCleanedFileName() As String
         Dim strCleanFileName As String = "defaultCleanFileName"
 
         If Not String.IsNullOrEmpty(GetFileName()) Then
@@ -154,6 +154,7 @@ Public Class dlgImportDataset
         End If
 
         Return strCleanFileName
+        Return frmMain.clsRLink.MakeValidText(strCleanFileName)
     End Function
 
     Private Function GetFileExtension() As String
@@ -410,7 +411,7 @@ Public Class dlgImportDataset
 
         ucrSaveFile.Reset()
         dctSelectedExcelSheets.Clear()
-        clbSheets.Items.Clear() 'reset this here. Not set by R code
+        chkListBoxSheetNames.Items.Clear() 'reset this here. Not set by R code
         ucrInputMissingValueStringExcel.SetName("") 'reset this here. Not set by R code 
         ucrInputMissingValueStringCSV.SetName("") 'reset this here. Not set by R code 
         ucrInputMissingValueStringText.SetName("") 'reset this here. Not set by R code 
@@ -556,7 +557,7 @@ Public Class dlgImportDataset
         txtTextFilePreview.Text = strTextRead
     End Sub
 
-    Private Sub ExcelSheetPreviewVisible(bVisible As Boolean)
+    Private Sub ExcelSheetsPreviewVisible(bVisible As Boolean)
         panelSheets.Visible = bVisible
     End Sub
 
@@ -601,21 +602,11 @@ Public Class dlgImportDataset
         grpRDS.Visible = False
         grpCSV.Visible = False
         TextPreviewVisible(False, "")
-        ExcelSheetPreviewVisible(False)
+        ExcelSheetsPreviewVisible(False)
         GridPreviewVisible(False, "")
         ucrSaveFile.Visible = False
 
-        'If String.IsNullOrEmpty(GetFilePathName()) Then
-        '    strFilePathSystem = ""
-        'Else
-        '    If bFromLibrary Then
-        '        strFilePathSystemTemp = strFilePathSystem 'store what was there temporarily first 
-        '    End If
-        '    strFilePathSystem = GetFilePathName(bInSystemFormat:=True)
-        'End If
-        'enumFileType = GetFileType(GetFileExtension)
-
-
+        'todo. check this. enum may never be nothing. 
         If IsNothing(enumFileType) Then
             Exit Sub
         End If
@@ -623,46 +614,74 @@ Public Class dlgImportDataset
         'TODO This needs to be different when RDS is a data frame
         'need to be able to detect RDS as data.frame/Instat Object
         If enumFileType = FileType.RDS Then
+            grpRDS.Visible = True
             clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
-            grpRDS.Visible = True
         ElseIf enumFileType = FileType.TXT Then
-            'add or change format parameter values
-            clsImportCSV.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
-            'by default the textfiles will be imported using the function we use for csv
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
             ucrPanelFixedWidthText.Visible = True
-            grpCSV.Text = "Import Text Options"
-            grpCSV.Location = New System.Drawing.Point(9, 99) 'set the location of the groupbox to adjust gaps in the form UI
-            grpCSV.Visible = True
+            If rdoFixedWidthText.Checked OrElse rdoFixedWidthWhiteSpacesText.Checked Then
+                grpText.Visible = True
+                clsImportFixedWidthText.SetRCommand(If(rdoFixedWidthText.Checked, "read_table", "read_table2"))
+                ucrBase.clsRsyntax.SetBaseRFunction(clsImportFixedWidthText)
+            ElseIf rdoSeparatortext.Checked Then
+                grpCSV.Visible = True
+                grpCSV.Text = "Import Text Options"
+                grpCSV.Location = New System.Drawing.Point(9, 99) 'set the location of the groupbox to adjust gaps in the form UI
+                'add or change format parameter values
+                clsImportCSV.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
+                'by default the textfiles will be imported using the function we use for csv
+                ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
+            End If
         ElseIf enumFileType = FileType.CSV Then
+            grpCSV.Visible = True
+            grpCSV.Text = "Import CSV Options"
+            grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
             'add format. forces rio to treat other csv format files, like .dly files, as csv 
             clsImportCSV.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
-            grpCSV.Text = "Import CSV Options"
-            grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
-            grpCSV.Visible = True
         ElseIf enumFileType = FileType.DAT Then
             clsImportDAT.AddParameter("file", Chr(34) & GetFilePathName() & Chr(34))
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportDAT)
         ElseIf enumFileType = FileType.XLSX OrElse enumFileType = FileType.XLS Then
-            ucrBase.clsRsyntax.SetBaseRFunction(If(clbSheets.CheckedItems.Count > 1, clsImportExcelMulti, clsImportExcel))
             grpExcel.Visible = True
-            ExcelSheetPreviewVisible(True)
+            ucrBase.clsRsyntax.SetBaseRFunction(If(chkListBoxSheetNames.CheckedItems.Count > 1, clsImportExcelMulti, clsImportExcel))
+
+            If dctSelectedExcelSheets.Count = 0 Then
+                clsImportExcel.RemoveParameterByName("which")
+                clsImportExcelMulti.RemoveParameterByName("which")
+                ucrSaveFile.Visible = True
+                ucrSaveFile.SetName("", bSilent:=True)
+                ucrSaveFile.SetDataFrameNames("")
+            ElseIf dctSelectedExcelSheets.Count = 1 Then
+                ucrSaveFile.Visible = True
+                clsImportExcel.AddParameter("which", dctSelectedExcelSheets.Keys.First().ToString)
+                ucrSaveFile.Visible = True
+                ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First(), bSilent:=True)
+                ucrSaveFile.SetDataFrameNames("")
+                'ucrSaveFile.Focus()
+            Else
+                clsImportExcelMulti.AddParameter("which", "c(" & String.Join(",", dctSelectedExcelSheets.Keys) & ")")
+                ucrSaveFile.Visible = False
+                ucrSaveFile.SetName(GetCleanedFileName, bSilent:=True)
+                ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=dctSelectedExcelSheets.Values.ToList())
+            End If
+
+            ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=(dctSelectedExcelSheets.Count > 1))
+            ExcelSheetsPreviewVisible(True)
             FillExcelSheets()
         ElseIf enumFileType = FileType.OTHER Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
         End If
 
-        'make file names valid, overwrite if file name except for excel(done elsewhere) and rds files
+        'make file names valid, overwrite if file name except for excel(done elsewhere) and is rds file
         If enumFileType <> FileType.RDS AndAlso enumFileType <> FileType.XLSX AndAlso enumFileType AndAlso FileType.XLS Then
-            ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(GetCleanFileName), bSilent:=True)
+            ucrSaveFile.SetName(GetCleanedFileName, bSilent:=True)
         End If
 
         'for rds and null file types hide ucrSave controls
         If enumFileType = FileType.XLSX OrElse enumFileType = FileType.XLS Then
             'if excel file then make ucrSave control visible if only 1 file selected 
-            ucrSaveFile.Visible = (clbSheets.CheckedItems.Count = 0)
+            ucrSaveFile.Visible = (chkListBoxSheetNames.CheckedItems.Count = 0)
         ElseIf enumFileType <> FileType.RDS Then
             ucrSaveFile.Visible = True
         End If
@@ -811,30 +830,59 @@ Public Class dlgImportDataset
         expSheet = frmMain.clsRLink.RunInternalScriptGetValue(clsGetExcelSheetNames.ToScript())
         chrSheets = expSheet?.AsCharacter
 
-        'store the checked items first temporarily 
-        For i As Integer = 0 To clbSheets.CheckedItems.Count - 1
-            lstCheckedItems.Add(clbSheets.CheckedItems(i).ToString)
+        If chrSheets Is Nothing OrElse chrSheets.Count = 0 Then
+            chkListBoxSheetNames.Items.Clear()
+            Exit Sub
+        End If
+
+        'check if the items are already contained in the list box
+        Dim arrStrSheetNames() As String = chrSheets.ToArray()
+        Dim bSheetNamesDifferent As Boolean = False
+        Dim bFound As Boolean
+        For Each strSheetName As String In arrStrSheetNames
+            bFound = False
+            'find the sheet name in the list box
+            For i As Integer = 0 To chkListBoxSheetNames.Items.Count - 1
+                If strSheetName = chkListBoxSheetNames.Items.Item(i).ToString Then
+                    bFound = True
+                    Exit For
+                End If
+            Next
+            'if sheet name was not found then exit for. Sheet names are different
+            If Not bFound Then
+                bSheetNamesDifferent = True
+                Exit For
+            End If
         Next
 
-        clbSheets.Items.Clear()
-        If chrSheets IsNot Nothing AndAlso chrSheets.Count > 0 Then
-            clbSheets.Items.AddRange(chrSheets.ToArray())
-            'if there were previously checked items then restore them
-            For Each strSelected As String In lstCheckedItems
-                For i As Integer = 0 To clbSheets.Items.Count - 1
-                    If strSelected = clbSheets.Items(i).ToString Then
-                        bSupressSheetChange = True
-                        clbSheets.SetItemChecked(i, True)
-                        bSupressSheetChange = False
-                        'sheet names are expected to be unique so exit inner for loop
-                        Exit For
-                    End If
-                Next
-            Next
+        'if sheet names are same then no need to fill them to the listbox again
+        If Not bSheetNamesDifferent Then
+            Exit Sub
         End If
+
+        'store the previously checked items first temporarily 
+        For i As Integer = 0 To chkListBoxSheetNames.CheckedItems.Count - 1
+            lstCheckedItems.Add(chkListBoxSheetNames.CheckedItems(i).ToString)
+        Next
+
+        'clear all the filled items, the add the new sheet names and restore the checked status
+        chkListBoxSheetNames.Items.Clear()
+        chkListBoxSheetNames.Items.AddRange(chrSheets.ToArray())
+        bSupressSheetChange = True
+        'if there were previously checked items then restore them
+        For Each strSelected As String In lstCheckedItems
+            For i As Integer = 0 To chkListBoxSheetNames.Items.Count - 1
+                If strSelected = chkListBoxSheetNames.Items(i).ToString Then
+                    chkListBoxSheetNames.SetItemChecked(i, True)
+                    Exit For 'sheet names are expected to be unique so exit inner for loop
+                End If
+            Next
+        Next
+        bSupressSheetChange = False
+
         'set checked status of select all checkbox
         bSupressCheckAllSheets = True
-        ucrChkSheetsCheckAll.Checked = chrSheets IsNot Nothing AndAlso clbSheets.CheckedItems.Count = chrSheets.Count
+        ucrChkSheetsCheckAll.Checked = (chkListBoxSheetNames.CheckedItems.Count = chrSheets.Count)
         bSupressCheckAllSheets = False
     End Sub
 
@@ -855,24 +903,19 @@ Public Class dlgImportDataset
 
     Private Sub ucrNudPreviewLines_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNudPreviewLines.ControlContentsChanged
         TestOkEnabled()
-        'RefreshFilePreview()
-        'RefreshGridPreview()
     End Sub
 
     Private Sub btnRefreshPreview_Click(sender As Object, e As EventArgs) Handles btnRefreshPreview.Click
         TestOkEnabled()
-        'RefreshFilePreview()
-        'RefreshGridPreview()
     End Sub
 
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTrimWSExcel.ControlValueChanged, ucrNudRowsToSkipExcel.ControlValueChanged, ucrChkColumnNamesExcel.ControlValueChanged, ucrChkColumnNamesText.ControlValueChanged, ucrNudRowsToSkipText.ControlValueChanged, ucrChkMaxRowsText.ControlValueChanged, ucrChkMaxRowsCSV.ControlValueChanged, ucrChkMaxRowsExcel.ControlValueChanged, ucrNudMaxRowsText.ControlValueChanged, ucrNudMaxRowsCSV.ControlValueChanged, ucrNudMaxRowsExcel.ControlValueChanged, ucrChkStringsAsFactorsCSV.ControlValueChanged, ucrInputEncodingCSV.ControlValueChanged, ucrInputSeparatorCSV.ControlValueChanged, ucrInputHeadersCSV.ControlValueChanged, ucrInputDecimalCSV.ControlValueChanged, ucrNudRowsToSkipCSV.ControlValueChanged
         TestOkEnabled()
-        'RefreshGridPreview()
     End Sub
 
     Private Sub MissingValuesInputControls_ContentsChanged() Handles ucrInputMissingValueStringText.ContentsChanged, ucrInputMissingValueStringCSV.ContentsChanged, ucrInputMissingValueStringExcel.ContentsChanged
         'currently we have no way of knowing which control has raised this event and therefore can't do that check
-        'so instead we are using the strFileType to identify which RFunctions should be updated accordingly
+        'so instead we are using the file type to identify which RFunctions should be updated accordingly
         If enumFileType = FileType.XLSX OrElse enumFileType = FileType.XLS Then
             'set for single imports and multiple imports 
             clsImportExcelMulti.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()))
@@ -887,33 +930,16 @@ Public Class dlgImportDataset
                 clsImportFixedWidthText.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringText.GetText()), iPosition:=2)
             End If
         End If
-        'RefreshGridPreview()
+
         TestOkEnabled()
     End Sub
 
     Private Sub UcrPanelFixedWidthText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPanelFixedWidthText.ControlValueChanged
-        If enumFileType <> FileType.TXT Then
-            Exit Sub
-        End If
-
-        'todo remove this here and push to set base control
-        grpCSV.Visible = False
-        grpText.Visible = False
-        If rdoFixedWidthText.Checked OrElse rdoFixedWidthWhiteSpacesText.Checked Then
-            clsImportFixedWidthText.SetRCommand(If(rdoFixedWidthText.Checked, "read_table", "read_table2"))
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportFixedWidthText)
-            grpText.Visible = True
-        ElseIf rdoSeparatortext.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
-            grpCSV.Visible = True
-        End If
-
-        'RefreshFilePreview()
-        'RefreshGridPreview()
-
+        SetControlsAndBaseFunction()
+        TestOkEnabled()
     End Sub
 
-    Private Sub clbSheets_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles clbSheets.ItemCheck
+    Private Sub chkListBoxSheetNames_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles chkListBoxSheetNames.ItemCheck
 
         If bSupressSheetChange Then
             Exit Sub
@@ -923,53 +949,23 @@ Public Class dlgImportDataset
             Exit Sub
         End If
 
-        Dim strSheetNumbers As String
-
         dctSelectedExcelSheets.Clear()
 
-        For Each i As Integer In clbSheets.CheckedIndices
-            dctSelectedExcelSheets.Add(i + 1, clbSheets.Items.Item(i).ToString())
+        For Each i As Integer In chkListBoxSheetNames.CheckedIndices
+            dctSelectedExcelSheets.Add(i + 1, chkListBoxSheetNames.Items.Item(i).ToString())
         Next
         If e.NewValue = CheckState.Checked Then
-            dctSelectedExcelSheets.Add(e.Index + 1, clbSheets.Items.Item(e.Index).ToString())
+            dctSelectedExcelSheets.Add(e.Index + 1, chkListBoxSheetNames.Items.Item(e.Index).ToString())
         Else
             dctSelectedExcelSheets.Remove(e.Index + 1)
         End If
 
-        'tdodo. remove some of these and push to set base and cotrols subroutine
-        If dctSelectedExcelSheets.Count = 0 Then
-            clsImportExcel.RemoveParameterByName("which")
-            clsImportExcelMulti.RemoveParameterByName("which")
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
-            ucrSaveFile.Visible = True
-            ucrSaveFile.SetDataFrameNames("")
-        ElseIf dctSelectedExcelSheets.Count = 1 Then
-            strSheetNumbers = dctSelectedExcelSheets.Keys.First()
-            clsImportExcel.AddParameter("which", strSheetNumbers)
-            ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First(), bSilent:=True)
-            ucrSaveFile.Focus()
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
-            ucrSaveFile.Visible = True
-            ucrSaveFile.SetDataFrameNames("")
-        Else
-            strSheetNumbers = "c(" & String.Join(",", dctSelectedExcelSheets.Keys) & ")"
-            clsImportExcelMulti.AddParameter("which", strSheetNumbers)
-            ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(GetCleanFileName), bSilent:=True)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcelMulti)
-            ucrSaveFile.Visible = False
-            ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=dctSelectedExcelSheets.Values.ToList())
-        End If
         bSupressCheckAllSheets = True
-        If dctSelectedExcelSheets.Count = clbSheets.Items.Count Then
-            ucrChkSheetsCheckAll.Checked = True
-        Else
-            ucrChkSheetsCheckAll.Checked = False
-        End If
+        ucrChkSheetsCheckAll.Checked = (dctSelectedExcelSheets.Count = chkListBoxSheetNames.Items.Count)
         bSupressCheckAllSheets = False
-        ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=(dctSelectedExcelSheets.Count > 1))
-        'RefreshGridPreview()
-        TestOkEnabled()
 
+        SetControlsAndBaseFunction()
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrChkSheetsCheckAll_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSheetsCheckAll.ControlValueChanged
@@ -977,15 +973,20 @@ Public Class dlgImportDataset
             Exit Sub
         End If
 
-        Dim bCheckAll As Boolean
-        bCheckAll = ucrChkSheetsCheckAll.Checked
+        If chkListBoxSheetNames.Items.Count = 0 Then
+            Exit Sub
+        End If
+
+        Dim bCheckAll As Boolean = ucrChkSheetsCheckAll.Checked
         bSupressSheetChange = True
-        For i As Integer = 0 To clbSheets.Items.Count - 1
-            If i = clbSheets.Items.Count - 1 Then
+        For i As Integer = 0 To chkListBoxSheetNames.Items.Count - 1
+            'don't suppress event change when changed checked status of last item
+            If i = chkListBoxSheetNames.Items.Count - 1 Then
                 bSupressSheetChange = False
             End If
-            clbSheets.SetItemChecked(i, bCheckAll)
+            chkListBoxSheetNames.SetItemChecked(i, bCheckAll)
         Next
+
     End Sub
 
     Private Sub dlgImportDataset_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
