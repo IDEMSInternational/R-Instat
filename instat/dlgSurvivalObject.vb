@@ -175,6 +175,7 @@ Public Class dlgSurvivalObject
         clsCreateObjectScript.AddParameter("after_cols", Chr(34) & "used to create the Survival Object:" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
         clsCreateObjectScript.AddParameter("surv_name", Chr(34) & ucrSaveObject.ucrInputComboSave.GetText() & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
 
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
 
         ucrBase.clsRsyntax.AddToAfterCodes(clsCreateObjectScript)
@@ -237,7 +238,6 @@ Public Class dlgSurvivalObject
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        ucrBase.clsRsyntax.RemoveFromAfterCodes(clsCreateObjectScript)
         SetDefaults()
         SetRCodeforControls(True)
         TestOkEnabled()
