@@ -187,8 +187,8 @@ Public Class ucrInput
             ElseIf strDefaultType = "Surv" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetSurvNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
-                    'Else
-                    '    SetName("")
+                Else
+                    SetName("")
                 End If
             End If
         End If

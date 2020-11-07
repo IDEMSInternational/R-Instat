@@ -167,7 +167,6 @@ Public Class dlgSurvivalObject
 
         clsDefaultFunction.SetRCommand("with")
         clsDefaultFunction.AddParameter("exp", clsRFunctionParameter:=clsRightLeftFunction, iPosition:=1)
-        clsDefaultFunction.SetAssignTo(ucrSaveObject.GetText, strTempDataframe:=ucrSelectorFitObject.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempSurv:=ucrSaveObject.GetText)
 
         clsCreateObjectScript.SetRCommand("cat")
         clsCreateObjectScriptPaste.SetRCommand("paste")
