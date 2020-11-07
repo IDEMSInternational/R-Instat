@@ -144,16 +144,22 @@ Public Class dlgImportDataset
     ''' </returns>
     '''--------------------------------------------------------------------------------------------
     Private Function GetCleanFileName() As String
-        Dim strCleanFileName As String
-        strCleanFileName = System.Text.RegularExpressions.Regex.Replace(GetFileName(), "[^A-Za-z0-9_\-]", "")
-        If String.IsNullOrEmpty(strCleanFileName) Then
-            strCleanFileName = "defaultCleanFileName"
+        Dim strCleanFileName As String = "defaultCleanFileName"
+
+        If Not String.IsNullOrEmpty(GetFileName()) Then
+            strCleanFileName = System.Text.RegularExpressions.Regex.Replace(GetFileName(), "[^A-Za-z0-9_\-]", "")
+            If String.IsNullOrEmpty(strCleanFileName) Then
+                strCleanFileName = "defaultCleanFileName"
+            End If
         End If
+
         Return strCleanFileName
     End Function
 
     Private Function GetFileExtension() As String
-        Return Path.GetExtension(GetFilePathName(bInSystemFormat:=True))
+        Dim strFileFilePath As String
+        strFileFilePath = GetFilePathName(bInSystemFormat:=True)
+        Return If(String.IsNullOrEmpty(strFileFilePath), "", Path.GetExtension(strFileFilePath))
     End Function
 
     Private Sub InitialiseDialog()
