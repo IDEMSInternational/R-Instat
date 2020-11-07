@@ -615,9 +615,11 @@ Public Class dlgImportDataset
         'need to be able to detect RDS as data.frame/Instat Object
         If enumFileType = FileType.RDS Then
             grpRDS.Visible = True
+            'todo.remove here. setting of the parameter should be done in the change events of the control
             clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
         ElseIf enumFileType = FileType.TXT Then
+            'todo.remove here. setting of the parameter should be done in the change events of the control
             ucrPanelFixedWidthText.Visible = True
             If rdoFixedWidthText.Checked OrElse rdoFixedWidthWhiteSpacesText.Checked Then
                 grpText.Visible = True
@@ -647,25 +649,19 @@ Public Class dlgImportDataset
             ucrBase.clsRsyntax.SetBaseRFunction(If(chkListBoxSheetNames.CheckedItems.Count > 1, clsImportExcelMulti, clsImportExcel))
 
             If dctSelectedExcelSheets.Count = 0 Then
-                clsImportExcel.RemoveParameterByName("which")
-                clsImportExcelMulti.RemoveParameterByName("which")
                 ucrSaveFile.Visible = True
                 ucrSaveFile.SetName("", bSilent:=True)
                 ucrSaveFile.SetDataFrameNames("")
             ElseIf dctSelectedExcelSheets.Count = 1 Then
                 ucrSaveFile.Visible = True
-                clsImportExcel.AddParameter("which", dctSelectedExcelSheets.Keys.First().ToString)
-                ucrSaveFile.Visible = True
                 ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First(), bSilent:=True)
                 ucrSaveFile.SetDataFrameNames("")
                 'ucrSaveFile.Focus()
             Else
-                clsImportExcelMulti.AddParameter("which", "c(" & String.Join(",", dctSelectedExcelSheets.Keys) & ")")
                 ucrSaveFile.Visible = False
                 ucrSaveFile.SetName(GetCleanedFileName, bSilent:=True)
                 ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=dctSelectedExcelSheets.Values.ToList())
             End If
-
             ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=(dctSelectedExcelSheets.Count > 1))
             ExcelSheetsPreviewVisible(True)
             FillExcelSheets()
@@ -964,8 +960,18 @@ Public Class dlgImportDataset
         ucrChkSheetsCheckAll.Checked = (dctSelectedExcelSheets.Count = chkListBoxSheetNames.Items.Count)
         bSupressCheckAllSheets = False
 
+        If dctSelectedExcelSheets.Count = 0 Then
+            clsImportExcel.RemoveParameterByName("which")
+            clsImportExcelMulti.RemoveParameterByName("which")
+        ElseIf dctSelectedExcelSheets.Count = 1 Then
+            clsImportExcel.AddParameter("which", dctSelectedExcelSheets.Keys.First().ToString)
+        Else
+            clsImportExcelMulti.AddParameter("which", "c(" & String.Join(",", dctSelectedExcelSheets.Keys) & ")")
+        End If
+
         SetControlsAndBaseFunction()
         TestOkEnabled()
+
     End Sub
 
     Private Sub ucrChkSheetsCheckAll_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSheetsCheckAll.ControlValueChanged
