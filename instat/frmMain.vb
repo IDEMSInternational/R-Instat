@@ -30,7 +30,7 @@ Public Class frmMain
     Public strAppDataPath As String
     Public strInstatOptionsFile As String = "Options.bin"
     Public clsInstatOptions As InstatOptions
-    Public clsRecentItems As New clsRecentFiles
+    Public clsRecentItems As clsRecentFiles
     Public strCurrentDataFrame As String
     Public dlgLastDialog As Form
     Public strSaveFilePath As String = ""
@@ -121,6 +121,7 @@ Public Class frmMain
             AddHandler System.Windows.Forms.Application.Idle, AddressOf Application_Idle
 
             'Sets up the Recent items
+            clsRecentItems = New clsRecentFiles(strAppDataPath)
             clsRecentItems.setToolStripItems(mnuFile, mnuTbOpen, mnuTbLast10Dialogs, sepStart, sepEnd)
             clsRecentItems.SetDataViewWindow(ucrDataViewer)
             'checks existence of MRU list
@@ -511,8 +512,8 @@ Public Class frmMain
     End Sub
 
     Private Sub EditLastDialogueToolStrip_Click(sender As Object, e As EventArgs) Handles mnuTbEditLastDialog.Click
-        If clsRecentItems.mnuItems.Count > 0 Then
-            clsRecentItems.mnuItems.Last.ShowDialog()
+        If clsRecentItems.lstRecentDialogs.Count > 0 Then
+            clsRecentItems.lstRecentDialogs.Last.ShowDialog()
         End If
     End Sub
 
