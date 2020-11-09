@@ -53,10 +53,13 @@ Public Class dlgTimeSeriesPlot
     ' Stack data
     ' These functions construct the R code below. This stacks the two columns which is needed for plotting.
     ' df_stack <- df %>% 
-    '   pivot_longer(cols = c(gauge, estimate), names_to = "data", values_to = "value")
+    '   pivot_longer(cols = c(gauge, estimate), names_to = "data", values_to = "value", names_ptypes = list(data = factor(levels = c("gauge", "estimates"))))
     Private clsStackOperator As ROperator
     Private clsPivotLonger As RFunction
     Private clsPivotCFunction As RFunction
+    Private clsPivotListFunction As RFunction
+    Private clsPivotFactorFunction As RFunction
+    Private clsPivotFactorLevelsCFunction As RFunction
 
     ' Calculate Individual Summaries.
     ' These functions construct the R code below if mean lines and/or if annotated individual summaries are added.
@@ -271,6 +274,9 @@ Public Class dlgTimeSeriesPlot
         clsStackOperator = New ROperator
         clsPivotLonger = New RFunction
         clsPivotCFunction = New RFunction
+        clsPivotListFunction = New RFunction
+        clsPivotFactorFunction = New RFunction
+        clsPivotFactorLevelsCFunction = New RFunction
 
         clsIndividualSummariesOperator = New ROperator
         clsIndividualSummariesGroupBy = New RFunction
@@ -387,9 +393,18 @@ Public Class dlgTimeSeriesPlot
         clsPivotLonger.SetRCommand("pivot_longer")
         clsPivotLonger.AddParameter("cols", clsRFunctionParameter:=clsPivotCFunction, iPosition:=1)
         clsPivotLonger.AddParameter("names_to", Chr(34) & strName & Chr(34), iPosition:=2)
+        clsPivotLonger.AddParameter("names_ptypes", clsRFunctionParameter:=clsPivotListFunction, iPosition:=6)
         clsPivotLonger.AddParameter("values_to", Chr(34) & strValue & Chr(34), iPosition:=8)
 
         clsPivotCFunction.SetRCommand("c")
+
+        clsPivotListFunction.SetRCommand("list")
+        clsPivotListFunction.AddParameter(strName, clsRFunctionParameter:=clsPivotFactorFunction, iPosition:=0)
+
+        clsPivotFactorFunction.SetRCommand("factor")
+        clsPivotFactorFunction.AddParameter("levels", clsRFunctionParameter:=clsPivotFactorLevelsCFunction, iPosition:=1)
+
+        clsPivotFactorLevelsCFunction.SetRCommand("c")
 
         ' Calculate individual summaries
 
@@ -756,11 +771,13 @@ Public Class dlgTimeSeriesPlot
             strEstimates = ""
             clsEstimatesFilter.RemoveParameterByName("1")
             clsEstimatesPasteLabel.RemoveParameterByName("0")
+            clsPivotFactorLevelsCFunction.RemoveParameterByName("1")
         Else
             strEstimates = ucrReceiverEstimates.GetVariableNames(False)
             clsAdjustNAMutate.AddParameter(strEstimates, clsRFunctionParameter:=clsIfElseEstimates, iPosition:=1)
             clsEstimatesFilter.AddParameter("1", strName & "==" & ucrReceiverEstimates.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
             clsEstimatesPasteLabel.AddParameter("0", Chr(34) & strEstimates & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+            clsPivotFactorLevelsCFunction.AddParameter("1", Chr(34) & strEstimates & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
         End If
     End Sub
 
@@ -772,11 +789,13 @@ Public Class dlgTimeSeriesPlot
             strReference = ""
             clsReferenceFilter.RemoveParameterByName("1")
             clsReferencePasteLabel.RemoveParameterByName("0")
+            clsPivotFactorLevelsCFunction.RemoveParameterByName("0")
         Else
             strReference = ucrReceiverReference.GetVariableNames(False)
             clsAdjustNAMutate.AddParameter(strReference, clsRFunctionParameter:=clsIfElseReference, iPosition:=0)
             clsReferenceFilter.AddParameter("1", strName & "==" & ucrReceiverReference.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
             clsReferencePasteLabel.AddParameter("0", Chr(34) & strReference & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+            clsPivotFactorLevelsCFunction.AddParameter("0", Chr(34) & strReference & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
         End If
     End Sub
 
