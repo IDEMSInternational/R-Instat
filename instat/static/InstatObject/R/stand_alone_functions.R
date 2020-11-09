@@ -1539,4 +1539,9 @@ slope <- function(y, x) {
 
 }
 
+density_fun <- function(x) {
+  g <- with(density(x,na.rm = TRUE), approxfun(x, y, rule = 1))
+  return(g(x))
+}
+
 

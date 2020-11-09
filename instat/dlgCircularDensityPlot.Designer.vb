@@ -22,23 +22,86 @@ Partial Class dlgCircularDensityPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSelectorDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverDensity = New instat.ucrReceiverSingle()
-        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
-        Me.lblDensity = New System.Windows.Forms.Label()
+        Me.lblVariable = New System.Windows.Forms.Label()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.cmdDensityOptions = New System.Windows.Forms.Button()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
-        Me.ucrSaveDensity = New instat.ucrSave()
+        Me.ucrSaveDensityPlot = New instat.ucrSave()
+        Me.ucrReceiverFactor = New instat.ucrReceiverSingle()
+        Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
+        Me.ucrSelectorDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'lblVariable
         '
-        Me.ucrBase.Location = New System.Drawing.Point(5, 300)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 0
+        Me.lblVariable.AutoSize = True
+        Me.lblVariable.Location = New System.Drawing.Point(272, 26)
+        Me.lblVariable.Name = "lblVariable"
+        Me.lblVariable.Size = New System.Drawing.Size(48, 13)
+        Me.lblVariable.TabIndex = 1
+        Me.lblVariable.Text = "Variable:"
+        '
+        'lblFactor
+        '
+        Me.lblFactor.AutoSize = True
+        Me.lblFactor.Location = New System.Drawing.Point(272, 89)
+        Me.lblFactor.Name = "lblFactor"
+        Me.lblFactor.Size = New System.Drawing.Size(40, 13)
+        Me.lblFactor.TabIndex = 3
+        Me.lblFactor.Text = "Factor:"
+        '
+        'cmdDensityOptions
+        '
+        Me.cmdDensityOptions.Enabled = False
+        Me.cmdDensityOptions.Location = New System.Drawing.Point(5, 205)
+        Me.cmdDensityOptions.Name = "cmdDensityOptions"
+        Me.cmdDensityOptions.Size = New System.Drawing.Size(120, 25)
+        Me.cmdDensityOptions.TabIndex = 5
+        Me.cmdDensityOptions.Text = "Density Options"
+        Me.cmdDensityOptions.UseVisualStyleBackColor = True
+        '
+        'cmdPlotOptions
+        '
+        Me.cmdPlotOptions.Enabled = False
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(5, 229)
+        Me.cmdPlotOptions.Name = "cmdPlotOptions"
+        Me.cmdPlotOptions.Size = New System.Drawing.Size(120, 25)
+        Me.cmdPlotOptions.TabIndex = 6
+        Me.cmdPlotOptions.Text = "Plot Options"
+        Me.cmdPlotOptions.UseVisualStyleBackColor = True
+        '
+        'ucrSaveDensityPlot
+        '
+        Me.ucrSaveDensityPlot.Location = New System.Drawing.Point(5, 266)
+        Me.ucrSaveDensityPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveDensityPlot.Name = "ucrSaveDensityPlot"
+        Me.ucrSaveDensityPlot.Size = New System.Drawing.Size(257, 24)
+        Me.ucrSaveDensityPlot.TabIndex = 7
+        '
+        'ucrReceiverFactor
+        '
+        Me.ucrReceiverFactor.frmParent = Me
+        Me.ucrReceiverFactor.Location = New System.Drawing.Point(275, 105)
+        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
+        Me.ucrReceiverFactor.Selector = Nothing
+        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactor.strNcFilePath = ""
+        Me.ucrReceiverFactor.TabIndex = 4
+        Me.ucrReceiverFactor.ucrSelector = Nothing
+        '
+        'ucrReceiverVariable
+        '
+        Me.ucrReceiverVariable.frmParent = Me
+        Me.ucrReceiverVariable.Location = New System.Drawing.Point(275, 41)
+        Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
+        Me.ucrReceiverVariable.Selector = Nothing
+        Me.ucrReceiverVariable.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverVariable.strNcFilePath = ""
+        Me.ucrReceiverVariable.TabIndex = 2
+        Me.ucrReceiverVariable.ucrSelector = Nothing
         '
         'ucrSelectorDataFrame
         '
@@ -49,88 +112,27 @@ Partial Class dlgCircularDensityPlot
         Me.ucrSelectorDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataFrame.Name = "ucrSelectorDataFrame"
         Me.ucrSelectorDataFrame.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorDataFrame.TabIndex = 1
+        Me.ucrSelectorDataFrame.TabIndex = 0
         '
-        'ucrReceiverDensity
+        'ucrBase
         '
-        Me.ucrReceiverDensity.frmParent = Me
-        Me.ucrReceiverDensity.Location = New System.Drawing.Point(295, 28)
-        Me.ucrReceiverDensity.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDensity.Name = "ucrReceiverDensity"
-        Me.ucrReceiverDensity.Selector = Nothing
-        Me.ucrReceiverDensity.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDensity.strNcFilePath = ""
-        Me.ucrReceiverDensity.TabIndex = 2
-        Me.ucrReceiverDensity.ucrSelector = Nothing
-        '
-        'ucrReceiverFactor
-        '
-        Me.ucrReceiverFactor.frmParent = Me
-        Me.ucrReceiverFactor.Location = New System.Drawing.Point(295, 92)
-        Me.ucrReceiverFactor.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverFactor.Name = "ucrReceiverFactor"
-        Me.ucrReceiverFactor.Selector = Nothing
-        Me.ucrReceiverFactor.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverFactor.strNcFilePath = ""
-        Me.ucrReceiverFactor.TabIndex = 3
-        Me.ucrReceiverFactor.ucrSelector = Nothing
-        '
-        'lblDensity
-        '
-        Me.lblDensity.AutoSize = True
-        Me.lblDensity.Location = New System.Drawing.Point(292, 9)
-        Me.lblDensity.Name = "lblDensity"
-        Me.lblDensity.Size = New System.Drawing.Size(45, 13)
-        Me.lblDensity.TabIndex = 4
-        Me.lblDensity.Text = "Density:"
-        '
-        'lblFactor
-        '
-        Me.lblFactor.AutoSize = True
-        Me.lblFactor.Location = New System.Drawing.Point(292, 69)
-        Me.lblFactor.Name = "lblFactor"
-        Me.lblFactor.Size = New System.Drawing.Size(40, 13)
-        Me.lblFactor.TabIndex = 5
-        Me.lblFactor.Text = "Factor:"
-        '
-        'cmdDensityOptions
-        '
-        Me.cmdDensityOptions.Location = New System.Drawing.Point(5, 205)
-        Me.cmdDensityOptions.Name = "cmdDensityOptions"
-        Me.cmdDensityOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdDensityOptions.TabIndex = 6
-        Me.cmdDensityOptions.Text = "Density Options"
-        Me.cmdDensityOptions.UseVisualStyleBackColor = True
-        '
-        'cmdPlotOptions
-        '
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(5, 229)
-        Me.cmdPlotOptions.Name = "cmdPlotOptions"
-        Me.cmdPlotOptions.Size = New System.Drawing.Size(120, 25)
-        Me.cmdPlotOptions.TabIndex = 7
-        Me.cmdPlotOptions.Text = "Plot Options"
-        Me.cmdPlotOptions.UseVisualStyleBackColor = True
-        '
-        'ucrSaveDensity
-        '
-        Me.ucrSaveDensity.Location = New System.Drawing.Point(5, 266)
-        Me.ucrSaveDensity.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveDensity.Name = "ucrSaveDensity"
-        Me.ucrSaveDensity.Size = New System.Drawing.Size(255, 24)
-        Me.ucrSaveDensity.TabIndex = 16
+        Me.ucrBase.Location = New System.Drawing.Point(5, 300)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
+        Me.ucrBase.TabIndex = 8
         '
         'dlgCircularDensityPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 355)
-        Me.Controls.Add(Me.ucrSaveDensity)
+        Me.Controls.Add(Me.ucrSaveDensityPlot)
         Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.cmdDensityOptions)
         Me.Controls.Add(Me.lblFactor)
-        Me.Controls.Add(Me.lblDensity)
+        Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrReceiverFactor)
-        Me.Controls.Add(Me.ucrReceiverDensity)
+        Me.Controls.Add(Me.ucrReceiverVariable)
         Me.Controls.Add(Me.ucrSelectorDataFrame)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -146,11 +148,11 @@ Partial Class dlgCircularDensityPlot
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorDataFrame As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverDensity As ucrReceiverSingle
+    Friend WithEvents ucrReceiverVariable As ucrReceiverSingle
     Friend WithEvents lblFactor As Label
-    Friend WithEvents lblDensity As Label
+    Friend WithEvents lblVariable As Label
     Friend WithEvents ucrReceiverFactor As ucrReceiverSingle
     Friend WithEvents cmdPlotOptions As Button
     Friend WithEvents cmdDensityOptions As Button
-    Friend WithEvents ucrSaveDensity As ucrSave
+    Friend WithEvents ucrSaveDensityPlot As ucrSave
 End Class
