@@ -501,23 +501,9 @@ Public Class dlgImportDataset
             ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
         ElseIf enumFileType = FileType.XLSX OrElse enumFileType = FileType.XLS Then
             grpExcel.Visible = True
-            ucrSaveFile.Visible = (dctSelectedExcelSheets.Count = 1) '(chkListBoxSheetNames.CheckedItems.Count = 1)
-            ucrBase.clsRsyntax.SetBaseRFunction(If(chkListBoxSheetNames.CheckedItems.Count > 1, clsImportExcelMulti, clsImportExcel))
-
-            If dctSelectedExcelSheets.Count = 0 Then
-                ucrSaveFile.SetName("", bSilent:=True)
-                ucrSaveFile.SetDataFrameNames("")
-            ElseIf dctSelectedExcelSheets.Count = 1 Then
-                ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First, bSilent:=True)
-                ucrSaveFile.SetDataFrameNames("")
-                'ucrSaveFile.Focus()
-            Else
-                ucrSaveFile.SetName(GetCleanedSelectedFileName, bSilent:=True)
-                ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=dctSelectedExcelSheets.Values.ToList())
-            End If
-            ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=(dctSelectedExcelSheets.Count > 1))
             ExcelSheetsNamesVisible(True)
             FillExcelSheets()
+            SetExcelBaseFunctionAndSaveProperties()
         ElseIf enumFileType = FileType.OTHER Then
             clsImport.RemoveParameterByName("format")
             ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
@@ -587,6 +573,7 @@ Public Class dlgImportDataset
         If ucrInputFilePath.IsEmpty() Then
             ucrBase.OKEnabled(False)
         ElseIf enumFileType = FileType.RDS Then
+            GridPreviewVisible(False, "Preview not yet implemented for this file type")
             ucrBase.OKEnabled(True)
         ElseIf enumFileType = FileType.TXT OrElse enumFileType = FileType.CSV OrElse enumFileType = FileType.DLY Then
             If TestFileTextPreview() AndAlso TestFileGridPreview() Then
@@ -601,7 +588,7 @@ Public Class dlgImportDataset
                 End If
             End If
         Else
-            'TextPreviewVisible(True, "Preview not yet implemented for this file type")
+            GridPreviewVisible(False, "Preview not yet implemented for this file type")
             ucrBase.OKEnabled(ucrSaveFile.IsComplete)
         End If
     End Sub
@@ -618,7 +605,6 @@ Public Class dlgImportDataset
         Dim strFilePathSystemFormat As String
 
         TextPreviewVisible(False, "")
-
         'change path from R format to windows format
         strFilePathSystemFormat = GetSelectedFilePath(bInSystemFormat:=True)
 
@@ -705,8 +691,7 @@ Public Class dlgImportDataset
             Try
                 grdDataPreview.Worksheets.Clear()
                 frmMain.clsGrids.FillSheet(dfTemp, strTempDataFrameName, grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
-                'grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-                'grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
+                grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
                 bValid = True
                 GridPreviewVisible(True, "")
             Catch
@@ -754,7 +739,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub GridPreviewVisible(bVisible As Boolean, strGridText As String)
-        lblCannotImport.Visible = False
+        lblImportPreview.Visible = False
         lblDataFramePreview.Visible = bVisible
         lblLinesToPreview.Visible = bVisible
         ucrNudPreviewLines.Visible = bVisible
@@ -762,20 +747,14 @@ Public Class dlgImportDataset
         grdDataPreview.Visible = bVisible
 
         If Not String.IsNullOrEmpty(strGridText) Then
-            lblCannotImport.Visible = True
-            lblCannotImport.Text = strGridText
+            lblImportPreview.Visible = True
+            lblImportPreview.Text = strGridText
             lblDataFramePreview.Visible = False
             lblLinesToPreview.Visible = False
             ucrNudPreviewLines.Visible = False
             btnRefreshPreview.Visible = False
             grdDataPreview.Visible = False
         End If
-
-        'If dctSelectedExcelSheets.Count > 1 Then
-        '    lblCannotImport.TextAlign = ContentAlignment.TopLeft
-        'Else
-        '    lblCannotImport.TextAlign = ContentAlignment.TopCenter
-        'End If
     End Sub
 
     Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
@@ -882,10 +861,6 @@ Public Class dlgImportDataset
             Exit Sub
         End If
 
-        If enumFileType <> FileType.XLSX AndAlso enumFileType <> FileType.XLS Then
-            Exit Sub
-        End If
-
         'clear all selected sheets first
         dctSelectedExcelSheets.Clear()
         'add/remove checked item to dictionary of selected sheets
@@ -911,7 +886,7 @@ Public Class dlgImportDataset
             clsImportExcelMulti.AddParameter("which", "c(" & String.Join(",", dctSelectedExcelSheets.Keys) & ")")
         End If
 
-        SetControlsAndBaseFunction()
+        SetExcelBaseFunctionAndSaveProperties()
         TestOkEnabled()
     End Sub
 
@@ -930,10 +905,29 @@ Public Class dlgImportDataset
 
     Private Sub dlgImportDataset_VisibleChanged(sender As Object, e As EventArgs) Handles Me.VisibleChanged
         If (Not Me.Visible) AndAlso bFromLibrary Then
+            'restore previous path if current opeing was from the library
             bFromLibrary = False
             SetSelectedFileProperties(strFilePathSystemTemp)
         End If
     End Sub
+
+    Private Sub SetExcelBaseFunctionAndSaveProperties()
+        ucrBase.clsRsyntax.SetBaseRFunction(If(dctSelectedExcelSheets.Count > 1, clsImportExcelMulti, clsImportExcel))
+        ucrSaveFile.Visible = (dctSelectedExcelSheets.Count = 1)
+        If dctSelectedExcelSheets.Count = 0 Then
+            ucrSaveFile.SetName("", bSilent:=True)
+            ucrSaveFile.SetDataFrameNames("")
+        ElseIf dctSelectedExcelSheets.Count = 1 Then
+            ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First, bSilent:=True)
+            ucrSaveFile.SetDataFrameNames("")
+            'ucrSaveFile.Focus()
+        Else
+            ucrSaveFile.SetName(GetCleanedSelectedFileName, bSilent:=True)
+            ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=dctSelectedExcelSheets.Values.ToList())
+        End If
+        ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=(dctSelectedExcelSheets.Count > 1))
+    End Sub
+
 
     ''' <summary>
     ''' Creates an R string to be used as the parameter value for na.strings and na parameters 

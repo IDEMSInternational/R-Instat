@@ -85,7 +85,7 @@ Partial Class dlgImportDataset
         Me.ucrChkImportFiltersRDS = New instat.ucrCheck()
         Me.ucrChkImportMetadataRDS = New instat.ucrCheck()
         Me.ucrChkKeepExistingDataRDS = New instat.ucrCheck()
-        Me.lblCannotImport = New System.Windows.Forms.Label()
+        Me.lblImportPreview = New System.Windows.Forms.Label()
         Me.lblLinesToPreview = New System.Windows.Forms.Label()
         Me.btnRefreshPreview = New System.Windows.Forms.Button()
         Me.grpText = New System.Windows.Forms.GroupBox()
@@ -469,10 +469,10 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrChkKeepExistingDataRDS, "ucrChkKeepExistingDataRDS")
         Me.ucrChkKeepExistingDataRDS.Name = "ucrChkKeepExistingDataRDS"
         '
-        'lblCannotImport
+        'lblImportPreview
         '
-        resources.ApplyResources(Me.lblCannotImport, "lblCannotImport")
-        Me.lblCannotImport.Name = "lblCannotImport"
+        resources.ApplyResources(Me.lblImportPreview, "lblImportPreview")
+        Me.lblImportPreview.Name = "lblImportPreview"
         '
         'lblLinesToPreview
         '
@@ -651,7 +651,7 @@ Partial Class dlgImportDataset
         Me.panelGridPreview.Controls.Add(Me.grdDataPreview)
         Me.panelGridPreview.Controls.Add(Me.ucrNudPreviewLines)
         Me.panelGridPreview.Controls.Add(Me.lblLinesToPreview)
-        Me.panelGridPreview.Controls.Add(Me.lblCannotImport)
+        Me.panelGridPreview.Controls.Add(Me.lblImportPreview)
         resources.ApplyResources(Me.panelGridPreview, "panelGridPreview")
         Me.panelGridPreview.Name = "panelGridPreview"
         '
@@ -715,7 +715,7 @@ Partial Class dlgImportDataset
     Friend WithEvents lblRowToSkipExcel As Label
     Friend WithEvents lblNamedRegion As Label
     Friend WithEvents ucrInputNamedRegions As ucrInputComboBox
-    Friend WithEvents lblCannotImport As Label
+    Friend WithEvents lblImportPreview As Label
     Friend WithEvents ucrInputFilePath As ucrInputTextBox
     Friend WithEvents ucrInputEncodingCSV As ucrInputComboBox
     Friend WithEvents ucrInputSeparatorCSV As ucrInputComboBox

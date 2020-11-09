@@ -1311,38 +1311,35 @@
   <data name="&gt;&gt;grpRDS.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="lblCannotImport.Font" type="System.Drawing.Font, System.Drawing">
+  <data name="lblImportPreview.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt, style=Bold</value>
   </data>
-  <data name="lblCannotImport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblImportPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblCannotImport.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblImportPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>
   </data>
-  <data name="lblCannotImport.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblImportPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>364, 170</value>
   </data>
-  <data name="lblCannotImport.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblImportPreview.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
-  <data name="lblCannotImport.Text" xml:space="preserve">
+  <data name="lblImportPreview.Text" xml:space="preserve">
     <value>Cannot import this file with the current options. 
 Modify options or select a different file.</value>
   </data>
-  <data name="lblCannotImport.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
+  <data name="&gt;&gt;lblImportPreview.Name" xml:space="preserve">
+    <value>lblImportPreview</value>
   </data>
-  <data name="&gt;&gt;lblCannotImport.Name" xml:space="preserve">
-    <value>lblCannotImport</value>
-  </data>
-  <data name="&gt;&gt;lblCannotImport.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblImportPreview.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblCannotImport.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblImportPreview.Parent" xml:space="preserve">
     <value>panelGridPreview</value>
   </data>
-  <data name="&gt;&gt;lblCannotImport.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblImportPreview.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="lblLinesToPreview.AutoSize" type="System.Boolean, mscorlib">
@@ -1848,7 +1845,7 @@ white spaces</value>
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>389, 24</value>
+    <value>293, 24</value>
   </data>
   <data name="ucrSaveFile.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
