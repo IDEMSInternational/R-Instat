@@ -576,7 +576,7 @@ data_obj$methods(convert_column_to_type = function(col_names = c(), to_type = "f
   }
   
 
-  if(!(to_type %in% c("integer", "factor", "numeric", "character"))){
+  if(!(to_type %in% c("integer", "factor", "numeric","character"))){
     stop(to_type, " is not a valid type to convert to")
   }
   
@@ -586,7 +586,7 @@ data_obj$methods(convert_column_to_type = function(col_names = c(), to_type = "f
   
   for(col_name in col_names){
     if(to_type=="factor"){
-      data[,col_name] <<- forcats::as_factor(data[,col_name])
+      data[,col_name] <<- as.factor(data[,col_name])
     }
     
     if(to_type=="integer"){

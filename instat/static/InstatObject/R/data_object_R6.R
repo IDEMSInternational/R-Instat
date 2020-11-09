@@ -1161,15 +1161,7 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
       make_ordered <- (to_type == "ordered_factor")
       if(set_decimals) curr_col <- round(curr_col, digits = set_digits)
       if(ignore_labels) {
-        if (is.numeric(curr_col)){
-        new_col <- forcats::fct_inseq(forcats::as_factor(curr_col), ordered = make_ordered)
-		} else if (is.factor(curr_col) | is.character(curr_col)){
-        new_col <- forcats::fct_inorder(curr_col, ordered = make_ordered)
-        } else if (is.logical(curr_col)){
-        new_col <- forcats::fct_inorder(forcats::as_factor(curr_col), ordered = make_ordered)
-		} else {
         new_col <- factor(curr_col, ordered = make_ordered)
-		}
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name)) {
@@ -1178,16 +1170,8 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
 		  #if(make_ordered) new_col <- ordered(new_col)
         }
         else {
-        if (is.numeric(curr_col)){ # or integer
-        new_col <- forcats::fct_inseq(forcats::as_factor(curr_col), ordered = make_ordered)
-		} else if (is.factor(curr_col) | is.character(curr_col)){
-        new_col <- forcats::fct_inorder(curr_col, ordered = make_ordered)
-        } else if (is.logical(curr_col)){
-        new_col <- forcats::fct_inorder(forcats::as_factor(curr_col), ordered = make_ordered)
-		} else {
-        new_col <- factor(curr_col, ordered = make_ordered)
-		}
-        if(is.numeric(curr_col) && !self$is_variables_metadata(labels_label, col_name)) {
+          new_col <- factor(curr_col, ordered = make_ordered)
+          if(is.numeric(curr_col) && !self$is_variables_metadata(labels_label, col_name)) {
             labs <- sort(unique(curr_col))
             names(labs) <- labs
             # temporary fix to issue of add_columns not retaining attributes of new columns
