@@ -47,6 +47,7 @@ Public Class dlgColumnStats
         ucrBase.iHelpTopicID = 64
 
         ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
+        cmdMissingOptions.Enabled = False
 
         ucrSelectorForColumnStatistics.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForColumnStatistics.SetParameterIsString()
@@ -58,8 +59,6 @@ Public Class dlgColumnStats
 
         ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
         ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
-        ucrReceiverByFactor.SetExcludedDataTypes({"numeric"})
-        ucrReceiverByFactor.strSelectorHeading = "Non-numeric(s)"
         ucrReceiverByFactor.SetParameterIsString()
 
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
@@ -191,6 +190,12 @@ Public Class dlgColumnStats
         Else
             clsDefaultFunction.RemoveParameterByName("use")
         End If
+        If Not ucrChkOmitMissing.Checked Then
+            clsDefaultFunction.RemoveParameterByName("na_type")
+        Else
+            clsDefaultFunction.AddParameter("na_type", clsRFunctionParameter:=clsConcFunction, iPosition:=9)
+        End If
+        cmdMissingOptions.Enabled = ucrChkOmitMissing.Checked
     End Sub
 
     Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
@@ -215,6 +220,12 @@ Public Class dlgColumnStats
         Else
             strWeightLabel = ""
         End If
+    End Sub
+
+    Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click
+        sdgMissingOptions.SetRFunction(clsNewSummaryFunction:=clsDefaultFunction, clsNewConcFunction:=clsConcFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgMissingOptions.ShowDialog()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
