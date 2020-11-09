@@ -55,6 +55,7 @@ Public Class ucrDataView
         grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
         grdData.SheetTabWidth = 450
         SetRFunctions()
+        HideOrShowRecentPanel()
     End Sub
 
     'Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
@@ -887,6 +888,7 @@ Public Class ucrDataView
     ''' </summary>
     Public Sub ClearRecentFileMenuItems()
         panelRecentMenuItems.Controls.Clear()
+        HideOrShowRecentPanel()
     End Sub
 
     ''' <summary>
@@ -919,6 +921,11 @@ Public Class ucrDataView
         lblMenuItemPath.Height = 13
         lblMenuItemPath.AutoSize = True
         panelRecentMenuItems.Controls.Add(lblMenuItemPath)
+        HideOrShowRecentPanel()
+    End Sub
+
+    Private Sub HideOrShowRecentPanel()
+        lblRecent.Visible = panelRecentMenuItems.Controls.Count > 0
     End Sub
 
     Private Sub linkHelpIntroduction_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpIntroduction.LinkClicked
