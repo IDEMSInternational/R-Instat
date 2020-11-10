@@ -837,8 +837,8 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click
-        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
         clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
 

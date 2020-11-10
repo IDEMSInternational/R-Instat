@@ -289,8 +289,8 @@ Public Class ucrColumnMetadata
     'End Sub
 
     Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
-        clsConvertOrderedFactor.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34), iPosition:=1)
-        clsConvertOrderedFactor.AddParameter("col_names", GetSelectedVariableNames(), iPosition:=2)
+        clsConvertOrderedFactor.AddParameter("col_names", GetSelectedVariableNames(), iPosition:=1)
+        clsConvertOrderedFactor.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34), iPosition:=2)
         RunScriptFromColumnMetadata(clsConvertOrderedFactor.ToScript, strComment:="Right click menu: Convert to Ordered Factor")
     End Sub
 
