@@ -1539,11 +1539,11 @@ slope <- function(y, x) {
 
 }
 
-make_factor <- function(x, levels = NULL, ordered = is.ordered(x)) {
+make_factor <- function(x, ordered = FALSE) {
   if (is.factor(x) & !is.ordered(x)){
     x <- x
   } else if (is.numeric(x)){
-    x <- factor(x, levels = NULL, ordered = ordered)
+    x <- factor(x, ordered = ordered)
   } else if (is.character(x) | is.ordered(x)){
     x <- factor(x, levels = unique(x), ordered = ordered)
   } else {
