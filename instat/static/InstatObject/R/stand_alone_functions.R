@@ -795,7 +795,7 @@ is.logical.like <- function(x) {
 is.binary <- function(x) {
   if(is.logical(x)) return(TRUE)
   else if(is.numeric(x)) return(all(na.omit(x) %in% c(1,0)))
-  else if(is.factor(x)) return(nlevels(x) == 2)
+  else if(make_factor(x)) return(nlevels(x) == 2)
   else return(FALSE)
 }
 
@@ -1122,7 +1122,7 @@ get_installed_packages_with_data <- function(with_data = TRUE) {
 
 drop_unused_levels <- function(dat, columns) {
   for(i in seq_along(columns)) {
-    if(is.factor(dat[[columns[i]]])) dat[[columns[i]]] <- droplevels(dat[[columns[i]]])
+    if(make_factor(dat[[columns[i]]])) dat[[columns[i]]] <- droplevels(dat[[columns[i]]])
   }
   return(dat)
 }
@@ -1429,7 +1429,7 @@ climatic_details <- function(data, date, elements = ..., stations,
     tidyr::pivot_longer(cols = c({{ elements }}),
                  names_to = "Element",
                  values_to = "Value") %>%
-    dplyr::mutate(Element = as.factor(Element))
+    dplyr::mutate(Element = make_factor(Element))
   
   # sort start/end times
   
@@ -1527,7 +1527,7 @@ climatic_details <- function(data, date, elements = ..., stations,
     }
   
   detail.table.all <- plyr::ldply(list_tables, data.frame) %>%
-                      dplyr::mutate(Level = as.factor(Level))
+                      dplyr::mutate(Level = make_factor(Level))
   
   return(detail.table.all)
 

@@ -1370,7 +1370,7 @@ DataBook$set("public", "add_single_climdex_index", function(data_name, indices, 
     linked_data_name <- self$get_linked_to_data_name(data_name, year)
     if(length(linked_data_name) == 0) {
       if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
-      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("factor" %in% year_class) ind_data[[year]] <- make_factor(levels(ind_data[[year]]))[ind_data[[year]]]
       if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, sep = "_")
@@ -1409,7 +1409,7 @@ DataBook$set("public", "add_single_climdex_index", function(data_name, indices, 
     linked_data_name <- self$get_linked_to_data_name(data_name, c(year, month))
     if(length(linked_data_name) == 0) {
       if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
-      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("factor" %in% year_class) ind_data[[year]] <- make_factor(levels(ind_data[[year]]))[ind_data[[year]]]
       if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, month, sep = "_")
@@ -2085,7 +2085,7 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
   if(!continue) return()
   
   # Standard format of slowest varying structure variables first (station then element then date) followed by measurements
-  if(!missing(station)) z <- data.frame(station = forcats::as_factor(y$station), date = y$date)
+  if(!missing(station)) z <- data.frame(station = make_factor(y$station), date = y$date)
   else z <- data.frame(date = y$date)
   if(!missing(element)) z$element <- y$element
   z[[element_name]] <- y[[element_name]]
