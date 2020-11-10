@@ -586,7 +586,7 @@ data_obj$methods(convert_column_to_type = function(col_names = c(), to_type = "f
   
   for(col_name in col_names){
     if(to_type=="factor"){
-      data[,col_name] <<- make_ordered(data[,col_name])
+      data[,col_name] <<- make_ordered(x = data[,col_name])
     }
     
     if(to_type=="integer"){
