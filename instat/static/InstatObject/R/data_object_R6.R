@@ -1161,7 +1161,7 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
       make_ordered <- (to_type == "ordered_factor")
       if(set_decimals) curr_col <- round(curr_col, digits = set_digits)
       if(ignore_labels) {
-        new_col <- make_factor(x = curr_col, make_ordered = make_ordered)
+        new_col <- make_factor(x = curr_col, ordered = make_ordered)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name)) {
@@ -1170,7 +1170,7 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
 		  #if(make_ordered) new_col <- ordered(new_col)
         }
         else {
-          new_col <- make_factor(x = curr_col, make_ordered = make_ordered)
+          new_col <- make_factor(x = curr_col, ordered = make_ordered)
           if(is.numeric(curr_col) && !self$is_variables_metadata(labels_label, col_name)) {
             labs <- sort(unique(curr_col))
             names(labs) <- labs
