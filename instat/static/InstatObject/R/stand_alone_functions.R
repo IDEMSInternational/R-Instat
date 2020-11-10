@@ -1539,4 +1539,14 @@ slope <- function(y, x) {
 
 }
 
-
+make_factor <- function(curr_col, make_ordered = FALSE) {
+  if (is.factor(curr_col) & !is.ordered(curr_col)){
+    curr_col <- curr_col
+    } else if (is.numeric(curr_col)){
+      curr_col <- factor(curr_col, ordered = make_ordered)
+    } else if (is.character(curr_col) | is.ordered(curr_col)){
+      curr_col <- factor(curr_col, levels = unique(curr_col), ordered = make_ordered)
+    } else {
+      curr_col <- factor(curr_col, levels = as.character(unique(curr_col)), ordered = make_ordered)
+    }
+}
