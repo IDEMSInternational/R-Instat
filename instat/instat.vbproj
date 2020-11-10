@@ -394,6 +394,12 @@
     <Compile Include="dlgTreemap.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgInventoryGraph.Designer.vb">
+      <DependentUpon>sdgInventoryGraph.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgInventoryGraph.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgMissingOptions.Designer.vb">
       <DependentUpon>sdgMissingOptions.vb</DependentUpon>
     </Compile>
@@ -2740,6 +2746,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgInventoryGraph.resx">
+      <DependentUpon>sdgInventoryGraph.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMissingOptions.resx">
       <DependentUpon>sdgMissingOptions.vb</DependentUpon>
