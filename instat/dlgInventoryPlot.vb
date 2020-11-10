@@ -21,6 +21,7 @@ Public Class dlgInventoryPlot
     Private clsInventoryPlot As RFunction
     Private clsClimaticMissing As RFunction
     Private clsClimaticDetails As RFunction
+    Private bResetSubdialog As Boolean = True
 
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -268,13 +269,6 @@ Public Class dlgInventoryPlot
         End If
 
     End Sub
-
-    Private Sub cmdOptions_Click(sender As Object, e As EventArgs)
-        'there needs to be work on sdgplots before this could be linked 
-        'sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        'sdgPlots.ShowDialog()
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -327,7 +321,11 @@ Public Class dlgInventoryPlot
         End If
 
     End Sub
-
+    Private Sub cmdInventoryPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdInventoryPlotOptions.Click
+        sdgInventoryGraph.SetRCode(clsInventoryNew:=clsInventoryPlot, bReset:=bResetSubdialog)
+        sdgInventoryGraph.ShowDialog()
+        bResetSubdialog = False
+    End Sub
     Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrSaveDetails.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrChkSummary.ControlContentsChanged, ucrChkDetails.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkHour.ControlContentsChanged, ucrChkMinute.ControlContentsChanged, ucrChkSecond.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOkEnabled()
 
