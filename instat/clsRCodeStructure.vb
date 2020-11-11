@@ -249,6 +249,7 @@ Public Class RCodeStructure
     ''' <param name="strDataFrameNames">            (Optional) Optional R character vector to give
     '''                                             names of new data frames if data frame list is
     '''                                             not named. </param>
+    ''' <param name="strAdjacentColumn">            (Optional) The new value for strAdjacentColumn. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempSurv As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True, Optional bDataFrameList As Boolean = False, Optional strDataFrameNames As String = "", Optional strAdjacentColumn As String = "")
         strAssignTo = strTemp
