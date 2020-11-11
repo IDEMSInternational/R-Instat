@@ -41,6 +41,40 @@ Public Class dlgCircularScatterPlot
     Private clsDolarOperator As ROperator
 
     Private Sub dlgCircularScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseDialog()
+            bFirstLoad = False
+        End If
 
+        If bReset Then
+            SetDefaults()
+        End If
+
+        SetRCodeForControls(bReset)
+        bReset = False
+        autoTranslate(Me)
+        TestOkEnabled()
     End Sub
+
+    Private Sub InitialiseDialog()
+        ucrBase.clsRsyntax.iCallType = 3
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+
+        ucrSelectorCircularDataFrame.SetParameter(New RParameter("data", 0))
+        ucrSelectorCircularDataFrame.SetParameterIsrfunction()
+
+        ucrReceiverVariable.SetParameter(New RParameter("x", 0))
+        ucrReceiverVariable.Selector = ucrSelectorCircularDataFrame
+        ucrReceiverVariable.SetParameterIsString()
+        ucrReceiverVariable.SetIncludedDataTypes({"numeric"})
+        ucrReceiverVariable.strSelectorHeading = "Numerics"
+        ucrReceiverVariable.bWithQuotes = False
+
+        ucrSaveScatterPlot.SetDataFrameSelector(ucrSelectorCircularDataFrame.ucrAvailableDataFrames)
+        ucrSaveScatterPlot.SetSaveTypeAsGraph()
+        ucrSaveScatterPlot.SetCheckBoxText("Save Graph:")
+        ucrSaveScatterPlot.SetPrefix("circular_density_plot")
+        ucrSaveScatterPlot.SetAssignToIfUncheckedValue("last_graph")
+    End Sub
+
 End Class
