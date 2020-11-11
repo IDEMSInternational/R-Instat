@@ -699,8 +699,8 @@ DataBook$set("public", "save_calc_output", function(calc, curr_data_list, previo
         stop("Cannot save output from this calculation because the data frame does not have any defined keys.")
       }
     }
-    else {      
-	  # If no summary or join, then simply add result as new column
+    else {
+      # If no summary or join, then simply add result as new column
       # Because no join was required, the rows should match 1-1 in both data frames
       self$add_columns_to_data(data_name = calc_from_data_name, col_name =  calc$result_name, col_data = curr_data_list[[c_data_label]][[calc$result_name]])
       to_data_name <- calc_from_data_name

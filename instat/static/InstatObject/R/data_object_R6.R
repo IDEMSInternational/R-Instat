@@ -493,7 +493,7 @@ DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, exclu
 }
 )
 
-DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column, num_cols, require_correct_length = TRUE) {
+DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column, num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
@@ -529,7 +529,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
     use_col_name_as_prefix = TRUE
   }
   
-  replaced = FALSE
+  replaced <- FALSE
   previous_length = self$get_column_count()
   if(!missing(adjacent_column) && !adjacent_column %in% self$get_column_names()) stop(adjacent_column, "not found in the data")
  
@@ -551,34 +551,35 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
     if(curr_col_name %in% self$get_column_names()) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
       self$append_to_changes(list(Replaced_col, curr_col_name))
-      replaced = TRUE
+      replaced <- TRUE
     }
     else self$append_to_changes(list(Added_col, curr_col_name))
     private$data[[curr_col_name]] <- curr_col
     self$data_changed <- TRUE
   }
   self$add_defaults_variables_metadata(new_col_names)
+  
+  # If replacing existing columns and not repositioning them, or before and adjacent_column column positioning parameters are missing
+  # then do not reposition.
+  if((replaced && keep_existing_position) || (missing(before) && missing(adjacent_column))) return()
 
-  #no need to reorder columns if before and adjacent_column column positioning paramaters are missing
-  if(missing(before) && missing(adjacent_column)) return()
-
-  #get the adjacent position to be used in appending the new column names
-  if(before){
-     if(missing(adjacent_column)) adjacent_position = 0
-	 else adjacent_position = which(self$get_column_names() == adjacent_column) - 1
-  }else{
-     if(missing(adjacent_column)) adjacent_position = self$get_column_count()
-	 else adjacent_position = which(self$get_column_names() == adjacent_column)
+  # Get the adjacent position to be used in appending the new column names
+  if(before) {
+    if(missing(adjacent_column)) adjacent_position <- 0
+    else adjacent_position <- which(self$get_column_names() == adjacent_column) - 1
+  } else {
+      if(missing(adjacent_column)) adjacent_position <- self$get_column_count()
+      else adjacent_position <- which(self$get_column_names() == adjacent_column)
   }
 
-  #replace existing names with empty placeholders. Maintains the indices
+  # Replace existing names with empty placeholders. Maintains the indices
   temp_all_col_names <- replace(self$get_column_names(), self$get_column_names() %in% new_col_names, "")
-  #append the newly added column names after the set position
+  # Append the newly added column names after the set position
   new_col_names_order <- append(temp_all_col_names, new_col_names, adjacent_position)
-  #remove all empty characters placeholders to get final reordered column names
-  new_col_names_order <- new_col_names_order[! new_col_names_order %in% c("")]
-  #only do reordering if the column names order differ
-  if( !all( self$get_column_names() == new_col_names_order) ) self$reorder_columns_in_data(col_order=new_col_names_order)
+  # Remove all empty characters placeholders to get final reordered column names
+  new_col_names_order <- new_col_names_order[! new_col_names_order == ""]
+  # Only do reordering if the column names order differ
+  if(!all(self$get_column_names() == new_col_names_order)) self$reorder_columns_in_data(col_order=new_col_names_order)
 }
 )
 
