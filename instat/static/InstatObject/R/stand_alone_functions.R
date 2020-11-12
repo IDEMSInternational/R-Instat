@@ -795,7 +795,7 @@ is.logical.like <- function(x) {
 is.binary <- function(x) {
   if(is.logical(x)) return(TRUE)
   else if(is.numeric(x)) return(all(na.omit(x) %in% c(1,0)))
-  else if(make_factor(x)) return(nlevels(x) == 2)
+  else if(is.factor(x)) return(nlevels(x) == 2)
   else return(FALSE)
 }
 
@@ -1122,7 +1122,7 @@ get_installed_packages_with_data <- function(with_data = TRUE) {
 
 drop_unused_levels <- function(dat, columns) {
   for(i in seq_along(columns)) {
-    if(make_factor(dat[[columns[i]]])) dat[[columns[i]]] <- droplevels(dat[[columns[i]]])
+    if(is.factor(dat[[columns[i]]])) dat[[columns[i]]] <- droplevels(dat[[columns[i]]])
   }
   return(dat)
 }
@@ -1539,14 +1539,29 @@ slope <- function(y, x) {
 
 }
 
+# make_factor is intended to be somewhat equivalent to forcats::as_factor() or base::as.factor().
+# It provides default behaviour for converting to factor depending on the data type, similar to forcats::as_factor().
+# For "character" and "numeric" types make_factor is consistent with forcats::as_factor() in terms of the order of the factor levels.
+# It differs from forcats::as_factor() in two main ways:
+# 1. It includes an ordered parameter to allow for creating ordered factors, including converting a factor to an ordered factor (and vice versa).
+# 2. It works for any data types (e.g. Dates) whereas forcats::as_factor() is limitied to "factor", "character", "logical", "numeric".
+#    For any other data types, levels are given in order of appearance (the same as for "character").
+#    Note that this should be used cautiously for other data types and the default behaviour may not be the most sensible.
+# If anything other than this default behaviour is required, use factor().
 make_factor <- function(x, ordered = is.ordered(x)) {
-  if (is.factor(x) & !is.ordered(x)){
-    x <- x
-  } else if (is.numeric(x)){
-    x <- factor(x, ordered = ordered)
-  } else if (is.character(x) | is.ordered(x)){
-    x <- factor(x, levels = unique(x), ordered = ordered)
+  if (is.factor(x)) {
+    if (ordered != is.ordered(x)) {
+      if (ordered) class(x) <- c("ordered", class(x))
+      else class(x) <- class(x)[class(x) != "ordered"]
+    }
+    x
+  } else if (is.numeric(x)) {
+    factor(x, ordered = ordered)
+  } else if (is.logical(x)) {
+    factor(x, levels = c("FALSE", "TRUE"), ordered = ordered)
+  } else if (is.character(x)) {
+    factor(x, levels = unique(x), ordered = ordered)
   } else {
-    x <- factor(x, levels = as.character(unique(x)), ordered = ordered)
+    factor(x, levels = as.character(unique(x)), ordered = ordered)
   }
 }
