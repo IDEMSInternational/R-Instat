@@ -83,7 +83,7 @@ Public Class dlgSplitText
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorSplitTextColumn.ucrAvailableDataFrames)
         ucrSaveColumn.SetLabelText("Prefix for New Columns:")
-        ucrSaveColumn.SetIsTextBox()
+        ucrSaveColumn.SetIsComboBox()
         ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
     End Sub
 
