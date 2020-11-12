@@ -168,6 +168,7 @@ Public Class sdgPlots
         ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeScalesY, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkIncludeFacets.AddToLinkedControls(ucrChkFreeSpace, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkIncludeFacets.AddToLinkedControls(ucrChkLabeler, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkIncludeFacets.AddToLinkedControls(ucrChkDrop, {True}, bNewLinkedHideIfParameterMissing:=True)
         'layers tab 
 
         'titles tab
@@ -325,6 +326,11 @@ Public Class sdgPlots
         ucrNudYaxisMarkSize.Increment = 0.1
         ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(True, "size")
         ucrChkYaxisTickMarkLabelSize.AddParameterPresentCondition(False, "size", False)
+
+        ucrChkDrop.SetParameter(New RParameter("drop", 8))
+        ucrChkDrop.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDrop.SetText("Drop empty factor levels")
+        ucrChkDrop.SetRDefault("TRUE")
     End Sub
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction, clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector, bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing)
@@ -403,6 +409,7 @@ Public Class sdgPlots
         ucrChkFreeScalesY.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrNudNumberofRows.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkLabeler.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkDrop.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         'axis controls
@@ -771,6 +778,7 @@ Public Class sdgPlots
         sdgThemesSub.ShowDialog()
         SetRcodeForCommonThemesControls(False)
     End Sub
+
     Private Sub ucrChkUsePolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUsePolarCoordinates.ControlValueChanged
         If ucrChkUsePolarCoordinates.Checked Then
             clsBaseOperator.AddParameter("coord_polar", clsRFunctionParameter:=clsCoordPolarFunc, iPosition:=20)
