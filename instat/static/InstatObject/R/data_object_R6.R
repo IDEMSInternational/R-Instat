@@ -1162,7 +1162,7 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
       make_ordered <- (to_type == "ordered_factor")
       if(set_decimals) curr_col <- round(curr_col, digits = set_digits)
       if(ignore_labels) {
-        new_col <- factor(curr_col, ordered = make_ordered)
+        new_col <- make_factor(x = curr_col, ordered = make_ordered)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name)) {
@@ -1171,7 +1171,7 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
 		  #if(make_ordered) new_col <- ordered(new_col)
         }
         else {
-          new_col <- factor(curr_col, ordered = make_ordered)
+          new_col <- make_factor(x = curr_col, ordered = make_ordered)
           if(is.numeric(curr_col) && !self$is_variables_metadata(labels_label, col_name)) {
             labs <- sort(unique(curr_col))
             names(labs) <- labs
@@ -1914,7 +1914,7 @@ DataSheet$set("public", "set_column_colours_by_metadata", function(columns, prop
   if(missing(columns)) property_values <- self$get_variables_metadata(property = property)
   else property_values <- self$get_variables_metadata(property = property, column = columns)
   
-  new_colours <- as.numeric(as.factor(property_values))
+  new_colours <- as.numeric(make_factor(property_values))
   new_colours[is.na(new_colours)] <- -1
   if(missing(columns)) self$set_column_colours(colours = new_colours)
   else self$set_column_colours(columns = columns, colours = new_colours)
