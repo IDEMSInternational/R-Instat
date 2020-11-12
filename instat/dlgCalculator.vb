@@ -80,7 +80,7 @@ Public Class dlgCalculator
         ucrBase.clsRsyntax.SetCommandString("")
         ucrCalc.ucrSaveResultInto.SetPrefix("calc")
         ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
-        ucrCalc.ucrSaveResultInto.SetIsTextBox()
+        ucrCalc.ucrSaveResultInto.SetIsComboBox()
         ucrCalc.ucrSaveResultInto.SetLabelText("Save Result Into:")
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
