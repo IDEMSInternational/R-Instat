@@ -178,6 +178,8 @@ Public Class dlgClimaticBoxPlot
         clsTextElementFunc.SetPackageName("ggplot2")
         clsTextElementFunc.SetRCommand("element_text")
         clsTextElementFunc.AddParameter("angle", "90", iPosition:=0)
+        clsTextElementFunc.AddParameter("hjust", "1", iPosition:=1)
+        clsTextElementFunc.AddParameter("vjust", "0.5", iPosition:=2)
         ucrChkVerticalXTickMarkers.SetText("Vertical X Tick Markers")
         ucrChkVerticalXTickMarkers.SetParameter(clsThemeParam, bNewAddRemoveParameter:=True, bNewChangeParameterValue:=False)
 
