@@ -64,7 +64,7 @@ Public Class sdgPlots
 
     Private dctTheta As New Dictionary(Of String, String)
 
-    Private Sub sdgPlots_Load(sender As Object, e As EventArgs)
+    Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
 
