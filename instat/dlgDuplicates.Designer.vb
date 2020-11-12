@@ -144,6 +144,7 @@ Partial Class dlgDuplicates
         'ucrInputConditions
         '
         Me.ucrInputConditions.AddQuotesIfUnrecognised = True
+        Me.ucrInputConditions.GetSetSelectedIndex = -1
         Me.ucrInputConditions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputConditions, "ucrInputConditions")
         Me.ucrInputConditions.Name = "ucrInputConditions"
@@ -168,6 +169,7 @@ Partial Class dlgDuplicates
         'ucrInputComboType
         '
         Me.ucrInputComboType.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboType.GetSetSelectedIndex = -1
         Me.ucrInputComboType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboType, "ucrInputComboType")
         Me.ucrInputComboType.Name = "ucrInputComboType"
