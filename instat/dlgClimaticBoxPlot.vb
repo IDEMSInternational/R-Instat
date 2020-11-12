@@ -221,7 +221,8 @@ Public Class dlgClimaticBoxPlot
         clsFacetOp.SetOperation("~")
         clsFacetOp.bForceIncludeOperation = True
         clsFacetOp.bBrackets = False
-        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOp)
+        clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOp, iPosition:=0)
+        clsFacetFunction.AddParameter("drop", "FALSE", iPosition:=1)
 
         clsFilterElementOperator.SetOperation(">")
         clsFilterElementOperator.bBrackets = False
