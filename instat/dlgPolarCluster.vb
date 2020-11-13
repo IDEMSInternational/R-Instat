@@ -28,7 +28,6 @@ Public Class dlgPolarCluster
             InitialiseDialog()
             bFirstLoad = False
         End If
-
         If bReset Then
             SetDefaults()
         End If
@@ -57,10 +56,14 @@ Public Class dlgPolarCluster
         ucrReceiverX.Selector = ucrSelectorPolarCluster
         ucrReceiverX.SetParameterIsString()
 
-        ucrInputColor.SetParameter(New RParameter("cols", 4))
+        ucrReceiverDate.SetParameter(New RParameter("date", 4))
+        ucrReceiverDate.Selector = ucrSelectorPolarCluster
+        ucrReceiverDate.SetParameterIsString()
+
+        ucrInputColor.SetParameter(New RParameter("cols", 5))
+        dctColor.Add("Paired", Chr(34) & "Paired" & Chr(34))
         dctColor.Add("Accent", Chr(34) & "Accent" & Chr(34))
         dctColor.Add("Dark2", Chr(34) & "Dark2" & Chr(34))
-        dctColor.Add("Paired", Chr(34) & "Paired" & Chr(34))
         dctColor.Add("Pastel1", Chr(34) & "Pastel1" & Chr(34))
         dctColor.Add("Pastel2", Chr(34) & "Pastel2" & Chr(34))
         dctColor.Add("Set1", Chr(34) & "Set1" & Chr(34))
@@ -69,23 +72,31 @@ Public Class dlgPolarCluster
         ucrInputColor.SetItems(dctColor)
         ucrInputColor.SetDropDownStyleAsNonEditable()
 
-        ucrNudAngularScale.SetParameter(New RParameter("angle", 5))
+        ucrNudAngularScale.SetParameter(New RParameter("angle", 6))
         ucrNudAngularScale.SetMinMax(0, 360)
 
-        ucrNudNoOfClusters.SetParameter(New RParameter("n.clusters", 6))
+        ucrNudNoOfClusters.SetParameter(New RParameter("n.clusters", 7))
         ucrNudNoOfClusters.Minimum = 1
+
+        ucrSaveGraph.SetPrefix("polarcluster")
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorPolarCluster.ucrAvailableDataFrames)
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
 
         clsPolarClusterFunction = New RFunction
 
-        clsPolarClusterFunction.AddParameter("cols", Chr(34) & "Accent" & Chr(34), iPosition:=4)
-        clsPolarClusterFunction.AddParameter("angle", "45", iPosition:=5)
-        clsPolarClusterFunction.AddParameter("n.clusters", "6", iPosition:=6)
+        clsPolarClusterFunction.AddParameter("cols", Chr(34) & "Paired" & Chr(34), iPosition:=5)
+        clsPolarClusterFunction.AddParameter("angle", "45", iPosition:=6)
+        clsPolarClusterFunction.AddParameter("n.clusters", "6", iPosition:=7)
 
         ucrSelectorPolarCluster.Reset()
         ucrReceiverPollutant.SetMeAsReceiver()
+        ucrSaveGraph.Reset()
 
         clsPolarClusterFunction.SetPackageName("openair")
         clsPolarClusterFunction.SetRCommand("polarCluster")
@@ -98,7 +109,7 @@ Public Class dlgPolarCluster
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverPollutant.IsEmpty Then
+        If ucrReceiverPollutant.IsEmpty OrElse ucrReceiverWindDirection.IsEmpty OrElse ucrReceiverX.IsEmpty OrElse ucrReceiverDate.IsEmpty Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -111,7 +122,7 @@ Public Class dlgPolarCluster
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverPollutant_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPollutant.ControlContentsChanged
+    Private Sub ucrReceiverPollutant_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPollutant.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverWindDirection.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
