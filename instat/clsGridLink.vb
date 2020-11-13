@@ -458,7 +458,9 @@ Public Class clsGridLink
                     End If
                 Next
             Else
-                For k = 0 To lstColumnNames.Count - 1
+                'worksheet columns could be less than than the data frame columns, 
+                'so use worksheet ColumnCount
+                For k = 0 To fillWorkSheet.ColumnCount - 1
                     fillWorkSheet.ColumnHeaders(k).Text = lstColumnNames(k)
                 Next
             End If
