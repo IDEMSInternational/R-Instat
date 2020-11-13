@@ -1544,7 +1544,7 @@ slope <- function(y, x) {
 # For "character" and "numeric" types make_factor is consistent with forcats::as_factor() in terms of the order of the factor levels.
 # It differs from forcats::as_factor() in two main ways:
 # 1. It includes an ordered parameter to allow for creating ordered factors, including converting a factor to an ordered factor (and vice versa).
-# 2. It works for any data types (e.g. Dates) whereas forcats::as_factor() is limitied to "factor", "character", "logical", "numeric".
+# 2. It works for any data types (e.g. Dates) whereas forcats::as_factor() is limited to "factor", "character", "logical", "numeric".
 #    For any other data types, levels are given in order of appearance (the same as for "character").
 #    Note that this should be used cautiously for other data types and the default behaviour may not be the most sensible.
 # If anything other than this default behaviour is required, use factor().
