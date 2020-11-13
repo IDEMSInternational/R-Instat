@@ -493,7 +493,7 @@ DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, exclu
 }
 )
 
-DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols, require_correct_length = TRUE) {
+DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column, num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
@@ -529,19 +529,10 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
     use_col_name_as_prefix = TRUE
   }
   
-  replaced = FALSE
+  replaced <- FALSE
   previous_length = self$get_column_count()
   if(!missing(adjacent_column) && !adjacent_column %in% self$get_column_names()) stop(adjacent_column, "not found in the data")
-  
-  if(before) {
-    if(!missing(adjacent_column)) ind = which(self$get_column_names() == adjacent_column)
-    else ind = 1
-  }
-  else {
-    if(!missing(adjacent_column)) ind = which(self$get_column_names() == adjacent_column) + 1
-    else ind = previous_length + 1
-  }
-  
+ 
   new_col_names <- c()
   for(i in 1:num_cols) {
     if(num_cols == 1) {
@@ -560,20 +551,35 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
     if(curr_col_name %in% self$get_column_names()) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
       self$append_to_changes(list(Replaced_col, curr_col_name))
-      replaced = TRUE
+      replaced <- TRUE
     }
     else self$append_to_changes(list(Added_col, curr_col_name))
     private$data[[curr_col_name]] <- curr_col
     self$data_changed <- TRUE
   }
   self$add_defaults_variables_metadata(new_col_names)
-  if(!replaced) {
-    if(before && ind == 1) self$set_data(dplyr::select(self$get_data_frame(use_current_filter = FALSE) , c((previous_length + 1):(previous_length + num_cols), 1:previous_length)))
-    else if(before || ind != previous_length + 1) self$set_data(dplyr::select(self$get_data_frame(use_current_filter = FALSE) , c(1:(ind - 1), (previous_length + 1):(previous_length + num_cols), ind:previous_length)))
+  
+  # If replacing existing columns and not repositioning them, or before and adjacent_column column positioning parameters are missing
+  # then do not reposition.
+  if((replaced && keep_existing_position) || (missing(before) && missing(adjacent_column))) return()
+
+  # Get the adjacent position to be used in appending the new column names
+  if(before) {
+    if(missing(adjacent_column)) adjacent_position <- 0
+    else adjacent_position <- which(self$get_column_names() == adjacent_column) - 1
+  } else {
+      if(missing(adjacent_column)) adjacent_position <- self$get_column_count()
+      else adjacent_position <- which(self$get_column_names() == adjacent_column)
   }
-  else {
-    if(!missing(before) || !missing(adjacent_column)) warning("Cannot reposition when one or move new columns replaces an old column.")
-  }
+
+  # Replace existing names with empty placeholders. Maintains the indices
+  temp_all_col_names <- replace(self$get_column_names(), self$get_column_names() %in% new_col_names, "")
+  # Append the newly added column names after the set position
+  new_col_names_order <- append(temp_all_col_names, new_col_names, adjacent_position)
+  # Remove all empty characters placeholders to get final reordered column names
+  new_col_names_order <- new_col_names_order[! new_col_names_order == ""]
+  # Only do reordering if the column names order differ
+  if(!all(self$get_column_names() == new_col_names_order)) self$reorder_columns_in_data(col_order=new_col_names_order)
 }
 )
 
@@ -2145,7 +2151,6 @@ DataSheet$set("public","set_contrasts_of_factor", function(col_name, new_contras
 DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, year_name = FALSE, leap_year = FALSE,  month_val = FALSE, month_abbr = FALSE, month_name = FALSE, week_val = FALSE, week_abbr = FALSE, week_name = FALSE,  weekday_val = FALSE, weekday_abbr = FALSE, weekday_name = FALSE,  day = FALSE, day_in_month = FALSE, day_in_year = FALSE, day_in_year_366 = FALSE, pentad_val = FALSE, pentad_abbr = FALSE,  dekad_val = FALSE, dekad_abbr = FALSE, quarter_val = FALSE, quarter_abbr = FALSE, with_year = FALSE, s_start_month = 1, s_start_day_in_month = 1, days_in_month = FALSE) {
   col_data <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
   if(!lubridate::is.Date(col_data)) stop("This column must be a date or time!")
-  
   s_shift <- s_start_day_in_month > 1 || s_start_month > 1
   is_climatic <- self$is_climatic_data()
   
@@ -3628,3 +3633,132 @@ DataSheet$set("public", "get_variable_sets", function(set_names, force_as_list) 
   return(out)
 }
 )
+
+DataSheet$set("public", "patch_climate_element", function(date_col_name = "", var = "", vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name, station_col_name) {
+  if (missing(date_col_name)) stop("date is missing with no default")
+  if (missing(var)) stop("var is missing with no default")
+  if (missing(vars)) stop("vars is missing with no default")
+  date_col <- self$get_columns_from_data(date_col_name, use_current_filter = FALSE)
+  min_date <- min(date_col)
+  max_date <- max(date_col)
+  full_date_range <- seq(from = min_date, to = max_date, by = "day")
+  if (!lubridate::is.Date(date_col)) stop("This column must be a date or time!")
+  curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  if (!missing(station_col_name)) {
+    station_col <- self$get_columns_from_data(station_col_name, use_current_filter = FALSE)
+    station_names <- unique(station_col)
+    list_out <- list()
+    date_lengths <- NULL
+    for (i in seq_along(station_names)) {
+      temp_data <- curr_data[station_col == station_names[i], ]
+      min_date <- min(temp_data[, date_col_name])
+      max_date <- max(temp_data[, date_col_name])
+      full_date_range <- seq(from = min_date, to = max_date, by = "day")
+      date_lengths[i] <- length(full_date_range)
+      var_col <- temp_data[, var]
+      date_col <- temp_data[, date_col_name]
+      Year <- lubridate::year(date_col)
+      Month <- lubridate::month(date_col)
+      Day <- lubridate::day(date_col)
+      weather <- data.frame(Year, Month, Day, var_col)
+      colnames(weather)[4] <- var
+      patch_weather <- list()
+      for (j in seq_along(vars)) {
+        col <- temp_data[, vars[j]]
+        patch_weather[[j]] <- data.frame(Year, Month, Day, col)
+        colnames(patch_weather[[j]])[4] <- var
+      }
+      out <- chillR::patch_daily_temperatures(weather = weather, patch_weather = patch_weather, vars = var, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias)
+      list_out[[i]] <- out[[1]][, var]
+    }
+    gaps <- sum(date_lengths) - dim(curr_data)[[1]]
+  } else {
+    gaps <- length(full_date_range) - length(date_col)
+    var_col <- self$get_columns_from_data(var, use_current_filter = FALSE)
+    Year <- lubridate::year(date_col)
+    Month <- lubridate::month(date_col)
+    Day <- lubridate::day(date_col)
+    weather <- data.frame(Year, Month, Day, var_col)
+    colnames(weather)[4] <- var
+    patch_weather <- list()
+    for (i in seq_along(vars)) {
+      col <- self$get_columns_from_data(vars[i], use_current_filter = FALSE)
+      patch_weather[[i]] <- data.frame(Year, Month, Day, col)
+      colnames(patch_weather[[i]])[4] <- var
+    }
+  }
+  if (!missing(station_col_name)) {
+    col <- unlist(list_out)
+  }
+  else {
+    out <- chillR::patch_daily_temperatures(weather = weather, patch_weather = patch_weather, vars = var, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias)
+    col <- out[[1]][, var]
+  }
+  if (length(col) == dim(curr_data)[[1]]) {
+    gaps_remaining <- summary_count_missing(col)
+    gaps_filled <- (summary_count_missing(curr_data[, var]) - gaps_remaining)
+    cat(gaps_filled, " gaps filled", gaps_remaining, " remaining.", "\n")
+    self$add_columns_to_data(col_name = column_name, col_data = col)
+  } else if (gaps != 0) {
+    cat(gaps, " rows for date gaps are missing, fill date gaps before proceeding.", "\n")
+  }
+})
+
+DataSheet$set("public", "visualize_element_na", function(element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = 1461, x_with_truth = NULL, measure = "percent") {
+  curr_data <- self$get_data_frame()
+  if (!missing(station_col_name)) {
+    station_col <- self$get_columns_from_data(station_col_name)
+    station_names <- unique(station_col)
+  }
+  if (!missing(element_col_name)) {
+    element_col <- self$get_columns_from_data(element_col_name)
+  }
+  if (!missing(element_col_name_imputed)) {
+    element_imputed_col <- self$get_columns_from_data(element_col_name_imputed)
+  }
+  if (!(type %in% c("distribution", "gapsize", "interval", "imputation"))) stop(type, " must be either distribution, gapsize or imputation")
+  plt_list <- list()
+  if (type == "distribution") {
+    if (!missing(station_col_name) && dplyr::n_distinct(station_names) > 1) {
+      for (i in seq_along(station_names)) {
+        temp_data <- curr_data[station_col == station_names[i], ]
+        plt_list[[i]] <- imputeTS::ggplot_na_distribution(x = temp_data[, element_col_name], x_axis_labels = temp_data[, x_axis_labels_col_name], title = station_names[i], xlab = xlab, ylab = ylab)
+      }
+    } else {
+      plt <- imputeTS::ggplot_na_distribution(x = element_col, x_axis_labels = curr_data[, x_axis_labels_col_name], xlab = xlab, ylab = ylab)
+    }
+  } else if (type == "gapsize") {
+    if (!missing(station_col_name) && dplyr::n_distinct(station_names) > 1) {
+      for (i in seq_along(station_names)) {
+        temp_data <- curr_data[station_col == station_names[i], ]
+        plt_list[[i]] <- imputeTS::ggplot_na_gapsize(x = temp_data[, element_col_name], include_total = TRUE, title = paste0(station_names[i], ":Occurrence of gap sizes"), xlab = xlab, ylab = ylab, legend = legend, orientation = orientation)
+      }
+    } else {
+      plt <- imputeTS::ggplot_na_gapsize(x = element_col, include_total = TRUE, xlab = xlab, ylab = ylab, legend = legend, orientation = orientation)
+    }
+  } else if (type == "interval") {
+    if (!missing(station_col_name) && dplyr::n_distinct(station_names) > 1) {
+      for (i in seq_along(station_names)) {
+        temp_data <- curr_data[station_col == station_names[i], ]
+        plt_list[[i]] <- imputeTS::ggplot_na_intervals(x = temp_data[, element_col_name], title = paste0(station_names[i], ":Missing Values per Interval"), ylab = ylab, interval_size = interval_size, measure = measure)
+      }
+    } else {
+      plt <- imputeTS::ggplot_na_intervals(x = element_col, ylab = ylab, interval_size = interval_size, measure = measure)
+    }
+  } else if (type == "imputation") {
+    if (!missing(station_col_name) && dplyr::n_distinct(station_names) > 1) {
+      for (i in seq_along(station_names)) {
+        temp_data <- curr_data[station_col == station_names[i], ]
+        plt_list[[i]] <- imputeTS::ggplot_na_imputations(x_with_na = temp_data[, element_col_name], x_with_imputations = temp_data[, element_col_name_imputed], x_axis_labels = temp_data[, x_axis_labels_col_name], title = station_names[i], xlab = xlab, ylab = ylab, legend = legend, x_with_truth = x_with_truth)
+      }
+    } else {
+      plt <- imputeTS::ggplot_na_imputations(x_with_na = element_col, x_with_imputations = element_imputed_col, x_axis_labels = curr_data[, x_axis_labels_col_name], xlab = xlab, ylab = ylab, legend = legend, x_with_truth = x_with_truth)
+    }
+  }
+  if (!missing(station_col_name) && dplyr::n_distinct(station_names) > 1) {
+    return(patchwork::wrap_plots(plt_list, ncol = ncol))
+  }
+  else {
+    return(plt)
+  }
+})
