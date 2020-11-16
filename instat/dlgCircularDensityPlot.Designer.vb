@@ -70,7 +70,7 @@ Partial Class dlgCircularDensityPlot
         '
         'ucrSaveDensity
         '
-        Me.ucrSaveDensity.Location = New System.Drawing.Point(13, 225)
+        Me.ucrSaveDensity.Location = New System.Drawing.Point(13, 239)
         Me.ucrSaveDensity.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDensity.Name = "ucrSaveDensity"
         Me.ucrSaveDensity.Size = New System.Drawing.Size(249, 21)
