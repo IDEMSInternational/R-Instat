@@ -493,7 +493,7 @@ DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, exclu
 }
 )
 
-DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column, num_cols, require_correct_length = TRUE) {
+DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column, num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
@@ -529,7 +529,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
     use_col_name_as_prefix = TRUE
   }
   
-  replaced = FALSE
+  replaced <- FALSE
   previous_length = self$get_column_count()
   if(!missing(adjacent_column) && !adjacent_column %in% self$get_column_names()) stop(adjacent_column, "not found in the data")
  
@@ -551,34 +551,35 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
     if(curr_col_name %in% self$get_column_names()) {
       message(paste("A column named", curr_col_name, "already exists. The column will be replaced in the data"))
       self$append_to_changes(list(Replaced_col, curr_col_name))
-      replaced = TRUE
+      replaced <- TRUE
     }
     else self$append_to_changes(list(Added_col, curr_col_name))
     private$data[[curr_col_name]] <- curr_col
     self$data_changed <- TRUE
   }
   self$add_defaults_variables_metadata(new_col_names)
+  
+  # If replacing existing columns and not repositioning them, or before and adjacent_column column positioning parameters are missing
+  # then do not reposition.
+  if((replaced && keep_existing_position) || (missing(before) && missing(adjacent_column))) return()
 
-  #no need to reorder columns if before and adjacent_column column positioning paramaters are missing
-  if(missing(before) && missing(adjacent_column)) return()
-
-  #get the adjacent position to be used in appending the new column names
-  if(before){
-     if(missing(adjacent_column)) adjacent_position = 0
-	 else adjacent_position = which(self$get_column_names() == adjacent_column) - 1
-  }else{
-     if(missing(adjacent_column)) adjacent_position = self$get_column_count()
-	 else adjacent_position = which(self$get_column_names() == adjacent_column)
+  # Get the adjacent position to be used in appending the new column names
+  if(before) {
+    if(missing(adjacent_column)) adjacent_position <- 0
+    else adjacent_position <- which(self$get_column_names() == adjacent_column) - 1
+  } else {
+      if(missing(adjacent_column)) adjacent_position <- self$get_column_count()
+      else adjacent_position <- which(self$get_column_names() == adjacent_column)
   }
 
-  #replace existing names with empty placeholders. Maintains the indices
+  # Replace existing names with empty placeholders. Maintains the indices
   temp_all_col_names <- replace(self$get_column_names(), self$get_column_names() %in% new_col_names, "")
-  #append the newly added column names after the set position
+  # Append the newly added column names after the set position
   new_col_names_order <- append(temp_all_col_names, new_col_names, adjacent_position)
-  #remove all empty characters placeholders to get final reordered column names
-  new_col_names_order <- new_col_names_order[! new_col_names_order %in% c("")]
-  #only do reordering if the column names order differ
-  if( !all( self$get_column_names() == new_col_names_order) ) self$reorder_columns_in_data(col_order=new_col_names_order)
+  # Remove all empty characters placeholders to get final reordered column names
+  new_col_names_order <- new_col_names_order[! new_col_names_order == ""]
+  # Only do reordering if the column names order differ
+  if(!all(self$get_column_names() == new_col_names_order)) self$reorder_columns_in_data(col_order=new_col_names_order)
 }
 )
 
@@ -1144,7 +1145,7 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
   }
   
   if(!is.null(factor_values) && !(factor_values %in% c("force_ordinals", "force_values"))) {
-    stop(factor_values, " can either be by_levels or by_ordinals.")
+    stop(factor_values, " must be either 'force_ordinals' or 'force_values'")
   }
   
   for(col_name in col_names) {
@@ -1155,22 +1156,25 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
     if(!is.null(factor_values) && is.factor(curr_col) && to_type %in% c("integer", "numeric")) {
       if(factor_values == "force_ordinals") new_col <- as.numeric(curr_col)
       else if(factor_values == "force_values") new_col <- as.numeric(levels(curr_col))[curr_col]
-      else stop("If specified, 'factor_values' must be either 'force_ordinals' or 'force_values'")
     }
     else if(to_type %in% c("factor", "ordered_factor")) {
-      make_ordered <- (to_type == "ordered_factor")
+      ordered <- (to_type == "ordered_factor")
+      # TODO This looks like it may not work if curr_col is not numeric.
+      # If this is not currently used anywhere possibly remove or modify.
       if(set_decimals) curr_col <- round(curr_col, digits = set_digits)
       if(ignore_labels) {
-        new_col <- factor(curr_col, ordered = make_ordered)
+        new_col <- make_factor(curr_col, ordered = ordered)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name)) {
           new_col <- sjlabelled::as_label(curr_col, add.non.labelled = TRUE)
-          #TODO work out how to do ordered correctly
-		  #if(make_ordered) new_col <- ordered(new_col)
+          # Adds "ordered" to the class in the same way as factor().
+          # factor(ordered = TURE) is not used as this drops all attributes of x.
+          if(ordered) class(new_col) <- c("ordered", class(new_col))
+          else class(new_col) <- class(new_col)[class(new_col) != "ordered"]
         }
         else {
-          new_col <- factor(curr_col, ordered = make_ordered)
+          new_col <- make_factor(curr_col, ordered = ordered)
           if(is.numeric(curr_col) && !self$is_variables_metadata(labels_label, col_name)) {
             labs <- sort(unique(curr_col))
             names(labs) <- labs
@@ -1180,8 +1184,8 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
         }
       }
     }
-    else if(to_type =="integer") {
-      new_col = as.integer(curr_col)
+    else if(to_type == "integer") {
+      new_col <- as.integer(curr_col)
     }
     else if(to_type == "numeric") {
       if(ignore_labels) {
@@ -1913,7 +1917,7 @@ DataSheet$set("public", "set_column_colours_by_metadata", function(columns, prop
   if(missing(columns)) property_values <- self$get_variables_metadata(property = property)
   else property_values <- self$get_variables_metadata(property = property, column = columns)
   
-  new_colours <- as.numeric(as.factor(property_values))
+  new_colours <- as.numeric(make_factor(property_values))
   new_colours[is.na(new_colours)] <- -1
   if(missing(columns)) self$set_column_colours(colours = new_colours)
   else self$set_column_colours(columns = columns, colours = new_colours)
