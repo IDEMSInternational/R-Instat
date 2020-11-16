@@ -402,9 +402,6 @@
   <data name="&gt;&gt;rdoTable.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrChkLabel.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="ucrChkLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>259, 242</value>
   </data>
@@ -413,9 +410,6 @@
   </data>
   <data name="ucrChkLabel.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
-  </data>
-  <data name="ucrChkLabel.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;ucrChkLabel.Name" xml:space="preserve">
     <value>ucrChkLabel</value>

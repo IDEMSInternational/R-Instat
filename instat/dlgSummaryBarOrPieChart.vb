@@ -129,6 +129,9 @@ Public Class dlgSummaryBarOrPieChart
 
         ucrPnlOptions.AddToLinkedControls({ucrInputBarChartPosition, ucrChkLabel}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputBarChartPosition.SetLinkedDisplayControl(lblPosition)
+
+        'TODO: Enable when geom_label is in sync with options from plot options subdialog
+        ucrChkLabel.Visible = False
     End Sub
 
     Private Sub SetDefaults()
