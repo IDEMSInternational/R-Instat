@@ -2854,6 +2854,7 @@ Partial Class ucrCalculator
         'ucrInputCalOptions
         '
         Me.ucrInputCalOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputCalOptions.GetSetSelectedIndex = -1
         Me.ucrInputCalOptions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCalOptions, "ucrInputCalOptions")
         Me.ucrInputCalOptions.Name = "ucrInputCalOptions"
