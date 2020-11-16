@@ -1240,7 +1240,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveStringHandling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 21</value>
+    <value>240, 21</value>
   </data>
   <data name="ucrSaveStringHandling.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
