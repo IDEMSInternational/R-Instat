@@ -1145,7 +1145,7 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
   }
   
   if(!is.null(factor_values) && !(factor_values %in% c("force_ordinals", "force_values"))) {
-    stop(factor_values, " can either be by_levels or by_ordinals.")
+    stop(factor_values, " must be either 'force_ordinals' or 'force_values'")
   }
   
   for(col_name in col_names) {
@@ -1156,22 +1156,25 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
     if(!is.null(factor_values) && is.factor(curr_col) && to_type %in% c("integer", "numeric")) {
       if(factor_values == "force_ordinals") new_col <- as.numeric(curr_col)
       else if(factor_values == "force_values") new_col <- as.numeric(levels(curr_col))[curr_col]
-      else stop("If specified, 'factor_values' must be either 'force_ordinals' or 'force_values'")
     }
     else if(to_type %in% c("factor", "ordered_factor")) {
-      make_ordered <- (to_type == "ordered_factor")
+      ordered <- (to_type == "ordered_factor")
+      # TODO This looks like it may not work if curr_col is not numeric.
+      # If this is not currently used anywhere possibly remove or modify.
       if(set_decimals) curr_col <- round(curr_col, digits = set_digits)
       if(ignore_labels) {
-        new_col <- factor(curr_col, ordered = make_ordered)
+        new_col <- make_factor(curr_col, ordered = ordered)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name)) {
           new_col <- sjlabelled::as_label(curr_col, add.non.labelled = TRUE)
-          #TODO work out how to do ordered correctly
-		  #if(make_ordered) new_col <- ordered(new_col)
+          # Adds "ordered" to the class in the same way as factor().
+          # factor(ordered = TURE) is not used as this drops all attributes of x.
+          if(ordered) class(new_col) <- c("ordered", class(new_col))
+          else class(new_col) <- class(new_col)[class(new_col) != "ordered"]
         }
         else {
-          new_col <- factor(curr_col, ordered = make_ordered)
+          new_col <- make_factor(curr_col, ordered = ordered)
           if(is.numeric(curr_col) && !self$is_variables_metadata(labels_label, col_name)) {
             labs <- sort(unique(curr_col))
             names(labs) <- labs
@@ -1181,8 +1184,8 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
         }
       }
     }
-    else if(to_type =="integer") {
-      new_col = as.integer(curr_col)
+    else if(to_type == "integer") {
+      new_col <- as.integer(curr_col)
     }
     else if(to_type == "numeric") {
       if(ignore_labels) {
@@ -1914,7 +1917,7 @@ DataSheet$set("public", "set_column_colours_by_metadata", function(columns, prop
   if(missing(columns)) property_values <- self$get_variables_metadata(property = property)
   else property_values <- self$get_variables_metadata(property = property, column = columns)
   
-  new_colours <- as.numeric(as.factor(property_values))
+  new_colours <- as.numeric(make_factor(property_values))
   new_colours[is.na(new_colours)] <- -1
   if(missing(columns)) self$set_column_colours(colours = new_colours)
   else self$set_column_colours(columns = columns, colours = new_colours)
