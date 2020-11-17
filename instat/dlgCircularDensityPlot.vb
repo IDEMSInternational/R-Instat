@@ -36,7 +36,9 @@ Public Class dlgCircularDensityPlot
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 2
+        Dim dctKernel As New Dictionary(Of String, String)
+
+        ucrBase.clsRsyntax.iCallType = 3
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorDataFrame.SetParameter(New RParameter("data", 0))
@@ -47,18 +49,27 @@ Public Class dlgCircularDensityPlot
         ucrReceiverVariable.SetParameterIsRFunction()
         ucrReceiverVariable.SetIncludedDataTypes({"numeric"})
         ucrReceiverVariable.strSelectorHeading = "Numerics"
-        'ucrReceiverVariable.bWithQuotes = False
+
+
+        ucrInputComboKernel.SetParameter(New RParameter("kernel", 2))
+        dctKernel.Add("vonmises", Chr(34) & "vonmises" & Chr(34))
+        dctKernel.Add("wrappednormal", Chr(34) & "wrappednormal" & Chr(34))
+        ucrInputComboKernel.SetItems(dctKernel)
+        ucrInputComboKernel.SetDropDownStyleAsNonEditable()
+        ucrInputComboKernel.SetDefaultState(Chr(34) & "vonmisess" & Chr(34))
+        ucrInputComboKernel.SetLinkedDisplayControl(lblKernel)
 
         ucrChkOmitMissing.SetText("Omit Missing Values")
-        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
+        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 3))
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
 
-        ucrInputBandWidth.SetParameter(New RParameter("bw", 2))
+        ucrInputBandWidth.SetParameter(New RParameter("bw", 1))
         ucrInputBandWidth.SetValidationTypeAsNumeric()
         ucrInputBandWidth.SetDefaultState(25)
         ucrInputBandWidth.AddQuotesIfUnrecognised = False
+        ucrInputBandWidth.SetLinkedDisplayControl(lblBandWidth)
 
         ucrSaveDensity.SetPrefix("circular_density")
         ucrSaveDensity.SetDataFrameSelector(ucrSelectorDataFrame.ucrAvailableDataFrames)
@@ -78,7 +89,6 @@ Public Class dlgCircularDensityPlot
 
         clsDensityFunction.SetPackageName("circular")
         clsDensityFunction.SetRCommand("density.circular")
-        'clsDensityFunction.AddParameter("adjust", "1", iPosition:=1)
 
         clsPlotFunction.SetRCommand("plot")
         clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsDensityFunction, iPosition:=0)
@@ -89,6 +99,8 @@ Public Class dlgCircularDensityPlot
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputBandWidth.AddAdditionalCodeParameterPair(clsDensityFunction, ucrInputBandWidth.GetParameter(), iAdditionalPairNo:=1)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsDensityFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
+        ucrInputComboKernel.AddAdditionalCodeParameterPair(clsDensityFunction, ucrInputComboKernel.GetParameter(), iAdditionalPairNo:=1)
+
         ucrSaveDensity.SetRCode(clsPlotFunction, bReset)
         ucrReceiverVariable.SetRCode(clsDensityFunction, bReset)
     End Sub

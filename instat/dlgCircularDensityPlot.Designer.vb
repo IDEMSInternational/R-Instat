@@ -30,11 +30,13 @@ Partial Class dlgCircularDensityPlot
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrInputBandWidth = New instat.ucrInputTextBox()
         Me.lblBandWidth = New System.Windows.Forms.Label()
+        Me.ucrInputComboKernel = New instat.ucrInputComboBox()
+        Me.lblKernel = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(5, 306)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 291)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -73,7 +75,7 @@ Partial Class dlgCircularDensityPlot
         '
         'ucrSaveDensity
         '
-        Me.ucrSaveDensity.Location = New System.Drawing.Point(13, 271)
+        Me.ucrSaveDensity.Location = New System.Drawing.Point(13, 260)
         Me.ucrSaveDensity.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDensity.Name = "ucrSaveDensity"
         Me.ucrSaveDensity.Size = New System.Drawing.Size(249, 21)
@@ -82,7 +84,7 @@ Partial Class dlgCircularDensityPlot
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(13, 234)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(13, 214)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(170, 20)
         Me.ucrChkOmitMissing.TabIndex = 5
@@ -92,7 +94,7 @@ Partial Class dlgCircularDensityPlot
         Me.ucrInputBandWidth.AddQuotesIfUnrecognised = True
         Me.ucrInputBandWidth.IsMultiline = False
         Me.ucrInputBandWidth.IsReadOnly = False
-        Me.ucrInputBandWidth.Location = New System.Drawing.Point(341, 225)
+        Me.ucrInputBandWidth.Location = New System.Drawing.Point(295, 158)
         Me.ucrInputBandWidth.Name = "ucrInputBandWidth"
         Me.ucrInputBandWidth.Size = New System.Drawing.Size(56, 21)
         Me.ucrInputBandWidth.TabIndex = 6
@@ -100,17 +102,38 @@ Partial Class dlgCircularDensityPlot
         'lblBandWidth
         '
         Me.lblBandWidth.AutoSize = True
-        Me.lblBandWidth.Location = New System.Drawing.Point(335, 210)
+        Me.lblBandWidth.Location = New System.Drawing.Point(290, 142)
         Me.lblBandWidth.Name = "lblBandWidth"
         Me.lblBandWidth.Size = New System.Drawing.Size(63, 13)
         Me.lblBandWidth.TabIndex = 7
         Me.lblBandWidth.Text = "Bandwidth: "
         '
+        'ucrInputComboKernel
+        '
+        Me.ucrInputComboKernel.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboKernel.GetSetSelectedIndex = -1
+        Me.ucrInputComboKernel.IsReadOnly = False
+        Me.ucrInputComboKernel.Location = New System.Drawing.Point(295, 213)
+        Me.ucrInputComboKernel.Name = "ucrInputComboKernel"
+        Me.ucrInputComboKernel.Size = New System.Drawing.Size(93, 21)
+        Me.ucrInputComboKernel.TabIndex = 8
+        '
+        'lblKernel
+        '
+        Me.lblKernel.AutoSize = True
+        Me.lblKernel.Location = New System.Drawing.Point(290, 197)
+        Me.lblKernel.Name = "lblKernel"
+        Me.lblKernel.Size = New System.Drawing.Size(43, 13)
+        Me.lblKernel.TabIndex = 9
+        Me.lblKernel.Text = "Kernel :"
+        '
         'dlgCircularDensityPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 362)
+        Me.ClientSize = New System.Drawing.Size(420, 347)
+        Me.Controls.Add(Me.lblKernel)
+        Me.Controls.Add(Me.ucrInputComboKernel)
         Me.Controls.Add(Me.lblBandWidth)
         Me.Controls.Add(Me.ucrInputBandWidth)
         Me.Controls.Add(Me.ucrChkOmitMissing)
@@ -138,4 +161,6 @@ Partial Class dlgCircularDensityPlot
     Friend WithEvents ucrInputBandWidth As ucrInputTextBox
     Friend WithEvents ucrChkOmitMissing As ucrCheck
     Friend WithEvents lblBandWidth As Label
+    Friend WithEvents lblKernel As Label
+    Friend WithEvents ucrInputComboKernel As ucrInputComboBox
 End Class
