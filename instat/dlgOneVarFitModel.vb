@@ -28,9 +28,11 @@ Public Class dlgOneVarFitModel
     Private bReset As Boolean = True
     Private bResetFittingOptions As Boolean = False
     Private bResetFitModDisplay As Boolean = False
+    Private bRCodeSet As Boolean = True
 
     Private Sub dlgOneVarFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        bRCodeSet = False
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
@@ -39,6 +41,7 @@ Public Class dlgOneVarFitModel
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        bRCodeSet = True
         bReset = False
         TestOKEnabled()
     End Sub
@@ -570,8 +573,10 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        bRCodeSet = False
         SetDefaults()
         SetRCodeForControls(True)
+        bRCodeSet = True
         TestOKEnabled()
     End Sub
 
@@ -884,21 +889,23 @@ Public Class dlgOneVarFitModel
     ''' </summary>
 
     Private Sub AddFactorLevels()
-        Dim chrCurrentFactorLevels As CharacterVector
-        Dim lstFactor As List(Of String) = New List(Of String)()
-        If Not ucrReceiverVariable.IsEmpty AndAlso rdoTest.Checked AndAlso (ucrReceiverVariable.strCurrDataType.ToLower = "logical" Or ucrReceiverVariable.strCurrDataType.ToLower = "factor") AndAlso (ucrInputComboTests.GetText() = "binomial" Or ucrInputComboTests.GetText() = "proportion") Then
-            clsGetFactorLevel.AddParameter("col_name", ucrReceiverVariable.GetVariableNames(), iPosition:=1)
-            chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevel.ToScript()).AsCharacter
-            For Each factor In chrCurrentFactorLevels
-                lstFactor.Add(Chr(34) & factor & Chr(34))
-            Next
-            ucrInputSuccess.SetItems(lstFactor.ToArray)
-            ucrInputSuccess.SetText(lstFactor(0))
-            ucrInputSuccess.Visible = True
-        Else
-            ucrInputSuccess.Visible = False
-            clsBionomialFunction.RemoveParameterByName("success")
-            clsProportionFunction.RemoveParameterByName("success")
+        If bRCodeSet Then
+            Dim chrCurrentFactorLevels As CharacterVector
+            Dim lstFactor As List(Of String) = New List(Of String)()
+            If Not ucrReceiverVariable.IsEmpty AndAlso rdoTest.Checked AndAlso (ucrReceiverVariable.strCurrDataType.ToLower = "logical" Or ucrReceiverVariable.strCurrDataType.ToLower = "factor") AndAlso (ucrInputComboTests.GetText() = "binomial" Or ucrInputComboTests.GetText() = "proportion") Then
+                clsGetFactorLevel.AddParameter("col_name", ucrReceiverVariable.GetVariableNames(), iPosition:=1)
+                chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevel.ToScript()).AsCharacter
+                For Each factor In chrCurrentFactorLevels
+                    lstFactor.Add(Chr(34) & factor & Chr(34))
+                Next
+                ucrInputSuccess.SetItems(lstFactor.ToArray)
+                ucrInputSuccess.SetText(lstFactor(0))
+                ucrInputSuccess.Visible = True
+            Else
+                ucrInputSuccess.Visible = False
+                clsBionomialFunction.RemoveParameterByName("success")
+                clsProportionFunction.RemoveParameterByName("success")
+            End If
         End If
     End Sub
 
