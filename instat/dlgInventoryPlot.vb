@@ -186,6 +186,7 @@ Public Class dlgInventoryPlot
         ucrReceiverElements.SetMeAsReceiver()
         ucrSaveGraph.Reset()
         ucrSaveDetails.Reset()
+        bResetSubdialog = True
 
         clsInventoryPlot.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsInventoryPlot.AddParameter("coord_flip", "FALSE", iPosition:=4)
@@ -322,8 +323,8 @@ Public Class dlgInventoryPlot
 
     End Sub
     Private Sub cmdInventoryPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdInventoryPlotOptions.Click
-        sdgInventoryGraph.SetRCode(clsInventoryNew:=clsInventoryPlot, bReset:=bResetSubdialog)
-        sdgInventoryGraph.ShowDialog()
+        sdgInventoryPlot.SetRCode(clsInventoryNew:=clsInventoryPlot, bReset:=bResetSubdialog)
+        sdgInventoryPlot.ShowDialog()
         bResetSubdialog = False
     End Sub
     Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrSaveDetails.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrChkSummary.ControlContentsChanged, ucrChkDetails.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkHour.ControlContentsChanged, ucrChkMinute.ControlContentsChanged, ucrChkSecond.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
