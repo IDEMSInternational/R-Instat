@@ -20,6 +20,7 @@ Public Class dlgCircularDensityPlot
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDensityFunction As RFunction
+    Private clsPlotFunction As RFunction
     Private Sub dlgCircularDensityPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -35,7 +36,7 @@ Public Class dlgCircularDensityPlot
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.iCallType = 3
+        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
         ucrSelectorDataFrame.SetParameter(New RParameter("data", 0))
@@ -43,10 +44,21 @@ Public Class dlgCircularDensityPlot
 
         ucrReceiverVariable.SetParameter(New RParameter("x", 0))
         ucrReceiverVariable.Selector = ucrSelectorDataFrame
-        'ucrReceiverVariable.SetParameterIsString()
+        ucrReceiverVariable.SetParameterIsRFunction()
         ucrReceiverVariable.SetIncludedDataTypes({"numeric"})
         ucrReceiverVariable.strSelectorHeading = "Numerics"
-        ucrReceiverVariable.bWithQuotes = False
+        'ucrReceiverVariable.bWithQuotes = False
+
+        ucrChkOmitMissing.SetText("Omit Missing Values")
+        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 6))
+        ucrChkOmitMissing.SetText("Omit Missing Values")
+        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkOmitMissing.SetRDefault("FALSE")
+
+        ucrInputBandWidth.SetParameter(New RParameter("bw", 2))
+        ucrInputBandWidth.SetValidationTypeAsNumeric()
+        ucrInputBandWidth.SetDefaultState(25)
+        ucrInputBandWidth.AddQuotesIfUnrecognised = False
 
         ucrSaveDensity.SetPrefix("circular_density")
         ucrSaveDensity.SetDataFrameSelector(ucrSelectorDataFrame.ucrAvailableDataFrames)
@@ -58,6 +70,7 @@ Public Class dlgCircularDensityPlot
 
     Private Sub SetDefaults()
         clsDensityFunction = New RFunction
+        clsPlotFunction = New RFunction
 
         ucrSaveDensity.Reset()
         ucrReceiverVariable.SetMeAsReceiver()
@@ -65,26 +78,36 @@ Public Class dlgCircularDensityPlot
 
         clsDensityFunction.SetPackageName("circular")
         clsDensityFunction.SetRCommand("density.circular")
-        clsDensityFunction.AddParameter("adjust", "1", iPosition:=1)
+        'clsDensityFunction.AddParameter("adjust", "1", iPosition:=1)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDensityFunction)
+        clsPlotFunction.SetRCommand("plot")
+        clsPlotFunction.AddParameter("x", clsRFunctionParameter:=clsDensityFunction, iPosition:=0)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsPlotFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrInputBandWidth.AddAdditionalCodeParameterPair(clsDensityFunction, ucrInputBandWidth.GetParameter(), iAdditionalPairNo:=1)
+        ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsDensityFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
+        ucrSaveDensity.SetRCode(clsPlotFunction, bReset)
         ucrReceiverVariable.SetRCode(clsDensityFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        'If ucrReceiverVariable.IsEmpty Then
-        '    ucrBase.OKEnabled(False)
-        'Else
-        '    ucrBase.OKEnabled(True)
-        'End If
+        If ucrSaveDensity.IsComplete AndAlso Not ucrReceiverVariable.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged() Handles ucrReceiverVariable.ControlContentsChanged, ucrSaveDensity.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

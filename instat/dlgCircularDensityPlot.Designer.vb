@@ -27,11 +27,14 @@ Partial Class dlgCircularDensityPlot
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.lblVariable = New System.Windows.Forms.Label()
         Me.ucrSaveDensity = New instat.ucrSave()
+        Me.ucrChkOmitMissing = New instat.ucrCheck()
+        Me.ucrInputBandWidth = New instat.ucrInputTextBox()
+        Me.lblBandWidth = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(5, 274)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 306)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -50,7 +53,7 @@ Partial Class dlgCircularDensityPlot
         'ucrReceiverVariable
         '
         Me.ucrReceiverVariable.frmParent = Me
-        Me.ucrReceiverVariable.Location = New System.Drawing.Point(295, 37)
+        Me.ucrReceiverVariable.Location = New System.Drawing.Point(295, 71)
         Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
         Me.ucrReceiverVariable.Selector = Nothing
@@ -62,7 +65,7 @@ Partial Class dlgCircularDensityPlot
         'lblVariable
         '
         Me.lblVariable.AutoSize = True
-        Me.lblVariable.Location = New System.Drawing.Point(290, 22)
+        Me.lblVariable.Location = New System.Drawing.Point(290, 56)
         Me.lblVariable.Name = "lblVariable"
         Me.lblVariable.Size = New System.Drawing.Size(48, 13)
         Me.lblVariable.TabIndex = 3
@@ -70,17 +73,47 @@ Partial Class dlgCircularDensityPlot
         '
         'ucrSaveDensity
         '
-        Me.ucrSaveDensity.Location = New System.Drawing.Point(13, 239)
+        Me.ucrSaveDensity.Location = New System.Drawing.Point(13, 271)
         Me.ucrSaveDensity.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDensity.Name = "ucrSaveDensity"
         Me.ucrSaveDensity.Size = New System.Drawing.Size(249, 21)
         Me.ucrSaveDensity.TabIndex = 4
         '
+        'ucrChkOmitMissing
+        '
+        Me.ucrChkOmitMissing.Checked = False
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(13, 234)
+        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
+        Me.ucrChkOmitMissing.Size = New System.Drawing.Size(170, 20)
+        Me.ucrChkOmitMissing.TabIndex = 5
+        '
+        'ucrInputBandWidth
+        '
+        Me.ucrInputBandWidth.AddQuotesIfUnrecognised = True
+        Me.ucrInputBandWidth.IsMultiline = False
+        Me.ucrInputBandWidth.IsReadOnly = False
+        Me.ucrInputBandWidth.Location = New System.Drawing.Point(341, 225)
+        Me.ucrInputBandWidth.Name = "ucrInputBandWidth"
+        Me.ucrInputBandWidth.Size = New System.Drawing.Size(56, 21)
+        Me.ucrInputBandWidth.TabIndex = 6
+        '
+        'lblBandWidth
+        '
+        Me.lblBandWidth.AutoSize = True
+        Me.lblBandWidth.Location = New System.Drawing.Point(335, 210)
+        Me.lblBandWidth.Name = "lblBandWidth"
+        Me.lblBandWidth.Size = New System.Drawing.Size(63, 13)
+        Me.lblBandWidth.TabIndex = 7
+        Me.lblBandWidth.Text = "Bandwidth: "
+        '
         'dlgCircularDensityPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 331)
+        Me.ClientSize = New System.Drawing.Size(420, 362)
+        Me.Controls.Add(Me.lblBandWidth)
+        Me.Controls.Add(Me.ucrInputBandWidth)
+        Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.ucrSaveDensity)
         Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrReceiverVariable)
@@ -102,4 +135,7 @@ Partial Class dlgCircularDensityPlot
     Friend WithEvents ucrReceiverVariable As ucrReceiverSingle
     Friend WithEvents ucrSaveDensity As ucrSave
     Friend WithEvents lblVariable As Label
+    Friend WithEvents ucrInputBandWidth As ucrInputTextBox
+    Friend WithEvents ucrChkOmitMissing As ucrCheck
+    Friend WithEvents lblBandWidth As Label
 End Class
