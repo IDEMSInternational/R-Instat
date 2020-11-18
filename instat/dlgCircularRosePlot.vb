@@ -70,15 +70,20 @@ Public Class dlgCircularRosePlot
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If ucrSaveCircularRosePlot.IsComplete AndAlso Not ucrReceiverVariable.IsEmpty Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-
+        SetRCodeForControls(True)
+        SetDefaults()
+        TestOkEnabled()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged() Handles ucrReceiverVariable.ControlContentsChanged, ucrSaveCircularRosePlot.ControlContentsChanged
-
+        TestOkEnabled()
     End Sub
-
 End Class
