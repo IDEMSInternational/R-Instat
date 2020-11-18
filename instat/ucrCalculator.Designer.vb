@@ -90,6 +90,25 @@ Partial Class ucrCalculator
         Me.cmdNaest = New System.Windows.Forms.Button()
         Me.cmdNafill = New System.Windows.Forms.Button()
         Me.cmdMovmin = New System.Windows.Forms.Button()
+        Me.cmdRowRank = New System.Windows.Forms.Button()
+        Me.cmdDiff = New System.Windows.Forms.Button()
+        Me.cmdCumdist = New System.Windows.Forms.Button()
+        Me.cmdmovemean = New System.Windows.Forms.Button()
+        Me.cmdCumMean = New System.Windows.Forms.Button()
+        Me.cmdNtile = New System.Windows.Forms.Button()
+        Me.cmMovMed = New System.Windows.Forms.Button()
+        Me.cmdMRank = New System.Windows.Forms.Button()
+        Me.cmdDRank = New System.Windows.Forms.Button()
+        Me.cmdMovMax = New System.Windows.Forms.Button()
+        Me.cmdMovSum = New System.Windows.Forms.Button()
+        Me.cmdpercentrank = New System.Windows.Forms.Button()
+        Me.cmdcumsum = New System.Windows.Forms.Button()
+        Me.cmdcummin = New System.Windows.Forms.Button()
+        Me.cmdcummax = New System.Windows.Forms.Button()
+        Me.cmdPMin = New System.Windows.Forms.Button()
+        Me.cmdpmax = New System.Windows.Forms.Button()
+        Me.cmdLead = New System.Windows.Forms.Button()
+        Me.cmdLag = New System.Windows.Forms.Button()
         Me.grpProbabilty = New System.Windows.Forms.GroupBox()
         Me.cmdQnbin = New System.Windows.Forms.Button()
         Me.cmdQpois = New System.Windows.Forms.Button()
@@ -121,31 +140,35 @@ Partial Class ucrCalculator
         Me.cmdTrigamma = New System.Windows.Forms.Button()
         Me.cmdBeta = New System.Windows.Forms.Button()
         Me.cmdDigamma = New System.Windows.Forms.Button()
-        Me.cmdRowRank = New System.Windows.Forms.Button()
-        Me.cmdDiff = New System.Windows.Forms.Button()
-        Me.cmdCumdist = New System.Windows.Forms.Button()
-        Me.cmdmovemean = New System.Windows.Forms.Button()
-        Me.cmdCumMean = New System.Windows.Forms.Button()
-        Me.cmdNtile = New System.Windows.Forms.Button()
-        Me.cmMovMed = New System.Windows.Forms.Button()
-        Me.cmdMRank = New System.Windows.Forms.Button()
-        Me.cmdDRank = New System.Windows.Forms.Button()
-        Me.cmdMovMax = New System.Windows.Forms.Button()
-        Me.cmdMovSum = New System.Windows.Forms.Button()
-        Me.cmdpercentrank = New System.Windows.Forms.Button()
-        Me.cmdcumsum = New System.Windows.Forms.Button()
-        Me.cmdcummin = New System.Windows.Forms.Button()
-        Me.cmdcummax = New System.Windows.Forms.Button()
-        Me.cmdPMin = New System.Windows.Forms.Button()
-        Me.cmdpmax = New System.Windows.Forms.Button()
-        Me.cmdLead = New System.Windows.Forms.Button()
-        Me.cmdLag = New System.Windows.Forms.Button()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
         Me.cmdKurtosis = New System.Windows.Forms.Button()
         Me.cmdMode1 = New System.Windows.Forms.Button()
         Me.cmdMode = New System.Windows.Forms.Button()
         Me.cmdFirst = New System.Windows.Forms.Button()
         Me.cmdLast = New System.Windows.Forms.Button()
+        Me.cmdnth = New System.Windows.Forms.Button()
+        Me.cmdCor = New System.Windows.Forms.Button()
+        Me.cmdCov = New System.Windows.Forms.Button()
+        Me.cmdMad = New System.Windows.Forms.Button()
+        Me.cmdMc = New System.Windows.Forms.Button()
+        Me.cmdPropn = New System.Windows.Forms.Button()
+        Me.cmdCv = New System.Windows.Forms.Button()
+        Me.cmdSkew = New System.Windows.Forms.Button()
+        Me.cmdAnyDup = New System.Windows.Forms.Button()
+        Me.cmdDistinct = New System.Windows.Forms.Button()
+        Me.cmdNonMiss = New System.Windows.Forms.Button()
+        Me.cmdIQR = New System.Windows.Forms.Button()
+        Me.cmdQuantile = New System.Windows.Forms.Button()
+        Me.cmdRange = New System.Windows.Forms.Button()
+        Me.cmdSd = New System.Windows.Forms.Button()
+        Me.cmdMedian = New System.Windows.Forms.Button()
+        Me.cmdMin = New System.Windows.Forms.Button()
+        Me.cmdMax = New System.Windows.Forms.Button()
+        Me.cmdMean = New System.Windows.Forms.Button()
+        Me.cmdMiss = New System.Windows.Forms.Button()
+        Me.cmdLength = New System.Windows.Forms.Button()
+        Me.cmdSum = New System.Windows.Forms.Button()
+        Me.cmdVar = New System.Windows.Forms.Button()
         Me.grpStrings = New System.Windows.Forms.GroupBox()
         Me.cmdStarts = New System.Windows.Forms.Button()
         Me.cmdReplace2 = New System.Windows.Forms.Button()
@@ -170,29 +193,6 @@ Partial Class ucrCalculator
         Me.cmdExtract = New System.Windows.Forms.Button()
         Me.cmdCountstrings = New System.Windows.Forms.Button()
         Me.cmdLocate = New System.Windows.Forms.Button()
-        Me.cmdnth = New System.Windows.Forms.Button()
-        Me.cmdCor = New System.Windows.Forms.Button()
-        Me.cmdCov = New System.Windows.Forms.Button()
-        Me.cmdMad = New System.Windows.Forms.Button()
-        Me.cmdMc = New System.Windows.Forms.Button()
-        Me.cmdPropn = New System.Windows.Forms.Button()
-        Me.cmdCv = New System.Windows.Forms.Button()
-        Me.cmdSkew = New System.Windows.Forms.Button()
-        Me.cmdAnyDup = New System.Windows.Forms.Button()
-        Me.cmdDistinct = New System.Windows.Forms.Button()
-        Me.cmdNonMiss = New System.Windows.Forms.Button()
-        Me.cmdIQR = New System.Windows.Forms.Button()
-        Me.cmdQuantile = New System.Windows.Forms.Button()
-        Me.cmdRange = New System.Windows.Forms.Button()
-        Me.cmdSd = New System.Windows.Forms.Button()
-        Me.cmdMedian = New System.Windows.Forms.Button()
-        Me.cmdMin = New System.Windows.Forms.Button()
-        Me.cmdMax = New System.Windows.Forms.Button()
-        Me.cmdMean = New System.Windows.Forms.Button()
-        Me.cmdMiss = New System.Windows.Forms.Button()
-        Me.cmdLength = New System.Windows.Forms.Button()
-        Me.cmdSum = New System.Windows.Forms.Button()
-        Me.cmdVar = New System.Windows.Forms.Button()
         Me.grpLogical = New System.Windows.Forms.GroupBox()
         Me.cmdFalse = New System.Windows.Forms.Button()
         Me.cmdTrue = New System.Windows.Forms.Button()
@@ -775,6 +775,120 @@ Partial Class ucrCalculator
         Me.cmdMovmin.Name = "cmdMovmin"
         Me.cmdMovmin.UseVisualStyleBackColor = True
         '
+        'cmdRowRank
+        '
+        resources.ApplyResources(Me.cmdRowRank, "cmdRowRank")
+        Me.cmdRowRank.Name = "cmdRowRank"
+        Me.cmdRowRank.UseVisualStyleBackColor = True
+        '
+        'cmdDiff
+        '
+        resources.ApplyResources(Me.cmdDiff, "cmdDiff")
+        Me.cmdDiff.Name = "cmdDiff"
+        Me.cmdDiff.UseVisualStyleBackColor = True
+        '
+        'cmdCumdist
+        '
+        resources.ApplyResources(Me.cmdCumdist, "cmdCumdist")
+        Me.cmdCumdist.Name = "cmdCumdist"
+        Me.cmdCumdist.UseVisualStyleBackColor = True
+        '
+        'cmdmovemean
+        '
+        resources.ApplyResources(Me.cmdmovemean, "cmdmovemean")
+        Me.cmdmovemean.Name = "cmdmovemean"
+        Me.cmdmovemean.UseVisualStyleBackColor = True
+        '
+        'cmdCumMean
+        '
+        resources.ApplyResources(Me.cmdCumMean, "cmdCumMean")
+        Me.cmdCumMean.Name = "cmdCumMean"
+        Me.cmdCumMean.UseVisualStyleBackColor = True
+        '
+        'cmdNtile
+        '
+        resources.ApplyResources(Me.cmdNtile, "cmdNtile")
+        Me.cmdNtile.Name = "cmdNtile"
+        Me.cmdNtile.UseVisualStyleBackColor = True
+        '
+        'cmMovMed
+        '
+        resources.ApplyResources(Me.cmMovMed, "cmMovMed")
+        Me.cmMovMed.Name = "cmMovMed"
+        Me.cmMovMed.UseVisualStyleBackColor = True
+        '
+        'cmdMRank
+        '
+        resources.ApplyResources(Me.cmdMRank, "cmdMRank")
+        Me.cmdMRank.Name = "cmdMRank"
+        Me.cmdMRank.UseVisualStyleBackColor = True
+        '
+        'cmdDRank
+        '
+        resources.ApplyResources(Me.cmdDRank, "cmdDRank")
+        Me.cmdDRank.Name = "cmdDRank"
+        Me.cmdDRank.UseVisualStyleBackColor = True
+        '
+        'cmdMovMax
+        '
+        resources.ApplyResources(Me.cmdMovMax, "cmdMovMax")
+        Me.cmdMovMax.Name = "cmdMovMax"
+        Me.cmdMovMax.UseVisualStyleBackColor = True
+        '
+        'cmdMovSum
+        '
+        resources.ApplyResources(Me.cmdMovSum, "cmdMovSum")
+        Me.cmdMovSum.Name = "cmdMovSum"
+        Me.cmdMovSum.UseVisualStyleBackColor = True
+        '
+        'cmdpercentrank
+        '
+        resources.ApplyResources(Me.cmdpercentrank, "cmdpercentrank")
+        Me.cmdpercentrank.Name = "cmdpercentrank"
+        Me.cmdpercentrank.UseVisualStyleBackColor = True
+        '
+        'cmdcumsum
+        '
+        resources.ApplyResources(Me.cmdcumsum, "cmdcumsum")
+        Me.cmdcumsum.Name = "cmdcumsum"
+        Me.cmdcumsum.UseVisualStyleBackColor = True
+        '
+        'cmdcummin
+        '
+        resources.ApplyResources(Me.cmdcummin, "cmdcummin")
+        Me.cmdcummin.Name = "cmdcummin"
+        Me.cmdcummin.UseVisualStyleBackColor = True
+        '
+        'cmdcummax
+        '
+        resources.ApplyResources(Me.cmdcummax, "cmdcummax")
+        Me.cmdcummax.Name = "cmdcummax"
+        Me.cmdcummax.UseVisualStyleBackColor = True
+        '
+        'cmdPMin
+        '
+        resources.ApplyResources(Me.cmdPMin, "cmdPMin")
+        Me.cmdPMin.Name = "cmdPMin"
+        Me.cmdPMin.UseVisualStyleBackColor = True
+        '
+        'cmdpmax
+        '
+        resources.ApplyResources(Me.cmdpmax, "cmdpmax")
+        Me.cmdpmax.Name = "cmdpmax"
+        Me.cmdpmax.UseVisualStyleBackColor = True
+        '
+        'cmdLead
+        '
+        resources.ApplyResources(Me.cmdLead, "cmdLead")
+        Me.cmdLead.Name = "cmdLead"
+        Me.cmdLead.UseVisualStyleBackColor = True
+        '
+        'cmdLag
+        '
+        resources.ApplyResources(Me.cmdLag, "cmdLag")
+        Me.cmdLag.Name = "cmdLag"
+        Me.cmdLag.UseVisualStyleBackColor = True
+        '
         'grpProbabilty
         '
         Me.grpProbabilty.Controls.Add(Me.cmdQnbin)
@@ -992,120 +1106,6 @@ Partial Class ucrCalculator
         Me.cmdDigamma.Name = "cmdDigamma"
         Me.cmdDigamma.UseVisualStyleBackColor = True
         '
-        'cmdRowRank
-        '
-        resources.ApplyResources(Me.cmdRowRank, "cmdRowRank")
-        Me.cmdRowRank.Name = "cmdRowRank"
-        Me.cmdRowRank.UseVisualStyleBackColor = True
-        '
-        'cmdDiff
-        '
-        resources.ApplyResources(Me.cmdDiff, "cmdDiff")
-        Me.cmdDiff.Name = "cmdDiff"
-        Me.cmdDiff.UseVisualStyleBackColor = True
-        '
-        'cmdCumdist
-        '
-        resources.ApplyResources(Me.cmdCumdist, "cmdCumdist")
-        Me.cmdCumdist.Name = "cmdCumdist"
-        Me.cmdCumdist.UseVisualStyleBackColor = True
-        '
-        'cmdmovemean
-        '
-        resources.ApplyResources(Me.cmdmovemean, "cmdmovemean")
-        Me.cmdmovemean.Name = "cmdmovemean"
-        Me.cmdmovemean.UseVisualStyleBackColor = True
-        '
-        'cmdCumMean
-        '
-        resources.ApplyResources(Me.cmdCumMean, "cmdCumMean")
-        Me.cmdCumMean.Name = "cmdCumMean"
-        Me.cmdCumMean.UseVisualStyleBackColor = True
-        '
-        'cmdNtile
-        '
-        resources.ApplyResources(Me.cmdNtile, "cmdNtile")
-        Me.cmdNtile.Name = "cmdNtile"
-        Me.cmdNtile.UseVisualStyleBackColor = True
-        '
-        'cmMovMed
-        '
-        resources.ApplyResources(Me.cmMovMed, "cmMovMed")
-        Me.cmMovMed.Name = "cmMovMed"
-        Me.cmMovMed.UseVisualStyleBackColor = True
-        '
-        'cmdMRank
-        '
-        resources.ApplyResources(Me.cmdMRank, "cmdMRank")
-        Me.cmdMRank.Name = "cmdMRank"
-        Me.cmdMRank.UseVisualStyleBackColor = True
-        '
-        'cmdDRank
-        '
-        resources.ApplyResources(Me.cmdDRank, "cmdDRank")
-        Me.cmdDRank.Name = "cmdDRank"
-        Me.cmdDRank.UseVisualStyleBackColor = True
-        '
-        'cmdMovMax
-        '
-        resources.ApplyResources(Me.cmdMovMax, "cmdMovMax")
-        Me.cmdMovMax.Name = "cmdMovMax"
-        Me.cmdMovMax.UseVisualStyleBackColor = True
-        '
-        'cmdMovSum
-        '
-        resources.ApplyResources(Me.cmdMovSum, "cmdMovSum")
-        Me.cmdMovSum.Name = "cmdMovSum"
-        Me.cmdMovSum.UseVisualStyleBackColor = True
-        '
-        'cmdpercentrank
-        '
-        resources.ApplyResources(Me.cmdpercentrank, "cmdpercentrank")
-        Me.cmdpercentrank.Name = "cmdpercentrank"
-        Me.cmdpercentrank.UseVisualStyleBackColor = True
-        '
-        'cmdcumsum
-        '
-        resources.ApplyResources(Me.cmdcumsum, "cmdcumsum")
-        Me.cmdcumsum.Name = "cmdcumsum"
-        Me.cmdcumsum.UseVisualStyleBackColor = True
-        '
-        'cmdcummin
-        '
-        resources.ApplyResources(Me.cmdcummin, "cmdcummin")
-        Me.cmdcummin.Name = "cmdcummin"
-        Me.cmdcummin.UseVisualStyleBackColor = True
-        '
-        'cmdcummax
-        '
-        resources.ApplyResources(Me.cmdcummax, "cmdcummax")
-        Me.cmdcummax.Name = "cmdcummax"
-        Me.cmdcummax.UseVisualStyleBackColor = True
-        '
-        'cmdPMin
-        '
-        resources.ApplyResources(Me.cmdPMin, "cmdPMin")
-        Me.cmdPMin.Name = "cmdPMin"
-        Me.cmdPMin.UseVisualStyleBackColor = True
-        '
-        'cmdpmax
-        '
-        resources.ApplyResources(Me.cmdpmax, "cmdpmax")
-        Me.cmdpmax.Name = "cmdpmax"
-        Me.cmdpmax.UseVisualStyleBackColor = True
-        '
-        'cmdLead
-        '
-        resources.ApplyResources(Me.cmdLead, "cmdLead")
-        Me.cmdLead.Name = "cmdLead"
-        Me.cmdLead.UseVisualStyleBackColor = True
-        '
-        'cmdLag
-        '
-        resources.ApplyResources(Me.cmdLag, "cmdLag")
-        Me.cmdLag.Name = "cmdLag"
-        Me.cmdLag.UseVisualStyleBackColor = True
-        '
         'grpSummary
         '
         Me.grpSummary.Controls.Add(Me.cmdKurtosis)
@@ -1169,6 +1169,144 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdLast, "cmdLast")
         Me.cmdLast.Name = "cmdLast"
         Me.cmdLast.UseVisualStyleBackColor = True
+        '
+        'cmdnth
+        '
+        resources.ApplyResources(Me.cmdnth, "cmdnth")
+        Me.cmdnth.Name = "cmdnth"
+        Me.cmdnth.UseVisualStyleBackColor = True
+        '
+        'cmdCor
+        '
+        resources.ApplyResources(Me.cmdCor, "cmdCor")
+        Me.cmdCor.Name = "cmdCor"
+        Me.cmdCor.UseVisualStyleBackColor = True
+        '
+        'cmdCov
+        '
+        resources.ApplyResources(Me.cmdCov, "cmdCov")
+        Me.cmdCov.Name = "cmdCov"
+        Me.cmdCov.UseVisualStyleBackColor = True
+        '
+        'cmdMad
+        '
+        resources.ApplyResources(Me.cmdMad, "cmdMad")
+        Me.cmdMad.Name = "cmdMad"
+        Me.cmdMad.UseVisualStyleBackColor = True
+        '
+        'cmdMc
+        '
+        resources.ApplyResources(Me.cmdMc, "cmdMc")
+        Me.cmdMc.Name = "cmdMc"
+        Me.cmdMc.UseVisualStyleBackColor = True
+        '
+        'cmdPropn
+        '
+        resources.ApplyResources(Me.cmdPropn, "cmdPropn")
+        Me.cmdPropn.Name = "cmdPropn"
+        Me.cmdPropn.UseVisualStyleBackColor = True
+        '
+        'cmdCv
+        '
+        resources.ApplyResources(Me.cmdCv, "cmdCv")
+        Me.cmdCv.Name = "cmdCv"
+        Me.cmdCv.UseVisualStyleBackColor = True
+        '
+        'cmdSkew
+        '
+        resources.ApplyResources(Me.cmdSkew, "cmdSkew")
+        Me.cmdSkew.Name = "cmdSkew"
+        Me.cmdSkew.UseVisualStyleBackColor = True
+        '
+        'cmdAnyDup
+        '
+        resources.ApplyResources(Me.cmdAnyDup, "cmdAnyDup")
+        Me.cmdAnyDup.Name = "cmdAnyDup"
+        Me.cmdAnyDup.UseVisualStyleBackColor = True
+        '
+        'cmdDistinct
+        '
+        resources.ApplyResources(Me.cmdDistinct, "cmdDistinct")
+        Me.cmdDistinct.Name = "cmdDistinct"
+        Me.cmdDistinct.UseVisualStyleBackColor = True
+        '
+        'cmdNonMiss
+        '
+        resources.ApplyResources(Me.cmdNonMiss, "cmdNonMiss")
+        Me.cmdNonMiss.Name = "cmdNonMiss"
+        Me.cmdNonMiss.UseVisualStyleBackColor = True
+        '
+        'cmdIQR
+        '
+        resources.ApplyResources(Me.cmdIQR, "cmdIQR")
+        Me.cmdIQR.Name = "cmdIQR"
+        Me.cmdIQR.UseVisualStyleBackColor = True
+        '
+        'cmdQuantile
+        '
+        resources.ApplyResources(Me.cmdQuantile, "cmdQuantile")
+        Me.cmdQuantile.Name = "cmdQuantile"
+        Me.cmdQuantile.UseVisualStyleBackColor = True
+        '
+        'cmdRange
+        '
+        resources.ApplyResources(Me.cmdRange, "cmdRange")
+        Me.cmdRange.Name = "cmdRange"
+        Me.cmdRange.UseVisualStyleBackColor = True
+        '
+        'cmdSd
+        '
+        resources.ApplyResources(Me.cmdSd, "cmdSd")
+        Me.cmdSd.Name = "cmdSd"
+        Me.cmdSd.UseVisualStyleBackColor = True
+        '
+        'cmdMedian
+        '
+        resources.ApplyResources(Me.cmdMedian, "cmdMedian")
+        Me.cmdMedian.Name = "cmdMedian"
+        Me.cmdMedian.UseVisualStyleBackColor = True
+        '
+        'cmdMin
+        '
+        resources.ApplyResources(Me.cmdMin, "cmdMin")
+        Me.cmdMin.Name = "cmdMin"
+        Me.cmdMin.UseVisualStyleBackColor = True
+        '
+        'cmdMax
+        '
+        resources.ApplyResources(Me.cmdMax, "cmdMax")
+        Me.cmdMax.Name = "cmdMax"
+        Me.cmdMax.UseVisualStyleBackColor = True
+        '
+        'cmdMean
+        '
+        resources.ApplyResources(Me.cmdMean, "cmdMean")
+        Me.cmdMean.Name = "cmdMean"
+        Me.cmdMean.UseVisualStyleBackColor = True
+        '
+        'cmdMiss
+        '
+        resources.ApplyResources(Me.cmdMiss, "cmdMiss")
+        Me.cmdMiss.Name = "cmdMiss"
+        Me.cmdMiss.UseVisualStyleBackColor = True
+        '
+        'cmdLength
+        '
+        resources.ApplyResources(Me.cmdLength, "cmdLength")
+        Me.cmdLength.Name = "cmdLength"
+        Me.cmdLength.UseVisualStyleBackColor = True
+        '
+        'cmdSum
+        '
+        resources.ApplyResources(Me.cmdSum, "cmdSum")
+        Me.cmdSum.Name = "cmdSum"
+        Me.cmdSum.UseVisualStyleBackColor = True
+        '
+        'cmdVar
+        '
+        resources.ApplyResources(Me.cmdVar, "cmdVar")
+        Me.cmdVar.Name = "cmdVar"
+        Me.cmdVar.UseVisualStyleBackColor = True
         '
         'grpStrings
         '
@@ -1346,144 +1484,6 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdLocate, "cmdLocate")
         Me.cmdLocate.Name = "cmdLocate"
         Me.cmdLocate.UseVisualStyleBackColor = True
-        '
-        'cmdnth
-        '
-        resources.ApplyResources(Me.cmdnth, "cmdnth")
-        Me.cmdnth.Name = "cmdnth"
-        Me.cmdnth.UseVisualStyleBackColor = True
-        '
-        'cmdCor
-        '
-        resources.ApplyResources(Me.cmdCor, "cmdCor")
-        Me.cmdCor.Name = "cmdCor"
-        Me.cmdCor.UseVisualStyleBackColor = True
-        '
-        'cmdCov
-        '
-        resources.ApplyResources(Me.cmdCov, "cmdCov")
-        Me.cmdCov.Name = "cmdCov"
-        Me.cmdCov.UseVisualStyleBackColor = True
-        '
-        'cmdMad
-        '
-        resources.ApplyResources(Me.cmdMad, "cmdMad")
-        Me.cmdMad.Name = "cmdMad"
-        Me.cmdMad.UseVisualStyleBackColor = True
-        '
-        'cmdMc
-        '
-        resources.ApplyResources(Me.cmdMc, "cmdMc")
-        Me.cmdMc.Name = "cmdMc"
-        Me.cmdMc.UseVisualStyleBackColor = True
-        '
-        'cmdPropn
-        '
-        resources.ApplyResources(Me.cmdPropn, "cmdPropn")
-        Me.cmdPropn.Name = "cmdPropn"
-        Me.cmdPropn.UseVisualStyleBackColor = True
-        '
-        'cmdCv
-        '
-        resources.ApplyResources(Me.cmdCv, "cmdCv")
-        Me.cmdCv.Name = "cmdCv"
-        Me.cmdCv.UseVisualStyleBackColor = True
-        '
-        'cmdSkew
-        '
-        resources.ApplyResources(Me.cmdSkew, "cmdSkew")
-        Me.cmdSkew.Name = "cmdSkew"
-        Me.cmdSkew.UseVisualStyleBackColor = True
-        '
-        'cmdAnyDup
-        '
-        resources.ApplyResources(Me.cmdAnyDup, "cmdAnyDup")
-        Me.cmdAnyDup.Name = "cmdAnyDup"
-        Me.cmdAnyDup.UseVisualStyleBackColor = True
-        '
-        'cmdDistinct
-        '
-        resources.ApplyResources(Me.cmdDistinct, "cmdDistinct")
-        Me.cmdDistinct.Name = "cmdDistinct"
-        Me.cmdDistinct.UseVisualStyleBackColor = True
-        '
-        'cmdNonMiss
-        '
-        resources.ApplyResources(Me.cmdNonMiss, "cmdNonMiss")
-        Me.cmdNonMiss.Name = "cmdNonMiss"
-        Me.cmdNonMiss.UseVisualStyleBackColor = True
-        '
-        'cmdIQR
-        '
-        resources.ApplyResources(Me.cmdIQR, "cmdIQR")
-        Me.cmdIQR.Name = "cmdIQR"
-        Me.cmdIQR.UseVisualStyleBackColor = True
-        '
-        'cmdQuantile
-        '
-        resources.ApplyResources(Me.cmdQuantile, "cmdQuantile")
-        Me.cmdQuantile.Name = "cmdQuantile"
-        Me.cmdQuantile.UseVisualStyleBackColor = True
-        '
-        'cmdRange
-        '
-        resources.ApplyResources(Me.cmdRange, "cmdRange")
-        Me.cmdRange.Name = "cmdRange"
-        Me.cmdRange.UseVisualStyleBackColor = True
-        '
-        'cmdSd
-        '
-        resources.ApplyResources(Me.cmdSd, "cmdSd")
-        Me.cmdSd.Name = "cmdSd"
-        Me.cmdSd.UseVisualStyleBackColor = True
-        '
-        'cmdMedian
-        '
-        resources.ApplyResources(Me.cmdMedian, "cmdMedian")
-        Me.cmdMedian.Name = "cmdMedian"
-        Me.cmdMedian.UseVisualStyleBackColor = True
-        '
-        'cmdMin
-        '
-        resources.ApplyResources(Me.cmdMin, "cmdMin")
-        Me.cmdMin.Name = "cmdMin"
-        Me.cmdMin.UseVisualStyleBackColor = True
-        '
-        'cmdMax
-        '
-        resources.ApplyResources(Me.cmdMax, "cmdMax")
-        Me.cmdMax.Name = "cmdMax"
-        Me.cmdMax.UseVisualStyleBackColor = True
-        '
-        'cmdMean
-        '
-        resources.ApplyResources(Me.cmdMean, "cmdMean")
-        Me.cmdMean.Name = "cmdMean"
-        Me.cmdMean.UseVisualStyleBackColor = True
-        '
-        'cmdMiss
-        '
-        resources.ApplyResources(Me.cmdMiss, "cmdMiss")
-        Me.cmdMiss.Name = "cmdMiss"
-        Me.cmdMiss.UseVisualStyleBackColor = True
-        '
-        'cmdLength
-        '
-        resources.ApplyResources(Me.cmdLength, "cmdLength")
-        Me.cmdLength.Name = "cmdLength"
-        Me.cmdLength.UseVisualStyleBackColor = True
-        '
-        'cmdSum
-        '
-        resources.ApplyResources(Me.cmdSum, "cmdSum")
-        Me.cmdSum.Name = "cmdSum"
-        Me.cmdSum.UseVisualStyleBackColor = True
-        '
-        'cmdVar
-        '
-        resources.ApplyResources(Me.cmdVar, "cmdVar")
-        Me.cmdVar.Name = "cmdVar"
-        Me.cmdVar.UseVisualStyleBackColor = True
         '
         'grpLogical
         '
