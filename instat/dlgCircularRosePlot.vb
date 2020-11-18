@@ -52,7 +52,7 @@ Public Class dlgCircularRosePlot
 
         ucrInputComboRadius.SetParameter(New RParameter("radii.scale", 3))
         dctRadius.Add("sqrt", Chr(34) & "sqrt" & Chr(34))
-        dctRadius.Add("sqrt", Chr(34) & "sqrt" & Chr(34))
+        dctRadius.Add("linear", Chr(34) & "linear" & Chr(34))
         ucrInputComboRadius.SetItems(dctRadius)
 
 
