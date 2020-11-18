@@ -38,12 +38,23 @@ Public Class dlgCircularRosePlot
 
     Private Sub InitialiseDialog()
 
+        Dim dctRadius As New Dictionary(Of String, String)
+
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 3
+
         ucrSelctorCircularDataFrame.SetParameter(New RParameter("data", 0))
         ucrSelctorCircularDataFrame.SetParameterIsrfunction()
 
         ucrReceiverVariable.SetParameter(New RParameter("x", 0))
         ucrReceiverVariable.Selector = ucrSelctorCircularDataFrame
         ucrReceiverVariable.SetParameterIsRFunction()
+
+        ucrInputComboRadius.SetParameter(New RParameter("radii.scale", 3))
+        dctRadius.Add("sqrt", Chr(34) & "sqrt" & Chr(34))
+        dctRadius.Add("sqrt", Chr(34) & "sqrt" & Chr(34))
+        ucrInputComboRadius.SetItems(dctRadius)
+
 
         ucrSaveCircularRosePlot.SetPrefix("circular_rose_plot")
         ucrSaveCircularRosePlot.SetDataFrameSelector(ucrSelctorCircularDataFrame.ucrAvailableDataFrames)
@@ -63,9 +74,16 @@ Public Class dlgCircularRosePlot
         clsRosePlotFunction.SetPackageName("circular")
         clsRosePlotFunction.SetRCommand("rose.diag")
 
+        ucrInputBins.SetParameter(New RParameter("bins", 2))
+        ucrInputBins.SetValidationTypeAsNumeric()
+        ucrInputBins.SetDefaultState(12)
+        ucrInputBins.AddQuotesIfUnrecognised = False
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRosePlotFunction)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
+        ucrInputBins.AddAdditionalCodeParameterPair(clsRosePlotFunction, ucrInputBins.GetParameter(), iAdditionalPairNo:=1)
         ucrReceiverVariable.SetRCode(clsRosePlotFunction, bReset)
     End Sub
 

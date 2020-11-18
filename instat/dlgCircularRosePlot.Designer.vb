@@ -27,6 +27,10 @@ Partial Class dlgCircularRosePlot
         Me.ucrSaveCircularRosePlot = New instat.ucrSave()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.lblVariable = New System.Windows.Forms.Label()
+        Me.ucrInputBins = New instat.ucrInputTextBox()
+        Me.lblBins = New System.Windows.Forms.Label()
+        Me.ucrInputComboRadius = New instat.ucrInputComboBox()
+        Me.lblRadiusScale = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -76,11 +80,53 @@ Partial Class dlgCircularRosePlot
         Me.lblVariable.TabIndex = 4
         Me.lblVariable.Text = "Variable:"
         '
+        'ucrInputBins
+        '
+        Me.ucrInputBins.AddQuotesIfUnrecognised = True
+        Me.ucrInputBins.IsMultiline = False
+        Me.ucrInputBins.IsReadOnly = False
+        Me.ucrInputBins.Location = New System.Drawing.Point(346, 128)
+        Me.ucrInputBins.Name = "ucrInputBins"
+        Me.ucrInputBins.Size = New System.Drawing.Size(66, 21)
+        Me.ucrInputBins.TabIndex = 5
+        '
+        'lblBins
+        '
+        Me.lblBins.AutoSize = True
+        Me.lblBins.Location = New System.Drawing.Point(310, 132)
+        Me.lblBins.Name = "lblBins"
+        Me.lblBins.Size = New System.Drawing.Size(30, 13)
+        Me.lblBins.TabIndex = 6
+        Me.lblBins.Text = "Bins:"
+        '
+        'ucrInputComboRadius
+        '
+        Me.ucrInputComboRadius.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboRadius.GetSetSelectedIndex = -1
+        Me.ucrInputComboRadius.IsReadOnly = False
+        Me.ucrInputComboRadius.Location = New System.Drawing.Point(346, 168)
+        Me.ucrInputComboRadius.Name = "ucrInputComboRadius"
+        Me.ucrInputComboRadius.Size = New System.Drawing.Size(66, 21)
+        Me.ucrInputComboRadius.TabIndex = 7
+        '
+        'lblRadiusScale
+        '
+        Me.lblRadiusScale.AutoSize = True
+        Me.lblRadiusScale.Location = New System.Drawing.Point(267, 173)
+        Me.lblRadiusScale.Name = "lblRadiusScale"
+        Me.lblRadiusScale.Size = New System.Drawing.Size(73, 13)
+        Me.lblRadiusScale.TabIndex = 8
+        Me.lblRadiusScale.Text = "Radius Scale:"
+        '
         'dlgCircularRosePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 330)
+        Me.Controls.Add(Me.lblRadiusScale)
+        Me.Controls.Add(Me.ucrInputComboRadius)
+        Me.Controls.Add(Me.lblBins)
+        Me.Controls.Add(Me.ucrInputBins)
         Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrReceiverVariable)
         Me.Controls.Add(Me.ucrSaveCircularRosePlot)
@@ -102,4 +148,8 @@ Partial Class dlgCircularRosePlot
     Friend WithEvents ucrSaveCircularRosePlot As ucrSave
     Friend WithEvents ucrReceiverVariable As ucrReceiverSingle
     Friend WithEvents lblVariable As Label
+    Friend WithEvents ucrInputBins As ucrInputTextBox
+    Friend WithEvents lblBins As Label
+    Friend WithEvents lblRadiusScale As Label
+    Friend WithEvents ucrInputComboRadius As ucrInputComboBox
 End Class
