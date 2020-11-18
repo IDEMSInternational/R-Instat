@@ -118,15 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrChkDrop.Location" type="System.Drawing.Point, System.Drawing">
+    <value>273, 269</value>
+  </data>
+  <data name="ucrChkDrop.Size" type="System.Drawing.Size, System.Drawing">
+    <value>156, 20</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrChkDrop.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDrop.Name" xml:space="preserve">
+    <value>ucrChkDrop</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDrop.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDrop.Parent" xml:space="preserve">
+    <value>tbpFacet</value>
+  </data>
+  <data name="&gt;&gt;ucrChkDrop.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrNudNumberofRows.Location" type="System.Drawing.Point, System.Drawing">
     <value>169, 252</value>
   </data>
   <data name="ucrNudNumberofRows.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrNudNumberofRows.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrNudNumberofRows.Name" xml:space="preserve">
     <value>ucrNudNumberofRows</value>
@@ -138,7 +159,7 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;ucrNudNumberofRows.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkNoOfRowsOrColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 254</value>
@@ -147,7 +168,7 @@
     <value>156, 20</value>
   </data>
   <data name="ucrChkNoOfRowsOrColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrChkNoOfRowsOrColumns.Name" xml:space="preserve">
     <value>ucrChkNoOfRowsOrColumns</value>
@@ -159,7 +180,7 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;ucrChkNoOfRowsOrColumns.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrChkIncludeFacets.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 13</value>
@@ -168,7 +189,7 @@
     <value>121, 20</value>
   </data>
   <data name="ucrChkIncludeFacets.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrChkIncludeFacets.Name" xml:space="preserve">
     <value>ucrChkIncludeFacets</value>
@@ -180,16 +201,16 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;ucrChkIncludeFacets.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrChkLabeler.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 278</value>
+    <value>273, 245</value>
   </data>
   <data name="ucrChkLabeler.Size" type="System.Drawing.Size, System.Drawing">
     <value>220, 20</value>
   </data>
   <data name="ucrChkLabeler.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrChkLabeler.Name" xml:space="preserve">
     <value>ucrChkLabeler</value>
@@ -201,16 +222,16 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;ucrChkLabeler.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrChkFreeSpace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 252</value>
+    <value>273, 221</value>
   </data>
   <data name="ucrChkFreeSpace.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
   </data>
   <data name="ucrChkFreeSpace.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrChkFreeSpace.Name" xml:space="preserve">
     <value>ucrChkFreeSpace</value>
@@ -222,16 +243,16 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;ucrChkFreeSpace.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrChkFreeScalesY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 229</value>
+    <value>273, 197</value>
   </data>
   <data name="ucrChkFreeScalesY.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
   </data>
   <data name="ucrChkFreeScalesY.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrChkFreeScalesY.Name" xml:space="preserve">
     <value>ucrChkFreeScalesY</value>
@@ -243,16 +264,16 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;ucrChkFreeScalesY.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrChkFreeScalesX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 206</value>
+    <value>273, 173</value>
   </data>
   <data name="ucrChkFreeScalesX.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
   </data>
   <data name="ucrChkFreeScalesX.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrChkFreeScalesX.Name" xml:space="preserve">
     <value>ucrChkFreeScalesX</value>
@@ -264,16 +285,16 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;ucrChkFreeScalesX.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="ucrChkMargin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 183</value>
+    <value>273, 149</value>
   </data>
   <data name="ucrChkMargin.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
   </data>
   <data name="ucrChkMargin.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrChkMargin.Name" xml:space="preserve">
     <value>ucrChkMargin</value>
@@ -285,7 +306,7 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;ucrChkMargin.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ucrFacetSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 36</value>
@@ -298,7 +319,7 @@
     <value>210, 180</value>
   </data>
   <data name="ucrFacetSelector.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrFacetSelector.Name" xml:space="preserve">
     <value>ucrFacetSelector</value>
@@ -310,7 +331,7 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;ucrFacetSelector.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="rdoHorizontal.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -325,7 +346,7 @@
     <value>72, 17</value>
   </data>
   <data name="rdoHorizontal.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>12</value>
   </data>
   <data name="rdoHorizontal.Text" xml:space="preserve">
     <value>Horizontal</value>
@@ -340,7 +361,7 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;rdoHorizontal.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="rdoVertical.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -355,7 +376,7 @@
     <value>60, 17</value>
   </data>
   <data name="rdoVertical.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>13</value>
   </data>
   <data name="rdoVertical.Text" xml:space="preserve">
     <value>Vertical</value>
@@ -370,7 +391,7 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;rdoVertical.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="lblFactor2.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -379,7 +400,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFactor2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 133</value>
+    <value>274, 99</value>
   </data>
   <data name="lblFactor2.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 13</value>
@@ -400,7 +421,7 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;lblFactor2.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="lblFactor1.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -409,13 +430,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblFactor1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 78</value>
+    <value>272, 44</value>
   </data>
   <data name="lblFactor1.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
   </data>
   <data name="lblFactor1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="lblFactor1.Text" xml:space="preserve">
     <value>1st Factor:</value>
@@ -430,10 +451,10 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;lblFactor1.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="ucr2ndFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 148</value>
+    <value>273, 114</value>
   </data>
   <data name="ucr2ndFactorReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -442,7 +463,7 @@
     <value>106, 26</value>
   </data>
   <data name="ucr2ndFactorReceiver.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucr2ndFactorReceiver.Name" xml:space="preserve">
     <value>ucr2ndFactorReceiver</value>
@@ -454,10 +475,10 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;ucr2ndFactorReceiver.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="ucr1stFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>273, 93</value>
+    <value>273, 59</value>
   </data>
   <data name="ucr1stFactorReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -466,7 +487,7 @@
     <value>106, 26</value>
   </data>
   <data name="ucr1stFactorReceiver.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucr1stFactorReceiver.Name" xml:space="preserve">
     <value>ucr1stFactorReceiver</value>
@@ -478,7 +499,7 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;ucr1stFactorReceiver.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="ucrPnlHorizonatalVertical.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 228</value>
@@ -499,7 +520,7 @@
     <value>tbpFacet</value>
   </data>
   <data name="&gt;&gt;ucrPnlHorizonatalVertical.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="tbpFacet.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
