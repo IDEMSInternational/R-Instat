@@ -2228,4 +2228,16 @@ Public Class frmMain
     Private Sub mnuStructuredCircularOtherRosePlotsPolarAnnulus_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarAnnulus.Click
         dlgPolarAnnulus.ShowDialog()
     End Sub
+
+    Private Sub mnuStructuredCircularScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularScatterPlot.Click
+        dlgCircularScatterPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularDensityPlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularDensityPlot.Click
+        dlgCircularDensityPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularRosePlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularRosePlot.Click
+        dlgCircularRosePlot.ShowDialog()
+    End Sub
 End Class
