@@ -24,7 +24,7 @@ Public Class dlgClimaticSummary
     Private bResetSubdialog As Boolean = False
     Private clsDefaultFunction, clsConcFunction, clsSummariesList, clsDefaultFactors, clsDayFilterCalc, clsDayFilterCalcFromConvert, clsDayFilterCalcFromList, clsAddDateFunction As New RFunction
     Private clsFromAndToConditionOperator, clsFromConditionOperator, clsToConditionOperator As New ROperator
-    Private StationsParam As New RParameter
+
     Private Sub dlgClimaticSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bRCodeSet = False
         If bFirstload Then
@@ -64,13 +64,15 @@ Public Class dlgClimaticSummary
         ucrPnlAnnualWithin.AddRadioButton(rdoWithinYear)
         ucrPnlAnnualWithin.AddRadioButton(rdoStation)
 
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnual, "stations", False)
+        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnual, "year", True)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnual, "within_variable", False)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "within_variable", True)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "year", True)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "within_variable", True)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "year", False)
-        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoStation, "stations", True)
+        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoStation, "station", True)
+        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoStation, "within_variable", False)
+        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoStation, "year", False)
 
         'receivers:
         ' by receivers
@@ -163,10 +165,6 @@ Public Class dlgClimaticSummary
         clsDayFilterCalc = New RFunction
         clsFromConditionOperator = New ROperator
         clsToConditionOperator = New ROperator
-        StationsParam = New RParameter
-
-        StationsParam.bIncludeArgumentName = False
-        StationsParam.SetArgumentName("stations")
 
         clsDayFilterCalcFromConvert = New RFunction
         clsDayFilterCalcFromConvert.SetRCommand("calc_from_convert")
@@ -208,6 +206,8 @@ Public Class dlgClimaticSummary
         clsDefaultFunction.AddParameter("silent", "TRUE")
 
         clsDefaultFactors.SetRCommand("c")
+        'This a temporary fix to enable correct functioning of conditions
+        clsDefaultFactors.AddParameter("year", "")
         clsConcFunction.SetRCommand("c")
 
         clsAddDateFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
@@ -259,9 +259,13 @@ Public Class dlgClimaticSummary
                     ucrBase.OKEnabled(False)
                 End If
             ElseIf rdoStation.Checked Then
-                ucrBase.OKEnabled(True)
+                If Not ucrReceiverStation.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
             End If
-        Else
+            Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
@@ -364,11 +368,9 @@ Public Class dlgClimaticSummary
     Private Sub SetFactors()
         If bRCodeSet Then
             If rdoStation.Checked Then
-                StationsParam.SetArgumentValue(ucrReceiverStation.GetVariableNames())
                 clsDefaultFactors.RemoveParameterByName("within_variable")
                 clsDefaultFactors.RemoveParameterByName("year")
-                clsDefaultFactors.RemoveParameterByName("station")
-                clsDefaultFactors.AddParameter(StationsParam)
+                clsDefaultFactors.AddParameter(ucrReceiverStation.GetParameter())
             Else
                 If Not ucrReceiverStation.IsEmpty Then
                     clsDefaultFactors.AddParameter(ucrReceiverStation.GetParameter())
@@ -386,7 +388,6 @@ Public Class dlgClimaticSummary
                     clsDefaultFactors.RemoveParameterByName("year")
                     clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
                 End If
-                clsDefaultFactors.RemoveParameterByName("stations")
             End If
         End If
     End Sub
