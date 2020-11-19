@@ -24,6 +24,13 @@ Public Class dlgVisualizeData
     Private clsVisGuessFunction As New RFunction
     Private clsCurrBaseFunction As New RFunction
     Private clsSamplingFraction As New RFunction
+    Private clsFilterFunction As New RFunction
+    Private clsAsLogicalFunction As New RFunction
+    Private clsRBinonFunction As New RFunction
+    Private clsNRowFunction As New RFunction
+
+    Private clsPipeOperator As New ROperator
+
 
     Private Sub dlgVisualizeData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -82,7 +89,7 @@ Public Class dlgVisualizeData
         ucrNudMaximumSize.Maximum = Integer.MaxValue
 
         ' Not yet implemented
-        ucrNudSamplingFunction.SetParameter(New RParameter("prop", 1))
+        ucrNudSamplingFunction.SetParameter(New RParameter("prob", 2))
         ucrNudSamplingFunction.DecimalPlaces = 2
         ucrNudSamplingFunction.Increment = 0.01
         ucrNudSamplingFunction.Minimum = 0.01
@@ -135,14 +142,30 @@ Public Class dlgVisualizeData
         clsVisMissFunction.AddParameter("show_perc_col", "TRUE", iPosition:=4)
         clsVisMissFunction.AddParameter("warn_large_data", "TRUE", iPosition:=6)
 
+        clsPipeOperator.SetOperation("%>>%")
+
+        clsFilterFunction.SetPackageName("dplyr")
+        clsFilterFunction.SetRCommand("filter")
+        clsFilterFunction.AddParameter(".data", clsRFunctionParameter:=clsAsLogicalFunction, iPosition:=0)
+
+        clsAsLogicalFunction.SetRCommand("as.logical")
+        clsAsLogicalFunction.AddParameter("x", clsRFunctionParameter:=clsRBinonFunction, iPosition:=0)
+
+        clsRBinonFunction.SetRCommand("rbinom")
+        clsRBinonFunction.AddParameter("n", clsRFunctionParameter:=clsNRowFunction, iPosition:=0)
+
+        clsNRowFunction.SetRCommand("nrow")
+        clsNRowFunction.AddParameter("x", "df", iPosition:=0)
+        clsNRowFunction.AddParameter("size", "1", iPosition:=1)
+
         clsVisGuessFunction.SetPackageName("visdat")
         clsVisGuessFunction.SetRCommand("vis_guess")
         clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
 
-        clsSamplingFraction.SetPackageName("dplyr")
-        clsSamplingFraction.SetRCommand("slice_sample")
-        clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        clsSamplingFraction.AddParameter("prop", "1.00", iPosition:=1)
+        'clsSamplingFraction.SetPackageName("dplyr")
+        'clsSamplingFraction.SetRCommand("slice_sample")
+        'clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        'clsSamplingFraction.AddParameter("prop", "1.00", iPosition:=1)
 
         clsCurrBaseFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsCurrBaseFunction)
@@ -162,7 +185,7 @@ Public Class dlgVisualizeData
         ucrSaveGraph.SetRCode(clsVisDatFunction, bReset)
         ucrInputComboboxPalette.SetRCode(clsVisDatFunction, bReset)
         ucrChkSortVariables.SetRCode(clsVisDatFunction)
-        ucrNudSamplingFunction.SetRCode(clsSamplingFraction, bReset)
+        ucrNudSamplingFunction.SetRCode(clsNRowFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -202,12 +225,12 @@ Public Class dlgVisualizeData
 
     Private Sub AddRemoveDataHideOptionsButtons()
         If rdoWholeDataFrame.Checked Then
-            clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+            'clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = False
             ucrSelectorVisualizeData.btnAdd.Visible = False
             ucrSelectorVisualizeData.btnDataOptions.Visible = False
         ElseIf rdoSelectedColumn.Checked Then
-            clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrReceiverVisualizeData.GetParameter.clsArgumentCodeStructure, iPosition:=0)
+            'clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrReceiverVisualizeData.GetParameter.clsArgumentCodeStructure, iPosition:=0)
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = True
             ucrSelectorVisualizeData.btnAdd.Visible = True
             ucrSelectorVisualizeData.btnDataOptions.Visible = True
