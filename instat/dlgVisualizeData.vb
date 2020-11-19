@@ -121,6 +121,12 @@ Public Class dlgVisualizeData
         clsVisMissFunction = New RFunction
         clsVisGuessFunction = New RFunction
         clsSamplingFraction = New RFunction
+        clsFilterFunction = New RFunction
+        clsRBinonFunction = New RFunction
+        clsAsLogicalFunction = New RFunction
+        clsNRowFunction = New RFunction
+
+        clsPipeOperator = New ROperator
         ucrSelectorVisualizeData.Reset()
         ucrSaveGraph.Reset()
 
@@ -142,7 +148,9 @@ Public Class dlgVisualizeData
         clsVisMissFunction.AddParameter("show_perc_col", "TRUE", iPosition:=4)
         clsVisMissFunction.AddParameter("warn_large_data", "TRUE", iPosition:=6)
 
-        clsPipeOperator.SetOperation("%>>%")
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("x", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+        clsPipeOperator.AddParameter(".data", clsRFunctionParameter:=clsFilterFunction, iPosition:=1)
 
         clsFilterFunction.SetPackageName("dplyr")
         clsFilterFunction.SetRCommand("filter")
@@ -153,19 +161,14 @@ Public Class dlgVisualizeData
 
         clsRBinonFunction.SetRCommand("rbinom")
         clsRBinonFunction.AddParameter("n", clsRFunctionParameter:=clsNRowFunction, iPosition:=0)
+        clsRBinonFunction.AddParameter("size", "1", iPosition:=1)
 
         clsNRowFunction.SetRCommand("nrow")
-        clsNRowFunction.AddParameter("x", "df", iPosition:=0)
-        clsNRowFunction.AddParameter("size", "1", iPosition:=1)
+        clsNRowFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
 
         clsVisGuessFunction.SetPackageName("visdat")
         clsVisGuessFunction.SetRCommand("vis_guess")
         clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-
-        'clsSamplingFraction.SetPackageName("dplyr")
-        'clsSamplingFraction.SetRCommand("slice_sample")
-        'clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        'clsSamplingFraction.AddParameter("prop", "1.00", iPosition:=1)
 
         clsCurrBaseFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseRFunction(clsCurrBaseFunction)
@@ -225,12 +228,10 @@ Public Class dlgVisualizeData
 
     Private Sub AddRemoveDataHideOptionsButtons()
         If rdoWholeDataFrame.Checked Then
-            'clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = False
             ucrSelectorVisualizeData.btnAdd.Visible = False
             ucrSelectorVisualizeData.btnDataOptions.Visible = False
         ElseIf rdoSelectedColumn.Checked Then
-            'clsSamplingFraction.AddParameter(".data", clsRFunctionParameter:=ucrReceiverVisualizeData.GetParameter.clsArgumentCodeStructure, iPosition:=0)
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = True
             ucrSelectorVisualizeData.btnAdd.Visible = True
             ucrSelectorVisualizeData.btnDataOptions.Visible = True
@@ -269,23 +270,23 @@ Public Class dlgVisualizeData
                 clsVisGuessFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, bIncludeArgumentName:=False, iPosition:=0)
                 clsVisMissFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, bIncludeArgumentName:=False, iPosition:=0)
             ElseIf ucrNudSamplingFunction.Value < 1 Then
-                clsVisDatFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
-                clsVisGuessFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
-                clsVisMissFunction.AddParameter("x", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
+                clsVisDatFunction.AddParameter("x", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+                clsVisGuessFunction.AddParameter("x", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+                clsVisMissFunction.AddParameter("x", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
             End If
         ElseIf rdoWholeDataFrame.Checked Then
             clsVisDatFunction.RemoveParameterByName("x")
-            clsVisGuessFunction.RemoveParameterByName("x")
-            clsVisMissFunction.RemoveParameterByName("x")
-            If ucrNudSamplingFunction.Value = 1 Then
-                clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-                clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-                clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
-            ElseIf ucrNudSamplingFunction.Value < 1 Then
-                clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
-                clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
-                clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=clsSamplingFraction, iPosition:=0)
+                clsVisGuessFunction.RemoveParameterByName("x")
+                clsVisMissFunction.RemoveParameterByName("x")
+                If ucrNudSamplingFunction.Value = 1 Then
+                    clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+                    clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+                    clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+                ElseIf ucrNudSamplingFunction.Value < 1 Then
+                    clsVisDatFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+                    clsVisGuessFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+                    clsVisMissFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+                End If
             End If
-        End If
     End Sub
 End Class
