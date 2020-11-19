@@ -478,9 +478,8 @@ DataBook$set("public", "set_metadata_changed", function(data_name = "", new_val)
 } 
 )
 
-DataBook$set("public", "add_columns_to_data", function(data_name, col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols, require_correct_length = TRUE) {
-  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols, require_correct_length = require_correct_length)
-  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols, require_correct_length = require_correct_length)
+DataBook$set("public", "add_columns_to_data", function(data_name, col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column, num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
+  self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols, require_correct_length = require_correct_length, keep_existing_position = keep_existing_position)
 }
 )
 
@@ -1370,7 +1369,7 @@ DataBook$set("public", "add_single_climdex_index", function(data_name, indices, 
     linked_data_name <- self$get_linked_to_data_name(data_name, year)
     if(length(linked_data_name) == 0) {
       if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
-      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("factor" %in% year_class) ind_data[[year]] <- make_factor(levels(ind_data[[year]]))[ind_data[[year]]]
       if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, sep = "_")
@@ -1409,7 +1408,7 @@ DataBook$set("public", "add_single_climdex_index", function(data_name, indices, 
     linked_data_name <- self$get_linked_to_data_name(data_name, c(year, month))
     if(length(linked_data_name) == 0) {
       if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
-      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("factor" %in% year_class) ind_data[[year]] <- make_factor(levels(ind_data[[year]]))[ind_data[[year]]]
       if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, month, sep = "_")
@@ -2085,7 +2084,7 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
   if(!continue) return()
   
   # Standard format of slowest varying structure variables first (station then element then date) followed by measurements
-  if(!missing(station)) z <- data.frame(station = forcats::as_factor(y$station), date = y$date)
+  if(!missing(station)) z <- data.frame(station = make_factor(y$station), date = y$date)
   else z <- data.frame(date = y$date)
   if(!missing(element)) z$element <- y$element
   z[[element_name]] <- y[[element_name]]
