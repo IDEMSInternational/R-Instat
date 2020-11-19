@@ -81,7 +81,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetPrefix("calc")
         ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
         ucrCalc.ucrSaveResultInto.SetIsComboBox()
-        ucrCalc.ucrSaveResultInto.SetLabelText("Save Result Into:")
+        ucrCalc.ucrSaveResultInto.SetCheckBoxText("Save Result Into:")
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
     End Sub
@@ -101,7 +101,7 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub SaveResults()
-        If ucrCalc.ucrSaveResultInto.IsComplete Then
+        If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked Then
             ucrBase.clsRsyntax.SetAssignTo(ucrCalc.ucrSaveResultInto.GetText(), strTempColumn:=ucrCalc.ucrSaveResultInto.GetText(), strTempDataframe:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
@@ -112,6 +112,15 @@ Public Class dlgCalculator
         End If
     End Sub
 
+    Private Sub ShowControl()
+        If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked Then
+            ucrCalc.ucrSaveResultInto.btnColumnPosition.Visible = True
+            ucrCalc.ucrSaveResultInto.Visible = True
+        Else
+            ucrCalc.ucrSaveResultInto.Visible = False
+            ucrCalc.ucrSaveResultInto.btnColumnPosition.Visible = False
+        End If
+    End Sub
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ucrCalc.SetCalculationHistory()
     End Sub
@@ -160,6 +169,10 @@ Public Class dlgCalculator
         End Select
     End Sub
 
+    Private Sub ucrChkSave_CheckedChanged() Handles ucrCalc.SaveResultsCheckedChanged
+        SaveResults()
+        ShowControl()
+    End Sub
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrCalc.DataFrameChanged
         ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
         SaveResults()

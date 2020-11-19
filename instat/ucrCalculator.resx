@@ -10624,7 +10624,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveResultInto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 21</value>
+    <value>310, 21</value>
   </data>
   <data name="ucrSaveResultInto.TabIndex" type="System.Int32, mscorlib">
     <value>196</value>

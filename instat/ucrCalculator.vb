@@ -20,6 +20,7 @@ Public Class ucrCalculator
     Public Event SelectionChanged()
     Public Event SaveNameChanged()
     Public Event DataFrameChanged()
+    Public Event SaveResultsCheckedChanged()
     Public Event TryCommadClick()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
