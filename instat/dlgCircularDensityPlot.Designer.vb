@@ -32,6 +32,7 @@ Partial Class dlgCircularDensityPlot
         Me.lblBandWidth = New System.Windows.Forms.Label()
         Me.ucrInputComboKernel = New instat.ucrInputComboBox()
         Me.lblKernel = New System.Windows.Forms.Label()
+        Me.cmdCircularOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ucrBase
@@ -55,7 +56,7 @@ Partial Class dlgCircularDensityPlot
         'ucrReceiverVariable
         '
         Me.ucrReceiverVariable.frmParent = Me
-        Me.ucrReceiverVariable.Location = New System.Drawing.Point(295, 71)
+        Me.ucrReceiverVariable.Location = New System.Drawing.Point(292, 27)
         Me.ucrReceiverVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
         Me.ucrReceiverVariable.Selector = Nothing
@@ -67,7 +68,7 @@ Partial Class dlgCircularDensityPlot
         'lblVariable
         '
         Me.lblVariable.AutoSize = True
-        Me.lblVariable.Location = New System.Drawing.Point(290, 56)
+        Me.lblVariable.Location = New System.Drawing.Point(288, 13)
         Me.lblVariable.Name = "lblVariable"
         Me.lblVariable.Size = New System.Drawing.Size(48, 13)
         Me.lblVariable.TabIndex = 3
@@ -84,7 +85,7 @@ Partial Class dlgCircularDensityPlot
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(13, 214)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(13, 232)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(170, 20)
         Me.ucrChkOmitMissing.TabIndex = 5
@@ -94,7 +95,7 @@ Partial Class dlgCircularDensityPlot
         Me.ucrInputBandWidth.AddQuotesIfUnrecognised = True
         Me.ucrInputBandWidth.IsMultiline = False
         Me.ucrInputBandWidth.IsReadOnly = False
-        Me.ucrInputBandWidth.Location = New System.Drawing.Point(295, 158)
+        Me.ucrInputBandWidth.Location = New System.Drawing.Point(355, 172)
         Me.ucrInputBandWidth.Name = "ucrInputBandWidth"
         Me.ucrInputBandWidth.Size = New System.Drawing.Size(56, 21)
         Me.ucrInputBandWidth.TabIndex = 6
@@ -102,7 +103,7 @@ Partial Class dlgCircularDensityPlot
         'lblBandWidth
         '
         Me.lblBandWidth.AutoSize = True
-        Me.lblBandWidth.Location = New System.Drawing.Point(290, 142)
+        Me.lblBandWidth.Location = New System.Drawing.Point(289, 175)
         Me.lblBandWidth.Name = "lblBandWidth"
         Me.lblBandWidth.Size = New System.Drawing.Size(63, 13)
         Me.lblBandWidth.TabIndex = 7
@@ -113,7 +114,7 @@ Partial Class dlgCircularDensityPlot
         Me.ucrInputComboKernel.AddQuotesIfUnrecognised = True
         Me.ucrInputComboKernel.GetSetSelectedIndex = -1
         Me.ucrInputComboKernel.IsReadOnly = False
-        Me.ucrInputComboKernel.Location = New System.Drawing.Point(295, 213)
+        Me.ucrInputComboKernel.Location = New System.Drawing.Point(320, 204)
         Me.ucrInputComboKernel.Name = "ucrInputComboKernel"
         Me.ucrInputComboKernel.Size = New System.Drawing.Size(93, 21)
         Me.ucrInputComboKernel.TabIndex = 8
@@ -121,17 +122,30 @@ Partial Class dlgCircularDensityPlot
         'lblKernel
         '
         Me.lblKernel.AutoSize = True
-        Me.lblKernel.Location = New System.Drawing.Point(290, 197)
+        Me.lblKernel.Location = New System.Drawing.Point(272, 208)
         Me.lblKernel.Name = "lblKernel"
         Me.lblKernel.Size = New System.Drawing.Size(43, 13)
         Me.lblKernel.TabIndex = 9
         Me.lblKernel.Text = "Kernel :"
+        '
+        'cmdCircularOptions
+        '
+        Me.cmdCircularOptions.Enabled = False
+        Me.cmdCircularOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdCircularOptions.Location = New System.Drawing.Point(13, 196)
+        Me.cmdCircularOptions.Name = "cmdCircularOptions"
+        Me.cmdCircularOptions.Size = New System.Drawing.Size(120, 25)
+        Me.cmdCircularOptions.TabIndex = 10
+        Me.cmdCircularOptions.Tag = "Circular_Options"
+        Me.cmdCircularOptions.Text = "Circular Options"
+        Me.cmdCircularOptions.UseVisualStyleBackColor = True
         '
         'dlgCircularDensityPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(420, 347)
+        Me.Controls.Add(Me.cmdCircularOptions)
         Me.Controls.Add(Me.lblKernel)
         Me.Controls.Add(Me.ucrInputComboKernel)
         Me.Controls.Add(Me.lblBandWidth)
@@ -163,4 +177,5 @@ Partial Class dlgCircularDensityPlot
     Friend WithEvents lblBandWidth As Label
     Friend WithEvents lblKernel As Label
     Friend WithEvents ucrInputComboKernel As ucrInputComboBox
+    Friend WithEvents cmdCircularOptions As Button
 End Class
