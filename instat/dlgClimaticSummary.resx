@@ -129,7 +129,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdoAnnual.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 14</value>
+    <value>109, 14</value>
   </data>
   <data name="rdoAnnual.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 27</value>
@@ -166,7 +166,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoWithinYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 14</value>
+    <value>301, 14</value>
   </data>
   <data name="rdoWithinYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 27</value>
@@ -202,7 +202,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoAnnualWithinYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>203, 14</value>
+    <value>205, 14</value>
   </data>
   <data name="rdoAnnualWithinYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 27</value>
@@ -682,7 +682,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoStation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 14</value>
+    <value>13, 14</value>
   </data>
   <data name="rdoStation.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 27</value>
@@ -850,10 +850,10 @@
     <value>18</value>
   </data>
   <data name="ucrPnlAnnualWithin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 10</value>
+    <value>10, 10</value>
   </data>
   <data name="ucrPnlAnnualWithin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>401, 35</value>
+    <value>392, 35</value>
   </data>
   <data name="ucrPnlAnnualWithin.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
