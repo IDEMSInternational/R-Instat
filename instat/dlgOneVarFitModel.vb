@@ -566,9 +566,13 @@ Public Class dlgOneVarFitModel
 
     Private Sub TestOKEnabled()
         If ucrSaveModel.IsComplete() AndAlso Not ucrReceiverVariable.IsEmpty AndAlso ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedItem <> "" Then
-            ucrBase.OKEnabled(True)
+            If ucrInputTxtSd.GetText = "" AndAlso rdoTest.Checked AndAlso ucrInputComboTests.GetText = "Z" Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
         Else
-            ucrBase.OKEnabled(False)
+                ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -920,7 +924,7 @@ Public Class dlgOneVarFitModel
         End If
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlContentsChanged, ucrReceiverVariable.ControlContentsChanged
+    Private Sub AllControl_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveModel.ControlContentsChanged, ucrReceiverVariable.ControlContentsChanged, ucrInputTxtSd.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
