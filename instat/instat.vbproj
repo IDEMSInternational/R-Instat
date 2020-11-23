@@ -196,6 +196,24 @@
     <Compile Include="dlgCircular.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCircularDensityPlot.Designer.vb">
+      <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCircularDensityPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCircularRosePlot.Designer.vb">
+      <DependentUpon>dlgCircularRosePlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCircularRosePlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCircularScatterPlot.Designer.vb">
+      <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCircularScatterPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimsoftWizard.Designer.vb">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </Compile>
@@ -236,6 +254,42 @@
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgOtherRosePlots.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPasteNewColumns.Designer.vb">
+      <DependentUpon>dlgPasteNewColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPasteNewColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPasteNewDataFrame.Designer.vb">
+      <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPasteNewDataFrame.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPolarAnnulus.Designer.vb">
+      <DependentUpon>dlgPolarAnnulus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPolarAnnulus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPolarCluster.Designer.vb">
+      <DependentUpon>dlgPolarCluster.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPolarCluster.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPolarFrequency.Designer.vb">
+      <DependentUpon>dlgPolarFrequency.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPolarFrequency.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPolarPlot.Designer.vb">
+      <DependentUpon>dlgPolarPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPolarPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSeasonalPlot.Designer.vb">
@@ -338,6 +392,12 @@
       <DependentUpon>dlgTreemap.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTreemap.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgMissingOptions.Designer.vb">
+      <DependentUpon>sdgMissingOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgMissingOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgThemesSub.Designer.vb">
@@ -2581,6 +2641,15 @@
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCircularDensityPlot.resx">
+      <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCircularRosePlot.resx">
+      <DependentUpon>dlgCircularRosePlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCircularScatterPlot.resx">
+      <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
@@ -2602,6 +2671,24 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPasteNewColumns.resx">
+      <DependentUpon>dlgPasteNewColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPasteNewDataFrame.resx">
+      <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPolarAnnulus.resx">
+      <DependentUpon>dlgPolarAnnulus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPolarCluster.resx">
+      <DependentUpon>dlgPolarCluster.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPolarFrequency.resx">
+      <DependentUpon>dlgPolarFrequency.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPolarPlot.resx">
+      <DependentUpon>dlgPolarPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
@@ -2653,6 +2740,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMissingOptions.resx">
+      <DependentUpon>sdgMissingOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgThemesSub.resx">
       <DependentUpon>sdgThemesSub.vb</DependentUpon>

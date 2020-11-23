@@ -1282,3 +1282,286 @@ summary_sample <- function(x, size, replace = FALSE){
   else if(length(x)==1){return(x)}
   else{sample(x = x, size = size, replace = replace)}
 }
+
+add_xy_area_range <- function(path, min_lon, max_lon, min_lat, max_lat, dim_x = "X", dim_y = "Y") {
+  paste0(
+    path, "/", dim_x, "/",
+    "(", ifelse(min_lon < 0, paste0(abs(min_lon), "W"), paste0(min_lon, "E")), ")", "/",
+    "(", ifelse(max_lon < 0, paste0(abs(max_lon), "W"), paste0(max_lon, "E")), ")", "/",
+    "RANGEEDGES", "/",
+    dim_y, "/",
+    "(", ifelse(min_lat < 0, paste0(abs(min_lat), "S"), paste0(min_lat, "N")), ")", "/",
+    "(", ifelse(max_lat < 0, paste0(abs(max_lat), "S"), paste0(max_lat, "N")), ")", "/",
+    "RANGEEDGES", "/"
+  )
+}
+
+add_xy_point_range <- function(path, min_lon, min_lat, dim_x = "X", dim_y = "Y") {
+  paste0(
+    path, "/", dim_x, "/",
+    "(", ifelse(min_lon < 0, paste0(abs(min_lon), "W"), paste0(min_lon, "E")), ")", "/",
+    "VALUES", "/",
+    dim_y, "/",
+    "(", ifelse(min_lat < 0, paste0(abs(min_lat), "S"), paste0(min_lat, "N")), ")", "/",
+    "VALUES", "/"
+  )
+}
+
+add_t_range <- function(path, min_date, max_date, dim_t = "T") {
+  paste0(
+    path, dim_t, "/",
+    "(", lubridate::day(min_date), "%20", lubridate::month(min_date, label = TRUE),
+    "%20", lubridate::year(min_date), ")", "/",
+    "(", lubridate::day(max_date), "%20", lubridate::month(max_date, label = TRUE),
+    "%20", lubridate::year(max_date), ")", "/",
+    "RANGEEDGES", "/"
+  )
+}
+
+add_nc <- function(path) {
+  paste0(path, "data.nc")
+}
+              
+fourier_series <- function(x, n, period) {
+  p2 <- "2 * pi"
+  h <-  seq_len(n)
+  paste0("sin(", x, " * ", h, " * ", p2, " / ", period, ")", " + ", 
+         "cos(", x, " * ", h, " * ", p2, " / ", period, ")", 
+         collapse = " + ")
+}
+
+
+climatic_missing <- function(data, date, elements = ..., stations,
+                             start = TRUE, end = FALSE){
+  
+  
+  if (missing(date)){
+    stop('argument "date" is missing, with no default')
+  }
+  
+  if (missing(elements)){
+    stop('argument "elements" is missing, with no default')
+  }
+  
+  # stack data
+  data.stack <- data %>%
+    tidyr::pivot_longer(cols = c({{ elements }}),
+                 names_to = "Element",
+                 values_to = "value")
+  
+  # sort start/end times
+
+    # set start date
+    if (start){
+      data.stack <- data.stack %>%
+        dplyr::group_by({{ stations }}, Element) %>%
+        dplyr::mutate(start = ({{ date }})[which.min(is.na( value ))])
+      
+    }else{
+      data.stack <- data.stack %>%
+        dplyr::group_by({{ stations }}) %>%
+        dplyr::mutate(start = dplyr::first( {{ date }} ))
+    }
+    
+    # set end date
+    if (end){
+      data.stack <- data.stack %>%
+        dplyr::group_by({{ stations }}, Element ) %>%
+        dplyr::mutate(end = ({{ date }} )[dplyr::last(which(!is.na( value )))])
+    }else{
+      data.stack <- data.stack %>%
+        dplyr::group_by({{ stations }} ) %>%
+        dplyr::mutate(end = dplyr::last({{ date }}))
+    }
+    
+    # number and percentage missing
+    summary.data <- data.stack %>%
+                                 dplyr::group_by({{ stations }}, Element) %>%
+                                 dplyr::filter(({{ date }}) >= start & ({{ date }}) <= end) %>%
+                                 dplyr::summarise(From = dplyr::first(start),
+                                                  To = dplyr::last(end),
+                                                  Missing = sum(is.na(value)),
+                                                  `%` = round(sum(is.na(value))/n()*100, 1))
+    
+    # complete years
+    complete.years <- data.stack %>%
+      dplyr::group_by({{ stations }}) %>%
+      dplyr::filter(({{ date }}) >= start & ({{ date }}) <= end) %>%
+      dplyr::group_by(lubridate::year({{ date }}), {{ stations }}, Element) %>%
+      dplyr::summarise(count = sum(is.na(value)))
+    complete.years <- complete.years %>%
+      dplyr::group_by({{ stations }}, Element) %>%
+      dplyr::summarise(Full_Years = sum(count == 0))
+    
+  
+    # bind together
+    summary.data <- merge(summary.data, complete.years)
+    
+    if (missing(stations)){
+      summary.data$stations <- NULL
+    }
+
+  return(summary.data)
+}  
+
+  
+  
+climatic_details <- function(data, date, elements = ..., stations,
+                 order = FALSE,
+                 day = TRUE,
+                 month = FALSE,
+                 year = FALSE, level = FALSE){
+  
+  
+  if (missing(date)){
+    stop('argument "date" is missing, with no default')
+  }
+  
+  if (missing(elements)){
+    stop('argument "elements" is missing, with no default')
+  }
+  
+  i <- 0
+  list_tables <- NULL
+  
+  # stack data
+  data.stack <- data %>%
+    tidyr::pivot_longer(cols = c({{ elements }}),
+                 names_to = "Element",
+                 values_to = "Value") %>%
+    dplyr::mutate(Element = make_factor(Element))
+  
+  # sort start/end times
+  
+  if (!any(day, month, year)){
+         warning('At least one of day, month, year need to be selected')
+  }
+    
+    if (day){
+      i = i + 1
+      detail.table.day = data.stack %>%
+        dplyr::group_by({{ stations }}, Element) %>%
+        dplyr::mutate(element.na = data.table::rleid(Value)) %>%
+        dplyr::filter(is.na(Value)) %>%
+        dplyr::group_by(element.na, {{ stations }}, Element) %>%
+        dplyr::summarise(From = dplyr::first({{ date }}),
+                  To = dplyr::last({{ date }}),
+                  Count = dplyr::n()) %>%
+        mutate(Level = "Day")
+      
+      if (order){
+        detail.table.day <- detail.table.day %>% dplyr::arrange(From)
+      } else {  
+        detail.table.day <- detail.table.day %>% dplyr::arrange(Element)
+      }
+      
+      detail.table.day <- detail.table.day %>% dplyr::ungroup() %>% dplyr::select(-c("element.na"))
+      list_tables[[i]] <- detail.table.day
+      
+    }
+    
+    if (month){
+      i = i + 1
+      detail.table.month <- data.stack %>%
+        dplyr::mutate(Date.ym = zoo::as.yearmon({{ date }}))  %>%
+        dplyr::group_by(Date.ym, {{ stations }}, Element)
+      
+      detail.table.month <- detail.table.month %>%
+        dplyr::summarise(no = n(),
+                  na = sum(is.na(Value)),
+                  From = dplyr::first({{ date }}),
+                  To = dplyr::last({{ date }})) %>%
+        dplyr::mutate(is.complete = ifelse(no == na, 1, 0)) # 0 if all are missing
+
+      detail.table.month <- detail.table.month %>%
+        dplyr::group_by({{ stations }}, Element) %>%
+        dplyr::mutate(element.na = data.table::rleid(is.complete)) %>%
+        dplyr::filter(is.complete == 1) %>%
+        dplyr::group_by(element.na, {{ stations }}, Element) %>%
+        dplyr::summarise(From = dplyr::first(From),
+                  To = dplyr::last(To),
+                  Count = n()) %>%
+        mutate(Level = "Month")
+      
+      if (order){
+        detail.table.month <- detail.table.month %>% dplyr::arrange(From)
+      } else {
+        detail.table.month <- detail.table.month %>% dplyr::arrange(Element)
+      }
+      
+      detail.table.month <- detail.table.month %>% dplyr::ungroup() %>% dplyr::select(-c("element.na"))
+      list_tables[[i]] <- detail.table.month
+    }
+    
+    if (year) {
+      i = i + 1
+      detail.table.year <- data.stack %>%
+        dplyr::mutate(Date.y = lubridate::year({{ date }}))  %>%
+        dplyr::group_by(Date.y, {{ stations }}, Element)
+      
+      detail.table.year <- detail.table.year %>%
+        dplyr::summarise(no = n(),
+                  na = sum(is.na(Value)),
+                  From = dplyr::first({{ date }}),
+                  To = dplyr::last({{ date }})) %>%
+        dplyr::mutate(is.complete = ifelse(no == na, 1, 0)) # 0 if all are missing
+      
+      detail.table.year <- detail.table.year %>%
+        dplyr::group_by({{ stations }}, Element) %>%
+        dplyr::mutate(element.na = data.table::rleid(is.complete)) %>%
+        dplyr::filter(is.complete == 1) %>%
+        dplyr::group_by(element.na, {{ stations }}, Element) %>%
+        dplyr::summarise(From = dplyr::first(From),
+                  To = dplyr::last(To),
+                  Count = n()) %>%
+        mutate(Level = "Year")
+      
+      if (order){
+        detail.table.year <- detail.table.year %>% dplyr::arrange(From)
+      } else {
+        detail.table.year <- detail.table.year %>% dplyr::arrange(Element)
+      }
+      
+      detail.table.year <- detail.table.year %>% dplyr::ungroup() %>% dplyr::select(-c("element.na"))
+      list_tables[[i]] <- detail.table.year
+    }
+  
+  detail.table.all <- plyr::ldply(list_tables, data.frame) %>%
+                      dplyr::mutate(Level = make_factor(Level))
+  
+  return(detail.table.all)
+
+}
+
+slope <- function(y, x) {
+  x <- as.numeric(x)
+  lm(y ~ x)$coefficients[2]
+
+}
+
+# make_factor is intended to be somewhat equivalent to forcats::as_factor() or base::as.factor().
+# It provides default behaviour for converting to factor depending on the data type, similar to forcats::as_factor().
+# For "character" and "numeric" types make_factor is consistent with forcats::as_factor() in terms of the order of the factor levels.
+# It differs from forcats::as_factor() in two main ways:
+# 1. It includes an ordered parameter to allow for creating ordered factors, including converting a factor to an ordered factor (and vice versa).
+# 2. It works for any data types (e.g. Dates) whereas forcats::as_factor() is limited to "factor", "character", "logical", "numeric".
+#    For any other data types, levels are given in order of appearance (the same as for "character").
+#    Note that this should be used cautiously for other data types and the default behaviour may not be the most sensible.
+# If anything other than this default behaviour is required, use factor().
+make_factor <- function(x, ordered = is.ordered(x)) {
+  if (is.factor(x)) {
+    if (ordered != is.ordered(x)) {
+      if (ordered) class(x) <- c("ordered", class(x))
+      else class(x) <- class(x)[class(x) != "ordered"]
+    }
+    x
+  } else if (is.numeric(x)) {
+    factor(x, ordered = ordered)
+  } else if (is.logical(x)) {
+    factor(x, levels = c("FALSE", "TRUE"), ordered = ordered)
+  } else if (is.character(x)) {
+    factor(x, levels = unique(x), ordered = ordered)
+  } else {
+    factor(x, levels = as.character(unique(x)), ordered = ordered)
+  }
+}
