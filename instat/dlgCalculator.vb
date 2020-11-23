@@ -43,7 +43,15 @@ Public Class dlgCalculator
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(Not ucrCalc.ucrReceiverForCalculation.IsEmpty AndAlso ucrCalc.ucrSaveResultInto.IsComplete)
+        If Not ucrCalc.ucrReceiverForCalculation.IsEmpty Then
+            If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked AndAlso ucrCalc.ucrSaveResultInto.IsComplete Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub SetDefaults()
@@ -54,6 +62,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrSaveResultInto.Reset()
         ucrCalc.chkShowParameters.Checked = False
+        ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = True
         ucrCalc.ucrSaveResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
         SaveResults()
         ucrCalc.ucrSelectorForCalculations.bUseCurrentFilter = False
@@ -115,7 +124,6 @@ Public Class dlgCalculator
     Private Sub ShowControl()
         If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked Then
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Visible = True
-            ucrCalc.ucrSaveResultInto.Visible = True
         Else
             ucrCalc.ucrSaveResultInto.Visible = False
             ucrCalc.ucrSaveResultInto.btnColumnPosition.Visible = False
@@ -169,10 +177,11 @@ Public Class dlgCalculator
         End Select
     End Sub
 
-    Private Sub ucrChkSave_CheckedChanged() Handles ucrCalc.SaveResultsCheckedChanged
+    Private Sub chkSaveResultInto_CheckedChanged() Handles ucrCalc.SaveResultsCheckedChanged
         SaveResults()
         ShowControl()
     End Sub
+
     Private Sub ucrSelectorForCalculations_DataframeChanged() Handles ucrCalc.DataFrameChanged
         ucrCalc.ucrTryCalculator.ucrInputTryMessage.SetName("")
         SaveResults()
