@@ -44,13 +44,13 @@ Public Class dlgCalculator
 
     Private Sub TestOKEnabled()
         If Not ucrCalc.ucrReceiverForCalculation.IsEmpty Then
-            If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked AndAlso ucrCalc.ucrSaveResultInto.IsComplete Then
-                ucrBase.OKEnabled(True)
-            Else
+            If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked AndAlso Not ucrCalc.ucrSaveResultInto.IsComplete Then
                 ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
             End If
         Else
-            ucrBase.OKEnabled(True)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
@@ -177,7 +177,7 @@ Public Class dlgCalculator
         End Select
     End Sub
 
-    Private Sub chkSaveResultInto_CheckedChanged() Handles ucrCalc.SaveResultsCheckedChanged
+    Private Sub ucrChkSave_CheckedChanged() Handles ucrCalc.SaveResultsCheckedChanged
         SaveResults()
         ShowControl()
     End Sub

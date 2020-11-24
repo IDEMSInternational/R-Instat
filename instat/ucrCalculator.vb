@@ -2739,4 +2739,8 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::VE(sim = , obs = )", 10)
         End If
     End Sub
+
+    Private Sub ucrSaveResultInto_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveResultInto.ControlValueChanged
+        RaiseEvent SaveNameChanged()
+    End Sub
 End Class
