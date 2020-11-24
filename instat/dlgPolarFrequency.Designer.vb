@@ -46,11 +46,11 @@ Partial Class dlgPolarFrequency
         'lblPollutant
         '
         Me.lblPollutant.AutoSize = True
-        Me.lblPollutant.Location = New System.Drawing.Point(280, 45)
+        Me.lblPollutant.Location = New System.Drawing.Point(283, 119)
         Me.lblPollutant.Name = "lblPollutant"
-        Me.lblPollutant.Size = New System.Drawing.Size(48, 13)
-        Me.lblPollutant.TabIndex = 1
-        Me.lblPollutant.Text = "Pollutant"
+        Me.lblPollutant.Size = New System.Drawing.Size(99, 13)
+        Me.lblPollutant.TabIndex = 11
+        Me.lblPollutant.Text = "Pollutant (Optional):"
         '
         'lblColor
         '
@@ -58,7 +58,7 @@ Partial Class dlgPolarFrequency
         Me.lblColor.Location = New System.Drawing.Point(13, 205)
         Me.lblColor.Name = "lblColor"
         Me.lblColor.Size = New System.Drawing.Size(34, 13)
-        Me.lblColor.TabIndex = 7
+        Me.lblColor.TabIndex = 12
         Me.lblColor.Text = "Color:"
         '
         'Label3
@@ -67,7 +67,7 @@ Partial Class dlgPolarFrequency
         Me.Label3.Location = New System.Drawing.Point(11, 229)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(68, 13)
-        Me.Label3.TabIndex = 9
+        Me.Label3.TabIndex = 13
         Me.Label3.Text = "Key Position:"
         '
         'Label4
@@ -76,7 +76,7 @@ Partial Class dlgPolarFrequency
         Me.Label4.Location = New System.Drawing.Point(254, 207)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(34, 13)
-        Me.Label4.TabIndex = 12
+        Me.Label4.TabIndex = 15
         Me.Label4.Text = "Type:"
         '
         'Label5
@@ -85,7 +85,7 @@ Partial Class dlgPolarFrequency
         Me.Label5.Location = New System.Drawing.Point(254, 256)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(74, 13)
-        Me.Label5.TabIndex = 16
+        Me.Label5.TabIndex = 17
         Me.Label5.Text = "Minimum Bins:"
         '
         'Label6
@@ -94,49 +94,49 @@ Partial Class dlgPolarFrequency
         Me.Label6.Location = New System.Drawing.Point(254, 231)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(47, 13)
-        Me.Label6.TabIndex = 14
+        Me.Label6.TabIndex = 16
         Me.Label6.Text = "Statistic:"
         '
         'lblWindSpeed
         '
         Me.lblWindSpeed.AutoSize = True
-        Me.lblWindSpeed.Location = New System.Drawing.Point(283, 135)
+        Me.lblWindSpeed.Location = New System.Drawing.Point(283, 34)
         Me.lblWindSpeed.Name = "lblWindSpeed"
         Me.lblWindSpeed.Size = New System.Drawing.Size(69, 13)
-        Me.lblWindSpeed.TabIndex = 5
+        Me.lblWindSpeed.TabIndex = 9
         Me.lblWindSpeed.Text = "Wind Speed:"
         '
         'lblWindDirection
         '
         Me.lblWindDirection.AutoSize = True
-        Me.lblWindDirection.Location = New System.Drawing.Point(284, 88)
+        Me.lblWindDirection.Location = New System.Drawing.Point(284, 78)
         Me.lblWindDirection.Name = "lblWindDirection"
         Me.lblWindDirection.Size = New System.Drawing.Size(80, 13)
-        Me.lblWindDirection.TabIndex = 3
+        Me.lblWindDirection.TabIndex = 10
         Me.lblWindDirection.Text = "Wind Direction:"
         '
         'ucrReceiverWindDirection
         '
         Me.ucrReceiverWindDirection.frmParent = Me
-        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(283, 103)
+        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(283, 93)
         Me.ucrReceiverWindDirection.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
         Me.ucrReceiverWindDirection.Selector = Nothing
         Me.ucrReceiverWindDirection.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWindDirection.strNcFilePath = ""
-        Me.ucrReceiverWindDirection.TabIndex = 4
+        Me.ucrReceiverWindDirection.TabIndex = 2
         Me.ucrReceiverWindDirection.ucrSelector = Nothing
         '
         'ucrReceiverWindSpeed
         '
         Me.ucrReceiverWindSpeed.frmParent = Me
-        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(283, 150)
+        Me.ucrReceiverWindSpeed.Location = New System.Drawing.Point(283, 49)
         Me.ucrReceiverWindSpeed.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindSpeed.Name = "ucrReceiverWindSpeed"
         Me.ucrReceiverWindSpeed.Selector = Nothing
         Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWindSpeed.strNcFilePath = ""
-        Me.ucrReceiverWindSpeed.TabIndex = 6
+        Me.ucrReceiverWindSpeed.TabIndex = 1
         Me.ucrReceiverWindSpeed.ucrSelector = Nothing
         '
         'ucrChkTransform
@@ -145,7 +145,7 @@ Partial Class dlgPolarFrequency
         Me.ucrChkTransform.Location = New System.Drawing.Point(14, 257)
         Me.ucrChkTransform.Name = "ucrChkTransform"
         Me.ucrChkTransform.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkTransform.TabIndex = 11
+        Me.ucrChkTransform.TabIndex = 14
         '
         'ucrNudMinimumBins
         '
@@ -156,7 +156,7 @@ Partial Class dlgPolarFrequency
         Me.ucrNudMinimumBins.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinimumBins.Name = "ucrNudMinimumBins"
         Me.ucrNudMinimumBins.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMinimumBins.TabIndex = 17
+        Me.ucrNudMinimumBins.TabIndex = 8
         Me.ucrNudMinimumBins.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputColor
@@ -167,7 +167,7 @@ Partial Class dlgPolarFrequency
         Me.ucrInputColor.Location = New System.Drawing.Point(94, 201)
         Me.ucrInputColor.Name = "ucrInputColor"
         Me.ucrInputColor.Size = New System.Drawing.Size(68, 21)
-        Me.ucrInputColor.TabIndex = 8
+        Me.ucrInputColor.TabIndex = 4
         '
         'ucrInputPosition
         '
@@ -177,7 +177,7 @@ Partial Class dlgPolarFrequency
         Me.ucrInputPosition.Location = New System.Drawing.Point(94, 228)
         Me.ucrInputPosition.Name = "ucrInputPosition"
         Me.ucrInputPosition.Size = New System.Drawing.Size(68, 21)
-        Me.ucrInputPosition.TabIndex = 10
+        Me.ucrInputPosition.TabIndex = 5
         '
         'ucrInputType
         '
@@ -187,7 +187,7 @@ Partial Class dlgPolarFrequency
         Me.ucrInputType.Location = New System.Drawing.Point(324, 202)
         Me.ucrInputType.Name = "ucrInputType"
         Me.ucrInputType.Size = New System.Drawing.Size(75, 21)
-        Me.ucrInputType.TabIndex = 13
+        Me.ucrInputType.TabIndex = 6
         '
         'ucrInputStatistic
         '
@@ -197,18 +197,18 @@ Partial Class dlgPolarFrequency
         Me.ucrInputStatistic.Location = New System.Drawing.Point(324, 229)
         Me.ucrInputStatistic.Name = "ucrInputStatistic"
         Me.ucrInputStatistic.Size = New System.Drawing.Size(75, 21)
-        Me.ucrInputStatistic.TabIndex = 15
+        Me.ucrInputStatistic.TabIndex = 7
         '
         'ucrReceiverPollutant
         '
         Me.ucrReceiverPollutant.frmParent = Me
-        Me.ucrReceiverPollutant.Location = New System.Drawing.Point(283, 60)
+        Me.ucrReceiverPollutant.Location = New System.Drawing.Point(283, 134)
         Me.ucrReceiverPollutant.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPollutant.Name = "ucrReceiverPollutant"
         Me.ucrReceiverPollutant.Selector = Nothing
         Me.ucrReceiverPollutant.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverPollutant.strNcFilePath = ""
-        Me.ucrReceiverPollutant.TabIndex = 2
+        Me.ucrReceiverPollutant.TabIndex = 3
         Me.ucrReceiverPollutant.ucrSelector = Nothing
         '
         'ucrSelectorPolarFrequency
@@ -224,7 +224,7 @@ Partial Class dlgPolarFrequency
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 329)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 307)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 18
@@ -233,7 +233,7 @@ Partial Class dlgPolarFrequency
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(426, 396)
+        Me.ClientSize = New System.Drawing.Size(422, 370)
         Me.Controls.Add(Me.ucrReceiverWindDirection)
         Me.Controls.Add(Me.lblWindDirection)
         Me.Controls.Add(Me.ucrReceiverWindSpeed)

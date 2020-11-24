@@ -47,17 +47,17 @@ Public Class dlgPolarFrequency
         ucrSelectorPolarFrequency.SetParameter(New RParameter("mydata", 0))
         ucrSelectorPolarFrequency.SetParameterIsrfunction()
 
-        ucrReceiverPollutant.SetParameter(New RParameter("pollutant", 1))
-        ucrReceiverPollutant.Selector = ucrSelectorPolarFrequency
-        ucrReceiverPollutant.SetParameterIsString()
+        ucrReceiverWindSpeed.SetParameter(New RParameter("ws_name", 1))
+        ucrReceiverWindSpeed.Selector = ucrSelectorPolarFrequency
+        ucrReceiverWindSpeed.SetParameterIsString()
 
         ucrReceiverWindDirection.SetParameter(New RParameter("wd_name", 2))
         ucrReceiverWindDirection.Selector = ucrSelectorPolarFrequency
         ucrReceiverWindDirection.SetParameterIsString()
 
-        ucrReceiverWindSpeed.SetParameter(New RParameter("ws_name", 3))
-        ucrReceiverWindSpeed.Selector = ucrSelectorPolarFrequency
-        ucrReceiverWindSpeed.SetParameterIsString()
+        ucrReceiverPollutant.SetParameter(New RParameter("pollutant", 3))
+        ucrReceiverPollutant.Selector = ucrSelectorPolarFrequency
+        ucrReceiverPollutant.SetParameterIsString()
 
         ucrChkTransform.SetText("Transform")
         ucrChkTransform.SetParameter(New RParameter("trans", 4))
@@ -116,7 +116,7 @@ Public Class dlgPolarFrequency
         clsPolarFrequencyFunction.AddParameter("trans", "TRUE", iPosition:=4)
 
         ucrSelectorPolarFrequency.Reset()
-        ucrReceiverPollutant.SetMeAsReceiver()
+        ucrReceiverWindSpeed.SetMeAsReceiver()
 
         clsPolarFrequencyFunction.SetRCommand("polar_frequency")
 
@@ -128,7 +128,7 @@ Public Class dlgPolarFrequency
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrSelectorPolarFrequency.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" Then
+        If ucrReceiverWindSpeed.IsEmpty OrElse ucrReceiverWindDirection.IsEmpty Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -141,7 +141,7 @@ Public Class dlgPolarFrequency
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrSelectorPolarFrequency_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPolarFrequency.ControlValueChanged
+    Private Sub ucrReceiverWindSpeed_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverWindDirection.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
