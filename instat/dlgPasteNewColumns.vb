@@ -1,0 +1,5 @@
+﻿Public Class dlgPasteNewColumns
+    Private Sub dlgPasteNewColumns_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+End Class

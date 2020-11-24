@@ -78,6 +78,7 @@ Public Class dlgSaveAs
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         frmMain.strSaveFilePath = ucrInputFilePath.GetText()
         frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
+        frmMain.bDataSaved = True
     End Sub
 
     Private Sub cmdEditorSave_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
