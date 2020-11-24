@@ -100,6 +100,9 @@ Public Class dlgVisualizeData
         ucrReceiverVisualizeData.bForceAsDataFrame = True
         ucrReceiverVisualizeData.SetMeAsReceiver()
 
+        ucrSelectorVisualizeData.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
+        ucrSelectorVisualizeData.SetParameterIsrfunction()
+
         ucrInputComboboxPalette.SetLinkedDisplayControl(lblPaltte)
         lstMaximumSizeControls.Add(lblMillionDataPoints)
         lstMaximumSizeControls.Add(lblMaximumSize)
@@ -147,7 +150,6 @@ Public Class dlgVisualizeData
         clsVisMissFunction.AddParameter("warn_large_data", "TRUE", iPosition:=6)
 
         clsPipeOperator.SetOperation("%>%")
-        clsPipeOperator.AddParameter("x", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
         clsPipeOperator.AddParameter(clsRFunctionParameter:=clsFilterFunction, iPosition:=1)
 
         clsFilterFunction.SetPackageName("dplyr")
@@ -155,7 +157,7 @@ Public Class dlgVisualizeData
         clsFilterFunction.AddParameter(clsRFunctionParameter:=clsAsLogicalFunction, iPosition:=0)
 
         clsAsLogicalFunction.SetRCommand("as.logical")
-        clsAsLogicalFunction.AddParameter("x", clsRFunctionParameter:=clsRBinonFunction, iPosition:=0)
+        clsAsLogicalFunction.AddParameter("x", clsRFunctionParameter:=clsRBinonFunction, bIncludeArgumentName:=False, iPosition:=0)
 
         clsRBinonFunction.SetRCommand("rbinom")
         clsRBinonFunction.AddParameter("n", clsRFunctionParameter:=clsNRowFunction, iPosition:=0)
@@ -163,7 +165,6 @@ Public Class dlgVisualizeData
         clsRBinonFunction.AddParameter("prob", "1", iPosition:=2)
 
         clsNRowFunction.SetRCommand("nrow")
-        clsNRowFunction.AddParameter("x", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
 
         clsVisGuessFunction.SetPackageName("visdat")
         clsVisGuessFunction.SetRCommand("vis_guess")
@@ -174,8 +175,11 @@ Public Class dlgVisualizeData
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0), 1)
-        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0), 2)
+        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsNRowFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), 1)
+        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0), 2)
+        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0), 3)
+        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsPipeOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), 4)
+        ucrSelectorVisualizeData.AddAdditionalCodeParameterPair(clsPipeOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), 1)
         ucrSaveGraph.AddAdditionalRCode(clsVisMissFunction, iAdditionalPairNo:=1)
         ucrSaveGraph.AddAdditionalRCode(clsVisGuessFunction, iAdditionalPairNo:=2)
         ucrInputComboboxPalette.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("palette", 1), iAdditionalPairNo:=1)
@@ -184,6 +188,7 @@ Public Class dlgVisualizeData
         ucrPnlSelectData.SetRCode(clsCurrBaseFunction, bReset)
         ucrPnlVisualizeData.SetRCode(clsCurrBaseFunction, bReset)
         ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
+        ucrSelectorVisualizeData.SetRCode(clsNRowFunction, bReset)
         ucrSaveGraph.SetRCode(clsVisDatFunction, bReset)
         ucrInputComboboxPalette.SetRCode(clsVisDatFunction, bReset)
         ucrChkSortVariables.SetRCode(clsVisDatFunction)
