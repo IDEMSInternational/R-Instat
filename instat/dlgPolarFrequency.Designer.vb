@@ -41,6 +41,7 @@ Partial Class dlgPolarFrequency
         Me.ucrReceiverPollutant = New instat.ucrReceiverSingle()
         Me.ucrSelectorPolarFrequency = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblPollutant
@@ -224,16 +225,25 @@ Partial Class dlgPolarFrequency
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 307)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 338)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 18
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 304)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(403, 34)
+        Me.ucrSaveGraph.TabIndex = 19
         '
         'dlgPolarFrequency
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 370)
+        Me.ClientSize = New System.Drawing.Size(422, 415)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrReceiverWindDirection)
         Me.Controls.Add(Me.lblWindDirection)
         Me.Controls.Add(Me.ucrReceiverWindSpeed)
@@ -283,4 +293,5 @@ Partial Class dlgPolarFrequency
     Friend WithEvents lblWindDirection As Label
     Friend WithEvents ucrReceiverWindSpeed As ucrReceiverSingle
     Friend WithEvents lblWindSpeed As Label
+    Friend WithEvents ucrSaveGraph As ucrSave
 End Class

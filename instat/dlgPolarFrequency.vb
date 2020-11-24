@@ -105,6 +105,13 @@ Public Class dlgPolarFrequency
         dctColor.Add("Jet", Chr(34) & "jet" & Chr(34))
         ucrInputColor.SetItems(dctColor)
         ucrInputColor.SetDropDownStyleAsNonEditable()
+
+        ucrSaveGraph.SetPrefix("polarfrequency")
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorPolarFrequency.ucrAvailableDataFrames)
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
@@ -117,6 +124,7 @@ Public Class dlgPolarFrequency
 
         ucrSelectorPolarFrequency.Reset()
         ucrReceiverWindSpeed.SetMeAsReceiver()
+        ucrSaveGraph.Reset()
 
         clsPolarFrequencyFunction.SetRCommand("polar_frequency")
 
