@@ -316,6 +316,12 @@
     <Compile Include="dlgWindPollutionRose.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDisplayDailyData.Designer.vb">
+      <DependentUpon>sdgDisplayDailyData.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDisplayDailyData.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgExtremesDisplayOptions.Designer.vb">
       <DependentUpon>sdgExtremesDisplayOptions.vb</DependentUpon>
     </Compile>
@@ -2701,6 +2707,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDisplayDailyData.resx">
+      <DependentUpon>sdgDisplayDailyData.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgExtremesDisplayOptions.resx">
       <DependentUpon>sdgExtremesDisplayOptions.vb</DependentUpon>

@@ -89,6 +89,7 @@ Partial Class dlgDisplayDailyData
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverSingleElements = New instat.ucrReceiverSingle()
+        Me.cmdDailyDisplayOptions = New System.Windows.Forms.Button()
         Me.grpGraph.SuspendLayout()
         Me.grpSummary.SuspendLayout()
         Me.grpFacet.SuspendLayout()
@@ -457,21 +458,29 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverSingleElements.strNcFilePath = ""
         Me.ucrReceiverSingleElements.ucrSelector = Nothing
         '
+        'cmdDailyDisplayOptions
+        '
+        resources.ApplyResources(Me.cmdDailyDisplayOptions, "cmdDailyDisplayOptions")
+        Me.cmdDailyDisplayOptions.Name = "cmdDailyDisplayOptions"
+        Me.cmdDailyDisplayOptions.Tag = ""
+        Me.cmdDailyDisplayOptions.UseVisualStyleBackColor = True
+        '
         'dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdDailyDisplayOptions)
+        Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrInputGraphRugColur)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.lblGRugColour)
         Me.Controls.Add(Me.ucrReceiverMultipleElements)
         Me.Controls.Add(Me.rdoGraphByYear)
+        Me.Controls.Add(Me.grpFacet)
         Me.Controls.Add(Me.lblElements)
-        Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrInputComboZero)
-        Me.Controls.Add(Me.grpFacet)
         Me.Controls.Add(Me.ucrInputComboMissing)
         Me.Controls.Add(Me.ucrInputComboTrace)
         Me.Controls.Add(Me.ucrChkMissing)
@@ -556,4 +565,5 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrInputScale As ucrInputComboBox
     Friend WithEvents lblGRugColour As Label
     Friend WithEvents ucrInputGraphRugColur As ucrInputComboBox
+    Friend WithEvents cmdDailyDisplayOptions As Button
 End Class
