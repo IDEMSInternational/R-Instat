@@ -312,8 +312,11 @@
   <data name="ucrSaveLogical.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 392</value>
   </data>
+  <data name="ucrSaveLogical.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrSaveLogical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>380, 24</value>
+    <value>430, 21</value>
   </data>
   <data name="ucrSaveLogical.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -376,7 +379,7 @@
     <value>11, 418</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 52</value>
+    <value>430, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -400,7 +403,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>420, 475</value>
+    <value>442, 475</value>
   </data>
   <data name="ucrReceiverFirst.Location" type="System.Drawing.Point, System.Drawing">
     <value>270, 60</value>

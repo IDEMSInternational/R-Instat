@@ -83,9 +83,9 @@ Public Class dlgCompareColumns
         ucrChkAllValues.SetRDefault("TRUE")
 
         ' Not setting data frame selector or prefix here because we need save control only linked to data frame of second selector which is not yet implemented
-        ucrSaveLogical.SetCheckBoxText("Save logical values for second column")
+        ucrSaveLogical.SetCheckBoxText("Save logical values for second column:")
         ucrSaveLogical.SetSaveTypeAsColumn()
-        ucrSaveLogical.SetIsTextBox()
+        ucrSaveLogical.SetIsComboBox()
         ' This ensures the assign text is correctly cleared when resetting
         ucrSaveLogical.bUpdateRCodeFromControl = False
     End Sub
@@ -146,12 +146,21 @@ Public Class dlgCompareColumns
         ucrSaveLogical.SetGlobalDataName(ucrReceiverSecond.GetDataName())
     End Sub
 
+    Private Sub ShowControl()
+        If Not ucrSaveLogical.ucrChkSave.Checked Then
+            ucrSaveLogical.btnColumnPosition.Visible = False
+        Else
+            ucrSaveLogical.btnColumnPosition.Visible = True
+        End If
+    End Sub
+
     Private Sub ucrSaveLogical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveLogical.ControlValueChanged
         If ucrSaveLogical.ucrChkSave.Checked Then
             ucrBase.clsRsyntax.AddToAfterCodes(clsYinXOperator, iPosition:=1)
         Else
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsYinXOperator)
         End If
+        ShowControl()
     End Sub
 
     Private Sub ucrReceiverFirst_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirst.ControlValueChanged

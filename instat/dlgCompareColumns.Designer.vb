@@ -26,14 +26,14 @@ Partial Class dlgCompareColumns
         Me.lblFirstColumn = New System.Windows.Forms.Label()
         Me.lblSecondColumn = New System.Windows.Forms.Label()
         Me.grpComparisions = New System.Windows.Forms.GroupBox()
-        Me.ucrSaveLogical = New instat.ucrSave()
-        Me.ucrChkSort = New instat.ucrCheck()
-        Me.ucrChkUnique = New instat.ucrCheck()
         Me.ucrChkAllValues = New instat.ucrCheck()
         Me.ucrChkUnion = New instat.ucrCheck()
         Me.ucrChkIntersection = New instat.ucrCheck()
         Me.ucrChkSecondNotFirst = New instat.ucrCheck()
         Me.ucrChkFirstNotSecond = New instat.ucrCheck()
+        Me.ucrSaveLogical = New instat.ucrSave()
+        Me.ucrChkSort = New instat.ucrCheck()
+        Me.ucrChkUnique = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverSecond = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirst = New instat.ucrReceiverSingle()
@@ -61,23 +61,6 @@ Partial Class dlgCompareColumns
         resources.ApplyResources(Me.grpComparisions, "grpComparisions")
         Me.grpComparisions.Name = "grpComparisions"
         Me.grpComparisions.TabStop = False
-        '
-        'ucrSaveLogical
-        '
-        resources.ApplyResources(Me.ucrSaveLogical, "ucrSaveLogical")
-        Me.ucrSaveLogical.Name = "ucrSaveLogical"
-        '
-        'ucrChkSort
-        '
-        Me.ucrChkSort.Checked = False
-        resources.ApplyResources(Me.ucrChkSort, "ucrChkSort")
-        Me.ucrChkSort.Name = "ucrChkSort"
-        '
-        'ucrChkUnique
-        '
-        Me.ucrChkUnique.Checked = False
-        resources.ApplyResources(Me.ucrChkUnique, "ucrChkUnique")
-        Me.ucrChkUnique.Name = "ucrChkUnique"
         '
         'ucrChkAllValues
         '
@@ -108,6 +91,23 @@ Partial Class dlgCompareColumns
         Me.ucrChkFirstNotSecond.Checked = False
         resources.ApplyResources(Me.ucrChkFirstNotSecond, "ucrChkFirstNotSecond")
         Me.ucrChkFirstNotSecond.Name = "ucrChkFirstNotSecond"
+        '
+        'ucrSaveLogical
+        '
+        resources.ApplyResources(Me.ucrSaveLogical, "ucrSaveLogical")
+        Me.ucrSaveLogical.Name = "ucrSaveLogical"
+        '
+        'ucrChkSort
+        '
+        Me.ucrChkSort.Checked = False
+        resources.ApplyResources(Me.ucrChkSort, "ucrChkSort")
+        Me.ucrChkSort.Name = "ucrChkSort"
+        '
+        'ucrChkUnique
+        '
+        Me.ucrChkUnique.Checked = False
+        resources.ApplyResources(Me.ucrChkUnique, "ucrChkUnique")
+        Me.ucrChkUnique.Name = "ucrChkUnique"
         '
         'ucrBase
         '
