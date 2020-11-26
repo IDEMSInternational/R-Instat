@@ -1565,3 +1565,34 @@ make_factor <- function(x, ordered = is.ordered(x)) {
     factor(x, levels = as.character(unique(x)), ordered = ordered)
   }
 }
+
+plot_mrl <- function(data, station_name, element_name, ncol = 1) {
+  if (!missing(station_name)) {
+    plts <- list()
+    station_col <- data[, station_name]
+    stations <- unique(station_col)
+    for (i in seq_along(stations)) {
+      d <- data[station_col == stations[i], ]
+      element_col <- d[, element_name]
+      plts[[i]] <- texmex::mrl(na.exclude(element_col)) %>%
+        ggplot2::ggplot(
+          xlab = "Threshold",
+          ylab = "Mean excess", main = stations[i], fill = "red", col = "black",
+          rug = TRUE, addNexcesses = TRUE, textsize = 4
+        ) +
+        ggplot2::theme_classic()
+    }
+    patchwork::wrap_plots(plts, ncol = ncol)
+  }
+  else {
+    element_col <- data[, element_name]
+    texmex::mrl(na.exclude(element_col)) %>%
+      ggplot2::ggplot(
+        xlab = "Threshold",
+        ylab = "Mean excess", fill = "red", col = "black",
+        rug = TRUE, addNexcesses = TRUE, textsize = 4
+      ) +
+      ggplot2::theme_classic()
+  }
+}
+
