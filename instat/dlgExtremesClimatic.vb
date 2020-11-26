@@ -45,6 +45,8 @@ Public Class dlgExtremesClimatic
     Private clsFilterExtremeSubCalcs As New RFunction
     Private clsFilterExtremeExp As New ROperator
 
+    Private clsPlotMrlFunction As RFunction
+
     Private Sub dlgExtremesClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -67,6 +69,8 @@ Public Class dlgExtremesClimatic
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
+        ucrReceiverStation.SetParameter(New RParameter("station_name", 1))
+        ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.Selector = ucrSelectorClimaticExtremes
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
@@ -96,6 +100,10 @@ Public Class dlgExtremesClimatic
         ucrReceiverElement.bAutoFill = True
         ucrReceiverElement.strSelectorHeading = "Numerics"
         ucrReceiverElement.SetIncludedDataTypes({"numeric"})
+
+        ucrSelectorClimaticExtremes.SetParameter(New RParameter("data", 0))
+        ucrSelectorClimaticExtremes.SetParameterIsrfunction()
+
 
         ' Panel Options
         ucrPnlExtremesType.AddRadioButton(rdoMinMax)
@@ -154,27 +162,28 @@ Public Class dlgExtremesClimatic
         ucrPnlExtremesType.AddToLinkedControls(ucrChkFirstDate, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrChkLastDate, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrChkNDates, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkDecluster.AddToLinkedControls(ucrNudDeclusterThreshold, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlCountsRunLength.AddToLinkedControls({ucrInputFrom, ucrInputTo, ucrInputSteps}, {rdoRunLength}, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrChkMrlPlot.AddToLinkedControls({ucrNudColumns, ucrSavePlot}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMaxMin.SetLinkedDisplayControl(lblNewColName)
         ucrChkMissingValues.SetLinkedDisplayControl(grpMinMaxOptions)
         ucrInputThresholdValue.SetLinkedDisplayControl(grpPeakOptions)
-        ucrInputThresholdOperator.SetLinkedDisplayControl(grpPlotOptions)
-        ucrInputFrom.SetLinkedDisplayControl(lblFrom)
-        ucrInputTo.SetLinkedDisplayControl(lblTo)
-        ucrInputSteps.SetLinkedDisplayControl(lblSteps)
+        ucrNudColumns.SetLinkedDisplayControl(lblColumns)
 
         ucrInputFilterPreview.IsReadOnly = True
 
-        ucrPnlCountsRunLength.AddRadioButton(rdoCounts)
-        ucrPnlCountsRunLength.AddRadioButton(rdoRunLength)
+        ucrChkMrlPlot.SetText("Mean Residual Life Plot")
+        ucrChkMrlPlot.AddRSyntaxContainsFunctionNamesCondition(True, {"plot_mrl"})
+        ucrChkMrlPlot.AddRSyntaxContainsFunctionNamesCondition(False, {"plot_mrl"}, False)
 
-        ucrChkDecluster.SetText("Decluster")
+        ucrNudColumns.SetParameter(New RParameter("ncol", 3))
+        ucrNudColumns.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
+        ucrNudColumns.Increment = 1
 
-        ucrChkMrlPlot.SetText("Mrl Plot")
-
-        ucrChkTcPlot.SetText("Tc Plot")
+        ucrSavePlot.SetDataFrameSelector(ucrSelectorClimaticExtremes.ucrAvailableDataFrames)
+        ucrSavePlot.SetPrefix("mrlplot")
+        ucrSavePlot.SetSaveTypeAsGraph()
+        ucrSavePlot.SetIsComboBox()
+        ucrSavePlot.SetCheckBoxText("Save Graph")
+        ucrSavePlot.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
@@ -205,8 +214,11 @@ Public Class dlgExtremesClimatic
         clsFilterExtremeSubCalcs.Clear()
         clsFilterExtremeExp.Clear()
 
+        clsPlotMrlFunction = New RFunction
+
         ucrSelectorClimaticExtremes.Reset()
         ucrReceiverElement.SetMeAsReceiver()
+        ucrSavePlot.Reset()
         SetCalculationValues()
 
         clsDayFilterCalcFromConvert = New RFunction
@@ -327,12 +339,18 @@ Public Class dlgExtremesClimatic
         clsFilterExtremeExp.SetOperation("==")
         clsFilterExtremeExp.bToScriptAsRString = True
 
+        clsPlotMrlFunction.SetRCommand("plot_mrl")
+        clsPlotMrlFunction.AddParameter("ncol", "1", iPosition:=3)
+        clsPlotMrlFunction.iCallType = 3
+        clsPlotMrlFunction.bExcludeAssignedFunctionOutput = False
+
         'Overall Calculation
         clsRunCalcFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         'This is a dummy function used to set the R code of the ucrPnlExtremesType
         clsCurrCalc = clsMinMaxSummariseFunction
         clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsMinMaxSummariseFunction)
         clsRunCalcFunction.AddParameter("display", "FALSE")
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunction)
     End Sub
 
@@ -362,6 +380,11 @@ Public Class dlgExtremesClimatic
         ucrChkFirstDate.SetRCode(clsCombinationSubCalcs, bReset)
         ucrChkNDates.SetRCode(clsCombinationSubCalcs, bReset)
         ucrChkLastDate.SetRCode(clsCombinationSubCalcs, bReset)
+        ucrSelectorClimaticExtremes.SetRCode(clsPlotMrlFunction, bReset)
+        ucrReceiverStation.SetRCode(clsPlotMrlFunction, bReset)
+        ucrSavePlot.SetRCode(clsPlotMrlFunction, bReset)
+        ucrNudColumns.SetRCode(clsPlotMrlFunction, bReset)
+        ucrChkMrlPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -461,6 +484,7 @@ Public Class dlgExtremesClimatic
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
         MinMaxFunction()
         PeaksFunction()
+        clsPlotMrlFunction.AddParameter("element_name", ucrReceiverElement.GetVariableNames, iPosition:=2)
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrSelectorClimaticExtremes.ControlValueChanged, ucrReceiverDOY.ControlContentsChanged
@@ -543,5 +567,13 @@ Public Class dlgExtremesClimatic
     Private Sub ucrInputSave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSave.ControlValueChanged
         SetResultNameCarryColumns()
         clsFilterExtremeExp.AddParameter("right", ucrInputSave.GetText(), iPosition:=1)
+    End Sub
+
+    Private Sub ucrChkMrlPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMrlPlot.ControlValueChanged
+        If ucrChkMrlPlot.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsPlotMrlFunction, 1)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsPlotMrlFunction)
+        End If
     End Sub
 End Class
