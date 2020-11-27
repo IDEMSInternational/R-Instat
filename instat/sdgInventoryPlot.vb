@@ -20,15 +20,55 @@ Public Class sdgInventoryPlot
     Private bControlsInitialised As Boolean = False
     Private clsInventory As New RFunction
     Public strAxisType As String
+    Public bRCodeSet As Boolean = False
 
     Private Sub sdgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
     Public Sub InitialiseControls()
         Dim dctLegendPosition As New Dictionary(Of String, String)
-        Dim dctDateFormat As New Dictionary(Of String, String)
-        Dim dctXScaleFormat As New Dictionary(Of String, String)
-        Dim dctXScaledateFormat As New Dictionary(Of String, String)
+        Dim dctScale As New Dictionary(Of String, String)
+        Dim dctLabelForDays As New Dictionary(Of String, String)
+        Dim dctDateTimePeriods As New Dictionary(Of String, String)
+
+        'facets tab  
+        ucrChkFacetSize.SetText("Size")
+        ucrChkFacetSize.SetParameter(New RParameter("facet_size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrNudFacetSize.SetParameter(New RParameter("facet_size"))
+        ucrChkFacetSize.AddToLinkedControls(ucrNudFacetSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=8)
+
+        ucrChkScales.SetText("Scales")
+        ucrChkScales.SetParameter(New RParameter("scale"))
+        ucrChkScales.AddToLinkedControls(ucrInputScale, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Free_y")
+        ucrInputScale.SetParameter(New RParameter("scale"))
+        dctScale.Add("None", Chr(34) & "none" & Chr(34))
+        dctScale.Add("Free_y", Chr(34) & "free_y" & Chr(34))
+        dctScale.Add("Free_x", Chr(34) & "free_x" & Chr(34))
+        dctScale.Add("Free", Chr(34) & "free" & Chr(34))
+        dctScale.Add("Fixed", Chr(34) & "fixed" & Chr(34))
+        ucrInputScale.SetItems(dctScale)
+        ucrInputScale.SetDropDownStyleAsNonEditable()
+        ucrChkScales.AddParameterPresentCondition(True, "scale")
+        ucrChkScales.AddParameterPresentCondition(False, "scale", False)
+
+        ucrChkNoOfRowsorColumns.SetText("Fixed Number of Rows")
+        ucrChkNoOfRowsorColumns.AddParameterPresentCondition(True, {"nrow", "ncol"}, True)
+        ucrChkNoOfRowsorColumns.AddParameterPresentCondition(False, {"nrow", "ncol"}, False)
+        ucrNudNumberofRowsOrcolumns.SetParameter(New RParameter("nrow"))
+        ucrNudNumberofRowsOrcolumns.SetMinMax(1, Integer.MaxValue)
+        ucrNudNumberofRowsOrcolumns.bAddRemoveParameter = False
+
+        ucrChkNoOfRowsorColumns.AddToLinkedControls(ucrNudNumberofRowsOrcolumns, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+
+        'Not setting parameter to write because of complex conditions for adding/removing this parameter
+        'Conditions in place for reading function
+        ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir"))
+        ucrPnlHorizonatalVertical.bChangeParameterValue = False
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical)
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal)
+        ucrPnlHorizonatalVertical.AddParameterValuesCondition(rdoVertical, "dir", Chr(34) & "v" & Chr(34))
+        ucrPnlHorizonatalVertical.AddParameterValuesCondition(rdoHorizontal, "dir", Chr(34) & "h" & Chr(34))
+        ucrPnlHorizonatalVertical.SetRDefault(Chr(34) & "h" & Chr(34))
 
         ucrPnlXAxisTitle.AddRadioButton(rdoAutoXAxis)
         ucrPnlXAxisTitle.AddRadioButton(rdoNoTitleXAxisTitle)
@@ -52,136 +92,101 @@ Public Class sdgInventoryPlot
         UcrPnlYAxisTitle.AddParameterValuesCondition(rdoSpecifyYAxisTitle, "labelYAxis", Chr(34) & Chr(34), False)
         UcrPnlYAxisTitle.AddToLinkedControls(ucrInputYAxisTitle, {rdoSpecifyYAxisTitle}, bNewLinkedHideIfParameterMissing:=True)
 
-
         ucrInputYAxisTitle.SetParameter(New RParameter("labelYAxis"))
-
         ucrInputGraphTitle.SetParameter(New RParameter("graph_title"))
         ucrInputGraphSubTitle.SetParameter(New RParameter("graph_subtitle"))
         ucrInputGraphcCaption.SetParameter(New RParameter("graph_caption"))
+        ttInventoryPlot.SetToolTip(ucrInputGraphcCaption.txtInput, "Type \n where you would like a new-line")
 
         ucrNudTitleSize.SetParameter(New RParameter("title_size"))
-        ucrNudTitleSize.Increment = 0.1
-        ucrNudTitleSize.Minimum = 0
+        ucrNudTitleSize.SetRDefault(20)
 
         ucrNudSubTitleSize.SetParameter(New RParameter("subtitle_size"))
-        ucrNudSubTitleSize.Increment = 0.1
-        ucrNudSubTitleSize.Minimum = 0
+        ucrNudSubTitleSize.SetRDefault(15)
 
         ucrNudCaptionSize.SetParameter(New RParameter("caption_size"))
-        ucrNudCaptionSize.Increment = 0.1
-        ucrNudCaptionSize.Minimum = 0
+        ucrNudCaptionSize.SetRDefault(8)
+
+        ucrNudXaxisTitleSize.SetParameter(New RParameter("xlabelsize"))
+        ucrNudXaxisTitleSize.SetRDefault(14)
+
+        ucrNudYAxisTitleSize.SetParameter(New RParameter("ylabelsize"))
+        ucrNudYAxisTitleSize.SetRDefault(14)
 
         ucrChkXAxisLabelSize.SetText("Size")
         ucrChkXAxisLabelSize.SetParameter(New RParameter("xSize"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrNudXaxisLabelSize.SetParameter(New RParameter("xSize"))
-        ucrNudXaxisLabelSize.Increment = 0.1
-        ucrNudXaxisLabelSize.Minimum = 0
-
-
-
-        ucrNudYAxisTitleSize.SetParameter(New RParameter("ySize"))
-        ucrNudYAxisTitleSize.Increment = 0.1
-        ucrNudYAxisTitleSize.Minimum = 0
+        ucrNudXAxisLabelSize.SetParameter(New RParameter("xSize"))
 
         ucrChkXAxisAngle.SetText("Angle")
         ucrChkXAxisAngle.SetParameter(New RParameter("Xangle"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrNudXAxisAngle.SetMinMax(0, 360)
         ucrNudXAxisAngle.SetParameter(New RParameter("Xangle"))
+        ucrNudXAxisAngle.SetMinMax(0, 360)
+
+        ucrChkXAxisAngle.AddToLinkedControls(ucrNudXAxisAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=90)
+        ucrChkXAxisLabelSize.AddToLinkedControls(ucrNudXAxisLabelSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=12)
+
+        ucrInputXInStepsOf.SetParameter(New RParameter("byXaxis"))
+        ucrInputXInStepsOf.SetValidationTypeAsNumeric()
+        ucrInputXInStepsOf.AddQuotesIfUnrecognised = False
+        ucrInputXFrom.SetParameter(New RParameter("fromXAxis"))
+        ucrInputXFrom.SetValidationTypeAsNumeric()
+        ucrInputXFrom.AddQuotesIfUnrecognised = False
+        ucrInputXTo.SetParameter(New RParameter("toXAxis"))
+        ucrInputXTo.SetValidationTypeAsNumeric()
+        'ucrInputXTo.SetRDefault(1)
+        ucrInputXTo.AddQuotesIfUnrecognised = False
+        ucrChkSpecifyXAxisTickMarks.SetText("Specify Breaks")
+        ucrChkSpecifyXAxisTickMarks.SetRDefault("TRUE")
+        ucrChkSpecifyXAxisTickMarks.SetParameter(New RParameter("scale_xdate"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrChkSpecifyXAxisTickMarks.AddToLinkedControls({ucrInputXFrom, ucrInputXTo, ucrInputXInStepsOf}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputXFrom.SetLinkedDisplayControl(lblXFrom)
+        ucrInputXTo.SetLinkedDisplayControl(lblXTo)
+        ucrInputXInStepsOf.SetLinkedDisplayControl(lblXInStepsOf)
+
+        dctLabelForDays.Add("Default", Chr(34) & "NULL" & Chr(34))
+        dctLabelForDays.Add("Day Number (1-366)", Chr(34) & "%j" & Chr(34))
+        dctLabelForDays.Add("Day Month (1 Jan)", Chr(34) & "%d %b" & Chr(34))
+        dctLabelForDays.Add("Day Month Full (1 January)", Chr(34) & "%d %B" & Chr(34))
+        ucrInputDateDisplayFormat.SetParameter(New RParameter("date_ylabels"))
+        ucrInputDateDisplayFormat.SetItems(dctLabelForDays)
+        ucrInputDateDisplayFormat.SetDropDownStyleAsNonEditable()
+        ucrInputDateDisplayFormat.SetLinkedDisplayControl(lblDateDisplayFormat)
+
+        dctDateTimePeriods.Add("Default", Chr(34) & "NULL" & Chr(34))
+        dctDateTimePeriods.Add("Days", Chr(34) & "day" & Chr(34))
+        dctDateTimePeriods.Add("Weeks", Chr(34) & "week" & Chr(34))
+        dctDateTimePeriods.Add("Months", Chr(34) & "month" & Chr(34))
+        dctDateTimePeriods.Add("Years", Chr(34) & "year" & Chr(34))
+
+        ucrInputDateBreakTime.SetParameter(New RParameter("date_ybreaks"))
+        ucrInputDateBreakTime.SetItems(dctDateTimePeriods)
+        ucrInputDateBreakTime.SetDropDownStyleAsNonEditable()
+
+        ucrNudDateBreakNumber.Minimum = 0
+        ucrNudDateBreakNumber.Increment = 1
+        ucrNudDateBreakNumber.SetParameter(New RParameter("step"))
+
+        ucrChkSpecifyDateBreaks.SetText("Specify Breaks")
+        ucrChkSpecifyDateBreaks.SetRDefault("TRUE")
+        ucrChkSpecifyDateBreaks.SetParameter(New RParameter("scale_ydate"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkSpecifyDateBreaks.AddToLinkedControls(ucrInputDateDisplayFormat, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Day Month (1 Jan)")
+        ucrChkSpecifyDateBreaks.AddToLinkedControls(ucrInputDateBreakTime, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Months")
+        ucrChkSpecifyDateBreaks.AddToLinkedControls(ucrNudDateBreakNumber, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkYAxisAngle.SetText("Angle")
         ucrChkYAxisAngle.SetParameter(New RParameter("Yangle"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrNudYAxisAngle.SetMinMax(0, 360)
         ucrNudYAxisAngle.SetParameter(New RParameter("Yangle"))
+        ucrNudYAxisAngle.SetMinMax(0, 360)
 
+        ucrChkYAxisLabelSize.SetText("Size")
+        ucrChkYAxisLabelSize.SetParameter(New RParameter("ySize"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrNudYAxisLabelSize.SetParameter(New RParameter("ySize"))
+        ucrNudYAxisLabelSize.Increment = 0.1
+        ucrNudYAxisLabelSize.Minimum = 0
 
-        ucrChkXAxisAngle.AddToLinkedControls(ucrNudXAxisAngle, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkXAxisLabelSize.AddToLinkedControls(ucrNudXaxisLabelSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkYAxisAngle.AddToLinkedControls(ucrNudYAxisAngle, {True}, bNewLinkedHideIfParameterMissing:=True)
-
-
-        ucrChkInputAxisType.SetText("Axis type")
-        dctXScaledateFormat.Add("None", Chr(34) & "None" & Chr(34))
-        dctXScaledateFormat.Add("Date", Chr(34) & "date" & Chr(34))
-        ucrInputAxisType.SetParameter(New RParameter("scale_xdate"))
-        ucrInputAxisType.SetItems(dctXScaledateFormat)
-        ucrInputAxisType.SetDropDownStyleAsNonEditable()
-
-        ucrChkInputAxisType.SetParameter(New RParameter("scale_xdate"), bNewChangeParameterValue:=False)
-        ucrChkInputAxisType.AddToLinkedControls(ucrInputAxisType, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year(4-digit)-Month-Day")
-
-
-        'Date X Scale
-        dctDateFormat.Add("Year, with century (0000-9999)", Chr(34) & "%Y" & Chr(34))
-        dctDateFormat.Add("Year, without century (00-99)", Chr(34) & "%y" & Chr(34))
-
-        dctDateFormat.Add("month, full (January-December)", Chr(34) & "%B" & Chr(34))
-        dctDateFormat.Add("month, abbreviated (Jan-Dec)", Chr(34) & "%b" & Chr(34))
-        dctDateFormat.Add("month, numeric (01-12)", Chr(34) & "%m" & Chr(34))
-
-        dctDateFormat.Add("day of the month (01-31)", Chr(34) & "%d" & Chr(34))
-        dctDateFormat.Add("day of the month (1-31)", Chr(34) & "%e" & Chr(34))
-        dctDateFormat.Add("day of the week, full (Monday-Sunday)", Chr(34) & "%A" & Chr(34))
-        dctDateFormat.Add("day of the week, abbreviated (Mon-Sun)", Chr(34) & "%a" & Chr(34))
-
-        dctDateFormat.Add("hour, in 24-hour clock (01-24)", Chr(34) & "%H" & Chr(34))
-        dctDateFormat.Add("hour, in 12-hour clock (01-12)", Chr(34) & "%I" & Chr(34))
-        dctDateFormat.Add("hour, in 12-hour clock (1-12)", Chr(34) & "%l" & Chr(34))
-
-        dctDateFormat.Add("minute (00-59)", Chr(34) & "%M" & Chr(34))
-        dctDateFormat.Add("second (00-59)", Chr(34) & "%S" & Chr(34))
-
-        dctDateFormat.Add("Day-Month-Year(4-digit)", Chr(34) & "%d-%m-%Y" & Chr(34))
-        dctDateFormat.Add("Day/Month/Year(4-digit)", Chr(34) & "%d/%m/%Y" & Chr(34))
-        dctDateFormat.Add("Day-Month(Full Name)-Year(4-digit)", Chr(34) & "%d-%B-%Y" & Chr(34))
-        dctDateFormat.Add("Day/Month(Full Name)/Year(4-digit)", Chr(34) & "%d/%B/%Y" & Chr(34))
-
-
-        ucrChkDateLabels.SetText("Date labels")
-        ucrInputComboDateLabel.SetParameter(New RParameter("date_xlabels"))
-        ucrInputComboDateLabel.SetItems(dctDateFormat)
-        ucrInputComboDateLabel.SetDropDownStyleAsEditable(bAdditionsAllowed:=True)
-
-        ucrChkDateLabels.SetParameter(New RParameter("date_xlabels"), bNewChangeParameterValue:=False)
-        ucrChkDateLabels.AddToLinkedControls(ucrInputComboDateLabel, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Year(4-digit)-Month-Day")
-
-        ucrNudDateBreak.SetParameter(New RParameter("byXaxis"))
-
-        dctXScaleFormat.Add("Year", Chr(34) & "year" & Chr(34))
-        dctXScaleFormat.Add("Month", Chr(34) & "month" & Chr(34))
-        dctXScaleFormat.Add("Week", Chr(34) & "week" & Chr(34))
-        dctXScaleFormat.Add("Day", Chr(34) & "day" & Chr(34))
-        dctXScaleFormat.Add("Hour", Chr(34) & "hour" & Chr(34))
-        dctXScaleFormat.Add("Min", Chr(34) & "min" & Chr(34))
-        dctXScaleFormat.Add("Sec", Chr(34) & "sec" & Chr(34))
-        ucrInputComboDateBreak.SetParameter(New RParameter("Xduration"))
-        ucrInputComboDateBreak.SetItems(dctXScaleFormat)
-        'ucrInputComboDateBreak.SetName("year")
-        ucrInputComboDateBreak.SetDropDownStyleAsNonEditable()
-        ucrInputComboDateBreak.AddQuotesIfUnrecognised = False
-
-        ucrChkBreaks.SetText("Breaks")
-        ucrChkBreaks.SetParameter(New RParameter("byXaxis"), bNewChangeParameterValue:=False)
-        ucrChkBreaks.AddToLinkedControls(ucrInputComboDateBreak, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="year")
-        ucrChkBreaks.AddToLinkedControls(ucrNudDateBreak, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="1")
-
-
-
-        ucrDtpLowerLimit.SetParameter(New RParameter("fromXAxis"))
-        ucrDtpUpperLimit.SetParameter(New RParameter("toXAxis"))
-        ucrDtpLowerLimit.ValueAsRDate()
-        ucrDtpUpperLimit.ValueAsRDate()
-
-        ucrDtpUpperLimit.SetLinkedDisplayControl(lblXScalDateUpperLimit)
-        ucrDtpLowerLimit.SetLinkedDisplayControl(lbXscaleDateLowerLimit)
-
-        ucrChkLimits.AddToLinkedControls(ucrDtpLowerLimit, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkLimits.AddToLinkedControls(ucrDtpUpperLimit, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrDtpUpperLimit.SetLinkedDisplayControl(lblXScalDateUpperLimit)
-        ucrDtpLowerLimit.SetLinkedDisplayControl(lbXscaleDateLowerLimit)
-
-        ucrChkLimits.SetText("Limits")
-        ucrChkLimits.SetParameter(New RParameter("fromXAxis"), bNewChangeParameterValue:=False)
-
+        ucrChkYAxisAngle.AddToLinkedControls(ucrNudYAxisAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=90)
+        ucrChkYAxisLabelSize.AddToLinkedControls(ucrNudYAxisLabelSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=12)
 
         ucrChkLegendPosition.SetText("Legend Position")
         ucrChkLegendPosition.AddToLinkedControls(ucrInputLegendPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
@@ -198,10 +203,9 @@ Public Class sdgInventoryPlot
 
         bControlsInitialised = True
     End Sub
-    Public Sub SetRCode(clsInventoryNew As RFunction, Optional strNewAxisType As String = "None", Optional bReset As Boolean = False)
+    Public Sub SetRCode(clsInventoryNew As RFunction, Optional bReset As Boolean = False)
         clsInventory = clsInventoryNew
-        strAxisType = strNewAxisType
-
+        bRCodeSet = False
 
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -210,41 +214,49 @@ Public Class sdgInventoryPlot
             tbInventory.SelectedIndex = 0
         End If
 
-        ucrInputAxisType.SetName(strAxisType)
-
         ucrInputGraphTitle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputGraphSubTitle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputGraphcCaption.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudTitleSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudSubTitleSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudCaptionSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrNudXaxisLabelSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrNudXaxisTitleSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrChkXAxisLabelSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudYAxisTitleSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputXAxisTitle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrInputXTo.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrChkSpecifyDateBreaks.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrNudDateBreakNumber.SetRCode(clsInventoryNew, bReset, bCloneIfNeeded:=True)
+        ucrChkFacetSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrChkYAxisAngle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrInputDateDisplayFormat.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrInputDateBreakTime.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrChkNoOfRowsorColumns.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrNudNumberofRowsOrcolumns.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrNudXAxisLabelSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrInputScale.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrChkYAxisLabelSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudYAxisAngle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrChkBreaks.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrInputAxisType.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrChkLimits.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrChkDateLabels.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrChkInputAxisType.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrNudFacetSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrNudYAxisLabelSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrInputXFrom.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrChkScales.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrChkSpecifyXAxisTickMarks.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrInputXInStepsOf.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrChkLegendPosition.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputYAxisTitle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudXAxisAngle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrChkXAxisAngle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrNudDateBreak.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputLegendPosition.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrInputComboDateBreak.SetRCode(clsInventory, bReset, bCloneIfNeeded:=False)
-        ucrInputComboDateLabel.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrDtpLowerLimit.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrDtpUpperLimit.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrPnlXAxisTitle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         UcrPnlYAxisTitle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrPnlHorizonatalVertical.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
 
+        bRCodeSet = True
 
         SetXLabel()
         SetYLabel()
+        SetFacetParameter()
 
     End Sub
 
@@ -267,16 +279,23 @@ Public Class sdgInventoryPlot
             clsInventory.AddParameter("labelYAxis", Chr(34) & ucrInputYAxisTitle.GetText() & Chr(34))
         End If
     End Sub
-    Private Sub SetAxisTypeControls()
-        strAxisType = ucrInputAxisType.GetText()
-
-        If strAxisType.ToLower = "date" Then
-            'show date panels
-            grpScaleXDate.Show()
-        Else
-            grpScaleXDate.Hide()
+    Public Sub SetFacetParameter()
+        If bRCodeSet Then
+            If rdoHorizontal.Checked Then
+                ucrChkNoOfRowsorColumns.SetText("Fixed Number of Rows")
+                ucrNudNumberofRowsOrcolumns.ChangeParameterName("nrow")
+            ElseIf rdoVertical.Checked Then
+                ucrChkNoOfRowsorColumns.SetText("Fixed Number of Columns")
+                ucrNudNumberofRowsOrcolumns.ChangeParameterName("ncol")
+            End If
+            If ucrChkNoOfRowsorColumns.Checked Then
+                clsInventory.AddParameter(ucrNudNumberofRowsOrcolumns.GetParameter())
+            Else
+                clsInventory.RemoveParameter(ucrNudNumberofRowsOrcolumns.GetParameter())
+            End If
         End If
     End Sub
+
     Private Sub ucrPnlXAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlXAxisTitle.ControlValueChanged, ucrInputXAxisTitle.ControlValueChanged
         SetXLabel()
 
@@ -287,7 +306,12 @@ Public Class sdgInventoryPlot
 
     End Sub
 
-    Private Sub ucrInputAxisType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAxisType.ControlValueChanged
-        SetAxisTypeControls()
+    Private Sub ucrPnlHorizonatalVertical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHorizonatalVertical.ControlValueChanged
+        SetFacetParameter()
+
+    End Sub
+
+    Private Sub ucrChkNoOfRowsorColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoOfRowsorColumns.ControlValueChanged
+        SetFacetParameter()
     End Sub
 End Class

@@ -22,9 +22,23 @@ Partial Class sdgInventoryPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgInventoryPlot))
         Me.tbInventory = New System.Windows.Forms.TabControl()
+        Me.tpFacets = New System.Windows.Forms.TabPage()
+        Me.rdoHorizontal = New System.Windows.Forms.RadioButton()
+        Me.rdoVertical = New System.Windows.Forms.RadioButton()
         Me.tpTitles = New System.Windows.Forms.TabPage()
+        Me.grpyAxisTitle = New System.Windows.Forms.GroupBox()
+        Me.rdoAutoYAxis = New System.Windows.Forms.RadioButton()
+        Me.rdoNoYAxisTitle = New System.Windows.Forms.RadioButton()
+        Me.rdoSpecifyYAxisTitle = New System.Windows.Forms.RadioButton()
+        Me.lblYAxisTitleSize = New System.Windows.Forms.Label()
+        Me.grpAxes = New System.Windows.Forms.GroupBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.rdoAutoXAxis = New System.Windows.Forms.RadioButton()
+        Me.rdoNoTitleXAxisTitle = New System.Windows.Forms.RadioButton()
+        Me.rdoSpecifyXAxisTitle = New System.Windows.Forms.RadioButton()
         Me.grpGraphTitles = New System.Windows.Forms.GroupBox()
         Me.lblCaptionSize = New System.Windows.Forms.Label()
         Me.lblSubTitleSize = New System.Windows.Forms.Label()
@@ -32,64 +46,68 @@ Partial Class sdgInventoryPlot
         Me.lblCaption = New System.Windows.Forms.Label()
         Me.lblSubTitle = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
+        Me.tpXAxis = New System.Windows.Forms.TabPage()
+        Me.grpXAxisLabels = New System.Windows.Forms.GroupBox()
+        Me.lblXFrom = New System.Windows.Forms.Label()
+        Me.lblXInStepsOf = New System.Windows.Forms.Label()
+        Me.lblXTo = New System.Windows.Forms.Label()
+        Me.tpYAxis = New System.Windows.Forms.TabPage()
+        Me.lblDateDisplayFormat = New System.Windows.Forms.Label()
+        Me.tpLegend = New System.Windows.Forms.TabPage()
+        Me.ttInventoryPlot = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrChkFacetSize = New instat.ucrCheck()
+        Me.ucrNudFacetSize = New instat.ucrNud()
+        Me.ucrNudNumberofRowsOrcolumns = New instat.ucrNud()
+        Me.ucrChkNoOfRowsorColumns = New instat.ucrCheck()
+        Me.ucrChkScales = New instat.ucrCheck()
+        Me.ucrInputScale = New instat.ucrInputComboBox()
+        Me.ucrPnlHorizonatalVertical = New instat.UcrPanel()
+        Me.ucrInputYAxisTitle = New instat.ucrInputTextBox()
+        Me.ucrNudYAxisTitleSize = New instat.ucrNud()
+        Me.UcrPnlYAxisTitle = New instat.UcrPanel()
+        Me.ucrNudXaxisTitleSize = New instat.ucrNud()
+        Me.ucrInputXAxisTitle = New instat.ucrInputTextBox()
+        Me.ucrPnlXAxisTitle = New instat.UcrPanel()
+        Me.ucrNudTitleSize = New instat.ucrNud()
         Me.ucrNudCaptionSize = New instat.ucrNud()
         Me.ucrNudSubTitleSize = New instat.ucrNud()
-        Me.ucrNudTitleSize = New instat.ucrNud()
         Me.ucrInputGraphcCaption = New instat.ucrInputTextBox()
         Me.ucrInputGraphTitle = New instat.ucrInputTextBox()
         Me.ucrInputGraphSubTitle = New instat.ucrInputTextBox()
-        Me.tpXAxis = New System.Windows.Forms.TabPage()
-        Me.grpScaleXDate = New System.Windows.Forms.GroupBox()
-        Me.ucrInputComboDateLabel = New instat.ucrInputComboBox()
-        Me.ucrChkDateLabels = New instat.ucrCheck()
-        Me.ucrInputComboDateBreak = New instat.ucrInputComboBox()
-        Me.lbXscaleDateLowerLimit = New System.Windows.Forms.Label()
-        Me.lblXScalDateUpperLimit = New System.Windows.Forms.Label()
-        Me.ucrNudDateBreak = New instat.ucrNud()
-        Me.ucrDtpLowerLimit = New instat.ucrDateTimePicker()
-        Me.ucrDtpUpperLimit = New instat.ucrDateTimePicker()
-        Me.ucrChkLimits = New instat.ucrCheck()
-        Me.ucrChkBreaks = New instat.ucrCheck()
-        Me.ucrInputAxisType = New instat.ucrInputComboBox()
-        Me.grpAxes = New System.Windows.Forms.GroupBox()
-        Me.ucrChkXAxisLabelSize = New instat.ucrCheck()
-        Me.rdoAutoXAxis = New System.Windows.Forms.RadioButton()
-        Me.ucrNudXaxisLabelSize = New instat.ucrNud()
-        Me.ucrInputXAxisTitle = New instat.ucrInputTextBox()
+        Me.ucrNudXAxisLabelSize = New instat.ucrNud()
         Me.ucrChkXAxisAngle = New instat.ucrCheck()
-        Me.rdoNoTitleXAxisTitle = New System.Windows.Forms.RadioButton()
         Me.ucrNudXAxisAngle = New instat.ucrNud()
-        Me.rdoSpecifyXAxisTitle = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlXAxisTitle = New instat.UcrPanel()
-        Me.tpYAxis = New System.Windows.Forms.TabPage()
-        Me.grpyAxisTitle = New System.Windows.Forms.GroupBox()
-        Me.ucrChkYAxisAngle = New instat.ucrCheck()
+        Me.ucrChkXAxisLabelSize = New instat.ucrCheck()
+        Me.ucrChkSpecifyXAxisTickMarks = New instat.ucrCheck()
+        Me.ucrInputXFrom = New instat.ucrInputTextBox()
+        Me.ucrInputXInStepsOf = New instat.ucrInputTextBox()
+        Me.ucrInputXTo = New instat.ucrInputTextBox()
+        Me.ucrNudDateBreakNumber = New instat.ucrNud()
+        Me.ucrInputDateBreakTime = New instat.ucrInputComboBox()
+        Me.ucrChkSpecifyDateBreaks = New instat.ucrCheck()
+        Me.ucrInputDateDisplayFormat = New instat.ucrInputComboBox()
         Me.ucrNudYAxisAngle = New instat.ucrNud()
-        Me.rdoAutoYAxis = New System.Windows.Forms.RadioButton()
-        Me.ucrInputYAxisTitle = New instat.ucrInputTextBox()
-        Me.rdoNoYAxisTitle = New System.Windows.Forms.RadioButton()
-        Me.ucrNudYAxisTitleSize = New instat.ucrNud()
-        Me.rdoSpecifyYAxisTitle = New System.Windows.Forms.RadioButton()
-        Me.UcrPnlYAxisTitle = New instat.UcrPanel()
-        Me.lblYAxisTitleSize = New System.Windows.Forms.Label()
-        Me.tpLegend = New System.Windows.Forms.TabPage()
+        Me.ucrNudYAxisLabelSize = New instat.ucrNud()
+        Me.ucrChkYAxisAngle = New instat.ucrCheck()
+        Me.ucrChkYAxisLabelSize = New instat.ucrCheck()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegendPosition = New instat.ucrCheck()
         Me.ucrButtonsInventoryplot = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkInputAxisType = New instat.ucrCheck()
         Me.tbInventory.SuspendLayout()
+        Me.tpFacets.SuspendLayout()
         Me.tpTitles.SuspendLayout()
+        Me.grpyAxisTitle.SuspendLayout()
+        Me.grpAxes.SuspendLayout()
         Me.grpGraphTitles.SuspendLayout()
         Me.tpXAxis.SuspendLayout()
-        Me.grpScaleXDate.SuspendLayout()
-        Me.grpAxes.SuspendLayout()
+        Me.grpXAxisLabels.SuspendLayout()
         Me.tpYAxis.SuspendLayout()
-        Me.grpyAxisTitle.SuspendLayout()
         Me.tpLegend.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbInventory
         '
+        Me.tbInventory.Controls.Add(Me.tpFacets)
         Me.tbInventory.Controls.Add(Me.tpTitles)
         Me.tbInventory.Controls.Add(Me.tpXAxis)
         Me.tbInventory.Controls.Add(Me.tpYAxis)
@@ -98,15 +116,127 @@ Partial Class sdgInventoryPlot
         Me.tbInventory.Name = "tbInventory"
         Me.tbInventory.SelectedIndex = 0
         '
+        'tpFacets
+        '
+        Me.tpFacets.Controls.Add(Me.ucrChkFacetSize)
+        Me.tpFacets.Controls.Add(Me.ucrNudFacetSize)
+        Me.tpFacets.Controls.Add(Me.ucrNudNumberofRowsOrcolumns)
+        Me.tpFacets.Controls.Add(Me.ucrChkNoOfRowsorColumns)
+        Me.tpFacets.Controls.Add(Me.ucrChkScales)
+        Me.tpFacets.Controls.Add(Me.ucrInputScale)
+        Me.tpFacets.Controls.Add(Me.rdoHorizontal)
+        Me.tpFacets.Controls.Add(Me.rdoVertical)
+        Me.tpFacets.Controls.Add(Me.ucrPnlHorizonatalVertical)
+        resources.ApplyResources(Me.tpFacets, "tpFacets")
+        Me.tpFacets.Name = "tpFacets"
+        Me.tpFacets.UseVisualStyleBackColor = True
+        '
+        'rdoHorizontal
+        '
+        resources.ApplyResources(Me.rdoHorizontal, "rdoHorizontal")
+        Me.rdoHorizontal.Name = "rdoHorizontal"
+        Me.rdoHorizontal.Tag = "Horizontal"
+        Me.rdoHorizontal.UseVisualStyleBackColor = True
+        '
+        'rdoVertical
+        '
+        resources.ApplyResources(Me.rdoVertical, "rdoVertical")
+        Me.rdoVertical.Checked = True
+        Me.rdoVertical.Name = "rdoVertical"
+        Me.rdoVertical.TabStop = True
+        Me.rdoVertical.Tag = "Vertical"
+        Me.rdoVertical.UseVisualStyleBackColor = True
+        '
         'tpTitles
         '
+        Me.tpTitles.Controls.Add(Me.grpyAxisTitle)
+        Me.tpTitles.Controls.Add(Me.grpAxes)
         Me.tpTitles.Controls.Add(Me.grpGraphTitles)
         resources.ApplyResources(Me.tpTitles, "tpTitles")
         Me.tpTitles.Name = "tpTitles"
         Me.tpTitles.UseVisualStyleBackColor = True
         '
+        'grpyAxisTitle
+        '
+        Me.grpyAxisTitle.Controls.Add(Me.rdoAutoYAxis)
+        Me.grpyAxisTitle.Controls.Add(Me.ucrInputYAxisTitle)
+        Me.grpyAxisTitle.Controls.Add(Me.rdoNoYAxisTitle)
+        Me.grpyAxisTitle.Controls.Add(Me.ucrNudYAxisTitleSize)
+        Me.grpyAxisTitle.Controls.Add(Me.rdoSpecifyYAxisTitle)
+        Me.grpyAxisTitle.Controls.Add(Me.UcrPnlYAxisTitle)
+        Me.grpyAxisTitle.Controls.Add(Me.lblYAxisTitleSize)
+        resources.ApplyResources(Me.grpyAxisTitle, "grpyAxisTitle")
+        Me.grpyAxisTitle.Name = "grpyAxisTitle"
+        Me.grpyAxisTitle.TabStop = False
+        '
+        'rdoAutoYAxis
+        '
+        resources.ApplyResources(Me.rdoAutoYAxis, "rdoAutoYAxis")
+        Me.rdoAutoYAxis.Name = "rdoAutoYAxis"
+        Me.rdoAutoYAxis.TabStop = True
+        Me.rdoAutoYAxis.UseVisualStyleBackColor = True
+        '
+        'rdoNoYAxisTitle
+        '
+        resources.ApplyResources(Me.rdoNoYAxisTitle, "rdoNoYAxisTitle")
+        Me.rdoNoYAxisTitle.Name = "rdoNoYAxisTitle"
+        Me.rdoNoYAxisTitle.TabStop = True
+        Me.rdoNoYAxisTitle.UseVisualStyleBackColor = True
+        '
+        'rdoSpecifyYAxisTitle
+        '
+        resources.ApplyResources(Me.rdoSpecifyYAxisTitle, "rdoSpecifyYAxisTitle")
+        Me.rdoSpecifyYAxisTitle.Name = "rdoSpecifyYAxisTitle"
+        Me.rdoSpecifyYAxisTitle.TabStop = True
+        Me.rdoSpecifyYAxisTitle.UseVisualStyleBackColor = True
+        '
+        'lblYAxisTitleSize
+        '
+        resources.ApplyResources(Me.lblYAxisTitleSize, "lblYAxisTitleSize")
+        Me.lblYAxisTitleSize.Name = "lblYAxisTitleSize"
+        '
+        'grpAxes
+        '
+        Me.grpAxes.Controls.Add(Me.Label1)
+        Me.grpAxes.Controls.Add(Me.rdoAutoXAxis)
+        Me.grpAxes.Controls.Add(Me.ucrNudXaxisTitleSize)
+        Me.grpAxes.Controls.Add(Me.ucrInputXAxisTitle)
+        Me.grpAxes.Controls.Add(Me.rdoNoTitleXAxisTitle)
+        Me.grpAxes.Controls.Add(Me.rdoSpecifyXAxisTitle)
+        Me.grpAxes.Controls.Add(Me.ucrPnlXAxisTitle)
+        resources.ApplyResources(Me.grpAxes, "grpAxes")
+        Me.grpAxes.Name = "grpAxes"
+        Me.grpAxes.TabStop = False
+        '
+        'Label1
+        '
+        resources.ApplyResources(Me.Label1, "Label1")
+        Me.Label1.Name = "Label1"
+        '
+        'rdoAutoXAxis
+        '
+        resources.ApplyResources(Me.rdoAutoXAxis, "rdoAutoXAxis")
+        Me.rdoAutoXAxis.Name = "rdoAutoXAxis"
+        Me.rdoAutoXAxis.TabStop = True
+        Me.rdoAutoXAxis.UseVisualStyleBackColor = True
+        '
+        'rdoNoTitleXAxisTitle
+        '
+        resources.ApplyResources(Me.rdoNoTitleXAxisTitle, "rdoNoTitleXAxisTitle")
+        Me.rdoNoTitleXAxisTitle.Name = "rdoNoTitleXAxisTitle"
+        Me.rdoNoTitleXAxisTitle.TabStop = True
+        Me.rdoNoTitleXAxisTitle.UseVisualStyleBackColor = True
+        '
+        'rdoSpecifyXAxisTitle
+        '
+        resources.ApplyResources(Me.rdoSpecifyXAxisTitle, "rdoSpecifyXAxisTitle")
+        Me.rdoSpecifyXAxisTitle.Name = "rdoSpecifyXAxisTitle"
+        Me.rdoSpecifyXAxisTitle.TabStop = True
+        Me.rdoSpecifyXAxisTitle.UseVisualStyleBackColor = True
+        '
         'grpGraphTitles
         '
+        Me.grpGraphTitles.Controls.Add(Me.ucrNudTitleSize)
         Me.grpGraphTitles.Controls.Add(Me.lblCaptionSize)
         Me.grpGraphTitles.Controls.Add(Me.lblSubTitleSize)
         Me.grpGraphTitles.Controls.Add(Me.lblTitleSize)
@@ -115,7 +245,6 @@ Partial Class sdgInventoryPlot
         Me.grpGraphTitles.Controls.Add(Me.lblTitle)
         Me.grpGraphTitles.Controls.Add(Me.ucrNudCaptionSize)
         Me.grpGraphTitles.Controls.Add(Me.ucrNudSubTitleSize)
-        Me.grpGraphTitles.Controls.Add(Me.ucrNudTitleSize)
         Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphcCaption)
         Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphTitle)
         Me.grpGraphTitles.Controls.Add(Me.ucrInputGraphSubTitle)
@@ -153,6 +282,186 @@ Partial Class sdgInventoryPlot
         resources.ApplyResources(Me.lblTitle, "lblTitle")
         Me.lblTitle.Name = "lblTitle"
         '
+        'tpXAxis
+        '
+        Me.tpXAxis.Controls.Add(Me.grpXAxisLabels)
+        resources.ApplyResources(Me.tpXAxis, "tpXAxis")
+        Me.tpXAxis.Name = "tpXAxis"
+        Me.tpXAxis.UseVisualStyleBackColor = True
+        '
+        'grpXAxisLabels
+        '
+        Me.grpXAxisLabels.Controls.Add(Me.ucrNudXAxisLabelSize)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrChkXAxisAngle)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrNudXAxisAngle)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrChkXAxisLabelSize)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrChkSpecifyXAxisTickMarks)
+        Me.grpXAxisLabels.Controls.Add(Me.lblXFrom)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrInputXFrom)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrInputXInStepsOf)
+        Me.grpXAxisLabels.Controls.Add(Me.ucrInputXTo)
+        Me.grpXAxisLabels.Controls.Add(Me.lblXInStepsOf)
+        Me.grpXAxisLabels.Controls.Add(Me.lblXTo)
+        resources.ApplyResources(Me.grpXAxisLabels, "grpXAxisLabels")
+        Me.grpXAxisLabels.Name = "grpXAxisLabels"
+        Me.grpXAxisLabels.TabStop = False
+        '
+        'lblXFrom
+        '
+        resources.ApplyResources(Me.lblXFrom, "lblXFrom")
+        Me.lblXFrom.Name = "lblXFrom"
+        '
+        'lblXInStepsOf
+        '
+        resources.ApplyResources(Me.lblXInStepsOf, "lblXInStepsOf")
+        Me.lblXInStepsOf.Name = "lblXInStepsOf"
+        '
+        'lblXTo
+        '
+        resources.ApplyResources(Me.lblXTo, "lblXTo")
+        Me.lblXTo.Name = "lblXTo"
+        '
+        'tpYAxis
+        '
+        Me.tpYAxis.Controls.Add(Me.lblDateDisplayFormat)
+        Me.tpYAxis.Controls.Add(Me.ucrNudDateBreakNumber)
+        Me.tpYAxis.Controls.Add(Me.ucrInputDateBreakTime)
+        Me.tpYAxis.Controls.Add(Me.ucrChkSpecifyDateBreaks)
+        Me.tpYAxis.Controls.Add(Me.ucrInputDateDisplayFormat)
+        Me.tpYAxis.Controls.Add(Me.ucrNudYAxisAngle)
+        Me.tpYAxis.Controls.Add(Me.ucrNudYAxisLabelSize)
+        Me.tpYAxis.Controls.Add(Me.ucrChkYAxisAngle)
+        Me.tpYAxis.Controls.Add(Me.ucrChkYAxisLabelSize)
+        resources.ApplyResources(Me.tpYAxis, "tpYAxis")
+        Me.tpYAxis.Name = "tpYAxis"
+        Me.tpYAxis.UseVisualStyleBackColor = True
+        '
+        'lblDateDisplayFormat
+        '
+        resources.ApplyResources(Me.lblDateDisplayFormat, "lblDateDisplayFormat")
+        Me.lblDateDisplayFormat.Name = "lblDateDisplayFormat"
+        '
+        'tpLegend
+        '
+        Me.tpLegend.Controls.Add(Me.ucrInputLegendPosition)
+        Me.tpLegend.Controls.Add(Me.ucrChkLegendPosition)
+        resources.ApplyResources(Me.tpLegend, "tpLegend")
+        Me.tpLegend.Name = "tpLegend"
+        Me.tpLegend.UseVisualStyleBackColor = True
+        '
+        'ttInventoryPlot
+        '
+        Me.ttInventoryPlot.AutoPopDelay = 10000
+        Me.ttInventoryPlot.InitialDelay = 500
+        Me.ttInventoryPlot.ReshowDelay = 100
+        '
+        'ucrChkFacetSize
+        '
+        Me.ucrChkFacetSize.Checked = False
+        resources.ApplyResources(Me.ucrChkFacetSize, "ucrChkFacetSize")
+        Me.ucrChkFacetSize.Name = "ucrChkFacetSize"
+        '
+        'ucrNudFacetSize
+        '
+        Me.ucrNudFacetSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFacetSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudFacetSize, "ucrNudFacetSize")
+        Me.ucrNudFacetSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFacetSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFacetSize.Name = "ucrNudFacetSize"
+        Me.ucrNudFacetSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudNumberofRowsOrcolumns
+        '
+        Me.ucrNudNumberofRowsOrcolumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberofRowsOrcolumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNumberofRowsOrcolumns, "ucrNudNumberofRowsOrcolumns")
+        Me.ucrNudNumberofRowsOrcolumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberofRowsOrcolumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberofRowsOrcolumns.Name = "ucrNudNumberofRowsOrcolumns"
+        Me.ucrNudNumberofRowsOrcolumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkNoOfRowsorColumns
+        '
+        Me.ucrChkNoOfRowsorColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkNoOfRowsorColumns, "ucrChkNoOfRowsorColumns")
+        Me.ucrChkNoOfRowsorColumns.Name = "ucrChkNoOfRowsorColumns"
+        '
+        'ucrChkScales
+        '
+        Me.ucrChkScales.Checked = False
+        resources.ApplyResources(Me.ucrChkScales, "ucrChkScales")
+        Me.ucrChkScales.Name = "ucrChkScales"
+        '
+        'ucrInputScale
+        '
+        Me.ucrInputScale.AddQuotesIfUnrecognised = True
+        Me.ucrInputScale.GetSetSelectedIndex = -1
+        Me.ucrInputScale.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputScale, "ucrInputScale")
+        Me.ucrInputScale.Name = "ucrInputScale"
+        '
+        'ucrPnlHorizonatalVertical
+        '
+        resources.ApplyResources(Me.ucrPnlHorizonatalVertical, "ucrPnlHorizonatalVertical")
+        Me.ucrPnlHorizonatalVertical.Name = "ucrPnlHorizonatalVertical"
+        '
+        'ucrInputYAxisTitle
+        '
+        Me.ucrInputYAxisTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputYAxisTitle.IsMultiline = False
+        Me.ucrInputYAxisTitle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYAxisTitle, "ucrInputYAxisTitle")
+        Me.ucrInputYAxisTitle.Name = "ucrInputYAxisTitle"
+        '
+        'ucrNudYAxisTitleSize
+        '
+        Me.ucrNudYAxisTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudYAxisTitleSize, "ucrNudYAxisTitleSize")
+        Me.ucrNudYAxisTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudYAxisTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisTitleSize.Name = "ucrNudYAxisTitleSize"
+        Me.ucrNudYAxisTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'UcrPnlYAxisTitle
+        '
+        resources.ApplyResources(Me.UcrPnlYAxisTitle, "UcrPnlYAxisTitle")
+        Me.UcrPnlYAxisTitle.Name = "UcrPnlYAxisTitle"
+        '
+        'ucrNudXaxisTitleSize
+        '
+        Me.ucrNudXaxisTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXaxisTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudXaxisTitleSize, "ucrNudXaxisTitleSize")
+        Me.ucrNudXaxisTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudXaxisTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXaxisTitleSize.Name = "ucrNudXaxisTitleSize"
+        Me.ucrNudXaxisTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputXAxisTitle
+        '
+        Me.ucrInputXAxisTitle.AddQuotesIfUnrecognised = True
+        Me.ucrInputXAxisTitle.IsMultiline = False
+        Me.ucrInputXAxisTitle.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXAxisTitle, "ucrInputXAxisTitle")
+        Me.ucrInputXAxisTitle.Name = "ucrInputXAxisTitle"
+        '
+        'ucrPnlXAxisTitle
+        '
+        resources.ApplyResources(Me.ucrPnlXAxisTitle, "ucrPnlXAxisTitle")
+        Me.ucrPnlXAxisTitle.Name = "ucrPnlXAxisTitle"
+        '
+        'ucrNudTitleSize
+        '
+        Me.ucrNudTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudTitleSize, "ucrNudTitleSize")
+        Me.ucrNudTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudTitleSize.Name = "ucrNudTitleSize"
+        Me.ucrNudTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrNudCaptionSize
         '
         Me.ucrNudCaptionSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -172,16 +481,6 @@ Partial Class sdgInventoryPlot
         Me.ucrNudSubTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSubTitleSize.Name = "ucrNudSubTitleSize"
         Me.ucrNudSubTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudTitleSize
-        '
-        Me.ucrNudTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudTitleSize, "ucrNudTitleSize")
-        Me.ucrNudTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudTitleSize.Name = "ucrNudTitleSize"
-        Me.ucrNudTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrInputGraphcCaption
         '
@@ -207,166 +506,21 @@ Partial Class sdgInventoryPlot
         resources.ApplyResources(Me.ucrInputGraphSubTitle, "ucrInputGraphSubTitle")
         Me.ucrInputGraphSubTitle.Name = "ucrInputGraphSubTitle"
         '
-        'tpXAxis
+        'ucrNudXAxisLabelSize
         '
-        Me.tpXAxis.Controls.Add(Me.ucrChkInputAxisType)
-        Me.tpXAxis.Controls.Add(Me.grpScaleXDate)
-        Me.tpXAxis.Controls.Add(Me.ucrInputAxisType)
-        Me.tpXAxis.Controls.Add(Me.grpAxes)
-        resources.ApplyResources(Me.tpXAxis, "tpXAxis")
-        Me.tpXAxis.Name = "tpXAxis"
-        Me.tpXAxis.UseVisualStyleBackColor = True
-        '
-        'grpScaleXDate
-        '
-        Me.grpScaleXDate.Controls.Add(Me.ucrInputComboDateLabel)
-        Me.grpScaleXDate.Controls.Add(Me.ucrChkDateLabels)
-        Me.grpScaleXDate.Controls.Add(Me.ucrInputComboDateBreak)
-        Me.grpScaleXDate.Controls.Add(Me.lbXscaleDateLowerLimit)
-        Me.grpScaleXDate.Controls.Add(Me.lblXScalDateUpperLimit)
-        Me.grpScaleXDate.Controls.Add(Me.ucrNudDateBreak)
-        Me.grpScaleXDate.Controls.Add(Me.ucrDtpLowerLimit)
-        Me.grpScaleXDate.Controls.Add(Me.ucrDtpUpperLimit)
-        Me.grpScaleXDate.Controls.Add(Me.ucrChkLimits)
-        Me.grpScaleXDate.Controls.Add(Me.ucrChkBreaks)
-        resources.ApplyResources(Me.grpScaleXDate, "grpScaleXDate")
-        Me.grpScaleXDate.Name = "grpScaleXDate"
-        Me.grpScaleXDate.TabStop = False
-        '
-        'ucrInputComboDateLabel
-        '
-        Me.ucrInputComboDateLabel.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboDateLabel.GetSetSelectedIndex = -1
-        Me.ucrInputComboDateLabel.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboDateLabel, "ucrInputComboDateLabel")
-        Me.ucrInputComboDateLabel.Name = "ucrInputComboDateLabel"
-        '
-        'ucrChkDateLabels
-        '
-        Me.ucrChkDateLabels.Checked = False
-        resources.ApplyResources(Me.ucrChkDateLabels, "ucrChkDateLabels")
-        Me.ucrChkDateLabels.Name = "ucrChkDateLabels"
-        '
-        'ucrInputComboDateBreak
-        '
-        Me.ucrInputComboDateBreak.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboDateBreak.GetSetSelectedIndex = -1
-        Me.ucrInputComboDateBreak.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboDateBreak, "ucrInputComboDateBreak")
-        Me.ucrInputComboDateBreak.Name = "ucrInputComboDateBreak"
-        '
-        'lbXscaleDateLowerLimit
-        '
-        resources.ApplyResources(Me.lbXscaleDateLowerLimit, "lbXscaleDateLowerLimit")
-        Me.lbXscaleDateLowerLimit.Name = "lbXscaleDateLowerLimit"
-        '
-        'lblXScalDateUpperLimit
-        '
-        resources.ApplyResources(Me.lblXScalDateUpperLimit, "lblXScalDateUpperLimit")
-        Me.lblXScalDateUpperLimit.Name = "lblXScalDateUpperLimit"
-        '
-        'ucrNudDateBreak
-        '
-        Me.ucrNudDateBreak.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDateBreak.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudDateBreak, "ucrNudDateBreak")
-        Me.ucrNudDateBreak.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDateBreak.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDateBreak.Name = "ucrNudDateBreak"
-        Me.ucrNudDateBreak.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrDtpLowerLimit
-        '
-        resources.ApplyResources(Me.ucrDtpLowerLimit, "ucrDtpLowerLimit")
-        Me.ucrDtpLowerLimit.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDtpLowerLimit.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDtpLowerLimit.Name = "ucrDtpLowerLimit"
-        '
-        'ucrDtpUpperLimit
-        '
-        resources.ApplyResources(Me.ucrDtpUpperLimit, "ucrDtpUpperLimit")
-        Me.ucrDtpUpperLimit.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDtpUpperLimit.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDtpUpperLimit.Name = "ucrDtpUpperLimit"
-        '
-        'ucrChkLimits
-        '
-        Me.ucrChkLimits.Checked = False
-        resources.ApplyResources(Me.ucrChkLimits, "ucrChkLimits")
-        Me.ucrChkLimits.Name = "ucrChkLimits"
-        '
-        'ucrChkBreaks
-        '
-        Me.ucrChkBreaks.Checked = False
-        resources.ApplyResources(Me.ucrChkBreaks, "ucrChkBreaks")
-        Me.ucrChkBreaks.Name = "ucrChkBreaks"
-        '
-        'ucrInputAxisType
-        '
-        Me.ucrInputAxisType.AddQuotesIfUnrecognised = True
-        Me.ucrInputAxisType.GetSetSelectedIndex = -1
-        Me.ucrInputAxisType.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputAxisType, "ucrInputAxisType")
-        Me.ucrInputAxisType.Name = "ucrInputAxisType"
-        '
-        'grpAxes
-        '
-        Me.grpAxes.Controls.Add(Me.ucrChkXAxisLabelSize)
-        Me.grpAxes.Controls.Add(Me.rdoAutoXAxis)
-        Me.grpAxes.Controls.Add(Me.ucrNudXaxisLabelSize)
-        Me.grpAxes.Controls.Add(Me.ucrInputXAxisTitle)
-        Me.grpAxes.Controls.Add(Me.ucrChkXAxisAngle)
-        Me.grpAxes.Controls.Add(Me.rdoNoTitleXAxisTitle)
-        Me.grpAxes.Controls.Add(Me.ucrNudXAxisAngle)
-        Me.grpAxes.Controls.Add(Me.rdoSpecifyXAxisTitle)
-        Me.grpAxes.Controls.Add(Me.ucrPnlXAxisTitle)
-        resources.ApplyResources(Me.grpAxes, "grpAxes")
-        Me.grpAxes.Name = "grpAxes"
-        Me.grpAxes.TabStop = False
-        '
-        'ucrChkXAxisLabelSize
-        '
-        Me.ucrChkXAxisLabelSize.Checked = False
-        resources.ApplyResources(Me.ucrChkXAxisLabelSize, "ucrChkXAxisLabelSize")
-        Me.ucrChkXAxisLabelSize.Name = "ucrChkXAxisLabelSize"
-        '
-        'rdoAutoXAxis
-        '
-        resources.ApplyResources(Me.rdoAutoXAxis, "rdoAutoXAxis")
-        Me.rdoAutoXAxis.Name = "rdoAutoXAxis"
-        Me.rdoAutoXAxis.TabStop = True
-        Me.rdoAutoXAxis.UseVisualStyleBackColor = True
-        '
-        'ucrNudXaxisLabelSize
-        '
-        Me.ucrNudXaxisLabelSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudXaxisLabelSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudXaxisLabelSize, "ucrNudXaxisLabelSize")
-        Me.ucrNudXaxisLabelSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudXaxisLabelSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudXaxisLabelSize.Name = "ucrNudXaxisLabelSize"
-        Me.ucrNudXaxisLabelSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputXAxisTitle
-        '
-        Me.ucrInputXAxisTitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputXAxisTitle.IsMultiline = False
-        Me.ucrInputXAxisTitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputXAxisTitle, "ucrInputXAxisTitle")
-        Me.ucrInputXAxisTitle.Name = "ucrInputXAxisTitle"
+        Me.ucrNudXAxisLabelSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAxisLabelSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudXAxisLabelSize, "ucrNudXAxisLabelSize")
+        Me.ucrNudXAxisLabelSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudXAxisLabelSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudXAxisLabelSize.Name = "ucrNudXAxisLabelSize"
+        Me.ucrNudXAxisLabelSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkXAxisAngle
         '
         Me.ucrChkXAxisAngle.Checked = False
         resources.ApplyResources(Me.ucrChkXAxisAngle, "ucrChkXAxisAngle")
         Me.ucrChkXAxisAngle.Name = "ucrChkXAxisAngle"
-        '
-        'rdoNoTitleXAxisTitle
-        '
-        resources.ApplyResources(Me.rdoNoTitleXAxisTitle, "rdoNoTitleXAxisTitle")
-        Me.rdoNoTitleXAxisTitle.Name = "rdoNoTitleXAxisTitle"
-        Me.rdoNoTitleXAxisTitle.TabStop = True
-        Me.rdoNoTitleXAxisTitle.UseVisualStyleBackColor = True
         '
         'ucrNudXAxisAngle
         '
@@ -378,45 +532,73 @@ Partial Class sdgInventoryPlot
         Me.ucrNudXAxisAngle.Name = "ucrNudXAxisAngle"
         Me.ucrNudXAxisAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'rdoSpecifyXAxisTitle
+        'ucrChkXAxisLabelSize
         '
-        resources.ApplyResources(Me.rdoSpecifyXAxisTitle, "rdoSpecifyXAxisTitle")
-        Me.rdoSpecifyXAxisTitle.Name = "rdoSpecifyXAxisTitle"
-        Me.rdoSpecifyXAxisTitle.TabStop = True
-        Me.rdoSpecifyXAxisTitle.UseVisualStyleBackColor = True
+        Me.ucrChkXAxisLabelSize.Checked = False
+        resources.ApplyResources(Me.ucrChkXAxisLabelSize, "ucrChkXAxisLabelSize")
+        Me.ucrChkXAxisLabelSize.Name = "ucrChkXAxisLabelSize"
         '
-        'ucrPnlXAxisTitle
+        'ucrChkSpecifyXAxisTickMarks
         '
-        resources.ApplyResources(Me.ucrPnlXAxisTitle, "ucrPnlXAxisTitle")
-        Me.ucrPnlXAxisTitle.Name = "ucrPnlXAxisTitle"
+        Me.ucrChkSpecifyXAxisTickMarks.Checked = False
+        resources.ApplyResources(Me.ucrChkSpecifyXAxisTickMarks, "ucrChkSpecifyXAxisTickMarks")
+        Me.ucrChkSpecifyXAxisTickMarks.Name = "ucrChkSpecifyXAxisTickMarks"
         '
-        'tpYAxis
+        'ucrInputXFrom
         '
-        Me.tpYAxis.Controls.Add(Me.grpyAxisTitle)
-        resources.ApplyResources(Me.tpYAxis, "tpYAxis")
-        Me.tpYAxis.Name = "tpYAxis"
-        Me.tpYAxis.UseVisualStyleBackColor = True
+        Me.ucrInputXFrom.AddQuotesIfUnrecognised = True
+        Me.ucrInputXFrom.IsMultiline = False
+        Me.ucrInputXFrom.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXFrom, "ucrInputXFrom")
+        Me.ucrInputXFrom.Name = "ucrInputXFrom"
         '
-        'grpyAxisTitle
+        'ucrInputXInStepsOf
         '
-        Me.grpyAxisTitle.Controls.Add(Me.ucrChkYAxisAngle)
-        Me.grpyAxisTitle.Controls.Add(Me.ucrNudYAxisAngle)
-        Me.grpyAxisTitle.Controls.Add(Me.rdoAutoYAxis)
-        Me.grpyAxisTitle.Controls.Add(Me.ucrInputYAxisTitle)
-        Me.grpyAxisTitle.Controls.Add(Me.rdoNoYAxisTitle)
-        Me.grpyAxisTitle.Controls.Add(Me.ucrNudYAxisTitleSize)
-        Me.grpyAxisTitle.Controls.Add(Me.rdoSpecifyYAxisTitle)
-        Me.grpyAxisTitle.Controls.Add(Me.UcrPnlYAxisTitle)
-        Me.grpyAxisTitle.Controls.Add(Me.lblYAxisTitleSize)
-        resources.ApplyResources(Me.grpyAxisTitle, "grpyAxisTitle")
-        Me.grpyAxisTitle.Name = "grpyAxisTitle"
-        Me.grpyAxisTitle.TabStop = False
+        Me.ucrInputXInStepsOf.AddQuotesIfUnrecognised = True
+        Me.ucrInputXInStepsOf.IsMultiline = False
+        Me.ucrInputXInStepsOf.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXInStepsOf, "ucrInputXInStepsOf")
+        Me.ucrInputXInStepsOf.Name = "ucrInputXInStepsOf"
         '
-        'ucrChkYAxisAngle
+        'ucrInputXTo
         '
-        Me.ucrChkYAxisAngle.Checked = False
-        resources.ApplyResources(Me.ucrChkYAxisAngle, "ucrChkYAxisAngle")
-        Me.ucrChkYAxisAngle.Name = "ucrChkYAxisAngle"
+        Me.ucrInputXTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputXTo.IsMultiline = False
+        Me.ucrInputXTo.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXTo, "ucrInputXTo")
+        Me.ucrInputXTo.Name = "ucrInputXTo"
+        '
+        'ucrNudDateBreakNumber
+        '
+        Me.ucrNudDateBreakNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDateBreakNumber.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudDateBreakNumber, "ucrNudDateBreakNumber")
+        Me.ucrNudDateBreakNumber.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDateBreakNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDateBreakNumber.Name = "ucrNudDateBreakNumber"
+        Me.ucrNudDateBreakNumber.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputDateBreakTime
+        '
+        Me.ucrInputDateBreakTime.AddQuotesIfUnrecognised = True
+        Me.ucrInputDateBreakTime.GetSetSelectedIndex = -1
+        Me.ucrInputDateBreakTime.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDateBreakTime, "ucrInputDateBreakTime")
+        Me.ucrInputDateBreakTime.Name = "ucrInputDateBreakTime"
+        '
+        'ucrChkSpecifyDateBreaks
+        '
+        Me.ucrChkSpecifyDateBreaks.Checked = False
+        resources.ApplyResources(Me.ucrChkSpecifyDateBreaks, "ucrChkSpecifyDateBreaks")
+        Me.ucrChkSpecifyDateBreaks.Name = "ucrChkSpecifyDateBreaks"
+        '
+        'ucrInputDateDisplayFormat
+        '
+        Me.ucrInputDateDisplayFormat.AddQuotesIfUnrecognised = True
+        Me.ucrInputDateDisplayFormat.GetSetSelectedIndex = -1
+        Me.ucrInputDateDisplayFormat.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDateDisplayFormat, "ucrInputDateDisplayFormat")
+        Me.ucrInputDateDisplayFormat.Name = "ucrInputDateDisplayFormat"
         '
         'ucrNudYAxisAngle
         '
@@ -428,62 +610,27 @@ Partial Class sdgInventoryPlot
         Me.ucrNudYAxisAngle.Name = "ucrNudYAxisAngle"
         Me.ucrNudYAxisAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'rdoAutoYAxis
+        'ucrNudYAxisLabelSize
         '
-        resources.ApplyResources(Me.rdoAutoYAxis, "rdoAutoYAxis")
-        Me.rdoAutoYAxis.Name = "rdoAutoYAxis"
-        Me.rdoAutoYAxis.TabStop = True
-        Me.rdoAutoYAxis.UseVisualStyleBackColor = True
+        Me.ucrNudYAxisLabelSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisLabelSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudYAxisLabelSize, "ucrNudYAxisLabelSize")
+        Me.ucrNudYAxisLabelSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudYAxisLabelSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisLabelSize.Name = "ucrNudYAxisLabelSize"
+        Me.ucrNudYAxisLabelSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputYAxisTitle
+        'ucrChkYAxisAngle
         '
-        Me.ucrInputYAxisTitle.AddQuotesIfUnrecognised = True
-        Me.ucrInputYAxisTitle.IsMultiline = False
-        Me.ucrInputYAxisTitle.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYAxisTitle, "ucrInputYAxisTitle")
-        Me.ucrInputYAxisTitle.Name = "ucrInputYAxisTitle"
+        Me.ucrChkYAxisAngle.Checked = False
+        resources.ApplyResources(Me.ucrChkYAxisAngle, "ucrChkYAxisAngle")
+        Me.ucrChkYAxisAngle.Name = "ucrChkYAxisAngle"
         '
-        'rdoNoYAxisTitle
+        'ucrChkYAxisLabelSize
         '
-        resources.ApplyResources(Me.rdoNoYAxisTitle, "rdoNoYAxisTitle")
-        Me.rdoNoYAxisTitle.Name = "rdoNoYAxisTitle"
-        Me.rdoNoYAxisTitle.TabStop = True
-        Me.rdoNoYAxisTitle.UseVisualStyleBackColor = True
-        '
-        'ucrNudYAxisTitleSize
-        '
-        Me.ucrNudYAxisTitleSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudYAxisTitleSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudYAxisTitleSize, "ucrNudYAxisTitleSize")
-        Me.ucrNudYAxisTitleSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudYAxisTitleSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudYAxisTitleSize.Name = "ucrNudYAxisTitleSize"
-        Me.ucrNudYAxisTitleSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'rdoSpecifyYAxisTitle
-        '
-        resources.ApplyResources(Me.rdoSpecifyYAxisTitle, "rdoSpecifyYAxisTitle")
-        Me.rdoSpecifyYAxisTitle.Name = "rdoSpecifyYAxisTitle"
-        Me.rdoSpecifyYAxisTitle.TabStop = True
-        Me.rdoSpecifyYAxisTitle.UseVisualStyleBackColor = True
-        '
-        'UcrPnlYAxisTitle
-        '
-        resources.ApplyResources(Me.UcrPnlYAxisTitle, "UcrPnlYAxisTitle")
-        Me.UcrPnlYAxisTitle.Name = "UcrPnlYAxisTitle"
-        '
-        'lblYAxisTitleSize
-        '
-        resources.ApplyResources(Me.lblYAxisTitleSize, "lblYAxisTitleSize")
-        Me.lblYAxisTitleSize.Name = "lblYAxisTitleSize"
-        '
-        'tpLegend
-        '
-        Me.tpLegend.Controls.Add(Me.ucrInputLegendPosition)
-        Me.tpLegend.Controls.Add(Me.ucrChkLegendPosition)
-        resources.ApplyResources(Me.tpLegend, "tpLegend")
-        Me.tpLegend.Name = "tpLegend"
-        Me.tpLegend.UseVisualStyleBackColor = True
+        Me.ucrChkYAxisLabelSize.Checked = False
+        resources.ApplyResources(Me.ucrChkYAxisLabelSize, "ucrChkYAxisLabelSize")
+        Me.ucrChkYAxisLabelSize.Name = "ucrChkYAxisLabelSize"
         '
         'ucrInputLegendPosition
         '
@@ -504,12 +651,6 @@ Partial Class sdgInventoryPlot
         resources.ApplyResources(Me.ucrButtonsInventoryplot, "ucrButtonsInventoryplot")
         Me.ucrButtonsInventoryplot.Name = "ucrButtonsInventoryplot"
         '
-        'ucrChkInputAxisType
-        '
-        Me.ucrChkInputAxisType.Checked = False
-        resources.ApplyResources(Me.ucrChkInputAxisType, "ucrChkInputAxisType")
-        Me.ucrChkInputAxisType.Name = "ucrChkInputAxisType"
-        '
         'sdgInventoryPlot
         '
         resources.ApplyResources(Me, "$this")
@@ -521,17 +662,20 @@ Partial Class sdgInventoryPlot
         Me.MinimizeBox = False
         Me.Name = "sdgInventoryPlot"
         Me.tbInventory.ResumeLayout(False)
+        Me.tpFacets.ResumeLayout(False)
+        Me.tpFacets.PerformLayout()
         Me.tpTitles.ResumeLayout(False)
+        Me.grpyAxisTitle.ResumeLayout(False)
+        Me.grpyAxisTitle.PerformLayout()
+        Me.grpAxes.ResumeLayout(False)
+        Me.grpAxes.PerformLayout()
         Me.grpGraphTitles.ResumeLayout(False)
         Me.grpGraphTitles.PerformLayout()
         Me.tpXAxis.ResumeLayout(False)
-        Me.grpScaleXDate.ResumeLayout(False)
-        Me.grpScaleXDate.PerformLayout()
-        Me.grpAxes.ResumeLayout(False)
-        Me.grpAxes.PerformLayout()
+        Me.grpXAxisLabels.ResumeLayout(False)
+        Me.grpXAxisLabels.PerformLayout()
         Me.tpYAxis.ResumeLayout(False)
-        Me.grpyAxisTitle.ResumeLayout(False)
-        Me.grpyAxisTitle.PerformLayout()
+        Me.tpYAxis.PerformLayout()
         Me.tpLegend.ResumeLayout(False)
         Me.ResumeLayout(False)
 
@@ -541,30 +685,31 @@ Partial Class sdgInventoryPlot
     Friend WithEvents tbInventory As TabControl
     Friend WithEvents tpTitles As TabPage
     Friend WithEvents grpGraphTitles As GroupBox
-    Friend WithEvents lblCaptionSize As Label
-    Friend WithEvents lblSubTitleSize As Label
-    Friend WithEvents lblTitleSize As Label
     Friend WithEvents lblCaption As Label
     Friend WithEvents lblSubTitle As Label
     Friend WithEvents lblTitle As Label
     Friend WithEvents ucrNudCaptionSize As ucrNud
     Friend WithEvents ucrNudSubTitleSize As ucrNud
-    Friend WithEvents ucrNudTitleSize As ucrNud
     Friend WithEvents ucrInputGraphcCaption As ucrInputTextBox
     Friend WithEvents ucrInputGraphTitle As ucrInputTextBox
     Friend WithEvents ucrInputGraphSubTitle As ucrInputTextBox
     Friend WithEvents tpXAxis As TabPage
-    Friend WithEvents ucrChkXAxisAngle As ucrCheck
-    Friend WithEvents ucrNudXAxisAngle As ucrNud
+    Friend WithEvents tpYAxis As TabPage
+    Friend WithEvents tpLegend As TabPage
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrChkLegendPosition As ucrCheck
+    Friend WithEvents lblCaptionSize As Label
+    Friend WithEvents lblSubTitleSize As Label
+    Friend WithEvents lblTitleSize As Label
+    Friend WithEvents ucrNudTitleSize As ucrNud
+    Friend WithEvents ttInventoryPlot As ToolTip
     Friend WithEvents grpAxes As GroupBox
     Friend WithEvents rdoAutoXAxis As RadioButton
+    Friend WithEvents ucrNudXaxisTitleSize As ucrNud
     Friend WithEvents ucrInputXAxisTitle As ucrInputTextBox
     Friend WithEvents rdoNoTitleXAxisTitle As RadioButton
     Friend WithEvents rdoSpecifyXAxisTitle As RadioButton
     Friend WithEvents ucrPnlXAxisTitle As UcrPanel
-    Friend WithEvents ucrChkXAxisLabelSize As ucrCheck
-    Friend WithEvents ucrNudXaxisLabelSize As ucrNud
-    Friend WithEvents tpYAxis As TabPage
     Friend WithEvents grpyAxisTitle As GroupBox
     Friend WithEvents rdoAutoYAxis As RadioButton
     Friend WithEvents ucrInputYAxisTitle As ucrInputTextBox
@@ -573,22 +718,36 @@ Partial Class sdgInventoryPlot
     Friend WithEvents rdoSpecifyYAxisTitle As RadioButton
     Friend WithEvents UcrPnlYAxisTitle As UcrPanel
     Friend WithEvents lblYAxisTitleSize As Label
-    Friend WithEvents tpLegend As TabPage
-    Friend WithEvents ucrInputAxisType As ucrInputComboBox
-    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
-    Friend WithEvents ucrChkLegendPosition As ucrCheck
-    Friend WithEvents ucrChkYAxisAngle As ucrCheck
+    Friend WithEvents grpXAxisLabels As GroupBox
+    Friend WithEvents ucrChkXAxisLabelSize As ucrCheck
+    Friend WithEvents ucrChkSpecifyXAxisTickMarks As ucrCheck
+    Friend WithEvents lblXFrom As Label
+    Friend WithEvents ucrInputXFrom As ucrInputTextBox
+    Friend WithEvents ucrInputXInStepsOf As ucrInputTextBox
+    Friend WithEvents ucrInputXTo As ucrInputTextBox
+    Friend WithEvents lblXInStepsOf As Label
+    Friend WithEvents lblXTo As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents ucrChkXAxisAngle As ucrCheck
+    Friend WithEvents ucrNudXAxisAngle As ucrNud
+    Friend WithEvents ucrNudXAxisLabelSize As ucrNud
+    Friend WithEvents tpFacets As TabPage
+    Friend WithEvents rdoHorizontal As RadioButton
+    Friend WithEvents rdoVertical As RadioButton
+    Friend WithEvents ucrPnlHorizonatalVertical As UcrPanel
+    Friend WithEvents ucrInputScale As ucrInputComboBox
+    Friend WithEvents ucrChkScales As ucrCheck
+    Friend WithEvents ucrNudNumberofRowsOrcolumns As ucrNud
+    Friend WithEvents ucrChkNoOfRowsorColumns As ucrCheck
+    Friend WithEvents ucrNudFacetSize As ucrNud
+    Friend WithEvents ucrChkFacetSize As ucrCheck
+    Friend WithEvents lblDateDisplayFormat As Label
+    Friend WithEvents ucrNudDateBreakNumber As ucrNud
+    Friend WithEvents ucrInputDateBreakTime As ucrInputComboBox
+    Friend WithEvents ucrChkSpecifyDateBreaks As ucrCheck
+    Friend WithEvents ucrInputDateDisplayFormat As ucrInputComboBox
     Friend WithEvents ucrNudYAxisAngle As ucrNud
-    Friend WithEvents grpScaleXDate As GroupBox
-    Friend WithEvents ucrInputComboDateLabel As ucrInputComboBox
-    Friend WithEvents ucrChkDateLabels As ucrCheck
-    Friend WithEvents ucrInputComboDateBreak As ucrInputComboBox
-    Friend WithEvents lbXscaleDateLowerLimit As Label
-    Friend WithEvents lblXScalDateUpperLimit As Label
-    Friend WithEvents ucrNudDateBreak As ucrNud
-    Friend WithEvents ucrDtpLowerLimit As ucrDateTimePicker
-    Friend WithEvents ucrDtpUpperLimit As ucrDateTimePicker
-    Friend WithEvents ucrChkLimits As ucrCheck
-    Friend WithEvents ucrChkBreaks As ucrCheck
-    Friend WithEvents ucrChkInputAxisType As ucrCheck
+    Friend WithEvents ucrNudYAxisLabelSize As ucrNud
+    Friend WithEvents ucrChkYAxisAngle As ucrCheck
+    Friend WithEvents ucrChkYAxisLabelSize As ucrCheck
 End Class
