@@ -63,6 +63,7 @@ Public Class dlgExtremesClimatic
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 203
+        Dim dctColours As New Dictionary(Of String, String)
 
         ucrReceiverYear.Selector = ucrSelectorClimaticExtremes
         ucrReceiverYear.SetClimaticType("year")
@@ -162,11 +163,15 @@ Public Class dlgExtremesClimatic
         ucrPnlExtremesType.AddToLinkedControls(ucrChkFirstDate, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrChkLastDate, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrChkNDates, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkMrlPlot.AddToLinkedControls({ucrNudColumns, ucrSavePlot}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkMrlPlot.AddToLinkedControls({ucrNudColumns, ucrSavePlot, ucrInputMin, ucrInputMax, ucrInputFill, ucrInputColours, ucrChkRugPlot}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMaxMin.SetLinkedDisplayControl(lblNewColName)
         ucrChkMissingValues.SetLinkedDisplayControl(grpMinMaxOptions)
         ucrInputThresholdValue.SetLinkedDisplayControl(grpPeakOptions)
         ucrNudColumns.SetLinkedDisplayControl(lblColumns)
+        ucrInputMin.SetLinkedDisplayControl(lblMinimum)
+        ucrInputMax.SetLinkedDisplayControl(lblTo)
+        ucrInputFill.SetLinkedDisplayControl(lblFill)
+        ucrInputColours.SetLinkedDisplayControl(lblColour)
 
         ucrInputFilterPreview.IsReadOnly = True
 
@@ -177,6 +182,35 @@ Public Class dlgExtremesClimatic
         ucrNudColumns.SetParameter(New RParameter("ncol", 3))
         ucrNudColumns.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
         ucrNudColumns.Increment = 1
+
+        ucrInputMin.SetParameter(New RParameter("umin", 4))
+        ucrInputMin.SetValidationTypeAsNumeric()
+        ucrInputMin.AddQuotesIfUnrecognised=False
+
+        ucrInputMax.SetParameter(New RParameter("umax", 5))
+        ucrInputMax.SetValidationTypeAsNumeric()
+        ucrInputMax.AddQuotesIfUnrecognised = False
+
+        dctColours.Add("Black", Chr(34) & "black" & Chr(34))
+        dctColours.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctColours.Add("Red", Chr(34) & "red" & Chr(34))
+        dctColours.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctColours.Add("Green", Chr(34) & "green" & Chr(34))
+        dctColours.Add("Violet", Chr(34) & "violet" & Chr(34))
+
+        ucrInputFill.SetParameter(New RParameter("fill", 6))
+        ucrInputFill.SetItems(dctColours)
+        ucrInputFill.bAllowNonConditionValues = True
+        ucrInputFill.SetRDefault(Chr(34) & "red" & Chr(34))
+
+        ucrInputColours.SetParameter(New RParameter("col", 7))
+        ucrInputColours.SetItems(dctColours)
+        ucrInputColours.bAllowNonConditionValues = True
+        ucrInputColours.SetRDefault(Chr(34) & "black" & Chr(34))
+
+        ucrChkRugPlot.SetParameter(New RParameter("rug", 8))
+        ucrChkRugPlot.SetText("Add Rug Plot")
+        ucrChkRugPlot.SetRDefault("TRUE")
 
         ucrSavePlot.SetDataFrameSelector(ucrSelectorClimaticExtremes.ucrAvailableDataFrames)
         ucrSavePlot.SetPrefix("mrlplot")
@@ -370,7 +404,6 @@ Public Class dlgExtremesClimatic
         ucrPnlMaxMin.SetRCode(clsMinMaxFuncExp, bReset)
         ucrReceiverElement.SetRCode(clsMinMaxFuncExp, bReset)
 
-
         ucrChkMissingValues.SetRCode(clsMinMaxFuncExp, bReset)
 
         ucrInputSave.SetRCode(clsMinMaxSummariseFunction, bReset)
@@ -382,9 +415,15 @@ Public Class dlgExtremesClimatic
         ucrChkLastDate.SetRCode(clsCombinationSubCalcs, bReset)
         ucrSelectorClimaticExtremes.SetRCode(clsPlotMrlFunction, bReset)
         ucrReceiverStation.SetRCode(clsPlotMrlFunction, bReset)
-        ucrSavePlot.SetRCode(clsPlotMrlFunction, bReset)
         ucrNudColumns.SetRCode(clsPlotMrlFunction, bReset)
         ucrChkMrlPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        ucrInputMin.SetRCode(clsPlotMrlFunction, bReset)
+        ucrInputMax.SetRCode(clsPlotMrlFunction, bReset)
+        ucrInputFill.SetRCode(clsPlotMrlFunction, bReset)
+        ucrInputColours.SetRCode(clsPlotMrlFunction, bReset)
+        ucrChkRugPlot.SetRCode(clsPlotMrlFunction, bReset)
+
+        ucrSavePlot.SetRCode(clsPlotMrlFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
