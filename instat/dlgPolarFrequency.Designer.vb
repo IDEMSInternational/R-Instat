@@ -27,7 +27,7 @@ Partial Class dlgPolarFrequency
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lblStatistic = New System.Windows.Forms.Label()
         Me.lblWindSpeed = New System.Windows.Forms.Label()
         Me.lblWindDirection = New System.Windows.Forms.Label()
         Me.ucrReceiverWindDirection = New instat.ucrReceiverSingle()
@@ -42,16 +42,17 @@ Partial Class dlgPolarFrequency
         Me.ucrSelectorPolarFrequency = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrChkIncludePollutant = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblPollutant
         '
         Me.lblPollutant.AutoSize = True
-        Me.lblPollutant.Location = New System.Drawing.Point(283, 119)
+        Me.lblPollutant.Location = New System.Drawing.Point(283, 149)
         Me.lblPollutant.Name = "lblPollutant"
-        Me.lblPollutant.Size = New System.Drawing.Size(99, 13)
+        Me.lblPollutant.Size = New System.Drawing.Size(51, 13)
         Me.lblPollutant.TabIndex = 11
-        Me.lblPollutant.Text = "Pollutant (Optional):"
+        Me.lblPollutant.Text = "Pollutant:"
         '
         'lblColor
         '
@@ -76,27 +77,27 @@ Partial Class dlgPolarFrequency
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(254, 207)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(34, 13)
+        Me.Label4.Size = New System.Drawing.Size(37, 13)
         Me.Label4.TabIndex = 15
-        Me.Label4.Text = "Type:"
+        Me.Label4.Text = "Facet:"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(254, 256)
+        Me.Label5.Location = New System.Drawing.Point(254, 233)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(74, 13)
         Me.Label5.TabIndex = 17
         Me.Label5.Text = "Minimum Bins:"
         '
-        'Label6
+        'lblStatistic
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(254, 231)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(47, 13)
-        Me.Label6.TabIndex = 16
-        Me.Label6.Text = "Statistic:"
+        Me.lblStatistic.AutoSize = True
+        Me.lblStatistic.Location = New System.Drawing.Point(253, 259)
+        Me.lblStatistic.Name = "lblStatistic"
+        Me.lblStatistic.Size = New System.Drawing.Size(47, 13)
+        Me.lblStatistic.TabIndex = 16
+        Me.lblStatistic.Text = "Statistic:"
         '
         'lblWindSpeed
         '
@@ -152,7 +153,7 @@ Partial Class dlgPolarFrequency
         '
         Me.ucrNudMinimumBins.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinimumBins.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinimumBins.Location = New System.Drawing.Point(348, 257)
+        Me.ucrNudMinimumBins.Location = New System.Drawing.Point(348, 229)
         Me.ucrNudMinimumBins.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMinimumBins.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinimumBins.Name = "ucrNudMinimumBins"
@@ -195,7 +196,7 @@ Partial Class dlgPolarFrequency
         Me.ucrInputStatistic.AddQuotesIfUnrecognised = True
         Me.ucrInputStatistic.GetSetSelectedIndex = -1
         Me.ucrInputStatistic.IsReadOnly = False
-        Me.ucrInputStatistic.Location = New System.Drawing.Point(324, 229)
+        Me.ucrInputStatistic.Location = New System.Drawing.Point(323, 257)
         Me.ucrInputStatistic.Name = "ucrInputStatistic"
         Me.ucrInputStatistic.Size = New System.Drawing.Size(75, 21)
         Me.ucrInputStatistic.TabIndex = 7
@@ -203,7 +204,7 @@ Partial Class dlgPolarFrequency
         'ucrReceiverPollutant
         '
         Me.ucrReceiverPollutant.frmParent = Me
-        Me.ucrReceiverPollutant.Location = New System.Drawing.Point(283, 134)
+        Me.ucrReceiverPollutant.Location = New System.Drawing.Point(283, 162)
         Me.ucrReceiverPollutant.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPollutant.Name = "ucrReceiverPollutant"
         Me.ucrReceiverPollutant.Selector = Nothing
@@ -238,11 +239,20 @@ Partial Class dlgPolarFrequency
         Me.ucrSaveGraph.Size = New System.Drawing.Size(403, 34)
         Me.ucrSaveGraph.TabIndex = 19
         '
+        'ucrChkIncludePollutant
+        '
+        Me.ucrChkIncludePollutant.Checked = False
+        Me.ucrChkIncludePollutant.Location = New System.Drawing.Point(283, 126)
+        Me.ucrChkIncludePollutant.Name = "ucrChkIncludePollutant"
+        Me.ucrChkIncludePollutant.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkIncludePollutant.TabIndex = 20
+        '
         'dlgPolarFrequency
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(422, 415)
+        Me.Controls.Add(Me.ucrChkIncludePollutant)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrReceiverWindDirection)
         Me.Controls.Add(Me.lblWindDirection)
@@ -255,7 +265,7 @@ Partial Class dlgPolarFrequency
         Me.Controls.Add(Me.ucrInputType)
         Me.Controls.Add(Me.ucrInputStatistic)
         Me.Controls.Add(Me.ucrReceiverPollutant)
-        Me.Controls.Add(Me.Label6)
+        Me.Controls.Add(Me.lblStatistic)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
@@ -281,7 +291,7 @@ Partial Class dlgPolarFrequency
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents Label6 As Label
+    Friend WithEvents lblStatistic As Label
     Friend WithEvents ucrReceiverPollutant As ucrReceiverSingle
     Friend WithEvents ucrChkTransform As ucrCheck
     Friend WithEvents ucrNudMinimumBins As ucrNud
@@ -294,4 +304,5 @@ Partial Class dlgPolarFrequency
     Friend WithEvents ucrReceiverWindSpeed As ucrReceiverSingle
     Friend WithEvents lblWindSpeed As Label
     Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrChkIncludePollutant As ucrCheck
 End Class

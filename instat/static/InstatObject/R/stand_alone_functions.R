@@ -1541,14 +1541,14 @@ slope <- function(y, x) {
 
 
 
-polar_frequency <- function(mydata, ws_name, wd_name, statistic = "frequency", pollutant = "nox",...){
+polar_frequency <- function(mydata, ws_name, wd_name,...){
   if (!("ws" %in% colnames(mydata))){ 
     mydata <- dplyr::rename(mydata, ws = !!ws_name)
   }
   if(!("wd" %in% colnames(mydata))){    
     mydata <- dplyr::rename(mydata, wd = !!wd_name)
   }
-  openair::polarFreq(mydata = mydata, statistic = statistic, pollutant = pollutant,...)
+  openair::polarFreq(mydata = mydata,...)
 }
 
 

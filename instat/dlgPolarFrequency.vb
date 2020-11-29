@@ -106,6 +106,14 @@ Public Class dlgPolarFrequency
         ucrInputColor.SetItems(dctColor)
         ucrInputColor.SetDropDownStyleAsNonEditable()
 
+        ucrChkIncludePollutant.AddParameterPresentCondition("True", "statistic", "True")
+
+        ucrChkIncludePollutant.SetText("Include Pollutant")
+        ucrChkIncludePollutant.AddToLinkedControls(ucrReceiverPollutant, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverPollutant.SetLinkedDisplayControl(lblPollutant)
+        ucrChkIncludePollutant.AddToLinkedControls(ucrInputStatistic, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=Chr(34) & "frequency" & Chr(34))
+        ucrInputStatistic.SetLinkedDisplayControl(lblStatistic)
+
         ucrSaveGraph.SetPrefix("polarfrequency")
         ucrSaveGraph.SetDataFrameSelector(ucrSelectorPolarFrequency.ucrAvailableDataFrames)
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -116,7 +124,6 @@ Public Class dlgPolarFrequency
 
     Private Sub SetDefaults()
         clsPolarFrequencyFunction = New RFunction
-        clsPolarFrequencyFunction.AddParameter("statistic", Chr(34) & "frequency" & Chr(34), iPosition:=8)
         clsPolarFrequencyFunction.AddParameter("type", Chr(34) & "default" & Chr(34), iPosition:=5)
         clsPolarFrequencyFunction.AddParameter("key.position", Chr(34) & "right" & Chr(34), iPosition:=7)
         clsPolarFrequencyFunction.AddParameter("cols", Chr(34) & "default" & Chr(34), iPosition:=9)
