@@ -235,7 +235,7 @@ Partial Class dlgExtremesClimatic
         Me.cmdDoyRange.Location = New System.Drawing.Point(13, 459)
         Me.cmdDoyRange.Name = "cmdDoyRange"
         Me.cmdDoyRange.Size = New System.Drawing.Size(105, 26)
-        Me.cmdDoyRange.TabIndex = 26
+        Me.cmdDoyRange.TabIndex = 16
         Me.cmdDoyRange.Tag = ""
         Me.cmdDoyRange.Text = "Day Range"
         Me.cmdDoyRange.UseVisualStyleBackColor = True
@@ -286,7 +286,7 @@ Partial Class dlgExtremesClimatic
         Me.lblNewColName.Location = New System.Drawing.Point(16, 491)
         Me.lblNewColName.Name = "lblNewColName"
         Me.lblNewColName.Size = New System.Drawing.Size(119, 13)
-        Me.lblNewColName.TabIndex = 17
+        Me.lblNewColName.TabIndex = 18
         Me.lblNewColName.Text = "New Column Name:"
         '
         'lblNewDFName
@@ -306,7 +306,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrInputFilterPreview.Location = New System.Drawing.Point(121, 462)
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
         Me.ucrInputFilterPreview.Size = New System.Drawing.Size(242, 22)
-        Me.ucrInputFilterPreview.TabIndex = 16
+        Me.ucrInputFilterPreview.TabIndex = 17
         '
         'ucrInputSave
         '
@@ -316,7 +316,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrInputSave.Location = New System.Drawing.Point(140, 487)
         Me.ucrInputSave.Name = "ucrInputSave"
         Me.ucrInputSave.Size = New System.Drawing.Size(170, 21)
-        Me.ucrInputSave.TabIndex = 18
+        Me.ucrInputSave.TabIndex = 19
         '
         'ucrReceiverElement
         '
@@ -394,7 +394,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrBase.Location = New System.Drawing.Point(10, 510)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(398, 52)
-        Me.ucrBase.TabIndex = 19
+        Me.ucrBase.TabIndex = 20
         '
         'ucrPnlExtremesType
         '
@@ -423,7 +423,7 @@ Partial Class dlgExtremesClimatic
         Me.grpPeakOptions.Location = New System.Drawing.Point(9, 237)
         Me.grpPeakOptions.Name = "grpPeakOptions"
         Me.grpPeakOptions.Size = New System.Drawing.Size(236, 194)
-        Me.grpPeakOptions.TabIndex = 27
+        Me.grpPeakOptions.TabIndex = 14
         Me.grpPeakOptions.TabStop = False
         Me.grpPeakOptions.Text = "Options"
         '
@@ -546,7 +546,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrSavePlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlot.Name = "ucrSavePlot"
         Me.ucrSavePlot.Size = New System.Drawing.Size(254, 24)
-        Me.ucrSavePlot.TabIndex = 29
+        Me.ucrSavePlot.TabIndex = 15
         '
         'dlgExtremesClimatic
         '
