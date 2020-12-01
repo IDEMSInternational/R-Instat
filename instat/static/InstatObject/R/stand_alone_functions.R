@@ -1541,9 +1541,12 @@ slope <- function(y, x) {
 
 
 
-polar_frequency <- function(mydata, ws_name, wd_name,...){
+polar_frequency <- function(mydata, ws_name, wd_name, date_name,...){
   if (!("ws" %in% colnames(mydata))){ 
     mydata <- dplyr::rename(mydata, ws = !!ws_name)
+  }
+  if (!("date" %in% colnames(mydata))){ 
+    mydata <- dplyr::rename(mydata, date = !!date_name)
   }
   if(!("wd" %in% colnames(mydata))){    
     mydata <- dplyr::rename(mydata, wd = !!wd_name)
