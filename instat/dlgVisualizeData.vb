@@ -23,7 +23,13 @@ Public Class dlgVisualizeData
     Private clsVisMissFunction As New RFunction
     Private clsVisGuessFunction As New RFunction
     Private clsCurrBaseFunction As New RFunction
-    Private clsSamplingFraction As New RFunction
+    Private clsFilterFunction As New RFunction
+    Private clsAsLogicalFunction As New RFunction
+    Private clsRBinonFunction As New RFunction
+    Private clsNRowFunction As New RFunction
+
+    Private clsPipeOperator As New ROperator
+
 
     Private Sub dlgVisualizeData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -56,7 +62,7 @@ Public Class dlgVisualizeData
         ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisMiss, "vis_miss")
         ucrPnlVisualizeData.AddFunctionNamesCondition(rdoVisGuess, "vis_guess")
 
-        ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortVariables, {rdoVisDat, rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlVisualizeData.AddToLinkedControls(ucrChkSortVariables, {rdoVisDat, rdoVisMiss}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrInputComboboxPalette, {rdoVisDat, rdoVisGuess}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlVisualizeData.AddToLinkedControls(ucrNudMaximumSize, {rdoVisDat, rdoVisMiss}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.9)
         ucrPnlSelectData.AddRadioButton(rdoWholeDataFrame)
@@ -82,7 +88,7 @@ Public Class dlgVisualizeData
         ucrNudMaximumSize.Maximum = Integer.MaxValue
 
         ' Not yet implemented
-        ucrNudSamplingFunction.SetParameter(New RParameter("prop", 1))
+        ucrNudSamplingFunction.SetParameter(New RParameter("prob", 2))
         ucrNudSamplingFunction.DecimalPlaces = 2
         ucrNudSamplingFunction.Increment = 0.01
         ucrNudSamplingFunction.Minimum = 0.01
@@ -93,6 +99,9 @@ Public Class dlgVisualizeData
         ucrReceiverVisualizeData.Selector = ucrSelectorVisualizeData
         ucrReceiverVisualizeData.bForceAsDataFrame = True
         ucrReceiverVisualizeData.SetMeAsReceiver()
+
+        ucrSelectorVisualizeData.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
+        ucrSelectorVisualizeData.SetParameterIsrfunction()
 
         ucrInputComboboxPalette.SetLinkedDisplayControl(lblPaltte)
         lstMaximumSizeControls.Add(lblMillionDataPoints)
@@ -113,7 +122,12 @@ Public Class dlgVisualizeData
         clsVisDatFunction = New RFunction
         clsVisMissFunction = New RFunction
         clsVisGuessFunction = New RFunction
-        clsSamplingFraction = New RFunction
+        clsFilterFunction = New RFunction
+        clsRBinonFunction = New RFunction
+        clsAsLogicalFunction = New RFunction
+        clsNRowFunction = New RFunction
+
+        clsPipeOperator = New ROperator
         ucrSelectorVisualizeData.Reset()
         ucrSaveGraph.Reset()
 
@@ -135,6 +149,23 @@ Public Class dlgVisualizeData
         clsVisMissFunction.AddParameter("show_perc_col", "TRUE", iPosition:=4)
         clsVisMissFunction.AddParameter("warn_large_data", "TRUE", iPosition:=6)
 
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter(clsRFunctionParameter:=clsFilterFunction, iPosition:=1)
+
+        clsFilterFunction.SetPackageName("dplyr")
+        clsFilterFunction.SetRCommand("filter")
+        clsFilterFunction.AddParameter(clsRFunctionParameter:=clsAsLogicalFunction, iPosition:=0)
+
+        clsAsLogicalFunction.SetRCommand("as.logical")
+        clsAsLogicalFunction.AddParameter("x", clsRFunctionParameter:=clsRBinonFunction, bIncludeArgumentName:=False, iPosition:=0)
+
+        clsRBinonFunction.SetRCommand("rbinom")
+        clsRBinonFunction.AddParameter("n", clsRFunctionParameter:=clsNRowFunction, iPosition:=0)
+        clsRBinonFunction.AddParameter("size", "1", iPosition:=1)
+        clsRBinonFunction.AddParameter("prob", "1", iPosition:=2)
+
+        clsNRowFunction.SetRCommand("nrow")
+
         clsVisGuessFunction.SetPackageName("visdat")
         clsVisGuessFunction.SetRCommand("vis_guess")
         clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
@@ -144,8 +175,11 @@ Public Class dlgVisualizeData
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0), 1)
-        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0), 2)
+        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsNRowFunction, New RParameter("x", 0, bNewIncludeArgumentName:=False), 1)
+        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0), 2)
+        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0), 3)
+        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsPipeOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), 4)
+        ucrSelectorVisualizeData.AddAdditionalCodeParameterPair(clsPipeOperator, New RParameter("x", 0, bNewIncludeArgumentName:=False), 1)
         ucrSaveGraph.AddAdditionalRCode(clsVisMissFunction, iAdditionalPairNo:=1)
         ucrSaveGraph.AddAdditionalRCode(clsVisGuessFunction, iAdditionalPairNo:=2)
         ucrInputComboboxPalette.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("palette", 1), iAdditionalPairNo:=1)
@@ -154,13 +188,15 @@ Public Class dlgVisualizeData
         ucrPnlSelectData.SetRCode(clsCurrBaseFunction, bReset)
         ucrPnlVisualizeData.SetRCode(clsCurrBaseFunction, bReset)
         ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
+        ucrSelectorVisualizeData.SetRCode(clsNRowFunction, bReset)
         ucrSaveGraph.SetRCode(clsVisDatFunction, bReset)
         ucrInputComboboxPalette.SetRCode(clsVisDatFunction, bReset)
         ucrChkSortVariables.SetRCode(clsVisDatFunction)
+        ucrNudSamplingFunction.SetRCode(clsRBinonFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" OrElse (rdoSelectedColumn.Checked AndAlso ucrReceiverVisualizeData.IsEmpty) OrElse Not ucrSaveGraph.IsComplete() OrElse (ucrNudMaximumSize.Visible = True AndAlso ucrNudMaximumSize.GetText = "") Then
+        If ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text = "" OrElse (rdoSelectedColumn.Checked AndAlso ucrReceiverVisualizeData.IsEmpty) OrElse Not ucrSaveGraph.IsComplete() OrElse (ucrNudMaximumSize.Visible = True AndAlso ucrNudMaximumSize.GetText = "") OrElse (ucrNudSamplingFunction.GetText = "") Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -175,7 +211,7 @@ Public Class dlgVisualizeData
         MaximumDataPoint()
     End Sub
 
-    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVisualizeData.ControlContentsChanged, ucrSelectorVisualizeData.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrNudMaximumSize.ControlValueChanged
+    Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVisualizeData.ControlContentsChanged, ucrSelectorVisualizeData.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrNudMaximumSize.ControlValueChanged, ucrNudSamplingFunction.ControlValueChanged
         TestOkEnabled()
     End Sub
 
@@ -196,21 +232,17 @@ Public Class dlgVisualizeData
 
     Private Sub AddRemoveDataHideOptionsButtons()
         If rdoWholeDataFrame.Checked Then
-            clsCurrBaseFunction.RemoveParameterByName("x")
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = False
             ucrSelectorVisualizeData.btnAdd.Visible = False
             ucrSelectorVisualizeData.btnDataOptions.Visible = False
-            clsCurrBaseFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
         ElseIf rdoSelectedColumn.Checked Then
-            clsCurrBaseFunction.RemoveParameterByName("data")
             ucrSelectorVisualizeData.lstAvailableVariable.Visible = True
             ucrSelectorVisualizeData.btnAdd.Visible = True
             ucrSelectorVisualizeData.btnDataOptions.Visible = True
-            clsCurrBaseFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVisualizeData.GetVariables(), iPosition:=0)
         End If
     End Sub
 
-    Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrSelectorVisualizeData.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged, ucrInputComboboxPalette.ControlValueChanged
+    Private Sub ucrControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlSelectData.ControlValueChanged, ucrSelectorVisualizeData.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged
         AddRemoveDataHideOptionsButtons()
     End Sub
 
@@ -230,5 +262,35 @@ Public Class dlgVisualizeData
 
     Private Sub ucrNudMaximumSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudMaximumSize.ControlValueChanged
         MaximumDataPoint()
+    End Sub
+
+    Private Sub ucrNudSamplingFunction_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudSamplingFunction.ControlValueChanged, ucrReceiverVisualizeData.ControlValueChanged
+        If rdoSelectedColumn.Checked AndAlso Not ucrReceiverVisualizeData.IsEmpty Then
+            clsVisDatFunction.RemoveParameterByName("data")
+            clsVisGuessFunction.RemoveParameterByName("data")
+            clsVisMissFunction.RemoveParameterByName("data")
+            If ucrNudSamplingFunction.Value = 1 Then
+                clsVisDatFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisGuessFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisMissFunction.AddParameter("x", ucrReceiverVisualizeData.GetParameter.strArgumentValue, bIncludeArgumentName:=False, iPosition:=0)
+            ElseIf ucrNudSamplingFunction.Value < 1 Then
+                clsVisDatFunction.AddParameter("x", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+                clsVisGuessFunction.AddParameter("x", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+                clsVisMissFunction.AddParameter("x", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+            End If
+        ElseIf rdoWholeDataFrame.Checked Then
+            clsVisDatFunction.RemoveParameterByName("x")
+            clsVisGuessFunction.RemoveParameterByName("x")
+            clsVisMissFunction.RemoveParameterByName("x")
+            If ucrNudSamplingFunction.Value = 1 Then
+                clsVisDatFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+                clsVisMissFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
+            ElseIf ucrNudSamplingFunction.Value < 1 Then
+                clsVisDatFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+                clsVisGuessFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+                clsVisMissFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
+            End If
+        End If
     End Sub
 End Class
