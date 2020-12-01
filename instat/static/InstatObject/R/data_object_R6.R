@@ -2455,7 +2455,7 @@ DataSheet$set("public","append_climatic_types", function(types) {
 
 #Method for creating inventory plot
 
-DataSheet$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, facet_size = NULL, graph_title = "Inventory Plot", graph_subtitle = NULL, graph_caption = NULL, title_size = NULL, subtitle_size = NULL, caption_size = NULL, labelXAxis, labelYAxis, xSize = NULL, ySize = NULL, Xangle = NULL, Yangle = NULL, fromXAxis = NULL, toXAxis = NULL, byXaxis = NULL, date_ylabels = NULL, scale_xdate = FALSE, legend_position = NULL, xlabelsize = NULL, ylabelsize = NULL, scale = "none", dir = NULL, nrow = NULL, ncol = NULL, scale_ydate = FALSE, date_ybreaks = NULL, step = NULL, key_colours = c("red", "grey"), display_rain_days = FALSE, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"))) {
+DataSheet$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, facet_size = NULL, graph_title = "Inventory Plot", graph_subtitle = NULL, graph_caption = NULL, title_size = NULL, subtitle_size = NULL, caption_size = NULL, labelXAxis, labelYAxis, xSize = NULL, ySize = NULL, Xangle = NULL, Yangle = NULL, fromXAxis = NULL, toXAxis = NULL, byXaxis = NULL, date_ylabels, scale_xdate = FALSE, legend_position = NULL, xlabelsize = NULL, ylabelsize = NULL, scale = "none", dir = NULL, nrow = NULL, ncol = NULL, scale_ydate = FALSE, date_ybreaks, step = NULL, key_colours = c("red", "grey"), display_rain_days = FALSE, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"))) {
   if(missing(date_col)) stop("Date columns must be specified.")
   if(missing(element_cols)) stop("Element column(s) must be specified.")
   if(!lubridate::is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type Date."))
@@ -2584,7 +2584,7 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
 	      }else if(scale == "none"){g <- g + ggplot2::facet_grid(facets = variable~.)}
     }
      if(scale_xdate){ g <- g + ggplot2::scale_x_continuous(breaks=seq(from = fromXAxis, to = toXAxis, by = byXaxis)) } 
-     if(scale_ydate && !is.null(date_ybreaks) && !is.null(date_ylabels)){ g <- g + ggplot2::scale_y_date(date_breaks = paste0(step," ",date_ybreaks), date_labels = date_ylabels) } 
+     if(scale_ydate && !missing(date_ybreaks) && !missing(date_ylabels)){ g <- g + ggplot2::scale_y_date(date_breaks = paste0(step," ",date_ybreaks), date_labels = date_ylabels) } 
   }
   else {
     if(!is.null(station_col) && length(element_cols) > 1) {
