@@ -389,6 +389,7 @@ Public Class dlgClimsoftWizard
             'stations combobox
             dctStationColumns.Add("Station IDs", Chr(34) & "stationId" & Chr(34))
             dctStationColumns.Add("Station Names", Chr(34) & "stationName" & Chr(34))
+            dctStationColumns.Add("Station Qualifiers", Chr(34) & "qualifier" & Chr(34))
             parentControls.ucrComboBoxStations.SetParameter(New RParameter("stationfiltercolumn", 0))
             parentControls.ucrComboBoxStations.SetItems(dctStationColumns)
             parentControls.ucrComboBoxStations.SetRDefault(Chr(34) & "stationId" & Chr(34))
@@ -443,7 +444,8 @@ Public Class dlgClimsoftWizard
 
             'sql query to get station values of the selected column from station table
             Dim strQuery As String
-            strQuery = "SELECT " & dctStationColumns.Item(parentControls.ucrComboBoxStations.GetText).Trim("""") & " FROM station;"
+            Dim strSelectedColumn As String = dctStationColumns.Item(parentControls.ucrComboBoxStations.GetText).Trim("""")
+            strQuery = "SELECT DISTINCT " & strSelectedColumn & " FROM station WHERE " & strSelectedColumn & " IS NOT NULL AND " & strSelectedColumn & " <> '';"
 
             If parentControls.ucrReceiverMultipleStations.strDatabaseQuery = strQuery Then
                 Return False
@@ -660,7 +662,10 @@ Public Class dlgClimsoftWizard
                 SetRCodeForControls(Reset)
             Else
                 'refresh the receiver query
-                SetElementsRecieverQuery()
+                If SetElementsRecieverQuery() Then
+                    'will also execute the receiver's sql query and also raise ControlsContents_ControlContentsChanged
+                    parentControls.ucrReceiverMultipleElements.SetMeAsReceiver()
+                End If
             End If
             Reset = False
         End Sub
