@@ -55,6 +55,7 @@ Public Class ucrDataView
         grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
         grdData.SheetTabWidth = 450
         SetRFunctions()
+        HideOrShowRecentPanel()
     End Sub
 
     'Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
@@ -234,21 +235,21 @@ Public Class ucrDataView
         Else
             clsInsertRows.RemoveParameterByName("before")
         End If
-        RunScriptFromDataView(clsInsertRows.ToScript(), strComment:="Right Click menu: Insert row(s) After")
+        RunScriptFromDataView(clsInsertRows.ToScript(), strComment:="Right click menu: Insert row(s) After")
     End Sub
 
     Private Sub mnuInsertRowsBefore_Click(sender As Object, e As EventArgs) Handles mnuInsertRowsBefore.Click
         clsInsertRows.AddParameter("start_row", grdCurrSheet.RowHeaders(grdCurrSheet.SelectionRange.Row).Text)
         clsInsertRows.AddParameter("number_rows", grdData.CurrentWorksheet.SelectionRange.Rows)
         clsInsertRows.AddParameter("before", "TRUE")
-        RunScriptFromDataView(clsInsertRows.ToScript(), strComment:="Right Click menu: Insert row(s) Before")
+        RunScriptFromDataView(clsInsertRows.ToScript(), strComment:="Right click menu: Insert row(s) Before")
     End Sub
 
     Private Sub mnuDeleteRows_Click(sender As Object, e As EventArgs) Handles mnuDeleteRows.Click
         Dim Delete = MsgBox("Are you sure you want to delete these row(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Row(s)")
         If Delete = DialogResult.Yes Then
             clsDeleteRows.AddParameter("row_names", SelectedRows())
-            RunScriptFromDataView(clsDeleteRows.ToScript(), strComment:="Right Click menu: Delete row(s)")
+            RunScriptFromDataView(clsDeleteRows.ToScript(), strComment:="Right click menu: Delete row(s)")
         End If
     End Sub
 
@@ -345,9 +346,14 @@ Public Class ucrDataView
                 lblRowDisplay.Text = lblRowDisplay.Text & " (" & frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, False) & ")"
             End If
             lblRowDisplay.Text = lblRowDisplay.Text & " | Showing " & grdCurrSheet.ColumnCount & " of " & iColumnCount & " columns"
+            'hide startup menu items
+            panelAllMenuItems.Visible = False
         Else
             frmMain.tstatus.Text = "No data loaded"
             lblRowDisplay.Text = ""
+            'show startup menu items
+            panelAllMenuItems.Visible = True
+            'todo. set the recent files list??
         End If
     End Sub
 
@@ -459,8 +465,8 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
-        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
-        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
 
@@ -479,20 +485,20 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuConvertText_Click(sender As Object, e As EventArgs) Handles mnuConvertText.Click
-        clsConvertTo.AddParameter("to_type", Chr(34) & "character" & Chr(34))
-        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "character" & Chr(34), iPosition:=2)
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
     End Sub
 
     Private Sub mnuConvertToLogical_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogical.Click
-        clsConvertTo.AddParameter("to_type", Chr(34) & "logical" & Chr(34))
-        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "logical" & Chr(34), iPosition:=2)
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
     End Sub
 
     Private Sub mnuConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToFactor.Click
-        clsConvertTo.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
-        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
     End Sub
 
@@ -587,21 +593,21 @@ Public Class ucrDataView
 
     Private Sub UpdateRFunctionDataFrameParameters()
         If grdCurrSheet IsNot Nothing Then
-            clsAppendVariablesMetaData.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsColumnNames.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsInsertColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsDeleteColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsConvertTo.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsInsertRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsDeleteRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsReplaceValue.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsRemoveFilter.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsFreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsUnfreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsGetDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsConvertOrderedFactor.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsFilterApplied.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsAppendVariablesMetaData.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsColumnNames.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsInsertColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsDeleteColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsConvertTo.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsInsertRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsDeleteRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsReplaceValue.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsRemoveFilter.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsFreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsUnfreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsGetDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsConvertOrderedFactor.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsFilterApplied.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
         End If
     End Sub
 
@@ -685,7 +691,7 @@ Public Class ucrDataView
         clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame)
         clsGetDataFrame.SetAssignTo(grdCurrSheet.Name)
         strTemp = clsViewDataFrame.ToScript(strScript)
-        RunScriptFromDataView(strScript & strTemp, strComment:="Right Click Menu: View R Data Frame", bSeparateThread:=False)
+        RunScriptFromDataView(strScript & strTemp, strComment:="Right click menu: View R Data Frame", bSeparateThread:=False)
 
     End Sub
 
@@ -695,9 +701,9 @@ Public Class ucrDataView
     'End Sub
 
     Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
-        clsConvertOrderedFactor.AddParameter("col_names", SelectedColumns())
-        clsConvertOrderedFactor.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34))
-        RunScriptFromDataView(clsConvertOrderedFactor.ToScript, strComment:="Right Click Menu: Convert to Ordered Factor")
+        clsConvertOrderedFactor.AddParameter("col_names", SelectedColumns(), iPosition:=1)
+        clsConvertOrderedFactor.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34), iPosition:=2)
+        RunScriptFromDataView(clsConvertOrderedFactor.ToScript, strComment:="Right click menu: Convert to Ordered Factor")
     End Sub
 
     Private Sub mnuDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplicateColumn.Click
@@ -807,32 +813,32 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuConvertToFact_Click(sender As Object, e As EventArgs) Handles mnuConvertToFact.Click
-        clsConvertTo.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
-        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
     End Sub
 
     Private Sub mnuConvertToOrderedFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToOrderedFactor.Click
-        clsConvertOrderedFactor.AddParameter("col_names", SelectedColumns())
-        clsConvertOrderedFactor.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34))
-        RunScriptFromDataView(clsConvertOrderedFactor.ToScript, strComment:="Right Click Menu: Convert to Ordered Factor")
+        clsConvertOrderedFactor.AddParameter("col_names", SelectedColumns(), iPosition:=1)
+        clsConvertOrderedFactor.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34), iPosition:=2)
+        RunScriptFromDataView(clsConvertOrderedFactor.ToScript, strComment:="Right click menu: Convert to Ordered Factor")
     End Sub
 
     Private Sub mnuConvertToCharacter_Click(sender As Object, e As EventArgs) Handles mnuConvertToCharacter.Click
-        clsConvertTo.AddParameter("to_type", Chr(34) & "character" & Chr(34))
-        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "character" & Chr(34), iPosition:=2)
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
     End Sub
 
     Private Sub mnuConvertToLogic_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogic.Click
-        clsConvertTo.AddParameter("to_type", Chr(34) & "logical" & Chr(34))
-        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "logical" & Chr(34), iPosition:=2)
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
     End Sub
 
     Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click
-        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
-        clsConvertTo.AddParameter("col_names", SelectedColumns())
+        clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
 
@@ -863,5 +869,78 @@ Public Class ucrDataView
 
     Private Sub mnuRemoveCurrentFilters_Click(sender As Object, e As EventArgs) Handles mnuRemoveCurrentFilters.Click
         RunScriptFromDataView(clsRemoveFilter.ToScript(), strComment:="Right click menu: Remove Current Filter")
+    End Sub
+
+    Private Sub grdCurrSheet_CellDataChanged(sender As Object, e As CellEventArgs) Handles grdCurrSheet.CellDataChanged
+        frmMain.bDataSaved = False
+    End Sub
+
+    Private Sub linkNewDataFrame_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartNewDataFrame.LinkClicked
+        dlgNewDataFrame.ShowDialog()
+    End Sub
+
+    Private Sub linkOpenFile_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenFile.LinkClicked
+        dlgImportDataset.ShowDialog()
+    End Sub
+
+    Private Sub linkOpenLibrary_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenLibrary.LinkClicked
+        dlgFromLibrary.ShowDialog()
+    End Sub
+
+    ''' <summary>
+    ''' clears all the added links label menu items from the recents panel of the data view
+    ''' </summary>
+    Public Sub ClearRecentFileMenuItems()
+        panelRecentMenuItems.Controls.Clear()
+        HideOrShowRecentPanel()
+    End Sub
+
+    ''' <summary>
+    ''' adds the link label as a menu item to the recents panel of the data view
+    ''' </summary>
+    ''' <param name="linkMenuItem">link label with file path set as its tag</param>
+    Public Sub InsertRecentFileMenuItems(linkMenuItem As LinkLabel)
+        'label used to display the path to the user
+        Dim lblMenuItemPath As New Label
+        Dim position As Integer = 1
+
+        'add subsequent links after each other, separating them by 19 pixels on the Y axis
+        If panelRecentMenuItems.Controls.Count > 0 Then
+            'get Y axis position of last control then add 19 pixels to be used as the new Y axis position.
+            position = panelRecentMenuItems.Controls.Item(panelRecentMenuItems.Controls.Count - 1).Location.Y
+            position = position + 19
+        End If
+
+        linkMenuItem.Location = New Point(0, position)
+        linkMenuItem.Height = 13
+        linkMenuItem.LinkBehavior = LinkBehavior.NeverUnderline
+        linkMenuItem.AutoSize = True
+
+        'add the link control. 
+        panelRecentMenuItems.Controls.Add(linkMenuItem)
+
+        'add the label control. will be besides each other on the same Y axis
+        lblMenuItemPath.Text = If(String.IsNullOrEmpty(linkMenuItem.Tag), "", Path.GetDirectoryName(linkMenuItem.Tag))
+        lblMenuItemPath.Location = New Point(linkMenuItem.Width + 10, position)
+        lblMenuItemPath.Height = 13
+        lblMenuItemPath.AutoSize = True
+        panelRecentMenuItems.Controls.Add(lblMenuItemPath)
+        HideOrShowRecentPanel()
+    End Sub
+
+    Private Sub HideOrShowRecentPanel()
+        lblRecent.Visible = panelRecentMenuItems.Controls.Count > 0
+    End Sub
+
+    Private Sub linkHelpIntroduction_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpIntroduction.LinkClicked
+        Help.ShowHelp(frmMain, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "0")
+    End Sub
+
+    Private Sub linkHelpRpackages_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRpackages.LinkClicked
+        dlgHelpVignettes.ShowDialog()
+    End Sub
+
+    Private Sub linkHelpRInstatWebsite_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRInstatWebsite.LinkClicked
+        Process.Start("http://r-instat.org/")
     End Sub
 End Class

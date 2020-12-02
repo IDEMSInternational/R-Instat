@@ -516,29 +516,30 @@ summary_mode <- function(x,...) {
 
 na_check <- function(x, na_type = c(), na_consecutive_n = NULL, na_max_n = NULL, na_max_prop = NULL, na_min_n = NULL, na_FUN = NULL, ...) {
   res <- c()
-  k <- 1
-  for (i in na_type) {
-    ##Added this to avoid error when "" is trancated. Not sure why "" is removed in some instances. 
-    ##Works differently with main summary function when you have a single case/multiple cases of na_type.
-    if(i == "'n'" || i == "n") {
-      res[k] <- summary_count_missing(x) <= na_max_n
+  for (i in seq_along(na_type)) {
+    type <- na_type[i]
+    if (type %in% c("n","'n'")) {
+      res[i] <- summary_count_missing(x) <= na_max_n
     }
-    else if(i == "'prop'" || i == "prop") {
-      res[k] <- (summary_count_missing(x)/summary_count(x)) <= na_max_prop/100
+    else if (type %in% c("prop","'prop'")) {
+      res[i] <- (summary_count_missing(x) / summary_count(x)) <= na_max_prop / 100
     }
-    else if(i == "'n_non_miss'" || i == "n_non_miss") {
-      res[k] <- summary_count_non_missing(x) >= na_min_n
+    else if (type %in% c("n_non_miss","'n_non_miss'")) {
+      res[i] <- summary_count_non_missing(x) >= na_min_n
     }
-    else if(i == "'FUN'" || i == "FUN") {
-      res[k] <- na_FUN(x, ...)
+    else if (type %in% c("FUN","'FUN'")) {
+      res[i] <- na_FUN(x, ...)
     }
-    else if(i == "'con'" || i == "con") {
+    else if (type %in% c("con","'con'")) {
       is_na_rle <- rle(is.na(x))
-      res[k] <- max(is_na_rle$lengths[is_na_rle$values]) <= na_consecutive_n
+      res[i] <- max(is_na_rle$lengths[is_na_rle$values]) <= na_consecutive_n
     }
-    else stop("Invalid na_type specified for missing values check.")
-    if(!res[k]) return(FALSE)
-    k <-  k+1
+    else {
+      stop("Invalid na_type specified for missing values check.")
+    }
+    if (!res[i]) {
+      return(FALSE)
+    }
   }
   return(all(res))
 }

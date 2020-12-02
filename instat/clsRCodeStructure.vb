@@ -249,9 +249,9 @@ Public Class RCodeStructure
     ''' <param name="strDataFrameNames">            (Optional) Optional R character vector to give
     '''                                             names of new data frames if data frame list is
     '''                                             not named. </param>
+    ''' <param name="strAdjacentColumn">            (Optional) The new value for strAdjacentColumn. </param>
     '''--------------------------------------------------------------------------------------------
-    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempSurv As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True, Optional bDataFrameList As Boolean = False, Optional strDataFrameNames As String = "")
-
+    Public Sub SetAssignTo(strTemp As String, Optional strTempDataframe As String = "", Optional strTempColumn As String = "", Optional strTempModel As String = "", Optional strTempGraph As String = "", Optional strTempSurv As String = "", Optional strTempTable As String = "", Optional bAssignToIsPrefix As Boolean = False, Optional bAssignToColumnWithoutNames As Boolean = False, Optional bInsertColumnBefore As Boolean = False, Optional bRequireCorrectLength As Boolean = True, Optional bDataFrameList As Boolean = False, Optional strDataFrameNames As String = "", Optional strAdjacentColumn As String = "")
         strAssignTo = strTemp
         If Not strTempDataframe = "" Then
             strAssignToDataFrame = strTempDataframe
@@ -277,10 +277,10 @@ Public Class RCodeStructure
         Me.bAssignToIsPrefix = bAssignToIsPrefix
         Me.bAssignToColumnWithoutNames = bAssignToColumnWithoutNames
         Me.bInsertColumnBefore = bInsertColumnBefore
+        Me.strAdjacentColumn = strAdjacentColumn
         Me.bRequireCorrectLength = bRequireCorrectLength
         Me.bDataFrameList = bDataFrameList
         Me.strDataFrameNames = strDataFrameNames
-
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -410,19 +410,9 @@ Public Class RCodeStructure
                         clsAddColumns.AddParameter("use_col_name_as_prefix", "FALSE")
                     End If
                 End If
-
+                clsAddColumns.AddParameter("before", If(bInsertColumnBefore, "TRUE", "FALSE"))
                 If Not String.IsNullOrEmpty(strAdjacentColumn) Then
-                    clsAddColumns.AddParameter("before", If(bInsertColumnBefore, "TRUE", "FALSE"))
                     clsAddColumns.AddParameter("adjacent_column", strAdjacentColumn)
-                Else
-                    If bInsertColumnBefore Then
-                        clsAddColumns.AddParameter("before", "TRUE")
-                    Else
-                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
-                            clsAddColumns.AddParameter("before", "FALSE")
-                        End If
-
-                    End If
                 End If
                 If Not bRequireCorrectLength Then
                     clsAddColumns.AddParameter("require_correct_length", "FALSE")

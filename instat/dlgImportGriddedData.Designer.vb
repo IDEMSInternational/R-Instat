@@ -39,67 +39,77 @@ Partial Class dlgImportGriddedData
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgImportGriddedData))
-        Me.lblMinLat = New System.Windows.Forms.Label()
+        Me.lblLat = New System.Windows.Forms.Label()
         Me.lblMaxLat = New System.Windows.Forms.Label()
-        Me.lblMinLon = New System.Windows.Forms.Label()
+        Me.lblLon = New System.Windows.Forms.Label()
         Me.lblMaxLon = New System.Windows.Forms.Label()
-        Me.lblMainDataName = New System.Windows.Forms.Label()
-        Me.lblDownloadFrom = New System.Windows.Forms.Label()
-        Me.lblDataFile = New System.Windows.Forms.Label()
+        Me.lblNewDataFrameName = New System.Windows.Forms.Label()
+        Me.lblSource = New System.Windows.Forms.Label()
+        Me.lblData = New System.Windows.Forms.Label()
         Me.cmdBrowse = New System.Windows.Forms.Button()
-        Me.lblExport = New System.Windows.Forms.Label()
-        Me.lblLocationData = New System.Windows.Forms.Label()
-        Me.grpGetArea = New System.Windows.Forms.GroupBox()
+        Me.grpDateRange = New System.Windows.Forms.GroupBox()
+        Me.rdoCustomRange = New System.Windows.Forms.RadioButton()
+        Me.rdoEntireRange = New System.Windows.Forms.RadioButton()
+        Me.lblTo = New System.Windows.Forms.Label()
+        Me.lblFrom = New System.Windows.Forms.Label()
+        Me.ucrDtpMinDate = New instat.ucrDateTimePicker()
+        Me.ucrDtpMaxDate = New instat.ucrDateTimePicker()
+        Me.ucrPnlDateRange = New instat.UcrPanel()
+        Me.grpLocationRange = New System.Windows.Forms.GroupBox()
         Me.rdoPoint = New System.Windows.Forms.RadioButton()
         Me.rdoArea = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlGetArea = New instat.UcrPanel()
-        Me.ucrInputLocDataName = New instat.ucrInputTextBox()
-        Me.ucrInputExportFile = New instat.ucrInputTextBox()
-        Me.ucrInputDataFile = New instat.ucrInputComboBox()
-        Me.ucrInputDownloadFrom = New instat.ucrInputComboBox()
-        Me.ucrInputMainDataName = New instat.ucrInputTextBox()
-        Me.ucrNudMaxLat = New instat.ucrNud()
-        Me.ucrNudMaxLon = New instat.ucrNud()
-        Me.ucrNudMinLon = New instat.ucrNud()
-        Me.ucrNudMinLat = New instat.ucrNud()
+        Me.ucrPnlLocationRange = New instat.UcrPanel()
+        Me.lblMinLon = New System.Windows.Forms.Label()
+        Me.lblMinLat = New System.Windows.Forms.Label()
+        Me.ucrInputMinLon = New instat.ucrInputTextBox()
+        Me.ucrInputMinLat = New instat.ucrInputTextBox()
+        Me.ucrInputMaxLat = New instat.ucrInputTextBox()
+        Me.ucrInputMaxLon = New instat.ucrInputTextBox()
+        Me.lblSaveDownloadedFileTo = New System.Windows.Forms.Label()
+        Me.ucrInputNewDataFrameName = New instat.ucrInputTextBox()
+        Me.ucrChkDontImportData = New instat.ucrCheck()
+        Me.ucrInputFilePath = New instat.ucrInputTextBox()
+        Me.ucrInputData = New instat.ucrInputComboBox()
+        Me.ucrInputSource = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpGetArea.SuspendLayout()
+        Me.grpDateRange.SuspendLayout()
+        Me.grpLocationRange.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblMinLat
+        'lblLat
         '
-        resources.ApplyResources(Me.lblMinLat, "lblMinLat")
-        Me.lblMinLat.Name = "lblMinLat"
+        resources.ApplyResources(Me.lblLat, "lblLat")
+        Me.lblLat.Name = "lblLat"
         '
         'lblMaxLat
         '
         resources.ApplyResources(Me.lblMaxLat, "lblMaxLat")
         Me.lblMaxLat.Name = "lblMaxLat"
         '
-        'lblMinLon
+        'lblLon
         '
-        resources.ApplyResources(Me.lblMinLon, "lblMinLon")
-        Me.lblMinLon.Name = "lblMinLon"
+        resources.ApplyResources(Me.lblLon, "lblLon")
+        Me.lblLon.Name = "lblLon"
         '
         'lblMaxLon
         '
         resources.ApplyResources(Me.lblMaxLon, "lblMaxLon")
         Me.lblMaxLon.Name = "lblMaxLon"
         '
-        'lblMainDataName
+        'lblNewDataFrameName
         '
-        resources.ApplyResources(Me.lblMainDataName, "lblMainDataName")
-        Me.lblMainDataName.Name = "lblMainDataName"
+        resources.ApplyResources(Me.lblNewDataFrameName, "lblNewDataFrameName")
+        Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
         '
-        'lblDownloadFrom
+        'lblSource
         '
-        resources.ApplyResources(Me.lblDownloadFrom, "lblDownloadFrom")
-        Me.lblDownloadFrom.Name = "lblDownloadFrom"
+        resources.ApplyResources(Me.lblSource, "lblSource")
+        Me.lblSource.Name = "lblSource"
         '
-        'lblDataFile
+        'lblData
         '
-        resources.ApplyResources(Me.lblDataFile, "lblDataFile")
-        Me.lblDataFile.Name = "lblDataFile"
+        resources.ApplyResources(Me.lblData, "lblData")
+        Me.lblData.Name = "lblData"
         '
         'cmdBrowse
         '
@@ -107,121 +117,204 @@ Partial Class dlgImportGriddedData
         Me.cmdBrowse.Name = "cmdBrowse"
         Me.cmdBrowse.UseVisualStyleBackColor = True
         '
-        'lblExport
+        'grpDateRange
         '
-        resources.ApplyResources(Me.lblExport, "lblExport")
-        Me.lblExport.Name = "lblExport"
+        Me.grpDateRange.Controls.Add(Me.rdoCustomRange)
+        Me.grpDateRange.Controls.Add(Me.rdoEntireRange)
+        Me.grpDateRange.Controls.Add(Me.lblTo)
+        Me.grpDateRange.Controls.Add(Me.lblFrom)
+        Me.grpDateRange.Controls.Add(Me.ucrDtpMinDate)
+        Me.grpDateRange.Controls.Add(Me.ucrDtpMaxDate)
+        Me.grpDateRange.Controls.Add(Me.ucrPnlDateRange)
+        resources.ApplyResources(Me.grpDateRange, "grpDateRange")
+        Me.grpDateRange.Name = "grpDateRange"
+        Me.grpDateRange.TabStop = False
         '
-        'lblLocationData
+        'rdoCustomRange
         '
-        resources.ApplyResources(Me.lblLocationData, "lblLocationData")
-        Me.lblLocationData.Name = "lblLocationData"
+        resources.ApplyResources(Me.rdoCustomRange, "rdoCustomRange")
+        Me.rdoCustomRange.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoCustomRange.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCustomRange.FlatAppearance.BorderSize = 2
+        Me.rdoCustomRange.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCustomRange.Name = "rdoCustomRange"
+        Me.rdoCustomRange.TabStop = True
+        Me.rdoCustomRange.Tag = ""
+        Me.rdoCustomRange.UseVisualStyleBackColor = False
         '
-        'grpGetArea
+        'rdoEntireRange
         '
-        Me.grpGetArea.Controls.Add(Me.rdoPoint)
-        Me.grpGetArea.Controls.Add(Me.rdoArea)
-        Me.grpGetArea.Controls.Add(Me.ucrPnlGetArea)
-        resources.ApplyResources(Me.grpGetArea, "grpGetArea")
-        Me.grpGetArea.Name = "grpGetArea"
-        Me.grpGetArea.TabStop = False
+        resources.ApplyResources(Me.rdoEntireRange, "rdoEntireRange")
+        Me.rdoEntireRange.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoEntireRange.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoEntireRange.FlatAppearance.BorderSize = 2
+        Me.rdoEntireRange.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoEntireRange.Name = "rdoEntireRange"
+        Me.rdoEntireRange.TabStop = True
+        Me.rdoEntireRange.Tag = ""
+        Me.rdoEntireRange.UseVisualStyleBackColor = False
+        '
+        'lblTo
+        '
+        resources.ApplyResources(Me.lblTo, "lblTo")
+        Me.lblTo.Name = "lblTo"
+        '
+        'lblFrom
+        '
+        resources.ApplyResources(Me.lblFrom, "lblFrom")
+        Me.lblFrom.Name = "lblFrom"
+        '
+        'ucrDtpMinDate
+        '
+        resources.ApplyResources(Me.ucrDtpMinDate, "ucrDtpMinDate")
+        Me.ucrDtpMinDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpMinDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpMinDate.Name = "ucrDtpMinDate"
+        '
+        'ucrDtpMaxDate
+        '
+        resources.ApplyResources(Me.ucrDtpMaxDate, "ucrDtpMaxDate")
+        Me.ucrDtpMaxDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpMaxDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpMaxDate.Name = "ucrDtpMaxDate"
+        '
+        'ucrPnlDateRange
+        '
+        resources.ApplyResources(Me.ucrPnlDateRange, "ucrPnlDateRange")
+        Me.ucrPnlDateRange.Name = "ucrPnlDateRange"
+        '
+        'grpLocationRange
+        '
+        Me.grpLocationRange.Controls.Add(Me.rdoPoint)
+        Me.grpLocationRange.Controls.Add(Me.rdoArea)
+        Me.grpLocationRange.Controls.Add(Me.ucrPnlLocationRange)
+        Me.grpLocationRange.Controls.Add(Me.lblMinLon)
+        Me.grpLocationRange.Controls.Add(Me.lblMinLat)
+        Me.grpLocationRange.Controls.Add(Me.ucrInputMinLon)
+        Me.grpLocationRange.Controls.Add(Me.ucrInputMinLat)
+        Me.grpLocationRange.Controls.Add(Me.lblMaxLon)
+        Me.grpLocationRange.Controls.Add(Me.lblMaxLat)
+        Me.grpLocationRange.Controls.Add(Me.ucrInputMaxLat)
+        Me.grpLocationRange.Controls.Add(Me.ucrInputMaxLon)
+        Me.grpLocationRange.Controls.Add(Me.lblLon)
+        Me.grpLocationRange.Controls.Add(Me.lblLat)
+        resources.ApplyResources(Me.grpLocationRange, "grpLocationRange")
+        Me.grpLocationRange.Name = "grpLocationRange"
+        Me.grpLocationRange.TabStop = False
         '
         'rdoPoint
         '
         resources.ApplyResources(Me.rdoPoint, "rdoPoint")
+        Me.rdoPoint.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoPoint.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPoint.FlatAppearance.BorderSize = 2
+        Me.rdoPoint.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPoint.Name = "rdoPoint"
         Me.rdoPoint.TabStop = True
-        Me.rdoPoint.UseVisualStyleBackColor = True
+        Me.rdoPoint.Tag = ""
+        Me.rdoPoint.UseVisualStyleBackColor = False
         '
         'rdoArea
         '
         resources.ApplyResources(Me.rdoArea, "rdoArea")
+        Me.rdoArea.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoArea.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoArea.FlatAppearance.BorderSize = 2
+        Me.rdoArea.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoArea.Name = "rdoArea"
         Me.rdoArea.TabStop = True
-        Me.rdoArea.UseVisualStyleBackColor = True
+        Me.rdoArea.Tag = ""
+        Me.rdoArea.UseVisualStyleBackColor = False
         '
-        'ucrPnlGetArea
+        'ucrPnlLocationRange
         '
-        resources.ApplyResources(Me.ucrPnlGetArea, "ucrPnlGetArea")
-        Me.ucrPnlGetArea.Name = "ucrPnlGetArea"
+        resources.ApplyResources(Me.ucrPnlLocationRange, "ucrPnlLocationRange")
+        Me.ucrPnlLocationRange.Name = "ucrPnlLocationRange"
         '
-        'ucrInputLocDataName
+        'lblMinLon
         '
-        Me.ucrInputLocDataName.AddQuotesIfUnrecognised = True
-        Me.ucrInputLocDataName.IsMultiline = False
-        Me.ucrInputLocDataName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLocDataName, "ucrInputLocDataName")
-        Me.ucrInputLocDataName.Name = "ucrInputLocDataName"
+        resources.ApplyResources(Me.lblMinLon, "lblMinLon")
+        Me.lblMinLon.Name = "lblMinLon"
         '
-        'ucrInputExportFile
+        'lblMinLat
         '
-        Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
-        Me.ucrInputExportFile.IsMultiline = False
-        Me.ucrInputExportFile.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputExportFile, "ucrInputExportFile")
-        Me.ucrInputExportFile.Name = "ucrInputExportFile"
+        resources.ApplyResources(Me.lblMinLat, "lblMinLat")
+        Me.lblMinLat.Name = "lblMinLat"
         '
-        'ucrInputDataFile
+        'ucrInputMinLon
         '
-        Me.ucrInputDataFile.AddQuotesIfUnrecognised = True
-        Me.ucrInputDataFile.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDataFile, "ucrInputDataFile")
-        Me.ucrInputDataFile.Name = "ucrInputDataFile"
+        Me.ucrInputMinLon.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinLon.IsMultiline = False
+        Me.ucrInputMinLon.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMinLon, "ucrInputMinLon")
+        Me.ucrInputMinLon.Name = "ucrInputMinLon"
         '
-        'ucrInputDownloadFrom
+        'ucrInputMinLat
         '
-        Me.ucrInputDownloadFrom.AddQuotesIfUnrecognised = True
-        Me.ucrInputDownloadFrom.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDownloadFrom, "ucrInputDownloadFrom")
-        Me.ucrInputDownloadFrom.Name = "ucrInputDownloadFrom"
+        Me.ucrInputMinLat.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinLat.IsMultiline = False
+        Me.ucrInputMinLat.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMinLat, "ucrInputMinLat")
+        Me.ucrInputMinLat.Name = "ucrInputMinLat"
         '
-        'ucrInputMainDataName
+        'ucrInputMaxLat
         '
-        Me.ucrInputMainDataName.AddQuotesIfUnrecognised = True
-        Me.ucrInputMainDataName.IsMultiline = False
-        Me.ucrInputMainDataName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMainDataName, "ucrInputMainDataName")
-        Me.ucrInputMainDataName.Name = "ucrInputMainDataName"
+        Me.ucrInputMaxLat.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaxLat.IsMultiline = False
+        Me.ucrInputMaxLat.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMaxLat, "ucrInputMaxLat")
+        Me.ucrInputMaxLat.Name = "ucrInputMaxLat"
         '
-        'ucrNudMaxLat
+        'ucrInputMaxLon
         '
-        Me.ucrNudMaxLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMaxLat, "ucrNudMaxLat")
-        Me.ucrNudMaxLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaxLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxLat.Name = "ucrNudMaxLat"
-        Me.ucrNudMaxLat.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrInputMaxLon.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaxLon.IsMultiline = False
+        Me.ucrInputMaxLon.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMaxLon, "ucrInputMaxLon")
+        Me.ucrInputMaxLon.Name = "ucrInputMaxLon"
         '
-        'ucrNudMaxLon
+        'lblSaveDownloadedFileTo
         '
-        Me.ucrNudMaxLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMaxLon, "ucrNudMaxLon")
-        Me.ucrNudMaxLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMaxLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMaxLon.Name = "ucrNudMaxLon"
-        Me.ucrNudMaxLon.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        resources.ApplyResources(Me.lblSaveDownloadedFileTo, "lblSaveDownloadedFileTo")
+        Me.lblSaveDownloadedFileTo.Name = "lblSaveDownloadedFileTo"
         '
-        'ucrNudMinLon
+        'ucrInputNewDataFrameName
         '
-        Me.ucrNudMinLon.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinLon.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMinLon, "ucrNudMinLon")
-        Me.ucrNudMinLon.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMinLon.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinLon.Name = "ucrNudMinLon"
-        Me.ucrNudMinLon.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrInputNewDataFrameName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewDataFrameName.IsMultiline = False
+        Me.ucrInputNewDataFrameName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNewDataFrameName, "ucrInputNewDataFrameName")
+        Me.ucrInputNewDataFrameName.Name = "ucrInputNewDataFrameName"
         '
-        'ucrNudMinLat
+        'ucrChkDontImportData
         '
-        Me.ucrNudMinLat.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinLat.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMinLat, "ucrNudMinLat")
-        Me.ucrNudMinLat.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMinLat.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinLat.Name = "ucrNudMinLat"
-        Me.ucrNudMinLat.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrChkDontImportData.Checked = False
+        resources.ApplyResources(Me.ucrChkDontImportData, "ucrChkDontImportData")
+        Me.ucrChkDontImportData.Name = "ucrChkDontImportData"
+        '
+        'ucrInputFilePath
+        '
+        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.IsMultiline = False
+        Me.ucrInputFilePath.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
+        Me.ucrInputFilePath.Name = "ucrInputFilePath"
+        '
+        'ucrInputData
+        '
+        Me.ucrInputData.AddQuotesIfUnrecognised = True
+        Me.ucrInputData.GetSetSelectedIndex = -1
+        Me.ucrInputData.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputData, "ucrInputData")
+        Me.ucrInputData.Name = "ucrInputData"
+        '
+        'ucrInputSource
+        '
+        Me.ucrInputSource.AddQuotesIfUnrecognised = True
+        Me.ucrInputSource.GetSetSelectedIndex = -1
+        Me.ucrInputSource.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSource, "ucrInputSource")
+        Me.ucrInputSource.Name = "ucrInputSource"
         '
         'ucrBase
         '
@@ -232,60 +325,63 @@ Partial Class dlgImportGriddedData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpGetArea)
-        Me.Controls.Add(Me.ucrInputLocDataName)
-        Me.Controls.Add(Me.lblLocationData)
-        Me.Controls.Add(Me.ucrInputExportFile)
+        Me.Controls.Add(Me.lblSaveDownloadedFileTo)
+        Me.Controls.Add(Me.ucrInputNewDataFrameName)
+        Me.Controls.Add(Me.ucrChkDontImportData)
+        Me.Controls.Add(Me.grpDateRange)
+        Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.cmdBrowse)
-        Me.Controls.Add(Me.lblExport)
-        Me.Controls.Add(Me.lblDataFile)
-        Me.Controls.Add(Me.ucrInputDataFile)
-        Me.Controls.Add(Me.lblDownloadFrom)
-        Me.Controls.Add(Me.ucrInputDownloadFrom)
-        Me.Controls.Add(Me.ucrInputMainDataName)
-        Me.Controls.Add(Me.lblMainDataName)
-        Me.Controls.Add(Me.lblMaxLon)
-        Me.Controls.Add(Me.lblMinLon)
-        Me.Controls.Add(Me.lblMaxLat)
-        Me.Controls.Add(Me.lblMinLat)
-        Me.Controls.Add(Me.ucrNudMaxLat)
-        Me.Controls.Add(Me.ucrNudMaxLon)
-        Me.Controls.Add(Me.ucrNudMinLon)
-        Me.Controls.Add(Me.ucrNudMinLat)
+        Me.Controls.Add(Me.lblData)
+        Me.Controls.Add(Me.ucrInputData)
+        Me.Controls.Add(Me.lblSource)
+        Me.Controls.Add(Me.ucrInputSource)
+        Me.Controls.Add(Me.lblNewDataFrameName)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.grpLocationRange)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgImportGriddedData"
-        Me.grpGetArea.ResumeLayout(False)
-        Me.grpGetArea.PerformLayout()
+        Me.grpDateRange.ResumeLayout(False)
+        Me.grpDateRange.PerformLayout()
+        Me.grpLocationRange.ResumeLayout(False)
+        Me.grpLocationRange.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrNudMinLat As ucrNud
-    Friend WithEvents ucrNudMinLon As ucrNud
-    Friend WithEvents ucrNudMaxLon As ucrNud
-    Friend WithEvents ucrNudMaxLat As ucrNud
-    Friend WithEvents lblMinLat As Label
+    Friend WithEvents lblLat As Label
     Friend WithEvents lblMaxLat As Label
-    Friend WithEvents lblMinLon As Label
+    Friend WithEvents lblLon As Label
     Friend WithEvents lblMaxLon As Label
-    Friend WithEvents lblMainDataName As Label
-    Friend WithEvents ucrInputMainDataName As ucrInputTextBox
-    Friend WithEvents ucrInputDownloadFrom As ucrInputComboBox
-    Friend WithEvents lblDownloadFrom As Label
-    Friend WithEvents ucrInputDataFile As ucrInputComboBox
-    Friend WithEvents lblDataFile As Label
-    Friend WithEvents ucrInputExportFile As ucrInputTextBox
+    Friend WithEvents lblNewDataFrameName As Label
+    Friend WithEvents ucrInputSource As ucrInputComboBox
+    Friend WithEvents lblSource As Label
+    Friend WithEvents ucrInputData As ucrInputComboBox
+    Friend WithEvents lblData As Label
+    Friend WithEvents ucrInputFilePath As ucrInputTextBox
     Friend WithEvents cmdBrowse As Button
-    Friend WithEvents lblExport As Label
-    Friend WithEvents ucrInputLocDataName As ucrInputTextBox
-    Friend WithEvents lblLocationData As Label
-    Friend WithEvents grpGetArea As GroupBox
+    Friend WithEvents ucrDtpMinDate As ucrDateTimePicker
+    Friend WithEvents ucrDtpMaxDate As ucrDateTimePicker
+    Friend WithEvents grpDateRange As GroupBox
+    Friend WithEvents lblTo As Label
+    Friend WithEvents lblFrom As Label
+    Friend WithEvents ucrInputMaxLon As ucrInputTextBox
+    Friend WithEvents ucrInputMinLon As ucrInputTextBox
+    Friend WithEvents ucrInputMaxLat As ucrInputTextBox
+    Friend WithEvents ucrInputMinLat As ucrInputTextBox
+    Friend WithEvents ucrChkDontImportData As ucrCheck
+    Friend WithEvents ucrInputNewDataFrameName As ucrInputTextBox
+    Friend WithEvents rdoCustomRange As RadioButton
+    Friend WithEvents rdoEntireRange As RadioButton
+    Friend WithEvents ucrPnlDateRange As UcrPanel
+    Friend WithEvents grpLocationRange As GroupBox
+    Friend WithEvents lblMinLon As Label
+    Friend WithEvents lblMinLat As Label
     Friend WithEvents rdoPoint As RadioButton
     Friend WithEvents rdoArea As RadioButton
-    Friend WithEvents ucrPnlGetArea As UcrPanel
+    Friend WithEvents ucrPnlLocationRange As UcrPanel
+    Friend WithEvents lblSaveDownloadedFileTo As Label
 End Class
