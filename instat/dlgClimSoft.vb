@@ -55,6 +55,7 @@ Public Class dlgClimSoft
         'stations combobox
         dctStationColumns.Add("Station IDs", Chr(34) & "stationId" & Chr(34))
         dctStationColumns.Add("Station Names", Chr(34) & "stationName" & Chr(34))
+        dctStationColumns.Add("Station Qualifiers", Chr(34) & "qualifier" & Chr(34))
         ucrComboBoxStations.SetParameter(New RParameter("stationfiltercolumn", 0))
         ucrComboBoxStations.SetItems(dctStationColumns)
         ucrComboBoxStations.SetRDefault(Chr(34) & "stationId" & Chr(34))
@@ -184,8 +185,9 @@ Public Class dlgClimSoft
 
         'sql query to get station values of the selected column from station table
         Dim strQuery As String
-        strQuery = "SELECT " & dctStationColumns.Item(ucrComboBoxStations.GetText).Trim("""") & " FROM station;"
+        Dim strSelectedColumn As String = dctStationColumns.Item(ucrComboBoxStations.GetText).Trim("""")
 
+        strQuery = "SELECT DISTINCT " & strSelectedColumn & " FROM station WHERE " & strSelectedColumn & " IS NOT NULL AND " & strSelectedColumn & " <> '';"
         If ucrReceiverMultipleStations.strDatabaseQuery = strQuery Then
             Return False
         End If
