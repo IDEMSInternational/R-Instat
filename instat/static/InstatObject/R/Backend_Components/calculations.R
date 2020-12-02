@@ -353,9 +353,8 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   #     Any case where we don't want this?
 
   for(var in curr_groups) {
-  curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(!!rlang::parse_expr(var), add = TRUE)
+  curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(!!! rlang::syms(var), add = TRUE)
   }
-
 
   # Names of the data frames required for the calculation
   data_names <- unique(as.vector(names(calc$calculated_from)))
@@ -438,7 +437,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
         #     Any case where we don't want this?
 
         for(var in curr_groups) {
-        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(!!rlang::parse_expr(var), add = TRUE)
+        curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(!!! rlang::syms(var), add = TRUE)
         }
         # The overall data is joined into the current sub calc, so the curr_data_list is "reset" to default values
         curr_data_list[[c_link_label]] <- list(from_data_frame = data_frame_name, link_cols = c())
@@ -473,7 +472,7 @@ DataBook$set("public", "apply_instat_calculation", function(calc, curr_data_list
   # The data remains unchanged so link and require merge remain unchanged
   else if(calc$type == "by") {
     # link unchanged
-    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(dplyr::across({{ calc_from_names }}), add = TRUE)
+    curr_data_list[[c_data_label]] <- curr_data_list[[c_data_label]] %>% dplyr::group_by(!!! rlang::syms(calc_from_names), add = TRUE)
   }
   # This type is sorting the data
   # The rows are now in a different order so a merge is required
