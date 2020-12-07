@@ -82,10 +82,10 @@ Public Class dlgUnstack
         ucrChkDropMissingCombinations.SetRDefault("TRUE")
 
         'ucrSave
-        ucrNewDFName.SetIsTextBox()
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetDataFrameSelector(ucrSelectorForUnstack.ucrAvailableDataFrames)
         ucrNewDFName.SetLabelText("New Data Frame Name:")
+        ucrNewDFName.SetIsTextBox()
 
         ucrPnlUnstackCol.AddRadioButton(rdoSingle)
         ucrPnlUnstackCol.AddRadioButton(rdoMultiple)
