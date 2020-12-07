@@ -44,7 +44,7 @@ Partial Class dlgPolarCluster
         'lblPollutant
         '
         Me.lblPollutant.AutoSize = True
-        Me.lblPollutant.Location = New System.Drawing.Point(267, 46)
+        Me.lblPollutant.Location = New System.Drawing.Point(267, 21)
         Me.lblPollutant.Name = "lblPollutant"
         Me.lblPollutant.Size = New System.Drawing.Size(51, 13)
         Me.lblPollutant.TabIndex = 5
@@ -53,7 +53,7 @@ Partial Class dlgPolarCluster
         'lblWindDirection
         '
         Me.lblWindDirection.AutoSize = True
-        Me.lblWindDirection.Location = New System.Drawing.Point(267, 129)
+        Me.lblWindDirection.Location = New System.Drawing.Point(267, 104)
         Me.lblWindDirection.Name = "lblWindDirection"
         Me.lblWindDirection.Size = New System.Drawing.Size(80, 13)
         Me.lblWindDirection.TabIndex = 7
@@ -62,16 +62,16 @@ Partial Class dlgPolarCluster
         'lblX
         '
         Me.lblX.AutoSize = True
-        Me.lblX.Location = New System.Drawing.Point(267, 172)
+        Me.lblX.Location = New System.Drawing.Point(267, 147)
         Me.lblX.Name = "lblX"
-        Me.lblX.Size = New System.Drawing.Size(17, 13)
+        Me.lblX.Size = New System.Drawing.Size(119, 13)
         Me.lblX.TabIndex = 8
-        Me.lblX.Text = "X:"
+        Me.lblX.Text = "Variable to Plot Against:"
         '
         'lblColor
         '
         Me.lblColor.AutoSize = True
-        Me.lblColor.Location = New System.Drawing.Point(5, 212)
+        Me.lblColor.Location = New System.Drawing.Point(199, 224)
         Me.lblColor.Name = "lblColor"
         Me.lblColor.Size = New System.Drawing.Size(34, 13)
         Me.lblColor.TabIndex = 12
@@ -80,7 +80,7 @@ Partial Class dlgPolarCluster
         'lblNumberOfClusters
         '
         Me.lblNumberOfClusters.AutoSize = True
-        Me.lblNumberOfClusters.Location = New System.Drawing.Point(5, 236)
+        Me.lblNumberOfClusters.Location = New System.Drawing.Point(5, 224)
         Me.lblNumberOfClusters.Name = "lblNumberOfClusters"
         Me.lblNumberOfClusters.Size = New System.Drawing.Size(76, 13)
         Me.lblNumberOfClusters.TabIndex = 13
@@ -89,7 +89,7 @@ Partial Class dlgPolarCluster
         'lblAngularScale
         '
         Me.lblAngularScale.AutoSize = True
-        Me.lblAngularScale.Location = New System.Drawing.Point(5, 258)
+        Me.lblAngularScale.Location = New System.Drawing.Point(5, 246)
         Me.lblAngularScale.Name = "lblAngularScale"
         Me.lblAngularScale.Size = New System.Drawing.Size(76, 13)
         Me.lblAngularScale.TabIndex = 14
@@ -108,7 +108,7 @@ Partial Class dlgPolarCluster
         Me.ucrInputColor.AddQuotesIfUnrecognised = True
         Me.ucrInputColor.GetSetSelectedIndex = -1
         Me.ucrInputColor.IsReadOnly = False
-        Me.ucrInputColor.Location = New System.Drawing.Point(76, 206)
+        Me.ucrInputColor.Location = New System.Drawing.Point(270, 218)
         Me.ucrInputColor.Name = "ucrInputColor"
         Me.ucrInputColor.Size = New System.Drawing.Size(101, 21)
         Me.ucrInputColor.TabIndex = 9
@@ -117,7 +117,7 @@ Partial Class dlgPolarCluster
         '
         Me.ucrNudNoOfClusters.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfClusters.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNoOfClusters.Location = New System.Drawing.Point(127, 231)
+        Me.ucrNudNoOfClusters.Location = New System.Drawing.Point(127, 219)
         Me.ucrNudNoOfClusters.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNoOfClusters.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNoOfClusters.Name = "ucrNudNoOfClusters"
@@ -129,7 +129,7 @@ Partial Class dlgPolarCluster
         '
         Me.ucrNudAngularScale.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAngularScale.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAngularScale.Location = New System.Drawing.Point(127, 255)
+        Me.ucrNudAngularScale.Location = New System.Drawing.Point(127, 243)
         Me.ucrNudAngularScale.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudAngularScale.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAngularScale.Name = "ucrNudAngularScale"
@@ -140,7 +140,7 @@ Partial Class dlgPolarCluster
         'ucrReceiverPollutant
         '
         Me.ucrReceiverPollutant.frmParent = Me
-        Me.ucrReceiverPollutant.Location = New System.Drawing.Point(270, 59)
+        Me.ucrReceiverPollutant.Location = New System.Drawing.Point(270, 34)
         Me.ucrReceiverPollutant.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPollutant.Name = "ucrReceiverPollutant"
         Me.ucrReceiverPollutant.Selector = Nothing
@@ -152,7 +152,7 @@ Partial Class dlgPolarCluster
         'ucrReceiverWindDirection
         '
         Me.ucrReceiverWindDirection.frmParent = Me
-        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(270, 146)
+        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(270, 121)
         Me.ucrReceiverWindDirection.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
         Me.ucrReceiverWindDirection.Selector = Nothing
@@ -164,7 +164,7 @@ Partial Class dlgPolarCluster
         'ucrReceiverX
         '
         Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(270, 190)
+        Me.ucrReceiverX.Location = New System.Drawing.Point(270, 163)
         Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverX.Name = "ucrReceiverX"
         Me.ucrReceiverX.Selector = Nothing
@@ -194,7 +194,7 @@ Partial Class dlgPolarCluster
         'lblDate
         '
         Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(267, 87)
+        Me.lblDate.Location = New System.Drawing.Point(267, 62)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 6
@@ -203,7 +203,7 @@ Partial Class dlgPolarCluster
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(270, 100)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(270, 75)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing

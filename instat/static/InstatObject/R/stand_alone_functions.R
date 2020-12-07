@@ -1565,3 +1565,15 @@ make_factor <- function(x, ordered = is.ordered(x)) {
     factor(x, levels = as.character(unique(x)), ordered = ordered)
   }
 }
+
+#The function polar_cluster creates a wrarper around the function polarCluster
+#this allows date to be supplied as parameter
+polar_cluster <- function(mydata, wd_name, date_name,...){
+  if(!("wd" %in% colnames(mydata))){    
+    mydata <- dplyr::rename(mydata, wd = !!wd_name)
+  }
+  if (!("date" %in% colnames(mydata))){ 
+    mydata <- dplyr::rename(mydata, date = !!date_name)
+  }
+  openair::polarCluster(mydata = mydata,...)
+}

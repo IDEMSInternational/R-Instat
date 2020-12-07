@@ -51,14 +51,22 @@ Public Class dlgPolarCluster
         ucrReceiverWindDirection.SetParameter(New RParameter("wd", 2))
         ucrReceiverWindDirection.Selector = ucrSelectorPolarCluster
         ucrReceiverWindDirection.SetParameterIsString()
+        ucrReceiverWindDirection.SetClimaticType("wind_direction")
+        ucrReceiverWindDirection.bAutoFill = True
 
         ucrReceiverX.SetParameter(New RParameter("x", 3))
         ucrReceiverX.Selector = ucrSelectorPolarCluster
         ucrReceiverX.SetParameterIsString()
+        ucrReceiverX.SetClimaticType("wind_speed")
+        ucrReceiverX.bAutoFill = True
+
 
         ucrReceiverDate.SetParameter(New RParameter("date", 4))
         ucrReceiverDate.Selector = ucrSelectorPolarCluster
         ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.SetIncludedDataTypes({"Date"})
+        ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.bAutoFill=True
 
         ucrInputColor.SetParameter(New RParameter("cols", 5))
         dctColor.Add("Paired", Chr(34) & "Paired" & Chr(34))
@@ -98,8 +106,9 @@ Public Class dlgPolarCluster
         ucrReceiverPollutant.SetMeAsReceiver()
         ucrSaveGraph.Reset()
 
-        clsPolarClusterFunction.SetPackageName("openair")
-        clsPolarClusterFunction.SetRCommand("polarCluster")
+        'clsPolarClusterFunction.SetPackageName("openair")
+        'clsPolarClusterFunction.SetRCommand("polarCluster")
+        clsPolarClusterFunction.SetRCommand("polar_cluster")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsPolarClusterFunction)
     End Sub
