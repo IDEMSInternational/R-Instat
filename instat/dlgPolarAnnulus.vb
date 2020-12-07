@@ -120,14 +120,11 @@ Public Class dlgPolarAnnulus
         ucrInputColor.SetItems(dctColor)
         ucrInputColor.SetDropDownStyleAsNonEditable()
 
-        ucrNudMinimumBins.SetParameter(New RParameter("min.bin", 11))
-        ucrNudMinimumBins.Minimum = 1
-
-        ucrNudPercentile.SetParameter(New RParameter("percentile", 12))
+        ucrNudPercentile.SetParameter(New RParameter("percentile", 11))
         ucrNudPercentile.Minimum = 1
 
         ucrChkNormalize.SetText("Normalise")
-        ucrChkNormalize.SetParameter(New RParameter("normalise", 13))
+        ucrChkNormalize.SetParameter(New RParameter("normalise", 12))
         ucrChkNormalize.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
     End Sub
 
@@ -144,21 +141,19 @@ Public Class dlgPolarAnnulus
         clsPolarAnnulusFunction.AddParameter("key.position", Chr(34) & "right" & Chr(34), iPosition:=8)
         clsPolarAnnulusFunction.AddParameter("statistic", Chr(34) & "mean" & Chr(34), iPosition:=9)
         clsPolarAnnulusFunction.AddParameter("cols", Chr(34) & "default" & Chr(34), iPosition:=10)
-        clsPolarAnnulusFunction.AddParameter("min.bin", "2", iPosition:=11)
-        clsPolarAnnulusFunction.AddParameter("percentile", "80", iPosition:=12)
-        clsPolarAnnulusFunction.AddParameter("normalise", "TRUE", iPosition:=13)
+        clsPolarAnnulusFunction.AddParameter("percentile", "80", iPosition:=11)
+        clsPolarAnnulusFunction.AddParameter("normalise", "TRUE", iPosition:=12)
 
         ucrSelectorPolarAnnulus.Reset()
         ucrReceiverMultiplePollutant.SetMeAsReceiver()
 
-        clsPolarAnnulusFunction.SetPackageName("openair")
-        clsPolarAnnulusFunction.SetRCommand("polarAnnulus")
+        clsPolarAnnulusFunction.SetRCommand("polar_annulus")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsPolarAnnulusFunction)
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverMultiplePollutant.IsEmpty OrElse ucrReceiverWindDirection.IsEmpty OrElse ucrReceiverDate.IsEmpty Then
+        If ucrReceiverWindDirection.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse (ucrReceiverMultiplePollutant.IsEmpty AndAlso ucrChkMultiplePollutants.Checked) OrElse (ucrReceiverSinglePollutant.IsEmpty AndAlso Not ucrChkMultiplePollutants.Checked) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -171,7 +166,7 @@ Public Class dlgPolarAnnulus
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverPollutant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindDirection.ControlValueChanged, ucrReceiverDate.ControlValueChanged
+    Private Sub ucrReceiverWindDirection_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindDirection.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverMultiplePollutant.ControlContentsChanged, ucrReceiverSinglePollutant.ControlContentsChanged, ucrChkMultiplePollutants.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

@@ -26,7 +26,6 @@ Partial Class dlgPolarAnnulus
         Me.lblColor = New System.Windows.Forms.Label()
         Me.lblType = New System.Windows.Forms.Label()
         Me.lblStatistic = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lblWindDirection = New System.Windows.Forms.Label()
         Me.lbldate = New System.Windows.Forms.Label()
@@ -39,7 +38,6 @@ Partial Class dlgPolarAnnulus
         Me.ucrReceiverMultiplePollutant = New instat.ucrReceiverMultiple()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverWindDirection = New instat.ucrReceiverSingle()
-        Me.ucrNudMinimumBins = New instat.ucrNud()
         Me.ucrChckPadDate = New instat.ucrCheck()
         Me.ucrChckExcludeMissing = New instat.ucrCheck()
         Me.ucrInputStatistic = New instat.ucrInputComboBox()
@@ -53,7 +51,7 @@ Partial Class dlgPolarAnnulus
         'lblMultiplePollutant
         '
         Me.lblMultiplePollutant.AutoSize = True
-        Me.lblMultiplePollutant.Location = New System.Drawing.Point(262, 18)
+        Me.lblMultiplePollutant.Location = New System.Drawing.Point(262, 112)
         Me.lblMultiplePollutant.Name = "lblMultiplePollutant"
         Me.lblMultiplePollutant.Size = New System.Drawing.Size(51, 13)
         Me.lblMultiplePollutant.TabIndex = 2
@@ -62,7 +60,7 @@ Partial Class dlgPolarAnnulus
         'lblColor
         '
         Me.lblColor.AutoSize = True
-        Me.lblColor.Location = New System.Drawing.Point(12, 263)
+        Me.lblColor.Location = New System.Drawing.Point(12, 236)
         Me.lblColor.Name = "lblColor"
         Me.lblColor.Size = New System.Drawing.Size(36, 13)
         Me.lblColor.TabIndex = 9
@@ -71,7 +69,7 @@ Partial Class dlgPolarAnnulus
         'lblType
         '
         Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(12, 289)
+        Me.lblType.Location = New System.Drawing.Point(12, 262)
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(34, 13)
         Me.lblType.TabIndex = 11
@@ -80,20 +78,11 @@ Partial Class dlgPolarAnnulus
         'lblStatistic
         '
         Me.lblStatistic.AutoSize = True
-        Me.lblStatistic.Location = New System.Drawing.Point(12, 314)
+        Me.lblStatistic.Location = New System.Drawing.Point(12, 287)
         Me.lblStatistic.Name = "lblStatistic"
         Me.lblStatistic.Size = New System.Drawing.Size(47, 13)
         Me.lblStatistic.TabIndex = 13
         Me.lblStatistic.Text = "Statistic:"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(227, 286)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(74, 13)
-        Me.Label5.TabIndex = 20
-        Me.Label5.Text = "Minimum Bins:"
         '
         'Label6
         '
@@ -107,7 +96,7 @@ Partial Class dlgPolarAnnulus
         'lblWindDirection
         '
         Me.lblWindDirection.AutoSize = True
-        Me.lblWindDirection.Location = New System.Drawing.Point(262, 131)
+        Me.lblWindDirection.Location = New System.Drawing.Point(261, 36)
         Me.lblWindDirection.Name = "lblWindDirection"
         Me.lblWindDirection.Size = New System.Drawing.Size(80, 13)
         Me.lblWindDirection.TabIndex = 6
@@ -116,7 +105,7 @@ Partial Class dlgPolarAnnulus
         'lbldate
         '
         Me.lbldate.AutoSize = True
-        Me.lbldate.Location = New System.Drawing.Point(262, 174)
+        Me.lbldate.Location = New System.Drawing.Point(262, 69)
         Me.lbldate.Name = "lbldate"
         Me.lbldate.Size = New System.Drawing.Size(33, 13)
         Me.lbldate.TabIndex = 7
@@ -125,7 +114,7 @@ Partial Class dlgPolarAnnulus
         'lblPercentile
         '
         Me.lblPercentile.AutoSize = True
-        Me.lblPercentile.Location = New System.Drawing.Point(11, 340)
+        Me.lblPercentile.Location = New System.Drawing.Point(11, 313)
         Me.lblPercentile.Name = "lblPercentile"
         Me.lblPercentile.Size = New System.Drawing.Size(57, 13)
         Me.lblPercentile.TabIndex = 15
@@ -134,7 +123,7 @@ Partial Class dlgPolarAnnulus
         'lblSinglePollutant
         '
         Me.lblSinglePollutant.AutoSize = True
-        Me.lblSinglePollutant.Location = New System.Drawing.Point(262, 18)
+        Me.lblSinglePollutant.Location = New System.Drawing.Point(262, 112)
         Me.lblSinglePollutant.Name = "lblSinglePollutant"
         Me.lblSinglePollutant.Size = New System.Drawing.Size(51, 13)
         Me.lblSinglePollutant.TabIndex = 5
@@ -143,7 +132,7 @@ Partial Class dlgPolarAnnulus
         'ucrReceiverSinglePollutant
         '
         Me.ucrReceiverSinglePollutant.frmParent = Me
-        Me.ucrReceiverSinglePollutant.Location = New System.Drawing.Point(264, 37)
+        Me.ucrReceiverSinglePollutant.Location = New System.Drawing.Point(265, 125)
         Me.ucrReceiverSinglePollutant.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverSinglePollutant.Name = "ucrReceiverSinglePollutant"
         Me.ucrReceiverSinglePollutant.Selector = Nothing
@@ -155,7 +144,7 @@ Partial Class dlgPolarAnnulus
         'ucrChkMultiplePollutants
         '
         Me.ucrChkMultiplePollutants.Checked = False
-        Me.ucrChkMultiplePollutants.Location = New System.Drawing.Point(15, 231)
+        Me.ucrChkMultiplePollutants.Location = New System.Drawing.Point(15, 204)
         Me.ucrChkMultiplePollutants.Name = "ucrChkMultiplePollutants"
         Me.ucrChkMultiplePollutants.Size = New System.Drawing.Size(209, 20)
         Me.ucrChkMultiplePollutants.TabIndex = 8
@@ -172,7 +161,7 @@ Partial Class dlgPolarAnnulus
         '
         Me.ucrNudPercentile.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPercentile.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPercentile.Location = New System.Drawing.Point(100, 336)
+        Me.ucrNudPercentile.Location = New System.Drawing.Point(100, 309)
         Me.ucrNudPercentile.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudPercentile.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudPercentile.Name = "ucrNudPercentile"
@@ -183,7 +172,7 @@ Partial Class dlgPolarAnnulus
         'ucrReceiverMultiplePollutant
         '
         Me.ucrReceiverMultiplePollutant.frmParent = Me
-        Me.ucrReceiverMultiplePollutant.Location = New System.Drawing.Point(265, 36)
+        Me.ucrReceiverMultiplePollutant.Location = New System.Drawing.Point(265, 125)
         Me.ucrReceiverMultiplePollutant.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiplePollutant.Name = "ucrReceiverMultiplePollutant"
         Me.ucrReceiverMultiplePollutant.Selector = Nothing
@@ -195,7 +184,7 @@ Partial Class dlgPolarAnnulus
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(265, 189)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(265, 82)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -207,7 +196,7 @@ Partial Class dlgPolarAnnulus
         'ucrReceiverWindDirection
         '
         Me.ucrReceiverWindDirection.frmParent = Me
-        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(265, 151)
+        Me.ucrReceiverWindDirection.Location = New System.Drawing.Point(264, 49)
         Me.ucrReceiverWindDirection.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindDirection.Name = "ucrReceiverWindDirection"
         Me.ucrReceiverWindDirection.Selector = Nothing
@@ -216,22 +205,10 @@ Partial Class dlgPolarAnnulus
         Me.ucrReceiverWindDirection.TabIndex = 3
         Me.ucrReceiverWindDirection.ucrSelector = Nothing
         '
-        'ucrNudMinimumBins
-        '
-        Me.ucrNudMinimumBins.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinimumBins.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinimumBins.Location = New System.Drawing.Point(319, 283)
-        Me.ucrNudMinimumBins.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMinimumBins.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinimumBins.Name = "ucrNudMinimumBins"
-        Me.ucrNudMinimumBins.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudMinimumBins.TabIndex = 21
-        Me.ucrNudMinimumBins.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrChckPadDate
         '
         Me.ucrChckPadDate.Checked = False
-        Me.ucrChckPadDate.Location = New System.Drawing.Point(230, 333)
+        Me.ucrChckPadDate.Location = New System.Drawing.Point(230, 314)
         Me.ucrChckPadDate.Name = "ucrChckPadDate"
         Me.ucrChckPadDate.Size = New System.Drawing.Size(154, 20)
         Me.ucrChckPadDate.TabIndex = 23
@@ -239,7 +216,7 @@ Partial Class dlgPolarAnnulus
         'ucrChckExcludeMissing
         '
         Me.ucrChckExcludeMissing.Checked = False
-        Me.ucrChckExcludeMissing.Location = New System.Drawing.Point(230, 307)
+        Me.ucrChckExcludeMissing.Location = New System.Drawing.Point(230, 289)
         Me.ucrChckExcludeMissing.Name = "ucrChckExcludeMissing"
         Me.ucrChckExcludeMissing.Size = New System.Drawing.Size(155, 20)
         Me.ucrChckExcludeMissing.TabIndex = 22
@@ -249,7 +226,7 @@ Partial Class dlgPolarAnnulus
         Me.ucrInputStatistic.AddQuotesIfUnrecognised = True
         Me.ucrInputStatistic.GetSetSelectedIndex = -1
         Me.ucrInputStatistic.IsReadOnly = False
-        Me.ucrInputStatistic.Location = New System.Drawing.Point(67, 311)
+        Me.ucrInputStatistic.Location = New System.Drawing.Point(67, 284)
         Me.ucrInputStatistic.Name = "ucrInputStatistic"
         Me.ucrInputStatistic.Size = New System.Drawing.Size(83, 21)
         Me.ucrInputStatistic.TabIndex = 14
@@ -259,7 +236,7 @@ Partial Class dlgPolarAnnulus
         Me.ucrInputType.AddQuotesIfUnrecognised = True
         Me.ucrInputType.GetSetSelectedIndex = -1
         Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(67, 285)
+        Me.ucrInputType.Location = New System.Drawing.Point(67, 258)
         Me.ucrInputType.Name = "ucrInputType"
         Me.ucrInputType.Size = New System.Drawing.Size(83, 21)
         Me.ucrInputType.TabIndex = 12
@@ -269,7 +246,7 @@ Partial Class dlgPolarAnnulus
         Me.ucrInputColor.AddQuotesIfUnrecognised = True
         Me.ucrInputColor.GetSetSelectedIndex = -1
         Me.ucrInputColor.IsReadOnly = False
-        Me.ucrInputColor.Location = New System.Drawing.Point(67, 259)
+        Me.ucrInputColor.Location = New System.Drawing.Point(67, 232)
         Me.ucrInputColor.Name = "ucrInputColor"
         Me.ucrInputColor.Size = New System.Drawing.Size(83, 21)
         Me.ucrInputColor.TabIndex = 10
@@ -318,7 +295,6 @@ Partial Class dlgPolarAnnulus
         Me.Controls.Add(Me.lbldate)
         Me.Controls.Add(Me.ucrReceiverWindDirection)
         Me.Controls.Add(Me.lblWindDirection)
-        Me.Controls.Add(Me.ucrNudMinimumBins)
         Me.Controls.Add(Me.ucrChckPadDate)
         Me.Controls.Add(Me.ucrChckExcludeMissing)
         Me.Controls.Add(Me.ucrInputStatistic)
@@ -326,7 +302,6 @@ Partial Class dlgPolarAnnulus
         Me.Controls.Add(Me.ucrInputColor)
         Me.Controls.Add(Me.ucrInputKeyPosition)
         Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.lblStatistic)
         Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.lblColor)
@@ -350,12 +325,10 @@ Partial Class dlgPolarAnnulus
     Friend WithEvents lblColor As Label
     Friend WithEvents lblType As Label
     Friend WithEvents lblStatistic As Label
-    Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents ucrInputColor As ucrInputComboBox
     Friend WithEvents ucrInputType As ucrInputComboBox
     Friend WithEvents ucrInputStatistic As ucrInputComboBox
-    Friend WithEvents ucrNudMinimumBins As ucrNud
     Friend WithEvents ucrChckPadDate As ucrCheck
     Friend WithEvents ucrChckExcludeMissing As ucrCheck
     Friend WithEvents ucrInputKeyPosition As ucrInputComboBox
