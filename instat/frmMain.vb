@@ -2238,4 +2238,8 @@ Public Class frmMain
     Private Sub mnuStructuredCircularOtherRosePlotsPolarAnnulus_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarAnnulus.Click
         dlgPolarAnnulus.ShowDialog()
     End Sub
+
+    Private Sub ExportToWWRToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToWWRToolStripMenuItem.Click
+        dlgExportToWWR.ShowDialog()
+    End Sub
 End Class
