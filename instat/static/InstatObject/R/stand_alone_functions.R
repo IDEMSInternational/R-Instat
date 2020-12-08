@@ -1565,3 +1565,78 @@ make_factor <- function(x, ordered = is.ordered(x)) {
     factor(x, levels = as.character(unique(x)), ordered = ordered)
   }
 }
+
+spei_input <- function(data, station, year, month, element) {
+  if (missing(station)) id_cols <- c(year, month) else id_cols <- c(station, year, month)
+  # SPEI package assumes data is ordered so must be sorted
+  data_sort <- data %>% arrange(!!! rlang::syms(id_cols))
+  data <- data_sort
+  # There should be a better way to check this.
+  if (!all(data == data_sort, na.rm = TRUE)) stop("data must be sorted by (", paste(id_cols, collapse = ", "), ") for SPEI/SPI to be calculated correctly.")
+  # Monthly data i.e. one value per month (per station) is required
+  if (anyDuplicated(data %>% select(!!! rlang::syms(id_cols)))) stop("Multiple values per month detected. SPEI/SPI requires monthly data.")
+  if (!missing(station)) {
+    for (s in unique(data[[station]])) {
+      df <- data %>% filter(.data[[station]] == s)
+      dates_seq <- seq.Date(from = as.Date(paste(df[[year]][1], as.numeric(df[[month]][1]), 1), format = "%Y %m %d"),
+                            to = as.Date(paste(tail(df[[year]], 1), tail(as.numeric(df[[month]]), 1), 1), format = "%Y %m %d"),
+                            by = "1 month")
+      if (length(dates_seq) != nrow(df)) stop("Less rows than expected. data has gaps for missing months in '", s, "'. SPEI/SPI requires no date gaps.")
+    }
+  } else {
+    dates_seq <- seq.Date(from = as.Date(paste(data[[year]][1], as.numeric(data[[month]][1]), 1), format = "%Y %m %d"),
+                          to = as.Date(paste(tail(data[[year]], 1), tail(as.numeric(data[[month]]), 1), 1), format = "%Y %m %d"),
+                          by = "1 month")
+    if (length(dates_seq) != nrow(data)) stop("Less rows than expected. data has gaps for missing months. SPEI/SPI requires no date gaps.")
+  }
+  cols <- c(id_cols, element)
+  start <- c(data[[year]][1], data[[month]][1])
+  # If multiple stations, needs to be in "wide" format for SPEI
+  if (!missing(station)) {
+    ts_data <- tidyr::pivot_wider(data, id_cols = tidyselect::all_of(c(year, month)), 
+                                  names_from = tidyselect::all_of(station), values_from = tidyselect::all_of(element),
+                                  values_fill = NA)
+    ts_data <- ts_data %>% arrange(!!! rlang::syms(c(year, month)))
+    # Not sure how to do this using dplyr::select
+    ts_data[id_cols] <- NULL
+    ts_data <- ts(as.matrix(ts_data), frequency = 12, start = start)
+  } else {
+    ts_data <- ts(as.matrix(data[[element]]), frequency = 12, start = start)
+  }
+  ts_data
+}
+
+# This function extracts the SPEI/SPI column from an spei object x.
+# It requires the original data in order to return a vector of the correct length by removing NA values introduced when unstacking.
+# An alternative to this is to have a single wrapper SPEI/SPI function to handle this.
+# The advantage of this method is that it doesn't hide the call to SPEI/SPI in R-Instat and is compatible with the existing dialog.
+# The wrapper function may be a prefered long-term solution.
+spei_output <- function(x, data, station, year, month) {
+  if (! inherits(x, "spei")) stop("x must be an object of class 'spei'")
+  vals <- x$fitted
+  # If is.mts then multiple stations. Need to unstack and merge to ensure correct values obtained.
+  if (is.mts(vals)) {
+    df_spei <- as.data.frame(vals)
+    # ind will be the year in fractions
+    df_spei$ind <- zoo::index(x$fitted)
+    # Stack all stations to get back into tidy format.
+    df_spei <- tidyr::pivot_longer(df_spei, cols = 1:ncol(vals))
+    # Integer part is year
+    df_spei$yy <- trunc(df_spei$ind)
+    # Remainder is fraction of month. Use round to ensure exact integers for merging.
+    df_spei$mm <- ((df_spei$ind - df_spei$yy) * 12) + 1
+    df_spei$mm <- round(df_spei$mm)
+    if (!(is.numeric(data[[month]]) | is.factor(data[[month]]))) stop("month must be numeric or factor to ensure SPEI/SPI values are calculated correctly.")
+    # If factor, this assumes levels are in correct order.
+    data[[month]] <- as.numeric(data[[month]])
+    by <- c("name", "yy", "mm")
+    names(by) <- c(station, year, month)
+    # Need to merge to know which NA values are true and which were introduced when unstacking.
+    df_new <- dplyr::left_join(data, df_spei, by = by)
+    col <- df_new$value
+  } else {
+    # If single station, then no extra missing values were introduced. Data just needs to be made into a vector.
+    col <- as.vector(vals)
+  }
+  col
+}

@@ -1,4 +1,4 @@
-﻿'R-Instat
+﻿' R-Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -18,8 +18,12 @@ Imports instat.Translations
 Public Class dlgSPI
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsSpiFunction, clsSpeiFunction, clsListFunction, clsSummaryFunction, clsAsVectorFunction As New RFunction
-    Private clsDolarOperator As New ROperator
+    Private clsSpiFunction As New RFunction
+    Private clsSpeiFunction
+    Private clsSummaryFunction As New RFunction
+    Private clsListFunction As New RFunction
+    Private clsSpeiInputFunction As New RFunction
+    Private clsSpeiOutputFunction As New RFunction
 
     Private Sub dlgSPI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -38,32 +42,33 @@ Public Class dlgSPI
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 566
 
-        ucrSelectorVariable.SetParameterIsString()
+        ucrSelectorVariable.SetParameterIsrfunction()
+        ucrSelectorVariable.SetParameter(New RParameter("data", 0))
 
         'receivers
-        ucrReceiverData.SetParameterIsRFunction()
-        ucrReceiverData.SetParameter(New RParameter("data", 0))
-        ucrReceiverData.Selector = ucrSelectorVariable
-        ucrReceiverData.bAutoFill = True
-        ucrReceiverData.strSelectorHeading = "Variables"
+        ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.SetParameter(New RParameter("station", 1))
+        ucrReceiverStation.Selector = ucrSelectorVariable
+        ucrReceiverStation.SetClimaticType("station")
+        ucrReceiverStation.bAutoFill = True
 
         ucrReceiverYear.SetParameterIsString()
+        ucrReceiverYear.SetParameter(New RParameter("year", 2))
         ucrReceiverYear.Selector = ucrSelectorVariable
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
-        ucrReceiverYear.strSelectorHeading = "Year Variables"
 
         ucrReceiverMonth.SetParameterIsString()
+        ucrReceiverMonth.SetParameter(New RParameter("month", 3))
         ucrReceiverMonth.Selector = ucrSelectorVariable
         ucrReceiverMonth.SetClimaticType("month")
         ucrReceiverMonth.bAutoFill = True
-        ucrReceiverMonth.strSelectorHeading = "Month Variables"
 
-        ucrReceiverDate.SetParameterIsString()
-        ucrReceiverDate.Selector = ucrSelectorVariable
-        ucrReceiverDate.SetClimaticType("date")
-        ucrReceiverDate.bAutoFill = True
-        ucrReceiverDate.strSelectorHeading = "Date Variables"
+        ucrReceiverElement.SetParameterIsString()
+        ucrReceiverElement.SetParameter(New RParameter("element", 4))
+        ucrReceiverElement.SetClimaticType("rain")
+        ucrReceiverElement.Selector = ucrSelectorVariable
+        ucrReceiverElement.bAutoFill = True
 
         'setting up Nuds
         ucrNudTimeScale.SetParameter(New RParameter("scale", 1))
@@ -108,17 +113,16 @@ Public Class dlgSPI
         clsSpeiFunction = New RFunction
         clsSpiFunction = New RFunction
         clsListFunction = New RFunction
-        clsAsVectorFunction = New RFunction
+        clsSpeiInputFunction = New RFunction
         clsSummaryFunction = New RFunction
-
-        clsDolarOperator = New ROperator
+        clsSpeiOutputFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
         ucrSelectorVariable.Reset()
         ucrSaveIndex.Reset()
         ucrSaveModel.Reset()
-        ucrReceiverData.SetMeAsReceiver()
+        ucrReceiverElement.SetMeAsReceiver()
 
         clsListFunction.SetRCommand("list")
         clsListFunction.AddParameter("type", Chr(39) & "rectangular" & Chr(39), iPosition:=0)
@@ -126,6 +130,7 @@ Public Class dlgSPI
 
         clsSpiFunction.SetPackageName("SPEI")
         clsSpiFunction.SetRCommand("spi")
+        clsSpiFunction.AddParameter("data", clsRFunctionParameter:=clsSpeiInputFunction, iPosition:=0)
         clsSpiFunction.AddParameter("scale", 1, iPosition:=1)
         clsSpiFunction.AddParameter("na.rm", "TRUE", iPosition:=5)
         clsSpiFunction.AddParameter("kernel", clsRFunctionParameter:=clsListFunction, iPosition:=2)
@@ -133,6 +138,7 @@ Public Class dlgSPI
 
         clsSpeiFunction.SetPackageName("SPEI")
         clsSpeiFunction.SetRCommand("spei")
+        clsSpeiFunction.AddParameter("data", clsrfunctionparameter:=clsSpeiInputFunction, iPosition:=0)
         clsSpeiFunction.AddParameter("scale", 1, iPosition:=1)
         clsSpeiFunction.AddParameter("na.rm", "TRUE", iPosition:=5)
         clsSpeiFunction.AddParameter("kernel", clsRFunctionParameter:=clsListFunction, iPosition:=2)
@@ -141,34 +147,42 @@ Public Class dlgSPI
         clsSummaryFunction.SetRCommand("summary")
         clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpiFunction)
 
-        clsAsVectorFunction.SetRCommand("as.vector")
-        clsAsVectorFunction.AddParameter("x", clsROperatorParameter:=clsDolarOperator)
+        clsSpeiInputFunction.SetRCommand("spei_input")
+        clsSpeiInputFunction.SetAssignTo("data_ts")
 
-        clsDolarOperator.SetOperation("$")
-        clsDolarOperator.AddParameter("model", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
-        clsDolarOperator.AddParameter("fitted", "fitted", iPosition:=1)
+        clsSpeiOutputFunction.SetRCommand("spei_output")
+        clsSpeiOutputFunction.AddParameter("x", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsAsVectorFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSpeiOutputFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNudTimeScale.AddAdditionalCodeParameterPair(clsSpeiFunction, New RParameter("scale", 1), iAdditionalPairNo:=1)
         ucrChkOmitMissingValues.AddAdditionalCodeParameterPair(clsSpeiFunction, New RParameter("na.rm", 6), iAdditionalPairNo:=1)
-        ucrReceiverData.AddAdditionalCodeParameterPair(clsSpeiFunction, New RParameter("data", 0), iAdditionalPairNo:=1)
+        ucrSaveModel.AddAdditionalRCode(clsSpiFunction, bReset)
 
-        ucrReceiverData.SetRCode(clsSpiFunction, bReset)
+        ucrReceiverStation.AddAdditionalCodeParameterPair(clsSpeiOutputFunction, New RParameter("station", 2), iAdditionalPairNo:=1)
+        ucrReceiverYear.AddAdditionalCodeParameterPair(clsSpeiOutputFunction, New RParameter("year", 3), iAdditionalPairNo:=1)
+        ucrReceiverMonth.AddAdditionalCodeParameterPair(clsSpeiOutputFunction, New RParameter("month", 4), iAdditionalPairNo:=1)
+        ucrSelectorVariable.AddAdditionalCodeParameterPair(clsSpeiOutputFunction, ucrSelectorVariable.GetParameter(), iAdditionalPairNo:=1)
+
+        ucrReceiverStation.SetRCode(clsSpeiInputFunction, bReset)
+        ucrReceiverYear.SetRCode(clsSpeiInputFunction, bReset)
+        ucrReceiverMonth.SetRCode(clsSpeiInputFunction, bReset)
+        ucrReceiverElement.SetRCode(clsSpeiInputFunction, bReset)
+        ucrSelectorVariable.SetRCode(clsSpeiInputFunction, bReset)
+
         ucrChkOmitMissingValues.SetRCode(clsSpiFunction, bReset)
         ucrNudTimeScale.SetRCode(clsSpiFunction, bReset)
         ucrPnlKernelType.SetRCode(clsListFunction, bReset)
         ucrNudKernelShift.SetRCode(clsListFunction, bReset)
         ucrPnlIndex.SetRCode(clsSummaryFunction, bReset)
-        ucrSaveIndex.SetRCode(clsAsVectorFunction, bReset)
-        ucrSaveModel.AddAdditionalRCode(clsSpiFunction, bReset)
+        ucrSaveIndex.SetRCode(clsSpeiOutputFunction, bReset)
         ucrSaveModel.SetRCode(clsSpeiFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverData.IsEmpty AndAlso ucrSaveIndex.IsComplete Then
+        If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso ucrSaveIndex.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -184,18 +198,18 @@ Public Class dlgSPI
     Private Sub ucrPnlIndex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlIndex.ControlContentsChanged
         If rdoSPI.Checked Then
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpiFunction)
-            clsDolarOperator.AddParameter("model", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
+            clsSpeiOutputFunction.AddParameter("x", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
             ucrSaveIndex.SetPrefix("spi")
             ucrSaveModel.SetPrefix("spi_mod")
         ElseIf rdoSPEI.Checked Then
             clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpeiFunction)
-            clsDolarOperator.AddParameter("model", clsRFunctionParameter:=clsSpeiFunction, iPosition:=0)
+            clsSpeiOutputFunction.AddParameter("x", clsRFunctionParameter:=clsSpeiFunction, iPosition:=0)
             ucrSaveIndex.SetPrefix("spei")
             ucrSaveModel.SetPrefix("spei_mod")
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverData.ControlContentsChanged, ucrSaveIndex.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrSaveIndex.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
