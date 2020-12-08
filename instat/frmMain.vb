@@ -2239,7 +2239,7 @@ Public Class frmMain
         dlgPolarAnnulus.ShowDialog()
     End Sub
 
-    Private Sub ExportToWWRToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ExportToWWRToolStripMenuItem.Click
+    Private Sub ExportToWWRToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuExportToWWRToolStrip.Click
         dlgExportToWWR.ShowDialog()
     End Sub
 End Class

@@ -1058,14 +1058,17 @@
   <data name="mnuClimaticFileExportToCPT.Text" xml:space="preserve">
     <value>Export to CPT...</value>
   </data>
-  <data name="ExportToWWRToolStripMenuItem.Enabled" type="System.Boolean, mscorlib">
+  <data name="mnuExportToWWRToolStrip.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="ExportToWWRToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuExportToWWRToolStrip.Size" type="System.Drawing.Size, System.Drawing">
     <value>247, 22</value>
   </data>
-  <data name="ExportToWWRToolStripMenuItem.Text" xml:space="preserve">
+  <data name="mnuExportToWWRToolStrip.Text" xml:space="preserve">
     <value>Export to World Weather Record</value>
+  </data>
+  <data name="mnuExportToWWRToolStrip.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="mnuClimaticFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
@@ -7311,10 +7314,10 @@
   <data name="&gt;&gt;mnuClimaticFileExportToCPT.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ExportToWWRToolStripMenuItem.Name" xml:space="preserve">
-    <value>ExportToWWRToolStripMenuItem</value>
+  <data name="&gt;&gt;mnuExportToWWRToolStrip.Name" xml:space="preserve">
+    <value>mnuExportToWWRToolStrip</value>
   </data>
-  <data name="&gt;&gt;ExportToWWRToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuExportToWWRToolStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator18.Name" xml:space="preserve">
