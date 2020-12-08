@@ -1332,7 +1332,7 @@
     <value>189, 22</value>
   </data>
   <data name="mnuClimaticPrepareSPI.Text" xml:space="preserve">
-    <value>SPI...</value>
+    <value>SPI/SPEI...</value>
   </data>
   <data name="ToolStripSeparator51.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 6</value>
