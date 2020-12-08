@@ -23,13 +23,14 @@ Partial Class dlgSPI
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSPI))
-        Me.lblDate = New System.Windows.Forms.Label()
+        Me.lblStation = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblData = New System.Windows.Forms.Label()
         Me.grpIndex = New System.Windows.Forms.GroupBox()
         Me.rdoSPEI = New System.Windows.Forms.RadioButton()
         Me.rdoSPI = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlIndex = New instat.UcrPanel()
         Me.lblTimeScale = New System.Windows.Forms.Label()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.grpKernel = New System.Windows.Forms.GroupBox()
@@ -39,28 +40,27 @@ Partial Class dlgSPI
         Me.rdoGaussian = New System.Windows.Forms.RadioButton()
         Me.rdoCircular = New System.Windows.Forms.RadioButton()
         Me.rdoTriangular = New System.Windows.Forms.RadioButton()
-        Me.ucrSaveModel = New instat.ucrSave()
-        Me.ucrSaveIndex = New instat.ucrSave()
         Me.ucrPnlKernelType = New instat.UcrPanel()
         Me.ucrNudKernelShift = New instat.ucrNud()
+        Me.ucrSaveModel = New instat.ucrSave()
+        Me.ucrSaveIndex = New instat.ucrSave()
         Me.ucrNudTimeScale = New instat.ucrNud()
         Me.ucrChkOmitMissingValues = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrPnlIndex = New instat.UcrPanel()
-        Me.ucrReceiverData = New instat.ucrReceiverSingle()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpIndex.SuspendLayout()
         Me.grpKernel.SuspendLayout()
         Me.grpKernelType.SuspendLayout()
         Me.SuspendLayout()
         '
-        'lblDate
+        'lblStation
         '
-        resources.ApplyResources(Me.lblDate, "lblDate")
-        Me.lblDate.Name = "lblDate"
+        resources.ApplyResources(Me.lblStation, "lblStation")
+        Me.lblStation.Name = "lblStation"
         '
         'lblYear
         '
@@ -99,6 +99,11 @@ Partial Class dlgSPI
         Me.rdoSPI.Name = "rdoSPI"
         Me.rdoSPI.TabStop = True
         Me.rdoSPI.UseVisualStyleBackColor = True
+        '
+        'ucrPnlIndex
+        '
+        resources.ApplyResources(Me.ucrPnlIndex, "ucrPnlIndex")
+        Me.ucrPnlIndex.Name = "ucrPnlIndex"
         '
         'lblTimeScale
         '
@@ -158,16 +163,6 @@ Partial Class dlgSPI
         Me.rdoTriangular.TabStop = True
         Me.rdoTriangular.UseVisualStyleBackColor = True
         '
-        'ucrSaveModel
-        '
-        resources.ApplyResources(Me.ucrSaveModel, "ucrSaveModel")
-        Me.ucrSaveModel.Name = "ucrSaveModel"
-        '
-        'ucrSaveIndex
-        '
-        resources.ApplyResources(Me.ucrSaveIndex, "ucrSaveIndex")
-        Me.ucrSaveIndex.Name = "ucrSaveIndex"
-        '
         'ucrPnlKernelType
         '
         resources.ApplyResources(Me.ucrPnlKernelType, "ucrPnlKernelType")
@@ -182,6 +177,16 @@ Partial Class dlgSPI
         Me.ucrNudKernelShift.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudKernelShift.Name = "ucrNudKernelShift"
         Me.ucrNudKernelShift.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrSaveModel
+        '
+        resources.ApplyResources(Me.ucrSaveModel, "ucrSaveModel")
+        Me.ucrSaveModel.Name = "ucrSaveModel"
+        '
+        'ucrSaveIndex
+        '
+        resources.ApplyResources(Me.ucrSaveIndex, "ucrSaveIndex")
+        Me.ucrSaveIndex.Name = "ucrSaveIndex"
         '
         'ucrNudTimeScale
         '
@@ -204,19 +209,14 @@ Partial Class dlgSPI
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrPnlIndex
+        'ucrReceiverElement
         '
-        resources.ApplyResources(Me.ucrPnlIndex, "ucrPnlIndex")
-        Me.ucrPnlIndex.Name = "ucrPnlIndex"
-        '
-        'ucrReceiverData
-        '
-        Me.ucrReceiverData.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverData, "ucrReceiverData")
-        Me.ucrReceiverData.Name = "ucrReceiverData"
-        Me.ucrReceiverData.Selector = Nothing
-        Me.ucrReceiverData.strNcFilePath = ""
-        Me.ucrReceiverData.ucrSelector = Nothing
+        Me.ucrReceiverElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrReceiverMonth
         '
@@ -236,14 +236,14 @@ Partial Class dlgSPI
         Me.ucrReceiverYear.strNcFilePath = ""
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
-        'ucrReceiverDate
+        'ucrReceiverStation
         '
-        Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.ucrSelector = Nothing
+        Me.ucrReceiverStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrSelectorVariable
         '
@@ -268,11 +268,11 @@ Partial Class dlgSPI
         Me.Controls.Add(Me.lblData)
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(Me.lblYear)
-        Me.Controls.Add(Me.lblDate)
-        Me.Controls.Add(Me.ucrReceiverData)
+        Me.Controls.Add(Me.lblStation)
+        Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrReceiverMonth)
         Me.Controls.Add(Me.ucrReceiverYear)
-        Me.Controls.Add(Me.ucrReceiverDate)
+        Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrSelectorVariable)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -289,9 +289,9 @@ Partial Class dlgSPI
 
     End Sub
     Friend WithEvents ucrSelectorVariable As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
-    Friend WithEvents lblDate As Label
-    Friend WithEvents ucrReceiverData As ucrReceiverSingle
+    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents lblStation As Label
+    Friend WithEvents ucrReceiverElement As ucrReceiverSingle
     Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents lblData As Label
