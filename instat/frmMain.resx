@@ -1058,6 +1058,18 @@
   <data name="mnuClimaticFileExportToCPT.Text" xml:space="preserve">
     <value>Export to CPT...</value>
   </data>
+  <data name="mnuExportToWWRToolStrip.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuExportToWWRToolStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>247, 22</value>
+  </data>
+  <data name="mnuExportToWWRToolStrip.Text" xml:space="preserve">
+    <value>Export to World Weather Record</value>
+  </data>
+  <data name="mnuExportToWWRToolStrip.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="mnuClimaticFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
   </data>
@@ -1320,7 +1332,7 @@
     <value>189, 22</value>
   </data>
   <data name="mnuClimaticPrepareSPI.Text" xml:space="preserve">
-    <value>SPI...</value>
+    <value>SPI/SPEI...</value>
   </data>
   <data name="ToolStripSeparator51.Size" type="System.Drawing.Size, System.Drawing">
     <value>186, 6</value>
@@ -3544,31 +3556,31 @@
     <value>Wind/Pollution Rose...</value>
   </data>
   <data name="mnuStructuredCircularOtherRosePlotsPercentileRose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>168, 22</value>
   </data>
   <data name="mnuStructuredCircularOtherRosePlotsPercentileRose.Text" xml:space="preserve">
     <value>Percentile Rose...</value>
   </data>
   <data name="mnuStructuredCircularOtherRosePlotsPolarPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>168, 22</value>
   </data>
   <data name="mnuStructuredCircularOtherRosePlotsPolarPlot.Text" xml:space="preserve">
     <value>Polar Plot...</value>
   </data>
   <data name="mnuStructuredCircularOtherRosePlotsPolarFrequency.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>168, 22</value>
   </data>
   <data name="mnuStructuredCircularOtherRosePlotsPolarFrequency.Text" xml:space="preserve">
     <value>Polar Frequency...</value>
   </data>
   <data name="mnuStructuredCircularOtherRosePlotsPolarCluster.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>168, 22</value>
   </data>
   <data name="mnuStructuredCircularOtherRosePlotsPolarCluster.Text" xml:space="preserve">
     <value>Polar Cluster...</value>
   </data>
   <data name="mnuStructuredCircularOtherRosePlotsPolarAnnulus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>168, 22</value>
   </data>
   <data name="mnuStructuredCircularOtherRosePlotsPolarAnnulus.Text" xml:space="preserve">
     <value>Polar Annulus...</value>
@@ -7300,6 +7312,12 @@
     <value>mnuClimaticFileExportToCPT</value>
   </data>
   <data name="&gt;&gt;mnuClimaticFileExportToCPT.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuExportToWWRToolStrip.Name" xml:space="preserve">
+    <value>mnuExportToWWRToolStrip</value>
+  </data>
+  <data name="&gt;&gt;mnuExportToWWRToolStrip.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator18.Name" xml:space="preserve">
