@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgExportToWWR
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,22 +20,33 @@ Partial Class dlgExportToWWR
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.UcrButtons1 = New instat.ucrButtons()
         Me.SuspendLayout()
+        '
+        'UcrButtons1
+        '
+        Me.UcrButtons1.Location = New System.Drawing.Point(6, 282)
+        Me.UcrButtons1.Name = "UcrButtons1"
+        Me.UcrButtons1.Size = New System.Drawing.Size(410, 52)
+        Me.UcrButtons1.TabIndex = 0
         '
         'dlgExportToWWR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(355, 372)
+        Me.ClientSize = New System.Drawing.Size(422, 363)
+        Me.Controls.Add(Me.UcrButtons1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgExportToWWR"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "dlgExportToWWR"
+        Me.Text = "Export To WWR"
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents UcrButtons1 As ucrButtons
 End Class
