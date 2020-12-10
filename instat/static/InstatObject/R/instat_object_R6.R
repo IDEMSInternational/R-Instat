@@ -1349,111 +1349,132 @@ DataBook$set("public", "remove_key", function(data_name, key_name) {
 }
 )
 
-DataBook$set("public", "add_climdex_indices", function(data_name, indices = list(), freq = "annual", year, month) {
-  if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label)) stop("Data must be defined as climatic to calculate climdex indices.")
-  if(missing(year)) stop("year column is required")
-  if(freq == "monthly" && missing(month)) stop("month column is required for monthly summaries")
-  for(i in seq_along(indices)) {
-    self$add_single_climdex_index(data_name = data_name, indices = indices[[i]], index_name = names(indices)[i], freq = freq, year = year, month = month)
-  }
-}
-)
-
-DataBook$set("public", "add_single_climdex_index", function(data_name, indices, index_name = "", freq = "annual", year, month) {
-  if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label)) stop("Data must be defined as climatic to calculate climdex indices.")
+DataBook$set("public", "add_climdex_indices", function(data_name, climdex_output, freq = "annual", station, year, month) {
+  stopifnot(freq %in% c("annual", "monthly"))
+  if (missing(climdex_output)) stop("climdex_output is required.")
+  if (missing(year)) stop("year is required.")
+  if (freq == "monthly" && missing(month)) stop("month is required for freq = 'monthly'.")
+  
   col_year <- self$get_columns_from_data(data_name = data_name, col_names = year)
-  year_class <- class(col_year)
-  if(freq == "annual") {
-    ind_data <- data.frame(names(indices), indices)
-    names(ind_data) <- c(year, index_name)
-    linked_data_name <- self$get_linked_to_data_name(data_name, year)
-    if(length(linked_data_name) == 0) {
-      if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
-      if("factor" %in% year_class) ind_data[[year]] <- make_factor(levels(ind_data[[year]]))[ind_data[[year]]]
-      if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
-      data_list = list(ind_data)
-      new_data_name <- paste(data_name, "by", year, sep = "_")
-      new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
-      names(data_list) <- new_data_name
-      self$import_data(data_tables = data_list)
-      self$add_key(new_data_name, year)
-      key_list <- list(year)
-      names(key_list) <- year
-      self$add_link(from_data_frame = data_name, to_data_frame = new_data_name, link_pairs = key_list, type = keyed_link_label)
+  if (!missing(station)) col_station <- self$get_columns_from_data(data_name = data_name, col_names = station)
+  if (freq == "monthly") col_month <- self$get_columns_from_data(data_name = data_name, col_names = month)
+  links_cols <- year
+  if (!missing(station)) links_cols <- c(station, links_cols)
+  if (freq == "monthly") links_cols <- c(links_cols, month)
+  linked_data_name <- self$get_linked_to_data_name(data_name, links_cols)
+  if (length(linked_data_name) == 0) {
+    # The classes should be the same if climdex_output comes from climdex() function.
+    # If not, try to match the classes so that they are sensibly linked.
+    # TODO These checks are repeated and could be extracted out.
+    if (!missing(station) && !all(class(col_station) == class(climdex_output[[station]]))) {
+      if (is.numeric(col_station)) climdex_output[[station]] <- as.numeric(climdex_output[[station]])
+      else if (is.factor(col_station)) climdex_output[[station]] <- make_factor(climdex_output[[station]])
+      else if (is.character(col_station)) climdex_output[[station]] <- as.character(climdex_output[[station]])
+      else warning("Cannot recognise the class of station column. Link between data frames may be unstable.")
     }
-    else {
-      # TODO what if there are multiple?
-      linked_data_name <- linked_data_name[1]
-      year_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = year)
-      by <- year
-      names(by) <- year_col_name_linked
-      linked_year_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = year_col_name_linked)
-      linked_year_class <- class(linked_year_data)
-      year_class <- class(ind_data[[year]])
-      if(!any(linked_year_class %in% year_class)) {
-        # Only need to check numeric/integer here since year in ind_data is factor.
-        # If construction of ind_data above is changed this may need to be updated.
-        if("numeric" %in% linked_year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
-        else if("integer" %in% linked_year_class) ind_data[[year]] <- as.integer(levels(ind_data[[year]]))[ind_data[[year]]]
-        # else merge may not work, but still worth trying
+    if (!all(class(col_year) == class(climdex_output[[year]]))) {
+      if (is.numeric(col_year)) climdex_output[[year]] <- as.numeric(climdex_output[[year]])
+      else if (is.factor(col_year)) climdex_output[[year]] <- make_factor(climdex_output[[year]])
+      else if (is.character(col_year)) climdex_output[[year]] <- as.character(climdex_output[[year]])
+      else warning("Cannot recognise the class of year column. Link between data frames may be unstable.")
+    }
+    if (freq == "monthly" && !all(class(col_month) == class(climdex_output[[month]]))) {
+      if (is.numeric(col_month)) climdex_output[[month]] <- as.numeric(climdex_output[[month]])
+      else if (is.factor(col_month)) {
+        lvs <- levels(col_month)
+        if (length(lvs) == 12) climdex_output[[month]] <- factor(climdex_output[[month]], labels = lvs, ordered = is.ordered(col_month))
+        else {
+          warning("month is a factor but does not have 12 levels. Output may not link correctly to data.")
+          climdex_output[[month]] <- make_factor(climdex_output[[month]])
+        }
       }
-      # TODO could make this a try/catch and then if merging fails put data in new data frame
-      self$merge_data(data_name = linked_data_name, new_data = ind_data, by = by)
+      else if (is.character(col_month)) {
+        mns <- unique(col_month)
+        # Also check English names as month.abb and month.name are locale dependent.
+        month.abb.english <- c("Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+        month.name.english <- c("January", "February", "March", "April", "May", "June", "July", 
+                                "August", "September", "October", "November", "December")
+        if (length(mns) == 12) {
+          if (setequal(mns, month.abb)) climdex_output[[month]] <- month.abb[climdex_output[[month]]]
+          else if (setequal(mns, month.name)) climdex_output[[month]] <- month.name[climdex_output[[month]]]
+          else if (setequal(mns, month.name.english)) climdex_output[[month]] <- month.abb.english[climdex_output[[month]]]
+          else if (setequal(mns, month.name.english)) climdex_output[[month]] <- month.name.english[climdex_output[[month]]]
+          else warning("Cannot determine format of month column in data. Output may not link correctly to data.")
+        } else {
+          warning("month does not have 12 unique values. Output may not link correctly to data.")
+          climdex_output[[month]] <- as.character(climdex_output[[month]])
+        }
+      }
     }
-  }
-  else if(freq == "monthly") {
-    ind_data <- data.frame(stringr::str_split_fixed(string = names(indices), n = 2, pattern = "-"), indices, row.names = NULL)
-    names(ind_data) <- c(year, month, index_name)
-    ind_data[[month]] <- as.numeric(ind_data[[month]])
-    linked_data_name <- self$get_linked_to_data_name(data_name, c(year, month))
-    if(length(linked_data_name) == 0) {
-      if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
-      if("factor" %in% year_class) ind_data[[year]] <- make_factor(levels(ind_data[[year]]))[ind_data[[year]]]
-      if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
-      data_list = list(ind_data)
-      new_data_name <- paste(data_name, "by", year, month, sep = "_")
-      new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
-      names(data_list) <- new_data_name
-      self$import_data(data_tables = data_list)
-      self$add_key(new_data_name, c(year, month))
-      key_list <- list(year, month)
-      names(key_list) <- c(year, month)
-      self$add_link(from_data_frame = data_name, to_data_frame = new_data_name, link_pairs = key_list, type = keyed_link_label)
+    data_list <- list(climdex_output)
+    new_data_name <- paste(data_name, "by", paste(links_cols, collapse = "_"), sep = "_")
+    new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
+    names(data_list) <- new_data_name
+    self$import_data(data_tables = data_list)
+    self$add_key(new_data_name, links_cols)
+    key_list <- as.list(links_cols)
+    names(key_list) <- links_cols
+    self$add_link(from_data_frame = data_name, to_data_frame = new_data_name, link_pairs = key_list, type = keyed_link_label)
+  } else {
+    # TODO what if there are multiple linked data frames?
+    linked_data_name <- linked_data_name[1]
+    year_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = year)
+    by <- year
+    names(by) <- year_col_name_linked
+    if (!missing(station)) {
+      station_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = station)
+      linked_station_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = station_col_name_linked)
+      by <- c(station, by)
+      names(by)[1] <- station_col_name_linked
     }
-    else {
-      # TODO what if there are multiple?
-      linked_data_name <- linked_data_name[1]
-      year_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = year)
+    if (freq == "monthly") {
       month_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = month)
-      by <- c(year, month)
-      names(by) <- c(year_col_name_linked, month_col_name_linked)
-      linked_year_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = year_col_name_linked)
-      linked_year_class <- class(linked_year_data)
       linked_month_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = month_col_name_linked)
-      linked_month_class <- class(linked_month_data)
-      year_class <- class(ind_data[[year]])
-      month_class <- class(ind_data[[month]])
-      if(!any(linked_year_class %in% year_class)) {
-        # Only need to check numeric/integer here since year in ind_data is factor.
-        # If construction of ind_data above is changed this may need to be updated.
-        if("numeric" %in% linked_year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
-        else if("integer" %in% linked_year_class) ind_data[[year]] <- as.integer(levels(ind_data[[year]]))[ind_data[[year]]]
-        # else merge may not work, but still worth trying
-      }
-      if(!all(ind_data[[month]] %in% linked_month_data)) {
-        # Only need to check month names here since month in ind_data is numeric.
-        if(all(linked_month_data) %in% month.name) {
-          ind_data[[month]] <- factor(ind_data[[month]], labels = month.name)
-        }
-        else if(all(linked_month_data) %in% month.abb) {
-          ind_data[[month]] <- factor(ind_data[[month]], labels = month.abb)
-        }
-      }
-      # TODO could make this a try/catch and then if merging fails put data in new data frame
-      self$merge_data(data_name = linked_data_name, new_data = ind_data, by = by)
+      by <- c(by, month)
+      names(by)[3] <- month_col_name_linked
     }
+    linked_year_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = year_col_name_linked)
+    if (!missing(station) && !all(class(linked_station_data) == class(climdex_output[[station]]))) {
+      if (is.numeric(linked_station_data)) climdex_output[[station]] <- as.numeric(climdex_output[[station]])
+      else if (is.factor(linked_station_data)) climdex_output[[station]] <- make_factor(climdex_output[[station]])
+      else if (is.character(linked_station_data)) climdex_output[[station]] <- as.character(climdex_output[[station]])
+    }
+    if (!all(class(linked_year_data) == class(climdex_output[[year]]))) {
+      if (is.numeric(linked_year_data)) climdex_output[[year]] <- as.numeric(climdex_output[[year]])
+      else if (is.factor(linked_year_data)) climdex_output[[year]] <- make_factor(climdex_output[[year]])
+      else if (is.character(linked_year_data)) climdex_output[[year]] <- as.character(climdex_output[[year]])
+    }
+    if (freq == "monthly" && !all(class(linked_month_data) == class(climdex_output[[month]]))) {
+      if (is.numeric(linked_month_data)) climdex_output[[month]] <- as.numeric(climdex_output[[month]])
+      else if (is.factor(linked_month_data)) {
+        lvs <- levels(linked_month_data)
+        if (length(lvs) == 12) climdex_output[[year]] <- factor(climdex_output[[month]], labels = lvs)
+        else {
+          warning("month is a factor but does not have 12 levels. Output may not link correctly to data.")
+          climdex_output[[month]] <- make_factor(climdex_output[[month]])
+        }
+      }
+      else if (is.character(linked_month_data)) {
+        mns <- unique(linked_month_data)
+        # Also check English names as month.abb and month.name are locale dependent.
+        month.abb.english <- c("Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+        month.name.english <- c("January", "February", "March", "April", "May", "June", "July", 
+                                "August", "September", "October", "November", "December")
+        if (length(mns) == 12) {
+          if (setequal(mns, month.abb)) climdex_output[[month]] <- month.abb[climdex_output[[month]]]
+          else if (setequal(mns, month.name)) climdex_output[[month]] <- month.name[climdex_output[[month]]]
+          else if (setequal(mns, month.name.english)) climdex_output[[month]] <- month.abb.english[climdex_output[[month]]]
+          else if (setequal(mns, month.name.english)) climdex_output[[month]] <- month.name.english[climdex_output[[month]]]
+          else warning("Cannot determine format of month column in data. Output may not link correctly to data.")
+        } else {
+          warning("month does not have 12 unique values. Output may not link correctly to data.")
+          climdex_output[[month]] <- as.character(climdex_output[[month]])
+        }
+      }
+    }
+    # TODO could make this a try/catch and then if merging fails put data in new data frame
+    self$merge_data(data_name = linked_data_name, new_data = climdex_output, by = by)
   }
-  else stop("freq not recognised. freq must be either 'annual' or 'monthly'")
 }
 )
 
