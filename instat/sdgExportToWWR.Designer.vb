@@ -22,13 +22,26 @@ Partial Class sdgExportToWWR
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.UcrSelectorByDataFrameAddRemove1 = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
+        '
+        'UcrSelectorByDataFrameAddRemove1
+        '
+        Me.UcrSelectorByDataFrameAddRemove1.bDropUnusedFilterLevels = False
+        Me.UcrSelectorByDataFrameAddRemove1.bShowHiddenColumns = False
+        Me.UcrSelectorByDataFrameAddRemove1.bUseCurrentFilter = True
+        Me.UcrSelectorByDataFrameAddRemove1.Location = New System.Drawing.Point(9, 9)
+        Me.UcrSelectorByDataFrameAddRemove1.Margin = New System.Windows.Forms.Padding(0)
+        Me.UcrSelectorByDataFrameAddRemove1.Name = "UcrSelectorByDataFrameAddRemove1"
+        Me.UcrSelectorByDataFrameAddRemove1.Size = New System.Drawing.Size(210, 180)
+        Me.UcrSelectorByDataFrameAddRemove1.TabIndex = 0
         '
         'sdgExportToWWR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(396, 287)
+        Me.Controls.Add(Me.UcrSelectorByDataFrameAddRemove1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -38,4 +51,6 @@ Partial Class sdgExportToWWR
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents UcrSelectorByDataFrameAddRemove1 As ucrSelectorByDataFrameAddRemove
 End Class
