@@ -39,6 +39,7 @@ Public Class dlgSPI
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctType As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 566
 
@@ -79,16 +80,18 @@ Public Class dlgSPI
         ucrChkOmitMissingValues.SetText("Omit Missing Values")
         ucrChkOmitMissingValues.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        'panel
-        ucrPnlKernelType.SetParameter(New RParameter("type", 0))
-        ucrPnlKernelType.AddRadioButton(rdoTriangular, Chr(39) & "triangular" & Chr(39))
-        ucrPnlKernelType.AddRadioButton(rdoCircular, Chr(39) & "circular" & Chr(39))
-        ucrPnlKernelType.AddRadioButton(rdoRectangular, Chr(39) & "rectangular" & Chr(39))
-        ucrPnlKernelType.AddRadioButton(rdoGaussian, Chr(39) & "gaussian" & Chr(39))
+        'input
+        ucrInputType.SetParameter(New RParameter("type", 0))
+        dctType.Add("Triangular", Chr(39) & "triangular" & Chr(39))
+        dctType.Add("Circular", Chr(39) & "circular" & Chr(39))
+        dctType.Add("Rectangular", Chr(39) & "rectangular" & Chr(39))
+        dctType.Add("Gaussian", Chr(39) & "gaussian" & Chr(39))
+        ucrInputType.SetItems(dctType)
+        ucrInputType.SetDropDownStyleAsNonEditable()
 
         'ucrshift
         ucrNudKernelShift.SetParameter(New RParameter("shift", 1))
-        ucrNudKernelShift.SetMinMax(0, 24)
+        ucrNudKernelShift.SetMinMax(0, ucrNudTimeScale.GetText - 1)
 
         'ucrpnlInd
         ucrPnlIndex.AddRadioButton(rdoSPI)
@@ -104,7 +107,7 @@ Public Class dlgSPI
 
         ucrSaveModel.SetSaveTypeAsModel()
         ucrSaveModel.SetDataFrameSelector(ucrSelectorVariable.ucrAvailableDataFrames)
-        ucrSaveModel.SetCheckBoxText("Save Model:")
+        ucrSaveModel.SetCheckBoxText("Save Model")
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
     End Sub
@@ -174,7 +177,7 @@ Public Class dlgSPI
 
         ucrChkOmitMissingValues.SetRCode(clsSpiFunction, bReset)
         ucrNudTimeScale.SetRCode(clsSpiFunction, bReset)
-        ucrPnlKernelType.SetRCode(clsListFunction, bReset)
+        ucrInputType.SetRCode(clsListFunction, bReset)
         ucrNudKernelShift.SetRCode(clsListFunction, bReset)
         ucrPnlIndex.SetRCode(clsSummaryFunction, bReset)
         ucrSaveIndex.SetRCode(clsSpeiOutputFunction, bReset)
@@ -182,7 +185,7 @@ Public Class dlgSPI
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso ucrSaveIndex.IsComplete Then
+        If Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty AndAlso Not ucrReceiverElement.IsEmpty AndAlso ucrSaveIndex.IsComplete AndAlso ucrSaveModel.IsComplete AndAlso ucrNudKernelShift.GetText <> "" AndAlso ucrNudTimeScale.GetText <> "" Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -209,7 +212,15 @@ Public Class dlgSPI
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrSaveIndex.ControlContentsChanged
+    Private Sub ucrNudTimeScale_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTimeScale.ControlValueChanged
+        If ucrNudTimeScale.GetText < 25 Then
+            ucrNudKernelShift.SetMinMax(0, ucrNudTimeScale.GetText - 1)
+        Else
+            ucrNudKernelShift.SetMinMax(0, 24)
+        End If
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrSaveIndex.ControlContentsChanged, ucrSaveModel.ControlContentsChanged, ucrNudTimeScale.ControlContentsChanged, ucrNudKernelShift.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

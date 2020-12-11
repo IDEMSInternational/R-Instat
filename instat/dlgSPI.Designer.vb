@@ -27,20 +27,15 @@ Partial Class dlgSPI
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblData = New System.Windows.Forms.Label()
-        Me.grpIndex = New System.Windows.Forms.GroupBox()
         Me.rdoSPEI = New System.Windows.Forms.RadioButton()
         Me.rdoSPI = New System.Windows.Forms.RadioButton()
         Me.ucrPnlIndex = New instat.UcrPanel()
         Me.lblTimeScale = New System.Windows.Forms.Label()
         Me.BackgroundWorker1 = New System.ComponentModel.BackgroundWorker()
         Me.grpKernel = New System.Windows.Forms.GroupBox()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.ucrInputType = New instat.ucrInputComboBox()
         Me.lblShift = New System.Windows.Forms.Label()
-        Me.grpKernelType = New System.Windows.Forms.GroupBox()
-        Me.rdoRectangular = New System.Windows.Forms.RadioButton()
-        Me.rdoGaussian = New System.Windows.Forms.RadioButton()
-        Me.rdoCircular = New System.Windows.Forms.RadioButton()
-        Me.rdoTriangular = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlKernelType = New instat.UcrPanel()
         Me.ucrNudKernelShift = New instat.ucrNud()
         Me.ucrSaveModel = New instat.ucrSave()
         Me.ucrSaveIndex = New instat.ucrSave()
@@ -52,9 +47,7 @@ Partial Class dlgSPI
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.grpIndex.SuspendLayout()
         Me.grpKernel.SuspendLayout()
-        Me.grpKernelType.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblStation
@@ -77,18 +70,12 @@ Partial Class dlgSPI
         resources.ApplyResources(Me.lblData, "lblData")
         Me.lblData.Name = "lblData"
         '
-        'grpIndex
-        '
-        Me.grpIndex.Controls.Add(Me.rdoSPEI)
-        Me.grpIndex.Controls.Add(Me.rdoSPI)
-        Me.grpIndex.Controls.Add(Me.ucrPnlIndex)
-        resources.ApplyResources(Me.grpIndex, "grpIndex")
-        Me.grpIndex.Name = "grpIndex"
-        Me.grpIndex.TabStop = False
-        '
         'rdoSPEI
         '
         resources.ApplyResources(Me.rdoSPEI, "rdoSPEI")
+        Me.rdoSPEI.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSPEI.FlatAppearance.BorderSize = 2
+        Me.rdoSPEI.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSPEI.Name = "rdoSPEI"
         Me.rdoSPEI.TabStop = True
         Me.rdoSPEI.UseVisualStyleBackColor = True
@@ -96,6 +83,9 @@ Partial Class dlgSPI
         'rdoSPI
         '
         resources.ApplyResources(Me.rdoSPI, "rdoSPI")
+        Me.rdoSPI.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSPI.FlatAppearance.BorderSize = 2
+        Me.rdoSPI.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoSPI.Name = "rdoSPI"
         Me.rdoSPI.TabStop = True
         Me.rdoSPI.UseVisualStyleBackColor = True
@@ -112,61 +102,31 @@ Partial Class dlgSPI
         '
         'grpKernel
         '
+        Me.grpKernel.Controls.Add(Me.lblType)
+        Me.grpKernel.Controls.Add(Me.ucrInputType)
         Me.grpKernel.Controls.Add(Me.lblShift)
-        Me.grpKernel.Controls.Add(Me.grpKernelType)
         Me.grpKernel.Controls.Add(Me.ucrNudKernelShift)
         resources.ApplyResources(Me.grpKernel, "grpKernel")
         Me.grpKernel.Name = "grpKernel"
         Me.grpKernel.TabStop = False
         '
+        'lblType
+        '
+        resources.ApplyResources(Me.lblType, "lblType")
+        Me.lblType.Name = "lblType"
+        '
+        'ucrInputType
+        '
+        Me.ucrInputType.AddQuotesIfUnrecognised = True
+        Me.ucrInputType.GetSetSelectedIndex = -1
+        Me.ucrInputType.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputType, "ucrInputType")
+        Me.ucrInputType.Name = "ucrInputType"
+        '
         'lblShift
         '
         resources.ApplyResources(Me.lblShift, "lblShift")
         Me.lblShift.Name = "lblShift"
-        '
-        'grpKernelType
-        '
-        Me.grpKernelType.Controls.Add(Me.rdoRectangular)
-        Me.grpKernelType.Controls.Add(Me.rdoGaussian)
-        Me.grpKernelType.Controls.Add(Me.rdoCircular)
-        Me.grpKernelType.Controls.Add(Me.rdoTriangular)
-        Me.grpKernelType.Controls.Add(Me.ucrPnlKernelType)
-        resources.ApplyResources(Me.grpKernelType, "grpKernelType")
-        Me.grpKernelType.Name = "grpKernelType"
-        Me.grpKernelType.TabStop = False
-        '
-        'rdoRectangular
-        '
-        resources.ApplyResources(Me.rdoRectangular, "rdoRectangular")
-        Me.rdoRectangular.Name = "rdoRectangular"
-        Me.rdoRectangular.TabStop = True
-        Me.rdoRectangular.UseVisualStyleBackColor = True
-        '
-        'rdoGaussian
-        '
-        resources.ApplyResources(Me.rdoGaussian, "rdoGaussian")
-        Me.rdoGaussian.Name = "rdoGaussian"
-        Me.rdoGaussian.TabStop = True
-        Me.rdoGaussian.UseVisualStyleBackColor = True
-        '
-        'rdoCircular
-        '
-        resources.ApplyResources(Me.rdoCircular, "rdoCircular")
-        Me.rdoCircular.Name = "rdoCircular"
-        Me.rdoCircular.TabStop = True
-        Me.rdoCircular.UseVisualStyleBackColor = True
-        '
-        'rdoTriangular
-        '
-        resources.ApplyResources(Me.rdoTriangular, "rdoTriangular")
-        Me.rdoTriangular.Name = "rdoTriangular"
-        Me.rdoTriangular.TabStop = True
-        Me.rdoTriangular.UseVisualStyleBackColor = True
-        '
-        'ucrPnlKernelType
-        '
-        resources.ApplyResources(Me.ucrPnlKernelType, "ucrPnlKernelType")
-        Me.ucrPnlKernelType.Name = "ucrPnlKernelType"
         '
         'ucrNudKernelShift
         '
@@ -257,6 +217,9 @@ Partial Class dlgSPI
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoSPEI)
+        Me.Controls.Add(Me.rdoSPI)
+        Me.Controls.Add(Me.ucrPnlIndex)
         Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.ucrSaveIndex)
         Me.Controls.Add(Me.grpKernel)
@@ -264,7 +227,6 @@ Partial Class dlgSPI
         Me.Controls.Add(Me.ucrChkOmitMissingValues)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblTimeScale)
-        Me.Controls.Add(Me.grpIndex)
         Me.Controls.Add(Me.lblData)
         Me.Controls.Add(Me.lblMonth)
         Me.Controls.Add(Me.lblYear)
@@ -278,12 +240,8 @@ Partial Class dlgSPI
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgSPI"
-        Me.grpIndex.ResumeLayout(False)
-        Me.grpIndex.PerformLayout()
         Me.grpKernel.ResumeLayout(False)
         Me.grpKernel.PerformLayout()
-        Me.grpKernelType.ResumeLayout(False)
-        Me.grpKernelType.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -297,7 +255,6 @@ Partial Class dlgSPI
     Friend WithEvents lblData As Label
     Friend WithEvents lblMonth As Label
     Friend WithEvents lblYear As Label
-    Friend WithEvents grpIndex As GroupBox
     Friend WithEvents rdoSPEI As RadioButton
     Friend WithEvents rdoSPI As RadioButton
     Friend WithEvents lblTimeScale As Label
@@ -306,15 +263,11 @@ Partial Class dlgSPI
     Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
     Friend WithEvents ucrNudTimeScale As ucrNud
     Friend WithEvents grpKernel As GroupBox
-    Friend WithEvents rdoRectangular As RadioButton
-    Friend WithEvents rdoTriangular As RadioButton
-    Friend WithEvents ucrPnlKernelType As UcrPanel
-    Friend WithEvents rdoCircular As RadioButton
-    Friend WithEvents rdoGaussian As RadioButton
     Friend WithEvents lblShift As Label
     Friend WithEvents ucrNudKernelShift As ucrNud
     Friend WithEvents ucrPnlIndex As UcrPanel
     Friend WithEvents ucrSaveIndex As ucrSave
-    Friend WithEvents grpKernelType As GroupBox
     Friend WithEvents ucrSaveModel As ucrSave
+    Friend WithEvents lblType As Label
+    Friend WithEvents ucrInputType As ucrInputComboBox
 End Class
