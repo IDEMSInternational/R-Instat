@@ -1390,15 +1390,16 @@ DataBook$set("public", "add_climdex_indices", function(data_name, climdex_output
       }
       else if (is.character(col_month)) {
         mns <- unique(col_month)
-        # Also check English names as month.abb and month.name are locale dependent.
-        month.abb.english <- c("Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-        month.name.english <- c("January", "February", "March", "April", "May", "June", "July", 
-                                "August", "September", "October", "November", "December")
+        # Also check English names as month.abb and month.name constants are locale dependent.
         if (length(mns) == 12) {
           if (setequal(mns, month.abb)) climdex_output[[month]] <- month.abb[climdex_output[[month]]]
           else if (setequal(mns, month.name)) climdex_output[[month]] <- month.name[climdex_output[[month]]]
-          else if (setequal(mns, month.name.english)) climdex_output[[month]] <- month.abb.english[climdex_output[[month]]]
-          else if (setequal(mns, month.name.english)) climdex_output[[month]] <- month.name.english[climdex_output[[month]]]
+          else if (setequal(mns, month_abb_english)) climdex_output[[month]] <- month_abb_english[climdex_output[[month]]]
+          else if (setequal(mns, month_name_english)) climdex_output[[month]] <- month_name_english[climdex_output[[month]]]
+          else if (setequal(mns, tolower(month_abb_english))) climdex_output[[month]] <- tolower(month_abb_english)[climdex_output[[month]]]
+          else if (setequal(mns, tolower(month_name_english))) climdex_output[[month]] <- tolower(month_name_english)[climdex_output[[month]]]
+          else if (setequal(mns, toupper(month_abb_english))) climdex_output[[month]] <- toupper(month_abb_english)[climdex_output[[month]]]
+          else if (setequal(mns, toupper(month_name_english))) climdex_output[[month]] <- toupper(month_name_english)[climdex_output[[month]]]
           else warning("Cannot determine format of month column in data. Output may not link correctly to data.")
         } else {
           warning("month does not have 12 unique values. Output may not link correctly to data.")
@@ -1457,14 +1458,15 @@ DataBook$set("public", "add_climdex_indices", function(data_name, climdex_output
       else if (is.character(linked_month_data)) {
         mns <- unique(linked_month_data)
         # Also check English names as month.abb and month.name are locale dependent.
-        month.abb.english <- c("Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-        month.name.english <- c("January", "February", "March", "April", "May", "June", "July", 
-                                "August", "September", "October", "November", "December")
         if (length(mns) == 12) {
           if (setequal(mns, month.abb)) climdex_output[[month]] <- month.abb[climdex_output[[month]]]
           else if (setequal(mns, month.name)) climdex_output[[month]] <- month.name[climdex_output[[month]]]
-          else if (setequal(mns, month.name.english)) climdex_output[[month]] <- month.abb.english[climdex_output[[month]]]
-          else if (setequal(mns, month.name.english)) climdex_output[[month]] <- month.name.english[climdex_output[[month]]]
+          else if (setequal(mns, month_abb_english)) climdex_output[[month]] <- month_abb_english[climdex_output[[month]]]
+          else if (setequal(mns, month_name_english)) climdex_output[[month]] <- month_name_english[climdex_output[[month]]]
+          else if (setequal(mns, tolower(month_abb_english))) climdex_output[[month]] <- tolower(month_abb_english)[climdex_output[[month]]]
+          else if (setequal(mns, tolower(month_name_english))) climdex_output[[month]] <- tolower(month_name_english)[climdex_output[[month]]]
+          else if (setequal(mns, toupper(month_abb_english))) climdex_output[[month]] <- toupper(month_abb_english)[climdex_output[[month]]]
+          else if (setequal(mns, toupper(month_name_english))) climdex_output[[month]] <- toupper(month_name_english)[climdex_output[[month]]]
           else warning("Cannot determine format of month column in data. Output may not link correctly to data.")
         } else {
           warning("month does not have 12 unique values. Output may not link correctly to data.")

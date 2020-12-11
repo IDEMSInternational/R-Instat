@@ -1566,6 +1566,11 @@ make_factor <- function(x, ordered = is.ordered(x)) {
   }
 }
 
+### Constants
+month_abb_english <- c("Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+month_name_english <- c("January", "February", "March", "April", "May", "June", "July", 
+                        "August", "September", "October", "November", "December")
+
 # factored out code for a multiple indices for a single station.
 # Called by climdex().
 # Not intended to be used externally.
@@ -1580,7 +1585,7 @@ climdex_single_station <- function(ci, freq = "annual", indices, year, month,
                    "fd" = climdex.pcic::climdex.fd(ci),
                    "su" = climdex.pcic::climdex.su(ci),
                    "id" = climdex.pcic::climdex.id(ci),
-                   "tr" = climdex.pcic::climdex.id(ci),
+                   "tr" = climdex.pcic::climdex.tr(ci),
                    "wsdi" = climdex.pcic::climdex.wsdi(ci, spells.can.span.years = spells.can.span.years),
                    "csdi" = climdex.pcic::climdex.csdi(ci, spells.can.span.years = spells.can.span.years),
                    "gsl" = climdex.pcic::climdex.gsl(ci, gsl.mode = gsl.mode),
@@ -1594,7 +1599,7 @@ climdex_single_station <- function(ci, freq = "annual", indices, year, month,
                    "tx90p" = climdex.pcic::climdex.tx90p(ci, freq = freq),
                    "dtr" = climdex.pcic::climdex.dtr(ci, freq = freq),
                    "rx1day" = climdex.pcic::climdex.rx1day(ci, freq = freq),
-                   "rx5day" = climdex.pcic::climdex.rx1day(ci, freq = freq),
+                   "rx5day" = climdex.pcic::climdex.rx5day(ci, freq = freq),
                    "sdii" = climdex.pcic::climdex.sdii(ci),
                    "r10mm" = climdex.pcic::climdex.r10mm(ci),
                    "r20mm" = climdex.pcic::climdex.r20mm(ci),
@@ -1610,7 +1615,7 @@ climdex_single_station <- function(ci, freq = "annual", indices, year, month,
       if (freq == "annual") {
         df_ind <- data.frame(names(vals), unname(vals))
         names(df_ind) <- c(year, indices[i])
-      } else if(freq == "monthly") {
+      } else {
         df_ind <- data.frame(stringr::str_split_fixed(string = names(vals), n = 2, pattern = "-"), vals, row.names = NULL)
         names(df_ind) <- c(year, month, indices[i])
         df_ind[[month]] <- as.numeric(df_ind[[month]])
@@ -1633,7 +1638,7 @@ climdex <- function(data, station, date, year, month, prec, tmax, tmin, indices,
   stopifnot(freq %in% c("annual", "monthly"))
   if (freq == "monthly" && missing(month)) stop("month is required for freq = 'monthly'.")
   
-  # All indices can only be calculated annually. Only some have monthly versions as well.
+  # All indices can be calculated annually. Only some have monthly versions as well.
   year_only_indices <- c("fd", "su", "id", "tr", "wsdi", "csdi", "gsl", "sdii", "r10mm", 
                          "r20mm", "rnnmm", "cdd", "cwd", "r95ptot", "r99ptot", "prcptot")
   if (freq == "monthly" && any(indices %in% year_only_indices)) stop("Some indices selected are not available on a monthly frequency.")
@@ -1673,6 +1678,7 @@ climdex <- function(data, station, date, year, month, prec, tmax, tmin, indices,
   }
   # Make the type of the year/month column(s) the same in the output as in data.
   if (!missing(station)) {
+    # TODO This is done in several places and should be extracted as a function.
     if (is.numeric(data[[station]])) df_out[[station]] <- as.numeric(df_out[[station]])
     else if (is.factor(data[[station]])) df_out[[station]] <- make_factor(df_out[[station]])
     else if (is.character(data[[station]])) df_out[[station]] <- as.character(df_out[[station]])
@@ -1694,14 +1700,15 @@ climdex <- function(data, station, date, year, month, prec, tmax, tmin, indices,
     else if (is.character(data[[month]])) {
       mns <- unique(data[[month]])
       # Also check English names as month.abb and month.name are locale dependent.
-      month.abb.english <- c("Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-      month.name.english <- c("January", "February", "March", "April", "May", "June", "July", 
-                              "August", "September", "October", "November", "December")
       if (length(mns) == 12) {
         if (setequal(mns, month.abb)) df_out[[month]] <- month.abb[df_out[[month]]]
         else if (setequal(mns, month.name)) df_out[[month]] <- month.name[df_out[[month]]]
-        else if (setequal(mns, month.name.english)) df_out[[month]] <- month.abb.english[df_out[[month]]]
-        else if (setequal(mns, month.name.english)) df_out[[month]] <- month.name.english[df_out[[month]]]
+        else if (setequal(mns, month_name_english)) df_out[[month]] <- month_abb_english[df_out[[month]]]
+        else if (setequal(mns, month_name_english)) df_out[[month]] <- month_name_english[df_out[[month]]]
+        else if (setequal(mns, tolower(month_name_english))) df_out[[month]] <- tolower(month_abb_english)[df_out[[month]]]
+        else if (setequal(mns, tolower(month_name_english))) df_out[[month]] <- tolower(month_name_english)[df_out[[month]]]
+        else if (setequal(mns, toupper(month_name_english))) df_out[[month]] <- toupper(month_abb_english)[df_out[[month]]]
+        else if (setequal(mns, toupper(month_name_english))) df_out[[month]] <- toupper(month_name_english)[df_out[[month]]]
         else warning("Cannot determine format of month column in data. Output may not link correctly to data.")
       } else {
         warning("month does not have 12 unique values. Output may not link correctly to data.")
