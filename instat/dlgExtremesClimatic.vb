@@ -551,7 +551,11 @@ Public Class dlgExtremesClimatic
             End If
         End If
 
-        clsPlotMrlFunction.AddParameter("element_name", ucrReceiverElement.GetVariableNames, iPosition:=2)
+        If Not ucrReceiverElement.IsEmpty Then
+            clsPlotMrlFunction.AddParameter("element_name", ucrReceiverElement.GetVariableNames, iPosition:=2)
+        Else
+            clsPlotMrlFunction.RemoveParameterByName("element_name")
+        End If
         MinMaxFunction()
         PeaksFunction()
     End Sub
