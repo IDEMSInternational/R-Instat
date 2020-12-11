@@ -133,7 +133,7 @@
     <value>43, 13</value>
   </data>
   <data name="lblStation.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>4</value>
   </data>
   <data name="lblStation.Text" xml:space="preserve">
     <value>Station:</value>
@@ -163,7 +163,7 @@
     <value>32, 13</value>
   </data>
   <data name="lblYear.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>6</value>
   </data>
   <data name="lblYear.Text" xml:space="preserve">
     <value>Year:</value>
@@ -193,7 +193,7 @@
     <value>40, 13</value>
   </data>
   <data name="lblMonth.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>8</value>
   </data>
   <data name="lblMonth.Text" xml:space="preserve">
     <value>Month:</value>
@@ -223,7 +223,7 @@
     <value>48, 13</value>
   </data>
   <data name="lblData.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="lblData.Text" xml:space="preserve">
     <value>Element:</value>
@@ -256,7 +256,7 @@
     <value>82, 27</value>
   </data>
   <data name="rdoSPEI.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="rdoSPEI.Text" xml:space="preserve">
     <value>SPEI</value>
@@ -292,7 +292,7 @@
     <value>82, 27</value>
   </data>
   <data name="rdoSPI.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="rdoSPI.Text" xml:space="preserve">
     <value>SPI</value>
@@ -319,7 +319,7 @@
     <value>176, 35</value>
   </data>
   <data name="ucrPnlIndex.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrPnlIndex.Name" xml:space="preserve">
     <value>ucrPnlIndex</value>
@@ -346,7 +346,7 @@
     <value>107, 13</value>
   </data>
   <data name="lblTimeScale.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="lblTimeScale.Text" xml:space="preserve">
     <value>Time Scale (Months):</value>
@@ -379,7 +379,7 @@
     <value>34, 13</value>
   </data>
   <data name="lblType.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+    <value>0</value>
   </data>
   <data name="lblType.Text" xml:space="preserve">
     <value>Type:</value>
@@ -403,7 +403,7 @@
     <value>137, 21</value>
   </data>
   <data name="ucrInputType.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrInputType.Name" xml:space="preserve">
     <value>ucrInputType</value>
@@ -430,7 +430,7 @@
     <value>31, 13</value>
   </data>
   <data name="lblShift.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
+    <value>2</value>
   </data>
   <data name="lblShift.Text" xml:space="preserve">
     <value>Shift:</value>
@@ -454,7 +454,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudKernelShift.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrNudKernelShift.Name" xml:space="preserve">
     <value>ucrNudKernelShift</value>
@@ -475,7 +475,7 @@
     <value>210, 73</value>
   </data>
   <data name="grpKernel.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="grpKernel.Text" xml:space="preserve">
     <value>Kernel</value>
@@ -502,7 +502,7 @@
     <value>256, 24</value>
   </data>
   <data name="ucrSaveModel.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrSaveModel.Name" xml:space="preserve">
     <value>ucrSaveModel</value>
@@ -526,7 +526,7 @@
     <value>256, 24</value>
   </data>
   <data name="ucrSaveIndex.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;ucrSaveIndex.Name" xml:space="preserve">
     <value>ucrSaveIndex</value>
@@ -547,7 +547,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudTimeScale.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrNudTimeScale.Name" xml:space="preserve">
     <value>ucrNudTimeScale</value>
@@ -568,7 +568,7 @@
     <value>149, 20</value>
   </data>
   <data name="ucrChkOmitMissingValues.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrChkOmitMissingValues.Name" xml:space="preserve">
     <value>ucrChkOmitMissingValues</value>
@@ -589,7 +589,7 @@
     <value>410, 57</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -625,7 +625,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverMonth.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMonth.Name" xml:space="preserve">
     <value>ucrReceiverMonth</value>
@@ -649,7 +649,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverYear.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrReceiverYear.Name" xml:space="preserve">
     <value>ucrReceiverYear</value>
@@ -673,7 +673,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverStation.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrReceiverStation.Name" xml:space="preserve">
     <value>ucrReceiverStation</value>
@@ -697,7 +697,7 @@
     <value>210, 180</value>
   </data>
   <data name="ucrSelectorVariable.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrSelectorVariable.Name" xml:space="preserve">
     <value>ucrSelectorVariable</value>
@@ -739,7 +739,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverElement.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrReceiverElement.Name" xml:space="preserve">
     <value>ucrReceiverElement</value>
