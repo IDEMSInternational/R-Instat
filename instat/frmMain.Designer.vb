@@ -190,6 +190,7 @@ Partial Class frmMain
         Me.mnuClimaticFileImportFromCliData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuExportToWWRToolStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticTidyandExamine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineVisualiseData = New System.Windows.Forms.ToolStripMenuItem()
@@ -1453,7 +1454,7 @@ Partial Class frmMain
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileOpenandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportFromClimSoft, Me.mnuClimateFileImportFromClimSoftWizard, Me.mnuClimaticFileImportFromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileOpenandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportFromClimSoft, Me.mnuClimateFileImportFromClimSoftWizard, Me.mnuClimaticFileImportFromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         resources.ApplyResources(Me.mnuClimaticFile, "mnuClimaticFile")
         '
@@ -1507,6 +1508,11 @@ Partial Class frmMain
         Me.mnuClimaticFileExportToCPT.Name = "mnuClimaticFileExportToCPT"
         resources.ApplyResources(Me.mnuClimaticFileExportToCPT, "mnuClimaticFileExportToCPT")
         Me.mnuClimaticFileExportToCPT.Tag = "Export_to_CPT"
+        '
+        'mnuExportToWWRToolStrip
+        '
+        resources.ApplyResources(Me.mnuExportToWWRToolStrip, "mnuExportToWWRToolStrip")
+        Me.mnuExportToWWRToolStrip.Name = "mnuExportToWWRToolStrip"
         '
         'ToolStripSeparator18
         '
@@ -4753,4 +4759,5 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarFrequency As ToolStripMenuItem
     Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarCluster As ToolStripMenuItem
     Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarAnnulus As ToolStripMenuItem
+    Friend WithEvents mnuExportToWWRToolStrip As ToolStripMenuItem
 End Class
