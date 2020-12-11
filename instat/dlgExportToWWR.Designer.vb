@@ -282,7 +282,7 @@ Partial Class dlgExportToWWR
         Me.ucrInputLinkby.AddQuotesIfUnrecognised = True
         Me.ucrInputLinkby.GetSetSelectedIndex = -1
         Me.ucrInputLinkby.IsReadOnly = False
-        Me.ucrInputLinkby.Location = New System.Drawing.Point(396, 48)
+        Me.ucrInputLinkby.Location = New System.Drawing.Point(398, 49)
         Me.ucrInputLinkby.Name = "ucrInputLinkby"
         Me.ucrInputLinkby.Size = New System.Drawing.Size(96, 21)
         Me.ucrInputLinkby.TabIndex = 4
@@ -332,7 +332,7 @@ Partial Class dlgExportToWWR
         'lblType
         '
         Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(392, 32)
+        Me.lblType.Location = New System.Drawing.Point(396, 32)
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(34, 13)
         Me.lblType.TabIndex = 3
@@ -342,7 +342,7 @@ Partial Class dlgExportToWWR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(495, 453)
+        Me.ClientSize = New System.Drawing.Size(499, 453)
         Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.ucrReceiverStationIdentifier)
         Me.Controls.Add(Me.lblSaveFile)

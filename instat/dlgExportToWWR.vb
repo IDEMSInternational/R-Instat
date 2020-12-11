@@ -17,7 +17,7 @@
 Imports System.IO
 Imports instat.Translations
 Public Class dlgExportToWWR
-    Dim bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
 
@@ -96,7 +96,8 @@ Public Class dlgExportToWWR
         ucrReceiverStationIdentifier.SetParameter(New RParameter("link", 12))
         ucrReceiverStationIdentifier.Selector = ucrSelectorExportToWWR
         ucrReceiverStationIdentifier.SetParameterIsString()
-
+        ucrReceiverStationIdentifier.SetClimaticType("station")
+        ucrReceiverStationIdentifier.bAutoFill = True
     End Sub
 
     Private Sub SetDefaults()
@@ -105,7 +106,7 @@ Public Class dlgExportToWWR
         clsWWRExport.AddParameter("link_by", Chr(34) & "station_name" & Chr(34), iPosition:=10)
 
         ucrSelectorExportToWWR.Reset()
-        ucrReceiverYear.SetMeAsReceiver()
+        ucrReceiverStationIdentifier.SetMeAsReceiver()
 
         clsWWRExport.SetRCommand("wwr_export")
         clsWWRExport.AddParameter("folder", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\", "/"), iPosition:=2)
@@ -120,11 +121,11 @@ Public Class dlgExportToWWR
     End Sub
 
     Private Sub TestOkEnabled()
-        '' If ucrInputStationName.IsEmpty Then
-        '' ucrBase.OKEnabled(False)
-        ''Else
-        ''ucrBase.OKEnabled(True)
-        ''End If
+        If ucrReceiverStationIdentifier.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrInputLinkby.IsEmpty OrElse (ucrReceiverMeanStationPressure.IsEmpty AndAlso ucrReceiverMeanSeaLevelPressure.IsEmpty AndAlso ucrReceiverMeanMonthlyAirTemperature.IsEmpty AndAlso ucrReceiverPrecipitation.IsEmpty AndAlso ucrReceiverMeanDailyMaxAirTemperature.IsEmpty AndAlso ucrReceiverMeanDailyMinAirTemperature.IsEmpty AndAlso ucrReceiverMeanRelativeHumidity.IsEmpty) OrElse Not sdgExportToWWR.bOkEnabled Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -133,14 +134,11 @@ Public Class dlgExportToWWR
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrInputStationName_ControlContentsChanged(ucrChangedControl As ucrCore)
-        TestOkEnabled()
-    End Sub
-
     Private Sub btnStationMetadata_Click(sender As Object, e As EventArgs) Handles btnStationMetadata.Click
         sdgExportToWWR.SetRFunction(clsNewRFunction:=clsWWRExport, bResetSubdialog)
         sdgExportToWWR.ShowDialog()
         bResetSubdialog = False
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
@@ -154,6 +152,10 @@ Public Class dlgExportToWWR
                 ucrInputFilePath.SetName(Replace(strPath, "\", "/"))
             End If
         End Using
+    End Sub
+
+    Private Sub ucrReceiverStationIdentifier_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStationIdentifier.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrInputLinkby.ControlContentsChanged, ucrReceiverMeanStationPressure.ControlContentsChanged, ucrReceiverMeanSeaLevelPressure.ControlContentsChanged, ucrReceiverMeanMonthlyAirTemperature.ControlContentsChanged, ucrReceiverPrecipitation.ControlContentsChanged, ucrReceiverMeanDailyMaxAirTemperature.ControlContentsChanged, ucrReceiverMeanDailyMinAirTemperature.ControlContentsChanged, ucrReceiverMeanRelativeHumidity.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
 

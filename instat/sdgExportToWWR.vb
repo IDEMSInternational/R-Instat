@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class sdgExportToWWR
     Private bControlsInitialised As Boolean = True
     Private clsWWRExport As New RFunction
+    Public bOkEnabled As Boolean = False
 
     Private Sub sdgExportToWWR_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -78,7 +79,15 @@ Public Class sdgExportToWWR
 
         If bReset Then
             ucrSelectorStationMetadata.Reset()
-            ' ucrReceiverStationName.SetMeAsReceiver()
+            ucrReceiverStationName.SetMeAsReceiver()
+        End If
+    End Sub
+
+    Private Sub ucrButtonsSdg_ClickReturn(sender As Object, e As EventArgs) Handles ucrButtonsSdg.ClickReturn
+        If ucrReceiverStationName.IsEmpty OrElse ucrReceiverWNONumber.IsEmpty OrElse ucrReceiverCountry.IsEmpty OrElse ucrReceiverLatitude.IsEmpty OrElse ucrReceiverLongitude.IsEmpty Then
+            bOkEnabled = False
+        Else
+            bOkEnabled = True
         End If
     End Sub
 End Class
