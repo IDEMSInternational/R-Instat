@@ -19,8 +19,10 @@ Imports instat.Translations
 Public Class dlgExportToWWR
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
 
-    'Add R functions and  operators
+    'R function
+    Private clsWWRExport As RFunction
     Private Sub dlgExportToWWR_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -37,74 +39,121 @@ Public Class dlgExportToWWR
     End Sub
 
     Private Sub InitiliseDialog()
-        ucrBase.iHelpTopicID = 355
+        Dim dctStationIdentifier As New Dictionary(Of String, String)
 
-        ucrSelectorExportToWWR.SetParameter(New RParameter("data"))
-        'ucrSelectorExportToWWR.SetParameterIsrfunction()
+        ucrSelectorExportToWWR.SetParameter(New RParameter("data", 0))
+        ucrSelectorExportToWWR.SetParameterIsrfunction()
 
         ucrReceiverYear.Selector = ucrSelectorExportToWWR
-        ucrReceiverYear.SetParameter(New RParameter("year"))
+        ucrReceiverYear.SetParameter(New RParameter("year", 1))
         ucrReceiverYear.SetParameterIsString()
-        ucrReceiverYear.SetLinkedDisplayControl(lblYear)
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
 
         ucrReceiverMonth.Selector = ucrSelectorExportToWWR
-        ucrReceiverMonth.SetParameter(New RParameter("year"))
+        ucrReceiverMonth.SetParameter(New RParameter("month", 2))
         ucrReceiverMonth.SetParameterIsString()
-        ucrReceiverMonth.SetLinkedDisplayControl(lblYear)
-        ucrReceiverMonth.SetClimaticType("year")
+        ucrReceiverMonth.SetClimaticType("month")
         ucrReceiverMonth.bAutoFill = True
 
+        ucrReceiverMeanStationPressure.SetParameter(New RParameter("element", 3))
         ucrReceiverMeanStationPressure.Selector = ucrSelectorExportToWWR
-        ucrReceiverMeanStationPressure.SetParameter(New RParameter("element"))
         ucrReceiverMeanStationPressure.SetParameterIsString()
-        ucrReceiverMeanStationPressure.SetLinkedDisplayControl(lblMeanStationPressure)
 
+        ucrReceiverMeanSeaLevelPressure.SetParameter(New RParameter("station", 4))
         ucrReceiverMeanSeaLevelPressure.Selector = ucrSelectorExportToWWR
-        ucrReceiverMeanSeaLevelPressure.SetParameter(New RParameter("station"))
         ucrReceiverMeanSeaLevelPressure.SetParameterIsString()
-        ucrReceiverMeanSeaLevelPressure.SetLinkedDisplayControl(lblMeanSeaLevelPressure)
 
-        ucrReceiverPrecipitation.SetParameter(New RParameter("latitude"))
+        ucrReceiverPrecipitation.SetParameter(New RParameter("total_precip", 5))
+        ucrReceiverPrecipitation.Selector = ucrSelectorExportToWWR
         ucrReceiverPrecipitation.SetParameterIsString()
-        ucrReceiverPrecipitation.SetLinkedDisplayControl(lblPrecipitation)
-        ucrReceiverPrecipitation.bAutoFill = True
 
-        ucrReceiverMeanRelativeHumidity.SetParameter(New RParameter("longitude"))
+        ucrReceiverMeanRelativeHumidity.SetParameter(New RParameter("mean_rel_hum", 6))
+        ucrReceiverMeanRelativeHumidity.Selector = ucrSelectorExportToWWR
         ucrReceiverMeanRelativeHumidity.SetParameterIsString()
-        ucrReceiverMeanRelativeHumidity.SetLinkedDisplayControl(lblMeanRelativeHumidity)
-        ucrReceiverMeanRelativeHumidity.bAutoFill = True
 
-        ucrReceiverMeanDailyMaxAirTemperature.SetParameter(New RParameter("longitude"))
+        ucrReceiverMeanDailyMaxAirTemperature.SetParameter(New RParameter("mean_max_temp", 7))
+        ucrReceiverMeanDailyMaxAirTemperature.Selector = ucrSelectorExportToWWR
         ucrReceiverMeanDailyMaxAirTemperature.SetParameterIsString()
-        ucrReceiverMeanDailyMaxAirTemperature.SetLinkedDisplayControl(lblMeanDailyMaxAirTemperature)
-        ucrReceiverMeanDailyMaxAirTemperature.bAutoFill = True
 
-        ucrReceiverMeanDailyMinAirTemperature.SetParameter(New RParameter("longitude"))
+        ucrReceiverMeanDailyMinAirTemperature.SetParameter(New RParameter("mean_min_temp", 8))
+        ucrReceiverMeanDailyMinAirTemperature.Selector = ucrSelectorExportToWWR
         ucrReceiverMeanDailyMinAirTemperature.SetParameterIsString()
-        ucrReceiverMeanDailyMinAirTemperature.SetLinkedDisplayControl(lblMeanDailyMinAirTemperature)
-        ucrReceiverMeanDailyMinAirTemperature.bAutoFill = True
 
-        ucrReceiverMeanMonthlyAirTemperature.SetParameter(New RParameter("longitude"))
+        ucrReceiverMeanMonthlyAirTemperature.SetParameter(New RParameter("mean_temp", 9))
+        ucrReceiverMeanMonthlyAirTemperature.Selector = ucrSelectorExportToWWR
         ucrReceiverMeanMonthlyAirTemperature.SetParameterIsString()
-        ucrReceiverMeanMonthlyAirTemperature.SetLinkedDisplayControl(lblMeanMonthlyAirTemperature)
-        ucrReceiverMeanMonthlyAirTemperature.bAutoFill = True
 
-        ucrNudWMONumber.SetParameter(New RParameter("wmo_number", 4))
-        'ucrNudWMONumber.SetMinMax(0, Integer.MaxValue)
+        ucrInputLinkby.SetParameter(New RParameter("link_by", 10))
+        dctStationIdentifier.Add("Station Name", Chr(34) & "station_name" & Chr(34))
+        dctStationIdentifier.Add("WMO Number", Chr(34) & "wmo_number" & Chr(34))
+        ucrInputLinkby.SetItems(dctStationIdentifier)
+        ucrInputLinkby.SetDropDownStyleAsNonEditable()
+
+        ucrInputFilePath.SetParameter(New RParameter("folder", 11))
+        ucrInputFilePath.IsReadOnly = True
+
+        ucrReceiverStationIdentifier.SetParameter(New RParameter("link", 12))
+        ucrReceiverStationIdentifier.Selector = ucrSelectorExportToWWR
+        ucrReceiverStationIdentifier.SetParameterIsString()
+
     End Sub
 
     Private Sub SetDefaults()
-        Throw New NotImplementedException()
+        clsWWRExport = New RFunction
+
+        clsWWRExport.AddParameter("link_by", Chr(34) & "station_name" & Chr(34), iPosition:=10)
+
+        ucrSelectorExportToWWR.Reset()
+        ucrReceiverYear.SetMeAsReceiver()
+
+        clsWWRExport.SetRCommand("wwr_export")
+        clsWWRExport.AddParameter("folder", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\", "/"), iPosition:=2)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsWWRExport)
+
+        bResetSubdialog = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        Throw New NotImplementedException()
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        Throw New NotImplementedException()
+        '' If ucrInputStationName.IsEmpty Then
+        '' ucrBase.OKEnabled(False)
+        ''Else
+        ''ucrBase.OKEnabled(True)
+        ''End If
+    End Sub
+
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputStationName_ControlContentsChanged(ucrChangedControl As ucrCore)
+        TestOkEnabled()
+    End Sub
+
+    Private Sub btnStationMetadata_Click(sender As Object, e As EventArgs) Handles btnStationMetadata.Click
+        sdgExportToWWR.SetRFunction(clsNewRFunction:=clsWWRExport, bResetSubdialog)
+        sdgExportToWWR.ShowDialog()
+        bResetSubdialog = False
+    End Sub
+
+    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
+        Dim strPath As String
+
+        Using dlgFolder As New FolderBrowserDialog
+            dlgFolder.Description = "Choose Folder"
+            If dlgFolder.ShowDialog() = DialogResult.OK Then
+                ucrInputFilePath.SetName("")
+                strPath = dlgFolder.SelectedPath
+                ucrInputFilePath.SetName(Replace(strPath, "\", "/"))
+            End If
+        End Using
     End Sub
 End Class
 

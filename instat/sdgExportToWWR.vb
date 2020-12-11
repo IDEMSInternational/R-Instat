@@ -1,5 +1,84 @@
-﻿Public Class sdgExportToWWR
-    Private Sub sdgExportToWWR_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat.Translations
+Public Class sdgExportToWWR
+    Private bControlsInitialised As Boolean = True
+    Private clsWWRExport As New RFunction
+
+    Private Sub sdgExportToWWR_Load(sender As Object, e As EventArgs) Handles Me.Load
+        autoTranslate(Me)
+    End Sub
+
+    Private Sub InitialiseControls()
+
+        ucrSelectorStationMetadata.SetParameter(New RParameter("station_data", 0))
+        ucrSelectorStationMetadata.SetParameterIsrfunction()
+
+        ucrReceiverStationName.SetParameter(New RParameter("station_name", 1))
+        ucrReceiverStationName.Selector = ucrSelectorStationMetadata
+        ucrReceiverStationName.SetParameterIsString()
+        ucrReceiverStationName.SetMeAsReceiver()
+
+        ucrReceiverWNONumber.SetParameter(New RParameter("wmo_number", 2))
+        ucrReceiverWNONumber.Selector = ucrSelectorStationMetadata
+        ucrReceiverWNONumber.SetParameterIsString()
+
+        ucrReceiverCountry.SetParameter(New RParameter("country_name", 3))
+        ucrReceiverCountry.Selector = ucrSelectorStationMetadata
+        ucrReceiverCountry.SetParameterIsString()
+
+        ucrReceiverLatitude.SetParameter(New RParameter("latitude", 4))
+        ucrReceiverLatitude.Selector = ucrSelectorStationMetadata
+        ucrReceiverLatitude.SetParameterIsString()
+
+        ucrReceiverLongitude.SetParameter(New RParameter("longitude", 5))
+        ucrReceiverLongitude.Selector = ucrSelectorStationMetadata
+        ucrReceiverLongitude.SetParameterIsString()
+
+        ucrReceiverStationHeight.SetParameter(New RParameter("height_station", 6))
+        ucrReceiverStationHeight.Selector = ucrSelectorStationMetadata
+        ucrReceiverStationHeight.SetParameterIsString()
+
+        ucrReceiverBarometerHeight.SetParameter(New RParameter("height_barometer", 7))
+        ucrReceiverBarometerHeight.Selector = ucrSelectorStationMetadata
+        ucrReceiverBarometerHeight.SetParameterIsString()
+
+        bControlsInitialised = False
+    End Sub
+
+    Public Sub SetRFunction(clsNewRFunction As RFunction, Optional bReset As Boolean = False)
+        If bControlsInitialised Then
+            InitialiseControls()
+        End If
+
+        clsWWRExport = clsNewRFunction
+
+        ucrSelectorStationMetadata.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
+        ucrReceiverStationName.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
+        ucrReceiverWNONumber.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
+        ucrReceiverCountry.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
+        ucrReceiverLatitude.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
+        ucrReceiverLongitude.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
+        ucrReceiverStationHeight.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
+        ucrReceiverBarometerHeight.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
+
+        If bReset Then
+            ucrSelectorStationMetadata.Reset()
+            ' ucrReceiverStationName.SetMeAsReceiver()
+        End If
     End Sub
 End Class

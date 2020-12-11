@@ -22,14 +22,6 @@ Partial Class sdgExportToWWR
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrSelectorByDataFrameAddRemove1 = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.UcrReceiverSingle1 = New instat.ucrReceiverSingle()
-        Me.UcrReceiverSingle2 = New instat.ucrReceiverSingle()
-        Me.UcrReceiverSingle3 = New instat.ucrReceiverSingle()
-        Me.UcrReceiverSingle5 = New instat.ucrReceiverSingle()
-        Me.UcrReceiverSingle6 = New instat.ucrReceiverSingle()
-        Me.UcrReceiverSingle7 = New instat.ucrReceiverSingle()
-        Me.UcrReceiverSingle8 = New instat.ucrReceiverSingle()
         Me.lblStationName = New System.Windows.Forms.Label()
         Me.lblWMONumber = New System.Windows.Forms.Label()
         Me.lblCountry = New System.Windows.Forms.Label()
@@ -38,110 +30,23 @@ Partial Class sdgExportToWWR
         Me.lblStationHeight = New System.Windows.Forms.Label()
         Me.lblBarometerHeight = New System.Windows.Forms.Label()
         Me.ucrButtonsSdg = New instat.ucrButtonsSubdialogue()
+        Me.ucrReceiverStationHeight = New instat.ucrReceiverSingle()
+        Me.ucrReceiverBarometerHeight = New instat.ucrReceiverSingle()
+        Me.ucrReceiverCountry = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
+        Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStationName = New instat.ucrReceiverSingle()
+        Me.ucrReceiverWNONumber = New instat.ucrReceiverSingle()
+        Me.ucrSelectorStationMetadata = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
-        '
-        'UcrSelectorByDataFrameAddRemove1
-        '
-        Me.UcrSelectorByDataFrameAddRemove1.bDropUnusedFilterLevels = False
-        Me.UcrSelectorByDataFrameAddRemove1.bShowHiddenColumns = False
-        Me.UcrSelectorByDataFrameAddRemove1.bUseCurrentFilter = True
-        Me.UcrSelectorByDataFrameAddRemove1.Location = New System.Drawing.Point(12, 20)
-        Me.UcrSelectorByDataFrameAddRemove1.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrSelectorByDataFrameAddRemove1.Name = "UcrSelectorByDataFrameAddRemove1"
-        Me.UcrSelectorByDataFrameAddRemove1.Size = New System.Drawing.Size(210, 180)
-        Me.UcrSelectorByDataFrameAddRemove1.TabIndex = 0
-        '
-        'UcrReceiverSingle1
-        '
-        Me.UcrReceiverSingle1.frmParent = Me
-        Me.UcrReceiverSingle1.Location = New System.Drawing.Point(251, 90)
-        Me.UcrReceiverSingle1.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle1.Name = "UcrReceiverSingle1"
-        Me.UcrReceiverSingle1.Selector = Nothing
-        Me.UcrReceiverSingle1.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle1.strNcFilePath = ""
-        Me.UcrReceiverSingle1.TabIndex = 1
-        Me.UcrReceiverSingle1.ucrSelector = Nothing
-        '
-        'UcrReceiverSingle2
-        '
-        Me.UcrReceiverSingle2.frmParent = Me
-        Me.UcrReceiverSingle2.Location = New System.Drawing.Point(251, 52)
-        Me.UcrReceiverSingle2.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle2.Name = "UcrReceiverSingle2"
-        Me.UcrReceiverSingle2.Selector = Nothing
-        Me.UcrReceiverSingle2.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle2.strNcFilePath = ""
-        Me.UcrReceiverSingle2.TabIndex = 2
-        Me.UcrReceiverSingle2.ucrSelector = Nothing
-        '
-        'UcrReceiverSingle3
-        '
-        Me.UcrReceiverSingle3.frmParent = Me
-        Me.UcrReceiverSingle3.Location = New System.Drawing.Point(251, 208)
-        Me.UcrReceiverSingle3.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle3.Name = "UcrReceiverSingle3"
-        Me.UcrReceiverSingle3.Selector = Nothing
-        Me.UcrReceiverSingle3.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle3.strNcFilePath = ""
-        Me.UcrReceiverSingle3.TabIndex = 4
-        Me.UcrReceiverSingle3.ucrSelector = Nothing
-        '
-        'UcrReceiverSingle5
-        '
-        Me.UcrReceiverSingle5.frmParent = Me
-        Me.UcrReceiverSingle5.Location = New System.Drawing.Point(251, 130)
-        Me.UcrReceiverSingle5.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle5.Name = "UcrReceiverSingle5"
-        Me.UcrReceiverSingle5.Selector = Nothing
-        Me.UcrReceiverSingle5.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle5.strNcFilePath = ""
-        Me.UcrReceiverSingle5.TabIndex = 6
-        Me.UcrReceiverSingle5.ucrSelector = Nothing
-        '
-        'UcrReceiverSingle6
-        '
-        Me.UcrReceiverSingle6.frmParent = Me
-        Me.UcrReceiverSingle6.Location = New System.Drawing.Point(251, 169)
-        Me.UcrReceiverSingle6.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle6.Name = "UcrReceiverSingle6"
-        Me.UcrReceiverSingle6.Selector = Nothing
-        Me.UcrReceiverSingle6.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle6.strNcFilePath = ""
-        Me.UcrReceiverSingle6.TabIndex = 5
-        Me.UcrReceiverSingle6.ucrSelector = Nothing
-        '
-        'UcrReceiverSingle7
-        '
-        Me.UcrReceiverSingle7.frmParent = Me
-        Me.UcrReceiverSingle7.Location = New System.Drawing.Point(251, 248)
-        Me.UcrReceiverSingle7.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle7.Name = "UcrReceiverSingle7"
-        Me.UcrReceiverSingle7.Selector = Nothing
-        Me.UcrReceiverSingle7.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle7.strNcFilePath = ""
-        Me.UcrReceiverSingle7.TabIndex = 8
-        Me.UcrReceiverSingle7.ucrSelector = Nothing
-        '
-        'UcrReceiverSingle8
-        '
-        Me.UcrReceiverSingle8.frmParent = Me
-        Me.UcrReceiverSingle8.Location = New System.Drawing.Point(12, 235)
-        Me.UcrReceiverSingle8.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverSingle8.Name = "UcrReceiverSingle8"
-        Me.UcrReceiverSingle8.Selector = Nothing
-        Me.UcrReceiverSingle8.Size = New System.Drawing.Size(120, 20)
-        Me.UcrReceiverSingle8.strNcFilePath = ""
-        Me.UcrReceiverSingle8.TabIndex = 7
-        Me.UcrReceiverSingle8.ucrSelector = Nothing
         '
         'lblStationName
         '
         Me.lblStationName.AutoSize = True
-        Me.lblStationName.Location = New System.Drawing.Point(250, 37)
+        Me.lblStationName.Location = New System.Drawing.Point(248, 37)
         Me.lblStationName.Name = "lblStationName"
         Me.lblStationName.Size = New System.Drawing.Size(74, 13)
-        Me.lblStationName.TabIndex = 9
+        Me.lblStationName.TabIndex = 1
         Me.lblStationName.Text = "Station Name:"
         '
         'lblWMONumber
@@ -150,7 +55,7 @@ Partial Class sdgExportToWWR
         Me.lblWMONumber.Location = New System.Drawing.Point(248, 77)
         Me.lblWMONumber.Name = "lblWMONumber"
         Me.lblWMONumber.Size = New System.Drawing.Size(78, 13)
-        Me.lblWMONumber.TabIndex = 10
+        Me.lblWMONumber.TabIndex = 3
         Me.lblWMONumber.Text = "WMO Number:"
         '
         'lblCountry
@@ -159,7 +64,7 @@ Partial Class sdgExportToWWR
         Me.lblCountry.Location = New System.Drawing.Point(248, 117)
         Me.lblCountry.Name = "lblCountry"
         Me.lblCountry.Size = New System.Drawing.Size(46, 13)
-        Me.lblCountry.TabIndex = 11
+        Me.lblCountry.TabIndex = 5
         Me.lblCountry.Text = "Country:"
         '
         'lblLatitude
@@ -168,16 +73,16 @@ Partial Class sdgExportToWWR
         Me.lblLatitude.Location = New System.Drawing.Point(248, 156)
         Me.lblLatitude.Name = "lblLatitude"
         Me.lblLatitude.Size = New System.Drawing.Size(48, 13)
-        Me.lblLatitude.TabIndex = 12
+        Me.lblLatitude.TabIndex = 7
         Me.lblLatitude.Text = "Latitude:"
         '
         'lblLongitude
         '
         Me.lblLongitude.AutoSize = True
-        Me.lblLongitude.Location = New System.Drawing.Point(250, 195)
+        Me.lblLongitude.Location = New System.Drawing.Point(248, 195)
         Me.lblLongitude.Name = "lblLongitude"
         Me.lblLongitude.Size = New System.Drawing.Size(57, 13)
-        Me.lblLongitude.TabIndex = 13
+        Me.lblLongitude.TabIndex = 9
         Me.lblLongitude.Text = "Longitude:"
         '
         'lblStationHeight
@@ -186,30 +91,125 @@ Partial Class sdgExportToWWR
         Me.lblStationHeight.Location = New System.Drawing.Point(248, 235)
         Me.lblStationHeight.Name = "lblStationHeight"
         Me.lblStationHeight.Size = New System.Drawing.Size(74, 13)
-        Me.lblStationHeight.TabIndex = 14
+        Me.lblStationHeight.TabIndex = 11
         Me.lblStationHeight.Text = "StationHeight:"
         '
         'lblBarometerHeight
         '
         Me.lblBarometerHeight.AutoSize = True
-        Me.lblBarometerHeight.Location = New System.Drawing.Point(9, 222)
+        Me.lblBarometerHeight.Location = New System.Drawing.Point(248, 282)
         Me.lblBarometerHeight.Name = "lblBarometerHeight"
         Me.lblBarometerHeight.Size = New System.Drawing.Size(86, 13)
-        Me.lblBarometerHeight.TabIndex = 15
+        Me.lblBarometerHeight.TabIndex = 13
         Me.lblBarometerHeight.Text = "BarometerHeight"
         '
         'ucrButtonsSdg
         '
-        Me.ucrButtonsSdg.Location = New System.Drawing.Point(107, 285)
+        Me.ucrButtonsSdg.Location = New System.Drawing.Point(127, 330)
         Me.ucrButtonsSdg.Name = "ucrButtonsSdg"
         Me.ucrButtonsSdg.Size = New System.Drawing.Size(142, 30)
-        Me.ucrButtonsSdg.TabIndex = 16
+        Me.ucrButtonsSdg.TabIndex = 15
+        '
+        'ucrReceiverStationHeight
+        '
+        Me.ucrReceiverStationHeight.frmParent = Me
+        Me.ucrReceiverStationHeight.Location = New System.Drawing.Point(248, 248)
+        Me.ucrReceiverStationHeight.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStationHeight.Name = "ucrReceiverStationHeight"
+        Me.ucrReceiverStationHeight.Selector = Nothing
+        Me.ucrReceiverStationHeight.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStationHeight.strNcFilePath = ""
+        Me.ucrReceiverStationHeight.TabIndex = 12
+        Me.ucrReceiverStationHeight.ucrSelector = Nothing
+        '
+        'ucrReceiverBarometerHeight
+        '
+        Me.ucrReceiverBarometerHeight.frmParent = Me
+        Me.ucrReceiverBarometerHeight.Location = New System.Drawing.Point(248, 295)
+        Me.ucrReceiverBarometerHeight.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverBarometerHeight.Name = "ucrReceiverBarometerHeight"
+        Me.ucrReceiverBarometerHeight.Selector = Nothing
+        Me.ucrReceiverBarometerHeight.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverBarometerHeight.strNcFilePath = ""
+        Me.ucrReceiverBarometerHeight.TabIndex = 14
+        Me.ucrReceiverBarometerHeight.ucrSelector = Nothing
+        '
+        'ucrReceiverCountry
+        '
+        Me.ucrReceiverCountry.frmParent = Me
+        Me.ucrReceiverCountry.Location = New System.Drawing.Point(248, 130)
+        Me.ucrReceiverCountry.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverCountry.Name = "ucrReceiverCountry"
+        Me.ucrReceiverCountry.Selector = Nothing
+        Me.ucrReceiverCountry.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverCountry.strNcFilePath = ""
+        Me.ucrReceiverCountry.TabIndex = 6
+        Me.ucrReceiverCountry.ucrSelector = Nothing
+        '
+        'ucrReceiverLatitude
+        '
+        Me.ucrReceiverLatitude.frmParent = Me
+        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(248, 169)
+        Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
+        Me.ucrReceiverLatitude.Selector = Nothing
+        Me.ucrReceiverLatitude.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverLatitude.strNcFilePath = ""
+        Me.ucrReceiverLatitude.TabIndex = 8
+        Me.ucrReceiverLatitude.ucrSelector = Nothing
+        '
+        'ucrReceiverLongitude
+        '
+        Me.ucrReceiverLongitude.frmParent = Me
+        Me.ucrReceiverLongitude.Location = New System.Drawing.Point(248, 208)
+        Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
+        Me.ucrReceiverLongitude.Selector = Nothing
+        Me.ucrReceiverLongitude.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverLongitude.strNcFilePath = ""
+        Me.ucrReceiverLongitude.TabIndex = 10
+        Me.ucrReceiverLongitude.ucrSelector = Nothing
+        '
+        'ucrReceiverStationName
+        '
+        Me.ucrReceiverStationName.frmParent = Me
+        Me.ucrReceiverStationName.Location = New System.Drawing.Point(248, 52)
+        Me.ucrReceiverStationName.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStationName.Name = "ucrReceiverStationName"
+        Me.ucrReceiverStationName.Selector = Nothing
+        Me.ucrReceiverStationName.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverStationName.strNcFilePath = ""
+        Me.ucrReceiverStationName.TabIndex = 2
+        Me.ucrReceiverStationName.ucrSelector = Nothing
+        '
+        'ucrReceiverWNONumber
+        '
+        Me.ucrReceiverWNONumber.frmParent = Me
+        Me.ucrReceiverWNONumber.Location = New System.Drawing.Point(248, 90)
+        Me.ucrReceiverWNONumber.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWNONumber.Name = "ucrReceiverWNONumber"
+        Me.ucrReceiverWNONumber.Selector = Nothing
+        Me.ucrReceiverWNONumber.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWNONumber.strNcFilePath = ""
+        Me.ucrReceiverWNONumber.TabIndex = 4
+        Me.ucrReceiverWNONumber.ucrSelector = Nothing
+        '
+        'ucrSelectorStationMetadata
+        '
+        Me.ucrSelectorStationMetadata.bDropUnusedFilterLevels = False
+        Me.ucrSelectorStationMetadata.bShowHiddenColumns = False
+        Me.ucrSelectorStationMetadata.bUseCurrentFilter = True
+        Me.ucrSelectorStationMetadata.Location = New System.Drawing.Point(12, 20)
+        Me.ucrSelectorStationMetadata.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorStationMetadata.Name = "ucrSelectorStationMetadata"
+        Me.ucrSelectorStationMetadata.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorStationMetadata.TabIndex = 0
         '
         'sdgExportToWWR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(396, 330)
+        Me.ClientSize = New System.Drawing.Size(396, 365)
         Me.Controls.Add(Me.ucrButtonsSdg)
         Me.Controls.Add(Me.lblBarometerHeight)
         Me.Controls.Add(Me.lblStationHeight)
@@ -218,14 +218,14 @@ Partial Class sdgExportToWWR
         Me.Controls.Add(Me.lblCountry)
         Me.Controls.Add(Me.lblWMONumber)
         Me.Controls.Add(Me.lblStationName)
-        Me.Controls.Add(Me.UcrReceiverSingle7)
-        Me.Controls.Add(Me.UcrReceiverSingle8)
-        Me.Controls.Add(Me.UcrReceiverSingle5)
-        Me.Controls.Add(Me.UcrReceiverSingle6)
-        Me.Controls.Add(Me.UcrReceiverSingle3)
-        Me.Controls.Add(Me.UcrReceiverSingle2)
-        Me.Controls.Add(Me.UcrReceiverSingle1)
-        Me.Controls.Add(Me.UcrSelectorByDataFrameAddRemove1)
+        Me.Controls.Add(Me.ucrReceiverStationHeight)
+        Me.Controls.Add(Me.ucrReceiverBarometerHeight)
+        Me.Controls.Add(Me.ucrReceiverCountry)
+        Me.Controls.Add(Me.ucrReceiverLatitude)
+        Me.Controls.Add(Me.ucrReceiverLongitude)
+        Me.Controls.Add(Me.ucrReceiverStationName)
+        Me.Controls.Add(Me.ucrReceiverWNONumber)
+        Me.Controls.Add(Me.ucrSelectorStationMetadata)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -237,15 +237,15 @@ Partial Class sdgExportToWWR
 
     End Sub
 
-    Friend WithEvents UcrSelectorByDataFrameAddRemove1 As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents UcrReceiverSingle1 As ucrReceiverSingle
-    Friend WithEvents UcrReceiverSingle2 As ucrReceiverSingle
+    Friend WithEvents ucrSelectorStationMetadata As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverWNONumber As ucrReceiverSingle
+    Friend WithEvents ucrReceiverStationName As ucrReceiverSingle
     Friend WithEvents lblStationName As Label
-    Friend WithEvents UcrReceiverSingle7 As ucrReceiverSingle
-    Friend WithEvents UcrReceiverSingle8 As ucrReceiverSingle
-    Friend WithEvents UcrReceiverSingle5 As ucrReceiverSingle
-    Friend WithEvents UcrReceiverSingle6 As ucrReceiverSingle
-    Friend WithEvents UcrReceiverSingle3 As ucrReceiverSingle
+    Friend WithEvents ucrReceiverStationHeight As ucrReceiverSingle
+    Friend WithEvents ucrReceiverBarometerHeight As ucrReceiverSingle
+    Friend WithEvents ucrReceiverCountry As ucrReceiverSingle
+    Friend WithEvents ucrReceiverLatitude As ucrReceiverSingle
+    Friend WithEvents ucrReceiverLongitude As ucrReceiverSingle
     Friend WithEvents lblBarometerHeight As Label
     Friend WithEvents lblStationHeight As Label
     Friend WithEvents lblLongitude As Label
