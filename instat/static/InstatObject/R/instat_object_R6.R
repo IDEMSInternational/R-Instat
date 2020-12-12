@@ -2064,8 +2064,8 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     y$year <- plyr::mapvalues(y$year, stack_cols, stack_years)
     
     # Replacing day 60 with 0 for non-leap years. This will result in NA dates.
-    y$doy[(!lubridate::leap_year(y$year)) & y$doy == 60] <- 0
-    y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] <- y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] - 1
+    y$doy[(!lubridate::leap_year(as.numeric(y$year))) & y$doy == 60] <- 0
+    y$doy[(!lubridate::leap_year(as.numeric(y$year))) & y$doy > 60] <- y$doy[(!lubridate::leap_year(as.numeric(y$year))) & y$doy > 60] - 1
     y$date <- as.Date(paste(y$year, y$doy), format = paste("%Y", "%j"))
     # Put day 0 back as 60. Needed in error displaying only.
     y$doy[y$doy == 0] <- 60
