@@ -238,6 +238,12 @@
     <Compile Include="dlgDisplayTopN.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportToWWR.Designer.vb">
+      <DependentUpon>dlgExportToWWR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportToWWR.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgHomogenization.Designer.vb">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </Compile>
@@ -314,6 +320,12 @@
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgWindPollutionRose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgExportToWWR.Designer.vb">
+      <DependentUpon>sdgExportToWWR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgExportToWWR.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgExtremesDisplayOptions.Designer.vb">
@@ -2663,6 +2675,9 @@
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportToWWR.resx">
+      <DependentUpon>dlgExportToWWR.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </EmbeddedResource>
@@ -2701,6 +2716,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgExportToWWR.resx">
+      <DependentUpon>sdgExportToWWR.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgExtremesDisplayOptions.resx">
       <DependentUpon>sdgExtremesDisplayOptions.vb</DependentUpon>
