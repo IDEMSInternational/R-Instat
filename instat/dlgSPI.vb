@@ -19,8 +19,7 @@ Public Class dlgSPI
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
     Private clsSpiFunction As New RFunction
-    Private clsSpeiFunction
-    Private clsSummaryFunction As New RFunction
+    Private clsSpeiFunction As New RFunction
     Private clsListFunction As New RFunction
     Private clsSpeiInputFunction As New RFunction
     Private clsSpeiOutputFunction As New RFunction
@@ -40,7 +39,7 @@ Public Class dlgSPI
 
     Private Sub InitialiseDialog()
         Dim dctType As New Dictionary(Of String, String)
-        ucrBase.clsRsyntax.iCallType = 2
+
         ucrBase.iHelpTopicID = 566
 
         ucrSelectorVariable.SetParameterIsrfunction()
@@ -82,16 +81,16 @@ Public Class dlgSPI
 
         'input
         ucrInputType.SetParameter(New RParameter("type", 0))
+        dctType.Add("Rectangular", Chr(39) & "rectangular" & Chr(39))
         dctType.Add("Triangular", Chr(39) & "triangular" & Chr(39))
         dctType.Add("Circular", Chr(39) & "circular" & Chr(39))
-        dctType.Add("Rectangular", Chr(39) & "rectangular" & Chr(39))
         dctType.Add("Gaussian", Chr(39) & "gaussian" & Chr(39))
         ucrInputType.SetItems(dctType)
         ucrInputType.SetDropDownStyleAsNonEditable()
 
         'ucrshift
         ucrNudKernelShift.SetParameter(New RParameter("shift", 1))
-        ucrNudKernelShift.SetMinMax(0, ucrNudTimeScale.GetText - 1)
+        ucrNudKernelShift.SetMinMax(0, 24)
 
         'ucrpnlInd
         ucrPnlIndex.AddRadioButton(rdoSPI)
@@ -117,7 +116,6 @@ Public Class dlgSPI
         clsSpiFunction = New RFunction
         clsListFunction = New RFunction
         clsSpeiInputFunction = New RFunction
-        clsSummaryFunction = New RFunction
         clsSpeiOutputFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
@@ -146,9 +144,6 @@ Public Class dlgSPI
         clsSpeiFunction.AddParameter("na.rm", "TRUE", iPosition:=5)
         clsSpeiFunction.AddParameter("kernel", clsRFunctionParameter:=clsListFunction, iPosition:=2)
         clsSpeiFunction.SetAssignTo("last_model", strTempDataframe:=ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
-
-        clsSummaryFunction.SetRCommand("summary")
-        clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpiFunction)
 
         clsSpeiInputFunction.SetRCommand("spei_input")
         clsSpeiInputFunction.SetAssignTo("data_ts")
@@ -179,9 +174,9 @@ Public Class dlgSPI
         ucrNudTimeScale.SetRCode(clsSpiFunction, bReset)
         ucrInputType.SetRCode(clsListFunction, bReset)
         ucrNudKernelShift.SetRCode(clsListFunction, bReset)
-        ucrPnlIndex.SetRCode(clsSummaryFunction, bReset)
         ucrSaveIndex.SetRCode(clsSpeiOutputFunction, bReset)
         ucrSaveModel.SetRCode(clsSpeiFunction, bReset)
+        SetShiftMax()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -200,12 +195,10 @@ Public Class dlgSPI
 
     Private Sub ucrPnlIndex_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlIndex.ControlContentsChanged
         If rdoSPI.Checked Then
-            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpiFunction)
             clsSpeiOutputFunction.AddParameter("x", clsRFunctionParameter:=clsSpiFunction, iPosition:=0)
             ucrSaveIndex.SetPrefix("spi")
             ucrSaveModel.SetPrefix("spi_mod")
         ElseIf rdoSPEI.Checked Then
-            clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsSpeiFunction)
             clsSpeiOutputFunction.AddParameter("x", clsRFunctionParameter:=clsSpeiFunction, iPosition:=0)
             ucrSaveIndex.SetPrefix("spei")
             ucrSaveModel.SetPrefix("spei_mod")
@@ -213,7 +206,11 @@ Public Class dlgSPI
     End Sub
 
     Private Sub ucrNudTimeScale_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudTimeScale.ControlValueChanged
-        If ucrNudTimeScale.GetText < 25 Then
+        SetShiftMax()
+    End Sub
+
+    Private Sub SetShiftMax()
+        If ucrNudTimeScale.GetText <> "" AndAlso ucrNudTimeScale.Value < 25 Then
             ucrNudKernelShift.SetMinMax(0, ucrNudTimeScale.GetText - 1)
         Else
             ucrNudKernelShift.SetMinMax(0, 24)
