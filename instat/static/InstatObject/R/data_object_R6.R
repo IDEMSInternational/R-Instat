@@ -2172,7 +2172,7 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     temp_s_year <- year_col
     temp_s_year[temp_s_doy < 1] <- paste(year_col[temp_s_doy < 1] - 1, year_col[temp_s_doy < 1], sep = "-")
     temp_s_year[temp_s_doy > 0] <- paste(year_col[temp_s_doy > 0], year_col[temp_s_doy > 0] + 1, sep = "-")
-    temp_s_year <- factor(temp_s_year)
+    temp_s_year <- make_factor(temp_s_year)
     temp_s_year_num <- as.numeric(substr(temp_s_year, 1, 4))
     temp_s_doy[temp_s_doy < 1] <- temp_s_doy[temp_s_doy < 1] + 366
     s_year_labs <- c(min(year_col) -1, sort(unique(year_col)))
@@ -2218,7 +2218,7 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     self$add_columns_to_data(col_name = col_name, col_data = pentad_val_vector, adjacent_column = adjacent_column, before = FALSE)
   }
   if(dekad_abbr) {
-    month_abbr_vector <- factor(forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE)), n = (s_start_month - 1)), ordered = FALSE)
+    month_abbr_vector <- make_factor(forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE)), n = (s_start_month - 1)), ordered = FALSE)
     dekad_val_vector <- ((as.numeric(dekade(col_data))) - (s_start_month - 1)*3) %% 3
     dekad_val_vector <- ifelse(dekad_val_vector == 0, 3, dekad_val_vector)
     month.list <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
@@ -2299,7 +2299,7 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
   }
   if(month_abbr) {
-    month_abbr_vector <- factor(forcats::fct_shift(f = lubridate::month(col_data, label = TRUE), n = s_start_month - 1), ordered = FALSE)
+    month_abbr_vector <- make_factor(forcats::fct_shift(f = lubridate::month(col_data, label = TRUE), n = s_start_month - 1), ordered = FALSE)
     col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_abbr_vector, adjacent_column = adjacent_column, before = FALSE)
     if(s_shift) self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted month starting on day", s_start_day))
@@ -2330,7 +2330,7 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     else {
       year_vector <- lubridate::year(col_data)
       col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name = col_name, col_data = factor(year_vector), adjacent_column = adjacent_column, before = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = make_factor(year_vector), adjacent_column = adjacent_column, before = FALSE)
     }
     if(is_climatic && is.null(self$get_climatic_column_name(year_label))) {
       self$append_climatic_types(types = c(year = col_name))
