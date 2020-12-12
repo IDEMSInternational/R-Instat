@@ -2086,12 +2086,14 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
       else {
         invalid_data_display <- invalid_data %>% dplyr::select(year, doy)
       }
+      # Also make a data.frame (instead of tibble) so that display will show all rows.
       if(!missing(station)) {
         invalid_data_display <- data.frame(station = invalid_data$station, invalid_data_display)
       }
       if(!missing(element)) {
         invalid_data_display <- data.frame(element = invalid_data$element, invalid_data_display)
       }
+      invalid_data_display <- data.frame(invalid_data_display)
       invalid_data_display[[element_name]] <- invalid_data[[element_name]]
       print(invalid_data_display, row.names = FALSE)
     }
