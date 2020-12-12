@@ -170,21 +170,19 @@ Public Class sdgClimdexIndices
 
         ' Maximum Missing Days
         ucrNudAnnualMissingDays.SetParameter(New RParameter("annual", 0))
-        ucrNudAnnualMissingDays.SetMinMax(1, 366)
+        ucrNudAnnualMissingDays.SetMinMax(0, 366)
 
         ucrNudMonthlyMissingDays.SetParameter(New RParameter("monthly", 1))
-        ucrNudMonthlyMissingDays.SetMinMax(1, 31)
+        ucrNudMonthlyMissingDays.SetMinMax(0, 31)
 
         ' Base Range
-        ucrNudLowerBase.SetParameter(New RParameter("lower_base", 0))
+        ucrNudLowerBase.SetParameter(New RParameter("0", 0))
         ucrNudLowerBase.SetParameterIncludeArgumentName(False)
-        'ucrNudLowerBase.SetRDefault(1961)
-        ucrNudLowerBase.SetMinMax(1900, 9999) ' is this right?
+        ucrNudLowerBase.SetMinMax(1900, 2100)
 
-        ucrNudUpperBase.SetParameter(New RParameter("upper_base", 1))
+        ucrNudUpperBase.SetParameter(New RParameter("1", 1))
         ucrNudUpperBase.SetParameterIncludeArgumentName(False)
-        'ucrNudUpperBase.SetRDefault(1990)
-        ucrNudUpperBase.SetMinMax(1900, 9999) ' is this right?
+        ucrNudUpperBase.SetMinMax(1900, 2100)
 
         ucrInputTempQtiles.SetParameter(New RParameter("0", 0))
         ucrInputTempQtiles.SetValidationTypeAsNumericList()

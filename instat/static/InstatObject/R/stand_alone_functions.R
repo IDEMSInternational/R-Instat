@@ -1652,12 +1652,12 @@ climdex <- function(data, station, date, year, month, prec, tmax, tmin, indices,
     for (s in seq_along(stations)) {
       df_station <- data %>% dplyr::filter(.data[[station]] == stations[s])
       ci <- climdex.pcic::climdexInput.raw(prec = df_station[[prec]], tmax = df_station[[tmax]], tmin = df_station[[tmin]], 
-                                           base.range = c(1961, 1990), northern.hemisphere = TRUE, 
-                                           temp.qtiles = c(0.1, 0.9), prec.qtiles = c(0.95, 0.99), 
-                                           max.missing.days = c(annual = 15, monthly = 3), 
-                                           min.base.data.fraction.present=0.1, 
-                                           tmax.dates = PCICt::as.PCICt(x = as.character(df_station[[date]]), cal="gregorian"), 
-                                           tmin.dates = PCICt::as.PCICt(x = as.character(df_station[[date]]), cal="gregorian"), 
+                                           base.range = base.range, northern.hemisphere = northern.hemisphere, 
+                                           temp.qtiles = temp.qtiles, prec.qtiles = prec.qtiles, 
+                                           max.missing.days = max.missing.days,
+                                           min.base.data.fraction.present = min.base.data.fraction.present,
+                                           tmax.dates = PCICt::as.PCICt(x = as.character(df_station[[date]]), cal="gregorian"),
+                                           tmin.dates = PCICt::as.PCICt(x = as.character(df_station[[date]]), cal="gregorian"),
                                            prec.dates = PCICt::as.PCICt(x = as.character(df_station[[date]]), cal="gregorian"))
       df_list[[stations[s]]] <- climdex_single_station(ci = ci, freq = freq, indices = indices, year = year, month = month,
                                                        spells.can.span.years = spells.can.span.years, gsl.mode = gsl.mode,
