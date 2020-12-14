@@ -1270,8 +1270,8 @@ in_top_n <- function(x, n = 10, wt, fun = sum) {
   if(!missing(wt)) {
     dat$wt <- wt
     dat <- dat %>% 
-      group_by(x) %>%
-      summarise(fq = as.function(fun)(na.omit(wt))) %>% arrange(-fq)
+      dplyr::group_by(x) %>%
+      dplyr::summarise(fq = as.function(fun)(na.omit(wt))) %>% arrange(-fq)
   }
   else dat <- dat %>% count(x, sort = TRUE, name = "fq")
   return(x %in% dat$x[1:n])
@@ -1604,8 +1604,8 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
   }
   if (!missing(mean_station_pressure)) {
     df_2_means <- data %>%
-      group_by(!!! rlang::syms(c(link, year))) %>%
-      summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_station_pressure]], na.rm = TRUE), 1)))
+      dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
+      dplyr::summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_station_pressure]], na.rm = TRUE), 1)))
     data[[mean_station_pressure]] <- ifelse(is.na(data[[mean_station_pressure]]), 
                                             "", round(data[[mean_station_pressure]], 1))
     data[[mean_station_pressure]] <- sprintf("%6s", data[[mean_station_pressure]])
@@ -1616,8 +1616,8 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
   }
   if (!missing(mean_sea_level_pressure)) {
     df_3_means <- data %>%
-      group_by(!!! rlang::syms(c(link, year))) %>%
-      summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_sea_level_pressure]], na.rm = TRUE), 1)))
+      dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
+      dplyr::summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_sea_level_pressure]], na.rm = TRUE), 1)))
     data[[mean_sea_level_pressure]] <- ifelse(is.na(data[[mean_sea_level_pressure]]), 
                                               "", round(data[[mean_sea_level_pressure]], 1))
     data[[mean_sea_level_pressure]] <- sprintf("%6s", data[[mean_sea_level_pressure]])
@@ -1628,8 +1628,8 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
   }
   if (!missing(mean_temp)) {
     df_4_means <- data %>%
-      group_by(!!! rlang::syms(c(link, year))) %>%
-      summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_temp]], na.rm = TRUE), 1)))
+      dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
+      dplyr::summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_temp]], na.rm = TRUE), 1)))
     data[[mean_temp]] <- ifelse(is.na(data[[mean_temp]]), 
                                 "", round(data[[mean_temp]], 1))
     data[[mean_temp]] <- sprintf("%6s", data[[mean_temp]])
@@ -1640,8 +1640,8 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
   }
   if (!missing(total_precip)) {
     df_5_means <- data %>%
-      group_by(!!! rlang::syms(c(link, year))) %>%
-      summarise(mean = sprintf("%6s", format(sum(.data[[total_precip]], na.rm = TRUE), digits = 1, nsmall = 1)))
+      dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
+      dplyr::summarise(mean = sprintf("%6s", format(sum(.data[[total_precip]], na.rm = TRUE), digits = 1, nsmall = 1)))
     data[[total_precip]] <- ifelse(is.na(data[[total_precip]]), 
                                    "", ifelse(data[[total_precip]] <= 0.05, 0, format(data[[total_precip]], digits = 1, nsmall = 1)))
     data[[total_precip]] <- sprintf("%6s", data[[total_precip]])
@@ -1653,7 +1653,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
   if (!missing(mean_max_temp)) {
     df_6_means <- data %>%
       group_by(!!! rlang::syms(c(link, year))) %>%
-      summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_max_temp]], na.rm = TRUE), 1)))
+      dplyr::summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_max_temp]], na.rm = TRUE), 1)))
     data[[mean_max_temp]] <- ifelse(is.na(data[[mean_max_temp]]), 
                                     "", round(data[[mean_max_temp]], 1))
     data[[mean_max_temp]] <- sprintf("%6s", data[[mean_max_temp]])
@@ -1664,8 +1664,8 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
   }
   if (!missing(mean_min_temp)) {
     df_7_means <- data %>%
-      group_by(!!! rlang::syms(c(link, year))) %>%
-      summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_min_temp]], na.rm = TRUE), 1)))
+      dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
+      dplyr::summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_min_temp]], na.rm = TRUE), 1)))
     data[[mean_min_temp]] <- ifelse(is.na(data[[mean_min_temp]]), 
                                     "", round(data[[mean_min_temp]], 1))
     data[[mean_min_temp]] <- sprintf("%6s", data[[mean_min_temp]])
@@ -1677,8 +1677,8 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
   if (!missing(mean_rel_hum)) {
     if (any(data[[mean_rel_hum]] < 0 | data[[mean_rel_hum]] > 100, na.rm = TRUE)) stop("Mean Relative Humidity must be a percentage between 0 and 100.")
     df_8_means <- data %>%
-      group_by(!!! rlang::syms(c(link, year))) %>%
-      summarise(mean = sprintf("%6s", round(sum(.data[[mean_rel_hum]], na.rm = TRUE), 0)))
+      dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
+      dplyr::summarise(mean = sprintf("%6s", round(sum(.data[[mean_rel_hum]], na.rm = TRUE), 0)))
     data[[mean_rel_hum]] <- ifelse(is.na(data[[mean_rel_hum]]), 
                                    "", round(data[[mean_rel_hum]], 1))
     data[[mean_rel_hum]] <- sprintf("%6s", data[[mean_rel_hum]])
@@ -1722,7 +1722,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       vals <- apply(df_2_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
       vals <- paste(vals, df_2_means %>% 
                       dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
-                      pull(mean))
+                      dplyr::pull(mean))
       lines <- append(lines, vals)
     }
     if (!missing(mean_sea_level_pressure)) {
@@ -1735,7 +1735,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       vals <- apply(df_3_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
       vals <- paste(vals, df_3_means %>% 
                       dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
-                      pull(mean))
+                      dplyr::pull(mean))
       lines <- append(lines, vals)
     }
     if (!missing(mean_temp)) {
@@ -1748,7 +1748,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       vals <- apply(df_4_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
       vals <- paste(vals, df_4_means %>% 
                       dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
-                      pull(mean))
+                      dplyr::pull(mean))
       lines <- append(lines, vals)
     }
     if (!missing(total_precip)) {
@@ -1761,7 +1761,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       vals <- apply(df_5_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
       vals <- paste(vals, df_5_means %>% 
                       dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
-                      pull(mean))
+                      dplyr::pull(mean))
       lines <- append(lines, vals)
     }
     if (!missing(mean_max_temp)) {
@@ -1774,7 +1774,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       vals <- apply(df_6_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
       vals <- paste(vals, df_6_means %>% 
                       dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
-                      pull(mean))
+                      dplyr::pull(mean))
       lines <- append(lines, vals)
     }
     if (!missing(mean_min_temp)) {
@@ -1787,7 +1787,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       vals <- apply(df_7_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
       vals <- paste(vals, df_7_means %>% 
                      dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
-                      pull(mean))
+                      dplyr::pull(mean))
       lines <- append(lines, vals)
     }
     if (!missing(mean_rel_hum)) {
@@ -1800,7 +1800,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       vals <- apply(df_8_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
       vals <- paste(vals, df_8_means %>% 
                       dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
-                      pull(mean))
+                      dplyr::pull(mean))
       lines <- append(lines, vals)
     }
     writeLines(lines, paste0(folder, "/", station_data[[station_link]][i], "-", format(Sys.time(), "%Y%m%d_%H%M%S"), ".txt"))
