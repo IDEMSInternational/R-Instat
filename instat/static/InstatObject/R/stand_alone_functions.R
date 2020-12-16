@@ -1540,3 +1540,14 @@ slope <- function(y, x) {
 }
 
 
+pollution_rose <- function(mydata, date_name, include_pollutant=TRUE, ...){
+  if (!("date" %in% colnames(mydata))){ 
+    mydata <- dplyr::rename(mydata, date = !!date_name)
+  }
+  if (include_pollutant==FALSE){
+    openair::windRose(mydata = mydata,...)
+  }
+  if (include_pollutant==TRUE){
+    openair::pollutionRose(mydata = mydata,...)
+  }
+}
