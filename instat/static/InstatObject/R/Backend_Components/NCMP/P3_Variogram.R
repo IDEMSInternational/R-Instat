@@ -142,6 +142,8 @@ p3_variogram <- function(p2, station, year, month, nyb = 1981, nye = 2010, ne,
   files <- data.frame(Station = station_df[[name]],
                       Lat = station_df[[lat]],
                       Long = station_df[[lon]], stringsAsFactors = FALSE)
+  # Ensure stations are in same order as in the data so that calculations match up.
+  files <- files[match(stations, files$Station), ]
   Station <- files$Station
   olats <- files$Lat
   olons <- files$Long
@@ -190,6 +192,7 @@ p3_variogram <- function(p2, station, year, month, nyb = 1981, nye = 2010, ne,
     p2_df <- p2 %>% dplyr::filter(.data[[station]] == stations[i])
     I1 <- tidyr::pivot_wider(p2_df, id_cols = tidyselect::all_of(year), names_from = tidyselect::all_of(month),
                              values_from = tidyselect::all_of(ele[ne]))
+    I1 <- data.frame(I1)
     if (ne == 2L) I1[,2:14] <- I1[,2:14] / 100
     if (ne == 3L) I1[,2:14] <- I1[,2:14] / 100 # scale PrA so that matrix inversion is clean
     NCMP.stn[[i]] <- I1
@@ -213,9 +216,8 @@ p3_variogram <- function(p2, station, year, month, nyb = 1981, nye = 2010, ne,
   # Loop through pairs of stations
   # For each pair, retain overlapping years only, then cut to variogram period
   # Can then calculate differences and add to the appropriate bin
-  
   for (i in 1:(nstn - 1)) {
-    I1 <- data.table(NCMP.stn[[i]], key="Year")
+    I1 <- data.table::data.table(NCMP.stn[[i]], key="Year")
     for (j in (i + 1):nstn) {
       I12 <- merge(I1, NCMP.stn[[j]])
       I12v <- I12[,.SD[is.element(Year,yrs)]]
