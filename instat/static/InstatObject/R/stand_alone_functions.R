@@ -1087,7 +1087,7 @@ duplicated_count_index<-function(x, type = "count"){
     x<-data.frame(x)
     
     #calculate the frequency of each combo. (using plyr:: because the function name is used in other packages so need explicit-ness)
-    counts<-plyr::count(x)
+    counts<-dplyr::count(x)
     
     #merge onto dataset. Adding a call to suppressMessages() because join() likes to tell you stuff a bit unneccesarily otherwise.
     x<-suppressMessages(plyr::join(x, counts))
@@ -1273,7 +1273,7 @@ in_top_n <- function(x, n = 10, wt, fun = sum) {
       dplyr::group_by(x) %>%
       dplyr::summarise(fq = as.function(fun)(na.omit(wt))) %>% dplyr::arrange(-fq)
   }
-  else dat <- dat %>% plyr::count(x, sort = TRUE, name = "fq")
+  else dat <- dat %>% dplyr::count(x, sort = TRUE, name = "fq")
   return(x %in% dat$x[1:n])
 }
 
@@ -1816,7 +1816,7 @@ dd_to_dms <- function(x, lat) {
   m <- trunc((x - d) * 60)
   s <- round((x - d - m/60) * 3600)
   return(paste(sprintf(ifelse(lat, "%02d", "%03d"), d), sprintf("%02d", m), sprintf("%02d", s), dir))
-
+}
 ### Constants
 month_abb_english <- c("Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 month_name_english <- c("January", "February", "March", "April", "May", "June", "July", 
