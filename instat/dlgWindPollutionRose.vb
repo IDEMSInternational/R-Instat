@@ -31,11 +31,10 @@ Public Class dlgWindPollutionRose
 
         If bReset Then
             SetDefaults()
-            SetRcodeForControls(bReset)
         End If
+        SetRcodeForControls(bReset)
         bReset = False
         TestOkEnabled()
-
     End Sub
 
     Private Sub InitiliseDialog()
@@ -72,6 +71,8 @@ Public Class dlgWindPollutionRose
         ucrReceiverDate.SetParameter(New RParameter("date_name", 6))
         ucrReceiverDate.Selector = ucrSelectorWindPollutionRose
         ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.SetIncludedDataTypes({"Date"})
+        ucrReceiverDate.SetClimaticType("date")
 
         ucrChkCompare.SetText("Compare")
         ucrChkCompare.AddToLinkedControls(ucrReceiverWindSpeed2, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -138,17 +139,17 @@ Public Class dlgWindPollutionRose
 
     Private Sub SetDefaults()
         clsPollutionRoseFunction = New RFunction
-
         clsPollutionRoseFunction.SetRCommand("pollution_rose")
 
         clsPollutionRoseFunction.AddParameter("statistic", Chr(34) & "prop.count" & Chr(34), iPosition:=13)
-        clsPollutionRoseFunction.AddParameter("include_pollutant", "TRUE", iPosition:=7)
+        clsPollutionRoseFunction.AddParameter("include_pollutant", "FALSE", iPosition:=7)
+        clsPollutionRoseFunction.AddParameter("paddle", "FALSE", iPosition:=8)
         clsPollutionRoseFunction.AddParameter("type", Chr(34) & "default" & Chr(34), iPosition:=8)
         clsPollutionRoseFunction.AddParameter("key.position", Chr(34) & "right" & Chr(34), iPosition:=11)
         clsPollutionRoseFunction.AddParameter("cols", Chr(34) & "default" & Chr(34), iPosition:=12)
 
         ucrSelectorWindPollutionRose.Reset()
-        ucrReceiverPollutant.SetMeAsReceiver()
+        ucrReceiverWindSpeed.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetBaseRFunction(clsPollutionRoseFunction)
     End Sub
 
@@ -170,14 +171,13 @@ Public Class dlgWindPollutionRose
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverWindDirection_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindDirection.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverWindDirection2.ControlContentsChanged, ucrReceiverWindSpeed2.ControlContentsChanged, ucrReceiverPollutant.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
+    Private Sub ucrReceiverWindDirection_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindDirection.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverWindDirection2.ControlContentsChanged, ucrReceiverWindSpeed2.ControlContentsChanged, ucrReceiverPollutant.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrChkCompare.ControlContentsChanged, ucrChkIncludePollutant.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
     Private Sub ucrChkIncludePollutant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludePollutant.ControlValueChanged
         If Not ucrChkIncludePollutant.Checked Then
             clsPollutionRoseFunction.AddParameter("include_pollutant", "FALSE", iPosition:=7)
-            clsPollutionRoseFunction.AddParameter("paddle", "FALSE", iPosition:=8)
         Else
             clsPollutionRoseFunction.AddParameter("include_pollutant", "TRUE", iPosition:=7)
         End If

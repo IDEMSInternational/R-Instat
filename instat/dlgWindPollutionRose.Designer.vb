@@ -56,7 +56,7 @@ Partial Class dlgWindPollutionRose
         Me.lblColor.Location = New System.Drawing.Point(20, 241)
         Me.lblColor.Name = "lblColor"
         Me.lblColor.Size = New System.Drawing.Size(34, 13)
-        Me.lblColor.TabIndex = 16
+        Me.lblColor.TabIndex = 17
         Me.lblColor.Text = "Color:"
         '
         'lblStatistic
@@ -65,7 +65,7 @@ Partial Class dlgWindPollutionRose
         Me.lblStatistic.Location = New System.Drawing.Point(20, 266)
         Me.lblStatistic.Name = "lblStatistic"
         Me.lblStatistic.Size = New System.Drawing.Size(47, 13)
-        Me.lblStatistic.TabIndex = 18
+        Me.lblStatistic.TabIndex = 19
         Me.lblStatistic.Text = "Statistic:"
         '
         'lblKeyPosition
@@ -74,7 +74,7 @@ Partial Class dlgWindPollutionRose
         Me.lblKeyPosition.Location = New System.Drawing.Point(14, 291)
         Me.lblKeyPosition.Name = "lblKeyPosition"
         Me.lblKeyPosition.Size = New System.Drawing.Size(64, 13)
-        Me.lblKeyPosition.TabIndex = 22
+        Me.lblKeyPosition.TabIndex = 21
         Me.lblKeyPosition.Text = "Keyposition:"
         '
         'lblType
@@ -82,9 +82,9 @@ Partial Class dlgWindPollutionRose
         Me.lblType.AutoSize = True
         Me.lblType.Location = New System.Drawing.Point(20, 218)
         Me.lblType.Name = "lblType"
-        Me.lblType.Size = New System.Drawing.Size(34, 13)
-        Me.lblType.TabIndex = 15
-        Me.lblType.Text = "Type:"
+        Me.lblType.Size = New System.Drawing.Size(37, 13)
+        Me.lblType.TabIndex = 16
+        Me.lblType.Text = "Facet:"
         '
         'lblWindDirection2
         '
@@ -92,7 +92,7 @@ Partial Class dlgWindPollutionRose
         Me.lblWindDirection2.Location = New System.Drawing.Point(265, 242)
         Me.lblWindDirection2.Name = "lblWindDirection2"
         Me.lblWindDirection2.Size = New System.Drawing.Size(89, 13)
-        Me.lblWindDirection2.TabIndex = 8
+        Me.lblWindDirection2.TabIndex = 10
         Me.lblWindDirection2.Text = "Wind Direction 2:"
         '
         'lblWindSpeed2
@@ -101,7 +101,7 @@ Partial Class dlgWindPollutionRose
         Me.lblWindSpeed2.Location = New System.Drawing.Point(265, 199)
         Me.lblWindSpeed2.Name = "lblWindSpeed2"
         Me.lblWindSpeed2.Size = New System.Drawing.Size(78, 13)
-        Me.lblWindSpeed2.TabIndex = 6
+        Me.lblWindSpeed2.TabIndex = 8
         Me.lblWindSpeed2.Text = "Wind Speed 2:"
         '
         'lblWindDirection
@@ -128,7 +128,7 @@ Partial Class dlgWindPollutionRose
         Me.lblPollutant.Location = New System.Drawing.Point(265, 310)
         Me.lblPollutant.Name = "lblPollutant"
         Me.lblPollutant.Size = New System.Drawing.Size(51, 13)
-        Me.lblPollutant.TabIndex = 11
+        Me.lblPollutant.TabIndex = 13
         Me.lblPollutant.Text = "Pollutant:"
         '
         'lblDate
@@ -137,7 +137,7 @@ Partial Class dlgWindPollutionRose
         Me.lblDate.Location = New System.Drawing.Point(265, 128)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 26
+        Me.lblDate.TabIndex = 5
         Me.lblDate.Text = "Date:"
         '
         'ucrReceiverDate
@@ -149,7 +149,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 27
+        Me.ucrReceiverDate.TabIndex = 6
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrSaveGraph
@@ -166,7 +166,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrChkIncludePollutant.Location = New System.Drawing.Point(268, 282)
         Me.ucrChkIncludePollutant.Name = "ucrChkIncludePollutant"
         Me.ucrChkIncludePollutant.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkIncludePollutant.TabIndex = 10
+        Me.ucrChkIncludePollutant.TabIndex = 12
         '
         'ucrInputStatistic
         '
@@ -176,7 +176,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrInputStatistic.Location = New System.Drawing.Point(73, 260)
         Me.ucrInputStatistic.Name = "ucrInputStatistic"
         Me.ucrInputStatistic.Size = New System.Drawing.Size(99, 21)
-        Me.ucrInputStatistic.TabIndex = 19
+        Me.ucrInputStatistic.TabIndex = 20
         '
         'ucrInputColor
         '
@@ -186,7 +186,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrInputColor.Location = New System.Drawing.Point(73, 236)
         Me.ucrInputColor.Name = "ucrInputColor"
         Me.ucrInputColor.Size = New System.Drawing.Size(99, 21)
-        Me.ucrInputColor.TabIndex = 17
+        Me.ucrInputColor.TabIndex = 18
         '
         'ucrInputType
         '
@@ -196,7 +196,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrInputType.Location = New System.Drawing.Point(73, 210)
         Me.ucrInputType.Name = "ucrInputType"
         Me.ucrInputType.Size = New System.Drawing.Size(99, 21)
-        Me.ucrInputType.TabIndex = 14
+        Me.ucrInputType.TabIndex = 15
         '
         'ucrChkPaddle
         '
@@ -204,7 +204,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrChkPaddle.Location = New System.Drawing.Point(17, 314)
         Me.ucrChkPaddle.Name = "ucrChkPaddle"
         Me.ucrChkPaddle.Size = New System.Drawing.Size(155, 20)
-        Me.ucrChkPaddle.TabIndex = 13
+        Me.ucrChkPaddle.TabIndex = 23
         '
         'ucrChkCompare
         '
@@ -212,7 +212,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrChkCompare.Location = New System.Drawing.Point(268, 172)
         Me.ucrChkCompare.Name = "ucrChkCompare"
         Me.ucrChkCompare.Size = New System.Drawing.Size(120, 20)
-        Me.ucrChkCompare.TabIndex = 5
+        Me.ucrChkCompare.TabIndex = 7
         '
         'ucrReceiverPollutant
         '
@@ -223,7 +223,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrReceiverPollutant.Selector = Nothing
         Me.ucrReceiverPollutant.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverPollutant.strNcFilePath = ""
-        Me.ucrReceiverPollutant.TabIndex = 12
+        Me.ucrReceiverPollutant.TabIndex = 14
         Me.ucrReceiverPollutant.ucrSelector = Nothing
         '
         'ucrReceiverWindSpeed
@@ -259,7 +259,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrReceiverWindSpeed2.Selector = Nothing
         Me.ucrReceiverWindSpeed2.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWindSpeed2.strNcFilePath = ""
-        Me.ucrReceiverWindSpeed2.TabIndex = 7
+        Me.ucrReceiverWindSpeed2.TabIndex = 9
         Me.ucrReceiverWindSpeed2.ucrSelector = Nothing
         '
         'ucrReceiverWindDirection2
@@ -271,7 +271,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrReceiverWindDirection2.Selector = Nothing
         Me.ucrReceiverWindDirection2.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWindDirection2.strNcFilePath = ""
-        Me.ucrReceiverWindDirection2.TabIndex = 9
+        Me.ucrReceiverWindDirection2.TabIndex = 11
         Me.ucrReceiverWindDirection2.ucrSelector = Nothing
         '
         'ucrSelectorWindPollutionRose
@@ -293,7 +293,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrInputKeyPosition.Location = New System.Drawing.Point(81, 287)
         Me.ucrInputKeyPosition.Name = "ucrInputKeyPosition"
         Me.ucrInputKeyPosition.Size = New System.Drawing.Size(91, 21)
-        Me.ucrInputKeyPosition.TabIndex = 23
+        Me.ucrInputKeyPosition.TabIndex = 22
         '
         'ucrBase
         '
