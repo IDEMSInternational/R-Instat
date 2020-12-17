@@ -2064,8 +2064,8 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     y$year <- plyr::mapvalues(y$year, stack_cols, stack_years)
     
     # Replacing day 60 with 0 for non-leap years. This will result in NA dates.
-    y$doy[(!lubridate::leap_year(y$year)) & y$doy == 60] <- 0
-    y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] <- y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] - 1
+    y$doy[(!lubridate::leap_year(as.numeric(y$year))) & y$doy == 60] <- 0
+    y$doy[(!lubridate::leap_year(as.numeric(y$year))) & y$doy > 60] <- y$doy[(!lubridate::leap_year(as.numeric(y$year))) & y$doy > 60] - 1
     y$date <- as.Date(paste(y$year, y$doy), format = paste("%Y", "%j"))
     # Put day 0 back as 60. Needed in error displaying only.
     y$doy[y$doy == 0] <- 60
@@ -2086,12 +2086,14 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
       else {
         invalid_data_display <- invalid_data %>% dplyr::select(year, doy)
       }
+      # Also make a data.frame (instead of tibble) so that display will show all rows.
       if(!missing(station)) {
         invalid_data_display <- data.frame(station = invalid_data$station, invalid_data_display)
       }
       if(!missing(element)) {
         invalid_data_display <- data.frame(element = invalid_data$element, invalid_data_display)
       }
+      invalid_data_display <- data.frame(invalid_data_display)
       invalid_data_display[[element_name]] <- invalid_data[[element_name]]
       print(invalid_data_display, row.names = FALSE)
     }
