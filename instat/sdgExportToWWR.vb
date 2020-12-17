@@ -26,35 +26,35 @@ Public Class sdgExportToWWR
 
     Private Sub InitialiseControls()
 
-        ucrSelectorStationMetadata.SetParameter(New RParameter("station_data", 0))
+        ucrSelectorStationMetadata.SetParameter(New RParameter("station_data", 13))
         ucrSelectorStationMetadata.SetParameterIsrfunction()
 
-        ucrReceiverStationName.SetParameter(New RParameter("station_name", 1))
+        ucrReceiverStationName.SetParameter(New RParameter("station_name", 14))
         ucrReceiverStationName.Selector = ucrSelectorStationMetadata
         ucrReceiverStationName.SetParameterIsString()
         ucrReceiverStationName.SetMeAsReceiver()
 
-        ucrReceiverWNONumber.SetParameter(New RParameter("wmo_number", 2))
+        ucrReceiverWNONumber.SetParameter(New RParameter("wmo_number", 15))
         ucrReceiverWNONumber.Selector = ucrSelectorStationMetadata
         ucrReceiverWNONumber.SetParameterIsString()
 
-        ucrReceiverCountry.SetParameter(New RParameter("country_name", 3))
+        ucrReceiverCountry.SetParameter(New RParameter("country_name", 16))
         ucrReceiverCountry.Selector = ucrSelectorStationMetadata
         ucrReceiverCountry.SetParameterIsString()
 
-        ucrReceiverLatitude.SetParameter(New RParameter("latitude", 4))
+        ucrReceiverLatitude.SetParameter(New RParameter("latitude", 17))
         ucrReceiverLatitude.Selector = ucrSelectorStationMetadata
         ucrReceiverLatitude.SetParameterIsString()
 
-        ucrReceiverLongitude.SetParameter(New RParameter("longitude", 5))
+        ucrReceiverLongitude.SetParameter(New RParameter("longitude", 18))
         ucrReceiverLongitude.Selector = ucrSelectorStationMetadata
         ucrReceiverLongitude.SetParameterIsString()
 
-        ucrReceiverStationHeight.SetParameter(New RParameter("height_station", 6))
+        ucrReceiverStationHeight.SetParameter(New RParameter("height_station", 19))
         ucrReceiverStationHeight.Selector = ucrSelectorStationMetadata
         ucrReceiverStationHeight.SetParameterIsString()
 
-        ucrReceiverBarometerHeight.SetParameter(New RParameter("height_barometer", 7))
+        ucrReceiverBarometerHeight.SetParameter(New RParameter("height_barometer", 20))
         ucrReceiverBarometerHeight.Selector = ucrSelectorStationMetadata
         ucrReceiverBarometerHeight.SetParameterIsString()
 

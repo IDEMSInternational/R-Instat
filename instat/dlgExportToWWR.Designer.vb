@@ -43,7 +43,7 @@ Partial Class dlgExportToWWR
         Me.lblPrecipitation = New System.Windows.Forms.Label()
         Me.lblMeanDailyMaxAirTemperature = New System.Windows.Forms.Label()
         Me.lblMeanRelativeHumidity = New System.Windows.Forms.Label()
-        Me.btnStationMetadata = New System.Windows.Forms.Button()
+        Me.cmdStationMetadata = New System.Windows.Forms.Button()
         Me.ucrInputLinkby = New instat.ucrInputComboBox()
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
@@ -268,14 +268,14 @@ Partial Class dlgExportToWWR
         Me.lblMeanRelativeHumidity.TabIndex = 22
         Me.lblMeanRelativeHumidity.Text = "Mean Daily Relative Humidity:"
         '
-        'btnStationMetadata
+        'cmdStationMetadata
         '
-        Me.btnStationMetadata.Location = New System.Drawing.Point(258, 82)
-        Me.btnStationMetadata.Name = "btnStationMetadata"
-        Me.btnStationMetadata.Size = New System.Drawing.Size(135, 25)
-        Me.btnStationMetadata.TabIndex = 5
-        Me.btnStationMetadata.Text = "Station Metadata"
-        Me.btnStationMetadata.UseVisualStyleBackColor = True
+        Me.cmdStationMetadata.Location = New System.Drawing.Point(258, 82)
+        Me.cmdStationMetadata.Name = "cmdStationMetadata"
+        Me.cmdStationMetadata.Size = New System.Drawing.Size(135, 25)
+        Me.cmdStationMetadata.TabIndex = 5
+        Me.cmdStationMetadata.Text = "Station Metadata"
+        Me.cmdStationMetadata.UseVisualStyleBackColor = True
         '
         'ucrInputLinkby
         '
@@ -349,7 +349,7 @@ Partial Class dlgExportToWWR
         Me.Controls.Add(Me.cmdBrowse)
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.ucrInputLinkby)
-        Me.Controls.Add(Me.btnStationMetadata)
+        Me.Controls.Add(Me.cmdStationMetadata)
         Me.Controls.Add(Me.lblMeanRelativeHumidity)
         Me.Controls.Add(Me.lblMeanDailyMaxAirTemperature)
         Me.Controls.Add(Me.lblPrecipitation)
@@ -403,7 +403,7 @@ Partial Class dlgExportToWWR
     Friend WithEvents ucrReceiverMeanMonthlyAirTemperature As ucrReceiverSingle
     Friend WithEvents ucrReceiverPrecipitation As ucrReceiverSingle
     Friend WithEvents ucrReceiverMeanRelativeHumidity As ucrReceiverSingle
-    Friend WithEvents btnStationMetadata As Button
+    Friend WithEvents cmdStationMetadata As Button
     Friend WithEvents ucrInputLinkby As ucrInputComboBox
     Friend WithEvents cmdBrowse As Button
     Friend WithEvents ucrInputFilePath As ucrInputTextBox

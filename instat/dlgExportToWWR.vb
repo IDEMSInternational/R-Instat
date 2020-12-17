@@ -134,7 +134,7 @@ Public Class dlgExportToWWR
         TestOkEnabled()
     End Sub
 
-    Private Sub btnStationMetadata_Click(sender As Object, e As EventArgs) Handles btnStationMetadata.Click
+    Private Sub cmdStationMetadata_Click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
         sdgExportToWWR.SetRFunction(clsNewRFunction:=clsWWRExport, bResetSubdialog)
         sdgExportToWWR.ShowDialog()
         bResetSubdialog = False
