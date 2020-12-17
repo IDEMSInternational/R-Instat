@@ -128,7 +128,7 @@ Public Class dlgWindPollutionRose
         ucrInputColor.SetItems(dctColor)
         ucrInputColor.SetDropDownStyleAsNonEditable()
 
-        ucrSaveGraph.SetPrefix("Wind/Pollution Rose")
+        ucrSaveGraph.SetPrefix("wind_pollution_rose")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetCheckBoxText("Save Graph")
@@ -157,7 +157,7 @@ Public Class dlgWindPollutionRose
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverWindDirection.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse (ucrChkIncludePollutant.Checked AndAlso ucrReceiverPollutant.IsEmpty) OrElse (ucrChkCompare.Checked AndAlso (ucrReceiverWindDirection2.IsEmpty OrElse ucrReceiverWindSpeed2.IsEmpty)) Then
+        If ucrReceiverWindDirection.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse (ucrChkIncludePollutant.Checked AndAlso ucrReceiverPollutant.IsEmpty) OrElse (ucrChkCompare.Checked AndAlso (ucrReceiverWindDirection2.IsEmpty OrElse ucrReceiverWindSpeed2.IsEmpty)) OrElse Not ucrSaveGraph.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -170,12 +170,8 @@ Public Class dlgWindPollutionRose
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverWindDirection_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindDirection.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverWindDirection2.ControlContentsChanged, ucrReceiverWindSpeed2.ControlContentsChanged, ucrReceiverPollutant.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged
+    Private Sub ucrReceiverWindDirection_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindDirection.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverWindDirection2.ControlContentsChanged, ucrReceiverWindSpeed2.ControlContentsChanged, ucrReceiverPollutant.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub UcrReceiverSingle1_Load(sender As Object, e As EventArgs) Handles ucrReceiverDate.Load
-
     End Sub
 
     Private Sub ucrChkIncludePollutant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludePollutant.ControlValueChanged
