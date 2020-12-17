@@ -1087,7 +1087,7 @@ duplicated_count_index<-function(x, type = "count"){
     x<-data.frame(x)
     
     #calculate the frequency of each combo. (using plyr:: because the function name is used in other packages so need explicit-ness)
-    counts<-dplyr::count(x)
+    counts<-plyr::count(x)
     
     #merge onto dataset. Adding a call to suppressMessages() because join() likes to tell you stuff a bit unneccesarily otherwise.
     x<-suppressMessages(plyr::join(x, counts))
