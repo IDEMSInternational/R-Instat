@@ -233,10 +233,10 @@ Public Class dlgClimSoft
         End If
     End Sub
     Private Sub ucrReceiverMultipleStations_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleStations.ControlValueChanged
-        If bIgnoreReceiverChanges Then
-            Exit Sub
+        If Not bIgnoreReceiverChanges Then
+            SetElementsRecieverQuery()
         End If
-        SetElementsRecieverQuery()
+
     End Sub
 
     Private Sub ucrComboBoxElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxElements.ControlValueChanged
@@ -246,15 +246,16 @@ Public Class dlgClimSoft
         End If
     End Sub
 
-    Private Sub ucrChkObservationData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkObservationData.ControlValueChanged
-        If ucrChkObservationData.Checked Then
-            ucrReceiverMultipleElements.SetMeAsReceiver()
-        Else
-            ucrReceiverMultipleStations.SetMeAsReceiver()
-        End If
-    End Sub
-
     Private Sub ucrUnstackDataControlsValueChanged_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUnstackData.ControlValueChanged, ucrReceiverMultipleElements.ControlValueChanged, ucrChkObservationData.ControlValueChanged
+        'only change the receivers if the event was raised by ucrChkObservationData checkbox
+        If TypeOf ucrChangedControl Is ucrCheck Then
+            If ucrChkObservationData.Checked Then
+                ucrReceiverMultipleElements.SetMeAsReceiver()
+            Else
+                ucrReceiverMultipleStations.SetMeAsReceiver()
+            End If
+        End If
+
         'unstack observation data only when more than 1 element is selected
         If ucrChkObservationData.Checked AndAlso ucrReceiverMultipleElements.GetVariableNamesAsList.Count > 1 Then
             ucrChkUnstackData.Enabled = True

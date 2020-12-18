@@ -159,16 +159,23 @@ Public Class dlgClimsoftWizard
     ''' but in future the panels could be changed to external custom controls used in the form.
     ''' </summary>
     Interface IWizStep
-        'raised if by the wizard step when any of its child control changes its values
+        ''' <summary>
+        ''' raised by the wizard step if any of its child controls change their value
+        ''' </summary>
+        ''' <param name="wizStepChanged"></param>
         Event StateChanged(wizStepChanged As IWizStep)
 
         'if set true, indicates to the wizard step, to reset to defaults and reset its R code
         Property Reset As Boolean
 
-        'shows the wizard step parent control, sets the defaults and R code for its children controls
+        ''' <summary>
+        ''' shows the wizard step parent control, sets the defaults and R code for its child controls
+        ''' </summary>
         Sub Show()
 
-        'hides the wizard step parent control and all its children controls
+        ''' <summary>
+        ''' hides the wizard step parent control and all its child controls
+        ''' </summary>
         Sub Hide()
 
         'indicates that the all the values set in the wizard step are valid and next step can be performed

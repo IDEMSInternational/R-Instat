@@ -34,7 +34,7 @@ Public Class sdgImportFromClimSoft
         SetRCodeForControls(False)
         'could have been connected through the wizard. So check here
         bConnected = CheckIfConnectionIsActive()
-        UpdateConnectionState()
+        UpdateConnectionAndControlsState()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -84,7 +84,7 @@ Public Class sdgImportFromClimSoft
         'End If
         'bConnected = False
         bConnected = CheckIfConnectionIsActive()
-        UpdateConnectionState()
+        UpdateConnectionAndControlsState()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -94,30 +94,28 @@ Public Class sdgImportFromClimSoft
         ucrTxtUserName.SetRCode(clsRDatabaseConnect, bReset)
     End Sub
 
-    Private Sub UpdateConnectionState()
+    Private Sub UpdateConnectionAndControlsState()
+        Dim bEnableControls As Boolean
         If bConnected Then
             lblConnection.Text = "Connected"
             lblConnection.ForeColor = Color.Green
             btnConnect.Text = "Disconnect"
-
             'disable all other controls. Entry allowed only when there is no existing connection
-            ucrComboBoxDatabaseName.Enabled = False
-            ucrComboBoxPort.Enabled = False
-            ucrTxtHost.Enabled = False
-            ucrTxtUserName.Enabled = False
-            chkRememberCredentials.Enabled = False
+            bEnableControls = False
         Else
             lblConnection.Text = "No Connection"
             lblConnection.ForeColor = Color.Red
             btnConnect.Text = "Connect"
-
             'enable all other controls to allow entry of connection details
-            ucrComboBoxDatabaseName.Enabled = True
-            ucrComboBoxPort.Enabled = True
-            ucrTxtHost.Enabled = True
-            ucrTxtUserName.Enabled = True
-            chkRememberCredentials.Enabled = True
+            bEnableControls = True
         End If
+
+        'enable/disable all other controls to allow entry of connection details
+        ucrComboBoxDatabaseName.Enabled = bEnableControls
+        ucrComboBoxPort.Enabled = bEnableControls
+        ucrTxtHost.Enabled = bEnableControls
+        ucrTxtUserName.Enabled = bEnableControls
+        chkRememberCredentials.Enabled = bEnableControls
     End Sub
 
     ''' <summary>
@@ -135,6 +133,15 @@ Public Class sdgImportFromClimSoft
 
     Private Sub Disconnect()
         frmMain.clsRLink.RunScript(clsRDatabaseDisconnect.ToScript(), strComment:="Disconnect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
+        bConnected = False
+    End Sub
+
+    ''' <summary>
+    '''  will display an R password input prompt, to enter password and attempt connecting to database
+    ''' </summary>
+    Private Sub Connect()
+        frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
+        bConnected = CheckIfConnectionIsActive()
     End Sub
 
     Public Sub Reset()
@@ -150,13 +157,10 @@ Public Class sdgImportFromClimSoft
         'if was already connected, then user action is meant to disconnect else, try connecting to database
         If bConnected Then
             Disconnect()
-            bConnected = False
         Else
-            'will display an R password input prompt, to enter password and attempt connecting to database
-            frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
-            bConnected = CheckIfConnectionIsActive()
+            Connect()
         End If
-        UpdateConnectionState()
+        UpdateConnectionAndControlsState()
         btnConnect.Enabled = True
 
         If chkRememberCredentials.Checked AndAlso bConnected Then

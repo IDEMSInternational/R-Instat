@@ -1535,7 +1535,7 @@ DataBook$set("public", "database_connect", function(dbname, user, host, port, dr
   #done this way so that password characters are not displayed in the output window
   password <- getPass::getPass(paste0(user, " password:"))
   if(length(password) > 0){
-    out <- NULL
+    #out <- NULL
     out <- DBI::dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
     if(!is.null(out)) {
       self$set_database_connection(out)
@@ -1650,8 +1650,10 @@ DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "s
     }
     
   } else{
-    data_list <- list(db_station_info)
-    names(data_list) <- next_default_item("stations_info", self$get_data_names())
+    if (length(stations) > 0) {
+      data_list <- list(db_station_info)
+      names(data_list) <- next_default_item("stations_info", self$get_data_names())
+    }
   }
   
   #import the data as separate data frames
