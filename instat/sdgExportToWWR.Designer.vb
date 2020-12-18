@@ -43,7 +43,7 @@ Partial Class sdgExportToWWR
         'lblStationName
         '
         Me.lblStationName.AutoSize = True
-        Me.lblStationName.Location = New System.Drawing.Point(248, 37)
+        Me.lblStationName.Location = New System.Drawing.Point(248, 36)
         Me.lblStationName.Name = "lblStationName"
         Me.lblStationName.Size = New System.Drawing.Size(74, 13)
         Me.lblStationName.TabIndex = 1
@@ -52,7 +52,7 @@ Partial Class sdgExportToWWR
         'lblWMONumber
         '
         Me.lblWMONumber.AutoSize = True
-        Me.lblWMONumber.Location = New System.Drawing.Point(248, 77)
+        Me.lblWMONumber.Location = New System.Drawing.Point(248, 76)
         Me.lblWMONumber.Name = "lblWMONumber"
         Me.lblWMONumber.Size = New System.Drawing.Size(78, 13)
         Me.lblWMONumber.TabIndex = 3
@@ -61,7 +61,7 @@ Partial Class sdgExportToWWR
         'lblCountry
         '
         Me.lblCountry.AutoSize = True
-        Me.lblCountry.Location = New System.Drawing.Point(248, 117)
+        Me.lblCountry.Location = New System.Drawing.Point(248, 116)
         Me.lblCountry.Name = "lblCountry"
         Me.lblCountry.Size = New System.Drawing.Size(46, 13)
         Me.lblCountry.TabIndex = 5
@@ -79,7 +79,7 @@ Partial Class sdgExportToWWR
         'lblLongitude
         '
         Me.lblLongitude.AutoSize = True
-        Me.lblLongitude.Location = New System.Drawing.Point(248, 195)
+        Me.lblLongitude.Location = New System.Drawing.Point(248, 196)
         Me.lblLongitude.Name = "lblLongitude"
         Me.lblLongitude.Size = New System.Drawing.Size(57, 13)
         Me.lblLongitude.TabIndex = 9
@@ -88,20 +88,20 @@ Partial Class sdgExportToWWR
         'lblStationHeight
         '
         Me.lblStationHeight.AutoSize = True
-        Me.lblStationHeight.Location = New System.Drawing.Point(248, 235)
+        Me.lblStationHeight.Location = New System.Drawing.Point(248, 236)
         Me.lblStationHeight.Name = "lblStationHeight"
-        Me.lblStationHeight.Size = New System.Drawing.Size(74, 13)
+        Me.lblStationHeight.Size = New System.Drawing.Size(77, 13)
         Me.lblStationHeight.TabIndex = 11
-        Me.lblStationHeight.Text = "StationHeight:"
+        Me.lblStationHeight.Text = "Station Height:"
         '
         'lblBarometerHeight
         '
         Me.lblBarometerHeight.AutoSize = True
-        Me.lblBarometerHeight.Location = New System.Drawing.Point(248, 282)
+        Me.lblBarometerHeight.Location = New System.Drawing.Point(248, 276)
         Me.lblBarometerHeight.Name = "lblBarometerHeight"
-        Me.lblBarometerHeight.Size = New System.Drawing.Size(86, 13)
+        Me.lblBarometerHeight.Size = New System.Drawing.Size(92, 13)
         Me.lblBarometerHeight.TabIndex = 13
-        Me.lblBarometerHeight.Text = "BarometerHeight"
+        Me.lblBarometerHeight.Text = "Barometer Height:"
         '
         'ucrButtonsSdg
         '
@@ -113,7 +113,7 @@ Partial Class sdgExportToWWR
         'ucrReceiverStationHeight
         '
         Me.ucrReceiverStationHeight.frmParent = Me
-        Me.ucrReceiverStationHeight.Location = New System.Drawing.Point(248, 248)
+        Me.ucrReceiverStationHeight.Location = New System.Drawing.Point(248, 252)
         Me.ucrReceiverStationHeight.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStationHeight.Name = "ucrReceiverStationHeight"
         Me.ucrReceiverStationHeight.Selector = Nothing
@@ -125,7 +125,7 @@ Partial Class sdgExportToWWR
         'ucrReceiverBarometerHeight
         '
         Me.ucrReceiverBarometerHeight.frmParent = Me
-        Me.ucrReceiverBarometerHeight.Location = New System.Drawing.Point(248, 295)
+        Me.ucrReceiverBarometerHeight.Location = New System.Drawing.Point(248, 292)
         Me.ucrReceiverBarometerHeight.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverBarometerHeight.Name = "ucrReceiverBarometerHeight"
         Me.ucrReceiverBarometerHeight.Selector = Nothing
@@ -137,7 +137,7 @@ Partial Class sdgExportToWWR
         'ucrReceiverCountry
         '
         Me.ucrReceiverCountry.frmParent = Me
-        Me.ucrReceiverCountry.Location = New System.Drawing.Point(248, 130)
+        Me.ucrReceiverCountry.Location = New System.Drawing.Point(248, 132)
         Me.ucrReceiverCountry.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverCountry.Name = "ucrReceiverCountry"
         Me.ucrReceiverCountry.Selector = Nothing
@@ -149,7 +149,7 @@ Partial Class sdgExportToWWR
         'ucrReceiverLatitude
         '
         Me.ucrReceiverLatitude.frmParent = Me
-        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(248, 169)
+        Me.ucrReceiverLatitude.Location = New System.Drawing.Point(248, 172)
         Me.ucrReceiverLatitude.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
         Me.ucrReceiverLatitude.Selector = Nothing
@@ -161,7 +161,7 @@ Partial Class sdgExportToWWR
         'ucrReceiverLongitude
         '
         Me.ucrReceiverLongitude.frmParent = Me
-        Me.ucrReceiverLongitude.Location = New System.Drawing.Point(248, 208)
+        Me.ucrReceiverLongitude.Location = New System.Drawing.Point(248, 212)
         Me.ucrReceiverLongitude.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
         Me.ucrReceiverLongitude.Selector = Nothing
@@ -185,7 +185,7 @@ Partial Class sdgExportToWWR
         'ucrReceiverWNONumber
         '
         Me.ucrReceiverWNONumber.frmParent = Me
-        Me.ucrReceiverWNONumber.Location = New System.Drawing.Point(248, 90)
+        Me.ucrReceiverWNONumber.Location = New System.Drawing.Point(248, 92)
         Me.ucrReceiverWNONumber.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWNONumber.Name = "ucrReceiverWNONumber"
         Me.ucrReceiverWNONumber.Selector = Nothing
