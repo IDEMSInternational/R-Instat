@@ -187,9 +187,9 @@ p2_indices <- function(df, station, date, precip, tmax, tmin, qct = 0, qcpr = 0,
     # Shape monthly values into table by year
     # This now explicitly uses data.table::dcast >= 1.9.6
     
-    Month.Y <- dcast(Month,Year~Mo,value.var=c("Pr","Tm"),sep=".",fill=NA)
-    Month.Y <- merge(Month.Y,Year,by="Year")  # No need to sort (in all locales?)
-    Month.Y <- round(Month.Y,2)  # round table to 2 digits
+    Month.Y <- data.table::dcast(Month, Year~Mo, value.var = c("Pr", "Tm"), sep = ".", fill = NA)
+    Month.Y <- data.table::merge.data.table(Month.Y, Year, by = "Year")  # No need to sort (in all locales?)
+    Month.Y <- round(Month.Y, 2)  # round table to 2 digits
     
     # Having dcast multiple variables, split them back up for further processing
     # This seems to be the only way to evaluate the correct column names
@@ -310,8 +310,8 @@ p2_indices <- function(df, station, date, precip, tmax, tmin, qct = 0, qcpr = 0,
     ###################################################################################
     
     dd <- data[, paste(Year, Mo, Day, sep = "-")]    # YYYY-MM-DD as string from data.table
-    D1 <- as.PCICt(dd, cal = "gregorian")         # String represented as Gregorian date
-    D <- climdexInput.raw(tmax = data[,Tx], tmin = data[,Tn], prec = data[,Prec],
+    D1 <- PCICt::as.PCICt(dd, cal = "gregorian")         # String represented as Gregorian date
+    D <- climdex.pcic::climdexInput.raw(tmax = data[,Tx], tmin = data[,Tn], prec = data[,Prec],
                           tmax.dates = D1, tmin.dates = D1,prec.dates = D1,
                           base.range = c(nybr, nyer), max.missing.days = max.miss)
     dd <- strsplit(levels(D@date.factors$monthly), "-")    # have padded partial years
@@ -330,8 +330,8 @@ p2_indices <- function(df, station, date, precip, tmax, tmin, qct = 0, qcpr = 0,
       
       # Combine monthly and annual values by casting monthly table into years
       
-      NCMP45 <- data.table(Year, Mo, NCMP45.M)
-      NCMP45 <- dcast(NCMP45, Year~Mo, value.var = "NCMP45.M")
+      NCMP45 <- data.table::data.table(Year, Mo, NCMP45.M)
+      NCMP45 <- data.table::dcast(NCMP45, Year~Mo, value.var = "NCMP45.M")
       NCMP45 <- cbind(NCMP45, NCMP45.Y)
       
       # Write to file with standardised column names
@@ -409,8 +409,8 @@ p2_indices <- function(df, station, date, precip, tmax, tmin, qct = 0, qcpr = 0,
         # Combine monthly and annual records - do need to worry about the table order
         
         MVarX <- MVarX[order(Mo)]
-        VarX.D <- dcast(VarX, Year~Mo, value.var = c("Day", "Var"),fill = NA)
-        VarX.all <- merge(VarX.D, YVarX, by = "Year")
+        VarX.D <- data.table::dcast(VarX, Year~Mo, value.var = c("Day", "Var"),fill = NA)
+        VarX.all <- data.table::merge.data.table(VarX.D, YVarX, by = "Year")
         
         # Separate extreme value and day index
         # Day index "Annual" value is the month of extreme value

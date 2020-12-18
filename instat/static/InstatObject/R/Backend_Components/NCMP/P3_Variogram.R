@@ -117,7 +117,7 @@ p3_variogram <- function(p2, station, year, month, nyb = 1981, nye = 2010, ne,
   # Still suppressing warning messages - about converting strings to integer
   
   stations_data <- unique(p2[[station]])
-  stations_metadata <- unique(station_df[[station]])
+  stations_metadata <- unique(station_df[[name]])
   if (!all(stations_data %in% stations_metadata)) stop("Station information not available for all stations that appear in data.")
   stations <- stations_data
   nstn <- length(stations)
@@ -129,7 +129,7 @@ p3_variogram <- function(p2, station, year, month, nyb = 1981, nye = 2010, ne,
   if (nye <= nyb) stop("Variogram end period must be after start period.")
   
   # Column names of the possible indices to select i.e. ele[ne]
-  ele <- c("TMA","PrAn","PrA","SPI","TX90p","TN90p","TX10p","TN10p") # NCMP index element
+  ele <- c("TMA", "PrAn", "PrA", "SPI", "TX90p", "TN90p", "TX10p", "TN10p") # NCMP index element
 
   # Output column names (now standard across CSV files)
   cnames <- c(month_name_english, "Annual")
@@ -162,6 +162,8 @@ p3_variogram <- function(p2, station, year, month, nyb = 1981, nye = 2010, ne,
   D <- distance(lat1, long1, lat2, long2)
   diag(D) <- 0
   D <- round(D, 2)
+  
+  ncmpn <- c(1L,2L,2L,3L,4L,4L,5L,5L)
 
   # Constrain distances and define bins accordingly
   Dmax1 <- round(max(D), -2)  # Maximum distance between stations (rounded to 100km)
