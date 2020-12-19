@@ -23,6 +23,20 @@
 #                                                                                 #
 ###################################################################################
 
+# p2: data.frame containing 21 indices from p2_indices()
+# station: name of station column in p2
+# year: name of year column in p2
+# month: name of month column in p2
+# station_df: data.frame will station metadata
+# name: name of station column in station_df (to link with p2[[station]])
+# lat: name of latitude column in station_df
+# lon: name of longitude column in station_df
+# nyba: (optional) start year for region average (if missing will use beginning year from p4)
+# nyea: (optional) end year for region average (if missing will use end year from p4)
+# nyb: (optional) start year for station trend (if missing will use nyba)
+# nye: (optional) end year for station trend (if missing will use nyea)
+# output_folder: directory to output graphs and maps. output_folder/A5_Trends_Graphs will be created for output.
+
 p5_trends_graphs <- function(p2, station, p2_year, month, p4, p4_year, p4_month, nyba, nyea, nyb, nye, output_folder,
                              station_df, name, lat, lon) {
   # The mapdata package is used for the high resolution world map, but the
