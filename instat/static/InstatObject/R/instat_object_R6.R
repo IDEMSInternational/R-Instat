@@ -1408,7 +1408,7 @@ DataBook$set("public", "add_single_climdex_index", function(data_name, indices, 
     linked_data_name <- self$get_linked_to_data_name(data_name, c(year, month))
     if(length(linked_data_name) == 0) {
       if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
-      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
+      if("factor" %in% year_class) ind_data[[year]] <- make_factor(levels(ind_data[[year]]))[ind_data[[year]]]
       if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
       data_list = list(ind_data)
       new_data_name <- paste(data_name, "by", year, month, sep = "_")
