@@ -23,14 +23,14 @@
 #    June 2017 - move function defs to support sript, added precip anomaly        #
 ###################################################################################
 
-# p2: data.frame containing 21 indices from p2_indices()
-# station: name of station column in p2
-# year: name of year column in p2
-# month: name of month column in p2
-# p3: data.frame containing variogram output from p3_variogram()
+# a2: data.frame containing 21 indices from p2_indices()
+# station: name of station column in a2
+# year: name of year column in a2
+# month: name of month column in a2
+# a3: data.frame containing variogram output from p3_variogram()
 # ne: which index to compute region average for, 1 to 8.
 # station_df: data.frame will station metadata
-# name: name of station column in station_df (to link with p2[[station]])
+# name: name of station column in station_df (to link with a2[[station]])
 # lat: name of latitude column in station_df
 # lon: name of longitude column in station_df
 # nyb: start year
@@ -50,7 +50,7 @@
 # 6: NCMP 4, Percentage of Warm Nights
 # 7: NCMP 5, Percentage of Cold Days
 # 8: NCMP 5, Percentage of Cold Nights
-p4_region_average <- function(p2, station, year, month, p3, ne,
+p4_region_average <- function(a2, station, year, month, a3, ne = 1:8,
                               station_df, name, lat, lon,
                               nyb = 1950, nye, uncode, label, res,
                               igrid = FALSE) {
@@ -69,7 +69,7 @@ p4_region_average <- function(p2, station, year, month, p3, ne,
   DmaxT <- 3000           # maximum separation (km) for temperature indices
   DmaxP <- 2000           # maximum separation (km) for precipitation indices
   
-  stations_data <- unique(p2[[station]])
+  stations_data <- unique(a2[[station]])
   stations_metadata <- unique(station_df[[name]])
   if (!all(stations_data %in% stations_metadata)) stop("Station information not available for all stations that appear in data.")
   stations <- stations_data
@@ -106,15 +106,6 @@ p4_region_average <- function(p2, station, year, month, p3, ne,
   if(!missing(label) && label != "") tname <- label
   tname <- gsub("[[:space:]]|[[:punct:]]", "_", tname)  # Replace punctuation and spaces
   
-  # DP TODO Decide how to use configuration files.
-  # dy <- base::date()
-  # desc <- c("Date of processing","Number of stations",
-  #           "Start of analysis period","End of analysis period",
-  #           "ISO 3166-1 Country code","Country/Region name","Grid resolution",
-  #           "UN Code number")
-  # mess <- paste(desc,c(dy,nstn,nyb,nye,tcode,tname,res,uncode),sep=" = ")
-  # writeLines(mess,con=namex)
-
   # Which diagnostic to compute
   # Removed the option to process all diagnostics in one run of the script
   
@@ -267,7 +258,7 @@ p4_region_average <- function(p2, station, year, month, p3, ne,
   ###################################################################################
   #    Read variogram:                                                              #
   ###################################################################################
-  var <- p3
+  var <- a3
   
   ###################################################################################
   #    Read index data for all stations:                                            #
@@ -277,7 +268,7 @@ p4_region_average <- function(p2, station, year, month, p3, ne,
   
   NCMP.stn <- vector("list", nstn)
   for (i in 1:nstn) {
-    I1 <- p2 %>% dplyr::filter(.data[[station]] == stations[i])
+    I1 <- a2 %>% dplyr::filter(.data[[station]] == stations[i])
     I1 <- tidyr::pivot_wider(I1, id_cols = tidyselect::all_of(year), names_from = tidyselect::all_of(month),
                              values_from = tidyselect::all_of(ele[ne]))
     I1 <- data.frame(I1)
