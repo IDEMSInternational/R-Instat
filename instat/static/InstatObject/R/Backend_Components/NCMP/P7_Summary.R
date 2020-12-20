@@ -22,7 +22,7 @@
 #    March 2018                                                                   #
 ###################################################################################
 
-p7_summary <- function(a4, a6, nyb, nye) {
+p7_summary <- function(a2, a4, a6, nyb, nye, ncmp_folder) {
   
   ###################################################################################
   #    Gathers input info from the user                                             #
@@ -53,21 +53,21 @@ p7_summary <- function(a4, a6, nyb, nye) {
   tname <- attr(a4, "tname")
   elez <- c("TMA", "PrAn", "PrA", "SPI", "TX90p", "TN10p")
   folder <- "A4_Region_Average"
-  filez <- file.path(folder,paste(tname,elez,"Region_Avg.csv",sep="_"))
-  optionalz <- c(FALSE,FALSE,FALSE,FALSE,FALSE,FALSE)
+  filez <- file.path(ncmp_folder, folder, paste(tname, elez, "Region_Avg.csv", sep = "_"))
+  optionalz <- c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)
   
   # Names of input count record files
   
-  eler <- c("TXx","TNn","RXday1")
+  eler <- c("TXx", "TNn", "RXday1")
   folder <- "A6_Count_Records"
-  filer <- file.path(folder,paste(tname,eler,"Count_Record.csv",sep="_"))
-  optionalr <- c(FALSE,FALSE,FALSE)
+  filer <- file.path(folder, paste(tname, eler, "Count_Record.csv", sep = "_"))
+  optionalr <- c(FALSE, FALSE, FALSE)
   
   # Concatenate these into a single variable to enable a single loop
   
   ele <- c(elez, eler)
-  namex <- c(filez,filer)
-  optional <- c(optionalz,optionalr)
+  namex <- c(filez, filer)
+  optional <- c(optionalz, optionalr)
   
   # Initialise storage for output tables
   # Use dummy tables for merging each diagnostic
@@ -110,10 +110,10 @@ p7_summary <- function(a4, a6, nyb, nye) {
     # If not, fill with the dummy table
     # Note that P6_Count_Records.R currently processes all 5 diagnostics at once
     
-    if ((ne <= 6 && !ele[ne] %in% names(a4)) || (ne > 7 && !ele[ne] %in% a6$index)) {
+    if ((ne <= 6 && !ele[ne] %in% a4$ncmp_index) || (ne > 7 && !ele[ne] %in% a6$ncmp_index)) {
       cat(desc, "has not been calculated for", ele[ne], fill = TRUE)
       if (!optional[ne]) {
-        cat("Summary file will be filled with missing values",fill = TRUE)
+        cat("Summary file will be filled with missing values", fill = TRUE)
         names(Xdum)[3:4] <- propervnames
         X <- merge(X, Xdum, by = c("Year", "Month"))
         next
@@ -124,12 +124,18 @@ p7_summary <- function(a4, a6, nyb, nye) {
     # The Guidance implies rounding to 2dp, but the annual extraction is to 3dp
     # Allowing for extra columns, e.g. planned station index of record counts
     if (ne <= 6) {
-      In <- 
+      In <- a4 %>% filter(ncmp_index == ele[ne])
+      In$ncmp_index <- NULL
+    } else {
+      In <- a6 %>% filter(ncmp_index == ele[ne])
+      In$region <- NULL
+      In$ncmp_index <- NULL
+      # Remove Count Accum column
+      In[[ncol(In)]] <- NULL
     }
-    In <- read.csv(file=namex[ne],header=TRUE,na.strings="-99.9",check.names=FALSE)
     names(In)[3:4] <- vnames
-    if (ne <= 8L) In[,3] <- round(In[,3],3)
-    X <- merge(X,In[,1:4],by=c("Year","Month"),all.x=TRUE)
+    if (ne <= 8L) In[,3] <- round(In[,3], 3)
+    X <- merge(X, In[,1:4], by = c("Year", "Month"), all.x = TRUE)
   }
   
   ###################################################################################
@@ -139,9 +145,7 @@ p7_summary <- function(a4, a6, nyb, nye) {
   # Thus the months are in the order 1,10,11,12,13,2,...,9 (in an English locale)
   # Put back into the expected chronological order
   
-  ind <- order(X[,"Year"],X[,"Month"])
-  
-  cat("Writing Summary file",fill=TRUE)
+  ind <- order(X[,"Year"], X[,"Month"])
   
   # Create a header for the Summary file
   # This consists of key metadata used in the analysis
@@ -153,17 +157,17 @@ p7_summary <- function(a4, a6, nyb, nye) {
             "Climatological period start","Climatological period end",
             "Temperature Quality Control level","Precipitation Quality Control level",
             "Region Average grid resolution","Version")
-  vals <- c(clist.P2$nstn,clist.P2$nyb,clist.P2$nye,clist.P2$QCT,clist.P2$QCPr,
-            clist.P4$res,2017)
-  mess <- paste(desc,vals,sep=" = ")
+  vals <- c(attr(a2, "nstn"), attr(a2, "nyb"), attr(a2, "nye"), attr(a2, "QCT"), attr(a2, "QCPr"),
+            attr(a2, "res"), 2017)
+  mess <- paste(desc, vals, sep=" = ")
   
   # Write header and table to single file - generates a warning which can be ignored
   # File has been tested as directly readable by Office 2016 Excel
   
-  namex <- paste(tname,nyb,nye,"Summary.csv",sep="_")
-  writeLines(mess,con=namex)
-  suppressWarnings(write.table(X[ind,],file=namex,append=TRUE,row.names=FALSE,sep=","))
-  
-  cat("Summary file completed!",fill=TRUE)
-  options(op)
+  namex <- paste(tname, nyb, nye, "Summary.csv", sep = "_")
+  namex <- file.path(ncmp_folder, namex)
+  writeLines(mess, con = namex)
+  write.table(X[ind,], file = namex, append = TRUE, row.names = FALSE, sep = ",")
+  X <- dplyr::arrange(X, Year, Month)
+  return(X)
 }
