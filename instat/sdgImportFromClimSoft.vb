@@ -78,11 +78,6 @@ Public Class sdgImportFromClimSoft
         'set database disconnect R command
         clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
 
-        'disconnect if was already connected 
-        'If CheckIfConnectionIsActive() Then
-        '   Disconnect()
-        'End If
-        'bConnected = False
         bConnected = CheckIfConnectionIsActive()
         UpdateConnectionAndControlsState()
     End Sub
