@@ -54,6 +54,13 @@ Public Class frmMain
     Private strCurrentOutputFileName As String = "" 'holds the saved ouput file name to help remember the current selected folder path
     Private strCurrentScriptFileName As String = "" 'holds the saved script file name to help remember the current selected folder path
     Private strCurrentLogFileName As String = "" 'holds the saved log file name to help remember the current selected folder path
+
+    ''' <summary>
+    ''' flag used to indicate if current state of selected data has been saved
+    ''' it's set to false by ucrDataView control when state of data has been changed
+    ''' it's set to true by dlgSaveAs dialog and save menu when data has been successfully saved 
+    ''' </summary>
+    Public Property bDataSaved As Boolean = False
     Public Sub New()
 
         ' This call is required by the designer.
@@ -531,6 +538,7 @@ Public Class frmMain
             clsSaveRDS.AddParameter("object", clsRLink.strInstatDataObject)
             clsSaveRDS.AddParameter("file", Chr(34) & Replace(strSaveFilePath, "\", "/") & Chr(34))
             clsRLink.RunScript(clsSaveRDS.ToScript(), strComment:="File > Save: save file")
+            bDataSaved = True
         End If
     End Sub
 
@@ -1540,13 +1548,15 @@ Public Class frmMain
     End Sub
 
     Private Sub mnuFileCloseData_Click(sender As Object, e As EventArgs) Handles mnuFileCloseData.Click
-        Dim bClose As DialogResult
-
-        bClose = MsgBox("Are you sure you want to close you data?" & Environment.NewLine & "Any unsaved changes will be lost.", MessageBoxButtons.YesNo, "Close Data")
-        If bClose = DialogResult.Yes Then
-            clsRLink.CloseData()
-            strSaveFilePath = ""
+        If Not bDataSaved Then
+            If DialogResult.No = MsgBox("Are you sure you want to close you data?" &
+                                         Environment.NewLine & "Any unsaved changes will be lost.",
+                                         MessageBoxButtons.YesNo, "Close Data") Then
+                Exit Sub
+            End If
         End If
+        clsRLink.CloseData()
+        strSaveFilePath = ""
     End Sub
 
     Private Sub mnuPrepareCheckDataDuplicates_Click(sender As Object, e As EventArgs) Handles mnuPrepareCheckDataDuplicates.Click
@@ -2227,5 +2237,13 @@ Public Class frmMain
 
     Private Sub mnuStructuredCircularOtherRosePlotsPolarAnnulus_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarAnnulus.Click
         dlgPolarAnnulus.ShowDialog()
+    End Sub
+
+    Private Sub ExportToWWRToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuExportToWWRToolStrip.Click
+        dlgExportToWWR.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredSurvivalDefine_Click(sender As Object, e As EventArgs) Handles mnuStructuredSurvivalDefine.Click
+        dlgSurvivalObject.ShowDialog()
     End Sub
 End Class

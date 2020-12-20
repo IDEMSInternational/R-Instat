@@ -179,4 +179,13 @@ Public Class ucrCheck
     Protected Overrides Sub ResetControlValue()
         Checked = False
     End Sub
+
+    Public Overloads Property Visible As Boolean
+        Get
+            Return chkCheck.Visible
+        End Get
+        Set(bVisible As Boolean)
+            chkCheck.Visible = bVisible
+        End Set
+    End Property
 End Class
