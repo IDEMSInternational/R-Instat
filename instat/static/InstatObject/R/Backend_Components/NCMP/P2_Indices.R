@@ -119,7 +119,7 @@ p2_indices <- function(df, station, date, precip, tmax, tmin, qct = 0, qcpr = 0,
   if (!all(stations_data %in% stations_metadata)) stop("Station information not available for all stations that appear in data.")
   stations <- stations_data
   nstn <- length(stations)
-
+  
   ###################################################################################
   # Set up miscellaneous variables                                                  #
   ###################################################################################
@@ -138,8 +138,8 @@ p2_indices <- function(df, station, date, precip, tmax, tmin, qct = 0, qcpr = 0,
              "TX90p", "TN90p", 
              "TX10p", "TN10p", 
              "RXday1_date", "RXday1", "TXx_date", "TXx", "TNx_date", "TNx", "TXn_date", "TXn", "TNn_date", "TNn")
-  labx <- c("Monthly Mean Temp", "Monthly Mean Temp Anom", "Monthly Total Prec", "Monthly Total Prec Anom", 
-            "Monthly Total Prec Anom Norm", "Monthly Total Prec Ratio", "Standard Prec Index",
+  labx <- c("Monthly Mean Temp", "Monthly Mean Temp Anom", "Monthly Total Prec Anom", "Monthly Total Prec Anom Norm",
+            "Monthly Total Prec", "Monthly Total Prec Ratio", "Standard Prec Index",
             "Warm Days", "Warm Nights", "Cold Days", "Cold Nights", "Extreme Cold Day", "Extreme Cold Day Date",
             "Extreme Cold Night", "Extreme Cold Night Date", "Extreme Prec", "Extreme Cold Prec Date",
             "Extreme Warm Day", "Extreme Warm Day Date", "Extreme Warm Night", "Extreme Warm Night Date")
@@ -229,7 +229,7 @@ p2_indices <- function(df, station, date, precip, tmax, tmin, qct = 0, qcpr = 0,
     for (mn in 2:13) {
       if (!is.na(Clim.P[mn])) {
         if (Clim.P[mn] == 0) { 
-          cat("Replacing zero in climatology period with average for full series",fill=TRUE)
+          cat("Replacing zero in climatology period with average for full series", fill = TRUE)
           Clim.P[mn] <- Clim_ext.P[mn]
           if (Clim.P[mn] == 0) { Clim.P[mn] <- 0.1 }
         }
