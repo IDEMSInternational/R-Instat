@@ -5282,6 +5282,12 @@
     <Content Include="static\Library\Climatic\climatic_guide_datasets.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="static\InstatObject\R\Backend_Components\NCMP\P2_Indices.R" />
+    <None Include="static\InstatObject\R\Backend_Components\NCMP\P3_Variogram.R" />
+    <None Include="static\InstatObject\R\Backend_Components\NCMP\P4_Region_Average.R" />
+    <None Include="static\InstatObject\R\Backend_Components\NCMP\P5_Trends_Graphs.R" />
+    <None Include="static\InstatObject\R\Backend_Components\NCMP\P6_Count_Records.R" />
+    <None Include="static\InstatObject\R\Backend_Components\NCMP\P7_Summary.R" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Carlosjj-Microsoft-Office-2013-Excel.ico" />
