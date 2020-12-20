@@ -22,18 +22,18 @@
 #                                                                                 #
 ###################################################################################
 
-# p2: data.frame containing 21 indices from p2_indices()
-# station: name of station column in p2
-# p2_year: name of year column in p2
-# month: name of month column in p2
-# p4: data.frame containing the main data.frame output from p4_region_averag
+# a2: data.frame containing 21 indices from p2_indices()
+# station: name of station column in a2
+# a2_year: name of year column in a2
+# month: name of month column in a2
+# a4: data.frame containing the main data.frame output from p4_region_averag
 # station_df: data.frame will station metadata
-# name: name of station column in station_df (to link with p2[[station]])
+# name: name of station column in station_df (to link with a2[[station]])
 # lat: name of latitude column in station_df
 # lon: name of longitude column in station_df
-# nyb: (optional) start year for count period (if missing will use beginning year from p4)
-# nye: (optional) end year for count period (if missing will use end year from p4)
-p6_count_records <- function(p2, station, p2_year, month, p4, nyb, nye,
+# nyb: (optional) start year for count period (if missing will use beginning year from a4)
+# nye: (optional) end year for count period (if missing will use end year from a4)
+p6_count_records <- function(a2, station, a2_year, month, a4, nyb, nye,
                              station_df, name, lat, lon) {
 
   ###################################################################################
@@ -46,8 +46,8 @@ p6_count_records <- function(p2, station, p2_year, month, p4, nyb, nye,
   
   ylo <- 1900L            # earliest possible year for count records
   yhi <- as.POSIXlt(Sys.time())$year + 1899L  # latest possible year == current - 1
-  yclo <- attr(p4, "nyb") # recommended start year of count record period
-  ychi <- attr(p4, "nye") # recommended end year of count record period
+  yclo <- attr(a4, "nyb") # recommended start year of count record period
+  ychi <- attr(a4, "nye") # recommended end year of count record period
   nthresh <- 30L          # minimum number of years for valid station record
   
   ###################################################################################
@@ -60,7 +60,7 @@ p6_count_records <- function(p2, station, p2_year, month, p4, nyb, nye,
   # editing of 'P2_Station_List.txt'
   # Suppressing warning messages - about converting strings to integer
   
-  stations_data <- unique(p2[[station]])
+  stations_data <- unique(a2[[station]])
   stations_metadata <- unique(station_df[[name]])
   if (!all(stations_data %in% stations_metadata)) stop("Station information not available for all stations that appear in data.")
   stations <- stations_data
@@ -99,7 +99,7 @@ p6_count_records <- function(p2, station, p2_year, month, p4, nyb, nye,
   # Element relating to NCMP Index
   
   ele <- c("TXn", "TNn", "TXx", "TNx", "RXday1")
-  tname <- attr(p4, "tname")
+  tname <- attr(a4, "tname")
 
   ###################################################################################
   #    Read the modified station list                                               #
@@ -150,12 +150,12 @@ p6_count_records <- function(p2, station, p2_year, month, p4, nyb, nye,
       # with missing extremes - which would likely fix several other issues             #
       ###################################################################################
       
-      a2_station <- p2 %>% dplyr::filter(.data[[station]] == stations[i])
-      I1 <- tidyr::pivot_wider(a2_station, id_cols = tidyselect::all_of(p2_year), names_from = tidyselect::all_of(month),
+      a2_station <- a2 %>% dplyr::filter(.data[[station]] == stations[i])
+      I1 <- tidyr::pivot_wider(a2_station, id_cols = tidyselect::all_of(a2_year), names_from = tidyselect::all_of(month),
                                values_from = tidyselect::all_of(ele[ne]))
       I1 <- data.frame(I1)
-      row.names(I1) <- I1[[p2_year]]
-      I1[[p2_year]] <- NULL
+      row.names(I1) <- I1[[a2_year]]
+      I1[[a2_year]] <- NULL
 
       # For now, skip if less than 30 years, and print message if first 30 years is incomplete
       # Have to allow for missing years in the table as indicated above
@@ -236,8 +236,9 @@ p6_count_records <- function(p2, station, p2_year, month, p4, nyb, nye,
   ###################################################################################
   # It is probably useful to retain a "configuration" file for counting records
   
-  out <- dplyr::bind_rows(output_data, .id = "index")
+  out <- dplyr::bind_rows(output_data, .id = "ncmp_index")
   out$region <- tname
+  out <- dplyr::select(out, region, dplyr::everything())
   dy <- date()
   attr(out, "dy") <- dy
   attr(out, "tname") <- tname

@@ -23,21 +23,34 @@
 #                                                                                 #
 ###################################################################################
 
-# p2: data.frame containing 21 indices from p2_indices()
-# station: name of station column in p2
-# year: name of year column in p2
-# month: name of month column in p2
-# station_df: data.frame will station metadata
-# name: name of station column in station_df (to link with p2[[station]])
-# lat: name of latitude column in station_df
-# lon: name of longitude column in station_df
-# nyba: (optional) start year for region average (if missing will use beginning year from p4)
-# nyea: (optional) end year for region average (if missing will use end year from p4)
+# a2: data.frame containing 21 indices from p2_indices()
+# station: name of station column in a2
+# a2_year: name of year column in a2
+# month: name of month column in a2
+# a4: data.frame containing main output data.frame() from p4_region_average()
+# a4_year: name of year column in a4
+# a4_month: name of month column in a4
+# ne: (optional) which indices to compute region average for, 1 to 8.
+# nyba: (optional) start year for region average (if missing will use beginning year from a4)
+# nyea: (optional) end year for region average (if missing will use end year from a4)
 # nyb: (optional) start year for station trend (if missing will use nyba)
 # nye: (optional) end year for station trend (if missing will use nyea)
-# output_folder: directory to output graphs and maps. output_folder/A5_Trends_Graphs will be created for output.
+# station_df: data.frame will station metadata
+# name: name of station column in station_df (to link with a2[[station]])
+# lat: name of latitude column in station_df
+# lon: name of longitude column in station_df
+# ncmp_folder: directory to output graphs and maps. ncmp_folder/A5_Trends_Graphs will be created for output.
 
-p5_trends_graphs <- function(p2, station, p2_year, month, p4, p4_year, p4_month, nyba, nyea, nyb, nye, output_folder,
+# ne options:
+# 1: NCMP 1, Monthly Mean Temperature Anomaly
+# 2: NCMP 2, Monthly Total Precipitation Anomaly Normalized
+# 3: NCMP 2, Monthly Total Precipitation Anomaly
+# 4: NCMP 3, Standardized Precipitation Index
+# 5: NCMP 4, Percentage of Warm Days
+# 6: NCMP 4, Percentage of Warm Nights
+# 7: NCMP 5, Percentage of Cold Days
+# 8: NCMP 5, Percentage of Cold Nights
+p5_trends_graphs <- function(a2, station, a2_year, month, a4, a4_year, a4_month, ne = 1:8, nyba, nyea, nyb, nye, ncmp_folder,
                              station_df, name, lat, lon) {
   # The mapdata package is used for the high resolution world map, but the
   # basic "world" database in maps seems equivalent to the wrld_simpl object in maptools
@@ -51,8 +64,8 @@ p5_trends_graphs <- function(p2, station, p2_year, month, p4, p4_year, p4_month,
   
   ylo <- 1900L            # earliest possible year for station trends
   yhi <- as.POSIXlt(Sys.time())$year + 1899L # latest possible year == current - 1
-  yalo <- attr(p4, "nyb")    # start year of region average period
-  yahi <- attr(p4, "nye")    # end year of region average period
+  yalo <- attr(a4, "nyb")    # start year of region average period
+  yahi <- attr(a4, "nye")    # end year of region average period
   tthresh <- 11L          # number of years required to calculated a trend
 
   # Lower trend threshold if the analysis period is too short
@@ -69,7 +82,7 @@ p5_trends_graphs <- function(p2, station, p2_year, month, p4, p4_year, p4_month,
   # For clarity, no longer do this as a separate function                           #
   ###################################################################################
   
-  stations_data <- unique(p2[[station]])
+  stations_data <- unique(a2[[station]])
   stations_metadata <- unique(station_df[[name]])
   if (!all(stations_data %in% stations_metadata)) stop("Station information not available for all stations that appear in data.")
   stations <- stations_data
@@ -110,7 +123,7 @@ p5_trends_graphs <- function(p2, station, p2_year, month, p4, p4_year, p4_month,
   # Set up variables for the 16 station indices to analyse                          #
   ###################################################################################
   
-  ncmpn <- c(1L,2L,3L,6L,5L,4L,5L,4L,6L,6L,6L,6L,1L,2L,2L,2L)
+  ncmpn <- c(1L, 2L, 3L, 6L, 5L, 4L, 5L, 4L, 6L, 6L, 6L, 6L, 1L, 2L, 2L, 2L)
   ntrend <- length(ncmpn)  # number of indices to analyse
   iext <- (ncmpn == 6L)    # which indices are extremes indices
   
@@ -167,11 +180,11 @@ p5_trends_graphs <- function(p2, station, p2_year, month, p4, p4_year, p4_month,
   title <- paste("(", letters[1:ntrend], ") ", gsub("_", " ", ele3), sep = "")
   
   # Output PDF file names by station
-  output_folder <- file.path(output_folder, "A5_Trends_Graphs")
+  ncmp_folder <- file.path(ncmp_folder, "A5_Trends_Graphs")
   folder2 <- c("Graphs_Annual_Station", "Maps_Annual_Station", "Graphs_Annual_Region")
   nybt <- c(nyb, nyb, nyba)
   nyet <- c(nye, nye, nyea)
-  odirs <- file.path(output_folder, paste(folder2, nybt, nyet, sep = "_"))  # adds separator "/"
+  odirs <- file.path(ncmp_folder, paste(folder2, nybt, nyet, sep = "_"))  # adds separator "/"
   
   # list of data frames to output
   output_data <- list()
@@ -186,7 +199,7 @@ p5_trends_graphs <- function(p2, station, p2_year, month, p4, p4_year, p4_month,
   # Begins loop for station trends                                                  #
   ###################################################################################
   
-  p2[[p2_year]] <- as.integer(p2[[p2_year]])
+  a2[[a2_year]] <- as.integer(a2[[a2_year]])
   for (i in 1:nstn) {
     # Open PDF for plots
     
@@ -200,18 +213,18 @@ p5_trends_graphs <- function(p2, station, p2_year, month, p4, p4_year, p4_month,
     trend <- rep(NA, ntrend)  # store annual estimated trend
     pval <- rep(NA, ntrend)   # store annual estimated p-value
 
-    a2_station <- p2 %>% dplyr::filter(.data[[station]] == stations[i])
+    a2_station <- a2 %>% dplyr::filter(.data[[station]] == stations[i])
     for (j in 1:ntrend) {
       
-      In <- tidyr::pivot_wider(a2_station, id_cols = tidyselect::all_of(p2_year), names_from = tidyselect::all_of(month),
+      In <- tidyr::pivot_wider(a2_station, id_cols = tidyselect::all_of(a2_year), names_from = tidyselect::all_of(month),
                                values_from = tidyselect::all_of(ele2[j]))
       In <- data.frame(In)
       # Calculate annual trends, using the Zhang method, if have enough data
       # The commented out code is for linear least squares trend
       
-      ref <- (In[[p2_year]] >= nyb & In[[p2_year]] <= nye)  # Select trend years
+      ref <- (In[[a2_year]] >= nyb & In[[a2_year]] <= nye)  # Select trend years
       if (sum(!is.na(In[ref, 'Annual'])) >= tthresh) {
-        q <- zyp::zyp.trend.vector(In[ref,'Annual'], In[ref,p2_year], method = 'zhang')
+        q <- zyp::zyp.trend.vector(In[ref,'Annual'], In[ref,a2_year], method = 'zhang')
         trend[j] <- q['trendp']         # Extract trend over period to vector
         pval[j] <- q['sig']             # Extract p-value to vector
         #      lq <- lm(Annual ~ Year,In,ref)  # Linear best fit
@@ -233,7 +246,7 @@ p5_trends_graphs <- function(p2, station, p2_year, month, p4, p4_year, p4_month,
           yrng <- range(In[ref,'Annual'], na.rm = TRUE)
           ylim <- c(floor(yrng[1]), ceiling(yrng[2]))  # expanded to nearest integer
         }
-        plot(In[ref,p2_year], In[ref,'Annual'], xlab = "Year", ylab = ylabel[j], main = title[j],
+        plot(In[ref,a2_year], In[ref,'Annual'], xlab = "Year", ylab = ylabel[j], main = title[j],
              col = "Blue", type = "l", ylim = ylim, yaxs = "i")
         
         # Only plot trend line if it has been estimated
@@ -268,7 +281,15 @@ p5_trends_graphs <- function(p2, station, p2_year, month, p4, p4_year, p4_month,
   # Consider separating as per Region Averages (and now Count Records)              #
   ###################################################################################
   
-  output_data[[paste("stn", "Trends", nyb, nye, "Annual", sep = "_")]] <- X
+  X_trend <- tidyr::pivot_longer(X, cols = seq(2, 32, 2), names_to = "ncmp_index",
+                                 values_to = "trend")
+  X_trend <- X_trend %>% select(Station, ncmp_index, trend)
+  X_pvalue <- tidyr::pivot_longer(X, cols = seq(3, 33, 2), names_to = "ncmp_index",
+                                  values_to = "signif")
+  X_out <- X_trend
+  X_out$signif <- X_pvalue$signif
+  
+  output_data[[paste("stn", "Trends", nyb, nye, "Annual", sep = "_")]] <- X_out
 
   ###################################################################################
   # Map annual trends by station                                                    #
@@ -377,7 +398,7 @@ p5_trends_graphs <- function(p2, station, p2_year, month, p4, p4_year, p4_month,
   
   # Names of input regional average files
   
-  tname <- attr(p4, "tname")
+  tname <- attr(a4, "tname")
 
   # Names of output regional average graphs
   
@@ -397,86 +418,87 @@ p5_trends_graphs <- function(p2, station, p2_year, month, p4, p4_year, p4_month,
   ymax <- c(4, 50, NA, 2, rep(25, 4))
   ylabel <- c("deg C", "%", "mm", "no units", rep("%", 4)) # Labels for y axis
   
-  # Output data.frame for trend and significance
-  # Changed column names for consistency with other output tables
-  
-  index <- attr(p4, "index")
-  i <- which(ele == index)
-
-  X <- data.frame(title[i],
-                  NA_real_, "?", NA_real_, "?", NA_real_, "?", NA_real_, "?",
-                  NA_real_, "?", NA_real_, "?", NA_real_, "?", NA_real_, "?",
-                  NA_real_, "?", NA_real_, "?", NA_real_, "?", NA_real_, "?",
-                  NA_real_, "?",
-                  stringsAsFactors = FALSE)
-  cnames <- c(month_name_english, "Annual")
-  names(X) <- c("NCMP", as.vector(t(matrix(c(cnames, paste(cnames, "S", sep = "_")), ncol = 2))))
-  
-  sq <- seq(from = 2, to = 26, by = 2) # sequence of even numbers
-  
   ###################################################################################
   # Begins loop for indices                                                         #
   ###################################################################################
   
-  # DP Removed loop so one index at a time.
-  
-  # Read in regional average data for all months for this index
+  region_trends_out <- list()
+  for (i in ne) {
+    # Output data.frame for trend and significance
+    # Changed column names for consistency with other output tables
+    
+    X <- data.frame(title[i],
+                    NA_real_, "?", NA_real_, "?", NA_real_, "?", NA_real_, "?",
+                    NA_real_, "?", NA_real_, "?", NA_real_, "?", NA_real_, "?",
+                    NA_real_, "?", NA_real_, "?", NA_real_, "?", NA_real_, "?",
+                    NA_real_, "?",
+                    stringsAsFactors = FALSE)
+    cnames <- c(month_name_english, "Annual")
+    names(X) <- c("NCMP", as.vector(t(matrix(c(cnames, paste(cnames, "S", sep = "_")), ncol = 2))))
+    
+    sq <- seq(from = 2, to = 26, by = 2) # sequence of even numbers
+    
+    # Read in regional average data for all months for this index
+    
+    In <- a4 %>% filter(ncmp_index == ele[i])
+    if (nrow(In) == 0) cat("Regional average has not yet been calculated for ", ele[i], "in A4 - skipping", fill = TRUE)
 
-  In <- p4
-  
-  trend <- rep(NA, 13)  # store monthly estimated trend over period
-  pval <- rep(NA, 13)   # store monthly estimated p-value
-  
-  # Calculations for trends by month
-  # Although have enforced a minimum period for trend analysis,
-  # allow for missing values generated by no station data
-  
-  for (j in 1:13) {
-    ref <- which(In[[p4_year]] >= nyba & In[[p4_year]] <= nyea & In[[p4_month]] == j)
-    if (sum(!is.na(In[ref, 'Index'])) >= tthresh) {
-      q <- zyp::zyp.trend.vector(In[ref, 'Index'], In[ref, p4_year], method = 'zhang')
-      trend[j] <- q['trendp']         # Extract trend over period to vector
-      pval[j] <- q['sig']             # Extract p-value to vector
-      #      lq <- lm(Index ~ Year,In,ref)   # Linear best fit
-      #      q <- coef(summary(lq))          # Extract coefficients
-      #      trend[j] <- q[2,1]*nyra         # Trend per year times number of years
-      #      pval[j] <- q[2,4]
+    trend <- rep(NA, 13)  # store monthly estimated trend over period
+    pval <- rep(NA, 13)   # store monthly estimated p-value
+    
+    # Calculations for trends by month
+    # Although have enforced a minimum period for trend analysis,
+    # allow for missing values generated by no station data
+    
+    for (j in 1:13) {
+      ref <- which(In[[a4_year]] >= nyba & In[[a4_year]] <= nyea & In[[a4_month]] == j)
+      if (sum(!is.na(In[ref, 'Index'])) >= tthresh) {
+        q <- zyp::zyp.trend.vector(In[ref, 'Index'], In[ref, a4_year], method = 'zhang')
+        trend[j] <- q['trendp']         # Extract trend over period to vector
+        pval[j] <- q['sig']             # Extract p-value to vector
+        #      lq <- lm(Index ~ Year,In,ref)   # Linear best fit
+        #      q <- coef(summary(lq))          # Extract coefficients
+        #      trend[j] <- q[2,1]*nyra         # Trend per year times number of years
+        #      pval[j] <- q[2,4]
+      }
     }
+    
+    # Copy trend and p-value into output table
+    # Currently converting p-value into "y"/"n" significance flag - should this be changed?
+    
+    X[1, sq] <- round(trend, 2)
+    X[1, sq + 1] <- ifelse(is.na(pval), "?", ifelse(pval < 0.05, "y", "n"))
+    
+    X_trend <- tidyr::pivot_longer(X, cols = seq(2, 26, 2), names_to = "month",
+                                   values_to = "trend")
+    X_trend <- X_trend %>% select(NCMP, month, trend)
+    X_pvalue <- tidyr::pivot_longer(X, cols = seq(3, 27, 2), names_to = "month",
+                                    values_to = "signif")
+    X <- X_trend
+    X$signif <- X_pvalue$signif
+    
+    region_trends_out[[ele[i]]] <- X
+    
+    # Plot annual series and trend
+    # These are preserved as the last index in the loop (j == 13)
+    
+    pdf(namep[i])
+    if (!is.na(ymin[i])) {
+      ylim <- c(ymin[i], ymax[i])
+    } else {
+      yrng <- range(In[ref,'Index'], na.rm = TRUE)
+      ylim <- c(floor(yrng[1]), ceiling(yrng[2]))
+    }
+    plot(In[ref, a4_year],In[ref, 'Index'], type = "l", col = "Blue", ylim = ylim, yaxs = "i",
+         xlab = "Year", ylab = ylabel[i], main = title[i], las = 1)
+    if (!is.na(trend[j])) {  # Add trend line if calculated
+      abline(q[c("intercept","trend")], col = "Red", lty = 2)
+      #    abline(q[,1],col="Red",lty=2)
+    }
+    dev.off()
   }
-  
-  # Copy trend and p-value into output table
-  # Currently converting p-value into "y"/"n" significance flag - should this be changed?
-  
-  X[1, sq] <- round(trend, 2)
-  X[1, sq + 1] <- ifelse(is.na(pval), "?", ifelse(pval < 0.05, "y", "n"))
-  
-  X_trend <- tidyr::pivot_longer(X, cols = seq(2, 26, 2), names_to = "month",
-                                 values_to = "trend")
-  X_trend <- X_trend %>% select(NCMP, month, trend)
-  X_pvalue <- tidyr::pivot_longer(X, cols = seq(3, 27, 2), names_to = "month",
-                                  values_to = "signif")
-  X <- X_trend
-  X$signif <- X_pvalue$signif
-  
+  X <- dplyr::bind_rows(region_trends_out, .id = "ncmp_index")
   output_data[[paste(tname, "Trends", nyb, nye, "Region", "Avg", sep = "_")]] <- X
-
-  # Plot annual series and trend
-  # These are preserved as the last index in the loop (j == 13)
-  
-  pdf(namep[i])
-  if (!is.na(ymin[i])) {
-    ylim <- c(ymin[i], ymax[i])
-  } else {
-    yrng <- range(In[ref,'Index'], na.rm = TRUE)
-    ylim <- c(floor(yrng[1]), ceiling(yrng[2]))
-  }
-  plot(In[ref, p4_year],In[ref, 'Index'], type = "l", col = "Blue", ylim = ylim, yaxs = "i",
-       xlab = "Year", ylab = ylabel[i], main = title[i], las = 1)
-  if (!is.na(trend[j])) {  # Add trend line if calculated
-    abline(q[c("intercept","trend")], col = "Red", lty = 2)
-    #    abline(q[,1],col="Red",lty=2)
-  }
-  dev.off()
   
   ###################################################################################
   # Ends loop for calculating and plotting regional average trends                  #

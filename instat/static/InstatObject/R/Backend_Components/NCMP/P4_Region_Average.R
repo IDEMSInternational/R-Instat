@@ -28,7 +28,7 @@
 # year: name of year column in a2
 # month: name of month column in a2
 # a3: data.frame containing variogram output from p3_variogram()
-# ne: which index to compute region average for, 1 to 8.
+# ne: (optional) which indices to compute region average for, 1 to 8.
 # station_df: data.frame will station metadata
 # name: name of station column in station_df (to link with a2[[station]])
 # lat: name of latitude column in station_df
@@ -55,7 +55,7 @@ p4_region_average <- function(a2, station, year, month, a3, ne = 1:8,
                               nyb = 1950, nye, uncode, label, res,
                               igrid = FALSE) {
 
-  data(package="maptools", wrld_simpl)
+  data(package = "maptools", wrld_simpl)
   
   ###################################################################################
   # Set variables with key thresholds for region averages                           #
@@ -123,7 +123,8 @@ p4_region_average <- function(a2, station, year, month, a3, ne = 1:8,
   
   files <- data.frame(Station = station_df[[name]],
                       Lat = station_df[[lat]],
-                      Long = station_df[[lon]], stringsAsFactors = FALSE)
+                      Long = station_df[[lon]], 
+                      stringsAsFactors = FALSE)
   # Ensure stations are in same order as in the data so that calculations match up.
   files <- files[match(stations, files$Station), ]
   Station <- files$Station
@@ -244,152 +245,165 @@ p4_region_average <- function(a2, station, year, month, a3, ne = 1:8,
   # Use this to restrict distance between stations and to grid squares
   # Is this the most appropriate way to limit the weighting for remote stations?
   
-  Dmax1 <- round(max(D), -2)  # Maximum distance between stations (rounded to 100km)
-  if (ne %in% 2:4) Dmax2 <- DmaxP else Dmax2 <- DmaxT
-  
-  Dmax <- min(Dmax1, Dmax2)
-  Dn <- pmin(D, Dmax)
-  Dion <- pmin(Dio, Dmax)
-  
-  nyrs <- nye - nyb + 1L                                       # variable number of years
-  NCMP <- matrix(NA, nrow = nyrs, ncol = 13)   # empty matrix for region avg, dim nyrsx12
-  NT <- matrix(0L, nrow = nyrs, ncol = 13)                     # empty matrix dim nyrsx12
-  
-  ###################################################################################
-  #    Read variogram:                                                              #
-  ###################################################################################
-  var <- a3
-  
-  ###################################################################################
-  #    Read index data for all stations:                                            #
-  # Instead of assign/get, define list of tables for each station                   #
-  ###################################################################################
-  # Converting PrAn from percentage back to ratio
-  
-  NCMP.stn <- vector("list", nstn)
-  for (i in 1:nstn) {
-    I1 <- a2 %>% dplyr::filter(.data[[station]] == stations[i])
-    I1 <- tidyr::pivot_wider(I1, id_cols = tidyselect::all_of(year), names_from = tidyselect::all_of(month),
-                             values_from = tidyselect::all_of(ele[ne]))
-    I1 <- data.frame(I1)
-    if (ne == 2L) I1[,2:14] <- I1[,2:14] / 100
-    if (ne == 3L) I1[,2:14] <- I1[,2:14] / 100  # scale to ensure matrix inversion behaves well
-    NCMP.stn[[i]] <- I1
-  }
-
-  ###################################################################################
-  # Begins loop over months                                                         #
-  ###################################################################################
-  grid_squares <- list()
-  for (nm in 1:13) {
-
-    ###################################################################################
-    # Generate variograms for this month for all years                                #
-    # Should not result in NA - if it did would end up with all NA upon inversion     #
-    # However, taking the approach of dropping entries for missing obs,               #
-    # so matrix inversion is still required for each yr/mo                            #
-    ###################################################################################
+  grid_squares_out <- list()
+  year_month_out <- list()
+  ann_out <- list()
+  for (e in ne) {
+    Dmax1 <- round(max(D), -2)  # Maximum distance between stations (rounded to 100km)
+    if (e %in% 2:4) Dmax2 <- DmaxP else Dmax2 <- DmaxT
     
-    # Copy the variogram best fit function and parameters from input table
+    Dmax <- min(Dmax1, Dmax2)
+    Dn <- pmin(D, Dmax)
+    Dion <- pmin(Dio, Dmax)
     
-    s1 <- var[nm, "s"]
-    n1 <- var[nm, "n"]
-    r1 <- var[nm, "r"]
-    f <- get(var[nm, "Function"])
-    
-    # Calculate inter-station variogram values and set diagonaly to nugget
-    # diag(C0) <- 0 # original code set diagonal to zero.
-    
-    C0 <- f(Dn, n1, r1, s1)
-    diag(C0) <- n1
-    
-    # Calculate station-to-grid square variogram values
-    # Keep only the valid grid squares for our country or region
-    
-    F <- rbind(f(Dion, n1, r1, s1), rep(1, gridsq))
-    F <- F[,sqs]
+    nyrs <- nye - nyb + 1L                                       # variable number of years
+    NCMP <- matrix(NA, nrow = nyrs, ncol = 13)   # empty matrix for region avg, dim nyrsx12
+    NT <- matrix(0L, nrow = nyrs, ncol = 13)                     # empty matrix dim nyrsx12
     
     ###################################################################################
-    # Loop over years                                                                 #
+    #    Read variogram:                                                              #
     ###################################################################################
+    var <- a3 %>% filter(ncmp_index == ele[e])
     
-    for (ny in nyb:nye) {
+    ###################################################################################
+    #    Read index data for all stations:                                            #
+    # Instead of assign/get, define list of tables for each station                   #
+    ###################################################################################
+    # Converting PrAn from percentage back to ratio
+    
+    NCMP.stn <- vector("list", nstn)
+    for (i in 1:nstn) {
+      I1 <- a2 %>% dplyr::filter(.data[[station]] == stations[i])
+      I1 <- tidyr::pivot_wider(I1, id_cols = tidyselect::all_of(year), names_from = tidyselect::all_of(month),
+                               values_from = tidyselect::all_of(ele[e]))
+      I1 <- data.frame(I1)
+      if (e == 2L) I1[,2:14] <- I1[,2:14] / 100
+      if (e == 3L) I1[,2:14] <- I1[,2:14] / 100  # scale to ensure matrix inversion behaves well
+      NCMP.stn[[i]] <- I1
+    }
+    
+    ###################################################################################
+    # Begins loop over months                                                         #
+    ###################################################################################
+    grid_squares <- list()
+    for (nm in 1:13) {
       
       ###################################################################################
-      #    Fill vector of index values for all stns for set yr/mo                       #
-      ###################################################################################
-      # For each station extract the value for this year
-      
-      z <- ny - nyb + 1            # index of year plus month
-      d <- c(rep(NA, nstn), 1)     # Empty vector for index, with last entry set to 1
-      for (i in 1:nstn) {
-        I1 <- NCMP.stn[[i]]        # Copy of table for this index
-        iz <- match(ny, I1[,1])    # Check for correct year within table
-        if (!is.na(iz)) d[i] <- I1[iz, nm + 1]  # Copy if year is present
-      }
-      
-      ###################################################################################
-      #    Calculates region average of set yr/mo                                       #
-      # Do this only using where have valid observations, and only if > 0               #
+      # Generate variograms for this month for all years                                #
+      # Should not result in NA - if it did would end up with all NA upon inversion     #
+      # However, taking the approach of dropping entries for missing obs,               #
+      # so matrix inversion is still required for each yr/mo                            #
       ###################################################################################
       
-      iobs <- which(!is.na(d))       # Index of contributing stations + end row
-      ntot <- length(iobs) - 1L      # Count of number of contributing stations
-      NT[z,nm] <- ntot
-      if (ntot > 0L) {               # Have contributing stations
-        C <- matrix(0, nrow = ntot + 1, ncol = ntot + 1)     # 0 == value for last row/col
-        C[1:ntot, 1:ntot] <- C0[iobs[1:ntot], iobs[1:ntot]]  # variogram of valid
-        C[1:ntot, ntot+1] <- 1                               # set last col to 1
-        C[ntot+1, 1:ntot] <- 1                               # set bottom row to 1
-        Cinv <- solve(C)                                     # invert C
+      # Copy the variogram best fit function and parameters from input table
+      
+      s1 <- var[nm, "s"]
+      n1 <- var[nm, "n"]
+      r1 <- var[nm, "r"]
+      f <- get(var[nm, "Function"])
+      
+      # Calculate inter-station variogram values and set diagonaly to nugget
+      # diag(C0) <- 0 # original code set diagonal to zero.
+      
+      C0 <- f(Dn, n1, r1, s1)
+      diag(C0) <- n1
+      
+      # Calculate station-to-grid square variogram values
+      # Keep only the valid grid squares for our country or region
+      
+      F <- rbind(f(Dion, n1, r1, s1), rep(1, gridsq))
+      F <- F[,sqs]
+      
+      ###################################################################################
+      # Loop over years                                                                 #
+      ###################################################################################
+      
+      for (ny in nyb:nye) {
         
-        # Calculate value for each valid grid square and then area-weighted average
-        # It seems here that there is effectively no weight for each grid square, and
-        # hence all (sqs) grid squares will have a non-missing value
-        # However kriging can generate an error estimate (not calculated here)
+        ###################################################################################
+        #    Fill vector of index values for all stns for set yr/mo                       #
+        ###################################################################################
+        # For each station extract the value for this year
         
-        Ix <- t(d[iobs]) %*% Cinv %*% F[iobs,]     # Matrix multiplication
-        if (ne == 2L) Ix <- Ix * 100 # If prec anom ratio (and prec anom?) multiply by 100
-        if (ne == 3L) Ix <- Ix * 100 # scale PrA so that matrix inversion works
-        NCMP[z, nm] <- weighted.mean(Ix, Dsq[sqs, 8]) # Find area average - no NA
-      } else {                      # No contributing stations
-        Ix <- rep(NA, length(sqs))  # Set all grid sqs to missing
-        NCMP[z, nm] <- NA   # Make it clear regional av is also missing
-      }
-      
-      #    Region average calculated. Done!
-      # If requested, write the grid square values to CSV file
-      
-      if (igrid) {
-        if (all(is.na(Ix))) X <- cbind(Dsq[sqs, c(1, 6:8)], Index = Ix)
-        else X <- cbind(Dsq[sqs, c(1, 6:8)], Index = t(Ix))
-        X <- data.frame(X)
-        grid_squares[[paste(ny, nm, sep = "_")]] <- X
+        z <- ny - nyb + 1            # index of year plus month
+        d <- c(rep(NA, nstn), 1)     # Empty vector for index, with last entry set to 1
+        for (i in 1:nstn) {
+          I1 <- NCMP.stn[[i]]        # Copy of table for this index
+          iz <- match(ny, I1[,1])    # Check for correct year within table
+          if (!is.na(iz)) d[i] <- I1[iz, nm + 1]  # Copy if year is present
+        }
+        
+        ###################################################################################
+        #    Calculates region average of set yr/mo                                       #
+        # Do this only using where have valid observations, and only if > 0               #
+        ###################################################################################
+        
+        iobs <- which(!is.na(d))       # Index of contributing stations + end row
+        ntot <- length(iobs) - 1L      # Count of number of contributing stations
+        NT[z,nm] <- ntot
+        if (ntot > 0L) {               # Have contributing stations
+          C <- matrix(0, nrow = ntot + 1, ncol = ntot + 1)     # 0 == value for last row/col
+          C[1:ntot, 1:ntot] <- C0[iobs[1:ntot], iobs[1:ntot]]  # variogram of valid
+          C[1:ntot, ntot+1] <- 1                               # set last col to 1
+          C[ntot+1, 1:ntot] <- 1                               # set bottom row to 1
+          Cinv <- solve(C)                                     # invert C
+          
+          # Calculate value for each valid grid square and then area-weighted average
+          # It seems here that there is effectively no weight for each grid square, and
+          # hence all (sqs) grid squares will have a non-missing value
+          # However kriging can generate an error estimate (not calculated here)
+          
+          Ix <- t(d[iobs]) %*% Cinv %*% F[iobs,]     # Matrix multiplication
+          if (e == 2L) Ix <- Ix * 100 # If prec anom ratio (and prec anom?) multiply by 100
+          if (e == 3L) Ix <- Ix * 100 # scale PrA so that matrix inversion works
+          NCMP[z, nm] <- weighted.mean(Ix, Dsq[sqs, 8]) # Find area average - no NA
+        } else {                      # No contributing stations
+          Ix <- rep(NA, length(sqs))  # Set all grid sqs to missing
+          NCMP[z, nm] <- NA   # Make it clear regional av is also missing
+        }
+        
+        #    Region average calculated. Done!
+        # If requested, write the grid square values to CSV file
+        
+        if (igrid) {
+          if (all(is.na(Ix))) X <- cbind(Dsq[sqs, c(1, 6:8)], Index = Ix)
+          else X <- cbind(Dsq[sqs, c(1, 6:8)], Index = t(Ix))
+          X <- data.frame(X)
+          grid_squares[[paste(ny, nm, sep = "_")]] <- X
+        }
       }
     }
+    if (igrid) {
+      grids_df <- dplyr::bind_rows(grid_squares, .id = "year_month")
+      grids_df <- tidyr::separate(grids_df, year_month, c("year", "month"), "_")
+      grids_df$month <- as.numeric(grids_df$month)
+      grids_df <- dplyr::arrange(grids_df, Grid, year, month)
+      grid_squares_out[[ele[e]]] <- grids_df
+    }
+    
+    ###################################################################################
+    # End loop of years (inner) and months (outer)                                    #
+    ###################################################################################
+    
+    ###################################################################################
+    #    Write region average                                                         #
+    # Writes the annual value as month == 13                                          #
+    # This is the format given in the Guidance and used by P5/P7                      #
+    # But useful to also write annual series separately - chronological and ranked    #
+    # (The latter was done in P5_Trends_Graphs.R but makes more sense here)           #
+    ###################################################################################
+    
+    X_year_month <- data.frame(Year = rep(nyb:nye, each = 13), Month = rep(1:13, times = nyrs),
+                               Index = as.vector(t(NCMP)), No_of_Stns = as.vector(t(NT)), check.names = FALSE)
+    year_month_out[[ele[e]]] <- X_year_month
+    
+    # Round extracted annual values to 3dp (the original file retains the full precision)
+    iz <- which(X_year_month[,'Month'] == 13L)
+    Xann <- X_year_month[iz, -2]
+    Xann[,"Index"] <- round(Xann[,"Index"], 3)
+    ann_out[[ele[e]]] <- Xann
   }
-  if (igrid) {
-    grids_df <- dplyr::bind_rows(grid_squares, .id = "year_month")
-    grids_df <- tidyr::separate(grids_df, year_month, c("year", "month"), "_")
-    grids_df$month <- as.numeric(grids_df$month)
-    grids_df <- dplyr::arrange(grids_df, Grid, year, month)
-    out[[paste(tname, ele[ne], "grids", sep = "_")]] <- grids_df
-  }
-
-  ###################################################################################
-  # End loop of years (inner) and months (outer)                                    #
-  ###################################################################################
-  
-  ###################################################################################
-  #    Write region average                                                         #
-  # Writes the annual value as month == 13                                          #
-  # This is the format given in the Guidance and used by P5/P7                      #
-  # But useful to also write annual series separately - chronological and ranked    #
-  # (The latter was done in P5_Trends_Graphs.R but makes more sense here)           #
-  ###################################################################################
-  
-  X_year_month <- data.frame(Year = rep(nyb:nye, each = 13), Month = rep(1:13, times = nyrs),
-                             Index = as.vector(t(NCMP)), No_of_Stns = as.vector(t(NT)), check.names = FALSE)
+  X_year_month <- dplyr::bind_rows(year_month_out, .id = "ncmp_index")
   
   dy <- date()
   attr(X_year_month, "dy") <- dy
@@ -400,25 +414,23 @@ p4_region_average <- function(a2, station, year, month, a3, ne = 1:8,
   attr(X_year_month, "tname") <- tname
   attr(X_year_month, "res") <- res
   attr(X_year_month, "uncode") <- uncode
-  attr(X_year_month, "index") <- ele[ne]
   
-  out[[paste(tname, ele[ne], "region_avg", sep = "_")]] <- X_year_month
+  X_ann <- dplyr::bind_rows(ann_out, .id = "ncmp_index")
+  attr(X_ann, "dy") <- dy
+  attr(X_ann, "nstn") <- nstn
+  attr(X_ann, "nyb") <- nyb
+  attr(X_ann, "nye") <- nye
+  attr(X_ann, "tcode") <- tcode
+  attr(X_ann, "tname") <- tname
+  attr(X_ann, "res") <- res
+  attr(X_ann, "uncode") <- uncode
+
+  out[[paste(tname, "avg", res, "annual", sep = "_")]] <- X_ann
+  out[[paste(tname, "region_avg", sep = "_")]] <- X_year_month
   
-  # Round extracted annual values to 3dp (the original file retains the full precision)
-  iz <- which(X_year_month[,'Month'] == 13L)
-  Xann <- X_year_month[iz, -2]
-  Xann[,"Index"] <- round(Xann[,"Index"], 3)
-  
-  attr(Xann, "dy") <- dy
-  attr(Xann, "nstn") <- nstn
-  attr(Xann, "nyb") <- nyb
-  attr(Xann, "nye") <- nye
-  attr(Xann, "tcode") <- tcode
-  attr(Xann, "tname") <- tname
-  attr(Xann, "res") <- res
-  attr(Xann, "uncode") <- uncode
-  attr(Xann, "index") <- ele[ne]
-  
-  out[[paste(tname, ele[ne], "avg", res, "annual",sep="_")]] <- Xann
-  out
+  if (igrid) {
+    grids_df <- dplyr::bind_rows(grid_squares_out, .id = "ncmp_index")
+    out[[paste(tname, "grids", sep = "_")]] <- grids_df
+  }
+  return(out)
 }

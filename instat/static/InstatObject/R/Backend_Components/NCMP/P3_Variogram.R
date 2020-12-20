@@ -364,7 +364,7 @@ p3_variogram <- function(a2, station, year, month, nyb = 1981, nye = 2010, ne = 
     ###################################################################################
     output_data[[ele[e]]] <- X
   }
-  X <- dplyr::bind_rows(output_data, .id = "index")
+  X <- dplyr::bind_rows(output_data, .id = "ncmp_index")
   
   ###################################################################################
   #    Write best fit variogram information                                         #
