@@ -1603,7 +1603,6 @@ DataBook$set("public", "import_from_climsoft", function(stationfiltercolumn = "s
     
     flags_column_col_sql <- " "
     if (include_observation_flags) {
-      db_flags_info <- DBI::dbGetQuery(con, "SELECT characterSymbol, description FROM flags")
       flags_column_col_sql <- ", observationfinal.flag AS flag"
     }
     
