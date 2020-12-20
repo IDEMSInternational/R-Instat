@@ -1566,6 +1566,44 @@ make_factor <- function(x, ordered = is.ordered(x)) {
   }
 }
 
+plot_mrl <- function(data, station_name, element_name, umin, umax, ncol = 1,
+                     xlab = "Threshold", ylab = "Mean excess", fill = "red",
+                     col = "black", rug = TRUE, addNexcesses = TRUE, textsize = 4) {
+  if (!missing(station_name)) {
+    plts <- list()
+    station_col <- data[, station_name]
+    stations <- unique(station_col)
+    for (i in seq_along(stations)) {
+      d <- data[station_col == stations[i], ]
+      element_col <- d[, element_name]
+      if (missing(umin)) {
+        umin <- min(element_col, na.rm = TRUE)
+      }
+      if (missing(umax)) {
+        umax <- max(element_col, na.rm = TRUE)
+      }
+      plts[[i]] <- texmex::mrl(na.exclude(element_col), umin = umin, umax = umax) %>%
+        ggplot2::ggplot(xlab = xlab, ylab = ylab, main = stations[i], fill = fill,
+          col = col, rug = rug, addNexcesses = addNexcesses, textsize = textsize
+        )
+    }
+    patchwork::wrap_plots(plts, ncol = ncol)
+  }
+  else {
+    element_col <- data[, element_name]
+    if (missing(umin)) {
+      umin <- min(element_col, na.rm = TRUE)
+    }
+    if (missing(umax)) {
+      umax <- max(element_col, na.rm = TRUE)
+    }
+    texmex::mrl(data = na.exclude(element_col), umin = umin, umax = umax) %>%
+      ggplot2::ggplot(xlab = xlab, ylab = ylab, fill = fill, col = col, rug = rug, 
+                      addNexcesses = addNexcesses, textsize = textsize
+      )
+  }
+}
+
 ### Constants
 month_abb_english <- c("Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 month_name_english <- c("January", "February", "March", "April", "May", "June", "July", 

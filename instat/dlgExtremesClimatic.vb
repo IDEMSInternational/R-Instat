@@ -15,9 +15,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports RDotNet
 Public Class dlgExtremesClimatic
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
+    Private bUpdateMinMax As Boolean = True
     Private clsExtreme As New RFunction
     Private strCurrDataName As String = ""
     Private clsGroupByFunction, clsRunCalcFunction, clsDayFromAndTo, clsDayManipulation As New RFunction
@@ -45,6 +47,8 @@ Public Class dlgExtremesClimatic
     Private clsFilterExtremeSubCalcs As New RFunction
     Private clsFilterExtremeExp As New ROperator
 
+    Private clsPlotMrlFunction As New RFunction
+
     Private Sub dlgExtremesClimatic_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -61,12 +65,15 @@ Public Class dlgExtremesClimatic
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 203
+        Dim dctColours As New Dictionary(Of String, String)
 
         ucrReceiverYear.Selector = ucrSelectorClimaticExtremes
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
         ucrReceiverYear.strSelectorHeading = "Year Variables"
 
+        ucrReceiverStation.SetParameter(New RParameter("station_name", 1))
+        ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.Selector = ucrSelectorClimaticExtremes
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.bAutoFill = True
@@ -96,6 +103,10 @@ Public Class dlgExtremesClimatic
         ucrReceiverElement.bAutoFill = True
         ucrReceiverElement.strSelectorHeading = "Numerics"
         ucrReceiverElement.SetIncludedDataTypes({"numeric"})
+
+        ucrSelectorClimaticExtremes.SetParameter(New RParameter("data", 0))
+        ucrSelectorClimaticExtremes.SetParameterIsrfunction()
+
 
         ' Panel Options
         ucrPnlExtremesType.AddRadioButton(rdoMinMax)
@@ -154,10 +165,59 @@ Public Class dlgExtremesClimatic
         ucrPnlExtremesType.AddToLinkedControls(ucrChkFirstDate, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrChkLastDate, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrChkNDates, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
-
+        ucrChkMrlPlot.AddToLinkedControls({ucrNudColumns, ucrSavePlot, ucrInputMin, ucrInputMax, ucrInputFill, ucrInputColours, ucrChkRugPlot}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMaxMin.SetLinkedDisplayControl(lblNewColName)
+        ucrChkMissingValues.SetLinkedDisplayControl(grpMinMaxOptions)
+        ucrInputThresholdValue.SetLinkedDisplayControl(grpPeakOptions)
+        ucrNudColumns.SetLinkedDisplayControl(lblColumns)
+        ucrInputMin.SetLinkedDisplayControl(lblMinimum)
+        ucrInputMax.SetLinkedDisplayControl(lblTo)
+        ucrInputFill.SetLinkedDisplayControl(lblFill)
+        ucrInputColours.SetLinkedDisplayControl(lblColour)
 
         ucrInputFilterPreview.IsReadOnly = True
+
+        ucrChkMrlPlot.SetText("Mean Residual Life Plot")
+        ucrChkMrlPlot.AddRSyntaxContainsFunctionNamesCondition(True, {"plot_mrl"})
+        ucrChkMrlPlot.AddRSyntaxContainsFunctionNamesCondition(False, {"plot_mrl"}, False)
+
+        ucrNudColumns.SetParameter(New RParameter("ncol", 3))
+        ucrNudColumns.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
+        ucrNudColumns.Increment = 1
+
+        ucrInputMin.SetValidationTypeAsNumeric()
+        ucrInputMin.AddQuotesIfUnrecognised = False
+
+        ucrInputMax.SetValidationTypeAsNumeric()
+        ucrInputMax.AddQuotesIfUnrecognised = False
+
+        dctColours.Add("Black", Chr(34) & "black" & Chr(34))
+        dctColours.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctColours.Add("Red", Chr(34) & "red" & Chr(34))
+        dctColours.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctColours.Add("Green", Chr(34) & "green" & Chr(34))
+        dctColours.Add("Violet", Chr(34) & "violet" & Chr(34))
+
+        ucrInputFill.SetParameter(New RParameter("fill", 6))
+        ucrInputFill.SetItems(dctColours)
+        ucrInputFill.bAllowNonConditionValues = True
+        ucrInputFill.SetRDefault(Chr(34) & "red" & Chr(34))
+
+        ucrInputColours.SetParameter(New RParameter("col", 7))
+        ucrInputColours.SetItems(dctColours)
+        ucrInputColours.bAllowNonConditionValues = True
+        ucrInputColours.SetRDefault(Chr(34) & "black" & Chr(34))
+
+        ucrChkRugPlot.SetParameter(New RParameter("rug", 8))
+        ucrChkRugPlot.SetText("Add Rug Plot")
+        ucrChkRugPlot.SetRDefault("TRUE")
+
+        ucrSavePlot.SetDataFrameSelector(ucrSelectorClimaticExtremes.ucrAvailableDataFrames)
+        ucrSavePlot.SetPrefix("mrlplot")
+        ucrSavePlot.SetSaveTypeAsGraph()
+        ucrSavePlot.SetIsComboBox()
+        ucrSavePlot.SetCheckBoxText("Save Graph")
+        ucrSavePlot.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
@@ -188,8 +248,13 @@ Public Class dlgExtremesClimatic
         clsFilterExtremeSubCalcs.Clear()
         clsFilterExtremeExp.Clear()
 
+        clsPlotMrlFunction = New RFunction
+
         ucrSelectorClimaticExtremes.Reset()
         ucrReceiverElement.SetMeAsReceiver()
+        ucrSavePlot.Reset()
+        ucrInputMin.SetText("")
+        ucrInputMax.SetText("")
         SetCalculationValues()
 
         clsDayFilterCalcFromConvert = New RFunction
@@ -310,16 +375,23 @@ Public Class dlgExtremesClimatic
         clsFilterExtremeExp.SetOperation("==")
         clsFilterExtremeExp.bToScriptAsRString = True
 
+        clsPlotMrlFunction.SetRCommand("plot_mrl")
+        clsPlotMrlFunction.AddParameter("ncol", "1", iPosition:=3)
+        clsPlotMrlFunction.iCallType = 3
+        clsPlotMrlFunction.bExcludeAssignedFunctionOutput = False
+
         'Overall Calculation
         clsRunCalcFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
         'This is a dummy function used to set the R code of the ucrPnlExtremesType
         clsCurrCalc = clsMinMaxSummariseFunction
         clsRunCalcFunction.AddParameter("calc", clsRFunctionParameter:=clsMinMaxSummariseFunction)
         clsRunCalcFunction.AddParameter("display", "FALSE")
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
+        bUpdateMinMax = False
         ucrReceiverDOY.AddAdditionalCodeParameterPair(clsDayFromOperator, New RParameter("doy", 0), iAdditionalPairNo:=1)
         ucrInputSave.AddAdditionalCodeParameterPair(clsPeaksFilterFunction, New RParameter("result_data_frame"), iAdditionalPairNo:=1)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsPeaksFilterOperator, New RParameter("left"), iAdditionalPairNo:=1)
@@ -328,23 +400,27 @@ Public Class dlgExtremesClimatic
         ucrReceiverDate.AddAdditionalCodeParameterPair(clsNFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
 
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
-
         '        ucrInputThresholdOperator.SetRCode(clsPeaksFilterFunction, bReset)
         ucrInputThresholdValue.SetRCode(clsPeaksFilterOperator, bReset)
-
         ucrPnlMaxMin.SetRCode(clsMinMaxFuncExp, bReset)
         ucrReceiverElement.SetRCode(clsMinMaxFuncExp, bReset)
-
-
         ucrChkMissingValues.SetRCode(clsMinMaxFuncExp, bReset)
-
         ucrInputSave.SetRCode(clsMinMaxSummariseFunction, bReset)
         ucrPnlExtremesType.SetRCode(clsCurrCalc, bReset)
-
         ucrReceiverDate.SetRCode(clsFirstFunction, bReset)
         ucrChkFirstDate.SetRCode(clsCombinationSubCalcs, bReset)
         ucrChkNDates.SetRCode(clsCombinationSubCalcs, bReset)
         ucrChkLastDate.SetRCode(clsCombinationSubCalcs, bReset)
+        ucrSelectorClimaticExtremes.SetRCode(clsPlotMrlFunction, bReset)
+        ucrReceiverStation.SetRCode(clsPlotMrlFunction, bReset)
+        ucrNudColumns.SetRCode(clsPlotMrlFunction, bReset)
+        ucrChkMrlPlot.SetRSyntax(ucrBase.clsRsyntax, bReset)
+        ucrInputFill.SetRCode(clsPlotMrlFunction, bReset)
+        ucrInputColours.SetRCode(clsPlotMrlFunction, bReset)
+        ucrChkRugPlot.SetRCode(clsPlotMrlFunction, bReset)
+
+        ucrSavePlot.SetRCode(clsPlotMrlFunction, bReset)
+        bUpdateMinMax = True
     End Sub
 
     Private Sub TestOkEnabled()
@@ -442,6 +518,44 @@ Public Class dlgExtremesClimatic
     End Sub
 
     Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged
+        Dim exprMin As SymbolicExpression
+        Dim exprMax As SymbolicExpression
+        Dim minCharVector As CharacterVector
+        Dim maxCharVector As CharacterVector
+        Dim clsMinimumFunction As New RFunction
+        Dim clsMaximumFunction As New RFunction
+        Dim clsGetVariablesFunc As New RFunction
+
+        clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsGetVariablesFunc.AddParameter("data_name", Chr(34) & ucrSelectorClimaticExtremes.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+        clsGetVariablesFunc.AddParameter("col_names", Chr(34) & ucrReceiverElement.GetVariableNames(False) & Chr(34), iPosition:=1)
+
+        clsMinimumFunction.SetRCommand("min")
+        clsMaximumFunction.SetRCommand("max")
+        clsMinimumFunction.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunc, iPosition:=0)
+        clsMaximumFunction.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunc, iPosition:=0)
+        clsMinimumFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
+        clsMaximumFunction.AddParameter("na.rm", "TRUE", iPosition:=1)
+
+        exprMin = frmMain.clsRLink.RunInternalScriptGetValue(clsMinimumFunction.ToScript(), bSilent:=True)
+        exprMax = frmMain.clsRLink.RunInternalScriptGetValue(clsMaximumFunction.ToScript(), bSilent:=True)
+
+        If bUpdateMinMax Then
+            If exprMin IsNot Nothing AndAlso Not exprMin.Type = Internals.SymbolicExpressionType.Null Then
+                minCharVector = exprMin.AsCharacter
+                ucrInputMin.SetText(minCharVector(0))
+            End If
+            If exprMax IsNot Nothing AndAlso Not exprMax.Type = Internals.SymbolicExpressionType.Null Then
+                maxCharVector = exprMax.AsCharacter
+                ucrInputMax.SetText(maxCharVector(0))
+            End If
+        End If
+
+        If Not ucrReceiverElement.IsEmpty Then
+            clsPlotMrlFunction.AddParameter("element_name", ucrReceiverElement.GetVariableNames, iPosition:=2)
+        Else
+            clsPlotMrlFunction.RemoveParameterByName("element_name")
+        End If
         MinMaxFunction()
         PeaksFunction()
     End Sub
@@ -526,5 +640,29 @@ Public Class dlgExtremesClimatic
     Private Sub ucrInputSave_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSave.ControlValueChanged
         SetResultNameCarryColumns()
         clsFilterExtremeExp.AddParameter("right", ucrInputSave.GetText(), iPosition:=1)
+    End Sub
+
+    Private Sub ucrChkMrlPlot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMrlPlot.ControlValueChanged
+        If ucrChkMrlPlot.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsPlotMrlFunction, 1)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsPlotMrlFunction)
+        End If
+    End Sub
+
+    Private Sub ucrInputMax_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputMax.ControlContentsChanged
+        If ucrInputMax.GetValue <> "" Then
+            clsPlotMrlFunction.AddParameter("umax", ucrInputMax.GetValue, iPosition:=5)
+        Else
+            clsPlotMrlFunction.RemoveParameterByName("umax")
+        End If
+    End Sub
+
+    Private Sub ucrInputMin_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputMin.ControlContentsChanged
+        If ucrInputMin.GetValue <> "" Then
+            clsPlotMrlFunction.AddParameter("umin", ucrInputMin.GetValue, iPosition:=4)
+        Else
+            clsPlotMrlFunction.RemoveParameterByName("umin")
+        End If
     End Sub
 End Class
