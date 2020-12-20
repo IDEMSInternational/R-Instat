@@ -33,7 +33,7 @@ Public Class sdgImportFromClimSoft
         End If
         SetRCodeForControls(False)
         'could have been connected through the wizard. So check here
-        bConnected = CheckIfConnectionIsActive()
+        bConnected = IsConnectionIsActive()
         UpdateConnectionAndControlsState()
     End Sub
 
@@ -78,7 +78,7 @@ Public Class sdgImportFromClimSoft
         'set database disconnect R command
         clsRDatabaseDisconnect.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$database_disconnect")
 
-        bConnected = CheckIfConnectionIsActive()
+        bConnected = IsConnectionIsActive()
         UpdateConnectionAndControlsState()
     End Sub
 
@@ -117,7 +117,7 @@ Public Class sdgImportFromClimSoft
     ''' checks if there is an active database connection
     ''' </summary>
     ''' <returns>true if connected to database, false if not</returns>
-    Public Function CheckIfConnectionIsActive() As Boolean
+    Public Function IsConnectionIsActive() As Boolean
         Dim clsRHasConnection As New RFunction
         Dim expTemp As SymbolicExpression
         'set has connection R command
@@ -136,7 +136,7 @@ Public Class sdgImportFromClimSoft
     ''' </summary>
     Private Sub Connect()
         frmMain.clsRLink.RunScript(clsRDatabaseConnect.ToScript(), strComment:="Connect database connection.", bSeparateThread:=False, bShowWaitDialogOverride:=False)
-        bConnected = CheckIfConnectionIsActive()
+        bConnected = IsConnectionIsActive()
     End Sub
 
     Public Sub Reset()

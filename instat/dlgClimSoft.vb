@@ -270,7 +270,7 @@ Public Class dlgClimSoft
     End Sub
 
     Private Sub CheckAndUpdateConnectionStatus()
-        If sdgImportFromClimSoft.CheckIfConnectionIsActive() Then
+        If sdgImportFromClimSoft.IsConnectionIsActive() Then
             lblConnection.Text = "Connected"
             lblConnection.ForeColor = Color.Green
         Else
