@@ -1535,7 +1535,6 @@ DataBook$set("public", "database_connect", function(dbname, user, host, port, dr
   #done this way so that password characters are not displayed in the output window
   password <- getPass::getPass(paste0(user, " password:"))
   if(length(password) > 0){
-    #out <- NULL
     out <- DBI::dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
     if(!is.null(out)) {
       self$set_database_connection(out)
