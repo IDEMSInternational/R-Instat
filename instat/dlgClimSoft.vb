@@ -236,7 +236,6 @@ Public Class dlgClimSoft
         If Not bIgnoreReceiverChanges Then
             SetElementsRecieverQuery()
         End If
-
     End Sub
 
     Private Sub ucrComboBoxElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrComboBoxElements.ControlValueChanged
