@@ -118,51 +118,93 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ucrChkFacetSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
+  <data name="ucrChkFacetYSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>187, 18</value>
   </data>
-  <data name="ucrChkFacetSize.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrChkFacetYSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrChkFacetSize.TabIndex" type="System.Int32, mscorlib">
-    <value>53</value>
+  <data name="ucrChkFacetYSize.TabIndex" type="System.Int32, mscorlib">
+    <value>55</value>
   </data>
-  <data name="&gt;&gt;ucrChkFacetSize.Name" xml:space="preserve">
-    <value>ucrChkFacetSize</value>
+  <data name="&gt;&gt;ucrChkFacetYSize.Name" xml:space="preserve">
+    <value>ucrChkFacetYSize</value>
   </data>
-  <data name="&gt;&gt;ucrChkFacetSize.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkFacetYSize.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkFacetSize.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkFacetYSize.Parent" xml:space="preserve">
     <value>tpFacets</value>
   </data>
-  <data name="&gt;&gt;ucrChkFacetSize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkFacetYSize.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrNudFacetSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 18</value>
+  <data name="ucrNudFacetYSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>282, 18</value>
   </data>
-  <data name="ucrNudFacetSize.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrNudFacetYSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
   </data>
-  <data name="ucrNudFacetSize.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
+  <data name="ucrNudFacetYSize.TabIndex" type="System.Int32, mscorlib">
+    <value>54</value>
   </data>
-  <data name="&gt;&gt;ucrNudFacetSize.Name" xml:space="preserve">
-    <value>ucrNudFacetSize</value>
+  <data name="&gt;&gt;ucrNudFacetYSize.Name" xml:space="preserve">
+    <value>ucrNudFacetYSize</value>
   </data>
-  <data name="&gt;&gt;ucrNudFacetSize.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudFacetYSize.Type" xml:space="preserve">
     <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrNudFacetSize.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudFacetYSize.Parent" xml:space="preserve">
     <value>tpFacets</value>
   </data>
-  <data name="&gt;&gt;ucrNudFacetSize.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrNudFacetYSize.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkFacetXSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 18</value>
+  </data>
+  <data name="ucrChkFacetXSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 20</value>
+  </data>
+  <data name="ucrChkFacetXSize.TabIndex" type="System.Int32, mscorlib">
+    <value>53</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFacetXSize.Name" xml:space="preserve">
+    <value>ucrChkFacetXSize</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFacetXSize.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFacetXSize.Parent" xml:space="preserve">
+    <value>tpFacets</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFacetXSize.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrNudFacetXSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>107, 18</value>
+  </data>
+  <data name="ucrNudFacetXSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudFacetXSize.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="&gt;&gt;ucrNudFacetXSize.Name" xml:space="preserve">
+    <value>ucrNudFacetXSize</value>
+  </data>
+  <data name="&gt;&gt;ucrNudFacetXSize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudFacetXSize.Parent" xml:space="preserve">
+    <value>tpFacets</value>
+  </data>
+  <data name="&gt;&gt;ucrNudFacetXSize.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="ucrNudNumberofRowsOrcolumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 129</value>
+    <value>197, 129</value>
   </data>
   <data name="ucrNudNumberofRowsOrcolumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -180,10 +222,10 @@
     <value>tpFacets</value>
   </data>
   <data name="&gt;&gt;ucrNudNumberofRowsOrcolumns.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="ucrChkNoOfRowsorColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 130</value>
+    <value>12, 130</value>
   </data>
   <data name="ucrChkNoOfRowsorColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>164, 20</value>
@@ -201,10 +243,10 @@
     <value>tpFacets</value>
   </data>
   <data name="&gt;&gt;ucrChkNoOfRowsorColumns.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="ucrChkScales.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 55</value>
+    <value>12, 55</value>
   </data>
   <data name="ucrChkScales.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -222,10 +264,10 @@
     <value>tpFacets</value>
   </data>
   <data name="&gt;&gt;ucrChkScales.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="ucrInputScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>160, 55</value>
+    <value>166, 55</value>
   </data>
   <data name="ucrInputScale.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -243,7 +285,7 @@
     <value>tpFacets</value>
   </data>
   <data name="&gt;&gt;ucrInputScale.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="rdoHorizontal.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -253,7 +295,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoHorizontal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 89</value>
+    <value>11, 89</value>
   </data>
   <data name="rdoHorizontal.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 17</value>
@@ -274,7 +316,7 @@
     <value>tpFacets</value>
   </data>
   <data name="&gt;&gt;rdoHorizontal.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="rdoVertical.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -283,7 +325,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoVertical.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 89</value>
+    <value>107, 89</value>
   </data>
   <data name="rdoVertical.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 17</value>
@@ -304,10 +346,10 @@
     <value>tpFacets</value>
   </data>
   <data name="&gt;&gt;rdoVertical.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="ucrPnlHorizonatalVertical.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 87</value>
+    <value>11, 87</value>
   </data>
   <data name="ucrPnlHorizonatalVertical.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 20</value>
@@ -325,7 +367,7 @@
     <value>tpFacets</value>
   </data>
   <data name="&gt;&gt;ucrPnlHorizonatalVertical.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="tpFacets.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1859,6 +1901,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>589, 367</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

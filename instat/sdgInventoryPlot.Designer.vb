@@ -55,8 +55,8 @@ Partial Class sdgInventoryPlot
         Me.lblDateDisplayFormat = New System.Windows.Forms.Label()
         Me.tpLegend = New System.Windows.Forms.TabPage()
         Me.ttInventoryPlot = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrChkFacetSize = New instat.ucrCheck()
-        Me.ucrNudFacetSize = New instat.ucrNud()
+        Me.ucrChkFacetXSize = New instat.ucrCheck()
+        Me.ucrNudFacetXSize = New instat.ucrNud()
         Me.ucrNudNumberofRowsOrcolumns = New instat.ucrNud()
         Me.ucrChkNoOfRowsorColumns = New instat.ucrCheck()
         Me.ucrChkScales = New instat.ucrCheck()
@@ -93,6 +93,8 @@ Partial Class sdgInventoryPlot
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegendPosition = New instat.ucrCheck()
         Me.ucrButtonsInventoryplot = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkFacetYSize = New instat.ucrCheck()
+        Me.ucrNudFacetYSize = New instat.ucrNud()
         Me.tbInventory.SuspendLayout()
         Me.tpFacets.SuspendLayout()
         Me.tpTitles.SuspendLayout()
@@ -118,8 +120,10 @@ Partial Class sdgInventoryPlot
         '
         'tpFacets
         '
-        Me.tpFacets.Controls.Add(Me.ucrChkFacetSize)
-        Me.tpFacets.Controls.Add(Me.ucrNudFacetSize)
+        Me.tpFacets.Controls.Add(Me.ucrChkFacetYSize)
+        Me.tpFacets.Controls.Add(Me.ucrNudFacetYSize)
+        Me.tpFacets.Controls.Add(Me.ucrChkFacetXSize)
+        Me.tpFacets.Controls.Add(Me.ucrNudFacetXSize)
         Me.tpFacets.Controls.Add(Me.ucrNudNumberofRowsOrcolumns)
         Me.tpFacets.Controls.Add(Me.ucrChkNoOfRowsorColumns)
         Me.tpFacets.Controls.Add(Me.ucrChkScales)
@@ -355,21 +359,21 @@ Partial Class sdgInventoryPlot
         Me.ttInventoryPlot.InitialDelay = 500
         Me.ttInventoryPlot.ReshowDelay = 100
         '
-        'ucrChkFacetSize
+        'ucrChkFacetXSize
         '
-        Me.ucrChkFacetSize.Checked = False
-        resources.ApplyResources(Me.ucrChkFacetSize, "ucrChkFacetSize")
-        Me.ucrChkFacetSize.Name = "ucrChkFacetSize"
+        Me.ucrChkFacetXSize.Checked = False
+        resources.ApplyResources(Me.ucrChkFacetXSize, "ucrChkFacetXSize")
+        Me.ucrChkFacetXSize.Name = "ucrChkFacetXSize"
         '
-        'ucrNudFacetSize
+        'ucrNudFacetXSize
         '
-        Me.ucrNudFacetSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFacetSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudFacetSize, "ucrNudFacetSize")
-        Me.ucrNudFacetSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudFacetSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudFacetSize.Name = "ucrNudFacetSize"
-        Me.ucrNudFacetSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFacetXSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFacetXSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudFacetXSize, "ucrNudFacetXSize")
+        Me.ucrNudFacetXSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFacetXSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFacetXSize.Name = "ucrNudFacetXSize"
+        Me.ucrNudFacetXSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrNudNumberofRowsOrcolumns
         '
@@ -651,6 +655,22 @@ Partial Class sdgInventoryPlot
         resources.ApplyResources(Me.ucrButtonsInventoryplot, "ucrButtonsInventoryplot")
         Me.ucrButtonsInventoryplot.Name = "ucrButtonsInventoryplot"
         '
+        'ucrChkFacetYSize
+        '
+        Me.ucrChkFacetYSize.Checked = False
+        resources.ApplyResources(Me.ucrChkFacetYSize, "ucrChkFacetYSize")
+        Me.ucrChkFacetYSize.Name = "ucrChkFacetYSize"
+        '
+        'ucrNudFacetYSize
+        '
+        Me.ucrNudFacetYSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFacetYSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudFacetYSize, "ucrNudFacetYSize")
+        Me.ucrNudFacetYSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFacetYSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFacetYSize.Name = "ucrNudFacetYSize"
+        Me.ucrNudFacetYSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'sdgInventoryPlot
         '
         resources.ApplyResources(Me, "$this")
@@ -739,8 +759,8 @@ Partial Class sdgInventoryPlot
     Friend WithEvents ucrChkScales As ucrCheck
     Friend WithEvents ucrNudNumberofRowsOrcolumns As ucrNud
     Friend WithEvents ucrChkNoOfRowsorColumns As ucrCheck
-    Friend WithEvents ucrNudFacetSize As ucrNud
-    Friend WithEvents ucrChkFacetSize As ucrCheck
+    Friend WithEvents ucrNudFacetXSize As ucrNud
+    Friend WithEvents ucrChkFacetXSize As ucrCheck
     Friend WithEvents lblDateDisplayFormat As Label
     Friend WithEvents ucrNudDateBreakNumber As ucrNud
     Friend WithEvents ucrInputDateBreakTime As ucrInputComboBox
@@ -750,4 +770,6 @@ Partial Class sdgInventoryPlot
     Friend WithEvents ucrNudYAxisLabelSize As ucrNud
     Friend WithEvents ucrChkYAxisAngle As ucrCheck
     Friend WithEvents ucrChkYAxisLabelSize As ucrCheck
+    Friend WithEvents ucrChkFacetYSize As ucrCheck
+    Friend WithEvents ucrNudFacetYSize As ucrNud
 End Class

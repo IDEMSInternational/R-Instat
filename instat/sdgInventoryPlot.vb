@@ -32,10 +32,16 @@ Public Class sdgInventoryPlot
         Dim dctDateTimePeriods As New Dictionary(Of String, String)
 
         'facets tab  
-        ucrChkFacetSize.SetText("Size")
-        ucrChkFacetSize.SetParameter(New RParameter("facet_size"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrNudFacetSize.SetParameter(New RParameter("facet_size"))
-        ucrChkFacetSize.AddToLinkedControls(ucrNudFacetSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=8)
+        ucrChkFacetXSize.SetText("Size X-Axis")
+        ucrChkFacetXSize.SetParameter(New RParameter("facet_xsize"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrNudFacetXSize.SetParameter(New RParameter("facet_xsize"))
+        ucrChkFacetXSize.AddToLinkedControls(ucrNudFacetXSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=7)
+
+        ucrChkFacetYSize.SetText("Size Y-Axis")
+        ucrChkFacetYSize.SetParameter(New RParameter("facet_ysize"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrNudFacetYSize.SetParameter(New RParameter("facet_ysize"))
+        ucrChkFacetYSize.AddToLinkedControls(ucrNudFacetYSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=11)
+
 
         ucrChkScales.SetText("Scales")
         ucrChkScales.SetParameter(New RParameter("scale"))
@@ -163,7 +169,7 @@ Public Class sdgInventoryPlot
         ucrInputDateBreakTime.SetItems(dctDateTimePeriods)
         ucrInputDateBreakTime.SetDropDownStyleAsNonEditable()
 
-        ucrNudDateBreakNumber.Minimum = 0
+        ucrNudDateBreakNumber.Minimum = 1
         ucrNudDateBreakNumber.Increment = 1
         ucrNudDateBreakNumber.SetParameter(New RParameter("step"))
 
@@ -182,8 +188,8 @@ Public Class sdgInventoryPlot
         ucrChkYAxisLabelSize.SetText("Size")
         ucrChkYAxisLabelSize.SetParameter(New RParameter("ySize"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrNudYAxisLabelSize.SetParameter(New RParameter("ySize"))
-        ucrNudYAxisLabelSize.Increment = 0.1
-        ucrNudYAxisLabelSize.Minimum = 0
+        'ucrNudYAxisLabelSize.Increment = 0.1
+        ucrNudYAxisLabelSize.Minimum = 1
 
         ucrChkYAxisAngle.AddToLinkedControls(ucrNudYAxisAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=90)
         ucrChkYAxisLabelSize.AddToLinkedControls(ucrNudYAxisLabelSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=12)
@@ -227,7 +233,8 @@ Public Class sdgInventoryPlot
         ucrInputXTo.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrChkSpecifyDateBreaks.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudDateBreakNumber.SetRCode(clsInventoryNew, bReset, bCloneIfNeeded:=True)
-        ucrChkFacetSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrChkFacetXSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrChkFacetYSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrChkYAxisAngle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputDateDisplayFormat.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputDateBreakTime.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
@@ -237,7 +244,8 @@ Public Class sdgInventoryPlot
         ucrInputScale.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrChkYAxisLabelSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudYAxisAngle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrNudFacetSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrNudFacetXSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrNudFacetYSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudYAxisLabelSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputXFrom.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrChkScales.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
@@ -313,5 +321,9 @@ Public Class sdgInventoryPlot
 
     Private Sub ucrChkNoOfRowsorColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoOfRowsorColumns.ControlValueChanged
         SetFacetParameter()
+    End Sub
+
+    Private Sub UcrNud1_Load(sender As Object, e As EventArgs) Handles ucrNudFacetYSize.Load
+
     End Sub
 End Class
