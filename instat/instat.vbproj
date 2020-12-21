@@ -196,6 +196,24 @@
     <Compile Include="dlgCircular.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCircularDensityPlot.Designer.vb">
+      <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCircularDensityPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCircularRosePlot.Designer.vb">
+      <DependentUpon>dlgCircularRosePlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCircularRosePlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCircularScatterPlot.Designer.vb">
+      <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCircularScatterPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimsoftWizard.Designer.vb">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </Compile>
@@ -220,6 +238,12 @@
     <Compile Include="dlgDisplayTopN.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportToWWR.Designer.vb">
+      <DependentUpon>dlgExportToWWR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportToWWR.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgHomogenization.Designer.vb">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </Compile>
@@ -236,6 +260,18 @@
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgOtherRosePlots.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPasteNewColumns.Designer.vb">
+      <DependentUpon>dlgPasteNewColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPasteNewColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPasteNewDataFrame.Designer.vb">
+      <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPasteNewDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgPolarAnnulus.Designer.vb">
@@ -284,6 +320,12 @@
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgWindPollutionRose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgExportToWWR.Designer.vb">
+      <DependentUpon>sdgExportToWWR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgExportToWWR.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgExtremesDisplayOptions.Designer.vb">
@@ -2611,6 +2653,15 @@
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCircularDensityPlot.resx">
+      <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCircularRosePlot.resx">
+      <DependentUpon>dlgCircularRosePlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgCircularScatterPlot.resx">
+      <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
@@ -2624,6 +2675,9 @@
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportToWWR.resx">
+      <DependentUpon>dlgExportToWWR.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </EmbeddedResource>
@@ -2632,6 +2686,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPasteNewColumns.resx">
+      <DependentUpon>dlgPasteNewColumns.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPasteNewDataFrame.resx">
+      <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPolarAnnulus.resx">
       <DependentUpon>dlgPolarAnnulus.vb</DependentUpon>
@@ -2656,6 +2716,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgExportToWWR.resx">
+      <DependentUpon>sdgExportToWWR.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgExtremesDisplayOptions.resx">
       <DependentUpon>sdgExtremesDisplayOptions.vb</DependentUpon>
@@ -5217,6 +5280,24 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\Climatic\climatic_guide_datasets.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P2_Indices.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P3_Variogram.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P4_Region_Average.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P5_Trends_Graphs.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P6_Count_Records.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P7_Summary.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

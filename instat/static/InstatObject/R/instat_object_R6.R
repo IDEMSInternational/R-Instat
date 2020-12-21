@@ -1,56 +1,56 @@
 DataBook <- R6::R6Class("DataBook",
-                         public = list(
-                           initialize = function(data_tables = list(), instat_obj_metadata = list(), 
-                                                 data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
-                                                 data_tables_metadata = rep(list(list()),length(data_tables)),
-                                                 data_tables_filters = rep(list(list()),length(data_tables)),
-                                                 imported_from = as.list(rep("",length(data_tables))),
-                                                 messages=TRUE, convert=TRUE, create=TRUE)
-                           { 
-                             self$set_meta(instat_obj_metadata)
-                             self$set_objects(list())
-                             
-                             if (missing(data_tables) || length(data_tables) == 0) {
-                               self$set_data_objects(list())
-                             }
-                             
-                             else {
-                               self$import_data(data_tables=data_tables, data_tables_variables_metadata=data_tables_variables_metadata, 
-                                                data_tables_metadata=data_tables_metadata, 
-                                                imported_from=imported_from, messages=messages, convert=convert, create=create, data_tables_filters = data_tables_filters)
-                             }
-                             
-                             private$.data_sheets_changed <- FALSE
-                           }
-                         ),
-                         private = list(
-                           .data_sheets = list(),
-                           .metadata = list(),
-                           .objects = list(),
-                           .links = list(),
-                           .data_sheets_changed = FALSE,
-                           .database_connection = NULL,
-                           .last_graph = NULL
-                         ),
-                         active = list(
-                           data_objects_changed = function(new_value) {
-                             if(missing(new_value)) return(private$.data_sheets_changed)
-                             else {
-                               if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
-                               private$.data_sheets_changed <- new_value
-                               #TODO is this behaviour we want?
-                               invisible(sapply(self$get_data_objects(), function(x) x$data_changed <- new_value))
-                             }
-                           }
-                         )
+                        public = list(
+                          initialize = function(data_tables = list(), instat_obj_metadata = list(), 
+                                                data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
+                                                data_tables_metadata = rep(list(list()),length(data_tables)),
+                                                data_tables_filters = rep(list(list()),length(data_tables)),
+                                                imported_from = as.list(rep("",length(data_tables))),
+                                                messages=TRUE, convert=TRUE, create=TRUE)
+                          { 
+                            self$set_meta(instat_obj_metadata)
+                            self$set_objects(list())
+                            
+                            if (missing(data_tables) || length(data_tables) == 0) {
+                              self$set_data_objects(list())
+                            }
+                            
+                            else {
+                              self$import_data(data_tables=data_tables, data_tables_variables_metadata=data_tables_variables_metadata, 
+                                               data_tables_metadata=data_tables_metadata, 
+                                               imported_from=imported_from, messages=messages, convert=convert, create=create, data_tables_filters = data_tables_filters)
+                            }
+                            
+                            private$.data_sheets_changed <- FALSE
+                          }
+                        ),
+                        private = list(
+                          .data_sheets = list(),
+                          .metadata = list(),
+                          .objects = list(),
+                          .links = list(),
+                          .data_sheets_changed = FALSE,
+                          .database_connection = NULL,
+                          .last_graph = NULL
+                        ),
+                        active = list(
+                          data_objects_changed = function(new_value) {
+                            if(missing(new_value)) return(private$.data_sheets_changed)
+                            else {
+                              if(new_value != TRUE && new_value != FALSE) stop("new_value must be TRUE or FALSE")
+                              private$.data_sheets_changed <- new_value
+                              #TODO is this behaviour we want?
+                              invisible(sapply(self$get_data_objects(), function(x) x$data_changed <- new_value))
+                            }
+                          }
+                        )
 )
 
 DataBook$set("public", "import_data", function(data_tables = list(), data_tables_variables_metadata = rep(list(data.frame()),length(data_tables)),
-                                                    data_tables_metadata = rep(list(list()),length(data_tables)),
-                                                    data_tables_filters = rep(list(list()),length(data_tables)),
-                                                    imported_from = as.list(rep("",length(data_tables))), 
-                                                    data_names = NULL,
-                                                    messages=TRUE, convert=TRUE, create=TRUE)
+                                               data_tables_metadata = rep(list(list()),length(data_tables)),
+                                               data_tables_filters = rep(list(list()),length(data_tables)),
+                                               imported_from = as.list(rep("",length(data_tables))), 
+                                               data_names = NULL,
+                                               messages=TRUE, convert=TRUE, create=TRUE)
 {
   if (missing(data_tables) || length(data_tables) == 0) {
     stop("No data found. No data objects can be created.")
@@ -94,12 +94,12 @@ DataBook$set("public", "import_data", function(data_tables = list(), data_tables
       }
       
       new_data = DataSheet$new(data=data_tables[[i]], data_name = curr_name,
-                                 variables_metadata = data_tables_variables_metadata[[i]],
-                                 metadata = data_tables_metadata[[i]], 
-                                 imported_from = imported_from[[i]], 
-                                 start_point = i, 
-                                 messages = messages, convert = convert, create = create, 
-                                 filters = data_tables_filters[[i]])
+                               variables_metadata = data_tables_variables_metadata[[i]],
+                               metadata = data_tables_metadata[[i]], 
+                               imported_from = imported_from[[i]], 
+                               start_point = i, 
+                               messages = messages, convert = convert, create = create, 
+                               filters = data_tables_filters[[i]])
       # Add this new data object to our list of data objects
       self$append_data_object(new_data$get_metadata(data_name_label), new_data)
     }
@@ -140,7 +140,7 @@ DataBook$set("public", "copy_data_object", function(data_name, new_name, filter_
 
 
 DataBook$set("public", "import_RDS", function(data_RDS, keep_existing = TRUE, overwrite_existing = FALSE, include_objects = TRUE,
-                                                   include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE)
+                                              include_metadata = TRUE, include_logs = TRUE, include_filters = TRUE, include_calculations = TRUE, include_comments = TRUE)
   # TODO add include_calcuations options
 {
   # 'instat_object' is previously used class name, some files may have this name.
@@ -478,9 +478,8 @@ DataBook$set("public", "set_metadata_changed", function(data_name = "", new_val)
 } 
 )
 
-DataBook$set("public", "add_columns_to_data", function(data_name, col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before = FALSE, adjacent_column, num_cols, require_correct_length = TRUE) {
-  if(missing(use_col_name_as_prefix)) self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols, require_correct_length = require_correct_length)
-  else self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols, require_correct_length = require_correct_length)
+DataBook$set("public", "add_columns_to_data", function(data_name, col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column, num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
+  self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols, require_correct_length = require_correct_length, keep_existing_position = keep_existing_position)
 }
 )
 
@@ -1350,111 +1349,134 @@ DataBook$set("public", "remove_key", function(data_name, key_name) {
 }
 )
 
-DataBook$set("public", "add_climdex_indices", function(data_name, indices = list(), freq = "annual", year, month) {
-  if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label)) stop("Data must be defined as climatic to calculate climdex indices.")
-  if(missing(year)) stop("year column is required")
-  if(freq == "monthly" && missing(month)) stop("month column is required for monthly summaries")
-  for(i in seq_along(indices)) {
-    self$add_single_climdex_index(data_name = data_name, indices = indices[[i]], index_name = names(indices)[i], freq = freq, year = year, month = month)
-  }
-}
-)
-
-DataBook$set("public", "add_single_climdex_index", function(data_name, indices, index_name = "", freq = "annual", year, month) {
-  if(!self$get_data_objects(data_name)$get_metadata(is_climatic_label)) stop("Data must be defined as climatic to calculate climdex indices.")
+DataBook$set("public", "add_climdex_indices", function(data_name, climdex_output, freq = "annual", station, year, month) {
+  stopifnot(freq %in% c("annual", "monthly"))
+  if (missing(climdex_output)) stop("climdex_output is required.")
+  if (missing(year)) stop("year is required.")
+  if (freq == "monthly" && missing(month)) stop("month is required for freq = 'monthly'.")
+  
   col_year <- self$get_columns_from_data(data_name = data_name, col_names = year)
-  year_class <- class(col_year)
-  if(freq == "annual") {
-    ind_data <- data.frame(names(indices), indices)
-    names(ind_data) <- c(year, index_name)
-    linked_data_name <- self$get_linked_to_data_name(data_name, year)
-    if(length(linked_data_name) == 0) {
-      if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
-      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
-      if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
-      data_list = list(ind_data)
-      new_data_name <- paste(data_name, "by", year, sep = "_")
-      new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
-      names(data_list) <- new_data_name
-      self$import_data(data_tables = data_list)
-      self$add_key(new_data_name, year)
-      key_list <- list(year)
-      names(key_list) <- year
-      self$add_link(from_data_frame = data_name, to_data_frame = new_data_name, link_pairs = key_list, type = keyed_link_label)
+  if (!missing(station)) col_station <- self$get_columns_from_data(data_name = data_name, col_names = station)
+  if (freq == "monthly") col_month <- self$get_columns_from_data(data_name = data_name, col_names = month)
+  links_cols <- year
+  if (!missing(station)) links_cols <- c(station, links_cols)
+  if (freq == "monthly") links_cols <- c(links_cols, month)
+  linked_data_name <- self$get_linked_to_data_name(data_name, links_cols)
+  if (length(linked_data_name) == 0) {
+    # The classes should be the same if climdex_output comes from climdex() function.
+    # If not, try to match the classes so that they are sensibly linked.
+    # TODO These checks are repeated and could be extracted out.
+    if (!missing(station) && !all(class(col_station) == class(climdex_output[[station]]))) {
+      if (is.numeric(col_station)) climdex_output[[station]] <- as.numeric(climdex_output[[station]])
+      else if (is.factor(col_station)) climdex_output[[station]] <- make_factor(climdex_output[[station]])
+      else if (is.character(col_station)) climdex_output[[station]] <- as.character(climdex_output[[station]])
+      else warning("Cannot recognise the class of station column. Link between data frames may be unstable.")
     }
-    else {
-      # TODO what if there are multiple?
-      linked_data_name <- linked_data_name[1]
-      year_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = year)
-      by <- year
-      names(by) <- year_col_name_linked
-      linked_year_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = year_col_name_linked)
-      linked_year_class <- class(linked_year_data)
-      year_class <- class(ind_data[[year]])
-      if(!any(linked_year_class %in% year_class)) {
-        # Only need to check numeric/integer here since year in ind_data is factor.
-        # If construction of ind_data above is changed this may need to be updated.
-        if("numeric" %in% linked_year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
-        else if("integer" %in% linked_year_class) ind_data[[year]] <- as.integer(levels(ind_data[[year]]))[ind_data[[year]]]
-        # else merge may not work, but still worth trying
+    if (!all(class(col_year) == class(climdex_output[[year]]))) {
+      if (is.numeric(col_year)) climdex_output[[year]] <- as.numeric(climdex_output[[year]])
+      else if (is.factor(col_year)) climdex_output[[year]] <- make_factor(climdex_output[[year]])
+      else if (is.character(col_year)) climdex_output[[year]] <- as.character(climdex_output[[year]])
+      else warning("Cannot recognise the class of year column. Link between data frames may be unstable.")
+    }
+    if (freq == "monthly" && !all(class(col_month) == class(climdex_output[[month]]))) {
+      if (is.numeric(col_month)) climdex_output[[month]] <- as.numeric(climdex_output[[month]])
+      else if (is.factor(col_month)) {
+        lvs <- levels(col_month)
+        if (length(lvs) == 12) climdex_output[[month]] <- factor(climdex_output[[month]], labels = lvs, ordered = is.ordered(col_month))
+        else {
+          warning("month is a factor but does not have 12 levels. Output may not link correctly to data.")
+          climdex_output[[month]] <- make_factor(climdex_output[[month]])
+        }
       }
-      # TODO could make this a try/catch and then if merging fails put data in new data frame
-      self$merge_data(data_name = linked_data_name, new_data = ind_data, by = by)
+      else if (is.character(col_month)) {
+        mns <- unique(col_month)
+        # Also check English names as month.abb and month.name constants are locale dependent.
+        if (length(mns) == 12) {
+          if (setequal(mns, month.abb)) climdex_output[[month]] <- month.abb[climdex_output[[month]]]
+          else if (setequal(mns, month.name)) climdex_output[[month]] <- month.name[climdex_output[[month]]]
+          else if (setequal(mns, month_abb_english)) climdex_output[[month]] <- month_abb_english[climdex_output[[month]]]
+          else if (setequal(mns, month_name_english)) climdex_output[[month]] <- month_name_english[climdex_output[[month]]]
+          else if (setequal(mns, tolower(month_abb_english))) climdex_output[[month]] <- tolower(month_abb_english)[climdex_output[[month]]]
+          else if (setequal(mns, tolower(month_name_english))) climdex_output[[month]] <- tolower(month_name_english)[climdex_output[[month]]]
+          else if (setequal(mns, toupper(month_abb_english))) climdex_output[[month]] <- toupper(month_abb_english)[climdex_output[[month]]]
+          else if (setequal(mns, toupper(month_name_english))) climdex_output[[month]] <- toupper(month_name_english)[climdex_output[[month]]]
+          else warning("Cannot determine format of month column in data. Output may not link correctly to data.")
+        } else {
+          warning("month does not have 12 unique values. Output may not link correctly to data.")
+          climdex_output[[month]] <- as.character(climdex_output[[month]])
+        }
+      }
     }
-  }
-  else if(freq == "monthly") {
-    ind_data <- data.frame(stringr::str_split_fixed(string = names(indices), n = 2, pattern = "-"), indices, row.names = NULL)
-    names(ind_data) <- c(year, month, index_name)
-    ind_data[[month]] <- as.numeric(ind_data[[month]])
-    linked_data_name <- self$get_linked_to_data_name(data_name, c(year, month))
-    if(length(linked_data_name) == 0) {
-      if(c("numeric","integer") %in% year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
-      if("factor" %in% year_class) ind_data[[year]] <- as.factor(levels(ind_data[[year]]))[ind_data[[year]]]
-      if("character" %in% year_class) ind_data[[year]] <- as.character(levels(ind_data[[year]]))[ind_data[[year]]]
-      data_list = list(ind_data)
-      new_data_name <- paste(data_name, "by", year, month, sep = "_")
-      new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
-      names(data_list) <- new_data_name
-      self$import_data(data_tables = data_list)
-      self$add_key(new_data_name, c(year, month))
-      key_list <- list(year, month)
-      names(key_list) <- c(year, month)
-      self$add_link(from_data_frame = data_name, to_data_frame = new_data_name, link_pairs = key_list, type = keyed_link_label)
+    data_list <- list(climdex_output)
+    new_data_name <- paste(data_name, "by", paste(links_cols, collapse = "_"), sep = "_")
+    new_data_name <- next_default_item(prefix = new_data_name , existing_names = self$get_data_names(), include_index = FALSE)
+    names(data_list) <- new_data_name
+    self$import_data(data_tables = data_list)
+    self$add_key(new_data_name, links_cols)
+    key_list <- as.list(links_cols)
+    names(key_list) <- links_cols
+    self$add_link(from_data_frame = data_name, to_data_frame = new_data_name, link_pairs = key_list, type = keyed_link_label)
+  } else {
+    # TODO what if there are multiple linked data frames?
+    linked_data_name <- linked_data_name[1]
+    year_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = year)
+    by <- year
+    names(by) <- year_col_name_linked
+    if (!missing(station)) {
+      station_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = station)
+      linked_station_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = station_col_name_linked)
+      by <- c(station, by)
+      names(by)[1] <- station_col_name_linked
     }
-    else {
-      # TODO what if there are multiple?
-      linked_data_name <- linked_data_name[1]
-      year_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = year)
+    if (freq == "monthly") {
       month_col_name_linked <- self$get_equivalent_columns(from_data_name = data_name, to_data_name = linked_data_name, columns = month)
-      by <- c(year, month)
-      names(by) <- c(year_col_name_linked, month_col_name_linked)
-      linked_year_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = year_col_name_linked)
-      linked_year_class <- class(linked_year_data)
       linked_month_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = month_col_name_linked)
-      linked_month_class <- class(linked_month_data)
-      year_class <- class(ind_data[[year]])
-      month_class <- class(ind_data[[month]])
-      if(!any(linked_year_class %in% year_class)) {
-        # Only need to check numeric/integer here since year in ind_data is factor.
-        # If construction of ind_data above is changed this may need to be updated.
-        if("numeric" %in% linked_year_class) ind_data[[year]] <- as.numeric(levels(ind_data[[year]]))[ind_data[[year]]]
-        else if("integer" %in% linked_year_class) ind_data[[year]] <- as.integer(levels(ind_data[[year]]))[ind_data[[year]]]
-        # else merge may not work, but still worth trying
-      }
-      if(!all(ind_data[[month]] %in% linked_month_data)) {
-        # Only need to check month names here since month in ind_data is numeric.
-        if(all(linked_month_data) %in% month.name) {
-          ind_data[[month]] <- factor(ind_data[[month]], labels = month.name)
-        }
-        else if(all(linked_month_data) %in% month.abb) {
-          ind_data[[month]] <- factor(ind_data[[month]], labels = month.abb)
-        }
-      }
-      # TODO could make this a try/catch and then if merging fails put data in new data frame
-      self$merge_data(data_name = linked_data_name, new_data = ind_data, by = by)
+      by <- c(by, month)
+      names(by)[3] <- month_col_name_linked
     }
+    linked_year_data <- self$get_columns_from_data(data_name = linked_data_name, col_names = year_col_name_linked)
+    if (!missing(station) && !all(class(linked_station_data) == class(climdex_output[[station]]))) {
+      if (is.numeric(linked_station_data)) climdex_output[[station]] <- as.numeric(climdex_output[[station]])
+      else if (is.factor(linked_station_data)) climdex_output[[station]] <- make_factor(climdex_output[[station]])
+      else if (is.character(linked_station_data)) climdex_output[[station]] <- as.character(climdex_output[[station]])
+    }
+    if (!all(class(linked_year_data) == class(climdex_output[[year]]))) {
+      if (is.numeric(linked_year_data)) climdex_output[[year]] <- as.numeric(climdex_output[[year]])
+      else if (is.factor(linked_year_data)) climdex_output[[year]] <- make_factor(climdex_output[[year]])
+      else if (is.character(linked_year_data)) climdex_output[[year]] <- as.character(climdex_output[[year]])
+    }
+    if (freq == "monthly" && !all(class(linked_month_data) == class(climdex_output[[month]]))) {
+      if (is.numeric(linked_month_data)) climdex_output[[month]] <- as.numeric(climdex_output[[month]])
+      else if (is.factor(linked_month_data)) {
+        lvs <- levels(linked_month_data)
+        if (length(lvs) == 12) climdex_output[[year]] <- factor(climdex_output[[month]], labels = lvs)
+        else {
+          warning("month is a factor but does not have 12 levels. Output may not link correctly to data.")
+          climdex_output[[month]] <- make_factor(climdex_output[[month]])
+        }
+      }
+      else if (is.character(linked_month_data)) {
+        mns <- unique(linked_month_data)
+        # Also check English names as month.abb and month.name are locale dependent.
+        if (length(mns) == 12) {
+          if (setequal(mns, month.abb)) climdex_output[[month]] <- month.abb[climdex_output[[month]]]
+          else if (setequal(mns, month.name)) climdex_output[[month]] <- month.name[climdex_output[[month]]]
+          else if (setequal(mns, month_abb_english)) climdex_output[[month]] <- month_abb_english[climdex_output[[month]]]
+          else if (setequal(mns, month_name_english)) climdex_output[[month]] <- month_name_english[climdex_output[[month]]]
+          else if (setequal(mns, tolower(month_abb_english))) climdex_output[[month]] <- tolower(month_abb_english)[climdex_output[[month]]]
+          else if (setequal(mns, tolower(month_name_english))) climdex_output[[month]] <- tolower(month_name_english)[climdex_output[[month]]]
+          else if (setequal(mns, toupper(month_abb_english))) climdex_output[[month]] <- toupper(month_abb_english)[climdex_output[[month]]]
+          else if (setequal(mns, toupper(month_name_english))) climdex_output[[month]] <- toupper(month_name_english)[climdex_output[[month]]]
+          else warning("Cannot determine format of month column in data. Output may not link correctly to data.")
+        } else {
+          warning("month does not have 12 unique values. Output may not link correctly to data.")
+          climdex_output[[month]] <- as.character(climdex_output[[month]])
+        }
+      }
+    }
+    # TODO could make this a try/catch and then if merging fails put data in new data frame
+    self$merge_data(data_name = linked_data_name, new_data = climdex_output, by = by)
   }
-  else stop("freq not recognised. freq must be either 'annual' or 'monthly'")
 }
 )
 
@@ -1532,7 +1554,7 @@ DataBook$set("public", "has_database_connection", function() {
 )
 
 DataBook$set("public", "database_connect", function(dbname, user, host, port, drv = RMySQL::MySQL()) {
- password <- getPass::getPass(paste0(user, " password:"))
+  password <- getPass::getPass(paste0(user, " password:"))
   out <- NULL
   out <- DBI::dbConnect(drv = drv, dbname = dbname, user = user, password = password, host = host, port = port)
   if(!is.null(out)) {
@@ -1577,7 +1599,7 @@ DataBook$set("public", "import_from_climsoft", function(stations = c(), elements
     end_date <- format(end_date, format = "%Y-%m-%d")
     date_bounds = paste0(date_bounds, " AND obsDatetime <",sQuote(end_date))
   }
-
+  
   if (length(elements) > 0){
     my_elements = paste0("(", paste0(sprintf("'%s'", elements), collapse = ", "), ")")
     element_ids = DBI::dbGetQuery(con, paste0("SELECT elementID FROM obselement WHERE elementName in", my_elements,";"))
@@ -1592,7 +1614,7 @@ DataBook$set("public", "import_from_climsoft", function(stations = c(), elements
       my_stations = paste0("(", paste(as.character(unique(station_data$recordedFrom)), collapse=", "), ")")
       station_info <-  DBI::dbGetQuery(con, paste0("SELECT * FROM station WHERE stationID in ", my_stations, ";"))
     }
-
+    
     data_list <- list(station_info, station_data)
     names(data_list) = c("station_info","station_data")
   }
@@ -1687,7 +1709,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   rain_total_name <- "rain_total"
   
   is_station <- !missing(station)
-
+  
   if(missing(year)) stop("Year column must be specified.")
   if(!is_station) by <- year
   else by <- c(year, station)
@@ -1739,7 +1761,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
                        !! rlang::sym(end_day) := dplyr::first(!! rlang::sym(end_day)))
     df <- dplyr::left_join(df, season_data, by = by)
   }
-
+  
   # Plant day condition
   if(start_check) {
     df$plant_day_cond <- (df[[start_day]] <= df[[plant_day_name]])
@@ -1747,7 +1769,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   
   # Plant length condition
   df$length_cond <- (df[[plant_day_name]] + df[[plant_length_name]] <= df[[end_day]])
-
+  
   # Rain total condition
   df[["rain_total_actual"]] <- sapply(1:nrow(df), 
                                       function(x) {
@@ -1766,7 +1788,7 @@ DataBook$set("public", "crops_definitions", function(data_name, year, station, r
   
   # All three conditions met
   df$overall_cond <- ((if(start_check) df$plant_day_cond else TRUE) & df$length_cond & df$rain_cond)
-
+  
   crops_name <- "crop_def"
   crops_name <- next_default_item(prefix = crops_name, existing_names = self$get_data_names(), include_index = FALSE)
   data_tables <- list(df)
@@ -2040,10 +2062,10 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
     
     # This assumes stack_cols and stack_years are in the same order
     y$year <- plyr::mapvalues(y$year, stack_cols, stack_years)
-
+    
     # Replacing day 60 with 0 for non-leap years. This will result in NA dates.
-    y$doy[(!lubridate::leap_year(y$year)) & y$doy == 60] <- 0
-    y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] <- y$doy[(!lubridate::leap_year(y$year)) & y$doy > 60] - 1
+    y$doy[(!lubridate::leap_year(as.numeric(y$year))) & y$doy == 60] <- 0
+    y$doy[(!lubridate::leap_year(as.numeric(y$year))) & y$doy > 60] <- y$doy[(!lubridate::leap_year(as.numeric(y$year))) & y$doy > 60] - 1
     y$date <- as.Date(paste(y$year, y$doy), format = paste("%Y", "%j"))
     # Put day 0 back as 60. Needed in error displaying only.
     y$doy[y$doy == 0] <- 60
@@ -2064,12 +2086,14 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
       else {
         invalid_data_display <- invalid_data %>% dplyr::select(year, doy)
       }
+      # Also make a data.frame (instead of tibble) so that display will show all rows.
       if(!missing(station)) {
         invalid_data_display <- data.frame(station = invalid_data$station, invalid_data_display)
       }
       if(!missing(element)) {
         invalid_data_display <- data.frame(element = invalid_data$element, invalid_data_display)
       }
+      invalid_data_display <- data.frame(invalid_data_display)
       invalid_data_display[[element_name]] <- invalid_data[[element_name]]
       print(invalid_data_display, row.names = FALSE)
     }
@@ -2085,7 +2109,7 @@ DataBook$set("public","tidy_climatic_data", function(x, format, stack_cols, day,
   if(!continue) return()
   
   # Standard format of slowest varying structure variables first (station then element then date) followed by measurements
-  if(!missing(station)) z <- data.frame(station = forcats::as_factor(y$station), date = y$date)
+  if(!missing(station)) z <- data.frame(station = make_factor(y$station), date = y$date)
   else z <- data.frame(date = y$date)
   if(!missing(element)) z$element <- y$element
   z[[element_name]] <- y[[element_name]]
@@ -2330,4 +2354,12 @@ DataBook$set("public", "download_from_IRI", function(source, data, path = tempdi
   if (missing(path)) {
     file.remove(file_name)
   }
+})
+
+DataBook$set("public", "patch_climate_element", function(data_name, date_col_name = "", var = "", vars = c(), max_mean_bias = NA, max_stdev_bias = NA, column_name, station_col_name = station_col_name) {
+  self$get_data_objects(data_name)$patch_climate_element(date_col_name = date_col_name, var = var, vars = vars, max_mean_bias = max_mean_bias, max_stdev_bias = max_stdev_bias, column_name = column_name, station_col_name = station_col_name)
+})
+
+DataBook$set("public", "visualize_element_na", function(data_name, element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = interval_size, x_with_truth = NULL, measure = "percent") {
+  self$get_data_objects(data_name)$visualize_element_na(element_col_name = element_col_name, element_col_name_imputed = element_col_name_imputed, station_col_name = station_col_name, x_axis_labels_col_name = x_axis_labels_col_name, ncol = ncol, type = type, xlab = xlab, ylab = ylab, legend = legend, orientation = orientation, interval_size = interval_size, x_with_truth = x_with_truth, measure = measure)
 })
