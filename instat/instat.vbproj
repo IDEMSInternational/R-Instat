@@ -214,6 +214,42 @@
     <Compile Include="dlgCircularScatterPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimaticNCMPCountRecords.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPCountRecords.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPIndices.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPIndices.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPIndices.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPRegionAverage.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPRegionAverage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPRegionAverage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPSummaryFile.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPSummaryFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPSummaryFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPTrendGraphs.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPTrendGraphs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPTrendGraphs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPVariogram.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPVariogram.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPVariogram.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimsoftWizard.Designer.vb">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </Compile>
@@ -320,6 +356,12 @@
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgWindPollutionRose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgClimaticNCMPMetadata.Designer.vb">
+      <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticNCMPMetadata.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgExportToWWR.Designer.vb">
