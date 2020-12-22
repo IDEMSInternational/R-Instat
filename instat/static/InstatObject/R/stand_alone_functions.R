@@ -2086,5 +2086,8 @@ spei_output <- function(x, data, station, year, month) {
   }
   col
 
+
+}
+
 }
 
