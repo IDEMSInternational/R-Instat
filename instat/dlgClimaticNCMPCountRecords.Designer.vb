@@ -22,9 +22,20 @@ Partial Class dlgClimaticNCMPCountRecords
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container
+        Me.SuspendLayout()
+        '
+        'dlgClimaticNCMPCountRecords
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
-        Me.Text = "dlgClimaticNCMPCountRecords"
+        Me.ClientSize = New System.Drawing.Size(575, 412)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
+        Me.Name = "dlgClimaticNCMPCountRecords"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "NCMP Count Records"
+        Me.ResumeLayout(False)
+
     End Sub
 End Class

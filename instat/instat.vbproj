@@ -2704,6 +2704,24 @@
     <EmbeddedResource Include="dlgCircularScatterPlot.resx">
       <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPCountRecords.resx">
+      <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPIndices.resx">
+      <DependentUpon>dlgClimaticNCMPIndices.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPRegionAverage.resx">
+      <DependentUpon>dlgClimaticNCMPRegionAverage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPSummaryFile.resx">
+      <DependentUpon>dlgClimaticNCMPSummaryFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPTrendGraphs.resx">
+      <DependentUpon>dlgClimaticNCMPTrendGraphs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPVariogram.resx">
+      <DependentUpon>dlgClimaticNCMPVariogram.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
