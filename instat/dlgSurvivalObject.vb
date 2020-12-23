@@ -300,7 +300,7 @@ Public Class dlgSurvivalObject
                     ucrModifyEventLogical.Visible = False
 
                 Else
-                    Me.Size = New System.Drawing.Size(458, Me.Height)
+                    Me.Size = New System.Drawing.Size(523, Me.Height)
                     clsModifyOperation.RemoveParameterByName("factor_value")
                     clsModifyOperation.AddParameter("c_function", clsRFunctionParameter:=clsCFunction, iPosition:=1)
 
@@ -323,7 +323,7 @@ Public Class dlgSurvivalObject
                 lblModifyEvent.Visible = False
                 clsRightLeftFunction.AddParameter("event", strParameterValue:=ucrReceiverEvent.GetVariableNames(False), iPosition:=2)
                 clsStartEndFunction.AddParameter("event", strParameterValue:=ucrReceiverEvent.GetVariableNames(False), iPosition:=2)
-                Me.Size = New System.Drawing.Size(458, Me.Height)
+                Me.Size = New System.Drawing.Size(523, Me.Height)
                 ucrModifyEventNumeric.Visible = False
                 ucrModifyEventFactor.Visible = False
                 ucrModifyEventLogical.Visible = False
@@ -333,7 +333,7 @@ Public Class dlgSurvivalObject
             lblModifyEvent.Visible = False
             clsRightLeftFunction.AddParameter("event", strParameterValue:=ucrReceiverEvent.GetVariableNames(False), iPosition:=2)
             clsStartEndFunction.AddParameter("event", strParameterValue:=ucrReceiverEvent.GetVariableNames(False), iPosition:=2)
-            Me.Size = New System.Drawing.Size(458, Me.Height)
+            Me.Size = New System.Drawing.Size(523, Me.Height)
             ucrChkModifyEvent.Visible = False
             ucrModifyEventNumeric.Visible = False
             ucrModifyEventFactor.Visible = False

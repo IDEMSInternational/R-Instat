@@ -208,10 +208,10 @@ Partial Class dlgSurvivalObject
         Me.ucrModifyEventFactor.AutoSize = True
         Me.ucrModifyEventFactor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.ucrModifyEventFactor.clsReceiver = Nothing
-        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(443, 194)
+        Me.ucrModifyEventFactor.Location = New System.Drawing.Point(425, 194)
         Me.ucrModifyEventFactor.Name = "ucrModifyEventFactor"
         Me.ucrModifyEventFactor.shtCurrSheet = Nothing
-        Me.ucrModifyEventFactor.Size = New System.Drawing.Size(193, 135)
+        Me.ucrModifyEventFactor.Size = New System.Drawing.Size(211, 135)
         Me.ucrModifyEventFactor.TabIndex = 18
         Me.ucrModifyEventFactor.ucrChkLevels = Nothing
         '
@@ -314,8 +314,7 @@ Partial Class dlgSurvivalObject
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(507, 335)
-        Me.Controls.Add(Me.lblModifyEvent)
+        Me.ClientSize = New System.Drawing.Size(648, 335)
         Me.Controls.Add(Me.ucrModifyEventLogical)
         Me.Controls.Add(Me.ucrModifyEventNumeric)
         Me.Controls.Add(Me.ucrModifyEventFactor)
@@ -338,6 +337,7 @@ Partial Class dlgSurvivalObject
         Me.Controls.Add(Me.ucrSelectorFitObject)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrChkModifyEvent)
+        Me.Controls.Add(Me.lblModifyEvent)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
