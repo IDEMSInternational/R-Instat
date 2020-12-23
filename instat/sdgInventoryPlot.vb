@@ -19,7 +19,6 @@ Imports instat.Translations
 Public Class sdgInventoryPlot
     Private bControlsInitialised As Boolean = False
     Private clsInventory As New RFunction
-    Public strAxisType As String
     Public bRCodeSet As Boolean = False
 
     Private Sub sdgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -322,7 +321,4 @@ Public Class sdgInventoryPlot
         SetFacetParameter()
     End Sub
 
-    Private Sub UcrNud1_Load(sender As Object, e As EventArgs) Handles ucrNudFacetYSize.Load
-
-    End Sub
 End Class
