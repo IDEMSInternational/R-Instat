@@ -2581,7 +2581,8 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
     else if(length(element_cols) > 1) {
           if(scale != "none"){
                g <- g + ggplot2::facet_wrap(.~variable, nrow = nrow, ncol = ncol, scales = scale, dir = dir)
-	      }else if(scale == "none"){g <- g + ggplot2::facet_grid(facets = variable~.)}
+	      }else {g <- g + ggplot2::facet_grid(facets = variable~.)}
+
     }
      if(scale_xdate){ g <- g + ggplot2::scale_x_continuous(breaks=seq(fromXAxis, toXAxis, byXaxis)) } 
      if(scale_ydate && !missing(date_ybreaks) && !missing(date_ylabels)){ g <- g + ggplot2::scale_y_date(date_breaks = paste0(step," ",date_ybreaks), date_labels = date_ylabels) } 
