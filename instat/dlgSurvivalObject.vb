@@ -102,7 +102,7 @@ Public Class dlgSurvivalObject
         ucrInputOrigin.SetRDefault("0")
 
         'ucrChk
-        ucrChkModifyEvent.SetText("Modify Event When Value is")
+        ucrChkModifyEvent.SetText("Modify Event")
         ucrChkModifyEvent.AddParameterIsROperatorCondition(True, "%in%", True)
         ucrChkModifyEvent.SetDefaultState(False)
 
@@ -149,6 +149,7 @@ Public Class dlgSurvivalObject
 
         ucrSelectorFitObject.Reset()
         ucrSaveObject.Reset()
+        lblModifyEvent.Visible = False
 
         clsRightLeftFunction.SetPackageName("survival")
         clsRightLeftFunction.SetRCommand("Surv")
@@ -287,6 +288,7 @@ Public Class dlgSurvivalObject
                 ' and (to my knowledge) we can't yet do this in the automatic system
                 clsRightLeftFunction.AddParameter("event", clsROperatorParameter:=clsModifyOperation, iPosition:=2)
                 clsStartEndFunction.AddParameter("event", clsROperatorParameter:=clsModifyOperation, iPosition:=2)
+                lblModifyEvent.Visible = True
 
                 If ucrReceiverEvent.strCurrDataType = "factor" Then
                     Me.Size = New System.Drawing.Size(662, Me.Height)
@@ -318,6 +320,7 @@ Public Class dlgSurvivalObject
                     End If
                 End If
             Else
+                lblModifyEvent.Visible = False
                 clsRightLeftFunction.AddParameter("event", strParameterValue:=ucrReceiverEvent.GetVariableNames(False), iPosition:=2)
                 clsStartEndFunction.AddParameter("event", strParameterValue:=ucrReceiverEvent.GetVariableNames(False), iPosition:=2)
                 Me.Size = New System.Drawing.Size(458, Me.Height)
@@ -327,6 +330,7 @@ Public Class dlgSurvivalObject
             End If
 
         Else 'if interval or interval2 checked
+            lblModifyEvent.Visible = False
             clsRightLeftFunction.AddParameter("event", strParameterValue:=ucrReceiverEvent.GetVariableNames(False), iPosition:=2)
             clsStartEndFunction.AddParameter("event", strParameterValue:=ucrReceiverEvent.GetVariableNames(False), iPosition:=2)
             Me.Size = New System.Drawing.Size(458, Me.Height)
