@@ -257,20 +257,20 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
-        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34))
-        clsConvertTo.AddParameter("col_names", GetSelectedVariableNames())
+        clsConvertTo.AddParameter("col_names", GetSelectedVariableNames(), iPosition:=1)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
         RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
 
     Private Sub mnuConvertText_Click(sender As Object, e As EventArgs) Handles mnuConvertText.Click
-        clsConvertTo.AddParameter("to_type", Chr(34) & "character" & Chr(34))
-        clsConvertTo.AddParameter("col_names", GetSelectedVariableNames())
+        clsConvertTo.AddParameter("col_names", GetSelectedVariableNames(), iPosition:=1)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "character" & Chr(34), iPosition:=2)
         RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Character")
     End Sub
 
     Private Sub mnuConvertToLogical_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogical.Click
-        clsConvertTo.AddParameter("to_type", Chr(34) & "logical" & Chr(34))
-        clsConvertTo.AddParameter("col_names", GetSelectedVariableNames())
+        clsConvertTo.AddParameter("col_names", GetSelectedVariableNames(), iPosition:=1)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "logical" & Chr(34), iPosition:=2)
         RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
     End Sub
 
@@ -289,9 +289,9 @@ Public Class ucrColumnMetadata
     'End Sub
 
     Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
-        clsConvertOrderedFactor.AddParameter("col_names", GetSelectedVariableNames())
-        clsConvertOrderedFactor.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34))
-        RunScriptFromColumnMetadata(clsConvertOrderedFactor.ToScript, strComment:="Right Click Menu: Convert to Ordered Factor")
+        clsConvertOrderedFactor.AddParameter("col_names", GetSelectedVariableNames(), iPosition:=1)
+        clsConvertOrderedFactor.AddParameter("to_type", Chr(34) & "ordered_factor" & Chr(34), iPosition:=2)
+        RunScriptFromColumnMetadata(clsConvertOrderedFactor.ToScript, strComment:="Right click menu: Convert to Ordered Factor")
     End Sub
 
     Private Sub mnuDuplicateColumn_Click(sender As Object, e As EventArgs) Handles mnuDuplicateColumn.Click
@@ -306,8 +306,8 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub mnuConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToFactor.Click
-        clsConvertTo.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
-        clsConvertTo.AddParameter("col_names", GetSelectedVariableNames())
+        clsConvertTo.AddParameter("col_names", GetSelectedVariableNames(), iPosition:=1)
+        clsConvertTo.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=2)
         RunScriptFromColumnMetadata(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Factor")
     End Sub
 
@@ -359,17 +359,17 @@ Public Class ucrColumnMetadata
 
     Private Sub UpdateRFunctionDataFrameParameters()
         If grdCurrSheet IsNot Nothing Then
-            clsAppendVariablesMetaData.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsColumnNames.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsInsertColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsDeleteColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsConvertTo.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsRemoveFilter.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsFreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsUnfreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            'clsGetDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-            clsConvertOrderedFactor.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+            clsAppendVariablesMetaData.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsColumnNames.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsInsertColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsDeleteColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsConvertTo.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsRemoveFilter.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsFreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsUnfreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            'clsGetDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsConvertOrderedFactor.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
         End If
     End Sub
 
