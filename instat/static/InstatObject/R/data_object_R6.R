@@ -2568,7 +2568,7 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
       else if(facet_by == "elements-stations") {
            if(scale != "none"){
                   g <- g + ggplot2::facet_wrap(facets = as.formula(paste(".~variable +",station_col)), nrow = nrow, ncol = ncol, scales = scale, dir = dir)
-	      }else if(scale == "none"){g <- g + ggplot2::facet_grid(facets = as.formula(paste("variable ~",station_col)))}
+	      }else {g <- g + ggplot2::facet_grid(facets = as.formula(paste("variable ~",station_col)))}
       }
       else stop("invalid facet_by value:", facet_by)
     }
