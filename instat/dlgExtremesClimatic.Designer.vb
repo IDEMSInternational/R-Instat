@@ -38,6 +38,7 @@ Partial Class dlgExtremesClimatic
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.lblStations = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
@@ -98,6 +99,7 @@ Partial Class dlgExtremesClimatic
         Me.grpPlots = New System.Windows.Forms.GroupBox()
         Me.rdoThreshold = New System.Windows.Forms.RadioButton()
         Me.ucrSaveThresholdPlot = New instat.ucrSave()
+        Me.ttpThreshold = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpMinMaxOptions.SuspendLayout()
         Me.grpPeakOptions.SuspendLayout()
         Me.grpThresholdOptions.SuspendLayout()
@@ -844,4 +846,5 @@ Partial Class dlgExtremesClimatic
     Friend WithEvents grpPlots As GroupBox
     Friend WithEvents rdoThreshold As RadioButton
     Friend WithEvents ucrSaveThresholdPlot As ucrSave
+    Friend WithEvents ttpThreshold As ToolTip
 End Class
