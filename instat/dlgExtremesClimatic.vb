@@ -201,6 +201,7 @@ Public Class dlgExtremesClimatic
 
         ucrNudColumns.SetParameter(New RParameter("ncol", 3))
         ucrNudColumns.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
+        ucrNudColumns.SetRDefault("1")
 
         ucrInputMin.SetValidationTypeAsNumeric()
         ucrInputMin.AddQuotesIfUnrecognised = False
@@ -253,14 +254,17 @@ Public Class dlgExtremesClimatic
 
         ucrNudThresholds.SetParameter(New RParameter("nint", 5))
         ucrNudThresholds.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
+        ucrNudThresholds.SetRDefault("10")
 
         ucrNudAlpha.SetParameter(New RParameter("alpha", 6))
         ucrNudAlpha.DecimalPlaces = 2
         ucrNudAlpha.Increment = 0.01
         ucrNudAlpha.SetMinMax(0, 1)
+        ucrNudAlpha.SetRDefault("0.05")
 
         ucrNudThresholdColumns.SetParameter(New RParameter("ncol", 7))
         ucrNudThresholdColumns.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
+        ucrNudThresholdColumns.SetRDefault("1")
     End Sub
 
     Private Sub SetDefaults()
@@ -293,6 +297,7 @@ Public Class dlgExtremesClimatic
 
         clsPlotMrlFunction = New RFunction
         clsThresholdPlotFunction = New RFunction
+        clsDummyRfunction = clsPlotMrlFunction
 
         ucrSelectorClimaticExtremes.Reset()
         ucrReceiverElement.SetMeAsReceiver()
@@ -426,8 +431,6 @@ Public Class dlgExtremesClimatic
         clsThresholdPlotFunction.AddParameter("nint", "10", iPosition:=5)
         clsThresholdPlotFunction.AddParameter("alpha", "0.05", iPosition:=6)
         clsThresholdPlotFunction.AddParameter("ncol", "1", iPosition:=7)
-
-        clsDummyRfunction = clsPlotMrlFunction
 
         'Overall Calculation
         clsRunCalcFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
