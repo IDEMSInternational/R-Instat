@@ -265,6 +265,8 @@ Public Class dlgExtremesClimatic
         ucrNudThresholdColumns.SetParameter(New RParameter("ncol", 7))
         ucrNudThresholdColumns.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
         ucrNudThresholdColumns.SetRDefault("1")
+
+        ttpThreshold.SetToolTip(rdoThreshold, "Plots that aid in identification of a threshold over which to fit a generalized Pareto distribution and threshold selection through fitting models to a range of thresholds.")
     End Sub
 
     Private Sub SetDefaults()
