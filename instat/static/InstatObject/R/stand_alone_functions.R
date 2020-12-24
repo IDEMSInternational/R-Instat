@@ -1948,7 +1948,7 @@ threshold_Plot <- function(x, r, type = c("GP", "PP", "Exponential"), nint = 10,
 }
 
 # This function produces multiple threshold plots for various stations at a time.
-plot_multiple_thereshold <- function(data, station_col_name, element_col_name, r, type = c("GP", "PP", "Exponential"), nint = 10,
+plot_multiple_threshold <- function(data, station_col_name, element_col_name, r, type = c("GP", "PP", "Exponential"), nint = 10,
                             alpha = 0.05, ncol = 1, xlb = "", main = NULL , verbose = FALSE,...) {
   if (!missing(station_col_name)) {
     plts <- list()
