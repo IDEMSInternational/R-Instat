@@ -79,32 +79,32 @@ Public Class dlgClimaticNCMPSummaryFile
         ucrInputFilePath.SetName("")
 
         clsDefaultFunction.SetRCommand("p7_summary")
-        '        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        '        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        '        If ucrSelectorA2.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA4.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA6.cboAvailableDataFrames.Text = "" Then
-        ' add in checkbox options
-        '            ucrBase.TestOKEnabled(False)
-        '        Else
-        '            ucrBase.TestOKEnabled(True)
-        '        End If
+        If ucrSelectorA2.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA4.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA6.cboAvailableDataFrames.Text = "" Then
+            ' add in checkbox options
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
-    '    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs)
-    '        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
-    '        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
-    '    End Sub
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs)
+        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
+        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
+    End Sub
 
-    '  Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-    '      SetDefaults()
-    '      SetRCodeForControls(True)
-    '      TestOkEnabled()
-    '  End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
 
     Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
         If ucrInputFilePath.IsEmpty() Then

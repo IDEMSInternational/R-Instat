@@ -82,36 +82,36 @@ Public Class dlgClimaticNCMPVariogram
         bResetSubdialog = True
 
         clsDefaultFunction.SetRCommand("p3_variogram")
-        '        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        '     SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        '        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.Value = "" OrElse ucrNudNYE.Value = "" OrElse ucrInputFilePath.IsEmpty Then
-        '            ucrBase.TestOKEnabled(False)
-        '        Else
-        '            ucrBase.TestOKEnabled(True)
-        '        End If
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.Value = "" OrElse ucrNudNYE.Value = "" OrElse ucrInputFilePath.IsEmpty Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
     Private Sub cmdStationMetadata_click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
-        '   sdgClimaticNCMPMetadata.SetRFunction(ucrBase.clsRsyntax, clsDefaultFunction, bReset:=bResetSubdialog)
+        sdgClimaticNCMPMetadata.SetRFunction(clsDefaultFunction, bReset:=bResetSubdialog)
         sdgClimaticNCMPMetadata.ShowDialog()
         bResetSubdialog = True
     End Sub
 
-    '    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs)
-    '        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
-    '        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
-    '    End Sub
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs)
+        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
+        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
+    End Sub
 
-    '  Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-    '      SetDefaults()
-    '      SetRCodeForControls(True)
-    '      TestOkEnabled()
-    '  End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
 
     Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
         If ucrInputFilePath.IsEmpty() Then

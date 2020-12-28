@@ -48,6 +48,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         Me.lblNYB = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -337,11 +338,19 @@ Partial Class dlgClimaticNCMPTrendGraphs
         Me.ucrReceiverStation.TabIndex = 2
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 548)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 19
+        '
         'dlgClimaticNCMPTrendGraphs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(398, 602)
+        Me.ClientSize = New System.Drawing.Size(413, 603)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.lblSaveFile)
@@ -400,4 +409,5 @@ Partial Class dlgClimaticNCMPTrendGraphs
     Friend WithEvents ucrNudNYEA As ucrNud
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents ucrBase As ucrButtons
 End Class

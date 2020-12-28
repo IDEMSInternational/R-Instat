@@ -113,23 +113,23 @@ Public Class dlgClimaticNCMPRegionAverage
 
         clsDefaultFunction.SetRCommand("p4_region_average")
         clsDefaultFunction.SetAssignTo(ucrSaveIndices.GetText(), strTempDataframe:=ucrSaveIndices.GetText())
-        '        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        '     SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        '        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.Value = "" OrElse ucrNudNYE.Value = "" OrElse ucrInputFilePath.IsEmpty OrElse Not ucrSaveIndices.IsComplete Then
-        '            ucrBase.TestOKEnabled(False)
-        '        Else
-        '            ucrBase.TestOKEnabled(True)
-        '        End If
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.Value = "" OrElse ucrNudNYE.Value = "" OrElse ucrInputFilePath.IsEmpty OrElse Not ucrSaveIndices.IsComplete Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub cmdStationMetadata_click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
-        '   sdgClimaticNCMPMetadata.SetRFunction(ucrBase.clsRsyntax, clsDefaultFunction, bReset:=bResetSubdialog)
+        sdgClimaticNCMPMetadata.SetRFunction(clsDefaultFunction, bReset:=bResetSubdialog)
         sdgClimaticNCMPMetadata.ShowDialog()
         bResetSubdialog = True
     End Sub

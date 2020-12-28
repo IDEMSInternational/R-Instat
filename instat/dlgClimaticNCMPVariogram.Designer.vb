@@ -38,6 +38,7 @@ Partial Class dlgClimaticNCMPVariogram
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorVariogram = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -213,11 +214,19 @@ Partial Class dlgClimaticNCMPVariogram
         Me.ucrSelectorVariogram.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorVariogram.TabIndex = 0
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 314)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 18
+        '
         'dlgClimaticNCMPVariogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(398, 363)
+        Me.ClientSize = New System.Drawing.Size(416, 373)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblSaveFile)
         Me.Controls.Add(Me.cmdChooseFile)
         Me.Controls.Add(Me.ucrInputFilePath)
@@ -260,4 +269,5 @@ Partial Class dlgClimaticNCMPVariogram
     Friend WithEvents lblSaveFile As Label
     Friend WithEvents cmdChooseFile As Button
     Friend WithEvents ucrInputFilePath As ucrInputTextBox
+    Friend WithEvents ucrBase As ucrButtons
 End Class

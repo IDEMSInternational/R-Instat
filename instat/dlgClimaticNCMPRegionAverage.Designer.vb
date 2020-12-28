@@ -42,6 +42,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.ucrSelectorForA2 = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSelectorForA3 = New instat.ucrDataFrame()
         Me.ucrSaveIndices = New instat.ucrSave()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -88,9 +89,9 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.grpOptions.Controls.Add(Me.ucrNudNYB)
         Me.grpOptions.Controls.Add(Me.lblNYER)
         Me.grpOptions.Controls.Add(Me.lblNYBR)
-        Me.grpOptions.Location = New System.Drawing.Point(170, 216)
+        Me.grpOptions.Location = New System.Drawing.Point(177, 216)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(217, 154)
+        Me.grpOptions.Size = New System.Drawing.Size(228, 154)
         Me.grpOptions.TabIndex = 10
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
@@ -260,11 +261,19 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.ucrSaveIndices.Size = New System.Drawing.Size(289, 22)
         Me.ucrSaveIndices.TabIndex = 0
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(9, 408)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 18
+        '
         'dlgClimaticNCMPRegionAverage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(397, 465)
+        Me.ClientSize = New System.Drawing.Size(414, 465)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSaveIndices)
         Me.Controls.Add(Me.ucrSelectorForA3)
         Me.Controls.Add(Me.cmdStationMetadata)
@@ -309,4 +318,5 @@ Partial Class dlgClimaticNCMPRegionAverage
     Friend WithEvents ucrInputResolution As ucrInputComboBox
     Friend WithEvents ucrInputUNCode As ucrInputTextBox
     Friend WithEvents ucrSaveIndices As ucrSave
+    Friend WithEvents ucrBase As ucrButtons
 End Class

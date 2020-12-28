@@ -44,6 +44,7 @@ Partial Class dlgClimaticNCMPIndices
         Me.ucrNudNYER = New instat.ucrNud()
         Me.lblNYER = New System.Windows.Forms.Label()
         Me.ucrSaveIndices = New instat.ucrSave()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -289,11 +290,19 @@ Partial Class dlgClimaticNCMPIndices
         Me.ucrSaveIndices.Size = New System.Drawing.Size(289, 22)
         Me.ucrSaveIndices.TabIndex = 1
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 373)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 16
+        '
         'dlgClimaticNCMPIndices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(404, 420)
+        Me.ClientSize = New System.Drawing.Size(415, 431)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSaveIndices)
         Me.Controls.Add(Me.ucrNudNYER)
         Me.Controls.Add(Me.lblNYER)
@@ -345,4 +354,5 @@ Partial Class dlgClimaticNCMPIndices
     Friend WithEvents ucrNudNYER As ucrNud
     Friend WithEvents lblNYER As Label
     Friend WithEvents ucrSaveIndices As ucrSave
+    Friend WithEvents ucrBase As ucrButtons
 End Class

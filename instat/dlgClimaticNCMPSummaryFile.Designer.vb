@@ -33,6 +33,7 @@ Partial Class dlgClimaticNCMPSummaryFile
         Me.ucrChkStartYear = New instat.ucrCheck()
         Me.ucrNudNYE = New instat.ucrNud()
         Me.ucrNudNYB = New instat.ucrNud()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -149,11 +150,19 @@ Partial Class dlgClimaticNCMPSummaryFile
         Me.ucrNudNYB.TabIndex = 1
         Me.ucrNudNYB.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 277)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 18
+        '
         'dlgClimaticNCMPSummaryFile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(395, 340)
+        Me.ClientSize = New System.Drawing.Size(416, 335)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.ucrSelectorA6)
         Me.Controls.Add(Me.ucrSelectorA4)
@@ -184,4 +193,5 @@ Partial Class dlgClimaticNCMPSummaryFile
     Friend WithEvents ucrChkStartYear As ucrCheck
     Friend WithEvents ucrNudNYE As ucrNud
     Friend WithEvents ucrNudNYB As ucrNud
+    Friend WithEvents ucrBase As ucrButtons
 End Class

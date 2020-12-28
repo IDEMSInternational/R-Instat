@@ -105,31 +105,31 @@ Public Class dlgClimaticNCMPIndices
 
         clsDefaultFunction.SetRCommand("p2_indices")
         clsDefaultFunction.SetAssignTo(ucrSaveIndices.GetText(), strTempDataframe:=ucrSaveIndices.GetText())
-        '        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        '     SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        '        If ucrReceiverStation.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse ucrReceiverRain.IsEmpty OrElse ucrReceiverTmax.IsEmpty OrElse ucrReceiverTmin.IsEmpty OrElse ucrNudQCT.Value = "" OrElse ucrNudQCPR.Value = "" OrElse ucrNudNYBR.Value = "" OrElse ucrNudNYER.Value = "" OrElse Not ucrSaveIndices.IsComplete Then
-        '            ucrBase.TestOKEnabled(False)
-        '        Else
-        '            ucrBase.TestOKEnabled(True)
-        '        End If
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse ucrReceiverRain.IsEmpty OrElse ucrReceiverTmax.IsEmpty OrElse ucrReceiverTmin.IsEmpty OrElse ucrNudQCT.Value = "" OrElse ucrNudQCPR.Value = "" OrElse ucrNudNYBR.Value = "" OrElse ucrNudNYER.Value = "" OrElse Not ucrSaveIndices.IsComplete Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
     Private Sub cmdStationMetadata_click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
-        '   sdgClimaticNCMPMetadata.SetRFunction(ucrBase.clsRsyntax, clsDefaultFunction, bReset:=bResetSubdialog)
+        sdgClimaticNCMPMetadata.SetRFunction(clsDefaultFunction, bReset:=bResetSubdialog)
         sdgClimaticNCMPMetadata.ShowDialog()
         bResetSubdialog = True
     End Sub
 
-    '  Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-    '      SetDefaults()
-    '      SetRCodeForControls(True)
-    '      TestOkEnabled()
-    '  End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrNudQCT.ControlContentsChanged, ucrNudQCPR.ControlContentsChanged, ucrNudNYBR.ControlContentsChanged, ucrNudNYER.ControlContentsChanged, ucrSaveIndices.ControlContentsChanged
         TestOkEnabled()

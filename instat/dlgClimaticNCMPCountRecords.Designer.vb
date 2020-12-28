@@ -37,6 +37,7 @@ Partial Class dlgClimaticNCMPCountRecords
         Me.lblYear = New System.Windows.Forms.Label()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorForA2 = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -198,11 +199,19 @@ Partial Class dlgClimaticNCMPCountRecords
         Me.ucrSelectorForA2.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorForA2.TabIndex = 0
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 363)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 17
+        '
         'dlgClimaticNCMPCountRecords
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(397, 432)
+        Me.ClientSize = New System.Drawing.Size(415, 419)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSaveCountRecords)
         Me.Controls.Add(Me.ucrSelectorForA4)
         Me.Controls.Add(Me.cmdStationMetadata)
@@ -241,4 +250,5 @@ Partial Class dlgClimaticNCMPCountRecords
     Friend WithEvents lblYear As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrSelectorForA2 As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrBase As ucrButtons
 End Class
