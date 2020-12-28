@@ -76,6 +76,7 @@ Public Class dlgClimaticNCMPRegionAverage
 
         ucrInputUNCode.SetParameter(New RParameter("uncode", 12))
         ucrInputUNCode.SetValidationTypeAsNumeric(dcmMin:=0)
+        ucrInputUNCode.AddQuotesIfUnrecognised = False
 
         ' add in label parameter and ne parameter
 
@@ -94,9 +95,9 @@ Public Class dlgClimaticNCMPRegionAverage
         ucrChkOutputGridSquareData.SetRDefault("FALSE")
 
         ' ucrsave
-        ucrSaveIndices.SetIsTextBox()
         ucrSaveIndices.SetSaveTypeAsDataFrame()
         ucrSaveIndices.SetLabelText("New Data Frame Name:")
+        ucrSaveIndices.SetIsTextBox()
         ucrSaveIndices.SetPrefix("RegionAverage")
     End Sub
 
@@ -108,6 +109,7 @@ Public Class dlgClimaticNCMPRegionAverage
         ucrReceiverStation.SetMeAsReceiver()
         ucrInputUNCode.Reset()
         ucrInputUNCode.SetName("")
+        ucrInputResolution.SetName(1)
         ucrSaveIndices.Reset()
         bResetSubdialog = True
 
@@ -121,7 +123,7 @@ Public Class dlgClimaticNCMPRegionAverage
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.Value = "" OrElse ucrNudNYE.Value = "" OrElse ucrInputFilePath.IsEmpty OrElse Not ucrSaveIndices.IsComplete Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse Not ucrSaveIndices.IsComplete OrElse ucrInputUNCode.IsEmpty Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)

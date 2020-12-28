@@ -129,19 +129,19 @@ Partial Class dlgClimaticNCMPVariogram
         '
         Me.lblSaveFile.AutoSize = True
         Me.lblSaveFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSaveFile.Location = New System.Drawing.Point(9, 290)
+        Me.lblSaveFile.Location = New System.Drawing.Point(9, 285)
         Me.lblSaveFile.Name = "lblSaveFile"
         Me.lblSaveFile.Size = New System.Drawing.Size(86, 13)
-        Me.lblSaveFile.TabIndex = 11
+        Me.lblSaveFile.TabIndex = 12
         Me.lblSaveFile.Text = "Save Output To:"
         '
         'cmdChooseFile
         '
         Me.cmdChooseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdChooseFile.Location = New System.Drawing.Point(311, 286)
+        Me.cmdChooseFile.Location = New System.Drawing.Point(334, 281)
         Me.cmdChooseFile.Name = "cmdChooseFile"
         Me.cmdChooseFile.Size = New System.Drawing.Size(75, 23)
-        Me.cmdChooseFile.TabIndex = 13
+        Me.cmdChooseFile.TabIndex = 14
         Me.cmdChooseFile.Text = "Browse"
         Me.cmdChooseFile.UseVisualStyleBackColor = True
         '
@@ -150,10 +150,10 @@ Partial Class dlgClimaticNCMPVariogram
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(96, 287)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(96, 282)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(210, 21)
-        Me.ucrInputFilePath.TabIndex = 12
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(232, 21)
+        Me.ucrInputFilePath.TabIndex = 13
         '
         'ucrNudNYE
         '
@@ -216,16 +216,16 @@ Partial Class dlgClimaticNCMPVariogram
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 314)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 309)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 18
+        Me.ucrBase.TabIndex = 15
         '
         'dlgClimaticNCMPVariogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 373)
+        Me.ClientSize = New System.Drawing.Size(415, 368)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblSaveFile)
         Me.Controls.Add(Me.cmdChooseFile)

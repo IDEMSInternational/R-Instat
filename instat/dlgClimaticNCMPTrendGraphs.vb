@@ -116,7 +116,7 @@ Public Class dlgClimaticNCMPTrendGraphs
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYearA4.IsEmpty OrElse ucrReceiverMonthA4.IsEmpty OrElse ucrReceiverYearA2.IsEmpty OrElse ucrReceiverMonthA2.IsEmpty OrElse ucrNudNYB.Value = "" OrElse ucrNudNYE.Value = "" OrElse ucrInputFilePath.IsEmpty OrElse ucrNudNYBA.Value = "" OrElse ucrNudNYEA.Value = "" Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYearA4.IsEmpty OrElse ucrReceiverMonthA4.IsEmpty OrElse ucrReceiverYearA2.IsEmpty OrElse ucrReceiverMonthA2.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse ucrInputFilePath.IsEmpty OrElse ucrNudNYBA.GetText = "" OrElse ucrNudNYEA.GetText = "" Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)

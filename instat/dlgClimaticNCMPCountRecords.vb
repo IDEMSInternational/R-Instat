@@ -80,9 +80,9 @@ Public Class dlgClimaticNCMPCountRecords
         ucrNudNYE.SetParameter(New RParameter("nye", 9))
         ucrNudNYE.SetMinMax(1900) ' min/max?
 
-        ucrSaveCountRecords.SetIsTextBox()
         ucrSaveCountRecords.SetSaveTypeAsDataFrame()
         ucrSaveCountRecords.SetLabelText("New Data Frame Name:")
+        ucrSaveCountRecords.SetIsTextBox()
         ucrSaveCountRecords.SetPrefix("Count_Records")
     End Sub
 

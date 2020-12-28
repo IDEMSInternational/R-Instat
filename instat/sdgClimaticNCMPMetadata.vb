@@ -27,7 +27,7 @@ Public Class sdgClimaticNCMPMetadata
         ucrSelectorMetadata.SetParameter(New RParameter("station_df", 10))
         ucrSelectorMetadata.SetParameterIsrfunction()
 
-        ucrReceiverStation.SetParameter(New RParameter("station", 11))
+        ucrReceiverStation.SetParameter(New RParameter("name", 11))
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.Selector = ucrSelectorMetadata
         ucrReceiverStation.SetClimaticType("station")
@@ -37,7 +37,7 @@ Public Class sdgClimaticNCMPMetadata
         ucrReceiverLatitude.SetParameterIsString()
         ucrReceiverLatitude.Selector = ucrSelectorMetadata
 
-        ucrReceiverLongitude.SetParameter(New RParameter("long", 13))
+        ucrReceiverLongitude.SetParameter(New RParameter("lon", 13))
         ucrReceiverLongitude.SetParameterIsString()
         ucrReceiverLongitude.Selector = ucrSelectorMetadata
     End Sub

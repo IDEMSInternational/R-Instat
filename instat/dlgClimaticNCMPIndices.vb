@@ -59,13 +59,13 @@ Public Class dlgClimaticNCMPIndices
         ucrReceiverRain.SetClimaticType("rain")
         ucrReceiverRain.bAutoFill = True
 
-        ucrReceiverTmin.SetParameter(New RParameter("min_temperature", 5))
+        ucrReceiverTmin.SetParameter(New RParameter("tmin", 4))
         ucrReceiverTmin.SetParameterIsString()
         ucrReceiverTmin.Selector = ucrSelectorIndices
         ucrReceiverTmin.SetClimaticType("temp_min")
         ucrReceiverTmin.bAutoFill = True
 
-        ucrReceiverTmax.SetParameter(New RParameter("max_temperature", 4))
+        ucrReceiverTmax.SetParameter(New RParameter("tmax", 5))
         ucrReceiverTmax.SetParameterIsString()
         ucrReceiverTmax.Selector = ucrSelectorIndices
         ucrReceiverTmax.SetClimaticType("temp_max")
@@ -88,9 +88,9 @@ Public Class dlgClimaticNCMPIndices
         'ucrNudNYER.SetRDefault(2010) 
 
         ' ucrsave
-        ucrSaveIndices.SetIsTextBox()
         ucrSaveIndices.SetSaveTypeAsDataFrame()
         ucrSaveIndices.SetLabelText("New Data Frame Name:")
+        ucrSaveIndices.SetIsTextBox()
         ucrSaveIndices.SetPrefix("Indices")
     End Sub
 
@@ -113,7 +113,7 @@ Public Class dlgClimaticNCMPIndices
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse ucrReceiverRain.IsEmpty OrElse ucrReceiverTmax.IsEmpty OrElse ucrReceiverTmin.IsEmpty OrElse ucrNudQCT.Value = "" OrElse ucrNudQCPR.Value = "" OrElse ucrNudNYBR.Value = "" OrElse ucrNudNYER.Value = "" OrElse Not ucrSaveIndices.IsComplete Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse ucrReceiverRain.IsEmpty OrElse ucrReceiverTmax.IsEmpty OrElse ucrReceiverTmin.IsEmpty OrElse ucrNudQCT.GetText = "" OrElse ucrNudQCPR.GetText = "" OrElse ucrNudNYBR.GetText = "" OrElse ucrNudNYER.GetText = "" OrElse Not ucrSaveIndices.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)

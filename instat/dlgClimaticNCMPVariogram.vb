@@ -38,7 +38,7 @@ Public Class dlgClimaticNCMPVariogram
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrSelectorVariogram.SetParameter(New RParameter("df", 0))
+        ucrSelectorVariogram.SetParameter(New RParameter("a2", 0))
         ucrSelectorVariogram.SetParameterIsrfunction()
         ucrSelectorVariogram.ucrAvailableDataFrames.lblDataFrame.Text = "Indices Data Frames:"
 
@@ -90,7 +90,7 @@ Public Class dlgClimaticNCMPVariogram
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.Value = "" OrElse ucrNudNYE.Value = "" OrElse ucrInputFilePath.IsEmpty Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse ucrInputFilePath.IsEmpty Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
