@@ -66,10 +66,6 @@ Public Class dlgClimaticNCMPRegionAverage
         ucrSelectorForA3.SetParameterIsRFunction()
         ucrSelectorForA3.lblDataFrame.Text = "Variogram Data Frames:"
 
-        ucrNudNYB.SetParameter(New RParameter("nyb", 10))
-        ucrNudNYB.SetMinMax(1900, 2000)
-        'ucrNudNYB.SetRDefault(1981)
-
         ucrNudNYE.SetParameter(New RParameter("nye", 11))
         ucrNudNYE.SetMinMax(2000, 2019) ' TODO: how to set as current year - 1
         'ucrNudNYE.SetRDefault(2010) 
@@ -114,6 +110,9 @@ Public Class dlgClimaticNCMPRegionAverage
         bResetSubdialog = True
 
         clsDefaultFunction.SetRCommand("p4_region_average")
+        clsDefaultFunction.AddParameter("nye", 2019, iPosition:=11)
+        clsDefaultFunction.AddParameter("res", 1, iPosition:=14)
+
         clsDefaultFunction.SetAssignTo(ucrSaveIndices.GetText(), strTempDataframe:=ucrSaveIndices.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
@@ -123,7 +122,7 @@ Public Class dlgClimaticNCMPRegionAverage
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse Not ucrSaveIndices.IsComplete OrElse ucrInputUNCode.IsEmpty Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYE.GetText = "" OrElse Not ucrSaveIndices.IsComplete OrElse ucrInputUNCode.IsEmpty Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -136,7 +135,7 @@ Public Class dlgClimaticNCMPRegionAverage
         bResetSubdialog = True
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYB.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputUNCode.ControlContentsChanged, ucrSaveIndices.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputUNCode.ControlContentsChanged, ucrSaveIndices.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

@@ -78,6 +78,7 @@ Public Class dlgClimaticNCMPTrendGraphs
         ucrReceiverMonthA4.SetClimaticType("month")
         ucrReceiverMonthA4.bAutoFill = True
 
+        grpOptions.Visible = False
         ucrNudNYBA.SetParameter(New RParameter("nyba", 8))
         ucrNudNYBA.SetMinMax(1900) ' min/max?
 
@@ -86,11 +87,9 @@ Public Class dlgClimaticNCMPTrendGraphs
 
         ucrNudNYB.SetParameter(New RParameter("nyb", 10))
         ucrNudNYB.SetMinMax(1900)
-        'ucrNudNYB.SetRDefault(1981)
 
         ucrNudNYE.SetParameter(New RParameter("nye", 11))
         ucrNudNYE.SetMinMax(1900) ' TODO: how to set as current year - 1
-        'ucrNudNYE.SetRDefault(2010) 
 
         ucrInputFilePath.SetParameter(New RParameter("ncmp_folder", 12))
         ucrInputFilePath.IsReadOnly = True

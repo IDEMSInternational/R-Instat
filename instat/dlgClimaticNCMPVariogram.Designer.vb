@@ -27,18 +27,19 @@ Partial Class dlgClimaticNCMPVariogram
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.ucrNudNYB = New instat.ucrNud()
         Me.lblNYBR = New System.Windows.Forms.Label()
+        Me.ucrNudNYE = New instat.ucrNud()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblSaveFile = New System.Windows.Forms.Label()
         Me.cmdChooseFile = New System.Windows.Forms.Button()
+        Me.ucrBase = New instat.ucrButtons()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
-        Me.ucrNudNYE = New instat.ucrNud()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorVariogram = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveVariogram = New instat.ucrSave()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -46,7 +47,7 @@ Partial Class dlgClimaticNCMPVariogram
         '
         Me.lblNYER.AutoSize = True
         Me.lblNYER.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNYER.Location = New System.Drawing.Point(14, 252)
+        Me.lblNYER.Location = New System.Drawing.Point(2, 59)
         Me.lblNYER.Name = "lblNYER"
         Me.lblNYER.Size = New System.Drawing.Size(152, 13)
         Me.lblNYER.TabIndex = 9
@@ -66,7 +67,9 @@ Partial Class dlgClimaticNCMPVariogram
         '
         Me.grpOptions.Controls.Add(Me.ucrNudNYB)
         Me.grpOptions.Controls.Add(Me.lblNYBR)
-        Me.grpOptions.Location = New System.Drawing.Point(10, 203)
+        Me.grpOptions.Controls.Add(Me.ucrNudNYE)
+        Me.grpOptions.Controls.Add(Me.lblNYER)
+        Me.grpOptions.Location = New System.Drawing.Point(10, 196)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(210, 74)
         Me.grpOptions.TabIndex = 8
@@ -94,6 +97,18 @@ Partial Class dlgClimaticNCMPVariogram
         Me.lblNYBR.Size = New System.Drawing.Size(155, 13)
         Me.lblNYBR.TabIndex = 0
         Me.lblNYBR.Text = "Start Year for Variogram Period:"
+        '
+        'ucrNudNYE
+        '
+        Me.ucrNudNYE.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNYE.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNYE.Location = New System.Drawing.Point(156, 54)
+        Me.ucrNudNYE.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNYE.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNYE.Name = "ucrNudNYE"
+        Me.ucrNudNYE.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNYE.TabIndex = 10
+        Me.ucrNudNYE.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblStation
         '
@@ -129,7 +144,7 @@ Partial Class dlgClimaticNCMPVariogram
         '
         Me.lblSaveFile.AutoSize = True
         Me.lblSaveFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSaveFile.Location = New System.Drawing.Point(9, 285)
+        Me.lblSaveFile.Location = New System.Drawing.Point(7, 247)
         Me.lblSaveFile.Name = "lblSaveFile"
         Me.lblSaveFile.Size = New System.Drawing.Size(86, 13)
         Me.lblSaveFile.TabIndex = 12
@@ -138,34 +153,29 @@ Partial Class dlgClimaticNCMPVariogram
         'cmdChooseFile
         '
         Me.cmdChooseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdChooseFile.Location = New System.Drawing.Point(334, 281)
+        Me.cmdChooseFile.Location = New System.Drawing.Point(334, 243)
         Me.cmdChooseFile.Name = "cmdChooseFile"
         Me.cmdChooseFile.Size = New System.Drawing.Size(75, 23)
         Me.cmdChooseFile.TabIndex = 14
         Me.cmdChooseFile.Text = "Browse"
         Me.cmdChooseFile.UseVisualStyleBackColor = True
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 271)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 15
+        '
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(96, 282)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(92, 244)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(232, 21)
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(236, 21)
         Me.ucrInputFilePath.TabIndex = 13
-        '
-        'ucrNudNYE
-        '
-        Me.ucrNudNYE.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYE.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYE.Location = New System.Drawing.Point(166, 250)
-        Me.ucrNudNYE.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNYE.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYE.Name = "ucrNudNYE"
-        Me.ucrNudNYE.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNYE.TabIndex = 10
-        Me.ucrNudNYE.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverMonth
         '
@@ -214,26 +224,25 @@ Partial Class dlgClimaticNCMPVariogram
         Me.ucrSelectorVariogram.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorVariogram.TabIndex = 0
         '
-        'ucrBase
+        'ucrSaveVariogram
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 309)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 15
+        Me.ucrSaveVariogram.Location = New System.Drawing.Point(10, 214)
+        Me.ucrSaveVariogram.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveVariogram.Name = "ucrSaveVariogram"
+        Me.ucrSaveVariogram.Size = New System.Drawing.Size(289, 22)
+        Me.ucrSaveVariogram.TabIndex = 16
         '
         'dlgClimaticNCMPVariogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 368)
+        Me.ClientSize = New System.Drawing.Size(415, 326)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.lblSaveFile)
         Me.Controls.Add(Me.cmdChooseFile)
         Me.Controls.Add(Me.ucrInputFilePath)
-        Me.Controls.Add(Me.ucrNudNYE)
-        Me.Controls.Add(Me.lblNYER)
+        Me.Controls.Add(Me.lblSaveFile)
+        Me.Controls.Add(Me.ucrSaveVariogram)
         Me.Controls.Add(Me.cmdStationMetadata)
-        Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverMonth)
         Me.Controls.Add(Me.ucrReceiverYear)
@@ -241,6 +250,7 @@ Partial Class dlgClimaticNCMPVariogram
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrSelectorVariogram)
+        Me.Controls.Add(Me.grpOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -270,4 +280,5 @@ Partial Class dlgClimaticNCMPVariogram
     Friend WithEvents cmdChooseFile As Button
     Friend WithEvents ucrInputFilePath As ucrInputTextBox
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSaveVariogram As ucrSave
 End Class

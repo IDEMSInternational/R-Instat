@@ -60,16 +60,21 @@ Public Class dlgClimaticNCMPVariogram
         ucrReceiverMonth.SetClimaticType("month")
         ucrReceiverMonth.bAutoFill = True
 
+        grpOptions.Visible = False
         ucrNudNYB.SetParameter(New RParameter("nyb", 4))
-        ucrNudNYB.SetMinMax(1900, 2000)
-        'ucrNudNYB.SetRDefault(1981)
+        'ucrNudNYB.SetMinMax(1900, 2000)' TODO: suitable min/max; default?
 
         ucrNudNYE.SetParameter(New RParameter("nye", 5))
-        ucrNudNYE.SetMinMax(2000, 2019) ' TODO: how to set as current year - 1
-        'ucrNudNYE.SetRDefault(2010) 
+        'ucrNudNYE.SetMinMax(2000, 2019) ' TODO: how to set max as current year - 1; default?
 
         ucrInputFilePath.SetParameter(New RParameter("ncmp_folder", 11))
         ucrInputFilePath.IsReadOnly = True
+
+        ' ucrsave
+        ucrSaveVariogram.SetSaveTypeAsDataFrame()
+        ucrSaveVariogram.SetLabelText("New Data Frame Name:")
+        ucrSaveVariogram.SetIsTextBox()
+        ucrSaveVariogram.SetPrefix("Variogram")
     End Sub
 
     Private Sub SetDefaults()
@@ -79,9 +84,11 @@ Public Class dlgClimaticNCMPVariogram
         ucrReceiverStation.SetMeAsReceiver()
         ucrInputFilePath.Reset()
         ucrInputFilePath.SetName("")
+        ucrSaveVariogram.Reset()
         bResetSubdialog = True
 
         clsDefaultFunction.SetRCommand("p3_variogram")
+        clsDefaultFunction.SetAssignTo(ucrSaveVariogram.GetText(), strTempDataframe:=ucrSaveVariogram.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
@@ -90,7 +97,7 @@ Public Class dlgClimaticNCMPVariogram
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse ucrInputFilePath.IsEmpty Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse ucrInputFilePath.IsEmpty OrElse Not ucrSaveVariogram.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -138,7 +145,7 @@ Public Class dlgClimaticNCMPVariogram
         SelectLocationToSave()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYB.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYB.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrSaveVariogram.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

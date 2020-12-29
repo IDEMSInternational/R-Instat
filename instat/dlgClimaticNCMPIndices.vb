@@ -71,6 +71,8 @@ Public Class dlgClimaticNCMPIndices
         ucrReceiverTmax.SetClimaticType("temp_max")
         ucrReceiverTmax.bAutoFill = True
 
+        grpOptions.Visible = False
+
         ucrNudQCT.SetParameter(New RParameter("qct", 6))
         ucrNudQCT.SetMinMax(0, 2)
         ucrNudQCT.SetRDefault(0)
@@ -80,12 +82,12 @@ Public Class dlgClimaticNCMPIndices
         ucrNudQCPR.SetRDefault(0)
 
         ucrNudNYBR.SetParameter(New RParameter("nybr", 8))
-        ucrNudNYBR.SetMinMax(1900, 2000)
-        'ucrNudNYBR.SetRDefault(1981)
+        ucrNudNYBR.SetMinMax(1900, 2000)  ' TODO: suitable start/end years.
+        ucrNudNYBR.SetRDefault(1981)
 
         ucrNudNYER.SetParameter(New RParameter("nyer", 9))
         ucrNudNYER.SetMinMax(2000, 2019) ' TODO: how to set as current year - 1
-        'ucrNudNYER.SetRDefault(2010) 
+        ucrNudNYER.SetRDefault(2010)
 
         ' ucrsave
         ucrSaveIndices.SetSaveTypeAsDataFrame()

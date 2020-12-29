@@ -22,47 +22,33 @@ Partial Class dlgClimaticNCMPRegionAverage
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrNudNYE = New instat.ucrNud()
         Me.lblNYER = New System.Windows.Forms.Label()
         Me.cmdStationMetadata = New System.Windows.Forms.Button()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.lblRes = New System.Windows.Forms.Label()
+        Me.lblUNCode = New System.Windows.Forms.Label()
+        Me.lblStation = New System.Windows.Forms.Label()
+        Me.lblMonth = New System.Windows.Forms.Label()
+        Me.lblYear = New System.Windows.Forms.Label()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveIndices = New instat.ucrSave()
+        Me.ucrSelectorForA3 = New instat.ucrDataFrame()
         Me.ucrInputResolution = New instat.ucrInputComboBox()
         Me.ucrInputUNCode = New instat.ucrInputTextBox()
         Me.ucrChkOutputGridSquareData = New instat.ucrCheck()
-        Me.lblRes = New System.Windows.Forms.Label()
-        Me.lblUNCode = New System.Windows.Forms.Label()
-        Me.ucrNudNYB = New instat.ucrNud()
-        Me.lblNYBR = New System.Windows.Forms.Label()
-        Me.lblStation = New System.Windows.Forms.Label()
+        Me.ucrNudNYE = New instat.ucrNud()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
-        Me.lblMonth = New System.Windows.Forms.Label()
-        Me.lblYear = New System.Windows.Forms.Label()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorForA2 = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrSelectorForA3 = New instat.ucrDataFrame()
-        Me.ucrSaveIndices = New instat.ucrSave()
-        Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'ucrNudNYE
-        '
-        Me.ucrNudNYE.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYE.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYE.Location = New System.Drawing.Point(160, 46)
-        Me.ucrNudNYE.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNYE.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYE.Name = "ucrNudNYE"
-        Me.ucrNudNYE.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNYE.TabIndex = 3
-        Me.ucrNudNYE.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblNYER
         '
         Me.lblNYER.AutoSize = True
         Me.lblNYER.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNYER.Location = New System.Drawing.Point(4, 49)
+        Me.lblNYER.Location = New System.Drawing.Point(5, 21)
         Me.lblNYER.Name = "lblNYER"
         Me.lblNYER.Size = New System.Drawing.Size(152, 13)
         Me.lblNYER.TabIndex = 2
@@ -86,49 +72,19 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.grpOptions.Controls.Add(Me.lblRes)
         Me.grpOptions.Controls.Add(Me.lblUNCode)
         Me.grpOptions.Controls.Add(Me.ucrNudNYE)
-        Me.grpOptions.Controls.Add(Me.ucrNudNYB)
         Me.grpOptions.Controls.Add(Me.lblNYER)
-        Me.grpOptions.Controls.Add(Me.lblNYBR)
         Me.grpOptions.Location = New System.Drawing.Point(177, 216)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(228, 154)
+        Me.grpOptions.Size = New System.Drawing.Size(228, 124)
         Me.grpOptions.TabIndex = 10
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
-        '
-        'ucrInputResolution
-        '
-        Me.ucrInputResolution.AddQuotesIfUnrecognised = True
-        Me.ucrInputResolution.GetSetSelectedIndex = -1
-        Me.ucrInputResolution.IsReadOnly = False
-        Me.ucrInputResolution.Location = New System.Drawing.Point(88, 99)
-        Me.ucrInputResolution.Name = "ucrInputResolution"
-        Me.ucrInputResolution.Size = New System.Drawing.Size(122, 21)
-        Me.ucrInputResolution.TabIndex = 7
-        '
-        'ucrInputUNCode
-        '
-        Me.ucrInputUNCode.AddQuotesIfUnrecognised = True
-        Me.ucrInputUNCode.IsMultiline = False
-        Me.ucrInputUNCode.IsReadOnly = False
-        Me.ucrInputUNCode.Location = New System.Drawing.Point(88, 72)
-        Me.ucrInputUNCode.Name = "ucrInputUNCode"
-        Me.ucrInputUNCode.Size = New System.Drawing.Size(122, 21)
-        Me.ucrInputUNCode.TabIndex = 5
-        '
-        'ucrChkOutputGridSquareData
-        '
-        Me.ucrChkOutputGridSquareData.Checked = False
-        Me.ucrChkOutputGridSquareData.Location = New System.Drawing.Point(7, 126)
-        Me.ucrChkOutputGridSquareData.Name = "ucrChkOutputGridSquareData"
-        Me.ucrChkOutputGridSquareData.Size = New System.Drawing.Size(187, 20)
-        Me.ucrChkOutputGridSquareData.TabIndex = 8
         '
         'lblRes
         '
         Me.lblRes.AutoSize = True
         Me.lblRes.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblRes.Location = New System.Drawing.Point(4, 104)
+        Me.lblRes.Location = New System.Drawing.Point(5, 74)
         Me.lblRes.Name = "lblRes"
         Me.lblRes.Size = New System.Drawing.Size(60, 13)
         Me.lblRes.TabIndex = 6
@@ -138,33 +94,11 @@ Partial Class dlgClimaticNCMPRegionAverage
         '
         Me.lblUNCode.AutoSize = True
         Me.lblUNCode.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblUNCode.Location = New System.Drawing.Point(4, 78)
+        Me.lblUNCode.Location = New System.Drawing.Point(5, 47)
         Me.lblUNCode.Name = "lblUNCode"
         Me.lblUNCode.Size = New System.Drawing.Size(54, 13)
         Me.lblUNCode.TabIndex = 4
         Me.lblUNCode.Text = "UN Code:"
-        '
-        'ucrNudNYB
-        '
-        Me.ucrNudNYB.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYB.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYB.Location = New System.Drawing.Point(160, 19)
-        Me.ucrNudNYB.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNYB.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYB.Name = "ucrNudNYB"
-        Me.ucrNudNYB.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNYB.TabIndex = 1
-        Me.ucrNudNYB.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblNYBR
-        '
-        Me.lblNYBR.AutoSize = True
-        Me.lblNYBR.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNYBR.Location = New System.Drawing.Point(4, 22)
-        Me.lblNYBR.Name = "lblNYBR"
-        Me.lblNYBR.Size = New System.Drawing.Size(155, 13)
-        Me.lblNYBR.TabIndex = 0
-        Me.lblNYBR.Text = "Start Year for Variogram Period:"
         '
         'lblStation
         '
@@ -175,6 +109,91 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 1
         Me.lblStation.Text = "Station:"
+        '
+        'lblMonth
+        '
+        Me.lblMonth.AutoSize = True
+        Me.lblMonth.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblMonth.Location = New System.Drawing.Point(253, 133)
+        Me.lblMonth.Name = "lblMonth"
+        Me.lblMonth.Size = New System.Drawing.Size(40, 13)
+        Me.lblMonth.TabIndex = 5
+        Me.lblMonth.Text = "Month:"
+        '
+        'lblYear
+        '
+        Me.lblYear.AutoSize = True
+        Me.lblYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblYear.Location = New System.Drawing.Point(253, 89)
+        Me.lblYear.Name = "lblYear"
+        Me.lblYear.Size = New System.Drawing.Size(32, 13)
+        Me.lblYear.TabIndex = 3
+        Me.lblYear.Text = "Year:"
+        '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 377)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 18
+        '
+        'ucrSaveIndices
+        '
+        Me.ucrSaveIndices.Location = New System.Drawing.Point(10, 347)
+        Me.ucrSaveIndices.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveIndices.Name = "ucrSaveIndices"
+        Me.ucrSaveIndices.Size = New System.Drawing.Size(289, 22)
+        Me.ucrSaveIndices.TabIndex = 0
+        '
+        'ucrSelectorForA3
+        '
+        Me.ucrSelectorForA3.bDropUnusedFilterLevels = False
+        Me.ucrSelectorForA3.bUseCurrentFilter = True
+        Me.ucrSelectorForA3.Location = New System.Drawing.Point(10, 204)
+        Me.ucrSelectorForA3.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorForA3.Name = "ucrSelectorForA3"
+        Me.ucrSelectorForA3.Size = New System.Drawing.Size(151, 50)
+        Me.ucrSelectorForA3.TabIndex = 8
+        '
+        'ucrInputResolution
+        '
+        Me.ucrInputResolution.AddQuotesIfUnrecognised = True
+        Me.ucrInputResolution.GetSetSelectedIndex = -1
+        Me.ucrInputResolution.IsReadOnly = False
+        Me.ucrInputResolution.Location = New System.Drawing.Point(89, 71)
+        Me.ucrInputResolution.Name = "ucrInputResolution"
+        Me.ucrInputResolution.Size = New System.Drawing.Size(122, 21)
+        Me.ucrInputResolution.TabIndex = 7
+        '
+        'ucrInputUNCode
+        '
+        Me.ucrInputUNCode.AddQuotesIfUnrecognised = True
+        Me.ucrInputUNCode.IsMultiline = False
+        Me.ucrInputUNCode.IsReadOnly = False
+        Me.ucrInputUNCode.Location = New System.Drawing.Point(89, 44)
+        Me.ucrInputUNCode.Name = "ucrInputUNCode"
+        Me.ucrInputUNCode.Size = New System.Drawing.Size(122, 21)
+        Me.ucrInputUNCode.TabIndex = 5
+        '
+        'ucrChkOutputGridSquareData
+        '
+        Me.ucrChkOutputGridSquareData.Checked = False
+        Me.ucrChkOutputGridSquareData.Location = New System.Drawing.Point(8, 98)
+        Me.ucrChkOutputGridSquareData.Name = "ucrChkOutputGridSquareData"
+        Me.ucrChkOutputGridSquareData.Size = New System.Drawing.Size(187, 20)
+        Me.ucrChkOutputGridSquareData.TabIndex = 8
+        '
+        'ucrNudNYE
+        '
+        Me.ucrNudNYE.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNYE.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNYE.Location = New System.Drawing.Point(161, 18)
+        Me.ucrNudNYE.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNYE.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNYE.Name = "ucrNudNYE"
+        Me.ucrNudNYE.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNYE.TabIndex = 3
+        Me.ucrNudNYE.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrReceiverMonth
         '
@@ -200,26 +219,6 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.ucrReceiverYear.TabIndex = 4
         Me.ucrReceiverYear.ucrSelector = Nothing
         '
-        'lblMonth
-        '
-        Me.lblMonth.AutoSize = True
-        Me.lblMonth.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMonth.Location = New System.Drawing.Point(253, 133)
-        Me.lblMonth.Name = "lblMonth"
-        Me.lblMonth.Size = New System.Drawing.Size(40, 13)
-        Me.lblMonth.TabIndex = 5
-        Me.lblMonth.Text = "Month:"
-        '
-        'lblYear
-        '
-        Me.lblYear.AutoSize = True
-        Me.lblYear.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYear.Location = New System.Drawing.Point(253, 89)
-        Me.lblYear.Name = "lblYear"
-        Me.lblYear.Size = New System.Drawing.Size(32, 13)
-        Me.lblYear.TabIndex = 3
-        Me.lblYear.Text = "Year:"
-        '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
@@ -243,36 +242,11 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.ucrSelectorForA2.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorForA2.TabIndex = 0
         '
-        'ucrSelectorForA3
-        '
-        Me.ucrSelectorForA3.bDropUnusedFilterLevels = False
-        Me.ucrSelectorForA3.bUseCurrentFilter = True
-        Me.ucrSelectorForA3.Location = New System.Drawing.Point(10, 204)
-        Me.ucrSelectorForA3.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForA3.Name = "ucrSelectorForA3"
-        Me.ucrSelectorForA3.Size = New System.Drawing.Size(151, 50)
-        Me.ucrSelectorForA3.TabIndex = 8
-        '
-        'ucrSaveIndices
-        '
-        Me.ucrSaveIndices.Location = New System.Drawing.Point(9, 378)
-        Me.ucrSaveIndices.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveIndices.Name = "ucrSaveIndices"
-        Me.ucrSaveIndices.Size = New System.Drawing.Size(289, 22)
-        Me.ucrSaveIndices.TabIndex = 0
-        '
-        'ucrBase
-        '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 408)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 18
-        '
         'dlgClimaticNCMPRegionAverage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 465)
+        Me.ClientSize = New System.Drawing.Size(413, 433)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSaveIndices)
         Me.Controls.Add(Me.ucrSelectorForA3)
@@ -305,8 +279,6 @@ Partial Class dlgClimaticNCMPRegionAverage
     Friend WithEvents ucrChkOutputGridSquareData As ucrCheck
     Friend WithEvents lblRes As Label
     Friend WithEvents lblUNCode As Label
-    Friend WithEvents ucrNudNYB As ucrNud
-    Friend WithEvents lblNYBR As Label
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
     Friend WithEvents ucrSelectorForA3 As ucrDataFrame

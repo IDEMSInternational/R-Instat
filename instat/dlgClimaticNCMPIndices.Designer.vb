@@ -205,11 +205,13 @@ Partial Class dlgClimaticNCMPIndices
         '
         Me.grpOptions.Controls.Add(Me.ucrNudNYBR)
         Me.grpOptions.Controls.Add(Me.lblNYBR)
+        Me.grpOptions.Controls.Add(Me.lblNYER)
+        Me.grpOptions.Controls.Add(Me.ucrNudNYER)
         Me.grpOptions.Controls.Add(Me.ucrNudQCPR)
         Me.grpOptions.Controls.Add(Me.lblQCPR)
         Me.grpOptions.Controls.Add(Me.ucrNudQCT)
         Me.grpOptions.Controls.Add(Me.lblQCT)
-        Me.grpOptions.Location = New System.Drawing.Point(10, 204)
+        Me.grpOptions.Location = New System.Drawing.Point(10, 201)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(247, 131)
         Me.grpOptions.TabIndex = 13
@@ -220,7 +222,7 @@ Partial Class dlgClimaticNCMPIndices
         '
         Me.ucrNudNYBR.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYBR.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYBR.Location = New System.Drawing.Point(191, 76)
+        Me.ucrNudNYBR.Location = New System.Drawing.Point(191, 74)
         Me.ucrNudNYBR.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNYBR.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYBR.Name = "ucrNudNYBR"
@@ -232,7 +234,7 @@ Partial Class dlgClimaticNCMPIndices
         '
         Me.lblNYBR.AutoSize = True
         Me.lblNYBR.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNYBR.Location = New System.Drawing.Point(4, 78)
+        Me.lblNYBR.Location = New System.Drawing.Point(4, 77)
         Me.lblNYBR.Name = "lblNYBR"
         Me.lblNYBR.Size = New System.Drawing.Size(172, 13)
         Me.lblNYBR.TabIndex = 4
@@ -264,7 +266,7 @@ Partial Class dlgClimaticNCMPIndices
         '
         Me.ucrNudNYER.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYER.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYER.Location = New System.Drawing.Point(201, 306)
+        Me.ucrNudNYER.Location = New System.Drawing.Point(191, 100)
         Me.ucrNudNYER.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNYER.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYER.Name = "ucrNudNYER"
@@ -276,7 +278,7 @@ Partial Class dlgClimaticNCMPIndices
         '
         Me.lblNYER.AutoSize = True
         Me.lblNYER.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblNYER.Location = New System.Drawing.Point(14, 308)
+        Me.lblNYER.Location = New System.Drawing.Point(4, 102)
         Me.lblNYER.Name = "lblNYER"
         Me.lblNYER.Size = New System.Drawing.Size(169, 13)
         Me.lblNYER.TabIndex = 14
@@ -284,7 +286,7 @@ Partial Class dlgClimaticNCMPIndices
         '
         'ucrSaveIndices
         '
-        Me.ucrSaveIndices.Location = New System.Drawing.Point(10, 343)
+        Me.ucrSaveIndices.Location = New System.Drawing.Point(10, 276)
         Me.ucrSaveIndices.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveIndices.Name = "ucrSaveIndices"
         Me.ucrSaveIndices.Size = New System.Drawing.Size(289, 22)
@@ -292,7 +294,7 @@ Partial Class dlgClimaticNCMPIndices
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 373)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 306)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 16
@@ -301,12 +303,10 @@ Partial Class dlgClimaticNCMPIndices
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 431)
+        Me.ClientSize = New System.Drawing.Size(415, 365)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrSaveIndices)
-        Me.Controls.Add(Me.ucrNudNYER)
-        Me.Controls.Add(Me.lblNYER)
         Me.Controls.Add(Me.cmdStationMetadata)
+        Me.Controls.Add(Me.ucrSaveIndices)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverTmin)

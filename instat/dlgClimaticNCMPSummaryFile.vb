@@ -51,20 +51,6 @@ Public Class dlgClimaticNCMPSummaryFile
         ucrSelectorA6.SetParameterIsRFunction()
         ucrSelectorA6.lblDataFrame.Text = "Count Records Data Frames:"
 
-        ucrChkStartYear.SetText("Specify Start Year for Count Period")
-        ucrChkStartYear.AddToLinkedControls(ucrNudNYB, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrChkStartYear.SetDefaultState(False)
-
-        ucrChkEndYear.SetText("Specify End Year for Count Period")
-        ucrChkEndYear.AddToLinkedControls(ucrNudNYE, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrChkEndYear.SetDefaultState(False)
-
-        ucrNudNYB.SetParameter(New RParameter("nyb", 3))
-        ucrNudNYB.SetMinMax(1900) ' suitable min/max?
-
-        ucrNudNYE.SetParameter(New RParameter("nye", 4))
-        ucrNudNYE.SetMinMax(1900) ' suitable min/max?
-
         ucrInputFilePath.SetParameter(New RParameter("ncmp_folder", 5))
         ucrInputFilePath.IsReadOnly = True
     End Sub
@@ -88,7 +74,6 @@ Public Class dlgClimaticNCMPSummaryFile
 
     Private Sub TestOkEnabled()
         If ucrSelectorA2.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA4.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA6.cboAvailableDataFrames.Text = "" Then
-            ' add in checkbox options
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -131,7 +116,7 @@ Public Class dlgClimaticNCMPSummaryFile
         SelectLocationToSave()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorA2.ControlContentsChanged, ucrSelectorA4.ControlContentsChanged, ucrSelectorA6.ControlContentsChanged, ucrNudNYB.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrChkStartYear.ControlContentsChanged, ucrChkEndYear.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorA2.ControlContentsChanged, ucrSelectorA4.ControlContentsChanged, ucrSelectorA6.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

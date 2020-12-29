@@ -186,7 +186,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         Me.lblSaveFile.AutoSize = True
         Me.lblSaveFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSaveFile.Location = New System.Drawing.Point(7, 523)
+        Me.lblSaveFile.Location = New System.Drawing.Point(5, 399)
         Me.lblSaveFile.Name = "lblSaveFile"
         Me.lblSaveFile.Size = New System.Drawing.Size(86, 13)
         Me.lblSaveFile.TabIndex = 16
@@ -195,7 +195,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         'cmdChooseFile
         '
         Me.cmdChooseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdChooseFile.Location = New System.Drawing.Point(309, 519)
+        Me.cmdChooseFile.Location = New System.Drawing.Point(333, 395)
         Me.cmdChooseFile.Name = "cmdChooseFile"
         Me.cmdChooseFile.Size = New System.Drawing.Size(75, 23)
         Me.cmdChooseFile.TabIndex = 18
@@ -207,9 +207,9 @@ Partial Class dlgClimaticNCMPTrendGraphs
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(94, 520)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(90, 396)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(210, 21)
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(237, 21)
         Me.ucrInputFilePath.TabIndex = 17
         '
         'ucrNudNYEA
@@ -340,7 +340,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 548)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 424)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 19
@@ -349,15 +349,13 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(413, 603)
+        Me.ClientSize = New System.Drawing.Size(413, 481)
+        Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStation)
-        Me.Controls.Add(Me.lblSaveFile)
         Me.Controls.Add(Me.cmdChooseFile)
-        Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.lblNYER)
-        Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.lblLine)
         Me.Controls.Add(Me.lblYearA4)
         Me.Controls.Add(Me.ucrReceiverMonthA4)
@@ -370,6 +368,8 @@ Partial Class dlgClimaticNCMPTrendGraphs
         Me.Controls.Add(Me.lblMonthA2)
         Me.Controls.Add(Me.ucrReceiverYearA2)
         Me.Controls.Add(Me.ucrSelectorForA2)
+        Me.Controls.Add(Me.lblSaveFile)
+        Me.Controls.Add(Me.grpOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
