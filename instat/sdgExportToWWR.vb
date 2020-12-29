@@ -29,9 +29,9 @@ Public Class sdgExportToWWR
         ucrSelectorStationMetadata.SetParameter(New RParameter("station_data", 12))
         ucrSelectorStationMetadata.SetParameterIsrfunction()
 
-        ucrReceiverWNONumber.SetParameter(New RParameter("wmo_number", 13))
-        ucrReceiverWNONumber.Selector = ucrSelectorStationMetadata
-        ucrReceiverWNONumber.SetParameterIsString()
+        ucrReceiverWMONumber.SetParameter(New RParameter("wmo_number", 13))
+        ucrReceiverWMONumber.Selector = ucrSelectorStationMetadata
+        ucrReceiverWMONumber.SetParameterIsString()
 
         ucrReceiverLatitude.SetParameter(New RParameter("latitude", 14))
         ucrReceiverLatitude.Selector = ucrSelectorStationMetadata
@@ -58,6 +58,10 @@ Public Class sdgExportToWWR
         ucrReceiverBarometerHeight.Selector = ucrSelectorStationMetadata
         ucrReceiverBarometerHeight.SetParameterIsString()
 
+        ucrReceiverWIGOSIdentifier.SetParameter(New RParameter("wigos_identifier", 20))
+        ucrReceiverWIGOSIdentifier.Selector = ucrSelectorStationMetadata
+        ucrReceiverWIGOSIdentifier.SetParameterIsString()
+
         bControlsInitialised = False
     End Sub
 
@@ -70,12 +74,13 @@ Public Class sdgExportToWWR
 
         ucrSelectorStationMetadata.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
         ucrReceiverStationName.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
-        ucrReceiverWNONumber.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
+        ucrReceiverWMONumber.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
         ucrReceiverCountry.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
         ucrReceiverLatitude.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
         ucrReceiverLongitude.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
         ucrReceiverStationHeight.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
         ucrReceiverBarometerHeight.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
+        ucrReceiverWIGOSIdentifier.SetRCode(clsWWRExport, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             ucrSelectorStationMetadata.Reset()
@@ -84,7 +89,7 @@ Public Class sdgExportToWWR
     End Sub
 
     Private Sub ucrButtonsSdg_ClickReturn(sender As Object, e As EventArgs) Handles ucrButtonsSdg.ClickReturn
-        If ucrReceiverStationName.IsEmpty OrElse ucrReceiverWNONumber.IsEmpty OrElse ucrReceiverCountry.IsEmpty OrElse ucrReceiverLatitude.IsEmpty OrElse ucrReceiverLongitude.IsEmpty Then
+        If ucrReceiverStationName.IsEmpty OrElse ucrReceiverCountry.IsEmpty OrElse ucrReceiverLatitude.IsEmpty OrElse ucrReceiverLongitude.IsEmpty Then
             bOkEnabled = False
         Else
             bOkEnabled = True

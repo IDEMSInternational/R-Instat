@@ -97,7 +97,7 @@ Public Class dlgExportToWWR
         ucrInputLinkby.SetItems(dctStationIdentifier)
         ucrInputLinkby.SetDropDownStyleAsNonEditable()
 
-        ucrInputFilePath.SetParameter(New RParameter("folder", 20))
+        ucrInputFilePath.SetParameter(New RParameter("folder", 21))
         ucrInputFilePath.IsReadOnly = True
     End Sub
 

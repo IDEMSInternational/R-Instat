@@ -1573,11 +1573,11 @@ make_factor <- function(x, ordered = is.ordered(x)) {
 wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_pressure, 
                        mean_temp, total_precip, mean_max_temp, mean_min_temp, mean_rel_hum, link, link_by,
                        station_data, wmo_number, latitude, longitude, country_name, station_name, 
-                       height_station, height_barometer, folder) {
+                       height_station, height_barometer, wigos_identifier, folder) {
   
   stopifnot(link_by %in% c("wmo_number", "station_name"))
   if (any(nchar(station_data[[year]]) != 4)) stop("year must be a 4 digit number.")
-  if (any(nchar(station_data[[wmo_number]]) > 5, na.rm = TRUE)) stop("wmo_number must be no more than 5 digits.")
+  if (!missing(wmo_number) && any(nchar(station_data[[wmo_number]]) > 5, na.rm = TRUE)) stop("wmo_number must be no more than 5 digits.")
   
   if (link_by == "wmo_number") {
     station_link <- wmo_number
@@ -1587,7 +1587,13 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
          found in the data:",
          paste(which(!unique(data[[link]]) %in% station_data[[wmo_number]]), collapse = ", "))
   }
-  station_data[[wmo_number]] <- sprintf("%05d", station_data[[wmo_number]])
+  if (!missing(wmo_number)) {
+    station_data[[wmo_number]] <- ifelse(is.na(station_data[[wmo_number]]),
+                                         "", sprintf("%05d", station_data[[wmo_number]]))
+  } else {
+    wmo_number <- ".wmo_number"
+    station_data[[wmo_number]] <- ""
+  }
   station_data[[latitude]] <- dd_to_dms(station_data[[latitude]], lat = TRUE)
   station_data[[longitude]] <- dd_to_dms(station_data[[longitude]], lat = FALSE)
   if (!missing(height_station)) {
@@ -1603,6 +1609,10 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
   } else {
     height_barometer <- ".height_barometer"
     station_data[[height_barometer]] <- ""
+  }
+  if (missing(wigos_identifier)) {
+    wigos_identifier <- ".wigos_identifier"
+    station_data[[wigos_identifier]] <- ""
   }
   if (!missing(mean_station_pressure)) {
     df_2_means <- data %>%
@@ -1643,7 +1653,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
   if (!missing(total_precip)) {
     df_5_means <- data %>%
       dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
-      dplyr::summarise(mean = sprintf("%6s", format(sum(.data[[total_precip]], na.rm = TRUE), digits = 1, nsmall = 1)), .groups = "keep")
+      dplyr::summarise(mean = sprintf("%6s", format(summary_sum(.data[[total_precip]], na.rm = TRUE), digits = 1, nsmall = 1)), .groups = "keep")
     data[[total_precip]] <- ifelse(is.na(data[[total_precip]]), 
                                    "", ifelse(data[[total_precip]] <= 0.05, 0, format(data[[total_precip]], digits = 1, nsmall = 1)))
     data[[total_precip]] <- sprintf("%6s", data[[total_precip]])
@@ -1680,7 +1690,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
     if (any(data[[mean_rel_hum]] < 0 | data[[mean_rel_hum]] > 100, na.rm = TRUE)) stop("Mean Relative Humidity must be a percentage between 0 and 100.")
     df_8_means <- data %>%
       dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
-      dplyr::summarise(mean = sprintf("%6s", round(sum(.data[[mean_rel_hum]], na.rm = TRUE), 0)), .groups = "keep")
+      dplyr::summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_rel_hum]], na.rm = TRUE), 0)), .groups = "keep")
     data[[mean_rel_hum]] <- ifelse(is.na(data[[mean_rel_hum]]), 
                                    "", round(data[[mean_rel_hum]], 1))
     data[[mean_rel_hum]] <- sprintf("%6s", data[[mean_rel_hum]])
@@ -1691,8 +1701,8 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
   }
   
   month_header <- paste0("Year", " ", paste(c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", 
-                                              "Aug", "Sep", "Oct", "Nov", "Dec", "MEAN"), 
-                                            collapse = strrep(" ", 4)), strrep(" ", 2))
+                                              "Aug", "Sep", "Oct", "Nov", "Dec", "ANNUAL"), 
+                                            collapse = strrep(" ", 4)))
   for (i in seq_along(station_data[[station_link]])) {
     # filter data for single station
     curr_df <- data %>% dplyr::filter(.data[[link]] == station_data[[station_link]][i])
@@ -1713,9 +1723,11 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
                                   station_data[[height_station]][i]))
     lines <- append(lines, paste0("Barometer Height (meters, to tenths):", strrep(" ", 2),
                                   station_data[[height_barometer]][i]))
+    lines <- append(lines, paste0("WIGOS Station Identifier (WSI):", strrep(" ", 8),
+                                  station_data[[wigos_identifier]][i]))
     lines <- append(lines, "")
     if (!missing(mean_station_pressure)) {
-      lines <- append(lines, "(2) Mean Station Pressure (tenths of hPa)")
+      lines <- append(lines, "(2) Mean Station Pressure (precision to tenths of hPa)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
       lines <- append(lines, "")
@@ -1728,7 +1740,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_sea_level_pressure)) {
-      lines <- append(lines, "(3) Mean Sea Level Pressure (tenths of hPa)")
+      lines <- append(lines, "(3) Mean Sea Level Pressure (precision to tenths of hPa)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
       lines <- append(lines, "")
@@ -1741,7 +1753,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_temp)) {
-      lines <- append(lines, "(4) Mean Daily Air Temperature (tenths of degrees Celsius)")
+      lines <- append(lines, "(4) Mean Daily Air Temperature (precision to tenths of degrees Celsius)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
       lines <- append(lines, "")
@@ -1754,7 +1766,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(total_precip)) {
-      lines <- append(lines, "(5) Total Precipitation (tenths of mm)")
+      lines <- append(lines, "(5) Total Precipitation (precision to tenths of mm)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
       lines <- append(lines, "")
@@ -1767,7 +1779,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_max_temp)) {
-      lines <- append(lines, "(6) Mean Daily Maximum Air Temperature (tenths of degree Celsius)")
+      lines <- append(lines, "(6) Mean Daily Maximum Air Temperature (precision to tenths of degree Celsius)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
       lines <- append(lines, "")
@@ -1780,7 +1792,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
       lines <- append(lines, vals)
     }
     if (!missing(mean_min_temp)) {
-      lines <- append(lines, "(7) Mean Daily Minimum Air Temperature (tenths of degree Celsius)")
+      lines <- append(lines, "(7) Mean Daily Minimum Air Temperature (precision to tenths of degree Celsius)")
       lines <- append(lines, "")
       lines <- append(lines, month_header)
       lines <- append(lines, "")
@@ -1807,7 +1819,7 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
     }
     writeLines(lines, paste0(folder, "/", station_data[[station_link]][i], "-", format(Sys.time(), "%Y%m%d_%H%M%S"), ".txt"))
   }
-  cat("File(s) created at:", folder)
+  cat(i, "file(s) created at:", folder)
 }
 
 dd_to_dms <- function(x, lat) {

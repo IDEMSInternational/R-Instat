@@ -36,8 +36,10 @@ Partial Class sdgExportToWWR
         Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
         Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
         Me.ucrReceiverStationName = New instat.ucrReceiverSingle()
-        Me.ucrReceiverWNONumber = New instat.ucrReceiverSingle()
+        Me.ucrReceiverWMONumber = New instat.ucrReceiverSingle()
         Me.ucrSelectorStationMetadata = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.lblWIGOSIdentifier = New System.Windows.Forms.Label()
+        Me.ucrReceiverWIGOSIdentifier = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblStationName
@@ -105,7 +107,7 @@ Partial Class sdgExportToWWR
         '
         'ucrButtonsSdg
         '
-        Me.ucrButtonsSdg.Location = New System.Drawing.Point(127, 330)
+        Me.ucrButtonsSdg.Location = New System.Drawing.Point(127, 367)
         Me.ucrButtonsSdg.Name = "ucrButtonsSdg"
         Me.ucrButtonsSdg.Size = New System.Drawing.Size(142, 30)
         Me.ucrButtonsSdg.TabIndex = 15
@@ -184,15 +186,15 @@ Partial Class sdgExportToWWR
         '
         'ucrReceiverWNONumber
         '
-        Me.ucrReceiverWNONumber.frmParent = Me
-        Me.ucrReceiverWNONumber.Location = New System.Drawing.Point(248, 92)
-        Me.ucrReceiverWNONumber.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverWNONumber.Name = "ucrReceiverWNONumber"
-        Me.ucrReceiverWNONumber.Selector = Nothing
-        Me.ucrReceiverWNONumber.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverWNONumber.strNcFilePath = ""
-        Me.ucrReceiverWNONumber.TabIndex = 4
-        Me.ucrReceiverWNONumber.ucrSelector = Nothing
+        Me.ucrReceiverWMONumber.frmParent = Me
+        Me.ucrReceiverWMONumber.Location = New System.Drawing.Point(248, 92)
+        Me.ucrReceiverWMONumber.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWMONumber.Name = "ucrReceiverWNONumber"
+        Me.ucrReceiverWMONumber.Selector = Nothing
+        Me.ucrReceiverWMONumber.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWMONumber.strNcFilePath = ""
+        Me.ucrReceiverWMONumber.TabIndex = 4
+        Me.ucrReceiverWMONumber.ucrSelector = Nothing
         '
         'ucrSelectorStationMetadata
         '
@@ -205,11 +207,34 @@ Partial Class sdgExportToWWR
         Me.ucrSelectorStationMetadata.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorStationMetadata.TabIndex = 0
         '
+        'lblWIGOSIdentifier
+        '
+        Me.lblWIGOSIdentifier.AutoSize = True
+        Me.lblWIGOSIdentifier.Location = New System.Drawing.Point(248, 318)
+        Me.lblWIGOSIdentifier.Name = "lblWIGOSIdentifier"
+        Me.lblWIGOSIdentifier.Size = New System.Drawing.Size(126, 13)
+        Me.lblWIGOSIdentifier.TabIndex = 16
+        Me.lblWIGOSIdentifier.Text = "WIGOS Station Identifier:"
+        '
+        'ucrReceiverWIGOSIdentifier
+        '
+        Me.ucrReceiverWIGOSIdentifier.frmParent = Me
+        Me.ucrReceiverWIGOSIdentifier.Location = New System.Drawing.Point(248, 334)
+        Me.ucrReceiverWIGOSIdentifier.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverWIGOSIdentifier.Name = "ucrReceiverWIGOSIdentifier"
+        Me.ucrReceiverWIGOSIdentifier.Selector = Nothing
+        Me.ucrReceiverWIGOSIdentifier.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverWIGOSIdentifier.strNcFilePath = ""
+        Me.ucrReceiverWIGOSIdentifier.TabIndex = 17
+        Me.ucrReceiverWIGOSIdentifier.ucrSelector = Nothing
+        '
         'sdgExportToWWR
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(396, 365)
+        Me.ClientSize = New System.Drawing.Size(396, 402)
+        Me.Controls.Add(Me.lblWIGOSIdentifier)
+        Me.Controls.Add(Me.ucrReceiverWIGOSIdentifier)
         Me.Controls.Add(Me.ucrButtonsSdg)
         Me.Controls.Add(Me.lblBarometerHeight)
         Me.Controls.Add(Me.lblStationHeight)
@@ -224,7 +249,7 @@ Partial Class sdgExportToWWR
         Me.Controls.Add(Me.ucrReceiverLatitude)
         Me.Controls.Add(Me.ucrReceiverLongitude)
         Me.Controls.Add(Me.ucrReceiverStationName)
-        Me.Controls.Add(Me.ucrReceiverWNONumber)
+        Me.Controls.Add(Me.ucrReceiverWMONumber)
         Me.Controls.Add(Me.ucrSelectorStationMetadata)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -238,7 +263,7 @@ Partial Class sdgExportToWWR
     End Sub
 
     Friend WithEvents ucrSelectorStationMetadata As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverWNONumber As ucrReceiverSingle
+    Friend WithEvents ucrReceiverWMONumber As ucrReceiverSingle
     Friend WithEvents ucrReceiverStationName As ucrReceiverSingle
     Friend WithEvents lblStationName As Label
     Friend WithEvents ucrReceiverStationHeight As ucrReceiverSingle
@@ -253,4 +278,6 @@ Partial Class sdgExportToWWR
     Friend WithEvents lblCountry As Label
     Friend WithEvents lblWMONumber As Label
     Friend WithEvents ucrButtonsSdg As ucrButtonsSubdialogue
+    Friend WithEvents lblWIGOSIdentifier As Label
+    Friend WithEvents ucrReceiverWIGOSIdentifier As ucrReceiverSingle
 End Class
