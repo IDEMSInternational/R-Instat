@@ -80,11 +80,6 @@ Public Class dlgClimaticNCMPSummaryFile
         End If
     End Sub
 
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs)
-        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
-        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
