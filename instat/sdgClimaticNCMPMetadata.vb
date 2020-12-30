@@ -14,11 +14,14 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports System.ComponentModel
 Imports instat.Translations
+
 Public Class sdgClimaticNCMPMetadata
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsDefaultFunction As New RFunction
+    Public bOKEnabled As Boolean = True
     Private Sub sdgClimaticNCMPMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -54,5 +57,33 @@ Public Class sdgClimaticNCMPMetadata
         ucrReceiverLongitude.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
 
         bControlsInitialised = True
+    End Sub
+
+    Private Sub sdgClimaticNCMPMetadata_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Dim strMessage As String = ""
+        Dim bWarning As Boolean = False
+        Dim result As MsgBoxResult
+
+        If ucrReceiverStation.IsEmpty Then
+            strMessage = strMessage & Environment.NewLine & "Station Receiver is Empty"
+            bWarning = True
+        End If
+        If ucrReceiverLatitude.IsEmpty Then
+            strMessage = strMessage & Environment.NewLine & "Latitude Receiver is Empty"
+            bWarning = True
+        End If
+        If ucrReceiverLongitude.IsEmpty Then
+            strMessage = strMessage & Environment.NewLine & "Longitude Receiver is Empty"
+            bWarning = True
+        End If
+
+        If bWarning Then
+            result = MessageBox.Show(text:="Information missing. See details below. OK will not be enabled on the main dialog until resolved." & Environment.NewLine & "Are you sure you want to return to the main dialog?" & Environment.NewLine & strMessage, caption:="Missing information", buttons:=MessageBoxButtons.YesNo, icon:=MessageBoxIcon.Information)
+            If result = MsgBoxResult.No Then
+                e.Cancel = True
+            End If
+        End If
+
+        bOKEnabled = Not bWarning
     End Sub
 End Class

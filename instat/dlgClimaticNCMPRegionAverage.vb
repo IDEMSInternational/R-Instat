@@ -20,6 +20,7 @@ Public Class dlgClimaticNCMPRegionAverage
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
+    Private bSubDialogOKEnabled As Boolean = True
 
     Private Sub dlgClimaticNCMPRegionAverage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -108,6 +109,7 @@ Public Class dlgClimaticNCMPRegionAverage
         ucrInputResolution.SetName(1)
         ucrSaveIndices.Reset()
         bResetSubdialog = True
+        bSubDialogOKEnabled = False
 
         clsDefaultFunction.SetRCommand("p4_region_average")
         clsDefaultFunction.AddParameter("nye", 2019, iPosition:=11)
@@ -122,7 +124,7 @@ Public Class dlgClimaticNCMPRegionAverage
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYE.GetText = "" OrElse Not ucrSaveIndices.IsComplete OrElse ucrInputUNCode.IsEmpty Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYE.GetText = "" OrElse Not ucrSaveIndices.IsComplete OrElse ucrInputUNCode.IsEmpty OrElse Not bSubDialogOKEnabled Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -131,8 +133,10 @@ Public Class dlgClimaticNCMPRegionAverage
 
     Private Sub cmdStationMetadata_click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
         sdgClimaticNCMPMetadata.SetRFunction(clsDefaultFunction, bReset:=bResetSubdialog)
-        sdgClimaticNCMPMetadata.ShowDialog()
         bResetSubdialog = True
+        sdgClimaticNCMPMetadata.ShowDialog()
+        bSubDialogOKEnabled = sdgClimaticNCMPMetadata.bOKEnabled
+        TestOkEnabled()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputUNCode.ControlContentsChanged, ucrSaveIndices.ControlContentsChanged

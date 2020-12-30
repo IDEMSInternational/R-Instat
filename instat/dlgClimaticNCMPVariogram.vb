@@ -20,6 +20,7 @@ Public Class dlgClimaticNCMPVariogram
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
+    Private bSubDialogOKEnabled As Boolean = True
 
     Private Sub dlgClimaticNCMPVariogram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -86,6 +87,7 @@ Public Class dlgClimaticNCMPVariogram
         ucrInputFilePath.SetName("")
         ucrSaveVariogram.Reset()
         bResetSubdialog = True
+        bSubDialogOKEnabled = False
 
         clsDefaultFunction.SetRCommand("p3_variogram")
         clsDefaultFunction.SetAssignTo(ucrSaveVariogram.GetText(), strTempDataframe:=ucrSaveVariogram.GetText())
@@ -97,7 +99,7 @@ Public Class dlgClimaticNCMPVariogram
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse ucrInputFilePath.IsEmpty OrElse Not ucrSaveVariogram.IsComplete Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse ucrInputFilePath.IsEmpty OrElse Not ucrSaveVariogram.IsComplete OrElse Not bSubDialogOKEnabled Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -105,8 +107,10 @@ Public Class dlgClimaticNCMPVariogram
     End Sub
     Private Sub cmdStationMetadata_click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
         sdgClimaticNCMPMetadata.SetRFunction(clsDefaultFunction, bReset:=bResetSubdialog)
-        sdgClimaticNCMPMetadata.ShowDialog()
         bResetSubdialog = True
+        sdgClimaticNCMPMetadata.ShowDialog()
+        bSubDialogOKEnabled = sdgClimaticNCMPMetadata.bOKEnabled
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs)

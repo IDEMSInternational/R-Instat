@@ -20,6 +20,7 @@ Public Class dlgClimaticNCMPTrendGraphs
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
+    Private bSubDialogOKEnabled As Boolean = True
 
     Private Sub dlgClimaticNCMPTrendGraphs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -104,6 +105,7 @@ Public Class dlgClimaticNCMPTrendGraphs
         ucrReceiverYearA4.SetMeAsReceiver()
         ucrInputFilePath.Reset()
         ucrInputFilePath.SetName("")
+        bSubDialogOKEnabled = False
         bResetSubdialog = True
 
         clsDefaultFunction.SetRCommand("p5_trends_graphs")
@@ -115,7 +117,7 @@ Public Class dlgClimaticNCMPTrendGraphs
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYearA4.IsEmpty OrElse ucrReceiverMonthA4.IsEmpty OrElse ucrReceiverYearA2.IsEmpty OrElse ucrReceiverMonthA2.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse ucrInputFilePath.IsEmpty OrElse ucrNudNYBA.GetText = "" OrElse ucrNudNYEA.GetText = "" Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYearA4.IsEmpty OrElse ucrReceiverMonthA4.IsEmpty OrElse ucrReceiverYearA2.IsEmpty OrElse ucrReceiverMonthA2.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse ucrInputFilePath.IsEmpty OrElse ucrNudNYBA.GetText = "" OrElse ucrNudNYEA.GetText = "" OrElse Not bSubDialogOKEnabled Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -124,8 +126,10 @@ Public Class dlgClimaticNCMPTrendGraphs
 
     Private Sub cmdStationMetadata_click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
         sdgClimaticNCMPMetadata.SetRFunction(clsDefaultFunction, bReset:=bResetSubdialog)
-        sdgClimaticNCMPMetadata.ShowDialog()
         bResetSubdialog = True
+        sdgClimaticNCMPMetadata.ShowDialog()
+        bSubDialogOKEnabled = sdgClimaticNCMPMetadata.bOKEnabled
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs)

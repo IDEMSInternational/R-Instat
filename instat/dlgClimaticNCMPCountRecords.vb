@@ -20,6 +20,7 @@ Public Class dlgClimaticNCMPCountRecords
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
+    Private bSubDialogOKEnabled As Boolean = True
 
     Private Sub dlgClimaticNCMPCountRecords_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -80,6 +81,7 @@ Public Class dlgClimaticNCMPCountRecords
         ucrReceiverStation.SetMeAsReceiver()
         ucrSaveCountRecords.Reset()
         bResetSubdialog = True
+        bSubDialogOKEnabled = False
 
         clsDefaultFunction.SetRCommand("p6_count_records")
         clsDefaultFunction.SetAssignTo(ucrSaveCountRecords.GetText(), strTempDataframe:=ucrSaveCountRecords.GetText())
@@ -91,7 +93,7 @@ Public Class dlgClimaticNCMPCountRecords
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse Not ucrSaveCountRecords.IsComplete() Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse Not ucrSaveCountRecords.IsComplete() OrElse Not bSubDialogOKEnabled Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -100,8 +102,10 @@ Public Class dlgClimaticNCMPCountRecords
 
     Private Sub cmdStationMetadata_click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
         sdgClimaticNCMPMetadata.SetRFunction(clsDefaultFunction, bReset:=bResetSubdialog)
-        sdgClimaticNCMPMetadata.ShowDialog()
         bResetSubdialog = True
+        sdgClimaticNCMPMetadata.ShowDialog()
+        bSubDialogOKEnabled = sdgClimaticNCMPMetadata.bOKEnabled
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

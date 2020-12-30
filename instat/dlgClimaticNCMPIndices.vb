@@ -20,6 +20,7 @@ Public Class dlgClimaticNCMPIndices
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
+    Private bSubDialogOKEnabled As Boolean = True
 
     Private Sub dlgClimaticNCMPIndices_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -102,7 +103,7 @@ Public Class dlgClimaticNCMPIndices
         ucrSelectorIndices.Reset()
         ucrSaveIndices.Reset()
         ucrReceiverStation.SetMeAsReceiver()
-
+        bSubDialogOKEnabled = False
         bResetSubdialog = True
 
         clsDefaultFunction.SetRCommand("p2_indices")
@@ -115,7 +116,7 @@ Public Class dlgClimaticNCMPIndices
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse ucrReceiverRain.IsEmpty OrElse ucrReceiverTmax.IsEmpty OrElse ucrReceiverTmin.IsEmpty OrElse ucrNudQCT.GetText = "" OrElse ucrNudQCPR.GetText = "" OrElse ucrNudNYBR.GetText = "" OrElse ucrNudNYER.GetText = "" OrElse Not ucrSaveIndices.IsComplete Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse ucrReceiverRain.IsEmpty OrElse ucrReceiverTmax.IsEmpty OrElse ucrReceiverTmin.IsEmpty OrElse ucrNudQCT.GetText = "" OrElse ucrNudQCPR.GetText = "" OrElse ucrNudNYBR.GetText = "" OrElse ucrNudNYER.GetText = "" OrElse Not ucrSaveIndices.IsComplete OrElse Not bSubDialogOKEnabled Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -123,8 +124,10 @@ Public Class dlgClimaticNCMPIndices
     End Sub
     Private Sub cmdStationMetadata_click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
         sdgClimaticNCMPMetadata.SetRFunction(clsDefaultFunction, bReset:=bResetSubdialog)
-        sdgClimaticNCMPMetadata.ShowDialog()
         bResetSubdialog = True
+        sdgClimaticNCMPMetadata.ShowDialog()
+        bSubDialogOKEnabled = sdgClimaticNCMPMetadata.bOKEnabled
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
