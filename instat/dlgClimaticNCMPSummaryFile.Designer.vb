@@ -35,11 +35,11 @@ Partial Class dlgClimaticNCMPSummaryFile
         '
         Me.lblSaveFile.AutoSize = True
         Me.lblSaveFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSaveFile.Location = New System.Drawing.Point(7, 163)
+        Me.lblSaveFile.Location = New System.Drawing.Point(9, 163)
         Me.lblSaveFile.Name = "lblSaveFile"
-        Me.lblSaveFile.Size = New System.Drawing.Size(86, 13)
+        Me.lblSaveFile.Size = New System.Drawing.Size(74, 13)
         Me.lblSaveFile.TabIndex = 4
-        Me.lblSaveFile.Text = "Save Output To:"
+        Me.lblSaveFile.Text = "Save file(s) to:"
         '
         'cmdChooseFile
         '
