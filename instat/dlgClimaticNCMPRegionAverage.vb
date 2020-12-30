@@ -92,10 +92,10 @@ Public Class dlgClimaticNCMPRegionAverage
         ucrChkOutputGridSquareData.SetRDefault("FALSE")
 
         ' ucrsave
-        ucrSaveIndices.SetSaveTypeAsDataFrame()
-        ucrSaveIndices.SetLabelText("New Data Frame Name:")
-        ucrSaveIndices.SetIsTextBox()
-        ucrSaveIndices.SetPrefix("RegionAverage")
+        ucrSaveRA.SetSaveTypeAsDataFrame()
+        ucrSaveRA.SetLabelText("New Data Frame Name:")
+        ucrSaveRA.SetIsTextBox()
+        ucrSaveRA.SetPrefix("Region_Average")
     End Sub
 
     Private Sub SetDefaults()
@@ -107,15 +107,14 @@ Public Class dlgClimaticNCMPRegionAverage
         ucrInputUNCode.Reset()
         ucrInputUNCode.SetName("")
         ucrInputResolution.SetName(1)
-        ucrSaveIndices.Reset()
+        ucrSaveRA.Reset()
         bResetSubdialog = True
         bSubDialogOKEnabled = False
 
         clsDefaultFunction.SetRCommand("p4_region_average")
         clsDefaultFunction.AddParameter("nye", 2019, iPosition:=11)
         clsDefaultFunction.AddParameter("res", 1, iPosition:=14)
-
-        clsDefaultFunction.SetAssignTo(ucrSaveIndices.GetText(), strTempDataframe:=ucrSaveIndices.GetText())
+        clsDefaultFunction.SetAssignTo(ucrSaveRA.GetText(), strTempDataframe:=ucrSaveRA.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
@@ -124,7 +123,7 @@ Public Class dlgClimaticNCMPRegionAverage
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYE.GetText = "" OrElse Not ucrSaveIndices.IsComplete OrElse ucrInputUNCode.IsEmpty OrElse Not bSubDialogOKEnabled Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYE.GetText = "" OrElse Not ucrSaveRA.IsComplete OrElse ucrInputUNCode.IsEmpty OrElse Not bSubDialogOKEnabled Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -139,7 +138,7 @@ Public Class dlgClimaticNCMPRegionAverage
         TestOkEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputUNCode.ControlContentsChanged, ucrSaveIndices.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputUNCode.ControlContentsChanged, ucrSaveRA.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
