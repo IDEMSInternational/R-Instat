@@ -110,7 +110,7 @@ Partial Class sdgExportToWWR
         Me.ucrButtonsSdg.Location = New System.Drawing.Point(127, 367)
         Me.ucrButtonsSdg.Name = "ucrButtonsSdg"
         Me.ucrButtonsSdg.Size = New System.Drawing.Size(142, 30)
-        Me.ucrButtonsSdg.TabIndex = 15
+        Me.ucrButtonsSdg.TabIndex = 17
         '
         'ucrReceiverStationHeight
         '
@@ -184,12 +184,12 @@ Partial Class sdgExportToWWR
         Me.ucrReceiverStationName.TabIndex = 2
         Me.ucrReceiverStationName.ucrSelector = Nothing
         '
-        'ucrReceiverWNONumber
+        'ucrReceiverWMONumber
         '
         Me.ucrReceiverWMONumber.frmParent = Me
         Me.ucrReceiverWMONumber.Location = New System.Drawing.Point(248, 92)
         Me.ucrReceiverWMONumber.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverWMONumber.Name = "ucrReceiverWNONumber"
+        Me.ucrReceiverWMONumber.Name = "ucrReceiverWMONumber"
         Me.ucrReceiverWMONumber.Selector = Nothing
         Me.ucrReceiverWMONumber.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWMONumber.strNcFilePath = ""
@@ -213,7 +213,7 @@ Partial Class sdgExportToWWR
         Me.lblWIGOSIdentifier.Location = New System.Drawing.Point(248, 318)
         Me.lblWIGOSIdentifier.Name = "lblWIGOSIdentifier"
         Me.lblWIGOSIdentifier.Size = New System.Drawing.Size(126, 13)
-        Me.lblWIGOSIdentifier.TabIndex = 16
+        Me.lblWIGOSIdentifier.TabIndex = 15
         Me.lblWIGOSIdentifier.Text = "WIGOS Station Identifier:"
         '
         'ucrReceiverWIGOSIdentifier
@@ -225,7 +225,7 @@ Partial Class sdgExportToWWR
         Me.ucrReceiverWIGOSIdentifier.Selector = Nothing
         Me.ucrReceiverWIGOSIdentifier.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWIGOSIdentifier.strNcFilePath = ""
-        Me.ucrReceiverWIGOSIdentifier.TabIndex = 17
+        Me.ucrReceiverWIGOSIdentifier.TabIndex = 16
         Me.ucrReceiverWIGOSIdentifier.ucrSelector = Nothing
         '
         'sdgExportToWWR

@@ -93,7 +93,7 @@ Partial Class dlgExportToWWR
         Me.ucrReceiverMeanRelativeHumidity.Selector = Nothing
         Me.ucrReceiverMeanRelativeHumidity.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverMeanRelativeHumidity.strNcFilePath = ""
-        Me.ucrReceiverMeanRelativeHumidity.TabIndex = 23
+        Me.ucrReceiverMeanRelativeHumidity.TabIndex = 24
         Me.ucrReceiverMeanRelativeHumidity.ucrSelector = Nothing
         '
         'ucrReceiverPrecipitation
@@ -105,7 +105,7 @@ Partial Class dlgExportToWWR
         Me.ucrReceiverPrecipitation.Selector = Nothing
         Me.ucrReceiverPrecipitation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverPrecipitation.strNcFilePath = ""
-        Me.ucrReceiverPrecipitation.TabIndex = 17
+        Me.ucrReceiverPrecipitation.TabIndex = 18
         Me.ucrReceiverPrecipitation.ucrSelector = Nothing
         '
         'ucrReceiverMeanSeaLevelPressure
@@ -117,7 +117,7 @@ Partial Class dlgExportToWWR
         Me.ucrReceiverMeanSeaLevelPressure.Selector = Nothing
         Me.ucrReceiverMeanSeaLevelPressure.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverMeanSeaLevelPressure.strNcFilePath = ""
-        Me.ucrReceiverMeanSeaLevelPressure.TabIndex = 13
+        Me.ucrReceiverMeanSeaLevelPressure.TabIndex = 14
         Me.ucrReceiverMeanSeaLevelPressure.ucrSelector = Nothing
         '
         'ucrReceiverMeanMonthlyAirTemperature
@@ -129,7 +129,7 @@ Partial Class dlgExportToWWR
         Me.ucrReceiverMeanMonthlyAirTemperature.Selector = Nothing
         Me.ucrReceiverMeanMonthlyAirTemperature.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverMeanMonthlyAirTemperature.strNcFilePath = ""
-        Me.ucrReceiverMeanMonthlyAirTemperature.TabIndex = 15
+        Me.ucrReceiverMeanMonthlyAirTemperature.TabIndex = 16
         Me.ucrReceiverMeanMonthlyAirTemperature.ucrSelector = Nothing
         '
         'ucrReceiverMeanDailyMaxAirTemperature
@@ -141,7 +141,7 @@ Partial Class dlgExportToWWR
         Me.ucrReceiverMeanDailyMaxAirTemperature.Selector = Nothing
         Me.ucrReceiverMeanDailyMaxAirTemperature.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverMeanDailyMaxAirTemperature.strNcFilePath = ""
-        Me.ucrReceiverMeanDailyMaxAirTemperature.TabIndex = 19
+        Me.ucrReceiverMeanDailyMaxAirTemperature.TabIndex = 20
         Me.ucrReceiverMeanDailyMaxAirTemperature.ucrSelector = Nothing
         '
         'ucrReceiverMeanDailyMinAirTemperature
@@ -153,7 +153,7 @@ Partial Class dlgExportToWWR
         Me.ucrReceiverMeanDailyMinAirTemperature.Selector = Nothing
         Me.ucrReceiverMeanDailyMinAirTemperature.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverMeanDailyMinAirTemperature.strNcFilePath = ""
-        Me.ucrReceiverMeanDailyMinAirTemperature.TabIndex = 21
+        Me.ucrReceiverMeanDailyMinAirTemperature.TabIndex = 22
         Me.ucrReceiverMeanDailyMinAirTemperature.ucrSelector = Nothing
         '
         'ucrReceiverMonth
@@ -177,7 +177,7 @@ Partial Class dlgExportToWWR
         Me.ucrReceiverMeanStationPressure.Selector = Nothing
         Me.ucrReceiverMeanStationPressure.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverMeanStationPressure.strNcFilePath = ""
-        Me.ucrReceiverMeanStationPressure.TabIndex = 11
+        Me.ucrReceiverMeanStationPressure.TabIndex = 12
         Me.ucrReceiverMeanStationPressure.ucrSelector = Nothing
         '
         'lblStationIdentifier
@@ -195,7 +195,7 @@ Partial Class dlgExportToWWR
         Me.lblMeanDailyMinAirTemperature.Location = New System.Drawing.Point(190, 57)
         Me.lblMeanDailyMinAirTemperature.Name = "lblMeanDailyMinAirTemperature"
         Me.lblMeanDailyMinAirTemperature.Size = New System.Drawing.Size(173, 13)
-        Me.lblMeanDailyMinAirTemperature.TabIndex = 20
+        Me.lblMeanDailyMinAirTemperature.TabIndex = 21
         Me.lblMeanDailyMinAirTemperature.Text = "7. Mean Daily Min Air Temperature:"
         '
         'lblYear
@@ -222,7 +222,7 @@ Partial Class dlgExportToWWR
         Me.lblMeanStationPressure.Location = New System.Drawing.Point(6, 16)
         Me.lblMeanStationPressure.Name = "lblMeanStationPressure"
         Me.lblMeanStationPressure.Size = New System.Drawing.Size(129, 13)
-        Me.lblMeanStationPressure.TabIndex = 10
+        Me.lblMeanStationPressure.TabIndex = 11
         Me.lblMeanStationPressure.Text = "2. Mean Station Pressure:"
         '
         'lblMeanSeaLevelPressure
@@ -231,7 +231,7 @@ Partial Class dlgExportToWWR
         Me.lblMeanSeaLevelPressure.Location = New System.Drawing.Point(6, 57)
         Me.lblMeanSeaLevelPressure.Name = "lblMeanSeaLevelPressure"
         Me.lblMeanSeaLevelPressure.Size = New System.Drawing.Size(144, 13)
-        Me.lblMeanSeaLevelPressure.TabIndex = 12
+        Me.lblMeanSeaLevelPressure.TabIndex = 13
         Me.lblMeanSeaLevelPressure.Text = "3. Mean Sea Level Pressure:"
         '
         'lblMeanMonthlyAirTemperature
@@ -240,7 +240,7 @@ Partial Class dlgExportToWWR
         Me.lblMeanMonthlyAirTemperature.Location = New System.Drawing.Point(6, 98)
         Me.lblMeanMonthlyAirTemperature.Name = "lblMeanMonthlyAirTemperature"
         Me.lblMeanMonthlyAirTemperature.Size = New System.Drawing.Size(153, 13)
-        Me.lblMeanMonthlyAirTemperature.TabIndex = 14
+        Me.lblMeanMonthlyAirTemperature.TabIndex = 15
         Me.lblMeanMonthlyAirTemperature.Text = "4. Mean Daily Air Temperature:"
         '
         'lblPrecipitation
@@ -249,7 +249,7 @@ Partial Class dlgExportToWWR
         Me.lblPrecipitation.Location = New System.Drawing.Point(6, 139)
         Me.lblPrecipitation.Name = "lblPrecipitation"
         Me.lblPrecipitation.Size = New System.Drawing.Size(110, 13)
-        Me.lblPrecipitation.TabIndex = 16
+        Me.lblPrecipitation.TabIndex = 17
         Me.lblPrecipitation.Text = " 5. Total Precipitation:"
         '
         'lblMeanDailyMaxAirTemperature
@@ -258,7 +258,7 @@ Partial Class dlgExportToWWR
         Me.lblMeanDailyMaxAirTemperature.Location = New System.Drawing.Point(190, 16)
         Me.lblMeanDailyMaxAirTemperature.Name = "lblMeanDailyMaxAirTemperature"
         Me.lblMeanDailyMaxAirTemperature.Size = New System.Drawing.Size(176, 13)
-        Me.lblMeanDailyMaxAirTemperature.TabIndex = 18
+        Me.lblMeanDailyMaxAirTemperature.TabIndex = 19
         Me.lblMeanDailyMaxAirTemperature.Text = "6. Mean Daily Max Air Temperature:"
         '
         'lblMeanRelativeHumidity
@@ -267,7 +267,7 @@ Partial Class dlgExportToWWR
         Me.lblMeanRelativeHumidity.Location = New System.Drawing.Point(190, 98)
         Me.lblMeanRelativeHumidity.Name = "lblMeanRelativeHumidity"
         Me.lblMeanRelativeHumidity.Size = New System.Drawing.Size(160, 13)
-        Me.lblMeanRelativeHumidity.TabIndex = 22
+        Me.lblMeanRelativeHumidity.TabIndex = 23
         Me.lblMeanRelativeHumidity.Text = "8. Mean Daily Relative Humidity:"
         '
         'cmdStationMetadata
@@ -359,7 +359,7 @@ Partial Class dlgExportToWWR
         Me.grpElements.Location = New System.Drawing.Point(9, 190)
         Me.grpElements.Name = "grpElements"
         Me.grpElements.Size = New System.Drawing.Size(399, 180)
-        Me.grpElements.TabIndex = 28
+        Me.grpElements.TabIndex = 10
         Me.grpElements.TabStop = False
         Me.grpElements.Text = "Elements"
         '
