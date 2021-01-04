@@ -106,12 +106,14 @@ Public Class dlgDisplayDailyData
 
 
         ucrInputGraphRugColur.SetParameter(New RParameter("colour", 1))
-        dctGRugColour.Add("Red", Chr(34) & "red" & Chr(34))
         dctGRugColour.Add("Black", Chr(34) & "black" & Chr(34))
+        dctGRugColour.Add("Red", Chr(34) & "red" & Chr(34))
         dctGRugColour.Add("Blue", Chr(34) & "blue" & Chr(34))
         dctGRugColour.Add("Yellow", Chr(34) & "yellow" & Chr(34))
         dctGRugColour.Add("Green", Chr(34) & "green" & Chr(34))
         dctGRugColour.Add("Violet", Chr(34) & "violet" & Chr(34))
+        dctGRugColour.Add("White", Chr(34) & "white" & Chr(34))
+        dctGRugColour.Add("None", Chr(34) & "none" & Chr(34))
         ucrInputGraphRugColur.SetItems(dctGRugColour)
         ucrInputGraphRugColur.bAllowNonConditionValues = True
 
@@ -310,7 +312,7 @@ Public Class dlgDisplayDailyData
         clsGeomRugFunction.SetPackageName("ggplot2")
         clsGeomRugFunction.SetRCommand("geom_rug")
         clsGeomRugFunction.AddParameter("data", clsROperatorParameter:=clsNAFilterOperator, iPosition:=0)
-        clsGeomRugFunction.AddParameter("colour", Chr(34) & "red" & Chr(34), iPosition:=1)
+        clsGeomRugFunction.AddParameter("colour", Chr(34) & "black" & Chr(34), iPosition:=1)
 
         clsThemeGreyFunction.SetRCommand("theme_grey")
 
@@ -348,7 +350,6 @@ Public Class dlgDisplayDailyData
 
         ucrBase.clsRsyntax.SetBaseROperator(clsGgPlotOperator)
 
-        SetFacetItems()
 
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
@@ -562,5 +563,14 @@ Public Class dlgDisplayDailyData
     Private Sub ucrSelectorDisplayDailyClimaticData_DataFrameChanged() Handles ucrSelectorDisplayDailyClimaticData.DataFrameChanged
         clsGGplotFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         clsNAFilterOperator.AddParameter("data", clsRFunctionParameter:=ucrSelectorDisplayDailyClimaticData.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+    End Sub
+
+    Private Sub ucrInputGraphRugColur_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphRugColur.ControlValueChanged
+        If ucrInputGraphRugColur.GetText = "None" Then
+            clsGgPlotOperator.RemoveParameterByName("geom_rug")
+        Else
+
+            clsGgPlotOperator.AddParameter("geom_rug", clsRFunctionParameter:=clsGeomRugFunction, iPosition:=2)
+        End If
     End Sub
 End Class
