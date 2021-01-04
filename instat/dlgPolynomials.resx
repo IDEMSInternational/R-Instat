@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblDegree.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 93</value>
+    <value>248, 93</value>
   </data>
   <data name="lblDegree.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
@@ -259,7 +259,7 @@
     <value>3</value>
   </data>
   <data name="grpType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 119</value>
+    <value>248, 119</value>
   </data>
   <data name="grpType.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 98</value>
@@ -283,7 +283,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudDegree.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 90</value>
+    <value>318, 90</value>
   </data>
   <data name="ucrNudDegree.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -306,8 +306,11 @@
   <data name="ucrSavePoly.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 222</value>
   </data>
+  <data name="ucrSavePoly.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrSavePoly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 24</value>
+    <value>358, 24</value>
   </data>
   <data name="ucrSavePoly.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -361,7 +364,7 @@
     <value>True</value>
   </data>
   <data name="lblSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 45</value>
+    <value>248, 45</value>
   </data>
   <data name="lblSelectedVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -418,7 +421,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverPolynomial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 60</value>
+    <value>248, 60</value>
   </data>
   <data name="ucrReceiverPolynomial.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 48</value>
+    <value>240, 45</value>
   </data>
   <data name="lblColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 13</value>
@@ -148,13 +148,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblColumn.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="ucrChkFilterNonumerics.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 226</value>
+    <value>10, 221</value>
   </data>
   <data name="ucrChkFilterNonumerics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 20</value>
+    <value>314, 20</value>
   </data>
   <data name="ucrChkFilterNonumerics.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -169,10 +169,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkFilterNonumerics.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="ucrChkShowSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 226</value>
+    <value>10, 196</value>
   </data>
   <data name="ucrChkShowSummary.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 20</value>
@@ -190,7 +190,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkShowSummary.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -199,55 +199,34 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>416, 352</value>
+    <value>419, 333</value>
   </data>
-  <data name="lblColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 262</value>
+  <data name="ucrSaveColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 247</value>
   </data>
-  <data name="lblColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 13</value>
+  <data name="ucrSaveColumn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
-  <data name="lblColumnName.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="ucrSaveColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 21</value>
   </data>
-  <data name="lblColumnName.Text" xml:space="preserve">
-    <value>Logical column:</value>
+  <data name="ucrSaveColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
-  <data name="&gt;&gt;lblColumnName.Name" xml:space="preserve">
-    <value>lblColumnName</value>
+  <data name="&gt;&gt;ucrSaveColumn.Name" xml:space="preserve">
+    <value>ucrSaveColumn</value>
   </data>
-  <data name="&gt;&gt;lblColumnName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ucrSaveColumn.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;lblColumnName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrSaveColumn.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblColumnName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrSaveColumn.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrInputColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>134, 259</value>
-  </data>
-  <data name="ucrInputColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
-  </data>
-  <data name="ucrInputColumnName.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColumnName.Name" xml:space="preserve">
-    <value>ucrInputColumnName</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColumnName.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColumnName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputColumnName.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="ucrSelectorShowNonNumericValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 28</value>
+    <value>10, 10</value>
   </data>
   <data name="ucrSelectorShowNonNumericValues.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -268,10 +247,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorShowNonNumericValues.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 292</value>
+    <value>10, 274</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -289,13 +268,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Find non numeric values</value>
+    <value>Find Non-Numeric Values</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgFindNonnumericValues</value>
@@ -304,7 +283,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>240, 64</value>
+    <value>240, 60</value>
   </data>
   <data name="ucrReceiverColumn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -325,6 +304,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverColumn.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
 </root>
