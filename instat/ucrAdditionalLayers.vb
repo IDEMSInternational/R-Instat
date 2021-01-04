@@ -40,7 +40,6 @@ Public Class ucrAdditionalLayers
         SetLayersList()
         strGlobalDataFrame = strNewGlobalDataFrame
         strMainDialogGeomNames = strMainDialogGeomParameterNames
-        SetEditDeleteEnabled()
     End Sub
 
     Private Sub SetLayersList()
@@ -51,6 +50,8 @@ Public Class ucrAdditionalLayers
         lstLayers.Clear()
         lstLayerComplete.Clear()
         lstLayers.HideSelection = False
+        'this ensures that the edit and delete buttons are disable in the general graphics dialogue during reset
+        SetEditDeleteEnabled()
 
         ' Sort parameters first so layers are in correct order
         clsBaseOperator.SortParameters()
