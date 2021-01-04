@@ -577,10 +577,8 @@ Public Class dlgOneVarFitModel
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        bRCodeSet = False
         SetDefaults()
         SetRCodeForControls(True)
-        bRCodeSet = True
         TestOKEnabled()
     End Sub
 
