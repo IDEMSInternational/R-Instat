@@ -108,6 +108,7 @@ Partial Class sdgPlots
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkDrop = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -136,6 +137,7 @@ Partial Class sdgPlots
         '
         'tbpFacet
         '
+        Me.tbpFacet.Controls.Add(Me.ucrChkDrop)
         Me.tbpFacet.Controls.Add(Me.ucrNudNumberofRows)
         Me.tbpFacet.Controls.Add(Me.ucrChkNoOfRowsOrColumns)
         Me.tbpFacet.Controls.Add(Me.ucrChkIncludeFacets)
@@ -504,6 +506,7 @@ Partial Class sdgPlots
         'ucrInputLegendPosition
         '
         Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLegendPosition, "ucrInputLegendPosition")
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
@@ -558,6 +561,7 @@ Partial Class sdgPlots
         'ucrInputThemes
         '
         Me.ucrInputThemes.AddQuotesIfUnrecognised = True
+        Me.ucrInputThemes.GetSetSelectedIndex = -1
         Me.ucrInputThemes.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputThemes, "ucrInputThemes")
         Me.ucrInputThemes.Name = "ucrInputThemes"
@@ -587,6 +591,7 @@ Partial Class sdgPlots
         'ucrInputPolarCoordinates
         '
         Me.ucrInputPolarCoordinates.AddQuotesIfUnrecognised = True
+        Me.ucrInputPolarCoordinates.GetSetSelectedIndex = -1
         Me.ucrInputPolarCoordinates.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputPolarCoordinates, "ucrInputPolarCoordinates")
         Me.ucrInputPolarCoordinates.Name = "ucrInputPolarCoordinates"
@@ -643,6 +648,12 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        '
+        'ucrChkDrop
+        '
+        Me.ucrChkDrop.Checked = False
+        resources.ApplyResources(Me.ucrChkDrop, "ucrChkDrop")
+        Me.ucrChkDrop.Name = "ucrChkDrop"
         '
         'sdgPlots
         '
@@ -746,6 +757,7 @@ Partial Class sdgPlots
     Friend WithEvents lblStartingAngle As Label
     Friend WithEvents ucrInputPolarCoordinates As ucrInputComboBox
     Friend WithEvents lblPolarCoordinate As Label
+    Friend WithEvents ucrChkDrop As ucrCheck
 End Class
 
 
