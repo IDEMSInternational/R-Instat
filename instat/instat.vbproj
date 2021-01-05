@@ -214,6 +214,42 @@
     <Compile Include="dlgCircularScatterPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimaticNCMPCountRecords.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPCountRecords.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPIndices.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPIndices.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPIndices.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPRegionAverage.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPRegionAverage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPRegionAverage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPSummaryFile.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPSummaryFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPSummaryFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPTrendGraphs.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPTrendGraphs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPTrendGraphs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPVariogram.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPVariogram.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPVariogram.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimsoftWizard.Designer.vb">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </Compile>
@@ -320,6 +356,12 @@
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgWindPollutionRose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgClimaticNCMPMetadata.Designer.vb">
+      <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticNCMPMetadata.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgExportToWWR.Designer.vb">
@@ -2662,6 +2704,24 @@
     <EmbeddedResource Include="dlgCircularScatterPlot.resx">
       <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPCountRecords.resx">
+      <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPIndices.resx">
+      <DependentUpon>dlgClimaticNCMPIndices.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPRegionAverage.resx">
+      <DependentUpon>dlgClimaticNCMPRegionAverage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPSummaryFile.resx">
+      <DependentUpon>dlgClimaticNCMPSummaryFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPTrendGraphs.resx">
+      <DependentUpon>dlgClimaticNCMPTrendGraphs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPVariogram.resx">
+      <DependentUpon>dlgClimaticNCMPVariogram.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
@@ -2716,6 +2776,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimaticNCMPMetadata.resx">
+      <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgExportToWWR.resx">
       <DependentUpon>sdgExportToWWR.vb</DependentUpon>
@@ -5280,6 +5343,24 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="static\Library\Climatic\climatic_guide_datasets.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P2_Indices.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P3_Variogram.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P4_Region_Average.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P5_Trends_Graphs.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P6_Count_Records.R">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P7_Summary.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

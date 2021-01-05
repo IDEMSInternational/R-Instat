@@ -285,9 +285,6 @@
   <data name="&gt;&gt;rdoGraph.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
-  <data name="cmdInventoryPlotOptions.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="cmdInventoryPlotOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -1136,9 +1133,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>23</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

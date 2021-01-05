@@ -48,17 +48,13 @@ Partial Class dlgDisplayDailyData
         Me.lblDayOfTheYear = New System.Windows.Forms.Label()
         Me.lblYaxisUpper = New System.Windows.Forms.Label()
         Me.grpGraph = New System.Windows.Forms.GroupBox()
+        Me.ucrInputRugColour = New instat.ucrInputComboBox()
         Me.lblRugColor = New System.Windows.Forms.Label()
+        Me.ucrInputBarColour = New instat.ucrInputComboBox()
         Me.lblBarColour = New System.Windows.Forms.Label()
+        Me.ucrNudUpperYaxis = New instat.ucrNud()
         Me.lblElements = New System.Windows.Forms.Label()
         Me.grpSummary = New System.Windows.Forms.GroupBox()
-        Me.grpFacet = New System.Windows.Forms.GroupBox()
-        Me.lblScales = New System.Windows.Forms.Label()
-        Me.lblFacetby = New System.Windows.Forms.Label()
-        Me.rdoGraphByYear = New System.Windows.Forms.RadioButton()
-        Me.lblGRugColour = New System.Windows.Forms.Label()
-        Me.ucrSaveGraph = New instat.ucrSave()
-        Me.ucrInputGraphRugColur = New instat.ucrInputComboBox()
         Me.ucrChkSumMissing = New instat.ucrCheck()
         Me.ucrChkMax = New instat.ucrCheck()
         Me.ucrChkIQR = New instat.ucrCheck()
@@ -66,20 +62,21 @@ Partial Class dlgDisplayDailyData
         Me.ucrChkSum = New instat.ucrCheck()
         Me.ucrChkMin = New instat.ucrCheck()
         Me.ucrChkMean = New instat.ucrCheck()
-        Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrInputComboZero = New instat.ucrInputComboBox()
-        Me.ucrInputRugColour = New instat.ucrInputComboBox()
-        Me.ucrInputBarColour = New instat.ucrInputComboBox()
-        Me.ucrNudUpperYaxis = New instat.ucrNud()
+        Me.grpFacet = New System.Windows.Forms.GroupBox()
+        Me.lblScales = New System.Windows.Forms.Label()
         Me.ucrInputScale = New instat.ucrInputComboBox()
+        Me.lblFacetby = New System.Windows.Forms.Label()
         Me.ucrNudNumberOfColumns = New instat.ucrNud()
         Me.ucrInputFacetBy = New instat.ucrInputComboBox()
         Me.ucrChkNumberOfColumns = New instat.ucrCheck()
+        Me.rdoGraphByYear = New System.Windows.Forms.RadioButton()
+        Me.lblGRugColour = New System.Windows.Forms.Label()
+        Me.ucrInputGraphRugColur = New instat.ucrInputComboBox()
+        Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrInputComboMissing = New instat.ucrInputComboBox()
         Me.ucrInputComboTrace = New instat.ucrInputComboBox()
         Me.ucrChkMissing = New instat.ucrCheck()
-        Me.ucrChkZero = New instat.ucrCheck()
         Me.ucrChkTrace = New instat.ucrCheck()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDayOfYear = New instat.ucrReceiverSingle()
@@ -89,6 +86,10 @@ Partial Class dlgDisplayDailyData
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverSingleElements = New instat.ucrReceiverSingle()
+        Me.ucrChkZero = New instat.ucrCheck()
+        Me.ucrInputComboZero = New instat.ucrInputComboBox()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.cmdDispalyDailyOptions = New System.Windows.Forms.Button()
         Me.grpGraph.SuspendLayout()
         Me.grpSummary.SuspendLayout()
         Me.grpFacet.SuspendLayout()
@@ -156,15 +157,41 @@ Partial Class dlgDisplayDailyData
         Me.grpGraph.Name = "grpGraph"
         Me.grpGraph.TabStop = False
         '
+        'ucrInputRugColour
+        '
+        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputRugColour.GetSetSelectedIndex = -1
+        Me.ucrInputRugColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputRugColour, "ucrInputRugColour")
+        Me.ucrInputRugColour.Name = "ucrInputRugColour"
+        '
         'lblRugColor
         '
         resources.ApplyResources(Me.lblRugColor, "lblRugColor")
         Me.lblRugColor.Name = "lblRugColor"
         '
+        'ucrInputBarColour
+        '
+        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarColour.GetSetSelectedIndex = -1
+        Me.ucrInputBarColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputBarColour, "ucrInputBarColour")
+        Me.ucrInputBarColour.Name = "ucrInputBarColour"
+        '
         'lblBarColour
         '
         resources.ApplyResources(Me.lblBarColour, "lblBarColour")
         Me.lblBarColour.Name = "lblBarColour"
+        '
+        'ucrNudUpperYaxis
+        '
+        Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudUpperYaxis, "ucrNudUpperYaxis")
+        Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
+        Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblElements
         '
@@ -183,55 +210,6 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.grpSummary, "grpSummary")
         Me.grpSummary.Name = "grpSummary"
         Me.grpSummary.TabStop = False
-        '
-        'grpFacet
-        '
-        Me.grpFacet.Controls.Add(Me.lblScales)
-        Me.grpFacet.Controls.Add(Me.ucrInputScale)
-        Me.grpFacet.Controls.Add(Me.lblFacetby)
-        Me.grpFacet.Controls.Add(Me.ucrNudNumberOfColumns)
-        Me.grpFacet.Controls.Add(Me.ucrInputFacetBy)
-        Me.grpFacet.Controls.Add(Me.ucrChkNumberOfColumns)
-        resources.ApplyResources(Me.grpFacet, "grpFacet")
-        Me.grpFacet.Name = "grpFacet"
-        Me.grpFacet.TabStop = False
-        '
-        'lblScales
-        '
-        resources.ApplyResources(Me.lblScales, "lblScales")
-        Me.lblScales.Name = "lblScales"
-        '
-        'lblFacetby
-        '
-        resources.ApplyResources(Me.lblFacetby, "lblFacetby")
-        Me.lblFacetby.Name = "lblFacetby"
-        '
-        'rdoGraphByYear
-        '
-        resources.ApplyResources(Me.rdoGraphByYear, "rdoGraphByYear")
-        Me.rdoGraphByYear.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGraphByYear.FlatAppearance.BorderSize = 2
-        Me.rdoGraphByYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoGraphByYear.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.rdoGraphByYear.Name = "rdoGraphByYear"
-        Me.rdoGraphByYear.UseVisualStyleBackColor = True
-        '
-        'lblGRugColour
-        '
-        resources.ApplyResources(Me.lblGRugColour, "lblGRugColour")
-        Me.lblGRugColour.Name = "lblGRugColour"
-        '
-        'ucrSaveGraph
-        '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        '
-        'ucrInputGraphRugColur
-        '
-        Me.ucrInputGraphRugColur.AddQuotesIfUnrecognised = True
-        Me.ucrInputGraphRugColur.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputGraphRugColur, "ucrInputGraphRugColur")
-        Me.ucrInputGraphRugColur.Name = "ucrInputGraphRugColur"
         '
         'ucrChkSumMissing
         '
@@ -275,6 +253,83 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.ucrChkMean, "ucrChkMean")
         Me.ucrChkMean.Name = "ucrChkMean"
         '
+        'grpFacet
+        '
+        Me.grpFacet.Controls.Add(Me.lblScales)
+        Me.grpFacet.Controls.Add(Me.ucrInputScale)
+        Me.grpFacet.Controls.Add(Me.lblFacetby)
+        Me.grpFacet.Controls.Add(Me.ucrNudNumberOfColumns)
+        Me.grpFacet.Controls.Add(Me.ucrInputFacetBy)
+        Me.grpFacet.Controls.Add(Me.ucrChkNumberOfColumns)
+        resources.ApplyResources(Me.grpFacet, "grpFacet")
+        Me.grpFacet.Name = "grpFacet"
+        Me.grpFacet.TabStop = False
+        '
+        'lblScales
+        '
+        resources.ApplyResources(Me.lblScales, "lblScales")
+        Me.lblScales.Name = "lblScales"
+        '
+        'ucrInputScale
+        '
+        Me.ucrInputScale.AddQuotesIfUnrecognised = True
+        Me.ucrInputScale.GetSetSelectedIndex = -1
+        Me.ucrInputScale.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputScale, "ucrInputScale")
+        Me.ucrInputScale.Name = "ucrInputScale"
+        '
+        'lblFacetby
+        '
+        resources.ApplyResources(Me.lblFacetby, "lblFacetby")
+        Me.lblFacetby.Name = "lblFacetby"
+        '
+        'ucrNudNumberOfColumns
+        '
+        Me.ucrNudNumberOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNumberOfColumns, "ucrNudNumberOfColumns")
+        Me.ucrNudNumberOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfColumns.Name = "ucrNudNumberOfColumns"
+        Me.ucrNudNumberOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputFacetBy
+        '
+        Me.ucrInputFacetBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputFacetBy.GetSetSelectedIndex = -1
+        Me.ucrInputFacetBy.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFacetBy, "ucrInputFacetBy")
+        Me.ucrInputFacetBy.Name = "ucrInputFacetBy"
+        '
+        'ucrChkNumberOfColumns
+        '
+        Me.ucrChkNumberOfColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkNumberOfColumns, "ucrChkNumberOfColumns")
+        Me.ucrChkNumberOfColumns.Name = "ucrChkNumberOfColumns"
+        '
+        'rdoGraphByYear
+        '
+        resources.ApplyResources(Me.rdoGraphByYear, "rdoGraphByYear")
+        Me.rdoGraphByYear.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGraphByYear.FlatAppearance.BorderSize = 2
+        Me.rdoGraphByYear.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGraphByYear.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoGraphByYear.Name = "rdoGraphByYear"
+        Me.rdoGraphByYear.UseVisualStyleBackColor = True
+        '
+        'lblGRugColour
+        '
+        resources.ApplyResources(Me.lblGRugColour, "lblGRugColour")
+        Me.lblGRugColour.Name = "lblGRugColour"
+        '
+        'ucrInputGraphRugColur
+        '
+        Me.ucrInputGraphRugColur.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphRugColur.GetSetSelectedIndex = -1
+        Me.ucrInputGraphRugColur.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputGraphRugColur, "ucrInputGraphRugColur")
+        Me.ucrInputGraphRugColur.Name = "ucrInputGraphRugColur"
+        '
         'ucrReceiverMultipleElements
         '
         Me.ucrReceiverMultipleElements.frmParent = Me
@@ -293,70 +348,10 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverElement.strNcFilePath = ""
         Me.ucrReceiverElement.ucrSelector = Nothing
         '
-        'ucrInputComboZero
-        '
-        Me.ucrInputComboZero.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboZero.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboZero, "ucrInputComboZero")
-        Me.ucrInputComboZero.Name = "ucrInputComboZero"
-        '
-        'ucrInputRugColour
-        '
-        Me.ucrInputRugColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputRugColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputRugColour, "ucrInputRugColour")
-        Me.ucrInputRugColour.Name = "ucrInputRugColour"
-        '
-        'ucrInputBarColour
-        '
-        Me.ucrInputBarColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputBarColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputBarColour, "ucrInputBarColour")
-        Me.ucrInputBarColour.Name = "ucrInputBarColour"
-        '
-        'ucrNudUpperYaxis
-        '
-        Me.ucrNudUpperYaxis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudUpperYaxis, "ucrNudUpperYaxis")
-        Me.ucrNudUpperYaxis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudUpperYaxis.Name = "ucrNudUpperYaxis"
-        Me.ucrNudUpperYaxis.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputScale
-        '
-        Me.ucrInputScale.AddQuotesIfUnrecognised = True
-        Me.ucrInputScale.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputScale, "ucrInputScale")
-        Me.ucrInputScale.Name = "ucrInputScale"
-        '
-        'ucrNudNumberOfColumns
-        '
-        Me.ucrNudNumberOfColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberOfColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNumberOfColumns, "ucrNudNumberOfColumns")
-        Me.ucrNudNumberOfColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNumberOfColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberOfColumns.Name = "ucrNudNumberOfColumns"
-        Me.ucrNudNumberOfColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputFacetBy
-        '
-        Me.ucrInputFacetBy.AddQuotesIfUnrecognised = True
-        Me.ucrInputFacetBy.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFacetBy, "ucrInputFacetBy")
-        Me.ucrInputFacetBy.Name = "ucrInputFacetBy"
-        '
-        'ucrChkNumberOfColumns
-        '
-        Me.ucrChkNumberOfColumns.Checked = False
-        resources.ApplyResources(Me.ucrChkNumberOfColumns, "ucrChkNumberOfColumns")
-        Me.ucrChkNumberOfColumns.Name = "ucrChkNumberOfColumns"
-        '
         'ucrInputComboMissing
         '
         Me.ucrInputComboMissing.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMissing.GetSetSelectedIndex = -1
         Me.ucrInputComboMissing.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboMissing, "ucrInputComboMissing")
         Me.ucrInputComboMissing.Name = "ucrInputComboMissing"
@@ -364,6 +359,7 @@ Partial Class dlgDisplayDailyData
         'ucrInputComboTrace
         '
         Me.ucrInputComboTrace.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboTrace.GetSetSelectedIndex = -1
         Me.ucrInputComboTrace.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboTrace, "ucrInputComboTrace")
         Me.ucrInputComboTrace.Name = "ucrInputComboTrace"
@@ -373,12 +369,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrChkMissing.Checked = False
         resources.ApplyResources(Me.ucrChkMissing, "ucrChkMissing")
         Me.ucrChkMissing.Name = "ucrChkMissing"
-        '
-        'ucrChkZero
-        '
-        Me.ucrChkZero.Checked = False
-        resources.ApplyResources(Me.ucrChkZero, "ucrChkZero")
-        Me.ucrChkZero.Name = "ucrChkZero"
         '
         'ucrChkTrace
         '
@@ -449,21 +439,47 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverSingleElements.strNcFilePath = ""
         Me.ucrReceiverSingleElements.ucrSelector = Nothing
         '
+        'ucrChkZero
+        '
+        Me.ucrChkZero.Checked = False
+        resources.ApplyResources(Me.ucrChkZero, "ucrChkZero")
+        Me.ucrChkZero.Name = "ucrChkZero"
+        '
+        'ucrInputComboZero
+        '
+        Me.ucrInputComboZero.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboZero.GetSetSelectedIndex = -1
+        Me.ucrInputComboZero.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboZero, "ucrInputComboZero")
+        Me.ucrInputComboZero.Name = "ucrInputComboZero"
+        '
+        'ucrSaveGraph
+        '
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        '
+        'cmdDispalyDailyOptions
+        '
+        resources.ApplyResources(Me.cmdDispalyDailyOptions, "cmdDispalyDailyOptions")
+        Me.cmdDispalyDailyOptions.Name = "cmdDispalyDailyOptions"
+        Me.cmdDispalyDailyOptions.UseVisualStyleBackColor = True
+        '
         'dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdDispalyDailyOptions)
+        Me.Controls.Add(Me.grpGraph)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpFacet)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrInputGraphRugColur)
-        Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.lblGRugColour)
         Me.Controls.Add(Me.ucrReceiverMultipleElements)
         Me.Controls.Add(Me.rdoGraphByYear)
         Me.Controls.Add(Me.lblElements)
-        Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrInputComboZero)
-        Me.Controls.Add(Me.grpFacet)
         Me.Controls.Add(Me.ucrInputComboMissing)
         Me.Controls.Add(Me.ucrInputComboTrace)
         Me.Controls.Add(Me.ucrChkMissing)
@@ -519,11 +535,8 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents lblRugColor As Label
     Friend WithEvents ucrInputBarColour As ucrInputComboBox
     Friend WithEvents lblBarColour As Label
-    Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrChkTrace As ucrCheck
     Friend WithEvents ucrChkMissing As ucrCheck
-    Friend WithEvents ucrChkZero As ucrCheck
-    Friend WithEvents ucrInputComboZero As ucrInputComboBox
     Friend WithEvents ucrInputComboMissing As ucrInputComboBox
     Friend WithEvents ucrInputComboTrace As ucrInputComboBox
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
@@ -548,4 +561,8 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrInputScale As ucrInputComboBox
     Friend WithEvents lblGRugColour As Label
     Friend WithEvents ucrInputGraphRugColur As ucrInputComboBox
+    Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrInputComboZero As ucrInputComboBox
+    Friend WithEvents ucrChkZero As ucrCheck
+    Friend WithEvents cmdDispalyDailyOptions As Button
 End Class

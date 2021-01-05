@@ -3622,7 +3622,7 @@
     <value>Low_Flow</value>
   </data>
   <data name="mnuStructuredSurvivalDefine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuStructuredSurvivalDefine.Text" xml:space="preserve">
     <value>Define...</value>
