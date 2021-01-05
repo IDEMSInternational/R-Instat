@@ -70,7 +70,7 @@ Public Class dlgClimaticNCMPCountRecords
         ucrSaveCountRecords.SetSaveTypeAsDataFrame()
         ucrSaveCountRecords.SetLabelText("New Data Frame Name:")
         ucrSaveCountRecords.SetIsTextBox()
-        ucrSaveCountRecords.SetPrefix("Count_Records")
+        ucrSaveCountRecords.SetPrefix("count_records")
     End Sub
 
     Private Sub SetDefaults()

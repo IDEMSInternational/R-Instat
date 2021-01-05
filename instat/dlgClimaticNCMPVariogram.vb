@@ -75,7 +75,7 @@ Public Class dlgClimaticNCMPVariogram
         ucrSaveVariogram.SetSaveTypeAsDataFrame()
         ucrSaveVariogram.SetLabelText("New Data Frame Name:")
         ucrSaveVariogram.SetIsTextBox()
-        ucrSaveVariogram.SetPrefix("Variogram")
+        ucrSaveVariogram.SetPrefix("variogram")
     End Sub
 
     Private Sub SetDefaults()
@@ -126,15 +126,12 @@ Public Class dlgClimaticNCMPVariogram
     End Sub
 
     Private Sub SelectLocationToSave()
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save NCMP Output"
-            If ucrInputFilePath.GetText() <> "" Then
-                dlgSave.InitialDirectory = ucrInputFilePath.GetText().Replace("/", "\")
-            Else
-                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            End If
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                ucrInputFilePath.SetName(dlgSave.FileName.Replace("\", "/"))
+        Dim strPath As String
+        Using dlgFolder As New FolderBrowserDialog
+            dlgFolder.Description = "Choose Folder"
+            If dlgFolder.ShowDialog() = DialogResult.OK Then
+                strPath = dlgFolder.SelectedPath
+                ucrInputFilePath.SetName(Replace(strPath, "\", "/"))
             End If
             TestOkEnabled()
         End Using

@@ -29,13 +29,14 @@ Partial Class dlgClimaticNCMPSummaryFile
         Me.ucrSelectorA4 = New instat.ucrDataFrame()
         Me.ucrSelectorA2 = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveSummary = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblSaveFile
         '
         Me.lblSaveFile.AutoSize = True
         Me.lblSaveFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSaveFile.Location = New System.Drawing.Point(9, 163)
+        Me.lblSaveFile.Location = New System.Drawing.Point(7, 191)
         Me.lblSaveFile.Name = "lblSaveFile"
         Me.lblSaveFile.Size = New System.Drawing.Size(74, 13)
         Me.lblSaveFile.TabIndex = 4
@@ -44,7 +45,7 @@ Partial Class dlgClimaticNCMPSummaryFile
         'cmdChooseFile
         '
         Me.cmdChooseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdChooseFile.Location = New System.Drawing.Point(335, 159)
+        Me.cmdChooseFile.Location = New System.Drawing.Point(333, 187)
         Me.cmdChooseFile.Name = "cmdChooseFile"
         Me.cmdChooseFile.Size = New System.Drawing.Size(75, 23)
         Me.cmdChooseFile.TabIndex = 6
@@ -56,7 +57,7 @@ Partial Class dlgClimaticNCMPSummaryFile
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(93, 160)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(91, 188)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
         Me.ucrInputFilePath.Size = New System.Drawing.Size(236, 21)
         Me.ucrInputFilePath.TabIndex = 5
@@ -93,16 +94,25 @@ Partial Class dlgClimaticNCMPSummaryFile
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(11, 188)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 216)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 18
+        Me.ucrBase.TabIndex = 7
+        '
+        'ucrSaveSummary
+        '
+        Me.ucrSaveSummary.Location = New System.Drawing.Point(10, 159)
+        Me.ucrSaveSummary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveSummary.Name = "ucrSaveSummary"
+        Me.ucrSaveSummary.Size = New System.Drawing.Size(289, 22)
+        Me.ucrSaveSummary.TabIndex = 3
         '
         'dlgClimaticNCMPSummaryFile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 245)
+        Me.ClientSize = New System.Drawing.Size(416, 273)
+        Me.Controls.Add(Me.ucrSaveSummary)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorA6)
         Me.Controls.Add(Me.ucrSelectorA4)
@@ -128,4 +138,5 @@ Partial Class dlgClimaticNCMPSummaryFile
     Friend WithEvents ucrSelectorA4 As ucrDataFrame
     Friend WithEvents ucrSelectorA2 As ucrDataFrame
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSaveSummary As ucrSave
 End Class

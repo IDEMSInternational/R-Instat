@@ -53,8 +53,13 @@ Public Class dlgClimaticNCMPSummaryFile
 
         ucrInputFilePath.SetParameter(New RParameter("ncmp_folder", 5))
         ucrInputFilePath.IsReadOnly = True
-    End Sub
 
+        'ucrsave
+        ucrSaveSummary.SetSaveTypeAsDataFrame()
+        ucrSaveSummary.SetLabelText("New Data Frame Name:")
+        ucrSaveSummary.SetIsTextBox()
+        ucrSaveSummary.SetPrefix("summary_file")
+    End Sub
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
 
@@ -63,8 +68,10 @@ Public Class dlgClimaticNCMPSummaryFile
         ucrSelectorA6.Reset()
         ucrInputFilePath.Reset()
         ucrInputFilePath.SetName("")
+        ucrSaveSummary.Reset()
 
         clsDefaultFunction.SetRCommand("p7_summary")
+        clsDefaultFunction.SetAssignTo(ucrSaveSummary.GetText(), strTempDataframe:=ucrSaveSummary.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
@@ -73,7 +80,7 @@ Public Class dlgClimaticNCMPSummaryFile
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrSelectorA2.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA4.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA6.cboAvailableDataFrames.Text = "" OrElse ucrInputFilePath.IsEmpty Then
+        If ucrSelectorA2.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA4.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA6.cboAvailableDataFrames.Text = "" OrElse ucrInputFilePath.IsEmpty OrElse Not ucrSaveSummary.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -93,15 +100,12 @@ Public Class dlgClimaticNCMPSummaryFile
     End Sub
 
     Private Sub SelectLocationToSave()
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save NCMP Output"
-            If ucrInputFilePath.GetText() <> "" Then
-                dlgSave.InitialDirectory = ucrInputFilePath.GetText().Replace("/", "\")
-            Else
-                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            End If
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                ucrInputFilePath.SetName(dlgSave.FileName.Replace("\", "/"))
+        Dim strPath As String
+        Using dlgFolder As New FolderBrowserDialog
+            dlgFolder.Description = "Choose Folder"
+            If dlgFolder.ShowDialog() = DialogResult.OK Then
+                strPath = dlgFolder.SelectedPath
+                ucrInputFilePath.SetName(Replace(strPath, "\", "/"))
             End If
             TestOkEnabled()
         End Using
@@ -111,7 +115,7 @@ Public Class dlgClimaticNCMPSummaryFile
         SelectLocationToSave()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorA2.ControlContentsChanged, ucrSelectorA4.ControlContentsChanged, ucrSelectorA6.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorA2.ControlContentsChanged, ucrSelectorA4.ControlContentsChanged, ucrSelectorA6.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrSaveSummary.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

@@ -19,7 +19,7 @@ Public Class dlgClimaticNCMPTrendGraphs
     Public bFirstLoad As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsNCMPFunction, clsBaseFunction As New RFunction
     Private bSubDialogOKEnabled As Boolean = True
 
     Private Sub dlgClimaticNCMPTrendGraphs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -79,25 +79,30 @@ Public Class dlgClimaticNCMPTrendGraphs
         ucrReceiverMonthA4.SetClimaticType("month")
         ucrReceiverMonthA4.bAutoFill = True
 
-        grpOptions.Visible = False
         ucrNudNYBA.SetParameter(New RParameter("nyba", 8))
         ucrNudNYBA.SetMinMax(1900) ' min/max?
 
         ucrNudNYEA.SetParameter(New RParameter("nyea", 9))
         ucrNudNYEA.SetMinMax(1900) ' min/max?
 
+        ucrNudNYB.Visible = False
         ucrNudNYB.SetParameter(New RParameter("nyb", 10))
         ucrNudNYB.SetMinMax(1900)
 
+        ucrNudNYE.Visible = False
         ucrNudNYE.SetParameter(New RParameter("nye", 11))
         ucrNudNYE.SetMinMax(1900) ' TODO: how to set as current year - 1
 
         ucrInputFilePath.SetParameter(New RParameter("ncmp_folder", 12))
         ucrInputFilePath.IsReadOnly = True
+
+        'ucrsave
+        ucrInputSaveTG.SetPrefix("trend_graphs")
     End Sub
 
     Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
+        clsBaseFunction = New RFunction
+        clsNCMPFunction = New RFunction
 
         ucrSelectorForA2.Reset()
         ucrSelectorForA4.Reset()
@@ -105,19 +110,25 @@ Public Class dlgClimaticNCMPTrendGraphs
         ucrReceiverYearA4.SetMeAsReceiver()
         ucrInputFilePath.Reset()
         ucrInputFilePath.SetName("")
+        ucrInputSaveTG.Reset()
         bSubDialogOKEnabled = False
         bResetSubdialog = True
 
-        clsDefaultFunction.SetRCommand("p5_trends_graphs")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        clsBaseFunction.SetRCommand("data_book$import_data")
+        clsBaseFunction.AddParameter("data_tables", clsRFunctionParameter:=clsNCMPFunction)
+        clsNCMPFunction.SetRCommand("p5_trends_graphs")
+        clsNCMPFunction.AddParameter("nyba", 1950, iPosition:=8)
+        clsNCMPFunction.AddParameter("nyea", 2019, iPosition:=9)
+        clsNCMPFunction.SetAssignTo(strTemp:=ucrInputSaveTG.GetText, bAssignToIsPrefix:=True)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRCode(Me, clsNCMPFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYearA4.IsEmpty OrElse ucrReceiverMonthA4.IsEmpty OrElse ucrReceiverYearA2.IsEmpty OrElse ucrReceiverMonthA2.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse ucrInputFilePath.IsEmpty OrElse ucrNudNYBA.GetText = "" OrElse ucrNudNYEA.GetText = "" OrElse Not bSubDialogOKEnabled Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYearA4.IsEmpty OrElse ucrReceiverMonthA4.IsEmpty OrElse ucrReceiverYearA2.IsEmpty OrElse ucrReceiverMonthA2.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse ucrInputFilePath.IsEmpty OrElse ucrNudNYBA.GetText = "" OrElse ucrNudNYEA.GetText = "" OrElse Not bSubDialogOKEnabled OrElse ucrInputSaveTG.IsEmpty Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -125,7 +136,7 @@ Public Class dlgClimaticNCMPTrendGraphs
     End Sub
 
     Private Sub cmdStationMetadata_click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
-        sdgClimaticNCMPMetadata.SetRFunction(clsDefaultFunction, bReset:=bResetSubdialog)
+        sdgClimaticNCMPMetadata.SetRFunction(clsNCMPFunction, bReset:=bResetSubdialog)
         bResetSubdialog = True
         sdgClimaticNCMPMetadata.ShowDialog()
         bSubDialogOKEnabled = sdgClimaticNCMPMetadata.bOKEnabled
@@ -145,15 +156,12 @@ Public Class dlgClimaticNCMPTrendGraphs
     End Sub
 
     Private Sub SelectLocationToSave()
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save NCMP Output"
-            If ucrInputFilePath.GetText() <> "" Then
-                dlgSave.InitialDirectory = ucrInputFilePath.GetText().Replace("/", "\")
-            Else
-                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            End If
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                ucrInputFilePath.SetName(dlgSave.FileName.Replace("\", "/"))
+        Dim strPath As String
+        Using dlgFolder As New FolderBrowserDialog
+            dlgFolder.Description = "Choose Folder"
+            If dlgFolder.ShowDialog() = DialogResult.OK Then
+                strPath = dlgFolder.SelectedPath
+                ucrInputFilePath.SetName(Replace(strPath, "\", "/"))
             End If
             TestOkEnabled()
         End Using
@@ -161,6 +169,10 @@ Public Class dlgClimaticNCMPTrendGraphs
 
     Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
         SelectLocationToSave()
+    End Sub
+
+    Private Sub ucrInputSaveTG_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSaveTG.ControlValueChanged
+        clsNCMPFunction.SetAssignTo(strTemp:=ucrInputSaveTG.GetText, bAssignToIsPrefix:=True)
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYearA4.ControlContentsChanged, ucrReceiverMonthA4.ControlContentsChanged, ucrReceiverYearA2.ControlContentsChanged, ucrReceiverMonthA2.ControlContentsChanged, ucrNudNYB.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrNudNYBA.ControlContentsChanged, ucrNudNYEA.ControlContentsChanged

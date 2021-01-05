@@ -24,6 +24,11 @@ Public Class sdgClimaticNCMPMetadata
     Public bOKEnabled As Boolean = True
     Private Sub sdgClimaticNCMPMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        If bFirstLoad Then
+            InitialiseControls()
+            ucrSelectorMetadata.Reset()
+            bFirstLoad = False
+        End If
     End Sub
 
     Public Sub InitialiseControls()

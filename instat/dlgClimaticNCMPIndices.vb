@@ -94,7 +94,7 @@ Public Class dlgClimaticNCMPIndices
         ucrSaveIndices.SetSaveTypeAsDataFrame()
         ucrSaveIndices.SetLabelText("New Data Frame Name:")
         ucrSaveIndices.SetIsTextBox()
-        ucrSaveIndices.SetPrefix("Indices")
+        ucrSaveIndices.SetPrefix("indices")
     End Sub
 
     Private Sub SetDefaults()
