@@ -32,16 +32,19 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrNudMinBin = New instat.ucrNud()
         Me.ucrNudBin = New instat.ucrNud()
         Me.ucrChkMinBin = New instat.ucrCheck()
-        Me.lblType = New System.Windows.Forms.Label()
-        Me.ucrReceiverType = New instat.ucrReceiverSingle()
         Me.ucrChkBin = New instat.ucrCheck()
         Me.ucrSavePlot = New instat.ucrSave()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.ucrReceiverMultipleFacet = New instat.ucrReceiverMultiple()
+        Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
+        Me.ucrChkLegendPosition = New instat.ucrCheck()
+        Me.ucrNudKeyColumns = New instat.ucrNud()
+        Me.ucrChkKeyColumns = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 373)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 366)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -104,7 +107,7 @@ Partial Class dlgConditionalQuantilePlot
         'cmdPlotOptions
         '
         Me.cmdPlotOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(9, 306)
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(9, 211)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Size = New System.Drawing.Size(121, 23)
         Me.cmdPlotOptions.TabIndex = 66
@@ -115,7 +118,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.ucrNudMinBin.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinBin.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinBin.Location = New System.Drawing.Point(158, 268)
+        Me.ucrNudMinBin.Location = New System.Drawing.Point(158, 243)
         Me.ucrNudMinBin.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMinBin.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinBin.Name = "ucrNudMinBin"
@@ -127,7 +130,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.ucrNudBin.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBin.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBin.Location = New System.Drawing.Point(54, 268)
+        Me.ucrNudBin.Location = New System.Drawing.Point(54, 243)
         Me.ucrNudBin.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBin.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBin.Name = "ucrNudBin"
@@ -138,65 +141,97 @@ Partial Class dlgConditionalQuantilePlot
         'ucrChkMinBin
         '
         Me.ucrChkMinBin.Checked = False
-        Me.ucrChkMinBin.Location = New System.Drawing.Point(100, 270)
+        Me.ucrChkMinBin.Location = New System.Drawing.Point(100, 245)
         Me.ucrChkMinBin.Name = "ucrChkMinBin"
         Me.ucrChkMinBin.Size = New System.Drawing.Size(77, 17)
         Me.ucrChkMinBin.TabIndex = 69
         '
-        'lblType
-        '
-        Me.lblType.AutoSize = True
-        Me.lblType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblType.Location = New System.Drawing.Point(9, 239)
-        Me.lblType.Name = "lblType"
-        Me.lblType.Size = New System.Drawing.Size(34, 13)
-        Me.lblType.TabIndex = 66
-        Me.lblType.Text = "Type:"
-        '
-        'ucrReceiverType
-        '
-        Me.ucrReceiverType.frmParent = Me
-        Me.ucrReceiverType.Location = New System.Drawing.Point(46, 235)
-        Me.ucrReceiverType.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverType.Name = "ucrReceiverType"
-        Me.ucrReceiverType.Selector = Nothing
-        Me.ucrReceiverType.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverType.strNcFilePath = ""
-        Me.ucrReceiverType.TabIndex = 67
-        Me.ucrReceiverType.ucrSelector = Nothing
-        '
         'ucrChkBin
         '
         Me.ucrChkBin.Checked = False
-        Me.ucrChkBin.Location = New System.Drawing.Point(9, 270)
+        Me.ucrChkBin.Location = New System.Drawing.Point(9, 245)
         Me.ucrChkBin.Name = "ucrChkBin"
         Me.ucrChkBin.Size = New System.Drawing.Size(72, 17)
         Me.ucrChkBin.TabIndex = 68
         '
         'ucrSavePlot
         '
-        Me.ucrSavePlot.Location = New System.Drawing.Point(9, 340)
+        Me.ucrSavePlot.Location = New System.Drawing.Point(9, 337)
         Me.ucrSavePlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlot.Name = "ucrSavePlot"
-        Me.ucrSavePlot.Size = New System.Drawing.Size(251, 25)
+        Me.ucrSavePlot.Size = New System.Drawing.Size(251, 29)
         Me.ucrSavePlot.TabIndex = 72
         '
-        'Label1
+        'lblType
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(33, 215)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(97, 13)
-        Me.Label1.TabIndex = 73
-        Me.Label1.Text = "Data Split Methods"
+        Me.lblType.AutoSize = True
+        Me.lblType.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblType.Location = New System.Drawing.Point(267, 176)
+        Me.lblType.Name = "lblType"
+        Me.lblType.Size = New System.Drawing.Size(100, 13)
+        Me.lblType.TabIndex = 66
+        Me.lblType.Text = "Facet By (Optional):"
+        '
+        'ucrReceiverMultipleFacet
+        '
+        Me.ucrReceiverMultipleFacet.frmParent = Me
+        Me.ucrReceiverMultipleFacet.Location = New System.Drawing.Point(265, 196)
+        Me.ucrReceiverMultipleFacet.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverMultipleFacet.Name = "ucrReceiverMultipleFacet"
+        Me.ucrReceiverMultipleFacet.Selector = Nothing
+        Me.ucrReceiverMultipleFacet.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverMultipleFacet.strNcFilePath = ""
+        Me.ucrReceiverMultipleFacet.TabIndex = 73
+        Me.ucrReceiverMultipleFacet.ucrSelector = Nothing
+        '
+        'ucrInputLegendPosition
+        '
+        Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
+        Me.ucrInputLegendPosition.IsReadOnly = False
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(100, 278)
+        Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
+        Me.ucrInputLegendPosition.Size = New System.Drawing.Size(98, 21)
+        Me.ucrInputLegendPosition.TabIndex = 75
+        '
+        'ucrChkLegendPosition
+        '
+        Me.ucrChkLegendPosition.Checked = False
+        Me.ucrChkLegendPosition.Location = New System.Drawing.Point(9, 281)
+        Me.ucrChkLegendPosition.Name = "ucrChkLegendPosition"
+        Me.ucrChkLegendPosition.Size = New System.Drawing.Size(105, 17)
+        Me.ucrChkLegendPosition.TabIndex = 74
+        '
+        'ucrNudKeyColumns
+        '
+        Me.ucrNudKeyColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudKeyColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudKeyColumns.Location = New System.Drawing.Point(100, 307)
+        Me.ucrNudKeyColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudKeyColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudKeyColumns.Name = "ucrNudKeyColumns"
+        Me.ucrNudKeyColumns.Size = New System.Drawing.Size(40, 20)
+        Me.ucrNudKeyColumns.TabIndex = 76
+        Me.ucrNudKeyColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkKeyColumns
+        '
+        Me.ucrChkKeyColumns.Checked = False
+        Me.ucrChkKeyColumns.Location = New System.Drawing.Point(9, 310)
+        Me.ucrChkKeyColumns.Name = "ucrChkKeyColumns"
+        Me.ucrChkKeyColumns.Size = New System.Drawing.Size(72, 17)
+        Me.ucrChkKeyColumns.TabIndex = 77
         '
         'dlgConditionalQuantilePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 425)
-        Me.Controls.Add(Me.Label1)
+        Me.ClientSize = New System.Drawing.Size(423, 418)
+        Me.Controls.Add(Me.ucrChkKeyColumns)
+        Me.Controls.Add(Me.ucrNudKeyColumns)
+        Me.Controls.Add(Me.ucrInputLegendPosition)
+        Me.Controls.Add(Me.ucrChkLegendPosition)
+        Me.Controls.Add(Me.ucrReceiverMultipleFacet)
         Me.Controls.Add(Me.ucrSavePlot)
         Me.Controls.Add(Me.ucrNudMinBin)
         Me.Controls.Add(Me.ucrNudBin)
@@ -207,7 +242,6 @@ Partial Class dlgConditionalQuantilePlot
         Me.Controls.Add(Me.ucrReceiverPredictions)
         Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.ucrReceiverObservations)
-        Me.Controls.Add(Me.ucrReceiverType)
         Me.Controls.Add(Me.lblObservations)
         Me.Controls.Add(Me.ucrConditionalQuantilePlotSelector)
         Me.Controls.Add(Me.ucrBase)
@@ -228,13 +262,16 @@ Partial Class dlgConditionalQuantilePlot
     Friend WithEvents lblObservations As Label
     Friend WithEvents lblPredictions As Label
     Friend WithEvents ucrReceiverPredictions As ucrReceiverSingle
-    Friend WithEvents lblType As Label
-    Friend WithEvents ucrReceiverType As ucrReceiverSingle
     Friend WithEvents cmdPlotOptions As Button
     Friend WithEvents ucrChkMinBin As ucrCheck
     Friend WithEvents ucrNudMinBin As ucrNud
     Friend WithEvents ucrNudBin As ucrNud
     Friend WithEvents ucrChkBin As ucrCheck
     Friend WithEvents ucrSavePlot As ucrSave
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblType As Label
+    Friend WithEvents ucrReceiverMultipleFacet As ucrReceiverMultiple
+    Friend WithEvents ucrChkKeyColumns As ucrCheck
+    Friend WithEvents ucrNudKeyColumns As ucrNud
+    Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
+    Friend WithEvents ucrChkLegendPosition As ucrCheck
 End Class
