@@ -71,15 +71,12 @@ Partial Class dlgDisplayDailyData
         Me.ucrChkNumberOfColumns = New instat.ucrCheck()
         Me.rdoGraphByYear = New System.Windows.Forms.RadioButton()
         Me.lblGRugColour = New System.Windows.Forms.Label()
-        Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrInputGraphRugColur = New instat.ucrInputComboBox()
         Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
-        Me.ucrInputComboZero = New instat.ucrInputComboBox()
         Me.ucrInputComboMissing = New instat.ucrInputComboBox()
         Me.ucrInputComboTrace = New instat.ucrInputComboBox()
         Me.ucrChkMissing = New instat.ucrCheck()
-        Me.ucrChkZero = New instat.ucrCheck()
         Me.ucrChkTrace = New instat.ucrCheck()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDayOfYear = New instat.ucrReceiverSingle()
@@ -89,6 +86,10 @@ Partial Class dlgDisplayDailyData
         Me.ucrSelectorDisplayDailyClimaticData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverSingleElements = New instat.ucrReceiverSingle()
+        Me.ucrChkZero = New instat.ucrCheck()
+        Me.ucrInputComboZero = New instat.ucrInputComboBox()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.cmdDispalyDailyOptions = New System.Windows.Forms.Button()
         Me.grpGraph.SuspendLayout()
         Me.grpSummary.SuspendLayout()
         Me.grpFacet.SuspendLayout()
@@ -321,11 +322,6 @@ Partial Class dlgDisplayDailyData
         resources.ApplyResources(Me.lblGRugColour, "lblGRugColour")
         Me.lblGRugColour.Name = "lblGRugColour"
         '
-        'ucrSaveGraph
-        '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        '
         'ucrInputGraphRugColur
         '
         Me.ucrInputGraphRugColur.AddQuotesIfUnrecognised = True
@@ -352,14 +348,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverElement.strNcFilePath = ""
         Me.ucrReceiverElement.ucrSelector = Nothing
         '
-        'ucrInputComboZero
-        '
-        Me.ucrInputComboZero.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboZero.GetSetSelectedIndex = -1
-        Me.ucrInputComboZero.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboZero, "ucrInputComboZero")
-        Me.ucrInputComboZero.Name = "ucrInputComboZero"
-        '
         'ucrInputComboMissing
         '
         Me.ucrInputComboMissing.AddQuotesIfUnrecognised = True
@@ -381,12 +369,6 @@ Partial Class dlgDisplayDailyData
         Me.ucrChkMissing.Checked = False
         resources.ApplyResources(Me.ucrChkMissing, "ucrChkMissing")
         Me.ucrChkMissing.Name = "ucrChkMissing"
-        '
-        'ucrChkZero
-        '
-        Me.ucrChkZero.Checked = False
-        resources.ApplyResources(Me.ucrChkZero, "ucrChkZero")
-        Me.ucrChkZero.Name = "ucrChkZero"
         '
         'ucrChkTrace
         '
@@ -457,21 +439,47 @@ Partial Class dlgDisplayDailyData
         Me.ucrReceiverSingleElements.strNcFilePath = ""
         Me.ucrReceiverSingleElements.ucrSelector = Nothing
         '
+        'ucrChkZero
+        '
+        Me.ucrChkZero.Checked = False
+        resources.ApplyResources(Me.ucrChkZero, "ucrChkZero")
+        Me.ucrChkZero.Name = "ucrChkZero"
+        '
+        'ucrInputComboZero
+        '
+        Me.ucrInputComboZero.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboZero.GetSetSelectedIndex = -1
+        Me.ucrInputComboZero.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboZero, "ucrInputComboZero")
+        Me.ucrInputComboZero.Name = "ucrInputComboZero"
+        '
+        'ucrSaveGraph
+        '
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        '
+        'cmdDispalyDailyOptions
+        '
+        resources.ApplyResources(Me.cmdDispalyDailyOptions, "cmdDispalyDailyOptions")
+        Me.cmdDispalyDailyOptions.Name = "cmdDispalyDailyOptions"
+        Me.cmdDispalyDailyOptions.UseVisualStyleBackColor = True
+        '
         'dlgDisplayDailyData
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdDispalyDailyOptions)
+        Me.Controls.Add(Me.grpGraph)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpFacet)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrInputGraphRugColur)
-        Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.lblGRugColour)
         Me.Controls.Add(Me.ucrReceiverMultipleElements)
         Me.Controls.Add(Me.rdoGraphByYear)
         Me.Controls.Add(Me.lblElements)
-        Me.Controls.Add(Me.grpGraph)
         Me.Controls.Add(Me.ucrReceiverElement)
         Me.Controls.Add(Me.ucrInputComboZero)
-        Me.Controls.Add(Me.grpFacet)
         Me.Controls.Add(Me.ucrInputComboMissing)
         Me.Controls.Add(Me.ucrInputComboTrace)
         Me.Controls.Add(Me.ucrChkMissing)
@@ -527,11 +535,8 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents lblRugColor As Label
     Friend WithEvents ucrInputBarColour As ucrInputComboBox
     Friend WithEvents lblBarColour As Label
-    Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrChkTrace As ucrCheck
     Friend WithEvents ucrChkMissing As ucrCheck
-    Friend WithEvents ucrChkZero As ucrCheck
-    Friend WithEvents ucrInputComboZero As ucrInputComboBox
     Friend WithEvents ucrInputComboMissing As ucrInputComboBox
     Friend WithEvents ucrInputComboTrace As ucrInputComboBox
     Friend WithEvents ucrReceiverElement As ucrReceiverSingle
@@ -556,4 +561,8 @@ Partial Class dlgDisplayDailyData
     Friend WithEvents ucrInputScale As ucrInputComboBox
     Friend WithEvents lblGRugColour As Label
     Friend WithEvents ucrInputGraphRugColur As ucrInputComboBox
+    Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrInputComboZero As ucrInputComboBox
+    Friend WithEvents ucrChkZero As ucrCheck
+    Friend WithEvents cmdDispalyDailyOptions As Button
 End Class

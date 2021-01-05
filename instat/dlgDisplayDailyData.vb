@@ -22,6 +22,7 @@ Public Class dlgDisplayDailyData
     Private iSaveYLocation As Integer
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bRCodeSet As Boolean = True
     Private lstCheckboxes As New List(Of ucrCheck)
     Private clsDisplayDailyTable, clsDisplayDailyGraphFunction, clsConcFunction As New RFunction
     Private clsGGplotFunction, clsGeomLineFunction, clsGeomRugFunction, clsThemeFunction, clsThemeGreyFunction As New RFunction
@@ -32,6 +33,7 @@ Public Class dlgDisplayDailyData
 
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
+        bRCodeSet = False
         If bFirstLoad Then
             iBasicHeight = Me.Height
             iBaseMaxY = ucrBase.Location.Y
@@ -43,6 +45,7 @@ Public Class dlgDisplayDailyData
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        bRCodeSet = True
         DialogSize()
         bReset = False
         TestOkEnabled()
@@ -350,6 +353,7 @@ Public Class dlgDisplayDailyData
 
         ucrBase.clsRsyntax.SetBaseROperator(clsGgPlotOperator)
 
+        SetFacetItems()
 
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
@@ -425,12 +429,13 @@ Public Class dlgDisplayDailyData
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight * 0.93)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.1)
             ucrSaveGraph.Location = New Point(ucrSaveGraph.Location.X, iSaveYLocation / 1.1)
-        ElseIf rdoTable.Checked OrElse rdoGraph.Checked Then
+        ElseIf rdoTable.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
-            If rdoGraph.Checked Then
-                ucrSaveGraph.Location = New Point(ucrSaveGraph.Location.X, iSaveYLocation)
-            End If
+        ElseIf rdoGraph.Checked Then
+            Me.Size = New System.Drawing.Size(Me.Width, iBasicHeight / 1.1)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.116)
+            ucrSaveGraph.Location = New Point(ucrSaveGraph.Location.X, iSaveYLocation / 1.12)
         End If
     End Sub
 
@@ -488,7 +493,9 @@ Public Class dlgDisplayDailyData
     End Sub
 
     Private Sub ucrReceiverMultipleElements_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMultipleElements.ControlValueChanged, ucrReceiverStations.ControlValueChanged
-        SetFacetItems()
+        If bRCodeSet Then
+            SetFacetItems()
+        End If
         StackingFunction()
     End Sub
 
