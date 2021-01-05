@@ -189,7 +189,7 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(100, 278)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(108, 278)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(98, 21)
         Me.ucrInputLegendPosition.TabIndex = 75
@@ -199,14 +199,14 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrChkLegendPosition.Checked = False
         Me.ucrChkLegendPosition.Location = New System.Drawing.Point(9, 281)
         Me.ucrChkLegendPosition.Name = "ucrChkLegendPosition"
-        Me.ucrChkLegendPosition.Size = New System.Drawing.Size(105, 17)
+        Me.ucrChkLegendPosition.Size = New System.Drawing.Size(85, 17)
         Me.ucrChkLegendPosition.TabIndex = 74
         '
         'ucrNudKeyColumns
         '
         Me.ucrNudKeyColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudKeyColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudKeyColumns.Location = New System.Drawing.Point(100, 307)
+        Me.ucrNudKeyColumns.Location = New System.Drawing.Point(108, 307)
         Me.ucrNudKeyColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudKeyColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudKeyColumns.Name = "ucrNudKeyColumns"
@@ -219,7 +219,7 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrChkKeyColumns.Checked = False
         Me.ucrChkKeyColumns.Location = New System.Drawing.Point(9, 310)
         Me.ucrChkKeyColumns.Name = "ucrChkKeyColumns"
-        Me.ucrChkKeyColumns.Size = New System.Drawing.Size(72, 17)
+        Me.ucrChkKeyColumns.Size = New System.Drawing.Size(85, 17)
         Me.ucrChkKeyColumns.TabIndex = 77
         '
         'dlgConditionalQuantilePlot

@@ -142,4 +142,5 @@ Public Class dlgConditionalQuantilePlot
     Private Sub ucrReceiverObservations_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObservations.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverPredictions.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
 End Class
