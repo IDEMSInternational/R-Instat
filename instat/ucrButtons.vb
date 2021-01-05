@@ -195,7 +195,9 @@ Public Class ucrButtons
     End Sub
 
     Private Sub ucrButtons_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        frmMain.clsRecentItems.addToMenu(Me.Parent)
+        If frmMain.clsRecentItems IsNot Nothing Then
+            frmMain.clsRecentItems.addToMenu(Me.Parent)
+        End If
         translateEach(Controls, Me)
         If bFirstLoad Then
             'TODO. Temp this could be done on the designer
