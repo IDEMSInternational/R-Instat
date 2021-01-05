@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgExtremes
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
-    Private clsFevdFunction, clsNaExclude, clsPlotsFunction As New RFunction
+    Private clsFevdFunction, clsPlotsFunction As New RFunction
     'clsLocationScaleResetOperator is not run but affects reset of the check box.Any better method of implementation?
     Private clsLocationScaleResetOperator As New ROperator
     Private clsLocationParamOperator As New ROperator
@@ -44,11 +44,6 @@ Public Class dlgExtremes
     Private Sub InitialiseDialog()
         Dim dctFevdTypes As New Dictionary(Of String, String)
 
-        ucrReceiverVariable.Selector = ucrSelectorExtremes
-        ucrReceiverVariable.strSelectorHeading = "Variables"
-        ucrReceiverVariable.SetParameter(New RParameter("x", 0))
-        ucrReceiverVariable.SetParameterIsRFunction()
-
         ucrInputExtremes.SetParameter(New RParameter("type", 1))
         dctFevdTypes.Add("GEV", Chr(34) & "GEV" & Chr(34))
         dctFevdTypes.Add("GP", Chr(34) & "GP" & Chr(34))
@@ -64,7 +59,7 @@ Public Class dlgExtremes
         ucrReceiverVariable.Selector = ucrSelectorExtremes
         ucrReceiverVariable.strSelectorHeading = "Variables"
         ucrReceiverVariable.SetMeAsReceiver()
-        ucrReceiverVariable.SetParameter(New RParameter("object", 0))
+        ucrReceiverVariable.SetParameter(New RParameter("x", 0))
         ucrReceiverVariable.SetParameterIsRFunction()
 
         ucrChkExplanatoryModelForLocationParameter.SetText("Explanatory Model for Location or Scale")
@@ -96,7 +91,6 @@ Public Class dlgExtremes
     Private Sub SetDefaults()
         clsFevdFunction = New RFunction
         clsPlotsFunction = New RFunction
-        clsNaExclude = New RFunction
         clsLocationParamOperator = New ROperator
         clsLocationScaleResetOperator = New ROperator
         clsAttach = New RFunction
@@ -116,9 +110,6 @@ Public Class dlgExtremes
         clsLocationParamOperator.AddParameter(strParameterValue:="", iPosition:=0, bIncludeArgumentName:=False)
         clsLocationParamOperator.bSpaceAroundOperation = False
 
-        clsNaExclude.SetPackageName("stats")
-        clsNaExclude.SetRCommand("na.exclude")
-
         clsPlotsFunction.SetRCommand("plot")
         clsPlotsFunction.iCallType = 3
         clsPlotsFunction.bExcludeAssignedFunctionOutput = False
@@ -126,9 +117,8 @@ Public Class dlgExtremes
         clsFevdFunction.SetPackageName("extRemes")
         clsFevdFunction.SetRCommand("fevd")
 
-        clsFevdFunction.AddParameter("x", clsRFunctionParameter:=clsNaExclude, iPosition:=0)
-        clsFevdFunction.AddParameter("type", Chr(34) & "GEV" & Chr(34), iPosition:=1)
-        clsFevdFunction.AddParameter("method", Chr(34) & "MLE" & Chr(34), iPosition:=2)
+        clsFevdFunction.AddParameter("type", Chr(34) & "GEV" & Chr(34), iPosition:=0)
+        clsFevdFunction.AddParameter("method", Chr(34) & "MLE" & Chr(34), iPosition:=1)
 
         clsFevdFunction.SetAssignTo(ucrSaveExtremes.GetText(), strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
         clsPlotsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -148,7 +138,7 @@ Public Class dlgExtremes
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputExtremes.SetRCode(clsFevdFunction, bReset)
-        ucrReceiverVariable.SetRCode(clsNaExclude, bReset)
+        ucrReceiverVariable.SetRCode(clsFevdFunction, bReset)
         ucrSaveExtremes.SetRCode(clsFevdFunction, bReset)
         ucrChkExplanatoryModelForLocationParameter.SetRCode(clsLocationScaleResetOperator, bReset)
         ucrReceiverExpressionExplanatoryModelForLocParam.SetRCode(clsLocationParamOperator, bReset)
@@ -268,7 +258,7 @@ Public Class dlgExtremes
     Private Sub ParameterControl()
         If ucrInputExtremes.GetText() = "GP" OrElse ucrInputExtremes.GetText() = "PP" OrElse ucrInputExtremes.GetText() = "Exponential" Then
             ucrInputThresholdforLocation.Visible = True
-            clsFevdFunction.AddParameter("threshold", ucrInputThresholdforLocation.GetText(), iPosition:=4)
+            clsFevdFunction.AddParameter("threshold", ucrInputThresholdforLocation.GetText(), iPosition:=3)
         Else
             ucrInputThresholdforLocation.Visible = False
             clsFevdFunction.RemoveParameterByName("threshold")
@@ -276,7 +266,7 @@ Public Class dlgExtremes
         If ucrChkExplanatoryModelForLocationParameter.Checked Then
             Select Case ucrInputExtremes.GetText()
                 Case "GP", "PP", "Exponential"
-                    clsFevdFunction.AddParameter("scale.fun", clsROperatorParameter:=clsLocationParamOperator, iPosition:=3)
+                    clsFevdFunction.AddParameter("scale.fun", clsROperatorParameter:=clsLocationParamOperator, iPosition:=4)
                     clsFevdFunction.RemoveParameterByName("location.fun")
                 Case "Gumbel", "GEV"
                     clsFevdFunction.AddParameter("location.fun", clsROperatorParameter:=clsLocationParamOperator, iPosition:=5)
