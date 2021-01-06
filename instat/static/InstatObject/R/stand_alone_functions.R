@@ -1831,3 +1831,138 @@ spei_output <- function(x, data, station, year, month) {
   }
   col
 }
+
+# This function has been adapted from extRemes::threshrange.plot().
+# It has been adapted for use in R-Instat and uses ggplot2 graphical system rather than base plot().
+threshold_Plot <- function(x, r, type = c("GP", "PP", "Exponential"), nint = 10,
+                      alpha = 0.05, na.action = na.omit, xlb = "", main = NULL , verbose = FALSE,
+                      ...) {
+  type <- match.arg(type)
+  x <- na.action(x)
+  n <- length(x)
+  lst_plots <- list()
+  if (missing(r)) {
+    r <- quantile(x, probs = c(0.75, 0.99))
+  }
+  u.i <- matrix(seq(from = r[1], to = r[2],length.out =  nint), ncol = 1)
+  thfun <- function(u, x, type, a, verbose, ...) {
+    fit <- try(extRemes::fevd(
+      x = x, threshold = u, type = type, verbose = verbose,
+      ...
+    ), silent = verbose)
+    if (verbose) {
+      print(fit)
+    }
+    if (all(class(fit) != "try-error")) {
+      if (!is.element(type, c("PP", "Exponential"))) {
+        res <- try(distillery::ci(fit,
+                      type = "parameter", alpha = a,
+                      R = 100, tscale = TRUE, ...
+        ), silent = verbose)
+      } else {
+        res <- try(distillery::ci(fit,
+                      type = "parameter", alpha = a,
+                      R = 100, ...
+        ), silent = verbose)
+      }
+      if (verbose) {
+        print(res)
+      }
+    }
+    else {
+      res <- fit
+    }
+    if (any(class(res) == "try-error")) {
+      if (type == "PP") {
+        res <- matrix(NA, 3, 3)
+      } else if (type != "Exponential") {
+        res <- matrix(NA, 2, 3)
+      } else {
+        res <- rep(NA, 3)
+      }
+    }
+    return(res)
+  }
+  out <- apply(u.i, 1, thfun,
+               x = x, type = type, a = alpha,
+               verbose = verbose, ...
+  )
+  if (type == "PP") {
+    rownames(out) <- c(
+      "low.loc", "low.scale", "low.shape",
+      "location", "scale", "shape", "up.loc", "up.scale",
+      "up.shape"
+    )
+  } else if (type != "Exponential") {
+    rownames(out) <- c(
+      "low.t.scale", "low.shape", "t.scale",
+      "shape", "up.t.scale", "up.shape"
+    )
+  } else {
+    rownames(out) <- c("low.scale", "scale", "up.scale")
+  }
+  m1 <- deparse(match.call())
+  if (type == "PP") {
+    yl <- range(c(out[c("low.loc", "location", "up.loc"), ]), finite = TRUE)
+    lst_plots[[1]] <- ggplot2::qplot(
+      x = u.i, y = out["location", ], ylim = yl, xlab = xlb,
+      ylab = "location", geom = c("line", "point"), main = main
+    ) +
+      ggplot2::geom_pointrange(mapping = ggplot2::aes(ymin = out["low.loc", ], ymax = out["up.loc", ]))
+    yl <- range(c(out[c("low.scale", "scale", "up.scale"), ]), finite = TRUE)
+    lst_plots[[2]] <- ggplot2::qplot(
+      x = u.i, y = out["scale", ], ylim = yl, xlab = xlb, ylab = "scale",
+      geom = c("point", "line")
+    ) +
+      ggplot2::geom_pointrange(mapping = ggplot2::aes(ymin = out["low.scale", ], ymax = out["up.scale", ]))
+    yl <- range(c(out[c("low.shape", "shape", "up.shape"), ]), finite = TRUE)
+    lst_plots[[3]] <- ggplot2::qplot(u.i, out["shape", ],
+                                     ylim = yl, xlab = "Threshold",
+                                     ylab = "shape", geom = c("point", "line")
+    ) +
+      ggplot2::geom_pointrange(mapping = ggplot2::aes(ymin = out["low.shape", ], ymax = out["up.shape", ]))
+  }
+  else if (type != "Exponential") {
+    yl <- range(c(out[c("low.t.scale", "t.scale", "up.t.scale"), ]), finite = TRUE)
+    lst_plots[[1]] <- ggplot2::qplot(
+      x = u.i, y = out["t.scale", ], ylim = yl, xlab = xlb, ylab = "reparameterized scale",
+      geom = c("point", "line"), main = main) +
+      ggplot2::geom_pointrange(mapping = ggplot2::aes(ymin = out["low.t.scale", ], ymax = out["up.t.scale", ]))
+    yl <- range(c(out[c("low.shape", "shape", "up.shape"), ]), finite = TRUE)
+    lst_plots[[2]] <- ggplot2::qplot(
+      x = u.i, y = out["shape", ], ylim = yl, xlab = "Threshold",
+      ylab = "shape", geom = c("point", "line")
+    ) +
+      ggplot2::geom_pointrange(mapping = ggplot2::aes(ymin = out["low.shape", ], ymax = out["up.shape", ]))
+  }
+  else {
+    yl <- range(c(out[c("low.scale", "scale", "up.scale"), 
+    ]), finite = TRUE)
+    return(ggplot2::qplot(
+      x = u.i, y = out["scale", ], ylim = yl, xlab = "Threshold",
+      ylab = "scale", geom = c("point", "line"), main = main
+    ) +
+      ggplot2::geom_pointrange(mapping = ggplot2::aes(ymin = out["low.scale", ], ymax = out["up.scale", ])))
+  }
+  patchwork::wrap_plots(lst_plots, ncol = 1) 
+}
+
+# This function produces multiple threshold plots for various stations at a time.
+plot_multiple_threshold <- function(data, station_col_name, element_col_name, r, type = c("GP", "PP", "Exponential"), nint = 10,
+                            alpha = 0.05, ncol = 1, xlb = "", main = NULL , verbose = FALSE,...) {
+  if (!missing(station_col_name)) {
+    plts <- list()
+    station_col <- data[, station_col_name]
+    stations <- unique(station_col)
+    for (i in seq_along(stations)) {
+      d <- data[station_col == stations[i], ]
+      element_col <- d[, element_col_name]
+      plts[[i]] <- threshold_Plot(x = element_col, main = stations[i], r = r, type = type, nint = nint, alpha = alpha, verbose = verbose)
+    }
+    patchwork::wrap_plots(plts, ncol = ncol)
+  }
+  else {
+    element_col <- data[, element_col_name]
+    threshold_Plot(x = element_col, r = r, type = type, nint = nint, alpha = alpha, verbose = verbose)
+  }
+}
