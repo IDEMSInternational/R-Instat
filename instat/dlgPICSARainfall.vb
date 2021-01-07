@@ -758,9 +758,6 @@ Public Class dlgPICSARainfall
             End If
             If bWrap Then
                 clsFacetFunction.SetRCommand("facet_wrap")
-                clsFacetOperator.AddParameter("wrap", iPosition:=0)
-            Else
-                clsFacetOperator.RemoveParameterByName("wrap")
             End If
             If bRow OrElse bCol Then
                 clsFacetFunction.SetRCommand("facet_grid")
