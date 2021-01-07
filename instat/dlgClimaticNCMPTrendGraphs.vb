@@ -95,9 +95,6 @@ Public Class dlgClimaticNCMPTrendGraphs
 
         ucrInputFilePath.SetParameter(New RParameter("ncmp_folder", 12))
         ucrInputFilePath.IsReadOnly = True
-
-        'ucrsave
-        ucrInputSaveTG.SetPrefix("trend_graphs")
     End Sub
 
     Private Sub SetDefaults()
@@ -110,7 +107,6 @@ Public Class dlgClimaticNCMPTrendGraphs
         ucrReceiverYearA4.SetMeAsReceiver()
         ucrInputFilePath.Reset()
         ucrInputFilePath.SetName("")
-        ucrInputSaveTG.Reset()
         bSubDialogOKEnabled = False
         bResetSubdialog = True
 
@@ -119,7 +115,7 @@ Public Class dlgClimaticNCMPTrendGraphs
         clsNCMPFunction.SetRCommand("p5_trends_graphs")
         clsNCMPFunction.AddParameter("nyba", 1950, iPosition:=8)
         clsNCMPFunction.AddParameter("nyea", 2019, iPosition:=9)
-        clsNCMPFunction.SetAssignTo(strTemp:=ucrInputSaveTG.GetText, bAssignToIsPrefix:=True)
+        clsNCMPFunction.SetAssignTo("trend_graphs_dfs")
         ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
     End Sub
 
@@ -128,7 +124,7 @@ Public Class dlgClimaticNCMPTrendGraphs
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYearA4.IsEmpty OrElse ucrReceiverMonthA4.IsEmpty OrElse ucrReceiverYearA2.IsEmpty OrElse ucrReceiverMonthA2.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse ucrInputFilePath.IsEmpty OrElse ucrNudNYBA.GetText = "" OrElse ucrNudNYEA.GetText = "" OrElse Not bSubDialogOKEnabled OrElse ucrInputSaveTG.IsEmpty Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYearA4.IsEmpty OrElse ucrReceiverMonthA4.IsEmpty OrElse ucrReceiverYearA2.IsEmpty OrElse ucrReceiverMonthA2.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse ucrInputFilePath.IsEmpty OrElse ucrNudNYBA.GetText = "" OrElse ucrNudNYEA.GetText = "" OrElse Not bSubDialogOKEnabled Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -169,10 +165,6 @@ Public Class dlgClimaticNCMPTrendGraphs
 
     Private Sub cmdChooseFile_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
         SelectLocationToSave()
-    End Sub
-
-    Private Sub ucrInputSaveTG_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSaveTG.ControlValueChanged
-        clsNCMPFunction.SetAssignTo(strTemp:=ucrInputSaveTG.GetText, bAssignToIsPrefix:=True)
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYearA4.ControlContentsChanged, ucrReceiverMonthA4.ControlContentsChanged, ucrReceiverYearA2.ControlContentsChanged, ucrReceiverMonthA2.ControlContentsChanged, ucrNudNYB.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrNudNYBA.ControlContentsChanged, ucrNudNYEA.ControlContentsChanged

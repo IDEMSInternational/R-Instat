@@ -49,8 +49,6 @@ Partial Class dlgClimaticNCMPTrendGraphs
         Me.ucrReceiverMonthA2 = New instat.ucrReceiverSingle()
         Me.ucrReceiverYearA2 = New instat.ucrReceiverSingle()
         Me.ucrSelectorForA2 = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrInputSaveTG = New instat.ucrInputTextBox()
-        Me.lblSaveRA = New System.Windows.Forms.Label()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -118,7 +116,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         Me.lblSaveFile.AutoSize = True
         Me.lblSaveFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSaveFile.Location = New System.Drawing.Point(7, 424)
+        Me.lblSaveFile.Location = New System.Drawing.Point(7, 401)
         Me.lblSaveFile.Name = "lblSaveFile"
         Me.lblSaveFile.Size = New System.Drawing.Size(74, 13)
         Me.lblSaveFile.TabIndex = 16
@@ -127,7 +125,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         'cmdChooseFile
         '
         Me.cmdChooseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdChooseFile.Location = New System.Drawing.Point(333, 420)
+        Me.cmdChooseFile.Location = New System.Drawing.Point(333, 397)
         Me.cmdChooseFile.Name = "cmdChooseFile"
         Me.cmdChooseFile.Size = New System.Drawing.Size(75, 23)
         Me.cmdChooseFile.TabIndex = 18
@@ -254,14 +252,14 @@ Partial Class dlgClimaticNCMPTrendGraphs
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(90, 421)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(90, 398)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
         Me.ucrInputFilePath.Size = New System.Drawing.Size(237, 21)
         Me.ucrInputFilePath.TabIndex = 17
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 449)
+        Me.ucrBase.Location = New System.Drawing.Point(9, 426)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 19
@@ -348,33 +346,11 @@ Partial Class dlgClimaticNCMPTrendGraphs
         Me.ucrSelectorForA2.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorForA2.TabIndex = 0
         '
-        'ucrInputSaveTG
-        '
-        Me.ucrInputSaveTG.AddQuotesIfUnrecognised = True
-        Me.ucrInputSaveTG.IsMultiline = False
-        Me.ucrInputSaveTG.IsReadOnly = False
-        Me.ucrInputSaveTG.Location = New System.Drawing.Point(131, 393)
-        Me.ucrInputSaveTG.Name = "ucrInputSaveTG"
-        Me.ucrInputSaveTG.Size = New System.Drawing.Size(153, 21)
-        Me.ucrInputSaveTG.TabIndex = 21
-        '
-        'lblSaveRA
-        '
-        Me.lblSaveRA.AutoSize = True
-        Me.lblSaveRA.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSaveRA.Location = New System.Drawing.Point(8, 395)
-        Me.lblSaveRA.Name = "lblSaveRA"
-        Me.lblSaveRA.Size = New System.Drawing.Size(121, 13)
-        Me.lblSaveRA.TabIndex = 20
-        Me.lblSaveRA.Text = "New Data Frame Name:"
-        '
         'dlgClimaticNCMPTrendGraphs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(467, 503)
-        Me.Controls.Add(Me.ucrInputSaveTG)
-        Me.Controls.Add(Me.lblSaveRA)
+        Me.ClientSize = New System.Drawing.Size(467, 483)
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdChooseFile)
@@ -434,6 +410,4 @@ Partial Class dlgClimaticNCMPTrendGraphs
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrInputSaveTG As ucrInputTextBox
-    Friend WithEvents lblSaveRA As Label
 End Class

@@ -90,9 +90,6 @@ Public Class dlgClimaticNCMPRegionAverage
         ucrChkOutputGridSquareData.SetText("Output Grid Square Data")
         ucrChkOutputGridSquareData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOutputGridSquareData.SetRDefault("FALSE")
-
-        ' ucrsave
-        ucrInputSaveRA.SetPrefix("region_average")
     End Sub
 
     Private Sub SetDefaults()
@@ -105,7 +102,6 @@ Public Class dlgClimaticNCMPRegionAverage
         ucrInputUNCode.Reset()
         ucrInputUNCode.SetName("")
         ucrInputResolution.SetName(1)
-        ucrInputSaveRA.Reset()
         bResetSubdialog = True
         bSubDialogOKEnabled = False
 
@@ -115,7 +111,7 @@ Public Class dlgClimaticNCMPRegionAverage
         clsNCMPFunction.SetRCommand("p4_region_average")
         clsNCMPFunction.AddParameter("nye", 2019, iPosition:=11)
         clsNCMPFunction.AddParameter("res", 1, iPosition:=14)
-        clsNCMPFunction.SetAssignTo(strTemp:=ucrInputSaveRA.GetText, bAssignToIsPrefix:=True)
+        clsNCMPFunction.SetAssignTo("region_average_dfs")
         ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
     End Sub
 
@@ -124,7 +120,7 @@ Public Class dlgClimaticNCMPRegionAverage
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYE.GetText = "" OrElse ucrInputSaveRA.IsEmpty OrElse ucrInputUNCode.IsEmpty OrElse Not bSubDialogOKEnabled Then
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYE.GetText = "" OrElse ucrInputUNCode.IsEmpty OrElse Not bSubDialogOKEnabled Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -139,11 +135,7 @@ Public Class dlgClimaticNCMPRegionAverage
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrInputSaveRA_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSaveRA.ControlValueChanged
-        clsNCMPFunction.SetAssignTo(strTemp:=ucrInputSaveRA.GetText, bAssignToIsPrefix:=True)
-    End Sub
-
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputUNCode.ControlContentsChanged, ucrInputSaveRA.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputUNCode.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

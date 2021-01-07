@@ -40,8 +40,6 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorForA2 = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrInputSaveRA = New instat.ucrInputTextBox()
-        Me.lblSaveRA = New System.Windows.Forms.Label()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -74,7 +72,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.grpOptions.Controls.Add(Me.lblUNCode)
         Me.grpOptions.Controls.Add(Me.ucrNudNYE)
         Me.grpOptions.Controls.Add(Me.lblNYER)
-        Me.grpOptions.Location = New System.Drawing.Point(177, 216)
+        Me.grpOptions.Location = New System.Drawing.Point(181, 216)
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.Size = New System.Drawing.Size(228, 124)
         Me.grpOptions.TabIndex = 9
@@ -173,7 +171,7 @@ Partial Class dlgClimaticNCMPRegionAverage
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 372)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 346)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(405, 52)
         Me.ucrBase.TabIndex = 12
@@ -235,34 +233,12 @@ Partial Class dlgClimaticNCMPRegionAverage
         Me.ucrSelectorForA2.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorForA2.TabIndex = 0
         '
-        'ucrInputSaveRA
-        '
-        Me.ucrInputSaveRA.AddQuotesIfUnrecognised = True
-        Me.ucrInputSaveRA.IsMultiline = False
-        Me.ucrInputSaveRA.IsReadOnly = False
-        Me.ucrInputSaveRA.Location = New System.Drawing.Point(132, 346)
-        Me.ucrInputSaveRA.Name = "ucrInputSaveRA"
-        Me.ucrInputSaveRA.Size = New System.Drawing.Size(153, 21)
-        Me.ucrInputSaveRA.TabIndex = 11
-        '
-        'lblSaveRA
-        '
-        Me.lblSaveRA.AutoSize = True
-        Me.lblSaveRA.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSaveRA.Location = New System.Drawing.Point(9, 348)
-        Me.lblSaveRA.Name = "lblSaveRA"
-        Me.lblSaveRA.Size = New System.Drawing.Size(121, 13)
-        Me.lblSaveRA.TabIndex = 10
-        Me.lblSaveRA.Text = "New Data Frame Name:"
-        '
         'dlgClimaticNCMPRegionAverage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 429)
-        Me.Controls.Add(Me.ucrInputSaveRA)
+        Me.ClientSize = New System.Drawing.Size(417, 403)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.lblSaveRA)
         Me.Controls.Add(Me.ucrSelectorForA3)
         Me.Controls.Add(Me.cmdStationMetadata)
         Me.Controls.Add(Me.grpOptions)
@@ -304,6 +280,4 @@ Partial Class dlgClimaticNCMPRegionAverage
     Friend WithEvents ucrInputResolution As ucrInputComboBox
     Friend WithEvents ucrInputUNCode As ucrInputTextBox
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrInputSaveRA As ucrInputTextBox
-    Friend WithEvents lblSaveRA As Label
 End Class
