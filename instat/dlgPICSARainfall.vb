@@ -125,7 +125,7 @@ Public Class dlgPICSARainfall
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
-        XAxisDataTypeCheck()
+        ' XAxisDataTypeCheck()
         TestOkEnabled()
     End Sub
 
@@ -149,8 +149,9 @@ Public Class dlgPICSARainfall
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.Selector = ucrSelectorPICSARainfall
         ucrReceiverX.SetClimaticType("year")
-        ucrReceiverX.bAutoFill = True
         ucrReceiverX.bWithQuotes = False
+        ucrReceiverX.SetIncludedDataTypes({"numeric", "factor"})
+        ucrReceiverX.bAddParameterIfEmpty = True
 
         ucrReceiverColourBy.SetParameter(New RParameter("colour", 2))
         ucrReceiverColourBy.Selector = ucrSelectorPICSARainfall
@@ -325,6 +326,7 @@ Public Class dlgPICSARainfall
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
+        'clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         clsAsFactorFunction.SetRCommand("as.factor")
 
         clsGeomLine.SetPackageName("ggplot2")
@@ -621,7 +623,7 @@ Public Class dlgPICSARainfall
         ucrSelectorPICSARainfall.SetRCode(clsPipeOperator, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
-        ucrReceiverFacetBy.SetRCode(clsFacetOperator, bReset)
+        'ucrReceiverFacetBy.SetRCode(clsFacetOperator, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForPicsa.SetRCode(clsAsNumeric, bReset)
@@ -682,7 +684,7 @@ Public Class dlgPICSARainfall
     Private Sub UpdateParameters()
         Dim strTemp As String = ""
 
-        clsRaesFunction.RemoveParameterByName("x")
+        'clsRaesFunction.RemoveParameterByName("x")
         clsRaesFunction.RemoveParameterByName("color")
         clsRaesFunction.RemoveParameterByName("fill")
         clsAsFactorFunction.RemoveParameterByName("x")
@@ -702,7 +704,7 @@ Public Class dlgPICSARainfall
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
                 dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(False)
                 dctComboReceiver(ucrInputTemp).SetRCode(clsAsFactorFunction)
-                clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
+                ' clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
             ElseIf strTemp = strColour Then
                 '    If rdoJitter.Checked Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
@@ -723,9 +725,9 @@ Public Class dlgPICSARainfall
                 dctComboReceiver(ucrInputTemp).SetRCode(clsFacetRowOp)
             End If
         Next
-        If Not clsRaesFunction.ContainsParameter("x") Then
-            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-        End If
+        'If Not clsRaesFunction.ContainsParameter("x") Then
+        '    clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+        'End If
         bUpdatingParameters = False
     End Sub
 
@@ -842,7 +844,7 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
-        XAxisDataTypeCheck()
+        ' XAxisDataTypeCheck()
     End Sub
 
     Private Sub XAxisDataTypeCheck()
@@ -854,7 +856,7 @@ Public Class dlgPICSARainfall
         End If
     End Sub
 
-    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged
+    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverX.ControlValueChanged
         'If ucrReceiverFacetBy.IsEmpty Then
         '    clsBaseOperator.RemoveParameterByName("facets")
         'Else
@@ -862,7 +864,7 @@ Public Class dlgPICSARainfall
         '    clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, iPosition:=30)
         'End If
         AddRemoveFacets()
-        ' AddRemoveGroupBy()
+        AddRemoveGroupBy()
     End Sub
 
     Private Sub AutoFacetStation()
@@ -875,7 +877,7 @@ Public Class dlgPICSARainfall
         If ucrCurrentReceiver IsNot Nothing Then
             ucrCurrentReceiver.SetMeAsReceiver()
         End If
-        'AddRemoveGroupBy()
+        AddRemoveGroupBy()
     End Sub
 
     Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForPicsa.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverFacetBy.ControlValueChanged
@@ -907,8 +909,7 @@ Public Class dlgPICSARainfall
             End If
 
             If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
-                clsGroupByFunction.AddParameter(i, "variable", bIncludeArgumentName:=False, iPosition:=0)
-                i = i + 1
+                clsGroupByFunction.AddParameter("variable", bIncludeArgumentName:=False, iPosition:=0)
             End If
 
             If clsGroupByFunction.iParameterCount > 0 Then
