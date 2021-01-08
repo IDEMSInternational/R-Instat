@@ -572,7 +572,7 @@ Public Class dlgOneVarFitModel
                 ucrBase.OKEnabled(True)
             End If
         Else
-                ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
