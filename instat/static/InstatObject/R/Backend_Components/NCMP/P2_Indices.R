@@ -137,13 +137,16 @@ p2_indices <- function(df, station, date, precip, tmax, tmin, qct = 0, qcpr = 0,
              "SPI", 
              "TX90p", "TN90p", 
              "TX10p", "TN10p", 
-             "RXday1_date", "RXday1", "TXx_date", "TXx", "TNx_date", "TNx", "TXn_date", "TXn", "TNn_date", "TNn")
-  labx <- c("Monthly Mean Temp", "Monthly Mean Temp Anom", "Monthly Total Prec Anom", "Monthly Total Prec Anom Norm",
-            "Monthly Total Prec", "Monthly Total Prec Ratio", "Standard Prec Index",
-            "Warm Days", "Warm Nights", "Cold Days", "Cold Nights", "Extreme Cold Day", "Extreme Cold Day Date",
-            "Extreme Cold Night", "Extreme Cold Night Date", "Extreme Prec", "Extreme Cold Prec Date",
-            "Extreme Warm Day", "Extreme Warm Day Date", "Extreme Warm Night", "Extreme Warm Night Date")
-  
+             "RXday1_date", "RXday1", "TXx_date", "TXx", "TNx_date", "TNx",
+             "TXn_date", "TXn", "TNn_date", "TNn")
+  labx <- c("Monthly Mean Temp", "Monthly Mean Temp Anom",
+            "Monthly Total Prec Anom", "Monthly Total Prec Anom Norm", "Monthly Total Prec", "Monthly Total Prec Ratio",
+            "Standard Prec Index",
+            "Warm Days", "Warm Nights",
+            "Cold Days", "Cold Nights",
+            "Extreme Prec Date", "Extreme Prec", "Extreme Warm Day Date", "Extreme Warm Day", "Extreme Warm Night Date", "Extreme Warm Night",
+            "Extreme Cold Day Date", "Extreme Cold Day", "Extreme Cold Night Date", "Extreme Cold Night")
+
   ###################################################################################
   # Begins loop for reading data files and doing calculations                       #
   ###################################################################################
