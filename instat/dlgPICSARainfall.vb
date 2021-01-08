@@ -125,7 +125,7 @@ Public Class dlgPICSARainfall
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
-        ' XAxisDataTypeCheck()
+        XAxisDataTypeCheck()
         TestOkEnabled()
     End Sub
 
@@ -839,11 +839,9 @@ Public Class dlgPICSARainfall
             clsGeomLine.AddParameter("colour", Chr(34) & "blue" & Chr(34))
         End If
     End Sub
-
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
-        ' XAxisDataTypeCheck()
+        XAxisDataTypeCheck()
     End Sub
-
     Private Sub XAxisDataTypeCheck()
         If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
             clsGeomLine.AddParameter("group", 1)
