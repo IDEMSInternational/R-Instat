@@ -889,7 +889,6 @@ Public Class dlgOneVarFitModel
     ''' <summary> 
     '''Lists the factor levels of the selected factor or logical column into the success combobox
     ''' </summary>
-
     Private Sub AddFactorLevels()
         If bRCodeSet Then
             Dim chrCurrentFactorLevels As CharacterVector
