@@ -639,6 +639,8 @@ Public Class dlgOneVarFitModel
         ElseIf rdoEstimate.Checked Then
             ucrSaveModel.SetCheckBoxText("Save Estimate")
             ucrSaveModel.SetPrefix("ci")
+        Else
+            MsgBox("Developer error: the Radio Button has not been added to the Panel.")
         End If
     End Sub
 
@@ -754,7 +756,7 @@ Public Class dlgOneVarFitModel
                         clsBrFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                     Case "Sen"
                         tttests.SetToolTip(ucrInputComboTests.cboInput, "Sen's slope for linear rate of change")
-                        clsSenFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
+            clsSenFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                     Case "serial corr"
                         clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertVectorFunction, iPosition:=0)
 
@@ -882,6 +884,8 @@ Public Class dlgOneVarFitModel
                     ucrBase.clsRsyntax.SetBaseRFunction(clsSdCIFunction)
                 Case "variance"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsVarCIFunction)
+                Case Else
+                    MsgBox("Developer error: there is no Estimate called" & Chr(34) & ucrInputComboEstimate.GetValue() & Chr(34) & vbNewLine & "Default Estimate will be selected.")
             End Select
         End If
     End Sub
