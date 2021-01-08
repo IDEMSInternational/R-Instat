@@ -753,7 +753,7 @@ Public Class dlgOneVarFitModel
                         tttests.SetToolTip(ucrInputComboTests.cboInput, "Buishand Range Test for Change-Point Detection")
                         clsBrFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                     Case "Sen"
-                        tttests.SetToolTip(ucrInputComboTests.cboInput, "Sen 's slope for linear rate of change")
+                        tttests.SetToolTip(ucrInputComboTests.cboInput, "Sen's slope for linear rate of change")
                         clsSenFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverVariable.GetParameter().clsArgumentCodeStructure, iPosition:=0)
                     Case "serial corr"
                         clsSerialCorrFunction.AddParameter("x", clsRFunctionParameter:=clsRConvertVector, iPosition:=0)
