@@ -184,7 +184,7 @@ Public Class dlgInfillMissingValues
         ucrChkMeanBias.AddToLinkedControls(ucrInputMeanBias, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
         ucrChkStdBias.AddToLinkedControls(ucrInputStdBias, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2.5)
         ucrPnlOptions.AddToLinkedControls({ucrSaveGraph, ucrReceiverDisplayShowDate, ucrReceiverDisplayObserved}, {rdoDisplay, rdoShow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverDispMultShowStation}, {rdoDisplay, rdoFitMultiple, rdoShow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkAddLegend, ucrReceiverDispMultShowStation}, {rdoDisplay, rdoFitMultiple, rdoShow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverImputed, ucrReceiverTrueValues}, {rdoShow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrInputComboType}, {rdoDisplay}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputComboType.AddToLinkedControls({ucrChkFlipCordinates}, {"Gap size"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -485,12 +485,11 @@ Public Class dlgInfillMissingValues
                     End Select
                 End If
             ElseIf rdoShow.Checked Then
-                ucrChkAddLegend.Visible = True
                 clsVisualizeElementNa.AddParameter("type", Chr(34) & "imputation" & Chr(34), iPosition:=8)
             End If
             cmdDisplayOptions.Visible = True
         ElseIf rdoFitSingle.Checked Then
-            ucrChkAddLegend.Visible = False
+            ucrChkMeanBias.Visible = False
             cmdDisplayOptions.Visible = False
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
@@ -502,7 +501,7 @@ Public Class dlgInfillMissingValues
                 ucrBase.clsRsyntax.SetBaseRFunction(clsAveFunction)
             End If
         ElseIf rdoFitMultiple.Checked Then
-            ucrChkAddLegend.Visible = False
+            ucrChkAddLegend.Visible = True
             cmdDisplayOptions.Visible = False
             ucrReceiverStation.Visible = True
             ucrBase.clsRsyntax.SetBaseRFunction(clsPatchClimateElementFunction)
