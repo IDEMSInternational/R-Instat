@@ -109,7 +109,6 @@ Public Class dlgCumulativeDistribution
         ucrChkCountsOnYAxis.SetText("Counts on Y Axis")
 
         ucrChkIncludePoints.SetText("Include Points")
-        ' ucrChkIncludePoints.SetParameter(New RParameter(""))
         ucrChkIncludePoints.SetParameter(New RParameter("geom"), bNewChangeParameterValue:=False)
         ucrChkIncludePoints.SetParameterValue(Chr(34) & "point" & Chr(34))
 
@@ -199,7 +198,6 @@ Public Class dlgCumulativeDistribution
         clsYScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSequence)
 
         clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsStatECDFFunction, iPosition:=1)
-        clsBaseOperator.AddParameter(strFirstPointParameterName, clsRFunctionParameter:=clsStatECDFPointFunction, iPosition:=2)
         clsBaseOperator.AddParameter(strYScleParameterName, clsRFunctionParameter:=clsYScalecontinuousFunction, bIncludeArgumentName:=False)
 
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
@@ -259,4 +257,11 @@ Public Class dlgCumulativeDistribution
         End If
     End Sub
 
+    Private Sub ucrChkIncludePoints_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludePoints.ControlValueChanged
+        If ucrChkIncludePoints.Checked Then
+            clsBaseOperator.AddParameter(strFirstPointParameterName, clsRFunctionParameter:=clsStatECDFPointFunction, iPosition:=2)
+        Else
+            clsBaseOperator.RemoveParameterByName(strFirstPointParameterName)
+        End If
+    End Sub
 End Class
