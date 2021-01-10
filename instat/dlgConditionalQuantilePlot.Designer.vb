@@ -22,6 +22,7 @@ Partial Class dlgConditionalQuantilePlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrConditionalQuantilePlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverObservations = New instat.ucrReceiverSingle()
@@ -29,7 +30,6 @@ Partial Class dlgConditionalQuantilePlot
         Me.lblPredictions = New System.Windows.Forms.Label()
         Me.ucrReceiverPredictions = New instat.ucrReceiverSingle()
         Me.cmdPlotOptions = New System.Windows.Forms.Button()
-        Me.ucrNudMinBin = New instat.ucrNud()
         Me.ucrNudBin = New instat.ucrNud()
         Me.ucrChkMinBin = New instat.ucrCheck()
         Me.ucrChkBin = New instat.ucrCheck()
@@ -40,6 +40,8 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrChkLegendPosition = New instat.ucrCheck()
         Me.ucrNudKeyColumns = New instat.ucrNud()
         Me.ucrChkKeyColumns = New instat.ucrCheck()
+        Me.ucrInputMinBin = New instat.ucrInputTextBox()
+        Me.ttConditionalQuatilePlot = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'ucrBase
@@ -106,6 +108,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         'cmdPlotOptions
         '
+        Me.cmdPlotOptions.Enabled = False
         Me.cmdPlotOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdPlotOptions.Location = New System.Drawing.Point(9, 211)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
@@ -114,23 +117,11 @@ Partial Class dlgConditionalQuantilePlot
         Me.cmdPlotOptions.Text = "Plot Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
-        'ucrNudMinBin
-        '
-        Me.ucrNudMinBin.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinBin.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinBin.Location = New System.Drawing.Point(158, 243)
-        Me.ucrNudMinBin.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMinBin.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinBin.Name = "ucrNudMinBin"
-        Me.ucrNudMinBin.Size = New System.Drawing.Size(40, 20)
-        Me.ucrNudMinBin.TabIndex = 70
-        Me.ucrNudMinBin.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrNudBin
         '
         Me.ucrNudBin.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBin.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBin.Location = New System.Drawing.Point(54, 243)
+        Me.ucrNudBin.Location = New System.Drawing.Point(54, 244)
         Me.ucrNudBin.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBin.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBin.Name = "ucrNudBin"
@@ -189,7 +180,7 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(108, 278)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(108, 277)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(98, 21)
         Me.ucrInputLegendPosition.TabIndex = 75
@@ -206,7 +197,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.ucrNudKeyColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudKeyColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudKeyColumns.Location = New System.Drawing.Point(108, 307)
+        Me.ucrNudKeyColumns.Location = New System.Drawing.Point(115, 307)
         Me.ucrNudKeyColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudKeyColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudKeyColumns.Name = "ucrNudKeyColumns"
@@ -219,21 +210,37 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrChkKeyColumns.Checked = False
         Me.ucrChkKeyColumns.Location = New System.Drawing.Point(9, 310)
         Me.ucrChkKeyColumns.Name = "ucrChkKeyColumns"
-        Me.ucrChkKeyColumns.Size = New System.Drawing.Size(85, 17)
+        Me.ucrChkKeyColumns.Size = New System.Drawing.Size(100, 17)
         Me.ucrChkKeyColumns.TabIndex = 77
+        '
+        'ucrInputMinBin
+        '
+        Me.ucrInputMinBin.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinBin.IsMultiline = False
+        Me.ucrInputMinBin.IsReadOnly = False
+        Me.ucrInputMinBin.Location = New System.Drawing.Point(161, 242)
+        Me.ucrInputMinBin.Name = "ucrInputMinBin"
+        Me.ucrInputMinBin.Size = New System.Drawing.Size(77, 21)
+        Me.ucrInputMinBin.TabIndex = 78
+        '
+        'ttConditionalQuatilePlot
+        '
+        Me.ttConditionalQuatilePlot.AutoPopDelay = 10000
+        Me.ttConditionalQuatilePlot.InitialDelay = 500
+        Me.ttConditionalQuatilePlot.ReshowDelay = 100
         '
         'dlgConditionalQuantilePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(423, 418)
+        Me.Controls.Add(Me.ucrInputMinBin)
         Me.Controls.Add(Me.ucrChkKeyColumns)
         Me.Controls.Add(Me.ucrNudKeyColumns)
         Me.Controls.Add(Me.ucrInputLegendPosition)
         Me.Controls.Add(Me.ucrChkLegendPosition)
         Me.Controls.Add(Me.ucrReceiverMultipleFacet)
         Me.Controls.Add(Me.ucrSavePlot)
-        Me.Controls.Add(Me.ucrNudMinBin)
         Me.Controls.Add(Me.ucrNudBin)
         Me.Controls.Add(Me.cmdPlotOptions)
         Me.Controls.Add(Me.ucrChkMinBin)
@@ -264,7 +271,6 @@ Partial Class dlgConditionalQuantilePlot
     Friend WithEvents ucrReceiverPredictions As ucrReceiverSingle
     Friend WithEvents cmdPlotOptions As Button
     Friend WithEvents ucrChkMinBin As ucrCheck
-    Friend WithEvents ucrNudMinBin As ucrNud
     Friend WithEvents ucrNudBin As ucrNud
     Friend WithEvents ucrChkBin As ucrCheck
     Friend WithEvents ucrSavePlot As ucrSave
@@ -274,4 +280,6 @@ Partial Class dlgConditionalQuantilePlot
     Friend WithEvents ucrNudKeyColumns As ucrNud
     Friend WithEvents ucrInputLegendPosition As ucrInputComboBox
     Friend WithEvents ucrChkLegendPosition As ucrCheck
+    Friend WithEvents ucrInputMinBin As ucrInputTextBox
+    Friend WithEvents ttConditionalQuatilePlot As ToolTip
 End Class
