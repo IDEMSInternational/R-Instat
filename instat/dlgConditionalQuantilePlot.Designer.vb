@@ -180,7 +180,7 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(108, 277)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(109, 277)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(98, 21)
         Me.ucrInputLegendPosition.TabIndex = 75
@@ -190,7 +190,7 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrChkLegendPosition.Checked = False
         Me.ucrChkLegendPosition.Location = New System.Drawing.Point(9, 281)
         Me.ucrChkLegendPosition.Name = "ucrChkLegendPosition"
-        Me.ucrChkLegendPosition.Size = New System.Drawing.Size(85, 17)
+        Me.ucrChkLegendPosition.Size = New System.Drawing.Size(100, 17)
         Me.ucrChkLegendPosition.TabIndex = 74
         '
         'ucrNudKeyColumns
