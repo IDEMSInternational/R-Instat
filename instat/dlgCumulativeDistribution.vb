@@ -18,8 +18,10 @@ Imports instat.Translations
 Public Class dlgCumulativeDistribution
     Private clsRggplotFunction As New RFunction
     Private clsStatECDFFunction As New RFunction
+    Private clsStatECDFPointFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private clsStatECDFAesFunction As New RFunction
+    Private clsStatECDFPointAesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private bFirstLoad As Boolean = True
     Private clsLabsFunction As New RFunction
@@ -37,8 +39,9 @@ Public Class dlgCumulativeDistribution
     Private bReset As Boolean = True
 
     Private strFirstParameterName As String = "stat_ecdf"
+    Private strFirstPointParameterName As String = "stat_ecdf2"
     Private strYScleParameterName As String = "YscaleContinous"
-    Private strGeomParameterNames() As String = {strFirstParameterName, strYScleParameterName}
+    Private strGeomParameterNames() As String = {strFirstParameterName, strFirstPointParameterName, strYScleParameterName}
 
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
@@ -106,9 +109,9 @@ Public Class dlgCumulativeDistribution
         ucrChkCountsOnYAxis.SetText("Counts on Y Axis")
 
         ucrChkIncludePoints.SetText("Include Points")
-        ucrChkIncludePoints.SetParameter(New RParameter("geom", iNewPosition:=1), bNewChangeParameterValue:=False)
+        ' ucrChkIncludePoints.SetParameter(New RParameter(""))
+        ucrChkIncludePoints.SetParameter(New RParameter("geom"), bNewChangeParameterValue:=False)
         ucrChkIncludePoints.SetParameterValue(Chr(34) & "point" & Chr(34))
-
 
         'ucrInputComboPad.SetParameter(New RParameter("pad"))
         'ucrInputComboPad.SetItems({"TRUE", "FALSE"})
@@ -127,8 +130,10 @@ Public Class dlgCumulativeDistribution
         clsBaseOperator = New ROperator
         clsRaesFunction = New RFunction
         clsStatECDFFunction = New RFunction
+        clsStatECDFPointFunction = New RFunction
         clsRggplotFunction = New RFunction
         clsStatECDFAesFunction = New RFunction
+        clsStatECDFPointAesFunction = New RFunction
 
         clsSequence = New RFunction
         clsSequence.SetRCommand("seq")
@@ -144,9 +149,6 @@ Public Class dlgCumulativeDistribution
         sdgPlots.Reset()
         bResetSubdialog = True
 
-        clsBaseOperator.SetOperation("+")
-        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -159,9 +161,21 @@ Public Class dlgCumulativeDistribution
         clsStatECDFFunction.SetRCommand("stat_ecdf")
         clsStatECDFFunction.AddParameter("pad", "FALSE", iPosition:=0)
 
+        clsStatECDFPointFunction.SetPackageName("ggplot2")
+        clsStatECDFPointFunction.SetRCommand("stat_ecdf")
+        clsStatECDFPointFunction.AddParameter("pad", "FALSE", iPosition:=0)
+
+        clsBaseOperator.SetOperation("+")
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+        clsBaseOperator.AddParameter("labs", clsRFunctionParameter:=clsLabsFunction)
+
         clsStatECDFAesFunction.SetPackageName("ggplot2")
         clsStatECDFAesFunction.SetRCommand("aes")
         clsStatECDFAesFunction.AddParameter("y", "1 - ..y..", iPosition:=0)
+
+        clsStatECDFPointAesFunction.SetPackageName("ggplot2")
+        clsStatECDFPointAesFunction.SetRCommand("aes")
+        clsStatECDFPointAesFunction.AddParameter("y", "1 - ..y..", iPosition:=0)
 
 
         clsYScalecontinuousFunction.AddParameter("labels", "scales::comma")
@@ -185,6 +199,7 @@ Public Class dlgCumulativeDistribution
         clsYScalecontinuousFunction.AddParameter("breaks", clsRFunctionParameter:=clsSequence)
 
         clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsStatECDFFunction, iPosition:=1)
+        clsBaseOperator.AddParameter(strFirstPointParameterName, clsRFunctionParameter:=clsStatECDFPointFunction, iPosition:=2)
         clsBaseOperator.AddParameter(strYScleParameterName, clsRFunctionParameter:=clsYScalecontinuousFunction, bIncludeArgumentName:=False)
 
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
@@ -203,7 +218,7 @@ Public Class dlgCumulativeDistribution
         ucrPnlOption.SetRCode(clsStatECDFFunction, bReset)
         ucrInputComboScales.SetRCode(clsYScalecontinuousFunction, bReset)
 
-        ucrChkIncludePoints.SetRCode(clsStatECDFFunction, bReset)
+        ucrChkIncludePoints.SetRCode(clsStatECDFPointFunction, bReset)
 
         ucrNudBy.SetRCode(clsSequence, bReset)
 
@@ -236,8 +251,12 @@ Public Class dlgCumulativeDistribution
     Private Sub ucrPnlOption_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOption.ControlValueChanged
         If rdoExceedance.Checked Then
             clsStatECDFFunction.AddParameter("mapping", clsRFunctionParameter:=clsStatECDFAesFunction, iPosition:=2)
+            clsStatECDFPointFunction.AddParameter("mapping", clsRFunctionParameter:=clsStatECDFPointAesFunction, iPosition:=2)
+
         ElseIf rdoCumulative.Checked Then
             clsStatECDFFunction.RemoveParameterByName("mapping")
+            clsStatECDFPointFunction.RemoveParameterByName("mapping")
         End If
     End Sub
+
 End Class
