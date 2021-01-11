@@ -63,6 +63,7 @@ Public Class dlgConditionalQuantilePlot
         ucrInputMinBin.SetParameter(New RParameter("min.bin", 5))
         ucrInputMinBin.SetValidationTypeAsNumeric()
         ucrInputMinBin.SetRDefault("c(10,20)")
+        ucrInputMinBin.AddQuotesIfUnrecognised = False
 
         ttConditionalQuatilePlot.SetToolTip(ucrInputMinBin.txtInput, "Min.bin can also be length of two e.g. min.bin = c(10,20)")
 
@@ -71,14 +72,14 @@ Public Class dlgConditionalQuantilePlot
         ucrNudKeyColumns.SetRDefault(2)
 
         ucrInputLegendPosition.SetParameter(New RParameter("key.position", 10))
-        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
-        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
-        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
         dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
+        dctLegendPosition.Add("Top", Chr(34) & "top" & Chr(34))
+        dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
+        dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
         dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
         ucrInputLegendPosition.SetItems(dctLegendPosition)
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
-        ucrInputLegendPosition.SetRDefault("bottom")
+        ucrInputLegendPosition.SetRDefault(Chr(34) & "bottom" & Chr(34))
         ucrInputLegendPosition.bAllowNonConditionValues = True
 
         ucrSavePlot.SetPrefix("conditionalquantile")
