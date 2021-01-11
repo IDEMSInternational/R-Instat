@@ -144,7 +144,9 @@ Public Class dlgConditionalQuantilePlot
 
     Private Sub ucrInputMinBin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMinBin.ControlValueChanged
         If ucrInputMinBin.Text.Contains(",") Then
-            clsConditionalQuantileFunction.AddParameter("min.bin", "c(" & ucrInputMinBin.GetText() & ")")
+            clsConditionalQuantileFunction.AddParameter("min.bin", "c(" & ucrInputMinBin.GetText() & ")", iPosition:=5) 'this is min.bin is length of two e.g min.bin = c(10,20) 
+        Else
+            clsConditionalQuantileFunction.AddParameter("min.bin", ucrInputMinBin.GetText(), iPosition:=5) 'this is min.bin is length of two e.g min.bin = c(10,20) 
         End If
     End Sub
 End Class
