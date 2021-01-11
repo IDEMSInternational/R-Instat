@@ -489,6 +489,7 @@ Public Class dlgOneVarFitModel
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsBionomialFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrReceiverVariable.AddAdditionalCodeParameterPair(clsProportionFunction, New RParameter("col_name", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsMedianCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsVarCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=2)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsSdCIFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=3)
@@ -896,11 +897,12 @@ Public Class dlgOneVarFitModel
     Private Sub AddFactorLevels()
         Dim bCurrentDatatype As Boolean = ucrReceiverVariable.strCurrDataType.ToLower = "logical" Or ucrReceiverVariable.strCurrDataType.ToLower = "factor"
         Dim bCurrentTest As Boolean = ucrInputComboTests.GetText() = "binomial" Or ucrInputComboTests.GetText() = "proportion"
+
         If bRCodeSet Then
             Dim chrCurrentFactorLevels As CharacterVector
             Dim lstFactor As List(Of String) = New List(Of String)()
-            If Not ucrReceiverVariable.IsEmpty AndAlso rdoTest.Checked Then
-                If bCurrentDatatype AndAlso bCurrentTest Then
+                If Not ucrReceiverVariable.IsEmpty AndAlso rdoTest.Checked Then
+                If (bCurrentDatatype) AndAlso bCurrentTest Then
                     clsGetFactorLevelFunction.AddParameter("col_name", ucrReceiverVariable.GetVariableNames(), iPosition:=1)
                     chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevelFunction.ToScript()).AsCharacter
                     For Each factor In chrCurrentFactorLevels
@@ -909,13 +911,17 @@ Public Class dlgOneVarFitModel
                     ucrInputSuccess.SetItems(lstFactor.ToArray)
                     ucrInputSuccess.SetText(lstFactor(0))
                     ucrInputSuccess.Visible = True
+                Else
+                    ucrInputSuccess.Visible = False
+                        clsBionomialFunction.RemoveParameterByName("success")
+                        clsProportionFunction.RemoveParameterByName("success")
+                    End If
+                Else
+                    ucrInputSuccess.Visible = False
+                    clsBionomialFunction.RemoveParameterByName("success")
+                    clsProportionFunction.RemoveParameterByName("success")
                 End If
-            Else
-                ucrInputSuccess.Visible = False
-                clsBionomialFunction.RemoveParameterByName("success")
-                clsProportionFunction.RemoveParameterByName("success")
             End If
-        End If
     End Sub
 
     Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboTests.ControlValueChanged, ucrInputComboEstimate.ControlValueChanged
