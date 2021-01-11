@@ -180,7 +180,7 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(108, 277)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(113, 277)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(98, 21)
         Me.ucrInputLegendPosition.TabIndex = 75
@@ -190,14 +190,14 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrChkLegendPosition.Checked = False
         Me.ucrChkLegendPosition.Location = New System.Drawing.Point(9, 281)
         Me.ucrChkLegendPosition.Name = "ucrChkLegendPosition"
-        Me.ucrChkLegendPosition.Size = New System.Drawing.Size(85, 17)
+        Me.ucrChkLegendPosition.Size = New System.Drawing.Size(100, 17)
         Me.ucrChkLegendPosition.TabIndex = 74
         '
         'ucrNudKeyColumns
         '
         Me.ucrNudKeyColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudKeyColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudKeyColumns.Location = New System.Drawing.Point(115, 307)
+        Me.ucrNudKeyColumns.Location = New System.Drawing.Point(113, 307)
         Me.ucrNudKeyColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudKeyColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudKeyColumns.Name = "ucrNudKeyColumns"
