@@ -434,26 +434,32 @@ Public Class dlgImportDataset
     ''' <summary>
     ''' Extracts the name of the file (without the extension) from selected file path.
     ''' It removes any special characters (i.e. any characters that are not letters, digits '_' or '-').
-    ''' It returns the resulting clean name. If the cleaned name is an empty string then returns 'defaultCleanFileName'.
-    ''' The special characters need to be removed because otherwise they trigger an error in some R commands.
+    ''' It returns the resulting clean name. If the cleaned name is an empty string then returns 'defaultCleanName'.
+    ''' The special characters need to be removed otherwise they trigger an error in some R commands.
     ''' </summary>
     ''' <returns>  
     ''' Returns the file name (without extension) with any special characters removed.
-    ''' If the cleaned name is an empty string then returns 'defaultCleanFileName'.
+    ''' If the cleaned name is an empty string then returns 'defaultCleanName'.
     ''' </returns>
     Private Function GetCleanedSelectedFileName() As String
-        Dim strCleanFileName As String = "defaultCleanFileName"
-        Dim selectedFilePath As String = GetSelectedFilePath(bInSystemFormat:=True)
-
-        If String.IsNullOrEmpty(selectedFilePath) Then
-            Return strCleanFileName
-        Else
-            strCleanFileName = System.Text.RegularExpressions.Regex.Replace(Path.GetFileNameWithoutExtension(selectedFilePath), "[^A-Za-z0-9_\-]", "")
-            If String.IsNullOrEmpty(strCleanFileName) Then
-                strCleanFileName = "defaultCleanFileName"
-            End If
-            Return frmMain.clsRLink.MakeValidText(strCleanFileName)
+        Return GetCleanedName(Path.GetFileNameWithoutExtension(GetSelectedFilePath(bInSystemFormat:=True)))
+    End Function
+    ''' <summary>
+    ''' It removes any special characters (i.e. any characters that are not letters, digits '_' or '-') from the passed string name
+    ''' It returns the resulting clean name. If the cleaned name is an empty string then returns 'defaultCleanName'.
+    ''' The special characters need to be removed otherwise they trigger an error in some R commands.
+    ''' </summary>
+    ''' <returns>  
+    ''' Returns the file name (without extension) with any special characters removed.
+    ''' If the cleaned name is an empty string then returns 'defaultCleanName'.
+    ''' </returns>
+    Private Function GetCleanedName(strName As String) As String
+        Dim strCleanName As String
+        strCleanName = System.Text.RegularExpressions.Regex.Replace(strName, "[^A-Za-z0-9_\-]", "")
+        If String.IsNullOrEmpty(strCleanName) Then
+            strCleanName = "defaultCleanName"
         End If
+        Return frmMain.clsRLink.MakeValidText(strCleanName)
     End Function
 
     Private Sub SetControlsAndBaseFunction()
@@ -918,7 +924,7 @@ Public Class dlgImportDataset
             ucrSaveFile.SetName("", bSilent:=True)
             ucrSaveFile.SetDataFrameNames("")
         ElseIf dctSelectedExcelSheets.Count = 1 Then
-            ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First, bSilent:=True)
+            ucrSaveFile.SetName(GetCleanedName(dctSelectedExcelSheets.Values.First), bSilent:=True)
             ucrSaveFile.SetDataFrameNames("")
             'ucrSaveFile.Focus()
         Else
