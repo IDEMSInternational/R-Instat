@@ -57,37 +57,19 @@ Public Class dlgConditionalQuantilePlot
         ucrReceiverMultipleFacet.bExcludeFromSelector = True
 
         ucrNudBin.SetParameter(New RParameter("bins", 4))
-        ucrNudBin.SetMinMax(1, Integer.MaxValue)
-
-        ucrChkBin.AddParameterPresentCondition(True, "bins")
-        ucrChkBin.AddParameterPresentCondition(False, "bins", False)
-        ucrChkBin.SetText("Bins:")
+        ucrNudBin.Minimum = 1
+        ucrNudBin.SetRDefault(31)
 
         ucrInputMinBin.SetParameter(New RParameter("min.bin", 5))
         ucrInputMinBin.SetValidationTypeAsNumeric()
-        ucrInputMinBin.AddQuotesIfUnrecognised = False
-        ucrInputMinBin.bAllowNonConditionValues = True
-
-        ucrChkMinBin.SetText("Min.bin:")
-        ucrChkMinBin.AddParameterPresentCondition(True, "min.bin")
-        ucrChkMinBin.AddParameterPresentCondition(False, "min.bin", False)
+        ucrInputMinBin.SetRDefault("c(10,20)")
 
         ttConditionalQuatilePlot.SetToolTip(ucrInputMinBin.txtInput, "Min.bin can also be length of two e.g. min.bin = c(10,20)")
 
         ucrNudKeyColumns.SetParameter(New RParameter("key.columns", 9))
-        ucrNudKeyColumns.SetMinMax(1, Integer.MaxValue)
+        ucrNudKeyColumns.Minimum = 1
+        ucrNudKeyColumns.SetRDefault(2)
 
-        ucrChkKeyColumns.AddParameterPresentCondition(True, "key.columns")
-        ucrChkKeyColumns.AddParameterPresentCondition(False, "key.columns", False)
-        ucrChkKeyColumns.SetText("Key Column(s):")
-
-        ucrChkKeyColumns.AddToLinkedControls(ucrNudKeyColumns, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
-        ucrChkBin.AddToLinkedControls(ucrNudBin, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=31)
-        ucrChkMinBin.AddToLinkedControls(ucrInputMinBin, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="10")
-
-        ucrChkLegendPosition.SetText("Key Position:")
-        ucrChkLegendPosition.AddToLinkedControls(ucrInputLegendPosition, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Bottom")
-        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
         ucrInputLegendPosition.SetParameter(New RParameter("key.position", 10))
         dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
         dctLegendPosition.Add("Right", Chr(34) & "right" & Chr(34))
@@ -95,8 +77,9 @@ Public Class dlgConditionalQuantilePlot
         dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
         dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
         ucrInputLegendPosition.SetItems(dctLegendPosition)
-        ucrChkLegendPosition.AddParameterPresentCondition(True, "key.position")
-        ucrChkLegendPosition.AddParameterPresentCondition(False, "key.position", False)
+        ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
+        ucrInputLegendPosition.SetRDefault("bottom")
+        ucrInputLegendPosition.bAllowNonConditionValues = True
 
         ucrSavePlot.SetPrefix("conditionalquantile")
         ucrSavePlot.SetCheckBoxText("Save Graph")
@@ -131,22 +114,14 @@ Public Class dlgConditionalQuantilePlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverObservations.IsEmpty() AndAlso Not ucrReceiverPredictions.IsEmpty() AndAlso ucrSavePlot.IsComplete AndAlso (ucrChkBin.Checked OrElse ucrNudBin.GetText <> "") AndAlso (ucrChkKeyColumns.Checked OrElse ucrNudKeyColumns.GetText <> "") AndAlso (ucrChkMinBin.Checked OrElse Not ucrInputMinBin.IsEmpty) Then
+        If Not ucrReceiverObservations.IsEmpty() AndAlso Not ucrReceiverPredictions.IsEmpty() AndAlso ucrSavePlot.IsComplete AndAlso ucrNudBin.GetText <> "" AndAlso ucrNudKeyColumns.GetText <> "" AndAlso Not ucrInputMinBin.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrReceiverObservations_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObservations.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverPredictions.ControlContentsChanged, ucrNudBin.ControlContentsChanged, ucrNudKeyColumns.ControlContentsChanged, ucrInputMinBin.ControlContentsChanged, ucrChkBin.ControlContentsChanged, ucrChkKeyColumns.ControlContentsChanged, ucrChkMinBin.ControlContentsChanged
+    Private Sub ucrReceiverObservations_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObservations.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverPredictions.ControlContentsChanged, ucrNudBin.ControlContentsChanged, ucrNudKeyColumns.ControlContentsChanged, ucrInputMinBin.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrInputMinBin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMinBin.ControlValueChanged
-        If ucrInputMinBin.Text.Contains(",") Then
-            clsConditionalQuantileFunction.AddParameter("min.bin", "c(" & ucrInputMinBin.GetText() & ")", iPosition:=5) 'this is min.bin is length of two e.g min.bin = c(10,20) 
-        Else
-            clsConditionalQuantileFunction.AddParameter("min.bin", ucrInputMinBin.GetText(), iPosition:=5) 'this is min.bin is length of two e.g min.bin = c(10,20) 
-        End If
     End Sub
 End Class
