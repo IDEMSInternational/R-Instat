@@ -1577,7 +1577,12 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
   
   stopifnot(link_by %in% c("wmo_number", "station_name"))
   if (any(nchar(station_data[[year]]) != 4)) stop("year must be a 4 digit number.")
-  if (!missing(wmo_number) && any(nchar(station_data[[wmo_number]]) > 5, na.rm = TRUE)) stop("wmo_number must be no more than 5 digits.")
+  if (!missing(wmo_number)) {
+    # Convert to character to avoid incorrect 
+    if (is.factor(station_data[[wmo_number]])) station_data[[wmo_number]] <- as.character(station_data[[wmo_number]])
+    if (any(is.na(as.numeric(station_data[[wmo_number]])))) stop("wmo_number must not contain missing values and must be a number.")
+    if (any(nchar(as.character(station_data[[wmo_number]])) > 5, na.rm = TRUE)) stop("wmo_number must be no more than 5 digits.")
+  }
   
   if (link_by == "wmo_number") {
     station_link <- wmo_number
@@ -1588,6 +1593,9 @@ wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_
          paste(which(!unique(data[[link]]) %in% station_data[[wmo_number]]), collapse = ", "))
   }
   if (!missing(wmo_number)) {
+    print(station_data[[wmo_number]])
+    station_data[[wmo_number]] <- as.numeric(station_data[[wmo_number]])
+    print(station_data[[wmo_number]])
     station_data[[wmo_number]] <- ifelse(is.na(station_data[[wmo_number]]),
                                          "", sprintf("%05d", station_data[[wmo_number]]))
   } else {
