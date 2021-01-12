@@ -22,7 +22,7 @@ Public Class dlgOneVarFitModel
     Private clsRplotFunction, clsRplotPPCompFunction, clsRplotCdfCompFunction, clsRplotQqCompFunction, clsRplotDensCompFunction As New RFunction
     Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction, clsBartelFunction, clsBrFunction, clsRunsFunction, clsSenFunction, clsSerialCorrFunction, clsSnhFunction, clsAdFunction, clsCvmFunction, clsLillieFunction, clsPearsonFunction, clsSfFunction As New RFunction
     Private clsMeanCIFunction, clsMedianCIFunction, clsNormCIFunction, clsQuantileCIFunction, clsSdCIFunction, clsVarCIFunction As New RFunction
-    Private clsGetFactorLevelFunction As New RFunction
+    Private clsGetFactorLevelFunction, clsConvertToColumnTypeFunction, clsColumnNameFunction As New RFunction
     Private WithEvents ucrDistribution As ucrDistributions
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
@@ -301,6 +301,8 @@ Public Class dlgOneVarFitModel
         clsVarCIFunction = New RFunction
 
         clsGetFactorLevelFunction = New RFunction
+        clsConvertToColumnTypeFunction = New RFunction
+        clsColumnNameFunction = New RFunction
 
         ucrSelectorOneVarFitMod.Reset()
         ucrSaveModel.Reset()
@@ -309,6 +311,9 @@ Public Class dlgOneVarFitModel
 
         clsGetFactorLevelFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
 
+        clsConvertToColumnTypeFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+
+        clsColumnNameFunction.SetRCommand("c")
         'General Case
         clsROneVarFitModelFunction.SetPackageName("fitdistrplus")
         clsROneVarFitModelFunction.SetRCommand("fitdist")
@@ -897,20 +902,31 @@ Public Class dlgOneVarFitModel
     Private Sub AddFactorLevels()
         Dim bCurrentDatatype As Boolean = ucrReceiverVariable.strCurrDataType.ToLower = "logical" Or ucrReceiverVariable.strCurrDataType.ToLower = "factor"
         Dim bCurrentTest As Boolean = ucrInputComboTests.GetText() = "binomial" Or ucrInputComboTests.GetText() = "proportion"
+        Dim bCurrentTypeIsNumeric As Boolean = ucrReceiverVariable.strCurrDataType.ToLower = "numeric"
+
+
 
         If bRCodeSet Then
             Dim chrCurrentFactorLevels As CharacterVector
             Dim lstFactor As List(Of String) = New List(Of String)()
                 If Not ucrReceiverVariable.IsEmpty AndAlso rdoTest.Checked Then
-                If (bCurrentDatatype) AndAlso bCurrentTest Then
-                    clsGetFactorLevelFunction.AddParameter("col_name", ucrReceiverVariable.GetVariableNames(), iPosition:=1)
-                    chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevelFunction.ToScript()).AsCharacter
-                    For Each factor In chrCurrentFactorLevels
-                        lstFactor.Add(Chr(34) & factor & Chr(34))
-                    Next
-                    ucrInputSuccess.SetItems(lstFactor.ToArray)
-                    ucrInputSuccess.SetText(lstFactor(0))
-                    ucrInputSuccess.Visible = True
+                If (bCurrentDatatype OrElse bCurrentTypeIsNumeric) AndAlso bCurrentTest Then
+                    If bCurrentTypeIsNumeric Then
+                        clsConvertToColumnTypeFunction.AddParameter("data_name", ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text, iPosition:=0)
+                        clsConvertToColumnTypeFunction.AddParameter("to_type", "factor", iPosition:=1)
+                        clsConvertToColumnTypeFunction.AddParameter("col_names", clsRFunctionParameter:=clsColumnNameFunction, iPosition:=2)
+                        clsColumnNameFunction.AddParameter("column", ucrReceiverVariable.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
+                    Else
+
+                        clsGetFactorLevelFunction.AddParameter("col_name", ucrReceiverVariable.GetVariableNames(), iPosition:=1)
+                        chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevelFunction.ToScript()).AsCharacter
+                        For Each factor In chrCurrentFactorLevels
+                            lstFactor.Add(Chr(34) & factor & Chr(34))
+                        Next
+                        ucrInputSuccess.SetItems(lstFactor.ToArray)
+                        ucrInputSuccess.SetText(lstFactor(0))
+                        ucrInputSuccess.Visible = True
+                    End If
                 Else
                     ucrInputSuccess.Visible = False
                         clsBionomialFunction.RemoveParameterByName("success")
