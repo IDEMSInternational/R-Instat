@@ -20,10 +20,13 @@ Public Class dlgClimdexIndices
     Private bReset As Boolean = True
     Public bSaveIndex As Boolean = True
     Private bResetSubdialog As Boolean = False
-    Private clsDefaultFunction As New RFunction
-    Private clsRDataName, clsRPCIct, clsRChar, clsRWriteDf, clsRWriteDfIndicesList, clsRMaxMissingDays, clsRBaseRange, clsRTempQTiles, clsRPrecQTiles As New RFunction
-    Private clsFrostDays, clsSummerDays, clsIcingDays, clsTropicalNights, clsWarmSpellDI, clsColdSpellDI, clsGrowingSeasonLength, clsMonthlyMaxDailyTMax, clsMonthlyMaxDailyTMin, clsMonthlyMinDailyTMax, clsMonthlyMinDailyTMin, clsTminBelow10Percent, clsTmaxBelow10Percent, clsTminAbove90Percent, clsTmaxAbove90Percent, clsMeanDiurnalTempRange As New RFunction
-    Private clsMonthlyMax1DayPrec, clsMonthlyMax5DayPrec, clsSimplePrecII, clsPrecExceed10mm, clsPrecExceed20mm, clsPrecExceedSpecifiedA, clsMaxDrySpell, clsMaxWetSpell, clsPrecExceed95Percent, clsPrecExceed99Percent, clsTotalDailyPrec As New RFunction
+    Private clsClimdex As New RFunction
+    Private clsIndices As New RFunction
+    Private clsBaseRange As New RFunction
+    Private clsMaxMissingDays As New RFunction
+    Private clsTempQTiles As New RFunction
+    Private clsPrecQTiles As New RFunction
+    Private clsAddClimexIndices As New RFunction
 
     Private Sub dlgClimdex_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -45,315 +48,130 @@ Public Class dlgClimdexIndices
         ucrSelectorClimdex.SetParameter(New RParameter("data_name", 0))
         ucrSelectorClimdex.SetParameterIsString()
 
-        ucrReceiverDate.SetParameter(New RParameter("x", 1))
-        ucrReceiverDate.Selector = ucrSelectorClimdex
-        ucrReceiverDate.SetClimaticType("date")
-        ucrReceiverDate.bAutoFill = True
-        ucrReceiverDate.SetParameterIsRFunction()
-        ucrReceiverDate.strSelectorHeading = "Date Variables"
+        ucrReceiverStation.Selector = ucrSelectorClimdex
+        ucrReceiverStation.SetParameter(New RParameter("station", 1))
+        ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.SetClimaticType("station")
+        ucrReceiverStation.bAutoFill = True
 
+        ucrReceiverDate.Selector = ucrSelectorClimdex
+        ucrReceiverDate.SetParameter(New RParameter("date", 2))
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.SetIncludedDataTypes({"Date"})
+        ucrReceiverDate.bAutoFill = True
+
+        ucrReceiverYear.Selector = ucrSelectorClimdex
         ucrReceiverYear.SetParameter(New RParameter("year", 3))
         ucrReceiverYear.SetParameterIsString()
-        ucrReceiverYear.Selector = ucrSelectorClimdex
         ucrReceiverYear.SetClimaticType("year")
         ucrReceiverYear.bAutoFill = True
 
+        ucrReceiverMonth.Selector = ucrSelectorClimdex
         ucrReceiverMonth.SetParameter(New RParameter("month", 4))
         ucrReceiverMonth.SetParameterIsString()
-        ucrReceiverMonth.Selector = ucrSelectorClimdex
         ucrReceiverMonth.SetClimaticType("month")
         ucrReceiverMonth.bAutoFill = True
-
-        ucrReceiverTmax.SetParameter(New RParameter("tmax", 1))
-        ucrReceiverTmax.SetParameterIsRFunction()
-        ucrReceiverTmax.Selector = ucrSelectorClimdex
-        ucrReceiverTmax.SetClimaticType("temp_max")
-        ucrReceiverTmax.bAutoFill = True
-        ucrReceiverTmax.strSelectorHeading = "Maximum Temperature"
-
-        ucrReceiverTmin.SetParameter(New RParameter("tmin", 1))
-        ucrReceiverTmin.SetParameterIsRFunction()
-        ucrReceiverTmin.Selector = ucrSelectorClimdex
-        ucrReceiverTmin.SetClimaticType("temp_min")
-        ucrReceiverTmin.bAutoFill = True
-        ucrReceiverTmin.strSelectorHeading = "Minimum Temperature"
-
-        ucrReceiverPrec.SetParameter(New RParameter("prec", 1))
-        ucrReceiverPrec.SetParameterIsRFunction()
-        ucrReceiverPrec.Selector = ucrSelectorClimdex
-        ucrReceiverPrec.SetClimaticType("rain")
-        ucrReceiverPrec.bAutoFill = True
-        ucrReceiverPrec.strSelectorHeading = "Rain Variables"
-
-
-        ucrPnlAnnualMonthly.AddToLinkedControls({ucrReceiverMonth}, {rdoMonthly}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverMonth.SetLinkedDisplayControl(lblMonth)
+
+        ucrReceiverPrec.Selector = ucrSelectorClimdex
+        ucrReceiverPrec.SetParameter(New RParameter("prec", 5))
+        ucrReceiverPrec.SetParameterIsString()
+        ucrReceiverPrec.SetClimaticType("rain")
+        ucrReceiverPrec.SetIncludedDataTypes({"numeric"})
+        ucrReceiverPrec.bAutoFill = True
+
+        ucrReceiverTmax.Selector = ucrSelectorClimdex
+        ucrReceiverTmax.SetParameter(New RParameter("tmax", 6))
+        ucrReceiverTmax.SetParameterIsString()
+        ucrReceiverTmax.SetClimaticType("temp_max")
+        ucrReceiverTmax.SetIncludedDataTypes({"numeric"})
+        ucrReceiverTmax.bAutoFill = True
+
+        ucrReceiverTmin.Selector = ucrSelectorClimdex
+        ucrReceiverTmin.SetParameter(New RParameter("tmin", 7))
+        ucrReceiverTmin.SetParameterIsString()
+        ucrReceiverTmin.SetClimaticType("temp_min")
+        ucrReceiverTmin.SetIncludedDataTypes({"numeric"})
+        ucrReceiverTmin.bAutoFill = True
 
         ucrPnlAnnualMonthly.SetParameter(New RParameter("freq", 2))
         ucrPnlAnnualMonthly.AddRadioButton(rdoAnnual, Chr(34) & "annual" & Chr(34))
         ucrPnlAnnualMonthly.AddRadioButton(rdoMonthly, Chr(34) & "monthly" & Chr(34))
         ucrPnlAnnualMonthly.SetRDefault(Chr(34) & "annual" & Chr(34))
+        ucrPnlAnnualMonthly.AddToLinkedControls({ucrReceiverMonth}, {rdoMonthly}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkSave.SetText("Save Indices")
         ucrChkSave.bChangeParameterValue = False
-
-
-
     End Sub
 
     Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
-        clsRPCIct = New RFunction
-        clsRChar = New RFunction
-        clsRWriteDf = New RFunction
-        clsRMaxMissingDays = New RFunction
-        clsRBaseRange = New RFunction
-        clsRTempQTiles = New RFunction
-        clsRPrecQTiles = New RFunction
-        clsRWriteDfIndicesList = New RFunction
-
-        clsFrostDays = New RFunction
-        clsSummerDays = New RFunction
-        clsIcingDays = New RFunction
-        clsTropicalNights = New RFunction
-        clsWarmSpellDI = New RFunction
-        clsColdSpellDI = New RFunction
-        clsGrowingSeasonLength = New RFunction
-        clsMonthlyMaxDailyTMax = New RFunction
-        clsMonthlyMaxDailyTMin = New RFunction
-        clsMonthlyMinDailyTMax = New RFunction
-        clsMonthlyMinDailyTMin = New RFunction
-        clsTminBelow10Percent = New RFunction
-        clsTmaxBelow10Percent = New RFunction
-        clsTminAbove90Percent = New RFunction
-        clsTmaxAbove90Percent = New RFunction
-        clsMeanDiurnalTempRange = New RFunction
-        clsMonthlyMax1DayPrec = New RFunction
-        clsMonthlyMax5DayPrec = New RFunction
-        clsSimplePrecII = New RFunction
-        clsPrecExceed10mm = New RFunction
-        clsPrecExceed20mm = New RFunction
-        clsPrecExceedSpecifiedA = New RFunction
-        clsMaxDrySpell = New RFunction
-        clsMaxWetSpell = New RFunction
-        clsPrecExceed95Percent = New RFunction
-        clsPrecExceed99Percent = New RFunction
-        clsTotalDailyPrec = New RFunction
+        clsClimdex = New RFunction
+        clsIndices = New RFunction
+        clsBaseRange = New RFunction
+        clsMaxMissingDays = New RFunction
+        clsTempQTiles = New RFunction
+        clsPrecQTiles = New RFunction
 
         ucrSelectorClimdex.Reset()
-        ucrSelectorClimdex.Focus()
-        ucrReceiverDate.SetMeAsReceiver()
+        ucrReceiverStation.SetMeAsReceiver()
         ucrChkSave.Checked = True
 
-        'Define the default RFunction
-        clsDefaultFunction.SetPackageName("climdex.pcic")
-        clsDefaultFunction.SetRCommand("climdexInput.raw")
-        clsDefaultFunction.AddParameter("tmax.dates", clsRFunctionParameter:=clsRPCIct)
-        clsDefaultFunction.AddParameter("tmin.dates", clsRFunctionParameter:=clsRPCIct)
-        clsDefaultFunction.AddParameter("prec.dates", clsRFunctionParameter:=clsRPCIct)
-        clsDefaultFunction.AddParameter("base.range", clsRFunctionParameter:=clsRBaseRange, iPosition:=7)
-        clsDefaultFunction.AddParameter("northern.hemisphere", "TRUE", iPosition:=9) ' r-default
-        clsDefaultFunction.AddParameter("temp.qtiles", clsRFunctionParameter:=clsRTempQTiles, iPosition:=13)
-        clsDefaultFunction.AddParameter("prec.qtiles", clsRFunctionParameter:=clsRPrecQTiles, iPosition:=14)
-        clsDefaultFunction.AddParameter("max.missing.days", clsRFunctionParameter:=clsRMaxMissingDays, iPosition:=15)
-        clsDefaultFunction.AddParameter("min.base.data.fraction.present", 0.1, iPosition:=16) ' r-default
-        clsDefaultFunction.SetAssignTo("climdex_input")
+        clsClimdex.SetRCommand("climdex")
 
-        clsRMaxMissingDays.SetRCommand("c")
-        clsRMaxMissingDays.AddParameter("annual", 15, iPosition:=0) ' These are both r-defaults, however, if you change say monthly and so that parameter runs, we get an error that it wants to see annual too. So, I've removed the r-default for now.
-        clsRMaxMissingDays.AddParameter("monthly", 3, iPosition:=1) ' Also we don't want to run max.missing.days = c().
+        clsClimdex.AddParameter("indices", clsRFunctionParameter:=clsIndices, iPosition:=8)
+        clsClimdex.AddParameter("base.range", clsRFunctionParameter:=clsBaseRange, iPosition:=11)
+        clsClimdex.AddParameter("temp.qtiles", clsRFunctionParameter:=clsTempQTiles, iPosition:=14)
+        clsClimdex.AddParameter("prec.qtiles", clsRFunctionParameter:=clsPrecQTiles, iPosition:=15)
+        clsClimdex.AddParameter("max.missing.days", clsRFunctionParameter:=clsMaxMissingDays, iPosition:=16)
+        clsClimdex.SetAssignTo("ci")
 
-        clsRBaseRange.SetRCommand("c")
-        clsRBaseRange.AddParameter("lower_base", 1961, bIncludeArgumentName:=False, iPosition:=0)
-        clsRBaseRange.AddParameter("upper_base", 1990, bIncludeArgumentName:=False, iPosition:=1)
+        clsIndices.SetRCommand("c")
 
-        clsRTempQTiles.SetRCommand("c")
-        clsRTempQTiles.AddParameter("x", "0.1, 0.9", bIncludeArgumentName:=False, iPosition:=0) ' r-default, left in to avoid running temp.qtiles = c()
+        clsMaxMissingDays.SetRCommand("c")
+        clsMaxMissingDays.AddParameter("annual", 15, iPosition:=0)
+        clsMaxMissingDays.AddParameter("monthly", 3, iPosition:=1)
 
-        clsRPrecQTiles.SetRCommand("c")
-        clsRPrecQTiles.AddParameter("x", "0.95, 0.99", bIncludeArgumentName:=False, iPosition:=0)
+        clsBaseRange.SetRCommand("c")
+        clsBaseRange.AddParameter("0", 1961, bIncludeArgumentName:=False, iPosition:=0)
+        clsBaseRange.AddParameter("1", 1990, bIncludeArgumentName:=False, iPosition:=1)
 
-        clsRPCIct.SetPackageName("PCICt")
-        clsRPCIct.SetRCommand("as.PCICt")
-        clsRPCIct.AddParameter("x", clsRFunctionParameter:=clsRChar, iPosition:=0)
-        clsRPCIct.AddParameter("cal", Chr(34) & "gregorian" & Chr(34), iPosition:=1)
+        clsTempQTiles.SetRCommand("c")
+        clsTempQTiles.AddParameter("0", "0.1, 0.9", bIncludeArgumentName:=False, iPosition:=0)
 
-        clsRChar.SetRCommand("as.character")
+        clsPrecQTiles.SetRCommand("c")
+        clsPrecQTiles.AddParameter("0", "0.95, 0.99", bIncludeArgumentName:=False, iPosition:=0)
 
         ' For the sub dialog
-        clsRWriteDf.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_climdex_indices")
-        clsRWriteDf.AddParameter("indices", clsRFunctionParameter:=clsRWriteDfIndicesList, iPosition:=1)
-        clsRWriteDfIndicesList.SetRCommand("list")
+        clsAddClimexIndices.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_climdex_indices")
+        clsAddClimexIndices.AddParameter("climdex_output", clsRFunctionParameter:=clsClimdex, iPosition:=1)
 
-        clsFrostDays.SetPackageName("climdex.pcic")
-        clsFrostDays.SetRCommand("climdex.fd")
-        clsFrostDays.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsFrostDays.SetAssignTo("FD")
-
-        clsSummerDays.SetPackageName("climdex.pcic")
-        clsSummerDays.SetRCommand("climdex.su")
-        clsSummerDays.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsSummerDays.SetAssignTo("SU")
-
-        clsIcingDays.SetPackageName("climdex.pcic")
-        clsIcingDays.SetRCommand("climdex.id")
-        clsIcingDays.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsIcingDays.SetAssignTo("ID")
-
-        clsTropicalNights.SetPackageName("climdex.pcic")
-        clsTropicalNights.SetRCommand("climdex.tr")
-        clsTropicalNights.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsTropicalNights.SetAssignTo("TR")
-
-        clsWarmSpellDI.SetPackageName("climdex.pcic")
-        clsWarmSpellDI.SetRCommand("climdex.wsdi")
-        clsWarmSpellDI.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsWarmSpellDI.AddParameter("spells.can.span.years", "FALSE", iPosition:=1) ' r-default
-        clsWarmSpellDI.SetAssignTo("WSDI")
-
-        clsColdSpellDI.SetPackageName("climdex.pcic")
-        clsColdSpellDI.SetRCommand("climdex.csdi")
-        clsColdSpellDI.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsColdSpellDI.AddParameter("spells.can.span.years", "FALSE", iPosition:=1) ' r-default
-        clsColdSpellDI.SetAssignTo("CSDI")
-
-        clsGrowingSeasonLength.SetPackageName("climdex.pcic")
-        clsGrowingSeasonLength.SetRCommand("climdex.gsl")
-        clsGrowingSeasonLength.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsGrowingSeasonLength.SetAssignTo("GSL")
-
-        clsMonthlyMaxDailyTMax.SetPackageName("climdex.pcic")
-        clsMonthlyMaxDailyTMax.SetRCommand("climdex.txx")
-        clsMonthlyMaxDailyTMax.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsMonthlyMaxDailyTMax.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsMonthlyMaxDailyTMax.SetAssignTo("TXx")
-
-        clsMonthlyMaxDailyTMin.SetPackageName("climdex.pcic")
-        clsMonthlyMaxDailyTMin.SetRCommand("climdex.txn")
-        clsMonthlyMaxDailyTMin.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsMonthlyMaxDailyTMin.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsMonthlyMaxDailyTMin.SetAssignTo("TNx")
-
-        clsMonthlyMinDailyTMax.SetPackageName("climdex.pcic")
-        clsMonthlyMinDailyTMax.SetRCommand("climdex.tnx")
-        clsMonthlyMinDailyTMax.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsMonthlyMinDailyTMax.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsMonthlyMinDailyTMax.SetAssignTo("TXn")
-
-        clsMonthlyMinDailyTMin.SetPackageName("climdex.pcic")
-        clsMonthlyMinDailyTMin.SetRCommand("climdex.tnn")
-        clsMonthlyMinDailyTMin.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsMonthlyMinDailyTMin.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsMonthlyMinDailyTMin.SetAssignTo("TNn")
-
-        clsTminBelow10Percent.SetPackageName("climdex.pcic")
-        clsTminBelow10Percent.SetRCommand("climdex.tn10p")
-        clsTminBelow10Percent.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsTminBelow10Percent.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsTminBelow10Percent.SetAssignTo("TN10p")
-
-        clsTmaxBelow10Percent.SetPackageName("climdex.pcic")
-        clsTmaxBelow10Percent.SetRCommand("climdex.tx10p")
-        clsTmaxBelow10Percent.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsTmaxBelow10Percent.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsTmaxBelow10Percent.SetAssignTo("TX10p")
-
-        clsTminAbove90Percent.SetPackageName("climdex.pcic")
-        clsTminAbove90Percent.SetRCommand("climdex.tn90p")
-        clsTminAbove90Percent.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsTminAbove90Percent.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsTminAbove90Percent.SetAssignTo("TN90p")
-
-        clsTmaxAbove90Percent.SetPackageName("climdex.pcic")
-        clsTmaxAbove90Percent.SetRCommand("climdex.tx90p")
-        clsTmaxAbove90Percent.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsTmaxAbove90Percent.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsTmaxAbove90Percent.SetAssignTo("TX90p")
-
-        clsMeanDiurnalTempRange.SetPackageName("climdex.pcic")
-        clsMeanDiurnalTempRange.SetRCommand("climdex.dtr")
-        clsMeanDiurnalTempRange.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsMeanDiurnalTempRange.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsMeanDiurnalTempRange.SetAssignTo("DTR")
-
-        clsMonthlyMax1DayPrec.SetPackageName("climdex.pcic")
-        clsMonthlyMax1DayPrec.SetRCommand("climdex.rx1day")
-        clsMonthlyMax1DayPrec.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsMonthlyMax1DayPrec.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=1)
-        clsMonthlyMax1DayPrec.SetAssignTo("Rx1day")
-
-        clsMonthlyMax5DayPrec.SetPackageName("climdex.pcic")
-        clsMonthlyMax5DayPrec.SetRCommand("climdex.rx5day")
-        clsMonthlyMax5DayPrec.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsMonthlyMax5DayPrec.AddParameter("freq", Chr(34) & "annual" & Chr(34), iPosition:=2)
-        clsMonthlyMax5DayPrec.SetAssignTo("Rx5day")
-
-        clsSimplePrecII.SetPackageName("climdex.pcic")
-        clsSimplePrecII.SetRCommand("climdex.sdii")
-        clsSimplePrecII.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsSimplePrecII.SetAssignTo("SDII")
-
-        clsPrecExceed10mm.SetPackageName("climdex.pcic")
-        clsPrecExceed10mm.SetRCommand("climdex.r10mm")
-        clsPrecExceed10mm.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsPrecExceed10mm.SetAssignTo("R10mm")
-
-        clsPrecExceed20mm.SetPackageName("climdex.pcic")
-        clsPrecExceed20mm.SetRCommand("climdex.r20mm")
-        clsPrecExceed20mm.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsPrecExceed20mm.SetAssignTo("R20mm")
-
-        clsPrecExceedSpecifiedA.SetPackageName("climdex.pcic")
-        clsPrecExceedSpecifiedA.SetRCommand("climdex.rnnmm")
-        clsPrecExceedSpecifiedA.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsPrecExceedSpecifiedA.SetAssignTo("Rnnmm")
-
-        clsMaxDrySpell.SetPackageName("climdex.pcic")
-        clsMaxDrySpell.SetRCommand("climdex.cdd")
-        clsMaxDrySpell.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction, iPosition:=0)
-        clsMaxDrySpell.AddParameter("spells.can.span.years", "TRUE", iPosition:=1) ' r-default
-        clsMaxDrySpell.SetAssignTo("CDD")
-
-        clsMaxWetSpell.SetPackageName("climdex.pcic")
-        clsMaxWetSpell.SetRCommand("climdex.cwd")
-        clsMaxWetSpell.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsMaxWetSpell.AddParameter("spells.can.span.years", "TRUE", iPosition:=1) ' r-default
-        clsMaxWetSpell.SetAssignTo("CWD")
-
-        clsPrecExceed95Percent.SetPackageName("climdex.pcic")
-        clsPrecExceed95Percent.SetRCommand("climdex.r95ptot")
-        clsPrecExceed95Percent.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsPrecExceed95Percent.SetAssignTo("R95p")
-
-        clsPrecExceed99Percent.SetPackageName("climdex.pcic")
-        clsPrecExceed99Percent.SetRCommand("climdex.r99ptot")
-        clsPrecExceed99Percent.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsPrecExceed99Percent.SetAssignTo("R99p")
-
-        clsTotalDailyPrec.SetPackageName("climdex.pcic")
-        clsTotalDailyPrec.SetRCommand("climdex.prcptot")
-        clsTotalDailyPrec.AddParameter("ci", clsRFunctionParameter:=clsDefaultFunction)
-        clsTotalDailyPrec.SetAssignTo("PRCPTOT")
-
-        ' Set default RFunction as the base function
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRWriteDf)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsAddClimexIndices)
         bResetSubdialog = True
         ParameterCount()
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorClimdex.SetRCode(clsRWriteDf, bReset)
-        ucrReceiverYear.SetRCode(clsRWriteDf, bReset)
-        ucrReceiverMonth.SetRCode(clsRWriteDf, bReset)
-        ucrPnlAnnualMonthly.SetRCode(clsRWriteDf, bReset)
-        ucrReceiverTmin.SetRCode(clsDefaultFunction, bReset)
-        ucrReceiverTmax.SetRCode(clsDefaultFunction, bReset)
-        ucrReceiverPrec.SetRCode(clsDefaultFunction, bReset)
-        ucrReceiverDate.SetRCode(clsRChar, bReset)
+        ucrPnlAnnualMonthly.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("freq", iNewPosition:=2), iAdditionalPairNo:=1)
+        ucrReceiverStation.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("station", iNewPosition:=3), iAdditionalPairNo:=1)
+        ucrReceiverYear.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("year", iNewPosition:=4), iAdditionalPairNo:=1)
+        ucrReceiverMonth.AddAdditionalCodeParameterPair(clsAddClimexIndices, New RParameter("month", iNewPosition:=5), iAdditionalPairNo:=1)
+
+        ucrPnlAnnualMonthly.SetRCode(clsClimdex, bReset)
+        ucrSelectorClimdex.SetRCode(clsAddClimexIndices, bReset)
+        ucrReceiverStation.SetRCode(clsClimdex, bReset)
+        ucrReceiverDate.SetRCode(clsClimdex, bReset)
+        ucrReceiverYear.SetRCode(clsClimdex, bReset)
+        ucrReceiverMonth.SetRCode(clsClimdex, bReset)
+        ucrReceiverPrec.SetRCode(clsClimdex, bReset)
+        ucrReceiverTmax.SetRCode(clsClimdex, bReset)
+        ucrReceiverTmin.SetRCode(clsClimdex, bReset)
+
+        SetClimdexData()
     End Sub
 
-    Private Sub TestOkEnabled() ' check this!
-        If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverTmax.IsEmpty AndAlso Not ucrReceiverTmin.IsEmpty AndAlso Not ucrReceiverPrec.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty Then
+    Private Sub TestOkEnabled()
+        If Not ucrReceiverTmax.IsEmpty AndAlso Not ucrReceiverTmin.IsEmpty AndAlso Not ucrReceiverPrec.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso (rdoAnnual.Checked OrElse Not ucrReceiverMonth.IsEmpty) AndAlso clsIndices.iParameterCount > 0 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -367,10 +185,11 @@ Public Class dlgClimdexIndices
     End Sub
 
     Private Sub cmdIndices_Click(sender As Object, e As EventArgs) Handles cmdIndices.Click
-        sdgClimdexIndices.SetRCode(clsDefaultFunction, clsRWriteDf, clsRWriteDfIndicesList, clsRMaxMissingDays, clsRBaseRange, clsRTempQTiles, clsRPrecQTiles, clsFrostDays, clsSummerDays, clsIcingDays, clsTropicalNights, clsWarmSpellDI, clsColdSpellDI, clsGrowingSeasonLength, clsMonthlyMaxDailyTMax, clsMonthlyMaxDailyTMin, clsMonthlyMinDailyTMax, clsMonthlyMinDailyTMin, clsTminBelow10Percent, clsTmaxBelow10Percent, clsTminAbove90Percent, clsTmaxAbove90Percent, clsMeanDiurnalTempRange, clsMonthlyMax1DayPrec, clsMonthlyMax5DayPrec, clsSimplePrecII, clsPrecExceed10mm, clsPrecExceed20mm, clsPrecExceedSpecifiedA, clsMaxDrySpell, clsMaxWetSpell, clsPrecExceed95Percent, clsPrecExceed99Percent, clsTotalDailyPrec, bResetSubdialog)
+        sdgClimdexIndices.SetRCode(clsNewClimdex:=clsClimdex, clsNewIndices:=clsIndices, clsNewMaxMissingDays:=clsMaxMissingDays, clsNewBaseRange:=clsBaseRange, clsNewTempQTiles:=clsTempQTiles, clsNewPrecQTiles:=clsPrecQTiles, bResetSubdialog)
         bResetSubdialog = False
         sdgClimdexIndices.ShowDialog()
         ParameterCount()
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrPnlAnnualMonthly_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualMonthly.ControlContentsChanged
@@ -380,22 +199,22 @@ Public Class dlgClimdexIndices
             sdgClimdexIndices.grpTmaxTminAnnual.Enabled = True
             sdgClimdexIndices.grpPrecAnnual.Enabled = True
         ElseIf rdoMonthly.Checked Then
-            clsRWriteDfIndicesList.RemoveParameterByName("FD")
-            clsRWriteDfIndicesList.RemoveParameterByName("TR")
-            clsRWriteDfIndicesList.RemoveParameterByName("CSDI")
-            clsRWriteDfIndicesList.RemoveParameterByName("SU")
-            clsRWriteDfIndicesList.RemoveParameterByName("ID")
-            clsRWriteDfIndicesList.RemoveParameterByName("GSL")
-            clsRWriteDfIndicesList.RemoveParameterByName("SDII")
-            clsRWriteDfIndicesList.RemoveParameterByName("R10mm")
-            clsRWriteDfIndicesList.RemoveParameterByName("R20mm")
-            clsRWriteDfIndicesList.RemoveParameterByName("Rnnmm")
-            clsRWriteDfIndicesList.RemoveParameterByName("WSDI")
-            clsRWriteDfIndicesList.RemoveParameterByName("CDD")
-            clsRWriteDfIndicesList.RemoveParameterByName("CWD")
-            clsRWriteDfIndicesList.RemoveParameterByName("R95p")
-            clsRWriteDfIndicesList.RemoveParameterByName("R99p")
-            clsRWriteDfIndicesList.RemoveParameterByName("PRCPTOT")
+            clsIndices.RemoveParameterByName("fd")
+            clsIndices.RemoveParameterByName("tr")
+            clsIndices.RemoveParameterByName("csdi")
+            clsIndices.RemoveParameterByName("su")
+            clsIndices.RemoveParameterByName("id")
+            clsIndices.RemoveParameterByName("gsl")
+            clsIndices.RemoveParameterByName("sdii")
+            clsIndices.RemoveParameterByName("r10mm")
+            clsIndices.RemoveParameterByName("r20mm")
+            clsIndices.RemoveParameterByName("rnnmm")
+            clsIndices.RemoveParameterByName("wsdi")
+            clsIndices.RemoveParameterByName("cdd")
+            clsIndices.RemoveParameterByName("cwd")
+            clsIndices.RemoveParameterByName("r95p")
+            clsIndices.RemoveParameterByName("r99p")
+            clsIndices.RemoveParameterByName("prcptot")
             sdgClimdexIndices.grpTminAnnual.Enabled = False
             sdgClimdexIndices.grpTmaxAnnual.Enabled = False
             sdgClimdexIndices.grpTmaxTminAnnual.Enabled = False
@@ -411,21 +230,17 @@ Public Class dlgClimdexIndices
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverPrec.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverPrec.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrPnlAnnualMonthly.ControlValueChanged
         TestOkEnabled()
     End Sub
 
     Private Sub ParameterCount()
-        lblSelectedIndices.Text = clsRWriteDfIndicesList.iParameterCount
-        lblSelectedIndices.ForeColor = Color.Red
+        lblSelectedIndices.Text = clsIndices.iParameterCount
         If rdoAnnual.Checked Then
             lblTotalIndices.Text = 27
-            lblTotalIndices.ForeColor = Color.Green
         Else
             lblTotalIndices.Text = 11
-            lblTotalIndices.ForeColor = Color.Green
         End If
-
     End Sub
 
     Private Sub EnableGroupBoxes()
@@ -447,5 +262,14 @@ Public Class dlgClimdexIndices
 
     Private Sub ucrReceiverPrec_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverPrec.ControlValueChanged, ucrReceiverTmin.ControlValueChanged, ucrReceiverTmax.ControlValueChanged
         EnableGroupBoxes()
+    End Sub
+
+    Private Sub ucrSelectorClimdex_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimdex.ControlValueChanged
+        ' This is done manually since we need the data both as a string and as a variable in the two functions.
+        SetClimdexData()
+    End Sub
+
+    Private Sub SetClimdexData()
+        clsClimdex.AddParameter("data", clsRFunctionParameter:=ucrSelectorClimdex.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
     End Sub
 End Class

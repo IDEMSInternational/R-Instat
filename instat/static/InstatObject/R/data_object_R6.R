@@ -2172,7 +2172,7 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     temp_s_year <- year_col
     temp_s_year[temp_s_doy < 1] <- paste(year_col[temp_s_doy < 1] - 1, year_col[temp_s_doy < 1], sep = "-")
     temp_s_year[temp_s_doy > 0] <- paste(year_col[temp_s_doy > 0], year_col[temp_s_doy > 0] + 1, sep = "-")
-    temp_s_year <- factor(temp_s_year)
+    temp_s_year <- make_factor(temp_s_year)
     temp_s_year_num <- as.numeric(substr(temp_s_year, 1, 4))
     temp_s_doy[temp_s_doy < 1] <- temp_s_doy[temp_s_doy < 1] + 366
     s_year_labs <- c(min(year_col) -1, sort(unique(year_col)))
@@ -2218,7 +2218,7 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     self$add_columns_to_data(col_name = col_name, col_data = pentad_val_vector, adjacent_column = adjacent_column, before = FALSE)
   }
   if(dekad_abbr) {
-    month_abbr_vector <- factor(forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE)), n = (s_start_month - 1)), ordered = FALSE)
+    month_abbr_vector <- make_factor(forcats::fct_shift(f = (lubridate::month(col_data, label = TRUE)), n = (s_start_month - 1)), ordered = FALSE)
     dekad_val_vector <- ((as.numeric(dekade(col_data))) - (s_start_month - 1)*3) %% 3
     dekad_val_vector <- ifelse(dekad_val_vector == 0, 3, dekad_val_vector)
     month.list <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
@@ -2299,7 +2299,7 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     self$append_to_variables_metadata(col_names = col_name, property = doy_start_label, new_val = s_start_day)
   }
   if(month_abbr) {
-    month_abbr_vector <- factor(forcats::fct_shift(f = lubridate::month(col_data, label = TRUE), n = s_start_month - 1), ordered = FALSE)
+    month_abbr_vector <- make_factor(forcats::fct_shift(f = lubridate::month(col_data, label = TRUE), n = s_start_month - 1), ordered = FALSE)
     col_name <- next_default_item(prefix = "month_abbr", existing_names = self$get_column_names(), include_index = FALSE)
     self$add_columns_to_data(col_name = col_name, col_data = month_abbr_vector, adjacent_column = adjacent_column, before = FALSE)
     if(s_shift) self$append_to_variables_metadata(col_names = col_name, property = label_label, new_val = paste("Shifted month starting on day", s_start_day))
@@ -2330,7 +2330,7 @@ DataSheet$set("public","split_date", function(col_name = "", year_val = FALSE, y
     else {
       year_vector <- lubridate::year(col_data)
       col_name <- next_default_item(prefix = "year", existing_names = self$get_column_names(), include_index = FALSE)
-      self$add_columns_to_data(col_name = col_name, col_data = factor(year_vector), adjacent_column = adjacent_column, before = FALSE)
+      self$add_columns_to_data(col_name = col_name, col_data = make_factor(year_vector), adjacent_column = adjacent_column, before = FALSE)
     }
     if(is_climatic && is.null(self$get_climatic_column_name(year_label))) {
       self$append_climatic_types(types = c(year = col_name))
@@ -2459,7 +2459,15 @@ DataSheet$set("public","append_climatic_types", function(types) {
 
 #Method for creating inventory plot
 
-DataSheet$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE, year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, graph_title = "Inventory Plot", key_colours = c("red", "grey"), display_rain_days = FALSE, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), key_colours = c("tan3", "blue"))) {
+DataSheet$set("public","make_inventory_plot", function(date_col, station_col = NULL, year_col = NULL, doy_col = NULL, element_cols = NULL, add_to_data = FALSE,
+                                                       year_doy_plot = FALSE, coord_flip = FALSE, facet_by = NULL, facet_xsize = 7, facet_ysize = 11, 
+                                                       graph_title = "Inventory Plot", graph_subtitle = NULL, graph_caption = NULL, title_size = NULL, 
+                                                       subtitle_size = NULL, caption_size = NULL, labelXAxis, labelYAxis, xSize = NULL, ySize = NULL,
+                                                       Xangle = NULL, Yangle = NULL, fromXAxis = NULL, toXAxis = NULL, byXaxis = NULL, date_ylabels, 
+                                                       scale_xdate = FALSE, legend_position = NULL, xlabelsize = NULL, ylabelsize = NULL, scale = "none", dir = NULL,
+                                                       nrow = NULL, ncol = NULL, scale_ydate = FALSE, date_ybreaks, step = 1, key_colours = c("red", "grey"), 
+                                                       display_rain_days = FALSE, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), 
+                                                       key_colours = c("tan3", "blue"))) {
   if(missing(date_col)) stop("Date columns must be specified.")
   if(missing(element_cols)) stop("Element column(s) must be specified.")
   if(!lubridate::is.Date(self$get_columns_from_data(date_col))) stop(paste(date_col, " must be of type Date."))
@@ -2549,7 +2557,7 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
   }
   if(year_doy_plot) {
     curr_data[["common_date"]] <- as.Date(paste0("2000-", curr_data[[doy_col]]), "%Y-%j")
-    g <- ggplot2::ggplot(data = curr_data, mapping = ggplot2::aes_(x = as.name(year_col), y = as.name("common_date"), colour = as.name(key_name))) + ggplot2::geom_point(size=5, shape=15) + ggplot2::scale_colour_manual(values = key) + ggplot2::scale_y_date(name = "Date", date_breaks = "2 month", labels = function(x) format(x, "%e %b"))
+    g <- ggplot2::ggplot(data = curr_data, mapping = ggplot2::aes_(x = as.name(year_col), y = as.name("common_date"), colour = as.name(key_name))) + ggplot2::geom_point(size=5, shape=15) + ggplot2::scale_colour_manual(values = key) + ggplot2::scale_y_date(date_breaks = "2 month", labels = function(x) format(x, "%e %b"))
     if(!is.null(station_col) && length(element_cols) > 1) {
       if(is.null(facet_by)) {
         message("facet_by not specified. facets will be by stations-elements.")
@@ -2565,10 +2573,14 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
       }
       
       if(facet_by == "stations-elements") {
-        g <- g + ggplot2::facet_grid(facets = as.formula(paste(station_col, "+ variable~.")))
+          if(scale != "none"){
+                  g <- g + ggplot2::facet_wrap(facets = as.formula(paste(".~",station_col, "+ variable")), nrow = nrow, ncol = ncol, scales = scale, dir = dir)
+	      }else {g <- g + ggplot2::facet_grid(facets = as.formula(paste(station_col, "~variable")))}
       }
       else if(facet_by == "elements-stations") {
-        g <- g + ggplot2::facet_grid(facets = as.formula(paste("variable +", station_col, "~.")))
+           if(scale != "none"){
+                  g <- g + ggplot2::facet_wrap(facets = as.formula(paste(".~variable +",station_col)), nrow = nrow, ncol = ncol, scales = scale, dir = dir)
+	      }else {g <- g + ggplot2::facet_grid(facets = as.formula(paste("variable ~",station_col)))}
       }
       else stop("invalid facet_by value:", facet_by)
     }
@@ -2579,23 +2591,28 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
       }
     }
     else if(length(element_cols) > 1) {
-      g <- g + ggplot2::facet_grid(facets = variable~.)
+          if(scale != "none"){
+               g <- g + ggplot2::facet_wrap(.~variable, nrow = nrow, ncol = ncol, scales = scale, dir = dir)
+	      }else {g <- g + ggplot2::facet_grid(facets = variable~.)}
+
     }
+     if(scale_xdate){ g <- g + ggplot2::scale_x_continuous(breaks=seq(fromXAxis, toXAxis, byXaxis)) } 
+     if(scale_ydate && !missing(date_ybreaks) && !missing(date_ylabels)){ g <- g + ggplot2::scale_y_date(date_breaks = paste0(step," ",date_ybreaks), date_labels = date_ylabels) } 
   }
   else {
     if(!is.null(station_col) && length(element_cols) > 1) {
       if(is.null(facet_by) || facet_by == "stations") {
         if(is.null(facet_by)) message("facet_by not specified. facets will be by stations.")
-        g <- ggplot2::ggplot(data = curr_data, ggplot2::aes_(x = as.name(date_col), y = as.name("variable"), fill = as.name(key_name))) + ggplot2::geom_raster() + ggplot2::scale_fill_manual(values = key) + ggplot2::scale_x_date(date_minor_breaks = "1 year") + ggplot2::geom_hline(yintercept = seq(0.5, by = 1, length.out = length(levels(curr_data[["variable"]])) + 1)) + ggplot2::facet_grid(facets = as.formula(paste(station_col, "~."))) + ggplot2::labs(y = "Elements")
+        g <- ggplot2::ggplot(data = curr_data, ggplot2::aes_(x = as.name(date_col), y = as.name("variable"), fill = as.name(key_name))) + ggplot2::geom_raster() + ggplot2::scale_fill_manual(values = key) + ggplot2::scale_x_date(date_minor_breaks = "1 year") + ggplot2::geom_hline(yintercept = seq(0.5, by = 1, length.out = length(levels(curr_data[["variable"]])) + 1)) + ggplot2::facet_grid(facets = as.formula(paste(".~",station_col))) + ggplot2::labs(y = "Elements")
       }
       else if(facet_by == "elements") {
-        g <- ggplot2::ggplot(data = curr_data, ggplot2::aes_(x = as.name(date_col), y = as.name(station_col), fill = as.name(key_name))) + ggplot2::geom_raster() + ggplot2::scale_fill_manual(values = key) + ggplot2::scale_x_date(date_minor_breaks = "1 year") + ggplot2::geom_hline(yintercept = seq(0.5, by = 1, length.out = length(levels(curr_data[[station_col]])) + 1)) + ggplot2::facet_grid(facets = variable~.)
+        g <- ggplot2::ggplot(data = curr_data, ggplot2::aes_(x = as.name(date_col), y = as.name(station_col), fill = as.name(key_name))) + ggplot2::geom_raster() + ggplot2::scale_fill_manual(values = key) + ggplot2::scale_x_date(date_minor_breaks = "1 year") + ggplot2::geom_hline(yintercept = seq(0.5, by = 1, length.out = length(levels(curr_data[[station_col]])) + 1)) + ggplot2::facet_grid(facets = .~variable)
       }
       else if(facet_by == "stations-elements") {
-        g <- ggplot2::ggplot(data = curr_data, ggplot2::aes_(x = as.name(date_col), y = 1, fill = as.name(key_name))) + ggplot2::geom_raster() + ggplot2::scale_fill_manual(values = key) + ggplot2::scale_x_date(date_minor_breaks = "1 year") + ggplot2::facet_grid(facets = as.formula(paste(station_col, "+variable~."))) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = "")
+        g <- ggplot2::ggplot(data = curr_data, ggplot2::aes_(x = as.name(date_col), y = 1, fill = as.name(key_name))) + ggplot2::geom_raster() + ggplot2::scale_fill_manual(values = key) + ggplot2::scale_x_date(date_minor_breaks = "1 year") + ggplot2::facet_grid(facets = as.formula(paste(station_col, "+ .~variable"))) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = "")
       }
       else if(facet_by == "elements-stations") {
-        g <- ggplot2::ggplot(data = curr_data, ggplot2::aes_(x = as.name(date_col), y = 1, fill = as.name(key_name))) + ggplot2::geom_raster() + ggplot2::scale_fill_manual(values = key) + ggplot2::scale_x_date(date_minor_breaks = "1 year") + ggplot2::facet_grid(facets = as.formula(paste("variable +", station_col, "~."))) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = "")
+        g <- ggplot2::ggplot(data = curr_data, ggplot2::aes_(x = as.name(date_col), y = 1, fill = as.name(key_name))) + ggplot2::geom_raster() + ggplot2::scale_fill_manual(values = key) + ggplot2::scale_x_date(date_minor_breaks = "1 year") + ggplot2::facet_grid(facets = as.formula(paste("variable +", ".~", station_col))) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = "")
       }
       else stop("invalid facet_by value:", facet_by)
     }
@@ -2612,11 +2629,14 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
     else {
       g <- ggplot2::ggplot(data = curr_data, ggplot2::aes_(x = as.name(date_col), y = 1, fill = as.name(key_name))) + ggplot2::geom_raster() + ggplot2::scale_fill_manual(values = key) + ggplot2::scale_x_date(date_minor_breaks = "1 year") + ggplot2::geom_hline(yintercept = seq(0.5, by = 1, length.out = length(levels(curr_data[["variable"]])) + 1)) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = element_cols)
     }
-  }
+   if(scale_xdate){ g <- g + ggplot2::scale_x_date(date_minor_breaks = paste0(byXaxis," year"), limits = c(from=as.Date(paste0(fromXAxis,"-01-01")), to = as.Date(paste0(toXAxis,"-12-31")))) } 
+ }
   if(coord_flip) {
     g <- g + ggplot2::coord_flip()
   }
-  return(g + ggplot2::ggtitle(graph_title) + ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5)))
+  if(!missing(labelXAxis)){g <- g + ggplot2::xlab(labelXAxis)}else{g <- g + ggplot2::xlab(NULL)}
+  if(!missing(labelYAxis)){g <- g + ggplot2::ylab(labelYAxis)}else{g <- g + ggplot2::ylab(NULL)}
+  return(g + ggplot2::labs(title = graph_title, subtitle = graph_subtitle, caption = graph_caption) + ggplot2::theme(strip.text.x = element_text(margin = margin(1, 0, 1, 0), size = facet_xsize), strip.text.y = element_text(margin = margin(1, 0, 1, 0), size = facet_ysize), legend.position=legend_position, plot.title = ggplot2::element_text(hjust = 0.5, size = title_size), plot.subtitle = ggplot2::element_text(size = subtitle_size), plot.caption = ggplot2::element_text(size = caption_size), axis.text.x = ggplot2::element_text(size=xSize, angle = Xangle), axis.title.x = ggplot2::element_text(size=xlabelsize), axis.title.y = ggplot2::element_text(size=ylabelsize), axis.text.y = ggplot2::element_text(size = ySize, angle = Yangle, hjust = 0.6)))
 }
 )
 
