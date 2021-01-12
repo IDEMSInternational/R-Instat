@@ -490,7 +490,6 @@ Public Class dlgInfillMissingValues
             End If
             cmdDisplayOptions.Visible = True
         ElseIf rdoFitSingle.Checked Then
-            ucrChkMeanBias.Visible = False
             cmdDisplayOptions.Visible = False
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
