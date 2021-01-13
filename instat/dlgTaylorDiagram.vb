@@ -40,30 +40,30 @@ Public Class dlgTaylorDiagram
         ucrSelectorTaylorDiagram.SetParameter(New RParameter("mydata", 0))
         ucrSelectorTaylorDiagram.SetParameterIsrfunction()
 
-        ucrReceiverSingleStation.SetParameter(New RParameter("type", 3))
+        ucrReceiverSingleObserved.SetParameter(New RParameter("obs", 1))
+        ucrReceiverSingleObserved.Selector = ucrSelectorTaylorDiagram
+        ucrReceiverSingleObserved.SetParameterIsString()
+        ucrReceiverSingleObserved.SetIncludedDataTypes({"numeric"})
+
+        ucrReceiverSingleEstimate.SetParameter(New RParameter("mod", 2))
+        ucrReceiverSingleEstimate.Selector = ucrSelectorTaylorDiagram
+        ucrReceiverSingleEstimate.SetParameterIsString()
+        ucrReceiverSingleEstimate.SetIncludedDataTypes({"numeric"})
+
+        ucrReceiverMultipleGroup.SetParameter(New RParameter("group", 3))
+        ucrReceiverMultipleGroup.Selector = ucrSelectorTaylorDiagram
+        ucrReceiverMultipleGroup.SetParameterIsString()
+        ucrReceiverMultipleGroup.SetIncludedDataTypes({"factor", "character"})
+        ucrReceiverMultipleGroup.bExcludeFromSelector = True
+
+        ucrReceiverSingleStation.SetParameter(New RParameter("type", 4))
         ucrReceiverSingleStation.Selector = ucrSelectorTaylorDiagram
         ucrReceiverSingleStation.SetParameterIsString()
         ucrReceiverSingleStation.bExcludeFromSelector = True
         ucrReceiverSingleStation.SetClimaticType("station")
         ucrReceiverSingleStation.bAutoFill = True
 
-        ucrReceiverSingleObserved.SetParameter(New RParameter("obs", 0))
-        ucrReceiverSingleObserved.Selector = ucrSelectorTaylorDiagram
-        ucrReceiverSingleObserved.SetParameterIsString()
-        ucrReceiverSingleObserved.SetIncludedDataTypes({"numeric"})
-
-        ucrReceiverSingleEstimate.SetParameter(New RParameter("mod", 1))
-        ucrReceiverSingleEstimate.Selector = ucrSelectorTaylorDiagram
-        ucrReceiverSingleEstimate.SetParameterIsString()
-        ucrReceiverSingleEstimate.SetIncludedDataTypes({"numeric"})
-
-        ucrReceiverMultipleGroup.SetParameter(New RParameter("group", 2))
-        ucrReceiverMultipleGroup.Selector = ucrSelectorTaylorDiagram
-        ucrReceiverMultipleGroup.SetParameterIsString()
-        ucrReceiverMultipleGroup.SetIncludedDataTypes({"factor", "character"})
-        ucrReceiverMultipleGroup.bExcludeFromSelector = True
-
-        ucrChkNormalise.SetParameter(New RParameter("normalise", 3))
+        ucrChkNormalise.SetParameter(New RParameter("normalise", 5))
         ucrChkNormalise.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkNormalise.SetText("Normalise")
         ucrChkNormalise.SetRDefault("FALSE")
@@ -85,6 +85,7 @@ Public Class dlgTaylorDiagram
 
         clsTaylorDiagramFunction.SetPackageName("openair")
         clsTaylorDiagramFunction.SetRCommand("TaylorDiagram")
+        clsTaylorDiagramFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorTaylorDiagram.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsTaylorDiagramFunction)
     End Sub

@@ -24,7 +24,7 @@ Partial Class dlgTaylorDiagram
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTaylorDiagram))
         Me.lblObserved = New System.Windows.Forms.Label()
-        Me.lblEstimate = New System.Windows.Forms.Label()
+        Me.lblEstimated = New System.Windows.Forms.Label()
         Me.lblGroup = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.ucrChkNormalise = New instat.ucrCheck()
@@ -42,10 +42,10 @@ Partial Class dlgTaylorDiagram
         resources.ApplyResources(Me.lblObserved, "lblObserved")
         Me.lblObserved.Name = "lblObserved"
         '
-        'lblEstimate
+        'lblEstimated
         '
-        resources.ApplyResources(Me.lblEstimate, "lblEstimate")
-        Me.lblEstimate.Name = "lblEstimate"
+        resources.ApplyResources(Me.lblEstimated, "lblEstimated")
+        Me.lblEstimated.Name = "lblEstimated"
         '
         'lblGroup
         '
@@ -127,7 +127,7 @@ Partial Class dlgTaylorDiagram
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSavePlot)
         Me.Controls.Add(Me.lblGroup)
-        Me.Controls.Add(Me.lblEstimate)
+        Me.Controls.Add(Me.lblEstimated)
         Me.Controls.Add(Me.lblObserved)
         Me.Controls.Add(Me.ucrReceiverMultipleGroup)
         Me.Controls.Add(Me.ucrReceiverSingleObserved)
@@ -145,7 +145,7 @@ Partial Class dlgTaylorDiagram
     Friend WithEvents ucrSelectorTaylorDiagram As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSavePlot As ucrSave
     Friend WithEvents lblGroup As Label
-    Friend WithEvents lblEstimate As Label
+    Friend WithEvents lblEstimated As Label
     Friend WithEvents lblObserved As Label
     Friend WithEvents ucrReceiverMultipleGroup As ucrReceiverMultiple
     Friend WithEvents ucrReceiverSingleObserved As ucrReceiverSingle
