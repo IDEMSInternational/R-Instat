@@ -95,7 +95,14 @@ Public Class frmMain
         clsRLink.SetLog(ucrLogWindow.txtLog)
 
         SetToDefaultLayout()
-        strStaticPath = Path.GetFullPath("static")
+
+        'Gets the path for the executable file that started the application, not including the executable name.
+        'because the application once double click in the associate file i.e. .RDS file.
+        'We need the full path of static folder to set the working folder containg files needed when the application is loading. 
+        'From the startup path I just replace \bin\Debug by \static to have the full path of static folder
+        Dim strPath As String = Application.StartupPath
+        strStaticPath = strPath.Replace("\bin\Debug", "\static")
+
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
 
         ' We need to create the likely R package installation directory before R.NET connection is initialised
@@ -139,12 +146,33 @@ Public Class frmMain
             mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
             mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
         End If
+
+        AssociatedFile()
+
     End Sub
 
     ' TODO This is used instead of autoTranslate so that split container isn't shifted
     ' Need to fix this so that all of frmMain can be translated
     Public Sub TranslateFrmMainMenu()
         translateMenu(mnuBar.Items, Me)
+    End Sub
+
+    Private Sub AssociatedFile()
+        Try
+            If (Environment.GetCommandLineArgs.Length > 1) Then
+                Dim FilePath As String = Environment.GetCommandLineArgs(1)
+                dlgImportDataset.strFileToOpenOn = FilePath
+                dlgImportDataset.bStartOpenDialog = False
+                dlgImportDataset.ShowDialog()
+            Else
+                My.Computer.Registry.ClassesRoot.CreateSubKey(".RDS") _
+                .SetValue("", "Instat", Microsoft.Win32.RegistryValueKind.String)
+                My.Computer.Registry.ClassesRoot.CreateSubKey("Instat\shell\open\command") _
+                    .SetValue("", Application.ExecutablePath & " ""%l"" ", Microsoft.Win32.RegistryValueKind.String)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
