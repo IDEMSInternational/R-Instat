@@ -42,11 +42,14 @@ Partial Class dlgConditionalQuantilePlot
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.rdoQuantiles = New System.Windows.Forms.RadioButton()
+        Me.rdoEvaluation = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlOptions = New instat.UcrPanel()
         Me.SuspendLayout()
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(8, 378)
+        Me.ucrBase.Location = New System.Drawing.Point(8, 396)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -56,7 +59,7 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrConditionalQuantilePlotSelector.bDropUnusedFilterLevels = False
         Me.ucrConditionalQuantilePlotSelector.bShowHiddenColumns = False
         Me.ucrConditionalQuantilePlotSelector.bUseCurrentFilter = True
-        Me.ucrConditionalQuantilePlotSelector.Location = New System.Drawing.Point(9, 19)
+        Me.ucrConditionalQuantilePlotSelector.Location = New System.Drawing.Point(9, 43)
         Me.ucrConditionalQuantilePlotSelector.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrConditionalQuantilePlotSelector.Name = "ucrConditionalQuantilePlotSelector"
         Me.ucrConditionalQuantilePlotSelector.Size = New System.Drawing.Size(210, 180)
@@ -65,7 +68,7 @@ Partial Class dlgConditionalQuantilePlot
         'ucrReceiverObservations
         '
         Me.ucrReceiverObservations.frmParent = Me
-        Me.ucrReceiverObservations.Location = New System.Drawing.Point(265, 68)
+        Me.ucrReceiverObservations.Location = New System.Drawing.Point(265, 86)
         Me.ucrReceiverObservations.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverObservations.Name = "ucrReceiverObservations"
         Me.ucrReceiverObservations.Selector = Nothing
@@ -78,7 +81,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.lblObservations.AutoSize = True
         Me.lblObservations.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblObservations.Location = New System.Drawing.Point(267, 50)
+        Me.lblObservations.Location = New System.Drawing.Point(267, 68)
         Me.lblObservations.Name = "lblObservations"
         Me.lblObservations.Size = New System.Drawing.Size(72, 13)
         Me.lblObservations.TabIndex = 63
@@ -88,7 +91,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.lblPredictions.AutoSize = True
         Me.lblPredictions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPredictions.Location = New System.Drawing.Point(267, 112)
+        Me.lblPredictions.Location = New System.Drawing.Point(267, 130)
         Me.lblPredictions.Name = "lblPredictions"
         Me.lblPredictions.Size = New System.Drawing.Size(62, 13)
         Me.lblPredictions.TabIndex = 64
@@ -97,7 +100,7 @@ Partial Class dlgConditionalQuantilePlot
         'ucrReceiverPredictions
         '
         Me.ucrReceiverPredictions.frmParent = Me
-        Me.ucrReceiverPredictions.Location = New System.Drawing.Point(265, 131)
+        Me.ucrReceiverPredictions.Location = New System.Drawing.Point(265, 149)
         Me.ucrReceiverPredictions.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPredictions.Name = "ucrReceiverPredictions"
         Me.ucrReceiverPredictions.Selector = Nothing
@@ -110,7 +113,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.cmdPlotOptions.Enabled = False
         Me.cmdPlotOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPlotOptions.Location = New System.Drawing.Point(9, 211)
+        Me.cmdPlotOptions.Location = New System.Drawing.Point(9, 229)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
         Me.cmdPlotOptions.Size = New System.Drawing.Size(148, 23)
         Me.cmdPlotOptions.TabIndex = 66
@@ -121,7 +124,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.ucrNudBin.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBin.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBin.Location = New System.Drawing.Point(44, 246)
+        Me.ucrNudBin.Location = New System.Drawing.Point(91, 265)
         Me.ucrNudBin.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBin.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBin.Name = "ucrNudBin"
@@ -131,7 +134,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         'ucrSavePlot
         '
-        Me.ucrSavePlot.Location = New System.Drawing.Point(9, 352)
+        Me.ucrSavePlot.Location = New System.Drawing.Point(9, 370)
         Me.ucrSavePlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlot.Name = "ucrSavePlot"
         Me.ucrSavePlot.Size = New System.Drawing.Size(251, 24)
@@ -141,7 +144,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.lblType.AutoSize = True
         Me.lblType.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblType.Location = New System.Drawing.Point(267, 176)
+        Me.lblType.Location = New System.Drawing.Point(267, 194)
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(100, 13)
         Me.lblType.TabIndex = 66
@@ -150,7 +153,7 @@ Partial Class dlgConditionalQuantilePlot
         'ucrReceiverMultipleFacet
         '
         Me.ucrReceiverMultipleFacet.frmParent = Me
-        Me.ucrReceiverMultipleFacet.Location = New System.Drawing.Point(265, 196)
+        Me.ucrReceiverMultipleFacet.Location = New System.Drawing.Point(265, 214)
         Me.ucrReceiverMultipleFacet.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultipleFacet.Name = "ucrReceiverMultipleFacet"
         Me.ucrReceiverMultipleFacet.Selector = Nothing
@@ -164,7 +167,7 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(95, 299)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(95, 317)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(98, 21)
         Me.ucrInputLegendPosition.TabIndex = 75
@@ -173,7 +176,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.ucrNudKeyColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudKeyColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudKeyColumns.Location = New System.Drawing.Point(95, 327)
+        Me.ucrNudKeyColumns.Location = New System.Drawing.Point(95, 345)
         Me.ucrNudKeyColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudKeyColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudKeyColumns.Name = "ucrNudKeyColumns"
@@ -186,7 +189,7 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrInputMinBin.AddQuotesIfUnrecognised = True
         Me.ucrInputMinBin.IsMultiline = False
         Me.ucrInputMinBin.IsReadOnly = False
-        Me.ucrInputMinBin.Location = New System.Drawing.Point(148, 271)
+        Me.ucrInputMinBin.Location = New System.Drawing.Point(148, 289)
         Me.ucrInputMinBin.Name = "ucrInputMinBin"
         Me.ucrInputMinBin.Size = New System.Drawing.Size(64, 21)
         Me.ucrInputMinBin.TabIndex = 78
@@ -201,17 +204,17 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.Label1.AutoSize = True
         Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(9, 249)
+        Me.Label1.Location = New System.Drawing.Point(9, 268)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(30, 13)
+        Me.Label1.Size = New System.Drawing.Size(80, 13)
         Me.Label1.TabIndex = 79
-        Me.Label1.Text = "Bins:"
+        Me.Label1.Text = "Histogram Bins:"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label2.Location = New System.Drawing.Point(9, 275)
+        Me.Label2.Location = New System.Drawing.Point(9, 293)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(135, 13)
         Me.Label2.TabIndex = 80
@@ -221,7 +224,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.Label3.AutoSize = True
         Me.Label3.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label3.Location = New System.Drawing.Point(9, 303)
+        Me.Label3.Location = New System.Drawing.Point(9, 321)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(68, 13)
         Me.Label3.TabIndex = 81
@@ -231,17 +234,61 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.Label4.AutoSize = True
         Me.Label4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label4.Location = New System.Drawing.Point(9, 330)
+        Me.Label4.Location = New System.Drawing.Point(9, 348)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(77, 13)
         Me.Label4.TabIndex = 82
         Me.Label4.Text = "Key Column(s):"
         '
+        'rdoQuantiles
+        '
+        Me.rdoQuantiles.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoQuantiles.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoQuantiles.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoQuantiles.FlatAppearance.BorderSize = 2
+        Me.rdoQuantiles.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoQuantiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoQuantiles.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoQuantiles.Location = New System.Drawing.Point(77, 5)
+        Me.rdoQuantiles.Name = "rdoQuantiles"
+        Me.rdoQuantiles.Size = New System.Drawing.Size(135, 27)
+        Me.rdoQuantiles.TabIndex = 84
+        Me.rdoQuantiles.Text = "Quantiles"
+        Me.rdoQuantiles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoQuantiles.UseVisualStyleBackColor = True
+        '
+        'rdoEvaluation
+        '
+        Me.rdoEvaluation.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoEvaluation.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoEvaluation.FlatAppearance.BorderSize = 2
+        Me.rdoEvaluation.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoEvaluation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoEvaluation.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.rdoEvaluation.Location = New System.Drawing.Point(210, 5)
+        Me.rdoEvaluation.Name = "rdoEvaluation"
+        Me.rdoEvaluation.Size = New System.Drawing.Size(135, 27)
+        Me.rdoEvaluation.TabIndex = 83
+        Me.rdoEvaluation.Text = "Evaluation"
+        Me.rdoEvaluation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoEvaluation.UseVisualStyleBackColor = True
+        '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.Enabled = False
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(72, 3)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(278, 35)
+        Me.ucrPnlOptions.TabIndex = 85
+        '
         'dlgConditionalQuantilePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 430)
+        Me.ClientSize = New System.Drawing.Size(423, 448)
+        Me.Controls.Add(Me.rdoQuantiles)
+        Me.Controls.Add(Me.rdoEvaluation)
+        Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
@@ -290,4 +337,7 @@ Partial Class dlgConditionalQuantilePlot
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label4 As Label
+    Friend WithEvents rdoQuantiles As RadioButton
+    Friend WithEvents rdoEvaluation As RadioButton
+    Friend WithEvents ucrPnlOptions As UcrPanel
 End Class
