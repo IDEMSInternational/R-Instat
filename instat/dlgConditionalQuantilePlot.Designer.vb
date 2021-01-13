@@ -112,9 +112,9 @@ Partial Class dlgConditionalQuantilePlot
         Me.cmdPlotOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdPlotOptions.Location = New System.Drawing.Point(9, 211)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
-        Me.cmdPlotOptions.Size = New System.Drawing.Size(121, 23)
+        Me.cmdPlotOptions.Size = New System.Drawing.Size(148, 23)
         Me.cmdPlotOptions.TabIndex = 66
-        Me.cmdPlotOptions.Text = "Plot Options"
+        Me.cmdPlotOptions.Text = "Conditional Quantile Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
         '
         'ucrNudBin
