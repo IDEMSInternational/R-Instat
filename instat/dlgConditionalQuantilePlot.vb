@@ -81,6 +81,13 @@ Public Class dlgConditionalQuantilePlot
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
         ucrInputLegendPosition.SetRDefault(Chr(34) & "bottom" & Chr(34))
 
+
+        ucrPnlOptions.AddRadioButton(rdoQuantiles)
+        ucrPnlOptions.AddRadioButton(rdoEvaluation)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoQuantiles, "", False)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoQuantiles, "", False)
+
+
         ucrSavePlot.SetPrefix("conditionalquantile")
         ucrSavePlot.SetCheckBoxText("Save Graph")
         ucrSavePlot.SetIsComboBox()
