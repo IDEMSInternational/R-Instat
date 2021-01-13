@@ -80,7 +80,6 @@ Public Class dlgConditionalQuantilePlot
         ucrInputLegendPosition.SetItems(dctLegendPosition)
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
         ucrInputLegendPosition.SetRDefault(Chr(34) & "bottom" & Chr(34))
-        ucrInputLegendPosition.bAllowNonConditionValues = True
 
         ucrSavePlot.SetPrefix("conditionalquantile")
         ucrSavePlot.SetCheckBoxText("Save Graph")
