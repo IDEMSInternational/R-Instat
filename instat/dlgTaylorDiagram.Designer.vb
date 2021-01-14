@@ -33,7 +33,7 @@ Partial Class dlgTaylorDiagram
         Me.ucrSavePlot = New instat.ucrSave()
         Me.ucrReceiverMultipleGroup = New instat.ucrReceiverMultiple()
         Me.ucrReceiverSingleObserved = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSingleEstimate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSingleEstimated = New instat.ucrReceiverSingle()
         Me.ucrSelectorTaylorDiagram = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
@@ -100,14 +100,14 @@ Partial Class dlgTaylorDiagram
         Me.ucrReceiverSingleObserved.strNcFilePath = ""
         Me.ucrReceiverSingleObserved.ucrSelector = Nothing
         '
-        'ucrReceiverSingleEstimate
+        'ucrReceiverSingleEstimated
         '
-        Me.ucrReceiverSingleEstimate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverSingleEstimate, "ucrReceiverSingleEstimate")
-        Me.ucrReceiverSingleEstimate.Name = "ucrReceiverSingleEstimate"
-        Me.ucrReceiverSingleEstimate.Selector = Nothing
-        Me.ucrReceiverSingleEstimate.strNcFilePath = ""
-        Me.ucrReceiverSingleEstimate.ucrSelector = Nothing
+        Me.ucrReceiverSingleEstimated.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverSingleEstimated, "ucrReceiverSingleEstimated")
+        Me.ucrReceiverSingleEstimated.Name = "ucrReceiverSingleEstimated"
+        Me.ucrReceiverSingleEstimated.Selector = Nothing
+        Me.ucrReceiverSingleEstimated.strNcFilePath = ""
+        Me.ucrReceiverSingleEstimated.ucrSelector = Nothing
         '
         'ucrSelectorTaylorDiagram
         '
@@ -131,7 +131,7 @@ Partial Class dlgTaylorDiagram
         Me.Controls.Add(Me.lblObserved)
         Me.Controls.Add(Me.ucrReceiverMultipleGroup)
         Me.Controls.Add(Me.ucrReceiverSingleObserved)
-        Me.Controls.Add(Me.ucrReceiverSingleEstimate)
+        Me.Controls.Add(Me.ucrReceiverSingleEstimated)
         Me.Controls.Add(Me.ucrSelectorTaylorDiagram)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -152,6 +152,6 @@ Partial Class dlgTaylorDiagram
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverSingleStation As ucrReceiverSingle
-    Friend WithEvents ucrReceiverSingleEstimate As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSingleEstimated As ucrReceiverSingle
     Friend WithEvents ucrChkNormalise As ucrCheck
 End Class

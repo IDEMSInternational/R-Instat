@@ -45,10 +45,10 @@ Public Class dlgTaylorDiagram
         ucrReceiverSingleObserved.SetParameterIsString()
         ucrReceiverSingleObserved.SetIncludedDataTypes({"numeric"})
 
-        ucrReceiverSingleEstimate.SetParameter(New RParameter("mod", 2))
-        ucrReceiverSingleEstimate.Selector = ucrSelectorTaylorDiagram
-        ucrReceiverSingleEstimate.SetParameterIsString()
-        ucrReceiverSingleEstimate.SetIncludedDataTypes({"numeric"})
+        ucrReceiverSingleEstimated.SetParameter(New RParameter("mod", 2))
+        ucrReceiverSingleEstimated.Selector = ucrSelectorTaylorDiagram
+        ucrReceiverSingleEstimated.SetParameterIsString()
+        ucrReceiverSingleEstimated.SetIncludedDataTypes({"numeric"})
 
         ucrReceiverMultipleGroup.SetParameter(New RParameter("group", 3))
         ucrReceiverMultipleGroup.Selector = ucrSelectorTaylorDiagram
@@ -101,14 +101,14 @@ Public Class dlgTaylorDiagram
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverSingleObserved.IsEmpty() OrElse ucrReceiverSingleEstimate.IsEmpty() OrElse Not ucrSavePlot.IsComplete Then
+        If ucrReceiverSingleObserved.IsEmpty() OrElse ucrReceiverSingleEstimated.IsEmpty() OrElse Not ucrSavePlot.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
     End Sub
 
-    Private Sub ucrReceiverSingleObserved_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSingleObserved.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverSingleEstimate.ControlContentsChanged
+    Private Sub ucrReceiverSingleObserved_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSingleObserved.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverSingleEstimated.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

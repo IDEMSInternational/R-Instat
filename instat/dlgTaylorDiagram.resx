@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblObserved.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 97</value>
+    <value>286, 42</value>
   </data>
   <data name="lblObserved.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -150,34 +150,34 @@
   <data name="&gt;&gt;lblObserved.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="lblEstimate.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblEstimated.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblEstimate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblEstimated.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblEstimate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 154</value>
+  <data name="lblEstimated.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 99</value>
   </data>
-  <data name="lblEstimate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 13</value>
+  <data name="lblEstimated.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
   </data>
-  <data name="lblEstimate.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblEstimated.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="lblEstimate.Text" xml:space="preserve">
-    <value>Estimate:</value>
+  <data name="lblEstimated.Text" xml:space="preserve">
+    <value>Estimated:</value>
   </data>
-  <data name="&gt;&gt;lblEstimate.Name" xml:space="preserve">
-    <value>lblEstimate</value>
+  <data name="&gt;&gt;lblEstimated.Name" xml:space="preserve">
+    <value>lblEstimated</value>
   </data>
-  <data name="&gt;&gt;lblEstimate.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblEstimated.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblEstimate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblEstimated.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblEstimate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblEstimated.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
   <data name="lblGroup.AutoSize" type="System.Boolean, mscorlib">
@@ -217,16 +217,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblStation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 40</value>
+    <value>286, 156</value>
   </data>
   <data name="lblStation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 13</value>
+    <value>79, 13</value>
   </data>
   <data name="lblStation.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="lblStation.Text" xml:space="preserve">
-    <value>Station:</value>
+    <value>Facet (Station):</value>
   </data>
   <data name="&gt;&gt;lblStation.Name" xml:space="preserve">
     <value>lblStation</value>
@@ -340,7 +340,7 @@
     <value>8</value>
   </data>
   <data name="ucrReceiverSingleObserved.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 113</value>
+    <value>286, 58</value>
   </data>
   <data name="ucrReceiverSingleObserved.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -363,28 +363,28 @@
   <data name="&gt;&gt;ucrReceiverSingleObserved.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="ucrReceiverSingleEstimate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 170</value>
+  <data name="ucrReceiverSingleEstimated.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 115</value>
   </data>
-  <data name="ucrReceiverSingleEstimate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverSingleEstimated.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverSingleEstimate.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverSingleEstimated.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
   </data>
-  <data name="ucrReceiverSingleEstimate.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrReceiverSingleEstimated.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSingleEstimate.Name" xml:space="preserve">
-    <value>ucrReceiverSingleEstimate</value>
+  <data name="&gt;&gt;ucrReceiverSingleEstimated.Name" xml:space="preserve">
+    <value>ucrReceiverSingleEstimated</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSingleEstimate.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverSingleEstimated.Type" xml:space="preserve">
     <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSingleEstimate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverSingleEstimated.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverSingleEstimate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverSingleEstimated.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="ucrSelectorTaylorDiagram.Location" type="System.Drawing.Point, System.Drawing">
@@ -424,7 +424,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverSingleStation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 56</value>
+    <value>286, 172</value>
   </data>
   <data name="ucrReceiverSingleStation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
