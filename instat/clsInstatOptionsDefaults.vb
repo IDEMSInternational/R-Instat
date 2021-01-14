@@ -20,6 +20,7 @@ Public Class clsInstatOptionsDefaults
     Public Shared ReadOnly DEFAULTbIncludeCommentDefault As Boolean = True
     Public Shared ReadOnly DEFAULTbShowProcurementMenu As Boolean = True
     Public Shared ReadOnly DEFAULTbShowClimaticMenu As Boolean = True
+    Public Shared ReadOnly DEFAULTbShowStructuredMenu As Boolean = True
     Public Shared ReadOnly DEFAULTbShowOptionsByContextMenu As Boolean = True
     Public Shared ReadOnly DEFAULTfntOutput As Font = New Font(FontFamily.GenericMonospace, 11, FontStyle.Regular)
     Public Shared ReadOnly DEFAULTclrOutput As Color = Color.Blue
