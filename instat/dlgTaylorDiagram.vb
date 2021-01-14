@@ -81,7 +81,7 @@ Public Class dlgTaylorDiagram
 
         ucrSelectorTaylorDiagram.Reset()
         ucrSavePlot.Reset()
-        ucrReceiverSingleStation.SetMeAsReceiver()
+        ucrReceiverSingleObserved.SetMeAsReceiver()
 
         clsTaylorDiagramFunction.SetPackageName("openair")
         clsTaylorDiagramFunction.SetRCommand("TaylorDiagram")

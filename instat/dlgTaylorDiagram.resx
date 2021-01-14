@@ -133,7 +133,7 @@
     <value>56, 13</value>
   </data>
   <data name="lblObserved.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="lblObserved.Text" xml:space="preserve">
     <value>Observed:</value>
@@ -163,7 +163,7 @@
     <value>56, 13</value>
   </data>
   <data name="lblEstimated.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="lblEstimated.Text" xml:space="preserve">
     <value>Estimated:</value>
@@ -223,7 +223,7 @@
     <value>79, 13</value>
   </data>
   <data name="lblStation.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>5</value>
   </data>
   <data name="lblStation.Text" xml:space="preserve">
     <value>Facet (Station):</value>
@@ -379,7 +379,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverSingleObserved.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrReceiverSingleObserved.Name" xml:space="preserve">
     <value>ucrReceiverSingleObserved</value>
@@ -403,7 +403,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverSingleEstimated.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrReceiverSingleEstimated.Name" xml:space="preserve">
     <value>ucrReceiverSingleEstimated</value>
@@ -463,7 +463,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverSingleStation.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrReceiverSingleStation.Name" xml:space="preserve">
     <value>ucrReceiverSingleStation</value>
