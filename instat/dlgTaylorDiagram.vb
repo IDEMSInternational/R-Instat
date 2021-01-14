@@ -44,16 +44,19 @@ Public Class dlgTaylorDiagram
         ucrReceiverSingleObserved.Selector = ucrSelectorTaylorDiagram
         ucrReceiverSingleObserved.SetParameterIsString()
         ucrReceiverSingleObserved.SetIncludedDataTypes({"numeric"})
+        ucrReceiverSingleObserved.strSelectorHeading = "Numerics"
 
         ucrReceiverSingleEstimated.SetParameter(New RParameter("mod", 2))
         ucrReceiverSingleEstimated.Selector = ucrSelectorTaylorDiagram
         ucrReceiverSingleEstimated.SetParameterIsString()
         ucrReceiverSingleEstimated.SetIncludedDataTypes({"numeric"})
+        ucrReceiverSingleEstimated.strSelectorHeading = "Numerics"
 
         ucrReceiverMultipleGroup.SetParameter(New RParameter("group", 3))
         ucrReceiverMultipleGroup.Selector = ucrSelectorTaylorDiagram
         ucrReceiverMultipleGroup.SetParameterIsString()
         ucrReceiverMultipleGroup.SetIncludedDataTypes({"factor", "character"})
+        ucrReceiverMultipleGroup.strSelectorHeading = "Factors & Characters"
         ucrReceiverMultipleGroup.bExcludeFromSelector = True
 
         ucrReceiverSingleStation.SetParameter(New RParameter("type", 4))
