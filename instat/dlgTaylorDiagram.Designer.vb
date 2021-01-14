@@ -35,6 +35,7 @@ Partial Class dlgTaylorDiagram
         Me.ucrReceiverSingleObserved = New instat.ucrReceiverSingle()
         Me.ucrReceiverSingleEstimated = New instat.ucrReceiverSingle()
         Me.ucrSelectorTaylorDiagram = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.cmdTaylorDiagramOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblObserved
@@ -117,10 +118,17 @@ Partial Class dlgTaylorDiagram
         resources.ApplyResources(Me.ucrSelectorTaylorDiagram, "ucrSelectorTaylorDiagram")
         Me.ucrSelectorTaylorDiagram.Name = "ucrSelectorTaylorDiagram"
         '
+        'cmdTaylorDiagramOptions
+        '
+        resources.ApplyResources(Me.cmdTaylorDiagramOptions, "cmdTaylorDiagramOptions")
+        Me.cmdTaylorDiagramOptions.Name = "cmdTaylorDiagramOptions"
+        Me.cmdTaylorDiagramOptions.UseVisualStyleBackColor = True
+        '
         'dlgTaylorDiagram
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdTaylorDiagramOptions)
         Me.Controls.Add(Me.ucrChkNormalise)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverSingleStation)
@@ -154,4 +162,5 @@ Partial Class dlgTaylorDiagram
     Friend WithEvents ucrReceiverSingleStation As ucrReceiverSingle
     Friend WithEvents ucrReceiverSingleEstimated As ucrReceiverSingle
     Friend WithEvents ucrChkNormalise As ucrCheck
+    Friend WithEvents cmdTaylorDiagramOptions As Button
 End Class

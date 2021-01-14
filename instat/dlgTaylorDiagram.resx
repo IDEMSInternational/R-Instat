@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblObserved.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="lblEstimated.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblEstimated.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblGroup.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -208,7 +208,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblGroup.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lblStation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -238,10 +238,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblStation.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrChkNormalise.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 231</value>
+    <value>12, 245</value>
   </data>
   <data name="ucrChkNormalise.Size" type="System.Drawing.Size, System.Drawing">
     <value>134, 20</value>
@@ -259,7 +259,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkNormalise.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -269,6 +269,36 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>426, 413</value>
+  </data>
+  <data name="cmdTaylorDiagramOptions.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="cmdTaylorDiagramOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdTaylorDiagramOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 211</value>
+  </data>
+  <data name="cmdTaylorDiagramOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>148, 23</value>
+  </data>
+  <data name="cmdTaylorDiagramOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>61</value>
+  </data>
+  <data name="cmdTaylorDiagramOptions.Text" xml:space="preserve">
+    <value>Taylor Diagram Options</value>
+  </data>
+  <data name="&gt;&gt;cmdTaylorDiagramOptions.Name" xml:space="preserve">
+    <value>cmdTaylorDiagramOptions</value>
+  </data>
+  <data name="&gt;&gt;cmdTaylorDiagramOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdTaylorDiagramOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdTaylorDiagramOptions.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 353</value>
@@ -289,7 +319,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrSavePlot.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 324</value>
@@ -313,7 +343,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSavePlot.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrReceiverMultipleGroup.Location" type="System.Drawing.Point, System.Drawing">
     <value>286, 227</value>
@@ -337,7 +367,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMultipleGroup.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="ucrReceiverSingleObserved.Location" type="System.Drawing.Point, System.Drawing">
     <value>286, 58</value>
@@ -361,7 +391,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverSingleObserved.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrReceiverSingleEstimated.Location" type="System.Drawing.Point, System.Drawing">
     <value>286, 115</value>
@@ -385,7 +415,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverSingleEstimated.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="ucrSelectorTaylorDiagram.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 25</value>
@@ -409,7 +439,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorTaylorDiagram.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -445,6 +475,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverSingleStation.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
 </root>
