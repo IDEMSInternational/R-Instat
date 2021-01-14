@@ -900,53 +900,65 @@ Public Class dlgOneVarFitModel
     '''Lists the factor levels of the selected factor or logical column into the success combobox
     ''' </summary>
     Private Sub AddFactorLevels()
-        Dim bCurrentDatatype As Boolean = ucrReceiverVariable.strCurrDataType.ToLower = "logical" Or ucrReceiverVariable.strCurrDataType.ToLower = "factor"
-        Dim bCurrentTest As Boolean = ucrInputComboTests.GetText() = "binomial" Or ucrInputComboTests.GetText() = "proportion"
-        Dim bCurrentTypeIsNumeric As Boolean = ucrReceiverVariable.strCurrDataType.ToLower = "numeric"
-        Dim strBefore, strAfter As String
-        If bRCodeSet Then
-            Dim chrCurrentFactorLevels As CharacterVector
-            Dim lstFactor As List(Of String) = New List(Of String)()
-            If Not ucrReceiverVariable.IsEmpty AndAlso rdoTest.Checked Then
-                If (bCurrentDatatype OrElse bCurrentTypeIsNumeric) AndAlso bCurrentTest Then
-                    If bCurrentTypeIsNumeric Then
-                        clsConvertToColumnTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-                        clsConvertToColumnTypeFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=1)
-                        clsConvertToColumnTypeFunction.AddParameter("col_names", clsRFunctionParameter:=clsColumnNameFunction, iPosition:=2)
-                        clsColumnNameFunction.AddParameter("column", ucrReceiverVariable.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
-                        clsGetFactorLevelFunction.AddParameter("col_name", ucrReceiverVariable.GetVariableNames(), iPosition:=1)
-                        strBefore = clsConvertToColumnTypeFunction.ToScript()
-                        strAfter = clsGetFactorLevelFunction.ToScript()
+        Dim bDatatype As Boolean = ucrReceiverVariable.strCurrDataType.ToLower = "logical" Or ucrReceiverVariable.strCurrDataType.ToLower = "factor"
+        Dim bTest As Boolean = ucrInputComboTests.GetText() = "binomial" Or ucrInputComboTests.GetText() = "proportion"
+        Dim bTypeIsNumeric As Boolean = ucrReceiverVariable.strCurrDataType.ToLower = "numeric"
 
-                        frmMain.clsRLink.RunInternalScript(strBefore, bSilent:=True)
-                        chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(strAfter).AsCharacter
-                        For Each factor In chrCurrentFactorLevels
-                            lstFactor.Add(Chr(34) & factor & Chr(34))
-                        Next
-                        ucrInputSuccess.SetItems(lstFactor.ToArray)
-                        ucrInputSuccess.SetText(lstFactor(0))
-                        ucrInputSuccess.Visible = True
-                    Else
-                        clsGetFactorLevelFunction.AddParameter("col_name", ucrReceiverVariable.GetVariableNames(), iPosition:=1)
-                        chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevelFunction.ToScript()).AsCharacter
-                        For Each factor In chrCurrentFactorLevels
-                            lstFactor.Add(Chr(34) & factor & Chr(34))
-                        Next
-                        ucrInputSuccess.SetItems(lstFactor.ToArray)
-                        ucrInputSuccess.SetText(lstFactor(0))
-                        ucrInputSuccess.Visible = True
-                    End If
+        If bRCodeSet Then
+            If Not ucrReceiverVariable.IsEmpty AndAlso rdoTest.Checked Then
+                If (bDatatype OrElse bTypeIsNumeric) AndAlso bTest Then
+                    FindLevels()
                 Else
-                    ucrInputSuccess.Visible = False
-                    clsBionomialFunction.RemoveParameterByName("success")
-                    clsProportionFunction.RemoveParameterByName("success")
+                    RemoveSuccessParameter()
                 End If
             Else
-                ucrInputSuccess.Visible = False
-                clsBionomialFunction.RemoveParameterByName("success")
-                clsProportionFunction.RemoveParameterByName("success")
+                RemoveSuccessParameter()
             End If
         End If
+    End Sub
+
+    ''' <summary> 
+    '''Lists the levels in a column to the success combobox and removes success parameter
+    ''' </summary>
+    Private Sub FindLevels()
+        Dim chrCurrentFactorLevels As CharacterVector
+        Dim lstFactor As List(Of String) = New List(Of String)()
+        Dim bTypeIsNumeric As Boolean = ucrReceiverVariable.strCurrDataType.ToLower = "numeric"
+
+        'Converting the numeric column to factor
+        If bTypeIsNumeric Then
+            clsConvertToColumnTypeFunction.AddParameter("data_name", Chr(34) & ucrSelectorOneVarFitMod.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+            clsConvertToColumnTypeFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34), iPosition:=1)
+            clsConvertToColumnTypeFunction.AddParameter("col_names", clsRFunctionParameter:=clsColumnNameFunction, iPosition:=2)
+            clsColumnNameFunction.AddParameter("column", ucrReceiverVariable.GetVariableNames(), iPosition:=0, bIncludeArgumentName:=False)
+            frmMain.clsRLink.RunInternalScript(clsConvertToColumnTypeFunction.ToScript(), bSilent:=True)
+        End If
+
+        clsGetFactorLevelFunction.AddParameter("col_name", ucrReceiverVariable.GetVariableNames(), iPosition:=1)
+        chrCurrentFactorLevels = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevelFunction.ToScript()).AsCharacter
+
+        For Each factor In chrCurrentFactorLevels
+            lstFactor.Add(Chr(34) & factor & Chr(34))
+        Next
+
+        'converting back to Numeric 
+        If bTypeIsNumeric Then
+            clsConvertToColumnTypeFunction.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=1)
+            frmMain.clsRLink.RunInternalScript(clsConvertToColumnTypeFunction.ToScript(), bSilent:=True)
+        End If
+
+        ucrInputSuccess.SetItems(lstFactor.ToArray)
+        ucrInputSuccess.SetText(lstFactor(0))
+        ucrInputSuccess.Visible = True
+    End Sub
+
+    ''' <summary> 
+    '''Removes success parameter
+    ''' </summary>
+    Private Sub RemoveSuccessParameter()
+        ucrInputSuccess.Visible = False
+        clsBionomialFunction.RemoveParameterByName("success")
+        clsProportionFunction.RemoveParameterByName("success")
     End Sub
 
     Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboTests.ControlValueChanged, ucrInputComboEstimate.ControlValueChanged
