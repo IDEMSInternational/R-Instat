@@ -43,7 +43,7 @@ Partial Class dlgExportDataset
         Me.lblDataFrames = New System.Windows.Forms.Label()
         Me.lblSelectedDataFrames = New System.Windows.Forms.Label()
         Me.lblFileExtension = New System.Windows.Forms.Label()
-        Me.cboFileExtension = New System.Windows.Forms.ComboBox()
+        Me.cboFileType = New System.Windows.Forms.ComboBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFilePath = New instat.ucrFilePath()
         Me.ucrSelectorDataFrames = New instat.ucrSelectorAddRemove()
@@ -72,13 +72,13 @@ Partial Class dlgExportDataset
         resources.ApplyResources(Me.lblFileExtension, "lblFileExtension")
         Me.lblFileExtension.Name = "lblFileExtension"
         '
-        'cboFileExtension
+        'cboFileType
         '
-        Me.cboFileExtension.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboFileExtension.FormattingEnabled = True
-        Me.cboFileExtension.Items.AddRange(New Object() {resources.GetString("cboFileExtension.Items"), resources.GetString("cboFileExtension.Items1"), resources.GetString("cboFileExtension.Items2"), resources.GetString("cboFileExtension.Items3"), resources.GetString("cboFileExtension.Items4"), resources.GetString("cboFileExtension.Items5"), resources.GetString("cboFileExtension.Items6"), resources.GetString("cboFileExtension.Items7"), resources.GetString("cboFileExtension.Items8"), resources.GetString("cboFileExtension.Items9"), resources.GetString("cboFileExtension.Items10"), resources.GetString("cboFileExtension.Items11"), resources.GetString("cboFileExtension.Items12"), resources.GetString("cboFileExtension.Items13"), resources.GetString("cboFileExtension.Items14"), resources.GetString("cboFileExtension.Items15"), resources.GetString("cboFileExtension.Items16")})
-        resources.ApplyResources(Me.cboFileExtension, "cboFileExtension")
-        Me.cboFileExtension.Name = "cboFileExtension"
+        Me.cboFileType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboFileType.FormattingEnabled = True
+        Me.cboFileType.Items.AddRange(New Object() {resources.GetString("cboFileType.Items"), resources.GetString("cboFileType.Items1"), resources.GetString("cboFileType.Items2"), resources.GetString("cboFileType.Items3"), resources.GetString("cboFileType.Items4"), resources.GetString("cboFileType.Items5"), resources.GetString("cboFileType.Items6"), resources.GetString("cboFileType.Items7"), resources.GetString("cboFileType.Items8"), resources.GetString("cboFileType.Items9"), resources.GetString("cboFileType.Items10"), resources.GetString("cboFileType.Items11"), resources.GetString("cboFileType.Items12"), resources.GetString("cboFileType.Items13"), resources.GetString("cboFileType.Items14"), resources.GetString("cboFileType.Items15"), resources.GetString("cboFileType.Items16")})
+        resources.ApplyResources(Me.cboFileType, "cboFileType")
+        Me.cboFileType.Name = "cboFileType"
         '
         'ucrBase
         '
@@ -126,7 +126,7 @@ Partial Class dlgExportDataset
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.chkSaveAsSingleFile)
-        Me.Controls.Add(Me.cboFileExtension)
+        Me.Controls.Add(Me.cboFileType)
         Me.Controls.Add(Me.lblFileExtension)
         Me.Controls.Add(Me.ucrReceiverMultipleDataFrames)
         Me.Controls.Add(Me.lblSelectedDataFrames)
@@ -153,6 +153,6 @@ Partial Class dlgExportDataset
     Friend WithEvents lblSelectedDataFrames As Label
     Friend WithEvents ucrReceiverMultipleDataFrames As ucrReceiverMultiple
     Friend WithEvents lblFileExtension As Label
-    Friend WithEvents cboFileExtension As ComboBox
+    Friend WithEvents cboFileType As ComboBox
     Friend WithEvents chkSaveAsSingleFile As CheckBox
 End Class

@@ -223,19 +223,19 @@
     <value>NoControl</value>
   </data>
   <data name="lblFileExtension.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 170</value>
+    <value>242, 161</value>
   </data>
   <data name="lblFileExtension.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
   <data name="lblFileExtension.Size" type="System.Drawing.Size, System.Drawing">
-    <value>195, 13</value>
+    <value>86, 13</value>
   </data>
   <data name="lblFileExtension.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
   </data>
   <data name="lblFileExtension.Text" xml:space="preserve">
-    <value>Select File Extension For Selected Files:</value>
+    <value>Select File Type:</value>
   </data>
   <data name="&gt;&gt;lblFileExtension.Name" xml:space="preserve">
     <value>lblFileExtension</value>
@@ -249,76 +249,76 @@
   <data name="&gt;&gt;lblFileExtension.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="cboFileExtension.Items" xml:space="preserve">
+  <data name="cboFileType.Items" xml:space="preserve">
     <value>.csv</value>
   </data>
-  <data name="cboFileExtension.Items1" xml:space="preserve">
+  <data name="cboFileType.Items1" xml:space="preserve">
     <value>.xlsx</value>
   </data>
-  <data name="cboFileExtension.Items2" xml:space="preserve">
+  <data name="cboFileType.Items2" xml:space="preserve">
     <value>.tsv</value>
   </data>
-  <data name="cboFileExtension.Items3" xml:space="preserve">
+  <data name="cboFileType.Items3" xml:space="preserve">
     <value>.psv</value>
   </data>
-  <data name="cboFileExtension.Items4" xml:space="preserve">
+  <data name="cboFileType.Items4" xml:space="preserve">
     <value>.feather</value>
   </data>
-  <data name="cboFileExtension.Items5" xml:space="preserve">
+  <data name="cboFileType.Items5" xml:space="preserve">
     <value>.fwf</value>
   </data>
-  <data name="cboFileExtension.Items6" xml:space="preserve">
+  <data name="cboFileType.Items6" xml:space="preserve">
     <value>.rds</value>
   </data>
-  <data name="cboFileExtension.Items7" xml:space="preserve">
+  <data name="cboFileType.Items7" xml:space="preserve">
     <value>.RData</value>
   </data>
-  <data name="cboFileExtension.Items8" xml:space="preserve">
+  <data name="cboFileType.Items8" xml:space="preserve">
     <value>.json</value>
   </data>
-  <data name="cboFileExtension.Items9" xml:space="preserve">
+  <data name="cboFileType.Items9" xml:space="preserve">
     <value>.yml</value>
   </data>
-  <data name="cboFileExtension.Items10" xml:space="preserve">
+  <data name="cboFileType.Items10" xml:space="preserve">
     <value>.dta</value>
   </data>
-  <data name="cboFileExtension.Items11" xml:space="preserve">
+  <data name="cboFileType.Items11" xml:space="preserve">
     <value>.sav</value>
   </data>
-  <data name="cboFileExtension.Items12" xml:space="preserve">
+  <data name="cboFileType.Items12" xml:space="preserve">
     <value>.dbf</value>
   </data>
-  <data name="cboFileExtension.Items13" xml:space="preserve">
+  <data name="cboFileType.Items13" xml:space="preserve">
     <value>.arff</value>
   </data>
-  <data name="cboFileExtension.Items14" xml:space="preserve">
+  <data name="cboFileType.Items14" xml:space="preserve">
     <value>.R</value>
   </data>
-  <data name="cboFileExtension.Items15" xml:space="preserve">
+  <data name="cboFileType.Items15" xml:space="preserve">
     <value>.xml</value>
   </data>
-  <data name="cboFileExtension.Items16" xml:space="preserve">
+  <data name="cboFileType.Items16" xml:space="preserve">
     <value>.html</value>
   </data>
-  <data name="cboFileExtension.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 184</value>
+  <data name="cboFileType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 175</value>
   </data>
-  <data name="cboFileExtension.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cboFileType.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 21</value>
   </data>
-  <data name="cboFileExtension.TabIndex" type="System.Int32, mscorlib">
+  <data name="cboFileType.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;cboFileExtension.Name" xml:space="preserve">
-    <value>cboFileExtension</value>
+  <data name="&gt;&gt;cboFileType.Name" xml:space="preserve">
+    <value>cboFileType</value>
   </data>
-  <data name="&gt;&gt;cboFileExtension.Type" xml:space="preserve">
+  <data name="&gt;&gt;cboFileType.Type" xml:space="preserve">
     <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cboFileExtension.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cboFileType.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cboFileExtension.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cboFileType.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
@@ -412,14 +412,13 @@
     <value>243, 133</value>
   </data>
   <data name="chkSaveAsSingleFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 30</value>
+    <value>111, 17</value>
   </data>
   <data name="chkSaveAsSingleFile.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
   </data>
   <data name="chkSaveAsSingleFile.Text" xml:space="preserve">
-    <value>Save as single file
-(Excel, RDS, RData, HTML)</value>
+    <value>Save as single file</value>
   </data>
   <data name="&gt;&gt;chkSaveAsSingleFile.Name" xml:space="preserve">
     <value>chkSaveAsSingleFile</value>
