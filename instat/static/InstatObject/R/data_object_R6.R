@@ -2676,7 +2676,7 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
     }
     grouped_data <- self$get_data_frame(use_current_filter = FALSE) %>% dplyr::group_by_(.dots = col_names_exp)
     date_ranges <- grouped_data %>% dplyr::summarise_(.dots = setNames(list(lazyeval::interp(~ min(var), var = as.name(date_name)), lazyeval::interp(~ max(var), var = as.name(date_name))), c("min_date", "max_date")))
-    date_lengths <- grouped_data %>% dplyr::summarise(count = n())
+    date_lengths <- grouped_data %>% dplyr::summarise(count = n(), .groups="keep")
     if(!missing(start_date) | !missing(end_date)) {
       if(!missing(start_date)) {
         date_ranges$min_date <- start_date
