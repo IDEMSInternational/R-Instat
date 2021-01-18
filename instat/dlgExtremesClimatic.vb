@@ -549,7 +549,7 @@ Public Class dlgExtremesClimatic
                 ucrBase.OKEnabled(False)
             End If
         Else
-            If ucrReceiverElement.IsEmpty OrElse (rdoMrlPlot.Checked AndAlso Not ucrSaveMrlPlot.IsComplete OrElse ucrNudColumns.GetText = "") OrElse (rdoThreshRangePlot.Checked AndAlso Not ucrSaveThresholdPlot.IsComplete OrElse ucrNudThresholds.GetText = "" OrElse ucrNudThresholdColumns.GetText = "" OrElse ucrNudAlpha.GetText = "") Then
+            If ucrReceiverElement.IsEmpty OrElse (rdoMrlPlot.Checked AndAlso Not ucrSaveMrlPlot.IsComplete OrElse ucrNudColumns.GetText = "") OrElse (rdoThreshRangePlot.Checked AndAlso Not ucrSaveThresholdPlot.IsComplete OrElse ucrNudThresholds.GetText = "" OrElse ucrNudThresholdColumns.GetText = "" OrElse ucrNudAlpha.GetText = "") OrElse (rdoDeclustering.Checked AndAlso (ucrInputThreshold.IsEmpty OrElse Not ucrSaveDeclusteredPlot.IsComplete) OrElse ucrNudDeclusterColumns.GetText = "" OrElse ucrNudRunLength.GetText = "") Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -718,10 +718,6 @@ Public Class dlgExtremesClimatic
         SetCalculationValues()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputSave.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged, ucrPnlPlots.ControlContentsChanged, ucrSaveMrlPlot.ControlContentsChanged, ucrSaveThresholdPlot.ControlContentsChanged, ucrNudColumns.ControlContentsChanged, ucrNudThresholds.ControlContentsChanged, ucrNudThresholdColumns.ControlContentsChanged, ucrNudAlpha.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrSelectorClimaticExtremes_DataFrameChanged() Handles ucrSelectorClimaticExtremes.DataFrameChanged
         clsDayFilterCalcFromList.ClearParameters()
     End Sub
@@ -821,5 +817,9 @@ Public Class dlgExtremesClimatic
         Else
             ucrBase.clsRsyntax.iCallType = 3
         End If
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputSave.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged, ucrPnlPlots.ControlContentsChanged, ucrSaveMrlPlot.ControlContentsChanged, ucrSaveThresholdPlot.ControlContentsChanged, ucrNudColumns.ControlContentsChanged, ucrNudThresholds.ControlContentsChanged, ucrNudThresholdColumns.ControlContentsChanged, ucrNudAlpha.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged, ucrNudDeclusterColumns.ControlContentsChanged, ucrNudRunLength.ControlContentsChanged, ucrSaveDeclusteredPlot.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
