@@ -44,13 +44,8 @@ Partial Class dlgExtremesClimatic
         Me.lblYear = New System.Windows.Forms.Label()
         Me.lblDayOfYear = New System.Windows.Forms.Label()
         Me.grpMinMaxOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkLastDate = New instat.ucrCheck()
-        Me.ucrChkNDates = New instat.ucrCheck()
-        Me.ucrChkMissingValues = New instat.ucrCheck()
         Me.rdoMin = New System.Windows.Forms.RadioButton()
         Me.rdoMax = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMaxMin = New instat.UcrPanel()
-        Me.ucrChkFirstDate = New instat.ucrCheck()
         Me.lblValues = New System.Windows.Forms.Label()
         Me.cmdDoyRange = New System.Windows.Forms.Button()
         Me.rdoMinMax = New System.Windows.Forms.RadioButton()
@@ -59,8 +54,6 @@ Partial Class dlgExtremesClimatic
         Me.lblNewColName = New System.Windows.Forms.Label()
         Me.lblNewDFName = New System.Windows.Forms.Label()
         Me.grpPeakOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
-        Me.ucrInputThresholdOperator = New instat.ucrInputComboBox()
         Me.lblFill = New System.Windows.Forms.Label()
         Me.lblColour = New System.Windows.Forms.Label()
         Me.lblMinimum = New System.Windows.Forms.Label()
@@ -73,28 +66,42 @@ Partial Class dlgExtremesClimatic
         Me.rdoMrlPlot = New System.Windows.Forms.RadioButton()
         Me.rdoThreshRangePlot = New System.Windows.Forms.RadioButton()
         Me.grpThresholdOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrNudThresholdColumns = New instat.ucrNud()
-        Me.ucrNudAlpha = New instat.ucrNud()
-        Me.ucrNudThresholds = New instat.ucrNud()
-        Me.ucrInputDistribution = New instat.ucrInputComboBox()
         Me.grpMrlOptions = New System.Windows.Forms.GroupBox()
+        Me.grpPlots = New System.Windows.Forms.GroupBox()
+        Me.rdoDeclustering = New System.Windows.Forms.RadioButton()
+        Me.rdoThreshold = New System.Windows.Forms.RadioButton()
+        Me.ttpThreshold = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblThreshold = New System.Windows.Forms.Label()
+        Me.lblDeclusterColumns = New System.Windows.Forms.Label()
+        Me.grpDeclusteringOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkRunLength = New instat.ucrCheck()
+        Me.ucrNudRunLength = New instat.ucrNud()
+        Me.ucrChkPrintSummary = New instat.ucrCheck()
+        Me.ucrInputThreshold = New instat.ucrInputTextBox()
+        Me.ucrNudDeclusterColumns = New instat.ucrNud()
+        Me.ucrSaveDeclusteredPlot = New instat.ucrSave()
+        Me.ucrSaveThresholdPlot = New instat.ucrSave()
+        Me.ucrSaveMrlPlot = New instat.ucrSave()
         Me.ucrNudColumns = New instat.ucrNud()
         Me.ucrInputMin = New instat.ucrInputTextBox()
         Me.ucrChkRugPlot = New instat.ucrCheck()
         Me.ucrInputMax = New instat.ucrInputTextBox()
         Me.ucrInputColours = New instat.ucrInputComboBox()
         Me.ucrInputFill = New instat.ucrInputComboBox()
-        Me.grpPlots = New System.Windows.Forms.GroupBox()
-        Me.rdoDeclustering = New System.Windows.Forms.RadioButton()
+        Me.ucrNudThresholdColumns = New instat.ucrNud()
+        Me.ucrNudAlpha = New instat.ucrNud()
+        Me.ucrNudThresholds = New instat.ucrNud()
+        Me.ucrInputDistribution = New instat.ucrInputComboBox()
         Me.ucrPnlPlots = New instat.UcrPanel()
-        Me.rdoThreshold = New System.Windows.Forms.RadioButton()
-        Me.ttpThreshold = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrSaveDeclusteredPlot = New instat.ucrSave()
-        Me.ucrSaveThresholdPlot = New instat.ucrSave()
-        Me.ucrSaveMrlPlot = New instat.ucrSave()
-        Me.ucrChkPrintSummary = New instat.ucrCheck()
+        Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
+        Me.ucrInputThresholdOperator = New instat.ucrInputComboBox()
         Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
         Me.ucrInputSave = New instat.ucrInputTextBox()
+        Me.ucrChkLastDate = New instat.ucrCheck()
+        Me.ucrChkNDates = New instat.ucrCheck()
+        Me.ucrChkMissingValues = New instat.ucrCheck()
+        Me.ucrPnlMaxMin = New instat.UcrPanel()
+        Me.ucrChkFirstDate = New instat.ucrCheck()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -103,13 +110,6 @@ Partial Class dlgExtremesClimatic
         Me.ucrSelectorClimaticExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlExtremesType = New instat.UcrPanel()
-        Me.ucrInputThreshold = New instat.ucrInputTextBox()
-        Me.lblThreshold = New System.Windows.Forms.Label()
-        Me.ucrNudRunLength = New instat.ucrNud()
-        Me.ucrNudDeclusterColumns = New instat.ucrNud()
-        Me.lblDeclusterColumns = New System.Windows.Forms.Label()
-        Me.grpDeclusteringOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkRunLength = New instat.ucrCheck()
         Me.grpMinMaxOptions.SuspendLayout()
         Me.grpPeakOptions.SuspendLayout()
         Me.grpThresholdOptions.SuspendLayout()
@@ -170,30 +170,6 @@ Partial Class dlgExtremesClimatic
         Me.grpMinMaxOptions.TabStop = False
         Me.grpMinMaxOptions.Text = "Options"
         '
-        'ucrChkLastDate
-        '
-        Me.ucrChkLastDate.Checked = False
-        Me.ucrChkLastDate.Location = New System.Drawing.Point(9, 121)
-        Me.ucrChkLastDate.Name = "ucrChkLastDate"
-        Me.ucrChkLastDate.Size = New System.Drawing.Size(195, 20)
-        Me.ucrChkLastDate.TabIndex = 13
-        '
-        'ucrChkNDates
-        '
-        Me.ucrChkNDates.Checked = False
-        Me.ucrChkNDates.Location = New System.Drawing.Point(10, 97)
-        Me.ucrChkNDates.Name = "ucrChkNDates"
-        Me.ucrChkNDates.Size = New System.Drawing.Size(194, 20)
-        Me.ucrChkNDates.TabIndex = 12
-        '
-        'ucrChkMissingValues
-        '
-        Me.ucrChkMissingValues.Checked = False
-        Me.ucrChkMissingValues.Location = New System.Drawing.Point(10, 147)
-        Me.ucrChkMissingValues.Name = "ucrChkMissingValues"
-        Me.ucrChkMissingValues.Size = New System.Drawing.Size(194, 20)
-        Me.ucrChkMissingValues.TabIndex = 11
-        '
         'rdoMin
         '
         Me.rdoMin.AutoSize = True
@@ -215,21 +191,6 @@ Partial Class dlgExtremesClimatic
         Me.rdoMax.TabStop = True
         Me.rdoMax.Text = "Maximum Values"
         Me.rdoMax.UseVisualStyleBackColor = True
-        '
-        'ucrPnlMaxMin
-        '
-        Me.ucrPnlMaxMin.Location = New System.Drawing.Point(6, 18)
-        Me.ucrPnlMaxMin.Name = "ucrPnlMaxMin"
-        Me.ucrPnlMaxMin.Size = New System.Drawing.Size(131, 49)
-        Me.ucrPnlMaxMin.TabIndex = 7
-        '
-        'ucrChkFirstDate
-        '
-        Me.ucrChkFirstDate.Checked = False
-        Me.ucrChkFirstDate.Location = New System.Drawing.Point(10, 73)
-        Me.ucrChkFirstDate.Name = "ucrChkFirstDate"
-        Me.ucrChkFirstDate.Size = New System.Drawing.Size(194, 20)
-        Me.ucrChkFirstDate.TabIndex = 10
         '
         'lblValues
         '
@@ -320,26 +281,6 @@ Partial Class dlgExtremesClimatic
         Me.grpPeakOptions.TabIndex = 14
         Me.grpPeakOptions.TabStop = False
         Me.grpPeakOptions.Text = "Options"
-        '
-        'ucrInputThresholdValue
-        '
-        Me.ucrInputThresholdValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputThresholdValue.IsMultiline = False
-        Me.ucrInputThresholdValue.IsReadOnly = False
-        Me.ucrInputThresholdValue.Location = New System.Drawing.Point(113, 19)
-        Me.ucrInputThresholdValue.Name = "ucrInputThresholdValue"
-        Me.ucrInputThresholdValue.Size = New System.Drawing.Size(43, 21)
-        Me.ucrInputThresholdValue.TabIndex = 8
-        '
-        'ucrInputThresholdOperator
-        '
-        Me.ucrInputThresholdOperator.AddQuotesIfUnrecognised = True
-        Me.ucrInputThresholdOperator.GetSetSelectedIndex = -1
-        Me.ucrInputThresholdOperator.IsReadOnly = False
-        Me.ucrInputThresholdOperator.Location = New System.Drawing.Point(44, 18)
-        Me.ucrInputThresholdOperator.Name = "ucrInputThresholdOperator"
-        Me.ucrInputThresholdOperator.Size = New System.Drawing.Size(68, 21)
-        Me.ucrInputThresholdOperator.TabIndex = 6
         '
         'lblFill
         '
@@ -461,52 +402,6 @@ Partial Class dlgExtremesClimatic
         Me.grpThresholdOptions.TabStop = False
         Me.grpThresholdOptions.Text = "Options"
         '
-        'ucrNudThresholdColumns
-        '
-        Me.ucrNudThresholdColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudThresholdColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudThresholdColumns.Location = New System.Drawing.Point(70, 106)
-        Me.ucrNudThresholdColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudThresholdColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudThresholdColumns.Name = "ucrNudThresholdColumns"
-        Me.ucrNudThresholdColumns.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudThresholdColumns.TabIndex = 32
-        Me.ucrNudThresholdColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudAlpha
-        '
-        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudAlpha.Location = New System.Drawing.Point(72, 54)
-        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlpha.Name = "ucrNudAlpha"
-        Me.ucrNudAlpha.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAlpha.TabIndex = 35
-        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudThresholds
-        '
-        Me.ucrNudThresholds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudThresholds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudThresholds.Location = New System.Drawing.Point(124, 81)
-        Me.ucrNudThresholds.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudThresholds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudThresholds.Name = "ucrNudThresholds"
-        Me.ucrNudThresholds.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudThresholds.TabIndex = 36
-        Me.ucrNudThresholds.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputDistribution
-        '
-        Me.ucrInputDistribution.AddQuotesIfUnrecognised = True
-        Me.ucrInputDistribution.GetSetSelectedIndex = -1
-        Me.ucrInputDistribution.IsReadOnly = False
-        Me.ucrInputDistribution.Location = New System.Drawing.Point(71, 25)
-        Me.ucrInputDistribution.Name = "ucrInputDistribution"
-        Me.ucrInputDistribution.Size = New System.Drawing.Size(78, 21)
-        Me.ucrInputDistribution.TabIndex = 39
-        '
         'grpMrlOptions
         '
         Me.grpMrlOptions.Controls.Add(Me.lblColour)
@@ -526,6 +421,154 @@ Partial Class dlgExtremesClimatic
         Me.grpMrlOptions.TabIndex = 16
         Me.grpMrlOptions.TabStop = False
         Me.grpMrlOptions.Text = "Options"
+        '
+        'grpPlots
+        '
+        Me.grpPlots.Controls.Add(Me.rdoDeclustering)
+        Me.grpPlots.Controls.Add(Me.rdoMrlPlot)
+        Me.grpPlots.Controls.Add(Me.rdoThreshRangePlot)
+        Me.grpPlots.Controls.Add(Me.ucrPnlPlots)
+        Me.grpPlots.Location = New System.Drawing.Point(9, 218)
+        Me.grpPlots.Name = "grpPlots"
+        Me.grpPlots.Size = New System.Drawing.Size(211, 80)
+        Me.grpPlots.TabIndex = 15
+        Me.grpPlots.TabStop = False
+        Me.grpPlots.Text = "Plots"
+        '
+        'rdoDeclustering
+        '
+        Me.rdoDeclustering.AutoSize = True
+        Me.rdoDeclustering.Location = New System.Drawing.Point(14, 54)
+        Me.rdoDeclustering.Name = "rdoDeclustering"
+        Me.rdoDeclustering.Size = New System.Drawing.Size(84, 17)
+        Me.rdoDeclustering.TabIndex = 45
+        Me.rdoDeclustering.TabStop = True
+        Me.rdoDeclustering.Text = "Declustering"
+        Me.rdoDeclustering.UseVisualStyleBackColor = True
+        '
+        'rdoThreshold
+        '
+        Me.rdoThreshold.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoThreshold.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoThreshold.FlatAppearance.BorderSize = 2
+        Me.rdoThreshold.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoThreshold.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoThreshold.Location = New System.Drawing.Point(169, 6)
+        Me.rdoThreshold.Name = "rdoThreshold"
+        Me.rdoThreshold.Size = New System.Drawing.Size(87, 27)
+        Me.rdoThreshold.TabIndex = 2
+        Me.rdoThreshold.TabStop = True
+        Me.rdoThreshold.Text = "Threshold "
+        Me.rdoThreshold.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoThreshold.UseVisualStyleBackColor = True
+        '
+        'lblThreshold
+        '
+        Me.lblThreshold.AutoSize = True
+        Me.lblThreshold.Location = New System.Drawing.Point(7, 17)
+        Me.lblThreshold.Name = "lblThreshold"
+        Me.lblThreshold.Size = New System.Drawing.Size(57, 13)
+        Me.lblThreshold.TabIndex = 48
+        Me.lblThreshold.Text = "Threshold:"
+        '
+        'lblDeclusterColumns
+        '
+        Me.lblDeclusterColumns.AutoSize = True
+        Me.lblDeclusterColumns.Location = New System.Drawing.Point(7, 89)
+        Me.lblDeclusterColumns.Name = "lblDeclusterColumns"
+        Me.lblDeclusterColumns.Size = New System.Drawing.Size(56, 13)
+        Me.lblDeclusterColumns.TabIndex = 51
+        Me.lblDeclusterColumns.Text = "Column(s):"
+        '
+        'grpDeclusteringOptions
+        '
+        Me.grpDeclusteringOptions.Controls.Add(Me.ucrChkRunLength)
+        Me.grpDeclusteringOptions.Controls.Add(Me.ucrNudRunLength)
+        Me.grpDeclusteringOptions.Controls.Add(Me.ucrChkPrintSummary)
+        Me.grpDeclusteringOptions.Controls.Add(Me.ucrInputThreshold)
+        Me.grpDeclusteringOptions.Controls.Add(Me.ucrNudDeclusterColumns)
+        Me.grpDeclusteringOptions.Controls.Add(Me.lblDeclusterColumns)
+        Me.grpDeclusteringOptions.Controls.Add(Me.lblThreshold)
+        Me.grpDeclusteringOptions.Location = New System.Drawing.Point(11, 300)
+        Me.grpDeclusteringOptions.Name = "grpDeclusteringOptions"
+        Me.grpDeclusteringOptions.Size = New System.Drawing.Size(209, 135)
+        Me.grpDeclusteringOptions.TabIndex = 16
+        Me.grpDeclusteringOptions.TabStop = False
+        Me.grpDeclusteringOptions.Text = "Options"
+        '
+        'ucrChkRunLength
+        '
+        Me.ucrChkRunLength.Checked = False
+        Me.ucrChkRunLength.Location = New System.Drawing.Point(7, 38)
+        Me.ucrChkRunLength.Name = "ucrChkRunLength"
+        Me.ucrChkRunLength.Size = New System.Drawing.Size(93, 20)
+        Me.ucrChkRunLength.TabIndex = 52
+        '
+        'ucrNudRunLength
+        '
+        Me.ucrNudRunLength.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRunLength.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudRunLength.Location = New System.Drawing.Point(106, 39)
+        Me.ucrNudRunLength.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudRunLength.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudRunLength.Name = "ucrNudRunLength"
+        Me.ucrNudRunLength.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudRunLength.TabIndex = 49
+        Me.ucrNudRunLength.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkPrintSummary
+        '
+        Me.ucrChkPrintSummary.Checked = False
+        Me.ucrChkPrintSummary.Location = New System.Drawing.Point(7, 61)
+        Me.ucrChkPrintSummary.Name = "ucrChkPrintSummary"
+        Me.ucrChkPrintSummary.Size = New System.Drawing.Size(149, 20)
+        Me.ucrChkPrintSummary.TabIndex = 45
+        '
+        'ucrInputThreshold
+        '
+        Me.ucrInputThreshold.AddQuotesIfUnrecognised = True
+        Me.ucrInputThreshold.IsMultiline = False
+        Me.ucrInputThreshold.IsReadOnly = False
+        Me.ucrInputThreshold.Location = New System.Drawing.Point(106, 14)
+        Me.ucrInputThreshold.Name = "ucrInputThreshold"
+        Me.ucrInputThreshold.Size = New System.Drawing.Size(43, 21)
+        Me.ucrInputThreshold.TabIndex = 46
+        '
+        'ucrNudDeclusterColumns
+        '
+        Me.ucrNudDeclusterColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDeclusterColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudDeclusterColumns.Location = New System.Drawing.Point(106, 87)
+        Me.ucrNudDeclusterColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudDeclusterColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudDeclusterColumns.Name = "ucrNudDeclusterColumns"
+        Me.ucrNudDeclusterColumns.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudDeclusterColumns.TabIndex = 50
+        Me.ucrNudDeclusterColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrSaveDeclusteredPlot
+        '
+        Me.ucrSaveDeclusteredPlot.Location = New System.Drawing.Point(8, 467)
+        Me.ucrSaveDeclusteredPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveDeclusteredPlot.Name = "ucrSaveDeclusteredPlot"
+        Me.ucrSaveDeclusteredPlot.Size = New System.Drawing.Size(267, 24)
+        Me.ucrSaveDeclusteredPlot.TabIndex = 19
+        '
+        'ucrSaveThresholdPlot
+        '
+        Me.ucrSaveThresholdPlot.Location = New System.Drawing.Point(8, 468)
+        Me.ucrSaveThresholdPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveThresholdPlot.Name = "ucrSaveThresholdPlot"
+        Me.ucrSaveThresholdPlot.Size = New System.Drawing.Size(267, 24)
+        Me.ucrSaveThresholdPlot.TabIndex = 19
+        '
+        'ucrSaveMrlPlot
+        '
+        Me.ucrSaveMrlPlot.Location = New System.Drawing.Point(8, 468)
+        Me.ucrSaveMrlPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveMrlPlot.Name = "ucrSaveMrlPlot"
+        Me.ucrSaveMrlPlot.Size = New System.Drawing.Size(267, 24)
+        Me.ucrSaveMrlPlot.TabIndex = 15
         '
         'ucrNudColumns
         '
@@ -587,29 +630,51 @@ Partial Class dlgExtremesClimatic
         Me.ucrInputFill.Size = New System.Drawing.Size(78, 21)
         Me.ucrInputFill.TabIndex = 36
         '
-        'grpPlots
+        'ucrNudThresholdColumns
         '
-        Me.grpPlots.Controls.Add(Me.rdoDeclustering)
-        Me.grpPlots.Controls.Add(Me.rdoMrlPlot)
-        Me.grpPlots.Controls.Add(Me.rdoThreshRangePlot)
-        Me.grpPlots.Controls.Add(Me.ucrPnlPlots)
-        Me.grpPlots.Location = New System.Drawing.Point(9, 218)
-        Me.grpPlots.Name = "grpPlots"
-        Me.grpPlots.Size = New System.Drawing.Size(211, 80)
-        Me.grpPlots.TabIndex = 15
-        Me.grpPlots.TabStop = False
-        Me.grpPlots.Text = "Plots"
+        Me.ucrNudThresholdColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThresholdColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudThresholdColumns.Location = New System.Drawing.Point(70, 106)
+        Me.ucrNudThresholdColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudThresholdColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThresholdColumns.Name = "ucrNudThresholdColumns"
+        Me.ucrNudThresholdColumns.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudThresholdColumns.TabIndex = 32
+        Me.ucrNudThresholdColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'rdoDeclustering
+        'ucrNudAlpha
         '
-        Me.rdoDeclustering.AutoSize = True
-        Me.rdoDeclustering.Location = New System.Drawing.Point(14, 54)
-        Me.rdoDeclustering.Name = "rdoDeclustering"
-        Me.rdoDeclustering.Size = New System.Drawing.Size(84, 17)
-        Me.rdoDeclustering.TabIndex = 45
-        Me.rdoDeclustering.TabStop = True
-        Me.rdoDeclustering.Text = "Declustering"
-        Me.rdoDeclustering.UseVisualStyleBackColor = True
+        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudAlpha.Location = New System.Drawing.Point(72, 54)
+        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Name = "ucrNudAlpha"
+        Me.ucrNudAlpha.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudAlpha.TabIndex = 35
+        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudThresholds
+        '
+        Me.ucrNudThresholds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThresholds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudThresholds.Location = New System.Drawing.Point(124, 81)
+        Me.ucrNudThresholds.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudThresholds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudThresholds.Name = "ucrNudThresholds"
+        Me.ucrNudThresholds.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudThresholds.TabIndex = 36
+        Me.ucrNudThresholds.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputDistribution
+        '
+        Me.ucrInputDistribution.AddQuotesIfUnrecognised = True
+        Me.ucrInputDistribution.GetSetSelectedIndex = -1
+        Me.ucrInputDistribution.IsReadOnly = False
+        Me.ucrInputDistribution.Location = New System.Drawing.Point(71, 25)
+        Me.ucrInputDistribution.Name = "ucrInputDistribution"
+        Me.ucrInputDistribution.Size = New System.Drawing.Size(78, 21)
+        Me.ucrInputDistribution.TabIndex = 39
         '
         'ucrPnlPlots
         '
@@ -618,53 +683,25 @@ Partial Class dlgExtremesClimatic
         Me.ucrPnlPlots.Size = New System.Drawing.Size(111, 63)
         Me.ucrPnlPlots.TabIndex = 41
         '
-        'rdoThreshold
+        'ucrInputThresholdValue
         '
-        Me.rdoThreshold.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoThreshold.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoThreshold.FlatAppearance.BorderSize = 2
-        Me.rdoThreshold.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoThreshold.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoThreshold.Location = New System.Drawing.Point(169, 6)
-        Me.rdoThreshold.Name = "rdoThreshold"
-        Me.rdoThreshold.Size = New System.Drawing.Size(87, 27)
-        Me.rdoThreshold.TabIndex = 2
-        Me.rdoThreshold.TabStop = True
-        Me.rdoThreshold.Text = "Threshold "
-        Me.rdoThreshold.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoThreshold.UseVisualStyleBackColor = True
+        Me.ucrInputThresholdValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdValue.IsMultiline = False
+        Me.ucrInputThresholdValue.IsReadOnly = False
+        Me.ucrInputThresholdValue.Location = New System.Drawing.Point(113, 19)
+        Me.ucrInputThresholdValue.Name = "ucrInputThresholdValue"
+        Me.ucrInputThresholdValue.Size = New System.Drawing.Size(43, 21)
+        Me.ucrInputThresholdValue.TabIndex = 0
         '
-        'ucrSaveDeclusteredPlot
+        'ucrInputThresholdOperator
         '
-        Me.ucrSaveDeclusteredPlot.Location = New System.Drawing.Point(8, 467)
-        Me.ucrSaveDeclusteredPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveDeclusteredPlot.Name = "ucrSaveDeclusteredPlot"
-        Me.ucrSaveDeclusteredPlot.Size = New System.Drawing.Size(267, 24)
-        Me.ucrSaveDeclusteredPlot.TabIndex = 45
-        '
-        'ucrSaveThresholdPlot
-        '
-        Me.ucrSaveThresholdPlot.Location = New System.Drawing.Point(8, 468)
-        Me.ucrSaveThresholdPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveThresholdPlot.Name = "ucrSaveThresholdPlot"
-        Me.ucrSaveThresholdPlot.Size = New System.Drawing.Size(267, 24)
-        Me.ucrSaveThresholdPlot.TabIndex = 19
-        '
-        'ucrSaveMrlPlot
-        '
-        Me.ucrSaveMrlPlot.Location = New System.Drawing.Point(8, 468)
-        Me.ucrSaveMrlPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveMrlPlot.Name = "ucrSaveMrlPlot"
-        Me.ucrSaveMrlPlot.Size = New System.Drawing.Size(267, 24)
-        Me.ucrSaveMrlPlot.TabIndex = 15
-        '
-        'ucrChkPrintSummary
-        '
-        Me.ucrChkPrintSummary.Checked = False
-        Me.ucrChkPrintSummary.Location = New System.Drawing.Point(7, 61)
-        Me.ucrChkPrintSummary.Name = "ucrChkPrintSummary"
-        Me.ucrChkPrintSummary.Size = New System.Drawing.Size(149, 20)
-        Me.ucrChkPrintSummary.TabIndex = 45
+        Me.ucrInputThresholdOperator.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdOperator.GetSetSelectedIndex = -1
+        Me.ucrInputThresholdOperator.IsReadOnly = False
+        Me.ucrInputThresholdOperator.Location = New System.Drawing.Point(44, 18)
+        Me.ucrInputThresholdOperator.Name = "ucrInputThresholdOperator"
+        Me.ucrInputThresholdOperator.Size = New System.Drawing.Size(68, 21)
+        Me.ucrInputThresholdOperator.TabIndex = 6
         '
         'ucrInputFilterPreview
         '
@@ -684,7 +721,46 @@ Partial Class dlgExtremesClimatic
         Me.ucrInputSave.Location = New System.Drawing.Point(140, 468)
         Me.ucrInputSave.Name = "ucrInputSave"
         Me.ucrInputSave.Size = New System.Drawing.Size(170, 21)
-        Me.ucrInputSave.TabIndex = 21
+        Me.ucrInputSave.TabIndex = 20
+        '
+        'ucrChkLastDate
+        '
+        Me.ucrChkLastDate.Checked = False
+        Me.ucrChkLastDate.Location = New System.Drawing.Point(9, 121)
+        Me.ucrChkLastDate.Name = "ucrChkLastDate"
+        Me.ucrChkLastDate.Size = New System.Drawing.Size(195, 20)
+        Me.ucrChkLastDate.TabIndex = 13
+        '
+        'ucrChkNDates
+        '
+        Me.ucrChkNDates.Checked = False
+        Me.ucrChkNDates.Location = New System.Drawing.Point(10, 97)
+        Me.ucrChkNDates.Name = "ucrChkNDates"
+        Me.ucrChkNDates.Size = New System.Drawing.Size(194, 20)
+        Me.ucrChkNDates.TabIndex = 12
+        '
+        'ucrChkMissingValues
+        '
+        Me.ucrChkMissingValues.Checked = False
+        Me.ucrChkMissingValues.Location = New System.Drawing.Point(10, 147)
+        Me.ucrChkMissingValues.Name = "ucrChkMissingValues"
+        Me.ucrChkMissingValues.Size = New System.Drawing.Size(194, 20)
+        Me.ucrChkMissingValues.TabIndex = 11
+        '
+        'ucrPnlMaxMin
+        '
+        Me.ucrPnlMaxMin.Location = New System.Drawing.Point(6, 18)
+        Me.ucrPnlMaxMin.Name = "ucrPnlMaxMin"
+        Me.ucrPnlMaxMin.Size = New System.Drawing.Size(131, 49)
+        Me.ucrPnlMaxMin.TabIndex = 7
+        '
+        'ucrChkFirstDate
+        '
+        Me.ucrChkFirstDate.Checked = False
+        Me.ucrChkFirstDate.Location = New System.Drawing.Point(10, 73)
+        Me.ucrChkFirstDate.Name = "ucrChkFirstDate"
+        Me.ucrChkFirstDate.Size = New System.Drawing.Size(194, 20)
+        Me.ucrChkFirstDate.TabIndex = 0
         '
         'ucrReceiverDOY
         '
@@ -762,7 +838,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrBase.Location = New System.Drawing.Point(10, 494)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(398, 52)
-        Me.ucrBase.TabIndex = 22
+        Me.ucrBase.TabIndex = 21
         '
         'ucrPnlExtremesType
         '
@@ -770,82 +846,6 @@ Partial Class dlgExtremesClimatic
         Me.ucrPnlExtremesType.Name = "ucrPnlExtremesType"
         Me.ucrPnlExtremesType.Size = New System.Drawing.Size(280, 37)
         Me.ucrPnlExtremesType.TabIndex = 0
-        '
-        'ucrInputThreshold
-        '
-        Me.ucrInputThreshold.AddQuotesIfUnrecognised = True
-        Me.ucrInputThreshold.IsMultiline = False
-        Me.ucrInputThreshold.IsReadOnly = False
-        Me.ucrInputThreshold.Location = New System.Drawing.Point(106, 14)
-        Me.ucrInputThreshold.Name = "ucrInputThreshold"
-        Me.ucrInputThreshold.Size = New System.Drawing.Size(43, 21)
-        Me.ucrInputThreshold.TabIndex = 46
-        '
-        'lblThreshold
-        '
-        Me.lblThreshold.AutoSize = True
-        Me.lblThreshold.Location = New System.Drawing.Point(7, 17)
-        Me.lblThreshold.Name = "lblThreshold"
-        Me.lblThreshold.Size = New System.Drawing.Size(57, 13)
-        Me.lblThreshold.TabIndex = 48
-        Me.lblThreshold.Text = "Threshold:"
-        '
-        'ucrNudRunLength
-        '
-        Me.ucrNudRunLength.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRunLength.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudRunLength.Location = New System.Drawing.Point(106, 39)
-        Me.ucrNudRunLength.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudRunLength.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudRunLength.Name = "ucrNudRunLength"
-        Me.ucrNudRunLength.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudRunLength.TabIndex = 49
-        Me.ucrNudRunLength.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudDeclusterColumns
-        '
-        Me.ucrNudDeclusterColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDeclusterColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudDeclusterColumns.Location = New System.Drawing.Point(106, 87)
-        Me.ucrNudDeclusterColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudDeclusterColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudDeclusterColumns.Name = "ucrNudDeclusterColumns"
-        Me.ucrNudDeclusterColumns.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudDeclusterColumns.TabIndex = 50
-        Me.ucrNudDeclusterColumns.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblDeclusterColumns
-        '
-        Me.lblDeclusterColumns.AutoSize = True
-        Me.lblDeclusterColumns.Location = New System.Drawing.Point(7, 89)
-        Me.lblDeclusterColumns.Name = "lblDeclusterColumns"
-        Me.lblDeclusterColumns.Size = New System.Drawing.Size(56, 13)
-        Me.lblDeclusterColumns.TabIndex = 51
-        Me.lblDeclusterColumns.Text = "Column(s):"
-        '
-        'grpDeclusteringOptions
-        '
-        Me.grpDeclusteringOptions.Controls.Add(Me.ucrChkRunLength)
-        Me.grpDeclusteringOptions.Controls.Add(Me.ucrNudRunLength)
-        Me.grpDeclusteringOptions.Controls.Add(Me.ucrChkPrintSummary)
-        Me.grpDeclusteringOptions.Controls.Add(Me.ucrInputThreshold)
-        Me.grpDeclusteringOptions.Controls.Add(Me.ucrNudDeclusterColumns)
-        Me.grpDeclusteringOptions.Controls.Add(Me.lblDeclusterColumns)
-        Me.grpDeclusteringOptions.Controls.Add(Me.lblThreshold)
-        Me.grpDeclusteringOptions.Location = New System.Drawing.Point(11, 300)
-        Me.grpDeclusteringOptions.Name = "grpDeclusteringOptions"
-        Me.grpDeclusteringOptions.Size = New System.Drawing.Size(209, 135)
-        Me.grpDeclusteringOptions.TabIndex = 52
-        Me.grpDeclusteringOptions.TabStop = False
-        Me.grpDeclusteringOptions.Text = "Options"
-        '
-        'ucrChkRunLength
-        '
-        Me.ucrChkRunLength.Checked = False
-        Me.ucrChkRunLength.Location = New System.Drawing.Point(7, 38)
-        Me.ucrChkRunLength.Name = "ucrChkRunLength"
-        Me.ucrChkRunLength.Size = New System.Drawing.Size(93, 20)
-        Me.ucrChkRunLength.TabIndex = 52
         '
         'dlgExtremesClimatic
         '
