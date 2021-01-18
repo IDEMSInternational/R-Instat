@@ -20,7 +20,6 @@ Public Class dlgExportDataset
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDefaultFunction As RFunction
-    Private bSupressFileValuesChange As Boolean = False
 
     Private Sub dlgExportDataset_Load(sender As Object, e As EventArgs) Handles Me.Load
         'temporarily commented out because it overwrites lblConfirm text contents
@@ -48,7 +47,6 @@ Public Class dlgExportDataset
 
         'file path control 
         ucrFilePath.SetPathControlParameter(New RParameter("file", 1))
-
     End Sub
 
     Private Sub SetDefaults()
@@ -97,6 +95,16 @@ Public Class dlgExportDataset
         ucrFilePath.Clear() 'will raise event FilePathChanged
     End Sub
 
+    Private Sub chkSaveAsSingleFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveAsSingleFile.CheckedChanged
+        ChangeFileControlsValues()
+        ucrFilePath.Clear() 'will raise event FilePathChanged
+    End Sub
+
+    Private Sub cboFileExtension_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFileType.SelectedIndexChanged
+        ucrFilePath.Clear() 'will raise event FilePathChanged
+        ucrFilePath.FilePathDialogFilter = GetFilePathDialogFilterText(cboFileType.SelectedItem)
+    End Sub
+
     ''' <summary>
     ''' this event will always be called when changes happen to the core controls of the form;
     ''' receiver, file path, save as single checkbox
@@ -120,16 +128,6 @@ Public Class dlgExportDataset
         TestOkEnabled()
     End Sub
 
-    Private Sub chkSaveAsSingleFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveAsSingleFile.CheckedChanged
-        ChangeFileControlsValues()
-        ucrFilePath.Clear() 'will raise event FilePathChanged
-    End Sub
-
-    Private Sub cboFileExtension_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFileType.SelectedIndexChanged
-        'ChangeFileControlsValues()
-        ucrFilePath.Clear() 'will raise event FilePathChanged
-        ucrFilePath.FilePathDialogFilter = GetFilePathDialogFilterText(cboFileType.SelectedItem)
-    End Sub
 
     ''' <summary>
     ''' changes the file path and cboFileType control values; 
@@ -137,11 +135,6 @@ Public Class dlgExportDataset
     ''' the changed settings determine the behaviour of the file path contro
     ''' </summary>
     Private Sub ChangeFileControlsValues()
-        If bSupressFileValuesChange Then
-            Exit Sub
-        End If
-
-        bSupressFileValuesChange = True
         Dim strPrevSelectedFileType As String = cboFileType.SelectedItem
         Dim iSelectedDataFrames As Integer = ucrReceiverMultipleDataFrames.GetVariableNamesList().Length
         ucrFilePath.FolderBrowse = False 'set file path control to open default SaveFileDialog prompt
@@ -192,10 +185,13 @@ Public Class dlgExportDataset
         End If
 
         ucrFilePath.FilePathDialogFilter = GetFilePathDialogFilterText(cboFileType.SelectedItem)
-        bSupressFileValuesChange = False
-
     End Sub
 
+    ''' <summary>
+    ''' expected string format  "filetype (*.ext)" 
+    ''' </summary>
+    ''' <param name="strText"></param>
+    ''' <returns></returns>
     Private Function GetFilePathDialogFilterText(strText As String) As String
         If String.IsNullOrEmpty(strText) Then
             Return ""
@@ -206,6 +202,11 @@ Public Class dlgExportDataset
 
     End Function
 
+    ''' <summary>
+    ''' expected string format  "filetype (*.ext)" 
+    ''' </summary>
+    ''' <param name="strText"></param>
+    ''' <returns></returns>
     Private Function GetSelectedExtension(strText As String) As String
         If String.IsNullOrEmpty(strText) Then
             Return ""
