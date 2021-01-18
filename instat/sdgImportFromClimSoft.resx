@@ -117,32 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ucrInputDatabaseName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 21</value>
-  </data>
-  <data name="ucrInputDatabaseName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrInputDatabaseName.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDatabaseName.Name" xml:space="preserve">
-    <value>ucrInputDatabaseName</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDatabaseName.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDatabaseName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDatabaseName.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
   <data name="lblDatabaseName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblDatabaseName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblDatabaseName.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 24</value>
   </data>
@@ -165,34 +148,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblDatabaseName.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="ucrInputHost.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 48</value>
-  </data>
-  <data name="ucrInputHost.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
-  </data>
-  <data name="ucrInputHost.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrInputHost.Name" xml:space="preserve">
-    <value>ucrInputHost</value>
-  </data>
-  <data name="&gt;&gt;ucrInputHost.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputHost.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputHost.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="lblHost.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblHost.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblHost.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 52</value>
+    <value>62, 53</value>
   </data>
   <data name="lblHost.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -213,34 +178,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblHost.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="ucrInputPort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 75</value>
-  </data>
-  <data name="ucrInputPort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
-  </data>
-  <data name="ucrInputPort.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrInputPort.Name" xml:space="preserve">
-    <value>ucrInputPort</value>
-  </data>
-  <data name="&gt;&gt;ucrInputPort.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputPort.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputPort.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>10</value>
   </data>
   <data name="lblPort.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblPort.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblPort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 79</value>
+    <value>65, 80</value>
   </data>
   <data name="lblPort.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 13</value>
@@ -261,34 +208,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblPort.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrInputUserName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 102</value>
-  </data>
-  <data name="ucrInputUserName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
-  </data>
-  <data name="ucrInputUserName.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUserName.Name" xml:space="preserve">
-    <value>ucrInputUserName</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUserName.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUserName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUserName.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>9</value>
   </data>
   <data name="lblUserName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblUserName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblUserName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 106</value>
+    <value>36, 106</value>
   </data>
   <data name="lblUserName.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -309,19 +238,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblUserName.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>7</value>
   </data>
   <data name="lblConnection.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblConnection.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblConnection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 134</value>
+    <value>185, 157</value>
   </data>
   <data name="lblConnection.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 13</value>
   </data>
   <data name="lblConnection.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="lblConnection.Text" xml:space="preserve">
     <value>No Connection</value>
@@ -336,16 +268,136 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblConnection.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="chkRememberCredentials.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkRememberCredentials.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkRememberCredentials.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 129</value>
+  </data>
+  <data name="chkRememberCredentials.Size" type="System.Drawing.Size, System.Drawing">
+    <value>132, 17</value>
+  </data>
+  <data name="chkRememberCredentials.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="chkRememberCredentials.Text" xml:space="preserve">
+    <value>Remember Credentials</value>
+  </data>
+  <data name="&gt;&gt;chkRememberCredentials.Name" xml:space="preserve">
+    <value>chkRememberCredentials</value>
+  </data>
+  <data name="&gt;&gt;chkRememberCredentials.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkRememberCredentials.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkRememberCredentials.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="btnConnect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="btnConnect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 152</value>
+  </data>
+  <data name="btnConnect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 22</value>
+  </data>
+  <data name="btnConnect.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="btnConnect.Text" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="&gt;&gt;btnConnect.Name" xml:space="preserve">
+    <value>btnConnect</value>
+  </data>
+  <data name="&gt;&gt;btnConnect.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;btnConnect.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;btnConnect.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrComboBoxPort.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 77</value>
+  </data>
+  <data name="ucrComboBoxPort.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 21</value>
+  </data>
+  <data name="ucrComboBoxPort.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxPort.Name" xml:space="preserve">
+    <value>ucrComboBoxPort</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxPort.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxPort.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxPort.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrTxtHost.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 49</value>
+  </data>
+  <data name="ucrTxtHost.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 21</value>
+  </data>
+  <data name="ucrTxtHost.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrTxtHost.Name" xml:space="preserve">
+    <value>ucrTxtHost</value>
+  </data>
+  <data name="&gt;&gt;ucrTxtHost.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrTxtHost.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrTxtHost.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrComboBoxDatabaseName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 21</value>
+  </data>
+  <data name="ucrComboBoxDatabaseName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 21</value>
+  </data>
+  <data name="ucrComboBoxDatabaseName.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxDatabaseName.Name" xml:space="preserve">
+    <value>ucrComboBoxDatabaseName</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxDatabaseName.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxDatabaseName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxDatabaseName.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="ucrBaseSdgClimSoft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 203</value>
+    <value>103, 189</value>
   </data>
   <data name="ucrBaseSdgClimSoft.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 30</value>
   </data>
   <data name="ucrBaseSdgClimSoft.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrBaseSdgClimSoft.Name" xml:space="preserve">
     <value>ucrBaseSdgClimSoft</value>
@@ -357,55 +409,28 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBaseSdgClimSoft.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>5</value>
   </data>
-  <data name="cmdEnterPassword.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 130</value>
+  <data name="ucrTxtUserName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>103, 102</value>
   </data>
-  <data name="cmdEnterPassword.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 22</value>
+  <data name="ucrTxtUserName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>153, 21</value>
   </data>
-  <data name="cmdEnterPassword.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrTxtUserName.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrTxtUserName.Name" xml:space="preserve">
+    <value>ucrTxtUserName</value>
+  </data>
+  <data name="&gt;&gt;ucrTxtUserName.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrTxtUserName.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrTxtUserName.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="cmdEnterPassword.Text" xml:space="preserve">
-    <value>Enter Password</value>
-  </data>
-  <data name="&gt;&gt;cmdEnterPassword.Name" xml:space="preserve">
-    <value>cmdEnterPassword</value>
-  </data>
-  <data name="&gt;&gt;cmdEnterPassword.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdEnterPassword.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdEnterPassword.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 158</value>
-  </data>
-  <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 23</value>
-  </data>
-  <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="cmdOptions.Text" xml:space="preserve">
-    <value>Set as Defaults</value>
-  </data>
-  <data name="&gt;&gt;cmdOptions.Name" xml:space="preserve">
-    <value>cmdOptions</value>
-  </data>
-  <data name="&gt;&gt;cmdOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -414,9 +439,8 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>257, 239</value>
+    <value>268, 225</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
