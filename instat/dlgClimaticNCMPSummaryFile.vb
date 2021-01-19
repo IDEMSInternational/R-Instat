@@ -41,15 +41,15 @@ Public Class dlgClimaticNCMPSummaryFile
 
         ucrSelectorA2.SetParameter(New RParameter("a2", 0))
         ucrSelectorA2.SetParameterIsRFunction()
-        ucrSelectorA2.lblDataFrame.Text = "Indices Data Frames:"
+        ucrSelectorA2.lblDataFrame.Text = "Indices Data Frame:"
 
         ucrSelectorA4.SetParameter(New RParameter("a4", 1))
         ucrSelectorA4.SetParameterIsRFunction()
-        ucrSelectorA4.lblDataFrame.Text = "Region Average Data Frames:"
+        ucrSelectorA4.lblDataFrame.Text = "Region Average Data Frame:"
 
         ucrSelectorA6.SetParameter(New RParameter("a6", 2))
         ucrSelectorA6.SetParameterIsRFunction()
-        ucrSelectorA6.lblDataFrame.Text = "Count Records Data Frames:"
+        ucrSelectorA6.lblDataFrame.Text = "Count Records Data Frame:"
 
         ucrInputFilePath.SetParameter(New RParameter("ncmp_folder", 5))
         ucrInputFilePath.IsReadOnly = True

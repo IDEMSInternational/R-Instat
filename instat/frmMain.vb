@@ -2255,4 +2255,27 @@ Public Class frmMain
         dlgSurvivalObject.ShowDialog()
     End Sub
 
+    Private Sub mnuClimaticNCMPIndices_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPIndices.Click
+        dlgClimaticNCMPIndices.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticNCMPVariogram_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPVariogram.Click
+        dlgClimaticNCMPVariogram.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticNCMPRegionAverage_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPRegionAverage.Click
+        dlgClimaticNCMPRegionAverage.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticNCMPTrendGraphs_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPTrendGraphs.Click
+        dlgClimaticNCMPTrendGraphs.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticNCMPCountRecords_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPCountRecords.Click
+        dlgClimaticNCMPCountRecords.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticNCMPSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPSummary.Click
+        dlgClimaticNCMPSummaryFile.ShowDialog()
+    End Sub
 End Class
