@@ -146,7 +146,6 @@ Public Class frmMain
         End If
 
         AssociatedFile()
-
     End Sub
 
     ' TODO This is used instead of autoTranslate so that split container isn't shifted
