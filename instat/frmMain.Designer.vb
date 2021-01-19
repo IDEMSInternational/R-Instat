@@ -257,6 +257,13 @@ Partial Class frmMain
         Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator31 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticNCMP = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticNCMPIndices = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticNCMPVariogram = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticNCMPRegionAverage = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticNCMPTrendGraphs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticNCMPCountRecords = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticNCMPSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSA = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSARainfall = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSACumExeedenceGraph = New System.Windows.Forms.ToolStripMenuItem()
@@ -1453,7 +1460,7 @@ Partial Class frmMain
         '
         'mnuClimatic
         '
-        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticTidyandExamine, Me.mnuClimaticDates, Me.mnuClimaticDefineClimaticData, Me.mnuClimaticCheckData, Me.mnuClimaticPrepare, Me.ToolStripSeparator30, Me.mnuClimaticDescribe, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.mnuClimaticCompare, Me.mnuClimaticMapping, Me.ToolStripSeparator16, Me.mnuClimaticModel, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticClimateMethods})
+        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticTidyandExamine, Me.mnuClimaticDates, Me.mnuClimaticDefineClimaticData, Me.mnuClimaticCheckData, Me.mnuClimaticPrepare, Me.ToolStripSeparator30, Me.mnuClimaticDescribe, Me.mnuClimaticNCMP, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.mnuClimaticCompare, Me.mnuClimaticMapping, Me.ToolStripSeparator16, Me.mnuClimaticModel, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticClimateMethods})
         Me.mnuClimatic.Name = "mnuClimatic"
         resources.ApplyResources(Me.mnuClimatic, "mnuClimatic")
         Me.mnuClimatic.Tag = "Climatic"
@@ -1857,6 +1864,42 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator31.Name = "ToolStripSeparator31"
         resources.ApplyResources(Me.ToolStripSeparator31, "ToolStripSeparator31")
+        '
+        'mnuClimaticNCMP
+        '
+        Me.mnuClimaticNCMP.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticNCMPIndices, Me.mnuClimaticNCMPVariogram, Me.mnuClimaticNCMPRegionAverage, Me.mnuClimaticNCMPTrendGraphs, Me.mnuClimaticNCMPCountRecords, Me.mnuClimaticNCMPSummary})
+        Me.mnuClimaticNCMP.Name = "mnuClimaticNCMP"
+        resources.ApplyResources(Me.mnuClimaticNCMP, "mnuClimaticNCMP")
+        '
+        'mnuClimaticNCMPIndices
+        '
+        Me.mnuClimaticNCMPIndices.Name = "mnuClimaticNCMPIndices"
+        resources.ApplyResources(Me.mnuClimaticNCMPIndices, "mnuClimaticNCMPIndices")
+        '
+        'mnuClimaticNCMPVariogram
+        '
+        Me.mnuClimaticNCMPVariogram.Name = "mnuClimaticNCMPVariogram"
+        resources.ApplyResources(Me.mnuClimaticNCMPVariogram, "mnuClimaticNCMPVariogram")
+        '
+        'mnuClimaticNCMPRegionAverage
+        '
+        Me.mnuClimaticNCMPRegionAverage.Name = "mnuClimaticNCMPRegionAverage"
+        resources.ApplyResources(Me.mnuClimaticNCMPRegionAverage, "mnuClimaticNCMPRegionAverage")
+        '
+        'mnuClimaticNCMPTrendGraphs
+        '
+        Me.mnuClimaticNCMPTrendGraphs.Name = "mnuClimaticNCMPTrendGraphs"
+        resources.ApplyResources(Me.mnuClimaticNCMPTrendGraphs, "mnuClimaticNCMPTrendGraphs")
+        '
+        'mnuClimaticNCMPCountRecords
+        '
+        Me.mnuClimaticNCMPCountRecords.Name = "mnuClimaticNCMPCountRecords"
+        resources.ApplyResources(Me.mnuClimaticNCMPCountRecords, "mnuClimaticNCMPCountRecords")
+        '
+        'mnuClimaticNCMPSummary
+        '
+        Me.mnuClimaticNCMPSummary.Name = "mnuClimaticNCMPSummary"
+        resources.ApplyResources(Me.mnuClimaticNCMPSummary, "mnuClimaticNCMPSummary")
         '
         'mnuClimaticPICSA
         '
@@ -4767,4 +4810,11 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarAnnulus As ToolStripMenuItem
     Friend WithEvents mnuExportToWWRToolStrip As ToolStripMenuItem
     Friend WithEvents mnuViewStructuredMenu As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMP As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMPIndices As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMPVariogram As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMPRegionAverage As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMPTrendGraphs As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMPCountRecords As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMPSummary As ToolStripMenuItem
 End Class

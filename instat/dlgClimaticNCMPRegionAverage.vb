@@ -43,7 +43,7 @@ Public Class dlgClimaticNCMPRegionAverage
 
         ucrSelectorForA2.SetParameter(New RParameter("a2", 0))
         ucrSelectorForA2.SetParameterIsrfunction()
-        ucrSelectorForA2.ucrAvailableDataFrames.lblDataFrame.Text = "Indices Data Frames:"
+        ucrSelectorForA2.ucrAvailableDataFrames.lblDataFrame.Text = "Indices Data Frame:"
 
         ucrReceiverStation.SetParameter(New RParameter("station", 1))
         ucrReceiverStation.SetParameterIsString()
@@ -65,10 +65,10 @@ Public Class dlgClimaticNCMPRegionAverage
 
         ucrSelectorForA3.SetParameter(New RParameter("a3", 4))
         ucrSelectorForA3.SetParameterIsRFunction()
-        ucrSelectorForA3.lblDataFrame.Text = "Variogram Data Frames:"
+        ucrSelectorForA3.lblDataFrame.Text = "Variogram Data Frame:"
 
         ucrNudNYE.SetParameter(New RParameter("nye", 11))
-        ucrNudNYE.SetMinMax(2000, 2019) ' TODO: how to set as current year - 1
+        ucrNudNYE.SetMinMax(2000, 2020) ' TODO: how to set as current year - 1
         'ucrNudNYE.SetRDefault(2010) 
 
         ucrInputUNCode.SetParameter(New RParameter("uncode", 12))
@@ -109,7 +109,7 @@ Public Class dlgClimaticNCMPRegionAverage
         clsBaseFunction.AddParameter("data_tables", clsRFunctionParameter:=clsNCMPFunction)
         ' the "name" of this function (clsNCMPFunction) is the value in the ucrInput box
         clsNCMPFunction.SetRCommand("p4_region_average")
-        clsNCMPFunction.AddParameter("nye", 2019, iPosition:=11)
+        clsNCMPFunction.AddParameter("nye", 2020, iPosition:=11)
         clsNCMPFunction.AddParameter("res", 1, iPosition:=14)
         clsNCMPFunction.SetAssignTo("region_average_dfs")
         ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
