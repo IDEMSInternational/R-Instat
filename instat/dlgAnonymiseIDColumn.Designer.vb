@@ -36,7 +36,7 @@ Partial Class dlgAnonymiseIDColumn
         'lblIDColumn
         '
         Me.lblIDColumn.AutoSize = True
-        Me.lblIDColumn.Location = New System.Drawing.Point(263, 49)
+        Me.lblIDColumn.Location = New System.Drawing.Point(254, 45)
         Me.lblIDColumn.Name = "lblIDColumn"
         Me.lblIDColumn.Size = New System.Drawing.Size(59, 13)
         Me.lblIDColumn.TabIndex = 1
@@ -45,7 +45,7 @@ Partial Class dlgAnonymiseIDColumn
         'lblSalt
         '
         Me.lblSalt.AutoSize = True
-        Me.lblSalt.Location = New System.Drawing.Point(264, 106)
+        Me.lblSalt.Location = New System.Drawing.Point(254, 89)
         Me.lblSalt.Name = "lblSalt"
         Me.lblSalt.Size = New System.Drawing.Size(107, 13)
         Me.lblSalt.TabIndex = 3
@@ -54,7 +54,7 @@ Partial Class dlgAnonymiseIDColumn
         'lblAlgorithm
         '
         Me.lblAlgorithm.AutoSize = True
-        Me.lblAlgorithm.Location = New System.Drawing.Point(264, 164)
+        Me.lblAlgorithm.Location = New System.Drawing.Point(254, 134)
         Me.lblAlgorithm.Name = "lblAlgorithm"
         Me.lblAlgorithm.Size = New System.Drawing.Size(56, 13)
         Me.lblAlgorithm.TabIndex = 5
@@ -63,8 +63,9 @@ Partial Class dlgAnonymiseIDColumn
         'ucrInputAlgorithm
         '
         Me.ucrInputAlgorithm.AddQuotesIfUnrecognised = True
+        Me.ucrInputAlgorithm.GetSetSelectedIndex = -1
         Me.ucrInputAlgorithm.IsReadOnly = False
-        Me.ucrInputAlgorithm.Location = New System.Drawing.Point(266, 180)
+        Me.ucrInputAlgorithm.Location = New System.Drawing.Point(253, 149)
         Me.ucrInputAlgorithm.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputAlgorithm.Name = "ucrInputAlgorithm"
         Me.ucrInputAlgorithm.Size = New System.Drawing.Size(137, 21)
@@ -75,7 +76,7 @@ Partial Class dlgAnonymiseIDColumn
         Me.ucrInputTextSalt.AddQuotesIfUnrecognised = True
         Me.ucrInputTextSalt.IsMultiline = False
         Me.ucrInputTextSalt.IsReadOnly = False
-        Me.ucrInputTextSalt.Location = New System.Drawing.Point(266, 122)
+        Me.ucrInputTextSalt.Location = New System.Drawing.Point(253, 104)
         Me.ucrInputTextSalt.Name = "ucrInputTextSalt"
         Me.ucrInputTextSalt.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputTextSalt.TabIndex = 4
@@ -85,7 +86,7 @@ Partial Class dlgAnonymiseIDColumn
         Me.ucrSelectorAnonymiseIDColumn.bDropUnusedFilterLevels = False
         Me.ucrSelectorAnonymiseIDColumn.bShowHiddenColumns = False
         Me.ucrSelectorAnonymiseIDColumn.bUseCurrentFilter = True
-        Me.ucrSelectorAnonymiseIDColumn.Location = New System.Drawing.Point(10, 33)
+        Me.ucrSelectorAnonymiseIDColumn.Location = New System.Drawing.Point(10, 10)
         Me.ucrSelectorAnonymiseIDColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorAnonymiseIDColumn.Name = "ucrSelectorAnonymiseIDColumn"
         Me.ucrSelectorAnonymiseIDColumn.Size = New System.Drawing.Size(210, 180)
@@ -93,7 +94,8 @@ Partial Class dlgAnonymiseIDColumn
         '
         'ucrSaveAnonymisedColumn
         '
-        Me.ucrSaveAnonymisedColumn.Location = New System.Drawing.Point(9, 240)
+        Me.ucrSaveAnonymisedColumn.Location = New System.Drawing.Point(10, 205)
+        Me.ucrSaveAnonymisedColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveAnonymisedColumn.Name = "ucrSaveAnonymisedColumn"
         Me.ucrSaveAnonymisedColumn.Size = New System.Drawing.Size(250, 24)
         Me.ucrSaveAnonymisedColumn.TabIndex = 7
@@ -101,7 +103,7 @@ Partial Class dlgAnonymiseIDColumn
         'ucrReceiverIDColumn
         '
         Me.ucrReceiverIDColumn.frmParent = Me
-        Me.ucrReceiverIDColumn.Location = New System.Drawing.Point(266, 65)
+        Me.ucrReceiverIDColumn.Location = New System.Drawing.Point(253, 60)
         Me.ucrReceiverIDColumn.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverIDColumn.Name = "ucrReceiverIDColumn"
         Me.ucrReceiverIDColumn.Selector = Nothing
@@ -112,7 +114,7 @@ Partial Class dlgAnonymiseIDColumn
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 286)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 237)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 8
@@ -121,7 +123,7 @@ Partial Class dlgAnonymiseIDColumn
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(439, 347)
+        Me.ClientSize = New System.Drawing.Size(415, 296)
         Me.Controls.Add(Me.lblAlgorithm)
         Me.Controls.Add(Me.ucrInputAlgorithm)
         Me.Controls.Add(Me.lblSalt)
