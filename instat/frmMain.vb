@@ -145,7 +145,7 @@ Public Class frmMain
             mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
         End If
 
-        AssociatedFile()
+        LoadDataOnFileClicked()
     End Sub
 
     ' TODO This is used instead of autoTranslate so that split container isn't shifted
@@ -154,7 +154,7 @@ Public Class frmMain
         translateMenu(mnuBar.Items, Me)
     End Sub
 
-    Private Sub AssociatedFile()
+    Private Sub LoadDataOnFileClicked()
         Try
             If (Environment.GetCommandLineArgs.Length > 1) Then
                 Dim FilePath As String = Environment.GetCommandLineArgs(1)
@@ -162,13 +162,7 @@ Public Class frmMain
                 dlgImportDataset.bStartOpenDialog = False
                 dlgImportDataset.ShowDialog()
             Else
-                Dim ans = MsgBox("Would you like to associate R-Instat with .RDS file", MsgBoxStyle.YesNo)
-                If ans = MsgBoxResult.Yes Then
-                    My.Computer.Registry.ClassesRoot.CreateSubKey(".RDS") _
-                        .SetValue("", "Instat", Microsoft.Win32.RegistryValueKind.String)
-                    My.Computer.Registry.ClassesRoot.CreateSubKey("Instat\shell\open\command") _
-                        .SetValue("", Application.ExecutablePath & " ""%l"" ", Microsoft.Win32.RegistryValueKind.String)
-                End If
+                MsgBox("This file extension is not associated with R-Instat.")
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
