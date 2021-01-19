@@ -1070,9 +1070,6 @@
   <data name="mnuExportToWWRToolStrip.Text" xml:space="preserve">
     <value>Export to World Weather Records...</value>
   </data>
-  <data name="mnuExportToWWRToolStrip.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuClimaticFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
   </data>
@@ -6449,6 +6446,9 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>
