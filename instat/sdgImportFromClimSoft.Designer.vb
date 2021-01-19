@@ -39,66 +39,34 @@ Partial Class sdgImportFromClimSoft
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgImportFromClimSoft))
-        Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
         Me.lblDatabaseName = New System.Windows.Forms.Label()
-        Me.ucrInputHost = New instat.ucrInputTextBox()
         Me.lblHost = New System.Windows.Forms.Label()
-        Me.ucrInputPort = New instat.ucrInputTextBox()
         Me.lblPort = New System.Windows.Forms.Label()
-        Me.ucrInputUserName = New instat.ucrInputTextBox()
         Me.lblUserName = New System.Windows.Forms.Label()
         Me.lblConnection = New System.Windows.Forms.Label()
+        Me.chkRememberCredentials = New System.Windows.Forms.CheckBox()
+        Me.btnConnect = New System.Windows.Forms.Button()
+        Me.ucrComboBoxPort = New instat.ucrInputComboBox()
+        Me.ucrTxtHost = New instat.ucrInputTextBox()
+        Me.ucrComboBoxDatabaseName = New instat.ucrInputComboBox()
         Me.ucrBaseSdgClimSoft = New instat.ucrButtonsSubdialogue()
-        Me.cmdEnterPassword = New System.Windows.Forms.Button()
-        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.ucrTxtUserName = New instat.ucrInputTextBox()
         Me.SuspendLayout()
-        '
-        'ucrInputDatabaseName
-        '
-        Me.ucrInputDatabaseName.AddQuotesIfUnrecognised = True
-        Me.ucrInputDatabaseName.IsMultiline = False
-        Me.ucrInputDatabaseName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDatabaseName, "ucrInputDatabaseName")
-        Me.ucrInputDatabaseName.Name = "ucrInputDatabaseName"
         '
         'lblDatabaseName
         '
         resources.ApplyResources(Me.lblDatabaseName, "lblDatabaseName")
         Me.lblDatabaseName.Name = "lblDatabaseName"
         '
-        'ucrInputHost
-        '
-        Me.ucrInputHost.AddQuotesIfUnrecognised = True
-        Me.ucrInputHost.IsMultiline = False
-        Me.ucrInputHost.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputHost, "ucrInputHost")
-        Me.ucrInputHost.Name = "ucrInputHost"
-        '
         'lblHost
         '
         resources.ApplyResources(Me.lblHost, "lblHost")
         Me.lblHost.Name = "lblHost"
         '
-        'ucrInputPort
-        '
-        Me.ucrInputPort.AddQuotesIfUnrecognised = True
-        Me.ucrInputPort.IsMultiline = False
-        Me.ucrInputPort.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPort, "ucrInputPort")
-        Me.ucrInputPort.Name = "ucrInputPort"
-        '
         'lblPort
         '
         resources.ApplyResources(Me.lblPort, "lblPort")
         Me.lblPort.Name = "lblPort"
-        '
-        'ucrInputUserName
-        '
-        Me.ucrInputUserName.AddQuotesIfUnrecognised = True
-        Me.ucrInputUserName.IsMultiline = False
-        Me.ucrInputUserName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputUserName, "ucrInputUserName")
-        Me.ucrInputUserName.Name = "ucrInputUserName"
         '
         'lblUserName
         '
@@ -108,41 +76,76 @@ Partial Class sdgImportFromClimSoft
         'lblConnection
         '
         resources.ApplyResources(Me.lblConnection, "lblConnection")
+        Me.lblConnection.ForeColor = System.Drawing.Color.Red
         Me.lblConnection.Name = "lblConnection"
+        '
+        'chkRememberCredentials
+        '
+        resources.ApplyResources(Me.chkRememberCredentials, "chkRememberCredentials")
+        Me.chkRememberCredentials.Checked = True
+        Me.chkRememberCredentials.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.chkRememberCredentials.Name = "chkRememberCredentials"
+        Me.chkRememberCredentials.UseVisualStyleBackColor = True
+        '
+        'btnConnect
+        '
+        resources.ApplyResources(Me.btnConnect, "btnConnect")
+        Me.btnConnect.Name = "btnConnect"
+        Me.btnConnect.UseVisualStyleBackColor = True
+        '
+        'ucrComboBoxPort
+        '
+        Me.ucrComboBoxPort.AddQuotesIfUnrecognised = False
+        Me.ucrComboBoxPort.GetSetSelectedIndex = -1
+        Me.ucrComboBoxPort.IsReadOnly = False
+        resources.ApplyResources(Me.ucrComboBoxPort, "ucrComboBoxPort")
+        Me.ucrComboBoxPort.Name = "ucrComboBoxPort"
+        '
+        'ucrTxtHost
+        '
+        Me.ucrTxtHost.AddQuotesIfUnrecognised = True
+        Me.ucrTxtHost.IsMultiline = False
+        Me.ucrTxtHost.IsReadOnly = False
+        resources.ApplyResources(Me.ucrTxtHost, "ucrTxtHost")
+        Me.ucrTxtHost.Name = "ucrTxtHost"
+        '
+        'ucrComboBoxDatabaseName
+        '
+        Me.ucrComboBoxDatabaseName.AddQuotesIfUnrecognised = True
+        Me.ucrComboBoxDatabaseName.GetSetSelectedIndex = -1
+        Me.ucrComboBoxDatabaseName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrComboBoxDatabaseName, "ucrComboBoxDatabaseName")
+        Me.ucrComboBoxDatabaseName.Name = "ucrComboBoxDatabaseName"
         '
         'ucrBaseSdgClimSoft
         '
         resources.ApplyResources(Me.ucrBaseSdgClimSoft, "ucrBaseSdgClimSoft")
         Me.ucrBaseSdgClimSoft.Name = "ucrBaseSdgClimSoft"
         '
-        'cmdEnterPassword
+        'ucrTxtUserName
         '
-        resources.ApplyResources(Me.cmdEnterPassword, "cmdEnterPassword")
-        Me.cmdEnterPassword.Name = "cmdEnterPassword"
-        Me.cmdEnterPassword.UseVisualStyleBackColor = True
-        '
-        'cmdOptions
-        '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.UseVisualStyleBackColor = True
+        Me.ucrTxtUserName.AddQuotesIfUnrecognised = True
+        Me.ucrTxtUserName.IsMultiline = False
+        Me.ucrTxtUserName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrTxtUserName, "ucrTxtUserName")
+        Me.ucrTxtUserName.Name = "ucrTxtUserName"
         '
         'sdgImportFromClimSoft
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.ucrComboBoxPort)
+        Me.Controls.Add(Me.ucrTxtHost)
+        Me.Controls.Add(Me.ucrComboBoxDatabaseName)
+        Me.Controls.Add(Me.btnConnect)
+        Me.Controls.Add(Me.chkRememberCredentials)
         Me.Controls.Add(Me.ucrBaseSdgClimSoft)
         Me.Controls.Add(Me.lblConnection)
-        Me.Controls.Add(Me.cmdEnterPassword)
         Me.Controls.Add(Me.lblUserName)
-        Me.Controls.Add(Me.ucrInputUserName)
+        Me.Controls.Add(Me.ucrTxtUserName)
         Me.Controls.Add(Me.lblPort)
-        Me.Controls.Add(Me.ucrInputPort)
         Me.Controls.Add(Me.lblHost)
-        Me.Controls.Add(Me.ucrInputHost)
         Me.Controls.Add(Me.lblDatabaseName)
-        Me.Controls.Add(Me.ucrInputDatabaseName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -151,17 +154,16 @@ Partial Class sdgImportFromClimSoft
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ucrInputDatabaseName As ucrInputTextBox
     Friend WithEvents lblDatabaseName As Label
-    Friend WithEvents ucrInputHost As ucrInputTextBox
     Friend WithEvents lblHost As Label
-    Friend WithEvents ucrInputPort As ucrInputTextBox
     Friend WithEvents lblPort As Label
-    Friend WithEvents ucrInputUserName As ucrInputTextBox
+    Friend WithEvents ucrTxtUserName As ucrInputTextBox
     Friend WithEvents lblUserName As Label
     Friend WithEvents lblConnection As Label
     Friend WithEvents ucrBaseSdgClimSoft As ucrButtonsSubdialogue
-    Friend WithEvents cmdEnterPassword As Button
-    Friend WithEvents cmdOptions As Button
+    Friend WithEvents chkRememberCredentials As CheckBox
+    Friend WithEvents btnConnect As Button
+    Friend WithEvents ucrComboBoxDatabaseName As ucrInputComboBox
+    Friend WithEvents ucrTxtHost As ucrInputTextBox
+    Friend WithEvents ucrComboBoxPort As ucrInputComboBox
 End Class
