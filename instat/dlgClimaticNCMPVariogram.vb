@@ -66,7 +66,7 @@ Public Class dlgClimaticNCMPVariogram
         'ucrNudNYB.SetMinMax(1900, 2000)' TODO: suitable min/max; default?
 
         ucrNudNYE.SetParameter(New RParameter("nye", 5))
-        'ucrNudNYE.SetMinMax(2000, 2019) ' TODO: how to set max as current year - 1; default?
+        'ucrNudNYE.SetMinMax(2000, 2020) ' TODO: how to set max as current year - 1; default?
 
         ucrInputFilePath.SetParameter(New RParameter("ncmp_folder", 11))
         ucrInputFilePath.IsReadOnly = True
