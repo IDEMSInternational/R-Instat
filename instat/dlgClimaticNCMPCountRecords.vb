@@ -43,7 +43,7 @@ Public Class dlgClimaticNCMPCountRecords
 
         ucrSelectorForA2.SetParameter(New RParameter("a2", 0))
         ucrSelectorForA2.SetParameterIsrfunction()
-        ucrSelectorForA2.ucrAvailableDataFrames.lblDataFrame.Text = "Indices Data Frames:"
+        ucrSelectorForA2.ucrAvailableDataFrames.lblDataFrame.Text = "Indices Data Frame:"
 
         ucrReceiverStation.SetParameter(New RParameter("station", 1))
         ucrReceiverStation.SetParameterIsString()
@@ -65,7 +65,7 @@ Public Class dlgClimaticNCMPCountRecords
 
         ucrSelectorForA4.SetParameter(New RParameter("a4", 4))
         ucrSelectorForA4.SetParameterIsRFunction()
-        ucrSelectorForA4.lblDataFrame.Text = "Region Average Data Frames:"
+        ucrSelectorForA4.lblDataFrame.Text = "Region Average Data Frame:"
 
         ucrSaveCountRecords.SetSaveTypeAsDataFrame()
         ucrSaveCountRecords.SetLabelText("New Data Frame Name:")
