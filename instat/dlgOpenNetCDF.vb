@@ -226,6 +226,8 @@ Public Class dlgOpenNetCDF
             dlgFolder.Description = "Choose Folder"
             If dlgFolder.ShowDialog() = DialogResult.OK Then
                 cmdDetails.Visible = False
+                bShowDetails = False
+                SetDialogSize()
                 ucrInputDataName.SetName("")
                 strPath = dlgFolder.SelectedPath
                 ucrInputPath.SetName(Replace(strPath, "\", "/"))
@@ -239,6 +241,8 @@ Public Class dlgOpenNetCDF
                     bCloseFile = True
                     clsImportNetcdfFunction.AddParameter("path", Chr(34) & Replace(strPath, "\", "/") & Chr(34))
                     ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(Path.GetFileName(strPath.TrimEnd(Path.DirectorySeparatorChar))))
+                    clsImportNetcdfFunction.RemoveParameterByName("boundary")
+                    clsBoundaryListFunction.ClearParameters()
                 Else
                     clsNcOpenFunction.RemoveParameterByName("filename")
                 End If
