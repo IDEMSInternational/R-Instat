@@ -43,7 +43,7 @@ Public Class dlgClimaticNCMPTrendGraphs
 
         ucrSelectorForA2.SetParameter(New RParameter("a2", 0))
         ucrSelectorForA2.SetParameterIsrfunction()
-        ucrSelectorForA2.ucrAvailableDataFrames.lblDataFrame.Text = "Indices Data Frames:"
+        ucrSelectorForA2.ucrAvailableDataFrames.lblDataFrame.Text = "Indices Data Frame:"
 
         ucrReceiverStation.SetParameter(New RParameter("station", 1))
         ucrReceiverStation.SetParameterIsString()
@@ -65,7 +65,7 @@ Public Class dlgClimaticNCMPTrendGraphs
 
         ucrSelectorForA4.SetParameter(New RParameter("a4", 4))
         ucrSelectorForA4.SetParameterIsrfunction()
-        ucrSelectorForA4.ucrAvailableDataFrames.lblDataFrame.Text = "Region Average Data Frames:"
+        ucrSelectorForA4.ucrAvailableDataFrames.lblDataFrame.Text = "Region Average Data Frame:"
 
         ucrReceiverYearA4.SetParameter(New RParameter("a4_year", 5))
         ucrReceiverYearA4.SetParameterIsString()

@@ -41,7 +41,7 @@ Public Class dlgClimaticNCMPVariogram
     Private Sub InitialiseDialog()
         ucrSelectorVariogram.SetParameter(New RParameter("a2", 0))
         ucrSelectorVariogram.SetParameterIsrfunction()
-        ucrSelectorVariogram.ucrAvailableDataFrames.lblDataFrame.Text = "Indices Data Frames:"
+        ucrSelectorVariogram.ucrAvailableDataFrames.lblDataFrame.Text = "Indices Data Frame:"
 
         ucrReceiverStation.SetParameter(New RParameter("station", 1))
         ucrReceiverStation.SetParameterIsString()
