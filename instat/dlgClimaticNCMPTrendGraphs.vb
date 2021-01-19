@@ -114,7 +114,7 @@ Public Class dlgClimaticNCMPTrendGraphs
         clsBaseFunction.AddParameter("data_tables", clsRFunctionParameter:=clsNCMPFunction)
         clsNCMPFunction.SetRCommand("p5_trends_graphs")
         clsNCMPFunction.AddParameter("nyba", 1950, iPosition:=8)
-        clsNCMPFunction.AddParameter("nyea", 2019, iPosition:=9)
+        clsNCMPFunction.AddParameter("nyea", 2020, iPosition:=9)
         clsNCMPFunction.SetAssignTo("trend_graphs_dfs")
         ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
     End Sub
