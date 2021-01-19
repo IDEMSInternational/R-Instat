@@ -1524,8 +1524,8 @@ Partial Class frmMain
         '
         'mnuExportToWWRToolStrip
         '
-        resources.ApplyResources(Me.mnuExportToWWRToolStrip, "mnuExportToWWRToolStrip")
         Me.mnuExportToWWRToolStrip.Name = "mnuExportToWWRToolStrip"
+        resources.ApplyResources(Me.mnuExportToWWRToolStrip, "mnuExportToWWRToolStrip")
         '
         'ToolStripSeparator18
         '
