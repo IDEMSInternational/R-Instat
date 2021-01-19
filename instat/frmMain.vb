@@ -99,12 +99,10 @@ Public Class frmMain
         'Gets the path for the executable file that started the application, not including the executable name.
         'because the application once double click in the associate file i.e. .RDS file.
         'We need the full path of static folder to set the working folder containg files needed when the application is loading. 
-        'From the startup path I just replace \bin\Debug by \static to have the full path of static folder
         Dim strPath As String = Application.StartupPath
-        strStaticPath = strPath.Replace("\bin\Debug", "\static")
+        strStaticPath = String.Concat(strPath, "\static")
 
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
-
         ' We need to create the likely R package installation directory before R.NET connection is initialised
         ' because of a bug in R.NET 1.8.2 where pop ups to create directories do not appear.
         ' This assumes that R packages will be installed in "Documents" folder and also that 
@@ -165,10 +163,13 @@ Public Class frmMain
                 dlgImportDataset.bStartOpenDialog = False
                 dlgImportDataset.ShowDialog()
             Else
-                My.Computer.Registry.ClassesRoot.CreateSubKey(".RDS") _
-                .SetValue("", "Instat", Microsoft.Win32.RegistryValueKind.String)
-                My.Computer.Registry.ClassesRoot.CreateSubKey("Instat\shell\open\command") _
-                    .SetValue("", Application.ExecutablePath & " ""%l"" ", Microsoft.Win32.RegistryValueKind.String)
+                Dim ans = MsgBox("Would you like to associate R-Instat with .RDS file", MsgBoxStyle.YesNo)
+                If ans = MsgBoxResult.Yes Then
+                    My.Computer.Registry.ClassesRoot.CreateSubKey(".RDS") _
+                        .SetValue("", "Instat", Microsoft.Win32.RegistryValueKind.String)
+                    My.Computer.Registry.ClassesRoot.CreateSubKey("Instat\shell\open\command") _
+                        .SetValue("", Application.ExecutablePath & " ""%l"" ", Microsoft.Win32.RegistryValueKind.String)
+                End If
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
