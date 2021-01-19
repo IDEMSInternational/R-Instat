@@ -114,8 +114,8 @@ p2_indices <- function(df, station, date, precip, tmax, tmin, qct = 0, qcpr = 0,
                       Lat = station_df[[lat]],
                       Long = station_df[[lon]], stringsAsFactors = FALSE)
 
-  stations_data <- unique(df[[station]])
-  stations_metadata <- unique(station_df[[station]])
+  stations_data <- as.character(unique(df[[station]]))
+  stations_metadata <- as.character(unique(station_df[[station]]))
   if (!all(stations_data %in% stations_metadata)) stop("Station information not available for all stations that appear in data.")
   stations <- stations_data
   nstn <- length(stations)
@@ -137,18 +137,22 @@ p2_indices <- function(df, station, date, precip, tmax, tmin, qct = 0, qcpr = 0,
              "SPI", 
              "TX90p", "TN90p", 
              "TX10p", "TN10p", 
-             "RXday1_date", "RXday1", "TXx_date", "TXx", "TNx_date", "TNx", "TXn_date", "TXn", "TNn_date", "TNn")
-  labx <- c("Monthly Mean Temp", "Monthly Mean Temp Anom", "Monthly Total Prec Anom", "Monthly Total Prec Anom Norm",
-            "Monthly Total Prec", "Monthly Total Prec Ratio", "Standard Prec Index",
-            "Warm Days", "Warm Nights", "Cold Days", "Cold Nights", "Extreme Cold Day", "Extreme Cold Day Date",
-            "Extreme Cold Night", "Extreme Cold Night Date", "Extreme Prec", "Extreme Cold Prec Date",
-            "Extreme Warm Day", "Extreme Warm Day Date", "Extreme Warm Night", "Extreme Warm Night Date")
-  
+             "RXday1_date", "RXday1", "TXx_date", "TXx", "TNx_date", "TNx",
+             "TXn_date", "TXn", "TNn_date", "TNn")
+  labx <- c("Monthly Mean Temp", "Monthly Mean Temp Anom",
+            "Monthly Total Prec Anom", "Monthly Total Prec Anom Norm", "Monthly Total Prec", "Monthly Total Prec Ratio",
+            "Standard Prec Index",
+            "Warm Days", "Warm Nights",
+            "Cold Days", "Cold Nights",
+            "Extreme Prec Date", "Extreme Prec", "Extreme Warm Day Date", "Extreme Warm Day", "Extreme Warm Night Date", "Extreme Warm Night",
+            "Extreme Cold Day Date", "Extreme Cold Day", "Extreme Cold Night Date", "Extreme Cold Night")
+
   ###################################################################################
   # Begins loop for reading data files and doing calculations                       #
   ###################################################################################
   
   by_month_stations <- vector(mode = "list", length = nstn)
+  names(by_month_stations) <- stations
   for (i in 1:nstn) {
 
     data <- df %>% dplyr::filter(.data[[station]] == stations[i])
@@ -475,19 +479,13 @@ p2_indices <- function(df, station, date, precip, tmax, tmin, qct = 0, qcpr = 0,
   # Ends loop for stations                                                          #
   ###################################################################################
   
-  # TODO How do we want to do this in R-Instat?
+  dy <- date()
+  attr(by_month, "dy") <- dy
+  attr(by_month, "nstn") <- nstn
+  attr(by_month, "nybr") <- nybr
+  attr(by_month, "nyer") <- nyer
+  attr(by_month, "qct") <- qct
+  attr(by_month, "qcpr") <- qcpr
   
-  # Write the modified station table and configuration file
-  # Do this last so that know have generated all station indices
-  
-  # namex <- file.path(folder,c("P2_Station_List.txt","P2_Configuration.txt"))
-  # write.table(X,file=namex[1],row.names=FALSE)
-  # 
-  # dy <- date()
-  # desc <- c("Date of processing","Number of stations",
-  #           "Start of climatological period","End of climatological period",
-  #           "Daily Temperature Quality Control level","Daily Precipitation Quality Control Level")
-  # mess <- paste(desc,c(dy,nstn,nybr,nyer,qct,qcpr),sep=" = ")  # Variables are converted to strings
-  # writeLines(mess,con=namex[2])
   return(by_month)
 }

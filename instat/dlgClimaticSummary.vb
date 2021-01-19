@@ -62,12 +62,16 @@ Public Class dlgClimaticSummary
         ucrPnlAnnualWithin.AddRadioButton(rdoAnnual)
         ucrPnlAnnualWithin.AddRadioButton(rdoAnnualWithinYear)
         ucrPnlAnnualWithin.AddRadioButton(rdoWithinYear)
+        ucrPnlAnnualWithin.AddRadioButton(rdoStation)
 
+        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnual, "year", True)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnual, "within_variable", False)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "within_variable", True)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoAnnualWithinYear, "year", True)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "within_variable", True)
         ucrPnlAnnualWithin.AddParameterPresentCondition(rdoWithinYear, "year", False)
+        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoStation, "within_variable", False)
+        ucrPnlAnnualWithin.AddParameterPresentCondition(rdoStation, "year", False)
 
         'receivers:
         ' by receivers
@@ -251,8 +255,14 @@ Public Class dlgClimaticSummary
                 Else
                     ucrBase.OKEnabled(False)
                 End If
+            ElseIf rdoStation.Checked Then
+                If Not ucrReceiverStation.IsEmpty Then
+                    ucrBase.OKEnabled(True)
+                Else
+                    ucrBase.OKEnabled(False)
+                End If
             End If
-        Else
+            Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
@@ -369,6 +379,9 @@ Public Class dlgClimaticSummary
             ElseIf rdoWithinYear.Checked Then
                 clsDefaultFactors.RemoveParameterByName("year")
                 clsDefaultFactors.AddParameter(ucrReceiverWithinYear.GetParameter())
+            ElseIf rdoStation.Checked Then
+                clsDefaultFactors.RemoveParameterByName("within_variable")
+                clsDefaultFactors.RemoveParameterByName("year")
             End If
         End If
     End Sub

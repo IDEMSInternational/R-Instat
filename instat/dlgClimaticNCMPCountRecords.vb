@@ -20,6 +20,7 @@ Public Class dlgClimaticNCMPCountRecords
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
+    Private bSubDialogOKEnabled As Boolean = True
 
     Private Sub dlgClimaticNCMPCountRecords_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -66,24 +67,10 @@ Public Class dlgClimaticNCMPCountRecords
         ucrSelectorForA4.SetParameterIsRFunction()
         ucrSelectorForA4.lblDataFrame.Text = "Region Average Data Frames:"
 
-        ucrChkStartYear.SetText("Specify Start Year for Count Period")
-        ucrChkStartYear.AddToLinkedControls(ucrNudNYB, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrChkStartYear.SetDefaultState(False)
-
-        ucrChkEndYear.SetText("Specify End Year for Count Period")
-        ucrChkEndYear.AddToLinkedControls(ucrNudNYE, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrChkEndYear.SetDefaultState(False)
-
-        ucrNudNYB.SetParameter(New RParameter("nyb", 8))
-        ucrNudNYB.SetMinMax(1900) ' min/max?
-
-        ucrNudNYE.SetParameter(New RParameter("nye", 9))
-        ucrNudNYE.SetMinMax(1900) ' min/max?
-
-        ucrSaveCountRecords.SetIsTextBox()
         ucrSaveCountRecords.SetSaveTypeAsDataFrame()
         ucrSaveCountRecords.SetLabelText("New Data Frame Name:")
-        ucrSaveCountRecords.SetPrefix("Count_Records")
+        ucrSaveCountRecords.SetIsTextBox()
+        ucrSaveCountRecords.SetPrefix("count_records")
     End Sub
 
     Private Sub SetDefaults()
@@ -94,38 +81,40 @@ Public Class dlgClimaticNCMPCountRecords
         ucrReceiverStation.SetMeAsReceiver()
         ucrSaveCountRecords.Reset()
         bResetSubdialog = True
+        bSubDialogOKEnabled = False
 
         clsDefaultFunction.SetRCommand("p6_count_records")
         clsDefaultFunction.SetAssignTo(ucrSaveCountRecords.GetText(), strTempDataframe:=ucrSaveCountRecords.GetText())
-        '        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        '        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        '        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse Not ucrSaveCountRecords.IsComplete() Then
-        ' add in checkbox options
-        '            ucrBase.TestOKEnabled(False)
-        '        Else
-        '            ucrBase.TestOKEnabled(True)
-        '        End If
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse Not ucrSaveCountRecords.IsComplete() OrElse Not bSubDialogOKEnabled Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub cmdStationMetadata_click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
-        'sdgClimaticNCMPMetadata.SetRFunction(ucrBase.clsRsyntax, clsDefaultFunction, bReset:=bResetSubdialog)
-        sdgClimaticNCMPMetadata.ShowDialog()
+        sdgClimaticNCMPMetadata.SetRFunction(clsDefaultFunction, bReset:=bResetSubdialog)
         bResetSubdialog = True
+        sdgClimaticNCMPMetadata.ShowDialog()
+        bSubDialogOKEnabled = sdgClimaticNCMPMetadata.bOKEnabled
+        TestOkEnabled()
     End Sub
 
-    '  Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-    '      SetDefaults()
-    '      SetRCodeForControls(True)
-    '      TestOkEnabled()
-    '  End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYB.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrSaveCountRecords.ControlContentsChanged, ucrChkStartYear.ControlContentsChanged, ucrChkEndYear.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrSaveCountRecords.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
