@@ -1254,6 +1254,7 @@ Public Class RLink
             End Try
             Try
                 ' if script should run in a separate thread
+                ' Fixed thread stack size i.e maxStackSize = 25000000 (25MB) because this may returns an overflow exception when large datasets are used. For example when producing a declustered plot on extremes dialog using Ghana dataset.
                 If bSeparateThread Then
                     thrRScript = New Threading.Thread(Sub()
                                                           Try
@@ -1267,7 +1268,7 @@ Public Class RLink
                                                               strTempError = ex.Message
                                                               bReturn = False
                                                           End Try
-                                                      End Sub)
+                                                      End Sub, maxStackSize:=25000000)
                     thrRScript.IsBackground = True
                     thrDelay = New Threading.Thread(Sub()
                                                         Dim t As New Stopwatch
