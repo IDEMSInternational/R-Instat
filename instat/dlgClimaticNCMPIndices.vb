@@ -87,7 +87,7 @@ Public Class dlgClimaticNCMPIndices
         ucrNudNYBR.SetRDefault(1981)
 
         ucrNudNYER.SetParameter(New RParameter("nyer", 9))
-        ucrNudNYER.SetMinMax(2000, 2020) ' TODO: how to set as current year - 1
+        ucrNudNYER.SetMinMax(2000, 2019) ' TODO: how to set as current year - 1
         ucrNudNYER.SetRDefault(2010)
 
         ' ucrsave
