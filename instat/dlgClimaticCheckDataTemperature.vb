@@ -199,7 +199,6 @@ Public Class dlgClimaticCheckDataTemperature
         'outliers Option
         ttOutliers.SetToolTip(ucrChkOutlier, "Values that are further than this number of IQRs from the corresponding quartile.")
 
-        EnableDisableControl()
     End Sub
 
     Private Sub SetDefaults()
@@ -300,7 +299,6 @@ Public Class dlgClimaticCheckDataTemperature
         clsRunCalcFunc.AddParameter("display", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunc)
 
-        EnableDisableControl()
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
@@ -612,7 +610,7 @@ Public Class dlgClimaticCheckDataTemperature
         End If
     End Sub
 
-    Private Sub EnableDisableControl()
+    Private Sub EnableOrDisableDifferenceControls()
         If ucrReceiverElement1.IsEmpty OrElse ucrReceiverElement2.IsEmpty Then
             ucrChkDifference.Enabled = False
             ucrChkDifference.Checked = False
@@ -625,7 +623,7 @@ Public Class dlgClimaticCheckDataTemperature
 
     Private Sub ucrReceiverMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMonth.ControlValueChanged, ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged
         GroupByMonth()
-        EnableDisableControl()
+        EnableOrDisableDifferenceControls()
     End Sub
 
     Private Sub ucrSelectorTemperature_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTemperature.ControlValueChanged
