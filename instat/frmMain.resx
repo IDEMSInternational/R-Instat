@@ -845,6 +845,12 @@
   <data name="ToolStripSeparator22.Size" type="System.Drawing.Size, System.Drawing">
     <value>208, 6</value>
   </data>
+  <data name="mnuViewStructuredMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 22</value>
+  </data>
+  <data name="mnuViewStructuredMenu.Text" xml:space="preserve">
+    <value>Structured Menu</value>
+  </data>
   <data name="mnuViewClimaticMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>211, 22</value>
   </data>
@@ -3622,7 +3628,7 @@
     <value>Low_Flow</value>
   </data>
   <data name="mnuStructuredSurvivalDefine.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>117, 22</value>
   </data>
   <data name="mnuStructuredSurvivalDefine.Text" xml:space="preserve">
     <value>Define...</value>
@@ -7079,6 +7085,12 @@
   </data>
   <data name="&gt;&gt;ToolStripSeparator22.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuViewStructuredMenu.Name" xml:space="preserve">
+    <value>mnuViewStructuredMenu</value>
+  </data>
+  <data name="&gt;&gt;mnuViewStructuredMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuViewClimaticMenu.Name" xml:space="preserve">
     <value>mnuViewClimaticMenu</value>
