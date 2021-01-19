@@ -475,7 +475,7 @@ Public Class dlgExtremesClimatic
         clsThresholdPlotFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         clsDeclusteringFunction.SetRCommand("plot_declustered")
-        clsDeclusteringFunction.AddParameter("threshold", "10", iPosition:=3)
+        clsDeclusteringFunction.AddParameter("threshold", "40", iPosition:=3)
         clsDeclusteringFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorClimaticExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         'Overall Calculation
