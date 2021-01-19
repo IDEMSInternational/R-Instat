@@ -1854,8 +1854,29 @@
   <data name="&gt;&gt;tbpGraphDisplay.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="ucrChkViewStructuredMenu.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 12</value>
+  </data>
+  <data name="ucrChkViewStructuredMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>209, 20</value>
+  </data>
+  <data name="ucrChkViewStructuredMenu.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkViewStructuredMenu.Name" xml:space="preserve">
+    <value>ucrChkViewStructuredMenu</value>
+  </data>
+  <data name="&gt;&gt;ucrChkViewStructuredMenu.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkViewStructuredMenu.Parent" xml:space="preserve">
+    <value>tbpTailoredMenus</value>
+  </data>
+  <data name="&gt;&gt;ucrChkViewStructuredMenu.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkViewOptionsByContextMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 68</value>
+    <value>7, 90</value>
   </data>
   <data name="ucrChkViewOptionsByContextMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 20</value>
@@ -1873,10 +1894,10 @@
     <value>tbpTailoredMenus</value>
   </data>
   <data name="&gt;&gt;ucrChkViewOptionsByContextMenu.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkViewProcurementMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 42</value>
+    <value>7, 64</value>
   </data>
   <data name="ucrChkViewProcurementMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 20</value>
@@ -1894,10 +1915,10 @@
     <value>tbpTailoredMenus</value>
   </data>
   <data name="&gt;&gt;ucrChkViewProcurementMenu.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrChkViewClimaticMenu.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 16</value>
+    <value>7, 38</value>
   </data>
   <data name="ucrChkViewClimaticMenu.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 20</value>
@@ -1915,7 +1936,7 @@
     <value>tbpTailoredMenus</value>
   </data>
   <data name="&gt;&gt;ucrChkViewClimaticMenu.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="tbpTailoredMenus.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>

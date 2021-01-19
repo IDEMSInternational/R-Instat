@@ -20,6 +20,7 @@ Public Class dlgClimaticNCMPIndices
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
+    Private bSubDialogOKEnabled As Boolean = True
 
     Private Sub dlgClimaticNCMPIndices_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -59,17 +60,19 @@ Public Class dlgClimaticNCMPIndices
         ucrReceiverRain.SetClimaticType("rain")
         ucrReceiverRain.bAutoFill = True
 
-        ucrReceiverTmin.SetParameter(New RParameter("min_temperature", 5))
+        ucrReceiverTmin.SetParameter(New RParameter("tmin", 4))
         ucrReceiverTmin.SetParameterIsString()
         ucrReceiverTmin.Selector = ucrSelectorIndices
         ucrReceiverTmin.SetClimaticType("temp_min")
         ucrReceiverTmin.bAutoFill = True
 
-        ucrReceiverTmax.SetParameter(New RParameter("max_temperature", 4))
+        ucrReceiverTmax.SetParameter(New RParameter("tmax", 5))
         ucrReceiverTmax.SetParameterIsString()
         ucrReceiverTmax.Selector = ucrSelectorIndices
         ucrReceiverTmax.SetClimaticType("temp_max")
         ucrReceiverTmax.bAutoFill = True
+
+        grpOptions.Visible = False
 
         ucrNudQCT.SetParameter(New RParameter("qct", 6))
         ucrNudQCT.SetMinMax(0, 2)
@@ -80,18 +83,18 @@ Public Class dlgClimaticNCMPIndices
         ucrNudQCPR.SetRDefault(0)
 
         ucrNudNYBR.SetParameter(New RParameter("nybr", 8))
-        ucrNudNYBR.SetMinMax(1900, 2000)
-        'ucrNudNYBR.SetRDefault(1981)
+        ucrNudNYBR.SetMinMax(1900, 2000)  ' TODO: suitable start/end years.
+        ucrNudNYBR.SetRDefault(1981)
 
         ucrNudNYER.SetParameter(New RParameter("nyer", 9))
         ucrNudNYER.SetMinMax(2000, 2019) ' TODO: how to set as current year - 1
-        'ucrNudNYER.SetRDefault(2010) 
+        ucrNudNYER.SetRDefault(2010)
 
         ' ucrsave
-        ucrSaveIndices.SetIsTextBox()
         ucrSaveIndices.SetSaveTypeAsDataFrame()
         ucrSaveIndices.SetLabelText("New Data Frame Name:")
-        ucrSaveIndices.SetPrefix("Indices")
+        ucrSaveIndices.SetIsTextBox()
+        ucrSaveIndices.SetPrefix("indices")
     End Sub
 
     Private Sub SetDefaults()
@@ -100,36 +103,38 @@ Public Class dlgClimaticNCMPIndices
         ucrSelectorIndices.Reset()
         ucrSaveIndices.Reset()
         ucrReceiverStation.SetMeAsReceiver()
-
+        bSubDialogOKEnabled = False
         bResetSubdialog = True
 
         clsDefaultFunction.SetRCommand("p2_indices")
         clsDefaultFunction.SetAssignTo(ucrSaveIndices.GetText(), strTempDataframe:=ucrSaveIndices.GetText())
-        '        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        '     SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        '        If ucrReceiverStation.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse ucrReceiverRain.IsEmpty OrElse ucrReceiverTmax.IsEmpty OrElse ucrReceiverTmin.IsEmpty OrElse ucrNudQCT.Value = "" OrElse ucrNudQCPR.Value = "" OrElse ucrNudNYBR.Value = "" OrElse ucrNudNYER.Value = "" OrElse Not ucrSaveIndices.IsComplete Then
-        '            ucrBase.TestOKEnabled(False)
-        '        Else
-        '            ucrBase.TestOKEnabled(True)
-        '        End If
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse ucrReceiverRain.IsEmpty OrElse ucrReceiverTmax.IsEmpty OrElse ucrReceiverTmin.IsEmpty OrElse ucrNudQCT.GetText = "" OrElse ucrNudQCPR.GetText = "" OrElse ucrNudNYBR.GetText = "" OrElse ucrNudNYER.GetText = "" OrElse Not ucrSaveIndices.IsComplete OrElse Not bSubDialogOKEnabled Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
     Private Sub cmdStationMetadata_click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
-        '   sdgClimaticNCMPMetadata.SetRFunction(ucrBase.clsRsyntax, clsDefaultFunction, bReset:=bResetSubdialog)
-        sdgClimaticNCMPMetadata.ShowDialog()
+        sdgClimaticNCMPMetadata.SetRFunction(clsDefaultFunction, bReset:=bResetSubdialog)
         bResetSubdialog = True
+        sdgClimaticNCMPMetadata.ShowDialog()
+        bSubDialogOKEnabled = sdgClimaticNCMPMetadata.bOKEnabled
+        TestOkEnabled()
     End Sub
 
-    '  Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-    '      SetDefaults()
-    '      SetRCodeForControls(True)
-    '      TestOkEnabled()
-    '  End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverRain.ControlContentsChanged, ucrReceiverTmax.ControlContentsChanged, ucrReceiverTmin.ControlContentsChanged, ucrNudQCT.ControlContentsChanged, ucrNudQCPR.ControlContentsChanged, ucrNudNYBR.ControlContentsChanged, ucrNudNYER.ControlContentsChanged, ucrSaveIndices.ControlContentsChanged
         TestOkEnabled()

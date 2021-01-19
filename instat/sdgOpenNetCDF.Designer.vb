@@ -25,16 +25,27 @@ Partial Class sdgOpenNetCDF
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgOpenNetCDF))
         Me.tbNetCDF = New System.Windows.Forms.TabControl()
         Me.tbSubset = New System.Windows.Forms.TabPage()
+        Me.ucrSelectorPoints = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpLocation = New System.Windows.Forms.GroupBox()
         Me.lblPointsID = New System.Windows.Forms.Label()
+        Me.ucrReceiverPointsID = New instat.ucrReceiverSingle()
         Me.rdoSinglePoint = New System.Windows.Forms.RadioButton()
         Me.rdoPoints = New System.Windows.Forms.RadioButton()
         Me.rdoRange = New System.Windows.Forms.RadioButton()
+        Me.ucrReceiverPointsY = New instat.ucrReceiverSingle()
+        Me.ucrReceiverPointsX = New instat.ucrReceiverSingle()
+        Me.ucrInputPointY = New instat.ucrInputTextBox()
+        Me.ucrInputPointX = New instat.ucrInputTextBox()
+        Me.ucrPnlLocation = New instat.UcrPanel()
         Me.lblX = New System.Windows.Forms.Label()
+        Me.ucrInputMinX = New instat.ucrInputTextBox()
+        Me.ucrInputMinY = New instat.ucrInputTextBox()
         Me.lblMinY = New System.Windows.Forms.Label()
+        Me.ucrInputMaxX = New instat.ucrInputTextBox()
         Me.lblY = New System.Windows.Forms.Label()
         Me.lblMaxX = New System.Windows.Forms.Label()
         Me.lblMinX = New System.Windows.Forms.Label()
+        Me.ucrInputMaxY = New instat.ucrInputTextBox()
         Me.lblMaxY = New System.Windows.Forms.Label()
         Me.lblMaxS = New System.Windows.Forms.Label()
         Me.lblMinS = New System.Windows.Forms.Label()
@@ -43,33 +54,22 @@ Partial Class sdgOpenNetCDF
         Me.dtpMinT = New System.Windows.Forms.DateTimePicker()
         Me.dtpMaxT = New System.Windows.Forms.DateTimePicker()
         Me.lblMaxT = New System.Windows.Forms.Label()
-        Me.lblMinT = New System.Windows.Forms.Label()
-        Me.lblMaxZ = New System.Windows.Forms.Label()
-        Me.lblT = New System.Windows.Forms.Label()
-        Me.lblMinZ = New System.Windows.Forms.Label()
-        Me.tbOptions = New System.Windows.Forms.TabPage()
-        Me.ucrBase = New instat.ucrButtonsSubdialogue()
-        Me.ucrSelectorPoints = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverPointsID = New instat.ucrReceiverSingle()
-        Me.ucrReceiverPointsY = New instat.ucrReceiverSingle()
-        Me.ucrReceiverPointsX = New instat.ucrReceiverSingle()
-        Me.ucrInputPointY = New instat.ucrInputTextBox()
-        Me.ucrInputPointX = New instat.ucrInputTextBox()
-        Me.ucrPnlLocation = New instat.UcrPanel()
-        Me.ucrInputMinX = New instat.ucrInputTextBox()
-        Me.ucrInputMinY = New instat.ucrInputTextBox()
-        Me.ucrInputMaxX = New instat.ucrInputTextBox()
-        Me.ucrInputMaxY = New instat.ucrInputTextBox()
         Me.ucrInputFileDetails = New instat.ucrInputTextBox()
+        Me.lblMinT = New System.Windows.Forms.Label()
         Me.ucrInputMaxS = New instat.ucrInputTextBox()
+        Me.lblMaxZ = New System.Windows.Forms.Label()
         Me.ucrInputMaxZ = New instat.ucrInputTextBox()
+        Me.lblT = New System.Windows.Forms.Label()
         Me.ucrInputMinS = New instat.ucrInputTextBox()
+        Me.lblMinZ = New System.Windows.Forms.Label()
         Me.ucrInputMinZ = New instat.ucrInputTextBox()
+        Me.tbOptions = New System.Windows.Forms.TabPage()
         Me.ucrChkGreatCircleDist = New instat.ucrCheck()
         Me.ucrChkIncludeRequestedPoints = New instat.ucrCheck()
         Me.ucrChkOnlyDataVariables = New instat.ucrCheck()
         Me.ucrChkKeepRawTime = New instat.ucrCheck()
         Me.ucrChkIncludeMetadata = New instat.ucrCheck()
+        Me.ucrBase = New instat.ucrButtonsSubdialogue()
         Me.tbNetCDF.SuspendLayout()
         Me.tbSubset.SuspendLayout()
         Me.grpLocation.SuspendLayout()
@@ -108,6 +108,14 @@ Partial Class sdgOpenNetCDF
         Me.tbSubset.Name = "tbSubset"
         Me.tbSubset.UseVisualStyleBackColor = True
         '
+        'ucrSelectorPoints
+        '
+        Me.ucrSelectorPoints.bDropUnusedFilterLevels = False
+        Me.ucrSelectorPoints.bShowHiddenColumns = False
+        Me.ucrSelectorPoints.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorPoints, "ucrSelectorPoints")
+        Me.ucrSelectorPoints.Name = "ucrSelectorPoints"
+        '
         'grpLocation
         '
         Me.grpLocation.Controls.Add(Me.lblPointsID)
@@ -138,6 +146,15 @@ Partial Class sdgOpenNetCDF
         '
         resources.ApplyResources(Me.lblPointsID, "lblPointsID")
         Me.lblPointsID.Name = "lblPointsID"
+        '
+        'ucrReceiverPointsID
+        '
+        Me.ucrReceiverPointsID.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverPointsID, "ucrReceiverPointsID")
+        Me.ucrReceiverPointsID.Name = "ucrReceiverPointsID"
+        Me.ucrReceiverPointsID.Selector = Nothing
+        Me.ucrReceiverPointsID.strNcFilePath = ""
+        Me.ucrReceiverPointsID.ucrSelector = Nothing
         '
         'rdoSinglePoint
         '
@@ -172,15 +189,78 @@ Partial Class sdgOpenNetCDF
         Me.rdoRange.TabStop = True
         Me.rdoRange.UseVisualStyleBackColor = False
         '
+        'ucrReceiverPointsY
+        '
+        Me.ucrReceiverPointsY.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverPointsY, "ucrReceiverPointsY")
+        Me.ucrReceiverPointsY.Name = "ucrReceiverPointsY"
+        Me.ucrReceiverPointsY.Selector = Nothing
+        Me.ucrReceiverPointsY.strNcFilePath = ""
+        Me.ucrReceiverPointsY.ucrSelector = Nothing
+        '
+        'ucrReceiverPointsX
+        '
+        Me.ucrReceiverPointsX.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverPointsX, "ucrReceiverPointsX")
+        Me.ucrReceiverPointsX.Name = "ucrReceiverPointsX"
+        Me.ucrReceiverPointsX.Selector = Nothing
+        Me.ucrReceiverPointsX.strNcFilePath = ""
+        Me.ucrReceiverPointsX.ucrSelector = Nothing
+        '
+        'ucrInputPointY
+        '
+        Me.ucrInputPointY.AddQuotesIfUnrecognised = True
+        Me.ucrInputPointY.IsMultiline = False
+        Me.ucrInputPointY.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPointY, "ucrInputPointY")
+        Me.ucrInputPointY.Name = "ucrInputPointY"
+        '
+        'ucrInputPointX
+        '
+        Me.ucrInputPointX.AddQuotesIfUnrecognised = True
+        Me.ucrInputPointX.IsMultiline = False
+        Me.ucrInputPointX.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputPointX, "ucrInputPointX")
+        Me.ucrInputPointX.Name = "ucrInputPointX"
+        '
+        'ucrPnlLocation
+        '
+        resources.ApplyResources(Me.ucrPnlLocation, "ucrPnlLocation")
+        Me.ucrPnlLocation.Name = "ucrPnlLocation"
+        '
         'lblX
         '
         resources.ApplyResources(Me.lblX, "lblX")
         Me.lblX.Name = "lblX"
         '
+        'ucrInputMinX
+        '
+        Me.ucrInputMinX.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinX.IsMultiline = False
+        Me.ucrInputMinX.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMinX, "ucrInputMinX")
+        Me.ucrInputMinX.Name = "ucrInputMinX"
+        '
+        'ucrInputMinY
+        '
+        Me.ucrInputMinY.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinY.IsMultiline = False
+        Me.ucrInputMinY.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMinY, "ucrInputMinY")
+        Me.ucrInputMinY.Name = "ucrInputMinY"
+        '
         'lblMinY
         '
         resources.ApplyResources(Me.lblMinY, "lblMinY")
         Me.lblMinY.Name = "lblMinY"
+        '
+        'ucrInputMaxX
+        '
+        Me.ucrInputMaxX.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaxX.IsMultiline = False
+        Me.ucrInputMaxX.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMaxX, "ucrInputMaxX")
+        Me.ucrInputMaxX.Name = "ucrInputMaxX"
         '
         'lblY
         '
@@ -196,6 +276,14 @@ Partial Class sdgOpenNetCDF
         '
         resources.ApplyResources(Me.lblMinX, "lblMinX")
         Me.lblMinX.Name = "lblMinX"
+        '
+        'ucrInputMaxY
+        '
+        Me.ucrInputMaxY.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaxY.IsMultiline = False
+        Me.ucrInputMaxY.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMaxY, "ucrInputMaxY")
+        Me.ucrInputMaxY.Name = "ucrInputMaxY"
         '
         'lblMaxY
         '
@@ -237,25 +325,65 @@ Partial Class sdgOpenNetCDF
         resources.ApplyResources(Me.lblMaxT, "lblMaxT")
         Me.lblMaxT.Name = "lblMaxT"
         '
+        'ucrInputFileDetails
+        '
+        Me.ucrInputFileDetails.AddQuotesIfUnrecognised = True
+        Me.ucrInputFileDetails.IsMultiline = True
+        Me.ucrInputFileDetails.IsReadOnly = True
+        resources.ApplyResources(Me.ucrInputFileDetails, "ucrInputFileDetails")
+        Me.ucrInputFileDetails.Name = "ucrInputFileDetails"
+        '
         'lblMinT
         '
         resources.ApplyResources(Me.lblMinT, "lblMinT")
         Me.lblMinT.Name = "lblMinT"
+        '
+        'ucrInputMaxS
+        '
+        Me.ucrInputMaxS.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaxS.IsMultiline = False
+        Me.ucrInputMaxS.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMaxS, "ucrInputMaxS")
+        Me.ucrInputMaxS.Name = "ucrInputMaxS"
         '
         'lblMaxZ
         '
         resources.ApplyResources(Me.lblMaxZ, "lblMaxZ")
         Me.lblMaxZ.Name = "lblMaxZ"
         '
+        'ucrInputMaxZ
+        '
+        Me.ucrInputMaxZ.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaxZ.IsMultiline = False
+        Me.ucrInputMaxZ.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMaxZ, "ucrInputMaxZ")
+        Me.ucrInputMaxZ.Name = "ucrInputMaxZ"
+        '
         'lblT
         '
         resources.ApplyResources(Me.lblT, "lblT")
         Me.lblT.Name = "lblT"
         '
+        'ucrInputMinS
+        '
+        Me.ucrInputMinS.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinS.IsMultiline = False
+        Me.ucrInputMinS.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMinS, "ucrInputMinS")
+        Me.ucrInputMinS.Name = "ucrInputMinS"
+        '
         'lblMinZ
         '
         resources.ApplyResources(Me.lblMinZ, "lblMinZ")
         Me.lblMinZ.Name = "lblMinZ"
+        '
+        'ucrInputMinZ
+        '
+        Me.ucrInputMinZ.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinZ.IsMultiline = False
+        Me.ucrInputMinZ.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMinZ, "ucrInputMinZ")
+        Me.ucrInputMinZ.Name = "ucrInputMinZ"
         '
         'tbOptions
         '
@@ -267,139 +395,6 @@ Partial Class sdgOpenNetCDF
         resources.ApplyResources(Me.tbOptions, "tbOptions")
         Me.tbOptions.Name = "tbOptions"
         Me.tbOptions.UseVisualStyleBackColor = True
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrSelectorPoints
-        '
-        Me.ucrSelectorPoints.bDropUnusedFilterLevels = False
-        Me.ucrSelectorPoints.bShowHiddenColumns = False
-        Me.ucrSelectorPoints.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorPoints, "ucrSelectorPoints")
-        Me.ucrSelectorPoints.Name = "ucrSelectorPoints"
-        '
-        'ucrReceiverPointsID
-        '
-        Me.ucrReceiverPointsID.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverPointsID, "ucrReceiverPointsID")
-        Me.ucrReceiverPointsID.Name = "ucrReceiverPointsID"
-        Me.ucrReceiverPointsID.Selector = Nothing
-        Me.ucrReceiverPointsID.strNcFilePath = ""
-        Me.ucrReceiverPointsID.ucrSelector = Nothing
-        '
-        'ucrReceiverPointsY
-        '
-        Me.ucrReceiverPointsY.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverPointsY, "ucrReceiverPointsY")
-        Me.ucrReceiverPointsY.Name = "ucrReceiverPointsY"
-        Me.ucrReceiverPointsY.Selector = Nothing
-        Me.ucrReceiverPointsY.strNcFilePath = ""
-        Me.ucrReceiverPointsY.ucrSelector = Nothing
-        '
-        'ucrReceiverPointsX
-        '
-        Me.ucrReceiverPointsX.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverPointsX, "ucrReceiverPointsX")
-        Me.ucrReceiverPointsX.Name = "ucrReceiverPointsX"
-        Me.ucrReceiverPointsX.Selector = Nothing
-        Me.ucrReceiverPointsX.strNcFilePath = ""
-        Me.ucrReceiverPointsX.ucrSelector = Nothing
-        '
-        'ucrInputPointY
-        '
-        Me.ucrInputPointY.AddQuotesIfUnrecognised = True
-        Me.ucrInputPointY.IsMultiline = False
-        Me.ucrInputPointY.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPointY, "ucrInputPointY")
-        Me.ucrInputPointY.Name = "ucrInputPointY"
-        '
-        'ucrInputPointX
-        '
-        Me.ucrInputPointX.AddQuotesIfUnrecognised = True
-        Me.ucrInputPointX.IsMultiline = False
-        Me.ucrInputPointX.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPointX, "ucrInputPointX")
-        Me.ucrInputPointX.Name = "ucrInputPointX"
-        '
-        'ucrPnlLocation
-        '
-        resources.ApplyResources(Me.ucrPnlLocation, "ucrPnlLocation")
-        Me.ucrPnlLocation.Name = "ucrPnlLocation"
-        '
-        'ucrInputMinX
-        '
-        Me.ucrInputMinX.AddQuotesIfUnrecognised = True
-        Me.ucrInputMinX.IsMultiline = False
-        Me.ucrInputMinX.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMinX, "ucrInputMinX")
-        Me.ucrInputMinX.Name = "ucrInputMinX"
-        '
-        'ucrInputMinY
-        '
-        Me.ucrInputMinY.AddQuotesIfUnrecognised = True
-        Me.ucrInputMinY.IsMultiline = False
-        Me.ucrInputMinY.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMinY, "ucrInputMinY")
-        Me.ucrInputMinY.Name = "ucrInputMinY"
-        '
-        'ucrInputMaxX
-        '
-        Me.ucrInputMaxX.AddQuotesIfUnrecognised = True
-        Me.ucrInputMaxX.IsMultiline = False
-        Me.ucrInputMaxX.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMaxX, "ucrInputMaxX")
-        Me.ucrInputMaxX.Name = "ucrInputMaxX"
-        '
-        'ucrInputMaxY
-        '
-        Me.ucrInputMaxY.AddQuotesIfUnrecognised = True
-        Me.ucrInputMaxY.IsMultiline = False
-        Me.ucrInputMaxY.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMaxY, "ucrInputMaxY")
-        Me.ucrInputMaxY.Name = "ucrInputMaxY"
-        '
-        'ucrInputFileDetails
-        '
-        Me.ucrInputFileDetails.AddQuotesIfUnrecognised = True
-        Me.ucrInputFileDetails.IsMultiline = True
-        Me.ucrInputFileDetails.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputFileDetails, "ucrInputFileDetails")
-        Me.ucrInputFileDetails.Name = "ucrInputFileDetails"
-        '
-        'ucrInputMaxS
-        '
-        Me.ucrInputMaxS.AddQuotesIfUnrecognised = True
-        Me.ucrInputMaxS.IsMultiline = False
-        Me.ucrInputMaxS.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMaxS, "ucrInputMaxS")
-        Me.ucrInputMaxS.Name = "ucrInputMaxS"
-        '
-        'ucrInputMaxZ
-        '
-        Me.ucrInputMaxZ.AddQuotesIfUnrecognised = True
-        Me.ucrInputMaxZ.IsMultiline = False
-        Me.ucrInputMaxZ.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMaxZ, "ucrInputMaxZ")
-        Me.ucrInputMaxZ.Name = "ucrInputMaxZ"
-        '
-        'ucrInputMinS
-        '
-        Me.ucrInputMinS.AddQuotesIfUnrecognised = True
-        Me.ucrInputMinS.IsMultiline = False
-        Me.ucrInputMinS.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMinS, "ucrInputMinS")
-        Me.ucrInputMinS.Name = "ucrInputMinS"
-        '
-        'ucrInputMinZ
-        '
-        Me.ucrInputMinZ.AddQuotesIfUnrecognised = True
-        Me.ucrInputMinZ.IsMultiline = False
-        Me.ucrInputMinZ.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMinZ, "ucrInputMinZ")
-        Me.ucrInputMinZ.Name = "ucrInputMinZ"
         '
         'ucrChkGreatCircleDist
         '
@@ -430,6 +425,11 @@ Partial Class sdgOpenNetCDF
         Me.ucrChkIncludeMetadata.Checked = False
         resources.ApplyResources(Me.ucrChkIncludeMetadata, "ucrChkIncludeMetadata")
         Me.ucrChkIncludeMetadata.Name = "ucrChkIncludeMetadata"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'sdgOpenNetCDF
         '

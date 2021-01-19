@@ -20,6 +20,7 @@ Public Class dlgClimaticNCMPVariogram
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
+    Private bSubDialogOKEnabled As Boolean = True
 
     Private Sub dlgClimaticNCMPVariogram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -38,7 +39,7 @@ Public Class dlgClimaticNCMPVariogram
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrSelectorVariogram.SetParameter(New RParameter("df", 0))
+        ucrSelectorVariogram.SetParameter(New RParameter("a2", 0))
         ucrSelectorVariogram.SetParameterIsrfunction()
         ucrSelectorVariogram.ucrAvailableDataFrames.lblDataFrame.Text = "Indices Data Frames:"
 
@@ -60,16 +61,21 @@ Public Class dlgClimaticNCMPVariogram
         ucrReceiverMonth.SetClimaticType("month")
         ucrReceiverMonth.bAutoFill = True
 
+        grpOptions.Visible = False
         ucrNudNYB.SetParameter(New RParameter("nyb", 4))
-        ucrNudNYB.SetMinMax(1900, 2000)
-        'ucrNudNYB.SetRDefault(1981)
+        'ucrNudNYB.SetMinMax(1900, 2000)' TODO: suitable min/max; default?
 
         ucrNudNYE.SetParameter(New RParameter("nye", 5))
-        ucrNudNYE.SetMinMax(2000, 2019) ' TODO: how to set as current year - 1
-        'ucrNudNYE.SetRDefault(2010) 
+        'ucrNudNYE.SetMinMax(2000, 2019) ' TODO: how to set max as current year - 1; default?
 
         ucrInputFilePath.SetParameter(New RParameter("ncmp_folder", 11))
         ucrInputFilePath.IsReadOnly = True
+
+        ' ucrsave
+        ucrSaveVariogram.SetSaveTypeAsDataFrame()
+        ucrSaveVariogram.SetLabelText("New Data Frame Name:")
+        ucrSaveVariogram.SetIsTextBox()
+        ucrSaveVariogram.SetPrefix("variogram")
     End Sub
 
     Private Sub SetDefaults()
@@ -79,39 +85,39 @@ Public Class dlgClimaticNCMPVariogram
         ucrReceiverStation.SetMeAsReceiver()
         ucrInputFilePath.Reset()
         ucrInputFilePath.SetName("")
+        ucrSaveVariogram.Reset()
         bResetSubdialog = True
+        bSubDialogOKEnabled = False
 
         clsDefaultFunction.SetRCommand("p3_variogram")
-        '        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        clsDefaultFunction.SetAssignTo(ucrSaveVariogram.GetText(), strTempDataframe:=ucrSaveVariogram.GetText())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        '     SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        '        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.Value = "" OrElse ucrNudNYE.Value = "" OrElse ucrInputFilePath.IsEmpty Then
-        '            ucrBase.TestOKEnabled(False)
-        '        Else
-        '            ucrBase.TestOKEnabled(True)
-        '        End If
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.GetText = "" OrElse ucrNudNYE.GetText = "" OrElse ucrInputFilePath.IsEmpty OrElse Not ucrSaveVariogram.IsComplete OrElse Not bSubDialogOKEnabled Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
     Private Sub cmdStationMetadata_click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
-        '   sdgClimaticNCMPMetadata.SetRFunction(ucrBase.clsRsyntax, clsDefaultFunction, bReset:=bResetSubdialog)
-        sdgClimaticNCMPMetadata.ShowDialog()
+        sdgClimaticNCMPMetadata.SetRFunction(clsDefaultFunction, bReset:=bResetSubdialog)
         bResetSubdialog = True
+        sdgClimaticNCMPMetadata.ShowDialog()
+        bSubDialogOKEnabled = sdgClimaticNCMPMetadata.bOKEnabled
+        TestOkEnabled()
     End Sub
 
-    '    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs)
-    '        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
-    '        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
-    '    End Sub
-
-    '  Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-    '      SetDefaults()
-    '      SetRCodeForControls(True)
-    '      TestOkEnabled()
-    '  End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
 
     Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
         If ucrInputFilePath.IsEmpty() Then
@@ -120,15 +126,12 @@ Public Class dlgClimaticNCMPVariogram
     End Sub
 
     Private Sub SelectLocationToSave()
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save NCMP Output"
-            If ucrInputFilePath.GetText() <> "" Then
-                dlgSave.InitialDirectory = ucrInputFilePath.GetText().Replace("/", "\")
-            Else
-                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            End If
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                ucrInputFilePath.SetName(dlgSave.FileName.Replace("\", "/"))
+        Dim strPath As String
+        Using dlgFolder As New FolderBrowserDialog
+            dlgFolder.Description = "Choose Folder"
+            If dlgFolder.ShowDialog() = DialogResult.OK Then
+                strPath = dlgFolder.SelectedPath
+                ucrInputFilePath.SetName(Replace(strPath, "\", "/"))
             End If
             TestOkEnabled()
         End Using
@@ -138,7 +141,7 @@ Public Class dlgClimaticNCMPVariogram
         SelectLocationToSave()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYB.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYB.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrSaveVariogram.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

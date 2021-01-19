@@ -51,24 +51,15 @@ Public Class dlgClimaticNCMPSummaryFile
         ucrSelectorA6.SetParameterIsRFunction()
         ucrSelectorA6.lblDataFrame.Text = "Count Records Data Frames:"
 
-        ucrChkStartYear.SetText("Specify Start Year for Count Period")
-        ucrChkStartYear.AddToLinkedControls(ucrNudNYB, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrChkStartYear.SetDefaultState(False)
-
-        ucrChkEndYear.SetText("Specify End Year for Count Period")
-        ucrChkEndYear.AddToLinkedControls(ucrNudNYE, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrChkEndYear.SetDefaultState(False)
-
-        ucrNudNYB.SetParameter(New RParameter("nyb", 3))
-        ucrNudNYB.SetMinMax(1900) ' suitable min/max?
-
-        ucrNudNYE.SetParameter(New RParameter("nye", 4))
-        ucrNudNYE.SetMinMax(1900) ' suitable min/max?
-
         ucrInputFilePath.SetParameter(New RParameter("ncmp_folder", 5))
         ucrInputFilePath.IsReadOnly = True
-    End Sub
 
+        'ucrsave
+        ucrSaveSummary.SetSaveTypeAsDataFrame()
+        ucrSaveSummary.SetLabelText("New Data Frame Name:")
+        ucrSaveSummary.SetIsTextBox()
+        ucrSaveSummary.SetPrefix("summary_file")
+    End Sub
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
 
@@ -77,34 +68,30 @@ Public Class dlgClimaticNCMPSummaryFile
         ucrSelectorA6.Reset()
         ucrInputFilePath.Reset()
         ucrInputFilePath.SetName("")
+        ucrSaveSummary.Reset()
 
         clsDefaultFunction.SetRCommand("p7_summary")
-        '        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        clsDefaultFunction.SetAssignTo(ucrSaveSummary.GetText(), strTempDataframe:=ucrSaveSummary.GetText())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        '        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        '        If ucrSelectorA2.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA4.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA6.cboAvailableDataFrames.Text = "" Then
-        ' add in checkbox options
-        '            ucrBase.TestOKEnabled(False)
-        '        Else
-        '            ucrBase.TestOKEnabled(True)
-        '        End If
+        If ucrSelectorA2.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA4.cboAvailableDataFrames.Text = "" OrElse ucrSelectorA6.cboAvailableDataFrames.Text = "" OrElse ucrInputFilePath.IsEmpty OrElse Not ucrSaveSummary.IsComplete Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
-    '    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs)
-    '        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
-    '        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
-    '    End Sub
-
-    '  Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-    '      SetDefaults()
-    '      SetRCodeForControls(True)
-    '      TestOkEnabled()
-    '  End Sub
+    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetDefaults()
+        SetRCodeForControls(True)
+        TestOkEnabled()
+    End Sub
 
     Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
         If ucrInputFilePath.IsEmpty() Then
@@ -113,15 +100,12 @@ Public Class dlgClimaticNCMPSummaryFile
     End Sub
 
     Private Sub SelectLocationToSave()
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save NCMP Output"
-            If ucrInputFilePath.GetText() <> "" Then
-                dlgSave.InitialDirectory = ucrInputFilePath.GetText().Replace("/", "\")
-            Else
-                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            End If
-            If dlgSave.ShowDialog() = DialogResult.OK Then
-                ucrInputFilePath.SetName(dlgSave.FileName.Replace("\", "/"))
+        Dim strPath As String
+        Using dlgFolder As New FolderBrowserDialog
+            dlgFolder.Description = "Choose Folder"
+            If dlgFolder.ShowDialog() = DialogResult.OK Then
+                strPath = dlgFolder.SelectedPath
+                ucrInputFilePath.SetName(Replace(strPath, "\", "/"))
             End If
             TestOkEnabled()
         End Using
@@ -131,7 +115,7 @@ Public Class dlgClimaticNCMPSummaryFile
         SelectLocationToSave()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorA2.ControlContentsChanged, ucrSelectorA4.ControlContentsChanged, ucrSelectorA6.ControlContentsChanged, ucrNudNYB.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrChkStartYear.ControlContentsChanged, ucrChkEndYear.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSelectorA2.ControlContentsChanged, ucrSelectorA4.ControlContentsChanged, ucrSelectorA6.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrSaveSummary.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
