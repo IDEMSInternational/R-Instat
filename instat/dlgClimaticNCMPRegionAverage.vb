@@ -19,7 +19,8 @@ Public Class dlgClimaticNCMPRegionAverage
     Public bFirstLoad As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
+    Private clsNCMPFunction, clsBaseFunction As New RFunction
+    Private bSubDialogOKEnabled As Boolean = True
 
     Private Sub dlgClimaticNCMPRegionAverage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -66,16 +67,13 @@ Public Class dlgClimaticNCMPRegionAverage
         ucrSelectorForA3.SetParameterIsRFunction()
         ucrSelectorForA3.lblDataFrame.Text = "Variogram Data Frames:"
 
-        ucrNudNYB.SetParameter(New RParameter("nyb", 10))
-        ucrNudNYB.SetMinMax(1900, 2000)
-        'ucrNudNYB.SetRDefault(1981)
-
         ucrNudNYE.SetParameter(New RParameter("nye", 11))
         ucrNudNYE.SetMinMax(2000, 2019) ' TODO: how to set as current year - 1
         'ucrNudNYE.SetRDefault(2010) 
 
         ucrInputUNCode.SetParameter(New RParameter("uncode", 12))
         ucrInputUNCode.SetValidationTypeAsNumeric(dcmMin:=0)
+        ucrInputUNCode.AddQuotesIfUnrecognised = False
 
         ' add in label parameter and ne parameter
 
@@ -92,49 +90,52 @@ Public Class dlgClimaticNCMPRegionAverage
         ucrChkOutputGridSquareData.SetText("Output Grid Square Data")
         ucrChkOutputGridSquareData.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOutputGridSquareData.SetRDefault("FALSE")
-
-        ' ucrsave
-        ucrSaveIndices.SetIsTextBox()
-        ucrSaveIndices.SetSaveTypeAsDataFrame()
-        ucrSaveIndices.SetLabelText("New Data Frame Name:")
-        ucrSaveIndices.SetPrefix("RegionAverage")
     End Sub
 
     Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
+        clsBaseFunction = New RFunction
+        clsNCMPFunction = New RFunction
 
         ucrSelectorForA2.Reset()
         ucrSelectorForA3.Reset()
         ucrReceiverStation.SetMeAsReceiver()
         ucrInputUNCode.Reset()
         ucrInputUNCode.SetName("")
-        ucrSaveIndices.Reset()
+        ucrInputResolution.SetName(1)
         bResetSubdialog = True
+        bSubDialogOKEnabled = False
 
-        clsDefaultFunction.SetRCommand("p4_region_average")
-        clsDefaultFunction.SetAssignTo(ucrSaveIndices.GetText(), strTempDataframe:=ucrSaveIndices.GetText())
-        '        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        clsBaseFunction.SetRCommand("data_book$import_data")
+        clsBaseFunction.AddParameter("data_tables", clsRFunctionParameter:=clsNCMPFunction)
+        ' the "name" of this function (clsNCMPFunction) is the value in the ucrInput box
+        clsNCMPFunction.SetRCommand("p4_region_average")
+        clsNCMPFunction.AddParameter("nye", 2019, iPosition:=11)
+        clsNCMPFunction.AddParameter("res", 1, iPosition:=14)
+        clsNCMPFunction.SetAssignTo("region_average_dfs")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsBaseFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
-        '     SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        SetRCode(Me, clsNCMPFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        '        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYB.Value = "" OrElse ucrNudNYE.Value = "" OrElse ucrInputFilePath.IsEmpty OrElse Not ucrSaveIndices.IsComplete Then
-        '            ucrBase.TestOKEnabled(False)
-        '        Else
-        '            ucrBase.TestOKEnabled(True)
-        '        End If
+        If ucrReceiverStation.IsEmpty OrElse ucrReceiverYear.IsEmpty OrElse ucrReceiverMonth.IsEmpty OrElse ucrNudNYE.GetText = "" OrElse ucrInputUNCode.IsEmpty OrElse Not bSubDialogOKEnabled Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub cmdStationMetadata_click(sender As Object, e As EventArgs) Handles cmdStationMetadata.Click
-        '   sdgClimaticNCMPMetadata.SetRFunction(ucrBase.clsRsyntax, clsDefaultFunction, bReset:=bResetSubdialog)
-        sdgClimaticNCMPMetadata.ShowDialog()
+        sdgClimaticNCMPMetadata.SetRFunction(clsNCMPFunction, bReset:=bResetSubdialog)
         bResetSubdialog = True
+        sdgClimaticNCMPMetadata.ShowDialog()
+        bSubDialogOKEnabled = sdgClimaticNCMPMetadata.bOKEnabled
+        TestOkEnabled()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYB.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputUNCode.ControlContentsChanged, ucrSaveIndices.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrNudNYE.ControlContentsChanged, ucrInputUNCode.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
