@@ -900,20 +900,18 @@ Public Class dlgOneVarFitModel
     '''Lists the factor levels of the selected factor or logical column into the success combobox
     ''' </summary>
     Private Sub AddFactorLevels()
+        If Not bRCodeSet Then
+            Exit Sub
+        End If
+
         Dim bDatatype As Boolean = ucrReceiverVariable.strCurrDataType.ToLower = "logical" Or ucrReceiverVariable.strCurrDataType.ToLower = "factor"
         Dim bTest As Boolean = ucrInputComboTests.GetText() = "binomial" Or ucrInputComboTests.GetText() = "proportion"
         Dim bTypeIsNumeric As Boolean = ucrReceiverVariable.strCurrDataType.ToLower = "numeric"
-
-        If bRCodeSet Then
-            If Not ucrReceiverVariable.IsEmpty AndAlso rdoTest.Checked Then
-                If (bDatatype OrElse bTypeIsNumeric) AndAlso bTest Then
-                    FindLevels()
-                Else
-                    RemoveSuccessParameter()
-                End If
-            Else
-                RemoveSuccessParameter()
-            End If
+        If Not ucrReceiverVariable.IsEmpty AndAlso rdoTest.Checked AndAlso
+                (bDatatype OrElse bTypeIsNumeric) AndAlso bTest Then
+            FindLevels()
+        Else
+            RemoveSuccessParameter()
         End If
     End Sub
 
