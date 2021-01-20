@@ -911,7 +911,9 @@ Public Class dlgOneVarFitModel
                 (bDatatype OrElse bTypeIsNumeric) AndAlso bTest Then
             FindLevels()
         Else
-            RemoveSuccessParameter()
+            ucrInputSuccess.Visible = False
+            clsBionomialFunction.RemoveParameterByName("success")
+            clsProportionFunction.RemoveParameterByName("success")
         End If
     End Sub
 
@@ -945,18 +947,15 @@ Public Class dlgOneVarFitModel
             frmMain.clsRLink.RunInternalScript(clsConvertToColumnTypeFunction.ToScript(), bSilent:=True)
         End If
 
-        ucrInputSuccess.SetItems(lstFactor.ToArray)
-        ucrInputSuccess.SetText(lstFactor(0))
-        ucrInputSuccess.Visible = True
-    End Sub
+        If lstFactor.ToArray.Count = 0 Then
+            MsgBox("Developer error: there are no factor levels to be displayed" & Chr(34) & vbNewLine & "Success combobox will be displayed with no inputs")
+        Else
+            ucrInputSuccess.SetItems(lstFactor.ToArray)
+            ucrInputSuccess.SetText(lstFactor(0))
+            ucrInputSuccess.Visible = True
+        End If
 
-    ''' <summary> 
-    '''Removes success parameter
-    ''' </summary>
-    Private Sub RemoveSuccessParameter()
-        ucrInputSuccess.Visible = False
-        clsBionomialFunction.RemoveParameterByName("success")
-        clsProportionFunction.RemoveParameterByName("success")
+
     End Sub
 
     Private Sub ucrInputTests_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboTests.ControlValueChanged, ucrInputComboEstimate.ControlValueChanged
