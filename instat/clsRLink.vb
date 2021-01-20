@@ -1385,6 +1385,7 @@ Public Class RLink
         Dim clsSetWd As New RFunction
         Dim clsSource As New RFunction
         Dim clsCreateIO As New ROperator
+        Dim clsDplyrOption As New RFunction
         Dim strScript As String = ""
 
         clsSetWd.SetRCommand("setwd")
@@ -1394,11 +1395,14 @@ Public Class RLink
         clsCreateIO.SetOperation("<-")
         clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
         clsCreateIO.AddParameter("right", strDataBookClassName & "$new()", iPosition:=1)
+        clsDplyrOption.SetRCommand("options")
+        clsDplyrOption.AddParameter("dplyr.summarise.inform", "FALSE", iPosition:=0)
 
         strScript = ""
         strScript = strScript & clsSetWd.ToScript() & Environment.NewLine
         strScript = strScript & clsSource.ToScript() & Environment.NewLine
-        strScript = strScript & clsCreateIO.ToScript()
+        strScript = strScript & clsCreateIO.ToScript() & Environment.NewLine
+        strScript = strScript & clsDplyrOption.ToScript()
 
         Return strScript
     End Function
