@@ -20,40 +20,82 @@ Public Class dlgClimaticCheckDataRain
     Private bReset As Boolean = True
     Private strCurrDataName As String = ""
     'Large/Same/wetdays
-    Private clsGroupByFunc, clsRainFilterFunc, clsRunCalcFunc, clsListFunc, clsGroupByMonth As New RFunction
+    Private clsGroupByFunc As New RFunction
+    Private clsRainFilterFunc As New RFunction
+    Private clsRunCalcFunc As New RFunction
+    Private clsListFunc As New RFunction
+    Private clsGroupByMonth As New RFunction
     'Large 
     Private clsLargeTestCalcFunc As New RFunction
-    Private clsLargeOperator, clsOrLargeOperator, clsLargeLessOperator, clsRainyDaysOperator As New ROperator
+    Private clsLargeOperator As New ROperator
+    Private clsOrLargeOperator As New ROperator
+    Private clsLargeLessOperator As New ROperator
+    Private clsRainyDaysOperator As New ROperator
     Private clsManipList As New RFunction
     Private strLargeTest As String = "Large"
     'Same
-    Private clsRleFunc, clsRepFunc, clsAsNumericFunc As New RFunction
-    Private clsSameCalcFunc, clsSameTestFunc As New RFunction
-    Private clsAndOperator, clsDollarOperator, clsGreaterSameOperator As New ROperator
+    Private clsRleFunc As New RFunction
+    Private clsRepFunc As New RFunction
+    Private clsAsNumericFunc As New RFunction
+    Private clsSameCalcFunc As New RFunction
+    Private clsSameTestFunc As New RFunction
+    Private clsAndOperator As New ROperator
+    Private clsDollarOperator As New ROperator
+    Private clsGreaterSameOperator As New ROperator
     Private clsSameList As New RFunction
     Private strSameCalc As String = "same"
     Private strSameTestCalc As String = "Same"
     'Wetdays
-    Private clsCumSumFuc, clsCumMaxFunc As New RFunction
-    Private clsGreaterOperator, clsMinusOperator, clsMultiplOperator, clsGreatOperator, clsEqualOperator As New ROperator
-    Private clsCumulativeCalcFunc, clsCumulativeTestFunc As New RFunction
+    Private clsCumSumFuc As New RFunction
+    Private clsCumMaxFunc As New RFunction
+    Private clsFisrtGreaterOperator As New ROperator
+    Private clsMinusOperator As New ROperator
+    Private clsMultipleOperator As New ROperator
+    Private clsSecondGreaterOperator As New ROperator
+    Private clsEqualOperator As New ROperator
+    Private clsCumulativeCalcFunc As New RFunction
+    Private clsCumulativeTestFunc As New RFunction
     Private clsCumulativeList As New RFunction
+    Private clsIfelseFunction As New RFunction
+    Private clsIsNaFunction As New RFunction
     Private strCumulativeCalc As String = "Wet_days"
     Private strCumulativeTestCalc As String = "wet_days"
     Private strDryMonthCalc As String = "dry_month"
     Private strDryMonthTestCalc As String = "dry_month_calc"
     'Dry Month
-    Private clsGroupByMonthYearFunction, clsDryMonthCalculationFunc, clsListCalcFunction, clsSumFuction, clsDryMonthTestCalculationFunc, clsListTestFunction, clsNotIsNaFunction, clsDrySumFuction, clsFilterMonthFunction, clsGroupByListFunc As New RFunction
-    Private clsDryMonthEqualOperator, clsDryMonthAndOperator, clsLessOperator, clsDryTestAndOperator, clsInOperator, clsNotOperator As New ROperator
+    Private clsGroupByMonthYearFunction As New RFunction
+    Private clsDryMonthCalculationFunc As New RFunction
+    Private clsListCalcFunction As New RFunction
+    Private clsSumFuction As New RFunction
+    Private clsDryMonthTestCalculationFunc As New RFunction
+    Private clsListTestFunction As New RFunction
+    Private clsNotIsNaFunction As New RFunction
+    Private clsDrySumFuction As New RFunction
+    Private clsFilterMonthFunction As New RFunction
+    Private clsGroupByListFunc As New RFunction
+    Private clsDryMonthEqualOperator As New ROperator
+    Private clsDryMonthAndOperator As New ROperator
+    Private clsLessOperator As New ROperator
+    Private clsDryTestAndOperator As New ROperator
+    Private clsInOperator As New ROperator
+    Private clsNotOperator As New ROperator
 
     'Combined Filters
     Private clsOrOperator As New ROperator
     Private clsListSubCalc As New RFunction
     'Outlier 
-    Private clsListForOutlierManipulations, clsRainyDaysFunc, clsUpperOutlierLimitFunc, clsUpperOutlierLimitValueCalcFunc, clsUpperOutlierlimitTestFunc, clsUpperListOutlier As New RFunction
+    Private clsListForOutlierManipulations As New RFunction
+    Private clsRainyDaysFunc As New RFunction
+    Private clsUpperOutlierLimitFunc As New RFunction
+    Private clsUpperOutlierLimitValueCalcFunc As New RFunction
+    Private clsUpperOutlierlimitTestFunc As New RFunction
+    Private clsUpperListOutlier As New RFunction
     Private clsUpperOutlierOperator As New ROperator
     Private strUpperOutlierTest As String = "upper_outlier"
-    Private clsLowerOutlierLimitValueCalcFunc, clsLowerOutlierlimitTestFunc, clsLowerListOutlier, clsLowerOutlierLimitFunc As New RFunction
+    Private clsLowerOutlierLimitValueCalcFunc As New RFunction
+    Private clsLowerOutlierlimitTestFunc As New RFunction
+    Private clsLowerListOutlier As New RFunction
+    Private clsLowerOutlierLimitFunc As New RFunction
     Private clsLowerOutlierOperator As New ROperator
     Private strLowerOutlierTest As String = "lower_outlier"
     Private clsOutliersOperator As New ROperator
@@ -183,6 +225,8 @@ Public Class dlgClimaticCheckDataRain
         clsRleFunc = New RFunction
         clsRepFunc = New RFunction
         clsAsNumericFunc = New RFunction
+        clsIfelseFunction = New RFunction
+        clsIsNaFunction = New RFunction
         clsAndOperator = New ROperator
         clsDollarOperator = New ROperator
         clsOrOperator = New ROperator
@@ -196,7 +240,7 @@ Public Class dlgClimaticCheckDataRain
         clsUpperOutlierOperator.Clear()
         clsOrLargeOperator.Clear()
         clsGreaterSameOperator.Clear()
-        clsGreatOperator.Clear()
+        clsSecondGreaterOperator.Clear()
 
         clsRainFilterFunc.Clear()
         clsLargeTestCalcFunc.Clear()
@@ -269,14 +313,16 @@ Public Class dlgClimaticCheckDataRain
         clsLargeTestCalcFunc.SetAssignTo("large_test_calculation")
 
         'Same
-        clsGreaterOperator.SetOperation(">")
-        clsGreaterOperator.AddParameter("y", "0", iPosition:=1, bIncludeArgumentName:=False)
+        clsFisrtGreaterOperator.SetOperation(">")
+        clsFisrtGreaterOperator.AddParameter("left", clsRFunctionParameter:=clsIfelseFunction, iPosition:=0)
+        clsFisrtGreaterOperator.AddParameter("right", "0", iPosition:=1)
+
 
         clsAndOperator.SetOperation("&")
         clsAndOperator.bBrackets = False
         clsAndOperator.bToScriptAsRString = True
         clsAndOperator.AddParameter("left", clsROperatorParameter:=clsGreaterSameOperator, iPosition:=0)
-        clsAndOperator.AddParameter("right", clsROperatorParameter:=clsGreaterOperator, iPosition:=1)
+        clsAndOperator.AddParameter("right", clsROperatorParameter:=clsFisrtGreaterOperator, iPosition:=1)
 
         clsGreaterSameOperator.SetOperation(">=")
         clsGreaterSameOperator.AddParameter("left", bIncludeArgumentName:=False, strParameterValue:=strSameCalc, iPosition:=0)
@@ -314,23 +360,28 @@ Public Class dlgClimaticCheckDataRain
 
         'Wet
         clsEqualOperator.SetOperation("==")
-        clsEqualOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreaterOperator, iPosition:=0)
-        clsEqualOperator.AddParameter("right", "0", bIncludeArgumentName:=False, iPosition:=1)
+        clsEqualOperator.AddParameter("left", clsROperatorParameter:=clsFisrtGreaterOperator, iPosition:=0)
+        clsEqualOperator.AddParameter("right", "0", iPosition:=1)
+
         clsCumSumFuc.SetRCommand("cumsum")
-        clsGreatOperator.SetOperation(">")
-        clsGreatOperator.bToScriptAsRString = True
-        clsGreatOperator.AddParameter("left", bIncludeArgumentName:=False, strParameterValue:=strCumulativeCalc, iPosition:=0)
+        clsCumSumFuc.AddParameter("x", clsROperatorParameter:=clsFisrtGreaterOperator, iPosition:=0)
+
+        clsSecondGreaterOperator.SetOperation(">")
+        clsSecondGreaterOperator.AddParameter("left", strParameterValue:=strCumulativeCalc, iPosition:=0)
+        clsSecondGreaterOperator.bToScriptAsRString = True
+
         clsMinusOperator.SetOperation("-")
         clsMinusOperator.bToScriptAsRString = True
-        clsMinusOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsCumSumFuc, iPosition:=0)
-        clsMinusOperator.AddParameter("right", bIncludeArgumentName:=False, clsRFunctionParameter:=clsCumMaxFunc, iPosition:=1)
+        clsMinusOperator.AddParameter("left", clsRFunctionParameter:=clsCumSumFuc, iPosition:=0)
+        clsMinusOperator.AddParameter("right", clsRFunctionParameter:=clsCumMaxFunc, iPosition:=1)
+
         clsCumMaxFunc.SetRCommand("cummax")
-        clsCumMaxFunc.AddParameter("right", bIncludeArgumentName:=False, clsROperatorParameter:=clsMultiplOperator, iPosition:=0)
-        clsMultiplOperator.SetOperation("*")
-        clsMultiplOperator.bSpaceAroundOperation = False
-        clsMultiplOperator.AddParameter("left", bIncludeArgumentName:=False, clsROperatorParameter:=clsEqualOperator, iPosition:=0)
-        clsMultiplOperator.AddParameter("right", bIncludeArgumentName:=False, clsRFunctionParameter:=clsCumSumFuc, iPosition:=1)
-        clsCumSumFuc.AddParameter("x", bIncludeArgumentName:=False, clsROperatorParameter:=clsGreaterOperator, iPosition:=0)
+        clsCumMaxFunc.AddParameter("x", clsROperatorParameter:=clsMultipleOperator, iPosition:=0)
+
+        clsMultipleOperator.SetOperation("*")
+        clsMultipleOperator.bSpaceAroundOperation = False
+        clsMultipleOperator.AddParameter("left", clsROperatorParameter:=clsEqualOperator, iPosition:=0)
+        clsMultipleOperator.AddParameter("right", clsRFunctionParameter:=clsCumSumFuc, iPosition:=1)
 
         clsCumulativeCalcFunc.SetRCommand("instat_calculation$new")
         clsCumulativeCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
@@ -340,13 +391,19 @@ Public Class dlgClimaticCheckDataRain
 
         clsCumulativeTestFunc.SetRCommand("instat_calculation$new")
         clsCumulativeTestFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
-        clsCumulativeTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsGreatOperator, iPosition:=1)
+        clsCumulativeTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsSecondGreaterOperator, iPosition:=1)
         clsCumulativeTestFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsCumulativeList, iPosition:=2)
         clsCumulativeTestFunc.AddParameter("result_name", Chr(34) & strCumulativeTestCalc & Chr(34))
         clsCumulativeTestFunc.SetAssignTo("cumulative_test_calculation")
 
         clsCumulativeList.SetRCommand("list")
         clsCumulativeList.AddParameter("sub1", clsRFunctionParameter:=clsCumulativeCalcFunc, bIncludeArgumentName:=False)
+
+        clsIfelseFunction.SetRCommand("ifelse")
+        clsIfelseFunction.AddParameter("test", clsRFunctionParameter:=clsIsNaFunction, iPosition:=0)
+        clsIfelseFunction.AddParameter("yes", "0", iPosition:=1)
+
+        clsIsNaFunction.SetRCommand("is.na")
 
         'Group By Month 
         clsGroupByMonth.SetRCommand("instat_calculation$new")
@@ -510,17 +567,18 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub setRcodeForControls(bReset)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsGreaterOperator, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsAsNumericFunc, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsLargeLessOperator, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsUpperOutlierOperator, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsUpperOutlierLimitFunc, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=5)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsRainyDaysOperator, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsLowerOutlierLimitFunc, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsLowerOutlierOperator, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=8)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsSumFuction, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=9)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsNotIsNaFunction, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=10)
-        ucrReceiverElement.AddAdditionalCodeParameterPair(clsDrySumFuction, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=11)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsAsNumericFunc, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsLargeLessOperator, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsUpperOutlierOperator, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsUpperOutlierLimitFunc, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsRainyDaysOperator, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=5)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsLowerOutlierLimitFunc, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsLowerOutlierOperator, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsSumFuction, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=8)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsNotIsNaFunction, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=9)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsDrySumFuction, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=10)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsIfelseFunction, New RParameter("no", 2), iAdditionalPairNo:=11)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsIsNaFunction, New RParameter("x", 0), iAdditionalPairNo:=12)
 
         ucrChkLarge.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("large", strParamValue:=clsLargeTestCalcFunc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrChkSame.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("same", strParamValue:=clsSameTestFunc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
@@ -541,7 +599,7 @@ Public Class dlgClimaticCheckDataRain
         ucrReceiverElement.SetRCode(clsLargeOperator, bReset)
         ucrNudLarge.SetRCode(clsLargeOperator, bReset)
         ucrNudSame.SetRCode(clsGreaterSameOperator, bReset)
-        ucrNudWetDays.SetRCode(clsGreatOperator, bReset)
+        ucrNudWetDays.SetRCode(clsSecondGreaterOperator, bReset)
         'ucrReceiverMonth.SetRCode(clsNotEqualToOperator, bReset)
 
         ucrChkLarge.SetRCode(clsOrOperator, bReset)
@@ -649,7 +707,6 @@ Public Class dlgClimaticCheckDataRain
         RainyDays()
         OutlierLimitCalc()
         CalculatedFromCalc()
-        TestOkEnabled()
     End Sub
 
     Private Sub AutoFillRainColumn()
