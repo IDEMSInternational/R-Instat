@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -141,6 +141,7 @@ Public Class frmMain
             Cursor = Cursors.Default
             SetMainMenusEnabled(True)
 
+            mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
             mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
             mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
         End If
@@ -1636,6 +1637,10 @@ Public Class frmMain
         mnuViewProcurementMenu.Checked = bNewShowProcurementMenu
     End Sub
 
+    Public Sub SetShowStructuredMenu(bNewShowStructuredMenu As Boolean)
+        mnuStructured.Visible = bNewShowStructuredMenu
+        mnuViewStructuredMenu.Checked = bNewShowStructuredMenu
+    End Sub
     Public Sub SetShowClimaticMenu(bNewShowClimaticMenu As Boolean)
         mnuClimatic.Visible = bNewShowClimaticMenu
         mnuViewClimaticMenu.Checked = bNewShowClimaticMenu
@@ -1646,6 +1651,9 @@ Public Class frmMain
         mnuViewOptionsByContextMenu.Checked = bNewShowOptionsByContextMenu
     End Sub
 
+    Private Sub mnuViewStructuredMenu_Click(sender As Object, e As EventArgs) Handles mnuViewStructuredMenu.Click
+        clsInstatOptions.SetShowStructuredMenu(Not mnuViewStructuredMenu.Checked)
+    End Sub
     Private Sub mnuViewClimaticMenu_Click(sender As Object, e As EventArgs) Handles mnuViewClimaticMenu.Click
         clsInstatOptions.SetShowClimaticMenu(Not mnuViewClimaticMenu.Checked)
     End Sub
@@ -2267,4 +2275,31 @@ Public Class frmMain
     Private Sub mnuStructuredSurvivalDefine_Click(sender As Object, e As EventArgs) Handles mnuStructuredSurvivalDefine.Click
         dlgSurvivalObject.ShowDialog()
     End Sub
+
 End Class
+
+    Private Sub mnuClimaticNCMPIndices_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPIndices.Click
+        dlgClimaticNCMPIndices.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticNCMPVariogram_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPVariogram.Click
+        dlgClimaticNCMPVariogram.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticNCMPRegionAverage_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPRegionAverage.Click
+        dlgClimaticNCMPRegionAverage.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticNCMPTrendGraphs_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPTrendGraphs.Click
+        dlgClimaticNCMPTrendGraphs.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticNCMPCountRecords_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPCountRecords.Click
+        dlgClimaticNCMPCountRecords.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticNCMPSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPSummary.Click
+        dlgClimaticNCMPSummaryFile.ShowDialog()
+    End Sub
+End Class
+

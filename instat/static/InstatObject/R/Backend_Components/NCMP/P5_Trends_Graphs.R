@@ -82,8 +82,8 @@ p5_trends_graphs <- function(a2, station, a2_year, month, a4, a4_year, a4_month,
   # For clarity, no longer do this as a separate function                           #
   ###################################################################################
   
-  stations_data <- unique(a2[[station]])
-  stations_metadata <- unique(station_df[[name]])
+  stations_data <- as.character(unique(a2[[station]]))
+  stations_metadata <- as.character(unique(station_df[[name]]))
   if (!all(stations_data %in% stations_metadata)) stop("Station information not available for all stations that appear in data.")
   stations <- stations_data
   nstn <- length(stations)
