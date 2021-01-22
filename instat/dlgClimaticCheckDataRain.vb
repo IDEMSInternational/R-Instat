@@ -41,14 +41,15 @@ Public Class dlgClimaticCheckDataRain
     Private clsSameTestFunc As New RFunction
     Private clsAndOperator As New ROperator
     Private clsDollarOperator As New ROperator
-    Private clsGreaterSameOperator As New ROperator
+    Private clsFirstGreaterSameOperator As New ROperator
+    Private clsSecondGreaterSameOperator As New ROperator
     Private clsSameList As New RFunction
     Private strSameCalc As String = "same"
     Private strSameTestCalc As String = "Same"
     'Wetdays
     Private clsCumSumFuc As New RFunction
     Private clsCumMaxFunc As New RFunction
-    Private clsFisrtGreaterOperator As New ROperator
+    Private clsFirstGreaterOperator As New ROperator
     Private clsMinusOperator As New ROperator
     Private clsMultipleOperator As New ROperator
     Private clsSecondGreaterOperator As New ROperator
@@ -194,6 +195,7 @@ Public Class dlgClimaticCheckDataRain
         'Linking of controls
         ucrChkLarge.AddToLinkedControls(ucrNudLarge, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=200)
         ucrChkSame.AddToLinkedControls(ucrNudSame, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrChkSame.AddToLinkedControls(ucrInputSameValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.05)
         ucrChkWetDays.AddToLinkedControls(ucrNudWetDays, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=10)
         ucrChkDryMonth.AddToLinkedControls(ucrInputThreshold, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0.05)
         ucrChkOutlier.AddToLinkedControls(ucrChkOmitZero, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -208,6 +210,7 @@ Public Class dlgClimaticCheckDataRain
         ucrNudWetDays.SetLinkedDisplayControl(lblRainDays)
         ucrNudSkewnessWeight.SetLinkedDisplayControl(lblSkewnessWeight)
         ucrNudCoeff.SetLinkedDisplayControl(lblCoeff)
+        ucrInputSameValue.SetLinkedDisplayControl(lblGreater)
 
         ucrChkCalculatedColumns.SetText("Calculated columns")
         ucrChkCalculatedColumns.SetParameter(New RParameter("save", 4))
@@ -216,6 +219,10 @@ Public Class dlgClimaticCheckDataRain
         ucrChkLogicalColumns.SetText("Logical columns")
         ucrChkLogicalColumns.SetParameter(New RParameter("save", 4))
         ucrChkLogicalColumns.SetValuesCheckedAndUnchecked("2", "0")
+
+        ucrInputSameValue.SetParameter(New RParameter("value", 1))
+        ucrInputSameValue.AddQuotesIfUnrecognised = False
+        ucrInputSameValue.SetValidationTypeAsNumeric()
     End Sub
 
     Private Sub SetDefaults()
@@ -239,8 +246,9 @@ Public Class dlgClimaticCheckDataRain
         clsRainyDaysOperator.Clear()
         clsUpperOutlierOperator.Clear()
         clsOrLargeOperator.Clear()
-        clsGreaterSameOperator.Clear()
+        clsFirstGreaterSameOperator.Clear()
         clsSecondGreaterOperator.Clear()
+        clsSecondGreaterSameOperator.Clear()
 
         clsRainFilterFunc.Clear()
         clsLargeTestCalcFunc.Clear()
@@ -313,19 +321,16 @@ Public Class dlgClimaticCheckDataRain
         clsLargeTestCalcFunc.SetAssignTo("large_test_calculation")
 
         'Same
-        clsFisrtGreaterOperator.SetOperation(">")
-        clsFisrtGreaterOperator.AddParameter("left", clsRFunctionParameter:=clsIfelseFunction, iPosition:=0)
-        clsFisrtGreaterOperator.AddParameter("right", "0", iPosition:=1)
-
-
         clsAndOperator.SetOperation("&")
         clsAndOperator.bBrackets = False
         clsAndOperator.bToScriptAsRString = True
-        clsAndOperator.AddParameter("left", clsROperatorParameter:=clsGreaterSameOperator, iPosition:=0)
-        clsAndOperator.AddParameter("right", clsROperatorParameter:=clsFisrtGreaterOperator, iPosition:=1)
+        clsAndOperator.AddParameter("left", clsROperatorParameter:=clsFirstGreaterSameOperator, iPosition:=0)
+        clsAndOperator.AddParameter("right", clsROperatorParameter:=clsSecondGreaterSameOperator, iPosition:=1)
 
-        clsGreaterSameOperator.SetOperation(">=")
-        clsGreaterSameOperator.AddParameter("left", bIncludeArgumentName:=False, strParameterValue:=strSameCalc, iPosition:=0)
+        clsFirstGreaterSameOperator.SetOperation(">=")
+        clsFirstGreaterSameOperator.AddParameter("left", strParameterValue:=strSameCalc, iPosition:=0)
+
+        clsSecondGreaterSameOperator.SetOperation(">")
 
         clsAsNumericFunc.SetRCommand("as.numeric")
 
@@ -334,8 +339,8 @@ Public Class dlgClimaticCheckDataRain
 
         clsDollarOperator.SetOperation("$")
         clsDollarOperator.bSpaceAroundOperation = False
-        clsDollarOperator.AddParameter("left", bIncludeArgumentName:=False, clsRFunctionParameter:=clsRleFunc, iPosition:=0)
-        clsDollarOperator.AddParameter("right", bIncludeArgumentName:=False, strParameterValue:=strLengths, iPosition:=1)
+        clsDollarOperator.AddParameter("left", clsRFunctionParameter:=clsRleFunc, iPosition:=0)
+        clsDollarOperator.AddParameter("right", strParameterValue:=strLengths, iPosition:=1)
 
         clsRepFunc.SetRCommand("rep")
         clsRepFunc.AddParameter("first", bIncludeArgumentName:=False, clsROperatorParameter:=clsDollarOperator, iPosition:=0)
@@ -360,11 +365,15 @@ Public Class dlgClimaticCheckDataRain
 
         'Wet
         clsEqualOperator.SetOperation("==")
-        clsEqualOperator.AddParameter("left", clsROperatorParameter:=clsFisrtGreaterOperator, iPosition:=0)
+        clsEqualOperator.AddParameter("left", clsROperatorParameter:=clsFirstGreaterOperator, iPosition:=0)
         clsEqualOperator.AddParameter("right", "0", iPosition:=1)
 
         clsCumSumFuc.SetRCommand("cumsum")
-        clsCumSumFuc.AddParameter("x", clsROperatorParameter:=clsFisrtGreaterOperator, iPosition:=0)
+        clsCumSumFuc.AddParameter("x", clsROperatorParameter:=clsFirstGreaterOperator, iPosition:=0)
+
+        clsFirstGreaterOperator.SetOperation(">")
+        clsFirstGreaterOperator.AddParameter("left", clsRFunctionParameter:=clsIfelseFunction, iPosition:=0)
+        clsFirstGreaterOperator.AddParameter("right", "0", iPosition:=1)
 
         clsSecondGreaterOperator.SetOperation(">")
         clsSecondGreaterOperator.AddParameter("left", strParameterValue:=strCumulativeCalc, iPosition:=0)
@@ -579,6 +588,7 @@ Public Class dlgClimaticCheckDataRain
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsDrySumFuction, New RParameter("rain", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=10)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsIfelseFunction, New RParameter("no", 2), iAdditionalPairNo:=11)
         ucrReceiverElement.AddAdditionalCodeParameterPair(clsIsNaFunction, New RParameter("x", 0), iAdditionalPairNo:=12)
+        ucrReceiverElement.AddAdditionalCodeParameterPair(clsSecondGreaterSameOperator, New RParameter("rain", 0), iAdditionalPairNo:=13)
 
         ucrChkLarge.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("large", strParamValue:=clsLargeTestCalcFunc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrChkSame.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("same", strParamValue:=clsSameTestFunc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
@@ -598,7 +608,7 @@ Public Class dlgClimaticCheckDataRain
 
         ucrReceiverElement.SetRCode(clsLargeOperator, bReset)
         ucrNudLarge.SetRCode(clsLargeOperator, bReset)
-        ucrNudSame.SetRCode(clsGreaterSameOperator, bReset)
+        ucrNudSame.SetRCode(clsFirstGreaterSameOperator, bReset)
         ucrNudWetDays.SetRCode(clsSecondGreaterOperator, bReset)
         'ucrReceiverMonth.SetRCode(clsNotEqualToOperator, bReset)
 
@@ -610,6 +620,7 @@ Public Class dlgClimaticCheckDataRain
         ucrInputThresholdValue.SetRCode(clsUpperOutlierLimitFunc, bReset)
         ucrNudCoeff.SetRCode(clsUpperOutlierLimitFunc, bReset)
         ucrInputThreshold.SetRCode(clsLessOperator, bReset)
+        ucrInputSameValue.SetRCode(clsSecondGreaterSameOperator, bReset)
 
         ucrChkOutlier.SetRCode(clsOrOperator, bReset)
         ucrNudSkewnessWeight.SetRCode(clsUpperOutlierLimitFunc, bReset)
