@@ -157,8 +157,7 @@ Public Class frmMain
     Private Sub LoadDataOnFileClicked()
         Try
             If (Environment.GetCommandLineArgs.Length > 1) Then
-                Dim FilePath As String = Environment.GetCommandLineArgs(1)
-                dlgImportDataset.strFileToOpenOn = FilePath
+                dlgImportDataset.strFileToOpenOn = Environment.GetCommandLineArgs(1)
                 dlgImportDataset.bStartOpenDialog = False
                 dlgImportDataset.ShowDialog()
             Else
