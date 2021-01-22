@@ -2242,3 +2242,40 @@ plot_multiple_threshold <- function(data, station_col_name, element_col_name, r,
     threshold_Plot(x = element_col, r = r, type = type, nint = nint, alpha = alpha, verbose = verbose)
   }
 }
+
+
+plot_declustered <- function(data, station_col_name, element_col_name, threshold, r = NULL, xlab = NULL, ylab = NULL, ncol = 1, print_summary = FALSE) {
+  if (!missing(station_col_name)) {
+    plts <- list()
+    station_col <- data[, station_col_name]
+    stations <- unique(station_col)
+    for (i in seq_along(stations)) {
+      station <- stations[i]
+      d <- data[station_col == station, ]
+      obj <- texmex::declust(y = na.exclude(d[, element_col_name]), r = r, threshold = threshold)
+      if (print_summary) {
+        cat("Station:", paste0("", station, ""), "\n \n")
+        cat("Threshold", obj$threshold, "\n")
+        cat("Declustering using the intervals method, run length", obj$r, "\n")
+        cat("Identified", obj$nClusters, "clusters.", "\n")
+        cat("------------------------------------------------------", "\n \n")
+      } else {
+        plts[[i]] <- obj %>%
+          ggplot2::ggplot(xlab = xlab, ylab = ylab, main = stations[i])
+      }
+    }
+    if (!print_summary) {
+      patchwork::wrap_plots(plts, ncol = ncol)
+    }
+  }
+  else {
+    obj <- texmex::declust(y = na.exclude(data[, element_col_name]), r = r, threshold = threshold)
+    if (print_summary) {
+      cat("Threshold", obj$threshold, "\n")
+      cat("Declustering using the intervals method, run length", obj$r, "\n")
+      cat("Identified", obj$nClusters, "clusters.", "\n")
+    } else {
+      obj %>% ggplot2::ggplot(xlab = xlab, ylab = ylab)
+    }
+  }
+}
