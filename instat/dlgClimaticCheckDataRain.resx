@@ -370,7 +370,7 @@
     <value>49, 13</value>
   </data>
   <data name="lblRainDays.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>23</value>
   </data>
   <data name="lblRainDays.Text" xml:space="preserve">
     <value>rain days</value>
@@ -400,7 +400,7 @@
     <value>96, 13</value>
   </data>
   <data name="lblSkewnessWeight.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
+    <value>31</value>
   </data>
   <data name="lblSkewnessWeight.Text" xml:space="preserve">
     <value>Skewness Weight:</value>
@@ -416,54 +416,6 @@
   </data>
   <data name="&gt;&gt;lblSkewnessWeight.ZOrder" xml:space="preserve">
     <value>11</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLogicalColumns.Name" xml:space="preserve">
-    <value>ucrChkLogicalColumns</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLogicalColumns.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLogicalColumns.Parent" xml:space="preserve">
-    <value>grpLogicalCalculatedColumns</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLogicalColumns.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCalculatedColumns.Name" xml:space="preserve">
-    <value>ucrChkCalculatedColumns</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCalculatedColumns.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCalculatedColumns.Parent" xml:space="preserve">
-    <value>grpLogicalCalculatedColumns</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCalculatedColumns.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="grpLogicalCalculatedColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 385</value>
-  </data>
-  <data name="grpLogicalCalculatedColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 55</value>
-  </data>
-  <data name="grpLogicalCalculatedColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="grpLogicalCalculatedColumns.Text" xml:space="preserve">
-    <value>Include in Original Data</value>
-  </data>
-  <data name="&gt;&gt;grpLogicalCalculatedColumns.Name" xml:space="preserve">
-    <value>grpLogicalCalculatedColumns</value>
-  </data>
-  <data name="&gt;&gt;grpLogicalCalculatedColumns.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpLogicalCalculatedColumns.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpLogicalCalculatedColumns.ZOrder" xml:space="preserve">
-    <value>38</value>
   </data>
   <data name="ucrChkLogicalColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 21</value>
@@ -507,6 +459,30 @@
   <data name="&gt;&gt;ucrChkCalculatedColumns.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="grpLogicalCalculatedColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 385</value>
+  </data>
+  <data name="grpLogicalCalculatedColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>399, 55</value>
+  </data>
+  <data name="grpLogicalCalculatedColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="grpLogicalCalculatedColumns.Text" xml:space="preserve">
+    <value>Include in Original Data</value>
+  </data>
+  <data name="&gt;&gt;grpLogicalCalculatedColumns.Name" xml:space="preserve">
+    <value>grpLogicalCalculatedColumns</value>
+  </data>
+  <data name="&gt;&gt;grpLogicalCalculatedColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLogicalCalculatedColumns.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpLogicalCalculatedColumns.ZOrder" xml:space="preserve">
+    <value>38</value>
+  </data>
   <data name="lblCoeff.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -520,7 +496,7 @@
     <value>35, 13</value>
   </data>
   <data name="lblCoeff.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
+    <value>35</value>
   </data>
   <data name="lblCoeff.Text" xml:space="preserve">
     <value>Coeff:</value>
@@ -547,7 +523,7 @@
     <value>75, 23</value>
   </data>
   <data name="cmdOmitMonths.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
+    <value>28</value>
   </data>
   <data name="cmdOmitMonths.Text" xml:space="preserve">
     <value>Omit Months</value>
@@ -577,7 +553,7 @@
     <value>57, 13</value>
   </data>
   <data name="lblThreshold.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+    <value>33</value>
   </data>
   <data name="lblThreshold.Text" xml:space="preserve">
     <value>Threshold:</value>
@@ -607,7 +583,7 @@
     <value>130, 13</value>
   </data>
   <data name="lblMissingThreshold.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
+    <value>25</value>
   </data>
   <data name="lblMissingThreshold.Text" xml:space="preserve">
     <value>Missing Values Threshold:</value>
@@ -637,7 +613,7 @@
     <value>23, 13</value>
   </data>
   <data name="lblThresholdmm.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
+    <value>27</value>
   </data>
   <data name="lblThresholdmm.Text" xml:space="preserve">
     <value>mm</value>
@@ -661,7 +637,7 @@
     <value>54, 21</value>
   </data>
   <data name="ucrInputThreshold.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+    <value>26</value>
   </data>
   <data name="&gt;&gt;ucrInputThreshold.Name" xml:space="preserve">
     <value>ucrInputThreshold</value>
@@ -682,7 +658,7 @@
     <value>54, 21</value>
   </data>
   <data name="ucrInputThresholdValue.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+    <value>34</value>
   </data>
   <data name="&gt;&gt;ucrInputThresholdValue.Name" xml:space="preserve">
     <value>ucrInputThresholdValue</value>
@@ -703,7 +679,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudCoeff.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
+    <value>36</value>
   </data>
   <data name="&gt;&gt;ucrNudCoeff.Name" xml:space="preserve">
     <value>ucrNudCoeff</value>
@@ -724,7 +700,7 @@
     <value>113, 20</value>
   </data>
   <data name="ucrChkOmitZero.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+    <value>30</value>
   </data>
   <data name="&gt;&gt;ucrChkOmitZero.Name" xml:space="preserve">
     <value>ucrChkOmitZero</value>
@@ -745,7 +721,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudSkewnessWeight.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
+    <value>32</value>
   </data>
   <data name="&gt;&gt;ucrNudSkewnessWeight.Name" xml:space="preserve">
     <value>ucrNudSkewnessWeight</value>
@@ -766,7 +742,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudWetDays.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
+    <value>22</value>
   </data>
   <data name="&gt;&gt;ucrNudWetDays.Name" xml:space="preserve">
     <value>ucrNudWetDays</value>
@@ -829,7 +805,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkOutlier.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+    <value>29</value>
   </data>
   <data name="&gt;&gt;ucrChkOutlier.Name" xml:space="preserve">
     <value>ucrChkOutlier</value>
@@ -850,7 +826,7 @@
     <value>92, 20</value>
   </data>
   <data name="ucrChkDryMonth.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+    <value>24</value>
   </data>
   <data name="&gt;&gt;ucrChkDryMonth.Name" xml:space="preserve">
     <value>ucrChkDryMonth</value>
@@ -871,7 +847,7 @@
     <value>92, 20</value>
   </data>
   <data name="ucrChkWetDays.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
+    <value>21</value>
   </data>
   <data name="&gt;&gt;ucrChkWetDays.Name" xml:space="preserve">
     <value>ucrChkWetDays</value>
@@ -943,7 +919,7 @@
     <value>40, 20</value>
   </data>
   <data name="ucrInputSameValue.TabIndex" type="System.Int32, mscorlib">
-    <value>39</value>
+    <value>20</value>
   </data>
   <data name="&gt;&gt;ucrInputSameValue.Name" xml:space="preserve">
     <value>ucrInputSameValue</value>
@@ -973,7 +949,7 @@
     <value>18, 20</value>
   </data>
   <data name="lblGreater.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
+    <value>19</value>
   </data>
   <data name="lblGreater.Text" xml:space="preserve">
     <value>&gt;</value>
@@ -1141,7 +1117,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
+    <value>38</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
