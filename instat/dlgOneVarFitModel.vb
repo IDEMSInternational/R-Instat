@@ -29,6 +29,7 @@ Public Class dlgOneVarFitModel
     Private bResetFittingOptions As Boolean = False
     Private bResetFitModDisplay As Boolean = False
     Private bRCodeSet As Boolean = True
+    Private ReadOnly strSeparator As String = "---------------------"
 
     Private Sub dlgOneVarFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -92,7 +93,7 @@ Public Class dlgOneVarFitModel
         ucrSaveModel.SetIsComboBox()
         ucrSaveModel.SetAssignToIfUncheckedValue("last_model")
 
-        ucrInputComboTests.SetItems({"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", "---------------------", "Bartel", "br", "runs", "Sen", "serial corr", "snh", "---------------------", "ad", "cvm", "lillie", "pearson", "sf"})
+        ucrInputComboTests.SetItems({"binomial", "proportion", "sign", "t", "Wilcoxon", "Z", strSeparator, "Bartel", "br", "runs", "Sen", "serial corr", "snh", strSeparator, "ad", "cvm", "lillie", "pearson", "sf"})
         ucrInputComboTests.SetDropDownStyleAsNonEditable()
 
         ucrInputComboEstimate.SetItems({"mean", "median", "normal", "quantile", "sd", "variance"})
@@ -964,7 +965,7 @@ Public Class dlgOneVarFitModel
         AddAsNumeric()
         EstimatesAsNumeric()
         AddFactorLevels()
-        If ucrInputComboTests.GetText = "---------------------" Then
+        If ucrInputComboTests.GetText = strSeparator Then
             ucrInputComboTests.cboInput.SelectedIndex = 0
         End If
     End Sub
