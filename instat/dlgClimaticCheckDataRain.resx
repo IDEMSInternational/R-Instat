@@ -400,7 +400,7 @@
     <value>96, 13</value>
   </data>
   <data name="lblSkewnessWeight.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
+    <value>29</value>
   </data>
   <data name="lblSkewnessWeight.Text" xml:space="preserve">
     <value>Skewness Weight:</value>
@@ -466,7 +466,7 @@
     <value>399, 55</value>
   </data>
   <data name="grpLogicalCalculatedColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
+    <value>35</value>
   </data>
   <data name="grpLogicalCalculatedColumns.Text" xml:space="preserve">
     <value>Include in Original Data</value>
@@ -496,7 +496,7 @@
     <value>35, 13</value>
   </data>
   <data name="lblCoeff.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
+    <value>33</value>
   </data>
   <data name="lblCoeff.Text" xml:space="preserve">
     <value>Coeff:</value>
@@ -523,7 +523,7 @@
     <value>75, 23</value>
   </data>
   <data name="cmdOmitMonths.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
+    <value>26</value>
   </data>
   <data name="cmdOmitMonths.Text" xml:space="preserve">
     <value>Omit Months</value>
@@ -553,7 +553,7 @@
     <value>57, 13</value>
   </data>
   <data name="lblThreshold.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+    <value>31</value>
   </data>
   <data name="lblThreshold.Text" xml:space="preserve">
     <value>Threshold:</value>
@@ -613,7 +613,7 @@
     <value>23, 13</value>
   </data>
   <data name="lblThresholdmm.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
+    <value>25</value>
   </data>
   <data name="lblThresholdmm.Text" xml:space="preserve">
     <value>mm</value>
@@ -637,7 +637,7 @@
     <value>54, 21</value>
   </data>
   <data name="ucrInputThreshold.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+    <value>24</value>
   </data>
   <data name="&gt;&gt;ucrInputThreshold.Name" xml:space="preserve">
     <value>ucrInputThreshold</value>
@@ -658,7 +658,7 @@
     <value>54, 21</value>
   </data>
   <data name="ucrInputThresholdValue.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
+    <value>32</value>
   </data>
   <data name="&gt;&gt;ucrInputThresholdValue.Name" xml:space="preserve">
     <value>ucrInputThresholdValue</value>
@@ -679,7 +679,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudCoeff.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
+    <value>34</value>
   </data>
   <data name="&gt;&gt;ucrNudCoeff.Name" xml:space="preserve">
     <value>ucrNudCoeff</value>
@@ -700,7 +700,7 @@
     <value>113, 20</value>
   </data>
   <data name="ucrChkOmitZero.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+    <value>28</value>
   </data>
   <data name="&gt;&gt;ucrChkOmitZero.Name" xml:space="preserve">
     <value>ucrChkOmitZero</value>
@@ -721,7 +721,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudSkewnessWeight.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
+    <value>30</value>
   </data>
   <data name="&gt;&gt;ucrNudSkewnessWeight.Name" xml:space="preserve">
     <value>ucrNudSkewnessWeight</value>
@@ -805,7 +805,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkOutlier.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+    <value>27</value>
   </data>
   <data name="&gt;&gt;ucrChkOutlier.Name" xml:space="preserve">
     <value>ucrChkOutlier</value>
@@ -1063,7 +1063,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
+    <value>36</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
