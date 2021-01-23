@@ -171,6 +171,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsCompareTwoOptionsLines.vb" />
     <Compile Include="clsCompareTwoOptionsPoints.vb" />
@@ -2411,6 +2412,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>

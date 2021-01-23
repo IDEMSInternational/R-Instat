@@ -72,6 +72,7 @@ Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
         Dim bClose As Boolean = False
+
         ' Note: this must change when R version changes
         Dim strRPackagesPath As String = Path.Combine(My.Computer.FileSystem.SpecialDirectories.MyDocuments, "R\win-library\3.6")
 
@@ -161,8 +162,6 @@ Public Class frmMain
                 dlgImportDataset.strFileToOpenOn = Environment.GetCommandLineArgs(1)
                 dlgImportDataset.bStartOpenDialog = False
                 dlgImportDataset.ShowDialog()
-            Else
-                MsgBox("This file extension is not associated with R-Instat.")
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -2275,8 +2274,6 @@ Public Class frmMain
     Private Sub mnuStructuredSurvivalDefine_Click(sender As Object, e As EventArgs) Handles mnuStructuredSurvivalDefine.Click
         dlgSurvivalObject.ShowDialog()
     End Sub
-
-End Class
 
     Private Sub mnuClimaticNCMPIndices_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPIndices.Click
         dlgClimaticNCMPIndices.ShowDialog()
