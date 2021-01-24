@@ -623,7 +623,6 @@ Public Class dlgClimaticCheckDataTemperature
 
     Private Sub ucrReceiverMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMonth.ControlValueChanged, ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged
         GroupByMonth()
-        EnableOrDisableDifferenceControls()
     End Sub
 
     Private Sub ucrSelectorTemperature_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorTemperature.ControlValueChanged
@@ -638,6 +637,7 @@ Public Class dlgClimaticCheckDataTemperature
 
     Private Sub ucrReceiverElement1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged
         FilterFunc()
+        EnableOrDisableDifferenceControls()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudRangeElement1Min.ControlContentsChanged, ucrNudRangeElement1Max.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudJump.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrChkRangeElement1.ControlContentsChanged, ucrChkRangeElement2.ControlContentsChanged, ucrChkJump.ControlContentsChanged, ucrChkDifference.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged
