@@ -153,6 +153,10 @@ Public Class ucrNud
         End If
     End Function
 
+    Public Function IsEmpty() As Boolean
+        Return nudUpDown.Text = ""
+    End Function
+
     Public Overrides Sub SetToValue(objTemp As Object)
         Dim dNewValue As Decimal
         If objTemp Is Nothing OrElse objTemp.ToString() = "" Then
