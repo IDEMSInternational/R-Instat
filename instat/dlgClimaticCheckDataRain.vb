@@ -300,7 +300,7 @@ Public Class dlgClimaticCheckDataRain
         clsListSubCalc.SetRCommand("list")
 
         clsManipList.SetRCommand("list")
-        clsManipList.AddParameter("manip1", clsRFunctionParameter:=clsGroupByFunc, bIncludeArgumentName:=False)
+        clsManipList.AddParameter("manip1", clsRFunctionParameter:=clsGroupByFunc, bIncludeArgumentName:=False, iPosition:=0)
 
         'Large
         clsLargeOperator.SetOperation(">")
@@ -317,7 +317,7 @@ Public Class dlgClimaticCheckDataRain
         clsLargeTestCalcFunc.SetRCommand("instat_calculation$new")
         clsLargeTestCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsLargeTestCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsOrLargeOperator, iPosition:=1)
-        clsLargeTestCalcFunc.AddParameter("result_name", Chr(34) & strLargeTest & Chr(34))
+        clsLargeTestCalcFunc.AddParameter("result_name", Chr(34) & strLargeTest & Chr(34), iPosition:=3)
         clsLargeTestCalcFunc.SetAssignTo("large_test_calculation")
 
         'Same
@@ -350,18 +350,18 @@ Public Class dlgClimaticCheckDataRain
         clsSameCalcFunc.SetRCommand("instat_calculation$new")
         clsSameCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSameCalcFunc.AddParameter("function_exp", clsRFunctionParameter:=clsRepFunc, iPosition:=1)
-        clsSameCalcFunc.AddParameter("result_name", Chr(34) & strSameCalc & Chr(34))
+        clsSameCalcFunc.AddParameter("result_name", Chr(34) & strSameCalc & Chr(34), iPosition:=3)
         clsSameCalcFunc.SetAssignTo("same_calculation")
 
         clsSameTestFunc.SetRCommand("instat_calculation$new")
         clsSameTestFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsSameTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsAndOperator, iPosition:=1)
         clsSameTestFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsSameList, iPosition:=2)
-        clsSameTestFunc.AddParameter("result_name", Chr(34) & strSameTestCalc & Chr(34))
+        clsSameTestFunc.AddParameter("result_name", Chr(34) & strSameTestCalc & Chr(34), iPosition:=3)
         clsSameTestFunc.SetAssignTo("same_test_calculation")
 
         clsSameList.SetRCommand("list")
-        clsSameList.AddParameter("sub1", clsRFunctionParameter:=clsSameCalcFunc, bIncludeArgumentName:=False)
+        clsSameList.AddParameter("sub1", clsRFunctionParameter:=clsSameCalcFunc, bIncludeArgumentName:=False, iPosition:=0)
 
         'Wet
         clsEqualOperator.SetOperation("==")
@@ -395,18 +395,18 @@ Public Class dlgClimaticCheckDataRain
         clsCumulativeCalcFunc.SetRCommand("instat_calculation$new")
         clsCumulativeCalcFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsCumulativeCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsMinusOperator, iPosition:=1)
-        clsCumulativeCalcFunc.AddParameter("result_name", Chr(34) & strCumulativeCalc & Chr(34))
+        clsCumulativeCalcFunc.AddParameter("result_name", Chr(34) & strCumulativeCalc & Chr(34), iPosition:=3)
         clsCumulativeCalcFunc.SetAssignTo("cumulative_calculation")
 
         clsCumulativeTestFunc.SetRCommand("instat_calculation$new")
         clsCumulativeTestFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsCumulativeTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsSecondGreaterOperator, iPosition:=1)
         clsCumulativeTestFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsCumulativeList, iPosition:=2)
-        clsCumulativeTestFunc.AddParameter("result_name", Chr(34) & strCumulativeTestCalc & Chr(34))
+        clsCumulativeTestFunc.AddParameter("result_name", Chr(34) & strCumulativeTestCalc & Chr(34), iPosition:=3)
         clsCumulativeTestFunc.SetAssignTo("cumulative_test_calculation")
 
         clsCumulativeList.SetRCommand("list")
-        clsCumulativeList.AddParameter("sub1", clsRFunctionParameter:=clsCumulativeCalcFunc, bIncludeArgumentName:=False)
+        clsCumulativeList.AddParameter("sub1", clsRFunctionParameter:=clsCumulativeCalcFunc, bIncludeArgumentName:=False, iPosition:=0)
 
         clsIfelseFunction.SetRCommand("ifelse")
         clsIfelseFunction.AddParameter("test", clsRFunctionParameter:=clsIsNaFunction, iPosition:=0)
@@ -424,11 +424,10 @@ Public Class dlgClimaticCheckDataRain
         clsGroupByMonthYearFunction.SetAssignTo("grouping_month_year")
 
         clsGroupByListFunc.SetRCommand("list")
-        clsGroupByListFunc.AddParameter("group", clsRFunctionParameter:=clsGroupByMonthYearFunction, bIncludeArgumentName:=False)
+        clsGroupByListFunc.AddParameter("group", clsRFunctionParameter:=clsGroupByMonthYearFunction, bIncludeArgumentName:=False, iPosition:=0)
 
         clsListForOutlierManipulations.SetRCommand("list")
         clsListForOutlierManipulations.AddParameter("sub1", clsRFunctionParameter:=clsGroupByMonth, bIncludeArgumentName:=False, iPosition:=0)
-        'clsListForOutlierManipulations.AddParameter("sub2", clsRFunctionParameter:=clsRainyDaysFunc, bIncludeArgumentName:=False, iPosition:=1)
 
         'Rainy Days Operator
         clsRainyDaysOperator.SetOperation(">")
@@ -462,12 +461,12 @@ Public Class dlgClimaticCheckDataRain
         clsUpperOutlierlimitTestFunc.SetRCommand("instat_calculation$new")
         clsUpperOutlierlimitTestFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsUpperOutlierlimitTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsUpperOutlierOperator, iPosition:=1)
-        clsUpperOutlierlimitTestFunc.AddParameter("result_name", Chr(34) & strUpperOutlierTest & Chr(34))
-        clsUpperOutlierlimitTestFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsUpperListOutlier)
+        clsUpperOutlierlimitTestFunc.AddParameter("result_name", Chr(34) & strUpperOutlierTest & Chr(34), iPosition:=3)
+        clsUpperOutlierlimitTestFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsUpperListOutlier, iPosition:=4)
         clsUpperOutlierlimitTestFunc.SetAssignTo("outlier_upper_test_calculation")
 
         clsUpperListOutlier.SetRCommand("list")
-        clsUpperListOutlier.AddParameter("sub1", clsRFunctionParameter:=clsUpperOutlierLimitValueCalcFunc, bIncludeArgumentName:=False)
+        clsUpperListOutlier.AddParameter("sub1", clsRFunctionParameter:=clsUpperOutlierLimitValueCalcFunc, bIncludeArgumentName:=False, iPosition:=0)
 
         'lower Outlier Limit function
         clsLowerOutlierLimitValueCalcFunc.SetRCommand("instat_calculation$new")
@@ -478,7 +477,7 @@ Public Class dlgClimaticCheckDataRain
 
         clsLowerOutlierLimitFunc.SetRCommand("summary_outlier_limit")
         clsLowerOutlierLimitFunc.bToScriptAsRString = True
-        clsLowerOutlierLimitFunc.AddParameter("bskewedcalc", "FALSE")
+        clsLowerOutlierLimitFunc.AddParameter("bskewedcalc", "FALSE", iPosition:=1)
 
         'Outlier Operator 
         clsLowerOutlierOperator.SetOperation("<")
@@ -489,15 +488,15 @@ Public Class dlgClimaticCheckDataRain
         clsLowerOutlierlimitTestFunc.SetRCommand("instat_calculation$new")
         clsLowerOutlierlimitTestFunc.AddParameter("type", Chr(34) & "calculation" & Chr(34), iPosition:=0)
         clsLowerOutlierlimitTestFunc.AddParameter("function_exp", clsROperatorParameter:=clsLowerOutlierOperator, iPosition:=1)
-        clsLowerOutlierlimitTestFunc.AddParameter("result_name", Chr(34) & strLowerOutlierTest & Chr(34))
-        clsLowerOutlierlimitTestFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsLowerListOutlier)
+        clsLowerOutlierlimitTestFunc.AddParameter("result_name", Chr(34) & strLowerOutlierTest & Chr(34), iPosition:=3)
+        clsLowerOutlierlimitTestFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clsLowerListOutlier, iPosition:=4)
         clsLowerOutlierlimitTestFunc.SetAssignTo("outlier_lower_test_calculation")
 
         clsLowerListOutlier.SetRCommand("list")
-        clsLowerListOutlier.AddParameter("sub1", clsRFunctionParameter:=clsLowerOutlierLimitValueCalcFunc, bIncludeArgumentName:=False)
+        clsLowerListOutlier.AddParameter("sub1", clsRFunctionParameter:=clsLowerOutlierLimitValueCalcFunc, bIncludeArgumentName:=False, iPosition:=0)
 
         clsOutliersOperator.SetOperation(",")
-        clsOutliersOperator.AddParameter("sub1", clsRFunctionParameter:=clsUpperOutlierlimitTestFunc, bIncludeArgumentName:=False)
+        clsOutliersOperator.AddParameter("sub1", clsRFunctionParameter:=clsUpperOutlierlimitTestFunc, bIncludeArgumentName:=False, iPosition:=0)
 
         'Removed this sub_claculation because lower limit is not of interest for rainfall data.
         'clsOutliersOperator.AddParameter("sub2", clsRFunctionParameter:=clsLowerOutlierlimitTestFunc, bIncludeArgumentName:=False)
@@ -511,7 +510,6 @@ Public Class dlgClimaticCheckDataRain
         clsFilterMonthFunction.SetRCommand("instat_calculation$new")
         clsFilterMonthFunction.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsFilterMonthFunction.AddParameter("function_exp", clsROperatorParameter:=clsInOperator, iPosition:=1)
-        clsFilterMonthFunction.AddParameter("manipulations", clsRFunctionParameter:=clsGroupByListFunc, iPosition:=3)
         clsFilterMonthFunction.SetAssignTo("filter_months")
 
         clsInOperator.SetOperation("%in%")
@@ -531,7 +529,7 @@ Public Class dlgClimaticCheckDataRain
         clsDryMonthCalculationFunc.SetAssignTo("dry_month_calculation")
 
         clsListCalcFunction.SetRCommand("list")
-        clsListCalcFunction.AddParameter("group", clsRFunctionParameter:=clsFilterMonthFunction, bIncludeArgumentName:=False)
+        clsListCalcFunction.AddParameter("year_month_grouping", clsRFunctionParameter:=clsGroupByMonthYearFunction, bIncludeArgumentName:=False, iPosition:=1)
 
         clsDryMonthEqualOperator.SetOperation("==")
         clsDryMonthEqualOperator.AddParameter("sum", clsRFunctionParameter:=clsSumFuction, iPosition:=0)
@@ -566,12 +564,12 @@ Public Class dlgClimaticCheckDataRain
         clsDryMonthTestCalculationFunc.SetAssignTo("dry_month_test_calculation")
 
         clsListTestFunction.SetRCommand("list")
-        clsListTestFunction.AddParameter("sub1", clsRFunctionParameter:=clsDryMonthCalculationFunc, bIncludeArgumentName:=False)
+        clsListTestFunction.AddParameter("sub1", clsRFunctionParameter:=clsDryMonthCalculationFunc, bIncludeArgumentName:=False, iPosition:=0)
 
         ' Run Calc function
         clsRunCalcFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$run_instat_calculation")
-        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc)
-        clsRunCalcFunc.AddParameter("display", "FALSE")
+        clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsRainFilterFunc, iPosition:=0)
+        clsRunCalcFunc.AddParameter("display", "FALSE", iPosition:=1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunc)
     End Sub
 
@@ -596,7 +594,6 @@ Public Class dlgClimaticCheckDataRain
         ucrChkOutlier.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("outlier", clsOutliersOperator, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrChkDryMonth.AddAdditionalCodeParameterPair(clsListSubCalc, New RParameter("dry_month", clsDryMonthCalculationFunc, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
 
-        'ucrChkCalculatedColumns.AddAdditionalCodeParameterPair(, New RParameter("save"), iAdditionalPairNo:=1)
         ucrChkCalculatedColumns.AddAdditionalCodeParameterPair(clsUpperOutlierLimitValueCalcFunc, New RParameter("save"), iAdditionalPairNo:=1)
         ucrChkCalculatedColumns.AddAdditionalCodeParameterPair(clsLowerOutlierLimitValueCalcFunc, New RParameter("save"), iAdditionalPairNo:=2)
 
@@ -604,13 +601,11 @@ Public Class dlgClimaticCheckDataRain
         ucrChkLogicalColumns.AddAdditionalCodeParameterPair(clsCumulativeTestFunc, New RParameter("save"), iAdditionalPairNo:=2)
         ucrChkLogicalColumns.AddAdditionalCodeParameterPair(clsUpperOutlierlimitTestFunc, New RParameter("save"), iAdditionalPairNo:=3)
         ucrChkLogicalColumns.AddAdditionalCodeParameterPair(clsLowerOutlierlimitTestFunc, New RParameter("save"), iAdditionalPairNo:=4)
-        'ucrChkLogicalColumns.AddAdditionalCodeParameterPair(clsDryMonthCalculationFunc, New RParameter("save"), iAdditionalPairNo:=5)
 
         ucrReceiverElement.SetRCode(clsLargeOperator, bReset)
         ucrNudLarge.SetRCode(clsLargeOperator, bReset)
         ucrNudSame.SetRCode(clsFirstGreaterSameOperator, bReset)
         ucrNudWetDays.SetRCode(clsSecondGreaterOperator, bReset)
-        'ucrReceiverMonth.SetRCode(clsNotEqualToOperator, bReset)
 
         ucrChkLarge.SetRCode(clsOrOperator, bReset)
         ucrChkSame.SetRCode(clsOrOperator, bReset)
@@ -630,23 +625,11 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverElement.IsEmpty AndAlso ((ucrChkLarge.Checked AndAlso ucrNudLarge.GetText <> "") OrElse (ucrChkSame.Checked AndAlso ucrNudSame.GetText <> "") OrElse (ucrChkWetDays.Checked AndAlso ucrNudWetDays.GetText <> "") OrElse (ucrChkOutlier.Checked AndAlso ucrNudSkewnessWeight.GetText <> "" AndAlso ucrNudCoeff.GetText <> "") OrElse (ucrChkDryMonth.Checked AndAlso Not ucrInputThreshold.IsEmpty AndAlso Not ucrReceiverMonth.IsEmpty)) Then
-            ucrBase.OKEnabled(True)
+        If ucrReceiverElement.IsEmpty OrElse ((ucrChkLarge.Checked AndAlso ucrNudLarge.IsEmpty) OrElse (ucrChkSame.Checked AndAlso (ucrNudSame.IsEmpty OrElse ucrInputSameValue.IsEmpty)) OrElse (ucrChkWetDays.Checked AndAlso ucrNudWetDays.IsEmpty) OrElse (ucrChkOutlier.Checked AndAlso (ucrNudSkewnessWeight.IsEmpty OrElse ucrNudCoeff.IsEmpty)) OrElse (ucrChkDryMonth.Checked AndAlso (ucrInputThreshold.IsEmpty OrElse ucrReceiverMonth.IsEmpty))) OrElse ucrChkOutlier.Checked AndAlso (ucrChkOmitZero.Checked AndAlso ucrInputThresholdValue.IsEmpty) Then
+            ucrBase.OKEnabled(False)
         Else
-            ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(True)
         End If
-        If ucrChkOutlier.Checked AndAlso ucrChkOmitZero.Checked AndAlso ucrInputThresholdValue.IsEmpty Then
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-
-    Private Sub CalculatedFromCalc()
-        clsLargeTestCalcFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
-        clsSameCalcFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "= " & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
-        clsCumulativeCalcFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "= " & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
-        clsUpperOutlierlimitTestFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "= " & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
-        clsLowerOutlierlimitTestFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "= " & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
-        clsLowerOutlierLimitValueCalcFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "= " & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
     End Sub
 
     Private Sub GroupByOptions()
@@ -674,50 +657,40 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub cmdOmitMonths_Click(sender As Object, e As EventArgs) Handles cmdOmitMonths.Click
-        sdgSelectMonth.SetRCode(clsNewInOperator:=clsInOperator, ucrNewReceiverMonth:=ucrReceiverMonth, bReset:=bResetSubdialog)
+        sdgSelectMonth.SetRCode(clsNewInOperator:=clsInOperator, clsNewListCalcFunction:=clsListCalcFunction, clsNewFilterMonthFunction:=clsFilterMonthFunction, ucrNewReceiverMonth:=ucrReceiverMonth, bReset:=bResetSubdialog)
         sdgSelectMonth.ShowDialog()
         bResetSubdialog = True
-    End Sub
-
-    Private Sub RainyDays()
-        clsRainyDaysFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
-        clsDryMonthCalculationFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
-    End Sub
-
-    Private Sub DryMonths()
-        clsDryMonthTestCalculationFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverMonth.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
-    End Sub
-
-    Private Sub OutlierLimitCalc()
-        clsUpperOutlierLimitValueCalcFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         setRcodeForControls(True)
         TestOkEnabled()
+        AutoFillRainColumn()
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverMonth.ControlValueChanged, ucrReceiverYear.ControlValueChanged, ucrReceiverElement.ControlValueChanged
         clsNotOperator.AddParameter("Month", ucrReceiverMonth.GetVariableNames(False), iPosition:=1)
+        clsDryMonthTestCalculationFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverMonth.GetVariableNames & "," & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
         GroupByOptions()
         GroupByMonth()
-        DryMonths()
     End Sub
 
-    Private Sub ucrSelectorRain_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRain.ControlValueChanged
+    Private Sub ucrSelectorRain_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRain.ControlValueChanged, ucrReceiverElement.ControlValueChanged
         strCurrDataName = Chr(34) & ucrSelectorRain.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34)
+        clsRainyDaysFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
+        clsDryMonthCalculationFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
+        clsUpperOutlierLimitValueCalcFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
+        clsLargeTestCalcFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "=" & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
+        clsSameCalcFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "= " & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
+        clsCumulativeCalcFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "= " & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
+        clsUpperOutlierlimitTestFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "= " & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
+        clsLowerOutlierlimitTestFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "= " & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
+        clsLowerOutlierLimitValueCalcFunc.AddParameter("calculated_from", "list(" & strCurrDataName & "= " & ucrReceiverElement.GetVariableNames & ")", iPosition:=2)
+
         GroupByOptions()
         GroupByMonth()
-        RainyDays()
-        OutlierLimitCalc()
         AutoFillRainColumn()
-    End Sub
-
-    Private Sub ucrReceiverElement_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlValueChanged, ucrNudLarge.ControlValueChanged
-        RainyDays()
-        OutlierLimitCalc()
-        CalculatedFromCalc()
     End Sub
 
     Private Sub AutoFillRainColumn()
@@ -732,7 +705,7 @@ Public Class dlgClimaticCheckDataRain
         End If
     End Sub
 
-    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrChkLarge.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkWetDays.ControlContentsChanged, ucrNudLarge.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudWetDays.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged, ucrChkOmitZero.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged, ucrChkDryMonth.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged
+    Private Sub ucrReceiverElement_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement.ControlContentsChanged, ucrChkLarge.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkWetDays.ControlContentsChanged, ucrNudLarge.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudWetDays.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged, ucrChkOmitZero.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged, ucrChkDryMonth.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged, ucrReceiverMonth.ControlContentsChanged, ucrInputSameValue.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
