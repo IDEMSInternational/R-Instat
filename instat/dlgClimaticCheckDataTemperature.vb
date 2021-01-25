@@ -298,7 +298,6 @@ Public Class dlgClimaticCheckDataTemperature
         clsRunCalcFunc.AddParameter("calc", clsRFunctionParameter:=clsFilterFunc, iPosition:=0)
         clsRunCalcFunc.AddParameter("display", "FALSE")
         ucrBase.clsRsyntax.SetBaseRFunction(clsRunCalcFunc)
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
@@ -613,7 +612,6 @@ Public Class dlgClimaticCheckDataTemperature
     Private Sub EnableOrDisableDifferenceControls()
         If ucrReceiverElement1.IsEmpty OrElse ucrReceiverElement2.IsEmpty Then
             ucrChkDifference.Enabled = False
-            ucrChkDifference.Checked = False
             ucrNudDifference.Enabled = False
         Else
             ucrChkDifference.Enabled = True
