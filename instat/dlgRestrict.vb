@@ -52,7 +52,6 @@ Public Class dlgRestrict
             SetDefaults()
             bFirstLoad = False
         End If
-        SetFilterSubsetStatus()
         SetDefaultDataFrame()
         If bAutoOpenSubDialog Then
             OpenNewFilterSubDialog()
