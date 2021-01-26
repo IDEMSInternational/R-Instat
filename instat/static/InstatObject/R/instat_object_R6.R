@@ -747,6 +747,11 @@ DataBook$set("public", "get_current_filter", function(data_name) {
 }
 )
 
+DataBook$set("public", "get_current_filter_name", function(data_name) {
+  self$get_data_objects(data_name)$get_current_filter()$name
+}
+)
+
 DataBook$set("public", "get_filter_names", function(data_name, as_list = FALSE, include = list(), exclude = list(), excluded_items = c()) {
   if(missing(data_name)) {
     #TODO what to do with excluded_items in this case
