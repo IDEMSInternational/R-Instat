@@ -1270,10 +1270,10 @@ in_top_n <- function(x, n = 10, wt, fun = sum) {
   if(!missing(wt)) {
     dat$wt <- wt
     dat <- dat %>% 
-      group_by(x) %>%
-      summarise(fq = as.function(fun)(na.omit(wt))) %>% arrange(-fq)
+      dplyr::group_by(x) %>%
+      dplyr::summarise(fq = as.function(fun)(na.omit(wt))) %>% dplyr::arrange(-fq)
   }
-  else dat <- dat %>% count(x, sort = TRUE, name = "fq")
+  else dat <- dat %>% dplyr::count(x, sort = TRUE, name = "fq")
   return(x %in% dat$x[1:n])
 }
 
@@ -1563,5 +1563,719 @@ make_factor <- function(x, ordered = is.ordered(x)) {
     factor(x, levels = unique(x), ordered = ordered)
   } else {
     factor(x, levels = as.character(unique(x)), ordered = ordered)
+  }
+}
+
+
+
+# wwr_export function is meant to reshape data into formats required by WMO for submission of climatic data
+# this gives Yearly data records with monthly and annual data for a particular year:
+wwr_export <- function(data, year, month, mean_station_pressure, mean_sea_level_pressure, 
+                       mean_temp, total_precip, mean_max_temp, mean_min_temp, mean_rel_hum, link, link_by,
+                       station_data, wmo_number, latitude, longitude, country_name, station_name, 
+                       height_station, height_barometer, wigos_identifier, folder) {
+  
+  stopifnot(link_by %in% c("wmo_number", "station_name"))
+  if (any(nchar(station_data[[year]]) != 4)) stop("year must be a 4 digit number.")
+  if (!missing(wmo_number)) {
+    # Convert to character to avoid incorrect 
+    if (is.factor(station_data[[wmo_number]])) station_data[[wmo_number]] <- as.character(station_data[[wmo_number]])
+    if (any(is.na(as.numeric(station_data[[wmo_number]])))) stop("wmo_number must not contain missing values and must be a number.")
+    if (any(nchar(as.character(station_data[[wmo_number]])) > 5, na.rm = TRUE)) stop("wmo_number must be no more than 5 digits.")
+  }
+  
+  if (link_by == "wmo_number") {
+    station_link <- wmo_number
+  } else station_link <- station_name
+  if (!all(unique(data[[link]]) %in% station_data[[station_link]])) {
+    stop("station_data is missing information for the following stations
+         found in the data:",
+         paste(which(!unique(data[[link]]) %in% station_data[[wmo_number]]), collapse = ", "))
+  }
+  if (!missing(wmo_number)) {
+    print(station_data[[wmo_number]])
+    station_data[[wmo_number]] <- as.numeric(station_data[[wmo_number]])
+    print(station_data[[wmo_number]])
+    station_data[[wmo_number]] <- ifelse(is.na(station_data[[wmo_number]]),
+                                         "", sprintf("%05d", station_data[[wmo_number]]))
+  } else {
+    wmo_number <- ".wmo_number"
+    station_data[[wmo_number]] <- ""
+  }
+  station_data[[latitude]] <- dd_to_dms(station_data[[latitude]], lat = TRUE)
+  station_data[[longitude]] <- dd_to_dms(station_data[[longitude]], lat = FALSE)
+  if (!missing(height_station)) {
+    station_data[[height_station]] <- ifelse(is.na(station_data[[height_station]]),
+                                             "", round(station_data[[height_station]]))
+  } else {
+    height_station <- ".height_station"
+    station_data[[height_station]] <- ""
+  }
+  if (!missing(height_barometer)) {
+    station_data[[height_barometer]] <- ifelse(is.na(station_data[[height_barometer]]),
+                                               "", round(station_data[[height_barometer]], 1))
+  } else {
+    height_barometer <- ".height_barometer"
+    station_data[[height_barometer]] <- ""
+  }
+  if (missing(wigos_identifier)) {
+    wigos_identifier <- ".wigos_identifier"
+    station_data[[wigos_identifier]] <- ""
+  }
+  if (!missing(mean_station_pressure)) {
+    df_2_means <- data %>%
+      dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
+      dplyr::summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_station_pressure]], na.rm = TRUE), 1)), .groups = "keep")
+    data[[mean_station_pressure]] <- ifelse(is.na(data[[mean_station_pressure]]), 
+                                            "", round(data[[mean_station_pressure]], 1))
+    data[[mean_station_pressure]] <- sprintf("%6s", data[[mean_station_pressure]])
+    df_2 <- data %>% tidyr::pivot_wider(id_cols = tidyselect::all_of(c(link, year)),
+                                        names_from = tidyselect::all_of(month),
+                                        values_from = tidyselect::all_of(mean_station_pressure),
+                                        values_fill = strrep(" ", 6))
+  }
+  if (!missing(mean_sea_level_pressure)) {
+    df_3_means <- data %>%
+      dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
+      dplyr::summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_sea_level_pressure]], na.rm = TRUE), 1)), .groups = "keep")
+    data[[mean_sea_level_pressure]] <- ifelse(is.na(data[[mean_sea_level_pressure]]), 
+                                              "", round(data[[mean_sea_level_pressure]], 1))
+    data[[mean_sea_level_pressure]] <- sprintf("%6s", data[[mean_sea_level_pressure]])
+    df_3 <- data %>% tidyr::pivot_wider(id_cols = tidyselect::all_of(c(link, year)),
+                                        names_from = tidyselect::all_of(month),
+                                        values_from = tidyselect::all_of(mean_sea_level_pressure),
+                                        values_fill = strrep(" ", 6))
+  }
+  if (!missing(mean_temp)) {
+    df_4_means <- data %>%
+      dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
+      dplyr::summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_temp]], na.rm = TRUE), 1)), .groups = "keep")
+    data[[mean_temp]] <- ifelse(is.na(data[[mean_temp]]), 
+                                "", round(data[[mean_temp]], 1))
+    data[[mean_temp]] <- sprintf("%6s", data[[mean_temp]])
+    df_4 <- data %>% tidyr::pivot_wider(id_cols = tidyselect::all_of(c(link, year)),
+                                        names_from = tidyselect::all_of(month),
+                                        values_from = tidyselect::all_of(mean_temp),
+                                        values_fill = strrep(" ", 6))
+  }
+  if (!missing(total_precip)) {
+    df_5_means <- data %>%
+      dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
+      dplyr::summarise(mean = sprintf("%6s", format(summary_sum(.data[[total_precip]], na.rm = TRUE), digits = 1, nsmall = 1)), .groups = "keep")
+    data[[total_precip]] <- ifelse(is.na(data[[total_precip]]), 
+                                   "", ifelse(data[[total_precip]] <= 0.05, 0, format(data[[total_precip]], digits = 1, nsmall = 1)))
+    data[[total_precip]] <- sprintf("%6s", data[[total_precip]])
+    df_5 <- data %>% tidyr::pivot_wider(id_cols = tidyselect::all_of(c(link, year)),
+                                        names_from = tidyselect::all_of(month),
+                                        values_from = tidyselect::all_of(total_precip),
+                                        values_fill = strrep(" ", 6))
+  }
+  if (!missing(mean_max_temp)) {
+    df_6_means <- data %>%
+      group_by(!!! rlang::syms(c(link, year))) %>%
+      dplyr::summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_max_temp]], na.rm = TRUE), 1)), .groups = "keep")
+    data[[mean_max_temp]] <- ifelse(is.na(data[[mean_max_temp]]), 
+                                    "", round(data[[mean_max_temp]], 1))
+    data[[mean_max_temp]] <- sprintf("%6s", data[[mean_max_temp]])
+    df_6 <- data %>% tidyr::pivot_wider(id_cols = tidyselect::all_of(c(link, year)),
+                                        names_from = tidyselect::all_of(month),
+                                        values_from = tidyselect::all_of(mean_max_temp),
+                                        values_fill = strrep(" ", 6))
+  }
+  if (!missing(mean_min_temp)) {
+    df_7_means <- data %>%
+      dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
+      dplyr::summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_min_temp]], na.rm = TRUE), 1)), .groups = "keep")
+    data[[mean_min_temp]] <- ifelse(is.na(data[[mean_min_temp]]), 
+                                    "", round(data[[mean_min_temp]], 1))
+    data[[mean_min_temp]] <- sprintf("%6s", data[[mean_min_temp]])
+    df_7 <- data %>% tidyr::pivot_wider(id_cols = tidyselect::all_of(c(link, year)),
+                                        names_from = tidyselect::all_of(month),
+                                        values_from = tidyselect::all_of(mean_min_temp),
+                                        values_fill = strrep(" ", 6))
+  }
+  if (!missing(mean_rel_hum)) {
+    if (any(data[[mean_rel_hum]] < 0 | data[[mean_rel_hum]] > 100, na.rm = TRUE)) stop("Mean Relative Humidity must be a percentage between 0 and 100.")
+    df_8_means <- data %>%
+      dplyr::group_by(!!! rlang::syms(c(link, year))) %>%
+      dplyr::summarise(mean = sprintf("%6s", round(summary_mean(.data[[mean_rel_hum]], na.rm = TRUE), 0)), .groups = "keep")
+    data[[mean_rel_hum]] <- ifelse(is.na(data[[mean_rel_hum]]), 
+                                   "", round(data[[mean_rel_hum]], 1))
+    data[[mean_rel_hum]] <- sprintf("%6s", data[[mean_rel_hum]])
+    df_8 <- data %>% tidyr::pivot_wider(id_cols = tidyselect::all_of(c(link, year)),
+                                        names_from = tidyselect::all_of(month),
+                                        values_from = tidyselect::all_of(mean_rel_hum),
+                                        values_fill = strrep(" ", 6))
+  }
+  
+  month_header <- paste0("Year", " ", paste(c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", 
+                                              "Aug", "Sep", "Oct", "Nov", "Dec", "ANNUAL"), 
+                                            collapse = strrep(" ", 4)))
+  for (i in seq_along(station_data[[station_link]])) {
+    # filter data for single station
+    curr_df <- data %>% dplyr::filter(.data[[link]] == station_data[[station_link]][i])
+    # lines to be written to txt file
+    lines <- c()
+    # add header lines
+    lines <- append(lines, paste0("WMO Number:", strrep(" ", 28),
+                                  station_data[[wmo_number]][i]))
+    lines <- append(lines, paste0("Station Name:", strrep(" ", 26),
+                                  station_data[[station_name]][i]))
+    lines <- append(lines, paste0("Country Name:", strrep(" ", 26),
+                                  station_data[[country_name]][i]))
+    lines <- append(lines, paste0("Latitude (DD MM SS N/S):", strrep(" ", 15),
+                                  station_data[[latitude]][i]))
+    lines <- append(lines, paste0("Longitude (DDD MM SS E/W):", strrep(" ", 13),
+                                  station_data[[longitude]][i]))
+    lines <- append(lines, paste0("Station Height (whole meters):", strrep(" ", 9),
+                                  station_data[[height_station]][i]))
+    lines <- append(lines, paste0("Barometer Height (meters, to tenths):", strrep(" ", 2),
+                                  station_data[[height_barometer]][i]))
+    lines <- append(lines, paste0("WIGOS Station Identifier (WSI):", strrep(" ", 8),
+                                  station_data[[wigos_identifier]][i]))
+    lines <- append(lines, "")
+    if (!missing(mean_station_pressure)) {
+      lines <- append(lines, "(2) Mean Station Pressure (precision to tenths of hPa)")
+      lines <- append(lines, "")
+      lines <- append(lines, month_header)
+      lines <- append(lines, "")
+      df_2_tmp <- df_2 %>% dplyr::filter(.data[[link]] == station_data[[station_link]][i])
+      df_2_mean_tmp <- df_2_means
+      vals <- apply(df_2_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
+      vals <- paste(vals, df_2_means %>% 
+                      dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
+                      dplyr::pull(mean))
+      lines <- append(lines, vals)
+    }
+    if (!missing(mean_sea_level_pressure)) {
+      lines <- append(lines, "(3) Mean Sea Level Pressure (precision to tenths of hPa)")
+      lines <- append(lines, "")
+      lines <- append(lines, month_header)
+      lines <- append(lines, "")
+      df_3_tmp <- df_3 %>% dplyr::filter(.data[[link]] == station_data[[station_link]][i])
+      df_3_mean_tmp <- df_3_means
+      vals <- apply(df_3_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
+      vals <- paste(vals, df_3_means %>% 
+                      dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
+                      dplyr::pull(mean))
+      lines <- append(lines, vals)
+    }
+    if (!missing(mean_temp)) {
+      lines <- append(lines, "(4) Mean Daily Air Temperature (precision to tenths of degrees Celsius)")
+      lines <- append(lines, "")
+      lines <- append(lines, month_header)
+      lines <- append(lines, "")
+      df_4_tmp <- df_4 %>% dplyr::filter(.data[[link]] == station_data[[station_link]][i])
+      df_4_mean_tmp <- df_4_means
+      vals <- apply(df_4_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
+      vals <- paste(vals, df_4_means %>% 
+                      dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
+                      dplyr::pull(mean))
+      lines <- append(lines, vals)
+    }
+    if (!missing(total_precip)) {
+      lines <- append(lines, "(5) Total Precipitation (precision to tenths of mm)")
+      lines <- append(lines, "")
+      lines <- append(lines, month_header)
+      lines <- append(lines, "")
+      df_5_tmp <- df_5 %>% dplyr::filter(.data[[link]] == station_data[[station_link]][i])
+      df_5_mean_tmp <- df_5_means
+      vals <- apply(df_5_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
+      vals <- paste(vals, df_5_means %>% 
+                      dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
+                      dplyr::pull(mean))
+      lines <- append(lines, vals)
+    }
+    if (!missing(mean_max_temp)) {
+      lines <- append(lines, "(6) Mean Daily Maximum Air Temperature (precision to tenths of degree Celsius)")
+      lines <- append(lines, "")
+      lines <- append(lines, month_header)
+      lines <- append(lines, "")
+      df_6_tmp <- df_6 %>% dplyr::filter(.data[[link]] == station_data[[station_link]][i])
+      df_6_mean_tmp <- df_6_means
+      vals <- apply(df_6_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
+      vals <- paste(vals, df_6_means %>% 
+                      dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
+                      dplyr::pull(mean))
+      lines <- append(lines, vals)
+    }
+    if (!missing(mean_min_temp)) {
+      lines <- append(lines, "(7) Mean Daily Minimum Air Temperature (precision to tenths of degree Celsius)")
+      lines <- append(lines, "")
+      lines <- append(lines, month_header)
+      lines <- append(lines, "")
+      df_7_tmp <- df_7 %>% dplyr::filter(.data[[link]] == station_data[[station_link]][i])
+      df_7_mean_tmp <- df_7_means
+      vals <- apply(df_7_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
+      vals <- paste(vals, df_7_means %>% 
+                     dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
+                      dplyr::pull(mean))
+      lines <- append(lines, vals)
+    }
+    if (!missing(mean_rel_hum)) {
+      lines <- append(lines, "(8) Mean of the Daily Relative Humidity (whole percent)")
+      lines <- append(lines, "")
+      lines <- append(lines, month_header)
+      lines <- append(lines, "")
+      df_8_tmp <- df_8 %>% dplyr::filter(.data[[link]] == station_data[[station_link]][i])
+      df_8_mean_tmp <- df_8_means
+      vals <- apply(df_8_tmp, 1, function(r) paste0(r[2:14], collapse = " "))
+      vals <- paste(vals, df_8_means %>% 
+                      dplyr::filter(.data[[link]] == station_data[[station_link]][i]) %>%
+                      dplyr::pull(mean))
+      lines <- append(lines, vals)
+    }
+    writeLines(lines, paste0(folder, "/", station_data[[station_link]][i], "-", format(Sys.time(), "%Y%m%d_%H%M%S"), ".txt"))
+  }
+  cat(i, "file(s) created at:", folder)
+}
+
+dd_to_dms <- function(x, lat) {
+  if (lat) dir <- ifelse(x >= 0, "N", "S")
+  else dir <- ifelse(x >= 0, "E", "W")
+  x <- abs(x)
+  d <- trunc(x)
+  m <- trunc((x - d) * 60)
+  s <- round((x - d - m/60) * 3600)
+  return(paste(sprintf(ifelse(lat, "%02d", "%03d"), d), sprintf("%02d", m), sprintf("%02d", s), dir))
+}
+
+plot_mrl <- function(data, station_name, element_name, umin, umax, ncol = 1,
+                     xlab = "Threshold", ylab = "Mean excess", fill = "red",
+                     col = "black", rug = TRUE, addNexcesses = TRUE, textsize = 4) {
+  if (!missing(station_name)) {
+    plts <- list()
+    station_col <- data[, station_name]
+    stations <- unique(station_col)
+    for (i in seq_along(stations)) {
+      d <- data[station_col == stations[i], ]
+      element_col <- d[, element_name]
+      if (missing(umin)) {
+        umin <- min(element_col, na.rm = TRUE)
+      }
+      if (missing(umax)) {
+        umax <- max(element_col, na.rm = TRUE)
+      }
+      plts[[i]] <- texmex::mrl(na.exclude(element_col), umin = umin, umax = umax) %>%
+        ggplot2::ggplot(xlab = xlab, ylab = ylab, main = stations[i], fill = fill,
+          col = col, rug = rug, addNexcesses = addNexcesses, textsize = textsize
+        )
+    }
+    patchwork::wrap_plots(plts, ncol = ncol)
+  }
+  else {
+    element_col <- data[, element_name]
+    if (missing(umin)) {
+      umin <- min(element_col, na.rm = TRUE)
+    }
+    if (missing(umax)) {
+      umax <- max(element_col, na.rm = TRUE)
+    }
+    texmex::mrl(data = na.exclude(element_col), umin = umin, umax = umax) %>%
+      ggplot2::ggplot(xlab = xlab, ylab = ylab, fill = fill, col = col, rug = rug, 
+                      addNexcesses = addNexcesses, textsize = textsize
+      )
+  }
+}
+
+
+### Constants
+month_abb_english <- c("Jan","Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+month_name_english <- c("January", "February", "March", "April", "May", "June", "July", 
+                        "August", "September", "October", "November", "December")
+
+# factored out code for a multiple indices for a single station.
+# Called by climdex().
+# Not intended to be used externally.
+climdex_single_station <- function(ci, freq = "annual", indices, year, month,
+                                   spells.can.span.years = FALSE, gsl.mode = gsl.mode,
+                                   threshold = 1) {
+  stopifnot(freq %in% c("annual", "monthly"))
+  if (freq == "monthly" && missing(month)) stop("month is required for freq = 'monthly'.")
+  if (missing(indices)) stop("No indices specified.")
+  for (i in seq_along(indices)) {
+    vals <- switch(indices[i],
+                   "fd" = climdex.pcic::climdex.fd(ci),
+                   "su" = climdex.pcic::climdex.su(ci),
+                   "id" = climdex.pcic::climdex.id(ci),
+                   "tr" = climdex.pcic::climdex.tr(ci),
+                   "wsdi" = climdex.pcic::climdex.wsdi(ci, spells.can.span.years = spells.can.span.years),
+                   "csdi" = climdex.pcic::climdex.csdi(ci, spells.can.span.years = spells.can.span.years),
+                   "gsl" = climdex.pcic::climdex.gsl(ci, gsl.mode = gsl.mode),
+                   "txx" = climdex.pcic::climdex.txx(ci, freq = freq),
+                   "txn" = climdex.pcic::climdex.txn(ci, freq = freq),
+                   "tnx" = climdex.pcic::climdex.tnx(ci, freq = freq),
+                   "tnn" = climdex.pcic::climdex.tnn(ci, freq = freq),
+                   "tn10p" = climdex.pcic::climdex.tn10p(ci, freq = freq),
+                   "tx10p" = climdex.pcic::climdex.tx10p(ci, freq = freq),
+                   "tn90p" = climdex.pcic::climdex.tn90p(ci, freq = freq),
+                   "tx90p" = climdex.pcic::climdex.tx90p(ci, freq = freq),
+                   "dtr" = climdex.pcic::climdex.dtr(ci, freq = freq),
+                   "rx1day" = climdex.pcic::climdex.rx1day(ci, freq = freq),
+                   "rx5day" = climdex.pcic::climdex.rx5day(ci, freq = freq),
+                   "sdii" = climdex.pcic::climdex.sdii(ci),
+                   "r10mm" = climdex.pcic::climdex.r10mm(ci),
+                   "r20mm" = climdex.pcic::climdex.r20mm(ci),
+                   "rnnmm" = climdex.pcic::climdex.rnnmm(ci, threshold = threshold),
+                   "cdd" = climdex.pcic::climdex.cdd(ci, spells.can.span.years = spells.can.span.years),
+                   "cwd" = climdex.pcic::climdex.cwd(ci, spells.can.span.years = spells.can.span.years),
+                   "r95ptot" = climdex.pcic::climdex.r95ptot(ci),
+                   "r99ptot" = climdex.pcic::climdex.r99ptot(ci),
+                   "prcptot" = climdex.pcic::climdex.prcptot(ci),
+                   stop("index name ", indices[i], " not recognised.")
+    )
+    if (i == 1) {
+      if (freq == "annual") {
+        df_ind <- data.frame(names(vals), unname(vals))
+        names(df_ind) <- c(year, indices[i])
+      } else {
+        df_ind <- data.frame(stringr::str_split_fixed(string = names(vals), n = 2, pattern = "-"), vals, row.names = NULL)
+        names(df_ind) <- c(year, month, indices[i])
+        df_ind[[month]] <- as.numeric(df_ind[[month]])
+      }
+    }
+    else {
+      df_ind[[indices[i]]] <- unname(vals)
+    }
+    if (indices[[i]] == "rnnmm") names(df_ind)[ncol(df_ind)] <- paste(indices[[i]], threshold, sep = "_")
+  }
+  return(df_ind)
+}
+
+climdex <- function(data, station, date, year, month, prec, tmax, tmin, indices, freq = "annual",
+                    base.range = c(1961, 1990), n = 5, northern.hemisphere = TRUE,
+                    quantiles = NULL, temp.qtiles = c(0.1, 0.9), 
+                    prec.qtiles = c(0.95, 0.99), max.missing.days = c(annual = 15, monthly = 3), 
+                    min.base.data.fraction.present = 0.1, spells.can.span.years = FALSE,
+                    gsl.mode = "GSL", threshold = 1) {
+  stopifnot(freq %in% c("annual", "monthly"))
+  if (freq == "monthly" && missing(month)) stop("month is required for freq = 'monthly'.")
+  
+  # All indices can be calculated annually. Only some have monthly versions as well.
+  year_only_indices <- c("fd", "su", "id", "tr", "wsdi", "csdi", "gsl", "sdii", "r10mm", 
+                         "r20mm", "rnnmm", "cdd", "cwd", "r95ptot", "r99ptot", "prcptot")
+  if (freq == "monthly" && any(indices %in% year_only_indices)) stop("Some indices selected are not available on a monthly frequency.")
+  
+  # climdex.pcic only calculates for a single station at a time so need to do individually then dplyr::bind_rows() together.
+  if (!missing(station)) {
+    stations <- unique(data[[station]])
+    # If data[[station]] is a factor this ensure stations are in factor order (and drops levels that don't appear in the data).
+    if (is.factor(data[[station]])) stations <- intersect(levels(data[[station]]), stations)
+    df_list <- vector(mode = "list", length = length(stations))
+    for (s in seq_along(stations)) {
+      df_station <- data %>% dplyr::filter(.data[[station]] == stations[s])
+      ci <- climdex.pcic::climdexInput.raw(prec = df_station[[prec]], tmax = df_station[[tmax]], tmin = df_station[[tmin]], 
+                                           base.range = base.range, northern.hemisphere = northern.hemisphere, 
+                                           temp.qtiles = temp.qtiles, prec.qtiles = prec.qtiles, 
+                                           max.missing.days = max.missing.days,
+                                           min.base.data.fraction.present = min.base.data.fraction.present,
+                                           tmax.dates = PCICt::as.PCICt(x = as.character(df_station[[date]]), cal="gregorian"),
+                                           tmin.dates = PCICt::as.PCICt(x = as.character(df_station[[date]]), cal="gregorian"),
+                                           prec.dates = PCICt::as.PCICt(x = as.character(df_station[[date]]), cal="gregorian"))
+      df_list[[stations[s]]] <- climdex_single_station(ci = ci, freq = freq, indices = indices, year = year, month = month,
+                                                       spells.can.span.years = spells.can.span.years, gsl.mode = gsl.mode,
+                                                       threshold = threshold)
+    }
+    df_out <- dplyr::bind_rows(df_list, .id = station)
+  }
+  else {
+    ci <- climdex.pcic::climdexInput.raw(prec = data[[prec]], tmax = data[[tmax]], tmin = data[[tmin]], 
+                                         base.range = c(1961, 1990), northern.hemisphere = TRUE, 
+                                         temp.qtiles = c(0.1, 0.9), prec.qtiles = c(0.95, 0.99), 
+                                         max.missing.days = c(annual = 15, monthly = 3), 
+                                         min.base.data.fraction.present=0.1, 
+                                         tmax.dates = PCICt::as.PCICt(x = as.character(data[[date]]), cal="gregorian"), 
+                                         tmin.dates = PCICt::as.PCICt(x = as.character(data[[date]]), cal="gregorian"), 
+                                         prec.dates = PCICt::as.PCICt(x = as.character(data[[date]]), cal="gregorian"))
+    df_out <- climdex_single_station(ci = ci, freq = freq, indices = indices, year = year, month = month, gsl.mode = gsl.mode)
+  }
+  # Make the type of the year/month column(s) the same in the output as in data.
+  if (!missing(station)) {
+    # TODO This is done in several places and should be extracted as a function.
+    if (is.numeric(data[[station]])) df_out[[station]] <- as.numeric(df_out[[station]])
+    else if (is.factor(data[[station]])) df_out[[station]] <- make_factor(df_out[[station]])
+    else if (is.character(data[[station]])) df_out[[station]] <- as.character(df_out[[station]])
+    else warning("Cannot recognise the class of station column. Link between data frames may be unstable.")
+  }
+  if (is.numeric(data[[year]])) df_out[[year]] <- as.numeric(df_out[[year]])
+  else if (is.factor(data[[year]])) df_out[[year]] <- make_factor(df_out[[year]])
+  else if (is.character(data[[year]])) df_out[[year]] <- as.character(df_out[[year]])
+  if (freq == "monthly") {
+    if (is.numeric(data[[month]])) df_out[[month]] <- as.numeric(df_out[[month]])
+    else if (is.factor(data[[month]])) {
+      lvs <- levels(data[[month]])
+      if (length(lvs) == 12) df_out[[month]] <- factor(df_out[[month]], labels = lvs, ordered = is.ordered(data[[month]]))
+      else {
+        warning("month is a factor but does not have 12 levels. Output may not link correctly to data.")
+        df_out[[month]] <- make_factor(df_out[[month]])
+      }
+    }
+    else if (is.character(data[[month]])) {
+      mns <- unique(data[[month]])
+      # Also check English names as month.abb and month.name are locale dependent.
+      if (length(mns) == 12) {
+        if (setequal(mns, month.abb)) df_out[[month]] <- month.abb[df_out[[month]]]
+        else if (setequal(mns, month.name)) df_out[[month]] <- month.name[df_out[[month]]]
+        else if (setequal(mns, month_name_english)) df_out[[month]] <- month_abb_english[df_out[[month]]]
+        else if (setequal(mns, month_name_english)) df_out[[month]] <- month_name_english[df_out[[month]]]
+        else if (setequal(mns, tolower(month_name_english))) df_out[[month]] <- tolower(month_abb_english)[df_out[[month]]]
+        else if (setequal(mns, tolower(month_name_english))) df_out[[month]] <- tolower(month_name_english)[df_out[[month]]]
+        else if (setequal(mns, toupper(month_name_english))) df_out[[month]] <- toupper(month_abb_english)[df_out[[month]]]
+        else if (setequal(mns, toupper(month_name_english))) df_out[[month]] <- toupper(month_name_english)[df_out[[month]]]
+        else warning("Cannot determine format of month column in data. Output may not link correctly to data.")
+      } else {
+        warning("month does not have 12 unique values. Output may not link correctly to data.")
+        df_out[[month]] <- as.character(df_out[[month]])
+      }
+    }
+  }
+  return(df_out)
+}
+
+spei_input <- function(data, station, year, month, element) {
+  if (missing(station)) id_cols <- c(year, month) else id_cols <- c(station, year, month)
+  # SPEI package assumes data is ordered so must be sorted
+  data_sort <- data %>% dplyr::arrange(!!! rlang::syms(id_cols))
+  data <- data_sort
+  # There should be a better way to check this.
+  if (!all(data == data_sort, na.rm = TRUE)) stop("data must be sorted by (", paste(id_cols, collapse = ", "), ") for SPEI/SPI to be calculated correctly.")
+  # Monthly data i.e. one value per month (per station) is required
+  if (anyDuplicated(data %>% dplyr::select(!!! rlang::syms(id_cols)))) stop("Multiple values per month detected. SPEI/SPI requires monthly data.")
+  if (!missing(station)) {
+    for (s in unique(data[[station]])) {
+      df <- data %>% dplyr::filter(.data[[station]] == s)
+      dates_seq <- seq.Date(from = as.Date(paste(df[[year]][1], as.numeric(df[[month]][1]), 1), format = "%Y %m %d"),
+                            to = as.Date(paste(tail(df[[year]], 1), tail(as.numeric(df[[month]]), 1), 1), format = "%Y %m %d"),
+                            by = "1 month")
+      if (length(dates_seq) != nrow(df)) stop("Less rows than expected. data has gaps for missing months in '", s, "'. SPEI/SPI requires no date gaps.")
+    }
+  } else {
+    dates_seq <- seq.Date(from = as.Date(paste(data[[year]][1], as.numeric(data[[month]][1]), 1), format = "%Y %m %d"),
+                          to = as.Date(paste(tail(data[[year]], 1), tail(as.numeric(data[[month]]), 1), 1), format = "%Y %m %d"),
+                          by = "1 month")
+    if (length(dates_seq) != nrow(data)) stop("Less rows than expected. data has gaps for missing months. SPEI/SPI requires no date gaps.")
+  }
+  cols <- c(id_cols, element)
+  start <- c(data[[year]][1], data[[month]][1])
+  # If multiple stations, needs to be in "wide" format for SPEI
+  if (!missing(station)) {
+    ts_data <- tidyr::pivot_wider(data, id_cols = tidyselect::all_of(c(year, month)), 
+                                  names_from = tidyselect::all_of(station), values_from = tidyselect::all_of(element),
+                                  values_fill = NA)
+    ts_data <- ts_data %>% dplyr::arrange(!!! rlang::syms(c(year, month)))
+    # Not sure how to do this using dplyr::select
+    ts_data[id_cols] <- NULL
+    ts_data <- ts(as.matrix(ts_data), frequency = 12, start = start)
+  } else {
+    ts_data <- ts(as.matrix(data[[element]]), frequency = 12, start = start)
+  }
+  ts_data
+}
+
+# This function extracts the SPEI/SPI column from an spei object x.
+# It requires the original data in order to return a vector of the correct length by removing NA values introduced when unstacking.
+# An alternative to this is to have a single wrapper SPEI/SPI function to handle this.
+# The advantage of this method is that it doesn't hide the call to SPEI/SPI in R-Instat and is compatible with the existing dialog.
+# The wrapper function may be a prefered long-term solution.
+spei_output <- function(x, data, station, year, month) {
+  if (! inherits(x, "spei")) stop("x must be an object of class 'spei'")
+  vals <- x$fitted
+  # If is.mts then multiple stations. Need to unstack and merge to ensure correct values obtained.
+  if (is.mts(vals)) {
+    df_spei <- as.data.frame(vals)
+    # ind will be the year in fractions
+    df_spei$ind <- zoo::index(x$fitted)
+    # Stack all stations to get back into tidy format.
+    df_spei <- tidyr::pivot_longer(df_spei, cols = 1:ncol(vals))
+    # Integer part is year
+    df_spei$yy <- trunc(df_spei$ind)
+    # Remainder is fraction of month. Use round to ensure exact integers for merging.
+    df_spei$mm <- ((df_spei$ind - df_spei$yy) * 12) + 1
+    df_spei$mm <- round(df_spei$mm)
+    if (!(is.numeric(data[[month]]) | is.factor(data[[month]]))) stop("month must be numeric or factor to ensure SPEI/SPI values are calculated correctly.")
+    # If factor, this assumes levels are in correct order.
+    data[[month]] <- as.numeric(data[[month]])
+    by <- c("name", "yy", "mm")
+    names(by) <- c(station, year, month)
+    # Need to merge to know which NA values are true and which were introduced when unstacking.
+    df_new <- dplyr::left_join(data, df_spei, by = by)
+    col <- df_new$value
+  } else {
+    # If single station, then no extra missing values were introduced. Data just needs to be made into a vector.
+    col <- as.vector(vals)
+  }
+  col
+
+}
+
+# This function has been adapted from extRemes::threshrange.plot().
+# It has been adapted for use in R-Instat and uses ggplot2 graphical system rather than base plot().
+threshold_Plot <- function(x, r, type = c("GP", "PP", "Exponential"), nint = 10,
+                      alpha = 0.05, na.action = na.omit, xlb = "", main = NULL , verbose = FALSE,
+                      ...) {
+  type <- match.arg(type)
+  x <- na.action(x)
+  n <- length(x)
+  lst_plots <- list()
+  if (missing(r)) {
+    r <- quantile(x, probs = c(0.75, 0.99))
+  }
+  u.i <- matrix(seq(from = r[1], to = r[2],length.out =  nint), ncol = 1)
+  thfun <- function(u, x, type, a, verbose, ...) {
+    fit <- try(extRemes::fevd(
+      x = x, threshold = u, type = type, verbose = verbose,
+      ...
+    ), silent = verbose)
+    if (verbose) {
+      print(fit)
+    }
+    if (all(class(fit) != "try-error")) {
+      if (!is.element(type, c("PP", "Exponential"))) {
+        res <- try(distillery::ci(fit,
+                      type = "parameter", alpha = a,
+                      R = 100, tscale = TRUE, ...
+        ), silent = verbose)
+      } else {
+        res <- try(distillery::ci(fit,
+                      type = "parameter", alpha = a,
+                      R = 100, ...
+        ), silent = verbose)
+      }
+      if (verbose) {
+        print(res)
+      }
+    }
+    else {
+      res <- fit
+    }
+    if (any(class(res) == "try-error")) {
+      if (type == "PP") {
+        res <- matrix(NA, 3, 3)
+      } else if (type != "Exponential") {
+        res <- matrix(NA, 2, 3)
+      } else {
+        res <- rep(NA, 3)
+      }
+    }
+    return(res)
+  }
+  out <- apply(u.i, 1, thfun,
+               x = x, type = type, a = alpha,
+               verbose = verbose, ...
+  )
+  if (type == "PP") {
+    rownames(out) <- c(
+      "low.loc", "low.scale", "low.shape",
+      "location", "scale", "shape", "up.loc", "up.scale",
+      "up.shape"
+    )
+  } else if (type != "Exponential") {
+    rownames(out) <- c(
+      "low.t.scale", "low.shape", "t.scale",
+      "shape", "up.t.scale", "up.shape"
+    )
+  } else {
+    rownames(out) <- c("low.scale", "scale", "up.scale")
+  }
+  m1 <- deparse(match.call())
+  if (type == "PP") {
+    yl <- range(c(out[c("low.loc", "location", "up.loc"), ]), finite = TRUE)
+    lst_plots[[1]] <- ggplot2::qplot(
+      x = u.i, y = out["location", ], ylim = yl, xlab = xlb,
+      ylab = "location", geom = c("line", "point"), main = main
+    ) +
+      ggplot2::geom_pointrange(mapping = ggplot2::aes(ymin = out["low.loc", ], ymax = out["up.loc", ]))
+    yl <- range(c(out[c("low.scale", "scale", "up.scale"), ]), finite = TRUE)
+    lst_plots[[2]] <- ggplot2::qplot(
+      x = u.i, y = out["scale", ], ylim = yl, xlab = xlb, ylab = "scale",
+      geom = c("point", "line")
+    ) +
+      ggplot2::geom_pointrange(mapping = ggplot2::aes(ymin = out["low.scale", ], ymax = out["up.scale", ]))
+    yl <- range(c(out[c("low.shape", "shape", "up.shape"), ]), finite = TRUE)
+    lst_plots[[3]] <- ggplot2::qplot(u.i, out["shape", ],
+                                     ylim = yl, xlab = "Threshold",
+                                     ylab = "shape", geom = c("point", "line")
+    ) +
+      ggplot2::geom_pointrange(mapping = ggplot2::aes(ymin = out["low.shape", ], ymax = out["up.shape", ]))
+  }
+  else if (type != "Exponential") {
+    yl <- range(c(out[c("low.t.scale", "t.scale", "up.t.scale"), ]), finite = TRUE)
+    lst_plots[[1]] <- ggplot2::qplot(
+      x = u.i, y = out["t.scale", ], ylim = yl, xlab = xlb, ylab = "reparameterized scale",
+      geom = c("point", "line"), main = main) +
+      ggplot2::geom_pointrange(mapping = ggplot2::aes(ymin = out["low.t.scale", ], ymax = out["up.t.scale", ]))
+    yl <- range(c(out[c("low.shape", "shape", "up.shape"), ]), finite = TRUE)
+    lst_plots[[2]] <- ggplot2::qplot(
+      x = u.i, y = out["shape", ], ylim = yl, xlab = "Threshold",
+      ylab = "shape", geom = c("point", "line")
+    ) +
+      ggplot2::geom_pointrange(mapping = ggplot2::aes(ymin = out["low.shape", ], ymax = out["up.shape", ]))
+  }
+  else {
+    yl <- range(c(out[c("low.scale", "scale", "up.scale"), 
+    ]), finite = TRUE)
+    return(ggplot2::qplot(
+      x = u.i, y = out["scale", ], ylim = yl, xlab = "Threshold",
+      ylab = "scale", geom = c("point", "line"), main = main
+    ) +
+      ggplot2::geom_pointrange(mapping = ggplot2::aes(ymin = out["low.scale", ], ymax = out["up.scale", ])))
+  }
+  patchwork::wrap_plots(lst_plots, ncol = 1) 
+}
+
+# This function produces multiple threshold plots for various stations at a time.
+plot_multiple_threshold <- function(data, station_col_name, element_col_name, r, type = c("GP", "PP", "Exponential"), nint = 10,
+                            alpha = 0.05, ncol = 1, xlb = "", main = NULL , verbose = FALSE,...) {
+  if (!missing(station_col_name)) {
+    plts <- list()
+    station_col <- data[, station_col_name]
+    stations <- unique(station_col)
+    for (i in seq_along(stations)) {
+      d <- data[station_col == stations[i], ]
+      element_col <- d[, element_col_name]
+      plts[[i]] <- threshold_Plot(x = element_col, main = stations[i], r = r, type = type, nint = nint, alpha = alpha, verbose = verbose)
+    }
+    patchwork::wrap_plots(plts, ncol = ncol)
+  }
+  else {
+    element_col <- data[, element_col_name]
+    threshold_Plot(x = element_col, r = r, type = type, nint = nint, alpha = alpha, verbose = verbose)
+  }
+}
+
+
+plot_declustered <- function(data, station_col_name, element_col_name, threshold, r = NULL, xlab = NULL, ylab = NULL, ncol = 1, print_summary = FALSE) {
+  if (!missing(station_col_name)) {
+    plts <- list()
+    station_col <- data[, station_col_name]
+    stations <- unique(station_col)
+    for (i in seq_along(stations)) {
+      station <- stations[i]
+      d <- data[station_col == station, ]
+      obj <- texmex::declust(y = na.exclude(d[, element_col_name]), r = r, threshold = threshold)
+      if (print_summary) {
+        cat("Station:", paste0("", station, ""), "\n \n")
+        cat("Threshold", obj$threshold, "\n")
+        cat("Declustering using the intervals method, run length", obj$r, "\n")
+        cat("Identified", obj$nClusters, "clusters.", "\n")
+        cat("------------------------------------------------------", "\n \n")
+      } else {
+        plts[[i]] <- obj %>%
+          ggplot2::ggplot(xlab = xlab, ylab = ylab, main = stations[i])
+      }
+    }
+    if (!print_summary) {
+      patchwork::wrap_plots(plts, ncol = ncol)
+    }
+  }
+  else {
+    obj <- texmex::declust(y = na.exclude(data[, element_col_name]), r = r, threshold = threshold)
+    if (print_summary) {
+      cat("Threshold", obj$threshold, "\n")
+      cat("Declustering using the intervals method, run length", obj$r, "\n")
+      cat("Identified", obj$nClusters, "clusters.", "\n")
+    } else {
+      obj %>% ggplot2::ggplot(xlab = xlab, ylab = ylab)
+    }
   }
 }

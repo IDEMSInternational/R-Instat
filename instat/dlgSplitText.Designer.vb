@@ -131,6 +131,7 @@ Partial Class dlgSplitText
         'ucrInputPattern
         '
         Me.ucrInputPattern.AddQuotesIfUnrecognised = True
+        Me.ucrInputPattern.GetSetSelectedIndex = -1
         Me.ucrInputPattern.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputPattern, "ucrInputPattern")
         Me.ucrInputPattern.Name = "ucrInputPattern"

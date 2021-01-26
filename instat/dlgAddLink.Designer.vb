@@ -82,6 +82,7 @@ Partial Class dlgAddLink
         'lvwLinkViewBox
         '
         Me.lvwLinkViewBox.FullRowSelect = True
+        Me.lvwLinkViewBox.HideSelection = False
         resources.ApplyResources(Me.lvwLinkViewBox, "lvwLinkViewBox")
         Me.lvwLinkViewBox.Name = "lvwLinkViewBox"
         Me.lvwLinkViewBox.UseCompatibleStateImageBehavior = False
@@ -97,12 +98,14 @@ Partial Class dlgAddLink
         '
         'ucrDataSelectorTo
         '
+        Me.ucrDataSelectorTo.bDropUnusedFilterLevels = False
         Me.ucrDataSelectorTo.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrDataSelectorTo, "ucrDataSelectorTo")
         Me.ucrDataSelectorTo.Name = "ucrDataSelectorTo"
         '
         'ucrDataSelectorFrom
         '
+        Me.ucrDataSelectorFrom.bDropUnusedFilterLevels = False
         Me.ucrDataSelectorFrom.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrDataSelectorFrom, "ucrDataSelectorFrom")
         Me.ucrDataSelectorFrom.Name = "ucrDataSelectorFrom"
