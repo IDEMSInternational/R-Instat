@@ -62,7 +62,6 @@ Public Class sdgInventoryPlot
 
 
         ucrChkNoOfRowsOrColumns.AddParameterPresentCondition(True, {"ncol", "nrow"}, True)
-        ucrChkNoOfRowsOrColumns.AddParameterPresentCondition(False, {"ncol", "nrow"}, False)
         ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
 
         ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
@@ -141,7 +140,6 @@ Public Class sdgInventoryPlot
         ucrInputXFrom.AddQuotesIfUnrecognised = False
         ucrInputXTo.SetParameter(New RParameter("toXAxis"))
         ucrInputXTo.SetValidationTypeAsNumeric()
-        'ucrInputXTo.SetRDefault(1)
         ucrInputXTo.AddQuotesIfUnrecognised = False
         ucrChkSpecifyXAxisTickMarks.SetText("Specify Breaks")
         ucrChkSpecifyXAxisTickMarks.SetRDefault("TRUE")
@@ -189,7 +187,6 @@ Public Class sdgInventoryPlot
         ucrChkYAxisLabelSize.SetText("Size")
         ucrChkYAxisLabelSize.SetParameter(New RParameter("ySize"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrNudYAxisLabelSize.SetParameter(New RParameter("ySize"))
-        'ucrNudYAxisLabelSize.Increment = 0.1
         ucrNudYAxisLabelSize.Minimum = 1
 
         ucrChkYAxisAngle.AddToLinkedControls(ucrNudYAxisAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=90)
