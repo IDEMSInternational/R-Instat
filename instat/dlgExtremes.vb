@@ -119,6 +119,7 @@ Public Class dlgExtremes
 
         clsFevdFunction.AddParameter("type", Chr(34) & "GEV" & Chr(34), iPosition:=0)
         clsFevdFunction.AddParameter("method", Chr(34) & "MLE" & Chr(34), iPosition:=1)
+        clsFevdFunction.AddParameter("na.action", "na.omit", iPosition:=3)
 
         clsFevdFunction.SetAssignTo(ucrSaveExtremes.GetText(), strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempModel:="last_model", bAssignToIsPrefix:=True)
         clsPlotsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
