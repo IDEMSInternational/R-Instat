@@ -2607,7 +2607,8 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
                 g <- g + ggplot2::facet_grid(facets = as.formula(paste(station_col, "+ variable~."))) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = "")
       }
       else if(facet_by == "elements") {
-               g <- g + ggplot2::facet_grid(facets = as.formula(paste("variable +", station_col, "~."))) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = "")
+               g <- g + ggplot2::facet_grid(facets = as.formula(paste("variable +", station_col, "~."))) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = NULL)
+
       }
       else if(facet_by == "stations-elements") {
          if(scale != "none"){
