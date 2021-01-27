@@ -101,7 +101,7 @@ Public Class dlgExtremes
         ucrReceiverVariable.SetMeAsReceiver()
         ucrSelectorExtremes.Reset()
         ucrInputThresholdforLocation.SetText("0")
-
+        ucrSaveExtremes.Reset()
 
         clsLocationScaleResetOperator.SetOperation("")
         clsLocationScaleResetOperator.bBrackets = False
@@ -276,16 +276,18 @@ Public Class dlgExtremes
             If Not bResettingDialogue Then
                 clsLocationScaleResetOperator.AddParameter("scaleLocation", clsROperatorParameter:=clsLocationParamOperator, iPosition:=0)
             End If
+            grpFirstCalc.Visible = True
+            grpSecondCalc.Visible = True
         Else
             ucrReceiverVariable.SetMeAsReceiver()
             clsFevdFunction.RemoveParameterByName("scale.fun")
             clsFevdFunction.RemoveParameterByName("location.fun")
             clsLocationScaleResetOperator.RemoveParameterByName("scaleLocation")
+
+            grpFirstCalc.Visible = False
+            grpSecondCalc.Visible = False
         End If
 
-        With ucrChkExplanatoryModelForLocationParameter
-            grpFirstCalc.Visible = .Checked
-            grpSecondCalc.Visible = .Checked
-        End With
+
     End Sub
 End Class

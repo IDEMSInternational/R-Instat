@@ -240,27 +240,6 @@
   <data name="&gt;&gt;cmdExp.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="ucrInputThresholdforLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 231</value>
-  </data>
-  <data name="ucrInputThresholdforLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 21</value>
-  </data>
-  <data name="ucrInputThresholdforLocation.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrInputThresholdforLocation.Name" xml:space="preserve">
-    <value>ucrInputThresholdforLocation</value>
-  </data>
-  <data name="&gt;&gt;ucrInputThresholdforLocation.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputThresholdforLocation.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputThresholdforLocation.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="lblThreshold.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -290,27 +269,6 @@
   </data>
   <data name="&gt;&gt;lblThreshold.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="ucrTryModelling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 258</value>
-  </data>
-  <data name="ucrTryModelling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 33</value>
-  </data>
-  <data name="ucrTryModelling.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;ucrTryModelling.Name" xml:space="preserve">
-    <value>ucrTryModelling</value>
-  </data>
-  <data name="&gt;&gt;ucrTryModelling.Type" xml:space="preserve">
-    <value>instat.ucrTry, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrTryModelling.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrTryModelling.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="cmdSin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -380,9 +338,6 @@
   </data>
   <data name="grpSecondCalc.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
-  </data>
-  <data name="grpSecondCalc.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="&gt;&gt;grpSecondCalc.Name" xml:space="preserve">
     <value>grpSecondCalc</value>
@@ -765,9 +720,6 @@
   <data name="grpFirstCalc.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="grpFirstCalc.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="&gt;&gt;grpFirstCalc.Name" xml:space="preserve">
     <value>grpFirstCalc</value>
   </data>
@@ -779,36 +731,6 @@
   </data>
   <data name="&gt;&gt;grpFirstCalc.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="ucrChkExplanatoryModelForLocationParameter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 85</value>
-  </data>
-  <data name="ucrChkExplanatoryModelForLocationParameter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 17</value>
-  </data>
-  <data name="ucrChkExplanatoryModelForLocationParameter.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkExplanatoryModelForLocationParameter.Name" xml:space="preserve">
-    <value>ucrChkExplanatoryModelForLocationParameter</value>
-  </data>
-  <data name="&gt;&gt;ucrChkExplanatoryModelForLocationParameter.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkExplanatoryModelForLocationParameter.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkExplanatoryModelForLocationParameter.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>520, 378</value>
   </data>
   <data name="lblFevdType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -839,51 +761,6 @@
   </data>
   <data name="&gt;&gt;lblFevdType.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="ucrInputExtremes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 204</value>
-  </data>
-  <data name="ucrInputExtremes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>79, 21</value>
-  </data>
-  <data name="ucrInputExtremes.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrInputExtremes.Name" xml:space="preserve">
-    <value>ucrInputExtremes</value>
-  </data>
-  <data name="&gt;&gt;ucrInputExtremes.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputExtremes.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputExtremes.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="ucrSaveExtremes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 292</value>
-  </data>
-  <data name="ucrSaveExtremes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ucrSaveExtremes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 21</value>
-  </data>
-  <data name="ucrSaveExtremes.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveExtremes.Name" xml:space="preserve">
-    <value>ucrSaveExtremes</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveExtremes.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveExtremes.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveExtremes.ZOrder" xml:space="preserve">
-    <value>9</value>
   </data>
   <data name="cmdDisplayOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -939,6 +816,153 @@
   <data name="&gt;&gt;cmdFittingOptions.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="lblDataToFit.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDataToFit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDataToFit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>258, 45</value>
+  </data>
+  <data name="lblDataToFit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>99, 13</value>
+  </data>
+  <data name="lblDataToFit.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblDataToFit.Text" xml:space="preserve">
+    <value>Response Variable:</value>
+  </data>
+  <data name="&gt;&gt;lblDataToFit.Name" xml:space="preserve">
+    <value>lblDataToFit</value>
+  </data>
+  <data name="&gt;&gt;lblDataToFit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDataToFit.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblDataToFit.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="ucrInputThresholdforLocation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 231</value>
+  </data>
+  <data name="ucrInputThresholdforLocation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 21</value>
+  </data>
+  <data name="ucrInputThresholdforLocation.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrInputThresholdforLocation.Name" xml:space="preserve">
+    <value>ucrInputThresholdforLocation</value>
+  </data>
+  <data name="&gt;&gt;ucrInputThresholdforLocation.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputThresholdforLocation.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputThresholdforLocation.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrTryModelling.Location" type="System.Drawing.Point, System.Drawing">
+    <value>1, 258</value>
+  </data>
+  <data name="ucrTryModelling.Size" type="System.Drawing.Size, System.Drawing">
+    <value>388, 33</value>
+  </data>
+  <data name="ucrTryModelling.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.Name" xml:space="preserve">
+    <value>ucrTryModelling</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.Type" xml:space="preserve">
+    <value>instat.ucrTry, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkExplanatoryModelForLocationParameter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>258, 85</value>
+  </data>
+  <data name="ucrChkExplanatoryModelForLocationParameter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>231, 17</value>
+  </data>
+  <data name="ucrChkExplanatoryModelForLocationParameter.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkExplanatoryModelForLocationParameter.Name" xml:space="preserve">
+    <value>ucrChkExplanatoryModelForLocationParameter</value>
+  </data>
+  <data name="&gt;&gt;ucrChkExplanatoryModelForLocationParameter.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkExplanatoryModelForLocationParameter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkExplanatoryModelForLocationParameter.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>520, 378</value>
+  </data>
+  <data name="ucrInputExtremes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 204</value>
+  </data>
+  <data name="ucrInputExtremes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>79, 21</value>
+  </data>
+  <data name="ucrInputExtremes.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrInputExtremes.Name" xml:space="preserve">
+    <value>ucrInputExtremes</value>
+  </data>
+  <data name="&gt;&gt;ucrInputExtremes.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputExtremes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputExtremes.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrSaveExtremes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 292</value>
+  </data>
+  <data name="ucrSaveExtremes.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrSaveExtremes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 21</value>
+  </data>
+  <data name="ucrSaveExtremes.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveExtremes.Name" xml:space="preserve">
+    <value>ucrSaveExtremes</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveExtremes.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveExtremes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveExtremes.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="ucrSelectorExtremes.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
@@ -962,36 +986,6 @@
   </data>
   <data name="&gt;&gt;ucrSelectorExtremes.ZOrder" xml:space="preserve">
     <value>12</value>
-  </data>
-  <data name="lblDataToFit.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblDataToFit.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblDataToFit.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 45</value>
-  </data>
-  <data name="lblDataToFit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 13</value>
-  </data>
-  <data name="lblDataToFit.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lblDataToFit.Text" xml:space="preserve">
-    <value>Variable:</value>
-  </data>
-  <data name="&gt;&gt;lblDataToFit.Name" xml:space="preserve">
-    <value>lblDataToFit</value>
-  </data>
-  <data name="&gt;&gt;lblDataToFit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblDataToFit.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblDataToFit.ZOrder" xml:space="preserve">
-    <value>13</value>
   </data>
   <data name="ucrReceiverVariable.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 60</value>

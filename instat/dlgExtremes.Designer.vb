@@ -43,9 +43,7 @@ Partial Class dlgExtremes
         Me.cmdLog = New System.Windows.Forms.Button()
         Me.cmdTan = New System.Windows.Forms.Button()
         Me.cmdExp = New System.Windows.Forms.Button()
-        Me.ucrInputThresholdforLocation = New instat.ucrInputTextBox()
         Me.lblThreshold = New System.Windows.Forms.Label()
-        Me.ucrTryModelling = New instat.ucrTry()
         Me.cmdSin = New System.Windows.Forms.Button()
         Me.grpSecondCalc = New System.Windows.Forms.GroupBox()
         Me.cmdCos = New System.Windows.Forms.Button()
@@ -61,15 +59,17 @@ Partial Class dlgExtremes
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdZero = New System.Windows.Forms.Button()
         Me.cmdMinus = New System.Windows.Forms.Button()
-        Me.ucrChkExplanatoryModelForLocationParameter = New instat.ucrCheck()
-        Me.ucrReceiverExpressionExplanatoryModelForLocParam = New instat.ucrReceiverExpression()
         Me.lblFevdType = New System.Windows.Forms.Label()
-        Me.ucrInputExtremes = New instat.ucrInputComboBox()
-        Me.ucrSaveExtremes = New instat.ucrSave()
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.cmdFittingOptions = New System.Windows.Forms.Button()
-        Me.ucrSelectorExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblDataToFit = New System.Windows.Forms.Label()
+        Me.ucrInputThresholdforLocation = New instat.ucrInputTextBox()
+        Me.ucrTryModelling = New instat.ucrTry()
+        Me.ucrChkExplanatoryModelForLocationParameter = New instat.ucrCheck()
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam = New instat.ucrReceiverExpression()
+        Me.ucrInputExtremes = New instat.ucrInputComboBox()
+        Me.ucrSaveExtremes = New instat.ucrSave()
+        Me.ucrSelectorExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.grpSecondCalc.SuspendLayout()
@@ -100,23 +100,10 @@ Partial Class dlgExtremes
         Me.cmdExp.Name = "cmdExp"
         Me.cmdExp.UseVisualStyleBackColor = True
         '
-        'ucrInputThresholdforLocation
-        '
-        Me.ucrInputThresholdforLocation.AddQuotesIfUnrecognised = True
-        Me.ucrInputThresholdforLocation.IsMultiline = False
-        Me.ucrInputThresholdforLocation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputThresholdforLocation, "ucrInputThresholdforLocation")
-        Me.ucrInputThresholdforLocation.Name = "ucrInputThresholdforLocation"
-        '
         'lblThreshold
         '
         resources.ApplyResources(Me.lblThreshold, "lblThreshold")
         Me.lblThreshold.Name = "lblThreshold"
-        '
-        'ucrTryModelling
-        '
-        resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
-        Me.ucrTryModelling.Name = "ucrTryModelling"
         '
         'cmdSin
         '
@@ -225,6 +212,42 @@ Partial Class dlgExtremes
         Me.cmdMinus.Name = "cmdMinus"
         Me.cmdMinus.UseVisualStyleBackColor = True
         '
+        'lblFevdType
+        '
+        resources.ApplyResources(Me.lblFevdType, "lblFevdType")
+        Me.lblFevdType.Name = "lblFevdType"
+        '
+        'cmdDisplayOptions
+        '
+        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
+        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
+        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
+        '
+        'cmdFittingOptions
+        '
+        resources.ApplyResources(Me.cmdFittingOptions, "cmdFittingOptions")
+        Me.cmdFittingOptions.Name = "cmdFittingOptions"
+        Me.cmdFittingOptions.UseVisualStyleBackColor = True
+        '
+        'lblDataToFit
+        '
+        resources.ApplyResources(Me.lblDataToFit, "lblDataToFit")
+        Me.lblDataToFit.Name = "lblDataToFit"
+        Me.lblDataToFit.Tag = "Data_to_be_fitted"
+        '
+        'ucrInputThresholdforLocation
+        '
+        Me.ucrInputThresholdforLocation.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdforLocation.IsMultiline = False
+        Me.ucrInputThresholdforLocation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputThresholdforLocation, "ucrInputThresholdforLocation")
+        Me.ucrInputThresholdforLocation.Name = "ucrInputThresholdforLocation"
+        '
+        'ucrTryModelling
+        '
+        resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
+        Me.ucrTryModelling.Name = "ucrTryModelling"
+        '
         'ucrChkExplanatoryModelForLocationParameter
         '
         Me.ucrChkExplanatoryModelForLocationParameter.Checked = False
@@ -240,11 +263,6 @@ Partial Class dlgExtremes
         Me.ucrReceiverExpressionExplanatoryModelForLocParam.strNcFilePath = ""
         Me.ucrReceiverExpressionExplanatoryModelForLocParam.ucrSelector = Nothing
         '
-        'lblFevdType
-        '
-        resources.ApplyResources(Me.lblFevdType, "lblFevdType")
-        Me.lblFevdType.Name = "lblFevdType"
-        '
         'ucrInputExtremes
         '
         Me.ucrInputExtremes.AddQuotesIfUnrecognised = True
@@ -258,18 +276,6 @@ Partial Class dlgExtremes
         resources.ApplyResources(Me.ucrSaveExtremes, "ucrSaveExtremes")
         Me.ucrSaveExtremes.Name = "ucrSaveExtremes"
         '
-        'cmdDisplayOptions
-        '
-        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
-        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
-        '
-        'cmdFittingOptions
-        '
-        resources.ApplyResources(Me.cmdFittingOptions, "cmdFittingOptions")
-        Me.cmdFittingOptions.Name = "cmdFittingOptions"
-        Me.cmdFittingOptions.UseVisualStyleBackColor = True
-        '
         'ucrSelectorExtremes
         '
         Me.ucrSelectorExtremes.bDropUnusedFilterLevels = False
@@ -277,12 +283,6 @@ Partial Class dlgExtremes
         Me.ucrSelectorExtremes.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorExtremes, "ucrSelectorExtremes")
         Me.ucrSelectorExtremes.Name = "ucrSelectorExtremes"
-        '
-        'lblDataToFit
-        '
-        resources.ApplyResources(Me.lblDataToFit, "lblDataToFit")
-        Me.lblDataToFit.Name = "lblDataToFit"
-        Me.lblDataToFit.Tag = "Data_to_be_fitted"
         '
         'ucrReceiverVariable
         '
