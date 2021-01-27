@@ -132,6 +132,7 @@ DataBook$set("public", "copy_data_object", function(data_name, new_name, filter_
   if(filter_name != "") {
     subset_data <- self$get_data_objects(data_name)$get_data_frame(use_current_filter = FALSE, filter_name = filter_name, retain_attr = TRUE)
     if(reset_row_names) rownames(subset_data) <- 1:nrow(subset_data)
+    new_obj$remove_current_filter()
     new_obj$set_data(subset_data)
   }
   self$append_data_object(new_name, new_obj)
@@ -744,6 +745,11 @@ DataBook$set("public", "get_filter_as_logical", function(data_name, filter_name)
 
 DataBook$set("public", "get_current_filter", function(data_name) {
   self$get_data_objects(data_name)$get_current_filter()
+}
+)
+
+DataBook$set("public", "get_current_filter_name", function(data_name) {
+  self$get_data_objects(data_name)$get_current_filter()$name
 }
 )
 
