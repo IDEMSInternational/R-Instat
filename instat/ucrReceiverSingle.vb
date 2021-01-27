@@ -333,6 +333,8 @@ Public Class ucrReceiverSingle
             If Selector IsNot Nothing AndAlso Selector.CurrentReceiver IsNot Nothing AndAlso Not Selector.CurrentReceiver.Equals(Me) Then
                 RemoveColor()
             End If
+            'by default multiple receivers will be autoswitched on selection change
+            bAutoSwitchFromReceiver = True
         End If
     End Sub
 

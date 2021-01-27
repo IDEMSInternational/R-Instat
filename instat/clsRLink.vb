@@ -156,16 +156,16 @@ Public Class RLink
 
 
     ''' <summary>   The R version major required. </summary>
-    Private strRVersionMajorRequired As String = "3"
+    Private strRVersionMajorRequired As String = "4"
 
     ''' <summary>   The R version minor required. </summary>
-    Private strRVersionMinorRequired As String = "6"
+    Private strRVersionMinorRequired As String = "0"
 
     ''' <summary>   The R version required. </summary>
     Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0"
 
     ''' <summary>   The R bundled version. </summary>
-    Private strRBundledVersion As String = "3.6.2"
+    Private strRBundledVersion As String = "4.0.3"
 
 
     '''--------------------------------------------------------------------------------------------
@@ -1254,6 +1254,7 @@ Public Class RLink
             End Try
             Try
                 ' if script should run in a separate thread
+                ' Fixed thread stack size i.e maxStackSize = 25000000 (25MB) because this may returns an overflow exception when large datasets are used. For example when producing a declustered plot on extremes dialog using Ghana dataset.
                 If bSeparateThread Then
                     thrRScript = New Threading.Thread(Sub()
                                                           Try
@@ -1267,7 +1268,7 @@ Public Class RLink
                                                               strTempError = ex.Message
                                                               bReturn = False
                                                           End Try
-                                                      End Sub)
+                                                      End Sub, maxStackSize:=25000000)
                     thrRScript.IsBackground = True
                     thrDelay = New Threading.Thread(Sub()
                                                         Dim t As New Stopwatch
@@ -1385,6 +1386,7 @@ Public Class RLink
         Dim clsSetWd As New RFunction
         Dim clsSource As New RFunction
         Dim clsCreateIO As New ROperator
+        Dim clsDplyrOption As New RFunction
         Dim strScript As String = ""
 
         clsSetWd.SetRCommand("setwd")
@@ -1394,11 +1396,14 @@ Public Class RLink
         clsCreateIO.SetOperation("<-")
         clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
         clsCreateIO.AddParameter("right", strDataBookClassName & "$new()", iPosition:=1)
+        clsDplyrOption.SetRCommand("options")
+        clsDplyrOption.AddParameter("dplyr.summarise.inform", "FALSE", iPosition:=0)
 
         strScript = ""
         strScript = strScript & clsSetWd.ToScript() & Environment.NewLine
         strScript = strScript & clsSource.ToScript() & Environment.NewLine
-        strScript = strScript & clsCreateIO.ToScript()
+        strScript = strScript & clsCreateIO.ToScript() & Environment.NewLine
+        strScript = strScript & clsDplyrOption.ToScript()
 
         Return strScript
     End Function
@@ -2277,11 +2282,10 @@ Public Class RLink
     '''--------------------------------------------------------------------------------------------
     Public Sub ViewLastGraph(Optional bAsPlotly As Boolean = False)
         Dim clsLastGraph As New RFunction
-        Dim clsInteractivePlot As New RFunction
-
         clsLastGraph.SetRCommand(strInstatDataObject & "$get_last_graph")
 
         If bAsPlotly Then
+            Dim clsInteractivePlot As New RFunction
             clsLastGraph.AddParameter("print_graph", "FALSE", iPosition:=0)
             clsInteractivePlot.SetPackageName("plotly")
             clsInteractivePlot.SetRCommand("ggplotly")
@@ -2289,7 +2293,13 @@ Public Class RLink
             'Need to set iCallType = 2 to obtain a graph in an interactive viewer.
             RunScript(clsInteractivePlot.ToScript(), iCallType:=2, strComment:="View last graph as Plotly", bSeparateThread:=False)
         Else
-            RunScript(clsLastGraph.ToScript(), strComment:="View last graph", bSeparateThread:=False)
+            Dim strGlobalGraphDisplayOption As String
+            'store the current set graph display option, to restore after display
+            strGlobalGraphDisplayOption = Me.strGraphDisplayOption
+            Me.strGraphDisplayOption = "view_R_viewer"
+            RunScript(clsLastGraph.ToScript(), iCallType:=3, strComment:="View last graph", bSeparateThread:=False)
+            'restore the graph display option
+            Me.strGraphDisplayOption = strGlobalGraphDisplayOption
         End If
     End Sub
 
