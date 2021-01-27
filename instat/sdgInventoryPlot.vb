@@ -56,21 +56,27 @@ Public Class sdgInventoryPlot
         ucrChkScales.AddParameterPresentCondition(True, "scale")
         ucrChkScales.AddParameterPresentCondition(False, "scale", False)
 
-        ucrChkNoOfRows.SetText("Fixed Number of Rows")
-        ucrChkNoOfRows.SetParameter(New RParameter("nrow"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
         ucrNudNumberofRows.SetMinMax(1, Integer.MaxValue)
         ucrNudNumberofRows.SetRDefault(1)
 
-        ucrChkNoOfColumns.SetText("Fixed Number of Columns")
-        ucrChkNoOfColumns.SetParameter(New RParameter("ncol"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
-        ucrNudNumberofColumns.SetParameter(New RParameter("ncol"))
-        ucrNudNumberofColumns.SetMinMax(1, Integer.MaxValue)
-        ucrNudNumberofColumns.SetRDefault(1)
 
+        ucrChkNoOfRowsOrColumns.AddParameterPresentCondition(True, {"ncol", "nrow"}, True)
+        ucrChkNoOfRowsOrColumns.AddParameterPresentCondition(False, {"ncol", "nrow"}, False)
+        ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
 
-        ucrChkNoOfRows.AddToLinkedControls(ucrNudNumberofRows, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkNoOfColumns.AddToLinkedControls(ucrNudNumberofColumns, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
+        ucrNudNumberofRows.bAddRemoveParameter = False
+
+        ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir"))
+        ucrPnlHorizonatalVertical.bChangeParameterValue = False
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical)
+        ucrPnlHorizonatalVertical.AddRadioButton(rdoHorizontal)
+        ucrPnlHorizonatalVertical.AddParameterValuesCondition(rdoVertical, "dir", Chr(34) & "v" & Chr(34))
+        ucrPnlHorizonatalVertical.AddParameterValuesCondition(rdoHorizontal, "dir", Chr(34) & "h" & Chr(34))
+        ucrPnlHorizonatalVertical.SetRDefault(Chr(34) & "h" & Chr(34))
+
+        ucrChkNoOfRowsOrColumns.AddToLinkedControls(ucrNudNumberofRows, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlXAxisTitle.AddRadioButton(rdoAutoXAxis)
         ucrPnlXAxisTitle.AddRadioButton(rdoNoTitleXAxisTitle)
@@ -233,12 +239,10 @@ Public Class sdgInventoryPlot
         ucrChkYAxisAngle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputDateDisplayFormat.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputDateBreakTime.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrChkNoOfRows.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrNudNumberofRows.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrChkNoOfColumns.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrNudNumberofColumns.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudXAxisLabelSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputScale.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrChkNoOfRowsOrColumns.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrNudNumberofRows.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrChkYAxisLabelSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudYAxisAngle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudFacetXSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
@@ -255,6 +259,7 @@ Public Class sdgInventoryPlot
         ucrInputLegendPosition.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrPnlXAxisTitle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         UcrPnlYAxisTitle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrPnlHorizonatalVertical.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
 
         bRCodeSet = True
 
@@ -282,6 +287,16 @@ Public Class sdgInventoryPlot
             clsInventory.AddParameter("labelYAxis", Chr(34) & ucrInputYAxisTitle.GetText() & Chr(34))
         End If
     End Sub
+
+    Private Sub SetFacetParameters()
+        If rdoHorizontal.Checked Then
+            ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
+            ucrNudNumberofRows.ChangeParameterName("nrow")
+        ElseIf rdoVertical.Checked Then
+            ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Columns")
+            ucrNudNumberofRows.ChangeParameterName("ncol")
+        End If
+    End Sub
     Private Sub ucrPnlXAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlXAxisTitle.ControlValueChanged, ucrInputXAxisTitle.ControlValueChanged
         SetXLabel()
 
@@ -292,4 +307,11 @@ Public Class sdgInventoryPlot
 
     End Sub
 
+    Private Sub ucrChkNoOfRowsOrColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoOfRowsOrColumns.ControlValueChanged
+        SetFacetParameters()
+    End Sub
+
+    Private Sub ucrPnlHorizonatalVertical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHorizonatalVertical.ControlValueChanged
+        SetFacetParameters()
+    End Sub
 End Class
