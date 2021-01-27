@@ -154,7 +154,7 @@ Public Class ucrNud
     End Function
 
     Public Function IsEmpty() As Boolean
-        Return nudUpDown.Text = ""
+        Return string.IsNullOrEmpty(nudUpDown.Text)
     End Function
 
     Public Overrides Sub SetToValue(objTemp As Object)
