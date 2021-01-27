@@ -625,7 +625,13 @@ Public Class dlgClimaticCheckDataRain
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverElement.IsEmpty OrElse ((ucrChkLarge.Checked AndAlso ucrNudLarge.IsEmpty) OrElse (ucrChkSame.Checked AndAlso (ucrNudSame.IsEmpty OrElse ucrInputSameValue.IsEmpty)) OrElse (ucrChkWetDays.Checked AndAlso ucrNudWetDays.IsEmpty) OrElse (ucrChkOutlier.Checked AndAlso (ucrNudSkewnessWeight.IsEmpty OrElse ucrNudCoeff.IsEmpty)) OrElse (ucrChkDryMonth.Checked AndAlso (ucrInputThreshold.IsEmpty OrElse ucrReceiverMonth.IsEmpty))) OrElse ucrChkOutlier.Checked AndAlso (ucrChkOmitZero.Checked AndAlso ucrInputThresholdValue.IsEmpty) Then
+        If ucrReceiverElement.IsEmpty OrElse 
+                ((ucrChkLarge.Checked AndAlso ucrNudLarge.IsEmpty) OrElse 
+                (ucrChkSame.Checked AndAlso (ucrNudSame.IsEmpty OrElse ucrInputSameValue.IsEmpty)) OrElse 
+                (ucrChkWetDays.Checked AndAlso ucrNudWetDays.IsEmpty) OrElse 
+                (ucrChkOutlier.Checked AndAlso (ucrNudSkewnessWeight.IsEmpty OrElse ucrNudCoeff.IsEmpty)) OrElse
+                (ucrChkDryMonth.Checked AndAlso (ucrInputThreshold.IsEmpty OrElse ucrReceiverMonth.IsEmpty))) OrElse
+                ucrChkOutlier.Checked AndAlso (ucrChkOmitZero.Checked AndAlso ucrInputThresholdValue.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
