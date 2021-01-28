@@ -207,7 +207,8 @@ Public Class dlgExtremes
     End Sub
 
     Private Sub cmdZero_Click(sender As Object, e As EventArgs) Handles cmdZero.Click
-        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("I()", 1)
+        ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("I( )", 1)
+
     End Sub
 
     Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
