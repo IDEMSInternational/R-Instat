@@ -130,7 +130,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdRemoveCurrentFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>4</value>
   </data>
   <data name="cmdRemoveCurrentFilter.Text" xml:space="preserve">
     <value>Remove Current Filter</value>
@@ -157,7 +157,7 @@
     <value>219, 180</value>
   </data>
   <data name="ucrSelectorFilters.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrSelectorFilters.Name" xml:space="preserve">
     <value>ucrSelectorFilters</value>
@@ -195,6 +195,9 @@
   <data name="lblFilterPreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblFilterPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 211</value>
   </data>
@@ -225,6 +228,9 @@
   <data name="rdoForDialog.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
+  <data name="rdoForDialog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoForDialog.Location" type="System.Drawing.Point, System.Drawing">
     <value>120, 19</value>
   </data>
@@ -232,7 +238,7 @@
     <value>120, 17</value>
   </data>
   <data name="rdoForDialog.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>1</value>
   </data>
   <data name="rdoForDialog.Text" xml:space="preserve">
     <value>For This Dialog Only</value>
@@ -252,6 +258,9 @@
   <data name="rdoAllDialogs.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoAllDialogs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoAllDialogs.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 19</value>
   </data>
@@ -259,7 +268,7 @@
     <value>92, 17</value>
   </data>
   <data name="rdoAllDialogs.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>0</value>
   </data>
   <data name="rdoAllDialogs.Text" xml:space="preserve">
     <value>For All Dialogs</value>
@@ -283,7 +292,7 @@
     <value>340, 49</value>
   </data>
   <data name="grpApplyOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>7</value>
   </data>
   <data name="grpApplyOptions.Text" xml:space="preserve">
     <value>Apply Options</value>
@@ -300,6 +309,9 @@
   <data name="&gt;&gt;grpApplyOptions.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="cmdDefineNewFilter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdDefineNewFilter.Location" type="System.Drawing.Point, System.Drawing">
     <value>228, 93</value>
   </data>
@@ -307,7 +319,7 @@
     <value>120, 23</value>
   </data>
   <data name="cmdDefineNewFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="cmdDefineNewFilter.Text" xml:space="preserve">
     <value>Define New Filter</value>
@@ -327,6 +339,9 @@
   <data name="lblFilter.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblFilter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblFilter.Location" type="System.Drawing.Point, System.Drawing">
     <value>225, 21</value>
   </data>
@@ -334,7 +349,7 @@
     <value>29, 13</value>
   </data>
   <data name="lblFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="lblFilter.Text" xml:space="preserve">
     <value>Filter</value>
@@ -405,6 +420,9 @@
   <data name="chkShowHiddenColumns.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="chkShowHiddenColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="chkShowHiddenColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 39</value>
   </data>
@@ -463,7 +481,7 @@
     <value>363, 317</value>
   </data>
   <data name="tbcDataOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tbcDataOptions.Name" xml:space="preserve">
     <value>tbcDataOptions</value>
@@ -484,7 +502,7 @@
     <value>142, 30</value>
   </data>
   <data name="ucrSubDialogueBase.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrSubDialogueBase.Name" xml:space="preserve">
     <value>ucrSubDialogueBase</value>
@@ -506,6 +524,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>375, 351</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
