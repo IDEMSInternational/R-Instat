@@ -49,10 +49,10 @@ Partial Class sdgDataOptions
         Me.cmdDefineNewFilter = New System.Windows.Forms.Button()
         Me.lblFilter = New System.Windows.Forms.Label()
         Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
-        Me.ucrSelectorFilters = New instat.ucrSelectorByDataFrame()
         Me.tbColumns = New System.Windows.Forms.TabPage()
         Me.chkShowHiddenColumns = New System.Windows.Forms.CheckBox()
         Me.ucrSubDialogueBase = New instat.ucrButtonsSubdialogue()
+        Me.ucrSelectorFilters = New instat.ucrSelectorByDataFrameAddRemove()
         Me.tbcDataOptions.SuspendLayout()
         Me.tbRows.SuspendLayout()
         Me.grpApplyOptions.SuspendLayout()
@@ -69,13 +69,13 @@ Partial Class sdgDataOptions
         '
         'tbRows
         '
+        Me.tbRows.Controls.Add(Me.ucrSelectorFilters)
         Me.tbRows.Controls.Add(Me.ucrInputFilterPreview)
         Me.tbRows.Controls.Add(Me.lblFilterPreview)
         Me.tbRows.Controls.Add(Me.grpApplyOptions)
         Me.tbRows.Controls.Add(Me.cmdDefineNewFilter)
         Me.tbRows.Controls.Add(Me.lblFilter)
         Me.tbRows.Controls.Add(Me.ucrReceiverFilter)
-        Me.tbRows.Controls.Add(Me.ucrSelectorFilters)
         resources.ApplyResources(Me.tbRows, "tbRows")
         Me.tbRows.Name = "tbRows"
         Me.tbRows.Tag = "Rows"
@@ -139,13 +139,6 @@ Partial Class sdgDataOptions
         Me.ucrReceiverFilter.strNcFilePath = ""
         Me.ucrReceiverFilter.ucrSelector = Nothing
         '
-        'ucrSelectorFilters
-        '
-        Me.ucrSelectorFilters.bShowHiddenColumns = False
-        Me.ucrSelectorFilters.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorFilters, "ucrSelectorFilters")
-        Me.ucrSelectorFilters.Name = "ucrSelectorFilters"
-        '
         'tbColumns
         '
         Me.tbColumns.Controls.Add(Me.chkShowHiddenColumns)
@@ -165,6 +158,14 @@ Partial Class sdgDataOptions
         '
         resources.ApplyResources(Me.ucrSubDialogueBase, "ucrSubDialogueBase")
         Me.ucrSubDialogueBase.Name = "ucrSubDialogueBase"
+        '
+        'ucrSelectorFilters
+        '
+        Me.ucrSelectorFilters.bDropUnusedFilterLevels = False
+        Me.ucrSelectorFilters.bShowHiddenColumns = False
+        Me.ucrSelectorFilters.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorFilters, "ucrSelectorFilters")
+        Me.ucrSelectorFilters.Name = "ucrSelectorFilters"
         '
         'sdgDataOptions
         '
@@ -193,7 +194,6 @@ Partial Class sdgDataOptions
     Friend WithEvents tbRows As TabPage
     Friend WithEvents tbColumns As TabPage
     Friend WithEvents chkShowHiddenColumns As CheckBox
-    Friend WithEvents ucrSelectorFilters As ucrSelectorByDataFrame
     Friend WithEvents cmdDefineNewFilter As Button
     Friend WithEvents lblFilter As Label
     Friend WithEvents ucrReceiverFilter As ucrReceiverSingle
@@ -202,4 +202,5 @@ Partial Class sdgDataOptions
     Friend WithEvents rdoAllDialogs As RadioButton
     Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
     Friend WithEvents lblFilterPreview As Label
+    Friend WithEvents ucrSelectorFilters As ucrSelectorByDataFrameAddRemove
 End Class
