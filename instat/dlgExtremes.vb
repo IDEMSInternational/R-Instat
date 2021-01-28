@@ -249,15 +249,17 @@ Public Class dlgExtremes
     End Sub
 
     ''' <summary> 
-    ''' <list type="bullet">
-    '''If the text selected in the extremes combobox is "GP","PP"or "Exponential" the Threshold for Location  textbox is 
-    ''' made visible else its made invisible
-    ''' If the text selected in the extremes combobox  "GP","PP"or "Exponential" the ."scale.fun" parameter is added
-    ''' to the fevd function and the "location.fun" parameter is removed from the fevd function
-    ''' If the text selected in the extremes combobox  "Gumbel" or "GEV" the ."location.fun" parameter is added
-    ''' to the fevd function and the "scale.fun" parameter is removed from the fevd function
-    ''' </list>   
-    ''' </summary>	   
+    ''' If the text selected in the extremes combobox is "GP", "PP" or "Exponential", then the 
+    ''' threshold for the location textbox is made visible, else it is made invisible.
+    ''' <para>
+    ''' If the text selected in the extremes combobox is "GP", "PP" or "Exponential", then 
+    ''' the "scale.fun" parameter is added to the fevd function and the "location.fun" parameter 
+    ''' is removed from the fevd function. 
+    ''' </para><para>
+    ''' If the text selected in the extremes combobox is "Gumbel" or "GEV", then the "location.fun" 
+    ''' parameter is added to the fevd function and the "scale.fun" parameter is removed from 
+    ''' the fevd function.
+    ''' </para></summary>	   
     Private Sub ParameterControl()
         If ucrInputExtremes.GetText() = "GP" OrElse ucrInputExtremes.GetText() = "PP" OrElse ucrInputExtremes.GetText() = "Exponential" Then
             ucrInputThresholdforLocation.Visible = True
