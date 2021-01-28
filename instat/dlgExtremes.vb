@@ -17,8 +17,9 @@
 Imports instat.Translations
 
 Public Class dlgExtremes
-    Private clsAttach As New RFunction
-    Private clsDetach As New RFunction
+    Private clsAttachFunction As New RFunction
+    Private clsDetachFunction As New RFunction
+
     Private clsFevdFunction, clsPlotsFunction As New RFunction
     'clsLocationScaleResetOperator is not run but affects reset of the check box.Any better method of implementation?
     Private clsLocationScaleResetOperator As New ROperator
