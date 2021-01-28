@@ -952,4 +952,8 @@ Public Class ucrDataView
     Private Sub rowContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles rowContextMenuStrip.Opening
         mnuRemoveCurrentFilter.Enabled = strFilterName <> "no_filter"
     End Sub
+
+    Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
+        mnuRemoveCurrentFilters.Enabled = strFilterName <> "no_filter"
+    End Sub
 End Class
