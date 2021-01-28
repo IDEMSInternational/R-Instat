@@ -17,6 +17,7 @@
 Imports System.ComponentModel
 Imports instat.Translations
 Imports unvell.ReoGrid.Events
+Imports RDotNet
 
 Public Class ucrColumnMetadata
     Private clsUnhideAllColumns As New RFunction
@@ -31,6 +32,7 @@ Public Class ucrColumnMetadata
     Private clsUnfreezeColumns As New RFunction
     Private clsConvertOrderedFactor As New RFunction
     Private clsAppendVariablesMetaData As New RFunction
+    Private clsGetCurrentFilterName As New RFunction
     'Public context As New frmEditor
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
     Public strPreviousCellText As String
@@ -63,6 +65,7 @@ Public Class ucrColumnMetadata
         clsFreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$freeze_columns")
         clsUnfreezeColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unfreeze_columns")
         clsConvertOrderedFactor.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+        clsGetCurrentFilterName.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_current_filter_name")
     End Sub
 
 
@@ -370,6 +373,7 @@ Public Class ucrColumnMetadata
             clsUnfreezeColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             'clsGetDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsConvertOrderedFactor.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+            clsGetCurrentFilterName.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
         End If
     End Sub
 
@@ -430,6 +434,7 @@ Public Class ucrColumnMetadata
         Dim iSelectedCols As Integer
         Dim strType As String
         Dim strColumns() As String
+        Dim strFilterName As String = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCurrentFilterName.ToScript(), bSilent:=True).AsCharacter(0)
 
         iSelectedCols = grdVariables.CurrentWorksheet.SelectionRange.Rows
         strColumns = GetSelectedVariableNamesAsArray()
@@ -446,6 +451,7 @@ Public Class ucrColumnMetadata
             mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If
+        mnuClearColumnFilter.Enabled = strFilterName <> "no_filter"
     End Sub
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
