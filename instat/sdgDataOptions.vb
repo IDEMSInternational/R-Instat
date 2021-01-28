@@ -70,6 +70,9 @@ Public Class sdgDataOptions
         If sdgCreateFilter.bFilterDefined Then
             frmMain.clsRLink.RunScript(sdgCreateFilter.clsCurrentFilter.ToScript(), strComment:="Create Filter subdialog: Created new filter")
             ucrSelectorFilters.SetDataframe(sdgCreateFilter.ucrCreateFilter.ucrSelectorForFitler.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            If ucrReceiverFilter.GetVariableNames(False) = sdgCreateFilter.ucrCreateFilter.ucrInputFilterName.GetText() Then
+                ucrReceiverFilter.Clear()
+            End If
             ucrReceiverFilter.Add(sdgCreateFilter.ucrCreateFilter.ucrInputFilterName.GetText())
         End If
         ucrSelectorFilters.LoadList()
