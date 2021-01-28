@@ -948,4 +948,8 @@ Public Class ucrDataView
     Private Sub linkHelpRInstatWebsite_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpRInstatWebsite.LinkClicked
         Process.Start("http://r-instat.org/")
     End Sub
+
+    Private Sub rowContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles rowContextMenuStrip.Opening
+        mnuRemoveCurrentFilter.Enabled = strFilterName <> "no_filter"
+    End Sub
 End Class
