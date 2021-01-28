@@ -44,7 +44,7 @@ Public Class ucrDataView
     Private clsHideDataFrame As New RFunction
     Private clsGetCurrentFilterName As New RFunction
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
-
+    Private strFilterName As String
     Private Sub ucrDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdData.Visible = False
         mnuInsertColsBefore.Visible = False
@@ -344,8 +344,8 @@ Public Class ucrDataView
             iRowCount = frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, True)
             iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(grdCurrSheet.Name)
             lblRowDisplay.Text = "Showing " & grdCurrSheet.RowCount & " of " & iRowCount & " rows"
+            strFilterName = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCurrentFilterName.ToScript(), bSilent:=True).AsCharacter(0)
             If frmMain.clsRLink.RunInternalScriptGetValue(clsFilterApplied.ToScript()).AsLogical(0) Then
-                Dim strFilterName As String = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCurrentFilterName.ToScript(), bSilent:=True).AsCharacter(0)
                 lblRowDisplay.Text = lblRowDisplay.Text & " (" & frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, False) & ")" & "|Active filter:" & strFilterName
             End If
             lblRowDisplay.Text = lblRowDisplay.Text & " | Showing " & grdCurrSheet.ColumnCount & " of " & iColumnCount & " columns"
@@ -773,6 +773,7 @@ Public Class ucrDataView
             mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If
+        mnuClearColumnFilter.Enabled = strFilterName <> "no_filter"
     End Sub
 
     Private Sub HideSheet_Click(sender As Object, e As EventArgs) Handles HideSheet.Click
