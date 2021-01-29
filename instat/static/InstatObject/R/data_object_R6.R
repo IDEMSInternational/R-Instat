@@ -2604,12 +2604,20 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
     if(!is.null(station_col) && length(element_cols) > 1) {
       if(is.null(facet_by) || facet_by == "stations") {
         if(is.null(facet_by)) message("facet_by not specified. facets will be by stations.")
-                g <- g + ggplot2::facet_grid(facets = as.formula(paste(station_col, "+ variable~."))) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = "")
+        if(!missing(row_col_number)){
+                g <- g + ggplot2::facet_wrap(facets = as.formula(paste(station_col, "+ variable~.")), nrow = nrow, ncol = ncol, scales = scale, dir = dir) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = NULL)
+        }
+        else{
+                g <- g + ggplot2::facet_grid(facets = as.formula(paste(station_col, "+ variable~."))) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = NULL)
+            }
       }
       else if(facet_by == "elements") {
+       if(!missing(row_col_number)){
+                g <- g + ggplot2::facet_wrap(facets = as.formula(paste("variable +", station_col, "~.")), nrow = nrow, ncol = ncol, scales = scale, dir = dir) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = NULL)
+        }else{
                g <- g + ggplot2::facet_grid(facets = as.formula(paste("variable +", station_col, "~."))) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = NULL)
-
-      }
+             }
+     }
       else if(facet_by == "stations-elements") {
          if(!missing(row_col_number)){
               g <- g + ggplot2::facet_wrap(facets = as.formula(paste(".~",station_col, "+ variable")), nrow = nrow, ncol = ncol, scales = scale, dir = dir) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = NULL)
