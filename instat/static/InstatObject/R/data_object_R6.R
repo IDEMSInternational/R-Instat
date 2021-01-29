@@ -2464,7 +2464,7 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
                                                        graph_title = "Inventory Plot", graph_subtitle = NULL, graph_caption = NULL, title_size = NULL, 
                                                        subtitle_size = NULL, caption_size = NULL, labelXAxis, labelYAxis, xSize = NULL, ySize = NULL,
                                                        Xangle = NULL, Yangle = NULL, scale_xdate, fromXAxis = NULL, toXAxis = NULL, byXaxis = NULL, date_ylabels, 
-                                                       legend_position = NULL, xlabelsize = NULL, ylabelsize = NULL, scale = "none", dir = "",
+                                                       legend_position = NULL, xlabelsize = NULL, ylabelsize = NULL, scale = NULL, dir = "", row_col_number,
                                                        nrow = NULL, ncol = NULL, scale_ydate = FALSE, date_ybreaks, step = 1, key_colours = c("red", "grey"), 
                                                        display_rain_days = FALSE, rain_cats = list(breaks = c(0, 0.85, Inf), labels = c("Dry", "Rain"), 
                                                        key_colours = c("tan3", "blue"))) {
@@ -2573,12 +2573,12 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
       }
       
       if(facet_by == "stations-elements") {
-          if(scale != "none"){
+          if(!missing(row_col_number)){
                   g <- g + ggplot2::facet_wrap(facets = as.formula(paste(".~",station_col, "+ variable")), nrow = nrow, ncol = ncol, scales = scale, dir = dir)
 	      }else {g <- g + ggplot2::facet_grid(facets = as.formula(paste(station_col, "~variable")))}
       }
       else if(facet_by == "elements-stations") {
-           if(scale != "none"){
+           if(!missing(row_col_number)){
                   g <- g + ggplot2::facet_wrap(facets = as.formula(paste(".~variable +",station_col)), nrow = nrow, ncol = ncol, scales = scale, dir = dir)
 	      }else {g <- g + ggplot2::facet_grid(facets = as.formula(paste("variable~",station_col)))}
       }
@@ -2591,7 +2591,7 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
       }
     }
     else if(length(element_cols) > 1) {
-          if(scale != "none"){
+          if(!missing(row_col_number)){
                g <- g + ggplot2::facet_wrap(.~variable, nrow = nrow, ncol = ncol, scales = scale, dir = dir)
 	      }else {g <- g + ggplot2::facet_grid(facets = variable~.)}
 
@@ -2611,7 +2611,7 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
 
       }
       else if(facet_by == "stations-elements") {
-         if(scale != "none"){
+         if(!missing(row_col_number)){
               g <- g + ggplot2::facet_wrap(facets = as.formula(paste(".~",station_col, "+ variable")), nrow = nrow, ncol = ncol, scales = scale, dir = dir) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = NULL)
 
          }
@@ -2621,7 +2621,7 @@ DataSheet$set("public","make_inventory_plot", function(date_col, station_col = N
          }
       }
       else if(facet_by == "elements-stations") {
-          if(scale != "none"){
+          if(!missing(row_col_number)){
                g <- g +  ggplot2::facet_wrap(facets = as.formula(paste(".~variable +",station_col)), nrow = nrow, ncol = ncol, scales = scale, dir = dir) + blank_y_axis + ggplot2::scale_y_continuous(breaks = NULL) + ggplot2::labs(y = NULL)
 
           }

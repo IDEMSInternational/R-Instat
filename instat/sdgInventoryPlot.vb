@@ -43,7 +43,7 @@ Public Class sdgInventoryPlot
 
 
         ucrChkScales.SetText("Scales")
-        ucrChkScales.SetParameter(New RParameter("scale"))
+        ucrChkScales.SetParameter(New RParameter("scale"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkScales.AddToLinkedControls(ucrInputScale, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
         ucrInputScale.SetParameter(New RParameter("scale"))
         dctScale.Add("None", Chr(34) & "none" & Chr(34))
@@ -53,15 +53,16 @@ Public Class sdgInventoryPlot
         dctScale.Add("Fixed", Chr(34) & "fixed" & Chr(34))
         ucrInputScale.SetItems(dctScale)
         ucrInputScale.SetDropDownStyleAsNonEditable()
-        ucrChkScales.AddParameterPresentCondition(True, "scale")
-        ucrChkScales.AddParameterPresentCondition(False, "scale", False)
+        ' ucrChkScales.AddParameterPresentCondition(True, "scale")
+      '  ucrChkScales.AddParameterPresentCondition(False, "scale", False)
 
         ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
         ucrNudNumberofRows.SetMinMax(1, Integer.MaxValue)
         ucrNudNumberofRows.SetRDefault(1)
 
-        ucrChkNoOfRowsOrColumns.SetParameter(New RParameter("nrow"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkNoOfRowsOrColumns.SetParameter(New RParameter("row_col_number"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
+        ucrChkNoOfRowsOrColumns.SetRDefault("TRUE")
 
         ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
         ucrNudNumberofRows.bAddRemoveParameter = False
@@ -292,12 +293,12 @@ Public Class sdgInventoryPlot
     Private Sub SetFacetParameters()
         If rdoHorizontal.Checked Then
             ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
-            ucrChkNoOfRowsOrColumns.ChangeParameterName("nrow")
+            ' ucrChkNoOfRowsOrColumns.ChangeParameterName("nrow")
             ucrNudNumberofRows.ChangeParameterName("nrow")
             clsInventory.AddParameter("dir", Chr(34) & "h" & Chr(34))
         ElseIf rdoVertical.Checked Then
             ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Columns")
-            ucrChkNoOfRowsOrColumns.ChangeParameterName("ncol")
+            ' ucrChkNoOfRowsOrColumns.ChangeParameterName("ncol")
             ucrNudNumberofRows.ChangeParameterName("ncol")
             clsInventory.AddParameter("dir", Chr(34) & "v" & Chr(34))
         Else
@@ -307,6 +308,16 @@ Public Class sdgInventoryPlot
             clsInventory.AddParameter(ucrNudNumberofRows.GetParameter())
         Else
             clsInventory.RemoveParameter(ucrNudNumberofRows.GetParameter())
+        End If
+    End Sub
+    Private Sub AddRemoveRowColumnNumber()
+        If bRCodeSet Then
+            If ucrChkNoOfRowsOrColumns.Checked Then
+                clsInventory.AddParameter("row_col_number", "TRUE")
+            Else
+                clsInventory.RemoveParameterByName("row_col_number")
+            End If
+
         End If
     End Sub
 
@@ -333,6 +344,7 @@ Public Class sdgInventoryPlot
 
     Private Sub ucrChkNoOfRowsOrColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoOfRowsOrColumns.ControlValueChanged
         SetFacetParameters()
+        AddRemoveRowColumnNumber()
     End Sub
 
     Private Sub ucrPnlHorizonatalVertical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHorizonatalVertical.ControlValueChanged
