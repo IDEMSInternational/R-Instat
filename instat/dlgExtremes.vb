@@ -94,8 +94,8 @@ Public Class dlgExtremes
         clsPlotsFunction = New RFunction
         clsLocationParamOperator = New ROperator
         clsLocationScaleResetOperator = New ROperator
-        clsAttach = New RFunction
-        clsDetach = New RFunction
+        clsAttachFunction = New RFunction
+        clsDetachFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -126,14 +126,14 @@ Public Class dlgExtremes
         clsPlotsFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorExtremes.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         clsPlotsFunction.AddParameter("x", clsRFunctionParameter:=clsFevdFunction, iPosition:=0)
 
-        clsAttach.SetRCommand("attach")
-        clsDetach.SetRCommand("detach")
-        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-        clsDetach.AddParameter("unload", "TRUE", iPosition:=2)
+        clsAttachFunction.SetRCommand("attach")
+        clsDetachFunction.SetRCommand("detach")
+        clsAttachFunction.AddParameter("what", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsDetachFunction.AddParameter("name", clsRFunctionParameter:=ucrSelectorExtremes.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsDetachFunction.AddParameter("unload", "TRUE", iPosition:=2)
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
-        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach, iPosition:=1)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttachFunction)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetachFunction, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsFevdFunction)
         ucrTryModelling.SetRSyntax(ucrBase.clsRsyntax)
     End Sub
@@ -159,11 +159,7 @@ Public Class dlgExtremes
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverVariable.IsEmpty Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
-        End If
+        ucrBase.OKEnabled(Not ucrReceiverVariable.IsEmpty)
     End Sub
     Private Sub cmdFittingOptions_Click(sender As Object, e As EventArgs) Handles cmdFittingOptions.Click
         sdgExtremesMethod.SetRCode(clsNewFevdFunction:=clsFevdFunction)
@@ -239,13 +235,10 @@ Public Class dlgExtremes
         ucrReceiverExpressionExplanatoryModelForLocParam.AddToReceiverAtCursorPosition("tan( )", 2)
     End Sub
 
-    Private Sub ucrReceiverVariable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariable.ControlValueChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub control_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputExtremes.ControlValueChanged, ucrReceiverVariable.ControlValueChanged, ucrChkExplanatoryModelForLocationParameter.ControlValueChanged, ucrInputThresholdforLocation.ControlValueChanged
         ParameterControl()
         ucrTryModelling.ResetInputTryMessage()
+        TestOkEnabled()
     End Sub
 
     ''' <summary> 
@@ -281,9 +274,9 @@ Public Class dlgExtremes
                 clsLocationScaleResetOperator.AddParameter("scaleLocation", clsROperatorParameter:=clsLocationParamOperator, iPosition:=0)
             End If
             grpFirstCalc.Visible = True
-            grpSecondCalc.Visible = True
-        Else
-            ucrReceiverVariable.SetMeAsReceiver()
+                grpSecondCalc.Visible = True
+            Else
+                ucrReceiverVariable.SetMeAsReceiver()
             clsFevdFunction.RemoveParameterByName("scale.fun")
             clsFevdFunction.RemoveParameterByName("location.fun")
             clsLocationScaleResetOperator.RemoveParameterByName("scaleLocation")
