@@ -434,6 +434,7 @@ Public Class ucrColumnMetadata
         Dim iSelectedCols As Integer
         Dim strType As String
         Dim strColumns() As String
+        Dim strNoFilter As String = "no_filter"
         Dim strFilterName As String = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCurrentFilterName.ToScript(), bSilent:=True).AsCharacter(0)
 
         iSelectedCols = grdVariables.CurrentWorksheet.SelectionRange.Rows
@@ -451,7 +452,7 @@ Public Class ucrColumnMetadata
             mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If
-        mnuClearColumnFilter.Enabled = strFilterName <> "no_filter"
+        mnuClearColumnFilter.Enabled = Not String.Equals(strFilterName, strNoFilter)
     End Sub
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click

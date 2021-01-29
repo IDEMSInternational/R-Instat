@@ -45,6 +45,7 @@ Public Class ucrDataView
     Private clsGetCurrentFilterName As New RFunction
     Public lstColumnNames As New List(Of KeyValuePair(Of String, String()))
     Private strFilterName As String
+    Private strNoFilter As String = "no_filter"
     Private Sub ucrDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdData.Visible = False
         mnuInsertColsBefore.Visible = False
@@ -773,7 +774,7 @@ Public Class ucrDataView
             mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If
-        mnuClearColumnFilter.Enabled = strFilterName <> "no_filter"
+        mnuClearColumnFilter.Enabled = Not String.Equals(strFilterName, strNoFilter)
     End Sub
 
     Private Sub HideSheet_Click(sender As Object, e As EventArgs) Handles HideSheet.Click
@@ -950,10 +951,10 @@ Public Class ucrDataView
     End Sub
 
     Private Sub rowContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles rowContextMenuStrip.Opening
-        mnuRemoveCurrentFilter.Enabled = strFilterName <> "no_filter"
+        mnuRemoveCurrentFilter.Enabled = Not String.Equals(strFilterName, strNoFilter)
     End Sub
 
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
-        mnuRemoveCurrentFilters.Enabled = strFilterName <> "no_filter"
+        mnuRemoveCurrentFilters.Enabled = Not String.Equals(strFilterName, strNoFilter)
     End Sub
 End Class
