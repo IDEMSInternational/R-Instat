@@ -25,11 +25,6 @@ Partial Class dlgClimaticNCMPCountRecords
         Me.ucrSaveCountRecords = New instat.ucrSave()
         Me.ucrSelectorForA4 = New instat.ucrDataFrame()
         Me.cmdStationMetadata = New System.Windows.Forms.Button()
-        Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkEndYear = New instat.ucrCheck()
-        Me.ucrChkStartYear = New instat.ucrCheck()
-        Me.ucrNudNYE = New instat.ucrNud()
-        Me.ucrNudNYB = New instat.ucrNud()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
@@ -37,12 +32,12 @@ Partial Class dlgClimaticNCMPCountRecords
         Me.lblYear = New System.Windows.Forms.Label()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorForA2 = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.grpOptions.SuspendLayout()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
         'ucrSaveCountRecords
         '
-        Me.ucrSaveCountRecords.Location = New System.Drawing.Point(10, 333)
+        Me.ucrSaveCountRecords.Location = New System.Drawing.Point(10, 251)
         Me.ucrSaveCountRecords.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveCountRecords.Name = "ucrSaveCountRecords"
         Me.ucrSaveCountRecords.Size = New System.Drawing.Size(289, 22)
@@ -67,59 +62,6 @@ Partial Class dlgClimaticNCMPCountRecords
         Me.cmdStationMetadata.TabIndex = 7
         Me.cmdStationMetadata.Text = "Station Metadata"
         Me.cmdStationMetadata.UseVisualStyleBackColor = True
-        '
-        'grpOptions
-        '
-        Me.grpOptions.Controls.Add(Me.ucrChkEndYear)
-        Me.grpOptions.Controls.Add(Me.ucrChkStartYear)
-        Me.grpOptions.Controls.Add(Me.ucrNudNYE)
-        Me.grpOptions.Controls.Add(Me.ucrNudNYB)
-        Me.grpOptions.Location = New System.Drawing.Point(10, 252)
-        Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(258, 73)
-        Me.grpOptions.TabIndex = 9
-        Me.grpOptions.TabStop = False
-        Me.grpOptions.Text = "Options"
-        '
-        'ucrChkEndYear
-        '
-        Me.ucrChkEndYear.Checked = False
-        Me.ucrChkEndYear.Location = New System.Drawing.Point(6, 46)
-        Me.ucrChkEndYear.Name = "ucrChkEndYear"
-        Me.ucrChkEndYear.Size = New System.Drawing.Size(187, 20)
-        Me.ucrChkEndYear.TabIndex = 2
-        '
-        'ucrChkStartYear
-        '
-        Me.ucrChkStartYear.Checked = False
-        Me.ucrChkStartYear.Location = New System.Drawing.Point(6, 20)
-        Me.ucrChkStartYear.Name = "ucrChkStartYear"
-        Me.ucrChkStartYear.Size = New System.Drawing.Size(187, 20)
-        Me.ucrChkStartYear.TabIndex = 0
-        '
-        'ucrNudNYE
-        '
-        Me.ucrNudNYE.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYE.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYE.Location = New System.Drawing.Point(199, 45)
-        Me.ucrNudNYE.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNYE.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYE.Name = "ucrNudNYE"
-        Me.ucrNudNYE.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNYE.TabIndex = 3
-        Me.ucrNudNYE.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudNYB
-        '
-        Me.ucrNudNYB.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYB.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYB.Location = New System.Drawing.Point(199, 19)
-        Me.ucrNudNYB.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNYB.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYB.Name = "ucrNudNYB"
-        Me.ucrNudNYB.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNYB.TabIndex = 1
-        Me.ucrNudNYB.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblStation
         '
@@ -198,15 +140,22 @@ Partial Class dlgClimaticNCMPCountRecords
         Me.ucrSelectorForA2.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorForA2.TabIndex = 0
         '
+        'ucrBase
+        '
+        Me.ucrBase.Location = New System.Drawing.Point(10, 279)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 17
+        '
         'dlgClimaticNCMPCountRecords
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(397, 432)
+        Me.ClientSize = New System.Drawing.Size(415, 336)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSaveCountRecords)
         Me.Controls.Add(Me.ucrSelectorForA4)
         Me.Controls.Add(Me.cmdStationMetadata)
-        Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverMonth)
         Me.Controls.Add(Me.ucrReceiverYear)
@@ -220,7 +169,6 @@ Partial Class dlgClimaticNCMPCountRecords
         Me.Name = "dlgClimaticNCMPCountRecords"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "NCMP Count Records"
-        Me.grpOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -229,11 +177,6 @@ Partial Class dlgClimaticNCMPCountRecords
     Friend WithEvents ucrSaveCountRecords As ucrSave
     Friend WithEvents ucrSelectorForA4 As ucrDataFrame
     Friend WithEvents cmdStationMetadata As Button
-    Friend WithEvents grpOptions As GroupBox
-    Friend WithEvents ucrChkEndYear As ucrCheck
-    Friend WithEvents ucrChkStartYear As ucrCheck
-    Friend WithEvents ucrNudNYE As ucrNud
-    Friend WithEvents ucrNudNYB As ucrNud
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverMonth As ucrReceiverSingle
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
@@ -241,4 +184,5 @@ Partial Class dlgClimaticNCMPCountRecords
     Friend WithEvents lblYear As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrSelectorForA2 As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrBase As ucrButtons
 End Class

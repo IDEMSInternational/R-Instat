@@ -154,11 +154,11 @@ p7_summary <- function(a2, a4, a6, nyb, nye, ncmp_folder) {
   # (unless one can do homogenisation *without* Quality Control, or these vary in time)
   
   desc <- c("Total number of Stations",
-            "Climatological period start","Climatological period end",
-            "Temperature Quality Control level","Precipitation Quality Control level",
-            "Region Average grid resolution","Version")
-  vals <- c(attr(a2, "nstn"), attr(a2, "nyb"), attr(a2, "nye"), attr(a2, "QCT"), attr(a2, "QCPr"),
-            attr(a2, "res"), 2017)
+            "Climatological period start", "Climatological period end",
+            "Temperature Quality Control level", "Precipitation Quality Control level",
+            "Region Average grid resolution", "Version")
+  vals <- c(attr(a2, "nstn"), attr(a2, "nyb"), attr(a2, "nye"), attr(a2, "qct"), attr(a2, "qcpr"),
+            attr(a4, "res"), 2017)
   mess <- paste(desc, vals, sep=" = ")
   
   # Write header and table to single file - generates a warning which can be ignored

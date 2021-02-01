@@ -116,8 +116,8 @@ p3_variogram <- function(a2, station, year, month, nyb = 1981, nye = 2010, ne = 
   # editing of 'P2_Station_List.txt'
   # Still suppressing warning messages - about converting strings to integer
   
-  stations_data <- unique(a2[[station]])
-  stations_metadata <- unique(station_df[[name]])
+  stations_data <- as.character(unique(a2[[station]]))
+  stations_metadata <- as.character(unique(station_df[[name]]))
   if (!all(stations_data %in% stations_metadata)) stop("Station information not available for all stations that appear in data.")
   stations <- stations_data
   nstn <- length(stations)
