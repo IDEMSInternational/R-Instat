@@ -18,6 +18,8 @@ Imports instat.Translations
 Public Class sdgSelectMonth
     Private ucrReceiverMonth As ucrReceiverSingle
     Private clsInOperator As New ROperator
+    Private clsFilterMonthFunction As New RFunction
+    Private clsListCalcFunction As New RFunction
 
     Private Sub sdgSelectMonth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -32,12 +34,19 @@ Public Class sdgSelectMonth
         ucrMonthAsFactor.bIncludeNA = False
     End Sub
 
-    Public Sub SetRCode(Optional clsNewInOperator As ROperator = Nothing, Optional ucrNewReceiverMonth As ucrReceiverSingle = Nothing, Optional bReset As Boolean = False)
+    Public Sub SetRCode(Optional clsNewInOperator As ROperator = Nothing, Optional clsNewListCalcFunction As RFunction = Nothing, Optional clsNewFilterMonthFunction As RFunction = Nothing, Optional ucrNewReceiverMonth As ucrReceiverSingle = Nothing, Optional bReset As Boolean = False)
         ucrReceiverMonth = ucrNewReceiverMonth
         clsInOperator = clsNewInOperator
+        clsFilterMonthFunction = clsNewFilterMonthFunction
+        clsListCalcFunction = clsNewListCalcFunction
     End Sub
 
     Private Sub ucrMonthAsFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrMonthAsFactor.ControlValueChanged
         clsInOperator.AddParameter("months", ucrMonthAsFactor.GetSelectedLevels(), iPosition:=1)
+        If ucrMonthAsFactor.GetSelectedLevels.Count > 0 Then
+            clsListCalcFunction.AddParameter("month_filter", clsRFunctionParameter:=clsFilterMonthFunction, bIncludeArgumentName:=False, iPosition:=0)
+        Else
+            clsListCalcFunction.RemoveParameterByName("month_filter")
+        End If
     End Sub
 End Class
