@@ -417,6 +417,54 @@
   <data name="&gt;&gt;lblSkewnessWeight.ZOrder" xml:space="preserve">
     <value>11</value>
   </data>
+  <data name="&gt;&gt;ucrChkLogicalColumns.Name" xml:space="preserve">
+    <value>ucrChkLogicalColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLogicalColumns.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLogicalColumns.Parent" xml:space="preserve">
+    <value>grpLogicalCalculatedColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrChkLogicalColumns.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCalculatedColumns.Name" xml:space="preserve">
+    <value>ucrChkCalculatedColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCalculatedColumns.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCalculatedColumns.Parent" xml:space="preserve">
+    <value>grpLogicalCalculatedColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCalculatedColumns.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="grpLogicalCalculatedColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 385</value>
+  </data>
+  <data name="grpLogicalCalculatedColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>399, 55</value>
+  </data>
+  <data name="grpLogicalCalculatedColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>37</value>
+  </data>
+  <data name="grpLogicalCalculatedColumns.Text" xml:space="preserve">
+    <value>Include in Original Data</value>
+  </data>
+  <data name="&gt;&gt;grpLogicalCalculatedColumns.Name" xml:space="preserve">
+    <value>grpLogicalCalculatedColumns</value>
+  </data>
+  <data name="&gt;&gt;grpLogicalCalculatedColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLogicalCalculatedColumns.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpLogicalCalculatedColumns.ZOrder" xml:space="preserve">
+    <value>38</value>
+  </data>
   <data name="ucrChkLogicalColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 21</value>
   </data>
@@ -459,30 +507,6 @@
   <data name="&gt;&gt;ucrChkCalculatedColumns.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="grpLogicalCalculatedColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 385</value>
-  </data>
-  <data name="grpLogicalCalculatedColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 55</value>
-  </data>
-  <data name="grpLogicalCalculatedColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
-  </data>
-  <data name="grpLogicalCalculatedColumns.Text" xml:space="preserve">
-    <value>Include in Original Data</value>
-  </data>
-  <data name="&gt;&gt;grpLogicalCalculatedColumns.Name" xml:space="preserve">
-    <value>grpLogicalCalculatedColumns</value>
-  </data>
-  <data name="&gt;&gt;grpLogicalCalculatedColumns.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpLogicalCalculatedColumns.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpLogicalCalculatedColumns.ZOrder" xml:space="preserve">
-    <value>38</value>
-  </data>
   <data name="lblCoeff.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -517,7 +541,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdOmitMonths.Location" type="System.Drawing.Point, System.Drawing">
-    <value>334, 298</value>
+    <value>334, 300</value>
   </data>
   <data name="cmdOmitMonths.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -577,16 +601,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblMissingThreshold.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 304</value>
+    <value>107, 305</value>
   </data>
   <data name="lblMissingThreshold.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 13</value>
+    <value>125, 13</value>
   </data>
   <data name="lblMissingThreshold.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
   </data>
   <data name="lblMissingThreshold.Text" xml:space="preserve">
-    <value>Missing Values Threshold:</value>
+    <value>Monthly rainfall less than:</value>
   </data>
   <data name="&gt;&gt;lblMissingThreshold.Name" xml:space="preserve">
     <value>lblMissingThreshold</value>
@@ -607,7 +631,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblThresholdmm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 305</value>
+    <value>292, 305</value>
   </data>
   <data name="lblThresholdmm.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
@@ -631,7 +655,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputThreshold.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 301</value>
+    <value>235, 301</value>
   </data>
   <data name="ucrInputThreshold.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 21</value>
