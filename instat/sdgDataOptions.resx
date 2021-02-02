@@ -117,14 +117,66 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmdRemoveCurrentFilter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="cmdRemoveCurrentFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>228, 140</value>
+  </data>
+  <data name="cmdRemoveCurrentFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 23</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="cmdRemoveCurrentFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="cmdRemoveCurrentFilter.Text" xml:space="preserve">
+    <value>Remove Current Filter</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveCurrentFilter.Name" xml:space="preserve">
+    <value>cmdRemoveCurrentFilter</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveCurrentFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveCurrentFilter.Parent" xml:space="preserve">
+    <value>tbRows</value>
+  </data>
+  <data name="&gt;&gt;cmdRemoveCurrentFilter.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrSelectorFilters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 15</value>
+  </data>
+  <data name="ucrSelectorFilters.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorFilters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 180</value>
+  </data>
+  <data name="ucrSelectorFilters.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFilters.Name" xml:space="preserve">
+    <value>ucrSelectorFilters</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFilters.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFilters.Parent" xml:space="preserve">
+    <value>tbRows</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFilters.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrInputFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>128, 209</value>
   </data>
   <data name="ucrInputFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 21</value>
+    <value>220, 21</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrInputFilterPreview.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
@@ -138,10 +190,13 @@
     <value>tbRows</value>
   </data>
   <data name="&gt;&gt;ucrInputFilterPreview.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
   </data>
   <data name="lblFilterPreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblFilterPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 211</value>
@@ -165,13 +220,16 @@
     <value>tbRows</value>
   </data>
   <data name="&gt;&gt;lblFilterPreview.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="rdoForDialog.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="rdoForDialog.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
+  </data>
+  <data name="rdoForDialog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoForDialog.Location" type="System.Drawing.Point, System.Drawing">
     <value>120, 19</value>
@@ -180,7 +238,7 @@
     <value>120, 17</value>
   </data>
   <data name="rdoForDialog.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>1</value>
   </data>
   <data name="rdoForDialog.Text" xml:space="preserve">
     <value>For This Dialog Only</value>
@@ -200,6 +258,9 @@
   <data name="rdoAllDialogs.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoAllDialogs.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoAllDialogs.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 19</value>
   </data>
@@ -207,7 +268,7 @@
     <value>92, 17</value>
   </data>
   <data name="rdoAllDialogs.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>0</value>
   </data>
   <data name="rdoAllDialogs.Text" xml:space="preserve">
     <value>For All Dialogs</value>
@@ -228,10 +289,10 @@
     <value>8, 236</value>
   </data>
   <data name="grpApplyOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 49</value>
+    <value>340, 49</value>
   </data>
   <data name="grpApplyOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>7</value>
   </data>
   <data name="grpApplyOptions.Text" xml:space="preserve">
     <value>Apply Options</value>
@@ -246,16 +307,19 @@
     <value>tbRows</value>
   </data>
   <data name="&gt;&gt;grpApplyOptions.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
+  </data>
+  <data name="cmdDefineNewFilter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdDefineNewFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 93</value>
+    <value>228, 93</value>
   </data>
   <data name="cmdDefineNewFilter.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 23</value>
   </data>
   <data name="cmdDefineNewFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="cmdDefineNewFilter.Text" xml:space="preserve">
     <value>Define New Filter</value>
@@ -270,19 +334,22 @@
     <value>tbRows</value>
   </data>
   <data name="&gt;&gt;cmdDefineNewFilter.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="lblFilter.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblFilter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 21</value>
+    <value>225, 21</value>
   </data>
   <data name="lblFilter.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 13</value>
   </data>
   <data name="lblFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>1</value>
   </data>
   <data name="lblFilter.Text" xml:space="preserve">
     <value>Filter</value>
@@ -297,12 +364,11 @@
     <value>tbRows</value>
   </data>
   <data name="&gt;&gt;lblFilter.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="ucrReceiverFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 34</value>
+    <value>228, 34</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrReceiverFilter.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
@@ -322,31 +388,7 @@
     <value>tbRows</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFilter.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrSelectorFilters.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 8</value>
-  </data>
-  <data name="ucrSelectorFilters.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrSelectorFilters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 180</value>
-  </data>
-  <data name="ucrSelectorFilters.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorFilters.Name" xml:space="preserve">
-    <value>ucrSelectorFilters</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorFilters.Type" xml:space="preserve">
-    <value>instat.ucrSelectorByDataFrame, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorFilters.Parent" xml:space="preserve">
-    <value>tbRows</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorFilters.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="tbRows.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -355,7 +397,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 291</value>
+    <value>355, 291</value>
   </data>
   <data name="tbRows.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -377,6 +419,9 @@
   </data>
   <data name="chkShowHiddenColumns.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="chkShowHiddenColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="chkShowHiddenColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 39</value>
@@ -409,7 +454,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>307, 291</value>
+    <value>355, 291</value>
   </data>
   <data name="tbColumns.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -433,10 +478,10 @@
     <value>0, 0</value>
   </data>
   <data name="tbcDataOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>315, 317</value>
+    <value>363, 317</value>
   </data>
   <data name="tbcDataOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tbcDataOptions.Name" xml:space="preserve">
     <value>tbcDataOptions</value>
@@ -451,13 +496,13 @@
     <value>0</value>
   </data>
   <data name="ucrSubDialogueBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 323</value>
+    <value>116, 323</value>
   </data>
   <data name="ucrSubDialogueBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 30</value>
   </data>
   <data name="ucrSubDialogueBase.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrSubDialogueBase.Name" xml:space="preserve">
     <value>ucrSubDialogueBase</value>
@@ -478,7 +523,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>313, 351</value>
+    <value>375, 351</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
