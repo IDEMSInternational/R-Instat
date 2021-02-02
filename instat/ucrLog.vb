@@ -108,6 +108,11 @@ Public Class ucrLog
         End If
     End Sub
 
+    Private Sub OpenDialog(strTexT As String)
+        If strTexT <> "" Then
+            frmMain.clsRLink.OpenDialogFromScript(strNewScript:=strTexT)
+        End If
+    End Sub
     Private Sub mnuSaveLogFile_Click(sender As Object, e As EventArgs) Handles mnuSaveLogFile.Click
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Log File"
@@ -127,4 +132,9 @@ Public Class ucrLog
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "541")
     End Sub
 
+    Private Sub mnuPopulateDialog_Click(sender As Object, e As EventArgs) Handles mnuPopulateDialog.Click
+        If txtLog.SelectionLength > 0 Then
+            OpenDialog(txtLog.SelectedText)
+        End If
+    End Sub
 End Class
