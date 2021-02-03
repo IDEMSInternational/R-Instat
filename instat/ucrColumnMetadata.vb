@@ -494,9 +494,9 @@ Public Class ucrColumnMetadata
     End Sub
 
     Private Sub hideSheet_Click(sender As Object, e As EventArgs) Handles hideSheet.Click
-        clsHideDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
-        clsHideDataFrame.AddParameter("property", "is_hidden_label")
-        clsHideDataFrame.AddParameter("new_val", "TRUE")
+        clsHideDataFrame.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
+        clsHideDataFrame.AddParameter("property", "is_hidden_label", iPosition:=1)
+        clsHideDataFrame.AddParameter("new_val", "TRUE", iPosition:=2)
         RunScriptFromColumnMetadata(clsHideDataFrame.ToScript(), strComment:="Right click menu: Hide Data Frame")
     End Sub
 
