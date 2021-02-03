@@ -1914,7 +1914,7 @@ Public Class RLink
         Dim clsGetSurvNames As New RFunction
         Dim expSurvNames As SymbolicExpression
 
-        clsGetSurvNames.SetRCommand(strInstatDataObject & "$get_graph_names")
+        clsGetSurvNames.SetRCommand(strInstatDataObject & "$get_surv_names")
         If strDataFrameName <> "" Then
             clsGetSurvNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
         End If
