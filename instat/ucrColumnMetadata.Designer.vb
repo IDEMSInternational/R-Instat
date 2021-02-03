@@ -58,7 +58,6 @@ Partial Class ucrColumnMetadata
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuLevelsLabels = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuSort = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
@@ -106,9 +105,9 @@ Partial Class ucrColumnMetadata
         '
         'columnContextMenuStrip
         '
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.ToolStripSeparator3, Me.mnuSort, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuSort, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 380)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 374)
         '
         'mnuColumnRename
         '
@@ -198,11 +197,6 @@ Partial Class ucrColumnMetadata
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(209, 6)
         '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(209, 6)
-        '
         'mnuSort
         '
         Me.mnuSort.Name = "mnuSort"
@@ -290,7 +284,6 @@ Partial Class ucrColumnMetadata
     Friend WithEvents mnuCovertToOrderedFactors As ToolStripMenuItem
     Friend WithEvents mnuConvertText As ToolStripMenuItem
     Friend WithEvents mnuConvertVariate As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents mnuSort As ToolStripMenuItem
     Private WithEvents mnuColumnFilter As ToolStripMenuItem
     Private WithEvents mnuClearColumnFilter As ToolStripMenuItem

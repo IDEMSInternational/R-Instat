@@ -47,8 +47,6 @@ Public Class ucrColumnMetadata
     Private Sub frmVariables_Load(sender As Object, e As EventArgs) Handles Me.Load
         loadForm()
         SetRFunctions()
-        mnuFreezeToHere.Enabled = False
-        mnuUnfreeze.Enabled = False
         mnuInsertColsAfter.Visible = False
         mnuInsertColsBefore.Visible = False
         '  grdVariables.RowHeaderContextMenuStrip = frmMain.ucrDataViewer.grdData.ColumnHeaderContextMenuStrip
