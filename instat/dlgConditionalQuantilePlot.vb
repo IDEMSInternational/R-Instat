@@ -18,10 +18,15 @@ Imports instat.Translations
 Public Class dlgConditionalQuantilePlot
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private iDialogHeight As Integer
+    Private iBaseMaxY
     Private clsConditionalQuantileFunction As New RFunction
+    Private clsConditionalEvalFunction As New RFunction
     Private Sub dlgConditionalQuantilePlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
+            iDialogHeight = Me.Height
+            iBaseMaxY = ucrBase.Location.Y
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -35,6 +40,7 @@ Public Class dlgConditionalQuantilePlot
 
     Private Sub InitialiseDialog()
         Dim dctLegendPosition As New Dictionary(Of String, String)
+        Dim dctStatistics As New Dictionary(Of String, String)
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrConditionalQuantilePlotSelector.SetParameter(New RParameter("mydata", 0))
@@ -44,17 +50,46 @@ Public Class dlgConditionalQuantilePlot
         ucrReceiverObservations.Selector = ucrConditionalQuantilePlotSelector
         ucrReceiverObservations.SetParameterIsString()
         ucrReceiverObservations.SetIncludedDataTypes({"numeric"})
+        ucrReceiverObservations.strSelectorHeading = "Numerics"
 
         ucrReceiverPredictions.SetParameter(New RParameter("mod", 2))
         ucrReceiverPredictions.Selector = ucrConditionalQuantilePlotSelector
         ucrReceiverPredictions.SetParameterIsString()
         ucrReceiverPredictions.SetIncludedDataTypes({"numeric"})
+        ucrReceiverPredictions.strSelectorHeading = "Numerics"
 
         ucrReceiverMultipleFacet.SetParameter(New RParameter("type", 3))
         ucrReceiverMultipleFacet.Selector = ucrConditionalQuantilePlotSelector
         ucrReceiverMultipleFacet.SetParameterIsString()
-        ucrReceiverMultipleFacet.SetIncludedDataTypes({"factor", "character"})
+        ucrReceiverMultipleFacet.SetIncludedDataTypes({"character"})
         ucrReceiverMultipleFacet.bExcludeFromSelector = True
+
+        ucrReceiverMultipleObs.SetParameter(New RParameter("var.obs", 3))
+        ucrReceiverMultipleObs.Selector = ucrConditionalQuantilePlotSelector
+        ucrReceiverMultipleObs.SetParameterIsString()
+        ucrReceiverMultipleObs.SetIncludedDataTypes({"numeric"})
+        ucrReceiverMultipleObs.bExcludeFromSelector = True
+        ucrReceiverMultipleObs.strSelectorHeading = "Numerics"
+
+        ucrReceiverMultiplePred.SetParameter(New RParameter("var.mod", 4))
+        ucrReceiverMultiplePred.Selector = ucrConditionalQuantilePlotSelector
+        ucrReceiverMultiplePred.SetParameterIsString()
+        ucrReceiverMultiplePred.SetIncludedDataTypes({"numeric"})
+        ucrReceiverMultiplePred.bExcludeFromSelector = True
+        ucrReceiverMultiplePred.strSelectorHeading = "Numerics"
+
+        ucrReceiverType.SetParameter(New RParameter("type", 5))
+        ucrReceiverType.Selector = ucrConditionalQuantilePlotSelector
+        ucrReceiverType.SetParameterIsString()
+        ucrReceiverType.SetIncludedDataTypes({"character"})
+        ucrReceiverType.strSelectorHeading = "Variables"
+
+        ucrReceiverStatistics.SetParameter(New RParameter("statistic", 7))
+        ucrReceiverStatistics.Selector = ucrConditionalQuantilePlotSelector
+        ucrReceiverStatistics.SetParameterIsString()
+        ucrReceiverStatistics.SetIncludedDataTypes({"numeric"})
+        ucrReceiverStatistics.strSelectorHeading = "Numerics"
+
 
         ucrNudBin.SetParameter(New RParameter("bins", 4))
         ucrNudBin.Minimum = 1
@@ -84,9 +119,18 @@ Public Class dlgConditionalQuantilePlot
 
         ucrPnlOptions.AddRadioButton(rdoQuantiles)
         ucrPnlOptions.AddRadioButton(rdoEvaluation)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoQuantiles, "", False)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoQuantiles, "", False)
-
+        ucrPnlOptions.AddFunctionNamesCondition(rdoQuantiles, "conditionalQuantile")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoEvaluation, "conditionalEval")
+        ucrPnlOptions.AddToLinkedControls({ucrNudKeyColumns, ucrInputLegendPosition, ucrInputMinBin, ucrReceiverMultipleFacet}, {rdoQuantiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleObs, ucrReceiverMultiplePred, ucrReceiverStatistics, ucrReceiverType}, {rdoEvaluation}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudKeyColumns.SetLinkedDisplayControl(lblKey)
+        ucrInputLegendPosition.SetLinkedDisplayControl(lblKeyPositions)
+        ucrInputMinBin.SetLinkedDisplayControl(lblColNumber)
+        ucrReceiverMultipleFacet.SetLinkedDisplayControl(lblTypes)
+        ucrReceiverMultipleObs.SetLinkedDisplayControl(lblVarObserved)
+        ucrReceiverMultiplePred.SetLinkedDisplayControl(lblVarPredicted)
+        ucrReceiverStatistics.SetLinkedDisplayControl(lblStatistics)
+        ucrReceiverType.SetLinkedDisplayControl(lblType)
 
         ucrSavePlot.SetPrefix("conditionalquantile")
         ucrSavePlot.SetCheckBoxText("Save Graph")
@@ -98,6 +142,7 @@ Public Class dlgConditionalQuantilePlot
 
     Private Sub SetDefaults()
         clsConditionalQuantileFunction = New RFunction
+        clsConditionalEvalFunction = New RFunction
 
         ucrConditionalQuantilePlotSelector.Reset()
         ucrSavePlot.Reset()
@@ -105,13 +150,39 @@ Public Class dlgConditionalQuantilePlot
 
         clsConditionalQuantileFunction.SetPackageName("openair")
         clsConditionalQuantileFunction.SetRCommand("conditionalQuantile")
+
+        clsConditionalEvalFunction.SetPackageName("openair")
+        clsConditionalEvalFunction.SetRCommand("conditionalEval")
+
+        clsConditionalEvalFunction.SetAssignTo("last_graph", strTempDataframe:=ucrConditionalQuantilePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+
         clsConditionalQuantileFunction.SetAssignTo("last_graph", strTempDataframe:=ucrConditionalQuantilePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsConditionalQuantileFunction)
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrConditionalQuantilePlotSelector.AddAdditionalCodeParameterPair(clsConditionalEvalFunction, ucrConditionalQuantilePlotSelector.GetParameter(), iAdditionalPairNo:=1)
+        ucrReceiverObservations.AddAdditionalCodeParameterPair(clsConditionalEvalFunction, ucrReceiverObservations.GetParameter(), iAdditionalPairNo:=1)
+        ucrReceiverPredictions.AddAdditionalCodeParameterPair(clsConditionalEvalFunction, ucrReceiverPredictions.GetParameter(), iAdditionalPairNo:=1)
+        ucrNudBin.AddAdditionalCodeParameterPair(clsConditionalEvalFunction, ucrNudBin.GetParameter(), iAdditionalPairNo:=1)
+
+        ucrConditionalQuantilePlotSelector.SetRCode(clsConditionalQuantileFunction, bReset)
+        ucrReceiverObservations.SetRCode(clsConditionalQuantileFunction, bReset)
+        ucrReceiverPredictions.SetRCode(clsConditionalQuantileFunction, bReset)
+        ucrReceiverMultipleFacet.SetRCode(clsConditionalQuantileFunction, bReset)
+        ucrNudBin.SetRCode(clsConditionalQuantileFunction, bReset)
+        ucrNudKeyColumns.SetRCode(clsConditionalQuantileFunction, bReset)
+        ucrInputLegendPosition.SetRCode(clsConditionalQuantileFunction, bReset)
+        ucrSavePlot.SetRCode(clsConditionalQuantileFunction, bReset)
+        ucrSavePlot.AddAdditionalRCode(clsConditionalEvalFunction)
+        ucrReceiverMultipleObs.SetRCode(clsConditionalEvalFunction, bReset)
+        ucrReceiverMultiplePred.SetRCode(clsConditionalEvalFunction, bReset)
+        ucrReceiverStatistics.SetRCode(clsConditionalEvalFunction, bReset)
+        ucrReceiverType.SetRCode(clsConditionalEvalFunction, bReset)
+
+        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -121,14 +192,34 @@ Public Class dlgConditionalQuantilePlot
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverObservations.IsEmpty() AndAlso Not ucrReceiverPredictions.IsEmpty() AndAlso ucrSavePlot.IsComplete AndAlso ucrNudBin.GetText <> "" AndAlso ucrNudKeyColumns.GetText <> "" AndAlso Not ucrInputMinBin.IsEmpty Then
+        If rdoQuantiles.Checked AndAlso Not ucrReceiverObservations.IsEmpty() AndAlso Not ucrReceiverPredictions.IsEmpty() AndAlso ucrSavePlot.IsComplete AndAlso ucrNudBin.GetText <> "" AndAlso ucrNudKeyColumns.GetText <> "" Then
+            ucrBase.OKEnabled(True)
+        ElseIf rdoEvaluation.Checked AndAlso Not ucrReceiverObservations.IsEmpty() AndAlso Not ucrReceiverPredictions.IsEmpty() AndAlso ucrSavePlot.IsComplete AndAlso Not ucrReceiverStatistics.IsEmpty Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
     End Sub
 
-    Private Sub ucrReceiverObservations_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObservations.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverPredictions.ControlContentsChanged, ucrNudBin.ControlContentsChanged, ucrNudKeyColumns.ControlContentsChanged, ucrInputMinBin.ControlContentsChanged
+    Private Sub ucrReceiverObservations_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObservations.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverPredictions.ControlContentsChanged, ucrReceiverStatistics.ControlContentsChanged, ucrNudBin.ControlContentsChanged, ucrNudKeyColumns.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        If rdoQuantiles.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsConditionalQuantileFunction)
+            ucrSavePlot.SetPrefix("conditionalquantile")
+            Me.Size = New System.Drawing.Size(Me.Width, 489)
+            ucrBase.Location = New Point(ucrBase.Location.X, 397)
+            ucrSavePlot.Location = New Point(ucrSavePlot.Location.X, 370)
+            cmdPlotOptions.Text = "Conditional Quantile Options"
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsConditionalEvalFunction)
+            ucrSavePlot.SetPrefix("conditionalEval")
+            Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
+            ucrSavePlot.Location = New Point(ucrSavePlot.Location.X, 401)
+            cmdPlotOptions.Text = "Conditional Eval Options"
+        End If
     End Sub
 End Class
