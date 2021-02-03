@@ -21,9 +21,15 @@ Public Class ucrDataFrameMetadata
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
     Public strPreviousCellText As String
     Private lstNonEditableColumns As New List(Of String)
+    Private clsHideDataFrame As New RFunction
+    Private clsViewDataFrame As New RFunction
+    Private clsGetDataFrame As New RFunction
 
     Private Sub frmMetaData_Load(sender As Object, e As EventArgs) Handles Me.Load
         LoadForm()
+        clsViewDataFrame.SetRCommand("View")
+        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+        clsHideDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_dataframe_metadata")
     End Sub
 
     ' TODO this needs tidying up
@@ -154,5 +160,58 @@ Public Class ucrDataFrameMetadata
 
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "544")
+    End Sub
+
+    Private Function GetSelectedVariableNamesAsArray() As String()
+        Dim lstSelectedVars As New List(Of String)
+
+        For i As Integer = grdMetaData.CurrentWorksheet.SelectionRange.Row To grdMetaData.CurrentWorksheet.SelectionRange.Row + grdMetaData.CurrentWorksheet.SelectionRange.Rows - 1
+            lstSelectedVars.Add(grdMetaData.CurrentWorksheet(i, 0))
+        Next
+        Return lstSelectedVars.ToArray
+    End Function
+
+    Private Sub deleteDataFrame_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
+        dlgDeleteDataFrames.SetDataFrameToAdd(GetSelectedVariableNamesAsArray(0))
+        dlgDeleteDataFrames.ShowDialog()
+    End Sub
+
+    Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
+        dlgRenameDataFrame.SetCurrentDataframe(GetSelectedVariableNamesAsArray(0))
+        dlgRenameDataFrame.ShowDialog()
+    End Sub
+
+    Private Sub hideSheet_Click(sender As Object, e As EventArgs) Handles hideSheet.Click
+        clsHideDataFrame.AddParameter("data_name", Chr(34) & GetSelectedVariableNamesAsArray(0) & Chr(34), iPosition:=0)
+        clsHideDataFrame.AddParameter("property", "is_hidden_label", iPosition:=1)
+        clsHideDataFrame.AddParameter("new_val", "TRUE", iPosition:=2)
+        RunScriptFromDataFrameMetadata(clsHideDataFrame.ToScript(), strComment:="Right click menu: Hide Data Frame")
+    End Sub
+
+    Private Sub unhideSheet_Click(sender As Object, e As EventArgs) Handles unhideSheet.Click
+        dlgHideDataframes.ShowDialog()
+    End Sub
+
+    Private Sub copySheet_Click(sender As Object, e As EventArgs) Handles copySheet.Click
+        dlgCopyDataFrame.SetCurrentDataframe(GetSelectedVariableNamesAsArray(0))
+        dlgCopyDataFrame.ShowDialog()
+    End Sub
+
+    Private Sub viewSheet_Click(sender As Object, e As EventArgs) Handles viewSheet.Click
+        Dim strScript As String = ""
+        Dim strTemp As String
+        clsGetDataFrame.AddParameter("data_name", Chr(34) & GetSelectedVariableNamesAsArray(0) & Chr(34), iPosition:=0)
+        clsViewDataFrame.AddParameter("x", clsRFunctionParameter:=clsGetDataFrame, iPosition:=0)
+        clsGetDataFrame.SetAssignTo(GetSelectedVariableNamesAsArray(0))
+        strTemp = clsViewDataFrame.ToScript(strScript)
+        RunScriptFromDataFrameMetadata(strScript & strTemp, strComment:="Right click menu: View R Data Frame", bSeparateThread:=False)
+    End Sub
+
+    Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
+        dlgReorderDataFrame.ShowDialog()
+    End Sub
+
+    Private Sub rowRightClickMenu_Opening(sender As Object, e As EventArgs) Handles rowRightClickMenu.Opening
+        hideSheet.Enabled = (grdMetaData.CurrentWorksheet.RowCount > 1)
     End Sub
 End Class
