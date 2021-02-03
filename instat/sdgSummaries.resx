@@ -2274,6 +2274,222 @@
   <data name="&gt;&gt;tbMore.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkP60.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 51</value>
+  </data>
+  <data name="ucrChkP60.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkP60.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="ucrChkP60.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP60.Name" xml:space="preserve">
+    <value>ucrChkP60</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP60.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP60.Parent" xml:space="preserve">
+    <value>grpDecilesQuintiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP60.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkP90.Location" type="System.Drawing.Point, System.Drawing">
+    <value>300, 51</value>
+  </data>
+  <data name="ucrChkP90.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkP90.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="ucrChkP90.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP90.Name" xml:space="preserve">
+    <value>ucrChkP90</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP90.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP90.Parent" xml:space="preserve">
+    <value>grpDecilesQuintiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP90.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkP70.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 51</value>
+  </data>
+  <data name="ucrChkP70.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkP70.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="ucrChkP70.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP70.Name" xml:space="preserve">
+    <value>ucrChkP70</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP70.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP70.Parent" xml:space="preserve">
+    <value>grpDecilesQuintiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP70.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkP80.Location" type="System.Drawing.Point, System.Drawing">
+    <value>190, 51</value>
+  </data>
+  <data name="ucrChkP80.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkP80.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="ucrChkP80.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP80.Name" xml:space="preserve">
+    <value>ucrChkP80</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP80.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP80.Parent" xml:space="preserve">
+    <value>grpDecilesQuintiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP80.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrChkP40.Location" type="System.Drawing.Point, System.Drawing">
+    <value>300, 21</value>
+  </data>
+  <data name="ucrChkP40.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkP40.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="ucrChkP40.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP40.Name" xml:space="preserve">
+    <value>ucrChkP40</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP40.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP40.Parent" xml:space="preserve">
+    <value>grpDecilesQuintiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP40.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrChkP30.Location" type="System.Drawing.Point, System.Drawing">
+    <value>190, 19</value>
+  </data>
+  <data name="ucrChkP30.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkP30.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="ucrChkP30.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP30.Name" xml:space="preserve">
+    <value>ucrChkP30</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP30.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP30.Parent" xml:space="preserve">
+    <value>grpDecilesQuintiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP30.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrChkP10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 21</value>
+  </data>
+  <data name="ucrChkP10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkP10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="ucrChkP10.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP10.Name" xml:space="preserve">
+    <value>ucrChkP10</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP10.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP10.Parent" xml:space="preserve">
+    <value>grpDecilesQuintiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP10.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrChkP20.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 21</value>
+  </data>
+  <data name="ucrChkP20.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkP20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>87, 20</value>
+  </data>
+  <data name="ucrChkP20.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP20.Name" xml:space="preserve">
+    <value>ucrChkP20</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP20.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP20.Parent" xml:space="preserve">
+    <value>grpDecilesQuintiles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP20.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="grpDecilesQuintiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 289</value>
+  </data>
+  <data name="grpDecilesQuintiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>393, 87</value>
+  </data>
+  <data name="grpDecilesQuintiles.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="grpDecilesQuintiles.Text" xml:space="preserve">
+    <value>Deciles &amp;&amp; Quintiles</value>
+  </data>
+  <data name="&gt;&gt;grpDecilesQuintiles.Name" xml:space="preserve">
+    <value>grpDecilesQuintiles</value>
+  </data>
+  <data name="&gt;&gt;grpDecilesQuintiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpDecilesQuintiles.Parent" xml:space="preserve">
+    <value>tbsum</value>
+  </data>
+  <data name="&gt;&gt;grpDecilesQuintiles.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkn_distinct.Location" type="System.Drawing.Point, System.Drawing">
     <value>172, 51</value>
   </data>
@@ -2416,88 +2632,136 @@
     <value>tbsum</value>
   </data>
   <data name="&gt;&gt;grpCommon.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkLowerQuartile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 19</value>
-  </data>
-  <data name="ucrChkLowerQuartile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="ucrChkLowerQuartile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 20</value>
-  </data>
-  <data name="ucrChkLowerQuartile.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLowerQuartile.Name" xml:space="preserve">
-    <value>ucrChkLowerQuartile</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLowerQuartile.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLowerQuartile.Parent" xml:space="preserve">
-    <value>grpQuartiles</value>
-  </data>
-  <data name="&gt;&gt;ucrChkLowerQuartile.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkUpperQuartile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 21</value>
-  </data>
-  <data name="ucrChkUpperQuartile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="ucrChkUpperQuartile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 20</value>
-  </data>
-  <data name="ucrChkUpperQuartile.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;ucrChkUpperQuartile.Name" xml:space="preserve">
-    <value>ucrChkUpperQuartile</value>
+  <data name="ucrChkP67.Location" type="System.Drawing.Point, System.Drawing">
+    <value>190, 19</value>
   </data>
-  <data name="&gt;&gt;ucrChkUpperQuartile.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="ucrChkP67.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
   </data>
-  <data name="&gt;&gt;ucrChkUpperQuartile.Parent" xml:space="preserve">
-    <value>grpQuartiles</value>
+  <data name="ucrChkP67.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
   </data>
-  <data name="&gt;&gt;ucrChkUpperQuartile.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="grpQuartiles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 301</value>
-  </data>
-  <data name="grpQuartiles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>393, 56</value>
-  </data>
-  <data name="grpQuartiles.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrChkP67.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="grpQuartiles.Text" xml:space="preserve">
-    <value>Quartiles</value>
+  <data name="&gt;&gt;ucrChkP67.Name" xml:space="preserve">
+    <value>ucrChkP67</value>
   </data>
-  <data name="&gt;&gt;grpQuartiles.Name" xml:space="preserve">
-    <value>grpQuartiles</value>
+  <data name="&gt;&gt;ucrChkP67.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;grpQuartiles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ucrChkP67.Parent" xml:space="preserve">
+    <value>grpQuartilesTerciles</value>
   </data>
-  <data name="&gt;&gt;grpQuartiles.Parent" xml:space="preserve">
-    <value>tbsum</value>
+  <data name="&gt;&gt;ucrChkP67.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;grpQuartiles.ZOrder" xml:space="preserve">
+  <data name="ucrChkP33.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 19</value>
+  </data>
+  <data name="ucrChkP33.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkP33.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="ucrChkP33.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP33.Name" xml:space="preserve">
+    <value>ucrChkP33</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP33.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP33.Parent" xml:space="preserve">
+    <value>grpQuartilesTerciles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP33.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrChkP25.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 19</value>
+  </data>
+  <data name="ucrChkP25.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkP25.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="ucrChkP25.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP25.Name" xml:space="preserve">
+    <value>ucrChkP25</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP25.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP25.Parent" xml:space="preserve">
+    <value>grpQuartilesTerciles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP25.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkP75.Location" type="System.Drawing.Point, System.Drawing">
+    <value>300, 19</value>
+  </data>
+  <data name="ucrChkP75.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkP75.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 20</value>
+  </data>
+  <data name="ucrChkP75.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP75.Name" xml:space="preserve">
+    <value>ucrChkP75</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP75.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP75.Parent" xml:space="preserve">
+    <value>grpQuartilesTerciles</value>
+  </data>
+  <data name="&gt;&gt;ucrChkP75.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpQuartilesTerciles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 230</value>
+  </data>
+  <data name="grpQuartilesTerciles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>393, 56</value>
+  </data>
+  <data name="grpQuartilesTerciles.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="grpQuartilesTerciles.Text" xml:space="preserve">
+    <value>Quartiles &amp;&amp; Terciles</value>
+  </data>
+  <data name="&gt;&gt;grpQuartilesTerciles.Name" xml:space="preserve">
+    <value>grpQuartilesTerciles</value>
+  </data>
+  <data name="&gt;&gt;grpQuartilesTerciles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpQuartilesTerciles.Parent" xml:space="preserve">
+    <value>tbsum</value>
+  </data>
+  <data name="&gt;&gt;grpQuartilesTerciles.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="ucrChkRange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 49</value>
+    <value>300, 21</value>
   </data>
   <data name="ucrChkRange.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrChkRange.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>85, 20</value>
   </data>
   <data name="ucrChkRange.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2563,10 +2827,10 @@
     <value>2</value>
   </data>
   <data name="grpNotOrderedFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 108</value>
+    <value>10, 92</value>
   </data>
   <data name="grpNotOrderedFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>393, 77</value>
+    <value>393, 54</value>
   </data>
   <data name="grpNotOrderedFactor.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2584,7 +2848,7 @@
     <value>tbsum</value>
   </data>
   <data name="&gt;&gt;grpNotOrderedFactor.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrChkVariance.Location" type="System.Drawing.Point, System.Drawing">
     <value>172, 51</value>
@@ -2707,7 +2971,7 @@
     <value>4</value>
   </data>
   <data name="grpNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 204</value>
+    <value>10, 149</value>
   </data>
   <data name="grpNumeric.Size" type="System.Drawing.Size, System.Drawing">
     <value>393, 78</value>
@@ -2728,7 +2992,7 @@
     <value>tbsum</value>
   </data>
   <data name="&gt;&gt;grpNumeric.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="tbsum.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>

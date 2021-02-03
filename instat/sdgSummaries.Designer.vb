@@ -128,15 +128,26 @@ Partial Class sdgSummaries
         Me.grpKurtosis = New System.Windows.Forms.GroupBox()
         Me.ucrChkKurtosis = New instat.ucrCheck()
         Me.tbsum = New System.Windows.Forms.TabPage()
+        Me.grpDecilesQuintiles = New System.Windows.Forms.GroupBox()
+        Me.ucrChkP60 = New instat.ucrCheck()
+        Me.ucrChkP90 = New instat.ucrCheck()
+        Me.ucrChkP70 = New instat.ucrCheck()
+        Me.ucrChkP80 = New instat.ucrCheck()
+        Me.ucrChkP40 = New instat.ucrCheck()
+        Me.ucrChkP30 = New instat.ucrCheck()
+        Me.ucrChkP10 = New instat.ucrCheck()
+        Me.ucrChkP20 = New instat.ucrCheck()
         Me.grpCommon = New System.Windows.Forms.GroupBox()
         Me.ucrChkn_distinct = New instat.ucrCheck()
         Me.ucrChkNTotal = New instat.ucrCheck()
         Me.ucrChkMode = New instat.ucrCheck()
         Me.ucrChkNMissing = New instat.ucrCheck()
         Me.ucrChkNonMissing = New instat.ucrCheck()
-        Me.grpQuartiles = New System.Windows.Forms.GroupBox()
-        Me.ucrChkLowerQuartile = New instat.ucrCheck()
-        Me.ucrChkUpperQuartile = New instat.ucrCheck()
+        Me.grpQuartilesTerciles = New System.Windows.Forms.GroupBox()
+        Me.ucrChkP67 = New instat.ucrCheck()
+        Me.ucrChkP33 = New instat.ucrCheck()
+        Me.ucrChkP25 = New instat.ucrCheck()
+        Me.ucrChkP75 = New instat.ucrCheck()
         Me.grpNotOrderedFactor = New System.Windows.Forms.GroupBox()
         Me.ucrChkRange = New instat.ucrCheck()
         Me.ucrChkMaximum = New instat.ucrCheck()
@@ -166,8 +177,9 @@ Partial Class sdgSummaries
         Me.grpSkewness.SuspendLayout()
         Me.grpKurtosis.SuspendLayout()
         Me.tbsum.SuspendLayout()
+        Me.grpDecilesQuintiles.SuspendLayout()
         Me.grpCommon.SuspendLayout()
-        Me.grpQuartiles.SuspendLayout()
+        Me.grpQuartilesTerciles.SuspendLayout()
         Me.grpNotOrderedFactor.SuspendLayout()
         Me.grpNumeric.SuspendLayout()
         Me.tbSummaries.SuspendLayout()
@@ -804,13 +816,77 @@ Partial Class sdgSummaries
         '
         'tbsum
         '
+        Me.tbsum.Controls.Add(Me.grpDecilesQuintiles)
         Me.tbsum.Controls.Add(Me.grpCommon)
-        Me.tbsum.Controls.Add(Me.grpQuartiles)
+        Me.tbsum.Controls.Add(Me.grpQuartilesTerciles)
         Me.tbsum.Controls.Add(Me.grpNotOrderedFactor)
         Me.tbsum.Controls.Add(Me.grpNumeric)
         resources.ApplyResources(Me.tbsum, "tbsum")
         Me.tbsum.Name = "tbsum"
         Me.tbsum.UseVisualStyleBackColor = True
+        '
+        'grpDecilesQuintiles
+        '
+        Me.grpDecilesQuintiles.Controls.Add(Me.ucrChkP60)
+        Me.grpDecilesQuintiles.Controls.Add(Me.ucrChkP90)
+        Me.grpDecilesQuintiles.Controls.Add(Me.ucrChkP70)
+        Me.grpDecilesQuintiles.Controls.Add(Me.ucrChkP80)
+        Me.grpDecilesQuintiles.Controls.Add(Me.ucrChkP40)
+        Me.grpDecilesQuintiles.Controls.Add(Me.ucrChkP30)
+        Me.grpDecilesQuintiles.Controls.Add(Me.ucrChkP10)
+        Me.grpDecilesQuintiles.Controls.Add(Me.ucrChkP20)
+        resources.ApplyResources(Me.grpDecilesQuintiles, "grpDecilesQuintiles")
+        Me.grpDecilesQuintiles.Name = "grpDecilesQuintiles"
+        Me.grpDecilesQuintiles.TabStop = False
+        Me.grpDecilesQuintiles.Tag = ""
+        '
+        'ucrChkP60
+        '
+        Me.ucrChkP60.Checked = False
+        resources.ApplyResources(Me.ucrChkP60, "ucrChkP60")
+        Me.ucrChkP60.Name = "ucrChkP60"
+        '
+        'ucrChkP90
+        '
+        Me.ucrChkP90.Checked = False
+        resources.ApplyResources(Me.ucrChkP90, "ucrChkP90")
+        Me.ucrChkP90.Name = "ucrChkP90"
+        '
+        'ucrChkP70
+        '
+        Me.ucrChkP70.Checked = False
+        resources.ApplyResources(Me.ucrChkP70, "ucrChkP70")
+        Me.ucrChkP70.Name = "ucrChkP70"
+        '
+        'ucrChkP80
+        '
+        Me.ucrChkP80.Checked = False
+        resources.ApplyResources(Me.ucrChkP80, "ucrChkP80")
+        Me.ucrChkP80.Name = "ucrChkP80"
+        '
+        'ucrChkP40
+        '
+        Me.ucrChkP40.Checked = False
+        resources.ApplyResources(Me.ucrChkP40, "ucrChkP40")
+        Me.ucrChkP40.Name = "ucrChkP40"
+        '
+        'ucrChkP30
+        '
+        Me.ucrChkP30.Checked = False
+        resources.ApplyResources(Me.ucrChkP30, "ucrChkP30")
+        Me.ucrChkP30.Name = "ucrChkP30"
+        '
+        'ucrChkP10
+        '
+        Me.ucrChkP10.Checked = False
+        resources.ApplyResources(Me.ucrChkP10, "ucrChkP10")
+        Me.ucrChkP10.Name = "ucrChkP10"
+        '
+        'ucrChkP20
+        '
+        Me.ucrChkP20.Checked = False
+        resources.ApplyResources(Me.ucrChkP20, "ucrChkP20")
+        Me.ucrChkP20.Name = "ucrChkP20"
         '
         'grpCommon
         '
@@ -854,26 +930,40 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrChkNonMissing, "ucrChkNonMissing")
         Me.ucrChkNonMissing.Name = "ucrChkNonMissing"
         '
-        'grpQuartiles
+        'grpQuartilesTerciles
         '
-        Me.grpQuartiles.Controls.Add(Me.ucrChkLowerQuartile)
-        Me.grpQuartiles.Controls.Add(Me.ucrChkUpperQuartile)
-        resources.ApplyResources(Me.grpQuartiles, "grpQuartiles")
-        Me.grpQuartiles.Name = "grpQuartiles"
-        Me.grpQuartiles.TabStop = False
-        Me.grpQuartiles.Tag = "Quartiles"
+        Me.grpQuartilesTerciles.Controls.Add(Me.ucrChkP67)
+        Me.grpQuartilesTerciles.Controls.Add(Me.ucrChkP33)
+        Me.grpQuartilesTerciles.Controls.Add(Me.ucrChkP25)
+        Me.grpQuartilesTerciles.Controls.Add(Me.ucrChkP75)
+        resources.ApplyResources(Me.grpQuartilesTerciles, "grpQuartilesTerciles")
+        Me.grpQuartilesTerciles.Name = "grpQuartilesTerciles"
+        Me.grpQuartilesTerciles.TabStop = False
+        Me.grpQuartilesTerciles.Tag = "Quartiles"
         '
-        'ucrChkLowerQuartile
+        'ucrChkP67
         '
-        Me.ucrChkLowerQuartile.Checked = False
-        resources.ApplyResources(Me.ucrChkLowerQuartile, "ucrChkLowerQuartile")
-        Me.ucrChkLowerQuartile.Name = "ucrChkLowerQuartile"
+        Me.ucrChkP67.Checked = False
+        resources.ApplyResources(Me.ucrChkP67, "ucrChkP67")
+        Me.ucrChkP67.Name = "ucrChkP67"
         '
-        'ucrChkUpperQuartile
+        'ucrChkP33
         '
-        Me.ucrChkUpperQuartile.Checked = False
-        resources.ApplyResources(Me.ucrChkUpperQuartile, "ucrChkUpperQuartile")
-        Me.ucrChkUpperQuartile.Name = "ucrChkUpperQuartile"
+        Me.ucrChkP33.Checked = False
+        resources.ApplyResources(Me.ucrChkP33, "ucrChkP33")
+        Me.ucrChkP33.Name = "ucrChkP33"
+        '
+        'ucrChkP25
+        '
+        Me.ucrChkP25.Checked = False
+        resources.ApplyResources(Me.ucrChkP25, "ucrChkP25")
+        Me.ucrChkP25.Name = "ucrChkP25"
+        '
+        'ucrChkP75
+        '
+        Me.ucrChkP75.Checked = False
+        resources.ApplyResources(Me.ucrChkP75, "ucrChkP75")
+        Me.ucrChkP75.Name = "ucrChkP75"
         '
         'grpNotOrderedFactor
         '
@@ -994,8 +1084,9 @@ Partial Class sdgSummaries
         Me.grpSkewness.ResumeLayout(False)
         Me.grpKurtosis.ResumeLayout(False)
         Me.tbsum.ResumeLayout(False)
+        Me.grpDecilesQuintiles.ResumeLayout(False)
         Me.grpCommon.ResumeLayout(False)
-        Me.grpQuartiles.ResumeLayout(False)
+        Me.grpQuartilesTerciles.ResumeLayout(False)
         Me.grpNotOrderedFactor.ResumeLayout(False)
         Me.grpNumeric.ResumeLayout(False)
         Me.tbSummaries.ResumeLayout(False)
@@ -1042,9 +1133,9 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkMode As ucrCheck
     Friend WithEvents ucrChkNMissing As ucrCheck
     Friend WithEvents ucrChkNonMissing As ucrCheck
-    Friend WithEvents grpQuartiles As GroupBox
-    Friend WithEvents ucrChkLowerQuartile As ucrCheck
-    Friend WithEvents ucrChkUpperQuartile As ucrCheck
+    Friend WithEvents grpQuartilesTerciles As GroupBox
+    Friend WithEvents ucrChkP25 As ucrCheck
+    Friend WithEvents ucrChkP75 As ucrCheck
     Friend WithEvents grpNotOrderedFactor As GroupBox
     Friend WithEvents ucrChkRange As ucrCheck
     Friend WithEvents ucrChkMaximum As ucrCheck
@@ -1113,4 +1204,15 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkSelectAll As ucrCheck
     Friend WithEvents lblJmia As Label
     Friend WithEvents ucrInputJmia As ucrInputTextBox
+    Friend WithEvents grpDecilesQuintiles As GroupBox
+    Friend WithEvents ucrChkP10 As ucrCheck
+    Friend WithEvents ucrChkP20 As ucrCheck
+    Friend WithEvents ucrChkP67 As ucrCheck
+    Friend WithEvents ucrChkP33 As ucrCheck
+    Friend WithEvents ucrChkP60 As ucrCheck
+    Friend WithEvents ucrChkP90 As ucrCheck
+    Friend WithEvents ucrChkP70 As ucrCheck
+    Friend WithEvents ucrChkP80 As ucrCheck
+    Friend WithEvents ucrChkP40 As ucrCheck
+    Friend WithEvents ucrChkP30 As ucrCheck
 End Class
