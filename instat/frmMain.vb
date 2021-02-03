@@ -100,8 +100,7 @@ Public Class frmMain
         'Gets the path for the executable file that started the application, not including the executable name.
         'because the application once double click in the associate file i.e. .RDS file.
         'We need the full path of static folder to set the working folder containg files needed when the application is loading. 
-        Dim strPath As String = Application.StartupPath
-        strStaticPath = String.Concat(strPath, "\static")
+        strStaticPath = String.Concat(Application.StartupPath, "\static")
 
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
         ' We need to create the likely R package installation directory before R.NET connection is initialised
@@ -2299,4 +2298,3 @@ Public Class frmMain
         dlgClimaticNCMPSummaryFile.ShowDialog()
     End Sub
 End Class
-
