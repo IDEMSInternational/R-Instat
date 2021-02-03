@@ -521,4 +521,8 @@ Public Class ucrColumnMetadata
     Private Sub reorderSheet_Click(sender As Object, e As EventArgs) Handles reorderSheet.Click
         dlgReorderDataFrame.ShowDialog()
     End Sub
+
+    Private Sub statusColumnMenu_Opening(sender As Object, e As CancelEventArgs) Handles statusColumnMenu.Opening
+        hideSheet.Enabled = (grdVariables.Worksheets.Count > 1)
+    End Sub
 End Class
