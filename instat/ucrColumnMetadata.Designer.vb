@@ -40,8 +40,8 @@ Partial Class ucrColumnMetadata
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.grdVariables = New unvell.ReoGrid.ReoGridControl()
-        Me.propertiesContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.mnuDeleteLabels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuColumnRename = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDuplicateColumn = New System.Windows.Forms.ToolStripMenuItem()
@@ -58,20 +58,18 @@ Partial Class ucrColumnMetadata
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuLevelsLabels = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuFreezeToHere = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuUnfreeze = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuSort = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
+        Me.propertiesContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuDeleteLabels = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
-        Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.propertiesContextMenuStrip.SuspendLayout()
-        Me.columnContextMenuStrip.SuspendLayout()
-        Me.tlpTableContainer.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
+        Me.columnContextMenuStrip.SuspendLayout()
+        Me.propertiesContextMenuStrip.SuspendLayout()
+        Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
         '
         'grdVariables
@@ -94,23 +92,23 @@ Partial Class ucrColumnMetadata
         Me.grdVariables.TabIndex = 2
         Me.grdVariables.Text = "Variables"
         '
-        'propertiesContextMenuStrip
+        'cellContextMenuStrip
         '
-        Me.propertiesContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDeleteLabels})
-        Me.propertiesContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.propertiesContextMenuStrip.Size = New System.Drawing.Size(144, 26)
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelp})
+        Me.cellContextMenuStrip.Name = "ContextMenuStrip1"
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(100, 26)
         '
-        'mnuDeleteLabels
+        'mnuHelp
         '
-        Me.mnuDeleteLabels.Name = "mnuDeleteLabels"
-        Me.mnuDeleteLabels.Size = New System.Drawing.Size(143, 22)
-        Me.mnuDeleteLabels.Text = "Delete Labels"
+        Me.mnuHelp.Name = "mnuHelp"
+        Me.mnuHelp.Size = New System.Drawing.Size(99, 22)
+        Me.mnuHelp.Text = "Help"
         '
         'columnContextMenuStrip
         '
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.mnuFreezeToHere, Me.mnuUnfreeze, Me.ToolStripSeparator3, Me.mnuSort, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator2, Me.mnuLevelsLabels, Me.ToolStripSeparator1, Me.ToolStripSeparator3, Me.mnuSort, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 402)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 380)
         '
         'mnuColumnRename
         '
@@ -200,18 +198,6 @@ Partial Class ucrColumnMetadata
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
         Me.ToolStripSeparator1.Size = New System.Drawing.Size(209, 6)
         '
-        'mnuFreezeToHere
-        '
-        Me.mnuFreezeToHere.Name = "mnuFreezeToHere"
-        Me.mnuFreezeToHere.Size = New System.Drawing.Size(212, 22)
-        Me.mnuFreezeToHere.Text = "Freeze to Here"
-        '
-        'mnuUnfreeze
-        '
-        Me.mnuUnfreeze.Name = "mnuUnfreeze"
-        Me.mnuUnfreeze.Size = New System.Drawing.Size(212, 22)
-        Me.mnuUnfreeze.Text = "Unfreeze"
-        '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
@@ -234,6 +220,18 @@ Partial Class ucrColumnMetadata
         Me.mnuClearColumnFilter.Name = "mnuClearColumnFilter"
         Me.mnuClearColumnFilter.Size = New System.Drawing.Size(212, 22)
         Me.mnuClearColumnFilter.Text = "Remove Current Filter"
+        '
+        'propertiesContextMenuStrip
+        '
+        Me.propertiesContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDeleteLabels})
+        Me.propertiesContextMenuStrip.Name = "columnContextMenuStrip"
+        Me.propertiesContextMenuStrip.Size = New System.Drawing.Size(144, 26)
+        '
+        'mnuDeleteLabels
+        '
+        Me.mnuDeleteLabels.Name = "mnuDeleteLabels"
+        Me.mnuDeleteLabels.Size = New System.Drawing.Size(143, 22)
+        Me.mnuDeleteLabels.Text = "Delete Labels"
         '
         'lblHeader
         '
@@ -264,18 +262,6 @@ Partial Class ucrColumnMetadata
         Me.tlpTableContainer.Size = New System.Drawing.Size(344, 138)
         Me.tlpTableContainer.TabIndex = 7
         '
-        'cellContextMenuStrip
-        '
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelp})
-        Me.cellContextMenuStrip.Name = "ContextMenuStrip1"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(100, 26)
-        '
-        'mnuHelp
-        '
-        Me.mnuHelp.Name = "mnuHelp"
-        Me.mnuHelp.Size = New System.Drawing.Size(152, 22)
-        Me.mnuHelp.Text = "Help"
-        '
         'ucrColumnMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -283,10 +269,10 @@ Partial Class ucrColumnMetadata
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrColumnMetadata"
         Me.Size = New System.Drawing.Size(344, 138)
-        Me.propertiesContextMenuStrip.ResumeLayout(False)
-        Me.columnContextMenuStrip.ResumeLayout(False)
-        Me.tlpTableContainer.ResumeLayout(False)
         Me.cellContextMenuStrip.ResumeLayout(False)
+        Me.columnContextMenuStrip.ResumeLayout(False)
+        Me.propertiesContextMenuStrip.ResumeLayout(False)
+        Me.tlpTableContainer.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -304,8 +290,6 @@ Partial Class ucrColumnMetadata
     Friend WithEvents mnuCovertToOrderedFactors As ToolStripMenuItem
     Friend WithEvents mnuConvertText As ToolStripMenuItem
     Friend WithEvents mnuConvertVariate As ToolStripMenuItem
-    Friend WithEvents mnuFreezeToHere As ToolStripMenuItem
-    Friend WithEvents mnuUnfreeze As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As ToolStripSeparator
     Friend WithEvents mnuSort As ToolStripMenuItem
     Private WithEvents mnuColumnFilter As ToolStripMenuItem
