@@ -97,9 +97,12 @@ Public Class frmMain
 
         SetToDefaultLayout()
 
-        'Gets the path for the executable file that started the application, not including the executable name.
-        'because the application once double click in the associate file i.e. .RDS file.
-        'We need the full path of static folder to set the working folder containg files needed when the application is loading. 
+        'Gets the path for the executable file that started the application, not including the 
+        'executable name.
+        'We use `Application.StartupPath` because this returns the correct path even if the 
+        'application was started by double-clicking a data file in another folder.
+        'We need the full path of the static folder to set the working folder containing files 
+        'needed when the application is loading.         
         strStaticPath = String.Concat(Application.StartupPath, "\static")
 
         strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
