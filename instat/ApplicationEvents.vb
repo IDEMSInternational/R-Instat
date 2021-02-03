@@ -1,4 +1,5 @@
 ﻿Namespace My
+    ''' <summary> 
     ''' The 'My' namespace and the 'My.Application' objects are part of the dotnet framework.
     ''' This class extends the 'My.Application' object by creating a Partial class named MyApplication.
     ''' This class handles the event raised when R-Instat is launched when it's already running.
@@ -16,6 +17,7 @@
         ''' <param name="e">        Startup next instance event information. </param>
         '''----------------------------------------------------------------------------------------
         Private Sub MyApplication_StartupNextInstance(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupNextInstanceEventArgs) Handles Me.StartupNextInstance
+            MsgBox("R-Instat is already running", MsgBoxStyle.Information, "Information")
             If e.CommandLine.Count > 0 Then
                 If MsgBox("Would you like to open this file?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                     dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
