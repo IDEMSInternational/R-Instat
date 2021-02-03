@@ -417,8 +417,18 @@ max_label="summary_max"
 mean_label="summary_mean"
 trimmed_mean_label = "summary_trimmed_mean"
 quartile_label="summary_quartile"
-lower_quart_label="lower_quartile"
-upper_quart_label="upper_quartile"
+p10_label="p10"
+p20_label="p20"
+p25_label="p25"
+p30_label="p30"
+p33_label="p33"
+p40_label="p40"
+p60_label="p60"
+p67_label="p67"
+p70_label="p70"
+p75_label="p75"
+p80_label="p80"
+p90_label="p90"
 skewness_label="summary_skewness"
 summary_skewness_mc_label="summary_skewness_mc"
 summary_outlier_limit_label = "summary_outlier_limit"
@@ -475,11 +485,11 @@ volumetric_efficiency_label="VE"
 # list of all summary function names
 # the order of this list determines the order summaries appears in certain functions
 all_summaries <- c(count_label, count_non_missing_label, count_missing_label, 
-                   min_label, lower_quart_label, quartile_label, median_label, 
+                   min_label, p10_label, p20_label, p25_label, p30_label, p33_label, p40_label, p60_label, p67_label, p70_label, p75_label, p80_label, p90_label, quartile_label, median_label, 
                    summary_median_absolute_deviation_label, summary_coef_var_label, 
                    summary_Qn_label, summary_Sn_label,
                    mode_label, mean_label, 
-                   trimmed_mean_label, upper_quart_label, max_label, sum_label, 
+                   trimmed_mean_label, max_label, sum_label, 
                    sd_label, var_label, range_label, standard_error_mean_label,
                    skewness_label, summary_skewness_mc_label, kurtosis_label, 
                    summary_outlier_limit_label, 
@@ -499,8 +509,8 @@ all_summaries <- c(count_label, count_non_missing_label, count_missing_label,
                    ratio_of_RMSE_label, sum_of_squared_residuals_label, volumetric_efficiency_label)
 
 # which of the summaries should return a Date value when x is a Date?
-date_summaries <- c(min_label, lower_quart_label, quartile_label, median_label, 
-                    mode_label, mean_label, trimmed_mean_label, upper_quart_label, 
+date_summaries <- c(min_label, p10_label, p20_label, p25_label, p30_label, p33_label, p40_label, p60_label, p67_label, p70_label, p75_label, p80_label, p90_label, quartile_label, median_label, 
+                    mode_label, mean_label, trimmed_mean_label,
                     max_label, first_label, last_label, nth_label, 
                     circular_min_label, circular_Q1_label, circular_quantile_label, 
                     circular_median_label, circular_medianHL_label, circular_mean_label, 
@@ -752,8 +762,34 @@ summary_quantile <- function(x, na.rm = FALSE, weights = NULL, probs, na_type = 
   }
 }
 
-# lower quartile function
-lower_quartile <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+# p10 function
+p10 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    if (missing(weights) || is.null(weights)) {
+      return(summary_quantile(x, na.rm = na.rm, probs = 0.10))
+    }
+    else {
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.10, na.rm = na.rm)[[1]])
+    }
+  }
+}
+
+# p20 function
+p20 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    if (missing(weights) || is.null(weights)) {
+      return(summary_quantile(x, na.rm = na.rm, probs = 0.20))
+    }
+    else {
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.20, na.rm = na.rm)[[1]])
+    }
+  }
+}
+
+# p25 function
+p25 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else {
     if (missing(weights) || is.null(weights)) {
@@ -765,8 +801,86 @@ lower_quartile <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) 
   }
 }
 
-# upper quartile function
-upper_quartile <- function(x, na.rm = FALSE, na_type = "" ,weights = NULL, ...) {
+# p30 function
+p30 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    if (missing(weights) || is.null(weights)) {
+      return(summary_quantile(x, na.rm = na.rm, probs = 0.30))
+    }
+    else {
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.30, na.rm = na.rm)[[1]])
+    }
+  }
+}
+
+# p33 function
+p33 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    if (missing(weights) || is.null(weights)) {
+      return(summary_quantile(x, na.rm = na.rm, probs = 0.33))
+    }
+    else {
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.33, na.rm = na.rm)[[1]])
+    }
+  }
+}
+
+# p40 function
+p40 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    if (missing(weights) || is.null(weights)) {
+      return(summary_quantile(x, na.rm = na.rm, probs = 0.40))
+    }
+    else {
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.40, na.rm = na.rm)[[1]])
+    }
+  }
+}
+
+# p60 function
+p60 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    if (missing(weights) || is.null(weights)) {
+      return(summary_quantile(x, na.rm = na.rm, probs = 0.60))
+    }
+    else {
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.60, na.rm = na.rm)[[1]])
+    }
+  }
+}
+
+# p67 function
+p67 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    if (missing(weights) || is.null(weights)) {
+      return(summary_quantile(x, na.rm = na.rm, probs = 0.67))
+    }
+    else {
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.67, na.rm = na.rm)[[1]])
+    }
+  }
+}
+
+# p70 function
+p70 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    if (missing(weights) || is.null(weights)) {
+      return(summary_quantile(x, na.rm = na.rm, probs = 0.70))
+    }
+    else {
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.70, na.rm = na.rm)[[1]])
+    }
+  }
+}
+
+# p75 function
+p75 <- function(x, na.rm = FALSE, na_type = "" ,weights = NULL, ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     if (missing(weights) || is.null(weights)) {
@@ -774,6 +888,32 @@ upper_quartile <- function(x, na.rm = FALSE, na_type = "" ,weights = NULL, ...) 
     }
     else {
       return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.75, na.rm = na.rm)[[1]])
+    }
+  }
+}
+
+# p80 function
+p80 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    if (missing(weights) || is.null(weights)) {
+      return(summary_quantile(x, na.rm = na.rm, probs = 0.80))
+    }
+    else {
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.80, na.rm = na.rm)[[1]])
+    }
+  }
+}
+
+# p90 function
+p90 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    if (missing(weights) || is.null(weights)) {
+      return(summary_quantile(x, na.rm = na.rm, probs = 0.90))
+    }
+    else {
+      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.90, na.rm = na.rm)[[1]])
     }
   }
 }
