@@ -2650,7 +2650,7 @@
     <value>34, 34</value>
   </data>
   <data name="mnuTbResetLayout.ToolTipText" xml:space="preserve">
-    <value>Reset Layout</value>
+    <value>Reset to Default Layout</value>
   </data>
   <data name="separator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 37</value>
@@ -6446,9 +6446,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>
