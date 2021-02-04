@@ -17,7 +17,9 @@
         ''' <param name="e">        Startup next instance event information. </param>
         '''----------------------------------------------------------------------------------------
         Private Sub MyApplication_StartupNextInstance(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupNextInstanceEventArgs) Handles Me.StartupNextInstance
-            MsgBox("R-Instat is already running", MsgBoxStyle.Information, "Information")
+            If e.CommandLine.Count = 0 Then
+                MsgBox("R-Instat is already running", MsgBoxStyle.Information, "Information")
+            End If
             If e.CommandLine.Count > 0 Then
                 If MsgBox("Would you like to open this file?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                     dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
