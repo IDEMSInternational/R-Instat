@@ -167,6 +167,8 @@ Public Class RLink
     ''' <summary>   The R bundled version. </summary>
     Private strRBundledVersion As String = "4.0.3"
 
+    ''' <summary>   List of RCodeStructures gotten from processing RStatements </summary>
+    Public lstNewRCodeStructures As New List(Of RCodeStructure)
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Initialises the connection with the R environment:
@@ -2326,21 +2328,42 @@ Public Class RLink
         Return strReconstructedComment
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Creates RCodeStructure from the list of Rstatement </summary>
+    '''
+    ''' <param name="strNewScript">   Script to be processed</param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub OpenDialogFromScript(strNewScript As String)
-        Dim clsRScript As RScript.clsRScript = New RScript.clsRScript(strNewScript)
-        Dim clsNewRCodeStructure As New RCodeStructure
+        'TEMPORARY..AM CLEARING THE LIST SO THAT THE RCODES DONT PILE WHILE TESTING
+        lstNewRCodeStructures.Clear()
+
+        Dim clsRScript As RScript.clsRScript = New RScript.clsRScript(strNewScript.Replace(" ", [String].Empty))
 
         For Each clsNewRStatement As RScript.clsRStatement In clsRScript.lstRStatements
+            Dim clsNewRCodeStructure As New RCodeStructure
+            clsNewRCodeStructure = GetListRCodeStructures(clsNewRStatement.clsElement)
+
             If Not IsNothing(clsNewRStatement.clsAssignment) Then
                 clsNewRCodeStructure.bToBeAssigned = True
                 clsNewRCodeStructure.strAssignTo = clsNewRStatement.clsAssignment.strTxt
             End If
-            GetListRCodeStructures(clsNewRStatement.clsElement)
-        Next
-    End Sub
 
+            lstNewRCodeStructures.Add(clsNewRCodeStructure)
+        Next
+
+        dlgSplitText.OpenFromScript()
+        dlgSplitText.ShowDialog()
+
+    End Sub
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Returns RCodeStructure from the Current Rstatement </summary>
+    '''
+    ''' <param name="clsNewRElement">    the RElement to be processed </param>
+    '''--------------------------------------------------------------------------------------------
     Public Shared Function GetListRCodeStructures(clsNewRElement As RScript.clsRElement) As RCodeStructure
         Dim intPos As Integer = 0
+        Dim clsNewRCodeStructure As New RCodeStructure
+
         If TypeOf (clsNewRElement) Is RScript.clsRElementOperator Then
             Dim clsNewRoperator As New ROperator
             Dim clsRElementOperator As RScript.clsRElementOperator
@@ -2363,38 +2386,59 @@ Public Class RLink
             If Not clsRElementOperator.bFirstParamOnRight AndAlso clsRElementOperator.lstParameters.Count = 1 Then
                 clsNewRoperator.clsParameters.Add(New RParameter("secondEmptyParam", bNewIncludeArgumentName:=False, iNewPosition:=intPos + 1))
             End If
-
+            Return clsNewRoperator
         ElseIf TypeOf (clsNewRElement) Is RScript.clsRElementProperty Then
             Dim clsRElementFunction As RScript.clsRElementFunction
             Dim clsNewRFunction As New RFunction
 
             clsRElementFunction = TryCast(clsNewRElement, RScript.clsRElementFunction)
             clsNewRFunction.SetPackageName(clsRElementFunction.strPackageName)
-            clsNewRFunction.strRCommand = clsRElementFunction.strTxt
 
-            Do While intPos < clsRElementFunction.lstParameters.Count
-                If TypeOf (clsRElementFunction.lstParameters(intPos)) Is RScript.clsRParameterNamed Then
-                    clsNewRFunction.clsParameters.Add(GetParameter(clsRElementFunction.lstParameters(intPos), intPos))
+
+            If Not IsNothing(clsRElementFunction.lstObjects) Then
+                If clsRElementFunction.lstObjects.Count = 1 AndAlso clsRElementFunction.lstObjects(0).strTxt = "data_book" Then
+                    clsNewRFunction.strRCommand = "data_book$" & clsRElementFunction.strTxt
+                Else
+                    clsNewRFunction.strRCommand = clsRElementFunction.strTxt
                 End If
-                intPos += 1
-            Loop
-        End If
+            Else
+                clsNewRFunction.strRCommand = clsRElementFunction.strTxt
+            End If
+
+                Do While intPos < clsRElementFunction.lstParameters.Count
+                    If TypeOf (clsRElementFunction.lstParameters(intPos)) Is RScript.clsRParameterNamed Then
+                        clsNewRFunction.clsParameters.Add(GetParameter(clsRElementFunction.lstParameters(intPos), intPos))
+                    End If
+                    intPos += 1
+                Loop
+                Return clsNewRFunction
+            End If
+            Return clsNewRCodeStructure
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Returns RParameters from the Current Element's RParameter </summary>
+    '''
+    ''' <param name="clsNewRParameter">    the RElement Parameters to be processed </param>
+    '''--------------------------------------------------------------------------------------------
     Public Shared Function GetParameter(clsNewRParameter As RScript.clsRParameter, intParamPos As Integer) As RParameter
-        Dim clsRParameter As RParameter
-        Dim clsRParameterFunction As RScript.clsRParameterNamed
+        Dim clsRParameter As New RParameter
 
-        If TypeOf (clsNewRParameter) Is RScript.clsRParameter Then
+        If TypeOf (clsNewRParameter) Is RScript.clsRParameterNamed Then
+            Dim clsRParameterFunction As RScript.clsRParameterNamed
             clsRParameterFunction = TryCast(clsNewRParameter, RScript.clsRParameterNamed)
-        ElseIf TypeOf (clsNewRParameter) Is RScript.clsRParameterNamed Then
-            clsRParameterFunction = clsNewRParameter
-        End If
 
-        If TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementProperty AndAlso Not TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementFunction Then
-            clsRParameter = New RParameter(clsRParameterFunction.strArgumentName, strParamValue:=clsRParameterFunction.clsArgValue.strTxt, iNewPosition:=intParamPos)
-        ElseIf TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementOperator OrElse TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementFunction Then
-            clsRParameter = New RParameter(clsRParameterFunction.strArgumentName, strParamValue:=GetListRCodeStructures(clsNewRParameter.clsArgValue), iNewPosition:=intParamPos)
+            If Not TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementProperty AndAlso Not TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementFunction Then
+                clsRParameter = New RParameter(clsRParameterFunction.strArgumentName, strParamValue:=clsNewRParameter.clsArgValue.strTxt, iNewPosition:=intParamPos)
+            ElseIf TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementOperator OrElse TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementFunction Then
+                clsRParameter = New RParameter(clsRParameterFunction.strArgumentName, strParamValue:=GetListRCodeStructures(clsNewRParameter.clsArgValue), iNewPosition:=intParamPos)
+            End If
+        Else
+            If Not TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementProperty AndAlso Not TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementFunction Then
+                clsRParameter = New RParameter("", strParamValue:=clsNewRParameter.clsArgValue.strTxt, iNewPosition:=intParamPos)
+            ElseIf TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementOperator OrElse TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementFunction Then
+                clsRParameter = New RParameter("", strParamValue:=GetListRCodeStructures(clsNewRParameter.clsArgValue), iNewPosition:=intParamPos)
+            End If
         End If
 
         Return clsRParameter

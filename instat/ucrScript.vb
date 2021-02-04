@@ -258,4 +258,16 @@ Public Class ucrScript
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
 
+    Private Sub mnuPopulateDialogue_Click(sender As Object, e As EventArgs) Handles mnuPopulateDialogue.Click
+        If txtScript.SelectionLength > 0 Then
+            OpenDialog(txtScript.SelectedText)
+        End If
+    End Sub
+
+    Private Sub OpenDialog(strTexT As String)
+        If strTexT <> "" Then
+            frmMain.clsRLink.OpenDialogFromScript(strNewScript:=strTexT)
+        End If
+    End Sub
+
 End Class

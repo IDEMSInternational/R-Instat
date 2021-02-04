@@ -17,8 +17,9 @@
 
 Imports instat.Translations
 Public Class dlgSplitText
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bLoadFromScript As Boolean = False
     Private clsTextComponentsFixed, clsTextComponentsMaximum As New RFunction
     Private clsBinaryColumns As New RFunction
 
@@ -30,6 +31,10 @@ Public Class dlgSplitText
         End If
         If bReset Then
             SetDefaults()
+        End If
+        If bLoadFromScript Then
+            clsTextComponentsFixed = frmMain.clsRLink.lstNewRCodeStructures(0)
+            bLoadFromScript = False
         End If
         SetRCodeForControls(bReset)
         bReset = False
@@ -163,4 +168,14 @@ Public Class dlgSplitText
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrPnlSplitText.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Public Sub OpenFromScript()
+        bReset = True
+        bLoadFromScript = True
+    End Sub
+
+    Public Sub getCode(clsNewRcodeStructure As RCodeStructure)
+        clsTextComponentsFixed = clsNewRcodeStructure
+    End Sub
+
 End Class

@@ -59,6 +59,7 @@ Partial Class ucrScript
         Me.cmdRun = New System.Windows.Forms.Button()
         Me.lblHeader = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.mnuPopulateDialogue = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -80,9 +81,9 @@ Partial Class ucrScript
         'mnuContextScript
         '
         Me.mnuContextScript.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuUndo, Me.mnuRedo, Me.RToolStripMenuItem, Me.mnuRunCurrentLine, Me.mnuRunSelectedText, Me.mnuRunAllText, Me.mnuOpenScriptasFile, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.mnuClearContents, Me.ToolStripSeparator1, Me.mnuHelp})
+        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuUndo, Me.mnuRedo, Me.RToolStripMenuItem, Me.mnuRunCurrentLine, Me.mnuRunSelectedText, Me.mnuRunAllText, Me.mnuOpenScriptasFile, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.mnuClearContents, Me.ToolStripSeparator1, Me.mnuHelp, Me.mnuPopulateDialogue})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(230, 302)
+        Me.mnuContextScript.Size = New System.Drawing.Size(230, 346)
         '
         'mnuCut
         '
@@ -224,6 +225,12 @@ Partial Class ucrScript
         Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
         Me.tlpTableContainer.TabIndex = 9
         '
+        'mnuPopulateDialogue
+        '
+        Me.mnuPopulateDialogue.Name = "mnuPopulateDialogue"
+        Me.mnuPopulateDialogue.Size = New System.Drawing.Size(229, 22)
+        Me.mnuPopulateDialogue.Text = "Populate Dialogue"
+        '
         'ucrScript
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -259,4 +266,5 @@ Partial Class ucrScript
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents mnuHelp As ToolStripMenuItem
     Friend WithEvents mnuRedo As ToolStripMenuItem
+    Friend WithEvents mnuPopulateDialogue As ToolStripMenuItem
 End Class
