@@ -19,12 +19,10 @@
         Private Sub MyApplication_StartupNextInstance(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupNextInstanceEventArgs) Handles Me.StartupNextInstance
             If e.CommandLine.Count = 0 Then
                 MsgBox("R-Instat is already running", MsgBoxStyle.Information, "Information")
-            Else
-                If MsgBox("Would you like to open this file?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-                    dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
-                    dlgImportDataset.bStartOpenDialog = False
-                    dlgImportDataset.ShowDialog()
-                End If
+            ElseIf MsgBox("Would you like to open this file?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
+                dlgImportDataset.bStartOpenDialog = False
+                dlgImportDataset.ShowDialog()
             End If
         End Sub
     End Class
