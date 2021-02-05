@@ -273,6 +273,7 @@ Public Class frmMain
         mnuViewDataFrameMetadata.Checked = False
         mnuViewColumnMetadata.Checked = False
         mnuViewScriptWindow.Checked = False
+        mnuViewSwapDataAndMetadata.Checked = False
 
         mnuTbDataView.Checked = True
         mnuTbOutput.Checked = True
@@ -420,7 +421,7 @@ Public Class frmMain
     End Sub
 
     Private Sub UpdateLayout()
-        If Not mnuViewDataView.Checked AndAlso Not mnuViewOutputWindow.Checked AndAlso Not mnuViewColumnMetadata.Checked AndAlso Not mnuViewDataFrameMetadata.Checked AndAlso Not mnuViewLog.Checked AndAlso Not mnuViewScriptWindow.Checked Then
+        If Not mnuViewDataView.Checked AndAlso Not mnuViewOutputWindow.Checked AndAlso Not mnuViewColumnMetadata.Checked AndAlso Not mnuViewDataFrameMetadata.Checked AndAlso Not mnuViewLog.Checked AndAlso Not mnuViewScriptWindow.Checked AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
             splOverall.Hide()
         Else
             splOverall.Show()
@@ -451,6 +452,20 @@ Public Class frmMain
                 End If
             Else
                 splOverall.Panel1Collapsed = True
+            End If
+            If mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked Then
+                splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
+                splMetadata.Panel1.Controls.Add(ucrDataViewer)
+            ElseIf mnuViewSwapDataAndMetadata.Checked AndAlso Not mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked Then
+                splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
+                splMetadata.Panel1.Controls.Add(ucrDataViewer)
+                splExtraWindows.Panel1Collapsed = True
+                splExtraWindows.Panel2Collapsed = True
+                splDataOutput.Panel1Collapsed = False
+            Else
+                splDataOutput.Panel1.Controls.Add(ucrDataViewer)
+                splMetadata.Panel1.Controls.Add(ucrColumnMeta)
+                splExtraWindows.Panel1Collapsed = False
             End If
         End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
@@ -483,7 +498,7 @@ Public Class frmMain
 
     Private Sub mnuWindowsEditor_Click(sender As Object, e As EventArgs) Handles mnuViewDataView.Click
         mnuViewDataView.Checked = Not mnuViewDataView.Checked
-        UpdateLayout()
+        'UpdateLayout()
     End Sub
 
     Private Sub mnuFilePrint_Click(sender As Object, e As EventArgs) Handles mnuFilePrint.Click
@@ -2277,5 +2292,13 @@ Public Class frmMain
 
     Private Sub mnuClimaticNCMPSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPSummary.Click
         dlgClimaticNCMPSummaryFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
+        mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
+    End Sub
+
+    Private Sub mnuViewSwapDataAndMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.CheckStateChanged, mnuViewDataView.CheckStateChanged, mnuViewSwapDataAndMetadata.CheckStateChanged
+        UpdateLayout()
     End Sub
 End Class
