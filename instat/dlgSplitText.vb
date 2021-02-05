@@ -22,7 +22,7 @@ Public Class dlgSplitText
     Private bLoadFromScript As Boolean = False
     Private clsTextComponentsFixed, clsTextComponentsMaximum As New RFunction
     Private clsBinaryColumns As New RFunction
-
+    Private lstRCodeStructure As List(Of RCodeStructure)
     Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -33,7 +33,7 @@ Public Class dlgSplitText
             SetDefaults()
         End If
         If bLoadFromScript Then
-            clsTextComponentsFixed = frmMain.clsRLink.lstNewRCodeStructures(0)
+            clsTextComponentsFixed = lstRCodeStructure(0)
             bLoadFromScript = False
         End If
         SetRCodeForControls(bReset)
@@ -120,8 +120,7 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("string", 0), iAdditionalPairNo:=1)
-        ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("var", 0), iAdditionalPairNo:=2)
+
         ucrInputPattern.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("pattern", 1), iAdditionalPairNo:=1)
         ucrInputPattern.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("split.char", 1), iAdditionalPairNo:=2)
         ucrReceiverSplitTextColumn.SetRCode(clsTextComponentsFixed, bReset)
@@ -130,6 +129,8 @@ Public Class dlgSplitText
         ucrPnlSplitText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlTextComponents.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveColumn.SetRCode(clsTextComponentsFixed, bReset)
+        ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("string", 0), iAdditionalPairNo:=1)
+        ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("var", 0), iAdditionalPairNo:=2)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -169,13 +170,9 @@ Public Class dlgSplitText
         TestOKEnabled()
     End Sub
 
-    Public Sub OpenFromScript()
+    Public Sub OpenFromScript(lstNewRcodeStructure As List(Of RCodeStructure))
         bReset = True
         bLoadFromScript = True
+        lstRCodeStructure = lstNewRcodeStructure
     End Sub
-
-    Public Sub getCode(clsNewRcodeStructure As RCodeStructure)
-        clsTextComponentsFixed = clsNewRcodeStructure
-    End Sub
-
 End Class

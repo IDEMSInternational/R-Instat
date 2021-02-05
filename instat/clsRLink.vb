@@ -167,8 +167,7 @@ Public Class RLink
     ''' <summary>   The R bundled version. </summary>
     Private strRBundledVersion As String = "4.0.3"
 
-    ''' <summary>   List of RCodeStructures gotten from processing RStatements </summary>
-    Public lstNewRCodeStructures As New List(Of RCodeStructure)
+
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Initialises the connection with the R environment:
@@ -2334,8 +2333,7 @@ Public Class RLink
     ''' <param name="strNewScript">   Script to be processed</param>
     '''--------------------------------------------------------------------------------------------
     Public Sub OpenDialogFromScript(strNewScript As String)
-        'TEMPORARY..AM CLEARING THE LIST SO THAT THE RCODES DONT PILE WHILE TESTING
-        lstNewRCodeStructures.Clear()
+        Dim lstNewRCodeStructures As New List(Of RCodeStructure)
 
         Dim clsRScript As RScript.clsRScript = New RScript.clsRScript(strNewScript.Replace(" ", [String].Empty))
 
@@ -2351,7 +2349,7 @@ Public Class RLink
             lstNewRCodeStructures.Add(clsNewRCodeStructure)
         Next
 
-        dlgSplitText.OpenFromScript()
+        dlgSplitText.OpenFromScript(lstNewRCodeStructures)
         dlgSplitText.ShowDialog()
 
     End Sub
