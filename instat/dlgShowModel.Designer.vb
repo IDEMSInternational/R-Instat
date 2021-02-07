@@ -45,11 +45,11 @@ Partial Class dlgShowModel
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrChkEnterValues = New instat.ucrCheck()
         Me.ucrChkDisplayGraphResults = New instat.ucrCheck()
-        Me.ucrPnlDistTypes = New instat.UcrPanel()
+        Me.ucrPnlDistributionType = New instat.UcrPanel()
         Me.ucrInputProbabilities = New instat.ucrInputComboBox()
-        Me.ucrDistributionsFOrTablePlus = New instat.ucrDistributionsWithParameters()
-        Me.ucrSelectorForDataFrame = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverExpressionForTablePlus = New instat.ucrReceiverSingle()
+        Me.ucrDistributionAndParameters = New instat.ucrDistributionsWithParameters()
+        Me.ucrSelectorShowModel = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverProbabilitiesOrValues = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
         '
@@ -127,12 +127,12 @@ Partial Class dlgShowModel
         Me.ucrChkDisplayGraphResults.Size = New System.Drawing.Size(100, 20)
         Me.ucrChkDisplayGraphResults.TabIndex = 7
         '
-        'ucrPnlDistTypes
+        'ucrPnlDistributionType
         '
-        Me.ucrPnlDistTypes.Location = New System.Drawing.Point(95, 10)
-        Me.ucrPnlDistTypes.Name = "ucrPnlDistTypes"
-        Me.ucrPnlDistTypes.Size = New System.Drawing.Size(273, 36)
-        Me.ucrPnlDistTypes.TabIndex = 0
+        Me.ucrPnlDistributionType.Location = New System.Drawing.Point(95, 10)
+        Me.ucrPnlDistributionType.Name = "ucrPnlDistributionType"
+        Me.ucrPnlDistributionType.Size = New System.Drawing.Size(273, 36)
+        Me.ucrPnlDistributionType.TabIndex = 0
         '
         'ucrInputProbabilities
         '
@@ -144,35 +144,35 @@ Partial Class dlgShowModel
         Me.ucrInputProbabilities.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputProbabilities.TabIndex = 5
         '
-        'ucrDistributionsFOrTablePlus
+        'ucrDistributionAndParameters
         '
-        Me.ucrDistributionsFOrTablePlus.Location = New System.Drawing.Point(246, 97)
-        Me.ucrDistributionsFOrTablePlus.Name = "ucrDistributionsFOrTablePlus"
-        Me.ucrDistributionsFOrTablePlus.Size = New System.Drawing.Size(247, 185)
-        Me.ucrDistributionsFOrTablePlus.TabIndex = 6
+        Me.ucrDistributionAndParameters.Location = New System.Drawing.Point(246, 97)
+        Me.ucrDistributionAndParameters.Name = "ucrDistributionAndParameters"
+        Me.ucrDistributionAndParameters.Size = New System.Drawing.Size(247, 185)
+        Me.ucrDistributionAndParameters.TabIndex = 6
         '
-        'ucrSelectorForDataFrame
+        'ucrSelectorShowModel
         '
-        Me.ucrSelectorForDataFrame.bDropUnusedFilterLevels = False
-        Me.ucrSelectorForDataFrame.bShowHiddenColumns = False
-        Me.ucrSelectorForDataFrame.bUseCurrentFilter = True
-        Me.ucrSelectorForDataFrame.Location = New System.Drawing.Point(9, 49)
-        Me.ucrSelectorForDataFrame.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorForDataFrame.Name = "ucrSelectorForDataFrame"
-        Me.ucrSelectorForDataFrame.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorForDataFrame.TabIndex = 3
+        Me.ucrSelectorShowModel.bDropUnusedFilterLevels = False
+        Me.ucrSelectorShowModel.bShowHiddenColumns = False
+        Me.ucrSelectorShowModel.bUseCurrentFilter = True
+        Me.ucrSelectorShowModel.Location = New System.Drawing.Point(9, 49)
+        Me.ucrSelectorShowModel.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorShowModel.Name = "ucrSelectorShowModel"
+        Me.ucrSelectorShowModel.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorShowModel.TabIndex = 3
         '
-        'ucrReceiverExpressionForTablePlus
+        'ucrReceiverProbabilitiesOrValues
         '
-        Me.ucrReceiverExpressionForTablePlus.frmParent = Me
-        Me.ucrReceiverExpressionForTablePlus.Location = New System.Drawing.Point(246, 74)
-        Me.ucrReceiverExpressionForTablePlus.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverExpressionForTablePlus.Name = "ucrReceiverExpressionForTablePlus"
-        Me.ucrReceiverExpressionForTablePlus.Selector = Nothing
-        Me.ucrReceiverExpressionForTablePlus.Size = New System.Drawing.Size(137, 20)
-        Me.ucrReceiverExpressionForTablePlus.strNcFilePath = ""
-        Me.ucrReceiverExpressionForTablePlus.TabIndex = 2
-        Me.ucrReceiverExpressionForTablePlus.ucrSelector = Nothing
+        Me.ucrReceiverProbabilitiesOrValues.frmParent = Me
+        Me.ucrReceiverProbabilitiesOrValues.Location = New System.Drawing.Point(246, 74)
+        Me.ucrReceiverProbabilitiesOrValues.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverProbabilitiesOrValues.Name = "ucrReceiverProbabilitiesOrValues"
+        Me.ucrReceiverProbabilitiesOrValues.Selector = Nothing
+        Me.ucrReceiverProbabilitiesOrValues.Size = New System.Drawing.Size(137, 20)
+        Me.ucrReceiverProbabilitiesOrValues.strNcFilePath = ""
+        Me.ucrReceiverProbabilitiesOrValues.TabIndex = 2
+        Me.ucrReceiverProbabilitiesOrValues.ucrSelector = Nothing
         '
         'ucrBase
         '
@@ -191,13 +191,13 @@ Partial Class dlgShowModel
         Me.Controls.Add(Me.ucrChkDisplayGraphResults)
         Me.Controls.Add(Me.rdoProbabilities)
         Me.Controls.Add(Me.rdoQuantiles)
-        Me.Controls.Add(Me.ucrPnlDistTypes)
+        Me.Controls.Add(Me.ucrPnlDistributionType)
         Me.Controls.Add(Me.ucrInputProbabilities)
-        Me.Controls.Add(Me.ucrDistributionsFOrTablePlus)
+        Me.Controls.Add(Me.ucrDistributionAndParameters)
         Me.Controls.Add(Me.lblProbValues)
         Me.Controls.Add(Me.lblQuantValues)
-        Me.Controls.Add(Me.ucrSelectorForDataFrame)
-        Me.Controls.Add(Me.ucrReceiverExpressionForTablePlus)
+        Me.Controls.Add(Me.ucrSelectorShowModel)
+        Me.Controls.Add(Me.ucrReceiverProbabilitiesOrValues)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -211,16 +211,16 @@ Partial Class dlgShowModel
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrReceiverExpressionForTablePlus As ucrReceiverSingle
-    Friend WithEvents ucrSelectorForDataFrame As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverProbabilitiesOrValues As ucrReceiverSingle
+    Friend WithEvents ucrSelectorShowModel As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblQuantValues As Label
     Friend WithEvents lblProbValues As Label
-    Friend WithEvents ucrDistributionsFOrTablePlus As ucrDistributionsWithParameters
+    Friend WithEvents ucrDistributionAndParameters As ucrDistributionsWithParameters
     Friend WithEvents ucrInputProbabilities As ucrInputComboBox
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrChkEnterValues As ucrCheck
     Friend WithEvents ucrChkDisplayGraphResults As ucrCheck
     Friend WithEvents rdoProbabilities As RadioButton
     Friend WithEvents rdoQuantiles As RadioButton
-    Friend WithEvents ucrPnlDistTypes As UcrPanel
+    Friend WithEvents ucrPnlDistributionType As UcrPanel
 End Class
