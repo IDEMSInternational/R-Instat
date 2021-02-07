@@ -31,7 +31,7 @@ Public Class dlgRandomSample
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeforControls(bReset)
+        SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
@@ -86,7 +86,7 @@ Public Class dlgRandomSample
         SetDataFrameAndDistributionParameters()
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNudSeed.SetRCode(clsSetSeed, bReset)
         ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
         ucrChkSetSeed.SetRSyntax(ucrBase.clsRsyntax, bReset)
@@ -106,7 +106,7 @@ Public Class dlgRandomSample
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeforControls(True)
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
