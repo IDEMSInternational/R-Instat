@@ -139,7 +139,6 @@ Public Class frmMain
             mnuViewStructuredMenu.Checked = clsInstatOptions.bShowStructuredMenu
             mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
             mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
-            mnuViewSwapDataAndMetadata.Visible = False
         End If
     End Sub
 
@@ -464,13 +463,7 @@ Public Class frmMain
             Else
                 splDataOutput.Panel1.Controls.Add(ucrDataViewer)
                 splMetadata.Panel1.Controls.Add(ucrColumnMeta)
-                splExtraWindows.Panel1Collapsed = False
             End If
-        End If
-        If mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked Then
-            mnuViewSwapDataAndMetadata.Visible = True
-        Else
-            mnuViewSwapDataAndMetadata.Visible = False
         End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
         mnuTbOutput.Checked = mnuViewOutputWindow.Checked
@@ -2302,7 +2295,7 @@ Public Class frmMain
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
     End Sub
 
-    Private Sub mnuViewSwapDataAndMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.CheckStateChanged, mnuViewDataView.CheckStateChanged, mnuViewSwapDataAndMetadata.CheckStateChanged
+    Private Sub mnuViewSwapDataAndMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.CheckStateChanged, mnuViewDataView.CheckStateChanged, mnuViewColumnMetadata.CheckStateChanged
         UpdateLayout()
     End Sub
 End Class
