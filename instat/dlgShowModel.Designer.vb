@@ -46,7 +46,7 @@ Partial Class dlgShowModel
         Me.ucrChkEnterValues = New instat.ucrCheck()
         Me.ucrChkDisplayGraphResults = New instat.ucrCheck()
         Me.ucrPnlDistributionType = New instat.UcrPanel()
-        Me.ucrInputProbabilities = New instat.ucrInputComboBox()
+        Me.ucrInputValuesOrProbabilities = New instat.ucrInputComboBox()
         Me.ucrDistributionAndParameters = New instat.ucrDistributionsWithParameters()
         Me.ucrSelectorShowModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverProbabilitiesOrValues = New instat.ucrReceiverSingle()
@@ -134,15 +134,15 @@ Partial Class dlgShowModel
         Me.ucrPnlDistributionType.Size = New System.Drawing.Size(273, 36)
         Me.ucrPnlDistributionType.TabIndex = 0
         '
-        'ucrInputProbabilities
+        'ucrInputValuesOrProbabilities
         '
-        Me.ucrInputProbabilities.AddQuotesIfUnrecognised = True
-        Me.ucrInputProbabilities.GetSetSelectedIndex = -1
-        Me.ucrInputProbabilities.IsReadOnly = False
-        Me.ucrInputProbabilities.Location = New System.Drawing.Point(246, 73)
-        Me.ucrInputProbabilities.Name = "ucrInputProbabilities"
-        Me.ucrInputProbabilities.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputProbabilities.TabIndex = 5
+        Me.ucrInputValuesOrProbabilities.AddQuotesIfUnrecognised = True
+        Me.ucrInputValuesOrProbabilities.GetSetSelectedIndex = -1
+        Me.ucrInputValuesOrProbabilities.IsReadOnly = False
+        Me.ucrInputValuesOrProbabilities.Location = New System.Drawing.Point(246, 73)
+        Me.ucrInputValuesOrProbabilities.Name = "ucrInputValuesOrProbabilities"
+        Me.ucrInputValuesOrProbabilities.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputValuesOrProbabilities.TabIndex = 5
         '
         'ucrDistributionAndParameters
         '
@@ -192,7 +192,7 @@ Partial Class dlgShowModel
         Me.Controls.Add(Me.rdoProbabilities)
         Me.Controls.Add(Me.rdoQuantiles)
         Me.Controls.Add(Me.ucrPnlDistributionType)
-        Me.Controls.Add(Me.ucrInputProbabilities)
+        Me.Controls.Add(Me.ucrInputValuesOrProbabilities)
         Me.Controls.Add(Me.ucrDistributionAndParameters)
         Me.Controls.Add(Me.lblProbValues)
         Me.Controls.Add(Me.lblQuantValues)
@@ -216,7 +216,7 @@ Partial Class dlgShowModel
     Friend WithEvents lblQuantValues As Label
     Friend WithEvents lblProbValues As Label
     Friend WithEvents ucrDistributionAndParameters As ucrDistributionsWithParameters
-    Friend WithEvents ucrInputProbabilities As ucrInputComboBox
+    Friend WithEvents ucrInputValuesOrProbabilities As ucrInputComboBox
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrChkEnterValues As ucrCheck
     Friend WithEvents ucrChkDisplayGraphResults As ucrCheck
