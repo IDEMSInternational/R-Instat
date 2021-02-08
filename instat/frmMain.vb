@@ -149,16 +149,6 @@ Public Class frmMain
             mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
         End If
 
-        LoadDataOnFileClicked()
-    End Sub
-
-    ' TODO This is used instead of autoTranslate so that split container isn't shifted
-    ' Need to fix this so that all of frmMain can be translated
-    Public Sub TranslateFrmMainMenu()
-        translateMenu(mnuBar.Items, Me)
-    End Sub
-
-    Private Sub LoadDataOnFileClicked()
         Try
             If (Environment.GetCommandLineArgs.Length > 1) Then
                 dlgImportDataset.strFileToOpenOn = Environment.GetCommandLineArgs(1)
@@ -168,6 +158,13 @@ Public Class frmMain
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+
+    End Sub
+
+    ' TODO This is used instead of autoTranslate so that split container isn't shifted
+    ' Need to fix this so that all of frmMain can be translated
+    Public Sub TranslateFrmMainMenu()
+        translateMenu(mnuBar.Items, Me)
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
