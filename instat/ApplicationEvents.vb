@@ -7,7 +7,7 @@
     ''' https://docs.microsoft.com/en-us/dotnet/visual-basic/developing-apps/customizing-extending-my/extending-the-my-namespace 
     ''' </summary>
     Partial Friend Class MyApplication
-        ''' <summary>   Handles the event raised when when launching a single-instance application 
+        ''' <summary>   Handles the event raised when launching a single-instance application 
         '''             and the application is already active. 
         '''             If the event was triggered by double-clicking on a data file, then the sub 
         '''             displays a message box asking if the user would like to open the file in 
