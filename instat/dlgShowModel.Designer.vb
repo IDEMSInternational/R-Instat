@@ -51,6 +51,7 @@ Partial Class dlgShowModel
         Me.ucrSelectorShowModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverProbabilitiesOrValues = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdDistributionOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblQuantValues
@@ -148,7 +149,7 @@ Partial Class dlgShowModel
         '
         Me.ucrDistributionAndParameters.Location = New System.Drawing.Point(246, 97)
         Me.ucrDistributionAndParameters.Name = "ucrDistributionAndParameters"
-        Me.ucrDistributionAndParameters.Size = New System.Drawing.Size(247, 185)
+        Me.ucrDistributionAndParameters.Size = New System.Drawing.Size(247, 170)
         Me.ucrDistributionAndParameters.TabIndex = 6
         '
         'ucrSelectorShowModel
@@ -181,11 +182,22 @@ Partial Class dlgShowModel
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
         '
+        'cmdDistributionOptions
+        '
+        Me.cmdDistributionOptions.Enabled = False
+        Me.cmdDistributionOptions.Location = New System.Drawing.Point(384, 274)
+        Me.cmdDistributionOptions.Name = "cmdDistributionOptions"
+        Me.cmdDistributionOptions.Size = New System.Drawing.Size(111, 32)
+        Me.cmdDistributionOptions.TabIndex = 11
+        Me.cmdDistributionOptions.Text = "Distribution Options"
+        Me.cmdDistributionOptions.UseVisualStyleBackColor = True
+        '
         'dlgShowModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(500, 372)
+        Me.Controls.Add(Me.cmdDistributionOptions)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrChkEnterValues)
         Me.Controls.Add(Me.ucrChkDisplayGraphResults)
@@ -223,4 +235,5 @@ Partial Class dlgShowModel
     Friend WithEvents rdoProbabilities As RadioButton
     Friend WithEvents rdoQuantiles As RadioButton
     Friend WithEvents ucrPnlDistributionType As UcrPanel
+    Friend WithEvents cmdDistributionOptions As Button
 End Class
