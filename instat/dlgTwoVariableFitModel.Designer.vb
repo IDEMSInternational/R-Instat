@@ -45,21 +45,14 @@ Partial Class dlgTwoVariableFitModel
         Me.cmdDisplayOptions = New System.Windows.Forms.Button()
         Me.cmdModelOptions = New System.Windows.Forms.Button()
         Me.lblModelPreview = New System.Windows.Forms.Label()
-        Me.rdoTwoSample = New System.Windows.Forms.RadioButton()
+        Me.rdoTest = New System.Windows.Forms.RadioButton()
         Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.lblNumeric = New System.Windows.Forms.Label()
-        Me.grpParameters = New System.Windows.Forms.GroupBox()
-        Me.rdoCompareVariance = New System.Windows.Forms.RadioButton()
-        Me.rdoCompareMeans = New System.Windows.Forms.RadioButton()
-        Me.lblDifferenceInMeans = New System.Windows.Forms.Label()
-        Me.lblConfidenceInterval = New System.Windows.Forms.Label()
         Me.cmdExplanatoryFunction = New System.Windows.Forms.Button()
+        Me.lblFirstVariable = New System.Windows.Forms.Label()
+        Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.ucrTryModelling = New instat.ucrTry()
-        Me.ucrPnlMeansAndVariance = New instat.UcrPanel()
-        Me.ucrChkPairedTest = New instat.ucrCheck()
-        Me.ucrNudHypothesis = New instat.ucrNud()
-        Me.ucrNudCI = New instat.ucrNud()
         Me.ucrSaveModels = New instat.ucrSave()
         Me.ucrChkConvertToVariate = New instat.ucrCheck()
         Me.ucrReceiverExplanatory = New instat.ucrReceiverSingle()
@@ -69,7 +62,8 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrDistributionChoice = New instat.ucrDistributions()
         Me.ucrBase = New instat.ucrButtons()
-        Me.grpParameters.SuspendLayout()
+        Me.lblTest = New System.Windows.Forms.Label()
+        Me.ucrInputTest = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -138,20 +132,20 @@ Partial Class dlgTwoVariableFitModel
         Me.lblModelPreview.TabIndex = 12
         Me.lblModelPreview.Text = "Model Preview:"
         '
-        'rdoTwoSample
+        'rdoTest
         '
-        Me.rdoTwoSample.Appearance = System.Windows.Forms.Appearance.Button
-        Me.rdoTwoSample.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoSample.FlatAppearance.BorderSize = 2
-        Me.rdoTwoSample.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoTwoSample.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoTwoSample.Location = New System.Drawing.Point(222, 11)
-        Me.rdoTwoSample.Name = "rdoTwoSample"
-        Me.rdoTwoSample.Size = New System.Drawing.Size(121, 28)
-        Me.rdoTwoSample.TabIndex = 2
-        Me.rdoTwoSample.Text = "Two Sample"
-        Me.rdoTwoSample.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.rdoTwoSample.UseVisualStyleBackColor = True
+        Me.rdoTest.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoTest.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTest.FlatAppearance.BorderSize = 2
+        Me.rdoTest.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoTest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.rdoTest.Location = New System.Drawing.Point(222, 11)
+        Me.rdoTest.Name = "rdoTest"
+        Me.rdoTest.Size = New System.Drawing.Size(121, 28)
+        Me.rdoTest.TabIndex = 2
+        Me.rdoTest.Text = "Test"
+        Me.rdoTest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.rdoTest.UseVisualStyleBackColor = True
         '
         'rdoGeneralCase
         '
@@ -188,67 +182,6 @@ Partial Class dlgTwoVariableFitModel
         Me.lblNumeric.TabIndex = 4
         Me.lblNumeric.Text = "Response Variable:"
         '
-        'grpParameters
-        '
-        Me.grpParameters.Controls.Add(Me.rdoCompareVariance)
-        Me.grpParameters.Controls.Add(Me.rdoCompareMeans)
-        Me.grpParameters.Controls.Add(Me.ucrPnlMeansAndVariance)
-        Me.grpParameters.Controls.Add(Me.ucrChkPairedTest)
-        Me.grpParameters.Controls.Add(Me.ucrNudHypothesis)
-        Me.grpParameters.Controls.Add(Me.ucrNudCI)
-        Me.grpParameters.Controls.Add(Me.lblDifferenceInMeans)
-        Me.grpParameters.Controls.Add(Me.lblConfidenceInterval)
-        Me.grpParameters.Location = New System.Drawing.Point(268, 212)
-        Me.grpParameters.Name = "grpParameters"
-        Me.grpParameters.Size = New System.Drawing.Size(183, 137)
-        Me.grpParameters.TabIndex = 9
-        Me.grpParameters.TabStop = False
-        Me.grpParameters.Text = "Parameters"
-        '
-        'rdoCompareVariance
-        '
-        Me.rdoCompareVariance.AutoSize = True
-        Me.rdoCompareVariance.Location = New System.Drawing.Point(13, 90)
-        Me.rdoCompareVariance.Name = "rdoCompareVariance"
-        Me.rdoCompareVariance.Size = New System.Drawing.Size(112, 17)
-        Me.rdoCompareVariance.TabIndex = 6
-        Me.rdoCompareVariance.TabStop = True
-        Me.rdoCompareVariance.Tag = ""
-        Me.rdoCompareVariance.Text = "Compare Variance"
-        Me.rdoCompareVariance.UseVisualStyleBackColor = True
-        '
-        'rdoCompareMeans
-        '
-        Me.rdoCompareMeans.AutoSize = True
-        Me.rdoCompareMeans.Location = New System.Drawing.Point(13, 67)
-        Me.rdoCompareMeans.Name = "rdoCompareMeans"
-        Me.rdoCompareMeans.Size = New System.Drawing.Size(102, 17)
-        Me.rdoCompareMeans.TabIndex = 5
-        Me.rdoCompareMeans.TabStop = True
-        Me.rdoCompareMeans.Tag = ""
-        Me.rdoCompareMeans.Text = "Compare Means"
-        Me.rdoCompareMeans.UseVisualStyleBackColor = True
-        '
-        'lblDifferenceInMeans
-        '
-        Me.lblDifferenceInMeans.AutoSize = True
-        Me.lblDifferenceInMeans.Location = New System.Drawing.Point(10, 46)
-        Me.lblDifferenceInMeans.Name = "lblDifferenceInMeans"
-        Me.lblDifferenceInMeans.Size = New System.Drawing.Size(106, 13)
-        Me.lblDifferenceInMeans.TabIndex = 2
-        Me.lblDifferenceInMeans.Tag = ""
-        Me.lblDifferenceInMeans.Text = "Difference In Means:"
-        '
-        'lblConfidenceInterval
-        '
-        Me.lblConfidenceInterval.AutoSize = True
-        Me.lblConfidenceInterval.Location = New System.Drawing.Point(10, 21)
-        Me.lblConfidenceInterval.Name = "lblConfidenceInterval"
-        Me.lblConfidenceInterval.Size = New System.Drawing.Size(102, 13)
-        Me.lblConfidenceInterval.TabIndex = 0
-        Me.lblConfidenceInterval.Tag = ""
-        Me.lblConfidenceInterval.Text = "Confidence Interval:"
-        '
         'cmdExplanatoryFunction
         '
         Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(268, 186)
@@ -258,51 +191,32 @@ Partial Class dlgTwoVariableFitModel
         Me.cmdExplanatoryFunction.Text = "Function..."
         Me.cmdExplanatoryFunction.UseVisualStyleBackColor = True
         '
+        'lblFirstVariable
+        '
+        Me.lblFirstVariable.AutoSize = True
+        Me.lblFirstVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblFirstVariable.Location = New System.Drawing.Point(267, 85)
+        Me.lblFirstVariable.Name = "lblFirstVariable"
+        Me.lblFirstVariable.Size = New System.Drawing.Size(70, 13)
+        Me.lblFirstVariable.TabIndex = 21
+        Me.lblFirstVariable.Text = "First Variable:"
+        '
+        'lblSecondVariable
+        '
+        Me.lblSecondVariable.AutoSize = True
+        Me.lblSecondVariable.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.lblSecondVariable.Location = New System.Drawing.Point(267, 150)
+        Me.lblSecondVariable.Name = "lblSecondVariable"
+        Me.lblSecondVariable.Size = New System.Drawing.Size(85, 13)
+        Me.lblSecondVariable.TabIndex = 22
+        Me.lblSecondVariable.Text = "Second Variable"
+        '
         'ucrTryModelling
         '
         Me.ucrTryModelling.Location = New System.Drawing.Point(-3, 351)
         Me.ucrTryModelling.Name = "ucrTryModelling"
         Me.ucrTryModelling.Size = New System.Drawing.Size(396, 29)
         Me.ucrTryModelling.TabIndex = 20
-        '
-        'ucrPnlMeansAndVariance
-        '
-        Me.ucrPnlMeansAndVariance.Location = New System.Drawing.Point(8, 67)
-        Me.ucrPnlMeansAndVariance.Name = "ucrPnlMeansAndVariance"
-        Me.ucrPnlMeansAndVariance.Size = New System.Drawing.Size(94, 43)
-        Me.ucrPnlMeansAndVariance.TabIndex = 4
-        '
-        'ucrChkPairedTest
-        '
-        Me.ucrChkPairedTest.Checked = False
-        Me.ucrChkPairedTest.Location = New System.Drawing.Point(13, 113)
-        Me.ucrChkPairedTest.Name = "ucrChkPairedTest"
-        Me.ucrChkPairedTest.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkPairedTest.TabIndex = 7
-        '
-        'ucrNudHypothesis
-        '
-        Me.ucrNudHypothesis.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHypothesis.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudHypothesis.Location = New System.Drawing.Point(121, 46)
-        Me.ucrNudHypothesis.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudHypothesis.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudHypothesis.Name = "ucrNudHypothesis"
-        Me.ucrNudHypothesis.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudHypothesis.TabIndex = 3
-        Me.ucrNudHypothesis.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudCI
-        '
-        Me.ucrNudCI.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCI.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudCI.Location = New System.Drawing.Point(121, 20)
-        Me.ucrNudCI.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudCI.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudCI.Name = "ucrNudCI"
-        Me.ucrNudCI.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudCI.TabIndex = 1
-        Me.ucrNudCI.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrSaveModels
         '
@@ -386,16 +300,35 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrBase.Size = New System.Drawing.Size(406, 54)
         Me.ucrBase.TabIndex = 17
         '
+        'lblTest
+        '
+        Me.lblTest.AutoSize = True
+        Me.lblTest.Location = New System.Drawing.Point(36, 250)
+        Me.lblTest.Name = "lblTest"
+        Me.lblTest.Size = New System.Drawing.Size(31, 13)
+        Me.lblTest.TabIndex = 23
+        Me.lblTest.Text = "Test:"
+        '
+        'ucrInputTest
+        '
+        Me.ucrInputTest.AddQuotesIfUnrecognised = True
+        Me.ucrInputTest.GetSetSelectedIndex = -1
+        Me.ucrInputTest.IsReadOnly = False
+        Me.ucrInputTest.Location = New System.Drawing.Point(77, 247)
+        Me.ucrInputTest.Name = "ucrInputTest"
+        Me.ucrInputTest.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputTest.TabIndex = 24
+        '
         'dlgTwoVariableFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(462, 510)
+        Me.Controls.Add(Me.ucrInputTest)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.cmdExplanatoryFunction)
-        Me.Controls.Add(Me.grpParameters)
         Me.Controls.Add(Me.ucrSaveModels)
-        Me.Controls.Add(Me.rdoTwoSample)
+        Me.Controls.Add(Me.rdoTest)
         Me.Controls.Add(Me.rdoGeneralCase)
         Me.Controls.Add(Me.ucrChkConvertToVariate)
         Me.Controls.Add(Me.lblFactor)
@@ -410,6 +343,9 @@ Partial Class dlgTwoVariableFitModel
         Me.Controls.Add(Me.cmdModelOptions)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.lblFirstVariable)
+        Me.Controls.Add(Me.lblSecondVariable)
+        Me.Controls.Add(Me.lblTest)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.HelpButton = True
         Me.MaximizeBox = False
@@ -420,8 +356,6 @@ Partial Class dlgTwoVariableFitModel
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Simple_Regression"
         Me.Text = "Two Variable Fit Model"
-        Me.grpParameters.ResumeLayout(False)
-        Me.grpParameters.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -437,7 +371,7 @@ Partial Class dlgTwoVariableFitModel
     Friend WithEvents lblModelPreview As Label
     Friend WithEvents ucrModelPreview As ucrInputTextBox
     Friend WithEvents ucrPnlModelType As UcrPanel
-    Friend WithEvents rdoTwoSample As RadioButton
+    Friend WithEvents rdoTest As RadioButton
     Friend WithEvents rdoGeneralCase As RadioButton
     Friend WithEvents ucrChkConvertToVariate As ucrCheck
     Friend WithEvents lblFactor As Label
@@ -446,15 +380,10 @@ Partial Class dlgTwoVariableFitModel
     Friend WithEvents ucrReceiverResponse As ucrReceiverSingle
     Friend WithEvents ucrSelectorSimpleReg As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSaveModels As ucrSave
-    Friend WithEvents grpParameters As GroupBox
-    Friend WithEvents ucrNudHypothesis As ucrNud
-    Friend WithEvents ucrNudCI As ucrNud
-    Friend WithEvents lblDifferenceInMeans As Label
-    Friend WithEvents lblConfidenceInterval As Label
-    Friend WithEvents ucrChkPairedTest As ucrCheck
-    Friend WithEvents rdoCompareVariance As RadioButton
-    Friend WithEvents rdoCompareMeans As RadioButton
-    Friend WithEvents ucrPnlMeansAndVariance As UcrPanel
     Friend WithEvents cmdExplanatoryFunction As Button
     Friend WithEvents ucrTryModelling As ucrTry
+    Friend WithEvents lblFirstVariable As Label
+    Friend WithEvents lblSecondVariable As Label
+    Friend WithEvents ucrInputTest As ucrInputComboBox
+    Friend WithEvents lblTest As Label
 End Class
