@@ -7,11 +7,13 @@
     ''' https://docs.microsoft.com/en-us/dotnet/visual-basic/developing-apps/customizing-extending-my/extending-the-my-namespace 
     ''' </summary>
     Partial Friend Class MyApplication
-        ''' <summary>   Handles the event raised when launching a single-instance application 
-        '''             and the application is already active. 
+        ''' <summary>   Handles the event raised when launching a single-instance application. 
         '''             If the event was triggered by double-clicking on a data file, then the sub 
-        '''             displays a message box asking if the user would like to open the file in 
-        '''             the currently running R-Instat instance. </summary>
+        '''             opens R-Instat (if not already running), displays the import dataset dialog 
+        '''             and populates the dialog with the double-clicked file's path. 
+        '''             If the event was triggered by just starting the R-Instat executable, then 
+        '''             the sub displays a message box informing the user that R-Instat is already 
+        '''             running.</summary>
         '''
         ''' <param name="sender">   Source of the event. </param>
         ''' <param name="e">        Startup next instance event information. </param>
