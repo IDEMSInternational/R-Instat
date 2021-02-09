@@ -288,7 +288,7 @@ Partial Class dlgTwoVariableFitModel
         '
         'ucrDistributionChoice
         '
-        Me.ucrDistributionChoice.Location = New System.Drawing.Point(10, 244)
+        Me.ucrDistributionChoice.Location = New System.Drawing.Point(9, 244)
         Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
         Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
         Me.ucrDistributionChoice.TabIndex = 11
@@ -303,7 +303,7 @@ Partial Class dlgTwoVariableFitModel
         'lblTest
         '
         Me.lblTest.AutoSize = True
-        Me.lblTest.Location = New System.Drawing.Point(36, 250)
+        Me.lblTest.Location = New System.Drawing.Point(10, 250)
         Me.lblTest.Name = "lblTest"
         Me.lblTest.Size = New System.Drawing.Size(31, 13)
         Me.lblTest.TabIndex = 23
@@ -314,7 +314,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrInputTest.AddQuotesIfUnrecognised = True
         Me.ucrInputTest.GetSetSelectedIndex = -1
         Me.ucrInputTest.IsReadOnly = False
-        Me.ucrInputTest.Location = New System.Drawing.Point(77, 247)
+        Me.ucrInputTest.Location = New System.Drawing.Point(44, 247)
         Me.ucrInputTest.Name = "ucrInputTest"
         Me.ucrInputTest.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputTest.TabIndex = 24
@@ -324,6 +324,7 @@ Partial Class dlgTwoVariableFitModel
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(462, 510)
+        Me.Controls.Add(Me.ucrDistributionChoice)
         Me.Controls.Add(Me.ucrInputTest)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.cmdExplanatoryFunction)
@@ -339,7 +340,6 @@ Partial Class dlgTwoVariableFitModel
         Me.Controls.Add(Me.ucrPnlModelType)
         Me.Controls.Add(Me.ucrModelPreview)
         Me.Controls.Add(Me.lblModelPreview)
-        Me.Controls.Add(Me.ucrDistributionChoice)
         Me.Controls.Add(Me.cmdModelOptions)
         Me.Controls.Add(Me.cmdDisplayOptions)
         Me.Controls.Add(Me.ucrBase)

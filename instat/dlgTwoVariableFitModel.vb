@@ -22,7 +22,7 @@ Public Class dlgTwoVariableFitModel
     Public clsVisReg, clsFamilyFunction As New RFunction
     Private clsTransformFunction As New RFunction
 
-    Private ConoverTestFunction, clsDunnettTestFunction, clsDunnTestFunction, clsMosesTestFunction,
+    Private clsConoverTestFunction, clsDunnettTestFunction, clsDunnTestFunction, clsMosesTestFunction,
     clsNemenyiTestFunction, clsPageTestFunction, clsRunsTestFunction, clsScheffeTestFunction, clsSiegeTukeyRankTestFunction,
     clsSignTestFunction, clsVanWaerdenTestFunction, clsVarTestFunction, clsGTestFunction, clsLehmacherTestFunction,
     clsJoneKheereTerpstraTestFunction, clsLeveneTestFunction, clsLillieTestFunction, clsChisqTestFunction As New RFunction
@@ -81,7 +81,7 @@ Public Class dlgTwoVariableFitModel
         ucrPnlModelType.AddFunctionNamesCondition(rdoGeneralCase, "t.test", False)
         ucrPnlModelType.AddToLinkedControls(ucrModelPreview, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlModelType.AddToLinkedControls(ucrDistributionChoice, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlModelType.AddToLinkedControls(ucrInputTest, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrPnlModelType.AddToLinkedControls(ucrInputTest, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="ConoverTest")
 
         ucrInputTest.SetLinkedDisplayControl(lblTest)
 
@@ -122,7 +122,24 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub SetDefaults()
-        ConoverTestFunction = New RFunction
+        clsConoverTestFunction = New RFunction
+        clsDunnettTestFunction = New RFunction
+        clsDunnTestFunction = New RFunction
+        clsMosesTestFunction = New RFunction
+        clsNemenyiTestFunction = New RFunction
+        clsPageTestFunction = New RFunction
+        clsRunsTestFunction = New RFunction
+        clsScheffeTestFunction = New RFunction
+        clsSiegeTukeyRankTestFunction = New RFunction
+        clsSignTestFunction = New RFunction
+        clsVanWaerdenTestFunction = New RFunction
+        clsVarTestFunction = New RFunction
+        clsGTestFunction = New RFunction
+        clsJoneKheereTerpstraTestFunction = New RFunction
+        clsLehmacherTestFunction = New RFunction
+        clsLeveneTestFunction = New RFunction
+        clsLillieTestFunction = New RFunction
+        clsChisqTestFunction = New RFunction
         clsFormulaOperator = New ROperator
         clsPolynomialFunc = New RFunction
         clsLM = New RFunction
@@ -170,9 +187,59 @@ Public Class dlgTwoVariableFitModel
         clsPolynomialFunc.SetRCommand("poly")
 
         'Tests
-        ConoverTestFunction.SetPackageName("DescTools")
-        ConoverTestFunction.SetRCommand("ConoverTest")
+        clsConoverTestFunction.SetPackageName("DescTools")
+        clsConoverTestFunction.SetRCommand("ConoverTest")
 
+        clsDunnettTestFunction.SetPackageName("DescTools")
+        clsDunnettTestFunction.SetRCommand("DunnetTest")
+
+        clsDunnTestFunction.SetPackageName("DescTools")
+        clsDunnTestFunction.SetRCommand("DunnTest")
+
+        clsMosesTestFunction.SetPackageName("DescTools")
+        clsMosesTestFunction.SetRCommand("MosesTest")
+
+        clsNemenyiTestFunction.SetPackageName("DescTools")
+        clsNemenyiTestFunction.SetRCommand("NemenyiTest")
+
+        clsPageTestFunction.SetPackageName("DescTools")
+        clsPageTestFunction.SetRCommand("PageTest")
+
+        clsRunsTestFunction.SetPackageName("DescTools")
+        clsRunsTestFunction.SetRCommand("RunsTest")
+
+        clsScheffeTestFunction.SetPackageName("DescTools")
+        clsScheffeTestFunction.SetRCommand("ScheffeTest")
+
+        clsSiegeTukeyRankTestFunction.SetPackageName("DescTools")
+        clsSiegeTukeyRankTestFunction.SetRCommand("SiegeTukeyRank")
+
+        clsSignTestFunction.SetPackageName("DescTools")
+        clsSignTestFunction.SetRCommand("SignTest")
+
+        clsVanWaerdenTestFunction.SetPackageName("DescTools")
+        clsVanWaerdenTestFunction.SetRCommand("VanWaerdenTest")
+
+        clsVarTestFunction.SetPackageName("DescTools")
+        clsVarTestFunction.SetRCommand("VarTest")
+
+        clsGTestFunction.SetPackageName("DescTools")
+        clsGTestFunction.SetRCommand("GTest")
+
+        clsJoneKheereTerpstraTestFunction.SetPackageName("DescTools")
+        clsJoneKheereTerpstraTestFunction.SetRCommand("JoneKheereTerpstraTest")
+
+        clsLehmacherTestFunction.SetPackageName("DescTools")
+        clsLehmacherTestFunction.SetRCommand("LehmacherTest")
+
+        clsLeveneTestFunction.SetPackageName("DescTools")
+        clsLeveneTestFunction.SetRCommand("LeveneTest")
+
+        clsLillieTestFunction.SetPackageName("DescTools")
+        clsLillieTestFunction.SetRCommand("LillieTest")
+
+        clsChisqTestFunction.SetPackageName("DescTools")
+        clsChisqTestFunction.SetRCommand("")
 
         'Residual Plots
         dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
@@ -267,6 +334,25 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub SetRCodeForControls(bReset)
         bRCodeSet = False
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsConoverTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsDunnettTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsDunnTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsMosesTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsNemenyiTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=5)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsPageTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsRunsTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsScheffeTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=8)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsSiegeTukeyRankTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=9)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=10)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsVanWaerdenTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=11)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=12)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsGTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=13)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsJoneKheereTerpstraTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=14)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsLehmacherTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=15)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsLeveneTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=16)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsLillieTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=17)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsLillieTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=18)
+
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickGeneralOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickFirstOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickSecondOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
@@ -274,7 +360,24 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsPolynomialFunc, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=5)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMonthFunc, New RParameter("month", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsYearFunc, New RParameter("year", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
-        'General case controls
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsConoverTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=8)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsDunnettTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=9)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsDunnTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=10)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMosesTestFunction, New RParameter("y", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=11)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsNemenyiTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=12)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsPageTestFunction, New RParameter("groups", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=13)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsRunsTestFunction, New RParameter("y", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=14)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsScheffeTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=15)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsSiegeTukeyRankTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=16)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("y", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=17)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsVanWaerdenTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=18)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("y", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=19)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsGTestFunction, New RParameter("y", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=20)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsJoneKheereTerpstraTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=21)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsLehmacherTestFunction, New RParameter("y", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=22)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsLeveneTestFunction, New RParameter("group", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=23)
+
+        'General case controls        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsYearFunc, New RParameter("year", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
         ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorSimpleReg.GetParameter(), 1)
         ucrSaveModels.AddAdditionalRCode(clsGLM, 1)
         ucrReceiverResponse.SetRCode(clsAsNumeric, bReset)
@@ -317,14 +420,6 @@ Public Class dlgTwoVariableFitModel
     Private Sub cmdModelOptions_Click(sender As Object, e As EventArgs) Handles cmdModelOptions.Click
         sdgModelOptions.ShowDialog()
         ucrDistributionChoice.ucrInputDistributions.cboInput.SelectedIndex = ucrDistributionChoice.lstCurrentDistributions.FindIndex(Function(dist) dist.strNameTag = sdgModelOptions.ucrDistributionChoice.clsCurrDistribution.strNameTag)
-    End Sub
-
-    Private Sub ucrExplanatory_SelectionChanged(sender As Object, e As EventArgs)
-
-    End Sub
-
-    Private Sub ucrFamily_EnabledChanged(sender As Object, e As EventArgs) Handles ucrDistributionChoice.EnabledChanged
-
     End Sub
 
     Private Sub cmdExplanatoryFunction_Click(sender As Object, e As EventArgs) Handles cmdExplanatoryFunction.Click
@@ -378,7 +473,41 @@ Public Class dlgTwoVariableFitModel
             clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
-
+        ElseIf rdoTest.checked Then
+            Select Case ucrInputTest.GetText()
+                Case "ConoverTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsConoverTestFunction)
+                Case "DunnettTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsDunnettTestFunction)
+                Case "DunnTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsDunnTestFunction)
+                Case "MosesTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsMosesTestFunction)
+                Case "NemenyiTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsNemenyiTestFunction)
+                Case "PageTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsPageTestFunction)
+                Case "RunsTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsRunsTestFunction)
+                Case "ScheffeTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsScheffeTestFunction)
+                Case "SiegeTukeyRank"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSiegeTukeyRankTestFunction)
+                Case "SignTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsSignTestFunction)
+                Case "VanWaerdenTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsVanWaerdenTestFunction)
+                Case "GTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsGTestFunction)
+                Case "JoneKheereTerpstraTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsJoneKheereTerpstraTestFunction)
+                Case "LehmacherTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLehmacherTestFunction)
+                Case "LeveneTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLeveneTestFunction)
+                Case "LillieTest"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsLillieTestFunction)
+            End Select
         End If
     End Sub
 
