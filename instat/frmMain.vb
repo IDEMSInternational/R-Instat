@@ -453,13 +453,9 @@ Public Class frmMain
             Else
                 splOverall.Panel1Collapsed = True
             End If
-            If mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked Then
+            If (mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked) OrElse (mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked AndAlso Not mnuViewColumnMetadata.Checked) OrElse (mnuViewSwapDataAndMetadata.Checked AndAlso Not mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked) Then
                 splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
                 splMetadata.Panel1.Controls.Add(ucrDataViewer)
-            ElseIf mnuViewSwapDataAndMetadata.Checked AndAlso Not mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked Then
-                splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
-                splOverall.Panel1Collapsed = True
-                splDataOutput.Panel1Collapsed = False
             Else
                 splDataOutput.Panel1.Controls.Add(ucrDataViewer)
                 splMetadata.Panel1.Controls.Add(ucrColumnMeta)
@@ -495,7 +491,7 @@ Public Class frmMain
 
     Private Sub mnuWindowsEditor_Click(sender As Object, e As EventArgs) Handles mnuViewDataView.Click
         mnuViewDataView.Checked = Not mnuViewDataView.Checked
-        'UpdateLayout()
+        UpdateLayout()
     End Sub
 
     Private Sub mnuFilePrint_Click(sender As Object, e As EventArgs) Handles mnuFilePrint.Click
@@ -2293,9 +2289,6 @@ Public Class frmMain
 
     Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
-    End Sub
-
-    Private Sub mnuViewSwapDataAndMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.CheckStateChanged, mnuViewDataView.CheckStateChanged, mnuViewColumnMetadata.CheckStateChanged
         UpdateLayout()
     End Sub
 End Class
