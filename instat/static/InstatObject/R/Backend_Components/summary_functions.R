@@ -768,170 +768,62 @@ summary_quantile <- function(x, na.rm = FALSE, weights = NULL, probs, na_type = 
 
 # p10 function
 p10 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) {
-    return(NA)
-  } else {
-    if (missing(weights) || is.null(weights)) {
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.10))
-    }
-    else {
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.10, na.rm = na.rm)[[1]])
-    }
-  }
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.1)
 }
 
 # p20 function
 p20 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) {
-    return(NA)
-  } else {
-    if (missing(weights) || is.null(weights)) {
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.20))
-    }
-    else {
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.20, na.rm = na.rm)[[1]])
-    }
-  }
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.2)
 }
 
 # p25 function
 p25 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) {
-    return(NA)
-  } else {
-    if (missing(weights) || is.null(weights)) {
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.25))
-    }
-    else {
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.25, na.rm = na.rm)[[1]])
-    }
-  }
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.25)
 }
 
 # p30 function
 p30 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) {
-    return(NA)
-  } else {
-    if (missing(weights) || is.null(weights)) {
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.30))
-    }
-    else {
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.30, na.rm = na.rm)[[1]])
-    }
-  }
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.3)
 }
 
 # p33 function
 p33 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) {
-    return(NA)
-  } else {
-    if (missing(weights) || is.null(weights)) {
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.33))
-    }
-    else {
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.33, na.rm = na.rm)[[1]])
-    }
-  }
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.33)
 }
 
 # p40 function
 p40 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) {
-    return(NA)
-  } else {
-    if (missing(weights) || is.null(weights)) {
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.40))
-    }
-    else {
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.40, na.rm = na.rm)[[1]])
-    }
-  }
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.4)
 }
 
 # p60 function
 p60 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) {
-    return(NA)
-  } else {
-    if (missing(weights) || is.null(weights)) {
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.60))
-    }
-    else {
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.60, na.rm = na.rm)[[1]])
-    }
-  }
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.6)
 }
 
 # p67 function
 p67 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) {
-    return(NA)
-  } else {
-    if (missing(weights) || is.null(weights)) {
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.67))
-    }
-    else {
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.67, na.rm = na.rm)[[1]])
-    }
-  }
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.67)
 }
 
 # p70 function
 p70 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) {
-    return(NA)
-  } else {
-    if (missing(weights) || is.null(weights)) {
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.70))
-    }
-    else {
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.70, na.rm = na.rm)[[1]])
-    }
-  }
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.7)
 }
 
 # p75 function
 p75 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) {
-    return(NA)
-  } else {
-    if (missing(weights) || is.null(weights)) {
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.75))
-    }
-    else {
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.75, na.rm = na.rm)[[1]])
-    }
-  }
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.75)
 }
 
 # p80 function
 p80 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) {
-    return(NA)
-  } else {
-    if (missing(weights) || is.null(weights)) {
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.80))
-    }
-    else {
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.80, na.rm = na.rm)[[1]])
-    }
-  }
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.8)
 }
 
 # p90 function
 p90 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
-  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) {
-    return(NA)
-  } else {
-    if (missing(weights) || is.null(weights)) {
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.90))
-    }
-    else {
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.90, na.rm = na.rm)[[1]])
-    }
-  }
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.9)
 }
 
 # Skewness e1071 function
