@@ -453,19 +453,14 @@ Public Class frmMain
             Else
                 splOverall.Panel1Collapsed = True
             End If
-            If (mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked) Then
+            If mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked Then
                 splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
                 splMetadata.Panel1.Controls.Add(ucrDataViewer)
-            ElseIf (mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked AndAlso Not mnuViewColumnMetadata.Checked) Then
+            ElseIf mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked AndAlso Not mnuViewColumnMetadata.Checked Then
                 splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
                 splMetadata.Panel1.Controls.Add(ucrDataViewer)
                 mnuViewColumnMetadata.Checked = True
                 mnuViewDataView.Checked = False
-            ElseIf (mnuViewSwapDataAndMetadata.Checked AndAlso Not mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked) Then
-                splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
-                splMetadata.Panel1.Controls.Add(ucrDataViewer)
-                mnuViewColumnMetadata.Checked = False
-                mnuViewDataView.Checked = True
             Else
                 splDataOutput.Panel1.Controls.Add(ucrDataViewer)
                 splMetadata.Panel1.Controls.Add(ucrColumnMeta)
@@ -2300,5 +2295,12 @@ Public Class frmMain
     Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
         mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
         UpdateLayout()
+    End Sub
+
+    Private Sub mnuViewSwapDataAndMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.CheckStateChanged
+        If Not mnuViewSwapDataAndMetadata.Checked AndAlso Not mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked Then
+            mnuViewColumnMetadata.Checked = False
+            mnuViewDataView.Checked = True
+        End If
     End Sub
 End Class
