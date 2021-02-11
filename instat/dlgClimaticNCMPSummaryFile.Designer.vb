@@ -28,28 +28,24 @@ Partial Class dlgClimaticNCMPSummaryFile
         Me.ucrSelectorA6 = New instat.ucrDataFrame()
         Me.ucrSelectorA4 = New instat.ucrDataFrame()
         Me.ucrSelectorA2 = New instat.ucrDataFrame()
-        Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkEndYear = New instat.ucrCheck()
-        Me.ucrChkStartYear = New instat.ucrCheck()
-        Me.ucrNudNYE = New instat.ucrNud()
-        Me.ucrNudNYB = New instat.ucrNud()
-        Me.grpOptions.SuspendLayout()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveSummary = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblSaveFile
         '
         Me.lblSaveFile.AutoSize = True
         Me.lblSaveFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblSaveFile.Location = New System.Drawing.Point(7, 252)
+        Me.lblSaveFile.Location = New System.Drawing.Point(7, 191)
         Me.lblSaveFile.Name = "lblSaveFile"
-        Me.lblSaveFile.Size = New System.Drawing.Size(86, 13)
+        Me.lblSaveFile.Size = New System.Drawing.Size(74, 13)
         Me.lblSaveFile.TabIndex = 4
-        Me.lblSaveFile.Text = "Save Output To:"
+        Me.lblSaveFile.Text = "Save file(s) to:"
         '
         'cmdChooseFile
         '
         Me.cmdChooseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdChooseFile.Location = New System.Drawing.Point(309, 248)
+        Me.cmdChooseFile.Location = New System.Drawing.Point(333, 187)
         Me.cmdChooseFile.Name = "cmdChooseFile"
         Me.cmdChooseFile.Size = New System.Drawing.Size(75, 23)
         Me.cmdChooseFile.TabIndex = 6
@@ -61,9 +57,9 @@ Partial Class dlgClimaticNCMPSummaryFile
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(94, 249)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(91, 188)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(210, 21)
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(236, 21)
         Me.ucrInputFilePath.TabIndex = 5
         '
         'ucrSelectorA6
@@ -96,78 +92,40 @@ Partial Class dlgClimaticNCMPSummaryFile
         Me.ucrSelectorA2.Size = New System.Drawing.Size(148, 50)
         Me.ucrSelectorA2.TabIndex = 0
         '
-        'grpOptions
+        'ucrBase
         '
-        Me.grpOptions.Controls.Add(Me.ucrChkEndYear)
-        Me.grpOptions.Controls.Add(Me.ucrChkStartYear)
-        Me.grpOptions.Controls.Add(Me.ucrNudNYE)
-        Me.grpOptions.Controls.Add(Me.ucrNudNYB)
-        Me.grpOptions.Location = New System.Drawing.Point(10, 163)
-        Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(258, 73)
-        Me.grpOptions.TabIndex = 3
-        Me.grpOptions.TabStop = False
-        Me.grpOptions.Text = "Options"
+        Me.ucrBase.Location = New System.Drawing.Point(9, 216)
+        Me.ucrBase.Name = "ucrBase"
+        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
+        Me.ucrBase.TabIndex = 7
         '
-        'ucrChkEndYear
+        'ucrSaveSummary
         '
-        Me.ucrChkEndYear.Checked = False
-        Me.ucrChkEndYear.Location = New System.Drawing.Point(6, 46)
-        Me.ucrChkEndYear.Name = "ucrChkEndYear"
-        Me.ucrChkEndYear.Size = New System.Drawing.Size(187, 20)
-        Me.ucrChkEndYear.TabIndex = 2
-        '
-        'ucrChkStartYear
-        '
-        Me.ucrChkStartYear.Checked = False
-        Me.ucrChkStartYear.Location = New System.Drawing.Point(6, 20)
-        Me.ucrChkStartYear.Name = "ucrChkStartYear"
-        Me.ucrChkStartYear.Size = New System.Drawing.Size(187, 20)
-        Me.ucrChkStartYear.TabIndex = 0
-        '
-        'ucrNudNYE
-        '
-        Me.ucrNudNYE.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYE.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYE.Location = New System.Drawing.Point(199, 45)
-        Me.ucrNudNYE.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNYE.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYE.Name = "ucrNudNYE"
-        Me.ucrNudNYE.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNYE.TabIndex = 3
-        Me.ucrNudNYE.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudNYB
-        '
-        Me.ucrNudNYB.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYB.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYB.Location = New System.Drawing.Point(199, 19)
-        Me.ucrNudNYB.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNYB.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNYB.Name = "ucrNudNYB"
-        Me.ucrNudNYB.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNYB.TabIndex = 1
-        Me.ucrNudNYB.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrSaveSummary.Location = New System.Drawing.Point(10, 159)
+        Me.ucrSaveSummary.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveSummary.Name = "ucrSaveSummary"
+        Me.ucrSaveSummary.Size = New System.Drawing.Size(289, 22)
+        Me.ucrSaveSummary.TabIndex = 3
         '
         'dlgClimaticNCMPSummaryFile
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(395, 340)
-        Me.Controls.Add(Me.grpOptions)
+        Me.ClientSize = New System.Drawing.Size(416, 273)
+        Me.Controls.Add(Me.ucrSaveSummary)
+        Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorA6)
         Me.Controls.Add(Me.ucrSelectorA4)
         Me.Controls.Add(Me.ucrSelectorA2)
-        Me.Controls.Add(Me.lblSaveFile)
         Me.Controls.Add(Me.cmdChooseFile)
         Me.Controls.Add(Me.ucrInputFilePath)
+        Me.Controls.Add(Me.lblSaveFile)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgClimaticNCMPSummaryFile"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "NCMP Summary File"
-        Me.grpOptions.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -179,9 +137,6 @@ Partial Class dlgClimaticNCMPSummaryFile
     Friend WithEvents ucrSelectorA6 As ucrDataFrame
     Friend WithEvents ucrSelectorA4 As ucrDataFrame
     Friend WithEvents ucrSelectorA2 As ucrDataFrame
-    Friend WithEvents grpOptions As GroupBox
-    Friend WithEvents ucrChkEndYear As ucrCheck
-    Friend WithEvents ucrChkStartYear As ucrCheck
-    Friend WithEvents ucrNudNYE As ucrNud
-    Friend WithEvents ucrNudNYB As ucrNud
+    Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrSaveSummary As ucrSave
 End Class

@@ -26,7 +26,7 @@
 # station: name of station column in a2
 # a2_year: name of year column in a2
 # month: name of month column in a2
-# a4: data.frame containing the main data.frame output from p4_region_averag
+# a4: data.frame containing the main data.frame output from p4_region_average
 # station_df: data.frame will station metadata
 # name: name of station column in station_df (to link with a2[[station]])
 # lat: name of latitude column in station_df
@@ -60,8 +60,8 @@ p6_count_records <- function(a2, station, a2_year, month, a4, nyb, nye,
   # editing of 'P2_Station_List.txt'
   # Suppressing warning messages - about converting strings to integer
   
-  stations_data <- unique(a2[[station]])
-  stations_metadata <- unique(station_df[[name]])
+  stations_data <- as.character(unique(a2[[station]]))
+  stations_metadata <- as.character(unique(station_df[[name]]))
   if (!all(stations_data %in% stations_metadata)) stop("Station information not available for all stations that appear in data.")
   stations <- stations_data
   nstn <- length(stations)

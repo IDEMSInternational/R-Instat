@@ -41,17 +41,18 @@ Partial Class sdgDataOptions
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgDataOptions))
         Me.tbcDataOptions = New System.Windows.Forms.TabControl()
         Me.tbRows = New System.Windows.Forms.TabPage()
-        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
+        Me.cmdRemoveCurrentFilter = New System.Windows.Forms.Button()
         Me.lblFilterPreview = New System.Windows.Forms.Label()
         Me.grpApplyOptions = New System.Windows.Forms.GroupBox()
         Me.rdoForDialog = New System.Windows.Forms.RadioButton()
         Me.rdoAllDialogs = New System.Windows.Forms.RadioButton()
         Me.cmdDefineNewFilter = New System.Windows.Forms.Button()
         Me.lblFilter = New System.Windows.Forms.Label()
-        Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
-        Me.ucrSelectorFilters = New instat.ucrSelectorByDataFrame()
         Me.tbColumns = New System.Windows.Forms.TabPage()
         Me.chkShowHiddenColumns = New System.Windows.Forms.CheckBox()
+        Me.ucrSelectorFilters = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
+        Me.ucrReceiverFilter = New instat.ucrReceiverSingle()
         Me.ucrSubDialogueBase = New instat.ucrButtonsSubdialogue()
         Me.tbcDataOptions.SuspendLayout()
         Me.tbRows.SuspendLayout()
@@ -69,25 +70,25 @@ Partial Class sdgDataOptions
         '
         'tbRows
         '
+        Me.tbRows.Controls.Add(Me.cmdRemoveCurrentFilter)
+        Me.tbRows.Controls.Add(Me.ucrSelectorFilters)
         Me.tbRows.Controls.Add(Me.ucrInputFilterPreview)
         Me.tbRows.Controls.Add(Me.lblFilterPreview)
         Me.tbRows.Controls.Add(Me.grpApplyOptions)
         Me.tbRows.Controls.Add(Me.cmdDefineNewFilter)
         Me.tbRows.Controls.Add(Me.lblFilter)
         Me.tbRows.Controls.Add(Me.ucrReceiverFilter)
-        Me.tbRows.Controls.Add(Me.ucrSelectorFilters)
         resources.ApplyResources(Me.tbRows, "tbRows")
         Me.tbRows.Name = "tbRows"
         Me.tbRows.Tag = "Rows"
         Me.tbRows.UseVisualStyleBackColor = True
         '
-        'ucrInputFilterPreview
+        'cmdRemoveCurrentFilter
         '
-        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilterPreview.IsMultiline = False
-        Me.ucrInputFilterPreview.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFilterPreview, "ucrInputFilterPreview")
-        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
+        resources.ApplyResources(Me.cmdRemoveCurrentFilter, "cmdRemoveCurrentFilter")
+        Me.cmdRemoveCurrentFilter.Name = "cmdRemoveCurrentFilter"
+        Me.cmdRemoveCurrentFilter.Tag = "Define_New_Filter"
+        Me.cmdRemoveCurrentFilter.UseVisualStyleBackColor = True
         '
         'lblFilterPreview
         '
@@ -130,22 +131,6 @@ Partial Class sdgDataOptions
         Me.lblFilter.Name = "lblFilter"
         Me.lblFilter.Tag = "Filter"
         '
-        'ucrReceiverFilter
-        '
-        Me.ucrReceiverFilter.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverFilter, "ucrReceiverFilter")
-        Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
-        Me.ucrReceiverFilter.Selector = Nothing
-        Me.ucrReceiverFilter.strNcFilePath = ""
-        Me.ucrReceiverFilter.ucrSelector = Nothing
-        '
-        'ucrSelectorFilters
-        '
-        Me.ucrSelectorFilters.bShowHiddenColumns = False
-        Me.ucrSelectorFilters.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorFilters, "ucrSelectorFilters")
-        Me.ucrSelectorFilters.Name = "ucrSelectorFilters"
-        '
         'tbColumns
         '
         Me.tbColumns.Controls.Add(Me.chkShowHiddenColumns)
@@ -160,6 +145,31 @@ Partial Class sdgDataOptions
         Me.chkShowHiddenColumns.Name = "chkShowHiddenColumns"
         Me.chkShowHiddenColumns.Tag = "Show_Hidden_Columns_in_Selector"
         Me.chkShowHiddenColumns.UseVisualStyleBackColor = True
+        '
+        'ucrSelectorFilters
+        '
+        Me.ucrSelectorFilters.bDropUnusedFilterLevels = False
+        Me.ucrSelectorFilters.bShowHiddenColumns = False
+        Me.ucrSelectorFilters.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorFilters, "ucrSelectorFilters")
+        Me.ucrSelectorFilters.Name = "ucrSelectorFilters"
+        '
+        'ucrInputFilterPreview
+        '
+        Me.ucrInputFilterPreview.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilterPreview.IsMultiline = False
+        Me.ucrInputFilterPreview.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFilterPreview, "ucrInputFilterPreview")
+        Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
+        '
+        'ucrReceiverFilter
+        '
+        Me.ucrReceiverFilter.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverFilter, "ucrReceiverFilter")
+        Me.ucrReceiverFilter.Name = "ucrReceiverFilter"
+        Me.ucrReceiverFilter.Selector = Nothing
+        Me.ucrReceiverFilter.strNcFilePath = ""
+        Me.ucrReceiverFilter.ucrSelector = Nothing
         '
         'ucrSubDialogueBase
         '
@@ -193,7 +203,6 @@ Partial Class sdgDataOptions
     Friend WithEvents tbRows As TabPage
     Friend WithEvents tbColumns As TabPage
     Friend WithEvents chkShowHiddenColumns As CheckBox
-    Friend WithEvents ucrSelectorFilters As ucrSelectorByDataFrame
     Friend WithEvents cmdDefineNewFilter As Button
     Friend WithEvents lblFilter As Label
     Friend WithEvents ucrReceiverFilter As ucrReceiverSingle
@@ -202,4 +211,6 @@ Partial Class sdgDataOptions
     Friend WithEvents rdoAllDialogs As RadioButton
     Friend WithEvents ucrInputFilterPreview As ucrInputTextBox
     Friend WithEvents lblFilterPreview As Label
+    Friend WithEvents ucrSelectorFilters As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents cmdRemoveCurrentFilter As Button
 End Class
