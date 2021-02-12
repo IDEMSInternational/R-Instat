@@ -2337,22 +2337,26 @@ Public Class RLink
 
         Dim clsRScript As RScript.clsRScript = New RScript.clsRScript(strNewScript.Replace(" ", [String].Empty))
 
-        For Each clsNewRStatement As RScript.clsRStatement In clsRScript.lstRStatements
-            Dim clsNewRCodeStructure As New RCodeStructure
-            clsNewRCodeStructure = GetListRCodeStructures(clsNewRStatement.clsElement)
-
-            If Not IsNothing(clsNewRStatement.clsAssignment) Then
-                clsNewRCodeStructure.bToBeAssigned = True
-                clsNewRCodeStructure.strAssignTo = clsNewRStatement.clsAssignment.strTxt
-            End If
-
-            lstNewRCodeStructures.Add(clsNewRCodeStructure)
+        For Each clsRStatement As RScript.clsRStatement In clsRScript.lstRStatements
+            lstNewRCodeStructures.Add(ProcessSingleRStatement(clsRStatement))
         Next
 
         dlgSplitText.OpenFromScript(lstNewRCodeStructures)
         dlgSplitText.ShowDialog()
 
     End Sub
+
+    Private Shared Function ProcessSingleRStatement(clsNewRStatement As RScript.clsRStatement) As RCodeStructure
+        Dim clsNewRCodeStructure As RCodeStructure
+        clsNewRCodeStructure = GetListRCodeStructures(clsNewRStatement.clsElement)
+
+        If Not IsNothing(clsNewRStatement.clsAssignment) Then
+            clsNewRCodeStructure.bToBeAssigned = True
+            clsNewRCodeStructure.strAssignTo = clsNewRStatement.clsAssignment.strTxt
+        End If
+        Return clsNewRCodeStructure
+    End Function
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Returns RCodeStructure from the Current Rstatement </summary>
     '''
@@ -2426,16 +2430,32 @@ Public Class RLink
             Dim clsRParameterFunction As RScript.clsRParameterNamed
             clsRParameterFunction = TryCast(clsNewRParameter, RScript.clsRParameterNamed)
 
-            If Not TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementProperty AndAlso Not TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementFunction Then
+            If Not TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementProperty AndAlso Not TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementFunction AndAlso Not TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementAssignable Then
                 clsRParameter = New RParameter(clsRParameterFunction.strArgumentName, strParamValue:=clsNewRParameter.clsArgValue.strTxt, iNewPosition:=intParamPos)
             ElseIf TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementOperator OrElse TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementFunction Then
                 clsRParameter = New RParameter(clsRParameterFunction.strArgumentName, strParamValue:=GetListRCodeStructures(clsNewRParameter.clsArgValue), iNewPosition:=intParamPos)
+            ElseIf TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementAssignable Then
+                Dim clsNewAsignable As RScript.clsRElementAssignable
+                clsNewAsignable = TryCast(clsNewRParameter.clsArgValue, RScript.clsRElementAssignable)
+
+                If Not IsNothing(clsNewAsignable.clsStatement) Then
+                    Dim clsNewRCodeStructure As RCodeStructure = ProcessSingleRStatement(clsNewAsignable.clsStatement)
+                    clsRParameter = New RParameter(clsRParameterFunction.strArgumentName, strParamValue:=clsNewRCodeStructure, iNewPosition:=intParamPos)
+                    clsRParameter.strArgumentValue = clsNewRCodeStructure.strAssignTo
+                End If
             End If
         Else
             If Not TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementProperty AndAlso Not TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementFunction Then
                 clsRParameter = New RParameter("", strParamValue:=clsNewRParameter.clsArgValue.strTxt, iNewPosition:=intParamPos)
             ElseIf TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementOperator OrElse TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementFunction Then
                 clsRParameter = New RParameter("", strParamValue:=GetListRCodeStructures(clsNewRParameter.clsArgValue), iNewPosition:=intParamPos)
+            ElseIf TypeOf (clsNewRParameter.clsArgValue) Is RScript.clsRElementAssignable Then
+                Dim clsNewAsignable As RScript.clsRElementAssignable
+                clsNewAsignable = TryCast(clsNewRParameter.clsArgValue, RScript.clsRElementAssignable)
+
+                If Not IsNothing(clsNewAsignable.clsStatement) Then
+                    clsRParameter = New RParameter("", strParamValue:=ProcessSingleRStatement(clsNewAsignable.clsStatement), iNewPosition:=intParamPos)
+                End If
             End If
         End If
 

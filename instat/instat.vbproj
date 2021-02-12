@@ -129,7 +129,7 @@
       <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
     <Reference Include="RScript">
-      <HintPath>..\..\..\..\Documents\RScript.dll</HintPath>
+      <HintPath>..\..\..\..\Downloads\RScript.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

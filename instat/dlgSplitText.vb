@@ -33,7 +33,8 @@ Public Class dlgSplitText
             SetDefaults()
         End If
         If bLoadFromScript Then
-            clsTextComponentsFixed = lstRCodeStructure(0)
+            clsTextComponentsFixed = lstRCodeStructure(1)
+            SplitTextOptions()
             bLoadFromScript = False
         End If
         SetRCodeForControls(bReset)
