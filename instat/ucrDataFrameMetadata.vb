@@ -163,12 +163,12 @@ Public Class ucrDataFrameMetadata
     End Sub
 
     Private Function GetSelectedVariableNamesAsArray() As String()
-        Dim lstSelectedVars As New List(Of String)
+        Dim arrSelectedVars(grdMetaData.CurrentWorksheet.SelectionRange.Rows - 1) As String
 
         For i As Integer = grdMetaData.CurrentWorksheet.SelectionRange.Row To grdMetaData.CurrentWorksheet.SelectionRange.Row + grdMetaData.CurrentWorksheet.SelectionRange.Rows - 1
-            lstSelectedVars.Add(grdMetaData.CurrentWorksheet(i, 0))
+            arrSelectedVars(i - grdMetaData.CurrentWorksheet.SelectionRange.Row) = grdMetaData.CurrentWorksheet(i, 0)
         Next
-        Return lstSelectedVars.ToArray
+        Return arrSelectedVars
     End Function
 
     Private Sub deleteDataFrame_Click(sender As Object, e As EventArgs) Handles deleteDataFrame.Click
