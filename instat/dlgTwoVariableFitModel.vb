@@ -21,12 +21,6 @@ Public Class dlgTwoVariableFitModel
     Public bFirstLoad As Boolean = True
     Public clsVisReg, clsFamilyFunction As New RFunction
     Private clsTransformFunction As New RFunction
-
-    Private clsConoverTestFunction, clsDunnettTestFunction, clsDunnTestFunction, clsMosesTestFunction,
-    clsNemenyiTestFunction, clsPageTestFunction, clsRunsTestFunction, clsScheffeTestFunction, clsSiegeTukeyRankTestFunction,
-    clsSignTestFunction, clsVanWaerdenTestFunction, clsVarTestFunction, clsGTestFunction, clsLehmacherTestFunction,
-    clsJoneKheereTerpstraTestFunction, clsLeveneTestFunction, clsLillieTestFunction, clsChisqTestFunction As New RFunction
-
     Public clsBrokenStickFirstOperator, clsBrokenStickSecondOperator, clsBrokenStickThirdOperator, clsBrokenStickGeneralOperator As New ROperator
     Public clsBrokenStickSecondOperFunction, clsBrokenStickIFunc As New RFunction
     Public clsSplineFunc As New RFunction
@@ -122,24 +116,6 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub SetDefaults()
-        clsConoverTestFunction = New RFunction
-        clsDunnettTestFunction = New RFunction
-        clsDunnTestFunction = New RFunction
-        clsMosesTestFunction = New RFunction
-        clsNemenyiTestFunction = New RFunction
-        clsPageTestFunction = New RFunction
-        clsRunsTestFunction = New RFunction
-        clsScheffeTestFunction = New RFunction
-        clsSiegeTukeyRankTestFunction = New RFunction
-        clsSignTestFunction = New RFunction
-        clsVanWaerdenTestFunction = New RFunction
-        clsVarTestFunction = New RFunction
-        clsGTestFunction = New RFunction
-        clsJoneKheereTerpstraTestFunction = New RFunction
-        clsLehmacherTestFunction = New RFunction
-        clsLeveneTestFunction = New RFunction
-        clsLillieTestFunction = New RFunction
-        clsChisqTestFunction = New RFunction
         clsFormulaOperator = New ROperator
         clsPolynomialFunc = New RFunction
         clsLM = New RFunction
@@ -186,60 +162,7 @@ Public Class dlgTwoVariableFitModel
 
         clsPolynomialFunc.SetRCommand("poly")
 
-        'Tests
-        clsConoverTestFunction.SetPackageName("DescTools")
-        clsConoverTestFunction.SetRCommand("ConoverTest")
 
-        clsDunnettTestFunction.SetPackageName("DescTools")
-        clsDunnettTestFunction.SetRCommand("DunnetTest")
-
-        clsDunnTestFunction.SetPackageName("DescTools")
-        clsDunnTestFunction.SetRCommand("DunnTest")
-
-        clsMosesTestFunction.SetPackageName("DescTools")
-        clsMosesTestFunction.SetRCommand("MosesTest")
-
-        clsNemenyiTestFunction.SetPackageName("DescTools")
-        clsNemenyiTestFunction.SetRCommand("NemenyiTest")
-
-        clsPageTestFunction.SetPackageName("DescTools")
-        clsPageTestFunction.SetRCommand("PageTest")
-
-        clsRunsTestFunction.SetPackageName("DescTools")
-        clsRunsTestFunction.SetRCommand("RunsTest")
-
-        clsScheffeTestFunction.SetPackageName("DescTools")
-        clsScheffeTestFunction.SetRCommand("ScheffeTest")
-
-        clsSiegeTukeyRankTestFunction.SetPackageName("DescTools")
-        clsSiegeTukeyRankTestFunction.SetRCommand("SiegeTukeyRank")
-
-        clsSignTestFunction.SetPackageName("DescTools")
-        clsSignTestFunction.SetRCommand("SignTest")
-
-        clsVanWaerdenTestFunction.SetPackageName("DescTools")
-        clsVanWaerdenTestFunction.SetRCommand("VanWaerdenTest")
-
-        clsVarTestFunction.SetPackageName("DescTools")
-        clsVarTestFunction.SetRCommand("VarTest")
-
-        clsGTestFunction.SetPackageName("DescTools")
-        clsGTestFunction.SetRCommand("GTest")
-
-        clsJoneKheereTerpstraTestFunction.SetPackageName("DescTools")
-        clsJoneKheereTerpstraTestFunction.SetRCommand("JoneKheereTerpstraTest")
-
-        clsLehmacherTestFunction.SetPackageName("DescTools")
-        clsLehmacherTestFunction.SetRCommand("LehmacherTest")
-
-        clsLeveneTestFunction.SetPackageName("DescTools")
-        clsLeveneTestFunction.SetRCommand("LeveneTest")
-
-        clsLillieTestFunction.SetPackageName("DescTools")
-        clsLillieTestFunction.SetRCommand("LillieTest")
-
-        clsChisqTestFunction.SetPackageName("DescTools")
-        clsChisqTestFunction.SetRCommand("")
 
         'Residual Plots
         dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
@@ -334,25 +257,6 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub SetRCodeForControls(bReset)
         bRCodeSet = False
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsConoverTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsDunnettTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsDunnTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsMosesTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=4)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsNemenyiTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=5)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsPageTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsRunsTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsScheffeTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=8)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsSiegeTukeyRankTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=9)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=10)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsVanWaerdenTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=11)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=12)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsGTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=13)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsJoneKheereTerpstraTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=14)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsLehmacherTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=15)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsLeveneTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=16)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsLillieTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=17)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsLillieTestFunction, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=18)
-
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickGeneralOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickFirstOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=2)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBrokenStickSecondOperator, New RParameter("x", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
@@ -360,24 +264,7 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsPolynomialFunc, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=5)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMonthFunc, New RParameter("month", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsYearFunc, New RParameter("year", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsConoverTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=8)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsDunnettTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=9)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsDunnTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=10)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMosesTestFunction, New RParameter("y", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=11)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsNemenyiTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=12)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsPageTestFunction, New RParameter("groups", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=13)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsRunsTestFunction, New RParameter("y", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=14)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsScheffeTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=15)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsSiegeTukeyRankTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=16)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsSignTestFunction, New RParameter("y", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=17)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsVanWaerdenTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=18)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("y", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=19)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsGTestFunction, New RParameter("y", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=20)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsJoneKheereTerpstraTestFunction, New RParameter("g", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=21)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsLehmacherTestFunction, New RParameter("y", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=22)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsLeveneTestFunction, New RParameter("group", iNewPosition:=1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=23)
-
-        'General case controls        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsYearFunc, New RParameter("year", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
+        'General case controls       
         ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorSimpleReg.GetParameter(), 1)
         ucrSaveModels.AddAdditionalRCode(clsGLM, 1)
         ucrReceiverResponse.SetRCode(clsAsNumeric, bReset)
@@ -388,8 +275,7 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.SetRCode(clsLM, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
         bRCodeSet = True
-        SetEnableDists()
-        ConvertToVariate()
+        'ConvertToVariate()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -437,19 +323,6 @@ Public Class dlgTwoVariableFitModel
         End If
     End Sub
 
-    Public Sub DataTypeAccepted()
-        If rdoTest.Checked Then
-            ucrReceiverResponse.SetIncludedDataTypes({"integer", "numeric"})
-            ucrReceiverExplanatory.SetIncludedDataTypes({"character", "factor"})
-            If ucrReceiverResponse.strCurrDataType = "factor" OrElse ucrReceiverResponse.strCurrDataType = "character" Then
-                ucrReceiverResponse.Clear()
-            End If
-            If ucrReceiverExplanatory.strCurrDataType = "integer" OrElse ucrReceiverExplanatory.strCurrDataType = "numeric" OrElse ucrReceiverResponse.strCurrDataType = "positive integer" Then
-                ucrReceiverExplanatory.Clear()
-            End If
-        End If
-    End Sub
-
     Private Sub SetBaseFunction()
         If rdoGeneralCase.Checked Then
             If (ucrDistributionChoice.clsCurrDistribution.strNameTag = "Normal") Then
@@ -474,40 +347,7 @@ Public Class dlgTwoVariableFitModel
             clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
         ElseIf rdoTest.checked Then
-            Select Case ucrInputTest.GetText()
-                Case "ConoverTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsConoverTestFunction)
-                Case "DunnettTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsDunnettTestFunction)
-                Case "DunnTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsDunnTestFunction)
-                Case "MosesTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsMosesTestFunction)
-                Case "NemenyiTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsNemenyiTestFunction)
-                Case "PageTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsPageTestFunction)
-                Case "RunsTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsRunsTestFunction)
-                Case "ScheffeTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsScheffeTestFunction)
-                Case "SiegeTukeyRank"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsSiegeTukeyRankTestFunction)
-                Case "SignTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsSignTestFunction)
-                Case "VanWaerdenTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsVanWaerdenTestFunction)
-                Case "GTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsGTestFunction)
-                Case "JoneKheereTerpstraTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsJoneKheereTerpstraTestFunction)
-                Case "LehmacherTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsLehmacherTestFunction)
-                Case "LeveneTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsLeveneTestFunction)
-                Case "LillieTest"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsLillieTestFunction)
-            End Select
+
         End If
     End Sub
 
@@ -522,13 +362,6 @@ Public Class dlgTwoVariableFitModel
                     Else
                         ucrChkConvertToVariate.Visible = True
                     End If
-                    If ucrChkConvertToVariate.Checked Then
-                        clsFormulaOperator.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
-                        ucrDistributionChoice.RecieverDatatype("numeric")
-                    Else
-                        clsFormulaOperator.AddParameter("y", ucrReceiverResponse.GetVariableNames(False), iPosition:=0)
-                        ucrDistributionChoice.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
-                    End If
                 Else
                     ucrChkConvertToVariate.Visible = False
                     If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverResponse.IsEmpty() Then
@@ -540,29 +373,21 @@ Public Class dlgTwoVariableFitModel
                         ucrDistributionChoice.Enabled = True
                     End If
                 End If
-            Else
-                If Not ucrReceiverResponse.IsEmpty Then
-                    ucrDistributionChoice.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
-                End If
             End If
-            UpdatePreview()
+
             TestOKEnabled()
         End If
     End Sub
 
     Private Sub ucrDistWithParameters_ucrInputDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
         SetBaseFunction()
-        DataTypeAccepted()
     End Sub
 
     Private Sub ucrResponse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlValueChanged
-        UpdatePreview()
-        ConvertToVariate()
-        SetEnableDists()
+        ucrDistributionChoice.Enabled = Not ucrReceiverResponse.IsEmpty
     End Sub
 
     Private Sub ucrSelectorSimpleReg_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSimpleReg.ControlValueChanged
-        SetBaseFunction()
         GraphAssignTo()
     End Sub
 
@@ -572,26 +397,15 @@ Public Class dlgTwoVariableFitModel
         clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
     End Sub
 
-    Private Sub ucrChkConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
-        SetBaseFunction()
-        ConvertToVariate()
-    End Sub
-
-    Private Sub ucrExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExplanatory.ControlValueChanged
+    Private Sub ucrReceiverExplanatory_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExplanatory.ControlValueChanged
         If bRCodeSet Then
             If Not ucrReceiverExplanatory.IsEmpty Then
                 clsFormulaOperator.AddParameter("exp1", ucrReceiverExplanatory.GetVariableNames(False), iPosition:=1)
             Else
                 clsFormulaOperator.RemoveParameterByName("exp1")
             End If
+            UpdatePreview()
         End If
-        FirstExplanatoryFunctionEnabled()
-        UpdatePreview()
-        SetBaseFunction()
-        DataTypeAccepted()
-    End Sub
-
-    Private Sub FirstExplanatoryFunctionEnabled()
         If Not ucrReceiverExplanatory.IsEmpty AndAlso {"numeric", "integer", "Date"}.Contains(ucrReceiverExplanatory.strCurrDataType) Then
             GetColumnMedian()
             cmdExplanatoryFunction.Enabled = True
@@ -626,14 +440,6 @@ Public Class dlgTwoVariableFitModel
         End If
     End Sub
 
-    Public Sub SetEnableDists()
-        ucrDistributionChoice.Enabled = Not ucrReceiverResponse.IsEmpty
-    End Sub
-
-    Private Sub ucrFamily_EnabledChanged() Handles ucrDistributionChoice.EnabledChanged
-        DataTypeAccepted()
-    End Sub
-
     Private Sub ucrPnlModelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlModelType.ControlValueChanged
         If rdoGeneralCase.Checked Then
             ucrDistributionChoice.SetGLMDistributions()
@@ -649,13 +455,23 @@ Public Class dlgTwoVariableFitModel
             ucrDistributionChoice.SetExactDistributions()
         End If
         SetBaseFunction()
-        ConvertToVariate()
-        DataTypeAccepted()
+
+    End Sub
+
+    Private Sub ucrChkConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
+        If ucrChkConvertToVariate.Checked Then
+            clsFormulaOperator.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
+            ucrDistributionChoice.RecieverDatatype("numeric")
+        Else
+            clsFormulaOperator.AddParameter("y", ucrReceiverResponse.GetVariableNames(False), iPosition:=0)
+            ucrDistributionChoice.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
+        End If
+        UpdatePreview()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged
+        UpdatePreview()
+        ConvertToVariate()
         TestOKEnabled()
     End Sub
-
-
 End Class
