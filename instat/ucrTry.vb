@@ -214,7 +214,7 @@ Public Class ucrTry
                                                                                        frmPopUp.Close()
                                                                                    End Sub
                                          AddHandler txtPopUpErrorDetail.KeyDown, Sub(sender As Object, e As KeyEventArgs)
-                                                                                     If e.Control AndAlso e.KeyCode = Keys.KeyCode.Enter Then
+                                                                                     If e.Control AndAlso e.KeyCode = Keys.Enter Then
                                                                                          frmPopUp.Close()
                                                                                      End If
                                                                                  End Sub
