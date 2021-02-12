@@ -19,13 +19,21 @@
         ''' <param name="e">        Startup next instance event information. </param>
         '''----------------------------------------------------------------------------------------
         Private Sub MyApplication_StartupNextInstance(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupNextInstanceEventArgs) Handles Me.StartupNextInstance
-            If e.CommandLine.Count = 0 Then
-                MessageBox.Show("R-Instat is already running", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Dim strPath As String
+            If e.CommandLine.Count > 0 Then
+                frmMain.TopMost = True
+                frmMain.TopMost = False
+                If Application.OpenForms.OfType(Of dlgImportDataset).Any Then
+                    strPath = Replace(e.CommandLine(0).ToString, "\", "/")
+                    dlgImportDataset.ucrInputFilePath.SetName(strPath)
+                Else
+                    dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
+                    dlgImportDataset.bStartOpenDialog = False
+                    dlgImportDataset.ShowDialog()
+                End If
             Else
-                dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
-                dlgImportDataset.bStartOpenDialog = False
-                dlgImportDataset.Visible = False
-                dlgImportDataset.ShowDialog()
+                frmMain.TopMost = True
+                frmMain.TopMost = False
             End If
         End Sub
     End Class
