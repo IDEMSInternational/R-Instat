@@ -240,7 +240,7 @@ Public Class ucrTry
     ''' <summary> Clears the ucrInputTryMessage textbox and sets its colour to white incase the 
     ''' ucrReceiverScript selection changes on the value for the ucrModelPreview changes    </summary>
     '''--------------------------------------------------------------------------------------------
-    Private Sub ResetInputTryMessage()
+    Public Sub ResetInputTryMessage()
         ucrInputTryMessage.SetName("")
         ucrInputTryMessage.txtInput.BackColor = Color.White
         ucrInputTryMessage.txtInput.Controls.Clear()
