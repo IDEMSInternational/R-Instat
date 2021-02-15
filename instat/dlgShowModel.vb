@@ -18,9 +18,13 @@
 Imports instat.Translations
 Public Class dlgShowModel
     Private bReset As Boolean = True
+    Private bResetSubdialog As Boolean = False
     Private bFirstLoad As Boolean = True
     Private clsProbabilitiesFunction As New RFunction
     Private clsQuantilesFunction As New RFunction
+    Private clsLabsFunction As New RFunction
+    Private clsThemeFunction As New RFunction
+    Private clsPipeOperator As New ROperator
     ' Private clsConcatenateFunction As New RFunction 'This RFunction is needed for automatic passing of p/q parameter for example p = c(0.5).
 
     Private Sub dlgTablePlus_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -47,9 +51,8 @@ Public Class dlgShowModel
 
         ucrPnlDistributionType.AddRadioButton(rdoProbabilities)
         ucrPnlDistributionType.AddRadioButton(rdoQuantiles)
-
-        ucrPnlDistributionType.AddFunctionNamesCondition(rdoQuantiles, "qdist")
-        ucrPnlDistributionType.AddFunctionNamesCondition(rdoProbabilities, "pdist")
+        ucrPnlDistributionType.AddParameterValueFunctionNamesCondition(rdoQuantiles, "0", "qdist")
+        ucrPnlDistributionType.AddParameterValueFunctionNamesCondition(rdoProbabilities, "0", "pdist")
 
         ucrSaveGraph.SetPrefix("quant")
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -89,6 +92,8 @@ Public Class dlgShowModel
         clsProbabilitiesFunction = New RFunction
         ' clsConcatenateFunction = New RFunction
 
+        clsPipeOperator = New ROperator
+
         ucrSelectorShowModel.Reset()
         ucrInputValuesOrProbabilities.Reset()
         ucrSaveGraph.Reset()
@@ -102,11 +107,22 @@ Public Class dlgShowModel
         clsQuantilesFunction.SetPackageName("mosaic")
         clsQuantilesFunction.SetRCommand("qdist")
 
-        ' clsConcatenateFunction.SetRCommand("c")
+        ' clsConcatenateFunction.SetRCommand("c") 
 
-        clsQuantilesFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorShowModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph", bAssignToIsPrefix:=True)
+        clsLabsFunction.SetPackageName("ggformula")
+        clsLabsFunction.SetRCommand("gf_labs")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsQuantilesFunction)
+        clsThemeFunction.SetPackageName("ggformula")
+        clsThemeFunction.SetRCommand("gf_theme")
+
+        clsPipeOperator.SetOperation("%>%")
+        clsPipeOperator.AddParameter("0", clsRFunctionParameter:=clsQuantilesFunction, iPosition:=0)
+        clsPipeOperator.AddParameter("1", clsRFunctionParameter:=clsLabsFunction, iPosition:=1)
+        clsPipeOperator.AddParameter("2", clsRFunctionParameter:=clsThemeFunction, iPosition:=2)
+
+        clsPipeOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorShowModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph", bAssignToIsPrefix:=True)
+        bResetSubdialog = True
+        ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -118,13 +134,13 @@ Public Class dlgShowModel
         'ucrInputValuesOrProbabilities.AddAdditionalCodeParameterPair(clsProbabilitiesFunction, New RParameter("q", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
         ucrChkDisplayGraphResults.AddAdditionalCodeParameterPair(clsProbabilitiesFunction, ucrChkDisplayGraphResults.GetParameter, iAdditionalPairNo:=1)
         'ucrChkEnterValues.AddAdditionalCodeParameterPair(clsProbabilitiesFunction, ucrChkEnterValues.GetParameter, iAdditionalPairNo:=1)
-        ucrPnlDistributionType.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrPnlDistributionType.SetRCode(clsPipeOperator, bReset)
         'ucrReceiverProbabilitiesOrValues.SetRCode(clsQuantilesFunction, bReset)
         ucrChkDisplayGraphResults.SetRCode(clsQuantilesFunction, bReset)
         'ucrInputValuesOrProbabilities.SetRCode(clsConcatenateFunction, bReset)
         If bReset Then
-            ucrSaveGraph.AddAdditionalRCode(clsProbabilitiesFunction, 1)
-            ucrSaveGraph.SetRCode(clsQuantilesFunction, bReset)
+            'ucrSaveGraph.AddAdditionalRCode(clsProbabilitiesFunction, 1)
+            ucrSaveGraph.SetRCode(clsPipeOperator, bReset)
         End If
         ucrDistributionAndParameters.SetRCode(clsQuantilesFunction, bReset)
         'ucrChkEnterValues.SetRCode(clsQuantilesFunction, bReset)
@@ -203,7 +219,8 @@ Public Class dlgShowModel
         UpdateDistributionAndParameters()
         AddPandQParameters()
         If rdoProbabilities.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsProbabilitiesFunction)
+            '  ucrBase.clsRsyntax.SetBaseRFunction(clsProbabilitiesFunction)
+            clsPipeOperator.AddParameter("0", clsRFunctionParameter:=clsProbabilitiesFunction, iPosition:=0)
             If ucrChkDisplayGraphResults.Checked AndAlso Not ucrSaveGraph.bUserTyped Then
                 ucrSaveGraph.SetPrefix("prob")
             End If
@@ -212,7 +229,8 @@ Public Class dlgShowModel
             lblProbValues.Visible = False
             lblQuantValues.Visible = True
         ElseIf rdoQuantiles.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsQuantilesFunction)
+            'ucrBase.clsRsyntax.SetBaseRFunction(clsQuantilesFunction)
+            clsPipeOperator.AddParameter("0", clsRFunctionParameter:=clsQuantilesFunction, iPosition:=0)
             If ucrChkDisplayGraphResults.Checked AndAlso Not ucrSaveGraph.bUserTyped Then
                 ucrSaveGraph.SetPrefix("quant")
             End If
@@ -225,5 +243,11 @@ Public Class dlgShowModel
 
     Private Sub AllControlsContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverProbabilitiesOrValues.ControlContentsChanged, ucrInputValuesOrProbabilities.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrDistributionAndParameters.ControlContentsChanged, ucrChkEnterValues.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub cmdDistributionOptions_Click(sender As Object, e As EventArgs) Handles cmdDistributionOptions.Click
+        sdgDistributionOptions.SetRCode(clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, bReset:=bResetSubdialog)
+        sdgDistributionOptions.ShowDialog()
+        bResetSubdialog = False
     End Sub
 End Class
