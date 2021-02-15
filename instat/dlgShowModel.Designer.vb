@@ -42,6 +42,7 @@ Partial Class dlgShowModel
         Me.lblProbValues = New System.Windows.Forms.Label()
         Me.rdoProbabilities = New System.Windows.Forms.RadioButton()
         Me.rdoQuantiles = New System.Windows.Forms.RadioButton()
+        Me.cmdDistributionOptions = New System.Windows.Forms.Button()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrChkEnterValues = New instat.ucrCheck()
         Me.ucrChkDisplayGraphResults = New instat.ucrCheck()
@@ -51,7 +52,6 @@ Partial Class dlgShowModel
         Me.ucrSelectorShowModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverProbabilitiesOrValues = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdDistributionOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblQuantValues
@@ -103,6 +103,15 @@ Partial Class dlgShowModel
         Me.rdoQuantiles.Text = "Quantiles"
         Me.rdoQuantiles.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoQuantiles.UseVisualStyleBackColor = True
+        '
+        'cmdDistributionOptions
+        '
+        Me.cmdDistributionOptions.Location = New System.Drawing.Point(384, 274)
+        Me.cmdDistributionOptions.Name = "cmdDistributionOptions"
+        Me.cmdDistributionOptions.Size = New System.Drawing.Size(111, 31)
+        Me.cmdDistributionOptions.TabIndex = 11
+        Me.cmdDistributionOptions.Text = "Distribution Options"
+        Me.cmdDistributionOptions.UseVisualStyleBackColor = True
         '
         'ucrSaveGraph
         '
@@ -181,16 +190,6 @@ Partial Class dlgShowModel
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 10
-        '
-        'cmdDistributionOptions
-        '
-        Me.cmdDistributionOptions.Enabled = False
-        Me.cmdDistributionOptions.Location = New System.Drawing.Point(384, 274)
-        Me.cmdDistributionOptions.Name = "cmdDistributionOptions"
-        Me.cmdDistributionOptions.Size = New System.Drawing.Size(111, 32)
-        Me.cmdDistributionOptions.TabIndex = 11
-        Me.cmdDistributionOptions.Text = "Distribution Options"
-        Me.cmdDistributionOptions.UseVisualStyleBackColor = True
         '
         'dlgShowModel
         '
