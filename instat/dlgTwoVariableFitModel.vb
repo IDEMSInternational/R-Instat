@@ -149,6 +149,7 @@ Public Class dlgTwoVariableFitModel
         ucrSelectorSimpleReg.Reset()
         ucrReceiverResponse.SetMeAsReceiver()
         ucrModelPreview.SetName("")
+        ucrChkConvertToVariate.Visible = False
 
         clsFormulaOperator = clsRegressionDefaults.clsDefaultFormulaOperator.Clone
 
@@ -346,37 +347,37 @@ Public Class dlgTwoVariableFitModel
             clsFittedValuesFunction.AddParameter("object", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsRstandardFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
             clsHatvaluesFunction.AddParameter("model", clsRFunctionParameter:=clsLMOrGLM, iPosition:=0)
-        ElseIf rdoTest.checked Then
+        ElseIf rdoTest.Checked Then
 
         End If
     End Sub
 
     Public Sub ConvertToVariate()
-        If bRCodeSet Then
-            If rdoGeneralCase.Checked Then
-                If Not ucrReceiverResponse.IsEmpty Then
-                    ucrDistributionChoice.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
-                    If ucrDistributionChoice.strDataType = "numeric" Then
-                        ucrChkConvertToVariate.Checked = False
-                        ucrChkConvertToVariate.Visible = False
-                    Else
-                        ucrChkConvertToVariate.Visible = True
-                    End If
-                Else
-                    ucrChkConvertToVariate.Visible = False
-                    If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverResponse.IsEmpty() Then
-                        ucrDistributionChoice.ucrInputDistributions.SetName("")
-                        ucrDistributionChoice.Enabled = False
-                        cmdModelOptions.Enabled = False
-                    Else
-                        cmdModelOptions.Enabled = True
-                        ucrDistributionChoice.Enabled = True
-                    End If
-                End If
-            End If
+        'If bRCodeSet Then
+        '    If rdoGeneralCase.Checked Then
+        '        If Not ucrReceiverResponse.IsEmpty Then
+        '            ucrDistributionChoice.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
+        '            If ucrDistributionChoice.strDataType = "numeric" Then
+        '                ucrChkConvertToVariate.Checked = False
+        '                ucrChkConvertToVariate.Visible = False
+        '            Else
+        '                ucrChkConvertToVariate.Visible = True
+        '            End If
+        '        Else
+        '            ucrChkConvertToVariate.Visible = False
+        '            If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverResponse.IsEmpty() Then
+        '                ucrDistributionChoice.ucrInputDistributions.SetName("")
+        '                ucrDistributionChoice.Enabled = False
+        '                cmdModelOptions.Enabled = False
+        '            Else
+        '                cmdModelOptions.Enabled = True
+        '                ucrDistributionChoice.Enabled = True
+        '            End If
+        '        End If
+        '    End If
 
-            TestOKEnabled()
-        End If
+        '    TestOKEnabled()
+        'End If
     End Sub
 
     Private Sub ucrDistWithParameters_ucrInputDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
@@ -385,6 +386,19 @@ Public Class dlgTwoVariableFitModel
 
     Private Sub ucrResponse_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlValueChanged
         ucrDistributionChoice.Enabled = Not ucrReceiverResponse.IsEmpty
+        If bRCodeSet Then
+            If Not ucrReceiverResponse.IsEmpty Then
+                ucrDistributionChoice.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
+                clsFormulaOperator.AddParameter("y", ucrReceiverResponse.GetVariableNames(False), iPosition:=0)
+            End If
+        End If
+        If Not ucrDistributionChoice.strDataType = "numeric" Then
+            ucrChkConvertToVariate.Checked = False
+            ucrChkConvertToVariate.Visible = True
+        Else
+            ucrChkConvertToVariate.Visible = False
+        End If
+        UpdatePreview()
     End Sub
 
     Private Sub ucrSelectorSimpleReg_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSimpleReg.ControlValueChanged
@@ -459,19 +473,19 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Private Sub ucrChkConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
-        If ucrChkConvertToVariate.Checked Then
-            clsFormulaOperator.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
-            ucrDistributionChoice.RecieverDatatype("numeric")
-        Else
-            clsFormulaOperator.AddParameter("y", ucrReceiverResponse.GetVariableNames(False), iPosition:=0)
+        If bRCodeSet Then
             ucrDistributionChoice.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
+            If ucrChkConvertToVariate.Checked Then
+                clsFormulaOperator.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
+            Else
+                clsFormulaOperator.AddParameter("y", ucrReceiverResponse.GetVariableNames(False), iPosition:=0)
+            End If
+            UpdatePreview()
         End If
-        UpdatePreview()
+        TestOKEnabled()
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponse.ControlContentsChanged, ucrPnlModelType.ControlContentsChanged, ucrReceiverExplanatory.ControlContentsChanged
-        UpdatePreview()
-        ConvertToVariate()
         TestOKEnabled()
     End Sub
 End Class
