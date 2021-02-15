@@ -40,10 +40,16 @@ Public Class sdgDistributionOptions
         ucrPnlYAxis.AddRadioButton(rdoYAxisAuto)
         ucrPnlYAxis.AddRadioButton(rdoYAxisSpecifyTitle)
         ucrPnlYAxis.AddRadioButton(rdoYAxisNoTitle)
+        ucrPnlYAxis.AddParameterPresentCondition(rdoYAxisAuto, "y", False)
+        ucrPnlYAxis.AddParameterPresentCondition(rdoYAxisSpecifyTitle, "y", True)
+        ucrPnlYAxis.AddParameterValuesCondition(rdoYAxisNoTitle, "y", Chr(34) & Chr(34), True)
 
         ucrPnlXAxis.AddRadioButton(rdoXAxisAuto)
         ucrPnlXAxis.AddRadioButton(rdoXAxisSpecifyTitle)
         ucrPnlXAxis.AddRadioButton(rdoXAxisNoTitle)
+        ucrPnlXAxis.AddParameterPresentCondition(rdoXAxisAuto, "x", True)
+        ucrPnlXAxis.AddParameterValuesCondition(rdoXAxisSpecifyTitle, "x", True)
+        ucrPnlXAxis.AddParameterValuesCondition(rdoXAxisNoTitle, "x", Chr(34) & Chr(34), True)
 
         ucrPnlXAxis.AddToLinkedControls(ucrInputXAxisLabel, {rdoXAxisSpecifyTitle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlYAxis.AddToLinkedControls(ucrInputYAxisLabel, {rdoYAxisSpecifyTitle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -61,6 +67,7 @@ Public Class sdgDistributionOptions
             End If
         Next
         ucrInputThemes.SetItems(dctThemes)
+        ucrInputThemes.SetRDefault("theme_grey()")
         ucrInputThemes.SetDropDownStyleAsNonEditable()
     End Sub
 
