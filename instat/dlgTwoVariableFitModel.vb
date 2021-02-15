@@ -276,7 +276,7 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.SetRCode(clsLM, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
         bRCodeSet = True
-        'ConvertToVariate()
+        ConvertToVariate()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -353,31 +353,31 @@ Public Class dlgTwoVariableFitModel
     End Sub
 
     Public Sub ConvertToVariate()
-        'If bRCodeSet Then
-        '    If rdoGeneralCase.Checked Then
-        '        If Not ucrReceiverResponse.IsEmpty Then
-        '            ucrDistributionChoice.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
-        '            If ucrDistributionChoice.strDataType = "numeric" Then
-        '                ucrChkConvertToVariate.Checked = False
-        '                ucrChkConvertToVariate.Visible = False
-        '            Else
-        '                ucrChkConvertToVariate.Visible = True
-        '            End If
-        '        Else
-        '            ucrChkConvertToVariate.Visible = False
-        '            If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverResponse.IsEmpty() Then
-        '                ucrDistributionChoice.ucrInputDistributions.SetName("")
-        '                ucrDistributionChoice.Enabled = False
-        '                cmdModelOptions.Enabled = False
-        '            Else
-        '                cmdModelOptions.Enabled = True
-        '                ucrDistributionChoice.Enabled = True
-        '            End If
-        '        End If
-        '    End If
+        If bRCodeSet Then
+            '    If rdoGeneralCase.Checked Then
+            '        If Not ucrReceiverResponse.IsEmpty Then
+            '            ucrDistributionChoice.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
+            '            If ucrDistributionChoice.strDataType = "numeric" Then
+            '                ucrChkConvertToVariate.Checked = False
+            '                ucrChkConvertToVariate.Visible = False
+            '            Else
+            '                ucrChkConvertToVariate.Visible = True
+            '            End If
+            '        Else
+            '            ucrChkConvertToVariate.Visible = False
+            '            If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverResponse.IsEmpty() Then
+            '                ucrDistributionChoice.ucrInputDistributions.SetName("")
+            '                ucrDistributionChoice.Enabled = False
+            '                cmdModelOptions.Enabled = False
+            '            Else
+            '                cmdModelOptions.Enabled = True
+            '                ucrDistributionChoice.Enabled = True
+            '            End If
+            '        End If
+            '    End If
 
-        '    TestOKEnabled()
-        'End If
+            '    TestOKEnabled()
+        End If
     End Sub
 
     Private Sub ucrDistWithParameters_ucrInputDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
@@ -390,14 +390,21 @@ Public Class dlgTwoVariableFitModel
             If Not ucrReceiverResponse.IsEmpty Then
                 ucrDistributionChoice.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
                 clsFormulaOperator.AddParameter("y", ucrReceiverResponse.GetVariableNames(False), iPosition:=0)
+                If Not ucrDistributionChoice.strDataType = "numeric" Then
+                    If ucrDistributionChoice.lstCurrentDistributions.Count = 0 Then
+                        ucrDistributionChoice.ucrInputDistributions.SetName("")
+                        ucrDistributionChoice.Enabled = False
+                        cmdModelOptions.Enabled = False
+                    End If
+                    ucrChkConvertToVariate.Checked = False
+                    ucrChkConvertToVariate.Visible = True
+                Else
+                    ucrChkConvertToVariate.Visible = False
+
+                End If
             End If
         End If
-        If Not ucrDistributionChoice.strDataType = "numeric" Then
-            ucrChkConvertToVariate.Checked = False
-            ucrChkConvertToVariate.Visible = True
-        Else
-            ucrChkConvertToVariate.Visible = False
-        End If
+
         UpdatePreview()
     End Sub
 
@@ -477,11 +484,18 @@ Public Class dlgTwoVariableFitModel
             If ucrChkConvertToVariate.Checked Then
                 clsFormulaOperator.AddParameter("y", clsRFunctionParameter:=clsAsNumeric, iPosition:=0)
                 ucrDistributionChoice.RecieverDatatype("numeric")
+                ucrDistributionChoice.Enabled = True
             Else
                 clsFormulaOperator.AddParameter("y", ucrReceiverResponse.GetVariableNames(False), iPosition:=0)
                 ucrDistributionChoice.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
+
             End If
             UpdatePreview()
+        End If
+        If ucrDistributionChoice.lstCurrentDistributions.Count = 0 Then
+            ucrDistributionChoice.ucrInputDistributions.SetName("")
+            ucrDistributionChoice.Enabled = False
+            cmdModelOptions.Enabled = False
         End If
         TestOKEnabled()
     End Sub
