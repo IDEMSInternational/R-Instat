@@ -397,14 +397,16 @@ Public Class dlgTwoVariableFitModel
                         cmdModelOptions.Enabled = False
                     End If
                     ucrChkConvertToVariate.Checked = False
-                    ucrChkConvertToVariate.Visible = True
-                Else
-                    ucrChkConvertToVariate.Visible = False
-
                 End If
+                ucrChkConvertToVariate.Visible = Not (ucrDistributionChoice.strDataType = "numeric")
+            Else
+                ucrDistributionChoice.ucrInputDistributions.SetName("")
+                ucrDistributionChoice.Enabled = False
+                cmdModelOptions.Enabled = False
+                ucrChkConvertToVariate.Checked = False
+                ucrChkConvertToVariate.Visible = False
             End If
         End If
-
         UpdatePreview()
     End Sub
 
@@ -464,17 +466,13 @@ Public Class dlgTwoVariableFitModel
     Private Sub ucrPnlModelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlModelType.ControlValueChanged
         If rdoGeneralCase.Checked Then
             ucrDistributionChoice.SetGLMDistributions()
-            lblNumeric.Visible = True
-            lblFactor.Visible = True
-            lblFirstVariable.Visible = False
-            lblSecondVariable.Visible = False
         Else
-            lblNumeric.Visible = False
-            lblFactor.Visible = False
-            lblFirstVariable.Visible = True
-            lblSecondVariable.Visible = True
             ucrDistributionChoice.SetExactDistributions()
         End If
+        lblNumeric.Visible = rdoGeneralCase.Checked
+        lblFactor.Visible = rdoGeneralCase.Checked
+        lblFirstVariable.Visible = Not rdoGeneralCase.Checked
+        lblSecondVariable.Visible = Not rdoGeneralCase.Checked
         SetBaseFunction()
 
     End Sub
