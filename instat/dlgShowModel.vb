@@ -161,6 +161,12 @@ Public Class dlgShowModel
         TestOKEnabled()
     End Sub
 
+    Private Sub cmdDistributionOptions_Click(sender As Object, e As EventArgs) Handles cmdDistributionOptions.Click
+        sdgDistributionOptions.SetRCode(clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, bReset:=bResetSubdialog)
+        sdgDistributionOptions.ShowDialog()
+        bResetSubdialog = False
+    End Sub
+
     Private Sub AddPandQParameters()
         If ucrChkEnterValues.Checked Then
             ucrSelectorShowModel.SetVariablesVisible(False)
@@ -243,11 +249,5 @@ Public Class dlgShowModel
 
     Private Sub AllControlsContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverProbabilitiesOrValues.ControlContentsChanged, ucrInputValuesOrProbabilities.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrDistributionAndParameters.ControlContentsChanged, ucrChkEnterValues.ControlContentsChanged
         TestOKEnabled()
-    End Sub
-
-    Private Sub cmdDistributionOptions_Click(sender As Object, e As EventArgs) Handles cmdDistributionOptions.Click
-        sdgDistributionOptions.SetRCode(clsNewLabsFunction:=clsLabsFunction, clsNewThemeFunction:=clsThemeFunction, bReset:=bResetSubdialog)
-        sdgDistributionOptions.ShowDialog()
-        bResetSubdialog = False
     End Sub
 End Class
