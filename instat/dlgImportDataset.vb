@@ -882,8 +882,8 @@ Public Class dlgImportDataset
         'so instead we are using the strFileType to identify which RFunctions should be updated accordingly
         If strFileType = "XLSX" OrElse strFileType = "XLS" Then
             'set for single imports and multiple imports 
-            clsImportExcelMulti.AddParameter("na", "c(" & GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()) & "," & Chr(34) & "" & Chr(34) & ")")
-            clsImportExcel.AddParameter("na", "c(" & GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()) & "," & Chr(34) & "" & Chr(34) & ")")
+            clsImportExcelMulti.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()))
+            clsImportExcel.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()))
         ElseIf strFileType = "CSV" Then
             clsImportCSV.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
         ElseIf strFileType = "TXT" Then
