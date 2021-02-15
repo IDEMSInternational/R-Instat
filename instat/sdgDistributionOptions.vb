@@ -24,7 +24,44 @@ Public Class sdgDistributionOptions
     End Sub
 
     Private Sub InitialiseControls()
+        Dim dctThemes As New Dictionary(Of String, String)
+        Dim strThemes As String()
 
+        ucrInputGraphTitle.SetParameter(New RParameter("title", 0))
+
+        ucrInputGraphSubTitle.SetParameter(New RParameter("subtitle", 1))
+
+        ucrInputGraphCaption.SetParameter(New RParameter("caption", 2))
+
+        ucrInputXAxisLabel.SetParameter(New RParameter("x", 3))
+
+        ucrInputYAxisLabel.SetParameter(New RParameter("y", 4))
+
+        ucrPnlYAxis.AddRadioButton(rdoYAxisAuto)
+        ucrPnlYAxis.AddRadioButton(rdoYAxisSpecifyTitle)
+        ucrPnlYAxis.AddRadioButton(rdoYAxisNoTitle)
+
+        ucrPnlXAxis.AddRadioButton(rdoXAxisAuto)
+        ucrPnlXAxis.AddRadioButton(rdoXAxisSpecifyTitle)
+        ucrPnlXAxis.AddRadioButton(rdoXAxisNoTitle)
+
+        ucrPnlXAxis.AddToLinkedControls(ucrInputXAxisLabel, {rdoXAxisSpecifyTitle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlYAxis.AddToLinkedControls(ucrInputYAxisLabel, {rdoYAxisSpecifyTitle}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputXAxisLabel.SetLinkedDisplayControl(lblXAxisTitle)
+        ucrInputYAxisLabel.SetLinkedDisplayControl(lblYAxisTitle)
+
+        strThemes = GgplotDefaults.strThemes
+
+        ucrInputThemes.SetParameter(New RParameter("theme", 0))
+        For Each strTemp As String In strThemes
+            If strTemp.StartsWith("theme_") Then
+                dctThemes.Add(strTemp.Remove(0, 6), strTemp & "()")
+            Else
+                dctThemes.Add(strTemp, strTemp & "()")
+            End If
+        Next
+        ucrInputThemes.SetItems(dctThemes)
+        ucrInputThemes.SetDropDownStyleAsNonEditable()
     End Sub
 
     Public Sub SetRCode(clsNewLabsFunction As RFunction, clsNewThemeFunction As RFunction, Optional bReset As Boolean = False)
@@ -36,6 +73,31 @@ Public Class sdgDistributionOptions
         clsThemeFunction = clsNewThemeFunction
         clsLabsFunction = clsNewLabsFunction
 
+        ucrInputGraphTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputGraphSubTitle.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputGraphCaption.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputXAxisLabel.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputYAxisLabel.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputThemes.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+    End Sub
 
+    Private Sub ucrPnlXAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlXAxis.ControlValueChanged
+        If rdoXAxisAuto.Checked Then
+            clsLabsFunction.RemoveParameterByName("x")
+        ElseIf rdoXAxisNoTitle.Checked Then
+            clsLabsFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=3)
+        Else
+            clsLabsFunction.AddParameter("x", Chr(34) & ucrInputXAxisLabel.GetText() & Chr(34), iPosition:=3)
+        End If
+    End Sub
+
+    Private Sub ucrPnlYAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlYAxis.ControlValueChanged
+        If rdoYAxisAuto.Checked Then
+            clsLabsFunction.RemoveParameterByName("y")
+        ElseIf rdoYAxisNoTitle.Checked Then
+            clsLabsFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=4)
+        Else
+            clsLabsFunction.AddParameter("y", Chr(34) & ucrInputYAxisLabel.GetText() & Chr(34), iPosition:=4)
+        End If
     End Sub
 End Class
