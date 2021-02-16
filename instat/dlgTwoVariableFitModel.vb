@@ -18,16 +18,22 @@ Imports instat
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgTwoVariableFitModel
-    Public bFirstLoad As Boolean = True
-    Public clsVisReg, clsFamilyFunction As New RFunction
+    Private bFirstLoad As Boolean = True
+    Private clsVisReg, clsFamilyFunction As New RFunction
     Private clsTransformFunction As New RFunction
-    Public clsBrokenStickFirstOperator, clsBrokenStickSecondOperator, clsBrokenStickThirdOperator, clsBrokenStickGeneralOperator As New ROperator
-    Public clsBrokenStickSecondOperFunction, clsBrokenStickIFunc As New RFunction
-    Public clsSplineFunc As New RFunction
+    Private clsBrokenStickFirstOperator, clsBrokenStickSecondOperator, clsBrokenStickThirdOperator, clsBrokenStickGeneralOperator As New ROperator
+    Private clsBrokenStickSecondOperFunction, clsBrokenStickIFunc As New RFunction
+    Private clsSplineFunc As New RFunction
+
+    'Tests
+    Private clsTtestFunction, clsWilcoxTestFunction, clsVarTestFunction, clsAnsariTestFuntion, clsMoodTestFunction,
+    clsCorTestFunction, clsKruskalTestFunction, clsOnewayTestFunction, clsBarletteTestFunction,
+    clsFlignerTestFunction, clsFisherTestFunction, clsXchisgTestFunction, clsPropTestFunction As New RFunction
+
     'General case codes
-    Public clsFormulaOperator As New ROperator
-    Public clsGLM, clsLM, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc As New RFunction
-    Public clsMonthFunc, clsYearFunc, clsAsFactorFunc As New RFunction
+    Private clsFormulaOperator As New ROperator
+    Private clsGLM, clsLM, clsLMOrGLM, clsAsNumeric, clsPolynomialFunc As New RFunction
+    Private clsMonthFunc, clsYearFunc, clsAsFactorFunc As New RFunction
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
 
@@ -75,7 +81,6 @@ Public Class dlgTwoVariableFitModel
         ucrPnlModelType.AddFunctionNamesCondition(rdoGeneralCase, "t.test", False)
         ucrPnlModelType.AddToLinkedControls(ucrModelPreview, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlModelType.AddToLinkedControls(ucrDistributionChoice, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlModelType.AddToLinkedControls(ucrInputTest, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="ConoverTest")
 
         ucrInputTest.SetLinkedDisplayControl(lblTest)
 
@@ -142,6 +147,19 @@ Public Class dlgTwoVariableFitModel
         clsYearFunc = New RFunction
         clsAsFactorFunc = New RFunction
         clsBrokenStickSecondOperFunction = New RFunction
+        clsWilcoxTestFunction = New RFunction
+        clsVarTestFunction = New RFunction
+        clsAnsariTestFuntion = New RFunction
+        clsMoodTestFunction = New RFunction
+        clsCorTestFunction = New RFunction
+        clsKruskalTestFunction = New RFunction
+        clsOnewayTestFunction = New RFunction
+        clsBarletteTestFunction = New RFunction
+        clsFlignerTestFunction = New RFunction
+        clsFisherTestFunction = New RFunction
+        clsXchisgTestFunction = New RFunction
+        clsPropTestFunction = New RFunction
+        clsTtestFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -162,8 +180,6 @@ Public Class dlgTwoVariableFitModel
         clsGLM.AddParameter("na.action", "na.exclude", iPosition:=4)
 
         clsPolynomialFunc.SetRCommand("poly")
-
-
 
         'Residual Plots
         dctPlotFunctions = New Dictionary(Of String, RFunction)(clsRegressionDefaults.dctModelPlotFunctions)
@@ -245,6 +261,47 @@ Public Class dlgTwoVariableFitModel
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorSimpleReg.ucrAvailableDataFrames.clsCurrDataFrame)
         clsDetach.AddParameter("unload", "TRUE")
 
+        'Tests
+        clsWilcoxTestFunction.SetPackageName("stats")
+        clsWilcoxTestFunction.SetRCommand("wilcox.test")
+
+        clsVarTestFunction.SetPackageName("stats")
+        clsVarTestFunction.SetRCommand("var.test")
+
+        clsAnsariTestFuntion.SetPackageName("stats")
+        clsAnsariTestFuntion.SetRCommand("ansari.test")
+
+        clsMoodTestFunction.SetPackageName("stats")
+        clsMoodTestFunction.SetRCommand("mood.test")
+
+        clsCorTestFunction.SetPackageName("stats")
+        clsCorTestFunction.SetRCommand("cor.test")
+
+        clsKruskalTestFunction.SetPackageName("stats")
+        clsKruskalTestFunction.SetRCommand("kruskal.test")
+
+        clsOnewayTestFunction.SetPackageName("stats")
+        clsOnewayTestFunction.SetRCommand("oneway.test")
+
+
+        clsBarletteTestFunction.SetPackageName("stats")
+        clsBarletteTestFunction.SetRCommand("barlette.test")
+
+        clsFlignerTestFunction.SetPackageName("stats")
+        clsFlignerTestFunction.SetRCommand("fligner.test")
+
+        clsFisherTestFunction.SetPackageName("stats")
+        clsFisherTestFunction.SetRCommand("fisher")
+
+        clsXchisgTestFunction.SetPackageName("mosaic")
+        clsXchisgTestFunction.SetRCommand("xchisq.test")
+
+        clsPropTestFunction.SetPackageName("mosaic")
+        clsPropTestFunction.SetRCommand("prop")
+
+        clsTtestFunction.SetPackageName("stats")
+        clsTtestFunction.SetRCommand("t.test")
+
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
@@ -265,7 +322,34 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsPolynomialFunc, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=5)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMonthFunc, New RParameter("month", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=6)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsYearFunc, New RParameter("year", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
-        'General case controls       
+
+        'Test
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=8)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=9)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsAnsariTestFuntion, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=10)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMoodTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=11)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsCorTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=12)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsKruskalTestFunction, New RParameter("g", iNewPosition:=1), iAdditionalPairNo:=13)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsBarletteTestFunction, New RParameter("g", iNewPosition:=1), iAdditionalPairNo:=14)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsFlignerTestFunction, New RParameter("g", iNewPosition:=1), iAdditionalPairNo:=15)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsXchisgTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=16)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsFisherTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=17)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=18)
+
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=2)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsAnsariTestFuntion, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=3)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsMoodTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=4)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsCorTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=5)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsKruskalTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=6)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBarletteTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=7)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsFlignerTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=8)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsXchisgTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=9)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsFisherTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=10)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsPropTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=11)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=12)
+
+        'General case controls 
         ucrSelectorSimpleReg.AddAdditionalCodeParameterPair(clsGLM, ucrSelectorSimpleReg.GetParameter(), 1)
         ucrSaveModels.AddAdditionalRCode(clsGLM, 1)
         ucrReceiverResponse.SetRCode(clsAsNumeric, bReset)
@@ -276,7 +360,6 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.SetRCode(clsLM, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
         bRCodeSet = True
-        ConvertToVariate()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -352,34 +435,6 @@ Public Class dlgTwoVariableFitModel
         End If
     End Sub
 
-    Public Sub ConvertToVariate()
-        If bRCodeSet Then
-            '    If rdoGeneralCase.Checked Then
-            '        If Not ucrReceiverResponse.IsEmpty Then
-            '            ucrDistributionChoice.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
-            '            If ucrDistributionChoice.strDataType = "numeric" Then
-            '                ucrChkConvertToVariate.Checked = False
-            '                ucrChkConvertToVariate.Visible = False
-            '            Else
-            '                ucrChkConvertToVariate.Visible = True
-            '            End If
-            '        Else
-            '            ucrChkConvertToVariate.Visible = False
-            '            If ucrDistributionChoice.lstCurrentDistributions.Count = 0 OrElse ucrReceiverResponse.IsEmpty() Then
-            '                ucrDistributionChoice.ucrInputDistributions.SetName("")
-            '                ucrDistributionChoice.Enabled = False
-            '                cmdModelOptions.Enabled = False
-            '            Else
-            '                cmdModelOptions.Enabled = True
-            '                ucrDistributionChoice.Enabled = True
-            '            End If
-            '        End If
-            '    End If
-
-            '    TestOKEnabled()
-        End If
-    End Sub
-
     Private Sub ucrDistWithParameters_ucrInputDistributionsIndexChanged() Handles ucrDistributionChoice.DistributionsIndexChanged
         SetBaseFunction()
     End Sub
@@ -451,11 +506,9 @@ Public Class dlgTwoVariableFitModel
         clsGetVariablesFunc.AddParameter("data_name", Chr(34) & ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
         clsGetVariablesFunc.AddParameter("col_names", Chr(34) & ucrReceiverExplanatory.GetVariableNames(False) & Chr(34), iPosition:=1)
 
-
         clsGetColumnMedianFunc.SetRCommand("summary_median")
         clsGetColumnMedianFunc.AddParameter("x", clsRFunctionParameter:=clsGetVariablesFunc, iPosition:=0)
         clsGetColumnMedianFunc.AddParameter("na.rm", "TRUE", iPosition:=1)
-
 
         expColumn = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnMedianFunc.ToScript(), bSilent:=False)
         If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
@@ -474,7 +527,6 @@ Public Class dlgTwoVariableFitModel
         lblFirstVariable.Visible = Not rdoGeneralCase.Checked
         lblSecondVariable.Visible = Not rdoGeneralCase.Checked
         SetBaseFunction()
-
     End Sub
 
     Private Sub ucrChkConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged

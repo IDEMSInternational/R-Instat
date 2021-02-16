@@ -52,6 +52,9 @@ Partial Class dlgTwoVariableFitModel
         Me.cmdExplanatoryFunction = New System.Windows.Forms.Button()
         Me.lblFirstVariable = New System.Windows.Forms.Label()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
+        Me.lblTest = New System.Windows.Forms.Label()
+        Me.ucrDistributionChoice = New instat.ucrDistributions()
+        Me.ucrInputTest = New instat.ucrInputComboBox()
         Me.ucrTryModelling = New instat.ucrTry()
         Me.ucrSaveModels = New instat.ucrSave()
         Me.ucrChkConvertToVariate = New instat.ucrCheck()
@@ -60,10 +63,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrSelectorSimpleReg = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlModelType = New instat.UcrPanel()
         Me.ucrModelPreview = New instat.ucrInputTextBox()
-        Me.ucrDistributionChoice = New instat.ucrDistributions()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblTest = New System.Windows.Forms.Label()
-        Me.ucrInputTest = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -211,6 +211,32 @@ Partial Class dlgTwoVariableFitModel
         Me.lblSecondVariable.TabIndex = 22
         Me.lblSecondVariable.Text = "Second Variable"
         '
+        'lblTest
+        '
+        Me.lblTest.AutoSize = True
+        Me.lblTest.Location = New System.Drawing.Point(10, 250)
+        Me.lblTest.Name = "lblTest"
+        Me.lblTest.Size = New System.Drawing.Size(31, 13)
+        Me.lblTest.TabIndex = 23
+        Me.lblTest.Text = "Test:"
+        '
+        'ucrDistributionChoice
+        '
+        Me.ucrDistributionChoice.Location = New System.Drawing.Point(16, 285)
+        Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
+        Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
+        Me.ucrDistributionChoice.TabIndex = 11
+        '
+        'ucrInputTest
+        '
+        Me.ucrInputTest.AddQuotesIfUnrecognised = True
+        Me.ucrInputTest.GetSetSelectedIndex = -1
+        Me.ucrInputTest.IsReadOnly = False
+        Me.ucrInputTest.Location = New System.Drawing.Point(44, 247)
+        Me.ucrInputTest.Name = "ucrInputTest"
+        Me.ucrInputTest.Size = New System.Drawing.Size(137, 21)
+        Me.ucrInputTest.TabIndex = 24
+        '
         'ucrTryModelling
         '
         Me.ucrTryModelling.Location = New System.Drawing.Point(-3, 351)
@@ -286,38 +312,12 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrModelPreview.Size = New System.Drawing.Size(204, 21)
         Me.ucrModelPreview.TabIndex = 13
         '
-        'ucrDistributionChoice
-        '
-        Me.ucrDistributionChoice.Location = New System.Drawing.Point(9, 244)
-        Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
-        Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
-        Me.ucrDistributionChoice.TabIndex = 11
-        '
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 449)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(406, 54)
         Me.ucrBase.TabIndex = 17
-        '
-        'lblTest
-        '
-        Me.lblTest.AutoSize = True
-        Me.lblTest.Location = New System.Drawing.Point(10, 250)
-        Me.lblTest.Name = "lblTest"
-        Me.lblTest.Size = New System.Drawing.Size(31, 13)
-        Me.lblTest.TabIndex = 23
-        Me.lblTest.Text = "Test:"
-        '
-        'ucrInputTest
-        '
-        Me.ucrInputTest.AddQuotesIfUnrecognised = True
-        Me.ucrInputTest.GetSetSelectedIndex = -1
-        Me.ucrInputTest.IsReadOnly = False
-        Me.ucrInputTest.Location = New System.Drawing.Point(44, 247)
-        Me.ucrInputTest.Name = "ucrInputTest"
-        Me.ucrInputTest.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputTest.TabIndex = 24
         '
         'dlgTwoVariableFitModel
         '
