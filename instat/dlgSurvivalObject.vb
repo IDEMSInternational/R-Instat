@@ -182,6 +182,7 @@ Public Class dlgSurvivalObject
         clsCreateObjectScript.AddParameter("surv_name", Chr(34) & ucrSaveObject.ucrInputComboSave.GetText() & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
         clsCreateObjectScript.AddParameter("new_row_1", Chr(34) & "\n" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
         clsCreateObjectScript.AddParameter("cens", Chr(34) & "Type of Censoring:" & Chr(34), iPosition:=5, bIncludeArgumentName:=False)
+        clsCreateObjectScript.AddParameter("new_row_2", Chr(34) & "\n" & Chr(34), iPosition:=7, bIncludeArgumentName:=False)
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
@@ -369,6 +370,46 @@ Public Class dlgSurvivalObject
         SetBaseExpression()
     End Sub
 
+    Private Sub CensoredComment()
+        If rdoInterval2.Checked Then
+            clsCreateObjectScript.RemoveParameterByName("modified")
+            clsCreateObjectScript.RemoveParameterByName("modified_type")
+        ElseIf rdoInterval.Checked Then
+            clsCreateObjectScript.RemoveParameterByName("modified")
+            clsCreateObjectScript.RemoveParameterByName("modified_type")
+            clsCreateObjectScript.AddParameter("modified", Chr(34) & "Right censored when event variable is 0, event occurs when variable is 1, left censored when event variable is 2, interval censored when event variable is 3" & Chr(34), iPosition:=8, bIncludeArgumentName:=False)
+        Else
+            clsCreateObjectScript.RemoveParameterByName("modified")
+            clsCreateObjectScript.AddParameter("modified", Chr(34) & "Censored when event is:" & Chr(34), iPosition:=8, bIncludeArgumentName:=False)
+            If ucrChkModifyEvent.Checked Then
+                clsCreateObjectScript.RemoveParameterByName("modified_type")
+                If ucrReceiverEvent.strCurrDataType = "factor" Then
+                    clsCreateObjectScript.AddParameter("modified_type", ucrModifyEventFactor.GetSelectedLevels(), iPosition:=9, bIncludeArgumentName:=False)
+                ElseIf ucrReceiverEvent.strCurrDataType = "logical" Then
+                    clsCreateObjectScript.AddParameter("modified_type", Chr(34) & ucrModifyEventLogical.GetText() & Chr(34), iPosition:=9, bIncludeArgumentName:=False)
+                Else
+                    clsCreateObjectScript.AddParameter("modified_type", Chr(34) & ucrModifyEventNumeric.GetText() & Chr(34), iPosition:=9, bIncludeArgumentName:=False)
+                End If
+            Else
+                If rdoMstate.Checked Then
+                    clsCreateObjectScript.RemoveParameterByName("modified_type")
+                    If ucrReceiverEvent.strCurrDataType = "logical" Then
+                        clsCreateObjectScript.AddParameter("modified_type", Chr(34) & "FALSE" & Chr(34), iPosition:=9, bIncludeArgumentName:=False)
+                    Else ' true whether it is factor or numeric
+                        clsCreateObjectScript.AddParameter("modified_type", Chr(34) & "first level of the event variable" & Chr(34), iPosition:=9, bIncludeArgumentName:=False)
+                    End If
+                Else
+                    clsCreateObjectScript.RemoveParameterByName("modified_type")
+                    If ucrReceiverEvent.strCurrDataType = "logical" Then
+                        clsCreateObjectScript.AddParameter("modified_type", Chr(34) & "FALSE" & Chr(34), iPosition:=9, bIncludeArgumentName:=False)
+                    Else
+                        clsCreateObjectScript.AddParameter("modified_type", Chr(34) & "0 if event variable is 0/1; 1 if event variable is 1/2" & Chr(34), iPosition:=9, bIncludeArgumentName:=False)
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         clsCreateObjectScriptPaste.AddParameter("col1", strParameterValue:=ucrReceiverExit.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=1)
         clsCreateObjectScript.AddParameter("surv_name", Chr(34) & ucrSaveObject.ucrInputComboSave.GetText() & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
@@ -384,6 +425,7 @@ Public Class dlgSurvivalObject
         Else
             clsCreateObjectScriptPaste.RemoveParameterByName("col2")
         End If
+        CensoredComment()
     End Sub
 
     Private Sub ucrSelectorFitObject_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorFitObject.ControlValueChanged
