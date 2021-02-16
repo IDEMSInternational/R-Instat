@@ -1254,6 +1254,7 @@ Public Class RLink
             End Try
             Try
                 ' if script should run in a separate thread
+                ' Fixed thread stack size i.e maxStackSize = 25000000 (25MB) because this may returns an overflow exception when large datasets are used. For example when producing a declustered plot on extremes dialog using Ghana dataset.
                 If bSeparateThread Then
                     thrRScript = New Threading.Thread(Sub()
                                                           Try
@@ -1267,7 +1268,7 @@ Public Class RLink
                                                               strTempError = ex.Message
                                                               bReturn = False
                                                           End Try
-                                                      End Sub)
+                                                      End Sub, maxStackSize:=25000000)
                     thrRScript.IsBackground = True
                     thrDelay = New Threading.Thread(Sub()
                                                         Dim t As New Stopwatch
@@ -1913,7 +1914,7 @@ Public Class RLink
         Dim clsGetSurvNames As New RFunction
         Dim expSurvNames As SymbolicExpression
 
-        clsGetSurvNames.SetRCommand(strInstatDataObject & "$get_graph_names")
+        clsGetSurvNames.SetRCommand(strInstatDataObject & "$get_surv_names")
         If strDataFrameName <> "" Then
             clsGetSurvNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
         End If
