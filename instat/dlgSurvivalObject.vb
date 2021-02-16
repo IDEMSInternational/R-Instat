@@ -42,6 +42,8 @@ Public Class dlgSurvivalObject
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctNumeric As New Dictionary(Of String, String)
+        Dim dctLogical As New Dictionary(Of String, String)
         'ucrBase.iHelpTopicID = 
 
         'ucrPnl
@@ -52,9 +54,8 @@ Public Class dlgSurvivalObject
         ucrPnlType.AddRadioButton(rdoInterval, Chr(34) & "interval" & Chr(34))
         ucrPnlType.AddRadioButton(rdoInterval2, Chr(34) & "interval2" & Chr(34))
         ucrPnlType.AddRadioButton(rdoMstate, Chr(34) & "mstate" & Chr(34))
-        ucrPnlType.SetRDefault(Chr(34) & "right" & Chr(34))
-        ' Note that this is the default in R when the status is not a factor
-        ' but status should not be a factor variable for "right", hence this is the R default here.
+        ' Note the default in R when the status is not a factor is "right", however is not set as the R default here since it is not always the default
+        ' additionally, in the output window the value has to always be given.
 
         ' entry time always is time
         ' exit time is time or time2 depending if rdoright, left are selected, or one of the other four are
@@ -108,13 +109,16 @@ Public Class dlgSurvivalObject
 
         'ucrInput
         ucrModifyEventNumeric.SetParameter(New RParameter("x", 0, bNewIncludeArgumentName:=False))
-        ucrModifyEventNumeric.SetValidationTypeAsNumericList(dcmMin:=Integer.MinValue,
-                                                             dcmMax:=Integer.MaxValue)
+        ucrModifyEventNumeric.SetValidationTypeAsNumericList(dcmMin:=Integer.MinValue, dcmMax:=Integer.MaxValue)
         ucrModifyEventNumeric.AddQuotesIfUnrecognised = False
+        dctNumeric.Add("0", "0")
+        dctNumeric.Add("1", "1")
+        dctNumeric.Add("2", "2")
+        ucrModifyEventNumeric.SetDefaultState("1")
+        ucrModifyEventNumeric.SetItems(dctNumeric)
 
         'logical
         ucrModifyEventLogical.SetParameter(New RParameter("z", 0, bNewIncludeArgumentName:=False))
-        Dim dctLogical As New Dictionary(Of String, String)
         dctLogical.Add("TRUE", "TRUE")
         dctLogical.Add("FALSE", "FALSE")
         ucrModifyEventLogical.SetItems(dctLogical)
@@ -150,6 +154,7 @@ Public Class dlgSurvivalObject
         ucrSelectorFitObject.Reset()
         ucrSaveObject.Reset()
         lblModifyEvent.Visible = False
+        ucrModifyEventNumeric.ResetText()
 
         clsRightLeftFunction.SetPackageName("survival")
         clsRightLeftFunction.SetRCommand("Surv")
@@ -175,6 +180,8 @@ Public Class dlgSurvivalObject
         clsCreateObjectScript.AddParameter("x", clsRFunctionParameter:=clsCreateObjectScriptPaste, bIncludeArgumentName:=False, iPosition:=0)
         clsCreateObjectScript.AddParameter("after_cols", Chr(34) & "used to create the Survival Object:" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
         clsCreateObjectScript.AddParameter("surv_name", Chr(34) & ucrSaveObject.ucrInputComboSave.GetText() & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+        clsCreateObjectScript.AddParameter("new_row_1", Chr(34) & "\n" & Chr(34), iPosition:=4, bIncludeArgumentName:=False)
+        clsCreateObjectScript.AddParameter("cens", Chr(34) & "Type of Censoring:" & Chr(34), iPosition:=5, bIncludeArgumentName:=False)
 
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
@@ -190,6 +197,7 @@ Public Class dlgSurvivalObject
         ucrReceiverExit.AddAdditionalCodeParameterPair(clsInterval2Function, New RParameter("time2", 1), iAdditionalPairNo:=2)
         ucrPnlType.AddAdditionalCodeParameterPair(clsStartEndFunction, New RParameter("type", 3), iAdditionalPairNo:=1)
         ucrPnlType.AddAdditionalCodeParameterPair(clsInterval2Function, New RParameter("type", 3), iAdditionalPairNo:=2)
+        ucrPnlType.AddAdditionalCodeParameterPair(clsCreateObjectScript, New RParameter("type", 6, False), iAdditionalPairNo:=3)
         ucrReceiverEntry.AddAdditionalCodeParameterPair(clsInterval2Function, New RParameter("time", 2), iAdditionalPairNo:=1)
         ucrReceiverEvent.AddAdditionalCodeParameterPair(clsRightLeftFunction, New RParameter("event", 2), iAdditionalPairNo:=1)
         ucrReceiverEvent.AddAdditionalCodeParameterPair(clsStartEndFunction, New RParameter("event", 2), iAdditionalPairNo:=2)
@@ -298,7 +306,6 @@ Public Class dlgSurvivalObject
                     ucrModifyEventNumeric.Visible = False
                     ucrModifyEventFactor.Visible = True
                     ucrModifyEventLogical.Visible = False
-
                 Else
                     Me.Size = New System.Drawing.Size(523, Me.Height)
                     clsModifyOperation.RemoveParameterByName("factor_value")
@@ -310,7 +317,6 @@ Public Class dlgSurvivalObject
                         ucrModifyEventNumeric.Visible = False
                         ucrModifyEventFactor.Visible = False
                         ucrModifyEventLogical.Visible = True
-
                     Else '(if numeric or integer)
                         clsCFunction.RemoveParameterByName("z")
                         clsCFunction.AddParameter("x", ucrModifyEventNumeric.GetText(), bIncludeArgumentName:=False, iPosition:=0)
