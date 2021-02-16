@@ -374,6 +374,10 @@
       <DependentUpon>sdgDensityLayerOptions.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgDensityLayerOptions.vb">
+    <Compile Include="sdgDistributionOptions.Designer.vb">
+      <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDistributionOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgExportToWWR.Designer.vb">
@@ -2797,6 +2801,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgDensityLayerOptions.resx">
       <DependentUpon>sdgDensityLayerOptions.vb</DependentUpon>
+    <EmbeddedResource Include="sdgDistributionOptions.resx">
+      <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgExportToWWR.resx">
       <DependentUpon>sdgExportToWWR.vb</DependentUpon>
