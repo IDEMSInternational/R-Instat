@@ -21,19 +21,27 @@
         Private Sub MyApplication_StartupNextInstance(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupNextInstanceEventArgs) Handles Me.StartupNextInstance
             Dim strPath As String
             If e.CommandLine.Count > 0 Then
-                frmMain.TopMost = True
-                frmMain.TopMost = False
+                frmMain.TopMost = True 'Needed to force the window above the other windows
+                frmMain.TopMost = False 'After the window being above other windows this will allow going to other windows
                 If Application.OpenForms.OfType(Of dlgImportDataset).Any Then
                     strPath = Replace(e.CommandLine(0).ToString, "\", "/")
                     dlgImportDataset.ucrInputFilePath.SetName(strPath)
                 Else
-                    dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
-                    dlgImportDataset.bStartOpenDialog = False
-                    dlgImportDataset.ShowDialog()
+                    If frmMain.WindowState <> FormWindowState.Maximized Then
+                        frmMain.WindowState = FormWindowState.Normal
+                        dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
+                        dlgImportDataset.bStartOpenDialog = False
+                        dlgImportDataset.ShowDialog()
+                    Else
+                        frmMain.WindowState = FormWindowState.Maximized
+                        dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
+                        dlgImportDataset.bStartOpenDialog = False
+                        dlgImportDataset.ShowDialog()
+                    End If
                 End If
             Else
-                frmMain.TopMost = True
-                frmMain.TopMost = False
+                frmMain.TopMost = True 'Needed to force the window above the other windows
+                frmMain.TopMost = False 'After the window being above other windows this will allow going to other windows
             End If
         End Sub
     End Class

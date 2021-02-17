@@ -151,8 +151,6 @@ Public Class frmMain
 
         Try
             If (Environment.GetCommandLineArgs.Length > 1) Then
-                Me.TopMost = True
-                Me.TopMost = False
                 dlgImportDataset.strFileToOpenOn = Environment.GetCommandLineArgs(1)
                 dlgImportDataset.bStartOpenDialog = False
                 dlgImportDataset.ShowDialog()
