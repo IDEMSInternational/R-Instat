@@ -364,6 +364,12 @@
     <Compile Include="sdgClimaticNCMPMetadata.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgDistributionOptions.Designer.vb">
+      <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDistributionOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgExportToWWR.Designer.vb">
       <DependentUpon>sdgExportToWWR.vb</DependentUpon>
     </Compile>
@@ -2779,6 +2785,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticNCMPMetadata.resx">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDistributionOptions.resx">
+      <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgExportToWWR.resx">
       <DependentUpon>sdgExportToWWR.vb</DependentUpon>
