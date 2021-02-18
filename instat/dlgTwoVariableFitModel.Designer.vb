@@ -49,10 +49,12 @@ Partial Class dlgTwoVariableFitModel
         Me.rdoGeneralCase = New System.Windows.Forms.RadioButton()
         Me.lblFactor = New System.Windows.Forms.Label()
         Me.lblNumeric = New System.Windows.Forms.Label()
-        Me.cmdExplanatoryFunction = New System.Windows.Forms.Button()
         Me.lblFirstVariable = New System.Windows.Forms.Label()
         Me.lblSecondVariable = New System.Windows.Forms.Label()
         Me.lblTest = New System.Windows.Forms.Label()
+        Me.lblFirstVariableType = New System.Windows.Forms.Label()
+        Me.cmdExplanatoryFunction = New System.Windows.Forms.Button()
+        Me.lblSecondVariableType = New System.Windows.Forms.Label()
         Me.ucrDistributionChoice = New instat.ucrDistributions()
         Me.ucrInputTest = New instat.ucrInputComboBox()
         Me.ucrTryModelling = New instat.ucrTry()
@@ -64,6 +66,10 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrPnlModelType = New instat.UcrPanel()
         Me.ucrModelPreview = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrInputConfidenceInterval = New instat.ucrInputComboBox()
+        Me.lblConfidenceLevel = New System.Windows.Forms.Label()
+        Me.ucrInputNullHypothesis = New instat.ucrInputTextBox()
+        Me.lblNullHypothesis = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblResidualMsg
@@ -182,15 +188,6 @@ Partial Class dlgTwoVariableFitModel
         Me.lblNumeric.TabIndex = 4
         Me.lblNumeric.Text = "Response Variable:"
         '
-        'cmdExplanatoryFunction
-        '
-        Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(268, 186)
-        Me.cmdExplanatoryFunction.Name = "cmdExplanatoryFunction"
-        Me.cmdExplanatoryFunction.Size = New System.Drawing.Size(103, 23)
-        Me.cmdExplanatoryFunction.TabIndex = 10
-        Me.cmdExplanatoryFunction.Text = "Function..."
-        Me.cmdExplanatoryFunction.UseVisualStyleBackColor = True
-        '
         'lblFirstVariable
         '
         Me.lblFirstVariable.AutoSize = True
@@ -220,9 +217,34 @@ Partial Class dlgTwoVariableFitModel
         Me.lblTest.TabIndex = 23
         Me.lblTest.Text = "Test:"
         '
+        'lblFirstVariableType
+        '
+        Me.lblFirstVariableType.AutoSize = True
+        Me.lblFirstVariableType.Location = New System.Drawing.Point(273, 124)
+        Me.lblFirstVariableType.Name = "lblFirstVariableType"
+        Me.lblFirstVariableType.Size = New System.Drawing.Size(0, 13)
+        Me.lblFirstVariableType.TabIndex = 25
+        '
+        'cmdExplanatoryFunction
+        '
+        Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(268, 186)
+        Me.cmdExplanatoryFunction.Name = "cmdExplanatoryFunction"
+        Me.cmdExplanatoryFunction.Size = New System.Drawing.Size(103, 23)
+        Me.cmdExplanatoryFunction.TabIndex = 10
+        Me.cmdExplanatoryFunction.Text = "Function..."
+        Me.cmdExplanatoryFunction.UseVisualStyleBackColor = True
+        '
+        'lblSecondVariableType
+        '
+        Me.lblSecondVariableType.AutoSize = True
+        Me.lblSecondVariableType.Location = New System.Drawing.Point(272, 191)
+        Me.lblSecondVariableType.Name = "lblSecondVariableType"
+        Me.lblSecondVariableType.Size = New System.Drawing.Size(0, 13)
+        Me.lblSecondVariableType.TabIndex = 26
+        '
         'ucrDistributionChoice
         '
-        Me.ucrDistributionChoice.Location = New System.Drawing.Point(16, 285)
+        Me.ucrDistributionChoice.Location = New System.Drawing.Point(10, 242)
         Me.ucrDistributionChoice.Name = "ucrDistributionChoice"
         Me.ucrDistributionChoice.Size = New System.Drawing.Size(208, 27)
         Me.ucrDistributionChoice.TabIndex = 11
@@ -319,11 +341,56 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrBase.Size = New System.Drawing.Size(406, 54)
         Me.ucrBase.TabIndex = 17
         '
+        'ucrInputConfidenceInterval
+        '
+        Me.ucrInputConfidenceInterval.AddQuotesIfUnrecognised = True
+        Me.ucrInputConfidenceInterval.GetSetSelectedIndex = -1
+        Me.ucrInputConfidenceInterval.IsReadOnly = False
+        Me.ucrInputConfidenceInterval.Location = New System.Drawing.Point(336, 233)
+        Me.ucrInputConfidenceInterval.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrInputConfidenceInterval.Name = "ucrInputConfidenceInterval"
+        Me.ucrInputConfidenceInterval.Size = New System.Drawing.Size(94, 21)
+        Me.ucrInputConfidenceInterval.TabIndex = 86
+        '
+        'lblConfidenceLevel
+        '
+        Me.lblConfidenceLevel.AutoSize = True
+        Me.lblConfidenceLevel.Location = New System.Drawing.Point(238, 237)
+        Me.lblConfidenceLevel.Name = "lblConfidenceLevel"
+        Me.lblConfidenceLevel.Size = New System.Drawing.Size(93, 13)
+        Me.lblConfidenceLevel.TabIndex = 87
+        Me.lblConfidenceLevel.Text = "Confidence Level:"
+        '
+        'ucrInputNullHypothesis
+        '
+        Me.ucrInputNullHypothesis.AddQuotesIfUnrecognised = True
+        Me.ucrInputNullHypothesis.IsMultiline = False
+        Me.ucrInputNullHypothesis.IsReadOnly = False
+        Me.ucrInputNullHypothesis.Location = New System.Drawing.Point(336, 262)
+        Me.ucrInputNullHypothesis.Name = "ucrInputNullHypothesis"
+        Me.ucrInputNullHypothesis.Size = New System.Drawing.Size(94, 22)
+        Me.ucrInputNullHypothesis.TabIndex = 88
+        '
+        'lblNullHypothesis
+        '
+        Me.lblNullHypothesis.AutoSize = True
+        Me.lblNullHypothesis.Location = New System.Drawing.Point(236, 265)
+        Me.lblNullHypothesis.Name = "lblNullHypothesis"
+        Me.lblNullHypothesis.Size = New System.Drawing.Size(83, 13)
+        Me.lblNullHypothesis.TabIndex = 89
+        Me.lblNullHypothesis.Text = "Null Hypothesis:"
+        '
         'dlgTwoVariableFitModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(462, 510)
+        Me.Controls.Add(Me.lblNullHypothesis)
+        Me.Controls.Add(Me.ucrInputNullHypothesis)
+        Me.Controls.Add(Me.lblConfidenceLevel)
+        Me.Controls.Add(Me.ucrInputConfidenceInterval)
+        Me.Controls.Add(Me.lblSecondVariableType)
+        Me.Controls.Add(Me.lblFirstVariableType)
         Me.Controls.Add(Me.ucrDistributionChoice)
         Me.Controls.Add(Me.ucrInputTest)
         Me.Controls.Add(Me.ucrTryModelling)
@@ -380,10 +447,16 @@ Partial Class dlgTwoVariableFitModel
     Friend WithEvents ucrReceiverResponse As ucrReceiverSingle
     Friend WithEvents ucrSelectorSimpleReg As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSaveModels As ucrSave
-    Friend WithEvents cmdExplanatoryFunction As Button
     Friend WithEvents ucrTryModelling As ucrTry
     Friend WithEvents lblFirstVariable As Label
     Friend WithEvents lblSecondVariable As Label
     Friend WithEvents ucrInputTest As ucrInputComboBox
     Friend WithEvents lblTest As Label
+    Friend WithEvents lblSecondVariableType As Label
+    Friend WithEvents lblFirstVariableType As Label
+    Friend WithEvents cmdExplanatoryFunction As Button
+    Friend WithEvents ucrInputConfidenceInterval As ucrInputComboBox
+    Friend WithEvents lblConfidenceLevel As Label
+    Friend WithEvents ucrInputNullHypothesis As ucrInputTextBox
+    Friend WithEvents lblNullHypothesis As Label
 End Class
