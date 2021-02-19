@@ -453,14 +453,13 @@ Public Class frmMain
             Else
                 splOverall.Panel1Collapsed = True
             End If
-            If mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked Then
+            If mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked Then
                 splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
                 splMetadata.Panel1.Controls.Add(ucrDataViewer)
-            ElseIf mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked AndAlso Not mnuViewColumnMetadata.Checked Then
-                splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
-                splMetadata.Panel1.Controls.Add(ucrDataViewer)
-                mnuViewColumnMetadata.Checked = True
-                mnuViewDataView.Checked = False
+                If Not mnuViewColumnMetadata.Checked Then
+                    mnuViewColumnMetadata.Checked = True
+                    mnuViewDataView.Checked = False
+                End If
             Else
                 splDataOutput.Panel1.Controls.Add(ucrDataViewer)
                 splMetadata.Panel1.Controls.Add(ucrColumnMeta)
