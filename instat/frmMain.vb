@@ -434,7 +434,6 @@ Public Class frmMain
             End If
             If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked OrElse mnuViewLog.Checked OrElse mnuViewScriptWindow.Checked Then
                 splOverall.Panel1Collapsed = False
-
                 If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
                     splExtraWindows.Panel1Collapsed = False
                     splMetadata.Panel1Collapsed = Not mnuViewColumnMetadata.Checked
@@ -442,7 +441,6 @@ Public Class frmMain
                 Else
                     splExtraWindows.Panel1Collapsed = True
                 End If
-
                 If mnuViewLog.Checked OrElse mnuViewScriptWindow.Checked Then
                     splExtraWindows.Panel2Collapsed = False
                     splLogScript.Panel1Collapsed = Not mnuViewLog.Checked
