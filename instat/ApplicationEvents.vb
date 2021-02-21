@@ -27,13 +27,13 @@
                     strPath = Replace(e.CommandLine(0).ToString, "\", "/")
                     dlgImportDataset.ucrInputFilePath.SetName(strPath)
                 Else
-                    If frmMain.WindowState <> FormWindowState.Maximized Then
-                        frmMain.WindowState = FormWindowState.Normal
+                    If frmMain.isMaximised AndAlso frmMain.isMinimised Then
+                        frmMain.WindowState = FormWindowState.Maximized
                         dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
                         dlgImportDataset.bStartOpenDialog = False
                         dlgImportDataset.ShowDialog()
-                    Else
-                        frmMain.WindowState = FormWindowState.Maximized
+                    ElseIf Not frmMain.isMaximised AndAlso frmMain.isMinimised Then
+                        frmMain.WindowState = FormWindowState.Normal
                         dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
                         dlgImportDataset.bStartOpenDialog = False
                         dlgImportDataset.ShowDialog()
@@ -42,6 +42,11 @@
             Else
                 frmMain.TopMost = True 'Needed to force the window above the other windows
                 frmMain.TopMost = False 'After the window being above other windows this will allow going to other windows
+                If frmMain.isMaximised AndAlso frmMain.isMinimised Then
+                    frmMain.WindowState = FormWindowState.Maximized
+                ElseIf Not frmMain.isMaximised AndAlso frmMain.isMinimised Then
+                    frmMain.WindowState = FormWindowState.Normal
+                End If
             End If
         End Sub
     End Class

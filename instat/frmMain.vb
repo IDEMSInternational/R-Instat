@@ -45,6 +45,10 @@ Public Class frmMain
 
     Public strCurrentAutoSaveDataFilePath As String = ""
 
+
+    Public isMinimised As Boolean = False
+    Public isMaximised As Boolean = False
+
     'This is the default data frame to appear in the data frame selector
     'If "" the current worksheet will be used
     'TODO This should be an option in the Options dialog
@@ -158,6 +162,8 @@ Public Class frmMain
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
+
+        isMaximised = True 'Need to get the windowstate when the application is loaded
 
     End Sub
 
@@ -2296,5 +2302,16 @@ Public Class frmMain
 
     Private Sub mnuClimaticNCMPSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPSummary.Click
         dlgClimaticNCMPSummaryFile.ShowDialog()
+    End Sub
+    Private Sub frmMain_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
+        If Me.WindowState = FormWindowState.Maximized Then
+            isMaximised = True
+        End If
+        If Me.WindowState = FormWindowState.Minimized Then
+            isMinimised = True
+        End If
+        If Me.WindowState = FormWindowState.Normal Then
+            isMaximised = False
+        End If
     End Sub
 End Class
