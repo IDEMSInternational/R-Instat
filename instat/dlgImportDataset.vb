@@ -882,8 +882,8 @@ Public Class dlgImportDataset
         'so instead we are using the strFileType to identify which RFunctions should be updated accordingly
         If strFileType = "XLSX" OrElse strFileType = "XLS" Then
             'set for single imports and multiple imports 
-            clsImportExcelMulti.AddParameter("na", "c(" & GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()) & "," & Chr(34) & "" & Chr(34) & ")")
-            clsImportExcel.AddParameter("na", "c(" & GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()) & "," & Chr(34) & "" & Chr(34) & ")")
+            clsImportExcelMulti.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()))
+            clsImportExcel.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()))
         ElseIf strFileType = "CSV" Then
             clsImportCSV.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
         ElseIf strFileType = "TXT" Then
@@ -1067,9 +1067,9 @@ Public Class dlgImportDataset
 
         'if length is = 1 return an R string else return a vector of strings for R.
         'please note the array length will never be 0
-        If arrStr.Length = 1 Then
-            Return Chr(34) & arrStr(0) & Chr(34)
-        End If
+        'If arrStr.Length = 1 Then
+        '    Return Chr(34) & arrStr(0) & Chr(34)
+        'End If
 
         Dim strRmissingValueString As String = ""
         For Each strTemp As String In arrStr
@@ -1079,7 +1079,7 @@ Public Class dlgImportDataset
                 strRmissingValueString = strRmissingValueString & "," & Chr(34) & strTemp.Trim & Chr(34)
             End If
         Next
-        strRmissingValueString = "c(" & strRmissingValueString & ")"
+        strRmissingValueString = "c(" & strRmissingValueString & "," & Chr(34) & "" & Chr(34) & ")"
         Return strRmissingValueString
     End Function
 
