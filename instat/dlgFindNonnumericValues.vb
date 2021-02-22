@@ -58,7 +58,7 @@ Public Class dlgFindNonnumericValues
         'save control
         ucrSaveColumn.SetPrefix("nonum")
         ucrSaveColumn.SetSaveTypeAsColumn()
-        ucrSaveColumn.SetIsTextBox()
+        ucrSaveColumn.SetIsComboBox()
         ucrSaveColumn.SetLabelText("Logical Column:")
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorShowNonNumericValues.ucrAvailableDataFrames)
 
