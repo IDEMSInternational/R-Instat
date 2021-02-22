@@ -87,6 +87,7 @@ Public Class frmMain
         ' Decimal point must be `.` and not `,` because R only accepts `.`
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
 
+        ucrDataViewer.StartupMenuItemsVisibility(False)
         InitialiseOutputWindow()
         clsGrids.SetDataViewer(ucrDataViewer)
         clsGrids.SetMetadata(ucrDataFrameMeta.grdMetaData)
@@ -133,6 +134,7 @@ Public Class frmMain
             clsRecentItems.SetDataViewWindow(ucrDataViewer)
             'checks existence of MRU list
             clsRecentItems.checkOnLoad()
+            ucrDataViewer.StartupMenuItemsVisibility(True)
             Cursor = Cursors.Default
             SetMainMenusEnabled(True)
 
