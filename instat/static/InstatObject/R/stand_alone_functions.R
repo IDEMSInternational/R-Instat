@@ -2279,3 +2279,7 @@ plot_declustered <- function(data, station_col_name, element_col_name, threshold
     }
   }
 }
+
+n_non_numeric <- function(x) {
+  sum(is.na(x) != is.na(suppressWarnings(as.numeric(x))))
+}
