@@ -270,7 +270,7 @@ Public Class dlgShowModel
                 ucrSaveGraphOrValues.SetPrefix("prob")
             End If
             ucrInputValuesOrProbabilities.SetName("1")
-            ucrInputValuesOrProbabilities.SetItems({"1", "0.1, 1, 3, 5, 10 ", "-2, -1, 0, 1, 2", "0.01, 0.05, 0.1, 0.2, 0.5, 0.8, 0.9, 0.95, 0.99", "0.5, 0.8, 0.9, 0.95, 0.98, 0.99, 0.995, 0.998, 0.999"})
+            ucrInputValuesOrProbabilities.SetItems({"1", "0.1, 1, 3, 5, 10 ", "-2, -1, 0, 1, 2"})
             lblProbValues.Visible = False
             lblQuantValues.Visible = True
         ElseIf rdoQuantiles.Checked Then
@@ -280,7 +280,7 @@ Public Class dlgShowModel
                 ucrSaveGraphOrValues.SetPrefix("quant")
             End If
             ucrInputValuesOrProbabilities.SetName("0.5")
-            ucrInputValuesOrProbabilities.SetItems({"0.5", "0.1, 0.2, 0.4, 0.6, 0.8, 0.9 ", "0.2, 0.5, 0.8", " 0.5, 0.8, 0.9, 0.95, 0.99", "-4, -3, -2, -1, 0, 1, 2, 3, 4", "40, 50, 60, 80, 100, 130, 160, 200, 250"})
+            ucrInputValuesOrProbabilities.SetItems({"0.5", "0.1, 0.2, 0.4, 0.6, 0.8, 0.9 ", "0.2, 0.5, 0.8", " 0.5, 0.8, 0.9, 0.95, 0.99"})
             lblQuantValues.Visible = False
             lblProbValues.Visible = True
         End If
