@@ -86,6 +86,11 @@ Public Class sdgDistributionOptions
         ucrInputXAxisLabel.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputYAxisLabel.SetRCode(clsLabsFunction, bReset, bCloneIfNeeded:=True)
         ucrInputThemes.SetRCode(clsThemeFunction, bReset, bCloneIfNeeded:=True)
+
+        If bReset Then
+            rdoXAxisAuto.Checked = True
+            rdoYAxisAuto.Checked = True
+        End If
     End Sub
 
     Private Sub ucrPnlXAxis_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlXAxis.ControlValueChanged
