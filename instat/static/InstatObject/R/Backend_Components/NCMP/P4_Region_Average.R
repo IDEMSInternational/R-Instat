@@ -69,8 +69,8 @@ p4_region_average <- function(a2, station, year, month, a3, ne = 1:8,
   DmaxT <- 3000           # maximum separation (km) for temperature indices
   DmaxP <- 2000           # maximum separation (km) for precipitation indices
   
-  stations_data <- unique(a2[[station]])
-  stations_metadata <- unique(station_df[[name]])
+  stations_data <- as.character(unique(a2[[station]]))
+  stations_metadata <- as.character(unique(station_df[[name]]))
   if (!all(stations_data %in% stations_metadata)) stop("Station information not available for all stations that appear in data.")
   stations <- stations_data
   nstn <- length(stations)

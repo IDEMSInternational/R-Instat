@@ -52,7 +52,6 @@ Public Class dlgRestrict
             SetDefaults()
             bFirstLoad = False
         End If
-        SetFilterSubsetStatus()
         SetDefaultDataFrame()
         If bAutoOpenSubDialog Then
             OpenNewFilterSubDialog()
@@ -128,6 +127,11 @@ Public Class dlgRestrict
         If sdgCreateFilter.bFilterDefined Then
             frmMain.clsRLink.RunScript(sdgCreateFilter.clsCurrentFilter.ToScript(), strComment:="Create Filter subdialog: Created new filter")
             ucrSelectorFilter.SetDataframe(sdgCreateFilter.ucrCreateFilter.ucrSelectorForFitler.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            'Clear the receiver if the filter created is the same as the filter currently in the receiver. 
+            'Clearing ensures that the filter preview is updated correctly because it might have changed.
+            If ucrReceiverFilter.GetVariableNames(False) = sdgCreateFilter.ucrCreateFilter.ucrInputFilterName.GetText() Then
+                ucrReceiverFilter.Clear()
+            End If
             ucrReceiverFilter.Add(sdgCreateFilter.ucrCreateFilter.ucrInputFilterName.GetText())
         End If
         ucrSelectorFilter.LoadList()
