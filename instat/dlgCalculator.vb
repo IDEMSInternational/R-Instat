@@ -78,12 +78,18 @@ Public Class dlgCalculator
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
         ucrBase.clsRsyntax.SetCommandString("")
+
         ucrCalc.ucrSaveResultInto.SetPrefix("calc")
         ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
-        ucrCalc.ucrSaveResultInto.SetIsTextBox()
-        ucrCalc.ucrSaveResultInto.SetLabelText("Save Result Into:")
+        'ucrCalc.ucrSaveResultInto.SetIsTextBox()
+        'ucrCalc.ucrSaveResultInto.SetLabelText("Save Result Into:")
+        ucrCalc.ucrSaveResultInto.SetIsComboBox()
+        ucrCalc.ucrSaveResultInto.SetCheckBoxText("Save Result Into:")
+
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
+
+
     End Sub
 
     Public Sub SetDefaultKeyboard(strNewDefaultKeyboard As String)
@@ -95,13 +101,16 @@ Public Class dlgCalculator
         End If
     End Sub
 
-    Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged
+    Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveResultChanged
         SaveResults()
         TestOKEnabled()
     End Sub
 
+    ''' <summary>
+    ''' Determines where the results will be saved; to a column or output window
+    ''' </summary>
     Private Sub SaveResults()
-        If ucrCalc.ucrSaveResultInto.IsComplete Then
+        If ucrCalc.ucrSaveResultInto.ucrChkSave.Checked AndAlso ucrCalc.ucrSaveResultInto.IsComplete Then
             ucrBase.clsRsyntax.SetAssignTo(ucrCalc.ucrSaveResultInto.GetText(), strTempColumn:=ucrCalc.ucrSaveResultInto.GetText(), strTempDataframe:=ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToIsPrefix:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToIsPrefix, bAssignToColumnWithoutNames:=ucrBase.clsRsyntax.clsBaseCommandString.bAssignToColumnWithoutNames, bInsertColumnBefore:=ucrBase.clsRsyntax.clsBaseCommandString.bInsertColumnBefore, bRequireCorrectLength:=ucrBase.clsRsyntax.clsBaseCommandString.bRequireCorrectLength)
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = True
             ucrBase.clsRsyntax.iCallType = 0
