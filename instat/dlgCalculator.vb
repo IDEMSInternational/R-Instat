@@ -81,10 +81,9 @@ Public Class dlgCalculator
 
         ucrCalc.ucrSaveResultInto.SetPrefix("calc")
         ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
-        'ucrCalc.ucrSaveResultInto.SetIsTextBox()
-        'ucrCalc.ucrSaveResultInto.SetLabelText("Save Result Into:")
         ucrCalc.ucrSaveResultInto.SetIsComboBox()
-        ucrCalc.ucrSaveResultInto.SetCheckBoxText("Save Result Into:")
+        ucrCalc.ucrSaveResultInto.SetCheckBoxText("Save Result:")
+        ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = True
 
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
@@ -116,7 +115,7 @@ Public Class dlgCalculator
             ucrBase.clsRsyntax.iCallType = 0
         Else
             ucrBase.clsRsyntax.RemoveAssignTo()
-            ucrBase.clsRsyntax.iCallType = 2
+            ucrBase.clsRsyntax.iCallType = 1
             ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         End If
     End Sub
