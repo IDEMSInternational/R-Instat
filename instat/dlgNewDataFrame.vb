@@ -51,9 +51,9 @@ Public Class dlgNewDataFrame
         ucrNudCols.SetMinMax(1, Integer.MaxValue)
 
         ' ucrNewSheetName
-        ucrNewDFName.SetIsTextBox()
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetLabelText("New Data Frame Name:")
+        ucrNewDFName.SetIsTextBox()
         ucrNewDFName.SetPrefix("data")
 
         'ucrRdoOptions

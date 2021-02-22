@@ -321,12 +321,27 @@
   <metadata name="colRowNum.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="colRowNum.HeaderText" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="colRowNum.Width" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
   <metadata name="colName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="colName.HeaderText" xml:space="preserve">
+    <value>Column Name</value>
+  </data>
+  <data name="colName.Width" type="System.Int32, mscorlib">
+    <value>130</value>
+  </data>
   <metadata name="colExpression.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="colExpression.HeaderText" xml:space="preserve">
+    <value>Expression</value>
+  </data>
   <data name="dataGridView.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 83</value>
   </data>
@@ -351,42 +366,9 @@
   <data name="&gt;&gt;dataGridView.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <metadata name="colRowNum.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colRowNum.HeaderText" xml:space="preserve">
-    <value>No.</value>
-  </data>
-  <data name="colRowNum.Width" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <metadata name="colName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colName.HeaderText" xml:space="preserve">
-    <value>Column Name</value>
-  </data>
-  <data name="colName.Width" type="System.Int32, mscorlib">
-    <value>130</value>
-  </data>
-  <metadata name="colExpression.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colExpression.HeaderText" xml:space="preserve">
-    <value>Expression</value>
-  </data>
   <metadata name="mnuStripCommand.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="mnuStripCommand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 114</value>
-  </data>
-  <data name="&gt;&gt;mnuStripCommand.Name" xml:space="preserve">
-    <value>mnuStripCommand</value>
-  </data>
-  <data name="&gt;&gt;mnuStripCommand.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="mnuItemCut.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+X</value>
   </data>
@@ -431,6 +413,15 @@
   </data>
   <data name="SelectAllToolStripMenuItem.Text" xml:space="preserve">
     <value>Select All</value>
+  </data>
+  <data name="mnuStripCommand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 114</value>
+  </data>
+  <data name="&gt;&gt;mnuStripCommand.Name" xml:space="preserve">
+    <value>mnuStripCommand</value>
+  </data>
+  <data name="&gt;&gt;mnuStripCommand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblCommand.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
