@@ -25,6 +25,10 @@ Imports System.ComponentModel
 Public Class ucrDataView
     'Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
+    ' Number of rows with and without the current filter (the same if no filter applied)
+    Private iRowCountFull As Integer
+    Private iRowCountFilter As Integer
+    Private iColumnCount As Integer
     Private clsNNonNumeric As New RFunction
     Private clsGetColumnsFromData As New RFunction
     Private clsAppendVariablesMetaData As New RFunction
@@ -322,8 +326,6 @@ Public Class ucrDataView
     End Sub
 
     Public Sub UpdateCurrentWorksheet()
-        Dim iRowCount As Integer
-        Dim iColumnCount As Integer
 
         grdCurrSheet = grdData.CurrentWorksheet
         If grdCurrSheet IsNot Nothing AndAlso frmMain.clsRLink.GetDataFrameNames().Contains(grdCurrSheet.Name) Then
@@ -333,12 +335,13 @@ Public Class ucrDataView
             grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
             grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
-            iRowCount = frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, True)
+            iRowCountFull = frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, False)
+            iRowCountFilter = frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, True)
             iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(grdCurrSheet.Name)
-            lblRowDisplay.Text = "Showing " & grdCurrSheet.RowCount & " of " & iRowCount & " rows"
+            lblRowDisplay.Text = "Showing " & grdCurrSheet.RowCount & " of " & iRowCountFilter & " rows"
             strFilterName = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCurrentFilterName.ToScript(), bSilent:=True).AsCharacter(0)
             If frmMain.clsRLink.RunInternalScriptGetValue(clsFilterApplied.ToScript()).AsLogical(0) Then
-                lblRowDisplay.Text = lblRowDisplay.Text & " (" & frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, False) & ")" & "|Active filter:" & strFilterName
+                lblRowDisplay.Text = lblRowDisplay.Text & " (" & iRowCountFull & ")" & " | Active filter: " & strFilterName
             End If
             lblRowDisplay.Text = lblRowDisplay.Text & " | Showing " & grdCurrSheet.ColumnCount & " of " & iColumnCount & " columns"
             'hide startup menu items
@@ -848,11 +851,19 @@ Public Class ucrDataView
             clsConvertTo.RemoveParameterByName("ignore_labels")
 
             clsGetColumnsFromData.AddParameter("col_names", Chr(34) & strCol & Chr(34), iPosition:=1)
+            clsGetColumnsFromData.AddParameter("use_current_filter", "FALSE", iPosition:=4)
+
             clsNNonNumeric.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=0)
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsNNonNumeric.ToScript(), bSilent:=True)
             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                 iNonNumeric = expTemp.AsNumeric(0)
-                If iNonNumeric > 0 Then
+                ' If all values are non-numeric or all values are numeric then convert function will automatically do the correct convert.
+                If iNonNumeric = 0 OrElse iNonNumeric = iRowCountFull Then
+                    clsConvertTo.RemoveParameterByName("ignore_labels")
+                    RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
+
+                    ' Only give user the choice when there are a mixture of numeric and non-numeric values.
+                ElseIf iNonNumeric > 0 Then
                     frmConvertToNumeric.SetColumnName(strCol)
                     frmConvertToNumeric.SetNonNumeric(iNonNumeric)
                     frmConvertToNumeric.ShowDialog()
@@ -867,9 +878,11 @@ Public Class ucrDataView
                         Continue For
                     End If
                 Else
+                    clsConvertTo.RemoveParameterByName("ignore_labels")
                     RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
                 End If
             Else
+                clsConvertTo.RemoveParameterByName("ignore_labels")
                 RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
             End If
         Next
