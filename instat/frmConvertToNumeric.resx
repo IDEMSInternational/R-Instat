@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="lblPossibleSolutions.Text" xml:space="preserve">
-    <value>      value(s) are non-numeric and will be converted to NA when converting to numeric.
+    <value>Some values are non-numeric and will be converted to NA when converting to numeric.
 
 - To convert anyway choose "Normal Convert". Non-numeric values will be lost.
 
-- To retain non-numeric values choose "Labelled Convert". Values will be labelled with integers and can be recovered by converting back to character.</value>
+- To retain non-numeric values choose "Labelled Convert". All values will be labelled with integers and can be recovered by converting back to character/factor.</value>
   </data>
 </root>

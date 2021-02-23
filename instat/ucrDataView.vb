@@ -459,9 +459,7 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
-        clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
-        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
-        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
+        ConvertToNumeric()
     End Sub
 
     Private Sub mnuLevelsLabels_Click(sender As Object, e As EventArgs) Handles mnuLevelsLabels.Click
@@ -834,25 +832,47 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click
+        ConvertToNumeric()
+    End Sub
+
+    Private Sub ConvertToNumeric()
         Dim expTemp As SymbolicExpression
         Dim iNonNumeric As Integer
+        Dim arrConvertCols() As String
 
-        clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
+        arrConvertCols = SelectedColumnsAsArray()
+
         clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
+        For Each strCol As String In arrConvertCols
+            clsConvertTo.AddParameter("col_names", Chr(34) & strCol & Chr(34), iPosition:=1)
+            clsConvertTo.RemoveParameterByName("ignore_labels")
 
-        clsGetColumnsFromData.AddParameter("col_names", SelectedColumns(), iPosition:=1)
-        clsNNonNumeric.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=0)
-        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsNNonNumeric.ToScript(), bSilent:=True)
-        If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-            iNonNumeric = expTemp.AsNumeric(0)
-            If iNonNumeric > 0 Then
-
+            clsGetColumnsFromData.AddParameter("col_names", Chr(34) & strCol & Chr(34), iPosition:=1)
+            clsNNonNumeric.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=0)
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsNNonNumeric.ToScript(), bSilent:=True)
+            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
+                iNonNumeric = expTemp.AsNumeric(0)
+                If iNonNumeric > 0 Then
+                    frmConvertToNumeric.SetColumnName(strCol)
+                    frmConvertToNumeric.SetNonNumeric(iNonNumeric)
+                    frmConvertToNumeric.ShowDialog()
+                    ' Yes for "normal" convert and No for "labelled" convert
+                    If frmConvertToNumeric.DialogResult = DialogResult.Yes Then
+                        clsConvertTo.AddParameter("ignore_labels", "TRUE", iPosition:=6)
+                        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
+                    ElseIf frmConvertToNumeric.DialogResult = DialogResult.No Then
+                        clsConvertTo.RemoveParameterByName("ignore_labels")
+                        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
+                    ElseIf frmConvertToNumeric.DialogResult = DialogResult.Cancel Then
+                        Continue For
+                    End If
+                Else
+                    RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
+                End If
             Else
                 RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
             End If
-        Else
-            RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
-        End If
+        Next
     End Sub
 
     Private Sub mnuLebelsLevel_Click(sender As Object, e As EventArgs) Handles mnuLebelsLevel.Click
