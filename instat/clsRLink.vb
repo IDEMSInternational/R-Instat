@@ -2335,7 +2335,7 @@ Public Class RLink
     Public Sub OpenDialogFromScript(strNewScript As String)
         Dim lstNewRCodeStructures As New List(Of RCodeStructure)
 
-        Dim clsRScript As RScript.clsRScript = New RScript.clsRScript(strNewScript.Replace(" ", [String].Empty))
+        Dim clsRScript As RScript.clsRScript = New RScript.clsRScript(strNewScript)
 
         For Each clsRStatement As RScript.clsRStatement In clsRScript.lstRStatements
             lstNewRCodeStructures.Add(ProcessSingleRStatement(clsRStatement))

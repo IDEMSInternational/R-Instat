@@ -128,8 +128,9 @@
     <Reference Include="RDotNet, Version=1.8.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\R.NET.1.8.2\lib\netstandard2.0\RDotNet.dll</HintPath>
     </Reference>
-    <Reference Include="RScript">
-      <HintPath>..\..\..\..\Downloads\RScript.dll</HintPath>
+    <Reference Include="RScript, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Pictures\RScript.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

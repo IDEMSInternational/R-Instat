@@ -19,10 +19,9 @@ Imports instat.Translations
 Public Class dlgSplitText
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private bLoadFromScript As Boolean = False
     Private clsTextComponentsFixed, clsTextComponentsMaximum As New RFunction
     Private clsBinaryColumns As New RFunction
-    Private lstRCodeStructure As List(Of RCodeStructure)
+    Private lstRCodeStructure As New List(Of RCodeStructure)
     Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -31,11 +30,6 @@ Public Class dlgSplitText
         End If
         If bReset Then
             SetDefaults()
-        End If
-        If bLoadFromScript Then
-            clsTextComponentsFixed = lstRCodeStructure(1)
-            SplitTextOptions()
-            bLoadFromScript = False
         End If
         SetRCodeForControls(bReset)
         bReset = False
@@ -117,7 +111,34 @@ Public Class dlgSplitText
         clsTextComponentsFixed.SetAssignTo(strTemp:="split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="split", bAssignToIsPrefix:=True)
         clsTextComponentsMaximum.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="split", bAssignToIsPrefix:=True)
         clsBinaryColumns.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
+
+        If lstRCodeStructure.Count > 0 Then
+            AssignFunction(clsTextComponentsFixed)
+            AssignFunction(clsTextComponentsMaximum)
+            AssignFunction(clsBinaryColumns)
+            lstRCodeStructure.Clear()
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
+        End If
+    End Sub
+
+    Private Sub AssignFunction(ByRef clsRFunction As RFunction)
+        If lstRCodeStructure.Count > 0 Then
+            Dim clsRFunctionScript As RFunction = TryCast(lstRCodeStructure(1), RFunction)
+
+            If clsRFunction.strRCommand = clsRFunctionScript.strRCommand Then
+                clsRFunction = clsRFunctionScript
+                ucrBase.clsRsyntax.SetBaseRFunction(clsRFunction)
+                'Temporary fix
+                If Not IsNothing(clsRFunction.GetParameter("var").clsArgumentCodeStructure) Then
+                    Dim clsVarParameterValue As New RCodeStructure
+                    clsVarParameterValue = clsRFunction.GetParameter("var").clsArgumentCodeStructure
+
+                    clsTextComponentsFixed.AddParameter("string", clsRCodeStructureParameter:=clsVarParameterValue, iPosition:=0)
+                End If
+
+            End If
+        End If
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -173,7 +194,6 @@ Public Class dlgSplitText
 
     Public Sub OpenFromScript(lstNewRcodeStructure As List(Of RCodeStructure))
         bReset = True
-        bLoadFromScript = True
         lstRCodeStructure = lstNewRcodeStructure
     End Sub
 End Class
