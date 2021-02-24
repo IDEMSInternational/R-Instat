@@ -860,11 +860,14 @@ Public Class ucrDataView
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsNNonNumeric.ToScript(), bSilent:=True)
             If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
                 iNonNumeric = expTemp.AsNumeric(0)
-                ' If all values are non-numeric or all values are numeric then convert function will automatically do the correct convert.
-                If iNonNumeric = 0 OrElse iNonNumeric = iRowCountFull Then
+                ' If all values are numeric then force ignore labels and do a "normal" convert.
+                If iNonNumeric = 0 Then
+                    clsConvertToNumeric.AddParameter("ignore_labels", "TRUE", iPosition:=6)
                     RunScriptFromDataView(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
-
-                    ' Only give user the choice when there are a mixture of numeric and non-numeric values.
+                    ' If all values are non-numeric then do a "labelled" convert.
+                ElseIf iNonNumeric = iRowCountFull Then
+                    RunScriptFromDataView(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
+                    ' If there are a mixture of numeric and non-numeric values give the user the choice.
                 ElseIf iNonNumeric > 0 Then
                     frmConvertToNumeric.SetColumnName(strCol)
                     frmConvertToNumeric.SetNonNumeric(iNonNumeric)

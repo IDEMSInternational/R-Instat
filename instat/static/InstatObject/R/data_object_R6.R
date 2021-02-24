@@ -1189,7 +1189,8 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
     }
     else if(to_type == "numeric") {
       if(ignore_labels) {
-        new_col <- as.numeric(curr_col)
+        if (is.factor(curr_col)) new_col <- as.numeric(levels(curr_col))[curr_col]
+        else new_col <- as.numeric(curr_col)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name) && !is.numeric(curr_col)) {
