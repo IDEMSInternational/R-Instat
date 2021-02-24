@@ -28,7 +28,7 @@ Public Class dlgTwoVariableFitModel
 
     'Tests
     Private clsTtestFunction, clsWilcoxTestFunction, clsVarTestFunction, clsAnsariTestFuntion,
-        clsMoodTestFunction, clsCorTestFunction, clsCorrelationFunction, clsKruskalTestFunction, clsOnewayTestFunction,
+        clsMoodTestFunction, clsCorTestFunction, clsKruskalTestFunction, clsOnewayTestFunction,
         clsBarletteTestFunction, clsMcnemarTestFunction, clsFlignerTestFunction, clsFisherTestFunction,
         clsXchisgTestFunction, clsPropTestFunction As New RFunction
 
@@ -133,11 +133,11 @@ Public Class dlgTwoVariableFitModel
         ucrInputConfidenceInterval.bAllowNonConditionValues = True
 
         ucrInputNullHypothesis.SetParameter(New RParameter("mu", 3))
-        ucrInputNullHypothesis.SetValidationTypeAsNumeric(dcmMin:=0, bIncludeMin:=True, dcmMax:=1, bIncludeMax:=True)
+        ucrInputNullHypothesis.SetValidationTypeAsNumeric(dcmMin:=0, dcmMax:=1)
         ucrInputNullHypothesis.AddQuotesIfUnrecognised = False
 
         ucrInputTest.AddToLinkedControls(ucrInputConfidenceInterval, {"t", "t paired", "wilcox",
-                                         "var", "ansari", "cor"}, bNewLinkedHideIfParameterMissing:=True)
+                                         "var", "ansari", "cor", "spearman", "kendall"}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputTest.AddToLinkedControls(ucrInputNullHypothesis, {"t", "t paired", "wilcox"},
                                          bNewLinkedHideIfParameterMissing:=True)
         ucrInputConfidenceInterval.SetLinkedDisplayControl(lblConfidenceLevel)
@@ -196,7 +196,6 @@ Public Class dlgTwoVariableFitModel
         clsPropTestFunction = New RFunction
         clsTtestFunction = New RFunction
         clsMcnemarTestFunction = New RFunction
-        clsCorrelationFunction = New RFunction
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -331,8 +330,6 @@ Public Class dlgTwoVariableFitModel
 
         clsMcnemarTestFunction.SetRCommand("mcnemar.test")
 
-        clsCorrelationFunction.SetRCommand("cor")
-
         ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
         ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
         ucrBase.clsRsyntax.SetBaseRFunction(clsLM)
@@ -367,7 +364,6 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsFisherTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=17)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=18)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMcnemarTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=19)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("y", iNewPosition:=0), iAdditionalPairNo:=20)
 
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=2)
@@ -382,7 +378,6 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsPropTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=11)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=12)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsMcnemarTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=13)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsCorrelationFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=14)
 
         ' Additional Rcode for test functions
         ucrSaveModels.AddAdditionalRCode(clsWilcoxTestFunction, iAdditionalPairNo:=1)
@@ -399,7 +394,6 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.AddAdditionalRCode(clsTtestFunction, iAdditionalPairNo:=12)
         ucrSaveModels.AddAdditionalRCode(clsMcnemarTestFunction, iAdditionalPairNo:=13)
         ucrSaveModels.AddAdditionalRCode(clsGLM, iAdditionalPairNo:=14)
-        ucrSaveModels.AddAdditionalRCode(clsCorrelationFunction, iAdditionalPairNo:=15)
 
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=2)
@@ -514,6 +508,7 @@ Public Class dlgTwoVariableFitModel
                 Case "mood"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMoodTestFunction)
                 Case "cor"
+                    clsCorTestFunction.AddParameter("method", Chr(34) & "pearson" & Chr(34))
                     ucrBase.clsRsyntax.SetBaseRFunction(clsCorTestFunction)
                 Case "kruskal"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsKruskalTestFunction)
@@ -530,11 +525,11 @@ Public Class dlgTwoVariableFitModel
                 Case "mcnemar"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsMcnemarTestFunction)
                 Case "spearman"
-                    clsCorrelationFunction.AddParameter("method", Chr(34) & "spearman" & Chr(34))
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
+                    clsCorTestFunction.AddParameter("method", Chr(34) & "spearman" & Chr(34))
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsCorTestFunction)
                 Case "kendall"
-                    clsCorrelationFunction.AddParameter("method", Chr(34) & "kendall" & Chr(34))
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationFunction)
+                    clsCorTestFunction.AddParameter("method", Chr(34) & "kendall" & Chr(34))
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsCorTestFunction)
             End Select
         End If
     End Sub
