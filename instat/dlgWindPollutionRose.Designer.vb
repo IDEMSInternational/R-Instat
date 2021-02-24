@@ -82,7 +82,7 @@ Partial Class dlgWindPollutionRose
         'lblType
         '
         Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(413, 102)
+        Me.lblType.Location = New System.Drawing.Point(411, 84)
         Me.lblType.Name = "lblType"
         Me.lblType.Size = New System.Drawing.Size(85, 13)
         Me.lblType.TabIndex = 16
@@ -195,9 +195,9 @@ Partial Class dlgWindPollutionRose
         Me.ucrInputType.AddQuotesIfUnrecognised = True
         Me.ucrInputType.GetSetSelectedIndex = -1
         Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(495, 100)
+        Me.ucrInputType.Location = New System.Drawing.Point(416, 100)
         Me.ucrInputType.Name = "ucrInputType"
-        Me.ucrInputType.Size = New System.Drawing.Size(57, 21)
+        Me.ucrInputType.Size = New System.Drawing.Size(136, 21)
         Me.ucrInputType.TabIndex = 15
         '
         'ucrChkPaddle
