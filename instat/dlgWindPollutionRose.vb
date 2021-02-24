@@ -93,6 +93,7 @@ Public Class dlgWindPollutionRose
 
         ucrInputType.SetParameter(New RParameter("type", 9))
         dctType.Add("Default", Chr(34) & "default" & Chr(34))
+        dctType.Add("Station", Chr(34) & "station" & Chr(34))
         dctType.Add("Year", Chr(34) & "year" & Chr(34))
         dctType.Add("Hour", Chr(34) & "hour" & Chr(34))
         dctType.Add("Month", Chr(34) & "month" & Chr(34))
@@ -129,6 +130,13 @@ Public Class dlgWindPollutionRose
         ucrInputColor.SetItems(dctColor)
         ucrInputColor.SetDropDownStyleAsNonEditable()
 
+        UcrReceiverStation.SetParameter(New RParameter("station", 13))
+        UcrReceiverStation.Selector = ucrSelectorWindPollutionRose
+        UcrReceiverStation.SetParameterIsString()
+        UcrReceiverStation.bExcludeFromSelector = True
+        UcrReceiverStation.SetClimaticType("station")
+        UcrReceiverStation.bAutoFill = True
+
         ucrSaveGraph.SetPrefix("wind_pollution_rose")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -141,11 +149,11 @@ Public Class dlgWindPollutionRose
         clsPollutionRoseFunction = New RFunction
         clsPollutionRoseFunction.SetRCommand("pollution_rose")
 
-        clsPollutionRoseFunction.AddParameter("statistic", Chr(34) & "prop.count" & Chr(34), iPosition:=13)
         clsPollutionRoseFunction.AddParameter("include_pollutant", "FALSE", iPosition:=7)
         clsPollutionRoseFunction.AddParameter("paddle", "FALSE", iPosition:=8)
-        clsPollutionRoseFunction.AddParameter("type", Chr(34) & "default" & Chr(34), iPosition:=8)
-        clsPollutionRoseFunction.AddParameter("key.position", Chr(34) & "right" & Chr(34), iPosition:=11)
+        clsPollutionRoseFunction.AddParameter("type", Chr(34) & "default" & Chr(34), iPosition:=9)
+        clsPollutionRoseFunction.AddParameter("key.position", Chr(34) & "right" & Chr(34), iPosition:=10)
+        clsPollutionRoseFunction.AddParameter("statistic", Chr(34) & "prop.count" & Chr(34), iPosition:=11)
         clsPollutionRoseFunction.AddParameter("cols", Chr(34) & "default" & Chr(34), iPosition:=12)
 
         ucrSelectorWindPollutionRose.Reset()
