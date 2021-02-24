@@ -358,6 +358,12 @@
     <Compile Include="dlgWindPollutionRose.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgCircularDensityPlotsOptions.Designer.vb">
+      <DependentUpon>sdgCircularDensityPlotsOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCircularDensityPlotsOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgClimaticNCMPMetadata.Designer.vb">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
     </Compile>
@@ -2788,6 +2794,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgCircularDensityPlotsOptions.resx">
+      <DependentUpon>sdgCircularDensityPlotsOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticNCMPMetadata.resx">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
