@@ -177,7 +177,7 @@
     <value>210, 17</value>
   </data>
   <data name="rdoDispOutputWindow.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="rdoDispOutputWindow.Text" xml:space="preserve">
     <value>Display in Output Window</value>
@@ -285,7 +285,7 @@
     <value>89, 13</value>
   </data>
   <data name="lblNumberofRows.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="lblNumberofRows.Text" xml:space="preserve">
     <value>Number of Rows:</value>
@@ -309,7 +309,7 @@
     <value>210, 17</value>
   </data>
   <data name="rdoHTMLOutputWindow.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="rdoHTMLOutputWindow.Text" xml:space="preserve">
     <value>Display HTML in Output Window</value>
@@ -334,13 +334,13 @@
     <value>Flat</value>
   </data>
   <data name="rdoViewAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 9</value>
+    <value>81, 12</value>
   </data>
   <data name="rdoViewAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 28</value>
+    <value>113, 28</value>
   </data>
   <data name="rdoViewAll.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="rdoViewAll.Text" xml:space="preserve">
     <value>All Columns</value>
@@ -367,13 +367,13 @@
     <value>Flat</value>
   </data>
   <data name="rdoViewSelectedColumnsRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 9</value>
+    <value>194, 12</value>
   </data>
   <data name="rdoViewSelectedColumnsRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 28</value>
+    <value>113, 28</value>
   </data>
   <data name="rdoViewSelectedColumnsRows.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="rdoViewSelectedColumnsRows.Text" xml:space="preserve">
     <value>Choose Columns</value>
@@ -394,10 +394,10 @@
     <value>1</value>
   </data>
   <data name="ucrPnlViewData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>47, 5</value>
+    <value>70, 8</value>
   </data>
   <data name="ucrPnlViewData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>335, 35</value>
+    <value>248, 35</value>
   </data>
   <data name="ucrPnlViewData.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -430,7 +430,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkSortColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrChkSortColumn.Name" xml:space="preserve">
     <value>ucrChkSortColumn</value>
