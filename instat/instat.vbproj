@@ -178,6 +178,7 @@
     <Compile Include="clsCustomColourTable.vb" />
     <Compile Include="clsCustomRenderer.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
+    <Compile Include="clsGridROperations.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsPopup.vb" />
     <Compile Include="clsQualityControl.vb" />

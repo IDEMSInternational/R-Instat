@@ -29,7 +29,6 @@ Public Class ucrDataView
     Private iRowCountFull As Integer
     Private iRowCountFilter As Integer
     Private iColumnCount As Integer
-    Private clsNNonNumeric As New RFunction
     Private clsGetColumnsFromData As New RFunction
     Private clsAppendVariablesMetaData As New RFunction
     Private clsUnhideAllColumns As New RFunction
@@ -37,7 +36,6 @@ Public Class ucrDataView
     Private clsColumnNames As New RFunction
     Private clsDeleteColumns As New RFunction
     Private clsConvertTo As New RFunction
-    Private clsConvertToNumeric As New RFunction
     Private clsInsertRows As New RFunction
     Private clsDeleteRows As New RFunction
     Private clsReplaceValue As New RFunction
@@ -66,6 +64,19 @@ Public Class ucrDataView
         SetRFunctions()
     End Sub
 
+    ''' <summary>
+    ''' Run any R operation/command from the grid by passing a Function which will run the R operation/command.
+    ''' This wrapper ensures consistency in what is done before and after running an R command.
+    ''' </summary>
+    ''' <param name="action">A function that will run an R operation/command, usually from GridROperations.</param>
+    Private Sub RunRCommand(action As Action)
+        Cursor = Cursors.WaitCursor
+        grdData.Enabled = False
+        action()
+        grdData.Enabled = True
+        Cursor = Cursors.Default
+    End Sub
+
     'Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
     '    MyBase.OnFormClosing(e)
     '    If Not e.Cancel AndAlso e.CloseReason = CloseReason.UserClosing Then
@@ -75,14 +86,12 @@ Public Class ucrDataView
     'End Sub
 
     Private Sub SetRFunctions()
-        clsNNonNumeric.SetRCommand("n_non_numeric")
         clsGetColumnsFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsAppendVariablesMetaData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
         clsInsertColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsDeleteColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_columns_in_data")
         clsConvertTo.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
-        clsConvertToNumeric.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
         clsInsertRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
         clsDeleteRows.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_rows_in_data")
         clsUnhideAllColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$unhide_all_columns")
@@ -463,10 +472,6 @@ Public Class ucrDataView
         dlgCopyDataFrame.ShowDialog()
     End Sub
 
-    Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
-        ConvertToNumeric()
-    End Sub
-
     Private Sub mnuLevelsLabels_Click(sender As Object, e As EventArgs) Handles mnuLevelsLabels.Click
         Dim strType As String
         Dim strColumns() As String
@@ -596,7 +601,6 @@ Public Class ucrDataView
             clsInsertColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsDeleteColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsConvertTo.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
-            clsConvertToNumeric.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsInsertRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsDeleteRows.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsUnhideAllColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
@@ -837,57 +841,8 @@ Public Class ucrDataView
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
     End Sub
 
-    Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click
-        ConvertToNumeric()
-    End Sub
-
-    Private Sub ConvertToNumeric()
-        Dim expTemp As SymbolicExpression
-        Dim iNonNumeric As Integer
-        Dim arrConvertCols() As String
-
-        arrConvertCols = SelectedColumnsAsArray()
-
-        clsConvertToNumeric.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
-        For Each strCol As String In arrConvertCols
-            clsConvertToNumeric.AddParameter("col_names", Chr(34) & strCol & Chr(34), iPosition:=1)
-            clsConvertToNumeric.RemoveParameterByName("ignore_labels")
-
-            clsGetColumnsFromData.AddParameter("col_names", Chr(34) & strCol & Chr(34), iPosition:=1)
-            clsGetColumnsFromData.AddParameter("use_current_filter", "FALSE", iPosition:=4)
-
-            clsNNonNumeric.AddParameter("x", clsRFunctionParameter:=clsGetColumnsFromData, iPosition:=0)
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsNNonNumeric.ToScript(), bSilent:=True)
-            If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
-                iNonNumeric = expTemp.AsNumeric(0)
-                ' If all values are numeric then force ignore labels and do a "normal" convert.
-                If iNonNumeric = 0 Then
-                    clsConvertToNumeric.AddParameter("ignore_labels", "TRUE", iPosition:=6)
-                    RunScriptFromDataView(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
-                    ' If all values are non-numeric then do a "labelled" convert.
-                ElseIf iNonNumeric = iRowCountFull Then
-                    RunScriptFromDataView(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
-                    ' If there are a mixture of numeric and non-numeric values give the user the choice.
-                ElseIf iNonNumeric > 0 Then
-                    frmConvertToNumeric.SetColumnName(strCol)
-                    frmConvertToNumeric.SetNonNumeric(iNonNumeric)
-                    frmConvertToNumeric.ShowDialog()
-                    ' Yes for "normal" convert and No for "labelled" convert
-                    If frmConvertToNumeric.DialogResult = DialogResult.Yes Then
-                        clsConvertToNumeric.AddParameter("ignore_labels", "TRUE", iPosition:=6)
-                        RunScriptFromDataView(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
-                    ElseIf frmConvertToNumeric.DialogResult = DialogResult.No Then
-                        RunScriptFromDataView(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
-                    ElseIf frmConvertToNumeric.DialogResult = DialogResult.Cancel Then
-                        Continue For
-                    End If
-                Else
-                    RunScriptFromDataView(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
-                End If
-            Else
-                RunScriptFromDataView(clsConvertToNumeric.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
-            End If
-        Next
+    Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click, mnuConvertVariate.Click
+        RunRCommand(Sub() GridROperations.ConvertToNumeric(grdCurrSheet.Name, SelectedColumnsAsArray, iRowCountFull))
     End Sub
 
     Private Sub mnuLebelsLevel_Click(sender As Object, e As EventArgs) Handles mnuLebelsLevel.Click
