@@ -19,33 +19,19 @@
         ''' <param name="e">        Startup next instance event information. </param>
         '''----------------------------------------------------------------------------------------
         Private Sub MyApplication_StartupNextInstance(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupNextInstanceEventArgs) Handles Me.StartupNextInstance
-            Dim strPath As String
+            frmMain.TopMost = True 'Needed to force the window above the other windows
+            frmMain.TopMost = False 'After the window is forced above other windows, this will allow other windows to be on top of this window
+            If frmMain.isMinimised Then
+                frmMain.WindowState = If(frmMain.isMaximised, FormWindowState.Maximized, FormWindowState.Normal)
+            End If
+
             If e.CommandLine.Count > 0 Then
-                frmMain.TopMost = True 'Needed to force the window above the other windows
-                frmMain.TopMost = False 'After the window being above other windows this will allow going to other windows
                 If Application.OpenForms.OfType(Of dlgImportDataset).Any Then
-                    strPath = Replace(e.CommandLine(0).ToString, "\", "/")
-                    dlgImportDataset.ucrInputFilePath.SetName(strPath)
+                    dlgImportDataset.ucrInputFilePath.SetName(Replace(e.CommandLine(0).ToString, "\", "/"))
                 Else
-                    If frmMain.isMaximised AndAlso frmMain.isMinimised Then
-                        frmMain.WindowState = FormWindowState.Maximized
-                        dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
-                        dlgImportDataset.bStartOpenDialog = False
-                        dlgImportDataset.ShowDialog()
-                    ElseIf Not frmMain.isMaximised AndAlso frmMain.isMinimised Then
-                        frmMain.WindowState = FormWindowState.Normal
-                        dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
-                        dlgImportDataset.bStartOpenDialog = False
-                        dlgImportDataset.ShowDialog()
-                    End If
-                End If
-            Else
-                frmMain.TopMost = True 'Needed to force the window above the other windows
-                frmMain.TopMost = False 'After the window being above other windows this will allow going to other windows
-                If frmMain.isMaximised AndAlso frmMain.isMinimised Then
-                    frmMain.WindowState = FormWindowState.Maximized
-                ElseIf Not frmMain.isMaximised AndAlso frmMain.isMinimised Then
-                    frmMain.WindowState = FormWindowState.Normal
+                    dlgImportDataset.strFileToOpenOn = e.CommandLine(0)
+                    dlgImportDataset.bStartOpenDialog = False
+                    dlgImportDataset.ShowDialog()
                 End If
             End If
         End Sub
