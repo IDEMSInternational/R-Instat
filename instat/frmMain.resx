@@ -3561,9 +3561,6 @@
   <data name="mnuStructuredCircularScatterPlot.Text" xml:space="preserve">
     <value>Scatter Plot...</value>
   </data>
-  <data name="mnuStructuredCircularDensityPlot.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuStructuredCircularDensityPlot.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 22</value>
   </data>
