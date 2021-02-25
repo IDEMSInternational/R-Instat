@@ -10,10 +10,7 @@
         ''' <summary>   Handles the event raised when launching a single-instance application. 
         '''             If the event was triggered by double-clicking on a data file, then the sub 
         '''             opens R-Instat (if not already running), displays the import dataset dialog 
-        '''             and populates the dialog with the double-clicked file's path. 
-        '''             If the event was triggered by just starting the R-Instat executable, then 
-        '''             the sub displays a message box informing the user that R-Instat is already 
-        '''             running.</summary>
+        '''             and populates the dialog with the double-clicked file's path.</summary>
         '''
         ''' <param name="sender">   Source of the event. </param>
         ''' <param name="e">        Startup next instance event information. </param>
