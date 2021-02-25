@@ -89,10 +89,10 @@ Public Class dlgDescribeTwoVariable
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_count_missing", Chr(34) & "summary_count_missing" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
         clsSummariesList.AddParameter("summary_min", Chr(34) & "summary_min" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-        clsSummariesList.AddParameter("lower_quartile", Chr(34) & "lower_quartile" & Chr(34), bIncludeArgumentName:=False, iPosition:=2)
+        clsSummariesList.AddParameter("p25", Chr(34) & "p25" & Chr(34), bIncludeArgumentName:=False, iPosition:=2)
         clsSummariesList.AddParameter("summary_median", Chr(34) & "summary_median" & Chr(34), bIncludeArgumentName:=False, iPosition:=3)
         clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False, iPosition:=4)
-        clsSummariesList.AddParameter("upper_quartile", Chr(34) & "upper_quartile" & Chr(34), bIncludeArgumentName:=False, iPosition:=5)
+        clsSummariesList.AddParameter("p75", Chr(34) & "p75" & Chr(34), bIncludeArgumentName:=False, iPosition:=5)
         clsSummariesList.AddParameter("summary_max", Chr(34) & "summary_max" & Chr(34), bIncludeArgumentName:=False, iPosition:=6)
 
         clsRCustomSummary.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary")
