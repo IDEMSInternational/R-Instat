@@ -15,9 +15,11 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.ComponentModel
+Imports instat
 
 Public Class ucrInputComboBox
     Dim strItemsType As String = ""
+    Dim bHasRFunctioParamAsString As Boolean = False
 
     Public Sub New()
 
@@ -198,8 +200,9 @@ Public Class ucrInputComboBox
         End If
     End Sub
 
-    Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True, Optional bSetCondtions As Boolean = True)
+    Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True, Optional bSetCondtions As Boolean = True, Optional bNewHasRParamFunctionAsString As Boolean = False)
         Dim kvpTemp As KeyValuePair(Of String, String)
+        bHasRFunctioParamAsString = bNewHasRParamFunctionAsString
 
         If bClearExisting Then
             cboInput.Items.Clear()
@@ -338,4 +341,25 @@ Public Class ucrInputComboBox
     Friend Sub AddToReceiverAtCursorPosition(v As String)
         Throw New NotImplementedException()
     End Sub
+
+    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True, Optional bCloneIfNeeded As Boolean = False)
+        If bHasRFunctioParamAsString Then
+            'checking whether the parameter is not Nothing
+            If Not IsNothing(lstAllRParameters(0).strArgumentName) Then
+                'checking whether the parameter argument name is not nothing .I require this to compare with the parameter in the RCode
+                If Not IsNothing(clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName)) Then
+                    If clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).bIsFunction Then
+                        'check that script is not empty.Make sure you make script before changing the clsRCodeStructure
+                        clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).strArgumentValue = clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).clsArgumentCodeStructure.ToScript()
+                        clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).bIsFunction = False
+                        clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).bIsOperator = False
+                        clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).bIsString = True
+                        clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).clsArgumentCodeStructure = Nothing
+                    End If
+                End If
+            End If
+        End If
+        MyBase.SetRCode(clsNewCodeStructure:=clsNewCodeStructure, bReset:=bReset, bUpdate:=bUpdate, bCloneIfNeeded:=bCloneIfNeeded)
+    End Sub
+
 End Class

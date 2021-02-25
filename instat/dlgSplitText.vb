@@ -73,7 +73,7 @@ Public Class dlgSplitText
         dctPatternPairs.Add("Semicolon ;", Chr(34) & ";" & Chr(34))
         dctPatternPairs.Add("Hyphen -", Chr(34) & "-" & Chr(34))
         dctPatternPairs.Add("Underscore _", Chr(34) & "_" & Chr(34))
-        ucrInputPattern.SetItems(dctPatternPairs)
+        ucrInputPattern.SetItems(dctPatternPairs, bNewHasRParamFunctionAsString:=True)
         'ucrInputPattern.SetRDefault(Chr(34) & " " & Chr(34)) 'This is the default for clsTextComponents
         ucrInputPattern.bAllowNonConditionValues = True
 
@@ -130,15 +130,18 @@ Public Class dlgSplitText
                 clsRFunction = clsRFunctionScript
                 ucrBase.clsRsyntax.SetBaseRFunction(clsRFunction)
                 'Temporary fix
-                If Not IsNothing(clsRFunction.GetParameter("var").clsArgumentCodeStructure) Then
-                    Dim clsVarParameterValue As New RCodeStructure
-                    clsVarParameterValue = clsRFunction.GetParameter("var").clsArgumentCodeStructure
+                If Not IsNothing(clsRFunction.GetParameter("var")) Then
+                    If Not IsNothing(clsRFunction.GetParameter("var").clsArgumentCodeStructure) Then
+                        Dim clsVarParameterValue As New RCodeStructure
+                        clsVarParameterValue = clsRFunction.GetParameter("var").clsArgumentCodeStructure
 
-                    clsTextComponentsFixed.AddParameter("string", clsRCodeStructureParameter:=clsVarParameterValue, iPosition:=0)
+                        clsTextComponentsFixed.AddParameter("string", clsRCodeStructureParameter:=clsVarParameterValue, iPosition:=0)
+                    End If
                 End If
+            End If
+
 
             End If
-        End If
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
