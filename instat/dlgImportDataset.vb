@@ -446,6 +446,7 @@ Public Class dlgImportDataset
 
             If DialogResult.OK = dlgOpen.ShowDialog() Then
                 ucrSaveFile.Reset()
+                'ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=False)
                 'TODO This is in place for when we allow multiple files selected.
                 bMultiFiles = (dlgOpen.FileNames.Count > 1)
                 If NumberOfFileTypes(dlgOpen.FileNames) > 1 Then
@@ -453,6 +454,7 @@ Public Class dlgImportDataset
                     SetControlsFromFile("")
                 Else
                     dctSelectedExcelSheets.Clear()
+                    clbSheets.Items.Clear()
                     SetControlsFromFile(dlgOpen.FileName)
                 End If
             Else
@@ -636,15 +638,22 @@ Public Class dlgImportDataset
             strFileType = ""
         End If
         If strFileType <> "" AndAlso strFileType <> "RDS" Then
-            'ucrSaveFile.Show()
-            'ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
-            'don't ovewrite the name for excel sheets if there is a selected sheet name
-            If (strFileType <> "XLSX" OrElse strFileType <> "XLS") AndAlso clbSheets.CheckedItems.Count = 0 Then
+            If (strFileType = "XLSX" OrElse strFileType = "XLS") Then
+                ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
+                If clbSheets.CheckedItems.Count > 1 Then
+                    ucrSaveFile.Hide()
+                ElseIf clbSheets.CheckedItems.Count = 1 Then
+                    ucrSaveFile.Show()
+                    ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First(), bSilent:=True)
+                ElseIf clbSheets.CheckedItems.Count = 0 Then
+                    ucrSaveFile.Show()
+                    ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
+                End If
+            Else
+                ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=False)
                 ucrSaveFile.Show()
                 ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
             End If
-        Else
-            ucrSaveFile.Hide()
         End If
         RefreshFilePreview()
         RefreshFrameView()
