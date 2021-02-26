@@ -21,7 +21,7 @@ Public Class dlgSplitText
     Private bReset As Boolean = True
     Private clsTextComponentsFixed, clsTextComponentsMaximum As New RFunction
     Private clsBinaryColumns As New RFunction
-    Private lstRCodeStructure As New List(Of RCodeStructure)
+    Private lstRCodeStructure As List(Of RCodeStructure)
     Private Sub dlgSplitText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -29,7 +29,7 @@ Public Class dlgSplitText
             bFirstLoad = False
         End If
         If bReset Then
-            SetDefaults()
+            SetDefaults(lstRCodeStructure)
         End If
         SetRCodeForControls(bReset)
         bReset = False
@@ -87,62 +87,96 @@ Public Class dlgSplitText
         ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
     End Sub
 
-    Private Sub SetDefaults()
+    Private Sub SetDefaults(Optional lstOfRCodeStructure As List(Of RCodeStructure) = Nothing)
         clsTextComponentsFixed = New RFunction
         clsTextComponentsMaximum = New RFunction
         clsBinaryColumns = New RFunction
 
         ucrSelectorSplitTextColumn.Reset()
 
+        'Setting of Package name and R commands for Rfunction happens before  we can check if any of these
+        'Rfunction matches the one lstOfRcodeStructure
         clsBinaryColumns.SetPackageName("questionr")
         clsBinaryColumns.SetRCommand("multi.split")
 
         clsTextComponentsFixed.SetPackageName("stringr")
         clsTextComponentsFixed.SetRCommand("str_split_fixed")
-        clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-        clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
 
         clsTextComponentsMaximum.SetPackageName("stringr")
         clsTextComponentsMaximum.SetRCommand("str_split")
-        clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-        clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
-        clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
+
+        If IsNothing(lstRCodeStructure) Then
+            clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+            clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
+
+            clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+            clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
+            clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
+            'This dialogue only requires one line of code to load
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstOfRCodeStructure(0), RFunction)) Then
+                Dim bMatchOneRfunction As Boolean = False
+                'loop through the three Rfunctions
+                If TryCast(lstOfRCodeStructure(0), RFunction).strRCommand = clsTextComponentsFixed.strRCommand Then
+                    If bMatchOneRfunction Then
+                        MsgBox("Developer error:More Than one Rfunctions match the Rfunction from the script")
+                        ' Exit if
+                    Else
+                        clsTextComponentsFixed = lstOfRCodeStructure(0)
+
+                        clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+                        clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
+                        clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
+
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
+                        bMatchOneRfunction = True
+                    End If
+                ElseIf TryCast(lstOfRCodeStructure(0), RFunction).strRCommand = clsBinaryColumns.strRCommand Then
+                    If bMatchOneRfunction Then
+                        MsgBox("Developer error:More Than one Rfunctions match the Rfunction from the script")
+                        ' Exit if
+                    Else
+                        clsBinaryColumns = lstOfRCodeStructure(0)
+
+                        clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+                        clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
+
+                        clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+                        clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
+                        clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
+
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
+                        bMatchOneRfunction = True
+                    End If
+                ElseIf TryCast(lstOfRCodeStructure(0), RFunction).strRCommand = clsTextComponentsMaximum.strRCommand Then
+                    If bMatchOneRfunction Then
+                        MsgBox("Developer error:More Than one Rfunctions match the Rfunction from the script")
+                        ' Exit if
+                    Else
+                        clsTextComponentsMaximum = lstOfRCodeStructure(0)
+
+                        clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+                        clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
+
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
+                        bMatchOneRfunction = True
+                    End If
+                End If
+            Else
+                MsgBox("Developer error:The Script must be an RFunction")
+            End If
+        Else
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        End If
+
+
 
         clsTextComponentsFixed.SetAssignTo(strTemp:="split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="split", bAssignToIsPrefix:=True)
         clsTextComponentsMaximum.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="split", bAssignToIsPrefix:=True)
         clsBinaryColumns.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
-
-        If lstRCodeStructure.Count > 0 Then
-            AssignFunction(clsTextComponentsFixed)
-            AssignFunction(clsTextComponentsMaximum)
-            AssignFunction(clsBinaryColumns)
-            lstRCodeStructure.Clear()
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
-        End If
     End Sub
 
-    Private Sub AssignFunction(ByRef clsRFunction As RFunction)
-        If lstRCodeStructure.Count > 0 Then
-            Dim clsRFunctionScript As RFunction = TryCast(lstRCodeStructure(1), RFunction)
-
-            If clsRFunction.strRCommand = clsRFunctionScript.strRCommand Then
-                clsRFunction = clsRFunctionScript
-                ucrBase.clsRsyntax.SetBaseRFunction(clsRFunction)
-                'Temporary fix
-                If Not IsNothing(clsRFunction.GetParameter("var")) Then
-                    If Not IsNothing(clsRFunction.GetParameter("var").clsArgumentCodeStructure) Then
-                        Dim clsVarParameterValue As New RCodeStructure
-                        clsVarParameterValue = clsRFunction.GetParameter("var").clsArgumentCodeStructure
-
-                        clsTextComponentsFixed.AddParameter("string", clsRCodeStructureParameter:=clsVarParameterValue, iPosition:=0)
-                    End If
-                End If
-            End If
-
-
-            End If
-    End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputPattern.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("pattern", 1), iAdditionalPairNo:=1)
