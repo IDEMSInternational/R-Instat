@@ -31,6 +31,7 @@ Public Class dlgTwoVariableFitModel
         clsMoodTestFunction, clsCorTestFunction, clsKruskalTestFunction, clsOnewayTestFunction,
         clsBarletteTestFunction, clsMcnemarTestFunction, clsFlignerTestFunction, clsFisherTestFunction,
         clsXchisgTestFunction, clsPropTestFunction As New RFunction
+    Private clsOneWayFormulaOperator As New ROperator
 
     'General case codes
     Private clsFormulaOperator As New ROperator
@@ -86,18 +87,20 @@ Public Class dlgTwoVariableFitModel
         ucrPnlModelType.AddRadioButton(rdoTest)
         ucrPnlModelType.AddToLinkedControls(ucrModelPreview, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlModelType.AddFunctionNamesCondition(rdoTest, {"t.test", "wilcox.test", "var.test", "ansari.test",
-                                                  "mood.test", "cor.test", "cor", "kruskal.test", "barlette.test",
-                                                  "fligner.test", "fisher.test", "xchisq.test", "prop.test"})
+                                                  "mood.test", "cor.test", "cor", "kruskal.test", "bartlett.test",
+                                                  "fligner.test", "fisher.test", "xchisq.test", "prop.test", "aov",
+                                                   "mcnemar.test"})
         ucrPnlModelType.AddFunctionNamesCondition(rdoGeneralCase, {"t.test", "wilcox.test", "var.test", "ansari.test",
-                                                  "mood.test", "cor.test", "cor", "kruskal.test", "barlette.test",
-                                                  "fligner.test", "fisher.test", "xchisq.test", "prop.test"}, False)
+                                                  "mood.test", "cor.test", "cor", "kruskal.test", "bartlett.test",
+                                                  "fligner.test", "fisher.test", "xchisq.test", "prop.test", "aov",
+                                                  "mcnemar.test"}, False)
         ucrPnlModelType.AddToLinkedControls(ucrDistributionChoice, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlModelType.AddToLinkedControls(ucrChkConvertToVariate, {rdoGeneralCase}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlModelType.AddToLinkedControls(ucrInputTest, {rdoTest}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
 
 
         ucrInputTest.SetItems({"t", "t paired", "wilcox", "var", "ansari", "mood",
-                                  "cor", "kruskal", "barlette", "fligner", "fisher", "chisq",
+                                  "cor", "kruskal", "bartlett", "fligner", "fisher", "chisq",
                                   "prop", "mcnemar"})
         ucrInputTest.SetDropDownStyleAsNonEditable()
 
@@ -133,7 +136,7 @@ Public Class dlgTwoVariableFitModel
         ucrInputConfidenceInterval.bAllowNonConditionValues = True
 
         ucrInputNullHypothesis.SetParameter(New RParameter("mu", 3))
-        ucrInputNullHypothesis.SetValidationTypeAsNumeric(dcmMin:=0, dcmMax:=1)
+        ucrInputNullHypothesis.SetValidationTypeAsNumeric()
         ucrInputNullHypothesis.AddQuotesIfUnrecognised = False
 
         ucrInputTest.AddToLinkedControls(ucrInputConfidenceInterval, {"t", "t paired", "wilcox",
@@ -196,6 +199,7 @@ Public Class dlgTwoVariableFitModel
         clsPropTestFunction = New RFunction
         clsTtestFunction = New RFunction
         clsMcnemarTestFunction = New RFunction
+        clsOneWayFormulaOperator = New ROperator
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -310,13 +314,16 @@ Public Class dlgTwoVariableFitModel
 
         clsKruskalTestFunction.SetRCommand("kruskal.test")
 
-        clsOnewayTestFunction.SetRCommand("oneway.test")
+        clsOneWayFormulaOperator.SetOperation("~")
 
-        clsBarletteTestFunction.SetRCommand("barlette.test")
+        clsOnewayTestFunction.SetRCommand("aov")
+        clsOnewayTestFunction.AddParameter("formula", clsROperatorParameter:=clsOneWayFormulaOperator, iPosition:=0)
+
+        clsBarletteTestFunction.SetRCommand("bartlett.test")
 
         clsFlignerTestFunction.SetRCommand("fligner.test")
 
-        clsFisherTestFunction.SetRCommand("fisher")
+        clsFisherTestFunction.SetRCommand("fisher.test")
 
         clsXchisgTestFunction.SetPackageName("mosaic")
         clsXchisgTestFunction.SetRCommand("xchisq.test")
@@ -364,6 +371,7 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsFisherTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=17)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=18)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMcnemarTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=19)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsOneWayFormulaOperator, New RParameter("SecondOperator", iNewPosition:=1), iAdditionalPairNo:=20)
 
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=2)
@@ -378,6 +386,7 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsPropTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=11)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=12)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsMcnemarTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=13)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsOneWayFormulaOperator, New RParameter("firstOperator", iNewPosition:=0), iAdditionalPairNo:=14)
 
         ' Additional Rcode for test functions
         ucrSaveModels.AddAdditionalRCode(clsWilcoxTestFunction, iAdditionalPairNo:=1)
@@ -394,6 +403,7 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.AddAdditionalRCode(clsTtestFunction, iAdditionalPairNo:=12)
         ucrSaveModels.AddAdditionalRCode(clsMcnemarTestFunction, iAdditionalPairNo:=13)
         ucrSaveModels.AddAdditionalRCode(clsGLM, iAdditionalPairNo:=14)
+        ucrSaveModels.AddAdditionalRCode(clsOnewayTestFunction, iAdditionalPairNo:=15)
 
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=2)
@@ -424,9 +434,12 @@ Public Class dlgTwoVariableFitModel
             Else
                 ucrBase.OKEnabled(False)
             End If
-        Else
-            ucrBase.OKEnabled(True)
-            'TODO
+        ElseIf rdoTest.checked Then
+            If Not ucrReceiverResponse.IsEmpty AndAlso Not ucrReceiverExplanatory.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
@@ -512,7 +525,7 @@ Public Class dlgTwoVariableFitModel
                     ucrBase.clsRsyntax.SetBaseRFunction(clsCorTestFunction)
                 Case "kruskal"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsKruskalTestFunction)
-                Case "barlette"
+                Case "bartlett"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsBarletteTestFunction)
                 Case "fligner"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsFlignerTestFunction)
@@ -530,6 +543,8 @@ Public Class dlgTwoVariableFitModel
                 Case "kendall"
                     clsCorTestFunction.AddParameter("method", Chr(34) & "kendall" & Chr(34))
                     ucrBase.clsRsyntax.SetBaseRFunction(clsCorTestFunction)
+                Case "oneway"
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsOnewayTestFunction)
             End Select
         End If
     End Sub
