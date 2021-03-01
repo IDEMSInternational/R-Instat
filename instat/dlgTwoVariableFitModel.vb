@@ -680,7 +680,7 @@ Public Class dlgTwoVariableFitModel
                     Else
                         strFirstVariableType = "numeric"
                     End If
-                    lblFirstVariableType.Text = "(" & strFirstVariableType & ")"
+                    lblFirstVariableType.Text = "(" & strFirstVariableType & ")" & "  Levels: " & GetNumberOfFactorLevels(ucrReceiverResponse.GetVariableNames(False))
                     lblFirstVariableType.ForeColor = SystemColors.Highlight
                 Else
                     strFirstVariableType = ""
@@ -694,7 +694,7 @@ Public Class dlgTwoVariableFitModel
                     Else
                         strSecondVariableType = "numeric"
                     End If
-                    lblSecondVariableType.Text = "(" & strSecondVariableType & ")"
+                    lblSecondVariableType.Text = "(" & strSecondVariableType & ")" & "  Levels: " & GetNumberOfFactorLevels(ucrReceiverExplanatory.GetVariableNames(False))
                     lblSecondVariableType.ForeColor = SystemColors.Highlight
                 Else
                     strSecondVariableType = ""
@@ -705,6 +705,23 @@ Public Class dlgTwoVariableFitModel
             End If
         End If
     End Sub
+
+    Private Function GetNumberOfFactorLevels(strColumnName As String) As String
+        Dim expColumn As SymbolicExpression
+        Dim clsGetFactorLevles As New RFunction
+        Dim iFactorCount As Integer = 0
+        clsGetFactorLevles.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_factor_levels")
+        clsGetFactorLevles.AddParameter("data_name", Chr(34) & ucrSelectorSimpleReg.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+        clsGetFactorLevles.AddParameter("col_name", Chr(34) & strColumnName & Chr(34), iPosition:=1)
+
+        expColumn = frmMain.clsRLink.RunInternalScriptGetValue(clsGetFactorLevles.ToScript(), bSilent:=False)
+        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
+            iFactorCount = expColumn.AsCharacter().ToList.Count
+            Return iFactorCount
+        Else
+            Return ""
+        End If
+    End Function
 
     Private Sub UpdatingTests()
         If strFirstVariableType = "numeric" Then
