@@ -1065,12 +1065,6 @@ Public Class dlgImportDataset
     Private Function GetMissingValueRString(strText As String) As String
         Dim arrStr() As String = strText.Split(",")
 
-        'if length is = 1 return an R string else return a vector of strings for R.
-        'please note the array length will never be 0
-        'If arrStr.Length = 1 Then
-        '    Return Chr(34) & arrStr(0) & Chr(34)
-        'End If
-
         Dim strRmissingValueString As String = ""
         For Each strTemp As String In arrStr
             If strRmissingValueString = "" Then
