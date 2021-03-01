@@ -51,9 +51,9 @@ Public Class dlgNewDataFrame
         ucrNudCols.SetMinMax(1, Integer.MaxValue)
 
         ' ucrNewSheetName
-        ucrNewDFName.SetIsTextBox()
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetLabelText("New Data Frame Name:")
+        ucrNewDFName.SetIsTextBox()
         ucrNewDFName.SetPrefix("data")
 
         'ucrRdoOptions
@@ -374,6 +374,12 @@ Public Class dlgNewDataFrame
 
             lstView.Items.Add(New ListViewItem({"occasions", "seq(as.Date(""1970/1/1""), by = ""4 months"", length = 30)"}))
             lstView.Items.Item(4).ToolTipText = "Regular sequence of monthly data"
+
+            lstView.Items.Add(New ListViewItem({"prob1", "c(0.01, 0.05, 0.1, 0.2, 0.5, 0.8, 0.9, 0.95, 0.99)"}))
+            lstView.Items.Add(New ListViewItem({"prob2", "c(0.5, 0.8, 0.9, 0.95, 0.98, 0.99, 0.995, 0.998, 0.999)"}))
+            lstView.Items.Add(New ListViewItem({"quant1", "seq(-4, 4)"}))
+            lstView.Items.Add(New ListViewItem({"quant2", "c(40, 50, 60, 80, 100, 130, 160, 200, 250)"}))
+
         End If
 
         'set respective handlers
