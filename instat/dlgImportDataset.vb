@@ -1079,7 +1079,7 @@ Public Class dlgImportDataset
                 strRmissingValueString = strRmissingValueString & "," & Chr(34) & strTemp.Trim & Chr(34)
             End If
         Next
-        strRmissingValueString = "c(" & strRmissingValueString & "," & Chr(34) & "" & Chr(34) & ")"
+        strRmissingValueString = "c(" & strRmissingValueString & "," & Chr(34) & Chr(34) & ")"
         Return strRmissingValueString
     End Function
 
