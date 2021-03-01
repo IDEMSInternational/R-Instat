@@ -95,7 +95,7 @@ Public Class dlgSplitText
         ucrSelectorSplitTextColumn.Reset()
 
         'Setting of Package name and R commands for Rfunction happens before  we can check if any of these
-        'Rfunction matches the one lstOfRcodeStructure
+        'Rfunction matches the one from the Script
         clsBinaryColumns.SetPackageName("questionr")
         clsBinaryColumns.SetRCommand("multi.split")
 
@@ -106,6 +106,7 @@ Public Class dlgSplitText
         clsTextComponentsMaximum.SetRCommand("str_split")
 
         If IsNothing(lstRCodeStructure) Then
+            'Continue with the updating Rfunction of Default value as normal
             clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
             clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
 
@@ -113,60 +114,63 @@ Public Class dlgSplitText
             clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
             clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
             ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
-            'This dialogue only requires one line of code to load
+            'This dialogue only requires one line of code to load hence this next elseIf statement
         ElseIf (lstRCodeStructure.Count = 1) Then
             If Not IsNothing(TryCast(lstOfRCodeStructure(0), RFunction)) Then
-                Dim bMatchOneRfunction As Boolean = False
-                'loop through the three Rfunctions
-                If TryCast(lstOfRCodeStructure(0), RFunction).strRCommand = clsTextComponentsFixed.strRCommand Then
-                    If bMatchOneRfunction Then
-                        MsgBox("Developer error:More Than one Rfunctions match the Rfunction from the script")
-                        ' Exit if
-                    Else
-                        clsTextComponentsFixed = lstOfRCodeStructure(0)
+                'bMatchTwoRfunction Determines if the ListofRcodeStructure from the 
+                'script matches more than one RFunction
+                Dim bMatchTwoRfunction As Boolean = False
+                Dim strRcommand = TryCast(lstOfRCodeStructure(0), RFunction).strRCommand
 
-                        clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-                        clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
-                        clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
+                For Each Rfunction In {clsTextComponentsFixed, clsTextComponentsMaximum, clsBinaryColumns}
+                    If strRcommand = Rfunction.strRCommand Then
+                        If bMatchTwoRfunction Then
+                            MsgBox("Developer error:More Than one Rfunctions match the Rfunction from the script")
+                            Exit For
+                            'TODO continue the normal loading of the dialogue if there
+                            'are more than one function matching the  Script
+                        Else
+                            If Rfunction Is clsTextComponentsFixed Then
+                                clsTextComponentsFixed = lstOfRCodeStructure(0)
 
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
-                        bMatchOneRfunction = True
+                                clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+                                clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
+                                clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
+
+                                ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
+                                bMatchTwoRfunction = True
+                            ElseIf Rfunction Is clsBinaryColumns Then
+                                clsBinaryColumns = lstOfRCodeStructure(0)
+
+                                clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+                                clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
+
+                                clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+                                clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
+                                clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
+
+                                ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
+                                bMatchTwoRfunction = True
+                            ElseIf Rfunction Is clsTextComponentsMaximum Then
+                                clsTextComponentsMaximum = lstOfRCodeStructure(0)
+
+                                clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+                                clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
+
+                                ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
+                                bMatchTwoRfunction = True
+                            End If
+                        End If
                     End If
-                ElseIf TryCast(lstOfRCodeStructure(0), RFunction).strRCommand = clsBinaryColumns.strRCommand Then
-                    If bMatchOneRfunction Then
-                        MsgBox("Developer error:More Than one Rfunctions match the Rfunction from the script")
-                        ' Exit if
-                    Else
-                        clsBinaryColumns = lstOfRCodeStructure(0)
-
-                        clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-                        clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
-
-                        clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-                        clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
-                        clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
-
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
-                        bMatchOneRfunction = True
-                    End If
-                ElseIf TryCast(lstOfRCodeStructure(0), RFunction).strRCommand = clsTextComponentsMaximum.strRCommand Then
-                    If bMatchOneRfunction Then
-                        MsgBox("Developer error:More Than one Rfunctions match the Rfunction from the script")
-                        ' Exit if
-                    Else
-                        clsTextComponentsMaximum = lstOfRCodeStructure(0)
-
-                        clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-                        clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
-
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
-                        bMatchOneRfunction = True
-                    End If
-                End If
+                Next
             Else
                 MsgBox("Developer error:The Script must be an RFunction")
             End If
+            'This returns the list of Rcode from the script to nothing to prevent begguing when reseting
+            lstRCodeStructure = Nothing
         Else
+            lstRCodeStructure = Nothing
+            'When the lstOfRcodeStructure has more than one Rfunction
             MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
         End If
 

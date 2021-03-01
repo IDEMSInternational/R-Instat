@@ -2341,6 +2341,8 @@ Public Class RLink
             lstNewRCodeStructures.Add(ProcessSingleRStatement(clsRStatement))
         Next
 
+        'Make it return only one line of code
+        lstNewRCodeStructures.RemoveAt(0)
         dlgSplitText.OpenFromScript(lstNewRCodeStructures)
         dlgSplitText.ShowDialog()
 
