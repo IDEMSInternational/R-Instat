@@ -45,23 +45,24 @@ Partial Class ucrFilePath
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilePath.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ucrInputFilePath.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = True
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(56, 2)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(77, 2)
         Me.ucrInputFilePath.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(240, 23)
-        Me.ucrInputFilePath.TabIndex = 7
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(260, 23)
+        Me.ucrInputFilePath.TabIndex = 2
         '
         'btnBrowse
         '
         Me.btnBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnBrowse.Location = New System.Drawing.Point(297, 1)
+        Me.btnBrowse.Location = New System.Drawing.Point(338, 1)
         Me.btnBrowse.Name = "btnBrowse"
         Me.btnBrowse.Size = New System.Drawing.Size(50, 23)
-        Me.btnBrowse.TabIndex = 8
+        Me.btnBrowse.TabIndex = 3
         Me.btnBrowse.Text = "Browse"
         Me.btnBrowse.UseVisualStyleBackColor = True
         '
@@ -72,7 +73,7 @@ Partial Class ucrFilePath
         Me.lblName.Location = New System.Drawing.Point(2, 6)
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(50, 13)
-        Me.lblName.TabIndex = 6
+        Me.lblName.TabIndex = 1
         Me.lblName.Text = "Save As:"
         '
         'ucrFilePath
@@ -83,7 +84,7 @@ Partial Class ucrFilePath
         Me.Controls.Add(Me.btnBrowse)
         Me.Controls.Add(Me.lblName)
         Me.Name = "ucrFilePath"
-        Me.Size = New System.Drawing.Size(351, 26)
+        Me.Size = New System.Drawing.Size(392, 26)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
