@@ -2319,6 +2319,7 @@ Public Class frmMain
     Private Sub mnuClimaticNCMPSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPSummary.Click
         dlgClimaticNCMPSummaryFile.ShowDialog()
     End Sub
+
     Private Sub frmMain_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
         If Me.WindowState = FormWindowState.Maximized Then
             isMaximised = True
