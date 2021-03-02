@@ -83,7 +83,7 @@ Public Class dlgStringDistance
         ucrSaveStringDistance.SetDataFrameSelector(ucrSelectorStringDistance.ucrAvailableDataFrames)
         ucrSaveStringDistance.SetIsComboBox()
         ucrSaveStringDistance.SetLabelText("Save Result:")
-        'ucrSaveStringDistance.setLinkedReceiver(ucrReceiverSplitTextColumn)
+        ucrSaveStringDistance.setLinkedReceiver(ucrReceiverStringDistance)
     End Sub
 
     Private Sub SetDefaults()
