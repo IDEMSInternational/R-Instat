@@ -446,7 +446,6 @@ Public Class dlgImportDataset
 
             If DialogResult.OK = dlgOpen.ShowDialog() Then
                 ucrSaveFile.Reset()
-                'ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=False)
                 'TODO This is in place for when we allow multiple files selected.
                 bMultiFiles = (dlgOpen.FileNames.Count > 1)
                 If NumberOfFileTypes(dlgOpen.FileNames) > 1 Then
