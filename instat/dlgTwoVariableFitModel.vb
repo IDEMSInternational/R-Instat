@@ -677,10 +677,11 @@ Public Class dlgTwoVariableFitModel
                     strFirstVariableType = ucrReceiverResponse.strCurrDataType
                     If strFirstVariableType.Contains("factor") OrElse strFirstVariableType.Contains("character") OrElse strFirstVariableType.Contains("logical") Then
                         strFirstVariableType = "categorical"
+                        lblFirstVariableType.Text = "(" & strFirstVariableType & ")" & "  Levels: " & GetNumberOfFactorLevels(ucrReceiverResponse.GetVariableNames(False))
                     Else
                         strFirstVariableType = "numeric"
+                        lblFirstVariableType.Text = "(" & strFirstVariableType & ")"
                     End If
-                    lblFirstVariableType.Text = "(" & strFirstVariableType & ")" & "  Levels: " & GetNumberOfFactorLevels(ucrReceiverResponse.GetVariableNames(False))
                     lblFirstVariableType.ForeColor = SystemColors.Highlight
                 Else
                     strFirstVariableType = ""
@@ -691,10 +692,11 @@ Public Class dlgTwoVariableFitModel
                     strSecondVariableType = ucrReceiverExplanatory.strCurrDataType
                     If strSecondVariableType.Contains("factor") OrElse strSecondVariableType.Contains("character") OrElse strSecondVariableType.Contains("logical") Then
                         strSecondVariableType = "categorical"
+                        lblSecondVariableType.Text = "(" & strSecondVariableType & ")" & "  Levels: " & GetNumberOfFactorLevels(ucrReceiverExplanatory.GetVariableNames(False))
                     Else
                         strSecondVariableType = "numeric"
+                        lblSecondVariableType.Text = "(" & strSecondVariableType & ")"
                     End If
-                    lblSecondVariableType.Text = "(" & strSecondVariableType & ")" & "  Levels: " & GetNumberOfFactorLevels(ucrReceiverExplanatory.GetVariableNames(False))
                     lblSecondVariableType.ForeColor = SystemColors.Highlight
                 Else
                     strSecondVariableType = ""
