@@ -57,7 +57,6 @@ Public Class ucrDataView
         grdData.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AutoFormatCell, False)
         grdData.SheetTabWidth = 450
         SetRFunctions()
-        HideOrShowRecentPanel()
     End Sub
 
     'Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
@@ -339,13 +338,12 @@ Public Class ucrDataView
             End If
             lblRowDisplay.Text = lblRowDisplay.Text & " | Showing " & grdCurrSheet.ColumnCount & " of " & iColumnCount & " columns"
             'hide startup menu items
-            panelAllMenuItems.Visible = False
+            panelSectionsAll.Visible = False
         Else
             frmMain.tstatus.Text = "No data loaded"
             lblRowDisplay.Text = ""
             'show startup menu items
-            panelAllMenuItems.Visible = True
-            'todo. set the recent files list??
+            panelSectionsAll.Visible = True
         End If
     End Sub
 
@@ -886,7 +884,7 @@ Public Class ucrDataView
     ''' </summary>
     Public Sub ClearRecentFileMenuItems()
         panelRecentMenuItems.Controls.Clear()
-        HideOrShowRecentPanel()
+        HideOrShowRecentSection()
     End Sub
 
     ''' <summary>
@@ -919,11 +917,25 @@ Public Class ucrDataView
         lblMenuItemPath.Height = 13
         lblMenuItemPath.AutoSize = True
         panelRecentMenuItems.Controls.Add(lblMenuItemPath)
-        HideOrShowRecentPanel()
+        HideOrShowRecentSection()
     End Sub
 
-    Private Sub HideOrShowRecentPanel()
-        lblRecent.Visible = panelRecentMenuItems.Controls.Count > 0
+    ''' <summary>
+    ''' toggles startup menu items visibility
+    ''' </summary>
+    ''' <param name="bVisibility"></param>
+    Public Sub StartupMenuItemsVisibility(bVisibility As Boolean)
+        panelSectionStart.Visible = bVisibility
+        panelSectionHelp.Visible = bVisibility
+        If bVisibility Then
+            HideOrShowRecentSection()
+        Else
+            panelSectionRecent.Visible = False
+        End If
+    End Sub
+
+    Private Sub HideOrShowRecentSection()
+        panelSectionRecent.Visible = panelRecentMenuItems.Controls.Count > 0
     End Sub
 
     Private Sub linkHelpIntroduction_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkHelpIntroduction.LinkClicked

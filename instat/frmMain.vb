@@ -87,6 +87,7 @@ Public Class frmMain
         ' Decimal point must be `.` and not `,` because R only accepts `.`
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
 
+        ucrDataViewer.StartupMenuItemsVisibility(False)
         InitialiseOutputWindow()
         clsGrids.SetDataViewer(ucrDataViewer)
         clsGrids.SetMetadata(ucrDataFrameMeta.grdMetaData)
@@ -133,6 +134,7 @@ Public Class frmMain
             clsRecentItems.SetDataViewWindow(ucrDataViewer)
             'checks existence of MRU list
             clsRecentItems.checkOnLoad()
+            ucrDataViewer.StartupMenuItemsVisibility(True)
             Cursor = Cursors.Default
             SetMainMenusEnabled(True)
 
@@ -273,6 +275,10 @@ Public Class frmMain
         mnuViewDataFrameMetadata.Checked = False
         mnuViewColumnMetadata.Checked = False
         mnuViewScriptWindow.Checked = False
+        mnuLogWindow.Checked = False
+        mnuScriptWindow.Checked = False
+        mnuColumnMetadat.Checked = False
+        mnuDataFrameMetadat.Checked = False
 
         mnuTbDataView.Checked = True
         mnuTbOutput.Checked = True
@@ -459,21 +465,25 @@ Public Class frmMain
 
     Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub mnuWindowDataFrame_Click(sender As Object, e As EventArgs) Handles mnuViewDataFrameMetadata.Click
         mnuViewDataFrameMetadata.Checked = Not mnuViewDataFrameMetadata.Checked
+        mnuDataFrameMetadat.Checked = mnuViewDataFrameMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub LogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewLog.Click
         mnuViewLog.Checked = Not mnuViewLog.Checked
+        mnuLogWindow.Checked = mnuViewLog.Checked
         UpdateLayout()
     End Sub
 
     Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewScriptWindow.Click
         mnuViewScriptWindow.Checked = Not mnuViewScriptWindow.Checked
+        mnuScriptWindow.Checked = mnuViewScriptWindow.Checked
         UpdateLayout()
     End Sub
 
@@ -2053,31 +2063,37 @@ Public Class frmMain
 
     Private Sub MnuMetadata_ButtonClick(sender As Object, e As EventArgs) Handles mnuMetadata.ButtonClick
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuTbLog_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLog.ButtonClick
         mnuViewLog.Checked = Not mnuViewLog.Checked
+        mnuLogWindow.Checked = mnuViewLog.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuColumnMetadat_Click(sender As Object, e As EventArgs) Handles mnuColumnMetadat.Click
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuDataFrameMetadat_Click(sender As Object, e As EventArgs) Handles mnuDataFrameMetadat.Click
         mnuViewDataFrameMetadata.Checked = Not mnuViewDataFrameMetadata.Checked
+        mnuDataFrameMetadat.Checked = mnuViewDataFrameMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuScriptWindow_Click(sender As Object, e As EventArgs) Handles mnuScriptWindow.Click
         mnuViewScriptWindow.Checked = Not mnuViewScriptWindow.Checked
+        mnuScriptWindow.Checked = mnuViewScriptWindow.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuLogWindow_Click(sender As Object, e As EventArgs) Handles mnuLogWindow.Click
         mnuViewLog.Checked = Not mnuViewLog.Checked
+        mnuLogWindow.Checked = mnuViewLog.Checked
         UpdateLayout()
     End Sub
 
@@ -2277,5 +2293,9 @@ Public Class frmMain
 
     Private Sub mnuClimaticNCMPSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPSummary.Click
         dlgClimaticNCMPSummaryFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularDensityPlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularDensityPlot.Click
+        dlgCircularDensityPlot.ShowDialog()
     End Sub
 End Class
