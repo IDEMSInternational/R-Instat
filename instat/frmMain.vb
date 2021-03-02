@@ -166,7 +166,6 @@ Public Class frmMain
         End Try
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
-
     End Sub
 
     ' TODO This is used instead of autoTranslate so that split container isn't shifted
