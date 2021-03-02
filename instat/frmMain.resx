@@ -2442,16 +2442,16 @@
     <value>Output Window</value>
   </data>
   <data name="mnuColumnMetadat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>202, 22</value>
   </data>
   <data name="mnuColumnMetadat.Text" xml:space="preserve">
-    <value>Column Metadata...</value>
+    <value>  Column Metadata...</value>
   </data>
   <data name="mnuDataFrameMetadat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>202, 22</value>
   </data>
   <data name="mnuDataFrameMetadat.Text" xml:space="preserve">
-    <value>Data Frame Metadata...</value>
+    <value>  Data Frame Metadata...</value>
   </data>
   <data name="mnuMetadata.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2510,16 +2510,16 @@
     <value>Column Metadata</value>
   </data>
   <data name="mnuLogWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuLogWindow.Text" xml:space="preserve">
-    <value>Log Window...</value>
+    <value>  Log Window...</value>
   </data>
   <data name="mnuScriptWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuScriptWindow.Text" xml:space="preserve">
-    <value>Script Window...</value>
+    <value>  Script Window...</value>
   </data>
   <data name="mnuTbLog.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2656,7 +2656,7 @@
     <value>34, 34</value>
   </data>
   <data name="mnuTbResetLayout.ToolTipText" xml:space="preserve">
-    <value>Reset Layout</value>
+    <value>Reset to Default Layout</value>
   </data>
   <data name="separator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 37</value>
@@ -3566,9 +3566,6 @@
   </data>
   <data name="mnuStructuredCircularScatterPlot.Text" xml:space="preserve">
     <value>Scatter Plot...</value>
-  </data>
-  <data name="mnuStructuredCircularDensityPlot.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="mnuStructuredCircularDensityPlot.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 22</value>
@@ -6452,9 +6449,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>

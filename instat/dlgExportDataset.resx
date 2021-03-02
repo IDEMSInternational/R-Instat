@@ -117,146 +117,212 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblConfirm.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cmdBrowse.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblConfirm.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="cmdBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 55</value>
+  <data name="lblConfirm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 240</value>
   </data>
-  <data name="cmdBrowse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="cmdBrowse.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="cmdBrowse.Text" xml:space="preserve">
-    <value>Browse</value>
-  </data>
-  <data name="&gt;&gt;cmdBrowse.Name" xml:space="preserve">
-    <value>cmdBrowse</value>
-  </data>
-  <data name="&gt;&gt;cmdBrowse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdBrowse.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdBrowse.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblExport.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblExport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 60</value>
-  </data>
-  <data name="lblExport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 13</value>
-  </data>
-  <data name="lblExport.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="lblExport.Text" xml:space="preserve">
-    <value>Export File:</value>
-  </data>
-  <data name="&gt;&gt;lblExport.Name" xml:space="preserve">
-    <value>lblExport</value>
-  </data>
-  <data name="&gt;&gt;lblExport.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblExport.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblExport.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="lblConfirmText.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblConfirmText.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblConfirmText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>85, 85</value>
-  </data>
-  <data name="lblConfirmText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblConfirm.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
-  <data name="lblConfirmText.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblConfirm.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 13</value>
   </data>
-  <data name="lblConfirmText.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblConfirm.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="lblConfirmText.Text" xml:space="preserve">
+  <data name="lblConfirm.Text" xml:space="preserve">
     <value>Click Ok to Confirm the Export</value>
   </data>
-  <data name="&gt;&gt;lblConfirmText.Name" xml:space="preserve">
-    <value>lblConfirmText</value>
+  <data name="&gt;&gt;lblConfirm.Name" xml:space="preserve">
+    <value>lblConfirm</value>
   </data>
-  <data name="&gt;&gt;lblConfirmText.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblConfirm.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblConfirmText.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblConfirm.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblConfirmText.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;lblConfirm.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
-  <data name="ucrInputExportFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 56</value>
+  <data name="lblDataFrames.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
-  <data name="ucrInputExportFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
+  <data name="lblDataFrames.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="ucrInputExportFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 21</value>
+  <data name="lblDataFrames.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 10</value>
   </data>
-  <data name="ucrInputExportFile.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblDataFrames.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblDataFrames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="lblDataFrames.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblDataFrames.Text" xml:space="preserve">
+    <value>Data Frames:</value>
+  </data>
+  <data name="&gt;&gt;lblDataFrames.Name" xml:space="preserve">
+    <value>lblDataFrames</value>
+  </data>
+  <data name="&gt;&gt;lblDataFrames.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDataFrames.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblDataFrames.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblSelectedDataFrames.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSelectedDataFrames.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSelectedDataFrames.Location" type="System.Drawing.Point, System.Drawing">
+    <value>240, 10</value>
+  </data>
+  <data name="lblSelectedDataFrames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>115, 13</value>
+  </data>
+  <data name="lblSelectedDataFrames.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblSelectedDataFrames.Text" xml:space="preserve">
+    <value>Selected Data Frames:</value>
+  </data>
+  <data name="&gt;&gt;lblSelectedDataFrames.Name" xml:space="preserve">
+    <value>lblSelectedDataFrames</value>
+  </data>
+  <data name="&gt;&gt;lblSelectedDataFrames.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSelectedDataFrames.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSelectedDataFrames.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblFileExtension.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFileExtension.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblFileExtension.Location" type="System.Drawing.Point, System.Drawing">
+    <value>242, 161</value>
+  </data>
+  <data name="lblFileExtension.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblFileExtension.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 13</value>
+  </data>
+  <data name="lblFileExtension.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblFileExtension.Text" xml:space="preserve">
+    <value>Select File Type:</value>
+  </data>
+  <data name="&gt;&gt;lblFileExtension.Name" xml:space="preserve">
+    <value>lblFileExtension</value>
+  </data>
+  <data name="&gt;&gt;lblFileExtension.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFileExtension.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblFileExtension.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;ucrInputExportFile.Name" xml:space="preserve">
-    <value>ucrInputExportFile</value>
+  <data name="cboFileType.Items" xml:space="preserve">
+    <value>.csv</value>
   </data>
-  <data name="&gt;&gt;ucrInputExportFile.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="cboFileType.Items1" xml:space="preserve">
+    <value>.xlsx</value>
   </data>
-  <data name="&gt;&gt;ucrInputExportFile.Parent" xml:space="preserve">
+  <data name="cboFileType.Items2" xml:space="preserve">
+    <value>.tsv</value>
+  </data>
+  <data name="cboFileType.Items3" xml:space="preserve">
+    <value>.psv</value>
+  </data>
+  <data name="cboFileType.Items4" xml:space="preserve">
+    <value>.feather</value>
+  </data>
+  <data name="cboFileType.Items5" xml:space="preserve">
+    <value>.fwf</value>
+  </data>
+  <data name="cboFileType.Items6" xml:space="preserve">
+    <value>.rds</value>
+  </data>
+  <data name="cboFileType.Items7" xml:space="preserve">
+    <value>.RData</value>
+  </data>
+  <data name="cboFileType.Items8" xml:space="preserve">
+    <value>.json</value>
+  </data>
+  <data name="cboFileType.Items9" xml:space="preserve">
+    <value>.yml</value>
+  </data>
+  <data name="cboFileType.Items10" xml:space="preserve">
+    <value>.dta</value>
+  </data>
+  <data name="cboFileType.Items11" xml:space="preserve">
+    <value>.sav</value>
+  </data>
+  <data name="cboFileType.Items12" xml:space="preserve">
+    <value>.dbf</value>
+  </data>
+  <data name="cboFileType.Items13" xml:space="preserve">
+    <value>.arff</value>
+  </data>
+  <data name="cboFileType.Items14" xml:space="preserve">
+    <value>.R</value>
+  </data>
+  <data name="cboFileType.Items15" xml:space="preserve">
+    <value>.xml</value>
+  </data>
+  <data name="cboFileType.Items16" xml:space="preserve">
+    <value>.html</value>
+  </data>
+  <data name="cboFileType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>245, 175</value>
+  </data>
+  <data name="cboFileType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>170, 21</value>
+  </data>
+  <data name="cboFileType.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;cboFileType.Name" xml:space="preserve">
+    <value>cboFileType</value>
+  </data>
+  <data name="&gt;&gt;cboFileType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cboFileType.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrInputExportFile.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrAvailableSheets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
-  </data>
-  <data name="ucrAvailableSheets.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrAvailableSheets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 41</value>
-  </data>
-  <data name="ucrAvailableSheets.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrAvailableSheets.Name" xml:space="preserve">
-    <value>ucrAvailableSheets</value>
-  </data>
-  <data name="&gt;&gt;ucrAvailableSheets.Type" xml:space="preserve">
-    <value>instat.ucrDataFrame, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrAvailableSheets.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrAvailableSheets.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;cboFileType.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 111</value>
+    <value>10, 270</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -265,7 +331,7 @@
     <value>405, 53</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -277,7 +343,55 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>9</value>
+  </data>
+  <data name="ucrFilePath.FilePathDialogFilter" xml:space="preserve">
+    <value>Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html</value>
+  </data>
+  <data name="ucrFilePath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 211</value>
+  </data>
+  <data name="ucrFilePath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>425, 26</value>
+  </data>
+  <data name="ucrFilePath.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrFilePath.Name" xml:space="preserve">
+    <value>ucrFilePath</value>
+  </data>
+  <data name="&gt;&gt;ucrFilePath.Type" xml:space="preserve">
+    <value>instat.ucrFilePath, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFilePath.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFilePath.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrSelectorDataFrames.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 28</value>
+  </data>
+  <data name="ucrSelectorDataFrames.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorDataFrames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>216, 147</value>
+  </data>
+  <data name="ucrSelectorDataFrames.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorDataFrames.Name" xml:space="preserve">
+    <value>ucrSelectorDataFrames</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorDataFrames.Type" xml:space="preserve">
+    <value>instat.ucrSelectorAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorDataFrames.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorDataFrames.ZOrder" xml:space="preserve">
+    <value>6</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -289,7 +403,34 @@
     <value>True</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>414, 165</value>
+    <value>441, 331</value>
+  </data>
+  <data name="chkSaveAsSingleFile.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkSaveAsSingleFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 133</value>
+  </data>
+  <data name="chkSaveAsSingleFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>111, 17</value>
+  </data>
+  <data name="chkSaveAsSingleFile.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="chkSaveAsSingleFile.Text" xml:space="preserve">
+    <value>Save as single file</value>
+  </data>
+  <data name="&gt;&gt;chkSaveAsSingleFile.Name" xml:space="preserve">
+    <value>chkSaveAsSingleFile</value>
+  </data>
+  <data name="&gt;&gt;chkSaveAsSingleFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;chkSaveAsSingleFile.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;chkSaveAsSingleFile.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -302,5 +443,29 @@
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrReceiverMultipleDataFrames.Location" type="System.Drawing.Point, System.Drawing">
+    <value>243, 28</value>
+  </data>
+  <data name="ucrReceiverMultipleDataFrames.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverMultipleDataFrames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 100</value>
+  </data>
+  <data name="ucrReceiverMultipleDataFrames.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverMultipleDataFrames.Name" xml:space="preserve">
+    <value>ucrReceiverMultipleDataFrames</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverMultipleDataFrames.Type" xml:space="preserve">
+    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverMultipleDataFrames.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverMultipleDataFrames.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
 </root>
