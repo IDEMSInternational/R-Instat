@@ -639,20 +639,23 @@ Public Class dlgImportDataset
         If strFileType <> "" AndAlso strFileType <> "RDS" Then
             If (strFileType = "XLSX" OrElse strFileType = "XLS") Then
                 ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
-                If clbSheets.CheckedItems.Count > 1 Then
-                    ucrSaveFile.Hide()
-                ElseIf clbSheets.CheckedItems.Count = 1 Then
-                    ucrSaveFile.Show()
-                    ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First(), bSilent:=True)
-                ElseIf clbSheets.CheckedItems.Count = 0 Then
-                    ucrSaveFile.Show()
-                    ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
-                End If
+                Select Case clbSheets.CheckedItems.Count
+                    Case Is > 1
+                        ucrSaveFile.Hide()
+                    Case 1
+                        ucrSaveFile.Show()
+                        ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First(), bSilent:=True)
+                    Case 0
+                        ucrSaveFile.Show()
+                        ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
+                End Select
             Else
                 ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=False)
                 ucrSaveFile.Show()
                 ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
             End If
+        Else
+            ucrSaveFile.Hide()
         End If
         RefreshFilePreview()
         RefreshFrameView()
