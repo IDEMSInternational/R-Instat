@@ -52,6 +52,7 @@ Public Class dlgCountinFactor
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrCountSelector.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("New Column Name:")
+        ucrNewColName.setLinkedReceiver(ucrCountReceiver)
     End Sub
 
     Private Sub SetDefaults()
