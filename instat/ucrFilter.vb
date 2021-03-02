@@ -113,8 +113,8 @@ Public Class ucrFilter
                             ucrDatePicker.Visible = True
                         Case Else
                             ucrReceiverExpression.Visible = True
+                            grpNumeric.Visible = True
                     End Select
-                    grpNumeric.Visible = True
                 End If
             End If
         End If

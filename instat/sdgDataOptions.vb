@@ -20,6 +20,7 @@ Imports RDotNet
 Public Class sdgDataOptions
     Public bFirstLoad As Boolean
     Private clsFilterPreview As RFunction
+    Private clsRemoveCurrentFilter As RFunction
     Private strCurrentDataFrame As String
 
     Public Sub New()
@@ -30,6 +31,7 @@ Public Class sdgDataOptions
         ' Add any initialization after the InitializeComponent() call.
         bFirstLoad = True
         clsFilterPreview = New RFunction
+        clsRemoveCurrentFilter = New RFunction
     End Sub
 
     Private Sub sdgDataOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -43,6 +45,7 @@ Public Class sdgDataOptions
 
     Private Sub InitialiseDialog()
         clsFilterPreview.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$filter_string")
+        clsRemoveCurrentFilter.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$remove_current_filter")
         ucrReceiverFilter.Selector = ucrSelectorFilters
         ucrReceiverFilter.SetItemType("filter")
         ucrReceiverFilter.SetMeAsReceiver()
@@ -70,6 +73,9 @@ Public Class sdgDataOptions
         If sdgCreateFilter.bFilterDefined Then
             frmMain.clsRLink.RunScript(sdgCreateFilter.clsCurrentFilter.ToScript(), strComment:="Create Filter subdialog: Created new filter")
             ucrSelectorFilters.SetDataframe(sdgCreateFilter.ucrCreateFilter.ucrSelectorForFitler.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+            If ucrReceiverFilter.GetVariableNames(False) = sdgCreateFilter.ucrCreateFilter.ucrInputFilterName.GetText() Then
+                ucrReceiverFilter.Clear()
+            End If
             ucrReceiverFilter.Add(sdgCreateFilter.ucrCreateFilter.ucrInputFilterName.GetText())
         End If
         ucrSelectorFilters.LoadList()
@@ -99,11 +105,19 @@ Public Class sdgDataOptions
     End Sub
 
     Private Sub ucrSelectorFilters_DataFrameChanged() Handles ucrSelectorFilters.DataFrameChanged
-        clsFilterPreview.AddParameter("data_name", Chr(34) & ucrSelectorFilters.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34))
+        clsFilterPreview.AddParameter("data_name", Chr(34) & ucrSelectorFilters.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsRemoveCurrentFilter.AddParameter("data_name", Chr(34) & ucrSelectorFilters.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
     End Sub
 
     Public Sub SetCurrentDataFrame(strNewDataFrame As String, Optional bEnabled As Boolean = False)
         strCurrentDataFrame = strNewDataFrame
         ucrSelectorFilters.SetDataframe(strCurrentDataFrame, bEnabled)
+    End Sub
+
+    Private Sub cmdRemoveCurrentFilter_Click(sender As Object, e As EventArgs) Handles cmdRemoveCurrentFilter.Click
+        frmMain.clsRLink.RunScript(clsRemoveCurrentFilter.ToScript, strComment:="Data Options subdialog: Remove current filter")
+        If Not ucrReceiverFilter.IsEmpty Then
+            ucrReceiverFilter.Clear()
+        End If
     End Sub
 End Class

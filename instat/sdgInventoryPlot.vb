@@ -43,8 +43,8 @@ Public Class sdgInventoryPlot
 
 
         ucrChkScales.SetText("Scales")
-        ucrChkScales.SetParameter(New RParameter("scale"))
-        ucrChkScales.AddToLinkedControls(ucrInputScale, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="Free_y")
+        ucrChkScales.SetParameter(New RParameter("scale"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkScales.AddToLinkedControls(ucrInputScale, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="None")
         ucrInputScale.SetParameter(New RParameter("scale"))
         dctScale.Add("None", Chr(34) & "none" & Chr(34))
         dctScale.Add("Free_y", Chr(34) & "free_y" & Chr(34))
@@ -53,20 +53,20 @@ Public Class sdgInventoryPlot
         dctScale.Add("Fixed", Chr(34) & "fixed" & Chr(34))
         ucrInputScale.SetItems(dctScale)
         ucrInputScale.SetDropDownStyleAsNonEditable()
-        ucrChkScales.AddParameterPresentCondition(True, "scale")
-        ucrChkScales.AddParameterPresentCondition(False, "scale", False)
+        ' ucrChkScales.AddParameterPresentCondition(True, "scale")
+      '  ucrChkScales.AddParameterPresentCondition(False, "scale", False)
 
-        ucrChkNoOfRowsorColumns.SetText("Fixed Number of Rows")
-        ucrChkNoOfRowsorColumns.AddParameterPresentCondition(True, {"nrow", "ncol"}, True)
-        ucrChkNoOfRowsorColumns.AddParameterPresentCondition(False, {"nrow", "ncol"}, False)
-        ucrNudNumberofRowsOrcolumns.SetParameter(New RParameter("nrow"))
-        ucrNudNumberofRowsOrcolumns.SetMinMax(1, Integer.MaxValue)
-        ucrNudNumberofRowsOrcolumns.bAddRemoveParameter = False
+        ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
+        ucrNudNumberofRows.SetMinMax(1, Integer.MaxValue)
+        ucrNudNumberofRows.SetRDefault(1)
 
-        ucrChkNoOfRowsorColumns.AddToLinkedControls(ucrNudNumberofRowsOrcolumns, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
+        ucrChkNoOfRowsOrColumns.SetParameter(New RParameter("row_col_number"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+        ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
+        ucrChkNoOfRowsOrColumns.SetRDefault("TRUE")
 
-        'Not setting parameter to write because of complex conditions for adding/removing this parameter
-        'Conditions in place for reading function
+        ucrNudNumberofRows.SetParameter(New RParameter("nrow"))
+        ucrNudNumberofRows.bAddRemoveParameter = False
+
         ucrPnlHorizonatalVertical.SetParameter(New RParameter("dir"))
         ucrPnlHorizonatalVertical.bChangeParameterValue = False
         ucrPnlHorizonatalVertical.AddRadioButton(rdoVertical)
@@ -74,6 +74,8 @@ Public Class sdgInventoryPlot
         ucrPnlHorizonatalVertical.AddParameterValuesCondition(rdoVertical, "dir", Chr(34) & "v" & Chr(34))
         ucrPnlHorizonatalVertical.AddParameterValuesCondition(rdoHorizontal, "dir", Chr(34) & "h" & Chr(34))
         ucrPnlHorizonatalVertical.SetRDefault(Chr(34) & "h" & Chr(34))
+
+        ucrChkNoOfRowsOrColumns.AddToLinkedControls(ucrNudNumberofRows, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlXAxisTitle.AddRadioButton(rdoAutoXAxis)
         ucrPnlXAxisTitle.AddRadioButton(rdoNoTitleXAxisTitle)
@@ -138,16 +140,19 @@ Public Class sdgInventoryPlot
         ucrInputXFrom.AddQuotesIfUnrecognised = False
         ucrInputXTo.SetParameter(New RParameter("toXAxis"))
         ucrInputXTo.SetValidationTypeAsNumeric()
-        'ucrInputXTo.SetRDefault(1)
         ucrInputXTo.AddQuotesIfUnrecognised = False
+
         ucrChkSpecifyXAxisTickMarks.SetText("Specify Breaks")
         ucrChkSpecifyXAxisTickMarks.SetRDefault("TRUE")
         ucrChkSpecifyXAxisTickMarks.SetParameter(New RParameter("scale_xdate"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        ucrChkSpecifyXAxisTickMarks.AddToLinkedControls({ucrInputXFrom, ucrInputXTo, ucrInputXInStepsOf}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSpecifyXAxisTickMarks.AddToLinkedControls(ucrInputXFrom, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSpecifyXAxisTickMarks.AddToLinkedControls(ucrInputXTo, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSpecifyXAxisTickMarks.AddToLinkedControls(ucrInputXInStepsOf, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputXFrom.SetLinkedDisplayControl(lblXFrom)
         ucrInputXTo.SetLinkedDisplayControl(lblXTo)
         ucrInputXInStepsOf.SetLinkedDisplayControl(lblXInStepsOf)
+
 
         dctLabelForDays.Add("Day Number (1-366)", Chr(34) & "%j" & Chr(34))
         dctLabelForDays.Add("Day Month (1 Jan)", Chr(34) & "%d %b" & Chr(34))
@@ -186,7 +191,6 @@ Public Class sdgInventoryPlot
         ucrChkYAxisLabelSize.SetText("Size")
         ucrChkYAxisLabelSize.SetParameter(New RParameter("ySize"), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrNudYAxisLabelSize.SetParameter(New RParameter("ySize"))
-        'ucrNudYAxisLabelSize.Increment = 0.1
         ucrNudYAxisLabelSize.Minimum = 1
 
         ucrChkYAxisAngle.AddToLinkedControls(ucrNudYAxisAngle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=90)
@@ -228,7 +232,10 @@ Public Class sdgInventoryPlot
         ucrChkXAxisLabelSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudYAxisTitleSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputXAxisTitle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrChkSpecifyXAxisTickMarks.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrInputXFrom.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputXTo.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrInputXInStepsOf.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrChkSpecifyDateBreaks.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudDateBreakNumber.SetRCode(clsInventoryNew, bReset, bCloneIfNeeded:=True)
         ucrChkFacetXSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
@@ -236,19 +243,16 @@ Public Class sdgInventoryPlot
         ucrChkYAxisAngle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputDateDisplayFormat.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputDateBreakTime.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrChkNoOfRowsorColumns.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrNudNumberofRowsOrcolumns.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudXAxisLabelSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputScale.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrChkNoOfRowsOrColumns.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
+        ucrNudNumberofRows.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrChkYAxisLabelSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudYAxisAngle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudFacetXSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudFacetYSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudYAxisLabelSize.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrInputXFrom.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrChkScales.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrChkSpecifyXAxisTickMarks.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
-        ucrInputXInStepsOf.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrChkLegendPosition.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrInputYAxisTitle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
         ucrNudXAxisAngle.SetRCode(clsInventory, bReset, bCloneIfNeeded:=True)
@@ -262,8 +266,7 @@ Public Class sdgInventoryPlot
 
         SetXLabel()
         SetYLabel()
-        SetFacetParameter()
-
+        AddRemoveXAxisBreaks()
     End Sub
 
     Private Sub SetXLabel()
@@ -285,40 +288,65 @@ Public Class sdgInventoryPlot
             clsInventory.AddParameter("labelYAxis", Chr(34) & ucrInputYAxisTitle.GetText() & Chr(34))
         End If
     End Sub
-    Public Sub SetFacetParameter()
+
+    Private Sub SetFacetParameters()
+        If rdoHorizontal.Checked Then
+            ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Rows")
+            ' ucrChkNoOfRowsOrColumns.ChangeParameterName("nrow")
+            ucrNudNumberofRows.ChangeParameterName("nrow")
+            clsInventory.AddParameter("dir", Chr(34) & "h" & Chr(34))
+        ElseIf rdoVertical.Checked Then
+            ucrChkNoOfRowsOrColumns.SetText("Fixed Number of Columns")
+            ' ucrChkNoOfRowsOrColumns.ChangeParameterName("ncol")
+            ucrNudNumberofRows.ChangeParameterName("ncol")
+            clsInventory.AddParameter("dir", Chr(34) & "v" & Chr(34))
+        Else
+            clsInventory.RemoveParameterByName("dir")
+        End If
+        If ucrChkNoOfRowsOrColumns.Checked Then
+            clsInventory.AddParameter(ucrNudNumberofRows.GetParameter())
+        Else
+            clsInventory.RemoveParameter(ucrNudNumberofRows.GetParameter())
+        End If
+    End Sub
+    Private Sub AddRemoveRowColumnNumber()
         If bRCodeSet Then
-            If rdoHorizontal.Checked Then
-                ucrChkNoOfRowsorColumns.SetText("Fixed Number of Rows")
-                ucrNudNumberofRowsOrcolumns.ChangeParameterName("nrow")
-            ElseIf rdoVertical.Checked Then
-                ucrChkNoOfRowsorColumns.SetText("Fixed Number of Columns")
-                ucrNudNumberofRowsOrcolumns.ChangeParameterName("ncol")
-            End If
-            If ucrChkNoOfRowsorColumns.Checked Then
-                clsInventory.AddParameter(ucrNudNumberofRowsOrcolumns.GetParameter())
+            If ucrChkNoOfRowsOrColumns.Checked Then
+                clsInventory.AddParameter("row_col_number", "TRUE")
             Else
-                clsInventory.RemoveParameter(ucrNudNumberofRowsOrcolumns.GetParameter())
+                clsInventory.RemoveParameterByName("row_col_number")
+            End If
+        End If
+    End Sub
+
+    Private Sub AddRemoveXAxisBreaks()
+        If bRCodeSet Then
+            If ucrChkSpecifyXAxisTickMarks.Checked AndAlso Not ucrInputXTo.IsEmpty AndAlso Not ucrInputXFrom.IsEmpty AndAlso Not ucrInputXInStepsOf.IsEmpty Then
+                clsInventory.AddParameter("scale_xdate", "TRUE")
+            Else
+                clsInventory.RemoveParameterByName("scale_xdate")
             End If
         End If
     End Sub
 
     Private Sub ucrPnlXAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlXAxisTitle.ControlValueChanged, ucrInputXAxisTitle.ControlValueChanged
         SetXLabel()
-
     End Sub
 
     Private Sub UcrPnlYAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrPnlYAxisTitle.ControlValueChanged, ucrInputYAxisTitle.ControlValueChanged
         SetYLabel()
+    End Sub
 
+    Private Sub ucrChkNoOfRowsOrColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoOfRowsOrColumns.ControlValueChanged
+        SetFacetParameters()
+        AddRemoveRowColumnNumber()
     End Sub
 
     Private Sub ucrPnlHorizonatalVertical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHorizonatalVertical.ControlValueChanged
-        SetFacetParameter()
-
+        SetFacetParameters()
     End Sub
 
-    Private Sub ucrChkNoOfRowsorColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoOfRowsorColumns.ControlValueChanged
-        SetFacetParameter()
+    Private Sub ucrChkSpecifyXAxisTickMarks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputXFrom.ControlValueChanged, ucrInputXTo.ControlValueChanged, ucrInputXInStepsOf.ControlValueChanged
+        AddRemoveXAxisBreaks()
     End Sub
-
 End Class
