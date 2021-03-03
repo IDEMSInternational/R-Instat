@@ -107,12 +107,10 @@ Public Class dlgSplitText
 
         If IsNothing(lstRCodeStructure) Then
             'Continue with the updating Rfunction of Default value as normal
-            clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-            clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
+            AddClsTextComponentsFixedDefaultParameters()
 
-            clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-            clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
-            clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
+            AddClsTextComponentsMaximumDefaultParameters()
+
             ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
             'This dialogue only requires one line of code to load hence this next elseIf statement
         ElseIf (lstRCodeStructure.Count = 1) Then
@@ -133,29 +131,23 @@ Public Class dlgSplitText
                             If Rfunction Is clsTextComponentsFixed Then
                                 clsTextComponentsFixed = lstOfRCodeStructure(0)
 
-                                clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-                                clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
-                                clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
+                                AddClsTextComponentsMaximumDefaultParameters()
 
                                 ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
                                 bMatchTwoRfunction = True
                             ElseIf Rfunction Is clsBinaryColumns Then
                                 clsBinaryColumns = lstOfRCodeStructure(0)
 
-                                clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-                                clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
+                                AddClsTextComponentsFixedDefaultParameters()
 
-                                clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-                                clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
-                                clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
+                                AddClsTextComponentsMaximumDefaultParameters()
 
                                 ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
                                 bMatchTwoRfunction = True
                             ElseIf Rfunction Is clsTextComponentsMaximum Then
                                 clsTextComponentsMaximum = lstOfRCodeStructure(0)
 
-                                clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
-                                clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
+                                AddClsTextComponentsFixedDefaultParameters()
 
                                 ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
                                 bMatchTwoRfunction = True
@@ -181,6 +173,16 @@ Public Class dlgSplitText
         clsBinaryColumns.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
     End Sub
 
+    Private Sub AddClsTextComponentsMaximumDefaultParameters()
+        clsTextComponentsMaximum.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+        clsTextComponentsMaximum.AddParameter("n", "Inf", iPosition:=2)
+        clsTextComponentsMaximum.AddParameter("simplify", "TRUE", iPosition:=3)
+    End Sub
+
+    Private Sub AddClsTextComponentsFixedDefaultParameters()
+        clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
+        clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
+    End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputPattern.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("pattern", 1), iAdditionalPairNo:=1)
