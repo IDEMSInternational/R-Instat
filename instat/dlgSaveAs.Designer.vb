@@ -39,50 +39,37 @@ Partial Class dlgSaveAs
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSaveAs))
-        Me.ucrBase = New instat.ucrButtons()
-        Me.lblSaveDataTo = New System.Windows.Forms.Label()
-        Me.ucrInputFilePath = New instat.ucrInputTextBox()
-        Me.cmdChooseFile = New System.Windows.Forms.Button()
         Me.lblConfirm = New System.Windows.Forms.Label()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.ucrFilePath = New instat.ucrFilePath()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'lblSaveDataTo
-        '
-        resources.ApplyResources(Me.lblSaveDataTo, "lblSaveDataTo")
-        Me.lblSaveDataTo.Name = "lblSaveDataTo"
-        '
-        'ucrInputFilePath
-        '
-        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilePath.IsMultiline = False
-        Me.ucrInputFilePath.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
-        Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        '
-        'cmdChooseFile
-        '
-        resources.ApplyResources(Me.cmdChooseFile, "cmdChooseFile")
-        Me.cmdChooseFile.Name = "cmdChooseFile"
-        Me.cmdChooseFile.UseVisualStyleBackColor = True
         '
         'lblConfirm
         '
         resources.ApplyResources(Me.lblConfirm, "lblConfirm")
         Me.lblConfirm.Name = "lblConfirm"
         '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
+        '
+        'ucrFilePath
+        '
+        Me.ucrFilePath.FilePath = ""
+        Me.ucrFilePath.FilePathBrowseText = "Browse"
+        Me.ucrFilePath.FilePathDialogFilter = "RDS Data file (*.RDS)|*.RDS"
+        Me.ucrFilePath.FilePathDialogTitle = "Save Data File"
+        Me.ucrFilePath.FilePathLabel = "Save Data To:"
+        resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
+        Me.ucrFilePath.Name = "ucrFilePath"
+        '
         'dlgSaveAs
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrFilePath)
         Me.Controls.Add(Me.lblConfirm)
-        Me.Controls.Add(Me.ucrInputFilePath)
-        Me.Controls.Add(Me.lblSaveDataTo)
-        Me.Controls.Add(Me.cmdChooseFile)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -95,8 +82,6 @@ Partial Class dlgSaveAs
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lblSaveDataTo As Label
-    Friend WithEvents ucrInputFilePath As ucrInputTextBox
-    Friend WithEvents cmdChooseFile As Button
     Friend WithEvents lblConfirm As Label
+    Friend WithEvents ucrFilePath As ucrFilePath
 End Class
