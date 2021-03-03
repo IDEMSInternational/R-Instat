@@ -2406,10 +2406,17 @@ cloud_cover_label="cloud_cover"
 all_climatic_column_types <- c(rain_label, rain_day_label, rain_day_lag_label, date_label, doy_label, s_doy_label, year_label, year_month_label, date_time_label, dos_label, season_label, month_label, day_label, dm_label, time_label, station_label, date_asstring_label, temp_min_label, temp_max_label, temp_air_label, temp_range_label, wet_buld_label, dry_bulb_label, evaporation_label, element_factor_label, identifier_label, capacity_label, wind_speed_label, wind_direction_label, lat_label, lon_label, alt_label, season_station_label, date_station_label, sunshine_hours_label, radiation_label, cloud_cover_label)
 
 # Column metadata
-climatic_type_label = "Climatic_Type"
+climatic_type_label <- "Climatic_Type"
+is_element_label <- "Is_Element"
+
+is_climatic_element <- function(x) {
+  return(x %in% c(rain_label, rain_day_label, rain_day_lag_label, temp_min_label, temp_max_label, temp_air_label,
+                  temp_range_label, wet_buld_label, dry_bulb_label, evaporation_label, capacity_label, wind_speed_label,
+                  wind_direction_label, sunshine_hours_label, radiation_label, cloud_cover_label))
+}
 
 # Data frame metadata
-is_climatic_label = "Is_Climatic"
+is_climatic_label <- "Is_Climatic"
 
 DataBook$set("public","define_as_climatic", function(data_name, types, key_col_names, key_name) {
   self$add_key(data_name = data_name, col_names = key_col_names, key_name = key_name)
@@ -2429,6 +2436,11 @@ DataSheet$set("public","set_climatic_types", function(types) {
   self$append_to_variables_metadata(property = climatic_type_label, new_val = NULL)
   if(!all(names(types) %in% all_climatic_column_types)) stop("Cannot recognise the following climatic types: ", paste(names(types)[!names(types) %in% all_climatic_column_types], collapse = ", "))
   invisible(sapply(names(types), function(name) self$append_to_variables_metadata(types[name], climatic_type_label, name)))
+  element_cols <- types[is_climatic_element(names(types))]
+  other_cols <- setdiff(self$get_column_names(), element_cols)
+  self$append_to_variables_metadata(element_cols, is_element_label, TRUE)
+  self$append_to_variables_metadata(other_cols, is_element_label, FALSE)
+  
   types <- types[sort(names(types))]
   cat("Climatic dataset:", self$get_metadata(data_name_label), "\n")
   cat("----------------\n")
