@@ -108,11 +108,6 @@ Public Class ucrLog
         End If
     End Sub
 
-    Private Sub OpenDialog(strTexT As String)
-        If strTexT <> "" Then
-            frmMain.clsRLink.OpenDialogFromScript(strNewScript:=strTexT)
-        End If
-    End Sub
     Private Sub mnuSaveLogFile_Click(sender As Object, e As EventArgs) Handles mnuSaveLogFile.Click
         Using dlgSave As New SaveFileDialog
             dlgSave.Title = "Save Log File"
