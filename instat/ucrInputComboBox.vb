@@ -202,7 +202,7 @@ Public Class ucrInputComboBox
 
     Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True, Optional bSetCondtions As Boolean = True, Optional bNewHasRParamFunctionAsString As Boolean = False)
         Dim kvpTemp As KeyValuePair(Of String, String)
-        bHasRFunctioParamAsString = bNewHasRParamFunctionAsString
+        bHasRFunctionParamAsString = bNewHasRParamFunctionAsString
 
         If bClearExisting Then
             cboInput.Items.Clear()
