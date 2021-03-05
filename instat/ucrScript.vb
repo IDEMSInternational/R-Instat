@@ -259,15 +259,9 @@ Public Class ucrScript
     End Sub
 
     Private Sub mnuPopulateDialogue_Click(sender As Object, e As EventArgs) Handles mnuPopulateDialogue.Click
-        If txtScript.SelectionLength > 0 Then
-            OpenDialog(txtScript.SelectedText)
-        End If
-    End Sub
-
-    Private Sub OpenDialog(strTexT As String)
-        If strTexT <> "" Then
-            frmMain.clsRLink.OpenDialogFromScript(strNewScript:=strTexT)
-        End If
+        If Not String.IsNullOrEmpty(txtScript.SelectedText) Then
+            frmMain.clsRLink.OpenDialogFromScript(strNewScript:=txtScript.SelectedText)
+        End If        
     End Sub
 
 End Class
