@@ -19,7 +19,7 @@ Imports instat
 
 Public Class ucrInputComboBox
     Dim strItemsType As String = ""
-    Dim bHasRFunctioParamAsString As Boolean = False
+    Private bHasRFunctionParamAsString As Boolean = False
 
     Public Sub New()
 
