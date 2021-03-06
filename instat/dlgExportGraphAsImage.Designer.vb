@@ -40,24 +40,16 @@ Partial Class dlgExportGraphAsImage
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportGraphAsImage))
         Me.lblSelectedGraph = New System.Windows.Forms.Label()
-        Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.ucrSelectedGraphReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorGraphAsImage = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblExport = New System.Windows.Forms.Label()
-        Me.ucrInputFile = New instat.ucrInputTextBox()
+        Me.ucrFilePath = New instat.ucrFilePath()
         Me.SuspendLayout()
         '
         'lblSelectedGraph
         '
         resources.ApplyResources(Me.lblSelectedGraph, "lblSelectedGraph")
         Me.lblSelectedGraph.Name = "lblSelectedGraph"
-        '
-        'cmdBrowse
-        '
-        resources.ApplyResources(Me.cmdBrowse, "cmdBrowse")
-        Me.cmdBrowse.Name = "cmdBrowse"
-        Me.cmdBrowse.UseVisualStyleBackColor = True
         '
         'ucrSelectedGraphReceiver
         '
@@ -81,26 +73,23 @@ Partial Class dlgExportGraphAsImage
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'lblExport
+        'ucrFilePath
         '
-        resources.ApplyResources(Me.lblExport, "lblExport")
-        Me.lblExport.Name = "lblExport"
-        '
-        'ucrInputFile
-        '
-        Me.ucrInputFile.AddQuotesIfUnrecognised = True
-        Me.ucrInputFile.IsMultiline = False
-        Me.ucrInputFile.IsReadOnly = True
-        resources.ApplyResources(Me.ucrInputFile, "ucrInputFile")
-        Me.ucrInputFile.Name = "ucrInputFile"
+        Me.ucrFilePath.DefaultFileSuggestionName = ""
+        Me.ucrFilePath.FilePath = ""
+        Me.ucrFilePath.FilePathBrowseText = "Browse"
+        Me.ucrFilePath.FilePathDialogFilter = "JPEG (*.jpeg)|*.jpeg|PNG(*.png)|*.png|BitMaP(*.bmp)|*.bmp|EPS(*.eps)|*.eps|PostSc" &
+    "ript(*.ps)|*.ps|SVG(*.svg)|*.svg|WMF(*.wmf)|*.wmf|PDF(*.pdf)|*.pdf"
+        Me.ucrFilePath.FilePathDialogTitle = "Save Graph As Image"
+        Me.ucrFilePath.FilePathLabel = "Export File:"
+        resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
+        Me.ucrFilePath.Name = "ucrFilePath"
         '
         'dlgExportGraphAsImage
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrInputFile)
-        Me.Controls.Add(Me.lblExport)
-        Me.Controls.Add(Me.cmdBrowse)
+        Me.Controls.Add(Me.ucrFilePath)
         Me.Controls.Add(Me.lblSelectedGraph)
         Me.Controls.Add(Me.ucrSelectedGraphReceiver)
         Me.Controls.Add(Me.ucrSelectorGraphAsImage)
@@ -117,8 +106,6 @@ Partial Class dlgExportGraphAsImage
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrSelectorGraphAsImage As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSelectedGraphReceiver As ucrReceiverSingle
-    Friend WithEvents cmdBrowse As Button
     Friend WithEvents lblSelectedGraph As Label
-    Friend WithEvents lblExport As Label
-    Friend WithEvents ucrInputFile As ucrInputTextBox
+    Friend WithEvents ucrFilePath As ucrFilePath
 End Class

@@ -214,7 +214,7 @@ Public Class ucrTry
                                                                                        frmPopUp.Close()
                                                                                    End Sub
                                          AddHandler txtPopUpErrorDetail.KeyDown, Sub(sender As Object, e As KeyEventArgs)
-                                                                                     If e.Control AndAlso e.KeyCode = Keys.KeyCode.Enter Then
+                                                                                     If e.Control AndAlso e.KeyCode = Keys.Enter Then
                                                                                          frmPopUp.Close()
                                                                                      End If
                                                                                  End Sub
@@ -240,7 +240,7 @@ Public Class ucrTry
     ''' <summary> Clears the ucrInputTryMessage textbox and sets its colour to white incase the 
     ''' ucrReceiverScript selection changes on the value for the ucrModelPreview changes    </summary>
     '''--------------------------------------------------------------------------------------------
-    Private Sub ResetInputTryMessage()
+    Public Sub ResetInputTryMessage()
         ucrInputTryMessage.SetName("")
         ucrInputTryMessage.txtInput.BackColor = Color.White
         ucrInputTryMessage.txtInput.Controls.Clear()

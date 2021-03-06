@@ -25,6 +25,7 @@ Public Class dlgColumnStats
     Public strDefaultDataFrame As String = ""
     Public strDefaultVariables() As String
     Public strDefaultFactors() As String
+    Private strDefaultTab As String = ""
 
     Private Sub dlgColumnStats_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -46,6 +47,7 @@ Public Class dlgColumnStats
         ucrBase.iHelpTopicID = 64
 
         ucrChkDropUnusedLevels.Enabled = False ' removed this functionality so this is disabled
+        cmdMissingOptions.Enabled = False
 
         ucrSelectorForColumnStatistics.SetParameter(New RParameter("data_name", 0))
         ucrSelectorForColumnStatistics.SetParameterIsString()
@@ -57,8 +59,6 @@ Public Class dlgColumnStats
 
         ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
         ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
-        ucrReceiverByFactor.SetExcludedDataTypes({"numeric"})
-        ucrReceiverByFactor.strSelectorHeading = "Non-numeric(s)"
         ucrReceiverByFactor.SetParameterIsString()
 
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
@@ -111,9 +111,9 @@ Public Class dlgColumnStats
         clsConcFunction.SetRCommand("c")
 
         clsSummariesList.SetRCommand("c")
-        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
-        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
-        clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
+        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False, iPosition:=3)
+        clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False, iPosition:=11)
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
@@ -151,6 +151,10 @@ Public Class dlgColumnStats
         strDefaultFactors = Nothing
     End Sub
 
+    Public Sub SetDefaultTab(strNewDefaultTab As String)
+        strDefaultTab = strNewDefaultTab
+    End Sub
+
     Public Sub TestOKEnabled()
         If ((ucrChkStoreResults.Checked OrElse ucrChkPrintOutput.Checked) AndAlso Not clsSummariesList.clsParameters.Count = 0) AndAlso sdgSummaries.bOkEnabled Then
             ucrBase.OKEnabled(True)
@@ -166,9 +170,10 @@ Public Class dlgColumnStats
     End Sub
 
     Private Sub cmdSummaries_Click(sender As Object, e As EventArgs) Handles cmdSummaries.Click
-        sdgSummaries.SetRFunction(clsNewRFunction:=clsSummariesList, clsNewDefaultFunction:=clsDefaultFunction, clsNewConcFunction:=clsConcFunction, ucrNewBaseSelector:=ucrSelectorForColumnStatistics, bReset:=bResetSubdialog, strNewWeightLabel:=strWeightLabel)
+        sdgSummaries.SetRFunction(clsNewRFunction:=clsSummariesList, clsNewDefaultFunction:=clsDefaultFunction, clsNewConcFunction:=clsConcFunction, ucrNewBaseSelector:=ucrSelectorForColumnStatistics, bReset:=bResetSubdialog, strNewWeightLabel:=strWeightLabel, strDefaultTab:=strDefaultTab)
         sdgSummaries.ShowDialog()
         bResetSubdialog = False
+        strDefaultTab = ""
         TestOKEnabled()
     End Sub
 
@@ -185,6 +190,12 @@ Public Class dlgColumnStats
         Else
             clsDefaultFunction.RemoveParameterByName("use")
         End If
+        If Not ucrChkOmitMissing.Checked Then
+            clsDefaultFunction.RemoveParameterByName("na_type")
+        Else
+            clsDefaultFunction.AddParameter("na_type", clsRFunctionParameter:=clsConcFunction, iPosition:=9)
+        End If
+        cmdMissingOptions.Enabled = ucrChkOmitMissing.Checked
     End Sub
 
     Private Sub ucrChkPrintOutput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlValueChanged
@@ -209,6 +220,12 @@ Public Class dlgColumnStats
         Else
             strWeightLabel = ""
         End If
+    End Sub
+
+    Private Sub cmdMissingOptions_Click(sender As Object, e As EventArgs) Handles cmdMissingOptions.Click
+        sdgMissingOptions.SetRFunction(clsNewSummaryFunction:=clsDefaultFunction, clsNewConcFunction:=clsConcFunction, bReset:=bResetSubdialog)
+        bResetSubdialog = False
+        sdgMissingOptions.ShowDialog()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged

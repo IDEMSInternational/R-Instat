@@ -403,108 +403,122 @@ missing_values_check <- function(x) {
 }
 
 # summary function labels
-sum_label="summary_sum"
-mode_label="summary_mode"
-count_label="summary_count"
-count_missing_label="summary_count_missing"
-count_non_missing_label="summary_count_non_missing"
-sd_label = "summary_sd"
-var_label = "summary_var"
-median_label = "summary_median"
-range_label = "summary_range"
-min_label="summary_min"
-max_label="summary_max"
-mean_label="summary_mean"
-trimmed_mean_label = "summary_trimmed_mean"
-quartile_label="summary_quartile"
-lower_quart_label="lower_quartile"
-upper_quart_label="upper_quartile"
-skewness_label="summary_skewness"
-summary_skewness_mc_label="summary_skewness_mc"
-summary_outlier_limit_label = "summary_outlier_limit"
-kurtosis_label="summary_kurtosis"
-summary_coef_var_label="summary_coef_var"
-summary_median_absolute_deviation_label="summary_median_absolute_deviation"
-summary_Qn_label="summary_Qn"
-summary_Sn_label="summary_Sn"
-cor_label="summary_cor"
-cov_label="summary_cov"
-first_label="summary_first"
-last_label="summary_last"
-nth_label="summary_nth"
-n_distinct_label="summary_n_distinct"
-proportion_label="proportion_calc"
-count_calc_label="count_calc"
-standard_error_mean_label="standard_error_mean"
-circular_mean_label="summary_circular_mean"
-circular_median_label="summary_circular_median"
-circular_medianHL_label="summary_circular_medianHL"
-circular_min_label="summary_circular_min"
-circular_max_label="summary_circular_max"
-circular_Q1_label="summary_circular_Q1"
-circular_Q3_label="summary_circular_Q3"
-circular_quantile_label="summary_circular_quantile"
-circular_sd_label="summary_circular_sd"
-circular_var_label="summary_circular_var"
-circular_ang_dev_label="summary_circular_ang_dev"
-circular_ang_var_label="summary_circular_ang_var"
-circular_rho_label="summary_circular_rho"
-circular_range_label="summary_circular_range"
-mean_error_label="me"
-mean_absolute_error_label="mae"
-root_mean_square_error_label="rmse"
-normalised_mean_square_error_label="nrmse"
-percent_bias_label="PBIAS"
-nash_Sutcliffe_efficiency_label="NSE"
-modified_Nash_Sutcliffe_efficiency_label="mNSE"
-relative_Nash_Sutcliffe_efficiency_label="rNSE"
-Index_of_agreement_label="d"
-modified_index_of_aggrement_label="md"
-relative_index_of_agreement_label="rd"
-coefficient_of_determination_label="R2"
-coefficient_of_persistence_label="cp"
-kling_Gupta_efficiency_label="KGE"
-mean_squared_error_label="mse"
-ratio_of_standard_deviations_label="rSD"
-ratio_of_RMSE_label="rsr"
-sum_of_squared_residuals_label="ssq"
-volumetric_efficiency_label="VE"
+sum_label <- "summary_sum"
+mode_label <- "summary_mode"
+count_label <- "summary_count"
+count_missing_label <- "summary_count_missing"
+count_non_missing_label <- "summary_count_non_missing"
+sd_label <- "summary_sd"
+var_label <- "summary_var"
+median_label <- "summary_median"
+range_label <- "summary_range"
+min_label <- "summary_min"
+max_label <- "summary_max"
+mean_label <- "summary_mean"
+trimmed_mean_label <- "summary_trimmed_mean"
+quartile_label <- "summary_quartile"
+p10_label <- "p10"
+p20_label <- "p20"
+p25_label <- "p25"
+p30_label <- "p30"
+p33_label <- "p33"
+p40_label <- "p40"
+p60_label <- "p60"
+p67_label <- "p67"
+p70_label <- "p70"
+p75_label <- "p75"
+p80_label <- "p80"
+p90_label <- "p90"
+skewness_label <- "summary_skewness"
+summary_skewness_mc_label <- "summary_skewness_mc"
+summary_outlier_limit_label <- "summary_outlier_limit"
+kurtosis_label <- "summary_kurtosis"
+summary_coef_var_label <- "summary_coef_var"
+summary_median_absolute_deviation_label <- "summary_median_absolute_deviation"
+summary_Qn_label <- "summary_Qn"
+summary_Sn_label <- "summary_Sn"
+cor_label <- "summary_cor"
+cov_label <- "summary_cov"
+first_label <- "summary_first"
+last_label <- "summary_last"
+nth_label <- "summary_nth"
+n_distinct_label <- "summary_n_distinct"
+proportion_label <- "proportion_calc"
+count_calc_label <- "count_calc"
+standard_error_mean_label <- "standard_error_mean"
+circular_mean_label <- "summary_circular_mean"
+circular_median_label <- "summary_circular_median"
+circular_medianHL_label <- "summary_circular_medianHL"
+circular_min_label <- "summary_circular_min"
+circular_max_label <- "summary_circular_max"
+circular_Q1_label <- "summary_circular_Q1"
+circular_Q3_label <- "summary_circular_Q3"
+circular_quantile_label <- "summary_circular_quantile"
+circular_sd_label <- "summary_circular_sd"
+circular_var_label <- "summary_circular_var"
+circular_ang_dev_label <- "summary_circular_ang_dev"
+circular_ang_var_label <- "summary_circular_ang_var"
+circular_rho_label <- "summary_circular_rho"
+circular_range_label <- "summary_circular_range"
+mean_error_label <- "me"
+mean_absolute_error_label <- "mae"
+root_mean_square_error_label <- "rmse"
+normalised_mean_square_error_label <- "nrmse"
+percent_bias_label <- "PBIAS"
+nash_Sutcliffe_efficiency_label <- "NSE"
+modified_Nash_Sutcliffe_efficiency_label <- "mNSE"
+relative_Nash_Sutcliffe_efficiency_label <- "rNSE"
+Index_of_agreement_label <- "d"
+modified_index_of_aggrement_label <- "md"
+relative_index_of_agreement_label <- "rd"
+coefficient_of_determination_label <- "R2"
+coefficient_of_persistence_label <- "cp"
+kling_Gupta_efficiency_label <- "KGE"
+mean_squared_error_label <- "mse"
+ratio_of_standard_deviations_label <- "rSD"
+ratio_of_RMSE_label <- "rsr"
+sum_of_squared_residuals_label <- "ssq"
+volumetric_efficiency_label <- "VE"
 
 
 
 # list of all summary function names
 # the order of this list determines the order summaries appears in certain functions
-all_summaries <- c(count_label, count_non_missing_label, count_missing_label, 
-                   min_label, lower_quart_label, quartile_label, median_label, 
-                   summary_median_absolute_deviation_label, summary_coef_var_label, 
-                   summary_Qn_label, summary_Sn_label,
-                   mode_label, mean_label, 
-                   trimmed_mean_label, upper_quart_label, max_label, sum_label, 
-                   sd_label, var_label, range_label, standard_error_mean_label,
-                   skewness_label, summary_skewness_mc_label, kurtosis_label, 
-                   summary_outlier_limit_label, 
-                   cor_label, cov_label, first_label, last_label, nth_label, n_distinct_label, 
-                   proportion_label, count_calc_label, 
-                   circular_min_label, circular_Q1_label, circular_quantile_label, 
-                   circular_median_label, circular_medianHL_label, circular_mean_label, 
-                   circular_Q3_label, circular_max_label, 
-                   circular_sd_label, circular_var_label, circular_range_label,
-                   circular_ang_dev_label, circular_ang_var_label, circular_rho_label,
-                   mean_error_label, mean_absolute_error_label, root_mean_square_error_label,
-                   normalised_mean_square_error_label, percent_bias_label, nash_Sutcliffe_efficiency_label,
-                   modified_Nash_Sutcliffe_efficiency_label, relative_Nash_Sutcliffe_efficiency_label,
-                   Index_of_agreement_label, modified_index_of_aggrement_label, relative_index_of_agreement_label,
-                   coefficient_of_determination_label, coefficient_of_persistence_label,
-                   kling_Gupta_efficiency_label, mean_squared_error_label, ratio_of_standard_deviations_label,
-                   ratio_of_RMSE_label, sum_of_squared_residuals_label, volumetric_efficiency_label)
+all_summaries <- c(
+  count_label, count_non_missing_label, count_missing_label,
+  min_label, p10_label, p20_label, p25_label, p30_label, p33_label, p40_label, p60_label, p67_label, p70_label, p75_label, p80_label, p90_label, quartile_label, median_label,
+  summary_median_absolute_deviation_label, summary_coef_var_label,
+  summary_Qn_label, summary_Sn_label,
+  mode_label, mean_label,
+  trimmed_mean_label, max_label, sum_label,
+  sd_label, var_label, range_label, standard_error_mean_label,
+  skewness_label, summary_skewness_mc_label, kurtosis_label,
+  summary_outlier_limit_label,
+  cor_label, cov_label, first_label, last_label, nth_label, n_distinct_label,
+  proportion_label, count_calc_label,
+  circular_min_label, circular_Q1_label, circular_quantile_label,
+  circular_median_label, circular_medianHL_label, circular_mean_label,
+  circular_Q3_label, circular_max_label,
+  circular_sd_label, circular_var_label, circular_range_label,
+  circular_ang_dev_label, circular_ang_var_label, circular_rho_label,
+  mean_error_label, mean_absolute_error_label, root_mean_square_error_label,
+  normalised_mean_square_error_label, percent_bias_label, nash_Sutcliffe_efficiency_label,
+  modified_Nash_Sutcliffe_efficiency_label, relative_Nash_Sutcliffe_efficiency_label,
+  Index_of_agreement_label, modified_index_of_aggrement_label, relative_index_of_agreement_label,
+  coefficient_of_determination_label, coefficient_of_persistence_label,
+  kling_Gupta_efficiency_label, mean_squared_error_label, ratio_of_standard_deviations_label,
+  ratio_of_RMSE_label, sum_of_squared_residuals_label, volumetric_efficiency_label
+)
 
 # which of the summaries should return a Date value when x is a Date?
-date_summaries <- c(min_label, lower_quart_label, quartile_label, median_label, 
-                    mode_label, mean_label, trimmed_mean_label, upper_quart_label, 
-                    max_label, first_label, last_label, nth_label, 
-                    circular_min_label, circular_Q1_label, circular_quantile_label, 
-                    circular_median_label, circular_medianHL_label, circular_mean_label, 
-                    circular_Q3_label, circular_max_label)
+date_summaries <- c(
+  min_label, p10_label, p20_label, p25_label, p30_label, p33_label, p40_label, p60_label, p67_label, p70_label, p75_label, p80_label, p90_label, quartile_label, median_label,
+  mode_label, mean_label, trimmed_mean_label,
+  max_label, first_label, last_label, nth_label,
+  circular_min_label, circular_Q1_label, circular_quantile_label,
+  circular_median_label, circular_medianHL_label, circular_mean_label,
+  circular_Q3_label, circular_max_label
+)
   
 summary_mode <- function(x,...) {
   ux <- unique(x)
@@ -516,29 +530,30 @@ summary_mode <- function(x,...) {
 
 na_check <- function(x, na_type = c(), na_consecutive_n = NULL, na_max_n = NULL, na_max_prop = NULL, na_min_n = NULL, na_FUN = NULL, ...) {
   res <- c()
-  k <- 1
-  for (i in na_type) {
-    ##Added this to avoid error when "" is trancated. Not sure why "" is removed in some instances. 
-    ##Works differently with main summary function when you have a single case/multiple cases of na_type.
-    if(i == "'n'" || i == "n") {
-      res[k] <- summary_count_missing(x) <= na_max_n
+  for (i in seq_along(na_type)) {
+    type <- na_type[i]
+    if (type %in% c("n","'n'")) {
+      res[i] <- summary_count_missing(x) <= na_max_n
     }
-    else if(i == "'prop'" || i == "prop") {
-      res[k] <- (summary_count_missing(x)/summary_count(x)) <= na_max_prop/100
+    else if (type %in% c("prop","'prop'")) {
+      res[i] <- (summary_count_missing(x) / summary_count(x)) <= na_max_prop / 100
     }
-    else if(i == "'n_non_miss'" || i == "n_non_miss") {
-      res[k] <- summary_count_non_missing(x) >= na_min_n
+    else if (type %in% c("n_non_miss","'n_non_miss'")) {
+      res[i] <- summary_count_non_missing(x) >= na_min_n
     }
-    else if(i == "'FUN'" || i == "FUN") {
-      res[k] <- na_FUN(x, ...)
+    else if (type %in% c("FUN","'FUN'")) {
+      res[i] <- na_FUN(x, ...)
     }
-    else if(i == "'con'" || i == "con") {
+    else if (type %in% c("con","'con'")) {
       is_na_rle <- rle(is.na(x))
-      res[k] <- max(is_na_rle$lengths[is_na_rle$values]) <= na_consecutive_n
+      res[i] <- max(is_na_rle$lengths[is_na_rle$values]) <= na_consecutive_n
     }
-    else stop("Invalid na_type specified for missing values check.")
-    if(!res[k]) return(FALSE)
-    k <-  k+1
+    else {
+      stop("Invalid na_type specified for missing values check.")
+    }
+    if (!res[i]) {
+      return(FALSE)
+    }
   }
   return(all(res))
 }
@@ -631,12 +646,12 @@ summary_quantile_circular <- function (x, probs = seq(0, 1, 0.25), na.rm = FALSE
   else return(circular::quantile.circular(x, probs = probs, na.rm = na.rm, names = names, type = type)[[1]])
 }
 
-summary_mean <- function (x, add_cols, weights = "", na.rm = FALSE, trim = 0, na_type = "", ...) {
+summary_mean <- function (x, add_cols, weights = NULL, na.rm = FALSE, trim = 0, na_type = "", ...) {
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
   else {
     if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
     else {
-      if (missing(weights)) 
+      if (missing(weights) || is.null(weights))
         return(mean(x, na.rm = na.rm, trim = trim))
       else 
         return(stats::weighted.mean(x, w = weights, na.rm = na.rm))
@@ -644,7 +659,7 @@ summary_mean <- function (x, add_cols, weights = "", na.rm = FALSE, trim = 0, na
   }
 }
 
-summary_trimmed_mean <- function (x, add_cols, weights="", na.rm = FALSE, trimmed = 0, na_type = "", ...) {
+summary_trimmed_mean <- function (x, add_cols, weights = NULL, na.rm = FALSE, trimmed = 0, na_type = "", ...) {
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
   else {
     if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
@@ -653,11 +668,11 @@ summary_trimmed_mean <- function (x, add_cols, weights="", na.rm = FALSE, trimme
   }
 }
 
-summary_sum <- function (x, weights = "", na.rm = FALSE, na_type = "", ...) {
+summary_sum <- function (x, weights = NULL, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else {
-      if (missing(weights)) return(sum(x, na.rm = na.rm))
-      else return(sum(x*weights, na.rm = na.rm))
+      if (missing(weights) || is.null(weights)) return(sum(x, na.rm = na.rm))
+      else return(sum(x * weights, na.rm = na.rm))
     }
   }
 
@@ -675,23 +690,26 @@ summary_count_non_missing <- function(x, ...) {
   return(sum(!is.na(x)))
 }
 
-summary_sd <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
+summary_sd <- function(x, na.rm = FALSE, weights = NULL, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if (missing(weights)) 
+    if (missing(weights) || is.null(weights)) {
       return(sd(x, na.rm = na.rm))
-    else 
+    } else {
       return(sqrt(Hmisc::wtd.var(x, weights = weights, na.rm = na.rm)))
+    }
   }  
 }
 
-summary_var <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
+summary_var <- function(x, na.rm = FALSE, weights = NULL, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if (missing(weights)) 
+    if (missing(weights) || is.null(weights)) {
       return(var(x,na.rm = na.rm))
-    else 
+    }
+    else {
       return(Hmisc::wtd.var(x, weights = weights, na.rm = na.rm))
+    }
   }
 }
 
@@ -721,68 +739,107 @@ summary_range <- function(x, na.rm = FALSE, na_type = "", ...) {
 }
 
 # median function
-summary_median <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
+summary_median <- function(x, na.rm = FALSE, weights = NULL, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if(missing(weights))
+    if(missing(weights) || is.null(weights)) {
       return(median(x, na.rm = na.rm))
-    else 
+    }
+    else {
       return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.5, na.rm = na.rm))
+    }
   }
 }
 
 # quantile function
-summary_quantile <- function(x, na.rm = FALSE, weights = "", probs, na_type = "", ...) {
+summary_quantile <- function(x, na.rm = FALSE, weights = NULL, probs, na_type = "", ...) {
   if(!na.rm && anyNA(x)) return(NA)
   # This prevents multiple values being returned
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(missing(weights))
+  else {
+    if(missing(weights) || is.null(weights)) {
       return(quantile(x, na.rm = na.rm, probs = probs)[[1]])
-    else 
+    }
+    else {
       return(Hmisc::wtd.quantile(x, weights = weights, probs = probs, na.rm = na.rm))
-  }
-}
-
-# lower quartile function
-lower_quartile <- function(x, na.rm = FALSE, na_type = "", weights = "", ...) {
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(missing(weights))
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.25))
-    else{
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.25, na.rm = na.rm)[[1]])
     }
   }
 }
 
-# upper quartile function
-upper_quartile <- function(x, na.rm = FALSE, na_type = "" ,weights = "", ...) {
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if(missing(weights))
-      return(summary_quantile(x, na.rm = na.rm, probs = 0.75))
-    else{
-      return(Hmisc::wtd.quantile(x, weights = weights, probs = 0.75, na.rm = na.rm)[[1]])
-    }
-  }
+# p10 function
+p10 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.1)
+}
+
+# p20 function
+p20 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.2)
+}
+
+# p25 function
+p25 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.25)
+}
+
+# p30 function
+p30 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.3)
+}
+
+# p33 function
+p33 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.33)
+}
+
+# p40 function
+p40 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.4)
+}
+
+# p60 function
+p60 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.6)
+}
+
+# p67 function
+p67 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.67)
+}
+
+# p70 function
+p70 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.7)
+}
+
+# p75 function
+p75 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.75)
+}
+
+# p80 function
+p80 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.8)
+}
+
+# p90 function
+p90 <- function(x, na.rm = FALSE, na_type = "", weights = NULL, ...) {
+  summary_quantile(x = x, na.rm = na.rm, na_type = na_type, weights = weights, probs = 0.9)
 }
 
 # Skewness e1071 function
-summary_skewness <- function(x, weights = "", na.rm = FALSE, type = 2, na_type = "", ...) {
+summary_skewness <- function(x, weights = NULL, na.rm = FALSE, type = 2, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if (missing(weights)) {
+    if (missing(weights) || is.null(weights)) {
       return(e1071::skewness(x, na.rm = na.rm, type = type))
     }
-    if (length(weights) != length(x)) 
-      stop("'x' and 'weights' must have the same length")
+    if (length(weights) != length(x)) stop("'x' and 'weights' must have the same length")
     if (na.rm) {
-      i <- !is.na(x)&&!is.na(weights)
+      i <- !is.na(x) && !is.na(weights)
       weights <- weights[i]
       x <- x[i]
     }
-    ( sum( weights*(x - Weighted.Desc.Stat::w.mean(x, weights))^3 ) / sum(weights)) / Weighted.Desc.Stat::w.sd(x, weights)^3
+    ( sum( weights * (x - Weighted.Desc.Stat::w.mean(x, weights))^3 ) / sum(weights)) / Weighted.Desc.Stat::w.sd(x, weights)^3
   }
 }
 
@@ -823,10 +880,10 @@ summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc
 }
 
 # kurtosis function
-summary_kurtosis <- function(x, na.rm = FALSE, weights = "", type = 2, na_type = "", ...) {
+summary_kurtosis <- function(x, na.rm = FALSE, weights = NULL, type = 2, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if (missing(weights)) {
+    if (missing(weights) || is.null(weights)) {
       return(e1071::kurtosis(x, na.rm = na.rm, type = type))
     }
     if (length(weights) != length(x)) 
@@ -841,10 +898,10 @@ summary_kurtosis <- function(x, na.rm = FALSE, weights = "", type = 2, na_type =
 }
 
 # Coefficient of Variation function
-summary_coef_var <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) {
+summary_coef_var <- function(x, na.rm = FALSE, weights = NULL, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if (missing(weights)) {
+    if (missing(weights) || is.null(weights)) {
       return(summary_sd(x) / summary_mean(x))
     }
     if (length(weights) != length(x)) 
@@ -859,12 +916,13 @@ summary_coef_var <- function(x, na.rm = FALSE, weights = "", na_type = "", ...) 
 }
 
 # median absolute deviation function
-summary_median_absolute_deviation <- function(x, constant = 1.4826, na.rm = FALSE, na_type = "", weights = "", low = FALSE, high = FALSE, ...) {
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if (missing(weights))
+summary_median_absolute_deviation <- function(x, constant = 1.4826, na.rm = FALSE, na_type = "", weights = NULL, low = FALSE, high = FALSE, ...) {
+  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    if (missing(weights) || is.null(weights)) {
       return(stats::mad(x, constant = constant, na.rm = na.rm, low = low, high = high))
-    else{
+    }
+    else {
       Weighted.Desc.Stat::w.ad(x = x, mu = weights)
     }
   }
@@ -895,22 +953,23 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
 }
 
 # cor function
-summary_cor <- function(x, y, na.rm = FALSE, na_type = "", weights = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
-  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else{
-    if (missing(weights))
+summary_cor <- function(x, y, na.rm = FALSE, na_type = "", weights = NULL, method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+  if (na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  else {
+    if (missing(weights) || is.null(weights)) {
       return(cor(x = x, y = y, use = use, method = method))
-    else{
+    }
+    else {
       weights::wtd.cor(x = x, y = y, weight = weights)[1]
     }
   }
 }
 
 # cov function 
-summary_cov <- function(x, y, na.rm = FALSE, weights = "", na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
+summary_cov <- function(x, y, na.rm = FALSE, weights = NULL, na_type = "", method = c("pearson", "kendall", "spearman"), use = c( "everything", "all.obs", "complete.obs", "na.or.complete", "pairwise.complete.obs"), ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-    if (missing(weights)) {
+    if (missing(weights) || is.null(weights)) {
       return(cov(x = x, y = y, use = use, method = method))
     }
     if (length(weights) != length(x)) 
