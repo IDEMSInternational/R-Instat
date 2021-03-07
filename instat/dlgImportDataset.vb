@@ -128,9 +128,9 @@ Public Class dlgImportDataset
         ucrInputFilePath.SetParameter(New RParameter("file"))
         ucrInputFilePath.IsReadOnly = True
 
+        ucrSaveFile.SetSaveTypeAsDataFrame()
         ucrSaveFile.SetLabelText("New Data Frame Name:")
         ucrSaveFile.SetIsTextBox()
-        ucrSaveFile.SetSaveTypeAsDataFrame()
         ucrSaveFile.ucrInputTextSave.bAutoChangeOnLeave = True
 
         ucrNudPreviewLines.Value = 10
@@ -559,7 +559,11 @@ Public Class dlgImportDataset
         grpExcel.Visible = bVisible
         clbSheets.Visible = bVisible
         lblSelectSheets.Visible = bVisible
-        ucrChkSheetsCheckAll.Visible = bVisible
+        If bVisible Then
+            ucrChkSheetsCheckAll.Show()
+        Else
+            ucrChkSheetsCheckAll.Hide()
+        End If
     End Sub
 
     Public Sub SetControlsFromFile(strFilePath As String)
