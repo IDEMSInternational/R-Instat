@@ -2439,7 +2439,7 @@ white spaces</value>
     <value>22</value>
   </data>
   <data name="ucrSaveFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 411</value>
+    <value>9, 412</value>
   </data>
   <data name="ucrSaveFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
