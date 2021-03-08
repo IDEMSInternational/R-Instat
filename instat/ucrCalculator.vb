@@ -21,7 +21,6 @@ Public Class ucrCalculator
     Public Event SaveNameChanged()
     Public Event DataFrameChanged()
     Public Event TryCommadClick()
-    Public Event SaveResultChanged()
     Public bFirstLoad As Boolean = True
     Public bControlsInitialised As Boolean = False
     Public clsHelp As New RFunction
@@ -2741,19 +2740,11 @@ Public Class ucrCalculator
     End Sub
 
     ''' <summary>
-    ''' raised when the input name is changed
+    ''' this will be raised when the input name is changed and even when the ucrSave checkbox checked status is changed
     ''' </summary>
     ''' <param name="ucrChangedControl"></param>
     Private Sub ucrSaveResultInto_SaveNameChanged(ucrChangedControl As ucrCore) Handles ucrSaveResultInto.ControlContentsChanged
         RaiseEvent SaveNameChanged()
-    End Sub
-
-    ''' <summary>
-    ''' this will be raised when the input name is changed and even when the ucrSave checkbox checked status is changed
-    ''' </summary>
-    ''' <param name="ucrChangedControl"></param>
-    Private Sub ucrSaveResultInto_SaveResultChanged(ucrChangedControl As ucrCore) Handles ucrSaveResultInto.ControlContentsChanged
-        RaiseEvent SaveResultChanged()
     End Sub
 
 End Class

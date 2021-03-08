@@ -100,7 +100,7 @@ Public Class dlgCalculator
         End If
     End Sub
 
-    Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveResultChanged
+    Private Sub ucrCalc_SaveNameChanged() Handles ucrCalc.SaveNameChanged
         SaveResults()
         TestOKEnabled()
     End Sub
