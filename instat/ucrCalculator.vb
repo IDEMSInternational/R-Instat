@@ -2749,7 +2749,7 @@ Public Class ucrCalculator
     End Sub
 
     ''' <summary>
-    ''' this will be raised the input name is changed and even when the ucrSave checkbox checked status is changed
+    ''' this will be raised when the input name is changed and even when the ucrSave checkbox checked status is changed
     ''' </summary>
     ''' <param name="ucrChangedControl"></param>
     Private Sub ucrSaveResultInto_SaveResultChanged(ucrChangedControl As ucrCore) Handles ucrSaveResultInto.ControlContentsChanged
