@@ -73,7 +73,7 @@ Public Class dlgSplitText
         dctPatternPairs.Add("Semicolon ;", Chr(34) & ";" & Chr(34))
         dctPatternPairs.Add("Hyphen -", Chr(34) & "-" & Chr(34))
         dctPatternPairs.Add("Underscore _", Chr(34) & "_" & Chr(34))
-        ucrInputPattern.SetItems(dctPatternPairs, bNewHasRParamFunctionAsString:=True)
+        ucrInputPattern.SetItems(dctPatternPairs)
         'ucrInputPattern.SetRDefault(Chr(34) & " " & Chr(34)) 'This is the default for clsTextComponents
         ucrInputPattern.bAllowNonConditionValues = True
 

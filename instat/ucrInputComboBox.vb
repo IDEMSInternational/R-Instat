@@ -19,7 +19,6 @@ Imports instat
 
 Public Class ucrInputComboBox
     Dim strItemsType As String = ""
-    Private bHasRFunctionParamAsString As Boolean = False
 
     Public Sub New()
 
@@ -200,9 +199,8 @@ Public Class ucrInputComboBox
         End If
     End Sub
 
-    Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True, Optional bSetCondtions As Boolean = True, Optional bNewHasRParamFunctionAsString As Boolean = False)
+    Public Sub SetItems(dctItemParameterValuePairs As Dictionary(Of String, String), Optional bClearExisting As Boolean = True, Optional bSetCondtions As Boolean = True)
         Dim kvpTemp As KeyValuePair(Of String, String)
-        bHasRFunctionParamAsString = bNewHasRParamFunctionAsString
 
         If bClearExisting Then
             cboInput.Items.Clear()
