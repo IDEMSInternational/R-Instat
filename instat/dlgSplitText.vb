@@ -29,7 +29,7 @@ Public Class dlgSplitText
             bFirstLoad = False
         End If
         If bReset Then
-            SetDefaults(lstRCodeStructure)
+            SetDefaults()
         End If
         SetRCodeForControls(bReset)
         bReset = False
@@ -87,86 +87,45 @@ Public Class dlgSplitText
         ucrSaveColumn.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
     End Sub
 
-    Private Sub SetDefaults(Optional lstOfRCodeStructure As List(Of RCodeStructure) = Nothing)
-        clsTextComponentsFixed = New RFunction
-        clsTextComponentsMaximum = New RFunction
-        clsBinaryColumns = New RFunction
-
-        ucrSelectorSplitTextColumn.Reset()
-
-        'Setting of Package name and R commands for Rfunction happens before  we can check if any of these
-        'Rfunction matches the one from the Script
-        clsBinaryColumns.SetPackageName("questionr")
-        clsBinaryColumns.SetRCommand("multi.split")
-
-        clsTextComponentsFixed.SetPackageName("stringr")
-        clsTextComponentsFixed.SetRCommand("str_split_fixed")
-
-        clsTextComponentsMaximum.SetPackageName("stringr")
-        clsTextComponentsMaximum.SetRCommand("str_split")
+    Private Sub SetDefaults()
+        ResetRFunctions()
 
         If IsNothing(lstRCodeStructure) Then
-            'Continue with the updating Rfunction of Default value as normal
-            AddClsTextComponentsFixedDefaultParameters()
-
-            AddClsTextComponentsMaximumDefaultParameters()
-
-            ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
-            'This dialogue only requires one line of code to load hence this next elseIf statement
+            setRFunctionDefaultParameters()
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            setRFunctionDefaultParameters()
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
         ElseIf (lstRCodeStructure.Count = 1) Then
-            If Not IsNothing(TryCast(lstOfRCodeStructure(0), RFunction)) Then
-                'bMatchTwoRfunction Determines if the ListofRcodeStructure from the 
-                'script matches more than one RFunction
-                Dim bMatchTwoRfunction As Boolean = False
-                Dim strRcommand = TryCast(lstOfRCodeStructure(0), RFunction).strRCommand
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                Dim strRcommand = TryCast(lstRCodeStructure(0), RFunction).strRCommand
 
-                For Each Rfunction In {clsTextComponentsFixed, clsTextComponentsMaximum, clsBinaryColumns}
-                    If strRcommand = Rfunction.strRCommand Then
-                        If bMatchTwoRfunction Then
-                            MsgBox("Developer error:More Than one Rfunctions match the Rfunction from the script")
-                            Exit For
-                            'TODO continue the normal loading of the dialogue if there
-                            'are more than one function matching the  Script
-                        Else
-                            If Rfunction Is clsTextComponentsFixed Then
-                                clsTextComponentsFixed = lstOfRCodeStructure(0)
+                Select Case strRcommand
+                    Case clsTextComponentsFixed.strRCommand
+                        clsTextComponentsFixed = lstRCodeStructure(0)
+                        AddClsTextComponentsMaximumDefaultParameters()
 
-                                AddClsTextComponentsMaximumDefaultParameters()
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
+                    Case clsBinaryColumns.strRCommand
+                        clsBinaryColumns = lstRCodeStructure(0)
+                        AddClsTextComponentsFixedDefaultParameters()
+                        AddClsTextComponentsMaximumDefaultParameters()
 
-                                ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
-                                bMatchTwoRfunction = True
-                            ElseIf Rfunction Is clsBinaryColumns Then
-                                clsBinaryColumns = lstOfRCodeStructure(0)
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
+                    Case clsTextComponentsMaximum.strRCommand
+                        clsTextComponentsMaximum = lstRCodeStructure(0)
+                        AddClsTextComponentsFixedDefaultParameters()
 
-                                AddClsTextComponentsFixedDefaultParameters()
-
-                                AddClsTextComponentsMaximumDefaultParameters()
-
-                                ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
-                                bMatchTwoRfunction = True
-                            ElseIf Rfunction Is clsTextComponentsMaximum Then
-                                clsTextComponentsMaximum = lstOfRCodeStructure(0)
-
-                                AddClsTextComponentsFixedDefaultParameters()
-
-                                ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
-                                bMatchTwoRfunction = True
-                            End If
-                        End If
-                    End If
-                Next
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsMaximum)
+                    Case Else
+                        setRFunctionDefaultParameters()
+                        MsgBox("Developer error:The Rfunction does not match any Rfunction in the dialogue")
+                End Select
             Else
+                setRFunctionDefaultParameters()
                 MsgBox("Developer error:The Script must be an RFunction")
             End If
-            'This returns the list of Rcode from the script to nothing to prevent begguing when reseting
-            lstRCodeStructure = Nothing
-        Else
-            lstRCodeStructure = Nothing
-            'When the lstOfRcodeStructure has more than one Rfunction
-            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
         End If
-
-
+        lstScriptsRCodeStructure = Nothing
 
         clsTextComponentsFixed.SetAssignTo(strTemp:="split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="split", bAssignToIsPrefix:=True)
         clsTextComponentsMaximum.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="split", bAssignToIsPrefix:=True)
@@ -182,6 +141,30 @@ Public Class dlgSplitText
     Private Sub AddClsTextComponentsFixedDefaultParameters()
         clsTextComponentsFixed.AddParameter("pattern", Chr(34) & "," & Chr(34), iPosition:=1)
         clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
+    End Sub
+
+    Private Sub ResetRFunctions()
+        clsTextComponentsFixed = New RFunction
+        clsTextComponentsMaximum = New RFunction
+        clsBinaryColumns = New RFunction
+
+        ucrSelectorSplitTextColumn.Reset()
+
+        clsBinaryColumns.SetPackageName("questionr")
+        clsBinaryColumns.SetRCommand("multi.split")
+
+        clsTextComponentsFixed.SetPackageName("stringr")
+        clsTextComponentsFixed.SetRCommand("str_split_fixed")
+
+        clsTextComponentsMaximum.SetPackageName("stringr")
+        clsTextComponentsMaximum.SetRCommand("str_split")
+    End Sub
+
+    Private Sub setRFunctionDefaultParameters()
+        AddClsTextComponentsFixedDefaultParameters()
+        AddClsTextComponentsMaximumDefaultParameters()
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsFixed)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -238,4 +221,14 @@ Public Class dlgSplitText
         bReset = True
         lstRCodeStructure = lstNewRcodeStructure
     End Sub
+
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class

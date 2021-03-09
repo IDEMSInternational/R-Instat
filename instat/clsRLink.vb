@@ -2343,7 +2343,7 @@ Public Class RLink
 
         'Make it return only one line of code
         lstNewRCodeStructures.RemoveAt(0)
-        dlgSplitText.OpenFromScript(lstNewRCodeStructures)
+        dlgSplitText.lstScriptsRCodeStructure = lstNewRCodeStructures
         dlgSplitText.ShowDialog()
 
     End Sub
