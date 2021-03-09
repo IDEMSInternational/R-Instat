@@ -341,25 +341,4 @@ Public Class ucrInputComboBox
     Friend Sub AddToReceiverAtCursorPosition(v As String)
         Throw New NotImplementedException()
     End Sub
-
-    Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True, Optional bCloneIfNeeded As Boolean = False)
-        If bHasRFunctionParamAsString Then
-            'checking whether the parameter is not Nothing
-            If Not IsNothing(lstAllRParameters(0).strArgumentName) Then
-                'checking whether the parameter argument name is not nothing .I require this to compare with the parameter in the RCode
-                If Not IsNothing(clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName)) Then
-                    If clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).bIsFunction Then
-                        'check that script is not empty.Make sure you make script before changing the clsRCodeStructure
-                        clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).strArgumentValue = clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).clsArgumentCodeStructure.ToScript()
-                        clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).bIsFunction = False
-                        clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).bIsOperator = False
-                        clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).bIsString = True
-                        clsNewCodeStructure.GetParameter(lstAllRParameters(0).strArgumentName).clsArgumentCodeStructure = Nothing
-                    End If
-                End If
-            End If
-        End If
-        MyBase.SetRCode(clsNewCodeStructure:=clsNewCodeStructure, bReset:=bReset, bUpdate:=bUpdate, bCloneIfNeeded:=bCloneIfNeeded)
-    End Sub
-
 End Class
