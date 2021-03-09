@@ -343,7 +343,7 @@ Public Class ucrInputComboBox
     End Sub
 
     Public Overrides Sub SetRCode(clsNewCodeStructure As RCodeStructure, Optional bReset As Boolean = False, Optional bUpdate As Boolean = True, Optional bCloneIfNeeded As Boolean = False)
-        If bHasRFunctioParamAsString Then
+        If bHasRFunctionParamAsString Then
             'checking whether the parameter is not Nothing
             If Not IsNothing(lstAllRParameters(0).strArgumentName) Then
                 'checking whether the parameter argument name is not nothing .I require this to compare with the parameter in the RCode
