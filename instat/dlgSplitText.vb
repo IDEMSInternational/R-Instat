@@ -123,6 +123,14 @@ Public Class dlgSplitText
                         setRFunctionDefaultParameters()
                         MsgBox("Developer error:The Rfunction does not match any Rfunction in the dialogue")
                 End Select
+
+                'In this dialog, there are three functions that have a parameter set by the 'ucrReceiverSplitTextColumn' receiver.
+                'The value displayed by the receiver is initialised from just one of these functions ('clsTextComponentsFixed'). 
+                'The receiver is initialised, in the 'SetRCode' function, from the 'clsTextComponentsFixed' 'string' parameter.
+                'Therefore, to ensure that the receiver is initialised with the correct value, we need to initialise the 'clsTextComponentsFixed' 'string' parameter.
+                If Not IsNothing(clsParameter) Then
+                    clsTextComponentsFixed.AddParameter(clsParameter)
+                End If
             Else
                 setRFunctionDefaultParameters()
                 MsgBox("Developer error:The Script must be an RFunction")
