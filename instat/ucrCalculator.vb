@@ -2760,4 +2760,13 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::pm()", 1)
         End If
     End Sub
+
+    ''' <summary>
+    ''' this will be raised when the input name is changed and even when the ucrSave checkbox checked status is changed
+    ''' </summary>
+    ''' <param name="ucrChangedControl"></param>
+    Private Sub ucrSaveResultInto_SaveNameChanged(ucrChangedControl As ucrCore) Handles ucrSaveResultInto.ControlContentsChanged
+        RaiseEvent SaveNameChanged()
+    End Sub
+
 End Class
