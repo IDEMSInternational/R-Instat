@@ -556,7 +556,7 @@ Partial Class dlgOneVarFitModel
         Me.ucrSaveModel.Location = New System.Drawing.Point(10, 323)
         Me.ucrSaveModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveModel.Name = "ucrSaveModel"
-        Me.ucrSaveModel.Size = New System.Drawing.Size(277, 24)
+        Me.ucrSaveModel.Size = New System.Drawing.Size(277, 21)
         Me.ucrSaveModel.TabIndex = 38
         '
         'ucrDistributionChoice
