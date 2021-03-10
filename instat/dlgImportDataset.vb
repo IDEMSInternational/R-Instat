@@ -647,6 +647,7 @@ Public Class dlgImportDataset
                 Select Case clbSheets.CheckedItems.Count
                     Case Is > 1
                         ucrSaveFile.Hide()
+                        ucrSaveFile.SetPrefix(frmMain.clsRLink.MakeValidText(strFileName))
                     Case 1
                         ucrSaveFile.Show()
                     Case 0
@@ -972,6 +973,7 @@ Public Class dlgImportDataset
                 Else
                     strSheetNumbers = "c(" & String.Join(",", dctSelectedExcelSheets.Keys) & ")"
                     clsImportExcelMulti.AddParameter("which", strSheetNumbers)
+                    ucrSaveFile.SetPrefix(frmMain.clsRLink.MakeValidText(strFileName))
                     ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcelMulti)
                     ucrSaveFile.Hide()
                     ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=dctSelectedExcelSheets.Values.ToList())
@@ -988,6 +990,10 @@ Public Class dlgImportDataset
                 TestOkEnabled()
             End If
         End If
+    End Sub
+
+    Private Sub ucrSaveFile_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveFile.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrChkSheetsCheckAll_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSheetsCheckAll.ControlValueChanged
