@@ -1113,9 +1113,9 @@ Public Class ucrCalculator
     End Sub
     Private Sub cmdD_In_M_Click(sender As Object, e As EventArgs) Handles cmdD_In_M.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::d_in_m(x = )", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::days_in_month(x = )", 1)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::d_in_m()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::days_in_month()", 1)
         End If
     End Sub
     Private Sub cmdQuarter_Click(sender As Object, e As EventArgs) Handles cmdQuarter.Click
@@ -2726,14 +2726,6 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::VE(sim = , obs = )", 10)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("hydroGOF::VE(sim = , obs = )", 10)
-        End If
-    End Sub
-
-    Private Sub cmdAsdate_Click(sender As Object, e As EventArgs) Handles cmdAsdate.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::as_date(x = , )", 3)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::as_date()", 1)
         End If
     End Sub
 

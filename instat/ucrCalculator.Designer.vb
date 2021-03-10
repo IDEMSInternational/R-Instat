@@ -67,7 +67,6 @@ Partial Class ucrCalculator
         Me.cmdPm = New System.Windows.Forms.Button()
         Me.cmdTime = New System.Windows.Forms.Button()
         Me.cmdDateTime = New System.Windows.Forms.Button()
-        Me.cmdAsdate = New System.Windows.Forms.Button()
         Me.cmdQuarter = New System.Windows.Forms.Button()
         Me.cmdD_In_M = New System.Windows.Forms.Button()
         Me.cmdAm = New System.Windows.Forms.Button()
@@ -573,7 +572,6 @@ Partial Class ucrCalculator
         Me.grpDates.Controls.Add(Me.cmdPm)
         Me.grpDates.Controls.Add(Me.cmdTime)
         Me.grpDates.Controls.Add(Me.cmdDateTime)
-        Me.grpDates.Controls.Add(Me.cmdAsdate)
         Me.grpDates.Controls.Add(Me.cmdQuarter)
         Me.grpDates.Controls.Add(Me.cmdD_In_M)
         Me.grpDates.Controls.Add(Me.cmdAm)
@@ -611,12 +609,6 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdDateTime, "cmdDateTime")
         Me.cmdDateTime.Name = "cmdDateTime"
         Me.cmdDateTime.UseVisualStyleBackColor = True
-        '
-        'cmdAsdate
-        '
-        resources.ApplyResources(Me.cmdAsdate, "cmdAsdate")
-        Me.cmdAsdate.Name = "cmdAsdate"
-        Me.cmdAsdate.UseVisualStyleBackColor = True
         '
         'cmdQuarter
         '
@@ -2896,6 +2888,7 @@ Partial Class ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpHydroGOF)
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
@@ -2910,7 +2903,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpStrings)
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.grpModifier)
-        Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.chkShowParameters)
         Me.Controls.Add(Me.ucrInputCalOptions)
@@ -3294,6 +3286,5 @@ Partial Class ucrCalculator
     Friend WithEvents ucrSaveResultInto As ucrSave
     Friend WithEvents cmdTime As Button
     Friend WithEvents cmdDateTime As Button
-    Friend WithEvents cmdAsdate As Button
     Friend WithEvents cmdPm As Button
 End Class
