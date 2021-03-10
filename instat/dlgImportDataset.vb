@@ -131,6 +131,7 @@ Public Class dlgImportDataset
         ucrSaveFile.SetSaveTypeAsDataFrame()
         ucrSaveFile.SetLabelText("New Data Frame Name:")
         ucrSaveFile.SetIsTextBox()
+        ucrSaveFile.SetPrefix(frmMain.clsRLink.MakeValidText(GetCleanFileName(strFileToOpenOn)))
         ucrSaveFile.ucrInputTextSave.bAutoChangeOnLeave = True
 
         ucrNudPreviewLines.Value = 10
@@ -648,15 +649,12 @@ Public Class dlgImportDataset
                         ucrSaveFile.Hide()
                     Case 1
                         ucrSaveFile.Show()
-                        ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First(), bSilent:=True)
                     Case 0
                         ucrSaveFile.Show()
-                        ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
                 End Select
             Else
                 ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=False)
                 ucrSaveFile.Show()
-                ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
             End If
         Else
             ucrSaveFile.Hide()
@@ -967,7 +965,6 @@ Public Class dlgImportDataset
                 ElseIf dctSelectedExcelSheets.Count = 1 Then
                     strSheetNumbers = dctSelectedExcelSheets.Keys.First()
                     clsImportExcel.AddParameter("which", strSheetNumbers)
-                    ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First(), bSilent:=True)
                     ucrSaveFile.Focus()
                     ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
                     ucrSaveFile.Show()
@@ -975,7 +972,6 @@ Public Class dlgImportDataset
                 Else
                     strSheetNumbers = "c(" & String.Join(",", dctSelectedExcelSheets.Keys) & ")"
                     clsImportExcelMulti.AddParameter("which", strSheetNumbers)
-                    ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcelMulti)
                     ucrSaveFile.Hide()
                     ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=dctSelectedExcelSheets.Values.ToList())
