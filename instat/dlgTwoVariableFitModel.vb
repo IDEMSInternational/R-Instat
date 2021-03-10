@@ -732,7 +732,8 @@ Public Class dlgTwoVariableFitModel
                                       "________", "var", "ansari", "mood", "________", "cor", "spearman", "kendall"})
                 ucrInputTest.SetText("t")
             ElseIf strSecondVariableType = "categorical" Then
-                ucrInputTest.SetItems({"oneway", "kruskal", "bartlett", "fligner"})
+                ucrInputTest.SetItems({"t", "wilcox", "var", "ansari", "mood", "________",
+                                      "oneway", "kruskal", "bartlett", "fligner"})
                 ucrInputTest.SetText("oneway")
             ElseIf strSecondVariableType = "" Then
                 ucrInputTest.SetItems({"None"})
