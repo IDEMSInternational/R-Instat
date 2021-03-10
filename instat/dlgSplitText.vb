@@ -111,6 +111,8 @@ Public Class dlgSplitText
                         AddClsTextComponentsMaximumDefaultParameters()
 
                         ucrBase.clsRsyntax.SetBaseRFunction(clsBinaryColumns)
+                        clsParameter = clsBinaryColumns.GetParameter("var").Clone()
+                        clsParameter.SetArgumentName("string")
                     Case clsTextComponentsMaximum.strRCommand
                         clsTextComponentsMaximum = lstRCodeStructure(0)
                         AddClsTextComponentsFixedDefaultParameters()
