@@ -98,7 +98,7 @@ Public Class dlgSplitText
         ElseIf (lstRCodeStructure.Count = 1) Then
             If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
                 Dim strRcommand = TryCast(lstRCodeStructure(0), RFunction).strRCommand
-
+                Dim clsParameter As RParameter = Nothing
                 Select Case strRcommand
                     Case clsTextComponentsFixed.strRCommand
                         clsTextComponentsFixed = lstRCodeStructure(0)
