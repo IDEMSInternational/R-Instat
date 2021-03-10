@@ -307,21 +307,12 @@ Public Class ucrReceiverSingle
         RemoveSelected()
     End Sub
 
-    Private Sub Selector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
-        CheckAutoFill()
-    End Sub
-
     Private Sub ParentForm_Shown()
         If bFirstShown Then
             'This is not needed probably
             'CheckAutoFill()
             bFirstShown = False
         End If
-    End Sub
-
-    Protected Overrides Sub Selector_ResetAll()
-        MyBase.Selector_ResetAll()
-        CheckAutoFill()
     End Sub
 
     Private Sub ucrReceiverSingle_Load(sender As Object, e As EventArgs) Handles Me.Load

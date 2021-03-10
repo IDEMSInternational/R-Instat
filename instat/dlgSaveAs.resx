@@ -117,18 +117,48 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 70</value>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblConfirm.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblConfirm.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="lblConfirm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>96, 40</value>
+  </data>
+  <data name="lblConfirm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 13</value>
+  </data>
+  <data name="lblConfirm.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblConfirm.Text" xml:space="preserve">
+    <value>Click Ok to confirm the save</value>
+  </data>
+  <data name="&gt;&gt;lblConfirm.Name" xml:space="preserve">
+    <value>lblConfirm</value>
+  </data>
+  <data name="&gt;&gt;lblConfirm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblConfirm.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblConfirm.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 63</value>
+  </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 53</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
@@ -142,102 +172,27 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="lblSaveDataTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 20</value>
-  </data>
-  <data name="lblSaveDataTo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 13</value>
-  </data>
-  <data name="lblSaveDataTo.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="lblSaveDataTo.Text" xml:space="preserve">
-    <value>Save Data To:</value>
-  </data>
-  <data name="&gt;&gt;lblSaveDataTo.Name" xml:space="preserve">
-    <value>lblSaveDataTo</value>
-  </data>
-  <data name="&gt;&gt;lblSaveDataTo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSaveDataTo.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSaveDataTo.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="ucrInputFilePath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>125, 17</value>
+  <data name="ucrFilePath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 9</value>
   </data>
-  <data name="ucrInputFilePath.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
+  <data name="ucrFilePath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>419, 26</value>
   </data>
-  <data name="ucrInputFilePath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 21</value>
+  <data name="ucrFilePath.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="ucrInputFilePath.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+  <data name="&gt;&gt;ucrFilePath.Name" xml:space="preserve">
+    <value>ucrFilePath</value>
   </data>
-  <data name="&gt;&gt;ucrInputFilePath.Name" xml:space="preserve">
-    <value>ucrInputFilePath</value>
+  <data name="&gt;&gt;ucrFilePath.Type" xml:space="preserve">
+    <value>instat.ucrFilePath, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputFilePath.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputFilePath.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrFilePath.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrInputFilePath.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="cmdChooseFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>443, 17</value>
-  </data>
-  <data name="cmdChooseFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>65, 21</value>
-  </data>
-  <data name="cmdChooseFile.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="cmdChooseFile.Text" xml:space="preserve">
-    <value>Browse</value>
-  </data>
-  <data name="&gt;&gt;cmdChooseFile.Name" xml:space="preserve">
-    <value>cmdChooseFile</value>
-  </data>
-  <data name="&gt;&gt;cmdChooseFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdChooseFile.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdChooseFile.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="lblConfirm.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblConfirm.Location" type="System.Drawing.Point, System.Drawing">
-    <value>96, 45</value>
-  </data>
-  <data name="lblConfirm.Size" type="System.Drawing.Size, System.Drawing">
-    <value>0, 13</value>
-  </data>
-  <data name="lblConfirm.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblConfirm.Name" xml:space="preserve">
-    <value>lblConfirm</value>
-  </data>
-  <data name="&gt;&gt;lblConfirm.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblConfirm.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblConfirm.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrFilePath.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -247,7 +202,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>511, 130</value>
+    <value>430, 124</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
