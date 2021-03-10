@@ -118,6 +118,7 @@ Public Class dlgSplitText
                         AddClsTextComponentsFixedDefaultParameters()
 
                         ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsMaximum)
+                        clsParameter = clsTextComponentsMaximum.GetParameter("string").Clone()
                     Case Else
                         setRFunctionDefaultParameters()
                         MsgBox("Developer error:The Rfunction does not match any Rfunction in the dialogue")
