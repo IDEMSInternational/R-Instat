@@ -86,9 +86,9 @@ Public Class dlgFromLibrary
 
         ucrPnlOptions.AddToLinkedControls(ucrNewDataFrameName, {rdoDefaultDatasets}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedUpdateFunction:=True)
 
+        ucrNewDataFrameName.SetSaveTypeAsDataFrame()
         ucrNewDataFrameName.SetLabelText("New Data Frame Name:")
         ucrNewDataFrameName.SetIsTextBox()
-        ucrNewDataFrameName.SetSaveTypeAsDataFrame()
     End Sub
 
     Private Sub SetDefaults()

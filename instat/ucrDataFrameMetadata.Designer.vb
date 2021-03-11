@@ -40,12 +40,21 @@ Partial Class ucrDataFrameMetadata
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.grdMetaData = New unvell.ReoGrid.ReoGridControl()
-        Me.lblHeader = New System.Windows.Forms.Label()
-        Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.tlpTableContainer.SuspendLayout()
+        Me.lblHeader = New System.Windows.Forms.Label()
+        Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.rowRightClickMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
+        Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.hideSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.copySheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.viewSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.cellContextMenuStrip.SuspendLayout()
+        Me.tlpTableContainer.SuspendLayout()
+        Me.rowRightClickMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'grdMetaData
@@ -57,7 +66,7 @@ Partial Class ucrDataFrameMetadata
         Me.grdMetaData.LeadHeaderContextMenuStrip = Nothing
         Me.grdMetaData.Location = New System.Drawing.Point(3, 23)
         Me.grdMetaData.Name = "grdMetaData"
-        Me.grdMetaData.RowHeaderContextMenuStrip = Nothing
+        Me.grdMetaData.RowHeaderContextMenuStrip = Me.rowRightClickMenu
         Me.grdMetaData.Script = Nothing
         Me.grdMetaData.SheetTabContextMenuStrip = Nothing
         Me.grdMetaData.SheetTabNewButtonVisible = False
@@ -67,6 +76,18 @@ Partial Class ucrDataFrameMetadata
         Me.grdMetaData.Size = New System.Drawing.Size(471, 291)
         Me.grdMetaData.TabIndex = 1
         Me.grdMetaData.Text = "Meta Data"
+        '
+        'cellContextMenuStrip
+        '
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelp})
+        Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(100, 26)
+        '
+        'mnuHelp
+        '
+        Me.mnuHelp.Name = "mnuHelp"
+        Me.mnuHelp.Size = New System.Drawing.Size(99, 22)
+        Me.mnuHelp.Text = "Help"
         '
         'lblHeader
         '
@@ -96,17 +117,55 @@ Partial Class ucrDataFrameMetadata
         Me.tlpTableContainer.Size = New System.Drawing.Size(477, 317)
         Me.tlpTableContainer.TabIndex = 8
         '
-        'cellContextMenuStrip
+        'rowRightClickMenu
         '
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuHelp})
-        Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(100, 26)
+        Me.rowRightClickMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.rowRightClickMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.hideSheet, Me.unhideSheet, Me.copySheet, Me.reorderSheet, Me.viewSheet})
+        Me.rowRightClickMenu.Name = "statusColumnMenu"
+        Me.rowRightClickMenu.Size = New System.Drawing.Size(163, 158)
         '
-        'mnuHelp
+        'deleteDataFrame
         '
-        Me.mnuHelp.Name = "mnuHelp"
-        Me.mnuHelp.Size = New System.Drawing.Size(152, 22)
-        Me.mnuHelp.Text = "Help"
+        Me.deleteDataFrame.Name = "deleteDataFrame"
+        Me.deleteDataFrame.Size = New System.Drawing.Size(180, 22)
+        Me.deleteDataFrame.Text = "Delete..."
+        '
+        'renameSheet
+        '
+        Me.renameSheet.Name = "renameSheet"
+        Me.renameSheet.Size = New System.Drawing.Size(180, 22)
+        Me.renameSheet.Text = "Rename..."
+        '
+        'hideSheet
+        '
+        Me.hideSheet.Name = "hideSheet"
+        Me.hideSheet.Size = New System.Drawing.Size(180, 22)
+        Me.hideSheet.Text = "Hide"
+        '
+        'unhideSheet
+        '
+        Me.unhideSheet.Name = "unhideSheet"
+        Me.unhideSheet.Size = New System.Drawing.Size(180, 22)
+        Me.unhideSheet.Text = "Unhide..."
+        '
+        'copySheet
+        '
+        Me.copySheet.Name = "copySheet"
+        Me.copySheet.Size = New System.Drawing.Size(180, 22)
+        Me.copySheet.Text = "Copy..."
+        '
+        'reorderSheet
+        '
+        Me.reorderSheet.Enabled = False
+        Me.reorderSheet.Name = "reorderSheet"
+        Me.reorderSheet.Size = New System.Drawing.Size(180, 22)
+        Me.reorderSheet.Text = "Reorder..."
+        '
+        'viewSheet
+        '
+        Me.viewSheet.Name = "viewSheet"
+        Me.viewSheet.Size = New System.Drawing.Size(180, 22)
+        Me.viewSheet.Text = "View Data Frame"
         '
         'ucrDataFrameMetadata
         '
@@ -115,8 +174,9 @@ Partial Class ucrDataFrameMetadata
         Me.Controls.Add(Me.tlpTableContainer)
         Me.Name = "ucrDataFrameMetadata"
         Me.Size = New System.Drawing.Size(477, 317)
-        Me.tlpTableContainer.ResumeLayout(False)
         Me.cellContextMenuStrip.ResumeLayout(False)
+        Me.tlpTableContainer.ResumeLayout(False)
+        Me.rowRightClickMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -126,4 +186,12 @@ Partial Class ucrDataFrameMetadata
     Friend WithEvents tlpTableContainer As TableLayoutPanel
     Friend WithEvents cellContextMenuStrip As ContextMenuStrip
     Friend WithEvents mnuHelp As ToolStripMenuItem
+    Friend WithEvents rowRightClickMenu As ContextMenuStrip
+    Friend WithEvents deleteDataFrame As ToolStripMenuItem
+    Friend WithEvents renameSheet As ToolStripMenuItem
+    Friend WithEvents hideSheet As ToolStripMenuItem
+    Friend WithEvents unhideSheet As ToolStripMenuItem
+    Friend WithEvents copySheet As ToolStripMenuItem
+    Friend WithEvents reorderSheet As ToolStripMenuItem
+    Friend WithEvents viewSheet As ToolStripMenuItem
 End Class

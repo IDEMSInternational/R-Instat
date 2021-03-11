@@ -39,29 +39,16 @@ Partial Class dlgExportRWorkspace
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExportRWorkspace))
-        Me.cmdBrowse = New System.Windows.Forms.Button()
-        Me.lblExport = New System.Windows.Forms.Label()
         Me.lblDataFrames = New System.Windows.Forms.Label()
         Me.lblSelectedDataFrames = New System.Windows.Forms.Label()
         Me.ucrSelectorForDataFrames = New instat.ucrSelectorAddRemove()
-        Me.ucrInputExportFile = New instat.ucrInputTextBox()
         Me.ucrChkGraphs = New instat.ucrCheck()
         Me.ucrChkModels = New instat.ucrCheck()
         Me.ucrChkMetadata = New instat.ucrCheck()
         Me.ucrReceiverMultiple = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrFilePath = New instat.ucrFilePath()
         Me.SuspendLayout()
-        '
-        'cmdBrowse
-        '
-        resources.ApplyResources(Me.cmdBrowse, "cmdBrowse")
-        Me.cmdBrowse.Name = "cmdBrowse"
-        Me.cmdBrowse.UseVisualStyleBackColor = True
-        '
-        'lblExport
-        '
-        resources.ApplyResources(Me.lblExport, "lblExport")
-        Me.lblExport.Name = "lblExport"
         '
         'lblDataFrames
         '
@@ -78,14 +65,6 @@ Partial Class dlgExportRWorkspace
         Me.ucrSelectorForDataFrames.bShowHiddenColumns = False
         resources.ApplyResources(Me.ucrSelectorForDataFrames, "ucrSelectorForDataFrames")
         Me.ucrSelectorForDataFrames.Name = "ucrSelectorForDataFrames"
-        '
-        'ucrInputExportFile
-        '
-        Me.ucrInputExportFile.AddQuotesIfUnrecognised = True
-        Me.ucrInputExportFile.IsMultiline = False
-        Me.ucrInputExportFile.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputExportFile, "ucrInputExportFile")
-        Me.ucrInputExportFile.Name = "ucrInputExportFile"
         '
         'ucrChkGraphs
         '
@@ -119,15 +98,24 @@ Partial Class dlgExportRWorkspace
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrFilePath
+        '
+        Me.ucrFilePath.DefaultFileSuggestionName = ""
+        Me.ucrFilePath.FilePath = ""
+        Me.ucrFilePath.FilePathBrowseText = "Browse"
+        Me.ucrFilePath.FilePathDialogFilter = "Saved R Objects (*.RData)|*.RData"
+        Me.ucrFilePath.FilePathDialogTitle = "Export R Workspace"
+        Me.ucrFilePath.FilePathLabel = "Export File:"
+        resources.ApplyResources(Me.ucrFilePath, "ucrFilePath")
+        Me.ucrFilePath.Name = "ucrFilePath"
+        '
         'dlgExportRWorkspace
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrFilePath)
         Me.Controls.Add(Me.lblSelectedDataFrames)
         Me.Controls.Add(Me.lblDataFrames)
-        Me.Controls.Add(Me.ucrInputExportFile)
-        Me.Controls.Add(Me.cmdBrowse)
-        Me.Controls.Add(Me.lblExport)
         Me.Controls.Add(Me.ucrChkGraphs)
         Me.Controls.Add(Me.ucrChkModels)
         Me.Controls.Add(Me.ucrChkMetadata)
@@ -148,10 +136,8 @@ Partial Class dlgExportRWorkspace
     Friend WithEvents ucrChkGraphs As ucrCheck
     Friend WithEvents ucrChkModels As ucrCheck
     Friend WithEvents ucrChkMetadata As ucrCheck
-    Friend WithEvents ucrInputExportFile As ucrInputTextBox
-    Friend WithEvents cmdBrowse As Button
-    Friend WithEvents lblExport As Label
     Friend WithEvents lblDataFrames As Label
     Friend WithEvents lblSelectedDataFrames As Label
     Friend WithEvents ucrSelectorForDataFrames As ucrSelectorAddRemove
+    Friend WithEvents ucrFilePath As ucrFilePath
 End Class

@@ -495,6 +495,7 @@ Public Class ucrSave
         ucrInputComboSave.Enabled = ucrChkSave.Checked
         ucrInputTextSave.Visible = False
         ucrInputComboSave.Visible = False
+        btnColumnPosition.Visible = ucrChkSave.Checked
         If strAssignToIfUnchecked <> "" Then
             If ucrChkSave.Checked Then
                 If bIsComboBox Then
@@ -608,6 +609,8 @@ Public Class ucrSave
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempModel:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                             Case "table"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempTable:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                            Case "surv"
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempSurv:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                         End Select
                     Else
                         clsTempCode.RemoveAssignTo()
@@ -621,7 +624,7 @@ Public Class ucrSave
     '''
     ''' <param name="ucrChangedControl">    Not used. </param>
     '''--------------------------------------------------------------------------------------------
-    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComboSave.ControlContentsChanged, ucrInputTextSave.ControlContentsChanged
+    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComboSave.ControlContentsChanged, ucrInputTextSave.ControlContentsChanged, ucrChkSave.ControlContentsChanged
         OnControlContentsChanged()
     End Sub
     '''--------------------------------------------------------------------------------------------
