@@ -130,6 +130,9 @@ Public Class dlgSplitText
                 'Therefore, to ensure that the receiver is initialised with the correct value, we need to initialise the 'clsTextComponentsFixed' 'string' parameter.
                 If Not IsNothing(clsParameter) Then
                     clsTextComponentsFixed.AddParameter(clsParameter)
+                    If Not (ucrBase.clsRsyntax.clsBaseFunction Is clsTextComponentsMaximum) Then
+                        clsTextComponentsMaximum.AddParameter(clsParameter)
+                    End If
                 End If
             Else
                 setRFunctionDefaultParameters()
