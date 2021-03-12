@@ -532,9 +532,7 @@ Partial Class frmMain
         Me.mnuStructuredCircularCalculator = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredCircularSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator46 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuStructuredCircularScatterPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredCircularDensityPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularRosePlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator67 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuStructuredCircularWindRose = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredCircularWindPollutionRose = New System.Windows.Forms.ToolStripMenuItem()
@@ -3420,7 +3418,7 @@ Partial Class frmMain
         '
         'mnuStructuredCircular
         '
-        Me.mnuStructuredCircular.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularDefine, Me.mnuStructuredCircularCalculator, Me.mnuStructuredCircularSummaries, Me.ToolStripSeparator46, Me.mnuStructuredCircularScatterPlot, Me.mnuStructuredCircularDensityPlot, Me.mnuStructuredCircularRosePlot, Me.ToolStripSeparator67, Me.mnuStructuredCircularWindRose, Me.mnuStructuredCircularWindPollutionRose, Me.mnuStructuredCircularOtherRosePlots, Me.ToolStripSeparator68, Me.mnuStructuredCircularCirclize})
+        Me.mnuStructuredCircular.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularDefine, Me.mnuStructuredCircularCalculator, Me.mnuStructuredCircularSummaries, Me.ToolStripSeparator46, Me.mnuStructuredCircularDensityPlot, Me.ToolStripSeparator67, Me.mnuStructuredCircularWindRose, Me.mnuStructuredCircularWindPollutionRose, Me.mnuStructuredCircularOtherRosePlots, Me.ToolStripSeparator68, Me.mnuStructuredCircularCirclize})
         Me.mnuStructuredCircular.Name = "mnuStructuredCircular"
         resources.ApplyResources(Me.mnuStructuredCircular, "mnuStructuredCircular")
         '
@@ -3444,20 +3442,10 @@ Partial Class frmMain
         Me.ToolStripSeparator46.Name = "ToolStripSeparator46"
         resources.ApplyResources(Me.ToolStripSeparator46, "ToolStripSeparator46")
         '
-        'mnuStructuredCircularScatterPlot
-        '
-        resources.ApplyResources(Me.mnuStructuredCircularScatterPlot, "mnuStructuredCircularScatterPlot")
-        Me.mnuStructuredCircularScatterPlot.Name = "mnuStructuredCircularScatterPlot"
-        '
         'mnuStructuredCircularDensityPlot
         '
         Me.mnuStructuredCircularDensityPlot.Name = "mnuStructuredCircularDensityPlot"
         resources.ApplyResources(Me.mnuStructuredCircularDensityPlot, "mnuStructuredCircularDensityPlot")
-        '
-        'mnuStructuredCircularRosePlot
-        '
-        resources.ApplyResources(Me.mnuStructuredCircularRosePlot, "mnuStructuredCircularRosePlot")
-        Me.mnuStructuredCircularRosePlot.Name = "mnuStructuredCircularRosePlot"
         '
         'ToolStripSeparator67
         '
@@ -4792,9 +4780,7 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredCircularCalculator As ToolStripMenuItem
     Friend WithEvents mnuStructuredCircularSummaries As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator46 As ToolStripSeparator
-    Friend WithEvents mnuStructuredCircularScatterPlot As ToolStripMenuItem
     Friend WithEvents mnuStructuredCircularDensityPlot As ToolStripMenuItem
-    Friend WithEvents mnuStructuredCircularRosePlot As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator67 As ToolStripSeparator
     Friend WithEvents mnuStructuredCircularWindRose As ToolStripMenuItem
     Friend WithEvents mnuStructuredCircularWindPollutionRose As ToolStripMenuItem
