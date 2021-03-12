@@ -57,6 +57,9 @@ Public Class dlgInventoryPlot
         ucrReceiverElements.Selector = ucrInventoryPlotSelector
         ucrReceiverElements.SetParameterIsString()
         ucrReceiverElements.strSelectorHeading = "Numerics"
+        ucrReceiverElements.SetIncludedDataTypes({"numeric"})
+        ucrReceiverElements.SetClimaticType("element")
+        ucrReceiverElements.bAutoFill = True
 
         ucrReceiverStation.Selector = ucrInventoryPlotSelector
         ucrReceiverStation.SetClimaticType("station")

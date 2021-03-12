@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.IO
 Imports instat.Translations
 Public Class dlgSaveAs
     Private bFirstLoad As Boolean = True
@@ -37,17 +36,16 @@ Public Class dlgSaveAs
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 332
 
-        ucrInputFilePath.SetParameter(New RParameter("file", 0))
-        ucrInputFilePath.IsReadOnly = True
+        ucrFilePath.SetPathControlParameter(New RParameter("file", 0))
 
-        lblConfirm.Text = "Click Ok to confirm the save"
+        lblConfirm.Visible = False
+        lblConfirm.ForeColor = Color.Green
     End Sub
 
     Private Sub SetDefaults()
         clsSaveFunction = New RFunction
 
-        ucrInputFilePath.Reset()
-        ucrInputFilePath.SetName("")
+        ucrFilePath.ResetPathControl()
 
         clsSaveFunction.SetRCommand("saveRDS")
         clsSaveFunction.AddParameter("object", frmMain.clsRLink.strInstatDataObject)
@@ -56,17 +54,17 @@ Public Class dlgSaveAs
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrFilePath.SetPathControlRcode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrInputFilePath.IsEmpty() Then
-            lblConfirm.Show()
-            ucrBase.OKEnabled(True)
-        Else
-            lblConfirm.Hide()
+        If ucrFilePath.IsEmpty() Then
+            lblConfirm.Visible = False
             ucrBase.OKEnabled(False)
+        Else
+            lblConfirm.Visible = True
+            ucrBase.OKEnabled(True)
         End If
     End Sub
 
@@ -76,41 +74,13 @@ Public Class dlgSaveAs
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        frmMain.strSaveFilePath = ucrInputFilePath.GetText()
-        frmMain.clsRecentItems.addToMenu(Replace(ucrInputFilePath.GetText(), "/", "\"))
+        frmMain.strSaveFilePath = ucrFilePath.FilePath
+        frmMain.clsRecentItems.addToMenu(Replace(ucrFilePath.FilePath, "/", "\"))
         frmMain.bDataSaved = True
     End Sub
 
-    Private Sub cmdEditorSave_Click(sender As Object, e As EventArgs) Handles cmdChooseFile.Click
-        SelectFileToSave()
-    End Sub
-
-    Private Sub ucrInputFilePath_Click(sender As Object, e As EventArgs) Handles ucrInputFilePath.Click
-        If ucrInputFilePath.IsEmpty() Then
-            SelectFileToSave()
-        End If
-    End Sub
-
-    Private Sub SelectFileToSave()
-        Dim strCurrentFileName As String = ucrInputFilePath.GetText()
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Save Data File"
-            dlgSave.Filter = "RDS Data file (*.RDS)|*.RDS"
-            If Not String.IsNullOrEmpty(strCurrentFileName) Then
-                strCurrentFileName = strCurrentFileName.Replace("/", "\")
-                dlgSave.FileName = Path.GetFileName(strCurrentFileName)
-                dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentFileName)
-            Else
-                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            End If
-            If DialogResult.OK = dlgSave.ShowDialog() Then
-                ucrInputFilePath.SetName(dlgSave.FileName.Replace("\", "/"))
-            End If
-            TestOKEnabled()
-        End Using
-    End Sub
-
-    Private Sub ucrInputFilePath_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputFilePath.ControlContentsChanged
+    Private Sub ucrFilePath_FilePathChanged() Handles ucrFilePath.FilePathChanged
         TestOKEnabled()
     End Sub
+
 End Class
