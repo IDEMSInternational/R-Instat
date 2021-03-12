@@ -202,18 +202,6 @@
     <Compile Include="dlgCircularDensityPlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgCircularRosePlot.Designer.vb">
-      <DependentUpon>dlgCircularRosePlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgCircularRosePlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgCircularScatterPlot.Designer.vb">
-      <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgCircularScatterPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgClimaticNCMPCountRecords.Designer.vb">
       <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
     </Compile>
@@ -2703,12 +2691,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCircularDensityPlot.resx">
       <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgCircularRosePlot.resx">
-      <DependentUpon>dlgCircularRosePlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgCircularScatterPlot.resx">
-      <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticNCMPCountRecords.resx">
       <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
