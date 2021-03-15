@@ -50,7 +50,7 @@ Public Class ucrAdditionalLayers
         lstLayers.Clear()
         lstLayerComplete.Clear()
         lstLayers.HideSelection = False
-        'this ensures that the edit and delete buttons are disable in the general graphics dialogue during reset
+        'Disabling of the Edit and Delete buttons when the list of Layers is cleared
         SetEditDeleteEnabled()
 
         ' Sort parameters first so layers are in correct order
@@ -119,6 +119,11 @@ Public Class ucrAdditionalLayers
     End Sub
 
     Private Sub SetEditDeleteEnabled()
+        If lstLayers.Items.Count = 0 Then
+            'Disabling of the Edit and Delete buttons when the list of Layers is cleared
+            cmdDelete.Enabled = False
+            cmdEdit.Enabled = False
+        End If
         If lstLayers.SelectedItems.Count = 1 Then
             cmdDelete.Enabled = True
             cmdEdit.Enabled = True
