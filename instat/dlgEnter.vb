@@ -53,7 +53,7 @@ Public Class dlgEnter
         ucrBase.clsRsyntax.SetCommandString("")
         ucrSaveEnterResultInto.SetSaveTypeAsColumn()
         ucrSaveEnterResultInto.SetPrefix("enter")
-        ucrSaveEnterResultInto.SetIsTextBox()
+        ucrSaveEnterResultInto.SetIsComboBox()
         ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
         ucrSaveEnterResultInto.SetLabelText("Enter Result Into:")
 
