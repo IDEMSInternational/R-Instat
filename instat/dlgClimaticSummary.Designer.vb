@@ -67,6 +67,7 @@ Partial Class dlgClimaticSummary
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlAnnualWithin = New instat.UcrPanel()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
+        Me.rdoStation = New System.Windows.Forms.RadioButton()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -273,10 +274,21 @@ Partial Class dlgClimaticSummary
         Me.ucrReceiverElements.strNcFilePath = ""
         Me.ucrReceiverElements.ucrSelector = Nothing
         '
+        'rdoStation
+        '
+        resources.ApplyResources(Me.rdoStation, "rdoStation")
+        Me.rdoStation.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStation.FlatAppearance.BorderSize = 2
+        Me.rdoStation.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoStation.Name = "rdoStation"
+        Me.rdoStation.TabStop = True
+        Me.rdoStation.UseVisualStyleBackColor = True
+        '
         'dlgClimaticSummary
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoStation)
         Me.Controls.Add(Me.ucrReceiverElements)
         Me.Controls.Add(Me.ucrInputFilterPreview)
         Me.Controls.Add(Me.cmdDoyRange)
@@ -337,4 +349,5 @@ Partial Class dlgClimaticSummary
     Friend WithEvents ucrChkOmitMissing As ucrCheck
     Friend WithEvents cmdMissingOptions As Button
     Friend WithEvents ucrReceiverElements As ucrReceiverMultiple
+    Friend WithEvents rdoStation As RadioButton
 End Class

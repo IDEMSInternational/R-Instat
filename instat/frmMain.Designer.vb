@@ -151,6 +151,7 @@ Partial Class frmMain
         Me.mnuViewColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator22 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuViewStructuredMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewClimaticMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewProcurementMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuViewOptionsByContextMenu = New System.Windows.Forms.ToolStripMenuItem()
@@ -190,6 +191,7 @@ Partial Class frmMain
         Me.mnuClimaticFileImportFromCliData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuExportToWWRToolStrip = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticTidyandExamine = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineVisualiseData = New System.Windows.Forms.ToolStripMenuItem()
@@ -255,6 +257,13 @@ Partial Class frmMain
         Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticDescribeGeneral = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator31 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticNCMP = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticNCMPIndices = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticNCMPVariogram = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticNCMPRegionAverage = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticNCMPTrendGraphs = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticNCMPCountRecords = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticNCMPSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSA = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSARainfall = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPICSACumExeedenceGraph = New System.Windows.Forms.ToolStripMenuItem()
@@ -523,9 +532,7 @@ Partial Class frmMain
         Me.mnuStructuredCircularCalculator = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredCircularSummaries = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator46 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuStructuredCircularScatterPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredCircularDensityPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularRosePlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator67 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuStructuredCircularWindRose = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredCircularWindPollutionRose = New System.Windows.Forms.ToolStripMenuItem()
@@ -1267,7 +1274,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout})
         Me.mnuView.Name = "mnuView"
         resources.ApplyResources(Me.mnuView, "mnuView")
         Me.mnuView.Tag = "View"
@@ -1311,6 +1318,11 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator22.Name = "ToolStripSeparator22"
         resources.ApplyResources(Me.ToolStripSeparator22, "ToolStripSeparator22")
+        '
+        'mnuViewStructuredMenu
+        '
+        Me.mnuViewStructuredMenu.Name = "mnuViewStructuredMenu"
+        resources.ApplyResources(Me.mnuViewStructuredMenu, "mnuViewStructuredMenu")
         '
         'mnuViewClimaticMenu
         '
@@ -1446,14 +1458,14 @@ Partial Class frmMain
         '
         'mnuClimatic
         '
-        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticTidyandExamine, Me.mnuClimaticDates, Me.mnuClimaticDefineClimaticData, Me.mnuClimaticCheckData, Me.mnuClimaticPrepare, Me.ToolStripSeparator30, Me.mnuClimaticDescribe, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.mnuClimaticCompare, Me.mnuClimaticMapping, Me.ToolStripSeparator16, Me.mnuClimaticModel, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticClimateMethods})
+        Me.mnuClimatic.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFile, Me.ToolStripSeparator18, Me.mnuClimaticTidyandExamine, Me.mnuClimaticDates, Me.mnuClimaticDefineClimaticData, Me.mnuClimaticCheckData, Me.mnuClimaticPrepare, Me.ToolStripSeparator30, Me.mnuClimaticDescribe, Me.mnuClimaticNCMP, Me.mnuClimaticPICSA, Me.mnuCMSAF, Me.mnuClimaticCompare, Me.mnuClimaticMapping, Me.ToolStripSeparator16, Me.mnuClimaticModel, Me.mnuClimaticExamine, Me.mnuClimaticProcess, Me.ToolStripSeparator23, Me.mnuClimaticSCF, Me.mnuClimaticEvaporation, Me.mnuClimaticCrop, Me.mnuClimaticHeatSum, Me.mnuClimaticClimateMethods})
         Me.mnuClimatic.Name = "mnuClimatic"
         resources.ApplyResources(Me.mnuClimatic, "mnuClimatic")
         Me.mnuClimatic.Tag = "Climatic"
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileOpenandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportFromClimSoft, Me.mnuClimateFileImportFromClimSoftWizard, Me.mnuClimaticFileImportFromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileOpenandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportFromClimSoft, Me.mnuClimateFileImportFromClimSoftWizard, Me.mnuClimaticFileImportFromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         resources.ApplyResources(Me.mnuClimaticFile, "mnuClimaticFile")
         '
@@ -1507,6 +1519,11 @@ Partial Class frmMain
         Me.mnuClimaticFileExportToCPT.Name = "mnuClimaticFileExportToCPT"
         resources.ApplyResources(Me.mnuClimaticFileExportToCPT, "mnuClimaticFileExportToCPT")
         Me.mnuClimaticFileExportToCPT.Tag = "Export_to_CPT"
+        '
+        'mnuExportToWWRToolStrip
+        '
+        Me.mnuExportToWWRToolStrip.Name = "mnuExportToWWRToolStrip"
+        resources.ApplyResources(Me.mnuExportToWWRToolStrip, "mnuExportToWWRToolStrip")
         '
         'ToolStripSeparator18
         '
@@ -1845,6 +1862,42 @@ Partial Class frmMain
         '
         Me.ToolStripSeparator31.Name = "ToolStripSeparator31"
         resources.ApplyResources(Me.ToolStripSeparator31, "ToolStripSeparator31")
+        '
+        'mnuClimaticNCMP
+        '
+        Me.mnuClimaticNCMP.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticNCMPIndices, Me.mnuClimaticNCMPVariogram, Me.mnuClimaticNCMPRegionAverage, Me.mnuClimaticNCMPTrendGraphs, Me.mnuClimaticNCMPCountRecords, Me.mnuClimaticNCMPSummary})
+        Me.mnuClimaticNCMP.Name = "mnuClimaticNCMP"
+        resources.ApplyResources(Me.mnuClimaticNCMP, "mnuClimaticNCMP")
+        '
+        'mnuClimaticNCMPIndices
+        '
+        Me.mnuClimaticNCMPIndices.Name = "mnuClimaticNCMPIndices"
+        resources.ApplyResources(Me.mnuClimaticNCMPIndices, "mnuClimaticNCMPIndices")
+        '
+        'mnuClimaticNCMPVariogram
+        '
+        Me.mnuClimaticNCMPVariogram.Name = "mnuClimaticNCMPVariogram"
+        resources.ApplyResources(Me.mnuClimaticNCMPVariogram, "mnuClimaticNCMPVariogram")
+        '
+        'mnuClimaticNCMPRegionAverage
+        '
+        Me.mnuClimaticNCMPRegionAverage.Name = "mnuClimaticNCMPRegionAverage"
+        resources.ApplyResources(Me.mnuClimaticNCMPRegionAverage, "mnuClimaticNCMPRegionAverage")
+        '
+        'mnuClimaticNCMPTrendGraphs
+        '
+        Me.mnuClimaticNCMPTrendGraphs.Name = "mnuClimaticNCMPTrendGraphs"
+        resources.ApplyResources(Me.mnuClimaticNCMPTrendGraphs, "mnuClimaticNCMPTrendGraphs")
+        '
+        'mnuClimaticNCMPCountRecords
+        '
+        Me.mnuClimaticNCMPCountRecords.Name = "mnuClimaticNCMPCountRecords"
+        resources.ApplyResources(Me.mnuClimaticNCMPCountRecords, "mnuClimaticNCMPCountRecords")
+        '
+        'mnuClimaticNCMPSummary
+        '
+        Me.mnuClimaticNCMPSummary.Name = "mnuClimaticNCMPSummary"
+        resources.ApplyResources(Me.mnuClimaticNCMPSummary, "mnuClimaticNCMPSummary")
         '
         'mnuClimaticPICSA
         '
@@ -3365,7 +3418,7 @@ Partial Class frmMain
         '
         'mnuStructuredCircular
         '
-        Me.mnuStructuredCircular.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularDefine, Me.mnuStructuredCircularCalculator, Me.mnuStructuredCircularSummaries, Me.ToolStripSeparator46, Me.mnuStructuredCircularScatterPlot, Me.mnuStructuredCircularDensityPlot, Me.mnuStructuredCircularRosePlot, Me.ToolStripSeparator67, Me.mnuStructuredCircularWindRose, Me.mnuStructuredCircularWindPollutionRose, Me.mnuStructuredCircularOtherRosePlots, Me.ToolStripSeparator68, Me.mnuStructuredCircularCirclize})
+        Me.mnuStructuredCircular.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularDefine, Me.mnuStructuredCircularCalculator, Me.mnuStructuredCircularSummaries, Me.ToolStripSeparator46, Me.mnuStructuredCircularDensityPlot, Me.ToolStripSeparator67, Me.mnuStructuredCircularWindRose, Me.mnuStructuredCircularWindPollutionRose, Me.mnuStructuredCircularOtherRosePlots, Me.ToolStripSeparator68, Me.mnuStructuredCircularCirclize})
         Me.mnuStructuredCircular.Name = "mnuStructuredCircular"
         resources.ApplyResources(Me.mnuStructuredCircular, "mnuStructuredCircular")
         '
@@ -3389,20 +3442,10 @@ Partial Class frmMain
         Me.ToolStripSeparator46.Name = "ToolStripSeparator46"
         resources.ApplyResources(Me.ToolStripSeparator46, "ToolStripSeparator46")
         '
-        'mnuStructuredCircularScatterPlot
-        '
-        resources.ApplyResources(Me.mnuStructuredCircularScatterPlot, "mnuStructuredCircularScatterPlot")
-        Me.mnuStructuredCircularScatterPlot.Name = "mnuStructuredCircularScatterPlot"
-        '
         'mnuStructuredCircularDensityPlot
         '
-        resources.ApplyResources(Me.mnuStructuredCircularDensityPlot, "mnuStructuredCircularDensityPlot")
         Me.mnuStructuredCircularDensityPlot.Name = "mnuStructuredCircularDensityPlot"
-        '
-        'mnuStructuredCircularRosePlot
-        '
-        resources.ApplyResources(Me.mnuStructuredCircularRosePlot, "mnuStructuredCircularRosePlot")
-        Me.mnuStructuredCircularRosePlot.Name = "mnuStructuredCircularRosePlot"
+        resources.ApplyResources(Me.mnuStructuredCircularDensityPlot, "mnuStructuredCircularDensityPlot")
         '
         'ToolStripSeparator67
         '
@@ -4737,9 +4780,7 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredCircularCalculator As ToolStripMenuItem
     Friend WithEvents mnuStructuredCircularSummaries As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator46 As ToolStripSeparator
-    Friend WithEvents mnuStructuredCircularScatterPlot As ToolStripMenuItem
     Friend WithEvents mnuStructuredCircularDensityPlot As ToolStripMenuItem
-    Friend WithEvents mnuStructuredCircularRosePlot As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator67 As ToolStripSeparator
     Friend WithEvents mnuStructuredCircularWindRose As ToolStripMenuItem
     Friend WithEvents mnuStructuredCircularWindPollutionRose As ToolStripMenuItem
@@ -4753,4 +4794,13 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarFrequency As ToolStripMenuItem
     Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarCluster As ToolStripMenuItem
     Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarAnnulus As ToolStripMenuItem
+    Friend WithEvents mnuExportToWWRToolStrip As ToolStripMenuItem
+    Friend WithEvents mnuViewStructuredMenu As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMP As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMPIndices As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMPVariogram As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMPRegionAverage As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMPTrendGraphs As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMPCountRecords As ToolStripMenuItem
+    Friend WithEvents mnuClimaticNCMPSummary As ToolStripMenuItem
 End Class

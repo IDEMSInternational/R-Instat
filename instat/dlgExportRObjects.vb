@@ -14,12 +14,11 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.IO
 Imports instat.Translations
 Public Class dlgExportRObjects
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsGetObjectsFunction, clsSaveRDS As New RFunction
+    Private clsExport As RFunction
 
     Private Sub dlgExportRObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -32,76 +31,59 @@ Public Class dlgExportRObjects
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        TestOkEnabled()
+        'TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 554
 
-        ucrSelectorObjects.SetParameter(New RParameter("data_name", 1))
-        ucrSelectorObjects.ucrAvailableDataFrames.SetParameterIsString()
-
-        ucrReceiverObjects.SetParameter(New RParameter("object_name", 2))
-        ucrReceiverObjects.SetParameterIsString()
-        ucrReceiverObjects.Selector = ucrSelectorObjects
-        ucrReceiverObjects.SetMeAsReceiver()
-        ucrReceiverObjects.strSelectorHeading = "Objects"
-        ucrReceiverObjects.SetItemType("object")
-
-        ucrInputExportFile.SetParameter(New RParameter("file", 0))
-        ucrInputExportFile.IsReadOnly = True
+        'multiple reciever control that holds selected objects
+        ucrReceiverMultipleObjects.SetParameter(New RParameter("x", 0))
+        ucrReceiverMultipleObjects.SetParameterIsRFunction()
+        ucrReceiverMultipleObjects.Selector = ucrSelectorObjects
+        ucrReceiverMultipleObjects.SetMeAsReceiver()
+        ucrReceiverMultipleObjects.strSelectorHeading = "Objects"
+        ucrReceiverMultipleObjects.SetItemType("object")
+        'file path control that holds the file path and name
+        ucrFilePath.SetPathControlParameter(New RParameter("file", 1))
     End Sub
 
     Private Sub SetDefaults()
-        clsGetObjectsFunction = New RFunction
-        clsSaveRDS = New RFunction
+        clsExport = New RFunction
 
-        ucrInputExportFile.SetName("")
-        ucrSelectorObjects.Reset()
-        clsGetObjectsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
-        clsSaveRDS.SetRCommand("saveRDS")
-        clsSaveRDS.AddParameter("object", clsRFunctionParameter:=clsGetObjectsFunction)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSaveRDS)
+        'reset controls
+        ucrSelectorObjects.Reset() 'will also reset the reciever
+        ucrFilePath.ResetPathControl()
+
+        'set R command and base function
+        clsExport.SetPackageName("rio")
+        clsExport.SetRCommand("export")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsExport)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorObjects.SetRCode(clsGetObjectsFunction, bReset)
-        ucrReceiverObjects.SetRCode(clsGetObjectsFunction, bReset)
-        ucrInputExportFile.SetRCode(clsSaveRDS, bReset)
+        ucrReceiverMultipleObjects.SetRCode(clsExport, bReset)
+        ucrFilePath.SetPathControlRcode(clsExport, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrInputExportFile.IsEmpty AndAlso Not ucrReceiverObjects.IsEmpty AndAlso ucrSelectorObjects.ucrAvailableDataFrames.cboAvailableDataFrames.Text <> "" Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
+        ucrBase.OKEnabled(Not ucrFilePath.IsEmpty AndAlso Not ucrReceiverMultipleObjects.IsEmpty AndAlso Not String.IsNullOrEmpty(ucrSelectorObjects.strCurrentDataFrame))
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        'TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverMultipleObjects_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverMultipleObjects.ControlContentsChanged
+        'give a default suggested name if only a single object is selected object
+        ucrFilePath.DefaultFileSuggestionName = If(ucrReceiverMultipleObjects.GetVariableNamesList().Length = 1, ucrReceiverMultipleObjects.GetVariableNames(bWithQuotes:=False), "")
         TestOkEnabled()
     End Sub
 
-    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-        Dim dlgSave As New SaveFileDialog
-
-        dlgSave.Title = "Export R Objects"
-        dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-        dlgSave.Filter = "Serialized R Objects (*.rds)|*.rds"
-        If dlgSave.ShowDialog = DialogResult.OK Then
-            If dlgSave.FileName <> "" Then
-                ucrInputExportFile.SetName(Path.GetFullPath(dlgSave.FileName).ToString.Replace("\", "/"))
-            End If
-        End If
-    End Sub
-
-    Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
-        cmdBrowse_Click(sender, e)
-    End Sub
-
-    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverObjects.ControlContentsChanged, ucrSelectorObjects.ControlContentsChanged, ucrInputExportFile.ControlContentsChanged
+    Private Sub ucrFilePath_FilePathChanged() Handles ucrFilePath.FilePathChanged
         TestOkEnabled()
     End Sub
+
 End Class

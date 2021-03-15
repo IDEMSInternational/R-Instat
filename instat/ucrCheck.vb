@@ -70,6 +70,7 @@ Public Class ucrCheck
     End Sub
 
     Private Sub chkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles chkCheck.CheckedChanged
+        OnControlContentsChanged()
         OnControlValueChanged()
     End Sub
 
@@ -179,4 +180,13 @@ Public Class ucrCheck
     Protected Overrides Sub ResetControlValue()
         Checked = False
     End Sub
+
+    Public Overloads Property Visible As Boolean
+        Get
+            Return chkCheck.Visible
+        End Get
+        Set(bVisible As Boolean)
+            chkCheck.Visible = bVisible
+        End Set
+    End Property
 End Class

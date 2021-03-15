@@ -178,7 +178,12 @@ Public Class Condition
             Else
                 clsTempParam = clsRCode.GetParameter(strParameterName)
             End If
-            Return (bIsPositive = (clsTempParam IsNot Nothing AndAlso clsTempParam.bIsString AndAlso clsTempParam.strArgumentValue IsNot Nothing AndAlso lstValues.Contains(clsTempParam.strArgumentValue)))
+            If clsTempParam.bIsString Then
+                Return (bIsPositive = (clsTempParam IsNot Nothing AndAlso clsTempParam.strArgumentValue IsNot Nothing AndAlso lstValues.Contains(clsTempParam.strArgumentValue)))
+
+            Else
+                Return (bIsPositive = (clsTempParam IsNot Nothing AndAlso clsTempParam.strArgumentValue Is Nothing AndAlso lstValues.Contains(clsTempParam.clsArgumentCodeStructure.ToScript)))
+            End If
         ElseIf bIsParameterPresent Then
             Return (bIsPositive = lstValues.Any(Function(x) clsRCode.ContainsParameter(x)))
         ElseIf bIsFunctionNames Then

@@ -2729,6 +2729,7 @@ Public Class ucrCalculator
         End If
     End Sub
 
+
     Private Sub cmdAsdate_Click(sender As Object, e As EventArgs) Handles cmdAsdate.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::as_date(x = , )", 3)
@@ -2760,4 +2761,14 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("lubridate::pm()", 1)
         End If
     End Sub
+
+    ''' <summary>
+    ''' this will be raised when the input name is changed and even when the ucrSave checkbox checked status is changed
+    ''' </summary>
+    ''' <param name="ucrChangedControl"></param>
+    Private Sub ucrSaveResultInto_SaveNameChanged(ucrChangedControl As ucrCore) Handles ucrSaveResultInto.ControlContentsChanged
+        RaiseEvent SaveNameChanged()
+    End Sub
+
+
 End Class
