@@ -17,6 +17,7 @@
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgFitModel
+    Public strVariableType As String
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
@@ -387,6 +388,7 @@ Public Class dlgFitModel
 
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         ChooseRFunction()
+        ResponseVariableType()
         clsFamilyFunction.RemoveParameterByName("link")
     End Sub
 
@@ -431,5 +433,29 @@ Public Class dlgFitModel
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         ucrReceiverExpressionFitModel.AddtoCombobox(ucrReceiverExpressionFitModel.GetText)
+    End Sub
+
+    Public Sub ResponseVariableType()
+        If bRCodeSet Then
+            If Not ucrReceiverResponseVar.IsEmpty() Then
+                strVariableType = ucrFamily.strDataType
+
+                If strVariableType.Contains("numeric") Then
+                    strVariableType = "numeric"
+                ElseIf strVariableType.Contains("positive integer") Then
+                    strVariableType = "positive integer"
+                ElseIf strVariableType.Contains("two level numeric") OrElse strVariableType.Contains("two level factor") Then
+                    strVariableType = "binary"
+                Else
+                    strVariableType = "unsuitable type"
+                End If
+                lblType.Text = strVariableType
+                lblType.ForeColor = SystemColors.Highlight
+            Else
+                strVariableType = ""
+                lblType.Text = "________"
+                lblType.ForeColor = SystemColors.ControlText
+            End If
+        End If
     End Sub
 End Class
