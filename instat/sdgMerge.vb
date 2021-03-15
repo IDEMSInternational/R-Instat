@@ -22,8 +22,15 @@ Public Class sdgMerge
     Private clsMerge As RFunction
     Private bEnableColumnSelection As Boolean = True
 
-    'Private Sub sdgMerge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    'End Sub
+    Private Sub sdgMerge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bEnableColumnSelection Then
+            If tbcMergeOptions.TabPages.Count <> 2 Then
+                tbcMergeOptions.TabPages.Add(value:=tpIncludeColumns)
+            End If
+        Else
+            tbcMergeOptions.TabPages.Remove(tpIncludeColumns)
+        End If
+    End Sub
 
     Public Sub InitiatiseControls()
         'Merge by Columns tab
@@ -35,14 +42,6 @@ Public Class sdgMerge
 
         ucrReceiverSecondDF.Selector = ucrSelectorSecondDF
         ucrReceiverSecondDF.SetMeAsReceiver()
-
-        ucrPnlMergeByOptions.AddRadioButton(rdoByAllMatching)
-        ucrPnlMergeByOptions.AddRadioButton(rdoChooseColumns)
-
-        ucrPnlMergeByOptions.AddParameterPresentCondition(rdoByAllMatching, "by", False)
-        ucrPnlMergeByOptions.AddParameterPresentCondition(rdoChooseColumns, "by")
-        ucrPnlMergeByOptions.AddToLinkedControls(ucrSelectorFirstDF, {rdoChooseColumns}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMergeByOptions.AddToLinkedControls(ucrSelectorSecondDF, {rdoChooseColumns}, bNewLinkedHideIfParameterMissing:=True)
 
         ' Columns to Include tab
         ucrChkMergeWithSubsetFirst.SetText("Choose Subset of Columns to Merge")
@@ -94,7 +93,6 @@ Public Class sdgMerge
             tbcMergeOptions.SelectedIndex = 0
         End If
 
-        ucrPnlMergeByOptions.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
         If bNewEnableColumnSelection Then
             ucrChkMergeWithSubsetFirst.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
             ucrChkMergeWithSubsetSecond.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
@@ -110,38 +108,6 @@ Public Class sdgMerge
             End If
             SetXParameter()
             SetYParameter()
-        End If
-    End Sub
-
-    Public ReadOnly Property IsComplete() As Boolean
-        Get
-            If rdoByAllMatching.Checked Then
-                Return True
-            ElseIf rdoChooseColumns.Checked Then
-                If lstKeyColumns.Items.Count > 0 Then
-                    Return True
-                Else
-                    Return False
-                End If
-            Else
-                Return False
-            End If
-        End Get
-    End Property
-
-    Private Sub AddRemoveBy()
-        If rdoByAllMatching.Checked Then
-            ucrSelectorFirstDF.SetVariablesVisible(False)
-            ucrSelectorSecondDF.SetVariablesVisible(False)
-            grpKeys.Visible = False
-            pnlKeyColumns.Visible = False
-            clsMerge.RemoveParameterByName("by")
-        ElseIf rdoChooseColumns.Checked Then
-            ucrSelectorFirstDF.SetVariablesVisible(True)
-            ucrSelectorSecondDF.SetVariablesVisible(True)
-            grpKeys.Visible = True
-            pnlKeyColumns.Visible = True
-            SetByArgument()
         End If
     End Sub
 
@@ -166,7 +132,7 @@ Public Class sdgMerge
             clsByList.AddParameter(Chr(34) & lviItem.Text() & Chr(34), Chr(34) & lviItem.SubItems(2).Text() & Chr(34))
         Next
         If lstKeyColumns.Items.Count > 0 Then
-            clsMerge.AddParameter("by", clsRFunctionParameter:=clsByList)
+            clsMerge.AddParameter("by", clsRFunctionParameter:=clsByList, iPosition:=2)
         Else
             clsMerge.RemoveParameterByName("by")
         End If
@@ -245,12 +211,6 @@ Public Class sdgMerge
         ucrSelectorColumnsToIncludeSecond.SetVariablesVisible(ucrChkMergeWithSubsetSecond.Checked)
     End Sub
 
-    Private Sub ucrPnlMergeByOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMergeByOptions.ControlValueChanged
-        pnlKeyColumns.Visible = rdoChooseColumns.Checked
-        grpKeys.Visible = rdoChooseColumns.Checked
-        AddRemoveBy()
-    End Sub
-
     Private Sub cmdRemoveAll_Click(sender As Object, e As EventArgs) Handles cmdRemoveAll.Click
         ResetKeyList()
     End Sub
@@ -274,50 +234,20 @@ Public Class sdgMerge
     Private Sub sdgMerge_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         Dim lstMatchingColumns As New List(Of String)
 
-        ' If user has chosen subset of columns we need to ensure 'by' columns are also included.
-
-        ' If user has specified the 'by' columns manually then we just check these
-        ' otherwise we check all columns with the same name in both data frames as this is what the 'by' will be by default.
-        If rdoChooseColumns.Checked Then
-            If ucrChkMergeWithSubsetFirst.Checked Then
-                For Each clsTmpParam As RParameter In clsByList.clsParameters
-                    If Not ucrReceiverFirstSelected.GetVariableNamesAsList.Contains(clsTmpParam.strArgumentName.Trim(Chr(34))) Then
-                        ucrReceiverFirstSelected.Add(clsTmpParam.strArgumentName.Trim(Chr(34)), ucrSelectorColumnsToIncludeFirst.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                    End If
-                Next
-            End If
-            If ucrChkMergeWithSubsetSecond.Checked Then
-                For Each clsTmpParam As RParameter In clsByList.clsParameters
-                    If Not ucrReceiverFirstSelected.GetVariableNamesAsList.Contains(clsTmpParam.strArgumentValue.Trim(Chr(34))) Then
-                        ucrReceiverSecondSelected.Add(clsTmpParam.strArgumentValue.Trim(Chr(34)), ucrSelectorColumnsToIncludeSecond.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                    End If
-                Next
-            End If
-        Else
-            If ucrChkMergeWithSubsetFirst.Checked OrElse ucrChkMergeWithSubsetSecond.Checked Then
-                For i As Integer = 0 To ucrSelectorColumnsToIncludeFirst.lstAvailableVariable.Items.Count - 1
-                    For j As Integer = 0 To ucrSelectorColumnsToIncludeSecond.lstAvailableVariable.Items.Count - 1
-                        If ucrSelectorColumnsToIncludeFirst.lstAvailableVariable.Items(i).Text = ucrSelectorColumnsToIncludeSecond.lstAvailableVariable.Items(j).Text Then
-                            lstMatchingColumns.Add(ucrSelectorColumnsToIncludeFirst.lstAvailableVariable.Items(i).Text)
-                            Exit For
-                        End If
-                    Next
-                Next
-                For Each strTemp As String In lstMatchingColumns
-                    ucrReceiverFirstSelected.Add(strTemp, ucrSelectorColumnsToIncludeFirst.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                    ucrReceiverSecondSelected.Add(strTemp, ucrSelectorColumnsToIncludeSecond.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                Next
-            End If
+        ' If user has chosen a subset of columns we need to ensure 'by' columns are also included.
+        If ucrChkMergeWithSubsetFirst.Checked Then
+            For Each clsTmpParam As RParameter In clsByList.clsParameters
+                If Not ucrReceiverFirstSelected.GetVariableNamesAsList.Contains(clsTmpParam.strArgumentName.Trim(Chr(34))) Then
+                    ucrReceiverFirstSelected.Add(clsTmpParam.strArgumentName.Trim(Chr(34)), ucrSelectorColumnsToIncludeFirst.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                End If
+            Next
         End If
-    End Sub
-
-    Private Sub sdgMerge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bEnableColumnSelection Then
-            If tbcMergeOptions.TabPages.Count <> 2 Then
-                tbcMergeOptions.TabPages.Add(value:=tpIncludeColumns)
-            End If
-        Else
-            tbcMergeOptions.TabPages.Remove(tpIncludeColumns)
+        If ucrChkMergeWithSubsetSecond.Checked Then
+            For Each clsTmpParam As RParameter In clsByList.clsParameters
+                If Not ucrReceiverFirstSelected.GetVariableNamesAsList.Contains(clsTmpParam.strArgumentValue.Trim(Chr(34))) Then
+                    ucrReceiverSecondSelected.Add(clsTmpParam.strArgumentValue.Trim(Chr(34)), ucrSelectorColumnsToIncludeSecond.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+                End If
+            Next
         End If
     End Sub
 End Class

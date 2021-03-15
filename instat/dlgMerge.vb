@@ -26,6 +26,7 @@ Public Class dlgMerge
     Private ttJoinType As New ToolTip
     Private dctJoinTexts As New Dictionary(Of String, String)
     Private bMergeColumnsExist As Boolean
+    Private clsSuffixC As RFunction
 
     ' This dialog has a bug when using numeric and integer columns as the joining columns.
     ' Issue reported here: https://github.com/hadley/dplyr/issues/2164
@@ -98,6 +99,7 @@ Public Class dlgMerge
     Private Sub SetDefaults()
         clsMerge = New RFunction
         clsByList = New RFunction
+        clsSuffixC = New RFunction
 
         ucrFirstDataFrame.Reset()
         ucrSecondDataFrame.Reset()
@@ -108,6 +110,8 @@ Public Class dlgMerge
         clsMerge.SetRCommand("full_join")
 
         clsByList.SetRCommand("c")
+
+        clsSuffixC.SetRCommand("c")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsMerge)
         bResetSubdialog = True
@@ -172,14 +176,16 @@ Public Class dlgMerge
 
     Private Sub DataFrames_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFirstDataFrame.ControlValueChanged, ucrSecondDataFrame.ControlValueChanged
         If ucrFirstDataFrame.cboAvailableDataFrames.Text <> "" AndAlso ucrSecondDataFrame.cboAvailableDataFrames.Text <> "" Then
-            clsMerge.AddParameter("suffix", "c(" & Chr(34) & ucrFirstDataFrame.cboAvailableDataFrames.Text & Chr(34) & ", " & Chr(34) & ucrSecondDataFrame.cboAvailableDataFrames.Text & Chr(34) & ")")
+            clsSuffixC.AddParameter("0", strParameterValue:=Chr(34) & ucrFirstDataFrame.cboAvailableDataFrames.Text & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+            clsSuffixC.AddParameter("1", strParameterValue:=Chr(34) & ucrSecondDataFrame.cboAvailableDataFrames.Text & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
         Else
             clsMerge.RemoveParameterByName("suffix")
         End If
         ' Ensures options set on the subdialog are "reset" since they depend on data frame choice
         clsMerge.RemoveParameterByName("by")
-        clsMerge.AddParameter("x", clsRFunctionParameter:=ucrFirstDataFrame.clsCurrDataFrame)
-        clsMerge.AddParameter("y", clsRFunctionParameter:=ucrSecondDataFrame.clsCurrDataFrame)
+        clsByList.ClearParameters()
+        clsMerge.AddParameter("x", clsRFunctionParameter:=ucrFirstDataFrame.clsCurrDataFrame, iPosition:=0)
+        clsMerge.AddParameter("y", clsRFunctionParameter:=ucrSecondDataFrame.clsCurrDataFrame, iPosition:=1)
         SetMergingBy()
     End Sub
 
@@ -192,6 +198,7 @@ Public Class dlgMerge
         Dim lstJoinPairs As New List(Of String)
         Dim lstFirstColumns As List(Of String)
         Dim lstSecondColumns As List(Of String)
+        Dim i As Integer = 0
 
         If ucrFirstDataFrame.cboAvailableDataFrames.Text <> "" AndAlso ucrSecondDataFrame.cboAvailableDataFrames.Text <> "" Then
             If clsMerge.ContainsParameter("by") Then
@@ -201,11 +208,17 @@ Public Class dlgMerge
             Else
                 lstFirstColumns = frmMain.clsRLink.GetColumnNames(ucrFirstDataFrame.cboAvailableDataFrames.Text)
                 lstSecondColumns = frmMain.clsRLink.GetColumnNames(ucrSecondDataFrame.cboAvailableDataFrames.Text)
+                i = 0
                 For Each strFirst As String In lstFirstColumns
                     If lstSecondColumns.Contains(strFirst) Then
                         dctJoinColumns.Add(strFirst, strFirst)
+                        clsByList.AddParameter(Chr(34) & strFirst & Chr(34), Chr(34) & strFirst & Chr(34), iPosition:=i)
+                        i = i + 1
                     End If
                 Next
+                If clsByList.iParameterCount > 0 Then
+                    clsMerge.AddParameter("by", clsRFunctionParameter:=clsByList, iPosition:=2)
+                End If
             End If
             If dctJoinColumns.Count > 0 Then
                 For Each kvpTemp As KeyValuePair(Of String, String) In dctJoinColumns
@@ -220,9 +233,10 @@ Public Class dlgMerge
         Else
             ucrInputMergingBy.SetName("")
             ucrInputMergingBy.txtInput.BackColor = SystemColors.Control
+            clsMerge.RemoveParameterByName("by")
+            clsByList.ClearParameters()
         End If
         bMergeColumnsExist = (dctJoinColumns.Count > 0)
         TestOKEnabled()
     End Sub
-
 End Class
