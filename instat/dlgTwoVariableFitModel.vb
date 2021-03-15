@@ -31,6 +31,8 @@ Public Class dlgTwoVariableFitModel
         clsMoodTestFunction, clsCorTestFunction, clsKruskalTestFunction, clsOnewayTestFunction,
         clsBarletteTestFunction, clsMcnemarTestFunction, clsFlignerTestFunction, clsFisherTestFunction,
         clsXchisgTestFunction, clsPropTestFunction As New RFunction
+
+    Private clsTtestOperator, clsWilcoxTestOperator, clsVarTestOperator As New ROperator
     Private clsOneWayFormulaOperator As New ROperator
 
     'General case codes
@@ -200,6 +202,9 @@ Public Class dlgTwoVariableFitModel
         clsTtestFunction = New RFunction
         clsMcnemarTestFunction = New RFunction
         clsOneWayFormulaOperator = New ROperator
+        clsTtestOperator = New ROperator
+        clsWilcoxTestOperator = New ROperator
+        clsVarTestOperator = New ROperator
 
         ucrBase.clsRsyntax.ClearCodes()
 
@@ -303,8 +308,18 @@ Public Class dlgTwoVariableFitModel
 
         'Tests
         clsWilcoxTestFunction.SetRCommand("wilcox.test")
+        clsWilcoxTestFunction.AddParameter("wilcoxOperator", clsROperatorParameter:=clsWilcoxTestOperator,
+                                           iPosition:=0, bIncludeArgumentName:=False)
+
+        clsWilcoxTestOperator.SetOperation("~")
+        clsWilcoxTestOperator.bSpaceAroundOperation = True
 
         clsVarTestFunction.SetRCommand("var.test")
+        clsVarTestFunction.AddParameter("varOperator", clsROperatorParameter:=clsVarTestOperator,
+                                        bIncludeArgumentName:=False, iPosition:=0)
+
+        clsVarTestOperator.SetOperation("~")
+        clsVarTestOperator.bSpaceAroundOperation = True
 
         clsAnsariTestFuntion.SetRCommand("ansari.test")
 
@@ -332,8 +347,12 @@ Public Class dlgTwoVariableFitModel
         clsPropTestFunction.SetRCommand("prop")
 
         clsTtestFunction.SetRCommand("t.test")
+        clsTtestFunction.AddParameter("testOperator", clsROperatorParameter:=clsTtestOperator, bIncludeArgumentName:=False, iPosition:=0)
         clsTtestFunction.AddParameter("conf.level", "0.95", iPosition:=2)
         clsTtestFunction.AddParameter("mu", "0", iPosition:=3)
+
+        clsTtestOperator.SetOperation("~")
+        clsTtestOperator.bSpaceAroundOperation = True
 
         clsMcnemarTestFunction.SetRCommand("mcnemar.test")
 
@@ -359,8 +378,8 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsYearFunc, New RParameter("year", iNewPosition:=0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=7)
 
         'Test
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=8)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=9)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsWilcoxTestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=8)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsVarTestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=9)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsAnsariTestFuntion, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=10)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMoodTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=11)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsCorTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=12)
@@ -369,12 +388,12 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsFlignerTestFunction, New RParameter("g", iNewPosition:=1), iAdditionalPairNo:=15)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsXchisgTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=16)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsFisherTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=17)
-        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=18)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsTtestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=18)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMcnemarTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=19)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsOneWayFormulaOperator, New RParameter("SecondOperator", iNewPosition:=1), iAdditionalPairNo:=20)
 
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=2)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsWilcoxTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsVarTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=2)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsAnsariTestFuntion, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=3)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsMoodTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=4)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsCorTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=5)
@@ -384,7 +403,7 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsXchisgTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=9)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsFisherTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=10)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsPropTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=11)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsTtestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=12)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsTtestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=12)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsMcnemarTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=13)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsOneWayFormulaOperator, New RParameter("firstOperator", iNewPosition:=0), iAdditionalPairNo:=14)
 
