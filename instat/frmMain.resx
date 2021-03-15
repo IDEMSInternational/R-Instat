@@ -2436,16 +2436,16 @@
     <value>Output Window</value>
   </data>
   <data name="mnuColumnMetadat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>202, 22</value>
   </data>
   <data name="mnuColumnMetadat.Text" xml:space="preserve">
-    <value>Column Metadata...</value>
+    <value>  Column Metadata...</value>
   </data>
   <data name="mnuDataFrameMetadat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>196, 22</value>
+    <value>202, 22</value>
   </data>
   <data name="mnuDataFrameMetadat.Text" xml:space="preserve">
-    <value>Data Frame Metadata...</value>
+    <value>  Data Frame Metadata...</value>
   </data>
   <data name="mnuMetadata.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2504,16 +2504,16 @@
     <value>Column Metadata</value>
   </data>
   <data name="mnuLogWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>166, 22</value>
   </data>
   <data name="mnuLogWindow.Text" xml:space="preserve">
-    <value>Log Window...</value>
+    <value>  Log Window...</value>
   </data>
   <data name="mnuScriptWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
+    <value>166, 22</value>
   </data>
   <data name="mnuScriptWindow.Text" xml:space="preserve">
-    <value>Script Window...</value>
+    <value>  Script Window...</value>
   </data>
   <data name="mnuTbLog.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -2650,7 +2650,7 @@
     <value>34, 34</value>
   </data>
   <data name="mnuTbResetLayout.ToolTipText" xml:space="preserve">
-    <value>Reset Layout</value>
+    <value>Reset to Default Layout</value>
   </data>
   <data name="separator3.Size" type="System.Drawing.Size, System.Drawing">
     <value>6, 37</value>
@@ -3552,32 +3552,11 @@
   <data name="ToolStripSeparator46.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 6</value>
   </data>
-  <data name="mnuStructuredCircularScatterPlot.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuStructuredCircularScatterPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
-  </data>
-  <data name="mnuStructuredCircularScatterPlot.Text" xml:space="preserve">
-    <value>Scatter Plot...</value>
-  </data>
-  <data name="mnuStructuredCircularDensityPlot.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuStructuredCircularDensityPlot.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 22</value>
   </data>
   <data name="mnuStructuredCircularDensityPlot.Text" xml:space="preserve">
-    <value>Density Plot...</value>
-  </data>
-  <data name="mnuStructuredCircularRosePlot.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuStructuredCircularRosePlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 22</value>
-  </data>
-  <data name="mnuStructuredCircularRosePlot.Text" xml:space="preserve">
-    <value>Rose Plot...</value>
+    <value>Circular Plots...</value>
   </data>
   <data name="ToolStripSeparator67.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 6</value>
@@ -6446,9 +6425,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>
@@ -9393,22 +9369,10 @@
   <data name="&gt;&gt;ToolStripSeparator46.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuStructuredCircularScatterPlot.Name" xml:space="preserve">
-    <value>mnuStructuredCircularScatterPlot</value>
-  </data>
-  <data name="&gt;&gt;mnuStructuredCircularScatterPlot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;mnuStructuredCircularDensityPlot.Name" xml:space="preserve">
     <value>mnuStructuredCircularDensityPlot</value>
   </data>
   <data name="&gt;&gt;mnuStructuredCircularDensityPlot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuStructuredCircularRosePlot.Name" xml:space="preserve">
-    <value>mnuStructuredCircularRosePlot</value>
-  </data>
-  <data name="&gt;&gt;mnuStructuredCircularRosePlot.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator67.Name" xml:space="preserve">

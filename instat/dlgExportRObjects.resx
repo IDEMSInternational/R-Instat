@@ -121,9 +121,13 @@
   <data name="lblObjects.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblObjects.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblObjects.Location" type="System.Drawing.Point, System.Drawing">
-    <value>266, 45</value>
+    <value>263, 45</value>
   </data>
   <data name="lblObjects.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 13</value>
@@ -144,7 +148,28 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblObjects.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>1</value>
+  </data>
+  <data name="ucrFilePath.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 199</value>
+  </data>
+  <data name="ucrFilePath.Size" type="System.Drawing.Size, System.Drawing">
+    <value>394, 26</value>
+  </data>
+  <data name="ucrFilePath.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrFilePath.Name" xml:space="preserve">
+    <value>ucrFilePath</value>
+  </data>
+  <data name="&gt;&gt;ucrFilePath.Type" xml:space="preserve">
+    <value>instat.ucrFilePath, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrFilePath.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrFilePath.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -153,80 +178,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>420, 288</value>
-  </data>
-  <data name="ucrInputExportFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 204</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrInputExportFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>6, 8, 6, 8</value>
-  </data>
-  <data name="ucrInputExportFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>240, 23</value>
-  </data>
-  <data name="ucrInputExportFile.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrInputExportFile.Name" xml:space="preserve">
-    <value>ucrInputExportFile</value>
-  </data>
-  <data name="&gt;&gt;ucrInputExportFile.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputExportFile.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputExportFile.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="cmdBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 203</value>
-  </data>
-  <data name="cmdBrowse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
-  </data>
-  <data name="cmdBrowse.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="cmdBrowse.Text" xml:space="preserve">
-    <value>Browse</value>
-  </data>
-  <data name="&gt;&gt;cmdBrowse.Name" xml:space="preserve">
-    <value>cmdBrowse</value>
-  </data>
-  <data name="&gt;&gt;cmdBrowse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdBrowse.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdBrowse.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblExportFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 206</value>
-  </data>
-  <data name="lblExportFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 13</value>
-  </data>
-  <data name="lblExportFile.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="lblExportFile.Text" xml:space="preserve">
-    <value>Export File:</value>
-  </data>
-  <data name="&gt;&gt;lblExportFile.Name" xml:space="preserve">
-    <value>lblExportFile</value>
-  </data>
-  <data name="&gt;&gt;lblExportFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblExportFile.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblExportFile.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>417, 288</value>
   </data>
   <data name="ucrSelectorObjects.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -250,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorObjects.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>3</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 232</value>
@@ -274,7 +226,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -288,28 +240,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrReceiverObjects.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrReceiverMultipleObjects.Location" type="System.Drawing.Point, System.Drawing">
     <value>267, 60</value>
   </data>
-  <data name="ucrReceiverObjects.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverMultipleObjects.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverObjects.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverMultipleObjects.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 100</value>
   </data>
-  <data name="ucrReceiverObjects.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrReceiverMultipleObjects.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverObjects.Name" xml:space="preserve">
-    <value>ucrReceiverObjects</value>
+  <data name="&gt;&gt;ucrReceiverMultipleObjects.Name" xml:space="preserve">
+    <value>ucrReceiverMultipleObjects</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverObjects.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverMultipleObjects.Type" xml:space="preserve">
     <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverObjects.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverMultipleObjects.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverObjects.ZOrder" xml:space="preserve">
-    <value>4</value>
+  <data name="&gt;&gt;ucrReceiverMultipleObjects.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
 </root>
