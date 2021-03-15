@@ -117,7 +117,7 @@ Public Class dlgDuplicateColumns
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorForDuplicateColumn.ucrAvailableDataFrames)
         ucrSaveColumn.SetLabelText("New Column Name:")
-        ucrSaveColumn.SetIsTextBox()
+        ucrSaveColumn.SetIsComboBox()
         ucrSaveColumn.setLinkedReceiver(ucrReceiverDuplicateColumns) 'added
 
     End Sub
