@@ -1406,14 +1406,20 @@ DataSheet$set("public", "get_data_type", function(col_name = "") {
   else if(is.numeric(private$data[[col_name]])) {
     #TODO vectors with integer values but stored as numeric will return numeric.
     #     Is that desirable?
-    if(is.integer(private$data[[col_name]])) {
-      if(all(private$data[[col_name]]>0)) {
-        type = "positive integer"
+      if(is.binary(private$data[[col_name]])){
+        type = "two level numeric"
       }
-      else type = "integer"
-    }
-    else type = "numeric"
+      else if(is.integer(private$data[[col_name]])) {
+        if(all(private$data[[col_name]]>0)) {
+          type = "positive integer"
+        }
+        else type = "integer"
+      }
+      else type = "numeric"
   }
+
+
+
   else if(is.factor(curr_col)) {
     if(length(levels(curr_col))==2) type = "two level factor"
     else if(length(levels(curr_col))>2) type = "multilevel factor"
