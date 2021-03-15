@@ -495,7 +495,13 @@ Public Class ucrSave
         ucrInputComboSave.Enabled = ucrChkSave.Checked
         ucrInputTextSave.Visible = False
         ucrInputComboSave.Visible = False
-        btnColumnPosition.Visible = ucrChkSave.Checked
+        btnColumnPosition.Visible = False
+
+        'always hide position button if save type is not a column
+        If strSaveType = "column" Then
+            btnColumnPosition.Visible = ucrChkSave.Checked
+        End If
+
         If strAssignToIfUnchecked <> "" Then
             If ucrChkSave.Checked Then
                 If bIsComboBox Then
