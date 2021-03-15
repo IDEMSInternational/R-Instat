@@ -47,11 +47,12 @@ Public Class dlgCountinFactor
         ucrCountReceiver.bUseFilteredData = False
 
         ' ucrNewColName
-        ucrNewColName.SetIsTextBox()
+        ucrNewColName.SetIsComboBox()
         ucrNewColName.SetPrefix("Count")
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrCountSelector.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("New Column Name:")
+        ucrNewColName.setLinkedReceiver(ucrCountReceiver)
     End Sub
 
     Private Sub SetDefaults()
