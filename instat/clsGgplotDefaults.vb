@@ -28,22 +28,32 @@ Public Class GgplotDefaults
         End Get
     End Property
 
-    Public Shared ReadOnly Property clsScaleColorViridis As RFunction
+    Public Shared ReadOnly Property clsScaleColorViridisFunction As RFunction
         Get
             Dim clsTempFunc As New RFunction
 
             clsTempFunc.SetPackageName("ggplot2")
             clsTempFunc.SetRCommand("scale_colour_viridis")
+            clsTempFunc.AddParameter("option", Chr(34) & "viridis" & Chr(34), iPosition:=0)
+            clsTempFunc.AddParameter("alpha", "1", iPosition:=1)
+            clsTempFunc.AddParameter("begin", "0", iPosition:=2)
+            clsTempFunc.AddParameter("end", "1", iPosition:=3)
+            clsTempFunc.AddParameter("direction", "1", iPosition:=4)
             Return clsTempFunc
         End Get
     End Property
 
-    Public Shared ReadOnly Property clsScaleFillViridis As RFunction
+    Public Shared ReadOnly Property clsScaleFillViridisFunction As RFunction
         Get
             Dim clsTempFunc As New RFunction
 
             clsTempFunc.SetPackageName("ggplot2")
             clsTempFunc.SetRCommand("scale_fill_viridis")
+            clsTempFunc.AddParameter("option", Chr(34) & "viridis" & Chr(34), iPosition:=0)
+            clsTempFunc.AddParameter("alpha", "1", iPosition:=1)
+            clsTempFunc.AddParameter("begin", "0", iPosition:=2)
+            clsTempFunc.AddParameter("end", "1", iPosition:=3)
+            clsTempFunc.AddParameter("direction", "1", iPosition:=4)
             Return clsTempFunc
         End Get
     End Property

@@ -14,6 +14,7 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports instat
 Imports instat.Translations
 Public Class sdgPlots
     'Question to be discussed (later: need to explore first)/Exploration Task: In order to uniformise the code, could create a PlotOptionsSetup where all the necessary links between specific plots and plot options are made ? For the moment all these are scattered around. Might be necessary to have this flexibility though... 
@@ -33,8 +34,8 @@ Public Class sdgPlots
     Public clsXScaleDateFunction As New RFunction
     Public clsYScaleDateFunction As New RFunction
     Public clsYLabFunction As New RFunction
-    Public clsScaleColourFunction As New RFunction
-    Public clsScaleFillFunction As New RFunction
+    Public clsScaleColourViridisFunction As New RFunction
+    Public clsScaleFillViridisFunction As New RFunction
     Public clsBaseOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
@@ -73,6 +74,8 @@ Public Class sdgPlots
     Public Sub InitialiseControls()
         Dim dctThemes As New Dictionary(Of String, String)
         Dim dctLegendPosition As New Dictionary(Of String, String)
+        Dim dctOptions As New Dictionary(Of String, String)
+
         Dim strThemes As String()
 
         Dim clsCoordFlipFunc As New RFunction
@@ -333,10 +336,44 @@ Public Class sdgPlots
         ucrChkDrop.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkDrop.SetText("Drop empty factor levels")
         ucrChkDrop.SetRDefault("TRUE")
+
+        'Colour
+        ucrInputFillScaleColour.SetParameter(New RParameter("option", iNewPosition:=0))
+        dctOptions.Add("viridis", Chr(34) & "viridis" & Chr(34))
+        dctOptions.Add("magma", Chr(34) & "magma" & Chr(34))
+        dctOptions.Add("inferno", Chr(34) & "inferno" & Chr(34))
+        dctOptions.Add("plasma", Chr(34) & "plasma" & Chr(34))
+        dctOptions.Add("cividis", Chr(34) & "cividis" & Chr(34))
+        ucrInputFillScaleColour.SetItems(dctOptions)
+        ucrInputFillScaleColour.SetLinkedDisplayControl(lblFillScaleColourPalettte)
+
+        ucrNudFillScaleTransparency.SetParameter(New RParameter("alpha", iNewPosition:=1))
+        ucrNudFillScaleTransparency.SetMinMax(0, 1)
+        ucrNudFillScaleTransparency.DecimalPlaces = 2
+        ucrNudFillScaleTransparency.Increment = 0.01
+        ucrNudFillScaleTransparency.SetLinkedDisplayControl(lblFillScaleTransparency)
+
+        ucrNudFillScaleMapBegins.SetParameter(New RParameter("begin", iNewPosition:=2))
+        ucrNudFillScaleMapBegins.SetMinMax(0, 1)
+        ucrNudFillScaleMapBegins.DecimalPlaces = 2
+        ucrNudFillScaleMapBegins.Increment = 0.01
+        ucrNudFillScaleMapBegins.SetLinkedDisplayControl(lblFillScaleBeginColour)
+
+        ucrNudFillScaleMapEnds.SetParameter(New RParameter("end", iNewPosition:=3))
+        ucrNudFillScaleMapEnds.SetMinMax(0, 1)
+        ucrNudFillScaleMapEnds.DecimalPlaces = 2
+        ucrNudFillScaleMapEnds.Increment = 0.01
+        ucrNudFillScaleMapEnds.SetLinkedDisplayControl(lblFillScaleMapEnds)
+
+        ucrChkFilLScaleReverseColourOrder.SetParameter(New RParameter("direction", iNewPosition:=4))
+        ucrChkFilLScaleReverseColourOrder.SetText("Reverse Order Of Colours")
+        ucrChkFilLScaleReverseColourOrder.SetValuesCheckedAndUnchecked("1", "-1")
+
+        ucrChkAddColoutPalette.SetText("Add Colour Palette")
     End Sub
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction, clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector, bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing,
-                        Optional clsNewScaleFillFunction As RFunction = Nothing, Optional clsNewScaleColourFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing)
+                        Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing)
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
@@ -363,8 +400,8 @@ Public Class sdgPlots
         clsThemeFunction = clsNewThemeFunction
         clsCoordPolarFunc = clsNewCoordPolarFunction
         clsCoordPolarStartOperator = clsNewCoordPolarStartOperator
-        clsScaleFillFunction = clsNewScaleFillFunction
-        clsScaleColourFunction = clsNewScaleColourFunction
+        clsScaleFillViridisFunction = clsNewScaleFillViridisFunction
+        clsScaleColourViridisFunction = clsNewScaleColourViridisFunction
 
         If Not IsNothing(clsCoordPolarStartOperator) Then
             clsCoordPolarFunc.AddParameter("start", clsROperatorParameter:=clsCoordPolarStartOperator, iPosition:=1)
@@ -422,6 +459,9 @@ Public Class sdgPlots
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
         ucrYAxis.SetRCodeForControl(bIsXAxis:=False, strNewAxisType:=GetAxisType(False), clsNewXYlabTitleFunction:=clsYLabFunction, clsNewXYScaleContinuousFunction:=clsYScalecontinuousFunction, clsNewBaseOperator:=clsBaseOperator, clsNewXYScaleDateFunction:=clsYScaleDateFunction, bReset:=bReset, bCloneIfNeeded:=True)
 
+        'colour tab
+
+
         'Themes tab
         SetRcodeForCommonThemesControls(bReset)
         'coordinates tab
@@ -431,6 +471,13 @@ Public Class sdgPlots
         ucrChkDirectionAnticlockwise.SetRCode(clsCoordPolarFunc, bReset:=True, bCloneIfNeeded:=True)
         ucrInputStartingAngle.SetRCode(clsCoordPolarStartOperator, bReset, bCloneIfNeeded:=True)
         ucrInputPolarCoordinates.SetRCode(clsCoordPolarFunc, bReset:=True, bCloneIfNeeded:=True)
+
+        'colour
+        ucrInputFillScaleColour.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudFillScaleTransparency.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudFillScaleMapBegins.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudFillScaleMapEnds.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkFilLScaleReverseColourOrder.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
         bRCodeSet = True
@@ -793,4 +840,11 @@ Public Class sdgPlots
         End If
     End Sub
 
+    Private Sub ucrChkAddColoutPalette_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddColoutPalette.ControlValueChanged
+        If ucrChkAddColoutPalette.Checked Then
+            clsBaseOperator.AddParameter("scale_fill", clsRFunctionParameter:=clsScaleFillViridisFunction, iPosition:=3)
+        Else
+            clsBaseOperator.RemoveParameterByName("scale_fill")
+        End If
+    End Sub
 End Class
