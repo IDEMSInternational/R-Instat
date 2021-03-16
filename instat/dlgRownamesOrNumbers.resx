@@ -294,8 +294,11 @@
   <data name="ucrNewColumnName.Location" type="System.Drawing.Point, System.Drawing">
     <value>24, 42</value>
   </data>
+  <data name="ucrNewColumnName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrNewColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 24</value>
+    <value>206, 21</value>
   </data>
   <data name="ucrNewColumnName.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
