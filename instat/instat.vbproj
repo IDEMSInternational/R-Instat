@@ -171,6 +171,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsCompareTwoOptionsLines.vb" />
     <Compile Include="clsCompareTwoOptionsPoints.vb" />
@@ -200,18 +201,6 @@
       <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCircularDensityPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgCircularRosePlot.Designer.vb">
-      <DependentUpon>dlgCircularRosePlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgCircularRosePlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgCircularScatterPlot.Designer.vb">
-      <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgCircularScatterPlot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimaticNCMPCountRecords.Designer.vb">
@@ -2417,6 +2406,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -2703,12 +2693,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCircularDensityPlot.resx">
       <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgCircularRosePlot.resx">
-      <DependentUpon>dlgCircularRosePlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgCircularScatterPlot.resx">
-      <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticNCMPCountRecords.resx">
       <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
