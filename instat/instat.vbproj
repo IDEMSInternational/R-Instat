@@ -443,6 +443,12 @@
     <Compile Include="dlgTreemap.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgMergeColumnsToInclude.Designer.vb">
+      <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgMergeColumnsToInclude.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgMissingOptions.Designer.vb">
       <DependentUpon>sdgMissingOptions.vb</DependentUpon>
     </Compile>
@@ -2814,6 +2820,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMergeColumnsToInclude.resx">
+      <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMissingOptions.resx">
       <DependentUpon>sdgMissingOptions.vb</DependentUpon>
