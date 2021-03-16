@@ -1734,29 +1734,50 @@
   <data name="&gt;&gt;tbpCoordinates.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="ucrChkAddColoutPalette.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 11</value>
+  <data name="ucrChkAddColourScale.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 197</value>
   </data>
-  <data name="ucrChkAddColoutPalette.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrChkAddColourScale.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
   </data>
-  <data name="ucrChkAddColoutPalette.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+  <data name="ucrChkAddColourScale.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
   </data>
-  <data name="&gt;&gt;ucrChkAddColoutPalette.Name" xml:space="preserve">
-    <value>ucrChkAddColoutPalette</value>
+  <data name="&gt;&gt;ucrChkAddColourScale.Name" xml:space="preserve">
+    <value>ucrChkAddColourScale</value>
   </data>
-  <data name="&gt;&gt;ucrChkAddColoutPalette.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkAddColourScale.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkAddColoutPalette.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkAddColourScale.Parent" xml:space="preserve">
     <value>tbpColour</value>
   </data>
-  <data name="&gt;&gt;ucrChkAddColoutPalette.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkAddColourScale.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="ucrChkAddFillScale.Location" type="System.Drawing.Point, System.Drawing">
+    <value>23, 6</value>
+  </data>
+  <data name="ucrChkAddFillScale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkAddFillScale.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddFillScale.Name" xml:space="preserve">
+    <value>ucrChkAddFillScale</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddFillScale.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddFillScale.Parent" xml:space="preserve">
+    <value>tbpColour</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddFillScale.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrNudColourScaleTransparency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 49</value>
+    <value>222, 46</value>
   </data>
   <data name="ucrNudColourScaleTransparency.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1777,7 +1798,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputColourScalePalette.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 19</value>
+    <value>222, 19</value>
   </data>
   <data name="ucrInputColourScalePalette.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -1798,7 +1819,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudColourScaleMapEnds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 102</value>
+    <value>222, 100</value>
   </data>
   <data name="ucrNudColourScaleMapEnds.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1819,7 +1840,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudColourScaleMapBegins.Location" type="System.Drawing.Point, System.Drawing">
-    <value>237, 76</value>
+    <value>222, 73</value>
   </data>
   <data name="ucrNudColourScaleMapBegins.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1840,7 +1861,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkColourScaleReverseOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 122</value>
+    <value>7, 123</value>
   </data>
   <data name="ucrChkColourScaleReverseOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 18</value>
@@ -1861,7 +1882,7 @@
     <value>4</value>
   </data>
   <data name="ucrChkColourScaleDiscrete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 145</value>
+    <value>7, 146</value>
   </data>
   <data name="ucrChkColourScaleDiscrete.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 26</value>
@@ -1888,7 +1909,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblColourScaleMapEnds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 99</value>
+    <value>7, 99</value>
   </data>
   <data name="lblColourScaleMapEnds.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 13</value>
@@ -1918,7 +1939,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblColourScaleMapBegins.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 76</value>
+    <value>7, 75</value>
   </data>
   <data name="lblColourScaleMapBegins.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 13</value>
@@ -1948,7 +1969,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblColourScalePalette.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 22</value>
+    <value>7, 27</value>
   </data>
   <data name="lblColourScalePalette.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
@@ -1978,7 +1999,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblColourScaleTransparency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 49</value>
+    <value>7, 51</value>
   </data>
   <data name="lblColourScaleTransparency.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
@@ -2002,10 +2023,10 @@
     <value>9</value>
   </data>
   <data name="grpColourScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 243</value>
+    <value>13, 243</value>
   </data>
   <data name="grpColourScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>430, 172</value>
+    <value>390, 172</value>
   </data>
   <data name="grpColourScale.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
@@ -2023,10 +2044,10 @@
     <value>tbpColour</value>
   </data>
   <data name="&gt;&gt;grpColourScale.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="UcrChkChangeColourScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 216</value>
+    <value>20, 217</value>
   </data>
   <data name="UcrChkChangeColourScale.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -2044,13 +2065,13 @@
     <value>tbpColour</value>
   </data>
   <data name="&gt;&gt;UcrChkChangeColourScale.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrNudFillScaleTransparency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 45</value>
+    <value>222, 46</value>
   </data>
   <data name="ucrNudFillScaleTransparency.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>50, 21</value>
   </data>
   <data name="ucrNudFillScaleTransparency.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -2068,10 +2089,10 @@
     <value>0</value>
   </data>
   <data name="ucrNudFillScaleMapEnds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 98</value>
+    <value>222, 100</value>
   </data>
   <data name="ucrNudFillScaleMapEnds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>50, 22</value>
   </data>
   <data name="ucrNudFillScaleMapEnds.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -2089,10 +2110,10 @@
     <value>1</value>
   </data>
   <data name="ucrNudFillScaleMapBegins.Location" type="System.Drawing.Point, System.Drawing">
-    <value>222, 72</value>
+    <value>222, 73</value>
   </data>
   <data name="ucrNudFillScaleMapBegins.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>50, 27</value>
   </data>
   <data name="ucrNudFillScaleMapBegins.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2113,7 +2134,7 @@
     <value>222, 19</value>
   </data>
   <data name="ucrInputFillScaleColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>137, 25</value>
   </data>
   <data name="ucrInputFillScaleColour.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -2131,7 +2152,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkFilLScaleReverseColourOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 118</value>
+    <value>7, 118</value>
   </data>
   <data name="ucrChkFilLScaleReverseColourOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -2152,7 +2173,7 @@
     <value>4</value>
   </data>
   <data name="ucrChkFillScaleDiscrete.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 144</value>
+    <value>7, 141</value>
   </data>
   <data name="ucrChkFillScaleDiscrete.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -2179,7 +2200,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFillScaleMapEnds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 94</value>
+    <value>7, 95</value>
   </data>
   <data name="lblFillScaleMapEnds.Size" type="System.Drawing.Size, System.Drawing">
     <value>198, 13</value>
@@ -2209,7 +2230,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFillScaleBeginColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 71</value>
+    <value>7, 72</value>
   </data>
   <data name="lblFillScaleBeginColour.Size" type="System.Drawing.Size, System.Drawing">
     <value>209, 13</value>
@@ -2239,7 +2260,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFillScaleColourPalettte.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 21</value>
+    <value>7, 26</value>
   </data>
   <data name="lblFillScaleColourPalettte.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
@@ -2266,7 +2287,7 @@
     <value>True</value>
   </data>
   <data name="lblFillScaleTransparency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 46</value>
+    <value>7, 49</value>
   </data>
   <data name="lblFillScaleTransparency.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
@@ -2290,10 +2311,10 @@
     <value>9</value>
   </data>
   <data name="grpFillScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 37</value>
+    <value>13, 30</value>
   </data>
   <data name="grpFillScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>430, 176</value>
+    <value>388, 160</value>
   </data>
   <data name="grpFillScale.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -2311,7 +2332,7 @@
     <value>tbpColour</value>
   </data>
   <data name="&gt;&gt;grpFillScale.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="tbpColour.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>

@@ -32,7 +32,7 @@ Public Class GgplotDefaults
         Get
             Dim clsTempFunc As New RFunction
 
-            clsTempFunc.SetPackageName("ggplot2")
+            clsTempFunc.SetPackageName("viridis")
             clsTempFunc.SetRCommand("scale_colour_viridis")
             clsTempFunc.AddParameter("option", Chr(34) & "viridis" & Chr(34), iPosition:=0)
             clsTempFunc.AddParameter("alpha", "1", iPosition:=1)
@@ -47,7 +47,7 @@ Public Class GgplotDefaults
         Get
             Dim clsTempFunc As New RFunction
 
-            clsTempFunc.SetPackageName("ggplot2")
+            clsTempFunc.SetPackageName("viridis")
             clsTempFunc.SetRCommand("scale_fill_viridis")
             clsTempFunc.AddParameter("option", Chr(34) & "viridis" & Chr(34), iPosition:=0)
             clsTempFunc.AddParameter("alpha", "1", iPosition:=1)

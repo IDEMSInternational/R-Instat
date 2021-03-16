@@ -109,6 +109,8 @@ Partial Class sdgPlots
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.tbpColour = New System.Windows.Forms.TabPage()
+        Me.ucrChkAddColourScale = New instat.ucrCheck()
+        Me.ucrChkAddFillScale = New instat.ucrCheck()
         Me.grpColourScale = New System.Windows.Forms.GroupBox()
         Me.ucrNudColourScaleTransparency = New instat.ucrNud()
         Me.ucrInputColourScalePalette = New instat.ucrInputComboBox()
@@ -133,7 +135,6 @@ Partial Class sdgPlots
         Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
         Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkAddColoutPalette = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -681,13 +682,26 @@ Partial Class sdgPlots
         '
         'tbpColour
         '
-        Me.tbpColour.Controls.Add(Me.ucrChkAddColoutPalette)
+        Me.tbpColour.Controls.Add(Me.ucrChkAddColourScale)
+        Me.tbpColour.Controls.Add(Me.ucrChkAddFillScale)
         Me.tbpColour.Controls.Add(Me.grpColourScale)
         Me.tbpColour.Controls.Add(Me.UcrChkChangeColourScale)
         Me.tbpColour.Controls.Add(Me.grpFillScale)
         resources.ApplyResources(Me.tbpColour, "tbpColour")
         Me.tbpColour.Name = "tbpColour"
         Me.tbpColour.UseVisualStyleBackColor = True
+        '
+        'ucrChkAddColourScale
+        '
+        Me.ucrChkAddColourScale.Checked = False
+        resources.ApplyResources(Me.ucrChkAddColourScale, "ucrChkAddColourScale")
+        Me.ucrChkAddColourScale.Name = "ucrChkAddColourScale"
+        '
+        'ucrChkAddFillScale
+        '
+        Me.ucrChkAddFillScale.Checked = False
+        resources.ApplyResources(Me.ucrChkAddFillScale, "ucrChkAddFillScale")
+        Me.ucrChkAddFillScale.Name = "ucrChkAddFillScale"
         '
         'grpColourScale
         '
@@ -872,12 +886,6 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
-        'ucrChkAddColoutPalette
-        '
-        Me.ucrChkAddColoutPalette.Checked = False
-        resources.ApplyResources(Me.ucrChkAddColoutPalette, "ucrChkAddColoutPalette")
-        Me.ucrChkAddColoutPalette.Name = "ucrChkAddColoutPalette"
-        '
         'sdgPlots
         '
         resources.ApplyResources(Me, "$this")
@@ -1010,7 +1018,8 @@ Partial Class sdgPlots
     Friend WithEvents ucrNudFillScaleMapEnds As ucrNud
     Friend WithEvents ucrNudFillScaleMapBegins As ucrNud
     Friend WithEvents ucrInputFillScaleColour As ucrInputComboBox
-    Friend WithEvents ucrChkAddColoutPalette As ucrCheck
+    Friend WithEvents ucrChkAddFillScale As ucrCheck
+    Friend WithEvents ucrChkAddColourScale As ucrCheck
 End Class
 
 
