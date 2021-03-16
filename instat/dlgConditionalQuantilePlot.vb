@@ -194,7 +194,7 @@ Public Class dlgConditionalQuantilePlot
     Private Sub TestOkEnabled()
         If rdoQuantiles.Checked AndAlso Not ucrReceiverObservations.IsEmpty() AndAlso Not ucrReceiverPredictions.IsEmpty() AndAlso ucrSavePlot.IsComplete AndAlso ucrNudBin.GetText <> "" AndAlso ucrNudKeyColumns.GetText <> "" Then
             ucrBase.OKEnabled(True)
-        ElseIf rdoEvaluation.Checked AndAlso Not ucrReceiverObservations.IsEmpty() AndAlso Not ucrReceiverPredictions.IsEmpty() AndAlso ucrSavePlot.IsComplete AndAlso Not ucrReceiverStatistics.IsEmpty Then
+        ElseIf rdoEvaluation.Checked AndAlso Not ucrReceiverObservations.IsEmpty() AndAlso Not ucrReceiverPredictions.IsEmpty() AndAlso ucrSavePlot.IsComplete Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
