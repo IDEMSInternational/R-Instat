@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblResponseVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>244, 28</value>
+    <value>248, 43</value>
   </data>
   <data name="lblResponseVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 13</value>
@@ -154,13 +154,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdModelOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>395, 291</value>
+    <value>395, 287</value>
   </data>
   <data name="cmdModelOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 23</value>
   </data>
   <data name="cmdModelOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>14</value>
   </data>
   <data name="cmdModelOptions.Text" xml:space="preserve">
     <value>Model Options</value>
@@ -184,13 +184,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblModelPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 295</value>
+    <value>7, 291</value>
   </data>
   <data name="lblModelPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
   </data>
   <data name="lblModelPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="lblModelPreview.Text" xml:space="preserve">
     <value>Model Preview:</value>
@@ -211,13 +211,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDisplayOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 318</value>
+    <value>395, 314</value>
   </data>
   <data name="cmdDisplayOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 23</value>
   </data>
   <data name="cmdDisplayOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="cmdDisplayOptions.Text" xml:space="preserve">
     <value>Display Options</value>
@@ -241,7 +241,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblExplanatoryModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 73</value>
+    <value>249, 92</value>
   </data>
   <data name="lblExplanatoryModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 13</value>
@@ -625,7 +625,7 @@
     <value>10</value>
   </data>
   <data name="grpFirstCalc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>244, 125</value>
+    <value>246, 133</value>
   </data>
   <data name="grpFirstCalc.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 111</value>
@@ -826,7 +826,7 @@
     <value>5</value>
   </data>
   <data name="grpSecondCalc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>374, 125</value>
+    <value>376, 133</value>
   </data>
   <data name="grpSecondCalc.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 111</value>
@@ -856,7 +856,7 @@
     <value>102, 16</value>
   </data>
   <data name="lblType.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;lblType.Name" xml:space="preserve">
     <value>lblType</value>
@@ -883,7 +883,7 @@
     <value>126, 13</value>
   </data>
   <data name="lblRVType.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>8</value>
   </data>
   <data name="lblRVType.Text" xml:space="preserve">
     <value>Response Variable Type:</value>
@@ -901,13 +901,13 @@
     <value>1</value>
   </data>
   <data name="ucrTryModelling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 257</value>
+    <value>0, 252</value>
   </data>
   <data name="ucrTryModelling.Size" type="System.Drawing.Size, System.Drawing">
     <value>480, 29</value>
   </data>
   <data name="ucrTryModelling.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrTryModelling.Name" xml:space="preserve">
     <value>ucrTryModelling</value>
@@ -922,7 +922,7 @@
     <value>2</value>
   </data>
   <data name="ucrModelName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 316</value>
+    <value>10, 315</value>
   </data>
   <data name="ucrModelName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -931,7 +931,7 @@
     <value>277, 24</value>
   </data>
   <data name="ucrModelName.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrModelName.Name" xml:space="preserve">
     <value>ucrModelName</value>
@@ -946,7 +946,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkConvertToVariate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>378, 43</value>
+    <value>382, 58</value>
   </data>
   <data name="ucrChkConvertToVariate.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
@@ -973,16 +973,16 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>510, 405</value>
+    <value>510, 401</value>
   </data>
   <data name="ucrInputModelPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 292</value>
+    <value>90, 288</value>
   </data>
   <data name="ucrInputModelPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>298, 21</value>
   </data>
   <data name="ucrInputModelPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrInputModelPreview.Name" xml:space="preserve">
     <value>ucrInputModelPreview</value>
@@ -1003,7 +1003,7 @@
     <value>207, 29</value>
   </data>
   <data name="ucrFamily.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrFamily.Name" xml:space="preserve">
     <value>ucrFamily</value>
@@ -1018,7 +1018,7 @@
     <value>12</value>
   </data>
   <data name="ucrReceiverResponseVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 43</value>
+    <value>247, 58</value>
   </data>
   <data name="ucrReceiverResponseVar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1066,13 +1066,13 @@
     <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 344</value>
+    <value>10, 343</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -1102,7 +1102,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverExpressionFitModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 89</value>
+    <value>247, 107</value>
   </data>
   <data name="ucrReceiverExpressionFitModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 30</value>

@@ -323,8 +323,7 @@ Public Class dlgFitModel
         If bRCodeSet Then
             If Not ucrReceiverResponseVar.IsEmpty Then
                 ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
-
-                If ucrFamily.strDataType = "numeric" Then
+                If ucrFamily.strDataType = "numeric" OrElse ucrFamily.strDataType = "positive integer" OrElse ucrFamily.strDataType = "two level numeric" Then
                     ucrChkConvertToVariate.Checked = False
                     ucrChkConvertToVariate.Visible = False
                 Else
@@ -416,30 +415,10 @@ Public Class dlgFitModel
         GraphAssignTo()
     End Sub
 
-    Private Sub GraphAssignTo()
-        'Dim lstPlotNames As New List(Of String)
-        'Dim i As Integer = 0
-
-        'lstPlotNames = New List(Of String)({"last_residplot", "last_qqplot", "last_scaleloc", "last_cooksdist", "last_residlev", "last_cookslev"})
-
-        'temp fix for graph display problem with RDotNet
-        clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
-
-        'For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
-        '    kvp.Value.SetAssignTo(lstPlotNames(index:=i), strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=lstPlotNames(index:=i))
-        '    i = i + 1
-        'Next
-    End Sub
-
-    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        ucrReceiverExpressionFitModel.AddtoCombobox(ucrReceiverExpressionFitModel.GetText)
-    End Sub
-
     Public Sub ResponseVariableType()
         If bRCodeSet Then
             If Not ucrReceiverResponseVar.IsEmpty() Then
                 strVariableType = ucrFamily.strDataType
-
                 If strVariableType.Contains("numeric") Then
                     strVariableType = "numeric"
                 ElseIf strVariableType.Contains("positive integer") Then
@@ -457,5 +436,24 @@ Public Class dlgFitModel
                 lblType.ForeColor = SystemColors.ControlText
             End If
         End If
+    End Sub
+
+    Private Sub GraphAssignTo()
+        'Dim lstPlotNames As New List(Of String)
+        'Dim i As Integer = 0
+
+        'lstPlotNames = New List(Of String)({"last_residplot", "last_qqplot", "last_scaleloc", "last_cooksdist", "last_residlev", "last_cookslev"})
+
+        'temp fix for graph display problem with RDotNet
+        clsVisReg.SetAssignTo("last_visreg", strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_visreg")
+
+        'For Each kvp As KeyValuePair(Of String, RFunction) In dctPlotFunctions
+        '    kvp.Value.SetAssignTo(lstPlotNames(index:=i), strTempDataframe:=ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=lstPlotNames(index:=i))
+        '    i = i + 1
+        'Next
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        ucrReceiverExpressionFitModel.AddtoCombobox(ucrReceiverExpressionFitModel.GetText)
     End Sub
 End Class
