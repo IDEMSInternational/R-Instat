@@ -50,7 +50,6 @@ Public Class dlgMerge
 
     Private Sub InitialiseDialog()
         Dim dctJoinTypes As New Dictionary(Of String, String)
-
         ucrBase.iHelpTopicID = 60
 
         'sdgMerge.SetRSyntax(ucrBase.clsRsyntax)
@@ -103,14 +102,11 @@ Public Class dlgMerge
 
         ucrFirstDataFrame.Reset()
         ucrSecondDataFrame.Reset()
-
         ucrSaveMerge.Reset()
 
         clsMerge.SetPackageName("dplyr")
         clsMerge.SetRCommand("full_join")
-
         clsByList.SetRCommand("c")
-
         clsSuffixC.SetRCommand("c")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsMerge)
@@ -141,6 +137,13 @@ Public Class dlgMerge
     Private Sub cmdJoinOptions_Click(sender As Object, e As EventArgs) Handles cmdJoinOptions.Click
         sdgMerge.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondDataFrame.cboAvailableDataFrames.Text, clsMerge, clsByList, bResetSubdialog)
         sdgMerge.ShowDialog()
+        bResetSubdialog = False
+        SetMergingBy()
+    End Sub
+
+    Private Sub cmdColumnOptions_Click(sender As Object, e As EventArgs) Handles cmdColumnOptions.Click
+        sdgMergeColumnstoInclude.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondDataFrame.cboAvailableDataFrames.Text, clsMerge, clsByList, bResetSubdialog)
+        sdgMergeColumnstoInclude.ShowDialog()
         bResetSubdialog = False
         SetMergingBy()
     End Sub
@@ -227,7 +230,7 @@ Public Class dlgMerge
                 ucrInputMergingBy.SetName(String.Join(", ", lstJoinPairs))
                 ucrInputMergingBy.txtInput.BackColor = SystemColors.Control
             Else
-                ucrInputMergingBy.SetName("No columns to merge by!" & Environment.NewLine & "Click Merge Options to specify merging columns.")
+                ucrInputMergingBy.SetName("No columns to merge by!" & Environment.NewLine & "Click Join Options to specify merging columns.")
                 ucrInputMergingBy.txtInput.BackColor = Color.LightCoral
             End If
         Else
