@@ -19,9 +19,10 @@ Imports instat.Translations
 Public Class dlgWindPollutionRose
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
+    Private bRcodeSet As Boolean = False
     'Functions 
     Private clsPollutionRoseFunction As RFunction
+    Private clsCombineValues As RFunction
 
     Private Sub dlgPollutionRose_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -71,19 +72,22 @@ Public Class dlgWindPollutionRose
         ucrReceiverDate.SetParameter(New RParameter("date_name", 6))
         ucrReceiverDate.Selector = ucrSelectorWindPollutionRose
         ucrReceiverDate.SetParameterIsString()
-        ucrReceiverDate.SetIncludedDataTypes({"Date"})
-        ucrReceiverDate.SetClimaticType("date")
+        'ucrReceiverDate.SetIncludedDataTypes({"Date"})
+        'ucrReceiverDate.SetClimaticType("date")
 
         ucrChkCompare.SetText("Compare")
+        ucrChkCompare.AddParameterPresentCondition(True, "ws2", True)
+        ucrChkCompare.AddParameterPresentCondition(False, "ws2", False)
+
         ucrChkCompare.AddToLinkedControls(ucrReceiverWindSpeed2, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverWindSpeed2.SetLinkedDisplayControl(lblWindSpeed2)
         ucrChkCompare.AddToLinkedControls(ucrReceiverWindDirection2, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverWindDirection2.SetLinkedDisplayControl(lblWindDirection2)
 
         ucrChkIncludePollutant.SetText("Include Pollutant")
-        ucrChkIncludePollutant.SetParameter(New RParameter("include_pollutant", 7))
-        ucrChkIncludePollutant.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
+        ucrChkIncludePollutant.AddParameterPresentCondition(True, "pollutant", True)
+        ucrChkIncludePollutant.AddParameterPresentCondition(False, "pollutant", False)
         ucrChkIncludePollutant.AddToLinkedControls(ucrReceiverPollutant, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverPollutant.SetLinkedDisplayControl(lblPollutant)
 
@@ -91,7 +95,7 @@ Public Class dlgWindPollutionRose
         ucrChkPaddle.SetParameter(New RParameter("paddle", 8))
         ucrChkPaddle.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        ucrInputType.SetParameter(New RParameter("type", 9))
+        ucrInputFacetOne.SetParameter(New RParameter("type1", 1))
         dctType.Add("Default", Chr(34) & "default" & Chr(34))
         dctType.Add("Station", Chr(34) & "station" & Chr(34))
         dctType.Add("Year", Chr(34) & "year" & Chr(34))
@@ -104,8 +108,12 @@ Public Class dlgWindPollutionRose
         dctType.Add("Monthyear", Chr(34) & "monthyear" & Chr(34))
         dctType.Add("Daylight", Chr(34) & "daylight" & Chr(34))
         dctType.Add("DST", Chr(34) & "dst" & Chr(34))
-        ucrInputType.SetItems(dctType)
-        ucrInputType.SetDropDownStyleAsNonEditable()
+        ucrInputFacetOne.SetItems(dctType)
+        ucrInputFacetOne.SetDropDownStyleAsEditable(True)
+
+        ucrInputFacetTwo.SetParameter(New RParameter("type2", 2))
+        ucrInputFacetTwo.AddQuotesIfUnrecognised = True
+
 
         ucrInputKeyPosition.SetParameter(New RParameter("key.position", 10))
         dctPosition.Add("Top", Chr(34) & "top" & Chr(34))
@@ -147,11 +155,17 @@ Public Class dlgWindPollutionRose
 
     Private Sub SetDefaults()
         clsPollutionRoseFunction = New RFunction
+        clsCombineValues = New RFunction
         clsPollutionRoseFunction.SetRCommand("pollution_rose")
+        clsCombineValues.SetRCommand("c")
+
+        clsCombineValues.AddParameter("type1", Chr(34) & "default" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
 
         clsPollutionRoseFunction.AddParameter("include_pollutant", "FALSE", iPosition:=7)
         clsPollutionRoseFunction.AddParameter("paddle", "FALSE", iPosition:=8)
-        clsPollutionRoseFunction.AddParameter("type", Chr(34) & "default" & Chr(34), iPosition:=9)
+
+        clsPollutionRoseFunction.AddParameter("type", clsRFunctionParameter:=clsCombineValues, bIncludeArgumentName:=True, iPosition:=9)
+
         clsPollutionRoseFunction.AddParameter("key.position", Chr(34) & "right" & Chr(34), iPosition:=10)
         clsPollutionRoseFunction.AddParameter("statistic", Chr(34) & "prop.count" & Chr(34), iPosition:=11)
         clsPollutionRoseFunction.AddParameter("cols", Chr(34) & "default" & Chr(34), iPosition:=12)
@@ -162,7 +176,26 @@ Public Class dlgWindPollutionRose
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        bRcodeSet = False
+        ucrSelectorWindPollutionRose.SetRCode(clsPollutionRoseFunction, bReset)
+
+        ucrReceiverDate.SetRCode(clsPollutionRoseFunction, bReset)
+        ucrReceiverWindSpeed.SetRCode(clsPollutionRoseFunction, bReset)
+        ucrReceiverWindSpeed2.SetRCode(clsPollutionRoseFunction, bReset)
+        ucrReceiverWindDirection.SetRCode(clsPollutionRoseFunction, bReset)
+        ucrReceiverWindDirection2.SetRCode(clsPollutionRoseFunction, bReset)
+        ucrReceiverPollutant.SetRCode(clsPollutionRoseFunction, bReset)
+        UcrReceiverStation.SetRCode(clsPollutionRoseFunction, bReset)
+        ucrInputColor.SetRCode(clsPollutionRoseFunction, bReset)
+        ucrInputStatistic.SetRCode(clsPollutionRoseFunction, bReset)
+        ucrInputKeyPosition.SetRCode(clsPollutionRoseFunction, bReset)
+
+        ucrInputFacetOne.SetRCode(clsCombineValues, bReset)
+        ucrChkCompare.SetRCode(clsPollutionRoseFunction, bReset)
+        ucrChkIncludePollutant.SetRCode(clsPollutionRoseFunction, bReset)
+        'ucrInputFacetTwo.SetRCode(clsCombineValues, bReset)
+        'SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        bRcodeSet = True
     End Sub
 
     Private Sub TestOkEnabled()
@@ -183,11 +216,21 @@ Public Class dlgWindPollutionRose
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrChkIncludePollutant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludePollutant.ControlValueChanged
-        If Not ucrChkIncludePollutant.Checked Then
-            clsPollutionRoseFunction.AddParameter("include_pollutant", "FALSE", iPosition:=7)
-        Else
-            clsPollutionRoseFunction.AddParameter("include_pollutant", "TRUE", iPosition:=7)
+    'Private Sub ucrChkIncludePollutant_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludePollutant.ControlValueChanged
+    '    If Not ucrChkIncludePollutant.Checked Then
+    '        clsPollutionRoseFunction.AddParameter("include_pollutant", "FALSE", iPosition:=7)
+    '    Else
+    '        clsPollutionRoseFunction.AddParameter("include_pollutant", "TRUE", iPosition:=7)
+    '    End If
+    'End Sub
+
+    Private Sub ucrInputFacetTwo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFacetTwo.ControlValueChanged
+        If bRcodeSet Then
+            If Not ucrInputFacetTwo.IsEmpty Then
+                clsCombineValues.AddParameter("type2", ucrInputFacetTwo.GetParameter.strArgumentValue, bIncludeArgumentName:=False, iPosition:=2)
+            Else
+                clsCombineValues.RemoveParameterByName("type2")
+            End If
         End If
     End Sub
 End Class
