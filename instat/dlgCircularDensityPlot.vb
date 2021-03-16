@@ -48,7 +48,7 @@ Public Class dlgCircularDensityPlot
         ucrPnlOptions.AddRadioButton(rdoScatterPlot)
 
         ucrPnlOptions.AddFunctionNamesCondition(rdoRosePlot, "rose.diag")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoDensity, "plot")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoDensity, "recordPlot")
         ucrPnlOptions.AddFunctionNamesCondition(rdoScatterPlot, "plot.circular")
 
         ucrPnlOptions.AddToLinkedControls(ucrInputBandWidth, {rdoDensity}, bNewLinkedHideIfParameterMissing:=True)
@@ -81,7 +81,7 @@ Public Class dlgCircularDensityPlot
 
         ucrInputUnits.SetParameter(New RParameter("units", 5))
         dctUnits.Add("degrees", Chr(34) & "degrees" & Chr(34))
-        dctUnits.Add("radinas", Chr(34) & "radians" & Chr(34))
+        dctUnits.Add("radians", Chr(34) & "radians" & Chr(34))
         dctUnits.Add("hours", Chr(34) & "hours" & Chr(34))
         ucrInputUnits.SetItems(dctUnits)
         ucrInputUnits.SetDropDownStyleAsNonEditable()
@@ -144,7 +144,12 @@ Public Class dlgCircularDensityPlot
         clsRecordPlotFunction.SetPackageName("grDevices")
         clsRecordPlotFunction.SetRCommand("recordPlot")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDensityPlotFunction)
+        'clsRecordPlotFunction.AddParameter("x", clsRFunctionParameter:=clsDensityPlotFunction, bIncludeArgumentName:=False, iPosition:=0)
+
+
+
+        'ucrSaveDensity.SetRCode(clsRecordPlotFunction, bReset)
+        '''''''''''''''''ucrSaveDensity.SetRCode(clsDensityPlotFunction, bReset)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -153,7 +158,8 @@ Public Class dlgCircularDensityPlot
         'ucrInputComboKernel.AddAdditionalCodeParameterPair(clsDensityFunction, ucrInputComboKernel.GetParameter(), iAdditionalPairNo:=1)
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
-        ucrSaveDensity.SetRCode(clsDensityPlotFunction, bReset)
+        ucrSaveDensity.SetRCode(clsRecordPlotFunction, bReset)
+        '''''''''''''ucrSaveDensity.SetRCode(clsDensityPlotFunction, bReset)
         ucrSaveDensity.AddAdditionalRCode(clsRosePlotFunction, iAdditionalPairNo:=1)
         ucrSaveDensity.AddAdditionalRCode(clsScatterPlotFunction, iAdditionalPairNo:=2)
 
@@ -196,8 +202,12 @@ Public Class dlgCircularDensityPlot
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoDensity.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsDensityPlotFunction)
+            ucrBase.clsRsyntax.AddToBeforeCodes(clsDensityPlotFunction)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsRecordPlotFunction)
+
+
             ucrSaveDensity.SetPrefix("density_plot")
+
         ElseIf rdoRosePlot.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsRosePlotFunction)
             ucrSaveDensity.SetPrefix("rose_plot")
@@ -205,5 +215,44 @@ Public Class dlgCircularDensityPlot
             ucrBase.clsRsyntax.SetBaseRFunction(clsScatterPlotFunction)
             ucrSaveDensity.SetPrefix("scatter_plot")
         End If
+    End Sub
+
+
+    Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
+
+
+
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsDensityPlotFunction)
+        'ucrBase.clsRsyntax.SetBaseRFunction(clsRecordPlotFunction)
+
+        Dim strBeforeScripts As String = ucrBase.clsRsyntax.GetBeforeCodesScripts()(0)
+        Dim strScripts As String = ucrBase.clsRsyntax.GetScript()
+
+        ucrBase.clsRsyntax.strScript = ""
+
+        ucrBase.clsRsyntax.GetBeforeCodes.Clear()
+
+
+
+        ucrBase.clsRsyntax.SetCommandString(strBeforeScripts & Environment.NewLine & strScripts)
+
+
+        'Dim strScript1 As String = ""
+        'Dim strScript2 As String = ""
+        'Dim strRealScript As String = ucrBase.clsRsyntax.GetScript
+        'Dim funct1 As RFunction = ucrBase.clsRsyntax.clsBaseFunction.Clone
+        ''funct1.SetPackageName("grDevices")
+        ''funct1.SetRCommand("recordPlot")
+
+        'Dim str1 As String = clsDensityPlotFunction.ToScript(strScript1, strScript2)
+
+        'Dim str2 As String = clsRecordPlotFunction.ToScript
+        'Dim str4 As String = funct1.ToScript(strScript1, strScript2)
+
+        'ucrBase.clsRsyntax.GetBeforeCodes.Clear()
+
+
+
+        'ucrBase.clsRsyntax.SetCommandString(str1 & Environment.NewLine & str2 & Environment.NewLine)
     End Sub
 End Class
