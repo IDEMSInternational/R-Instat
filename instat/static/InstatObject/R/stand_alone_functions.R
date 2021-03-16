@@ -32,7 +32,7 @@ convert_to_character_matrix <- function(data, format_decimal_places = TRUE, deci
   return(out)
 }
 
-next_default_item = function(prefix, existing_names = c(), include_index = TRUE, start_index = 1) {
+next_default_item = function(prefix, existing_names = c(), include_index = FALSE, start_index = 1) {
   if(!is.character(prefix)) stop("prefix must be of type character")
   
   if(!include_index) {
@@ -393,9 +393,9 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
       curr_count[2]  <- 1
       curr_dim_values[[y_var]] <- curr_dim_values[[y_var]][y_ind]
       if(show_requested_points) {
-        curr_dim_values[[paste0("requested_", x_var)]] <- lon_points[i]
-        curr_dim_values[[paste0("requested_", y_var)]] <- lat_points[i]
-        if(!is.null(id_points)) curr_dim_values[["requested_id"]] <- id_points[i]
+        curr_dim_values[[paste0(x_var, "_point")]] <- lon_points[i]
+        curr_dim_values[[paste0(y_var, "_point")]] <- lat_points[i]
+        if(!is.null(id_points)) curr_dim_values[["station"]] <- id_points[i]
         requested_points_added <- TRUE
       }
       
@@ -444,14 +444,14 @@ nc_as_data_frame <- function(nc, vars, keep_raw_time = TRUE, include_metadata = 
         time_ind <- which(raw_time_full %in% raw_time)
         units <- ncdf4::ncatt_get(nc, time_var, "units")
         if(units$hasatt && units$value == "julian_day") {
-          time_df[[paste0(time_var, "_date")]] <- as.Date(raw_time, origin = structure(-2440588, class = "Date"))
+          time_df[["date"]] <- as.Date(raw_time, origin = structure(-2440588, class = "Date"))
         }
         else {
           pcict_time <- ncdf4.helpers::nc.get.time.series(nc, time.dim.name = time_var)
           pcict_time <- pcict_time[time_ind]
           posixct_time <- PCICt::as.POSIXct.PCICt(pcict_time)
-          time_df[[paste0(time_var, "_full")]] <- posixct_time
-          time_df[[paste0(time_var, "_date")]] <- as.Date(posixct_time)
+          time_df[["date"]] <- as.Date(posixct_time)
+          time_df[["datetime"]] <- posixct_time
         }
       })
       if(ncol(time_df) > 1) curr_var_data <- dplyr::full_join(curr_var_data, time_df, by = time_var)

@@ -43,26 +43,26 @@ Partial Class dlgOneWayFrequencies
         Me.rdoDescendingFrequencies = New System.Windows.Forms.RadioButton()
         Me.rdoAscendingFrequencies = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlSort = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
         Me.rdoTable = New System.Windows.Forms.RadioButton()
         Me.rdoBoth = New System.Windows.Forms.RadioButton()
+        Me.grpOutput = New System.Windows.Forms.GroupBox()
+        Me.rdoAsHtml = New System.Windows.Forms.RadioButton()
+        Me.rdoAsText = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlOutput = New instat.UcrPanel()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrReceiverOneWayFreq = New instat.ucrReceiverMultiple()
         Me.ucrNudGroups = New instat.ucrNud()
         Me.ucrPnlFrequencies = New instat.UcrPanel()
         Me.ucrChkGroupData = New instat.ucrCheck()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrChkFlip = New instat.ucrCheck()
+        Me.ucrPnlSort = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverOneWayFreq = New instat.ucrReceiverMultiple()
-        Me.ucrSaveGraph = New instat.ucrSave()
-        Me.grpOutput = New System.Windows.Forms.GroupBox()
-        Me.rdoAsHtml = New System.Windows.Forms.RadioButton()
-        Me.rdoAsText = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlOutput = New instat.UcrPanel()
         Me.grpSort.SuspendLayout()
         Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
@@ -97,11 +97,6 @@ Partial Class dlgOneWayFrequencies
         Me.rdoNone.Name = "rdoNone"
         Me.rdoNone.TabStop = True
         Me.rdoNone.UseVisualStyleBackColor = True
-        '
-        'ucrPnlSort
-        '
-        resources.ApplyResources(Me.ucrPnlSort, "ucrPnlSort")
-        Me.ucrPnlSort.Name = "ucrPnlSort"
         '
         'cmdOptions
         '
@@ -140,6 +135,46 @@ Partial Class dlgOneWayFrequencies
         Me.rdoBoth.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBoth.Name = "rdoBoth"
         Me.rdoBoth.UseVisualStyleBackColor = True
+        '
+        'grpOutput
+        '
+        Me.grpOutput.Controls.Add(Me.rdoAsHtml)
+        Me.grpOutput.Controls.Add(Me.rdoAsText)
+        Me.grpOutput.Controls.Add(Me.ucrPnlOutput)
+        resources.ApplyResources(Me.grpOutput, "grpOutput")
+        Me.grpOutput.Name = "grpOutput"
+        Me.grpOutput.TabStop = False
+        '
+        'rdoAsHtml
+        '
+        resources.ApplyResources(Me.rdoAsHtml, "rdoAsHtml")
+        Me.rdoAsHtml.Name = "rdoAsHtml"
+        Me.rdoAsHtml.UseVisualStyleBackColor = True
+        '
+        'rdoAsText
+        '
+        resources.ApplyResources(Me.rdoAsText, "rdoAsText")
+        Me.rdoAsText.Name = "rdoAsText"
+        Me.rdoAsText.UseVisualStyleBackColor = True
+        '
+        'ucrPnlOutput
+        '
+        resources.ApplyResources(Me.ucrPnlOutput, "ucrPnlOutput")
+        Me.ucrPnlOutput.Name = "ucrPnlOutput"
+        '
+        'ucrSaveGraph
+        '
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        '
+        'ucrReceiverOneWayFreq
+        '
+        Me.ucrReceiverOneWayFreq.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverOneWayFreq, "ucrReceiverOneWayFreq")
+        Me.ucrReceiverOneWayFreq.Name = "ucrReceiverOneWayFreq"
+        Me.ucrReceiverOneWayFreq.Selector = Nothing
+        Me.ucrReceiverOneWayFreq.strNcFilePath = ""
+        Me.ucrReceiverOneWayFreq.ucrSelector = Nothing
         '
         'ucrNudGroups
         '
@@ -183,6 +218,11 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.ucrChkFlip, "ucrChkFlip")
         Me.ucrChkFlip.Name = "ucrChkFlip"
         '
+        'ucrPnlSort
+        '
+        resources.ApplyResources(Me.ucrPnlSort, "ucrPnlSort")
+        Me.ucrPnlSort.Name = "ucrPnlSort"
+        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -195,46 +235,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrSelectorOneWayFreq.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorOneWayFreq, "ucrSelectorOneWayFreq")
         Me.ucrSelectorOneWayFreq.Name = "ucrSelectorOneWayFreq"
-        '
-        'ucrReceiverOneWayFreq
-        '
-        Me.ucrReceiverOneWayFreq.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverOneWayFreq, "ucrReceiverOneWayFreq")
-        Me.ucrReceiverOneWayFreq.Name = "ucrReceiverOneWayFreq"
-        Me.ucrReceiverOneWayFreq.Selector = Nothing
-        Me.ucrReceiverOneWayFreq.strNcFilePath = ""
-        Me.ucrReceiverOneWayFreq.ucrSelector = Nothing
-        '
-        'ucrSaveGraph
-        '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        '
-        'grpOutput
-        '
-        Me.grpOutput.Controls.Add(Me.rdoAsHtml)
-        Me.grpOutput.Controls.Add(Me.rdoAsText)
-        Me.grpOutput.Controls.Add(Me.ucrPnlOutput)
-        resources.ApplyResources(Me.grpOutput, "grpOutput")
-        Me.grpOutput.Name = "grpOutput"
-        Me.grpOutput.TabStop = False
-        '
-        'rdoAsHtml
-        '
-        resources.ApplyResources(Me.rdoAsHtml, "rdoAsHtml")
-        Me.rdoAsHtml.Name = "rdoAsHtml"
-        Me.rdoAsHtml.UseVisualStyleBackColor = True
-        '
-        'rdoAsText
-        '
-        resources.ApplyResources(Me.rdoAsText, "rdoAsText")
-        Me.rdoAsText.Name = "rdoAsText"
-        Me.rdoAsText.UseVisualStyleBackColor = True
-        '
-        'ucrPnlOutput
-        '
-        resources.ApplyResources(Me.ucrPnlOutput, "ucrPnlOutput")
-        Me.ucrPnlOutput.Name = "ucrPnlOutput"
         '
         'dlgOneWayFrequencies
         '

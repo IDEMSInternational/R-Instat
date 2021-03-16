@@ -267,7 +267,6 @@ Public Class sdgInventoryPlot
         SetXLabel()
         SetYLabel()
         AddRemoveXAxisBreaks()
-
     End Sub
 
     Private Sub SetXLabel()
@@ -317,7 +316,6 @@ Public Class sdgInventoryPlot
             Else
                 clsInventory.RemoveParameterByName("row_col_number")
             End If
-
         End If
     End Sub
 
@@ -328,18 +326,15 @@ Public Class sdgInventoryPlot
             Else
                 clsInventory.RemoveParameterByName("scale_xdate")
             End If
-
         End If
     End Sub
 
     Private Sub ucrPnlXAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlXAxisTitle.ControlValueChanged, ucrInputXAxisTitle.ControlValueChanged
         SetXLabel()
-
     End Sub
 
     Private Sub UcrPnlYAxisTitle_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrPnlYAxisTitle.ControlValueChanged, ucrInputYAxisTitle.ControlValueChanged
         SetYLabel()
-
     End Sub
 
     Private Sub ucrChkNoOfRowsOrColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoOfRowsOrColumns.ControlValueChanged
@@ -353,6 +348,5 @@ Public Class sdgInventoryPlot
 
     Private Sub ucrChkSpecifyXAxisTickMarks_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputXFrom.ControlValueChanged, ucrInputXTo.ControlValueChanged, ucrInputXInStepsOf.ControlValueChanged
         AddRemoveXAxisBreaks()
-
     End Sub
 End Class

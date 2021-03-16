@@ -119,14 +119,14 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrNudNumberofRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 124</value>
+    <value>156, 125</value>
   </data>
   <data name="ucrNudNumberofRows.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrNudNumberofRows.TabIndex" type="System.Int32, mscorlib">
-    <value>59</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrNudNumberofRows.Name" xml:space="preserve">
     <value>ucrNudNumberofRows</value>
@@ -141,13 +141,13 @@
     <value>0</value>
   </data>
   <data name="ucrChkNoOfRowsOrColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 124</value>
+    <value>12, 125</value>
   </data>
   <data name="ucrChkNoOfRowsOrColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>156, 20</value>
   </data>
   <data name="ucrChkNoOfRowsOrColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>58</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrChkNoOfRowsOrColumns.Name" xml:space="preserve">
     <value>ucrChkNoOfRowsOrColumns</value>
@@ -169,13 +169,13 @@
     <value>NoControl</value>
   </data>
   <data name="rdoHorizontal.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 94</value>
+    <value>12, 99</value>
   </data>
   <data name="rdoHorizontal.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 17</value>
   </data>
   <data name="rdoHorizontal.TabIndex" type="System.Int32, mscorlib">
-    <value>56</value>
+    <value>6</value>
   </data>
   <data name="rdoHorizontal.Text" xml:space="preserve">
     <value>Horizontal</value>
@@ -199,13 +199,13 @@
     <value>NoControl</value>
   </data>
   <data name="rdoVertical.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 94</value>
+    <value>108, 99</value>
   </data>
   <data name="rdoVertical.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 17</value>
   </data>
   <data name="rdoVertical.TabIndex" type="System.Int32, mscorlib">
-    <value>57</value>
+    <value>7</value>
   </data>
   <data name="rdoVertical.Text" xml:space="preserve">
     <value>Vertical</value>
@@ -223,7 +223,7 @@
     <value>3</value>
   </data>
   <data name="ucrPnlHorizonatalVertical.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 92</value>
+    <value>12, 97</value>
   </data>
   <data name="ucrPnlHorizonatalVertical.Size" type="System.Drawing.Size, System.Drawing">
     <value>165, 20</value>
@@ -244,13 +244,13 @@
     <value>4</value>
   </data>
   <data name="ucrChkFacetYSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 18</value>
+    <value>12, 44</value>
   </data>
   <data name="ucrChkFacetYSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 20</value>
   </data>
   <data name="ucrChkFacetYSize.TabIndex" type="System.Int32, mscorlib">
-    <value>55</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrChkFacetYSize.Name" xml:space="preserve">
     <value>ucrChkFacetYSize</value>
@@ -265,13 +265,13 @@
     <value>5</value>
   </data>
   <data name="ucrNudFacetYSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>282, 18</value>
+    <value>126, 44</value>
   </data>
   <data name="ucrNudFacetYSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
   </data>
   <data name="ucrNudFacetYSize.TabIndex" type="System.Int32, mscorlib">
-    <value>54</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrNudFacetYSize.Name" xml:space="preserve">
     <value>ucrNudFacetYSize</value>
@@ -292,7 +292,7 @@
     <value>84, 20</value>
   </data>
   <data name="ucrChkFacetXSize.TabIndex" type="System.Int32, mscorlib">
-    <value>53</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrChkFacetXSize.Name" xml:space="preserve">
     <value>ucrChkFacetXSize</value>
@@ -307,13 +307,13 @@
     <value>7</value>
   </data>
   <data name="ucrNudFacetXSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 18</value>
+    <value>126, 18</value>
   </data>
   <data name="ucrNudFacetXSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
   </data>
   <data name="ucrNudFacetXSize.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrNudFacetXSize.Name" xml:space="preserve">
     <value>ucrNudFacetXSize</value>
@@ -328,13 +328,13 @@
     <value>8</value>
   </data>
   <data name="ucrChkScales.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 55</value>
+    <value>12, 70</value>
   </data>
   <data name="ucrChkScales.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
   </data>
   <data name="ucrChkScales.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrChkScales.Name" xml:space="preserve">
     <value>ucrChkScales</value>
@@ -349,13 +349,13 @@
     <value>9</value>
   </data>
   <data name="ucrInputScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 55</value>
+    <value>126, 70</value>
   </data>
   <data name="ucrInputScale.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
   </data>
   <data name="ucrInputScale.TabIndex" type="System.Int32, mscorlib">
-    <value>48</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrInputScale.Name" xml:space="preserve">
     <value>ucrInputScale</value>
@@ -376,7 +376,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpFacets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>567, 309</value>
+    <value>507, 271</value>
   </data>
   <data name="tpFacets.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -396,34 +396,34 @@
   <data name="&gt;&gt;tpFacets.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Label2.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblYAxisSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblYAxisSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>39, 79</value>
+  <data name="lblYAxisSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 79</value>
   </data>
-  <data name="Label2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblYAxisSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
   </data>
-  <data name="Label2.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
+  <data name="lblYAxisSize.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="Label2.Text" xml:space="preserve">
+  <data name="lblYAxisSize.Text" xml:space="preserve">
     <value>Size:</value>
   </data>
-  <data name="&gt;&gt;Label2.Name" xml:space="preserve">
-    <value>Label2</value>
+  <data name="&gt;&gt;lblYAxisSize.Name" xml:space="preserve">
+    <value>lblYAxisSize</value>
   </data>
-  <data name="&gt;&gt;Label2.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblYAxisSize.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblYAxisSize.Parent" xml:space="preserve">
     <value>grpyAxisTitle</value>
   </data>
-  <data name="&gt;&gt;Label2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblYAxisSize.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="rdoAutoYAxis.AutoSize" type="System.Boolean, mscorlib">
@@ -439,7 +439,7 @@
     <value>50, 17</value>
   </data>
   <data name="rdoAutoYAxis.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
+    <value>0</value>
   </data>
   <data name="rdoAutoYAxis.Text" xml:space="preserve">
     <value>Auto </value>
@@ -457,16 +457,16 @@
     <value>1</value>
   </data>
   <data name="ucrInputYAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 44</value>
+    <value>43, 47</value>
   </data>
   <data name="ucrInputYAxisTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="ucrInputYAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 21</value>
+    <value>146, 21</value>
   </data>
   <data name="ucrInputYAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrInputYAxisTitle.Name" xml:space="preserve">
     <value>ucrInputYAxisTitle</value>
@@ -493,7 +493,7 @@
     <value>62, 17</value>
   </data>
   <data name="rdoNoYAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
+    <value>2</value>
   </data>
   <data name="rdoNoYAxisTitle.Text" xml:space="preserve">
     <value>No Title</value>
@@ -511,7 +511,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudYAxisTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 75</value>
+    <value>43, 76</value>
   </data>
   <data name="ucrNudYAxisTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -520,7 +520,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudYAxisTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrNudYAxisTitleSize.Name" xml:space="preserve">
     <value>ucrNudYAxisTitleSize</value>
@@ -547,7 +547,7 @@
     <value>60, 17</value>
   </data>
   <data name="rdoSpecifyYAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
+    <value>1</value>
   </data>
   <data name="rdoSpecifyYAxisTitle.Text" xml:space="preserve">
     <value>Specify</value>
@@ -625,7 +625,7 @@
     <value>240, 111</value>
   </data>
   <data name="grpyAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
+    <value>2</value>
   </data>
   <data name="grpyAxisTitle.Text" xml:space="preserve">
     <value>Y-Axis Title</value>
@@ -642,34 +642,34 @@
   <data name="&gt;&gt;grpyAxisTitle.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblXAxisSize.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblXAxisSize.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>35, 80</value>
+  <data name="lblXAxisSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 79</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblXAxisSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
   </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
+  <data name="lblXAxisSize.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
+  <data name="lblXAxisSize.Text" xml:space="preserve">
     <value>Size:</value>
   </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
+  <data name="&gt;&gt;lblXAxisSize.Name" xml:space="preserve">
+    <value>lblXAxisSize</value>
   </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblXAxisSize.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblXAxisSize.Parent" xml:space="preserve">
     <value>grpAxes</value>
   </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblXAxisSize.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="rdoAutoXAxis.AutoSize" type="System.Boolean, mscorlib">
@@ -685,7 +685,7 @@
     <value>50, 17</value>
   </data>
   <data name="rdoAutoXAxis.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
+    <value>0</value>
   </data>
   <data name="rdoAutoXAxis.Text" xml:space="preserve">
     <value>Auto </value>
@@ -703,7 +703,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudXaxisTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>67, 77</value>
+    <value>46, 76</value>
   </data>
   <data name="ucrNudXaxisTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -712,7 +712,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudXaxisTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrNudXaxisTitleSize.Name" xml:space="preserve">
     <value>ucrNudXaxisTitleSize</value>
@@ -727,16 +727,16 @@
     <value>2</value>
   </data>
   <data name="ucrInputXAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 47</value>
+    <value>46, 47</value>
   </data>
   <data name="ucrInputXAxisTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="ucrInputXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 21</value>
+    <value>146, 21</value>
   </data>
   <data name="ucrInputXAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrInputXAxisTitle.Name" xml:space="preserve">
     <value>ucrInputXAxisTitle</value>
@@ -763,7 +763,7 @@
     <value>62, 17</value>
   </data>
   <data name="rdoNoTitleXAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
+    <value>2</value>
   </data>
   <data name="rdoNoTitleXAxisTitle.Text" xml:space="preserve">
     <value>No Title</value>
@@ -793,7 +793,7 @@
     <value>62, 17</value>
   </data>
   <data name="rdoSpecifyXAxisTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>40</value>
+    <value>1</value>
   </data>
   <data name="rdoSpecifyXAxisTitle.Text" xml:space="preserve">
     <value>Specifiy</value>
@@ -817,7 +817,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrPnlXAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>204, 81</value>
+    <value>228, 81</value>
   </data>
   <data name="ucrPnlXAxisTitle.TabIndex" type="System.Int32, mscorlib">
     <value>36</value>
@@ -841,7 +841,7 @@
     <value>242, 111</value>
   </data>
   <data name="grpAxes.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
+    <value>1</value>
   </data>
   <data name="grpAxes.Text" xml:space="preserve">
     <value>X-Axis Title</value>
@@ -859,13 +859,13 @@
     <value>1</value>
   </data>
   <data name="ucrNudTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>448, 18</value>
+    <value>425, 18</value>
   </data>
   <data name="ucrNudTitleSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
   </data>
   <data name="ucrNudTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrNudTitleSize.Name" xml:space="preserve">
     <value>ucrNudTitleSize</value>
@@ -886,13 +886,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblCaptionSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 83</value>
+    <value>337, 75</value>
   </data>
   <data name="lblCaptionSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
   </data>
   <data name="lblCaptionSize.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
+    <value>10</value>
   </data>
   <data name="lblCaptionSize.Text" xml:space="preserve">
     <value>Caption Size:</value>
@@ -916,16 +916,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblSubTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>360, 53</value>
+    <value>337, 48</value>
   </data>
   <data name="lblSubTitleSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 13</value>
+    <value>68, 13</value>
   </data>
   <data name="lblSubTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+    <value>6</value>
   </data>
   <data name="lblSubTitleSize.Text" xml:space="preserve">
-    <value>Sub Title Size:</value>
+    <value>Subtitle Size:</value>
   </data>
   <data name="&gt;&gt;lblSubTitleSize.Name" xml:space="preserve">
     <value>lblSubTitleSize</value>
@@ -946,13 +946,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>361, 23</value>
+    <value>337, 20</value>
   </data>
   <data name="lblTitleSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
   </data>
   <data name="lblTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+    <value>2</value>
   </data>
   <data name="lblTitleSize.Text" xml:space="preserve">
     <value>Title Size:</value>
@@ -976,13 +976,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 83</value>
+    <value>5, 75</value>
   </data>
   <data name="lblCaption.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 13</value>
   </data>
   <data name="lblCaption.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
+    <value>8</value>
   </data>
   <data name="lblCaption.Text" xml:space="preserve">
     <value>Graph Caption:</value>
@@ -1006,16 +1006,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblSubTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 53</value>
+    <value>5, 48</value>
   </data>
   <data name="lblSubTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
+    <value>77, 13</value>
   </data>
   <data name="lblSubTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
+    <value>4</value>
   </data>
   <data name="lblSubTitle.Text" xml:space="preserve">
-    <value>Graph Sub Title:</value>
+    <value>Graph Subtitle:</value>
   </data>
   <data name="&gt;&gt;lblSubTitle.Name" xml:space="preserve">
     <value>lblSubTitle</value>
@@ -1036,13 +1036,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 23</value>
+    <value>6, 20</value>
   </data>
   <data name="lblTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 13</value>
   </data>
   <data name="lblTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>25</value>
+    <value>0</value>
   </data>
   <data name="lblTitle.Text" xml:space="preserve">
     <value>Graph Title:</value>
@@ -1060,7 +1060,7 @@
     <value>6</value>
   </data>
   <data name="ucrNudCaptionSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>448, 78</value>
+    <value>425, 72</value>
   </data>
   <data name="ucrNudCaptionSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1069,7 +1069,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudCaptionSize.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrNudCaptionSize.Name" xml:space="preserve">
     <value>ucrNudCaptionSize</value>
@@ -1084,7 +1084,7 @@
     <value>7</value>
   </data>
   <data name="ucrNudSubTitleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>448, 48</value>
+    <value>425, 45</value>
   </data>
   <data name="ucrNudSubTitleSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1093,7 +1093,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudSubTitleSize.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrNudSubTitleSize.Name" xml:space="preserve">
     <value>ucrNudSubTitleSize</value>
@@ -1108,7 +1108,7 @@
     <value>8</value>
   </data>
   <data name="ucrInputGraphcCaption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 78</value>
+    <value>97, 72</value>
   </data>
   <data name="ucrInputGraphcCaption.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
@@ -1117,7 +1117,7 @@
     <value>181, 53</value>
   </data>
   <data name="ucrInputGraphcCaption.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrInputGraphcCaption.Name" xml:space="preserve">
     <value>ucrInputGraphcCaption</value>
@@ -1132,7 +1132,7 @@
     <value>9</value>
   </data>
   <data name="ucrInputGraphTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 18</value>
+    <value>97, 18</value>
   </data>
   <data name="ucrInputGraphTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
@@ -1141,7 +1141,7 @@
     <value>181, 21</value>
   </data>
   <data name="ucrInputGraphTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrInputGraphTitle.Name" xml:space="preserve">
     <value>ucrInputGraphTitle</value>
@@ -1156,7 +1156,7 @@
     <value>10</value>
   </data>
   <data name="ucrInputGraphSubTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 48</value>
+    <value>97, 45</value>
   </data>
   <data name="ucrInputGraphSubTitle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
@@ -1165,7 +1165,7 @@
     <value>181, 21</value>
   </data>
   <data name="ucrInputGraphSubTitle.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>5</value>
   </data>
   <data name="&gt;&gt;ucrInputGraphSubTitle.Name" xml:space="preserve">
     <value>ucrInputGraphSubTitle</value>
@@ -1183,10 +1183,10 @@
     <value>9, 10</value>
   </data>
   <data name="grpGraphTitles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>525, 136</value>
+    <value>488, 136</value>
   </data>
   <data name="grpGraphTitles.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>0</value>
   </data>
   <data name="grpGraphTitles.Text" xml:space="preserve">
     <value>Graph</value>
@@ -1210,7 +1210,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpTitles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>567, 309</value>
+    <value>507, 271</value>
   </data>
   <data name="tpTitles.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1231,7 +1231,7 @@
     <value>1</value>
   </data>
   <data name="ucrChkSpecifyXAxisTickMarks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 18</value>
+    <value>8, 24</value>
   </data>
   <data name="ucrChkSpecifyXAxisTickMarks.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1240,7 +1240,7 @@
     <value>100, 20</value>
   </data>
   <data name="ucrChkSpecifyXAxisTickMarks.TabIndex" type="System.Int32, mscorlib">
-    <value>66</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrChkSpecifyXAxisTickMarks.Name" xml:space="preserve">
     <value>ucrChkSpecifyXAxisTickMarks</value>
@@ -1255,13 +1255,13 @@
     <value>0</value>
   </data>
   <data name="ucrNudXAxisLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 53</value>
+    <value>112, 79</value>
   </data>
   <data name="ucrNudXAxisLabelSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
   </data>
   <data name="ucrNudXAxisLabelSize.TabIndex" type="System.Int32, mscorlib">
-    <value>44</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrNudXAxisLabelSize.Name" xml:space="preserve">
     <value>ucrNudXAxisLabelSize</value>
@@ -1276,7 +1276,7 @@
     <value>1</value>
   </data>
   <data name="ucrChkXAxisAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 54</value>
+    <value>8, 53</value>
   </data>
   <data name="ucrChkXAxisAngle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1285,7 +1285,7 @@
     <value>75, 20</value>
   </data>
   <data name="ucrChkXAxisAngle.TabIndex" type="System.Int32, mscorlib">
-    <value>43</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrChkXAxisAngle.Name" xml:space="preserve">
     <value>ucrChkXAxisAngle</value>
@@ -1300,7 +1300,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudXAxisAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>91, 54</value>
+    <value>112, 52</value>
   </data>
   <data name="ucrNudXAxisAngle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1309,7 +1309,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudXAxisAngle.TabIndex" type="System.Int32, mscorlib">
-    <value>42</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;ucrNudXAxisAngle.Name" xml:space="preserve">
     <value>ucrNudXAxisAngle</value>
@@ -1324,7 +1324,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkXAxisLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 54</value>
+    <value>8, 82</value>
   </data>
   <data name="ucrChkXAxisLabelSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1333,7 +1333,7 @@
     <value>75, 20</value>
   </data>
   <data name="ucrChkXAxisLabelSize.TabIndex" type="System.Int32, mscorlib">
-    <value>41</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrChkXAxisLabelSize.Name" xml:space="preserve">
     <value>ucrChkXAxisLabelSize</value>
@@ -1354,13 +1354,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblXFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 20</value>
+    <value>108, 27</value>
   </data>
   <data name="lblXFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
   </data>
   <data name="lblXFrom.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
+    <value>1</value>
   </data>
   <data name="lblXFrom.Text" xml:space="preserve">
     <value>From:</value>
@@ -1378,16 +1378,16 @@
     <value>5</value>
   </data>
   <data name="ucrInputXFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 17</value>
+    <value>143, 24</value>
   </data>
   <data name="ucrInputXFrom.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="ucrInputXFrom.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 21</value>
+    <value>51, 21</value>
   </data>
   <data name="ucrInputXFrom.TabIndex" type="System.Int32, mscorlib">
-    <value>38</value>
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrInputXFrom.Name" xml:space="preserve">
     <value>ucrInputXFrom</value>
@@ -1402,7 +1402,7 @@
     <value>6</value>
   </data>
   <data name="ucrInputXInStepsOf.Location" type="System.Drawing.Point, System.Drawing">
-    <value>440, 17</value>
+    <value>407, 24</value>
   </data>
   <data name="ucrInputXInStepsOf.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
@@ -1411,7 +1411,7 @@
     <value>51, 21</value>
   </data>
   <data name="ucrInputXInStepsOf.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrInputXInStepsOf.Name" xml:space="preserve">
     <value>ucrInputXInStepsOf</value>
@@ -1426,7 +1426,7 @@
     <value>7</value>
   </data>
   <data name="ucrInputXTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 17</value>
+    <value>260, 24</value>
   </data>
   <data name="ucrInputXTo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
@@ -1435,7 +1435,7 @@
     <value>51, 21</value>
   </data>
   <data name="ucrInputXTo.TabIndex" type="System.Int32, mscorlib">
-    <value>37</value>
+    <value>4</value>
   </data>
   <data name="&gt;&gt;ucrInputXTo.Name" xml:space="preserve">
     <value>ucrInputXTo</value>
@@ -1456,13 +1456,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblXInStepsOf.Location" type="System.Drawing.Point, System.Drawing">
-    <value>375, 20</value>
+    <value>344, 27</value>
   </data>
   <data name="lblXInStepsOf.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 13</value>
   </data>
   <data name="lblXInStepsOf.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
+    <value>5</value>
   </data>
   <data name="lblXInStepsOf.Text" xml:space="preserve">
     <value>In Steps of:</value>
@@ -1486,13 +1486,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblXTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 20</value>
+    <value>235, 27</value>
   </data>
   <data name="lblXTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
   </data>
   <data name="lblXTo.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
+    <value>3</value>
   </data>
   <data name="lblXTo.Text" xml:space="preserve">
     <value>To:</value>
@@ -1510,13 +1510,13 @@
     <value>10</value>
   </data>
   <data name="grpXAxisLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 16</value>
+    <value>9, 10</value>
   </data>
   <data name="grpXAxisLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>504, 93</value>
+    <value>492, 110</value>
   </data>
   <data name="grpXAxisLabels.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
+    <value>0</value>
   </data>
   <data name="grpXAxisLabels.Text" xml:space="preserve">
     <value>X-Axis</value>
@@ -1540,7 +1540,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpXAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>567, 309</value>
+    <value>507, 271</value>
   </data>
   <data name="tpXAxis.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1560,6 +1560,102 @@
   <data name="&gt;&gt;tpXAxis.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrChkSpecifyDateBreaks.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 24</value>
+  </data>
+  <data name="ucrChkSpecifyDateBreaks.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkSpecifyDateBreaks.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkSpecifyDateBreaks.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSpecifyDateBreaks.Name" xml:space="preserve">
+    <value>ucrChkSpecifyDateBreaks</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSpecifyDateBreaks.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSpecifyDateBreaks.Parent" xml:space="preserve">
+    <value>grpYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSpecifyDateBreaks.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrNudYAxisLabelSize.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 79</value>
+  </data>
+  <data name="ucrNudYAxisLabelSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrNudYAxisLabelSize.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudYAxisLabelSize.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrNudYAxisLabelSize.Name" xml:space="preserve">
+    <value>ucrNudYAxisLabelSize</value>
+  </data>
+  <data name="&gt;&gt;ucrNudYAxisLabelSize.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudYAxisLabelSize.Parent" xml:space="preserve">
+    <value>grpYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrNudYAxisLabelSize.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrNudYAxisAngle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 52</value>
+  </data>
+  <data name="ucrNudYAxisAngle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrNudYAxisAngle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudYAxisAngle.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrNudYAxisAngle.Name" xml:space="preserve">
+    <value>ucrNudYAxisAngle</value>
+  </data>
+  <data name="&gt;&gt;ucrNudYAxisAngle.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudYAxisAngle.Parent" xml:space="preserve">
+    <value>grpYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrNudYAxisAngle.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrInputDateDisplayFormat.Location" type="System.Drawing.Point, System.Drawing">
+    <value>341, 23</value>
+  </data>
+  <data name="ucrInputDateDisplayFormat.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="ucrInputDateDisplayFormat.Size" type="System.Drawing.Size, System.Drawing">
+    <value>141, 21</value>
+  </data>
+  <data name="ucrInputDateDisplayFormat.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDateDisplayFormat.Name" xml:space="preserve">
+    <value>ucrInputDateDisplayFormat</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDateDisplayFormat.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDateDisplayFormat.Parent" xml:space="preserve">
+    <value>grpYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDateDisplayFormat.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="lblDateDisplayFormat.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1567,13 +1663,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateDisplayFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>281, 67</value>
+    <value>260, 27</value>
   </data>
   <data name="lblDateDisplayFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 13</value>
   </data>
   <data name="lblDateDisplayFormat.TabIndex" type="System.Int32, mscorlib">
-    <value>79</value>
+    <value>3</value>
   </data>
   <data name="lblDateDisplayFormat.Text" xml:space="preserve">
     <value>Display Format:</value>
@@ -1585,181 +1681,13 @@
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;lblDateDisplayFormat.Parent" xml:space="preserve">
-    <value>tpYAxis</value>
+    <value>grpYAxis</value>
   </data>
   <data name="&gt;&gt;lblDateDisplayFormat.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrNudDateBreakNumber.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 62</value>
-  </data>
-  <data name="ucrNudDateBreakNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="ucrNudDateBreakNumber.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 20</value>
-  </data>
-  <data name="ucrNudDateBreakNumber.TabIndex" type="System.Int32, mscorlib">
-    <value>67</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDateBreakNumber.Name" xml:space="preserve">
-    <value>ucrNudDateBreakNumber</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDateBreakNumber.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDateBreakNumber.Parent" xml:space="preserve">
-    <value>tpYAxis</value>
-  </data>
-  <data name="&gt;&gt;ucrNudDateBreakNumber.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrInputDateBreakTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 61</value>
-  </data>
-  <data name="ucrInputDateBreakTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="ucrInputDateBreakTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 21</value>
-  </data>
-  <data name="ucrInputDateBreakTime.TabIndex" type="System.Int32, mscorlib">
-    <value>66</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDateBreakTime.Name" xml:space="preserve">
-    <value>ucrInputDateBreakTime</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDateBreakTime.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDateBreakTime.Parent" xml:space="preserve">
-    <value>tpYAxis</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDateBreakTime.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrChkSpecifyDateBreaks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>40, 63</value>
-  </data>
-  <data name="ucrChkSpecifyDateBreaks.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="ucrChkSpecifyDateBreaks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="ucrChkSpecifyDateBreaks.TabIndex" type="System.Int32, mscorlib">
-    <value>65</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyDateBreaks.Name" xml:space="preserve">
-    <value>ucrChkSpecifyDateBreaks</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyDateBreaks.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyDateBreaks.Parent" xml:space="preserve">
-    <value>tpYAxis</value>
-  </data>
-  <data name="&gt;&gt;ucrChkSpecifyDateBreaks.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrInputDateDisplayFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>365, 63</value>
-  </data>
-  <data name="ucrInputDateDisplayFormat.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>7, 6, 7, 6</value>
-  </data>
-  <data name="ucrInputDateDisplayFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 21</value>
-  </data>
-  <data name="ucrInputDateDisplayFormat.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDateDisplayFormat.Name" xml:space="preserve">
-    <value>ucrInputDateDisplayFormat</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDateDisplayFormat.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDateDisplayFormat.Parent" xml:space="preserve">
-    <value>tpYAxis</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDateDisplayFormat.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="ucrNudYAxisAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 106</value>
-  </data>
-  <data name="ucrNudYAxisAngle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="ucrNudYAxisAngle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudYAxisAngle.TabIndex" type="System.Int32, mscorlib">
-    <value>64</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisAngle.Name" xml:space="preserve">
-    <value>ucrNudYAxisAngle</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisAngle.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisAngle.Parent" xml:space="preserve">
-    <value>tpYAxis</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisAngle.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrNudYAxisLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>274, 106</value>
-  </data>
-  <data name="ucrNudYAxisLabelSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="ucrNudYAxisLabelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudYAxisLabelSize.TabIndex" type="System.Int32, mscorlib">
-    <value>53</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisLabelSize.Name" xml:space="preserve">
-    <value>ucrNudYAxisLabelSize</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisLabelSize.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisLabelSize.Parent" xml:space="preserve">
-    <value>tpYAxis</value>
-  </data>
-  <data name="&gt;&gt;ucrNudYAxisLabelSize.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrChkYAxisAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>40, 108</value>
-  </data>
-  <data name="ucrChkYAxisAngle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
-  </data>
-  <data name="ucrChkYAxisAngle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 20</value>
-  </data>
-  <data name="ucrChkYAxisAngle.TabIndex" type="System.Int32, mscorlib">
-    <value>63</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisAngle.Name" xml:space="preserve">
-    <value>ucrChkYAxisAngle</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisAngle.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisAngle.Parent" xml:space="preserve">
-    <value>tpYAxis</value>
-  </data>
-  <data name="&gt;&gt;ucrChkYAxisAngle.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="ucrChkYAxisLabelSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>195, 108</value>
+    <value>8, 82</value>
   </data>
   <data name="ucrChkYAxisLabelSize.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -1768,7 +1696,7 @@
     <value>75, 20</value>
   </data>
   <data name="ucrChkYAxisLabelSize.TabIndex" type="System.Int32, mscorlib">
-    <value>61</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrChkYAxisLabelSize.Name" xml:space="preserve">
     <value>ucrChkYAxisLabelSize</value>
@@ -1777,10 +1705,106 @@
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ucrChkYAxisLabelSize.Parent" xml:space="preserve">
-    <value>tpYAxis</value>
+    <value>grpYAxis</value>
   </data>
   <data name="&gt;&gt;ucrChkYAxisLabelSize.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrChkYAxisAngle.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 53</value>
+  </data>
+  <data name="ucrChkYAxisAngle.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrChkYAxisAngle.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 20</value>
+  </data>
+  <data name="ucrChkYAxisAngle.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrChkYAxisAngle.Name" xml:space="preserve">
+    <value>ucrChkYAxisAngle</value>
+  </data>
+  <data name="&gt;&gt;ucrChkYAxisAngle.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkYAxisAngle.Parent" xml:space="preserve">
+    <value>grpYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrChkYAxisAngle.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrNudDateBreakNumber.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 23</value>
+  </data>
+  <data name="ucrNudDateBreakNumber.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrNudDateBreakNumber.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudDateBreakNumber.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDateBreakNumber.Name" xml:space="preserve">
+    <value>ucrNudDateBreakNumber</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDateBreakNumber.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDateBreakNumber.Parent" xml:space="preserve">
+    <value>grpYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrNudDateBreakNumber.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrInputDateBreakTime.Location" type="System.Drawing.Point, System.Drawing">
+    <value>175, 23</value>
+  </data>
+  <data name="ucrInputDateBreakTime.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>7, 6, 7, 6</value>
+  </data>
+  <data name="ucrInputDateBreakTime.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 21</value>
+  </data>
+  <data name="ucrInputDateBreakTime.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDateBreakTime.Name" xml:space="preserve">
+    <value>ucrInputDateBreakTime</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDateBreakTime.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDateBreakTime.Parent" xml:space="preserve">
+    <value>grpYAxis</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDateBreakTime.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="grpYAxis.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 10</value>
+  </data>
+  <data name="grpYAxis.Size" type="System.Drawing.Size, System.Drawing">
+    <value>492, 110</value>
+  </data>
+  <data name="grpYAxis.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpYAxis.Text" xml:space="preserve">
+    <value>Y-Axis</value>
+  </data>
+  <data name="&gt;&gt;grpYAxis.Name" xml:space="preserve">
+    <value>grpYAxis</value>
+  </data>
+  <data name="&gt;&gt;grpYAxis.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpYAxis.Parent" xml:space="preserve">
+    <value>tpYAxis</value>
+  </data>
+  <data name="&gt;&gt;grpYAxis.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="tpYAxis.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 22</value>
@@ -1789,7 +1813,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpYAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>567, 309</value>
+    <value>507, 271</value>
   </data>
   <data name="tpYAxis.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1810,13 +1834,13 @@
     <value>3</value>
   </data>
   <data name="ucrInputLegendPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>272, 67</value>
+    <value>130, 16</value>
   </data>
   <data name="ucrInputLegendPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
   </data>
   <data name="ucrInputLegendPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrInputLegendPosition.Name" xml:space="preserve">
     <value>ucrInputLegendPosition</value>
@@ -1831,13 +1855,13 @@
     <value>0</value>
   </data>
   <data name="ucrChkLegendPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 67</value>
+    <value>12, 18</value>
   </data>
   <data name="ucrChkLegendPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>204, 20</value>
   </data>
   <data name="ucrChkLegendPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrChkLegendPosition.Name" xml:space="preserve">
     <value>ucrChkLegendPosition</value>
@@ -1858,7 +1882,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tpLegend.Size" type="System.Drawing.Size, System.Drawing">
-    <value>567, 309</value>
+    <value>507, 271</value>
   </data>
   <data name="tpLegend.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1879,13 +1903,13 @@
     <value>4</value>
   </data>
   <data name="tbInventory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 0</value>
+    <value>9, 8</value>
   </data>
   <data name="tbInventory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>575, 335</value>
+    <value>515, 297</value>
   </data>
   <data name="tbInventory.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;tbInventory.Name" xml:space="preserve">
     <value>tbInventory</value>
@@ -1903,13 +1927,13 @@
     <value>17, 17</value>
   </metadata>
   <data name="ucrButtonsInventoryplot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>211, 336</value>
+    <value>197, 307</value>
   </data>
   <data name="ucrButtonsInventoryplot.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 30</value>
   </data>
   <data name="ucrButtonsInventoryplot.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="&gt;&gt;ucrButtonsInventoryplot.Name" xml:space="preserve">
     <value>ucrButtonsInventoryplot</value>
@@ -1930,10 +1954,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>589, 367</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>537, 341</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
