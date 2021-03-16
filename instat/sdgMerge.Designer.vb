@@ -53,11 +53,8 @@ Partial Class sdgMerge
         Me.cmdRemoveSelectedPair = New System.Windows.Forms.Button()
         Me.tbcMergeOptions = New System.Windows.Forms.TabControl()
         Me.tpJoinByOptions = New System.Windows.Forms.TabPage()
-        Me.rdoChooseColumns = New System.Windows.Forms.RadioButton()
-        Me.rdoByAllMatching = New System.Windows.Forms.RadioButton()
         Me.ucrSelectorSecondDF = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSelectorFirstDF = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrPnlMergeByOptions = New instat.UcrPanel()
         Me.tpIncludeColumns = New System.Windows.Forms.TabPage()
         Me.ucrChkMergeWithSubsetSecond = New instat.ucrCheck()
         Me.ucrChkMergeWithSubsetFirst = New instat.ucrCheck()
@@ -138,6 +135,7 @@ Partial Class sdgMerge
         'lstKeyColumns
         '
         Me.lstKeyColumns.FullRowSelect = True
+        Me.lstKeyColumns.HideSelection = False
         resources.ApplyResources(Me.lstKeyColumns, "lstKeyColumns")
         Me.lstKeyColumns.Name = "lstKeyColumns"
         Me.lstKeyColumns.UseCompatibleStateImageBehavior = False
@@ -164,37 +162,17 @@ Partial Class sdgMerge
         '
         'tpJoinByOptions
         '
-        Me.tpJoinByOptions.Controls.Add(Me.rdoChooseColumns)
-        Me.tpJoinByOptions.Controls.Add(Me.rdoByAllMatching)
         Me.tpJoinByOptions.Controls.Add(Me.ucrSelectorSecondDF)
         Me.tpJoinByOptions.Controls.Add(Me.ucrSelectorFirstDF)
         Me.tpJoinByOptions.Controls.Add(Me.pnlKeyColumns)
         Me.tpJoinByOptions.Controls.Add(Me.grpKeys)
-        Me.tpJoinByOptions.Controls.Add(Me.ucrPnlMergeByOptions)
         resources.ApplyResources(Me.tpJoinByOptions, "tpJoinByOptions")
         Me.tpJoinByOptions.Name = "tpJoinByOptions"
         Me.tpJoinByOptions.UseVisualStyleBackColor = True
         '
-        'rdoChooseColumns
-        '
-        resources.ApplyResources(Me.rdoChooseColumns, "rdoChooseColumns")
-        Me.rdoChooseColumns.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoChooseColumns.FlatAppearance.BorderSize = 2
-        Me.rdoChooseColumns.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoChooseColumns.Name = "rdoChooseColumns"
-        Me.rdoChooseColumns.UseVisualStyleBackColor = True
-        '
-        'rdoByAllMatching
-        '
-        resources.ApplyResources(Me.rdoByAllMatching, "rdoByAllMatching")
-        Me.rdoByAllMatching.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoByAllMatching.FlatAppearance.BorderSize = 2
-        Me.rdoByAllMatching.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoByAllMatching.Name = "rdoByAllMatching"
-        Me.rdoByAllMatching.UseVisualStyleBackColor = True
-        '
         'ucrSelectorSecondDF
         '
+        Me.ucrSelectorSecondDF.bDropUnusedFilterLevels = False
         Me.ucrSelectorSecondDF.bShowHiddenColumns = False
         Me.ucrSelectorSecondDF.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorSecondDF, "ucrSelectorSecondDF")
@@ -202,15 +180,11 @@ Partial Class sdgMerge
         '
         'ucrSelectorFirstDF
         '
+        Me.ucrSelectorFirstDF.bDropUnusedFilterLevels = False
         Me.ucrSelectorFirstDF.bShowHiddenColumns = False
         Me.ucrSelectorFirstDF.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorFirstDF, "ucrSelectorFirstDF")
         Me.ucrSelectorFirstDF.Name = "ucrSelectorFirstDF"
-        '
-        'ucrPnlMergeByOptions
-        '
-        resources.ApplyResources(Me.ucrPnlMergeByOptions, "ucrPnlMergeByOptions")
-        Me.ucrPnlMergeByOptions.Name = "ucrPnlMergeByOptions"
         '
         'tpIncludeColumns
         '
@@ -268,6 +242,7 @@ Partial Class sdgMerge
         '
         'ucrSelectorColumnsToIncludeSecond
         '
+        Me.ucrSelectorColumnsToIncludeSecond.bDropUnusedFilterLevels = False
         Me.ucrSelectorColumnsToIncludeSecond.bShowHiddenColumns = False
         Me.ucrSelectorColumnsToIncludeSecond.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorColumnsToIncludeSecond, "ucrSelectorColumnsToIncludeSecond")
@@ -275,6 +250,7 @@ Partial Class sdgMerge
         '
         'ucrSelectorColumnsToIncludeFirst
         '
+        Me.ucrSelectorColumnsToIncludeFirst.bDropUnusedFilterLevels = False
         Me.ucrSelectorColumnsToIncludeFirst.bShowHiddenColumns = False
         Me.ucrSelectorColumnsToIncludeFirst.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorColumnsToIncludeFirst, "ucrSelectorColumnsToIncludeFirst")
@@ -324,15 +300,12 @@ Partial Class sdgMerge
     Friend WithEvents cmdRemoveSelectedPair As Button
     Friend WithEvents tpIncludeColumns As TabPage
     Friend WithEvents ucrReceiverFirstDF As ucrReceiverSingle
-    Friend WithEvents ucrPnlMergeByOptions As UcrPanel
     Friend WithEvents lblVariablesToIncludeSecond As Label
     Friend WithEvents lblVariablesToIncludeFirst As Label
     Friend WithEvents ucrReceiverSecondSelected As ucrReceiverMultiple
     Friend WithEvents ucrReceiverFirstSelected As ucrReceiverMultiple
     Friend WithEvents ucrSelectorColumnsToIncludeSecond As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSelectorColumnsToIncludeFirst As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents rdoChooseColumns As RadioButton
-    Friend WithEvents rdoByAllMatching As RadioButton
     Friend WithEvents ucrChkMergeWithSubsetSecond As ucrCheck
     Friend WithEvents ucrChkMergeWithSubsetFirst As ucrCheck
 End Class
