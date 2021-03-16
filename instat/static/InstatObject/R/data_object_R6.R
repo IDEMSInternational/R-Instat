@@ -1657,7 +1657,7 @@ DataSheet$set("public", "add_object", function(object, object_name) {
   if(object_name %in% names(private$objects)) message("An object called ", object_name, " already exists. It will be replaced.")
   private$objects[[object_name]] <- object
   self$append_to_changes(list(Added_object, object_name))
-  if(any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair") %in% class(object))) {
+  if(any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair","recordedplot") %in% class(object))) {
     private$.last_graph <- object_name
   }
 }
