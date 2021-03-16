@@ -541,6 +541,7 @@ Public Class dlgClimaticCheckDataTemperature
             clsOutlierCombinedOperator.RemoveParameterByName("upperOutlierTest1")
             clsOutlierCombinedOperator.RemoveParameterByName("lowerOutlierTest1")
         End If
+
         If Not ucrReceiverElement2.IsEmpty Then
             clsSameOp.AddParameter("same2", strParameterValue:=clsSameCodeElement2.strTestName, bIncludeArgumentName:=False)
             clsSameListSubCalc.AddParameter("same2test", clsRFunctionParameter:=clsSameCodeElement2.clsSameTestFunction, bIncludeArgumentName:=False)
