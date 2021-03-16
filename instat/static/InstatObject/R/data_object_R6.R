@@ -1391,7 +1391,7 @@ DataSheet$set("public", "get_data_type", function(col_name = "") {
     stop(paste(col_name, "is not a column in", self$get_metadata(data_name_label)))
   }
   type = ""
-  curr_col <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  curr_col <- self$get_columns_from_data(col_name, use_current_filter = TRUE)
   if(is.character(curr_col)) {
     type = "character"
   }
@@ -1403,23 +1403,20 @@ DataSheet$set("public", "get_data_type", function(col_name = "") {
     #we can add options for other forms of dates serch as POSIXct, POSIXlt, Date, chron, yearmon, yearqtr, zoo, zooreg, timeDate, xts, its, ti, jul, timeSeries, and fts objects.
     type = "Date"
   }
-  else if(is.numeric(private$data[[col_name]])) {
+  else if(is.numeric(curr_col)) {
     #TODO vectors with integer values but stored as numeric will return numeric.
     #     Is that desirable?
-      if(is.binary(private$data[[col_name]])){
+      if(is.binary(curr_col)){
         type = "two level numeric"
       }
-      else if(is.integer(private$data[[col_name]])) {
-        if(all(private$data[[col_name]]>0)) {
+      else if(all(curr_col == as.integer(curr_col))) {
+        if(all(curr_col>0)) {
           type = "positive integer"
         }
         else type = "integer"
       }
       else type = "numeric"
   }
-
-
-
   else if(is.factor(curr_col)) {
     if(length(levels(curr_col))==2) type = "two level factor"
     else if(length(levels(curr_col))>2) type = "multilevel factor"
