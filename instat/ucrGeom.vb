@@ -1653,7 +1653,7 @@ Public Class ucrGeom
             If iNewGeomIndex <> -1 Then
                 clsCurrGeom = lstAllGeoms(iNewGeomIndex)
                 If iNewGeomIndex <> iCurrentGeomIndex Then
-                    'Why do we have to remove the parameters here?
+                    'TODO Why do we have to remove the parameters here?
                     If Not bResetGlobal Then
                         For Each clsParam In lstAllGeoms(iCurrentGeomIndex).clsLayerParameters
                             clsGeomFunction.RemoveParameterByName(clsParam.strLayerParameterName)
