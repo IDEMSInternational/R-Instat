@@ -119,12 +119,7 @@ Public Class ucrAdditionalLayers
     End Sub
 
     Private Sub SetEditDeleteEnabled()
-        If lstLayers.Items.Count = 0 Then
-            'Disabling of the Edit and Delete buttons when the list of Layers is cleared
-            cmdDelete.Enabled = False
-            cmdEdit.Enabled = False
-        End If
-        If lstLayers.SelectedItems.Count = 1 Then
+        If lstLayers.Items.Count > 0 AndAlso lstLayers.SelectedItems.Count = 1 Then
             cmdDelete.Enabled = True
             cmdEdit.Enabled = True
         Else
