@@ -33,6 +33,8 @@ Public Class sdgPlots
     Public clsXScaleDateFunction As New RFunction
     Public clsYScaleDateFunction As New RFunction
     Public clsYLabFunction As New RFunction
+    Public clsScaleColourFunction As New RFunction
+    Public clsScaleFillFunction As New RFunction
     Public clsBaseOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
@@ -333,7 +335,8 @@ Public Class sdgPlots
         ucrChkDrop.SetRDefault("TRUE")
     End Sub
 
-    Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction, clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector, bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing)
+    Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction, clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector, bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing,
+                        Optional clsNewScaleFillFunction As RFunction = Nothing, Optional clsNewScaleColourFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing)
         Dim clsTempParam As RParameter
 
         bRCodeSet = False
@@ -360,6 +363,9 @@ Public Class sdgPlots
         clsThemeFunction = clsNewThemeFunction
         clsCoordPolarFunc = clsNewCoordPolarFunction
         clsCoordPolarStartOperator = clsNewCoordPolarStartOperator
+        clsScaleFillFunction = clsNewScaleFillFunction
+        clsScaleColourFunction = clsNewScaleColourFunction
+
         If Not IsNothing(clsCoordPolarStartOperator) Then
             clsCoordPolarFunc.AddParameter("start", clsROperatorParameter:=clsCoordPolarStartOperator, iPosition:=1)
         End If
