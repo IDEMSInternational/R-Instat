@@ -684,7 +684,6 @@ Public Class dlgPICSARainfall
     Private Sub UpdateParameters()
         Dim strTemp As String = ""
 
-        'clsRaesFunction.RemoveParameterByName("x")
         clsRaesFunction.RemoveParameterByName("color")
         clsRaesFunction.RemoveParameterByName("fill")
         clsAsFactorFunction.RemoveParameterByName("x")
