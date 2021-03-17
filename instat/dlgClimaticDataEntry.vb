@@ -96,7 +96,7 @@ Public Class dlgClimaticDataEntry
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverDate.ControlValueChanged, ucrReceiverElements.ControlValueChanged
         If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty Then
-            Me.Width = iBasicWidth * 1.96
+            Me.Width = iBasicWidth * 1.93
         Else
             Me.Width = iBasicWidth
         End If

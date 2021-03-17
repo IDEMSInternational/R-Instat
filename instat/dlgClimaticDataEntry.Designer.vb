@@ -44,6 +44,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.rdoDaily.Appearance = System.Windows.Forms.Appearance.Button
         Me.rdoDaily.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.rdoDaily.Enabled = False
         Me.rdoDaily.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDaily.FlatAppearance.BorderSize = 2
         Me.rdoDaily.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
@@ -60,6 +61,7 @@ Partial Class dlgClimaticDataEntry
         'rdoMonthly
         '
         Me.rdoMonthly.Appearance = System.Windows.Forms.Appearance.Button
+        Me.rdoMonthly.Enabled = False
         Me.rdoMonthly.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMonthly.FlatAppearance.BorderSize = 2
         Me.rdoMonthly.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
