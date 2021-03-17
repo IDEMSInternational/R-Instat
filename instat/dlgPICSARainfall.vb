@@ -925,6 +925,7 @@ Public Class dlgPICSARainfall
         Else
             clsPipeOperator.RemoveParameterByName("group_by")
         End If
+
         SetPipeAssignTo()
     End Sub
 
