@@ -52,6 +52,8 @@ Public Class dlgCircularDensityPlot
         ucrPnlOptions.AddFunctionNamesCondition(rdoScatterPlot, "plot.circular")
 
         ucrPnlOptions.AddToLinkedControls(ucrInputBandWidth, {rdoDensity}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrInputbins, {rdoRosePlot}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrInputComboKernel, {rdoDensity}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorDataFrame.SetParameter(New RParameter("data", 0))
         ucrSelectorDataFrame.SetParameterIsrfunction()
@@ -67,6 +69,11 @@ Public Class dlgCircularDensityPlot
         ucrInputBandWidth.AddQuotesIfUnrecognised = False
         ucrInputBandWidth.SetLinkedDisplayControl(lblBandWidth)
 
+        ucrInputBins.SetParameter(New RParameter("bins", 5))
+        ucrInputBins.SetValidationTypeAsNumeric()
+        ucrInputBins.AddQuotesIfUnrecognised = False
+        ucrInputBins.SetLinkedDisplayControl(lblBins)
+
         ucrInputComboKernel.SetParameter(New RParameter("kernel", 2))
         dctKernel.Add("vonmises", Chr(34) & "vonmises" & Chr(34))
         dctKernel.Add("wrappednormal", Chr(34) & "wrappednormal" & Chr(34))
@@ -81,7 +88,7 @@ Public Class dlgCircularDensityPlot
 
         ucrInputUnits.SetParameter(New RParameter("units", 5))
         dctUnits.Add("degrees", Chr(34) & "degrees" & Chr(34))
-        dctUnits.Add("radinas", Chr(34) & "radians" & Chr(34))
+        dctUnits.Add("radians", Chr(34) & "radians" & Chr(34))
         dctUnits.Add("hours", Chr(34) & "hours" & Chr(34))
         ucrInputUnits.SetItems(dctUnits)
         ucrInputUnits.SetDropDownStyleAsNonEditable()
@@ -117,7 +124,7 @@ Public Class dlgCircularDensityPlot
         clsRosePlotFunction.SetRCommand("rose.diag")
         clsRosePlotFunction.AddParameter("na.rm", "TRUE", iPosition:=3)
         clsRosePlotFunction.AddParameter("prop", 2.9, bIncludeArgumentName:=True, iPosition:=4)
-        clsRosePlotFunction.AddParameter("bin", 36, bIncludeArgumentName:=True, iPosition:=5)
+        clsRosePlotFunction.AddParameter("bins", 36, bIncludeArgumentName:=True, iPosition:=5)
         clsRosePlotFunction.AddParameter("col", Chr(34) & "blue" & Chr(34), bIncludeArgumentName:=True, iPosition:=6)
         clsRosePlotFunction.AddParameter("kernel", Chr(34) & "vonmises" & Chr(34), iPosition:=7)
         clsRosePlotFunction.AddParameter("units", Chr(34) & "degrees" & Chr(34), iPosition:=8)
@@ -161,6 +168,7 @@ Public Class dlgCircularDensityPlot
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRosePlotFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsScatterPlotFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrInputBandWidth.SetRCode(clsDensityFunction, bReset)
+        ucrInputBins.SetRCode(clsRosePlotFunction, bReset)
         ucrInputComboKernel.SetRCode(clsDensityFunction, bReset)
         ucrInputComboKernel.AddAdditionalCodeParameterPair(clsRosePlotFunction, New RParameter("kernel", 7), iAdditionalPairNo:=1)
         ucrInputComboKernel.AddAdditionalCodeParameterPair(clsScatterPlotFunction, New RParameter("kernel", 7), iAdditionalPairNo:=2)
