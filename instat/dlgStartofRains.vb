@@ -774,7 +774,11 @@ Public Class dlgStartofRains
         If Not (ucrChkAsDoy.Checked OrElse ucrChkAsDate.Checked OrElse ucrChkStatus.Checked) Then
             bOkEnabled = False
         End If
-        If (ucrChkAsDoy.Checked AndAlso ucrInputNewDoyColumnName.IsEmpty) OrElse (ucrChkAsDate.Checked AndAlso ucrInputNewDateColumnName.IsEmpty) OrElse (ucrChkStatus.Checked AndAlso ucrInputNewStatusColumnName.IsEmpty) Then
+        If (ucrChkAsDoy.Checked AndAlso ucrInputNewDoyColumnName.IsEmpty) OrElse
+                (ucrChkAsDate.Checked AndAlso ucrInputNewDateColumnName.IsEmpty) OrElse
+                (ucrChkStatus.Checked AndAlso ucrInputNewStatusColumnName.IsEmpty) Then
+            bOkEnabled = False
+        End If
             bOkEnabled = False
         End If
 
