@@ -706,10 +706,6 @@ Public Class dlgPICSARainfall
             ElseIf strTemp = strColour Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
                 dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
-                '    ElseIf rdoBoxplot.Checked OrElse rdoViolin.Checked Then
-                '        dctComboReceiver(ucrInputTemp).ChangeParameterName("fill")
-                '        dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
-                '    End If
                 dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
             ElseIf strTemp = strFacetWrap Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("wrap" & ucrInputTemp.Name)
