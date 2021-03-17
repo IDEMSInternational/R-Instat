@@ -523,7 +523,7 @@ DataBook$set("public", "get_objects", function(data_name, object_name, include_o
       if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
     }
     if(!missing(object_name) && length(object_name) == 1) {
-      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot", "openair","recordedplot") %in% class(out)))) return(print(out))
+      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot", "openair") %in% class(out)))) return(print(out))
       else return(out)
     }
     else return(out)
