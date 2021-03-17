@@ -724,9 +724,6 @@ Public Class dlgPICSARainfall
                 dctComboReceiver(ucrInputTemp).SetRCode(clsFacetRowOp)
             End If
         Next
-        'If Not clsRaesFunction.ContainsParameter("x") Then
-        '    clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-        'End If
         bUpdatingParameters = False
     End Sub
 
