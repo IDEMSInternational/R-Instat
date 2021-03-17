@@ -26,7 +26,7 @@ Public Class dlgCalculator
     Private iBasicWidth As Integer
     Private strDefaultKeyboard As String
     ' Note: This list needs to be updated when a new keyboard is added.
-    Private strKeyboards() As String = {"Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Factor", "Probability", "Dates", "Transform", "Circular", "Wakefield", "Modifier", "Symbols", "HydroGOF"}
+    Private strKeyboards() As String = {"Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Circular", "Wakefield", "Modifier", "Symbols", "HydroGOF"}
 
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -53,6 +53,7 @@ Public Class dlgCalculator
         ucrCalc.Reset()
         ucrCalc.ucrSelectorForCalculations.Reset()
         ucrCalc.ucrSaveResultInto.Reset()
+        ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = True
         ucrCalc.chkShowParameters.Checked = False
         ucrCalc.ucrSaveResultInto.SetRCode(ucrBase.clsRsyntax.clsBaseCommandString)
         SaveResults()
@@ -82,8 +83,7 @@ Public Class dlgCalculator
         ucrCalc.ucrSaveResultInto.SetPrefix("calc")
         ucrCalc.ucrSaveResultInto.SetSaveTypeAsColumn()
         ucrCalc.ucrSaveResultInto.SetIsComboBox()
-        ucrCalc.ucrSaveResultInto.SetCheckBoxText("Save Result:")
-        ucrCalc.ucrSaveResultInto.ucrChkSave.Checked = True
+        ucrCalc.ucrSaveResultInto.SetCheckBoxText("Save Result ")
 
         ucrCalc.ucrSaveResultInto.SetDataFrameSelector(ucrCalc.ucrSelectorForCalculations.ucrAvailableDataFrames)
         ucrCalc.ucrTryCalculator.StrvecOutputRequired()
@@ -149,8 +149,8 @@ Public Class dlgCalculator
                 Me.Width = iBasicWidth * 1.4
             Case "Probability"
                 Me.Width = iBasicWidth * 1.5
-            Case "Dates"
-                Me.Width = iBasicWidth * 1.3
+            Case "Dates/Times"
+                Me.Width = iBasicWidth * 1.37
             Case "Transform"
                 Me.Width = iBasicWidth * 1.37
             Case "Circular"
