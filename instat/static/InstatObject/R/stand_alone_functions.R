@@ -2279,3 +2279,29 @@ plot_declustered <- function(data, station_col_name, element_col_name, threshold
     }
   }
 }
+
+#This function creates awrarper around functions from openair package
+other_rose_plots <- function(data, type = "default", date_col_name, wd_col_name, ws_col_name, main_method, ...) {
+  if (!main_method %in% c("percentile_rose", "polar_plot", "polar_annulus", "polar_cluster", "polar_frequency")) stop("Method must be either percentile_rose, polar_plot, polar_annulus, polar_cluster or polar_frequency.")
+  if (missing(data)) stop("Data is missing with no default.")
+  col_names <- colnames(data)
+  fun_col_names <- c(date_col_name, wd_col_name)
+  if (!all(fun_col_names %in% col_names)) stop(paste(fun_col_names[!fun_col_names %in% col_names], ","), " column(s) missing in the dataframe.")
+  if (!"date" %in% col_names) data <- dplyr::rename(data, date = !!date_col_name)
+  if (!"wd" %in% col_names) data <- dplyr::rename(data, wd = !!wd_col_name)
+  if (main_method == "percentile_rose") {
+    if (!"ws" %in% col_names) data <- dplyr::rename(data, ws = !!ws_col_name)
+    openair::percentileRose(mydata = data, type = type, ...)
+  } else if (main_method == "polar_plot") {
+    openair::polarPlot(mydata = data, type = type, ...)
+  } else if (main_method == "polar_annulus") {
+    if (!"ws" %in% col_names) data <- dplyr::rename(data, ws = !!ws_col_name)
+    openair::polarAnnulus(mydata = data, type = type, ...)
+  } else if (main_method == "polar_cluster") {
+    openair::polarCluster(mydata = data, type = type, ...)
+  } else if (main_method == "polar_frequency") {
+    if (!"ws" %in% col_names) data <- dplyr::rename(data, ws = !!ws_col_name)
+    openair::polarFreq(mydata = data, type = type, ...)
+  }
+}
+
