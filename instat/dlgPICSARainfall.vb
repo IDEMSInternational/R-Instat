@@ -703,7 +703,6 @@ Public Class dlgPICSARainfall
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
                 dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(False)
                 dctComboReceiver(ucrInputTemp).SetRCode(clsAsFactorFunction)
-                ' clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
             ElseIf strTemp = strColour Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
                 dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
