@@ -857,12 +857,6 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverX.ControlValueChanged
-        'If ucrReceiverFacetBy.IsEmpty Then
-        '    clsBaseOperator.RemoveParameterByName("facets")
-        'Else
-        '    clsFacetOperator.AddParameter("var2", ".", iPosition:=0)
-        '    clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, iPosition:=30)
-        'End If
         AddRemoveFacets()
         AddRemoveGroupBy()
     End Sub
