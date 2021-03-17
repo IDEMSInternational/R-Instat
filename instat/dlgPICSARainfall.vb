@@ -345,11 +345,6 @@ Public Class dlgPICSARainfall
         clsFacetOperator.bBrackets = False
         clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
 
-        'clsFacetFunction.SetPackageName("ggplot2")
-        'clsFacetFunction.SetRCommand("facet_wrap")
-        'clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
-
-        'clsFacetOperator.SetOperation("~")
 
         'Mean Line
         clsGeomHlineMean.SetPackageName("ggplot2")
