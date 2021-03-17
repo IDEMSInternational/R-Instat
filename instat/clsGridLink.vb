@@ -438,20 +438,29 @@ Public Class clsGridLink
                 For k = 0 To dfTemp.ColumnCount - 1
                     strCurrHeader = lstColumnNames(k)
                     If vecColumnDataTypes(k).Contains("factor") AndAlso vecColumnDataTypes(k).Contains("ordered") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (o.f)"
+                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (O.F)"
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.Blue
                     ElseIf vecColumnDataTypes(k).Contains("factor") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (f)"
+                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (F)"
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.Blue
                     ElseIf vecColumnDataTypes(k).Contains("character") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (c)"
+                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (C)"
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
-                    ElseIf vecColumnDataTypes(k).Contains("Date") Then
+                    ElseIf vecColumnDataTypes(k).Contains("Date") OrElse vecColumnDataTypes(k).Contains("POSIXct") OrElse vecColumnDataTypes(k).Contains("POSIXt") OrElse vecColumnDataTypes(k).Contains("hms") OrElse vecColumnDataTypes(k).Contains("difftime") OrElse vecColumnDataTypes(k).Contains("Duration") OrElse vecColumnDataTypes(k).Contains("Period") OrElse vecColumnDataTypes(k).Contains("Interval") Then
                         fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (D)"
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
                     ElseIf vecColumnDataTypes(k).Contains("logical") Then
                         fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (L)"
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
+                        ' Structured columns e.g. "circular" are coded with "(S)"
+                    ElseIf vecColumnDataTypes(k).Contains("circular") Then
+                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (S)"
+                        fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
+                        ' Types of data for specific Application areas e.g. survival are coded with "(A)"
+                        ' No examples implemented yet.
+                        'ElseIf vecColumnDataTypes(k).Contains() Then
+                        '    fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (A)"
+                        '    fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
                     Else
                         fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader
                         fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
