@@ -206,7 +206,7 @@ Partial Class dlgOtherRosePlots
         Me.rdoPercentileRose.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPercentileRose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoPercentileRose.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPercentileRose.Location = New System.Drawing.Point(131, 12)
+        Me.rdoPercentileRose.Location = New System.Drawing.Point(123, 12)
         Me.rdoPercentileRose.Name = "rdoPercentileRose"
         Me.rdoPercentileRose.Size = New System.Drawing.Size(96, 28)
         Me.rdoPercentileRose.TabIndex = 88
@@ -224,7 +224,7 @@ Partial Class dlgOtherRosePlots
         Me.rdoPolarFrequency.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPolarFrequency.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoPolarFrequency.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPolarFrequency.Location = New System.Drawing.Point(23, 12)
+        Me.rdoPolarFrequency.Location = New System.Drawing.Point(15, 12)
         Me.rdoPolarFrequency.Name = "rdoPolarFrequency"
         Me.rdoPolarFrequency.Size = New System.Drawing.Size(110, 28)
         Me.rdoPolarFrequency.TabIndex = 90
@@ -242,7 +242,7 @@ Partial Class dlgOtherRosePlots
         Me.rdoPolarAnnulus.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPolarAnnulus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoPolarAnnulus.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPolarAnnulus.Location = New System.Drawing.Point(328, 12)
+        Me.rdoPolarAnnulus.Location = New System.Drawing.Point(320, 12)
         Me.rdoPolarAnnulus.Name = "rdoPolarAnnulus"
         Me.rdoPolarAnnulus.Size = New System.Drawing.Size(95, 28)
         Me.rdoPolarAnnulus.TabIndex = 91
@@ -260,7 +260,7 @@ Partial Class dlgOtherRosePlots
         Me.rdoPolarPlot.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPolarPlot.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoPolarPlot.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPolarPlot.Location = New System.Drawing.Point(224, 12)
+        Me.rdoPolarPlot.Location = New System.Drawing.Point(216, 12)
         Me.rdoPolarPlot.Name = "rdoPolarPlot"
         Me.rdoPolarPlot.Size = New System.Drawing.Size(106, 28)
         Me.rdoPolarPlot.TabIndex = 92
@@ -278,7 +278,7 @@ Partial Class dlgOtherRosePlots
         Me.rdoPolarCluster.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoPolarCluster.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoPolarCluster.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoPolarCluster.Location = New System.Drawing.Point(421, 12)
+        Me.rdoPolarCluster.Location = New System.Drawing.Point(413, 12)
         Me.rdoPolarCluster.Name = "rdoPolarCluster"
         Me.rdoPolarCluster.Size = New System.Drawing.Size(104, 28)
         Me.rdoPolarCluster.TabIndex = 89
@@ -290,10 +290,10 @@ Partial Class dlgOtherRosePlots
         '
         'ucrPnlOptions
         '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(26, 1)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(9, 1)
         Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(544, 44)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(516, 44)
         Me.ucrPnlOptions.TabIndex = 86
         '
         'ucrInputColor
