@@ -700,30 +700,31 @@ Public Class dlgPICSARainfall
         For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
             strTemp = ucrInputTemp.GetText()
             dctComboReceiver(ucrInputTemp).SetRCode(Nothing)
-            If strTemp = strXAxis Then
-                dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
-                dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(False)
-                dctComboReceiver(ucrInputTemp).SetRCode(clsAsFactorFunction)
-                ' clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
-            ElseIf strTemp = strColour Then
-                '    If rdoJitter.Checked Then
-                dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
-                dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
-                '    ElseIf rdoBoxplot.Checked OrElse rdoViolin.Checked Then
-                '        dctComboReceiver(ucrInputTemp).ChangeParameterName("fill")
-                '        dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
-                '    End If
-                dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
-            ElseIf strTemp = strFacetWrap Then
-                dctComboReceiver(ucrInputTemp).ChangeParameterName("wrap" & ucrInputTemp.Name)
-                dctComboReceiver(ucrInputTemp).SetRCode(clsFacetOperator)
-            ElseIf strTemp = strFacetCol Then
-                dctComboReceiver(ucrInputTemp).ChangeParameterName("col" & ucrInputTemp.Name)
-                dctComboReceiver(ucrInputTemp).SetRCode(clsFacetColOp)
-            ElseIf strTemp = strFacetRow Then
-                dctComboReceiver(ucrInputTemp).ChangeParameterName("row" & ucrInputTemp.Name)
-                dctComboReceiver(ucrInputTemp).SetRCode(clsFacetRowOp)
-            End If
+            Select Case strTemp
+                Case strXAxis
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
+                        dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(False)
+                        dctComboReceiver(ucrInputTemp).SetRCode(clsAsFactorFunction)
+                        ' clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
+                Case strColour
+                    '    If rdoJitter.Checked Then
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
+                        dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
+                        '    ElseIf rdoBoxplot.Checked OrElse rdoViolin.Checked Then
+                        '        dctComboReceiver(ucrInputTemp).ChangeParameterName("fill")
+                        '        dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
+                        '    End If
+                        dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
+                Case strFacetWrap
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("wrap" & ucrInputTemp.Name)
+                        dctComboReceiver(ucrInputTemp).SetRCode(clsFacetOperator)
+                Case strFacetCol
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("col" & ucrInputTemp.Name)
+                        dctComboReceiver(ucrInputTemp).SetRCode(clsFacetColOp)
+                Case strFacetRow
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("row" & ucrInputTemp.Name)
+                    dctComboReceiver(ucrInputTemp).SetRCode(clsFacetRowOp)
+            End Select
         Next
         'If Not clsRaesFunction.ContainsParameter("x") Then
         '    clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
@@ -741,16 +742,15 @@ Public Class dlgPICSARainfall
             clsBaseOperator.RemoveParameterByName("facets")
             For Each kvpTemp As KeyValuePair(Of ucrInputComboBox, ucrReceiverSingle) In dctComboReceiver
                 strText = kvpTemp.Key.GetText()
-                If strText = strFacetWrap OrElse strText = strFacetCol OrElse strText = strFacetRow AndAlso Not kvpTemp.Value.IsEmpty Then
-                    If strText = strFacetWrap Then
-                        bWrap = True
-                    End If
-                    If strText = strFacetCol Then
-                        bCol = True
-                    End If
-                    If strText = strFacetRow Then
-                        bRow = True
-                    End If
+                If Not kvpTemp.Value.IsEmpty Then
+                    Select Case strText
+                        Case strFacetWrap
+                            bWrap = True
+                        Case strFacetCol
+                            bCol = True
+                        Case strFacetRow
+                            bRow = True
+                    End Select
                 End If
             Next
             If bWrap OrElse bRow OrElse bCol Then
@@ -901,10 +901,6 @@ Public Class dlgPICSARainfall
             If clsRaesFunction.ContainsParameter("colour") Then
                 clsGroupByFunction.AddParameter(i, ucrReceiverColourBy.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
                 i = i + 1
-            End If
-
-            If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
-                clsGroupByFunction.AddParameter("variable", bIncludeArgumentName:=False, iPosition:=0)
             End If
 
             If clsGroupByFunction.iParameterCount > 0 Then
