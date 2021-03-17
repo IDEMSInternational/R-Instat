@@ -112,6 +112,7 @@ Public Class ucrSave
     '''             the column name.
     '''             Only used when this control is saving a column. </summary>
     Private ucrLinkedReceiver As ucrReceiver
+
     ''' <summary>   Function containing the parameters ('before' and 'adjacent_column') and their 
     '''             respective values. These parameters are only used when the save object is a 
     '''             column.
@@ -121,7 +122,8 @@ Public Class ucrSave
     '''             Note that only the parameters of this function are set and referenced. 
     '''             No other RFunction data members are used.
     '''             </para></summary>
-    Private clsColPosFunction As New RFunction
+
+    'Private clsColPosFunction As New RFunction
     'TODO SJL 16/06/20 This RFunction only seems to be used for local storage of parameters 
     '                  (i.e. just a list of parameters). These parameters are never part of the 
     '                  main function. 
@@ -132,6 +134,12 @@ Public Class ucrSave
     '                  adds columns. 
     '                  Or the parameters could be explicitly stored as a list of parameters.
     '                  Or just the booleans could be stored.
+
+    Private strAdjacentColumn As String = ""
+    Private bKeepExistingPosition As Boolean = True
+    Public bWritePositionParamsDirectly As String = True
+
+
     ''' <summary>   Width of the combo box. </summary>
     Private iComboBoxWidth As Integer
     '''--------------------------------------------------------------------------------------------
@@ -183,7 +191,9 @@ Public Class ucrSave
         LabelOrCheckboxSettings()
         UpdateRCode()
         'update the variables used for column position
-        UpdateColumnPositionVariables(True)
+        bInsertColumnBefore = False
+        strAdjacentColumn = ""
+        UpdateColumnPositionVariables()
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the label to <paramref name="strText"/> and sets the child 
@@ -541,7 +551,7 @@ Public Class ucrSave
         'the control's R code has changed so ensure that the linked controls stay consistent
         UpdateLinkedControls(bReset)
         'update the variables used for column position
-        UpdateColumnPositionVariables(bReset)
+        UpdateColumnPositionVariables()
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Updates the control's 'assign to' variables and column position variables. 
@@ -599,7 +609,9 @@ Public Class ucrSave
                     If strSaveName <> "" Then
                         Select Case strSaveType
                             Case "column"
-                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
+                                If bWritePositionParamsDirectly Then
+                                    clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
+                                End If
                             Case "dataframe"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bDataFrameList:=bDataFrameList, strDataFrameNames:=strDataFrameNames)
                             Case "graph"
@@ -855,16 +867,18 @@ Public Class ucrSave
     ''' <param name="e">        Not used. </param>
     '''--------------------------------------------------------------------------------------------
     Private Sub btnColumnPosition_Click(sender As Object, e As EventArgs) Handles btnColumnPosition.Click
-        Dim strDataName As String
-        If ucrDataFrameSelector IsNot Nothing Then
-            strDataName = ucrDataFrameSelector.cboAvailableDataFrames.Text
-        Else
-            strDataName = strGlobalDataName
-        End If
-        sdgSaveColumnPosition.SetUp(clsColPosFunction, strDataName)
+        Dim strDataName As String = If(ucrDataFrameSelector IsNot Nothing, ucrDataFrameSelector.cboAvailableDataFrames.Text, strGlobalDataName)
+
+        sdgSaveColumnPosition.SetUp(strDataName, bInsertColumnBefore, strAdjacentColumn, bKeepExistingPosition)
         sdgSaveColumnPosition.ShowDialog()
+
+        bInsertColumnBefore = sdgSaveColumnPosition.InsertColumnBefore
+        strAdjacentColumn = sdgSaveColumnPosition.AdjacentColumn
+        bKeepExistingPosition = sdgSaveColumnPosition.KeepExistingPosition
+
         UpdateColumnPositionVariables()
     End Sub
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the receiver linked to this control. 
     '''             The receiver contains the column used for the calculation.
@@ -880,6 +894,7 @@ Public Class ucrSave
         Me.ucrLinkedReceiver = ucrLinkedReceiver
         AddHandler ucrLinkedReceiver.ControlValueChanged, AddressOf LinkedReceiverControlValueChanged
     End Sub
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Updates the control's R command's column position variables.
     '''             These variables specify the position of the new column in the data frame 
@@ -895,60 +910,45 @@ Public Class ucrSave
     '''--------------------------------------------------------------------------------------------
     Private Sub LinkedReceiverControlValueChanged()
         If Not sdgSaveColumnPosition.bUserSelected Then
-            clsColPosFunction.AddParameter(strParameterName:="before", strParameterValue:="FALSE")
-            If Not ucrLinkedReceiver.IsEmpty Then
-                clsColPosFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrLinkedReceiver.GetVariableNames())
-            Else
-                clsColPosFunction.RemoveParameterByName("adjacent_column")
-            End If
+            bInsertColumnBefore = False
+            strAdjacentColumn = If(Not ucrLinkedReceiver.IsEmpty, ucrLinkedReceiver.GetVariableNames(), "")
         End If
         UpdateColumnPositionVariables()
     End Sub
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   If save object is a column then updates the control's R command's column 
     '''             position variables.
     '''             These variables specify the position of the new column in the data frame 
     '''             (start, end or before/after a specified column).
-    '''             <para>
-    '''             If <paramref name="bReset"/> is true then also resets the position dialog and
-    '''             variables so that the column will be appended to the end of the data frame.
-    '''             </para><para>
     '''             If save object is not a column then this function does nothing.
-    '''             </para></summary>
-    '''
-    ''' <param name="bReset">   (Optional) If true then resets the position dialog, sets the 
-    '''                         'before' parameter to false, and removes any 'adjacent_column' 
-    '''                         parameter. This means that the column will be appended to the end 
-    '''                         of the data frame. </param>
+    ''' </summary>    '''
     '''--------------------------------------------------------------------------------------------
-    Private Sub UpdateColumnPositionVariables(Optional bReset As Boolean = False)
+    Private Sub UpdateColumnPositionVariables()
         Dim clsTempCode As RCodeStructure
         If strSaveType <> "column" Then
             Exit Sub
         End If
-        If bReset Then 'TODO SJL 17/06/20 Should the reset be done here or in the normal reset function?
-            sdgSaveColumnPosition.Reset()
-            'set the 'before' parameter to false, and remove any 'adjacent_column' parameter
-            '(this means that the column will be appended to the end of the data frame)
-            clsColPosFunction.AddParameter(strParameterName:="before", strParameterValue:="FALSE")
-            clsColPosFunction.RemoveParameterByName("adjacent_column")
-        End If
+
         'for each command in the control's command-parameter lists
+        'set the command's column position variables from this control's stored 'before' and 'adjacent_column' values
         For i As Integer = 0 To lstAllRCodes.Count - 1
             clsTempCode = lstAllRCodes(i)
             If clsTempCode Is Nothing Then
                 Continue For
             End If
-            'set the command's column position variables from this control's stored 'before' and 'adjacent_column' parameters
-            If clsColPosFunction.GetParameter("before") Is Nothing Then
-                clsTempCode.bInsertColumnBefore = False
+
+            If bWritePositionParamsDirectly Then
+                clsTempCode.bInsertColumnBefore = bInsertColumnBefore
+                clsTempCode.strAdjacentColumn = strAdjacentColumn
+                'todo. should we add property bKeepExistingPosition to the RCodeStructure class ?? similar to bInsertColumnBefore and strAdjacentColumn 
             Else
-                clsTempCode.bInsertColumnBefore = If(clsColPosFunction.GetParameter("before").strArgumentValue = "TRUE", True, False)
-            End If
-            If clsColPosFunction.GetParameter("adjacent_column") Is Nothing Then
-                clsTempCode.strAdjacentColumn = ""
-            Else
-                clsTempCode.strAdjacentColumn = clsColPosFunction.GetParameter("adjacent_column").strArgumentValue
+                clsTempCode.AddParameter(strParameterName:="before", strParameterValue:=If(bInsertColumnBefore, "TRUE", "FALSE"))
+                If String.IsNullOrEmpty(strAdjacentColumn) Then
+                    clsTempCode.RemoveParameterByName("adjacent_column")
+                Else
+                    clsTempCode.AddParameter(strParameterName:="adjacent_column", strParameterValue:=strAdjacentColumn)
+                End If
             End If
         Next
     End Sub
