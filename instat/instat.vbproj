@@ -203,6 +203,12 @@
     <Compile Include="dlgCircularDensityPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimaticDataEntry.Designer.vb">
+      <DependentUpon>dlgClimaticDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimaticNCMPCountRecords.Designer.vb">
       <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
     </Compile>
@@ -2699,6 +2705,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCircularDensityPlot.resx">
       <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticDataEntry.resx">
+      <DependentUpon>dlgClimaticDataEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticNCMPCountRecords.resx">
       <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>

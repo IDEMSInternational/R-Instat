@@ -2334,4 +2334,8 @@ Public Class frmMain
     Private Sub mnuStructuredCircularDensityPlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularDensityPlot.Click
         dlgCircularDensityPlot.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticDataEntry_Click(sender As Object, e As EventArgs) Handles mnuClimaticDataEntry.Click
+        dlgClimaticDataEntry.ShowDialog()
+    End Sub
 End Class
