@@ -122,7 +122,6 @@ Partial Class sdgPlots
         Me.lblColourScaleMapBegins = New System.Windows.Forms.Label()
         Me.lblColourScalePalette = New System.Windows.Forms.Label()
         Me.lblColourScaleTransparency = New System.Windows.Forms.Label()
-        Me.UcrChkChangeColourScale = New instat.ucrCheck()
         Me.grpFillScale = New System.Windows.Forms.GroupBox()
         Me.ucrNudFillScaleTransparency = New instat.ucrNud()
         Me.ucrNudFillScaleMapEnds = New instat.ucrNud()
@@ -135,6 +134,7 @@ Partial Class sdgPlots
         Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
         Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkApplyChanges = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -682,10 +682,10 @@ Partial Class sdgPlots
         '
         'tbpColour
         '
+        Me.tbpColour.Controls.Add(Me.ucrChkApplyChanges)
         Me.tbpColour.Controls.Add(Me.ucrChkAddColourScale)
         Me.tbpColour.Controls.Add(Me.ucrChkAddFillScale)
         Me.tbpColour.Controls.Add(Me.grpColourScale)
-        Me.tbpColour.Controls.Add(Me.UcrChkChangeColourScale)
         Me.tbpColour.Controls.Add(Me.grpFillScale)
         resources.ApplyResources(Me.tbpColour, "tbpColour")
         Me.tbpColour.Name = "tbpColour"
@@ -789,12 +789,6 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.lblColourScaleTransparency, "lblColourScaleTransparency")
         Me.lblColourScaleTransparency.Name = "lblColourScaleTransparency"
         '
-        'UcrChkChangeColourScale
-        '
-        Me.UcrChkChangeColourScale.Checked = False
-        resources.ApplyResources(Me.UcrChkChangeColourScale, "UcrChkChangeColourScale")
-        Me.UcrChkChangeColourScale.Name = "UcrChkChangeColourScale"
-        '
         'grpFillScale
         '
         Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleTransparency)
@@ -885,6 +879,12 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        '
+        'ucrChkApplyChanges
+        '
+        Me.ucrChkApplyChanges.Checked = False
+        resources.ApplyResources(Me.ucrChkApplyChanges, "ucrChkApplyChanges")
+        Me.ucrChkApplyChanges.Name = "ucrChkApplyChanges"
         '
         'sdgPlots
         '
@@ -1013,13 +1013,13 @@ Partial Class sdgPlots
     Friend WithEvents lblColourScaleMapBegins As Label
     Friend WithEvents lblColourScalePalette As Label
     Friend WithEvents lblColourScaleTransparency As Label
-    Friend WithEvents UcrChkChangeColourScale As ucrCheck
     Friend WithEvents ucrNudFillScaleTransparency As ucrNud
     Friend WithEvents ucrNudFillScaleMapEnds As ucrNud
     Friend WithEvents ucrNudFillScaleMapBegins As ucrNud
     Friend WithEvents ucrInputFillScaleColour As ucrInputComboBox
     Friend WithEvents ucrChkAddFillScale As ucrCheck
     Friend WithEvents ucrChkAddColourScale As ucrCheck
+    Friend WithEvents ucrChkApplyChanges As ucrCheck
 End Class
 
 

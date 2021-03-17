@@ -377,6 +377,36 @@ Public Class sdgPlots
         ucrChkAddColourScale.AddParameterPresentCondition(True, "scale_colour", True)
         ucrChkAddColourScale.AddParameterPresentCondition(False, "scale_colour", False)
 
+        ucrInputColourScalePalette.SetParameter(New RParameter("option", iNewPosition:=0))
+        ucrInputColourScalePalette.SetItems(dctOptions)
+        ucrInputColourScalePalette.SetLinkedDisplayControl(lblColourScalePalette)
+
+        ucrNudColourScaleTransparency.SetParameter(New RParameter("alpha", iNewPosition:=1))
+        ucrNudColourScaleTransparency.SetMinMax(0, 1)
+        ucrNudColourScaleTransparency.DecimalPlaces = 2
+        ucrNudColourScaleTransparency.Increment = 0.01
+        ucrNudColourScaleTransparency.SetLinkedDisplayControl(lblColourScaleTransparency)
+
+        ucrNudColourScaleMapBegins.SetParameter(New RParameter("begin", iNewPosition:=2))
+        ucrNudColourScaleMapBegins.SetMinMax(0, 1)
+        ucrNudColourScaleMapBegins.DecimalPlaces = 2
+        ucrNudColourScaleMapBegins.Increment = 0.01
+        ucrNudColourScaleMapBegins.SetLinkedDisplayControl(lblColourScaleMapBegins)
+
+        ucrNudColourScaleMapEnds.SetParameter(New RParameter("end", iNewPosition:=3))
+        ucrNudColourScaleMapEnds.SetMinMax(0, 1)
+        ucrNudColourScaleMapEnds.DecimalPlaces = 2
+        ucrNudColourScaleMapEnds.Increment = 0.01
+        ucrNudColourScaleMapEnds.SetLinkedDisplayControl(lblColourScaleMapEnds)
+
+        ucrChkColourScaleReverseOrder.SetParameter(New RParameter("direction", iNewPosition:=4))
+        ucrChkColourScaleReverseOrder.SetText("Reverse Order Of Colours")
+        ucrChkColourScaleReverseOrder.SetValuesCheckedAndUnchecked("1", "-1")
+
+        ucrChkApplyChanges.SetText("Apply changes to colour scale")
+        ucrChkFillScaleDiscrete.SetText("Discrete")
+        ucrChkColourScaleDiscrete.SetText("Discrete")
+
         grpFillScale.Visible = False
         grpColourScale.Visible = False
 
@@ -487,6 +517,11 @@ Public Class sdgPlots
         ucrChkFilLScaleReverseColourOrder.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkAddFillScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddColourScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrInputColourScalePalette.SetRCode(clsScaleColourViridisFunction, bReset)
+        ucrNudColourScaleTransparency.SetRCode(clsScaleColourViridisFunction, bReset)
+        ucrNudColourScaleMapBegins.SetRCode(clsScaleColourViridisFunction, bReset)
+        ucrNudColourScaleMapEnds.SetRCode(clsScaleColourViridisFunction, bReset)
+        ucrChkColourScaleReverseOrder.SetRCode(clsScaleColourViridisFunction, bReset)
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
         bRCodeSet = True

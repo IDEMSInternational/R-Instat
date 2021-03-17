@@ -1734,6 +1734,27 @@
   <data name="&gt;&gt;tbpCoordinates.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="ucrChkApplyChanges.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 217</value>
+  </data>
+  <data name="ucrChkApplyChanges.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkApplyChanges.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="&gt;&gt;ucrChkApplyChanges.Name" xml:space="preserve">
+    <value>ucrChkApplyChanges</value>
+  </data>
+  <data name="&gt;&gt;ucrChkApplyChanges.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkApplyChanges.Parent" xml:space="preserve">
+    <value>tbpColour</value>
+  </data>
+  <data name="&gt;&gt;ucrChkApplyChanges.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkAddColourScale.Location" type="System.Drawing.Point, System.Drawing">
     <value>20, 197</value>
   </data>
@@ -1753,7 +1774,7 @@
     <value>tbpColour</value>
   </data>
   <data name="&gt;&gt;ucrChkAddColourScale.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkAddFillScale.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 6</value>
@@ -1774,7 +1795,7 @@
     <value>tbpColour</value>
   </data>
   <data name="&gt;&gt;ucrChkAddFillScale.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrNudColourScaleTransparency.Location" type="System.Drawing.Point, System.Drawing">
     <value>222, 46</value>
@@ -2044,27 +2065,6 @@
     <value>tbpColour</value>
   </data>
   <data name="&gt;&gt;grpColourScale.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="UcrChkChangeColourScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>20, 217</value>
-  </data>
-  <data name="UcrChkChangeColourScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
-  </data>
-  <data name="UcrChkChangeColourScale.TabIndex" type="System.Int32, mscorlib">
-    <value>24</value>
-  </data>
-  <data name="&gt;&gt;UcrChkChangeColourScale.Name" xml:space="preserve">
-    <value>UcrChkChangeColourScale</value>
-  </data>
-  <data name="&gt;&gt;UcrChkChangeColourScale.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrChkChangeColourScale.Parent" xml:space="preserve">
-    <value>tbpColour</value>
-  </data>
-  <data name="&gt;&gt;UcrChkChangeColourScale.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="ucrNudFillScaleTransparency.Location" type="System.Drawing.Point, System.Drawing">
