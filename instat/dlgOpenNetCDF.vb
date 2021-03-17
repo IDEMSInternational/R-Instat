@@ -200,6 +200,9 @@ Public Class dlgOpenNetCDF
                     End If
                 Else
                     MsgBox("File type: '" & strFileExt & "' not recognised as a NetCDF file (.nc).", vbOKOnly)
+                    strShort = ""
+                    strMedium = ""
+                    strLong = ""
                 End If
             End If
         End Using
@@ -239,12 +242,17 @@ Public Class dlgOpenNetCDF
                     clsNcOpenFunction.ToScript(strTemp)
                     frmMain.clsRLink.RunScript(strTemp, strComment:="Opening connection to first NetCDF file", bUpdateGrids:=False)
                     bCloseFile = True
+                    clsRFileDetails.AddParameter("infile", Chr(34) & Replace(strFiles(0), "\", "/") & Chr(34), iPosition:=1)
                     clsImportNetcdfFunction.AddParameter("path", Chr(34) & Replace(strPath, "\", "/") & Chr(34))
                     ucrInputDataName.SetName(frmMain.clsRLink.MakeValidText(Path.GetFileName(strPath.TrimEnd(Path.DirectorySeparatorChar))))
+                    FileDetails()
                     clsImportNetcdfFunction.RemoveParameterByName("boundary")
                     clsBoundaryListFunction.ClearParameters()
                 Else
                     clsNcOpenFunction.RemoveParameterByName("filename")
+                    strShort = ""
+                    strMedium = ""
+                    strLong = ""
                 End If
             End If
         End Using

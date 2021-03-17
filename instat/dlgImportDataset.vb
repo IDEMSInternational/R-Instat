@@ -128,9 +128,9 @@ Public Class dlgImportDataset
         ucrInputFilePath.SetParameter(New RParameter("file"))
         ucrInputFilePath.IsReadOnly = True
 
+        ucrSaveFile.SetSaveTypeAsDataFrame()
         ucrSaveFile.SetLabelText("New Data Frame Name:")
         ucrSaveFile.SetIsTextBox()
-        ucrSaveFile.SetSaveTypeAsDataFrame()
         ucrSaveFile.ucrInputTextSave.bAutoChangeOnLeave = True
 
         ucrNudPreviewLines.Value = 10
@@ -453,6 +453,7 @@ Public Class dlgImportDataset
                     SetControlsFromFile("")
                 Else
                     dctSelectedExcelSheets.Clear()
+                    clbSheets.Items.Clear()
                     SetControlsFromFile(dlgOpen.FileName)
                 End If
             Else
@@ -558,7 +559,11 @@ Public Class dlgImportDataset
         grpExcel.Visible = bVisible
         clbSheets.Visible = bVisible
         lblSelectSheets.Visible = bVisible
-        ucrChkSheetsCheckAll.Visible = bVisible
+        If bVisible Then
+            ucrChkSheetsCheckAll.Show()
+        Else
+            ucrChkSheetsCheckAll.Hide()
+        End If
     End Sub
 
     Public Sub SetControlsFromFile(strFilePath As String)
@@ -636,10 +641,20 @@ Public Class dlgImportDataset
             strFileType = ""
         End If
         If strFileType <> "" AndAlso strFileType <> "RDS" Then
-            'ucrSaveFile.Show()
-            'ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
-            'don't ovewrite the name for excel sheets if there is a selected sheet name
-            If (strFileType <> "XLSX" OrElse strFileType <> "XLS") AndAlso clbSheets.CheckedItems.Count = 0 Then
+            If (strFileType = "XLSX" OrElse strFileType = "XLS") Then
+                ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
+                Select Case clbSheets.CheckedItems.Count
+                    Case Is > 1
+                        ucrSaveFile.Hide()
+                    Case 1
+                        ucrSaveFile.Show()
+                        ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First(), bSilent:=True)
+                    Case 0
+                        ucrSaveFile.Show()
+                        ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
+                End Select
+            Else
+                ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=False)
                 ucrSaveFile.Show()
                 ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
             End If
@@ -977,6 +992,10 @@ Public Class dlgImportDataset
                 TestOkEnabled()
             End If
         End If
+    End Sub
+
+    Private Sub ucrSaveFile_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveFile.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 
     Private Sub ucrChkSheetsCheckAll_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSheetsCheckAll.ControlValueChanged
