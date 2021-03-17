@@ -20,7 +20,7 @@ Public Class dlgOneWayFrequencies
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsSjMiscFrq As New RFunction
-    Private clsSjPlot, clsPlotGrid As New RFunction
+    Private clsSjPlot, clsPlotGrid, clsSjPlotList As New RFunction
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
 
@@ -119,15 +119,17 @@ Public Class dlgOneWayFrequencies
 
         clsPlotGrid.SetPackageName("sjPlot")
         clsPlotGrid.SetRCommand("plot_grid")
+        clsPlotGrid.AddParameter("x", clsRFunctionParameter:=clsSjPlotList)
 
-        clsPlotGrid.AddParameter("x", clsRFunctionParameter:=clsSjPlot)
+        clsSjPlotList.SetRCommand("list")
+        clsSjPlotList.AddParameter("x", clsRFunctionParameter:=clsSjPlot, iPosition:=0)
 
         clsSjMiscFrq.SetPackageName("sjmisc")
         clsSjMiscFrq.SetRCommand("frq")
         clsSjMiscFrq.AddParameter("out", Chr(34) & "txt" & Chr(34), iPosition:=7)
 
         clsSjPlot.SetPackageName("sjPlot")
-        clsSjPlot.SetRCommand("sjplot")
+        clsSjPlot.SetRCommand("plot_frq")
         clsPlotGrid.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjMiscFrq)
@@ -222,7 +224,7 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgOneWayFrequencies.SetRFunction(clsSjMiscFrq, clsSjPlot, clsPlotGrid, bResetSubdialog)
+        sdgOneWayFrequencies.SetRFunction(clsSjMiscFrq, clsSjPlot, clsPlotGrid, clsSjPlotList, bResetSubdialog)
         bResetSubdialog = False
         sdgOneWayFrequencies.ShowDialog()
         TestOkEnabled()
@@ -239,6 +241,16 @@ Public Class dlgOneWayFrequencies
         ElseIf rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPlotGrid)
             ucrBase.clsRsyntax.iCallType = 3
+        End If
+    End Sub
+
+    Private Sub ucrReceiverOneWayFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneWayFreq.ControlValueChanged
+        If ucrReceiverOneWayFreq.lstSelectedVariables.Items.Count > 1 Then
+            clsPlotGrid.RemoveParameterByName("x")
+            clsPlotGrid.AddParameter("x", clsRFunctionParameter:=clsSjPlot)
+        Else
+            clsPlotGrid.RemoveParameterByName("x")
+            clsPlotGrid.AddParameter("x", clsRFunctionParameter:=clsSjPlotList)
         End If
     End Sub
 

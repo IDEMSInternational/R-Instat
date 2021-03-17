@@ -82,21 +82,21 @@ Partial Class sdgInventoryPlot
         Me.lblXInStepsOf = New System.Windows.Forms.Label()
         Me.lblXTo = New System.Windows.Forms.Label()
         Me.tpYAxis = New System.Windows.Forms.TabPage()
+        Me.grpYAxis = New System.Windows.Forms.GroupBox()
+        Me.ucrChkSpecifyDateBreaks = New instat.ucrCheck()
+        Me.ucrNudYAxisLabelSize = New instat.ucrNud()
+        Me.ucrNudYAxisAngle = New instat.ucrNud()
+        Me.ucrInputDateDisplayFormat = New instat.ucrInputComboBox()
         Me.lblDateDisplayFormat = New System.Windows.Forms.Label()
+        Me.ucrChkYAxisLabelSize = New instat.ucrCheck()
+        Me.ucrChkYAxisAngle = New instat.ucrCheck()
         Me.ucrNudDateBreakNumber = New instat.ucrNud()
         Me.ucrInputDateBreakTime = New instat.ucrInputComboBox()
-        Me.ucrChkSpecifyDateBreaks = New instat.ucrCheck()
-        Me.ucrInputDateDisplayFormat = New instat.ucrInputComboBox()
-        Me.ucrNudYAxisAngle = New instat.ucrNud()
-        Me.ucrNudYAxisLabelSize = New instat.ucrNud()
-        Me.ucrChkYAxisAngle = New instat.ucrCheck()
-        Me.ucrChkYAxisLabelSize = New instat.ucrCheck()
         Me.tpLegend = New System.Windows.Forms.TabPage()
         Me.ucrInputLegendPosition = New instat.ucrInputComboBox()
         Me.ucrChkLegendPosition = New instat.ucrCheck()
         Me.ttInventoryPlot = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrButtonsInventoryplot = New instat.ucrButtonsSubdialogue()
-        Me.grpYAxis = New System.Windows.Forms.GroupBox()
         Me.tbInventory.SuspendLayout()
         Me.tpFacets.SuspendLayout()
         Me.tpTitles.SuspendLayout()
@@ -106,8 +106,8 @@ Partial Class sdgInventoryPlot
         Me.tpXAxis.SuspendLayout()
         Me.grpXAxisLabels.SuspendLayout()
         Me.tpYAxis.SuspendLayout()
-        Me.tpLegend.SuspendLayout()
         Me.grpYAxis.SuspendLayout()
+        Me.tpLegend.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbInventory
@@ -570,10 +570,71 @@ Partial Class sdgInventoryPlot
         Me.tpYAxis.Name = "tpYAxis"
         Me.tpYAxis.UseVisualStyleBackColor = True
         '
+        'grpYAxis
+        '
+        Me.grpYAxis.Controls.Add(Me.ucrChkSpecifyDateBreaks)
+        Me.grpYAxis.Controls.Add(Me.ucrNudYAxisLabelSize)
+        Me.grpYAxis.Controls.Add(Me.ucrNudYAxisAngle)
+        Me.grpYAxis.Controls.Add(Me.ucrInputDateDisplayFormat)
+        Me.grpYAxis.Controls.Add(Me.lblDateDisplayFormat)
+        Me.grpYAxis.Controls.Add(Me.ucrChkYAxisLabelSize)
+        Me.grpYAxis.Controls.Add(Me.ucrChkYAxisAngle)
+        Me.grpYAxis.Controls.Add(Me.ucrNudDateBreakNumber)
+        Me.grpYAxis.Controls.Add(Me.ucrInputDateBreakTime)
+        resources.ApplyResources(Me.grpYAxis, "grpYAxis")
+        Me.grpYAxis.Name = "grpYAxis"
+        Me.grpYAxis.TabStop = False
+        '
+        'ucrChkSpecifyDateBreaks
+        '
+        Me.ucrChkSpecifyDateBreaks.Checked = False
+        resources.ApplyResources(Me.ucrChkSpecifyDateBreaks, "ucrChkSpecifyDateBreaks")
+        Me.ucrChkSpecifyDateBreaks.Name = "ucrChkSpecifyDateBreaks"
+        '
+        'ucrNudYAxisLabelSize
+        '
+        Me.ucrNudYAxisLabelSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisLabelSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudYAxisLabelSize, "ucrNudYAxisLabelSize")
+        Me.ucrNudYAxisLabelSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudYAxisLabelSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisLabelSize.Name = "ucrNudYAxisLabelSize"
+        Me.ucrNudYAxisLabelSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudYAxisAngle
+        '
+        Me.ucrNudYAxisAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudYAxisAngle, "ucrNudYAxisAngle")
+        Me.ucrNudYAxisAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudYAxisAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudYAxisAngle.Name = "ucrNudYAxisAngle"
+        Me.ucrNudYAxisAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputDateDisplayFormat
+        '
+        Me.ucrInputDateDisplayFormat.AddQuotesIfUnrecognised = True
+        Me.ucrInputDateDisplayFormat.GetSetSelectedIndex = -1
+        Me.ucrInputDateDisplayFormat.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDateDisplayFormat, "ucrInputDateDisplayFormat")
+        Me.ucrInputDateDisplayFormat.Name = "ucrInputDateDisplayFormat"
+        '
         'lblDateDisplayFormat
         '
         resources.ApplyResources(Me.lblDateDisplayFormat, "lblDateDisplayFormat")
         Me.lblDateDisplayFormat.Name = "lblDateDisplayFormat"
+        '
+        'ucrChkYAxisLabelSize
+        '
+        Me.ucrChkYAxisLabelSize.Checked = False
+        resources.ApplyResources(Me.ucrChkYAxisLabelSize, "ucrChkYAxisLabelSize")
+        Me.ucrChkYAxisLabelSize.Name = "ucrChkYAxisLabelSize"
+        '
+        'ucrChkYAxisAngle
+        '
+        Me.ucrChkYAxisAngle.Checked = False
+        resources.ApplyResources(Me.ucrChkYAxisAngle, "ucrChkYAxisAngle")
+        Me.ucrChkYAxisAngle.Name = "ucrChkYAxisAngle"
         '
         'ucrNudDateBreakNumber
         '
@@ -592,52 +653,6 @@ Partial Class sdgInventoryPlot
         Me.ucrInputDateBreakTime.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputDateBreakTime, "ucrInputDateBreakTime")
         Me.ucrInputDateBreakTime.Name = "ucrInputDateBreakTime"
-        '
-        'ucrChkSpecifyDateBreaks
-        '
-        Me.ucrChkSpecifyDateBreaks.Checked = False
-        resources.ApplyResources(Me.ucrChkSpecifyDateBreaks, "ucrChkSpecifyDateBreaks")
-        Me.ucrChkSpecifyDateBreaks.Name = "ucrChkSpecifyDateBreaks"
-        '
-        'ucrInputDateDisplayFormat
-        '
-        Me.ucrInputDateDisplayFormat.AddQuotesIfUnrecognised = True
-        Me.ucrInputDateDisplayFormat.GetSetSelectedIndex = -1
-        Me.ucrInputDateDisplayFormat.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDateDisplayFormat, "ucrInputDateDisplayFormat")
-        Me.ucrInputDateDisplayFormat.Name = "ucrInputDateDisplayFormat"
-        '
-        'ucrNudYAxisAngle
-        '
-        Me.ucrNudYAxisAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudYAxisAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudYAxisAngle, "ucrNudYAxisAngle")
-        Me.ucrNudYAxisAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudYAxisAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudYAxisAngle.Name = "ucrNudYAxisAngle"
-        Me.ucrNudYAxisAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudYAxisLabelSize
-        '
-        Me.ucrNudYAxisLabelSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudYAxisLabelSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudYAxisLabelSize, "ucrNudYAxisLabelSize")
-        Me.ucrNudYAxisLabelSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudYAxisLabelSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudYAxisLabelSize.Name = "ucrNudYAxisLabelSize"
-        Me.ucrNudYAxisLabelSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkYAxisAngle
-        '
-        Me.ucrChkYAxisAngle.Checked = False
-        resources.ApplyResources(Me.ucrChkYAxisAngle, "ucrChkYAxisAngle")
-        Me.ucrChkYAxisAngle.Name = "ucrChkYAxisAngle"
-        '
-        'ucrChkYAxisLabelSize
-        '
-        Me.ucrChkYAxisLabelSize.Checked = False
-        resources.ApplyResources(Me.ucrChkYAxisLabelSize, "ucrChkYAxisLabelSize")
-        Me.ucrChkYAxisLabelSize.Name = "ucrChkYAxisLabelSize"
         '
         'tpLegend
         '
@@ -672,21 +687,6 @@ Partial Class sdgInventoryPlot
         resources.ApplyResources(Me.ucrButtonsInventoryplot, "ucrButtonsInventoryplot")
         Me.ucrButtonsInventoryplot.Name = "ucrButtonsInventoryplot"
         '
-        'grpYAxis
-        '
-        Me.grpYAxis.Controls.Add(Me.ucrChkSpecifyDateBreaks)
-        Me.grpYAxis.Controls.Add(Me.ucrNudYAxisLabelSize)
-        Me.grpYAxis.Controls.Add(Me.ucrNudYAxisAngle)
-        Me.grpYAxis.Controls.Add(Me.ucrInputDateDisplayFormat)
-        Me.grpYAxis.Controls.Add(Me.lblDateDisplayFormat)
-        Me.grpYAxis.Controls.Add(Me.ucrChkYAxisLabelSize)
-        Me.grpYAxis.Controls.Add(Me.ucrChkYAxisAngle)
-        Me.grpYAxis.Controls.Add(Me.ucrNudDateBreakNumber)
-        Me.grpYAxis.Controls.Add(Me.ucrInputDateBreakTime)
-        resources.ApplyResources(Me.grpYAxis, "grpYAxis")
-        Me.grpYAxis.Name = "grpYAxis"
-        Me.grpYAxis.TabStop = False
-        '
         'sdgInventoryPlot
         '
         resources.ApplyResources(Me, "$this")
@@ -711,9 +711,9 @@ Partial Class sdgInventoryPlot
         Me.grpXAxisLabels.ResumeLayout(False)
         Me.grpXAxisLabels.PerformLayout()
         Me.tpYAxis.ResumeLayout(False)
-        Me.tpLegend.ResumeLayout(False)
         Me.grpYAxis.ResumeLayout(False)
         Me.grpYAxis.PerformLayout()
+        Me.tpLegend.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
