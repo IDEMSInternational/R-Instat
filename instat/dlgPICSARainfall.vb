@@ -747,7 +747,6 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub AddRemoveFacets()
-        Dim strText As String
         Dim bWrap As Boolean = False
         Dim bCol As Boolean = False
         Dim bRow As Boolean = False
@@ -755,9 +754,8 @@ Public Class dlgPICSARainfall
         If Not bUpdatingParameters Then
             clsBaseOperator.RemoveParameterByName("facets")
             For Each kvpTemp As KeyValuePair(Of ucrInputComboBox, ucrReceiverSingle) In dctComboReceiver
-                strText = kvpTemp.Key.GetText()
                 If Not kvpTemp.Value.IsEmpty Then
-                    Select Case strText
+                    Select Case kvpTemp.Key.GetText()
                         Case strFacetWrap
                             bWrap = True
                         Case strFacetCol
