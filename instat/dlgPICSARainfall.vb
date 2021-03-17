@@ -326,7 +326,6 @@ Public Class dlgPICSARainfall
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
-        'clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         clsAsFactorFunction.SetRCommand("as.factor")
 
         clsGeomLine.SetPackageName("ggplot2")
