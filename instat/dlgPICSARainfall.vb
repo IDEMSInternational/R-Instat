@@ -705,7 +705,6 @@ Public Class dlgPICSARainfall
                 dctComboReceiver(ucrInputTemp).SetRCode(clsAsFactorFunction)
                 ' clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
             ElseIf strTemp = strColour Then
-                '    If rdoJitter.Checked Then
                 dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
                 dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
                 '    ElseIf rdoBoxplot.Checked OrElse rdoViolin.Checked Then
