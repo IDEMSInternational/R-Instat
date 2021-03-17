@@ -432,153 +432,6 @@
   <data name="&gt;&gt;cmdBrowse.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
-  <data name="&gt;&gt;ucrNudMaxRowsCSV.Name" xml:space="preserve">
-    <value>ucrNudMaxRowsCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrNudMaxRowsCSV.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudMaxRowsCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrNudMaxRowsCSV.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMaxRowsCSV.Name" xml:space="preserve">
-    <value>ucrChkMaxRowsCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMaxRowsCSV.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMaxRowsCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMaxRowsCSV.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lblNAStringsCSV.Name" xml:space="preserve">
-    <value>lblNAStringsCSV</value>
-  </data>
-  <data name="&gt;&gt;lblNAStringsCSV.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblNAStringsCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;lblNAStringsCSV.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkStringsAsFactorsCSV.Name" xml:space="preserve">
-    <value>ucrChkStringsAsFactorsCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrChkStringsAsFactorsCSV.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkStringsAsFactorsCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrChkStringsAsFactorsCSV.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRowsToSkipCSV.Name" xml:space="preserve">
-    <value>ucrNudRowsToSkipCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRowsToSkipCSV.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRowsToSkipCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRowsToSkipCSV.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrInputHeadersCSV.Name" xml:space="preserve">
-    <value>ucrInputHeadersCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrInputHeadersCSV.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputHeadersCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrInputHeadersCSV.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMissingValueStringCSV.Name" xml:space="preserve">
-    <value>ucrInputMissingValueStringCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMissingValueStringCSV.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMissingValueStringCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMissingValueStringCSV.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDecimalCSV.Name" xml:space="preserve">
-    <value>ucrInputDecimalCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDecimalCSV.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDecimalCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDecimalCSV.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSeparatorCSV.Name" xml:space="preserve">
-    <value>ucrInputSeparatorCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSeparatorCSV.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSeparatorCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrInputSeparatorCSV.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrInputEncodingCSV.Name" xml:space="preserve">
-    <value>ucrInputEncodingCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrInputEncodingCSV.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputEncodingCSV.Parent" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;ucrInputEncodingCSV.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="grpCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 99</value>
-  </data>
-  <data name="grpCSV.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 268</value>
-  </data>
-  <data name="grpCSV.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="grpCSV.Text" xml:space="preserve">
-    <value>Import csv Options</value>
-  </data>
-  <data name="grpCSV.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;grpCSV.Name" xml:space="preserve">
-    <value>grpCSV</value>
-  </data>
-  <data name="&gt;&gt;grpCSV.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpCSV.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpCSV.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="ucrNudMaxRowsCSV.Location" type="System.Drawing.Point, System.Drawing">
     <value>158, 237</value>
   </data>
@@ -825,212 +678,32 @@
   <data name="&gt;&gt;ucrInputEncodingCSV.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="&gt;&gt;lblTo.Name" xml:space="preserve">
-    <value>lblTo</value>
+  <data name="grpCSV.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 99</value>
   </data>
-  <data name="&gt;&gt;lblTo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="grpCSV.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 268</value>
   </data>
-  <data name="&gt;&gt;lblTo.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;lblTo.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkRange.Name" xml:space="preserve">
-    <value>ucrChkRange</value>
-  </data>
-  <data name="&gt;&gt;ucrChkRange.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkRange.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrChkRange.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lblFrom.Name" xml:space="preserve">
-    <value>lblFrom</value>
-  </data>
-  <data name="&gt;&gt;lblFrom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblFrom.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;lblFrom.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextTo.Name" xml:space="preserve">
-    <value>ucrInputTextTo</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextTo.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextTo.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextTo.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextFrom.Name" xml:space="preserve">
-    <value>ucrInputTextFrom</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextFrom.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextFrom.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrInputTextFrom.ZOrder" xml:space="preserve">
+  <data name="grpCSV.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
-  <data name="&gt;&gt;ucrNudMaxRowsExcel.Name" xml:space="preserve">
-    <value>ucrNudMaxRowsExcel</value>
+  <data name="grpCSV.Text" xml:space="preserve">
+    <value>Import csv Options</value>
   </data>
-  <data name="&gt;&gt;ucrNudMaxRowsExcel.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudMaxRowsExcel.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrNudMaxRowsExcel.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColumnNamesExcel.Name" xml:space="preserve">
-    <value>ucrChkColumnNamesExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColumnNamesExcel.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColumnNamesExcel.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColumnNamesExcel.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMaxRowsExcel.Name" xml:space="preserve">
-    <value>ucrChkMaxRowsExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMaxRowsExcel.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMaxRowsExcel.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMaxRowsExcel.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;ucrChkTrimWSExcel.Name" xml:space="preserve">
-    <value>ucrChkTrimWSExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrChkTrimWSExcel.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkTrimWSExcel.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrChkTrimWSExcel.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRowsToSkipExcel.Name" xml:space="preserve">
-    <value>ucrNudRowsToSkipExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRowsToSkipExcel.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRowsToSkipExcel.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRowsToSkipExcel.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;lblMissingValueStringExcel.Name" xml:space="preserve">
-    <value>lblMissingValueStringExcel</value>
-  </data>
-  <data name="&gt;&gt;lblMissingValueStringExcel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMissingValueStringExcel.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;lblMissingValueStringExcel.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMissingValueStringExcel.Name" xml:space="preserve">
-    <value>ucrInputMissingValueStringExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMissingValueStringExcel.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMissingValueStringExcel.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMissingValueStringExcel.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNamedRegions.Name" xml:space="preserve">
-    <value>ucrInputNamedRegions</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNamedRegions.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNamedRegions.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNamedRegions.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;lblNamedRegion.Name" xml:space="preserve">
-    <value>lblNamedRegion</value>
-  </data>
-  <data name="&gt;&gt;lblNamedRegion.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblNamedRegion.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;lblNamedRegion.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;lblRowToSkipExcel.Name" xml:space="preserve">
-    <value>lblRowToSkipExcel</value>
-  </data>
-  <data name="&gt;&gt;lblRowToSkipExcel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblRowToSkipExcel.Parent" xml:space="preserve">
-    <value>grpExcel</value>
-  </data>
-  <data name="&gt;&gt;lblRowToSkipExcel.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="grpExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 50</value>
-  </data>
-  <data name="grpExcel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 241</value>
-  </data>
-  <data name="grpExcel.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="grpExcel.Text" xml:space="preserve">
-    <value>Import Excel Options</value>
-  </data>
-  <data name="grpExcel.Visible" type="System.Boolean, mscorlib">
+  <data name="grpCSV.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;grpExcel.Name" xml:space="preserve">
-    <value>grpExcel</value>
+  <data name="&gt;&gt;grpCSV.Name" xml:space="preserve">
+    <value>grpCSV</value>
   </data>
-  <data name="&gt;&gt;grpExcel.Type" xml:space="preserve">
+  <data name="&gt;&gt;grpCSV.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;grpExcel.Parent" xml:space="preserve">
+  <data name="&gt;&gt;grpCSV.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;grpExcel.ZOrder" xml:space="preserve">
-    <value>13</value>
+  <data name="&gt;&gt;grpCSV.ZOrder" xml:space="preserve">
+    <value>16</value>
   </data>
   <data name="lblTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1416,116 +1089,32 @@
   <data name="&gt;&gt;lblRowToSkipExcel.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
-  <data name="&gt;&gt;ucrChkOverwriteRDS.Name" xml:space="preserve">
-    <value>ucrChkOverwriteRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOverwriteRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOverwriteRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOverwriteRDS.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportObjectsRDS.Name" xml:space="preserve">
-    <value>ucrChkImportObjectsRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportObjectsRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportObjectsRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportObjectsRDS.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportCalculationsRDS.Name" xml:space="preserve">
-    <value>ucrChkImportCalculationsRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportCalculationsRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportCalculationsRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportCalculationsRDS.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportChangesLogRDS.Name" xml:space="preserve">
-    <value>ucrChkImportChangesLogRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportChangesLogRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportChangesLogRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportChangesLogRDS.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportFiltersRDS.Name" xml:space="preserve">
-    <value>ucrChkImportFiltersRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportFiltersRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportFiltersRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportFiltersRDS.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportMetadataRDS.Name" xml:space="preserve">
-    <value>ucrChkImportMetadataRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportMetadataRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportMetadataRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkImportMetadataRDS.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepExistingDataRDS.Name" xml:space="preserve">
-    <value>ucrChkKeepExistingDataRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepExistingDataRDS.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepExistingDataRDS.Parent" xml:space="preserve">
-    <value>grpRDS</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepExistingDataRDS.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="grpRDS.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="grpExcel.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 50</value>
   </data>
-  <data name="grpRDS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 218</value>
+  <data name="grpExcel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 241</value>
   </data>
-  <data name="grpRDS.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="grpExcel.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
   </data>
-  <data name="grpRDS.Text" xml:space="preserve">
-    <value>Import RDS Options</value>
+  <data name="grpExcel.Text" xml:space="preserve">
+    <value>Import Excel Options</value>
   </data>
-  <data name="grpRDS.Visible" type="System.Boolean, mscorlib">
+  <data name="grpExcel.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="&gt;&gt;grpRDS.Name" xml:space="preserve">
-    <value>grpRDS</value>
+  <data name="&gt;&gt;grpExcel.Name" xml:space="preserve">
+    <value>grpExcel</value>
   </data>
-  <data name="&gt;&gt;grpRDS.Type" xml:space="preserve">
+  <data name="&gt;&gt;grpExcel.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;grpRDS.Parent" xml:space="preserve">
+  <data name="&gt;&gt;grpExcel.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;grpRDS.ZOrder" xml:space="preserve">
-    <value>14</value>
+  <data name="&gt;&gt;grpExcel.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
   <data name="ucrChkOverwriteRDS.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 175</value>
@@ -1695,6 +1284,33 @@
   <data name="&gt;&gt;ucrChkKeepExistingDataRDS.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="grpRDS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 50</value>
+  </data>
+  <data name="grpRDS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 218</value>
+  </data>
+  <data name="grpRDS.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="grpRDS.Text" xml:space="preserve">
+    <value>Import RDS Options</value>
+  </data>
+  <data name="grpRDS.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;grpRDS.Name" xml:space="preserve">
+    <value>grpRDS</value>
+  </data>
+  <data name="&gt;&gt;grpRDS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpRDS.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpRDS.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
   <data name="lblCannotImport.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -1772,7 +1388,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblNoPreview.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>15</value>
   </data>
   <data name="lblLinesToPreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1830,117 +1446,6 @@ Modify options or select a different file.</value>
   </data>
   <data name="&gt;&gt;cmdRefreshPreview.ZOrder" xml:space="preserve">
     <value>9</value>
-  </data>
-  <data name="&gt;&gt;ucrNudMaxRowsText.Name" xml:space="preserve">
-    <value>ucrNudMaxRowsText</value>
-  </data>
-  <data name="&gt;&gt;ucrNudMaxRowsText.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudMaxRowsText.Parent" xml:space="preserve">
-    <value>grpText</value>
-  </data>
-  <data name="&gt;&gt;ucrNudMaxRowsText.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMaxRowsText.Name" xml:space="preserve">
-    <value>ucrChkMaxRowsText</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMaxRowsText.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMaxRowsText.Parent" xml:space="preserve">
-    <value>grpText</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMaxRowsText.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColumnNamesText.Name" xml:space="preserve">
-    <value>ucrChkColumnNamesText</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColumnNamesText.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColumnNamesText.Parent" xml:space="preserve">
-    <value>grpText</value>
-  </data>
-  <data name="&gt;&gt;ucrChkColumnNamesText.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblMissingValueStringText.Name" xml:space="preserve">
-    <value>lblMissingValueStringText</value>
-  </data>
-  <data name="&gt;&gt;lblMissingValueStringText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblMissingValueStringText.Parent" xml:space="preserve">
-    <value>grpText</value>
-  </data>
-  <data name="&gt;&gt;lblMissingValueStringText.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRowsToSkipText.Name" xml:space="preserve">
-    <value>ucrNudRowsToSkipText</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRowsToSkipText.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRowsToSkipText.Parent" xml:space="preserve">
-    <value>grpText</value>
-  </data>
-  <data name="&gt;&gt;ucrNudRowsToSkipText.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMissingValueStringText.Name" xml:space="preserve">
-    <value>ucrInputMissingValueStringText</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMissingValueStringText.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMissingValueStringText.Parent" xml:space="preserve">
-    <value>grpText</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMissingValueStringText.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;lblLinesToSkipText.Name" xml:space="preserve">
-    <value>lblLinesToSkipText</value>
-  </data>
-  <data name="&gt;&gt;lblLinesToSkipText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblLinesToSkipText.Parent" xml:space="preserve">
-    <value>grpText</value>
-  </data>
-  <data name="&gt;&gt;lblLinesToSkipText.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="grpText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 99</value>
-  </data>
-  <data name="grpText.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 132</value>
-  </data>
-  <data name="grpText.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="grpText.Text" xml:space="preserve">
-    <value>Import Text Options</value>
-  </data>
-  <data name="grpText.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="&gt;&gt;grpText.Name" xml:space="preserve">
-    <value>grpText</value>
-  </data>
-  <data name="&gt;&gt;grpText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpText.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpText.ZOrder" xml:space="preserve">
-    <value>8</value>
   </data>
   <data name="ucrNudMaxRowsText.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 104</value>
@@ -2122,6 +1627,33 @@ Modify options or select a different file.</value>
   <data name="&gt;&gt;lblLinesToSkipText.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="grpText.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 99</value>
+  </data>
+  <data name="grpText.Size" type="System.Drawing.Size, System.Drawing">
+    <value>239, 132</value>
+  </data>
+  <data name="grpText.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="grpText.Text" xml:space="preserve">
+    <value>Import Text Options</value>
+  </data>
+  <data name="grpText.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;grpText.Name" xml:space="preserve">
+    <value>grpText</value>
+  </data>
+  <data name="&gt;&gt;grpText.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpText.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpText.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
   <data name="rdoSeparatortext.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
@@ -2156,7 +1688,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoSeparatortext.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="rdoFixedWidthText.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2192,7 +1724,7 @@ Modify options or select a different file.</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoFixedWidthText.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="rdoFixedWidthWhiteSpacesText.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2229,7 +1761,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoFixedWidthWhiteSpacesText.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="clbSheets.HorizontalScrollbar" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2253,7 +1785,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;clbSheets.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lblSelectSheets.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -2283,7 +1815,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelectSheets.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lblImportingSheets.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 11.25pt</value>
@@ -2316,7 +1848,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblImportingSheets.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrChkSheetsCheckAll.Location" type="System.Drawing.Point, System.Drawing">
     <value>270, 66</value>
@@ -2340,7 +1872,7 @@ white spaces</value>
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkSheetsCheckAll.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrNudPreviewLines.Location" type="System.Drawing.Point, System.Drawing">
     <value>555, 227</value>
@@ -2386,30 +1918,6 @@ white spaces</value>
   </data>
   <data name="&gt;&gt;ucrPanelFixedWidthText.ZOrder" xml:space="preserve">
     <value>12</value>
-  </data>
-  <data name="ucrSaveFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 411</value>
-  </data>
-  <data name="ucrSaveFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ucrSaveFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>389, 24</value>
-  </data>
-  <data name="ucrSaveFile.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveFile.Name" xml:space="preserve">
-    <value>ucrSaveFile</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveFile.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveFile.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveFile.ZOrder" xml:space="preserve">
-    <value>15</value>
   </data>
   <data name="ucrInputFilePath.Location" type="System.Drawing.Point, System.Drawing">
     <value>47, 17</value>
@@ -2461,6 +1969,30 @@ white spaces</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>22</value>
+  </data>
+  <data name="ucrSaveFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 412</value>
+  </data>
+  <data name="ucrSaveFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrSaveFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 22</value>
+  </data>
+  <data name="ucrSaveFile.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveFile.Name" xml:space="preserve">
+    <value>ucrSaveFile</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveFile.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveFile.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveFile.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

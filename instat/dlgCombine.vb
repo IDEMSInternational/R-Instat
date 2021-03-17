@@ -63,7 +63,7 @@ Public Class dlgCombine
         ucrChkLexOrder.SetRDefault("FALSE")
 
         ' Input Column Name
-        ucrNewColName.SetIsTextBox()
+        ucrNewColName.SetIsComboBox()
         ucrNewColName.SetPrefix("Interact")
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)

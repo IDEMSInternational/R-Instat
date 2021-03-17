@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgCircularRosePlot
+Partial Class sdgMergeColumnsToInclude
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,31 +22,18 @@ Partial Class dlgCircularRosePlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgMergeColumnsToInclude))
         Me.SuspendLayout()
         '
-        'ucrBase
+        'sdgMergeColumnsToInclude
         '
-        Me.ucrBase.Location = New System.Drawing.Point(6, 240)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(406, 52)
-        Me.ucrBase.TabIndex = 0
-        '
-        'dlgCircularRosePlot
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 296)
-        Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgCircularRosePlot"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Rose Plot"
+        Me.Name = "sdgMergeColumnsToInclude"
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents ucrBase As ucrButtons
 End Class

@@ -56,7 +56,7 @@ Public Class dlgCombineText
         ucrInputSeparator.bAllowNonConditionValues = True
 
         ' ucrSaveColumn
-        ucrSaveColumn.SetIsTextBox()
+        ucrSaveColumn.SetIsComboBox()
         ucrSaveColumn.SetPrefix("Combine")
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorForCombineText.ucrAvailableDataFrames)
