@@ -80,12 +80,12 @@ Public Class dlgPICSARainfall
     Private clsGeomHlineAesLowerTercile As New RFunction
     Private clsGeomHlineAesUpperTercile As New RFunction
 
-    Private strFacetWrap As String = "Facet Wrap"
-    Private strFacetRow As String = "Facet Row"
-    Private strFacetCol As String = "Facet Column"
-    Private strXAxis As String = "X Axis"
-    Private strColour As String = "Colour Axis"
-    Private strNone As String = "None"
+    Private ReadOnly strFacetWrap As String = "Facet Wrap"
+    Private ReadOnly strFacetRow As String = "Facet Row"
+    Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strXAxis As String = "X Axis"
+    Private ReadOnly strColour As String = "Colour Axis"
+    Private ReadOnly strNone As String = "None"
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
