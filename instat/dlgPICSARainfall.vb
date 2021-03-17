@@ -659,8 +659,6 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
-        Dim ucrTempReciever As ucrReceiver = Nothing
-        Dim strChangedText As String = ""
 
         If bUpdateComboOptions Then
             strChangedText = ucrChangedControl.GetText()
