@@ -204,6 +204,8 @@ Partial Class frmMain
         Me.mnuClimaticTidyandExamineUnstack = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineMerge = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineAppend = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator69 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticDataEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator50 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticTidyandExamineOneVariableSummarize = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
@@ -649,8 +651,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticDataEntry = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator69 = New System.Windows.Forms.ToolStripSeparator()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1582,6 +1582,16 @@ Partial Class frmMain
         '
         Me.mnuClimaticTidyandExamineAppend.Name = "mnuClimaticTidyandExamineAppend"
         resources.ApplyResources(Me.mnuClimaticTidyandExamineAppend, "mnuClimaticTidyandExamineAppend")
+        '
+        'ToolStripSeparator69
+        '
+        Me.ToolStripSeparator69.Name = "ToolStripSeparator69"
+        resources.ApplyResources(Me.ToolStripSeparator69, "ToolStripSeparator69")
+        '
+        'mnuClimaticDataEntry
+        '
+        resources.ApplyResources(Me.mnuClimaticDataEntry, "mnuClimaticDataEntry")
+        Me.mnuClimaticDataEntry.Name = "mnuClimaticDataEntry"
         '
         'ToolStripSeparator50
         '
@@ -4112,16 +4122,6 @@ Partial Class frmMain
         '
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
-        '
-        'mnuClimaticDataEntry
-        '
-        Me.mnuClimaticDataEntry.Name = "mnuClimaticDataEntry"
-        resources.ApplyResources(Me.mnuClimaticDataEntry, "mnuClimaticDataEntry")
-        '
-        'ToolStripSeparator69
-        '
-        Me.ToolStripSeparator69.Name = "ToolStripSeparator69"
-        resources.ApplyResources(Me.ToolStripSeparator69, "ToolStripSeparator69")
         '
         'frmMain
         '
