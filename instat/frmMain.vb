@@ -2271,22 +2271,6 @@ Public Class frmMain
         dlgConditionalQuantilePlot.ShowDialog()
     End Sub
 
-    Private Sub mnuStructuredCircularOtherRosePlotsPolarPlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarPlot.Click
-        dlgPolarPlot.ShowDialog()
-    End Sub
-
-    Private Sub mnuStructuredCircularOtherRosePlotsPolarFrequency_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarFrequency.Click
-        dlgPolarFrequency.ShowDialog()
-    End Sub
-
-    Private Sub mnuStructuredCircularOtherRosePlotsPolarCluster_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarCluster.Click
-        dlgPolarCluster.ShowDialog()
-    End Sub
-
-    Private Sub mnuStructuredCircularOtherRosePlotsPolarAnnulus_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarAnnulus.Click
-        dlgPolarAnnulus.ShowDialog()
-    End Sub
-
     Private Sub ExportToWWRToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuExportToWWRToolStrip.Click
         dlgExportToWWR.ShowDialog()
     End Sub
@@ -2335,7 +2319,12 @@ Public Class frmMain
         dlgCircularDensityPlot.ShowDialog()
     End Sub
 
+
     Private Sub mnuClimaticDataEntry_Click(sender As Object, e As EventArgs) Handles mnuClimaticDataEntry.Click
         dlgClimaticDataEntry.ShowDialog()
+
+    Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
+        dlgOtherRosePlots.ShowDialog()
+
     End Sub
 End Class

@@ -537,11 +537,6 @@ Partial Class frmMain
         Me.mnuStructuredCircularWindRose = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredCircularWindPollutionRose = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredCircularOtherRosePlots = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularOtherRosePlotsPercentileRose = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularOtherRosePlotsPolarPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularOtherRosePlotsPolarFrequency = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularOtherRosePlotsPolarCluster = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuStructuredCircularOtherRosePlotsPolarAnnulus = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator68 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuStructuredCircularCirclize = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuStructuredLow_Flow = New System.Windows.Forms.ToolStripMenuItem()
@@ -3466,34 +3461,8 @@ Partial Class frmMain
         '
         'mnuStructuredCircularOtherRosePlots
         '
-        Me.mnuStructuredCircularOtherRosePlots.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStructuredCircularOtherRosePlotsPercentileRose, Me.mnuStructuredCircularOtherRosePlotsPolarPlot, Me.mnuStructuredCircularOtherRosePlotsPolarFrequency, Me.mnuStructuredCircularOtherRosePlotsPolarCluster, Me.mnuStructuredCircularOtherRosePlotsPolarAnnulus})
         Me.mnuStructuredCircularOtherRosePlots.Name = "mnuStructuredCircularOtherRosePlots"
         resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlots, "mnuStructuredCircularOtherRosePlots")
-        '
-        'mnuStructuredCircularOtherRosePlotsPercentileRose
-        '
-        Me.mnuStructuredCircularOtherRosePlotsPercentileRose.Name = "mnuStructuredCircularOtherRosePlotsPercentileRose"
-        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPercentileRose, "mnuStructuredCircularOtherRosePlotsPercentileRose")
-        '
-        'mnuStructuredCircularOtherRosePlotsPolarPlot
-        '
-        Me.mnuStructuredCircularOtherRosePlotsPolarPlot.Name = "mnuStructuredCircularOtherRosePlotsPolarPlot"
-        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarPlot, "mnuStructuredCircularOtherRosePlotsPolarPlot")
-        '
-        'mnuStructuredCircularOtherRosePlotsPolarFrequency
-        '
-        Me.mnuStructuredCircularOtherRosePlotsPolarFrequency.Name = "mnuStructuredCircularOtherRosePlotsPolarFrequency"
-        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarFrequency, "mnuStructuredCircularOtherRosePlotsPolarFrequency")
-        '
-        'mnuStructuredCircularOtherRosePlotsPolarCluster
-        '
-        Me.mnuStructuredCircularOtherRosePlotsPolarCluster.Name = "mnuStructuredCircularOtherRosePlotsPolarCluster"
-        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarCluster, "mnuStructuredCircularOtherRosePlotsPolarCluster")
-        '
-        'mnuStructuredCircularOtherRosePlotsPolarAnnulus
-        '
-        Me.mnuStructuredCircularOtherRosePlotsPolarAnnulus.Name = "mnuStructuredCircularOtherRosePlotsPolarAnnulus"
-        resources.ApplyResources(Me.mnuStructuredCircularOtherRosePlotsPolarAnnulus, "mnuStructuredCircularOtherRosePlotsPolarAnnulus")
         '
         'ToolStripSeparator68
         '
@@ -4801,11 +4770,6 @@ Partial Class frmMain
     Friend WithEvents mnuStructuredCircularCirclize As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
     Friend WithEvents mnuClimateFileImportFromClimSoftWizard As ToolStripMenuItem
-    Friend WithEvents mnuStructuredCircularOtherRosePlotsPercentileRose As ToolStripMenuItem
-    Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarPlot As ToolStripMenuItem
-    Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarFrequency As ToolStripMenuItem
-    Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarCluster As ToolStripMenuItem
-    Friend WithEvents mnuStructuredCircularOtherRosePlotsPolarAnnulus As ToolStripMenuItem
     Friend WithEvents mnuExportToWWRToolStrip As ToolStripMenuItem
     Friend WithEvents mnuViewStructuredMenu As ToolStripMenuItem
     Friend WithEvents mnuClimaticNCMP As ToolStripMenuItem
