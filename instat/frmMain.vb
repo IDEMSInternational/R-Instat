@@ -2319,7 +2319,11 @@ Public Class frmMain
         dlgCircularDensityPlot.ShowDialog()
     End Sub
 
+    Private Sub mnuClimaticDataEntry_Click(sender As Object, e As EventArgs) Handles mnuClimaticDataEntry.Click
+        dlgClimaticDataEntry.ShowDialog()
+    End Sub
     Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
         dlgOtherRosePlots.ShowDialog()
+
     End Sub
 End Class
