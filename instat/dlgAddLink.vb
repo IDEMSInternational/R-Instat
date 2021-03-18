@@ -20,7 +20,7 @@ Imports RDotNet
 Public Class dlgAddLink
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsAddLink As RFunction
+    Private clsAddLink, clsCreateLinkScript As RFunction
 
     Private Sub dlgAddLink_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -51,11 +51,14 @@ Public Class dlgAddLink
         ucrInputLinkName.SetParameter(New RParameter("link_name", 4))
         lvwLinkViewBox.Columns.Add("Name", 80, HorizontalAlignment.Left)
         lvwLinkViewBox.Columns.Add("Columns", 150, HorizontalAlignment.Left)
+
+        ucrInputSelectedKey.SetParameter(New RParameter("cols", 0))
         ucrInputSelectedKey.IsReadOnly = True
     End Sub
 
     Private Sub SetDefaults()
         clsAddLink = New RFunction
+        clsCreateLinkScript = New RFunction
 
         ucrDataSelectorFrom.Reset()
         ucrDataSelectorTo.Reset()
@@ -66,11 +69,23 @@ Public Class dlgAddLink
         clsAddLink.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_link")
         clsAddLink.AddParameter("type", Chr(34) & "keyed_link" & Chr(34), iPosition:=3)
 
+        clsCreateLinkScript.SetRCommand("cat")
+        clsCreateLinkScript.AddParameter("after_cols", Chr(34) & "used to create the link:" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddLink)
+
+        ucrBase.clsRsyntax.AddToAfterCodes(clsCreateLinkScript)
+        clsCreateLinkScript.iCallType = 2
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputLinkName.AddAdditionalCodeParameterPair(clsCreateLinkScript, New RParameter("link_name", 2), iAdditionalPairNo:=1)
+
+        ucrDataSelectorFrom.SetRCode(clsAddLink, bReset)
+        ucrDataSelectorTo.SetRCode(clsAddLink, bReset)
+        ucrInputLinkName.SetRCode(clsAddLink, bReset)
+        ucrInputSelectedKey.SetRCode(clsCreateLinkScript, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
