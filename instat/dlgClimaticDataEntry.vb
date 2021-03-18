@@ -16,6 +16,7 @@
 
 Imports instat.Translations
 Imports RDotNet
+Imports unvell.ReoGrid
 Public Class dlgClimaticDataEntry
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -47,12 +48,10 @@ Public Class dlgClimaticDataEntry
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.strSelectorHeading = "Factors"
 
-        ucrReceiverLevel.Selector = ucrSelectorClimaticDataEntry
-        ucrReceiverLevel.SetClimaticType("station")
-        ucrReceiverLevel.SetParameter(New RParameter("", 2))
-        ucrReceiverLevel.SetParameterIsString()
-        ucrReceiverLevel.bAutoFill = True
-        ucrReceiverLevel.strSelectorHeading = "Factors"
+        ucrInputFactorLevels.SetParameter(New RParameter("", 2))
+        ucrInputFactorLevels.SetFactorReceiver(ucrReceiverStation)
+        'ucrInputFactorLevels.AddQuotesIfUnrecognised = False
+        'ucrInputFactorLevels.strQuotes = "`"
 
         ucrReceiverDate.SetParameter(New RParameter("date_col", 3))
         ucrReceiverDate.Selector = ucrSelectorClimaticDataEntry
@@ -82,7 +81,7 @@ Public Class dlgClimaticDataEntry
 
     End Sub
     Private Sub TestOkEnabled()
-        If (Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverLevel.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty) Then
+        If (Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputFactorLevels.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -94,11 +93,11 @@ Public Class dlgClimaticDataEntry
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverDate.ControlValueChanged, ucrReceiverElements.ControlValueChanged
-        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty Then
-            Me.Width = iBasicWidth * 1.93
-        Else
-            Me.Width = iBasicWidth
-        End If
+    Public Sub FillGrid(grdDataEntry As ReoGridControl)
+
+    End Sub
+
+    Private Sub cmdEnterData_Click(sender As Object, e As EventArgs) Handles cmdEnterData.Click
+        sdgClimaticDataEntry.ShowDialog()
     End Sub
 End Class
