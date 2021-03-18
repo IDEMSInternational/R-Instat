@@ -109,6 +109,7 @@ Partial Class sdgPlots
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.tbpColour = New System.Windows.Forms.TabPage()
+        Me.ucrChkApplyChanges = New instat.ucrCheck()
         Me.ucrChkAddColourScale = New instat.ucrCheck()
         Me.ucrChkAddFillScale = New instat.ucrCheck()
         Me.grpColourScale = New System.Windows.Forms.GroupBox()
@@ -127,14 +128,13 @@ Partial Class sdgPlots
         Me.ucrNudFillScaleMapEnds = New instat.ucrNud()
         Me.ucrNudFillScaleMapBegins = New instat.ucrNud()
         Me.ucrInputFillScaleColour = New instat.ucrInputComboBox()
-        Me.ucrChkFilLScaleReverseColourOrder = New instat.ucrCheck()
+        Me.ucrChkFillScaleReverseColourOrder = New instat.ucrCheck()
         Me.ucrChkFillScaleDiscrete = New instat.ucrCheck()
         Me.lblFillScaleMapEnds = New System.Windows.Forms.Label()
         Me.lblFillScaleBeginColour = New System.Windows.Forms.Label()
         Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
         Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkApplyChanges = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -691,6 +691,12 @@ Partial Class sdgPlots
         Me.tbpColour.Name = "tbpColour"
         Me.tbpColour.UseVisualStyleBackColor = True
         '
+        'ucrChkApplyChanges
+        '
+        Me.ucrChkApplyChanges.Checked = False
+        resources.ApplyResources(Me.ucrChkApplyChanges, "ucrChkApplyChanges")
+        Me.ucrChkApplyChanges.Name = "ucrChkApplyChanges"
+        '
         'ucrChkAddColourScale
         '
         Me.ucrChkAddColourScale.Checked = False
@@ -795,7 +801,7 @@ Partial Class sdgPlots
         Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleMapEnds)
         Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleMapBegins)
         Me.grpFillScale.Controls.Add(Me.ucrInputFillScaleColour)
-        Me.grpFillScale.Controls.Add(Me.ucrChkFilLScaleReverseColourOrder)
+        Me.grpFillScale.Controls.Add(Me.ucrChkFillScaleReverseColourOrder)
         Me.grpFillScale.Controls.Add(Me.ucrChkFillScaleDiscrete)
         Me.grpFillScale.Controls.Add(Me.lblFillScaleMapEnds)
         Me.grpFillScale.Controls.Add(Me.lblFillScaleBeginColour)
@@ -843,11 +849,11 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrInputFillScaleColour, "ucrInputFillScaleColour")
         Me.ucrInputFillScaleColour.Name = "ucrInputFillScaleColour"
         '
-        'ucrChkFilLScaleReverseColourOrder
+        'ucrChkFillScaleReverseColourOrder
         '
-        Me.ucrChkFilLScaleReverseColourOrder.Checked = False
-        resources.ApplyResources(Me.ucrChkFilLScaleReverseColourOrder, "ucrChkFilLScaleReverseColourOrder")
-        Me.ucrChkFilLScaleReverseColourOrder.Name = "ucrChkFilLScaleReverseColourOrder"
+        Me.ucrChkFillScaleReverseColourOrder.Checked = False
+        resources.ApplyResources(Me.ucrChkFillScaleReverseColourOrder, "ucrChkFillScaleReverseColourOrder")
+        Me.ucrChkFillScaleReverseColourOrder.Name = "ucrChkFillScaleReverseColourOrder"
         '
         'ucrChkFillScaleDiscrete
         '
@@ -879,12 +885,6 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        '
-        'ucrChkApplyChanges
-        '
-        Me.ucrChkApplyChanges.Checked = False
-        resources.ApplyResources(Me.ucrChkApplyChanges, "ucrChkApplyChanges")
-        Me.ucrChkApplyChanges.Name = "ucrChkApplyChanges"
         '
         'sdgPlots
         '
@@ -1000,7 +1000,7 @@ Partial Class sdgPlots
     Friend WithEvents lblFillScaleBeginColour As Label
     Friend WithEvents lblFillScaleColourPalettte As Label
     Friend WithEvents lblFillScaleTransparency As Label
-    Friend WithEvents ucrChkFilLScaleReverseColourOrder As ucrCheck
+    Friend WithEvents ucrChkFillScaleReverseColourOrder As ucrCheck
     Friend WithEvents ucrChkFillScaleDiscrete As ucrCheck
     Friend WithEvents grpColourScale As GroupBox
     Friend WithEvents ucrNudColourScaleTransparency As ucrNud

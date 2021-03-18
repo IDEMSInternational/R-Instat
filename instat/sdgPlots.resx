@@ -1738,7 +1738,7 @@
     <value>20, 217</value>
   </data>
   <data name="ucrChkApplyChanges.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>246, 20</value>
   </data>
   <data name="ucrChkApplyChanges.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -1759,7 +1759,7 @@
     <value>20, 197</value>
   </data>
   <data name="ucrChkAddColourScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>209, 20</value>
   </data>
   <data name="ucrChkAddColourScale.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -1780,7 +1780,7 @@
     <value>23, 6</value>
   </data>
   <data name="ucrChkAddFillScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>243, 20</value>
   </data>
   <data name="ucrChkAddFillScale.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -2151,25 +2151,25 @@
   <data name="&gt;&gt;ucrInputFillScaleColour.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrChkFilLScaleReverseColourOrder.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrChkFillScaleReverseColourOrder.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 118</value>
   </data>
-  <data name="ucrChkFilLScaleReverseColourOrder.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrChkFillScaleReverseColourOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
   </data>
-  <data name="ucrChkFilLScaleReverseColourOrder.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrChkFillScaleReverseColourOrder.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="&gt;&gt;ucrChkFilLScaleReverseColourOrder.Name" xml:space="preserve">
-    <value>ucrChkFilLScaleReverseColourOrder</value>
+  <data name="&gt;&gt;ucrChkFillScaleReverseColourOrder.Name" xml:space="preserve">
+    <value>ucrChkFillScaleReverseColourOrder</value>
   </data>
-  <data name="&gt;&gt;ucrChkFilLScaleReverseColourOrder.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkFillScaleReverseColourOrder.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkFilLScaleReverseColourOrder.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkFillScaleReverseColourOrder.Parent" xml:space="preserve">
     <value>grpFillScale</value>
   </data>
-  <data name="&gt;&gt;ucrChkFilLScaleReverseColourOrder.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkFillScaleReverseColourOrder.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="ucrChkFillScaleDiscrete.Location" type="System.Drawing.Point, System.Drawing">

@@ -44,6 +44,7 @@ Public Class sdgPlots
     Public strDataFrame As String
     Private bAdditionalLayersSetGlobal As Boolean
     Private clsFacetVariablesOperator As New ROperator
+    Private clsAestheticFunction As New RFunction
     Private strFirstVariable As String
     Private strSecondvariable As String
     Private clsThemeFunction As New RFunction
@@ -77,6 +78,10 @@ Public Class sdgPlots
         Dim dctOptions As New Dictionary(Of String, String)
 
         Dim strThemes As String()
+
+        clsAestheticFunction.SetRCommand("c")
+        clsAestheticFunction.AddParameter("fill", Chr(34) & "fill" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
+        clsAestheticFunction.AddParameter("colour", Chr(34) & "colour" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
 
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
@@ -365,9 +370,9 @@ Public Class sdgPlots
         ucrNudFillScaleMapEnds.Increment = 0.01
         ucrNudFillScaleMapEnds.SetLinkedDisplayControl(lblFillScaleMapEnds)
 
-        ucrChkFilLScaleReverseColourOrder.SetParameter(New RParameter("direction", iNewPosition:=4))
-        ucrChkFilLScaleReverseColourOrder.SetText("Reverse Order Of Colours")
-        ucrChkFilLScaleReverseColourOrder.SetValuesCheckedAndUnchecked("1", "-1")
+        ucrChkFillScaleReverseColourOrder.SetParameter(New RParameter("direction", iNewPosition:=4))
+        ucrChkFillScaleReverseColourOrder.SetText("Reverse Order Of Colours")
+        ucrChkFillScaleReverseColourOrder.SetValuesCheckedAndUnchecked("-1", "1")
 
         ucrChkAddFillScale.SetText("Add Fill Scale")
         ucrChkAddFillScale.AddParameterPresentCondition(True, "scale_fill", True)
@@ -401,15 +406,18 @@ Public Class sdgPlots
 
         ucrChkColourScaleReverseOrder.SetParameter(New RParameter("direction", iNewPosition:=4))
         ucrChkColourScaleReverseOrder.SetText("Reverse Order Of Colours")
-        ucrChkColourScaleReverseOrder.SetValuesCheckedAndUnchecked("1", "-1")
+        ucrChkColourScaleReverseOrder.SetValuesCheckedAndUnchecked("-1", "1")
 
-        ucrChkApplyChanges.SetText("Apply changes to colour scale")
+        ucrChkApplyChanges.AddParameterPresentCondition(True, "aesthetics", True)
+        ucrChkApplyChanges.AddParameterPresentCondition(False, "aesthetics", False)
+
+        ucrChkApplyChanges.SetText("Apply Changes to Colour Scale")
         ucrChkFillScaleDiscrete.SetText("Discrete")
         ucrChkColourScaleDiscrete.SetText("Discrete")
 
-        grpFillScale.Visible = False
-        grpColourScale.Visible = False
-
+        grpFillScale.Enabled = False
+        grpColourScale.Enabled = False
+        ucrChkApplyChanges.Enabled = False
     End Sub
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction, clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector, bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing,
@@ -514,7 +522,7 @@ Public Class sdgPlots
         ucrNudFillScaleTransparency.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrNudFillScaleMapBegins.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrNudFillScaleMapEnds.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkFilLScaleReverseColourOrder.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkFillScaleReverseColourOrder.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkAddFillScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrChkAddColourScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
         ucrInputColourScalePalette.SetRCode(clsScaleColourViridisFunction, bReset)
@@ -522,6 +530,7 @@ Public Class sdgPlots
         ucrNudColourScaleMapBegins.SetRCode(clsScaleColourViridisFunction, bReset)
         ucrNudColourScaleMapEnds.SetRCode(clsScaleColourViridisFunction, bReset)
         ucrChkColourScaleReverseOrder.SetRCode(clsScaleColourViridisFunction, bReset)
+        ucrChkApplyChanges.SetRCode(clsScaleColourViridisFunction, bReset)
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
         bRCodeSet = True
@@ -884,23 +893,33 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrChkAddColoutPalette_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFillScale.ControlValueChanged
+    Private Sub ucrChkAddFillScale_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFillScale.ControlValueChanged
         If ucrChkAddFillScale.Checked Then
             clsBaseOperator.AddParameter("scale_fill", clsRFunctionParameter:=clsScaleFillViridisFunction, iPosition:=3)
-            grpFillScale.Visible = True
+            grpFillScale.Enabled = True
         Else
             clsBaseOperator.RemoveParameterByName("scale_fill")
-            grpFillScale.Visible = False
+            grpFillScale.Enabled = False
         End If
     End Sub
 
     Private Sub ucrChkAddColourScale_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddColourScale.ControlValueChanged
         If ucrChkAddColourScale.Checked Then
             clsBaseOperator.AddParameter("scale_colour", clsRFunctionParameter:=clsScaleColourViridisFunction, iPosition:=4)
-            grpColourScale.Visible = True
+            grpColourScale.Enabled = True
+            ucrChkApplyChanges.Enabled = True
         Else
             clsBaseOperator.RemoveParameterByName("scale_colour")
-            grpColourScale.Visible = False
+            grpColourScale.Enabled = False
+            ucrChkApplyChanges.Enabled = False
+        End If
+    End Sub
+
+    Private Sub ucrChkApplyChanges_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkApplyChanges.ControlValueChanged
+        If ucrChkApplyChanges.Checked Then
+            clsScaleColourViridisFunction.AddParameter("aesthetics", clsRFunctionParameter:=clsAestheticFunction, iPosition:=6)
+        Else
+            clsScaleColourViridisFunction.RemoveParameterByName("aesthetics")
         End If
     End Sub
 End Class
