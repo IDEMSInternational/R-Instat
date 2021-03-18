@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgWindPollutionRose
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class dlgWindPollutionRose
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblColor = New System.Windows.Forms.Label()
         Me.lblStatistic = New System.Windows.Forms.Label()
@@ -50,8 +50,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrSelectorWindPollutionRose = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputKeyPosition = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblFacetTwo = New System.Windows.Forms.Label()
-        Me.ucrInputFacetTwo = New instat.ucrInputTextBox()
+        Me.ucrInputStation = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblColor
@@ -84,11 +83,11 @@ Partial Class dlgWindPollutionRose
         'lblFacetOne
         '
         Me.lblFacetOne.AutoSize = True
-        Me.lblFacetOne.Location = New System.Drawing.Point(411, 84)
+        Me.lblFacetOne.Location = New System.Drawing.Point(411, 131)
         Me.lblFacetOne.Name = "lblFacetOne"
-        Me.lblFacetOne.Size = New System.Drawing.Size(46, 13)
+        Me.lblFacetOne.Size = New System.Drawing.Size(85, 13)
         Me.lblFacetOne.TabIndex = 16
-        Me.lblFacetOne.Text = "Facet 1:"
+        Me.lblFacetOne.Text = "Facet (Optional):"
         '
         'lblWindDirection2
         '
@@ -218,7 +217,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrInputFacetOne.AddQuotesIfUnrecognised = True
         Me.ucrInputFacetOne.GetSetSelectedIndex = -1
         Me.ucrInputFacetOne.IsReadOnly = False
-        Me.ucrInputFacetOne.Location = New System.Drawing.Point(416, 100)
+        Me.ucrInputFacetOne.Location = New System.Drawing.Point(414, 147)
         Me.ucrInputFacetOne.Name = "ucrInputFacetOne"
         Me.ucrInputFacetOne.Size = New System.Drawing.Size(130, 21)
         Me.ucrInputFacetOne.TabIndex = 15
@@ -327,32 +326,22 @@ Partial Class dlgWindPollutionRose
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 25
         '
-        'lblFacetTwo
+        'ucrInputStation
         '
-        Me.lblFacetTwo.AutoSize = True
-        Me.lblFacetTwo.Location = New System.Drawing.Point(411, 131)
-        Me.lblFacetTwo.Name = "lblFacetTwo"
-        Me.lblFacetTwo.Size = New System.Drawing.Size(94, 13)
-        Me.lblFacetTwo.TabIndex = 29
-        Me.lblFacetTwo.Text = "Facet 2 (Optional):"
-        '
-        'ucrInputFacetTwo
-        '
-        Me.ucrInputFacetTwo.AddQuotesIfUnrecognised = True
-        Me.ucrInputFacetTwo.IsMultiline = False
-        Me.ucrInputFacetTwo.IsReadOnly = False
-        Me.ucrInputFacetTwo.Location = New System.Drawing.Point(417, 147)
-        Me.ucrInputFacetTwo.Name = "ucrInputFacetTwo"
-        Me.ucrInputFacetTwo.Size = New System.Drawing.Size(129, 21)
-        Me.ucrInputFacetTwo.TabIndex = 30
+        Me.ucrInputStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputStation.GetSetSelectedIndex = -1
+        Me.ucrInputStation.IsReadOnly = False
+        Me.ucrInputStation.Location = New System.Drawing.Point(414, 101)
+        Me.ucrInputStation.Name = "ucrInputStation"
+        Me.ucrInputStation.Size = New System.Drawing.Size(82, 21)
+        Me.ucrInputStation.TabIndex = 28
         '
         'dlgWindPollutionRose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(558, 462)
-        Me.Controls.Add(Me.ucrInputFacetTwo)
-        Me.Controls.Add(Me.lblFacetTwo)
+        Me.Controls.Add(Me.ucrInputStation)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.UcrReceiverStation)
         Me.Controls.Add(Me.lblDate)
@@ -419,6 +408,5 @@ Partial Class dlgWindPollutionRose
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblStation As Label
     Friend WithEvents UcrReceiverStation As ucrReceiverSingle
-    Friend WithEvents lblFacetTwo As Label
-    Friend WithEvents ucrInputFacetTwo As ucrInputTextBox
+    Friend WithEvents ucrInputStation As ucrInputComboBox
 End Class

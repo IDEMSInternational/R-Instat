@@ -111,10 +111,6 @@ Public Class dlgWindPollutionRose
         ucrInputFacetOne.SetItems(dctType)
         ucrInputFacetOne.SetDropDownStyleAsEditable(True)
 
-        ucrInputFacetTwo.SetParameter(New RParameter("type2", 2))
-        ucrInputFacetTwo.AddQuotesIfUnrecognised = True
-
-
         ucrInputKeyPosition.SetParameter(New RParameter("key.position", 10))
         dctPosition.Add("Top", Chr(34) & "top" & Chr(34))
         dctPosition.Add("Right", Chr(34) & "right" & Chr(34))
@@ -224,13 +220,13 @@ Public Class dlgWindPollutionRose
     '    End If
     'End Sub
 
-    Private Sub ucrInputFacetTwo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFacetTwo.ControlValueChanged
-        If bRcodeSet Then
-            If Not ucrInputFacetTwo.IsEmpty Then
-                clsCombineValues.AddParameter("type2", ucrInputFacetTwo.GetParameter.strArgumentValue, bIncludeArgumentName:=False, iPosition:=2)
-            Else
-                clsCombineValues.RemoveParameterByName("type2")
-            End If
-        End If
-    End Sub
+    'Private Sub ucrInputFacetTwo_ControlValueChanged(ucrChangedControl As ucrCore)
+    '    If bRcodeSet Then
+    '        If Not ucrInputFacetTwo.IsEmpty Then
+    '            clsCombineValues.AddParameter("type2", ucrInputFacetTwo.GetParameter.strArgumentValue, bIncludeArgumentName:=False, iPosition:=2)
+    '        Else
+    '            clsCombineValues.RemoveParameterByName("type2")
+    '        End If
+    '    End If
+    'End Sub
 End Class
