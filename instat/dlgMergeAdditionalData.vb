@@ -202,7 +202,7 @@ Public Class dlgMergeAdditionalData
                     Next
                     bBySpecified = True
                 Else
-                    strMergeBy = "No columns with the same name. Click 'Modify' to specify merging columns."
+                    strMergeBy = "No columns with the same name. Click 'Join Options' to specify merging columns."
                     bBySpecified = False
                 End If
             End If

@@ -21,7 +21,6 @@ Public Class sdgMergeColumnstoInclude
     Private bControlsInitialised As Boolean = False
     Private clsByList As New RFunction
     Private clsMerge As RFunction
-    Private bEnableColumnSelection As Boolean = True
 
     Private Sub sdgMerge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -64,7 +63,6 @@ Public Class sdgMergeColumnstoInclude
             ucrSelectorColumnsToIncludeFirst.SetDataframe(strFirstDataName, False)
             ucrSelectorColumnsToIncludeSecond.SetDataframe(strSecondDataName, False)
         End If
-        bEnableColumnSelection = bNewEnableColumnSelection
         clsMerge = clsNewMerge
         clsByList = clsNewByList
 

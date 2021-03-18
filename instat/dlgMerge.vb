@@ -229,9 +229,11 @@ Public Class dlgMerge
                 Next
                 ucrInputMergingBy.SetName(String.Join(", ", lstJoinPairs))
                 ucrInputMergingBy.txtInput.BackColor = SystemColors.Control
+                cmdJoinOptions.BackColor = SystemColors.ControlLight
             Else
                 ucrInputMergingBy.SetName("No columns to merge by!" & Environment.NewLine & "Click Join Options to specify merging columns.")
                 ucrInputMergingBy.txtInput.BackColor = Color.LightCoral
+                cmdJoinOptions.BackColor = Color.LemonChiffon
             End If
         Else
             ucrInputMergingBy.SetName("")

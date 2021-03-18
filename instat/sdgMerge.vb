@@ -21,7 +21,6 @@ Public Class sdgMerge
     Private bControlsInitialised As Boolean = False
     Private clsByList As New RFunction
     Private clsMerge As RFunction
-    Private bEnableColumnSelection As Boolean = True
 
     Private Sub sdgMerge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -47,7 +46,6 @@ Public Class sdgMerge
         ucrSelectorFirstDF.SetDataframe(strFirstDataName, False)
         ucrSelectorSecondDF.SetDataframe(strSecondDataName, False)
 
-        bEnableColumnSelection = bNewEnableColumnSelection
         clsMerge = clsNewMerge
         clsByList = clsNewByList
         ResetKeyList()

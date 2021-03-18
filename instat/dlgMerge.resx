@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdJoinOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 131</value>
+    <value>10, 150</value>
   </data>
   <data name="cmdJoinOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 23</value>
@@ -187,13 +187,13 @@
     <value>9, 95</value>
   </data>
   <data name="lblMergeBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>63, 13</value>
+    <value>58, 13</value>
   </data>
   <data name="lblMergeBy.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="lblMergeBy.Text" xml:space="preserve">
-    <value>Merging By:</value>
+    <value>Joining By:</value>
   </data>
   <data name="&gt;&gt;lblMergeBy.Name" xml:space="preserve">
     <value>lblMergeBy</value>
@@ -211,7 +211,7 @@
     <value>87, 92</value>
   </data>
   <data name="ucrInputMergingBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 33</value>
+    <value>278, 52</value>
   </data>
   <data name="ucrInputMergingBy.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -229,7 +229,7 @@
     <value>1</value>
   </data>
   <data name="ucrSaveMerge.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 191</value>
+    <value>10, 209</value>
   </data>
   <data name="ucrSaveMerge.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -322,7 +322,7 @@
     <value>7</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 223</value>
+    <value>10, 236</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 53</value>
@@ -346,7 +346,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdColumnOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 160</value>
+    <value>10, 179</value>
   </data>
   <data name="cmdColumnOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 23</value>
@@ -355,7 +355,7 @@
     <value>7</value>
   </data>
   <data name="cmdColumnOptions.Text" xml:space="preserve">
-    <value>Column Options</value>
+    <value>Column Selection</value>
   </data>
   <data name="&gt;&gt;cmdColumnOptions.Name" xml:space="preserve">
     <value>cmdColumnOptions</value>
@@ -376,7 +376,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>417, 282</value>
+    <value>416, 292</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
