@@ -42,6 +42,7 @@ Public Class dlgFitModel
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
+            ucrChkConvertToVariate.Visible = False
         End If
         If bReset Then
             SetDefaults()
@@ -391,18 +392,24 @@ Public Class dlgFitModel
         clsFamilyFunction.RemoveParameterByName("link")
     End Sub
 
-    Private Sub ucrReceiverResponseVar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponseVar.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged, ucrReceiverResponseVar.ControlValueChanged
+    Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged
         ChooseRFunction()
         ResponseConvert()
     End Sub
 
-    Private Sub ucrConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
+    Private Sub ucrReceiverResponseVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponseVar.ControlValueChanged
+        ChooseRFunction()
         ResponseConvert()
-        TestOKEnabled()
+        ResponseVariableType()
+    End Sub
+
+    Private Sub ucrConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
+        ResponseVariableType()
+        ResponseConvert()
     End Sub
 
     Private Sub ucrReceiverExpressionFitModel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlContentsChanged, ucrReceiverResponseVar.ControlContentsChanged
@@ -419,12 +426,16 @@ Public Class dlgFitModel
         If bRCodeSet Then
             If Not ucrReceiverResponseVar.IsEmpty() Then
                 strVariableType = ucrFamily.strDataType
-                If strVariableType.Contains("numeric") Then
-                    strVariableType = "numeric"
-                ElseIf strVariableType.Contains("positive integer") Then
+                If strVariableType.Contains("positive integer") Then
                     strVariableType = "positive integer"
                 ElseIf strVariableType.Contains("two level numeric") OrElse strVariableType.Contains("two level factor") Then
                     strVariableType = "binary"
+                ElseIf strVariableType.Contains("numeric") Then
+                    strVariableType = "numeric"
+                ElseIf strVariableType.Contains("logical") Then
+                    strVariableType = "logical"
+                ElseIf strVariableType.Contains("factor") Then
+                    strVariableType = "factor"
                 Else
                     strVariableType = "unsuitable type"
                 End If

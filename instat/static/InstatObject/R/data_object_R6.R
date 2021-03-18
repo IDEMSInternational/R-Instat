@@ -1395,7 +1395,7 @@ DataSheet$set("public", "get_data_type", function(col_name = "") {
   if(is.character(curr_col)) {
     type = "character"
   }
-  else if(is.logical(private$data[[col_name]])) {
+  else if(is.logical(curr_col)) {
     type = "logical"
   }
   else if(lubridate::is.Date(private$data[[col_name]])){
