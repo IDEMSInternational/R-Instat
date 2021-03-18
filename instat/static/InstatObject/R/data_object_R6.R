@@ -1657,7 +1657,7 @@ DataSheet$set("public", "add_object", function(object, object_name) {
   if(object_name %in% names(private$objects)) message("An object called ", object_name, " already exists. It will be replaced.")
   private$objects[[object_name]] <- object
   self$append_to_changes(list(Added_object, object_name))
-  if(any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair") %in% class(object))) {
+  if(any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair","recordedplot") %in% class(object))) {
     private$.last_graph <- object_name
   }
 }
@@ -1681,7 +1681,7 @@ DataSheet$set("public", "get_object_names", function(type = "", as_list = FALSE,
   if(type == "") out = names(private$objects)
   else {
     if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
-    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair") %in% class(x)))]
+    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair","recordedplot") %in% class(x)))]
     else if(type == surv_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("Surv") %in% class(x)))]
     else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame", "list") %in% class(x)))]
     else stop("type: ", type, " not recognised")
