@@ -47,9 +47,9 @@ Public Class dlgCircularDensityPlot
         ucrPnlOptions.AddRadioButton(rdoDensity)
         ucrPnlOptions.AddRadioButton(rdoScatterPlot)
 
-        ucrPnlOptions.AddFunctionNamesCondition(rdoRosePlot, "rose.diag")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoDensity, "record_graph")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoScatterPlot, "plot.circular")
+        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoRosePlot, "x", "rose.diag")
+        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoDensity, "x", "plot")
+        ucrPnlOptions.AddParameterValueFunctionNamesCondition(rdoScatterPlot, "x", "plot.circular")
 
         ucrPnlOptions.AddToLinkedControls(ucrInputBandWidth, {rdoDensity}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrInputbins, {rdoRosePlot}, bNewLinkedHideIfParameterMissing:=True)
@@ -120,6 +120,14 @@ Public Class dlgCircularDensityPlot
         clsDensityFunction.AddParameter("kernel", Chr(34) & "vonmises" & Chr(34), iPosition:=2)
         clsDensityFunction.AddParameter("na.rm", "TRUE", iPosition:=3)
 
+        clsDensityPlotFunction.SetRCommand("plot")
+        clsDensityPlotFunction.AddParameter("x", clsRFunctionParameter:=clsDensityFunction, iPosition:=0)
+        clsDensityPlotFunction.AddParameter("main", Chr(34) & " " & Chr(34), iPosition:=1)
+        clsDensityPlotFunction.AddParameter("xlab", Chr(34) & " " & Chr(34), iPosition:=2)
+        clsDensityPlotFunction.AddParameter("ylab", Chr(34) & " " & Chr(34), iPosition:=3)
+        clsDensityPlotFunction.AddParameter("shrink", 1.3, iPosition:=4)
+        clsDensityPlotFunction.AddParameter("units", Chr(34) & "degrees" & Chr(34), iPosition:=5)
+
         clsRosePlotFunction.SetPackageName("circular")
         clsRosePlotFunction.SetRCommand("rose.diag")
         clsRosePlotFunction.AddParameter("na.rm", "TRUE", iPosition:=3)
@@ -138,31 +146,16 @@ Public Class dlgCircularDensityPlot
         clsScatterPlotFunction.AddParameter("kernel", Chr(34) & "vonmises" & Chr(34), iPosition:=7)
         clsScatterPlotFunction.AddParameter("units", Chr(34) & "degrees" & Chr(34), iPosition:=8)
 
-
-        clsDensityPlotFunction.SetRCommand("plot")
-        clsDensityPlotFunction.AddParameter("x", clsRFunctionParameter:=clsDensityFunction, bIncludeArgumentName:=False, iPosition:=0)
-
-        clsDensityPlotFunction.AddParameter("main", Chr(34) & " " & Chr(34), bIncludeArgumentName:=True, iPosition:=1)
-        clsDensityPlotFunction.AddParameter("xlab", Chr(34) & " " & Chr(34), bIncludeArgumentName:=True, iPosition:=2)
-        clsDensityPlotFunction.AddParameter("ylab", Chr(34) & " " & Chr(34), bIncludeArgumentName:=True, iPosition:=3)
-        clsDensityPlotFunction.AddParameter("shrink", 1.3, bIncludeArgumentName:=True, iPosition:=4)
-        clsDensityPlotFunction.AddParameter("units", Chr(34) & "degrees" & Chr(34), iPosition:=5)
-
         clsRecordGraphFunction.SetRCommand("record_graph")
-        clsRecordGraphFunction.AddParameter("x", clsRFunctionParameter:=clsDensityPlotFunction, bIncludeArgumentName:=False, iPosition:=0)
+        clsRecordGraphFunction.AddParameter("x", clsRFunctionParameter:=clsDensityPlotFunction, iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsRecordGraphFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        'ucrInputBandWidth.AddAdditionalCodeParameterPair(clsDensityFunction, ucrInputBandWidth.GetParameter(), iAdditionalPairNo:=1)
-        'ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsDensityFunction, ucrChkOmitMissing.GetParameter(), iAdditionalPairNo:=1)
-        'ucrInputComboKernel.AddAdditionalCodeParameterPair(clsDensityFunction, ucrInputComboKernel.GetParameter(), iAdditionalPairNo:=1)
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrSaveDensity.SetRCode(clsRecordGraphFunction, bReset)
-        ucrSaveDensity.AddAdditionalRCode(clsRosePlotFunction, iAdditionalPairNo:=1)
-        ucrSaveDensity.AddAdditionalRCode(clsScatterPlotFunction, iAdditionalPairNo:=2)
 
         ucrReceiverVariable.SetRCode(clsDensityFunction, bReset)
         ucrReceiverVariable.AddAdditionalCodeParameterPair(clsRosePlotFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
@@ -173,7 +166,6 @@ Public Class dlgCircularDensityPlot
         ucrInputComboKernel.AddAdditionalCodeParameterPair(clsRosePlotFunction, New RParameter("kernel", 7), iAdditionalPairNo:=1)
         ucrInputComboKernel.AddAdditionalCodeParameterPair(clsScatterPlotFunction, New RParameter("kernel", 7), iAdditionalPairNo:=2)
 
-
         ucrInputUnits.SetRCode(clsDensityPlotFunction, bReset)
         ucrInputUnits.AddAdditionalCodeParameterPair(clsRosePlotFunction, New RParameter("units", 2), iAdditionalPairNo:=1)
         ucrInputUnits.AddAdditionalCodeParameterPair(clsScatterPlotFunction, New RParameter("units", 2), iAdditionalPairNo:=2)
@@ -181,7 +173,6 @@ Public Class dlgCircularDensityPlot
         ucrChkOmitMissing.SetRCode(clsDensityFunction, bReset)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsRosePlotFunction, New RParameter("na.rm", 1), iAdditionalPairNo:=1)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsScatterPlotFunction, New RParameter("na.rm", 1), iAdditionalPairNo:=2)
-
     End Sub
 
     Private Sub TestOkEnabled()
@@ -204,13 +195,13 @@ Public Class dlgCircularDensityPlot
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoDensity.Checked Then
-            clsRecordGraphFunction.AddParameter("x", clsRFunctionParameter:=clsDensityPlotFunction, bIncludeArgumentName:=False, iPosition:=0)
+            clsRecordGraphFunction.AddParameter("x", clsRFunctionParameter:=clsDensityPlotFunction, iPosition:=0)
             ucrSaveDensity.SetPrefix("density_plot")
         ElseIf rdoRosePlot.Checked Then
-            clsRecordGraphFunction.AddParameter("x", clsRFunctionParameter:=clsRosePlotFunction, bIncludeArgumentName:=False, iPosition:=0)
+            clsRecordGraphFunction.AddParameter("x", clsRFunctionParameter:=clsRosePlotFunction, iPosition:=0)
             ucrSaveDensity.SetPrefix("rose_plot")
         ElseIf rdoScatterPlot.Checked Then
-            clsRecordGraphFunction.AddParameter("x", clsRFunctionParameter:=clsScatterPlotFunction, bIncludeArgumentName:=False, iPosition:=0)
+            clsRecordGraphFunction.AddParameter("x", clsRFunctionParameter:=clsScatterPlotFunction, iPosition:=0)
             ucrSaveDensity.SetPrefix("scatter_plot")
         End If
     End Sub
