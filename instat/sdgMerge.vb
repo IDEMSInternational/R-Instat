@@ -39,7 +39,7 @@ Public Class sdgMerge
         bControlsInitialised = True
     End Sub
 
-    Public Sub Setup(strFirstDataName As String, strSecondDataName As String, clsNewMerge As RFunction, clsNewByList As RFunction, bReset As Boolean, Optional bNewEnableColumnSelection As Boolean = True)
+    Public Sub Setup(strFirstDataName As String, strSecondDataName As String, clsNewMerge As RFunction, clsNewByList As RFunction, bReset As Boolean)
         If Not bControlsInitialised Then
             InitiatiseControls()
         End If

@@ -22,7 +22,7 @@ Partial Class sdgMergeColumnstoInclude
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgMergeColumnsToInclude))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgMergeColumnstoInclude))
         Me.ucrChkMergeWithSubsetSecond = New instat.ucrCheck()
         Me.ucrChkMergeWithSubsetFirst = New instat.ucrCheck()
         Me.lblVariablesToIncludeSecond = New System.Windows.Forms.Label()
@@ -95,7 +95,7 @@ Partial Class sdgMergeColumnstoInclude
         resources.ApplyResources(Me.ucrSubBase, "ucrSubBase")
         Me.ucrSubBase.Name = "ucrSubBase"
         '
-        'sdgMergeColumnsToInclude
+        'sdgMergeColumnstoInclude
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -111,7 +111,7 @@ Partial Class sdgMergeColumnstoInclude
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "sdgMergeColumnsToInclude"
+        Me.Name = "sdgMergeColumnstoInclude"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

@@ -172,13 +172,13 @@
     <value>252, 228</value>
   </data>
   <data name="lblVariablesToIncludeSecond.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 13</value>
+    <value>103, 13</value>
   </data>
   <data name="lblVariablesToIncludeSecond.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="lblVariablesToIncludeSecond.Text" xml:space="preserve">
-    <value>Variables To Include:</value>
+    <value>Variables to Include:</value>
   </data>
   <data name="&gt;&gt;lblVariablesToIncludeSecond.Name" xml:space="preserve">
     <value>lblVariablesToIncludeSecond</value>
@@ -202,13 +202,13 @@
     <value>13, 228</value>
   </data>
   <data name="lblVariablesToIncludeFirst.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 13</value>
+    <value>103, 13</value>
   </data>
   <data name="lblVariablesToIncludeFirst.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="lblVariablesToIncludeFirst.Text" xml:space="preserve">
-    <value>Variable To Include:</value>
+    <value>Variables to Include:</value>
   </data>
   <data name="&gt;&gt;lblVariablesToIncludeFirst.Name" xml:space="preserve">
     <value>lblVariablesToIncludeFirst</value>
@@ -331,7 +331,7 @@
     <value>Columns to Include</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>sdgMergeColumnsToInclude</value>
+    <value>sdgMergeColumnstoInclude</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
