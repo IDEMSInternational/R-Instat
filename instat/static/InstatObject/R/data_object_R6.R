@@ -1418,7 +1418,7 @@ DataSheet$set("public", "get_data_type", function(col_name = "") {
       else type = "numeric"
   }
   else if(is.factor(curr_col)) {
-    if(nlevels(curr_col)==2 | nlevels(factor(curr_col))==2) type = "two level factor"
+    if(nlevels(curr_col) == 2 || nlevels(factor(curr_col)) == 2) type = "two level factor"
     else if(length(levels(curr_col))>2) type = "multilevel factor"
     else type = "factor"
   }
