@@ -184,7 +184,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMergeBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 95</value>
+    <value>9, 96</value>
   </data>
   <data name="lblMergeBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -208,7 +208,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputMergingBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 92</value>
+    <value>87, 93</value>
   </data>
   <data name="ucrInputMergingBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>278, 52</value>
@@ -229,7 +229,7 @@
     <value>1</value>
   </data>
   <data name="ucrSaveMerge.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 209</value>
+    <value>10, 180</value>
   </data>
   <data name="ucrSaveMerge.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -322,7 +322,7 @@
     <value>7</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 236</value>
+    <value>10, 207</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 53</value>
@@ -346,7 +346,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdColumnOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 179</value>
+    <value>250, 63</value>
   </data>
   <data name="cmdColumnOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>115, 23</value>
@@ -376,7 +376,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>416, 292</value>
+    <value>413, 263</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
