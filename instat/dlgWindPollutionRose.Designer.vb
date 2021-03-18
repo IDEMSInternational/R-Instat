@@ -33,6 +33,7 @@ Partial Class dlgWindPollutionRose
         Me.lblPollutant = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
+        Me.ucrInputStationFacet = New instat.ucrInputComboBox()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrSaveGraph = New instat.ucrSave()
@@ -50,7 +51,6 @@ Partial Class dlgWindPollutionRose
         Me.ucrSelectorWindPollutionRose = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputKeyPosition = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputStationFacet = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblColor
@@ -83,7 +83,7 @@ Partial Class dlgWindPollutionRose
         'lblFacet
         '
         Me.lblFacet.AutoSize = True
-        Me.lblFacet.Location = New System.Drawing.Point(411, 110)
+        Me.lblFacet.Location = New System.Drawing.Point(411, 130)
         Me.lblFacet.Name = "lblFacet"
         Me.lblFacet.Size = New System.Drawing.Size(85, 13)
         Me.lblFacet.TabIndex = 16
@@ -152,6 +152,16 @@ Partial Class dlgWindPollutionRose
         Me.lblStation.TabIndex = 26
         Me.lblStation.Text = "Station:"
         '
+        'ucrInputStationFacet
+        '
+        Me.ucrInputStationFacet.AddQuotesIfUnrecognised = True
+        Me.ucrInputStationFacet.GetSetSelectedIndex = -1
+        Me.ucrInputStationFacet.IsReadOnly = False
+        Me.ucrInputStationFacet.Location = New System.Drawing.Point(414, 80)
+        Me.ucrInputStationFacet.Name = "ucrInputStationFacet"
+        Me.ucrInputStationFacet.Size = New System.Drawing.Size(69, 21)
+        Me.ucrInputStationFacet.TabIndex = 28
+        '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
@@ -217,7 +227,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrInputFacet.AddQuotesIfUnrecognised = True
         Me.ucrInputFacet.GetSetSelectedIndex = -1
         Me.ucrInputFacet.IsReadOnly = False
-        Me.ucrInputFacet.Location = New System.Drawing.Point(414, 126)
+        Me.ucrInputFacet.Location = New System.Drawing.Point(414, 146)
         Me.ucrInputFacet.Name = "ucrInputFacet"
         Me.ucrInputFacet.Size = New System.Drawing.Size(130, 21)
         Me.ucrInputFacet.TabIndex = 15
@@ -325,16 +335,6 @@ Partial Class dlgWindPollutionRose
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 25
-        '
-        'ucrInputStationFacet
-        '
-        Me.ucrInputStationFacet.AddQuotesIfUnrecognised = True
-        Me.ucrInputStationFacet.GetSetSelectedIndex = -1
-        Me.ucrInputStationFacet.IsReadOnly = False
-        Me.ucrInputStationFacet.Location = New System.Drawing.Point(414, 80)
-        Me.ucrInputStationFacet.Name = "ucrInputStationFacet"
-        Me.ucrInputStationFacet.Size = New System.Drawing.Size(40, 21)
-        Me.ucrInputStationFacet.TabIndex = 28
         '
         'dlgWindPollutionRose
         '
