@@ -95,22 +95,6 @@ Public Class dlgWindPollutionRose
         ucrChkPaddle.SetParameter(New RParameter("paddle", 8))
         ucrChkPaddle.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
-        ucrInputFacetOne.SetParameter(New RParameter("type1", 1))
-        dctType.Add("Default", Chr(34) & "default" & Chr(34))
-        dctType.Add("Station", Chr(34) & "station" & Chr(34))
-        dctType.Add("Year", Chr(34) & "year" & Chr(34))
-        dctType.Add("Hour", Chr(34) & "hour" & Chr(34))
-        dctType.Add("Month", Chr(34) & "month" & Chr(34))
-        dctType.Add("Season", Chr(34) & "season" & Chr(34))
-        dctType.Add("Weekday", Chr(34) & "weekday" & Chr(34))
-        dctType.Add("Site", Chr(34) & "site" & Chr(34))
-        dctType.Add("Weekend", Chr(34) & "weekend" & Chr(34))
-        dctType.Add("Monthyear", Chr(34) & "monthyear" & Chr(34))
-        dctType.Add("Daylight", Chr(34) & "daylight" & Chr(34))
-        dctType.Add("DST", Chr(34) & "dst" & Chr(34))
-        ucrInputFacetOne.SetItems(dctType)
-        ucrInputFacetOne.SetDropDownStyleAsEditable(True)
-
         ucrInputKeyPosition.SetParameter(New RParameter("key.position", 10))
         dctPosition.Add("Top", Chr(34) & "top" & Chr(34))
         dctPosition.Add("Right", Chr(34) & "right" & Chr(34))
@@ -134,12 +118,31 @@ Public Class dlgWindPollutionRose
         ucrInputColor.SetItems(dctColor)
         ucrInputColor.SetDropDownStyleAsNonEditable()
 
-        UcrReceiverStation.SetParameter(New RParameter("station", 13))
-        UcrReceiverStation.Selector = ucrSelectorWindPollutionRose
-        UcrReceiverStation.SetParameterIsString()
-        UcrReceiverStation.bExcludeFromSelector = True
-        UcrReceiverStation.SetClimaticType("station")
-        UcrReceiverStation.bAutoFill = True
+        ucrReceiverStation.SetParameter(New RParameter("station", 13))
+        ucrReceiverStation.Selector = ucrSelectorWindPollutionRose
+        ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.bExcludeFromSelector = True
+        ucrReceiverStation.SetClimaticType("station")
+        ucrReceiverStation.bAutoFill = True
+
+        ucrInputStationFacet.SetItems({"NONE", "FACET 1", "FACET 2"})
+        ucrInputStationFacet.SetDropDownStyleAsNonEditable()
+
+        ucrInputFacet.SetParameter(New RParameter("type1", 1))
+        dctType.Add("Default", Chr(34) & "default" & Chr(34))
+        dctType.Add("Station", Chr(34) & "station" & Chr(34))
+        dctType.Add("Year", Chr(34) & "year" & Chr(34))
+        dctType.Add("Hour", Chr(34) & "hour" & Chr(34))
+        dctType.Add("Month", Chr(34) & "month" & Chr(34))
+        dctType.Add("Season", Chr(34) & "season" & Chr(34))
+        dctType.Add("Weekday", Chr(34) & "weekday" & Chr(34))
+        dctType.Add("Site", Chr(34) & "site" & Chr(34))
+        dctType.Add("Weekend", Chr(34) & "weekend" & Chr(34))
+        dctType.Add("Monthyear", Chr(34) & "monthyear" & Chr(34))
+        dctType.Add("Daylight", Chr(34) & "daylight" & Chr(34))
+        dctType.Add("DST", Chr(34) & "dst" & Chr(34))
+        ucrInputFacet.SetItems(dctType)
+        ucrInputFacet.SetDropDownStyleAsEditable(True)
 
         ucrSaveGraph.SetPrefix("wind_pollution_rose")
         ucrSaveGraph.SetIsComboBox()
@@ -181,12 +184,12 @@ Public Class dlgWindPollutionRose
         ucrReceiverWindDirection.SetRCode(clsPollutionRoseFunction, bReset)
         ucrReceiverWindDirection2.SetRCode(clsPollutionRoseFunction, bReset)
         ucrReceiverPollutant.SetRCode(clsPollutionRoseFunction, bReset)
-        UcrReceiverStation.SetRCode(clsPollutionRoseFunction, bReset)
+        ucrReceiverStation.SetRCode(clsPollutionRoseFunction, bReset)
         ucrInputColor.SetRCode(clsPollutionRoseFunction, bReset)
         ucrInputStatistic.SetRCode(clsPollutionRoseFunction, bReset)
         ucrInputKeyPosition.SetRCode(clsPollutionRoseFunction, bReset)
 
-        ucrInputFacetOne.SetRCode(clsCombineValues, bReset)
+        ucrInputFacet.SetRCode(clsCombineValues, bReset)
         ucrChkCompare.SetRCode(clsPollutionRoseFunction, bReset)
         ucrChkIncludePollutant.SetRCode(clsPollutionRoseFunction, bReset)
         'ucrInputFacetTwo.SetRCode(clsCombineValues, bReset)
@@ -220,13 +223,15 @@ Public Class dlgWindPollutionRose
     '    End If
     'End Sub
 
-    'Private Sub ucrInputFacetTwo_ControlValueChanged(ucrChangedControl As ucrCore)
-    '    If bRcodeSet Then
-    '        If Not ucrInputFacetTwo.IsEmpty Then
-    '            clsCombineValues.AddParameter("type2", ucrInputFacetTwo.GetParameter.strArgumentValue, bIncludeArgumentName:=False, iPosition:=2)
-    '        Else
-    '            clsCombineValues.RemoveParameterByName("type2")
-    '        End If
-    '    End If
-    'End Sub
+    Private Sub ucrInputFacetTwo_ControlValueChanged(ucrChangedControl As ucrCore)
+        If bRcodeSet Then
+            If Not ucrInputFacet.IsEmpty Then
+                clsCombineValues.AddParameter("type2", ucrInputFacetTwo.GetParameter.strArgumentValue, bIncludeArgumentName:=False, iPosition:=2)
+            Else
+                clsCombineValues.RemoveParameterByName("type2")
+            End If
+        End If
+    End Sub
+
+
 End Class

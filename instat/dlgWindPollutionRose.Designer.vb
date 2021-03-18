@@ -25,7 +25,7 @@ Partial Class dlgWindPollutionRose
         Me.lblColor = New System.Windows.Forms.Label()
         Me.lblStatistic = New System.Windows.Forms.Label()
         Me.lblKeyPosition = New System.Windows.Forms.Label()
-        Me.lblFacetOne = New System.Windows.Forms.Label()
+        Me.lblFacet = New System.Windows.Forms.Label()
         Me.lblWindDirection2 = New System.Windows.Forms.Label()
         Me.lblWindSpeed2 = New System.Windows.Forms.Label()
         Me.lblWindDirection = New System.Windows.Forms.Label()
@@ -33,13 +33,13 @@ Partial Class dlgWindPollutionRose
         Me.lblPollutant = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.UcrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrChkIncludePollutant = New instat.ucrCheck()
         Me.ucrInputStatistic = New instat.ucrInputComboBox()
         Me.ucrInputColor = New instat.ucrInputComboBox()
-        Me.ucrInputFacetOne = New instat.ucrInputComboBox()
+        Me.ucrInputFacet = New instat.ucrInputComboBox()
         Me.ucrChkPaddle = New instat.ucrCheck()
         Me.ucrChkCompare = New instat.ucrCheck()
         Me.ucrReceiverPollutant = New instat.ucrReceiverSingle()
@@ -50,7 +50,7 @@ Partial Class dlgWindPollutionRose
         Me.ucrSelectorWindPollutionRose = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputKeyPosition = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputStation = New instat.ucrInputComboBox()
+        Me.ucrInputStationFacet = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblColor
@@ -80,14 +80,14 @@ Partial Class dlgWindPollutionRose
         Me.lblKeyPosition.TabIndex = 21
         Me.lblKeyPosition.Text = "Keyposition:"
         '
-        'lblFacetOne
+        'lblFacet
         '
-        Me.lblFacetOne.AutoSize = True
-        Me.lblFacetOne.Location = New System.Drawing.Point(411, 131)
-        Me.lblFacetOne.Name = "lblFacetOne"
-        Me.lblFacetOne.Size = New System.Drawing.Size(85, 13)
-        Me.lblFacetOne.TabIndex = 16
-        Me.lblFacetOne.Text = "Facet (Optional):"
+        Me.lblFacet.AutoSize = True
+        Me.lblFacet.Location = New System.Drawing.Point(411, 110)
+        Me.lblFacet.Name = "lblFacet"
+        Me.lblFacet.Size = New System.Drawing.Size(85, 13)
+        Me.lblFacet.TabIndex = 16
+        Me.lblFacet.Text = "Facet (Optional):"
         '
         'lblWindDirection2
         '
@@ -152,17 +152,17 @@ Partial Class dlgWindPollutionRose
         Me.lblStation.TabIndex = 26
         Me.lblStation.Text = "Station:"
         '
-        'UcrReceiverStation
+        'ucrReceiverStation
         '
-        Me.UcrReceiverStation.frmParent = Me
-        Me.UcrReceiverStation.Location = New System.Drawing.Point(414, 55)
-        Me.UcrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.UcrReceiverStation.Name = "UcrReceiverStation"
-        Me.UcrReceiverStation.Selector = Nothing
-        Me.UcrReceiverStation.Size = New System.Drawing.Size(132, 20)
-        Me.UcrReceiverStation.strNcFilePath = ""
-        Me.UcrReceiverStation.TabIndex = 27
-        Me.UcrReceiverStation.ucrSelector = Nothing
+        Me.ucrReceiverStation.frmParent = Me
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(414, 55)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(132, 20)
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 27
+        Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrReceiverDate
         '
@@ -212,15 +212,15 @@ Partial Class dlgWindPollutionRose
         Me.ucrInputColor.Size = New System.Drawing.Size(99, 21)
         Me.ucrInputColor.TabIndex = 18
         '
-        'ucrInputFacetOne
+        'ucrInputFacet
         '
-        Me.ucrInputFacetOne.AddQuotesIfUnrecognised = True
-        Me.ucrInputFacetOne.GetSetSelectedIndex = -1
-        Me.ucrInputFacetOne.IsReadOnly = False
-        Me.ucrInputFacetOne.Location = New System.Drawing.Point(414, 147)
-        Me.ucrInputFacetOne.Name = "ucrInputFacetOne"
-        Me.ucrInputFacetOne.Size = New System.Drawing.Size(130, 21)
-        Me.ucrInputFacetOne.TabIndex = 15
+        Me.ucrInputFacet.AddQuotesIfUnrecognised = True
+        Me.ucrInputFacet.GetSetSelectedIndex = -1
+        Me.ucrInputFacet.IsReadOnly = False
+        Me.ucrInputFacet.Location = New System.Drawing.Point(414, 126)
+        Me.ucrInputFacet.Name = "ucrInputFacet"
+        Me.ucrInputFacet.Size = New System.Drawing.Size(130, 21)
+        Me.ucrInputFacet.TabIndex = 15
         '
         'ucrChkPaddle
         '
@@ -326,37 +326,37 @@ Partial Class dlgWindPollutionRose
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 25
         '
-        'ucrInputStation
+        'ucrInputStationFacet
         '
-        Me.ucrInputStation.AddQuotesIfUnrecognised = True
-        Me.ucrInputStation.GetSetSelectedIndex = -1
-        Me.ucrInputStation.IsReadOnly = False
-        Me.ucrInputStation.Location = New System.Drawing.Point(414, 101)
-        Me.ucrInputStation.Name = "ucrInputStation"
-        Me.ucrInputStation.Size = New System.Drawing.Size(82, 21)
-        Me.ucrInputStation.TabIndex = 28
+        Me.ucrInputStationFacet.AddQuotesIfUnrecognised = True
+        Me.ucrInputStationFacet.GetSetSelectedIndex = -1
+        Me.ucrInputStationFacet.IsReadOnly = False
+        Me.ucrInputStationFacet.Location = New System.Drawing.Point(414, 80)
+        Me.ucrInputStationFacet.Name = "ucrInputStationFacet"
+        Me.ucrInputStationFacet.Size = New System.Drawing.Size(40, 21)
+        Me.ucrInputStationFacet.TabIndex = 28
         '
         'dlgWindPollutionRose
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(558, 462)
-        Me.Controls.Add(Me.ucrInputStation)
+        Me.Controls.Add(Me.ucrInputStationFacet)
         Me.Controls.Add(Me.lblStation)
-        Me.Controls.Add(Me.UcrReceiverStation)
+        Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrChkIncludePollutant)
         Me.Controls.Add(Me.ucrInputStatistic)
         Me.Controls.Add(Me.ucrInputColor)
-        Me.Controls.Add(Me.ucrInputFacetOne)
+        Me.Controls.Add(Me.ucrInputFacet)
         Me.Controls.Add(Me.ucrChkPaddle)
         Me.Controls.Add(Me.lblColor)
         Me.Controls.Add(Me.lblStatistic)
         Me.Controls.Add(Me.lblKeyPosition)
         Me.Controls.Add(Me.ucrChkCompare)
-        Me.Controls.Add(Me.lblFacetOne)
+        Me.Controls.Add(Me.lblFacet)
         Me.Controls.Add(Me.lblWindDirection2)
         Me.Controls.Add(Me.lblWindSpeed2)
         Me.Controls.Add(Me.lblWindDirection)
@@ -383,13 +383,13 @@ Partial Class dlgWindPollutionRose
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrInputStatistic As ucrInputComboBox
     Friend WithEvents ucrInputColor As ucrInputComboBox
-    Friend WithEvents ucrInputFacetOne As ucrInputComboBox
+    Friend WithEvents ucrInputFacet As ucrInputComboBox
     Friend WithEvents ucrChkPaddle As ucrCheck
     Friend WithEvents lblColor As Label
     Friend WithEvents lblStatistic As Label
     Friend WithEvents lblKeyPosition As Label
     Friend WithEvents ucrChkCompare As ucrCheck
-    Friend WithEvents lblFacetOne As Label
+    Friend WithEvents lblFacet As Label
     Friend WithEvents lblWindDirection2 As Label
     Friend WithEvents lblWindSpeed2 As Label
     Friend WithEvents lblWindDirection As Label
@@ -407,6 +407,6 @@ Partial Class dlgWindPollutionRose
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblStation As Label
-    Friend WithEvents UcrReceiverStation As ucrReceiverSingle
-    Friend WithEvents ucrInputStation As ucrInputComboBox
+    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
+    Friend WithEvents ucrInputStationFacet As ucrInputComboBox
 End Class
