@@ -123,7 +123,7 @@ Public Class sdgMergeColumnstoInclude
         End If
         If ucrChkMergeWithSubsetSecond.Checked Then
             For Each clsTmpParam As RParameter In clsByList.clsParameters
-                If Not ucrReceiverFirstSelected.GetVariableNamesAsList.Contains(clsTmpParam.strArgumentValue.Trim(Chr(34))) Then
+                If Not ucrReceiverSecondSelected.GetVariableNamesAsList.Contains(clsTmpParam.strArgumentValue.Trim(Chr(34))) Then
                     ucrReceiverSecondSelected.Add(clsTmpParam.strArgumentValue.Trim(Chr(34)), ucrSelectorColumnsToIncludeSecond.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
                 End If
             Next
