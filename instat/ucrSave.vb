@@ -137,7 +137,7 @@ Public Class ucrSave
 
     Private strAdjacentColumn As String = ""
     Private bKeepExistingPosition As Boolean = True
-    Public bWritePositionParamsDirectly As String = True
+    Private bSetPositionParamsDirectly As String = True
 
 
     ''' <summary>   Width of the combo box. </summary>
@@ -193,6 +193,7 @@ Public Class ucrSave
         'update the variables used for column position
         bInsertColumnBefore = False
         strAdjacentColumn = ""
+        bSetPositionParamsDirectly = True
         UpdateColumnPositionVariables()
     End Sub
     '''--------------------------------------------------------------------------------------------
@@ -609,7 +610,7 @@ Public Class ucrSave
                     If strSaveName <> "" Then
                         Select Case strSaveType
                             Case "column"
-                                If bWritePositionParamsDirectly Then
+                                If bSetPositionParamsDirectly Then
                                     clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
                                 End If
                             Case "dataframe"
@@ -938,7 +939,7 @@ Public Class ucrSave
                 Continue For
             End If
 
-            If bWritePositionParamsDirectly Then
+            If bSetPositionParamsDirectly Then
                 clsTempCode.bInsertColumnBefore = bInsertColumnBefore
                 clsTempCode.strAdjacentColumn = strAdjacentColumn
                 'todo. should we add property bKeepExistingPosition to the RCodeStructure class ?? similar to bInsertColumnBefore and strAdjacentColumn 
@@ -951,5 +952,10 @@ Public Class ucrSave
                 End If
             End If
         Next
+    End Sub
+
+    Public Sub SetPositionParametersDirectly(bSetPositionParamsDirectly As Boolean)
+        Me.bSetPositionParamsDirectly = bSetPositionParamsDirectly
+        UpdateColumnPositionVariables()
     End Sub
 End Class

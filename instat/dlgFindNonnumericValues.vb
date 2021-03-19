@@ -86,6 +86,7 @@ Public Class dlgFindNonnumericValues
         ucrReceiverColumn.SetMeAsReceiver()
         ucrSelectorShowNonNumericValues.Reset()
         ucrSaveColumn.Reset()
+        ucrSaveColumn.SetPositionParametersDirectly(False)
         ucrBase.clsRsyntax.ClearCodes()
 
         clsIsNaFunction.SetRCommand("is.na")
@@ -136,7 +137,9 @@ Public Class dlgFindNonnumericValues
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverColumn.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", 1), iAdditionalPairNo:=1)
         ucrReceiverColumn.SetRCode(clsIsNaFunction, bReset)
-        ucrSaveColumn.SetRCode(clsGetColumnsFunction, bReset)
+        'ucrSaveColumn.SetRCode(clsGetColumnsFunction, bReset)
+        ucrSaveColumn.SetRCode(clsNonNumericFilterFunc, bReset)
+
         ucrChkShowSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkFilterNonumerics.SetRCode(clsCurrRunCalc, bReset)
         ucrSelectorShowNonNumericValues.SetRCode(clsGetColumnsFunction, bReset)
