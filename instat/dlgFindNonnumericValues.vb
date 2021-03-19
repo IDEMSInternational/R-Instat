@@ -138,7 +138,9 @@ Public Class dlgFindNonnumericValues
         ucrReceiverColumn.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", 1), iAdditionalPairNo:=1)
         ucrReceiverColumn.SetRCode(clsIsNaFunction, bReset)
         'ucrSaveColumn.SetRCode(clsGetColumnsFunction, bReset)
-        ucrSaveColumn.SetRCode(clsNonNumericFilterFunc, bReset)
+        ucrSaveColumn.SetRCode(clsNonNumericCalcFunc, bReset)
+        ucrSaveColumn.AddAdditionalRCode(clsNonNumericFilterFunc, iAdditionalPairNo:=1)
+
 
         ucrChkShowSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkFilterNonumerics.SetRCode(clsCurrRunCalc, bReset)
