@@ -324,14 +324,14 @@ Public Class dlgFitModel
         If bRCodeSet Then
             If Not ucrReceiverResponseVar.IsEmpty Then
                 ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
-                If ucrFamily.strDataType = "numeric" OrElse ucrFamily.strDataType = "positive integer" OrElse ucrFamily.strDataType = "two level numeric" Then
+                If ucrFamily.strDataType.Contains("factor") Then
+                    ucrChkConvertToVariate.Visible = True
+                Else
                     ucrChkConvertToVariate.Checked = False
                     ucrChkConvertToVariate.Visible = False
-                Else
-                    ucrChkConvertToVariate.Visible = True
                 End If
 
-                If ucrChkConvertToVariate.Checked Then
+            If ucrChkConvertToVariate.Checked Then
                     ' clsRConvert.AddParameter("x", ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
                     clsFormulaOperator.AddParameter("x", clsRFunctionParameter:=clsRConvert, iPosition:=0)
                     ucrFamily.RecieverDatatype("numeric")
@@ -408,8 +408,8 @@ Public Class dlgFitModel
     End Sub
 
     Private Sub ucrConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
-        ResponseVariableType()
         ResponseConvert()
+        ResponseVariableType()
     End Sub
 
     Private Sub ucrReceiverExpressionFitModel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlContentsChanged, ucrReceiverResponseVar.ControlContentsChanged

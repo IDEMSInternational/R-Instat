@@ -154,7 +154,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdModelOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>395, 287</value>
+    <value>395, 286</value>
   </data>
   <data name="cmdModelOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 23</value>
@@ -976,10 +976,10 @@
     <value>510, 401</value>
   </data>
   <data name="ucrInputModelPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 288</value>
+    <value>89, 287</value>
   </data>
   <data name="ucrInputModelPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 21</value>
+    <value>297, 21</value>
   </data>
   <data name="ucrInputModelPreview.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1085,9 +1085,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>17</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
