@@ -415,9 +415,9 @@ Public Class sdgPlots
         ucrChkFillScaleDiscrete.SetText("Discrete")
         ucrChkColourScaleDiscrete.SetText("Discrete")
 
-        grpFillScale.Enabled = False
-        grpColourScale.Enabled = False
-        ucrChkApplyChanges.Enabled = False
+        grpFillScale.Visible = False
+        grpColourScale.Visible = False
+        ucrChkApplyChanges.Visible = False
     End Sub
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction, clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector, bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing,
@@ -896,30 +896,32 @@ Public Class sdgPlots
     Private Sub ucrChkAddFillScale_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFillScale.ControlValueChanged
         If ucrChkAddFillScale.Checked Then
             clsBaseOperator.AddParameter("scale_fill", clsRFunctionParameter:=clsScaleFillViridisFunction, iPosition:=3)
-            grpFillScale.Enabled = True
+            grpFillScale.Visible = True
         Else
             clsBaseOperator.RemoveParameterByName("scale_fill")
-            grpFillScale.Enabled = False
+            grpFillScale.Visible = False
         End If
     End Sub
 
     Private Sub ucrChkAddColourScale_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddColourScale.ControlValueChanged
         If ucrChkAddColourScale.Checked Then
             clsBaseOperator.AddParameter("scale_colour", clsRFunctionParameter:=clsScaleColourViridisFunction, iPosition:=4)
-            grpColourScale.Enabled = True
-            ucrChkApplyChanges.Enabled = True
+            grpColourScale.Visible = True
+            ucrChkApplyChanges.Visible = True
         Else
             clsBaseOperator.RemoveParameterByName("scale_colour")
-            grpColourScale.Enabled = False
-            ucrChkApplyChanges.Enabled = False
+            grpColourScale.Visible = False
+            ucrChkApplyChanges.Visible = False
         End If
     End Sub
 
     Private Sub ucrChkApplyChanges_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkApplyChanges.ControlValueChanged
         If ucrChkApplyChanges.Checked Then
             clsScaleColourViridisFunction.AddParameter("aesthetics", clsRFunctionParameter:=clsAestheticFunction, iPosition:=6)
+            grpColourScale.Enabled = True
         Else
             clsScaleColourViridisFunction.RemoveParameterByName("aesthetics")
+            grpColourScale.Enabled = False
         End If
     End Sub
 End Class
