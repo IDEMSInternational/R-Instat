@@ -198,6 +198,7 @@ Public Class dlgClimaticCheckDataTemperature
 
         'outliers Option
         ttOutliers.SetToolTip(ucrChkOutlier, "Values that are further than this number of IQRs from the corresponding quartile.")
+
     End Sub
 
     Private Sub SetDefaults()
@@ -540,6 +541,7 @@ Public Class dlgClimaticCheckDataTemperature
             clsOutlierCombinedOperator.RemoveParameterByName("upperOutlierTest1")
             clsOutlierCombinedOperator.RemoveParameterByName("lowerOutlierTest1")
         End If
+
         If Not ucrReceiverElement2.IsEmpty Then
             clsSameOp.AddParameter("same2", strParameterValue:=clsSameCodeElement2.strTestName, bIncludeArgumentName:=False)
             clsSameListSubCalc.AddParameter("same2test", clsRFunctionParameter:=clsSameCodeElement2.clsSameTestFunction, bIncludeArgumentName:=False)
@@ -608,6 +610,17 @@ Public Class dlgClimaticCheckDataTemperature
         End If
     End Sub
 
+    Private Sub EnableOrDisableDifferenceControls()
+        If ucrReceiverElement1.IsEmpty OrElse ucrReceiverElement2.IsEmpty Then
+            ucrChkDifference.Enabled = False
+            ucrNudDifference.Enabled = False
+            ucrChkDifference.Checked = False
+        Else
+            ucrChkDifference.Enabled = True
+            ucrNudDifference.Enabled = True
+        End If
+    End Sub
+
     Private Sub ucrReceiverMonth_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverMonth.ControlValueChanged, ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged
         GroupByMonth()
     End Sub
@@ -624,6 +637,7 @@ Public Class dlgClimaticCheckDataTemperature
 
     Private Sub ucrReceiverElement1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlValueChanged, ucrReceiverElement2.ControlValueChanged
         FilterFunc()
+        EnableOrDisableDifferenceControls()
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverElement1.ControlContentsChanged, ucrReceiverElement2.ControlContentsChanged, ucrNudSame.ControlContentsChanged, ucrNudRangeElement1Min.ControlContentsChanged, ucrNudRangeElement1Max.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudJump.ControlContentsChanged, ucrNudRangeElement2Min.ControlContentsChanged, ucrNudRangeElement2Max.ControlContentsChanged, ucrNudDifference.ControlContentsChanged, ucrChkRangeElement1.ControlContentsChanged, ucrChkRangeElement2.ControlContentsChanged, ucrChkJump.ControlContentsChanged, ucrChkDifference.ControlContentsChanged, ucrChkSame.ControlContentsChanged, ucrChkOutlier.ControlContentsChanged

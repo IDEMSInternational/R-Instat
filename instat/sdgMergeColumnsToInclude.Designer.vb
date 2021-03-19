@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class dlgPolarCluster
+Partial Class sdgMergeColumnsToInclude
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,31 +22,18 @@ Partial Class dlgPolarCluster
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.UcrButtons1 = New instat.ucrButtons()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgMergeColumnsToInclude))
         Me.SuspendLayout()
         '
-        'UcrButtons1
+        'sdgMergeColumnsToInclude
         '
-        Me.UcrButtons1.Location = New System.Drawing.Point(6, 282)
-        Me.UcrButtons1.Name = "UcrButtons1"
-        Me.UcrButtons1.Size = New System.Drawing.Size(410, 52)
-        Me.UcrButtons1.TabIndex = 0
-        '
-        'dlgPolarCluster
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(422, 363)
-        Me.Controls.Add(Me.UcrButtons1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgPolarCluster"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Polar Cluster"
+        Me.Name = "sdgMergeColumnsToInclude"
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents UcrButtons1 As ucrButtons
 End Class
