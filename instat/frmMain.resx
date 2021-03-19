@@ -1136,6 +1136,18 @@
   <data name="mnuClimaticTidyandExamineAppend.Text" xml:space="preserve">
     <value>Append...</value>
   </data>
+  <data name="ToolStripSeparator69.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 6</value>
+  </data>
+  <data name="mnuClimaticDataEntry.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticDataEntry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="mnuClimaticDataEntry.Text" xml:space="preserve">
+    <value>Data Entry</value>
+  </data>
   <data name="ToolStripSeparator50.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 6</value>
   </data>
@@ -3580,7 +3592,7 @@
     <value>192, 22</value>
   </data>
   <data name="mnuStructuredCircularOtherRosePlots.Text" xml:space="preserve">
-    <value>Other Rose Plots...</value>
+    <value>Other Rose Plots</value>
   </data>
   <data name="ToolStripSeparator68.Size" type="System.Drawing.Size, System.Drawing">
     <value>189, 6</value>
@@ -7387,6 +7399,18 @@
     <value>mnuClimaticTidyandExamineAppend</value>
   </data>
   <data name="&gt;&gt;mnuClimaticTidyandExamineAppend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator69.Name" xml:space="preserve">
+    <value>ToolStripSeparator69</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator69.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticDataEntry.Name" xml:space="preserve">
+    <value>mnuClimaticDataEntry</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticDataEntry.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator50.Name" xml:space="preserve">
