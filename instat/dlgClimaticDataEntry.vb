@@ -21,6 +21,7 @@ Public Class dlgClimaticDataEntry
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private iBasicWidth As Integer
+    Public dfTemp As DataFrame
     Private Sub dlgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -44,7 +45,7 @@ Public Class dlgClimaticDataEntry
         ucrReceiverStation.Selector = ucrSelectorClimaticDataEntry
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.SetParameter(New RParameter("station_col", 1))
-        ucrReceiverStation.SetParameterIsString()
+        ucrReceiverStation.SetParameterIsRFunction()
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.strSelectorHeading = "Factors"
 
@@ -58,12 +59,12 @@ Public Class dlgClimaticDataEntry
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.SetIncludedDataTypes({"Date"})
         ucrReceiverDate.bAutoFill = True
-        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.SetParameterIsRFunction()
         ucrReceiverDate.strSelectorHeading = "Date"
 
         ucrReceiverElements.SetParameter(New RParameter("element_cols", 4))
         ucrReceiverElements.Selector = ucrSelectorClimaticDataEntry
-        ucrReceiverElements.SetParameterIsString()
+        ucrReceiverElements.SetParameterIsRFunction()
         ucrReceiverElements.strSelectorHeading = "Numerics"
         ucrReceiverElements.SetIncludedDataTypes({"numeric"})
         ucrReceiverElements.SetClimaticType("element")
@@ -74,6 +75,17 @@ Public Class dlgClimaticDataEntry
 
     End Sub
 
+    Public Sub GetDataFrame()
+        Dim clsGetDataFrame As New RFunction
+        Dim expTemp As SymbolicExpression
+
+        If frmMain.clsRLink.bInstatObjectExists AndAlso frmMain.clsRLink.GetDataFrameCount() > 0 Then
+            clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+            clsGetDataFrame.AddParameter("data_name", Chr(34) & ucrSelectorClimaticDataEntry.strCurrentDataFrame & Chr(34))
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript(), bSilent:=True)
+            dfTemp = expTemp.AsDataFrame()
+        End If
+    End Sub
     Private Sub SetDefaults()
 
     End Sub
@@ -97,65 +109,69 @@ Public Class dlgClimaticDataEntry
         sdgClimaticDataEntry.ShowDialog()
     End Sub
 
-    Public Function GetFilledDataTable(dataFrame As DataFrame) As DataTable
-        Dim dataTable As New DataTable
-        Dim dataRow As DataRow
-        Dim bAddRow As Boolean
-        Dim strStationColumnName As String = ucrInputFactorLevels.GetValue()
-        Dim strDateColumnName As String = ucrInputFactorLevels.GetValue()
-        Dim lstElementsColumnNames As List(Of String) = ucrReceiverElements.GetVariableNamesAsList
-        Dim dateFrom As Date = ucrDateTimePickerFrom.DateValue
+    Private Sub ucrSelectorClimaticDataEntry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticDataEntry.ControlValueChanged
+        GetDataFrame()
+    End Sub
 
-        'create the columns to the data table; station, date and elements
-        dataTable.Columns.Add(strStationColumnName)
-        dataTable.Columns.Add(strDateColumnName)
-        For Each strElement As String In lstElementsColumnNames
-            dataTable.Columns.Add(strElement)
-        Next
+    'Public Function GetFilledDataTable(dataFrame As DataFrame) As DataTable
+    '    Dim dataTable As New DataTable
+    '    Dim dataRow As DataRow
+    '    Dim bAddRow As Boolean
+    '    Dim strStationColumnName As String = ucrInputFactorLevels.GetValue()
+    '    Dim strDateColumnName As String = ucrInputFactorLevels.GetValue()
+    '    Dim lstElementsColumnNames As List(Of String) = ucrReceiverElements.GetVariableNamesAsList
+    '    Dim dateFrom As Date = ucrDateTimePickerFrom.DateValue
 
-        For i As Integer = 0 To dataFrame.RowCount - 1
-            bAddRow = True
-            'create a new data table row
-            dataRow = dataTable.NewRow()
+    '    'create the columns to the data table; station, date and elements
+    '    dataTable.Columns.Add(strStationColumnName)
+    '    dataTable.Columns.Add(strDateColumnName)
+    '    For Each strElement As String In lstElementsColumnNames
+    '        dataTable.Columns.Add(strElement)
+    '    Next
 
-            'fill the row with required values
-            'the data frame column names should be the same as the data table column names in content
-            For Each strDataFrameColumnName As String In dataFrame.ColumnNames
-                If strDataFrameColumnName = strDateColumnName Then
-                    'todo. validate the date and compare, if > starting date then bAddRow = False
-                End If
-                dataRow.Item(strDataFrameColumnName) = dataFrame.Item(i, strDataFrameColumnName)
-            Next
+    '    For i As Integer = 0 To dataFrame.RowCount - 1
+    '        bAddRow = True
+    '        'create a new data table row
+    '        dataRow = dataTable.NewRow()
 
-            If bAddRow Then
-                'add the row to the datatable
-                dataTable.Rows.Add(dataRow)
-            End If
+    '        'fill the row with required values
+    '        'the data frame column names should be the same as the data table column names in content
+    '        For Each strDataFrameColumnName As String In dataFrame.ColumnNames
+    '            If strDataFrameColumnName = strDateColumnName Then
+    '                'todo. validate the date and compare, if > starting date then bAddRow = False
+    '            End If
+    '            dataRow.Item(strDataFrameColumnName) = dataFrame.Item(i, strDataFrameColumnName)
+    '        Next
 
-        Next
+    '        If bAddRow Then
+    '            'add the row to the datatable
+    '            dataTable.Rows.Add(dataRow)
+    '        End If
 
-        Return dataTable
-    End Function
+    '    Next
 
-    Public Function GetFilledWorkSheet(dataTable As DataTable) As Worksheet
-        Dim grdWorkSheet As Worksheet = New ReoGridControl().CreateWorksheet("dateentry")
+    '    Return dataTable
+    'End Function
 
-        'create the columns and set the header names in the worksheet
-        grdWorkSheet.Columns = dataTable.Columns.Count
-        For k = 0 To dataTable.Columns.Count - 1
-            grdWorkSheet.ColumnHeaders.Item(k).Text = dataTable.Columns.Item(k).ColumnName
-        Next
+    'Public Function GetFilledWorkSheet(dataTable As DataTable) As Worksheet
+    '    Dim grdWorkSheet As Worksheet = New ReoGridControl().CreateWorksheet("dateentry")
 
-        'create rows and values for the worksheet 
-        grdWorkSheet.SetRangeData(New RangePosition(0, 0, dataTable.Rows.Count, dataTable.Columns.Count), dataTable)
+    '    'create the columns and set the header names in the worksheet
+    '    grdWorkSheet.Columns = dataTable.Columns.Count
+    '    For k = 0 To dataTable.Columns.Count - 1
+    '        grdWorkSheet.ColumnHeaders.Item(k).Text = dataTable.Columns.Item(k).ColumnName
+    '    Next
 
-        'todo. these 3 settings not important now. Left here to be done later
-        'grdWorkSheet.SetSettings(WorksheetSettings.Edit_AllowAdjustRowHeight, True)
-        'grdWorkSheet.SetRowsHeight(0, 1, 20)
-        'grdWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdWorkSheet.Rows, grdWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
+    '    'create rows and values for the worksheet 
+    '    grdWorkSheet.SetRangeData(New RangePosition(0, 0, dataTable.Rows.Count, dataTable.Columns.Count), dataTable)
 
-        Return grdWorkSheet
-    End Function
+    '    'todo. these 3 settings not important now. Left here to be done later
+    '    'grdWorkSheet.SetSettings(WorksheetSettings.Edit_AllowAdjustRowHeight, True)
+    '    'grdWorkSheet.SetRowsHeight(0, 1, 20)
+    '    'grdWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdWorkSheet.Rows, grdWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
+
+    '    Return grdWorkSheet
+    'End Function
 
 
 End Class
