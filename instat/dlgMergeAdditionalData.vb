@@ -134,7 +134,7 @@ Public Class dlgMergeAdditionalData
                 PopulateMergeByText()
                 bBySpecified = True
             Else
-                ucrInputMergingBy.SetName("No link between these data frames. Click 'Modify' to specify merging columns.")
+                ucrInputMergingBy.SetName("No link between these data frames. Click 'Join Options' to specify merging columns.")
                 clsLeftJoin.RemoveParameterByName("by")
                 bBySpecified = False
             End If
@@ -154,7 +154,7 @@ Public Class dlgMergeAdditionalData
     End Sub
 
     Private Sub cmdModify_Click(sender As Object, e As EventArgs) Handles cmdModify.Click
-        sdgMerge.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, clsLeftJoin, clsByList, bResetSubdialog, False)
+        sdgMerge.Setup(ucrFirstDataFrame.cboAvailableDataFrames.Text, ucrSecondSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, clsLeftJoin, clsByList, bResetSubdialog)
         sdgMerge.ShowDialog()
         PopulateMergeByText()
         bResetSubdialog = False
@@ -202,7 +202,7 @@ Public Class dlgMergeAdditionalData
                     Next
                     bBySpecified = True
                 Else
-                    strMergeBy = "No columns with the same name. Click 'Modify' to specify merging columns."
+                    strMergeBy = "No columns with the same name. Click 'Join Options' to specify merging columns."
                     bBySpecified = False
                 End If
             End If

@@ -48,6 +48,7 @@ Partial Class dlgMerge
         Me.ucrSecondDataFrame = New instat.ucrDataFrame()
         Me.ucrFirstDataFrame = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
+        Me.cmdColumnOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'cmdJoinOptions
@@ -82,6 +83,7 @@ Partial Class dlgMerge
         'ucrInputJoinType
         '
         Me.ucrInputJoinType.AddQuotesIfUnrecognised = True
+        Me.ucrInputJoinType.GetSetSelectedIndex = -1
         Me.ucrInputJoinType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputJoinType, "ucrInputJoinType")
         Me.ucrInputJoinType.Name = "ucrInputJoinType"
@@ -105,10 +107,17 @@ Partial Class dlgMerge
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'cmdColumnOptions
+        '
+        resources.ApplyResources(Me.cmdColumnOptions, "cmdColumnOptions")
+        Me.cmdColumnOptions.Name = "cmdColumnOptions"
+        Me.cmdColumnOptions.UseVisualStyleBackColor = True
+        '
         'dlgMerge
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdColumnOptions)
         Me.Controls.Add(Me.ucrInputMergingBy)
         Me.Controls.Add(Me.lblMergeBy)
         Me.Controls.Add(Me.ucrSaveMerge)
@@ -137,4 +146,5 @@ Partial Class dlgMerge
     Friend WithEvents ucrSaveMerge As ucrSave
     Friend WithEvents lblMergeBy As Label
     Friend WithEvents ucrInputMergingBy As ucrInputTextBox
+    Friend WithEvents cmdColumnOptions As Button
 End Class
