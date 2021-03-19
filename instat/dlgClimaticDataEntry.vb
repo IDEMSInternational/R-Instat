@@ -21,7 +21,7 @@ Public Class dlgClimaticDataEntry
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private iBasicWidth As Integer
-    Public dfTemp As DataFrame
+    'Public dfTemp As DataFrame
     Private Sub dlgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -52,7 +52,7 @@ Public Class dlgClimaticDataEntry
         ucrInputFactorLevels.SetParameter(New RParameter("", 2))
         ucrInputFactorLevels.SetFactorReceiver(ucrReceiverStation)
         'ucrInputFactorLevels.AddQuotesIfUnrecognised = False
-        'ucrInputFactorLevels.strQuotes = "`"
+        ucrInputFactorLevels.strQuotes = ""
 
         ucrReceiverDate.SetParameter(New RParameter("date_col", 3))
         ucrReceiverDate.Selector = ucrSelectorClimaticDataEntry
@@ -75,17 +75,7 @@ Public Class dlgClimaticDataEntry
 
     End Sub
 
-    Public Sub GetDataFrame()
-        Dim clsGetDataFrame As New RFunction
-        Dim expTemp As SymbolicExpression
 
-        If frmMain.clsRLink.bInstatObjectExists AndAlso frmMain.clsRLink.GetDataFrameCount() > 0 Then
-            clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-            clsGetDataFrame.AddParameter("data_name", Chr(34) & ucrSelectorClimaticDataEntry.strCurrentDataFrame & Chr(34))
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript(), bSilent:=True)
-            dfTemp = expTemp.AsDataFrame()
-        End If
-    End Sub
     Private Sub SetDefaults()
 
     End Sub
@@ -106,6 +96,12 @@ Public Class dlgClimaticDataEntry
     End Sub
 
     Private Sub cmdEnterData_Click(sender As Object, e As EventArgs) Handles cmdEnterData.Click
+        sdgClimaticDataEntry.Setup(ucrReceiverStation.GetVariableNames(bWithQuotes:=False),
+                                   ucrReceiverDate.GetVariableNames(bWithQuotes:=False),
+                                   ucrReceiverElements.GetVariableNamesList(bWithQuotes:=False).ToList,
+                                   ucrInputFactorLevels.GetValue(),
+                                   ucrDateTimePickerFrom.DateValue,
+                                   GetDataFrame())
         sdgClimaticDataEntry.ShowDialog()
     End Sub
 
@@ -113,65 +109,18 @@ Public Class dlgClimaticDataEntry
         GetDataFrame()
     End Sub
 
-    'Public Function GetFilledDataTable(dataFrame As DataFrame) As DataTable
-    '    Dim dataTable As New DataTable
-    '    Dim dataRow As DataRow
-    '    Dim bAddRow As Boolean
-    '    Dim strStationColumnName As String = ucrInputFactorLevels.GetValue()
-    '    Dim strDateColumnName As String = ucrInputFactorLevels.GetValue()
-    '    Dim lstElementsColumnNames As List(Of String) = ucrReceiverElements.GetVariableNamesAsList
-    '    Dim dateFrom As Date = ucrDateTimePickerFrom.DateValue
+    Private Function GetDataFrame() As DataFrame
+        Dim dfTemp As DataFrame = Nothing
+        Dim clsGetDataFrame As New RFunction
+        Dim expTemp As SymbolicExpression
 
-    '    'create the columns to the data table; station, date and elements
-    '    dataTable.Columns.Add(strStationColumnName)
-    '    dataTable.Columns.Add(strDateColumnName)
-    '    For Each strElement As String In lstElementsColumnNames
-    '        dataTable.Columns.Add(strElement)
-    '    Next
-
-    '    For i As Integer = 0 To dataFrame.RowCount - 1
-    '        bAddRow = True
-    '        'create a new data table row
-    '        dataRow = dataTable.NewRow()
-
-    '        'fill the row with required values
-    '        'the data frame column names should be the same as the data table column names in content
-    '        For Each strDataFrameColumnName As String In dataFrame.ColumnNames
-    '            If strDataFrameColumnName = strDateColumnName Then
-    '                'todo. validate the date and compare, if > starting date then bAddRow = False
-    '            End If
-    '            dataRow.Item(strDataFrameColumnName) = dataFrame.Item(i, strDataFrameColumnName)
-    '        Next
-
-    '        If bAddRow Then
-    '            'add the row to the datatable
-    '            dataTable.Rows.Add(dataRow)
-    '        End If
-
-    '    Next
-
-    '    Return dataTable
-    'End Function
-
-    'Public Function GetFilledWorkSheet(dataTable As DataTable) As Worksheet
-    '    Dim grdWorkSheet As Worksheet = New ReoGridControl().CreateWorksheet("dateentry")
-
-    '    'create the columns and set the header names in the worksheet
-    '    grdWorkSheet.Columns = dataTable.Columns.Count
-    '    For k = 0 To dataTable.Columns.Count - 1
-    '        grdWorkSheet.ColumnHeaders.Item(k).Text = dataTable.Columns.Item(k).ColumnName
-    '    Next
-
-    '    'create rows and values for the worksheet 
-    '    grdWorkSheet.SetRangeData(New RangePosition(0, 0, dataTable.Rows.Count, dataTable.Columns.Count), dataTable)
-
-    '    'todo. these 3 settings not important now. Left here to be done later
-    '    'grdWorkSheet.SetSettings(WorksheetSettings.Edit_AllowAdjustRowHeight, True)
-    '    'grdWorkSheet.SetRowsHeight(0, 1, 20)
-    '    'grdWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdWorkSheet.Rows, grdWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
-
-    '    Return grdWorkSheet
-    'End Function
-
+        If frmMain.clsRLink.bInstatObjectExists AndAlso frmMain.clsRLink.GetDataFrameCount() > 0 Then
+            clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
+            clsGetDataFrame.AddParameter("data_name", Chr(34) & ucrSelectorClimaticDataEntry.strCurrentDataFrame & Chr(34))
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript(), bSilent:=True)
+            dfTemp = expTemp.AsDataFrame()
+        End If
+        Return dfTemp
+    End Function
 
 End Class

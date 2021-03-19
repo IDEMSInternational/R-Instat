@@ -18,18 +18,38 @@ Imports instat.Translations
 Imports RDotNet
 Imports unvell.ReoGrid
 Public Class sdgClimaticDataEntry
+
+    Dim strStationColumnName As String
+    Dim strDateColumnName As String
+    Dim lstElementsColumnNames As List(Of String)
+    Dim strStationSelected As String
+    Dim startDateSelected As Date
+    Dim dataTable As DataTable
+
     Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        grdDataEntry.CurrentWorksheet = GetFilledWorkSheet(GetFilledDataTable(dlgClimaticDataEntry.dfTemp))
+
     End Sub
-    Public Function GetFilledDataTable(dataFrame As DataFrame) As DataTable
+
+    Public Sub Setup(strStationColumnName As String, strDateColumnName As String, lstElementsColumnNames As List(Of String), strStationSelected As String, startDateSelected As Date, dataFrameSelected As DataFrame)
+        Me.strStationColumnName = strStationColumnName
+        Me.strDateColumnName = strDateColumnName
+        Me.lstElementsColumnNames = lstElementsColumnNames
+        Me.strStationSelected = strStationSelected
+        Me.startDateSelected = startDateSelected
+        grdDataEntry.Worksheets.Clear()
+        Me.dataTable = GetFilledDataTable(strStationColumnName, strDateColumnName, lstElementsColumnNames, strStationSelected, startDateSelected, dataFrameSelected)
+
+        Dim currentWorkSheet As Worksheet = GetFilledWorkSheet(dataTable)
+        grdDataEntry.AddWorksheet(currentWorkSheet)
+
+        grdDataEntry.CurrentWorksheet = currentWorkSheet
+    End Sub
+
+    Private Function GetFilledDataTable(strStationColumnName As String, strDateColumnName As String, lstElementsColumnNames As List(Of String), strStationSelected As String, startDateSelected As Date, dataFrameSelected As DataFrame) As DataTable
         Dim dataTable As New DataTable
-        Dim dataRow As DataRow
+        Dim dataTableRow As DataRow
+        Dim dataFrameCellValue As Object
         Dim bAddRow As Boolean
-        Dim strStationColumnName As String = dlgClimaticDataEntry.ucrReceiverStation.GetVariableNames
-        ' Dim strDateColumnName As String = dlgClimaticDataEntry.ucrInputFactorLevels.GetValue()
-        Dim strDateColumnName As String = dlgClimaticDataEntry.ucrReceiverDate.GetVariableNames
-        Dim lstElementsColumnNames As List(Of String) = dlgClimaticDataEntry.ucrReceiverElements.GetVariableNamesAsList
-        Dim dateFrom As Date = dlgClimaticDataEntry.ucrDateTimePickerFrom.DateValue
 
         'create the columns to the data table; station, date and elements
         dataTable.Columns.Add(strStationColumnName)
@@ -38,23 +58,31 @@ Public Class sdgClimaticDataEntry
             dataTable.Columns.Add(strElement)
         Next
 
-        For i As Integer = 0 To dataFrame.RowCount - 1
+        For i As Integer = 0 To dataFrameSelected.RowCount - 1
             bAddRow = True
             'create a new data table row
-            dataRow = dataTable.NewRow()
+            dataTableRow = dataTable.NewRow()
 
             'fill the row with required values
             'the data frame column names should be the same as the data table column names in content
-            For Each strDataFrameColumnName As String In dataFrame.ColumnNames
-                If strDataFrameColumnName = strDateColumnName Then
-                    'todo. validate the date and compare, if > starting date then bAddRow = False
-                End If
-                dataRow.Item(strDataFrameColumnName) = dataFrame.Item(i, strDataFrameColumnName)
+            For Each dataTableColumn As DataColumn In dataTable.Columns
+                dataFrameCellValue = dataFrameSelected.Item(i, dataTableColumn.ColumnName)
+                'Only add rows of the station selected and from the starting date
+                'If strColumnName = strStationColumnName AndAlso dataFrameCellValue.ToString <> strStationSelected Then
+                '    'bAddRow = False
+                '    'Exit For
+                'ElseIf strColumnName = strDateColumnName Then
+                '    'todo. validate the date and compare, if > starting date then bAddRow = False
+                '    'bAddRow = False
+                '    'Exit For
+                'End If
+
+                dataTableRow.Item(dataTableColumn.ColumnName) = dataFrameCellValue
             Next
 
             If bAddRow Then
                 'add the row to the datatable
-                dataTable.Rows.Add(dataRow)
+                dataTable.Rows.Add(dataTableRow)
             End If
 
         Next
@@ -62,7 +90,7 @@ Public Class sdgClimaticDataEntry
     End Function
 
     Public Function GetFilledWorkSheet(dataTable As DataTable) As Worksheet
-        Dim grdWorkSheet As Worksheet = New ReoGridControl().CreateWorksheet("dataentry")
+        Dim grdWorkSheet As Worksheet = grdDataEntry.CreateWorksheet("dataentry")
 
         'create the columns and set the header names in the worksheet
         grdWorkSheet.Columns = dataTable.Columns.Count
@@ -71,6 +99,7 @@ Public Class sdgClimaticDataEntry
         Next
 
         'create rows and values for the worksheet 
+        grdWorkSheet.Rows = dataTable.Rows.Count
         grdWorkSheet.SetRangeData(New RangePosition(0, 0, dataTable.Rows.Count, dataTable.Columns.Count), dataTable)
 
         'todo. these 3 settings not important now. Left here to be done later
@@ -78,6 +107,7 @@ Public Class sdgClimaticDataEntry
         'grdWorkSheet.SetRowsHeight(0, 1, 20)
         'grdWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdWorkSheet.Rows, grdWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
 
+        'todo. make the station column be uneditable 
         Return grdWorkSheet
     End Function
 End Class
