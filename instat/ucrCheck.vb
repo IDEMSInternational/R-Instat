@@ -70,6 +70,7 @@ Public Class ucrCheck
     End Sub
 
     Private Sub chkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles chkCheck.CheckedChanged
+        OnControlContentsChanged()
         OnControlValueChanged()
     End Sub
 

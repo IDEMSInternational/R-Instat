@@ -506,6 +506,13 @@ Public Class ucrSave
         ucrInputComboSave.Enabled = ucrChkSave.Checked
         ucrInputTextSave.Visible = False
         ucrInputComboSave.Visible = False
+        btnColumnPosition.Visible = False
+
+        'always hide position button if save type is not a column
+        If strSaveType = "column" Then
+            btnColumnPosition.Visible = ucrChkSave.Checked
+        End If
+
         If strAssignToIfUnchecked <> "" Then
             If ucrChkSave.Checked Then
                 If bIsComboBox Then
@@ -636,7 +643,7 @@ Public Class ucrSave
     '''
     ''' <param name="ucrChangedControl">    Not used. </param>
     '''--------------------------------------------------------------------------------------------
-    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComboSave.ControlContentsChanged, ucrInputTextSave.ControlContentsChanged
+    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComboSave.ControlContentsChanged, ucrInputTextSave.ControlContentsChanged, ucrChkSave.ControlContentsChanged
         OnControlContentsChanged()
     End Sub
     '''--------------------------------------------------------------------------------------------
