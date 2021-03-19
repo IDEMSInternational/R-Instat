@@ -171,12 +171,12 @@ Public Class dlgCircularDensityPlot
         ucrInputComboKernel.SetRCode(clsDensityFunction, bReset)
 
         ucrNudShrink.SetRCode(clsDensityPlotFunction, bReset)
-        ucrNudShrink.AddAdditionalCodeParameterPair(clsRosePlotFunction, New RParameter("na.rm", 1), iAdditionalPairNo:=1)
-        ucrNudShrink.AddAdditionalCodeParameterPair(clsScatterPlotFunction, New RParameter("na.rm", 1), iAdditionalPairNo:=2)
+        ucrNudShrink.AddAdditionalCodeParameterPair(clsRosePlotFunction, New RParameter("shrink", 1), iAdditionalPairNo:=1)
+        ucrNudShrink.AddAdditionalCodeParameterPair(clsScatterPlotFunction, New RParameter("shrink", 1), iAdditionalPairNo:=2)
 
         ucrInputUnits.SetRCode(clsDensityPlotFunction, bReset)
-        ucrInputUnits.AddAdditionalCodeParameterPair(clsRosePlotFunction, New RParameter("shrink", 9), iAdditionalPairNo:=1)
-        ucrInputUnits.AddAdditionalCodeParameterPair(clsScatterPlotFunction, New RParameter("shrink", 9), iAdditionalPairNo:=2)
+        ucrInputUnits.AddAdditionalCodeParameterPair(clsRosePlotFunction, New RParameter("units", 9), iAdditionalPairNo:=1)
+        ucrInputUnits.AddAdditionalCodeParameterPair(clsScatterPlotFunction, New RParameter("units", 9), iAdditionalPairNo:=2)
 
         ucrChkOmitMissing.SetRCode(clsDensityFunction, bReset)
         ucrChkOmitMissing.AddAdditionalCodeParameterPair(clsRosePlotFunction, New RParameter("na.rm", 1), iAdditionalPairNo:=1)
