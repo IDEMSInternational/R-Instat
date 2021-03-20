@@ -134,6 +134,7 @@ Public Class dlgOneWayFrequencies
 
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("plot_frq")
+        clsSjPlot.AddParameter("geom.size", 0.5, iPosition:=14)
         clsPlotGrid.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
 
         clsAsGGplot.SetPackageName("ggplotify")
