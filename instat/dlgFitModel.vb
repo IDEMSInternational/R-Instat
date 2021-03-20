@@ -42,7 +42,6 @@ Public Class dlgFitModel
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
-            ucrChkConvertToVariate.Visible = False
         End If
         If bReset Then
             SetDefaults()
@@ -205,6 +204,7 @@ Public Class dlgFitModel
         ucrModelName.SetRCode(clsLM, bReset)
         ucrFamily.SetRCode(clsFamilyFunction, bReset)
         bRCodeSet = True
+        ResponseConvert()
     End Sub
 
     Private Sub TestOKEnabled()
