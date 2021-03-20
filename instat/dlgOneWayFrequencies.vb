@@ -23,6 +23,7 @@ Public Class dlgOneWayFrequencies
     Private clsSjPlot As New RFunction
     Private clsPlotGrid As New RFunction
     Private clsSjPlotList As New RFunction
+    Private clsAsGGplot As New RFunction
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
 
@@ -75,7 +76,7 @@ Public Class dlgOneWayFrequencies
 
         'setting rdoGraph and rdoTable
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "frq")
-        ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "plot_grid")
+        ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "as.ggplot")
         'TODO be able to have conditions across multiple functions
 
         ucrPnlOutput.SetParameter(New RParameter("out", 7))
@@ -114,6 +115,7 @@ Public Class dlgOneWayFrequencies
         clsSjMiscFrq = New RFunction
         clsSjPlot = New RFunction
         clsPlotGrid = New RFunction
+        clsAsGGplot = New RFunction
 
         ucrSelectorOneWayFreq.Reset()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
@@ -133,6 +135,10 @@ Public Class dlgOneWayFrequencies
         clsSjPlot.SetPackageName("sjPlot")
         clsSjPlot.SetRCommand("plot_frq")
         clsPlotGrid.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+
+        clsAsGGplot.SetPackageName("ggplotify")
+        clsAsGGplot.SetRCommand("as.ggplot")
+        clsAsGGplot.AddParameter("plot", clsRFunctionParameter:=clsPlotGrid, iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjMiscFrq)
         bResetSubdialog = True
@@ -158,7 +164,7 @@ Public Class dlgOneWayFrequencies
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrChkGroupData.SetRCode(clsSjMiscFrq, bReset)
         ucrNudGroups.SetRCode(clsSjMiscFrq, bReset)
-        ucrSaveGraph.SetRCode(clsPlotGrid, bReset)
+        ucrSaveGraph.SetRCode(clsAsGGplot, bReset)
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -241,7 +247,7 @@ Public Class dlgOneWayFrequencies
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjMiscFrq)
             ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoGraph.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsPlotGrid)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsAsGGplot)
             ucrBase.clsRsyntax.iCallType = 3
         End If
     End Sub
