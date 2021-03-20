@@ -16,6 +16,7 @@
 
 Imports instat
 Imports instat.Translations
+Imports RDotNet
 Public Class sdgPlots
     'Question to be discussed (later: need to explore first)/Exploration Task: In order to uniformise the code, could create a PlotOptionsSetup where all the necessary links between specific plots and plot options are made ? For the moment all these are scattered around. Might be necessary to have this flexibility though... 
     'Question to be discussed (later)/Exploration Task: Why do we have RSyntax given through here and not in the LayerOptions dialog ? Would it be easier to just give through the RSyntax everywhere, and locally extract/edit the necessary info in the different sdg's, ucr's ?  Sort of like it is done here ? As far as I understand, there is no clear attitude concerning what is shared, what is carried through, where, using what method. Maybe if we uniformise, choose a coherent attitiude, it will be easier to edit things, avoid bugs, add on functionalities...
@@ -412,8 +413,13 @@ Public Class sdgPlots
         ucrChkApplyChanges.AddParameterPresentCondition(False, "aesthetics", False)
 
         ucrChkApplyChanges.SetText("Apply Changes to Colour Scale")
-        ucrChkFillScaleDiscrete.SetText("Discrete")
-        ucrChkColourScaleDiscrete.SetText("Discrete")
+
+        ucrInputFillDicrete.SetLinkedDisplayControl(lblFillDiscrete)
+        ucrInputFillDicrete.SetItems({"Discrete", "Continous"})
+
+        ucrInputColourDiscrete.SetLinkedDisplayControl(lblColourDiscrete)
+        ucrInputColourDiscrete.SetItems({"Discrete", "Continous"})
+
 
         grpFillScale.Visible = False
         grpColourScale.Visible = False
@@ -544,6 +550,7 @@ Public Class sdgPlots
             bResetThemes = True
         End If
         SetFacetParameters()
+        CheckForDiscreteContinuous()
     End Sub
 
     Private Sub SetFacetParameters()
@@ -922,6 +929,84 @@ Public Class sdgPlots
         Else
             clsScaleColourViridisFunction.RemoveParameterByName("aesthetics")
             grpColourScale.Enabled = False
+        End If
+    End Sub
+
+    Private Sub CheckForDiscreteContinuous()
+        Dim bNotParameterFound As Boolean = True
+        Dim clsFillParameter As New RParameter
+        Dim strColumnType As String = ""
+        Dim expDateType As SymbolicExpression
+        For Each clsParameter As RParameter In clsBaseOperator.clsParameters
+            If bNotParameterFound Then
+                If clsParameter.bIsFunction Then
+                    Dim clsTempRFunction As New RFunction
+                    If Not IsNothing(TryCast(clsParameter.clsArgumentCodeStructure, RFunction)) Then
+                        clsTempRFunction = TryCast(clsParameter.clsArgumentCodeStructure, RFunction)
+                    End If
+                    For Each clsTempParameter As RParameter In clsTempRFunction.clsParameters
+                        If clsTempParameter.bIsFunction Then
+                            If Not IsNothing(TryCast(clsTempParameter.clsArgumentCodeStructure, RFunction)) Then
+                                If TryCast(clsTempParameter.clsArgumentCodeStructure, RFunction).strRCommand = "aes" Then
+                                    If Not IsNothing(TryCast(clsTempParameter.clsArgumentCodeStructure, RFunction).GetParameter("fill")) Then
+                                        clsFillParameter = TryCast(clsTempParameter.clsArgumentCodeStructure, RFunction).GetParameter("fill")
+                                        bNotParameterFound = False
+                                        Exit For
+                                    End If
+
+                                End If
+                            End If
+                        End If
+                    Next
+                End If
+            Else
+                Exit For
+            End If
+        Next
+
+        If Not clsFillParameter.strArgumentValue = "" Then
+            Dim clsGetColumnDatType As New RFunction
+            clsGetColumnDatType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_data_types")
+            clsGetColumnDatType.AddParameter("data_name", Chr(34) & ucrBaseSelector.strCurrentDataFrame & Chr(34), iPosition:=0)
+            clsGetColumnDatType.AddParameter("columns", Chr(34) & clsFillParameter.strArgumentValue & Chr(34), iPosition:=1)
+
+            expDateType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnDatType.ToScript, bSilent:=True)
+
+            If expDateType IsNot Nothing AndAlso expDateType.Type <> Internals.SymbolicExpressionType.Null Then
+                strColumnType = (expDateType.AsCharacter(0)).ToLower
+                If strColumnType = "factor" OrElse strColumnType = "logical" OrElse strColumnType = "character" Then
+                    ucrInputFillDicrete.SetText("Discrete")
+                    ucrInputColourDiscrete.SetText("Discrete")
+                ElseIf strColumnType = "numeric" Then
+                    ucrInputFillDicrete.SetText("Continous")
+                    ucrInputColourDiscrete.SetText("Continous")
+                End If
+            Else
+                ucrInputFillDicrete.SetText("Discrete")
+                ucrInputColourDiscrete.SetText("Discrete")
+            End If
+        Else
+            ucrInputFillDicrete.SetText("Discrete")
+            ucrInputColourDiscrete.SetText("Discrete")
+        End If
+
+    End Sub
+
+    Private Sub ucrPlotsAdditionalLayers_NumberOfLayersChanged() Handles ucrPlotsAdditionalLayers.NumberOfLayersChanged, ucrPlotsAdditionalLayers.LayerEdited
+        CheckForDiscreteContinuous()
+    End Sub
+
+    Private Sub Discrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputColourDiscrete.ControlValueChanged, ucrInputFillDicrete.ControlValueChanged
+        If ucrInputColourDiscrete.GetText = "Discrete" Then
+            clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
+        Else
+            clsScaleColourViridisFunction.AddParameter("discrete", "FALSE", iPosition:=7)
+        End If
+
+        If ucrInputFillDicrete.GetText = "Discrete" Then
+            clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
+        Else
+            clsScaleFillViridisFunction.AddParameter("discrete", "FALSE", iPosition:=7)
         End If
     End Sub
 End Class

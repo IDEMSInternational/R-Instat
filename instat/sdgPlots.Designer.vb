@@ -113,23 +113,25 @@ Partial Class sdgPlots
         Me.ucrChkAddColourScale = New instat.ucrCheck()
         Me.ucrChkAddFillScale = New instat.ucrCheck()
         Me.grpColourScale = New System.Windows.Forms.GroupBox()
+        Me.lblColourDiscrete = New System.Windows.Forms.Label()
+        Me.ucrInputColourDiscrete = New instat.ucrInputComboBox()
         Me.ucrNudColourScaleTransparency = New instat.ucrNud()
         Me.ucrInputColourScalePalette = New instat.ucrInputComboBox()
         Me.ucrNudColourScaleMapEnds = New instat.ucrNud()
         Me.ucrNudColourScaleMapBegins = New instat.ucrNud()
         Me.ucrChkColourScaleReverseOrder = New instat.ucrCheck()
-        Me.ucrChkColourScaleDiscrete = New instat.ucrCheck()
         Me.lblColourScaleMapEnds = New System.Windows.Forms.Label()
         Me.lblColourScaleMapBegins = New System.Windows.Forms.Label()
         Me.lblColourScalePalette = New System.Windows.Forms.Label()
         Me.lblColourScaleTransparency = New System.Windows.Forms.Label()
         Me.grpFillScale = New System.Windows.Forms.GroupBox()
+        Me.lblFillDiscrete = New System.Windows.Forms.Label()
         Me.ucrNudFillScaleTransparency = New instat.ucrNud()
         Me.ucrNudFillScaleMapEnds = New instat.ucrNud()
+        Me.ucrInputFillDicrete = New instat.ucrInputComboBox()
         Me.ucrNudFillScaleMapBegins = New instat.ucrNud()
         Me.ucrInputFillScaleColour = New instat.ucrInputComboBox()
         Me.ucrChkFillScaleReverseColourOrder = New instat.ucrCheck()
-        Me.ucrChkFillScaleDiscrete = New instat.ucrCheck()
         Me.lblFillScaleMapEnds = New System.Windows.Forms.Label()
         Me.lblFillScaleBeginColour = New System.Windows.Forms.Label()
         Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
@@ -711,12 +713,13 @@ Partial Class sdgPlots
         '
         'grpColourScale
         '
+        Me.grpColourScale.Controls.Add(Me.lblColourDiscrete)
+        Me.grpColourScale.Controls.Add(Me.ucrInputColourDiscrete)
         Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleTransparency)
         Me.grpColourScale.Controls.Add(Me.ucrInputColourScalePalette)
         Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleMapEnds)
         Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleMapBegins)
         Me.grpColourScale.Controls.Add(Me.ucrChkColourScaleReverseOrder)
-        Me.grpColourScale.Controls.Add(Me.ucrChkColourScaleDiscrete)
         Me.grpColourScale.Controls.Add(Me.lblColourScaleMapEnds)
         Me.grpColourScale.Controls.Add(Me.lblColourScaleMapBegins)
         Me.grpColourScale.Controls.Add(Me.lblColourScalePalette)
@@ -724,6 +727,19 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.grpColourScale, "grpColourScale")
         Me.grpColourScale.Name = "grpColourScale"
         Me.grpColourScale.TabStop = False
+        '
+        'lblColourDiscrete
+        '
+        resources.ApplyResources(Me.lblColourDiscrete, "lblColourDiscrete")
+        Me.lblColourDiscrete.Name = "lblColourDiscrete"
+        '
+        'ucrInputColourDiscrete
+        '
+        Me.ucrInputColourDiscrete.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourDiscrete.GetSetSelectedIndex = -1
+        Me.ucrInputColourDiscrete.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputColourDiscrete, "ucrInputColourDiscrete")
+        Me.ucrInputColourDiscrete.Name = "ucrInputColourDiscrete"
         '
         'ucrNudColourScaleTransparency
         '
@@ -769,12 +785,6 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrChkColourScaleReverseOrder, "ucrChkColourScaleReverseOrder")
         Me.ucrChkColourScaleReverseOrder.Name = "ucrChkColourScaleReverseOrder"
         '
-        'ucrChkColourScaleDiscrete
-        '
-        Me.ucrChkColourScaleDiscrete.Checked = False
-        resources.ApplyResources(Me.ucrChkColourScaleDiscrete, "ucrChkColourScaleDiscrete")
-        Me.ucrChkColourScaleDiscrete.Name = "ucrChkColourScaleDiscrete"
-        '
         'lblColourScaleMapEnds
         '
         resources.ApplyResources(Me.lblColourScaleMapEnds, "lblColourScaleMapEnds")
@@ -797,12 +807,13 @@ Partial Class sdgPlots
         '
         'grpFillScale
         '
+        Me.grpFillScale.Controls.Add(Me.lblFillDiscrete)
         Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleTransparency)
         Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleMapEnds)
+        Me.grpFillScale.Controls.Add(Me.ucrInputFillDicrete)
         Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleMapBegins)
         Me.grpFillScale.Controls.Add(Me.ucrInputFillScaleColour)
         Me.grpFillScale.Controls.Add(Me.ucrChkFillScaleReverseColourOrder)
-        Me.grpFillScale.Controls.Add(Me.ucrChkFillScaleDiscrete)
         Me.grpFillScale.Controls.Add(Me.lblFillScaleMapEnds)
         Me.grpFillScale.Controls.Add(Me.lblFillScaleBeginColour)
         Me.grpFillScale.Controls.Add(Me.lblFillScaleColourPalettte)
@@ -810,6 +821,11 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.grpFillScale, "grpFillScale")
         Me.grpFillScale.Name = "grpFillScale"
         Me.grpFillScale.TabStop = False
+        '
+        'lblFillDiscrete
+        '
+        resources.ApplyResources(Me.lblFillDiscrete, "lblFillDiscrete")
+        Me.lblFillDiscrete.Name = "lblFillDiscrete"
         '
         'ucrNudFillScaleTransparency
         '
@@ -830,6 +846,14 @@ Partial Class sdgPlots
         Me.ucrNudFillScaleMapEnds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFillScaleMapEnds.Name = "ucrNudFillScaleMapEnds"
         Me.ucrNudFillScaleMapEnds.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputFillDicrete
+        '
+        Me.ucrInputFillDicrete.AddQuotesIfUnrecognised = True
+        Me.ucrInputFillDicrete.GetSetSelectedIndex = -1
+        Me.ucrInputFillDicrete.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFillDicrete, "ucrInputFillDicrete")
+        Me.ucrInputFillDicrete.Name = "ucrInputFillDicrete"
         '
         'ucrNudFillScaleMapBegins
         '
@@ -854,12 +878,6 @@ Partial Class sdgPlots
         Me.ucrChkFillScaleReverseColourOrder.Checked = False
         resources.ApplyResources(Me.ucrChkFillScaleReverseColourOrder, "ucrChkFillScaleReverseColourOrder")
         Me.ucrChkFillScaleReverseColourOrder.Name = "ucrChkFillScaleReverseColourOrder"
-        '
-        'ucrChkFillScaleDiscrete
-        '
-        Me.ucrChkFillScaleDiscrete.Checked = False
-        resources.ApplyResources(Me.ucrChkFillScaleDiscrete, "ucrChkFillScaleDiscrete")
-        Me.ucrChkFillScaleDiscrete.Name = "ucrChkFillScaleDiscrete"
         '
         'lblFillScaleMapEnds
         '
@@ -1001,14 +1019,12 @@ Partial Class sdgPlots
     Friend WithEvents lblFillScaleColourPalettte As Label
     Friend WithEvents lblFillScaleTransparency As Label
     Friend WithEvents ucrChkFillScaleReverseColourOrder As ucrCheck
-    Friend WithEvents ucrChkFillScaleDiscrete As ucrCheck
     Friend WithEvents grpColourScale As GroupBox
     Friend WithEvents ucrNudColourScaleTransparency As ucrNud
     Friend WithEvents ucrInputColourScalePalette As ucrInputComboBox
     Friend WithEvents ucrNudColourScaleMapEnds As ucrNud
     Friend WithEvents ucrNudColourScaleMapBegins As ucrNud
     Friend WithEvents ucrChkColourScaleReverseOrder As ucrCheck
-    Friend WithEvents ucrChkColourScaleDiscrete As ucrCheck
     Friend WithEvents lblColourScaleMapEnds As Label
     Friend WithEvents lblColourScaleMapBegins As Label
     Friend WithEvents lblColourScalePalette As Label
@@ -1020,6 +1036,10 @@ Partial Class sdgPlots
     Friend WithEvents ucrChkAddFillScale As ucrCheck
     Friend WithEvents ucrChkAddColourScale As ucrCheck
     Friend WithEvents ucrChkApplyChanges As ucrCheck
+    Friend WithEvents ucrInputFillDicrete As ucrInputComboBox
+    Friend WithEvents lblFillDiscrete As Label
+    Friend WithEvents lblColourDiscrete As Label
+    Friend WithEvents ucrInputColourDiscrete As ucrInputComboBox
 End Class
 
 
