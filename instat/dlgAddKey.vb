@@ -22,7 +22,6 @@ Public Class dlgAddKey
     Private bReset As Boolean = True
     Private clsDefaultRFunction As New RFunction
     Private clsAnyDuplicatesFunction As New RFunction
-    Private clsCreateKeyScript As New RFunction
     Private bUniqueChecked As Boolean = False
 
     Private Sub dlgAddKey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -43,6 +42,7 @@ Public Class dlgAddKey
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 504
+        ucrBase.clsRsyntax.iCallType = 2
         ucrInputCheckInput.IsReadOnly = True
         EnableDisableCmdCheckUnique()
 
@@ -60,7 +60,6 @@ Public Class dlgAddKey
 
     Private Sub SetDefaults()
         clsDefaultRFunction = New RFunction
-        clsCreateKeyScript = New RFunction
 
         ucrSelectorKeyColumns.Reset()
         ucrInputKeyName.SetName("")
@@ -69,24 +68,11 @@ Public Class dlgAddKey
         bUniqueChecked = False
 
         clsDefaultRFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
-
-        clsCreateKeyScript.SetRCommand("cat")
-        clsCreateKeyScript.AddParameter("after_cols", Chr(34) & "used to create the key:" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
-
-        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultRFunction)
-
-        ucrBase.clsRsyntax.AddToAfterCodes(clsCreateKeyScript)
-        clsCreateKeyScript.iCallType = 2
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrReceiverKeyColumns.AddAdditionalCodeParameterPair(clsCreateKeyScript, New RParameter("cols", 0), iAdditionalPairNo:=1)
-        ucrInputKeyName.AddAdditionalCodeParameterPair(clsCreateKeyScript, New RParameter("key_name", 2), iAdditionalPairNo:=1)
-
-        ucrSelectorKeyColumns.SetRCode(clsDefaultRFunction, bReset)
-        ucrReceiverKeyColumns.SetRCode(clsDefaultRFunction, bReset)
-        ucrInputKeyName.SetRCode(clsDefaultRFunction, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
