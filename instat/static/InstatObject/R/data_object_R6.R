@@ -1846,7 +1846,7 @@ DataSheet$set("public", "get_keys", function(key_name) {
 DataSheet$set("public", "remove_key", function(key_name) {
   if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
   private$keys[[key_name]] <- NULL
-  return(cat("key removed:", key_name))
+  return(cat("Key removed:", key_name))
 }
 )
 

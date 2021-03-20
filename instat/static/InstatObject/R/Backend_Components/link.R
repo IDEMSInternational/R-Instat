@@ -99,6 +99,7 @@ DataBook$set("public", "add_link", function(from_data_frame, to_data_frame, link
         from_on_left <- FALSE
         break
       }
+    #return(cat(link_pairs, "used to create link:", link_name))
     }
     # This should never happen because we are inside the Else of link_exists_between
     if(length(index) == 0) stop("link not found")
