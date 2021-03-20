@@ -247,6 +247,7 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub ucrReceiverOneWayFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneWayFreq.ControlValueChanged
+        clsPlotGrid.AddParameter("tags", ucrReceiverOneWayFreq.GetVariableNames, iPosition:=1)
         If ucrReceiverOneWayFreq.lstSelectedVariables.Items.Count > 1 Then
             clsPlotGrid.AddParameter("x", clsRFunctionParameter:=clsSjPlot, iPosition:=0)
         Else
