@@ -12,4 +12,178 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 279</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>410, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="ucrSelectByMetadata.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="ucrSelectByMetadata.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectByMetadata.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectByMetadata.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>426, 338</value>
+  </data>
+  <data name="lblProperty.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>252, 30</value>
+  </data>
+  <data name="lblProperty.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 15</value>
+  </data>
+  <data name="lblProperty.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblProperty.Text" xml:space="preserve">
+    <value>Sifa:</value>
+  </data>
+  <data name="UcrDialogDisabled1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>92, 157</value>
+  </data>
+  <data name="UcrDialogDisabled1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>240, 50</value>
+  </data>
+  <data name="UcrDialogDisabled1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="ucrInputDefineProperty.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>254, 45</value>
+  </data>
+  <data name="ucrInputDefineProperty.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 21</value>
+  </data>
+  <data name="ucrInputDefineProperty.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoChooseProperty.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 22</value>
+  </data>
+  <data name="rdoChooseProperty.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>104, 24</value>
+  </data>
+  <data name="rdoChooseProperty.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoDefineNewProperty.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 49</value>
+  </data>
+  <data name="rdoDefineNewProperty.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>127, 24</value>
+  </data>
+  <data name="rdoDefineNewProperty.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpProperty.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>254, 193</value>
+  </data>
+  <data name="grpProperty.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>153, 80</value>
+  </data>
+  <data name="grpProperty.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpProperty.Text" xml:space="preserve">
+    <value>Rasilimali</value>
+  </data>
+  <data name="ucrNewValue.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>92, 244</value>
+  </data>
+  <data name="ucrNewValue.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>140, 29</value>
+  </data>
+  <data name="ucrNewValue.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrCurrentValue.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>92, 213</value>
+  </data>
+  <data name="ucrCurrentValue.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrCurrentValue.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblNewValue.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 248</value>
+  </data>
+  <data name="lblNewValue.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>76, 18</value>
+  </data>
+  <data name="lblNewValue.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblNewValue.Text" xml:space="preserve">
+    <value>Thamani Mpya</value>
+  </data>
+  <data name="lblCurrentValue.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 215</value>
+  </data>
+  <data name="lblCurrentValue.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>84, 23</value>
+  </data>
+  <data name="lblCurrentValue.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblCurrentValue.Text" xml:space="preserve">
+    <value>Thamani ya Sasa</value>
+  </data>
+  <data name="ucrReceiverChooseColumns.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>254, 87</value>
+  </data>
+  <data name="ucrReceiverChooseColumns.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverChooseColumns.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 103</value>
+  </data>
+  <data name="ucrReceiverChooseColumns.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblChooseColumns.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>254, 73</value>
+  </data>
+  <data name="lblChooseColumns.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 30</value>
+  </data>
+  <data name="lblChooseColumns.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="lblChooseColumns.Text" xml:space="preserve">
+    <value>Chagua Safuwima...</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Metadata</value>
+  </data>
+  <data name="ucrReceiverChooseProperty.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>254, 45</value>
+  </data>
+  <data name="ucrReceiverChooseProperty.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverChooseProperty.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverChooseProperty.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

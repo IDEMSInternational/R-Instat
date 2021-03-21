@@ -12,4 +12,166 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="cmdOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 267</value>
+  </data>
+  <data name="cmdOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 25</value>
+  </data>
+  <data name="cmdOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="cmdHistogramOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 236</value>
+  </data>
+  <data name="cmdHistogramOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 25</value>
+  </data>
+  <data name="cmdHistogramOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="rdoHistogram.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoHistogram.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoHistogram.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>45, 12</value>
+  </data>
+  <data name="rdoHistogram.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>111, 28</value>
+  </data>
+  <data name="rdoHistogram.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoHistogram.Text" xml:space="preserve">
+    <value>Histogramu</value>
+  </data>
+  <data name="rdoHistogram.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="rdoDensity.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoDensity.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoDensity.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>154, 12</value>
+  </data>
+  <data name="rdoDensity.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>111, 28</value>
+  </data>
+  <data name="rdoDensity.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoDensity.Text" xml:space="preserve">
+    <value>Uzito</value>
+  </data>
+  <data name="rdoDensity.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="rdoFrequencyPolygon.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoFrequencyPolygon.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoFrequencyPolygon.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>263, 12</value>
+  </data>
+  <data name="rdoFrequencyPolygon.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>111, 28</value>
+  </data>
+  <data name="rdoFrequencyPolygon.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoFrequencyPolygon.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="lblfactor.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblfactor.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>247, 216</value>
+  </data>
+  <data name="lblfactor.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>85, 13</value>
+  </data>
+  <data name="lblfactor.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="ucrSaveHist.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 300</value>
+  </data>
+  <data name="ucrSaveHist.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>255, 24</value>
+  </data>
+  <data name="ucrSaveHist.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>418, 382</value>
+  </data>
+  <data name="ucrFactorReceiver.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>247, 231</value>
+  </data>
+  <data name="ucrFactorReceiver.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrFactorReceiver.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>125, 20</value>
+  </data>
+  <data name="ucrFactorReceiver.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="ucrHistogramSelector.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 48</value>
+  </data>
+  <data name="ucrHistogramSelector.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrHistogramSelector.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrHistogramSelector.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 324</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>410, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="ucrPnlOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 5</value>
+  </data>
+  <data name="ucrPnlOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>398, 42</value>
+  </data>
+  <data name="ucrPnlOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="ucrVariablesAsFactorforHist.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>247, 68</value>
+  </data>
+  <data name="ucrVariablesAsFactorforHist.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>125, 136</value>
+  </data>
+  <data name="ucrVariablesAsFactorforHist.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

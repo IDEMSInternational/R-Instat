@@ -12,4 +12,109 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblDistributionParameters.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDistributionParameters.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 45</value>
+  </data>
+  <data name="lblDistributionParameters.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>118, 13</value>
+  </data>
+  <data name="lblDistributionParameters.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblParameter1.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblParameter1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 72</value>
+  </data>
+  <data name="lblParameter1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="lblParameter1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblParameter2.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblParameter2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 101</value>
+  </data>
+  <data name="lblParameter2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="lblParameter2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblParameter3.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblParameter3.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 128</value>
+  </data>
+  <data name="lblParameter3.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="lblParameter3.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="lblParameter4.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblParameter4.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>9, 155</value>
+  </data>
+  <data name="lblParameter4.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="lblParameter4.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="ucrInputParameter1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>143, 64</value>
+  </data>
+  <data name="ucrInputParameter1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="ucrInputParameter1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="ucrInputParameter2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>143, 93</value>
+  </data>
+  <data name="ucrInputParameter2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="ucrInputParameter2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="ucrInputParameter3.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>143, 120</value>
+  </data>
+  <data name="ucrInputParameter3.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="ucrInputParameter3.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="ucrInputParameter4.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>143, 147</value>
+  </data>
+  <data name="ucrInputParameter4.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 21</value>
+  </data>
+  <data name="ucrInputParameter4.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>248, 177</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

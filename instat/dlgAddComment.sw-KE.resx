@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="lblRow.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblRow.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>266, 90</value>
+  </data>
+  <data name="lblRow.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>32, 13</value>
+  </data>
+  <data name="lblRow.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblRow.Text" xml:space="preserve">
+    <value>&amp;Safuulalo</value>
+  </data>
+  <data name="lblColumn.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblColumn.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>266, 139</value>
+  </data>
+  <data name="lblColumn.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 13</value>
+  </data>
+  <data name="lblColumn.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblColumn.Text" xml:space="preserve">
+    <value>Safuwima</value>
+  </data>
+  <data name="lblComment.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblComment.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>12, 253</value>
+  </data>
+  <data name="lblComment.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>54, 13</value>
+  </data>
+  <data name="lblComment.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblComment.Text" xml:space="preserve">
+    <value>Maoni:</value>
+  </data>
+  <data name="rdoCell.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoCell.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoCell.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>115, 12</value>
+  </data>
+  <data name="rdoCell.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 28</value>
+  </data>
+  <data name="rdoCell.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoCell.Text" xml:space="preserve">
+    <value>Seli</value>
+  </data>
+  <data name="rdoCell.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="rdoRow.Appearance" xml:space="preserve" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoRow.BackgroundImageLayout" xml:space="preserve" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="rdoRow.CheckAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="rdoRow.FlatStyle" xml:space="preserve" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoRow.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>213, 12</value>
+  </data>
+  <data name="rdoRow.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>100, 28</value>
+  </data>
+  <data name="rdoRow.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoRow.Text" xml:space="preserve">
+    <value>Safu ulalo</value>
+  </data>
+  <data name="rdoRow.TextAlign" xml:space="preserve" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="UcrDialogDisabled1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>66, 147</value>
+  </data>
+  <data name="UcrDialogDisabled1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>295, 96</value>
+  </data>
+  <data name="UcrDialogDisabled1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="ucrPnlCellOrRow.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>108, 12</value>
+  </data>
+  <data name="ucrPnlCellOrRow.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>219, 29</value>
+  </data>
+  <data name="ucrPnlCellOrRow.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrInputComment.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>92, 249</value>
+  </data>
+  <data name="ucrInputComment.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>316, 21</value>
+  </data>
+  <data name="ucrInputComment.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>418, 330</value>
+  </data>
+  <data name="ucrReceiverRow.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>266, 105</value>
+  </data>
+  <data name="ucrReceiverRow.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverRow.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>137, 20</value>
+  </data>
+  <data name="ucrReceiverRow.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="ucrSelectorAddComment.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 55</value>
+  </data>
+  <data name="ucrSelectorAddComment.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorAddComment.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorAddComment.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="ucrDataFrame.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 55</value>
+  </data>
+  <data name="ucrDataFrame.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrDataFrame.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 50</value>
+  </data>
+  <data name="ucrDataFrame.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 276</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>408, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="ucrReceiverColumn.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>266, 154</value>
+  </data>
+  <data name="ucrReceiverColumn.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverColumn.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>137, 20</value>
+  </data>
+  <data name="ucrReceiverColumn.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>

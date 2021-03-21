@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
@@ -22,6 +22,15 @@ Public Class ucrCheck
 
     Private strValueIfChecked As String = "TRUE"
     Private strValueIfUnchecked As String = "FALSE"
+
+    Public Overrides Property Text() As String
+        Get
+            Return chkCheck.Text
+        End Get
+        Set(value As String)
+            chkCheck.Text = value
+        End Set
+    End Property
 
     Public Sub SetValueIfChecked(strNewValueIfChecked As String)
         Dim clsTempCond As New Condition
@@ -61,10 +70,11 @@ Public Class ucrCheck
     End Sub
 
     Private Sub chkCheck_CheckedChanged(sender As Object, e As EventArgs) Handles chkCheck.CheckedChanged
+        OnControlContentsChanged()
         OnControlValueChanged()
     End Sub
 
-    Protected Overrides Sub UpdateParameter(clsTempParam As RParameter)
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If bChangeParameterValue AndAlso clsTempParam IsNot Nothing Then
             If chkCheck.Checked Then
                 If strValueIfChecked <> "" Then
@@ -117,6 +127,8 @@ Public Class ucrCheck
                     End If
                 ElseIf bAddRemoveParameter Then
                     Return GetRCode().ContainsParameter(clsMainParameter)
+                Else
+                    Return Nothing
                 End If
             ElseIf clsMainParameter.bIsFunction OrElse clsMainParameter.bIsOperator Then
                 Return clsMainParameter.clsArgumentCodeStructure
@@ -128,13 +140,18 @@ Public Class ucrCheck
         End If
     End Function
 
-    Protected Overrides Sub SetToValue(objTemp As Object)
+    Public Overrides Sub SetToValue(objTemp As Object)
         Dim bTempValue As Boolean
 
-        If Boolean.TryParse(objTemp, bTempValue) Then
-            Checked = bTempValue
+        If objTemp Is Nothing Then
+            'If no value reset to a default value
+            Checked = False
         Else
-            MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to boolean.")
+            If Boolean.TryParse(objTemp, bTempValue) Then
+                Checked = bTempValue
+            Else
+                MsgBox("Developer error: Cannot set the value of " & Name & " because cannot convert value of object to boolean.")
+            End If
         End If
     End Sub
 
@@ -159,4 +176,17 @@ Public Class ucrCheck
             End If
         End If
     End Sub
+
+    Protected Overrides Sub ResetControlValue()
+        Checked = False
+    End Sub
+
+    Public Overloads Property Visible As Boolean
+        Get
+            Return chkCheck.Visible
+        End Get
+        Set(bVisible As Boolean)
+            chkCheck.Visible = bVisible
+        End Set
+    End Property
 End Class

@@ -12,4 +12,109 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ucrChkCoefficients.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 46</value>
+  </data>
+  <data name="ucrChkCoefficients.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>184, 20</value>
+  </data>
+  <data name="ucrChkCoefficients.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrChkCanonicalCorrelations.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 18</value>
+  </data>
+  <data name="ucrChkCanonicalCorrelations.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>184, 20</value>
+  </data>
+  <data name="ucrChkCanonicalCorrelations.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrChkPairwisePlot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 18</value>
+  </data>
+  <data name="ucrChkPairwisePlot.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>184, 20</value>
+  </data>
+  <data name="ucrChkPairwisePlot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoYVariables.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoYVariables.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>46, 67</value>
+  </data>
+  <data name="rdoYVariables.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>78, 17</value>
+  </data>
+  <data name="rdoYVariables.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoXVariables.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoXVariables.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>46, 44</value>
+  </data>
+  <data name="rdoXVariables.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>78, 17</value>
+  </data>
+  <data name="rdoXVariables.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrPnlVariables.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>36, 36</value>
+  </data>
+  <data name="ucrPnlVariables.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>127, 58</value>
+  </data>
+  <data name="ucrPnlVariables.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrSdgButtons.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>36, 190</value>
+  </data>
+  <data name="ucrSdgButtons.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrSdgButtons.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpDisplay.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 7</value>
+  </data>
+  <data name="grpDisplay.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>200, 72</value>
+  </data>
+  <data name="grpDisplay.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpDisplay.Text" xml:space="preserve">
+    <value>Onyesha</value>
+  </data>
+  <data name="grpGraphics.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 85</value>
+  </data>
+  <data name="grpGraphics.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>200, 100</value>
+  </data>
+  <data name="grpGraphics.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpGraphics.Text" xml:space="preserve">
+    <value>Michoro</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>214, 224</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgExtremes
     Inherits System.Windows.Forms.Form
 
@@ -22,281 +38,329 @@ Partial Class dlgExtremes
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.ucrBase = New instat.ucrButtons()
-        Me.ucrAddRemove = New instat.ucrSelectorAddRemove()
-        Me.ucrReceiverDataToFit = New instat.ucrReceiverSingle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgExtremes))
+        Me.cmdSqrt = New System.Windows.Forms.Button()
+        Me.cmdLog = New System.Windows.Forms.Button()
+        Me.cmdTan = New System.Windows.Forms.Button()
+        Me.cmdExp = New System.Windows.Forms.Button()
+        Me.lblThreshold = New System.Windows.Forms.Label()
+        Me.cmdSin = New System.Windows.Forms.Button()
+        Me.grpSecondCalc = New System.Windows.Forms.GroupBox()
+        Me.cmdCos = New System.Windows.Forms.Button()
+        Me.grpFirstCalc = New System.Windows.Forms.GroupBox()
+        Me.cmdMultiply = New System.Windows.Forms.Button()
+        Me.cmdColon = New System.Windows.Forms.Button()
+        Me.cmdPlus = New System.Windows.Forms.Button()
+        Me.cmdPower = New System.Windows.Forms.Button()
+        Me.cmdClosingBracket = New System.Windows.Forms.Button()
+        Me.cmdOpeningBracket = New System.Windows.Forms.Button()
+        Me.cmdDiv = New System.Windows.Forms.Button()
+        Me.cmdDoubleBracket = New System.Windows.Forms.Button()
+        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.cmdZero = New System.Windows.Forms.Button()
+        Me.cmdMinus = New System.Windows.Forms.Button()
+        Me.lblFevdType = New System.Windows.Forms.Label()
+        Me.cmdDisplayOptions = New System.Windows.Forms.Button()
+        Me.cmdFittingOptions = New System.Windows.Forms.Button()
         Me.lblDataToFit = New System.Windows.Forms.Label()
-        Me.grpDistributions = New System.Windows.Forms.GroupBox()
-        Me.rdoGEV = New System.Windows.Forms.RadioButton()
-        Me.rdoGumbel = New System.Windows.Forms.RadioButton()
-        Me.grpEstimationMethods = New System.Windows.Forms.GroupBox()
-        Me.cboMethodOfMoments = New System.Windows.Forms.ComboBox()
-        Me.cboMaximumLikelihood = New System.Windows.Forms.ComboBox()
-        Me.lblSaveEstimates = New System.Windows.Forms.Label()
-        Me.chkMethodOfMoments = New System.Windows.Forms.CheckBox()
-        Me.chkMaximumLikelihood = New System.Windows.Forms.CheckBox()
-        Me.chkRestrictValues = New System.Windows.Forms.CheckBox()
-        Me.lblBetween = New System.Windows.Forms.Label()
-        Me.txtBetween = New System.Windows.Forms.TextBox()
-        Me.lblAnd = New System.Windows.Forms.Label()
-        Me.txtAnd = New System.Windows.Forms.TextBox()
-        Me.chkProbabilityPlot = New System.Windows.Forms.CheckBox()
-        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
-        Me.grpDistributions.SuspendLayout()
-        Me.grpEstimationMethods.SuspendLayout()
+        Me.ucrInputThresholdforLocation = New instat.ucrInputTextBox()
+        Me.ucrTryModelling = New instat.ucrTry()
+        Me.ucrChkExplanatoryModelForLocationParameter = New instat.ucrCheck()
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam = New instat.ucrReceiverExpression()
+        Me.ucrInputExtremes = New instat.ucrInputComboBox()
+        Me.ucrSaveExtremes = New instat.ucrSave()
+        Me.ucrSelectorExtremes = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverVariable = New instat.ucrReceiverSingle()
+        Me.ucrBase = New instat.ucrButtons()
+        Me.grpSecondCalc.SuspendLayout()
+        Me.grpFirstCalc.SuspendLayout()
         Me.SuspendLayout()
         '
-        'ucrBase
+        'cmdSqrt
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 290)
-        Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 51)
-        Me.ucrBase.TabIndex = 0
+        resources.ApplyResources(Me.cmdSqrt, "cmdSqrt")
+        Me.cmdSqrt.Name = "cmdSqrt"
+        Me.cmdSqrt.UseVisualStyleBackColor = True
         '
-        'ucrAddRemove
+        'cmdLog
         '
-        Me.ucrAddRemove.bShowHiddenColumns = False
-        Me.ucrAddRemove.Location = New System.Drawing.Point(9, 24)
-        Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(206, 127)
-        Me.ucrAddRemove.TabIndex = 1
+        resources.ApplyResources(Me.cmdLog, "cmdLog")
+        Me.cmdLog.Name = "cmdLog"
+        Me.cmdLog.UseVisualStyleBackColor = True
         '
-        'ucrReceiverDataToFit
+        'cmdTan
         '
-        Me.ucrReceiverDataToFit.Location = New System.Drawing.Point(224, 39)
-        Me.ucrReceiverDataToFit.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDataToFit.Name = "ucrReceiverDataToFit"
-        Me.ucrReceiverDataToFit.Selector = Nothing
-        Me.ucrReceiverDataToFit.Size = New System.Drawing.Size(106, 26)
-        Me.ucrReceiverDataToFit.TabIndex = 2
+        resources.ApplyResources(Me.cmdTan, "cmdTan")
+        Me.cmdTan.Name = "cmdTan"
+        Me.cmdTan.UseVisualStyleBackColor = True
+        '
+        'cmdExp
+        '
+        resources.ApplyResources(Me.cmdExp, "cmdExp")
+        Me.cmdExp.Name = "cmdExp"
+        Me.cmdExp.UseVisualStyleBackColor = True
+        '
+        'lblThreshold
+        '
+        resources.ApplyResources(Me.lblThreshold, "lblThreshold")
+        Me.lblThreshold.Name = "lblThreshold"
+        '
+        'cmdSin
+        '
+        resources.ApplyResources(Me.cmdSin, "cmdSin")
+        Me.cmdSin.Name = "cmdSin"
+        Me.cmdSin.UseVisualStyleBackColor = True
+        '
+        'grpSecondCalc
+        '
+        Me.grpSecondCalc.Controls.Add(Me.cmdCos)
+        Me.grpSecondCalc.Controls.Add(Me.cmdSqrt)
+        Me.grpSecondCalc.Controls.Add(Me.cmdSin)
+        Me.grpSecondCalc.Controls.Add(Me.cmdLog)
+        Me.grpSecondCalc.Controls.Add(Me.cmdTan)
+        Me.grpSecondCalc.Controls.Add(Me.cmdExp)
+        resources.ApplyResources(Me.grpSecondCalc, "grpSecondCalc")
+        Me.grpSecondCalc.Name = "grpSecondCalc"
+        Me.grpSecondCalc.TabStop = False
+        '
+        'cmdCos
+        '
+        resources.ApplyResources(Me.cmdCos, "cmdCos")
+        Me.cmdCos.Name = "cmdCos"
+        Me.cmdCos.UseVisualStyleBackColor = True
+        '
+        'grpFirstCalc
+        '
+        Me.grpFirstCalc.Controls.Add(Me.cmdMultiply)
+        Me.grpFirstCalc.Controls.Add(Me.cmdColon)
+        Me.grpFirstCalc.Controls.Add(Me.cmdPlus)
+        Me.grpFirstCalc.Controls.Add(Me.cmdPower)
+        Me.grpFirstCalc.Controls.Add(Me.cmdClosingBracket)
+        Me.grpFirstCalc.Controls.Add(Me.cmdOpeningBracket)
+        Me.grpFirstCalc.Controls.Add(Me.cmdDiv)
+        Me.grpFirstCalc.Controls.Add(Me.cmdDoubleBracket)
+        Me.grpFirstCalc.Controls.Add(Me.cmdClear)
+        Me.grpFirstCalc.Controls.Add(Me.cmdZero)
+        Me.grpFirstCalc.Controls.Add(Me.cmdMinus)
+        resources.ApplyResources(Me.grpFirstCalc, "grpFirstCalc")
+        Me.grpFirstCalc.Name = "grpFirstCalc"
+        Me.grpFirstCalc.TabStop = False
+        '
+        'cmdMultiply
+        '
+        resources.ApplyResources(Me.cmdMultiply, "cmdMultiply")
+        Me.cmdMultiply.Name = "cmdMultiply"
+        Me.cmdMultiply.UseVisualStyleBackColor = True
+        '
+        'cmdColon
+        '
+        resources.ApplyResources(Me.cmdColon, "cmdColon")
+        Me.cmdColon.Name = "cmdColon"
+        Me.cmdColon.UseVisualStyleBackColor = True
+        '
+        'cmdPlus
+        '
+        resources.ApplyResources(Me.cmdPlus, "cmdPlus")
+        Me.cmdPlus.Name = "cmdPlus"
+        Me.cmdPlus.UseVisualStyleBackColor = True
+        '
+        'cmdPower
+        '
+        resources.ApplyResources(Me.cmdPower, "cmdPower")
+        Me.cmdPower.Name = "cmdPower"
+        Me.cmdPower.UseVisualStyleBackColor = True
+        '
+        'cmdClosingBracket
+        '
+        resources.ApplyResources(Me.cmdClosingBracket, "cmdClosingBracket")
+        Me.cmdClosingBracket.Name = "cmdClosingBracket"
+        Me.cmdClosingBracket.UseVisualStyleBackColor = True
+        '
+        'cmdOpeningBracket
+        '
+        resources.ApplyResources(Me.cmdOpeningBracket, "cmdOpeningBracket")
+        Me.cmdOpeningBracket.Name = "cmdOpeningBracket"
+        Me.cmdOpeningBracket.UseVisualStyleBackColor = True
+        '
+        'cmdDiv
+        '
+        resources.ApplyResources(Me.cmdDiv, "cmdDiv")
+        Me.cmdDiv.Name = "cmdDiv"
+        Me.cmdDiv.UseVisualStyleBackColor = True
+        '
+        'cmdDoubleBracket
+        '
+        resources.ApplyResources(Me.cmdDoubleBracket, "cmdDoubleBracket")
+        Me.cmdDoubleBracket.Name = "cmdDoubleBracket"
+        Me.cmdDoubleBracket.UseVisualStyleBackColor = True
+        '
+        'cmdClear
+        '
+        resources.ApplyResources(Me.cmdClear, "cmdClear")
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.UseVisualStyleBackColor = True
+        '
+        'cmdZero
+        '
+        resources.ApplyResources(Me.cmdZero, "cmdZero")
+        Me.cmdZero.Name = "cmdZero"
+        Me.cmdZero.UseVisualStyleBackColor = True
+        '
+        'cmdMinus
+        '
+        resources.ApplyResources(Me.cmdMinus, "cmdMinus")
+        Me.cmdMinus.Name = "cmdMinus"
+        Me.cmdMinus.UseVisualStyleBackColor = True
+        '
+        'lblFevdType
+        '
+        resources.ApplyResources(Me.lblFevdType, "lblFevdType")
+        Me.lblFevdType.Name = "lblFevdType"
+        '
+        'cmdDisplayOptions
+        '
+        resources.ApplyResources(Me.cmdDisplayOptions, "cmdDisplayOptions")
+        Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
+        Me.cmdDisplayOptions.UseVisualStyleBackColor = True
+        '
+        'cmdFittingOptions
+        '
+        resources.ApplyResources(Me.cmdFittingOptions, "cmdFittingOptions")
+        Me.cmdFittingOptions.Name = "cmdFittingOptions"
+        Me.cmdFittingOptions.UseVisualStyleBackColor = True
         '
         'lblDataToFit
         '
-        Me.lblDataToFit.AutoSize = True
-        Me.lblDataToFit.Location = New System.Drawing.Point(224, 24)
+        resources.ApplyResources(Me.lblDataToFit, "lblDataToFit")
         Me.lblDataToFit.Name = "lblDataToFit"
-        Me.lblDataToFit.Size = New System.Drawing.Size(89, 13)
-        Me.lblDataToFit.TabIndex = 3
         Me.lblDataToFit.Tag = "Data_to_be_fitted"
-        Me.lblDataToFit.Text = "Data to be Fitted:"
         '
-        'grpDistributions
+        'ucrInputThresholdforLocation
         '
-        Me.grpDistributions.Controls.Add(Me.rdoGEV)
-        Me.grpDistributions.Controls.Add(Me.rdoGumbel)
-        Me.grpDistributions.Location = New System.Drawing.Point(267, 194)
-        Me.grpDistributions.Name = "grpDistributions"
-        Me.grpDistributions.Size = New System.Drawing.Size(100, 91)
-        Me.grpDistributions.TabIndex = 4
-        Me.grpDistributions.TabStop = False
-        Me.grpDistributions.Tag = "Distributions"
-        Me.grpDistributions.Text = "Distributions"
+        Me.ucrInputThresholdforLocation.AddQuotesIfUnrecognised = True
+        Me.ucrInputThresholdforLocation.IsMultiline = False
+        Me.ucrInputThresholdforLocation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputThresholdforLocation, "ucrInputThresholdforLocation")
+        Me.ucrInputThresholdforLocation.Name = "ucrInputThresholdforLocation"
         '
-        'rdoGEV
+        'ucrTryModelling
         '
-        Me.rdoGEV.AutoSize = True
-        Me.rdoGEV.Location = New System.Drawing.Point(6, 48)
-        Me.rdoGEV.Name = "rdoGEV"
-        Me.rdoGEV.Size = New System.Drawing.Size(47, 17)
-        Me.rdoGEV.TabIndex = 1
-        Me.rdoGEV.TabStop = True
-        Me.rdoGEV.Tag = "GEV"
-        Me.rdoGEV.Text = "GEV"
-        Me.rdoGEV.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
+        Me.ucrTryModelling.Name = "ucrTryModelling"
         '
-        'rdoGumbel
+        'ucrChkExplanatoryModelForLocationParameter
         '
-        Me.rdoGumbel.AutoSize = True
-        Me.rdoGumbel.Location = New System.Drawing.Point(6, 25)
-        Me.rdoGumbel.Name = "rdoGumbel"
-        Me.rdoGumbel.Size = New System.Drawing.Size(61, 17)
-        Me.rdoGumbel.TabIndex = 0
-        Me.rdoGumbel.TabStop = True
-        Me.rdoGumbel.Tag = "Gumbel"
-        Me.rdoGumbel.Text = "Gumbel"
-        Me.rdoGumbel.UseVisualStyleBackColor = True
+        Me.ucrChkExplanatoryModelForLocationParameter.Checked = False
+        resources.ApplyResources(Me.ucrChkExplanatoryModelForLocationParameter, "ucrChkExplanatoryModelForLocationParameter")
+        Me.ucrChkExplanatoryModelForLocationParameter.Name = "ucrChkExplanatoryModelForLocationParameter"
         '
-        'grpEstimationMethods
+        'ucrReceiverExpressionExplanatoryModelForLocParam
         '
-        Me.grpEstimationMethods.Controls.Add(Me.cboMethodOfMoments)
-        Me.grpEstimationMethods.Controls.Add(Me.cboMaximumLikelihood)
-        Me.grpEstimationMethods.Controls.Add(Me.lblSaveEstimates)
-        Me.grpEstimationMethods.Controls.Add(Me.chkMethodOfMoments)
-        Me.grpEstimationMethods.Controls.Add(Me.chkMaximumLikelihood)
-        Me.grpEstimationMethods.Location = New System.Drawing.Point(9, 193)
-        Me.grpEstimationMethods.Name = "grpEstimationMethods"
-        Me.grpEstimationMethods.Size = New System.Drawing.Size(241, 91)
-        Me.grpEstimationMethods.TabIndex = 6
-        Me.grpEstimationMethods.TabStop = False
-        Me.grpEstimationMethods.Tag = "Estimation_methods"
-        Me.grpEstimationMethods.Text = "Estimation methods"
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverExpressionExplanatoryModelForLocParam, "ucrReceiverExpressionExplanatoryModelForLocParam")
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.Name = "ucrReceiverExpressionExplanatoryModelForLocParam"
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.Selector = Nothing
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.strNcFilePath = ""
+        Me.ucrReceiverExpressionExplanatoryModelForLocParam.ucrSelector = Nothing
         '
-        'cboMethodOfMoments
+        'ucrInputExtremes
         '
-        Me.cboMethodOfMoments.FormattingEnabled = True
-        Me.cboMethodOfMoments.Location = New System.Drawing.Point(147, 59)
-        Me.cboMethodOfMoments.Name = "cboMethodOfMoments"
-        Me.cboMethodOfMoments.Size = New System.Drawing.Size(84, 21)
-        Me.cboMethodOfMoments.TabIndex = 4
+        Me.ucrInputExtremes.AddQuotesIfUnrecognised = True
+        Me.ucrInputExtremes.GetSetSelectedIndex = -1
+        Me.ucrInputExtremes.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputExtremes, "ucrInputExtremes")
+        Me.ucrInputExtremes.Name = "ucrInputExtremes"
         '
-        'cboMaximumLikelihood
+        'ucrSaveExtremes
         '
-        Me.cboMaximumLikelihood.FormattingEnabled = True
-        Me.cboMaximumLikelihood.Location = New System.Drawing.Point(147, 32)
-        Me.cboMaximumLikelihood.Name = "cboMaximumLikelihood"
-        Me.cboMaximumLikelihood.Size = New System.Drawing.Size(84, 21)
-        Me.cboMaximumLikelihood.TabIndex = 3
+        resources.ApplyResources(Me.ucrSaveExtremes, "ucrSaveExtremes")
+        Me.ucrSaveExtremes.Name = "ucrSaveExtremes"
         '
-        'lblSaveEstimates
+        'ucrSelectorExtremes
         '
-        Me.lblSaveEstimates.AutoSize = True
-        Me.lblSaveEstimates.Location = New System.Drawing.Point(143, 16)
-        Me.lblSaveEstimates.Name = "lblSaveEstimates"
-        Me.lblSaveEstimates.Size = New System.Drawing.Size(94, 13)
-        Me.lblSaveEstimates.TabIndex = 2
-        Me.lblSaveEstimates.Tag = "Save_estimates_in"
-        Me.lblSaveEstimates.Text = "Save Estimates in:"
+        Me.ucrSelectorExtremes.bDropUnusedFilterLevels = False
+        Me.ucrSelectorExtremes.bShowHiddenColumns = False
+        Me.ucrSelectorExtremes.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorExtremes, "ucrSelectorExtremes")
+        Me.ucrSelectorExtremes.Name = "ucrSelectorExtremes"
         '
-        'chkMethodOfMoments
+        'ucrReceiverVariable
         '
-        Me.chkMethodOfMoments.AutoSize = True
-        Me.chkMethodOfMoments.Location = New System.Drawing.Point(6, 62)
-        Me.chkMethodOfMoments.Name = "chkMethodOfMoments"
-        Me.chkMethodOfMoments.Size = New System.Drawing.Size(120, 17)
-        Me.chkMethodOfMoments.TabIndex = 1
-        Me.chkMethodOfMoments.Tag = "Method_of_moments"
-        Me.chkMethodOfMoments.Text = "Method of Moments"
-        Me.chkMethodOfMoments.UseVisualStyleBackColor = True
+        Me.ucrReceiverVariable.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverVariable, "ucrReceiverVariable")
+        Me.ucrReceiverVariable.Name = "ucrReceiverVariable"
+        Me.ucrReceiverVariable.Selector = Nothing
+        Me.ucrReceiverVariable.strNcFilePath = ""
+        Me.ucrReceiverVariable.ucrSelector = Nothing
         '
-        'chkMaximumLikelihood
+        'ucrBase
         '
-        Me.chkMaximumLikelihood.AutoSize = True
-        Me.chkMaximumLikelihood.Location = New System.Drawing.Point(6, 34)
-        Me.chkMaximumLikelihood.Name = "chkMaximumLikelihood"
-        Me.chkMaximumLikelihood.Size = New System.Drawing.Size(121, 17)
-        Me.chkMaximumLikelihood.TabIndex = 0
-        Me.chkMaximumLikelihood.Tag = "Maximum_likelihood_"
-        Me.chkMaximumLikelihood.Text = "Maximum Likelihood"
-        Me.chkMaximumLikelihood.UseVisualStyleBackColor = True
-        '
-        'chkRestrictValues
-        '
-        Me.chkRestrictValues.AutoSize = True
-        Me.chkRestrictValues.Location = New System.Drawing.Point(224, 77)
-        Me.chkRestrictValues.Name = "chkRestrictValues"
-        Me.chkRestrictValues.Size = New System.Drawing.Size(123, 17)
-        Me.chkRestrictValues.TabIndex = 7
-        Me.chkRestrictValues.Tag = "Restrict_data_values"
-        Me.chkRestrictValues.Text = "Restrict Data Values"
-        Me.chkRestrictValues.UseVisualStyleBackColor = True
-        '
-        'lblBetween
-        '
-        Me.lblBetween.AutoSize = True
-        Me.lblBetween.Location = New System.Drawing.Point(232, 101)
-        Me.lblBetween.Name = "lblBetween"
-        Me.lblBetween.Size = New System.Drawing.Size(30, 13)
-        Me.lblBetween.TabIndex = 8
-        Me.lblBetween.Tag = "between"
-        Me.lblBetween.Text = "From"
-        Me.lblBetween.TextAlign = System.Drawing.ContentAlignment.TopRight
-        '
-        'txtBetween
-        '
-        Me.txtBetween.Location = New System.Drawing.Point(267, 97)
-        Me.txtBetween.Name = "txtBetween"
-        Me.txtBetween.Size = New System.Drawing.Size(33, 20)
-        Me.txtBetween.TabIndex = 10
-        '
-        'lblAnd
-        '
-        Me.lblAnd.AutoSize = True
-        Me.lblAnd.Location = New System.Drawing.Point(234, 124)
-        Me.lblAnd.Name = "lblAnd"
-        Me.lblAnd.Size = New System.Drawing.Size(20, 13)
-        Me.lblAnd.TabIndex = 11
-        Me.lblAnd.Tag = "and"
-        Me.lblAnd.Text = "To"
-        '
-        'txtAnd
-        '
-        Me.txtAnd.Location = New System.Drawing.Point(267, 123)
-        Me.txtAnd.Name = "txtAnd"
-        Me.txtAnd.Size = New System.Drawing.Size(33, 20)
-        Me.txtAnd.TabIndex = 12
-        '
-        'chkProbabilityPlot
-        '
-        Me.chkProbabilityPlot.AutoSize = True
-        Me.chkProbabilityPlot.Location = New System.Drawing.Point(9, 168)
-        Me.chkProbabilityPlot.Name = "chkProbabilityPlot"
-        Me.chkProbabilityPlot.Size = New System.Drawing.Size(94, 17)
-        Me.chkProbabilityPlot.TabIndex = 13
-        Me.chkProbabilityPlot.Tag = "Probability_plot"
-        Me.chkProbabilityPlot.Text = "Probability plot"
-        Me.chkProbabilityPlot.UseVisualStyleBackColor = True
-        '
-        'UcrDialogDisabled1
-        '
-        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.UcrDialogDisabled1.Location = New System.Drawing.Point(80, 140)
-        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
-        Me.UcrDialogDisabled1.Size = New System.Drawing.Size(240, 50)
-        Me.UcrDialogDisabled1.TabIndex = 14
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgExtremes
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(416, 353)
-        Me.Controls.Add(Me.UcrDialogDisabled1)
-        Me.Controls.Add(Me.chkProbabilityPlot)
-        Me.Controls.Add(Me.txtAnd)
-        Me.Controls.Add(Me.lblAnd)
-        Me.Controls.Add(Me.txtBetween)
-        Me.Controls.Add(Me.lblBetween)
-        Me.Controls.Add(Me.chkRestrictValues)
-        Me.Controls.Add(Me.grpEstimationMethods)
-        Me.Controls.Add(Me.grpDistributions)
+        Me.Controls.Add(Me.ucrInputThresholdforLocation)
+        Me.Controls.Add(Me.lblThreshold)
+        Me.Controls.Add(Me.ucrTryModelling)
+        Me.Controls.Add(Me.grpSecondCalc)
+        Me.Controls.Add(Me.grpFirstCalc)
+        Me.Controls.Add(Me.ucrChkExplanatoryModelForLocationParameter)
+        Me.Controls.Add(Me.ucrReceiverExpressionExplanatoryModelForLocParam)
+        Me.Controls.Add(Me.lblFevdType)
+        Me.Controls.Add(Me.ucrInputExtremes)
+        Me.Controls.Add(Me.ucrSaveExtremes)
+        Me.Controls.Add(Me.cmdDisplayOptions)
+        Me.Controls.Add(Me.cmdFittingOptions)
+        Me.Controls.Add(Me.ucrSelectorExtremes)
         Me.Controls.Add(Me.lblDataToFit)
-        Me.Controls.Add(Me.ucrReceiverDataToFit)
-        Me.Controls.Add(Me.ucrAddRemove)
+        Me.Controls.Add(Me.ucrReceiverVariable)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgExtremes"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Fit_an_Extreme_distribution"
-        Me.Text = "Fit an Extreme Distribution"
-        Me.grpDistributions.ResumeLayout(False)
-        Me.grpDistributions.PerformLayout()
-        Me.grpEstimationMethods.ResumeLayout(False)
-        Me.grpEstimationMethods.PerformLayout()
+        Me.grpSecondCalc.ResumeLayout(False)
+        Me.grpFirstCalc.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
 
-    Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrAddRemove As ucrSelectorAddRemove
-    Friend WithEvents ucrReceiverDataToFit As ucrReceiverSingle
+    Friend WithEvents cmdSqrt As Button
+    Friend WithEvents cmdLog As Button
+    Friend WithEvents cmdTan As Button
+    Friend WithEvents cmdExp As Button
+    Friend WithEvents ucrInputThresholdforLocation As ucrInputTextBox
+    Friend WithEvents lblThreshold As Label
+    Friend WithEvents ucrTryModelling As ucrTry
+    Friend WithEvents cmdSin As Button
+    Friend WithEvents grpSecondCalc As GroupBox
+    Friend WithEvents cmdCos As Button
+    Friend WithEvents grpFirstCalc As GroupBox
+    Friend WithEvents cmdMultiply As Button
+    Friend WithEvents cmdColon As Button
+    Friend WithEvents cmdPlus As Button
+    Friend WithEvents cmdPower As Button
+    Friend WithEvents cmdClosingBracket As Button
+    Friend WithEvents cmdOpeningBracket As Button
+    Friend WithEvents cmdDiv As Button
+    Friend WithEvents cmdDoubleBracket As Button
+    Friend WithEvents cmdClear As Button
+    Friend WithEvents cmdZero As Button
+    Friend WithEvents cmdMinus As Button
+    Friend WithEvents ucrChkExplanatoryModelForLocationParameter As ucrCheck
+    Friend WithEvents ucrReceiverExpressionExplanatoryModelForLocParam As ucrReceiverExpression
+    Friend WithEvents lblFevdType As Label
+    Friend WithEvents ucrInputExtremes As ucrInputComboBox
+    Friend WithEvents ucrSaveExtremes As ucrSave
+    Friend WithEvents cmdDisplayOptions As Button
+    Friend WithEvents cmdFittingOptions As Button
+    Friend WithEvents ucrSelectorExtremes As ucrSelectorByDataFrameAddRemove
     Friend WithEvents lblDataToFit As Label
-    Friend WithEvents grpDistributions As GroupBox
-    Friend WithEvents rdoGEV As RadioButton
-    Friend WithEvents rdoGumbel As RadioButton
-    Friend WithEvents grpEstimationMethods As GroupBox
-    Friend WithEvents cboMethodOfMoments As ComboBox
-    Friend WithEvents cboMaximumLikelihood As ComboBox
-    Friend WithEvents lblSaveEstimates As Label
-    Friend WithEvents chkMethodOfMoments As CheckBox
-    Friend WithEvents chkMaximumLikelihood As CheckBox
-    Friend WithEvents chkRestrictValues As CheckBox
-    Friend WithEvents lblBetween As Label
-    Friend WithEvents txtBetween As TextBox
-    Friend WithEvents lblAnd As Label
-    Friend WithEvents txtAnd As TextBox
-    Friend WithEvents chkProbabilityPlot As CheckBox
-    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
+    Friend WithEvents ucrReceiverVariable As ucrReceiverSingle
+    Friend WithEvents ucrBase As ucrButtons
 End Class

@@ -1,0 +1,573 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="chkShowEnterArguments.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkShowEnterArguments.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>347, 26</value>
+  </data>
+  <data name="chkShowEnterArguments.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>106, 17</value>
+  </data>
+  <data name="chkShowEnterArguments.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>155</value>
+  </data>
+  <data name="chkShowEnterArguments.Text" xml:space="preserve">
+    <value>Onyesha Hoja</value>
+  </data>
+  <data name="lblData.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblData.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 26</value>
+  </data>
+  <data name="lblData.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblData.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>30, 13</value>
+  </data>
+  <data name="lblData.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>152</value>
+  </data>
+  <data name="lblData.Text" xml:space="preserve">
+    <value>Data</value>
+  </data>
+  <data name="chkSaveEnterResultInto.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkSaveEnterResultInto.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 252</value>
+  </data>
+  <data name="chkSaveEnterResultInto.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="chkSaveEnterResultInto.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>104, 17</value>
+  </data>
+  <data name="chkSaveEnterResultInto.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>157</value>
+  </data>
+  <data name="cmd1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 77</value>
+  </data>
+  <data name="cmd1.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmd1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmd1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>117</value>
+  </data>
+  <data name="cmd1.Text" xml:space="preserve">
+    <value>• %1.</value>
+  </data>
+  <data name="cmdSquareBrackets.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>123, 14</value>
+  </data>
+  <data name="cmdSquareBrackets.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdSquareBrackets.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmdSquareBrackets.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>141</value>
+  </data>
+  <data name="cmd0.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>44, 108</value>
+  </data>
+  <data name="cmd0.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmd0.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmd0.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>118</value>
+  </data>
+  <data name="cmd0.Text" xml:space="preserve">
+    <value>^0 ▼</value>
+  </data>
+  <data name="cmd2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>44, 77</value>
+  </data>
+  <data name="cmd2.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmd2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmd2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>119</value>
+  </data>
+  <data name="cmdClear.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 6.75pt</value>
+  </data>
+  <data name="cmdClear.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>123, 77</value>
+  </data>
+  <data name="cmdClear.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdClear.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>37, 61</value>
+  </data>
+  <data name="cmdClear.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>144</value>
+  </data>
+  <data name="cmdClear.Text" xml:space="preserve">
+    <value>Ondoa</value>
+  </data>
+  <data name="cmd3.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>83, 77</value>
+  </data>
+  <data name="cmd3.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmd3.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmd3.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>120</value>
+  </data>
+  <data name="cmd4.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 45</value>
+  </data>
+  <data name="cmd4.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmd4.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmd4.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>121</value>
+  </data>
+  <data name="cmd5.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>44, 45</value>
+  </data>
+  <data name="cmd5.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmd5.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmd5.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>122</value>
+  </data>
+  <data name="cmd6.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>83, 45</value>
+  </data>
+  <data name="cmd6.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmd6.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmd6.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>123</value>
+  </data>
+  <data name="cmd7.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 14</value>
+  </data>
+  <data name="cmd7.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmd7.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmd7.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>124</value>
+  </data>
+  <data name="cmd8.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>44, 14</value>
+  </data>
+  <data name="cmd8.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmd8.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmd8.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>125</value>
+  </data>
+  <data name="cmd9.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>83, 14</value>
+  </data>
+  <data name="cmd9.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmd9.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmd9.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>126</value>
+  </data>
+  <data name="cmdMinus.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>123, 45</value>
+  </data>
+  <data name="cmdMinus.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdMinus.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmdMinus.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>129</value>
+  </data>
+  <data name="cmdDelete.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="cmdDelete.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 108</value>
+  </data>
+  <data name="cmdDelete.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdDelete.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmdDelete.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>132</value>
+  </data>
+  <data name="cmdDelete.Text" xml:space="preserve">
+    <value>Futa</value>
+  </data>
+  <data name="cmdBrackets.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>83, 108</value>
+  </data>
+  <data name="cmdBrackets.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdBrackets.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>36, 30</value>
+  </data>
+  <data name="cmdBrackets.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>136</value>
+  </data>
+  <data name="grpEnterKeybord1.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>143, 58</value>
+  </data>
+  <data name="grpEnterKeybord1.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="grpEnterKeybord1.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="grpEnterKeybord1.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>164, 149</value>
+  </data>
+  <data name="grpEnterKeybord1.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>154</value>
+  </data>
+  <data name="cmdMissingValues.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>106, 14</value>
+  </data>
+  <data name="cmdMissingValues.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdMissingValues.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="cmdMissingValues.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>142</value>
+  </data>
+  <data name="cmdMissingValues.Text" xml:space="preserve">
+    <value>NA</value>
+  </data>
+  <data name="cmdExponential.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="cmdExponential.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 109</value>
+  </data>
+  <data name="cmdExponential.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdExponential.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="cmdExponential.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>143</value>
+  </data>
+  <data name="cmdExponential.Text" xml:space="preserve">
+    <value>E</value>
+  </data>
+  <data name="cmdConcantenateFunction.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>56, 14</value>
+  </data>
+  <data name="cmdConcantenateFunction.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdConcantenateFunction.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="cmdConcantenateFunction.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>145</value>
+  </data>
+  <data name="cmdConcantenateFunction.Text" xml:space="preserve">
+    <value>c</value>
+  </data>
+  <data name="cmdSequence2.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="cmdSequence2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>56, 109</value>
+  </data>
+  <data name="cmdSequence2.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdSequence2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="cmdSequence2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>146</value>
+  </data>
+  <data name="cmdSequenceFunction.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="cmdSequenceFunction.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>56, 77</value>
+  </data>
+  <data name="cmdSequenceFunction.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdSequenceFunction.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="cmdSequenceFunction.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>147</value>
+  </data>
+  <data name="cmdRepelicationFunction.Font" xml:space="preserve" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="cmdRepelicationFunction.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>56, 45</value>
+  </data>
+  <data name="cmdRepelicationFunction.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdRepelicationFunction.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="cmdRepelicationFunction.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>148</value>
+  </data>
+  <data name="cmdRepelicationFunction.Text" xml:space="preserve">
+    <value>taar.</value>
+  </data>
+  <data name="cmdLETTERS.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>154, 14</value>
+  </data>
+  <data name="cmdLETTERS.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdLETTERS.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 61</value>
+  </data>
+  <data name="cmdLETTERS.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>149</value>
+  </data>
+  <data name="cmdPi.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>106, 45</value>
+  </data>
+  <data name="cmdPi.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdPi.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="cmdPi.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>149</value>
+  </data>
+  <data name="cmdPi.Text" xml:space="preserve">
+    <value>pi</value>
+  </data>
+  <data name="cmdDot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 14</value>
+  </data>
+  <data name="cmdDot.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdDot.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="cmdDot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>149</value>
+  </data>
+  <data name="cmdMonthPlus.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>106, 108</value>
+  </data>
+  <data name="cmdMonthPlus.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdMonthPlus.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="cmdMonthPlus.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <data name="cmdLetters2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>154, 77</value>
+  </data>
+  <data name="cmdLetters2.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdLetters2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 61</value>
+  </data>
+  <data name="cmdLetters2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>152</value>
+  </data>
+  <data name="cmdComma.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 45</value>
+  </data>
+  <data name="cmdComma.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdComma.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="cmdComma.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>152</value>
+  </data>
+  <data name="cmdMonthMinus.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>106, 77</value>
+  </data>
+  <data name="cmdMonthMinus.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdMonthMinus.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="cmdMonthMinus.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>151</value>
+  </data>
+  <data name="cmdColon.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>7, 77</value>
+  </data>
+  <data name="cmdColon.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdColon.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>45, 30</value>
+  </data>
+  <data name="cmdColon.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>151</value>
+  </data>
+  <data name="grpEnterKeyboard2.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>311, 58</value>
+  </data>
+  <data name="grpEnterKeyboard2.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="grpEnterKeyboard2.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="grpEnterKeyboard2.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>204, 149</value>
+  </data>
+  <data name="grpEnterKeyboard2.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>159</value>
+  </data>
+  <data name="cmdTry.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 216</value>
+  </data>
+  <data name="cmdTry.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="cmdTry.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>74, 23</value>
+  </data>
+  <data name="cmdTry.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>160</value>
+  </data>
+  <data name="cmdTry.Text" xml:space="preserve">
+    <value>Jaribu</value>
+  </data>
+  <data name="ucrInputTryMessage.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>96, 217</value>
+  </data>
+  <data name="ucrInputTryMessage.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="ucrInputTryMessage.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>414, 22</value>
+  </data>
+  <data name="ucrInputTryMessage.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>161</value>
+  </data>
+  <data name="ucrSaveEnterResultInto.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>124, 249</value>
+  </data>
+  <data name="ucrSaveEnterResultInto.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="ucrSaveEnterResultInto.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>288, 22</value>
+  </data>
+  <data name="ucrSaveEnterResultInto.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>158</value>
+  </data>
+  <data name="ucrDataFrameEnter.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 65</value>
+  </data>
+  <data name="ucrDataFrameEnter.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrDataFrameEnter.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 40</value>
+  </data>
+  <data name="ucrDataFrameEnter.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>156</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>522, 344</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 275</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>452, 52</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Ingiza</value>
+  </data>
+  <data name="ucrReceiverForEnterCalculation.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>65, 26</value>
+  </data>
+  <data name="ucrReceiverForEnterCalculation.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 3, 2, 3</value>
+  </data>
+  <data name="ucrReceiverForEnterCalculation.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>254, 28</value>
+  </data>
+  <data name="ucrReceiverForEnterCalculation.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>153</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>

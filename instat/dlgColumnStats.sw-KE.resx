@@ -12,4 +12,151 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="lblSelectedVariables.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSelectedVariables.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>265, 45</value>
+  </data>
+  <data name="lblSelectedVariables.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>125, 13</value>
+  </data>
+  <data name="lblSelectedVariables.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblByFactors.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblByFactors.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>265, 168</value>
+  </data>
+  <data name="lblByFactors.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
+  <data name="lblByFactors.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="ucrChkStoreResults.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 17</value>
+  </data>
+  <data name="ucrChkStoreResults.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>148, 20</value>
+  </data>
+  <data name="ucrChkStoreResults.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrChkOmitMissing.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 92</value>
+  </data>
+  <data name="ucrChkOmitMissing.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>148, 20</value>
+  </data>
+  <data name="ucrChkOmitMissing.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="ucrChkPrintOutput.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 42</value>
+  </data>
+  <data name="ucrChkPrintOutput.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>148, 20</value>
+  </data>
+  <data name="ucrChkPrintOutput.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrChkDropUnusedLevels.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 67</value>
+  </data>
+  <data name="ucrChkDropUnusedLevels.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>148, 20</value>
+  </data>
+  <data name="ucrChkDropUnusedLevels.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="grpOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 196</value>
+  </data>
+  <data name="grpOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>160, 121</value>
+  </data>
+  <data name="grpOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="grpOptions.Text" xml:space="preserve">
+    <value>chaguo</value>
+  </data>
+  <data name="cmdSummaries.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>247, 289</value>
+  </data>
+  <data name="cmdSummaries.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>143, 23</value>
+  </data>
+  <data name="cmdSummaries.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="cmdProportionsPercentages.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>247, 318</value>
+  </data>
+  <data name="cmdProportionsPercentages.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>143, 23</value>
+  </data>
+  <data name="cmdProportionsPercentages.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>416, 404</value>
+  </data>
+  <data name="ucrReceiverSelectedVariables.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>265, 60</value>
+  </data>
+  <data name="ucrReceiverSelectedVariables.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverSelectedVariables.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 100</value>
+  </data>
+  <data name="ucrReceiverSelectedVariables.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrSelectorForColumnStatistics.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 10</value>
+  </data>
+  <data name="ucrSelectorForColumnStatistics.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorForColumnStatistics.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>210, 180</value>
+  </data>
+  <data name="ucrSelectorForColumnStatistics.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 349</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>402, 53</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="ucrReceiverByFactor.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>265, 183</value>
+  </data>
+  <data name="ucrReceiverByFactor.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverByFactor.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 100</value>
+  </data>
+  <data name="ucrReceiverByFactor.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

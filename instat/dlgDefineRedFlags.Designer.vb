@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgDefineRedFlags
     Inherits System.Windows.Forms.Form
 
@@ -22,6 +38,7 @@ Partial Class dlgDefineRedFlags
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgDefineRedFlags))
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverRedFlag = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDefineRedFlag = New instat.ucrSelectorByDataFrameAddRemove()
@@ -30,46 +47,34 @@ Partial Class dlgDefineRedFlags
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 202)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 3
         '
         'ucrReceiverRedFlag
         '
         Me.ucrReceiverRedFlag.frmParent = Me
-        Me.ucrReceiverRedFlag.Location = New System.Drawing.Point(271, 60)
-        Me.ucrReceiverRedFlag.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverRedFlag, "ucrReceiverRedFlag")
         Me.ucrReceiverRedFlag.Name = "ucrReceiverRedFlag"
         Me.ucrReceiverRedFlag.Selector = Nothing
-        Me.ucrReceiverRedFlag.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverRedFlag.TabIndex = 2
+        Me.ucrReceiverRedFlag.strNcFilePath = ""
         Me.ucrReceiverRedFlag.ucrSelector = Nothing
         '
         'ucrSelectorDefineRedFlag
         '
         Me.ucrSelectorDefineRedFlag.bShowHiddenColumns = False
         Me.ucrSelectorDefineRedFlag.bUseCurrentFilter = True
-        Me.ucrSelectorDefineRedFlag.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorDefineRedFlag.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorDefineRedFlag, "ucrSelectorDefineRedFlag")
         Me.ucrSelectorDefineRedFlag.Name = "ucrSelectorDefineRedFlag"
-        Me.ucrSelectorDefineRedFlag.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorDefineRedFlag.TabIndex = 0
         '
         'lblRedFlags
         '
-        Me.lblRedFlags.AutoSize = True
-        Me.lblRedFlags.Location = New System.Drawing.Point(271, 45)
+        resources.ApplyResources(Me.lblRedFlags, "lblRedFlags")
         Me.lblRedFlags.Name = "lblRedFlags"
-        Me.lblRedFlags.Size = New System.Drawing.Size(58, 13)
-        Me.lblRedFlags.TabIndex = 1
-        Me.lblRedFlags.Text = "Red Flags:"
         '
         'dlgDefineRedFlags
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(420, 260)
         Me.Controls.Add(Me.lblRedFlags)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverRedFlag)
@@ -78,8 +83,6 @@ Partial Class dlgDefineRedFlags
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgDefineRedFlags"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Define Red Flags"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

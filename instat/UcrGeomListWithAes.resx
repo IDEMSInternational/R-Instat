@@ -117,4 +117,799 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrGeomWithAesSelector.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 56</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrGeomWithAesSelector.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrGeomWithAesSelector.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 192</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrGeomWithAesSelector.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrGeomWithAesSelector.Name" xml:space="preserve">
+    <value>ucrGeomWithAesSelector</value>
+  </data>
+  <data name="&gt;&gt;ucrGeomWithAesSelector.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrGeomWithAesSelector.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrGeomWithAesSelector.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblAesList.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAesList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>256, 69</value>
+  </data>
+  <data name="lblAesList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>0, 13</value>
+  </data>
+  <data name="lblAesList.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;lblAesList.Name" xml:space="preserve">
+    <value>lblAesList</value>
+  </data>
+  <data name="&gt;&gt;lblAesList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAesList.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblAesList.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrReceiverParam1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 25</value>
+  </data>
+  <data name="ucrReceiverParam1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverParam1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverParam1.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam1.Name" xml:space="preserve">
+    <value>ucrReceiverParam1</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam1.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam1.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam1.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="ucrReceiverParam2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 51</value>
+  </data>
+  <data name="ucrReceiverParam2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverParam2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverParam2.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam2.Name" xml:space="preserve">
+    <value>ucrReceiverParam2</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam2.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam2.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam2.ZOrder" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="ucrReceiverParam3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 77</value>
+  </data>
+  <data name="ucrReceiverParam3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverParam3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverParam3.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam3.Name" xml:space="preserve">
+    <value>ucrReceiverParam3</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam3.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam3.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam3.ZOrder" xml:space="preserve">
+    <value>24</value>
+  </data>
+  <data name="ucrReceiverParam4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 103</value>
+  </data>
+  <data name="ucrReceiverParam4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverParam4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverParam4.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam4.Name" xml:space="preserve">
+    <value>ucrReceiverParam4</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam4.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam4.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam4.ZOrder" xml:space="preserve">
+    <value>23</value>
+  </data>
+  <data name="ucrReceiverParam5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 129</value>
+  </data>
+  <data name="ucrReceiverParam5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverParam5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverParam5.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam5.Name" xml:space="preserve">
+    <value>ucrReceiverParam5</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam5.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam5.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam5.ZOrder" xml:space="preserve">
+    <value>21</value>
+  </data>
+  <data name="lblGgParam13.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGgParam13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 341</value>
+  </data>
+  <data name="lblGgParam13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblGgParam13.TabIndex" type="System.Int32, mscorlib">
+    <value>24</value>
+  </data>
+  <data name="lblGgParam13.Text" xml:space="preserve">
+    <value>Label3</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam13.Name" xml:space="preserve">
+    <value>lblGgParam13</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam13.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam13.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrReceiverParam13.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 337</value>
+  </data>
+  <data name="ucrReceiverParam13.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverParam13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverParam13.TabIndex" type="System.Int32, mscorlib">
+    <value>25</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam13.Name" xml:space="preserve">
+    <value>ucrReceiverParam13</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam13.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam13.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam13.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblGgParam12.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGgParam12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 315</value>
+  </data>
+  <data name="lblGgParam12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblGgParam12.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="lblGgParam12.Text" xml:space="preserve">
+    <value>Label2</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam12.Name" xml:space="preserve">
+    <value>lblGgParam12</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam12.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam12.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrReceiverParam12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 311</value>
+  </data>
+  <data name="ucrReceiverParam12.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverParam12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverParam12.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam12.Name" xml:space="preserve">
+    <value>ucrReceiverParam12</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam12.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam12.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam12.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblGgParam11.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGgParam11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 289</value>
+  </data>
+  <data name="lblGgParam11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblGgParam11.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="lblGgParam11.Text" xml:space="preserve">
+    <value>Label2</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam11.Name" xml:space="preserve">
+    <value>lblGgParam11</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam11.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam11.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam11.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrReceiverParam11.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 285</value>
+  </data>
+  <data name="ucrReceiverParam11.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverParam11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverParam11.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam11.Name" xml:space="preserve">
+    <value>ucrReceiverParam11</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam11.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam11.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam11.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblGgParam6.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGgParam6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 159</value>
+  </data>
+  <data name="lblGgParam6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="lblGgParam6.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="lblGgParam6.Text" xml:space="preserve">
+    <value>label</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam6.Name" xml:space="preserve">
+    <value>lblGgParam6</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam6.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam6.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblGgParam10.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGgParam10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 263</value>
+  </data>
+  <data name="lblGgParam10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblGgParam10.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="lblGgParam10.Text" xml:space="preserve">
+    <value>Label2</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam10.Name" xml:space="preserve">
+    <value>lblGgParam10</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam10.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam10.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblGgParam9.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGgParam9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 237</value>
+  </data>
+  <data name="lblGgParam9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblGgParam9.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblGgParam9.Text" xml:space="preserve">
+    <value>Label2</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam9.Name" xml:space="preserve">
+    <value>lblGgParam9</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam9.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam9.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblGgParam8.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGgParam8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 211</value>
+  </data>
+  <data name="lblGgParam8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblGgParam8.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="lblGgParam8.Text" xml:space="preserve">
+    <value>Label2</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam8.Name" xml:space="preserve">
+    <value>lblGgParam8</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam8.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam8.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="lblGgParam7.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGgParam7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 185</value>
+  </data>
+  <data name="lblGgParam7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblGgParam7.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="lblGgParam7.Text" xml:space="preserve">
+    <value>Label2</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam7.Name" xml:space="preserve">
+    <value>lblGgParam7</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam7.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam7.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="lblGgParam5.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGgParam5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 133</value>
+  </data>
+  <data name="lblGgParam5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblGgParam5.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblGgParam5.Text" xml:space="preserve">
+    <value>Label2</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam5.Name" xml:space="preserve">
+    <value>lblGgParam5</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam5.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam5.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="lblGgParam4.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGgParam4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 107</value>
+  </data>
+  <data name="lblGgParam4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblGgParam4.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblGgParam4.Text" xml:space="preserve">
+    <value>Label2</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam4.Name" xml:space="preserve">
+    <value>lblGgParam4</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam4.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam4.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="lblGgParam3.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGgParam3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 81</value>
+  </data>
+  <data name="lblGgParam3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblGgParam3.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblGgParam3.Text" xml:space="preserve">
+    <value>Label2</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam3.Name" xml:space="preserve">
+    <value>lblGgParam3</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam3.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam3.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="lblGgParam2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGgParam2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 55</value>
+  </data>
+  <data name="lblGgParam2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblGgParam2.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblGgParam2.Text" xml:space="preserve">
+    <value>Label2</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam2.Name" xml:space="preserve">
+    <value>lblGgParam2</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam2.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam2.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="lblGgParam1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblGgParam1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 29</value>
+  </data>
+  <data name="lblGgParam1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 13</value>
+  </data>
+  <data name="lblGgParam1.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblGgParam1.Text" xml:space="preserve">
+    <value>Label1</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam1.Name" xml:space="preserve">
+    <value>lblGgParam1</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam1.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;lblGgParam1.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="ucrReceiverParam10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 259</value>
+  </data>
+  <data name="ucrReceiverParam10.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverParam10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverParam10.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam10.Name" xml:space="preserve">
+    <value>ucrReceiverParam10</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam10.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam10.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam10.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="ucrReceiverParam9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 233</value>
+  </data>
+  <data name="ucrReceiverParam9.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverParam9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverParam9.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam9.Name" xml:space="preserve">
+    <value>ucrReceiverParam9</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam9.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam9.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam9.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="ucrReceiverParam8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 207</value>
+  </data>
+  <data name="ucrReceiverParam8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverParam8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverParam8.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam8.Name" xml:space="preserve">
+    <value>ucrReceiverParam8</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam8.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam8.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam8.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="ucrReceiverParam7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 181</value>
+  </data>
+  <data name="ucrReceiverParam7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverParam7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverParam7.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam7.Name" xml:space="preserve">
+    <value>ucrReceiverParam7</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam7.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam7.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam7.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="ucrReceiverParam6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>97, 155</value>
+  </data>
+  <data name="ucrReceiverParam6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverParam6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>106, 26</value>
+  </data>
+  <data name="ucrReceiverParam6.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam6.Name" xml:space="preserve">
+    <value>ucrReceiverParam6</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam6.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam6.Parent" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverParam6.ZOrder" xml:space="preserve">
+    <value>22</value>
+  </data>
+  <data name="grpAesList.Location" type="System.Drawing.Point, System.Drawing">
+    <value>242, 19</value>
+  </data>
+  <data name="grpAesList.Size" type="System.Drawing.Size, System.Drawing">
+    <value>219, 366</value>
+  </data>
+  <data name="grpAesList.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="grpAesList.Text" xml:space="preserve">
+    <value>Geom Aesthetics:</value>
+  </data>
+  <data name="&gt;&gt;grpAesList.Name" xml:space="preserve">
+    <value>grpAesList</value>
+  </data>
+  <data name="&gt;&gt;grpAesList.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpAesList.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpAesList.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrChkIgnoreGlobalAes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 280</value>
+  </data>
+  <data name="ucrChkIgnoreGlobalAes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 20</value>
+  </data>
+  <data name="ucrChkIgnoreGlobalAes.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIgnoreGlobalAes.Name" xml:space="preserve">
+    <value>ucrChkIgnoreGlobalAes</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIgnoreGlobalAes.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIgnoreGlobalAes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIgnoreGlobalAes.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrChkApplyOnAllLayers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 254</value>
+  </data>
+  <data name="ucrChkApplyOnAllLayers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>230, 20</value>
+  </data>
+  <data name="ucrChkApplyOnAllLayers.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrChkApplyOnAllLayers.Name" xml:space="preserve">
+    <value>ucrChkApplyOnAllLayers</value>
+  </data>
+  <data name="&gt;&gt;ucrChkApplyOnAllLayers.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkApplyOnAllLayers.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkApplyOnAllLayers.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
+    <value>467, 399</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ucrGeomListWithParameters</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>instat.ucrGeom, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
 </root>

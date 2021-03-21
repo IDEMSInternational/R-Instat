@@ -117,4 +117,718 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrChkParametric.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 71</value>
+  </data>
+  <data name="ucrChkParametric.Size" type="System.Drawing.Size, System.Drawing">
+    <value>140, 20</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrChkParametric.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrChkParametric.Name" xml:space="preserve">
+    <value>ucrChkParametric</value>
+  </data>
+  <data name="&gt;&gt;ucrChkParametric.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkParametric.Parent" xml:space="preserve">
+    <value>tbpBootstrapOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkParametric.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblNumberOfIterations.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumberOfIterations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 12</value>
+  </data>
+  <data name="lblNumberOfIterations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>105, 13</value>
+  </data>
+  <data name="lblNumberOfIterations.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblNumberOfIterations.Text" xml:space="preserve">
+    <value>Number of Iterations:</value>
+  </data>
+  <data name="&gt;&gt;lblNumberOfIterations.Name" xml:space="preserve">
+    <value>lblNumberOfIterations</value>
+  </data>
+  <data name="&gt;&gt;lblNumberOfIterations.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblNumberOfIterations.Parent" xml:space="preserve">
+    <value>tbpBootstrapOptions</value>
+  </data>
+  <data name="&gt;&gt;lblNumberOfIterations.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="lblCI.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 39</value>
+  </data>
+  <data name="lblCI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 13</value>
+  </data>
+  <data name="lblCI.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblCI.Text" xml:space="preserve">
+    <value>Confidence Interval:</value>
+  </data>
+  <data name="&gt;&gt;lblCI.Name" xml:space="preserve">
+    <value>lblCI</value>
+  </data>
+  <data name="&gt;&gt;lblCI.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCI.Parent" xml:space="preserve">
+    <value>tbpBootstrapOptions</value>
+  </data>
+  <data name="&gt;&gt;lblCI.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrNudIterations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>129, 9</value>
+  </data>
+  <data name="ucrNudIterations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudIterations.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrNudIterations.Name" xml:space="preserve">
+    <value>ucrNudIterations</value>
+  </data>
+  <data name="&gt;&gt;ucrNudIterations.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudIterations.Parent" xml:space="preserve">
+    <value>tbpBootstrapOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrNudIterations.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrNudCI.Location" type="System.Drawing.Point, System.Drawing">
+    <value>129, 35</value>
+  </data>
+  <data name="ucrNudCI.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudCI.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCI.Name" xml:space="preserve">
+    <value>ucrNudCI</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCI.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCI.Parent" xml:space="preserve">
+    <value>tbpBootstrapOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrNudCI.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tbpBootstrapOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tbpBootstrapOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpBootstrapOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 179</value>
+  </data>
+  <data name="tbpBootstrapOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tbpBootstrapOptions.Text" xml:space="preserve">
+    <value>Bootstrap Options</value>
+  </data>
+  <data name="&gt;&gt;tbpBootstrapOptions.Name" xml:space="preserve">
+    <value>tbpBootstrapOptions</value>
+  </data>
+  <data name="&gt;&gt;tbpBootstrapOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpBootstrapOptions.Parent" xml:space="preserve">
+    <value>tbpOneVarUseModFit</value>
+  </data>
+  <data name="&gt;&gt;tbpBootstrapOptions.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrInputQuantiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 144</value>
+  </data>
+  <data name="ucrInputQuantiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputQuantiles.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrInputQuantiles.Name" xml:space="preserve">
+    <value>ucrInputQuantiles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputQuantiles.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputQuantiles.Parent" xml:space="preserve">
+    <value>tbpQuantiles</value>
+  </data>
+  <data name="&gt;&gt;ucrInputQuantiles.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrNudBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 91</value>
+  </data>
+  <data name="ucrNudBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 20</value>
+  </data>
+  <data name="ucrNudBy.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrNudBy.Name" xml:space="preserve">
+    <value>ucrNudBy</value>
+  </data>
+  <data name="&gt;&gt;ucrNudBy.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudBy.Parent" xml:space="preserve">
+    <value>tbpQuantiles</value>
+  </data>
+  <data name="&gt;&gt;ucrNudBy.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrNudTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 65</value>
+  </data>
+  <data name="ucrNudTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 20</value>
+  </data>
+  <data name="ucrNudTo.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrNudTo.Name" xml:space="preserve">
+    <value>ucrNudTo</value>
+  </data>
+  <data name="&gt;&gt;ucrNudTo.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudTo.Parent" xml:space="preserve">
+    <value>tbpQuantiles</value>
+  </data>
+  <data name="&gt;&gt;ucrNudTo.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrNudFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>79, 39</value>
+  </data>
+  <data name="ucrNudFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 20</value>
+  </data>
+  <data name="ucrNudFrom.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrNudFrom.Name" xml:space="preserve">
+    <value>ucrNudFrom</value>
+  </data>
+  <data name="&gt;&gt;ucrNudFrom.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudFrom.Parent" xml:space="preserve">
+    <value>tbpQuantiles</value>
+  </data>
+  <data name="&gt;&gt;ucrNudFrom.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="lblFrom.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 41</value>
+  </data>
+  <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
+    <value>33, 13</value>
+  </data>
+  <data name="lblFrom.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblFrom.Text" xml:space="preserve">
+    <value>From:</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Name" xml:space="preserve">
+    <value>lblFrom</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.Parent" xml:space="preserve">
+    <value>tbpQuantiles</value>
+  </data>
+  <data name="&gt;&gt;lblFrom.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblTo.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 67</value>
+  </data>
+  <data name="lblTo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>23, 13</value>
+  </data>
+  <data name="lblTo.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblTo.Text" xml:space="preserve">
+    <value>To:</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Name" xml:space="preserve">
+    <value>lblTo</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblTo.Parent" xml:space="preserve">
+    <value>tbpQuantiles</value>
+  </data>
+  <data name="&gt;&gt;lblTo.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rdoSequence.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoSequence.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 12</value>
+  </data>
+  <data name="rdoSequence.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 17</value>
+  </data>
+  <data name="rdoSequence.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoSequence.Text" xml:space="preserve">
+    <value>Sequence of Values</value>
+  </data>
+  <data name="&gt;&gt;rdoSequence.Name" xml:space="preserve">
+    <value>rdoSequence</value>
+  </data>
+  <data name="&gt;&gt;rdoSequence.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSequence.Parent" xml:space="preserve">
+    <value>tbpQuantiles</value>
+  </data>
+  <data name="&gt;&gt;rdoSequence.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="rdoInsertValues.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoInsertValues.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 121</value>
+  </data>
+  <data name="rdoInsertValues.Size" type="System.Drawing.Size, System.Drawing">
+    <value>86, 17</value>
+  </data>
+  <data name="rdoInsertValues.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="rdoInsertValues.Text" xml:space="preserve">
+    <value>Insert Values</value>
+  </data>
+  <data name="&gt;&gt;rdoInsertValues.Name" xml:space="preserve">
+    <value>rdoInsertValues</value>
+  </data>
+  <data name="&gt;&gt;rdoInsertValues.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoInsertValues.Parent" xml:space="preserve">
+    <value>tbpQuantiles</value>
+  </data>
+  <data name="&gt;&gt;rdoInsertValues.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblBy.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 93</value>
+  </data>
+  <data name="lblBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>22, 13</value>
+  </data>
+  <data name="lblBy.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblBy.Text" xml:space="preserve">
+    <value>By:</value>
+  </data>
+  <data name="&gt;&gt;lblBy.Name" xml:space="preserve">
+    <value>lblBy</value>
+  </data>
+  <data name="&gt;&gt;lblBy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblBy.Parent" xml:space="preserve">
+    <value>tbpQuantiles</value>
+  </data>
+  <data name="&gt;&gt;lblBy.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrPnlQuantiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 12</value>
+  </data>
+  <data name="ucrPnlQuantiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 164</value>
+  </data>
+  <data name="ucrPnlQuantiles.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlQuantiles.Name" xml:space="preserve">
+    <value>ucrPnlQuantiles</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlQuantiles.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlQuantiles.Parent" xml:space="preserve">
+    <value>tbpQuantiles</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlQuantiles.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="tbpQuantiles.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpQuantiles.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpQuantiles.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 179</value>
+  </data>
+  <data name="tbpQuantiles.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbpQuantiles.Text" xml:space="preserve">
+    <value>Quantiles</value>
+  </data>
+  <data name="&gt;&gt;tbpQuantiles.Name" xml:space="preserve">
+    <value>tbpQuantiles</value>
+  </data>
+  <data name="&gt;&gt;tbpQuantiles.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpQuantiles.Parent" xml:space="preserve">
+    <value>tbpOneVarUseModFit</value>
+  </data>
+  <data name="&gt;&gt;tbpQuantiles.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoNoPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoNoPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 12</value>
+  </data>
+  <data name="rdoNoPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="rdoNoPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoNoPlot.Text" xml:space="preserve">
+    <value>No Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoNoPlot.Name" xml:space="preserve">
+    <value>rdoNoPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoNoPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoNoPlot.Parent" xml:space="preserve">
+    <value>tbpPlots</value>
+  </data>
+  <data name="&gt;&gt;rdoNoPlot.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoPlotAll.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoPlotAll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 35</value>
+  </data>
+  <data name="rdoPlotAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
+  </data>
+  <data name="rdoPlotAll.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoPlotAll.Text" xml:space="preserve">
+    <value>Multi-Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoPlotAll.Name" xml:space="preserve">
+    <value>rdoPlotAll</value>
+  </data>
+  <data name="&gt;&gt;rdoPlotAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoPlotAll.Parent" xml:space="preserve">
+    <value>tbpPlots</value>
+  </data>
+  <data name="&gt;&gt;rdoPlotAll.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoCDFPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoCDFPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 58</value>
+  </data>
+  <data name="rdoCDFPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>67, 17</value>
+  </data>
+  <data name="rdoCDFPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoCDFPlot.Text" xml:space="preserve">
+    <value>CDF Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoCDFPlot.Name" xml:space="preserve">
+    <value>rdoCDFPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoCDFPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCDFPlot.Parent" xml:space="preserve">
+    <value>tbpPlots</value>
+  </data>
+  <data name="&gt;&gt;rdoCDFPlot.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="rdoPPPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoPPPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 127</value>
+  </data>
+  <data name="rdoPPPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="rdoPPPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoPPPlot.Text" xml:space="preserve">
+    <value>PP-Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoPPPlot.Name" xml:space="preserve">
+    <value>rdoPPPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoPPPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoPPPlot.Parent" xml:space="preserve">
+    <value>tbpPlots</value>
+  </data>
+  <data name="&gt;&gt;rdoPPPlot.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="rdoDensityPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDensityPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 81</value>
+  </data>
+  <data name="rdoDensityPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>81, 17</value>
+  </data>
+  <data name="rdoDensityPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoDensityPlot.Text" xml:space="preserve">
+    <value>Density Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoDensityPlot.Name" xml:space="preserve">
+    <value>rdoDensityPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoDensityPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDensityPlot.Parent" xml:space="preserve">
+    <value>tbpPlots</value>
+  </data>
+  <data name="&gt;&gt;rdoDensityPlot.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="rdoQQPlot.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoQQPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 104</value>
+  </data>
+  <data name="rdoQQPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 17</value>
+  </data>
+  <data name="rdoQQPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rdoQQPlot.Text" xml:space="preserve">
+    <value>QQ-Plot</value>
+  </data>
+  <data name="&gt;&gt;rdoQQPlot.Name" xml:space="preserve">
+    <value>rdoQQPlot</value>
+  </data>
+  <data name="&gt;&gt;rdoQQPlot.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoQQPlot.Parent" xml:space="preserve">
+    <value>tbpPlots</value>
+  </data>
+  <data name="&gt;&gt;rdoQQPlot.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="rdoCIcdf.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoCIcdf.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 150</value>
+  </data>
+  <data name="rdoCIcdf.Size" type="System.Drawing.Size, System.Drawing">
+    <value>189, 17</value>
+  </data>
+  <data name="rdoCIcdf.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="rdoCIcdf.Text" xml:space="preserve">
+    <value>CDF Plot with Confidence Intervals</value>
+  </data>
+  <data name="&gt;&gt;rdoCIcdf.Name" xml:space="preserve">
+    <value>rdoCIcdf</value>
+  </data>
+  <data name="&gt;&gt;rdoCIcdf.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCIcdf.Parent" xml:space="preserve">
+    <value>tbpPlots</value>
+  </data>
+  <data name="&gt;&gt;rdoCIcdf.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrPnlPlots.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="ucrPnlPlots.Size" type="System.Drawing.Size, System.Drawing">
+    <value>227, 165</value>
+  </data>
+  <data name="ucrPnlPlots.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlPlots.Name" xml:space="preserve">
+    <value>ucrPnlPlots</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlPlots.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlPlots.Parent" xml:space="preserve">
+    <value>tbpPlots</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlPlots.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="tbpPlots.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpPlots.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpPlots.Size" type="System.Drawing.Size, System.Drawing">
+    <value>241, 179</value>
+  </data>
+  <data name="tbpPlots.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbpPlots.Text" xml:space="preserve">
+    <value>Plots</value>
+  </data>
+  <data name="&gt;&gt;tbpPlots.Name" xml:space="preserve">
+    <value>tbpPlots</value>
+  </data>
+  <data name="&gt;&gt;tbpPlots.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpPlots.Parent" xml:space="preserve">
+    <value>tbpOneVarUseModFit</value>
+  </data>
+  <data name="&gt;&gt;tbpPlots.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbpOneVarUseModFit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 5</value>
+  </data>
+  <data name="tbpOneVarUseModFit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>249, 205</value>
+  </data>
+  <data name="tbpOneVarUseModFit.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbpOneVarUseModFit.Name" xml:space="preserve">
+    <value>tbpOneVarUseModFit</value>
+  </data>
+  <data name="&gt;&gt;tbpOneVarUseModFit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpOneVarUseModFit.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbpOneVarUseModFit.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>59, 216</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>260, 255</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Fit Model and Bootstrap Options</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgOneVarUseModFit</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

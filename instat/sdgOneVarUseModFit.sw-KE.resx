@@ -1,0 +1,342 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ucrChkParametric.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>14, 71</value>
+  </data>
+  <data name="ucrChkParametric.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>140, 20</value>
+  </data>
+  <data name="ucrChkParametric.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblNumberOfIterations.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblNumberOfIterations.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 12</value>
+  </data>
+  <data name="lblNumberOfIterations.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>105, 13</value>
+  </data>
+  <data name="lblNumberOfIterations.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="lblCI.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCI.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 39</value>
+  </data>
+  <data name="lblCI.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>102, 13</value>
+  </data>
+  <data name="lblCI.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblCI.Text" xml:space="preserve">
+    <value>Kiwango cha Uaminifu</value>
+  </data>
+  <data name="ucrNudIterations.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>129, 9</value>
+  </data>
+  <data name="ucrNudIterations.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudIterations.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrNudCI.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>129, 35</value>
+  </data>
+  <data name="ucrNudCI.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudCI.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tbpBootstrapOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpBootstrapOptions.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpBootstrapOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>241, 179</value>
+  </data>
+  <data name="tbpBootstrapOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrInputQuantiles.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>50, 144</value>
+  </data>
+  <data name="ucrInputQuantiles.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrInputQuantiles.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="ucrNudBy.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>79, 91</value>
+  </data>
+  <data name="ucrNudBy.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>53, 20</value>
+  </data>
+  <data name="ucrNudBy.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="ucrNudTo.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>79, 65</value>
+  </data>
+  <data name="ucrNudTo.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>52, 20</value>
+  </data>
+  <data name="ucrNudTo.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="ucrNudFrom.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>79, 39</value>
+  </data>
+  <data name="ucrNudFrom.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>52, 20</value>
+  </data>
+  <data name="ucrNudFrom.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblFrom.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFrom.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>18, 41</value>
+  </data>
+  <data name="lblFrom.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>33, 13</value>
+  </data>
+  <data name="lblFrom.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="lblFrom.Text" xml:space="preserve">
+    <value>Kutoka kwa:</value>
+  </data>
+  <data name="lblTo.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblTo.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>18, 67</value>
+  </data>
+  <data name="lblTo.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>23, 13</value>
+  </data>
+  <data name="lblTo.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblTo.Text" xml:space="preserve">
+    <value>Kwenda:</value>
+  </data>
+  <data name="rdoSequence.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoSequence.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 12</value>
+  </data>
+  <data name="rdoSequence.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>121, 17</value>
+  </data>
+  <data name="rdoSequence.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoInsertValues.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoInsertValues.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 121</value>
+  </data>
+  <data name="rdoInsertValues.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>86, 17</value>
+  </data>
+  <data name="rdoInsertValues.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblBy.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblBy.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>18, 93</value>
+  </data>
+  <data name="lblBy.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>22, 13</value>
+  </data>
+  <data name="lblBy.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblBy.Text" xml:space="preserve">
+    <value>Na:</value>
+  </data>
+  <data name="ucrPnlQuantiles.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>5, 12</value>
+  </data>
+  <data name="ucrPnlQuantiles.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>227, 164</value>
+  </data>
+  <data name="ucrPnlQuantiles.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="tbpQuantiles.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpQuantiles.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpQuantiles.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>241, 179</value>
+  </data>
+  <data name="tbpQuantiles.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoNoPlot.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoNoPlot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 12</value>
+  </data>
+  <data name="rdoNoPlot.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="rdoNoPlot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoPlotAll.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoPlotAll.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 35</value>
+  </data>
+  <data name="rdoPlotAll.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>68, 17</value>
+  </data>
+  <data name="rdoPlotAll.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoCDFPlot.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoCDFPlot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 58</value>
+  </data>
+  <data name="rdoCDFPlot.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>67, 17</value>
+  </data>
+  <data name="rdoCDFPlot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdoPPPlot.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoPPPlot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 127</value>
+  </data>
+  <data name="rdoPPPlot.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>60, 17</value>
+  </data>
+  <data name="rdoPPPlot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoDensityPlot.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDensityPlot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 81</value>
+  </data>
+  <data name="rdoDensityPlot.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>81, 17</value>
+  </data>
+  <data name="rdoDensityPlot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoQQPlot.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoQQPlot.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 104</value>
+  </data>
+  <data name="rdoQQPlot.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>62, 17</value>
+  </data>
+  <data name="rdoQQPlot.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="rdoCIcdf.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoCIcdf.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>11, 150</value>
+  </data>
+  <data name="rdoCIcdf.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>189, 17</value>
+  </data>
+  <data name="rdoCIcdf.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="ucrPnlPlots.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="ucrPnlPlots.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>227, 165</value>
+  </data>
+  <data name="ucrPnlPlots.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbpPlots.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpPlots.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpPlots.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>241, 179</value>
+  </data>
+  <data name="tbpPlots.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbpOneVarUseModFit.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>5, 5</value>
+  </data>
+  <data name="tbpOneVarUseModFit.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>249, 205</value>
+  </data>
+  <data name="tbpOneVarUseModFit.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="ucrBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>59, 216</value>
+  </data>
+  <data name="ucrBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>260, 255</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+</root>

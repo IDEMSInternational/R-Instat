@@ -12,4 +12,181 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ucrInputFilterPreview.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>128, 209</value>
+  </data>
+  <data name="ucrInputFilterPreview.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>167, 21</value>
+  </data>
+  <data name="ucrInputFilterPreview.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblFilterPreview.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFilterPreview.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 211</value>
+  </data>
+  <data name="lblFilterPreview.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>115, 13</value>
+  </data>
+  <data name="lblFilterPreview.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoForDialog.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoForDialog.Enabled" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="rdoForDialog.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>120, 19</value>
+  </data>
+  <data name="rdoForDialog.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 17</value>
+  </data>
+  <data name="rdoForDialog.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="rdoAllDialogs.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoAllDialogs.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>10, 19</value>
+  </data>
+  <data name="rdoAllDialogs.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>92, 17</value>
+  </data>
+  <data name="rdoAllDialogs.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="grpApplyOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 236</value>
+  </data>
+  <data name="grpApplyOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>247, 49</value>
+  </data>
+  <data name="grpApplyOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="cmdDefineNewFilter.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>175, 93</value>
+  </data>
+  <data name="cmdDefineNewFilter.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 23</value>
+  </data>
+  <data name="cmdDefineNewFilter.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblFilter.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblFilter.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>172, 21</value>
+  </data>
+  <data name="lblFilter.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>29, 13</value>
+  </data>
+  <data name="lblFilter.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblFilter.Text" xml:space="preserve">
+    <value>Kichujio</value>
+  </data>
+  <data name="ucrReceiverFilter.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>175, 34</value>
+  </data>
+  <data name="ucrReceiverFilter.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverFilter.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverFilter.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="ucrSelectorFilters.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="ucrSelectorFilters.Margin" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorFilters.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>154, 180</value>
+  </data>
+  <data name="ucrSelectorFilters.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbRows.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbRows.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbRows.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>307, 291</value>
+  </data>
+  <data name="tbRows.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbRows.Text" xml:space="preserve">
+    <value>Safumlalo</value>
+  </data>
+  <data name="chkShowHiddenColumns.AutoSize" xml:space="preserve" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="chkShowHiddenColumns.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>6, 39</value>
+  </data>
+  <data name="chkShowHiddenColumns.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>186, 17</value>
+  </data>
+  <data name="chkShowHiddenColumns.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbColumns.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbColumns.Padding" xml:space="preserve" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbColumns.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>307, 291</value>
+  </data>
+  <data name="tbColumns.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbColumns.Text" xml:space="preserve">
+    <value>Safuwima</value>
+  </data>
+  <data name="tbcDataOptions.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tbcDataOptions.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>315, 317</value>
+  </data>
+  <data name="tbcDataOptions.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="ucrSubDialogueBase.Location" xml:space="preserve" type="System.Drawing.Point, System.Drawing">
+    <value>88, 323</value>
+  </data>
+  <data name="ucrSubDialogueBase.Size" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrSubDialogueBase.TabIndex" xml:space="preserve" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" xml:space="preserve" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" xml:space="preserve" type="System.Drawing.Size, System.Drawing">
+    <value>313, 351</value>
+  </data>
+  <data name="$this.StartPosition" xml:space="preserve" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <metadata name="$this.Localizable" xml:space="preserve" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
 </root>

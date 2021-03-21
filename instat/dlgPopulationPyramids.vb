@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,8 +11,9 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 Imports instat.Translations
 Public Class dlgPopulationPyramids
     Private clsRggplotFunction As New RFunction
@@ -37,18 +38,26 @@ Public Class dlgPopulationPyramids
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 455
         ucrBase.clsRsyntax.SetOperation("+")
+
+        clsRggplotFunction.SetPackageName("ggplot")
         clsRggplotFunction.SetRCommand("ggplot")
+
+        clsRaesFunction.SetPackageName("ggplot")
         clsRaesFunction.SetRCommand("aes")
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
         ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
+
+        clsRgeom_bar.SetPackageName("ggplot")
         clsRgeom_bar.SetRCommand("geom_bar")
         clsRgeom_bar.AddParameter("stat", Chr(34) & "identity" & Chr(34))
         ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_bar)
 
+        clsRgeom_bar2.SetPackageName("ggplot")
         clsRgeom_bar2.SetRCommand("geom_bar")
         clsRgeom_bar2.AddParameter("stat", Chr(34) & "identity" & Chr(34))
         ucrBase.clsRsyntax.AddOperatorParameter("geom_bar", clsRFunc:=clsRgeom_bar)
 
+        clsRgeom_CoordFlip.SetPackageName("ggplot")
         clsRgeom_CoordFlip.SetRCommand("coord_flip")
         ucrBase.clsRsyntax.AddOperatorParameter("coord_flip", "coord_flip")
 

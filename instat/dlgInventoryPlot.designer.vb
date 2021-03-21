@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgInventoryPlot
     Inherits System.Windows.Forms.Form
 
@@ -22,185 +38,354 @@ Partial Class dlgInventoryPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblDayOfyear = New System.Windows.Forms.Label()
-        Me.cmdOptions = New System.Windows.Forms.Button()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgInventoryPlot))
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.cmdInventoryPlotOptions = New System.Windows.Forms.Button()
         Me.lblElement = New System.Windows.Forms.Label()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.rdoMissing = New System.Windows.Forms.RadioButton()
+        Me.rdoGraph = New System.Windows.Forms.RadioButton()
+        Me.cmdInventoryPlotOptions = New System.Windows.Forms.Button()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.rdoElementOrder = New System.Windows.Forms.RadioButton()
+        Me.rdoDateOrder = New System.Windows.Forms.RadioButton()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkOmitStart = New instat.ucrCheck()
+        Me.ucrChkOmitEnd = New instat.ucrCheck()
+        Me.ucrChkDetails = New instat.ucrCheck()
+        Me.ucrPnlOrder = New instat.UcrPanel()
+        Me.ucrChkSummary = New instat.ucrCheck()
+        Me.grpDetailsOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkMinute = New instat.ucrCheck()
+        Me.ucrSaveDetails = New instat.ucrSave()
+        Me.ucrChkSecond = New instat.ucrCheck()
+        Me.ucrChkMonth = New instat.ucrCheck()
+        Me.ucrChkHour = New instat.ucrCheck()
+        Me.ucrChkYear = New instat.ucrCheck()
+        Me.ucrChkDay = New instat.ucrCheck()
+        Me.lblGraphTitle = New System.Windows.Forms.Label()
+        Me.grpPlotType = New System.Windows.Forms.GroupBox()
+        Me.rdoyear_doy_plot = New System.Windows.Forms.RadioButton()
+        Me.rdoDatePlot = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlPlotType = New instat.UcrPanel()
+        Me.lblFacetBy = New System.Windows.Forms.Label()
+        Me.ucrChkDisplayRainDays = New instat.ucrCheck()
+        Me.ucrInputFacetBy = New instat.ucrInputComboBox()
         Me.ucrInputTitle = New instat.ucrInputTextBox()
-        Me.ucrChkTitle = New instat.ucrCheck()
-        Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrChkShowNonMissing = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrInventoryPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.grpOptions.SuspendLayout()
+        Me.grpDetailsOptions.SuspendLayout()
+        Me.grpPlotType.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'lblDayOfyear
-        '
-        Me.lblDayOfyear.AutoSize = True
-        Me.lblDayOfyear.Location = New System.Drawing.Point(289, 88)
-        Me.lblDayOfyear.Name = "lblDayOfyear"
-        Me.lblDayOfyear.Size = New System.Drawing.Size(0, 13)
-        Me.lblDayOfyear.TabIndex = 15
-        '
-        'cmdOptions
-        '
-        Me.cmdOptions.Enabled = False
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 205)
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(119, 23)
-        Me.cmdOptions.TabIndex = 7
-        Me.cmdOptions.Text = "Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'lblDate
         '
-        Me.lblDate.AutoSize = True
-        Me.lblDate.Location = New System.Drawing.Point(260, 45)
+        resources.ApplyResources(Me.lblDate, "lblDate")
         Me.lblDate.Name = "lblDate"
-        Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 1
-        Me.lblDate.Text = "Date:"
         '
         'lblStation
         '
-        Me.lblStation.AutoSize = True
-        Me.lblStation.Location = New System.Drawing.Point(261, 204)
+        resources.ApplyResources(Me.lblStation, "lblStation")
         Me.lblStation.Name = "lblStation"
-        Me.lblStation.Size = New System.Drawing.Size(88, 13)
-        Me.lblStation.TabIndex = 5
-        Me.lblStation.Text = "Station(Optional):"
-        '
-        'cmdInventoryPlotOptions
-        '
-        Me.cmdInventoryPlotOptions.Enabled = False
-        Me.cmdInventoryPlotOptions.Location = New System.Drawing.Point(10, 238)
-        Me.cmdInventoryPlotOptions.Name = "cmdInventoryPlotOptions"
-        Me.cmdInventoryPlotOptions.Size = New System.Drawing.Size(119, 23)
-        Me.cmdInventoryPlotOptions.TabIndex = 8
-        Me.cmdInventoryPlotOptions.Text = "Inventory Plot Options"
-        Me.cmdInventoryPlotOptions.UseVisualStyleBackColor = True
         '
         'lblElement
         '
-        Me.lblElement.AutoSize = True
-        Me.lblElement.Location = New System.Drawing.Point(260, 86)
+        resources.ApplyResources(Me.lblElement, "lblElement")
         Me.lblElement.Name = "lblElement"
-        Me.lblElement.Size = New System.Drawing.Size(59, 13)
-        Me.lblElement.TabIndex = 3
-        Me.lblElement.Text = "Element(s):"
         '
-        'ucrReceiverDate
+        'rdoMissing
         '
-        Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(263, 60)
-        Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverDate.TabIndex = 2
+        resources.ApplyResources(Me.rdoMissing, "rdoMissing")
+        Me.rdoMissing.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMissing.FlatAppearance.BorderSize = 2
+        Me.rdoMissing.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoMissing.Name = "rdoMissing"
+        Me.rdoMissing.UseVisualStyleBackColor = True
+        '
+        'rdoGraph
+        '
+        resources.ApplyResources(Me.rdoGraph, "rdoGraph")
+        Me.rdoGraph.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGraph.FlatAppearance.BorderSize = 2
+        Me.rdoGraph.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGraph.Name = "rdoGraph"
+        Me.rdoGraph.UseVisualStyleBackColor = True
+        '
+        'cmdInventoryPlotOptions
+        '
+        resources.ApplyResources(Me.cmdInventoryPlotOptions, "cmdInventoryPlotOptions")
+        Me.cmdInventoryPlotOptions.Name = "cmdInventoryPlotOptions"
+        Me.cmdInventoryPlotOptions.UseVisualStyleBackColor = True
+        '
+        'cmdOptions
+        '
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'rdoElementOrder
+        '
+        resources.ApplyResources(Me.rdoElementOrder, "rdoElementOrder")
+        Me.rdoElementOrder.Name = "rdoElementOrder"
+        Me.rdoElementOrder.TabStop = True
+        Me.rdoElementOrder.UseVisualStyleBackColor = True
+        '
+        'rdoDateOrder
+        '
+        resources.ApplyResources(Me.rdoDateOrder, "rdoDateOrder")
+        Me.rdoDateOrder.Name = "rdoDateOrder"
+        Me.rdoDateOrder.TabStop = True
+        Me.rdoDateOrder.UseVisualStyleBackColor = True
+        '
+        'grpOptions
+        '
+        Me.grpOptions.Controls.Add(Me.ucrChkOmitStart)
+        Me.grpOptions.Controls.Add(Me.rdoElementOrder)
+        Me.grpOptions.Controls.Add(Me.ucrChkOmitEnd)
+        Me.grpOptions.Controls.Add(Me.rdoDateOrder)
+        Me.grpOptions.Controls.Add(Me.ucrChkDetails)
+        Me.grpOptions.Controls.Add(Me.ucrPnlOrder)
+        Me.grpOptions.Controls.Add(Me.ucrChkSummary)
+        resources.ApplyResources(Me.grpOptions, "grpOptions")
+        Me.grpOptions.Name = "grpOptions"
+        Me.grpOptions.TabStop = False
+        '
+        'ucrChkOmitStart
+        '
+        Me.ucrChkOmitStart.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitStart, "ucrChkOmitStart")
+        Me.ucrChkOmitStart.Name = "ucrChkOmitStart"
+        '
+        'ucrChkOmitEnd
+        '
+        Me.ucrChkOmitEnd.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitEnd, "ucrChkOmitEnd")
+        Me.ucrChkOmitEnd.Name = "ucrChkOmitEnd"
+        '
+        'ucrChkDetails
+        '
+        Me.ucrChkDetails.Checked = False
+        resources.ApplyResources(Me.ucrChkDetails, "ucrChkDetails")
+        Me.ucrChkDetails.Name = "ucrChkDetails"
+        '
+        'ucrPnlOrder
+        '
+        resources.ApplyResources(Me.ucrPnlOrder, "ucrPnlOrder")
+        Me.ucrPnlOrder.Name = "ucrPnlOrder"
+        '
+        'ucrChkSummary
+        '
+        Me.ucrChkSummary.Checked = False
+        resources.ApplyResources(Me.ucrChkSummary, "ucrChkSummary")
+        Me.ucrChkSummary.Name = "ucrChkSummary"
+        '
+        'grpDetailsOptions
+        '
+        Me.grpDetailsOptions.Controls.Add(Me.ucrChkMinute)
+        Me.grpDetailsOptions.Controls.Add(Me.ucrSaveDetails)
+        Me.grpDetailsOptions.Controls.Add(Me.ucrChkSecond)
+        Me.grpDetailsOptions.Controls.Add(Me.ucrChkMonth)
+        Me.grpDetailsOptions.Controls.Add(Me.ucrChkHour)
+        Me.grpDetailsOptions.Controls.Add(Me.ucrChkYear)
+        Me.grpDetailsOptions.Controls.Add(Me.ucrChkDay)
+        resources.ApplyResources(Me.grpDetailsOptions, "grpDetailsOptions")
+        Me.grpDetailsOptions.Name = "grpDetailsOptions"
+        Me.grpDetailsOptions.TabStop = False
+        '
+        'ucrChkMinute
+        '
+        Me.ucrChkMinute.Checked = False
+        resources.ApplyResources(Me.ucrChkMinute, "ucrChkMinute")
+        Me.ucrChkMinute.Name = "ucrChkMinute"
+        '
+        'ucrSaveDetails
+        '
+        resources.ApplyResources(Me.ucrSaveDetails, "ucrSaveDetails")
+        Me.ucrSaveDetails.Name = "ucrSaveDetails"
+        '
+        'ucrChkSecond
+        '
+        Me.ucrChkSecond.Checked = False
+        resources.ApplyResources(Me.ucrChkSecond, "ucrChkSecond")
+        Me.ucrChkSecond.Name = "ucrChkSecond"
+        '
+        'ucrChkMonth
+        '
+        Me.ucrChkMonth.Checked = False
+        resources.ApplyResources(Me.ucrChkMonth, "ucrChkMonth")
+        Me.ucrChkMonth.Name = "ucrChkMonth"
+        '
+        'ucrChkHour
+        '
+        Me.ucrChkHour.Checked = False
+        resources.ApplyResources(Me.ucrChkHour, "ucrChkHour")
+        Me.ucrChkHour.Name = "ucrChkHour"
+        '
+        'ucrChkYear
+        '
+        Me.ucrChkYear.Checked = False
+        resources.ApplyResources(Me.ucrChkYear, "ucrChkYear")
+        Me.ucrChkYear.Name = "ucrChkYear"
+        '
+        'ucrChkDay
+        '
+        Me.ucrChkDay.Checked = False
+        resources.ApplyResources(Me.ucrChkDay, "ucrChkDay")
+        Me.ucrChkDay.Name = "ucrChkDay"
+        '
+        'lblGraphTitle
+        '
+        resources.ApplyResources(Me.lblGraphTitle, "lblGraphTitle")
+        Me.lblGraphTitle.Name = "lblGraphTitle"
+        '
+        'grpPlotType
+        '
+        Me.grpPlotType.Controls.Add(Me.rdoyear_doy_plot)
+        Me.grpPlotType.Controls.Add(Me.rdoDatePlot)
+        Me.grpPlotType.Controls.Add(Me.ucrPnlPlotType)
+        resources.ApplyResources(Me.grpPlotType, "grpPlotType")
+        Me.grpPlotType.Name = "grpPlotType"
+        Me.grpPlotType.TabStop = False
+        '
+        'rdoyear_doy_plot
+        '
+        resources.ApplyResources(Me.rdoyear_doy_plot, "rdoyear_doy_plot")
+        Me.rdoyear_doy_plot.Name = "rdoyear_doy_plot"
+        Me.rdoyear_doy_plot.TabStop = True
+        Me.rdoyear_doy_plot.UseVisualStyleBackColor = True
+        '
+        'rdoDatePlot
+        '
+        resources.ApplyResources(Me.rdoDatePlot, "rdoDatePlot")
+        Me.rdoDatePlot.Name = "rdoDatePlot"
+        Me.rdoDatePlot.TabStop = True
+        Me.rdoDatePlot.UseVisualStyleBackColor = True
+        '
+        'ucrPnlPlotType
+        '
+        resources.ApplyResources(Me.ucrPnlPlotType, "ucrPnlPlotType")
+        Me.ucrPnlPlotType.Name = "ucrPnlPlotType"
+        '
+        'lblFacetBy
+        '
+        resources.ApplyResources(Me.lblFacetBy, "lblFacetBy")
+        Me.lblFacetBy.Name = "lblFacetBy"
+        '
+        'ucrChkDisplayRainDays
+        '
+        Me.ucrChkDisplayRainDays.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplayRainDays, "ucrChkDisplayRainDays")
+        Me.ucrChkDisplayRainDays.Name = "ucrChkDisplayRainDays"
+        '
+        'ucrInputFacetBy
+        '
+        Me.ucrInputFacetBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputFacetBy.GetSetSelectedIndex = -1
+        Me.ucrInputFacetBy.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFacetBy, "ucrInputFacetBy")
+        Me.ucrInputFacetBy.Name = "ucrInputFacetBy"
         '
         'ucrInputTitle
         '
         Me.ucrInputTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
-        Me.ucrInputTitle.Location = New System.Drawing.Point(119, 295)
+        resources.ApplyResources(Me.ucrInputTitle, "ucrInputTitle")
         Me.ucrInputTitle.Name = "ucrInputTitle"
-        Me.ucrInputTitle.Size = New System.Drawing.Size(259, 21)
-        Me.ucrInputTitle.TabIndex = 12
-        '
-        'ucrChkTitle
-        '
-        Me.ucrChkTitle.Checked = False
-        Me.ucrChkTitle.Location = New System.Drawing.Point(10, 297)
-        Me.ucrChkTitle.Name = "ucrChkTitle"
-        Me.ucrChkTitle.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkTitle.TabIndex = 11
-        '
-        'ucrReceiverElements
-        '
-        Me.ucrReceiverElements.frmParent = Me
-        Me.ucrReceiverElements.Location = New System.Drawing.Point(263, 101)
-        Me.ucrReceiverElements.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverElements.Name = "ucrReceiverElements"
-        Me.ucrReceiverElements.Selector = Nothing
-        Me.ucrReceiverElements.Size = New System.Drawing.Size(120, 100)
-        Me.ucrReceiverElements.TabIndex = 4
         '
         'ucrChkShowNonMissing
         '
         Me.ucrChkShowNonMissing.Checked = False
-        Me.ucrChkShowNonMissing.Location = New System.Drawing.Point(263, 270)
+        resources.ApplyResources(Me.ucrChkShowNonMissing, "ucrChkShowNonMissing")
         Me.ucrChkShowNonMissing.Name = "ucrChkShowNonMissing"
-        Me.ucrChkShowNonMissing.Size = New System.Drawing.Size(151, 20)
-        Me.ucrChkShowNonMissing.TabIndex = 10
-        Me.ucrChkShowNonMissing.Visible = False
         '
         'ucrSaveGraph
         '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 322)
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(283, 24)
-        Me.ucrSaveGraph.TabIndex = 13
         '
         'ucrChkFlipCoordinates
         '
         Me.ucrChkFlipCoordinates.Checked = False
-        Me.ucrChkFlipCoordinates.Location = New System.Drawing.Point(263, 244)
+        resources.ApplyResources(Me.ucrChkFlipCoordinates, "ucrChkFlipCoordinates")
         Me.ucrChkFlipCoordinates.Name = "ucrChkFlipCoordinates"
-        Me.ucrChkFlipCoordinates.Size = New System.Drawing.Size(151, 20)
-        Me.ucrChkFlipCoordinates.TabIndex = 9
+        '
+        'ucrPnlOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'ucrReceiverElements
+        '
+        Me.ucrReceiverElements.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElements, "ucrReceiverElements")
+        Me.ucrReceiverElements.Name = "ucrReceiverElements"
+        Me.ucrReceiverElements.Selector = Nothing
+        Me.ucrReceiverElements.strNcFilePath = ""
+        Me.ucrReceiverElements.ucrSelector = Nothing
         '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(263, 219)
-        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
-        Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverStation.TabIndex = 6
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrInventoryPlotSelector
         '
+        Me.ucrInventoryPlotSelector.bDropUnusedFilterLevels = False
         Me.ucrInventoryPlotSelector.bShowHiddenColumns = False
         Me.ucrInventoryPlotSelector.bUseCurrentFilter = True
-        Me.ucrInventoryPlotSelector.Location = New System.Drawing.Point(10, 10)
-        Me.ucrInventoryPlotSelector.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrInventoryPlotSelector, "ucrInventoryPlotSelector")
         Me.ucrInventoryPlotSelector.Name = "ucrInventoryPlotSelector"
-        Me.ucrInventoryPlotSelector.Size = New System.Drawing.Size(210, 180)
-        Me.ucrInventoryPlotSelector.TabIndex = 0
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 352)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
-        Me.ucrBase.TabIndex = 14
         '
         'dlgInventoryPlot
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(417, 413)
-        Me.Controls.Add(Me.lblElement)
-        Me.Controls.Add(Me.ucrReceiverDate)
+        Me.Controls.Add(Me.lblGraphTitle)
+        Me.Controls.Add(Me.ucrChkDisplayRainDays)
+        Me.Controls.Add(Me.grpPlotType)
+        Me.Controls.Add(Me.lblFacetBy)
+        Me.Controls.Add(Me.ucrInputFacetBy)
         Me.Controls.Add(Me.ucrInputTitle)
-        Me.Controls.Add(Me.ucrChkTitle)
-        Me.Controls.Add(Me.cmdInventoryPlotOptions)
-        Me.Controls.Add(Me.lblDate)
-        Me.Controls.Add(Me.ucrReceiverElements)
         Me.Controls.Add(Me.ucrChkShowNonMissing)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
+        Me.Controls.Add(Me.grpDetailsOptions)
+        Me.Controls.Add(Me.grpOptions)
+        Me.Controls.Add(Me.cmdInventoryPlotOptions)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.lblDayOfyear)
+        Me.Controls.Add(Me.rdoGraph)
+        Me.Controls.Add(Me.rdoMissing)
+        Me.Controls.Add(Me.ucrPnlOptions)
+        Me.Controls.Add(Me.lblElement)
+        Me.Controls.Add(Me.ucrReceiverDate)
+        Me.Controls.Add(Me.lblDate)
+        Me.Controls.Add(Me.ucrReceiverElements)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrInventoryPlotSelector)
@@ -209,27 +394,55 @@ Partial Class dlgInventoryPlot
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgInventoryPlot"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Tag = "Inventory_Plot"
-        Me.Text = "Inventory Plot"
+        Me.grpOptions.ResumeLayout(False)
+        Me.grpOptions.PerformLayout()
+        Me.grpDetailsOptions.ResumeLayout(False)
+        Me.grpPlotType.ResumeLayout(False)
+        Me.grpPlotType.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrInventoryPlotSelector As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents lblDayOfyear As Label
-    Friend WithEvents cmdOptions As Button
-    Friend WithEvents ucrChkFlipCoordinates As ucrCheck
-    Friend WithEvents ucrSaveGraph As ucrSave
-    Friend WithEvents ucrChkShowNonMissing As ucrCheck
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrReceiverElements As ucrReceiverMultiple
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
-    Friend WithEvents cmdInventoryPlotOptions As Button
-    Friend WithEvents ucrInputTitle As ucrInputTextBox
-    Friend WithEvents ucrChkTitle As ucrCheck
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblElement As Label
+    Friend WithEvents ucrPnlOptions As UcrPanel
+    Friend WithEvents ucrChkMinute As ucrCheck
+    Friend WithEvents ucrChkSecond As ucrCheck
+    Friend WithEvents ucrChkYear As ucrCheck
+    Friend WithEvents ucrChkMonth As ucrCheck
+    Friend WithEvents ucrChkDay As ucrCheck
+    Friend WithEvents ucrChkHour As ucrCheck
+    Friend WithEvents rdoGraph As RadioButton
+    Friend WithEvents rdoMissing As RadioButton
+    Friend WithEvents cmdInventoryPlotOptions As Button
+    Friend WithEvents cmdOptions As Button
+    Friend WithEvents rdoElementOrder As RadioButton
+    Friend WithEvents ucrSaveDetails As ucrSave
+    Friend WithEvents rdoDateOrder As RadioButton
+    Friend WithEvents ucrPnlOrder As UcrPanel
+    Friend WithEvents ucrChkDetails As ucrCheck
+    Friend WithEvents ucrChkSummary As ucrCheck
+    Friend WithEvents grpOptions As GroupBox
+    Friend WithEvents grpDetailsOptions As GroupBox
+    Friend WithEvents lblGraphTitle As Label
+    Friend WithEvents ucrChkDisplayRainDays As ucrCheck
+    Friend WithEvents grpPlotType As GroupBox
+    Friend WithEvents rdoyear_doy_plot As RadioButton
+    Friend WithEvents rdoDatePlot As RadioButton
+    Friend WithEvents ucrPnlPlotType As UcrPanel
+    Friend WithEvents lblFacetBy As Label
+    Friend WithEvents ucrInputFacetBy As ucrInputComboBox
+    Friend WithEvents ucrInputTitle As ucrInputTextBox
+    Friend WithEvents ucrChkShowNonMissing As ucrCheck
+    Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrChkFlipCoordinates As ucrCheck
+    Friend WithEvents ucrChkOmitStart As ucrCheck
+    Friend WithEvents ucrChkOmitEnd As ucrCheck
 End Class

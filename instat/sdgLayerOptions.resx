@@ -117,4 +117,166 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrGeomWithAes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="ucrGeomWithAes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>467, 399</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrGeomWithAes.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrGeomWithAes.Name" xml:space="preserve">
+    <value>ucrGeomWithAes</value>
+  </data>
+  <data name="&gt;&gt;ucrGeomWithAes.Type" xml:space="preserve">
+    <value>instat.ucrGeomListWithParameters, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrGeomWithAes.Parent" xml:space="preserve">
+    <value>tbpAesthetics</value>
+  </data>
+  <data name="&gt;&gt;ucrGeomWithAes.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbpAesthetics.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tbpAesthetics.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpAesthetics.Size" type="System.Drawing.Size, System.Drawing">
+    <value>474, 485</value>
+  </data>
+  <data name="tbpAesthetics.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tbpAesthetics.Text" xml:space="preserve">
+    <value>Layer Dimensions (Aesthetics)</value>
+  </data>
+  <data name="&gt;&gt;tbpAesthetics.Name" xml:space="preserve">
+    <value>tbpAesthetics</value>
+  </data>
+  <data name="&gt;&gt;tbpAesthetics.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpAesthetics.Parent" xml:space="preserve">
+    <value>tbcLayers</value>
+  </data>
+  <data name="&gt;&gt;tbpAesthetics.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrLayerParameter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 3</value>
+  </data>
+  <data name="ucrLayerParameter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>308, 476</value>
+  </data>
+  <data name="ucrLayerParameter.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrLayerParameter.Name" xml:space="preserve">
+    <value>ucrLayerParameter</value>
+  </data>
+  <data name="&gt;&gt;ucrLayerParameter.Type" xml:space="preserve">
+    <value>instat.ucrLayerParameters, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrLayerParameter.Parent" xml:space="preserve">
+    <value>tbpGeomParameters</value>
+  </data>
+  <data name="&gt;&gt;ucrLayerParameter.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbpGeomParameters.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpGeomParameters.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpGeomParameters.Size" type="System.Drawing.Size, System.Drawing">
+    <value>474, 485</value>
+  </data>
+  <data name="tbpGeomParameters.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbpGeomParameters.Text" xml:space="preserve">
+    <value>Layer Parameters (Geom Parameters)</value>
+  </data>
+  <data name="&gt;&gt;tbpGeomParameters.Name" xml:space="preserve">
+    <value>tbpGeomParameters</value>
+  </data>
+  <data name="&gt;&gt;tbpGeomParameters.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpGeomParameters.Parent" xml:space="preserve">
+    <value>tbcLayers</value>
+  </data>
+  <data name="&gt;&gt;tbpGeomParameters.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbcLayers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 8</value>
+  </data>
+  <data name="tbcLayers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>482, 511</value>
+  </data>
+  <data name="tbcLayers.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbcLayers.Name" xml:space="preserve">
+    <value>tbcLayers</value>
+  </data>
+  <data name="&gt;&gt;tbcLayers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbcLayers.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbcLayers.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrSdgLayerBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>173, 524</value>
+  </data>
+  <data name="ucrSdgLayerBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrSdgLayerBase.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrSdgLayerBase.Name" xml:space="preserve">
+    <value>ucrSdgLayerBase</value>
+  </data>
+  <data name="&gt;&gt;ucrSdgLayerBase.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSdgLayerBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSdgLayerBase.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>492, 562</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterParent</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Layer Options</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>sdgLayerOptions</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

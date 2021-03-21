@@ -1,4 +1,20 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class dlgAddKey
     Inherits System.Windows.Forms.Form
 
@@ -22,6 +38,7 @@ Partial Class dlgAddKey
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgAddKey))
         Me.cmdCheckUnique = New System.Windows.Forms.Button()
         Me.lblKeyColumns = New System.Windows.Forms.Label()
         Me.lblKeyName = New System.Windows.Forms.Label()
@@ -34,81 +51,61 @@ Partial Class dlgAddKey
         '
         'cmdCheckUnique
         '
-        Me.cmdCheckUnique.Location = New System.Drawing.Point(10, 249)
+        resources.ApplyResources(Me.cmdCheckUnique, "cmdCheckUnique")
         Me.cmdCheckUnique.Name = "cmdCheckUnique"
-        Me.cmdCheckUnique.Size = New System.Drawing.Size(98, 23)
-        Me.cmdCheckUnique.TabIndex = 5
-        Me.cmdCheckUnique.Text = "Check Unique"
         Me.cmdCheckUnique.UseVisualStyleBackColor = True
         '
         'lblKeyColumns
         '
-        Me.lblKeyColumns.AutoSize = True
-        Me.lblKeyColumns.Location = New System.Drawing.Point(254, 47)
+        resources.ApplyResources(Me.lblKeyColumns, "lblKeyColumns")
         Me.lblKeyColumns.Name = "lblKeyColumns"
-        Me.lblKeyColumns.Size = New System.Drawing.Size(71, 13)
-        Me.lblKeyColumns.TabIndex = 1
-        Me.lblKeyColumns.Text = "Key Columns:"
         '
         'lblKeyName
         '
-        Me.lblKeyName.AutoSize = True
-        Me.lblKeyName.Location = New System.Drawing.Point(10, 218)
+        resources.ApplyResources(Me.lblKeyName, "lblKeyName")
         Me.lblKeyName.Name = "lblKeyName"
-        Me.lblKeyName.Size = New System.Drawing.Size(59, 13)
-        Me.lblKeyName.TabIndex = 3
-        Me.lblKeyName.Text = "Key Name:"
         '
         'ucrInputKeyName
         '
+        Me.ucrInputKeyName.AddQuotesIfUnrecognised = True
         Me.ucrInputKeyName.IsMultiline = False
         Me.ucrInputKeyName.IsReadOnly = False
-        Me.ucrInputKeyName.Location = New System.Drawing.Point(114, 215)
+        resources.ApplyResources(Me.ucrInputKeyName, "ucrInputKeyName")
         Me.ucrInputKeyName.Name = "ucrInputKeyName"
-        Me.ucrInputKeyName.Size = New System.Drawing.Size(137, 21)
-        Me.ucrInputKeyName.TabIndex = 4
         '
         'ucrInputCheckInput
         '
+        Me.ucrInputCheckInput.AddQuotesIfUnrecognised = True
         Me.ucrInputCheckInput.IsMultiline = False
         Me.ucrInputCheckInput.IsReadOnly = False
-        Me.ucrInputCheckInput.Location = New System.Drawing.Point(114, 250)
+        resources.ApplyResources(Me.ucrInputCheckInput, "ucrInputCheckInput")
         Me.ucrInputCheckInput.Name = "ucrInputCheckInput"
-        Me.ucrInputCheckInput.Size = New System.Drawing.Size(294, 21)
-        Me.ucrInputCheckInput.TabIndex = 6
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 285)
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(405, 52)
-        Me.ucrBase.TabIndex = 7
         '
         'ucrSelectorKeyColumns
         '
         Me.ucrSelectorKeyColumns.bShowHiddenColumns = False
         Me.ucrSelectorKeyColumns.bUseCurrentFilter = True
-        Me.ucrSelectorKeyColumns.Location = New System.Drawing.Point(10, 10)
-        Me.ucrSelectorKeyColumns.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrSelectorKeyColumns, "ucrSelectorKeyColumns")
         Me.ucrSelectorKeyColumns.Name = "ucrSelectorKeyColumns"
-        Me.ucrSelectorKeyColumns.Size = New System.Drawing.Size(241, 180)
-        Me.ucrSelectorKeyColumns.TabIndex = 0
         '
         'ucrReceiverKeyColumns
         '
         Me.ucrReceiverKeyColumns.frmParent = Me
-        Me.ucrReceiverKeyColumns.Location = New System.Drawing.Point(255, 62)
-        Me.ucrReceiverKeyColumns.Margin = New System.Windows.Forms.Padding(0)
+        resources.ApplyResources(Me.ucrReceiverKeyColumns, "ucrReceiverKeyColumns")
         Me.ucrReceiverKeyColumns.Name = "ucrReceiverKeyColumns"
         Me.ucrReceiverKeyColumns.Selector = Nothing
-        Me.ucrReceiverKeyColumns.Size = New System.Drawing.Size(132, 133)
-        Me.ucrReceiverKeyColumns.TabIndex = 2
+        Me.ucrReceiverKeyColumns.strNcFilePath = ""
+        Me.ucrReceiverKeyColumns.ucrSelector = Nothing
         '
         'dlgAddKey
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(414, 340)
         Me.Controls.Add(Me.ucrInputKeyName)
         Me.Controls.Add(Me.lblKeyColumns)
         Me.Controls.Add(Me.ucrInputCheckInput)
@@ -121,8 +118,6 @@ Partial Class dlgAddKey
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgAddKey"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Add Key"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

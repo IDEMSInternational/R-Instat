@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,7 +11,7 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports RDotNet
@@ -20,7 +20,11 @@ Public Class ucrReceiverSingle
     Dim strDataFrameName As String
     Public strCurrDataType As String
     Public Event WithMeSelectionChanged(ucrChangedReceiver As ucrReceiverSingle)
-    Public bAutoFill As Boolean = False
+    'We have not added this to multiple receiver because we have no case yet that we want not to print graph
+    Public bPrintGraph As Boolean = True
+    'If True variable will be assigned to e.g. DF.x instead of x (where DF is strDataFrameName and x is receiver value)
+    'This is useful e.g. to ensure uniqueness when a dialog uses multiple data frames
+    Public bIncludeDataFrameInAssignment As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -43,9 +47,11 @@ Public Class ucrReceiverSingle
 
     End Sub
 
-    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "")
+    Public Overrides Sub Add(strItem As String, Optional strDataFrame As String = "", Optional bFixReceiver As Boolean = False)
         Dim clsGetDataType As New RFunction
         Dim strCurrentItemType As String
+        Dim expColumnType As SymbolicExpression
+        Dim bRemove As Boolean = False
 
         'Would prefer to have remove selected but that will first clear the receiver
         'This has issues when reading RSyntax and filling receivers e.g. in Specific plot dialogs
@@ -55,7 +61,7 @@ Public Class ucrReceiverSingle
         'If RemoveSelected() later contains other things, this may need to be updated.
         'RemoveSelected()
         If Selector IsNot Nothing Then
-            Selector.RemoveFromVariablesList(txtReceiverSingle.Text)
+            Selector.RemoveFromVariablesList(txtReceiverSingle.Text, strDataFrame)
         End If
         MyBase.Add(strItem, strDataFrame)
 
@@ -79,21 +85,55 @@ Public Class ucrReceiverSingle
                 If strDataFrame <> "" Then
                     clsGetDataType.AddParameter("data_name", Chr(34) & strDataFrame & Chr(34))
                     clsGetDataType.AddParameter("column", Chr(34) & strItem & Chr(34))
-                    strCurrDataType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript()).AsCharacter(0)
+                    If ucrSelector IsNot Nothing AndAlso ucrSelector.HasStackedVariables() Then
+                        If strItem = "variable" Then
+                            strCurrDataType = "factor"
+                        ElseIf strItem = "value" Then
+                            strCurrDataType = ""
+                        Else
+                            expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+                            If expColumnType IsNot Nothing AndAlso expColumnType.Type <> Internals.SymbolicExpressionType.Null Then
+                                If expColumnType.AsCharacter.Count > 1 Then
+                                    strCurrDataType = Join(expColumnType.AsCharacter.ToArray, ",")
+                                Else
+                                    strCurrDataType = expColumnType.AsCharacter(0)
+                                End If
+                            Else
+                                strCurrDataType = ""
+                                bRemove = True
+                            End If
+                        End If
+                    Else
+                        expColumnType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataType.ToScript(), bSilent:=True)
+                        If expColumnType IsNot Nothing AndAlso expColumnType.Type <> Internals.SymbolicExpressionType.Null Then
+                            If expColumnType.AsCharacter.Count > 1 Then
+                                strCurrDataType = Join(expColumnType.AsCharacter.ToArray, ",")
+                            Else
+                                strCurrDataType = expColumnType.AsCharacter(0)
+                            End If
+                        Else
+                            strCurrDataType = ""
+                            bRemove = True
+                        End If
+                    End If
                 End If
             Else
                 strCurrDataType = ""
             End If
             strDataFrameName = strDataFrame
             txtReceiverSingle.Text = strItem
-            Selector.AddToVariablesList(strItem)
+            Selector.AddToVariablesList(strItem, strDataFrameName)
+            If bRemove Then
+                RemoveSelected()
+            End If
+            txtReceiverSingle.Enabled = Not bFixReceiver
         End If
     End Sub
 
     Public Overrides Sub RemoveSelected()
         If txtReceiverSingle.Enabled Then
             If Selector IsNot Nothing Then
-                Selector.RemoveFromVariablesList(txtReceiverSingle.Text)
+                Selector.RemoveFromVariablesList(txtReceiverSingle.Text, strDataFrameName)
             End If
             txtReceiverSingle.Text = ""
             strDataFrameName = ""
@@ -139,6 +179,10 @@ Public Class ucrReceiverSingle
                             clsGetVariablesFunc.AddParameter("force_as_data_frame", "FALSE")
                         End If
                     End If
+                    If bRemoveLabels Then
+                        'temp fix to bug in sjPlot needing labels removed for factor columns
+                        clsGetVariablesFunc.AddParameter("remove_labels", "TRUE")
+                    End If
                     If bUseFilteredData Then
                         If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
                             clsGetVariablesFunc.AddParameter("use_current_filter", "TRUE")
@@ -147,6 +191,15 @@ Public Class ucrReceiverSingle
                         End If
                     Else
                         clsGetVariablesFunc.AddParameter("use_current_filter", "FALSE")
+                    End If
+                    If bDropUnusedFilterLevels Then
+                        clsGetVariablesFunc.AddParameter("drop_unused_filter_levels", "TRUE")
+                    Else
+                        If frmMain.clsInstatOptions.bIncludeRDefaultParameters Then
+                            clsGetVariablesFunc.AddParameter("drop_unused_filter_levels", "FALSE")
+                        Else
+                            clsGetVariablesFunc.RemoveParameterByName("drop_unused_filter_levels")
+                        End If
                     End If
                 Case "filter"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_filter")
@@ -157,6 +210,9 @@ Public Class ucrReceiverSingle
                 Case "graph"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_graphs")
                     clsGetVariablesFunc.AddParameter("graph_name", GetVariableNames())
+                    If Not bPrintGraph Then
+                        clsGetVariablesFunc.AddParameter("print_graph", "FALSE")
+                    End If
                 Case "model"
                     clsGetVariablesFunc.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_models")
                     clsGetVariablesFunc.AddParameter("model_name", GetVariableNames())
@@ -172,7 +228,11 @@ Public Class ucrReceiverSingle
             End Select
 
             'TODO make this an option set in Options menu
-            clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+            If bIncludeDataFrameInAssignment AndAlso strDataFrameName <> "" Then
+                clsGetVariablesFunc.SetAssignTo(strDataFrameName & "." & txtReceiverSingle.Text)
+            Else
+                clsGetVariablesFunc.SetAssignTo(txtReceiverSingle.Text)
+            End If
             Return clsGetVariablesFunc
         Else
             Return clsGetVariablesFunc
@@ -191,7 +251,7 @@ Public Class ucrReceiverSingle
         Return strTemp
     End Function
 
-    Public Overrides Function GetVariableNameslist(Optional bWithQuotes As Boolean = True) As String()
+    Public Overrides Function GetVariableNameslist(Optional bWithQuotes As Boolean = True, Optional strQuotes As String = Chr(34)) As String()
         Dim arrTemp As String() = Nothing
         arrTemp = {GetVariableNames()}
         Return arrTemp
@@ -206,6 +266,7 @@ Public Class ucrReceiverSingle
         OnSelectionChanged()
     End Sub
 
+    'TODO make these global options
     Public Overrides Sub SetColor()
         txtReceiverSingle.BackColor = Color.Aqua
     End Sub
@@ -228,7 +289,9 @@ Public Class ucrReceiverSingle
             Selector.RemoveFromVariablesList("variable")
         Else
             Me.Enabled = True
-            RemoveSelected()
+            If txtReceiverSingle.Text = "variable" Then
+                RemoveSelected()
+            End If
         End If
     End Sub
 
@@ -244,43 +307,33 @@ Public Class ucrReceiverSingle
         RemoveSelected()
     End Sub
 
-    Public Overrides Sub UpdateControl(Optional bReset As Boolean = False)
-        MyBase.UpdateControl(bReset)
-    End Sub
-
-    Private Sub Selector_DataFrameChanged() Handles ucrSelector.DataFrameChanged
-        CheckAutoFill()
-    End Sub
-
-    Public Sub CheckAutoFill()
-        If bAutoFill Then
-            If Selector IsNot Nothing Then
-                If lstIncludedMetadataProperties.Count > 0 OrElse lstExcludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count > 0 OrElse Selector.lstIncludedMetadataProperties.Count Then
-                    SetMeAsReceiver()
-                    If Selector.lstAvailableVariable.Items.Count = 1 Then
-                        Add(Selector.lstAvailableVariable.Items(0).Text, Selector.strCurrentDataFrame)
-                    End If
-                End If
-            End If
-        End If
-    End Sub
-
     Private Sub ParentForm_Shown()
         If bFirstShown Then
-            CheckAutoFill()
+            'This is not needed probably
+            'CheckAutoFill()
             bFirstShown = False
         End If
     End Sub
 
-    Protected Overrides Sub Selector_ResetAll()
-        MyBase.Selector_ResetAll()
-        CheckAutoFill()
-    End Sub
-
     Private Sub ucrReceiverSingle_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
-            AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
+            If ParentForm IsNot Nothing Then
+                AddHandler ParentForm.Shown, AddressOf ParentForm_Shown
+            End If
             bFirstLoad = False
+            If Selector IsNot Nothing AndAlso Selector.CurrentReceiver IsNot Nothing AndAlso Not Selector.CurrentReceiver.Equals(Me) Then
+                RemoveColor()
+            End If
+            'by default multiple receivers will be autoswitched on selection change
+            bAutoSwitchFromReceiver = True
         End If
     End Sub
+
+    Public Overrides Sub SetTextColour(clrNew As Color)
+        txtReceiverSingle.ForeColor = clrNew
+    End Sub
+
+    Public Overrides Function GetItemsDataFrames() As List(Of String)
+        Return New List(Of String)({strDataFrameName})
+    End Function
 End Class

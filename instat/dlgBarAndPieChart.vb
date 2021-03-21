@@ -1,5 +1,5 @@
-﻿' Instat-R
-' Copyright (C) 2015
+﻿' R- Instat
+' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
 ' it under the terms of the GNU General Public License as published by
@@ -11,211 +11,346 @@
 ' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ' GNU General Public License for more details.
 '
-' You should have received a copy of the GNU General Public License k
+' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+Imports instat
 Imports instat.Translations
+
 Public Class dlgBarAndPieChart
     Private clsRggplotFunction As New RFunction
-    Private clsRgeom_barchart As New RFunction
-    Private clsRaesFunction As New RFunction
-    Private clsTempRFunc As New RFunction
+    Private clsRgeomBarFunction As New RFunction
+    Private clsBarAesFunction As New RFunction
+    Private clsPieAesFunction As New RFunction
+    Private clsLocalRaesFunction As New RFunction
+    Private clsBaseOperator As New ROperator
+    Private clsRCoordPolarParam As New RParameter
+    Private clsLabsFunction As New RFunction
+    Private clsXlabFunction As New RFunction
+    Private clsYlabFunction As New RFunction
+    Private clsXScalecontinuousFunction As New RFunction
+    Private clsYScalecontinuousFunction As New RFunction
+    Private clsRFacetFunction As New RFunction
+    Private clsThemeFuction As New RFunction
+    Private dctThemeFunctions As New Dictionary(Of String, RFunction)
+    Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
+    Private bResetSubdialog As Boolean = True
+    Private bResetBarLayerSubdialog As Boolean = True
+    Private clsCoordPolarFunction As New RFunction
+    Private clsCoordPolarStartOperator As New ROperator
+    Private clsXScaleDateFunction As New RFunction
+    Private clsYScaleDateFunction As New RFunction
 
-    Private Sub dlgBarAndPieChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub cmdOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            SetDefaults()
             bFirstLoad = False
-        Else
-            ReopenDialog()
         End If
+        If bReset Then
+            SetDefaults()
+        End If
+        SetRCodeForControls(bReset)
 
+        bReset = False
         autoTranslate(Me)
-    End Sub
-
-    Private Sub SetDefaults()
-        'Set main dialog defaults...
-        clsRgeom_barchart.ClearParameters()
-        clsRaesFunction.ClearParameters()
-        rdoBarChart.Checked = True
-        ucrBarChartSelector.Reset()
-        ucrBarChartSelector.Focus()
-        ucrFactorReceiver.SetMeAsReceiver()
-        ucrSaveBar.Reset()
-        sdgPlots.Reset()
-        chkFlipCoordinates.Checked = False
+        ChangeLabel() 'TODO. this has been put here temporarily because there is a problem with the translation of the label
+        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrBase.clsRsyntax.SetOperation("+")
-        clsRggplotFunction.SetRCommand("ggplot")
-        clsRaesFunction.SetRCommand("aes")
-        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction)
-        ucrBase.clsRsyntax.SetOperatorParameter(True, clsRFunc:=clsRggplotFunction)
-        clsRgeom_barchart.SetRCommand("geom_bar")
-        ucrBase.clsRsyntax.SetOperatorParameter(False, clsRFunc:=clsRgeom_barchart)
-        ucrFactorReceiver.Selector = ucrBarChartSelector
-        ucrFactorReceiver.SetIncludedDataTypes({"factor"})
+        Dim clsCoordFlipFunc As New RFunction
+        Dim clsCoordFlipParam As New RParameter
+        Dim clsRCoordPolarFunction As New RFunction
+        Dim dctPositionPairs As New Dictionary(Of String, String)
+        Dim dctStatOptions As New Dictionary(Of String, String)
 
-        ucrSecondReceiver.Selector = ucrBarChartSelector
-        ucrSecondReceiver.SetIncludedDataTypes({"factor"})
-
-        sdgPlots.SetRSyntax(ucrBase.clsRsyntax)
-        ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
+        ucrBase.clsRsyntax.iCallType = 3
         ucrBase.iHelpTopicID = 438
 
+        ucrPnlOptions.AddRadioButton(rdoBarChart)
+        ucrPnlOptions.AddRadioButton(rdoPieChart)
+        ucrPnlOptions.AddParameterPresentCondition(rdoPieChart, "coordpolar")
+        ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coordpolar", False)
 
+        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrInputBarChartPosition, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputBarChartPosition.SetLinkedDisplayControl(lblPosition)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverByFactor}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
+
+        ucrBarChartSelector.SetParameter(New RParameter("data", 0))
+        ucrBarChartSelector.SetParameterIsrfunction()
+
+        ucrReceiverFirst.Selector = ucrBarChartSelector
+        ucrReceiverFirst.strSelectorHeading = "Variables"
+        ucrReceiverFirst.SetParameter(New RParameter("x", 0))
+        ucrReceiverFirst.bWithQuotes = False
+        ucrReceiverFirst.SetParameterIsString()
+        ucrReceiverFirst.SetLinkedDisplayControl(lblVariable)
+
+        ucrReceiverByFactor.Selector = ucrBarChartSelector
+        ucrReceiverByFactor.SetIncludedDataTypes({"factor"})
+        ucrReceiverByFactor.strSelectorHeading = "Factors"
+        ucrReceiverByFactor.SetParameter(New RParameter("fill", 1))
+        ucrReceiverByFactor.bWithQuotes = False
+        ucrReceiverByFactor.SetParameterIsString()
+
+        ucrReceiverY.Selector = ucrBarChartSelector
+        ucrReceiverY.strSelectorHeading = "Y Variable"
+        ucrReceiverY.SetParameter(New RParameter("y", 1))
+        ucrReceiverY.bWithQuotes = False
+        ucrReceiverY.SetParameterIsString()
+        ucrReceiverY.SetLinkedDisplayControl(lblYvariable)
+
+        ucrSaveBar.SetIsComboBox()
+        ucrSaveBar.SetCheckBoxText("Save Graph")
         ucrSaveBar.SetDataFrameSelector(ucrBarChartSelector.ucrAvailableDataFrames)
-        ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
-        ucrSaveBar.strPrefix = "Bar"
-        ucrBase.clsRsyntax.iCallType = 3
+        ucrSaveBar.SetSaveTypeAsGraph()
+        ucrSaveBar.SetPrefix("bar")
+        ucrSaveBar.SetAssignToIfUncheckedValue("last_graph")
+
+        clsRCoordPolarFunction.SetPackageName("ggplot2")
+        clsRCoordPolarFunction.SetRCommand("coord_polar")
+        clsRCoordPolarFunction.AddParameter("theta", Chr(34) & "y" & Chr(34))
+        clsRCoordPolarParam.SetArgumentName("coordpolar")
+        clsRCoordPolarParam.SetArgument(clsRCoordPolarFunction)
+
+        clsCoordFlipFunc.SetPackageName("ggplot2")
+        clsCoordFlipFunc.SetRCommand("coord_flip")
+        clsCoordFlipParam.SetArgumentName("coord_flip")
+        clsCoordFlipParam.SetArgument(clsCoordFlipFunc)
+        ucrChkFlipCoordinates.SetText("Flip Coordinates")
+        ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrInputYValue.SetParameter(New RParameter("stat", 0))
+        dctStatOptions.Add("Count", Chr(34) & "count" & Chr(34))
+        dctStatOptions.Add("Variable", Chr(34) & "identity" & Chr(34))
+        ucrInputYValue.SetItems(dctStatOptions)
+        ucrInputYValue.SetDropDownStyleAsNonEditable()
+        ucrInputYValue.SetRDefault(Chr(34) & "count" & Chr(34))
+
+        ucrInputBarChartPosition.SetParameter(New RParameter("position", 0))
+        dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
+        dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
+        dctPositionPairs.Add("Identity", Chr(34) & "identity" & Chr(34))
+        dctPositionPairs.Add("Jitter", Chr(34) & "jitter" & Chr(34))
+        dctPositionPairs.Add("Fill", Chr(34) & "fill" & Chr(34))
+        dctPositionPairs.Add("Stack in reverse", "position_stack(reverse = TRUE)")
+        ucrInputBarChartPosition.SetItems(dctPositionPairs)
+        ucrInputBarChartPosition.SetDropDownStyleAsNonEditable()
+        ucrInputBarChartPosition.SetRDefault(Chr(34) & "stack" & Chr(34))
+
     End Sub
 
-    Private Sub ReopenDialog()
+    Private Sub SetDefaults()
+        clsBaseOperator = New ROperator
+        clsRggplotFunction = New RFunction
+        clsRgeomBarFunction = New RFunction
+        clsBarAesFunction = New RFunction
+        clsPieAesFunction = New RFunction
+
+        ucrBarChartSelector.Reset()
+        ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
+        ucrReceiverFirst.SetMeAsReceiver()
+        ucrSaveBar.Reset()
+        bResetSubdialog = True
+        bResetBarLayerSubdialog = True
+
+        clsBaseOperator.SetOperation("+")
+        clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
+        clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
+
+        clsRggplotFunction.SetPackageName("ggplot2")
+        clsRggplotFunction.SetRCommand("ggplot")
+        clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
+
+        clsBarAesFunction.SetPackageName("ggplot2")
+        clsBarAesFunction.SetRCommand("aes")
+
+        clsPieAesFunction.SetPackageName("ggplot2")
+        clsPieAesFunction.SetRCommand("aes")
+        clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34))
+        clsPieAesFunction.AddParameter("y", Chr(34) & Chr(34))
+
+        clsRgeomBarFunction.SetPackageName("ggplot2")
+        clsRgeomBarFunction.SetRCommand("geom_bar")
+        clsRgeomBarFunction.AddParameter("position", Chr(34) & "dodge" & Chr(34), iPosition:=0)
+        clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
+
+        clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
+        clsXlabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
+        clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
+        clsXScalecontinuousFunction = GgplotDefaults.clsXScalecontinuousFunction.Clone()
+        clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone
+        clsRFacetFunction = GgplotDefaults.clsFacetFunction.Clone()
+        clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
+        clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
+        clsCoordPolarFunction = GgplotDefaults.clsCoordPolarFunction.Clone()
+        clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
+        clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
+        clsThemeFuction = GgplotDefaults.clsDefaultThemeFunction.Clone
+        dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
+        clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
-    Public Sub TestOKEnabled()
-        If ucrFactorReceiver.IsEmpty OrElse (ucrSaveBar.chkSaveGraph.Checked AndAlso ucrSaveBar.ucrInputGraphName.IsEmpty) Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
+    Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrReceiverFirst.SetRCode(clsBarAesFunction, bReset)
+        ucrReceiverFirst.AddAdditionalCodeParameterPair(clsPieAesFunction, New RParameter("fill", 0), iAdditionalPairNo:=1)
+        ucrReceiverY.SetRCode(clsBarAesFunction, bReset)
+        ucrReceiverY.AddAdditionalCodeParameterPair(clsPieAesFunction, New RParameter("y", 1), iAdditionalPairNo:=1)
+        ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
+        ucrSaveBar.SetRCode(clsBaseOperator, bReset)
+        ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
+        ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
+        ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
+        ucrInputBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
+        ucrInputYValue.SetRCode(clsRgeomBarFunction, bReset)
+    End Sub
+
+    Private Sub TestOkEnabled()
+        If rdoBarChart.Checked Then
+            If Not ucrReceiverFirst.IsEmpty AndAlso Not (ucrReceiverY.IsEmpty AndAlso ucrReceiverY.Visible) AndAlso ucrSaveBar.IsComplete Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
+        ElseIf rdoPieChart.Checked Then
+            If ucrReceiverFirst.IsEmpty OrElse Not ucrSaveBar.IsComplete Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
         End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrBarChartSelector_DataFrameChanged() Handles ucrBarChartSelector.DataFrameChanged
-        clsRggplotFunction.AddParameter("data", clsRFunctionParameter:=ucrBarChartSelector.ucrAvailableDataFrames.clsCurrDataFrame)
-    End Sub
-
-    Private Sub ucrFactorReceiver_SelectionChanged() Handles ucrFactorReceiver.SelectionChanged
-        SetFactorReceiverParameter()
-    End Sub
-
-    Private Sub SetFactorReceiverParameter()
-        If rdoBarChart.Checked = True Then
-            If Not ucrFactorReceiver.IsEmpty Then
-                clsRaesFunction.AddParameter("x", ucrFactorReceiver.GetVariableNames(False))
-            Else
-                clsRaesFunction.RemoveParameterByName("x")
-            End If
-        Else
-            If Not ucrFactorReceiver.IsEmpty Then
-                clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False))
-            Else
-                clsRaesFunction.RemoveParameterByName("fill")
-            End If
-        End If
-        TestOKEnabled()
-    End Sub
-
-
-    Private Sub ucrSecondReceiver_SelectionChanged() Handles ucrSecondReceiver.SelectionChanged
-        SetSecondFactorReceiverParameter()
-    End Sub
-
-    Private Sub SetSecondFactorReceiverParameter()
-        If rdoBarChart.Checked AndAlso Not ucrSecondReceiver.IsEmpty Then
-            clsRaesFunction.AddParameter("fill", ucrSecondReceiver.GetVariableNames(False))
-        Else
-            clsRaesFunction.RemoveParameterByName("fill")
-        End If
-        TestOKEnabled()
-    End Sub
-
-    Private Sub grpSelection_CheckedChanged(sender As Object, e As EventArgs) Handles rdoBarChart.CheckedChanged, rdoPieChart.CheckedChanged
-        If rdoBarChart.Checked = True Then
-            ucrSaveBar.strPrefix = "Bar"
-            clsRgeom_barchart.RemoveParameterByName("width")
-            ucrBase.clsRsyntax.RemoveOperatorParameter("polar")
-            cmdBarChartOptions.Visible = True
-            cmdPieChartOptions.Visible = False
-            ucrSecondReceiver.Visible = True
-            lblSecondFactor.Visible = True
-            chkFlipCoordinates.Visible = True
-            SetCoordFlip()
-        ElseIf rdoPieChart.Checked = True Then
-            ucrSaveBar.strPrefix = "Pie"
-            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
-            clsRgeom_barchart.AddParameter("width", "1")
-            clsTempRFunc.SetRCommand("coord_polar")
-            clsTempRFunc.AddParameter("theta", Chr(34) & "y" & Chr(34))
-            ucrBase.clsRsyntax.AddOperatorParameter("polar", clsRFunc:=clsTempRFunc)
-            cmdBarChartOptions.Visible = False
-            cmdPieChartOptions.Visible = True
-            ucrSecondReceiver.Visible = False
-            lblSecondFactor.Visible = False
-            chkFlipCoordinates.Visible = False
-            ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
-        End If
-        SetSecondFactorReceiverParameter() 'Warning: need to set second factor first, as in the pie chart case, it erases "fill" parameter (in clsRaesFunction), which is the parameter that takes the value in the first factor receiver.
-        SetFactorReceiverParameter()
-        TestOKEnabled()
+        SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetDataFrame(strNewDataFrame:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        If rdoBarChart.Checked Then
+            sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewGlobalAesFunction:=clsBarAesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrBarChartSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
+        Else
+            sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewGlobalAesFunction:=clsPieAesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrBarChartSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
+        End If
         sdgPlots.ShowDialog()
-        'Warning, when coordinate flip is added to coordinates tab on sdgPLots, then link with chkFlipCoordinates...
+        bResetSubdialog = False
+        'Warning, when coordinate flip is added to coordinates tab on sdgPLots, then link with ucrChkFlipCoordinates...
+
+        'this syncs the coordflip in sdgplots and this main dlg
+        ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
     End Sub
 
     Private Sub cmdBarChartOptions_Click(sender As Object, e As EventArgs) Handles cmdBarChartOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_barchart, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True, bIgnoreGlobalAes:=False)
+        'What should global and local aes be?
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsBarAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
         sdgLayerOptions.ShowDialog()
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                ucrFactorReceiver.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "fill" Then
-                ucrSecondReceiver.Add(clsParam.strArgumentValue)
-            End If
-        Next
-        TestOKEnabled()
+        bResetBarLayerSubdialog = False
+        If clsBarAesFunction.ContainsParameter("x") Then
+            ucrReceiverFirst.Add(clsBarAesFunction.GetParameter("x").strArgumentValue)
+        Else
+            ucrReceiverFirst.Clear()
+        End If
+        If clsBarAesFunction.ContainsParameter("fill") Then
+            ucrReceiverByFactor.Add(clsBarAesFunction.GetParameter("fill").strArgumentValue)
+        Else
+            ucrReceiverByFactor.Clear()
+        End If
+        'Allows for sync with the layer parameters
+        ucrInputBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
+        TestOkEnabled()
     End Sub
 
     Private Sub cmdPieChartOptions_Click(sender As Object, e As EventArgs) Handles cmdPieChartOptions.Click
-        sdgLayerOptions.SetupLayer(clsTempGgPlot:=clsRggplotFunction, clsTempGeomFunc:=clsRgeom_barchart, clsTempAesFunc:=clsRaesFunction, bFixAes:=True, bFixGeom:=True, strDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bApplyAesGlobally:=True)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsPieAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
         sdgLayerOptions.ShowDialog()
-        For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "x" Then
-                If clsParam.strArgumentValue = Chr(34) & Chr(34) Then
-                    ucrFactorReceiver.Clear()
-                Else
-                    ucrFactorReceiver.Add(clsParam.strArgumentValue)
-                End If
-            ElseIf clsParam.strArgumentName = "fill" Then
-                ucrSecondReceiver.Add(clsParam.strArgumentValue)
+        bResetBarLayerSubdialog = False
+        'temp fix - should instead be setting R code of the receivers here
+        If Not clsPieAesFunction.ContainsParameter("x") Then
+            clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34))
+        End If
+        If clsPieAesFunction.ContainsParameter("fill") Then
+            ucrReceiverFirst.Add(clsPieAesFunction.GetParameter("fill").strArgumentValue)
+        Else
+            ucrReceiverFirst.Clear()
+        End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub SetDialogOptions()
+        If rdoBarChart.Checked Then
+            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
+            cmdPieChartOptions.Visible = False
+            cmdBarChartOptions.Visible = True
+            cmdColumnChartOptions.Visible = False
+            If Not clsBaseOperator.ContainsParameter("geom_bar") Then
+                clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
             End If
-        Next
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrSaveBar_GraphNameChanged() Handles ucrSaveBar.GraphNameChanged, ucrSaveBar.SaveGraphCheckedChanged
-        If ucrSaveBar.bSaveGraph Then
-            ucrBase.clsRsyntax.SetAssignTo(ucrSaveBar.strGraphName, strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveBar.strGraphName)
-        Else
-            ucrBase.clsRsyntax.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+            clsRgeomBarFunction.RemoveParameterByName("width")
+            clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
+            clsBaseOperator.RemoveParameterByName("geom_col")
+            If Not ucrSaveBar.bUserTyped Then
+                ucrSaveBar.SetPrefix("bar")
+            End If
+            ucrReceiverFirst.RemoveIncludedMetadataProperty("class")
+            ucrReceiverFirst.strSelectorHeading = "Variables"
+        ElseIf rdoPieChart.Checked Then
+            clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1)
+            clsRgeomBarFunction.AddParameter("width", "1")
+            clsBaseOperator.AddParameter(clsRCoordPolarParam)
+            clsBaseOperator.RemoveParameterByName("geom_col")
+            ucrReceiverFirst.SetMeAsReceiver()
+            cmdPieChartOptions.Visible = True
+            cmdBarChartOptions.Visible = False
+            cmdColumnChartOptions.Visible = False
+            If Not ucrSaveBar.bUserTyped Then
+                ucrSaveBar.SetPrefix("pie")
+            End If
+            ucrReceiverFirst.SetIncludedDataTypes({"factor"})
+            ucrReceiverFirst.strSelectorHeading = "Factors"
+            If Not {"factor", "logical"}.Contains(ucrReceiverFirst.strCurrDataType) Then
+                ucrReceiverFirst.Clear()
+            End If
         End If
-        TestOKEnabled()
     End Sub
 
-    Private Sub ucrSaveBar_ContentsChanged() Handles ucrSaveBar.ContentsChanged
-        TestOKEnabled()
+    Private Sub ChangeLabel()
+        lblVariable.Text = If(rdoBarChart.Checked, "X Variable", "Variable")
+        lblYValue.Text = If(rdoBarChart.Checked, "Y Value", "Value")
+        lblYvariable.Text = If(rdoBarChart.Checked, "Y Variable", "Value from")
     End Sub
 
-    Public Sub SetCoordFlip()
-        Dim clsTempRFunc As New RFunction
-        If chkFlipCoordinates.Checked Then
-            clsTempRFunc.SetRCommand("coord_flip")
-            ucrBase.clsRsyntax.AddOperatorParameter("coord_flip", clsRFunc:=clsTempRFunc)
+    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged
+        SetDialogOptions()
+        ChangeLabel()
+        setColumnChartOption()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub setColumnChartOption()
+        If ucrInputYValue.GetValue = "Variable" Then
+            ucrReceiverY.SetVisible(True)
+            ucrReceiverY.SetMeAsReceiver()
+            ucrReceiverY.AddOrRemoveParameter(True)
         Else
-            ucrBase.clsRsyntax.RemoveOperatorParameter("coord_flip")
+            ucrReceiverY.SetVisible(False)
+            ucrReceiverFirst.SetMeAsReceiver()
+            ucrReceiverY.AddOrRemoveParameter(False)
         End If
     End Sub
 
-    Private Sub chkFlipCoordinates_CheckedChanged(sender As Object, e As EventArgs) Handles chkFlipCoordinates.CheckedChanged
-        SetCoordFlip()
+    Private Sub ucrInputYValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputYValue.ControlValueChanged
+        setColumnChartOption()
+        TestOkEnabled()
+    End Sub
+
+    Private Sub CoreControls_ContentsChanged() Handles ucrReceiverFirst.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
