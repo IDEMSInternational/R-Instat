@@ -205,16 +205,16 @@ Public Class dlgOneWayFrequencies
         Dim strAssignTo As String
 
         If rdoBoth.Checked Then
-            bIsAssigned = clsPlotGrid.bIsAssigned
-            bToBeAssigned = clsPlotGrid.bToBeAssigned
-            strAssignTo = clsPlotGrid.strAssignTo
+            bIsAssigned = clsAsGGplot.bIsAssigned
+            bToBeAssigned = clsAsGGplot.bToBeAssigned
+            strAssignTo = clsAsGGplot.strAssignTo
 
-            strGraph = clsPlotGrid.ToScript(strTempScript)
+            strGraph = clsAsGGplot.ToScript(strTempScript)
             frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
 
-            clsPlotGrid.bIsAssigned = bIsAssigned
-            clsPlotGrid.bToBeAssigned = bToBeAssigned
-            clsPlotGrid.strAssignTo = strAssignTo
+            clsAsGGplot.bIsAssigned = bIsAssigned
+            clsAsGGplot.bToBeAssigned = bToBeAssigned
+            clsAsGGplot.strAssignTo = strAssignTo
         End If
     End Sub
 
