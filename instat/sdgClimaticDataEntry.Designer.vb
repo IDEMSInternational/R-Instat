@@ -62,18 +62,18 @@ Partial Class sdgClimaticDataEntry
         Me.grdDataEntry.SheetTabContextMenuStrip = Nothing
         Me.grdDataEntry.SheetTabNewButtonVisible = True
         Me.grdDataEntry.SheetTabVisible = True
-        Me.grdDataEntry.SheetTabWidth = 60
+        Me.grdDataEntry.SheetTabWidth = 154
         Me.grdDataEntry.ShowScrollEndSpacing = True
         Me.grdDataEntry.Size = New System.Drawing.Size(494, 251)
-        Me.grdDataEntry.TabIndex = 86
-        Me.grdDataEntry.Text = "ReoGridControl1"
+        Me.grdDataEntry.TabIndex = 3
+        Me.grdDataEntry.Text = "Variables"
         '
         'ucrSdgPICSARainfalbuttons
         '
-        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(171, 5)
+        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(161, 5)
         Me.ucrSdgPICSARainfalbuttons.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
-        Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(142, 30)
+        Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(144, 30)
         Me.ucrSdgPICSARainfalbuttons.TabIndex = 87
         '
         'sdgClimaticDataEntry
@@ -94,6 +94,6 @@ Partial Class sdgClimaticDataEntry
     End Sub
 
     Friend WithEvents SplitContainer1 As SplitContainer
-    Friend WithEvents grdDataEntry As unvell.ReoGrid.ReoGridControl
     Friend WithEvents ucrSdgPICSARainfalbuttons As ucrButtonsSubdialogue
+    Friend WithEvents grdDataEntry As unvell.ReoGrid.ReoGridControl
 End Class

@@ -20,18 +20,17 @@ Imports unvell.ReoGrid
 Public Class dlgClimaticDataEntry
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private iBasicWidth As Integer
+    Private clsClimaticDataEntry As RFunction
     'Public dfTemp As DataFrame
     Private Sub dlgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
-            iBasicWidth = Me.Width
             bFirstLoad = False
         End If
         If bReset Then
-            'SetDefaults()
+            SetDefaults()
         End If
-        'SetRCodeForControls(bReset)
+        SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
     End Sub
@@ -49,10 +48,14 @@ Public Class dlgClimaticDataEntry
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.strSelectorHeading = "Factors"
 
-        ucrInputFactorLevels.SetParameter(New RParameter("", 2))
-        ucrInputFactorLevels.SetFactorReceiver(ucrReceiverStation)
+        ucrInputSelectStation.SetParameter(New RParameter("left", 2))
+        ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
+        ucrInputSelectStation.SetItems()
         'ucrInputFactorLevels.AddQuotesIfUnrecognised = False
-        ucrInputFactorLevels.strQuotes = ""
+        ucrInputSelectStation.strQuotes = ""
+
+        ucrDateTimePickerStartingDate.SetParameter(New RParameter(""))
+        ucrDateTimePickerStartingDate.SetParameterIsRDate()
 
         ucrReceiverDate.SetParameter(New RParameter("date_col", 3))
         ucrReceiverDate.Selector = ucrSelectorClimaticDataEntry
@@ -74,19 +77,23 @@ Public Class dlgClimaticDataEntry
         ucrPnlOptions.AddRadioButton(rdoMonthly)
 
     End Sub
-
-
     Private Sub SetDefaults()
+        clsClimaticDataEntry = New RFunction
 
+        ucrSelectorClimaticDataEntry.Reset()
+        ucrReceiverElements.SetMeAsReceiver()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsClimaticDataEntry)
     End Sub
     Private Sub SetRCodeForControls(bReset As Boolean)
-
+        ' SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
     Private Sub TestOkEnabled()
-        If (Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputFactorLevels.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty) Then
+        If (Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputSelectStation.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty) Then
             ucrBase.OKEnabled(True)
+            'cmdEnterData.Enabled = True
         Else
             ucrBase.OKEnabled(False)
+            'cmdEnterData.Enabled = False
         End If
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -99,14 +106,10 @@ Public Class dlgClimaticDataEntry
         sdgClimaticDataEntry.Setup(ucrReceiverStation.GetVariableNames(bWithQuotes:=False),
                                    ucrReceiverDate.GetVariableNames(bWithQuotes:=False),
                                    ucrReceiverElements.GetVariableNamesList(bWithQuotes:=False).ToList,
-                                   ucrInputFactorLevels.GetValue(),
-                                   ucrDateTimePickerFrom.DateValue,
-                                   GetDataFrame())
+                                   ucrInputSelectStation.GetValue(),
+                                   ucrDateTimePickerStartingDate.DateValue,
+                                   GetDataFrame(), ucrSelectorClimaticDataEntry.strCurrentDataFrame)
         sdgClimaticDataEntry.ShowDialog()
-    End Sub
-
-    Private Sub ucrSelectorClimaticDataEntry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticDataEntry.ControlValueChanged
-        GetDataFrame()
     End Sub
 
     Private Function GetDataFrame() As DataFrame
@@ -115,12 +118,22 @@ Public Class dlgClimaticDataEntry
         Dim expTemp As SymbolicExpression
 
         If frmMain.clsRLink.bInstatObjectExists AndAlso frmMain.clsRLink.GetDataFrameCount() > 0 Then
-            clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-            clsGetDataFrame.AddParameter("data_name", Chr(34) & ucrSelectorClimaticDataEntry.strCurrentDataFrame & Chr(34))
+            clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
+            clsGetDataFrame.AddParameter("data_name", Chr(34) & ucrSelectorClimaticDataEntry.strCurrentDataFrame & Chr(34), iPosition:=0)
+            clsGetDataFrame.AddParameter("station", ucrReceiverStation.GetVariableNames, iPosition:=1)
+            clsGetDataFrame.AddParameter("date", ucrReceiverDate.GetVariableNames, iPosition:=2)
+            clsGetDataFrame.AddParameter("elements", ucrReceiverElements.GetVariableNames(), iPosition:=3)
+            clsGetDataFrame.AddParameter("station_name", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=4)
+            clsGetDataFrame.AddParameter("start_date", clsRFunctionParameter:=ucrDateTimePickerStartingDate.ValueAsRDate(), iPosition:=5)
+            ' clsGetDataFrame.AddParameter("end_date", Chr(34) & ucrSelectorClimaticDataEntry.strCurrentDataFrame & Chr(34))
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript(), bSilent:=True)
             dfTemp = expTemp.AsDataFrame()
+
         End If
         Return dfTemp
     End Function
 
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrInputSelectStation.ControlValueChanged, ucrReceiverDate.ControlValueChanged, ucrReceiverElements.ControlValueChanged
+        TestOkEnabled()
+    End Sub
 End Class
