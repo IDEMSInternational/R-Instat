@@ -47,6 +47,8 @@ Partial Class sdgOneWayFrequencies
         Me.ucrChkShowStrings = New instat.ucrCheck()
         Me.tbpGraph = New System.Windows.Forms.TabPage()
         Me.grpGraphOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrNudSize = New instat.ucrNud()
+        Me.lblSize = New System.Windows.Forms.Label()
         Me.ucrInputColor = New instat.ucrInputComboBox()
         Me.lblColor = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
@@ -68,8 +70,6 @@ Partial Class sdgOneWayFrequencies
         Me.rdoBar = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrBaseOneWayFrequencies = New instat.ucrButtonsSubdialogue()
-        Me.lblSize = New System.Windows.Forms.Label()
-        Me.ucrNudSize = New instat.ucrNud()
         Me.tbpOneWayFrequencies.SuspendLayout()
         Me.tbpTable.SuspendLayout()
         Me.grpTableOptions.SuspendLayout()
@@ -147,6 +147,21 @@ Partial Class sdgOneWayFrequencies
         resources.ApplyResources(Me.grpGraphOptions, "grpGraphOptions")
         Me.grpGraphOptions.Name = "grpGraphOptions"
         Me.grpGraphOptions.TabStop = False
+        '
+        'ucrNudSize
+        '
+        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSize, "ucrNudSize")
+        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Name = "ucrNudSize"
+        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSize
+        '
+        resources.ApplyResources(Me.lblSize, "lblSize")
+        Me.lblSize.Name = "lblSize"
         '
         'ucrInputColor
         '
@@ -290,21 +305,6 @@ Partial Class sdgOneWayFrequencies
         '
         resources.ApplyResources(Me.ucrBaseOneWayFrequencies, "ucrBaseOneWayFrequencies")
         Me.ucrBaseOneWayFrequencies.Name = "ucrBaseOneWayFrequencies"
-        '
-        'lblSize
-        '
-        resources.ApplyResources(Me.lblSize, "lblSize")
-        Me.lblSize.Name = "lblSize"
-        '
-        'ucrNudSize
-        '
-        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSize, "ucrNudSize")
-        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSize.Name = "ucrNudSize"
-        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'sdgOneWayFrequencies
         '
