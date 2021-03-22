@@ -22,87 +22,57 @@ Partial Class dlgOtherRosePlots
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.ucrInputfac = New instat.ucrInputTextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ucrInputType = New instat.ucrInputComboBox()
-        Me.lblType = New System.Windows.Forms.Label()
+        Me.lblFacet = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.ucrReceiverSingleStation = New instat.ucrReceiverSingle()
-        Me.ucrChkSmooth = New instat.ucrCheck()
-        Me.ucrChkExcludeMissing = New instat.ucrCheck()
-        Me.ucrNudPercentile = New instat.ucrNud()
-        Me.ucrChkPadDate = New instat.ucrCheck()
-        Me.ucrNudNmberOfClusters = New instat.ucrNud()
         Me.lblVariableToPlotAgainst = New System.Windows.Forms.Label()
-        Me.ucrChkTransform = New instat.ucrCheck()
-        Me.ucrSaveGraph = New instat.ucrSave()
         Me.rdoPercentileRose = New System.Windows.Forms.RadioButton()
         Me.rdoPolarFrequency = New System.Windows.Forms.RadioButton()
         Me.rdoPolarAnnulus = New System.Windows.Forms.RadioButton()
         Me.rdoPolarPlot = New System.Windows.Forms.RadioButton()
         Me.rdoPolarCluster = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrInputColor = New instat.ucrInputComboBox()
         Me.lblColor = New System.Windows.Forms.Label()
         Me.lblWindDirection = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblWindSpeed = New System.Windows.Forms.Label()
+        Me.lblStatistic = New System.Windows.Forms.Label()
+        Me.lblPollutant = New System.Windows.Forms.Label()
+        Me.lblMethod = New System.Windows.Forms.Label()
+        Me.lblNoOfClusters = New System.Windows.Forms.Label()
+        Me.lblPercentile = New System.Windows.Forms.Label()
+        Me.ucrInputStationFacet = New instat.ucrInputComboBox()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
+        Me.ucrChkSmooth = New instat.ucrCheck()
+        Me.ucrChkExcludeMissing = New instat.ucrCheck()
+        Me.ucrNudPercentile = New instat.ucrNud()
+        Me.ucrChkPadDate = New instat.ucrCheck()
+        Me.ucrNudNmberOfClusters = New instat.ucrNud()
+        Me.ucrChkTransform = New instat.ucrCheck()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrInputColor = New instat.ucrInputComboBox()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverWindDirection = New instat.ucrReceiverSingle()
         Me.ucrSelectorOtherRosePlots = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblStatistic = New System.Windows.Forms.Label()
-        Me.lblPollutant = New System.Windows.Forms.Label()
         Me.ucrReceiverPollutant = New instat.ucrReceiverSingle()
         Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.ucrInputStatistic = New instat.ucrInputComboBox()
-        Me.lblMethod = New System.Windows.Forms.Label()
-        Me.lblNoOfClusters = New System.Windows.Forms.Label()
         Me.ucrChkForcePositive = New instat.ucrCheck()
         Me.ucrChkNormalise = New instat.ucrCheck()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.lblPercentile = New System.Windows.Forms.Label()
         Me.ucrReceiverMultiplePollutants = New instat.ucrReceiverMultiple()
         Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
+        Me.ucrInputFacet = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
-        'ucrInputfac
+        'lblFacet
         '
-        Me.ucrInputfac.AddQuotesIfUnrecognised = True
-        Me.ucrInputfac.IsMultiline = False
-        Me.ucrInputfac.IsReadOnly = False
-        Me.ucrInputfac.Location = New System.Drawing.Point(416, 159)
-        Me.ucrInputfac.Name = "ucrInputfac"
-        Me.ucrInputfac.Size = New System.Drawing.Size(109, 21)
-        Me.ucrInputfac.TabIndex = 110
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(415, 144)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(91, 13)
-        Me.Label1.TabIndex = 109
-        Me.Label1.Text = "Facet 2(Optional):"
-        '
-        'ucrInputType
-        '
-        Me.ucrInputType.AddQuotesIfUnrecognised = True
-        Me.ucrInputType.GetSetSelectedIndex = -1
-        Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(416, 113)
-        Me.ucrInputType.Name = "ucrInputType"
-        Me.ucrInputType.Size = New System.Drawing.Size(109, 21)
-        Me.ucrInputType.TabIndex = 108
-        '
-        'lblType
-        '
-        Me.lblType.AutoSize = True
-        Me.lblType.Location = New System.Drawing.Point(415, 98)
-        Me.lblType.Name = "lblType"
-        Me.lblType.Size = New System.Drawing.Size(37, 13)
-        Me.lblType.TabIndex = 107
-        Me.lblType.Text = "Facet:"
+        Me.lblFacet.AutoSize = True
+        Me.lblFacet.Location = New System.Drawing.Point(415, 144)
+        Me.lblFacet.Name = "lblFacet"
+        Me.lblFacet.Size = New System.Drawing.Size(85, 13)
+        Me.lblFacet.TabIndex = 109
+        Me.lblFacet.Text = "Facet (Optional):"
         '
         'lblStation
         '
@@ -113,66 +83,6 @@ Partial Class dlgOtherRosePlots
         Me.lblStation.TabIndex = 105
         Me.lblStation.Text = "Station:"
         '
-        'ucrReceiverSingleStation
-        '
-        Me.ucrReceiverSingleStation.frmParent = Me
-        Me.ucrReceiverSingleStation.Location = New System.Drawing.Point(417, 71)
-        Me.ucrReceiverSingleStation.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverSingleStation.Name = "ucrReceiverSingleStation"
-        Me.ucrReceiverSingleStation.Selector = Nothing
-        Me.ucrReceiverSingleStation.Size = New System.Drawing.Size(108, 20)
-        Me.ucrReceiverSingleStation.strNcFilePath = ""
-        Me.ucrReceiverSingleStation.TabIndex = 106
-        Me.ucrReceiverSingleStation.ucrSelector = Nothing
-        '
-        'ucrChkSmooth
-        '
-        Me.ucrChkSmooth.Checked = False
-        Me.ucrChkSmooth.Location = New System.Drawing.Point(261, 321)
-        Me.ucrChkSmooth.Name = "ucrChkSmooth"
-        Me.ucrChkSmooth.Size = New System.Drawing.Size(130, 20)
-        Me.ucrChkSmooth.TabIndex = 103
-        '
-        'ucrChkExcludeMissing
-        '
-        Me.ucrChkExcludeMissing.Checked = False
-        Me.ucrChkExcludeMissing.Location = New System.Drawing.Point(23, 337)
-        Me.ucrChkExcludeMissing.Name = "ucrChkExcludeMissing"
-        Me.ucrChkExcludeMissing.Size = New System.Drawing.Size(154, 20)
-        Me.ucrChkExcludeMissing.TabIndex = 102
-        '
-        'ucrNudPercentile
-        '
-        Me.ucrNudPercentile.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentile.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudPercentile.Location = New System.Drawing.Point(103, 307)
-        Me.ucrNudPercentile.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudPercentile.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudPercentile.Name = "ucrNudPercentile"
-        Me.ucrNudPercentile.Size = New System.Drawing.Size(56, 20)
-        Me.ucrNudPercentile.TabIndex = 101
-        Me.ucrNudPercentile.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkPadDate
-        '
-        Me.ucrChkPadDate.Checked = False
-        Me.ucrChkPadDate.Location = New System.Drawing.Point(262, 350)
-        Me.ucrChkPadDate.Name = "ucrChkPadDate"
-        Me.ucrChkPadDate.Size = New System.Drawing.Size(107, 20)
-        Me.ucrChkPadDate.TabIndex = 84
-        '
-        'ucrNudNmberOfClusters
-        '
-        Me.ucrNudNmberOfClusters.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNmberOfClusters.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNmberOfClusters.Location = New System.Drawing.Point(106, 250)
-        Me.ucrNudNmberOfClusters.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNmberOfClusters.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNmberOfClusters.Name = "ucrNudNmberOfClusters"
-        Me.ucrNudNmberOfClusters.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNmberOfClusters.TabIndex = 82
-        Me.ucrNudNmberOfClusters.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'lblVariableToPlotAgainst
         '
         Me.lblVariableToPlotAgainst.AutoSize = True
@@ -181,22 +91,6 @@ Partial Class dlgOtherRosePlots
         Me.lblVariableToPlotAgainst.Size = New System.Drawing.Size(66, 13)
         Me.lblVariableToPlotAgainst.TabIndex = 76
         Me.lblVariableToPlotAgainst.Text = "Plot Against:"
-        '
-        'ucrChkTransform
-        '
-        Me.ucrChkTransform.Checked = False
-        Me.ucrChkTransform.Location = New System.Drawing.Point(25, 340)
-        Me.ucrChkTransform.Name = "ucrChkTransform"
-        Me.ucrChkTransform.Size = New System.Drawing.Size(154, 20)
-        Me.ucrChkTransform.TabIndex = 87
-        '
-        'ucrSaveGraph
-        '
-        Me.ucrSaveGraph.Location = New System.Drawing.Point(6, 390)
-        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(391, 34)
-        Me.ucrSaveGraph.TabIndex = 93
         '
         'rdoPercentileRose
         '
@@ -288,24 +182,6 @@ Partial Class dlgOtherRosePlots
         Me.rdoPolarCluster.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoPolarCluster.UseVisualStyleBackColor = True
         '
-        'ucrPnlOptions
-        '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(9, 1)
-        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(516, 44)
-        Me.ucrPnlOptions.TabIndex = 86
-        '
-        'ucrInputColor
-        '
-        Me.ucrInputColor.AddQuotesIfUnrecognised = True
-        Me.ucrInputColor.GetSetSelectedIndex = -1
-        Me.ucrInputColor.IsReadOnly = False
-        Me.ucrInputColor.Location = New System.Drawing.Point(82, 279)
-        Me.ucrInputColor.Name = "ucrInputColor"
-        Me.ucrInputColor.Size = New System.Drawing.Size(97, 21)
-        Me.ucrInputColor.TabIndex = 83
-        '
         'lblColor
         '
         Me.lblColor.AutoSize = True
@@ -341,6 +217,155 @@ Partial Class dlgOtherRosePlots
         Me.lblWindSpeed.Size = New System.Drawing.Size(69, 13)
         Me.lblWindSpeed.TabIndex = 72
         Me.lblWindSpeed.Text = "Wind Speed:"
+        '
+        'lblStatistic
+        '
+        Me.lblStatistic.AutoSize = True
+        Me.lblStatistic.Location = New System.Drawing.Point(22, 254)
+        Me.lblStatistic.Name = "lblStatistic"
+        Me.lblStatistic.Size = New System.Drawing.Size(47, 13)
+        Me.lblStatistic.TabIndex = 97
+        Me.lblStatistic.Text = "Statistic:"
+        '
+        'lblPollutant
+        '
+        Me.lblPollutant.AutoSize = True
+        Me.lblPollutant.Location = New System.Drawing.Point(261, 190)
+        Me.lblPollutant.Name = "lblPollutant"
+        Me.lblPollutant.Size = New System.Drawing.Size(51, 13)
+        Me.lblPollutant.TabIndex = 78
+        Me.lblPollutant.Text = "Pollutant:"
+        '
+        'lblMethod
+        '
+        Me.lblMethod.AutoSize = True
+        Me.lblMethod.Location = New System.Drawing.Point(22, 255)
+        Me.lblMethod.Name = "lblMethod"
+        Me.lblMethod.Size = New System.Drawing.Size(46, 13)
+        Me.lblMethod.TabIndex = 99
+        Me.lblMethod.Text = "Method:"
+        '
+        'lblNoOfClusters
+        '
+        Me.lblNoOfClusters.AutoSize = True
+        Me.lblNoOfClusters.Location = New System.Drawing.Point(22, 254)
+        Me.lblNoOfClusters.Name = "lblNoOfClusters"
+        Me.lblNoOfClusters.Size = New System.Drawing.Size(78, 13)
+        Me.lblNoOfClusters.TabIndex = 94
+        Me.lblNoOfClusters.Text = "No Of Clusters:"
+        '
+        'lblPercentile
+        '
+        Me.lblPercentile.AutoSize = True
+        Me.lblPercentile.Location = New System.Drawing.Point(22, 312)
+        Me.lblPercentile.Name = "lblPercentile"
+        Me.lblPercentile.Size = New System.Drawing.Size(57, 13)
+        Me.lblPercentile.TabIndex = 100
+        Me.lblPercentile.Text = "Percentile:"
+        '
+        'ucrInputStationFacet
+        '
+        Me.ucrInputStationFacet.AddQuotesIfUnrecognised = True
+        Me.ucrInputStationFacet.GetSetSelectedIndex = -1
+        Me.ucrInputStationFacet.IsReadOnly = False
+        Me.ucrInputStationFacet.Location = New System.Drawing.Point(416, 93)
+        Me.ucrInputStationFacet.Name = "ucrInputStationFacet"
+        Me.ucrInputStationFacet.Size = New System.Drawing.Size(60, 21)
+        Me.ucrInputStationFacet.TabIndex = 108
+        '
+        'ucrReceiverStation
+        '
+        Me.ucrReceiverStation.frmParent = Me
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(417, 71)
+        Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.Size = New System.Drawing.Size(108, 20)
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.TabIndex = 106
+        Me.ucrReceiverStation.ucrSelector = Nothing
+        '
+        'ucrChkSmooth
+        '
+        Me.ucrChkSmooth.Checked = False
+        Me.ucrChkSmooth.Location = New System.Drawing.Point(261, 321)
+        Me.ucrChkSmooth.Name = "ucrChkSmooth"
+        Me.ucrChkSmooth.Size = New System.Drawing.Size(130, 20)
+        Me.ucrChkSmooth.TabIndex = 103
+        '
+        'ucrChkExcludeMissing
+        '
+        Me.ucrChkExcludeMissing.Checked = False
+        Me.ucrChkExcludeMissing.Location = New System.Drawing.Point(23, 337)
+        Me.ucrChkExcludeMissing.Name = "ucrChkExcludeMissing"
+        Me.ucrChkExcludeMissing.Size = New System.Drawing.Size(154, 20)
+        Me.ucrChkExcludeMissing.TabIndex = 102
+        '
+        'ucrNudPercentile
+        '
+        Me.ucrNudPercentile.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPercentile.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudPercentile.Location = New System.Drawing.Point(103, 307)
+        Me.ucrNudPercentile.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudPercentile.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudPercentile.Name = "ucrNudPercentile"
+        Me.ucrNudPercentile.Size = New System.Drawing.Size(56, 20)
+        Me.ucrNudPercentile.TabIndex = 101
+        Me.ucrNudPercentile.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkPadDate
+        '
+        Me.ucrChkPadDate.Checked = False
+        Me.ucrChkPadDate.Location = New System.Drawing.Point(262, 350)
+        Me.ucrChkPadDate.Name = "ucrChkPadDate"
+        Me.ucrChkPadDate.Size = New System.Drawing.Size(107, 20)
+        Me.ucrChkPadDate.TabIndex = 84
+        '
+        'ucrNudNmberOfClusters
+        '
+        Me.ucrNudNmberOfClusters.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNmberOfClusters.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNmberOfClusters.Location = New System.Drawing.Point(106, 250)
+        Me.ucrNudNmberOfClusters.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNmberOfClusters.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNmberOfClusters.Name = "ucrNudNmberOfClusters"
+        Me.ucrNudNmberOfClusters.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNmberOfClusters.TabIndex = 82
+        Me.ucrNudNmberOfClusters.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkTransform
+        '
+        Me.ucrChkTransform.Checked = False
+        Me.ucrChkTransform.Location = New System.Drawing.Point(25, 340)
+        Me.ucrChkTransform.Name = "ucrChkTransform"
+        Me.ucrChkTransform.Size = New System.Drawing.Size(154, 20)
+        Me.ucrChkTransform.TabIndex = 87
+        '
+        'ucrSaveGraph
+        '
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(6, 390)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(391, 34)
+        Me.ucrSaveGraph.TabIndex = 93
+        '
+        'ucrPnlOptions
+        '
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(9, 1)
+        Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(516, 44)
+        Me.ucrPnlOptions.TabIndex = 86
+        '
+        'ucrInputColor
+        '
+        Me.ucrInputColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputColor.GetSetSelectedIndex = -1
+        Me.ucrInputColor.IsReadOnly = False
+        Me.ucrInputColor.Location = New System.Drawing.Point(82, 279)
+        Me.ucrInputColor.Name = "ucrInputColor"
+        Me.ucrInputColor.Size = New System.Drawing.Size(97, 21)
+        Me.ucrInputColor.TabIndex = 83
         '
         'ucrReceiverDate
         '
@@ -384,24 +409,6 @@ Partial Class dlgOtherRosePlots
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 95
         '
-        'lblStatistic
-        '
-        Me.lblStatistic.AutoSize = True
-        Me.lblStatistic.Location = New System.Drawing.Point(22, 254)
-        Me.lblStatistic.Name = "lblStatistic"
-        Me.lblStatistic.Size = New System.Drawing.Size(47, 13)
-        Me.lblStatistic.TabIndex = 97
-        Me.lblStatistic.Text = "Statistic:"
-        '
-        'lblPollutant
-        '
-        Me.lblPollutant.AutoSize = True
-        Me.lblPollutant.Location = New System.Drawing.Point(261, 190)
-        Me.lblPollutant.Name = "lblPollutant"
-        Me.lblPollutant.Size = New System.Drawing.Size(51, 13)
-        Me.lblPollutant.TabIndex = 78
-        Me.lblPollutant.Text = "Pollutant:"
-        '
         'ucrReceiverPollutant
         '
         Me.ucrReceiverPollutant.frmParent = Me
@@ -434,24 +441,6 @@ Partial Class dlgOtherRosePlots
         Me.ucrInputStatistic.Size = New System.Drawing.Size(97, 21)
         Me.ucrInputStatistic.TabIndex = 81
         '
-        'lblMethod
-        '
-        Me.lblMethod.AutoSize = True
-        Me.lblMethod.Location = New System.Drawing.Point(22, 255)
-        Me.lblMethod.Name = "lblMethod"
-        Me.lblMethod.Size = New System.Drawing.Size(46, 13)
-        Me.lblMethod.TabIndex = 99
-        Me.lblMethod.Text = "Method:"
-        '
-        'lblNoOfClusters
-        '
-        Me.lblNoOfClusters.AutoSize = True
-        Me.lblNoOfClusters.Location = New System.Drawing.Point(22, 254)
-        Me.lblNoOfClusters.Name = "lblNoOfClusters"
-        Me.lblNoOfClusters.Size = New System.Drawing.Size(78, 13)
-        Me.lblNoOfClusters.TabIndex = 94
-        Me.lblNoOfClusters.Text = "No Of Clusters:"
-        '
         'ucrChkForcePositive
         '
         Me.ucrChkForcePositive.Checked = False
@@ -480,15 +469,6 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverX.TabIndex = 77
         Me.ucrReceiverX.ucrSelector = Nothing
         '
-        'lblPercentile
-        '
-        Me.lblPercentile.AutoSize = True
-        Me.lblPercentile.Location = New System.Drawing.Point(22, 312)
-        Me.lblPercentile.Name = "lblPercentile"
-        Me.lblPercentile.Size = New System.Drawing.Size(57, 13)
-        Me.lblPercentile.TabIndex = 100
-        Me.lblPercentile.Text = "Percentile:"
-        '
         'ucrReceiverMultiplePollutants
         '
         Me.ucrReceiverMultiplePollutants.frmParent = Me
@@ -513,17 +493,26 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverWindSpeed.TabIndex = 73
         Me.ucrReceiverWindSpeed.ucrSelector = Nothing
         '
+        'ucrInputFacet
+        '
+        Me.ucrInputFacet.AddQuotesIfUnrecognised = True
+        Me.ucrInputFacet.GetSetSelectedIndex = -1
+        Me.ucrInputFacet.IsReadOnly = False
+        Me.ucrInputFacet.Location = New System.Drawing.Point(417, 159)
+        Me.ucrInputFacet.Name = "ucrInputFacet"
+        Me.ucrInputFacet.Size = New System.Drawing.Size(108, 21)
+        Me.ucrInputFacet.TabIndex = 110
+        '
         'dlgOtherRosePlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(532, 488)
-        Me.Controls.Add(Me.ucrInputfac)
-        Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.ucrInputType)
-        Me.Controls.Add(Me.lblType)
+        Me.Controls.Add(Me.ucrInputFacet)
+        Me.Controls.Add(Me.lblFacet)
+        Me.Controls.Add(Me.ucrInputStationFacet)
         Me.Controls.Add(Me.lblStation)
-        Me.Controls.Add(Me.ucrReceiverSingleStation)
+        Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrChkSmooth)
         Me.Controls.Add(Me.ucrChkExcludeMissing)
         Me.Controls.Add(Me.ucrNudPercentile)
@@ -570,13 +559,10 @@ Partial Class dlgOtherRosePlots
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ucrInputfac As ucrInputTextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents ucrInputType As ucrInputComboBox
-    Friend WithEvents lblType As Label
+    Friend WithEvents lblFacet As Label
+    Friend WithEvents ucrInputStationFacet As ucrInputComboBox
     Friend WithEvents lblStation As Label
-    Friend WithEvents ucrReceiverSingleStation As ucrReceiverSingle
+    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrChkSmooth As ucrCheck
     Friend WithEvents ucrChkExcludeMissing As ucrCheck
     Friend WithEvents ucrNudPercentile As ucrNud
@@ -613,4 +599,5 @@ Partial Class dlgOtherRosePlots
     Friend WithEvents lblPercentile As Label
     Friend WithEvents ucrReceiverMultiplePollutants As ucrReceiverMultiple
     Friend WithEvents ucrReceiverWindSpeed As ucrReceiverSingle
+    Friend WithEvents ucrInputFacet As ucrInputComboBox
 End Class
