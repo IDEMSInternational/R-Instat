@@ -207,6 +207,16 @@ Public Class dlgTransformClimatic
         ucrInputColName.SetParameter(New RParameter("result_name", 2))
         ucrInputColName.SetName("moving_sum")
 
+        'save control
+        ucrSaveColumn.SetPrefix("moving_sum")
+        ucrSaveColumn.SetSaveTypeAsColumn()
+        ucrSaveColumn.SetIsComboBox()
+        ucrSaveColumn.SetLabelText("Logical Column")
+        ucrSaveColumn.SetDataFrameSelector(ucrSelectorTransform.ucrAvailableDataFrames)
+        ucrSaveColumn.SetPositionParametersDirectly(False, "result_name")
+        'makes the ucrSave control to position new column after selected column
+        ucrSaveColumn.setLinkedReceiver(ucrReceiverData)
+
         ucrPnlEvap.AddToLinkedControls(ucrInputEvaporation, {rdoEvapValue}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlEvap.AddToLinkedControls(ucrReceiverEvap, {rdoEvapVariable}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlEvap.SetLinkedDisplayControl(lblWBEvaporation)
