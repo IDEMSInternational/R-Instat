@@ -112,32 +112,10 @@ Public Class ucrSave
     '''             the column name.
     '''             Only used when this control is saving a column. </summary>
     Private ucrLinkedReceiver As ucrReceiver
-
-    ''' <summary>   Function containing the parameters ('before' and 'adjacent_column') and their 
-    '''             respective values. These parameters are only used when the save object is a 
-    '''             column.
-    '''             In this case it is used to specify the position of the new column in the data 
-    '''             frame (start, end or before/after a specified column).
-    '''             <para>
-    '''             Note that only the parameters of this function are set and referenced. 
-    '''             No other RFunction data members are used.
-    '''             </para></summary>
-
-    'Private clsColPosFunction As New RFunction
-    'TODO SJL 16/06/20 This RFunction only seems to be used for local storage of parameters 
-    '                  (i.e. just a list of parameters). These parameters are never part of the 
-    '                  main function. 
-    '                  The parameters are created in LinkedReceiverControlValueChanged and 
-    '                  converted to booleans in UpdateColumnPositionVariables. 
-    '                  The booleans are converted back into parameters in 'RCodeStructure.ToScript'.
-    '                  Normally, these would be stored as parameters in the actual function that 
-    '                  adds columns. 
-    '                  Or the parameters could be explicitly stored as a list of parameters.
-    '                  Or just the booleans could be stored.
-
     Private strAdjacentColumn As String = ""
-    Private bKeepExistingPosition As Boolean = True
+    Private bKeepExistingPosition As Boolean = True 'todo. not used yet
     Private bSetPositionParamsDirectly As String = True
+    Private bReadNameFromAssignToFunctions As String = True
 
 
     ''' <summary>   Width of the combo box. </summary>
@@ -187,14 +165,17 @@ Public Class ucrSave
     Private Sub SetDefaults()
         ucrInputTextSave.Reset()
         ucrInputComboSave.Reset()
+
+        'update the variables used for column position
+        'bInsertColumnBefore = False
+        'strAdjacentColumn = ""
+        'bSetPositionParamsDirectly = True
+        UpdateColumnPositionVariables()
+
         SetSaveType(strSaveType)
         LabelOrCheckboxSettings()
         UpdateRCode()
-        'update the variables used for column position
-        bInsertColumnBefore = False
-        strAdjacentColumn = ""
-        bSetPositionParamsDirectly = True
-        UpdateColumnPositionVariables()
+
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the label to <paramref name="strText"/> and sets the child 
@@ -669,7 +650,7 @@ Public Class ucrSave
         Dim clsMainRCode As RCodeStructure
         clsMainRCode = GetRCode()
         If clsMainRCode IsNot Nothing Then
-            If clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned Then
+            If bReadNameFromAssignToFunctions AndAlso (clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned) Then
                 If bIsComboBox Then
                     ucrInputComboSave.SetName(clsMainRCode.strAssignTo)
                     ucrInputTextSave.SetName("")
@@ -961,8 +942,9 @@ Public Class ucrSave
         Next
     End Sub
 
-    Public Sub SetPositionParametersDirectly(bSetPositionParamsDirectly As Boolean)
+    Public Sub SetPositionParametersDirectly(bSetPositionParamsDirectly As Boolean, bReadNameFromAssignToFunctions As Boolean)
         Me.bSetPositionParamsDirectly = bSetPositionParamsDirectly
+        Me.bReadNameFromAssignToFunctions = bReadNameFromAssignToFunctions
         UpdateColumnPositionVariables()
     End Sub
 End Class

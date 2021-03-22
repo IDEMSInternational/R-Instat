@@ -52,15 +52,17 @@ Public Class dlgFindNonnumericValues
         ucrReceiverColumn.bWithQuotes = False
         ucrReceiverColumn.SetIncludedDataTypes({"character"})
         ucrReceiverColumn.strSelectorHeading = "characters"
-        'makes the ucrSave control to position new column after selected column
-        ucrSaveColumn.setLinkedReceiver(ucrReceiverColumn)
 
         'save control
         ucrSaveColumn.SetPrefix("nonum")
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetIsComboBox()
-        ucrSaveColumn.SetLabelText("Logical Column:")
+        ucrSaveColumn.SetLabelText("Logical Column")
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorShowNonNumericValues.ucrAvailableDataFrames)
+        ucrSaveColumn.SetPositionParametersDirectly(False, False)
+        'makes the ucrSave control to position new column after selected column
+        ucrSaveColumn.setLinkedReceiver(ucrReceiverColumn)
+        ucrSaveColumn.SetAssignToBooleans(bTempAssignToColumnWithoutNames:=False)
 
         ucrChkShowSummary.SetText("Display summary")
         ucrChkShowSummary.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"})
@@ -86,7 +88,6 @@ Public Class dlgFindNonnumericValues
         ucrReceiverColumn.SetMeAsReceiver()
         ucrSelectorShowNonNumericValues.Reset()
         ucrSaveColumn.Reset()
-        ucrSaveColumn.SetPositionParametersDirectly(False)
         ucrBase.clsRsyntax.ClearCodes()
 
         clsIsNaFunction.SetRCommand("is.na")
@@ -137,10 +138,8 @@ Public Class dlgFindNonnumericValues
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverColumn.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", 1), iAdditionalPairNo:=1)
         ucrReceiverColumn.SetRCode(clsIsNaFunction, bReset)
-        'ucrSaveColumn.SetRCode(clsGetColumnsFunction, bReset)
         ucrSaveColumn.SetRCode(clsNonNumericCalcFunc, bReset)
         ucrSaveColumn.AddAdditionalRCode(clsNonNumericFilterFunc, iAdditionalPairNo:=1)
-
 
         ucrChkShowSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkFilterNonumerics.SetRCode(clsCurrRunCalc, bReset)
@@ -154,6 +153,7 @@ Public Class dlgFindNonnumericValues
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        ucrSaveColumn.SetName("nonum")
         TestOKEnabled()
     End Sub
 

@@ -116,7 +116,7 @@ DataSheet$set("public", "save_calculation", function(calc) {
 instat_calculation <- R6::R6Class("instat_calculation",
                        public = list(
                          initialize = function(function_exp = "", type = "", name = "", result_name = "", result_data_frame = "", manipulations = list(),
-                                               sub_calculations = list(), calculated_from = list(), save = 0) {
+                                               sub_calculations = list(), calculated_from = list(), save = 0, before, adjacent_column) {
                            if((type == "calculation" || type == "summary") && missing(result_name)) stop("result_name must be provided for calculation and summary types")
                            if(type == "combination" && save > 0) {
                              warning("combination types do not have a main calculation which can be saved. save_output will be stored as FALSE")
@@ -132,6 +132,8 @@ instat_calculation <- R6::R6Class("instat_calculation",
                            self$sub_calculations <- sub_calculations
                            self$calculated_from <- calculated_from
                            self$save <- save
+                           self$before <- before
+                           self$adjacent_column <- adjacent_column
                          },
                          name = "",
                          result_name = "",
@@ -141,7 +143,9 @@ instat_calculation <- R6::R6Class("instat_calculation",
                          sub_calculations = list(),
                          function_exp = "",
                          calculated_from = list(),
-                         save = 0
+                         save = 0,
+						             before = FALSE,
+						             adjacent_column = ""
                        )
 )
 
@@ -649,7 +653,7 @@ DataBook$set("public", "save_calc_output", function(calc, curr_data_list, previo
           self$get_data_objects(to_data_name)$merge_data(curr_data_list[[c_data_label]][c(calc_link_cols, calc$result_name)], by = by, type = "full")
         }
         else {
-          self$get_data_objects(to_data_name)$add_columns_to_data(calc$result_name, curr_data_list[[c_data_label]][calc$result_name])
+          self$get_data_objects(to_data_name)$add_columns_to_data(calc$result_name, curr_data_list[[c_data_label]][calc$result_name], before = calc$before, adjacent_column = calc$adjacent_column)
         }
       }
       else {
@@ -702,7 +706,7 @@ DataBook$set("public", "save_calc_output", function(calc, curr_data_list, previo
     else {
       # If no summary or join, then simply add result as new column
       # Because no join was required, the rows should match 1-1 in both data frames
-      self$add_columns_to_data(data_name = calc_from_data_name, col_name =  calc$result_name, col_data = curr_data_list[[c_data_label]][[calc$result_name]])
+      self$add_columns_to_data(data_name = calc_from_data_name, col_name =  calc$result_name, col_data = curr_data_list[[c_data_label]][[calc$result_name]], before = calc$before, adjacent_column = calc$adjacent_column)
       to_data_name <- calc_from_data_name
       if(calc$name %in% self$get_calculation_names(to_data_name)) {
         calc$name <- next_default_item(calc$name, self$get_calculation_names(to_data_name))
