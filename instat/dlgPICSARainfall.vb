@@ -652,82 +652,72 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
-        If bUpdateComboOptions Then
-            Dim strChangedText As String = ucrChangedControl.GetText()
-            If strChangedText <> strNone Then
-                For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
-                    If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso Not ucrInputTemp.Equals(ucrChangedControl) AndAlso ucrInputTemp.GetText() = strChangedText Then
-                        bUpdateComboOptions = False
-                        ucrInputTemp.SetName(strNone)
-                        bUpdateComboOptions = True
-                    End If
-                    If strChangedText = strFacetWrap AndAlso ucrInputTemp.GetText = strFacetRow OrElse strChangedText = strFacetRow AndAlso ucrInputTemp.GetText = strFacetWrap OrElse strChangedText = strFacetWrap AndAlso ucrInputTemp.GetText = strFacetCol OrElse strChangedText = strFacetCol AndAlso ucrInputTemp.GetText = strFacetWrap Then
-                        ucrInputTemp.SetName(strNone)
-                    End If
-                Next
-            End If
-            UpdateParameters()
-            AddRemoveFacets()
+        If Not bUpdateComboOptions Then
+            Exit Sub
         End If
+        Dim strChangedText As String = ucrChangedControl.GetText()
+        If strChangedText <> strNone Then
+            For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
+                If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso
+                      Not ucrInputTemp.Equals(ucrChangedControl) AndAlso ucrInputTemp.GetText() = strChangedText Then
+                    bUpdateComboOptions = False
+                    ucrInputTemp.SetName(strNone)
+                    bUpdateComboOptions = True
+                End If
+                If (strChangedText = strFacetWrap AndAlso ucrInputTemp.GetText = strFacetRow) OrElse (strChangedText = strFacetRow AndAlso
+                      ucrInputTemp.GetText = strFacetWrap) OrElse (strChangedText = strFacetWrap AndAlso
+                      ucrInputTemp.GetText = strFacetCol) OrElse (strChangedText = strFacetCol AndAlso ucrInputTemp.GetText = strFacetWrap) Then
+                    ucrInputTemp.SetName(strNone)
+                End If
+            Next
+        End If
+        UpdateParameters()
+        AddRemoveFacets()
     End Sub
 
     Private Sub UpdateParameters()
-
+        clsRaesFunction.RemoveParameterByName("x")
         clsRaesFunction.RemoveParameterByName("color")
         clsRaesFunction.RemoveParameterByName("fill")
         clsAsFactorFunction.RemoveParameterByName("x")
 
         clsFacetOperator.RemoveParameterByName("wrap" & ucrInputStation.Name)
-            clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
+        clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
-        clsBaseOperator.RemoveParameterByName("facets")
 
+        clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
-        ucrInputStation.SetRCode(Nothing)
-        Select Case ucrInputStation.GetText()
-            Case strXAxis
-                ucrInputStation.ChangeParameterName("x")
-                ucrInputStation.SetParameterIncludeArgumentName(False)
-                ucrInputStation.SetRCode(clsAsFactorFunction)
-                        ' clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
-            Case strColour
-                '    If rdoJitter.Checked Then
-                ucrInputStation.ChangeParameterName("color")
-                ucrInputStation.SetParameterIncludeArgumentName(True)
-                '    ElseIf rdoBoxplot.Checked OrElse rdoViolin.Checked Then
-                '        dctComboReceiver(ucrInputTemp).ChangeParameterName("fill")
-                '        dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
-                '    End If
-                ucrInputStation.SetRCode(clsRaesFunction)
-            Case strFacetWrap
-                ucrInputStation.ChangeParameterName("wrap" & ucrInputStation.Name)
-                ucrInputStation.SetRCode(clsFacetOperator)
-            Case strFacetCol
-                ucrInputStation.ChangeParameterName("col" & ucrInputStation.Name)
-                ucrInputStation.SetRCode(clsFacetColOp)
-            Case strFacetRow
-                ucrInputStation.ChangeParameterName("row" & ucrInputStation.Name)
-                ucrInputStation.SetRCode(clsFacetRowOp)
-        End Select
-        Select Case ucrInputStation.GetText()
-            Case strXAxis
-                ucrInputStation.ChangeParameterName("x")
-                ucrInputStation.SetParameterIncludeArgumentName(False)
-                ucrInputStation.SetRCode(clsAsFactorFunction)
-            Case strColour
-                ucrInputStation.ChangeParameterName("color")
-                ucrInputStation.SetParameterIncludeArgumentName(True)
-                ucrInputStation.SetRCode(clsRaesFunction)
-            Case strFacetWrap
-                ucrInputStation.ChangeParameterName("wrap" & ucrInputStation.Name)
-                ucrInputStation.SetRCode(clsFacetOperator)
-            Case strFacetCol
-                ucrInputStation.ChangeParameterName("col" & ucrInputStation.Name)
-                ucrInputStation.SetRCode(clsFacetColOp)
-            Case strFacetRow
-                ucrInputStation.ChangeParameterName("row" & ucrInputStation.Name)
-                ucrInputStation.SetRCode(clsFacetRowOp)
-        End Select
+        For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
+            dctComboReceiver(ucrInputTemp).SetRCode(Nothing)
+            Select Case ucrInputStation.GetText()
+                Case strXAxis
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
+                    dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(False)
+                    dctComboReceiver(ucrInputTemp).SetRCode(clsAsFactorFunction)
+                    clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
+                Case strColour
+                    '    If rdoJitter.Checked Then
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
+                    dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
+                    '    ElseIf rdoBoxplot.Checked OrElse rdoViolin.Checked Then
+                    '        dctComboReceiver(ucrInputTemp).ChangeParameterName("fill")
+                    '        dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
+                    '    End If
+                    dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
+                Case strFacetWrap
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("wrap" & ucrInputTemp.Name)
+                    dctComboReceiver(ucrInputTemp).SetRCode(clsFacetOperator)
+                Case strFacetCol
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("col" & ucrInputTemp.Name)
+                    dctComboReceiver(ucrInputTemp).SetRCode(clsFacetColOp)
+                Case strFacetRow
+                    dctComboReceiver(ucrInputTemp).ChangeParameterName("row" & ucrInputTemp.Name)
+                    dctComboReceiver(ucrInputTemp).SetRCode(clsFacetRowOp)
+            End Select
+        Next
+        If Not clsRaesFunction.ContainsParameter("x") Then
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+        End If
         bUpdatingParameters = False
     End Sub
 
@@ -739,6 +729,7 @@ Public Class dlgPICSARainfall
         If bUpdatingParameters Then
             Exit Sub
         End If
+
         clsBaseOperator.RemoveParameterByName("facets")
         If Not ucrReceiverFacetBy.IsEmpty Then
             Select Case ucrInputStation.GetText()
@@ -750,6 +741,7 @@ Public Class dlgPICSARainfall
                     bRow = True
             End Select
         End If
+
         If bWrap OrElse bRow OrElse bCol Then
             clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
         End If
@@ -757,7 +749,7 @@ Public Class dlgPICSARainfall
             clsFacetFunction.SetRCommand("facet_wrap")
         End If
         If bRow OrElse bCol Then
-                clsFacetFunction.SetRCommand("facet_grid")
+            clsFacetFunction.SetRCommand("facet_grid")
         End If
         If bRow Then
             clsFacetOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
@@ -765,7 +757,7 @@ Public Class dlgPICSARainfall
             clsFacetOperator.AddParameter("left", ".", iPosition:=0)
         Else
             clsFacetOperator.RemoveParameterByName("left")
-            End If
+        End If
         If bCol Then
             clsFacetOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
         ElseIf bRow AndAlso bWrap = False Then
