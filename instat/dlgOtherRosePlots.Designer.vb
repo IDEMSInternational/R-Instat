@@ -71,7 +71,7 @@ Partial Class dlgOtherRosePlots
         Me.lblFacet.Location = New System.Drawing.Point(415, 144)
         Me.lblFacet.Name = "lblFacet"
         Me.lblFacet.Size = New System.Drawing.Size(85, 13)
-        Me.lblFacet.TabIndex = 109
+        Me.lblFacet.TabIndex = 21
         Me.lblFacet.Text = "Facet (Optional):"
         '
         'lblStation
@@ -80,7 +80,7 @@ Partial Class dlgOtherRosePlots
         Me.lblStation.Location = New System.Drawing.Point(413, 56)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 105
+        Me.lblStation.TabIndex = 19
         Me.lblStation.Text = "Station:"
         '
         'lblVariableToPlotAgainst
@@ -89,7 +89,7 @@ Partial Class dlgOtherRosePlots
         Me.lblVariableToPlotAgainst.Location = New System.Drawing.Point(261, 143)
         Me.lblVariableToPlotAgainst.Name = "lblVariableToPlotAgainst"
         Me.lblVariableToPlotAgainst.Size = New System.Drawing.Size(66, 13)
-        Me.lblVariableToPlotAgainst.TabIndex = 76
+        Me.lblVariableToPlotAgainst.TabIndex = 22
         Me.lblVariableToPlotAgainst.Text = "Plot Against:"
         '
         'rdoPercentileRose
@@ -197,7 +197,7 @@ Partial Class dlgOtherRosePlots
         Me.lblWindDirection.Location = New System.Drawing.Point(260, 99)
         Me.lblWindDirection.Name = "lblWindDirection"
         Me.lblWindDirection.Size = New System.Drawing.Size(80, 13)
-        Me.lblWindDirection.TabIndex = 74
+        Me.lblWindDirection.TabIndex = 23
         Me.lblWindDirection.Text = "Wind Direction:"
         '
         'lblDate
@@ -233,7 +233,7 @@ Partial Class dlgOtherRosePlots
         Me.lblPollutant.Location = New System.Drawing.Point(261, 190)
         Me.lblPollutant.Name = "lblPollutant"
         Me.lblPollutant.Size = New System.Drawing.Size(51, 13)
-        Me.lblPollutant.TabIndex = 78
+        Me.lblPollutant.TabIndex = 14
         Me.lblPollutant.Text = "Pollutant:"
         '
         'lblMethod
@@ -271,7 +271,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrInputStationFacet.Location = New System.Drawing.Point(416, 93)
         Me.ucrInputStationFacet.Name = "ucrInputStationFacet"
         Me.ucrInputStationFacet.Size = New System.Drawing.Size(60, 21)
-        Me.ucrInputStationFacet.TabIndex = 108
+        Me.ucrInputStationFacet.TabIndex = 8
         '
         'ucrReceiverStation
         '
@@ -282,7 +282,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(108, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 106
+        Me.ucrReceiverStation.TabIndex = 7
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrChkSmooth
@@ -330,7 +330,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrNudNmberOfClusters.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNmberOfClusters.Name = "ucrNudNmberOfClusters"
         Me.ucrNudNmberOfClusters.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNmberOfClusters.TabIndex = 82
+        Me.ucrNudNmberOfClusters.TabIndex = 12
         Me.ucrNudNmberOfClusters.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrChkTransform
@@ -365,7 +365,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrInputColor.Location = New System.Drawing.Point(82, 279)
         Me.ucrInputColor.Name = "ucrInputColor"
         Me.ucrInputColor.Size = New System.Drawing.Size(97, 21)
-        Me.ucrInputColor.TabIndex = 83
+        Me.ucrInputColor.TabIndex = 10
         '
         'ucrReceiverDate
         '
@@ -376,7 +376,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 71
+        Me.ucrReceiverDate.TabIndex = 1
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverWindDirection
@@ -388,7 +388,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverWindDirection.Selector = Nothing
         Me.ucrReceiverWindDirection.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWindDirection.strNcFilePath = ""
-        Me.ucrReceiverWindDirection.TabIndex = 75
+        Me.ucrReceiverWindDirection.TabIndex = 2
         Me.ucrReceiverWindDirection.ucrSelector = Nothing
         '
         'ucrSelectorOtherRosePlots
@@ -400,7 +400,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrSelectorOtherRosePlots.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorOtherRosePlots.Name = "ucrSelectorOtherRosePlots"
         Me.ucrSelectorOtherRosePlots.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorOtherRosePlots.TabIndex = 69
+        Me.ucrSelectorOtherRosePlots.TabIndex = 0
         '
         'ucrBase
         '
@@ -418,7 +418,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverPollutant.Selector = Nothing
         Me.ucrReceiverPollutant.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverPollutant.strNcFilePath = ""
-        Me.ucrReceiverPollutant.TabIndex = 79
+        Me.ucrReceiverPollutant.TabIndex = 5
         Me.ucrReceiverPollutant.ucrSelector = Nothing
         '
         'ucrInputMethod
@@ -429,7 +429,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrInputMethod.Location = New System.Drawing.Point(81, 249)
         Me.ucrInputMethod.Name = "ucrInputMethod"
         Me.ucrInputMethod.Size = New System.Drawing.Size(97, 21)
-        Me.ucrInputMethod.TabIndex = 98
+        Me.ucrInputMethod.TabIndex = 11
         '
         'ucrInputStatistic
         '
@@ -466,7 +466,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverX.Selector = Nothing
         Me.ucrReceiverX.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverX.strNcFilePath = ""
-        Me.ucrReceiverX.TabIndex = 77
+        Me.ucrReceiverX.TabIndex = 3
         Me.ucrReceiverX.ucrSelector = Nothing
         '
         'ucrReceiverMultiplePollutants
@@ -478,7 +478,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverMultiplePollutants.Selector = Nothing
         Me.ucrReceiverMultiplePollutants.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverMultiplePollutants.strNcFilePath = ""
-        Me.ucrReceiverMultiplePollutants.TabIndex = 104
+        Me.ucrReceiverMultiplePollutants.TabIndex = 6
         Me.ucrReceiverMultiplePollutants.ucrSelector = Nothing
         '
         'ucrReceiverWindSpeed
@@ -490,7 +490,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverWindSpeed.Selector = Nothing
         Me.ucrReceiverWindSpeed.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverWindSpeed.strNcFilePath = ""
-        Me.ucrReceiverWindSpeed.TabIndex = 73
+        Me.ucrReceiverWindSpeed.TabIndex = 4
         Me.ucrReceiverWindSpeed.ucrSelector = Nothing
         '
         'ucrInputFacet
@@ -501,7 +501,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrInputFacet.Location = New System.Drawing.Point(417, 159)
         Me.ucrInputFacet.Name = "ucrInputFacet"
         Me.ucrInputFacet.Size = New System.Drawing.Size(108, 21)
-        Me.ucrInputFacet.TabIndex = 110
+        Me.ucrInputFacet.TabIndex = 9
         '
         'dlgOtherRosePlots
         '
