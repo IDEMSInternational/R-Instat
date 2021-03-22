@@ -86,18 +86,18 @@ Public Class sdgMergeColumnstoInclude
 
     Private Sub SetXParameter()
         If ucrChkMergeWithSubsetFirst.Checked AndAlso Not ucrReceiverFirstSelected.IsEmpty Then
-            clsMerge.AddParameter("x", clsRFunctionParameter:=ucrReceiverFirstSelected.GetVariables(bForceAsDataFrame:=True))
+            clsMerge.AddParameter("x", clsRFunctionParameter:=ucrReceiverFirstSelected.GetVariables(bForceAsDataFrame:=True), iPosition:=0)
         Else
-            clsMerge.AddParameter("x", clsRFunctionParameter:=ucrSelectorColumnsToIncludeFirst.ucrAvailableDataFrames.clsCurrDataFrame)
+            clsMerge.AddParameter("x", clsRFunctionParameter:=ucrSelectorColumnsToIncludeFirst.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         End If
         ucrSelectorColumnsToIncludeFirst.SetVariablesVisible(ucrChkMergeWithSubsetFirst.Checked)
     End Sub
 
     Private Sub SetYParameter()
         If ucrChkMergeWithSubsetSecond.Checked AndAlso Not ucrReceiverSecondSelected.IsEmpty Then
-            clsMerge.AddParameter("y", clsRFunctionParameter:=ucrReceiverSecondSelected.GetVariables(bForceAsDataFrame:=True))
+            clsMerge.AddParameter("y", clsRFunctionParameter:=ucrReceiverSecondSelected.GetVariables(bForceAsDataFrame:=True), iPosition:=1)
         Else
-            clsMerge.AddParameter("y", clsRFunctionParameter:=ucrSelectorColumnsToIncludeSecond.ucrAvailableDataFrames.clsCurrDataFrame)
+            clsMerge.AddParameter("y", clsRFunctionParameter:=ucrSelectorColumnsToIncludeSecond.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=1)
         End If
         ucrSelectorColumnsToIncludeSecond.SetVariablesVisible(ucrChkMergeWithSubsetSecond.Checked)
     End Sub
