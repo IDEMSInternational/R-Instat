@@ -65,6 +65,8 @@ Public Class dlgOptions
         rtbOutputPreview.Text = strPreviewText
         SetView()
 
+        ucrChkRecogniseRDSFile.SetText("Recognise RDS File")
+
         'temp disabled as not functioning yet
         rdoSpanish.Enabled = False
         rdoKiswahili.Enabled = False
@@ -252,6 +254,7 @@ Public Class dlgOptions
         cmdHelp.Enabled = True
         ApplyEnabled(False)
         Cursor = Cursors.Default
+        RecogniseFile()
     End Sub
 
     Private Sub ucrPnlLanguage_ControlValueChanged() Handles ucrPnlLanguage.ControlValueChanged
@@ -321,10 +324,20 @@ Public Class dlgOptions
 
     End Sub
 
-    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrChkRecogniseRDSFile.ControlValueChanged
         ApplyEnabled(True)
     End Sub
 
+    Private Sub RecogniseFile()
+        If ucrChkRecogniseRDSFile.Checked Then
+            My.Computer.Registry.ClassesRoot.CreateSubKey(".RDS") _
+                .SetValue("", "Instat", Microsoft.Win32.RegistryValueKind.String) 'Creates a registry key in ClassesRoot for the .RDS extension.
+            My.Computer.Registry.ClassesRoot.CreateSubKey("Instat\shell\open\command") _
+                .SetValue("", Application.ExecutablePath & " ""%l"" ", Microsoft.Win32.RegistryValueKind.String) 'tells the app to associate the currently running executable with this file type i.e .RDS.
+        Else
+            My.Computer.Registry.ClassesRoot.DeleteSubKey(".RDS")
+        End If
+    End Sub
     Private Sub ApplyEnabled(bEnable As Boolean)
         cmdApply.Enabled = bEnable
         cmdOk.Enabled = bEnable
@@ -360,7 +373,7 @@ Public Class dlgOptions
         End If
     End Sub
 
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWaitSeconds.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudMaxCols.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrChkAutoSave.ControlValueChanged
+    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWaitSeconds.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudMaxCols.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged
 
     End Sub
 

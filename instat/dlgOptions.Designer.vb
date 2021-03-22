@@ -109,6 +109,7 @@ Partial Class dlgOptions
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphDisplay = New instat.UcrPanel()
         Me.tbpTailoredMenus = New System.Windows.Forms.TabPage()
+        Me.ucrChkViewStructuredMenu = New instat.ucrCheck()
         Me.ucrChkViewOptionsByContextMenu = New instat.ucrCheck()
         Me.ucrChkViewProcurementMenu = New instat.ucrCheck()
         Me.ucrChkViewClimaticMenu = New instat.ucrCheck()
@@ -121,7 +122,8 @@ Partial Class dlgOptions
         Me.ucrInputPort = New instat.ucrInputTextBox()
         Me.ucrInputHost = New instat.ucrInputTextBox()
         Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
-        Me.ucrChkViewStructuredMenu = New instat.ucrCheck()
+        Me.tbpFileRecognition = New System.Windows.Forms.TabPage()
+        Me.ucrChkRecogniseRDSFile = New instat.ucrCheck()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -145,6 +147,7 @@ Partial Class dlgOptions
         Me.tbpGraphDisplay.SuspendLayout()
         Me.tbpTailoredMenus.SuspendLayout()
         Me.tbpClimsoft.SuspendLayout()
+        Me.tbpFileRecognition.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdApply
@@ -215,6 +218,7 @@ Partial Class dlgOptions
         Me.tbcOptions.Controls.Add(Me.tbpGraphDisplay)
         Me.tbcOptions.Controls.Add(Me.tbpTailoredMenus)
         Me.tbcOptions.Controls.Add(Me.tbpClimsoft)
+        Me.tbcOptions.Controls.Add(Me.tbpFileRecognition)
         resources.ApplyResources(Me.tbcOptions, "tbcOptions")
         Me.tbcOptions.Name = "tbcOptions"
         Me.tbcOptions.SelectedIndex = 0
@@ -664,6 +668,12 @@ Partial Class dlgOptions
         Me.tbpTailoredMenus.Name = "tbpTailoredMenus"
         Me.tbpTailoredMenus.UseVisualStyleBackColor = True
         '
+        'ucrChkViewStructuredMenu
+        '
+        Me.ucrChkViewStructuredMenu.Checked = False
+        resources.ApplyResources(Me.ucrChkViewStructuredMenu, "ucrChkViewStructuredMenu")
+        Me.ucrChkViewStructuredMenu.Name = "ucrChkViewStructuredMenu"
+        '
         'ucrChkViewOptionsByContextMenu
         '
         Me.ucrChkViewOptionsByContextMenu.Checked = False
@@ -748,11 +758,18 @@ Partial Class dlgOptions
         resources.ApplyResources(Me.ucrInputDatabaseName, "ucrInputDatabaseName")
         Me.ucrInputDatabaseName.Name = "ucrInputDatabaseName"
         '
-        'ucrChkViewStructuredMenu
+        'tbpFileRecognition
         '
-        Me.ucrChkViewStructuredMenu.Checked = False
-        resources.ApplyResources(Me.ucrChkViewStructuredMenu, "ucrChkViewStructuredMenu")
-        Me.ucrChkViewStructuredMenu.Name = "ucrChkViewStructuredMenu"
+        Me.tbpFileRecognition.Controls.Add(Me.ucrChkRecogniseRDSFile)
+        resources.ApplyResources(Me.tbpFileRecognition, "tbpFileRecognition")
+        Me.tbpFileRecognition.Name = "tbpFileRecognition"
+        Me.tbpFileRecognition.UseVisualStyleBackColor = True
+        '
+        'ucrChkRecogniseRDSFile
+        '
+        Me.ucrChkRecogniseRDSFile.Checked = False
+        resources.ApplyResources(Me.ucrChkRecogniseRDSFile, "ucrChkRecogniseRDSFile")
+        Me.ucrChkRecogniseRDSFile.Name = "ucrChkRecogniseRDSFile"
         '
         'dlgOptions
         '
@@ -806,6 +823,7 @@ Partial Class dlgOptions
         Me.tbpTailoredMenus.ResumeLayout(False)
         Me.tbpClimsoft.ResumeLayout(False)
         Me.tbpClimsoft.PerformLayout()
+        Me.tbpFileRecognition.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -892,4 +910,6 @@ Partial Class dlgOptions
     Friend WithEvents lblHost As Label
     Friend WithEvents lblDatabaseName As Label
     Friend WithEvents ucrChkViewStructuredMenu As ucrCheck
+    Friend WithEvents tbpFileRecognition As TabPage
+    Friend WithEvents ucrChkRecogniseRDSFile As ucrCheck
 End Class

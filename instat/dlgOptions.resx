@@ -2196,6 +2196,54 @@
   <data name="&gt;&gt;tbpClimsoft.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="ucrChkRecogniseRDSFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 17</value>
+  </data>
+  <data name="ucrChkRecogniseRDSFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>257, 20</value>
+  </data>
+  <data name="ucrChkRecogniseRDSFile.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRecogniseRDSFile.Name" xml:space="preserve">
+    <value>ucrChkRecogniseRDSFile</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRecogniseRDSFile.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRecogniseRDSFile.Parent" xml:space="preserve">
+    <value>tbpFileRecognition</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRecogniseRDSFile.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tbpFileRecognition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbpFileRecognition.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbpFileRecognition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>564, 291</value>
+  </data>
+  <data name="tbpFileRecognition.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="tbpFileRecognition.Text" xml:space="preserve">
+    <value>File Recognise</value>
+  </data>
+  <data name="&gt;&gt;tbpFileRecognition.Name" xml:space="preserve">
+    <value>tbpFileRecognition</value>
+  </data>
+  <data name="&gt;&gt;tbpFileRecognition.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbpFileRecognition.Parent" xml:space="preserve">
+    <value>tbcOptions</value>
+  </data>
+  <data name="&gt;&gt;tbpFileRecognition.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
   <data name="tbcOptions.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
