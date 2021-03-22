@@ -1819,7 +1819,9 @@ DataSheet$set("public", "add_key", function(col_names, key_name) {
     if(length(private$keys) == 1) self$append_to_variables_metadata(setdiff(self$get_column_names(), col_names), is_key_label, FALSE)
     self$append_to_metadata(is_linkable, TRUE)
     self$append_to_metadata(next_default_item(key_label, names(self$get_metadata())), paste(col_names, collapse = ","))
-    return(cat(private$keys[[key_name]], "used to create key:", key_name))
+    cat(paste("Key name:", key_name),
+        paste("Key columns:", paste(private$keys[[key_name]], collapse = ", ")),
+        sep = "\n")
   }
 }
 )
@@ -1837,7 +1839,9 @@ DataSheet$set("public", "has_key", function() {
 DataSheet$set("public", "get_keys", function(key_name) {
   if(!missing(key_name)) {
     if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
-     return(cat(private$keys[[key_name]], "used to create key:", key_name))
+    cat(paste("Key name:", key_name),
+        paste("Key columns:", paste(private$keys[[key_name]], collapse = ", ")),
+        sep = "\n")
       }
   else return(private$keys)
 }
@@ -1846,7 +1850,7 @@ DataSheet$set("public", "get_keys", function(key_name) {
 DataSheet$set("public", "remove_key", function(key_name) {
   if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
   private$keys[[key_name]] <- NULL
-  return(cat("Key removed:", key_name))
+  cat("Key removed:", key_name)
 }
 )
 
