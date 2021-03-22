@@ -85,6 +85,7 @@ Partial Class dlgTransformClimatic
         Me.ucrReceiverData = New instat.ucrReceiverSingle()
         Me.ucrSelectorTransform = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSaveColumn = New instat.ucrSave()
         Me.grpTransform.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -250,6 +251,7 @@ Partial Class dlgTransformClimatic
         'ucrInputCumulative
         '
         Me.ucrInputCumulative.AddQuotesIfUnrecognised = True
+        Me.ucrInputCumulative.GetSetSelectedIndex = -1
         Me.ucrInputCumulative.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCumulative, "ucrInputCumulative")
         Me.ucrInputCumulative.Name = "ucrInputCumulative"
@@ -257,6 +259,7 @@ Partial Class dlgTransformClimatic
         'ucrInputCircularPosition
         '
         Me.ucrInputCircularPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputCircularPosition.GetSetSelectedIndex = -1
         Me.ucrInputCircularPosition.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCircularPosition, "ucrInputCircularPosition")
         Me.ucrInputCircularPosition.Name = "ucrInputCircularPosition"
@@ -269,6 +272,7 @@ Partial Class dlgTransformClimatic
         'ucrInputPosition
         '
         Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.GetSetSelectedIndex = -1
         Me.ucrInputPosition.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
         Me.ucrInputPosition.Name = "ucrInputPosition"
@@ -306,6 +310,7 @@ Partial Class dlgTransformClimatic
         'ucrInputCondition
         '
         Me.ucrInputCondition.AddQuotesIfUnrecognised = True
+        Me.ucrInputCondition.GetSetSelectedIndex = -1
         Me.ucrInputCondition.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCondition, "ucrInputCondition")
         Me.ucrInputCondition.Name = "ucrInputCondition"
@@ -359,6 +364,7 @@ Partial Class dlgTransformClimatic
         'ucrInputSum
         '
         Me.ucrInputSum.AddQuotesIfUnrecognised = True
+        Me.ucrInputSum.GetSetSelectedIndex = -1
         Me.ucrInputSum.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSum, "ucrInputSum")
         Me.ucrInputSum.Name = "ucrInputSum"
@@ -455,10 +461,16 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrSaveColumn
+        '
+        resources.ApplyResources(Me.ucrSaveColumn, "ucrSaveColumn")
+        Me.ucrSaveColumn.Name = "ucrSaveColumn"
+        '
         'dlgTransformClimatic
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.rdoCumulative)
         Me.Controls.Add(Me.rdoMultSpells)
         Me.Controls.Add(Me.grpTransform)
@@ -536,4 +548,5 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrInputCircularPosition As ucrInputComboBox
     Friend WithEvents rdoCumulative As RadioButton
     Friend WithEvents ucrInputCumulative As ucrInputComboBox
+    Friend WithEvents ucrSaveColumn As ucrSave
 End Class
