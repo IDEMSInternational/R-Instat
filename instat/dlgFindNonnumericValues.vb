@@ -62,7 +62,6 @@ Public Class dlgFindNonnumericValues
         ucrSaveColumn.SetPositionParametersDirectly(False, "result_name")
         'makes the ucrSave control to position new column after selected column
         ucrSaveColumn.setLinkedReceiver(ucrReceiverColumn)
-        ucrSaveColumn.SetAssignToBooleans(bTempAssignToColumnWithoutNames:=False)
 
         ucrChkShowSummary.SetText("Display summary")
         ucrChkShowSummary.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"})
