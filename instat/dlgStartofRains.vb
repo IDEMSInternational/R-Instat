@@ -797,8 +797,6 @@ Public Class dlgStartofRains
                 (ucrChkStatus.Checked AndAlso ucrInputNewStatusColumnName.IsEmpty) Then
             bOkEnabled = False
         End If
-            bOkEnabled = False
-        End If
 
         ucrBase.OKEnabled(bOkEnabled)
     End Sub
