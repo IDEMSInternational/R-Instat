@@ -115,8 +115,7 @@ Public Class ucrSave
     Private strAdjacentColumn As String = ""
     Private bKeepExistingPosition As Boolean = True 'todo. not used yet
     Private bSetPositionParamsDirectly As String = True
-    Private bReadNameFromAssignToFunctions As String = True
-
+    Private strReadNameFromParameterName As String = ""
 
     ''' <summary>   Width of the combo box. </summary>
     Private iComboBoxWidth As Integer
@@ -647,21 +646,27 @@ Public Class ucrSave
     '''                                 overridden function. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
-        Dim clsMainRCode As RCodeStructure
-        clsMainRCode = GetRCode()
+        Dim clsMainRCode As RCodeStructure = GetRCode()
+        Dim strControlValue As String = ""
+
         If clsMainRCode IsNot Nothing Then
-            If bReadNameFromAssignToFunctions AndAlso (clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned) Then
-                If bIsComboBox Then
-                    ucrInputComboSave.SetName(clsMainRCode.strAssignTo)
-                    ucrInputTextSave.SetName("")
-                Else
-                    ucrInputTextSave.SetName(clsMainRCode.strAssignTo)
-                    ucrInputComboSave.SetName("")
+            If String.IsNullOrEmpty(strReadNameFromParameterName) Then
+                If clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned Then
+                    strControlValue = clsMainRCode.strAssignTo
                 End If
             Else
-                ucrInputComboSave.SetName("")
-                ucrInputTextSave.SetName("")
+                strControlValue = clsMainRCode.GetParameter(strReadNameFromParameterName).strArgumentValue
+                strControlValue = If(strControlValue Is Nothing, "", strControlValue.Replace("""", ""))
             End If
+
+            If bIsComboBox Then
+                ucrInputComboSave.SetName(strControlValue)
+                ucrInputTextSave.SetName("")
+            Else
+                ucrInputTextSave.SetName(strControlValue)
+                ucrInputComboSave.SetName("")
+            End If
+
             If bShowCheckBox Then
                 If GetText() = strAssignToIfUnchecked Then
                     ucrChkSave.Checked = False
@@ -942,9 +947,9 @@ Public Class ucrSave
         Next
     End Sub
 
-    Public Sub SetPositionParametersDirectly(bSetPositionParamsDirectly As Boolean, bReadNameFromAssignToFunctions As Boolean)
+    Public Sub SetPositionParametersDirectly(bSetPositionParamsDirectly As Boolean, strReadNameFromParameterName As String)
         Me.bSetPositionParamsDirectly = bSetPositionParamsDirectly
-        Me.bReadNameFromAssignToFunctions = bReadNameFromAssignToFunctions
+        Me.strReadNameFromParameterName = strReadNameFromParameterName
         UpdateColumnPositionVariables()
     End Sub
 End Class
