@@ -153,7 +153,7 @@ Public Class dlgFindNonnumericValues
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        ucrSaveColumn.SetName("nonum")
+        'ucrSaveColumn.SetName("nonum")
         TestOKEnabled()
     End Sub
 
