@@ -657,19 +657,17 @@ Public Class dlgPICSARainfall
         End If
         Dim strChangedText As String = ucrChangedControl.GetText()
         If strChangedText <> strNone Then
-            For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
-                If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso
-                      Not ucrInputTemp.Equals(ucrChangedControl) AndAlso ucrInputTemp.GetText() = strChangedText Then
-                    bUpdateComboOptions = False
-                    ucrInputTemp.SetName(strNone)
-                    bUpdateComboOptions = True
-                End If
-                If (strChangedText = strFacetWrap AndAlso ucrInputTemp.GetText = strFacetRow) OrElse (strChangedText = strFacetRow AndAlso
-                      ucrInputTemp.GetText = strFacetWrap) OrElse (strChangedText = strFacetWrap AndAlso
-                      ucrInputTemp.GetText = strFacetCol) OrElse (strChangedText = strFacetCol AndAlso ucrInputTemp.GetText = strFacetWrap) Then
-                    ucrInputTemp.SetName(strNone)
-                End If
-            Next
+            If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso
+                    Not ucrInputStation.Equals(ucrChangedControl) AndAlso ucrInputStation.GetText() = strChangedText Then
+                bUpdateComboOptions = False
+                ucrInputStation.SetName(strNone)
+                bUpdateComboOptions = True
+            End If
+            If (strChangedText = strFacetWrap AndAlso ucrInputStation.GetText = strFacetRow) OrElse (strChangedText = strFacetRow AndAlso
+                    ucrInputStation.GetText = strFacetWrap) OrElse (strChangedText = strFacetWrap AndAlso
+                    ucrInputStation.GetText = strFacetCol) OrElse (strChangedText = strFacetCol AndAlso ucrInputStation.GetText = strFacetWrap) Then
+                ucrInputStation.SetName(strNone)
+            End If
         End If
         UpdateParameters()
         AddRemoveFacets()
