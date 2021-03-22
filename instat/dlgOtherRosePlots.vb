@@ -295,7 +295,7 @@ Public Class dlgOtherRosePlots
                 End If
             End If
         Else
-        ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(False)
         End If
     End Sub
 
