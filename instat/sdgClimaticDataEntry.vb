@@ -62,6 +62,22 @@ Public Class sdgClimaticDataEntry
             ' strPreviousCellText = e.Cell.Data.ToString()
         End If
     End Sub
+
+    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
+        'ReplaceValueInData(e.NewData.ToString(), e.Cell.Row, e.Cell.Column)
+    End Sub
+
+    Private Sub GetDataEntry(iRow As Integer)
+
+    End Sub
+    Private Sub GetDataFrame()
+        Dim clsDataFrame As New RFunction
+        clsDataFrame.SetRCommand("data.frame")
+        clsDataFrame.AddParameter(Me.strStationColumnName, Chr(34) & strStationSelected & Chr(34), iPosition:=0)
+        clsDataFrame.AddParameter(Me.strDateColumnName, )
+        'clsDataFrame.AddParameter(Me.lstElementsColumnNames, )
+        clsDataFrame.AddParameter()
+    End Sub
     Private Function GetFilledDataTable(strStationColumnName As String, strDateColumnName As String, lstElementsColumnNames As List(Of String), strStationSelected As String, startDateSelected As Date, dataFrameSelected As DataFrame) As DataTable
         Dim dataTable As New DataTable
         Dim dataTableRow As DataRow
