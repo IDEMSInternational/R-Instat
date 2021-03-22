@@ -379,10 +379,6 @@ Public Class sdgPlots
         ucrChkAddFillScale.AddParameterPresentCondition(True, "scale_fill", True)
         ucrChkAddFillScale.AddParameterPresentCondition(False, "scale_fill", False)
 
-        ucrChkAddColourScale.SetText("Add Colour Scale")
-        ucrChkAddColourScale.AddParameterPresentCondition(True, "scale_colour", True)
-        ucrChkAddColourScale.AddParameterPresentCondition(False, "scale_colour", False)
-
         ucrInputColourScalePalette.SetParameter(New RParameter("option", iNewPosition:=0))
         ucrInputColourScalePalette.SetItems(dctOptions)
         ucrInputColourScalePalette.SetLinkedDisplayControl(lblColourScalePalette)
@@ -420,10 +416,15 @@ Public Class sdgPlots
         ucrInputColourDiscrete.SetLinkedDisplayControl(lblColourDiscrete)
         ucrInputColourDiscrete.SetItems({"Discrete", "Continous"})
 
+        ucrPnlColour.AddRadioButton(rdoNoColour)
+        ucrPnlColour.AddRadioButton(rdoModifyColour)
+
+        ucrPnlColour.AddParameterPresentCondition(rdoModifyColour, "scale_colour", True)
+        ucrPnlColour.AddParameterPresentCondition(rdoNoColour, "scale_colour", False)
 
         grpFillScale.Visible = False
         grpColourScale.Visible = False
-        ucrChkApplyChanges.Visible = False
+        grpColourScale.Enabled = False
     End Sub
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction, clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector, bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing,
@@ -530,13 +531,13 @@ Public Class sdgPlots
         ucrNudFillScaleMapEnds.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkFillScaleReverseColourOrder.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkAddFillScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
-        ucrChkAddColourScale.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
-        ucrInputColourScalePalette.SetRCode(clsScaleColourViridisFunction, bReset)
-        ucrNudColourScaleTransparency.SetRCode(clsScaleColourViridisFunction, bReset)
-        ucrNudColourScaleMapBegins.SetRCode(clsScaleColourViridisFunction, bReset)
-        ucrNudColourScaleMapEnds.SetRCode(clsScaleColourViridisFunction, bReset)
-        ucrChkColourScaleReverseOrder.SetRCode(clsScaleColourViridisFunction, bReset)
-        ucrChkApplyChanges.SetRCode(clsScaleColourViridisFunction, bReset)
+        ucrInputColourScalePalette.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudColourScaleTransparency.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudColourScaleMapBegins.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudColourScaleMapEnds.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkColourScaleReverseOrder.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkApplyChanges.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
+        ucrPnlColour.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
         bRCodeSet = True
@@ -910,25 +911,16 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrChkAddColourScale_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddColourScale.ControlValueChanged
-        If ucrChkAddColourScale.Checked Then
-            clsBaseOperator.AddParameter("scale_colour", clsRFunctionParameter:=clsScaleColourViridisFunction, iPosition:=4)
-            grpColourScale.Visible = True
-            ucrChkApplyChanges.Visible = True
-        Else
-            clsBaseOperator.RemoveParameterByName("scale_colour")
-            grpColourScale.Visible = False
-            ucrChkApplyChanges.Visible = False
-        End If
-    End Sub
 
     Private Sub ucrChkApplyChanges_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkApplyChanges.ControlValueChanged
         If ucrChkApplyChanges.Checked Then
-            clsScaleColourViridisFunction.AddParameter("aesthetics", clsRFunctionParameter:=clsAestheticFunction, iPosition:=6)
-            grpColourScale.Enabled = True
-        Else
-            clsScaleColourViridisFunction.RemoveParameterByName("aesthetics")
+            clsScaleFillViridisFunction.AddParameter("aesthetics", clsRFunctionParameter:=clsAestheticFunction, iPosition:=6)
             grpColourScale.Enabled = False
+            ucrPnlColour.Enabled = False
+        Else
+            clsScaleFillViridisFunction.RemoveParameterByName("aesthetics")
+            grpColourScale.Enabled = True
+            ucrPnlColour.Enabled = True
         End If
     End Sub
 
@@ -1007,6 +999,18 @@ Public Class sdgPlots
             clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
         Else
             clsScaleFillViridisFunction.AddParameter("discrete", "FALSE", iPosition:=7)
+        End If
+    End Sub
+
+    Private Sub ucrPnlColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColour.ControlValueChanged
+        If rdoNoColour.Checked Then
+            clsBaseOperator.RemoveParameterByName("scale_colour")
+            grpColourScale.Visible = False
+            grpColourScale.Enabled = False
+        ElseIf rdoModifyColour.checked Then
+            clsBaseOperator.AddParameter("scale_colour", clsRFunctionParameter:=clsScaleColourViridisFunction, iPosition:=8)
+            grpColourScale.Visible = True
+            grpColourScale.Enabled = True
         End If
     End Sub
 End Class
