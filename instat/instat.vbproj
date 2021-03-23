@@ -203,6 +203,12 @@
     <Compile Include="dlgCircularDensityPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgClimaticDataEntry.Designer.vb">
+      <DependentUpon>dlgClimaticDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgClimaticNCMPCountRecords.Designer.vb">
       <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
     </Compile>
@@ -321,6 +327,12 @@
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgWindPollutionRose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntry.Designer.vb">
+      <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgClimaticNCMPMetadata.Designer.vb">
@@ -2676,6 +2688,9 @@
     <EmbeddedResource Include="dlgCircularDensityPlot.resx">
       <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticDataEntry.resx">
+      <DependentUpon>dlgClimaticDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticNCMPCountRecords.resx">
       <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
     </EmbeddedResource>
@@ -2736,6 +2751,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimaticDataEntry.resx">
+      <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticNCMPMetadata.resx">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
