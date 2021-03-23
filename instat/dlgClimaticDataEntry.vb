@@ -43,21 +43,18 @@ Public Class dlgClimaticDataEntry
 
         ucrReceiverStation.Selector = ucrSelectorClimaticDataEntry
         ucrReceiverStation.SetClimaticType("station")
-        ucrReceiverStation.SetParameter(New RParameter("station_col", 1))
         ucrReceiverStation.SetParameterIsRFunction()
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.strSelectorHeading = "Factors"
 
-        ucrInputSelectStation.SetParameter(New RParameter("left", 2))
+        'todo. how do we make this control write parameter value with quotes while displaying without quotes
+        'if the items are being set by the receiver. New enhancement??
+        'ucrInputSelectStation.SetParameter(New RParameter("station", 1))
         ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
         ucrInputSelectStation.SetItems()
-        'ucrInputFactorLevels.AddQuotesIfUnrecognised = False
         ucrInputSelectStation.strQuotes = ""
 
-        ucrDateTimePickerStartingDate.SetParameter(New RParameter(""))
-        ucrDateTimePickerStartingDate.SetParameterIsRDate()
-
-        ucrReceiverDate.SetParameter(New RParameter("date_col", 3))
+        ucrReceiverDate.SetParameter(New RParameter("date", 2))
         ucrReceiverDate.Selector = ucrSelectorClimaticDataEntry
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.SetIncludedDataTypes({"Date"})
@@ -65,13 +62,16 @@ Public Class dlgClimaticDataEntry
         ucrReceiverDate.SetParameterIsRFunction()
         ucrReceiverDate.strSelectorHeading = "Date"
 
-        ucrReceiverElements.SetParameter(New RParameter("element_cols", 4))
+        ucrReceiverElements.SetParameter(New RParameter("elements", 3))
         ucrReceiverElements.Selector = ucrSelectorClimaticDataEntry
         ucrReceiverElements.SetParameterIsRFunction()
         ucrReceiverElements.strSelectorHeading = "Numerics"
         ucrReceiverElements.SetIncludedDataTypes({"numeric"})
         ucrReceiverElements.SetClimaticType("element")
         ucrReceiverElements.bAutoFill = True
+
+        ucrDateTimePickerStartingDate.SetParameter(New RParameter("start_date", 4))
+        ucrDateTimePickerStartingDate.SetParameterIsRDate()
 
         ucrPnlOptions.AddRadioButton(rdoDaily)
         ucrPnlOptions.AddRadioButton(rdoMonthly)
@@ -80,20 +80,29 @@ Public Class dlgClimaticDataEntry
     Private Sub SetDefaults()
         clsClimaticDataEntry = New RFunction
 
+
         ucrSelectorClimaticDataEntry.Reset()
         ucrReceiverElements.SetMeAsReceiver()
+
+        'the R command will be of the form shown below
+        'dataobject$save_data_entry_data(data_name="",station = "", date = "", elements = c(), start_date = "", data_changed = "", rows_changed="")
+        clsClimaticDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$save_data_entry_data")
         ucrBase.clsRsyntax.SetBaseRFunction(clsClimaticDataEntry)
     End Sub
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ' SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrSelectorClimaticDataEntry.SetRCode(clsClimaticDataEntry, bReset)
+        ucrInputSelectStation.SetRCode(clsClimaticDataEntry, bReset)
+        ucrReceiverDate.SetRCode(clsClimaticDataEntry, bReset)
+        ucrReceiverElements.SetRCode(clsClimaticDataEntry, bReset)
+        ucrDateTimePickerStartingDate.SetRCode(clsClimaticDataEntry, bReset)
     End Sub
     Private Sub TestOkEnabled()
-        If (Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputSelectStation.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty) Then
+        If ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty AndAlso sdgClimaticDataEntry.GetNumofRowsChanged > 0 Then
             ucrBase.OKEnabled(True)
-            'cmdEnterData.Enabled = True
+            cmdEnterData.Enabled = True
         Else
             ucrBase.OKEnabled(False)
-            'cmdEnterData.Enabled = False
+            cmdEnterData.Enabled = False
         End If
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -109,31 +118,44 @@ Public Class dlgClimaticDataEntry
                                    ucrInputSelectStation.GetValue(),
                                    ucrDateTimePickerStartingDate.DateValue,
                                    GetDataFrame(), ucrSelectorClimaticDataEntry.strCurrentDataFrame)
+
         sdgClimaticDataEntry.ShowDialog()
+
+        'check if any changes were made
+        If sdgClimaticDataEntry.GetNumofRowsChanged < 1 Then
+            'todo. disable the ok button ??
+            Return
+        End If
+
+        'set the parameters for data changed and rows changed of the data frame that was passed to the dialog
+        clsClimaticDataEntry.AddParameter("data_changed", sdgClimaticDataEntry.GetDataChangedAsString, iPosition:=5)
+        clsClimaticDataEntry.AddParameter("rows_changed", sdgClimaticDataEntry.GetRowsChangedAsRVectorString, iPosition:=6)
+
     End Sub
 
     Private Function GetDataFrame() As DataFrame
-        Dim dfTemp As DataFrame = Nothing
+        Dim dfTemp As DataFrame
         Dim clsGetDataFrame As New RFunction
         Dim expTemp As SymbolicExpression
 
-        If frmMain.clsRLink.bInstatObjectExists AndAlso frmMain.clsRLink.GetDataFrameCount() > 0 Then
-            clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
-            clsGetDataFrame.AddParameter("data_name", Chr(34) & ucrSelectorClimaticDataEntry.strCurrentDataFrame & Chr(34), iPosition:=0)
-            clsGetDataFrame.AddParameter("station", ucrReceiverStation.GetVariableNames, iPosition:=1)
-            clsGetDataFrame.AddParameter("date", ucrReceiverDate.GetVariableNames, iPosition:=2)
-            clsGetDataFrame.AddParameter("elements", ucrReceiverElements.GetVariableNames(), iPosition:=3)
-            clsGetDataFrame.AddParameter("station_name", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=4)
-            clsGetDataFrame.AddParameter("start_date", clsRFunctionParameter:=ucrDateTimePickerStartingDate.ValueAsRDate(), iPosition:=5)
-            ' clsGetDataFrame.AddParameter("end_date", Chr(34) & ucrSelectorClimaticDataEntry.strCurrentDataFrame & Chr(34))
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript(), bSilent:=True)
-            dfTemp = expTemp.AsDataFrame()
+        clsGetDataFrame.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
+        clsGetDataFrame.AddParameter("data_name", Chr(34) & ucrSelectorClimaticDataEntry.strCurrentDataFrame & Chr(34), iPosition:=0)
+        clsGetDataFrame.AddParameter("station", ucrReceiverStation.GetVariableNames, iPosition:=1)
+        clsGetDataFrame.AddParameter("date", ucrReceiverDate.GetVariableNames, iPosition:=2)
+        clsGetDataFrame.AddParameter("elements", ucrReceiverElements.GetVariableNames(), iPosition:=3)
+        clsGetDataFrame.AddParameter("station_name", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=4)
+        clsGetDataFrame.AddParameter("start_date", clsRFunctionParameter:=ucrDateTimePickerStartingDate.ValueAsRDate(), iPosition:=5)
+        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript(), bSilent:=True)
+        dfTemp = expTemp.AsDataFrame()
 
-        End If
         Return dfTemp
     End Function
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrInputSelectStation.ControlValueChanged, ucrReceiverDate.ControlValueChanged, ucrReceiverElements.ControlValueChanged
+    Private Sub ucrInputSelectStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSelectStation.ControlValueChanged, ucrReceiverDate.ControlValueChanged, ucrReceiverElements.ControlValueChanged
+        clsClimaticDataEntry.AddParameter("station", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=1)
+    End Sub
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrInputSelectStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
 End Class
