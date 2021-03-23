@@ -129,7 +129,7 @@ Public Class dlgWindPollutionRose
         ucrInputStationFacet.SetDropDownStyleAsNonEditable()
 
         ucrInputFacet.SetParameter(New RParameter(""))
-        ucrInputFacet.SetItems({"default", "station", "year", "hour", "month", "season", "weekday", "site", "weekend", "monthyear", "daylight", "dst"})
+        ucrInputFacet.SetItems({"default", "year", "hour", "month", "season", "weekday", "site", "weekend", "monthyear", "daylight", "dst"})
 
         ucrInputFacet.SetDropDownStyleAsEditable(True)
 
