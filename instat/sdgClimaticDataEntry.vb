@@ -17,6 +17,7 @@
 Imports instat.Translations
 Imports RDotNet
 Imports unvell.ReoGrid
+Imports unvell.ReoGrid.Events
 Public Class sdgClimaticDataEntry
 
     Dim strStationColumnName As String
@@ -25,12 +26,14 @@ Public Class sdgClimaticDataEntry
     Dim strStationSelected As String
     Dim startDateSelected As Date
     Dim dataTable As DataTable
+    Dim WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
 
     Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        grdDataEntry.SheetTabNewButtonVisible = False
     End Sub
 
-    Public Sub Setup(strStationColumnName As String, strDateColumnName As String, lstElementsColumnNames As List(Of String), strStationSelected As String, startDateSelected As Date, dataFrameSelected As DataFrame)
+    Public Sub Setup(strStationColumnName As String, strDateColumnName As String, lstElementsColumnNames As List(Of String), strStationSelected As String, startDateSelected As Date, dataFrameSelected As DataFrame, strSheetName As String)
         Me.strStationColumnName = strStationColumnName
         Me.strDateColumnName = strDateColumnName
         Me.lstElementsColumnNames = lstElementsColumnNames
@@ -39,12 +42,42 @@ Public Class sdgClimaticDataEntry
         grdDataEntry.Worksheets.Clear()
         Me.dataTable = GetFilledDataTable(strStationColumnName, strDateColumnName, lstElementsColumnNames, strStationSelected, startDateSelected, dataFrameSelected)
 
-        Dim currentWorkSheet As Worksheet = GetFilledWorkSheet(dataTable)
-        grdDataEntry.AddWorksheet(currentWorkSheet)
+        Dim currentWorkSheet As Worksheet = GetFilledWorkSheet(dataTable, strSheetName)
 
-        grdDataEntry.CurrentWorksheet = currentWorkSheet
+        grdDataEntry.AddWorksheet(currentWorkSheet)
+        grdCurrSheet = currentWorkSheet
+        grdDataEntry.SheetTabNewButtonVisible = False
+    End Sub
+    Private Sub grdDataEntry_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdDataEntry.CurrentWorksheetChanged, Me.Load, grdDataEntry.WorksheetInserted
+        grdCurrSheet = grdDataEntry.CurrentWorksheet
+        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+        grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
+        grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
+    End Sub
+    Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrSheet.BeforeCellEdit
+        If grdCurrSheet.ColumnHeaders(e.Cell.Column).Text = "station" Then
+            e.IsCancelled = True
+        Else
+            ' strPreviousCellText = e.Cell.Data.ToString()
+        End If
     End Sub
 
+    Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
+        'ReplaceValueInData(e.NewData.ToString(), e.Cell.Row, e.Cell.Column)
+    End Sub
+
+    Private Sub GetDataEntry(iRow As Integer)
+
+    End Sub
+    Private Sub GetDataFrame()
+        Dim clsDataFrame As New RFunction
+        clsDataFrame.SetRCommand("data.frame")
+        clsDataFrame.AddParameter(Me.strStationColumnName, Chr(34) & strStationSelected & Chr(34), iPosition:=0)
+        clsDataFrame.AddParameter(Me.strDateColumnName, )
+        'clsDataFrame.AddParameter(Me.lstElementsColumnNames, )
+        clsDataFrame.AddParameter()
+    End Sub
     Private Function GetFilledDataTable(strStationColumnName As String, strDateColumnName As String, lstElementsColumnNames As List(Of String), strStationSelected As String, startDateSelected As Date, dataFrameSelected As DataFrame) As DataTable
         Dim dataTable As New DataTable
         Dim dataTableRow As DataRow
@@ -52,7 +85,9 @@ Public Class sdgClimaticDataEntry
         Dim bAddRow As Boolean
 
         'create the columns to the data table; station, date and elements
-        dataTable.Columns.Add(strStationColumnName)
+        If strStationColumnName <> "" Then
+            dataTable.Columns.Add(strStationColumnName)
+        End If
         dataTable.Columns.Add(strDateColumnName)
         For Each strElement As String In lstElementsColumnNames
             dataTable.Columns.Add(strElement)
@@ -69,8 +104,8 @@ Public Class sdgClimaticDataEntry
                 dataFrameCellValue = dataFrameSelected.Item(i, dataTableColumn.ColumnName)
                 'Only add rows of the station selected and from the starting date
                 'If strColumnName = strStationColumnName AndAlso dataFrameCellValue.ToString <> strStationSelected Then
-                '    'bAddRow = False
-                '    'Exit For
+                'bAddRow = False
+                'Exit For
                 'ElseIf strColumnName = strDateColumnName Then
                 '    'todo. validate the date and compare, if > starting date then bAddRow = False
                 '    'bAddRow = False
@@ -89,8 +124,8 @@ Public Class sdgClimaticDataEntry
         Return dataTable
     End Function
 
-    Public Function GetFilledWorkSheet(dataTable As DataTable) As Worksheet
-        Dim grdWorkSheet As Worksheet = grdDataEntry.CreateWorksheet("dataentry")
+    Public Function GetFilledWorkSheet(dataTable As DataTable, strSheetName As String) As Worksheet
+        Dim grdWorkSheet As Worksheet = grdDataEntry.CreateWorksheet(strSheetName)
 
         'create the columns and set the header names in the worksheet
         grdWorkSheet.Columns = dataTable.Columns.Count

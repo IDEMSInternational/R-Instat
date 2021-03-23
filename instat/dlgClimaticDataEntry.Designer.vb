@@ -29,15 +29,15 @@ Partial Class dlgClimaticDataEntry
         Me.lblDate = New System.Windows.Forms.Label()
         Me.lblStation = New System.Windows.Forms.Label()
         Me.lblStartingDate = New System.Windows.Forms.Label()
-        Me.ucrDateTimePickerFrom = New instat.ucrDateTimePicker()
+        Me.cmdEnterData = New System.Windows.Forms.Button()
+        Me.ucrSelectorClimaticDataEntry = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputSelectStation = New instat.ucrInputFactorLevels()
+        Me.ucrDateTimePickerStartingDate = New instat.ucrDateTimePicker()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrSelectorClimaticDataEntry = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrInputFactorLevels = New instat.ucrInputFactorLevels()
-        Me.cmdEnterData = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'rdoDaily
@@ -53,7 +53,7 @@ Partial Class dlgClimaticDataEntry
         Me.rdoDaily.Location = New System.Drawing.Point(74, 12)
         Me.rdoDaily.Name = "rdoDaily"
         Me.rdoDaily.Size = New System.Drawing.Size(135, 27)
-        Me.rdoDaily.TabIndex = 25
+        Me.rdoDaily.TabIndex = 1
         Me.rdoDaily.Text = "Daily"
         Me.rdoDaily.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoDaily.UseVisualStyleBackColor = True
@@ -70,7 +70,7 @@ Partial Class dlgClimaticDataEntry
         Me.rdoMonthly.Location = New System.Drawing.Point(207, 12)
         Me.rdoMonthly.Name = "rdoMonthly"
         Me.rdoMonthly.Size = New System.Drawing.Size(135, 27)
-        Me.rdoMonthly.TabIndex = 24
+        Me.rdoMonthly.TabIndex = 2
         Me.rdoMonthly.Text = "Monthly"
         Me.rdoMonthly.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoMonthly.UseVisualStyleBackColor = True
@@ -79,11 +79,11 @@ Partial Class dlgClimaticDataEntry
         '
         Me.Label1.AutoSize = True
         Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(264, 95)
+        Me.Label1.Location = New System.Drawing.Point(264, 96)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(36, 13)
-        Me.Label1.TabIndex = 3
-        Me.Label1.Text = "Level:"
+        Me.Label1.Size = New System.Drawing.Size(74, 13)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "Select station:"
         '
         'lblElement
         '
@@ -92,7 +92,7 @@ Partial Class dlgClimaticDataEntry
         Me.lblElement.Location = New System.Drawing.Point(264, 182)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(59, 13)
-        Me.lblElement.TabIndex = 8
+        Me.lblElement.TabIndex = 10
         Me.lblElement.Text = "Element(s):"
         '
         'lblDate
@@ -102,7 +102,7 @@ Partial Class dlgClimaticDataEntry
         Me.lblDate.Location = New System.Drawing.Point(264, 140)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
-        Me.lblDate.TabIndex = 5
+        Me.lblDate.TabIndex = 8
         Me.lblDate.Text = "Date:"
         '
         'lblStation
@@ -112,7 +112,7 @@ Partial Class dlgClimaticDataEntry
         Me.lblStation.Location = New System.Drawing.Point(264, 53)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
-        Me.lblStation.TabIndex = 1
+        Me.lblStation.TabIndex = 4
         Me.lblStation.Text = "Station:"
         '
         'lblStartingDate
@@ -123,18 +123,49 @@ Partial Class dlgClimaticDataEntry
         Me.lblStartingDate.Location = New System.Drawing.Point(7, 253)
         Me.lblStartingDate.Name = "lblStartingDate"
         Me.lblStartingDate.Size = New System.Drawing.Size(72, 13)
-        Me.lblStartingDate.TabIndex = 10
+        Me.lblStartingDate.TabIndex = 12
         Me.lblStartingDate.Tag = ""
         Me.lblStartingDate.Text = "Starting Date:"
         '
-        'ucrDateTimePickerFrom
+        'cmdEnterData
         '
-        Me.ucrDateTimePickerFrom.Location = New System.Drawing.Point(84, 250)
-        Me.ucrDateTimePickerFrom.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDateTimePickerFrom.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDateTimePickerFrom.Name = "ucrDateTimePickerFrom"
-        Me.ucrDateTimePickerFrom.Size = New System.Drawing.Size(153, 20)
-        Me.ucrDateTimePickerFrom.TabIndex = 11
+        Me.cmdEnterData.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdEnterData.Location = New System.Drawing.Point(7, 275)
+        Me.cmdEnterData.Name = "cmdEnterData"
+        Me.cmdEnterData.Size = New System.Drawing.Size(121, 23)
+        Me.cmdEnterData.TabIndex = 14
+        Me.cmdEnterData.Text = "Enter Data"
+        Me.cmdEnterData.UseVisualStyleBackColor = True
+        '
+        'ucrSelectorClimaticDataEntry
+        '
+        Me.ucrSelectorClimaticDataEntry.bDropUnusedFilterLevels = False
+        Me.ucrSelectorClimaticDataEntry.bShowHiddenColumns = False
+        Me.ucrSelectorClimaticDataEntry.bUseCurrentFilter = True
+        Me.ucrSelectorClimaticDataEntry.Location = New System.Drawing.Point(7, 55)
+        Me.ucrSelectorClimaticDataEntry.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrSelectorClimaticDataEntry.Name = "ucrSelectorClimaticDataEntry"
+        Me.ucrSelectorClimaticDataEntry.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorClimaticDataEntry.TabIndex = 3
+        '
+        'ucrInputSelectStation
+        '
+        Me.ucrInputSelectStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputSelectStation.GetSetSelectedIndex = -1
+        Me.ucrInputSelectStation.IsReadOnly = False
+        Me.ucrInputSelectStation.Location = New System.Drawing.Point(263, 112)
+        Me.ucrInputSelectStation.Name = "ucrInputSelectStation"
+        Me.ucrInputSelectStation.Size = New System.Drawing.Size(120, 21)
+        Me.ucrInputSelectStation.TabIndex = 7
+        '
+        'ucrDateTimePickerStartingDate
+        '
+        Me.ucrDateTimePickerStartingDate.Location = New System.Drawing.Point(84, 250)
+        Me.ucrDateTimePickerStartingDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDateTimePickerStartingDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDateTimePickerStartingDate.Name = "ucrDateTimePickerStartingDate"
+        Me.ucrDateTimePickerStartingDate.Size = New System.Drawing.Size(153, 20)
+        Me.ucrDateTimePickerStartingDate.TabIndex = 13
         '
         'ucrReceiverStation
         '
@@ -145,7 +176,7 @@ Partial Class dlgClimaticDataEntry
         Me.ucrReceiverStation.Selector = Nothing
         Me.ucrReceiverStation.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverStation.strNcFilePath = ""
-        Me.ucrReceiverStation.TabIndex = 2
+        Me.ucrReceiverStation.TabIndex = 5
         Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrReceiverDate
@@ -157,7 +188,7 @@ Partial Class dlgClimaticDataEntry
         Me.ucrReceiverDate.Selector = Nothing
         Me.ucrReceiverDate.Size = New System.Drawing.Size(120, 20)
         Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.TabIndex = 7
+        Me.ucrReceiverDate.TabIndex = 9
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'ucrReceiverElements
@@ -169,7 +200,7 @@ Partial Class dlgClimaticDataEntry
         Me.ucrReceiverElements.Selector = Nothing
         Me.ucrReceiverElements.Size = New System.Drawing.Size(120, 100)
         Me.ucrReceiverElements.strNcFilePath = ""
-        Me.ucrReceiverElements.TabIndex = 9
+        Me.ucrReceiverElements.TabIndex = 11
         Me.ucrReceiverElements.ucrSelector = Nothing
         '
         'ucrBase
@@ -186,45 +217,15 @@ Partial Class dlgClimaticDataEntry
         Me.ucrPnlOptions.Size = New System.Drawing.Size(278, 35)
         Me.ucrPnlOptions.TabIndex = 26
         '
-        'ucrSelectorClimaticDataEntry
-        '
-        Me.ucrSelectorClimaticDataEntry.bDropUnusedFilterLevels = False
-        Me.ucrSelectorClimaticDataEntry.bShowHiddenColumns = False
-        Me.ucrSelectorClimaticDataEntry.bUseCurrentFilter = True
-        Me.ucrSelectorClimaticDataEntry.Location = New System.Drawing.Point(7, 57)
-        Me.ucrSelectorClimaticDataEntry.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrSelectorClimaticDataEntry.Name = "ucrSelectorClimaticDataEntry"
-        Me.ucrSelectorClimaticDataEntry.Size = New System.Drawing.Size(210, 180)
-        Me.ucrSelectorClimaticDataEntry.TabIndex = 0
-        '
-        'ucrInputFactorLevels
-        '
-        Me.ucrInputFactorLevels.AddQuotesIfUnrecognised = True
-        Me.ucrInputFactorLevels.GetSetSelectedIndex = -1
-        Me.ucrInputFactorLevels.IsReadOnly = False
-        Me.ucrInputFactorLevels.Location = New System.Drawing.Point(263, 111)
-        Me.ucrInputFactorLevels.Name = "ucrInputFactorLevels"
-        Me.ucrInputFactorLevels.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputFactorLevels.TabIndex = 83
-        '
-        'cmdEnterData
-        '
-        Me.cmdEnterData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdEnterData.Location = New System.Drawing.Point(7, 275)
-        Me.cmdEnterData.Name = "cmdEnterData"
-        Me.cmdEnterData.Size = New System.Drawing.Size(121, 23)
-        Me.cmdEnterData.TabIndex = 84
-        Me.cmdEnterData.Text = "Enter Data"
-        Me.cmdEnterData.UseVisualStyleBackColor = True
-        '
         'dlgClimaticDataEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(411, 360)
+        Me.Controls.Add(Me.ucrSelectorClimaticDataEntry)
         Me.Controls.Add(Me.cmdEnterData)
-        Me.Controls.Add(Me.ucrInputFactorLevels)
-        Me.Controls.Add(Me.ucrDateTimePickerFrom)
+        Me.Controls.Add(Me.ucrInputSelectStation)
+        Me.Controls.Add(Me.ucrDateTimePickerStartingDate)
         Me.Controls.Add(Me.lblStartingDate)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStation)
@@ -237,7 +238,6 @@ Partial Class dlgClimaticDataEntry
         Me.Controls.Add(Me.rdoDaily)
         Me.Controls.Add(Me.rdoMonthly)
         Me.Controls.Add(Me.ucrPnlOptions)
-        Me.Controls.Add(Me.ucrSelectorClimaticDataEntry)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "dlgClimaticDataEntry"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
@@ -246,8 +246,6 @@ Partial Class dlgClimaticDataEntry
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents ucrSelectorClimaticDataEntry As ucrSelectorByDataFrameAddRemove
     Friend WithEvents rdoDaily As RadioButton
     Friend WithEvents rdoMonthly As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
@@ -259,8 +257,9 @@ Partial Class dlgClimaticDataEntry
     Friend WithEvents lblDate As Label
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
-    Friend WithEvents ucrDateTimePickerFrom As ucrDateTimePicker
+    Friend WithEvents ucrDateTimePickerStartingDate As ucrDateTimePicker
     Friend WithEvents lblStartingDate As Label
-    Friend WithEvents ucrInputFactorLevels As ucrInputFactorLevels
+    Friend WithEvents ucrInputSelectStation As ucrInputFactorLevels
     Friend WithEvents cmdEnterData As Button
+    Friend WithEvents ucrSelectorClimaticDataEntry As ucrSelectorByDataFrameAddRemove
 End Class

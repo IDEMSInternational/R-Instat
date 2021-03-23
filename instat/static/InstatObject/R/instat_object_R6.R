@@ -2448,3 +2448,7 @@ DataBook$set("public", "patch_climate_element", function(data_name, date_col_nam
 DataBook$set("public", "visualize_element_na", function(data_name, element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = interval_size, x_with_truth = NULL, measure = "percent") {
   self$get_data_objects(data_name)$visualize_element_na(element_col_name = element_col_name, element_col_name_imputed = element_col_name_imputed, station_col_name = station_col_name, x_axis_labels_col_name = x_axis_labels_col_name, ncol = ncol, type = type, xlab = xlab, ylab = ylab, legend = legend, orientation = orientation, interval_size = interval_size, x_with_truth = x_with_truth, measure = measure)
 })
+
+DataBook$set("public", "get_data_entry_data", function(data_name, station, date, elements, station_name, start_date, end_date) {
+  self$get_data_objects(data_name)$get_data_entry_data(station = station, date = date, elements = elements, station_name = station_name, start_date = start_date, end_date = end_date)
+})

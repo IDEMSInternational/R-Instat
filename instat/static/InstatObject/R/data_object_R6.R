@@ -3821,3 +3821,24 @@ DataSheet$set("public", "visualize_element_na", function(element_col_name, eleme
     return(plt)
   }
 })
+DataSheet$set("public", "get_data_entry_data", function(station, date, elements, station_name, start_date, end_date) {
+  cols <- c(date, elements)
+  if (!missing(station)) cols <- c(station, cols)
+  curr_data <- self$get_columns_from_data(cols)
+  if (!missing(station)) curr_data <- curr_data[curr_data[[station]] == station_name, ]
+  curr_data <- curr_data[curr_data[[date]] >= start_date, ]
+  if (!missing(end_date)) curr_data <- curr_data[curr_data[[date]] <= end_date, ]
+  if (nrow(curr_data) == 0) stop("No data in range.")
+  # Convert to character to they display correctly in VB grid.
+  curr_data[[date]] <- as.character(curr_data[[date]])
+  if (!missing(station)) curr_data[[station]] <- as.character(curr_data[[station]])
+  # Order columns in correct order for data entry.
+  if (!missing(station)) {
+    out_data <- data.frame(curr_data[[station]], curr_data[[date]], curr_data[elements])
+    names(out_data) <- c(station, date, elements)
+  } else {
+    out_data <- data.frame(curr_data[[date]], curr_data[elements])
+    names(out_data) <- c(date, elements)
+  }
+  out_data
+})
