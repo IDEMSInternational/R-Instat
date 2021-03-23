@@ -88,14 +88,6 @@ Public Class sdgClimaticDataEntry
         grdDataEntry.AddWorksheet(grdCurrentWorkSheet)
     End Sub
 
-    Private Sub grdDataEntry_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdDataEntry.CurrentWorksheetChanged, Me.Load, grdDataEntry.WorksheetInserted
-        'grdCurrSheet = grdDataEntry.CurrentWorksheet
-        'grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-        'grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-        'grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
-        'grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
-    End Sub
-
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
         'todo. do this disabling of data entry be done when setting up the grid. Not here
         If grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text = "station" Then
@@ -105,6 +97,7 @@ Public Class sdgClimaticDataEntry
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
         AddChangedRow(e.Cell.Row)
+        grdCurrentWorkSheet.GetCell(e.Cell.Row, e.Cell.Column).Style.BackColor = Color.Yellow
     End Sub
 
     ''' <summary>
