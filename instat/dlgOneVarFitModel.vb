@@ -342,7 +342,7 @@ Public Class dlgOneVarFitModel
         clsRplotFunction.SetRCommand("plot")
         clsRplotFunction.AddParameter("x", clsRFunctionParameter:=clsROneVarFitModelFunction, iPosition:=0)
         clsRplotFunction.iCallType = 3
-        ' clsRplotFunction.bExcludeAssignedFunctionOutput = False
+        clsRplotFunction.bExcludeAssignedFunctionOutput = False
 
         clsRplotPPCompFunction.SetPackageName("fitdistrplus")
         clsRplotPPCompFunction.SetRCommand("ppcomp")

@@ -109,11 +109,12 @@ Partial Class sdgPlots
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.tbpColour = New System.Windows.Forms.TabPage()
+        Me.rdoModifyColour = New System.Windows.Forms.RadioButton()
+        Me.rdoNoColour = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlColour = New instat.UcrPanel()
         Me.ucrChkApplyChanges = New instat.ucrCheck()
         Me.ucrChkAddFillScale = New instat.ucrCheck()
         Me.grpColourScale = New System.Windows.Forms.GroupBox()
-        Me.lblColourDiscrete = New System.Windows.Forms.Label()
-        Me.ucrInputColourDiscrete = New instat.ucrInputComboBox()
         Me.ucrNudColourScaleTransparency = New instat.ucrNud()
         Me.ucrInputColourScalePalette = New instat.ucrInputComboBox()
         Me.ucrNudColourScaleMapEnds = New instat.ucrNud()
@@ -124,10 +125,8 @@ Partial Class sdgPlots
         Me.lblColourScalePalette = New System.Windows.Forms.Label()
         Me.lblColourScaleTransparency = New System.Windows.Forms.Label()
         Me.grpFillScale = New System.Windows.Forms.GroupBox()
-        Me.lblFillDiscrete = New System.Windows.Forms.Label()
         Me.ucrNudFillScaleTransparency = New instat.ucrNud()
         Me.ucrNudFillScaleMapEnds = New instat.ucrNud()
-        Me.ucrInputFillDicrete = New instat.ucrInputComboBox()
         Me.ucrNudFillScaleMapBegins = New instat.ucrNud()
         Me.ucrInputFillScaleColour = New instat.ucrInputComboBox()
         Me.ucrChkFillScaleReverseColourOrder = New instat.ucrCheck()
@@ -136,9 +135,8 @@ Partial Class sdgPlots
         Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
         Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrPnlColour = New instat.UcrPanel()
-        Me.rdoNoColour = New System.Windows.Forms.RadioButton()
-        Me.rdoModifyColour = New System.Windows.Forms.RadioButton()
+        Me.ucrChkFillDiscrete = New instat.ucrCheck()
+        Me.ucrChkColourDiscrete = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -697,6 +695,25 @@ Partial Class sdgPlots
         Me.tbpColour.Name = "tbpColour"
         Me.tbpColour.UseVisualStyleBackColor = True
         '
+        'rdoModifyColour
+        '
+        resources.ApplyResources(Me.rdoModifyColour, "rdoModifyColour")
+        Me.rdoModifyColour.Name = "rdoModifyColour"
+        Me.rdoModifyColour.TabStop = True
+        Me.rdoModifyColour.UseVisualStyleBackColor = True
+        '
+        'rdoNoColour
+        '
+        resources.ApplyResources(Me.rdoNoColour, "rdoNoColour")
+        Me.rdoNoColour.Name = "rdoNoColour"
+        Me.rdoNoColour.TabStop = True
+        Me.rdoNoColour.UseVisualStyleBackColor = True
+        '
+        'ucrPnlColour
+        '
+        resources.ApplyResources(Me.ucrPnlColour, "ucrPnlColour")
+        Me.ucrPnlColour.Name = "ucrPnlColour"
+        '
         'ucrChkApplyChanges
         '
         Me.ucrChkApplyChanges.Checked = False
@@ -711,8 +728,7 @@ Partial Class sdgPlots
         '
         'grpColourScale
         '
-        Me.grpColourScale.Controls.Add(Me.lblColourDiscrete)
-        Me.grpColourScale.Controls.Add(Me.ucrInputColourDiscrete)
+        Me.grpColourScale.Controls.Add(Me.ucrChkColourDiscrete)
         Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleTransparency)
         Me.grpColourScale.Controls.Add(Me.ucrInputColourScalePalette)
         Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleMapEnds)
@@ -725,19 +741,6 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.grpColourScale, "grpColourScale")
         Me.grpColourScale.Name = "grpColourScale"
         Me.grpColourScale.TabStop = False
-        '
-        'lblColourDiscrete
-        '
-        resources.ApplyResources(Me.lblColourDiscrete, "lblColourDiscrete")
-        Me.lblColourDiscrete.Name = "lblColourDiscrete"
-        '
-        'ucrInputColourDiscrete
-        '
-        Me.ucrInputColourDiscrete.AddQuotesIfUnrecognised = True
-        Me.ucrInputColourDiscrete.GetSetSelectedIndex = -1
-        Me.ucrInputColourDiscrete.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputColourDiscrete, "ucrInputColourDiscrete")
-        Me.ucrInputColourDiscrete.Name = "ucrInputColourDiscrete"
         '
         'ucrNudColourScaleTransparency
         '
@@ -805,10 +808,9 @@ Partial Class sdgPlots
         '
         'grpFillScale
         '
-        Me.grpFillScale.Controls.Add(Me.lblFillDiscrete)
+        Me.grpFillScale.Controls.Add(Me.ucrChkFillDiscrete)
         Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleTransparency)
         Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleMapEnds)
-        Me.grpFillScale.Controls.Add(Me.ucrInputFillDicrete)
         Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleMapBegins)
         Me.grpFillScale.Controls.Add(Me.ucrInputFillScaleColour)
         Me.grpFillScale.Controls.Add(Me.ucrChkFillScaleReverseColourOrder)
@@ -819,11 +821,6 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.grpFillScale, "grpFillScale")
         Me.grpFillScale.Name = "grpFillScale"
         Me.grpFillScale.TabStop = False
-        '
-        'lblFillDiscrete
-        '
-        resources.ApplyResources(Me.lblFillDiscrete, "lblFillDiscrete")
-        Me.lblFillDiscrete.Name = "lblFillDiscrete"
         '
         'ucrNudFillScaleTransparency
         '
@@ -844,14 +841,6 @@ Partial Class sdgPlots
         Me.ucrNudFillScaleMapEnds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudFillScaleMapEnds.Name = "ucrNudFillScaleMapEnds"
         Me.ucrNudFillScaleMapEnds.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrInputFillDicrete
-        '
-        Me.ucrInputFillDicrete.AddQuotesIfUnrecognised = True
-        Me.ucrInputFillDicrete.GetSetSelectedIndex = -1
-        Me.ucrInputFillDicrete.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFillDicrete, "ucrInputFillDicrete")
-        Me.ucrInputFillDicrete.Name = "ucrInputFillDicrete"
         '
         'ucrNudFillScaleMapBegins
         '
@@ -902,24 +891,17 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
-        'ucrPnlColour
+        'ucrChkFillDiscrete
         '
-        resources.ApplyResources(Me.ucrPnlColour, "ucrPnlColour")
-        Me.ucrPnlColour.Name = "ucrPnlColour"
+        Me.ucrChkFillDiscrete.Checked = False
+        resources.ApplyResources(Me.ucrChkFillDiscrete, "ucrChkFillDiscrete")
+        Me.ucrChkFillDiscrete.Name = "ucrChkFillDiscrete"
         '
-        'rdoNoColour
+        'ucrChkColourDiscrete
         '
-        resources.ApplyResources(Me.rdoNoColour, "rdoNoColour")
-        Me.rdoNoColour.Name = "rdoNoColour"
-        Me.rdoNoColour.TabStop = True
-        Me.rdoNoColour.UseVisualStyleBackColor = True
-        '
-        'rdoModifyColour
-        '
-        resources.ApplyResources(Me.rdoModifyColour, "rdoModifyColour")
-        Me.rdoModifyColour.Name = "rdoModifyColour"
-        Me.rdoModifyColour.TabStop = True
-        Me.rdoModifyColour.UseVisualStyleBackColor = True
+        Me.ucrChkColourDiscrete.Checked = False
+        resources.ApplyResources(Me.ucrChkColourDiscrete, "ucrChkColourDiscrete")
+        Me.ucrChkColourDiscrete.Name = "ucrChkColourDiscrete"
         '
         'sdgPlots
         '
@@ -1053,13 +1035,11 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputFillScaleColour As ucrInputComboBox
     Friend WithEvents ucrChkAddFillScale As ucrCheck
     Friend WithEvents ucrChkApplyChanges As ucrCheck
-    Friend WithEvents ucrInputFillDicrete As ucrInputComboBox
-    Friend WithEvents lblFillDiscrete As Label
-    Friend WithEvents lblColourDiscrete As Label
-    Friend WithEvents ucrInputColourDiscrete As ucrInputComboBox
     Friend WithEvents rdoModifyColour As RadioButton
     Friend WithEvents rdoNoColour As RadioButton
     Friend WithEvents ucrPnlColour As UcrPanel
+    Friend WithEvents ucrChkColourDiscrete As ucrCheck
+    Friend WithEvents ucrChkFillDiscrete As ucrCheck
 End Class
 
 

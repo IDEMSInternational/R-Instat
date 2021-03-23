@@ -410,11 +410,11 @@ Public Class sdgPlots
 
         ucrChkApplyChanges.SetText("Apply Changes to Colour Scale")
 
-        ucrInputFillDicrete.SetLinkedDisplayControl(lblFillDiscrete)
-        ucrInputFillDicrete.SetItems({"Discrete", "Continous"})
+        ucrChkAddFillScale.AddToLinkedControls(ucrChkApplyChanges, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=True)
+        ucrChkApplyChanges.AddToLinkedControls(ucrPnlColour, {False}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrInputColourDiscrete.SetLinkedDisplayControl(lblColourDiscrete)
-        ucrInputColourDiscrete.SetItems({"Discrete", "Continous"})
+        ucrChkFillDiscrete.SetText("Discrete")
+        ucrChkColourDiscrete.SetText("Discrete")
 
         ucrPnlColour.AddRadioButton(rdoNoColour)
         ucrPnlColour.AddRadioButton(rdoModifyColour)
@@ -423,8 +423,6 @@ Public Class sdgPlots
         ucrPnlColour.AddParameterPresentCondition(rdoNoColour, "scale_colour", False)
 
         grpFillScale.Visible = False
-        grpColourScale.Visible = False
-        grpColourScale.Enabled = False
     End Sub
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction, clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector, bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing,
@@ -536,7 +534,7 @@ Public Class sdgPlots
         ucrNudColourScaleMapBegins.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrNudColourScaleMapEnds.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkColourScaleReverseOrder.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkApplyChanges.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkApplyChanges.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlColour.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
@@ -904,23 +902,11 @@ Public Class sdgPlots
     Private Sub ucrChkAddFillScale_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFillScale.ControlValueChanged
         If ucrChkAddFillScale.Checked Then
             clsBaseOperator.AddParameter("scale_fill", clsRFunctionParameter:=clsScaleFillViridisFunction, iPosition:=3)
+            clsBaseOperator.RemoveParameterByName("scale_colour")
             grpFillScale.Visible = True
         Else
             clsBaseOperator.RemoveParameterByName("scale_fill")
             grpFillScale.Visible = False
-        End If
-    End Sub
-
-
-    Private Sub ucrChkApplyChanges_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkApplyChanges.ControlValueChanged
-        If ucrChkApplyChanges.Checked Then
-            clsScaleFillViridisFunction.AddParameter("aesthetics", clsRFunctionParameter:=clsAestheticFunction, iPosition:=6)
-            grpColourScale.Enabled = False
-            ucrPnlColour.Enabled = False
-        Else
-            clsScaleFillViridisFunction.RemoveParameterByName("aesthetics")
-            grpColourScale.Enabled = True
-            ucrPnlColour.Enabled = True
         End If
     End Sub
 
@@ -967,19 +953,19 @@ Public Class sdgPlots
             If expDateType IsNot Nothing AndAlso expDateType.Type <> Internals.SymbolicExpressionType.Null Then
                 strColumnType = (expDateType.AsCharacter(0)).ToLower
                 If strColumnType = "factor" OrElse strColumnType = "logical" OrElse strColumnType = "character" Then
-                    ucrInputFillDicrete.SetText("Discrete")
-                    ucrInputColourDiscrete.SetText("Discrete")
+                    ucrChkFillDiscrete.Checked = True
+                    ucrChkColourDiscrete.Checked = True
                 ElseIf strColumnType = "numeric" Then
-                    ucrInputFillDicrete.SetText("Continous")
-                    ucrInputColourDiscrete.SetText("Continous")
+                    ucrChkFillDiscrete.Checked = False
+                    ucrChkColourDiscrete.Checked = False
                 End If
             Else
-                ucrInputFillDicrete.SetText("Discrete")
-                ucrInputColourDiscrete.SetText("Discrete")
+                ucrChkFillDiscrete.Checked = True
+                ucrChkColourDiscrete.Checked = True
             End If
         Else
-            ucrInputFillDicrete.SetText("Discrete")
-            ucrInputColourDiscrete.SetText("Discrete")
+            ucrChkFillDiscrete.Checked = True
+            ucrChkColourDiscrete.Checked = True
         End If
 
     End Sub
@@ -988,29 +974,37 @@ Public Class sdgPlots
         CheckForDiscreteContinuous()
     End Sub
 
-    Private Sub Discrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputColourDiscrete.ControlValueChanged, ucrInputFillDicrete.ControlValueChanged
-        If ucrInputColourDiscrete.GetText = "Discrete" Then
+    Private Sub AddRemoveColour()
+        If ucrChkApplyChanges.Checked Then
+            clsScaleFillViridisFunction.AddParameter("aesthetics", clsRFunctionParameter:=clsAestheticFunction, iPosition:=6)
+            clsBaseOperator.RemoveParameterByName("scale_colour")
+            grpColourScale.Visible = False
+        Else
+            clsScaleFillViridisFunction.RemoveParameterByName("aesthetics")
+            If rdoNoColour.Checked Then
+                clsBaseOperator.RemoveParameterByName("scale_colour")
+                grpColourScale.Visible = False
+            ElseIf rdoModifyColour.Checked Then
+                clsBaseOperator.AddParameter("scale_colour", clsRFunctionParameter:=clsScaleColourViridisFunction, iPosition:=8)
+                grpColourScale.Visible = True
+            End If
+        End If
+    End Sub
+
+    Private Sub ucrPnlColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColour.ControlValueChanged, ucrChkApplyChanges.ControlValueChanged
+        AddRemoveColour()
+    End Sub
+
+    Private Sub Discrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFillDiscrete.ControlValueChanged, ucrChkColourDiscrete.ControlValueChanged
+        If ucrChkColourDiscrete.Checked Then
             clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
         Else
             clsScaleColourViridisFunction.AddParameter("discrete", "FALSE", iPosition:=7)
         End If
-
-        If ucrInputFillDicrete.GetText = "Discrete" Then
+        If ucrChkFillDiscrete.Checked Then
             clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
         Else
             clsScaleFillViridisFunction.AddParameter("discrete", "FALSE", iPosition:=7)
-        End If
-    End Sub
-
-    Private Sub ucrPnlColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColour.ControlValueChanged
-        If rdoNoColour.Checked Then
-            clsBaseOperator.RemoveParameterByName("scale_colour")
-            grpColourScale.Visible = False
-            grpColourScale.Enabled = False
-        ElseIf rdoModifyColour.checked Then
-            clsBaseOperator.AddParameter("scale_colour", clsRFunctionParameter:=clsScaleColourViridisFunction, iPosition:=8)
-            grpColourScale.Visible = True
-            grpColourScale.Enabled = True
         End If
     End Sub
 End Class
