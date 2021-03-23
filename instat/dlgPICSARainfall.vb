@@ -89,7 +89,6 @@ Public Class dlgPICSARainfall
 
     Private bUpdateComboOptions As Boolean = True
     Private bUpdatingParameters As Boolean = False
-    Private dctComboReceiver As New Dictionary(Of ucrInputComboBox, ucrReceiverSingle)
 
     Private clsGeomTextLabelMeanLine As New RFunction
     Private clsAesGeomTextLabelMeanLine As New RFunction
@@ -167,8 +166,6 @@ Public Class dlgPICSARainfall
         ucrReceiverFacetBy.bWithQuotes = False
         ucrReceiverFacetBy.SetParameterIsString()
         ucrReceiverFacetBy.SetValuesToIgnore({"."})
-
-        dctComboReceiver.Add(ucrInputStation, ucrReceiverFacetBy)
 
         ucrChkPoints.SetText("Add Points")
         ucrChkPoints.AddParameterPresentCondition(True, "points")
