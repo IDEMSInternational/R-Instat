@@ -116,7 +116,7 @@ DataSheet$set("public", "save_calculation", function(calc) {
 instat_calculation <- R6::R6Class("instat_calculation",
                        public = list(
                          initialize = function(function_exp = "", type = "", name = "", result_name = "", result_data_frame = "", manipulations = list(),
-                                               sub_calculations = list(), calculated_from = list(), save = 0, before, adjacent_column) {
+                                               sub_calculations = list(), calculated_from = list(), save = 0, before = FALSE, adjacent_column = "") {
                            if((type == "calculation" || type == "summary") && missing(result_name)) stop("result_name must be provided for calculation and summary types")
                            if(type == "combination" && save > 0) {
                              warning("combination types do not have a main calculation which can be saved. save_output will be stored as FALSE")
