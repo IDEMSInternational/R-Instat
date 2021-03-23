@@ -147,7 +147,7 @@ Public Class sdgClimaticDataEntry
         Next
 
         grdWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdWorkSheet.Rows, grdWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
-
+        grdWorkSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
         Return grdWorkSheet
     End Function
 
