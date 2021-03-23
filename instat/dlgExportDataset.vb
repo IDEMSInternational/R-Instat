@@ -14,16 +14,17 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports System.IO
+Imports instat
 Imports instat.Translations
 Public Class dlgExportDataset
     Dim bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsDefaultFunction As New RFunction
-    Private strCurrentFileName As String
+    Private clsDefaultFunction As RFunction
 
     Private Sub dlgExportDataset_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
+        'temporarily commented out because it overwrites lblConfirm text contents
+        'autoTranslate(Me) 
+
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -33,26 +34,31 @@ Public Class dlgExportDataset
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        TestOkEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrInputExportFile.IsReadOnly = True
-        ucrAvailableSheets.SetParameter(New RParameter("x", 0))
-        ucrAvailableSheets.SetParameterIsRFunction()
-        ucrAvailableSheets.SetText("Data Frame to Export:")
+        'multiple reciever control that holds selected objects
+        ucrReceiverMultipleDataFrames.SetParameter(New RParameter("x", 0))
+        ucrReceiverMultipleDataFrames.SetParameterIsRFunction()
+        ucrReceiverMultipleDataFrames.Selector = ucrSelectorDataFrames
+        ucrReceiverMultipleDataFrames.SetMeAsReceiver()
+        ucrReceiverMultipleDataFrames.strSelectorHeading = "Data Frames"
+        ucrReceiverMultipleDataFrames.SetItemType("dataframe")
 
-        ucrInputExportFile.SetParameter(New RParameter("file", 1))
-
-        lblConfirmText.Text = "Click Ok to Confirm the Export"
-        lblConfirmText.ForeColor = Color.Red
+        'file path control 
+        ucrFilePath.SetPathControlParameter(New RParameter("file", 1))
     End Sub
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
 
-        ucrInputExportFile.SetName("")
-        ucrAvailableSheets.Reset()
+        ucrSelectorDataFrames.Reset()
+        chkSaveAsSingleFile.Checked = False
+        chkSaveAsSingleFile.Visible = False
+        cboFileType.SelectedIndex = 0
+        lblConfirm.Visible = False
+        ucrFilePath.ResetPathControl()
+
         clsDefaultFunction.SetPackageName("rio")
         clsDefaultFunction.SetRCommand("export")
 
@@ -60,57 +66,153 @@ Public Class dlgExportDataset
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'done this way because, the selected base function could be a command string or clsDefaultFunction.
+        'so we don't want to reset the controls if command string was the base function on reloading the form
+        If bReset Then
+            ucrReceiverMultipleDataFrames.SetRCode(clsDefaultFunction, bReset)
+            ucrFilePath.SetPathControlRcode(clsDefaultFunction, bReset)
+        End If
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrInputExportFile.IsEmpty AndAlso ucrAvailableSheets.cboAvailableDataFrames.Text <> "" Then
+        If Not ucrFilePath.IsEmpty AndAlso Not ucrReceiverMultipleDataFrames.IsEmpty Then
             ucrBase.OKEnabled(True)
+            lblConfirm.Visible = True
         Else
             ucrBase.OKEnabled(False)
-        End If
-        If Not ucrInputExportFile.IsEmpty() Then
-            lblConfirmText.Show()
-            ucrBase.OKEnabled(True)
-        Else
-            lblConfirmText.Hide()
-            ucrBase.OKEnabled(False)
+            lblConfirm.Visible = False
         End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+    End Sub
+
+    Private Sub ucrReceiverMultipleDataFrames_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrReceiverMultipleDataFrames.ControlContentsChanged
+        chkSaveAsSingleFile.Visible = ucrReceiverMultipleDataFrames.GetVariableNamesList().Length > 1
+        ChangeFileControlsValues()
+        ucrFilePath.Clear() 'will raise event FilePathChanged
+    End Sub
+
+    Private Sub chkSaveAsSingleFile_CheckedChanged(sender As Object, e As EventArgs) Handles chkSaveAsSingleFile.CheckedChanged
+        ChangeFileControlsValues()
+        ucrFilePath.Clear() 'will raise event FilePathChanged
+    End Sub
+
+    Private Sub cboFileExtension_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboFileType.SelectedIndexChanged
+        ucrFilePath.Clear() 'will raise event FilePathChanged
+        ucrFilePath.FilePathDialogFilter = GetFilePathDialogFilterText(cboFileType.SelectedItem)
+    End Sub
+
+    ''' <summary>
+    ''' this event will always be called when changes happen to the core controls of the form;
+    ''' receiver, file path, save as single checkbox
+    ''' </summary>
+    Private Sub ucrFilePath_FilePathChanged() Handles ucrFilePath.FilePathChanged
+        'if no or single data frame selected or save as single checked then just set the base function to the default
+        If ucrReceiverMultipleDataFrames.GetVariableNamesList().Length <= 1 OrElse chkSaveAsSingleFile.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+            lblConfirm.Text = "Click Ok to Confirm the Export."
+        Else
+            'else, create a string command for exporting separate files to a directory.
+            'note, as of 09/09/2020 rio didn't support exporting separate files in 1 command see issue #5590
+            Dim lstItems As String() = ucrReceiverMultipleDataFrames.GetVariableNamesList(bWithQuotes:=False)
+            Dim strCommand As String = ""
+            For Each strItem In lstItems
+                strCommand = strCommand & "rio::export( x = data_book$get_data_frame(data_name=""" & strItem & """), file = """ & ucrFilePath.FilePath & "/" & strItem & GetSelectedExtension(cboFileType.SelectedItem) & """)" & Environment.NewLine
+            Next
+            ucrBase.clsRsyntax.SetCommandString(strCommand)
+            lblConfirm.Text = "Files with the same names will be overwritten." & Environment.NewLine & "Click Ok to Confirm the Export."
+        End If
         TestOkEnabled()
     End Sub
 
-    Private Sub cmdBrowse_Click(sender As Object, e As EventArgs) Handles cmdBrowse.Click
-        Using dlgSave As New SaveFileDialog
-            dlgSave.Title = "Export File Dialog"
-            dlgSave.Filter = "Comma separated file (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx|TAB-separated data (*.tsv)|*.tsv|Pipe-separated data (*.psv)|*.psv|Feather r / Python interchange format (*.feather)|*.feather|Fixed-Width format data (*.fwf)|*.fwf|Serialized r objects (*.rds)|*.rds|Saved r objects (*.RData)|*.RData|JSON(*.json)|*.json|YAML(*.yml)|*.yml|Stata(*.dta)|*.dta|SPSS(*.sav)|*.sav|XBASE database files (*.dbf)|*.dbf| Weka Attribute - Relation File Format (*.arff)|*.arff|r syntax object (*.R)|*.R|Xml(*.xml)|*.xml|HTML(*.html)|*.html"
-            If Not String.IsNullOrEmpty(strCurrentFileName) Then
-                dlgSave.FileName = Path.GetFileName(strCurrentFileName)
-                dlgSave.InitialDirectory = Path.GetDirectoryName(strCurrentFileName)
-            Else
-                dlgSave.FileName = ucrAvailableSheets.cboAvailableDataFrames.Text
-                dlgSave.InitialDirectory = frmMain.clsInstatOptions.strWorkingDirectory
-            End If
-            If dlgSave.ShowDialog = DialogResult.OK Then
-                ucrInputExportFile.SetName(dlgSave.FileName.Replace("\", "/"))
-                strCurrentFileName = dlgSave.FileName
-            End If
-        End Using
+
+    ''' <summary>
+    ''' changes the file path and cboFileType control values; 
+    ''' the FolderBrowse, DefaultFileSuggestionName, FilePathDialogFilter, selectable file types
+    ''' the changed settings determine the behaviour of the file path contro
+    ''' </summary>
+    Private Sub ChangeFileControlsValues()
+        Dim strPrevSelectedFileType As String = cboFileType.SelectedItem
+        Dim iSelectedDataFrames As Integer = ucrReceiverMultipleDataFrames.GetVariableNamesList().Length
+        ucrFilePath.FolderBrowse = False 'set file path control to open default SaveFileDialog prompt
+        ucrFilePath.DefaultFileSuggestionName = ""
+        ucrFilePath.FilePathDialogFilter = ""
+        cboFileType.Items.Clear()
+
+
+        ucrFilePath.FolderBrowse = iSelectedDataFrames > 1 AndAlso Not chkSaveAsSingleFile.Checked
+
+        If iSelectedDataFrames > 1 AndAlso chkSaveAsSingleFile.Checked Then
+            'file types currently supported insaving of multiple files into a single file
+            cboFileType.Items.Add("Excel files (*.xlsx)")
+            cboFileType.Items.Add("Serialized r objects (*.rds)")
+            cboFileType.Items.Add("Saved r objects (*.RData)")
+            cboFileType.Items.Add("HTML (*.html)")
+        Else
+            'file types supported
+            cboFileType.Items.Add("Comma separated file (*.csv)")
+            cboFileType.Items.Add("Excel files (*.xlsx)")
+            cboFileType.Items.Add("TAB-separated data (*.tsv)")
+            cboFileType.Items.Add("Pipe-separated data (*.psv)")
+            cboFileType.Items.Add("Feather r / Python interchange format (*.feather)")
+            cboFileType.Items.Add("Fixed-Width format data (*.fwf)")
+            cboFileType.Items.Add("Serialized r objects (*.rds)")
+            cboFileType.Items.Add("Saved r objects (*.RData)")
+            cboFileType.Items.Add("JSON (*.json)")
+            cboFileType.Items.Add("YAML (*.yml)")
+            cboFileType.Items.Add("Stata (*.dta)")
+            cboFileType.Items.Add("SPSS (*.sav)")
+            cboFileType.Items.Add("XBASE database files (*.dbf)")
+            cboFileType.Items.Add("Weka Attribute - Relation File Format (*.arff)")
+            cboFileType.Items.Add("r syntax object (*.R)")
+            cboFileType.Items.Add("Xml (*.xml)")
+            cboFileType.Items.Add("HTML (*.html)")
+            cboFileType.Items.Add("Matlab (*.mat)")
+            cboFileType.Items.Add("SAS (*.sas7bdat)")
+            cboFileType.Items.Add("SAS XPORT (*.xpt)")
+
+            'set the default suggested name
+            ucrFilePath.DefaultFileSuggestionName = ucrReceiverMultipleDataFrames.GetVariableNames(bWithQuotes:=False)
+        End If
+
+        'previous selected file type may not be there in the current combobox items
+        cboFileType.SelectedItem = strPrevSelectedFileType
+        If String.IsNullOrEmpty(cboFileType.SelectedItem) Then
+            cboFileType.SelectedIndex = 0
+        End If
+
+        ucrFilePath.FilePathDialogFilter = GetFilePathDialogFilterText(cboFileType.SelectedItem)
     End Sub
 
-    Private Sub ucrInputExportFile_Click(sender As Object, e As EventArgs) Handles ucrInputExportFile.Click
-        cmdBrowse_Click(sender, e)
-    End Sub
+    ''' <summary>
+    ''' expected string format  "filetype (*.ext)" 
+    ''' </summary>
+    ''' <param name="strText"></param>
+    ''' <returns></returns>
+    Private Function GetFilePathDialogFilterText(strText As String) As String
+        If String.IsNullOrEmpty(strText) Then
+            Return ""
+        End If
+        'example of required format; Excel files (*.xlsx)|*.xlsx
+        Dim arrStr() As String = strText.Split({"(", ")"}, StringSplitOptions.RemoveEmptyEntries)
+        Return arrStr(0) & "(" & arrStr(1) & ")|" & arrStr(1)
 
-    Private Sub ucrInputExportFile_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrInputExportFile.ControlContentsChanged, ucrAvailableSheets.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
+    End Function
 
-    Private Sub ucrAvailableSheets_DataFrameChanged(sender As Object, e As EventArgs, strPrevDataFrame As String) Handles ucrAvailableSheets.DataFrameChanged
-        strCurrentFileName = ""
-    End Sub
+    ''' <summary>
+    ''' expected string format  "filetype (*.ext)" 
+    ''' </summary>
+    ''' <param name="strText"></param>
+    ''' <returns></returns>
+    Private Function GetSelectedExtension(strText As String) As String
+        If String.IsNullOrEmpty(strText) Then
+            Return ""
+        End If
+        'example of required format;.xlsx
+        Return strText.Split({"(", "*", ")"}, StringSplitOptions.RemoveEmptyEntries)(1)
+    End Function
+
 End Class

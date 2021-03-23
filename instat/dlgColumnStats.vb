@@ -59,8 +59,6 @@ Public Class dlgColumnStats
 
         ucrReceiverByFactor.SetParameter(New RParameter("factors", 2))
         ucrReceiverByFactor.Selector = ucrSelectorForColumnStatistics
-        ucrReceiverByFactor.SetExcludedDataTypes({"numeric"})
-        ucrReceiverByFactor.strSelectorHeading = "Non-numeric(s)"
         ucrReceiverByFactor.SetParameterIsString()
 
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 3))
@@ -113,9 +111,9 @@ Public Class dlgColumnStats
         clsConcFunction.SetRCommand("c")
 
         clsSummariesList.SetRCommand("c")
-        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False)
-        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False)
-        clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False)
+        clsSummariesList.AddParameter("summary_count_non_missing", Chr(34) & "summary_count_non_missing" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsSummariesList.AddParameter("summary_count", Chr(34) & "summary_count" & Chr(34), bIncludeArgumentName:=False, iPosition:=3)
+        clsSummariesList.AddParameter("summary_sum", Chr(34) & "summary_sum" & Chr(34), bIncludeArgumentName:=False, iPosition:=11)
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$calculate_summary")
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)

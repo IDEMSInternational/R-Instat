@@ -21,6 +21,7 @@ Public Class dlgInventoryPlot
     Private clsInventoryPlot As RFunction
     Private clsClimaticMissing As RFunction
     Private clsClimaticDetails As RFunction
+    Private bResetSubdialog As Boolean = True
 
     Private Sub dlgInventoryPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -56,6 +57,9 @@ Public Class dlgInventoryPlot
         ucrReceiverElements.Selector = ucrInventoryPlotSelector
         ucrReceiverElements.SetParameterIsString()
         ucrReceiverElements.strSelectorHeading = "Numerics"
+        ucrReceiverElements.SetIncludedDataTypes({"numeric"})
+        ucrReceiverElements.SetClimaticType("element")
+        ucrReceiverElements.bAutoFill = True
 
         ucrReceiverStation.Selector = ucrInventoryPlotSelector
         ucrReceiverStation.SetClimaticType("station")
@@ -185,6 +189,7 @@ Public Class dlgInventoryPlot
         ucrReceiverElements.SetMeAsReceiver()
         ucrSaveGraph.Reset()
         ucrSaveDetails.Reset()
+        bResetSubdialog = True
 
         clsInventoryPlot.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$make_inventory_plot")
         clsInventoryPlot.AddParameter("coord_flip", "FALSE", iPosition:=4)
@@ -326,6 +331,12 @@ Public Class dlgInventoryPlot
             clsClimaticDetails.iCallType = 2
         End If
 
+    End Sub
+
+    Private Sub cmdInventoryPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdInventoryPlotOptions.Click
+        sdgInventoryPlot.SetRCode(clsInventoryNew:=clsInventoryPlot, bReset:=bResetSubdialog)
+        sdgInventoryPlot.ShowDialog()
+        bResetSubdialog = False
     End Sub
 
     Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlContentsChanged, ucrSaveDetails.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrChkSummary.ControlContentsChanged, ucrChkDetails.ControlContentsChanged, ucrChkYear.ControlContentsChanged, ucrChkMonth.ControlContentsChanged, ucrChkDay.ControlContentsChanged, ucrChkHour.ControlContentsChanged, ucrChkMinute.ControlContentsChanged, ucrChkSecond.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged

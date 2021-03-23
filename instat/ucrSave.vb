@@ -495,6 +495,13 @@ Public Class ucrSave
         ucrInputComboSave.Enabled = ucrChkSave.Checked
         ucrInputTextSave.Visible = False
         ucrInputComboSave.Visible = False
+        btnColumnPosition.Visible = False
+
+        'always hide position button if save type is not a column
+        If strSaveType = "column" Then
+            btnColumnPosition.Visible = ucrChkSave.Checked
+        End If
+
         If strAssignToIfUnchecked <> "" Then
             If ucrChkSave.Checked Then
                 If bIsComboBox Then
@@ -608,6 +615,8 @@ Public Class ucrSave
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempModel:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                             Case "table"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempTable:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
+                            Case "surv"
+                                clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempSurv:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix)
                         End Select
                     Else
                         clsTempCode.RemoveAssignTo()
@@ -621,7 +630,7 @@ Public Class ucrSave
     '''
     ''' <param name="ucrChangedControl">    Not used. </param>
     '''--------------------------------------------------------------------------------------------
-    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComboSave.ControlContentsChanged, ucrInputTextSave.ControlContentsChanged
+    Private Sub ucrInputControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComboSave.ControlContentsChanged, ucrInputTextSave.ControlContentsChanged, ucrChkSave.ControlContentsChanged
         OnControlContentsChanged()
     End Sub
     '''--------------------------------------------------------------------------------------------
@@ -883,7 +892,7 @@ Public Class ucrSave
     '''             These variables specify the position of the new column in the data frame 
     '''             (start, end or before/after a specified column).<para>
     '''             This subroutine is called automatically when the receiver (specifying a column name) linked to 
-    '''             this control changes. </para><para>
+    '''             clsColPosFunction changes. </para><para>
     '''             If the save object is not a column then this function does nothing.</para><para>
     '''             If the user has selected a column in the linked receiver, then sets the 
     '''             parameters to ensure that the new column is added directly after the receiver 

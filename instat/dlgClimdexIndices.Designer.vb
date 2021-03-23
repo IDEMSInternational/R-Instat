@@ -43,7 +43,7 @@ Partial Class dlgClimdexIndices
         Me.lblTmin = New System.Windows.Forms.Label()
         Me.lblPrec = New System.Windows.Forms.Label()
         Me.cmdIndices = New System.Windows.Forms.Button()
-        Me.lblDate = New System.Windows.Forms.Label()
+        Me.lblStation = New System.Windows.Forms.Label()
         Me.lblMonth = New System.Windows.Forms.Label()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.rdoAnnual = New System.Windows.Forms.RadioButton()
@@ -55,12 +55,14 @@ Partial Class dlgClimdexIndices
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrChkSave = New instat.ucrCheck()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverPrec = New instat.ucrReceiverSingle()
         Me.ucrReceiverTmin = New instat.ucrReceiverSingle()
         Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
         Me.ucrSelectorClimdex = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblDate = New System.Windows.Forms.Label()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblTmax
@@ -79,7 +81,7 @@ Partial Class dlgClimdexIndices
         '
         resources.ApplyResources(Me.lblPrec, "lblPrec")
         Me.lblPrec.Name = "lblPrec"
-        Me.lblPrec.Tag = "Rainfall:"
+        Me.lblPrec.Tag = ""
         '
         'cmdIndices
         '
@@ -88,11 +90,11 @@ Partial Class dlgClimdexIndices
         Me.cmdIndices.Tag = "Indices..."
         Me.cmdIndices.UseVisualStyleBackColor = True
         '
-        'lblDate
+        'lblStation
         '
-        resources.ApplyResources(Me.lblDate, "lblDate")
-        Me.lblDate.Name = "lblDate"
-        Me.lblDate.Tag = "Date:"
+        resources.ApplyResources(Me.lblStation, "lblStation")
+        Me.lblStation.Name = "lblStation"
+        Me.lblStation.Tag = ""
         '
         'lblMonth
         '
@@ -135,12 +137,14 @@ Partial Class dlgClimdexIndices
         'lblSelectedIndices
         '
         resources.ApplyResources(Me.lblSelectedIndices, "lblSelectedIndices")
+        Me.lblSelectedIndices.ForeColor = System.Drawing.Color.Green
         Me.lblSelectedIndices.Name = "lblSelectedIndices"
         Me.lblSelectedIndices.Tag = ""
         '
         'lblTotalIndices
         '
         resources.ApplyResources(Me.lblTotalIndices, "lblTotalIndices")
+        Me.lblTotalIndices.ForeColor = System.Drawing.Color.Green
         Me.lblTotalIndices.Name = "lblTotalIndices"
         Me.lblTotalIndices.Tag = ""
         '
@@ -173,14 +177,14 @@ Partial Class dlgClimdexIndices
         resources.ApplyResources(Me.ucrChkSave, "ucrChkSave")
         Me.ucrChkSave.Name = "ucrChkSave"
         '
-        'ucrReceiverDate
+        'ucrReceiverStation
         '
-        Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.ucrSelector = Nothing
+        Me.ucrReceiverStation.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverStation, "ucrReceiverStation")
+        Me.ucrReceiverStation.Name = "ucrReceiverStation"
+        Me.ucrReceiverStation.Selector = Nothing
+        Me.ucrReceiverStation.strNcFilePath = ""
+        Me.ucrReceiverStation.ucrSelector = Nothing
         '
         'ucrReceiverPrec
         '
@@ -222,10 +226,27 @@ Partial Class dlgClimdexIndices
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'lblDate
+        '
+        resources.ApplyResources(Me.lblDate, "lblDate")
+        Me.lblDate.Name = "lblDate"
+        Me.lblDate.Tag = ""
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
         'dlgClimdexIndices
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblDate)
+        Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.lblTotalIndices)
         Me.Controls.Add(Me.lblSelectedIndices)
         Me.Controls.Add(Me.lblIndicesSelectedOutOf)
@@ -237,8 +258,8 @@ Partial Class dlgClimdexIndices
         Me.Controls.Add(Me.ucrReceiverYear)
         Me.Controls.Add(Me.ucrReceiverMonth)
         Me.Controls.Add(Me.ucrChkSave)
-        Me.Controls.Add(Me.lblDate)
-        Me.Controls.Add(Me.ucrReceiverDate)
+        Me.Controls.Add(Me.lblStation)
+        Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.cmdIndices)
         Me.Controls.Add(Me.lblPrec)
         Me.Controls.Add(Me.lblTmin)
@@ -268,8 +289,8 @@ Partial Class dlgClimdexIndices
     Friend WithEvents lblTmin As Label
     Friend WithEvents lblPrec As Label
     Friend WithEvents cmdIndices As Button
-    Friend WithEvents lblDate As Label
-    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
+    Friend WithEvents lblStation As Label
+    Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents ucrChkSave As ucrCheck
     Friend WithEvents lblYear As Label
     Friend WithEvents lblMonth As Label
@@ -281,4 +302,6 @@ Partial Class dlgClimdexIndices
     Friend WithEvents lblTotalIndices As Label
     Friend WithEvents lblSelectedIndices As Label
     Friend WithEvents lblIndicesSelectedOutOf As Label
+    Friend WithEvents lblDate As Label
+    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
 End Class

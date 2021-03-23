@@ -171,6 +171,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsCompareTwoOptionsLines.vb" />
     <Compile Include="clsCompareTwoOptionsPoints.vb" />
@@ -194,6 +195,54 @@
       <DependentUpon>dlgCircular.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCircular.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgCircularDensityPlot.Designer.vb">
+      <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCircularDensityPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticDataEntry.Designer.vb">
+      <DependentUpon>dlgClimaticDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPCountRecords.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPCountRecords.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPIndices.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPIndices.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPIndices.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPRegionAverage.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPRegionAverage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPRegionAverage.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPSummaryFile.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPSummaryFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPSummaryFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPTrendGraphs.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPTrendGraphs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPTrendGraphs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPVariogram.Designer.vb">
+      <DependentUpon>dlgClimaticNCMPVariogram.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticNCMPVariogram.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimsoftWizard.Designer.vb">
@@ -220,6 +269,12 @@
     <Compile Include="dlgDisplayTopN.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgExportToWWR.Designer.vb">
+      <DependentUpon>dlgExportToWWR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportToWWR.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgHomogenization.Designer.vb">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </Compile>
@@ -238,28 +293,16 @@
     <Compile Include="dlgOtherRosePlots.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgPolarAnnulus.Designer.vb">
-      <DependentUpon>dlgPolarAnnulus.vb</DependentUpon>
+    <Compile Include="dlgPasteNewColumns.Designer.vb">
+      <DependentUpon>dlgPasteNewColumns.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgPolarAnnulus.vb">
+    <Compile Include="dlgPasteNewColumns.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgPolarCluster.Designer.vb">
-      <DependentUpon>dlgPolarCluster.vb</DependentUpon>
+    <Compile Include="dlgPasteNewDataFrame.Designer.vb">
+      <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgPolarCluster.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgPolarFrequency.Designer.vb">
-      <DependentUpon>dlgPolarFrequency.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPolarFrequency.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgPolarPlot.Designer.vb">
-      <DependentUpon>dlgPolarPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPolarPlot.vb">
+    <Compile Include="dlgPasteNewDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSeasonalPlot.Designer.vb">
@@ -284,6 +327,30 @@
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgWindPollutionRose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntry.Designer.vb">
+      <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgClimaticNCMPMetadata.Designer.vb">
+      <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticNCMPMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgDistributionOptions.Designer.vb">
+      <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgDistributionOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgExportToWWR.Designer.vb">
+      <DependentUpon>sdgExportToWWR.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgExportToWWR.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgExtremesDisplayOptions.Designer.vb">
@@ -362,6 +429,12 @@
       <DependentUpon>dlgTreemap.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTreemap.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgMergeColumnsToInclude.Designer.vb">
+      <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgMergeColumnsToInclude.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgMissingOptions.Designer.vb">
@@ -2327,6 +2400,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -2611,6 +2685,30 @@
     <EmbeddedResource Include="dlgCircular.resx">
       <DependentUpon>dlgCircular.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCircularDensityPlot.resx">
+      <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticDataEntry.resx">
+      <DependentUpon>dlgClimaticDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPCountRecords.resx">
+      <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPIndices.resx">
+      <DependentUpon>dlgClimaticNCMPIndices.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPRegionAverage.resx">
+      <DependentUpon>dlgClimaticNCMPRegionAverage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPSummaryFile.resx">
+      <DependentUpon>dlgClimaticNCMPSummaryFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPTrendGraphs.resx">
+      <DependentUpon>dlgClimaticNCMPTrendGraphs.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticNCMPVariogram.resx">
+      <DependentUpon>dlgClimaticNCMPVariogram.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimsoftWizard.resx">
       <DependentUpon>dlgClimsoftWizard.vb</DependentUpon>
     </EmbeddedResource>
@@ -2624,6 +2722,9 @@
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportToWWR.resx">
+      <DependentUpon>dlgExportToWWR.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </EmbeddedResource>
@@ -2633,17 +2734,11 @@
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPolarAnnulus.resx">
-      <DependentUpon>dlgPolarAnnulus.vb</DependentUpon>
+    <EmbeddedResource Include="dlgPasteNewColumns.resx">
+      <DependentUpon>dlgPasteNewColumns.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPolarCluster.resx">
-      <DependentUpon>dlgPolarCluster.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPolarFrequency.resx">
-      <DependentUpon>dlgPolarFrequency.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPolarPlot.resx">
-      <DependentUpon>dlgPolarPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgPasteNewDataFrame.resx">
+      <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
@@ -2656,6 +2751,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimaticDataEntry.resx">
+      <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimaticNCMPMetadata.resx">
+      <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgDistributionOptions.resx">
+      <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgExportToWWR.resx">
+      <DependentUpon>sdgExportToWWR.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgExtremesDisplayOptions.resx">
       <DependentUpon>sdgExtremesDisplayOptions.vb</DependentUpon>
@@ -2695,6 +2802,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMergeColumnsToInclude.resx">
+      <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMissingOptions.resx">
       <DependentUpon>sdgMissingOptions.vb</DependentUpon>
@@ -5111,112 +5221,22 @@
     <Content Include="static\InstatObject\R\Backend_Components\options_by_context.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\CAST\cast.rds">
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P2_Indices.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Climatic\Ghana\ghana_two_stations.RDS">
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P3_Variogram.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Climatic\Guinea\guinea_two_stations.csv">
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P4_Region_Average.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Climatic\Guinea\guinea_two_stations.RDS">
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P5_Trends_Graphs.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Climatic\Guinea\kankan.xlsx">
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P6_Count_Records.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="static\Library\Climatic\Guinea\koundara.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Kenya\western_kenya_rain.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Kenya\western_kenya_station_info.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Nigeria\samaru_56.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\rain_galle.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Tanzania\dodoma.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\_Satellite\CMSAF_CFC_DailyMean_1991-2015_Dodoma.nc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\_Satellite\CMSAF_SDU_DailySums_1983-2015_Dodoma.nc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\_Satellite\CMSAF_SISc_DailyMean_1983-2015_Dodoma.nc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\_Satellite\CMSAF_SIS_DailyMean_1983-2015_Dodoma.nc">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\experimental_survey.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\introductory_guide_datasets.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\IRLI\cs01.rds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\IRLI\cs12.rds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\IRLI\cso3.rds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\IRLI\cso4.rds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\IRLI\cso7.rds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\country.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\country.year.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\european_aid.rds">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\idb.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\uganda15-18.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\wb_ppp_1990-2014_long.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\worldbank.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Procurement\worldbank97-14.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Rwanda\rwanda.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Nigeria\samaru_56.csv">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Kenya\western_kenya.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Zambia\moorings.RDS">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\Lesotho\thaba_tseka.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="static\Library\Climatic\climatic_guide_datasets.xlsx">
+    <Content Include="static\InstatObject\R\Backend_Components\NCMP\P7_Summary.R">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -5258,7 +5278,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="obj\" />
-    <Folder Include="static\Library\Options by Context\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

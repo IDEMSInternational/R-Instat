@@ -62,6 +62,8 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorRain = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.lblGreater = New System.Windows.Forms.Label()
+        Me.ucrInputSameValue = New instat.ucrInputTextBox()
         Me.grpLogicalCalculatedColumns.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -330,10 +332,25 @@ Partial Class dlgClimaticCheckDataRain
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'lblGreater
+        '
+        resources.ApplyResources(Me.lblGreater, "lblGreater")
+        Me.lblGreater.Name = "lblGreater"
+        '
+        'ucrInputSameValue
+        '
+        Me.ucrInputSameValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputSameValue.IsMultiline = False
+        Me.ucrInputSameValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSameValue, "ucrInputSameValue")
+        Me.ucrInputSameValue.Name = "ucrInputSameValue"
+        '
         'dlgClimaticCheckDataRain
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputSameValue)
+        Me.Controls.Add(Me.lblGreater)
         Me.Controls.Add(Me.lblThresholdmm)
         Me.Controls.Add(Me.ucrInputThreshold)
         Me.Controls.Add(Me.lblMissingThreshold)
@@ -420,4 +437,6 @@ Partial Class dlgClimaticCheckDataRain
     Friend WithEvents lblMissingThreshold As Label
     Friend WithEvents ucrInputThreshold As ucrInputTextBox
     Friend WithEvents lblThresholdmm As Label
+    Friend WithEvents lblGreater As Label
+    Friend WithEvents ucrInputSameValue As ucrInputTextBox
 End Class

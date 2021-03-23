@@ -78,7 +78,7 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.SetPrefix("count")
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
-        ucrSaveStringHandling.SetIsTextBox()
+        ucrSaveStringHandling.SetIsComboBox()
         ucrSaveStringHandling.SetLabelText("Prefix for New Column:")
         ucrSaveStringHandling.setLinkedReceiver(ucrReceiverStringHandling) 'added
 

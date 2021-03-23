@@ -349,7 +349,6 @@ Public Class clsGridLink
         Dim bApplyColumnColours As Boolean
         Dim i, j, k As Integer
         Dim strCurrColNames As String = ""
-        Dim strCurrHeader As String
         Dim lstColumnNames As New List(Of String)
 
         iCount = 0
@@ -436,29 +435,40 @@ Public Class clsGridLink
                 vecColumnDataTypes = frmMain.clsRLink.RunInternalScriptGetValue(clsGetVarMetaFunc.ToScript()).AsCharacter
 
                 For k = 0 To dfTemp.ColumnCount - 1
-                    strCurrHeader = lstColumnNames(k)
-                    If vecColumnDataTypes(k).Contains("factor") AndAlso vecColumnDataTypes(k).Contains("ordered") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (o.f)"
-                        fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.Blue
-                    ElseIf vecColumnDataTypes(k).Contains("factor") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (f)"
-                        fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.Blue
-                    ElseIf vecColumnDataTypes(k).Contains("character") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (c)"
-                        fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
-                    ElseIf vecColumnDataTypes(k).Contains("Date") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (D)"
-                        fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
-                    ElseIf vecColumnDataTypes(k).Contains("logical") Then
-                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (L)"
-                        fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
-                    Else
-                        fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader
-                        fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
+                    Dim strType As String
+                    Dim clsHeader As ColumnHeader
+
+                    strType = vecColumnDataTypes(k)
+                    clsHeader = fillWorkSheet.ColumnHeaders(k)
+                    clsHeader.Text = lstColumnNames(k)
+                    clsHeader.TextColor = Graphics.SolidColor.DarkBlue
+
+                    If strType.Contains("factor") AndAlso strType.Contains("ordered") Then
+                        clsHeader.Text &= " (O.F)"
+                        clsHeader.TextColor = Graphics.SolidColor.Blue
+                    ElseIf strType.Contains("factor") Then
+                        clsHeader.Text &= " (F)"
+                        clsHeader.TextColor = Graphics.SolidColor.Blue
+                    ElseIf strType.Contains("character") Then
+                        clsHeader.Text &= " (C)"
+                    ElseIf strType.Contains("Date") OrElse strType.Contains("POSIXct") OrElse strType.Contains("POSIXt") OrElse strType.Contains("hms") OrElse strType.Contains("difftime") OrElse strType.Contains("Duration") OrElse strType.Contains("Period") OrElse strType.Contains("Interval") Then
+                        clsHeader.Text &= " (D)"
+                    ElseIf strType.Contains("logical") Then
+                        clsHeader.Text &= " (L)"
+                        ' Structured columns e.g. "circular" are coded with "(S)"
+                    ElseIf strType.Contains("circular") Then
+                        clsHeader.Text &= " (S)"
+                        ' Types of data for specific Application areas e.g. survival are coded with "(A)"
+                        ' No examples implemented yet.
+                        'ElseIf strType.Contains() Then
+                        '    fillWorkSheet.ColumnHeaders(k).Text = strCurrHeader & " (A)"
+                        '    fillWorkSheet.ColumnHeaders(k).TextColor = Graphics.SolidColor.DarkBlue
                     End If
                 Next
             Else
-                For k = 0 To lstColumnNames.Count - 1
+                'worksheet columns could be less than than the data frame columns, 
+                'so use worksheet ColumnCount
+                For k = 0 To fillWorkSheet.ColumnCount - 1
                     fillWorkSheet.ColumnHeaders(k).Text = lstColumnNames(k)
                 Next
             End If

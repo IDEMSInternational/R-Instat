@@ -1134,135 +1134,6 @@
   <data name="&gt;&gt;tbSubset.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;ucrChkGreatCircleDist.Name" xml:space="preserve">
-    <value>ucrChkGreatCircleDist</value>
-  </data>
-  <data name="&gt;&gt;ucrChkGreatCircleDist.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkGreatCircleDist.Parent" xml:space="preserve">
-    <value>tbOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkGreatCircleDist.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeRequestedPoints.Name" xml:space="preserve">
-    <value>ucrChkIncludeRequestedPoints</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeRequestedPoints.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeRequestedPoints.Parent" xml:space="preserve">
-    <value>tbOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeRequestedPoints.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOnlyDataVariables.Name" xml:space="preserve">
-    <value>ucrChkOnlyDataVariables</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOnlyDataVariables.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOnlyDataVariables.Parent" xml:space="preserve">
-    <value>tbOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkOnlyDataVariables.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepRawTime.Name" xml:space="preserve">
-    <value>ucrChkKeepRawTime</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepRawTime.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepRawTime.Parent" xml:space="preserve">
-    <value>tbOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkKeepRawTime.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeMetadata.Name" xml:space="preserve">
-    <value>ucrChkIncludeMetadata</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeMetadata.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeMetadata.Parent" xml:space="preserve">
-    <value>tbOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeMetadata.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="tbOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tbOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>711, 397</value>
-  </data>
-  <data name="tbOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tbOptions.Text" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="&gt;&gt;tbOptions.Name" xml:space="preserve">
-    <value>tbOptions</value>
-  </data>
-  <data name="&gt;&gt;tbOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbOptions.Parent" xml:space="preserve">
-    <value>tbNetCDF</value>
-  </data>
-  <data name="&gt;&gt;tbOptions.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="tbNetCDF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 8</value>
-  </data>
-  <data name="tbNetCDF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>719, 423</value>
-  </data>
-  <data name="tbNetCDF.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tbNetCDF.Name" xml:space="preserve">
-    <value>tbNetCDF</value>
-  </data>
-  <data name="&gt;&gt;tbNetCDF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbNetCDF.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tbNetCDF.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 433</value>
-  </data>
-  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
-  </data>
-  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
-    <value>ucrBase</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
-    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrChkGreatCircleDist.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 122</value>
   </data>
@@ -1368,6 +1239,75 @@
   <data name="&gt;&gt;ucrChkIncludeMetadata.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="tbOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbOptions.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>711, 397</value>
+  </data>
+  <data name="tbOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbOptions.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="&gt;&gt;tbOptions.Name" xml:space="preserve">
+    <value>tbOptions</value>
+  </data>
+  <data name="&gt;&gt;tbOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbOptions.Parent" xml:space="preserve">
+    <value>tbNetCDF</value>
+  </data>
+  <data name="&gt;&gt;tbOptions.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tbNetCDF.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 8</value>
+  </data>
+  <data name="tbNetCDF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>719, 423</value>
+  </data>
+  <data name="tbNetCDF.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;tbNetCDF.Name" xml:space="preserve">
+    <value>tbNetCDF</value>
+  </data>
+  <data name="&gt;&gt;tbNetCDF.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbNetCDF.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbNetCDF.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
+    <value>295, 433</value>
+  </data>
+  <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 30</value>
+  </data>
+  <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
+    <value>ucrBase</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Type" xml:space="preserve">
+    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1376,9 +1316,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>733, 468</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
