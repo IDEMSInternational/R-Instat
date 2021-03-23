@@ -685,34 +685,27 @@ Public Class dlgPICSARainfall
 
         clsBaseOperator.RemoveParameterByName("facets")
         bUpdatingParameters = True
-        For Each ucrInputTemp As ucrInputComboBox In dctComboReceiver.Keys
-            dctComboReceiver(ucrInputTemp).SetRCode(Nothing)
-            Select Case ucrInputStation.GetText()
-                Case strXAxis
-                    dctComboReceiver(ucrInputTemp).ChangeParameterName("x")
-                    dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(False)
-                    dctComboReceiver(ucrInputTemp).SetRCode(clsAsFactorFunction)
-                    clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
-                Case strColour
-                    '    If rdoJitter.Checked Then
-                    dctComboReceiver(ucrInputTemp).ChangeParameterName("color")
-                    dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
-                    '    ElseIf rdoBoxplot.Checked OrElse rdoViolin.Checked Then
-                    '        dctComboReceiver(ucrInputTemp).ChangeParameterName("fill")
-                    '        dctComboReceiver(ucrInputTemp).SetParameterIncludeArgumentName(True)
-                    '    End If
-                    dctComboReceiver(ucrInputTemp).SetRCode(clsRaesFunction)
-                Case strFacetWrap
-                    dctComboReceiver(ucrInputTemp).ChangeParameterName("wrap" & ucrInputTemp.Name)
-                    dctComboReceiver(ucrInputTemp).SetRCode(clsFacetOperator)
-                Case strFacetCol
-                    dctComboReceiver(ucrInputTemp).ChangeParameterName("col" & ucrInputTemp.Name)
-                    dctComboReceiver(ucrInputTemp).SetRCode(clsFacetColOp)
-                Case strFacetRow
-                    dctComboReceiver(ucrInputTemp).ChangeParameterName("row" & ucrInputTemp.Name)
-                    dctComboReceiver(ucrInputTemp).SetRCode(clsFacetRowOp)
-            End Select
-        Next
+        ucrReceiverFacetBy.SetRCode(Nothing)
+        Select Case ucrInputStation.GetText()
+            Case strXAxis
+                ucrReceiverFacetBy.ChangeParameterName("x")
+                ucrReceiverFacetBy.SetParameterIncludeArgumentName(False)
+                ucrReceiverFacetBy.SetRCode(clsAsFactorFunction)
+                clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
+            Case strColour
+                ucrReceiverFacetBy.ChangeParameterName("color")
+                ucrReceiverFacetBy.SetParameterIncludeArgumentName(True)
+                ucrReceiverFacetBy.SetRCode(clsRaesFunction)
+            Case strFacetWrap
+                ucrReceiverFacetBy.ChangeParameterName("wrap" & ucrInputStation.Name)
+                ucrReceiverFacetBy.SetRCode(clsFacetOperator)
+            Case strFacetCol
+                ucrReceiverFacetBy.ChangeParameterName("col" & ucrInputStation.Name)
+                ucrReceiverFacetBy.SetRCode(clsFacetColOp)
+            Case strFacetRow
+                ucrReceiverFacetBy.ChangeParameterName("row" & ucrInputStation.Name)
+                ucrReceiverFacetBy.SetRCode(clsFacetRowOp)
+        End Select
         If Not clsRaesFunction.ContainsParameter("x") Then
             clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
         End If
