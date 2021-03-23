@@ -19,75 +19,73 @@ Imports RDotNet
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 Public Class sdgClimaticDataEntry
-
-    Dim strStationColumnName As String
-    Dim strDateColumnName As String
-    Dim lstElementsColumnNames As List(Of String)
-    Dim strStationSelected As String
-    Dim startDateSelected As Date
-
-    'stores the values changed in the grid
-    Dim dataChanged As DataTable
-
-    'stores the row indices changed in the grid
-    'key = grid row number, value = dataChanged row number
-    Dim rowsChanged As New Dictionary(Of Integer, Integer)
+    ''' <summary>
+    ''' stores the row indices changed in the grid 
+    ''' key = grid row index, value = grid row name(which should always be a number)
+    ''' </summary>
+    Private dctRowsChanged As New Dictionary(Of Integer, Integer)
 
     'the current worksheet in the grid
-    Dim WithEvents grdCurrentWorkSheet As unvell.ReoGrid.Worksheet
+    Private WithEvents grdCurrentWorkSheet As Worksheet
 
     ''' <summary>
-    ''' returns the data changed as a string, in the format of a "csv"
+    ''' returns the data changed for the passed column as an R vector string
     ''' </summary>
     ''' <returns></returns>
-    Public Function GetDataChangedAsString() As String
-        If dataChanged Is Nothing Then
-            Return ""
+    Public Function GetRowsChangedAsRVectorString(strColumnName As String, Optional strQuotes As String = "") As String
+        If grdCurrentWorkSheet Is Nothing Then
+            Return "c()"
         End If
 
         Dim strValues As String = ""
-        For Each row As DataRow In dataChanged.Rows
-            If strValues = "" Then
-                strValues = String.Join(",", row.ItemArray)
-            Else
-                strValues = strValues & Environment.NewLine & String.Join(",", row.ItemArray)
+        Dim iColumnIndex As Integer = 0
+
+        'get the column index
+        For i As Integer = 0 To grdCurrentWorkSheet.ColumnCount - 1
+            If grdCurrentWorkSheet.ColumnHeaders.Item(i).Text = strColumnName Then
+                iColumnIndex = i
+                Exit For
             End If
         Next
-        Return strValues
+
+        'get the changed values of the column index
+        For Each iRowIndex As Integer In dctRowsChanged.Keys
+            If strValues = "" Then
+                strValues = strQuotes & grdCurrentWorkSheet.Item(row:=iRowIndex, col:=iColumnIndex) & strQuotes
+            Else
+                strValues = strValues & "," & strQuotes & grdCurrentWorkSheet.Item(row:=iRowIndex, col:=iColumnIndex) & strQuotes
+            End If
+        Next
+
+        Return "c(" & strValues & ")"
     End Function
 
-    Public Function GetRowsChangedAsRVectorString() As String
-        Return "c(" & String.Join(",", rowsChanged.Keys.ToArray) & ")"
+    Public Function GetRowNamesChangedAsRVectorString() As String
+        Return "c(" & String.Join(",", dctRowsChanged.Values.ToArray) & ")"
     End Function
 
     Public Function GetNumofRowsChanged() As Integer
-        Return rowsChanged.Count
+        Return dctRowsChanged.Count
     End Function
+
+    Public Sub Reset()
+        dctRowsChanged.Clear()
+        grdCurrentWorkSheet = Nothing
+    End Sub
 
     Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdDataEntry.SheetTabNewButtonVisible = False
     End Sub
 
-    Public Sub Setup(strStationColumnName As String, strDateColumnName As String, lstElementsColumnNames As List(Of String), strStationSelected As String, startDateSelected As Date, dataFrame As DataFrame, strSheetName As String)
-        Me.strStationColumnName = strStationColumnName
-        Me.strDateColumnName = strDateColumnName
-        Me.lstElementsColumnNames = lstElementsColumnNames
-        Me.strStationSelected = strStationSelected
-        Me.startDateSelected = startDateSelected
-
+    Public Sub Setup(strStationColumnName As String, strDateColumnName As String, lstElementsColumnNames As List(Of String), dataFrame As DataFrame, strDataFrameName As String)
         'clear any previous data
         grdDataEntry.Worksheets.Clear()
-        rowsChanged.Clear()
+        dctRowsChanged.Clear()
 
-        Dim dataTable As DataTable
-
-        'create a data table from the passed data frame then create a worksheet from the data table
-        dataTable = GetFilledDataTable(strStationColumnName, strDateColumnName, lstElementsColumnNames, strStationSelected, startDateSelected, dataFrame)
-        grdCurrentWorkSheet = GetFilledWorkSheet(dataTable, strSheetName)
+        'create work sheet from the data frame
+        grdCurrentWorkSheet = GetFilledWorkSheet(strStationColumnName, strDateColumnName, lstElementsColumnNames, dataFrame, strDataFrameName)
         'add the new worksheet to the grid
         grdDataEntry.AddWorksheet(grdCurrentWorkSheet)
-        'create a new data changed table from the the structure of the created data table
-        dataChanged = dataTable.Clone
     End Sub
 
     Private Sub grdDataEntry_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdDataEntry.CurrentWorksheetChanged, Me.Load, grdDataEntry.WorksheetInserted
@@ -99,107 +97,57 @@ Public Class sdgClimaticDataEntry
     End Sub
 
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
-        'todo. can this disabling of data entry be done elsewhere
+        'todo. do this disabling of data entry be done when setting up the grid. Not here
         If grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text = "station" Then
             e.IsCancelled = True
-        Else
-            ' strPreviousCellText = e.Cell.Data.ToString()
         End If
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
-        AddChangedData(e.Cell.Column, e.Cell.Row, e.NewData.ToString())
+        AddChangedRow(e.Cell.Row)
     End Sub
 
     ''' <summary>
-    ''' adds the changed data to the data structures that hold changes made on the grid
+    ''' adds the row index changed to the list of rows changes
     ''' </summary>
-    ''' <param name="iCol">grid column</param>
-    ''' <param name="iRow">grid row</param>
-    ''' <param name="strNewValue">newly typed value</param>
-    Private Sub AddChangedData(iCol As Integer, iRow As Integer, strNewValue As String)
-        'if the change was already added then just update it, else add the change as a new row(change)
-        If rowsChanged.ContainsKey(iRow) Then
-            dataChanged.Rows.Item(rowsChanged.Item(iRow)).Item(iCol) = strNewValue
-        Else
-            Dim dataTableRow As DataRow = dataChanged.NewRow()
-            dataTableRow.Item(iCol) = strNewValue
-            'add the new change
-            dataChanged.Rows.Add(dataTableRow)
-            'also record the row indices
-            rowsChanged.Add(iRow, dataChanged.Rows.Count - 1)
+    ''' <param name="iRow"></param>
+    Private Sub AddChangedRow(iRow As Integer)
+        'add the row index and row name to the lust of rows changed
+        If Not dctRowsChanged.ContainsKey(iRow) Then
+            dctRowsChanged.Add(iRow, Integer.Parse(grdCurrentWorkSheet.RowHeaders.Item(iRow).Text))
         End If
     End Sub
 
-    ''' <summary>
-    ''' creates and fills a datable from the passed parameters
-    ''' e.g of columns; station,date,...elements..
-    ''' </summary>
-    ''' <param name="strStationColumnName"></param>
-    ''' <param name="strDateColumnName"></param>
-    ''' <param name="lstElementsColumnNames"></param>
-    ''' <param name="strStationSelected"></param>
-    ''' <param name="startDateSelected"></param>
-    ''' <param name="dataFrame"></param>
-    ''' <returns></returns>
-    Private Function GetFilledDataTable(strStationColumnName As String, strDateColumnName As String, lstElementsColumnNames As List(Of String), strStationSelected As String, startDateSelected As Date, dataFrame As DataFrame) As DataTable
-        Dim dataTable As New DataTable
-        Dim dataTableRow As DataRow
-        Dim dataFrameCellValue As Object
-
-        'create the columns to the data table; station, date and elements
-        'station is optional
-        If Not String.IsNullOrEmpty(strStationColumnName) Then
-            dataTable.Columns.Add(strStationColumnName)
-        End If
-
-        dataTable.Columns.Add(strDateColumnName)
-        For Each strElement As String In lstElementsColumnNames
-            dataTable.Columns.Add(strElement)
-        Next
-
-        For i As Integer = 0 To dataFrame.RowCount - 1
-            'create a new data table row
-            dataTableRow = dataTable.NewRow()
-
-            'fill the row with required values
-            'the data frame column names should be the same as the data table column names in content
-            For Each dataTableColumn As DataColumn In dataTable.Columns
-                dataFrameCellValue = dataFrame.Item(i, dataTableColumn.ColumnName)
-                'todo. in future convert the R NA's to VB.NET "NA" string. 
-                dataTableRow.Item(dataTableColumn.ColumnName) = dataFrameCellValue
-            Next
-            'add the row to the datatable
-            dataTable.Rows.Add(dataTableRow)
-        Next
-        Return dataTable
-    End Function
-
-    ''' <summary>
-    ''' creates a worksheet from the passed data table
-    ''' </summary>
-    ''' <param name="dataTable"></param>
-    ''' <param name="strSheetName"></param>
-    ''' <returns></returns>
-    Public Function GetFilledWorkSheet(dataTable As DataTable, strSheetName As String) As Worksheet
+    Private Function GetFilledWorkSheet(strStationColumnName As String, strDateColumnName As String, lstElementsColumnNames As List(Of String), dataFrame As DataFrame, strSheetName As String) As Worksheet
         Dim grdWorkSheet As Worksheet = grdDataEntry.CreateWorksheet(strSheetName)
+        Dim lstColumnHeaders As New List(Of String)
 
-        'create the columns and set the header names in the worksheet
-        grdWorkSheet.Columns = dataTable.Columns.Count
-        For k = 0 To dataTable.Columns.Count - 1
-            grdWorkSheet.ColumnHeaders.Item(k).Text = dataTable.Columns.Item(k).ColumnName
+        'create the columns to be used by in worksheet; station, date and elements.station is optional
+        If Not String.IsNullOrEmpty(strStationColumnName) Then
+            lstColumnHeaders.Add(strStationColumnName)
+        End If
+        lstColumnHeaders.Add(strDateColumnName)
+        lstColumnHeaders.AddRange(lstElementsColumnNames)
+
+        'set the columns header names for the worksheet
+        grdWorkSheet.Columns = lstColumnHeaders.Count
+        For k = 0 To lstColumnHeaders.Count - 1
+            grdWorkSheet.ColumnHeaders.Item(k).Text = lstColumnHeaders(k)
         Next
 
-        'create rows and values for the worksheet 
-        grdWorkSheet.Rows = dataTable.Rows.Count
-        grdWorkSheet.SetRangeData(New RangePosition(0, 0, dataTable.Rows.Count, dataTable.Columns.Count), dataTable)
+        'set the rows values and header names for the worksheet 
+        grdWorkSheet.Rows = dataFrame.RowCount
+        For i As Integer = 0 To dataFrame.RowCount - 1
+            For j = 0 To grdWorkSheet.Columns - 1
+                'todo. in future convert the R NA's to VB.NET "NA" string. 
+                grdWorkSheet.Item(row:=i, col:=j) = dataFrame.Item(i, j)
+            Next
+            'set the row header names
+            grdWorkSheet.RowHeaders.Item(i).Text = dataFrame.RowNames(i)
+        Next
 
-        'todo. these 3 settings not important now. Left here to be done later
-        'grdWorkSheet.SetSettings(WorksheetSettings.Edit_AllowAdjustRowHeight, True)
-        'grdWorkSheet.SetRowsHeight(0, 1, 20)
-        'grdWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdWorkSheet.Rows, grdWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
+        grdWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdWorkSheet.Rows, grdWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
 
-        'todo. make the station column be uneditable, though it is an optional column 
         Return grdWorkSheet
     End Function
 
