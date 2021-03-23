@@ -204,14 +204,14 @@ Public Class dlgTransformClimatic
         ucrInputEvaporation.AddQuotesIfUnrecognised = False
 
         ' Save Options
-        ucrInputColName.SetParameter(New RParameter("result_name", 2))
-        ucrInputColName.SetName("moving_sum")
+        'ucrInputColName.SetParameter(New RParameter("result_name", 2))
+        'ucrInputColName.SetName("moving_sum")
 
         'save control
-        ucrSaveColumn.SetPrefix("moving_sum")
+        'ucrSaveColumn.SetPrefix("moving_sum")
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetIsComboBox()
-        ucrSaveColumn.SetLabelText("Logical Column")
+        ucrSaveColumn.SetLabelText("New Column Name")
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorTransform.ucrAvailableDataFrames)
         ucrSaveColumn.SetPositionParametersDirectly(False, "result_name")
         'makes the ucrSave control to position new column after selected column
@@ -444,15 +444,22 @@ Public Class dlgTransformClimatic
         ucrReceiverEvap.SetRCode(clsReduceOpEvapValue, bReset)
         ucrNudWBCapacity.SetRCode(clsPMinFunctionMax, bReset)
 
-        ucrInputColName.SetRCode(clsRTransform, bReset)
+        'ucrInputColName.SetRCode(clsRTransform, bReset)
+        ucrSaveColumn.SetRCode(clsRTransform, bReset)
+
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverData.IsEmpty AndAlso Not ucrInputColName.IsEmpty AndAlso ((rdoCount.Checked AndAlso ucrNudCountOver.GetText <> "" AndAlso (((ucrInputCondition.GetText = "Between" OrElse ucrInputCondition.GetText = "Outer") AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoCumulative.Checked AndAlso Not ucrInputCumulative.IsEmpty) OrElse (rdoMoving.Checked AndAlso Not ucrInputSum.IsEmpty AndAlso ucrNudSumOver.GetText <> "") OrElse (rdoSpell.Checked AndAlso (((ucrInputCondition.GetText = "Between" OrElse ucrInputCondition.GetText = "Outer") AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoMultSpells.Checked AndAlso ucrNudMultSpells.GetText <> "" AndAlso (((ucrInputCondition.GetText = "Between" OrElse ucrInputCondition.GetText = "Outer") AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoWaterBalance.Checked AndAlso ucrNudWBCapacity.GetText <> "" AndAlso ((rdoEvapValue.Checked AndAlso Not ucrInputEvaporation.IsEmpty) OrElse (rdoEvapVariable.Checked AndAlso Not ucrReceiverEvap.IsEmpty)))) Then
+        If Not ucrReceiverData.IsEmpty AndAlso ucrSaveColumn.IsComplete AndAlso ((rdoCount.Checked AndAlso ucrNudCountOver.GetText <> "" AndAlso (((ucrInputCondition.GetText = "Between" OrElse ucrInputCondition.GetText = "Outer") AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoCumulative.Checked AndAlso Not ucrInputCumulative.IsEmpty) OrElse (rdoMoving.Checked AndAlso Not ucrInputSum.IsEmpty AndAlso ucrNudSumOver.GetText <> "") OrElse (rdoSpell.Checked AndAlso (((ucrInputCondition.GetText = "Between" OrElse ucrInputCondition.GetText = "Outer") AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoMultSpells.Checked AndAlso ucrNudMultSpells.GetText <> "" AndAlso (((ucrInputCondition.GetText = "Between" OrElse ucrInputCondition.GetText = "Outer") AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoWaterBalance.Checked AndAlso ucrNudWBCapacity.GetText <> "" AndAlso ((rdoEvapValue.Checked AndAlso Not ucrInputEvaporation.IsEmpty) OrElse (rdoEvapVariable.Checked AndAlso Not ucrReceiverEvap.IsEmpty)))) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
         End If
+        'If Not ucrReceiverData.IsEmpty AndAlso Not ucrInputColName.IsEmpty AndAlso ((rdoCount.Checked AndAlso ucrNudCountOver.GetText <> "" AndAlso (((ucrInputCondition.GetText = "Between" OrElse ucrInputCondition.GetText = "Outer") AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoCumulative.Checked AndAlso Not ucrInputCumulative.IsEmpty) OrElse (rdoMoving.Checked AndAlso Not ucrInputSum.IsEmpty AndAlso ucrNudSumOver.GetText <> "") OrElse (rdoSpell.Checked AndAlso (((ucrInputCondition.GetText = "Between" OrElse ucrInputCondition.GetText = "Outer") AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoMultSpells.Checked AndAlso ucrNudMultSpells.GetText <> "" AndAlso (((ucrInputCondition.GetText = "Between" OrElse ucrInputCondition.GetText = "Outer") AndAlso Not ucrInputSpellLower.IsEmpty AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = "<=" AndAlso Not ucrInputSpellUpper.IsEmpty) OrElse (ucrInputCondition.GetText = ">=" AndAlso Not ucrInputSpellUpper.IsEmpty))) OrElse (rdoWaterBalance.Checked AndAlso ucrNudWBCapacity.GetText <> "" AndAlso ((rdoEvapValue.Checked AndAlso Not ucrInputEvaporation.IsEmpty) OrElse (rdoEvapVariable.Checked AndAlso Not ucrReceiverEvap.IsEmpty)))) Then
+        '    ucrBase.OKEnabled(True)
+        'Else
+        '    ucrBase.OKEnabled(False)
+        'End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -530,32 +537,42 @@ Public Class dlgTransformClimatic
         If rdoCumulative.Checked Then
             CumulativeColNames()
         ElseIf rdoCount.Checked Then
-            ucrInputColName.SetName("count")
+            'ucrInputColName.SetName("count")
+            ucrSaveColumn.SetName("count")
         ElseIf rdoMoving.Checked Then
             MovingColNames()
         ElseIf rdoSpell.Checked Then
-            ucrInputColName.SetName("spell")
+            'ucrInputColName.SetName("spell")
+            ucrSaveColumn.SetName("spell")
         ElseIf rdoMultSpells.Checked Then
-            ucrInputColName.SetName("spells")
+            'ucrInputColName.SetName("spells")
+            ucrSaveColumn.SetName("spells")
         ElseIf rdoWaterBalance.Checked Then
-            ucrInputColName.SetName("water")
+            'ucrInputColName.SetName("water")
+            ucrSaveColumn.SetName("water")
         End If
     End Sub
 
     Private Sub MovingColNames()
         Select Case ucrInputSum.GetText
             Case "Sum"
-                ucrInputColName.SetName("moving_sum")
+                'ucrInputColName.SetName("moving_sum")
+                ucrSaveColumn.SetName("moving_sum")
             Case "Maximum"
-                ucrInputColName.SetName("moving_max")
+                'ucrInputColName.SetName("moving_max")
+                ucrSaveColumn.SetName("moving_max")
             Case "Minimum"
-                ucrInputColName.SetName("moving_min")
+                'ucrInputColName.SetName("moving_min")
+                ucrSaveColumn.SetName("moving_min")
             Case "Mean"
-                ucrInputColName.SetName("moving_mean")
+                'ucrInputColName.SetName("moving_mean")
+                ucrSaveColumn.SetName("moving_mean")
             Case "Median"
-                ucrInputColName.SetName("moving_median")
+                'ucrInputColName.SetName("moving_median")
+                ucrSaveColumn.SetName("moving_median")
             Case Else
-                ucrInputColName.SetName("moving")
+                'ucrInputColName.SetName("moving")
+                ucrSaveColumn.SetName("moving")
         End Select
     End Sub
 
@@ -689,11 +706,14 @@ Public Class dlgTransformClimatic
     Private Sub CumulativeColNames()
         Select Case ucrInputCumulative.GetText
             Case "Sum"
-                ucrInputColName.SetName("cumsum")
+                'ucrInputColName.SetName("cumsum")
+                ucrSaveColumn.SetName("cumsum")
             Case "Maximum"
-                ucrInputColName.SetName("cummax")
+                'ucrInputColName.SetName("cummax")
+                ucrSaveColumn.SetName("cummax")
             Case "Minimum"
-                ucrInputColName.SetName("cummin")
+                'ucrInputColName.SetName("cummin")
+                ucrSaveColumn.SetName("cummin")
         End Select
     End Sub
 
@@ -708,7 +728,7 @@ Public Class dlgTransformClimatic
         End If
     End Sub
 
-    Private Sub ucrPnlEvap_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvap.ControlContentsChanged, ucrInputSum.ControlContentsChanged, ucrPnlTransform.ControlContentsChanged, ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged, ucrNudCountOver.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrInputColName.ControlContentsChanged, ucrNudWBCapacity.ControlContentsChanged, ucrReceiverEvap.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudMultSpells.ControlContentsChanged
+    Private Sub ucrPnlEvap_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlEvap.ControlContentsChanged, ucrInputSum.ControlContentsChanged, ucrPnlTransform.ControlContentsChanged, ucrReceiverData.ControlContentsChanged, ucrNudSumOver.ControlContentsChanged, ucrNudCountOver.ControlContentsChanged, ucrInputSpellLower.ControlContentsChanged, ucrInputSpellUpper.ControlContentsChanged, ucrInputCondition.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrNudWBCapacity.ControlContentsChanged, ucrReceiverEvap.ControlContentsChanged, ucrInputEvaporation.ControlContentsChanged, ucrNudMultSpells.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class

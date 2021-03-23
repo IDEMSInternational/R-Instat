@@ -49,7 +49,6 @@ Partial Class dlgTransformClimatic
         Me.rdoWaterBalance = New System.Windows.Forms.RadioButton()
         Me.lblSumRows = New System.Windows.Forms.Label()
         Me.lblSumOver = New System.Windows.Forms.Label()
-        Me.lblNewColName = New System.Windows.Forms.Label()
         Me.lblCountOver = New System.Windows.Forms.Label()
         Me.grpTransform = New System.Windows.Forms.GroupBox()
         Me.ucrReceiverEvap = New instat.ucrReceiverSingle()
@@ -77,7 +76,6 @@ Partial Class dlgTransformClimatic
         Me.ucrNudCountOver = New instat.ucrNud()
         Me.rdoMultSpells = New System.Windows.Forms.RadioButton()
         Me.rdoCumulative = New System.Windows.Forms.RadioButton()
-        Me.ucrInputColName = New instat.ucrInputTextBox()
         Me.ucrPnlTransform = New instat.UcrPanel()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
@@ -161,12 +159,6 @@ Partial Class dlgTransformClimatic
         resources.ApplyResources(Me.lblSumOver, "lblSumOver")
         Me.lblSumOver.Name = "lblSumOver"
         Me.lblSumOver.Tag = "Over"
-        '
-        'lblNewColName
-        '
-        resources.ApplyResources(Me.lblNewColName, "lblNewColName")
-        Me.lblNewColName.Name = "lblNewColName"
-        Me.lblNewColName.Tag = "New Column Name:"
         '
         'lblCountOver
         '
@@ -399,14 +391,6 @@ Partial Class dlgTransformClimatic
         Me.rdoCumulative.Name = "rdoCumulative"
         Me.rdoCumulative.UseVisualStyleBackColor = True
         '
-        'ucrInputColName
-        '
-        Me.ucrInputColName.AddQuotesIfUnrecognised = True
-        Me.ucrInputColName.IsMultiline = False
-        Me.ucrInputColName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputColName, "ucrInputColName")
-        Me.ucrInputColName.Name = "ucrInputColName"
-        '
         'ucrPnlTransform
         '
         resources.ApplyResources(Me.ucrPnlTransform, "ucrPnlTransform")
@@ -474,8 +458,6 @@ Partial Class dlgTransformClimatic
         Me.Controls.Add(Me.rdoCumulative)
         Me.Controls.Add(Me.rdoMultSpells)
         Me.Controls.Add(Me.grpTransform)
-        Me.Controls.Add(Me.lblNewColName)
-        Me.Controls.Add(Me.ucrInputColName)
         Me.Controls.Add(Me.rdoWaterBalance)
         Me.Controls.Add(Me.rdoSpell)
         Me.Controls.Add(Me.rdoMoving)
@@ -521,8 +503,6 @@ Partial Class dlgTransformClimatic
     Friend WithEvents ucrNudSumOver As ucrNud
     Friend WithEvents lblSumOver As Label
     Friend WithEvents ucrInputSum As ucrInputComboBox
-    Friend WithEvents ucrInputColName As ucrInputTextBox
-    Friend WithEvents lblNewColName As Label
     Friend WithEvents ucrNudCountOver As ucrNud
     Friend WithEvents lblCountOver As Label
     Friend WithEvents lblWBEvaporation As Label
