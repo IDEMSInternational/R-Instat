@@ -652,6 +652,8 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuStationMaps = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCheckStations = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2012,6 +2014,7 @@ Partial Class frmMain
         '
         'mnuClimaticMapping
         '
+        Me.mnuClimaticMapping.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuStationMaps, Me.mnuCheckStations})
         Me.mnuClimaticMapping.Name = "mnuClimaticMapping"
         resources.ApplyResources(Me.mnuClimaticMapping, "mnuClimaticMapping")
         '
@@ -4129,6 +4132,16 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
+        'mnuStationMaps
+        '
+        Me.mnuStationMaps.Name = "mnuStationMaps"
+        resources.ApplyResources(Me.mnuStationMaps, "mnuStationMaps")
+        '
+        'mnuCheckStations
+        '
+        Me.mnuCheckStations.Name = "mnuCheckStations"
+        resources.ApplyResources(Me.mnuCheckStations, "mnuCheckStations")
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4788,4 +4801,6 @@ Partial Class frmMain
     Friend WithEvents mnuViewSwapDataAndMetadata As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator69 As ToolStripSeparator
     Friend WithEvents mnuClimaticDataEntry As ToolStripMenuItem
+    Friend WithEvents mnuStationMaps As ToolStripMenuItem
+    Friend WithEvents mnuCheckStations As ToolStripMenuItem
 End Class

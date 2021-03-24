@@ -2010,10 +2010,6 @@ Public Class frmMain
         dlgSPI.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticMapping_Click(sender As Object, e As EventArgs) Handles mnuClimaticMapping.Click
-        dlgClimaticStationMaps.ShowDialog()
-    End Sub
-
     Private Sub mnuHelpWindows_Click(sender As Object, e As EventArgs) Handles mnuHelpWindows.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "539")
     End Sub
@@ -2346,6 +2342,13 @@ Public Class frmMain
     End Sub
     Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
         dlgOtherRosePlots.ShowDialog()
+    End Sub
 
+    Private Sub mnuStationMaps_Click(sender As Object, e As EventArgs) Handles mnuStationMaps.Click
+        dlgClimaticStationMaps.ShowDialog()
+    End Sub
+
+    Private Sub mnuCheckStations_Click(sender As Object, e As EventArgs) Handles mnuCheckStations.Click
+        dlgLocatingPointsInShapeFile.ShowDialog()
     End Sub
 End Class
