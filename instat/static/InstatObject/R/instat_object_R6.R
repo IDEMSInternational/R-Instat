@@ -2452,3 +2452,8 @@ DataBook$set("public", "visualize_element_na", function(data_name, element_col_n
 DataBook$set("public", "get_data_entry_data", function(data_name, station, date, elements, station_name, start_date, end_date) {
   self$get_data_objects(data_name)$get_data_entry_data(station = station, date = date, elements = elements, station_name = station_name, start_date = start_date, end_date = end_date)
 })
+
+DataBook$set("public", "save_data_entry_data", function(data_name, new_data, rows_changed) {
+  self$get_data_objects(data_name)$save_data_entry_data(new_data = new_data, rows_changed = rows_changed)
+}
+)

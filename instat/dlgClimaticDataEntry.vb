@@ -82,6 +82,7 @@ Public Class dlgClimaticDataEntry
     End Sub
     Private Sub SetDefaults()
         clsClimaticDataEntry = New RFunction
+        clsDataChangedFunction = New RFunction
 
         ucrSelectorClimaticDataEntry.Reset()
         ucrReceiverElements.SetMeAsReceiver()
@@ -141,9 +142,6 @@ Public Class dlgClimaticDataEntry
             Return
         End If
 
-        'recreate the RFunction
-        clsDataChangedFunction = New RFunction
-
         'add the station column if it was selected. e.g Added as station = "sample_name" 
         If Not String.IsNullOrEmpty(strStationColumnName) AndAlso Not String.IsNullOrEmpty(strStationSelected) Then
             clsDataChangedFunction.AddParameter(strStationColumnName, Chr(34) & strStationSelected & Chr(34), iPosition:=0)
@@ -162,7 +160,7 @@ Public Class dlgClimaticDataEntry
         clsClimaticDataEntry.AddParameter("data_name", Chr(34) & strSelectedDataFrameName & Chr(34), iPosition:=0)
         clsClimaticDataEntry.AddParameter("new_data", clsRFunctionParameter:=clsDataChangedFunction, iPosition:=1)
         clsClimaticDataEntry.AddParameter("rows_changed", sdgClimaticDataEntry.GetRowNamesChangedAsRVectorString, iPosition:=2)
-
+      
         TestOkEnabled()
     End Sub
 

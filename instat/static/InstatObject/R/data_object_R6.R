@@ -2062,7 +2062,7 @@ DataSheet$set("public", "graph_one_variable", function(columns, numeric = "geom_
       i = i + 1
     }
     if(output == "combine") {
-      return(gridExtra::grid.arrange(grobs = graphs, ncol = ncol))
+      return(patchwork::wrap_plots(graphs, ncol = ncol))
     }
     else {
       return(graphs)
@@ -3842,3 +3842,16 @@ DataSheet$set("public", "get_data_entry_data", function(station, date, elements,
   }
   out_data
 })
+DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed) {
+  if (nrow(new_data) != length(rows_changed)) stop("new_data must have the same number of rows as length of rows_changed.")
+  curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  for (i in seq_along(rows_changed)) {
+    for (k in seq_along(names(new_data))) {
+      print(rows_changed[i])
+      print(names(new_data)[k])
+      curr_data[rows_changed[i], names(new_data)[k]] <- new_data[i, names(new_data)[k]]
+    }
+  }
+  self$set_data(curr_data)
+}
+)
