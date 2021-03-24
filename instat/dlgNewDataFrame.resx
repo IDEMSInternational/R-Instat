@@ -130,7 +130,7 @@
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="lblRows.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="lblRows.Text" xml:space="preserve">
     <value>Rows:</value>
@@ -157,7 +157,7 @@
     <value>50, 13</value>
   </data>
   <data name="lblColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>10</value>
   </data>
   <data name="lblColumns.Text" xml:space="preserve">
     <value>Columns:</value>
@@ -190,7 +190,7 @@
     <value>95, 27</value>
   </data>
   <data name="rdoCommand.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="rdoCommand.Text" xml:space="preserve">
     <value>Command</value>
@@ -226,7 +226,7 @@
     <value>95, 27</value>
   </data>
   <data name="rdoRandom.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="rdoRandom.Text" xml:space="preserve">
     <value>Random</value>
@@ -262,7 +262,7 @@
     <value>95, 27</value>
   </data>
   <data name="rdoEmpty.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="rdoEmpty.Text" xml:space="preserve">
     <value>Empty</value>
@@ -298,7 +298,7 @@
     <value>95, 27</value>
   </data>
   <data name="rdoConstruct.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="rdoConstruct.Text" xml:space="preserve">
     <value>Construct</value>
@@ -430,13 +430,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblCommand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 61</value>
+    <value>10, 59</value>
   </data>
   <data name="lblCommand.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
   </data>
   <data name="lblCommand.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="lblCommand.Text" xml:space="preserve">
     <value>Command:</value>
@@ -457,7 +457,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnExample.Location" type="System.Drawing.Point, System.Drawing">
-    <value>69, 55</value>
+    <value>69, 54</value>
   </data>
   <data name="btnExample.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -466,7 +466,7 @@
     <value>118, 22</value>
   </data>
   <data name="btnExample.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="btnExample.Text" xml:space="preserve">
     <value>Command Examples</value>
@@ -496,7 +496,7 @@
     <value>74, 23</value>
   </data>
   <data name="btnTry.TabIndex" type="System.Int32, mscorlib">
-    <value>176</value>
+    <value>12</value>
   </data>
   <data name="btnTry.Text" xml:space="preserve">
     <value>Try</value>
@@ -523,7 +523,7 @@
     <value>293, 22</value>
   </data>
   <data name="ucrInputTryMessage.TabIndex" type="System.Int32, mscorlib">
-    <value>177</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrInputTryMessage.Name" xml:space="preserve">
     <value>ucrInputTryMessage</value>
@@ -544,7 +544,7 @@
     <value>417, 159</value>
   </data>
   <data name="ucrInputCommand.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrInputCommand.Name" xml:space="preserve">
     <value>ucrInputCommand</value>
@@ -568,7 +568,7 @@
     <value>405, 43</value>
   </data>
   <data name="ucrPnlDataFrame.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrPnlDataFrame.Name" xml:space="preserve">
     <value>ucrPnlDataFrame</value>
@@ -616,7 +616,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudCols.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrNudCols.Name" xml:space="preserve">
     <value>ucrNudCols</value>
@@ -640,7 +640,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudRows.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrNudRows.Name" xml:space="preserve">
     <value>ucrNudRows</value>
@@ -664,7 +664,7 @@
     <value>399, 48</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -689,6 +689,9 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>439, 378</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

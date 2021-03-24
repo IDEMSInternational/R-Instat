@@ -174,7 +174,7 @@ Public Class dlgTransformText
         ucrNudTo.SetLinkedDisplayControl(lblToSubstring)
 
         'ucrNewColName
-        ucrNewColName.SetIsTextBox()
+        ucrNewColName.SetIsComboBox()
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("Column Name:")

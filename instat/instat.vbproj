@@ -171,6 +171,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
     <Compile Include="clsCompareTwoOptionsLines.vb" />
     <Compile Include="clsCompareTwoOptionsPoints.vb" />
@@ -203,16 +204,10 @@
     <Compile Include="dlgCircularDensityPlot.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgCircularRosePlot.Designer.vb">
-      <DependentUpon>dlgCircularRosePlot.vb</DependentUpon>
+    <Compile Include="dlgClimaticDataEntry.Designer.vb">
+      <DependentUpon>dlgClimaticDataEntry.vb</DependentUpon>
     </Compile>
-    <Compile Include="dlgCircularRosePlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgCircularScatterPlot.Designer.vb">
-      <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgCircularScatterPlot.vb">
+    <Compile Include="dlgClimaticDataEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimaticNCMPCountRecords.Designer.vb">
@@ -311,30 +306,6 @@
     <Compile Include="dlgPasteNewDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dlgPolarAnnulus.Designer.vb">
-      <DependentUpon>dlgPolarAnnulus.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPolarAnnulus.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgPolarCluster.Designer.vb">
-      <DependentUpon>dlgPolarCluster.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPolarCluster.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgPolarFrequency.Designer.vb">
-      <DependentUpon>dlgPolarFrequency.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPolarFrequency.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="dlgPolarPlot.Designer.vb">
-      <DependentUpon>dlgPolarPlot.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dlgPolarPlot.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="dlgSeasonalPlot.Designer.vb">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </Compile>
@@ -363,6 +334,10 @@
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
     </Compile>
     <Compile Include="frmConvertToNumeric.vb">
+    <Compile Include="sdgClimaticDataEntry.Designer.vb">
+      <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgClimaticNCMPMetadata.Designer.vb">
@@ -459,6 +434,12 @@
       <DependentUpon>dlgTreemap.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgTreemap.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgMergeColumnsToInclude.Designer.vb">
+      <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgMergeColumnsToInclude.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgMissingOptions.Designer.vb">
@@ -2424,6 +2405,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -2711,11 +2693,8 @@
     <EmbeddedResource Include="dlgCircularDensityPlot.resx">
       <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgCircularRosePlot.resx">
-      <DependentUpon>dlgCircularRosePlot.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgCircularScatterPlot.resx">
-      <DependentUpon>dlgCircularScatterPlot.vb</DependentUpon>
+    <EmbeddedResource Include="dlgClimaticDataEntry.resx">
+      <DependentUpon>dlgClimaticDataEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticNCMPCountRecords.resx">
       <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
@@ -2766,18 +2745,6 @@
     <EmbeddedResource Include="dlgPasteNewDataFrame.resx">
       <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="dlgPolarAnnulus.resx">
-      <DependentUpon>dlgPolarAnnulus.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPolarCluster.resx">
-      <DependentUpon>dlgPolarCluster.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPolarFrequency.resx">
-      <DependentUpon>dlgPolarFrequency.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dlgPolarPlot.resx">
-      <DependentUpon>dlgPolarPlot.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </EmbeddedResource>
@@ -2792,6 +2759,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmConvertToNumeric.resx">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
+    <EmbeddedResource Include="sdgClimaticDataEntry.resx">
+      <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticNCMPMetadata.resx">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
@@ -2840,6 +2809,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTreemap.resx">
       <DependentUpon>dlgTreemap.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgMergeColumnsToInclude.resx">
+      <DependentUpon>sdgMergeColumnsToInclude.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgMissingOptions.resx">
       <DependentUpon>sdgMissingOptions.vb</DependentUpon>
