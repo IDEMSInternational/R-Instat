@@ -91,7 +91,8 @@ Public Class dlgClimaticDataEntry
 
         'e,g data_book$save_data_entry_data(data_name="Sheet1", new_data = data.frame(station = "A", date = as.Date(c("1999/1/1", "1999/1/2", "1999/1/3")), rain = c(1, 5, 3), tmax = c(43, 53, 2)), rows_changed = c(1, 4, 3))
         clsClimaticDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$save_data_entry_data")
-
+        'ucrBase.clsRsyntax.ClearCodes()
+        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsClimaticDataEntry)
     End Sub
 
@@ -110,6 +111,9 @@ Public Class dlgClimaticDataEntry
         Else
             ucrBase.OKEnabled(False)
             cmdEnterData.Enabled = False
+        End If
+        If sdgClimaticDataEntry.GetNumofRowsChanged < 1 Then
+            ucrBase.OKEnabled(False)
         End If
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -133,20 +137,23 @@ Public Class dlgClimaticDataEntry
 
         If dfTemp Is Nothing Then
             'todo. display message box here. This could be due to no records from the starting date
+            MsgBox("No available data in " & ucrSelectorClimaticDataEntry.strCurrentDataFrame & " dataset for this starting date.")
             Return
         End If
 
+
         'todo. should we have the abilty to retain the previous changes if the selections have not changed??
         sdgClimaticDataEntry.Setup(strStationColumnName, strDateColumnName, lstElementsColumnNames,
-                                   dfTemp, strSelectedDataFrameName)
+                                       dfTemp, strSelectedDataFrameName)
 
-        sdgClimaticDataEntry.ShowDialog()
+            sdgClimaticDataEntry.ShowDialog()
 
         'if no changes made then just return
         If sdgClimaticDataEntry.GetNumofRowsChanged < 1 Then
             Return
         End If
 
+        clsDataChangedFunction.ClearParameters()
         'add the station column if it was selected. e.g Added as station = "sample_name" 
         If Not String.IsNullOrEmpty(strStationColumnName) AndAlso Not String.IsNullOrEmpty(strStationSelected) Then
             clsDataChangedFunction.AddParameter(strStationColumnName, Chr(34) & strStationSelected & Chr(34), iPosition:=0)
@@ -165,7 +172,7 @@ Public Class dlgClimaticDataEntry
         clsClimaticDataEntry.AddParameter("data_name", Chr(34) & strSelectedDataFrameName & Chr(34), iPosition:=0)
         clsClimaticDataEntry.AddParameter("new_data", clsRFunctionParameter:=clsDataChangedFunction, iPosition:=1)
         clsClimaticDataEntry.AddParameter("rows_changed", sdgClimaticDataEntry.GetRowNamesChangedAsRVectorString, iPosition:=2)
-      
+
         TestOkEnabled()
     End Sub
 
@@ -187,6 +194,5 @@ Public Class dlgClimaticDataEntry
         End If
         Return dfTemp
     End Function
-
 
 End Class

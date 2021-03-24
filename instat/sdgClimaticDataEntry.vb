@@ -97,7 +97,7 @@ Public Class sdgClimaticDataEntry
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
         AddChangedRow(e.Cell.Row)
-        grdCurrentWorkSheet.GetCell(e.Cell.Row, e.Cell.Column).Style.BackColor = Color.LightGreen
+        grdCurrentWorkSheet.GetCell(e.Cell.Row, e.Cell.Column).Style.BackColor = Color.Yellow
     End Sub
 
     ''' <summary>

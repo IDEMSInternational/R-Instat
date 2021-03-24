@@ -3852,6 +3852,7 @@ DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed)
       curr_data[rows_changed[i], names(new_data)[k]] <- new_data[i, names(new_data)[k]]
     }
   }
+  cat("Values updated in:", length(rows_changed), "row(s).\n")
   self$set_data(curr_data)
 }
 )
