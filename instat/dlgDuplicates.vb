@@ -158,7 +158,6 @@ Public Class dlgDuplicates
         clsDupCountIndex.SetRCommand("duplicated_count_index")
 
         clsGetColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        clsGetColumnsFunction.AddParameter(strParameterName:="data_name", strParameterValue:=Chr(34) & ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34), iPosition:=0)
 
         clsSummaryFunction.SetRCommand("summary")
         clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsGetColumnsFunction)
