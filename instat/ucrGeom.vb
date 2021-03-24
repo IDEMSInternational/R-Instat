@@ -168,7 +168,33 @@ Public Class ucrGeom
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
 
+        Dim clsgeom_stat_density_ridges As New Geoms
         Dim clsgeom_statECDF As New Geoms
+
+
+
+        clsgeom_stat_density_ridges.SetGeomPackage("ggridges")
+        clsgeom_stat_density_ridges.strGeomName = "stat_density_ridges"
+        'Mandatory Aesthetics
+        clsgeom_stat_density_ridges.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_stat_density_ridges.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_stat_density_ridges.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+
+        'adding layer parameters
+        clsgeom_stat_density_ridges.AddLayerParameter("geom", "list", Chr(34) & "density_ridges" & Chr(34), lstParameterStrings:={Chr(34) & "density_ridges" & Chr(34), Chr(34) & "density_ridges_gradient" & Chr(34)})
+        clsgeom_stat_density_ridges.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_stat_density_ridges.AddLayerParameter("bandwidth", "numeric", "0.1", lstParameterStrings:={1, 0})
+        clsgeom_stat_density_ridges.AddLayerParameter("jittered_points", "boolean", "FALSE")
+        clsgeom_stat_density_ridges.AddLayerParameter("quantile_lines", "boolean", "FALSE")
+        clsgeom_stat_density_ridges.AddLayerParameter("calc_ecdf", "boolean", "FALSE")
+        clsgeom_stat_density_ridges.AddLayerParameter("quantiles", "numeric", "1.0", lstParameterStrings:={1, 0})
+        clsgeom_stat_density_ridges.AddLayerParameter("quantile_fun", "list", "quantile", lstParameterStrings:={"quantile"})
+        clsgeom_stat_density_ridges.AddLayerParameter("alpha", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_stat_density_ridges.AddLayerParameter("n", "numeric", "512", lstParameterStrings:={0, 0}) ' This should be a power of 2 - Not sure how to restrict this. 40.
+        clsgeom_stat_density_ridges.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_stat_density_ridges.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_stat_density_ridges)
+
 
         clsgeom_statECDF.SetGeomName("stat_ecdf")
         'mandatory
