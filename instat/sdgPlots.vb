@@ -413,7 +413,14 @@ Public Class sdgPlots
         ucrChkApplyChanges.AddToLinkedControls(ucrPnlColour, {False}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkFillDiscrete.SetText("Discrete")
+        ucrChkFillDiscrete.SetParameter(New RParameter("discrete", iNewPosition:=7))
+        ucrChkFillDiscrete.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
+
         ucrChkColourDiscrete.SetText("Discrete")
+        ucrChkColourDiscrete.SetParameter(New RParameter("discrete", iNewPosition:=7))
+        ucrChkColourDiscrete.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
 
         ucrPnlColour.AddRadioButton(rdoNoColour)
         ucrPnlColour.AddRadioButton(rdoModifyColour)
@@ -535,6 +542,8 @@ Public Class sdgPlots
         ucrChkColourScaleReverseOrder.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrChkApplyChanges.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
         ucrPnlColour.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkFillDiscrete.SetRCode(clsScaleFillViridisFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkColourDiscrete.SetRCode(clsScaleColourViridisFunction, bReset, bCloneIfNeeded:=True)
 
         ucrPlotsAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsRggplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=strDataFrame, strMainDialogGeomParameterNames:=strMainDialogGeomParameterNames, bReset:=bReset)
         bRCodeSet = True
@@ -548,7 +557,6 @@ Public Class sdgPlots
             bResetThemes = True
         End If
         SetFacetParameters()
-        CheckForDiscreteContinuous()
     End Sub
 
     Private Sub SetFacetParameters()
@@ -955,23 +963,32 @@ Public Class sdgPlots
             If expDateType IsNot Nothing AndAlso expDateType.Type <> Internals.SymbolicExpressionType.Null Then
                 strColumnType = (expDateType.AsCharacter(0)).ToLower
                 If strColumnType = "factor" OrElse strColumnType = "logical" OrElse strColumnType = "character" Then
+                    AddDiscreteParamToFillColourFunction()
                     ucrChkFillDiscrete.Checked = True
                     ucrChkColourDiscrete.Checked = True
                 ElseIf strColumnType = "numeric" Then
+                    clsScaleColourViridisFunction.AddParameter("discrete", "FALSE", iPosition:=7)
+                    clsScaleFillViridisFunction.AddParameter("discrete", "FALSE", iPosition:=7)
                     ucrChkFillDiscrete.Checked = False
                     ucrChkColourDiscrete.Checked = False
                 End If
             Else
+                AddDiscreteParamToFillColourFunction()
                 ucrChkFillDiscrete.Checked = True
                 ucrChkColourDiscrete.Checked = True
             End If
         Else
+            AddDiscreteParamToFillColourFunction()
             ucrChkFillDiscrete.Checked = True
             ucrChkColourDiscrete.Checked = True
         End If
 
     End Sub
 
+    Private Sub AddDiscreteParamToFillColourFunction()
+        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
+        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
+    End Sub
     Private Sub ucrPlotsAdditionalLayers_NumberOfLayersChanged() Handles ucrPlotsAdditionalLayers.NumberOfLayersChanged, ucrPlotsAdditionalLayers.LayerEdited
         CheckForDiscreteContinuous()
     End Sub
@@ -997,16 +1014,4 @@ Public Class sdgPlots
         AddRemoveColour()
     End Sub
 
-    Private Sub Discrete_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFillDiscrete.ControlValueChanged, ucrChkColourDiscrete.ControlValueChanged
-        If ucrChkColourDiscrete.Checked Then
-            clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
-        Else
-            clsScaleColourViridisFunction.AddParameter("discrete", "FALSE", iPosition:=7)
-        End If
-        If ucrChkFillDiscrete.Checked Then
-            clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
-        Else
-            clsScaleFillViridisFunction.AddParameter("discrete", "FALSE", iPosition:=7)
-        End If
-    End Sub
 End Class
