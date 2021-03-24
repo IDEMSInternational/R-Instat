@@ -878,6 +878,12 @@
   <data name="mnuViewResetToDefaultLayout.Text" xml:space="preserve">
     <value>Reset to Default Layout</value>
   </data>
+  <data name="mnuViewSwapDataAndMetadata.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 22</value>
+  </data>
+  <data name="mnuViewSwapDataAndMetadata.Text" xml:space="preserve">
+    <value>Swap Data and Metadata</value>
+  </data>
   <data name="mnuView.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
   </data>
@@ -1135,6 +1141,15 @@
   </data>
   <data name="mnuClimaticTidyandExamineAppend.Text" xml:space="preserve">
     <value>Append...</value>
+  </data>
+  <data name="ToolStripSeparator69.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 6</value>
+  </data>
+  <data name="mnuClimaticDataEntry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="mnuClimaticDataEntry.Text" xml:space="preserve">
+    <value>Data Entry</value>
   </data>
   <data name="ToolStripSeparator50.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 6</value>
@@ -3575,36 +3590,6 @@
   </data>
   <data name="mnuStructuredCircularWindPollutionRose.Text" xml:space="preserve">
     <value>Wind/Pollution Rose...</value>
-  </data>
-  <data name="mnuStructuredCircularOtherRosePlotsPercentileRose.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
-  </data>
-  <data name="mnuStructuredCircularOtherRosePlotsPercentileRose.Text" xml:space="preserve">
-    <value>Percentile Rose...</value>
-  </data>
-  <data name="mnuStructuredCircularOtherRosePlotsPolarPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
-  </data>
-  <data name="mnuStructuredCircularOtherRosePlotsPolarPlot.Text" xml:space="preserve">
-    <value>Polar Plot...</value>
-  </data>
-  <data name="mnuStructuredCircularOtherRosePlotsPolarFrequency.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
-  </data>
-  <data name="mnuStructuredCircularOtherRosePlotsPolarFrequency.Text" xml:space="preserve">
-    <value>Polar Frequency...</value>
-  </data>
-  <data name="mnuStructuredCircularOtherRosePlotsPolarCluster.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
-  </data>
-  <data name="mnuStructuredCircularOtherRosePlotsPolarCluster.Text" xml:space="preserve">
-    <value>Polar Cluster...</value>
-  </data>
-  <data name="mnuStructuredCircularOtherRosePlotsPolarAnnulus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
-  </data>
-  <data name="mnuStructuredCircularOtherRosePlotsPolarAnnulus.Text" xml:space="preserve">
-    <value>Polar Annulus...</value>
   </data>
   <data name="mnuStructuredCircularOtherRosePlots.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 22</value>
@@ -7137,6 +7122,12 @@
   <data name="&gt;&gt;mnuViewResetToDefaultLayout.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuViewSwapDataAndMetadata.Name" xml:space="preserve">
+    <value>mnuViewSwapDataAndMetadata</value>
+  </data>
+  <data name="&gt;&gt;mnuViewSwapDataAndMetadata.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuHelp.Name" xml:space="preserve">
     <value>mnuHelp</value>
   </data>
@@ -7417,6 +7408,18 @@
     <value>mnuClimaticTidyandExamineAppend</value>
   </data>
   <data name="&gt;&gt;mnuClimaticTidyandExamineAppend.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator69.Name" xml:space="preserve">
+    <value>ToolStripSeparator69</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator69.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticDataEntry.Name" xml:space="preserve">
+    <value>mnuClimaticDataEntry</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticDataEntry.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator50.Name" xml:space="preserve">
@@ -9397,36 +9400,6 @@
     <value>mnuStructuredCircularOtherRosePlots</value>
   </data>
   <data name="&gt;&gt;mnuStructuredCircularOtherRosePlots.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuStructuredCircularOtherRosePlotsPercentileRose.Name" xml:space="preserve">
-    <value>mnuStructuredCircularOtherRosePlotsPercentileRose</value>
-  </data>
-  <data name="&gt;&gt;mnuStructuredCircularOtherRosePlotsPercentileRose.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuStructuredCircularOtherRosePlotsPolarPlot.Name" xml:space="preserve">
-    <value>mnuStructuredCircularOtherRosePlotsPolarPlot</value>
-  </data>
-  <data name="&gt;&gt;mnuStructuredCircularOtherRosePlotsPolarPlot.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuStructuredCircularOtherRosePlotsPolarFrequency.Name" xml:space="preserve">
-    <value>mnuStructuredCircularOtherRosePlotsPolarFrequency</value>
-  </data>
-  <data name="&gt;&gt;mnuStructuredCircularOtherRosePlotsPolarFrequency.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuStructuredCircularOtherRosePlotsPolarCluster.Name" xml:space="preserve">
-    <value>mnuStructuredCircularOtherRosePlotsPolarCluster</value>
-  </data>
-  <data name="&gt;&gt;mnuStructuredCircularOtherRosePlotsPolarCluster.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuStructuredCircularOtherRosePlotsPolarAnnulus.Name" xml:space="preserve">
-    <value>mnuStructuredCircularOtherRosePlotsPolarAnnulus</value>
-  </data>
-  <data name="&gt;&gt;mnuStructuredCircularOtherRosePlotsPolarAnnulus.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator68.Name" xml:space="preserve">
