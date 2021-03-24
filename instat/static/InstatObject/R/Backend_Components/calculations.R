@@ -135,17 +135,17 @@ instat_calculation <- R6::R6Class("instat_calculation",
                            self$before <- before
                            self$adjacent_column <- adjacent_column
                          },
-                         name = "",
-                         result_name = "",
-						             result_data_frame = "",
-                         type = "",
-                         manipulations = list(),
-                         sub_calculations = list(),
-                         function_exp = "",
-                         calculated_from = list(),
-                         save = 0,
-						             before = FALSE,
-						             adjacent_column = ""
+						               name = "",
+						               result_name = "",
+						               result_data_frame = "",
+						               type = "",
+						               manipulations = list(),
+						               sub_calculations = list(),
+						               function_exp = "",
+						               calculated_from = list(),
+						               save = 0,
+						               before = FALSE,
+						               adjacent_column = ""
                        )
 )
 
