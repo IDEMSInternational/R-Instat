@@ -35,6 +35,7 @@ Public Class dlgClimaticDataEntry
         SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
+        ucrBase.OKEnabled(False)
     End Sub
     Private Sub InitialiseDialog()
 
@@ -112,9 +113,6 @@ Public Class dlgClimaticDataEntry
             ucrBase.OKEnabled(False)
             cmdEnterData.Enabled = False
         End If
-        If sdgClimaticDataEntry.GetNumofRowsChanged < 1 Then
-            ucrBase.OKEnabled(False)
-        End If
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -146,7 +144,7 @@ Public Class dlgClimaticDataEntry
         sdgClimaticDataEntry.Setup(strStationColumnName, strDateColumnName, lstElementsColumnNames,
                                        dfTemp, strSelectedDataFrameName)
 
-            sdgClimaticDataEntry.ShowDialog()
+        sdgClimaticDataEntry.ShowDialog()
 
         'if no changes made then just return
         If sdgClimaticDataEntry.GetNumofRowsChanged < 1 Then
@@ -195,4 +193,7 @@ Public Class dlgClimaticDataEntry
         Return dfTemp
     End Function
 
+    Private Sub ucrSelectorClimaticDataEntry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticDataEntry.ControlValueChanged
+        sdgClimaticDataEntry.Reset()
+    End Sub
 End Class
