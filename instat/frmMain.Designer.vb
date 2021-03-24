@@ -157,6 +157,7 @@ Partial Class frmMain
         Me.mnuViewOptionsByContextMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator39 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuViewResetToDefaultLayout = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewSwapDataAndMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpHelpIntroduction = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpHistFAQ = New System.Windows.Forms.ToolStripMenuItem()
@@ -204,6 +205,8 @@ Partial Class frmMain
         Me.mnuClimaticTidyandExamineUnstack = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineMerge = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineAppend = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator69 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuClimaticDataEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator50 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticTidyandExamineOneVariableSummarize = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
@@ -1269,7 +1272,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata})
         Me.mnuView.Name = "mnuView"
         resources.ApplyResources(Me.mnuView, "mnuView")
         Me.mnuView.Tag = "View"
@@ -1345,6 +1348,11 @@ Partial Class frmMain
         '
         Me.mnuViewResetToDefaultLayout.Name = "mnuViewResetToDefaultLayout"
         resources.ApplyResources(Me.mnuViewResetToDefaultLayout, "mnuViewResetToDefaultLayout")
+        '
+        'mnuViewSwapDataAndMetadata
+        '
+        Me.mnuViewSwapDataAndMetadata.Name = "mnuViewSwapDataAndMetadata"
+        resources.ApplyResources(Me.mnuViewSwapDataAndMetadata, "mnuViewSwapDataAndMetadata")
         '
         'mnuHelp
         '
@@ -1527,7 +1535,7 @@ Partial Class frmMain
         '
         'mnuClimaticTidyandExamine
         '
-        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineVisualiseData, Me.mnuClimaticTidyandExamineTidyDailyData, Me.mnuClimaticTidyandExamineNonNumericCases, Me.mnuClimaticTidyandExamineReplaceValues, Me.mnuClimaticTidyandExamineDuplicates, Me.ToolStripSeparator54, Me.mnuClimaticTidyandExamineStack, Me.mnuClimaticTidyandExamineUnstack, Me.mnuClimaticTidyandExamineMerge, Me.mnuClimaticTidyandExamineAppend, Me.ToolStripSeparator50, Me.mnuClimaticTidyandExamineOneVariableSummarize, Me.mnuClimaticTidyandExamineOneVariableGraph, Me.mnuClimaticTidyandExamineOneVariableFrequencies})
+        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineVisualiseData, Me.mnuClimaticTidyandExamineTidyDailyData, Me.mnuClimaticTidyandExamineNonNumericCases, Me.mnuClimaticTidyandExamineReplaceValues, Me.mnuClimaticTidyandExamineDuplicates, Me.ToolStripSeparator54, Me.mnuClimaticTidyandExamineStack, Me.mnuClimaticTidyandExamineUnstack, Me.mnuClimaticTidyandExamineMerge, Me.mnuClimaticTidyandExamineAppend, Me.ToolStripSeparator69, Me.mnuClimaticDataEntry, Me.ToolStripSeparator50, Me.mnuClimaticTidyandExamineOneVariableSummarize, Me.mnuClimaticTidyandExamineOneVariableGraph, Me.mnuClimaticTidyandExamineOneVariableFrequencies})
         Me.mnuClimaticTidyandExamine.Name = "mnuClimaticTidyandExamine"
         resources.ApplyResources(Me.mnuClimaticTidyandExamine, "mnuClimaticTidyandExamine")
         '
@@ -1580,6 +1588,16 @@ Partial Class frmMain
         '
         Me.mnuClimaticTidyandExamineAppend.Name = "mnuClimaticTidyandExamineAppend"
         resources.ApplyResources(Me.mnuClimaticTidyandExamineAppend, "mnuClimaticTidyandExamineAppend")
+        '
+        'ToolStripSeparator69
+        '
+        Me.ToolStripSeparator69.Name = "ToolStripSeparator69"
+        resources.ApplyResources(Me.ToolStripSeparator69, "ToolStripSeparator69")
+        '
+        'mnuClimaticDataEntry
+        '
+        Me.mnuClimaticDataEntry.Name = "mnuClimaticDataEntry"
+        resources.ApplyResources(Me.mnuClimaticDataEntry, "mnuClimaticDataEntry")
         '
         'ToolStripSeparator50
         '
@@ -4767,4 +4785,7 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticNCMPTrendGraphs As ToolStripMenuItem
     Friend WithEvents mnuClimaticNCMPCountRecords As ToolStripMenuItem
     Friend WithEvents mnuClimaticNCMPSummary As ToolStripMenuItem
+    Friend WithEvents mnuViewSwapDataAndMetadata As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator69 As ToolStripSeparator
+    Friend WithEvents mnuClimaticDataEntry As ToolStripMenuItem
 End Class

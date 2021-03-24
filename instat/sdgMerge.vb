@@ -15,18 +15,18 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.ComponentModel
+Imports instat.Translations
 
 Public Class sdgMerge
     Private bControlsInitialised As Boolean = False
     Private clsByList As New RFunction
     Private clsMerge As RFunction
-    Private bEnableColumnSelection As Boolean = True
 
-    'Private Sub sdgMerge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    'End Sub
+    Private Sub sdgMerge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        autoTranslate(Me)
+    End Sub
 
     Public Sub InitiatiseControls()
-        'Merge by Columns tab
         ucrSelectorFirstDF.SetLabelText("First Data Frame")
         ucrSelectorSecondDF.SetLabelText("Second Data Frame")
 
@@ -36,113 +36,22 @@ Public Class sdgMerge
         ucrReceiverSecondDF.Selector = ucrSelectorSecondDF
         ucrReceiverSecondDF.SetMeAsReceiver()
 
-        ucrPnlMergeByOptions.AddRadioButton(rdoByAllMatching)
-        ucrPnlMergeByOptions.AddRadioButton(rdoChooseColumns)
-
-        ucrPnlMergeByOptions.AddParameterPresentCondition(rdoByAllMatching, "by", False)
-        ucrPnlMergeByOptions.AddParameterPresentCondition(rdoChooseColumns, "by")
-        ucrPnlMergeByOptions.AddToLinkedControls(ucrSelectorFirstDF, {rdoChooseColumns}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlMergeByOptions.AddToLinkedControls(ucrSelectorSecondDF, {rdoChooseColumns}, bNewLinkedHideIfParameterMissing:=True)
-
-        ' Columns to Include tab
-        ucrChkMergeWithSubsetFirst.SetText("Choose Subset of Columns to Merge")
-        ucrChkMergeWithSubsetFirst.AddToLinkedControls(ucrReceiverFirstSelected, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkMergeWithSubsetFirst.AddParameterValueFunctionNamesCondition(True, "x", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        ucrChkMergeWithSubsetFirst.AddParameterValueFunctionNamesCondition(False, "x", frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-
-        ucrChkMergeWithSubsetSecond.SetText("Choose Subset of Columns to Merge")
-        ucrChkMergeWithSubsetSecond.AddToLinkedControls(ucrReceiverSecondSelected, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkMergeWithSubsetSecond.AddParameterValueFunctionNamesCondition(True, "y", frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        ucrChkMergeWithSubsetSecond.AddParameterValueFunctionNamesCondition(False, "y", frmMain.clsRLink.strInstatDataObject & "$get_data_frame")
-
-        ucrReceiverFirstSelected.SetParameter(New RParameter("x", 0))
-        ucrReceiverFirstSelected.SetParameterIsRFunction()
-        ucrReceiverFirstSelected.SetLinkedDisplayControl(lblVariablesToIncludeFirst)
-        ucrReceiverFirstSelected.Selector = ucrSelectorColumnsToIncludeFirst
-        ucrReceiverFirstSelected.SetMeAsReceiver()
-        ucrReceiverFirstSelected.bForceAsDataFrame = True
-
-        ucrReceiverSecondSelected.SetParameter(New RParameter("y", 1))
-        ucrReceiverSecondSelected.SetParameterIsRFunction()
-        ucrReceiverSecondSelected.SetLinkedDisplayControl(lblVariablesToIncludeSecond)
-        ucrReceiverSecondSelected.Selector = ucrSelectorColumnsToIncludeSecond
-        ucrReceiverSecondSelected.SetMeAsReceiver()
-        ucrReceiverSecondSelected.bForceAsDataFrame = True
-
         bControlsInitialised = True
     End Sub
 
-    Public Sub Setup(strFirstDataName As String, strSecondDataName As String, clsNewMerge As RFunction, clsNewByList As RFunction, bReset As Boolean, Optional bNewEnableColumnSelection As Boolean = True)
+    Public Sub Setup(strFirstDataName As String, strSecondDataName As String, clsNewMerge As RFunction, clsNewByList As RFunction, bReset As Boolean)
         If Not bControlsInitialised Then
             InitiatiseControls()
         End If
         ucrSelectorFirstDF.SetDataframe(strFirstDataName, False)
         ucrSelectorSecondDF.SetDataframe(strSecondDataName, False)
 
-        If bNewEnableColumnSelection Then
-            ucrSelectorColumnsToIncludeFirst.SetDataframe(strFirstDataName, False)
-            ucrSelectorColumnsToIncludeSecond.SetDataframe(strSecondDataName, False)
-        End If
-        bEnableColumnSelection = bNewEnableColumnSelection
         clsMerge = clsNewMerge
         clsByList = clsNewByList
         ResetKeyList()
         For Each clsTempParam In clsByList.clsParameters
             lstKeyColumns.Items.Add(clsTempParam.strArgumentName.Trim(Chr(34))).SubItems.AddRange({"and", clsTempParam.strArgumentValue.Trim(Chr(34))})
         Next
-        If bReset Then
-            tbcMergeOptions.SelectedIndex = 0
-        End If
-
-        ucrPnlMergeByOptions.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
-        If bNewEnableColumnSelection Then
-            ucrChkMergeWithSubsetFirst.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
-            ucrChkMergeWithSubsetSecond.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
-            If ucrChkMergeWithSubsetFirst.Checked Then
-                ucrReceiverFirstSelected.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
-            Else
-                ucrReceiverFirstSelected.Clear()
-            End If
-            If ucrChkMergeWithSubsetSecond.Checked Then
-                ucrReceiverSecondSelected.SetRCode(clsMerge, bReset, bCloneIfNeeded:=True)
-            Else
-                ucrReceiverSecondSelected.Clear()
-            End If
-            SetXParameter()
-            SetYParameter()
-        End If
-    End Sub
-
-    Public ReadOnly Property IsComplete() As Boolean
-        Get
-            If rdoByAllMatching.Checked Then
-                Return True
-            ElseIf rdoChooseColumns.Checked Then
-                If lstKeyColumns.Items.Count > 0 Then
-                    Return True
-                Else
-                    Return False
-                End If
-            Else
-                Return False
-            End If
-        End Get
-    End Property
-
-    Private Sub AddRemoveBy()
-        If rdoByAllMatching.Checked Then
-            ucrSelectorFirstDF.SetVariablesVisible(False)
-            ucrSelectorSecondDF.SetVariablesVisible(False)
-            grpKeys.Visible = False
-            pnlKeyColumns.Visible = False
-            clsMerge.RemoveParameterByName("by")
-        ElseIf rdoChooseColumns.Checked Then
-            ucrSelectorFirstDF.SetVariablesVisible(True)
-            ucrSelectorSecondDF.SetVariablesVisible(True)
-            grpKeys.Visible = True
-            pnlKeyColumns.Visible = True
-            SetByArgument()
-        End If
     End Sub
 
     Public Sub AutoAddInOtherReceiver(ucrChangedReceiver As ucrReceiverSingle, ucrOtherReceiver As ucrReceiverSingle)
@@ -166,7 +75,7 @@ Public Class sdgMerge
             clsByList.AddParameter(Chr(34) & lviItem.Text() & Chr(34), Chr(34) & lviItem.SubItems(2).Text() & Chr(34))
         Next
         If lstKeyColumns.Items.Count > 0 Then
-            clsMerge.AddParameter("by", clsRFunctionParameter:=clsByList)
+            clsMerge.AddParameter("by", clsRFunctionParameter:=clsByList, iPosition:=2)
         Else
             clsMerge.RemoveParameterByName("by")
         End If
@@ -227,97 +136,15 @@ Public Class sdgMerge
         SetByArgument()
     End Sub
 
-    Private Sub SetXParameter()
-        If ucrChkMergeWithSubsetFirst.Checked AndAlso Not ucrReceiverFirstSelected.IsEmpty Then
-            clsMerge.AddParameter("x", clsRFunctionParameter:=ucrReceiverFirstSelected.GetVariables(bForceAsDataFrame:=True))
-        Else
-            clsMerge.AddParameter("x", clsRFunctionParameter:=ucrSelectorColumnsToIncludeFirst.ucrAvailableDataFrames.clsCurrDataFrame)
-        End If
-        ucrSelectorColumnsToIncludeFirst.SetVariablesVisible(ucrChkMergeWithSubsetFirst.Checked)
-    End Sub
-
-    Private Sub SetYParameter()
-        If ucrChkMergeWithSubsetSecond.Checked AndAlso Not ucrReceiverSecondSelected.IsEmpty Then
-            clsMerge.AddParameter("y", clsRFunctionParameter:=ucrReceiverSecondSelected.GetVariables(bForceAsDataFrame:=True))
-        Else
-            clsMerge.AddParameter("y", clsRFunctionParameter:=ucrSelectorColumnsToIncludeSecond.ucrAvailableDataFrames.clsCurrDataFrame)
-        End If
-        ucrSelectorColumnsToIncludeSecond.SetVariablesVisible(ucrChkMergeWithSubsetSecond.Checked)
-    End Sub
-
-    Private Sub ucrPnlMergeByOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMergeByOptions.ControlValueChanged
-        pnlKeyColumns.Visible = rdoChooseColumns.Checked
-        grpKeys.Visible = rdoChooseColumns.Checked
-        AddRemoveBy()
-    End Sub
-
     Private Sub cmdRemoveAll_Click(sender As Object, e As EventArgs) Handles cmdRemoveAll.Click
         ResetKeyList()
-    End Sub
-
-    Private Sub ucrReceiverSecondDF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondDF.ControlValueChanged
-        AutoAddInOtherReceiver(ucrReceiverSecondDF, ucrReceiverFirstDF)
     End Sub
 
     Private Sub ucrReceiverFirstDF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstDF.ControlValueChanged
         AutoAddInOtherReceiver(ucrReceiverFirstDF, ucrReceiverSecondDF)
     End Sub
 
-    Private Sub FirstSubsetControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMergeWithSubsetFirst.ControlValueChanged, ucrReceiverFirstSelected.ControlValueChanged
-        SetXParameter()
-    End Sub
-
-    Private Sub SecondSubsetControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMergeWithSubsetSecond.ControlValueChanged, ucrReceiverSecondSelected.ControlValueChanged
-        SetYParameter()
-    End Sub
-
-    Private Sub sdgMerge_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-        Dim lstMatchingColumns As New List(Of String)
-
-        ' If user has chosen subset of columns we need to ensure 'by' columns are also included.
-
-        ' If user has specified the 'by' columns manually then we just check these
-        ' otherwise we check all columns with the same name in both data frames as this is what the 'by' will be by default.
-        If rdoChooseColumns.Checked Then
-            If ucrChkMergeWithSubsetFirst.Checked Then
-                For Each clsTmpParam As RParameter In clsByList.clsParameters
-                    If Not ucrReceiverFirstSelected.GetVariableNamesAsList.Contains(clsTmpParam.strArgumentName.Trim(Chr(34))) Then
-                        ucrReceiverFirstSelected.Add(clsTmpParam.strArgumentName.Trim(Chr(34)), ucrSelectorColumnsToIncludeFirst.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                    End If
-                Next
-            End If
-            If ucrChkMergeWithSubsetSecond.Checked Then
-                For Each clsTmpParam As RParameter In clsByList.clsParameters
-                    If Not ucrReceiverFirstSelected.GetVariableNamesAsList.Contains(clsTmpParam.strArgumentValue.Trim(Chr(34))) Then
-                        ucrReceiverSecondSelected.Add(clsTmpParam.strArgumentValue.Trim(Chr(34)), ucrSelectorColumnsToIncludeSecond.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                    End If
-                Next
-            End If
-        Else
-            If ucrChkMergeWithSubsetFirst.Checked OrElse ucrChkMergeWithSubsetSecond.Checked Then
-                For i As Integer = 0 To ucrSelectorColumnsToIncludeFirst.lstAvailableVariable.Items.Count - 1
-                    For j As Integer = 0 To ucrSelectorColumnsToIncludeSecond.lstAvailableVariable.Items.Count - 1
-                        If ucrSelectorColumnsToIncludeFirst.lstAvailableVariable.Items(i).Text = ucrSelectorColumnsToIncludeSecond.lstAvailableVariable.Items(j).Text Then
-                            lstMatchingColumns.Add(ucrSelectorColumnsToIncludeFirst.lstAvailableVariable.Items(i).Text)
-                            Exit For
-                        End If
-                    Next
-                Next
-                For Each strTemp As String In lstMatchingColumns
-                    ucrReceiverFirstSelected.Add(strTemp, ucrSelectorColumnsToIncludeFirst.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                    ucrReceiverSecondSelected.Add(strTemp, ucrSelectorColumnsToIncludeSecond.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-                Next
-            End If
-        End If
-    End Sub
-
-    Private Sub sdgMerge_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bEnableColumnSelection Then
-            If tbcMergeOptions.TabPages.Count <> 2 Then
-                tbcMergeOptions.TabPages.Add(value:=tpIncludeColumns)
-            End If
-        Else
-            tbcMergeOptions.TabPages.Remove(tpIncludeColumns)
-        End If
+    Private Sub ucrReceiverSecondDF_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecondDF.ControlValueChanged
+        AutoAddInOtherReceiver(ucrReceiverSecondDF, ucrReceiverFirstDF)
     End Sub
 End Class

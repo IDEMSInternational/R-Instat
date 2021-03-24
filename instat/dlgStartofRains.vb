@@ -763,7 +763,25 @@ Public Class dlgStartofRains
 
     Private Sub TestOKEnabled()
         Dim bOkEnabled As Boolean
-        If (ucrChkAsDoy.Checked AndAlso Not ucrInputNewDoyColumnName.IsEmpty) AndAlso Not ucrReceiverRainfall.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverDOY.IsEmpty AndAlso Not ucrReceiverYear.IsEmpty AndAlso ucrNudThreshold.GetText <> "" AndAlso ((ucrChkNumberOfRainyDays.Checked AndAlso ucrNudRDMinimumDays.GetText <> "" AndAlso ucrNudRDOutOfDays.GetText <> "") OrElse Not ucrChkNumberOfRainyDays.Checked) AndAlso (((ucrChkTotalRainfall.Checked AndAlso ucrNudTROverDays.GetText <> "") AndAlso ((rdoTRAmount.Checked AndAlso ucrNudTRAmount.GetText <> "") OrElse (rdoTRPercentile.Checked AndAlso ucrNudTRPercentile.GetText <> ""))) OrElse Not ucrChkTotalRainfall.Checked) AndAlso ((ucrChkDrySpell.Checked AndAlso ucrNudDSMaximumDays.GetText <> "" AndAlso ucrNudDSLengthOfTime.GetText <> "") OrElse Not ucrChkDrySpell.Checked) AndAlso ((ucrChkDryPeriod.Checked AndAlso ucrNudDPMaxRain.GetText <> "" AndAlso ucrNudDPRainPeriod.GetText <> "" AndAlso ucrNudDPOverallInterval.GetText <> "") OrElse Not ucrChkDryPeriod.Checked) Then
+        If Not ucrReceiverRainfall.IsEmpty AndAlso
+                Not ucrReceiverDate.IsEmpty AndAlso
+                Not ucrReceiverDOY.IsEmpty AndAlso
+                Not ucrReceiverYear.IsEmpty AndAlso
+                ucrNudThreshold.GetText <> "" AndAlso
+                (
+                    (ucrChkNumberOfRainyDays.Checked AndAlso ucrNudRDMinimumDays.GetText <> "" AndAlso ucrNudRDOutOfDays.GetText <> "") OrElse
+                    Not ucrChkNumberOfRainyDays.Checked) AndAlso
+                (
+                    (
+                        (ucrChkTotalRainfall.Checked AndAlso ucrNudTROverDays.GetText <> "") AndAlso
+                        ((rdoTRAmount.Checked AndAlso ucrNudTRAmount.GetText <> "") OrElse (rdoTRPercentile.Checked AndAlso ucrNudTRPercentile.GetText <> ""))) OrElse
+                    Not ucrChkTotalRainfall.Checked) AndAlso
+                (
+                    (ucrChkDrySpell.Checked AndAlso ucrNudDSMaximumDays.GetText <> "" AndAlso ucrNudDSLengthOfTime.GetText <> "") OrElse
+                    Not ucrChkDrySpell.Checked) AndAlso
+                (
+                    (ucrChkDryPeriod.Checked AndAlso ucrNudDPMaxRain.GetText <> "" AndAlso ucrNudDPRainPeriod.GetText <> "" AndAlso ucrNudDPOverallInterval.GetText <> "") OrElse
+                    Not ucrChkDryPeriod.Checked) Then
             bOkEnabled = True
         Else
             bOkEnabled = False
@@ -771,17 +789,13 @@ Public Class dlgStartofRains
         If Not (ucrChkTotalRainfall.Checked OrElse ucrChkNumberOfRainyDays.Checked OrElse ucrChkDrySpell.Checked OrElse ucrChkDryPeriod.Checked) Then
             bOkEnabled = False
         End If
-        If ucrChkAsDoy.Checked AndAlso ucrChkAsDate.Checked Then
-            If Not ucrInputNewDoyColumnName.IsEmpty AndAlso Not ucrInputNewDateColumnName.IsEmpty Then
-                bOkEnabled = True
-            Else
-                bOkEnabled = False
-            End If
+        If Not (ucrChkAsDoy.Checked OrElse ucrChkAsDate.Checked OrElse ucrChkStatus.Checked) Then
+            bOkEnabled = False
         End If
-        If ucrChkStatus.Checked Then
-            If ucrInputNewStatusColumnName.IsEmpty Then
-                bOkEnabled = False
-            End If
+        If (ucrChkAsDoy.Checked AndAlso ucrInputNewDoyColumnName.IsEmpty) OrElse
+                (ucrChkAsDate.Checked AndAlso ucrInputNewDateColumnName.IsEmpty) OrElse
+                (ucrChkStatus.Checked AndAlso ucrInputNewStatusColumnName.IsEmpty) Then
+            bOkEnabled = False
         End If
 
         ucrBase.OKEnabled(bOkEnabled)

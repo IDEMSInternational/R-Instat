@@ -132,7 +132,7 @@
     <value>39, 12</value>
   </data>
   <data name="rdoDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 27</value>
+    <value>115, 27</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoDataFrame.TabIndex" type="System.Int32, mscorlib">
@@ -154,7 +154,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoDataFrame.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="rdoSelectedVariables.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -166,10 +166,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 12</value>
+    <value>152, 12</value>
   </data>
   <data name="rdoSelectedVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 27</value>
+    <value>115, 27</value>
   </data>
   <data name="rdoSelectedVariables.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -190,7 +190,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoSelectedVariables.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="rdoIndexNumberOfDuplicates.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -220,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoIndexNumberOfDuplicates.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="rdoDuplicatesOnly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -250,7 +250,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoDuplicatesOnly.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="rdoAllDuplicateCases.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -280,7 +280,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoAllDuplicateCases.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <metadata name="ttDuplicates.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>31, 6</value>
@@ -295,10 +295,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoSuccessiveValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>295, 12</value>
+    <value>265, 12</value>
   </data>
   <data name="rdoSuccessiveValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 27</value>
+    <value>115, 27</value>
   </data>
   <data name="rdoSuccessiveValues.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -319,7 +319,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoSuccessiveValues.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="ucrInputOmitValues.Location" type="System.Drawing.Point, System.Drawing">
     <value>145, 45</value>
@@ -427,7 +427,7 @@
     <value>4</value>
   </data>
   <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 242</value>
+    <value>10, 230</value>
   </data>
   <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>288, 124</value>
@@ -448,7 +448,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpOptions.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="lblSelectedVariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -457,16 +457,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 82</value>
+    <value>277, 82</value>
   </data>
   <data name="lblSelectedVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 13</value>
+    <value>94, 13</value>
   </data>
   <data name="lblSelectedVariable.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="lblSelectedVariable.Text" xml:space="preserve">
-    <value>Variable to check:</value>
+    <value>Variable to Check:</value>
   </data>
   <data name="&gt;&gt;lblSelectedVariable.Name" xml:space="preserve">
     <value>lblSelectedVariable</value>
@@ -478,7 +478,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelectedVariable.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lblVariablesToDuplicate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -487,16 +487,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblVariablesToDuplicate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 82</value>
+    <value>277, 82</value>
   </data>
   <data name="lblVariablesToDuplicate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
+    <value>99, 13</value>
   </data>
   <data name="lblVariablesToDuplicate.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="lblVariablesToDuplicate.Text" xml:space="preserve">
-    <value>Variables to check:</value>
+    <value>Variables to Check:</value>
   </data>
   <data name="&gt;&gt;lblVariablesToDuplicate.Name" xml:space="preserve">
     <value>lblVariablesToDuplicate</value>
@@ -508,7 +508,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVariablesToDuplicate.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lblType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -517,7 +517,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>174, 278</value>
+    <value>178, 297</value>
   </data>
   <data name="lblType.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
@@ -538,10 +538,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblType.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrInputComboType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>172, 294</value>
+    <value>212, 295</value>
   </data>
   <data name="ucrInputComboType.Size" type="System.Drawing.Size, System.Drawing">
     <value>84, 21</value>
@@ -559,7 +559,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputComboType.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -571,10 +571,31 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>464, 456</value>
+    <value>422, 473</value>
+  </data>
+  <data name="ucrChkIncludeSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 360</value>
+  </data>
+  <data name="ucrChkIncludeSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 20</value>
+  </data>
+  <data name="ucrChkIncludeSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeSummary.Name" xml:space="preserve">
+    <value>ucrChkIncludeSummary</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeSummary.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeSummary.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeSummary.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrReceiverForSuccessiveValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 97</value>
+    <value>277, 97</value>
   </data>
   <data name="ucrReceiverForSuccessiveValues.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -595,13 +616,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverForSuccessiveValues.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ucrPnlDuplicates.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 245</value>
   </data>
   <data name="ucrPnlDuplicates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 77</value>
+    <value>298, 77</value>
   </data>
   <data name="ucrPnlDuplicates.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -616,16 +637,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlDuplicates.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="ucrNewColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 372</value>
+    <value>10, 388</value>
+  </data>
+  <data name="ucrNewColumnName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewColumnName.Size" type="System.Drawing.Size, System.Drawing">
     <value>281, 24</value>
   </data>
   <data name="ucrNewColumnName.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrNewColumnName.Name" xml:space="preserve">
     <value>ucrNewColumnName</value>
@@ -637,13 +661,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNewColumnName.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 8</value>
   </data>
   <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>436, 36</value>
+    <value>397, 36</value>
   </data>
   <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -658,16 +682,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 398</value>
+    <value>10, 416</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>401, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -679,7 +703,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="ucrSelectorDuplicateswithVariables.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 47</value>
@@ -703,7 +727,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorDuplicateswithVariables.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -724,7 +748,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverForSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 97</value>
+    <value>277, 97</value>
   </data>
   <data name="ucrReceiverForSelectedVariables.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -745,6 +769,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverForSelectedVariables.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
 </root>
