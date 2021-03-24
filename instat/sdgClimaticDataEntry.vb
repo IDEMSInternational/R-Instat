@@ -103,7 +103,7 @@ Public Class sdgClimaticDataEntry
     ''' <summary>
     ''' adds the row index changed to the list of rows changes
     ''' </summary>
-    ''' <param name="iRow"></param>
+    ''' <param name="iRow"> row index</param>
     Private Sub AddChangedRow(iRow As Integer)
         'add the row index and row name to the lust of rows changed
         If Not dctRowsChanged.ContainsKey(iRow) Then
