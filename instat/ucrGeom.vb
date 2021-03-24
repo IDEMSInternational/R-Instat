@@ -578,6 +578,7 @@ Public Class ucrGeom
         clsgeom_crossbar.strGeomName = "geom_crossbar"
         'Mandatory
         clsgeom_crossbar.AddAesParameter("x", bIsMandatory:=True)
+        clsgeom_crossbar.AddAesParameter("y", bIsMandatory:=True)
         clsgeom_crossbar.AddAesParameter("ymax", bIsMandatory:=True)
         clsgeom_crossbar.AddAesParameter("ymin", bIsMandatory:=True)
         'Optional
@@ -585,11 +586,17 @@ Public Class ucrGeom
         clsgeom_crossbar.AddAesParameter("colour")
         clsgeom_crossbar.AddAesParameter("linetype")
         clsgeom_crossbar.AddAesParameter("size")
+        clsgeom_crossbar.AddAesParameter("fill")
+        clsgeom_crossbar.AddAesParameter("group")
+        clsgeom_crossbar.AddAesParameter("type")
+
+
 
         'adding layer parameters
         clsgeom_crossbar.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
-        clsgeom_crossbar.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_crossbar.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "dodge" & Chr(34)})
         clsgeom_crossbar.AddLayerParameter("fatten", "numeric", "2.5", lstParameterStrings:={1, 1})
+        clsgeom_crossbar.AddLayerParameter("width", "numeric", "0.5", lstParameterStrings:={1, 0})
         clsgeom_crossbar.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_crossbar.AddLayerParameter("na.rm", "boolean", "FALSE")
         lstAllGeoms.Add(clsgeom_crossbar)
@@ -845,7 +852,7 @@ Public Class ucrGeom
         clsgeom_errorbarh.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
         clsgeom_errorbarh.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_errorbarh.AddLayerParameter("size", "numeric", "1", lstParameterStrings:={0, 0})
-        clsgeom_errorbarh.AddLayerParameter("height", "numeric", "0.2", lstParameterStrings:={1, 1})
+        clsgeom_errorbarh.AddLayerParameter("height", "numeric", "0.2", lstParameterStrings:={1, 0})
         clsgeom_errorbarh.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_errorbarh.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         lstAllGeoms.Add(clsgeom_errorbarh)
@@ -1143,7 +1150,7 @@ Public Class ucrGeom
         clsgeom_path.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
         'linemitre should 1 or a number >1
         clsgeom_path.AddLayerParameter("linemitre", "numeric", "1", lstParameterStrings:={0, 1})
-        clsgeom_path.AddLayerParameter("arrow", "editablelist", Chr(34) & "arrow()", lstParameterStrings:={"arrow()"})
+        clsgeom_path.AddLayerParameter("arrow", "editablelist", "arrow()", lstParameterStrings:={"arrow()"})
         lstAllGeoms.Add(clsgeom_path)
 
         clsgeom_mosaic.SetGeomPackage("ggmosaic")
@@ -1312,8 +1319,10 @@ Public Class ucrGeom
 
         clsgeom_rect.strGeomName = "geom_rect"
         'mandatory
-        clsgeom_rect.AddAesParameter("x", bIsMandatory:=True)
-        clsgeom_rect.AddAesParameter("y", bIsMandatory:=True)
+        clsgeom_rect.AddAesParameter("xmin", bIsMandatory:=True)
+        clsgeom_rect.AddAesParameter("xmax", bIsMandatory:=True)
+        clsgeom_rect.AddAesParameter("ymin", bIsMandatory:=True)
+        clsgeom_rect.AddAesParameter("ymax ", bIsMandatory:=True)
         'optional
         clsgeom_rect.AddAesParameter("alpha")
         clsgeom_rect.AddAesParameter("colour")
@@ -1323,6 +1332,7 @@ Public Class ucrGeom
 
         clsgeom_rect.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
         clsgeom_rect.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34)})
+        clsgeom_raster.AddLayerParameter("size", "numeric", "0.5")
         clsgeom_rect.AddLayerParameter("linejoin", "list", Chr(34) & "round" & Chr(34), lstParameterStrings:={Chr(34) & "round" & Chr(34), Chr(34) & "mitre" & Chr(34), Chr(34) & "bevel" & Chr(34)})
         clsgeom_rect.AddLayerParameter("na.rm", "boolean", "FALSE")
         clsgeom_rect.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
