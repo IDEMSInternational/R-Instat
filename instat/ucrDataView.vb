@@ -650,15 +650,6 @@ Public Class ucrDataView
         e.IsCancelled = True
     End Sub
 
-    Private Sub grdCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforePaste
-        e.IsCancelled = True
-        If Not e.Range.IsSingleCell Then
-            MsgBox("Pasting multiple cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try pasting one cell at a time.", MsgBoxStyle.Information, "Cannot paste multiple cells")
-        Else
-            ReplaceValueInData(Clipboard.GetText(), e.Range.Row, e.Range.Col)
-        End If
-    End Sub
-
     ' Not currently working. Bug with reogrid reported here:
     ' https://reogrid.net/forum/viewtopic.php?id=350
     Private Sub grdCurrSheet_BeforeRangeMove(sender As Object, e As BeforeCopyOrMoveRangeEventArgs) Handles grdCurrSheet.BeforeRangeMove

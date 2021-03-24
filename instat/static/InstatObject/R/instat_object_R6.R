@@ -789,6 +789,11 @@ DataBook$set("public", "replace_value_in_data", function(data_name, col_names, r
 }
 )
 
+DataBook$set("public", "paste_from_clipboard", function(data_name, col_names, start_row_pos = 1, first_clip_row_is_header = TRUE, clip_board_text) {
+  self$get_data_objects(data_name)$paste_from_clipboard(col_names, start_row_pos, first_clip_row_is_header, clip_board_text)
+}
+)
+
 DataBook$set("public", "rename_column_in_data", function(data_name, column_name, new_val, label = "") {
   self$get_data_objects(data_name)$rename_column_in_data(column_name, new_val, label)
   self$update_links_rename_column(data_name = data_name, old_column_name = column_name, new_column_name = new_val)
