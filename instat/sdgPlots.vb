@@ -81,8 +81,7 @@ Public Class sdgPlots
         Dim strThemes As String()
 
         clsAestheticFunction.SetRCommand("c")
-        clsAestheticFunction.AddParameter("fill", Chr(34) & "fill" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-        clsAestheticFunction.AddParameter("colour", Chr(34) & "colour" & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
+        clsAestheticFunction.AddParameter("colour", Chr(34) & "colour" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
 
         Dim clsCoordFlipFunc As New RFunction
         Dim clsCoordFlipParam As New RParameter
@@ -903,10 +902,13 @@ Public Class sdgPlots
         If ucrChkAddFillScale.Checked Then
             clsBaseOperator.AddParameter("scale_fill", clsRFunctionParameter:=clsScaleFillViridisFunction, iPosition:=3)
             clsBaseOperator.RemoveParameterByName("scale_colour")
+            AddRemoveColour()
             grpFillScale.Visible = True
         Else
+            clsBaseOperator.RemoveParameterByName("scale_colour")
             clsBaseOperator.RemoveParameterByName("scale_fill")
             grpFillScale.Visible = False
+            grpColourScale.Visible = False
         End If
     End Sub
 

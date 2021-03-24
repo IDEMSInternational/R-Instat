@@ -115,6 +115,7 @@ Partial Class sdgPlots
         Me.ucrChkApplyChanges = New instat.ucrCheck()
         Me.ucrChkAddFillScale = New instat.ucrCheck()
         Me.grpColourScale = New System.Windows.Forms.GroupBox()
+        Me.ucrChkColourDiscrete = New instat.ucrCheck()
         Me.ucrNudColourScaleTransparency = New instat.ucrNud()
         Me.ucrInputColourScalePalette = New instat.ucrInputComboBox()
         Me.ucrNudColourScaleMapEnds = New instat.ucrNud()
@@ -125,6 +126,7 @@ Partial Class sdgPlots
         Me.lblColourScalePalette = New System.Windows.Forms.Label()
         Me.lblColourScaleTransparency = New System.Windows.Forms.Label()
         Me.grpFillScale = New System.Windows.Forms.GroupBox()
+        Me.ucrChkFillDiscrete = New instat.ucrCheck()
         Me.ucrNudFillScaleTransparency = New instat.ucrNud()
         Me.ucrNudFillScaleMapEnds = New instat.ucrNud()
         Me.ucrNudFillScaleMapBegins = New instat.ucrNud()
@@ -135,8 +137,6 @@ Partial Class sdgPlots
         Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
         Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkFillDiscrete = New instat.ucrCheck()
-        Me.ucrChkColourDiscrete = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -742,6 +742,12 @@ Partial Class sdgPlots
         Me.grpColourScale.Name = "grpColourScale"
         Me.grpColourScale.TabStop = False
         '
+        'ucrChkColourDiscrete
+        '
+        Me.ucrChkColourDiscrete.Checked = False
+        resources.ApplyResources(Me.ucrChkColourDiscrete, "ucrChkColourDiscrete")
+        Me.ucrChkColourDiscrete.Name = "ucrChkColourDiscrete"
+        '
         'ucrNudColourScaleTransparency
         '
         Me.ucrNudColourScaleTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -822,6 +828,12 @@ Partial Class sdgPlots
         Me.grpFillScale.Name = "grpFillScale"
         Me.grpFillScale.TabStop = False
         '
+        'ucrChkFillDiscrete
+        '
+        Me.ucrChkFillDiscrete.Checked = False
+        resources.ApplyResources(Me.ucrChkFillDiscrete, "ucrChkFillDiscrete")
+        Me.ucrChkFillDiscrete.Name = "ucrChkFillDiscrete"
+        '
         'ucrNudFillScaleTransparency
         '
         Me.ucrNudFillScaleTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -890,18 +902,6 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        '
-        'ucrChkFillDiscrete
-        '
-        Me.ucrChkFillDiscrete.Checked = False
-        resources.ApplyResources(Me.ucrChkFillDiscrete, "ucrChkFillDiscrete")
-        Me.ucrChkFillDiscrete.Name = "ucrChkFillDiscrete"
-        '
-        'ucrChkColourDiscrete
-        '
-        Me.ucrChkColourDiscrete.Checked = False
-        resources.ApplyResources(Me.ucrChkColourDiscrete, "ucrChkColourDiscrete")
-        Me.ucrChkColourDiscrete.Name = "ucrChkColourDiscrete"
         '
         'sdgPlots
         '
