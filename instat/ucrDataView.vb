@@ -957,4 +957,109 @@ Public Class ucrDataView
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
         mnuRemoveCurrentFilters.Enabled = Not String.Equals(strFilterName, strNoFilter)
     End Sub
+
+    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+        PasteValuesToDataFrame(SelectedColumnsAsArray(), 1, False)
+    End Sub
+
+    ''' <summary>
+    ''' event raised on menu toolstrip click
+    ''' paste data starting from selected cells
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub mnuCellPasteRange_Click(sender As Object, e As EventArgs) Handles mnuCellPasteRange.Click
+        Dim arrAllCurrentColumns As String()
+        Dim lstSelectedColumnNames As New List(Of String)
+        Dim iStartRowPos As Integer
+        'get all columns of current selected data frame
+        arrAllCurrentColumns = GetCurrentWorkSheetColumnNames()
+        'get columns selected
+        For colIndex As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.EndCol
+            lstSelectedColumnNames.Add(arrAllCurrentColumns(colIndex))
+        Next
+        'get starting row position then paste clipboard values
+        iStartRowPos = Integer.Parse(grdData.CurrentWorksheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text)
+        PasteValuesToDataFrame(lstSelectedColumnNames, iStartRowPos, False)
+    End Sub
+
+    ''' <summary>
+    ''' event raised on Ctr + V
+    ''' paste data starting from selected cells 
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    Private Sub grdCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforePaste
+        e.IsCancelled = True 'prevents pasted data from being added directly into the data view 
+        Dim arrAllCurrentColumns As String()
+        Dim lstSelectedColumnNames As New List(Of String)
+        Dim iStartRowPos As Integer
+        'get all columns of current selected data frame
+        arrAllCurrentColumns = GetCurrentWorkSheetColumnNames()
+        'validate columns
+        If e.Range.EndCol >= arrAllCurrentColumns.Length Then
+            'this happens when Ctrl + V is pressed and the data to be pasted has more columns
+            'than columns between start and end column 
+            MsgBox("Columns copied are more than the current data frame columns.", MsgBoxStyle.Critical, "Excess Columns")
+            Exit Sub
+        End If
+        'get selected columns
+        For colIndex As Integer = e.Range.Col To e.Range.EndCol
+            lstSelectedColumnNames.Add(arrAllCurrentColumns(colIndex))
+        Next
+        'get starting row position then paste clipboard values
+        iStartRowPos = Integer.Parse(grdData.CurrentWorksheet.RowHeaders.Item(e.Range.Row).Text)
+        PasteValuesToDataFrame(lstSelectedColumnNames, iStartRowPos, False)
+    End Sub
+
+    ''' <summary>
+    ''' pastes data from clipboard to data view
+    ''' </summary>
+    ''' <param name="lstColumnNames">column names to paste data into</param>
+    ''' <param name="startRowPos">starting row position. This starts at postion 1</param>
+    ''' <param name="firstClipRowHeader">flag indicating whether first row of clipboard data is a header</param>
+    Private Sub PasteValuesToDataFrame(lstColumnNames As IEnumerable(Of String), startRowPos As String, firstClipRowHeader As Boolean)
+        Dim clsPasteValues As New RFunction
+        Dim strColNamesVec As String = ""
+        Dim strClipBoardText As String = My.Computer.Clipboard.GetText
+
+        If String.IsNullOrEmpty(strClipBoardText) Then
+            MsgBox("No data available for pasting.", MsgBoxStyle.Information, "No Data")
+            Exit Sub
+        End If
+        'warn user action cannot be undone
+        If DialogResult.No = MsgBox("Are you sure you want to paste to these column(s)?" & Environment.NewLine &
+                            "This action cannot be undone.", MessageBoxButtons.YesNo, "Paste Data") Then
+            Exit Sub
+        End If
+
+        'construct R vector command for new row values
+        For i As Integer = 0 To lstColumnNames.Count - 1
+            strColNamesVec = strColNamesVec & Chr(34) & lstColumnNames(i) & Chr(34)
+            If i = lstColumnNames.Count - 1 Then
+                Exit For
+            End If
+            strColNamesVec = strColNamesVec & ", "
+        Next
+        strColNamesVec = "c(" & strColNamesVec & ")"
+
+        'add R parameters and run the command
+        clsPasteValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$paste_from_clipboard")
+        clsPasteValues.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+        clsPasteValues.AddParameter("col_names", strColNamesVec)
+        clsPasteValues.AddParameter("start_row_pos", startRowPos)
+        clsPasteValues.AddParameter("first_clip_row_is_header", If(firstClipRowHeader, "TRUE", "FALSE"))
+        clsPasteValues.AddParameter("clip_board_text", Chr(34) & strClipBoardText & Chr(34))
+        RunScriptFromDataView(clsPasteValues.ToScript(), strComment:="Paste values in Data")
+    End Sub
+
+    ''' <summary>
+    ''' gets column names of current worksheet
+    ''' </summary>
+    ''' <returns>array of column names</returns>
+    Private Function GetCurrentWorkSheetColumnNames() As String()
+        'get all columns of current selected data frame
+        Return lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value
+    End Function
+
 End Class
