@@ -334,6 +334,8 @@
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
     </Compile>
     <Compile Include="frmConvertToNumeric.vb">
+	      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgClimaticDataEntry.Designer.vb">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </Compile>
@@ -2759,6 +2761,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmConvertToNumeric.resx">
       <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
+	</EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticDataEntry.resx">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </EmbeddedResource>
