@@ -1512,37 +1512,37 @@
     <value>Describe</value>
   </data>
   <data name="mnuClimaticNCMPIndices.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>166, 22</value>
   </data>
   <data name="mnuClimaticNCMPIndices.Text" xml:space="preserve">
     <value>Indices...</value>
   </data>
   <data name="mnuClimaticNCMPVariogram.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>166, 22</value>
   </data>
   <data name="mnuClimaticNCMPVariogram.Text" xml:space="preserve">
     <value>Variogram...</value>
   </data>
   <data name="mnuClimaticNCMPRegionAverage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>166, 22</value>
   </data>
   <data name="mnuClimaticNCMPRegionAverage.Text" xml:space="preserve">
     <value>Region Average...</value>
   </data>
   <data name="mnuClimaticNCMPTrendGraphs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>166, 22</value>
   </data>
   <data name="mnuClimaticNCMPTrendGraphs.Text" xml:space="preserve">
     <value>Trend Graphs...</value>
   </data>
   <data name="mnuClimaticNCMPCountRecords.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>166, 22</value>
   </data>
   <data name="mnuClimaticNCMPCountRecords.Text" xml:space="preserve">
     <value>Count Records...</value>
   </data>
   <data name="mnuClimaticNCMPSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>166, 22</value>
   </data>
   <data name="mnuClimaticNCMPSummary.Text" xml:space="preserve">
     <value>Summary...</value>
@@ -1673,11 +1673,17 @@
   <data name="mnuClimaticMappingMap.Text" xml:space="preserve">
     <value>Map...</value>
   </data>
+  <data name="mnuClimaticMappingMap.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="mnuClimaticMappingCheckStations.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
   <data name="mnuClimaticMappingCheckStations.Text" xml:space="preserve">
     <value>Check Stations...</value>
+  </data>
+  <data name="mnuClimaticMappingCheckStations.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="mnuClimaticMapping.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
@@ -7914,6 +7920,18 @@
   <data name="&gt;&gt;mnuClimaticMapping.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuClimaticMappingMap.Name" xml:space="preserve">
+    <value>mnuClimaticMappingMap</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticMappingMap.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticMappingCheckStations.Name" xml:space="preserve">
+    <value>mnuClimaticMappingCheckStations</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticMappingCheckStations.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuClimaticModel.Name" xml:space="preserve">
     <value>mnuClimaticModel</value>
   </data>
@@ -10018,18 +10036,6 @@
     <value>mnuLogFile</value>
   </data>
   <data name="&gt;&gt;mnuLogFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticMappingMap.Name" xml:space="preserve">
-    <value>mnuClimaticMappingMap</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticMappingMap.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticMappingCheckStations.Name" xml:space="preserve">
-    <value>mnuClimaticMappingCheckStations</value>
-  </data>
-  <data name="&gt;&gt;mnuClimaticMappingCheckStations.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

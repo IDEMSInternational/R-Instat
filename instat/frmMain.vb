@@ -2344,11 +2344,11 @@ Public Class frmMain
         dlgOtherRosePlots.ShowDialog()
     End Sub
 
-    Private Sub mnuStationMaps_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingMap.Click
+    Private Sub mnuClimaticMappingMap_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingMap.Click
         dlgClimaticStationMaps.ShowDialog()
     End Sub
 
-    Private Sub mnuCheckStations_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingCheckStations.Click
+    Private Sub mnuClimaticMappingCheckStations_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingCheckStations.Click
         dlgLocatingPointsInShapeFile.ShowDialog()
     End Sub
 End Class
