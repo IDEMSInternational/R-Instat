@@ -129,11 +129,16 @@ Public Class dlgClimaticDataEntry
         Dim strStationSelected As String = ucrInputSelectStation.GetValue()
         Dim startDateSelected As Date = ucrDateTimePickerStartingDate.DateValue
         Dim strSelectedDataFrameName As String = ucrSelectorClimaticDataEntry.strCurrentDataFrame
+        Dim dfTemp As DataFrame = GetSelectedDataFrame()
+
+        If dfTemp Is Nothing Then
+            'todo. display message box here. This could be due to no records from the starting date
+            Return
+        End If
 
         'todo. should we have the abilty to retain the previous changes if the selections have not changed??
-
         sdgClimaticDataEntry.Setup(strStationColumnName, strDateColumnName, lstElementsColumnNames,
-                                   GetSelectedDataFrame(), strSelectedDataFrameName)
+                                   dfTemp, strSelectedDataFrameName)
 
         sdgClimaticDataEntry.ShowDialog()
 
@@ -165,7 +170,7 @@ Public Class dlgClimaticDataEntry
     End Sub
 
     Private Function GetSelectedDataFrame() As DataFrame
-        Dim dfTemp As DataFrame
+        Dim dfTemp As DataFrame = Nothing
         Dim clsGetDataFrame As New RFunction
         Dim expTemp As SymbolicExpression
 
@@ -177,7 +182,9 @@ Public Class dlgClimaticDataEntry
         clsGetDataFrame.AddParameter("station_name", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=4)
         clsGetDataFrame.AddParameter("start_date", clsRFunctionParameter:=ucrDateTimePickerStartingDate.ValueAsRDate(), iPosition:=5)
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript(), bSilent:=True)
-        dfTemp = expTemp.AsDataFrame()
+        If expTemp IsNot Nothing Then
+            dfTemp = expTemp.AsDataFrame()
+        End If
         Return dfTemp
     End Function
 
