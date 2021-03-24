@@ -137,8 +137,6 @@ Public Class dlgDuplicates
         clsStreakFunction = New RFunction
         clsSubsetCol = New RFunction
         clsDupCountIndex = New RFunction
-        clsGetColumnsFunction = New RFunction
-        clsSummaryFunction = New RFunction
 
         SetDataFrameOrColumns()
         ucrNewColumnName.Reset()
