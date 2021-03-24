@@ -1596,8 +1596,8 @@ Partial Class frmMain
         '
         'mnuClimaticDataEntry
         '
-        resources.ApplyResources(Me.mnuClimaticDataEntry, "mnuClimaticDataEntry")
         Me.mnuClimaticDataEntry.Name = "mnuClimaticDataEntry"
+        resources.ApplyResources(Me.mnuClimaticDataEntry, "mnuClimaticDataEntry")
         '
         'ToolStripSeparator50
         '
