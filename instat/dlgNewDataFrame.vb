@@ -313,14 +313,17 @@ Public Class dlgNewDataFrame
             lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, s = rep(""Reading"",30), r = seq(1, 6.8, length=30), t = seq(1, 60, 2))"}))
             lstView.Items.Item(2).ToolTipText = "4 variables, showing use of seq and rep function"
 
-            lstView.Items.Add(New ListViewItem({"data.frame(l = 1:31, d = seq(as.Date(""2013-1-1""), as.Date(""2013-1-31""), ""day""))"}))
-            lstView.Items.Item(3).ToolTipText = "2 variables with dates. Or use Prepare > Column: Date > Generate Dates to add a date variable."
+            lstView.Items.Add(New ListViewItem({"data.frame(date = seq(as.Date(""2021-1-1""), as.Date(""2021-1-31""), ""day""), rain = as.numeric(NA))"}))
+            'lstView.Items.Item(3).ToolTipText = ""
+
+            lstView.Items.Add(New ListViewItem({"data.frame(date = seq(as.Date(""2019-1-1""), as.Date(""2020-12-31""), ""month""), rain = as.numeric(NA), tmin = as.numeric(NA), tmax = as.numeric(NA))"}))
+            'lstView.Items.Item(4).ToolTipText = ""
 
             lstView.Items.Add(New ListViewItem({"data.frame(n = 1:12, h = seq(as.POSIXct(""2010-1-1 3: 0:0""), by = ""2 hours"",length = 12))"}))
-            lstView.Items.Item(4).ToolTipText = "2 variables including generating a sequence of times"
+            lstView.Items.Item(5).ToolTipText = "2 variables including generating a sequence of times"
 
             lstView.Items.Add(New ListViewItem({"data.frame(block = gl(4, 3), treat = c(""C"", ""A"", ""B"", ""B"", ""C"", ""A"", ""A"", ""B"", ""C"", ""A"", ""C"", ""B""), yield = c(74, 68,  50, 62, 68, 57, 70, 56, 83, 67, 67, 59))"}))
-            lstView.Items.Item(5).ToolTipText = "Illustrates the gl function and generates data for a simple experiment on 12 plots"
+            lstView.Items.Item(6).ToolTipText = "Illustrates the gl function and generates data for a simple experiment on 12 plots"
 
         ElseIf rdoRandom.Checked Then
             lstView.Columns.Add("Command", 450)  'add columns
