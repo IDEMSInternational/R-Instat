@@ -316,7 +316,8 @@ Public Class dlgNewDataFrame
             lstView.Items.Add(New ListViewItem({"data.frame(date = seq(as.Date(""2021-1-1""), as.Date(""2021-1-31""), ""day""), rain = as.numeric(NA))"}))
             'lstView.Items.Item(3).ToolTipText = ""
 
-            lstView.Items.Add(New ListViewItem({"data.frame(date = seq(as.Date(""2019-1-1""), as.Date(""2020-12-31""), ""month""), rain = as.numeric(NA), tmin = as.numeric(NA), tmax = as.numeric(NA))"}))
+            lstView.Items.Add(New ListViewItem({"data.frame(date = seq(as.Date(""2019-1-1""), as.Date(""2020-12-31""), ""month""), rain = NA_real_, tmin = NA_real_, tmax = NA_real_)"}))
+
             'lstView.Items.Item(4).ToolTipText = ""
 
             lstView.Items.Add(New ListViewItem({"data.frame(n = 1:12, h = seq(as.POSIXct(""2010-1-1 3: 0:0""), by = ""2 hours"",length = 12))"}))
