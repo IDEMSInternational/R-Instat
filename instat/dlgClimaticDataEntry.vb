@@ -18,10 +18,13 @@ Imports instat.Translations
 Imports RDotNet
 Imports unvell.ReoGrid
 Public Class dlgClimaticDataEntry
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsClimaticDataEntry As New RFunction
     Private clsDataChangedFunction As New RFunction
+    Private ReadOnly strDay As String = "Day"
+    Private ReadOnly strMonth As String = "Month"
+    Private ReadOnly strRange As String = "Range"
 
     'Public dfTemp As DataFrame
     Private Sub dlgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -74,11 +77,25 @@ Public Class dlgClimaticDataEntry
         ucrReceiverElements.SetClimaticType("element")
         ucrReceiverElements.bAutoFill = True
 
-        'ucrDateTimePickerStartingDate.SetParameter(New RParameter("start_date", 5))
-        ucrDateTimePickerStartingDate.SetParameterIsRDate()
+        ucrReceiverVariables.Selector = ucrSelectorClimaticDataEntry
+        ucrReceiverVariables.SetParameterIsRFunction()
+        ucrReceiverVariables.SetIncludedDataTypes({"numeric", "character", "date", "factor"})
+        ucrReceiverVariables.strSelectorHeading = "Variables"
 
-        ucrPnlOptions.AddRadioButton(rdoDaily)
-        ucrPnlOptions.AddRadioButton(rdoMonthly)
+        ucrDateTimePickerStartingDate.Format = DateTimePickerFormat.Custom
+        ucrDateTimePickerStartingDate.CustomFormat = "dd MM yyyy"
+
+        ucrDateTimePickerEndingDate.Format = DateTimePickerFormat.Custom
+        ucrDateTimePickerEndingDate.CustomFormat = "dd MM yyyy"
+
+        ucrInputPeriodOption.SetItems({strDay, strMonth, strRange})
+        ucrInputPeriodOption.SetDropDownStyleAsNonEditable()
+
+        'cmdCheckData.Enabled = False
+        ttCmdCheckData.SetToolTip(cmdCheckData, "Data checking facilities not yet implemented")
+
+        ucrPnlOptions.AddRadioButton(rdoAdd)
+        ucrPnlOptions.AddRadioButton(rdoEdit)
 
     End Sub
     Private Sub SetDefaults()
@@ -87,6 +104,9 @@ Public Class dlgClimaticDataEntry
 
         ucrSelectorClimaticDataEntry.Reset()
         ucrReceiverElements.SetMeAsReceiver()
+
+        ucrInputPeriodOption.SetText(strDay)
+        ChangingPeriodOption()
 
         clsDataChangedFunction.SetRCommand("data.frame")
 
@@ -123,13 +143,12 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrInputSelectStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
     Private Sub cmdEnterData_Click(sender As Object, e As EventArgs) Handles cmdEnterData.Click
         Dim strStationColumnName As String = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
         Dim strDateColumnName As String = ucrReceiverDate.GetVariableNames(bWithQuotes:=False)
         Dim lstElementsColumnNames As List(Of String) = ucrReceiverElements.GetVariableNamesList(bWithQuotes:=False).ToList
         Dim strStationSelected As String = ucrInputSelectStation.GetValue()
-        Dim startDateSelected As Date = ucrDateTimePickerStartingDate.DateValue
+        Dim startDateSelected As Date = ucrDateTimePickerStartingDate.Value.Date
         Dim strSelectedDataFrameName As String = ucrSelectorClimaticDataEntry.strCurrentDataFrame
         Dim dfTemp As DataFrame = GetSelectedDataFrame()
 
@@ -185,7 +204,10 @@ Public Class dlgClimaticDataEntry
         clsGetDataFrame.AddParameter("date", ucrReceiverDate.GetVariableNames, iPosition:=2)
         clsGetDataFrame.AddParameter("elements", ucrReceiverElements.GetVariableNames(), iPosition:=3)
         clsGetDataFrame.AddParameter("station_name", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=4)
-        clsGetDataFrame.AddParameter("start_date", clsRFunctionParameter:=ucrDateTimePickerStartingDate.ValueAsRDate(), iPosition:=5)
+        clsGetDataFrame.AddParameter("start_date", Chr(34) & ucrDateTimePickerStartingDate.Value.Date.ToString("yyyy/MM/dd") & Chr(34), iPosition:=5)
+        If ucrDateTimePickerEndingDate.Visible Then
+            clsGetDataFrame.AddParameter("end_date", Chr(34) & ucrDateTimePickerEndingDate.Value.Date.ToString("yyyy/MM/dd") & Chr(34), iPosition:=6)
+        End If
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript(), bSilent:=True)
         If expTemp IsNot Nothing Then
             dfTemp = expTemp.AsDataFrame()
@@ -195,5 +217,26 @@ Public Class dlgClimaticDataEntry
 
     Private Sub ucrSelectorClimaticDataEntry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticDataEntry.ControlValueChanged
         sdgClimaticDataEntry.Reset()
+    End Sub
+    Private Sub ChangingPeriodOption()
+        Select Case ucrInputPeriodOption.GetText()
+            Case strDay
+                lblStartingDate.Text = "Day:"
+                lblEndingDate.Visible = False
+                ucrDateTimePickerEndingDate.Visible = False
+            Case strMonth
+                lblStartingDate.Text = "Month:"
+                lblEndingDate.Visible = False
+                ucrDateTimePickerEndingDate.Visible = False
+                ucrDateTimePickerStartingDate.CustomFormat = "MM yyyy"
+            Case strRange
+                lblStartingDate.Text = "Starting Date:"
+                lblEndingDate.Visible = True
+                ucrDateTimePickerEndingDate.Visible = True
+                ucrDateTimePickerStartingDate.CustomFormat = "dd MM yyyy"
+        End Select
+    End Sub
+    Private Sub ucrInputPeriodOption_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputPeriodOption.ControlValueChanged
+        ChangingPeriodOption()
     End Sub
 End Class

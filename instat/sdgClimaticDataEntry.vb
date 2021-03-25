@@ -28,6 +28,8 @@ Public Class sdgClimaticDataEntry
     'the current worksheet in the grid
     Private WithEvents grdCurrentWorkSheet As Worksheet
 
+    Private lstNonEditableColumns As New List(Of String)
+
     ''' <summary>
     ''' returns the data changed for the passed column as an R vector string
     ''' </summary>
@@ -75,6 +77,7 @@ Public Class sdgClimaticDataEntry
 
     Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdDataEntry.SheetTabNewButtonVisible = False
+        lstNonEditableColumns.AddRange({"station", "date"})
     End Sub
 
     Public Sub Setup(strStationColumnName As String, strDateColumnName As String, lstElementsColumnNames As List(Of String), dataFrame As DataFrame, strDataFrameName As String)
@@ -90,7 +93,7 @@ Public Class sdgClimaticDataEntry
 
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
         'todo. do this disabling of data entry be done when setting up the grid. Not here
-        If grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text = "station" Then
+        If lstNonEditableColumns.Contains(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text) Then
             e.IsCancelled = True
         End If
     End Sub
