@@ -314,11 +314,10 @@ Public Class dlgNewDataFrame
             lstView.Items.Item(2).ToolTipText = "4 variables, showing use of seq and rep function"
 
             lstView.Items.Add(New ListViewItem({"data.frame(date = seq(as.Date(""2021-1-1""), as.Date(""2021-1-31""), ""day""), rain = as.numeric(NA))"}))
-            'lstView.Items.Item(3).ToolTipText = ""
+            lstView.Items.Item(3).ToolTipText = "Two variables with daily dates and rainfall, ready for climatic data entry."
 
             lstView.Items.Add(New ListViewItem({"data.frame(date = seq(as.Date(""2019-1-1""), as.Date(""2020-12-31""), ""month""), rain = NA_real_, tmin = NA_real_, tmax = NA_real_)"}))
-
-            'lstView.Items.Item(4).ToolTipText = ""
+            lstView.Items.Item(4).ToolTipText = "Four variables including monthly dates. Or use Prepare > Column: Date > Generate Dates to include a date variable."
 
             lstView.Items.Add(New ListViewItem({"data.frame(n = 1:12, h = seq(as.POSIXct(""2010-1-1 3: 0:0""), by = ""2 hours"",length = 12))"}))
             lstView.Items.Item(5).ToolTipText = "2 variables including generating a sequence of times"
