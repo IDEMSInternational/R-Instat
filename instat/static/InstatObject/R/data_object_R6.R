@@ -1813,12 +1813,15 @@ DataSheet$set("public", "add_key", function(col_names, key_name) {
   }
   else {
     if(missing(key_name)) key_name <- next_default_item("key", names(private$keys))
-    if(key_name %in% names(private$keys)) warning("A key called ", key_name, " already exists. It wil be replaced.")
+    if(key_name %in% names(private$keys)) warning("A key called", key_name, "already exists. It will be replaced.")
     private$keys[[key_name]] <- col_names
     self$append_to_variables_metadata(col_names, is_key_label, TRUE)
     if(length(private$keys) == 1) self$append_to_variables_metadata(setdiff(self$get_column_names(), col_names), is_key_label, FALSE)
     self$append_to_metadata(is_linkable, TRUE)
     self$append_to_metadata(next_default_item(key_label, names(self$get_metadata())), paste(col_names, collapse = ","))
+    cat(paste("Key name:", key_name),
+        paste("Key columns:", paste(private$keys[[key_name]], collapse = ", ")),
+        sep = "\n")
   }
 }
 )
@@ -1836,8 +1839,10 @@ DataSheet$set("public", "has_key", function() {
 DataSheet$set("public", "get_keys", function(key_name) {
   if(!missing(key_name)) {
     if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
-    return(private$keys[[key_name]])
-  }
+    cat(paste("Key name:", key_name),
+        paste("Key columns:", paste(private$keys[[key_name]], collapse = ", ")),
+        sep = "\n")
+      }
   else return(private$keys)
 }
 )
@@ -1845,6 +1850,7 @@ DataSheet$set("public", "get_keys", function(key_name) {
 DataSheet$set("public", "remove_key", function(key_name) {
   if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
   private$keys[[key_name]] <- NULL
+  cat("Key removed:", key_name)
 }
 )
 
@@ -2062,7 +2068,7 @@ DataSheet$set("public", "graph_one_variable", function(columns, numeric = "geom_
       i = i + 1
     }
     if(output == "combine") {
-      return(gridExtra::grid.arrange(grobs = graphs, ncol = ncol))
+      return(patchwork::wrap_plots(graphs, ncol = ncol))
     }
     else {
       return(graphs)
