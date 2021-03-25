@@ -106,14 +106,13 @@ Public Class dlgFindNonnumericValues
         clsNonNumericCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsNotEqualToOperator, iPosition:=1)
         clsNonNumericCalcFunc.AddParameter("result_name", Chr(34) & strLogicalColumn & Chr(34), iPosition:=3)
         clsNonNumericCalcFunc.AddParameter("save", 2, iPosition:=4)
-        'clsNonNumericCalcFunc.SetAssignTo("non_numerics_calculation")
 
         clsNonNumericFilterFunc.SetRCommand("instat_calculation$new")
         clsNonNumericFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
         clsNonNumericFilterFunc.AddParameter("sub_calculations", clsRFunctionParameter:=clslSubCalcListFunc, iPosition:=2)
         clsNonNumericFilterFunc.AddParameter("result_data_frame", Chr(34) & "Filter" & Chr(34), iPosition:=3)
         clsNonNumericFilterFunc.AddParameter("save", 2, iPosition:=4)
-        'clsNonNumericFilterFunc.SetAssignTo("non_numerics_filter")
+        clsNonNumericFilterFunc.SetAssignTo("non_numerics_filter")
 
         clslSubCalcListFunc.SetRCommand("list")
         clslSubCalcListFunc.AddParameter("sub1", clsRFunctionParameter:=clsNonNumericCalcFunc, bIncludeArgumentName:=False)
@@ -138,8 +137,6 @@ Public Class dlgFindNonnumericValues
         ucrReceiverColumn.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", 1), iAdditionalPairNo:=1)
         ucrReceiverColumn.SetRCode(clsIsNaFunction, bReset)
         ucrSaveColumn.SetRCode(clsNonNumericCalcFunc, bReset)
-        'ucrSaveColumn.AddAdditionalRCode(clsNonNumericFilterFunc, iAdditionalPairNo:=1)
-
         ucrChkShowSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkFilterNonumerics.SetRCode(clsCurrRunCalc, bReset)
         ucrSelectorShowNonNumericValues.SetRCode(clsGetColumnsFunction, bReset)
