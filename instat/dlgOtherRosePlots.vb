@@ -21,7 +21,7 @@ Public Class dlgOtherRosePlots
     Private bReset As Boolean = True
 
     'R function
-    Private clsOtherRosePlots, clsCombineValues As New RFunction
+    Private clsOtherRosePlots As New RFunction
 
     Private Sub dlgOtherRosePlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -40,7 +40,6 @@ Public Class dlgOtherRosePlots
 
     Private Sub InitiliseDialog()
         Dim dctMethod As New Dictionary(Of String, String)
-        Dim dctcolor As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.iCallType = 3
 
@@ -50,21 +49,14 @@ Public Class dlgOtherRosePlots
         ucrReceiverDate.Selector = ucrSelectorOtherRosePlots
         ucrReceiverDate.SetParameter(New RParameter("date_col_name", 1))
         ucrReceiverDate.SetParameterIsString()
-        'UcrReceiverDate.SetIncludedDataTypes({"Date"})
-        'UcrReceiverDate.SetClimaticType("date")
-        'UcrReceiverDate.bAutoFill = True
 
         ucrReceiverWindDirection.Selector = ucrSelectorOtherRosePlots
         ucrReceiverWindDirection.SetParameter(New RParameter("wd_col_name", 2))
         ucrReceiverWindDirection.SetParameterIsString()
-        'ucrReceiverWindDirection.SetClimaticType("wind_direction")
-        'ucrReceiverWindDirection.bAutoFill = True
 
         ucrReceiverWindSpeed.SetParameter(New RParameter("ws_col_name", 3))
         ucrReceiverWindSpeed.Selector = ucrSelectorOtherRosePlots
         ucrReceiverWindSpeed.SetParameterIsString()
-        'ucrReceiverWindSpeed.SetClimaticType("wind_speed")
-        'ucrReceiverWindSpeed.bAutoFill = True
 
         ucrReceiverX.SetParameter(New RParameter("x", 4))
         ucrReceiverX.Selector = ucrSelectorOtherRosePlots
@@ -83,11 +75,11 @@ Public Class dlgOtherRosePlots
         ucrPnlOptions.AddParameterValuesCondition(rdoPolarPlot, "main_method", Chr(34) & "polar_plot" & Chr(34))
         ucrPnlOptions.AddParameterValuesCondition(rdoPolarAnnulus, "main_method", Chr(34) & "polar_annulus" & Chr(34))
 
-        ucrReceiverPollutant.SetParameter(New RParameter("pollutant", 6))
+        ucrReceiverPollutant.SetParameter(New RParameter("single_pollutant", 6))
         ucrReceiverPollutant.Selector = ucrSelectorOtherRosePlots
         ucrReceiverPollutant.SetParameterIsString()
 
-        ucrReceiverMultiplePollutants.SetParameter(New RParameter("pollutant", 7))
+        ucrReceiverMultiplePollutants.SetParameter(New RParameter("multiple_pollutant", 7))
         ucrReceiverMultiplePollutants.Selector = ucrSelectorOtherRosePlots
         ucrReceiverMultiplePollutants.SetIncludedDataTypes({"numeric"})
         ucrReceiverMultiplePollutants.strSelectorHeading = "Numerics"
@@ -95,9 +87,9 @@ Public Class dlgOtherRosePlots
 
         ucrPnlOptions.AddToLinkedControls({ucrChkNormalise}, {rdoPolarAnnulus, rdoPolarPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkTransform}, {rdoPolarFrequency}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrReceiverX, {rdoPolarCluster, rdoPolarPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverX, {rdoPolarPlot, rdoPolarCluster}, bNewLinkedUpdateFunction:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverWindSpeed, {rdoPercentileRose, rdoPolarAnnulus, rdoPolarFrequency}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrReceiverPollutant, {rdoPolarCluster, rdoPolarFrequency}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverPollutant, {rdoPolarCluster, rdoPolarFrequency}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverMultiplePollutants, {rdoPercentileRose, rdoPolarAnnulus, rdoPolarPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrInputMethod, {rdoPercentileRose}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="default")
         ucrPnlOptions.AddToLinkedControls(ucrInputColor, {rdoPercentileRose, rdoPolarAnnulus, rdoPolarFrequency, rdoPolarPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="default")
@@ -106,10 +98,8 @@ Public Class dlgOtherRosePlots
         ucrPnlOptions.AddToLinkedControls(ucrChkForcePositive, {rdoPolarPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkExcludeMissing, ucrChkPadDate}, {rdoPolarAnnulus}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrNudNmberOfClusters, {rdoPolarCluster}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlOptions.AddToLinkedControls(ucrInputStationFacet, {rdoPolarAnnulus, rdoPolarFrequency, rdoPolarPlot, rdoPercentileRose}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="default")
 
         ucrInputStatistic.SetLinkedDisplayControl(lblStatistic)
-        'ucrInputStationFacet.SetLinkedDisplayControl(lblType)
         ucrReceiverX.SetLinkedDisplayControl(lblVariableToPlotAgainst)
         ucrReceiverWindSpeed.SetLinkedDisplayControl(lblWindSpeed)
         ucrNudPercentile.SetLinkedDisplayControl(lblPercentile)
@@ -122,12 +112,7 @@ Public Class dlgOtherRosePlots
         ucrChkTransform.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkTransform.SetRDefault("TRUE")
 
-        ucrInputColor.SetParameter(New RParameter("cols", 10))
-        dctcolor.Add("Default", Chr(34) & "default" & Chr(34))
-        dctcolor.Add("increment", Chr(34) & "increment" & Chr(34))
-        dctcolor.Add("heat", Chr(34) & "heat" & Chr(34))
-        dctcolor.Add("jet", Chr(34) & "jet" & Chr(34))
-        ucrInputColor.SetItems(dctcolor)
+        ucrInputColor.SetItems({"default", "increment", "heat", "jet"})
         ucrInputColor.SetDropDownStyleAsNonEditable()
 
         ucrInputStatistic.SetItems({"frequency", "mean", "median", "max", "stdev", "weighted.mean"})
@@ -172,20 +157,6 @@ Public Class dlgOtherRosePlots
         ucrNudPercentile.SetRDefault(90)
         ucrNudPercentile.SetMinMax(0, 100)
 
-        ucrReceiverStation.SetParameter(New RParameter(""))
-        ucrReceiverStation.Selector = ucrSelectorOtherRosePlots
-        ucrReceiverStation.SetParameterIsString()
-        ucrReceiverStation.bExcludeFromSelector = True
-        ucrReceiverStation.SetClimaticType("station")
-        ucrReceiverStation.bAutoFill = True
-
-        ucrInputStationFacet.SetItems({"NONE", "FACET 1", "FACET 2"})
-        ucrInputStationFacet.SetDropDownStyleAsNonEditable()
-
-        ucrInputFacet.SetParameter(New RParameter(""))
-        ucrInputFacet.SetItems({"default", "station", "year", "hour", "month", "season", "weekday", "site", "weekend", "monthyear", "daylight", "dst"})
-        ucrInputFacet.SetDropDownStyleAsEditable(True)
-
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetCheckBoxText("Save Graph")
@@ -195,10 +166,6 @@ Public Class dlgOtherRosePlots
 
     Private Sub SetDefaults()
         clsOtherRosePlots = New RFunction
-        clsCombineValues = New RFunction
-
-        ucrInputStationFacet.SetText("NONE")
-        ucrInputFacet.SetText("default")
 
         ucrSelectorOtherRosePlots.Reset()
         ucrReceiverDate.SetMeAsReceiver()
@@ -207,52 +174,20 @@ Public Class dlgOtherRosePlots
         ucrInputStatistic.SetName("mean")
 
         clsOtherRosePlots.SetRCommand("other_rose_plots")
-        clsCombineValues.SetRCommand("c")
 
-        clsCombineValues.AddParameter("type1", Chr(34) & "default" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-
-        clsOtherRosePlots.AddParameter("cols", Chr(34) & "default" & Chr(34), iPosition:=10)
         clsOtherRosePlots.AddParameter("exclude.missing", "FALSE")
         clsOtherRosePlots.AddParameter("trans", "TRUE")
-        'clsOtherRosePlots.AddParameter("force.positive", "TRUE")
         clsOtherRosePlots.AddParameter("main_method", Chr(34) & "polar_frequency" & Chr(34), iPosition:=5)
         clsOtherRosePlots.AddParameter("statistic", Chr(34) & "mean" & Chr(34), iPosition:=11)
-        clsOtherRosePlots.AddParameter("type", clsRFunctionParameter:=clsCombineValues, bIncludeArgumentName:=True, iPosition:=9)
 
         'AddRemoveStatistic()
-
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsOtherRosePlots)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRcodeSet = False
-        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrSelectorOtherRosePlots.SetRCode(clsOtherRosePlots, bReset)
-
-        ucrReceiverDate.SetRCode(clsOtherRosePlots, bReset)
-        ucrReceiverWindSpeed.SetRCode(clsOtherRosePlots, bReset)
-        ucrReceiverWindDirection.SetRCode(clsOtherRosePlots, bReset)
-        ucrReceiverMultiplePollutants.SetRCode(clsOtherRosePlots, bReset)
-        ucrReceiverX.SetRCode(clsOtherRosePlots, bReset)
-        ucrReceiverPollutant.SetRCode(clsOtherRosePlots, bReset)
-
-        ucrInputColor.SetRCode(clsOtherRosePlots, bReset)
-        ucrInputStatistic.SetRCode(clsOtherRosePlots, bReset)
-        ucrInputStatistic.SetRCode(clsOtherRosePlots, bReset)
-        ucrInputMethod.SetRCode(clsOtherRosePlots, bReset)
-        'ucrInputFacet.SetRCode(clsOtherRosePlots, bReset)
-        'ucrInputStationFacet.SetRCode(clsOtherRosePlots, bReset)
-
-        ucrChkForcePositive.SetRCode(clsOtherRosePlots, bReset)
-        ucrChkExcludeMissing.SetRCode(clsOtherRosePlots, bReset)
-        ucrChkNormalise.SetRCode(clsOtherRosePlots, bReset)
-        ucrChkPadDate.SetRCode(clsOtherRosePlots, bReset)
-        ucrChkSmooth.SetRCode(clsOtherRosePlots, bReset)
-        ucrChkTransform.SetRCode(clsOtherRosePlots, bReset)
-
-        ucrNudPercentile.SetRCode(clsOtherRosePlots, bReset)
-        ucrNudNmberOfClusters.SetRCode(clsOtherRosePlots, bReset)
+        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         bRcodeSet = True
     End Sub
@@ -345,38 +280,5 @@ Public Class dlgOtherRosePlots
             ucrSaveGraph.SetPrefix("Percentile_Rose")
         End If
         AddRemoveStatistic()
-    End Sub
-
-    Private Sub ucrInputStationFacet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStationFacet.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrInputFacet.ControlValueChanged
-        If bRcodeSet Then
-            Select Case ucrInputStationFacet.GetText
-                Case "NONE"
-                    clsCombineValues.RemoveParameterByName("type2")
-                    Select Case ucrInputFacet.GetText
-                        Case "default"
-                            clsCombineValues.AddParameter("type1", Chr(34) & "default" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-                        Case Else
-                            clsCombineValues.AddParameter("type1", Chr(34) & ucrInputFacet.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-                    End Select
-                Case "FACET 1"
-                    Select Case ucrInputFacet.GetText
-                        Case "default"
-                            clsCombineValues.RemoveParameterByName("type2")
-                            clsCombineValues.AddParameter("type1", ucrReceiverStation.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=0)
-                        Case Else
-                            clsCombineValues.AddParameter("type1", ucrReceiverStation.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=0)
-                            clsCombineValues.AddParameter("type2", Chr(34) & ucrInputFacet.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-                    End Select
-                Case "FACET 2"
-                    Select Case ucrInputFacet.GetText
-                        Case "default"
-                            clsCombineValues.RemoveParameterByName("type2")
-                            clsCombineValues.AddParameter("type1", ucrReceiverStation.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=0)
-                        Case Else
-                            clsCombineValues.AddParameter("type1", Chr(34) & ucrInputFacet.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-                            clsCombineValues.AddParameter("type2", ucrReceiverStation.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=1)
-                    End Select
-            End Select
-        End If
     End Sub
 End Class
