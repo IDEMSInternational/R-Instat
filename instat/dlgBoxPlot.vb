@@ -260,9 +260,6 @@ Public Class dlgBoxplot
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
         clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
         clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
-        clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
-        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
-        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
 
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
@@ -421,8 +418,8 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub ucrSecondFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSecondFactorReceiver.ControlValueChanged
-        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
-        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
+        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
+        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
     End Sub
 
     'this code is commented out but will work once we get the feature of linking controls with the contents of a receiver

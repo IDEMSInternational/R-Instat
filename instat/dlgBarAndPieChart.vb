@@ -197,8 +197,6 @@ Public Class dlgBarAndPieChart
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
         clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
-        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
-        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrBarChartSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -362,7 +360,7 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ucrReceiverByFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverByFactor.ControlValueChanged
-        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
-        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
+        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
+        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
     End Sub
 End Class

@@ -174,8 +174,6 @@ Public Class dlgHistogram
         clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
         clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
-        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
-        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrHistogramSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -342,7 +340,7 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub ucrFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorReceiver.ControlValueChanged
-        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
-        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
+        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
+        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
     End Sub
 End Class

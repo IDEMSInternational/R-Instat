@@ -186,8 +186,6 @@ Public Class dlgMosaicPlot
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
-        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
-        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
 
         If Not dctThemeFunctions.TryGetValue("axis.text.x", clsXElementLabels) Then
             clsXElementLabels = New RFunction
@@ -306,7 +304,7 @@ Public Class dlgMosaicPlot
     End Sub
 
     Private Sub ucrReceiverFill_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFill.ControlValueChanged
-        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
-        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
+        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
+        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
     End Sub
 End Class

@@ -194,8 +194,6 @@ Public Class dlgCumulativeDistribution
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
         clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
-        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
-        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
         clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
 
         clsThemeFunction = GgplotDefaults.clsDefaultThemeFunction.Clone()

@@ -39,6 +39,7 @@ Public Class GgplotDefaults
             clsTempFunc.AddParameter("begin", "0", iPosition:=2)
             clsTempFunc.AddParameter("end", "1", iPosition:=3)
             clsTempFunc.AddParameter("direction", "1", iPosition:=4)
+            clsTempFunc.AddParameter("discrete", "TRUE", iPosition:=5)
             Return clsTempFunc
         End Get
     End Property
@@ -54,6 +55,7 @@ Public Class GgplotDefaults
             clsTempFunc.AddParameter("begin", "0", iPosition:=2)
             clsTempFunc.AddParameter("end", "1", iPosition:=3)
             clsTempFunc.AddParameter("direction", "1", iPosition:=4)
+            clsTempFunc.AddParameter("discrete", "TRUE", iPosition:=5)
             Return clsTempFunc
         End Get
     End Property
