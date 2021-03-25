@@ -21,6 +21,7 @@ Public Class dlgLocatingPointsInShapeFile
     Private clsStAsSfFunction As New RFunction
     Private clsStIntersectsFunction As New RFunction
     Private clsConcFunction As New RFunction
+    Private clsSubsetOperator As New ROperator
 
     Private Sub dlgLocatingPointsInShapeFile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -34,59 +35,68 @@ Public Class dlgLocatingPointsInShapeFile
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        TestOkEnabled()
+        TestOKEnabled()
     End Sub
 
     Private Sub InitiliseDialog()
         ucrSelectorStationFile.SetParameter(New RParameter("x", 0))
         ucrSelectorStationFile.SetParameterIsrfunction()
 
-
-        ucrReceiverLongitude.SetParameter(New RParameter("longitude", 0))
+        ucrReceiverLongitude.SetParameter(New RParameter("longitude", 0, bNewIncludeArgumentName:=False))
         ucrReceiverLongitude.Selector = ucrSelectorStationFile
         ucrReceiverLongitude.SetParameterIsString()
         ucrReceiverLongitude.SetDataType("numeric")
 
-        ucrReceiverLatitude.SetParameter(New RParameter("latitude", 1))
+        ucrReceiverLatitude.SetParameter(New RParameter("latitude", 1, bNewIncludeArgumentName:=False))
         ucrReceiverLatitude.Selector = ucrSelectorStationFile
         ucrReceiverLatitude.SetParameterIsString()
         ucrReceiverLatitude.SetDataType("numeric")
 
         ucrReceiverGeometry.SetParameter(New RParameter("y", 1))
         ucrReceiverGeometry.Selector = ucrSelectorShapeFile
+        ucrReceiverGeometry.SetParameterIsRFunction()
         ucrReceiverGeometry.SetDataType("numeric")
 
 
-        ucrNewColumnName.SetPrefix("logical")
-        ucrNewColumnName.SetSaveTypeAsColumn()
-        ucrNewColumnName.SetDataFrameSelector(ucrSelectorStationFile.ucrAvailableDataFrames)
-        ucrNewColumnName.SetIsComboBox()
-        ucrNewColumnName.SetLabelText("New column name")
+        ucrSaveNewColumnName.SetPrefix("logical")
+        ucrSaveNewColumnName.SetSaveTypeAsColumn()
+        ucrSaveNewColumnName.SetDataFrameSelector(ucrSelectorStationFile.ucrAvailableDataFrames)
+        ucrSaveNewColumnName.SetIsComboBox()
+        ucrSaveNewColumnName.SetLabelText("New Column Name")
     End Sub
 
     Private Sub SetDefaults()
         clsStAsSfFunction = New RFunction
         clsStIntersectsFunction = New RFunction
         clsConcFunction = New RFunction
+        clsSubsetOperator = New ROperator
 
         ucrSelectorShapeFile.Reset()
         ucrSelectorStationFile.Reset()
-        ucrNewColumnName.Reset()
+        ucrSaveNewColumnName.Reset()
+        ucrReceiverLongitude.SetMeAsReceiver()
+        ucrReceiverGeometry.SetMeAsReceiver()
 
 
         clsStAsSfFunction.SetPackageName("sf")
         clsStAsSfFunction.SetRCommand("st_as_sf")
         clsStAsSfFunction.AddParameter("coords", clsRFunctionParameter:=clsConcFunction, iPosition:=1)
         clsStAsSfFunction.AddParameter("crs", "4326", iPosition:=2)
+        clsStAsSfFunction.SetAssignTo("points")
 
         clsStIntersectsFunction.SetPackageName("sf")
         clsStIntersectsFunction.SetRCommand("st_intersects")
         clsStIntersectsFunction.AddParameter("x", clsRFunctionParameter:=clsStAsSfFunction, iPosition:=0)
         clsStIntersectsFunction.AddParameter("sparse", "FALSE", iPosition:=2)
+        clsStIntersectsFunction.SetAssignTo("logical_matrix")
 
         clsConcFunction.SetRCommand("c")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsStIntersectsFunction)
+        clsSubsetOperator.SetOperation("[")
+        clsSubsetOperator.AddParameter("left", clsRFunctionParameter:=clsStIntersectsFunction, iPosition:=0)
+        clsSubsetOperator.AddParameter("right", ",1]", iPosition:=1)
+
+        ucrBase.clsRsyntax.SetBaseROperator(clsSubsetOperator)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
@@ -94,16 +104,24 @@ Public Class dlgLocatingPointsInShapeFile
         ucrReceiverLatitude.SetRCode(clsConcFunction, bReset)
         ucrReceiverLongitude.SetRCode(clsConcFunction, bReset)
         ucrReceiverGeometry.SetRCode(clsStIntersectsFunction, bReset)
-        ucrNewColumnName.SetRCode(clsStIntersectsFunction, bReset)
+        ucrSaveNewColumnName.SetRCode(clsSubsetOperator, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-
+        If ucrReceiverLongitude.IsEmpty OrElse ucrReceiverLatitude.IsEmpty OrElse ucrReceiverGeometry.IsEmpty OrElse Not ucrSaveNewColumnName.IsComplete Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub CoreControlsContentsChanged_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrSaveNewColumnName.ControlContentsChanged, ucrReceiverGeometry.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
