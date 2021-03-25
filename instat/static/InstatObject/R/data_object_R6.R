@@ -2719,7 +2719,7 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
     }
     full_dates <- seq(min_date, max_date, by = "day")
     if(length(full_dates) > length(date_col)) {
-      cat("Adding", (length(full_dates) - length(date_col)), "rows for date gaps", "\n")
+      cat("Added", (length(full_dates) - length(date_col)), "rows to extend data and fill date gaps", "\n")
       full_dates <- data.frame(full_dates)
       names(full_dates) <- date_name
       by <- date_name
@@ -2759,7 +2759,7 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
     for(j in 1:nrow(date_ranges)) {
       full_dates <- seq(date_ranges$min_date[j], date_ranges$max_date[j], by = "day")
       if(length(full_dates) > date_lengths[[2]][j]) {
-        cat(paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), ": Adding", (length(full_dates) - date_lengths[[2]][j]), "rows for date gaps", "\n")
+        cat(paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), ": Added", (length(full_dates) - date_lengths[[2]][j]), "rows to extend data and fill date gaps", "\n")
         merge_required <- TRUE
       }
       full_dates <- data.frame(full_dates)
