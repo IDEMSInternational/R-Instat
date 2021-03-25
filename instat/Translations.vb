@@ -15,6 +15,73 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Public Class Translations
+
+    '**********************************************************************************************
+    'TODO This section contains functions for the new translation system started in March 2021.
+    ' These are prototype functions and are still under development.
+    '**********************************************************************************************
+
+    Public Shared Sub autoTranslate(ctrParent As Control, Optional CultureInfo As Globalization.CultureInfo = Nothing)
+        If IsNothing(TryCast(ctrParent, Form)) Then
+            Exit Sub
+        End If
+
+        Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim strDbFile As String = "RInstatTranslations\rInstatTranslations.db"
+        Dim strDbPath As String = System.IO.Path.Combine(strDesktopPath, strDbFile)
+        TranslateWinForm.clsTranslateWinForm.translateForm(ctrParent, strDbPath, "fr")
+    End Sub
+
+    Public Shared Sub translateMenu(tsCollection As ToolStripItemCollection, ctrParent As Control)
+        'TODO Lloyd 22/03/21 The function 'ExportMenuNames' below generates a csv file containing 
+        ' all the menu items and their text.
+        ' The CSV file can be imported into the translations database.
+        ' The function below only needs to be executed once per release.
+        'ExportMenuNames(tsCollection, ctrParent)
+
+        Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim strDbFile As String = "RInstatTranslations\rInstatTranslations.db"
+        Dim strDbPath As String = System.IO.Path.Combine(strDesktopPath, strDbFile)
+        TranslateWinForm.clsTranslateWinForm.translateMenuItems(tsCollection, ctrParent, strDbPath, "fr")
+    End Sub
+
+    Private Shared Sub ExportMenuNames(tsCollection As ToolStripItemCollection, ctrParent As Control)
+        Dim desktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim newfile As String = "form_controls.csv"
+        Dim newPath As String = System.IO.Path.Combine(desktopPath, newfile)
+
+        Dim strMenuItemsAsCsv As String = GetMenuItemsAsCsv(tsCollection, ctrParent)
+        Using sw As New System.IO.StreamWriter(newPath)
+            sw.WriteLine(strMenuItemsAsCsv)
+            sw.Flush()
+            sw.Close()
+        End Using
+    End Sub
+
+    Private Shared Function GetMenuItemsAsCsv(tsCollection As ToolStripItemCollection, ctrParent As Control) As String
+        Dim strMenuItemsAsCsv As String = ""
+
+        For Each tsItem As ToolStripItem In tsCollection
+            If tsItem.Text <> "" Then
+                strMenuItemsAsCsv &= ctrParent.Name & "," & tsItem.Name & "," & tsItem.Text & vbCrLf
+            End If
+            Dim mnuItem As ToolStripMenuItem = TryCast(tsItem, ToolStripMenuItem)
+            If mnuItem IsNot Nothing Then
+                If mnuItem.HasDropDownItems Then
+                    strMenuItemsAsCsv &= GetMenuItemsAsCsv(mnuItem.DropDownItems, ctrParent)
+                End If
+            End If
+        Next
+
+        Return strMenuItemsAsCsv
+    End Function
+
+
+    '**********************************************************************************************
+    'TODO This section contains functions from the old translation system.
+    ' These functions will be replaced as part of the new translation system started in March 2021.
+    '**********************************************************************************************
+
     Public Shared Function translate(tag As String) As String
         ' Note: if the tag is not found in Resources then Nothing will be returned
         Return My.Resources.ResourceManager.GetObject(tag)
@@ -79,7 +146,15 @@ Public Class Translations
         'Next formControl
     End Sub
 
-    Public Shared Sub autoTranslate(ctrParent As Control, Optional CultureInfo As Globalization.CultureInfo = Nothing)
+
+    '**********************************************************************************************
+    'TODO This section contains old functions that have been replaced by the new translation system 
+    ' started in March 2021.
+    ' These functions will be deleted when the new translation system has been implemented.
+    '**********************************************************************************************
+
+
+    Public Shared Sub DELETEMEautoTranslate(ctrParent As Control, Optional CultureInfo As Globalization.CultureInfo = Nothing)
         'Dim translatedString As String
 
         '' Attempt to translate the form's title if it has a tag
@@ -93,8 +168,8 @@ Public Class Translations
         translateEach(ctrParent.Controls, ctrParent, New ComponentModel.ComponentResourceManager(ctrParent.GetType()), CultureInfo)
     End Sub
 
-    ' translateMenu and translateSubMenu should not be neccessary if we can improve translateEach to accept any iterable
-    Public Shared Sub translateMenu(tsCollection As ToolStripItemCollection, ctrParent As Control)
+    'translateMenu And translateSubMenu should Not be neccessary if we can improve translateEach to accept any iterable
+    Public Shared Sub DELETEMEtranslateMenu(tsCollection As ToolStripItemCollection, ctrParent As Control)
         Dim tsItem As ToolStripItem
         Dim mnuItem As ToolStripMenuItem
         Dim res As ComponentModel.ComponentResourceManager = New ComponentModel.ComponentResourceManager(ctrParent.GetType)
@@ -112,27 +187,27 @@ Public Class Translations
         Next
     End Sub
 
-    '' translateMenu and translateSubMenu should not be neccessary if we can improve translateEach to accept any iterable
-    'Public Shared Sub translateSubMenu(subMenuControl As ToolStripItemCollection)
-    '    Dim item
-    '    Dim originalTag As String
-    '    Dim translatedString As String
+    ' translateMenu and translateSubMenu should not be neccessary if we can improve translateEach to accept any iterable
+    Public Shared Sub translateSubMenu(subMenuControl As ToolStripItemCollection)
+        Dim item
+        Dim originalTag As String
+        Dim translatedString As String
 
-    '    For Each item In subMenuControl
-    '        ' process this item, then recursively process any sub items
-    '        If Not (TypeOf item Is ToolStripSeparator) Then
+        For Each item In subMenuControl
+            ' process this item, then recursively process any sub items
+            If Not (TypeOf item Is ToolStripSeparator) Then
 
-    '            If (item.hasdropdownitems()) Then
-    '                translateSubMenu(item.DropDownItems)
-    '            End If
-    '            originalTag = item.Tag
-    '            If (originalTag IsNot Nothing) Then
-    '                translatedString = My.Resources.ResourceManager.GetObject(originalTag)
-    '                If (translatedString IsNot Nothing) Then
-    '                    item.Text = translatedString
-    '                End If
-    '            End If
-    '        End If
-    '    Next item
-    'End Sub
+                If (item.hasdropdownitems()) Then
+                    translateSubMenu(item.DropDownItems)
+                End If
+                originalTag = item.Tag
+                If (originalTag IsNot Nothing) Then
+                    translatedString = My.Resources.ResourceManager.GetObject(originalTag)
+                    If (translatedString IsNot Nothing) Then
+                        item.Text = translatedString
+                    End If
+                End If
+            End If
+        Next item
+    End Sub
 End Class
