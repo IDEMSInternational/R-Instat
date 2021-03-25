@@ -34,12 +34,6 @@ Public Class GgplotDefaults
 
             clsTempFunc.SetPackageName("viridis")
             clsTempFunc.SetRCommand("scale_colour_viridis")
-            clsTempFunc.AddParameter("option", Chr(34) & "viridis" & Chr(34), iPosition:=0)
-            clsTempFunc.AddParameter("alpha", "1", iPosition:=1)
-            clsTempFunc.AddParameter("begin", "0", iPosition:=2)
-            clsTempFunc.AddParameter("end", "1", iPosition:=3)
-            clsTempFunc.AddParameter("direction", "1", iPosition:=4)
-            clsTempFunc.AddParameter("discrete", "TRUE", iPosition:=5)
             Return clsTempFunc
         End Get
     End Property
@@ -50,12 +44,6 @@ Public Class GgplotDefaults
 
             clsTempFunc.SetPackageName("viridis")
             clsTempFunc.SetRCommand("scale_fill_viridis")
-            clsTempFunc.AddParameter("option", Chr(34) & "viridis" & Chr(34), iPosition:=0)
-            clsTempFunc.AddParameter("alpha", "1", iPosition:=1)
-            clsTempFunc.AddParameter("begin", "0", iPosition:=2)
-            clsTempFunc.AddParameter("end", "1", iPosition:=3)
-            clsTempFunc.AddParameter("direction", "1", iPosition:=4)
-            clsTempFunc.AddParameter("discrete", "TRUE", iPosition:=5)
             Return clsTempFunc
         End Get
     End Property

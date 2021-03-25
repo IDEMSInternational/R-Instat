@@ -109,10 +109,6 @@ Partial Class sdgPlots
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.tbpColour = New System.Windows.Forms.TabPage()
-        Me.rdoModifyColour = New System.Windows.Forms.RadioButton()
-        Me.rdoNoColour = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlColour = New instat.UcrPanel()
-        Me.ucrChkApplyChanges = New instat.ucrCheck()
         Me.ucrChkAddFillScale = New instat.ucrCheck()
         Me.grpColourScale = New System.Windows.Forms.GroupBox()
         Me.ucrChkColourDiscrete = New instat.ucrCheck()
@@ -137,6 +133,7 @@ Partial Class sdgPlots
         Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
         Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkAddColour = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -684,41 +681,13 @@ Partial Class sdgPlots
         '
         'tbpColour
         '
-        Me.tbpColour.Controls.Add(Me.rdoModifyColour)
-        Me.tbpColour.Controls.Add(Me.rdoNoColour)
-        Me.tbpColour.Controls.Add(Me.ucrPnlColour)
-        Me.tbpColour.Controls.Add(Me.ucrChkApplyChanges)
+        Me.tbpColour.Controls.Add(Me.ucrChkAddColour)
         Me.tbpColour.Controls.Add(Me.ucrChkAddFillScale)
         Me.tbpColour.Controls.Add(Me.grpColourScale)
         Me.tbpColour.Controls.Add(Me.grpFillScale)
         resources.ApplyResources(Me.tbpColour, "tbpColour")
         Me.tbpColour.Name = "tbpColour"
         Me.tbpColour.UseVisualStyleBackColor = True
-        '
-        'rdoModifyColour
-        '
-        resources.ApplyResources(Me.rdoModifyColour, "rdoModifyColour")
-        Me.rdoModifyColour.Name = "rdoModifyColour"
-        Me.rdoModifyColour.TabStop = True
-        Me.rdoModifyColour.UseVisualStyleBackColor = True
-        '
-        'rdoNoColour
-        '
-        resources.ApplyResources(Me.rdoNoColour, "rdoNoColour")
-        Me.rdoNoColour.Name = "rdoNoColour"
-        Me.rdoNoColour.TabStop = True
-        Me.rdoNoColour.UseVisualStyleBackColor = True
-        '
-        'ucrPnlColour
-        '
-        resources.ApplyResources(Me.ucrPnlColour, "ucrPnlColour")
-        Me.ucrPnlColour.Name = "ucrPnlColour"
-        '
-        'ucrChkApplyChanges
-        '
-        Me.ucrChkApplyChanges.Checked = False
-        resources.ApplyResources(Me.ucrChkApplyChanges, "ucrChkApplyChanges")
-        Me.ucrChkApplyChanges.Name = "ucrChkApplyChanges"
         '
         'ucrChkAddFillScale
         '
@@ -903,6 +872,12 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
+        'ucrChkAddColour
+        '
+        Me.ucrChkAddColour.Checked = False
+        resources.ApplyResources(Me.ucrChkAddColour, "ucrChkAddColour")
+        Me.ucrChkAddColour.Name = "ucrChkAddColour"
+        '
         'sdgPlots
         '
         resources.ApplyResources(Me, "$this")
@@ -931,7 +906,6 @@ Partial Class sdgPlots
         Me.grpPolarCordinates.ResumeLayout(False)
         Me.grpPolarCordinates.PerformLayout()
         Me.tbpColour.ResumeLayout(False)
-        Me.tbpColour.PerformLayout()
         Me.grpColourScale.ResumeLayout(False)
         Me.grpColourScale.PerformLayout()
         Me.grpFillScale.ResumeLayout(False)
@@ -1034,12 +1008,9 @@ Partial Class sdgPlots
     Friend WithEvents ucrNudFillScaleMapBegins As ucrNud
     Friend WithEvents ucrInputFillScaleColour As ucrInputComboBox
     Friend WithEvents ucrChkAddFillScale As ucrCheck
-    Friend WithEvents ucrChkApplyChanges As ucrCheck
-    Friend WithEvents rdoModifyColour As RadioButton
-    Friend WithEvents rdoNoColour As RadioButton
-    Friend WithEvents ucrPnlColour As UcrPanel
     Friend WithEvents ucrChkColourDiscrete As ucrCheck
     Friend WithEvents ucrChkFillDiscrete As ucrCheck
+    Friend WithEvents ucrChkAddColour As ucrCheck
 End Class
 
 
