@@ -42,7 +42,9 @@ Public Class Translations
         Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
         Dim strDbFile As String = "RInstatTranslations\rInstatTranslations.db"
         Dim strDbPath As String = System.IO.Path.Combine(strDesktopPath, strDbFile)
-        TranslateWinForm.clsTranslateWinForm.translateMenuItems(tsCollection, ctrParent, strDbPath, "fr")
+        Dim arrLanguageCodes As String() = frmMain.clsInstatOptions.strLanguageCultureCode.Split(New Char() {"-"c})
+        Dim strLanguageCode As String = arrLanguageCodes(0)
+        TranslateWinForm.clsTranslateWinForm.translateMenuItems(tsCollection, ctrParent, strDbPath, strLanguageCode)
     End Sub
 
     Private Shared Sub ExportMenuNames(tsCollection As ToolStripItemCollection, ctrParent As Control)
