@@ -878,6 +878,12 @@
   <data name="mnuViewResetToDefaultLayout.Text" xml:space="preserve">
     <value>Reset to Default Layout</value>
   </data>
+  <data name="mnuViewSwapDataAndMetadata.Size" type="System.Drawing.Size, System.Drawing">
+    <value>211, 22</value>
+  </data>
+  <data name="mnuViewSwapDataAndMetadata.Text" xml:space="preserve">
+    <value>Swap Data and Metadata</value>
+  </data>
   <data name="mnuView.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
   </data>
@@ -1138,9 +1144,6 @@
   </data>
   <data name="ToolStripSeparator69.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 6</value>
-  </data>
-  <data name="mnuClimaticDataEntry.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="mnuClimaticDataEntry.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 22</value>
@@ -1664,11 +1667,26 @@
   <data name="mnuClimaticCompare.Text" xml:space="preserve">
     <value>Compare</value>
   </data>
+  <data name="mnuClimaticMappingMap.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuClimaticMappingMap.Text" xml:space="preserve">
+    <value>Map...</value>
+  </data>
+  <data name="mnuClimaticMappingCheckStations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuClimaticMappingCheckStations.Text" xml:space="preserve">
+    <value>Check Stations...</value>
+  </data>
+  <data name="mnuClimaticMappingCheckStations.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="mnuClimaticMapping.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
   </data>
   <data name="mnuClimaticMapping.Text" xml:space="preserve">
-    <value>Mapping...</value>
+    <value>Mapping</value>
   </data>
   <data name="mnuClimaticModelsExtremes.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
@@ -6408,6 +6426,9 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>
   </data>
@@ -7117,6 +7138,12 @@
     <value>mnuViewResetToDefaultLayout</value>
   </data>
   <data name="&gt;&gt;mnuViewResetToDefaultLayout.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuViewSwapDataAndMetadata.Name" xml:space="preserve">
+    <value>mnuViewSwapDataAndMetadata</value>
+  </data>
+  <data name="&gt;&gt;mnuViewSwapDataAndMetadata.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuHelp.Name" xml:space="preserve">
@@ -7891,6 +7918,18 @@
     <value>mnuClimaticMapping</value>
   </data>
   <data name="&gt;&gt;mnuClimaticMapping.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticMappingMap.Name" xml:space="preserve">
+    <value>mnuClimaticMappingMap</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticMappingMap.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticMappingCheckStations.Name" xml:space="preserve">
+    <value>mnuClimaticMappingCheckStations</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticMappingCheckStations.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticModel.Name" xml:space="preserve">

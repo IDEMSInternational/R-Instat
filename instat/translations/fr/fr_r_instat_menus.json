@@ -50,7 +50,7 @@
     "Column Structure...": "Structure de la colonne...",
     "Colour by Property...": "Couleur par propriété...",
     "Check Data": "Vérification des données",
-    "Visualise Data...": "Visualise Data...",
+    "Visualise Data...": "Visualiser les données...",
     "Duplicates...": "Doublons...",
     "Compare Columns...": "Comparaison de colonnes...",
     "Non-numeric Cases...": "Cas non numériques...",
@@ -399,5 +399,10 @@
     "More...": "Plus...",
     "About R-Instat": "À propos de R-Instat",
     "Licence...": "Licence...",
-    "Acknowlegments": "Remerciements"
+    "Acknowledgments": "Acknowledgments",
+    "Percentile Rose...": "Percentile Rose...",
+    "Polar Plot...": "Polar Plot...",
+    "Polar Frequency...": "Polar Frequency...",
+    "Polar Cluster...": "Polar Cluster...",
+    "Polar Annulus...": "Polar Annulus..."
 }
