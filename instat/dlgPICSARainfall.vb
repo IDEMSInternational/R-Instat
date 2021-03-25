@@ -83,8 +83,6 @@ Public Class dlgPICSARainfall
     Private ReadOnly strFacetWrap As String = "Facet Wrap"
     Private ReadOnly strFacetRow As String = "Facet Row"
     Private ReadOnly strFacetCol As String = "Facet Column"
-    Private ReadOnly strXAxis As String = "X Axis"
-    Private ReadOnly strColour As String = "Colour Axis"
     Private ReadOnly strNone As String = "None"
 
     Private bUpdateComboOptions As Boolean = True
@@ -179,7 +177,7 @@ Public Class dlgPICSARainfall
         clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
         ucrChkPoints.SetParameter(clsPointsParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        ucrInputStation.SetItems({strXAxis, strColour, strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
         ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrSave.SetPrefix("PICSA_Rainfall_Graph")
@@ -671,11 +669,6 @@ Public Class dlgPICSARainfall
     End Sub
 
     Private Sub UpdateParameters()
-        clsRaesFunction.RemoveParameterByName("x")
-        clsRaesFunction.RemoveParameterByName("color")
-        clsRaesFunction.RemoveParameterByName("fill")
-        clsAsFactorFunction.RemoveParameterByName("x")
-
         clsFacetOperator.RemoveParameterByName("wrap" & ucrInputStation.Name)
         clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
         clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
@@ -684,15 +677,6 @@ Public Class dlgPICSARainfall
         bUpdatingParameters = True
         ucrReceiverFacetBy.SetRCode(Nothing)
         Select Case ucrInputStation.GetText()
-            Case strXAxis
-                ucrReceiverFacetBy.ChangeParameterName("x")
-                ucrReceiverFacetBy.SetParameterIncludeArgumentName(False)
-                ucrReceiverFacetBy.SetRCode(clsAsFactorFunction)
-                clsRaesFunction.AddParameter("x", clsRFunctionParameter:=clsAsFactorFunction)
-            Case strColour
-                ucrReceiverFacetBy.ChangeParameterName("color")
-                ucrReceiverFacetBy.SetParameterIncludeArgumentName(True)
-                ucrReceiverFacetBy.SetRCode(clsRaesFunction)
             Case strFacetWrap
                 ucrReceiverFacetBy.ChangeParameterName("wrap" & ucrInputStation.Name)
                 ucrReceiverFacetBy.SetRCode(clsFacetOperator)
