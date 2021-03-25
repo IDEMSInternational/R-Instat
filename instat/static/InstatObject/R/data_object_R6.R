@@ -3834,7 +3834,7 @@ DataSheet$set("public", "get_data_entry_data", function(station, date, elements,
   curr_data <- self$get_columns_from_data(cols)
   col_names <- c(date, elements)
   if (!missing(station))col_names <- c(station, col_names)
-  if (!missing(view_variables)) col_names <- c(col_names, paste(view_variables, "(view)"))
+  if (!is.null(view_variables)) col_names <- c(col_names, paste(view_variables, "(view)"))
   names(curr_data) <- col_names
   
   if (!missing(station)) curr_data <- curr_data[curr_data[[station]] == station_name, ]
