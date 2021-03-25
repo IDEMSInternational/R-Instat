@@ -187,27 +187,27 @@ Public Class Translations
         Next
     End Sub
 
-    ' translateMenu and translateSubMenu should not be neccessary if we can improve translateEach to accept any iterable
-    Public Shared Sub translateSubMenu(subMenuControl As ToolStripItemCollection)
-        Dim item
-        Dim originalTag As String
-        Dim translatedString As String
+    '' translateMenu and translateSubMenu should not be neccessary if we can improve translateEach to accept any iterable
+    'Public Shared Sub translateSubMenu(subMenuControl As ToolStripItemCollection)
+    '    Dim item
+    '    Dim originalTag As String
+    '    Dim translatedString As String
 
-        For Each item In subMenuControl
-            ' process this item, then recursively process any sub items
-            If Not (TypeOf item Is ToolStripSeparator) Then
+    '    For Each item In subMenuControl
+    '        ' process this item, then recursively process any sub items
+    '        If Not (TypeOf item Is ToolStripSeparator) Then
 
-                If (item.hasdropdownitems()) Then
-                    translateSubMenu(item.DropDownItems)
-                End If
-                originalTag = item.Tag
-                If (originalTag IsNot Nothing) Then
-                    translatedString = My.Resources.ResourceManager.GetObject(originalTag)
-                    If (translatedString IsNot Nothing) Then
-                        item.Text = translatedString
-                    End If
-                End If
-            End If
-        Next item
-    End Sub
+    '            If (item.hasdropdownitems()) Then
+    '                translateSubMenu(item.DropDownItems)
+    '            End If
+    '            originalTag = item.Tag
+    '            If (originalTag IsNot Nothing) Then
+    '                translatedString = My.Resources.ResourceManager.GetObject(originalTag)
+    '                If (translatedString IsNot Nothing) Then
+    '                    item.Text = translatedString
+    '                End If
+    '            End If
+    '        End If
+    '    Next item
+    'End Sub
 End Class
