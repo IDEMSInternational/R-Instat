@@ -576,7 +576,8 @@ DataBook$set("public", "get_objects", function(data_name, object_name, include_o
 }
 )
 
-DataBook$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+DataBook$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE, excluded_items = c(), internal = TRUE) {
+  if (!internal && exists("graph_data_book")) return(graph_data_book$get_object_names(data_name = data_name, include_overall = include_overall, include = include, exclude = exclude, type = type, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = TRUE))
   if(type == "") overall_object_names = names(private$.objects)
   else {
     if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
@@ -701,8 +702,9 @@ DataBook$set("public", "get_graphs", function(data_name, graph_name, include_ove
 }
 )
 
-DataBook$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
-  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
+DataBook$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c(), internal = FALSE) {
+  if (!internal & exists("graph_data_book")) graph_data_book$get_graph_names(data_name = data_name, include_overall = include_overall, include = include, exclude = exclude, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = TRUE)
+  else self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
 }
 )
 
