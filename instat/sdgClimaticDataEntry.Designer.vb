@@ -24,8 +24,8 @@ Partial Class sdgClimaticDataEntry
     Private Sub InitializeComponent()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.grdDataEntry = New unvell.ReoGrid.ReoGridControl()
-        Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
         Me.cmdRefress = New System.Windows.Forms.Button()
+        Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -70,14 +70,6 @@ Partial Class sdgClimaticDataEntry
         Me.grdDataEntry.TabIndex = 3
         Me.grdDataEntry.Text = "Variables"
         '
-        'ucrSdgPICSARainfalbuttons
-        '
-        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(161, 5)
-        Me.ucrSdgPICSARainfalbuttons.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
-        Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(144, 30)
-        Me.ucrSdgPICSARainfalbuttons.TabIndex = 87
-        '
         'cmdRefress
         '
         Me.cmdRefress.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -87,6 +79,14 @@ Partial Class sdgClimaticDataEntry
         Me.cmdRefress.TabIndex = 88
         Me.cmdRefress.Text = "Refresh"
         Me.cmdRefress.UseVisualStyleBackColor = True
+        '
+        'ucrSdgPICSARainfalbuttons
+        '
+        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(161, 5)
+        Me.ucrSdgPICSARainfalbuttons.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
+        Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(144, 30)
+        Me.ucrSdgPICSARainfalbuttons.TabIndex = 87
         '
         'sdgClimaticDataEntry
         '

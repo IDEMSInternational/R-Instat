@@ -140,6 +140,9 @@ Public Class dlgClimaticDataEntry
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
+    Public Function VariablesNames() As List(Of String)
+        Return ucrReceiverVariables.GetVariableNamesList(bWithQuotes:=False).ToList
+    End Function
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrInputSelectStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
         TestOkEnabled()
     End Sub
@@ -147,10 +150,20 @@ Public Class dlgClimaticDataEntry
         Dim strStationColumnName As String = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
         Dim strDateColumnName As String = ucrReceiverDate.GetVariableNames(bWithQuotes:=False)
         Dim lstElementsColumnNames As List(Of String) = ucrReceiverElements.GetVariableNamesList(bWithQuotes:=False).ToList
+        Dim lstVariablesColumnNames As List(Of String) = ucrReceiverVariables.GetVariableNamesList(bWithQuotes:=False).ToList
         Dim strStationSelected As String = ucrInputSelectStation.GetValue()
         Dim startDateSelected As Date = ucrDateTimePickerStartingDate.Value.Date
         Dim strSelectedDataFrameName As String = ucrSelectorClimaticDataEntry.strCurrentDataFrame
         Dim dfTemp As DataFrame = GetSelectedDataFrame()
+
+        If ucrDateTimePickerEndingDate.Visible Then
+            If ucrDateTimePickerEndingDate.Value.Year - ucrDateTimePickerStartingDate.Value.Year > 1 OrElse
+                ucrDateTimePickerStartingDate.Value.Date > ucrDateTimePickerEndingDate.Value.Date OrElse
+                ucrDateTimePickerStartingDate.Value.Date = ucrDateTimePickerEndingDate.Value.Date Then
+                MsgBox("The difference between Starting date and Ending date should be 1 year." & Environment.NewLine & " The Starting date must be less than Ending date.", MsgBoxStyle.Exclamation)
+                Exit Sub
+            End If
+        End If
 
         If dfTemp Is Nothing Then
             'todo. display message box here. This could be due to no records from the starting date
@@ -160,8 +173,7 @@ Public Class dlgClimaticDataEntry
 
 
         'todo. should we have the abilty to retain the previous changes if the selections have not changed??
-        sdgClimaticDataEntry.Setup(strStationColumnName, strDateColumnName, lstElementsColumnNames,
-                                       dfTemp, strSelectedDataFrameName)
+        sdgClimaticDataEntry.Setup(dfTemp, strSelectedDataFrameName)
 
         sdgClimaticDataEntry.ShowDialog()
 
@@ -193,7 +205,7 @@ Public Class dlgClimaticDataEntry
         TestOkEnabled()
     End Sub
 
-    Private Function GetSelectedDataFrame() As DataFrame
+    Public Function GetSelectedDataFrame() As DataFrame
         Dim dfTemp As DataFrame = Nothing
         Dim clsGetDataFrame As New RFunction
         Dim expTemp As SymbolicExpression
@@ -203,11 +215,11 @@ Public Class dlgClimaticDataEntry
         clsGetDataFrame.AddParameter("station", ucrReceiverStation.GetVariableNames, iPosition:=1)
         clsGetDataFrame.AddParameter("date", ucrReceiverDate.GetVariableNames, iPosition:=2)
         clsGetDataFrame.AddParameter("elements", ucrReceiverElements.GetVariableNames(), iPosition:=3)
-        clsGetDataFrame.AddParameter("station_name", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=4)
-        clsGetDataFrame.AddParameter("start_date", Chr(34) & ucrDateTimePickerStartingDate.Value.Date.ToString("yyyy/MM/dd") & Chr(34), iPosition:=5)
-        If ucrDateTimePickerEndingDate.Visible Then
-            clsGetDataFrame.AddParameter("end_date", Chr(34) & ucrDateTimePickerEndingDate.Value.Date.ToString("yyyy/MM/dd") & Chr(34), iPosition:=6)
-        End If
+        clsGetDataFrame.AddParameter("view_variables", ucrReceiverVariables.GetVariableNames(), iPosition:=4)
+        clsGetDataFrame.AddParameter("station_name", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=5)
+        clsGetDataFrame.AddParameter("type", Chr(34) & Strings.LCase(ucrInputPeriodOption.GetValue()) & Chr(34), iPosition:=6)
+        clsGetDataFrame.AddParameter("start_date", Chr(34) & ucrDateTimePickerStartingDate.Value.Date.ToString("yyyy/MM/dd") & Chr(34), iPosition:=7)
+        clsGetDataFrame.AddParameter("end_date", Chr(34) & ucrDateTimePickerEndingDate.Value.Date.ToString("yyyy/MM/dd") & Chr(34), iPosition:=8)
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript(), bSilent:=True)
         If expTemp IsNot Nothing Then
             dfTemp = expTemp.AsDataFrame()

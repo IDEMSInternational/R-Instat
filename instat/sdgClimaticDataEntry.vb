@@ -77,16 +77,16 @@ Public Class sdgClimaticDataEntry
 
     Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdDataEntry.SheetTabNewButtonVisible = False
-        lstNonEditableColumns.AddRange({"station", "date"})
+        lstNonEditableColumns.AddRange({"station", "date", "Name"})
     End Sub
 
-    Public Sub Setup(strStationColumnName As String, strDateColumnName As String, lstElementsColumnNames As List(Of String), dataFrame As DataFrame, strDataFrameName As String)
+    Public Sub Setup(dataFrame As DataFrame, strDataFrameName As String)
         'clear any previous data
         grdDataEntry.Worksheets.Clear()
         dctRowsChanged.Clear()
 
         'create work sheet from the data frame
-        grdCurrentWorkSheet = GetFilledWorkSheet(strStationColumnName, strDateColumnName, lstElementsColumnNames, dataFrame, strDataFrameName)
+        grdCurrentWorkSheet = GetFilledWorkSheet(dataFrame, strDataFrameName)
         'add the new worksheet to the grid
         grdDataEntry.AddWorksheet(grdCurrentWorkSheet)
     End Sub
@@ -94,6 +94,9 @@ Public Class sdgClimaticDataEntry
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
         'todo. do this disabling of data entry be done when setting up the grid. Not here
         If lstNonEditableColumns.Contains(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text) Then
+            e.IsCancelled = True
+        End If
+        If dlgClimaticDataEntry.VariablesNames.Contains(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text) Then
             e.IsCancelled = True
         End If
     End Sub
@@ -114,16 +117,19 @@ Public Class sdgClimaticDataEntry
         End If
     End Sub
 
-    Private Function GetFilledWorkSheet(strStationColumnName As String, strDateColumnName As String, lstElementsColumnNames As List(Of String), dataFrame As DataFrame, strSheetName As String) As Worksheet
+    Private Function GetFilledWorkSheet(dataFrame As DataFrame, strSheetName As String) As Worksheet
         Dim grdWorkSheet As Worksheet = grdDataEntry.CreateWorksheet(strSheetName)
-        Dim lstColumnHeaders As New List(Of String)
+        'Dim lstColumnHeaders As New List(Of String)
+        Dim lstColumnHeaders As String()
 
         'create the columns to be used by in worksheet; station, date and elements.station is optional
-        If Not String.IsNullOrEmpty(strStationColumnName) Then
-            lstColumnHeaders.Add(strStationColumnName)
-        End If
-        lstColumnHeaders.Add(strDateColumnName)
-        lstColumnHeaders.AddRange(lstElementsColumnNames)
+        'If Not String.IsNullOrEmpty(strStationColumnName) Then
+        '    lstColumnHeaders.Add(strStationColumnName)
+        'End If
+        'lstColumnHeaders.Add(strDateColumnName)
+        'lstColumnHeaders.AddRange(lstElementsColumnNames)
+        'lstColumnHeaders.AddRange(lstVariablesColumnNames)
+        lstColumnHeaders = dataFrame.ColumnNames
 
         'set the columns header names for the worksheet
         grdWorkSheet.Columns = lstColumnHeaders.Count
@@ -147,4 +153,9 @@ Public Class sdgClimaticDataEntry
         Return grdWorkSheet
     End Function
 
+    Private Sub cmdRefress_Click(sender As Object, e As EventArgs) Handles cmdRefress.Click
+        If MsgBox("Would you like to refress the grid?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            Setup(dlgClimaticDataEntry.GetSelectedDataFrame, grdCurrentWorkSheet.Name)
+        End If
+    End Sub
 End Class
