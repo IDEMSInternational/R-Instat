@@ -946,6 +946,7 @@ Public Class dlgImportDataset
 
     Private Sub clbSheets_ItemCheck(sender As Object, e As ItemCheckEventArgs) Handles clbSheets.ItemCheck
         Dim strSheetNumbers As String
+        Dim strSheetName As String
 
         If Not bSupressSheetChange Then
             dctSelectedExcelSheets.Clear()
@@ -967,7 +968,8 @@ Public Class dlgImportDataset
                 ElseIf dctSelectedExcelSheets.Count = 1 Then
                     strSheetNumbers = dctSelectedExcelSheets.Keys.First()
                     clsImportExcel.AddParameter("which", strSheetNumbers)
-                    ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First(), bSilent:=True)
+                    strSheetName = dctSelectedExcelSheets.Values.First()
+                    ucrSaveFile.SetName(strSheetName.Replace(" ", "."), bSilent:=True)
                     ucrSaveFile.Focus()
                     ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
                     ucrSaveFile.Show()
