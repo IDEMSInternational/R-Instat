@@ -1149,7 +1149,7 @@
     <value>215, 22</value>
   </data>
   <data name="mnuClimaticDataEntry.Text" xml:space="preserve">
-    <value>Data Entry</value>
+    <value>Daily Data Entry...</value>
   </data>
   <data name="ToolStripSeparator50.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 6</value>
