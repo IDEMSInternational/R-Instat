@@ -40,31 +40,29 @@ Public Class dlgTaylorDiagram
         ucrSelectorTaylorDiagram.SetParameter(New RParameter("mydata", 0))
         ucrSelectorTaylorDiagram.SetParameterIsrfunction()
 
-        ucrReceiverSingleObserved.SetParameter(New RParameter("obs", 1))
-        ucrReceiverSingleObserved.Selector = ucrSelectorTaylorDiagram
-        ucrReceiverSingleObserved.SetParameterIsString()
-        ucrReceiverSingleObserved.SetIncludedDataTypes({"numeric"})
-        ucrReceiverSingleObserved.strSelectorHeading = "Numerics"
+        ucrReceiverObserved.SetParameter(New RParameter("obs", 1))
+        ucrReceiverObserved.Selector = ucrSelectorTaylorDiagram
+        ucrReceiverObserved.SetParameterIsString()
+        ucrReceiverObserved.SetIncludedDataTypes({"numeric"})
+        ucrReceiverObserved.strSelectorHeading = "Numerics"
 
-        ucrReceiverSingleEstimated.SetParameter(New RParameter("mod", 2))
-        ucrReceiverSingleEstimated.Selector = ucrSelectorTaylorDiagram
-        ucrReceiverSingleEstimated.SetParameterIsString()
-        ucrReceiverSingleEstimated.SetIncludedDataTypes({"numeric"})
-        ucrReceiverSingleEstimated.strSelectorHeading = "Numerics"
+        ucrReceiverEstimated.SetParameter(New RParameter("mod", 2))
+        ucrReceiverEstimated.Selector = ucrSelectorTaylorDiagram
+        ucrReceiverEstimated.SetParameterIsString()
+        ucrReceiverEstimated.SetIncludedDataTypes({"numeric"})
+        ucrReceiverEstimated.strSelectorHeading = "Numerics"
 
-        ucrReceiverMultipleGroup.SetParameter(New RParameter("group", 3))
-        ucrReceiverMultipleGroup.Selector = ucrSelectorTaylorDiagram
-        ucrReceiverMultipleGroup.SetParameterIsString()
-        ucrReceiverMultipleGroup.SetIncludedDataTypes({"factor", "character"})
-        ucrReceiverMultipleGroup.strSelectorHeading = "Factors & Characters"
-        ucrReceiverMultipleGroup.bExcludeFromSelector = True
+        ucrReceiverGroup.SetParameter(New RParameter("group", 3))
+        ucrReceiverGroup.Selector = ucrSelectorTaylorDiagram
+        ucrReceiverGroup.SetParameterIsString()
+        ucrReceiverGroup.SetIncludedDataTypes({"factor", "character"})
+        ucrReceiverGroup.strSelectorHeading = "Factors & Characters"
+        ucrReceiverGroup.bExcludeFromSelector = True
 
-        ucrReceiverSingleStation.SetParameter(New RParameter("type", 4))
-        ucrReceiverSingleStation.Selector = ucrSelectorTaylorDiagram
-        ucrReceiverSingleStation.SetParameterIsString()
-        ucrReceiverSingleStation.bExcludeFromSelector = True
-        ucrReceiverSingleStation.SetClimaticType("station")
-        ucrReceiverSingleStation.bAutoFill = True
+        ucrReceiverType.SetParameter(New RParameter("type", 4))
+        ucrReceiverType.Selector = ucrSelectorTaylorDiagram
+        ucrReceiverType.SetParameterIsString()
+        ucrReceiverType.bExcludeFromSelector = True
 
         ucrChkNormalise.SetParameter(New RParameter("normalise", 5))
         ucrChkNormalise.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -84,7 +82,7 @@ Public Class dlgTaylorDiagram
 
         ucrSelectorTaylorDiagram.Reset()
         ucrSavePlot.Reset()
-        ucrReceiverSingleObserved.SetMeAsReceiver()
+        ucrReceiverObserved.SetMeAsReceiver()
 
         clsTaylorDiagramFunction.SetPackageName("openair")
         clsTaylorDiagramFunction.SetRCommand("TaylorDiagram")
@@ -104,14 +102,14 @@ Public Class dlgTaylorDiagram
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverSingleObserved.IsEmpty() OrElse ucrReceiverSingleEstimated.IsEmpty() OrElse Not ucrSavePlot.IsComplete Then
+        If ucrReceiverObserved.IsEmpty() OrElse ucrReceiverEstimated.IsEmpty() OrElse Not ucrSavePlot.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
     End Sub
 
-    Private Sub ucrReceiverSingleObserved_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSingleObserved.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverSingleEstimated.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObserved.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverEstimated.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
