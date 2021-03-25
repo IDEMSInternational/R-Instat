@@ -691,7 +691,7 @@ DataBook$set("public", "add_graph", function(data_name, graph, graph_name, inter
     if(!is.null(last_graph_name)) private$.last_graph <- c(data_name, last_graph_name)
   }
   else {
-    if (!exists(".graph_data_book")) self$create_.graph_data_book()
+    if (!exists(".graph_data_book")) self$create_graph_data_book()
     .graph_data_book$add_graph(data_name = data_name, graph = graph, graph_name = graph_name, internal = TRUE)
   }
 }

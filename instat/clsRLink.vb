@@ -60,6 +60,9 @@ Public Class RLink
     ''' <summary>   The instat data book object. </summary> 
     Public strInstatDataObject As String = "data_book" 'TODO SJL 23/04/20 make private constant?
 
+    ''' <summary>   The name of the graph data book used for storing graphs. </summary> 
+    Private strGraphDataBook As String = ".graph_data_book"
+
     ''' <summary>   Name of the data book class. </summary>
     Public strDataBookClassName As String = "DataBook" 'TODO SJL 23/04/20 make private constant?
 
@@ -2263,7 +2266,8 @@ Public Class RLink
         Dim clsCreateIO As New ROperator
 
         clsRm.SetRCommand("rm")
-        clsRm.AddParameter("x", strInstatDataObject)
+        clsRm.AddParameter("0", strInstatDataObject, bIncludeArgumentName:=False, iPosition:=0)
+        clsRm.AddParameter("1", strGraphDataBook, bIncludeArgumentName:=False, iPosition:=1)
 
         clsCreateIO.SetOperation("<-")
         clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)
