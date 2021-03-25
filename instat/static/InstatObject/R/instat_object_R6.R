@@ -509,28 +509,28 @@ DataBook$set("public", "add_object", function(data_name, object, object_name, in
     else self$get_data_objects(data_name)$add_object(object = object, object_name = object_name)
   }
   else {
-    if (!exists("graph_data_book")) self$create_graph_data_book()
-    graph_data_book$add_object(data_name = data_name, object = object, object_name = object_name, internal = TRUE)
+    if (!exists(".graph_data_book")) self$create_graph_data_book()
+    .graph_data_book$add_object(data_name = data_name, object = object, object_name = object_name, internal = TRUE)
   }
 }
 )
 
 DataBook$set("public", "create_graph_data_book", function() {
-  graph_data_book <- DataBook$new()
+  .graph_data_book <- DataBook$new()
   df_names <- self$get_data_names()
   dfs <- vector("list", length(df_names))
   names(dfs) <- df_names
   for (i in seq_along(dfs)) {
     dfs[[i]] <- data.frame()
   }
-  graph_data_book$import_data(data_tables = dfs)
-  assign("graph_data_book", graph_data_book, envir = .GlobalEnv)
+  .graph_data_book$import_data(data_tables = dfs)
+  assign(".graph_data_book", .graph_data_book, envir = .GlobalEnv)
 }
 )
 
 DataBook$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE, print_graph = TRUE, silent = FALSE, internal = TRUE, ...) {
-  if (!internal & exists("graph_data_book")) {
-    out <- graph_data_book$get_objects(data_name = data_name, object_name = object_name, include_overall = include_overall, as_list = as_list, type = type, include_empty = include_empty, force_as_list = force_as_list, print_graph = print_graph, silent = silent, internal = TRUE, ... = ...)
+  if (!internal & exists(".graph_data_book")) {
+    out <- .graph_data_book$get_objects(data_name = data_name, object_name = object_name, include_overall = include_overall, as_list = as_list, type = type, include_empty = include_empty, force_as_list = force_as_list, print_graph = print_graph, silent = silent, internal = TRUE, ... = ...)
     if (!is.null(out)) return(out)
   }
   else {
@@ -577,7 +577,7 @@ DataBook$set("public", "get_objects", function(data_name, object_name, include_o
 )
 
 DataBook$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE, excluded_items = c(), internal = TRUE) {
-  if (!internal && exists("graph_data_book")) return(graph_data_book$get_object_names(data_name = data_name, include_overall = include_overall, include = include, exclude = exclude, type = type, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = TRUE))
+  if (!internal && exists(".graph_data_book")) return(.graph_data_book$get_object_names(data_name = data_name, include_overall = include_overall, include = include, exclude = exclude, type = type, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = TRUE))
   if(type == "") overall_object_names = names(private$.objects)
   else {
     if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
@@ -691,8 +691,8 @@ DataBook$set("public", "add_graph", function(data_name, graph, graph_name, inter
     if(!is.null(last_graph_name)) private$.last_graph <- c(data_name, last_graph_name)
   }
   else {
-    if (!exists("graph_data_book")) self$create_graph_data_book()
-    graph_data_book$add_graph(data_name = data_name, graph = graph, graph_name = graph_name, internal = TRUE)
+    if (!exists(".graph_data_book")) self$create_.graph_data_book()
+    .graph_data_book$add_graph(data_name = data_name, graph = graph, graph_name = graph_name, internal = TRUE)
   }
 }
 )
@@ -703,13 +703,13 @@ DataBook$set("public", "get_graphs", function(data_name, graph_name, include_ove
 )
 
 DataBook$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c(), internal = FALSE) {
-  if (!internal & exists("graph_data_book")) graph_data_book$get_graph_names(data_name = data_name, include_overall = include_overall, include = include, exclude = exclude, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = TRUE)
+  if (!internal & exists(".graph_data_book")) .graph_data_book$get_graph_names(data_name = data_name, include_overall = include_overall, include = include, exclude = exclude, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = TRUE)
   else self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
 }
 )
 
 DataBook$set("public", "get_last_graph", function(print_graph = TRUE, internal = FALSE) {
-  if (!internal && exists("graph_data_book")) graph_data_book$get_last_graph(print_graph = print_graph, internal = TRUE)
+  if (!internal && exists(".graph_data_book")) .graph_data_book$get_last_graph(print_graph = print_graph, internal = TRUE)
   else {
     if(!is.null(private$.last_graph) && length(private$.last_graph) == 2) {
       self$get_objects(data_name = private$.last_graph[1], object_name = private$.last_graph[2], type = graph_label, print_graph = print_graph)
@@ -923,7 +923,7 @@ DataBook$set("public", "delete_dataframes", function(data_names) {
     }
     if(!is.null(private$.last_graph) && private$.last_graph[1] %in% data_names) private$.last_graph <- NULL
   }
-  if (exists("graph_data_book")) graph_data_book$delete_dataframes(data_names = data_names)
+  if (exists(".graph_data_book")) .graph_data_book$delete_dataframes(data_names = data_names)
 } 
 )
 
@@ -963,7 +963,7 @@ DataBook$set("public", "rename_dataframe", function(data_name, new_value = "", l
   data_obj$set_data_changed(TRUE)
   data_obj$set_metadata_changed(TRUE)
   data_obj$set_variables_metadata_changed(TRUE)
-  if (exists("graph_data_book")) graph_data_book$rename_dataframe(data_name = data_name, new_value = new_value, label = label)
+  if (exists(".graph_data_book")) .graph_data_book$rename_dataframe(data_name = data_name, new_value = new_value, label = label)
 }
 )
 
