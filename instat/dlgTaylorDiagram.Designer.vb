@@ -24,17 +24,18 @@ Partial Class dlgTaylorDiagram
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgTaylorDiagram))
         Me.lblObserved = New System.Windows.Forms.Label()
-        Me.lblEstimate = New System.Windows.Forms.Label()
+        Me.lblEstimated = New System.Windows.Forms.Label()
         Me.lblGroup = New System.Windows.Forms.Label()
-        Me.lblStation = New System.Windows.Forms.Label()
+        Me.lblFacet = New System.Windows.Forms.Label()
         Me.ucrChkNormalise = New instat.ucrCheck()
-        Me.ucrReceiverSingleStation = New instat.ucrReceiverSingle()
+        Me.ucrReceiverType = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSavePlot = New instat.ucrSave()
-        Me.ucrReceiverMultipleGroup = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverSingleObserved = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSingleEstimate = New instat.ucrReceiverSingle()
+        Me.ucrReceiverGroup = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverObserved = New instat.ucrReceiverSingle()
+        Me.ucrReceiverEstimated = New instat.ucrReceiverSingle()
         Me.ucrSelectorTaylorDiagram = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.cmdTaylorDiagramOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblObserved
@@ -42,20 +43,20 @@ Partial Class dlgTaylorDiagram
         resources.ApplyResources(Me.lblObserved, "lblObserved")
         Me.lblObserved.Name = "lblObserved"
         '
-        'lblEstimate
+        'lblEstimated
         '
-        resources.ApplyResources(Me.lblEstimate, "lblEstimate")
-        Me.lblEstimate.Name = "lblEstimate"
+        resources.ApplyResources(Me.lblEstimated, "lblEstimated")
+        Me.lblEstimated.Name = "lblEstimated"
         '
         'lblGroup
         '
         resources.ApplyResources(Me.lblGroup, "lblGroup")
         Me.lblGroup.Name = "lblGroup"
         '
-        'lblStation
+        'lblFacet
         '
-        resources.ApplyResources(Me.lblStation, "lblStation")
-        Me.lblStation.Name = "lblStation"
+        resources.ApplyResources(Me.lblFacet, "lblFacet")
+        Me.lblFacet.Name = "lblFacet"
         '
         'ucrChkNormalise
         '
@@ -63,14 +64,14 @@ Partial Class dlgTaylorDiagram
         resources.ApplyResources(Me.ucrChkNormalise, "ucrChkNormalise")
         Me.ucrChkNormalise.Name = "ucrChkNormalise"
         '
-        'ucrReceiverSingleStation
+        'ucrReceiverType
         '
-        Me.ucrReceiverSingleStation.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverSingleStation, "ucrReceiverSingleStation")
-        Me.ucrReceiverSingleStation.Name = "ucrReceiverSingleStation"
-        Me.ucrReceiverSingleStation.Selector = Nothing
-        Me.ucrReceiverSingleStation.strNcFilePath = ""
-        Me.ucrReceiverSingleStation.ucrSelector = Nothing
+        Me.ucrReceiverType.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverType, "ucrReceiverType")
+        Me.ucrReceiverType.Name = "ucrReceiverType"
+        Me.ucrReceiverType.Selector = Nothing
+        Me.ucrReceiverType.strNcFilePath = ""
+        Me.ucrReceiverType.ucrSelector = Nothing
         '
         'ucrBase
         '
@@ -82,32 +83,32 @@ Partial Class dlgTaylorDiagram
         resources.ApplyResources(Me.ucrSavePlot, "ucrSavePlot")
         Me.ucrSavePlot.Name = "ucrSavePlot"
         '
-        'ucrReceiverMultipleGroup
+        'ucrReceiverGroup
         '
-        Me.ucrReceiverMultipleGroup.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultipleGroup, "ucrReceiverMultipleGroup")
-        Me.ucrReceiverMultipleGroup.Name = "ucrReceiverMultipleGroup"
-        Me.ucrReceiverMultipleGroup.Selector = Nothing
-        Me.ucrReceiverMultipleGroup.strNcFilePath = ""
-        Me.ucrReceiverMultipleGroup.ucrSelector = Nothing
+        Me.ucrReceiverGroup.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverGroup, "ucrReceiverGroup")
+        Me.ucrReceiverGroup.Name = "ucrReceiverGroup"
+        Me.ucrReceiverGroup.Selector = Nothing
+        Me.ucrReceiverGroup.strNcFilePath = ""
+        Me.ucrReceiverGroup.ucrSelector = Nothing
         '
-        'ucrReceiverSingleObserved
+        'ucrReceiverObserved
         '
-        Me.ucrReceiverSingleObserved.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverSingleObserved, "ucrReceiverSingleObserved")
-        Me.ucrReceiverSingleObserved.Name = "ucrReceiverSingleObserved"
-        Me.ucrReceiverSingleObserved.Selector = Nothing
-        Me.ucrReceiverSingleObserved.strNcFilePath = ""
-        Me.ucrReceiverSingleObserved.ucrSelector = Nothing
+        Me.ucrReceiverObserved.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverObserved, "ucrReceiverObserved")
+        Me.ucrReceiverObserved.Name = "ucrReceiverObserved"
+        Me.ucrReceiverObserved.Selector = Nothing
+        Me.ucrReceiverObserved.strNcFilePath = ""
+        Me.ucrReceiverObserved.ucrSelector = Nothing
         '
-        'ucrReceiverSingleEstimate
+        'ucrReceiverEstimated
         '
-        Me.ucrReceiverSingleEstimate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverSingleEstimate, "ucrReceiverSingleEstimate")
-        Me.ucrReceiverSingleEstimate.Name = "ucrReceiverSingleEstimate"
-        Me.ucrReceiverSingleEstimate.Selector = Nothing
-        Me.ucrReceiverSingleEstimate.strNcFilePath = ""
-        Me.ucrReceiverSingleEstimate.ucrSelector = Nothing
+        Me.ucrReceiverEstimated.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverEstimated, "ucrReceiverEstimated")
+        Me.ucrReceiverEstimated.Name = "ucrReceiverEstimated"
+        Me.ucrReceiverEstimated.Selector = Nothing
+        Me.ucrReceiverEstimated.strNcFilePath = ""
+        Me.ucrReceiverEstimated.ucrSelector = Nothing
         '
         'ucrSelectorTaylorDiagram
         '
@@ -117,21 +118,28 @@ Partial Class dlgTaylorDiagram
         resources.ApplyResources(Me.ucrSelectorTaylorDiagram, "ucrSelectorTaylorDiagram")
         Me.ucrSelectorTaylorDiagram.Name = "ucrSelectorTaylorDiagram"
         '
+        'cmdTaylorDiagramOptions
+        '
+        resources.ApplyResources(Me.cmdTaylorDiagramOptions, "cmdTaylorDiagramOptions")
+        Me.cmdTaylorDiagramOptions.Name = "cmdTaylorDiagramOptions"
+        Me.cmdTaylorDiagramOptions.UseVisualStyleBackColor = True
+        '
         'dlgTaylorDiagram
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdTaylorDiagramOptions)
         Me.Controls.Add(Me.ucrChkNormalise)
-        Me.Controls.Add(Me.lblStation)
-        Me.Controls.Add(Me.ucrReceiverSingleStation)
+        Me.Controls.Add(Me.lblFacet)
+        Me.Controls.Add(Me.ucrReceiverType)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSavePlot)
         Me.Controls.Add(Me.lblGroup)
-        Me.Controls.Add(Me.lblEstimate)
+        Me.Controls.Add(Me.lblEstimated)
         Me.Controls.Add(Me.lblObserved)
-        Me.Controls.Add(Me.ucrReceiverMultipleGroup)
-        Me.Controls.Add(Me.ucrReceiverSingleObserved)
-        Me.Controls.Add(Me.ucrReceiverSingleEstimate)
+        Me.Controls.Add(Me.ucrReceiverGroup)
+        Me.Controls.Add(Me.ucrReceiverObserved)
+        Me.Controls.Add(Me.ucrReceiverEstimated)
         Me.Controls.Add(Me.ucrSelectorTaylorDiagram)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -145,13 +153,14 @@ Partial Class dlgTaylorDiagram
     Friend WithEvents ucrSelectorTaylorDiagram As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSavePlot As ucrSave
     Friend WithEvents lblGroup As Label
-    Friend WithEvents lblEstimate As Label
+    Friend WithEvents lblEstimated As Label
     Friend WithEvents lblObserved As Label
-    Friend WithEvents ucrReceiverMultipleGroup As ucrReceiverMultiple
-    Friend WithEvents ucrReceiverSingleObserved As ucrReceiverSingle
+    Friend WithEvents ucrReceiverGroup As ucrReceiverMultiple
+    Friend WithEvents ucrReceiverObserved As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lblStation As Label
-    Friend WithEvents ucrReceiverSingleStation As ucrReceiverSingle
-    Friend WithEvents ucrReceiverSingleEstimate As ucrReceiverSingle
+    Friend WithEvents lblFacet As Label
+    Friend WithEvents ucrReceiverType As ucrReceiverSingle
+    Friend WithEvents ucrReceiverEstimated As ucrReceiverSingle
     Friend WithEvents ucrChkNormalise As ucrCheck
+    Friend WithEvents cmdTaylorDiagramOptions As Button
 End Class
