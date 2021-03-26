@@ -262,7 +262,7 @@
     <value>1</value>
   </data>
   <data name="ucrChkResort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 19</value>
+    <value>188, 19</value>
   </data>
   <data name="ucrChkResort.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 20</value>
@@ -304,10 +304,10 @@
     <value>3</value>
   </data>
   <data name="ucrInputLimitOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>55, 19</value>
+    <value>51, 19</value>
   </data>
   <data name="ucrInputLimitOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 21</value>
+    <value>127, 21</value>
   </data>
   <data name="ucrInputLimitOptions.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -527,9 +527,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
