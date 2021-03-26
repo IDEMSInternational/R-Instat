@@ -2280,7 +2280,8 @@ plot_declustered <- function(data, station_col_name, element_col_name, threshold
   }
 }
 
-#This function creates a wrapper around grDevices::recordPlot() to enable non-ggplot graphs to be saved as recorded_plot objects.
+# This function creates a wrapper around grDevices::recordPlot() to enable non-ggplot graphs to be saved as recorded_plot objects.
+# It also handles graphics devices carefully.
 record_graph <- function(x) {
   # store current device, which could be png
   d <- dev.cur()
