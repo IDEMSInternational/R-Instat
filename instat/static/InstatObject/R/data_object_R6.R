@@ -1391,11 +1391,11 @@ DataSheet$set("public", "get_data_type", function(col_name = "") {
     stop(paste(col_name, "is not a column in", self$get_metadata(data_name_label)))
   }
   type = ""
-  curr_col <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  curr_col <- self$get_columns_from_data(col_name, use_current_filter = TRUE)
   if(is.character(curr_col)) {
     type = "character"
   }
-  else if(is.logical(private$data[[col_name]])) {
+  else if(is.logical(curr_col)) {
     type = "logical"
   }
   else if(lubridate::is.Date(private$data[[col_name]])){
@@ -1403,19 +1403,22 @@ DataSheet$set("public", "get_data_type", function(col_name = "") {
     #we can add options for other forms of dates serch as POSIXct, POSIXlt, Date, chron, yearmon, yearqtr, zoo, zooreg, timeDate, xts, its, ti, jul, timeSeries, and fts objects.
     type = "Date"
   }
-  else if(is.numeric(private$data[[col_name]])) {
+  else if(is.numeric(curr_col)) {
     #TODO vectors with integer values but stored as numeric will return numeric.
     #     Is that desirable?
-    if(is.integer(private$data[[col_name]])) {
-      if(all(private$data[[col_name]]>0)) {
-        type = "positive integer"
+      if(is.binary(curr_col)){
+        type = "two level numeric"
       }
-      else type = "integer"
-    }
-    else type = "numeric"
+      else if(all(curr_col == as.integer(curr_col))) {
+        if(all(curr_col>0)) {
+          type = "positive integer"
+        }
+        else type = "integer"
+      }
+      else type = "numeric"
   }
   else if(is.factor(curr_col)) {
-    if(length(levels(curr_col))==2) type = "two level factor"
+    if(nlevels(curr_col) == 2 || nlevels(factor(curr_col)) == 2) type = "two level factor"
     else if(length(levels(curr_col))>2) type = "multilevel factor"
     else type = "factor"
   }
@@ -2719,7 +2722,7 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
     }
     full_dates <- seq(min_date, max_date, by = "day")
     if(length(full_dates) > length(date_col)) {
-      cat("Adding", (length(full_dates) - length(date_col)), "rows for date gaps", "\n")
+      cat("Added", (length(full_dates) - length(date_col)), "rows to extend data and fill date gaps", "\n")
       full_dates <- data.frame(full_dates)
       names(full_dates) <- date_name
       by <- date_name
@@ -2759,7 +2762,7 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
     for(j in 1:nrow(date_ranges)) {
       full_dates <- seq(date_ranges$min_date[j], date_ranges$max_date[j], by = "day")
       if(length(full_dates) > date_lengths[[2]][j]) {
-        cat(paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), ": Adding", (length(full_dates) - date_lengths[[2]][j]), "rows for date gaps", "\n")
+        cat(paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), ": Added", (length(full_dates) - date_lengths[[2]][j]), "rows to extend data and fill date gaps", "\n")
         merge_required <- TRUE
       }
       full_dates <- data.frame(full_dates)
