@@ -148,7 +148,6 @@ Public Class dlgCircularDensityPlot
         clsScatterPlotFunction.AddParameter("na.rm", "TRUE", iPosition:=3)
         clsScatterPlotFunction.AddParameter("stack", "TRUE", iPosition:=4)
         clsScatterPlotFunction.AddParameter("sep", 0.0003, iPosition:=5)
-        clsScatterPlotFunction.AddParameter("kernel", Chr(34) & "vonmises" & Chr(34), iPosition:=7)
         clsScatterPlotFunction.AddParameter("shrink", 1, iPosition:=9)
 
         clsRecordGraphFunction.SetRCommand("record_graph")
