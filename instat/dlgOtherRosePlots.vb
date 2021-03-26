@@ -157,6 +157,14 @@ Public Class dlgOtherRosePlots
         ucrNudPercentile.SetRDefault(90)
         ucrNudPercentile.SetMinMax(0, 100)
 
+        ucrReceiverFacetOne.SetParameter(New RParameter("type1", 20))
+        ucrReceiverFacetOne.Selector = ucrSelectorOtherRosePlots
+        ucrReceiverFacetOne.SetParameterIsString()
+
+        ucrReceiverFacetTwo.SetParameter(New RParameter("type2", 21))
+        ucrReceiverFacetTwo.Selector = ucrSelectorOtherRosePlots
+        ucrReceiverFacetTwo.SetParameterIsString()
+
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetCheckBoxText("Save Graph")
