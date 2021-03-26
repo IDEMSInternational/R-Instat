@@ -538,7 +538,7 @@ DataBook$set("public", "get_objects", function(data_name, object_name, include_o
     if(missing(data_name)) {
       if(!missing(object_name)) {
         curr_objects = private$.objects[self$get_object_names(data_name = overall_label, type = type)]
-        if(!(object_name %in% names(curr_objects))) stop(object_name, "not found.")
+        if(!(object_name %in% names(curr_objects))) stop(object_name, " not found.")
         else out = curr_objects[[object_name]]
       }
       else {
