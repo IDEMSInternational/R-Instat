@@ -22,10 +22,12 @@ Partial Class sdgClimaticDataEntry
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.grdDataEntry = New unvell.ReoGrid.ReoGridControl()
-        Me.cmdRefress = New System.Windows.Forms.Button()
+        Me.cmdReset = New System.Windows.Forms.Button()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
+        Me.ttCmdReset = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -45,7 +47,7 @@ Partial Class sdgClimaticDataEntry
         '
         'SplitContainer1.Panel2
         '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.cmdRefress)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.cmdReset)
         Me.SplitContainer1.Panel2.Controls.Add(Me.ucrSdgPICSARainfalbuttons)
         Me.SplitContainer1.Size = New System.Drawing.Size(494, 295)
         Me.SplitContainer1.SplitterDistance = 251
@@ -70,15 +72,15 @@ Partial Class sdgClimaticDataEntry
         Me.grdDataEntry.TabIndex = 3
         Me.grdDataEntry.Text = "Variables"
         '
-        'cmdRefress
+        'cmdReset
         '
-        Me.cmdRefress.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdRefress.Location = New System.Drawing.Point(10, 9)
-        Me.cmdRefress.Name = "cmdRefress"
-        Me.cmdRefress.Size = New System.Drawing.Size(72, 24)
-        Me.cmdRefress.TabIndex = 88
-        Me.cmdRefress.Text = "Refresh"
-        Me.cmdRefress.UseVisualStyleBackColor = True
+        Me.cmdReset.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdReset.Location = New System.Drawing.Point(10, 9)
+        Me.cmdReset.Name = "cmdReset"
+        Me.cmdReset.Size = New System.Drawing.Size(72, 24)
+        Me.cmdReset.TabIndex = 88
+        Me.cmdReset.Text = "Reset"
+        Me.cmdReset.UseVisualStyleBackColor = True
         '
         'ucrSdgPICSARainfalbuttons
         '
@@ -87,6 +89,12 @@ Partial Class sdgClimaticDataEntry
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
         Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(144, 30)
         Me.ucrSdgPICSARainfalbuttons.TabIndex = 87
+        '
+        'ttCmdReset
+        '
+        Me.ttCmdReset.AutoPopDelay = 10000
+        Me.ttCmdReset.InitialDelay = 500
+        Me.ttCmdReset.ReshowDelay = 100
         '
         'sdgClimaticDataEntry
         '
@@ -108,5 +116,6 @@ Partial Class sdgClimaticDataEntry
     Friend WithEvents SplitContainer1 As SplitContainer
     Friend WithEvents ucrSdgPICSARainfalbuttons As ucrButtonsSubdialogue
     Friend WithEvents grdDataEntry As unvell.ReoGrid.ReoGridControl
-    Friend WithEvents cmdRefress As Button
+    Friend WithEvents cmdReset As Button
+    Friend WithEvents ttCmdReset As ToolTip
 End Class

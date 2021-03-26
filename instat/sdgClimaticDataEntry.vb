@@ -78,6 +78,7 @@ Public Class sdgClimaticDataEntry
     Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         grdDataEntry.SheetTabNewButtonVisible = False
         lstNonEditableColumns.AddRange({"station", "date", "Name"})
+        ttCmdReset.SetToolTip(cmdReset, "This is for situations where you have entered incorrect data and wish to start again. It only affects the data that you see here.")
     End Sub
 
     Public Sub Setup(dataFrame As DataFrame, strDataFrameName As String)
@@ -96,7 +97,7 @@ Public Class sdgClimaticDataEntry
         If lstNonEditableColumns.Contains(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text) Then
             e.IsCancelled = True
         End If
-        If dlgClimaticDataEntry.VariablesNames.Contains(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text) Then
+        If InStr(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text, "(view)") Then
             e.IsCancelled = True
         End If
     End Sub
@@ -121,7 +122,7 @@ Public Class sdgClimaticDataEntry
         Dim grdWorkSheet As Worksheet = grdDataEntry.CreateWorksheet(strSheetName)
         'Dim lstColumnHeaders As New List(Of String)
         Dim lstColumnHeaders As String()
-
+        'This commented code can be re-use
         'create the columns to be used by in worksheet; station, date and elements.station is optional
         'If Not String.IsNullOrEmpty(strStationColumnName) Then
         '    lstColumnHeaders.Add(strStationColumnName)
@@ -153,8 +154,8 @@ Public Class sdgClimaticDataEntry
         Return grdWorkSheet
     End Function
 
-    Private Sub cmdRefress_Click(sender As Object, e As EventArgs) Handles cmdRefress.Click
-        If MsgBox("Would you like to refress the grid?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+    Private Sub cmdRefress_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
+        If MsgBox("This deletes the data entered here. (No other data are affected). Do you want to continue?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
             Setup(dlgClimaticDataEntry.GetSelectedDataFrame, grdCurrentWorkSheet.Name)
         End If
     End Sub

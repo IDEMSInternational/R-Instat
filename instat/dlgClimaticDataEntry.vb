@@ -44,10 +44,6 @@ Public Class dlgClimaticDataEntry
 
         ucrBase.iHelpTopicID = 359
 
-        'ucrSelectorClimaticDataEntry.SetParameter(New RParameter("data_name", 0))
-        'ucrSelectorClimaticDataEntry.SetParameterIsString()
-
-        'ucrReceiverStation.SetParameter(New RParameter("station", 1))
         ucrReceiverStation.Selector = ucrSelectorClimaticDataEntry
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.SetParameterIsRFunction()
@@ -56,12 +52,10 @@ Public Class dlgClimaticDataEntry
 
         'todo. how do we make this control write parameter value with quotes while displaying without quotes
         'if the items are being set by the receiver. New enhancement??
-        'ucrInputSelectStation.SetParameter(New RParameter("station_name", 2))
         ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
         ucrInputSelectStation.SetItems()
         ucrInputSelectStation.strQuotes = ""
 
-        'ucrReceiverDate.SetParameter(New RParameter("date", 3))
         ucrReceiverDate.Selector = ucrSelectorClimaticDataEntry
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.SetIncludedDataTypes({"Date"})
@@ -69,7 +63,6 @@ Public Class dlgClimaticDataEntry
         ucrReceiverDate.SetParameterIsRFunction()
         ucrReceiverDate.strSelectorHeading = "Date"
 
-        'ucrReceiverElements.SetParameter(New RParameter("elements", 4))
         ucrReceiverElements.Selector = ucrSelectorClimaticDataEntry
         ucrReceiverElements.SetParameterIsRFunction()
         ucrReceiverElements.strSelectorHeading = "Numerics"
@@ -79,7 +72,7 @@ Public Class dlgClimaticDataEntry
 
         ucrReceiverVariables.Selector = ucrSelectorClimaticDataEntry
         ucrReceiverVariables.SetParameterIsRFunction()
-        ucrReceiverVariables.SetIncludedDataTypes({"numeric", "character", "date", "factor"})
+        ucrReceiverVariables.SetIncludedDataTypes({"numeric", "Date"})
         ucrReceiverVariables.strSelectorHeading = "Variables"
 
         ucrDateTimePickerStartingDate.Format = DateTimePickerFormat.Custom
@@ -91,8 +84,8 @@ Public Class dlgClimaticDataEntry
         ucrInputPeriodOption.SetItems({strDay, strMonth, strRange})
         ucrInputPeriodOption.SetDropDownStyleAsNonEditable()
 
-        'cmdCheckData.Enabled = False
         ttCmdCheckData.SetToolTip(cmdCheckData, "Data checking facilities not yet implemented")
+        cmdCheckData.Enabled = False
 
         ucrPnlOptions.AddRadioButton(rdoAdd)
         ucrPnlOptions.AddRadioButton(rdoEdit)
@@ -112,23 +105,21 @@ Public Class dlgClimaticDataEntry
 
         'e,g data_book$save_data_entry_data(data_name="Sheet1", new_data = data.frame(station = "A", date = as.Date(c("1999/1/1", "1999/1/2", "1999/1/3")), rain = c(1, 5, 3), tmax = c(43, 53, 2)), rows_changed = c(1, 4, 3))
         clsClimaticDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$save_data_entry_data")
-        'ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsClimaticDataEntry)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        'ucrSelectorClimaticDataEntry.SetRCode(clsClimaticDataEntry, bReset)
-        'ucrInputSelectStation.SetRCode(clsClimaticDataEntry, bReset)
-        'ucrReceiverDate.SetRCode(clsClimaticDataEntry, bReset)
-        'ucrReceiverElements.SetRCode(clsClimaticDataEntry, bReset)
-        'ucrDateTimePickerStartingDate.SetRCode(clsClimaticDataEntry, bReset)
+
     End Sub
 
     Private Sub TestOkEnabled()
         If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty Then
             ucrBase.OKEnabled(sdgClimaticDataEntry.GetNumofRowsChanged > 0)
             cmdEnterData.Enabled = True
+            If Not ucrReceiverStation.IsEmpty AndAlso ucrInputSelectStation.IsEmpty Then
+                cmdEnterData.Enabled = False
+            End If
         Else
             ucrBase.OKEnabled(False)
             cmdEnterData.Enabled = False
@@ -140,9 +131,7 @@ Public Class dlgClimaticDataEntry
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
-    Public Function VariablesNames() As List(Of String)
-        Return ucrReceiverVariables.GetVariableNamesList(bWithQuotes:=False).ToList
-    End Function
+
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrInputSelectStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
         TestOkEnabled()
     End Sub
@@ -218,8 +207,8 @@ Public Class dlgClimaticDataEntry
         clsGetDataFrame.AddParameter("view_variables", ucrReceiverVariables.GetVariableNames(), iPosition:=4)
         clsGetDataFrame.AddParameter("station_name", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=5)
         clsGetDataFrame.AddParameter("type", Chr(34) & Strings.LCase(ucrInputPeriodOption.GetValue()) & Chr(34), iPosition:=6)
-        clsGetDataFrame.AddParameter("start_date", Chr(34) & ucrDateTimePickerStartingDate.Value.Date.ToString("yyyy/MM/dd") & Chr(34), iPosition:=7)
-        clsGetDataFrame.AddParameter("end_date", Chr(34) & ucrDateTimePickerEndingDate.Value.Date.ToString("yyyy/MM/dd") & Chr(34), iPosition:=8)
+        clsGetDataFrame.AddParameter("start_date", "as.Date(" & Chr(34) & ucrDateTimePickerStartingDate.Value.Date.ToString("yyyy/MM/dd") & Chr(34) & ")", iPosition:=7)
+        clsGetDataFrame.AddParameter("end_date", "as.Date(" & Chr(34) & ucrDateTimePickerEndingDate.Value.Date.ToString("yyyy/MM/dd") & Chr(34) & ")", iPosition:=8)
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript(), bSilent:=True)
         If expTemp IsNot Nothing Then
             dfTemp = expTemp.AsDataFrame()
@@ -240,6 +229,7 @@ Public Class dlgClimaticDataEntry
                 lblStartingDate.Text = "Month:"
                 lblEndingDate.Visible = False
                 ucrDateTimePickerEndingDate.Visible = False
+                ucrDateTimePickerStartingDate.Format = DateTimePickerFormat.Custom
                 ucrDateTimePickerStartingDate.CustomFormat = "MM yyyy"
             Case strRange
                 lblStartingDate.Text = "Starting Date:"
