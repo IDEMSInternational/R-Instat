@@ -101,6 +101,8 @@ Public Class dlgClimaticDataEntry
         ucrInputPeriodOption.SetText(strDay)
         ChangingPeriodOption()
 
+        ucrInputSelectStation.GetSetSelectedIndex = 0
+
         clsDataChangedFunction.SetRCommand("data.frame")
 
         'e,g data_book$save_data_entry_data(data_name="Sheet1", new_data = data.frame(station = "A", date = as.Date(c("1999/1/1", "1999/1/2", "1999/1/3")), rain = c(1, 5, 3), tmax = c(43, 53, 2)), rows_changed = c(1, 4, 3))
@@ -218,6 +220,7 @@ Public Class dlgClimaticDataEntry
 
     Private Sub ucrSelectorClimaticDataEntry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticDataEntry.ControlValueChanged
         sdgClimaticDataEntry.Reset()
+        ucrInputSelectStation.GetSetSelectedIndex = 0
     End Sub
     Private Sub ChangingPeriodOption()
         Select Case ucrInputPeriodOption.GetText()
