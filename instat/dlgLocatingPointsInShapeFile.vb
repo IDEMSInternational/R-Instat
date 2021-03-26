@@ -58,7 +58,7 @@ Public Class dlgLocatingPointsInShapeFile
         ucrReceiverGeometry.SetDataType("numeric")
 
 
-        ucrSaveNewColumnName.SetPrefix("logical")
+        ucrSaveNewColumnName.SetPrefix("location")
         ucrSaveNewColumnName.SetSaveTypeAsColumn()
         ucrSaveNewColumnName.SetDataFrameSelector(ucrSelectorStationFile.ucrAvailableDataFrames)
         ucrSaveNewColumnName.SetIsComboBox()
