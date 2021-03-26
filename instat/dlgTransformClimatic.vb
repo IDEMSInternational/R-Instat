@@ -206,7 +206,7 @@ Public Class dlgTransformClimatic
         'save control 
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetIsComboBox()
-        ucrSaveColumn.SetLabelText("New Column Name")
+        ucrSaveColumn.SetLabelText("New Column Name:")
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorTransform.ucrAvailableDataFrames)
         ucrSaveColumn.SetPositionParametersDirectly(False, "result_name")
         'makes the ucrSave control to position new column after selected column
