@@ -164,17 +164,9 @@ Public Class ucrSave
     Private Sub SetDefaults()
         ucrInputTextSave.Reset()
         ucrInputComboSave.Reset()
-
-        'update the variables used for column position
-        'bInsertColumnBefore = False
-        'strAdjacentColumn = ""
-        'bSetPositionParamsDirectly = True
-        UpdateColumnPositionVariables()
-
         SetSaveType(strSaveType)
         LabelOrCheckboxSettings()
         UpdateRCode()
-
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the label to <paramref name="strText"/> and sets the child 
@@ -538,8 +530,6 @@ Public Class ucrSave
         UpdateAssignTo()
         'the control's R code has changed so ensure that the linked controls stay consistent
         UpdateLinkedControls(bReset)
-        'update the variables used for column position
-        UpdateColumnPositionVariables()
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Updates the control's 'assign to' variables and column position variables. 
@@ -547,8 +537,6 @@ Public Class ucrSave
     '''--------------------------------------------------------------------------------------------
     Protected Overrides Sub UpdateAllParameters()
         UpdateAssignTo()
-        'update the variables used for column position
-        UpdateColumnPositionVariables()
         ' TODO SJL 16/06/20 Name ‘UpdateAllParameters’ is misleading, parent function does what the name says, this function doesn’t. Ask Danny's advice?
     End Sub
     '''--------------------------------------------------------------------------------------------
@@ -597,8 +585,16 @@ Public Class ucrSave
                     If strSaveName <> "" Then
                         Select Case strSaveType
                             Case "column"
+                                'todo 25/03/2021. because of this new functionailty added. Should we rename this function from UpdateAssignTo() to something else
                                 If bSetPositionParamsDirectly Then
-                                    clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore)
+                                    clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strDataName, strTempColumn:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bAssignToColumnWithoutNames:=bAssignToColumnWithoutNames, bInsertColumnBefore:=bInsertColumnBefore, strAdjacentColumn:=strAdjacentColumn)
+                                Else
+                                    clsTempCode.AddParameter(strParameterName:="before", strParameterValue:=If(bInsertColumnBefore, "TRUE", "FALSE"))
+                                    If String.IsNullOrEmpty(strAdjacentColumn) Then
+                                        clsTempCode.RemoveParameterByName("adjacent_column")
+                                    Else
+                                        clsTempCode.AddParameter(strParameterName:="adjacent_column", strParameterValue:=strAdjacentColumn)
+                                    End If
                                 End If
                             Case "dataframe"
                                 clsTempCode.SetAssignTo(strTemp:=strSaveName, strTempDataframe:=strSaveName, bAssignToIsPrefix:=bAssignToIsPrefix, bDataFrameList:=bDataFrameList, strDataFrameNames:=strDataFrameNames)
@@ -652,11 +648,13 @@ Public Class ucrSave
         If clsMainRCode IsNot Nothing Then
             If String.IsNullOrEmpty(strReadNameFromParameterName) Then
                 If clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned Then
-                    strControlValue = clsMainRCode.strAssignTo
+                    strControlValue = If(clsMainRCode.strAssignTo IsNot Nothing, clsMainRCode.strAssignTo, "")
                 End If
             Else
-                strControlValue = clsMainRCode.GetParameter(strReadNameFromParameterName).strArgumentValue
-                strControlValue = If(strControlValue Is Nothing, "", strControlValue.Replace("""", ""))
+                If clsMainRCode.GetParameter(strReadNameFromParameterName) IsNot Nothing Then
+                    strControlValue = clsMainRCode.GetParameter(strReadNameFromParameterName).strArgumentValue
+                    strControlValue = If(strControlValue IsNot Nothing, strControlValue.Replace("""", ""), "")
+                End If
             End If
 
             If bIsComboBox Then
@@ -870,7 +868,7 @@ Public Class ucrSave
         strAdjacentColumn = sdgSaveColumnPosition.AdjacentColumn
         bKeepExistingPosition = sdgSaveColumnPosition.KeepExistingPosition
 
-        UpdateColumnPositionVariables()
+        UpdateAssignTo()
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -907,49 +905,12 @@ Public Class ucrSave
             bInsertColumnBefore = False
             strAdjacentColumn = If(Not ucrLinkedReceiver.IsEmpty, ucrLinkedReceiver.GetVariableNames(), "")
         End If
-        UpdateColumnPositionVariables()
-    End Sub
-
-    '''--------------------------------------------------------------------------------------------
-    ''' <summary>   If save object is a column then updates the control's R command's column 
-    '''             position variables.
-    '''             These variables specify the position of the new column in the data frame 
-    '''             (start, end or before/after a specified column).
-    '''             If save object is not a column then this function does nothing.
-    ''' </summary>    '''
-    '''--------------------------------------------------------------------------------------------
-    Private Sub UpdateColumnPositionVariables()
-        Dim clsTempCode As RCodeStructure
-        If strSaveType <> "column" Then
-            Exit Sub
-        End If
-
-        'for each command in the control's command-parameter lists
-        'set the command's column position variables from this control's stored 'before' and 'adjacent_column' values
-        For i As Integer = 0 To lstAllRCodes.Count - 1
-            clsTempCode = lstAllRCodes(i)
-            If clsTempCode Is Nothing Then
-                Continue For
-            End If
-
-            If bSetPositionParamsDirectly Then
-                clsTempCode.bInsertColumnBefore = bInsertColumnBefore
-                clsTempCode.strAdjacentColumn = strAdjacentColumn
-                'todo. should we add property bKeepExistingPosition to the RCodeStructure class ?? similar to bInsertColumnBefore and strAdjacentColumn 
-            Else
-                clsTempCode.AddParameter(strParameterName:="before", strParameterValue:=If(bInsertColumnBefore, "TRUE", "FALSE"))
-                If String.IsNullOrEmpty(strAdjacentColumn) Then
-                    clsTempCode.RemoveParameterByName("adjacent_column")
-                Else
-                    clsTempCode.AddParameter(strParameterName:="adjacent_column", strParameterValue:=strAdjacentColumn)
-                End If
-            End If
-        Next
+        UpdateAssignTo()
     End Sub
 
     Public Sub SetPositionParametersDirectly(bSetPositionParamsDirectly As Boolean, strReadNameFromParameterName As String)
         Me.bSetPositionParamsDirectly = bSetPositionParamsDirectly
         Me.strReadNameFromParameterName = strReadNameFromParameterName
-        UpdateColumnPositionVariables()
+        UpdateAssignTo()
     End Sub
 End Class
