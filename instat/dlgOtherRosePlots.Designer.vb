@@ -58,6 +58,10 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrReceiverMultiplePollutants = New instat.ucrReceiverMultiple()
         Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
+        Me.lblFacetTwo = New System.Windows.Forms.Label()
+        Me.lblFacetOne = New System.Windows.Forms.Label()
+        Me.ucrReceiverFacetOne = New instat.ucrReceiverSingle()
+        Me.ucrReceiverFacetTwo = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblVariableToPlotAgainst
@@ -448,11 +452,57 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverWindSpeed.TabIndex = 4
         Me.ucrReceiverWindSpeed.ucrSelector = Nothing
         '
+        'lblFacetTwo
+        '
+        Me.lblFacetTwo.AutoSize = True
+        Me.lblFacetTwo.Location = New System.Drawing.Point(423, 99)
+        Me.lblFacetTwo.Name = "lblFacetTwo"
+        Me.lblFacetTwo.Size = New System.Drawing.Size(91, 13)
+        Me.lblFacetTwo.TabIndex = 106
+        Me.lblFacetTwo.Text = "Facet2 (Optional):"
+        '
+        'lblFacetOne
+        '
+        Me.lblFacetOne.AutoSize = True
+        Me.lblFacetOne.Location = New System.Drawing.Point(423, 57)
+        Me.lblFacetOne.Name = "lblFacetOne"
+        Me.lblFacetOne.Size = New System.Drawing.Size(85, 13)
+        Me.lblFacetOne.TabIndex = 107
+        Me.lblFacetOne.Text = "Facet (Optional):"
+        '
+        'ucrReceiverFacetOne
+        '
+        Me.ucrReceiverFacetOne.frmParent = Me
+        Me.ucrReceiverFacetOne.Location = New System.Drawing.Point(423, 72)
+        Me.ucrReceiverFacetOne.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacetOne.Name = "ucrReceiverFacetOne"
+        Me.ucrReceiverFacetOne.Selector = Nothing
+        Me.ucrReceiverFacetOne.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFacetOne.strNcFilePath = ""
+        Me.ucrReceiverFacetOne.TabIndex = 104
+        Me.ucrReceiverFacetOne.ucrSelector = Nothing
+        '
+        'ucrReceiverFacetTwo
+        '
+        Me.ucrReceiverFacetTwo.frmParent = Me
+        Me.ucrReceiverFacetTwo.Location = New System.Drawing.Point(423, 113)
+        Me.ucrReceiverFacetTwo.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverFacetTwo.Name = "ucrReceiverFacetTwo"
+        Me.ucrReceiverFacetTwo.Selector = Nothing
+        Me.ucrReceiverFacetTwo.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFacetTwo.strNcFilePath = ""
+        Me.ucrReceiverFacetTwo.TabIndex = 105
+        Me.ucrReceiverFacetTwo.ucrSelector = Nothing
+        '
         'dlgOtherRosePlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(443, 488)
+        Me.ClientSize = New System.Drawing.Size(552, 488)
+        Me.Controls.Add(Me.lblFacetTwo)
+        Me.Controls.Add(Me.lblFacetOne)
+        Me.Controls.Add(Me.ucrReceiverFacetOne)
+        Me.Controls.Add(Me.ucrReceiverFacetTwo)
         Me.Controls.Add(Me.ucrChkSmooth)
         Me.Controls.Add(Me.ucrChkExcludeMissing)
         Me.Controls.Add(Me.ucrNudPercentile)
@@ -535,4 +585,8 @@ Partial Class dlgOtherRosePlots
     Friend WithEvents lblPercentile As Label
     Friend WithEvents ucrReceiverMultiplePollutants As ucrReceiverMultiple
     Friend WithEvents ucrReceiverWindSpeed As ucrReceiverSingle
+    Friend WithEvents lblFacetTwo As Label
+    Friend WithEvents lblFacetOne As Label
+    Friend WithEvents ucrReceiverFacetOne As ucrReceiverSingle
+    Friend WithEvents ucrReceiverFacetTwo As ucrReceiverSingle
 End Class
