@@ -190,13 +190,13 @@
     <value>286, 211</value>
   </data>
   <data name="lblGroup.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 13</value>
+    <value>87, 13</value>
   </data>
   <data name="lblGroup.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
   <data name="lblGroup.Text" xml:space="preserve">
-    <value>Group:</value>
+    <value>Group (Optional):</value>
   </data>
   <data name="&gt;&gt;lblGroup.Name" xml:space="preserve">
     <value>lblGroup</value>
@@ -210,34 +210,34 @@
   <data name="&gt;&gt;lblGroup.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="lblType.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblFacet.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblFacet.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblType.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblFacet.Location" type="System.Drawing.Point, System.Drawing">
     <value>283, 156</value>
   </data>
-  <data name="lblType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+  <data name="lblFacet.Size" type="System.Drawing.Size, System.Drawing">
+    <value>85, 13</value>
   </data>
-  <data name="lblType.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblFacet.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
-  <data name="lblType.Text" xml:space="preserve">
-    <value>Type:</value>
+  <data name="lblFacet.Text" xml:space="preserve">
+    <value>Facet (Optional):</value>
   </data>
-  <data name="&gt;&gt;lblType.Name" xml:space="preserve">
-    <value>lblType</value>
+  <data name="&gt;&gt;lblFacet.Name" xml:space="preserve">
+    <value>lblFacet</value>
   </data>
-  <data name="&gt;&gt;lblType.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblFacet.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblType.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblFacet.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblType.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblFacet.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
   <data name="ucrChkNormalise.Location" type="System.Drawing.Point, System.Drawing">

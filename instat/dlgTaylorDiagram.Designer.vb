@@ -26,7 +26,7 @@ Partial Class dlgTaylorDiagram
         Me.lblObserved = New System.Windows.Forms.Label()
         Me.lblEstimated = New System.Windows.Forms.Label()
         Me.lblGroup = New System.Windows.Forms.Label()
-        Me.lblType = New System.Windows.Forms.Label()
+        Me.lblFacet = New System.Windows.Forms.Label()
         Me.ucrChkNormalise = New instat.ucrCheck()
         Me.ucrReceiverType = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
@@ -53,10 +53,10 @@ Partial Class dlgTaylorDiagram
         resources.ApplyResources(Me.lblGroup, "lblGroup")
         Me.lblGroup.Name = "lblGroup"
         '
-        'lblType
+        'lblFacet
         '
-        resources.ApplyResources(Me.lblType, "lblType")
-        Me.lblType.Name = "lblType"
+        resources.ApplyResources(Me.lblFacet, "lblFacet")
+        Me.lblFacet.Name = "lblFacet"
         '
         'ucrChkNormalise
         '
@@ -130,7 +130,7 @@ Partial Class dlgTaylorDiagram
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cmdTaylorDiagramOptions)
         Me.Controls.Add(Me.ucrChkNormalise)
-        Me.Controls.Add(Me.lblType)
+        Me.Controls.Add(Me.lblFacet)
         Me.Controls.Add(Me.ucrReceiverType)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSavePlot)
@@ -158,7 +158,7 @@ Partial Class dlgTaylorDiagram
     Friend WithEvents ucrReceiverGroup As ucrReceiverMultiple
     Friend WithEvents ucrReceiverObserved As ucrReceiverSingle
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents lblType As Label
+    Friend WithEvents lblFacet As Label
     Friend WithEvents ucrReceiverType As ucrReceiverSingle
     Friend WithEvents ucrReceiverEstimated As ucrReceiverSingle
     Friend WithEvents ucrChkNormalise As ucrCheck
