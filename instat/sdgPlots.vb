@@ -417,13 +417,13 @@ Public Class sdgPlots
         ucrChkColourScaleReverseOrder.SetValuesCheckedAndUnchecked("-1", "1")
 
         ucrChkFillDiscrete.SetText("Discrete")
-        ucrChkFillDiscrete.SetParameter(New RParameter("discrete", iNewPosition:=7))
-        ucrChkFillDiscrete.SetRDefault("TRUE")
+        ucrChkFillDiscrete.SetParameter(New RParameter("discrete", iNewPosition:=5))
+        ucrChkFillDiscrete.SetRDefault("FALSE")
         ucrChkFillDiscrete.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrChkColourDiscrete.SetText("Discrete")
-        ucrChkColourDiscrete.SetParameter(New RParameter("discrete", iNewPosition:=7))
-        ucrChkColourDiscrete.SetRDefault("TRUE")
+        ucrChkColourDiscrete.SetParameter(New RParameter("discrete", iNewPosition:=5))
+        ucrChkColourDiscrete.SetRDefault("FALSE")
         ucrChkColourDiscrete.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrChkAddColour.SetText("Add Colour Scale")
@@ -435,9 +435,8 @@ Public Class sdgPlots
     End Sub
 
     Public Sub SetRCode(clsNewOperator As ROperator, clsNewCoordPolarFunction As RFunction, clsNewCoordPolarStartOperator As ROperator, clsNewYScalecontinuousFunction As RFunction, clsNewXScalecontinuousFunction As RFunction, clsNewLabsFunction As RFunction, clsNewXLabsTitleFunction As RFunction, clsNewYLabTitleFunction As RFunction, clsNewFacetFunction As RFunction, clsNewThemeFunction As RFunction, dctNewThemeFunctions As Dictionary(Of String, RFunction), ucrNewBaseSelector As ucrSelector, bReset As Boolean, Optional clsNewGlobalAesFunction As RFunction = Nothing, Optional clsNewXScaleDateFunction As RFunction = Nothing, Optional clsNewYScaleDateFunction As RFunction = Nothing,
-                        Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing)
+                        Optional clsNewScaleFillViridisFunction As RFunction = Nothing, Optional clsNewScaleColourViridisFunction As RFunction = Nothing, Optional strMainDialogGeomParameterNames() As String = Nothing, Optional bNewEnableFill As Boolean = True, Optional bNewEnableColour As Boolean = True, Optional bNewEnableDiscrete As Boolean = True)
         Dim clsTempParam As RParameter
-
         bRCodeSet = False
 
         If Not bControlsInitialised Then
@@ -559,6 +558,11 @@ Public Class sdgPlots
             bResetThemes = True
         End If
         SetFacetParameters()
+        ucrChkAddFillScale.Enabled = bNewEnableFill
+        ucrChkAddColour.Enabled = bNewEnableColour
+        ucrChkColourDiscrete.Enabled = bNewEnableDiscrete
+        ucrChkFillDiscrete.Enabled = bNewEnableDiscrete
+
     End Sub
 
     Private Sub SetFacetParameters()
@@ -916,79 +920,6 @@ Public Class sdgPlots
             clsBaseOperator.RemoveParameterByName("scale_fill")
             grpFillScale.Visible = False
         End If
-    End Sub
-
-    Private Sub CheckForDiscreteContinuous()
-        Dim bNotParameterFound As Boolean = True
-        Dim clsFillParameter As New RParameter
-        Dim strColumnType As String = ""
-        Dim expDateType As SymbolicExpression
-        For Each clsParameter As RParameter In clsBaseOperator.clsParameters
-            If bNotParameterFound Then
-                If clsParameter.bIsFunction Then
-                    Dim clsTempRFunction As New RFunction
-                    If Not IsNothing(TryCast(clsParameter.clsArgumentCodeStructure, RFunction)) Then
-                        clsTempRFunction = TryCast(clsParameter.clsArgumentCodeStructure, RFunction)
-                    End If
-                    For Each clsTempParameter As RParameter In clsTempRFunction.clsParameters
-                        If clsTempParameter.bIsFunction Then
-                            If Not IsNothing(TryCast(clsTempParameter.clsArgumentCodeStructure, RFunction)) Then
-                                If TryCast(clsTempParameter.clsArgumentCodeStructure, RFunction).strRCommand = "aes" Then
-                                    If Not IsNothing(TryCast(clsTempParameter.clsArgumentCodeStructure, RFunction).GetParameter("fill")) Then
-                                        clsFillParameter = TryCast(clsTempParameter.clsArgumentCodeStructure, RFunction).GetParameter("fill")
-                                        bNotParameterFound = False
-                                        Exit For
-                                    End If
-
-                                End If
-                            End If
-                        End If
-                    Next
-                End If
-            Else
-                Exit For
-            End If
-        Next
-
-        If Not clsFillParameter.strArgumentValue = "" Then
-            Dim clsGetColumnDatType As New RFunction
-            clsGetColumnDatType.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_data_types")
-            clsGetColumnDatType.AddParameter("data_name", Chr(34) & ucrBaseSelector.strCurrentDataFrame & Chr(34), iPosition:=0)
-            clsGetColumnDatType.AddParameter("columns", Chr(34) & clsFillParameter.strArgumentValue & Chr(34), iPosition:=1)
-
-            expDateType = frmMain.clsRLink.RunInternalScriptGetValue(clsGetColumnDatType.ToScript, bSilent:=True)
-
-            If expDateType IsNot Nothing AndAlso expDateType.Type <> Internals.SymbolicExpressionType.Null Then
-                strColumnType = (expDateType.AsCharacter(0)).ToLower
-                If strColumnType = "factor" OrElse strColumnType = "logical" OrElse strColumnType = "character" Then
-                    AddDiscreteParamToFillColourFunction()
-                    ucrChkFillDiscrete.Checked = True
-                    ucrChkColourDiscrete.Checked = True
-                ElseIf strColumnType = "numeric" Then
-                    clsScaleColourViridisFunction.AddParameter("discrete", "FALSE", iPosition:=7)
-                    clsScaleFillViridisFunction.AddParameter("discrete", "FALSE", iPosition:=7)
-                    ucrChkFillDiscrete.Checked = False
-                    ucrChkColourDiscrete.Checked = False
-                End If
-            Else
-                AddDiscreteParamToFillColourFunction()
-                ucrChkFillDiscrete.Checked = True
-                ucrChkColourDiscrete.Checked = True
-            End If
-        Else
-            AddDiscreteParamToFillColourFunction()
-            ucrChkFillDiscrete.Checked = True
-            ucrChkColourDiscrete.Checked = True
-        End If
-    End Sub
-
-    Private Sub AddDiscreteParamToFillColourFunction()
-        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
-        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=7)
-    End Sub
-
-    Private Sub ucrPlotsAdditionalLayers_NumberOfLayersChanged() Handles ucrPlotsAdditionalLayers.NumberOfLayersChanged, ucrPlotsAdditionalLayers.LayerEdited
-        CheckForDiscreteContinuous()
     End Sub
 
     Private Sub ucrChkAddColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddColour.ControlValueChanged
