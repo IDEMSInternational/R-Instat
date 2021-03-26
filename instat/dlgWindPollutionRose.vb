@@ -22,7 +22,6 @@ Public Class dlgWindPollutionRose
     Private bRcodeSet As Boolean = False
     'Functions 
     Private clsPollutionRoseFunction As RFunction
-    Private clsCombineValues As RFunction
 
     Private Sub dlgPollutionRose_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -117,22 +116,6 @@ Public Class dlgWindPollutionRose
         ucrInputColor.SetItems(dctColor)
         ucrInputColor.SetDropDownStyleAsNonEditable()
 
-        ucrReceiverStation.SetParameter(New RParameter(""))
-        ucrReceiverStation.Selector = ucrSelectorWindPollutionRose
-        ucrReceiverStation.SetParameterIsString()
-        ucrReceiverStation.bExcludeFromSelector = True
-        ucrReceiverStation.SetClimaticType("station")
-        ucrReceiverStation.bAutoFill = True
-
-        ucrInputStationFacet.SetItems({"None", "Facet 1", "Facet 2"})
-
-        ucrInputStationFacet.SetDropDownStyleAsNonEditable()
-
-        ucrInputFacet.SetParameter(New RParameter(""))
-        ucrInputFacet.SetItems({"default", "year", "hour", "month", "season", "weekday", "weekend", "monthyear", "daylight"})
-
-        ucrInputFacet.SetDropDownStyleAsEditable(True)
-
         ucrSaveGraph.SetPrefix("wind_pollution_rose")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -143,18 +126,10 @@ Public Class dlgWindPollutionRose
 
     Private Sub SetDefaults()
         clsPollutionRoseFunction = New RFunction
-        clsCombineValues = New RFunction
         clsPollutionRoseFunction.SetRCommand("pollution_rose")
-        clsCombineValues.SetRCommand("c")
-        ucrInputStationFacet.SetText("None")
-        ucrInputFacet.SetText("default")
-
-        clsCombineValues.AddParameter("type1", Chr(34) & "default" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
 
         clsPollutionRoseFunction.AddParameter("include_pollutant", "FALSE", iPosition:=7)
         clsPollutionRoseFunction.AddParameter("paddle", "FALSE", iPosition:=8)
-
-        clsPollutionRoseFunction.AddParameter("type", clsRFunctionParameter:=clsCombineValues, bIncludeArgumentName:=True, iPosition:=9)
 
         clsPollutionRoseFunction.AddParameter("key.position", Chr(34) & "right" & Chr(34), iPosition:=10)
         clsPollutionRoseFunction.AddParameter("statistic", Chr(34) & "prop.count" & Chr(34), iPosition:=11)
@@ -187,7 +162,7 @@ Public Class dlgWindPollutionRose
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverWindDirection.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse (ucrChkIncludePollutant.Checked AndAlso ucrReceiverPollutant.IsEmpty) OrElse (ucrChkCompare.Checked AndAlso (ucrReceiverWindDirection2.IsEmpty OrElse ucrReceiverWindSpeed2.IsEmpty)) OrElse Not ucrSaveGraph.IsComplete OrElse ucrInputFacet.GetText = "" OrElse (ucrReceiverStation.IsEmpty AndAlso Not ucrInputStationFacet.GetText = "None") Then
+        If ucrReceiverWindDirection.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse (ucrChkIncludePollutant.Checked AndAlso ucrReceiverPollutant.IsEmpty) OrElse (ucrChkCompare.Checked AndAlso (ucrReceiverWindDirection2.IsEmpty OrElse ucrReceiverWindSpeed2.IsEmpty)) OrElse Not ucrSaveGraph.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -200,40 +175,7 @@ Public Class dlgWindPollutionRose
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverWindDirection_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindDirection.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverWindDirection2.ControlContentsChanged, ucrReceiverWindSpeed2.ControlContentsChanged, ucrReceiverPollutant.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrChkCompare.ControlContentsChanged, ucrChkIncludePollutant.ControlContentsChanged, ucrReceiverStation.ControlContentsChanged, ucrInputStationFacet.ControlValueChanged, ucrInputFacet.ControlContentsChanged
+    Private Sub ucrReceiverWindDirection_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindDirection.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverWindDirection2.ControlContentsChanged, ucrReceiverWindSpeed2.ControlContentsChanged, ucrReceiverPollutant.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrChkCompare.ControlContentsChanged, ucrChkIncludePollutant.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub ucrInputStationFacet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputStationFacet.ControlValueChanged, ucrInputFacet.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverStation.ControlValueChanged
-        If bRcodeSet Then
-            Select Case ucrInputStationFacet.GetText
-                Case "None"
-                    clsCombineValues.RemoveParameterByName("type2")
-                    Select Case ucrInputFacet.GetText
-                        Case "default"
-                            clsCombineValues.AddParameter("type1", Chr(34) & "default" & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-                        Case Else
-                            clsCombineValues.AddParameter("type1", Chr(34) & ucrInputFacet.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-                    End Select
-                Case "Facet 1"
-                    Select Case ucrInputFacet.GetText
-                        Case "default"
-                            clsCombineValues.RemoveParameterByName("type2")
-                            clsCombineValues.AddParameter("type1", ucrReceiverStation.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=0)
-                        Case Else
-                            clsCombineValues.AddParameter("type1", ucrReceiverStation.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=0)
-                            clsCombineValues.AddParameter("type2", Chr(34) & ucrInputFacet.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=1)
-                    End Select
-                Case "Facet 2"
-                    Select Case ucrInputFacet.GetText
-                        Case "default"
-                            clsCombineValues.RemoveParameterByName("type2")
-                            clsCombineValues.AddParameter("type1", ucrReceiverStation.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=0)
-                        Case Else
-                            clsCombineValues.AddParameter("type1", Chr(34) & ucrInputFacet.GetText & Chr(34), bIncludeArgumentName:=False, iPosition:=0)
-                            clsCombineValues.AddParameter("type2", ucrReceiverStation.GetVariableNames(), bIncludeArgumentName:=False, iPosition:=1)
-                    End Select
-            End Select
-        End If
     End Sub
 End Class
