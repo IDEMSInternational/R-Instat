@@ -164,6 +164,7 @@ Public Class dlgDuplicates
         clsSummaryFunction.iCallType = 2
 
         clsSubsetCol.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated2)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=0)

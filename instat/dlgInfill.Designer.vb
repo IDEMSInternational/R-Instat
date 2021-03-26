@@ -43,9 +43,9 @@ Partial Class dlgInfill
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblLimits = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.lblStartingFrom = New System.Windows.Forms.Label()
         Me.lblEndDate = New System.Windows.Forms.Label()
         Me.lblStartDate = New System.Windows.Forms.Label()
-        Me.lblStartingFrom = New System.Windows.Forms.Label()
         Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrInfillSelector = New instat.ucrSelectorByDataFrameAddRemove()
@@ -90,6 +90,11 @@ Partial Class dlgInfill
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
+        'lblStartingFrom
+        '
+        resources.ApplyResources(Me.lblStartingFrom, "lblStartingFrom")
+        Me.lblStartingFrom.Name = "lblStartingFrom"
+        '
         'lblEndDate
         '
         resources.ApplyResources(Me.lblEndDate, "lblEndDate")
@@ -99,11 +104,6 @@ Partial Class dlgInfill
         '
         resources.ApplyResources(Me.lblStartDate, "lblStartDate")
         Me.lblStartDate.Name = "lblStartDate"
-        '
-        'lblStartingFrom
-        '
-        resources.ApplyResources(Me.lblStartingFrom, "lblStartingFrom")
-        Me.lblStartingFrom.Name = "lblStartingFrom"
         '
         'ucrReceiverFactors
         '
@@ -151,6 +151,7 @@ Partial Class dlgInfill
         'ucrInputComboMonth
         '
         Me.ucrInputComboMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMonth.GetSetSelectedIndex = -1
         Me.ucrInputComboMonth.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboMonth, "ucrInputComboMonth")
         Me.ucrInputComboMonth.Name = "ucrInputComboMonth"
@@ -158,6 +159,7 @@ Partial Class dlgInfill
         'ucrInputLimitOptions
         '
         Me.ucrInputLimitOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputLimitOptions.GetSetSelectedIndex = -1
         Me.ucrInputLimitOptions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLimitOptions, "ucrInputLimitOptions")
         Me.ucrInputLimitOptions.Name = "ucrInputLimitOptions"
