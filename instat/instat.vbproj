@@ -330,12 +330,6 @@
     <Compile Include="dlgWindPollutionRose.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmConvertToNumeric.Designer.vb">
-      <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmConvertToNumeric.vb">
-	      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="sdgClimaticDataEntry.Designer.vb">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </Compile>
@@ -2759,9 +2753,6 @@
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmConvertToNumeric.resx">
-      <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
-	</EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticDataEntry.resx">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </EmbeddedResource>
