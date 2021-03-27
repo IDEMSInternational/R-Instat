@@ -179,7 +179,6 @@
     <Compile Include="clsCustomColourTable.vb" />
     <Compile Include="clsCustomRenderer.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
-    <Compile Include="clsGridROperations.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsPopup.vb" />
     <Compile Include="clsQualityControl.vb" />
@@ -286,6 +285,12 @@
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgInfillMissingValues.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgLocatingPointsInShapeFile.Designer.vb">
+      <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgLocatingPointsInShapeFile.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOtherRosePlots.Designer.vb">
@@ -2731,6 +2736,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgLocatingPointsInShapeFile.resx">
+      <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>

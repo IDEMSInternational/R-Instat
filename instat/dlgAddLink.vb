@@ -40,6 +40,7 @@ Public Class dlgAddLink
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 506
+        ucrBase.clsRsyntax.iCallType = 2
         cmdSpecifyLink.Enabled = False ' temporarily disabled
 
         ucrDataSelectorFrom.SetParameter(New RParameter("from_data_frame", 0))
