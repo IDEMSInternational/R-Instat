@@ -95,16 +95,15 @@ Public Class dlgConditionalQuantilePlot
         ucrNudBin.Minimum = 1
         ucrNudBin.SetRDefault(31)
 
-        ucrInputMinBin.SetParameter(New RParameter("min.bin", 5))
-        ucrInputMinBin.SetValidationTypeAsNumeric()
-        ucrInputMinBin.SetRDefault("c(10,20)")
-        ucrInputMinBin.AddQuotesIfUnrecognised = False
+        ucrNudMinNumPoints.SetParameter(New RParameter("min.bin", 5))
+        ucrNudMinNumPoints.Minimum = 5
+        ucrNudMinNumPoints.SetRDefault(10)
 
-        ttConditionalQuatilePlot.SetToolTip(ucrInputMinBin.txtInput, "Min.bin can also be length of two e.g. min.bin = c(10,20)")
+        ' ttConditionalQuatilePlot.SetToolTip(ucrNudMinNumPoints.txtInput, "Min.bin can also be length of two e.g. min.bin = c(10,20)")
 
-        ucrNudKeyColumns.SetParameter(New RParameter("key.columns", 9))
-        ucrNudKeyColumns.Minimum = 1
-        ucrNudKeyColumns.SetRDefault(2)
+        ucrNudColumns.SetParameter(New RParameter("key.columns", 9))
+        ucrNudColumns.Minimum = 1
+        ucrNudColumns.SetRDefault(2)
 
         ucrInputLegendPosition.SetParameter(New RParameter("key.position", 10))
         dctLegendPosition.Add("Bottom", Chr(34) & "bottom" & Chr(34))
@@ -113,19 +112,17 @@ Public Class dlgConditionalQuantilePlot
         dctLegendPosition.Add("Left", Chr(34) & "left" & Chr(34))
         dctLegendPosition.Add("None", Chr(34) & "none" & Chr(34))
         ucrInputLegendPosition.SetItems(dctLegendPosition)
+        ucrInputLegendPosition.SetRDefault(Chr(34) & "none" & Chr(34))
         ucrInputLegendPosition.SetDropDownStyleAsNonEditable()
-        ucrInputLegendPosition.SetRDefault(Chr(34) & "bottom" & Chr(34))
-
 
         ucrPnlOptions.AddRadioButton(rdoQuantiles)
         ucrPnlOptions.AddRadioButton(rdoEvaluation)
         ucrPnlOptions.AddFunctionNamesCondition(rdoQuantiles, "conditionalQuantile")
         ucrPnlOptions.AddFunctionNamesCondition(rdoEvaluation, "conditionalEval")
-        ucrPnlOptions.AddToLinkedControls({ucrNudKeyColumns, ucrInputLegendPosition, ucrInputMinBin, ucrReceiverMultipleFacet}, {rdoQuantiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrInputLegendPosition, ucrNudMinNumPoints, ucrReceiverMultipleFacet}, {rdoQuantiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverMultipleObs, ucrReceiverMultiplePred, ucrReceiverStatistics, ucrReceiverType}, {rdoEvaluation}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrNudKeyColumns.SetLinkedDisplayControl(lblKey)
-        ucrInputLegendPosition.SetLinkedDisplayControl(lblKeyPositions)
-        ucrInputMinBin.SetLinkedDisplayControl(lblColNumber)
+        ucrInputLegendPosition.SetLinkedDisplayControl(lblLegendPositions)
+        ucrNudMinNumPoints.SetLinkedDisplayControl(lblColNumber)
         ucrReceiverMultipleFacet.SetLinkedDisplayControl(lblTypes)
         ucrReceiverMultipleObs.SetLinkedDisplayControl(lblVarObserved)
         ucrReceiverMultiplePred.SetLinkedDisplayControl(lblVarPredicted)
@@ -147,6 +144,7 @@ Public Class dlgConditionalQuantilePlot
         ucrConditionalQuantilePlotSelector.Reset()
         ucrSavePlot.Reset()
         ucrReceiverObservations.SetMeAsReceiver()
+        SetVisibleColumnOption()
 
         clsConditionalQuantileFunction.SetPackageName("openair")
         clsConditionalQuantileFunction.SetRCommand("conditionalQuantile")
@@ -173,7 +171,8 @@ Public Class dlgConditionalQuantilePlot
         ucrReceiverPredictions.SetRCode(clsConditionalQuantileFunction, bReset)
         ucrReceiverMultipleFacet.SetRCode(clsConditionalQuantileFunction, bReset)
         ucrNudBin.SetRCode(clsConditionalQuantileFunction, bReset)
-        ucrNudKeyColumns.SetRCode(clsConditionalQuantileFunction, bReset)
+        ucrNudMinNumPoints.SetRCode(clsConditionalQuantileFunction, bReset)
+        ucrNudColumns.SetRCode(clsConditionalQuantileFunction, bReset)
         ucrInputLegendPosition.SetRCode(clsConditionalQuantileFunction, bReset)
         ucrSavePlot.SetRCode(clsConditionalQuantileFunction, bReset)
         ucrSavePlot.AddAdditionalRCode(clsConditionalEvalFunction)
@@ -190,9 +189,18 @@ Public Class dlgConditionalQuantilePlot
         SetRcodeForControls(True)
         TestOkEnabled()
     End Sub
+    Private Sub SetVisibleColumnOption()
+        If ucrInputLegendPosition.GetText = "None" Then
+            lblColumns.Visible = False
+            ucrNudColumns.Visible = False
+        Else
+            lblColumns.Visible = True
+            ucrNudColumns.Visible = True
+        End If
+    End Sub
 
     Private Sub TestOkEnabled()
-        If rdoQuantiles.Checked AndAlso Not ucrReceiverObservations.IsEmpty() AndAlso Not ucrReceiverPredictions.IsEmpty() AndAlso ucrSavePlot.IsComplete AndAlso ucrNudBin.GetText <> "" AndAlso ucrNudKeyColumns.GetText <> "" Then
+        If rdoQuantiles.Checked AndAlso Not ucrReceiverObservations.IsEmpty() AndAlso Not ucrReceiverPredictions.IsEmpty() AndAlso ucrSavePlot.IsComplete AndAlso ucrNudBin.GetText <> "" AndAlso ucrNudColumns.GetText <> "" Then
             ucrBase.OKEnabled(True)
         ElseIf rdoEvaluation.Checked AndAlso Not ucrReceiverObservations.IsEmpty() AndAlso Not ucrReceiverPredictions.IsEmpty() AndAlso ucrSavePlot.IsComplete Then
             ucrBase.OKEnabled(True)
@@ -201,7 +209,7 @@ Public Class dlgConditionalQuantilePlot
         End If
     End Sub
 
-    Private Sub ucrReceiverObservations_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObservations.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverPredictions.ControlContentsChanged, ucrReceiverStatistics.ControlContentsChanged, ucrNudBin.ControlContentsChanged, ucrNudKeyColumns.ControlContentsChanged
+    Private Sub ucrReceiverObservations_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverObservations.ControlContentsChanged, ucrSavePlot.ControlContentsChanged, ucrReceiverPredictions.ControlContentsChanged, ucrReceiverStatistics.ControlContentsChanged, ucrNudBin.ControlContentsChanged, ucrNudColumns.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -221,5 +229,9 @@ Public Class dlgConditionalQuantilePlot
             ucrSavePlot.Location = New Point(ucrSavePlot.Location.X, 401)
             cmdPlotOptions.Text = "Conditional Eval Options"
         End If
+    End Sub
+
+    Private Sub ucrInputLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLegendPosition.ControlValueChanged
+        SetVisibleColumnOption()
     End Sub
 End Class
