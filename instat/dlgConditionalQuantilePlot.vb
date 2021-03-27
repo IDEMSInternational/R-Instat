@@ -61,7 +61,7 @@ Public Class dlgConditionalQuantilePlot
         ucrReceiverMultipleFacet.SetParameter(New RParameter("type", 3))
         ucrReceiverMultipleFacet.Selector = ucrConditionalQuantilePlotSelector
         ucrReceiverMultipleFacet.SetParameterIsString()
-        ucrReceiverMultipleFacet.SetIncludedDataTypes({"character"})
+        ucrReceiverMultipleFacet.SetIncludedDataTypes({"factor"})
         ucrReceiverMultipleFacet.bExcludeFromSelector = True
 
         ucrReceiverMultipleObs.SetParameter(New RParameter("var.obs", 3))
