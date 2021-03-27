@@ -1189,7 +1189,8 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
     }
     else if(to_type == "numeric") {
       if(ignore_labels) {
-        new_col <- as.numeric(curr_col)
+        if (is.factor(curr_col)) new_col <- as.numeric(levels(curr_col))[curr_col]
+        else new_col <- as.numeric(curr_col)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name) && !is.numeric(curr_col)) {
@@ -1666,12 +1667,15 @@ DataSheet$set("public", "add_object", function(object, object_name) {
 }
 )
 
-DataSheet$set("public", "get_objects", function(object_name, type = "", force_as_list = FALSE) {
+DataSheet$set("public", "get_objects", function(object_name, type = "", force_as_list = FALSE, silent = FALSE) {
   curr_objects = private$objects[self$get_object_names(type = type)]
   if(length(curr_objects) == 0) return(curr_objects)
   if(missing(object_name)) return(curr_objects)
   if(!is.character(object_name)) stop("object_name must be a character")
-  if(!all(object_name %in% names(curr_objects))) stop(object_name, " not found in objects")
+  if(!all(object_name %in% names(curr_objects))) {
+    if (silent) return(NULL)
+    else stop(object_name, " not found in objects")
+  }
   if(length(object_name) == 1) {
     if(force_as_list) return(curr_objects[object_name])
     else return(curr_objects[[object_name]])
