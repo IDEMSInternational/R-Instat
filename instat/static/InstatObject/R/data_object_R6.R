@@ -3835,19 +3835,21 @@ DataSheet$set("public", "visualize_element_na", function(element_col_name, eleme
   }
 })
 
-DataSheet$set("public", "get_data_entry_data", function(station, date, elements, view_variables = NULL, station_name, type, start_date, end_date) {
-  cols <- c(date, elements, view_variables)
+DataSheet$set("public", "get_data_entry_data", function(station, date, elements, view_variables, station_name, type, start_date, end_date) {
+  cols <- c(date, elements)
+  if (!missing(view_variables)) cols <- c(cols, view_variables)
   if (!missing(station)) cols <- c(station, cols)
   curr_data <- self$get_columns_from_data(cols)
   col_names <- c(date, elements)
-  if (!missing(station))col_names <- c(station, col_names)
-  if (!is.null(view_variables)) col_names <- c(col_names, paste(view_variables, "(view)"))
+  if (!missing(station)) col_names <- c(station, col_names)
+  if (!missing(view_variables)) col_names <- c(col_names, paste(view_variables, "(view)"))
   names(curr_data) <- col_names
   
   if (!missing(station)) curr_data <- curr_data[curr_data[[station]] == station_name, ]
   if (type == "day") {
     curr_data <- curr_data[curr_data[[date]] == start_date, ]
   } else if (type == "month") {
+    if (lubridate::day(start_date) != 1) warning("type = 'month' but start_date is not 1st of the month.")
     curr_data <- curr_data[curr_data[[date]] >= start_date & curr_data[[date]] <= (start_date + months(1) - 1), ]
   } else if (type == "range") {
     curr_data <- curr_data[curr_data[[date]] >= start_date & curr_data[[date]] <= end_date, ]
@@ -3855,6 +3857,7 @@ DataSheet$set("public", "get_data_entry_data", function(station, date, elements,
   if (nrow(curr_data) == 0) stop("No data in range.")
   # Convert to character to they display correctly in VB grid.
   curr_data[[date]] <- as.character(curr_data[[date]])
+  if (!missing(view_variables) && date %in% view_variables) curr_data[[paste(date, "(view)")]] <- as.character(curr_data[[paste(date, "(view)")]])
   if (!missing(station)) curr_data[[station]] <- as.character(curr_data[[station]])
   curr_data
 })
@@ -3864,12 +3867,10 @@ DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed)
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   for (i in seq_along(rows_changed)) {
     for (k in seq_along(names(new_data))) {
-      print(rows_changed[i])
-      print(names(new_data)[k])
       curr_data[rows_changed[i], names(new_data)[k]] <- new_data[i, names(new_data)[k]]
     }
   }
-  cat("Values updated in:", length(rows_changed), "row(s).\n")
+  cat("Values updated in:", length(rows_changed), "row(s)\n")
   self$set_data(curr_data)
 }
 )
