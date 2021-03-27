@@ -48,6 +48,7 @@ Partial Class dlgDuplicates
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDuplicateswithVariables = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkIncludeSummary = New instat.ucrCheck()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -144,6 +145,7 @@ Partial Class dlgDuplicates
         'ucrInputConditions
         '
         Me.ucrInputConditions.AddQuotesIfUnrecognised = True
+        Me.ucrInputConditions.GetSetSelectedIndex = -1
         Me.ucrInputConditions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputConditions, "ucrInputConditions")
         Me.ucrInputConditions.Name = "ucrInputConditions"
@@ -168,6 +170,7 @@ Partial Class dlgDuplicates
         'ucrInputComboType
         '
         Me.ucrInputComboType.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboType.GetSetSelectedIndex = -1
         Me.ucrInputComboType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboType, "ucrInputComboType")
         Me.ucrInputComboType.Name = "ucrInputComboType"
@@ -218,10 +221,17 @@ Partial Class dlgDuplicates
         resources.ApplyResources(Me.ucrSelectorDuplicateswithVariables, "ucrSelectorDuplicateswithVariables")
         Me.ucrSelectorDuplicateswithVariables.Name = "ucrSelectorDuplicateswithVariables"
         '
+        'ucrChkIncludeSummary
+        '
+        Me.ucrChkIncludeSummary.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeSummary, "ucrChkIncludeSummary")
+        Me.ucrChkIncludeSummary.Name = "ucrChkIncludeSummary"
+        '
         'dlgDuplicates
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkIncludeSummary)
         Me.Controls.Add(Me.grpOptions)
         Me.Controls.Add(Me.lblType)
         Me.Controls.Add(Me.lblVariablesToDuplicate)
@@ -274,4 +284,5 @@ Partial Class dlgDuplicates
     Friend WithEvents ucrInputOmitValues As ucrInputTextBox
     Friend WithEvents lblType As Label
     Friend WithEvents ucrInputComboType As ucrInputComboBox
+    Friend WithEvents ucrChkIncludeSummary As ucrCheck
 End Class

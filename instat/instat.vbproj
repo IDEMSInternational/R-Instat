@@ -179,6 +179,7 @@
     <Compile Include="clsCustomColourTable.vb" />
     <Compile Include="clsCustomRenderer.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
+    <Compile Include="clsGridROperations.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsPopup.vb" />
     <Compile Include="clsQualityControl.vb" />
@@ -201,6 +202,12 @@
       <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgCircularDensityPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgClimaticDataEntry.Designer.vb">
+      <DependentUpon>dlgClimaticDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgClimaticDataEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgClimaticNCMPCountRecords.Designer.vb">
@@ -281,6 +288,12 @@
     <Compile Include="dlgInfillMissingValues.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgLocatingPointsInShapeFile.Designer.vb">
+      <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgLocatingPointsInShapeFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgOtherRosePlots.Designer.vb">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
     </Compile>
@@ -321,6 +334,18 @@
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgWindPollutionRose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConvertToNumeric.Designer.vb">
+      <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConvertToNumeric.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntry.Designer.vb">
+      <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgClimaticNCMPMetadata.Designer.vb">
@@ -2676,6 +2701,9 @@
     <EmbeddedResource Include="dlgCircularDensityPlot.resx">
       <DependentUpon>dlgCircularDensityPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgClimaticDataEntry.resx">
+      <DependentUpon>dlgClimaticDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgClimaticNCMPCountRecords.resx">
       <DependentUpon>dlgClimaticNCMPCountRecords.vb</DependentUpon>
     </EmbeddedResource>
@@ -2716,6 +2744,9 @@
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgLocatingPointsInShapeFile.resx">
+      <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
     </EmbeddedResource>
@@ -2736,6 +2767,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConvertToNumeric.resx">
+      <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimaticDataEntry.resx">
+      <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticNCMPMetadata.resx">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
