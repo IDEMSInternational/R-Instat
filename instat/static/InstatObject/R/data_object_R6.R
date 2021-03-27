@@ -1660,18 +1660,21 @@ DataSheet$set("public", "add_object", function(object, object_name) {
   if(object_name %in% names(private$objects)) message("An object called ", object_name, " already exists. It will be replaced.")
   private$objects[[object_name]] <- object
   self$append_to_changes(list(Added_object, object_name))
-  if(any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair") %in% class(object))) {
+  if(any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair", "recordedplot") %in% class(object))) {
     private$.last_graph <- object_name
   }
 }
 )
 
-DataSheet$set("public", "get_objects", function(object_name, type = "", force_as_list = FALSE) {
+DataSheet$set("public", "get_objects", function(object_name, type = "", force_as_list = FALSE, silent = FALSE) {
   curr_objects = private$objects[self$get_object_names(type = type)]
   if(length(curr_objects) == 0) return(curr_objects)
   if(missing(object_name)) return(curr_objects)
   if(!is.character(object_name)) stop("object_name must be a character")
-  if(!all(object_name %in% names(curr_objects))) stop(object_name, " not found in objects")
+  if(!all(object_name %in% names(curr_objects))) {
+    if (silent) return(NULL)
+    else stop(object_name, " not found in objects")
+  }
   if(length(object_name) == 1) {
     if(force_as_list) return(curr_objects[object_name])
     else return(curr_objects[[object_name]])
@@ -1684,7 +1687,7 @@ DataSheet$set("public", "get_object_names", function(type = "", as_list = FALSE,
   if(type == "") out = names(private$objects)
   else {
     if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
-    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair") %in% class(x)))]
+    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair", "recordedplot") %in% class(x)))]
     else if(type == surv_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("Surv") %in% class(x)))]
     else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame", "list") %in% class(x)))]
     else stop("type: ", type, " not recognised")
