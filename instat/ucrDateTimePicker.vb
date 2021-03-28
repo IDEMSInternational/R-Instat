@@ -22,6 +22,14 @@ Public Class ucrDateTimePicker
     ' Otherwise, parameter value will be set as a string e.g. "2000/1/1"
     Public bIsRDate As Boolean = True
 
+    Private strFormat As String = ""
+
+    Private Sub ucrDateTimePicker_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If strFormat = "" Then
+            Format = "dd MMM yyyy"
+        End If
+    End Sub
+
     Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
         If bChangeParameterValue AndAlso clsTempParam IsNot Nothing Then
             clsTempParam.SetArgument(ValueAsRDate())
@@ -182,7 +190,23 @@ Public Class ucrDateTimePicker
         End If
     End Function
 
-    Public Function DateValue() As Date
-        Return dtpDateTime.Value
-    End Function
+    Public Property Format() As String
+        Get
+            Return strFormat
+        End Get
+        Set(strFormat As String)
+            Me.strFormat = strFormat
+            dtpDateTime.Format = DateTimePickerFormat.Custom
+            dtpDateTime.CustomFormat = strFormat
+        End Set
+    End Property
+
+    Public Property DateValue() As Date
+        Get
+            Return dtpDateTime.Value
+        End Get
+        Set(value As Date)
+            dtpDateTime.Value = value
+        End Set
+    End Property
 End Class
