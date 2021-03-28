@@ -84,9 +84,6 @@ Public Class sdgClimaticDataEntry
         grdCurrentWorkSheet = Nothing
     End Sub
 
-    Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    End Sub
-
     Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction, clsEditDataFrame As RFunction, strDateName As String, lstElementsNames As List(Of String), Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "")
         Dim lstColumnHeaders As String()
 
@@ -170,8 +167,13 @@ Public Class sdgClimaticDataEntry
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
-        AddChangedRow(e.Cell.Row)
-        grdCurrentWorkSheet.GetCell(e.Cell.Row, e.Cell.Column).Style.BackColor = Color.Yellow
+        If Not IsNumeric(e.NewData) AndAlso Not e.NewData.ToString() = "NA" Then
+            MsgBox("Value is not numeric or NA.", MsgBoxStyle.Information, "Not numeric.")
+            e.EndReason = EndEditReason.Cancel
+        Else
+            AddChangedRow(e.Cell.Row)
+            grdCurrentWorkSheet.GetCell(e.Cell.Row, e.Cell.Column).Style.BackColor = Color.Yellow
+        End If
     End Sub
 
     ''' <summary>

@@ -90,7 +90,7 @@ Public Class dlgClimaticDataEntry
         ucrReceiverElements.SetParameter(New RParameter("elements", iNewPosition:=3))
         ucrReceiverElements.SetParameterIsString()
         ucrReceiverElements.strSelectorHeading = "Numerics"
-        ucrReceiverElements.SetIncludedDataTypes({"numeric"})
+        ucrReceiverElements.SetIncludedDataTypes({"numeric"}, bStrict:=True)
         ucrReceiverElements.bAutoFill = True
 
         ucrReceiverViewVariables.Selector = ucrSelectorClimaticDataEntry
@@ -116,7 +116,7 @@ Public Class dlgClimaticDataEntry
         ucrReceiverElements.SetMeAsReceiver()
 
         clsGetDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
-        clsGetDataEntry.AddParameter("type", Chr(34) & "day" & Chr(34), iPosition:=6)
+        clsGetDataEntry.AddParameter("type", Chr(34) & "month" & Chr(34), iPosition:=6)
         clsSaveDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$save_data_entry_data")
         clsSaveDataEntry.AddParameter("new_data", clsRFunctionParameter:=clsEditDataFrame, iPosition:=1)
         clsEditDataFrame.SetRCommand("data.frame")
@@ -260,5 +260,10 @@ Public Class dlgClimaticDataEntry
         If Not strStationColumn = "" AndAlso Not ucrInputSelectStation.GetValue() = "" Then
             clsEditDataFrame.AddParameter(strStationColumn, ucrInputSelectStation.GetValue(), iPosition:=0)
         End If
+    End Sub
+
+    Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
+        bChange = True
+        bSubdialogFirstLoad = True
     End Sub
 End Class

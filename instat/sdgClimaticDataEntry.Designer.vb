@@ -75,7 +75,7 @@ Partial Class sdgClimaticDataEntry
         'cmdReset
         '
         Me.cmdReset.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdReset.Location = New System.Drawing.Point(10, 9)
+        Me.cmdReset.Location = New System.Drawing.Point(410, 9)
         Me.cmdReset.Name = "cmdReset"
         Me.cmdReset.Size = New System.Drawing.Size(72, 24)
         Me.cmdReset.TabIndex = 88
