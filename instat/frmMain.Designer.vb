@@ -157,6 +157,7 @@ Partial Class frmMain
         Me.mnuViewOptionsByContextMenu = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator39 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuViewResetToDefaultLayout = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuViewSwapDataAndMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpHelpIntroduction = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuHelpHistFAQ = New System.Windows.Forms.ToolStripMenuItem()
@@ -286,6 +287,8 @@ Partial Class frmMain
         Me.mnuClimaticCompareConditionalQuantiles = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCompareTaylorDiagram = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticMapping = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticMappingMap = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticMappingCheckStations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModelsExtremes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModelCircular = New System.Windows.Forms.ToolStripMenuItem()
@@ -1271,7 +1274,7 @@ Partial Class frmMain
         '
         'mnuView
         '
-        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout})
+        Me.mnuView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuViewDataView, Me.mnuViewOutputWindow, Me.mnuViewLog, Me.mnuViewScriptWindow, Me.mnuViewColumnMetadata, Me.mnuViewDataFrameMetadata, Me.ToolStripSeparator22, Me.mnuViewStructuredMenu, Me.mnuViewClimaticMenu, Me.mnuViewProcurementMenu, Me.mnuViewOptionsByContextMenu, Me.ToolStripSeparator39, Me.mnuViewResetToDefaultLayout, Me.mnuViewSwapDataAndMetadata})
         Me.mnuView.Name = "mnuView"
         resources.ApplyResources(Me.mnuView, "mnuView")
         Me.mnuView.Tag = "View"
@@ -1347,6 +1350,11 @@ Partial Class frmMain
         '
         Me.mnuViewResetToDefaultLayout.Name = "mnuViewResetToDefaultLayout"
         resources.ApplyResources(Me.mnuViewResetToDefaultLayout, "mnuViewResetToDefaultLayout")
+        '
+        'mnuViewSwapDataAndMetadata
+        '
+        Me.mnuViewSwapDataAndMetadata.Name = "mnuViewSwapDataAndMetadata"
+        resources.ApplyResources(Me.mnuViewSwapDataAndMetadata, "mnuViewSwapDataAndMetadata")
         '
         'mnuHelp
         '
@@ -1590,8 +1598,8 @@ Partial Class frmMain
         '
         'mnuClimaticDataEntry
         '
-        resources.ApplyResources(Me.mnuClimaticDataEntry, "mnuClimaticDataEntry")
         Me.mnuClimaticDataEntry.Name = "mnuClimaticDataEntry"
+        resources.ApplyResources(Me.mnuClimaticDataEntry, "mnuClimaticDataEntry")
         '
         'ToolStripSeparator50
         '
@@ -2006,8 +2014,19 @@ Partial Class frmMain
         '
         'mnuClimaticMapping
         '
+        Me.mnuClimaticMapping.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticMappingMap, Me.mnuClimaticMappingCheckStations})
         Me.mnuClimaticMapping.Name = "mnuClimaticMapping"
         resources.ApplyResources(Me.mnuClimaticMapping, "mnuClimaticMapping")
+        '
+        'mnuClimaticMappingMap
+        '
+        Me.mnuClimaticMappingMap.Name = "mnuClimaticMappingMap"
+        resources.ApplyResources(Me.mnuClimaticMappingMap, "mnuClimaticMappingMap")
+        '
+        'mnuClimaticMappingCheckStations
+        '
+        Me.mnuClimaticMappingCheckStations.Name = "mnuClimaticMappingCheckStations"
+        resources.ApplyResources(Me.mnuClimaticMappingCheckStations, "mnuClimaticMappingCheckStations")
         '
         'mnuClimaticModel
         '
@@ -4779,6 +4798,9 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticNCMPTrendGraphs As ToolStripMenuItem
     Friend WithEvents mnuClimaticNCMPCountRecords As ToolStripMenuItem
     Friend WithEvents mnuClimaticNCMPSummary As ToolStripMenuItem
+    Friend WithEvents mnuViewSwapDataAndMetadata As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator69 As ToolStripSeparator
     Friend WithEvents mnuClimaticDataEntry As ToolStripMenuItem
+    Friend WithEvents mnuClimaticMappingMap As ToolStripMenuItem
+    Friend WithEvents mnuClimaticMappingCheckStations As ToolStripMenuItem
 End Class
