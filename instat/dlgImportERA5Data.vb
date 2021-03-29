@@ -77,9 +77,9 @@ Public Class dlgImportERA5Data
         ucrInputElement.SetItems(dctElements)
         ucrInputElement.SetDropDownStyleAsNonEditable()
 
-        ucrDtpFromDate.SetParameter(New RParameter("start_date", 3))
+        ucrDtpStartDate.SetParameter(New RParameter("start_date", 3))
 
-        ucrDtpToDate.SetParameter(New RParameter("end_date", 4))
+        ucrDtpEndDate.SetParameter(New RParameter("end_date", 4))
 
         ucrChkDoNotImport.SetParameter(New RParameter("import", 8))
         ucrChkDoNotImport.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -127,6 +127,8 @@ Public Class dlgImportERA5Data
         clsImportFromCDSFunction.AddParameter("lon", clsRFunctionParameter:=clsConcLonFunction, iPosition:=5)
         clsImportFromCDSFunction.AddParameter("lat", clsRFunctionParameter:=clsConcLatFunction, iPosition:=6)
         clsImportFromCDSFunction.AddParameter("path", Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments).Replace("\", "/"), iPosition:=7)
+        clsImportFromCDSFunction.AddParameter("start_date", clsRFunctionParameter:=ucrDtpStartDate.ValueAsRDate, iPosition:=3)
+        clsImportFromCDSFunction.AddParameter("end_date", clsRFunctionParameter:=ucrDtpEndDate.ValueAsRDate, iPosition:=4)
 
         clsConcLonFunction.SetRCommand("c")
         clsConcLonFunction.AddParameter("min_lon", 20, bIncludeArgumentName:=False, iPosition:=0)
@@ -144,8 +146,8 @@ Public Class dlgImportERA5Data
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrInputData.SetRCode(clsImportFromCDSFunction, bReset)
         ucrInputElement.SetRCode(clsImportFromCDSFunction, bReset)
-        ucrDtpFromDate.SetRCode(clsImportFromCDSFunction, bReset)
-        ucrDtpToDate.SetRCode(clsImportFromCDSFunction, bReset)
+        ucrDtpStartDate.SetRCode(clsImportFromCDSFunction, bReset)
+        ucrDtpEndDate.SetRCode(clsImportFromCDSFunction, bReset)
         ucrInputNewDataFrameName.SetRCode(clsImportFromCDSFunction, bReset)
         ucrChkDoNotImport.SetRCode(clsImportFromCDSFunction, bReset)
         ucrInputFilePath.SetRCode(clsImportFromCDSFunction, bReset)
