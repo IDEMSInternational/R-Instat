@@ -84,9 +84,9 @@ Public Class dlgImportERA5Data
         ucrDtpEndDate.MinDate = New Date(1979, 1, 1)
 
         ucrChkDoNotImport.SetParameter(New RParameter("import", 8))
-        ucrChkDoNotImport.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkDoNotImport.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
         ucrChkDoNotImport.SetText("Don't import data after downloading")
-        ucrChkDoNotImport.SetRDefault("TRUE")
+        ucrChkDoNotImport.SetRDefault("FALSE")
 
         ucrInputNewDataFrameName.SetParameter(New RParameter("new_name", 9))
 
