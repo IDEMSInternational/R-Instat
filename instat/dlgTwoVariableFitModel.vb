@@ -19,6 +19,7 @@ Imports instat.Translations
 Imports RDotNet
 Public Class dlgTwoVariableFitModel
     Private strFirstVariableType, strSecondVariableType As String
+    Private iNumberOfSecondFactorLevels As Integer
     Private bFirstLoad As Boolean = True
     Private clsVisReg, clsFamilyFunction As New RFunction
     Private clsTransformFunction As New RFunction
@@ -27,10 +28,10 @@ Public Class dlgTwoVariableFitModel
     Private clsSplineFunc As New RFunction
 
     'Tests
-    Private clsTtestFunction, clsWilcoxTestFunction, clsVarTestFunction, clsAnsariTestFuntion,
-        clsMoodTestFunction, clsCorTestFunction, clsKruskalTestFunction, clsOnewayTestFunction,
-        clsBarletteTestFunction, clsMcnemarTestFunction, clsFlignerTestFunction, clsFisherTestFunction,
-        clsXchisgTestFunction, clsPropTestFunction As New RFunction
+    Private clsNumericTtestFunction, clsTtestFunction, clsNumericWilcoxTestFunction, clsWilcoxTestFunction,
+        clsNumericVarTestFunction, clsVarTestFunction, clsAnsariTestFuntion, clsMoodTestFunction, clsCorTestFunction,
+        clsKruskalTestFunction, clsOnewayTestFunction, clsBarletteTestFunction, clsMcnemarTestFunction,
+        clsFlignerTestFunction, clsFisherTestFunction, clsXchisgTestFunction, clsPropTestFunction As New RFunction
 
     Private clsTtestOperator, clsWilcoxTestOperator, clsVarTestOperator As New ROperator
     Private clsOneWayFormulaOperator As New ROperator
@@ -187,7 +188,9 @@ Public Class dlgTwoVariableFitModel
         clsYearFunc = New RFunction
         clsAsFactorFunc = New RFunction
         clsBrokenStickSecondOperFunction = New RFunction
+        clsNumericWilcoxTestFunction = New RFunction
         clsWilcoxTestFunction = New RFunction
+        clsNumericVarTestFunction = New RFunction
         clsVarTestFunction = New RFunction
         clsAnsariTestFuntion = New RFunction
         clsMoodTestFunction = New RFunction
@@ -199,6 +202,7 @@ Public Class dlgTwoVariableFitModel
         clsFisherTestFunction = New RFunction
         clsXchisgTestFunction = New RFunction
         clsPropTestFunction = New RFunction
+        clsNumericTtestFunction = New RFunction
         clsTtestFunction = New RFunction
         clsMcnemarTestFunction = New RFunction
         clsOneWayFormulaOperator = New ROperator
@@ -307,12 +311,16 @@ Public Class dlgTwoVariableFitModel
         clsDetach.AddParameter("unload", "TRUE")
 
         'Tests
+        clsNumericWilcoxTestFunction.SetRCommand("wilcox.test")
+
         clsWilcoxTestFunction.SetRCommand("wilcox.test")
         clsWilcoxTestFunction.AddParameter("wilcoxOperator", clsROperatorParameter:=clsWilcoxTestOperator,
                                            iPosition:=0, bIncludeArgumentName:=False)
 
         clsWilcoxTestOperator.SetOperation("~")
         clsWilcoxTestOperator.bSpaceAroundOperation = True
+
+        clsNumericVarTestFunction.SetRCommand("var.test")
 
         clsVarTestFunction.SetRCommand("var.test")
         clsVarTestFunction.AddParameter("varOperator", clsROperatorParameter:=clsVarTestOperator,
@@ -345,6 +353,8 @@ Public Class dlgTwoVariableFitModel
 
         clsPropTestFunction.SetPackageName("mosaic")
         clsPropTestFunction.SetRCommand("prop")
+
+        clsNumericTtestFunction.SetRCommand("t.test")
 
         clsTtestFunction.SetRCommand("t.test")
         clsTtestFunction.AddParameter("testOperator", clsROperatorParameter:=clsTtestOperator, bIncludeArgumentName:=False, iPosition:=0)
@@ -391,6 +401,9 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsTtestOperator, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=18)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsMcnemarTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=19)
         ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsOneWayFormulaOperator, New RParameter("SecondOperator", iNewPosition:=1), iAdditionalPairNo:=20)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsNumericTtestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=21)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsNumericVarTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=22)
+        ucrReceiverExplanatory.AddAdditionalCodeParameterPair(clsNumericWilcoxTestFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=23)
 
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsWilcoxTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsVarTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=2)
@@ -406,6 +419,9 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsTtestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=12)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsMcnemarTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=13)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsOneWayFormulaOperator, New RParameter("firstOperator", iNewPosition:=0), iAdditionalPairNo:=14)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsNumericWilcoxTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=15)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsNumericVarTestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=16)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsNumericTtestFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=17)
 
         ' Additional Rcode for test functions
         ucrSaveModels.AddAdditionalRCode(clsWilcoxTestFunction, iAdditionalPairNo:=1)
@@ -423,12 +439,19 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.AddAdditionalRCode(clsMcnemarTestFunction, iAdditionalPairNo:=13)
         ucrSaveModels.AddAdditionalRCode(clsGLM, iAdditionalPairNo:=14)
         ucrSaveModels.AddAdditionalRCode(clsOnewayTestFunction, iAdditionalPairNo:=15)
+        ucrSaveModels.AddAdditionalRCode(clsNumericTtestFunction, iAdditionalPairNo:=16)
+        ucrSaveModels.AddAdditionalRCode(clsNumericVarTestFunction, iAdditionalPairNo:=17)
+        ucrSaveModels.AddAdditionalRCode(clsNumericWilcoxTestFunction, iAdditionalPairNo:=18)
 
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=1)
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsVarTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=2)
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsAnsariTestFuntion, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=3)
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsMoodTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=4)
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsCorTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=5)
+        ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsNumericTtestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=6)
+        ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsNumericVarTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=7)
+        ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsNumericWilcoxTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=8)
+
         ucrInputConfidenceInterval.SetRCode(clsTtestFunction, bReset)
 
         ucrInputNullHypothesis.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("mu", iNewPosition:=4), iAdditionalPairNo:=1)
@@ -443,7 +466,7 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.SetRCode(clsLM, bReset)
         ucrDistributionChoice.SetRCode(clsFamilyFunction, bReset)
         bRCodeSet = True
-        'ReceiverColumnType()
+        ReceiverColumnType()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -526,15 +549,33 @@ Public Class dlgTwoVariableFitModel
 
             Select Case ucrInputTest.GetText()
                 Case "t"
-                    clsTtestFunction.AddParameter("paired", "FALSE", iPosition:=4)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsTtestFunction)
+                    If strFirstVariableType = "numeric" AndAlso strSecondVariableType = "categorical" Then
+                        clsTtestFunction.AddParameter("paired", "FALSE", iPosition:=4)
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsTtestFunction)
+                    Else
+                        clsNumericTtestFunction.AddParameter("paired", "FALSE", iPosition:=4)
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsNumericTtestFunction)
+                    End If
                 Case "t paired"
-                    clsTtestFunction.AddParameter("paired", "TRUE", iPosition:=4)
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsTtestFunction)
+                    If strFirstVariableType = "numeric" AndAlso strSecondVariableType = "categorical" Then
+                        clsTtestFunction.AddParameter("paired", "TRUE", iPosition:=4)
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsTtestFunction)
+                    Else
+                        clsNumericTtestFunction.AddParameter("paired", "TRUE", iPosition:=4)
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsNumericTtestFunction)
+                    End If
                 Case "wilcox"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsWilcoxTestFunction)
+                    If strFirstVariableType = "numeric" AndAlso strSecondVariableType = "categorical" Then
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsWilcoxTestFunction)
+
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsNumericWilcoxTestFunction)
+                    End If
                 Case "var"
-                    ucrBase.clsRsyntax.SetBaseRFunction(clsVarTestFunction)
+                    If strFirstVariableType = "numeric" AndAlso strSecondVariableType = "categorical" Then
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsVarTestFunction)
+                    Else
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsNumericVarTestFunction)
+                    End If
                 Case "ansari"
                     ucrBase.clsRsyntax.SetBaseRFunction(clsAnsariTestFuntion)
                 Case "mood"
@@ -654,8 +695,12 @@ Public Class dlgTwoVariableFitModel
     Private Sub ucrPnlModelType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlModelType.ControlValueChanged
         If rdoGeneralCase.Checked Then
             ucrDistributionChoice.SetGLMDistributions()
+            cmdDisplayOptions.Visible = True
+            cmdModelOptions.Visible = True
         Else
             ucrDistributionChoice.SetExactDistributions()
+            cmdDisplayOptions.Visible = False
+            cmdModelOptions.Visible = False
         End If
         lblNumeric.Visible = rdoGeneralCase.Checked
         lblFactor.Visible = rdoGeneralCase.Checked
@@ -711,7 +756,8 @@ Public Class dlgTwoVariableFitModel
                     strSecondVariableType = ucrReceiverExplanatory.strCurrDataType
                     If strSecondVariableType.Contains("factor") OrElse strSecondVariableType.Contains("character") OrElse strSecondVariableType.Contains("logical") Then
                         strSecondVariableType = "categorical"
-                        lblSecondVariableType.Text = "(" & strSecondVariableType & ")" & "  Levels: " & GetNumberOfFactorLevels(ucrReceiverExplanatory.GetVariableNames(False))
+                        iNumberOfSecondFactorLevels = GetNumberOfFactorLevels(ucrReceiverExplanatory.GetVariableNames(False))
+                        lblSecondVariableType.Text = "(" & strSecondVariableType & ")" & "  Levels: " & iNumberOfSecondFactorLevels
                     Else
                         strSecondVariableType = "numeric"
                         lblSecondVariableType.Text = "(" & strSecondVariableType & ")"
@@ -751,16 +797,22 @@ Public Class dlgTwoVariableFitModel
                                       "________", "var", "ansari", "mood", "________", "cor", "spearman", "kendall"})
                 ucrInputTest.SetText("t")
             ElseIf strSecondVariableType = "categorical" Then
-                ucrInputTest.SetItems({"t", "wilcox", "var", "ansari", "mood", "________",
-                                      "oneway", "kruskal", "bartlett", "fligner"})
-                ucrInputTest.SetText("oneway")
+                If iNumberOfSecondFactorLevels = 2 Then
+                    ucrInputTest.SetItems({"t", "wilcox", "var", "ansari", "mood", "________",
+                      "oneway", "kruskal", "bartlett", "fligner"})
+                    ucrInputTest.SetText("t")
+                ElseIf iNumberOfSecondFactorLevels > 2 Then
+                    ucrInputTest.SetItems({"oneway", "kruskal", "bartlett", "fligner"})
+                    ucrInputTest.SetText("oneway")
+                End If
+
             ElseIf strSecondVariableType = "" Then
                 ucrInputTest.SetItems({"None"})
                 ucrInputTest.SetText("None")
             End If
         ElseIf strFirstVariableType = "categorical" Then
             If strSecondVariableType = "categorical" Then
-                ucrInputTest.SetItems({"chisq", "fisher", "mcnemar"})
+                ucrInputTest.SetItems({"chisq", "fisher", "________", "mcnemar"})
                 ucrInputTest.SetText("chisq")
             ElseIf strSecondVariableType = "" Then
                 ucrInputTest.SetItems({"None"})
