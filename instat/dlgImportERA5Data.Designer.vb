@@ -28,6 +28,9 @@ Partial Class dlgImportERA5Data
         Me.lblTo = New System.Windows.Forms.Label()
         Me.rdoSelection = New System.Windows.Forms.RadioButton()
         Me.lblFrom = New System.Windows.Forms.Label()
+        Me.ucrDtpEndDate = New instat.ucrDateTimePicker()
+        Me.ucrDtpStartDate = New instat.ucrDateTimePicker()
+        Me.ucrPnlRangeSelection = New instat.UcrPanel()
         Me.lblData = New System.Windows.Forms.Label()
         Me.lblElement = New System.Windows.Forms.Label()
         Me.lblAPIKey = New System.Windows.Forms.Label()
@@ -40,27 +43,24 @@ Partial Class dlgImportERA5Data
         Me.lblLatitude = New System.Windows.Forms.Label()
         Me.lblLongitude = New System.Windows.Forms.Label()
         Me.grpLocationSelection = New System.Windows.Forms.GroupBox()
+        Me.ucrInputMinLongitude = New instat.ucrInputTextBox()
+        Me.ucrInputMinLatitude = New instat.ucrInputTextBox()
+        Me.ucrInputMaxLongitude = New instat.ucrInputTextBox()
+        Me.ucrInputMaxLatitude = New instat.ucrInputTextBox()
         Me.lblResolutionLabel = New System.Windows.Forms.Label()
         Me.grpLoginToCDS = New System.Windows.Forms.GroupBox()
+        Me.ucrInputUserID = New instat.ucrInputTextBox()
+        Me.ucrInputAPIKey = New instat.ucrInputTextBox()
         Me.lblResolution = New System.Windows.Forms.Label()
         Me.lnkCreateAnAccount = New System.Windows.Forms.LinkLabel()
         Me.lblSaveDownloadedFileTo = New System.Windows.Forms.Label()
         Me.cmdBrowse = New System.Windows.Forms.Button()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
-        Me.ucrInputMinLongitude = New instat.ucrInputTextBox()
-        Me.ucrInputMinLatitude = New instat.ucrInputTextBox()
-        Me.ucrInputMaxLongitude = New instat.ucrInputTextBox()
-        Me.ucrInputMaxLatitude = New instat.ucrInputTextBox()
         Me.ucrChkDoNotImport = New instat.ucrCheck()
         Me.ucrInputNewDataFrameName = New instat.ucrInputTextBox()
-        Me.ucrDtpToDate = New instat.ucrDateTimePicker()
-        Me.ucrDtpFromDate = New instat.ucrDateTimePicker()
-        Me.ucrPnlRangeSelection = New instat.UcrPanel()
         Me.ucrInputElement = New instat.ucrInputComboBox()
         Me.ucrInputData = New instat.ucrInputComboBox()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputUserID = New instat.ucrInputTextBox()
-        Me.ucrInputAPIKey = New instat.ucrInputTextBox()
         Me.grpTimeSelection.SuspendLayout()
         Me.grpLocationSelection.SuspendLayout()
         Me.grpLoginToCDS.SuspendLayout()
@@ -72,8 +72,8 @@ Partial Class dlgImportERA5Data
         Me.grpTimeSelection.Controls.Add(Me.lblTo)
         Me.grpTimeSelection.Controls.Add(Me.rdoSelection)
         Me.grpTimeSelection.Controls.Add(Me.lblFrom)
-        Me.grpTimeSelection.Controls.Add(Me.ucrDtpToDate)
-        Me.grpTimeSelection.Controls.Add(Me.ucrDtpFromDate)
+        Me.grpTimeSelection.Controls.Add(Me.ucrDtpEndDate)
+        Me.grpTimeSelection.Controls.Add(Me.ucrDtpStartDate)
         Me.grpTimeSelection.Controls.Add(Me.ucrPnlRangeSelection)
         resources.ApplyResources(Me.grpTimeSelection, "grpTimeSelection")
         Me.grpTimeSelection.Name = "grpTimeSelection"
@@ -113,6 +113,29 @@ Partial Class dlgImportERA5Data
         '
         resources.ApplyResources(Me.lblFrom, "lblFrom")
         Me.lblFrom.Name = "lblFrom"
+        '
+        'ucrDtpEndDate
+        '
+        Me.ucrDtpEndDate.DateValue = New Date(2021, 3, 29, 10, 5, 8, 139)
+        Me.ucrDtpEndDate.Format = "dd MMM yyyy"
+        resources.ApplyResources(Me.ucrDtpEndDate, "ucrDtpEndDate")
+        Me.ucrDtpEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpEndDate.Name = "ucrDtpEndDate"
+        '
+        'ucrDtpStartDate
+        '
+        Me.ucrDtpStartDate.DateValue = New Date(2021, 3, 29, 10, 5, 8, 139)
+        Me.ucrDtpStartDate.Format = "dd MMM yyyy"
+        resources.ApplyResources(Me.ucrDtpStartDate, "ucrDtpStartDate")
+        Me.ucrDtpStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpStartDate.Name = "ucrDtpStartDate"
+        '
+        'ucrPnlRangeSelection
+        '
+        resources.ApplyResources(Me.ucrPnlRangeSelection, "ucrPnlRangeSelection")
+        Me.ucrPnlRangeSelection.Name = "ucrPnlRangeSelection"
         '
         'lblData
         '
@@ -185,6 +208,38 @@ Partial Class dlgImportERA5Data
         Me.grpLocationSelection.Name = "grpLocationSelection"
         Me.grpLocationSelection.TabStop = False
         '
+        'ucrInputMinLongitude
+        '
+        Me.ucrInputMinLongitude.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinLongitude.IsMultiline = False
+        Me.ucrInputMinLongitude.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMinLongitude, "ucrInputMinLongitude")
+        Me.ucrInputMinLongitude.Name = "ucrInputMinLongitude"
+        '
+        'ucrInputMinLatitude
+        '
+        Me.ucrInputMinLatitude.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinLatitude.IsMultiline = False
+        Me.ucrInputMinLatitude.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMinLatitude, "ucrInputMinLatitude")
+        Me.ucrInputMinLatitude.Name = "ucrInputMinLatitude"
+        '
+        'ucrInputMaxLongitude
+        '
+        Me.ucrInputMaxLongitude.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaxLongitude.IsMultiline = False
+        Me.ucrInputMaxLongitude.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMaxLongitude, "ucrInputMaxLongitude")
+        Me.ucrInputMaxLongitude.Name = "ucrInputMaxLongitude"
+        '
+        'ucrInputMaxLatitude
+        '
+        Me.ucrInputMaxLatitude.AddQuotesIfUnrecognised = True
+        Me.ucrInputMaxLatitude.IsMultiline = False
+        Me.ucrInputMaxLatitude.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMaxLatitude, "ucrInputMaxLatitude")
+        Me.ucrInputMaxLatitude.Name = "ucrInputMaxLatitude"
+        '
         'lblResolutionLabel
         '
         resources.ApplyResources(Me.lblResolutionLabel, "lblResolutionLabel")
@@ -200,6 +255,22 @@ Partial Class dlgImportERA5Data
         resources.ApplyResources(Me.grpLoginToCDS, "grpLoginToCDS")
         Me.grpLoginToCDS.Name = "grpLoginToCDS"
         Me.grpLoginToCDS.TabStop = False
+        '
+        'ucrInputUserID
+        '
+        Me.ucrInputUserID.AddQuotesIfUnrecognised = True
+        Me.ucrInputUserID.IsMultiline = False
+        Me.ucrInputUserID.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputUserID, "ucrInputUserID")
+        Me.ucrInputUserID.Name = "ucrInputUserID"
+        '
+        'ucrInputAPIKey
+        '
+        Me.ucrInputAPIKey.AddQuotesIfUnrecognised = True
+        Me.ucrInputAPIKey.IsMultiline = False
+        Me.ucrInputAPIKey.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputAPIKey, "ucrInputAPIKey")
+        Me.ucrInputAPIKey.Name = "ucrInputAPIKey"
         '
         'lblResolution
         '
@@ -234,38 +305,6 @@ Partial Class dlgImportERA5Data
         resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
         '
-        'ucrInputMinLongitude
-        '
-        Me.ucrInputMinLongitude.AddQuotesIfUnrecognised = True
-        Me.ucrInputMinLongitude.IsMultiline = False
-        Me.ucrInputMinLongitude.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMinLongitude, "ucrInputMinLongitude")
-        Me.ucrInputMinLongitude.Name = "ucrInputMinLongitude"
-        '
-        'ucrInputMinLatitude
-        '
-        Me.ucrInputMinLatitude.AddQuotesIfUnrecognised = True
-        Me.ucrInputMinLatitude.IsMultiline = False
-        Me.ucrInputMinLatitude.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMinLatitude, "ucrInputMinLatitude")
-        Me.ucrInputMinLatitude.Name = "ucrInputMinLatitude"
-        '
-        'ucrInputMaxLongitude
-        '
-        Me.ucrInputMaxLongitude.AddQuotesIfUnrecognised = True
-        Me.ucrInputMaxLongitude.IsMultiline = False
-        Me.ucrInputMaxLongitude.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMaxLongitude, "ucrInputMaxLongitude")
-        Me.ucrInputMaxLongitude.Name = "ucrInputMaxLongitude"
-        '
-        'ucrInputMaxLatitude
-        '
-        Me.ucrInputMaxLatitude.AddQuotesIfUnrecognised = True
-        Me.ucrInputMaxLatitude.IsMultiline = False
-        Me.ucrInputMaxLatitude.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMaxLatitude, "ucrInputMaxLatitude")
-        Me.ucrInputMaxLatitude.Name = "ucrInputMaxLatitude"
-        '
         'ucrChkDoNotImport
         '
         Me.ucrChkDoNotImport.Checked = False
@@ -279,29 +318,6 @@ Partial Class dlgImportERA5Data
         Me.ucrInputNewDataFrameName.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputNewDataFrameName, "ucrInputNewDataFrameName")
         Me.ucrInputNewDataFrameName.Name = "ucrInputNewDataFrameName"
-        '
-        'ucrDtpToDate
-        '
-        Me.ucrDtpToDate.DateValue = New Date(2021, 3, 29, 10, 5, 8, 139)
-        Me.ucrDtpToDate.Format = "dd MMM yyyy"
-        resources.ApplyResources(Me.ucrDtpToDate, "ucrDtpToDate")
-        Me.ucrDtpToDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDtpToDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDtpToDate.Name = "ucrDtpToDate"
-        '
-        'ucrDtpFromDate
-        '
-        Me.ucrDtpFromDate.DateValue = New Date(2021, 3, 29, 10, 5, 8, 139)
-        Me.ucrDtpFromDate.Format = "dd MMM yyyy"
-        resources.ApplyResources(Me.ucrDtpFromDate, "ucrDtpFromDate")
-        Me.ucrDtpFromDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDtpFromDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDtpFromDate.Name = "ucrDtpFromDate"
-        '
-        'ucrPnlRangeSelection
-        '
-        resources.ApplyResources(Me.ucrPnlRangeSelection, "ucrPnlRangeSelection")
-        Me.ucrPnlRangeSelection.Name = "ucrPnlRangeSelection"
         '
         'ucrInputElement
         '
@@ -323,22 +339,6 @@ Partial Class dlgImportERA5Data
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrInputUserID
-        '
-        Me.ucrInputUserID.AddQuotesIfUnrecognised = True
-        Me.ucrInputUserID.IsMultiline = False
-        Me.ucrInputUserID.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputUserID, "ucrInputUserID")
-        Me.ucrInputUserID.Name = "ucrInputUserID"
-        '
-        'ucrInputAPIKey
-        '
-        Me.ucrInputAPIKey.AddQuotesIfUnrecognised = True
-        Me.ucrInputAPIKey.IsMultiline = False
-        Me.ucrInputAPIKey.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputAPIKey, "ucrInputAPIKey")
-        Me.ucrInputAPIKey.Name = "ucrInputAPIKey"
         '
         'dlgImportERA5Data
         '
@@ -380,8 +380,8 @@ Partial Class dlgImportERA5Data
     Friend WithEvents ucrInputData As ucrInputComboBox
     Friend WithEvents ucrInputElement As ucrInputComboBox
     Friend WithEvents grpTimeSelection As GroupBox
-    Friend WithEvents ucrDtpToDate As ucrDateTimePicker
-    Friend WithEvents ucrDtpFromDate As ucrDateTimePicker
+    Friend WithEvents ucrDtpEndDate As ucrDateTimePicker
+    Friend WithEvents ucrDtpStartDate As ucrDateTimePicker
     Friend WithEvents ucrInputMinLongitude As ucrInputTextBox
     Friend WithEvents ucrInputMaxLatitude As ucrInputTextBox
     Friend WithEvents ucrInputMaxLongitude As ucrInputTextBox

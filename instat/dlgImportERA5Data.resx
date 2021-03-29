@@ -117,116 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;rdoRange.Name" xml:space="preserve">
-    <value>rdoRange</value>
-  </data>
-  <data name="&gt;&gt;rdoRange.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoRange.Parent" xml:space="preserve">
-    <value>grpTimeSelection</value>
-  </data>
-  <data name="&gt;&gt;rdoRange.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;lblTo.Name" xml:space="preserve">
-    <value>lblTo</value>
-  </data>
-  <data name="&gt;&gt;lblTo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblTo.Parent" xml:space="preserve">
-    <value>grpTimeSelection</value>
-  </data>
-  <data name="&gt;&gt;lblTo.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;rdoSelection.Name" xml:space="preserve">
-    <value>rdoSelection</value>
-  </data>
-  <data name="&gt;&gt;rdoSelection.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoSelection.Parent" xml:space="preserve">
-    <value>grpTimeSelection</value>
-  </data>
-  <data name="&gt;&gt;rdoSelection.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblFrom.Name" xml:space="preserve">
-    <value>lblFrom</value>
-  </data>
-  <data name="&gt;&gt;lblFrom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblFrom.Parent" xml:space="preserve">
-    <value>grpTimeSelection</value>
-  </data>
-  <data name="&gt;&gt;lblFrom.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpToDate.Name" xml:space="preserve">
-    <value>ucrDtpToDate</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpToDate.Type" xml:space="preserve">
-    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpToDate.Parent" xml:space="preserve">
-    <value>grpTimeSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpToDate.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpFromDate.Name" xml:space="preserve">
-    <value>ucrDtpFromDate</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpFromDate.Type" xml:space="preserve">
-    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpFromDate.Parent" xml:space="preserve">
-    <value>grpTimeSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpFromDate.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlRangeSelection.Name" xml:space="preserve">
-    <value>ucrPnlRangeSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlRangeSelection.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlRangeSelection.Parent" xml:space="preserve">
-    <value>grpTimeSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlRangeSelection.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="grpTimeSelection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 133</value>
-  </data>
-  <data name="grpTimeSelection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 129</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="grpTimeSelection.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="grpTimeSelection.Text" xml:space="preserve">
-    <value>Time Selection</value>
-  </data>
-  <data name="&gt;&gt;grpTimeSelection.Name" xml:space="preserve">
-    <value>grpTimeSelection</value>
-  </data>
-  <data name="&gt;&gt;grpTimeSelection.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpTimeSelection.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpTimeSelection.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoRange.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -237,12 +127,14 @@
   <data name="rdoRange.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdoRange.Location" type="System.Drawing.Point, System.Drawing">
     <value>43, 23</value>
   </data>
   <data name="rdoRange.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 28</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoRange.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -362,6 +254,93 @@
   </data>
   <data name="&gt;&gt;lblFrom.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="ucrDtpEndDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>46, 100</value>
+  </data>
+  <data name="ucrDtpEndDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 20</value>
+  </data>
+  <data name="ucrDtpEndDate.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpEndDate.Name" xml:space="preserve">
+    <value>ucrDtpEndDate</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpEndDate.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpEndDate.Parent" xml:space="preserve">
+    <value>grpTimeSelection</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpEndDate.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrDtpStartDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>46, 68</value>
+  </data>
+  <data name="ucrDtpStartDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 20</value>
+  </data>
+  <data name="ucrDtpStartDate.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.Name" xml:space="preserve">
+    <value>ucrDtpStartDate</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.Parent" xml:space="preserve">
+    <value>grpTimeSelection</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrPnlRangeSelection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>38, 16</value>
+  </data>
+  <data name="ucrPnlRangeSelection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>223, 42</value>
+  </data>
+  <data name="ucrPnlRangeSelection.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlRangeSelection.Name" xml:space="preserve">
+    <value>ucrPnlRangeSelection</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlRangeSelection.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlRangeSelection.Parent" xml:space="preserve">
+    <value>grpTimeSelection</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlRangeSelection.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="grpTimeSelection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 133</value>
+  </data>
+  <data name="grpTimeSelection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 129</value>
+  </data>
+  <data name="grpTimeSelection.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="grpTimeSelection.Text" xml:space="preserve">
+    <value>Time Selection</value>
+  </data>
+  <data name="&gt;&gt;grpTimeSelection.Name" xml:space="preserve">
+    <value>grpTimeSelection</value>
+  </data>
+  <data name="&gt;&gt;grpTimeSelection.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpTimeSelection.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpTimeSelection.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
   <data name="lblData.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -765,6 +744,90 @@
   <data name="&gt;&gt;grpLocationSelection.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="ucrInputMinLongitude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 15</value>
+  </data>
+  <data name="ucrInputMinLongitude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 21</value>
+  </data>
+  <data name="ucrInputMinLongitude.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinLongitude.Name" xml:space="preserve">
+    <value>ucrInputMinLongitude</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinLongitude.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinLongitude.Parent" xml:space="preserve">
+    <value>grpLocationSelection</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinLongitude.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrInputMinLatitude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 45</value>
+  </data>
+  <data name="ucrInputMinLatitude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 21</value>
+  </data>
+  <data name="ucrInputMinLatitude.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinLatitude.Name" xml:space="preserve">
+    <value>ucrInputMinLatitude</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinLatitude.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinLatitude.Parent" xml:space="preserve">
+    <value>grpLocationSelection</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMinLatitude.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrInputMaxLongitude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>211, 15</value>
+  </data>
+  <data name="ucrInputMaxLongitude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 21</value>
+  </data>
+  <data name="ucrInputMaxLongitude.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxLongitude.Name" xml:space="preserve">
+    <value>ucrInputMaxLongitude</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxLongitude.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxLongitude.Parent" xml:space="preserve">
+    <value>grpLocationSelection</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxLongitude.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrInputMaxLatitude.Location" type="System.Drawing.Point, System.Drawing">
+    <value>211, 45</value>
+  </data>
+  <data name="ucrInputMaxLatitude.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 21</value>
+  </data>
+  <data name="ucrInputMaxLatitude.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxLatitude.Name" xml:space="preserve">
+    <value>ucrInputMaxLatitude</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxLatitude.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxLatitude.Parent" xml:space="preserve">
+    <value>grpLocationSelection</value>
+  </data>
+  <data name="&gt;&gt;ucrInputMaxLatitude.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="lblResolutionLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -842,6 +905,48 @@
   </data>
   <data name="&gt;&gt;grpLoginToCDS.ZOrder" xml:space="preserve">
     <value>16</value>
+  </data>
+  <data name="ucrInputUserID.Location" type="System.Drawing.Point, System.Drawing">
+    <value>59, 16</value>
+  </data>
+  <data name="ucrInputUserID.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 21</value>
+  </data>
+  <data name="ucrInputUserID.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrInputUserID.Name" xml:space="preserve">
+    <value>ucrInputUserID</value>
+  </data>
+  <data name="&gt;&gt;ucrInputUserID.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputUserID.Parent" xml:space="preserve">
+    <value>grpLoginToCDS</value>
+  </data>
+  <data name="&gt;&gt;ucrInputUserID.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrInputAPIKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>58, 43</value>
+  </data>
+  <data name="ucrInputAPIKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>222, 21</value>
+  </data>
+  <data name="ucrInputAPIKey.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputAPIKey.Name" xml:space="preserve">
+    <value>ucrInputAPIKey</value>
+  </data>
+  <data name="&gt;&gt;ucrInputAPIKey.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputAPIKey.Parent" xml:space="preserve">
+    <value>grpLoginToCDS</value>
+  </data>
+  <data name="&gt;&gt;ucrInputAPIKey.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="lblResolution.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -984,90 +1089,6 @@
   <data name="&gt;&gt;ucrInputFilePath.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ucrInputMinLongitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 15</value>
-  </data>
-  <data name="ucrInputMinLongitude.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 21</value>
-  </data>
-  <data name="ucrInputMinLongitude.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLongitude.Name" xml:space="preserve">
-    <value>ucrInputMinLongitude</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLongitude.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLongitude.Parent" xml:space="preserve">
-    <value>grpLocationSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLongitude.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrInputMinLatitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 45</value>
-  </data>
-  <data name="ucrInputMinLatitude.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 21</value>
-  </data>
-  <data name="ucrInputMinLatitude.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLatitude.Name" xml:space="preserve">
-    <value>ucrInputMinLatitude</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLatitude.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLatitude.Parent" xml:space="preserve">
-    <value>grpLocationSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLatitude.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="ucrInputMaxLongitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>211, 15</value>
-  </data>
-  <data name="ucrInputMaxLongitude.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 21</value>
-  </data>
-  <data name="ucrInputMaxLongitude.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLongitude.Name" xml:space="preserve">
-    <value>ucrInputMaxLongitude</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLongitude.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLongitude.Parent" xml:space="preserve">
-    <value>grpLocationSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLongitude.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="ucrInputMaxLatitude.Location" type="System.Drawing.Point, System.Drawing">
-    <value>211, 45</value>
-  </data>
-  <data name="ucrInputMaxLatitude.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 21</value>
-  </data>
-  <data name="ucrInputMaxLatitude.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLatitude.Name" xml:space="preserve">
-    <value>ucrInputMaxLatitude</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLatitude.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLatitude.Parent" xml:space="preserve">
-    <value>grpLocationSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLatitude.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="ucrChkDoNotImport.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 412</value>
   </data>
@@ -1109,69 +1130,6 @@
   </data>
   <data name="&gt;&gt;ucrInputNewDataFrameName.ZOrder" xml:space="preserve">
     <value>11</value>
-  </data>
-  <data name="ucrDtpToDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>46, 100</value>
-  </data>
-  <data name="ucrDtpToDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 20</value>
-  </data>
-  <data name="ucrDtpToDate.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpToDate.Name" xml:space="preserve">
-    <value>ucrDtpToDate</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpToDate.Type" xml:space="preserve">
-    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpToDate.Parent" xml:space="preserve">
-    <value>grpTimeSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpToDate.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrDtpFromDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>46, 68</value>
-  </data>
-  <data name="ucrDtpFromDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 20</value>
-  </data>
-  <data name="ucrDtpFromDate.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpFromDate.Name" xml:space="preserve">
-    <value>ucrDtpFromDate</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpFromDate.Type" xml:space="preserve">
-    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpFromDate.Parent" xml:space="preserve">
-    <value>grpTimeSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpFromDate.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrPnlRangeSelection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>38, 16</value>
-  </data>
-  <data name="ucrPnlRangeSelection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>223, 42</value>
-  </data>
-  <data name="ucrPnlRangeSelection.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlRangeSelection.Name" xml:space="preserve">
-    <value>ucrPnlRangeSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlRangeSelection.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlRangeSelection.Parent" xml:space="preserve">
-    <value>grpTimeSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlRangeSelection.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
   <data name="ucrInputElement.Location" type="System.Drawing.Point, System.Drawing">
     <value>71, 107</value>
@@ -1236,48 +1194,6 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>15</value>
   </data>
-  <data name="ucrInputUserID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 16</value>
-  </data>
-  <data name="ucrInputUserID.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 21</value>
-  </data>
-  <data name="ucrInputUserID.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUserID.Name" xml:space="preserve">
-    <value>ucrInputUserID</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUserID.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUserID.Parent" xml:space="preserve">
-    <value>grpLoginToCDS</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUserID.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrInputAPIKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>58, 43</value>
-  </data>
-  <data name="ucrInputAPIKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>222, 21</value>
-  </data>
-  <data name="ucrInputAPIKey.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrInputAPIKey.Name" xml:space="preserve">
-    <value>ucrInputAPIKey</value>
-  </data>
-  <data name="&gt;&gt;ucrInputAPIKey.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputAPIKey.Parent" xml:space="preserve">
-    <value>grpLoginToCDS</value>
-  </data>
-  <data name="&gt;&gt;ucrInputAPIKey.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1286,9 +1202,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>428, 534</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
