@@ -63,6 +63,9 @@ Partial Class dlgFitModel
         Me.cmdLog = New System.Windows.Forms.Button()
         Me.cmdTan = New System.Windows.Forms.Button()
         Me.cmdExp = New System.Windows.Forms.Button()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.lblRVType = New System.Windows.Forms.Label()
+        Me.ucrTryModelling = New instat.ucrTry()
         Me.ucrModelName = New instat.ucrSave()
         Me.ucrChkConvertToVariate = New instat.ucrCheck()
         Me.ucrReceiverExpressionFitModel = New instat.ucrReceiverExpression()
@@ -71,7 +74,6 @@ Partial Class dlgFitModel
         Me.ucrReceiverResponseVar = New instat.ucrReceiverSingle()
         Me.ucrSelectorByDataFrameAddRemoveForFitModel = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrTryModelling = New instat.ucrTry()
         Me.grpFirstCalc.SuspendLayout()
         Me.grpSecondCalc.SuspendLayout()
         Me.SuspendLayout()
@@ -234,6 +236,22 @@ Partial Class dlgFitModel
         Me.cmdExp.Name = "cmdExp"
         Me.cmdExp.UseVisualStyleBackColor = True
         '
+        'lblType
+        '
+        Me.lblType.ForeColor = System.Drawing.SystemColors.ControlText
+        resources.ApplyResources(Me.lblType, "lblType")
+        Me.lblType.Name = "lblType"
+        '
+        'lblRVType
+        '
+        resources.ApplyResources(Me.lblRVType, "lblRVType")
+        Me.lblRVType.Name = "lblRVType"
+        '
+        'ucrTryModelling
+        '
+        resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
+        Me.ucrTryModelling.Name = "ucrTryModelling"
+        '
         'ucrModelName
         '
         resources.ApplyResources(Me.ucrModelName, "ucrModelName")
@@ -289,15 +307,12 @@ Partial Class dlgFitModel
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrTryModelling
-        '
-        resources.ApplyResources(Me.ucrTryModelling, "ucrTryModelling")
-        Me.ucrTryModelling.Name = "ucrTryModelling"
-        '
         'dlgFitModel
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblType)
+        Me.Controls.Add(Me.lblRVType)
         Me.Controls.Add(Me.ucrTryModelling)
         Me.Controls.Add(Me.ucrModelName)
         Me.Controls.Add(Me.ucrChkConvertToVariate)
@@ -359,4 +374,6 @@ Partial Class dlgFitModel
     Friend WithEvents ucrChkConvertToVariate As ucrCheck
     Friend WithEvents ucrModelName As ucrSave
     Friend WithEvents ucrTryModelling As ucrTry
+    Friend WithEvents lblType As Label
+    Friend WithEvents lblRVType As Label
 End Class

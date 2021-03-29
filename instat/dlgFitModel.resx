@@ -121,9 +121,13 @@
   <data name="lblResponseVariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblResponseVariable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblResponseVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>244, 28</value>
+    <value>248, 43</value>
   </data>
   <data name="lblResponseVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 13</value>
@@ -144,16 +148,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblResponseVariable.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
+  </data>
+  <data name="cmdModelOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdModelOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 285</value>
+    <value>395, 286</value>
   </data>
   <data name="cmdModelOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 23</value>
   </data>
   <data name="cmdModelOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>14</value>
   </data>
   <data name="cmdModelOptions.Text" xml:space="preserve">
     <value>Model Options</value>
@@ -168,19 +175,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdModelOptions.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="lblModelPreview.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblModelPreview.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblModelPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 295</value>
+    <value>7, 291</value>
   </data>
   <data name="lblModelPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 13</value>
   </data>
   <data name="lblModelPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>12</value>
   </data>
   <data name="lblModelPreview.Text" xml:space="preserve">
     <value>Model Preview:</value>
@@ -195,16 +205,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblModelPreview.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
+  </data>
+  <data name="cmdDisplayOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdDisplayOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>394, 313</value>
+    <value>395, 314</value>
   </data>
   <data name="cmdDisplayOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 23</value>
   </data>
   <data name="cmdDisplayOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="cmdDisplayOptions.Text" xml:space="preserve">
     <value>Display Options</value>
@@ -219,13 +232,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdDisplayOptions.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="lblExplanatoryModel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblExplanatoryModel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblExplanatoryModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 73</value>
+    <value>249, 92</value>
   </data>
   <data name="lblExplanatoryModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>97, 13</value>
@@ -246,15 +262,17 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblExplanatoryModel.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="cmdDiv.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
   </data>
+  <data name="cmdDiv.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdDiv.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 10</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdDiv.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
@@ -281,6 +299,9 @@
   </data>
   <data name="cmdMultiply.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="cmdMultiply.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdMultiply.Location" type="System.Drawing.Point, System.Drawing">
     <value>67, 10</value>
@@ -312,6 +333,9 @@
   <data name="cmdColon.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
   </data>
+  <data name="cmdColon.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdColon.Location" type="System.Drawing.Point, System.Drawing">
     <value>37, 10</value>
   </data>
@@ -341,6 +365,9 @@
   </data>
   <data name="cmdPlus.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
+  </data>
+  <data name="cmdPlus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdPlus.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 10</value>
@@ -372,6 +399,9 @@
   <data name="cmdPower.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
   </data>
+  <data name="cmdPower.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdPower.Location" type="System.Drawing.Point, System.Drawing">
     <value>97, 41</value>
   </data>
@@ -401,6 +431,9 @@
   </data>
   <data name="cmdClosingBracket.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
+  </data>
+  <data name="cmdClosingBracket.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdClosingBracket.Location" type="System.Drawing.Point, System.Drawing">
     <value>67, 41</value>
@@ -432,6 +465,9 @@
   <data name="cmdOpeningBracket.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
+  <data name="cmdOpeningBracket.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdOpeningBracket.Location" type="System.Drawing.Point, System.Drawing">
     <value>37, 41</value>
   </data>
@@ -462,6 +498,9 @@
   <data name="cmdDoubleBracket.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 9.75pt</value>
   </data>
+  <data name="cmdDoubleBracket.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdDoubleBracket.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 41</value>
   </data>
@@ -488,6 +527,9 @@
   </data>
   <data name="&gt;&gt;cmdDoubleBracket.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="cmdClear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdClear.Location" type="System.Drawing.Point, System.Drawing">
     <value>67, 74</value>
@@ -519,6 +561,9 @@
   <data name="cmdZero.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.75pt</value>
   </data>
+  <data name="cmdZero.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdZero.Location" type="System.Drawing.Point, System.Drawing">
     <value>37, 74</value>
   </data>
@@ -549,6 +594,9 @@
   <data name="cmdMinus.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 12pt</value>
   </data>
+  <data name="cmdMinus.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdMinus.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 74</value>
   </data>
@@ -577,7 +625,7 @@
     <value>10</value>
   </data>
   <data name="grpFirstCalc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>244, 125</value>
+    <value>246, 133</value>
   </data>
   <data name="grpFirstCalc.Size" type="System.Drawing.Size, System.Drawing">
     <value>131, 111</value>
@@ -595,7 +643,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpFirstCalc.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
+  </data>
+  <data name="cmdCos.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdCos.Location" type="System.Drawing.Point, System.Drawing">
     <value>62, 10</value>
@@ -624,6 +675,9 @@
   <data name="&gt;&gt;cmdCos.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="cmdSqrt.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdSqrt.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 10</value>
   </data>
@@ -650,6 +704,9 @@
   </data>
   <data name="&gt;&gt;cmdSqrt.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="cmdSin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdSin.Location" type="System.Drawing.Point, System.Drawing">
     <value>62, 42</value>
@@ -678,6 +735,9 @@
   <data name="&gt;&gt;cmdSin.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="cmdLog.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdLog.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 42</value>
   </data>
@@ -705,6 +765,9 @@
   <data name="&gt;&gt;cmdLog.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="cmdTan.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdTan.Location" type="System.Drawing.Point, System.Drawing">
     <value>62, 74</value>
   </data>
@@ -731,6 +794,9 @@
   </data>
   <data name="&gt;&gt;cmdTan.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="cmdExp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="cmdExp.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 74</value>
@@ -760,7 +826,7 @@
     <value>5</value>
   </data>
   <data name="grpSecondCalc.Location" type="System.Drawing.Point, System.Drawing">
-    <value>374, 125</value>
+    <value>376, 133</value>
   </data>
   <data name="grpSecondCalc.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 111</value>
@@ -778,10 +844,85 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpSecondCalc.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
+  </data>
+  <data name="lblType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>136, 199</value>
+  </data>
+  <data name="lblType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 16</value>
+  </data>
+  <data name="lblType.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;lblType.Name" xml:space="preserve">
+    <value>lblType</value>
+  </data>
+  <data name="&gt;&gt;lblType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblType.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblRVType.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblRVType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblRVType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 199</value>
+  </data>
+  <data name="lblRVType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>126, 13</value>
+  </data>
+  <data name="lblRVType.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblRVType.Text" xml:space="preserve">
+    <value>Response Variable Type:</value>
+  </data>
+  <data name="&gt;&gt;lblRVType.Name" xml:space="preserve">
+    <value>lblRVType</value>
+  </data>
+  <data name="&gt;&gt;lblRVType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblRVType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblRVType.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrTryModelling.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 252</value>
+  </data>
+  <data name="ucrTryModelling.Size" type="System.Drawing.Size, System.Drawing">
+    <value>480, 29</value>
+  </data>
+  <data name="ucrTryModelling.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.Name" xml:space="preserve">
+    <value>ucrTryModelling</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.Type" xml:space="preserve">
+    <value>instat.ucrTry, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrTryModelling.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="ucrModelName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 316</value>
+    <value>10, 315</value>
   </data>
   <data name="ucrModelName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -790,7 +931,7 @@
     <value>277, 24</value>
   </data>
   <data name="ucrModelName.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrModelName.Name" xml:space="preserve">
     <value>ucrModelName</value>
@@ -802,10 +943,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrModelName.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>3</value>
   </data>
   <data name="ucrChkConvertToVariate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>378, 43</value>
+    <value>382, 58</value>
   </data>
   <data name="ucrChkConvertToVariate.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
@@ -823,7 +964,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkConvertToVariate.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -832,37 +973,16 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>510, 420</value>
-  </data>
-  <data name="ucrTryModelling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 246</value>
-  </data>
-  <data name="ucrTryModelling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>480, 33</value>
-  </data>
-  <data name="ucrTryModelling.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
-  <data name="&gt;&gt;ucrTryModelling.Name" xml:space="preserve">
-    <value>ucrTryModelling</value>
-  </data>
-  <data name="&gt;&gt;ucrTryModelling.Type" xml:space="preserve">
-    <value>instat.ucrTry, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrTryModelling.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrTryModelling.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>510, 401</value>
   </data>
   <data name="ucrInputModelPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 292</value>
+    <value>89, 287</value>
   </data>
   <data name="ucrInputModelPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>298, 21</value>
+    <value>297, 21</value>
   </data>
   <data name="ucrInputModelPreview.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrInputModelPreview.Name" xml:space="preserve">
     <value>ucrInputModelPreview</value>
@@ -874,16 +994,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputModelPreview.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="ucrFamily.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 199</value>
+    <value>10, 218</value>
   </data>
   <data name="ucrFamily.Size" type="System.Drawing.Size, System.Drawing">
-    <value>207, 43</value>
+    <value>207, 29</value>
   </data>
   <data name="ucrFamily.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrFamily.Name" xml:space="preserve">
     <value>ucrFamily</value>
@@ -895,10 +1015,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFamily.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="ucrReceiverResponseVar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 43</value>
+    <value>247, 58</value>
   </data>
   <data name="ucrReceiverResponseVar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -919,7 +1039,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverResponseVar.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="ucrSelectorByDataFrameAddRemoveForFitModel.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -943,16 +1063,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorByDataFrameAddRemoveForFitModel.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 344</value>
+    <value>10, 343</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -964,7 +1084,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -979,7 +1099,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverExpressionFitModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 89</value>
+    <value>247, 107</value>
   </data>
   <data name="ucrReceiverExpressionFitModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>256, 30</value>
@@ -997,6 +1117,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverExpressionFitModel.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
 </root>

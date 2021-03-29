@@ -479,7 +479,7 @@ DataBook$set("public", "set_metadata_changed", function(data_name = "", new_val)
 } 
 )
 
-DataBook$set("public", "add_columns_to_data", function(data_name, col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column, num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
+DataBook$set("public", "add_columns_to_data", function(data_name, col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column = "", num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
   self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols, require_correct_length = require_correct_length, keep_existing_position = keep_existing_position)
 }
 )
@@ -499,63 +499,88 @@ DataBook$set("public", "get_columns_from_data", function(data_name, col_names, f
 }
 )
 
-DataBook$set("public", "add_object", function(data_name, object, object_name) {
-  if(missing(data_name)) {
-    if(missing(object_name)) object_name = next_default_item("object", names(private$.objects))
-    if(object_name %in% names(private$.objects)) message(paste("An object called", object_name, "already exists. It will be replaced."))
-    private$.objects[[object_name]] <- object
+DataBook$set("public", "add_object", function(data_name, object, object_name, internal = TRUE) {
+  if (internal) {
+    if(missing(data_name)) {
+      if(missing(object_name)) object_name = next_default_item("object", names(private$.objects))
+      if(object_name %in% names(private$.objects)) message(paste("An object called", object_name, "already exists. It will be replaced."))
+      private$.objects[[object_name]] <- object
+    }
+    else self$get_data_objects(data_name)$add_object(object = object, object_name = object_name)
+  } else {
+    if (!exists(".graph_data_book")) self$create_graph_data_book()
+    .graph_data_book$add_object(data_name = data_name, object = object, object_name = object_name, internal = TRUE)
   }
-  else self$get_data_objects(data_name)$add_object(object = object, object_name = object_name)
 }
 ) 
 
-DataBook$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE, print_graph = TRUE, ...) {
-  #TODO implement force_as_list in all cases
-  if(missing(data_name)) {
-    if(!missing(object_name)) {
-      curr_objects = private$.objects[self$get_object_names(data_name = overall_label, type = type)]
-      if(!(object_name %in% names(curr_objects))) stop(object_name, "not found.")
-      else out = curr_objects[[object_name]]
-    }
-    else {
-      out = sapply(self$get_data_objects(as_list = TRUE), function(x) x$get_objects(type = type))
-      if(include_overall) out[[overall_label]] <- private$.objects[self$get_object_names(data_name = overall_label, type = type)]
-      if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
-    }
-    if(!missing(object_name) && length(object_name) == 1) {
-      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot", "openair") %in% class(out)))) return(print(out))
-      else return(out)
-    }
-    else return(out)
+DataBook$set("public", "create_graph_data_book", function() {
+  .graph_data_book <- DataBook$new()
+  df_names <- self$get_data_names()
+  dfs <- vector("list", length(df_names))
+  names(dfs) <- df_names
+  for (i in seq_along(dfs)) {
+    dfs[[i]] <- data.frame()
+  }
+  .graph_data_book$import_data(data_tables = dfs)
+  assign(".graph_data_book", .graph_data_book, envir = .GlobalEnv)
+}
+)
+
+DataBook$set("public", "get_objects", function(data_name, object_name, include_overall = TRUE, as_list = FALSE, type = "", include_empty = FALSE, force_as_list = FALSE, print_graph = TRUE, internal = TRUE, ...) {
+  if (!internal & exists(".graph_data_book")) {
+    out <- .graph_data_book$get_objects(data_name = data_name, object_name = object_name, include_overall = include_overall, as_list = as_list, type = type, include_empty = include_empty, force_as_list = force_as_list, print_graph = print_graph, silent = silent, internal = TRUE, ... = ...)
+    if (!is.null(out)) return(out)
   }
   else {
-    if(data_name == overall_label) {
-      curr_objects = private$.objects[self$get_object_names(data_name = data_name, type = type)]
+    #TODO implement force_as_list in all cases
+    if(missing(data_name)) {
       if(!missing(object_name)) {
+        curr_objects = private$.objects[self$get_object_names(data_name = overall_label, type = type)]
         if(!(object_name %in% names(curr_objects))) stop(object_name, "not found.")
         else out = curr_objects[[object_name]]
       }
-      else out = curr_objects
-    }
-    else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type, force_as_list = force_as_list)
-    if(as_list) {
-      lst = list()
-      lst[[data_name]][[object_name]] <- out
-      return(lst)
+      else {
+        out = sapply(self$get_data_objects(as_list = TRUE), function(x) x$get_objects(type = type))
+        if(include_overall) out[[overall_label]] <- private$.objects[self$get_object_names(data_name = overall_label, type = type)]
+        if(!include_empty) out = out[sapply(out, function(x) length(x) > 0)]
+      }
+      if(!missing(object_name) && length(object_name) == 1) {
+        if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot", "openair", "recordedplot") %in% class(out)))) return(print(out))
+        else return(out)
+      }
+      else return(out)
     }
     else {
-      if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot", "openair") %in% class(out)))) return(print(out))
-      else return(out)
+      if(data_name == overall_label) {
+        curr_objects = private$.objects[self$get_object_names(data_name = data_name, type = type)]
+        if(!missing(object_name)) {
+          if(!(object_name %in% names(curr_objects))) stop(object_name, "not found.")
+          else out = curr_objects[[object_name]]
+        }
+        else out = curr_objects
+      }
+      else out = self$get_data_objects(data_name)$get_objects(object_name = object_name, type = type, force_as_list = force_as_list)
+      if(as_list) {
+        lst = list()
+        lst[[data_name]][[object_name]] <- out
+        return(lst)
+      }
+      else {
+        if(print_graph && (ggplot2::is.ggplot(out) || any(c("gg", "ggmultiplot", "openair", "recordedplot") %in% class(out)))) return(print(out))
+        else return(out)
+      }
     }
   }
 }
 )
 
-DataBook$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
+DataBook$set("public", "get_object_names", function(data_name, include_overall = TRUE, include, exclude, type = "", include_empty = FALSE, as_list = FALSE, excluded_items = c(), internal = TRUE) {
+  if (!internal && exists(".graph_data_book")) return(.graph_data_book$get_object_names(data_name = data_name, include_overall = include_overall, include = include, exclude = exclude, type = type, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = TRUE))
   if(type == "") overall_object_names = names(private$.objects)
   else {
     if(type == model_label) overall_object_names = names(private$.objects)[!sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
-    else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair") %in% class(x)))]
+    else if(type == graph_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair", "recordedplot") %in% class(x)))]
     else if(type == surv_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("Surv") %in% class(x)))]
     else if(type == table_label) overall_object_names = names(private$.objects)[sapply(private$.objects, function(x) any(c("htmlTable") %in% class(x)))]
     else stop("type: ", type, " not recognised")
@@ -658,26 +683,35 @@ DataBook$set("public", "get_from_model", function(data_name, model_name, value1,
 }
 )
 
-DataBook$set("public", "add_graph", function(data_name, graph, graph_name) {
-  self$add_object(data_name = data_name, object = graph, object_name = graph_name)
-  last_graph_name <- self$get_data_objects(data_name)$get_last_graph_name()
-  if(!is.null(last_graph_name)) private$.last_graph <- c(data_name, last_graph_name)
+DataBook$set("public", "add_graph", function(data_name, graph, graph_name, internal = FALSE) {
+  if (internal) {
+    self$add_object(data_name = data_name, object = graph, object_name = graph_name)
+    last_graph_name <- self$get_data_objects(data_name)$get_last_graph_name()
+    if(!is.null(last_graph_name)) private$.last_graph <- c(data_name, last_graph_name)
+  } else {
+    if (!exists(".graph_data_book")) self$create_graph_data_book()
+    .graph_data_book$add_graph(data_name = data_name, graph = graph, graph_name = graph_name, internal = TRUE)
+  }
 }
 )
 
-DataBook$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE, force_as_list = FALSE, print_graph = TRUE) {
-  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label, force_as_list = force_as_list, print_graph = print_graph)
+DataBook$set("public", "get_graphs", function(data_name, graph_name, include_overall = TRUE, force_as_list = FALSE, print_graph = TRUE, internal = FALSE) {
+  self$get_objects(data_name = data_name, object_name = graph_name, include_overall = include_overall, type = graph_label, force_as_list = force_as_list, print_graph = print_graph, internal = internal)
 }
 )
 
-DataBook$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c()) {
-  self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items)
+DataBook$set("public", "get_graph_names", function(data_name, include_overall = TRUE, include, exclude, include_empty = FALSE, as_list = FALSE, excluded_items = c(), internal = FALSE) {
+  if (!internal & exists(".graph_data_book")) .graph_data_book$get_graph_names(data_name = data_name, include_overall = include_overall, include = include, exclude = exclude, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = TRUE)
+  else self$get_object_names(data_name = data_name, include_overall = include_overall, include, exclude, type = graph_label, include_empty = include_empty, as_list = as_list, excluded_items = excluded_items, internal = internal)
 }
 )
 
-DataBook$set("public", "get_last_graph", function(print_graph = TRUE) {
-  if(!is.null(private$.last_graph) && length(private$.last_graph) == 2) {
-    self$get_objects(data_name = private$.last_graph[1], object_name = private$.last_graph[2], type = graph_label, print_graph = print_graph)
+DataBook$set("public", "get_last_graph", function(print_graph = TRUE, internal = FALSE) {
+  if (!internal && exists(".graph_data_book")) .graph_data_book$get_last_graph(print_graph = print_graph, internal = TRUE)
+  else {
+    if(!is.null(private$.last_graph) && length(private$.last_graph) == 2) {
+      self$get_objects(data_name = private$.last_graph[1], object_name = private$.last_graph[2], type = graph_label, print_graph = print_graph)
+    }
   }
 }
 )
@@ -887,12 +921,14 @@ DataBook$set("public", "delete_dataframes", function(data_names) {
     }
     if(!is.null(private$.last_graph) && private$.last_graph[1] %in% data_names) private$.last_graph <- NULL
   }
+  if (exists(".graph_data_book")) .graph_data_book$delete_dataframes(data_names = data_names)
 } 
 )
 
 DataBook$set("public", "remove_link", function(link_name) {
   if(!link_name %in% names(private$.links)) stop(link_name, " not found.")
   private$.links[[link_name]] <- NULL
+  cat("Link removed:", link_name)
 }
 )
 
@@ -925,6 +961,7 @@ DataBook$set("public", "rename_dataframe", function(data_name, new_value = "", l
   data_obj$set_data_changed(TRUE)
   data_obj$set_metadata_changed(TRUE)
   data_obj$set_variables_metadata_changed(TRUE)
+  if (exists(".graph_data_book")) .graph_data_book$rename_dataframe(data_name = data_name, new_value = new_value, label = label)
 }
 )
 
@@ -2448,3 +2485,12 @@ DataBook$set("public", "patch_climate_element", function(data_name, date_col_nam
 DataBook$set("public", "visualize_element_na", function(data_name, element_col_name, element_col_name_imputed, station_col_name, x_axis_labels_col_name, ncol = 2, type = "distribution", xlab = NULL, ylab = NULL, legend = TRUE, orientation = "horizontal", interval_size = interval_size, x_with_truth = NULL, measure = "percent") {
   self$get_data_objects(data_name)$visualize_element_na(element_col_name = element_col_name, element_col_name_imputed = element_col_name_imputed, station_col_name = station_col_name, x_axis_labels_col_name = x_axis_labels_col_name, ncol = ncol, type = type, xlab = xlab, ylab = ylab, legend = legend, orientation = orientation, interval_size = interval_size, x_with_truth = x_with_truth, measure = measure)
 })
+
+DataBook$set("public", "get_data_entry_data", function(data_name, station, date, elements, view_variables, station_name, type, start_date, end_date) {
+  self$get_data_objects(data_name)$get_data_entry_data(station = station, date = date, elements = elements, view_variables = view_variables, station_name = station_name, type = type, start_date = start_date, end_date = end_date)
+})
+
+DataBook$set("public", "save_data_entry_data", function(data_name, new_data, rows_changed) {
+  self$get_data_objects(data_name)$save_data_entry_data(new_data = new_data, rows_changed = rows_changed)
+}
+)

@@ -29,7 +29,7 @@
 
 Imports instat.Translations
 Public Class sdgSaveColumnPosition
-    Private clsDefaultFunction As RFunction
+    Private clsColPosFunction As RFunction
     Public bControlsNotInitialised As Boolean = True
     Public bUserSelected As Boolean = False
     Public bRcodeFlag As Boolean = False
@@ -46,13 +46,6 @@ Public Class sdgSaveColumnPosition
         'For ucrSelector
         ucrSelectorColumns.btnDataOptions.Visible = False
 
-        'For ucrReceiver
-        ucrReceiverColumn.SetParameter(New RParameter("adjacent_column", 1))
-        ucrReceiverColumn.SetParameterIsString()
-        ucrReceiverColumn.Selector = ucrSelectorColumns
-        ucrReceiverColumn.SetMeAsReceiver()
-        ucrReceiverColumn.bUseFilteredData = False
-        ucrReceiverColumn.SetLinkedDisplayControl(lblColumns)
 
         'Panel and radio buttons
         ucrPnlColumnPosition.SetParameter(New RParameter("before"))
@@ -67,31 +60,44 @@ Public Class sdgSaveColumnPosition
         ucrPnlColumnPosition.AddParameterPresentCondition(rdoBefore, "adjacent_column", True)
         ucrPnlColumnPosition.AddParameterPresentCondition(rdoAfter, "adjacent_column", True)
 
+        'For ucrReceiver
+        ucrReceiverColumn.SetParameter(New RParameter("adjacent_column"))
+        ucrReceiverColumn.SetParameterIsString()
+        ucrReceiverColumn.Selector = ucrSelectorColumns
+        ucrReceiverColumn.SetMeAsReceiver()
+        ucrReceiverColumn.bUseFilteredData = False
+        ucrReceiverColumn.SetLinkedDisplayControl(lblColumns)
+
+        'todo. change visibilty to true once this feature is implemented
+        ucrChkKeepExistingPos.Visible = False
+        ucrChkKeepExistingPos.Text = "Keep existing position"
+        ucrChkKeepExistingPos.SetParameter(New RParameter("keep_existing_position"))
+        ucrChkKeepExistingPos.Checked = True
     End Sub
 
-    Public Sub SetUp(clsColPosFunction As RFunction, strDataFrameName As String)
+    Public Sub SetUp(strDataFrameName As String, bInsertColumnBefore As Boolean, strAdjacentColumn As String, bKeepExistingPosition As Boolean)
         If bControlsNotInitialised Then
             InitialiseControl()
             bControlsNotInitialised = False
         End If
 
-        clsDefaultFunction = clsColPosFunction
+        clsColPosFunction = New RFunction
+
+        clsColPosFunction.AddParameter(strParameterName:="before", strParameterValue:=If(bInsertColumnBefore, "TRUE", "FALSE"))
+
+        If Not String.IsNullOrEmpty(strAdjacentColumn) Then
+            clsColPosFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=strAdjacentColumn)
+        End If
+
+        clsColPosFunction.AddParameter(strParameterName:="keep_existing_position", strParameterValue:=If(bKeepExistingPosition, "TRUE", "FALSE"))
 
         bRcodeFlag = True
         ucrSelectorColumns.SetDataframe(strDataFrameName, False)
-        ucrPnlColumnPosition.SetRCode(clsDefaultFunction, True)
-        ucrReceiverColumn.SetRCode(clsDefaultFunction, True)
+        ucrPnlColumnPosition.SetRCode(clsColPosFunction, True)
+        ucrReceiverColumn.SetRCode(clsColPosFunction, True)
+        ucrChkKeepExistingPos.SetRCode(clsColPosFunction, True)
         bRcodeFlag = False
         SetColumnControlsAndParameterState()
-    End Sub
-
-    Public Sub Reset()
-        If bControlsNotInitialised Then
-            InitialiseControl()
-            bControlsNotInitialised = False
-        End If
-        ucrSelectorColumns.Reset()
-        bUserSelected = False
     End Sub
 
     Private Sub Controls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlColumnPosition.ControlValueChanged, ucrReceiverColumn.ControlValueChanged
@@ -104,22 +110,22 @@ Public Class sdgSaveColumnPosition
 
     Private Sub SetColumnControlsAndParameterState()
         If rdoStart.Checked Then
-            clsDefaultFunction.RemoveParameterByName("adjacent_column")
+            clsColPosFunction.RemoveParameterByName("adjacent_column")
             ucrSelectorColumns.Visible = False
             ucrReceiverColumn.Visible = False
             lblColumns.Visible = False
             grpColumnPosition.Text = "New column will be at the: "
         ElseIf rdoEnd.Checked Then
-            clsDefaultFunction.RemoveParameterByName("adjacent_column")
+            clsColPosFunction.RemoveParameterByName("adjacent_column")
             ucrSelectorColumns.Visible = False
             ucrReceiverColumn.Visible = False
             lblColumns.Visible = False
             grpColumnPosition.Text = "New column will be at the: "
         ElseIf rdoBefore.Checked Then
             If Not ucrReceiverColumn.IsEmpty Then
-                clsDefaultFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrReceiverColumn.GetVariableNames())
+                clsColPosFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrReceiverColumn.GetVariableNames())
             Else
-                clsDefaultFunction.RemoveParameterByName("adjacent_column")
+                clsColPosFunction.RemoveParameterByName("adjacent_column")
             End If
             ucrSelectorColumns.Visible = True
             ucrReceiverColumn.Visible = True
@@ -127,9 +133,9 @@ Public Class sdgSaveColumnPosition
             grpColumnPosition.Text = "New column will be: "
         ElseIf rdoAfter.Checked Then
             If Not ucrReceiverColumn.IsEmpty Then
-                clsDefaultFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrReceiverColumn.GetVariableNames())
+                clsColPosFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrReceiverColumn.GetVariableNames())
             Else
-                clsDefaultFunction.RemoveParameterByName("adjacent_column")
+                clsColPosFunction.RemoveParameterByName("adjacent_column")
             End If
             ucrSelectorColumns.Visible = True
             ucrReceiverColumn.Visible = True
@@ -137,5 +143,23 @@ Public Class sdgSaveColumnPosition
             grpColumnPosition.Text = "New column will be: "
         End If
     End Sub
+
+    Public ReadOnly Property InsertColumnBefore() As Boolean
+        Get
+            Return Not IsNothing(clsColPosFunction.GetParameter("before")) AndAlso clsColPosFunction.GetParameter("before").strArgumentValue = "TRUE"
+        End Get
+    End Property
+
+    Public ReadOnly Property AdjacentColumn() As String
+        Get
+            Return If(IsNothing(clsColPosFunction.GetParameter("adjacent_column")), "", clsColPosFunction.GetParameter("adjacent_column").strArgumentValue)
+        End Get
+    End Property
+
+    Public ReadOnly Property KeepExistingPosition() As Boolean
+        Get
+            Return Not IsNothing(clsColPosFunction.GetParameter("keep_existing_position")) AndAlso clsColPosFunction.GetParameter("keep_existing_position").strArgumentValue = "TRUE"
+        End Get
+    End Property
 
 End Class
