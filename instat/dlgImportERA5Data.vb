@@ -83,7 +83,7 @@ Public Class dlgImportERA5Data
 
         ucrChkDoNotImport.SetParameter(New RParameter("import", 8))
         ucrChkDoNotImport.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkDoNotImport.SetText("Don' t import data after downloading")
+        ucrChkDoNotImport.SetText("Don't import data after downloading")
         ucrChkDoNotImport.SetRDefault("TRUE")
 
         ucrInputNewDataFrameName.SetParameter(New RParameter("new_name", 9))
