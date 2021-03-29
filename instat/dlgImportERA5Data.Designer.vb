@@ -280,6 +280,7 @@ Partial Class dlgImportERA5Data
         'lnkCreateAnAccount
         '
         resources.ApplyResources(Me.lnkCreateAnAccount, "lnkCreateAnAccount")
+        Me.lnkCreateAnAccount.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.lnkCreateAnAccount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lnkCreateAnAccount.Cursor = System.Windows.Forms.Cursors.Hand
         Me.lnkCreateAnAccount.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline

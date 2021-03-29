@@ -672,78 +672,6 @@
   <data name="&gt;&gt;lblLongitude.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;ucrInputMinLongitude.Name" xml:space="preserve">
-    <value>ucrInputMinLongitude</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLongitude.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLongitude.Parent" xml:space="preserve">
-    <value>grpLocationSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLongitude.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLatitude.Name" xml:space="preserve">
-    <value>ucrInputMinLatitude</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLatitude.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLatitude.Parent" xml:space="preserve">
-    <value>grpLocationSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMinLatitude.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLongitude.Name" xml:space="preserve">
-    <value>ucrInputMaxLongitude</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLongitude.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLongitude.Parent" xml:space="preserve">
-    <value>grpLocationSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLongitude.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLatitude.Name" xml:space="preserve">
-    <value>ucrInputMaxLatitude</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLatitude.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLatitude.Parent" xml:space="preserve">
-    <value>grpLocationSelection</value>
-  </data>
-  <data name="&gt;&gt;ucrInputMaxLatitude.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="grpLocationSelection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 295</value>
-  </data>
-  <data name="grpLocationSelection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 79</value>
-  </data>
-  <data name="grpLocationSelection.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="grpLocationSelection.Text" xml:space="preserve">
-    <value>Location Selection</value>
-  </data>
-  <data name="&gt;&gt;grpLocationSelection.Name" xml:space="preserve">
-    <value>grpLocationSelection</value>
-  </data>
-  <data name="&gt;&gt;grpLocationSelection.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpLocationSelection.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpLocationSelection.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
   <data name="ucrInputMinLongitude.Location" type="System.Drawing.Point, System.Drawing">
     <value>100, 15</value>
   </data>
@@ -828,6 +756,30 @@
   <data name="&gt;&gt;ucrInputMaxLatitude.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="grpLocationSelection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 295</value>
+  </data>
+  <data name="grpLocationSelection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>297, 79</value>
+  </data>
+  <data name="grpLocationSelection.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="grpLocationSelection.Text" xml:space="preserve">
+    <value>Location Selection</value>
+  </data>
+  <data name="&gt;&gt;grpLocationSelection.Name" xml:space="preserve">
+    <value>grpLocationSelection</value>
+  </data>
+  <data name="&gt;&gt;grpLocationSelection.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLocationSelection.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpLocationSelection.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
   <data name="lblResolutionLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -857,54 +809,6 @@
   </data>
   <data name="&gt;&gt;lblResolutionLabel.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUserID.Name" xml:space="preserve">
-    <value>ucrInputUserID</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUserID.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUserID.Parent" xml:space="preserve">
-    <value>grpLoginToCDS</value>
-  </data>
-  <data name="&gt;&gt;ucrInputUserID.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrInputAPIKey.Name" xml:space="preserve">
-    <value>ucrInputAPIKey</value>
-  </data>
-  <data name="&gt;&gt;ucrInputAPIKey.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputAPIKey.Parent" xml:space="preserve">
-    <value>grpLoginToCDS</value>
-  </data>
-  <data name="&gt;&gt;ucrInputAPIKey.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="grpLoginToCDS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 9</value>
-  </data>
-  <data name="grpLoginToCDS.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 67</value>
-  </data>
-  <data name="grpLoginToCDS.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="grpLoginToCDS.Text" xml:space="preserve">
-    <value>Login to CDS</value>
-  </data>
-  <data name="&gt;&gt;grpLoginToCDS.Name" xml:space="preserve">
-    <value>grpLoginToCDS</value>
-  </data>
-  <data name="&gt;&gt;grpLoginToCDS.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpLoginToCDS.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpLoginToCDS.ZOrder" xml:space="preserve">
-    <value>16</value>
   </data>
   <data name="ucrInputUserID.Location" type="System.Drawing.Point, System.Drawing">
     <value>59, 16</value>
@@ -947,6 +851,30 @@
   </data>
   <data name="&gt;&gt;ucrInputAPIKey.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="grpLoginToCDS.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 9</value>
+  </data>
+  <data name="grpLoginToCDS.Size" type="System.Drawing.Size, System.Drawing">
+    <value>296, 67</value>
+  </data>
+  <data name="grpLoginToCDS.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpLoginToCDS.Text" xml:space="preserve">
+    <value>Login to CDS</value>
+  </data>
+  <data name="&gt;&gt;grpLoginToCDS.Name" xml:space="preserve">
+    <value>grpLoginToCDS</value>
+  </data>
+  <data name="&gt;&gt;grpLoginToCDS.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpLoginToCDS.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpLoginToCDS.ZOrder" xml:space="preserve">
+    <value>16</value>
   </data>
   <data name="lblResolution.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
