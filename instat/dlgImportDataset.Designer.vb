@@ -109,6 +109,11 @@ Partial Class dlgImportDataset
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveFile = New instat.ucrSave()
+        Me.rdoDetect = New System.Windows.Forms.RadioButton()
+        Me.rdoCount = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlStringHandling = New instat.UcrPanel()
+        Me.cboFileType = New System.Windows.Forms.ComboBox()
+        Me.lblFileExtension = New System.Windows.Forms.Label()
         Me.grpCSV.SuspendLayout()
         Me.grpExcel.SuspendLayout()
         Me.grpRDS.SuspendLayout()
@@ -635,10 +640,53 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrSaveFile, "ucrSaveFile")
         Me.ucrSaveFile.Name = "ucrSaveFile"
         '
+        'rdoDetect
+        '
+        resources.ApplyResources(Me.rdoDetect, "rdoDetect")
+        Me.rdoDetect.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDetect.FlatAppearance.BorderSize = 2
+        Me.rdoDetect.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDetect.Name = "rdoDetect"
+        Me.rdoDetect.TabStop = True
+        Me.rdoDetect.UseVisualStyleBackColor = True
+        '
+        'rdoCount
+        '
+        resources.ApplyResources(Me.rdoCount, "rdoCount")
+        Me.rdoCount.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCount.FlatAppearance.BorderSize = 2
+        Me.rdoCount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoCount.Name = "rdoCount"
+        Me.rdoCount.TabStop = True
+        Me.rdoCount.UseVisualStyleBackColor = True
+        '
+        'ucrPnlStringHandling
+        '
+        resources.ApplyResources(Me.ucrPnlStringHandling, "ucrPnlStringHandling")
+        Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
+        '
+        'cboFileType
+        '
+        Me.cboFileType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboFileType.FormattingEnabled = True
+        Me.cboFileType.Items.AddRange(New Object() {resources.GetString("cboFileType.Items"), resources.GetString("cboFileType.Items1"), resources.GetString("cboFileType.Items2"), resources.GetString("cboFileType.Items3"), resources.GetString("cboFileType.Items4"), resources.GetString("cboFileType.Items5"), resources.GetString("cboFileType.Items6"), resources.GetString("cboFileType.Items7"), resources.GetString("cboFileType.Items8"), resources.GetString("cboFileType.Items9"), resources.GetString("cboFileType.Items10"), resources.GetString("cboFileType.Items11"), resources.GetString("cboFileType.Items12"), resources.GetString("cboFileType.Items13"), resources.GetString("cboFileType.Items14"), resources.GetString("cboFileType.Items15"), resources.GetString("cboFileType.Items16")})
+        resources.ApplyResources(Me.cboFileType, "cboFileType")
+        Me.cboFileType.Name = "cboFileType"
+        '
+        'lblFileExtension
+        '
+        resources.ApplyResources(Me.lblFileExtension, "lblFileExtension")
+        Me.lblFileExtension.Name = "lblFileExtension"
+        '
         'dlgImportDataset
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cboFileType)
+        Me.Controls.Add(Me.lblFileExtension)
+        Me.Controls.Add(Me.rdoDetect)
+        Me.Controls.Add(Me.rdoCount)
+        Me.Controls.Add(Me.ucrPnlStringHandling)
         Me.Controls.Add(Me.ucrSaveFile)
         Me.Controls.Add(Me.lblImportingSheets)
         Me.Controls.Add(Me.ucrChkSheetsCheckAll)
@@ -752,4 +800,9 @@ Partial Class dlgImportDataset
     Friend WithEvents ucrInputTextTo As ucrInputTextBox
     Friend WithEvents ucrInputTextFrom As ucrInputTextBox
     Friend WithEvents ucrSaveFile As ucrSave
+    Friend WithEvents rdoDetect As RadioButton
+    Friend WithEvents rdoCount As RadioButton
+    Friend WithEvents ucrPnlStringHandling As UcrPanel
+    Friend WithEvents cboFileType As ComboBox
+    Friend WithEvents lblFileExtension As Label
 End Class
