@@ -95,6 +95,8 @@ Public Class dlgImportERA5Data
 
         ucrInputAPIKey.SetParameter(New RParameter("key", 1))
 
+        ucrChkDoNotImport.AddToLinkedControls(ucrInputNewDataFrameName, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputNewDataFrameName.SetLinkedDisplayControl(lblNewDataFrameName)
         'user <- ecmwfr::wf_set_key(user = "xxx",
         '                   key = "xxx",
         '                   service = "cds")
