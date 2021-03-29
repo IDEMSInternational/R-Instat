@@ -99,14 +99,6 @@ Public Class dlgImportERA5Data
 
         ucrChkDoNotImport.AddToLinkedControls(ucrInputNewDataFrameName, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputNewDataFrameName.SetLinkedDisplayControl(lblNewDataFrameName)
-        'user <- ecmwfr::wf_set_key(user = "xxx",
-        '                   key = "xxx",
-        '                   service = "cds")
-
-        'data_book$import_from_cds(user = user, DataSet = "reanalysis-era5-single-levels",
-        '                          elements = "total_precipitation", start_date = as.Date("1999/1/1"),
-        '                          end_date = as.Date("1999/1/31"), lon = c(20, 20.3), lat = c(50, 50.3), 
-        '                          path = "C:/Users/Danny/Downloads")
     End Sub
 
     Private Sub SetDefaults()
@@ -119,10 +111,6 @@ Public Class dlgImportERA5Data
         clsWfsetkeyFunction.SetRCommand("wf_set_key")
         clsWfsetkeyFunction.AddParameter("service", Chr(34) & "cds" & Chr(34), iPosition:=2)
         clsWfsetkeyFunction.SetAssignTo("user")
-
-        'temporary
-        clsWfsetkeyFunction.AddParameter("user", Chr(34) & "18864" & Chr(34), iPosition:=0)
-        clsWfsetkeyFunction.AddParameter("key", Chr(34) & "b2a6cecb-27b0-4bcf-8b30-e7dbc48230e1" & Chr(34), iPosition:=1)
 
         clsImportFromCDSFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_from_cds")
         clsImportFromCDSFunction.AddParameter("user", clsRFunctionParameter:=clsWfsetkeyFunction, iPosition:=0)
