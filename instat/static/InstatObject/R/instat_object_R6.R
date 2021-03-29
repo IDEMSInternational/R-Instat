@@ -2495,7 +2495,7 @@ DataBook$set("public", "save_data_entry_data", function(data_name, new_data, row
 }
 )
 
-DataBook$set("public", "import_from_cds", function(user, dataset, elements, start_date, end_date, lon, lat, path, import = TRUE, new_name) {
+DataBook$set("public", "import_from_cds", function(user, dataset, elements, start_date, end_date, lon, lat, path, import = FALSE, new_name) {
   all_dates <- seq(start_date, end_date, by = 1)
   all_periods <- unique(paste(lubridate::year(all_dates), sprintf("%02d", lubridate::month(all_dates)), sep = "-"))
   all_days <- c("01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31")
