@@ -154,7 +154,7 @@ Public Class dlgImportERA5Data
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrInputUserID.IsEmpty OrElse ucrInputAPIKey.IsEmpty OrElse ucrInputMinLongitude.IsEmpty OrElse ucrInputMaxLongitude.IsEmpty OrElse ucrInputMinLatitude.IsEmpty OrElse ucrInputMaxLatitude.IsEmpty OrElse ucrInputFilePath.IsEmpty OrElse ucrInputNewDataFrameName.IsEmpty Then
+        If ucrInputUserID.IsEmpty OrElse ucrInputAPIKey.IsEmpty OrElse ucrInputMinLongitude.IsEmpty OrElse ucrInputMaxLongitude.IsEmpty OrElse ucrInputMinLatitude.IsEmpty OrElse ucrInputMaxLatitude.IsEmpty OrElse ucrInputFilePath.IsEmpty OrElse (Not ucrChkDoNotImport.Checked AndAlso ucrInputNewDataFrameName.IsEmpty) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -194,7 +194,7 @@ Public Class dlgImportERA5Data
         SetNewDataFrameName()
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputUserID.ControlContentsChanged, ucrInputAPIKey.ControlContentsChanged, ucrInputMinLongitude.ControlContentsChanged, ucrInputMaxLongitude.ControlContentsChanged, ucrInputMinLatitude.ControlContentsChanged, ucrInputMaxLatitude.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged
+    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputUserID.ControlContentsChanged, ucrInputAPIKey.ControlContentsChanged, ucrInputMinLongitude.ControlContentsChanged, ucrInputMaxLongitude.ControlContentsChanged, ucrInputMinLatitude.ControlContentsChanged, ucrInputMaxLatitude.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged, ucrChkDoNotImport.ControlContentsChanged
         TestOkEnabled()
     End Sub
 End Class
