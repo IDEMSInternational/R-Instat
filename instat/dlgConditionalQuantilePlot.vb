@@ -19,7 +19,7 @@ Public Class dlgConditionalQuantilePlot
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private iDialogHeight As Integer
-    Private iBaseMaxY
+    Private iBaseMaxY As Integer
     Private clsConditionalQuantileFunction As New RFunction
     Private clsConditionalEvalFunction As New RFunction
     Private Sub dlgConditionalQuantilePlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
