@@ -161,7 +161,11 @@ Public Class dlgImportERA5Data
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If ucrInputUserID.IsEmpty OrElse ucrInputAPIKey.IsEmpty OrElse ucrInputMinLongitude.IsEmpty OrElse ucrInputMaxLongitude.IsEmpty OrElse ucrInputMinLatitude.IsEmpty OrElse ucrInputMaxLatitude.IsEmpty OrElse ucrInputFilePath.IsEmpty OrElse ucrInputNewDataFrameName.IsEmpty Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -184,6 +188,10 @@ Public Class dlgImportERA5Data
     End Sub
 
     Private Sub lnkCreateAnAccount_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkCreateAnAccount.LinkClicked
-        Process.Start("https://cds.climate.copernicus.eu/user/register")
+        Process.Start("https://cds.climate.copernicus.eu/user/login")
+    End Sub
+
+    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputUserID.ControlContentsChanged, ucrInputAPIKey.ControlContentsChanged, ucrInputMinLongitude.ControlContentsChanged, ucrInputMaxLongitude.ControlContentsChanged, ucrInputMinLatitude.ControlContentsChanged, ucrInputMaxLatitude.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
