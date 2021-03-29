@@ -78,8 +78,10 @@ Public Class dlgImportERA5Data
         ucrInputElement.SetDropDownStyleAsNonEditable()
 
         ucrDtpStartDate.SetParameter(New RParameter("start_date", 3))
+        ucrDtpStartDate.MinDate = New Date(1979, 1, 1)
 
         ucrDtpEndDate.SetParameter(New RParameter("end_date", 4))
+        ucrDtpEndDate.MinDate = New Date(1979, 1, 1)
 
         ucrChkDoNotImport.SetParameter(New RParameter("import", 8))
         ucrChkDoNotImport.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -140,8 +142,6 @@ Public Class dlgImportERA5Data
         clsConcLatFunction.AddParameter("min_lat", 50, bIncludeArgumentName:=False, iPosition:=0)
         clsConcLatFunction.AddParameter("max_lat", 50.3, bIncludeArgumentName:=False, iPosition:=1)
 
-        ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsWfsetkeyFunction)
         ucrBase.clsRsyntax.SetBaseRFunction(clsImportFromCDSFunction)
     End Sub
 
