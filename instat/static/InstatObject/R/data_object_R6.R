@@ -493,7 +493,7 @@ DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, exclu
 }
 )
 
-DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column, num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
+DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column = "", num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
@@ -531,7 +531,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
   
   replaced <- FALSE
   previous_length = self$get_column_count()
-  if(!missing(adjacent_column) && !adjacent_column %in% self$get_column_names()) stop(adjacent_column, "not found in the data")
+  if(adjacent_column != "" && !adjacent_column %in% self$get_column_names()) stop(adjacent_column, "not found in the data")
  
   new_col_names <- c()
   for(i in 1:num_cols) {
@@ -561,14 +561,14 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
   
   # If replacing existing columns and not repositioning them, or before and adjacent_column column positioning parameters are missing
   # then do not reposition.
-  if((replaced && keep_existing_position) || (missing(before) && missing(adjacent_column))) return()
+  if((replaced && keep_existing_position) || (missing(before) && adjacent_column == "")) return()
 
   # Get the adjacent position to be used in appending the new column names
   if(before) {
-    if(missing(adjacent_column)) adjacent_position <- 0
+    if(adjacent_column == "") adjacent_position <- 0
     else adjacent_position <- which(self$get_column_names() == adjacent_column) - 1
   } else {
-      if(missing(adjacent_column)) adjacent_position <- self$get_column_count()
+      if(adjacent_column == "") adjacent_position <- self$get_column_count()
       else adjacent_position <- which(self$get_column_names() == adjacent_column)
   }
 
