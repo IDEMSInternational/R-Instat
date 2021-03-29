@@ -2506,7 +2506,7 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
   for (i in seq_along(all_periods)) {
     y <- substr(all_periods[i], 1, 4)
     m <- substr(all_periods[i], 6, 7)
-    curr_dates <- all_dates[month(all_dates) == as.numeric(m) & year(all_dates) == as.numeric(y)]
+    curr_dates <- all_dates[lubridate::month(all_dates) == as.numeric(m) & lubridate::year(all_dates) == as.numeric(y)]
     d <- sprintf("%02d", lubridate::day(curr_dates))
     request <- list(
       dataset_short_name = dataset,
