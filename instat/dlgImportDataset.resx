@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblTextFilePreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 101</value>
+    <value>264, 122</value>
   </data>
   <data name="lblTextFilePreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 13</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 282</value>
+    <value>264, 303</value>
   </data>
   <data name="lblDataFrame.Size" type="System.Drawing.Size, System.Drawing">
     <value>106, 13</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblEncodingCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 76</value>
+    <value>3, 97</value>
   </data>
   <data name="lblEncodingCSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
@@ -217,7 +217,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblHeadersCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 107</value>
+    <value>3, 128</value>
   </data>
   <data name="lblHeadersCSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>143, 13</value>
@@ -247,7 +247,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSeparatorCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 138</value>
+    <value>3, 159</value>
   </data>
   <data name="lblSeparatorCSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -277,7 +277,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDecimalCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 169</value>
+    <value>3, 190</value>
   </data>
   <data name="lblDecimalCSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 13</value>
@@ -301,7 +301,7 @@
     <value>14</value>
   </data>
   <data name="txtTextFilePreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 118</value>
+    <value>267, 139</value>
   </data>
   <data name="txtTextFilePreview.Multiline" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -328,7 +328,7 @@
     <value>28</value>
   </data>
   <data name="grdDataPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 303</value>
+    <value>267, 324</value>
   </data>
   <data name="grdDataPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>338, 153</value>
@@ -382,7 +382,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLinesToSkipCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 261</value>
+    <value>3, 282</value>
   </data>
   <data name="lblLinesToSkipCSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
@@ -433,7 +433,7 @@
     <value>24</value>
   </data>
   <data name="ucrNudMaxRowsCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 289</value>
+    <value>158, 310</value>
   </data>
   <data name="ucrNudMaxRowsCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -457,7 +457,7 @@
     <value>0</value>
   </data>
   <data name="ucrChkMaxRowsCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 289</value>
+    <value>4, 310</value>
   </data>
   <data name="ucrChkMaxRowsCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -487,7 +487,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNAStringsCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 200</value>
+    <value>3, 221</value>
   </data>
   <data name="lblNAStringsCSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 13</value>
@@ -511,7 +511,7 @@
     <value>2</value>
   </data>
   <data name="ucrChkStringsAsFactorsCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 232</value>
+    <value>4, 253</value>
   </data>
   <data name="ucrChkStringsAsFactorsCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -535,7 +535,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudRowsToSkipCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 259</value>
+    <value>111, 280</value>
   </data>
   <data name="ucrNudRowsToSkipCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -559,7 +559,7 @@
     <value>4</value>
   </data>
   <data name="ucrInputHeadersCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>147, 104</value>
+    <value>147, 125</value>
   </data>
   <data name="ucrInputHeadersCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -583,7 +583,7 @@
     <value>5</value>
   </data>
   <data name="ucrInputMissingValueStringCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 197</value>
+    <value>111, 218</value>
   </data>
   <data name="ucrInputMissingValueStringCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -607,7 +607,7 @@
     <value>6</value>
   </data>
   <data name="ucrInputDecimalCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 167</value>
+    <value>71, 188</value>
   </data>
   <data name="ucrInputDecimalCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -631,7 +631,7 @@
     <value>7</value>
   </data>
   <data name="ucrInputSeparatorCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 135</value>
+    <value>71, 156</value>
   </data>
   <data name="ucrInputSeparatorCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -655,7 +655,7 @@
     <value>8</value>
   </data>
   <data name="ucrInputEncodingCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 72</value>
+    <value>71, 93</value>
   </data>
   <data name="ucrInputEncodingCSV.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -679,7 +679,7 @@
     <value>9</value>
   </data>
   <data name="grpCSV.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 151</value>
+    <value>9, 172</value>
   </data>
   <data name="grpCSV.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 268</value>
@@ -712,7 +712,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 220</value>
+    <value>107, 241</value>
   </data>
   <data name="lblTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>23, 13</value>
@@ -736,7 +736,7 @@
     <value>0</value>
   </data>
   <data name="ucrChkRange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 191</value>
+    <value>8, 212</value>
   </data>
   <data name="ucrChkRange.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -766,7 +766,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 220</value>
+    <value>7, 241</value>
   </data>
   <data name="lblFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
@@ -790,7 +790,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputTextTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 236</value>
+    <value>109, 257</value>
   </data>
   <data name="ucrInputTextTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 20</value>
@@ -811,7 +811,7 @@
     <value>3</value>
   </data>
   <data name="ucrInputTextFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 235</value>
+    <value>8, 256</value>
   </data>
   <data name="ucrInputTextFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 20</value>
@@ -832,7 +832,7 @@
     <value>4</value>
   </data>
   <data name="ucrNudMaxRowsExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 266</value>
+    <value>168, 287</value>
   </data>
   <data name="ucrNudMaxRowsExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -856,7 +856,7 @@
     <value>5</value>
   </data>
   <data name="ucrChkColumnNamesExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 104</value>
+    <value>8, 125</value>
   </data>
   <data name="ucrChkColumnNamesExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -880,7 +880,7 @@
     <value>6</value>
   </data>
   <data name="ucrChkMaxRowsExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 266</value>
+    <value>8, 287</value>
   </data>
   <data name="ucrChkMaxRowsExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -904,7 +904,7 @@
     <value>7</value>
   </data>
   <data name="ucrChkTrimWSExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 134</value>
+    <value>8, 155</value>
   </data>
   <data name="ucrChkTrimWSExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -928,7 +928,7 @@
     <value>8</value>
   </data>
   <data name="ucrNudRowsToSkipExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 162</value>
+    <value>109, 183</value>
   </data>
   <data name="ucrNudRowsToSkipExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -958,7 +958,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMissingValueStringExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 81</value>
+    <value>2, 102</value>
   </data>
   <data name="lblMissingValueStringExcel.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 13</value>
@@ -982,7 +982,7 @@
     <value>10</value>
   </data>
   <data name="ucrInputMissingValueStringExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 77</value>
+    <value>109, 98</value>
   </data>
   <data name="ucrInputMissingValueStringExcel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1006,7 +1006,7 @@
     <value>11</value>
   </data>
   <data name="ucrInputNamedRegions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 77</value>
+    <value>109, 98</value>
   </data>
   <data name="ucrInputNamedRegions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1036,7 +1036,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblNamedRegion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>7, 81</value>
+    <value>7, 102</value>
   </data>
   <data name="lblNamedRegion.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -1066,7 +1066,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblRowToSkipExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 165</value>
+    <value>3, 186</value>
   </data>
   <data name="lblRowToSkipExcel.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 13</value>
@@ -1090,7 +1090,7 @@
     <value>14</value>
   </data>
   <data name="grpExcel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 102</value>
+    <value>9, 123</value>
   </data>
   <data name="grpExcel.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 241</value>
@@ -1117,7 +1117,7 @@
     <value>18</value>
   </data>
   <data name="ucrChkOverwriteRDS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 227</value>
+    <value>8, 248</value>
   </data>
   <data name="ucrChkOverwriteRDS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1141,7 +1141,7 @@
     <value>0</value>
   </data>
   <data name="ucrChkImportObjectsRDS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 123</value>
+    <value>8, 144</value>
   </data>
   <data name="ucrChkImportObjectsRDS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1165,7 +1165,7 @@
     <value>1</value>
   </data>
   <data name="ucrChkImportCalculationsRDS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 175</value>
+    <value>8, 196</value>
   </data>
   <data name="ucrChkImportCalculationsRDS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1189,7 +1189,7 @@
     <value>2</value>
   </data>
   <data name="ucrChkImportChangesLogRDS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 201</value>
+    <value>8, 222</value>
   </data>
   <data name="ucrChkImportChangesLogRDS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1213,7 +1213,7 @@
     <value>3</value>
   </data>
   <data name="ucrChkImportFiltersRDS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 149</value>
+    <value>8, 170</value>
   </data>
   <data name="ucrChkImportFiltersRDS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1237,7 +1237,7 @@
     <value>4</value>
   </data>
   <data name="ucrChkImportMetadataRDS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 97</value>
+    <value>8, 118</value>
   </data>
   <data name="ucrChkImportMetadataRDS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1261,7 +1261,7 @@
     <value>5</value>
   </data>
   <data name="ucrChkKeepExistingDataRDS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 73</value>
+    <value>8, 94</value>
   </data>
   <data name="ucrChkKeepExistingDataRDS.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1285,7 +1285,7 @@
     <value>6</value>
   </data>
   <data name="grpRDS.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 102</value>
+    <value>9, 123</value>
   </data>
   <data name="grpRDS.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 218</value>
@@ -1321,7 +1321,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCannotImport.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 341</value>
+    <value>253, 362</value>
   </data>
   <data name="lblCannotImport.Size" type="System.Drawing.Size, System.Drawing">
     <value>366, 36</value>
@@ -1361,7 +1361,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="lblNoPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 342</value>
+    <value>286, 363</value>
   </data>
   <data name="lblNoPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>302, 18</value>
@@ -1397,7 +1397,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="lblLinesToPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>467, 282</value>
+    <value>467, 303</value>
   </data>
   <data name="lblLinesToPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -1424,7 +1424,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="cmdRefreshPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>511, 464</value>
+    <value>511, 485</value>
   </data>
   <data name="cmdRefreshPreview.Size" type="System.Drawing.Size, System.Drawing">
     <value>94, 23</value>
@@ -1448,7 +1448,7 @@ Modify options or select a different file.</value>
     <value>14</value>
   </data>
   <data name="ucrNudMaxRowsText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 156</value>
+    <value>168, 177</value>
   </data>
   <data name="ucrNudMaxRowsText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1472,7 +1472,7 @@ Modify options or select a different file.</value>
     <value>0</value>
   </data>
   <data name="ucrChkMaxRowsText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 156</value>
+    <value>8, 177</value>
   </data>
   <data name="ucrChkMaxRowsText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1496,7 +1496,7 @@ Modify options or select a different file.</value>
     <value>1</value>
   </data>
   <data name="ucrChkColumnNamesText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 73</value>
+    <value>8, 94</value>
   </data>
   <data name="ucrChkColumnNamesText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1526,7 +1526,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="lblMissingValueStringText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 99</value>
+    <value>4, 120</value>
   </data>
   <data name="lblMissingValueStringText.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 13</value>
@@ -1550,7 +1550,7 @@ Modify options or select a different file.</value>
     <value>3</value>
   </data>
   <data name="ucrNudRowsToSkipText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 126</value>
+    <value>118, 147</value>
   </data>
   <data name="ucrNudRowsToSkipText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1574,7 +1574,7 @@ Modify options or select a different file.</value>
     <value>4</value>
   </data>
   <data name="ucrInputMissingValueStringText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 96</value>
+    <value>118, 117</value>
   </data>
   <data name="ucrInputMissingValueStringText.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1604,7 +1604,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="lblLinesToSkipText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 131</value>
+    <value>4, 152</value>
   </data>
   <data name="lblLinesToSkipText.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
@@ -1628,7 +1628,7 @@ Modify options or select a different file.</value>
     <value>6</value>
   </data>
   <data name="grpText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 151</value>
+    <value>9, 172</value>
   </data>
   <data name="grpText.Size" type="System.Drawing.Size, System.Drawing">
     <value>239, 132</value>
@@ -1664,7 +1664,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="rdoSeparatortext.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 102</value>
+    <value>9, 123</value>
   </data>
   <data name="rdoSeparatortext.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 40</value>
@@ -1700,7 +1700,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="rdoFixedWidthText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 102</value>
+    <value>88, 123</value>
   </data>
   <data name="rdoFixedWidthText.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 40</value>
@@ -1736,7 +1736,7 @@ Modify options or select a different file.</value>
     <value>NoControl</value>
   </data>
   <data name="rdoFixedWidthWhiteSpacesText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>167, 102</value>
+    <value>167, 123</value>
   </data>
   <data name="rdoFixedWidthWhiteSpacesText.Size" type="System.Drawing.Size, System.Drawing">
     <value>81, 40</value>
@@ -1767,7 +1767,7 @@ white spaces</value>
     <value>True</value>
   </data>
   <data name="clbSheets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 146</value>
+    <value>267, 167</value>
   </data>
   <data name="clbSheets.Size" type="System.Drawing.Size, System.Drawing">
     <value>255, 124</value>
@@ -1794,7 +1794,7 @@ white spaces</value>
     <value>NoControl</value>
   </data>
   <data name="lblSelectSheets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 102</value>
+    <value>267, 123</value>
   </data>
   <data name="lblSelectSheets.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
@@ -1824,7 +1824,7 @@ white spaces</value>
     <value>NoControl</value>
   </data>
   <data name="lblImportingSheets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 315</value>
+    <value>267, 336</value>
   </data>
   <data name="lblImportingSheets.Size" type="System.Drawing.Size, System.Drawing">
     <value>338, 114</value>
@@ -1851,7 +1851,7 @@ white spaces</value>
     <value>6</value>
   </data>
   <data name="ucrChkSheetsCheckAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>270, 118</value>
+    <value>270, 139</value>
   </data>
   <data name="ucrChkSheetsCheckAll.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1875,7 +1875,7 @@ white spaces</value>
     <value>7</value>
   </data>
   <data name="ucrNudPreviewLines.Location" type="System.Drawing.Point, System.Drawing">
-    <value>555, 279</value>
+    <value>555, 300</value>
   </data>
   <data name="ucrNudPreviewLines.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1899,7 +1899,7 @@ white spaces</value>
     <value>16</value>
   </data>
   <data name="ucrPanelFixedWidthText.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 99</value>
+    <value>5, 120</value>
   </data>
   <data name="ucrPanelFixedWidthText.Size" type="System.Drawing.Size, System.Drawing">
     <value>253, 45</value>
@@ -1947,7 +1947,7 @@ white spaces</value>
     <value>22</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 497</value>
+    <value>9, 518</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1971,7 +1971,7 @@ white spaces</value>
     <value>27</value>
   </data>
   <data name="ucrSaveFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 464</value>
+    <value>9, 485</value>
   </data>
   <data name="ucrSaveFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -1994,97 +1994,97 @@ white spaces</value>
   <data name="&gt;&gt;ucrSaveFile.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="rdoDetect.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+  <data name="rdMultipleFiles.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
-  <data name="rdoDetect.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="rdMultipleFiles.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="rdoDetect.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdMultipleFiles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdoDetect.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdMultipleFiles.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 6</value>
   </data>
-  <data name="rdoDetect.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdMultipleFiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 27</value>
   </data>
-  <data name="rdoDetect.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdMultipleFiles.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
-  <data name="rdoDetect.Text" xml:space="preserve">
-    <value>Detect</value>
+  <data name="rdMultipleFiles.Text" xml:space="preserve">
+    <value>Multiple Files</value>
   </data>
-  <data name="rdoDetect.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="rdMultipleFiles.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;rdoDetect.Name" xml:space="preserve">
-    <value>rdoDetect</value>
+  <data name="&gt;&gt;rdMultipleFiles.Name" xml:space="preserve">
+    <value>rdMultipleFiles</value>
   </data>
-  <data name="&gt;&gt;rdoDetect.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdMultipleFiles.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoDetect.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdMultipleFiles.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rdoDetect.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdMultipleFiles.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="rdoCount.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+  <data name="rdSingleFile.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
-  <data name="rdoCount.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="rdSingleFile.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="rdoCount.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdSingleFile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdoCount.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdSingleFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>212, 6</value>
   </data>
-  <data name="rdoCount.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdSingleFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 27</value>
   </data>
-  <data name="rdoCount.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdSingleFile.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
-  <data name="rdoCount.Text" xml:space="preserve">
-    <value> Word Count</value>
+  <data name="rdSingleFile.Text" xml:space="preserve">
+    <value>Single File</value>
   </data>
-  <data name="rdoCount.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="rdSingleFile.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;rdoCount.Name" xml:space="preserve">
-    <value>rdoCount</value>
+  <data name="&gt;&gt;rdSingleFile.Name" xml:space="preserve">
+    <value>rdSingleFile</value>
   </data>
-  <data name="&gt;&gt;rdoCount.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdSingleFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoCount.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdSingleFile.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rdoCount.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdSingleFile.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrPnlStringHandling.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrPnlFiles.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 5</value>
   </data>
-  <data name="ucrPnlStringHandling.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrPnlFiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>594, 30</value>
   </data>
-  <data name="ucrPnlStringHandling.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrPnlFiles.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="&gt;&gt;ucrPnlStringHandling.Name" xml:space="preserve">
-    <value>ucrPnlStringHandling</value>
+  <data name="&gt;&gt;ucrPnlFiles.Name" xml:space="preserve">
+    <value>ucrPnlFiles</value>
   </data>
-  <data name="&gt;&gt;ucrPnlStringHandling.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrPnlFiles.Type" xml:space="preserve">
     <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrPnlStringHandling.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrPnlFiles.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrPnlStringHandling.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrPnlFiles.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="cboFileType.Items" xml:space="preserve">
@@ -2199,7 +2199,7 @@ white spaces</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>617, 626</value>
+    <value>617, 617</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

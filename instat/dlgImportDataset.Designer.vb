@@ -109,9 +109,9 @@ Partial Class dlgImportDataset
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveFile = New instat.ucrSave()
-        Me.rdoDetect = New System.Windows.Forms.RadioButton()
-        Me.rdoCount = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlStringHandling = New instat.UcrPanel()
+        Me.rdMultipleFiles = New System.Windows.Forms.RadioButton()
+        Me.rdSingleFile = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlFiles = New instat.UcrPanel()
         Me.cboFileType = New System.Windows.Forms.ComboBox()
         Me.lblFileExtension = New System.Windows.Forms.Label()
         Me.grpCSV.SuspendLayout()
@@ -640,30 +640,30 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrSaveFile, "ucrSaveFile")
         Me.ucrSaveFile.Name = "ucrSaveFile"
         '
-        'rdoDetect
+        'rdMultipleFiles
         '
-        resources.ApplyResources(Me.rdoDetect, "rdoDetect")
-        Me.rdoDetect.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDetect.FlatAppearance.BorderSize = 2
-        Me.rdoDetect.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDetect.Name = "rdoDetect"
-        Me.rdoDetect.TabStop = True
-        Me.rdoDetect.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdMultipleFiles, "rdMultipleFiles")
+        Me.rdMultipleFiles.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdMultipleFiles.FlatAppearance.BorderSize = 2
+        Me.rdMultipleFiles.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdMultipleFiles.Name = "rdMultipleFiles"
+        Me.rdMultipleFiles.TabStop = True
+        Me.rdMultipleFiles.UseVisualStyleBackColor = True
         '
-        'rdoCount
+        'rdSingleFile
         '
-        resources.ApplyResources(Me.rdoCount, "rdoCount")
-        Me.rdoCount.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoCount.FlatAppearance.BorderSize = 2
-        Me.rdoCount.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoCount.Name = "rdoCount"
-        Me.rdoCount.TabStop = True
-        Me.rdoCount.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdSingleFile, "rdSingleFile")
+        Me.rdSingleFile.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdSingleFile.FlatAppearance.BorderSize = 2
+        Me.rdSingleFile.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdSingleFile.Name = "rdSingleFile"
+        Me.rdSingleFile.TabStop = True
+        Me.rdSingleFile.UseVisualStyleBackColor = True
         '
-        'ucrPnlStringHandling
+        'ucrPnlFiles
         '
-        resources.ApplyResources(Me.ucrPnlStringHandling, "ucrPnlStringHandling")
-        Me.ucrPnlStringHandling.Name = "ucrPnlStringHandling"
+        resources.ApplyResources(Me.ucrPnlFiles, "ucrPnlFiles")
+        Me.ucrPnlFiles.Name = "ucrPnlFiles"
         '
         'cboFileType
         '
@@ -684,9 +684,9 @@ Partial Class dlgImportDataset
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cboFileType)
         Me.Controls.Add(Me.lblFileExtension)
-        Me.Controls.Add(Me.rdoDetect)
-        Me.Controls.Add(Me.rdoCount)
-        Me.Controls.Add(Me.ucrPnlStringHandling)
+        Me.Controls.Add(Me.rdMultipleFiles)
+        Me.Controls.Add(Me.rdSingleFile)
+        Me.Controls.Add(Me.ucrPnlFiles)
         Me.Controls.Add(Me.ucrSaveFile)
         Me.Controls.Add(Me.lblImportingSheets)
         Me.Controls.Add(Me.ucrChkSheetsCheckAll)
@@ -800,9 +800,9 @@ Partial Class dlgImportDataset
     Friend WithEvents ucrInputTextTo As ucrInputTextBox
     Friend WithEvents ucrInputTextFrom As ucrInputTextBox
     Friend WithEvents ucrSaveFile As ucrSave
-    Friend WithEvents rdoDetect As RadioButton
-    Friend WithEvents rdoCount As RadioButton
-    Friend WithEvents ucrPnlStringHandling As UcrPanel
+    Friend WithEvents rdMultipleFiles As RadioButton
+    Friend WithEvents rdSingleFile As RadioButton
+    Friend WithEvents ucrPnlFiles As UcrPanel
     Friend WithEvents cboFileType As ComboBox
     Friend WithEvents lblFileExtension As Label
 End Class
