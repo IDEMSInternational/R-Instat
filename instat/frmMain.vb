@@ -2356,4 +2356,8 @@ Public Class frmMain
     Private Sub mnuClimaticCheckDataCheckStations_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataCheckStations.Click
         dlgLocatingPointsInShapeFile.ShowDialog()
     End Sub
+
+    Private Sub mnuClimaticFileImportERA5Data_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportERA5Data.Click
+        dlgImportERA5Data.ShowDialog()
+    End Sub
 End Class
