@@ -160,6 +160,7 @@ Public Class dlgImportERA5Data
 
         ucrInputMinLatitude.SetRCode(clsConcLatFunction, bReset)
         ucrInputMaxLatitude.SetRCode(clsConcLatFunction, bReset)
+        SetNewDataFrameName()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -191,6 +192,16 @@ Public Class dlgImportERA5Data
 
     Private Sub lnkCreateAnAccount_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkCreateAnAccount.LinkClicked
         Process.Start("https://cds.climate.copernicus.eu/user/login")
+    End Sub
+
+    Private Sub SetNewDataFrameName()
+        If Not ucrInputData.IsEmpty Then
+            ucrInputNewDataFrameName.SetName(ucrInputData.GetText.ToLower)
+        End If
+    End Sub
+
+    Private Sub ucrInputData_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputData.ControlValueChanged
+        SetNewDataFrameName()
     End Sub
 
     Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputUserID.ControlContentsChanged, ucrInputAPIKey.ControlContentsChanged, ucrInputMinLongitude.ControlContentsChanged, ucrInputMaxLongitude.ControlContentsChanged, ucrInputMinLatitude.ControlContentsChanged, ucrInputMaxLatitude.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged, ucrInputFilePath.ControlContentsChanged
