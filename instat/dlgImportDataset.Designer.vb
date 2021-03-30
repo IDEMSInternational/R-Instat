@@ -109,6 +109,7 @@ Partial Class dlgImportDataset
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSaveFile = New instat.ucrSave()
+        Me.ucrChkMultipleFiles = New instat.ucrCheck()
         Me.grpCSV.SuspendLayout()
         Me.grpExcel.SuspendLayout()
         Me.grpRDS.SuspendLayout()
@@ -635,10 +636,17 @@ Partial Class dlgImportDataset
         resources.ApplyResources(Me.ucrSaveFile, "ucrSaveFile")
         Me.ucrSaveFile.Name = "ucrSaveFile"
         '
+        'ucrChkMultipleFiles
+        '
+        Me.ucrChkMultipleFiles.Checked = False
+        resources.ApplyResources(Me.ucrChkMultipleFiles, "ucrChkMultipleFiles")
+        Me.ucrChkMultipleFiles.Name = "ucrChkMultipleFiles"
+        '
         'dlgImportDataset
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkMultipleFiles)
         Me.Controls.Add(Me.ucrSaveFile)
         Me.Controls.Add(Me.lblImportingSheets)
         Me.Controls.Add(Me.ucrChkSheetsCheckAll)
@@ -752,4 +760,5 @@ Partial Class dlgImportDataset
     Friend WithEvents ucrInputTextTo As ucrInputTextBox
     Friend WithEvents ucrInputTextFrom As ucrInputTextBox
     Friend WithEvents ucrSaveFile As ucrSave
+    Friend WithEvents ucrChkMultipleFiles As ucrCheck
 End Class
