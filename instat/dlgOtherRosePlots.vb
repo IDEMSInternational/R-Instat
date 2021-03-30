@@ -98,6 +98,8 @@ Public Class dlgOtherRosePlots
         ucrPnlOptions.AddToLinkedControls(ucrChkForcePositive, {rdoPolarPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrChkExcludeMissing, ucrChkPadDate}, {rdoPolarAnnulus}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrNudNmberOfClusters, {rdoPolarCluster}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverFacetOne, {rdoPercentileRose, rdoPolarAnnulus, rdoPolarFrequency, rdoPolarPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverFacetTwo, {rdoPercentileRose, rdoPolarAnnulus, rdoPolarFrequency, rdoPolarPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputStatistic.SetLinkedDisplayControl(lblStatistic)
         ucrReceiverX.SetLinkedDisplayControl(lblVariableToPlotAgainst)
@@ -106,6 +108,8 @@ Public Class dlgOtherRosePlots
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
         ucrInputColor.SetLinkedDisplayControl(lblColor)
         ucrNudNmberOfClusters.SetLinkedDisplayControl(lblNoOfClusters)
+        ucrReceiverFacetOne.SetLinkedDisplayControl(lblFacetOne)
+        ucrReceiverFacetTwo.SetLinkedDisplayControl(lblFacetTwo)
 
         ucrChkTransform.SetText("Transform")
         ucrChkTransform.SetParameter(New RParameter("trans", 9))
@@ -188,7 +192,6 @@ Public Class dlgOtherRosePlots
         clsOtherRosePlots.AddParameter("main_method", Chr(34) & "polar_frequency" & Chr(34), iPosition:=5)
         clsOtherRosePlots.AddParameter("statistic", Chr(34) & "mean" & Chr(34), iPosition:=11)
 
-        'AddRemoveStatistic()
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsOtherRosePlots)
     End Sub
