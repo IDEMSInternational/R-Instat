@@ -1943,15 +1943,25 @@ climdex_single_station <- function(ci, freq = "annual", indices, year, month,
 }
 
 
-pollution_rose <- function(mydata, date_name, include_pollutant=TRUE, ...){
+pollution_rose <- function(mydata, date_name, include_pollutant=TRUE, type1_col_name, type2_col_name, ...){
+  type = "default"
+  if (missing(type1_col_name) == FALSE && missing(type2_col_name) == FALSE) {
+    type <- c(type1_col_name,type2_col_name)
+  }
+  if (missing(type1_col_name) == TRUE && missing(type2_col_name) == FALSE) {
+    type <- type2_col_name
+  }
+  if (missing(type1_col_name) == FALSE && missing(type2_col_name) ==TRUE) {
+    type <- type1_col_name
+  }
   if (!("date" %in% colnames(mydata))){ 
     mydata <- dplyr::rename(mydata, date = !!date_name)
   }
   if (include_pollutant==FALSE){
-    openair::windRose(mydata = mydata,...)
+    openair::windRose(mydata = mydata, type = type, ...)
   }
   if (include_pollutant==TRUE){
-    openair::pollutionRose(mydata = mydata,...)
+    openair::pollutionRose(mydata = mydata, type = type, ...)
   }
 }
 
