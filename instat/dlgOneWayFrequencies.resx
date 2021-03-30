@@ -223,7 +223,7 @@
     <value>3</value>
   </data>
   <data name="grpSort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 201</value>
+    <value>258, 185</value>
   </data>
   <data name="grpSort.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 88</value>
@@ -256,7 +256,7 @@
     <value>87, 23</value>
   </data>
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="cmdOptions.Text" xml:space="preserve">
     <value>Options</value>
@@ -280,7 +280,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 80</value>
+    <value>258, 64</value>
   </data>
   <data name="lblSelectedVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -493,13 +493,13 @@
     <value>2</value>
   </data>
   <data name="grpOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 302</value>
+    <value>258, 275</value>
   </data>
   <data name="grpOutput.Size" type="System.Drawing.Size, System.Drawing">
     <value>151, 75</value>
   </data>
   <data name="grpOutput.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>8</value>
   </data>
   <data name="grpOutput.Text" xml:space="preserve">
     <value>Output </value>
@@ -517,16 +517,16 @@
     <value>0</value>
   </data>
   <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 328</value>
+    <value>10, 353</value>
   </data>
   <data name="ucrSaveGraph.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>254, 24</value>
   </data>
   <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrSaveGraph.Name" xml:space="preserve">
     <value>ucrSaveGraph</value>
@@ -556,7 +556,7 @@
     <value>50, 20</value>
   </data>
   <data name="ucrNudGroups.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrNudGroups.Name" xml:space="preserve">
     <value>ucrNudGroups</value>
@@ -595,10 +595,10 @@
     <value>10, 280</value>
   </data>
   <data name="ucrChkGroupData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 20</value>
+    <value>115, 20</value>
   </data>
   <data name="ucrChkGroupData.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="&gt;&gt;ucrChkGroupData.Name" xml:space="preserve">
     <value>ucrChkGroupData</value>
@@ -622,7 +622,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverWeights.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrReceiverWeights.Name" xml:space="preserve">
     <value>ucrReceiverWeights</value>
@@ -643,7 +643,7 @@
     <value>114, 20</value>
   </data>
   <data name="ucrChkWeights.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="&gt;&gt;ucrChkWeights.Name" xml:space="preserve">
     <value>ucrChkWeights</value>
@@ -664,7 +664,7 @@
     <value>145, 20</value>
   </data>
   <data name="ucrChkFlip.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrChkFlip.Name" xml:space="preserve">
     <value>ucrChkFlip</value>
@@ -685,7 +685,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -739,7 +739,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverOneWayFreq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 95</value>
+    <value>258, 79</value>
   </data>
   <data name="ucrReceiverOneWayFreq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

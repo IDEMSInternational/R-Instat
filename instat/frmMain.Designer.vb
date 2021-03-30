@@ -206,7 +206,7 @@ Partial Class frmMain
         Me.mnuClimaticTidyandExamineMerge = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineAppend = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator69 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuClimaticDataEntry = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTidyandExamineClimaticDataEntry = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator50 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticTidyandExamineOneVariableSummarize = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticTidyandExamineOneVariableGraph = New System.Windows.Forms.ToolStripMenuItem()
@@ -227,7 +227,9 @@ Partial Class frmMain
         Me.mnuClimaticCheckDataBoxplot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCheckDataQCTemperatures = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCheckDataQCRainfall = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator70 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticCheckDataHomogenization = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticCheckDataCheckStations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepare = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCimaticPrepareTransform = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticPrepareConversions = New System.Windows.Forms.ToolStripMenuItem()
@@ -287,6 +289,8 @@ Partial Class frmMain
         Me.mnuClimaticCompareConditionalQuantiles = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticCompareTaylorDiagram = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticMapping = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticMappingMap = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticMappingCheckStations = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModel = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModelsExtremes = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticModelCircular = New System.Windows.Forms.ToolStripMenuItem()
@@ -652,6 +656,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileImportERA5Data = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1468,7 +1473,7 @@ Partial Class frmMain
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileOpenandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportFromClimSoft, Me.mnuClimateFileImportFromClimSoftWizard, Me.mnuClimaticFileImportFromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportERA5Data, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileOpenandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportFromClimSoft, Me.mnuClimateFileImportFromClimSoftWizard, Me.mnuClimaticFileImportFromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         resources.ApplyResources(Me.mnuClimaticFile, "mnuClimaticFile")
         '
@@ -1535,7 +1540,7 @@ Partial Class frmMain
         '
         'mnuClimaticTidyandExamine
         '
-        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineVisualiseData, Me.mnuClimaticTidyandExamineTidyDailyData, Me.mnuClimaticTidyandExamineNonNumericCases, Me.mnuClimaticTidyandExamineReplaceValues, Me.mnuClimaticTidyandExamineDuplicates, Me.ToolStripSeparator54, Me.mnuClimaticTidyandExamineStack, Me.mnuClimaticTidyandExamineUnstack, Me.mnuClimaticTidyandExamineMerge, Me.mnuClimaticTidyandExamineAppend, Me.ToolStripSeparator69, Me.mnuClimaticDataEntry, Me.ToolStripSeparator50, Me.mnuClimaticTidyandExamineOneVariableSummarize, Me.mnuClimaticTidyandExamineOneVariableGraph, Me.mnuClimaticTidyandExamineOneVariableFrequencies})
+        Me.mnuClimaticTidyandExamine.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticTidyandExamineVisualiseData, Me.mnuClimaticTidyandExamineTidyDailyData, Me.mnuClimaticTidyandExamineNonNumericCases, Me.mnuClimaticTidyandExamineReplaceValues, Me.mnuClimaticTidyandExamineDuplicates, Me.ToolStripSeparator54, Me.mnuClimaticTidyandExamineStack, Me.mnuClimaticTidyandExamineUnstack, Me.mnuClimaticTidyandExamineMerge, Me.mnuClimaticTidyandExamineAppend, Me.ToolStripSeparator69, Me.mnuTidyandExamineClimaticDataEntry, Me.ToolStripSeparator50, Me.mnuClimaticTidyandExamineOneVariableSummarize, Me.mnuClimaticTidyandExamineOneVariableGraph, Me.mnuClimaticTidyandExamineOneVariableFrequencies})
         Me.mnuClimaticTidyandExamine.Name = "mnuClimaticTidyandExamine"
         resources.ApplyResources(Me.mnuClimaticTidyandExamine, "mnuClimaticTidyandExamine")
         '
@@ -1594,10 +1599,10 @@ Partial Class frmMain
         Me.ToolStripSeparator69.Name = "ToolStripSeparator69"
         resources.ApplyResources(Me.ToolStripSeparator69, "ToolStripSeparator69")
         '
-        'mnuClimaticDataEntry
+        'mnuTidyandExamineClimaticDataEntry
         '
-        resources.ApplyResources(Me.mnuClimaticDataEntry, "mnuClimaticDataEntry")
-        Me.mnuClimaticDataEntry.Name = "mnuClimaticDataEntry"
+        Me.mnuTidyandExamineClimaticDataEntry.Name = "mnuTidyandExamineClimaticDataEntry"
+        resources.ApplyResources(Me.mnuTidyandExamineClimaticDataEntry, "mnuTidyandExamineClimaticDataEntry")
         '
         'ToolStripSeparator50
         '
@@ -1662,7 +1667,7 @@ Partial Class frmMain
         '
         'mnuClimaticCheckData
         '
-        Me.mnuClimaticCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCheckDataInventory, Me.mnuClimaticCheckDataDisplayDaily, Me.ToolStripSeparator65, Me.mnuClimaticCheckDataFillMissingValues, Me.mnuClimaticCheckDataBoxplot, Me.mnuClimaticCheckDataQCTemperatures, Me.mnuClimaticCheckDataQCRainfall, Me.mnuClimaticCheckDataHomogenization})
+        Me.mnuClimaticCheckData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticCheckDataInventory, Me.mnuClimaticCheckDataDisplayDaily, Me.ToolStripSeparator65, Me.mnuClimaticCheckDataFillMissingValues, Me.mnuClimaticCheckDataBoxplot, Me.mnuClimaticCheckDataQCTemperatures, Me.mnuClimaticCheckDataQCRainfall, Me.ToolStripSeparator70, Me.mnuClimaticCheckDataHomogenization, Me.mnuClimaticCheckDataCheckStations})
         Me.mnuClimaticCheckData.Name = "mnuClimaticCheckData"
         resources.ApplyResources(Me.mnuClimaticCheckData, "mnuClimaticCheckData")
         '
@@ -1701,10 +1706,20 @@ Partial Class frmMain
         Me.mnuClimaticCheckDataQCRainfall.Name = "mnuClimaticCheckDataQCRainfall"
         resources.ApplyResources(Me.mnuClimaticCheckDataQCRainfall, "mnuClimaticCheckDataQCRainfall")
         '
+        'ToolStripSeparator70
+        '
+        Me.ToolStripSeparator70.Name = "ToolStripSeparator70"
+        resources.ApplyResources(Me.ToolStripSeparator70, "ToolStripSeparator70")
+        '
         'mnuClimaticCheckDataHomogenization
         '
         Me.mnuClimaticCheckDataHomogenization.Name = "mnuClimaticCheckDataHomogenization"
         resources.ApplyResources(Me.mnuClimaticCheckDataHomogenization, "mnuClimaticCheckDataHomogenization")
+        '
+        'mnuClimaticCheckDataCheckStations
+        '
+        Me.mnuClimaticCheckDataCheckStations.Name = "mnuClimaticCheckDataCheckStations"
+        resources.ApplyResources(Me.mnuClimaticCheckDataCheckStations, "mnuClimaticCheckDataCheckStations")
         '
         'mnuClimaticPrepare
         '
@@ -2012,8 +2027,19 @@ Partial Class frmMain
         '
         'mnuClimaticMapping
         '
+        Me.mnuClimaticMapping.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticMappingMap, Me.mnuClimaticMappingCheckStations})
         Me.mnuClimaticMapping.Name = "mnuClimaticMapping"
         resources.ApplyResources(Me.mnuClimaticMapping, "mnuClimaticMapping")
+        '
+        'mnuClimaticMappingMap
+        '
+        Me.mnuClimaticMappingMap.Name = "mnuClimaticMappingMap"
+        resources.ApplyResources(Me.mnuClimaticMappingMap, "mnuClimaticMappingMap")
+        '
+        'mnuClimaticMappingCheckStations
+        '
+        Me.mnuClimaticMappingCheckStations.Name = "mnuClimaticMappingCheckStations"
+        resources.ApplyResources(Me.mnuClimaticMappingCheckStations, "mnuClimaticMappingCheckStations")
         '
         'mnuClimaticModel
         '
@@ -4129,6 +4155,11 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
+        'mnuClimaticFileImportERA5Data
+        '
+        Me.mnuClimaticFileImportERA5Data.Name = "mnuClimaticFileImportERA5Data"
+        resources.ApplyResources(Me.mnuClimaticFileImportERA5Data, "mnuClimaticFileImportERA5Data")
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4787,5 +4818,10 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticNCMPSummary As ToolStripMenuItem
     Friend WithEvents mnuViewSwapDataAndMetadata As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator69 As ToolStripSeparator
-    Friend WithEvents mnuClimaticDataEntry As ToolStripMenuItem
+    Friend WithEvents mnuTidyandExamineClimaticDataEntry As ToolStripMenuItem
+    Friend WithEvents mnuClimaticMappingMap As ToolStripMenuItem
+    Friend WithEvents mnuClimaticMappingCheckStations As ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator70 As ToolStripSeparator
+    Friend WithEvents mnuClimaticCheckDataCheckStations As ToolStripMenuItem
+    Friend WithEvents mnuClimaticFileImportERA5Data As ToolStripMenuItem
 End Class

@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -25,6 +25,11 @@ Imports System.ComponentModel
 Public Class ucrDataView
     'Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
+    ' Number of rows with and without the current filter (the same if no filter applied)
+    Private iRowCountFull As Integer
+    Private iRowCountFilter As Integer
+    Private iColumnCount As Integer
+    Private clsGetColumnsFromData As New RFunction
     Private clsAppendVariablesMetaData As New RFunction
     Private clsUnhideAllColumns As New RFunction
     Private clsInsertColumns As New RFunction
@@ -59,6 +64,19 @@ Public Class ucrDataView
         SetRFunctions()
     End Sub
 
+    ''' <summary>
+    ''' Run any R operation/command from the grid by passing a Function which will run the R operation/command.
+    ''' This wrapper ensures consistency in what is done before and after running an R command.
+    ''' </summary>
+    ''' <param name="action">A function that will run an R operation/command, usually from GridROperations.</param>
+    Private Sub RunRCommand(action As Action)
+        Cursor = Cursors.WaitCursor
+        grdData.Enabled = False
+        action()
+        grdData.Enabled = True
+        Cursor = Cursors.Default
+    End Sub
+
     'Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
     '    MyBase.OnFormClosing(e)
     '    If Not e.Cancel AndAlso e.CloseReason = CloseReason.UserClosing Then
@@ -68,6 +86,7 @@ Public Class ucrDataView
     'End Sub
 
     Private Sub SetRFunctions()
+        clsGetColumnsFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsAppendVariablesMetaData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
         clsInsertColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
@@ -318,8 +337,6 @@ Public Class ucrDataView
     End Sub
 
     Public Sub UpdateCurrentWorksheet()
-        Dim iRowCount As Integer
-        Dim iColumnCount As Integer
 
         grdCurrSheet = grdData.CurrentWorksheet
         If grdCurrSheet IsNot Nothing AndAlso frmMain.clsRLink.GetDataFrameNames().Contains(grdCurrSheet.Name) Then
@@ -329,12 +346,13 @@ Public Class ucrDataView
             grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
             grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
-            iRowCount = frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, True)
+            iRowCountFull = frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, False)
+            iRowCountFilter = frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, True)
             iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(grdCurrSheet.Name)
-            lblRowDisplay.Text = "Showing " & grdCurrSheet.RowCount & " of " & iRowCount & " rows"
+            lblRowDisplay.Text = "Showing " & grdCurrSheet.RowCount & " of " & iRowCountFilter & " rows"
             strFilterName = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCurrentFilterName.ToScript(), bSilent:=True).AsCharacter(0)
             If frmMain.clsRLink.RunInternalScriptGetValue(clsFilterApplied.ToScript()).AsLogical(0) Then
-                lblRowDisplay.Text = lblRowDisplay.Text & " (" & frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, False) & ")" & "|Active filter:" & strFilterName
+                lblRowDisplay.Text = lblRowDisplay.Text & " (" & iRowCountFull & ")" & " | Active filter: " & strFilterName
             End If
             lblRowDisplay.Text = lblRowDisplay.Text & " | Showing " & grdCurrSheet.ColumnCount & " of " & iColumnCount & " columns"
             'hide startup menu items
@@ -459,7 +477,7 @@ Public Class ucrDataView
         clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
-
+    
     Private Sub mnuLevelsLabels_Click(sender As Object, e As EventArgs) Handles mnuLevelsLabels.Click
         Dim strType As String
         Dim strColumns() As String
@@ -819,10 +837,8 @@ Public Class ucrDataView
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
     End Sub
 
-    Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click
-        clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
-        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
-        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
+    Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click, mnuConvertVariate.Click
+        RunRCommand(Sub() GridROperations.ConvertToNumeric(grdCurrSheet.Name, SelectedColumnsAsArray, iRowCountFull))
     End Sub
 
     Private Sub mnuLebelsLevel_Click(sender As Object, e As EventArgs) Handles mnuLebelsLevel.Click

@@ -35,6 +35,8 @@ Public Class dlgPICSARainfall
     Private clsCLimitsYDate As New RFunction
     Private clsFacetFunction As New RFunction
     Private clsFacetOperator As New ROperator
+    Private clsFacetRowOp As New ROperator
+    Private clsFacetColOp As New ROperator
     Private clsThemeFunction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
@@ -46,6 +48,8 @@ Public Class dlgPICSARainfall
     Private clsFactorLevels As New RFunction
 
     Private clsDatePeriodOperator As New ROperator
+
+    Private clsAsFactorFunction As New RFunction
 
     Private clsMeanFunction As New RFunction
     Private clsRoundMeanY As New RFunction
@@ -75,6 +79,14 @@ Public Class dlgPICSARainfall
     Private clsGeomHlineAesMedian As New RFunction
     Private clsGeomHlineAesLowerTercile As New RFunction
     Private clsGeomHlineAesUpperTercile As New RFunction
+
+    Private ReadOnly strFacetWrap As String = "Facet Wrap"
+    Private ReadOnly strFacetRow As String = "Facet Row"
+    Private ReadOnly strFacetCol As String = "Facet Column"
+    Private ReadOnly strNone As String = "None"
+
+    Private bUpdateComboOptions As Boolean = True
+    Private bUpdatingParameters As Boolean = False
 
     Private clsGeomTextLabelMeanLine As New RFunction
     Private clsAesGeomTextLabelMeanLine As New RFunction
@@ -134,8 +146,9 @@ Public Class dlgPICSARainfall
         ucrReceiverX.SetParameterIsString()
         ucrReceiverX.Selector = ucrSelectorPICSARainfall
         ucrReceiverX.SetClimaticType("year")
-        ucrReceiverX.bAutoFill = True
         ucrReceiverX.bWithQuotes = False
+        ucrReceiverX.SetIncludedDataTypes({"numeric", "factor"})
+        ucrReceiverX.bAddParameterIfEmpty = True
 
         ucrReceiverColourBy.SetParameter(New RParameter("colour", 2))
         ucrReceiverColourBy.Selector = ucrSelectorPICSARainfall
@@ -144,7 +157,7 @@ Public Class dlgPICSARainfall
         ucrReceiverColourBy.bWithQuotes = False
         ucrReceiverColourBy.SetParameterIsString()
 
-        ucrReceiverFacetBy.SetParameter(New RParameter("var1", 1))
+        ucrReceiverFacetBy.SetParameter(New RParameter(""))
         ucrReceiverFacetBy.Selector = ucrSelectorPICSARainfall
         ucrReceiverFacetBy.SetIncludedDataTypes({"factor"})
         ucrReceiverFacetBy.strSelectorHeading = "Factors"
@@ -163,6 +176,9 @@ Public Class dlgPICSARainfall
         clsPointsFunc.AddParameter("size", "3")
         clsPointsFunc.AddParameter("colour", Chr(34) & "red" & Chr(34))
         ucrChkPoints.SetParameter(clsPointsParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
+
+        ucrInputStation.SetItems({strFacetWrap, strFacetRow, strFacetCol, strNone})
+        ucrInputStation.SetDropDownStyleAsNonEditable()
 
         ucrSave.SetPrefix("PICSA_Rainfall_Graph")
         ucrSave.SetIsComboBox()
@@ -199,6 +215,8 @@ Public Class dlgPICSARainfall
 
         clsFacetFunction = New RFunction
         clsFacetOperator = New ROperator
+        clsFacetRowOp = New ROperator
+        clsFacetColOp = New ROperator
 
         clsAsDateYLimit = New RFunction
 
@@ -235,6 +253,9 @@ Public Class dlgPICSARainfall
         clsGeomTextLabelUpperTercileLine = New RFunction
         clsPasteUpperTercileY = New RFunction
         clsFormatUpperTercileY = New RFunction
+
+        ucrInputStation.SetText(strNone)
+        ucrInputStation.bUpdateRCodeFromControl = True
 
         clsDatePeriodOperator = New ROperator
 
@@ -295,8 +316,12 @@ Public Class dlgPICSARainfall
         clsRggplotFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0)
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRaesFunction, iPosition:=1)
 
+
+        clsAsFactorFunction = New RFunction
+
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
+        clsAsFactorFunction.SetRCommand("as.factor")
 
         clsGeomLine.SetPackageName("ggplot2")
         clsGeomLine.SetRCommand("geom_line")
@@ -306,10 +331,15 @@ Public Class dlgPICSARainfall
 
 
         clsFacetFunction.SetPackageName("ggplot2")
-        clsFacetFunction.SetRCommand("facet_wrap")
+        clsFacetRowOp.SetOperation("+")
+        clsFacetRowOp.bBrackets = False
+        clsFacetColOp.SetOperation("+")
+        clsFacetColOp.bBrackets = False
+        clsFacetOperator.SetOperation("~")
+        clsFacetOperator.bForceIncludeOperation = True
+        clsFacetOperator.bBrackets = False
         clsFacetFunction.AddParameter("facets", clsROperatorParameter:=clsFacetOperator, iPosition:=0)
 
-        clsFacetOperator.SetOperation("~")
 
         'Mean Line
         clsGeomHlineMean.SetPackageName("ggplot2")
@@ -582,7 +612,6 @@ Public Class dlgPICSARainfall
         ucrSelectorPICSARainfall.SetRCode(clsPipeOperator, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
         ucrReceiverColourBy.SetRCode(clsRaesFunction, bReset)
-        ucrReceiverFacetBy.SetRCode(clsFacetOperator, bReset)
         ucrSave.SetRCode(clsBaseOperator, bReset)
         ucrChkPoints.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForPicsa.SetRCode(clsAsNumeric, bReset)
@@ -602,6 +631,8 @@ Public Class dlgPICSARainfall
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        UpdateParameters()
+        TestOkEnabled()
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
@@ -615,6 +646,98 @@ Public Class dlgPICSARainfall
         End If
     End Sub
 
+    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrInputComboBox) Handles ucrInputStation.ControlValueChanged
+        If Not bUpdateComboOptions Then
+            Exit Sub
+        End If
+        Dim strChangedText As String = ucrChangedControl.GetText()
+        If strChangedText <> strNone Then
+            If Not strChangedText = strFacetCol AndAlso Not strChangedText = strFacetRow AndAlso
+                    Not ucrInputStation.Equals(ucrChangedControl) AndAlso ucrInputStation.GetText() = strChangedText Then
+                bUpdateComboOptions = False
+                ucrInputStation.SetName(strNone)
+                bUpdateComboOptions = True
+            End If
+            If (strChangedText = strFacetWrap AndAlso ucrInputStation.GetText = strFacetRow) OrElse (strChangedText = strFacetRow AndAlso
+                    ucrInputStation.GetText = strFacetWrap) OrElse (strChangedText = strFacetWrap AndAlso
+                    ucrInputStation.GetText = strFacetCol) OrElse (strChangedText = strFacetCol AndAlso ucrInputStation.GetText = strFacetWrap) Then
+                ucrInputStation.SetName(strNone)
+            End If
+        End If
+        UpdateParameters()
+        AddRemoveFacets()
+    End Sub
+
+    Private Sub UpdateParameters()
+        clsFacetOperator.RemoveParameterByName("wrap" & ucrInputStation.Name)
+        clsFacetColOp.RemoveParameterByName("col" & ucrInputStation.Name)
+        clsFacetRowOp.RemoveParameterByName("row" & ucrInputStation.Name)
+
+        clsBaseOperator.RemoveParameterByName("facets")
+        bUpdatingParameters = True
+        ucrReceiverFacetBy.SetRCode(Nothing)
+        Select Case ucrInputStation.GetText()
+            Case strFacetWrap
+                ucrReceiverFacetBy.ChangeParameterName("wrap" & ucrInputStation.Name)
+                ucrReceiverFacetBy.SetRCode(clsFacetOperator)
+            Case strFacetCol
+                ucrReceiverFacetBy.ChangeParameterName("col" & ucrInputStation.Name)
+                ucrReceiverFacetBy.SetRCode(clsFacetColOp)
+            Case strFacetRow
+                ucrReceiverFacetBy.ChangeParameterName("row" & ucrInputStation.Name)
+                ucrReceiverFacetBy.SetRCode(clsFacetRowOp)
+        End Select
+        If Not clsRaesFunction.ContainsParameter("x") Then
+            clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+        End If
+        bUpdatingParameters = False
+    End Sub
+
+    Private Sub AddRemoveFacets()
+        Dim bWrap As Boolean = False
+        Dim bCol As Boolean = False
+        Dim bRow As Boolean = False
+
+        If bUpdatingParameters Then
+            Exit Sub
+        End If
+
+        clsBaseOperator.RemoveParameterByName("facets")
+        If Not ucrReceiverFacetBy.IsEmpty Then
+            Select Case ucrInputStation.GetText()
+                Case strFacetWrap
+                    bWrap = True
+                Case strFacetCol
+                    bCol = True
+                Case strFacetRow
+                    bRow = True
+            End Select
+        End If
+
+        If bWrap OrElse bRow OrElse bCol Then
+            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction)
+        End If
+        If bWrap Then
+            clsFacetFunction.SetRCommand("facet_wrap")
+        End If
+        If bRow OrElse bCol Then
+            clsFacetFunction.SetRCommand("facet_grid")
+        End If
+        If bRow Then
+            clsFacetOperator.AddParameter("left", clsROperatorParameter:=clsFacetRowOp, iPosition:=0)
+        ElseIf bCol AndAlso bWrap = False Then
+            clsFacetOperator.AddParameter("left", ".", iPosition:=0)
+        Else
+            clsFacetOperator.RemoveParameterByName("left")
+        End If
+        If bCol Then
+            clsFacetOperator.AddParameter("right", clsROperatorParameter:=clsFacetColOp, iPosition:=1)
+        ElseIf bRow AndAlso bWrap = False Then
+            clsFacetOperator.AddParameter("right", ".", iPosition:=1)
+        Else
+            clsFacetOperator.RemoveParameterByName("right")
+        End If
+    End Sub
     Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged() Handles ucrVariablesAsFactorForPicsa.ControlValueChanged
         TempOptionsDisabledInMultipleVariablesCase()
     End Sub
@@ -676,11 +799,9 @@ Public Class dlgPICSARainfall
             clsGeomLine.AddParameter("colour", Chr(34) & "blue" & Chr(34))
         End If
     End Sub
-
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
         XAxisDataTypeCheck()
     End Sub
-
     Private Sub XAxisDataTypeCheck()
         If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
             clsGeomLine.AddParameter("group", 1)
@@ -690,13 +811,8 @@ Public Class dlgPICSARainfall
         End If
     End Sub
 
-    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged
-        If ucrReceiverFacetBy.IsEmpty Then
-            clsBaseOperator.RemoveParameterByName("facets")
-        Else
-            clsFacetOperator.AddParameter("var2", ".", iPosition:=0)
-            clsBaseOperator.AddParameter("facets", clsRFunctionParameter:=clsFacetFunction, iPosition:=30)
-        End If
+    Private Sub ucrReceiverFacetBy_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacetBy.ControlValueChanged, ucrReceiverColourBy.ControlValueChanged, ucrReceiverX.ControlValueChanged
+        AddRemoveFacets()
         AddRemoveGroupBy()
     End Sub
 
@@ -741,11 +857,6 @@ Public Class dlgPICSARainfall
                 i = i + 1
             End If
 
-            If Not ucrVariablesAsFactorForPicsa.bSingleVariable Then
-                clsGroupByFunction.AddParameter(i, "variable", bIncludeArgumentName:=False, iPosition:=0)
-                i = i + 1
-            End If
-
             If clsGroupByFunction.iParameterCount > 0 Then
                 clsPipeOperator.AddParameter("group_by", clsRFunctionParameter:=clsGroupByFunction, iPosition:=1)
             Else
@@ -754,6 +865,7 @@ Public Class dlgPICSARainfall
         Else
             clsPipeOperator.RemoveParameterByName("group_by")
         End If
+
         SetPipeAssignTo()
     End Sub
 
