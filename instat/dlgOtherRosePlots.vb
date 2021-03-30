@@ -102,8 +102,6 @@ Public Class dlgOtherRosePlots
         ucrPnlOptions.AddToLinkedControls(ucrReceiverFacetTwo, {rdoPercentileRose, rdoPolarAnnulus, rdoPolarFrequency, rdoPolarPlot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputStatistic.SetLinkedDisplayControl(lblStatistic)
-        ucrReceiverX.SetLinkedDisplayControl(lblVariableToPlotAgainst)
-        ucrReceiverWindSpeed.SetLinkedDisplayControl(lblWindSpeed)
         ucrNudPercentile.SetLinkedDisplayControl(lblPercentile)
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
         ucrInputColor.SetLinkedDisplayControl(lblColor)

@@ -22,7 +22,6 @@ Partial Class dlgOtherRosePlots
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.lblVariableToPlotAgainst = New System.Windows.Forms.Label()
         Me.rdoPercentileRose = New System.Windows.Forms.RadioButton()
         Me.rdoPolarFrequency = New System.Windows.Forms.RadioButton()
         Me.rdoPolarAnnulus = New System.Windows.Forms.RadioButton()
@@ -59,19 +58,10 @@ Partial Class dlgOtherRosePlots
         Me.ucrInputStatistic = New instat.ucrInputComboBox()
         Me.ucrChkForcePositive = New instat.ucrCheck()
         Me.ucrChkNormalise = New instat.ucrCheck()
-        Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrReceiverMultiplePollutants = New instat.ucrReceiverMultiple()
         Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
+        Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
-        '
-        'lblVariableToPlotAgainst
-        '
-        Me.lblVariableToPlotAgainst.AutoSize = True
-        Me.lblVariableToPlotAgainst.Location = New System.Drawing.Point(259, 97)
-        Me.lblVariableToPlotAgainst.Name = "lblVariableToPlotAgainst"
-        Me.lblVariableToPlotAgainst.Size = New System.Drawing.Size(66, 13)
-        Me.lblVariableToPlotAgainst.TabIndex = 3
-        Me.lblVariableToPlotAgainst.Text = "Plot Against:"
         '
         'rdoPercentileRose
         '
@@ -229,7 +219,7 @@ Partial Class dlgOtherRosePlots
         'lblNoOfClusters
         '
         Me.lblNoOfClusters.AutoSize = True
-        Me.lblNoOfClusters.Location = New System.Drawing.Point(85, 254)
+        Me.lblNoOfClusters.Location = New System.Drawing.Point(11, 254)
         Me.lblNoOfClusters.Name = "lblNoOfClusters"
         Me.lblNoOfClusters.Size = New System.Drawing.Size(78, 13)
         Me.lblNoOfClusters.TabIndex = 94
@@ -326,7 +316,7 @@ Partial Class dlgOtherRosePlots
         '
         Me.ucrNudNmberOfClusters.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNmberOfClusters.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNmberOfClusters.Location = New System.Drawing.Point(85, 250)
+        Me.ucrNudNmberOfClusters.Location = New System.Drawing.Point(97, 250)
         Me.ucrNudNmberOfClusters.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNmberOfClusters.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNmberOfClusters.Name = "ucrNudNmberOfClusters"
@@ -427,7 +417,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrInputMethod.AddQuotesIfUnrecognised = True
         Me.ucrInputMethod.GetSetSelectedIndex = -1
         Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(85, 249)
+        Me.ucrInputMethod.Location = New System.Drawing.Point(83, 249)
         Me.ucrInputMethod.Name = "ucrInputMethod"
         Me.ucrInputMethod.Size = New System.Drawing.Size(97, 21)
         Me.ucrInputMethod.TabIndex = 19
@@ -437,7 +427,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrInputStatistic.AddQuotesIfUnrecognised = True
         Me.ucrInputStatistic.GetSetSelectedIndex = -1
         Me.ucrInputStatistic.IsReadOnly = False
-        Me.ucrInputStatistic.Location = New System.Drawing.Point(85, 249)
+        Me.ucrInputStatistic.Location = New System.Drawing.Point(83, 249)
         Me.ucrInputStatistic.Name = "ucrInputStatistic"
         Me.ucrInputStatistic.Size = New System.Drawing.Size(97, 21)
         Me.ucrInputStatistic.TabIndex = 81
@@ -457,18 +447,6 @@ Partial Class dlgOtherRosePlots
         Me.ucrChkNormalise.Name = "ucrChkNormalise"
         Me.ucrChkNormalise.Size = New System.Drawing.Size(156, 20)
         Me.ucrChkNormalise.TabIndex = 85
-        '
-        'ucrReceiverX
-        '
-        Me.ucrReceiverX.frmParent = Me
-        Me.ucrReceiverX.Location = New System.Drawing.Point(259, 113)
-        Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
-        Me.ucrReceiverX.Name = "ucrReceiverX"
-        Me.ucrReceiverX.Selector = Nothing
-        Me.ucrReceiverX.Size = New System.Drawing.Size(120, 20)
-        Me.ucrReceiverX.strNcFilePath = ""
-        Me.ucrReceiverX.TabIndex = 4
-        Me.ucrReceiverX.ucrSelector = Nothing
         '
         'ucrReceiverMultiplePollutants
         '
@@ -494,6 +472,18 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverWindSpeed.TabIndex = 6
         Me.ucrReceiverWindSpeed.ucrSelector = Nothing
         '
+        'ucrReceiverX
+        '
+        Me.ucrReceiverX.frmParent = Me
+        Me.ucrReceiverX.Location = New System.Drawing.Point(259, 113)
+        Me.ucrReceiverX.Margin = New System.Windows.Forms.Padding(0)
+        Me.ucrReceiverX.Name = "ucrReceiverX"
+        Me.ucrReceiverX.Selector = Nothing
+        Me.ucrReceiverX.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverX.strNcFilePath = ""
+        Me.ucrReceiverX.TabIndex = 4
+        Me.ucrReceiverX.ucrSelector = Nothing
+        '
         'dlgOtherRosePlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -507,7 +497,6 @@ Partial Class dlgOtherRosePlots
         Me.Controls.Add(Me.ucrChkExcludeMissing)
         Me.Controls.Add(Me.ucrNudPercentile)
         Me.Controls.Add(Me.ucrChkPadDate)
-        Me.Controls.Add(Me.ucrNudNmberOfClusters)
         Me.Controls.Add(Me.ucrChkTransform)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoPercentileRose)
@@ -520,25 +509,25 @@ Partial Class dlgOtherRosePlots
         Me.Controls.Add(Me.lblColor)
         Me.Controls.Add(Me.lblWindDirection)
         Me.Controls.Add(Me.lblDate)
-        Me.Controls.Add(Me.lblWindSpeed)
         Me.Controls.Add(Me.ucrReceiverDate)
         Me.Controls.Add(Me.ucrReceiverWindDirection)
         Me.Controls.Add(Me.ucrSelectorOtherRosePlots)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblPollutant)
         Me.Controls.Add(Me.ucrReceiverPollutant)
-        Me.Controls.Add(Me.ucrInputMethod)
-        Me.Controls.Add(Me.ucrInputStatistic)
-        Me.Controls.Add(Me.lblMethod)
         Me.Controls.Add(Me.lblNoOfClusters)
         Me.Controls.Add(Me.ucrChkForcePositive)
         Me.Controls.Add(Me.ucrChkNormalise)
         Me.Controls.Add(Me.lblPercentile)
         Me.Controls.Add(Me.ucrReceiverMultiplePollutants)
         Me.Controls.Add(Me.ucrReceiverWindSpeed)
-        Me.Controls.Add(Me.lblStatistic)
         Me.Controls.Add(Me.ucrReceiverX)
-        Me.Controls.Add(Me.lblVariableToPlotAgainst)
+        Me.Controls.Add(Me.lblWindSpeed)
+        Me.Controls.Add(Me.lblMethod)
+        Me.Controls.Add(Me.lblStatistic)
+        Me.Controls.Add(Me.ucrNudNmberOfClusters)
+        Me.Controls.Add(Me.ucrInputMethod)
+        Me.Controls.Add(Me.ucrInputStatistic)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -554,7 +543,6 @@ Partial Class dlgOtherRosePlots
     Friend WithEvents ucrNudPercentile As ucrNud
     Friend WithEvents ucrChkPadDate As ucrCheck
     Friend WithEvents ucrNudNmberOfClusters As ucrNud
-    Friend WithEvents lblVariableToPlotAgainst As Label
     Friend WithEvents ucrChkTransform As ucrCheck
     Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents rdoPercentileRose As RadioButton
