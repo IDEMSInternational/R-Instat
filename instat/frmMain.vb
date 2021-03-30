@@ -2337,9 +2337,10 @@ Public Class frmMain
         dlgCircularDensityPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticDataEntry_Click(sender As Object, e As EventArgs) Handles mnuClimaticDataEntry.Click
+    Private Sub mnuTidyandExamineClimaticDataEntry_Click(sender As Object, e As EventArgs) Handles mnuTidyandExamineClimaticDataEntry.Click
         dlgClimaticDataEntry.ShowDialog()
     End Sub
+
     Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
         dlgOtherRosePlots.ShowDialog()
     End Sub
@@ -2350,5 +2351,13 @@ Public Class frmMain
 
     Private Sub mnuClimaticMappingCheckStations_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingCheckStations.Click
         dlgLocatingPointsInShapeFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCheckDataCheckStations_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataCheckStations.Click
+        dlgLocatingPointsInShapeFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticFileImportERA5Data_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportERA5Data.Click
+        dlgImportERA5Data.ShowDialog()
     End Sub
 End Class

@@ -493,7 +493,7 @@ DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, exclu
 }
 )
 
-DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column, num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
+DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column = "", num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
@@ -531,7 +531,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
   
   replaced <- FALSE
   previous_length = self$get_column_count()
-  if(!missing(adjacent_column) && !adjacent_column %in% self$get_column_names()) stop(adjacent_column, "not found in the data")
+  if(adjacent_column != "" && !adjacent_column %in% self$get_column_names()) stop(adjacent_column, "not found in the data")
  
   new_col_names <- c()
   for(i in 1:num_cols) {
@@ -561,14 +561,14 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
   
   # If replacing existing columns and not repositioning them, or before and adjacent_column column positioning parameters are missing
   # then do not reposition.
-  if((replaced && keep_existing_position) || (missing(before) && missing(adjacent_column))) return()
+  if((replaced && keep_existing_position) || (missing(before) && adjacent_column == "")) return()
 
   # Get the adjacent position to be used in appending the new column names
   if(before) {
-    if(missing(adjacent_column)) adjacent_position <- 0
+    if(adjacent_column == "") adjacent_position <- 0
     else adjacent_position <- which(self$get_column_names() == adjacent_column) - 1
   } else {
-      if(missing(adjacent_column)) adjacent_position <- self$get_column_count()
+      if(adjacent_column == "") adjacent_position <- self$get_column_count()
       else adjacent_position <- which(self$get_column_names() == adjacent_column)
   }
 
@@ -3834,3 +3834,43 @@ DataSheet$set("public", "visualize_element_na", function(element_col_name, eleme
     return(plt)
   }
 })
+
+DataSheet$set("public", "get_data_entry_data", function(station, date, elements, view_variables, station_name, type, start_date, end_date) {
+  cols <- c(date, elements)
+  if (!missing(view_variables)) cols <- c(cols, view_variables)
+  if (!missing(station)) cols <- c(station, cols)
+  curr_data <- self$get_columns_from_data(cols)
+  col_names <- c(date, elements)
+  if (!missing(station)) col_names <- c(station, col_names)
+  if (!missing(view_variables)) col_names <- c(col_names, paste(view_variables, "(view)"))
+  names(curr_data) <- col_names
+  
+  if (!missing(station)) curr_data <- curr_data[curr_data[[station]] == station_name, ]
+  if (type == "day") {
+    curr_data <- curr_data[curr_data[[date]] == start_date, ]
+  } else if (type == "month") {
+    if (lubridate::day(start_date) != 1) warning("type = 'month' but start_date is not 1st of the month.")
+    curr_data <- curr_data[curr_data[[date]] >= start_date & curr_data[[date]] <= (start_date + months(1) - 1), ]
+  } else if (type == "range") {
+    curr_data <- curr_data[curr_data[[date]] >= start_date & curr_data[[date]] <= end_date, ]
+  }
+  if (nrow(curr_data) == 0) stop("No data in range.")
+  # Convert to character to they display correctly in VB grid.
+  curr_data[[date]] <- as.character(curr_data[[date]])
+  if (!missing(view_variables) && date %in% view_variables) curr_data[[paste(date, "(view)")]] <- as.character(curr_data[[paste(date, "(view)")]])
+  if (!missing(station)) curr_data[[station]] <- as.character(curr_data[[station]])
+  curr_data
+})
+
+DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed) {
+  if (nrow(new_data) != length(rows_changed)) stop("new_data must have the same number of rows as length of rows_changed.")
+  curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  for (i in seq_along(rows_changed)) {
+    for (k in seq_along(names(new_data))) {
+      curr_data[rows_changed[i], names(new_data)[k]] <- new_data[i, names(new_data)[k]]
+    }
+  }
+  cat("Values updated in:", length(rows_changed), "row(s)\n")
+  self$set_data(curr_data)
+}
+)
