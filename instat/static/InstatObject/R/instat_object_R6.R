@@ -1190,7 +1190,8 @@ DataBook$set("public","add_new_comment", function(data_name, row, column = "", c
                              row = character(0),
                              column = character(0),
                              id = numeric(0),
-                             comment = character(0))
+                             comment = character(0),
+                             time_stamp = as.POSIXct(c()))
     self$import_data(data_tables = list(.comment = comment_df))
     self$add_key(".comment", c("sheet", "row", "id"), "key1")
   }
@@ -1207,7 +1208,8 @@ DataBook$set("public","add_new_comment", function(data_name, row, column = "", c
                                              row = key_vals,
                                              column = column,
                                              id = new_id,
-                                             comment = comment)
+                                             comment = comment,
+                                             time_stamp = Sys.time())
   self$get_data_objects(".comment")$set_data(new_data = comment_df)
 }
 )
