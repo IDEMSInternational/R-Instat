@@ -884,7 +884,7 @@ DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_po
           stop("Invalid column values. Level not found in factor")
         }
       }#end inner for loop
-    }else if ( !(col_type == "numeric" || col_type == "integer" || col_type == "character" || col_type == "logical" ) ){
+    } else if ( !(is.numeric(col_data) || is.logical(col_data) || is.character(col_data)) {
       #clipr support above column types only. So pasting to a column not recognised by clipr may result to unpredictible results 
       #if not in any of above column types then exit function
       stop( paste("Cannot paste into columns of type:", col_type) )
