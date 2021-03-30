@@ -150,6 +150,7 @@ Public Class dlgImportDataset
         dctFileTypes.Add("csv", Chr(34) & "\\.csv$" & Chr(34))
         dctFileTypes.Add("txt", Chr(34) & "\\.txt$" & Chr(34))
         dctFileTypes.Add("tsv", Chr(34) & "\\.tsv$" & Chr(34))
+        dctFileTypes.Add("sav", Chr(34) & "\\.sav" & Chr(34))
         ucrInputComboFileTypes.SetItems(dctFileTypes)
         ucrInputComboFileTypes.SetDropDownStyleAsNonEditable()
         ucrInputComboFileTypes.SetLinkedDisplayControl(lblFileType)
@@ -677,7 +678,7 @@ Public Class dlgImportDataset
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
                 ucrPanelFixedWidthText.Show()
                 grpCSV.Text = "Import Text Options"
-                ''grpCSV.Location = New System.Drawing.Point(9, 99) 'set the location of the groupbox to adjust gaps in the form UI
+                grpCSV.Location = New System.Drawing.Point(9, 150) 'set the location of the groupbox to adjust gaps in the form UI
                 grpCSV.Show()
             ElseIf strFileExt = ".csv" OrElse strFileExt = ".dly" Then
                 strFileType = "CSV"
@@ -685,7 +686,7 @@ Public Class dlgImportDataset
                 clsImportCSV.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
                 grpCSV.Text = "Import CSV Options"
-                'grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
+                grpCSV.Location = New System.Drawing.Point(9, 172) 'set the location of the groupbox to adjust gaps in the form UI
                 grpCSV.Show()
             ElseIf strFileExt = ".dat" Then
                 strFileType = "DAT"
