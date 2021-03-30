@@ -2010,10 +2010,6 @@ Public Class frmMain
         dlgSPI.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticMapping_Click(sender As Object, e As EventArgs) Handles mnuClimaticMapping.Click
-        dlgClimaticStationMaps.ShowDialog()
-    End Sub
-
     Private Sub mnuHelpWindows_Click(sender As Object, e As EventArgs) Handles mnuHelpWindows.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "539")
     End Sub
@@ -2341,11 +2337,27 @@ Public Class frmMain
         dlgCircularDensityPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticDataEntry_Click(sender As Object, e As EventArgs) Handles mnuClimaticDataEntry.Click
+    Private Sub mnuTidyandExamineClimaticDataEntry_Click(sender As Object, e As EventArgs) Handles mnuTidyandExamineClimaticDataEntry.Click
         dlgClimaticDataEntry.ShowDialog()
     End Sub
+
     Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
         dlgOtherRosePlots.ShowDialog()
+    End Sub
 
+    Private Sub mnuClimaticMappingMap_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingMap.Click
+        dlgClimaticStationMaps.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticMappingCheckStations_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingCheckStations.Click
+        dlgLocatingPointsInShapeFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCheckDataCheckStations_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataCheckStations.Click
+        dlgLocatingPointsInShapeFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticFileImportERA5Data_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportERA5Data.Click
+        dlgImportERA5Data.ShowDialog()
     End Sub
 End Class

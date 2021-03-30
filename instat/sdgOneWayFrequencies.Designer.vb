@@ -47,6 +47,10 @@ Partial Class sdgOneWayFrequencies
         Me.ucrChkShowStrings = New instat.ucrCheck()
         Me.tbpGraph = New System.Windows.Forms.TabPage()
         Me.grpGraphOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrNudSize = New instat.ucrNud()
+        Me.lblSize = New System.Windows.Forms.Label()
+        Me.ucrInputColor = New instat.ucrInputComboBox()
+        Me.lblColor = New System.Windows.Forms.Label()
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.lblHjust = New System.Windows.Forms.Label()
         Me.lblVjust = New System.Windows.Forms.Label()
@@ -57,6 +61,10 @@ Partial Class sdgOneWayFrequencies
         Me.ucrChkShowPercentage = New instat.ucrCheck()
         Me.ucrChkShowCount = New instat.ucrCheck()
         Me.grpGraphType = New System.Windows.Forms.GroupBox()
+        Me.rdoViolin = New System.Windows.Forms.RadioButton()
+        Me.rdoHistogram = New System.Windows.Forms.RadioButton()
+        Me.rdoBoxplot = New System.Windows.Forms.RadioButton()
+        Me.rdoDensity = New System.Windows.Forms.RadioButton()
         Me.rdoLine = New System.Windows.Forms.RadioButton()
         Me.rdoDot = New System.Windows.Forms.RadioButton()
         Me.rdoBar = New System.Windows.Forms.RadioButton()
@@ -123,6 +131,10 @@ Partial Class sdgOneWayFrequencies
         '
         'grpGraphOptions
         '
+        Me.grpGraphOptions.Controls.Add(Me.ucrNudSize)
+        Me.grpGraphOptions.Controls.Add(Me.lblSize)
+        Me.grpGraphOptions.Controls.Add(Me.ucrInputColor)
+        Me.grpGraphOptions.Controls.Add(Me.lblColor)
         Me.grpGraphOptions.Controls.Add(Me.lblTitle)
         Me.grpGraphOptions.Controls.Add(Me.lblHjust)
         Me.grpGraphOptions.Controls.Add(Me.lblVjust)
@@ -135,6 +147,34 @@ Partial Class sdgOneWayFrequencies
         resources.ApplyResources(Me.grpGraphOptions, "grpGraphOptions")
         Me.grpGraphOptions.Name = "grpGraphOptions"
         Me.grpGraphOptions.TabStop = False
+        '
+        'ucrNudSize
+        '
+        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSize, "ucrNudSize")
+        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Name = "ucrNudSize"
+        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblSize
+        '
+        resources.ApplyResources(Me.lblSize, "lblSize")
+        Me.lblSize.Name = "lblSize"
+        '
+        'ucrInputColor
+        '
+        Me.ucrInputColor.AddQuotesIfUnrecognised = True
+        Me.ucrInputColor.GetSetSelectedIndex = -1
+        Me.ucrInputColor.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputColor, "ucrInputColor")
+        Me.ucrInputColor.Name = "ucrInputColor"
+        '
+        'lblColor
+        '
+        resources.ApplyResources(Me.lblColor, "lblColor")
+        Me.lblColor.Name = "lblColor"
         '
         'lblTitle
         '
@@ -162,6 +202,7 @@ Partial Class sdgOneWayFrequencies
         'ucrInputHorizontalLabels
         '
         Me.ucrInputHorizontalLabels.AddQuotesIfUnrecognised = True
+        Me.ucrInputHorizontalLabels.GetSetSelectedIndex = -1
         Me.ucrInputHorizontalLabels.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputHorizontalLabels, "ucrInputHorizontalLabels")
         Me.ucrInputHorizontalLabels.Name = "ucrInputHorizontalLabels"
@@ -169,6 +210,7 @@ Partial Class sdgOneWayFrequencies
         'ucrInputVerticalLabels
         '
         Me.ucrInputVerticalLabels.AddQuotesIfUnrecognised = True
+        Me.ucrInputVerticalLabels.GetSetSelectedIndex = -1
         Me.ucrInputVerticalLabels.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputVerticalLabels, "ucrInputVerticalLabels")
         Me.ucrInputVerticalLabels.Name = "ucrInputVerticalLabels"
@@ -193,6 +235,10 @@ Partial Class sdgOneWayFrequencies
         '
         'grpGraphType
         '
+        Me.grpGraphType.Controls.Add(Me.rdoViolin)
+        Me.grpGraphType.Controls.Add(Me.rdoHistogram)
+        Me.grpGraphType.Controls.Add(Me.rdoBoxplot)
+        Me.grpGraphType.Controls.Add(Me.rdoDensity)
         Me.grpGraphType.Controls.Add(Me.rdoLine)
         Me.grpGraphType.Controls.Add(Me.rdoDot)
         Me.grpGraphType.Controls.Add(Me.rdoBar)
@@ -200,6 +246,34 @@ Partial Class sdgOneWayFrequencies
         resources.ApplyResources(Me.grpGraphType, "grpGraphType")
         Me.grpGraphType.Name = "grpGraphType"
         Me.grpGraphType.TabStop = False
+        '
+        'rdoViolin
+        '
+        resources.ApplyResources(Me.rdoViolin, "rdoViolin")
+        Me.rdoViolin.Name = "rdoViolin"
+        Me.rdoViolin.TabStop = True
+        Me.rdoViolin.UseVisualStyleBackColor = True
+        '
+        'rdoHistogram
+        '
+        resources.ApplyResources(Me.rdoHistogram, "rdoHistogram")
+        Me.rdoHistogram.Name = "rdoHistogram"
+        Me.rdoHistogram.TabStop = True
+        Me.rdoHistogram.UseVisualStyleBackColor = True
+        '
+        'rdoBoxplot
+        '
+        resources.ApplyResources(Me.rdoBoxplot, "rdoBoxplot")
+        Me.rdoBoxplot.Name = "rdoBoxplot"
+        Me.rdoBoxplot.TabStop = True
+        Me.rdoBoxplot.UseVisualStyleBackColor = True
+        '
+        'rdoDensity
+        '
+        resources.ApplyResources(Me.rdoDensity, "rdoDensity")
+        Me.rdoDensity.Name = "rdoDensity"
+        Me.rdoDensity.TabStop = True
+        Me.rdoDensity.UseVisualStyleBackColor = True
         '
         'rdoLine
         '
@@ -278,4 +352,12 @@ Partial Class sdgOneWayFrequencies
     Friend WithEvents lblVjust As Label
     Friend WithEvents ucrInputTitle As ucrInputTextBox
     Friend WithEvents lblTableTitle As Label
+    Friend WithEvents rdoHistogram As RadioButton
+    Friend WithEvents rdoBoxplot As RadioButton
+    Friend WithEvents rdoDensity As RadioButton
+    Friend WithEvents rdoViolin As RadioButton
+    Friend WithEvents ucrInputColor As ucrInputComboBox
+    Friend WithEvents lblColor As Label
+    Friend WithEvents lblSize As Label
+    Friend WithEvents ucrNudSize As ucrNud
 End Class
