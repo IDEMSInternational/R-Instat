@@ -158,6 +158,7 @@ Public Class dlgImportDataset
         dctFileTypes.Add("tsv", Chr(34) & "\\.tsv$" & Chr(34))
         dctFileTypes.Add("sav", Chr(34) & "\\.sav" & Chr(34))
         dctFileTypes.Add("dta", Chr(34) & "\\.dta" & Chr(34))
+        dctFileTypes.Add("dly", Chr(34) & "\\.dly" & Chr(34))
         ucrInputComboFileTypes.SetItems(dctFileTypes)
         ucrInputComboFileTypes.SetDropDownStyleAsNonEditable()
         ucrInputComboFileTypes.SetLinkedDisplayControl(lblFileType)
@@ -1199,6 +1200,15 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub ucrInputComboFileTypes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboFileTypes.ControlValueChanged
+        If clsImportMultipleFiles IsNot Nothing Then
+            If ucrInputFilePath.GetText.Contains("dly") Then
+                clsImportMultipleFiles.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
+            Else
+                clsImportMultipleFiles.RemoveParameterByName("format")
+            End If
+        End If
+
+
         SetControlsFromFile(ucrInputFilePath.GetText)
         TestOkEnabled()
     End Sub
