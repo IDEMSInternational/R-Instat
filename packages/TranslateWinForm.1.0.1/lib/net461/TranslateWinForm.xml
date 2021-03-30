@@ -1,0 +1,125 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+TranslateWinForm
+</name>
+</assembly>
+<members>
+<member name="T:TranslateWinForm.My.Resources.Resources">
+<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member>
+<member name="P:TranslateWinForm.My.Resources.Resources.ResourceManager">
+<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member>
+<member name="P:TranslateWinForm.My.Resources.Resources.Culture">
+<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member>
+<member name="T:TranslateWinForm.clsTranslateWinForm">
+------------------------------------------------------------------------------------------------
+ <summary>   
+ Provides utility functions to translate the text in WinForm objects (e.g. menu items, forms and 
+ controls) to a different natural language (e.g. to French). 
+ <para>
+ This class uses an SQLite database to translate text items to a new language. The database must 
+ contain the following tables:
+ <code>
+ CREATE TABLE "form_controls" (
+	"form_name"	TEXT,
+	"control_name"	TEXT,
+	"id_text"	TEXT,
+	PRIMARY KEY("form_name", "control_name")
+ )
+ <para>
+ CREATE TABLE "translations" (
+	"id_text"	TEXT,
+	"language_code"	TEXT,
+	"translation"	TEXT,
+	PRIMARY KEY("id_text", "language_code")
+ )
+ </para></code>
+ For example, if the 'form_controls' table contains a row with the values 
+ {'frmMain', 'mnuFile', 'File'}, 
+ then the 'translations' table should have a row for each supported language, e.g. 
+ {'File', 'en', 'File'}, {'File', 'fr', 'Fichier'}.
+ </para><para>
+ Note: This class is intended to be used solely as a 'static' class (i.e. contains only shared 
+ members, cannot be instantiated and cannot be inherited from).
+ In order to enforce this (and prevent developers from using this class in an unintended way), 
+ the class is declared as 'NotInheritable` and the constructor is declared as 'Private'.</para>
+ </summary>
+------------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.#ctor">
+--------------------------------------------------------------------------------------------
+ <summary> 
+ Declare constructor 'Private' to prevent instantiation of this class (see class comments 
+ for more details). 
+ </summary>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.translateForm(System.Windows.Forms.Form,System.String,System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>
+     TODO this function is still under development - please do not peer review or test yet. 
+     Attempts to translate all the text in <paramref name="clsForm"/> to 
+     <paramref name="strLanguage"/>.
+ </summary>
+
+ <param name="clsForm">          The WinForm form to translate. </param>
+ <param name="strDataSource">    The path of the SQLite '.db' file that contains the
+                                 translation database. </param>
+ <param name="strLanguage">      The language code to translate to (e.g. 'fr' for French). 
+                                 </param>
+
+ <returns>   If an exception is thrown, then returns the exception text; else returns 
+             'Nothing'. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.translateMenuItems(System.Windows.Forms.ToolStripItemCollection,System.Windows.Forms.Control,System.String,System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>
+     Attempts to translate all the text in the menu items in <paramref name="tsCollection"/> 
+     to <paramref name="strLanguage"/>.
+ </summary>
+
+ <param name="tsCollection">     The WinForm menu items to translate. </param>
+ <param name="ctrParent">        The WinForm control that is the parent of the menu. </param>
+ <param name="strDataSource">    The path of the SQLite '.db' file that contains the
+                                 translation database. </param>
+ <param name="strLanguage">      (Optional) The language code to translate to (e.g. 'fr' for
+                                 French). </param>
+
+ <returns>
+     If an exception is thrown, then returns the exception text; else returns 'Nothing'.
+ </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetDctMenuItems(System.Windows.Forms.ToolStripItemCollection)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+     Recursively traverses the <paramref name="tsCollection"/> menu hierarchy and returns a 
+     dictionary containing the name of each (sub)menu option in 
+     <paramref name="tsCollection"/> (as the dictionary key), together with its associated 
+     object (as the dictionary value). 
+ </summary>
+
+ <param name="tsCollection"> The WinForm menu item hierarchy used to populate the returned 
+                             dictionary. </param>
+
+ <returns>   
+     A dictionary containing the name of each (sub)menu option in 
+     <paramref name="tsCollection"/> (as the dictionary key), together with it's associated 
+     object (as the dictionary value). 
+ </returns>
+--------------------------------------------------------------------------------------------
+</member>
+</members>
+</doc>
