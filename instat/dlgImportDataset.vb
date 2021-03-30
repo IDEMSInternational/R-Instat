@@ -128,10 +128,9 @@ Public Class dlgImportDataset
 
         ucrPanelFiles.AddRadioButton(rdoSingleFile)
         ucrPanelFiles.AddRadioButton(rdoMultipleFiles)
-        ucrPanelFiles.AddFunctionNamesCondition(rdoSingleFile, "import_list", bNewIsPositive:=False)
+        'ucrPanelFiles.AddFunctionNamesCondition(rdoMultipleFiles, "import_list", bNewIsPositive:=True)
+        'ucrPanelFiles.AddFunctionNamesCondition(rdoSingleFile, "import_list", bNewIsPositive:=False)
 
-        ucrPanelFiles.AddFunctionNamesCondition(rdoSingleFile, "import_list", bNewIsPositive:=False)
-        ucrPanelFiles.AddFunctionNamesCondition(rdoMultipleFiles, "import_list", bNewIsPositive:=True)
 
         ucrInputFilePath.SetParameter(New RParameter("file"))
         ucrInputFilePath.IsReadOnly = True
@@ -152,7 +151,7 @@ Public Class dlgImportDataset
         dctFileTypes.Add("txt", Chr(34) & "\\.txt$" & Chr(34))
         dctFileTypes.Add("tsv", Chr(34) & "\\.tsv$" & Chr(34))
         ucrInputComboFileTypes.SetItems(dctFileTypes)
-        ucrInputComboFileTypes.SetRDefault(Chr(34) & "\\.csv$" & Chr(34))
+        'ucrInputComboFileTypes.SetRDefault(Chr(34) & "\\.csv$" & Chr(34))
         ucrInputComboFileTypes.SetDropDownStyleAsNonEditable()
         ucrInputComboFileTypes.SetLinkedDisplayControl(lblFileType)
 
@@ -406,7 +405,7 @@ Public Class dlgImportDataset
         clsImportMultipleFiles.SetRCommand("import_list")
 
         clsGetFilesList.SetRCommand("list.files")
-        clsGetFilesList.AddParameter("pattern", "\\.csv$", iPosition:=1)
+        clsGetFilesList.AddParameter("pattern", Chr(34) & "\\.csv$" & Chr(34), iPosition:=1)
         clsGetFilesList.AddParameter("full.names", "TRUE", iPosition:=2)
         clsGetFilesList.AddParameter("ignore.case", "TRUE", iPosition:=3)
 
@@ -437,7 +436,7 @@ Public Class dlgImportDataset
         lblCannotImport.Hide()
         GridPreviewVisible(False)
         ucrSaveFile.Hide()
-        'rdoSingleFile.Checked = True
+        rdoSingleFile.Checked = True
     End Sub
 
     'Private Sub ucrInputName_NameChanged() Handles ucrInputName.ControlValueChanged
@@ -458,7 +457,7 @@ Public Class dlgImportDataset
 
     Private Sub TestOkEnabled()
         If rdoMultipleFiles.Checked Then
-            ucrBase.OKEnabled(strFilePathSystem <> "" AndAlso Directory.GetFiles(strFilePathSystem, GetSelectedFileExtensionForMultipleFiles()).Count > 0)
+            ucrBase.OKEnabled(strFilePathSystem <> "" AndAlso Directory.Exists(strFilePathSystem) AndAlso Directory.GetFiles(strFilePathSystem, GetSelectedFileExtensionForMultipleFiles()).Count > 0)
         Else
             If (ucrSaveFile.IsComplete OrElse strFileType = "RDS") AndAlso bCanImport Then
                 If strFileType = "XLSX" OrElse strFileType = "XLS" Then
@@ -541,7 +540,7 @@ Public Class dlgImportDataset
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsGetFilesList, New RParameter("path", 0), iAdditionalPairNo:=8)
         ucrInputFilePath.SetRCode(clsImport, bReset)
 
-        ucrPanelFiles.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        'ucrPanelFiles.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         'file types control
         ucrInputComboFileTypes.SetRCode(clsGetFilesList, bReset)
@@ -660,7 +659,7 @@ Public Class dlgImportDataset
             Dim arrFilePathsAndNames() As String
             Dim lstFileNames As New List(Of String)
 
-            If strFilePathSystem <> "" Then
+            If strFilePathSystem <> "" AndAlso Directory.Exists(strFilePathSystem) Then
                 arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, GetSelectedFileExtensionForMultipleFiles())
                 For Each strFilePathName As String In arrFilePathsAndNames
                     lstFileNames.Add(GetCleanFileName(strFilePathName))
