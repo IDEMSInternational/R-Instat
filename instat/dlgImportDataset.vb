@@ -643,7 +643,6 @@ Public Class dlgImportDataset
         grpRDS.Hide()
         ExcelSheetPreviewVisible(False)
         grpCSV.Hide()
-        'ucrChkMultipleFiles.SetVisible(False)
         ucrSaveFile.Show()
 
         If bFolder Then
