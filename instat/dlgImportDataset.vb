@@ -40,6 +40,7 @@ Public Class dlgImportDataset
     Private bSupressSheetChange As Boolean = False
 
     Dim dctSelectedExcelSheets As New Dictionary(Of Integer, String)
+    Private dctFileTypes As New Dictionary(Of String, String)
 
     Public Sub New()
         ' This call is required by the designer.
@@ -87,7 +88,7 @@ Public Class dlgImportDataset
         Else
             'if none of the above then try setting the displayed values from the previous contents of ucrInputFilePath.
             If Not String.IsNullOrEmpty(ucrInputFilePath.GetText()) Then
-                If File.Exists(ucrInputFilePath.GetText()) Then
+                If File.Exists(ucrInputFilePath.GetText()) OrElse Directory.Exists(ucrInputFilePath.GetText()) Then
                     SetControlsFromFile(ucrInputFilePath.GetText())
                 Else
                     MsgBox("File no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File No Longer Exists")
@@ -114,7 +115,6 @@ Public Class dlgImportDataset
         Dim dctucrInputEncodingCSV As New Dictionary(Of String, String)
         Dim dctucrInputDecimalCSV As New Dictionary(Of String, String)
         Dim dctucrInputHeadersCSV As New Dictionary(Of String, String)
-        Dim dctFileTypes As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 11
 
@@ -128,6 +128,8 @@ Public Class dlgImportDataset
 
         ucrPanelFiles.AddRadioButton(rdoSingleFile)
         ucrPanelFiles.AddRadioButton(rdoMultipleFiles)
+        ucrPanelFiles.AddFunctionNamesCondition(rdoSingleFile, "import_list", bNewIsPositive:=False)
+
         ucrPanelFiles.AddFunctionNamesCondition(rdoSingleFile, "import_list", bNewIsPositive:=False)
         ucrPanelFiles.AddFunctionNamesCondition(rdoMultipleFiles, "import_list", bNewIsPositive:=True)
 
@@ -145,6 +147,7 @@ Public Class dlgImportDataset
         'Multiple Files Controls
 
         ucrInputComboFileTypes.SetParameter(New RParameter("pattern", iNewPosition:=1))
+        dctFileTypes.Clear()
         dctFileTypes.Add("csv", Chr(34) & "\\.csv$" & Chr(34))
         dctFileTypes.Add("txt", Chr(34) & "\\.txt$" & Chr(34))
         dctFileTypes.Add("tsv", Chr(34) & "\\.tsv$" & Chr(34))
@@ -434,7 +437,7 @@ Public Class dlgImportDataset
         lblCannotImport.Hide()
         GridPreviewVisible(False)
         ucrSaveFile.Hide()
-        rdoSingleFile.Checked = True
+        'rdoSingleFile.Checked = True
     End Sub
 
     'Private Sub ucrInputName_NameChanged() Handles ucrInputName.ControlValueChanged
@@ -455,7 +458,7 @@ Public Class dlgImportDataset
 
     Private Sub TestOkEnabled()
         If rdoMultipleFiles.Checked Then
-            'todo
+            ucrBase.OKEnabled(strFilePathSystem <> "" AndAlso Directory.GetFiles(strFilePathSystem, GetSelectedFileExtensionForMultipleFiles()).Count > 0)
         Else
             If (ucrSaveFile.IsComplete OrElse strFileType = "RDS") AndAlso bCanImport Then
                 If strFileType = "XLSX" OrElse strFileType = "XLS" Then
@@ -537,6 +540,8 @@ Public Class dlgImportDataset
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("file", 0), iAdditionalPairNo:=7)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsGetFilesList, New RParameter("path", 0), iAdditionalPairNo:=8)
         ucrInputFilePath.SetRCode(clsImport, bReset)
+
+        ucrPanelFiles.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         'file types control
         ucrInputComboFileTypes.SetRCode(clsGetFilesList, bReset)
@@ -652,25 +657,19 @@ Public Class dlgImportDataset
         grpCSV.Hide()
 
         If rdoMultipleFiles.Checked Then
-            strFileType = ""
-
-
-
-
             Dim arrFilePathsAndNames() As String
             Dim lstFileNames As New List(Of String)
 
-            'e.g Chr(34) & "\\.csv$" & Chr(34
-            'todo. get the value from the dictionary
-            strFileExt = ucrInputComboFileTypes.GetValue()
-            strFileExt = "*." & strFileExt.Replace("""", "").Replace("\\.", "").Replace("$", "")
-            arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, strFileExt)
-
-            For Each strFilePathName As String In arrFilePathsAndNames
-                lstFileNames.Add(GetCleanFileName(strFilePathName))
-            Next
+            If strFilePathSystem <> "" Then
+                arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, GetSelectedFileExtensionForMultipleFiles())
+                For Each strFilePathName As String In arrFilePathsAndNames
+                    lstFileNames.Add(GetCleanFileName(strFilePathName))
+                Next
+            End If
+            strFileType = ""
             'set the file names as the data frame names
             ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=lstFileNames)
+            ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
             ucrSaveFile.Hide()
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
         Else
@@ -751,15 +750,7 @@ Public Class dlgImportDataset
         Dim rowsToSkip As Integer
         If bDialogLoaded Then
             If rdoMultipleFiles.Checked AndAlso strFilePathSystem <> "" Then
-                Dim strFileExt As String
-                Dim arrFilePathsAndNames() As String
-
-                'e.g Chr(34) & "\\.csv$" & Chr(34
-                'todo. get the value from the dictionary of the control
-                strFileExt = ucrInputComboFileTypes.GetValue()
-                strFileExt = "*." & strFileExt.Replace("""", "").Replace("\\.", "").Replace("$", "")
-                arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, strFileExt)
-
+                Dim arrFilePathsAndNames() As String = Directory.GetFiles(strFilePathSystem, GetSelectedFileExtensionForMultipleFiles())
                 lblTextFilePreview.Text = If(arrFilePathsAndNames.Count = 0, "No Files found", "Files found: " & arrFilePathsAndNames.Count)
                 txtTextFilePreview.Text = ""
                 For Each strFilePathName As String In arrFilePathsAndNames
@@ -1215,5 +1206,14 @@ Public Class dlgImportDataset
         SetControlsFromFile(ucrInputFilePath.GetText)
         TestOkEnabled()
     End Sub
+
+    Private Function GetSelectedFileExtensionForMultipleFiles() As String
+        If dctFileTypes.Count < 1 OrElse ucrInputComboFileTypes.IsEmpty Then
+            Return ""
+        End If
+        Dim strFileExt As String = dctFileTypes.Item(ucrInputComboFileTypes.GetText)
+        strFileExt = "*." & strFileExt.Replace("""", "").Replace("\\.", "").Replace("$", "")
+        Return strFileExt
+    End Function
 
 End Class
