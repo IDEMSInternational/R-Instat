@@ -68,11 +68,17 @@ Public Class dlgImportDataset
         End If
         SetRCodeForControls(bReset)
         If strFileToOpenOn <> "" Then
-            If Not File.Exists(strFileToOpenOn) Then
+            If File.Exists(strFileToOpenOn) Then
+                rdoSingleFile.Checked = True
+                rdoMultipleFiles.Checked = False
+                SetControlsFromFile(strFileToOpenOn)
+            ElseIf Directory.Exists(strFileToOpenOn) Then
+                rdoSingleFile.Checked = False
+                rdoMultipleFiles.Checked = True
+                SetControlsFromFile(strFileToOpenOn)
+            Else
                 MsgBox("File no longer exists: " & strFileToOpenOn)
                 SetControlsFromFile("")
-            Else
-                SetControlsFromFile(strFileToOpenOn)
             End If
             bStartOpenDialog = False
             strFileToOpenOn = ""
@@ -654,6 +660,7 @@ Public Class dlgImportDataset
         grpRDS.Hide()
         ExcelSheetPreviewVisible(False)
         grpCSV.Hide()
+        ucrSaveFile.Show()
 
         If rdoMultipleFiles.Checked Then
             strFileType = ""
@@ -679,7 +686,7 @@ Public Class dlgImportDataset
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
                 ucrPanelFixedWidthText.Show()
                 grpCSV.Text = "Import Text Options"
-                grpCSV.Location = New System.Drawing.Point(9, 150) 'set the location of the groupbox to adjust gaps in the form UI
+                grpCSV.Location = New System.Drawing.Point(9, 172) 'set the location of the groupbox to adjust gaps in the form UI
                 grpCSV.Show()
             ElseIf strFileExt = ".csv" OrElse strFileExt = ".dly" Then
                 strFileType = "CSV"
@@ -687,7 +694,7 @@ Public Class dlgImportDataset
                 clsImportCSV.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
                 grpCSV.Text = "Import CSV Options"
-                grpCSV.Location = New System.Drawing.Point(9, 172) 'set the location of the groupbox to adjust gaps in the form UI
+                grpCSV.Location = New System.Drawing.Point(9, 130) 'set the location of the groupbox to adjust gaps in the form UI
                 grpCSV.Show()
             ElseIf strFileExt = ".dat" Then
                 strFileType = "DAT"

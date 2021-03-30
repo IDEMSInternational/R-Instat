@@ -255,7 +255,7 @@ Public Class clsRecentFiles
             End If
         End If
 
-        If File.Exists(strFilePath) Then
+        If File.Exists(strFilePath) OrElse Directory.Exists(strFilePath) Then
             dlgImportDataset.strFileToOpenOn = strFilePath
             dlgImportDataset.ShowDialog()
         Else
