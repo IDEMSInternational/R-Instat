@@ -19,7 +19,7 @@ Imports instat.Translations
 Public Class dlgDuplicates
     Private bReset As Boolean = True
     Private bFirstLoad As Boolean = True
-    Private clsDuplicated2, clsDuplicated, clsStreakFunction, clsSubsetCol, clsdupCountIndex As New RFunction
+    Private clsDuplicated2, clsDuplicated, clsStreakFunction, clsSubsetCol, clsDupCountIndex, clsSummaryFunction, clsGetColumnsFunction As New RFunction
 
     Private Sub dlgDuplicatesConstructed_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -120,6 +120,10 @@ Public Class dlgDuplicates
         ucrInputComboType.SetDropDownStyleAsNonEditable()
         ucrInputComboType.SetItems(dctType)
 
+        ucrChkIncludeSummary.SetText("Display Summary")
+        ucrChkIncludeSummary.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"})
+        ucrChkIncludeSummary.AddRSyntaxContainsFunctionNamesCondition(False, {"summary"}, False)
+
         ucrNewColumnName.SetPrefix("dup")
         ucrNewColumnName.SetDataFrameSelector(ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames)
         ucrNewColumnName.SetIsComboBox()
@@ -132,7 +136,9 @@ Public Class dlgDuplicates
         clsDuplicated2 = New RFunction
         clsStreakFunction = New RFunction
         clsSubsetCol = New RFunction
-        clsdupCountIndex = New RFunction
+        clsDupCountIndex = New RFunction
+        clsGetColumnsFunction = New RFunction
+        clsSummaryFunction = New RFunction
 
         SetDataFrameOrColumns()
         ucrNewColumnName.Reset()
@@ -149,24 +155,32 @@ Public Class dlgDuplicates
         clsStreakFunction.SetRCommand("duplicated_cases")
         clsStreakFunction.AddParameter("ignore", "NULL")
 
-        clsdupCountIndex.SetRCommand("duplicated_count_index")
+        clsDupCountIndex.SetRCommand("duplicated_count_index")
+
+        clsGetColumnsFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+
+        clsSummaryFunction.SetRCommand("summary")
+        clsSummaryFunction.AddParameter("object", clsRFunctionParameter:=clsGetColumnsFunction)
+        clsSummaryFunction.iCallType = 2
 
         clsSubsetCol.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated2)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=0)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverForSelectedVariables.AddAdditionalCodeParameterPair(clsDuplicated2, New RParameter("x", 1), iAdditionalPairNo:=1)
-        ucrReceiverForSelectedVariables.AddAdditionalCodeParameterPair(clsdupCountIndex, New RParameter("x", 1), iAdditionalPairNo:=2)
+        ucrReceiverForSelectedVariables.AddAdditionalCodeParameterPair(clsDupCountIndex, New RParameter("x", 1), iAdditionalPairNo:=2)
         ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDuplicated2, New RParameter("x", 0), iAdditionalPairNo:=1)
-        ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsdupCountIndex, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrSelectorDuplicateswithVariables.AddAdditionalCodeParameterPair(clsDupCountIndex, New RParameter("x", 0), iAdditionalPairNo:=2)
         ucrNewColumnName.AddAdditionalRCode(clsDuplicated2, iAdditionalPairNo:=1)
         ucrNewColumnName.AddAdditionalRCode(clsStreakFunction, iAdditionalPairNo:=2)
-        ucrNewColumnName.AddAdditionalRCode(clsdupCountIndex, iAdditionalPairNo:=3)
+        ucrNewColumnName.AddAdditionalRCode(clsDupCountIndex, iAdditionalPairNo:=3)
+        ucrNewColumnName.AddAdditionalRCode(clsGetColumnsFunction, iAdditionalPairNo:=4)
 
-
-        ucrInputComboType.SetRCode(clsdupCountIndex, bReset)
+        ucrInputComboType.SetRCode(clsDupCountIndex, bReset)
         ucrReceiverForSuccessiveValues.SetRCode(clsStreakFunction, bReset)
         ucrChkOmitValues.SetRCode(clsStreakFunction, bReset)
         ucrInputOmitValues.SetRCode(clsStreakFunction, bReset)
@@ -176,9 +190,12 @@ Public Class dlgDuplicates
         ucrReceiverForSelectedVariables.SetRCode(clsDuplicated, bReset)
         ucrNewColumnName.SetRCode(clsDuplicated, bReset)
         ucrPnlDuplicates.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrChkIncludeSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
+
         If bReset Then
             ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         End If
+        AddDataFrameForGetColumnsFunction()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -220,6 +237,14 @@ Public Class dlgDuplicates
         SetDataFrameOrColumns()
     End Sub
 
+    Private Sub ucrChkIncludeSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeSummary.ControlValueChanged
+        If ucrChkIncludeSummary.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
+        End If
+    End Sub
+
     Private Sub SetDataFrameOrColumns()
         If rdoDataFrame.Checked Then
             ucrSelectorDuplicateswithVariables.SetVariablesVisible(False)
@@ -227,7 +252,7 @@ Public Class dlgDuplicates
             ' note that we have to run this here because the parameter x is used for both functions and all four radio buttons
             clsDuplicated.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
             clsDuplicated2.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
-            clsdupCountIndex.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+            clsDupCountIndex.AddParameter("x", clsRFunctionParameter:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         ElseIf rdoSelectedVariables.Checked Then
             ucrReceiverForSelectedVariables.SetMeAsReceiver()
             ucrReceiverForSelectedVariables.SetParameterIsRFunction()
@@ -246,7 +271,7 @@ Public Class dlgDuplicates
             ElseIf rdoDuplicatesOnly.Checked Then
                 ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated)
             ElseIf rdoIndexNumberOfDuplicates.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsdupCountIndex)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsDupCountIndex)
             End If
         ElseIf rdoSuccessiveValues.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsStreakFunction)
@@ -257,15 +282,29 @@ Public Class dlgDuplicates
         SetBaseFunction()
     End Sub
 
-    Private Sub ucrSelectorDuplicateswithVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDuplicateswithVariables.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+    Private Sub AddDataFrameForGetColumnsFunction()
+        clsGetColumnsFunction.AddParameter(strParameterName:="data_name", strParameterValue:=Chr(34) & ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34), iPosition:=0)
+    End Sub
+
+    Private Sub ucrSelectorDuplicateswithVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDuplicateswithVariables.ControlValueChanged
         SetDataFrameOrColumns()
+        AddDataFrameForGetColumnsFunction()
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        SetDataFrameOrColumns()
+    End Sub
+
+    Private Sub ucrNewColumnName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlValueChanged
+        'change the parameter values
+        clsGetColumnsFunction.AddParameter(strParameterName:="col_names", strParameterValue:=Chr(34) & ucrNewColumnName.GetText & Chr(34), iPosition:=1)
     End Sub
 
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewColumnName.ControlContentsChanged, ucrSelectorDuplicateswithVariables.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrReceiverForSelectedVariables.ControlContentsChanged, ucrReceiverForSuccessiveValues.ControlContentsChanged, ucrChkOmitValues.ControlContentsChanged, ucrChkTolerance.ControlContentsChanged, ucrInputTolerance.ControlContentsChanged, ucrInputOmitValues.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrcorecontrols_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitValues.ControlValueChanged, ucrReceiverForSuccessiveValues.ControlValueChanged, ucrInputConditions.ControlValueChanged, ucrInputOmitValues.ControlValueChanged
+    Private Sub ucrCoreControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitValues.ControlValueChanged, ucrReceiverForSuccessiveValues.ControlValueChanged, ucrInputConditions.ControlValueChanged, ucrInputOmitValues.ControlValueChanged
         SetIgnoreVals()
     End Sub
 End Class
