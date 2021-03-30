@@ -58,6 +58,10 @@ Public Class dlgLocatingPointsInShapeFile
         ucrReceiverGeometry.SetParameterIsRFunction()
         ucrReceiverGeometry.SetDataType("numeric")
 
+        ucrChkOmitMissing.SetParameter(New RParameter("na.fail", 3))
+        ucrChkOmitMissing.SetText("Omit Missing Values")
+        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
+        ucrChkOmitMissing.SetRDefault("TRUE")
 
         ucrSaveNewColumnName.SetPrefix("location")
         ucrSaveNewColumnName.SetSaveTypeAsColumn()
@@ -79,10 +83,10 @@ Public Class dlgLocatingPointsInShapeFile
         ucrReceiverLongitude.SetMeAsReceiver()
         ucrReceiverGeometry.SetMeAsReceiver()
 
-
         clsStAsSfFunction.SetPackageName("sf")
         clsStAsSfFunction.SetRCommand("st_as_sf")
         clsStAsSfFunction.AddParameter("coords", clsRFunctionParameter:=clsConcFunction, iPosition:=1)
+        clsStAsSfFunction.AddParameter("na.fail", "FALSE", iPosition:=3)
         clsStAsSfFunction.AddParameter("crs", "4326", iPosition:=2)
         clsStAsSfFunction.SetAssignTo("points")
 
@@ -111,6 +115,7 @@ Public Class dlgLocatingPointsInShapeFile
         ucrReceiverLongitude.SetRCode(clsConcFunction, bReset)
         ucrReceiverGeometry.SetRCode(clsStCombineFunction, bReset)
         ucrSaveNewColumnName.SetRCode(clsSubsetOperator, bReset)
+        ucrChkOmitMissing.SetRCode(clsStAsSfFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
