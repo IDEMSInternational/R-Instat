@@ -1050,13 +1050,13 @@
     <value>282, 22</value>
   </data>
   <data name="mnuClimateFileImportfromClimSoft.Text" xml:space="preserve">
-    <value>Import from CLIMSOFT...</value>
+    <value>Import from Climsoft...</value>
   </data>
   <data name="mnuClimateFileImportfromClimSoftWizard.Size" type="System.Drawing.Size, System.Drawing">
     <value>282, 22</value>
   </data>
   <data name="mnuClimateFileImportfromClimSoftWizard.Text" xml:space="preserve">
-    <value>Import from CLIMSOFT Wizard...</value>
+    <value>Import from Climsoft Wizard...</value>
   </data>
   <data name="mnuClimaticFileImportFromCliData.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
