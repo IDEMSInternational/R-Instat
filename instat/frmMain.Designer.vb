@@ -188,8 +188,8 @@ Partial Class frmMain
         Me.mnuClimaticFileImportandTidyNetCDF = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileImportandTidyShapefile = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuClimateFileImportFromClimSoft = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimateFileImportFromClimSoftWizard = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateFileImportfromClimSoft = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimateFileImportfromClimSoftWizard = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileImportFromCliData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
@@ -1473,7 +1473,7 @@ Partial Class frmMain
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportfromClimateDataStore, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileImportandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportFromClimSoft, Me.mnuClimateFileImportFromClimSoftWizard, Me.mnuClimaticFileImportFromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportfromClimateDataStore, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileImportandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportfromClimSoft, Me.mnuClimateFileImportfromClimSoftWizard, Me.mnuClimaticFileImportFromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         resources.ApplyResources(Me.mnuClimaticFile, "mnuClimaticFile")
         '
@@ -1507,15 +1507,15 @@ Partial Class frmMain
         Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
         resources.ApplyResources(Me.ToolStripSeparator20, "ToolStripSeparator20")
         '
-        'mnuClimateFileImportFromClimSoft
+        'mnuClimateFileImportfromClimSoft
         '
-        Me.mnuClimateFileImportFromClimSoft.Name = "mnuClimateFileImportFromClimSoft"
-        resources.ApplyResources(Me.mnuClimateFileImportFromClimSoft, "mnuClimateFileImportFromClimSoft")
+        Me.mnuClimateFileImportfromClimSoft.Name = "mnuClimateFileImportfromClimSoft"
+        resources.ApplyResources(Me.mnuClimateFileImportfromClimSoft, "mnuClimateFileImportfromClimSoft")
         '
-        'mnuClimateFileImportFromClimSoftWizard
+        'mnuClimateFileImportfromClimSoftWizard
         '
-        Me.mnuClimateFileImportFromClimSoftWizard.Name = "mnuClimateFileImportFromClimSoftWizard"
-        resources.ApplyResources(Me.mnuClimateFileImportFromClimSoftWizard, "mnuClimateFileImportFromClimSoftWizard")
+        Me.mnuClimateFileImportfromClimSoftWizard.Name = "mnuClimateFileImportfromClimSoftWizard"
+        resources.ApplyResources(Me.mnuClimateFileImportfromClimSoftWizard, "mnuClimateFileImportfromClimSoftWizard")
         '
         'mnuClimaticFileImportFromCliData
         '
@@ -4491,7 +4491,7 @@ Partial Class frmMain
     Friend WithEvents mnuHelpGuideGlosary As ToolStripMenuItem
     Friend WithEvents mnuhelpGuidesMore As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileExportToCPT As ToolStripMenuItem
-    Friend WithEvents mnuClimateFileImportFromClimSoft As ToolStripMenuItem
+    Friend WithEvents mnuClimateFileImportfromClimSoft As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileImportFromCliData As ToolStripMenuItem
     Friend WithEvents mnuCimaticPrepareTransform As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckData As ToolStripMenuItem
@@ -4806,7 +4806,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator68 As ToolStripSeparator
     Friend WithEvents mnuStructuredCircularCirclize As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator20 As ToolStripSeparator
-    Friend WithEvents mnuClimateFileImportFromClimSoftWizard As ToolStripMenuItem
+    Friend WithEvents mnuClimateFileImportfromClimSoftWizard As ToolStripMenuItem
     Friend WithEvents mnuExportToWWRToolStrip As ToolStripMenuItem
     Friend WithEvents mnuViewStructuredMenu As ToolStripMenuItem
     Friend WithEvents mnuClimaticNCMP As ToolStripMenuItem

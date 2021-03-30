@@ -1013,6 +1013,75 @@
   <metadata name="SaveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>638, 56</value>
   </metadata>
+  <data name="mnuClimaticFileOpensst.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
+  </data>
+  <data name="mnuClimaticFileOpensst.Text" xml:space="preserve">
+    <value>Open SST...</value>
+  </data>
+  <data name="mnuClimaticFileImportfromIRIDataLibrary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
+  </data>
+  <data name="mnuClimaticFileImportfromIRIDataLibrary.Text" xml:space="preserve">
+    <value>Import from IRI Data Library...</value>
+  </data>
+  <data name="mnuClimaticFileImportfromClimateDataStore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
+  </data>
+  <data name="mnuClimaticFileImportfromClimateDataStore.Text" xml:space="preserve">
+    <value>Import from CDS (Climate Data Store)...</value>
+  </data>
+  <data name="mnuClimaticFileImportandTidyNetCDF.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
+  </data>
+  <data name="mnuClimaticFileImportandTidyNetCDF.Text" xml:space="preserve">
+    <value>Import and Tidy NetCDF...</value>
+  </data>
+  <data name="mnuClimaticFileImportandTidyShapefile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
+  </data>
+  <data name="mnuClimaticFileImportandTidyShapefile.Text" xml:space="preserve">
+    <value>Import and Tidy Shapefile...</value>
+  </data>
+  <data name="ToolStripSeparator20.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 6</value>
+  </data>
+  <data name="mnuClimateFileImportfromClimSoft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
+  </data>
+  <data name="mnuClimateFileImportfromClimSoft.Text" xml:space="preserve">
+    <value>Import from CLIMSOFT...</value>
+  </data>
+  <data name="mnuClimateFileImportfromClimSoftWizard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
+  </data>
+  <data name="mnuClimateFileImportfromClimSoftWizard.Text" xml:space="preserve">
+    <value>Import from CLIMSOFT Wizard...</value>
+  </data>
+  <data name="mnuClimaticFileImportFromCliData.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuClimaticFileImportFromCliData.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
+  </data>
+  <data name="mnuClimaticFileImportFromCliData.Text" xml:space="preserve">
+    <value>Import From CLIDATA...</value>
+  </data>
+  <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
+    <value>279, 6</value>
+  </data>
+  <data name="mnuClimaticFileExportToCPT.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
+  </data>
+  <data name="mnuClimaticFileExportToCPT.Text" xml:space="preserve">
+    <value>Export to CPT...</value>
+  </data>
+  <data name="mnuExportToWWRToolStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
+  </data>
+  <data name="mnuExportToWWRToolStrip.Text" xml:space="preserve">
+    <value>Export to World Weather Records...</value>
+  </data>
   <data name="mnuClimaticFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
   </data>
@@ -1085,18 +1154,6 @@
   <data name="mnuClimaticCompare.Text" xml:space="preserve">
     <value>Compare</value>
   </data>
-  <data name="mnuClimaticMappingMap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 22</value>
-  </data>
-  <data name="mnuClimaticMappingMap.Text" xml:space="preserve">
-    <value>Map...</value>
-  </data>
-  <data name="mnuClimaticMappingCheckStationLocations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 22</value>
-  </data>
-  <data name="mnuClimaticMappingCheckStationLocations.Text" xml:space="preserve">
-    <value>Check Station Locations...</value>
-  </data>
   <data name="mnuClimaticMapping.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
   </data>
@@ -1132,75 +1189,6 @@
   </data>
   <data name="mnuClimatic.Text" xml:space="preserve">
     <value>Climatic</value>
-  </data>
-  <data name="mnuClimaticFileOpensst.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 22</value>
-  </data>
-  <data name="mnuClimaticFileOpensst.Text" xml:space="preserve">
-    <value>Open SST...</value>
-  </data>
-  <data name="mnuClimaticFileImportfromIRIDataLibrary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 22</value>
-  </data>
-  <data name="mnuClimaticFileImportfromIRIDataLibrary.Text" xml:space="preserve">
-    <value>Import from IRI Data Library...</value>
-  </data>
-  <data name="mnuClimaticFileImportfromClimateDataStore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 22</value>
-  </data>
-  <data name="mnuClimaticFileImportfromClimateDataStore.Text" xml:space="preserve">
-    <value>Import from CDS (Climate Data Store)...</value>
-  </data>
-  <data name="mnuClimaticFileImportandTidyNetCDF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 22</value>
-  </data>
-  <data name="mnuClimaticFileImportandTidyNetCDF.Text" xml:space="preserve">
-    <value>Import and Tidy NetCDF...</value>
-  </data>
-  <data name="mnuClimaticFileImportandTidyShapefile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 22</value>
-  </data>
-  <data name="mnuClimaticFileImportandTidyShapefile.Text" xml:space="preserve">
-    <value>Import and Tidy Shapefile...</value>
-  </data>
-  <data name="ToolStripSeparator20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 6</value>
-  </data>
-  <data name="mnuClimateFileImportFromClimSoft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 22</value>
-  </data>
-  <data name="mnuClimateFileImportFromClimSoft.Text" xml:space="preserve">
-    <value>Import from CLIMSOFT...</value>
-  </data>
-  <data name="mnuClimateFileImportFromClimSoftWizard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 22</value>
-  </data>
-  <data name="mnuClimateFileImportFromClimSoftWizard.Text" xml:space="preserve">
-    <value>Import from CLIMSOFT Wizard...</value>
-  </data>
-  <data name="mnuClimaticFileImportFromCliData.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuClimaticFileImportFromCliData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 22</value>
-  </data>
-  <data name="mnuClimaticFileImportFromCliData.Text" xml:space="preserve">
-    <value>Import From CLIDATA...</value>
-  </data>
-  <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>279, 6</value>
-  </data>
-  <data name="mnuClimaticFileExportToCPT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 22</value>
-  </data>
-  <data name="mnuClimaticFileExportToCPT.Text" xml:space="preserve">
-    <value>Export to CPT...</value>
-  </data>
-  <data name="mnuExportToWWRToolStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 22</value>
-  </data>
-  <data name="mnuExportToWWRToolStrip.Text" xml:space="preserve">
-    <value>Export to World Weather Records...</value>
   </data>
   <data name="mnuClimaticTidyandExamineVisualiseData.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 22</value>
@@ -1729,6 +1717,18 @@
   </data>
   <data name="mnuClimaticCompareTaylorDiagram.Text" xml:space="preserve">
     <value>Taylor Diagram...</value>
+  </data>
+  <data name="mnuClimaticMappingMap.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 22</value>
+  </data>
+  <data name="mnuClimaticMappingMap.Text" xml:space="preserve">
+    <value>Map...</value>
+  </data>
+  <data name="mnuClimaticMappingCheckStationLocations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 22</value>
+  </data>
+  <data name="mnuClimaticMappingCheckStationLocations.Text" xml:space="preserve">
+    <value>Check Station Locations...</value>
   </data>
   <data name="mnuClimaticModelsExtremes.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
@@ -7335,16 +7335,16 @@
   <data name="&gt;&gt;ToolStripSeparator20.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimateFileImportFromClimSoft.Name" xml:space="preserve">
-    <value>mnuClimateFileImportFromClimSoft</value>
+  <data name="&gt;&gt;mnuClimateFileImportfromClimSoft.Name" xml:space="preserve">
+    <value>mnuClimateFileImportfromClimSoft</value>
   </data>
-  <data name="&gt;&gt;mnuClimateFileImportFromClimSoft.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimateFileImportfromClimSoft.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimateFileImportFromClimSoftWizard.Name" xml:space="preserve">
-    <value>mnuClimateFileImportFromClimSoftWizard</value>
+  <data name="&gt;&gt;mnuClimateFileImportfromClimSoftWizard.Name" xml:space="preserve">
+    <value>mnuClimateFileImportfromClimSoftWizard</value>
   </data>
-  <data name="&gt;&gt;mnuClimateFileImportFromClimSoftWizard.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimateFileImportfromClimSoftWizard.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticFileImportFromCliData.Name" xml:space="preserve">

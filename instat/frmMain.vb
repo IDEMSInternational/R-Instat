@@ -1250,11 +1250,11 @@ Public Class frmMain
         dlgInventoryPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateFileImportFromClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportFromClimSoft.Click
+    Private Sub mnuClimateFileImportfromClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportfromClimSoft.Click
         dlgClimSoft.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateFileImportFromClimSoftWizard_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportFromClimSoftWizard.Click
+    Private Sub mnuClimateFileImportfromClimSoftWizard_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportfromClimSoftWizard.Click
         dlgClimsoftWizard.ShowDialog()
     End Sub
 
