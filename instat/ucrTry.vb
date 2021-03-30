@@ -22,10 +22,10 @@ Public Class ucrTry
     Private CommandModel As String = ""
     Private bIsModel As Boolean
     Private strError As String
-    Private WithEvents ucrReceiverScript As New ucrReceiverExpression
-    Private WithEvents ucrModelPreview As New ucrInputTextBox
+    Private WithEvents ucrReceiverScript As ucrReceiverExpression
     Private clsRSyntax As RSyntax
     Private bstrVecOutput As Boolean
+    Private arrAssociatedControls As ucrCore()
 
     Public Sub New()
         ' This call is required by the designer.
@@ -38,14 +38,8 @@ Public Class ucrTry
         bstrVecOutput = False
     End Sub
 
-    Public Sub SetReceiver(Optional ucrNewReceiverScript As ucrReceiverExpression = Nothing, Optional ucrNewInputTextBox As ucrInputTextBox = Nothing)
-        If ucrNewReceiverScript IsNot Nothing Then
-            ucrReceiverScript = ucrNewReceiverScript
-        End If
-
-        If ucrNewInputTextBox IsNot Nothing Then
-            ucrModelPreview = ucrNewInputTextBox
-        End If
+    Public Sub SetReceiver(Optional ucrNewReceiverScript As ucrReceiverExpression = Nothing)
+        ucrReceiverScript = ucrNewReceiverScript
     End Sub
 
     Public Sub SetRSyntax(clsNewRSyntax As RSyntax)
@@ -101,10 +95,11 @@ Public Class ucrTry
 
         Try
             setToCommandOrModel()
-            If (ucrReceiverScript.IsEmpty() AndAlso ucrModelPreview.IsEmpty()) Then
+            If Not IsNothing(ucrReceiverScript) AndAlso ucrReceiverScript.IsEmpty() Then
+                ucrInputTryMessage.SetName("")
+            ElseIf IsNothing(ucrReceiverScript) AndAlso CheckForEmptyInputControl Then
                 ucrInputTryMessage.SetName("")
             Else
-
                 For Each clsTempCode In clsRSyntax.lstBeforeCodes
                     clsCodeClone = clsTempCode.Clone()
                     strBeforeAfterScript = ""
@@ -228,13 +223,40 @@ Public Class ucrTry
                                      End Sub
     End Sub
 
-    Private Sub ucrReceiverScript_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverScript.SelectionChanged
-        ResetInputTryMessage()
+    Public Sub AssociatedControls(lstOfAssociatedControls As ucrCore())
+        arrAssociatedControls = lstOfAssociatedControls
+        For Each corecontrol In lstOfAssociatedControls
+            If Not IsNothing(TryCast(corecontrol, ucrInputComboBox)) Then
+                AddHandler TryCast(corecontrol, ucrInputComboBox).SelectionIndexChanged, AddressOf TextSelectionChanged
+            ElseIf Not IsNothing(TryCast(corecontrol, ucrReceiverSingle)) Then
+                AddHandler TryCast(corecontrol, ucrReceiverSingle).SelectionChanged, AddressOf TextSelectionChanged
+            End If
+        Next
     End Sub
-    Private Sub ucrModelPreview_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrModelPreview.ControlValueChanged
+
+    Private Function CheckForEmptyInputControl() As Boolean
+        If Not IsNothing(arrAssociatedControls) Then
+            For Each ucrControl As ucrCore In arrAssociatedControls
+                If Not IsNothing(TryCast(ucrControl, ucrReceiverSingle)) Then
+                    If TryCast(ucrControl, ucrReceiverSingle).IsEmpty Then
+                        Return True
+                        Exit For
+                    End If
+                End If
+            Next
+            Return False
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Sub TextSelectionChanged()
         ResetInputTryMessage()
     End Sub
 
+    Private Sub ucrReceiverScript_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverScript.SelectionChanged
+        ResetInputTryMessage()
+    End Sub
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary> Clears the ucrInputTryMessage textbox and sets its colour to white incase the 
