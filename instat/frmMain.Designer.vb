@@ -184,6 +184,7 @@ Partial Class frmMain
         Me.mnuClimaticFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileOpensst = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileImportfromIRIDataLibrary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileImportERA5Data = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileImportandTidyNetCDF = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileOpenandTidyShapefile = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
@@ -656,7 +657,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticFileImportERA5Data = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -1486,6 +1486,11 @@ Partial Class frmMain
         '
         Me.mnuClimaticFileImportfromIRIDataLibrary.Name = "mnuClimaticFileImportfromIRIDataLibrary"
         resources.ApplyResources(Me.mnuClimaticFileImportfromIRIDataLibrary, "mnuClimaticFileImportfromIRIDataLibrary")
+        '
+        'mnuClimaticFileImportERA5Data
+        '
+        Me.mnuClimaticFileImportERA5Data.Name = "mnuClimaticFileImportERA5Data"
+        resources.ApplyResources(Me.mnuClimaticFileImportERA5Data, "mnuClimaticFileImportERA5Data")
         '
         'mnuClimaticFileImportandTidyNetCDF
         '
@@ -4154,11 +4159,6 @@ Partial Class frmMain
         '
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
-        '
-        'mnuClimaticFileImportERA5Data
-        '
-        Me.mnuClimaticFileImportERA5Data.Name = "mnuClimaticFileImportERA5Data"
-        resources.ApplyResources(Me.mnuClimaticFileImportERA5Data, "mnuClimaticFileImportERA5Data")
         '
         'frmMain
         '
