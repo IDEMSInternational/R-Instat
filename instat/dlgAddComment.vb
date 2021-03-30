@@ -16,11 +16,13 @@
 
 Imports instat.Translations
 Public Class dlgAddComment
-    Public bUseSelectedColumn As Boolean = False
-    Private strSelectedColumn As String = ""
+    Public bUseSelectedPosition As Boolean = False
     Private strSelectedDataFrame As String = ""
+    Private strSelectedRow As String = ""
+    Private strSelectedColumn As String = ""
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private clsAddComment As RFunction
 
     Private Sub dlgAddComment_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -30,31 +32,48 @@ Public Class dlgAddComment
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
-        If bUseSelectedColumn Then
-            SetDefaultColumn()
+        SetRCodeForControls(bReset)
+        If bUseSelectedPosition Then
+            SetDefaultPosition()
         End If
         TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 508
-        ucrReceiverColumn.Selector = ucrSelectorAddComment
-        ucrReceiverColumn.SetMeAsReceiver()
-        ucrReceiverRow.Selector = ucrSelectorAddComment
-        ucrReceiverRow.SetMeAsReceiver()
+
         ucrPnlCellOrRow.AddRadioButton(rdoCell)
         ucrPnlCellOrRow.AddRadioButton(rdoRow)
-        ucrPnlCellOrRow.AddToLinkedControls(ucrReceiverRow, {rdoRow}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrPnlCellOrRow.bAllowNonConditionValues = True
+        ucrPnlCellOrRow.AddParameterPresentCondition(rdoCell, "column", True)
+        ucrPnlCellOrRow.AddParameterPresentCondition(rdoRow, "column", False)
+        ucrPnlCellOrRow.AddToLinkedControls(ucrReceiverColumn, {rdoCell}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
+        ucrSelectorAddComment.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorAddComment.SetParameterIsString()
+
+        ucrInputRow.SetParameter(New RParameter("row", iNewPosition:=1))
+        ucrInputRow.SetValidationTypeAsNumeric()
+
+        ucrReceiverColumn.Selector = ucrSelectorAddComment
+        ucrReceiverColumn.SetParameter(New RParameter("column", iNewPosition:=2))
+        ucrReceiverColumn.SetParameterIsString()
+        ucrReceiverColumn.SetLinkedDisplayControl(lblColumn)
+
+        ucrInputComment.SetParameter(New RParameter("comment", iNewPosition:=3))
     End Sub
 
     Private Sub SetDefaults()
+        clsAddComment = New RFunction
+
         ucrSelectorAddComment.Reset()
-        ucrSelectorAddComment.Visible = False
         ucrInputComment.IsMultiline = True
+
+        ucrReceiverColumn.SetMeAsReceiver()
+
+        clsAddComment.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_new_comment")
+        ucrBase.clsRsyntax.SetBaseRFunction(clsAddComment)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -62,7 +81,11 @@ Public Class dlgAddComment
     End Sub
 
     Private Sub TestOKEnabled()
-        ucrBase.OKEnabled(False) ' Temporary
+        If Not ucrInputRow.IsEmpty() AndAlso Not ucrInputComment.IsEmpty AndAlso (Not ucrReceiverColumn.IsEmpty OrElse rdoRow.Checked) Then
+            ucrBase.OKEnabled(True)
+        Else
+            ucrBase.OKEnabled(False)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -71,21 +94,33 @@ Public Class dlgAddComment
         TestOKEnabled()
     End Sub
 
-    Private Sub SetDefaultColumn()
-        rdoRow.Checked = True
-        SetRCodeForControls(True)
+    Private Sub SetDefaultPosition()
         ucrSelectorAddComment.SetDataframe(strSelectedDataFrame)
-        ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
-        bUseSelectedColumn = False
+        ucrInputRow.SetName(strSelectedRow)
+        If strSelectedColumn <> "" Then
+            ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
+            rdoCell.Checked = True
+        Else
+            rdoRow.Checked = True
+        End If
+        strSelectedDataFrame = ""
+        strSelectedRow = ""
+        strSelectedColumn = ""
+        bUseSelectedPosition = False
     End Sub
 
-    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
-        strSelectedColumn = strColumn
+    Public Sub SetPosition(strDataFrame As String, strRow As String, Optional strColumn As String = "")
         strSelectedDataFrame = strDataFrame
-        bUseSelectedColumn = True
+        strSelectedRow = strRow
+        strSelectedColumn = strColumn
+        bUseSelectedPosition = True
     End Sub
 
-    Private Sub Control_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumn.ControlContentsChanged, ucrReceiverColumn.ControlContentsChanged, ucrInputComment.ControlContentsChanged, ucrPnlCellOrRow.ControlContentsChanged
+    Private Sub Control_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumn.ControlContentsChanged, ucrInputRow.ControlContentsChanged, ucrInputComment.ControlContentsChanged, ucrPnlCellOrRow.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlCellOrRow_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCellOrRow.ControlValueChanged
+        ucrSelectorAddComment.ShowColumnSelector(rdoCell.Checked)
     End Sub
 End Class

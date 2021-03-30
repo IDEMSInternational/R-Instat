@@ -1181,6 +1181,37 @@ DataBook$set("public","get_keys", function(data_name, key_name) {
 }
 )
 
+# Note: This is a separate functionality to comments as defined in instat_comment.R
+# This is intended to be later integrated together.
+DataBook$set("public","add_new_comment", function(data_name, row, column = "", comment) {
+  if (!self$has_key(data_name)) stop("A key must be defined in the data frame to add a comment. Use the Add Key dialog to define a key.")
+  if (!".comment" %in% self$get_data_names()) {
+    comment_df <- data.frame(sheet = character(0),
+                             row = character(0),
+                             column = character(0),
+                             id = numeric(0),
+                             comment = character(0))
+    self$import_data(data_tables = list(.comment = comment_df))
+    self$add_key(".comment", c("sheet", "row", "id"), "key1")
+  }
+  comment_df <- self$get_data_frame(".comment", use_current_filter = FALSE)
+  curr_df <- self$get_data_frame(data_name, use_current_filter = FALSE)
+  curr_row <- curr_df[row.names(curr_df) == row, ]
+  key <- self$get_keys(data_name)[[1]]
+  key_cols <- as.character(key)
+  key_vals <- paste(sapply(curr_row[, key_cols], as.character), collapse = "__")
+  curr_comments <- comment_df[comment_df$sheet == data_name & comment_df$row == key_vals, ]
+  new_id <- 1
+  if (nrow(curr_comments) > 0) new_id <- max(curr_comments$id) + 1
+  comment_df[nrow(comment_df) + 1, ] <- list(sheet = data_name,
+                                             row = key_vals,
+                                             column = column,
+                                             id = new_id,
+                                             comment = comment)
+  self$get_data_objects(".comment")$set_data(new_data = comment_df)
+}
+)
+
 DataBook$set("public","get_comments", function(data_name, comment_id) {
   self$get_data_objects(data_name)$get_comments(comment_id)
 }

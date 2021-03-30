@@ -716,11 +716,18 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
+        Dim strRow As String
+
+        strRow = grdCurrSheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text
+        dlgAddComment.SetPosition(grdCurrSheet.Name, strRow)
         dlgAddComment.ShowDialog()
     End Sub
 
-    Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgAddComment.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+    Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuCellAddComment.Click
+        Dim strRow As String
+
+        strRow = grdCurrSheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text
+        dlgAddComment.SetPosition(grdCurrSheet.Name, strRow, SelectedColumnsAsArray()(0))
         dlgAddComment.ShowDialog()
     End Sub
 
