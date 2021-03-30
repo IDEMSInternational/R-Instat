@@ -624,8 +624,6 @@ Public Class dlgImportDataset
                 strFileExtension = strNewFileExt
                 bFolder = True
             Else
-                'MsgBox("Controls could not be set up from the given option", MsgBoxStyle.Critical, "Developer Error")
-                'Return
                 strFileName = ""
                 strFileExtension = ""
                 strFilePathSystem = ""
