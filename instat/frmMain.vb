@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -45,6 +45,10 @@ Public Class frmMain
 
     Public strCurrentAutoSaveDataFilePath As String = ""
 
+
+    Public isMinimised As Boolean = False
+    Public isMaximised As Boolean = False
+
     'This is the default data frame to appear in the data frame selector
     'If "" the current worksheet will be used
     'TODO This should be an option in the Options dialog
@@ -72,6 +76,7 @@ Public Class frmMain
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim prdCustom As New clsCustomRenderer(New clsCustomColourTable)
         Dim bClose As Boolean = False
+
         ' Note: this must change when R version changes
         Dim strRPackagesPath As String = Path.Combine(My.Computer.FileSystem.SpecialDirectories.MyDocuments, "R\win-library\3.6")
 
@@ -87,6 +92,7 @@ Public Class frmMain
         ' Decimal point must be `.` and not `,` because R only accepts `.`
         Thread.CurrentThread.CurrentCulture = New CultureInfo("en-GB")
 
+        ucrDataViewer.StartupMenuItemsVisibility(False)
         InitialiseOutputWindow()
         clsGrids.SetDataViewer(ucrDataViewer)
         clsGrids.SetMetadata(ucrDataFrameMeta.grdMetaData)
@@ -95,9 +101,16 @@ Public Class frmMain
         clsRLink.SetLog(ucrLogWindow.txtLog)
 
         SetToDefaultLayout()
-        strStaticPath = Path.GetFullPath("static")
-        strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
 
+        'Gets the path for the executable file that started the application, not including the 
+        'executable name.
+        'We use `Application.StartupPath` because this returns the correct path even if the 
+        'application was started by double-clicking a data file in another folder.
+        'We need the full path of the static folder to set the working folder containing files 
+        'needed when the application is loading.         
+        strStaticPath = String.Concat(Application.StartupPath, "\static")
+
+        strAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "RInstat\")
         ' We need to create the likely R package installation directory before R.NET connection is initialised
         ' because of a bug in R.NET 1.8.2 where pop ups to create directories do not appear.
         ' This assumes that R packages will be installed in "Documents" folder and also that 
@@ -133,6 +146,7 @@ Public Class frmMain
             clsRecentItems.SetDataViewWindow(ucrDataViewer)
             'checks existence of MRU list
             clsRecentItems.checkOnLoad()
+            ucrDataViewer.StartupMenuItemsVisibility(True)
             Cursor = Cursors.Default
             SetMainMenusEnabled(True)
 
@@ -140,6 +154,18 @@ Public Class frmMain
             mnuViewClimaticMenu.Checked = clsInstatOptions.bShowClimaticMenu
             mnuViewProcurementMenu.Checked = clsInstatOptions.bShowProcurementMenu
         End If
+
+        Try
+            If (Environment.GetCommandLineArgs.Length > 1) Then
+                dlgImportDataset.strFileToOpenOn = Environment.GetCommandLineArgs(1)
+                dlgImportDataset.bStartOpenDialog = False
+                dlgImportDataset.ShowDialog()
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+        isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 
     ' TODO This is used instead of autoTranslate so that split container isn't shifted
@@ -273,6 +299,11 @@ Public Class frmMain
         mnuViewDataFrameMetadata.Checked = False
         mnuViewColumnMetadata.Checked = False
         mnuViewScriptWindow.Checked = False
+        mnuViewSwapDataAndMetadata.Checked = False
+        mnuLogWindow.Checked = False
+        mnuScriptWindow.Checked = False
+        mnuColumnMetadat.Checked = False
+        mnuDataFrameMetadat.Checked = False
 
         mnuTbDataView.Checked = True
         mnuTbOutput.Checked = True
@@ -420,7 +451,7 @@ Public Class frmMain
     End Sub
 
     Private Sub UpdateLayout()
-        If Not mnuViewDataView.Checked AndAlso Not mnuViewOutputWindow.Checked AndAlso Not mnuViewColumnMetadata.Checked AndAlso Not mnuViewDataFrameMetadata.Checked AndAlso Not mnuViewLog.Checked AndAlso Not mnuViewScriptWindow.Checked Then
+        If Not mnuViewDataView.Checked AndAlso Not mnuViewOutputWindow.Checked AndAlso Not mnuViewColumnMetadata.Checked AndAlso Not mnuViewDataFrameMetadata.Checked AndAlso Not mnuViewLog.Checked AndAlso Not mnuViewScriptWindow.Checked AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
             splOverall.Hide()
         Else
             splOverall.Show()
@@ -433,7 +464,6 @@ Public Class frmMain
             End If
             If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked OrElse mnuViewLog.Checked OrElse mnuViewScriptWindow.Checked Then
                 splOverall.Panel1Collapsed = False
-
                 If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
                     splExtraWindows.Panel1Collapsed = False
                     splMetadata.Panel1Collapsed = Not mnuViewColumnMetadata.Checked
@@ -441,7 +471,6 @@ Public Class frmMain
                 Else
                     splExtraWindows.Panel1Collapsed = True
                 End If
-
                 If mnuViewLog.Checked OrElse mnuViewScriptWindow.Checked Then
                     splExtraWindows.Panel2Collapsed = False
                     splLogScript.Panel1Collapsed = Not mnuViewLog.Checked
@@ -452,6 +481,17 @@ Public Class frmMain
             Else
                 splOverall.Panel1Collapsed = True
             End If
+            If mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked Then
+                splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
+                splMetadata.Panel1.Controls.Add(ucrDataViewer)
+                If Not mnuViewColumnMetadata.Checked Then
+                    mnuViewColumnMetadata.Checked = True
+                    mnuViewDataView.Checked = False
+                End If
+            Else
+                splDataOutput.Panel1.Controls.Add(ucrDataViewer)
+                splMetadata.Panel1.Controls.Add(ucrColumnMeta)
+            End If
         End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
         mnuTbOutput.Checked = mnuViewOutputWindow.Checked
@@ -459,21 +499,25 @@ Public Class frmMain
 
     Private Sub mnuWindowVariable_Click(sender As Object, e As EventArgs) Handles mnuViewColumnMetadata.Click
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub mnuWindowDataFrame_Click(sender As Object, e As EventArgs) Handles mnuViewDataFrameMetadata.Click
         mnuViewDataFrameMetadata.Checked = Not mnuViewDataFrameMetadata.Checked
+        mnuDataFrameMetadat.Checked = mnuViewDataFrameMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub LogToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewLog.Click
         mnuViewLog.Checked = Not mnuViewLog.Checked
+        mnuLogWindow.Checked = mnuViewLog.Checked
         UpdateLayout()
     End Sub
 
     Private Sub ScriptToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuViewScriptWindow.Click
         mnuViewScriptWindow.Checked = Not mnuViewScriptWindow.Checked
+        mnuScriptWindow.Checked = mnuViewScriptWindow.Checked
         UpdateLayout()
     End Sub
 
@@ -1966,10 +2010,6 @@ Public Class frmMain
         dlgSPI.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticMapping_Click(sender As Object, e As EventArgs) Handles mnuClimaticMapping.Click
-        dlgClimaticStationMaps.ShowDialog()
-    End Sub
-
     Private Sub mnuHelpWindows_Click(sender As Object, e As EventArgs) Handles mnuHelpWindows.Click
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TopicId, "539")
     End Sub
@@ -2053,31 +2093,37 @@ Public Class frmMain
 
     Private Sub MnuMetadata_ButtonClick(sender As Object, e As EventArgs) Handles mnuMetadata.ButtonClick
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuTbLog_ButtonClick(sender As Object, e As EventArgs) Handles mnuTbLog.ButtonClick
         mnuViewLog.Checked = Not mnuViewLog.Checked
+        mnuLogWindow.Checked = mnuViewLog.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuColumnMetadat_Click(sender As Object, e As EventArgs) Handles mnuColumnMetadat.Click
         mnuViewColumnMetadata.Checked = Not mnuViewColumnMetadata.Checked
+        mnuColumnMetadat.Checked = mnuViewColumnMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuDataFrameMetadat_Click(sender As Object, e As EventArgs) Handles mnuDataFrameMetadat.Click
         mnuViewDataFrameMetadata.Checked = Not mnuViewDataFrameMetadata.Checked
+        mnuDataFrameMetadat.Checked = mnuViewDataFrameMetadata.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuScriptWindow_Click(sender As Object, e As EventArgs) Handles mnuScriptWindow.Click
         mnuViewScriptWindow.Checked = Not mnuViewScriptWindow.Checked
+        mnuScriptWindow.Checked = mnuViewScriptWindow.Checked
         UpdateLayout()
     End Sub
 
     Private Sub MnuLogWindow_Click(sender As Object, e As EventArgs) Handles mnuLogWindow.Click
         mnuViewLog.Checked = Not mnuViewLog.Checked
+        mnuLogWindow.Checked = mnuViewLog.Checked
         UpdateLayout()
     End Sub
 
@@ -2231,22 +2277,6 @@ Public Class frmMain
         dlgConditionalQuantilePlot.ShowDialog()
     End Sub
 
-    Private Sub mnuStructuredCircularOtherRosePlotsPolarPlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarPlot.Click
-        dlgPolarPlot.ShowDialog()
-    End Sub
-
-    Private Sub mnuStructuredCircularOtherRosePlotsPolarFrequency_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarFrequency.Click
-        dlgPolarFrequency.ShowDialog()
-    End Sub
-
-    Private Sub mnuStructuredCircularOtherRosePlotsPolarCluster_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarCluster.Click
-        dlgPolarCluster.ShowDialog()
-    End Sub
-
-    Private Sub mnuStructuredCircularOtherRosePlotsPolarAnnulus_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlotsPolarAnnulus.Click
-        dlgPolarAnnulus.ShowDialog()
-    End Sub
-
     Private Sub ExportToWWRToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuExportToWWRToolStrip.Click
         dlgExportToWWR.ShowDialog()
     End Sub
@@ -2277,5 +2307,57 @@ Public Class frmMain
 
     Private Sub mnuClimaticNCMPSummary_Click(sender As Object, e As EventArgs) Handles mnuClimaticNCMPSummary.Click
         dlgClimaticNCMPSummaryFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
+        mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuViewSwapDataAndMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.CheckStateChanged
+        If Not mnuViewSwapDataAndMetadata.Checked AndAlso Not mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked Then
+            mnuViewColumnMetadata.Checked = False
+            mnuViewDataView.Checked = True
+        End If
+    End Sub
+
+    Private Sub frmMain_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
+        If Me.WindowState = FormWindowState.Maximized Then
+            isMaximised = True
+        End If
+        If Me.WindowState = FormWindowState.Minimized Then
+            isMinimised = True
+        End If
+        If Me.WindowState = FormWindowState.Normal Then
+            isMaximised = False
+        End If
+    End Sub
+
+    Private Sub mnuStructuredCircularDensityPlot_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularDensityPlot.Click
+        dlgCircularDensityPlot.ShowDialog()
+    End Sub
+
+    Private Sub mnuTidyandExamineClimaticDataEntry_Click(sender As Object, e As EventArgs) Handles mnuTidyandExamineClimaticDataEntry.Click
+        dlgClimaticDataEntry.ShowDialog()
+    End Sub
+
+    Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
+        dlgOtherRosePlots.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticMappingMap_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingMap.Click
+        dlgClimaticStationMaps.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticMappingCheckStations_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingCheckStations.Click
+        dlgLocatingPointsInShapeFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCheckDataCheckStations_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataCheckStations.Click
+        dlgLocatingPointsInShapeFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticFileImportERA5Data_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportERA5Data.Click
+        dlgImportERA5Data.ShowDialog()
     End Sub
 End Class

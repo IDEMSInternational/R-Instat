@@ -158,12 +158,20 @@ Public Class ucrDistributions
                 Case "GLMFunctions"
                     If (Dist.strGLMFunctionName <> "") Then
                         Select Case strDataType
+                            Case "logical"
+                                If Dist.bTwoLevelFactor Then
+                                    bUse = True
+                                End If
                             Case "numeric"
                                 If Dist.bNumeric Then
                                     bUse = True
                                 End If
                             Case "positive integer"
-                                If Dist.bPositiveInt Then
+                                If Dist.bPositiveInt Or Dist.bNumeric Then
+                                    bUse = True
+                                End If
+                            Case "two level numeric"
+                                If Dist.bNumeric Or Dist.bTwoLevelFactor Then
                                     bUse = True
                                 End If
                             Case "two level factor"

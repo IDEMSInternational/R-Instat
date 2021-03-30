@@ -11,9 +11,9 @@ categories:
       - 'bugfix'
       - 'bug'
   - title: '🌦️ Climatic'
-    label: 'climatic'
+    label: 'Climatic'
   - title: '📝 Procurement'
-    label: 'procurement'
+    label: 'Procurement'
 exclude-labels:
   - 'skip-releasenotes'
 prerelease: true

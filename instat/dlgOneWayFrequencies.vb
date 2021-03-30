@@ -20,7 +20,10 @@ Public Class dlgOneWayFrequencies
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = False
     Private clsSjMiscFrq As New RFunction
-    Private clsSjPlot, clsPlotGrid As New RFunction
+    Private clsSjPlot As New RFunction
+    Private clsPlotGrid As New RFunction
+    Private clsSjPlotList As New RFunction
+    Private clsAsGGplot As New RFunction
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
 
@@ -73,7 +76,7 @@ Public Class dlgOneWayFrequencies
 
         'setting rdoGraph and rdoTable
         ucrPnlFrequencies.AddFunctionNamesCondition(rdoTable, "frq")
-        ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "plot_grid")
+        ucrPnlFrequencies.AddFunctionNamesCondition(rdoGraph, "as.ggplot")
         'TODO be able to have conditions across multiple functions
 
         ucrPnlOutput.SetParameter(New RParameter("out", 7))
@@ -112,6 +115,7 @@ Public Class dlgOneWayFrequencies
         clsSjMiscFrq = New RFunction
         clsSjPlot = New RFunction
         clsPlotGrid = New RFunction
+        clsAsGGplot = New RFunction
 
         ucrSelectorOneWayFreq.Reset()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
@@ -119,16 +123,24 @@ Public Class dlgOneWayFrequencies
 
         clsPlotGrid.SetPackageName("sjPlot")
         clsPlotGrid.SetRCommand("plot_grid")
+        clsPlotGrid.AddParameter("x", clsRFunctionParameter:=clsSjPlotList, iPosition:=0)
 
-        clsPlotGrid.AddParameter("x", clsRFunctionParameter:=clsSjPlot)
+        clsSjPlotList.SetRCommand("list")
+        clsSjPlotList.AddParameter("x", clsRFunctionParameter:=clsSjPlot, iPosition:=0)
 
         clsSjMiscFrq.SetPackageName("sjmisc")
         clsSjMiscFrq.SetRCommand("frq")
         clsSjMiscFrq.AddParameter("out", Chr(34) & "txt" & Chr(34), iPosition:=7)
 
         clsSjPlot.SetPackageName("sjPlot")
-        clsSjPlot.SetRCommand("sjplot")
+        clsSjPlot.SetRCommand("plot_frq")
+        clsSjPlot.AddParameter("geom.size", 0.5, iPosition:=14)
+        clsSjPlot.SetAssignTo("one_way_plot")
         clsPlotGrid.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorOneWayFreq.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+
+        clsAsGGplot.SetPackageName("ggplotify")
+        clsAsGGplot.SetRCommand("as.ggplot")
+        clsAsGGplot.AddParameter("plot", clsRFunctionParameter:=clsPlotGrid, iPosition:=0)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSjMiscFrq)
         bResetSubdialog = True
@@ -154,7 +166,7 @@ Public Class dlgOneWayFrequencies
         ucrChkFlip.SetRCode(clsSjPlot, bReset)
         ucrChkGroupData.SetRCode(clsSjMiscFrq, bReset)
         ucrNudGroups.SetRCode(clsSjMiscFrq, bReset)
-        ucrSaveGraph.SetRCode(clsPlotGrid, bReset)
+        ucrSaveGraph.SetRCode(clsAsGGplot, bReset)
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -194,16 +206,16 @@ Public Class dlgOneWayFrequencies
         Dim strAssignTo As String
 
         If rdoBoth.Checked Then
-            bIsAssigned = clsPlotGrid.bIsAssigned
-            bToBeAssigned = clsPlotGrid.bToBeAssigned
-            strAssignTo = clsPlotGrid.strAssignTo
+            bIsAssigned = clsAsGGplot.bIsAssigned
+            bToBeAssigned = clsAsGGplot.bToBeAssigned
+            strAssignTo = clsAsGGplot.strAssignTo
 
-            strGraph = clsPlotGrid.ToScript(strTempScript)
+            strGraph = clsAsGGplot.ToScript(strTempScript)
             frmMain.clsRLink.RunScript(strTempScript & strGraph, iCallType:=3)
 
-            clsPlotGrid.bIsAssigned = bIsAssigned
-            clsPlotGrid.bToBeAssigned = bToBeAssigned
-            clsPlotGrid.strAssignTo = strAssignTo
+            clsAsGGplot.bIsAssigned = bIsAssigned
+            clsAsGGplot.bToBeAssigned = bToBeAssigned
+            clsAsGGplot.strAssignTo = strAssignTo
         End If
     End Sub
 
@@ -222,7 +234,7 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgOneWayFrequencies.SetRFunction(clsSjMiscFrq, clsSjPlot, clsPlotGrid, bResetSubdialog)
+        sdgOneWayFrequencies.SetRFunction(clsSjMiscFrq, clsSjPlot, clsPlotGrid, clsSjPlotList, bResetSubdialog)
         bResetSubdialog = False
         sdgOneWayFrequencies.ShowDialog()
         TestOkEnabled()
@@ -237,8 +249,17 @@ Public Class dlgOneWayFrequencies
             ucrBase.clsRsyntax.SetBaseRFunction(clsSjMiscFrq)
             ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoGraph.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsPlotGrid)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsAsGGplot)
             ucrBase.clsRsyntax.iCallType = 3
+        End If
+    End Sub
+
+    Private Sub ucrReceiverOneWayFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneWayFreq.ControlValueChanged
+        clsPlotGrid.AddParameter("tags", ucrReceiverOneWayFreq.GetVariableNames, iPosition:=1)
+        If ucrReceiverOneWayFreq.lstSelectedVariables.Items.Count > 1 Then
+            clsPlotGrid.AddParameter("x", clsRFunctionParameter:=clsSjPlot, iPosition:=0)
+        Else
+            clsPlotGrid.AddParameter("x", clsRFunctionParameter:=clsSjPlotList, iPosition:=0)
         End If
     End Sub
 

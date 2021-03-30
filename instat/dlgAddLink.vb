@@ -40,6 +40,7 @@ Public Class dlgAddLink
 
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 506
+        ucrBase.clsRsyntax.iCallType = 2
         cmdSpecifyLink.Enabled = False ' temporarily disabled
 
         ucrDataSelectorFrom.SetParameter(New RParameter("from_data_frame", 0))
@@ -101,34 +102,36 @@ Public Class dlgAddLink
         Dim strColumnNames As String()
         Dim clsGetKeys As New RFunction
 
-        lvwLinkViewBox.Items.Clear()
+        If ucrDataSelectorTo.cboAvailableDataFrames.Text <> "" Then
+            lvwLinkViewBox.Items.Clear()
 
-        lblKeys.Text = ucrDataSelectorTo.cboAvailableDataFrames.SelectedItem & " Keys:"
-        clsGetKeys.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
-        clsGetKeys.AddParameter("data_name", Chr(34) & ucrDataSelectorTo.cboAvailableDataFrames.SelectedItem & Chr(34))
-        lstKeys = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKeys.ToScript).AsList
+            lblKeys.Text = ucrDataSelectorTo.cboAvailableDataFrames.SelectedItem & " Keys:"
+            clsGetKeys.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
+            clsGetKeys.AddParameter("data_name", Chr(34) & ucrDataSelectorTo.cboAvailableDataFrames.SelectedItem & Chr(34))
+            lstKeys = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKeys.ToScript).AsList
 
-        clsColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
-        clsColumnNames.AddParameter("data_name", Chr(34) & ucrDataSelectorFrom.cboAvailableDataFrames.SelectedItem & Chr(34))
-        strColumnNames = frmMain.clsRLink.RunInternalScriptGetValue(clsColumnNames.ToScript).AsCharacter().ToArray
+            clsColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
+            clsColumnNames.AddParameter("data_name", Chr(34) & ucrDataSelectorFrom.cboAvailableDataFrames.SelectedItem & Chr(34))
+            strColumnNames = frmMain.clsRLink.RunInternalScriptGetValue(clsColumnNames.ToScript).AsCharacter().ToArray
 
-        For i = 0 To lstKeys.Count - 1
-            chrKeyColumns = lstKeys(i).AsCharacter
-            strKeyColumns = String.Join(", ", chrKeyColumns.ToArray)
-            If chrKeyColumns IsNot Nothing Then
-                lviTemp = New ListViewItem({lstKeys.Names(i), strKeyColumns})
-                clsColumnNames.AddParameter("to_columns", "c(" & strKeyColumns & ")")
-                bCanAutoLink = chrKeyColumns.ToArray.All(Function(strCol) strColumnNames.Contains(strCol))
-                If bCanAutoLink Then
-                    lviTemp.BackColor = Color.LightGreen
-                    ucrBase.OKEnabled(True)
-                Else
-                    lviTemp.BackColor = Color.LightCoral
-                    ucrBase.OKEnabled(False)
+            For i = 0 To lstKeys.Count - 1
+                chrKeyColumns = lstKeys(i).AsCharacter
+                strKeyColumns = String.Join(", ", chrKeyColumns.ToArray)
+                If chrKeyColumns IsNot Nothing Then
+                    lviTemp = New ListViewItem({lstKeys.Names(i), strKeyColumns})
+                    clsColumnNames.AddParameter("to_columns", "c(" & strKeyColumns & ")")
+                    bCanAutoLink = chrKeyColumns.ToArray.All(Function(strCol) strColumnNames.Contains(strCol))
+                    If bCanAutoLink Then
+                        lviTemp.BackColor = Color.LightGreen
+                        ucrBase.OKEnabled(True)
+                    Else
+                        lviTemp.BackColor = Color.LightCoral
+                        ucrBase.OKEnabled(False)
+                    End If
+                    lvwLinkViewBox.Items.Add(lviTemp)
                 End If
-                lvwLinkViewBox.Items.Add(lviTemp)
-            End If
-        Next
+            Next
+        End If
     End Sub
 
     Private Sub lvwLinkViewBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lvwLinkViewBox.SelectedIndexChanged
@@ -151,15 +154,6 @@ Public Class dlgAddLink
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrDataSelectorTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorTo.ControlValueChanged
-        UpdateKeys()
-        TestOKEnabled()
-    End Sub
-
-    Private Sub ucrDataSelectorFrom_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrInputLinkName.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
-        TestOKEnabled()
-    End Sub
-
     Private Function IsSelectionValidKey() As Boolean
         If lvwLinkViewBox.SelectedItems.Count = 1 Then
             Return lvwLinkViewBox.SelectedItems(0).BackColor = Color.LightGreen
@@ -167,4 +161,12 @@ Public Class dlgAddLink
             Return False
         End If
     End Function
+
+    Private Sub ucrDataSelectorTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorTo.ControlValueChanged
+        UpdateKeys()
+    End Sub
+
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrDataSelectorTo.ControlContentsChanged, ucrInputLinkName.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
+        TestOKEnabled()
+    End Sub
 End Class

@@ -51,9 +51,9 @@ Public Class dlgNewDataFrame
         ucrNudCols.SetMinMax(1, Integer.MaxValue)
 
         ' ucrNewSheetName
-        ucrNewDFName.SetIsTextBox()
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetLabelText("New Data Frame Name:")
+        ucrNewDFName.SetIsTextBox()
         ucrNewDFName.SetPrefix("data")
 
         'ucrRdoOptions
@@ -313,14 +313,17 @@ Public Class dlgNewDataFrame
             lstView.Items.Add(New ListViewItem({"data.frame(x = 1:30, s = rep(""Reading"",30), r = seq(1, 6.8, length=30), t = seq(1, 60, 2))"}))
             lstView.Items.Item(2).ToolTipText = "4 variables, showing use of seq and rep function"
 
-            lstView.Items.Add(New ListViewItem({"data.frame(l = 1:31, d = seq(as.Date(""2013-1-1""), as.Date(""2013-1-31""), ""day""))"}))
-            lstView.Items.Item(3).ToolTipText = "2 variables with dates. Or use Prepare > Column: Date > Generate Dates to add a date variable."
+            lstView.Items.Add(New ListViewItem({"data.frame(date = seq(as.Date(""2021-1-1""), as.Date(""2021-1-31""), ""day""), rain = as.numeric(NA))"}))
+            lstView.Items.Item(3).ToolTipText = "Two variables with daily dates and rainfall, ready for climatic data entry."
+
+            lstView.Items.Add(New ListViewItem({"data.frame(date = seq(as.Date(""2019-1-1""), as.Date(""2020-12-31""), ""month""), rain = NA_real_, tmin = NA_real_, tmax = NA_real_)"}))
+            lstView.Items.Item(4).ToolTipText = "Four variables including monthly dates. Or use Prepare > Column: Date > Generate Dates to include a date variable."
 
             lstView.Items.Add(New ListViewItem({"data.frame(n = 1:12, h = seq(as.POSIXct(""2010-1-1 3: 0:0""), by = ""2 hours"",length = 12))"}))
-            lstView.Items.Item(4).ToolTipText = "2 variables including generating a sequence of times"
+            lstView.Items.Item(5).ToolTipText = "2 variables including generating a sequence of times"
 
             lstView.Items.Add(New ListViewItem({"data.frame(block = gl(4, 3), treat = c(""C"", ""A"", ""B"", ""B"", ""C"", ""A"", ""A"", ""B"", ""C"", ""A"", ""C"", ""B""), yield = c(74, 68,  50, 62, 68, 57, 70, 56, 83, 67, 67, 59))"}))
-            lstView.Items.Item(5).ToolTipText = "Illustrates the gl function and generates data for a simple experiment on 12 plots"
+            lstView.Items.Item(6).ToolTipText = "Illustrates the gl function and generates data for a simple experiment on 12 plots"
 
         ElseIf rdoRandom.Checked Then
             lstView.Columns.Add("Command", 450)  'add columns
@@ -374,6 +377,12 @@ Public Class dlgNewDataFrame
 
             lstView.Items.Add(New ListViewItem({"occasions", "seq(as.Date(""1970/1/1""), by = ""4 months"", length = 30)"}))
             lstView.Items.Item(4).ToolTipText = "Regular sequence of monthly data"
+
+            lstView.Items.Add(New ListViewItem({"prob1", "c(0.01, 0.05, 0.1, 0.2, 0.5, 0.8, 0.9, 0.95, 0.99)"}))
+            lstView.Items.Add(New ListViewItem({"prob2", "c(0.5, 0.8, 0.9, 0.95, 0.98, 0.99, 0.995, 0.998, 0.999)"}))
+            lstView.Items.Add(New ListViewItem({"quant1", "seq(-4, 4)"}))
+            lstView.Items.Add(New ListViewItem({"quant2", "c(40, 50, 60, 80, 100, 130, 160, 200, 250)"}))
+
         End If
 
         'set respective handlers

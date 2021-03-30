@@ -52,15 +52,16 @@ Public Class dlgFindNonnumericValues
         ucrReceiverColumn.bWithQuotes = False
         ucrReceiverColumn.SetIncludedDataTypes({"character"})
         ucrReceiverColumn.strSelectorHeading = "characters"
-        'makes the ucrSave control to position new column after selected column
-        ucrSaveColumn.setLinkedReceiver(ucrReceiverColumn)
 
         'save control
         ucrSaveColumn.SetPrefix("nonum")
         ucrSaveColumn.SetSaveTypeAsColumn()
-        ucrSaveColumn.SetIsTextBox()
-        ucrSaveColumn.SetLabelText("Logical Column:")
+        ucrSaveColumn.SetIsComboBox()
+        ucrSaveColumn.SetLabelText("Logical Column")
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorShowNonNumericValues.ucrAvailableDataFrames)
+        ucrSaveColumn.SetPositionParametersDirectly(False, "result_name")
+        'makes the ucrSave control to position new column after selected column
+        ucrSaveColumn.setLinkedReceiver(ucrReceiverColumn)
 
         ucrChkShowSummary.SetText("Display summary")
         ucrChkShowSummary.AddRSyntaxContainsFunctionNamesCondition(True, {"summary"})
@@ -105,7 +106,6 @@ Public Class dlgFindNonnumericValues
         clsNonNumericCalcFunc.AddParameter("function_exp", clsROperatorParameter:=clsNotEqualToOperator, iPosition:=1)
         clsNonNumericCalcFunc.AddParameter("result_name", Chr(34) & strLogicalColumn & Chr(34), iPosition:=3)
         clsNonNumericCalcFunc.AddParameter("save", 2, iPosition:=4)
-        clsNonNumericCalcFunc.SetAssignTo("non_numerics_calculation")
 
         clsNonNumericFilterFunc.SetRCommand("instat_calculation$new")
         clsNonNumericFilterFunc.AddParameter("type", Chr(34) & "filter" & Chr(34), iPosition:=0)
@@ -136,7 +136,7 @@ Public Class dlgFindNonnumericValues
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverColumn.AddAdditionalCodeParameterPair(clsAsNumericFunction, New RParameter("x", 1), iAdditionalPairNo:=1)
         ucrReceiverColumn.SetRCode(clsIsNaFunction, bReset)
-        ucrSaveColumn.SetRCode(clsGetColumnsFunction, bReset)
+        ucrSaveColumn.SetRCode(clsNonNumericCalcFunc, bReset)
         ucrChkShowSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkFilterNonumerics.SetRCode(clsCurrRunCalc, bReset)
         ucrSelectorShowNonNumericValues.SetRCode(clsGetColumnsFunction, bReset)
