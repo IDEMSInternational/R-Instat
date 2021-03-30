@@ -93,6 +93,8 @@ Public Class dlgImportDataset
             If Not String.IsNullOrEmpty(ucrInputFilePath.GetText()) Then
                 If File.Exists(ucrInputFilePath.GetText()) Then
                     SetControlsFromFile(ucrInputFilePath.GetText())
+                ElseIf Directory.Exists(strCurrentDirectory) AndAlso strFileExtension <> "" Then
+                    SetControlsFromFile(strCurrentDirectory, strFileExtension)
                 Else
                     MsgBox("File no longer exists: " & strFilePathSystem, MsgBoxStyle.Information, "File No Longer Exists")
                     SetControlsFromFile("")
@@ -603,7 +605,6 @@ Public Class dlgImportDataset
         'Dim strFileExt As String
         Dim bFolder As Boolean = False
 
-        strFileName = ""
         If strFilePath <> "" Then
             If bFromLibrary Then
                 strFilePathSystemTemp = strFilePathSystem 'store what was there temporarily first 
