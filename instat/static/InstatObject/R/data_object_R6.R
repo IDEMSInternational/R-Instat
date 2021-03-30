@@ -887,7 +887,7 @@ DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_po
     }else if ( !(col_type == "numeric" || col_type == "integer" || col_type == "character" || col_type == "logical" ) ){
       #clipr support above column types only. So pasting to a column not recognised by clipr may result to unpredictible results 
       #if not in any of above column types then exit function
-      stop( paste("developer error. unknown column type:", col_type) ) 
+      stop( paste("Cannot paste into columns of type:", col_type) )
     }#end if  
   }#end outer for loop
   
