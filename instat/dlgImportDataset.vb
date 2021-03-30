@@ -656,17 +656,17 @@ Public Class dlgImportDataset
             ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=GetDirectoryFiles(True))
             ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
             ucrSaveFile.Hide()
+            clsGetFilesList.AddParameter("pattern", Chr(34) & "\\" & strFileExtension & "$" & Chr(34), iPosition:=1)
             If strFileExtension = ".dly" Then
-                clsGetFilesList.AddParameter("pattern", Chr(34) & "\\csv$" & Chr(34), iPosition:=1)
+                'clsGetFilesList.AddParameter("pattern", Chr(34) & "\\csv$" & Chr(34), iPosition:=1)
                 clsImportMultipleFiles.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
             Else
-                clsGetFilesList.AddParameter("pattern", Chr(34) & "\\" & strFileExtension & "$" & Chr(34), iPosition:=1)
                 clsImportMultipleFiles.AddParameter("format", Chr(34) & strFileExtension.Substring(1) & Chr(34), iPosition:=1)
             End If
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
         Else
             'enable multiple files import for the following files only
-            ucrChkMultipleFiles.SetVisible(strFileExtension = ".txt" OrElse strFileExtension = ".csv" OrElse strFileExtension = ".dly")
+            ucrChkMultipleFiles.SetVisible(Not (strFileExtension = ".rds" OrElse strFileExtension = ".xlsx" OrElse strFileExtension = ".xls"))
 
             'TODO This needs to be different when RDS is a data frame
             'need to be able to detect RDS as data.frame/Instat Object
@@ -1211,7 +1211,7 @@ Public Class dlgImportDataset
         Dim arrFilePathsAndNames() As String
 
         If strFilePathSystem <> "" AndAlso Directory.Exists(strFilePathSystem) Then
-            arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, "*." & strFileType)
+            arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, "*" & strFileExtension)
 
             If bOnlyCleanedFileNames Then
                 For Each strFilePathName As String In arrFilePathsAndNames
