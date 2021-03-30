@@ -151,6 +151,7 @@ Public Class dlgImportDataset
         dctFileTypes.Add("txt", Chr(34) & "\\.txt$" & Chr(34))
         dctFileTypes.Add("tsv", Chr(34) & "\\.tsv$" & Chr(34))
         dctFileTypes.Add("sav", Chr(34) & "\\.sav" & Chr(34))
+        dctFileTypes.Add("dta", Chr(34) & "\\.dta" & Chr(34))
         ucrInputComboFileTypes.SetItems(dctFileTypes)
         ucrInputComboFileTypes.SetDropDownStyleAsNonEditable()
         ucrInputComboFileTypes.SetLinkedDisplayControl(lblFileType)
