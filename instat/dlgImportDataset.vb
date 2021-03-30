@@ -5,6 +5,7 @@ Imports instat.Translations
 Public Class dlgImportDataset
 
     Private clsImportFixedWidthText, clsImportCSV, clsImportDAT, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As RFunction
+    Private clsImportMultipleFiles, clsGetFilesList As RFunction
     Private clsGetExcelSheetNames As RFunction
     Private clsRangeOperator As ROperator
     ''' <summary>   Ensures that any file paths containing special characters (e.g. accents) are 
@@ -113,7 +114,7 @@ Public Class dlgImportDataset
         Dim dctucrInputEncodingCSV As New Dictionary(Of String, String)
         Dim dctucrInputDecimalCSV As New Dictionary(Of String, String)
         Dim dctucrInputHeadersCSV As New Dictionary(Of String, String)
-
+        Dim dctFileTypes As New Dictionary(Of String, String)
 
         ucrBase.iHelpTopicID = 11
 
@@ -125,6 +126,11 @@ Public Class dlgImportDataset
 
         'General Controls
 
+        ucrPanelFiles.AddRadioButton(rdoSingleFile)
+        ucrPanelFiles.AddRadioButton(rdoMultipleFiles)
+        ucrPanelFiles.AddFunctionNamesCondition(rdoSingleFile, "import_list", bNewIsPositive:=False)
+        ucrPanelFiles.AddFunctionNamesCondition(rdoMultipleFiles, "import_list", bNewIsPositive:=True)
+
         ucrInputFilePath.SetParameter(New RParameter("file"))
         ucrInputFilePath.IsReadOnly = True
 
@@ -134,6 +140,20 @@ Public Class dlgImportDataset
         ucrSaveFile.ucrInputTextSave.bAutoChangeOnLeave = True
 
         ucrNudPreviewLines.Value = 10
+
+        '##############################################################
+        'Multiple Files Controls
+
+        ucrInputComboFileTypes.SetParameter(New RParameter("pattern", iNewPosition:=1))
+        dctFileTypes.Add("csv", Chr(34) & "\\.csv$" & Chr(34))
+        dctFileTypes.Add("txt", Chr(34) & "\\.txt$" & Chr(34))
+        dctFileTypes.Add("tsv", Chr(34) & "\\.tsv$" & Chr(34))
+        ucrInputComboFileTypes.SetItems(dctFileTypes)
+        ucrInputComboFileTypes.SetRDefault(Chr(34) & "\\.csv$" & Chr(34))
+        ucrInputComboFileTypes.SetDropDownStyleAsNonEditable()
+        ucrInputComboFileTypes.SetLinkedDisplayControl(lblFileType)
+
+        ucrPanelFiles.AddToLinkedControls(ucrInputComboFileTypes, {rdoMultipleFiles}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         '##############################################################
 
@@ -326,6 +346,8 @@ Public Class dlgImportDataset
 
         clsImportExcelMulti = New RFunction
         clsFileList = New RFunction
+        clsImportMultipleFiles = New RFunction
+        clsGetFilesList = New RFunction
 
         clsImportFixedWidthText.SetPackageName("readr")
         clsImportFixedWidthText.SetRCommand("read_table")
@@ -376,6 +398,17 @@ Public Class dlgImportDataset
 
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
 
+        'commands for multiple files
+        clsImportMultipleFiles.SetPackageName("rio")
+        clsImportMultipleFiles.SetRCommand("import_list")
+
+        clsGetFilesList.SetRCommand("list.files")
+        clsGetFilesList.AddParameter("pattern", "\\.csv$", iPosition:=1)
+        clsGetFilesList.AddParameter("full.names", "TRUE", iPosition:=2)
+        clsGetFilesList.AddParameter("ignore.case", "TRUE", iPosition:=3)
+
+        clsImportMultipleFiles.AddParameter("file", clsRFunctionParameter:=clsGetFilesList, iPosition:=0)
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
         strFilePathSystem = ""
@@ -401,6 +434,7 @@ Public Class dlgImportDataset
         lblCannotImport.Hide()
         GridPreviewVisible(False)
         ucrSaveFile.Hide()
+        rdoSingleFile.Checked = True
     End Sub
 
     'Private Sub ucrInputName_NameChanged() Handles ucrInputName.ControlValueChanged
@@ -420,61 +454,77 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub TestOkEnabled()
-        If (ucrSaveFile.IsComplete OrElse strFileType = "RDS") AndAlso bCanImport Then
-            If strFileType = "XLSX" OrElse strFileType = "XLS" Then
-                ucrBase.OKEnabled(dctSelectedExcelSheets.Count > 0)
-            Else
-                ucrBase.OKEnabled(True)
-            End If
+        If rdoMultipleFiles.Checked Then
+            'todo
         Else
-            ucrBase.OKEnabled(False)
+            If (ucrSaveFile.IsComplete OrElse strFileType = "RDS") AndAlso bCanImport Then
+                If strFileType = "XLSX" OrElse strFileType = "XLS" Then
+                    ucrBase.OKEnabled(dctSelectedExcelSheets.Count > 0)
+                Else
+                    ucrBase.OKEnabled(True)
+                End If
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
     'Loads the open dialog on load and click
     Public Sub GetFileFromOpenDialog()
-        Using dlgOpen As New OpenFileDialog
-            dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html;*.dly|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html|DLY|*.dly|All files|*.*"
-            dlgOpen.Multiselect = False
-            If bFromLibrary Then
-                dlgOpen.Title = "Import from Library"
-                dlgOpen.InitialDirectory = strLibraryPath
-            Else
-                dlgOpen.Title = "Open Data from file"
-                dlgOpen.InitialDirectory = If(String.IsNullOrEmpty(strCurrentDirectory), frmMain.clsInstatOptions.strWorkingDirectory, strCurrentDirectory)
-            End If
-
-            If DialogResult.OK = dlgOpen.ShowDialog() Then
-                ucrSaveFile.Reset()
-                'TODO This is in place for when we allow multiple files selected.
-                bMultiFiles = (dlgOpen.FileNames.Count > 1)
-                If NumberOfFileTypes(dlgOpen.FileNames) > 1 Then
-                    MsgBox("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
-                    SetControlsFromFile("")
-                Else
-                    dctSelectedExcelSheets.Clear()
-                    clbSheets.Items.Clear()
-                    SetControlsFromFile(dlgOpen.FileName)
+        If rdoMultipleFiles.Checked Then
+            Using dlgFolder As New FolderBrowserDialog
+                dlgFolder.Description = "Choose Folder"
+                If dlgFolder.ShowDialog() = DialogResult.OK Then
+                    ucrSaveFile.Reset()
+                    SetControlsFromFile(dlgFolder.SelectedPath)
                 End If
-            Else
+            End Using
+        Else
+            Using dlgOpen As New OpenFileDialog
+                dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html;*.dly|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html|DLY|*.dly|All files|*.*"
+                dlgOpen.Multiselect = False
                 If bFromLibrary Then
-                    'TODO something like this so that the Import dialog closes
-                    '     when using open from library but library dialog stays open
-                    'Me.Close()
+                    dlgOpen.Title = "Import from Library"
+                    dlgOpen.InitialDirectory = strLibraryPath
+                Else
+                    dlgOpen.Title = "Open Data from file"
+                    dlgOpen.InitialDirectory = If(String.IsNullOrEmpty(strCurrentDirectory), frmMain.clsInstatOptions.strWorkingDirectory, strCurrentDirectory)
                 End If
-                If ucrInputFilePath.GetText() = "" Then
-                    grpText.Hide()
-                    grpCSV.Hide()
-                    ExcelSheetPreviewVisible(False)
-                    grpRDS.Hide()
-                    grdDataPreview.Hide()
-                    lblDataFrame.Hide()
-                    txtTextFilePreview.Hide()
-                    lblTextFilePreview.Hide()
+
+                If DialogResult.OK = dlgOpen.ShowDialog() Then
+                    ucrSaveFile.Reset()
+                    'TODO This is in place for when we allow multiple files selected.
+                    bMultiFiles = (dlgOpen.FileNames.Count > 1)
+                    If NumberOfFileTypes(dlgOpen.FileNames) > 1 Then
+                        MsgBox("All files must be of the same type", MsgBoxStyle.Information, "Multiple file types")
+                        SetControlsFromFile("")
+                    Else
+                        dctSelectedExcelSheets.Clear()
+                        clbSheets.Items.Clear()
+                        SetControlsFromFile(dlgOpen.FileName)
+                    End If
+                Else
+                    If bFromLibrary Then
+                        'TODO something like this so that the Import dialog closes
+                        '     when using open from library but library dialog stays open
+                        'Me.Close()
+                    End If
                 End If
-            End If
-            TestOkEnabled()
-        End Using
+            End Using
+        End If
+
+        If ucrInputFilePath.IsEmpty Then
+            grpText.Hide()
+            grpCSV.Hide()
+            ExcelSheetPreviewVisible(False)
+            grpRDS.Hide()
+            grdDataPreview.Hide()
+            lblDataFrame.Hide()
+            txtTextFilePreview.Hide()
+            lblTextFilePreview.Hide()
+        End If
+        TestOkEnabled()
+
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -485,7 +535,11 @@ Public Class dlgImportDataset
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsReadRDS, New RParameter("file", 0), iAdditionalPairNo:=5)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsEnc2Native, New RParameter("path", 0, False), iAdditionalPairNo:=6)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("file", 0), iAdditionalPairNo:=7)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsGetFilesList, New RParameter("path", 0), iAdditionalPairNo:=8)
         ucrInputFilePath.SetRCode(clsImport, bReset)
+
+        'file types control
+        ucrInputComboFileTypes.SetRCode(clsGetFilesList, bReset)
 
         'Save control
         ucrSaveFile.AddAdditionalRCode(clsImportFixedWidthText, iAdditionalPairNo:=1)
@@ -493,6 +547,7 @@ Public Class dlgImportDataset
         ucrSaveFile.AddAdditionalRCode(clsImportDAT, iAdditionalPairNo:=3)
         ucrSaveFile.AddAdditionalRCode(clsImportExcel, iAdditionalPairNo:=4)
         ucrSaveFile.AddAdditionalRCode(clsImportExcelMulti, iAdditionalPairNo:=5)
+        ucrSaveFile.AddAdditionalRCode(clsImportMultipleFiles, iAdditionalPairNo:=6)
         ucrSaveFile.SetRCode(clsImport, bReset)
 
         'Used by both text and csv functions
@@ -595,72 +650,99 @@ Public Class dlgImportDataset
         grpRDS.Hide()
         ExcelSheetPreviewVisible(False)
         grpCSV.Hide()
-        'TODO This needs to be different when RDS is a data frame
-        'need to be able to detect RDS as data.frame/Instat Object
-        If strFileExt = ".rds" Then
-            strFileType = "RDS"
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
-            clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
-            grpRDS.Show()
-        ElseIf strFileExt = ".txt" Then
-            strFileType = "TXT"
-            'add or change format parameter values
-            clsImportCSV.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
-            'by default the textfiles will be imported using the function we use for csv
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
-            ucrPanelFixedWidthText.Show()
-            grpCSV.Text = "Import Text Options"
-            grpCSV.Location = New System.Drawing.Point(9, 99) 'set the location of the groupbox to adjust gaps in the form UI
-            grpCSV.Show()
-        ElseIf strFileExt = ".csv" OrElse strFileExt = ".dly" Then
-            strFileType = "CSV"
-            'add format. forces rio to treat dly files as csv 
-            clsImportCSV.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
-            grpCSV.Text = "Import CSV Options"
-            grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
-            grpCSV.Show()
-        ElseIf strFileExt = ".dat" Then
-            strFileType = "DAT"
-            clsImportDAT.AddParameter("file", Chr(34) & strFilePathR & Chr(34))
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportDAT)
-        ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
-            strFileType = If(strFileExt = ".xlsx", "XLSX", "XLS")
-            If clbSheets.CheckedItems.Count > 1 Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcelMulti)
+
+        If rdoMultipleFiles.Checked Then
+            strFileType = ""
+
+
+
+
+            Dim arrFilePathsAndNames() As String
+            Dim lstFileNames As New List(Of String)
+
+            'e.g Chr(34) & "\\.csv$" & Chr(34
+            'todo. get the value from the dictionary
+            strFileExt = ucrInputComboFileTypes.GetValue()
+            strFileExt = "*." & strFileExt.Replace("""", "").Replace("\\.", "").Replace("$", "")
+            arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, strFileExt)
+
+            For Each strFilePathName As String In arrFilePathsAndNames
+                lstFileNames.Add(GetCleanFileName(strFilePathName))
+            Next
+            'set the file names as the data frame names
+            ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=lstFileNames)
+            ucrSaveFile.Hide()
+            ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
+        Else
+            'TODO This needs to be different when RDS is a data frame
+            'need to be able to detect RDS as data.frame/Instat Object
+            If strFileExt = ".rds" Then
+                strFileType = "RDS"
+                ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
+                clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
+                grpRDS.Show()
+            ElseIf strFileExt = ".txt" Then
+                strFileType = "TXT"
+                'add or change format parameter values
+                clsImportCSV.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
+                'by default the textfiles will be imported using the function we use for csv
+                ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
+                ucrPanelFixedWidthText.Show()
+                grpCSV.Text = "Import Text Options"
+                grpCSV.Location = New System.Drawing.Point(9, 99) 'set the location of the groupbox to adjust gaps in the form UI
+                grpCSV.Show()
+            ElseIf strFileExt = ".csv" OrElse strFileExt = ".dly" Then
+                strFileType = "CSV"
+                'add format. forces rio to treat dly files as csv 
+                clsImportCSV.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
+                ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
+                grpCSV.Text = "Import CSV Options"
+                grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
+                grpCSV.Show()
+            ElseIf strFileExt = ".dat" Then
+                strFileType = "DAT"
+                clsImportDAT.AddParameter("file", Chr(34) & strFilePathR & Chr(34))
+                ucrBase.clsRsyntax.SetBaseRFunction(clsImportDAT)
+            ElseIf strFileExt = ".xlsx" OrElse strFileExt = ".xls" Then
+                strFileType = If(strFileExt = ".xlsx", "XLSX", "XLS")
+                If clbSheets.CheckedItems.Count > 1 Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcelMulti)
+                Else
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
+                End If
+
+                ExcelSheetPreviewVisible(True)
+                FillExcelSheets(strFilePath)
+            ElseIf strFileExt <> "" Then
+                strFileType = strFileExt.Substring(1).ToUpper()
+                ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
             Else
-                ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
+                strFileType = ""
+            End If
+            If strFileType <> "" AndAlso strFileType <> "RDS" Then
+                If (strFileType = "XLSX" OrElse strFileType = "XLS") Then
+                    ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
+                    Select Case clbSheets.CheckedItems.Count
+                        Case Is > 1
+                            ucrSaveFile.Hide()
+                        Case 1
+                            ucrSaveFile.Show()
+                            ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First(), bSilent:=True)
+                        Case 0
+                            ucrSaveFile.Show()
+                            ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
+                    End Select
+                Else
+                    ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=False)
+                    ucrSaveFile.Show()
+                    ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
+                End If
+            Else
+                ucrSaveFile.Hide()
             End If
 
-            ExcelSheetPreviewVisible(True)
-            FillExcelSheets(strFilePath)
-        ElseIf strFileExt <> "" Then
-            strFileType = strFileExt.Substring(1).ToUpper()
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
-        Else
-            strFileType = ""
         End If
-        If strFileType <> "" AndAlso strFileType <> "RDS" Then
-            If (strFileType = "XLSX" OrElse strFileType = "XLS") Then
-                ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
-                Select Case clbSheets.CheckedItems.Count
-                    Case Is > 1
-                        ucrSaveFile.Hide()
-                    Case 1
-                        ucrSaveFile.Show()
-                        ucrSaveFile.SetName(dctSelectedExcelSheets.Values.First(), bSilent:=True)
-                    Case 0
-                        ucrSaveFile.Show()
-                        ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
-                End Select
-            Else
-                ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=False)
-                ucrSaveFile.Show()
-                ucrSaveFile.SetName(frmMain.clsRLink.MakeValidText(strFileName), bSilent:=True)
-            End If
-        Else
-            ucrSaveFile.Hide()
-        End If
+
         RefreshFilePreview()
         RefreshFrameView()
     End Sub
@@ -668,29 +750,48 @@ Public Class dlgImportDataset
     Public Sub RefreshFilePreview(Optional strNewFileType As String = "")
         Dim rowsToSkip As Integer
         If bDialogLoaded Then
-            If strNewFileType = "" Then
-                strNewFileType = strFileType
-            End If
-            If (strNewFileType = "CSV" OrElse strNewFileType = "TXT") AndAlso strFilePathSystem <> "" Then
+            If rdoMultipleFiles.Checked AndAlso strFilePathSystem <> "" Then
+                Dim strFileExt As String
+                Dim arrFilePathsAndNames() As String
+
+                'e.g Chr(34) & "\\.csv$" & Chr(34
+                'todo. get the value from the dictionary of the control
+                strFileExt = ucrInputComboFileTypes.GetValue()
+                strFileExt = "*." & strFileExt.Replace("""", "").Replace("\\.", "").Replace("$", "")
+                arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, strFileExt)
+
+                lblTextFilePreview.Text = If(arrFilePathsAndNames.Count = 0, "No Files found", "Files found: " & arrFilePathsAndNames.Count)
+                txtTextFilePreview.Text = ""
+                For Each strFilePathName As String In arrFilePathsAndNames
+                    txtTextFilePreview.Text = txtTextFilePreview.Text & strFilePathName & Environment.NewLine
+                Next
                 TextPreviewVisible(True)
-                rowsToSkip = If(strNewFileType = "CSV", ucrNudRowsToSkipCSV.Value, ucrNudRowsToSkipText.Value)
-                Try
-                    Using sReader As New StreamReader(strFilePathSystem)
-                        txtTextFilePreview.Text = ""
-                        For i = 1 To ucrNudPreviewLines.Value + rowsToSkip + 1
-                            txtTextFilePreview.Text = txtTextFilePreview.Text & sReader.ReadLine() & Environment.NewLine
-                            If sReader.Peek() = -1 Then
-                                Exit For
-                            End If
-                        Next
-                    End Using
-                Catch ex As Exception
-                    txtTextFilePreview.Text = "Cannot show text preview of file:" & strFilePathSystem & ". The file may have moved or be in use by another program. Close the file and select it again from the dialog to refresh the preview."
-                    bCanImport = False
-                End Try
             Else
-                TextPreviewVisible(False)
+                If strNewFileType = "" Then
+                    strNewFileType = strFileType
+                End If
+                If (strNewFileType = "CSV" OrElse strNewFileType = "TXT") AndAlso strFilePathSystem <> "" Then
+                    TextPreviewVisible(True)
+                    rowsToSkip = If(strNewFileType = "CSV", ucrNudRowsToSkipCSV.Value, ucrNudRowsToSkipText.Value)
+                    Try
+                        Using sReader As New StreamReader(strFilePathSystem)
+                            txtTextFilePreview.Text = ""
+                            For i = 1 To ucrNudPreviewLines.Value + rowsToSkip + 1
+                                txtTextFilePreview.Text = txtTextFilePreview.Text & sReader.ReadLine() & Environment.NewLine
+                                If sReader.Peek() = -1 Then
+                                    Exit For
+                                End If
+                            Next
+                        End Using
+                    Catch ex As Exception
+                        txtTextFilePreview.Text = "Cannot show text preview of file:" & strFilePathSystem & ". The file may have moved or be in use by another program. Close the file and select it again from the dialog to refresh the preview."
+                        bCanImport = False
+                    End Try
+                Else
+                    TextPreviewVisible(False)
+                End If
             End If
+
         End If
     End Sub
 
@@ -1101,5 +1202,18 @@ Public Class dlgImportDataset
         strRmissingValueString = "c(" & strRmissingValueString & ")"
         Return strRmissingValueString
     End Function
+
+    Private Sub ucrPanelFiles_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPanelFiles.ControlValueChanged
+        If rdoMultipleFiles.Checked Then
+            ucrSaveFile.SetName("files", bSilent:=True)
+        End If
+        SetControlsFromFile("")
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputComboFileTypes_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComboFileTypes.ControlValueChanged
+        SetControlsFromFile(ucrInputFilePath.GetText)
+        TestOkEnabled()
+    End Sub
 
 End Class

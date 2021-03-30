@@ -1994,203 +1994,152 @@ white spaces</value>
   <data name="&gt;&gt;ucrSaveFile.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="rdMultipleFiles.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+  <data name="rdoMultipleFiles.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
-  <data name="rdMultipleFiles.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="rdoMultipleFiles.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="rdMultipleFiles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoMultipleFiles.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdMultipleFiles.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoMultipleFiles.Location" type="System.Drawing.Point, System.Drawing">
     <value>290, 6</value>
   </data>
-  <data name="rdMultipleFiles.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoMultipleFiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 27</value>
   </data>
-  <data name="rdMultipleFiles.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoMultipleFiles.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
-  <data name="rdMultipleFiles.Text" xml:space="preserve">
+  <data name="rdoMultipleFiles.Text" xml:space="preserve">
     <value>Multiple Files</value>
   </data>
-  <data name="rdMultipleFiles.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="rdoMultipleFiles.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;rdMultipleFiles.Name" xml:space="preserve">
-    <value>rdMultipleFiles</value>
+  <data name="&gt;&gt;rdoMultipleFiles.Name" xml:space="preserve">
+    <value>rdoMultipleFiles</value>
   </data>
-  <data name="&gt;&gt;rdMultipleFiles.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoMultipleFiles.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdMultipleFiles.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoMultipleFiles.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rdMultipleFiles.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoMultipleFiles.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="rdSingleFile.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+  <data name="rdoSingleFile.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
-  <data name="rdSingleFile.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="rdoSingleFile.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="rdSingleFile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoSingleFile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdSingleFile.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoSingleFile.Location" type="System.Drawing.Point, System.Drawing">
     <value>212, 6</value>
   </data>
-  <data name="rdSingleFile.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoSingleFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 27</value>
   </data>
-  <data name="rdSingleFile.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoSingleFile.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
-  <data name="rdSingleFile.Text" xml:space="preserve">
+  <data name="rdoSingleFile.Text" xml:space="preserve">
     <value>Single File</value>
   </data>
-  <data name="rdSingleFile.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="rdoSingleFile.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;rdSingleFile.Name" xml:space="preserve">
-    <value>rdSingleFile</value>
+  <data name="&gt;&gt;rdoSingleFile.Name" xml:space="preserve">
+    <value>rdoSingleFile</value>
   </data>
-  <data name="&gt;&gt;rdSingleFile.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoSingleFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdSingleFile.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoSingleFile.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rdSingleFile.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoSingleFile.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrPnlFiles.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrPanelFiles.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 5</value>
   </data>
-  <data name="ucrPnlFiles.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrPanelFiles.Size" type="System.Drawing.Size, System.Drawing">
     <value>594, 30</value>
   </data>
-  <data name="ucrPnlFiles.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrPanelFiles.TabIndex" type="System.Int32, mscorlib">
     <value>30</value>
   </data>
-  <data name="&gt;&gt;ucrPnlFiles.Name" xml:space="preserve">
-    <value>ucrPnlFiles</value>
+  <data name="&gt;&gt;ucrPanelFiles.Name" xml:space="preserve">
+    <value>ucrPanelFiles</value>
   </data>
-  <data name="&gt;&gt;ucrPnlFiles.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrPanelFiles.Type" xml:space="preserve">
     <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrPnlFiles.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrPanelFiles.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrPnlFiles.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrPanelFiles.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="cboFileType.Items" xml:space="preserve">
-    <value>.csv</value>
-  </data>
-  <data name="cboFileType.Items1" xml:space="preserve">
-    <value>.xlsx</value>
-  </data>
-  <data name="cboFileType.Items2" xml:space="preserve">
-    <value>.tsv</value>
-  </data>
-  <data name="cboFileType.Items3" xml:space="preserve">
-    <value>.psv</value>
-  </data>
-  <data name="cboFileType.Items4" xml:space="preserve">
-    <value>.feather</value>
-  </data>
-  <data name="cboFileType.Items5" xml:space="preserve">
-    <value>.fwf</value>
-  </data>
-  <data name="cboFileType.Items6" xml:space="preserve">
-    <value>.rds</value>
-  </data>
-  <data name="cboFileType.Items7" xml:space="preserve">
-    <value>.RData</value>
-  </data>
-  <data name="cboFileType.Items8" xml:space="preserve">
-    <value>.json</value>
-  </data>
-  <data name="cboFileType.Items9" xml:space="preserve">
-    <value>.yml</value>
-  </data>
-  <data name="cboFileType.Items10" xml:space="preserve">
-    <value>.dta</value>
-  </data>
-  <data name="cboFileType.Items11" xml:space="preserve">
-    <value>.sav</value>
-  </data>
-  <data name="cboFileType.Items12" xml:space="preserve">
-    <value>.dbf</value>
-  </data>
-  <data name="cboFileType.Items13" xml:space="preserve">
-    <value>.arff</value>
-  </data>
-  <data name="cboFileType.Items14" xml:space="preserve">
-    <value>.R</value>
-  </data>
-  <data name="cboFileType.Items15" xml:space="preserve">
-    <value>.xml</value>
-  </data>
-  <data name="cboFileType.Items16" xml:space="preserve">
-    <value>.html</value>
-  </data>
-  <data name="cboFileType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 44</value>
-  </data>
-  <data name="cboFileType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>170, 21</value>
-  </data>
-  <data name="cboFileType.TabIndex" type="System.Int32, mscorlib">
-    <value>33</value>
-  </data>
-  <data name="&gt;&gt;cboFileType.Name" xml:space="preserve">
-    <value>cboFileType</value>
-  </data>
-  <data name="&gt;&gt;cboFileType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cboFileType.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cboFileType.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="lblFileExtension.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblFileType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblFileExtension.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblFileType.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblFileExtension.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblFileType.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 47</value>
   </data>
-  <data name="lblFileExtension.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="lblFileType.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 0, 2, 0</value>
   </data>
-  <data name="lblFileExtension.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblFileType.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 13</value>
   </data>
-  <data name="lblFileExtension.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblFileType.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
   </data>
-  <data name="lblFileExtension.Text" xml:space="preserve">
+  <data name="lblFileType.Text" xml:space="preserve">
     <value>Select File Type:</value>
   </data>
-  <data name="&gt;&gt;lblFileExtension.Name" xml:space="preserve">
-    <value>lblFileExtension</value>
+  <data name="&gt;&gt;lblFileType.Name" xml:space="preserve">
+    <value>lblFileType</value>
   </data>
-  <data name="&gt;&gt;lblFileExtension.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblFileType.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblFileExtension.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblFileType.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblFileExtension.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblFileType.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ucrInputComboFileTypes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>100, 41</value>
+  </data>
+  <data name="ucrInputComboFileTypes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>212, 21</value>
+  </data>
+  <data name="ucrInputComboFileTypes.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboFileTypes.Name" xml:space="preserve">
+    <value>ucrInputComboFileTypes</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboFileTypes.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboFileTypes.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputComboFileTypes.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
