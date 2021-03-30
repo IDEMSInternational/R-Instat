@@ -874,7 +874,7 @@ DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_po
     #get column type of column from the current table using column name
     col_type <- class(col_data)
     #check copied data integrity based on the data type expected
-    if (col_type == "factor" || col_type == "ordered" ){
+    if (is.factor(col_data)) {
       #get all the factor levels of the selected column in the current data frame
       expected_factor_levels <- levels(col_data)
       #check if all copied data values are contained in the factor levels
