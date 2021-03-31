@@ -2280,16 +2280,16 @@ plot_declustered <- function(data, station_col_name, element_col_name, threshold
   }
 }
 
-#This function creates awrarper around functions from openair package
+#This function creates a wrapper around functions from openair package
 other_rose_plots <- function(data, type1_col_name, type2_col_name, date_col_name, wd_col_name, ws_col_name, main_method, single_pollutant, multiple_pollutant, ...) {
-  type = "default"
-  if (missing(type1_col_name) == FALSE && missing(type2_col_name) == FALSE) {
-    type <- c(type1_col_name,type2_col_name)
+  type <- "default"
+  if (!missing(type1_col_name) && !missing(type2_col_name)) {
+    type <- c(type1_col_name, type2_col_name)
   }
-  if (missing(type1_col_name) == TRUE && missing(type2_col_name) == FALSE) {
+  if (missing(type1_col_name) && !missing(type2_col_name)) {
     type <- type2_col_name
   }
-  if (missing(type1_col_name) == FALSE && missing(type2_col_name) ==TRUE) {
+  if (!missing(type1_col_name) && missing(type2_col_name)) {
     type <- type1_col_name
   }
   if (!main_method %in% c("percentile_rose", "polar_plot", "polar_annulus", "polar_cluster", "polar_frequency")) stop("Method must be either percentile_rose, polar_plot, polar_annulus, polar_cluster or polar_frequency.")
