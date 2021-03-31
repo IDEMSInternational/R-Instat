@@ -75,7 +75,7 @@ Public Class sdgClimaticDataEntry
             If bEditableColumn Then
                 If bAllowTrace AndAlso newValue.ToUpper = "T" Then
                     newValue = 0.03
-                ElseIf bTransform Then
+                ElseIf bTransform And IsNumeric(newValue) Then
                     newValue = newValue / dTranformValue
                 End If
             End If
@@ -146,6 +146,7 @@ Public Class sdgClimaticDataEntry
             End If
         Next
 
+        Dim dfValue As String
         grdCurrentWorkSheet.Rows = dfEditData.RowCount
         For i As Integer = 0 To dfEditData.RowCount - 1
             For j = 0 To grdCurrentWorkSheet.Columns - 1
