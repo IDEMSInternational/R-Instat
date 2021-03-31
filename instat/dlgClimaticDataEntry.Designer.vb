@@ -37,11 +37,11 @@ Partial Class dlgClimaticDataEntry
         Me.cmdCheckData = New System.Windows.Forms.Button()
         Me.ttCmdCheckData = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpRestrictEntry = New System.Windows.Forms.GroupBox()
+        Me.ucrChkAllowTrace = New instat.ucrCheck()
+        Me.ucrChkNoDecimal = New instat.ucrCheck()
         Me.ttucrChkDefaultValue = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrInputDefaultValue = New instat.ucrInputTextBox()
         Me.ucrInputTransform = New instat.ucrInputComboBox()
-        Me.ucrChkAllowTrace = New instat.ucrCheck()
-        Me.ucrChkNoDecimal = New instat.ucrCheck()
         Me.ucrChkDefaultValue = New instat.ucrCheck()
         Me.ucrChkTransform = New instat.ucrCheck()
         Me.ucrEndDate = New instat.ucrDateTimePicker()
@@ -171,9 +171,9 @@ Partial Class dlgClimaticDataEntry
         Me.lblPeriod.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.lblPeriod.Location = New System.Drawing.Point(141, 52)
         Me.lblPeriod.Name = "lblPeriod"
-        Me.lblPeriod.Size = New System.Drawing.Size(34, 13)
+        Me.lblPeriod.Size = New System.Drawing.Size(40, 13)
         Me.lblPeriod.TabIndex = 4
-        Me.lblPeriod.Text = "Type:"
+        Me.lblPeriod.Text = "Period:"
         '
         'lblEndingDate
         '
@@ -214,6 +214,22 @@ Partial Class dlgClimaticDataEntry
         Me.grpRestrictEntry.TabStop = False
         Me.grpRestrictEntry.Text = "Restrict Entry:"
         '
+        'ucrChkAllowTrace
+        '
+        Me.ucrChkAllowTrace.Checked = False
+        Me.ucrChkAllowTrace.Location = New System.Drawing.Point(109, 14)
+        Me.ucrChkAllowTrace.Name = "ucrChkAllowTrace"
+        Me.ucrChkAllowTrace.Size = New System.Drawing.Size(127, 20)
+        Me.ucrChkAllowTrace.TabIndex = 66
+        '
+        'ucrChkNoDecimal
+        '
+        Me.ucrChkNoDecimal.Checked = False
+        Me.ucrChkNoDecimal.Location = New System.Drawing.Point(7, 14)
+        Me.ucrChkNoDecimal.Name = "ucrChkNoDecimal"
+        Me.ucrChkNoDecimal.Size = New System.Drawing.Size(113, 20)
+        Me.ucrChkNoDecimal.TabIndex = 65
+        '
         'ttucrChkDefaultValue
         '
         Me.ttucrChkDefaultValue.AutoPopDelay = 10000
@@ -240,22 +256,6 @@ Partial Class dlgClimaticDataEntry
         Me.ucrInputTransform.Name = "ucrInputTransform"
         Me.ucrInputTransform.Size = New System.Drawing.Size(94, 21)
         Me.ucrInputTransform.TabIndex = 86
-        '
-        'ucrChkAllowTrace
-        '
-        Me.ucrChkAllowTrace.Checked = False
-        Me.ucrChkAllowTrace.Location = New System.Drawing.Point(109, 14)
-        Me.ucrChkAllowTrace.Name = "ucrChkAllowTrace"
-        Me.ucrChkAllowTrace.Size = New System.Drawing.Size(127, 20)
-        Me.ucrChkAllowTrace.TabIndex = 66
-        '
-        'ucrChkNoDecimal
-        '
-        Me.ucrChkNoDecimal.Checked = False
-        Me.ucrChkNoDecimal.Location = New System.Drawing.Point(7, 14)
-        Me.ucrChkNoDecimal.Name = "ucrChkNoDecimal"
-        Me.ucrChkNoDecimal.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkNoDecimal.TabIndex = 65
         '
         'ucrChkDefaultValue
         '

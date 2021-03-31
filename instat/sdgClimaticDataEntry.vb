@@ -64,11 +64,17 @@ Public Class sdgClimaticDataEntry
             End If
         Next
 
+        Dim newValue As String
         For Each iRowIndex As Integer In dctRowsChanged.Keys
+            newValue = grdCurrentWorkSheet.Item(row:=iRowIndex, col:=iColumnIndex)
+            'todo. what happens transformation is enable
+            If newValue.ToUpper = "T" Then
+                newValue = 0.03
+            End If
             If strValues = "" Then
-                strValues = strQuotes & grdCurrentWorkSheet.Item(row:=iRowIndex, col:=iColumnIndex) & strQuotes
+                strValues = strQuotes & newValue & strQuotes
             Else
-                strValues = strValues & "," & strQuotes & grdCurrentWorkSheet.Item(row:=iRowIndex, col:=iColumnIndex) & strQuotes
+                strValues = strValues & "," & strQuotes & newValue & strQuotes
             End If
         Next
 
@@ -180,21 +186,26 @@ Public Class sdgClimaticDataEntry
         e.IsCancelled = True
     End Sub
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
-        Dim strtTraceAllowed As String() = {"t", "T"}
-        If (Not IsNumeric(e.NewData) AndAlso Not e.NewData.ToString() = "NA") OrElse ((InStr(e.NewData, "t") OrElse InStr(e.NewData, "T")) AndAlso Not bAllowTrace) Then
-            MsgBox("Value is not numeric or NA.", MsgBoxStyle.Information, "Not numeric.")
-            e.EndReason = EndEditReason.Cancel
-        ElseIf InStr(e.NewData, ".") AndAlso bNoDecimal Then
+        Dim bValidValue As Boolean = True
+        Dim newValue As String = e.NewData
+
+        If Not IsNumeric(newValue) AndAlso Not newValue = "NA" Then
+            If Not (bAllowTrace AndAlso newValue.ToUpper = "T") Then
+                MsgBox("Value is not numeric or NA.", MsgBoxStyle.Information, "Not numeric.")
+                e.EndReason = EndEditReason.Cancel
+                bValidValue = False
+            End If
+        ElseIf bNoDecimal AndAlso newValue.Contains(".") Then
             MsgBox("Value should not be decimal otherwise uncheck No Decimal.", MsgBoxStyle.Information, "Not decimal Allowed.")
             e.EndReason = EndEditReason.Cancel
-        Else
+            bValidValue = False
+        End If
+
+        If bValidValue Then
             AddChangedRow(e.Cell.Row)
             grdCurrentWorkSheet.GetCell(e.Cell.Row, e.Cell.Column).Style.BackColor = Color.Yellow
         End If
-        'If InStr(e.NewData, ".") AndAlso bNoDecimal Then
-        '    MsgBox("Value should not be decimal otherwise uncheck No Decimal.", MsgBoxStyle.Information, "Not decimal Allowed.")
-        '    e.EndReason = EndEditReason.Cancel
-        'End If
+
     End Sub
 
     ''' <summary>
