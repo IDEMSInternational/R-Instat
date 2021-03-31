@@ -68,7 +68,6 @@ Partial Class dlgExtremesClimatic
         Me.grpThresholdOptions = New System.Windows.Forms.GroupBox()
         Me.grpMrlOptions = New System.Windows.Forms.GroupBox()
         Me.grpPlots = New System.Windows.Forms.GroupBox()
-        Me.rdoDeclustering = New System.Windows.Forms.RadioButton()
         Me.rdoThreshold = New System.Windows.Forms.RadioButton()
         Me.ttpThreshold = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblThreshold = New System.Windows.Forms.Label()
@@ -110,6 +109,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrSelectorClimaticExtremes = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlExtremesType = New instat.UcrPanel()
+        Me.ucrChkDeclustering = New instat.ucrCheck()
         Me.grpMinMaxOptions.SuspendLayout()
         Me.grpPeakOptions.SuspendLayout()
         Me.grpThresholdOptions.SuspendLayout()
@@ -184,7 +184,7 @@ Partial Class dlgExtremesClimatic
         'rdoMax
         '
         Me.rdoMax.AutoSize = True
-        Me.rdoMax.Location = New System.Drawing.Point(10, 48)
+        Me.rdoMax.Location = New System.Drawing.Point(12, 48)
         Me.rdoMax.Name = "rdoMax"
         Me.rdoMax.Size = New System.Drawing.Size(104, 17)
         Me.rdoMax.TabIndex = 9
@@ -424,27 +424,15 @@ Partial Class dlgExtremesClimatic
         '
         'grpPlots
         '
-        Me.grpPlots.Controls.Add(Me.rdoDeclustering)
         Me.grpPlots.Controls.Add(Me.rdoMrlPlot)
         Me.grpPlots.Controls.Add(Me.rdoThreshRangePlot)
         Me.grpPlots.Controls.Add(Me.ucrPnlPlots)
         Me.grpPlots.Location = New System.Drawing.Point(9, 218)
         Me.grpPlots.Name = "grpPlots"
-        Me.grpPlots.Size = New System.Drawing.Size(211, 80)
+        Me.grpPlots.Size = New System.Drawing.Size(211, 65)
         Me.grpPlots.TabIndex = 15
         Me.grpPlots.TabStop = False
         Me.grpPlots.Text = "Plots"
-        '
-        'rdoDeclustering
-        '
-        Me.rdoDeclustering.AutoSize = True
-        Me.rdoDeclustering.Location = New System.Drawing.Point(14, 54)
-        Me.rdoDeclustering.Name = "rdoDeclustering"
-        Me.rdoDeclustering.Size = New System.Drawing.Size(84, 17)
-        Me.rdoDeclustering.TabIndex = 45
-        Me.rdoDeclustering.TabStop = True
-        Me.rdoDeclustering.Text = "Declustering"
-        Me.rdoDeclustering.UseVisualStyleBackColor = True
         '
         'rdoThreshold
         '
@@ -489,9 +477,9 @@ Partial Class dlgExtremesClimatic
         Me.grpDeclusteringOptions.Controls.Add(Me.ucrNudDeclusterColumns)
         Me.grpDeclusteringOptions.Controls.Add(Me.lblDeclusterColumns)
         Me.grpDeclusteringOptions.Controls.Add(Me.lblThreshold)
-        Me.grpDeclusteringOptions.Location = New System.Drawing.Point(11, 300)
+        Me.grpDeclusteringOptions.Location = New System.Drawing.Point(11, 282)
         Me.grpDeclusteringOptions.Name = "grpDeclusteringOptions"
-        Me.grpDeclusteringOptions.Size = New System.Drawing.Size(209, 135)
+        Me.grpDeclusteringOptions.Size = New System.Drawing.Size(209, 118)
         Me.grpDeclusteringOptions.TabIndex = 16
         Me.grpDeclusteringOptions.TabStop = False
         Me.grpDeclusteringOptions.Text = "Options"
@@ -548,7 +536,7 @@ Partial Class dlgExtremesClimatic
         '
         'ucrSaveDeclusteredPlot
         '
-        Me.ucrSaveDeclusteredPlot.Location = New System.Drawing.Point(8, 467)
+        Me.ucrSaveDeclusteredPlot.Location = New System.Drawing.Point(8, 411)
         Me.ucrSaveDeclusteredPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDeclusteredPlot.Name = "ucrSaveDeclusteredPlot"
         Me.ucrSaveDeclusteredPlot.Size = New System.Drawing.Size(267, 24)
@@ -680,7 +668,7 @@ Partial Class dlgExtremesClimatic
         '
         Me.ucrPnlPlots.Location = New System.Drawing.Point(12, 13)
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
-        Me.ucrPnlPlots.Size = New System.Drawing.Size(111, 63)
+        Me.ucrPnlPlots.Size = New System.Drawing.Size(111, 44)
         Me.ucrPnlPlots.TabIndex = 41
         '
         'ucrInputThresholdValue
@@ -847,11 +835,20 @@ Partial Class dlgExtremesClimatic
         Me.ucrPnlExtremesType.Size = New System.Drawing.Size(280, 37)
         Me.ucrPnlExtremesType.TabIndex = 0
         '
+        'ucrChkDeclustering
+        '
+        Me.ucrChkDeclustering.Checked = False
+        Me.ucrChkDeclustering.Location = New System.Drawing.Point(250, 310)
+        Me.ucrChkDeclustering.Name = "ucrChkDeclustering"
+        Me.ucrChkDeclustering.Size = New System.Drawing.Size(93, 20)
+        Me.ucrChkDeclustering.TabIndex = 53
+        '
         'dlgExtremesClimatic
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(419, 549)
+        Me.Controls.Add(Me.ucrChkDeclustering)
         Me.Controls.Add(Me.grpDeclusteringOptions)
         Me.Controls.Add(Me.ucrSaveDeclusteredPlot)
         Me.Controls.Add(Me.ucrSaveThresholdPlot)
@@ -859,7 +856,6 @@ Partial Class dlgExtremesClimatic
         Me.Controls.Add(Me.grpMrlOptions)
         Me.Controls.Add(Me.grpThresholdOptions)
         Me.Controls.Add(Me.rdoThreshold)
-        Me.Controls.Add(Me.grpPlots)
         Me.Controls.Add(Me.grpPeakOptions)
         Me.Controls.Add(Me.cmdDoyRange)
         Me.Controls.Add(Me.ucrInputFilterPreview)
@@ -868,7 +864,6 @@ Partial Class dlgExtremesClimatic
         Me.Controls.Add(Me.lblElement)
         Me.Controls.Add(Me.rdoPeaks)
         Me.Controls.Add(Me.rdoMinMax)
-        Me.Controls.Add(Me.grpMinMaxOptions)
         Me.Controls.Add(Me.lblDayOfYear)
         Me.Controls.Add(Me.lblYear)
         Me.Controls.Add(Me.lblDate)
@@ -882,6 +877,8 @@ Partial Class dlgExtremesClimatic
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlExtremesType)
         Me.Controls.Add(Me.lblNewDFName)
+        Me.Controls.Add(Me.grpPlots)
+        Me.Controls.Add(Me.grpMinMaxOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -966,7 +963,6 @@ Partial Class dlgExtremesClimatic
     Friend WithEvents rdoThreshold As RadioButton
     Friend WithEvents ucrSaveThresholdPlot As ucrSave
     Friend WithEvents ttpThreshold As ToolTip
-    Friend WithEvents rdoDeclustering As RadioButton
     Friend WithEvents ucrChkPrintSummary As ucrCheck
     Friend WithEvents ucrSaveDeclusteredPlot As ucrSave
     Friend WithEvents lblThreshold As Label
@@ -976,4 +972,5 @@ Partial Class dlgExtremesClimatic
     Friend WithEvents lblDeclusterColumns As Label
     Friend WithEvents grpDeclusteringOptions As GroupBox
     Friend WithEvents ucrChkRunLength As ucrCheck
+    Friend WithEvents ucrChkDeclustering As ucrCheck
 End Class
