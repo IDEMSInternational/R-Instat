@@ -715,19 +715,17 @@ Public Class ucrDataView
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
-    Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
-        Dim strRow As String
+    Private Function GetFirstSelectedRow() As String
+        Return grdCurrSheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text
+    End Function
 
-        strRow = grdCurrSheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text
-        dlgAddComment.SetPosition(grdCurrSheet.Name, strRow)
+    Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
+        dlgAddComment.SetPosition(grdCurrSheet.Name, GetFirstSelectedRow())
         dlgAddComment.ShowDialog()
     End Sub
 
     Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuCellAddComment.Click
-        Dim strRow As String
-
-        strRow = grdCurrSheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text
-        dlgAddComment.SetPosition(grdCurrSheet.Name, strRow, SelectedColumnsAsArray()(0))
+        dlgAddComment.SetPosition(grdCurrSheet.Name, GetFirstSelectedRow(), SelectedColumnsAsArray()(0))
         dlgAddComment.ShowDialog()
     End Sub
 

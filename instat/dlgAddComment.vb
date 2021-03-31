@@ -16,7 +16,7 @@
 
 Imports instat.Translations
 Public Class dlgAddComment
-    Public bUseSelectedPosition As Boolean = False
+    Private bUseSelectedPosition As Boolean = False
     Private strSelectedDataFrame As String = ""
     Private strSelectedRow As String = ""
     Private strSelectedColumn As String = ""
