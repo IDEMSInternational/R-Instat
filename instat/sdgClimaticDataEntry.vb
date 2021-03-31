@@ -40,6 +40,10 @@ Public Class sdgClimaticDataEntry
     Private lstElementsNames As List(Of String)
     Private lstViewVariablesNames As List(Of String)
     Private strStationColumnName As String
+    Private strDefaultValue As String
+    Private bNoDecimal As Boolean
+    Private bAllowTrace As Boolean
+
 
     ''' <summary>
     ''' returns the data changed for the passed column as an R vector string
@@ -84,7 +88,7 @@ Public Class sdgClimaticDataEntry
         grdCurrentWorkSheet = Nothing
     End Sub
 
-    Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction, clsEditDataFrame As RFunction, strDateName As String, lstElementsNames As List(Of String), Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "")
+    Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction, clsEditDataFrame As RFunction, strDateName As String, lstElementsNames As List(Of String), Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "", Optional bDefaultValue As Boolean = False, Optional strDefaultValue As String = "", Optional bNoDecimal As Boolean = False, Optional bAllowTrace As Boolean = False)
         Dim lstColumnHeaders As String()
 
         grdDataEntry.Worksheets.Clear()
@@ -99,6 +103,9 @@ Public Class sdgClimaticDataEntry
         Me.lstElementsNames = lstElementsNames
         Me.lstViewVariablesNames = lstViewVariablesNames
         Me.strStationColumnName = strStationColumnName
+        Me.strDefaultValue = strDefaultValue
+        Me.bNoDecimal = bNoDecimal
+        Me.bAllowTrace = bAllowTrace
 
         If Not strStationColumnName = "" Then
             lstNonEditableColumns.Add(strStationColumnName)
@@ -125,8 +132,14 @@ Public Class sdgClimaticDataEntry
         grdCurrentWorkSheet.Rows = dfEditData.RowCount
         For i As Integer = 0 To dfEditData.RowCount - 1
             For j = 0 To grdCurrentWorkSheet.Columns - 1
-                'TODO Convert the R NAs to VB.NET "NA" string. 
+                'TODO Convert the R NAs to VB.NET "NA" string.
                 grdCurrentWorkSheet.Item(row:=i, col:=j) = dfEditData.Item(i, j)
+                If grdCurrentWorkSheet.Item(row:=i, col:=j).ToString() = "NaN" Then
+                    grdCurrentWorkSheet.Item(row:=i, col:=j) = "NA"
+                End If
+                If Not lstNonEditableColumns.Contains(lstColumnHeaders(j)) AndAlso bDefaultValue AndAlso grdCurrentWorkSheet.Item(row:=i, col:=j).ToString() = "NA" Then
+                    grdCurrentWorkSheet.Item(row:=i, col:=j) = strDefaultValue
+                End If
                 If lstNonEditableColumns.Contains(lstColumnHeaders(j)) Then
                     grdCurrentWorkSheet.GetCell(i, j).IsReadOnly = True
                 End If
@@ -142,6 +155,7 @@ Public Class sdgClimaticDataEntry
         grdDataEntry.SheetTabNewButtonVisible = False
 
         ttCmdReset.SetToolTip(cmdReset, "Clears all data entry.")
+        ttCmdTransformButton.SetToolTip(cmdTransform, "When implemented, this is an option to show the transformed data.")
     End Sub
 
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
@@ -165,15 +179,22 @@ Public Class sdgClimaticDataEntry
         MsgBox("Pasting not yet implemented.", MsgBoxStyle.Information, "Pasting not implemented.")
         e.IsCancelled = True
     End Sub
-
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
-        If Not IsNumeric(e.NewData) AndAlso Not e.NewData.ToString() = "NA" Then
+        Dim strtTraceAllowed As String() = {"t", "T"}
+        If (Not IsNumeric(e.NewData) AndAlso Not e.NewData.ToString() = "NA") OrElse ((InStr(e.NewData, "t") OrElse InStr(e.NewData, "T")) AndAlso Not bAllowTrace) Then
             MsgBox("Value is not numeric or NA.", MsgBoxStyle.Information, "Not numeric.")
+            e.EndReason = EndEditReason.Cancel
+        ElseIf InStr(e.NewData, ".") AndAlso bNoDecimal Then
+            MsgBox("Value should not be decimal otherwise uncheck No Decimal.", MsgBoxStyle.Information, "Not decimal Allowed.")
             e.EndReason = EndEditReason.Cancel
         Else
             AddChangedRow(e.Cell.Row)
             grdCurrentWorkSheet.GetCell(e.Cell.Row, e.Cell.Column).Style.BackColor = Color.Yellow
         End If
+        'If InStr(e.NewData, ".") AndAlso bNoDecimal Then
+        '    MsgBox("Value should not be decimal otherwise uncheck No Decimal.", MsgBoxStyle.Information, "Not decimal Allowed.")
+        '    e.EndReason = EndEditReason.Cancel
+        'End If
     End Sub
 
     ''' <summary>
@@ -190,7 +211,7 @@ Public Class sdgClimaticDataEntry
     Private Sub cmdRefress_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
         If MsgBox("All data entry will be lost. Are you sure you want to continue?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
             clsSaveDataEntry.RemoveParameterByName("rows_changed")
-            Setup(dfEditData, strDataFrameName, clsSaveDataEntry, clsEditDataFrame, strDateName, lstElementsNames, lstViewVariablesNames, strStationColumnName)
+            Setup(dfEditData, strDataFrameName, clsSaveDataEntry, clsEditDataFrame, strDateName, lstElementsNames, lstViewVariablesNames, strStationColumnName, bDefaultValue:=False, strDefaultValue, bNoDecimal, bAllowTrace)
         End If
     End Sub
 

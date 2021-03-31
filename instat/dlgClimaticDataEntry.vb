@@ -29,6 +29,7 @@ Public Class dlgClimaticDataEntry
     Private ReadOnly strRange As String = "Range"
     Private bChange As Boolean = False
     Private bSubdialogFirstLoad As Boolean = True
+    Private bState As Boolean = False
 
     Private Sub dlgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -103,8 +104,25 @@ Public Class dlgClimaticDataEntry
         ucrEndDate.SetParameter(New RParameter("end_date", iNewPosition:=9))
         ucrEndDate.SetParameterIsRDate()
 
+        'Not yet implemented
+        ucrChkTransform.SetText("Transform:")
+        ucrChkTransform.Enabled = False
+
+        ucrInputTransform.Enabled = False
+        ucrInputTransform.SetItems({"10", "Inch to mm"})
+        ucrInputTransform.Visible = False
+
+        ucrChkDefaultValue.SetText("Default Value")
+        ucrInputDefaultValue.SetText("0")
+
+        ucrChkNoDecimal.SetText("No Decimal")
+        'ucrChkNoDecimal.Enabled = False
+
+        ucrChkAllowTrace.SetText("Allow t for Trace")
+
         ttCmdCheckData.SetToolTip(cmdCheckData, "Data checking facilities not yet implemented")
         cmdCheckData.Enabled = False
+        ttucrChkDefaultValue.SetToolTip(ucrChkDefaultValue, "The data must be defined as climatic to recognise which variable is precipitation.")
     End Sub
 
     Private Sub SetDefaults()
@@ -112,8 +130,12 @@ Public Class dlgClimaticDataEntry
         clsEditDataFrame = New RFunction
         clsGetDataEntry = New RFunction
 
+        SetVisibleDefaultValue()
+
         ucrSelectorClimaticDataEntry.Reset()
         ucrReceiverElements.SetMeAsReceiver()
+        ucrChkDefaultValue.Checked = False
+        ucrChkAllowTrace.Checked = False
 
         clsGetDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
         clsGetDataEntry.AddParameter("type", Chr(34) & "month" & Chr(34), iPosition:=6)
@@ -125,6 +147,7 @@ Public Class dlgClimaticDataEntry
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsSaveDataEntry)
         bChange = False
+        bState = False
         bSubdialogFirstLoad = True
     End Sub
 
@@ -179,8 +202,13 @@ Public Class dlgClimaticDataEntry
         Dim strStationSelected As String
         Dim dfEditData As DataFrame
         Dim strDataFrameName As String
+        Dim strDefaultValue As String
         Dim bSetup As Boolean
         Dim bShow As Boolean
+        Dim bNoDecimals As Boolean
+        Dim bDefaultValue As Boolean
+        Dim bAllowTrace As Boolean
+
 
         strDataFrameName = ucrSelectorClimaticDataEntry.strCurrentDataFrame
         strStationColumnName = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
@@ -189,6 +217,8 @@ Public Class dlgClimaticDataEntry
         lstElementsColumnNames = ucrReceiverElements.GetVariableNamesList(bWithQuotes:=False).ToList
         lstVariablesColumnNames = ucrReceiverViewVariables.GetVariableNamesList(bWithQuotes:=False).ToList
         dfEditData = GetSelectedDataFrame()
+
+        strDefaultValue = ucrInputDefaultValue.GetValue()
 
         If dfEditData Is Nothing Then
             MsgBox("No available data for this selection. Modify dates and try again.")
@@ -207,9 +237,26 @@ Public Class dlgClimaticDataEntry
             bShow = True
             bSetup = False
         End If
+        If bState Then
+            If ucrChkNoDecimal.Checked Then
+                bNoDecimals = True
+            Else
+                bNoDecimals = False
+            End If
+            If ucrChkDefaultValue.Checked Then
+                bDefaultValue = True
+            Else
+                bDefaultValue = False
+            End If
+            If ucrChkAllowTrace.Checked Then
+                bAllowTrace = True
+            Else
+                bAllowTrace = False
+            End If
+        End If
         If bShow Then
             If bSetup Then
-                sdgClimaticDataEntry.Setup(dfEditData, strDataFrameName, clsSaveDataEntry, clsEditDataFrame, strDateColumnName, lstElementsColumnNames, lstVariablesColumnNames, strStationColumnName)
+                sdgClimaticDataEntry.Setup(dfEditData, strDataFrameName, clsSaveDataEntry, clsEditDataFrame, strDateColumnName, lstElementsColumnNames, lstVariablesColumnNames, strStationColumnName, bDefaultValue:=bDefaultValue, strDefaultValue, bNoDecimal:=bNoDecimals, bAllowTrace:=bAllowTrace)
             End If
             sdgClimaticDataEntry.ShowDialog()
             bSubdialogFirstLoad = False
@@ -265,5 +312,24 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
+    End Sub
+    Private Sub SetVisibleDefaultValue()
+        If ucrChkDefaultValue.Checked Then
+            ucrInputDefaultValue.Visible = True
+        Else
+            ucrInputDefaultValue.Visible = False
+        End If
+    End Sub
+    Private Sub ucrChkDefaultValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefaultValue.ControlValueChanged
+        SetVisibleDefaultValue()
+    End Sub
+
+    Private Sub ucrChkNoDecimal_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoDecimal.ControlValueChanged, ucrChkDefaultValue.ControlValueChanged, ucrChkAllowTrace.ControlValueChanged
+        bChange = True
+        If ucrChkDefaultValue.Checked OrElse ucrChkNoDecimal.Checked OrElse ucrChkAllowTrace.Checked Then
+            bState = True
+        Else
+            bState = False
+        End If
     End Sub
 End Class
