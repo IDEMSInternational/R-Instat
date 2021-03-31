@@ -19,7 +19,7 @@ Partial Class dlgAddComment
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,7 +36,7 @@ Partial Class dlgAddComment
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgAddComment))
         Me.lblRow = New System.Windows.Forms.Label()
@@ -44,14 +44,12 @@ Partial Class dlgAddComment
         Me.lblComment = New System.Windows.Forms.Label()
         Me.rdoCell = New System.Windows.Forms.RadioButton()
         Me.rdoRow = New System.Windows.Forms.RadioButton()
-        Me.UcrDialogDisabled1 = New instat.ucrDialogDisabled()
         Me.ucrPnlCellOrRow = New instat.UcrPanel()
         Me.ucrInputComment = New instat.ucrInputTextBox()
         Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
-        Me.ucrReceiverRow = New instat.ucrReceiverSingle()
-        Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrDataFrame = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrInputRow = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblRow
@@ -89,12 +87,6 @@ Partial Class dlgAddComment
         Me.rdoRow.Name = "rdoRow"
         Me.rdoRow.UseVisualStyleBackColor = True
         '
-        'UcrDialogDisabled1
-        '
-        Me.UcrDialogDisabled1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.UcrDialogDisabled1, "UcrDialogDisabled1")
-        Me.UcrDialogDisabled1.Name = "UcrDialogDisabled1"
-        '
         'ucrPnlCellOrRow
         '
         resources.ApplyResources(Me.ucrPnlCellOrRow, "ucrPnlCellOrRow")
@@ -117,38 +109,33 @@ Partial Class dlgAddComment
         Me.ucrReceiverColumn.strNcFilePath = ""
         Me.ucrReceiverColumn.ucrSelector = Nothing
         '
-        'ucrReceiverRow
-        '
-        Me.ucrReceiverRow.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverRow, "ucrReceiverRow")
-        Me.ucrReceiverRow.Name = "ucrReceiverRow"
-        Me.ucrReceiverRow.Selector = Nothing
-        Me.ucrReceiverRow.strNcFilePath = ""
-        Me.ucrReceiverRow.ucrSelector = Nothing
-        '
-        'ucrSelectorAddComment
-        '
-        Me.ucrSelectorAddComment.bShowHiddenColumns = False
-        Me.ucrSelectorAddComment.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorAddComment, "ucrSelectorAddComment")
-        Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
-        '
-        'ucrDataFrame
-        '
-        Me.ucrDataFrame.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrDataFrame, "ucrDataFrame")
-        Me.ucrDataFrame.Name = "ucrDataFrame"
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrSelectorAddComment
+        '
+        Me.ucrSelectorAddComment.bDropUnusedFilterLevels = False
+        Me.ucrSelectorAddComment.bShowHiddenColumns = False
+        Me.ucrSelectorAddComment.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorAddComment, "ucrSelectorAddComment")
+        Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
+        '
+        'ucrInputRow
+        '
+        Me.ucrInputRow.AddQuotesIfUnrecognised = True
+        Me.ucrInputRow.IsMultiline = False
+        Me.ucrInputRow.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputRow, "ucrInputRow")
+        Me.ucrInputRow.Name = "ucrInputRow"
+        '
         'dlgAddComment
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.UcrDialogDisabled1)
+        Me.Controls.Add(Me.ucrInputRow)
+        Me.Controls.Add(Me.ucrSelectorAddComment)
         Me.Controls.Add(Me.rdoCell)
         Me.Controls.Add(Me.rdoRow)
         Me.Controls.Add(Me.ucrPnlCellOrRow)
@@ -157,9 +144,6 @@ Partial Class dlgAddComment
         Me.Controls.Add(Me.lblColumn)
         Me.Controls.Add(Me.ucrReceiverColumn)
         Me.Controls.Add(Me.lblRow)
-        Me.Controls.Add(Me.ucrReceiverRow)
-        Me.Controls.Add(Me.ucrSelectorAddComment)
-        Me.Controls.Add(Me.ucrDataFrame)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -171,9 +155,6 @@ Partial Class dlgAddComment
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrDataFrame As ucrDataFrame
-    Friend WithEvents ucrSelectorAddComment As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverRow As ucrReceiverSingle
     Friend WithEvents lblRow As Label
     Friend WithEvents lblColumn As Label
     Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
@@ -182,5 +163,6 @@ Partial Class dlgAddComment
     Friend WithEvents rdoCell As RadioButton
     Friend WithEvents rdoRow As RadioButton
     Friend WithEvents ucrPnlCellOrRow As UcrPanel
-    Friend WithEvents UcrDialogDisabled1 As ucrDialogDisabled
+    Friend WithEvents ucrInputRow As ucrInputTextBox
+    Friend WithEvents ucrSelectorAddComment As ucrSelectorByDataFrameAddRemove
 End Class
