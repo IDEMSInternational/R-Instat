@@ -258,7 +258,7 @@ Public Class dlgOtherRosePlots
             End If
         ElseIf rdoPolarAnnulus.Checked OrElse rdoPolarPlot.Checked Then
             clsOtherRosePlots.AddParameter("statistic", Chr(34) & ucrInputStatistic.GetText & Chr(34), iPosition:=11)
-        ElseIf rdoPolarCluster.Checked OrElse rdoPercentileRose.Checked Then
+        Else
             clsOtherRosePlots.RemoveParameterByName("statistic")
         End If
     End Sub
