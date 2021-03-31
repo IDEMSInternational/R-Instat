@@ -117,10 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="ttCmdReset.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="ttCmdTransformButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>161, 17</value>
-  </metadata>
+  <data name="lblPossibleSolutions.Text" xml:space="preserve">
+    <value>Some values are non-numeric and will be converted to NA when converting to numeric.
+
+- To convert anyway choose "Normal Convert". Non-numeric values will be lost.
+
+- To retain non-numeric values choose "Labelled Convert". All values will be labelled with integers and can be recovered by converting back to character/factor.</value>
+  </data>
 </root>

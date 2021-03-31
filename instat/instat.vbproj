@@ -179,6 +179,7 @@
     <Compile Include="clsCustomColourTable.vb" />
     <Compile Include="clsCustomRenderer.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
+    <Compile Include="clsGridROperations.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
     <Compile Include="clsPopup.vb" />
     <Compile Include="clsQualityControl.vb" />
@@ -281,10 +282,22 @@
     <Compile Include="dlgHomogenization.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportERA5Data.Designer.vb">
+      <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportERA5Data.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgInfillMissingValues.Designer.vb">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgInfillMissingValues.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgLocatingPointsInShapeFile.Designer.vb">
+      <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgLocatingPointsInShapeFile.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgOtherRosePlots.Designer.vb">
@@ -327,6 +340,12 @@
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgWindPollutionRose.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConvertToNumeric.Designer.vb">
+      <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmConvertToNumeric.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgClimaticDataEntry.Designer.vb">
@@ -2728,8 +2747,14 @@
     <EmbeddedResource Include="dlgHomogenization.resx">
       <DependentUpon>dlgHomogenization.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportERA5Data.resx">
+      <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgLocatingPointsInShapeFile.resx">
+      <DependentUpon>dlgLocatingPointsInShapeFile.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgOtherRosePlots.resx">
       <DependentUpon>dlgOtherRosePlots.vb</DependentUpon>
@@ -2751,6 +2776,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgWindPollutionRose.resx">
       <DependentUpon>dlgWindPollutionRose.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConvertToNumeric.resx">
+      <DependentUpon>frmConvertToNumeric.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticDataEntry.resx">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
