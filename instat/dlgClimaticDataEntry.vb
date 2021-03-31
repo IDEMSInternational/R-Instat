@@ -164,7 +164,7 @@ Public Class dlgClimaticDataEntry
         ucrStartDate.SetRCode(clsGetDataEntry, bReset)
         ucrEndDate.SetRCode(clsGetDataEntry, bReset)
         If bReset Then
-            ' Default start date to 1 Jan 2021
+            ' Default start date to 1 Jan 2021. todo change to correct way of getting first date of current year
             ucrStartDate.DateValue = New Date("2021", "1", "1")
         End If
         SetDateOptions()
@@ -239,7 +239,7 @@ Public Class dlgClimaticDataEntry
             bShow = True
             bSetup = False
         End If
-        'todo. do we really need the state??
+        'todo. do we really need the bState??
         If bState Then
             bNoDecimals = ucrChkNoDecimal.Checked
             bDefaultValue = ucrChkDefaultValue.Checked
