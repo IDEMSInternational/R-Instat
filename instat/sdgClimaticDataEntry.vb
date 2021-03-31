@@ -147,18 +147,22 @@ Public Class sdgClimaticDataEntry
         Next
 
         Dim dfValue As String
+        Dim bNonEditableCell As Boolean
         grdCurrentWorkSheet.Rows = dfEditData.RowCount
         For i As Integer = 0 To dfEditData.RowCount - 1
             For j = 0 To grdCurrentWorkSheet.Columns - 1
-                'TODO Convert the R NAs to VB.NET "NA" string.
-                grdCurrentWorkSheet.Item(row:=i, col:=j) = dfEditData.Item(i, j)
-                If grdCurrentWorkSheet.Item(row:=i, col:=j).ToString() = "NaN" Then
-                    grdCurrentWorkSheet.Item(row:=i, col:=j) = "NA"
+                bNonEditableCell = lstNonEditableColumns.Contains(lstColumnHeaders(j))
+                dfValue = dfEditData.Item(i, j)
+                If dfValue = "NaN" Then
+                    dfValue = "NA"
                 End If
-                If Not lstNonEditableColumns.Contains(lstColumnHeaders(j)) AndAlso bDefaultValue AndAlso grdCurrentWorkSheet.Item(row:=i, col:=j).ToString() = "NA" Then
-                    grdCurrentWorkSheet.Item(row:=i, col:=j) = strDefaultValue
+                If bDefaultValue AndAlso Not bNonEditableCell AndAlso dfValue = "NA" Then
+                    dfValue = strDefaultValue
                 End If
-                If lstNonEditableColumns.Contains(lstColumnHeaders(j)) Then
+
+                grdCurrentWorkSheet.Item(row:=i, col:=j) = dfValue
+
+                If bNonEditableCell Then
                     grdCurrentWorkSheet.GetCell(i, j).IsReadOnly = True
                 End If
             Next
