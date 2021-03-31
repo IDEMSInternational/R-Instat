@@ -250,11 +250,6 @@ Public Class dlgExtremesClimatic
         ucrChkRunLength.AddParameterPresentCondition(True, "r")
         ucrChkRunLength.AddParameterPresentCondition(False, "r", False)
 
-        ucrInputThreshold.SetParameter(New RParameter("threshold", 3))
-        ucrInputThreshold.SetValidationTypeAsNumeric()
-        ucrInputThreshold.SetLinkedDisplayControl(lblValues)
-        ucrInputThreshold.AddQuotesIfUnrecognised = False
-
         ucrNudRunLength.SetParameter(New RParameter("r", 4))
         ucrNudRunLength.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
 
@@ -505,8 +500,9 @@ Public Class dlgExtremesClimatic
         ucrReceiverStation.AddAdditionalCodeParameterPair(clsThresholdPlotFunction, New RParameter("station_col_name", 2), iAdditionalPairNo:=1)
         ucrReceiverStation.AddAdditionalCodeParameterPair(clsDeclusteringFunction, New RParameter("station_col_name", 2), iAdditionalPairNo:=2)
 
+        ucrInputThresholdValue.AddAdditionalCodeParameterPair(clsDeclusteringFunction, New RParameter("threshold", 3), iAdditionalPairNo:=1)
+
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
-        '        ucrInputThresholdOperator.SetRCode(clsPeaksFilterFunction, bReset)
         ucrInputThresholdValue.SetRCode(clsPeaksFilterOperator, bReset)
         ucrPnlMaxMin.SetRCode(clsMinMaxFuncExp, bReset)
         ucrReceiverElement.SetRCode(clsMinMaxFuncExp, bReset)
@@ -529,7 +525,6 @@ Public Class dlgExtremesClimatic
         ucrNudThresholdColumns.SetRCode(clsThresholdPlotFunction, bReset)
         ucrNudAlpha.SetRCode(clsThresholdPlotFunction, bReset)
         ucrNudThresholds.SetRCode(clsThresholdPlotFunction, bReset)
-        ucrInputThreshold.SetRCode(clsDeclusteringFunction, bReset)
         ucrNudRunLength.SetRCode(clsDeclusteringFunction, bReset)
         ucrChkPrintSummary.SetRCode(clsDeclusteringFunction, bReset)
         ucrNudDeclusterColumns.SetRCode(clsDeclusteringFunction, bReset)
@@ -552,7 +547,7 @@ Public Class dlgExtremesClimatic
                 ucrBase.OKEnabled(False)
             End If
         Else
-            If ucrReceiverElement.IsEmpty OrElse (rdoMrlPlot.Checked AndAlso Not ucrSaveMrlPlot.IsComplete OrElse ucrNudColumns.GetText = "") OrElse (rdoThreshRangePlot.Checked AndAlso Not ucrSaveThresholdPlot.IsComplete OrElse ucrNudThresholds.GetText = "" OrElse ucrNudThresholdColumns.GetText = "" OrElse ucrNudAlpha.GetText = "") OrElse (ucrChkDeclustering.Checked AndAlso (ucrInputThreshold.IsEmpty OrElse Not ucrSaveDeclusteredPlot.IsComplete) OrElse ucrNudDeclusterColumns.GetText = "" OrElse ucrNudRunLength.GetText = "") Then
+            If ucrReceiverElement.IsEmpty OrElse (rdoMrlPlot.Checked AndAlso Not ucrSaveMrlPlot.IsComplete OrElse ucrNudColumns.GetText = "") OrElse (rdoThreshRangePlot.Checked AndAlso Not ucrSaveThresholdPlot.IsComplete OrElse ucrNudThresholds.GetText = "" OrElse ucrNudThresholdColumns.GetText = "" OrElse ucrNudAlpha.GetText = "") OrElse (ucrChkDeclustering.Checked AndAlso (Not ucrSaveDeclusteredPlot.IsComplete) OrElse ucrNudDeclusterColumns.GetText = "" OrElse ucrNudRunLength.GetText = "") Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -820,7 +815,7 @@ Public Class dlgExtremesClimatic
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputSave.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged, ucrPnlPlots.ControlContentsChanged, ucrSaveMrlPlot.ControlContentsChanged, ucrSaveThresholdPlot.ControlContentsChanged, ucrNudColumns.ControlContentsChanged, ucrNudThresholds.ControlContentsChanged, ucrNudThresholdColumns.ControlContentsChanged, ucrNudAlpha.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged, ucrNudDeclusterColumns.ControlContentsChanged, ucrNudRunLength.ControlContentsChanged, ucrSaveDeclusteredPlot.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputSave.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged, ucrPnlPlots.ControlContentsChanged, ucrSaveMrlPlot.ControlContentsChanged, ucrSaveThresholdPlot.ControlContentsChanged, ucrNudColumns.ControlContentsChanged, ucrNudThresholds.ControlContentsChanged, ucrNudThresholdColumns.ControlContentsChanged, ucrNudAlpha.ControlContentsChanged, ucrNudDeclusterColumns.ControlContentsChanged, ucrNudRunLength.ControlContentsChanged, ucrSaveDeclusteredPlot.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
