@@ -743,10 +743,10 @@ Public Class dlgImportDataset
             End If
 
             If ucrChkMultipleFiles.Checked Then
-                Dim lstFilePathsAndNames As List(Of String) = GetDirectoryFiles(False)
-                lblTextFilePreview.Text = If(lstFilePathsAndNames.Count = 0, "No Files found", "Files found: " & lstFilePathsAndNames.Count)
+                Dim lstFileNames As List(Of String) = GetDirectoryFiles(True)
+                lblTextFilePreview.Text = If(lstFileNames.Count = 0, "No Files found", "Files found: " & lstFileNames.Count)
                 txtTextFilePreview.Text = ""
-                For Each strFilePathName As String In lstFilePathsAndNames
+                For Each strFilePathName As String In lstFileNames
                     txtTextFilePreview.Text = txtTextFilePreview.Text & strFilePathName & Environment.NewLine
                 Next
                 TextPreviewVisible(True)
