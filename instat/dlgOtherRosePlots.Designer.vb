@@ -44,7 +44,6 @@ Partial Class dlgOtherRosePlots
         Me.ucrChkExcludeMissing = New instat.ucrCheck()
         Me.ucrNudPercentile = New instat.ucrNud()
         Me.ucrChkPadDate = New instat.ucrCheck()
-        Me.ucrNudNmberOfClusters = New instat.ucrNud()
         Me.ucrChkTransform = New instat.ucrCheck()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrPnlOptions = New instat.UcrPanel()
@@ -54,13 +53,14 @@ Partial Class dlgOtherRosePlots
         Me.ucrSelectorOtherRosePlots = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverPollutant = New instat.ucrReceiverSingle()
-        Me.ucrInputMethod = New instat.ucrInputComboBox()
-        Me.ucrInputStatistic = New instat.ucrInputComboBox()
         Me.ucrChkForcePositive = New instat.ucrCheck()
         Me.ucrChkNormalise = New instat.ucrCheck()
         Me.ucrReceiverMultiplePollutants = New instat.ucrReceiverMultiple()
         Me.ucrReceiverWindSpeed = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
+        Me.ucrNudNmberOfClusters = New instat.ucrNud()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
+        Me.ucrInputStatistic = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'rdoPercentileRose
@@ -221,9 +221,9 @@ Partial Class dlgOtherRosePlots
         Me.lblNoOfClusters.AutoSize = True
         Me.lblNoOfClusters.Location = New System.Drawing.Point(11, 254)
         Me.lblNoOfClusters.Name = "lblNoOfClusters"
-        Me.lblNoOfClusters.Size = New System.Drawing.Size(78, 13)
+        Me.lblNoOfClusters.Size = New System.Drawing.Size(76, 13)
         Me.lblNoOfClusters.TabIndex = 94
-        Me.lblNoOfClusters.Text = "No Of Clusters:"
+        Me.lblNoOfClusters.Text = "No of Clusters:"
         '
         'lblPercentile
         '
@@ -279,7 +279,7 @@ Partial Class dlgOtherRosePlots
         'ucrChkSmooth
         '
         Me.ucrChkSmooth.Checked = False
-        Me.ucrChkSmooth.Location = New System.Drawing.Point(259, 321)
+        Me.ucrChkSmooth.Location = New System.Drawing.Point(14, 337)
         Me.ucrChkSmooth.Name = "ucrChkSmooth"
         Me.ucrChkSmooth.Size = New System.Drawing.Size(130, 20)
         Me.ucrChkSmooth.TabIndex = 103
@@ -307,27 +307,15 @@ Partial Class dlgOtherRosePlots
         'ucrChkPadDate
         '
         Me.ucrChkPadDate.Checked = False
-        Me.ucrChkPadDate.Location = New System.Drawing.Point(259, 350)
+        Me.ucrChkPadDate.Location = New System.Drawing.Point(15, 307)
         Me.ucrChkPadDate.Name = "ucrChkPadDate"
         Me.ucrChkPadDate.Size = New System.Drawing.Size(130, 20)
         Me.ucrChkPadDate.TabIndex = 84
         '
-        'ucrNudNmberOfClusters
-        '
-        Me.ucrNudNmberOfClusters.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNmberOfClusters.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNmberOfClusters.Location = New System.Drawing.Point(97, 250)
-        Me.ucrNudNmberOfClusters.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNmberOfClusters.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNmberOfClusters.Name = "ucrNudNmberOfClusters"
-        Me.ucrNudNmberOfClusters.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudNmberOfClusters.TabIndex = 20
-        Me.ucrNudNmberOfClusters.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'ucrChkTransform
         '
         Me.ucrChkTransform.Checked = False
-        Me.ucrChkTransform.Location = New System.Drawing.Point(14, 340)
+        Me.ucrChkTransform.Location = New System.Drawing.Point(14, 337)
         Me.ucrChkTransform.Name = "ucrChkTransform"
         Me.ucrChkTransform.Size = New System.Drawing.Size(154, 20)
         Me.ucrChkTransform.TabIndex = 87
@@ -337,7 +325,7 @@ Partial Class dlgOtherRosePlots
         Me.ucrSaveGraph.Location = New System.Drawing.Point(14, 390)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(391, 34)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(264, 34)
         Me.ucrSaveGraph.TabIndex = 26
         '
         'ucrPnlOptions
@@ -412,26 +400,6 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverPollutant.TabIndex = 10
         Me.ucrReceiverPollutant.ucrSelector = Nothing
         '
-        'ucrInputMethod
-        '
-        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputMethod.GetSetSelectedIndex = -1
-        Me.ucrInputMethod.IsReadOnly = False
-        Me.ucrInputMethod.Location = New System.Drawing.Point(83, 249)
-        Me.ucrInputMethod.Name = "ucrInputMethod"
-        Me.ucrInputMethod.Size = New System.Drawing.Size(97, 21)
-        Me.ucrInputMethod.TabIndex = 19
-        '
-        'ucrInputStatistic
-        '
-        Me.ucrInputStatistic.AddQuotesIfUnrecognised = True
-        Me.ucrInputStatistic.GetSetSelectedIndex = -1
-        Me.ucrInputStatistic.IsReadOnly = False
-        Me.ucrInputStatistic.Location = New System.Drawing.Point(83, 249)
-        Me.ucrInputStatistic.Name = "ucrInputStatistic"
-        Me.ucrInputStatistic.Size = New System.Drawing.Size(97, 21)
-        Me.ucrInputStatistic.TabIndex = 81
-        '
         'ucrChkForcePositive
         '
         Me.ucrChkForcePositive.Checked = False
@@ -484,6 +452,38 @@ Partial Class dlgOtherRosePlots
         Me.ucrReceiverX.TabIndex = 4
         Me.ucrReceiverX.ucrSelector = Nothing
         '
+        'ucrNudNmberOfClusters
+        '
+        Me.ucrNudNmberOfClusters.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNmberOfClusters.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.ucrNudNmberOfClusters.Location = New System.Drawing.Point(97, 250)
+        Me.ucrNudNmberOfClusters.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNmberOfClusters.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNmberOfClusters.Name = "ucrNudNmberOfClusters"
+        Me.ucrNudNmberOfClusters.Size = New System.Drawing.Size(50, 20)
+        Me.ucrNudNmberOfClusters.TabIndex = 20
+        Me.ucrNudNmberOfClusters.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.GetSetSelectedIndex = -1
+        Me.ucrInputMethod.IsReadOnly = False
+        Me.ucrInputMethod.Location = New System.Drawing.Point(83, 249)
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        Me.ucrInputMethod.Size = New System.Drawing.Size(97, 21)
+        Me.ucrInputMethod.TabIndex = 19
+        '
+        'ucrInputStatistic
+        '
+        Me.ucrInputStatistic.AddQuotesIfUnrecognised = True
+        Me.ucrInputStatistic.GetSetSelectedIndex = -1
+        Me.ucrInputStatistic.IsReadOnly = False
+        Me.ucrInputStatistic.Location = New System.Drawing.Point(83, 249)
+        Me.ucrInputStatistic.Name = "ucrInputStatistic"
+        Me.ucrInputStatistic.Size = New System.Drawing.Size(97, 21)
+        Me.ucrInputStatistic.TabIndex = 81
+        '
         'dlgOtherRosePlots
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -493,11 +493,7 @@ Partial Class dlgOtherRosePlots
         Me.Controls.Add(Me.lblFacetOne)
         Me.Controls.Add(Me.ucrReceiverFacetOne)
         Me.Controls.Add(Me.ucrReceiverFacetTwo)
-        Me.Controls.Add(Me.ucrChkSmooth)
-        Me.Controls.Add(Me.ucrChkExcludeMissing)
         Me.Controls.Add(Me.ucrNudPercentile)
-        Me.Controls.Add(Me.ucrChkPadDate)
-        Me.Controls.Add(Me.ucrChkTransform)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoPercentileRose)
         Me.Controls.Add(Me.rdoPolarFrequency)
@@ -528,6 +524,10 @@ Partial Class dlgOtherRosePlots
         Me.Controls.Add(Me.ucrNudNmberOfClusters)
         Me.Controls.Add(Me.ucrInputMethod)
         Me.Controls.Add(Me.ucrInputStatistic)
+        Me.Controls.Add(Me.ucrChkPadDate)
+        Me.Controls.Add(Me.ucrChkTransform)
+        Me.Controls.Add(Me.ucrChkSmooth)
+        Me.Controls.Add(Me.ucrChkExcludeMissing)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

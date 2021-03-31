@@ -268,6 +268,7 @@ Public Class dlgOtherRosePlots
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        ucrReceiverDate.SetMeAsReceiver()
         If rdoPolarAnnulus.Checked Then
             ucrSaveGraph.SetPrefix("Polar_Annulus")
         ElseIf rdoPolarPlot.Checked Then
