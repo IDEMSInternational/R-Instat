@@ -135,7 +135,7 @@ Public Class dlgImportDataset
         ucrInputFilePath.SetParameter(New RParameter("file"))
         ucrInputFilePath.IsReadOnly = True
 
-        ucrChkMultipleFiles.SetText("Multiple Files")
+        ucrChkMultipleFiles.SetText("All files of this type")
         'todo. set tooltip for checkbox
 
 
