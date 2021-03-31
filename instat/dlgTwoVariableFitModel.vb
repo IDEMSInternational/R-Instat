@@ -466,7 +466,7 @@ Public Class dlgTwoVariableFitModel
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsBarletteTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=19)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsFlignerTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=20)
         ucrReceiverResponse.AddAdditionalCodeParameterPair(clsPropTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=21)
-        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsKruskalTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=21)
+        ucrReceiverResponse.AddAdditionalCodeParameterPair(clsKruskalTestOperator, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=22)
 
         ' Additional Rcode for test functions
         ucrSaveModels.AddAdditionalRCode(clsWilcoxTestFunction, iAdditionalPairNo:=1)
@@ -490,7 +490,7 @@ Public Class dlgTwoVariableFitModel
         ucrSaveModels.AddAdditionalRCode(clsAnsariTestFunction, iAdditionalPairNo:=19)
         ucrSaveModels.AddAdditionalRCode(clsMoodTestFunction, iAdditionalPairNo:=20)
         ucrSaveModels.AddAdditionalRCode(clsKruskalTestFunction, iAdditionalPairNo:=21)
-        ucrSaveModels.AddAdditionalRCode(clsBarletteTestOperator, iAdditionalPairNo:=22)
+        ucrSaveModels.AddAdditionalRCode(clsBarletteTestFunction, iAdditionalPairNo:=22)
         ucrSaveModels.AddAdditionalRCode(clsFlignerTestFunction, iAdditionalPairNo:=23)
 
         ucrInputConfidenceInterval.AddAdditionalCodeParameterPair(clsWilcoxTestFunction, New RParameter("conf.level", iNewPosition:=2), iAdditionalPairNo:=1)
@@ -886,15 +886,15 @@ Public Class dlgTwoVariableFitModel
             If strSecondVariableType = "categorical" Then
                 If iNumberOfFirstFactorLevels = 2 Then
                     If strSecondVariableType = "categorical" AndAlso iNumberOfSecondFactorLevels = 2 Then
-                        ucrInputTest.SetItems({"proportion"})
+                        ucrInputTest.SetItems({"proportion", "chisq", "fisher", "mcnemar"})
                         ucrInputTest.SetText("proportion")
                     Else
                         ucrInputTest.SetItems({"None"})
                         ucrInputTest.SetText("None")
                     End If
                 Else
-                    ucrInputTest.SetItems({"proportion", "chisq", "fisher", "________", "mcnemar"})
-                    ucrInputTest.SetText("proportion")
+                    ucrInputTest.SetItems({"chisq", "fisher", "________", "mcnemar"})
+                    ucrInputTest.SetText("chisq")
                 End If
             ElseIf strSecondVariableType = "" Then
                 ucrInputTest.SetItems({"None"})
