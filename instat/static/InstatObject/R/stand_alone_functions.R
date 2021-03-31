@@ -2280,7 +2280,7 @@ plot_declustered <- function(data, station_col_name, element_col_name, threshold
   }
 }
 
-#This function creates awrarper around functions from openair package
+#This function creates a wrapper around functions from openair package
 other_rose_plots <- function(data, type1_col_name, type2_col_name, date_col_name, wd_col_name, ws_col_name, main_method, single_pollutant, multiple_pollutant, ...) {
   type <- "default"
   if (!missing(type1_col_name) && !missing(type2_col_name)) {
