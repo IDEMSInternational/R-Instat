@@ -106,17 +106,17 @@ Public Class dlgClimaticDataEntry
 
         'Not yet implemented
         ucrChkTransform.SetText("Transform:")
-        ucrChkTransform.Enabled = False
 
-        ucrInputTransform.Enabled = False
-        ucrInputTransform.SetItems({"10", "Inch to mm"})
+        'ucrInputTransform.SetItems({"10", "Inch to mm"})
+        ucrInputTransform.SetItems({"10"}) 'todo. temporary
+        ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=1) 'temporary`
         ucrInputTransform.Visible = False
 
         ucrChkDefaultValue.SetText("Default Value")
         ucrInputDefaultValue.SetText("0")
+        ucrInputDefaultValue.Visible = False
 
         ucrChkNoDecimal.SetText("No Decimal")
-        'ucrChkNoDecimal.Enabled = False
 
         ucrChkAllowTrace.SetText("Allow t for Trace")
 
@@ -130,12 +130,12 @@ Public Class dlgClimaticDataEntry
         clsEditDataFrame = New RFunction
         clsGetDataEntry = New RFunction
 
-        SetVisibleDefaultValue()
-
         ucrSelectorClimaticDataEntry.Reset()
         ucrReceiverElements.SetMeAsReceiver()
         ucrChkDefaultValue.Checked = False
         ucrChkAllowTrace.Checked = False
+        ucrChkTransform.Checked = False
+        ucrInputTransform.SetName(10)
 
         clsGetDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
         clsGetDataEntry.AddParameter("type", Chr(34) & "month" & Chr(34), iPosition:=6)
@@ -202,12 +202,14 @@ Public Class dlgClimaticDataEntry
         Dim strStationSelected As String
         Dim dfEditData As DataFrame
         Dim strDataFrameName As String
-        Dim strDefaultValue As String
+        Dim strDefaultValue As String 'todo. why is this a string?
         Dim bSetup As Boolean
         Dim bShow As Boolean
         Dim bNoDecimals As Boolean
         Dim bDefaultValue As Boolean
         Dim bAllowTrace As Boolean
+        Dim bTransform As Boolean
+        Dim dTranformValue As Double
 
 
         strDataFrameName = ucrSelectorClimaticDataEntry.strCurrentDataFrame
@@ -237,26 +239,21 @@ Public Class dlgClimaticDataEntry
             bShow = True
             bSetup = False
         End If
+        'todo. do we really need the state??
         If bState Then
-            If ucrChkNoDecimal.Checked Then
-                bNoDecimals = True
-            Else
-                bNoDecimals = False
-            End If
-            If ucrChkDefaultValue.Checked Then
-                bDefaultValue = True
-            Else
-                bDefaultValue = False
-            End If
-            If ucrChkAllowTrace.Checked Then
-                bAllowTrace = True
-            Else
-                bAllowTrace = False
-            End If
+            bNoDecimals = ucrChkNoDecimal.Checked
+            bDefaultValue = ucrChkDefaultValue.Checked
+            bAllowTrace = ucrChkAllowTrace.Checked
+            bTransform = ucrChkTransform.Checked
+            dTranformValue = ucrInputTransform.GetValue
         End If
         If bShow Then
             If bSetup Then
-                sdgClimaticDataEntry.Setup(dfEditData, strDataFrameName, clsSaveDataEntry, clsEditDataFrame, strDateColumnName, lstElementsColumnNames, lstVariablesColumnNames, strStationColumnName, bDefaultValue:=bDefaultValue, strDefaultValue, bNoDecimal:=bNoDecimals, bAllowTrace:=bAllowTrace)
+                sdgClimaticDataEntry.Setup(dfEditData, strDataFrameName, clsSaveDataEntry, clsEditDataFrame, strDateColumnName,
+                                           lstElementsColumnNames, lstVariablesColumnNames, strStationColumnName,
+                                           bDefaultValue:=bDefaultValue, strDefaultValue:=strDefaultValue,
+                                           bNoDecimal:=bNoDecimals, bAllowTrace:=bAllowTrace,
+                                           bTransform:=bTransform, dTranformValue:=dTranformValue)
             End If
             sdgClimaticDataEntry.ShowDialog()
             bSubdialogFirstLoad = False
@@ -313,23 +310,23 @@ Public Class dlgClimaticDataEntry
         bChange = True
         bSubdialogFirstLoad = True
     End Sub
-    Private Sub SetVisibleDefaultValue()
-        If ucrChkDefaultValue.Checked Then
-            ucrInputDefaultValue.Visible = True
-        Else
-            ucrInputDefaultValue.Visible = False
-        End If
-    End Sub
-    Private Sub ucrChkDefaultValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefaultValue.ControlValueChanged
-        SetVisibleDefaultValue()
-    End Sub
 
-    Private Sub ucrChkNoDecimal_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoDecimal.ControlValueChanged, ucrChkDefaultValue.ControlValueChanged, ucrChkAllowTrace.ControlValueChanged
+    Private Sub ucrChkNoDecimal_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoDecimal.ControlValueChanged, ucrChkDefaultValue.ControlValueChanged, ucrChkAllowTrace.ControlValueChanged, ucrChkTransform.ControlValueChanged
         bChange = True
-        If ucrChkDefaultValue.Checked OrElse ucrChkNoDecimal.Checked OrElse ucrChkAllowTrace.Checked Then
+        If ucrChkDefaultValue.Checked OrElse ucrChkNoDecimal.Checked OrElse ucrChkAllowTrace.Checked OrElse ucrChkTransform.Checked Then
             bState = True
         Else
             bState = False
         End If
+    End Sub
+
+    Private Sub ucrChkDefaultValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefaultValue.ControlValueChanged
+        'todo. can this "toggling" be done in another way?
+        ucrInputDefaultValue.Visible = ucrChkDefaultValue.Checked
+    End Sub
+
+    Private Sub ucrChkTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTransform.ControlValueChanged
+        'todo. can this "toggling" be done in another way?
+        ucrInputTransform.Visible = ucrChkTransform.Checked
     End Sub
 End Class

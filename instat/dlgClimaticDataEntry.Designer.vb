@@ -97,7 +97,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.Label1.AutoSize = True
         Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(274, 128)
+        Me.Label1.Location = New System.Drawing.Point(274, 95)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(76, 13)
         Me.Label1.TabIndex = 8
@@ -107,7 +107,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.lblElement.AutoSize = True
         Me.lblElement.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblElement.Location = New System.Drawing.Point(274, 214)
+        Me.lblElement.Location = New System.Drawing.Point(274, 181)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(86, 13)
         Me.lblElement.TabIndex = 12
@@ -117,7 +117,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.lblDate.AutoSize = True
         Me.lblDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDate.Location = New System.Drawing.Point(274, 172)
+        Me.lblDate.Location = New System.Drawing.Point(274, 139)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 10
@@ -127,7 +127,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.lblStation.AutoSize = True
         Me.lblStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStation.Location = New System.Drawing.Point(274, 87)
+        Me.lblStation.Location = New System.Drawing.Point(274, 54)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 6
@@ -159,7 +159,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.Label2.AutoSize = True
         Me.Label2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label2.Location = New System.Drawing.Point(274, 339)
+        Me.Label2.Location = New System.Drawing.Point(274, 306)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(91, 13)
         Me.Label2.TabIndex = 14
@@ -169,7 +169,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.lblPeriod.AutoSize = True
         Me.lblPeriod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPeriod.Location = New System.Drawing.Point(141, 52)
+        Me.lblPeriod.Location = New System.Drawing.Point(22, 247)
         Me.lblPeriod.Name = "lblPeriod"
         Me.lblPeriod.Size = New System.Drawing.Size(40, 13)
         Me.lblPeriod.TabIndex = 4
@@ -300,15 +300,15 @@ Partial Class dlgClimaticDataEntry
         Me.ucrInputType.AddQuotesIfUnrecognised = True
         Me.ucrInputType.GetSetSelectedIndex = -1
         Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(184, 49)
+        Me.ucrInputType.Location = New System.Drawing.Point(74, 244)
         Me.ucrInputType.Name = "ucrInputType"
-        Me.ucrInputType.Size = New System.Drawing.Size(85, 21)
+        Me.ucrInputType.Size = New System.Drawing.Size(132, 21)
         Me.ucrInputType.TabIndex = 5
         '
         'ucrReceiverViewVariables
         '
         Me.ucrReceiverViewVariables.frmParent = Me
-        Me.ucrReceiverViewVariables.Location = New System.Drawing.Point(273, 356)
+        Me.ucrReceiverViewVariables.Location = New System.Drawing.Point(273, 323)
         Me.ucrReceiverViewVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverViewVariables.Name = "ucrReceiverViewVariables"
         Me.ucrReceiverViewVariables.Selector = Nothing
@@ -322,7 +322,7 @@ Partial Class dlgClimaticDataEntry
         Me.ucrSelectorClimaticDataEntry.bDropUnusedFilterLevels = False
         Me.ucrSelectorClimaticDataEntry.bShowHiddenColumns = False
         Me.ucrSelectorClimaticDataEntry.bUseCurrentFilter = True
-        Me.ucrSelectorClimaticDataEntry.Location = New System.Drawing.Point(7, 80)
+        Me.ucrSelectorClimaticDataEntry.Location = New System.Drawing.Point(7, 48)
         Me.ucrSelectorClimaticDataEntry.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorClimaticDataEntry.Name = "ucrSelectorClimaticDataEntry"
         Me.ucrSelectorClimaticDataEntry.Size = New System.Drawing.Size(210, 180)
@@ -333,7 +333,7 @@ Partial Class dlgClimaticDataEntry
         Me.ucrInputSelectStation.AddQuotesIfUnrecognised = True
         Me.ucrInputSelectStation.GetSetSelectedIndex = -1
         Me.ucrInputSelectStation.IsReadOnly = False
-        Me.ucrInputSelectStation.Location = New System.Drawing.Point(273, 144)
+        Me.ucrInputSelectStation.Location = New System.Drawing.Point(273, 111)
         Me.ucrInputSelectStation.Name = "ucrInputSelectStation"
         Me.ucrInputSelectStation.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputSelectStation.TabIndex = 9
@@ -341,7 +341,7 @@ Partial Class dlgClimaticDataEntry
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(273, 103)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(273, 70)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
@@ -353,7 +353,7 @@ Partial Class dlgClimaticDataEntry
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(273, 188)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(273, 155)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -365,7 +365,7 @@ Partial Class dlgClimaticDataEntry
         'ucrReceiverElements
         '
         Me.ucrReceiverElements.frmParent = Me
-        Me.ucrReceiverElements.Location = New System.Drawing.Point(273, 231)
+        Me.ucrReceiverElements.Location = New System.Drawing.Point(273, 198)
         Me.ucrReceiverElements.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElements.Name = "ucrReceiverElements"
         Me.ucrReceiverElements.Selector = Nothing

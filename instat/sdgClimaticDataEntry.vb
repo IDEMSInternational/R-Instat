@@ -43,7 +43,8 @@ Public Class sdgClimaticDataEntry
     Private strDefaultValue As String
     Private bNoDecimal As Boolean
     Private bAllowTrace As Boolean
-
+    Private bTransform As Boolean
+    Private dTranformValue As Double
 
     ''' <summary>
     ''' returns the data changed for the passed column as an R vector string
@@ -52,6 +53,8 @@ Public Class sdgClimaticDataEntry
     Public Function GetRowsChangedAsRVectorString(strColumnName As String, Optional strQuotes As String = "") As String
         Dim strValues As String = ""
         Dim iColumnIndex As Integer = 0
+        Dim bEditableColumn As Boolean
+        Dim newValue As String
 
         If grdCurrentWorkSheet Is Nothing Then
             Return "c()"
@@ -64,13 +67,19 @@ Public Class sdgClimaticDataEntry
             End If
         Next
 
-        Dim newValue As String
+        bEditableColumn = Not lstNonEditableColumns.Contains(strColumnName)
+
         For Each iRowIndex As Integer In dctRowsChanged.Keys
             newValue = grdCurrentWorkSheet.Item(row:=iRowIndex, col:=iColumnIndex)
-            'todo. what happens transformation is enable
-            If newValue.ToUpper = "T" Then
-                newValue = 0.03
+            'for editable columns
+            If bEditableColumn Then
+                If bAllowTrace AndAlso newValue.ToUpper = "T" Then
+                    newValue = 0.03
+                ElseIf bTransform Then
+                    newValue = newValue / dTranformValue
+                End If
             End If
+
             If strValues = "" Then
                 strValues = strQuotes & newValue & strQuotes
             Else
@@ -94,7 +103,7 @@ Public Class sdgClimaticDataEntry
         grdCurrentWorkSheet = Nothing
     End Sub
 
-    Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction, clsEditDataFrame As RFunction, strDateName As String, lstElementsNames As List(Of String), Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "", Optional bDefaultValue As Boolean = False, Optional strDefaultValue As String = "", Optional bNoDecimal As Boolean = False, Optional bAllowTrace As Boolean = False)
+    Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction, clsEditDataFrame As RFunction, strDateName As String, lstElementsNames As List(Of String), Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "", Optional bDefaultValue As Boolean = False, Optional strDefaultValue As String = "", Optional bNoDecimal As Boolean = False, Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False, Optional dTranformValue As Double = 0)
         Dim lstColumnHeaders As String()
 
         grdDataEntry.Worksheets.Clear()
@@ -112,6 +121,8 @@ Public Class sdgClimaticDataEntry
         Me.strDefaultValue = strDefaultValue
         Me.bNoDecimal = bNoDecimal
         Me.bAllowTrace = bAllowTrace
+        Me.bTransform = bTransform
+        Me.dTranformValue = dTranformValue
 
         If Not strStationColumnName = "" Then
             lstNonEditableColumns.Add(strStationColumnName)
