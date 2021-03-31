@@ -654,7 +654,6 @@ Public Class dlgImportDataset
             ucrSaveFile.Hide()
             clsGetFilesList.AddParameter("pattern", Chr(34) & "\\" & strFileExtension & "$" & Chr(34), iPosition:=1)
             If strFileExtension = ".dly" Then
-                'clsGetFilesList.AddParameter("pattern", Chr(34) & "\\csv$" & Chr(34), iPosition:=1)
                 clsImportMultipleFiles.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
             Else
                 clsImportMultipleFiles.AddParameter("format", Chr(34) & strFileExtension.Substring(1) & Chr(34), iPosition:=1)
