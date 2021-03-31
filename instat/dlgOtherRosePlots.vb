@@ -17,7 +17,6 @@
 Imports instat.Translations
 Public Class dlgOtherRosePlots
     Private bFirstLoad As Boolean = True
-    Private bRcodeSet As Boolean = False
     Private bReset As Boolean = True
 
     'R function
@@ -185,20 +184,16 @@ Public Class dlgOtherRosePlots
 
         clsOtherRosePlots.SetRCommand("other_rose_plots")
 
-        clsOtherRosePlots.AddParameter("exclude.missing", "FALSE")
-        clsOtherRosePlots.AddParameter("trans", "TRUE")
+        clsOtherRosePlots.AddParameter("trans", "TRUE", iPosition:=9)
         clsOtherRosePlots.AddParameter("main_method", Chr(34) & "polar_frequency" & Chr(34), iPosition:=5)
         clsOtherRosePlots.AddParameter("statistic", Chr(34) & "mean" & Chr(34), iPosition:=11)
+        clsOtherRosePlots.AddParameter("exclude.missing", "FALSE", iPosition:=14)
 
-        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsOtherRosePlots)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        bRcodeSet = False
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-
-        bRcodeSet = True
     End Sub
 
     Private Sub TestOkEnabled()
@@ -209,29 +204,25 @@ Public Class dlgOtherRosePlots
                 Else
                     ucrBase.OKEnabled(False)
                 End If
-            End If
-            If rdoPercentileRose.Checked Then
+            ElseIf rdoPercentileRose.Checked Then
                 If Not ucrReceiverWindSpeed.IsEmpty AndAlso Not ucrReceiverMultiplePollutants.IsEmpty Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
                 End If
-            End If
-            If rdoPolarPlot.Checked Then
+            ElseIf rdoPolarPlot.Checked Then
                 If Not ucrReceiverX.IsEmpty AndAlso Not ucrReceiverMultiplePollutants.IsEmpty Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
                 End If
-            End If
-            If rdoPolarAnnulus.Checked Then
+            ElseIf rdoPolarAnnulus.Checked Then
                 If Not ucrReceiverWindSpeed.IsEmpty AndAlso Not ucrReceiverMultiplePollutants.IsEmpty Then
                     ucrBase.OKEnabled(True)
                 Else
                     ucrBase.OKEnabled(False)
                 End If
-            End If
-            If rdoPolarCluster.Checked Then
+            ElseIf rdoPolarCluster.Checked Then
                 If Not ucrReceiverX.IsEmpty AndAlso Not ucrReceiverPollutant.IsEmpty Then
                     ucrBase.OKEnabled(True)
                 Else
