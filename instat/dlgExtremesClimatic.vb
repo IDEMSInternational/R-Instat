@@ -185,7 +185,6 @@ Public Class dlgExtremesClimatic
         ucrPnlExtremesType.AddToLinkedControls({ucrPnlPlots}, {rdoThreshold}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPlots.AddToLinkedControls({ucrSaveMrlPlot}, {rdoMrlPlot}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPlots.AddToLinkedControls({ucrSaveThresholdPlot}, {rdoThreshRangePlot}, bNewLinkedHideIfParameterMissing:=True)
-        'ucrPnlPlots.AddToLinkedControls({ucrChkPrintSummary}, {rdoDeclustering}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkRunLength.AddToLinkedControls({ucrNudRunLength}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkPrintSummary.AddToLinkedControls({ucrSaveDeclusteredPlot, ucrNudDeclusterColumns}, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkDeclustering.AddToLinkedControls({ucrChkPrintSummary}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
