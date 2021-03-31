@@ -650,7 +650,6 @@ Public Class dlgImportDataset
             ucrChkMultipleFiles.SetVisible(True)
             ucrChkMultipleFiles.Checked = True
             ucrSaveFile.SetName("files", bSilent:=True)
-            ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=GetDirectoryFiles(True))
             ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
             ucrSaveFile.Hide()
             clsGetFilesList.AddParameter("pattern", Chr(34) & "\\" & strFileExtension & "$" & Chr(34), iPosition:=1)
