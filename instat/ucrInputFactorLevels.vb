@@ -20,6 +20,8 @@ Public Class ucrInputFactorLevels
     Private WithEvents ucrReceiverFactor As ucrReceiverSingle
     Private clsLevels As New RFunction
     Public strQuotes As String = Chr(34)
+    ''' <summary> Should the first level be selected by default? </summary>
+    Public bFirstLevelDefault As Boolean = False
 
     Public Sub New()
 
@@ -64,6 +66,9 @@ Public Class ucrInputFactorLevels
                     lstLevels.Add(strQuotes & strLevels(i) & strQuotes)
                 Next
                 SetItems(lstLevels.ToArray())
+                If bFirstLevelDefault AndAlso lstLevels.Count > 0 Then
+                    GetSetSelectedIndex = 0
+                End If
             End If
         End If
     End Sub

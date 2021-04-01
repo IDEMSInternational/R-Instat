@@ -17,6 +17,7 @@
 Imports instat.Translations
 Imports RDotNet
 Public Class dlgFitModel
+    Public strVariableType As String
     Private clsAttach As New RFunction
     Private clsDetach As New RFunction
     Public bFirstLoad As Boolean = True
@@ -203,6 +204,7 @@ Public Class dlgFitModel
         ucrModelName.SetRCode(clsLM, bReset)
         ucrFamily.SetRCode(clsFamilyFunction, bReset)
         bRCodeSet = True
+        ResponseConvert()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -322,15 +324,14 @@ Public Class dlgFitModel
         If bRCodeSet Then
             If Not ucrReceiverResponseVar.IsEmpty Then
                 ucrFamily.RecieverDatatype(ucrSelectorByDataFrameAddRemoveForFitModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
-
-                If ucrFamily.strDataType = "numeric" Then
+                If ucrFamily.strDataType.Contains("factor") Then
+                    ucrChkConvertToVariate.Visible = True
+                Else
                     ucrChkConvertToVariate.Checked = False
                     ucrChkConvertToVariate.Visible = False
-                Else
-                    ucrChkConvertToVariate.Visible = True
                 End If
 
-                If ucrChkConvertToVariate.Checked Then
+            If ucrChkConvertToVariate.Checked Then
                     ' clsRConvert.AddParameter("x", ucrReceiverResponseVar.GetVariableNames(bWithQuotes:=False))
                     clsFormulaOperator.AddParameter("x", clsRFunctionParameter:=clsRConvert, iPosition:=0)
                     ucrFamily.RecieverDatatype("numeric")
@@ -387,21 +388,28 @@ Public Class dlgFitModel
 
     Public Sub ucrFamily_cboDistributionsIndexChanged() Handles ucrFamily.DistributionsIndexChanged
         ChooseRFunction()
+        ResponseVariableType()
         clsFamilyFunction.RemoveParameterByName("link")
     End Sub
 
-    Private Sub ucrReceiverResponseVar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponseVar.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged, ucrReceiverResponseVar.ControlValueChanged
+    Private Sub ucrReceiverExpressionFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlValueChanged
         ChooseRFunction()
         ResponseConvert()
     End Sub
 
+    Private Sub ucrReceiverResponseVar_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverResponseVar.ControlValueChanged
+        ChooseRFunction()
+        ResponseConvert()
+        ResponseVariableType()
+    End Sub
+
     Private Sub ucrConvertToVariate_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkConvertToVariate.ControlValueChanged
         ResponseConvert()
-        TestOKEnabled()
+        ResponseVariableType()
     End Sub
 
     Private Sub ucrReceiverExpressionFitModel_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpressionFitModel.ControlContentsChanged, ucrReceiverResponseVar.ControlContentsChanged
@@ -412,6 +420,33 @@ Public Class dlgFitModel
     Private Sub ucrSelectorByDataFrameAddRemoveForFitModel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorByDataFrameAddRemoveForFitModel.ControlValueChanged
         ChooseRFunction()
         GraphAssignTo()
+    End Sub
+
+    Public Sub ResponseVariableType()
+        If bRCodeSet Then
+            If Not ucrReceiverResponseVar.IsEmpty() Then
+                strVariableType = ucrFamily.strDataType
+                If strVariableType.Contains("positive integer") Then
+                    strVariableType = "positive integer"
+                ElseIf strVariableType.Contains("two level numeric") OrElse strVariableType.Contains("two level factor") Then
+                    strVariableType = "binary"
+                ElseIf strVariableType.Contains("numeric") Then
+                    strVariableType = "numeric"
+                ElseIf strVariableType.Contains("logical") Then
+                    strVariableType = "logical"
+                ElseIf strVariableType.Contains("factor") Then
+                    strVariableType = "factor"
+                Else
+                    strVariableType = "unsuitable type"
+                End If
+                lblType.Text = strVariableType
+                lblType.ForeColor = SystemColors.Highlight
+            Else
+                strVariableType = ""
+                lblType.Text = "________"
+                lblType.ForeColor = SystemColors.ControlText
+            End If
+        End If
     End Sub
 
     Private Sub GraphAssignTo()

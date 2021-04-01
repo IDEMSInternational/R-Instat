@@ -154,16 +154,16 @@
     <value>NoControl</value>
   </data>
   <data name="cmdModify.Location" type="System.Drawing.Point, System.Drawing">
-    <value>297, 332</value>
+    <value>282, 332</value>
   </data>
   <data name="cmdModify.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>90, 23</value>
   </data>
   <data name="cmdModify.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
   <data name="cmdModify.Text" xml:space="preserve">
-    <value>Modify</value>
+    <value>Join Options</value>
   </data>
   <data name="&gt;&gt;cmdModify.Name" xml:space="preserve">
     <value>cmdModify</value>
@@ -238,13 +238,13 @@
     <value>12, 289</value>
   </data>
   <data name="lblMergeBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 13</value>
+    <value>43, 13</value>
   </data>
   <data name="lblMergeBy.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="lblMergeBy.Text" xml:space="preserve">
-    <value>Merge by:</value>
+    <value>Join by:</value>
   </data>
   <data name="&gt;&gt;lblMergeBy.Name" xml:space="preserve">
     <value>lblMergeBy</value>
