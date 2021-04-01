@@ -28,6 +28,8 @@ Partial Class sdgClimaticDataEntry
         Me.cmdReset = New System.Windows.Forms.Button()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
         Me.ttCmdReset = New System.Windows.Forms.ToolTip(Me.components)
+        Me.cmdTransform = New System.Windows.Forms.Button()
+        Me.ttCmdTransformButton = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -47,6 +49,7 @@ Partial Class sdgClimaticDataEntry
         '
         'SplitContainer1.Panel2
         '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.cmdTransform)
         Me.SplitContainer1.Panel2.Controls.Add(Me.cmdReset)
         Me.SplitContainer1.Panel2.Controls.Add(Me.ucrSdgPICSARainfalbuttons)
         Me.SplitContainer1.Size = New System.Drawing.Size(494, 295)
@@ -84,7 +87,7 @@ Partial Class sdgClimaticDataEntry
         '
         'ucrSdgPICSARainfalbuttons
         '
-        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(161, 5)
+        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(114, 5)
         Me.ucrSdgPICSARainfalbuttons.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
         Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(144, 30)
@@ -95,6 +98,23 @@ Partial Class sdgClimaticDataEntry
         Me.ttCmdReset.AutoPopDelay = 10000
         Me.ttCmdReset.InitialDelay = 500
         Me.ttCmdReset.ReshowDelay = 100
+        '
+        'cmdTransform
+        '
+        Me.cmdTransform.Enabled = False
+        Me.cmdTransform.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdTransform.Location = New System.Drawing.Point(270, 7)
+        Me.cmdTransform.Name = "cmdTransform"
+        Me.cmdTransform.Size = New System.Drawing.Size(104, 24)
+        Me.cmdTransform.TabIndex = 89
+        Me.cmdTransform.Text = "Transform"
+        Me.cmdTransform.UseVisualStyleBackColor = True
+        '
+        'ttCmdTransformButton
+        '
+        Me.ttCmdTransformButton.AutoPopDelay = 10000
+        Me.ttCmdTransformButton.InitialDelay = 500
+        Me.ttCmdTransformButton.ReshowDelay = 100
         '
         'sdgClimaticDataEntry
         '
@@ -118,4 +138,6 @@ Partial Class sdgClimaticDataEntry
     Friend WithEvents grdDataEntry As unvell.ReoGrid.ReoGridControl
     Friend WithEvents cmdReset As Button
     Friend WithEvents ttCmdReset As ToolTip
+    Friend WithEvents cmdTransform As Button
+    Friend WithEvents ttCmdTransformButton As ToolTip
 End Class
