@@ -117,47 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;lblGeometry.Name" xml:space="preserve">
-    <value>lblGeometry</value>
-  </data>
-  <data name="&gt;&gt;lblGeometry.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblGeometry.Parent" xml:space="preserve">
-    <value>grpShapeaFile</value>
-  </data>
-  <data name="&gt;&gt;lblGeometry.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="grpShapeaFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 224</value>
-  </data>
-  <data name="grpShapeaFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 215</value>
-  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="grpShapeaFile.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="grpShapeaFile.Text" xml:space="preserve">
-    <value>Shape File</value>
-  </data>
-  <data name="&gt;&gt;grpShapeaFile.Name" xml:space="preserve">
-    <value>grpShapeaFile</value>
-  </data>
-  <data name="&gt;&gt;grpShapeaFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpShapeaFile.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpShapeaFile.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="lblGeometry.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblGeometry.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblGeometry.Location" type="System.Drawing.Point, System.Drawing">
     <value>245, 42</value>
   </data>
@@ -182,56 +150,35 @@
   <data name="&gt;&gt;lblGeometry.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;lblLongitude.Name" xml:space="preserve">
-    <value>lblLongitude</value>
+  <data name="grpShapeaFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 206</value>
   </data>
-  <data name="&gt;&gt;lblLongitude.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="grpShapeaFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>397, 213</value>
   </data>
-  <data name="&gt;&gt;lblLongitude.Parent" xml:space="preserve">
-    <value>grpStationFile</value>
+  <data name="grpShapeaFile.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
   </data>
-  <data name="&gt;&gt;lblLongitude.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="grpShapeaFile.Text" xml:space="preserve">
+    <value>Shape File</value>
   </data>
-  <data name="&gt;&gt;lblLatitude.Name" xml:space="preserve">
-    <value>lblLatitude</value>
+  <data name="&gt;&gt;grpShapeaFile.Name" xml:space="preserve">
+    <value>grpShapeaFile</value>
   </data>
-  <data name="&gt;&gt;lblLatitude.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblLatitude.Parent" xml:space="preserve">
-    <value>grpStationFile</value>
-  </data>
-  <data name="&gt;&gt;lblLatitude.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="grpStationFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 4</value>
-  </data>
-  <data name="grpStationFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 216</value>
-  </data>
-  <data name="grpStationFile.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="grpStationFile.Text" xml:space="preserve">
-    <value>StationFile</value>
-  </data>
-  <data name="&gt;&gt;grpStationFile.Name" xml:space="preserve">
-    <value>grpStationFile</value>
-  </data>
-  <data name="&gt;&gt;grpStationFile.Type" xml:space="preserve">
+  <data name="&gt;&gt;grpShapeaFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;grpStationFile.Parent" xml:space="preserve">
+  <data name="&gt;&gt;grpShapeaFile.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;grpStationFile.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;grpShapeaFile.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="lblLongitude.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblLongitude.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblLongitude.Location" type="System.Drawing.Point, System.Drawing">
     <value>245, 43</value>
@@ -260,6 +207,9 @@
   <data name="lblLatitude.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblLatitude.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblLatitude.Location" type="System.Drawing.Point, System.Drawing">
     <value>245, 104</value>
   </data>
@@ -284,8 +234,53 @@
   <data name="&gt;&gt;lblLatitude.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="grpStationFile.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 4</value>
+  </data>
+  <data name="grpStationFile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>397, 201</value>
+  </data>
+  <data name="grpStationFile.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="grpStationFile.Text" xml:space="preserve">
+    <value>StationFile</value>
+  </data>
+  <data name="&gt;&gt;grpStationFile.Name" xml:space="preserve">
+    <value>grpStationFile</value>
+  </data>
+  <data name="&gt;&gt;grpStationFile.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpStationFile.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpStationFile.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrChkOmitMissing.Location" type="System.Drawing.Point, System.Drawing">
+    <value>13, 430</value>
+  </data>
+  <data name="ucrChkOmitMissing.Size" type="System.Drawing.Size, System.Drawing">
+    <value>130, 20</value>
+  </data>
+  <data name="ucrChkOmitMissing.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissing.Name" xml:space="preserve">
+    <value>ucrChkOmitMissing</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissing.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissing.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkOmitMissing.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 471</value>
+    <value>13, 488</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -303,7 +298,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -312,12 +307,11 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>430, 526</value>
+    <value>430, 542</value>
   </data>
   <data name="ucrSelectorShapeFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>19, 240</value>
+    <value>19, 223</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorShapeFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
@@ -337,7 +331,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorShapeFile.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrReceiverLongitude.Location" type="System.Drawing.Point, System.Drawing">
     <value>261, 64</value>
@@ -361,7 +355,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverLongitude.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrReceiverLatitude.Location" type="System.Drawing.Point, System.Drawing">
     <value>261, 125</value>
@@ -385,10 +379,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverLatitude.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrSelectorStationFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 20</value>
+    <value>17, 17</value>
   </data>
   <data name="ucrSelectorStationFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -409,10 +403,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorStationFile.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="ucrSaveNewColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 443</value>
+    <value>13, 459</value>
   </data>
   <data name="ucrSaveNewColumnName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -433,7 +427,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveNewColumnName.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -448,7 +445,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverGeometry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 282</value>
+    <value>261, 265</value>
   </data>
   <data name="ucrReceiverGeometry.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -469,6 +466,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverGeometry.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
 </root>
