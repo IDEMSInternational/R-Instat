@@ -28,6 +28,26 @@ Public Class GgplotDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsScaleColorViridisFunction As RFunction
+        Get
+            Dim clsTempFunc As New RFunction
+
+            clsTempFunc.SetPackageName("viridis")
+            clsTempFunc.SetRCommand("scale_colour_viridis")
+            Return clsTempFunc
+        End Get
+    End Property
+
+    Public Shared ReadOnly Property clsScaleFillViridisFunction As RFunction
+        Get
+            Dim clsTempFunc As New RFunction
+
+            clsTempFunc.SetPackageName("viridis")
+            clsTempFunc.SetRCommand("scale_fill_viridis")
+            Return clsTempFunc
+        End Get
+    End Property
+
     Public Shared ReadOnly Property clsDefaultThemeParameter As RParameter
         Get
             Dim clsTempParam As New RParameter
