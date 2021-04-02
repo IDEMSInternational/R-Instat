@@ -362,6 +362,12 @@
     <Compile Include="sdgClimaticDataEntry.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="sdgClimaticDataEntryOptions.Designer.vb">
+      <DependentUpon>sdgClimaticDataEntryOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntryOptions.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="sdgClimaticNCMPMetadata.Designer.vb">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
     </Compile>
@@ -2790,6 +2796,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticDataEntry.resx">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimaticDataEntryOptions.resx">
+      <DependentUpon>sdgClimaticDataEntryOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticNCMPMetadata.resx">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
