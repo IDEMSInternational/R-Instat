@@ -804,7 +804,7 @@ Public Class ucrDataView
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
     End Sub
 
-    Private Sub lblHeader_Click(sender As Object, e As EventArgs) Handles lblHeader.Click
+    Private Sub lblHeader_Click(sender As Object, e As EventArgs) Handles lblHeaderDataView.Click
 
     End Sub
 
