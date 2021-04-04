@@ -50,7 +50,6 @@ Public Class dlgInfill
         ucrReceiverFactors.strSelectorHeading = "Factors"
         ucrReceiverFactors.SetParameter(New RParameter("factors", 5))
         ucrReceiverFactors.SetParameterIsString()
-        ucrReceiverFactors.strSelectorHeading = "Factors"
 
         'Set data frame parameter
         ucrInfillSelector.SetParameter(New RParameter("data_name", 0))
