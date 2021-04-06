@@ -28,6 +28,7 @@ Partial Class dlgLocatingPointsInShapeFile
         Me.grpStationFile = New System.Windows.Forms.GroupBox()
         Me.lblLongitude = New System.Windows.Forms.Label()
         Me.lblLatitude = New System.Windows.Forms.Label()
+        Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverGeometry = New instat.ucrReceiverSingle()
         Me.ucrSelectorShapeFile = New instat.ucrSelectorByDataFrameAddRemove()
@@ -68,6 +69,12 @@ Partial Class dlgLocatingPointsInShapeFile
         '
         resources.ApplyResources(Me.lblLatitude, "lblLatitude")
         Me.lblLatitude.Name = "lblLatitude"
+        '
+        'ucrChkOmitMissing
+        '
+        Me.ucrChkOmitMissing.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitMissing, "ucrChkOmitMissing")
+        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         '
         'ucrBase
         '
@@ -126,6 +133,7 @@ Partial Class dlgLocatingPointsInShapeFile
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverGeometry)
         Me.Controls.Add(Me.ucrSelectorShapeFile)
@@ -158,4 +166,5 @@ Partial Class dlgLocatingPointsInShapeFile
     Friend WithEvents lblLatitude As Label
     Friend WithEvents ucrSaveNewColumnName As ucrSave
     Friend WithEvents ucrBase As ucrButtons
+    Friend WithEvents ucrChkOmitMissing As ucrCheck
 End Class
