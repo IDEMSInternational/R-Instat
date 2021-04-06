@@ -40,7 +40,7 @@ Partial Class frmConvertToNumeric
         Me.lblPossibleSolutions.Location = New System.Drawing.Point(13, 30)
         Me.lblPossibleSolutions.Name = "lblPossibleSolutions"
         Me.lblPossibleSolutions.Size = New System.Drawing.Size(423, 103)
-        Me.lblPossibleSolutions.TabIndex = 3
+        Me.lblPossibleSolutions.TabIndex = 4
         Me.lblPossibleSolutions.Text = resources.GetString("lblPossibleSolutions.Text")
         '
         'cmdNormalConvert
@@ -77,14 +77,14 @@ Partial Class frmConvertToNumeric
         Me.lblN.Location = New System.Drawing.Point(261, 9)
         Me.lblN.Name = "lblN"
         Me.lblN.Size = New System.Drawing.Size(0, 13)
-        Me.lblN.TabIndex = 9
+        Me.lblN.TabIndex = 3
         '
         'cmdCancel
         '
         Me.cmdCancel.Location = New System.Drawing.Point(370, 143)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(66, 23)
-        Me.cmdCancel.TabIndex = 10
+        Me.cmdCancel.TabIndex = 9
         Me.cmdCancel.Text = "Cancel"
         Me.cmdCancel.UseVisualStyleBackColor = True
         '
@@ -94,7 +94,7 @@ Partial Class frmConvertToNumeric
         Me.lblColumn.Location = New System.Drawing.Point(16, 8)
         Me.lblColumn.Name = "lblColumn"
         Me.lblColumn.Size = New System.Drawing.Size(48, 13)
-        Me.lblColumn.TabIndex = 11
+        Me.lblColumn.TabIndex = 0
         Me.lblColumn.Text = "Column: "
         '
         'lblColumnName
@@ -104,7 +104,7 @@ Partial Class frmConvertToNumeric
         Me.lblColumnName.Location = New System.Drawing.Point(63, 8)
         Me.lblColumnName.Name = "lblColumnName"
         Me.lblColumnName.Size = New System.Drawing.Size(0, 13)
-        Me.lblColumnName.TabIndex = 12
+        Me.lblColumnName.TabIndex = 1
         '
         'lblNumber
         '
@@ -112,7 +112,7 @@ Partial Class frmConvertToNumeric
         Me.lblNumber.Location = New System.Drawing.Point(138, 8)
         Me.lblNumber.Name = "lblNumber"
         Me.lblNumber.Size = New System.Drawing.Size(123, 13)
-        Me.lblNumber.TabIndex = 13
+        Me.lblNumber.TabIndex = 2
         Me.lblNumber.Text = "Number of non-numeric: "
         '
         'cmdNonNumeric
@@ -120,7 +120,7 @@ Partial Class frmConvertToNumeric
         Me.cmdNonNumeric.Location = New System.Drawing.Point(3, 143)
         Me.cmdNonNumeric.Name = "cmdNonNumeric"
         Me.cmdNonNumeric.Size = New System.Drawing.Size(82, 23)
-        Me.cmdNonNumeric.TabIndex = 14
+        Me.cmdNonNumeric.TabIndex = 5
         Me.cmdNonNumeric.Text = "Non-Numeric"
         Me.cmdNonNumeric.UseVisualStyleBackColor = True
         '
