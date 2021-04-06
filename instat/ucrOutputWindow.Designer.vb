@@ -46,11 +46,11 @@ Partial Class ucrOutputWindow
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.deleteRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.clearRTB = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lblHeader = New System.Windows.Forms.Label()
+        Me.HelpRTB = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblHeaderOutputWindow = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.ucrWPFrtfElementHost = New System.Windows.Forms.Integration.ElementHost()
         Me.ucrRichTextBox = New instat.ucrWPFRichTextBox()
-        Me.HelpRTB = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextRTB.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -60,7 +60,7 @@ Partial Class ucrOutputWindow
         Me.mnuContextRTB.ImageScalingSize = New System.Drawing.Size(24, 24)
         Me.mnuContextRTB.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CopyRTB, Me.CopyImageRTB, Me.mnuHideCommands, Me.ToolStripSeparator1, Me.deleteRTB, Me.clearRTB, Me.HelpRTB})
         Me.mnuContextRTB.Name = "mnuContextRTB"
-        Me.mnuContextRTB.Size = New System.Drawing.Size(206, 164)
+        Me.mnuContextRTB.Size = New System.Drawing.Size(206, 142)
         '
         'CopyRTB
         '
@@ -98,25 +98,31 @@ Partial Class ucrOutputWindow
         Me.clearRTB.Size = New System.Drawing.Size(205, 22)
         Me.clearRTB.Text = "Clear"
         '
-        'lblHeader
+        'HelpRTB
         '
-        Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
-        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblHeader.Location = New System.Drawing.Point(3, 0)
-        Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(716, 20)
-        Me.lblHeader.TabIndex = 6
-        Me.lblHeader.Text = "Output Window"
-        Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.HelpRTB.Name = "HelpRTB"
+        Me.HelpRTB.Size = New System.Drawing.Size(205, 22)
+        Me.HelpRTB.Text = "Help"
+        '
+        'lblHeaderOutputWindow
+        '
+        Me.lblHeaderOutputWindow.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.lblHeaderOutputWindow.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblHeaderOutputWindow.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblHeaderOutputWindow.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblHeaderOutputWindow.Location = New System.Drawing.Point(3, 0)
+        Me.lblHeaderOutputWindow.Name = "lblHeaderOutputWindow"
+        Me.lblHeaderOutputWindow.Size = New System.Drawing.Size(716, 20)
+        Me.lblHeaderOutputWindow.TabIndex = 6
+        Me.lblHeaderOutputWindow.Text = "Output Window"
+        Me.lblHeaderOutputWindow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tlpTableContainer
         '
         Me.tlpTableContainer.ColumnCount = 1
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Controls.Add(Me.ucrWPFrtfElementHost, 0, 1)
-        Me.tlpTableContainer.Controls.Add(Me.lblHeader, 0, 0)
+        Me.tlpTableContainer.Controls.Add(Me.lblHeaderOutputWindow, 0, 0)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
@@ -137,12 +143,6 @@ Partial Class ucrOutputWindow
         Me.ucrWPFrtfElementHost.Text = "ucrWPFrtfElementHost"
         Me.ucrWPFrtfElementHost.Child = Me.ucrRichTextBox
         '
-        'HelpRTB
-        '
-        Me.HelpRTB.Name = "HelpRTB"
-        Me.HelpRTB.Size = New System.Drawing.Size(205, 22)
-        Me.HelpRTB.Text = "Help"
-        '
         'ucrOutputWindow
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -161,7 +161,7 @@ Partial Class ucrOutputWindow
     Friend WithEvents mnuContextRTB As ContextMenuStrip
     Friend WithEvents CopyRTB As ToolStripMenuItem
     Friend WithEvents CopyImageRTB As ToolStripMenuItem
-    Friend WithEvents lblHeader As Label
+    Friend WithEvents lblHeaderOutputWindow As Label
     Friend WithEvents tlpTableContainer As TableLayoutPanel
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents clearRTB As ToolStripMenuItem
