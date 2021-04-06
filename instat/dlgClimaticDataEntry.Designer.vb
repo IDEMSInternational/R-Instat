@@ -36,14 +36,7 @@ Partial Class dlgClimaticDataEntry
         Me.lblEndingDate = New System.Windows.Forms.Label()
         Me.cmdCheckData = New System.Windows.Forms.Button()
         Me.ttCmdCheckData = New System.Windows.Forms.ToolTip(Me.components)
-        Me.grpRestrictEntry = New System.Windows.Forms.GroupBox()
-        Me.ucrChkAllowTrace = New instat.ucrCheck()
-        Me.ucrChkNoDecimal = New instat.ucrCheck()
         Me.ttucrChkDefaultValue = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrInputDefaultValue = New instat.ucrInputTextBox()
-        Me.ucrInputTransform = New instat.ucrInputComboBox()
-        Me.ucrChkDefaultValue = New instat.ucrCheck()
-        Me.ucrChkTransform = New instat.ucrCheck()
         Me.ucrEndDate = New instat.ucrDateTimePicker()
         Me.ucrStartDate = New instat.ucrDateTimePicker()
         Me.ucrInputType = New instat.ucrInputComboBox()
@@ -55,7 +48,8 @@ Partial Class dlgClimaticDataEntry
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.grpRestrictEntry.SuspendLayout()
+        Me.lblNbRowsChanged = New System.Windows.Forms.Label()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'rdoAdd
@@ -97,7 +91,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.Label1.AutoSize = True
         Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(274, 95)
+        Me.Label1.Location = New System.Drawing.Point(274, 109)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(76, 13)
         Me.Label1.TabIndex = 8
@@ -107,7 +101,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.lblElement.AutoSize = True
         Me.lblElement.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblElement.Location = New System.Drawing.Point(274, 181)
+        Me.lblElement.Location = New System.Drawing.Point(274, 195)
         Me.lblElement.Name = "lblElement"
         Me.lblElement.Size = New System.Drawing.Size(86, 13)
         Me.lblElement.TabIndex = 12
@@ -117,7 +111,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.lblDate.AutoSize = True
         Me.lblDate.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblDate.Location = New System.Drawing.Point(274, 139)
+        Me.lblDate.Location = New System.Drawing.Point(274, 153)
         Me.lblDate.Name = "lblDate"
         Me.lblDate.Size = New System.Drawing.Size(33, 13)
         Me.lblDate.TabIndex = 10
@@ -127,7 +121,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.lblStation.AutoSize = True
         Me.lblStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStation.Location = New System.Drawing.Point(274, 54)
+        Me.lblStation.Location = New System.Drawing.Point(274, 68)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 6
@@ -148,7 +142,7 @@ Partial Class dlgClimaticDataEntry
         'cmdEnterData
         '
         Me.cmdEnterData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdEnterData.Location = New System.Drawing.Point(7, 436)
+        Me.cmdEnterData.Location = New System.Drawing.Point(7, 413)
         Me.cmdEnterData.Name = "cmdEnterData"
         Me.cmdEnterData.Size = New System.Drawing.Size(106, 24)
         Me.cmdEnterData.TabIndex = 20
@@ -159,7 +153,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.Label2.AutoSize = True
         Me.Label2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label2.Location = New System.Drawing.Point(274, 306)
+        Me.Label2.Location = New System.Drawing.Point(274, 320)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(91, 13)
         Me.Label2.TabIndex = 14
@@ -190,7 +184,7 @@ Partial Class dlgClimaticDataEntry
         'cmdCheckData
         '
         Me.cmdCheckData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCheckData.Location = New System.Drawing.Point(137, 436)
+        Me.cmdCheckData.Location = New System.Drawing.Point(137, 413)
         Me.cmdCheckData.Name = "cmdCheckData"
         Me.cmdCheckData.Size = New System.Drawing.Size(72, 24)
         Me.cmdCheckData.TabIndex = 21
@@ -203,75 +197,11 @@ Partial Class dlgClimaticDataEntry
         Me.ttCmdCheckData.InitialDelay = 500
         Me.ttCmdCheckData.ReshowDelay = 100
         '
-        'grpRestrictEntry
-        '
-        Me.grpRestrictEntry.Controls.Add(Me.ucrChkAllowTrace)
-        Me.grpRestrictEntry.Controls.Add(Me.ucrChkNoDecimal)
-        Me.grpRestrictEntry.Location = New System.Drawing.Point(7, 388)
-        Me.grpRestrictEntry.Name = "grpRestrictEntry"
-        Me.grpRestrictEntry.Size = New System.Drawing.Size(243, 40)
-        Me.grpRestrictEntry.TabIndex = 64
-        Me.grpRestrictEntry.TabStop = False
-        Me.grpRestrictEntry.Text = "Restrict Entry:"
-        '
-        'ucrChkAllowTrace
-        '
-        Me.ucrChkAllowTrace.Checked = False
-        Me.ucrChkAllowTrace.Location = New System.Drawing.Point(109, 14)
-        Me.ucrChkAllowTrace.Name = "ucrChkAllowTrace"
-        Me.ucrChkAllowTrace.Size = New System.Drawing.Size(127, 20)
-        Me.ucrChkAllowTrace.TabIndex = 66
-        '
-        'ucrChkNoDecimal
-        '
-        Me.ucrChkNoDecimal.Checked = False
-        Me.ucrChkNoDecimal.Location = New System.Drawing.Point(7, 14)
-        Me.ucrChkNoDecimal.Name = "ucrChkNoDecimal"
-        Me.ucrChkNoDecimal.Size = New System.Drawing.Size(113, 20)
-        Me.ucrChkNoDecimal.TabIndex = 65
-        '
         'ttucrChkDefaultValue
         '
         Me.ttucrChkDefaultValue.AutoPopDelay = 10000
         Me.ttucrChkDefaultValue.InitialDelay = 500
         Me.ttucrChkDefaultValue.ReshowDelay = 100
-        '
-        'ucrInputDefaultValue
-        '
-        Me.ucrInputDefaultValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputDefaultValue.IsMultiline = False
-        Me.ucrInputDefaultValue.IsReadOnly = False
-        Me.ucrInputDefaultValue.Location = New System.Drawing.Point(97, 361)
-        Me.ucrInputDefaultValue.Name = "ucrInputDefaultValue"
-        Me.ucrInputDefaultValue.Size = New System.Drawing.Size(61, 21)
-        Me.ucrInputDefaultValue.TabIndex = 87
-        '
-        'ucrInputTransform
-        '
-        Me.ucrInputTransform.AddQuotesIfUnrecognised = True
-        Me.ucrInputTransform.GetSetSelectedIndex = -1
-        Me.ucrInputTransform.IsReadOnly = False
-        Me.ucrInputTransform.Location = New System.Drawing.Point(97, 331)
-        Me.ucrInputTransform.Margin = New System.Windows.Forms.Padding(5)
-        Me.ucrInputTransform.Name = "ucrInputTransform"
-        Me.ucrInputTransform.Size = New System.Drawing.Size(94, 21)
-        Me.ucrInputTransform.TabIndex = 86
-        '
-        'ucrChkDefaultValue
-        '
-        Me.ucrChkDefaultValue.Checked = False
-        Me.ucrChkDefaultValue.Location = New System.Drawing.Point(7, 362)
-        Me.ucrChkDefaultValue.Name = "ucrChkDefaultValue"
-        Me.ucrChkDefaultValue.Size = New System.Drawing.Size(93, 20)
-        Me.ucrChkDefaultValue.TabIndex = 63
-        '
-        'ucrChkTransform
-        '
-        Me.ucrChkTransform.Checked = False
-        Me.ucrChkTransform.Location = New System.Drawing.Point(7, 333)
-        Me.ucrChkTransform.Name = "ucrChkTransform"
-        Me.ucrChkTransform.Size = New System.Drawing.Size(83, 20)
-        Me.ucrChkTransform.TabIndex = 62
         '
         'ucrEndDate
         '
@@ -308,7 +238,7 @@ Partial Class dlgClimaticDataEntry
         'ucrReceiverViewVariables
         '
         Me.ucrReceiverViewVariables.frmParent = Me
-        Me.ucrReceiverViewVariables.Location = New System.Drawing.Point(273, 323)
+        Me.ucrReceiverViewVariables.Location = New System.Drawing.Point(273, 337)
         Me.ucrReceiverViewVariables.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverViewVariables.Name = "ucrReceiverViewVariables"
         Me.ucrReceiverViewVariables.Selector = Nothing
@@ -333,7 +263,7 @@ Partial Class dlgClimaticDataEntry
         Me.ucrInputSelectStation.AddQuotesIfUnrecognised = True
         Me.ucrInputSelectStation.GetSetSelectedIndex = -1
         Me.ucrInputSelectStation.IsReadOnly = False
-        Me.ucrInputSelectStation.Location = New System.Drawing.Point(273, 111)
+        Me.ucrInputSelectStation.Location = New System.Drawing.Point(273, 125)
         Me.ucrInputSelectStation.Name = "ucrInputSelectStation"
         Me.ucrInputSelectStation.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputSelectStation.TabIndex = 9
@@ -341,7 +271,7 @@ Partial Class dlgClimaticDataEntry
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(273, 70)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(273, 84)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
@@ -353,7 +283,7 @@ Partial Class dlgClimaticDataEntry
         'ucrReceiverDate
         '
         Me.ucrReceiverDate.frmParent = Me
-        Me.ucrReceiverDate.Location = New System.Drawing.Point(273, 155)
+        Me.ucrReceiverDate.Location = New System.Drawing.Point(273, 169)
         Me.ucrReceiverDate.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverDate.Name = "ucrReceiverDate"
         Me.ucrReceiverDate.Selector = Nothing
@@ -365,7 +295,7 @@ Partial Class dlgClimaticDataEntry
         'ucrReceiverElements
         '
         Me.ucrReceiverElements.frmParent = Me
-        Me.ucrReceiverElements.Location = New System.Drawing.Point(273, 198)
+        Me.ucrReceiverElements.Location = New System.Drawing.Point(273, 212)
         Me.ucrReceiverElements.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverElements.Name = "ucrReceiverElements"
         Me.ucrReceiverElements.Selector = Nothing
@@ -388,16 +318,32 @@ Partial Class dlgClimaticDataEntry
         Me.ucrPnlOptions.Size = New System.Drawing.Size(278, 35)
         Me.ucrPnlOptions.TabIndex = 26
         '
+        'lblNbRowsChanged
+        '
+        Me.lblNbRowsChanged.AutoSize = True
+        Me.lblNbRowsChanged.Location = New System.Drawing.Point(253, -57)
+        Me.lblNbRowsChanged.Name = "lblNbRowsChanged"
+        Me.lblNbRowsChanged.Size = New System.Drawing.Size(39, 13)
+        Me.lblNbRowsChanged.TabIndex = 88
+        Me.lblNbRowsChanged.Text = "Label3"
+        '
+        'cmdOptions
+        '
+        Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdOptions.Location = New System.Drawing.Point(10, 337)
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Size = New System.Drawing.Size(106, 24)
+        Me.cmdOptions.TabIndex = 89
+        Me.cmdOptions.Text = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
         'dlgClimaticDataEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(411, 520)
-        Me.Controls.Add(Me.ucrInputDefaultValue)
-        Me.Controls.Add(Me.ucrInputTransform)
-        Me.Controls.Add(Me.grpRestrictEntry)
-        Me.Controls.Add(Me.ucrChkDefaultValue)
-        Me.Controls.Add(Me.ucrChkTransform)
+        Me.Controls.Add(Me.cmdOptions)
+        Me.Controls.Add(Me.lblNbRowsChanged)
         Me.Controls.Add(Me.ucrEndDate)
         Me.Controls.Add(Me.ucrStartDate)
         Me.Controls.Add(Me.cmdCheckData)
@@ -425,7 +371,6 @@ Partial Class dlgClimaticDataEntry
         Me.Name = "dlgClimaticDataEntry"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Daily Data Entry"
-        Me.grpRestrictEntry.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -454,12 +399,7 @@ Partial Class dlgClimaticDataEntry
     Friend WithEvents ttCmdCheckData As ToolTip
     Friend WithEvents ucrEndDate As ucrDateTimePicker
     Friend WithEvents ucrStartDate As ucrDateTimePicker
-    Friend WithEvents ucrChkDefaultValue As ucrCheck
-    Friend WithEvents ucrChkTransform As ucrCheck
-    Friend WithEvents grpRestrictEntry As GroupBox
-    Friend WithEvents ucrChkAllowTrace As ucrCheck
-    Friend WithEvents ucrChkNoDecimal As ucrCheck
     Friend WithEvents ttucrChkDefaultValue As ToolTip
-    Friend WithEvents ucrInputTransform As ucrInputComboBox
-    Friend WithEvents ucrInputDefaultValue As ucrInputTextBox
+    Friend WithEvents lblNbRowsChanged As Label
+    Friend WithEvents cmdOptions As Button
 End Class
