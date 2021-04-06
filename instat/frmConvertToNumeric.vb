@@ -1,6 +1,7 @@
 ﻿Public Class frmConvertToNumeric
     Private iNNonNumeric As Integer = 0
     Private strColumnName As String
+    Private strDataFrameName As String
     Private bFirstLoad As Boolean = True
 
     Private Sub frmConvertToNumeric_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -23,6 +24,10 @@
     Public Sub SetColumnName(strName As String)
         strColumnName = strName
         lblColumnName.Text = strColumnName
+    End Sub
+
+    Public Sub SetDataFrameName(strDataFrame As String)
+        strDataFrameName = strDataFrame
     End Sub
 
     Private Sub frmConvertToNumeric_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -48,6 +53,7 @@
 
     Private Sub cmdNonNumeric_Click(sender As Object, e As EventArgs) Handles cmdNonNumeric.Click
         Me.Hide()
+        dlgFindNonnumericValues.SetCurrentColumn(strColumnName, strDataFrameName)
         dlgFindNonnumericValues.ShowDialog()
     End Sub
 End Class
