@@ -35,7 +35,7 @@ Public Class ucrGeom
     Dim strLineType As String() = {Chr(34) & "blank" & Chr(34), Chr(34) & "solid" & Chr(34), Chr(34) & "dashed" & Chr(34), Chr(34) & "dotted" & Chr(34), Chr(34) & "dotdash" & Chr(34), Chr(34) & "longdash" & Chr(34), Chr(34) & "twodash" & Chr(34)}
     Dim strShapePoint As String() = {Chr(34) & "circle" & Chr(34), Chr(34) & "circle open" & Chr(34), Chr(34) & "circle filled" & Chr(34), Chr(34) & "circle cross" & Chr(34), Chr(34) & "circle plus" & Chr(34), Chr(34) & "circle small" & Chr(34), Chr(34) & "bullet" & Chr(34), Chr(34) & "square" & Chr(34), Chr(34) & "square open" & Chr(34), Chr(34) & "square filled" & Chr(34), Chr(34) & "square cross" & Chr(34), Chr(34) & "square plus" & Chr(34), Chr(34) & "square triangle" & Chr(34), Chr(34) & "diamond" & Chr(34), Chr(34) & "diamond open" & Chr(34), Chr(34) & "diamond filled" & Chr(34), Chr(34) & "diamond plus" & Chr(34), Chr(34) & "triangle" & Chr(34), Chr(34) & "triangle open" & Chr(34), Chr(34) & "triangle filled" & Chr(34), Chr(34) & "triangle square" & Chr(34), Chr(34) & "triangle down open" & Chr(34), Chr(34) & "triangle down filled" & Chr(34), Chr(34) & "plus" & Chr(34), Chr(34) & "cross" & Chr(34), Chr(34) & "asterisk" & Chr(34)}
     Dim strBoxShapePoint As String() = {Chr(34) & "NA" & Chr(34), Chr(34) & "circle" & Chr(34), Chr(34) & "circle open" & Chr(34), Chr(34) & "circle filled" & Chr(34), Chr(34) & "circle cross" & Chr(34), Chr(34) & "circle plus" & Chr(34), Chr(34) & "circle small" & Chr(34), Chr(34) & "bullet" & Chr(34), Chr(34) & "square" & Chr(34), Chr(34) & "square open" & Chr(34), Chr(34) & "square filled" & Chr(34), Chr(34) & "square cross" & Chr(34), Chr(34) & "square plus" & Chr(34), Chr(34) & "square triangle" & Chr(34), Chr(34) & "diamond" & Chr(34), Chr(34) & "diamond open" & Chr(34), Chr(34) & "diamond filled" & Chr(34), Chr(34) & "diamond plus" & Chr(34), Chr(34) & "triangle" & Chr(34), Chr(34) & "triangle open" & Chr(34), Chr(34) & "triangle filled" & Chr(34), Chr(34) & "triangle square" & Chr(34), Chr(34) & "triangle down open" & Chr(34), Chr(34) & "triangle down filled" & Chr(34), Chr(34) & "plus" & Chr(34), Chr(34) & "cross" & Chr(34), Chr(34) & "asterisk" & Chr(34)}
-
+    Private bResetGlobal As Boolean = False
     Public Sub New()
 
         ' This call is required by the designer.
@@ -56,7 +56,9 @@ Public Class ucrGeom
                 iGeomIndex = lstAllGeoms.FindIndex(Function(x) x.strGeomName = clsTempFunc.strRCommand)
                 If iGeomIndex <> -1 Then
                     clsCurrGeom = lstAllGeoms(iGeomIndex)
+                    bResetGlobal = bReset
                     ucrInputGeoms.SetName(clsCurrGeom.strGeomName)
+                    bResetGlobal = False
                 Else
                     MsgBox("Developer error: Function set for " & Name & " is not a recognised geom.")
                 End If
@@ -95,7 +97,7 @@ Public Class ucrGeom
             End If
         Next
         'Next, the clsGeomFunction is set. Either this one is empty, or it has already been setup on the dialogue that is calling Setup...
-        SetGeomFunction(clsNewGeomFunc)
+        SetGeomFunction(clsNewGeomFunc, bReset)
         ucrInputGeoms.Enabled = Not bFixGeom
         clsGlobalAesFunction = clsNewGlobalAesFunc
         clsLocalAesFunction = clsNewLocalAes
@@ -1775,9 +1777,12 @@ Public Class ucrGeom
             If iNewGeomIndex <> -1 Then
                 clsCurrGeom = lstAllGeoms(iNewGeomIndex)
                 If iNewGeomIndex <> iCurrentGeomIndex Then
-                    For Each clsParam In lstAllGeoms(iCurrentGeomIndex).clsLayerParameters
-                        clsGeomFunction.RemoveParameterByName(clsParam.strLayerParameterName)
-                    Next
+                    'TODO Why do we have to remove the parameters here?
+                    If Not bResetGlobal Then
+                        For Each clsParam In lstAllGeoms(iCurrentGeomIndex).clsLayerParameters
+                            clsGeomFunction.RemoveParameterByName(clsParam.strLayerParameterName)
+                        Next
+                    End If
                     clsGeomFunction.SetPackageName(clsCurrGeom.strGeomPackage)
                     clsGeomFunction.SetRCommand(clsCurrGeom.strGeomName)
                     iCurrentGeomIndex = iNewGeomIndex
