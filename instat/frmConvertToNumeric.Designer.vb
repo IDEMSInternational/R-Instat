@@ -144,7 +144,7 @@ Partial Class frmConvertToNumeric
         Me.MinimizeBox = False
         Me.Name = "frmConvertToNumeric"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Convert To Numeric"
+        Me.Text = "Convert to Numeric"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
