@@ -685,10 +685,6 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Sub mnuCellCopyRange_Click(sender As Object, e As EventArgs) Handles mnuCellCopyRange.Click
-        grdData.CurrentWorksheet.Copy()
-    End Sub
-
     Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
         Dim strScript As String = ""
         Dim strTemp As String
@@ -724,7 +720,7 @@ Public Class ucrDataView
         dlgAddComment.ShowDialog()
     End Sub
 
-    Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles mnuCellAddComment.Click
+    Private Sub mnuComment_Click(sender As Object, e As EventArgs) Handles mnuComment.Click
         dlgAddComment.SetPosition(grdCurrSheet.Name, GetFirstSelectedRow(), SelectedColumnsAsArray()(0))
         dlgAddComment.ShowDialog()
     End Sub
@@ -798,15 +794,6 @@ Public Class ucrDataView
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
         dlgReorderColumns.ShowDialog()
-    End Sub
-
-    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuCellHelp.Click
-        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
-    End Sub
-
-    Private Sub lblHeaderDataView_Click(sender As Object, e As EventArgs) Handles lblHeaderDataView.Click
-
-
     End Sub
 
     Private Sub mnuRenameColumn_Click(sender As Object, e As EventArgs) Handles mnuRenameColumn.Click
