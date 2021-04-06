@@ -32,37 +32,38 @@ Partial Class frmConvertToNumeric
         Me.lblColumn = New System.Windows.Forms.Label()
         Me.lblColumnName = New System.Windows.Forms.Label()
         Me.lblNumber = New System.Windows.Forms.Label()
+        Me.cmdNonNumeric = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'lblPossibleSolutions
         '
-        Me.lblPossibleSolutions.Location = New System.Drawing.Point(13, 37)
+        Me.lblPossibleSolutions.Location = New System.Drawing.Point(13, 30)
         Me.lblPossibleSolutions.Name = "lblPossibleSolutions"
-        Me.lblPossibleSolutions.Size = New System.Drawing.Size(425, 88)
+        Me.lblPossibleSolutions.Size = New System.Drawing.Size(423, 103)
         Me.lblPossibleSolutions.TabIndex = 3
         Me.lblPossibleSolutions.Text = resources.GetString("lblPossibleSolutions.Text")
         '
         'cmdNormalConvert
         '
-        Me.cmdNormalConvert.Location = New System.Drawing.Point(16, 138)
+        Me.cmdNormalConvert.Location = New System.Drawing.Point(87, 143)
         Me.cmdNormalConvert.Name = "cmdNormalConvert"
-        Me.cmdNormalConvert.Size = New System.Drawing.Size(107, 23)
+        Me.cmdNormalConvert.Size = New System.Drawing.Size(89, 23)
         Me.cmdNormalConvert.TabIndex = 6
         Me.cmdNormalConvert.Text = "Normal Convert"
         Me.cmdNormalConvert.UseVisualStyleBackColor = True
         '
         'cmdLabelledConvert
         '
-        Me.cmdLabelledConvert.Location = New System.Drawing.Point(131, 138)
+        Me.cmdLabelledConvert.Location = New System.Drawing.Point(178, 143)
         Me.cmdLabelledConvert.Name = "cmdLabelledConvert"
-        Me.cmdLabelledConvert.Size = New System.Drawing.Size(107, 23)
+        Me.cmdLabelledConvert.Size = New System.Drawing.Size(103, 23)
         Me.cmdLabelledConvert.TabIndex = 7
         Me.cmdLabelledConvert.Text = "Labelled Convert"
         Me.cmdLabelledConvert.UseVisualStyleBackColor = True
         '
         'cmdHelp
         '
-        Me.cmdHelp.Location = New System.Drawing.Point(280, 138)
+        Me.cmdHelp.Location = New System.Drawing.Point(302, 143)
         Me.cmdHelp.Name = "cmdHelp"
         Me.cmdHelp.Size = New System.Drawing.Size(66, 23)
         Me.cmdHelp.TabIndex = 8
@@ -80,7 +81,7 @@ Partial Class frmConvertToNumeric
         '
         'cmdCancel
         '
-        Me.cmdCancel.Location = New System.Drawing.Point(354, 138)
+        Me.cmdCancel.Location = New System.Drawing.Point(370, 143)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.Size = New System.Drawing.Size(66, 23)
         Me.cmdCancel.TabIndex = 10
@@ -114,11 +115,21 @@ Partial Class frmConvertToNumeric
         Me.lblNumber.TabIndex = 13
         Me.lblNumber.Text = "Number of non-numeric: "
         '
+        'cmdNonNumeric
+        '
+        Me.cmdNonNumeric.Location = New System.Drawing.Point(3, 143)
+        Me.cmdNonNumeric.Name = "cmdNonNumeric"
+        Me.cmdNonNumeric.Size = New System.Drawing.Size(82, 23)
+        Me.cmdNonNumeric.TabIndex = 14
+        Me.cmdNonNumeric.Text = "Non-Numeric"
+        Me.cmdNonNumeric.UseVisualStyleBackColor = True
+        '
         'frmConvertToNumeric
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(440, 171)
+        Me.Controls.Add(Me.cmdNonNumeric)
         Me.Controls.Add(Me.lblNumber)
         Me.Controls.Add(Me.lblColumnName)
         Me.Controls.Add(Me.lblColumn)
@@ -147,4 +158,5 @@ Partial Class frmConvertToNumeric
     Friend WithEvents lblColumn As Label
     Friend WithEvents lblColumnName As Label
     Friend WithEvents lblNumber As Label
+    Friend WithEvents cmdNonNumeric As Button
 End Class
