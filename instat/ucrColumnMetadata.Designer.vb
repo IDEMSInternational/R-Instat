@@ -61,10 +61,6 @@ Partial Class ucrColumnMetadata
         Me.mnuSort = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
-        Me.propertiesContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.mnuDeleteLabels = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lblHeader = New System.Windows.Forms.Label()
-        Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
@@ -73,11 +69,15 @@ Partial Class ucrColumnMetadata
         Me.copySheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.viewSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.propertiesContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuDeleteLabels = New System.Windows.Forms.ToolStripMenuItem()
+        Me.lblHeaderColumnMetadata = New System.Windows.Forms.Label()
+        Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.columnContextMenuStrip.SuspendLayout()
+        Me.statusColumnMenu.SuspendLayout()
         Me.propertiesContextMenuStrip.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
-        Me.statusColumnMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'grdVariables
@@ -224,47 +224,6 @@ Partial Class ucrColumnMetadata
         Me.mnuClearColumnFilter.Size = New System.Drawing.Size(212, 22)
         Me.mnuClearColumnFilter.Text = "Remove Current Filter"
         '
-        'propertiesContextMenuStrip
-        '
-        Me.propertiesContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDeleteLabels})
-        Me.propertiesContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.propertiesContextMenuStrip.Size = New System.Drawing.Size(144, 26)
-        '
-        'mnuDeleteLabels
-        '
-        Me.mnuDeleteLabels.Name = "mnuDeleteLabels"
-        Me.mnuDeleteLabels.Size = New System.Drawing.Size(143, 22)
-        Me.mnuDeleteLabels.Text = "Delete Labels"
-        '
-        'lblHeader
-        '
-        Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
-        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblHeader.Location = New System.Drawing.Point(3, 0)
-        Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(338, 20)
-        Me.lblHeader.TabIndex = 6
-        Me.lblHeader.Text = "Column Metadata"
-        Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'tlpTableContainer
-        '
-        Me.tlpTableContainer.ColumnCount = 1
-        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlpTableContainer.Controls.Add(Me.grdVariables, 0, 1)
-        Me.tlpTableContainer.Controls.Add(Me.lblHeader, 0, 0)
-        Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
-        Me.tlpTableContainer.Name = "tlpTableContainer"
-        Me.tlpTableContainer.RowCount = 3
-        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.tlpTableContainer.Size = New System.Drawing.Size(344, 138)
-        Me.tlpTableContainer.TabIndex = 7
-        '
         'statusColumnMenu
         '
         Me.statusColumnMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
@@ -315,6 +274,47 @@ Partial Class ucrColumnMetadata
         Me.viewSheet.Size = New System.Drawing.Size(162, 22)
         Me.viewSheet.Text = "View Data Frame"
         '
+        'propertiesContextMenuStrip
+        '
+        Me.propertiesContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDeleteLabels})
+        Me.propertiesContextMenuStrip.Name = "columnContextMenuStrip"
+        Me.propertiesContextMenuStrip.Size = New System.Drawing.Size(144, 26)
+        '
+        'mnuDeleteLabels
+        '
+        Me.mnuDeleteLabels.Name = "mnuDeleteLabels"
+        Me.mnuDeleteLabels.Size = New System.Drawing.Size(143, 22)
+        Me.mnuDeleteLabels.Text = "Delete Labels"
+        '
+        'lblHeaderColumnMetadata
+        '
+        Me.lblHeaderColumnMetadata.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.lblHeaderColumnMetadata.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblHeaderColumnMetadata.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblHeaderColumnMetadata.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblHeaderColumnMetadata.Location = New System.Drawing.Point(3, 0)
+        Me.lblHeaderColumnMetadata.Name = "lblHeaderColumnMetadata"
+        Me.lblHeaderColumnMetadata.Size = New System.Drawing.Size(338, 20)
+        Me.lblHeaderColumnMetadata.TabIndex = 6
+        Me.lblHeaderColumnMetadata.Text = "Column Metadata"
+        Me.lblHeaderColumnMetadata.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'tlpTableContainer
+        '
+        Me.tlpTableContainer.ColumnCount = 1
+        Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.Controls.Add(Me.grdVariables, 0, 1)
+        Me.tlpTableContainer.Controls.Add(Me.lblHeaderColumnMetadata, 0, 0)
+        Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
+        Me.tlpTableContainer.Name = "tlpTableContainer"
+        Me.tlpTableContainer.RowCount = 3
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.tlpTableContainer.Size = New System.Drawing.Size(344, 138)
+        Me.tlpTableContainer.TabIndex = 7
+        '
         'ucrColumnMetadata
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -324,15 +324,15 @@ Partial Class ucrColumnMetadata
         Me.Size = New System.Drawing.Size(344, 138)
         Me.cellContextMenuStrip.ResumeLayout(False)
         Me.columnContextMenuStrip.ResumeLayout(False)
+        Me.statusColumnMenu.ResumeLayout(False)
         Me.propertiesContextMenuStrip.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
-        Me.statusColumnMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents grdVariables As unvell.ReoGrid.ReoGridControl
-    Friend WithEvents lblHeader As Label
+    Friend WithEvents lblHeaderColumnMetadata As Label
     Private WithEvents columnContextMenuStrip As ContextMenuStrip
     Friend WithEvents mnuColumnRename As ToolStripMenuItem
     Friend WithEvents mnuDuplicateColumn As ToolStripMenuItem

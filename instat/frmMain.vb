@@ -1250,11 +1250,11 @@ Public Class frmMain
         dlgInventoryPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateFileImportFromClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportFromClimSoft.Click
+    Private Sub mnuClimateFileImportfromClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportfromClimSoft.Click
         dlgClimSoft.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateFileImportFromClimSoftWizard_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportFromClimSoftWizard.Click
+    Private Sub mnuClimateFileImportfromClimSoftWizard_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportfromClimSoftWizard.Click
         dlgClimsoftWizard.ShowDialog()
     End Sub
 
@@ -1935,7 +1935,7 @@ Public Class frmMain
         dlgAnonymiseIDColumn.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticFileOpenandTidyShapefile_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileOpenandTidyShapefile.Click
+    Private Sub mnuClimaticFileImportandTidyShapefile_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportandTidyShapefile.Click
         dlgImportShapeFiles.ShowDialog()
     End Sub
 
@@ -2349,15 +2349,15 @@ Public Class frmMain
         dlgClimaticStationMaps.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticMappingCheckStations_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingCheckStations.Click
+    Private Sub mnuClimaticMappingCheckStations_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingCheckStationLocations.Click
         dlgLocatingPointsInShapeFile.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticCheckDataCheckStations_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataCheckStations.Click
+    Private Sub mnuClimaticCheckDataCheckStationLocations_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataCheckStationLocations.Click
         dlgLocatingPointsInShapeFile.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticFileImportERA5Data_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportERA5Data.Click
+    Private Sub mnuClimaticFileImportfromClimateDataStore_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportfromClimateDataStore.Click
         dlgImportERA5Data.ShowDialog()
     End Sub
 End Class

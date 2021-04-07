@@ -41,6 +41,7 @@ Partial Class sdgPlots
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgPlots))
         Me.tbpPlotsOptions = New System.Windows.Forms.TabControl()
         Me.tbpFacet = New System.Windows.Forms.TabPage()
+        Me.ucrChkDrop = New instat.ucrCheck()
         Me.ucrNudNumberofRows = New instat.ucrNud()
         Me.ucrChkNoOfRowsOrColumns = New instat.ucrCheck()
         Me.ucrChkIncludeFacets = New instat.ucrCheck()
@@ -107,8 +108,32 @@ Partial Class sdgPlots
         Me.ucrInputStartingAngle = New instat.ucrInputTextBox()
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
+        Me.tbpColour = New System.Windows.Forms.TabPage()
+        Me.ucrChkAddFillScale = New instat.ucrCheck()
+        Me.grpColourScale = New System.Windows.Forms.GroupBox()
+        Me.ucrChkColourDiscrete = New instat.ucrCheck()
+        Me.ucrNudColourScaleTransparency = New instat.ucrNud()
+        Me.ucrInputColourScalePalette = New instat.ucrInputComboBox()
+        Me.ucrNudColourScaleMapEnds = New instat.ucrNud()
+        Me.ucrNudColourScaleMapBegins = New instat.ucrNud()
+        Me.ucrChkColourScaleReverseOrder = New instat.ucrCheck()
+        Me.lblColourScaleMapEnds = New System.Windows.Forms.Label()
+        Me.lblColourScaleMapBegins = New System.Windows.Forms.Label()
+        Me.lblColourScalePalette = New System.Windows.Forms.Label()
+        Me.lblColourScaleTransparency = New System.Windows.Forms.Label()
+        Me.grpFillScale = New System.Windows.Forms.GroupBox()
+        Me.ucrChkFillDiscrete = New instat.ucrCheck()
+        Me.ucrNudFillScaleTransparency = New instat.ucrNud()
+        Me.ucrNudFillScaleMapEnds = New instat.ucrNud()
+        Me.ucrNudFillScaleMapBegins = New instat.ucrNud()
+        Me.ucrInputFillScaleColour = New instat.ucrInputComboBox()
+        Me.ucrChkFillScaleReverseColourOrder = New instat.ucrCheck()
+        Me.lblFillScaleMapEnds = New System.Windows.Forms.Label()
+        Me.lblFillScaleBeginColour = New System.Windows.Forms.Label()
+        Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
+        Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkDrop = New instat.ucrCheck()
+        Me.ucrChkAddColour = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -120,6 +145,9 @@ Partial Class sdgPlots
         Me.grpCommonOptions.SuspendLayout()
         Me.tbpCoordinates.SuspendLayout()
         Me.grpPolarCordinates.SuspendLayout()
+        Me.tbpColour.SuspendLayout()
+        Me.grpColourScale.SuspendLayout()
+        Me.grpFillScale.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbpPlotsOptions
@@ -131,6 +159,7 @@ Partial Class sdgPlots
         Me.tbpPlotsOptions.Controls.Add(Me.tbpYAxis)
         Me.tbpPlotsOptions.Controls.Add(Me.tbpTheme)
         Me.tbpPlotsOptions.Controls.Add(Me.tbpCoordinates)
+        Me.tbpPlotsOptions.Controls.Add(Me.tbpColour)
         resources.ApplyResources(Me.tbpPlotsOptions, "tbpPlotsOptions")
         Me.tbpPlotsOptions.Name = "tbpPlotsOptions"
         Me.tbpPlotsOptions.SelectedIndex = 0
@@ -158,6 +187,12 @@ Partial Class sdgPlots
         Me.tbpFacet.Name = "tbpFacet"
         Me.tbpFacet.Tag = "Facet"
         Me.tbpFacet.UseVisualStyleBackColor = True
+        '
+        'ucrChkDrop
+        '
+        Me.ucrChkDrop.Checked = False
+        resources.ApplyResources(Me.ucrChkDrop, "ucrChkDrop")
+        Me.ucrChkDrop.Name = "ucrChkDrop"
         '
         'ucrNudNumberofRows
         '
@@ -644,16 +679,204 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrChkHorizontalPlot, "ucrChkHorizontalPlot")
         Me.ucrChkHorizontalPlot.Name = "ucrChkHorizontalPlot"
         '
+        'tbpColour
+        '
+        Me.tbpColour.Controls.Add(Me.ucrChkAddColour)
+        Me.tbpColour.Controls.Add(Me.ucrChkAddFillScale)
+        Me.tbpColour.Controls.Add(Me.grpColourScale)
+        Me.tbpColour.Controls.Add(Me.grpFillScale)
+        resources.ApplyResources(Me.tbpColour, "tbpColour")
+        Me.tbpColour.Name = "tbpColour"
+        Me.tbpColour.UseVisualStyleBackColor = True
+        '
+        'ucrChkAddFillScale
+        '
+        Me.ucrChkAddFillScale.Checked = False
+        resources.ApplyResources(Me.ucrChkAddFillScale, "ucrChkAddFillScale")
+        Me.ucrChkAddFillScale.Name = "ucrChkAddFillScale"
+        '
+        'grpColourScale
+        '
+        Me.grpColourScale.Controls.Add(Me.ucrChkColourDiscrete)
+        Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleTransparency)
+        Me.grpColourScale.Controls.Add(Me.ucrInputColourScalePalette)
+        Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleMapEnds)
+        Me.grpColourScale.Controls.Add(Me.ucrNudColourScaleMapBegins)
+        Me.grpColourScale.Controls.Add(Me.ucrChkColourScaleReverseOrder)
+        Me.grpColourScale.Controls.Add(Me.lblColourScaleMapEnds)
+        Me.grpColourScale.Controls.Add(Me.lblColourScaleMapBegins)
+        Me.grpColourScale.Controls.Add(Me.lblColourScalePalette)
+        Me.grpColourScale.Controls.Add(Me.lblColourScaleTransparency)
+        resources.ApplyResources(Me.grpColourScale, "grpColourScale")
+        Me.grpColourScale.Name = "grpColourScale"
+        Me.grpColourScale.TabStop = False
+        '
+        'ucrChkColourDiscrete
+        '
+        Me.ucrChkColourDiscrete.Checked = False
+        resources.ApplyResources(Me.ucrChkColourDiscrete, "ucrChkColourDiscrete")
+        Me.ucrChkColourDiscrete.Name = "ucrChkColourDiscrete"
+        '
+        'ucrNudColourScaleTransparency
+        '
+        Me.ucrNudColourScaleTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColourScaleTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudColourScaleTransparency, "ucrNudColourScaleTransparency")
+        Me.ucrNudColourScaleTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColourScaleTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColourScaleTransparency.Name = "ucrNudColourScaleTransparency"
+        Me.ucrNudColourScaleTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputColourScalePalette
+        '
+        Me.ucrInputColourScalePalette.AddQuotesIfUnrecognised = True
+        Me.ucrInputColourScalePalette.GetSetSelectedIndex = -1
+        Me.ucrInputColourScalePalette.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputColourScalePalette, "ucrInputColourScalePalette")
+        Me.ucrInputColourScalePalette.Name = "ucrInputColourScalePalette"
+        '
+        'ucrNudColourScaleMapEnds
+        '
+        Me.ucrNudColourScaleMapEnds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColourScaleMapEnds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudColourScaleMapEnds, "ucrNudColourScaleMapEnds")
+        Me.ucrNudColourScaleMapEnds.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColourScaleMapEnds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColourScaleMapEnds.Name = "ucrNudColourScaleMapEnds"
+        Me.ucrNudColourScaleMapEnds.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudColourScaleMapBegins
+        '
+        Me.ucrNudColourScaleMapBegins.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColourScaleMapBegins.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudColourScaleMapBegins, "ucrNudColourScaleMapBegins")
+        Me.ucrNudColourScaleMapBegins.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColourScaleMapBegins.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColourScaleMapBegins.Name = "ucrNudColourScaleMapBegins"
+        Me.ucrNudColourScaleMapBegins.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkColourScaleReverseOrder
+        '
+        Me.ucrChkColourScaleReverseOrder.Checked = False
+        resources.ApplyResources(Me.ucrChkColourScaleReverseOrder, "ucrChkColourScaleReverseOrder")
+        Me.ucrChkColourScaleReverseOrder.Name = "ucrChkColourScaleReverseOrder"
+        '
+        'lblColourScaleMapEnds
+        '
+        resources.ApplyResources(Me.lblColourScaleMapEnds, "lblColourScaleMapEnds")
+        Me.lblColourScaleMapEnds.Name = "lblColourScaleMapEnds"
+        '
+        'lblColourScaleMapBegins
+        '
+        resources.ApplyResources(Me.lblColourScaleMapBegins, "lblColourScaleMapBegins")
+        Me.lblColourScaleMapBegins.Name = "lblColourScaleMapBegins"
+        '
+        'lblColourScalePalette
+        '
+        resources.ApplyResources(Me.lblColourScalePalette, "lblColourScalePalette")
+        Me.lblColourScalePalette.Name = "lblColourScalePalette"
+        '
+        'lblColourScaleTransparency
+        '
+        resources.ApplyResources(Me.lblColourScaleTransparency, "lblColourScaleTransparency")
+        Me.lblColourScaleTransparency.Name = "lblColourScaleTransparency"
+        '
+        'grpFillScale
+        '
+        Me.grpFillScale.Controls.Add(Me.ucrChkFillDiscrete)
+        Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleTransparency)
+        Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleMapEnds)
+        Me.grpFillScale.Controls.Add(Me.ucrNudFillScaleMapBegins)
+        Me.grpFillScale.Controls.Add(Me.ucrInputFillScaleColour)
+        Me.grpFillScale.Controls.Add(Me.ucrChkFillScaleReverseColourOrder)
+        Me.grpFillScale.Controls.Add(Me.lblFillScaleMapEnds)
+        Me.grpFillScale.Controls.Add(Me.lblFillScaleBeginColour)
+        Me.grpFillScale.Controls.Add(Me.lblFillScaleColourPalettte)
+        Me.grpFillScale.Controls.Add(Me.lblFillScaleTransparency)
+        resources.ApplyResources(Me.grpFillScale, "grpFillScale")
+        Me.grpFillScale.Name = "grpFillScale"
+        Me.grpFillScale.TabStop = False
+        '
+        'ucrChkFillDiscrete
+        '
+        Me.ucrChkFillDiscrete.Checked = False
+        resources.ApplyResources(Me.ucrChkFillDiscrete, "ucrChkFillDiscrete")
+        Me.ucrChkFillDiscrete.Name = "ucrChkFillDiscrete"
+        '
+        'ucrNudFillScaleTransparency
+        '
+        Me.ucrNudFillScaleTransparency.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFillScaleTransparency.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudFillScaleTransparency, "ucrNudFillScaleTransparency")
+        Me.ucrNudFillScaleTransparency.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFillScaleTransparency.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFillScaleTransparency.Name = "ucrNudFillScaleTransparency"
+        Me.ucrNudFillScaleTransparency.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudFillScaleMapEnds
+        '
+        Me.ucrNudFillScaleMapEnds.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFillScaleMapEnds.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudFillScaleMapEnds, "ucrNudFillScaleMapEnds")
+        Me.ucrNudFillScaleMapEnds.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFillScaleMapEnds.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFillScaleMapEnds.Name = "ucrNudFillScaleMapEnds"
+        Me.ucrNudFillScaleMapEnds.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudFillScaleMapBegins
+        '
+        Me.ucrNudFillScaleMapBegins.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFillScaleMapBegins.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudFillScaleMapBegins, "ucrNudFillScaleMapBegins")
+        Me.ucrNudFillScaleMapBegins.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudFillScaleMapBegins.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudFillScaleMapBegins.Name = "ucrNudFillScaleMapBegins"
+        Me.ucrNudFillScaleMapBegins.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrInputFillScaleColour
+        '
+        Me.ucrInputFillScaleColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputFillScaleColour.GetSetSelectedIndex = -1
+        Me.ucrInputFillScaleColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFillScaleColour, "ucrInputFillScaleColour")
+        Me.ucrInputFillScaleColour.Name = "ucrInputFillScaleColour"
+        '
+        'ucrChkFillScaleReverseColourOrder
+        '
+        Me.ucrChkFillScaleReverseColourOrder.Checked = False
+        resources.ApplyResources(Me.ucrChkFillScaleReverseColourOrder, "ucrChkFillScaleReverseColourOrder")
+        Me.ucrChkFillScaleReverseColourOrder.Name = "ucrChkFillScaleReverseColourOrder"
+        '
+        'lblFillScaleMapEnds
+        '
+        resources.ApplyResources(Me.lblFillScaleMapEnds, "lblFillScaleMapEnds")
+        Me.lblFillScaleMapEnds.Name = "lblFillScaleMapEnds"
+        '
+        'lblFillScaleBeginColour
+        '
+        resources.ApplyResources(Me.lblFillScaleBeginColour, "lblFillScaleBeginColour")
+        Me.lblFillScaleBeginColour.Name = "lblFillScaleBeginColour"
+        '
+        'lblFillScaleColourPalettte
+        '
+        resources.ApplyResources(Me.lblFillScaleColourPalettte, "lblFillScaleColourPalettte")
+        Me.lblFillScaleColourPalettte.Name = "lblFillScaleColourPalettte"
+        '
+        'lblFillScaleTransparency
+        '
+        resources.ApplyResources(Me.lblFillScaleTransparency, "lblFillScaleTransparency")
+        Me.lblFillScaleTransparency.Name = "lblFillScaleTransparency"
+        '
         'ucrBaseSubdialog
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
-        'ucrChkDrop
+        'ucrChkAddColour
         '
-        Me.ucrChkDrop.Checked = False
-        resources.ApplyResources(Me.ucrChkDrop, "ucrChkDrop")
-        Me.ucrChkDrop.Name = "ucrChkDrop"
+        Me.ucrChkAddColour.Checked = False
+        resources.ApplyResources(Me.ucrChkAddColour, "ucrChkAddColour")
+        Me.ucrChkAddColour.Name = "ucrChkAddColour"
         '
         'sdgPlots
         '
@@ -682,6 +905,11 @@ Partial Class sdgPlots
         Me.tbpCoordinates.ResumeLayout(False)
         Me.grpPolarCordinates.ResumeLayout(False)
         Me.grpPolarCordinates.PerformLayout()
+        Me.tbpColour.ResumeLayout(False)
+        Me.grpColourScale.ResumeLayout(False)
+        Me.grpColourScale.PerformLayout()
+        Me.grpFillScale.ResumeLayout(False)
+        Me.grpFillScale.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -758,6 +986,31 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputPolarCoordinates As ucrInputComboBox
     Friend WithEvents lblPolarCoordinate As Label
     Friend WithEvents ucrChkDrop As ucrCheck
+    Friend WithEvents tbpColour As TabPage
+    Friend WithEvents grpFillScale As GroupBox
+    Friend WithEvents lblFillScaleMapEnds As Label
+    Friend WithEvents lblFillScaleBeginColour As Label
+    Friend WithEvents lblFillScaleColourPalettte As Label
+    Friend WithEvents lblFillScaleTransparency As Label
+    Friend WithEvents ucrChkFillScaleReverseColourOrder As ucrCheck
+    Friend WithEvents grpColourScale As GroupBox
+    Friend WithEvents ucrNudColourScaleTransparency As ucrNud
+    Friend WithEvents ucrInputColourScalePalette As ucrInputComboBox
+    Friend WithEvents ucrNudColourScaleMapEnds As ucrNud
+    Friend WithEvents ucrNudColourScaleMapBegins As ucrNud
+    Friend WithEvents ucrChkColourScaleReverseOrder As ucrCheck
+    Friend WithEvents lblColourScaleMapEnds As Label
+    Friend WithEvents lblColourScaleMapBegins As Label
+    Friend WithEvents lblColourScalePalette As Label
+    Friend WithEvents lblColourScaleTransparency As Label
+    Friend WithEvents ucrNudFillScaleTransparency As ucrNud
+    Friend WithEvents ucrNudFillScaleMapEnds As ucrNud
+    Friend WithEvents ucrNudFillScaleMapBegins As ucrNud
+    Friend WithEvents ucrInputFillScaleColour As ucrInputComboBox
+    Friend WithEvents ucrChkAddFillScale As ucrCheck
+    Friend WithEvents ucrChkColourDiscrete As ucrCheck
+    Friend WithEvents ucrChkFillDiscrete As ucrCheck
+    Friend WithEvents ucrChkAddColour As ucrCheck
 End Class
 
 

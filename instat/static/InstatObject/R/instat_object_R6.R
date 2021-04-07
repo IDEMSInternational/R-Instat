@@ -479,7 +479,7 @@ DataBook$set("public", "set_metadata_changed", function(data_name = "", new_val)
 } 
 )
 
-DataBook$set("public", "add_columns_to_data", function(data_name, col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column, num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
+DataBook$set("public", "add_columns_to_data", function(data_name, col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column = "", num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
   self$get_data_objects(data_name)$add_columns_to_data(col_name, col_data, use_col_name_as_prefix = use_col_name_as_prefix, hidden = hidden, before = before, adjacent_column = adjacent_column, num_cols = num_cols, require_correct_length = require_correct_length, keep_existing_position = keep_existing_position)
 }
 )
@@ -1178,6 +1178,39 @@ DataBook$set("public","has_key", function(data_name) {
 
 DataBook$set("public","get_keys", function(data_name, key_name) {
   self$get_data_objects(data_name)$get_keys(key_name)
+}
+)
+
+# Note: This is a separate functionality to comments as defined in instat_comment.R
+# This is intended to be later integrated together.
+DataBook$set("public","add_new_comment", function(data_name, row, column = "", comment) {
+  if (!self$has_key(data_name)) stop("A key must be defined in the data frame to add a comment. Use the Add Key dialog to define a key.")
+  if (!".comment" %in% self$get_data_names()) {
+    comment_df <- data.frame(sheet = character(0),
+                             row = character(0),
+                             column = character(0),
+                             id = numeric(0),
+                             comment = character(0),
+                             time_stamp = as.POSIXct(c()))
+    self$import_data(data_tables = list(.comment = comment_df))
+    self$add_key(".comment", c("sheet", "row", "id"), "key1")
+  }
+  comment_df <- self$get_data_frame(".comment", use_current_filter = FALSE)
+  curr_df <- self$get_data_frame(data_name, use_current_filter = FALSE)
+  curr_row <- curr_df[row.names(curr_df) == row, ]
+  key <- self$get_keys(data_name)[[1]]
+  key_cols <- as.character(key)
+  key_vals <- paste(sapply(curr_row[, key_cols], as.character), collapse = "__")
+  curr_comments <- comment_df[comment_df$sheet == data_name & comment_df$row == key_vals, ]
+  new_id <- 1
+  if (nrow(curr_comments) > 0) new_id <- max(curr_comments$id) + 1
+  comment_df[nrow(comment_df) + 1, ] <- list(sheet = data_name,
+                                             row = key_vals,
+                                             column = column,
+                                             id = new_id,
+                                             comment = comment,
+                                             time_stamp = Sys.time())
+  self$get_data_objects(".comment")$set_data(new_data = comment_df)
 }
 )
 
@@ -2494,3 +2527,40 @@ DataBook$set("public", "save_data_entry_data", function(data_name, new_data, row
   self$get_data_objects(data_name)$save_data_entry_data(new_data = new_data, rows_changed = rows_changed)
 }
 )
+
+DataBook$set("public", "import_from_cds", function(user, dataset, elements, start_date, end_date, lon, lat, path, import = FALSE, new_name) {
+  all_dates <- seq(start_date, end_date, by = 1)
+  all_periods <- unique(paste(lubridate::year(all_dates), sprintf("%02d", lubridate::month(all_dates)), sep = "-"))
+  area <- c(lat[2], lon[1], lat[1], lon[2])
+  pb <- winProgressBar(title = "Requesting data from CDS", min = 0, max = length(all_periods))
+  nc_files <- vector(mode = "character", length = length(all_periods))
+  for (i in seq_along(all_periods)) {
+    y <- substr(all_periods[i], 1, 4)
+    m <- substr(all_periods[i], 6, 7)
+    curr_dates <- all_dates[lubridate::month(all_dates) == as.numeric(m) & lubridate::year(all_dates) == as.numeric(y)]
+    d <- sprintf("%02d", lubridate::day(curr_dates))
+    request <- list(
+      dataset_short_name = dataset,
+      product_type = "reanalysis",
+      variable = elements,
+      year = y,
+      month = m,
+      day = d,
+      time = c("00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"),
+      format = "netcdf",
+      area = area,
+      target = paste0(dataset, "-", paste(elements, collapse = "_"), "-", all_periods[i], ".nc")
+    )
+    info <- paste0("Requesting data for ", all_periods[i], " - ", round(100 * i / length(all_periods)), "%")
+    setWinProgressBar(pb, value = i, title = info, label = info)
+    ncfile <- ecmwfr::wf_request(user = user, request = request,
+                                 transfer = TRUE, path = path,
+                                 time_out = 3 * 3600)
+    if (import) {
+      nc <- ncdf4::nc_open(filename = ncfile)
+      self$import_NetCDF(nc = nc, name = new_name)
+      ncdf4::nc_close(nc = nc)
+    }
+  }
+  close(pb)
+})
