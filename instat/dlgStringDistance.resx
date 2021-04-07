@@ -126,13 +126,13 @@
     <value>257, 88</value>
   </data>
   <data name="lblColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
+    <value>45, 13</value>
   </data>
   <data name="lblColumn.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="lblColumn.Text" xml:space="preserve">
-    <value>StringDistance</value>
+    <value>Column:</value>
   </data>
   <data name="&gt;&gt;lblColumn.Name" xml:space="preserve">
     <value>lblColumn</value>
