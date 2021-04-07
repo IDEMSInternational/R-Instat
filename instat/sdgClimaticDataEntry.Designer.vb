@@ -25,11 +25,12 @@ Partial Class sdgClimaticDataEntry
         Me.components = New System.ComponentModel.Container()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.grdDataEntry = New unvell.ReoGrid.ReoGridControl()
+        Me.cmdTransform = New System.Windows.Forms.Button()
         Me.cmdReset = New System.Windows.Forms.Button()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
         Me.ttCmdReset = New System.Windows.Forms.ToolTip(Me.components)
-        Me.cmdTransform = New System.Windows.Forms.Button()
         Me.ttCmdTransformButton = New System.Windows.Forms.ToolTip(Me.components)
+        Me.cmdComment = New System.Windows.Forms.Button()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -49,6 +50,7 @@ Partial Class sdgClimaticDataEntry
         '
         'SplitContainer1.Panel2
         '
+        Me.SplitContainer1.Panel2.Controls.Add(Me.cmdComment)
         Me.SplitContainer1.Panel2.Controls.Add(Me.cmdTransform)
         Me.SplitContainer1.Panel2.Controls.Add(Me.cmdReset)
         Me.SplitContainer1.Panel2.Controls.Add(Me.ucrSdgPICSARainfalbuttons)
@@ -75,6 +77,17 @@ Partial Class sdgClimaticDataEntry
         Me.grdDataEntry.TabIndex = 3
         Me.grdDataEntry.Text = "Variables"
         '
+        'cmdTransform
+        '
+        Me.cmdTransform.Enabled = False
+        Me.cmdTransform.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdTransform.Location = New System.Drawing.Point(277, 7)
+        Me.cmdTransform.Name = "cmdTransform"
+        Me.cmdTransform.Size = New System.Drawing.Size(104, 24)
+        Me.cmdTransform.TabIndex = 89
+        Me.cmdTransform.Text = "Transform"
+        Me.cmdTransform.UseVisualStyleBackColor = True
+        '
         'cmdReset
         '
         Me.cmdReset.ImeMode = System.Windows.Forms.ImeMode.NoControl
@@ -87,7 +100,7 @@ Partial Class sdgClimaticDataEntry
         '
         'ucrSdgPICSARainfalbuttons
         '
-        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(114, 5)
+        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(33, 7)
         Me.ucrSdgPICSARainfalbuttons.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
         Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(144, 30)
@@ -99,22 +112,22 @@ Partial Class sdgClimaticDataEntry
         Me.ttCmdReset.InitialDelay = 500
         Me.ttCmdReset.ReshowDelay = 100
         '
-        'cmdTransform
-        '
-        Me.cmdTransform.Enabled = False
-        Me.cmdTransform.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTransform.Location = New System.Drawing.Point(270, 7)
-        Me.cmdTransform.Name = "cmdTransform"
-        Me.cmdTransform.Size = New System.Drawing.Size(104, 24)
-        Me.cmdTransform.TabIndex = 89
-        Me.cmdTransform.Text = "Transform"
-        Me.cmdTransform.UseVisualStyleBackColor = True
-        '
         'ttCmdTransformButton
         '
         Me.ttCmdTransformButton.AutoPopDelay = 10000
         Me.ttCmdTransformButton.InitialDelay = 500
         Me.ttCmdTransformButton.ReshowDelay = 100
+        '
+        'cmdComment
+        '
+        Me.cmdComment.Enabled = False
+        Me.cmdComment.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComment.Location = New System.Drawing.Point(183, 8)
+        Me.cmdComment.Name = "cmdComment"
+        Me.cmdComment.Size = New System.Drawing.Size(90, 24)
+        Me.cmdComment.TabIndex = 90
+        Me.cmdComment.Text = "Comment"
+        Me.cmdComment.UseVisualStyleBackColor = True
         '
         'sdgClimaticDataEntry
         '
@@ -140,4 +153,5 @@ Partial Class sdgClimaticDataEntry
     Friend WithEvents ttCmdReset As ToolTip
     Friend WithEvents cmdTransform As Button
     Friend WithEvents ttCmdTransformButton As ToolTip
+    Friend WithEvents cmdComment As Button
 End Class

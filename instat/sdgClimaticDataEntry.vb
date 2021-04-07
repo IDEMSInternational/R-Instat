@@ -244,7 +244,7 @@ Public Class sdgClimaticDataEntry
 
     Private Sub sdgClimaticDataEntry_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
         Dim i As Integer
-
+        dlgClimaticDataEntry.GetNumberRowsChanged(NRowsChanged())
         If NRowsChanged() > 0 Then
             clsEditDataFrame.AddParameter(strDateName, "as.Date(" & GetRowsChangedAsRVectorString(strDateName, Chr(34)) & ")", iPosition:=1)
             i = 2

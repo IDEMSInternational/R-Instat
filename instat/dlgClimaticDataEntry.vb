@@ -105,24 +105,24 @@ Public Class dlgClimaticDataEntry
         ucrEndDate.SetParameterIsRDate()
 
         'Not yet implemented
-        ucrChkTransform.SetText("Transform:")
+        'ucrChkTransform.SetText("Transform:")
 
-        'ucrInputTransform.SetItems({"10", "Inch to mm"})
-        ucrInputTransform.SetItems({"10"}) 'todo. temporary
-        ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=1) 'temporary`
-        ucrInputTransform.Visible = False
+        ''ucrInputTransform.SetItems({"10", "Inch to mm"})
+        'ucrInputTransform.SetItems({"10"}) 'todo. temporary
+        'ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=1) 'temporary`
+        'ucrInputTransform.Visible = False
 
-        ucrChkDefaultValue.SetText("Default Value")
-        ucrInputDefaultValue.SetText("0")
-        ucrInputDefaultValue.Visible = False
+        'ucrChkDefaultValue.SetText("Default Value")
+        'ucrInputDefaultValue.SetText("0")
+        'ucrInputDefaultValue.Visible = False
 
-        ucrChkNoDecimal.SetText("No Decimal")
+        'ucrChkNoDecimal.SetText("No Decimal")
 
-        ucrChkAllowTrace.SetText("Allow t for Trace")
+        'ucrChkAllowTrace.SetText("Allow t for Trace")
 
         ttCmdCheckData.SetToolTip(cmdCheckData, "Data checking facilities not yet implemented")
         cmdCheckData.Enabled = False
-        ttucrChkDefaultValue.SetToolTip(ucrChkDefaultValue, "The data must be defined as climatic to recognise which variable is precipitation.")
+        'ttucrChkDefaultValue.SetToolTip(ucrChkDefaultValue, "The data must be defined as climatic to recognise which variable is precipitation.")
     End Sub
 
     Private Sub SetDefaults()
@@ -132,10 +132,12 @@ Public Class dlgClimaticDataEntry
 
         ucrSelectorClimaticDataEntry.Reset()
         ucrReceiverElements.SetMeAsReceiver()
-        ucrChkDefaultValue.Checked = False
-        ucrChkAllowTrace.Checked = False
-        ucrChkTransform.Checked = False
-        ucrInputTransform.SetName(10)
+        'ucrChkDefaultValue.Checked = False
+        'ucrChkAllowTrace.Checked = False
+        'ucrChkTransform.Checked = False
+        'ucrInputTransform.SetName(10)
+
+        lblNbRowsChanged.Visible = False
 
         clsGetDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
         clsGetDataEntry.AddParameter("type", Chr(34) & "month" & Chr(34), iPosition:=6)
@@ -220,7 +222,7 @@ Public Class dlgClimaticDataEntry
         lstVariablesColumnNames = ucrReceiverViewVariables.GetVariableNamesList(bWithQuotes:=False).ToList
         dfEditData = GetSelectedDataFrame()
 
-        strDefaultValue = ucrInputDefaultValue.GetValue()
+        'strDefaultValue = ucrInputDefaultValue.GetValue()
 
         If dfEditData Is Nothing Then
             MsgBox("No available data for this selection. Modify dates and try again.")
@@ -240,13 +242,13 @@ Public Class dlgClimaticDataEntry
             bSetup = False
         End If
         'todo. do we really need the bState??
-        If bState Then
-            bNoDecimals = ucrChkNoDecimal.Checked
-            bDefaultValue = ucrChkDefaultValue.Checked
-            bAllowTrace = ucrChkAllowTrace.Checked
-            bTransform = ucrChkTransform.Checked
-            dTranformValue = ucrInputTransform.GetValue
-        End If
+        'If bState Then
+        '    bNoDecimals = ucrChkNoDecimal.Checked
+        '    bDefaultValue = ucrChkDefaultValue.Checked
+        '    bAllowTrace = ucrChkAllowTrace.Checked
+        '    bTransform = ucrChkTransform.Checked
+        '    dTranformValue = ucrInputTransform.GetValue
+        'End If
         If bShow Then
             If bSetup Then
                 sdgClimaticDataEntry.Setup(dfEditData, strDataFrameName, clsSaveDataEntry, clsEditDataFrame, strDateColumnName,
@@ -311,22 +313,30 @@ Public Class dlgClimaticDataEntry
         bSubdialogFirstLoad = True
     End Sub
 
-    Private Sub ucrChkNoDecimal_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoDecimal.ControlValueChanged, ucrChkDefaultValue.ControlValueChanged, ucrChkAllowTrace.ControlValueChanged, ucrChkTransform.ControlValueChanged
-        bChange = True
-        If ucrChkDefaultValue.Checked OrElse ucrChkNoDecimal.Checked OrElse ucrChkAllowTrace.Checked OrElse ucrChkTransform.Checked Then
-            bState = True
-        Else
-            bState = False
-        End If
+    Private Sub ucrChkNoDecimal_ControlValueChanged(ucrChangedControl As ucrCore)
+        'bChange = True
+        'If ucrChkDefaultValue.Checked OrElse ucrChkNoDecimal.Checked OrElse ucrChkAllowTrace.Checked OrElse ucrChkTransform.Checked Then
+        '    bState = True
+        'Else
+        '    bState = False
+        'End If
+    End Sub
+    Public Sub GetNumberRowsChanged(nval As Integer)
+        lblNbRowsChanged.Visible = True
+        lblNbRowsChanged.ForeColor = Color.Red
+        lblNbRowsChanged.Text = "Value(s) changed: " & nval
     End Sub
 
-    Private Sub ucrChkDefaultValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefaultValue.ControlValueChanged
-        'todo. can this "toggling" be done in another way?
-        ucrInputDefaultValue.Visible = ucrChkDefaultValue.Checked
+    Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgClimaticDataEntryOptions.ShowDialog()
     End Sub
+    'Private Sub ucrChkDefaultValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefaultValue.ControlValueChanged
+    '    'todo. can this "toggling" be done in another way?
+    '    ' ucrInputDefaultValue.Visible = ucrChkDefaultValue.Checked
+    'End Sub
 
-    Private Sub ucrChkTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTransform.ControlValueChanged
-        'todo. can this "toggling" be done in another way?
-        ucrInputTransform.Visible = ucrChkTransform.Checked
-    End Sub
+    'Private Sub ucrChkTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTransform.ControlValueChanged
+    '    'todo. can this "toggling" be done in another way?
+    '    'ucrInputTransform.Visible = ucrChkTransform.Checked
+    'End Sub
 End Class
