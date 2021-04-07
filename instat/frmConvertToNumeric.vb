@@ -51,7 +51,7 @@
         'Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, iHelpTopicID.ToString())
     End Sub
 
-    Private Sub cmdNonNumeric_Click(sender As Object, e As EventArgs) Handles cmdNonNumeric.Click
+    Private Sub cmdInspectValues_Click(sender As Object, e As EventArgs) Handles cmdInspectValues.Click
         Me.Hide()
         dlgFindNonnumericValues.SetCurrentColumn(strColumnName, strDataFrameName)
         dlgFindNonnumericValues.ShowDialog()

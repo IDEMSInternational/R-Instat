@@ -120,7 +120,7 @@
   <data name="lblPossibleSolutions.Text" xml:space="preserve">
     <value>Some values are non-numeric:
 
-- Choose "Non-numeric" to investigate these values.
+- Choose "Inspect Values" to investigate these values.
 - Choose "Normal Convert" to convert anyway. Non-numeric values will be lost. They will be set to NA.
 - Choose "Labelled Convert" to retain all values. All values will be labelled with integers and can be recovered by converting back to Factor or Character.</value>
   </data>
