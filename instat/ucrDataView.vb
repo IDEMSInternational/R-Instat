@@ -961,9 +961,12 @@ Public Class ucrDataView
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
         Dim iSelectedCols As Integer = grdData.CurrentWorksheet.SelectionRange.Cols
         Dim strColumns() As String = SelectedColumnsAsArray()
-        Dim strType As String = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
+        Dim strType As String
 
-        mnuLebelsLevel.Enabled = (iSelectedCols = 1 AndAlso strType.Contains("factor"))
+        If strColumns IsNot Nothing AndAlso strColumns.Count > 0 Then
+            strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
+            mnuLebelsLevel.Enabled = (iSelectedCols = 1 AndAlso strType.Contains("factor"))
+        End If
         mnuRemoveCurrentFilters.Enabled = Not String.Equals(strFilterName, strNoFilter)
     End Sub
 End Class
