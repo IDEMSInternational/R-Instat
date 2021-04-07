@@ -204,11 +204,11 @@ Public Class dlgTransformClimatic
         ucrInputEvaporation.AddQuotesIfUnrecognised = False
 
         'save control 
-        ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetIsComboBox()
-        ucrSaveColumn.SetLabelText("New Column Name:")
+        ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorTransform.ucrAvailableDataFrames)
         ucrSaveColumn.SetPositionParametersDirectly(False, "result_name")
+        ucrSaveColumn.SetLabelText("New Column Name:")
         'makes the ucrSave control to position new column after selected column
         ucrSaveColumn.setLinkedReceiver(ucrReceiverData)
 
