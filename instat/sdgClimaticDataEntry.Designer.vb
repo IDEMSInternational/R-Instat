@@ -25,12 +25,12 @@ Partial Class sdgClimaticDataEntry
         Me.components = New System.ComponentModel.Container()
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.grdDataEntry = New unvell.ReoGrid.ReoGridControl()
+        Me.cmdComment = New System.Windows.Forms.Button()
         Me.cmdTransform = New System.Windows.Forms.Button()
         Me.cmdReset = New System.Windows.Forms.Button()
-        Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
+        Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
         Me.ttCmdReset = New System.Windows.Forms.ToolTip(Me.components)
         Me.ttCmdTransformButton = New System.Windows.Forms.ToolTip(Me.components)
-        Me.cmdComment = New System.Windows.Forms.Button()
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -53,7 +53,7 @@ Partial Class sdgClimaticDataEntry
         Me.SplitContainer1.Panel2.Controls.Add(Me.cmdComment)
         Me.SplitContainer1.Panel2.Controls.Add(Me.cmdTransform)
         Me.SplitContainer1.Panel2.Controls.Add(Me.cmdReset)
-        Me.SplitContainer1.Panel2.Controls.Add(Me.ucrSdgPICSARainfalbuttons)
+        Me.SplitContainer1.Panel2.Controls.Add(Me.ucrSdgBaseButtons)
         Me.SplitContainer1.Size = New System.Drawing.Size(494, 295)
         Me.SplitContainer1.SplitterDistance = 251
         Me.SplitContainer1.TabIndex = 0
@@ -77,6 +77,17 @@ Partial Class sdgClimaticDataEntry
         Me.grdDataEntry.TabIndex = 3
         Me.grdDataEntry.Text = "Variables"
         '
+        'cmdComment
+        '
+        Me.cmdComment.Enabled = False
+        Me.cmdComment.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.cmdComment.Location = New System.Drawing.Point(183, 8)
+        Me.cmdComment.Name = "cmdComment"
+        Me.cmdComment.Size = New System.Drawing.Size(90, 24)
+        Me.cmdComment.TabIndex = 90
+        Me.cmdComment.Text = "Comment"
+        Me.cmdComment.UseVisualStyleBackColor = True
+        '
         'cmdTransform
         '
         Me.cmdTransform.Enabled = False
@@ -98,13 +109,13 @@ Partial Class sdgClimaticDataEntry
         Me.cmdReset.Text = "Reset"
         Me.cmdReset.UseVisualStyleBackColor = True
         '
-        'ucrSdgPICSARainfalbuttons
+        'ucrSdgBaseButtons
         '
-        Me.ucrSdgPICSARainfalbuttons.Location = New System.Drawing.Point(33, 7)
-        Me.ucrSdgPICSARainfalbuttons.Margin = New System.Windows.Forms.Padding(4)
-        Me.ucrSdgPICSARainfalbuttons.Name = "ucrSdgPICSARainfalbuttons"
-        Me.ucrSdgPICSARainfalbuttons.Size = New System.Drawing.Size(144, 30)
-        Me.ucrSdgPICSARainfalbuttons.TabIndex = 87
+        Me.ucrSdgBaseButtons.Location = New System.Drawing.Point(33, 7)
+        Me.ucrSdgBaseButtons.Margin = New System.Windows.Forms.Padding(4)
+        Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
+        Me.ucrSdgBaseButtons.Size = New System.Drawing.Size(144, 30)
+        Me.ucrSdgBaseButtons.TabIndex = 87
         '
         'ttCmdReset
         '
@@ -117,17 +128,6 @@ Partial Class sdgClimaticDataEntry
         Me.ttCmdTransformButton.AutoPopDelay = 10000
         Me.ttCmdTransformButton.InitialDelay = 500
         Me.ttCmdTransformButton.ReshowDelay = 100
-        '
-        'cmdComment
-        '
-        Me.cmdComment.Enabled = False
-        Me.cmdComment.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComment.Location = New System.Drawing.Point(183, 8)
-        Me.cmdComment.Name = "cmdComment"
-        Me.cmdComment.Size = New System.Drawing.Size(90, 24)
-        Me.cmdComment.TabIndex = 90
-        Me.cmdComment.Text = "Comment"
-        Me.cmdComment.UseVisualStyleBackColor = True
         '
         'sdgClimaticDataEntry
         '
@@ -147,7 +147,7 @@ Partial Class sdgClimaticDataEntry
     End Sub
 
     Friend WithEvents SplitContainer1 As SplitContainer
-    Friend WithEvents ucrSdgPICSARainfalbuttons As ucrButtonsSubdialogue
+    Friend WithEvents ucrSdgBaseButtons As ucrButtonsSubdialogue
     Friend WithEvents grdDataEntry As unvell.ReoGrid.ReoGridControl
     Friend WithEvents cmdReset As Button
     Friend WithEvents ttCmdReset As ToolTip

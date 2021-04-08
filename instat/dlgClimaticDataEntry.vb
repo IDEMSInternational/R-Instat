@@ -204,14 +204,8 @@ Public Class dlgClimaticDataEntry
         Dim strStationSelected As String
         Dim dfEditData As DataFrame
         Dim strDataFrameName As String
-        Dim strDefaultValue As String 'todo. why is this a string?
         Dim bSetup As Boolean
         Dim bShow As Boolean
-        Dim bNoDecimals As Boolean
-        Dim bDefaultValue As Boolean
-        Dim bAllowTrace As Boolean
-        Dim bTransform As Boolean
-        Dim dTranformValue As Double
 
 
         strDataFrameName = ucrSelectorClimaticDataEntry.strCurrentDataFrame
@@ -221,8 +215,6 @@ Public Class dlgClimaticDataEntry
         lstElementsColumnNames = ucrReceiverElements.GetVariableNamesList(bWithQuotes:=False).ToList
         lstVariablesColumnNames = ucrReceiverViewVariables.GetVariableNamesList(bWithQuotes:=False).ToList
         dfEditData = GetSelectedDataFrame()
-
-        'strDefaultValue = ucrInputDefaultValue.GetValue()
 
         If dfEditData Is Nothing Then
             MsgBox("No available data for this selection. Modify dates and try again.")
@@ -241,21 +233,17 @@ Public Class dlgClimaticDataEntry
             bShow = True
             bSetup = False
         End If
-        'todo. do we really need the bState??
-        'If bState Then
-        '    bNoDecimals = ucrChkNoDecimal.Checked
-        '    bDefaultValue = ucrChkDefaultValue.Checked
-        '    bAllowTrace = ucrChkAllowTrace.Checked
-        '    bTransform = ucrChkTransform.Checked
-        '    dTranformValue = ucrInputTransform.GetValue
-        'End If
+
         If bShow Then
             If bSetup Then
                 sdgClimaticDataEntry.Setup(dfEditData, strDataFrameName, clsSaveDataEntry, clsEditDataFrame, strDateColumnName,
                                            lstElementsColumnNames, lstVariablesColumnNames, strStationColumnName,
-                                           bDefaultValue:=bDefaultValue, strDefaultValue:=strDefaultValue,
-                                           bNoDecimal:=bNoDecimals, bAllowTrace:=bAllowTrace,
-                                           bTransform:=bTransform, dTranformValue:=dTranformValue)
+                                           bDefaultValue:=sdgClimaticDataEntryOptions.UseDefault,
+                                           strDefaultValue:=sdgClimaticDataEntryOptions.DefaultValue,
+                                           bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
+                                           bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
+                                           bTransform:=sdgClimaticDataEntryOptions.Transform,
+                                           dTranformValue:=sdgClimaticDataEntryOptions.TransformValue)
             End If
             sdgClimaticDataEntry.ShowDialog()
             bSubdialogFirstLoad = False
@@ -329,6 +317,7 @@ Public Class dlgClimaticDataEntry
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgClimaticDataEntryOptions.ShowDialog()
+        bChange = True 'todo. is it always true
     End Sub
     'Private Sub ucrChkDefaultValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefaultValue.ControlValueChanged
     '    'todo. can this "toggling" be done in another way?

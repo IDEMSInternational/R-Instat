@@ -45,6 +45,8 @@ Public Class sdgClimaticDataEntry
     Private bAllowTrace As Boolean
     Private bTransform As Boolean
     Private dTranformValue As Double
+    Private bLastChangeValid As Boolean
+    Private strLastChangedCellAddress As String
 
     ''' <summary>
     ''' returns the data changed for the passed column as an R vector string
@@ -208,18 +210,22 @@ Public Class sdgClimaticDataEntry
         If Not IsNumeric(newValue) AndAlso Not newValue = "NA" Then
             If Not (bAllowTrace AndAlso newValue.ToUpper = "T") Then
                 MsgBox("Value is not numeric or NA.", MsgBoxStyle.Information, "Not numeric.")
-                e.EndReason = EndEditReason.Cancel
                 bValidValue = False
             End If
         ElseIf bNoDecimal AndAlso newValue.Contains(".") Then
             MsgBox("Value should not be decimal otherwise uncheck No Decimal.", MsgBoxStyle.Information, "Not decimal Allowed.")
-            e.EndReason = EndEditReason.Cancel
             bValidValue = False
         End If
+
+        bLastChangeValid = bValidValue
+        strLastChangedCellAddress = e.Cell.Address
 
         If bValidValue Then
             AddChangedRow(e.Cell.Row)
             grdCurrentWorkSheet.GetCell(e.Cell.Row, e.Cell.Column).Style.BackColor = Color.Yellow
+        Else
+            e.EndReason = EndEditReason.Cancel
+            grdCurrentWorkSheet.FocusPos = New CellPosition(e.Cell.Address)
         End If
 
     End Sub
@@ -243,6 +249,10 @@ Public Class sdgClimaticDataEntry
     End Sub
 
     Private Sub sdgClimaticDataEntry_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+
+    End Sub
+
+    Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
         Dim i As Integer
         dlgClimaticDataEntry.GetNumberRowsChanged(NRowsChanged())
         If NRowsChanged() > 0 Then
@@ -257,4 +267,13 @@ Public Class sdgClimaticDataEntry
             clsSaveDataEntry.RemoveParameterByName("rows_changed")
         End If
     End Sub
+
+    Private Sub grdCurrentWorkSheet_FocusPosChanged(sender As Object, e As CellPosEventArgs) Handles grdCurrentWorkSheet.FocusPosChanged
+        'retain cell focus for invalid entries
+        If Not bLastChangeValid AndAlso strLastChangedCellAddress IsNot Nothing Then
+            grdCurrentWorkSheet.FocusPos = New CellPosition(strLastChangedCellAddress)
+        End If
+    End Sub
+
+
 End Class

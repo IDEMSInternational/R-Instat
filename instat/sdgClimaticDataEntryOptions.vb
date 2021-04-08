@@ -73,4 +73,46 @@ Public Class sdgClimaticDataEntryOptions
         lblBefore.Visible = ucrChkExtraRows.Checked
         lblAfter.Visible = ucrChkExtraRows.Checked
     End Sub
+
+    Public ReadOnly Property NoDecimals As Boolean
+        Get
+            Return ucrChkNoDecimal.Checked
+        End Get
+    End Property
+
+    Public ReadOnly Property UseDefault As Boolean
+        Get
+            Return ucrChkDefaultValue.Checked
+        End Get
+    End Property
+
+
+    'todo. why is this a string?
+    Public ReadOnly Property DefaultValue As String
+        Get
+            Return ucrInputDefaultValue.GetValue
+        End Get
+    End Property
+
+    Public ReadOnly Property AllowTrace As Boolean
+        Get
+            Return ucrChkAllowTrace.Checked
+        End Get
+    End Property
+
+    Public ReadOnly Property Transform As Boolean
+        Get
+            Return ucrChkTransform.Checked
+        End Get
+    End Property
+
+    Public ReadOnly Property TransformValue As Double
+        Get
+            'todo. do explicit conversion. Currently ucrInputTransform validation type is number
+            Return If(String.IsNullOrEmpty(ucrInputTransform.GetValue), 0, ucrInputTransform.GetValue)
+        End Get
+    End Property
+
+
+
 End Class
