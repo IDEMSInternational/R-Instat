@@ -351,8 +351,11 @@
   <data name="ucrSaveStringDistance.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 240</value>
   </data>
+  <data name="ucrSaveStringDistance.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrSaveStringDistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>247, 24</value>
+    <value>295, 24</value>
   </data>
   <data name="ucrSaveStringDistance.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
