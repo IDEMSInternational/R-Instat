@@ -166,7 +166,7 @@ Partial Class dlgWindPollutionRose
         'lblStatistic
         '
         Me.lblStatistic.AutoSize = True
-        Me.lblStatistic.Location = New System.Drawing.Point(10, 246)
+        Me.lblStatistic.Location = New System.Drawing.Point(10, 244)
         Me.lblStatistic.Name = "lblStatistic"
         Me.lblStatistic.Size = New System.Drawing.Size(47, 13)
         Me.lblStatistic.TabIndex = 69
@@ -175,7 +175,7 @@ Partial Class dlgWindPollutionRose
         'lblWindDirection2
         '
         Me.lblWindDirection2.AutoSize = True
-        Me.lblWindDirection2.Location = New System.Drawing.Point(259, 214)
+        Me.lblWindDirection2.Location = New System.Drawing.Point(259, 259)
         Me.lblWindDirection2.Name = "lblWindDirection2"
         Me.lblWindDirection2.Size = New System.Drawing.Size(89, 13)
         Me.lblWindDirection2.TabIndex = 59
@@ -184,7 +184,7 @@ Partial Class dlgWindPollutionRose
         'lblWindSpeed2
         '
         Me.lblWindSpeed2.AutoSize = True
-        Me.lblWindSpeed2.Location = New System.Drawing.Point(259, 171)
+        Me.lblWindSpeed2.Location = New System.Drawing.Point(259, 216)
         Me.lblWindSpeed2.Name = "lblWindSpeed2"
         Me.lblWindSpeed2.Size = New System.Drawing.Size(78, 13)
         Me.lblWindSpeed2.TabIndex = 57
@@ -211,7 +211,7 @@ Partial Class dlgWindPollutionRose
         'lblPollutant
         '
         Me.lblPollutant.AutoSize = True
-        Me.lblPollutant.Location = New System.Drawing.Point(259, 263)
+        Me.lblPollutant.Location = New System.Drawing.Point(259, 170)
         Me.lblPollutant.Name = "lblPollutant"
         Me.lblPollutant.Size = New System.Drawing.Size(51, 13)
         Me.lblPollutant.TabIndex = 61
@@ -220,7 +220,7 @@ Partial Class dlgWindPollutionRose
         'ucrReceiverPollutant
         '
         Me.ucrReceiverPollutant.frmParent = Me
-        Me.ucrReceiverPollutant.Location = New System.Drawing.Point(259, 280)
+        Me.ucrReceiverPollutant.Location = New System.Drawing.Point(259, 187)
         Me.ucrReceiverPollutant.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPollutant.Name = "ucrReceiverPollutant"
         Me.ucrReceiverPollutant.Selector = Nothing
@@ -256,7 +256,7 @@ Partial Class dlgWindPollutionRose
         'ucrReceiverWindSpeed2
         '
         Me.ucrReceiverWindSpeed2.frmParent = Me
-        Me.ucrReceiverWindSpeed2.Location = New System.Drawing.Point(259, 187)
+        Me.ucrReceiverWindSpeed2.Location = New System.Drawing.Point(259, 232)
         Me.ucrReceiverWindSpeed2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindSpeed2.Name = "ucrReceiverWindSpeed2"
         Me.ucrReceiverWindSpeed2.Selector = Nothing
@@ -268,7 +268,7 @@ Partial Class dlgWindPollutionRose
         'ucrReceiverWindDirection2
         '
         Me.ucrReceiverWindDirection2.frmParent = Me
-        Me.ucrReceiverWindDirection2.Location = New System.Drawing.Point(259, 230)
+        Me.ucrReceiverWindDirection2.Location = New System.Drawing.Point(259, 275)
         Me.ucrReceiverWindDirection2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverWindDirection2.Name = "ucrReceiverWindDirection2"
         Me.ucrReceiverWindDirection2.Selector = Nothing
