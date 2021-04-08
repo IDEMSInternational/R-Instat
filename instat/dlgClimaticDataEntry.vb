@@ -137,7 +137,7 @@ Public Class dlgClimaticDataEntry
         'ucrChkTransform.Checked = False
         'ucrInputTransform.SetName(10)
 
-        lblNbRowsChanged.Visible = False
+        lblNbRowsChanged1.Visible = False
 
         clsGetDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
         clsGetDataEntry.AddParameter("type", Chr(34) & "month" & Chr(34), iPosition:=6)
@@ -310,9 +310,9 @@ Public Class dlgClimaticDataEntry
         'End If
     End Sub
     Public Sub GetNumberRowsChanged(nval As Integer)
-        lblNbRowsChanged.Visible = True
-        lblNbRowsChanged.ForeColor = Color.Red
-        lblNbRowsChanged.Text = "Value(s) changed: " & nval
+        lblNbRowsChanged1.Visible = True
+        lblNbRowsChanged1.ForeColor = Color.Red
+        lblNbRowsChanged1.Text = nval & " row(s) entered"
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click

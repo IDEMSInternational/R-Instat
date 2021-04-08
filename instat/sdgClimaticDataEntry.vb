@@ -144,7 +144,7 @@ Public Class sdgClimaticDataEntry
         If lstViewVariablesNames IsNot Nothing Then
             For Each strVar In lstViewVariablesNames
                 ' Note this is the format used in get_data_entry_data R method
-                lstNonEditableColumns.Add(strVar & " (view)")
+                lstNonEditableColumns.Add(strVar)
             Next
         End If
 

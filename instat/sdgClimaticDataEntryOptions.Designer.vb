@@ -25,6 +25,8 @@ Partial Class sdgClimaticDataEntryOptions
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgClimaticDataEntryOptions))
         Me.grpRestrictEntry = New System.Windows.Forms.GroupBox()
+        Me.ucrChkAllowTrace = New instat.ucrCheck()
+        Me.ucrChkNoDecimal = New instat.ucrCheck()
         Me.ttucrChkDefaultValue = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrChkExtraRows = New instat.ucrCheck()
         Me.ucrNudAfter = New instat.ucrNud()
@@ -32,8 +34,6 @@ Partial Class sdgClimaticDataEntryOptions
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
         Me.ucrInputDefaultValue = New instat.ucrInputTextBox()
         Me.ucrInputTransform = New instat.ucrInputComboBox()
-        Me.ucrChkAllowTrace = New instat.ucrCheck()
-        Me.ucrChkNoDecimal = New instat.ucrCheck()
         Me.ucrChkDefaultValue = New instat.ucrCheck()
         Me.ucrChkTransform = New instat.ucrCheck()
         Me.lblBefore = New System.Windows.Forms.Label()
@@ -48,6 +48,18 @@ Partial Class sdgClimaticDataEntryOptions
         resources.ApplyResources(Me.grpRestrictEntry, "grpRestrictEntry")
         Me.grpRestrictEntry.Name = "grpRestrictEntry"
         Me.grpRestrictEntry.TabStop = False
+        '
+        'ucrChkAllowTrace
+        '
+        Me.ucrChkAllowTrace.Checked = False
+        resources.ApplyResources(Me.ucrChkAllowTrace, "ucrChkAllowTrace")
+        Me.ucrChkAllowTrace.Name = "ucrChkAllowTrace"
+        '
+        'ucrChkNoDecimal
+        '
+        Me.ucrChkNoDecimal.Checked = False
+        resources.ApplyResources(Me.ucrChkNoDecimal, "ucrChkNoDecimal")
+        Me.ucrChkNoDecimal.Name = "ucrChkNoDecimal"
         '
         'ttucrChkDefaultValue
         '
@@ -101,18 +113,6 @@ Partial Class sdgClimaticDataEntryOptions
         Me.ucrInputTransform.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputTransform, "ucrInputTransform")
         Me.ucrInputTransform.Name = "ucrInputTransform"
-        '
-        'ucrChkAllowTrace
-        '
-        Me.ucrChkAllowTrace.Checked = False
-        resources.ApplyResources(Me.ucrChkAllowTrace, "ucrChkAllowTrace")
-        Me.ucrChkAllowTrace.Name = "ucrChkAllowTrace"
-        '
-        'ucrChkNoDecimal
-        '
-        Me.ucrChkNoDecimal.Checked = False
-        resources.ApplyResources(Me.ucrChkNoDecimal, "ucrChkNoDecimal")
-        Me.ucrChkNoDecimal.Name = "ucrChkNoDecimal"
         '
         'ucrChkDefaultValue
         '
