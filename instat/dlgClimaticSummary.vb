@@ -351,7 +351,7 @@ Public Class dlgClimaticSummary
     Private Sub ucrPnlAnnualWithin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlAnnualWithin.ControlValueChanged
         WithinYearLabelReceiverLocation()
         SetFactors()
-        If (rdoWithinYear.Checked AndAlso (ucrSelectorVariable.CurrentReceiver Is ucrReceiverYear)) OrElse (rdoAnnual.Checked AndAlso (ucrSelectorVariable.CurrentReceiver Is ucrReceiverWithinYear)) Then
+        If (rdoWithinYear.Checked AndAlso (ucrSelectorVariable.CurrentReceiver Is ucrReceiverYear)) OrElse (rdoAnnual.Checked AndAlso (ucrSelectorVariable.CurrentReceiver Is ucrReceiverWithinYear)) OrElse ((rdoStation.Checked OrElse rdoDaily.Checked) AndAlso ((ucrSelectorVariable.CurrentReceiver Is ucrReceiverWithinYear) OrElse (ucrSelectorVariable.CurrentReceiver Is ucrReceiverYear))) Then
             ucrReceiverElements.SetMeAsReceiver()
         End If
     End Sub
