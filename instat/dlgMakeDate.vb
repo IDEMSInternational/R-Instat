@@ -147,7 +147,7 @@ Public Class dlgMakeDate
         ucrPnlDate.AddFunctionNamesCondition(rdoThreeColumns, frmMain.clsRLink.strInstatDataObject & "$make_date_yearmonthday")
 
         'ucrSave Date Column
-        ucrSaveDate.SetPrefix("Date")
+        ucrSaveDate.SetPrefix("date")
         ucrSaveDate.SetSaveTypeAsColumn()
         ucrSaveDate.SetDataFrameSelector(ucrSelectorMakeDate.ucrAvailableDataFrames)
         ucrSaveDate.SetLabelText("Save Date:")
