@@ -3842,7 +3842,7 @@ DataSheet$set("public", "get_data_entry_data", function(station, date, elements,
   curr_data <- self$get_columns_from_data(cols)
   col_names <- c(date, elements)
   if (!missing(station)) col_names <- c(station, col_names)
-  if (!missing(view_variables)) col_names <- c(col_names, view_variables)
+  if (!missing(view_variables)) col_names <- c(col_names, paste(view_variables, "(view)"))
   names(curr_data) <- col_names
   
   if (!missing(station)) curr_data <- curr_data[curr_data[[station]] == station_name, ]
@@ -3857,7 +3857,7 @@ DataSheet$set("public", "get_data_entry_data", function(station, date, elements,
   if (nrow(curr_data) == 0) stop("No data in range.")
   # Convert to character to they display correctly in VB grid.
   curr_data[[date]] <- as.character(curr_data[[date]])
-  if (!missing(view_variables) && date %in% view_variables) curr_data[[date]] <- as.character(curr_data[[date]])
+  if (!missing(view_variables) && date %in% view_variables) curr_data[[paste(date, "(view)")]] <- as.character(curr_data[[paste(date, "(view)")]])
   if (!missing(station)) curr_data[[station]] <- as.character(curr_data[[station]])
   curr_data
 })
