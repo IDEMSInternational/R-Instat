@@ -19,6 +19,9 @@ Imports instat.Translations
 Public Class dlgFindNonnumericValues
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bUseSelectedColumn As Boolean = False
+    Private strSelectedColumn As String = ""
+    Private strSelectedDataFrame As String = ""
     Private clsIsNaFunction, clsIsNaNumericFunction, clsAsNumericFunction, clsSummaryFunction As New RFunction
     Private clsNonNumericCalcFunc, clsNonNumericFilterFunc, clsRunCalcFunction, clslSubCalcListFunc, clsGetColumnsFunction As New RFunction
     Private clsCurrRunCalc As RFunction
@@ -37,6 +40,9 @@ Public Class dlgFindNonnumericValues
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
+        If bUseSelectedColumn Then
+            SetSelectedColumn()
+        End If
     End Sub
 
     Private Sub InitialiseDialog()
@@ -140,6 +146,18 @@ Public Class dlgFindNonnumericValues
         ucrChkShowSummary.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrChkFilterNonumerics.SetRCode(clsCurrRunCalc, bReset)
         ucrSelectorShowNonNumericValues.SetRCode(clsGetColumnsFunction, bReset)
+    End Sub
+
+    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
+        strSelectedColumn = strColumn
+        strSelectedDataFrame = strDataFrame
+        bUseSelectedColumn = True
+    End Sub
+
+    Private Sub SetSelectedColumn()
+        ucrSelectorShowNonNumericValues.SetDataframe(strSelectedDataFrame)
+        ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
+        bUseSelectedColumn = False
     End Sub
 
     Private Sub TestOKEnabled()
