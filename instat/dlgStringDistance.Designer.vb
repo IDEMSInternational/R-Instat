@@ -106,6 +106,7 @@ Partial Class dlgStringDistance
         '
         'ucrSelectorStringDistance
         '
+        Me.ucrSelectorStringDistance.bDropUnusedFilterLevels = False
         Me.ucrSelectorStringDistance.bShowHiddenColumns = False
         Me.ucrSelectorStringDistance.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorStringDistance, "ucrSelectorStringDistance")
@@ -114,6 +115,7 @@ Partial Class dlgStringDistance
         'ucrInputComboBoxMethod
         '
         Me.ucrInputComboBoxMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboBoxMethod.GetSetSelectedIndex = -1
         Me.ucrInputComboBoxMethod.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboBoxMethod, "ucrInputComboBoxMethod")
         Me.ucrInputComboBoxMethod.Name = "ucrInputComboBoxMethod"
