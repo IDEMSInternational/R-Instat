@@ -50,6 +50,8 @@ Partial Class dlgAddComment
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrInputRow = New instat.ucrInputTextBox()
+        Me.rdoDataFrame = New System.Windows.Forms.RadioButton()
+        Me.rdoColumn = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblRow
@@ -130,10 +132,32 @@ Partial Class dlgAddComment
         resources.ApplyResources(Me.ucrInputRow, "ucrInputRow")
         Me.ucrInputRow.Name = "ucrInputRow"
         '
+        'rdoDataFrame
+        '
+        resources.ApplyResources(Me.rdoDataFrame, "rdoDataFrame")
+        Me.rdoDataFrame.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDataFrame.FlatAppearance.BorderSize = 2
+        Me.rdoDataFrame.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDataFrame.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoDataFrame.Name = "rdoDataFrame"
+        Me.rdoDataFrame.UseVisualStyleBackColor = True
+        '
+        'rdoColumn
+        '
+        resources.ApplyResources(Me.rdoColumn, "rdoColumn")
+        Me.rdoColumn.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoColumn.FlatAppearance.BorderSize = 2
+        Me.rdoColumn.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoColumn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.rdoColumn.Name = "rdoColumn"
+        Me.rdoColumn.UseVisualStyleBackColor = True
+        '
         'dlgAddComment
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoColumn)
+        Me.Controls.Add(Me.rdoDataFrame)
         Me.Controls.Add(Me.ucrInputRow)
         Me.Controls.Add(Me.ucrSelectorAddComment)
         Me.Controls.Add(Me.rdoCell)
@@ -165,4 +189,6 @@ Partial Class dlgAddComment
     Friend WithEvents ucrPnlCellOrRow As UcrPanel
     Friend WithEvents ucrInputRow As ucrInputTextBox
     Friend WithEvents ucrSelectorAddComment As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents rdoColumn As RadioButton
+    Friend WithEvents rdoDataFrame As RadioButton
 End Class
