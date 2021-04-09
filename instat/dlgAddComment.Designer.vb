@@ -44,7 +44,7 @@ Partial Class dlgAddComment
         Me.lblComment = New System.Windows.Forms.Label()
         Me.rdoCell = New System.Windows.Forms.RadioButton()
         Me.rdoRow = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlCellOrRow = New instat.UcrPanel()
+        Me.ucrPnlCellRowColumnDataFrame = New instat.UcrPanel()
         Me.ucrInputComment = New instat.ucrInputTextBox()
         Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
@@ -89,10 +89,10 @@ Partial Class dlgAddComment
         Me.rdoRow.Name = "rdoRow"
         Me.rdoRow.UseVisualStyleBackColor = True
         '
-        'ucrPnlCellOrRow
+        'ucrPnlCellRowColumnDataFrame
         '
-        resources.ApplyResources(Me.ucrPnlCellOrRow, "ucrPnlCellOrRow")
-        Me.ucrPnlCellOrRow.Name = "ucrPnlCellOrRow"
+        resources.ApplyResources(Me.ucrPnlCellRowColumnDataFrame, "ucrPnlCellRowColumnDataFrame")
+        Me.ucrPnlCellRowColumnDataFrame.Name = "ucrPnlCellRowColumnDataFrame"
         '
         'ucrInputComment
         '
@@ -162,7 +162,7 @@ Partial Class dlgAddComment
         Me.Controls.Add(Me.ucrSelectorAddComment)
         Me.Controls.Add(Me.rdoCell)
         Me.Controls.Add(Me.rdoRow)
-        Me.Controls.Add(Me.ucrPnlCellOrRow)
+        Me.Controls.Add(Me.ucrPnlCellRowColumnDataFrame)
         Me.Controls.Add(Me.ucrInputComment)
         Me.Controls.Add(Me.lblComment)
         Me.Controls.Add(Me.lblColumn)
@@ -186,7 +186,7 @@ Partial Class dlgAddComment
     Friend WithEvents ucrInputComment As ucrInputTextBox
     Friend WithEvents rdoCell As RadioButton
     Friend WithEvents rdoRow As RadioButton
-    Friend WithEvents ucrPnlCellOrRow As UcrPanel
+    Friend WithEvents ucrPnlCellRowColumnDataFrame As UcrPanel
     Friend WithEvents ucrInputRow As ucrInputTextBox
     Friend WithEvents ucrSelectorAddComment As ucrSelectorByDataFrameAddRemove
     Friend WithEvents rdoColumn As RadioButton
