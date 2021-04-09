@@ -969,7 +969,8 @@ Public Class ucrDataView
             strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
             mnuLebelsLevel.Enabled = (iSelectedCols = 1 AndAlso strType.Contains("factor"))
         Else
-            'TODO: Add developer error?
+            MsgBox("Developer error: SelectedColumnsAsArray() expected to return an array with at least one element.")
+            mnuLebelsLevel.Enabled =  False
         End If
         mnuRemoveCurrentFilters.Enabled = Not String.Equals(strFilterName, strNoFilter)
     End Sub
