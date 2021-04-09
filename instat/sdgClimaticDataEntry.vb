@@ -40,14 +40,25 @@ Public Class sdgClimaticDataEntry
     Private lstElementsNames As List(Of String)
     Private lstViewVariablesNames As List(Of String)
     Private strStationColumnName As String
-    Private strDefaultValue As String
+    Private strDefaultValue As Double
     Private bNoDecimal As Boolean
     Private bAllowTrace As Boolean
     Private bTransform As Boolean
     Private dTranformValue As Double
     Private bLastChangeValid As Boolean
     Private strLastChangedCellAddress As String
+    Private bFirstLoad As Boolean = True
 
+    Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseControls()
+            bFirstLoad = False
+        End If
+        autoTranslate(Me)
+    End Sub
+    Private Sub InitialiseControls()
+        ucrChkAddFlagFieldData.SetText("Add flag field data")
+    End Sub
     ''' <summary>
     ''' returns the data changed for the passed column as an R vector string
     ''' </summary>
@@ -105,7 +116,7 @@ Public Class sdgClimaticDataEntry
         grdCurrentWorkSheet = Nothing
     End Sub
 
-    Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction, clsEditDataFrame As RFunction, strDateName As String, lstElementsNames As List(Of String), Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "", Optional bDefaultValue As Boolean = False, Optional strDefaultValue As String = "", Optional bNoDecimal As Boolean = False, Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False, Optional dTranformValue As Double = 0)
+    Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction, clsEditDataFrame As RFunction, strDateName As String, lstElementsNames As List(Of String), Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "", Optional bDefaultValue As Boolean = False, Optional strDefaultValue As Double = 0, Optional bNoDecimal As Boolean = False, Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False, Optional dTranformValue As Double = 0)
         Dim lstColumnHeaders As String()
 
         grdDataEntry.Worksheets.Clear()
@@ -274,6 +285,4 @@ Public Class sdgClimaticDataEntry
             grdCurrentWorkSheet.FocusPos = New CellPosition(strLastChangedCellAddress)
         End If
     End Sub
-
-
 End Class

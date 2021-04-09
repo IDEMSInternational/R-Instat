@@ -88,9 +88,9 @@ Public Class sdgClimaticDataEntryOptions
 
 
     'todo. why is this a string?
-    Public ReadOnly Property DefaultValue As String
+    Public ReadOnly Property DefaultValue As Double
         Get
-            Return ucrInputDefaultValue.GetValue
+            Return If(String.IsNullOrEmpty(ucrInputDefaultValue.GetValue), 0, ucrInputDefaultValue.GetValue)
         End Get
     End Property
 

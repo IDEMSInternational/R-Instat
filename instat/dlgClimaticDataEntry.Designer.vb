@@ -50,6 +50,7 @@ Partial Class dlgClimaticDataEntry
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.lblNbRowsChanged = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.lblNbRowsChanged1 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'rdoAdd
@@ -337,11 +338,21 @@ Partial Class dlgClimaticDataEntry
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
+        'lblNbRowsChanged1
+        '
+        Me.lblNbRowsChanged1.AutoSize = True
+        Me.lblNbRowsChanged1.Location = New System.Drawing.Point(254, 47)
+        Me.lblNbRowsChanged1.Name = "lblNbRowsChanged1"
+        Me.lblNbRowsChanged1.Size = New System.Drawing.Size(39, 13)
+        Me.lblNbRowsChanged1.TabIndex = 90
+        Me.lblNbRowsChanged1.Text = "Label3"
+        '
         'dlgClimaticDataEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(411, 520)
+        Me.Controls.Add(Me.lblNbRowsChanged1)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblNbRowsChanged)
         Me.Controls.Add(Me.ucrEndDate)
@@ -402,4 +413,5 @@ Partial Class dlgClimaticDataEntry
     Friend WithEvents ttucrChkDefaultValue As ToolTip
     Friend WithEvents lblNbRowsChanged As Label
     Friend WithEvents cmdOptions As Button
+    Friend WithEvents lblNbRowsChanged1 As Label
 End Class
