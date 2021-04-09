@@ -128,7 +128,7 @@ Public Class dlgWindPollutionRose
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverPollutant.IsEmpty OrElse ucrReceiverWindDirection.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse (ucrReceiverWindDirection2.IsEmpty AndAlso Not ucrReceiverWindSpeed2.IsEmpty) OrElse (Not ucrReceiverWindDirection2.IsEmpty AndAlso ucrReceiverWindSpeed2.IsEmpty) OrElse Not ucrSaveGraph.IsComplete Then
+        If ucrReceiverWindDirection.IsEmpty OrElse ucrReceiverWindSpeed.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse (ucrReceiverWindDirection2.IsEmpty AndAlso Not ucrReceiverWindSpeed2.IsEmpty) OrElse (Not ucrReceiverWindDirection2.IsEmpty AndAlso ucrReceiverWindSpeed2.IsEmpty) OrElse Not ucrSaveGraph.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)

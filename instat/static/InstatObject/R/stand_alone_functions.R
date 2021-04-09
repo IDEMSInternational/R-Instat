@@ -2316,7 +2316,7 @@ other_rose_plots <- function(data, type1_col_name, type2_col_name, date_col_name
 }
 
 #This function creates a wrapper around functions from openair package
-pollution_rose <- function(mydata, date_name, include_pollutant=TRUE, type1_col_name, type2_col_name, ...){
+pollution_rose <- function(mydata, date_name, pollutant, type1_col_name, type2_col_name, ...){
   type = "default"
   if (missing(type1_col_name) == FALSE && missing(type2_col_name) == FALSE) {
     type <- c(type1_col_name,type2_col_name)
@@ -2330,11 +2330,10 @@ pollution_rose <- function(mydata, date_name, include_pollutant=TRUE, type1_col_
   if (!("date" %in% colnames(mydata))){ 
     mydata <- dplyr::rename(mydata, date = !!date_name)
   }
-  if (include_pollutant==FALSE){
+  if (missing(pollutant)){
     openair::windRose(mydata = mydata, type = type, ...)
-  }
-  if (include_pollutant==TRUE){
-    openair::pollutionRose(mydata = mydata, type = type, ...)
+  } else {
+    openair::pollutionRose(mydata = mydata, type = type, pollutant, ...)
   }
 }
 
