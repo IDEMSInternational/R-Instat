@@ -48,6 +48,8 @@ Public Class sdgClimaticDataEntry
     Private bLastChangeValid As Boolean
     Private strLastChangedCellAddress As String
     Private bFirstLoad As Boolean = True
+    'used to check if current options allow the grid to be editable
+    Private bAllowEdits As Boolean = True
 
     Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -137,6 +139,9 @@ Public Class sdgClimaticDataEntry
         Me.bTransform = bTransform
         Me.dTranformValue = dTranformValue
 
+        bAllowEdits = True
+        cmdTransform.Enabled = bTransform
+
         If Not strStationColumnName = "" Then
             lstNonEditableColumns.Add(strStationColumnName)
         End If
@@ -218,6 +223,13 @@ Public Class sdgClimaticDataEntry
         Dim bValidValue As Boolean = True
         Dim newValue As String = e.NewData
 
+        If Not bAllowEdits Then
+            'todo. set a better feedback message 
+            MsgBox("Edits not allowed", MsgBoxStyle.Information, "No edits allowed.")
+            e.EndReason = EndEditReason.Cancel
+            Exit Sub
+        End If
+
         If Not IsNumeric(newValue) AndAlso Not newValue = "NA" Then
             If Not (bAllowTrace AndAlso newValue.ToUpper = "T") Then
                 MsgBox("Value is not numeric or NA.", MsgBoxStyle.Information, "Not numeric.")
@@ -259,13 +271,8 @@ Public Class sdgClimaticDataEntry
         End If
     End Sub
 
-    Private Sub sdgClimaticDataEntry_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
-
-    End Sub
-
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
         Dim i As Integer
-        dlgClimaticDataEntry.GetNumberRowsChanged(NRowsChanged())
         If NRowsChanged() > 0 Then
             clsEditDataFrame.AddParameter(strDateName, "as.Date(" & GetRowsChangedAsRVectorString(strDateName, Chr(34)) & ")", iPosition:=1)
             i = 2
@@ -285,4 +292,17 @@ Public Class sdgClimaticDataEntry
             grdCurrentWorkSheet.FocusPos = New CellPosition(strLastChangedCellAddress)
         End If
     End Sub
+
+    Private Sub cmdTransform_Click(sender As Object, e As EventArgs) Handles cmdTransform.Click
+        'todo. check how translation will affect this, possibly use 2 buttons instead of one ?
+        If cmdTransform.Text = "Transform" Then
+            cmdTransform.Text = "UnTransform"
+            bAllowEdits = False
+        Else
+            cmdTransform.Text = "Transform"
+            bAllowEdits = True
+        End If
+    End Sub
+
+
 End Class

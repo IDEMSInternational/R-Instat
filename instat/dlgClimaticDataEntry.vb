@@ -246,6 +246,7 @@ Public Class dlgClimaticDataEntry
                                            dTranformValue:=sdgClimaticDataEntryOptions.TransformValue)
             End If
             sdgClimaticDataEntry.ShowDialog()
+            SetNumberRowsChangedText(sdgClimaticDataEntry.NRowsChanged)
             bSubdialogFirstLoad = False
             bChange = False
             TestOkEnabled()
@@ -301,15 +302,7 @@ Public Class dlgClimaticDataEntry
         bSubdialogFirstLoad = True
     End Sub
 
-    Private Sub ucrChkNoDecimal_ControlValueChanged(ucrChangedControl As ucrCore)
-        'bChange = True
-        'If ucrChkDefaultValue.Checked OrElse ucrChkNoDecimal.Checked OrElse ucrChkAllowTrace.Checked OrElse ucrChkTransform.Checked Then
-        '    bState = True
-        'Else
-        '    bState = False
-        'End If
-    End Sub
-    Public Sub GetNumberRowsChanged(nval As Integer)
+    Private Sub SetNumberRowsChangedText(nval As Integer)
         lblNbRowsChanged1.Visible = True
         lblNbRowsChanged1.ForeColor = Color.Red
         lblNbRowsChanged1.Text = nval & " row(s) entered"
