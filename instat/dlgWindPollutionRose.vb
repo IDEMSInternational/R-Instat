@@ -101,6 +101,10 @@ Public Class dlgWindPollutionRose
         ucrReceiverFacetTwo.Selector = ucrSelectorWindPollutionRose
         ucrReceiverFacetTwo.SetParameterIsString()
 
+        ucrReceiverWindDirection2.SetLinkedDisplayControl(lblWindDirection2)
+        ucrReceiverWindSpeed2.SetLinkedDisplayControl(lblWindSpeed2)
+        ucrChkCompareTwoSets.AddToLinkedControls({ucrReceiverWindDirection2, ucrReceiverWindSpeed2}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
         ucrSaveGraph.SetPrefix("wind_pollution_rose")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetSaveTypeAsGraph()
@@ -131,7 +135,7 @@ Public Class dlgWindPollutionRose
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrReceiverWindDirection.IsEmpty OrElse ucrReceiverWindSpeed.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse (ucrReceiverWindDirection2.IsEmpty AndAlso Not ucrReceiverWindSpeed2.IsEmpty) OrElse (Not ucrReceiverWindDirection2.IsEmpty AndAlso ucrReceiverWindSpeed2.IsEmpty) OrElse Not ucrSaveGraph.IsComplete Then
+        If ucrReceiverWindDirection.IsEmpty OrElse ucrReceiverWindSpeed.IsEmpty OrElse ucrReceiverDate.IsEmpty OrElse (ucrChkCompareTwoSets.Checked AndAlso (ucrReceiverWindDirection2.IsEmpty OrElse ucrReceiverWindSpeed2.IsEmpty)) OrElse Not ucrSaveGraph.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -144,7 +148,7 @@ Public Class dlgWindPollutionRose
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverWindDirection_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindDirection.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverWindDirection2.ControlContentsChanged, ucrReceiverWindSpeed2.ControlContentsChanged, ucrReceiverPollutant.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
+    Private Sub ucrReceiverWindDirection_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWindDirection.ControlContentsChanged, ucrReceiverWindSpeed.ControlContentsChanged, ucrReceiverWindDirection2.ControlContentsChanged, ucrReceiverWindSpeed2.ControlContentsChanged, ucrReceiverPollutant.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrChkCompareTwoSets.ControlValueChanged
         TestOkEnabled()
     End Sub
 End Class
