@@ -974,4 +974,14 @@ Public Class ucrDataView
         End If
         mnuRemoveCurrentFilters.Enabled = Not String.Equals(strFilterName, strNoFilter)
     End Sub
+
+    Private Sub mnuColumnAddComment_Click(sender As Object, e As EventArgs) Handles mnuColumnAddComment.Click
+        dlgAddComment.SetPosition(strDataFrame:=grdCurrSheet.Name, strColumn:=SelectedColumnsAsArray()(0))
+        dlgAddComment.ShowDialog()
+    End Sub
+
+    Private Sub mnuBottomAddComment_Click(sender As Object, e As EventArgs) Handles mnuBottomAddComment.Click
+        dlgAddComment.SetPosition(strDataFrame:=grdCurrSheet.Name)
+        dlgAddComment.ShowDialog()
+    End Sub
 End Class
