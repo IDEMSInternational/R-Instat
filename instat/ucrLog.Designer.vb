@@ -53,6 +53,7 @@ Partial Class ucrLog
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.lblHeaderLog = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.mnuPopulateDialogue = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuContextLogFile.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
         Me.SuspendLayout()
@@ -74,9 +75,9 @@ Partial Class ucrLog
         'mnuContextLogFile
         '
         Me.mnuContextLogFile.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy, Me.ToolStripSeparator3, Me.mnuRunCurrentLine, Me.mnuRunSelectedText, Me.mnuRunAll, Me.ToolStripSeparator2, Me.mnuSaveLogFile, Me.mnuOpenLogFile, Me.ToolStripSeparator1, Me.mnuHelp})
+        Me.mnuContextLogFile.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCopy, Me.ToolStripSeparator3, Me.mnuRunCurrentLine, Me.mnuRunSelectedText, Me.mnuRunAll, Me.ToolStripSeparator2, Me.mnuSaveLogFile, Me.mnuOpenLogFile, Me.ToolStripSeparator1, Me.mnuPopulateDialogue, Me.mnuHelp})
         Me.mnuContextLogFile.Name = "mnuContextLogFile"
-        Me.mnuContextLogFile.Size = New System.Drawing.Size(230, 176)
+        Me.mnuContextLogFile.Size = New System.Drawing.Size(230, 220)
         '
         'mnuCopy
         '
@@ -168,6 +169,12 @@ Partial Class ucrLog
         Me.tlpTableContainer.Size = New System.Drawing.Size(531, 415)
         Me.tlpTableContainer.TabIndex = 9
         '
+        'mnuPopulateDialogue
+        '
+        Me.mnuPopulateDialogue.Name = "mnuPopulateDialogue"
+        Me.mnuPopulateDialogue.Size = New System.Drawing.Size(229, 22)
+        Me.mnuPopulateDialogue.Text = "Populate Dialogue"
+        '
         'ucrLog
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -196,4 +203,5 @@ Partial Class ucrLog
     Friend WithEvents mnuRunAll As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+    Friend WithEvents mnuPopulateDialogue As ToolStripMenuItem
 End Class

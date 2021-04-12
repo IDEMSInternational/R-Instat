@@ -127,4 +127,9 @@ Public Class ucrLog
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "541")
     End Sub
 
+    Private Sub mnuPopulateDialogue_Click(sender As Object, e As EventArgs) Handles mnuPopulateDialogue.Click
+        If Not String.IsNullOrEmpty(txtLog.SelectedText) Then
+            frmMain.clsRLink.OpenDialogFromScript(strNewScript:=txtLog.SelectedText)
+        End If
+    End Sub
 End Class
