@@ -332,6 +332,12 @@
     <Compile Include="dlgSeasonalPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSetupForDataEntry.Designer.vb">
+      <DependentUpon>dlgSetupForDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSetupForDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTaylorDiagram.Designer.vb">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
     </Compile>
@@ -2781,6 +2787,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSetupForDataEntry.resx">
+      <DependentUpon>dlgSetupForDataEntry.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgTaylorDiagram.resx">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
