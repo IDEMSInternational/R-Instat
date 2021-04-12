@@ -148,7 +148,7 @@ Public Class dlgSplitText
                 MsgBox("Developer error:The Script must be an RFunction")
             End If
         End If
-        lstScriptsRCodeStructure = Nothing
+        lstRCodeStructure = Nothing
 
         clsTextComponentsFixed.SetAssignTo(strTemp:="split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="split", bAssignToIsPrefix:=True)
         clsTextComponentsMaximum.SetAssignTo("split", strTempDataframe:=ucrSelectorSplitTextColumn.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:="split", bAssignToIsPrefix:=True)
