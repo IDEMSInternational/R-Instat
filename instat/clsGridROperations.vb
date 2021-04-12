@@ -75,6 +75,7 @@ Public Class GridROperations
                     RunScript(clsConvertToNumeric.ToScript(), strComment:=strComment)
                     ' If there are a mixture of numeric and non-numeric values give the user the choice.
                 ElseIf iNonNumeric > 0 Then
+                    frmConvertToNumeric.SetDataFrameName(strDataFrame)
                     frmConvertToNumeric.SetColumnName(strCol)
                     frmConvertToNumeric.SetNonNumeric(iNonNumeric)
                     frmConvertToNumeric.ShowDialog()
