@@ -20,6 +20,7 @@ Public Class dlgLocatingPointsInShapeFile
     Private bReset As Boolean = True
     Private clsStAsSfFunction As New RFunction
     Private clsStIntersectsFunction As New RFunction
+    Private clsStCombineFunction As New RFunction
     Private clsConcFunction As New RFunction
     Private clsSubsetOperator As New ROperator
 
@@ -52,11 +53,15 @@ Public Class dlgLocatingPointsInShapeFile
         ucrReceiverLatitude.SetParameterIsString()
         ucrReceiverLatitude.SetDataType("numeric")
 
-        ucrReceiverGeometry.SetParameter(New RParameter("y", 1))
+        ucrReceiverGeometry.SetParameter(New RParameter("x", 1))
         ucrReceiverGeometry.Selector = ucrSelectorShapeFile
         ucrReceiverGeometry.SetParameterIsRFunction()
         ucrReceiverGeometry.SetDataType("numeric")
 
+        ucrChkOmitMissing.SetParameter(New RParameter("na.fail", 3))
+        ucrChkOmitMissing.SetText("Omit Missing Values")
+        ucrChkOmitMissing.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
+        ucrChkOmitMissing.SetRDefault("TRUE")
 
         ucrSaveNewColumnName.SetPrefix("location")
         ucrSaveNewColumnName.SetSaveTypeAsColumn()
@@ -68,6 +73,7 @@ Public Class dlgLocatingPointsInShapeFile
     Private Sub SetDefaults()
         clsStAsSfFunction = New RFunction
         clsStIntersectsFunction = New RFunction
+        clsStCombineFunction = New RFunction
         clsConcFunction = New RFunction
         clsSubsetOperator = New ROperator
 
@@ -77,20 +83,24 @@ Public Class dlgLocatingPointsInShapeFile
         ucrReceiverLongitude.SetMeAsReceiver()
         ucrReceiverGeometry.SetMeAsReceiver()
 
-
         clsStAsSfFunction.SetPackageName("sf")
         clsStAsSfFunction.SetRCommand("st_as_sf")
         clsStAsSfFunction.AddParameter("coords", clsRFunctionParameter:=clsConcFunction, iPosition:=1)
+        clsStAsSfFunction.AddParameter("na.fail", "FALSE", iPosition:=3)
         clsStAsSfFunction.AddParameter("crs", "4326", iPosition:=2)
         clsStAsSfFunction.SetAssignTo("points")
 
         clsStIntersectsFunction.SetPackageName("sf")
         clsStIntersectsFunction.SetRCommand("st_intersects")
         clsStIntersectsFunction.AddParameter("x", clsRFunctionParameter:=clsStAsSfFunction, iPosition:=0)
+        clsStIntersectsFunction.AddParameter("y", clsRFunctionParameter:=clsStCombineFunction, iPosition:=1)
         clsStIntersectsFunction.AddParameter("sparse", "FALSE", iPosition:=2)
         clsStIntersectsFunction.SetAssignTo("logical_matrix")
 
         clsConcFunction.SetRCommand("c")
+
+        clsStCombineFunction.SetPackageName("sf")
+        clsStCombineFunction.SetRCommand("st_combine")
 
         clsSubsetOperator.SetOperation("[")
         clsSubsetOperator.AddParameter("left", clsRFunctionParameter:=clsStIntersectsFunction, iPosition:=0)
@@ -103,8 +113,9 @@ Public Class dlgLocatingPointsInShapeFile
         ucrSelectorStationFile.SetRCode(clsStAsSfFunction, bReset)
         ucrReceiverLatitude.SetRCode(clsConcFunction, bReset)
         ucrReceiverLongitude.SetRCode(clsConcFunction, bReset)
-        ucrReceiverGeometry.SetRCode(clsStIntersectsFunction, bReset)
+        ucrReceiverGeometry.SetRCode(clsStCombineFunction, bReset)
         ucrSaveNewColumnName.SetRCode(clsSubsetOperator, bReset)
+        ucrChkOmitMissing.SetRCode(clsStAsSfFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()

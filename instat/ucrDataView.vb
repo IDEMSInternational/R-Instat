@@ -685,10 +685,6 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Sub mnuCellCopyRange_Click(sender As Object, e As EventArgs) Handles mnuCellCopyRange.Click
-        grdData.CurrentWorksheet.Copy()
-    End Sub
-
     Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
         Dim strScript As String = ""
         Dim strTemp As String
@@ -715,12 +711,17 @@ Public Class ucrDataView
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
+    Private Function GetFirstSelectedRow() As String
+        Return grdCurrSheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text
+    End Function
+
     Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
+        dlgAddComment.SetPosition(grdCurrSheet.Name, GetFirstSelectedRow())
         dlgAddComment.ShowDialog()
     End Sub
 
-    Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgAddComment.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+    Private Sub mnuComment_Click(sender As Object, e As EventArgs) Handles mnuComment.Click
+        dlgAddComment.SetPosition(grdCurrSheet.Name, GetFirstSelectedRow(), SelectedColumnsAsArray()(0))
         dlgAddComment.ShowDialog()
     End Sub
 
@@ -793,14 +794,6 @@ Public Class ucrDataView
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
         dlgReorderColumns.ShowDialog()
-    End Sub
-
-    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuCellHelp.Click
-        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
-    End Sub
-
-    Private Sub lblHeader_Click(sender As Object, e As EventArgs) Handles lblHeader.Click
-
     End Sub
 
     Private Sub mnuRenameColumn_Click(sender As Object, e As EventArgs) Handles mnuRenameColumn.Click
@@ -966,6 +959,19 @@ Public Class ucrDataView
     End Sub
 
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
+        Dim iSelectedCols As Integer
+        Dim strColumns() As String
+        Dim strType As String
+
+        strColumns = SelectedColumnsAsArray()
+        If strColumns IsNot Nothing AndAlso strColumns.Count > 0 Then
+            iSelectedCols = grdData.CurrentWorksheet.SelectionRange.Cols
+            strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
+            mnuLebelsLevel.Enabled = (iSelectedCols = 1 AndAlso strType.Contains("factor"))
+        Else
+            MsgBox("Developer error: SelectedColumnsAsArray() expected to return an array with at least one element.")
+            mnuLebelsLevel.Enabled =  False
+        End If
         mnuRemoveCurrentFilters.Enabled = Not String.Equals(strFilterName, strNoFilter)
     End Sub
 End Class

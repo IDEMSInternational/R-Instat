@@ -326,6 +326,7 @@
   </data>
   <data name="ucrSaveRandomSamples.Size" type="System.Drawing.Size, System.Drawing">
     <value>314, 24</value>
+    <value>334, 24</value>
   </data>
   <data name="ucrSaveRandomSamples.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>

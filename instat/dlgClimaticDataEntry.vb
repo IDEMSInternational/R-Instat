@@ -29,6 +29,7 @@ Public Class dlgClimaticDataEntry
     Private ReadOnly strRange As String = "Range"
     Private bChange As Boolean = False
     Private bSubdialogFirstLoad As Boolean = True
+    Private bState As Boolean = False
 
     Private Sub dlgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -103,8 +104,25 @@ Public Class dlgClimaticDataEntry
         ucrEndDate.SetParameter(New RParameter("end_date", iNewPosition:=9))
         ucrEndDate.SetParameterIsRDate()
 
+        'Not yet implemented
+        ucrChkTransform.SetText("Transform:")
+
+        'ucrInputTransform.SetItems({"10", "Inch to mm"})
+        ucrInputTransform.SetItems({"10"}) 'todo. temporary
+        ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=1) 'temporary`
+        ucrInputTransform.Visible = False
+
+        ucrChkDefaultValue.SetText("Default Value")
+        ucrInputDefaultValue.SetText("0")
+        ucrInputDefaultValue.Visible = False
+
+        ucrChkNoDecimal.SetText("No Decimal")
+
+        ucrChkAllowTrace.SetText("Allow t for Trace")
+
         ttCmdCheckData.SetToolTip(cmdCheckData, "Data checking facilities not yet implemented")
         cmdCheckData.Enabled = False
+        ttucrChkDefaultValue.SetToolTip(ucrChkDefaultValue, "The data must be defined as climatic to recognise which variable is precipitation.")
     End Sub
 
     Private Sub SetDefaults()
@@ -114,6 +132,10 @@ Public Class dlgClimaticDataEntry
 
         ucrSelectorClimaticDataEntry.Reset()
         ucrReceiverElements.SetMeAsReceiver()
+        ucrChkDefaultValue.Checked = False
+        ucrChkAllowTrace.Checked = False
+        ucrChkTransform.Checked = False
+        ucrInputTransform.SetName(10)
 
         clsGetDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
         clsGetDataEntry.AddParameter("type", Chr(34) & "month" & Chr(34), iPosition:=6)
@@ -125,6 +147,7 @@ Public Class dlgClimaticDataEntry
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsSaveDataEntry)
         bChange = False
+        bState = False
         bSubdialogFirstLoad = True
     End Sub
 
@@ -141,7 +164,7 @@ Public Class dlgClimaticDataEntry
         ucrStartDate.SetRCode(clsGetDataEntry, bReset)
         ucrEndDate.SetRCode(clsGetDataEntry, bReset)
         If bReset Then
-            ' Default start date to 1 Jan 2021
+            ' Default start date to 1 Jan 2021. todo change to correct way of getting first date of current year
             ucrStartDate.DateValue = New Date("2021", "1", "1")
         End If
         SetDateOptions()
@@ -179,8 +202,15 @@ Public Class dlgClimaticDataEntry
         Dim strStationSelected As String
         Dim dfEditData As DataFrame
         Dim strDataFrameName As String
+        Dim strDefaultValue As String 'todo. why is this a string?
         Dim bSetup As Boolean
         Dim bShow As Boolean
+        Dim bNoDecimals As Boolean
+        Dim bDefaultValue As Boolean
+        Dim bAllowTrace As Boolean
+        Dim bTransform As Boolean
+        Dim dTranformValue As Double
+
 
         strDataFrameName = ucrSelectorClimaticDataEntry.strCurrentDataFrame
         strStationColumnName = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
@@ -189,6 +219,8 @@ Public Class dlgClimaticDataEntry
         lstElementsColumnNames = ucrReceiverElements.GetVariableNamesList(bWithQuotes:=False).ToList
         lstVariablesColumnNames = ucrReceiverViewVariables.GetVariableNamesList(bWithQuotes:=False).ToList
         dfEditData = GetSelectedDataFrame()
+
+        strDefaultValue = ucrInputDefaultValue.GetValue()
 
         If dfEditData Is Nothing Then
             MsgBox("No available data for this selection. Modify dates and try again.")
@@ -207,9 +239,21 @@ Public Class dlgClimaticDataEntry
             bShow = True
             bSetup = False
         End If
+        'todo. do we really need the bState??
+        If bState Then
+            bNoDecimals = ucrChkNoDecimal.Checked
+            bDefaultValue = ucrChkDefaultValue.Checked
+            bAllowTrace = ucrChkAllowTrace.Checked
+            bTransform = ucrChkTransform.Checked
+            dTranformValue = ucrInputTransform.GetValue
+        End If
         If bShow Then
             If bSetup Then
-                sdgClimaticDataEntry.Setup(dfEditData, strDataFrameName, clsSaveDataEntry, clsEditDataFrame, strDateColumnName, lstElementsColumnNames, lstVariablesColumnNames, strStationColumnName)
+                sdgClimaticDataEntry.Setup(dfEditData, strDataFrameName, clsSaveDataEntry, clsEditDataFrame, strDateColumnName,
+                                           lstElementsColumnNames, lstVariablesColumnNames, strStationColumnName,
+                                           bDefaultValue:=bDefaultValue, strDefaultValue:=strDefaultValue,
+                                           bNoDecimal:=bNoDecimals, bAllowTrace:=bAllowTrace,
+                                           bTransform:=bTransform, dTranformValue:=dTranformValue)
             End If
             sdgClimaticDataEntry.ShowDialog()
             bSubdialogFirstLoad = False
@@ -265,5 +309,24 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
+    End Sub
+
+    Private Sub ucrChkNoDecimal_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoDecimal.ControlValueChanged, ucrChkDefaultValue.ControlValueChanged, ucrChkAllowTrace.ControlValueChanged, ucrChkTransform.ControlValueChanged
+        bChange = True
+        If ucrChkDefaultValue.Checked OrElse ucrChkNoDecimal.Checked OrElse ucrChkAllowTrace.Checked OrElse ucrChkTransform.Checked Then
+            bState = True
+        Else
+            bState = False
+        End If
+    End Sub
+
+    Private Sub ucrChkDefaultValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefaultValue.ControlValueChanged
+        'todo. can this "toggling" be done in another way?
+        ucrInputDefaultValue.Visible = ucrChkDefaultValue.Checked
+    End Sub
+
+    Private Sub ucrChkTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTransform.ControlValueChanged
+        'todo. can this "toggling" be done in another way?
+        ucrInputTransform.Visible = ucrChkTransform.Checked
     End Sub
 End Class

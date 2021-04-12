@@ -332,6 +332,12 @@
     <Compile Include="dlgSeasonalPlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgSetupForDataEntry.Designer.vb">
+      <DependentUpon>dlgSetupForDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSetupForDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgTaylorDiagram.Designer.vb">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
     </Compile>
@@ -360,6 +366,12 @@
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgClimaticDataEntry.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntryOptions.Designer.vb">
+      <DependentUpon>sdgClimaticDataEntryOptions.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgClimaticDataEntryOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgClimaticNCMPMetadata.Designer.vb">
@@ -2776,6 +2788,9 @@
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgSetupForDataEntry.resx">
+      <DependentUpon>dlgSetupForDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgTaylorDiagram.resx">
       <DependentUpon>dlgTaylorDiagram.vb</DependentUpon>
     </EmbeddedResource>
@@ -2790,6 +2805,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticDataEntry.resx">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="sdgClimaticDataEntryOptions.resx">
+      <DependentUpon>sdgClimaticDataEntryOptions.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="sdgClimaticNCMPMetadata.resx">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
