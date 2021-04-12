@@ -3503,8 +3503,8 @@ Partial Class frmMain
         '
         'mnuStructuredCircularWindPollutionRose
         '
-        resources.ApplyResources(Me.mnuStructuredCircularWindPollutionRose, "mnuStructuredCircularWindPollutionRose")
         Me.mnuStructuredCircularWindPollutionRose.Name = "mnuStructuredCircularWindPollutionRose"
+        resources.ApplyResources(Me.mnuStructuredCircularWindPollutionRose, "mnuStructuredCircularWindPollutionRose")
         '
         'mnuStructuredCircularOtherRosePlots
         '

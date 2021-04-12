@@ -152,8 +152,12 @@
   <data name="ucrSaveNewColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 305</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrSaveNewColumn.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrSaveNewColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 24</value>
+    <value>334, 24</value>
   </data>
   <data name="ucrSaveNewColumn.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -177,7 +181,7 @@
     <value>248, 87</value>
   </data>
   <data name="ucrFactorGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>288, 221</value>
+    <value>288, 210</value>
   </data>
   <data name="ucrFactorGrid.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -224,7 +228,6 @@
   <data name="ucrSelectorForRecode.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorForRecode.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
