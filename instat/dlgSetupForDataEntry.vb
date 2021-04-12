@@ -121,7 +121,6 @@ Public Class dlgSetupForDataEntry
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNewDFName.SetRCode(clsNewDataFrame, bReset)
         If bReset Then
-            ' Default start date to 1 Jan 2021. todo change to correct way of getting first date of current year
             ucrDateFrom.DateValue = New Date("2021", "1", "1")
         End If
         SetDateOptions()
