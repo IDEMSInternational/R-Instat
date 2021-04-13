@@ -536,4 +536,14 @@ Public Class ucrColumnMetadata
     Private Sub statusColumnMenu_Opening(sender As Object, e As CancelEventArgs) Handles statusColumnMenu.Opening
         hideSheet.Enabled = (grdVariables.Worksheets.Count > 1)
     End Sub
+
+    Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
+        dlgAddComment.SetPosition(strDataFrame:=grdCurrSheet.Name, strColumn:=GetSelectedVariableNamesAsArray()(0))
+        dlgAddComment.ShowDialog()
+    End Sub
+
+    Private Sub mnuBottomAddComment_Click(sender As Object, e As EventArgs) Handles mnuBottomAddComment.Click
+        dlgAddComment.SetPosition(strDataFrame:=grdCurrSheet.Name)
+        dlgAddComment.ShowDialog()
+    End Sub
 End Class
