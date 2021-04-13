@@ -121,16 +121,18 @@ Public Class dlgExtremesClimatic
 
         ucrPnlPlots.AddRadioButton(rdoMrlPlot)
         ucrPnlPlots.AddRadioButton(rdoThreshRangePlot)
-        ucrPnlPlots.AddRadioButton(rdoDeclustering)
         ucrPnlPlots.AddFunctionNamesCondition(rdoMrlPlot, "plot_mrl")
         ucrPnlPlots.AddFunctionNamesCondition(rdoThreshRangePlot, "plot_multiple_threshold")
-        ucrPnlPlots.AddFunctionNamesCondition(rdoDeclustering, "plot_declustered")
 
         ' Min/Max Option
         ucrPnlMaxMin.AddRadioButton(rdoMax)
         ucrPnlMaxMin.AddRadioButton(rdoMin)
         ucrPnlMaxMin.AddFunctionNamesCondition(rdoMax, "max")
         ucrPnlMaxMin.AddFunctionNamesCondition(rdoMin, "min")
+
+        ucrChkDeclustering.SetText("Declustering")
+        ucrChkDeclustering.AddRSyntaxContainsFunctionNamesCondition(True, {"plot_declustered"})
+        ucrChkDeclustering.AddRSyntaxContainsFunctionNamesCondition(False, {"plot_declustered"}, False)
 
         ucrChkFirstDate.SetText("Include First Date of Occurrence")
         ucrChkFirstDate.AddParameterPresentCondition(True, "sub1", True)
@@ -172,6 +174,7 @@ Public Class dlgExtremesClimatic
 
         ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdOperator, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=">=")
         ucrPnlExtremesType.AddToLinkedControls(ucrInputThresholdValue, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="60")
+        ucrPnlExtremesType.AddToLinkedControls(ucrChkDeclustering, {rdoPeaks}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrPnlMaxMin, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls(ucrChkMissingValues, {rdoMinMax}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlExtremesType.AddToLinkedControls({ucrChkFirstDate, ucrChkLastDate}, {rdoMinMax}, bNewLinkedHideIfParameterMissing:=True)
@@ -182,9 +185,9 @@ Public Class dlgExtremesClimatic
         ucrPnlExtremesType.AddToLinkedControls({ucrPnlPlots}, {rdoThreshold}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPlots.AddToLinkedControls({ucrSaveMrlPlot}, {rdoMrlPlot}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPlots.AddToLinkedControls({ucrSaveThresholdPlot}, {rdoThreshRangePlot}, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlPlots.AddToLinkedControls({ucrChkPrintSummary}, {rdoDeclustering}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkRunLength.AddToLinkedControls({ucrNudRunLength}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrChkPrintSummary.AddToLinkedControls({ucrSaveDeclusteredPlot, ucrNudDeclusterColumns}, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkDeclustering.AddToLinkedControls({ucrChkPrintSummary}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlMaxMin.SetLinkedDisplayControl(lblNewColName)
         ucrPnlMaxMin.SetLinkedDisplayControl(lblNewColName)
         ucrChkMissingValues.SetLinkedDisplayControl(grpMinMaxOptions)
@@ -246,11 +249,6 @@ Public Class dlgExtremesClimatic
         ucrChkRunLength.SetText("Run Length")
         ucrChkRunLength.AddParameterPresentCondition(True, "r")
         ucrChkRunLength.AddParameterPresentCondition(False, "r", False)
-
-        ucrInputThreshold.SetParameter(New RParameter("threshold", 3))
-        ucrInputThreshold.SetValidationTypeAsNumeric()
-        ucrInputThreshold.SetLinkedDisplayControl(lblValues)
-        ucrInputThreshold.AddQuotesIfUnrecognised = False
 
         ucrNudRunLength.SetParameter(New RParameter("r", 4))
         ucrNudRunLength.SetMinMax(iNewMin:=1, iNewMax:=Integer.MaxValue)
@@ -502,8 +500,9 @@ Public Class dlgExtremesClimatic
         ucrReceiverStation.AddAdditionalCodeParameterPair(clsThresholdPlotFunction, New RParameter("station_col_name", 2), iAdditionalPairNo:=1)
         ucrReceiverStation.AddAdditionalCodeParameterPair(clsDeclusteringFunction, New RParameter("station_col_name", 2), iAdditionalPairNo:=2)
 
+        ucrInputThresholdValue.AddAdditionalCodeParameterPair(clsDeclusteringFunction, New RParameter("threshold", 3), iAdditionalPairNo:=1)
+
         ucrReceiverDOY.SetRCode(clsDayToOperator, bReset)
-        '        ucrInputThresholdOperator.SetRCode(clsPeaksFilterFunction, bReset)
         ucrInputThresholdValue.SetRCode(clsPeaksFilterOperator, bReset)
         ucrPnlMaxMin.SetRCode(clsMinMaxFuncExp, bReset)
         ucrReceiverElement.SetRCode(clsMinMaxFuncExp, bReset)
@@ -526,12 +525,11 @@ Public Class dlgExtremesClimatic
         ucrNudThresholdColumns.SetRCode(clsThresholdPlotFunction, bReset)
         ucrNudAlpha.SetRCode(clsThresholdPlotFunction, bReset)
         ucrNudThresholds.SetRCode(clsThresholdPlotFunction, bReset)
-        ucrInputThreshold.SetRCode(clsDeclusteringFunction, bReset)
         ucrNudRunLength.SetRCode(clsDeclusteringFunction, bReset)
         ucrChkPrintSummary.SetRCode(clsDeclusteringFunction, bReset)
         ucrNudDeclusterColumns.SetRCode(clsDeclusteringFunction, bReset)
         ucrChkRunLength.SetRCode(clsDeclusteringFunction, bReset)
-
+        ucrChkDeclustering.SetRSyntax(ucrBase.clsRsyntax, bReset)
         ucrSaveThresholdPlot.SetRCode(clsThresholdPlotFunction)
         ucrSaveMrlPlot.SetRCode(clsPlotMrlFunction, bReset)
         'This is done on bReset because we don't want to SetAssignTo when this save control is hidden
@@ -549,7 +547,7 @@ Public Class dlgExtremesClimatic
                 ucrBase.OKEnabled(False)
             End If
         Else
-            If ucrReceiverElement.IsEmpty OrElse (rdoMrlPlot.Checked AndAlso Not ucrSaveMrlPlot.IsComplete OrElse ucrNudColumns.GetText = "") OrElse (rdoThreshRangePlot.Checked AndAlso Not ucrSaveThresholdPlot.IsComplete OrElse ucrNudThresholds.GetText = "" OrElse ucrNudThresholdColumns.GetText = "" OrElse ucrNudAlpha.GetText = "") OrElse (rdoDeclustering.Checked AndAlso (ucrInputThreshold.IsEmpty OrElse Not ucrSaveDeclusteredPlot.IsComplete) OrElse ucrNudDeclusterColumns.GetText = "" OrElse ucrNudRunLength.GetText = "") Then
+            If ucrReceiverElement.IsEmpty OrElse (rdoMrlPlot.Checked AndAlso Not ucrSaveMrlPlot.IsComplete OrElse ucrNudColumns.GetText = "") OrElse (rdoThreshRangePlot.Checked AndAlso Not ucrSaveThresholdPlot.IsComplete OrElse ucrNudThresholds.GetText = "" OrElse ucrNudThresholdColumns.GetText = "" OrElse ucrNudAlpha.GetText = "") OrElse (ucrChkDeclustering.Checked AndAlso (Not ucrSaveDeclusteredPlot.IsComplete) OrElse ucrNudDeclusterColumns.GetText = "" OrElse ucrNudRunLength.GetText = "") Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -799,8 +797,6 @@ Public Class dlgExtremesClimatic
                 clsDummyRfunction = clsPlotMrlFunction
             ElseIf rdoThreshRangePlot.Checked Then
                 clsDummyRfunction = clsThresholdPlotFunction
-            ElseIf rdoDeclustering.Checked Then
-                clsDummyRfunction = clsDeclusteringFunction
             End If
             ucrBase.clsRsyntax.SetBaseRFunction(clsDummyRfunction)
             clsCurrCalc = clsDummyRfunction
@@ -813,13 +809,23 @@ Public Class dlgExtremesClimatic
 
     Private Sub ucrChkPrintSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintSummary.ControlValueChanged
         If ucrChkPrintSummary.Checked Then
-            ucrBase.clsRsyntax.iCallType = 2
+            clsDeclusteringFunction.iCallType = 2
         Else
-            ucrBase.clsRsyntax.iCallType = 3
+            clsDeclusteringFunction.iCallType = 3
         End If
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputSave.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged, ucrPnlPlots.ControlContentsChanged, ucrSaveMrlPlot.ControlContentsChanged, ucrSaveThresholdPlot.ControlContentsChanged, ucrNudColumns.ControlContentsChanged, ucrNudThresholds.ControlContentsChanged, ucrNudThresholdColumns.ControlContentsChanged, ucrNudAlpha.ControlContentsChanged, ucrInputThreshold.ControlContentsChanged, ucrNudDeclusterColumns.ControlContentsChanged, ucrNudRunLength.ControlContentsChanged, ucrSaveDeclusteredPlot.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged, ucrReceiverElement.ControlContentsChanged, ucrReceiverDOY.ControlContentsChanged, ucrReceiverYear.ControlContentsChanged, ucrInputSave.ControlContentsChanged, ucrInputThresholdValue.ControlContentsChanged, ucrPnlPlots.ControlContentsChanged, ucrSaveMrlPlot.ControlContentsChanged, ucrSaveThresholdPlot.ControlContentsChanged, ucrNudColumns.ControlContentsChanged, ucrNudThresholds.ControlContentsChanged, ucrNudThresholdColumns.ControlContentsChanged, ucrNudAlpha.ControlContentsChanged, ucrNudDeclusterColumns.ControlContentsChanged, ucrNudRunLength.ControlContentsChanged, ucrSaveDeclusteredPlot.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrChkDeclustering_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDeclustering.ControlValueChanged
+        If ucrChkDeclustering.Checked Then
+            clsDeclusteringFunction.iCallType = 3
+            clsDeclusteringFunction.bExcludeAssignedFunctionOutput = False
+            ucrBase.clsRsyntax.AddToAfterCodes(clsDeclusteringFunction, iPosition:=1)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsDeclusteringFunction)
+        End If
     End Sub
 End Class

@@ -1014,64 +1014,70 @@
     <value>638, 56</value>
   </metadata>
   <data name="mnuClimaticFileOpensst.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 22</value>
+    <value>282, 22</value>
   </data>
   <data name="mnuClimaticFileOpensst.Text" xml:space="preserve">
     <value>Open SST...</value>
   </data>
   <data name="mnuClimaticFileImportfromIRIDataLibrary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 22</value>
+    <value>282, 22</value>
   </data>
   <data name="mnuClimaticFileImportfromIRIDataLibrary.Text" xml:space="preserve">
     <value>Import from IRI Data Library...</value>
   </data>
+  <data name="mnuClimaticFileImportfromClimateDataStore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
+  </data>
+  <data name="mnuClimaticFileImportfromClimateDataStore.Text" xml:space="preserve">
+    <value>Import from CDS (Climate Data Store)...</value>
+  </data>
   <data name="mnuClimaticFileImportandTidyNetCDF.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 22</value>
+    <value>282, 22</value>
   </data>
   <data name="mnuClimaticFileImportandTidyNetCDF.Text" xml:space="preserve">
     <value>Import and Tidy NetCDF...</value>
   </data>
-  <data name="mnuClimaticFileOpenandTidyShapefile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 22</value>
+  <data name="mnuClimaticFileImportandTidyShapefile.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
   </data>
-  <data name="mnuClimaticFileOpenandTidyShapefile.Text" xml:space="preserve">
-    <value>Open and Tidy Shapefile...</value>
+  <data name="mnuClimaticFileImportandTidyShapefile.Text" xml:space="preserve">
+    <value>Import and Tidy Shapefile...</value>
   </data>
   <data name="ToolStripSeparator20.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 6</value>
+    <value>279, 6</value>
   </data>
-  <data name="mnuClimateFileImportFromClimSoft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 22</value>
+  <data name="mnuClimateFileImportfromClimSoft.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
   </data>
-  <data name="mnuClimateFileImportFromClimSoft.Text" xml:space="preserve">
-    <value>Import From CLIMSOFT...</value>
+  <data name="mnuClimateFileImportfromClimSoft.Text" xml:space="preserve">
+    <value>Import from Climsoft...</value>
   </data>
-  <data name="mnuClimateFileImportFromClimSoftWizard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 22</value>
+  <data name="mnuClimateFileImportfromClimSoftWizard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>282, 22</value>
   </data>
-  <data name="mnuClimateFileImportFromClimSoftWizard.Text" xml:space="preserve">
-    <value>Import From CLIMSOFT Wizard...</value>
+  <data name="mnuClimateFileImportfromClimSoftWizard.Text" xml:space="preserve">
+    <value>Import from Climsoft Wizard...</value>
   </data>
   <data name="mnuClimaticFileImportFromCliData.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="mnuClimaticFileImportFromCliData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 22</value>
+    <value>282, 22</value>
   </data>
   <data name="mnuClimaticFileImportFromCliData.Text" xml:space="preserve">
     <value>Import From CLIDATA...</value>
   </data>
   <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 6</value>
+    <value>279, 6</value>
   </data>
   <data name="mnuClimaticFileExportToCPT.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 22</value>
+    <value>282, 22</value>
   </data>
   <data name="mnuClimaticFileExportToCPT.Text" xml:space="preserve">
     <value>Export to CPT...</value>
   </data>
   <data name="mnuExportToWWRToolStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 22</value>
+    <value>282, 22</value>
   </data>
   <data name="mnuExportToWWRToolStrip.Text" xml:space="preserve">
     <value>Export to World Weather Records...</value>
@@ -1145,10 +1151,19 @@
   <data name="ToolStripSeparator69.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 6</value>
   </data>
-  <data name="mnuClimaticDataEntry.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuSetupForDataEntry.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 22</value>
   </data>
-  <data name="mnuClimaticDataEntry.Text" xml:space="preserve">
+  <data name="mnuSetupForDataEntry.Text" xml:space="preserve">
+    <value>Setup for Data Entry...</value>
+  </data>
+  <data name="mnuSetupForDataEntry.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuTidyandExamineClimaticDataEntry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>215, 22</value>
+  </data>
+  <data name="mnuTidyandExamineClimaticDataEntry.Text" xml:space="preserve">
     <value>Daily Data Entry...</value>
   </data>
   <data name="ToolStripSeparator50.Size" type="System.Drawing.Size, System.Drawing">
@@ -1233,49 +1248,58 @@
     <value>Define Climatic Data...</value>
   </data>
   <data name="mnuClimaticCheckDataInventory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuClimaticCheckDataInventory.Text" xml:space="preserve">
     <value>Inventory...</value>
   </data>
   <data name="mnuClimaticCheckDataDisplayDaily.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuClimaticCheckDataDisplayDaily.Text" xml:space="preserve">
     <value>Display Daily...</value>
   </data>
   <data name="ToolStripSeparator65.Size" type="System.Drawing.Size, System.Drawing">
-    <value>175, 6</value>
+    <value>207, 6</value>
   </data>
   <data name="mnuClimaticCheckDataFillMissingValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuClimaticCheckDataFillMissingValues.Text" xml:space="preserve">
     <value>Fill Missing Values...</value>
   </data>
   <data name="mnuClimaticCheckDataBoxplot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuClimaticCheckDataBoxplot.Text" xml:space="preserve">
     <value>Boxplot...</value>
   </data>
   <data name="mnuClimaticCheckDataQCTemperatures.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuClimaticCheckDataQCTemperatures.Text" xml:space="preserve">
     <value>QC Temperatures...</value>
   </data>
   <data name="mnuClimaticCheckDataQCRainfall.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuClimaticCheckDataQCRainfall.Text" xml:space="preserve">
     <value>QC Rainfall...</value>
   </data>
+  <data name="ToolStripSeparator70.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 6</value>
+  </data>
   <data name="mnuClimaticCheckDataHomogenization.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuClimaticCheckDataHomogenization.Text" xml:space="preserve">
     <value>Homogenization...</value>
+  </data>
+  <data name="mnuClimaticCheckDataCheckStationLocations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 22</value>
+  </data>
+  <data name="mnuClimaticCheckDataCheckStationLocations.Text" xml:space="preserve">
+    <value>Check Station Locations...</value>
   </data>
   <data name="mnuClimaticCheckData.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
@@ -1668,19 +1692,16 @@
     <value>Compare</value>
   </data>
   <data name="mnuClimaticMappingMap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 22</value>
+    <value>210, 22</value>
   </data>
   <data name="mnuClimaticMappingMap.Text" xml:space="preserve">
     <value>Map...</value>
   </data>
-  <data name="mnuClimaticMappingCheckStations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>161, 22</value>
+  <data name="mnuClimaticMappingCheckStationLocations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 22</value>
   </data>
-  <data name="mnuClimaticMappingCheckStations.Text" xml:space="preserve">
-    <value>Check Stations...</value>
-  </data>
-  <data name="mnuClimaticMappingCheckStations.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
+  <data name="mnuClimaticMappingCheckStationLocations.Text" xml:space="preserve">
+    <value>Check Station Locations...</value>
   </data>
   <data name="mnuClimaticMapping.Size" type="System.Drawing.Size, System.Drawing">
     <value>212, 22</value>
@@ -3596,9 +3617,6 @@
   </data>
   <data name="mnuStructuredCircularWindRose.Text" xml:space="preserve">
     <value>Wind Rose...</value>
-  </data>
-  <data name="mnuStructuredCircularWindPollutionRose.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="mnuStructuredCircularWindPollutionRose.Size" type="System.Drawing.Size, System.Drawing">
     <value>192, 22</value>
@@ -7299,16 +7317,22 @@
   <data name="&gt;&gt;mnuClimaticFileImportfromIRIDataLibrary.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuClimaticFileImportfromClimateDataStore.Name" xml:space="preserve">
+    <value>mnuClimaticFileImportfromClimateDataStore</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticFileImportfromClimateDataStore.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuClimaticFileImportandTidyNetCDF.Name" xml:space="preserve">
     <value>mnuClimaticFileImportandTidyNetCDF</value>
   </data>
   <data name="&gt;&gt;mnuClimaticFileImportandTidyNetCDF.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticFileOpenandTidyShapefile.Name" xml:space="preserve">
-    <value>mnuClimaticFileOpenandTidyShapefile</value>
+  <data name="&gt;&gt;mnuClimaticFileImportandTidyShapefile.Name" xml:space="preserve">
+    <value>mnuClimaticFileImportandTidyShapefile</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticFileOpenandTidyShapefile.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimaticFileImportandTidyShapefile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator20.Name" xml:space="preserve">
@@ -7317,16 +7341,16 @@
   <data name="&gt;&gt;ToolStripSeparator20.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimateFileImportFromClimSoft.Name" xml:space="preserve">
-    <value>mnuClimateFileImportFromClimSoft</value>
+  <data name="&gt;&gt;mnuClimateFileImportfromClimSoft.Name" xml:space="preserve">
+    <value>mnuClimateFileImportfromClimSoft</value>
   </data>
-  <data name="&gt;&gt;mnuClimateFileImportFromClimSoft.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimateFileImportfromClimSoft.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimateFileImportFromClimSoftWizard.Name" xml:space="preserve">
-    <value>mnuClimateFileImportFromClimSoftWizard</value>
+  <data name="&gt;&gt;mnuClimateFileImportfromClimSoftWizard.Name" xml:space="preserve">
+    <value>mnuClimateFileImportfromClimSoftWizard</value>
   </data>
-  <data name="&gt;&gt;mnuClimateFileImportFromClimSoftWizard.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimateFileImportfromClimSoftWizard.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticFileImportFromCliData.Name" xml:space="preserve">
@@ -7431,10 +7455,16 @@
   <data name="&gt;&gt;ToolStripSeparator69.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticDataEntry.Name" xml:space="preserve">
-    <value>mnuClimaticDataEntry</value>
+  <data name="&gt;&gt;mnuSetupForDataEntry.Name" xml:space="preserve">
+    <value>mnuSetupForDataEntry</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticDataEntry.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuSetupForDataEntry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuTidyandExamineClimaticDataEntry.Name" xml:space="preserve">
+    <value>mnuTidyandExamineClimaticDataEntry</value>
+  </data>
+  <data name="&gt;&gt;mnuTidyandExamineClimaticDataEntry.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator50.Name" xml:space="preserve">
@@ -7557,10 +7587,22 @@
   <data name="&gt;&gt;mnuClimaticCheckDataQCRainfall.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;ToolStripSeparator70.Name" xml:space="preserve">
+    <value>ToolStripSeparator70</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator70.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuClimaticCheckDataHomogenization.Name" xml:space="preserve">
     <value>mnuClimaticCheckDataHomogenization</value>
   </data>
   <data name="&gt;&gt;mnuClimaticCheckDataHomogenization.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCheckDataCheckStationLocations.Name" xml:space="preserve">
+    <value>mnuClimaticCheckDataCheckStationLocations</value>
+  </data>
+  <data name="&gt;&gt;mnuClimaticCheckDataCheckStationLocations.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticPrepare.Name" xml:space="preserve">
@@ -7923,10 +7965,10 @@
   <data name="&gt;&gt;mnuClimaticMappingMap.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticMappingCheckStations.Name" xml:space="preserve">
-    <value>mnuClimaticMappingCheckStations</value>
+  <data name="&gt;&gt;mnuClimaticMappingCheckStationLocations.Name" xml:space="preserve">
+    <value>mnuClimaticMappingCheckStationLocations</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticMappingCheckStations.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimaticMappingCheckStationLocations.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticModel.Name" xml:space="preserve">
