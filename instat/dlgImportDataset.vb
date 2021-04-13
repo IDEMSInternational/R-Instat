@@ -616,9 +616,7 @@ Public Class dlgImportDataset
                 'get the name of the file (without extension), with any special characters removed
                 strFileName = GetCleanFileName(strFilePath)
                 strCurrentDirectory = Path.GetDirectoryName(strFilePath)
-                If Not bFromLibrary Then
-                    strFileExtension = Path.GetExtension(strFilePath).ToLower()
-                End If
+                strFileExtension = Path.GetExtension(strFilePath).ToLower()
             ElseIf Directory.Exists(strFilePath) AndAlso strNewFileExt <> "" Then
                 strCurrentDirectory = strFilePath
                 strFileExtension = strNewFileExt
@@ -660,7 +658,7 @@ Public Class dlgImportDataset
             End If
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
         Else
-            'enable multiple files import for the following files only
+            'don't enable multiple files import for the following files only; .rds, .xlsx, .xls
             ucrChkMultipleFiles.SetVisible(Not (strFileExtension = ".rds" OrElse strFileExtension = ".xlsx" OrElse strFileExtension = ".xls"))
 
             'TODO This needs to be different when RDS is a data frame
