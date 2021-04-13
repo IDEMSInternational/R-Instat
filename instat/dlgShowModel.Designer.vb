@@ -45,8 +45,9 @@ Partial Class dlgShowModel
         Me.cmdDistributionOptions = New System.Windows.Forms.Button()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
         Me.rdoValues = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveNewColumn = New instat.ucrSave()
         Me.ucrPnlGraphValues = New instat.UcrPanel()
-        Me.ucrSaveGraphOrValues = New instat.ucrSave()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrChkEnterValues = New instat.ucrCheck()
         Me.ucrPnlDistributionType = New instat.UcrPanel()
         Me.ucrInputValuesOrProbabilities = New instat.ucrInputComboBox()
@@ -81,7 +82,7 @@ Partial Class dlgShowModel
         Me.rdoProbabilities.FlatAppearance.BorderSize = 2
         Me.rdoProbabilities.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoProbabilities.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoProbabilities.Location = New System.Drawing.Point(229, 15)
+        Me.rdoProbabilities.Location = New System.Drawing.Point(233, 15)
         Me.rdoProbabilities.Name = "rdoProbabilities"
         Me.rdoProbabilities.Size = New System.Drawing.Size(128, 27)
         Me.rdoProbabilities.TabIndex = 2
@@ -108,10 +109,10 @@ Partial Class dlgShowModel
         '
         'cmdDistributionOptions
         '
-        Me.cmdDistributionOptions.Location = New System.Drawing.Point(384, 274)
+        Me.cmdDistributionOptions.Location = New System.Drawing.Point(384, 279)
         Me.cmdDistributionOptions.Name = "cmdDistributionOptions"
         Me.cmdDistributionOptions.Size = New System.Drawing.Size(111, 31)
-        Me.cmdDistributionOptions.TabIndex = 11
+        Me.cmdDistributionOptions.TabIndex = 12
         Me.cmdDistributionOptions.Text = "Distribution Options"
         Me.cmdDistributionOptions.UseVisualStyleBackColor = True
         '
@@ -121,7 +122,7 @@ Partial Class dlgShowModel
         Me.rdoGraph.Location = New System.Drawing.Point(25, 242)
         Me.rdoGraph.Name = "rdoGraph"
         Me.rdoGraph.Size = New System.Drawing.Size(54, 17)
-        Me.rdoGraph.TabIndex = 13
+        Me.rdoGraph.TabIndex = 8
         Me.rdoGraph.TabStop = True
         Me.rdoGraph.Text = "Graph"
         Me.rdoGraph.UseVisualStyleBackColor = True
@@ -132,33 +133,41 @@ Partial Class dlgShowModel
         Me.rdoValues.Location = New System.Drawing.Point(121, 242)
         Me.rdoValues.Name = "rdoValues"
         Me.rdoValues.Size = New System.Drawing.Size(57, 17)
-        Me.rdoValues.TabIndex = 14
+        Me.rdoValues.TabIndex = 9
         Me.rdoValues.TabStop = True
         Me.rdoValues.Text = "Values"
         Me.rdoValues.UseVisualStyleBackColor = True
         '
+        'ucrSaveNewColumn
+        '
+        Me.ucrSaveNewColumn.Location = New System.Drawing.Point(9, 285)
+        Me.ucrSaveNewColumn.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveNewColumn.Name = "ucrSaveNewColumn"
+        Me.ucrSaveNewColumn.Size = New System.Drawing.Size(321, 24)
+        Me.ucrSaveNewColumn.TabIndex = 11
+        '
         'ucrPnlGraphValues
         '
-        Me.ucrPnlGraphValues.Location = New System.Drawing.Point(15, 234)
+        Me.ucrPnlGraphValues.Location = New System.Drawing.Point(9, 234)
         Me.ucrPnlGraphValues.Name = "ucrPnlGraphValues"
         Me.ucrPnlGraphValues.Size = New System.Drawing.Size(214, 31)
-        Me.ucrPnlGraphValues.TabIndex = 12
+        Me.ucrPnlGraphValues.TabIndex = 7
         '
-        'ucrSaveGraphOrValues
+        'ucrSaveGraph
         '
-        Me.ucrSaveGraphOrValues.Location = New System.Drawing.Point(15, 285)
-        Me.ucrSaveGraphOrValues.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.ucrSaveGraphOrValues.Name = "ucrSaveGraphOrValues"
-        Me.ucrSaveGraphOrValues.Size = New System.Drawing.Size(342, 24)
-        Me.ucrSaveGraphOrValues.TabIndex = 9
+        Me.ucrSaveGraph.Location = New System.Drawing.Point(9, 285)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(278, 24)
+        Me.ucrSaveGraph.TabIndex = 9
         '
         'ucrChkEnterValues
         '
         Me.ucrChkEnterValues.Checked = False
-        Me.ucrChkEnterValues.Location = New System.Drawing.Point(15, 265)
+        Me.ucrChkEnterValues.Location = New System.Drawing.Point(9, 265)
         Me.ucrChkEnterValues.Name = "ucrChkEnterValues"
         Me.ucrChkEnterValues.Size = New System.Drawing.Size(100, 20)
-        Me.ucrChkEnterValues.TabIndex = 8
+        Me.ucrChkEnterValues.TabIndex = 10
         '
         'ucrPnlDistributionType
         '
@@ -179,7 +188,7 @@ Partial Class dlgShowModel
         '
         'ucrDistributionAndParameters
         '
-        Me.ucrDistributionAndParameters.Location = New System.Drawing.Point(246, 97)
+        Me.ucrDistributionAndParameters.Location = New System.Drawing.Point(248, 98)
         Me.ucrDistributionAndParameters.Name = "ucrDistributionAndParameters"
         Me.ucrDistributionAndParameters.Size = New System.Drawing.Size(247, 170)
         Me.ucrDistributionAndParameters.TabIndex = 6
@@ -212,18 +221,19 @@ Partial Class dlgShowModel
         Me.ucrBase.Location = New System.Drawing.Point(9, 311)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 10
+        Me.ucrBase.TabIndex = 13
         '
         'dlgShowModel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(500, 372)
+        Me.Controls.Add(Me.ucrSaveNewColumn)
         Me.Controls.Add(Me.rdoValues)
         Me.Controls.Add(Me.rdoGraph)
         Me.Controls.Add(Me.ucrPnlGraphValues)
         Me.Controls.Add(Me.cmdDistributionOptions)
-        Me.Controls.Add(Me.ucrSaveGraphOrValues)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrChkEnterValues)
         Me.Controls.Add(Me.rdoProbabilities)
         Me.Controls.Add(Me.rdoQuantiles)
@@ -253,7 +263,7 @@ Partial Class dlgShowModel
     Friend WithEvents lblProbValues As Label
     Friend WithEvents ucrDistributionAndParameters As ucrDistributionsWithParameters
     Friend WithEvents ucrInputValuesOrProbabilities As ucrInputComboBox
-    Friend WithEvents ucrSaveGraphOrValues As ucrSave
+    Friend WithEvents ucrSaveGraph As ucrSave
     Friend WithEvents ucrChkEnterValues As ucrCheck
     Friend WithEvents rdoProbabilities As RadioButton
     Friend WithEvents rdoQuantiles As RadioButton
@@ -262,4 +272,5 @@ Partial Class dlgShowModel
     Friend WithEvents rdoValues As RadioButton
     Friend WithEvents rdoGraph As RadioButton
     Friend WithEvents ucrPnlGraphValues As UcrPanel
+    Friend WithEvents ucrSaveNewColumn As ucrSave
 End Class
