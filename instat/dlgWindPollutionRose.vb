@@ -86,10 +86,10 @@ Public Class dlgWindPollutionRose
         ucrInputStatistic.SetDropDownStyleAsNonEditable()
 
         ucrInputColor.SetParameter(New RParameter("cols", 9))
-        dctColor.Add(“Default”, Chr(34) & "default" & Chr(34))
-        dctColor.Add(“Increment”, Chr(34) & "increment" & Chr(34))
-        dctColor.Add(“Heat”, Chr(34) & "heat" & Chr(34))
-        dctColor.Add(“Jet”, Chr(34) & "jet" & Chr(34))
+        dctColor.Add("Default", Chr(34) & "default" & Chr(34))
+        dctColor.Add("Increment", Chr(34) & "increment" & Chr(34))
+        dctColor.Add("Heat", Chr(34) & "heat" & Chr(34))
+        dctColor.Add("Jet", Chr(34) & "jet" & Chr(34))
         ucrInputColor.SetItems(dctColor)
         ucrInputColor.SetDropDownStyleAsNonEditable()
 
@@ -127,11 +127,7 @@ Public Class dlgWindPollutionRose
     End Sub
 
     Private Sub SetRcodeForControls(bReset As Boolean)
-        bRcodeSet = False
-
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-
-        bRcodeSet = True
     End Sub
 
     Private Sub TestOkEnabled()
