@@ -72,7 +72,7 @@ Public Class dlgWindPollutionRose
         ucrReceiverDate.SetParameterIsString()
 
         ucrChkCompareTwoSets.SetText("Compare two sets")
-        ucrChkCompareTwoSets.AddParameterPresentCondition(True, "wd2", True)
+        ucrChkCompareTwoSets.AddParameterPresentCondition(True, "wd2")
 
         ucrChkPaddle.SetText("Paddle")
         ucrChkPaddle.SetParameter(New RParameter("paddle", 7))
@@ -115,14 +115,15 @@ Public Class dlgWindPollutionRose
 
     Private Sub SetDefaults()
         clsPollutionRoseFunction = New RFunction
-        clsPollutionRoseFunction.SetRCommand("pollution_rose")
-
+        
+        ucrSelectorWindPollutionRose.Reset()
+        ucrReceiverDate.SetMeAsReceiver()
+        
+        clsPollutionRoseFunction.SetRCommand("wind_pollution_rose")
         clsPollutionRoseFunction.AddParameter("paddle", "FALSE", iPosition:=7)
         clsPollutionRoseFunction.AddParameter("statistic", Chr(34) & "prop.count" & Chr(34), iPosition:=8)
         clsPollutionRoseFunction.AddParameter("cols", Chr(34) & "default" & Chr(34), iPosition:=9)
 
-        ucrSelectorWindPollutionRose.Reset()
-        ucrReceiverDate.SetMeAsReceiver()
         ucrBase.clsRsyntax.SetBaseRFunction(clsPollutionRoseFunction)
     End Sub
 
