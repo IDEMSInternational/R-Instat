@@ -174,19 +174,17 @@ Public Class dlgShowModel
     End Sub
 
     Private Sub SwitchBetweenSaveGraphOrColumn()
+        clsPipeOperator.RemoveAssignTo()
         If rdoValues.Checked AndAlso ucrReceiverProbabilitiesOrValues.Visible Then
-            clsPipeOperator.RemoveAssignTo()
             ucrBase.clsRsyntax.iCallType = 0
             clsPipeOperator.SetAssignTo(ucrSaveNewColumn.GetText(), strTempDataframe:=ucrSelectorShowModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewColumn.GetText)
         ElseIf rdoGraph.Checked AndAlso ucrSaveGraph.ucrChkSave.Checked Then
-            clsPipeOperator.RemoveAssignTo()
             ucrBase.clsRsyntax.iCallType = 3
             clsPipeOperator.SetAssignTo(ucrSaveGraph.GetText(), strTempDataframe:=ucrSelectorShowModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraph.GetText)
         ElseIf rdoGraph.Checked AndAlso Not ucrSaveGraph.ucrChkSave.Checked Then
             ucrBase.clsRsyntax.iCallType = 3
             clsPipeOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorShowModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph", bAssignToIsPrefix:=True)
         Else
-            clsPipeOperator.RemoveAssignTo()
             ucrBase.clsRsyntax.iCallType = 2
         End If
     End Sub
