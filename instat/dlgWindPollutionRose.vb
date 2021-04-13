@@ -119,7 +119,7 @@ Public Class dlgWindPollutionRose
         ucrSelectorWindPollutionRose.Reset()
         ucrReceiverDate.SetMeAsReceiver()
         
-        clsPollutionRoseFunction.SetRCommand("pollution_rose")
+        clsPollutionRoseFunction.SetRCommand("wind_pollution_rose")
         clsPollutionRoseFunction.AddParameter("paddle", "FALSE", iPosition:=7)
         clsPollutionRoseFunction.AddParameter("statistic", Chr(34) & "prop.count" & Chr(34), iPosition:=8)
         clsPollutionRoseFunction.AddParameter("cols", Chr(34) & "default" & Chr(34), iPosition:=9)
