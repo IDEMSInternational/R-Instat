@@ -54,9 +54,18 @@ Public Class dlgShowModel
         ucrPnlDistributionType.AddParameterValueFunctionNamesCondition(rdoQuantiles, "0", "qdist")
         ucrPnlDistributionType.AddParameterValueFunctionNamesCondition(rdoProbabilities, "0", "pdist")
 
-        ucrSaveGraphOrValues.SetPrefix("quant")
-        ucrSaveGraphOrValues.SetIsComboBox()
-        ucrSaveGraphOrValues.SetDataFrameSelector(ucrSelectorShowModel.ucrAvailableDataFrames)
+        ucrSaveGraph.SetPrefix("quant")
+        ucrSaveGraph.SetIsComboBox()
+        ucrSaveGraph.SetCheckBoxText("Save Graph")
+        ucrSaveGraph.SetSaveTypeAsGraph()
+        ucrSaveGraph.SetDataFrameSelector(ucrSelectorShowModel.ucrAvailableDataFrames)
+        ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
+
+        ucrSaveNewColumn.SetLabelText("New column name:")
+        ucrSaveNewColumn.SetSaveTypeAsColumn()
+        ucrSaveNewColumn.SetIsComboBox()
+        ucrSaveNewColumn.SetPrefix("quant")
+        ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorShowModel.ucrAvailableDataFrames)
 
         ucrInputValuesOrProbabilities.SetParameter(New RParameter("p", 1, bNewIncludeArgumentName:=False))
         ucrInputValuesOrProbabilities.AddQuotesIfUnrecognised = False
@@ -76,7 +85,7 @@ Public Class dlgShowModel
 
         ucrChkEnterValues.AddToLinkedControls(ucrReceiverProbabilitiesOrValues, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkEnterValues.AddToLinkedControls(ucrInputValuesOrProbabilities, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ' ucrPnlGraphValues.AddToLinkedControls(ucrSaveGraphOrValues, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlGraphValues.AddToLinkedControls(ucrSaveGraph, {rdoGraph}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         'These conditions might still be needed when SetRcode for this checkbox is enabled.
         'ucrChkEnterValues.AddParameterIsRFunctionCondition(False, "q", True)
@@ -88,15 +97,18 @@ Public Class dlgShowModel
     Private Sub SetDefaults()
         clsQuantilesFunction = New RFunction
         clsProbabilitiesFunction = New RFunction
-        ' clsConcatenateFunction = New RFunction
+        'clsConcatenateFunction = New RFunction
         clsLabsFunction = New RFunction
         clsThemeFunction = New RFunction
 
         clsPipeOperator = New ROperator
 
+        ucrSaveGraph.ucrChkSave.Checked = False 'Reset the checkbox here since saving is done manually!
+
         ucrSelectorShowModel.Reset()
         ucrInputValuesOrProbabilities.Reset()
-        ucrSaveGraphOrValues.Reset()
+        ucrSaveGraph.Reset()
+        ucrSaveNewColumn.Reset()
         ucrDistributionAndParameters.SetRDistributions()
 
         ucrChkEnterValues.Checked = True 'TODO: Set conditions properly!
@@ -107,7 +119,7 @@ Public Class dlgShowModel
         clsQuantilesFunction.SetPackageName("mosaic")
         clsQuantilesFunction.SetRCommand("qdist")
 
-        ' clsConcatenateFunction.SetRCommand("c") 
+        'clsConcatenateFunction.SetRCommand("c") 
 
         clsLabsFunction.SetPackageName("ggformula")
         clsLabsFunction.SetRCommand("gf_labs")
@@ -120,7 +132,6 @@ Public Class dlgShowModel
         clsPipeOperator.AddParameter("1", clsRFunctionParameter:=clsLabsFunction, iPosition:=1)
         clsPipeOperator.AddParameter("2", clsRFunctionParameter:=clsThemeFunction, iPosition:=2)
 
-        clsPipeOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorShowModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph", bAssignToIsPrefix:=True)
         bResetSubdialog = True
         ucrBase.clsRsyntax.SetBaseROperator(clsPipeOperator)
     End Sub
@@ -138,17 +149,12 @@ Public Class dlgShowModel
         'ucrReceiverProbabilitiesOrValues.SetRCode(clsQuantilesFunction, bReset)
         ucrPnlGraphValues.SetRCode(clsQuantilesFunction, bReset)
         'ucrInputValuesOrProbabilities.SetRCode(clsConcatenateFunction, bReset)
-        If bReset Then
-            'ucrSaveGraph.AddAdditionalRCode(clsProbabilitiesFunction, 1)
-            ucrSaveGraphOrValues.SetRCode(clsPipeOperator, bReset)
-        End If
         ucrDistributionAndParameters.SetRCode(clsQuantilesFunction, bReset)
-        'ucrChkEnterValues.SetRCode(clsQuantilesFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
         If Not ucrDistributionAndParameters.bParametersFilled OrElse (Not ucrChkEnterValues.Checked AndAlso ucrReceiverProbabilitiesOrValues.IsEmpty) OrElse
-                (ucrChkEnterValues.Checked AndAlso ucrInputValuesOrProbabilities.IsEmpty) OrElse Not ucrSaveGraphOrValues.IsComplete Then
+                (ucrChkEnterValues.Checked AndAlso ucrInputValuesOrProbabilities.IsEmpty) OrElse Not ucrSaveGraph.IsComplete Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -169,33 +175,33 @@ Public Class dlgShowModel
 
     Private Sub SwitchBetweenSaveGraphOrColumn()
         If rdoValues.Checked AndAlso ucrReceiverProbabilitiesOrValues.Visible Then
-            ucrSaveGraphOrValues.SetLabelText("New column name")
-            ucrSaveGraphOrValues.SetSaveTypeAsColumn()
-            'clsPipeOperator.SetAssignTo(ucrSaveGraphOrValues.GetText(), strTempDataframe:=ucrSelectorShowModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveGraphOrValues.GetText)
-        Else
-            ucrSaveGraphOrValues.SetCheckBoxText("Save Graph")
-            ucrSaveGraphOrValues.SetAssignToIfUncheckedValue("last_graph")
-            ucrSaveGraphOrValues.SetSaveTypeAsGraph()
-            'clsPipeOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorShowModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph", bAssignToIsPrefix:=True)
-        End If
-    End Sub
-
-    Private Sub SetIcallType()
-        If ucrReceiverProbabilitiesOrValues.Visible AndAlso rdoValues.Checked Then
+            clsPipeOperator.RemoveAssignTo()
             ucrBase.clsRsyntax.iCallType = 0
+            clsPipeOperator.SetAssignTo(ucrSaveNewColumn.GetText(), strTempDataframe:=ucrSelectorShowModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewColumn.GetText)
+        ElseIf rdoGraph.Checked AndAlso ucrSaveGraph.ucrChkSave.Checked Then
+            clsPipeOperator.RemoveAssignTo()
+            ucrBase.clsRsyntax.iCallType = 3
+            clsPipeOperator.SetAssignTo(ucrSaveGraph.GetText(), strTempDataframe:=ucrSelectorShowModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:=ucrSaveGraph.GetText)
+        ElseIf rdoGraph.Checked AndAlso Not ucrSaveGraph.ucrChkSave.Checked Then
+            ucrBase.clsRsyntax.iCallType = 3
+            clsPipeOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorShowModel.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph", bAssignToIsPrefix:=True)
+        Else
+            clsPipeOperator.RemoveAssignTo()
+            ucrBase.clsRsyntax.iCallType = 2
         End If
     End Sub
 
     Private Sub HideShowSaveControl()
         If ucrChkEnterValues.Checked AndAlso rdoValues.Checked Then
-            ucrSaveGraphOrValues.Hide()
+            ucrSaveNewColumn.Hide()
+        ElseIf rdoGraph.Checked Then
+            ucrSaveNewColumn.Hide()
         Else
-            ucrSaveGraphOrValues.Show()
+            ucrSaveNewColumn.Show()
         End If
     End Sub
 
     Private Sub AddPandQParameters()
-        SwitchBetweenSaveGraphOrColumn()
         HideShowSaveControl()
         If ucrChkEnterValues.Checked Then
             ucrSelectorShowModel.SetVariablesVisible(False)
@@ -237,7 +243,6 @@ Public Class dlgShowModel
     Private Sub DisplayGraphOrValues()
         If rdoGraph.Checked Then
             cmdDistributionOptions.Enabled = True
-            ucrBase.clsRsyntax.iCallType = 3
             clsPipeOperator.AddParameter("1", clsRFunctionParameter:=clsLabsFunction, iPosition:=1)
             clsPipeOperator.AddParameter("2", clsRFunctionParameter:=clsThemeFunction, iPosition:=2)
             clsQuantilesFunction.AddParameter("return", Chr(34) & "plot" & Chr(34), iPosition:=9)
@@ -246,7 +251,6 @@ Public Class dlgShowModel
             cmdDistributionOptions.Enabled = False
             ucrBase.clsRsyntax.RemoveOperatorParameter("1")
             ucrBase.clsRsyntax.RemoveOperatorParameter("2")
-            ucrBase.clsRsyntax.iCallType = 2
             clsQuantilesFunction.AddParameter("return", Chr(34) & "values" & Chr(34), iPosition:=9)
             clsProbabilitiesFunction.AddParameter("return", Chr(34) & "values" & Chr(34), iPosition:=9)
         End If
@@ -256,29 +260,24 @@ Public Class dlgShowModel
         DisplayGraphOrValues()
         SwitchBetweenSaveGraphOrColumn()
         HideShowSaveControl()
-        SetIcallType()
     End Sub
 
     Private Sub ucrPnlDistributionType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlDistributionType.ControlValueChanged
+        SwitchBetweenSaveGraphOrColumn()
         UpdateDistributionAndParameters()
         AddPandQParameters()
-        SetIcallType()
         If rdoProbabilities.Checked Then
-            '  ucrBase.clsRsyntax.SetBaseRFunction(clsProbabilitiesFunction)
             clsPipeOperator.AddParameter("0", clsRFunctionParameter:=clsProbabilitiesFunction, iPosition:=0)
-            If rdoGraph.Checked AndAlso Not ucrSaveGraphOrValues.bUserTyped Then
-                ucrSaveGraphOrValues.SetPrefix("prob")
-            End If
+            ucrSaveGraph.SetPrefix("prob")
+            ucrSaveNewColumn.SetPrefix("prob")
             ucrInputValuesOrProbabilities.SetName("1")
             ucrInputValuesOrProbabilities.SetItems({"1", "0.1, 1, 3, 5, 10 ", "-2, -1, 0, 1, 2"})
             lblProbValues.Visible = False
             lblQuantValues.Visible = True
         ElseIf rdoQuantiles.Checked Then
-            'ucrBase.clsRsyntax.SetBaseRFunction(clsQuantilesFunction)
             clsPipeOperator.AddParameter("0", clsRFunctionParameter:=clsQuantilesFunction, iPosition:=0)
-            If rdoGraph.Checked AndAlso Not ucrSaveGraphOrValues.bUserTyped Then
-                ucrSaveGraphOrValues.SetPrefix("quant")
-            End If
+            ucrSaveGraph.SetPrefix("quant")
+            ucrSaveNewColumn.SetPrefix("quant")
             ucrInputValuesOrProbabilities.SetName("0.5")
             ucrInputValuesOrProbabilities.SetItems({"0.5", "0.1, 0.2, 0.4, 0.6, 0.8, 0.9 ", "0.2, 0.5, 0.8", " 0.5, 0.8, 0.9, 0.95, 0.99"})
             lblQuantValues.Visible = False
@@ -286,11 +285,11 @@ Public Class dlgShowModel
         End If
     End Sub
 
-    Private Sub AllControlsContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverProbabilitiesOrValues.ControlContentsChanged, ucrInputValuesOrProbabilities.ControlContentsChanged, ucrSaveGraphOrValues.ControlContentsChanged, ucrDistributionAndParameters.ControlContentsChanged, ucrChkEnterValues.ControlContentsChanged
-        TestOKEnabled()
+    Private Sub ucrSaveGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlValueChanged
+        SwitchBetweenSaveGraphOrColumn()
     End Sub
 
-    Private Sub ucrDistributionsFOrTablePlus_ParameterChanged(ucrChangedControl As ucrCore) Handles ucrDistributionAndParameters.ControlValueChanged
-
+    Private Sub AllControlsContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverProbabilitiesOrValues.ControlContentsChanged, ucrInputValuesOrProbabilities.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrDistributionAndParameters.ControlContentsChanged, ucrChkEnterValues.ControlContentsChanged
+        TestOKEnabled()
     End Sub
 End Class
