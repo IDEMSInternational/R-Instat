@@ -124,10 +124,6 @@
   <data name="rdoNew.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>None</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rdoNew.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="rdoNew.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
@@ -141,6 +137,7 @@
   <data name="rdoNew.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 27</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoNew.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
@@ -164,9 +161,6 @@
   </data>
   <data name="rdoAddFlags.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
-  </data>
-  <data name="rdoAddFlags.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="rdoAddFlags.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -231,34 +225,34 @@
   <data name="&gt;&gt;lblStation.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="Label1.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblSelectStation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="Label1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblSelectStation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="Label1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblSelectStation.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 96</value>
   </data>
-  <data name="Label1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblSelectStation.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
   </data>
-  <data name="Label1.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblSelectStation.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
   </data>
-  <data name="Label1.Text" xml:space="preserve">
+  <data name="lblSelectStation.Text" xml:space="preserve">
     <value>Select Station:</value>
   </data>
-  <data name="&gt;&gt;Label1.Name" xml:space="preserve">
-    <value>Label1</value>
+  <data name="&gt;&gt;lblSelectStation.Name" xml:space="preserve">
+    <value>lblSelectStation</value>
   </data>
-  <data name="&gt;&gt;Label1.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblSelectStation.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;Label1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblSelectStation.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;Label1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblSelectStation.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="lblDateTo.AutoSize" type="System.Boolean, mscorlib">

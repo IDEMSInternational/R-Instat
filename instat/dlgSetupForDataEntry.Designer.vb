@@ -26,10 +26,12 @@ Partial Class dlgSetupForDataEntry
         Me.rdoNew = New System.Windows.Forms.RadioButton()
         Me.rdoAddFlags = New System.Windows.Forms.RadioButton()
         Me.lblStation = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblSelectStation = New System.Windows.Forms.Label()
         Me.lblDateTo = New System.Windows.Forms.Label()
         Me.lblDateFrom = New System.Windows.Forms.Label()
         Me.grpElements = New System.Windows.Forms.GroupBox()
+        Me.ucrNewDFName = New instat.ucrSave()
+        Me.ucrChkAddFlagVariables = New instat.ucrCheck()
         Me.ucrInputSpecify3 = New instat.ucrInputTextBox()
         Me.ucrInputSpecify2 = New instat.ucrInputTextBox()
         Me.ucrInputSpecify1 = New instat.ucrInputTextBox()
@@ -42,8 +44,6 @@ Partial Class dlgSetupForDataEntry
         Me.ucrChkTmin = New instat.ucrCheck()
         Me.ucrChkTmax = New instat.ucrCheck()
         Me.ucrChkPrecip = New instat.ucrCheck()
-        Me.ucrNewDFName = New instat.ucrSave()
-        Me.ucrChkAddFlagVariables = New instat.ucrCheck()
         Me.ucrDateTo = New instat.ucrDateTimePicker()
         Me.ucrDateFrom = New instat.ucrDateTimePicker()
         Me.ucrInputSelectStation = New instat.ucrInputFactorLevels()
@@ -77,10 +77,10 @@ Partial Class dlgSetupForDataEntry
         resources.ApplyResources(Me.lblStation, "lblStation")
         Me.lblStation.Name = "lblStation"
         '
-        'Label1
+        'lblSelectStation
         '
-        resources.ApplyResources(Me.Label1, "Label1")
-        Me.Label1.Name = "Label1"
+        resources.ApplyResources(Me.lblSelectStation, "lblSelectStation")
+        Me.lblSelectStation.Name = "lblSelectStation"
         '
         'lblDateTo
         '
@@ -111,6 +111,17 @@ Partial Class dlgSetupForDataEntry
         resources.ApplyResources(Me.grpElements, "grpElements")
         Me.grpElements.Name = "grpElements"
         Me.grpElements.TabStop = False
+        '
+        'ucrNewDFName
+        '
+        resources.ApplyResources(Me.ucrNewDFName, "ucrNewDFName")
+        Me.ucrNewDFName.Name = "ucrNewDFName"
+        '
+        'ucrChkAddFlagVariables
+        '
+        Me.ucrChkAddFlagVariables.Checked = False
+        resources.ApplyResources(Me.ucrChkAddFlagVariables, "ucrChkAddFlagVariables")
+        Me.ucrChkAddFlagVariables.Name = "ucrChkAddFlagVariables"
         '
         'ucrInputSpecify3
         '
@@ -190,17 +201,6 @@ Partial Class dlgSetupForDataEntry
         resources.ApplyResources(Me.ucrChkPrecip, "ucrChkPrecip")
         Me.ucrChkPrecip.Name = "ucrChkPrecip"
         '
-        'ucrNewDFName
-        '
-        resources.ApplyResources(Me.ucrNewDFName, "ucrNewDFName")
-        Me.ucrNewDFName.Name = "ucrNewDFName"
-        '
-        'ucrChkAddFlagVariables
-        '
-        Me.ucrChkAddFlagVariables.Checked = False
-        resources.ApplyResources(Me.ucrChkAddFlagVariables, "ucrChkAddFlagVariables")
-        Me.ucrChkAddFlagVariables.Name = "ucrChkAddFlagVariables"
-        '
         'ucrDateTo
         '
         Me.ucrDateTo.DateValue = New Date(2021, 3, 27, 16, 14, 1, 560)
@@ -268,7 +268,7 @@ Partial Class dlgSetupForDataEntry
         Me.Controls.Add(Me.ucrInputSelectStation)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStation)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblSelectStation)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorSetupDataEntry)
         Me.Controls.Add(Me.rdoNew)
@@ -292,7 +292,7 @@ Partial Class dlgSetupForDataEntry
     Friend WithEvents ucrInputSelectStation As ucrInputFactorLevels
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblSelectStation As Label
     Friend WithEvents ucrChkAddFlagVariables As ucrCheck
     Friend WithEvents grpElements As GroupBox
     Friend WithEvents ucrInputSpecify3 As ucrInputTextBox

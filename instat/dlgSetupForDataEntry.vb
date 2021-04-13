@@ -20,6 +20,7 @@ Public Class dlgSetupForDataEntry
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsNewDataFrame As New RFunction
+    Private clsAddFlag As New RFunction
     Dim nrow As Integer
 
     Private Sub dlgSetupForDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -35,11 +36,9 @@ Public Class dlgSetupForDataEntry
         autoTranslate(Me)
     End Sub
     Private Sub InitialiseDialog()
-        ucrPnlOptions.AddRadioButton(rdoNew)
-        ucrPnlOptions.AddRadioButton(rdoAddFlags)
-       ' ucrPnlOptions.AddFunctionNamesCondition(rdoNew, "data.frame")
-        rdoNew.Checked = True
-        rdoAddFlags.Enabled = False
+
+        'rdoNew.Checked = True
+        'rdoAddFlags.Enabled = False
 
         ucrBase.iHelpTopicID = 359
 
@@ -93,10 +92,22 @@ Public Class dlgSetupForDataEntry
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetLabelText("New Data Frame Name:")
         ucrNewDFName.SetIsTextBox()
+
+        ucrPnlOptions.AddRadioButton(rdoNew)
+        ucrPnlOptions.AddRadioButton(rdoAddFlags)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoNew, "data.frame")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoAddFlags, "")
+        ucrPnlOptions.AddToLinkedControls({ucrInputSelectStation, ucrDateFrom, ucrDateTo, ucrChkAddFlagVariables, ucrNewDFName}, {rdoNew}, bNewLinkedAddRemoveParameter:=True)
+        ucrInputSelectStation.SetLinkedDisplayControl(lblSelectStation)
+        ucrDateFrom.SetLinkedDisplayControl(lblDateFrom)
+        ucrDateTo.SetLinkedDisplayControl(lblDateTo)
+        ucrChkAddFlagVariables.SetLinkedDisplayControl(grpElements)
+
     End Sub
 
     Private Sub SetDefaults()
         clsNewDataFrame = New RFunction
+        clsAddFlag = New RFunction
 
         ucrSelectorSetupDataEntry.Reset()
         ucrReceiverStation.SetMeAsReceiver()
@@ -112,13 +123,15 @@ Public Class dlgSetupForDataEntry
         ucrChkAddFlagVariables.Checked = False
 
         clsNewDataFrame.SetRCommand("data.frame")
+        clsAddFlag.SetRCommand("")
 
         ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
-
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
     End Sub
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrNewDFName.SetRCode(clsNewDataFrame, bReset)
         If bReset Then
             ucrDateFrom.DateValue = New Date("2021", "1", "1")
@@ -232,7 +245,7 @@ Public Class dlgSetupForDataEntry
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrChkPrecip.ControlContentsChanged, ucrChkSunh.ControlContentsChanged, ucrChkTmax.ControlContentsChanged, ucrChkTmin.ControlContentsChanged, ucrChkWD.ControlContentsChanged, ucrChkWS.ControlContentsChanged, ucrChkSpecify1.ControlContentsChanged, ucrChkSpecify2.ControlContentsChanged, ucrChkSpecify3.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrChkPrecip.ControlContentsChanged, ucrChkSunh.ControlContentsChanged, ucrChkTmax.ControlContentsChanged, ucrChkTmin.ControlContentsChanged, ucrChkWD.ControlContentsChanged, ucrChkWS.ControlContentsChanged, ucrChkSpecify1.ControlContentsChanged, ucrChkSpecify2.ControlContentsChanged, ucrChkSpecify3.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOkEnabled()
     End Sub
     Private Sub ucrDateTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDateTo.ControlValueChanged, ucrDateFrom.ControlValueChanged
@@ -275,5 +288,13 @@ Public Class dlgSetupForDataEntry
     Private Sub ucrChkPrecip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFlagVariables.ControlValueChanged, ucrChkPrecip.ControlValueChanged, ucrChkSunh.ControlValueChanged, ucrChkTmax.ControlValueChanged, ucrChkTmin.ControlValueChanged, ucrChkWD.ControlValueChanged, ucrChkWS.ControlValueChanged
         AddRemoveParameter()
         AddFlagVariables()
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        If rdoNew.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
+        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsAddFlag)
+        End If
     End Sub
 End Class
