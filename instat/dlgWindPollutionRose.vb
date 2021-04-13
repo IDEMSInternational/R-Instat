@@ -72,7 +72,7 @@ Public Class dlgWindPollutionRose
         ucrReceiverDate.SetParameterIsString()
 
         ucrChkCompareTwoSets.SetText("Compare two sets")
-        ucrChkCompareTwoSets.AddParameterPresentCondition(True, "wd2", True)
+        ucrChkCompareTwoSets.AddParameterPresentCondition(True, "wd2")
 
         ucrChkPaddle.SetText("Paddle")
         ucrChkPaddle.SetParameter(New RParameter("paddle", 7))
