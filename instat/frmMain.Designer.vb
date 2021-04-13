@@ -1607,8 +1607,8 @@ Partial Class frmMain
         '
         'mnuSetupForDataEntry
         '
-        resources.ApplyResources(Me.mnuSetupForDataEntry, "mnuSetupForDataEntry")
         Me.mnuSetupForDataEntry.Name = "mnuSetupForDataEntry"
+        resources.ApplyResources(Me.mnuSetupForDataEntry, "mnuSetupForDataEntry")
         '
         'mnuTidyandExamineClimaticDataEntry
         '
