@@ -184,8 +184,8 @@ DataBook$set("public", "calculate_summary", function(data_name, columns_to_summa
       }
       else {
         values_calculation <- instat_calculation$new(type = type, result_name = result_name,
-                                                      function_exp = paste0(summary_type, "(x = ", column_names, function_exp),
-                                                      calculated_from = calculated_from, save = save)
+                                                     function_exp = paste0(summary_type, "(x = ", column_names, function_exp),
+                                                     calculated_from = calculated_from, save = save)
         if(percentage_type == "columns") {
           if(length(perc_total_columns) == 1) perc_col_name <- perc_total_columns
           else perc_col_name <- perc_total_columns[i]
@@ -255,13 +255,13 @@ DataBook$set("public", "summary", function(data_name, columns_to_summarise, summ
   summary_other_names <- summary_names[(count_summaries_max + 1):summaries_max]
   
   col_data_type <- self$get_variables_metadata(data_name = data_name, column = columns_to_summarise, property = data_type_label)
-
+  
   factors_disp <- dplyr::if_else(length(factors) == 0, ".id", factors)
   factors_levels <- lapply(factors, function(x) {
     fac_col <- self$get_columns_from_data(data_name, x)
     if(is.factor(fac_col)) return(levels(fac_col))
     else return(sort(unique(fac_col)))
-    })
+  })
   factors_levels <- expand.grid(factors_levels)
   names(factors_levels) <- factors
   
@@ -284,7 +284,7 @@ DataBook$set("public", "summary", function(data_name, columns_to_summarise, summ
                                  x[[summary_names[j]]] <- NA
                                  return(x)
                                }
-                               })
+                             })
       names(calc_apply)[length(factors_disp) + 1] <- col_new
       calc_apply$summary <- summary_names[j]
       names(calc_apply) <- make.names(names(calc_apply), unique = TRUE)
@@ -519,7 +519,7 @@ date_summaries <- c(
   circular_median_label, circular_medianHL_label, circular_mean_label,
   circular_Q3_label, circular_max_label
 )
-  
+
 summary_mode <- function(x,...) {
   ux <- unique(x)
   out <- ux[which.max(tabulate(match(x, ux)))]
@@ -663,23 +663,23 @@ summary_trimmed_mean <- function (x, add_cols, weights = NULL, na.rm = FALSE, tr
   if( length(x)==0 || (na.rm && length(x[!is.na(x)])==0) ) return(NA)
   else {
     if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-  else 
-    return(mean(x, na.rm = na.rm, trim = trimmed))
+    else 
+      return(mean(x, na.rm = na.rm, trim = trimmed))
   }
 }
 
 summary_sum <- function (x, weights = NULL, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else {
-      if (missing(weights) || is.null(weights)) return(sum(x, na.rm = na.rm))
-      else return(sum(x * weights, na.rm = na.rm))
-    }
+    if (missing(weights) || is.null(weights)) return(sum(x, na.rm = na.rm))
+    else return(sum(x * weights, na.rm = na.rm))
   }
+}
 
 
 summary_count <- function(x, ...) {
   return(length(x))
-  }
+}
 
 
 summary_count_missing <- function(x, ...) {
@@ -716,7 +716,7 @@ summary_var <- function(x, na.rm = FALSE, weights = NULL, na_type = "", ...) {
 summary_max <- function (x, na.rm = FALSE, na_type = "", ...) {
   #TODO This prevents warning and -Inf being retured. Is this desirable?
   if(length(x)==0 || (na.rm && length(x[!is.na(x)])==0)) return(NA)
-    if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
+  if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     return(max(x, na.rm = na.rm))
   } 
@@ -728,7 +728,7 @@ summary_min <- function (x, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
     return(min(x, na.rm = na.rm))
-} 
+  } 
 }
 # get the range of the data
 summary_range <- function(x, na.rm = FALSE, na_type = "", ...) {
@@ -847,7 +847,7 @@ summary_skewness <- function(x, weights = NULL, na.rm = FALSE, type = 2, na_type
 summary_skewness_mc <- function(x, na.rm = FALSE, na_type = "", ...) {
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-  return(robustbase::mc(x, na.rm = na.rm))
+    return(robustbase::mc(x, na.rm = na.rm))
   }
 }
 
@@ -856,10 +856,10 @@ summary_outlier_limit <- function(x, coef = 1.5, bupperlimit = TRUE, bskewedcalc
   if(omit){
     #This is needed when we need rainy days defined(Rain>=0.85)
     #if(value!=0){
-     # x <- x[x>=value]
+    # x <- x[x>=value]
     #}else{
-      x <- x[x>value]
-      #}
+    x <- x[x>value]
+    #}
   }
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
@@ -935,8 +935,8 @@ summary_Qn <- function(x, constant = 2.21914, finite.corr = missing(constant), n
     if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
     else{
       x <- x[!is.na(x)]
-    return(robustbase::Qn(x, constant = constant, finite.corr = finite.corr))
-  }
+      return(robustbase::Qn(x, constant = constant, finite.corr = finite.corr))
+    }
   }
 }
 
@@ -947,8 +947,8 @@ summary_Sn <- function(x, constant = 1.1926, finite.corr = missing(constant), na
     if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
     else{
       x <- x[!is.na(x)]
-    return(robustbase::Qn(x, constant = constant, finite.corr = finite.corr))
-  }
+      return(robustbase::Qn(x, constant = constant, finite.corr = finite.corr))
+    }
   }
 }
 
@@ -985,79 +985,79 @@ summary_cov <- function(x, y, na.rm = FALSE, weights = NULL, na_type = "", metho
 
 # first function
 summary_first <- function(x, order_by = NULL, ...) {
-    return(dplyr::first(x = x, order_by = order_by))
+  return(dplyr::first(x = x, order_by = order_by))
 }
 
 # last function
 summary_last <- function(x, order_by = NULL, ...) {
-     return(dplyr::last(x = x, order_by = order_by))
+  return(dplyr::last(x = x, order_by = order_by))
 }
 
 # nth function
 summary_nth <- function(x, nth_value, order_by = NULL, ...) {
-    return(dplyr::nth(x = x, n = nth_value, order_by = order_by))
+  return(dplyr::nth(x = x, n = nth_value, order_by = order_by))
 }
 
 # n_distinct function
 summary_n_distinct<- function(x, na.rm = FALSE, ...) {
-    return(dplyr::n_distinct(x = x, na.rm = na.rm))
+  return(dplyr::n_distinct(x = x, na.rm = na.rm))
 }
 
 #Proportions functions
 proportion_calc <- function(x, prop_test = "==", prop_value, As_percentage = FALSE, na.rm = FALSE, na_type = "", ... ){ 
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-      if(!na.rm){
-        if(sum(is.na(x)) > 0) return(NA)
-        y <- x[eval(parse(text = paste("x", prop_value, sep = prop_test)))]
-        if(!As_percentage){
-          return(round(length(y)/length(x),digits = 2))
-          }
-        else {
-          return(round((length(y)/length(x)*100),digits = 2 ))
-          }  
+    if(!na.rm){
+      if(sum(is.na(x)) > 0) return(NA)
+      y <- x[eval(parse(text = paste("x", prop_value, sep = prop_test)))]
+      if(!As_percentage){
+        return(round(length(y)/length(x),digits = 2))
       }
       else {
-        remove.na <- na.omit(x)
-        y <- remove.na[eval(parse(text = paste("remove.na", prop_value, sep = prop_test)))]
-        if (!As_percentage){
-          return(round(length(y)/length(remove.na), digits = 2))
-          }
-        else{
-          return(round(length(y)/length(remove.na)*100, digits = 2 ))
-          }
+        return(round((length(y)/length(x)*100),digits = 2 ))
+      }  
+    }
+    else {
+      remove.na <- na.omit(x)
+      y <- remove.na[eval(parse(text = paste("remove.na", prop_value, sep = prop_test)))]
+      if (!As_percentage){
+        return(round(length(y)/length(remove.na), digits = 2))
+      }
+      else{
+        return(round(length(y)/length(remove.na)*100, digits = 2 ))
+      }
+    }
   }
-}
 }
 
 #count function
 count_calc <- function(x, count_test = "==", count_value, na.rm = FALSE, na_type = "", ...){ 
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
   else{
-      if (!na.rm){
-        if (sum(is.na(x)) > 0) return(NA)
-        return(length(x[eval(parse(text = paste("x", count_value, sep = count_test)))]))
-      }
-      else{
-          y <- na.omit(x)
-        return(length(y[eval(parse(text = paste("y", count_value, sep = count_test)))]))
-  }
+    if (!na.rm){
+      if (sum(is.na(x)) > 0) return(NA)
+      return(length(x[eval(parse(text = paste("x", count_value, sep = count_test)))]))
+    }
+    else{
+      y <- na.omit(x)
+      return(length(y[eval(parse(text = paste("y", count_value, sep = count_test)))]))
+    }
   }
 }
 
 #standard error of mean function
 standard_error_mean <- function(x, na.rm = FALSE, na_type = "", ...){
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
-      else{
-      if (!na.rm){
-        if(sum(is.na(x) > 0)) return(NA)
-         return(sd(x)/sqrt(length(x)))
-      }
-      else{
-        y <- na.omit(x)
-        return(sd(y)/sqrt(length(y)))
-      }
-      }
+  else{
+    if (!na.rm){
+      if(sum(is.na(x) > 0)) return(NA)
+      return(sd(x)/sqrt(length(x)))
+    }
+    else{
+      y <- na.omit(x)
+      return(sd(y)/sqrt(length(y)))
+    }
+  }
 }
 
 #Verification functions 
@@ -1467,7 +1467,7 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
         cell_values[["Variable"]] <- NULL
         summary_factors <- "Summary"
       }
-    }
+    } 
     else {
       if(treat_columns_as_factor) {
         summary_factors <- "Variable"
@@ -1482,14 +1482,15 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
       column_formula <- paste(column_factors, collapse = "+")
     }
     else column_formula <- "."
-    if(length(c(row_factors, summary_factors)) > 0) {
-      row_formula <- paste(c(row_factors, summary_factors), collapse = "+")
+    row_factors_1 <- c(row_factors, summary_factors)
+    if(length(row_factors_1) > 0) {
+      row_formula <- paste(row_factors_1, collapse = "+")
     }
     else row_formula <- "."
     shaped_cell_values <- reshape2::dcast(formula = as.formula(paste(row_formula, "~", column_formula)), value.var = "Value", data = cell_values)
     
     #This removes blank column caused by dcast having no row variables
-    if(length(c(row_factors, summary_factors)) == 0) shaped_cell_values[[1]] <- NULL
+    #if(length(c(row_factors_1)) == 0) shaped_cell_values[[1]] <- NULL
     
     #Converts factor columns to character so we can relabel values if needed
     for(i in seq_along(row_factors)) {
@@ -1500,27 +1501,54 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
       power_sets <- rje::powerSet(factors)
       # We could need last set if only have row or column factors
       power_sets <- power_sets[-(c(length(power_sets)))]
+      order_names <- unique(paste(shaped_cell_values$Summary, shaped_cell_values$Variable, sep = "_"))
       for(facts in power_sets) {
         if(length(facts) == 0) facts <- c()
         margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE)
+        margin_tables[[length(margin_tables)]] <- margin_tables[[length(margin_tables)]] %>% dplyr::select(c(all_of(facts), order_names))
       }
+      # Row Factor - add as column margin
+      if(length(column_factors) > 0) {
+        row_factor_margin  <- margin_tables[[which(sapply(power_sets, function(x) setequal(row_factors, x)))]]
+        row_factor_margin <- tidyr::pivot_longer(row_factor_margin, cols = !all_of(row_factors), values_to = margin_name)
+        row_factor_margin <- row_factor_margin %>% tidyr::separate(name, c("Summary", "Variable"), "_")
+        shaped_cell_values_row <- merge(shaped_cell_values, row_factor_margin)
+        if (length(row_factors) == 0){
+          shaped_cell_values <- shaped_cell_values_row
+        }
+      }
+      # if multiple row factors (>1) then consider here adding inner margins (length(summaries) + length(unique(FACTOR LEVEL)))
+      # for outer margins
+      margin_item <- length(summaries) * length(columns_to_summarise)
+      
+      # Overall value - add only if column and row margins are in
+      overall_value <- NULL
+      for (margin_no in 1:margin_item){
+        overall_value[[margin_no]] <- margin_tables[[1]][1,margin_no]
+        names(overall_value[[margin_no]]) <- margin_name
+      }
+      overall_value <- plyr::ldply(overall_value)
+      
       # Column Factor - add as row margin
       if(length(row_factors) > 0) {
-        column_factor_margin <- margin_tables[[which(sapply(power_sets, function(x) setequal(column_factors, x)))]][[length(column_factors) + 1]]
-        new_row <- c(rep(NA, length(row_factors) + length(summary_factors)), column_factor_margin)
-        shaped_cell_values <- rbind(shaped_cell_values, new_row)
-        shaped_cell_values[nrow(shaped_cell_values), 1] <- margin_name
-      }
-      overall_value <- margin_tables[[1]][1,1]
-      if(length(column_factors) > 0) {
-        row_factor_margin <- margin_tables[[which(sapply(power_sets, function(x) setequal(row_factors, x)))]][[length(row_factors) + 1]]
-        # append the vector for the summary of interest in row_factor_margin with the overall_value
-        if(length(row_factors) > 0) {
-          overall_row_margin <- c(row_factor_margin, overall_value)
+        column_factor_margin <- NULL
+        outer_row_margin <- NULL
+        for (margin_no in 1:margin_item){
+          column_factor_margin[[margin_no]] <- margin_tables[[which(sapply(power_sets, function(x) setequal(column_factors, x)))]][[margin_no + length(column_factors)]]
+          outer_row_margin[[margin_no]] <- c(rep(NA, length(row_factors_1)), column_factor_margin[[margin_no]])
+          names(outer_row_margin[[margin_no]]) <- names(shaped_cell_values) 
         }
-        else overall_row_margin <- overall_value
-        # add into the unstacked dataset
-        shaped_cell_values[[margin_name]] <- overall_row_margin
+        outer_row_margin <- plyr::ldply(outer_row_margin)
+        outer_row_margin[1] <- margin_name
+        outer_row_margin["Summary"] <- rev(summaries_display)   # TODO: code this in a "better" way.
+        outer_row_margin["Variable"] <- rev(rep(columns_to_summarise, each = length(summaries)))
+        if(length(column_factors) > 0) {
+          overall_row_margin <- cbind(outer_row_margin, overall_value)
+          shaped_cell_values <- rbind(shaped_cell_values_row, overall_row_margin)
+        } else {
+          overall_row_margin <- outer_row_margin
+          shaped_cell_values <- rbind(shaped_cell_values, overall_row_margin)
+        }
       }
       align <- paste0(paste(rep("c", ncol(shaped_cell_values) - 1), collapse = ""), "|", "c")
     }
@@ -1563,14 +1591,14 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
         }
         else {
           spanner_data <- unique(cell_values[column_factors])
-          col_names <- c(row_factors, as.character(spanner_data[[length(spanner_data)]]))
+          col_names <- c(row_factors_1, as.character(spanner_data[[length(spanner_data)]]))
           if(include_margins) {
             col_names <- c(col_names, margin_name)
           }
           names(shaped_cell_values) <- col_names
           if(length(column_factors) == 1) {
-            cgroup <- c(rep("", length(row_factors)), column_factors)
-            n.cgroup <- c(rep(1, length(row_factors)), nrow(spanner_data))
+            cgroup <- c(rep("", length(row_factors_1)), column_factors)
+            n.cgroup <- c(rep(1, length(row_factors_1)), nrow(spanner_data))
           }
           else if(length(column_factors) > 1) {
             # removes duplicate rows which exist when row factors present
@@ -1579,8 +1607,8 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
             lengths <- lapply(spanner_data[-length(spanner_data)], function(x) rle(as.character(x))$lengths)
             values <- lapply(spanner_data[-length(spanner_data)], function(x) rle(as.character(x))$values)
             span_length <- max(sapply(values, length))
-            lengths <- sapply(lengths, function(x) c(rep(1, length(row_factors)), x, rep(NA, span_length - length(x))))
-            values <- sapply(values, function(x) c(rep("", length(row_factors)), x, rep(NA, span_length - length(x))))
+            lengths <- sapply(lengths, function(x) c(rep(1, length(row_factors_1)), x, rep(NA, span_length - length(x))))
+            values <- sapply(values, function(x) c(rep("", length(row_factors_1)), x, rep(NA, span_length - length(x))))
             cgroup <- t(values)
             n.cgroup <- t(lengths)
           }
@@ -1600,7 +1628,8 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
             }
             css.cell <- matrix("", nrow = nrow(shaped_cell_values), ncol = ncol(shaped_cell_values))
             if(length(column_factors) > 0) css.cell[ , ncol(css.cell)] <- "font-weight: 900;"
-            if(length(row_factors) > 0) css.cell[nrow(css.cell), ] <- "border-top: 1px solid #BEBEBE; font-weight: 900;"
+            if(length(row_factors) > 0) css.cell[which(shaped_cell_values[1]==margin_name), ] <- "border-top: 1px; font-weight: 900;"
+            if(length(row_factors) > 0) css.cell[dplyr::first(which(shaped_cell_values[1]==margin_name)), ] <- "border-top: 1px solid #BEBEBE; font-weight: 900;"
           }
           tab <- htmlTable::htmlTable(shaped_cell_values, caption = caption, total = FALSE, align = align, tfoot = notes, cgroup = cgroup, n.cgroup = n.cgroup, css.cell = css.cell, ... = ...)
           class(tab) <- class(tab)[!class(tab) == "html"]
