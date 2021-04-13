@@ -2338,18 +2338,30 @@ Public Class RLink
     '''--------------------------------------------------------------------------------------------
     Public Sub OpenDialogFromScript(strNewScript As String)
         Dim lstNewRCodeStructures As New List(Of RCodeStructure)
+        Dim strCommentFromDialogue As String
 
         Dim clsRScript As RScript.clsRScript = New RScript.clsRScript(strNewScript)
 
-        For Each clsRStatement As RScript.clsRStatement In clsRScript.lstRStatements
-            lstNewRCodeStructures.Add(ProcessSingleRStatement(clsRStatement))
+        For iRstatement As Integer = 0 To clsRScript.lstRStatements.Count - 1
+            'Getting the dialogue am working on by getting the comment 
+            If iRstatement = 0 Then
+                If clsRScript.lstRStatements(0).clsAssignment.strPrefix <> "" Then
+                    strCommentFromDialogue = (clsRScript.lstRStatements(0).clsAssignment.strPrefix).ToLower
+                End If
+            End If
+            lstNewRCodeStructures.Add(ProcessSingleRStatement(clsRScript.lstRStatements(iRstatement)))
         Next
 
-        'Make it return only one line of code
-        lstNewRCodeStructures.RemoveAt(0)
-        dlgSplitText.lstScriptsRCodeStructure = lstNewRCodeStructures
-        dlgSplitText.ShowDialog()
+        If clsRScript.lstRStatements(0).clsAssignment.strPrefix <> "" Then
+            If strCommentFromDialogue.Contains("split text column") Then
+                'Restricting it to returning the main Rfunction RcodeStructure only
+                lstNewRCodeStructures.RemoveAt(0)
+                dlgSplitText.lstScriptsRCodeStructure = lstNewRCodeStructures
+                dlgSplitText.ShowDialog()
+            ElseIf strCommentFromDialogue.Contains("display daily data") Then
 
+            End If
+        End If
     End Sub
 
     Private Shared Function ProcessSingleRStatement(clsNewRStatement As RScript.clsRStatement) As RCodeStructure
