@@ -29,11 +29,10 @@ Partial Class dlgCompareColumns
         Me.lblTolerance = New System.Windows.Forms.Label()
         Me.rdoByValue = New System.Windows.Forms.RadioButton()
         Me.rdoByRow = New System.Windows.Forms.RadioButton()
+        Me.ucrInputTolerance = New instat.ucrInputComboBox()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrSaveLogical = New instat.ucrSave()
         Me.ucrChkSort = New instat.ucrCheck()
-        Me.ucrChkUnique = New instat.ucrCheck()
-        Me.ucrInputTolerance = New instat.ucrInputComboBox()
         Me.ucrChkAllValues = New instat.ucrCheck()
         Me.ucrChkUnion = New instat.ucrCheck()
         Me.ucrChkIntersection = New instat.ucrCheck()
@@ -43,6 +42,7 @@ Partial Class dlgCompareColumns
         Me.ucrReceiverSecond = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirst = New instat.ucrReceiverSingle()
         Me.ucrSelectorCompareColumns = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkUnique = New instat.ucrCheck()
         Me.grpComparisions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -94,6 +94,14 @@ Partial Class dlgCompareColumns
         Me.rdoByRow.Tag = ""
         Me.rdoByRow.UseVisualStyleBackColor = True
         '
+        'ucrInputTolerance
+        '
+        Me.ucrInputTolerance.AddQuotesIfUnrecognised = True
+        Me.ucrInputTolerance.GetSetSelectedIndex = -1
+        Me.ucrInputTolerance.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTolerance, "ucrInputTolerance")
+        Me.ucrInputTolerance.Name = "ucrInputTolerance"
+        '
         'ucrPnlOptions
         '
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
@@ -109,20 +117,6 @@ Partial Class dlgCompareColumns
         Me.ucrChkSort.Checked = False
         resources.ApplyResources(Me.ucrChkSort, "ucrChkSort")
         Me.ucrChkSort.Name = "ucrChkSort"
-        '
-        'ucrChkUnique
-        '
-        Me.ucrChkUnique.Checked = False
-        resources.ApplyResources(Me.ucrChkUnique, "ucrChkUnique")
-        Me.ucrChkUnique.Name = "ucrChkUnique"
-        '
-        'ucrInputTolerance
-        '
-        Me.ucrInputTolerance.AddQuotesIfUnrecognised = True
-        Me.ucrInputTolerance.GetSetSelectedIndex = -1
-        Me.ucrInputTolerance.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTolerance, "ucrInputTolerance")
-        Me.ucrInputTolerance.Name = "ucrInputTolerance"
         '
         'ucrChkAllValues
         '
@@ -185,11 +179,16 @@ Partial Class dlgCompareColumns
         resources.ApplyResources(Me.ucrSelectorCompareColumns, "ucrSelectorCompareColumns")
         Me.ucrSelectorCompareColumns.Name = "ucrSelectorCompareColumns"
         '
+        'ucrChkUnique
+        '
+        Me.ucrChkUnique.Checked = False
+        resources.ApplyResources(Me.ucrChkUnique, "ucrChkUnique")
+        Me.ucrChkUnique.Name = "ucrChkUnique"
+        '
         'dlgCompareColumns
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrChkUnique)
         Me.Controls.Add(Me.lblTolerance)
         Me.Controls.Add(Me.ucrInputTolerance)
         Me.Controls.Add(Me.rdoByValue)
@@ -204,6 +203,7 @@ Partial Class dlgCompareColumns
         Me.Controls.Add(Me.ucrReceiverSecond)
         Me.Controls.Add(Me.ucrReceiverFirst)
         Me.Controls.Add(Me.ucrSelectorCompareColumns)
+        Me.Controls.Add(Me.ucrChkUnique)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
