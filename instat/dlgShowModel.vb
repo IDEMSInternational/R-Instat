@@ -218,6 +218,7 @@ Public Class dlgShowModel
 
     Private Sub ucrReceiverProbabilitiesOrValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverProbabilitiesOrValues.ControlValueChanged, ucrChkEnterValues.ControlValueChanged, ucrInputValuesOrProbabilities.ControlValueChanged
         AddPandQParameters()
+        SwitchBetweenSaveGraphOrColumn()
     End Sub
 
     Private Sub UpdateDistributionAndParameters()
