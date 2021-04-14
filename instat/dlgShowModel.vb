@@ -143,13 +143,17 @@ Public Class dlgShowModel
 
         'ucrReceiverProbabilitiesOrValues.AddAdditionalCodeParameterPair(clsProbabilitiesFunction, New RParameter("q", 1), 1)
         'ucrInputValuesOrProbabilities.AddAdditionalCodeParameterPair(clsProbabilitiesFunction, New RParameter("q", 1, bNewIncludeArgumentName:=False), iAdditionalPairNo:=1)
-        ucrPnlGraphValues.AddAdditionalCodeParameterPair(clsProbabilitiesFunction, ucrPnlGraphValues.GetParameter, iAdditionalPairNo:=1)
+        If bReset Then
+            ucrPnlGraphValues.AddAdditionalCodeParameterPair(clsProbabilitiesFunction, ucrPnlGraphValues.GetParameter, iAdditionalPairNo:=1)
+            ucrPnlGraphValues.SetRCode(clsQuantilesFunction, bReset)
+        End If
         'ucrChkEnterValues.AddAdditionalCodeParameterPair(clsProbabilitiesFunction, ucrChkEnterValues.GetParameter, iAdditionalPairNo:=1)
         ucrPnlDistributionType.SetRCode(clsPipeOperator, bReset)
         'ucrReceiverProbabilitiesOrValues.SetRCode(clsQuantilesFunction, bReset)
-        ucrPnlGraphValues.SetRCode(clsQuantilesFunction, bReset)
+
         'ucrInputValuesOrProbabilities.SetRCode(clsConcatenateFunction, bReset)
         ucrDistributionAndParameters.SetRCode(clsQuantilesFunction, bReset)
+        SwitchBetweenSaveGraphOrColumn()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -283,7 +287,7 @@ Public Class dlgShowModel
         End If
     End Sub
 
-    Private Sub ucrSaveGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlValueChanged
+    Private Sub ucrSaveGraph_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveGraph.ControlValueChanged, ucrSaveNewColumn.ControlValueChanged
         SwitchBetweenSaveGraphOrColumn()
     End Sub
 
