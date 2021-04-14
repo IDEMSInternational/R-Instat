@@ -109,11 +109,11 @@ Partial Class dlgShowModel
         '
         'cmdDistributionOptions
         '
-        Me.cmdDistributionOptions.Location = New System.Drawing.Point(384, 279)
+        Me.cmdDistributionOptions.Location = New System.Drawing.Point(388, 248)
         Me.cmdDistributionOptions.Name = "cmdDistributionOptions"
-        Me.cmdDistributionOptions.Size = New System.Drawing.Size(111, 31)
+        Me.cmdDistributionOptions.Size = New System.Drawing.Size(100, 25)
         Me.cmdDistributionOptions.TabIndex = 12
-        Me.cmdDistributionOptions.Text = "Distribution Options"
+        Me.cmdDistributionOptions.Text = "Graphics Options"
         Me.cmdDistributionOptions.UseVisualStyleBackColor = True
         '
         'rdoGraph
@@ -190,7 +190,7 @@ Partial Class dlgShowModel
         '
         Me.ucrDistributionAndParameters.Location = New System.Drawing.Point(248, 98)
         Me.ucrDistributionAndParameters.Name = "ucrDistributionAndParameters"
-        Me.ucrDistributionAndParameters.Size = New System.Drawing.Size(247, 170)
+        Me.ucrDistributionAndParameters.Size = New System.Drawing.Size(247, 147)
         Me.ucrDistributionAndParameters.TabIndex = 6
         '
         'ucrSelectorShowModel
