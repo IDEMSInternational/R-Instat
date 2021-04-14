@@ -68,6 +68,7 @@ Partial Class dlgClimaticSummary
         Me.ucrPnlAnnualWithin = New instat.UcrPanel()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.rdoStation = New System.Windows.Forms.RadioButton()
+        Me.rdoDaily = New System.Windows.Forms.RadioButton()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -284,10 +285,21 @@ Partial Class dlgClimaticSummary
         Me.rdoStation.TabStop = True
         Me.rdoStation.UseVisualStyleBackColor = True
         '
+        'rdoDaily
+        '
+        resources.ApplyResources(Me.rdoDaily, "rdoDaily")
+        Me.rdoDaily.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDaily.FlatAppearance.BorderSize = 2
+        Me.rdoDaily.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDaily.Name = "rdoDaily"
+        Me.rdoDaily.TabStop = True
+        Me.rdoDaily.UseVisualStyleBackColor = True
+        '
         'dlgClimaticSummary
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoDaily)
         Me.Controls.Add(Me.rdoStation)
         Me.Controls.Add(Me.ucrReceiverElements)
         Me.Controls.Add(Me.ucrInputFilterPreview)
@@ -350,4 +362,5 @@ Partial Class dlgClimaticSummary
     Friend WithEvents cmdMissingOptions As Button
     Friend WithEvents ucrReceiverElements As ucrReceiverMultiple
     Friend WithEvents rdoStation As RadioButton
+    Friend WithEvents rdoDaily As RadioButton
 End Class
