@@ -205,9 +205,6 @@ Public Class ucrButtons
             AddButtonInCommentTextbox()
             SetDefaults()
             bFirstLoad = False
-            If frmMain.clsInstatOptions IsNot Nothing Then
-                strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
-            End If
         End If
         If frmMain.clsInstatOptions IsNot Nothing Then
             If frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
@@ -217,6 +214,8 @@ Public Class ucrButtons
                 cmdHelp.Width = cmdOk.Width
                 cmdLanguage.Visible = False
             End If
+            strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+            autoTranslate(Me.ParentForm) 'needed because otherwise buttons are not translated the 2nd time a dialog is opened
         End If
 
     End Sub
@@ -269,12 +268,11 @@ Public Class ucrButtons
             strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
         End If
 
-        Try
-            Dim CultureInfo As New Globalization.CultureInfo(strCurrLang)
-            autoTranslate(Me.ParentForm, CultureInfo)
-        Catch ex As Exception
-            autoTranslate(Me.ParentForm)
-        End Try
+        Dim strConfiguredLanguage As String = frmMain.clsInstatOptions.strLanguageCultureCode
+        frmMain.clsInstatOptions.strLanguageCultureCode = strCurrLang
+        autoTranslate(Me.ParentForm)
+        frmMain.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
+
         If cmdLanguage.FlatStyle = FlatStyle.Popup Then
             cmdLanguage.FlatStyle = FlatStyle.Flat
         Else
