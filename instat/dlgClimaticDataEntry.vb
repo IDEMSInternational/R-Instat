@@ -74,10 +74,10 @@ Public Class dlgClimaticDataEntry
         ucrReceiverStation.SetIncludedDataTypes({"factor"})
         ucrReceiverStation.strSelectorHeading = "Factors"
 
-        ucrInputSelectStation.SetParameter(New RParameter("station_name", 6))
+        'ucrInputSelectStation.SetParameter(New RParameter("station_name", 6))
         ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
-        ucrInputSelectStation.AddQuotesIfUnrecognised = False
-        ucrInputSelectStation.bFirstLevelDefault = True
+        'ucrInputSelectStation.AddQuotesIfUnrecognised = False
+        ucrInputSelectStation.strQuotes = ""
 
         ucrReceiverDate.Selector = ucrSelectorClimaticDataEntry
         ucrReceiverDate.SetClimaticType("date")
@@ -132,6 +132,7 @@ Public Class dlgClimaticDataEntry
 
         ucrSelectorClimaticDataEntry.Reset()
         ucrReceiverElements.SetMeAsReceiver()
+        ucrInputSelectStation.bFirstLevelDefault = True
         'ucrChkDefaultValue.Checked = False
         'ucrChkAllowTrace.Checked = False
         'ucrChkTransform.Checked = False
@@ -162,7 +163,7 @@ Public Class dlgClimaticDataEntry
         ucrReceiverDate.SetRCode(clsGetDataEntry, bReset)
         ucrReceiverElements.SetRCode(clsGetDataEntry, bReset)
         ucrReceiverViewVariables.SetRCode(clsGetDataEntry, bReset)
-        ucrInputSelectStation.SetRCode(clsGetDataEntry, bReset)
+        'ucrInputSelectStation.SetRCode(clsGetDataEntry, bReset)
         ucrStartDate.SetRCode(clsGetDataEntry, bReset)
         ucrEndDate.SetRCode(clsGetDataEntry, bReset)
         If bReset Then
@@ -176,7 +177,7 @@ Public Class dlgClimaticDataEntry
         If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty Then
             ucrBase.OKEnabled(clsSaveDataEntry.ContainsParameter("rows_changed"))
             cmdEnterData.Enabled = True
-            If Not ucrReceiverStation.IsEmpty AndAlso ucrInputSelectStation.IsEmpty Then
+            If Not ucrReceiverStation.IsEmpty Then
                 cmdEnterData.Enabled = False
             End If
         Else
@@ -192,7 +193,7 @@ Public Class dlgClimaticDataEntry
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrInputSelectStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -264,7 +265,7 @@ Public Class dlgClimaticDataEntry
         Return dfTemp
     End Function
 
-    Private Sub ucrSelectorClimaticDataEntry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticDataEntry.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverDate.ControlValueChanged, ucrReceiverElements.ControlValueChanged, ucrReceiverViewVariables.ControlValueChanged, ucrInputSelectStation.ControlValueChanged, ucrInputType.ControlValueChanged, ucrStartDate.ControlValueChanged, ucrEndDate.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+    Private Sub ucrSelectorClimaticDataEntry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticDataEntry.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverDate.ControlValueChanged, ucrReceiverElements.ControlValueChanged, ucrReceiverViewVariables.ControlValueChanged, ucrInputType.ControlValueChanged, ucrStartDate.ControlValueChanged, ucrEndDate.ControlValueChanged, ucrPnlOptions.ControlValueChanged
         bChange = True
     End Sub
 
@@ -291,9 +292,10 @@ Public Class dlgClimaticDataEntry
 
     Private Sub StationControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrInputSelectStation.ControlValueChanged
         clsEditDataFrame.RemoveParameterByName(strStationColumn)
+        clsGetDataEntry.AddParameter("station_name", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=6)
         strStationColumn = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
         If Not strStationColumn = "" AndAlso Not ucrInputSelectStation.GetValue() = "" Then
-            clsEditDataFrame.AddParameter(strStationColumn, ucrInputSelectStation.GetValue(), iPosition:=0)
+            clsEditDataFrame.AddParameter(strStationColumn, Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=0)
         End If
     End Sub
 

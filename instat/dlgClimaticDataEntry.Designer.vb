@@ -42,7 +42,6 @@ Partial Class dlgClimaticDataEntry
         Me.ucrInputType = New instat.ucrInputComboBox()
         Me.ucrReceiverViewVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorClimaticDataEntry = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrInputSelectStation = New instat.ucrInputFactorLevels()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
@@ -51,6 +50,7 @@ Partial Class dlgClimaticDataEntry
         Me.lblNbRowsChanged = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblNbRowsChanged1 = New System.Windows.Forms.Label()
+        Me.ucrInputSelectStation = New instat.ucrInputFactorLevels()
         Me.SuspendLayout()
         '
         'rdoAdd
@@ -259,16 +259,6 @@ Partial Class dlgClimaticDataEntry
         Me.ucrSelectorClimaticDataEntry.Size = New System.Drawing.Size(210, 180)
         Me.ucrSelectorClimaticDataEntry.TabIndex = 3
         '
-        'ucrInputSelectStation
-        '
-        Me.ucrInputSelectStation.AddQuotesIfUnrecognised = True
-        Me.ucrInputSelectStation.GetSetSelectedIndex = -1
-        Me.ucrInputSelectStation.IsReadOnly = False
-        Me.ucrInputSelectStation.Location = New System.Drawing.Point(273, 125)
-        Me.ucrInputSelectStation.Name = "ucrInputSelectStation"
-        Me.ucrInputSelectStation.Size = New System.Drawing.Size(120, 21)
-        Me.ucrInputSelectStation.TabIndex = 9
-        '
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
@@ -347,11 +337,22 @@ Partial Class dlgClimaticDataEntry
         Me.lblNbRowsChanged1.TabIndex = 90
         Me.lblNbRowsChanged1.Text = "Label3"
         '
+        'ucrInputSelectStation
+        '
+        Me.ucrInputSelectStation.AddQuotesIfUnrecognised = True
+        Me.ucrInputSelectStation.GetSetSelectedIndex = -1
+        Me.ucrInputSelectStation.IsReadOnly = False
+        Me.ucrInputSelectStation.Location = New System.Drawing.Point(273, 127)
+        Me.ucrInputSelectStation.Name = "ucrInputSelectStation"
+        Me.ucrInputSelectStation.Size = New System.Drawing.Size(126, 21)
+        Me.ucrInputSelectStation.TabIndex = 91
+        '
         'dlgClimaticDataEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(411, 520)
+        Me.Controls.Add(Me.ucrInputSelectStation)
         Me.Controls.Add(Me.lblNbRowsChanged1)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblNbRowsChanged)
@@ -365,7 +366,6 @@ Partial Class dlgClimaticDataEntry
         Me.Controls.Add(Me.ucrReceiverViewVariables)
         Me.Controls.Add(Me.ucrSelectorClimaticDataEntry)
         Me.Controls.Add(Me.cmdEnterData)
-        Me.Controls.Add(Me.ucrInputSelectStation)
         Me.Controls.Add(Me.lblStartingDate)
         Me.Controls.Add(Me.lblStation)
         Me.Controls.Add(Me.ucrReceiverStation)
@@ -398,7 +398,6 @@ Partial Class dlgClimaticDataEntry
     Friend WithEvents lblStation As Label
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
     Friend WithEvents lblStartingDate As Label
-    Friend WithEvents ucrInputSelectStation As ucrInputFactorLevels
     Friend WithEvents cmdEnterData As Button
     Friend WithEvents ucrSelectorClimaticDataEntry As ucrSelectorByDataFrameAddRemove
     Friend WithEvents Label2 As Label
@@ -414,4 +413,5 @@ Partial Class dlgClimaticDataEntry
     Friend WithEvents lblNbRowsChanged As Label
     Friend WithEvents cmdOptions As Button
     Friend WithEvents lblNbRowsChanged1 As Label
+    Friend WithEvents ucrInputSelectStation As ucrInputFactorLevels
 End Class

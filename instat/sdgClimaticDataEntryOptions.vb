@@ -30,8 +30,8 @@ Public Class sdgClimaticDataEntryOptions
         ucrChkTransform.SetText("Transform:")
 
         'ucrInputTransform.SetItems({"10", "Inch to mm"})
-        ucrInputTransform.SetItems({"10"}) 'todo. temporary
-        ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=1) 'temporary`
+        ucrInputTransform.SetItems({"0.1", "25.4", "0.254"}) 'todo. temporary
+        ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=0.1) 'temporary`
         ucrInputTransform.Visible = False
 
         ucrChkDefaultValue.SetText("Default Value")
@@ -54,7 +54,7 @@ Public Class sdgClimaticDataEntryOptions
         ucrNudAfter.Visible = False
         lblBefore.Visible = False
         lblAfter.Visible = False
-        ucrInputTransform.SetName(10)
+        ucrInputTransform.GetSetSelectedIndex = 0
     End Sub
 
     Private Sub ucrChkDefaultValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefaultValue.ControlValueChanged

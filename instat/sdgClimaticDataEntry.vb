@@ -91,7 +91,7 @@ Public Class sdgClimaticDataEntry
                 If bAllowTrace AndAlso newValue.ToUpper = "T" Then
                     newValue = 0.03
                 ElseIf bTransform And IsNumeric(newValue) Then
-                    newValue = newValue / dTranformValue
+                    newValue = newValue * dTranformValue
                 End If
             End If
 
