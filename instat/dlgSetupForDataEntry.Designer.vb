@@ -30,8 +30,6 @@ Partial Class dlgSetupForDataEntry
         Me.lblDateTo = New System.Windows.Forms.Label()
         Me.lblDateFrom = New System.Windows.Forms.Label()
         Me.grpElements = New System.Windows.Forms.GroupBox()
-        Me.ucrNewDFName = New instat.ucrSave()
-        Me.ucrChkAddFlagVariables = New instat.ucrCheck()
         Me.ucrInputSpecify3 = New instat.ucrInputTextBox()
         Me.ucrInputSpecify2 = New instat.ucrInputTextBox()
         Me.ucrInputSpecify1 = New instat.ucrInputTextBox()
@@ -44,6 +42,11 @@ Partial Class dlgSetupForDataEntry
         Me.ucrChkTmin = New instat.ucrCheck()
         Me.ucrChkTmax = New instat.ucrCheck()
         Me.ucrChkPrecip = New instat.ucrCheck()
+        Me.lblAddFlagVariables = New System.Windows.Forms.Label()
+        Me.ucrChkAddKey = New instat.ucrCheck()
+        Me.ucrReceiverAddFlagVariables = New instat.ucrReceiverMultiple()
+        Me.ucrNewDFName = New instat.ucrSave()
+        Me.ucrChkAddFlagVariables = New instat.ucrCheck()
         Me.ucrDateTo = New instat.ucrDateTimePicker()
         Me.ucrDateFrom = New instat.ucrDateTimePicker()
         Me.ucrInputSelectStation = New instat.ucrInputFactorLevels()
@@ -51,6 +54,8 @@ Partial Class dlgSetupForDataEntry
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorSetupDataEntry = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.lblDate = New System.Windows.Forms.Label()
         Me.grpElements.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -111,17 +116,6 @@ Partial Class dlgSetupForDataEntry
         resources.ApplyResources(Me.grpElements, "grpElements")
         Me.grpElements.Name = "grpElements"
         Me.grpElements.TabStop = False
-        '
-        'ucrNewDFName
-        '
-        resources.ApplyResources(Me.ucrNewDFName, "ucrNewDFName")
-        Me.ucrNewDFName.Name = "ucrNewDFName"
-        '
-        'ucrChkAddFlagVariables
-        '
-        Me.ucrChkAddFlagVariables.Checked = False
-        resources.ApplyResources(Me.ucrChkAddFlagVariables, "ucrChkAddFlagVariables")
-        Me.ucrChkAddFlagVariables.Name = "ucrChkAddFlagVariables"
         '
         'ucrInputSpecify3
         '
@@ -201,6 +195,37 @@ Partial Class dlgSetupForDataEntry
         resources.ApplyResources(Me.ucrChkPrecip, "ucrChkPrecip")
         Me.ucrChkPrecip.Name = "ucrChkPrecip"
         '
+        'lblAddFlagVariables
+        '
+        resources.ApplyResources(Me.lblAddFlagVariables, "lblAddFlagVariables")
+        Me.lblAddFlagVariables.Name = "lblAddFlagVariables"
+        '
+        'ucrChkAddKey
+        '
+        Me.ucrChkAddKey.Checked = False
+        resources.ApplyResources(Me.ucrChkAddKey, "ucrChkAddKey")
+        Me.ucrChkAddKey.Name = "ucrChkAddKey"
+        '
+        'ucrReceiverAddFlagVariables
+        '
+        Me.ucrReceiverAddFlagVariables.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverAddFlagVariables, "ucrReceiverAddFlagVariables")
+        Me.ucrReceiverAddFlagVariables.Name = "ucrReceiverAddFlagVariables"
+        Me.ucrReceiverAddFlagVariables.Selector = Nothing
+        Me.ucrReceiverAddFlagVariables.strNcFilePath = ""
+        Me.ucrReceiverAddFlagVariables.ucrSelector = Nothing
+        '
+        'ucrNewDFName
+        '
+        resources.ApplyResources(Me.ucrNewDFName, "ucrNewDFName")
+        Me.ucrNewDFName.Name = "ucrNewDFName"
+        '
+        'ucrChkAddFlagVariables
+        '
+        Me.ucrChkAddFlagVariables.Checked = False
+        resources.ApplyResources(Me.ucrChkAddFlagVariables, "ucrChkAddFlagVariables")
+        Me.ucrChkAddFlagVariables.Name = "ucrChkAddFlagVariables"
+        '
         'ucrDateTo
         '
         Me.ucrDateTo.DateValue = New Date(2021, 3, 27, 16, 14, 1, 560)
@@ -254,10 +279,29 @@ Partial Class dlgSetupForDataEntry
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
+        'lblDate
+        '
+        resources.ApplyResources(Me.lblDate, "lblDate")
+        Me.lblDate.Name = "lblDate"
+        '
         'dlgSetupForDataEntry
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverDate)
+        Me.Controls.Add(Me.lblDate)
+        Me.Controls.Add(Me.ucrChkAddKey)
+        Me.Controls.Add(Me.ucrReceiverAddFlagVariables)
+        Me.Controls.Add(Me.lblAddFlagVariables)
         Me.Controls.Add(Me.ucrNewDFName)
         Me.Controls.Add(Me.ucrChkAddFlagVariables)
         Me.Controls.Add(Me.grpElements)
@@ -312,4 +356,9 @@ Partial Class dlgSetupForDataEntry
     Friend WithEvents lblDateTo As Label
     Friend WithEvents lblDateFrom As Label
     Friend WithEvents ucrNewDFName As ucrSave
+    Friend WithEvents lblAddFlagVariables As Label
+    Friend WithEvents ucrReceiverAddFlagVariables As ucrReceiverMultiple
+    Friend WithEvents ucrChkAddKey As ucrCheck
+    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
+    Friend WithEvents lblDate As Label
 End Class

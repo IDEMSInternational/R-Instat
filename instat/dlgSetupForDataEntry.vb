@@ -21,9 +21,28 @@ Public Class dlgSetupForDataEntry
     Private bReset As Boolean = True
     Private clsNewDataFrame As New RFunction
     Private clsAddFlag As New RFunction
+    Private clsFactorFunction As New RFunction
+    Private clsCFunction As New RFunction
+    Private clsSeqFunction As New RFunction
+    Private clsAddKey As New RFunction
+    Private clsCAddKeyFunction As New RFunction
+    Private clsGetKey As RFunction
+
+    Private iDialogHeight As Integer
+    Private iBaseMaxY As Integer
+
+    ''' <summary> Store the name of the specify value entered. </summary>
+    Private strSpecify1 As String = ""
+    Private strSpecify2 As String = ""
+    Private strSpecify3 As String = ""
+
+    ''' <summary> Store the name of the station value selected. </summary>
+    Private strStation As String = ""
 
     Private Sub dlgSetupForDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
+            iDialogHeight = Me.Height
+            iBaseMaxY = ucrBase.Location.Y
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -45,15 +64,15 @@ Public Class dlgSetupForDataEntry
         ucrReceiverStation.SetIncludedDataTypes({"factor"})
         ucrReceiverStation.strSelectorHeading = "Factors"
 
+        ucrReceiverDate.Selector = ucrSelectorSetupDataEntry
+        ucrReceiverDate.SetClimaticType("date")
+        ucrReceiverDate.SetIncludedDataTypes({"Date"})
+        ucrReceiverDate.bAutoFill = True
+        ucrReceiverDate.SetParameterIsString()
+        ucrReceiverDate.strSelectorHeading = "Date"
+
         ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
         ucrInputSelectStation.AddQuotesIfUnrecognised = False
-        ucrInputSelectStation.bFirstLevelDefault = True
-
-        'ucrStartDate.SetParameter(New RParameter("start_date", iNewPosition:=8))
-        'ucrDateFrom.SetParameterIsRDate()
-
-        'ucrEndDate.SetParameter(New RParameter("end_date", iNewPosition:=9))
-        'ucrDateTo.SetParameterIsRDate()
 
         ucrChkPrecip.SetText("precip")
 
@@ -74,33 +93,55 @@ Public Class dlgSetupForDataEntry
         ucrChkSpecify3.SetText("specify3")
 
         ucrChkAddFlagVariables.SetText("Add Flag Variables")
-        'ucrChkAddFlagVariables.SetParameter(New RParameter("add_flag", iNewPosition:=11))
-        ucrInputSpecify1.Visible = False
-        ucrInputSpecify2.Visible = False
-        ucrInputSpecify3.Visible = False
 
-        ' ucrNewSheetName
+        ucrChkAddKey.SetText("Add Key")
+
+        ucrReceiverAddFlagVariables.Selector = ucrSelectorSetupDataEntry
+        ucrReceiverAddFlagVariables.SetParameterIsString()
+        ucrReceiverAddFlagVariables.strSelectorHeading = "Numerics"
+        ucrReceiverAddFlagVariables.SetIncludedDataTypes({"numeric"}, bStrict:=True)
+        ucrReceiverAddFlagVariables.bAutoFill = True
+
         ucrNewDFName.SetSaveTypeAsDataFrame()
         ucrNewDFName.SetLabelText("New Data Frame Name:")
         ucrNewDFName.SetIsTextBox()
+
+        ucrInputSpecify1.Visible = False
+        ucrInputSpecify2.Visible = False
+        ucrInputSpecify3.Visible = False
 
         ucrPnlOptions.AddRadioButton(rdoNew)
         ucrPnlOptions.AddRadioButton(rdoAddFlags)
         ucrPnlOptions.AddFunctionNamesCondition(rdoNew, "data.frame")
         ucrPnlOptions.AddFunctionNamesCondition(rdoAddFlags, "placeholdercommand")
         ucrPnlOptions.AddToLinkedControls({ucrInputSelectStation, ucrDateFrom, ucrDateTo, ucrChkAddFlagVariables, ucrNewDFName}, {rdoNew}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverAddFlagVariables, ucrReceiverDate, ucrChkAddKey}, {rdoAddFlags}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectStation.SetLinkedDisplayControl(lblSelectStation)
         ucrDateFrom.SetLinkedDisplayControl(lblDateFrom)
         ucrDateTo.SetLinkedDisplayControl(lblDateTo)
+        ucrReceiverDate.SetLinkedDisplayControl(lblDate)
+        ucrReceiverAddFlagVariables.SetLinkedDisplayControl(lblAddFlagVariables)
 
     End Sub
 
     Private Sub SetDefaults()
         clsNewDataFrame = New RFunction
         clsAddFlag = New RFunction
+        clsFactorFunction = New RFunction
+        clsCFunction = New RFunction
+        clsSeqFunction = New RFunction
+        clsCAddKeyFunction = New RFunction
+        clsGetKey = New RFunction
+
+        clsGetKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
+        clsGetKey.AddParameter("key_name", Chr(34) & "key" & Chr(34), iPosition:=0)
 
         ucrSelectorSetupDataEntry.Reset()
-        ucrReceiverStation.SetMeAsReceiver()
+        ucrReceiverAddFlagVariables.SetMeAsReceiver()
+        ucrInputSelectStation.bFirstLevelDefault = True
+
+        ucrChkAddKey.Checked = True
+
         ucrChkSpecify1.Checked = False
         ucrChkSpecify2.Checked = False
         ucrChkSpecify3.Checked = False
@@ -116,7 +157,26 @@ Public Class dlgSetupForDataEntry
         ucrDateTo.DateValue = ucrDateFrom.DateValue.AddMonths(1).AddDays(-1)
 
         clsNewDataFrame.SetRCommand("data.frame")
+
         clsAddFlag.SetRCommand("placeholdercommand")
+
+        clsFactorFunction.SetRCommand("factor")
+        clsFactorFunction.AddParameter("x", "NA", iPosition:=0)
+        clsFactorFunction.AddParameter("levels", clsRFunctionParameter:=clsCFunction, iPosition:=1)
+
+        clsCFunction.SetRCommand("c")
+        clsCFunction.AddParameter("data", Chr(34) & "data" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsCFunction.AddParameter("edit", Chr(34) & "edit" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+        clsCFunction.AddParameter("add", Chr(34) & "add" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
+
+        clsSeqFunction.SetRCommand("seq")
+        clsSeqFunction.AddParameter("by", Chr(34) & "day" & Chr(34), iPosition:=2)
+
+        clsAddKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
+        clsAddKey.AddParameter("key_name", Chr(34) & "key" & Chr(34), iPosition:=1)
+
+        clsCAddKeyFunction.SetRCommand("c")
+        clsCAddKeyFunction.AddParameter("date", Chr(34) & "date" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
 
         clsNewDataFrame.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
@@ -127,14 +187,68 @@ Public Class dlgSetupForDataEntry
 
     End Sub
     Private Sub TestOkEnabled()
-        If Not ucrReceiverStation.IsEmpty AndAlso (ucrChkPrecip.Checked OrElse ucrChkSunh.Checked OrElse ucrChkTmax.Checked OrElse ucrChkTmin.Checked OrElse
+        If rdoNew.Checked Then
+            If Not ucrReceiverStation.IsEmpty AndAlso (ucrChkPrecip.Checked OrElse ucrChkSunh.Checked OrElse ucrChkTmax.Checked OrElse ucrChkTmin.Checked OrElse
             ucrChkWD.Checked OrElse ucrChkWS.Checked OrElse ucrChkSpecify1.Checked OrElse ucrChkSpecify2.Checked OrElse ucrChkSpecify3.Checked) Then
-            ucrBase.OKEnabled(True)
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         Else
-            ucrBase.OKEnabled(False)
+            If Not ucrReceiverStation.IsEmpty AndAlso Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverAddFlagVariables.IsEmpty Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
     Private Sub AddRemoveParameter()
+        If ucrChkPrecip.Checked AndAlso ucrChkAddFlagVariables.Checked Then
+            clsNewDataFrame.AddParameter("precip_fl", clsRFunctionParameter:=clsFactorFunction, iPosition:=11)
+        Else
+            clsNewDataFrame.RemoveParameterByName("precip_fl")
+        End If
+        If ucrChkTmax.Checked AndAlso ucrChkAddFlagVariables.Checked Then
+            clsNewDataFrame.AddParameter("tmax_fl", clsRFunctionParameter:=clsFactorFunction, iPosition:=12)
+        Else
+            clsNewDataFrame.RemoveParameterByName("tmax_fl")
+        End If
+        If ucrChkTmin.Checked AndAlso ucrChkAddFlagVariables.Checked Then
+            clsNewDataFrame.AddParameter("tmin_fl", clsRFunctionParameter:=clsFactorFunction, iPosition:=13)
+        Else
+            clsNewDataFrame.RemoveParameterByName("tmin_fl")
+        End If
+        If ucrChkSunh.Checked AndAlso ucrChkAddFlagVariables.Checked Then
+            clsNewDataFrame.AddParameter("sunh_fl", clsRFunctionParameter:=clsFactorFunction, iPosition:=14)
+        Else
+            clsNewDataFrame.RemoveParameterByName("sunh_fl")
+        End If
+        If ucrChkWD.Checked AndAlso ucrChkAddFlagVariables.Checked Then
+            clsNewDataFrame.AddParameter("wd_fl", clsRFunctionParameter:=clsFactorFunction, iPosition:=15)
+        Else
+            clsNewDataFrame.RemoveParameterByName("wd_fl")
+        End If
+        If ucrChkWS.Checked AndAlso ucrChkAddFlagVariables.Checked Then
+            clsNewDataFrame.AddParameter("ws_fl", clsRFunctionParameter:=clsFactorFunction, iPosition:=16)
+        Else
+            clsNewDataFrame.RemoveParameterByName("ws_fl")
+        End If
+        If ucrChkSpecify1.Checked AndAlso ucrChkAddFlagVariables.Checked Then
+            clsNewDataFrame.AddParameter(ucrInputSpecify1.GetValue() & "_fl", clsRFunctionParameter:=clsFactorFunction, iPosition:=17)
+        Else
+            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify1.GetValue() & "_fl")
+        End If
+        If ucrChkSpecify2.Checked AndAlso ucrChkAddFlagVariables.Checked Then
+            clsNewDataFrame.AddParameter(ucrInputSpecify2.GetValue() & "_fl", clsRFunctionParameter:=clsFactorFunction, iPosition:=18)
+        Else
+            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify2.GetValue() & "_fl")
+        End If
+        If ucrChkSpecify3.Checked AndAlso ucrChkAddFlagVariables.Checked Then
+            clsNewDataFrame.AddParameter(ucrInputSpecify3.GetValue() & "_fl", clsRFunctionParameter:=clsFactorFunction, iPosition:=19)
+        Else
+            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify3.GetValue() & "_fl")
+        End If
+
         If ucrChkPrecip.Checked Then
             clsNewDataFrame.AddParameter("precip", "as.numeric(NA)", iPosition:=2)
         Else
@@ -167,416 +281,128 @@ Public Class dlgSetupForDataEntry
         End If
     End Sub
 
-    'todo. merge this subroutine with AddRemoveParameter() subroutine
-    Private Sub AddFlagVariables()
-        Dim nrows As Integer = GetNumberOfRows()
-
-        If ucrChkPrecip.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter("precip_fl", "factor(rep(NA," & nrows & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=11)
-        Else
-            clsNewDataFrame.RemoveParameterByName("precip_fl")
-        End If
-        If ucrChkTmax.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter("tmax_fl", "factor(rep(NA," & nrows & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=12)
-        Else
-            clsNewDataFrame.RemoveParameterByName("tmax_fl")
-        End If
-        If ucrChkTmin.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter("tmin_fl", "factor(rep(NA," & nrows & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=13)
-        Else
-            clsNewDataFrame.RemoveParameterByName("tmin_fl")
-        End If
-        If ucrChkSunh.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter("sunh_fl", "factor(rep(NA," & nrows & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=14)
-        Else
-            clsNewDataFrame.RemoveParameterByName("sunh_fl")
-        End If
-        If ucrChkWD.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter("wd_fl", "factor(rep(NA," & nrows & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=15)
-        Else
-            clsNewDataFrame.RemoveParameterByName("wd_fl")
-        End If
-        If ucrChkWS.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter("ws_fl", "factor(rep(NA," & nrows & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=16)
-        Else
-            clsNewDataFrame.RemoveParameterByName("ws_fl")
-        End If
-        If ucrChkSpecify1.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter(ucrInputSpecify1.GetValue() & "_fl", "factor(rep(NA," & nrows & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=17)
-        Else
-            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify1.GetValue() & "_fl")
-        End If
-        If ucrChkSpecify2.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter(ucrInputSpecify2.GetValue() & "_fl", "factor(rep(NA," & nrows & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=18)
-        Else
-            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify2.GetValue() & "_fl")
-        End If
-        If ucrChkSpecify3.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter(ucrInputSpecify3.GetValue() & "_fl", "factor(rep(NA," & nrows & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=19)
-        Else
-            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify3.GetValue() & "_fl")
-        End If
-    End Sub
-
-
-
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrInputSelectStation.ControlValueChanged
+        ' This ensures clsNewDataFrame has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
+        ' Storing and then removing strSpecify3 as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
         If Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputSelectStation.IsEmpty Then
-            clsNewDataFrame.AddParameter(ucrReceiverStation.GetVariableNames(bWithQuotes:=False), "as.factor(" & ucrInputSelectStation.GetValue() & ")", iPosition:=0)
+            strStation = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
+            clsNewDataFrame.AddParameter(strStation, "as.factor(" & ucrInputSelectStation.GetValue() & ")", iPosition:=0)
             ucrNewDFName.SetPrefix(ucrInputSelectStation.GetValue().ToString.Trim(Chr(34)).ToLower.Replace(" ", "_"))
         Else
-            clsNewDataFrame.RemoveParameterByName(ucrReceiverStation.GetVariableNames(bWithQuotes:=False))
+            clsNewDataFrame.RemoveParameterByName(ucrInputSelectStation.GetValue().ToString.Trim(Chr(34)).ToLower.Replace(" ", "_"))
+            strStation = ""
         End If
+
     End Sub
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrChkPrecip.ControlContentsChanged, ucrChkSunh.ControlContentsChanged, ucrChkTmax.ControlContentsChanged, ucrChkTmin.ControlContentsChanged, ucrChkWD.ControlContentsChanged, ucrChkWS.ControlContentsChanged, ucrChkSpecify1.ControlContentsChanged, ucrChkSpecify2.ControlContentsChanged, ucrChkSpecify3.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
+
     Private Sub ucrDateTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDateTo.ControlValueChanged, ucrDateFrom.ControlValueChanged
-        clsNewDataFrame.AddParameter("date", "seq(" & "as.Date(" & Chr(34) & ucrDateFrom.DateValue.ToString("yyyy-MM-dd") & Chr(34) & ")" & "," & "as.Date(" & Chr(34) & ucrDateTo.DateValue.ToString("yyyy-MM-dd") & Chr(34) & ")" & "," & Chr(34) & "day" & Chr(34) & ")", iPosition:=1)
-        AddFlagVariables()
+        clsSeqFunction.AddParameter("from", "as.Date(" & Chr(34) & ucrDateFrom.DateValue.ToString("yyyy-MM-dd") & Chr(34) & ")", iPosition:=0)
+        clsSeqFunction.AddParameter("to", "as.Date(" & Chr(34) & ucrDateTo.DateValue.ToString("yyyy-MM-dd") & Chr(34) & ")", iPosition:=1)
+        clsNewDataFrame.AddParameter("date", clsRFunctionParameter:=clsSeqFunction, iPosition:=1)
+        AddRemoveParameter()
     End Sub
 
-    Private Sub ucrChkSpecify1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecify1.ControlValueChanged
+    Private Sub ucrChkSpecify1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecify1.ControlValueChanged, ucrChkSpecify2.ControlValueChanged, ucrChkSpecify3.ControlValueChanged
         ucrInputSpecify1.Visible = ucrChkSpecify1.Checked
-    End Sub
-    Private Sub ucrChkSpecify2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecify2.ControlValueChanged
         ucrInputSpecify2.Visible = ucrChkSpecify2.Checked
-    End Sub
-    Private Sub ucrChkSpecify3_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecify3.ControlValueChanged
         ucrInputSpecify3.Visible = ucrChkSpecify3.Checked
     End Sub
+    'Private Sub ucrChkSpecify2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecify2.ControlValueChanged
+    '    ucrInputSpecify2.Visible = ucrChkSpecify2.Checked
+    'End Sub
+    'Private Sub ucrChkSpecify3_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecify3.ControlValueChanged
+    '    ucrInputSpecify3.Visible = ucrChkSpecify3.Checked
+    'End Sub
     Private Sub ucrInputSpecify1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify1.ControlValueChanged, ucrChkSpecify1.ControlValueChanged
+        ' This ensures clsNewDataFrame has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
+        ' Storing and then removing strSpecify3 as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
         If Not ucrInputSpecify1.IsEmpty AndAlso ucrChkSpecify1.Checked Then
-            clsNewDataFrame.AddParameter(ucrInputSpecify1.GetValue(), "as.numeric(NA)", iPosition:=8)
+            clsNewDataFrame.RemoveParameterByName(strSpecify1)
+            strSpecify1 = ucrInputSpecify1.GetValue()
+            clsNewDataFrame.AddParameter(strSpecify1, "as.numeric(NA)", iPosition:=8)
         Else
-            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify1.GetValue())
+            clsNewDataFrame.RemoveParameterByName(strSpecify1)
+            strSpecify1 = ""
         End If
-        AddFlagVariables()
+        AddRemoveParameter()
     End Sub
     Private Sub ucrInputSpecify2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify2.ControlValueChanged, ucrChkSpecify2.ControlValueChanged
+        ' This ensures clsNewDataFrame has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
+        ' Storing and then removing strSpecify2 as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
         If Not ucrInputSpecify2.IsEmpty AndAlso ucrChkSpecify2.Checked Then
-            clsNewDataFrame.AddParameter(ucrInputSpecify2.GetValue(), "as.numeric(NA)", iPosition:=9)
+            clsNewDataFrame.RemoveParameterByName(strSpecify2)
+            strSpecify2 = ucrInputSpecify2.GetValue()
+            clsNewDataFrame.AddParameter(strSpecify2, "as.numeric(NA)", iPosition:=9)
         Else
-            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify2.GetValue())
+            clsNewDataFrame.RemoveParameterByName(strSpecify2)
+            strSpecify2 = ""
         End If
-        AddFlagVariables()
+        AddRemoveParameter()
     End Sub
     Private Sub ucrInputSpecify3_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify3.ControlValueChanged, ucrChkSpecify3.ControlValueChanged
+        ' This ensures clsNewDataFrame has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
+        ' Storing and then removing strSpecify3 as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
         If Not ucrInputSpecify3.IsEmpty AndAlso ucrChkSpecify3.Checked Then
-            clsNewDataFrame.AddParameter(ucrInputSpecify3.GetValue(), "as.numeric(NA)", iPosition:=10)
+            clsNewDataFrame.RemoveParameterByName(strSpecify3)
+            strSpecify3 = ucrInputSpecify3.GetValue()
+            clsNewDataFrame.AddParameter(strSpecify3, "as.numeric(NA)", iPosition:=10)
         Else
-            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify3.GetValue())
+            clsNewDataFrame.RemoveParameterByName(strSpecify3)
+            strSpecify3 = ""
         End If
-        AddFlagVariables()
-    End Sub
-
-    Private Sub ucrChkPrecip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFlagVariables.ControlValueChanged, ucrChkPrecip.ControlValueChanged, ucrChkSunh.ControlValueChanged, ucrChkTmax.ControlValueChanged, ucrChkTmin.ControlValueChanged, ucrChkWD.ControlValueChanged, ucrChkWS.ControlValueChanged
         AddRemoveParameter()
-        AddFlagVariables()
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoNew.Checked Then
+            Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddKey, iPosition:=0)
             grpElements.Visible = True
             AddRemoveParameter()
-            AddFlagVariables()
+            'AddFlagVariables()
         Else
+            Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight * 0.8)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.35)
             ucrBase.clsRsyntax.SetBaseRFunction(clsAddFlag)
             grpElements.Visible = False
         End If
     End Sub
 
-    Private Function GetNumberOfRows() As Integer
-        Return (ucrDateTo.DateValue.Day - ucrDateFrom.DateValue.Day) + 1
-    End Function
-  
-Imports instat.Translations
-Imports RDotNet
-Public Class dlgSetupForDataEntry
-    Private bFirstLoad As Boolean = True
-    Private bReset As Boolean = True
-    Private clsNewDataFrame As New RFunction
-    Private clsAddFlag As New RFunction
-    Dim nrow As Integer
-
-    Private Sub dlgSetupForDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
-            InitialiseDialog()
-            bFirstLoad = False
-        End If
-        If bReset Then
-            SetDefaults()
-        End If
-        SetRCodeForControls(bReset)
-        bReset = False
-        autoTranslate(Me)
-    End Sub
-    Private Sub InitialiseDialog()
-
-        'rdoNew.Checked = True
-        'rdoAddFlags.Enabled = False
-
-        ucrBase.iHelpTopicID = 359
-
-        ucrSelectorSetupDataEntry.SetParameterIsString()
-        'ucrSelectorSetupDataEntry.SetParameter(New RParameter("data_name", iNewPosition:=0))
-
-        ucrReceiverStation.Selector = ucrSelectorSetupDataEntry
-        ucrReceiverStation.SetClimaticType("station")
-        ' ucrReceiverStation.SetParameter(New RParameter("station", iNewPosition:=1))
-        ucrReceiverStation.SetParameterIsString()
-        ucrReceiverStation.bAutoFill = True
-        ucrReceiverStation.SetIncludedDataTypes({"factor"})
-        ucrReceiverStation.strSelectorHeading = "Factors"
-
-        'ucrInputSelectStation.SetParameter(New RParameter("station_name", 6))
-        ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
-        ucrInputSelectStation.AddQuotesIfUnrecognised = False
-        ucrInputSelectStation.bFirstLevelDefault = True
-
-        'ucrStartDate.SetParameter(New RParameter("start_date", iNewPosition:=8))
-        'ucrDateFrom.SetParameterIsRDate()
-
-        'ucrEndDate.SetParameter(New RParameter("end_date", iNewPosition:=9))
-        'ucrDateTo.SetParameterIsRDate()
-
-        ucrChkPrecip.SetText("precip")
-
-        ucrChkTmax.SetText("tmax")
-
-        ucrChkTmin.SetText("tmin")
-
-        ucrChkSunh.SetText("sunh")
-
-        ucrChkWD.SetText("wd")
-
-        ucrChkWS.SetText("ws")
-
-        ucrChkSpecify1.SetText("specify1")
-
-        ucrChkSpecify2.SetText("specify2")
-
-        ucrChkSpecify3.SetText("specify3")
-
-        ucrChkAddFlagVariables.SetText("Add Flag Variables")
-        'ucrChkAddFlagVariables.SetParameter(New RParameter("add_flag", iNewPosition:=11))
-        ucrInputSpecify1.Visible = False
-        ucrInputSpecify2.Visible = False
-        ucrInputSpecify3.Visible = False
-
-        ' ucrNewSheetName
-        ucrNewDFName.SetSaveTypeAsDataFrame()
-        ucrNewDFName.SetLabelText("New Data Frame Name:")
-        ucrNewDFName.SetIsTextBox()
-
-        ucrPnlOptions.AddRadioButton(rdoNew)
-        ucrPnlOptions.AddRadioButton(rdoAddFlags)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoNew, "data.frame")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoAddFlags, "")
-        ucrPnlOptions.AddToLinkedControls({ucrInputSelectStation, ucrDateFrom, ucrDateTo, ucrChkAddFlagVariables, ucrNewDFName}, {rdoNew}, bNewLinkedAddRemoveParameter:=True)
-        ucrInputSelectStation.SetLinkedDisplayControl(lblSelectStation)
-        ucrDateFrom.SetLinkedDisplayControl(lblDateFrom)
-        ucrDateTo.SetLinkedDisplayControl(lblDateTo)
-        ucrChkAddFlagVariables.SetLinkedDisplayControl(grpElements)
-
+    Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlValueChanged
+        clsCAddKeyFunction.AddParameter("station", ucrReceiverStation.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
+        clsAddKey.AddParameter("data_name", Chr(34) & ucrNewDFName.GetText() & Chr(34), iPosition:=0)
+        clsAddKey.AddParameter("col_names", clsRFunctionParameter:=clsCAddKeyFunction, iPosition:=1)
     End Sub
 
-    Private Sub SetDefaults()
-        clsNewDataFrame = New RFunction
-        clsAddFlag = New RFunction
+    Private Sub ucrChkAddKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddKey.ControlValueChanged
+        If ucrChkAddKey.Checked Then
+            Dim expTemp As SymbolicExpression
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKey.ToScript(), bSilent:=True)
+            If expTemp IsNot Nothing Then
+                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKey)
+            Else
+                ucrBase.clsRsyntax.AddToAfterCodes(clsAddKey, iPosition:=0)
+            End If
+        End If
+    End Sub
 
-        ucrSelectorSetupDataEntry.Reset()
-        ucrReceiverStation.SetMeAsReceiver()
-        ucrChkSpecify1.Checked = False
-        ucrChkSpecify2.Checked = False
-        ucrChkSpecify3.Checked = False
-        ucrChkPrecip.Checked = False
-        ucrChkSunh.Checked = False
-        ucrChkTmax.Checked = False
-        ucrChkTmin.Checked = False
-        ucrChkWS.Checked = False
-        ucrChkWD.Checked = False
-        ucrChkAddFlagVariables.Checked = False
+    Private Sub ucrSelectorSetupDataEntry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSetupDataEntry.ControlValueChanged
+        clsGetKey.AddParameter("data_name", Chr(34) & ucrSelectorSetupDataEntry.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+    End Sub
 
-        clsNewDataFrame.SetRCommand("data.frame")
-        clsAddFlag.SetRCommand("")
-
-        ucrBase.clsRsyntax.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
-        ucrBase.clsRsyntax.ClearCodes()
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
-    End Sub
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrNewDFName.SetRCode(clsNewDataFrame, bReset)
-        If bReset Then
-            ucrDateFrom.DateValue = New Date("2021", "1", "1")
-        End If
-        SetDateOptions()
-    End Sub
-    Private Sub TestOkEnabled()
-        If Not ucrReceiverStation.IsEmpty AndAlso (ucrChkPrecip.Checked OrElse ucrChkSunh.Checked OrElse ucrChkTmax.Checked OrElse ucrChkTmin.Checked OrElse
-            ucrChkWD.Checked OrElse ucrChkWS.Checked OrElse ucrChkSpecify1.Checked OrElse ucrChkSpecify2.Checked OrElse ucrChkSpecify3.Checked) Then
-            ucrBase.OKEnabled(True)
-        Else
-            ucrBase.OKEnabled(False)
-        End If
-    End Sub
-    Private Sub AddRemoveParameter()
-        If ucrChkPrecip.Checked Then
-            clsNewDataFrame.AddParameter("precip", "as.numeric(NA)", iPosition:=2)
-        Else
-            clsNewDataFrame.RemoveParameterByName("precip")
-        End If
-        If ucrChkTmax.Checked Then
-            clsNewDataFrame.AddParameter("tmax", "as.numeric(NA)", iPosition:=3)
-        Else
-            clsNewDataFrame.RemoveParameterByName("tmax")
-        End If
-        If ucrChkTmin.Checked Then
-            clsNewDataFrame.AddParameter("tmin", "as.numeric(NA)", iPosition:=4)
-        Else
-            clsNewDataFrame.RemoveParameterByName("tmin")
-        End If
-        If ucrChkSunh.Checked Then
-            clsNewDataFrame.AddParameter("sunh", "as.numeric(NA)", iPosition:=5)
-        Else
-            clsNewDataFrame.RemoveParameterByName("sunh")
-        End If
-        If ucrChkWS.Checked Then
-            clsNewDataFrame.AddParameter("ws", "as.numeric(NA)", iPosition:=6)
-        Else
-            clsNewDataFrame.RemoveParameterByName("ws")
-        End If
-        If ucrChkWD.Checked Then
-            clsNewDataFrame.AddParameter("wd", "as.numeric(NA)", iPosition:=7)
-        Else
-            clsNewDataFrame.RemoveParameterByName("wd")
-        End If
-    End Sub
-    Private Sub AddFlagVariables()
-        If ucrChkPrecip.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter("precip_fl", "factor(rep(NA," & nrow & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=11)
-        Else
-            clsNewDataFrame.RemoveParameterByName("precip_fl")
-        End If
-        If ucrChkTmax.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter("tmax_fl", "factor(rep(NA," & nrow & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=12)
-        Else
-            clsNewDataFrame.RemoveParameterByName("tmax_fl")
-        End If
-        If ucrChkTmin.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter("tmin_fl", "factor(rep(NA," & nrow & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=13)
-        Else
-            clsNewDataFrame.RemoveParameterByName("tmin_fl")
-        End If
-        If ucrChkSunh.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter("sunh_fl", "factor(rep(NA," & nrow & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=14)
-        Else
-            clsNewDataFrame.RemoveParameterByName("sunh_fl")
-        End If
-        If ucrChkWD.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter("wd_fl", "factor(rep(NA," & nrow & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=15)
-        Else
-            clsNewDataFrame.RemoveParameterByName("wd_fl")
-        End If
-        If ucrChkWS.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter("ws_fl", "factor(rep(NA," & nrow & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=16)
-        Else
-            clsNewDataFrame.RemoveParameterByName("ws_fl")
-        End If
-        If ucrChkSpecify1.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter(ucrInputSpecify1.GetValue() & "_fl", "factor(rep(NA," & nrow & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=17)
-        Else
-            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify1.GetValue() & "_fl")
-        End If
-        If ucrChkSpecify2.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter(ucrInputSpecify2.GetValue() & "_fl", "factor(rep(NA," & nrow & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=18)
-        Else
-            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify2.GetValue() & "_fl")
-        End If
-        If ucrChkSpecify3.Checked AndAlso ucrChkAddFlagVariables.Checked Then
-            clsNewDataFrame.AddParameter(ucrInputSpecify3.GetValue() & "_fl", "factor(rep(NA," & nrow & "), levels = c(" & Chr(34) & "data" & Chr(34) & "," & Chr(34) & "edit" & Chr(34) & "," & Chr(34) & "add" & Chr(34) & "))", iPosition:=19)
-        Else
-            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify3.GetValue() & "_fl")
-        End If
-    End Sub
-    Private Sub SetDateOptions()
-        Dim dtStart As Date
-        dtStart = ucrDateFrom.DateValue
-        ucrDateFrom.DateValue = New Date(dtStart.Year, dtStart.Month, 1)
-        ucrDateTo.DateValue = ucrDateFrom.DateValue.AddMonths(1).AddDays(-1)
-    End Sub
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrInputSelectStation.ControlValueChanged
-        Dim strStation As String = LCase(ucrInputSelectStation.GetValue().Trim(Chr(34)))
-        If Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputSelectStation.IsEmpty Then
-            clsNewDataFrame.AddParameter(ucrReceiverStation.GetVariableNames(bWithQuotes:=False), "as.factor(" & ucrInputSelectStation.GetValue() & ")", iPosition:=0)
-            ucrNewDFName.SetPrefix(strStation.Replace(" ", "_"))
-        Else
-            clsNewDataFrame.RemoveParameterByName(ucrReceiverStation.GetVariableNames(bWithQuotes:=False))
-        End If
-    End Sub
-    Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
-        SetDefaults()
-        SetRCodeForControls(True)
+    Private Sub ucrChkPrecip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFlagVariables.ControlValueChanged, ucrChkPrecip.ControlValueChanged, ucrChkSunh.ControlValueChanged, ucrChkTmax.ControlValueChanged, ucrChkTmin.ControlValueChanged, ucrChkWD.ControlValueChanged, ucrChkWS.ControlValueChanged, ucrPnlOptions.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrChkPrecip.ControlContentsChanged, ucrChkSunh.ControlContentsChanged, ucrChkTmax.ControlContentsChanged, ucrChkTmin.ControlContentsChanged, ucrChkWD.ControlContentsChanged, ucrChkWS.ControlContentsChanged, ucrChkSpecify1.ControlContentsChanged, ucrChkSpecify2.ControlContentsChanged, ucrChkSpecify3.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-    Private Sub ucrDateTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDateTo.ControlValueChanged, ucrDateFrom.ControlValueChanged
-        nrow = (ucrDateTo.DateValue.Day - ucrDateFrom.DateValue.Day) + 1
-        ucrChkAddFlagVariables.Checked = False
-        clsNewDataFrame.AddParameter("date", "seq(" & "as.Date(" & Chr(34) & ucrDateFrom.DateValue.ToString("yyyy-MM-dd") & Chr(34) & ")" & "," & "as.Date(" & Chr(34) & ucrDateTo.DateValue.ToString("yyyy-MM-dd") & Chr(34) & ")" & "," & Chr(34) & "day" & Chr(34) & ")", iPosition:=1)
-    End Sub
-
-    Private Sub ucrChkSpecify1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecify1.ControlValueChanged
-        ucrInputSpecify1.Visible = ucrChkSpecify1.Checked
-    End Sub
-    Private Sub ucrChkSpecify2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecify2.ControlValueChanged
-        ucrInputSpecify2.Visible = ucrChkSpecify2.Checked
-    End Sub
-    Private Sub ucrChkSpecify3_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkSpecify3.ControlValueChanged
-        ucrInputSpecify3.Visible = ucrChkSpecify3.Checked
-    End Sub
-    Private Sub ucrInputSpecify1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify1.ControlValueChanged, ucrChkSpecify1.ControlValueChanged
-        If Not ucrInputSpecify1.IsEmpty AndAlso ucrChkSpecify1.Checked Then
-            clsNewDataFrame.AddParameter(ucrInputSpecify1.GetValue(), "as.numeric(NA)", iPosition:=8)
-        Else
-            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify1.GetValue())
-        End If
-    End Sub
-    Private Sub ucrInputSpecify2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify2.ControlValueChanged, ucrChkSpecify2.ControlValueChanged
-        If Not ucrInputSpecify2.IsEmpty AndAlso ucrChkSpecify2.Checked Then
-            clsNewDataFrame.AddParameter(ucrInputSpecify2.GetValue(), "as.numeric(NA)", iPosition:=9)
-        Else
-            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify2.GetValue())
-        End If
-    End Sub
-    Private Sub ucrInputSpecify3_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify3.ControlValueChanged, ucrChkSpecify3.ControlValueChanged
-        If Not ucrInputSpecify3.IsEmpty AndAlso ucrChkSpecify3.Checked Then
-            clsNewDataFrame.AddParameter(ucrInputSpecify3.GetValue(), "as.numeric(NA)", iPosition:=10)
-        Else
-            clsNewDataFrame.RemoveParameterByName(ucrInputSpecify3.GetValue())
-        End If
-    End Sub
-
-    Private Sub ucrChkPrecip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFlagVariables.ControlValueChanged, ucrChkPrecip.ControlValueChanged, ucrChkSunh.ControlValueChanged, ucrChkTmax.ControlValueChanged, ucrChkTmin.ControlValueChanged, ucrChkWD.ControlValueChanged, ucrChkWS.ControlValueChanged
         AddRemoveParameter()
-        AddFlagVariables()
+        'AddFlagVariables()
     End Sub
-
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
-        If rdoNew.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
-        Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsAddFlag)
-        End If
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverAddFlagVariables.ControlContentsChanged, ucrChkPrecip.ControlContentsChanged, ucrChkSunh.ControlContentsChanged, ucrChkTmax.ControlContentsChanged, ucrChkTmin.ControlContentsChanged, ucrChkWD.ControlContentsChanged, ucrChkWS.ControlContentsChanged, ucrChkSpecify1.ControlContentsChanged, ucrChkSpecify2.ControlContentsChanged, ucrChkSpecify3.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class
