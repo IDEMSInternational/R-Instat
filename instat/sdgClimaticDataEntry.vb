@@ -40,12 +40,27 @@ Public Class sdgClimaticDataEntry
     Private lstElementsNames As List(Of String)
     Private lstViewVariablesNames As List(Of String)
     Private strStationColumnName As String
-    Private strDefaultValue As String
+    Private strDefaultValue As Double
     Private bNoDecimal As Boolean
     Private bAllowTrace As Boolean
     Private bTransform As Boolean
     Private dTranformValue As Double
+    Private bLastChangeValid As Boolean
+    Private strLastChangedCellAddress As String
+    Private bFirstLoad As Boolean = True
+    'used to check if current options allow the grid to be editable
+    Private bAllowEdits As Boolean = True
 
+    Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If bFirstLoad Then
+            InitialiseControls()
+            bFirstLoad = False
+        End If
+        autoTranslate(Me)
+    End Sub
+    Private Sub InitialiseControls()
+        ucrChkAddFlagFieldData.SetText("Add flag field data")
+    End Sub
     ''' <summary>
     ''' returns the data changed for the passed column as an R vector string
     ''' </summary>
@@ -76,7 +91,7 @@ Public Class sdgClimaticDataEntry
                 If bAllowTrace AndAlso newValue.ToUpper = "T" Then
                     newValue = 0.03
                 ElseIf bTransform And IsNumeric(newValue) Then
-                    newValue = newValue / dTranformValue
+                    newValue = newValue * dTranformValue
                 End If
             End If
 
@@ -103,7 +118,7 @@ Public Class sdgClimaticDataEntry
         grdCurrentWorkSheet = Nothing
     End Sub
 
-    Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction, clsEditDataFrame As RFunction, strDateName As String, lstElementsNames As List(Of String), Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "", Optional bDefaultValue As Boolean = False, Optional strDefaultValue As String = "", Optional bNoDecimal As Boolean = False, Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False, Optional dTranformValue As Double = 0)
+    Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction, clsEditDataFrame As RFunction, strDateName As String, lstElementsNames As List(Of String), Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "", Optional bDefaultValue As Boolean = False, Optional strDefaultValue As Double = 0, Optional bNoDecimal As Boolean = False, Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False, Optional dTranformValue As Double = 0)
         Dim lstColumnHeaders As String()
 
         grdDataEntry.Worksheets.Clear()
@@ -123,6 +138,9 @@ Public Class sdgClimaticDataEntry
         Me.bAllowTrace = bAllowTrace
         Me.bTransform = bTransform
         Me.dTranformValue = dTranformValue
+
+        bAllowEdits = True
+        cmdTransform.Enabled = bTransform
 
         If Not strStationColumnName = "" Then
             lstNonEditableColumns.Add(strStationColumnName)
@@ -205,21 +223,32 @@ Public Class sdgClimaticDataEntry
         Dim bValidValue As Boolean = True
         Dim newValue As String = e.NewData
 
+        If Not bAllowEdits Then
+            'todo. set a better feedback message 
+            MsgBox("Edits not allowed", MsgBoxStyle.Information, "No edits allowed.")
+            e.EndReason = EndEditReason.Cancel
+            Exit Sub
+        End If
+
         If Not IsNumeric(newValue) AndAlso Not newValue = "NA" Then
             If Not (bAllowTrace AndAlso newValue.ToUpper = "T") Then
                 MsgBox("Value is not numeric or NA.", MsgBoxStyle.Information, "Not numeric.")
-                e.EndReason = EndEditReason.Cancel
                 bValidValue = False
             End If
         ElseIf bNoDecimal AndAlso newValue.Contains(".") Then
             MsgBox("Value should not be decimal otherwise uncheck No Decimal.", MsgBoxStyle.Information, "Not decimal Allowed.")
-            e.EndReason = EndEditReason.Cancel
             bValidValue = False
         End If
+
+        bLastChangeValid = bValidValue
+        strLastChangedCellAddress = e.Cell.Address
 
         If bValidValue Then
             AddChangedRow(e.Cell.Row)
             grdCurrentWorkSheet.GetCell(e.Cell.Row, e.Cell.Column).Style.BackColor = Color.Yellow
+        Else
+            e.EndReason = EndEditReason.Cancel
+            grdCurrentWorkSheet.FocusPos = New CellPosition(e.Cell.Address)
         End If
 
     End Sub
@@ -242,9 +271,8 @@ Public Class sdgClimaticDataEntry
         End If
     End Sub
 
-    Private Sub sdgClimaticDataEntry_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+    Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
         Dim i As Integer
-
         If NRowsChanged() > 0 Then
             clsEditDataFrame.AddParameter(strDateName, "as.Date(" & GetRowsChangedAsRVectorString(strDateName, Chr(34)) & ")", iPosition:=1)
             i = 2
@@ -257,4 +285,24 @@ Public Class sdgClimaticDataEntry
             clsSaveDataEntry.RemoveParameterByName("rows_changed")
         End If
     End Sub
+
+    Private Sub grdCurrentWorkSheet_FocusPosChanged(sender As Object, e As CellPosEventArgs) Handles grdCurrentWorkSheet.FocusPosChanged
+        'retain cell focus for invalid entries
+        If Not bLastChangeValid AndAlso strLastChangedCellAddress IsNot Nothing Then
+            grdCurrentWorkSheet.FocusPos = New CellPosition(strLastChangedCellAddress)
+        End If
+    End Sub
+
+    Private Sub cmdTransform_Click(sender As Object, e As EventArgs) Handles cmdTransform.Click
+        'todo. check how translation will affect this, possibly use 2 buttons instead of one ?
+        If cmdTransform.Text = "Transform" Then
+            cmdTransform.Text = "UnTransform"
+            bAllowEdits = False
+        Else
+            cmdTransform.Text = "Transform"
+            bAllowEdits = True
+        End If
+    End Sub
+
+
 End Class
