@@ -21,6 +21,8 @@ Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
 Public Class sdgClimaticDataEntry
+    Private lstColumnNames As New List(Of KeyValuePair(Of String, String()))
+
     ''' <summary>
     ''' stores the row indices changed in the grid 
     ''' key = grid row index, value = grid row name (which should always be a number)
@@ -194,10 +196,39 @@ Public Class sdgClimaticDataEntry
         grdDataEntry.AddWorksheet(grdCurrentWorkSheet)
         grdDataEntry.SheetTabNewButtonVisible = False
 
+        SetColumnNames(strDataFrameName, dfEditData.ColumnNames())
+
         ttCmdReset.SetToolTip(cmdReset, "Clears all data entry.")
         ttCmdTransformButton.SetToolTip(cmdTransform, "When implemented, this is an option to show the transformed data.")
     End Sub
+    Public Sub SetColumnNames(strDataFrameName As String, strColumnNames As String())
+        Dim iIndex As Integer
+        iIndex = lstColumnNames.FindIndex(Function(x) x.Key = strDataFrameName)
+        If iIndex <> -1 Then
+            lstColumnNames.RemoveAt(iIndex)
+        End If
+        lstColumnNames.Add(New KeyValuePair(Of String, String())(strDataFrameName, strColumnNames))
+    End Sub
+    Private Function SelectedColumnsAsArray() As String()
+        Dim strSelectedColumns As String()
+        Dim lstCurrentDataColumns As String()
 
+        lstCurrentDataColumns = lstColumnNames.Find(Function(x) x.Key = grdDataEntry.CurrentWorksheet.Name).Value
+
+        If lstColumnNames IsNot Nothing AndAlso lstColumnNames.Count > 0 Then
+            strSelectedColumns = New String(grdDataEntry.CurrentWorksheet.SelectionRange.Cols - 1) {}
+            For i As Integer = 0 To grdDataEntry.CurrentWorksheet.SelectionRange.Cols - 1
+                strSelectedColumns(i) = lstCurrentDataColumns(i + grdDataEntry.CurrentWorksheet.SelectionRange.Col)
+            Next
+            Return strSelectedColumns
+        Else
+            strSelectedColumns = New String() {}
+        End If
+        Return strSelectedColumns
+    End Function
+    Private Function GetFirstSelectedRow() As String
+        Return grdCurrentWorkSheet.RowHeaders.Item(grdDataEntry.CurrentWorksheet.SelectionRange.Row).Text
+    End Function
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
         ''todo. do this disabling of data entry be done when setting up the grid. Not here
         'If lstNonEditableColumns.Contains(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text) Then
@@ -304,5 +335,8 @@ Public Class sdgClimaticDataEntry
         End If
     End Sub
 
-
+    Private Sub cmdComment_Click(sender As Object, e As EventArgs) Handles cmdComment.Click
+        sdgCommentForDataEntry.SetPosition(grdCurrentWorkSheet.Name, GetFirstSelectedRow(), SelectedColumnsAsArray()(0))
+        sdgCommentForDataEntry.ShowDialog()
+    End Sub
 End Class

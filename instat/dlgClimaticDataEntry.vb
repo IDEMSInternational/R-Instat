@@ -177,7 +177,7 @@ Public Class dlgClimaticDataEntry
         If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty Then
             ucrBase.OKEnabled(clsSaveDataEntry.ContainsParameter("rows_changed"))
             cmdEnterData.Enabled = True
-            If Not ucrReceiverStation.IsEmpty Then
+            If Not ucrReceiverStation.IsEmpty AndAlso ucrInputSelectStation.IsEmpty Then
                 cmdEnterData.Enabled = False
             End If
         Else
@@ -193,7 +193,7 @@ Public Class dlgClimaticDataEntry
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrInputSelectStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
