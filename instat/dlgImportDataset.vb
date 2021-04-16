@@ -400,6 +400,7 @@ Public Class dlgImportDataset
         clsGetFilesList.AddParameter("ignore.case", "TRUE", iPosition:=3)
 
         clsImportMultipleFiles.AddParameter("file", clsRFunctionParameter:=clsGetFilesList, iPosition:=0)
+        clsImportMultipleFiles.AddParameter("stringsAsFactors", "TRUE")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
@@ -548,6 +549,15 @@ Public Class dlgImportDataset
         ucrNudMaxRowsCSV.SetRCode(clsImportCSV, bReset)
         ucrChkMaxRowsCSV.SetRCode(clsImportCSV, bReset)
 
+        'multiple controls
+        ucrInputSeparatorCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("sep"), iAdditionalPairNo:=1)
+        ucrInputHeadersCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("header"), iAdditionalPairNo:=1)
+        ucrInputDecimalCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("dec"), iAdditionalPairNo:=1)
+        ucrInputEncodingCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("encoding"), iAdditionalPairNo:=1)
+        ucrChkStringsAsFactorsCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("stringsAsFactors"), iAdditionalPairNo:=1)
+        ucrNudRowsToSkipCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("skip"), iAdditionalPairNo:=1)
+        ucrNudMaxRowsCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("nrows", strParamValue:=ucrNudMaxRowsCSV.Value), iAdditionalPairNo:=1)
+
         'RDS CONTROLS
         ucrChkImportChangesLogRDS.SetRCode(clsImportRDS, bReset)
         ucrChkKeepExistingDataRDS.SetRCode(clsImportRDS, bReset)
@@ -616,9 +626,7 @@ Public Class dlgImportDataset
                 'get the name of the file (without extension), with any special characters removed
                 strFileName = GetCleanFileName(strFilePath)
                 strCurrentDirectory = Path.GetDirectoryName(strFilePath)
-                If Not bFromLibrary Then
-                    strFileExtension = Path.GetExtension(strFilePath).ToLower()
-                End If
+                strFileExtension = Path.GetExtension(strFilePath).ToLower()
             ElseIf Directory.Exists(strFilePath) AndAlso strNewFileExt <> "" Then
                 strCurrentDirectory = strFilePath
                 strFileExtension = strNewFileExt
@@ -659,8 +667,13 @@ Public Class dlgImportDataset
                 clsImportMultipleFiles.AddParameter("format", Chr(34) & strFileExtension.Substring(1) & Chr(34), iPosition:=1)
             End If
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
+            If strFileExtension = ".txt" OrElse strFileExtension = ".csv" OrElse strFileExtension = ".dly" Then
+                grpCSV.Text = "Import Options"
+                grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
+                grpCSV.Show()
+            End If
         Else
-            'enable multiple files import for the following files only
+            'don't enable multiple files import for the following files only; .rds, .xlsx, .xls
             ucrChkMultipleFiles.SetVisible(Not (strFileExtension = ".rds" OrElse strFileExtension = ".xlsx" OrElse strFileExtension = ".xls"))
 
             'TODO This needs to be different when RDS is a data frame
@@ -986,10 +999,12 @@ Public Class dlgImportDataset
             clsImportExcel.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()))
         ElseIf strFileType = "CSV" Then
             clsImportCSV.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
+            clsImportMultipleFiles.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
         ElseIf strFileType = "TXT" Then
             'for separator we use the function used for csv
             If rdoSeparatortext.Checked Then
                 clsImportCSV.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
+                clsImportMultipleFiles.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
             Else
                 clsImportFixedWidthText.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringText.GetText()), iPosition:=2)
             End If
