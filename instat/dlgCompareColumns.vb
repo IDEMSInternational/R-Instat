@@ -51,9 +51,6 @@ Public Class dlgCompareColumns
         ucrPnlOptions.AddFunctionNamesCondition(rdoByValue, {"%in%", "compare_columns"})
 
         ucrPnlOptions.AddToLinkedControls({ucrChkSort, ucrChkUnique}, {rdoByValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrInputTolerance}, {rdoByRow}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-
-        ucrInputTolerance.SetLinkedDisplayControl(lblTolerance)
 
         ucrReceiverFirst.SetParameter(New RParameter("x", 0))
         ucrReceiverFirst.Selector = ucrSelectorCompareColumns
@@ -61,7 +58,6 @@ Public Class dlgCompareColumns
         ucrReceiverFirst.bAttachedToPrimaryDataFrame = False
         ucrReceiverFirst.bOnlyLinkedToPrimaryDataFrames = False
         ucrReceiverFirst.bIncludeDataFrameInAssignment = True
-
 
         ucrReceiverSecond.SetParameter(New RParameter("y", 1))
         ucrReceiverSecond.Selector = ucrSelectorCompareColumns
@@ -108,11 +104,11 @@ Public Class dlgCompareColumns
         ucrChkAllValues.SetText("All values if columns are equal")
         ucrChkAllValues.SetRDefault("TRUE")
 
-        ' Not setting data frame selector or prefix here because we need save control only linked to data frame of second selector which is not yet implemented
+        ucrSaveLogical.SetPrefix("compare")
         ucrSaveLogical.SetSaveTypeAsColumn()
-        ucrSaveLogical.SetIsTextBox()
-        ' This ensures the assign text is correctly cleared when resetting
-        ucrSaveLogical.bUpdateRCodeFromControl = False
+        ucrSaveLogical.SetDataFrameSelector(ucrSelectorCompareColumns.ucrAvailableDataFrames)
+        ucrSaveLogical.SetIsComboBox()
+        ucrSaveLogical.SetLabelText("New Column Name")
 
         ucrBase.clsRsyntax.iCallType = 2
     End Sub
@@ -165,7 +161,6 @@ Public Class dlgCompareColumns
         clsSummaryFunction.iCallType = 2
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsIfElseCompareFunction)
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -191,9 +186,8 @@ Public Class dlgCompareColumns
         ucrChkAllValues.SetRCode(clsCompareColumns, bReset)
         ucrInputTolerance.SetRCode(clsLessorEqualToOperator, bReset)
 
-        ucrSaveLogical.SetRCode(clsYinXOperator, bReset)
-        ucrSaveLogical.AddAdditionalRCode(clsIfElseCompareFunction, bReset)
-        ucrSaveLogical.AddAdditionalRCode(clsAbsoluteFunction, bReset)
+        ucrSaveLogical.SetRCode(clsIfElseCompareFunction, bReset)
+        ucrSaveLogical.AddAdditionalRCode(clsYinXOperator, iAdditionalPairNo:=1)
         bRcodeSet = True
     End Sub
 
@@ -229,53 +223,17 @@ Public Class dlgCompareColumns
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverSecond_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecond.ControlValueChanged
-        ' Needs to be done manually because data frame name should only be the data frame name from the second receiver's variable.
-        ucrSaveLogical.SetGlobalDataName(ucrReceiverSecond.GetDataName())
-    End Sub
-
-    Private Sub ucrSaveLogical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveLogical.ControlValueChanged
-        If ucrSaveLogical.ucrChkSave.Checked Then
-            If rdoByValue.Checked Then
-                ucrBase.clsRsyntax.AddToAfterCodes(clsYinXOperator, iPosition:=1)
-            Else
-                ucrBase.clsRsyntax.AddToAfterCodes(clsIfElseCompareFunction, iPosition:=1)
-            End If
-        Else
-            If rdoByValue.Checked Then
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsYinXOperator)
-            Else
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsIfElseCompareFunction)
-            End If
-        End If
-    End Sub
-
-    Private Sub ucrReceiverFirst_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirst.ControlValueChanged, ucrPnlOptions.ControlValueChanged
-        If rdoByRow.Checked Then
-            ucrSaveLogical.SetCheckBoxText("Save logical column:")
-            ucrSaveLogical.SetName("logical_column")
-        Else
-            ucrSaveLogical.SetCheckBoxText("Save logical values for second column:")
-            If Not ucrSaveLogical.bUserTyped Then
-                If ucrReceiverFirst.IsEmpty Then
-                    ucrSaveLogical.SetName("")
-                Else
-                    ucrSaveLogical.SetName("in_" & ucrReceiverFirst.GetVariableNames(False))
-                End If
-            End If
-        End If
-
-    End Sub
-
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoByValue.Checked Then
             grpComparisions.Visible = True
             ucrBase.clsRsyntax.SetBaseRFunction(clsCompareColumns)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsYinXOperator, iPosition:=1)
         Else
             grpComparisions.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsIfElseCompareFunction)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsYinXOperator)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=1)
         End If
         CheckDatatype()
     End Sub
