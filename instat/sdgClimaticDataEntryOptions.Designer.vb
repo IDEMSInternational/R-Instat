@@ -38,6 +38,7 @@ Partial Class sdgClimaticDataEntryOptions
         Me.ucrChkTransform = New instat.ucrCheck()
         Me.lblBefore = New System.Windows.Forms.Label()
         Me.lblAfter = New System.Windows.Forms.Label()
+        Me.ttucrChkTransform = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpRestrictEntry.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -136,6 +137,12 @@ Partial Class sdgClimaticDataEntryOptions
         resources.ApplyResources(Me.lblAfter, "lblAfter")
         Me.lblAfter.Name = "lblAfter"
         '
+        'ttucrChkTransform
+        '
+        Me.ttucrChkTransform.AutoPopDelay = 10000
+        Me.ttucrChkTransform.InitialDelay = 500
+        Me.ttucrChkTransform.ReshowDelay = 100
+        '
         'sdgClimaticDataEntryOptions
         '
         resources.ApplyResources(Me, "$this")
@@ -175,4 +182,5 @@ Partial Class sdgClimaticDataEntryOptions
     Friend WithEvents ucrChkExtraRows As ucrCheck
     Friend WithEvents lblBefore As Label
     Friend WithEvents lblAfter As Label
+    Friend WithEvents ttucrChkTransform As ToolTip
 End Class

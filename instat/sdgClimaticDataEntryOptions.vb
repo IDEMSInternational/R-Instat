@@ -28,6 +28,7 @@ Public Class sdgClimaticDataEntryOptions
     End Sub
     Private Sub InitialiseControls()
         ucrChkTransform.SetText("Transform:")
+        ttucrChkTransform.SetToolTip(ucrChkTransform, "The values written to the data frame are transformed, usually multiplied, by the value given here.")
 
         'ucrInputTransform.SetItems({"10", "Inch to mm"})
         ucrInputTransform.SetItems({"0.1", "25.4", "0.254"}) 'todo. temporary
