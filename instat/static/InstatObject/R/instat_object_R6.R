@@ -2568,3 +2568,8 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
   }
   close(pb)
 })
+
+DataBook$set("public", "add_flag_fields", function(data_name, col_names) {
+  self$get_data_objects(data_name)$add_flag_fields(col_names = col_names)
+}
+)
