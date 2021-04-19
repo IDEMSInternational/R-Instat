@@ -26,7 +26,6 @@ Public Class dlgSetupForDataEntry
     Private clsSeqFunction As New RFunction
     Private clsAddKey As New RFunction
     Private clsCAddKeyFunction As New RFunction
-    Private clsGetKey As RFunction
 
     Private iDialogHeight As Integer
     Private iBaseMaxY As Integer
@@ -56,6 +55,9 @@ Public Class dlgSetupForDataEntry
     Private Sub InitialiseDialog()
 
         ucrBase.iHelpTopicID = 359
+
+        ucrSelectorSetupDataEntry.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorSetupDataEntry.SetParameterIsString()
 
         ucrReceiverStation.Selector = ucrSelectorSetupDataEntry
         ucrReceiverStation.SetClimaticType("station")
@@ -95,7 +97,10 @@ Public Class dlgSetupForDataEntry
         ucrChkAddFlagVariables.SetText("Add Flag Variables")
 
         ucrChkAddKey.SetText("Add Key")
+        ucrChkAddKey.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$add_key"})
+        ucrChkAddKey.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$add_key"}, False)
 
+        ucrReceiverAddFlagVariables.SetParameter(New RParameter("col_names", 1))
         ucrReceiverAddFlagVariables.Selector = ucrSelectorSetupDataEntry
         ucrReceiverAddFlagVariables.SetParameterIsString()
         ucrReceiverAddFlagVariables.strSelectorHeading = "Numerics"
@@ -113,7 +118,8 @@ Public Class dlgSetupForDataEntry
         ucrPnlOptions.AddRadioButton(rdoNew)
         ucrPnlOptions.AddRadioButton(rdoAddFlags)
         ucrPnlOptions.AddFunctionNamesCondition(rdoNew, "data.frame")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoAddFlags, "placeholdercommand")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoAddFlags, frmMain.clsRLink.strInstatDataObject & "$add_flag_fields")
+
         ucrPnlOptions.AddToLinkedControls({ucrInputSelectStation, ucrDateFrom, ucrDateTo, ucrChkAddFlagVariables, ucrNewDFName}, {rdoNew}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverAddFlagVariables, ucrReceiverDate, ucrChkAddKey}, {rdoAddFlags}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectStation.SetLinkedDisplayControl(lblSelectStation)
@@ -121,7 +127,6 @@ Public Class dlgSetupForDataEntry
         ucrDateTo.SetLinkedDisplayControl(lblDateTo)
         ucrReceiverDate.SetLinkedDisplayControl(lblDate)
         ucrReceiverAddFlagVariables.SetLinkedDisplayControl(lblAddFlagVariables)
-
     End Sub
 
     Private Sub SetDefaults()
@@ -131,16 +136,10 @@ Public Class dlgSetupForDataEntry
         clsCFunction = New RFunction
         clsSeqFunction = New RFunction
         clsCAddKeyFunction = New RFunction
-        clsGetKey = New RFunction
-
-        clsGetKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
-        clsGetKey.AddParameter("key_name", Chr(34) & "key" & Chr(34), iPosition:=0)
 
         ucrSelectorSetupDataEntry.Reset()
         ucrReceiverAddFlagVariables.SetMeAsReceiver()
         ucrInputSelectStation.bFirstLevelDefault = True
-
-        ucrChkAddKey.Checked = True
 
         ucrChkSpecify1.Checked = False
         ucrChkSpecify2.Checked = False
@@ -158,7 +157,7 @@ Public Class dlgSetupForDataEntry
 
         clsNewDataFrame.SetRCommand("data.frame")
 
-        clsAddFlag.SetRCommand("placeholdercommand")
+        clsAddFlag.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_flag_fields")
 
         clsFactorFunction.SetRCommand("factor")
         clsFactorFunction.AddParameter("x", "NA", iPosition:=0)
@@ -179,13 +178,20 @@ Public Class dlgSetupForDataEntry
         clsCAddKeyFunction.AddParameter("date", Chr(34) & "date" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
 
         clsNewDataFrame.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
+
+        ucrBase.clsRsyntax.AddToAfterCodes(clsAddKey, iPosition:=0)
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
     End Sub
+
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrNewDFName.SetRCode(clsNewDataFrame, bReset)
-
+        ucrSelectorSetupDataEntry.SetRCode(clsAddFlag, bReset)
+        ucrReceiverAddFlagVariables.SetRCode(clsAddFlag, bReset)
+        ucrChkAddKey.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
+
     Private Sub TestOkEnabled()
         If rdoNew.Checked Then
             If Not ucrReceiverStation.IsEmpty AndAlso (ucrChkPrecip.Checked OrElse ucrChkSunh.Checked OrElse ucrChkTmax.Checked OrElse ucrChkTmin.Checked OrElse
@@ -202,6 +208,7 @@ Public Class dlgSetupForDataEntry
             End If
         End If
     End Sub
+
     Private Sub AddRemoveParameter()
         If ucrChkPrecip.Checked AndAlso ucrChkAddFlagVariables.Checked Then
             clsNewDataFrame.AddParameter("precip_fl", clsRFunctionParameter:=clsFactorFunction, iPosition:=11)
@@ -294,6 +301,7 @@ Public Class dlgSetupForDataEntry
         End If
 
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -331,6 +339,7 @@ Public Class dlgSetupForDataEntry
         End If
         AddRemoveParameter()
     End Sub
+
     Private Sub ucrInputSpecify2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify2.ControlValueChanged, ucrChkSpecify2.ControlValueChanged
         ' This ensures clsNewDataFrame has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
         ' Storing and then removing strSpecify2 as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
@@ -344,6 +353,7 @@ Public Class dlgSetupForDataEntry
         End If
         AddRemoveParameter()
     End Sub
+
     Private Sub ucrInputSpecify3_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify3.ControlValueChanged, ucrChkSpecify3.ControlValueChanged
         ' This ensures clsNewDataFrame has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
         ' Storing and then removing strSpecify3 as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
@@ -363,10 +373,8 @@ Public Class dlgSetupForDataEntry
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
-            ucrBase.clsRsyntax.AddToAfterCodes(clsAddKey, iPosition:=0)
             grpElements.Visible = True
             AddRemoveParameter()
-            'AddFlagVariables()
         Else
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight * 0.8)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.35)
@@ -377,31 +385,25 @@ Public Class dlgSetupForDataEntry
 
     Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlValueChanged
         clsCAddKeyFunction.AddParameter("station", ucrReceiverStation.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
-        clsAddKey.AddParameter("data_name", Chr(34) & ucrNewDFName.GetText() & Chr(34), iPosition:=0)
         clsAddKey.AddParameter("col_names", clsRFunctionParameter:=clsCAddKeyFunction, iPosition:=1)
     End Sub
 
-    Private Sub ucrChkAddKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddKey.ControlValueChanged
-        If ucrChkAddKey.Checked Then
-            Dim expTemp As SymbolicExpression
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKey.ToScript(), bSilent:=True)
-            If expTemp IsNot Nothing Then
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKey)
-            Else
-                ucrBase.clsRsyntax.AddToAfterCodes(clsAddKey, iPosition:=0)
-            End If
+    Private Sub ucrChkAddKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddKey.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+        If rdoAddFlags.Checked AndAlso ucrChkAddKey.Checked Then
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddKey, iPosition:=0)
+        Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKey)
         End If
     End Sub
 
     Private Sub ucrSelectorSetupDataEntry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSetupDataEntry.ControlValueChanged
-        clsGetKey.AddParameter("data_name", Chr(34) & ucrSelectorSetupDataEntry.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        clsAddKey.AddParameter("data_name", Chr(34) & ucrSelectorSetupDataEntry.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
     End Sub
 
-    Private Sub ucrChkPrecip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFlagVariables.ControlValueChanged, ucrChkPrecip.ControlValueChanged, ucrChkSunh.ControlValueChanged, ucrChkTmax.ControlValueChanged, ucrChkTmin.ControlValueChanged, ucrChkWD.ControlValueChanged, ucrChkWS.ControlValueChanged, ucrPnlOptions.ControlContentsChanged
-        TestOkEnabled()
+    Private Sub ucrChkPrecip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFlagVariables.ControlValueChanged, ucrChkPrecip.ControlValueChanged, ucrChkSunh.ControlValueChanged, ucrChkTmax.ControlValueChanged, ucrChkTmin.ControlValueChanged, ucrChkWD.ControlValueChanged, ucrChkWS.ControlValueChanged
         AddRemoveParameter()
-        'AddFlagVariables()
     End Sub
+
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverAddFlagVariables.ControlContentsChanged, ucrChkPrecip.ControlContentsChanged, ucrChkSunh.ControlContentsChanged, ucrChkTmax.ControlContentsChanged, ucrChkTmin.ControlContentsChanged, ucrChkWD.ControlContentsChanged, ucrChkWS.ControlContentsChanged, ucrChkSpecify1.ControlContentsChanged, ucrChkSpecify2.ControlContentsChanged, ucrChkSpecify3.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOkEnabled()
     End Sub
