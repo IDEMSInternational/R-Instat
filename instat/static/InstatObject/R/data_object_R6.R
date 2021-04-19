@@ -3875,11 +3875,10 @@ DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed)
 }
 )
 
-DataSheet$set("public","add_flag_fields", function(col_names) {
+DataSheet$set("public", "add_flag_fields", function(col_names) {
   curr_data <- self$get_columns_from_data(col_names, force_as_data_frame = TRUE)
   for (i in colnames(curr_data)) {
-    col_data <- factor(ifelse(is.na(curr_data[,i]), NA, "data"), levels = c("data", "edit", "add"))
+    col_data <- factor(ifelse(is.na(curr_data[, i]), NA_real_, "data"), levels = c("data", "edit", "add"))
     self$add_columns_to_data(col_data = col_data, col_name = paste0(i, "_fl"))
   }
-}
-)
+})
