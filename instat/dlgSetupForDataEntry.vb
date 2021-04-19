@@ -376,7 +376,6 @@ Public Class dlgSetupForDataEntry
             grpElements.Visible = True
             AddRemoveParameter()
         Else
-            ucrChkAddKey.Checked = True
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight * 0.8)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.35)
             ucrBase.clsRsyntax.SetBaseRFunction(clsAddFlag)
