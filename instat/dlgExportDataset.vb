@@ -125,6 +125,7 @@ Public Class dlgExportDataset
             ucrBase.clsRsyntax.SetCommandString(strCommand)
             lblConfirm.Text = "Files with the same names will be overwritten." & Environment.NewLine & "Click Ok to Confirm the Export."
         End If
+        autoTranslate(Me)
         TestOkEnabled()
     End Sub
 

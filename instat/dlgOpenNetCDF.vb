@@ -256,6 +256,7 @@ Public Class dlgOpenNetCDF
                 End If
             End If
         End Using
+        autoTranslate(Me)
     End Sub
 
     Private Sub SetNFilesInFolder(strPath As String)
@@ -288,6 +289,7 @@ Public Class dlgOpenNetCDF
             Me.Size = New Size(iExpandedWidth / 1.8, Me.Height)
             cmdDetails.Text = "Show Details >>"
         End If
+        autoTranslate(Me)
     End Sub
 
     Public Sub FileDetails()
@@ -332,6 +334,7 @@ Public Class dlgOpenNetCDF
             ucrInputFileDetails.Text = strLong
         Else
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub DescriptionButtons_CheckedChanged(sender As Object, e As EventArgs) Handles rdoShort.CheckedChanged, rdoMedium.CheckedChanged, rdoLong.CheckedChanged

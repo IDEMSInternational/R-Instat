@@ -103,6 +103,25 @@ TranslateWinForm
              'Nothing'. </returns>
 --------------------------------------------------------------------------------------------
 </member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetTranslation(System.String,System.String,System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+    Returns <paramref name="strText"/> translated into <paramref name="strLanguage"/>. 
+    <para>
+    Translations can be bi-directional (e.g. from English to French or from French to English).
+    If <paramref name="strText"/> is already in the current language, or if no translation 
+    can be found, then returns <paramref name="strText"/>.         
+    </para></summary>
+
+ <param name="strText">          The text to translate. </param>
+ <param name="strDataSource">    The path of the SQLite '.db' file that contains the
+                                 translation database. </param>
+ <param name="strLanguage">      The language code to translate to (e.g. 'fr' for French).
+                                 </param>
+
+ <returns>   <paramref name="strText"/> translated into <paramref name="strLanguage"/>. </returns>
+--------------------------------------------------------------------------------------------
+</member>
 <member name="M:TranslateWinForm.clsTranslateWinForm.GetControlsAsCsv(System.Windows.Forms.Control)">
 --------------------------------------------------------------------------------------------
  <summary>   
@@ -185,6 +204,43 @@ TranslateWinForm
  <returns>
      If an exception is thrown, then returns the exception text; else returns 'Nothing'.
  </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetDynamicTranslation(System.String,System.String,System.Data.SQLite.SQLiteConnection)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+    Returns <paramref name="strText"/> translated into <paramref name="strLanguage"/>. 
+    <para>
+    Translations can be bi-directional (e.g. from English to French or from French to English).
+    If <paramref name="strText"/> is already in the current language, or if no translation 
+    can be found, then returns <paramref name="strText"/>.         
+    </para></summary>
+
+ <param name="strText">          The text to translate. </param>
+ <param name="strLanguage">      The language code to translate to (e.g. 'fr' for French).
+                                 </param>
+ <param name="clsConnection">    An open connection to the SQLite translation database. </param>
+
+ <returns>   <paramref name="strText"/> translated into <paramref name="strLanguage"/>. </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetCsvText(System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+    Decides whether <paramref name="strText"/> is likely to be changed during execution of 
+    the software. If no, then returns <paramref name="strText"/>. If yes, then returns 
+    'ReplaceWithDynamicTranslation'. It makes the decision based upon a set of heuristics.
+    <para>
+    This function is normally only used when creating a comma-separated list suitable for 
+    importing into a database. During program execution, the 'ReplaceWithDynamicTranslation'
+    text tells the library to dynamically try and translate the current text, rather than
+    looking up the static text associated with the control.</para></summary>
+
+ <param name="strText">  The text to assess. </param>
+
+ <returns>   Decides whether <paramref name="strText"/> is likely to be changed during 
+             execution of the software. If no, then returns <paramref name="strText"/>. 
+             If yes, then returns'ReplaceWithDynamicTranslation'. </returns>
 --------------------------------------------------------------------------------------------
 </member>
 </members>

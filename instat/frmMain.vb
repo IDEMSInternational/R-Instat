@@ -932,6 +932,7 @@ Public Class frmMain
             tstatus.Text = strCurrentStatus
             Cursor = Cursors.Default
         End If
+        autoTranslate(Me)
     End Sub
 
     Public Sub DeleteAutoSaveData()

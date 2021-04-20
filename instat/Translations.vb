@@ -30,7 +30,7 @@ Public Class Translations
             Exit Sub
         End If
 
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateForm(clsControl, GetDbPath(), GetLanguageCode()))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateForm(clsControl, GetDbPath(), GetLanguageCode()))
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ Public Class Translations
     ''' <param name="ctrParent">        The WinForm control that is the parent of the menu. </param>
     '''--------------------------------------------------------------------------------------------
     Public Shared Sub translateMenu(tsCollection As ToolStripItemCollection, ctrParent As Control)
-        ' The function below should normally be commented out. 
+        ' The 'WriteCsvFile' function call below should normally be commented out. 
         ' It only needs be uncommented and executed once, prior to each new release.
         'WriteCsvFile()
 
@@ -54,23 +54,39 @@ Public Class Translations
         'translate the main form, including all its output windows and menus
         Dim strDbPath = GetDbPath()
         Dim strLanguageCode = GetLanguageCode()
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateForm(ctrParent, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateForm(ctrParent, strDbPath, strLanguageCode))
 
         'The right mouse button menus for the 6 output windows are not accessible via 
         '    the control lists. Therefore, translate these menus explicitly
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateMenuItems(frmMain.ucrOutput.Name, frmMain.ucrOutput.mnuContextRTB.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateMenuItems(frmMain.ucrColumnMeta.Name, frmMain.ucrColumnMeta.cellContextMenuStrip.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateMenuItems(frmMain.ucrColumnMeta.Name, frmMain.ucrColumnMeta.grdVariables.RowHeaderContextMenuStrip.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateMenuItems(frmMain.ucrColumnMeta.Name, frmMain.ucrColumnMeta.statusColumnMenu.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateMenuItems(frmMain.ucrDataFrameMeta.Name, frmMain.ucrDataFrameMeta.cellContextMenuStrip.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateMenuItems(frmMain.ucrDataFrameMeta.Name, frmMain.ucrDataFrameMeta.rowRightClickMenu.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateMenuItems(frmMain.ucrLogWindow.Name, frmMain.ucrLogWindow.mnuContextLogFile.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateMenuItems(frmMain.ucrScriptWindow.Name, frmMain.ucrScriptWindow.mnuContextScript.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.grdData.RowHeaderContextMenuStrip.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.grdData.ColumnHeaderContextMenuStrip.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.grdData.ContextMenuStrip.Items, strDbPath, strLanguageCode))
-        HandleError(TranslateWinForm.clsTranslateWinForm.translateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.grdData.SheetTabContextMenuStrip.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrOutput.Name, frmMain.ucrOutput.mnuContextRTB.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrColumnMeta.Name, frmMain.ucrColumnMeta.cellContextMenuStrip.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrColumnMeta.Name, frmMain.ucrColumnMeta.grdVariables.RowHeaderContextMenuStrip.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrColumnMeta.Name, frmMain.ucrColumnMeta.statusColumnMenu.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataFrameMeta.Name, frmMain.ucrDataFrameMeta.cellContextMenuStrip.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataFrameMeta.Name, frmMain.ucrDataFrameMeta.rowRightClickMenu.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrLogWindow.Name, frmMain.ucrLogWindow.mnuContextLogFile.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrScriptWindow.Name, frmMain.ucrScriptWindow.mnuContextScript.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.grdData.RowHeaderContextMenuStrip.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.grdData.ColumnHeaderContextMenuStrip.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.grdData.ContextMenuStrip.Items, strDbPath, strLanguageCode))
+        HandleError(TranslateWinForm.clsTranslateWinForm.TranslateMenuItems(frmMain.ucrDataViewer.Name, frmMain.ucrDataViewer.grdData.SheetTabContextMenuStrip.Items, strDbPath, strLanguageCode))
     End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   TODO Gets a translation. </summary>
+    '''
+    ''' <param name="strText">  The text. </param>
+    '''
+    ''' <returns>   The translation. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Shared Function GetTranslation(strText As String) As String
+        If String.IsNullOrEmpty(strText) Then
+            Return ""
+        End If
+
+        Return TranslateWinForm.clsTranslateWinForm.GetTranslation(strText, GetDbPath(), GetLanguageCode())
+    End Function
+
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   
@@ -149,8 +165,6 @@ Public Class Translations
         Dim strControlsAsCsv As String = ""
         For Each typFormClass As Type In lstFormClasses
             Dim frmTemp As Form = CallByName(My.Forms, typFormClass.Name, CallType.Get)
-            'TODO need to prevent check boxes and input fields being added to the CSV file
-            ' If TypeOf clsControl Is ucrCheck OrElse TypeOf clsControl Is ucrInput Then
             strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetControlsAsCsv(frmTemp)
         Next
 
