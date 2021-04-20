@@ -437,10 +437,10 @@ Public Class sdgClimaticDataEntry
         If IsNumeric(strSumValue) Then
             dDifferenceValue = Math.Round(Double.Parse(strSumValue) - dTotalCalculatedValue, 2)
             grdCurrentWorkSheet.Item(row:=iLastRowIndex, col:=iColIndexSelected) = dDifferenceValue
-            grdCurrentWorkSheet.GetCell(row:=iLastRowIndex, col:=iColIndexSelected).Style.BackColor = If(dDifferenceValue = 0, Color.LightGreen, Color.White)
+            'grdCurrentWorkSheet.GetCell(row:=iLastRowIndex, col:=iColIndexSelected).Style.BackColor = If(dDifferenceValue = 0, Color.LightGreen, Color.White)
         Else
             grdCurrentWorkSheet.Item(row:=iLastRowIndex, col:=iColIndexSelected) = ""
-            grdCurrentWorkSheet.GetCell(row:=iLastRowIndex, col:=iColIndexSelected).Style.BackColor = Color.White
+            'grdCurrentWorkSheet.GetCell(row:=iLastRowIndex, col:=iColIndexSelected).Style.BackColor = Color.White
         End If
 
     End Sub
