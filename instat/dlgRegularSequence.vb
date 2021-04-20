@@ -36,10 +36,10 @@ Public Class dlgRegularSequence
         If bReset Then
             SetDefaults()
         End If
+        autoTranslate(Me)
         SetDefaultRdo()
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
     End Sub
     'This sub is meant to set the default radiobutton on diffrent places on the Menu.
     Private Sub SetDefaultRdo()
@@ -78,10 +78,10 @@ Public Class dlgRegularSequence
 
         ucrInputComboDatesBy.SetParameter(New RParameter("period", 1, bNewIncludeArgumentName:=False))
 
-        dctDatesBy.Add(GetTranslation("Days"), "days")
-        dctDatesBy.Add(GetTranslation("Weeks"), "weeks")
-        dctDatesBy.Add(GetTranslation("Months"), "months")
-        dctDatesBy.Add(GetTranslation("Years"), "years")
+        dctDatesBy.Add("Days", "days")
+        dctDatesBy.Add("Weeks", "weeks")
+        dctDatesBy.Add("Months", "months")
+        dctDatesBy.Add("Years", "years")
         ucrInputComboDatesBy.SetItems(dctDatesBy)
         ucrInputComboDatesBy.SetDropDownStyleAsNonEditable()
 
@@ -314,13 +314,13 @@ Public Class dlgRegularSequence
                 vecSequence = frmMain.clsRLink.RunInternalScriptGetValue(strRCommand, bSilent:=True).AsCharacter
                 ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectDataFrameRegularSequence.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
                 If iLength < ucrSelectDataFrameRegularSequence.iDataFrameLength Then
-                    lblMessage.Text = GetTranslation("Sequence extended to match") & Environment.NewLine & GetTranslation("the length of the data frame.")
+                    lblMessage.Text = "Sequence extended to match" & Environment.NewLine & "the length of the data frame."
                 ElseIf iLength > ucrSelectDataFrameRegularSequence.iDataFrameLength Then
-                    lblMessage.Text = GetTranslation("Sequence truncated to match") & Environment.NewLine & GetTranslation("the length of the data frame.")
+                    lblMessage.Text = "Sequence truncated to match" & Environment.NewLine & "the length of the data frame."
                 End If
             Else
                 clsRepFunction.RemoveParameterByName("length.out")
-                lblMessage.Text = GetTranslation("Sequence matches the length of the data frame.")
+                lblMessage.Text = "Sequence matches the length of the data frame."
             End If
             txtGetPreview.Text = ""
             txtGetPreview.Text = String.Join(", ", vecSequence)
@@ -328,9 +328,8 @@ Public Class dlgRegularSequence
             ucrBase.clsRsyntax.clsBaseFunction.bToBeAssigned = bToBeAssigned
         Catch ex As Exception
             txtGetPreview.Text = ""
-            lblMessage.Text = GetTranslation("No preview available.")
+            lblMessage.Text = "No preview available."
         End Try
-        autoTranslate(Me)
     End Sub
 
     Private Sub ucrSelectDataFrameRegularSequence_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectDataFrameRegularSequence.ControlValueChanged
