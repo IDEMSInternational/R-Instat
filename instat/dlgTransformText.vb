@@ -25,6 +25,7 @@ Public Class dlgTransformText
     Private igrpParameterFullHeight As Integer
     Private iBaseMaxY As Integer
     Private iNewColMaxY As Integer
+    Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub dlgTransformText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -124,7 +125,7 @@ Public Class dlgTransformText
         ucrChkLastOr.AddToLinkedControls(ucrNudLastWord, {False}, bNewLinkedDisabledIfParameterMissing:=True)
         ucrChkLastOr.AddToLinkedControls(ucrReceiverLastWord, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedHideIfParameterMissing:=True)
 
         'parameter for this control has been passed manually
         ucrNudFirstWord.SetMinMax(Integer.MinValue, Integer.MaxValue)
@@ -161,8 +162,8 @@ Public Class dlgTransformText
         ucrInputSeparator.bAllowNonConditionValues = True
 
         'rdoSubstring
-        ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
-        ucrPnlOperation.AddToLinkedControls(ucrNudTo, {rdoSubstring}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=2)
+        ucrPnlOperation.AddToLinkedControls(ucrNudFrom, {rdoSubstring}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOperation.AddToLinkedControls(ucrNudTo, {rdoSubstring}, bNewLinkedHideIfParameterMissing:=True)
 
         'ucrNuds
         ucrNudFrom.SetParameter(New RParameter("start", 1))
@@ -180,24 +181,13 @@ Public Class dlgTransformText
         ucrNewColName.SetLabelText("Column Name:")
     End Sub
 
-    Private Sub SetDefaults()
+    Private Sub ResetRCode()
         clsConvertFunction = New RFunction
         clsLengthFunction = New RFunction
         clsPadFunction = New RFunction
         clsTrimFunction = New RFunction
         clsWordsFunction = New RFunction
         clsSubstringFunction = New RFunction
-
-        ucrNewColName.Reset()
-        ucrSelectorForTransformText.Reset()
-        NewDefaultName()
-
-        'initialise word controls
-        ucrNudFirstWord.SetText(1)
-        ucrNudLastWord.SetText(2)
-        ucrChkFirstOr.Checked = False
-        ucrChkLastOr.Checked = False
-
 
         clsConvertFunction.SetPackageName("stringr")
         clsConvertFunction.SetRCommand("str_to_lower")
@@ -223,6 +213,21 @@ Public Class dlgTransformText
         clsSubstringFunction.SetRCommand("str_sub")
         clsSubstringFunction.AddParameter("start", 1, iPosition:=1)
         clsSubstringFunction.AddParameter("end", 2, iPosition:=2)
+    End Sub
+    Private Sub SetDefaults()
+        ucrNewColName.Reset()
+        ucrSelectorForTransformText.Reset()
+        NewDefaultName()
+
+        'initialise word controls
+        ucrNudFirstWord.SetText(1)
+        ucrNudLastWord.SetText(2)
+        ucrChkFirstOr.Checked = False
+        ucrChkLastOr.Checked = False
+
+        ResetRCode()
+
+
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
     End Sub
@@ -419,5 +424,13 @@ Public Class dlgTransformText
             clsWordsFunction.AddParameter("end", strParameterValue:=ucrNudLastWord.Value, iPosition:=2)
         End If
     End Sub
-
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class

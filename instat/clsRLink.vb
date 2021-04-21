@@ -2336,6 +2336,7 @@ Public Class RLink
     '''
     ''' <param name="strNewScript">   Script to be processed</param>
     '''--------------------------------------------------------------------------------------------
+    'This is currently implemented to open the dialogue with the comment to the dialogue selected too
     Public Sub OpenDialogFromScript(strNewScript As String)
         Dim lstNewRCodeStructures As New List(Of RCodeStructure)
         Dim strCommentFromDialogue As String
@@ -2358,7 +2359,7 @@ Public Class RLink
                 lstNewRCodeStructures.RemoveAt(0)
                 dlgSplitText.lstScriptsRCodeStructure = lstNewRCodeStructures
                 dlgSplitText.ShowDialog()
-            ElseIf strCommentFromDialogue.Contains("display daily data") Then
+            ElseIf strCommentFromDialogue.Contains("transform text column") Then
 
             End If
         End If
