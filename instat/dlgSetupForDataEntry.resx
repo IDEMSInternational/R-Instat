@@ -205,13 +205,13 @@
     <value>262, 55</value>
   </data>
   <data name="lblStation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>43, 13</value>
+    <value>84, 13</value>
   </data>
   <data name="lblStation.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
   <data name="lblStation.Text" xml:space="preserve">
-    <value>Station:</value>
+    <value>Station Variable:</value>
   </data>
   <data name="&gt;&gt;lblStation.Name" xml:space="preserve">
     <value>lblStation</value>

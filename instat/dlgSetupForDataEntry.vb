@@ -75,7 +75,7 @@ Public Class dlgSetupForDataEntry
         ucrReceiverDate.strSelectorHeading = "Date"
 
         ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
-        ucrInputSelectStation.AddQuotesIfUnrecognised = False
+        ucrInputSelectStation.strQuotes = ""
         ucrInputSelectStation.bFirstLevelDefault = True
 
         ucrChkPrecip.SetText("precip")
@@ -184,6 +184,7 @@ Public Class dlgSetupForDataEntry
         clsNewDataFrame.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
 
         ' ucrBase.clsRsyntax.AddToAfterCodes(clsAddKey, iPosition:=0)
+        clsAddKey.iCallType = 2
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
     End Sub
@@ -298,7 +299,7 @@ Public Class dlgSetupForDataEntry
         Dim strDaframeName As String = ucrInputSelectStation.GetValue().ToString.Trim(Chr(34)).ToLower.Replace(" ", "_")
         If Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputSelectStation.IsEmpty Then
             strStation = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
-            clsNewDataFrame.AddParameter(strStation, "as.factor(" & ucrInputSelectStation.GetValue() & ")", iPosition:=0)
+            clsNewDataFrame.AddParameter(strStation, "as.factor(" & Chr(34) & ucrInputSelectStation.GetValue() & Chr(34) & ")", iPosition:=0)
             ucrNewDFName.SetPrefix(strDaframeName.Replace("'", ""))
         Else
             clsNewDataFrame.RemoveParameterByName(strDaframeName.Replace("'", ""))
