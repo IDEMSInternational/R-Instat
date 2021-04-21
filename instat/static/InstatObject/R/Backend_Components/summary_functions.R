@@ -1336,7 +1336,7 @@ SEDI <- function(x, y, frcst.type, obs.type, ...){
 ##TODO:Check if there are summaries that only apply to (Probabilistic-binary) types.
 
 
-DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = "default", as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
+DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, return_output = TRUE, treat_columns_as_factor = FALSE, page_by = NULL, as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   if(n_column_factors == 1 && length(factors) == 0) n_column_factors <- 0
   if(n_column_factors > length(factors)) stop("n_column_factors must be <= number of factors specified.")
   if(na_level_display == "") stop("na_level_display must be a non empty string")
@@ -1353,97 +1353,100 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
   # removes "summary_" from beginning of summary function names so that display is nice
   summaries_display <- sapply(summaries, function(x) ifelse(startsWith(x, "summary_"), substring(x, 9), x))
   
-  if(!is.null(page_by) && page_by == "default") {
-    if(length(columns_to_summarise) > 1 && length(summaries) > 1) {
-      page_by <- c("summaries", "variables")
-    }
-    else if(length(summaries) > 1) {
-      page_by <- "summaries"
-    }
-    else if(length(columns_to_summarise) > 1) {
-      page_by <- "variables"
-    }
-    else page_by <- c()
-  }
-  if(include_margins) {
-    #TODO fix these checks when we implement choice for page_by
-    # if(length(columns_to_summarise) > 1 && length(summaries) > 1 && !setequal(page_by, c("summaries", "variables"))) {
-    #   warning("Multiple summaries and variables with margins is currently only implemented through multiple pages. Overriding page_by to be c(summaries, variables)")
-    #   page_by <- c("summaries", "variables")
-    # }
-    # else if(length(summaries) > 1 && (length(page_by) == 0 || page_by != "summaries")) {
-    #   warning("Multiple summaries with margins is currently only implemented through multiple pages. Overriding page_by to be summaries")
-    #   page_by <- "summaries"
-    # }
-    # else if(length(columns_to_summarise) > 1 && (length(page_by) == 0 || page_by != "variables")) {
-    #   warning("Multiple variables with margins is currently only implemented through multiple pages. Overriding page_by to be variables")
-    #   page_by <- "variables"
-    # }
-  }
-  if(length(page_by) > 0) {
-    out <- list()
-    if(length(page_by) == 1 && page_by == "summaries") {
-      for(i in seq_along(summaries)) {
-        out[[paste(summaries_display[i], columns_to_summarise)]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries[i], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, ... = ...)
-      }
-    }
-    else if(length(page_by) == 1 && page_by == "variables") {
-      for(i in seq_along(columns_to_summarise)) {
-        out[[paste(summaries_display, columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries, factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, ... = ...)
-      }
-    }
-    else if(length(page_by) == 2  && all(page_by %in% c("variables", "summaries"))) {
-      for(i in seq_along(columns_to_summarise)) {
-        for(j in seq_along(summaries)) {
-          out[[paste(summaries_display[j], columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries[j], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, ... = ...)
-        }
-      }
-    }
-    else if(all(page_by %in% factors)) {
-      levels_list <- lapply(page_by, function(x) levels(self$get_columns_from_data(data_name = data_name, col_names = x)))
-      levels_data_frame <- expand.grid(levels_list)
-      # temp fix for having empty levels in page_by factor
-      # currently only checks each factor level separately - could still crash if missing combinations
-      # TODO fix for general case
-      tmp_data <- self$get_data_frame(data_name)
-      levels_data_frame$filter <- TRUE
-      for(i in seq_along(page_by)) {
-        tab <- table(tmp_data[[page_by[[i]]]])
-        tab <- tab[tab > 0]
-        levels_data_frame$filter <- levels_data_frame$filter & (levels_data_frame[[paste0("Var", i)]] %in% names(tab))
-      }
-      levels_data_frame <- subset(levels_data_frame, filter)
-      levels_data_frame$filter <- NULL
-      for(j in 1:ncol(levels_data_frame)) {
-        levels_data_frame[,j] <- paste0(page_by[j], " == ", "'", levels_data_frame[,j], "'")
-      }
-      filter_expressions <- apply(levels_data_frame, 1, paste, collapse = " & ")
-      calculated_from <- as.list(page_by)
-      names(calculated_from) <- rep(data_name, length(page_by))
-      curr_factors <- setdiff(factors, page_by)
-      for(i in seq_along(filter_expressions)) {
-        filter_calc <- instat_calculation$new(type = "filter", function_exp = filter_expressions[i], calculated_from = calculated_from)
-        for(j in seq_along(summaries)) {
-          for(k in seq_along(columns_to_summarise)) {
-            out[[paste(filter_expressions[i], summaries_display[j], columns_to_summarise[k])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[k], summaries = summaries[j], factors = curr_factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = filter_calc, perc_return_all = FALSE, ... = ...)
-          }
-        }
-      }
-    }
-    else stop("page_by not recognised")
-    if(as_html) {
-      if(length(out) == 1 ) {
-        return(out[[1]])
-      }
-      else {
-        tabs <- htmlTable::concatHtmlTables(out, headers = "")
-        class(tabs) <- c("htmlTable", "character")
-        return(tabs)
-      }
-    }
-    else return(out)
-  }
-  else {
+  # ignore all page_by options for now.
+  # this should be sorted after the summary table is created too.
+
+ # if(!is.null(page_by) && page_by == "default") {
+ #   if(length(columns_to_summarise) > 1 && length(summaries) > 1) {
+ #     page_by <- c("summaries", "variables")
+ #   }
+ #   else if(length(summaries) > 1) {
+ #     page_by <- "summaries"
+ #   }
+ #   else if(length(columns_to_summarise) > 1) {
+ #     page_by <- "variables"
+ #   }
+ #   else page_by <- c()
+ # }
+ # if(include_margins) {
+ #   #TODO fix these checks when we implement choice for page_by
+ #   # if(length(columns_to_summarise) > 1 && length(summaries) > 1 && !setequal(page_by, c("summaries", "variables"))) {
+ #   #   warning("Multiple summaries and variables with margins is currently only implemented through multiple pages. Overriding page_by to be c(summaries, variables)")
+ #   #   page_by <- c("summaries", "variables")
+ #   # }
+ #   # else if(length(summaries) > 1 && (length(page_by) == 0 || page_by != "summaries")) {
+ #   #   warning("Multiple summaries with margins is currently only implemented through multiple pages. Overriding page_by to be summaries")
+ #   #   page_by <- "summaries"
+ #   # }
+ #   # else if(length(columns_to_summarise) > 1 && (length(page_by) == 0 || page_by != "variables")) {
+ #   #   warning("Multiple variables with margins is currently only implemented through multiple pages. Overriding page_by to be variables")
+ #   #   page_by <- "variables"
+ #   # }
+ # }
+ # if(length(page_by) > 0) {
+ #   out <- list()
+ #   if(length(page_by) == 1 && page_by == "summaries") {
+ #     for(i in seq_along(summaries)) {
+ #       out[[paste(summaries_display[i], columns_to_summarise)]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries[i], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, ... = ...)
+ #     }
+ #   }
+ #   else if(length(page_by) == 1 && page_by == "variables") {
+ #     for(i in seq_along(columns_to_summarise)) {
+ #       out[[paste(summaries_display, columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries, factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, ... = ...)
+ #     }
+ #   }
+ #   else if(length(page_by) == 2  && all(page_by %in% c("variables", "summaries"))) {
+ #     for(i in seq_along(columns_to_summarise)) {
+ #       for(j in seq_along(summaries)) {
+ #         out[[paste(summaries_display[j], columns_to_summarise[i])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[i], summaries = summaries[j], factors = factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, ... = ...)
+ #       }
+ #     }
+ #   }
+ #   else if(all(page_by %in% factors)) {
+ #     levels_list <- lapply(page_by, function(x) levels(self$get_columns_from_data(data_name = data_name, col_names = x)))
+ #     levels_data_frame <- expand.grid(levels_list)
+ #     # temp fix for having empty levels in page_by factor
+ #     # currently only checks each factor level separately - could still crash if missing combinations
+ #     # TODO fix for general case
+ #     tmp_data <- self$get_data_frame(data_name)
+ #     levels_data_frame$filter <- TRUE
+ #     for(i in seq_along(page_by)) {
+ #       tab <- table(tmp_data[[page_by[[i]]]])
+ #       tab <- tab[tab > 0]
+ #       levels_data_frame$filter <- levels_data_frame$filter & (levels_data_frame[[paste0("Var", i)]] %in% names(tab))
+ #     }
+ #     levels_data_frame <- subset(levels_data_frame, filter)
+ #     levels_data_frame$filter <- NULL
+ #     for(j in 1:ncol(levels_data_frame)) {
+ #       levels_data_frame[,j] <- paste0(page_by[j], " == ", "'", levels_data_frame[,j], "'")
+ #     }
+ #     filter_expressions <- apply(levels_data_frame, 1, paste, collapse = " & ")
+ #     calculated_from <- as.list(page_by)
+ #     names(calculated_from) <- rep(data_name, length(page_by))
+ #     curr_factors <- setdiff(factors, page_by)
+ #     for(i in seq_along(filter_expressions)) {
+ #       filter_calc <- instat_calculation$new(type = "filter", function_exp = filter_expressions[i], calculated_from = calculated_from)
+ #       for(j in seq_along(summaries)) {
+ #         for(k in seq_along(columns_to_summarise)) {
+ #           out[[paste(filter_expressions[i], summaries_display[j], columns_to_summarise[k])]] <- self$summary_table(data_name = data_name, columns_to_summarise = columns_to_summarise[k], summaries = summaries[j], factors = curr_factors, n_column_factors = n_column_factors, store_results = store_results, drop = drop, na.rm = na.rm, summary_name = summary_name, include_margins = include_margins, return_output = return_output, treat_columns_as_factor = treat_columns_as_factor, page_by = "default", as_html = as_html, weights = weights, na_display = na_display, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = filter_calc, perc_return_all = FALSE, ... = ...)
+ #         }
+ #       }
+ #     }
+ #   }
+ #   else stop("page_by not recognised")
+ #   if(as_html) {
+ #     if(length(out) == 1 ) {
+ #       return(out[[1]])
+ #     }
+ #     else {
+ #       tabs <- htmlTable::concatHtmlTables(out, headers = "")
+ #       class(tabs) <- c("htmlTable", "character")
+ #       return(tabs)
+ #     }
+ #   }
+ #   else return(out)
+ # }
+ # else {
     cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE)
     for(i in seq_along(factors)) {
       levels(cell_values[[i]]) <- c(levels(cell_values[[i]]), na_level_display)
@@ -1639,6 +1642,6 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
       else return(shaped_cell_values)
       #return(stargazer::stargazer(shaped_cell_values, type = "html", summary = FALSE, rownames = FALSE, title = caption, notes = notes, ... = ...))
     }
-  }
+  #}
 }
 )
