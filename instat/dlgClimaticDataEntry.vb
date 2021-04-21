@@ -244,7 +244,8 @@ Public Class dlgClimaticDataEntry
                                            bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
                                            bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
                                            bTransform:=sdgClimaticDataEntryOptions.Transform,
-                                           dTranformValue:=sdgClimaticDataEntryOptions.TransformValue)
+                                           dTranformValue:=sdgClimaticDataEntryOptions.TransformValue,
+                                           strEntryType:=ucrInputType.GetText)
             End If
             sdgClimaticDataEntry.ShowDialog()
             SetNumberRowsChangedText(sdgClimaticDataEntry.NRowsChanged)
