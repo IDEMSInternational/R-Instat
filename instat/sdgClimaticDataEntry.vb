@@ -120,7 +120,7 @@ Public Class sdgClimaticDataEntry
         grdCurrentWorkSheet = Nothing
     End Sub
 
-    Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction, clsEditDataFrame As RFunction, strDateName As String, lstElementsNames As List(Of String), Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "", Optional bDefaultValue As Boolean = False, Optional strDefaultValue As Double = 0, Optional bNoDecimal As Boolean = False, Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False, Optional dTranformValue As Double = 0, Optional strEntryType As String = "")
+    Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction, clsEditDataFrame As RFunction, strDateName As String, lstElementsNames As List(Of String), Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "", Optional bDefaultValue As Boolean = False, Optional strDefaultValue As Double = 0, Optional bNoDecimal As Boolean = False, Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False, Optional dTranformValue As Double = 0, Optional MissingValueAsNA As Boolean = False, Optional strEntryType As String = "")
         Dim arrColumnHeaders As String()
 
         grdDataEntry.Worksheets.Clear()
@@ -178,7 +178,11 @@ Public Class sdgClimaticDataEntry
                 bNonEditableCell = lstNonEditableColumns.Contains(arrColumnHeaders(j))
                 dfValue = dfEditData.Item(i, j)
                 If dfValue = "NaN" Then
-                    dfValue = "NA"
+                    If MissingValueAsNA Then
+                        dfValue = "NA"
+                    Else
+                        dfValue = ""
+                    End If
                 End If
                 If bDefaultValue AndAlso Not bNonEditableCell AndAlso dfValue = "NA" Then
                     dfValue = strDefaultValue

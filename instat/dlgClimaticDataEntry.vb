@@ -229,6 +229,7 @@ Public Class dlgClimaticDataEntry
                                            bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
                                            bTransform:=sdgClimaticDataEntryOptions.Transform,
                                            dTranformValue:=sdgClimaticDataEntryOptions.TransformValue,
+                                           MissingValueAsNA:=sdgClimaticDataEntryOptions.MissingValueAsNA,
                                            strEntryType:=ucrInputType.GetText)
             End If
             sdgClimaticDataEntry.ShowDialog()
