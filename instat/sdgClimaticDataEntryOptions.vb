@@ -121,7 +121,4 @@ Public Class sdgClimaticDataEntryOptions
             Return If(String.IsNullOrEmpty(ucrInputTransform.GetValue), 0, ucrInputTransform.GetValue)
         End Get
     End Property
-
-
-
 End Class

@@ -26,6 +26,7 @@ Public Class sdgCommentForDataEntry
     Private clsCommentsList As New RFunction
     Private clsSaveDataEntry As RFunction
     Private i As Integer = 0
+    Private iComment As Integer = 0
 
     Private Sub sdgCommentForDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -138,7 +139,15 @@ Public Class sdgCommentForDataEntry
     Private Sub cmdAddComment_Click(sender As Object, e As EventArgs) Handles cmdAddComment.Click
         clsList.AddParameter("C" & i, clsRFunctionParameter:=clsCommentsList, iPosition:=i)
         i = i + 1
+        iComment = iComment + 1
         Me.Close()
+    End Sub
+
+    Public Function NbCommentEntered() As Integer
+        Return iComment
+    End Function
+    Public Sub ResetCommentNumber()
+        iComment = 0
     End Sub
 
     Private Sub ucrInputComment_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComment.ControlContentsChanged

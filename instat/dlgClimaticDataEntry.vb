@@ -123,6 +123,7 @@ Public Class dlgClimaticDataEntry
         'ucrInputTransform.SetName(10)
 
         lblNbRowsChanged1.Visible = False
+        lblNbCommentEntered.Visible = False
 
         clsGetDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
         clsGetDataEntry.AddParameter("type", Chr(34) & "month" & Chr(34), iPosition:=6)
@@ -192,6 +193,7 @@ Public Class dlgClimaticDataEntry
         Dim bSetup As Boolean
         Dim bShow As Boolean
 
+        sdgCommentForDataEntry.ResetCommentNumber()
 
         strDataFrameName = ucrSelectorClimaticDataEntry.strCurrentDataFrame
         strStationColumnName = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
@@ -234,6 +236,7 @@ Public Class dlgClimaticDataEntry
             End If
             sdgClimaticDataEntry.ShowDialog()
             SetNumberRowsChangedText(sdgClimaticDataEntry.NRowsChanged)
+            SetNumberCommentEnteredText(sdgCommentForDataEntry.NbCommentEntered)
             bSubdialogFirstLoad = False
             bChange = False
             TestOkEnabled()
@@ -288,13 +291,18 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
-        sdgCommentForDataEntry.ClearComments()
+        'sdgCommentForDataEntry.ClearComments()
     End Sub
 
     Private Sub SetNumberRowsChangedText(nval As Integer)
         lblNbRowsChanged1.Visible = True
         lblNbRowsChanged1.ForeColor = Color.Red
         lblNbRowsChanged1.Text = nval & " row(s) entered"
+    End Sub
+    Private Sub SetNumberCommentEnteredText(nval As Integer)
+        lblNbCommentEntered.Visible = True
+        lblNbCommentEntered.ForeColor = Color.Red
+        lblNbCommentEntered.Text = nval & " comment(s) entered"
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
