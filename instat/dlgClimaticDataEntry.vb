@@ -104,25 +104,9 @@ Public Class dlgClimaticDataEntry
         ucrEndDate.SetParameter(New RParameter("end_date", iNewPosition:=9))
         ucrEndDate.SetParameterIsRDate()
 
-        'Not yet implemented
-        'ucrChkTransform.SetText("Transform:")
-
-        ''ucrInputTransform.SetItems({"10", "Inch to mm"})
-        'ucrInputTransform.SetItems({"10"}) 'todo. temporary
-        'ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=1) 'temporary`
-        'ucrInputTransform.Visible = False
-
-        'ucrChkDefaultValue.SetText("Default Value")
-        'ucrInputDefaultValue.SetText("0")
-        'ucrInputDefaultValue.Visible = False
-
-        'ucrChkNoDecimal.SetText("No Decimal")
-
-        'ucrChkAllowTrace.SetText("Allow t for Trace")
 
         ttCmdCheckData.SetToolTip(cmdCheckData, "Data checking facilities not yet implemented")
         cmdCheckData.Enabled = False
-        'ttucrChkDefaultValue.SetToolTip(ucrChkDefaultValue, "The data must be defined as climatic to recognise which variable is precipitation.")
     End Sub
 
     Private Sub SetDefaults()
@@ -244,7 +228,9 @@ Public Class dlgClimaticDataEntry
                                            bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
                                            bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
                                            bTransform:=sdgClimaticDataEntryOptions.Transform,
-                                           dTranformValue:=sdgClimaticDataEntryOptions.TransformValue)
+                                           dTranformValue:=sdgClimaticDataEntryOptions.TransformValue,
+                                           MissingValueAsNA:=sdgClimaticDataEntryOptions.MissingValueAsNA,
+                                           strEntryType:=ucrInputType.GetText)
             End If
             sdgClimaticDataEntry.ShowDialog()
             SetNumberRowsChangedText(sdgClimaticDataEntry.NRowsChanged)

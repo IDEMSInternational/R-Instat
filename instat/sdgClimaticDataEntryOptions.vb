@@ -39,6 +39,8 @@ Public Class sdgClimaticDataEntryOptions
         ucrInputDefaultValue.SetText("0")
         ucrInputDefaultValue.Visible = False
 
+        ucrChkMissingValues.SetText("Missing Values given as NA")
+
         ucrChkNoDecimal.SetText("No Decimal")
 
         ucrChkExtraRows.SetText("Extra Rows")
@@ -51,6 +53,7 @@ Public Class sdgClimaticDataEntryOptions
         ucrChkDefaultValue.Checked = False
         ucrChkAllowTrace.Checked = False
         ucrChkTransform.Checked = False
+        ucrChkMissingValues.Checked = True
         ucrNudBefore.Visible = False
         ucrNudAfter.Visible = False
         lblBefore.Visible = False
@@ -84,6 +87,11 @@ Public Class sdgClimaticDataEntryOptions
     Public ReadOnly Property UseDefault As Boolean
         Get
             Return ucrChkDefaultValue.Checked
+        End Get
+    End Property
+    Public ReadOnly Property MissingValueAsNA As Boolean
+        Get
+            Return ucrChkMissingValues.Checked
         End Get
     End Property
 
