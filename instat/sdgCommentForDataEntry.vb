@@ -23,7 +23,7 @@ Public Class sdgCommentForDataEntry
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Public clsList As RFunction
-    Public clsCommentsList As New RFunction
+    Private clsCommentsList As New RFunction
     Private clsSaveDataEntry As RFunction
     Private i As Integer = 0
 
