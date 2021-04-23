@@ -117,14 +117,62 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;ucrChkAllowTrace.Name" xml:space="preserve">
+    <value>ucrChkAllowTrace</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAllowTrace.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAllowTrace.Parent" xml:space="preserve">
+    <value>grpRestrictEntry</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAllowTrace.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNoDecimal.Name" xml:space="preserve">
+    <value>ucrChkNoDecimal</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNoDecimal.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNoDecimal.Parent" xml:space="preserve">
+    <value>grpRestrictEntry</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNoDecimal.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="grpRestrictEntry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 63</value>
+  </data>
+  <data name="grpRestrictEntry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 40</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="grpRestrictEntry.TabIndex" type="System.Int32, mscorlib">
+    <value>90</value>
+  </data>
+  <data name="grpRestrictEntry.Text" xml:space="preserve">
+    <value>Restrict Entry:</value>
+  </data>
+  <data name="&gt;&gt;grpRestrictEntry.Name" xml:space="preserve">
+    <value>grpRestrictEntry</value>
+  </data>
+  <data name="&gt;&gt;grpRestrictEntry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpRestrictEntry.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpRestrictEntry.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="ucrChkAllowTrace.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 14</value>
   </data>
   <data name="ucrChkAllowTrace.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 20</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrChkAllowTrace.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
@@ -161,30 +209,6 @@
   <data name="&gt;&gt;ucrChkNoDecimal.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="grpRestrictEntry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 76</value>
-  </data>
-  <data name="grpRestrictEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 40</value>
-  </data>
-  <data name="grpRestrictEntry.TabIndex" type="System.Int32, mscorlib">
-    <value>90</value>
-  </data>
-  <data name="grpRestrictEntry.Text" xml:space="preserve">
-    <value>Restrict Entry:</value>
-  </data>
-  <data name="&gt;&gt;grpRestrictEntry.Name" xml:space="preserve">
-    <value>grpRestrictEntry</value>
-  </data>
-  <data name="&gt;&gt;grpRestrictEntry.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpRestrictEntry.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpRestrictEntry.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <metadata name="ttucrChkDefaultValue.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -196,7 +220,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblBefore.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 128</value>
+    <value>102, 115</value>
   </data>
   <data name="lblBefore.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -226,7 +250,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAfter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>197, 128</value>
+    <value>197, 115</value>
   </data>
   <data name="lblAfter.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -253,7 +277,7 @@
     <value>116, 17</value>
   </metadata>
   <data name="ucrChkMissingValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 151</value>
+    <value>12, 138</value>
   </data>
   <data name="ucrChkMissingValues.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 20</value>
@@ -277,7 +301,7 @@
     <value>False</value>
   </data>
   <data name="ucrChkExtraRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 125</value>
+    <value>12, 112</value>
   </data>
   <data name="ucrChkExtraRows.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 20</value>
@@ -298,7 +322,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudAfter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 125</value>
+    <value>233, 112</value>
   </data>
   <data name="ucrNudAfter.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -319,7 +343,7 @@
     <value>4</value>
   </data>
   <data name="ucrNudBefore.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 125</value>
+    <value>143, 112</value>
   </data>
   <data name="ucrNudBefore.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -340,7 +364,7 @@
     <value>5</value>
   </data>
   <data name="ucrSdgPICSARainfalbuttons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 242</value>
+    <value>85, 165</value>
   </data>
   <data name="ucrSdgPICSARainfalbuttons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -364,10 +388,10 @@
     <value>6</value>
   </data>
   <data name="ucrInputDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 49</value>
+    <value>102, 36</value>
   </data>
   <data name="ucrInputDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
+    <value>94, 21</value>
   </data>
   <data name="ucrInputDefaultValue.TabIndex" type="System.Int32, mscorlib">
     <value>92</value>
@@ -385,7 +409,7 @@
     <value>7</value>
   </data>
   <data name="ucrInputTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 19</value>
+    <value>102, 6</value>
   </data>
   <data name="ucrInputTransform.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -409,7 +433,7 @@
     <value>8</value>
   </data>
   <data name="ucrChkDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 50</value>
+    <value>12, 37</value>
   </data>
   <data name="ucrChkDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 20</value>
@@ -430,7 +454,7 @@
     <value>10</value>
   </data>
   <data name="ucrChkTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 21</value>
+    <value>12, 8</value>
   </data>
   <data name="ucrChkTransform.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 20</value>
@@ -457,10 +481,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>436, 280</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>304, 203</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

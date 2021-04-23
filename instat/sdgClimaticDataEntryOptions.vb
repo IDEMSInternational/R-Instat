@@ -35,7 +35,7 @@ Public Class sdgClimaticDataEntryOptions
         ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=0.1) 'temporary`
         ucrInputTransform.Visible = False
 
-        ucrChkDefaultValue.SetText("Default Value")
+        ucrChkDefaultValue.SetText("Default Value:")
         ucrInputDefaultValue.SetText("0")
         ucrInputDefaultValue.Visible = False
 

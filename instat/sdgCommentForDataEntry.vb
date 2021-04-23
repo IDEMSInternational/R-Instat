@@ -20,9 +20,12 @@ Public Class sdgCommentForDataEntry
     Private strSelectedDataFrame As String = ""
     Private strSelectedRow As String = ""
     Private strSelectedColumn As String = ""
-    Public bFirstLoad As Boolean = True
+    Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsAddComment As RFunction
+    Public clsList As RFunction
+    Private clsCommentsList As New RFunction
+    Private clsSaveDataEntry As RFunction
+    Private i As Integer = 0
 
     Private Sub sdgCommentForDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -39,8 +42,8 @@ Public Class sdgCommentForDataEntry
             SetDefaultPosition()
         End If
     End Sub
-    Private Sub InitialiseDialog()
 
+    Private Sub InitialiseDialog()
         ucrPnlCellRowColumnDataFrame.AddRadioButton(rdoCell)
         ucrPnlCellRowColumnDataFrame.AddRadioButton(rdoRow)
         ucrPnlCellRowColumnDataFrame.AddRadioButton(rdoColumn)
@@ -75,19 +78,23 @@ Public Class sdgCommentForDataEntry
     End Sub
 
     Private Sub SetDefaults()
-        clsAddComment = New RFunction
+        clsCommentsList = New RFunction
+        clsList = New RFunction
 
         ucrSelectorAddComment.Reset()
         ucrInputComment.IsMultiline = True
 
         ucrReceiverColumn.SetMeAsReceiver()
 
-        clsAddComment.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_new_comment")
+        clsCommentsList.SetRCommand("list")
+
+        clsList.SetRCommand("list")
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, clsAddComment, bReset)
+        SetRCode(Me, clsCommentsList, bReset)
     End Sub
+
     Private Sub SetDefaultPosition()
         ucrSelectorAddComment.SetDataframe(strSelectedDataFrame)
         ucrInputRow.SetName(strSelectedRow)
@@ -107,13 +114,38 @@ Public Class sdgCommentForDataEntry
         strSelectedColumn = ""
         bUseSelectedPosition = False
     End Sub
+
+    Public Sub SetRfunctions(clsNewSaveDataEntry As RFunction)
+        clsSaveDataEntry = clsNewSaveDataEntry
+        EnableDisableAddComment()
+    End Sub
+
+    Private Sub EnableDisableAddComment()
+        cmdAddComment.Enabled = Not ucrInputComment.IsEmpty
+    End Sub
+
     Public Sub SetPosition(strDataFrame As String, Optional strRow As String = "", Optional strColumn As String = "")
         strSelectedDataFrame = strDataFrame
         strSelectedRow = strRow
         strSelectedColumn = strColumn
         bUseSelectedPosition = True
     End Sub
+
     Private Sub ucrPnlCellRowColumnDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCellRowColumnDataFrame.ControlValueChanged
         ucrSelectorAddComment.ShowColumnSelector(rdoCell.Checked OrElse rdoColumn.Checked)
+    End Sub
+
+    Private Sub cmdAddComment_Click(sender As Object, e As EventArgs) Handles cmdAddComment.Click
+        clsList.AddParameter("C" & i, clsRFunctionParameter:=clsCommentsList, iPosition:=i)
+        i = i + 1
+        Me.Close()
+    End Sub
+
+    Private Sub ucrInputComment_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComment.ControlContentsChanged
+        EnableDisableAddComment()
+    End Sub
+
+    Public Sub ClearComments()
+        clsList.ClearParameters()
     End Sub
 End Class
