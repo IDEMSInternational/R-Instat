@@ -143,7 +143,7 @@ Partial Class dlgClimaticDataEntry
         'cmdEnterData
         '
         Me.cmdEnterData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdEnterData.Location = New System.Drawing.Point(7, 413)
+        Me.cmdEnterData.Location = New System.Drawing.Point(7, 382)
         Me.cmdEnterData.Name = "cmdEnterData"
         Me.cmdEnterData.Size = New System.Drawing.Size(106, 24)
         Me.cmdEnterData.TabIndex = 20
@@ -164,7 +164,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.lblPeriod.AutoSize = True
         Me.lblPeriod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPeriod.Location = New System.Drawing.Point(22, 247)
+        Me.lblPeriod.Location = New System.Drawing.Point(7, 247)
         Me.lblPeriod.Name = "lblPeriod"
         Me.lblPeriod.Size = New System.Drawing.Size(40, 13)
         Me.lblPeriod.TabIndex = 4
@@ -185,7 +185,7 @@ Partial Class dlgClimaticDataEntry
         'cmdCheckData
         '
         Me.cmdCheckData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCheckData.Location = New System.Drawing.Point(137, 413)
+        Me.cmdCheckData.Location = New System.Drawing.Point(137, 382)
         Me.cmdCheckData.Name = "cmdCheckData"
         Me.cmdCheckData.Size = New System.Drawing.Size(72, 24)
         Me.cmdCheckData.TabIndex = 21
@@ -321,7 +321,7 @@ Partial Class dlgClimaticDataEntry
         'cmdOptions
         '
         Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 337)
+        Me.cmdOptions.Location = New System.Drawing.Point(7, 337)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(106, 24)
         Me.cmdOptions.TabIndex = 89
@@ -331,7 +331,7 @@ Partial Class dlgClimaticDataEntry
         'lblNbRowsChanged1
         '
         Me.lblNbRowsChanged1.AutoSize = True
-        Me.lblNbRowsChanged1.Location = New System.Drawing.Point(254, 47)
+        Me.lblNbRowsChanged1.Location = New System.Drawing.Point(7, 424)
         Me.lblNbRowsChanged1.Name = "lblNbRowsChanged1"
         Me.lblNbRowsChanged1.Size = New System.Drawing.Size(39, 13)
         Me.lblNbRowsChanged1.TabIndex = 90

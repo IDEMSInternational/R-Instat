@@ -288,6 +288,7 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
+        sdgCommentForDataEntry.ClearComments()
     End Sub
 
     Private Sub SetNumberRowsChangedText(nval As Integer)

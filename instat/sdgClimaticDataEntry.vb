@@ -37,6 +37,7 @@ Public Class sdgClimaticDataEntry
     Private strDataFrameName As String
     Private clsSaveDataEntry As RFunction
     Private clsEditDataFrame As RFunction
+    Private clsCommentList As RFunction
     Private dfEditData As DataFrame
     Private strDateName As String
     Private lstElementsNames As List(Of String)
@@ -60,9 +61,11 @@ Public Class sdgClimaticDataEntry
         End If
         autoTranslate(Me)
     End Sub
+
     Private Sub InitialiseControls()
         ucrChkAddFlagFieldData.SetText("Add flag field data")
     End Sub
+
     ''' <summary>
     ''' returns the data changed for the passed column as an R vector string
     ''' </summary>
@@ -254,6 +257,7 @@ Public Class sdgClimaticDataEntry
         ttCmdReset.SetToolTip(cmdReset, "Clears all data entry.")
         ttCmdTransformButton.SetToolTip(cmdTransform, "When implemented, this is an option to show the transformed data.")
     End Sub
+
     Public Sub SetColumnNames(strDataFrameName As String, strColumnNames As String())
         Dim iIndex As Integer
         iIndex = lstColumnNames.FindIndex(Function(x) x.Key = strDataFrameName)
@@ -262,6 +266,7 @@ Public Class sdgClimaticDataEntry
         End If
         lstColumnNames.Add(New KeyValuePair(Of String, String())(strDataFrameName, strColumnNames))
     End Sub
+
     Private Function SelectedColumnsAsArray() As String()
         Dim strSelectedColumns As String()
         Dim lstCurrentDataColumns As String()
@@ -279,9 +284,11 @@ Public Class sdgClimaticDataEntry
         End If
         Return strSelectedColumns
     End Function
+
     Private Function GetFirstSelectedRow() As String
         Return grdCurrentWorkSheet.RowHeaders.Item(grdDataEntry.CurrentWorksheet.SelectionRange.Row).Text
     End Function
+
     Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
         ''todo. do this disabling of data entry be done when setting up the grid. Not here
         'If lstNonEditableColumns.Contains(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text) Then
@@ -303,6 +310,7 @@ Public Class sdgClimaticDataEntry
         MsgBox("Pasting not yet implemented.", MsgBoxStyle.Information, "Pasting not implemented.")
         e.IsCancelled = True
     End Sub
+
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
         Dim bValidValue As Boolean = True
         Dim newValue As String = e.NewData
@@ -366,6 +374,7 @@ Public Class sdgClimaticDataEntry
                 i = i + 1
             Next
             clsSaveDataEntry.AddParameter("rows_changed", GetRowNamesChangedAsRVectorString(), iPosition:=2)
+            clsSaveDataEntry.AddParameter("comments_list", clsRFunctionParameter:=sdgCommentForDataEntry.clsList, iPosition:=3)
         Else
             clsSaveDataEntry.RemoveParameterByName("rows_changed")
         End If
@@ -384,6 +393,7 @@ Public Class sdgClimaticDataEntry
 
     Private Sub cmdComment_Click(sender As Object, e As EventArgs) Handles cmdComment.Click
         sdgCommentForDataEntry.SetPosition(grdCurrentWorkSheet.Name, GetFirstSelectedRow(), SelectedColumnsAsArray()(0))
+        sdgCommentForDataEntry.SetRfunctions(clsNewSaveDataEntry:=clsSaveDataEntry)
         sdgCommentForDataEntry.ShowDialog()
     End Sub
 
@@ -448,6 +458,4 @@ Public Class sdgClimaticDataEntry
         End If
 
     End Sub
-
-
 End Class
