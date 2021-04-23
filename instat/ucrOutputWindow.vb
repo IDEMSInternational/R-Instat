@@ -78,9 +78,9 @@ Public Class ucrOutputWindow
         End If
 
         If frmMain.clsInstatOptions.bCommandsinOutput Then
-            mnuHideCommands.Text = "Hide (future) commands"
+            mnuHideCommands.Text = GetTranslation("Hide (future) commands")
         Else
-            mnuHideCommands.Text = "Show commands"
+            mnuHideCommands.Text = GetTranslation("Show commands")
         End If
 
     End Sub

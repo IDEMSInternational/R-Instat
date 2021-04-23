@@ -198,7 +198,6 @@ Public Class ucrButtons
         If frmMain.clsRecentItems IsNot Nothing Then
             frmMain.clsRecentItems.addToMenu(Me.Parent)
         End If
-        translateEach(Controls, Me)
         If bFirstLoad Then
             'TODO. Temp this could be done on the designer
             txtComment.Multiline = True
@@ -215,7 +214,6 @@ Public Class ucrButtons
                 cmdLanguage.Visible = False
             End If
             strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
-            autoTranslate(Me.ParentForm) 'needed because otherwise buttons are not translated the 2nd time a dialog is opened
         End If
 
     End Sub

@@ -202,44 +202,4 @@ Public Class Translations
         System.Windows.Forms.Application.Exit()
     End Sub
 
-
-    '**********************************************************************************************
-    'TODO This section contains functions from the old translation system.
-    ' These functions will be replaced as part of the new translation system started in March 2021.
-    '**********************************************************************************************
-
-    Public Shared Function translate(tag As String) As String
-        ' Note: if the tag is not found in Resources then Nothing will be returned
-        Return My.Resources.ResourceManager.GetObject(tag)
-    End Function
-
-    Public Shared Sub translateEach(controls As Control.ControlCollection, ctrParent As Control, Optional res As ComponentModel.ComponentResourceManager = Nothing, Optional CultureInfo As Globalization.CultureInfo = Nothing)
-        Dim mnuTmp As MenuStrip
-        Dim pntLocation As Point
-
-        If res Is Nothing Then
-            res = New ComponentModel.ComponentResourceManager(ctrParent.GetType)
-        End If
-        If CultureInfo Is Nothing Then
-            CultureInfo = Threading.Thread.CurrentThread.CurrentUICulture
-        End If
-        For Each aControl As Control In controls
-            'Checkbox text is set in the dialog so shouldn't be translated
-            'Input controls use Text property for display value so shouldn't be translated
-            If TypeOf aControl IsNot ucrCheck AndAlso TypeOf aControl IsNot ucrInput Then
-                If TypeOf aControl Is MenuStrip Then
-                    mnuTmp = DirectCast(aControl, MenuStrip)
-                    translateMenu(mnuTmp.Items, ctrParent)
-                ElseIf TypeOf aControl Is UserControl OrElse TypeOf aControl Is Panel OrElse TypeOf aControl Is GroupBox OrElse TypeOf aControl Is TabControl OrElse TypeOf aControl Is SplitContainer OrElse TypeOf aControl Is TreeView Then
-                    translateEach(aControl.Controls, aControl, res, CultureInfo)
-                End If
-                If aControl.Name <> "" Then
-                    pntLocation = aControl.Location
-                    res.ApplyResources(aControl, aControl.Name, CultureInfo)
-                    aControl.Location = pntLocation
-                End If
-            End If
-        Next
-    End Sub
-
 End Class
