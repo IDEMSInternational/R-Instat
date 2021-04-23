@@ -217,7 +217,6 @@ Public Class dlgTransformText
     Private Sub SetDefaults()
         ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
-        NewDefaultName()
 
         'initialise word controls
         ucrNudFirstWord.SetText(1)
@@ -379,20 +378,25 @@ Public Class dlgTransformText
             If ucrChkFirstOr.Checked Then
                 ucrNudFirstWord.Enabled = False
                 lblFirstWord.Enabled = False
-                ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverFirstWord)
             Else
                 ucrNudFirstWord.Enabled = True
                 lblFirstWord.Enabled = True
-                ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverTransformText)
             End If
 
             If ucrChkLastOr.Checked Then
                 ucrNudLastWord.Enabled = False
                 lblLastWord.Enabled = False
-                ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverLastWord)
             Else
                 ucrNudLastWord.Enabled = True
                 lblLastWord.Enabled = True
+
+            End If
+
+            If ucrChkFirstOr.Checked Then
+                ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverFirstWord)
+            ElseIf ucrChkLastOr.Checked Then
+                ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverLastWord)
+            Else
                 ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverTransformText)
             End If
             changeWordParamValues()
