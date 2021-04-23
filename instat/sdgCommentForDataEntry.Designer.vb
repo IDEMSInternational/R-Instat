@@ -23,25 +23,21 @@ Partial Class sdgCommentForDataEntry
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgCommentForDataEntry))
-        Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
         Me.rdoColumn = New System.Windows.Forms.RadioButton()
         Me.rdoDataFrame = New System.Windows.Forms.RadioButton()
-        Me.ucrInputRow = New instat.ucrInputTextBox()
-        Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
         Me.rdoCell = New System.Windows.Forms.RadioButton()
         Me.rdoRow = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlCellRowColumnDataFrame = New instat.UcrPanel()
-        Me.ucrInputComment = New instat.ucrInputTextBox()
         Me.lblComment = New System.Windows.Forms.Label()
         Me.lblColumn = New System.Windows.Forms.Label()
-        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.lblRow = New System.Windows.Forms.Label()
+        Me.ucrInputRow = New instat.ucrInputTextBox()
+        Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrPnlCellRowColumnDataFrame = New instat.UcrPanel()
+        Me.ucrInputComment = New instat.ucrInputTextBox()
+        Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
+        Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
+        Me.cmdAddComment = New System.Windows.Forms.Button()
         Me.SuspendLayout()
-        '
-        'ucrSdgBaseButtons
-        '
-        resources.ApplyResources(Me.ucrSdgBaseButtons, "ucrSdgBaseButtons")
-        Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
         '
         'rdoColumn
         '
@@ -63,22 +59,6 @@ Partial Class sdgCommentForDataEntry
         Me.rdoDataFrame.Name = "rdoDataFrame"
         Me.rdoDataFrame.UseVisualStyleBackColor = True
         '
-        'ucrInputRow
-        '
-        Me.ucrInputRow.AddQuotesIfUnrecognised = True
-        Me.ucrInputRow.IsMultiline = False
-        Me.ucrInputRow.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputRow, "ucrInputRow")
-        Me.ucrInputRow.Name = "ucrInputRow"
-        '
-        'ucrSelectorAddComment
-        '
-        Me.ucrSelectorAddComment.bDropUnusedFilterLevels = False
-        Me.ucrSelectorAddComment.bShowHiddenColumns = False
-        Me.ucrSelectorAddComment.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorAddComment, "ucrSelectorAddComment")
-        Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
-        '
         'rdoCell
         '
         resources.ApplyResources(Me.rdoCell, "rdoCell")
@@ -99,6 +79,37 @@ Partial Class sdgCommentForDataEntry
         Me.rdoRow.Name = "rdoRow"
         Me.rdoRow.UseVisualStyleBackColor = True
         '
+        'lblComment
+        '
+        resources.ApplyResources(Me.lblComment, "lblComment")
+        Me.lblComment.Name = "lblComment"
+        '
+        'lblColumn
+        '
+        resources.ApplyResources(Me.lblColumn, "lblColumn")
+        Me.lblColumn.Name = "lblColumn"
+        '
+        'lblRow
+        '
+        resources.ApplyResources(Me.lblRow, "lblRow")
+        Me.lblRow.Name = "lblRow"
+        '
+        'ucrInputRow
+        '
+        Me.ucrInputRow.AddQuotesIfUnrecognised = True
+        Me.ucrInputRow.IsMultiline = False
+        Me.ucrInputRow.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputRow, "ucrInputRow")
+        Me.ucrInputRow.Name = "ucrInputRow"
+        '
+        'ucrSelectorAddComment
+        '
+        Me.ucrSelectorAddComment.bDropUnusedFilterLevels = False
+        Me.ucrSelectorAddComment.bShowHiddenColumns = False
+        Me.ucrSelectorAddComment.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorAddComment, "ucrSelectorAddComment")
+        Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
+        '
         'ucrPnlCellRowColumnDataFrame
         '
         resources.ApplyResources(Me.ucrPnlCellRowColumnDataFrame, "ucrPnlCellRowColumnDataFrame")
@@ -112,16 +123,6 @@ Partial Class sdgCommentForDataEntry
         resources.ApplyResources(Me.ucrInputComment, "ucrInputComment")
         Me.ucrInputComment.Name = "ucrInputComment"
         '
-        'lblComment
-        '
-        resources.ApplyResources(Me.lblComment, "lblComment")
-        Me.lblComment.Name = "lblComment"
-        '
-        'lblColumn
-        '
-        resources.ApplyResources(Me.lblColumn, "lblColumn")
-        Me.lblColumn.Name = "lblColumn"
-        '
         'ucrReceiverColumn
         '
         Me.ucrReceiverColumn.frmParent = Me
@@ -131,15 +132,22 @@ Partial Class sdgCommentForDataEntry
         Me.ucrReceiverColumn.strNcFilePath = ""
         Me.ucrReceiverColumn.ucrSelector = Nothing
         '
-        'lblRow
+        'ucrSdgBaseButtons
         '
-        resources.ApplyResources(Me.lblRow, "lblRow")
-        Me.lblRow.Name = "lblRow"
+        resources.ApplyResources(Me.ucrSdgBaseButtons, "ucrSdgBaseButtons")
+        Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
+        '
+        'cmdAddComment
+        '
+        resources.ApplyResources(Me.cmdAddComment, "cmdAddComment")
+        Me.cmdAddComment.Name = "cmdAddComment"
+        Me.cmdAddComment.UseVisualStyleBackColor = True
         '
         'sdgCommentForDataEntry
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdAddComment)
         Me.Controls.Add(Me.rdoColumn)
         Me.Controls.Add(Me.rdoDataFrame)
         Me.Controls.Add(Me.ucrInputRow)
@@ -175,4 +183,5 @@ Partial Class sdgCommentForDataEntry
     Friend WithEvents lblColumn As Label
     Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
     Friend WithEvents lblRow As Label
+    Friend WithEvents cmdAddComment As Button
 End Class

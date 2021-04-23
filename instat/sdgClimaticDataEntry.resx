@@ -226,7 +226,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>431, 6</value>
+    <value>431, 7</value>
   </data>
   <data name="cmdTransform.Size" type="System.Drawing.Size, System.Drawing">
     <value>104, 24</value>
@@ -253,7 +253,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdReset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>564, 8</value>
+    <value>541, 7</value>
   </data>
   <data name="cmdReset.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 24</value>
