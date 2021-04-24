@@ -43,6 +43,7 @@ Public Class dlgClimaticDataEntry
         bReset = False
         autoTranslate(Me)
         ucrBase.OKEnabled(False)
+        SetNumberCommentEnteredText(sdgCommentForDataEntry.NbCommentEntered)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -199,8 +200,6 @@ Public Class dlgClimaticDataEntry
         lstVariablesColumnNames = ucrReceiverViewVariables.GetVariableNamesList(bWithQuotes:=False).ToList
         dfEditData = GetSelectedDataFrame()
 
-        sdgCommentForDataEntry.ResetCommentNumber()
-
         If dfEditData Is Nothing Then
             MsgBox("No available data for this selection. Modify dates and try again.")
             Exit Sub
@@ -289,7 +288,7 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
-        'sdgCommentForDataEntry.ClearComments()
+        sdgCommentForDataEntry.ClearComments()
     End Sub
 
     Private Sub SetNumberRowsChangedText(nval As Integer)
