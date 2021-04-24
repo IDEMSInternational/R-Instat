@@ -207,6 +207,9 @@
   <data name="lblBefore.Text" xml:space="preserve">
     <value>Before:</value>
   </data>
+  <data name="lblBefore.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;lblBefore.Name" xml:space="preserve">
     <value>lblBefore</value>
   </data>
@@ -236,6 +239,9 @@
   </data>
   <data name="lblAfter.Text" xml:space="preserve">
     <value>After:</value>
+  </data>
+  <data name="lblAfter.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;lblAfter.Name" xml:space="preserve">
     <value>lblAfter</value>
@@ -306,6 +312,9 @@
   <data name="ucrNudAfter.TabIndex" type="System.Int32, mscorlib">
     <value>96</value>
   </data>
+  <data name="ucrNudAfter.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;ucrNudAfter.Name" xml:space="preserve">
     <value>ucrNudAfter</value>
   </data>
@@ -326,6 +335,9 @@
   </data>
   <data name="ucrNudBefore.TabIndex" type="System.Int32, mscorlib">
     <value>95</value>
+  </data>
+  <data name="ucrNudBefore.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;ucrNudBefore.Name" xml:space="preserve">
     <value>ucrNudBefore</value>

@@ -31,9 +31,8 @@ Public Class sdgClimaticDataEntryOptions
         ucrChkTransform.SetText("Transform:")
         ttucrChkTransform.SetToolTip(ucrChkTransform, "The values written to the data frame are transformed, usually multiplied, by the value given here.")
 
-        'ucrInputTransform.SetItems({"10", "Inch to mm"})
-        ucrInputTransform.SetItems({"0.1", "25.4", "0.254"}) 'todo. temporary
-        ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=0.1) 'temporary`
+        ucrInputTransform.SetItems({"0.1", "25.4", "0.254"})
+        ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=0.1)
         ucrInputTransform.Visible = False
 
         ucrChkDefaultValue.SetText("Default Value:")
@@ -55,10 +54,6 @@ Public Class sdgClimaticDataEntryOptions
         ucrChkAllowTrace.Checked = False
         ucrChkTransform.Checked = False
         ucrChkMissingValues.Checked = True
-        ucrNudBefore.Visible = False
-        ucrNudAfter.Visible = False
-        lblBefore.Visible = False
-        lblAfter.Visible = False
         ucrInputTransform.GetSetSelectedIndex = 0
     End Sub
 
@@ -70,13 +65,6 @@ Public Class sdgClimaticDataEntryOptions
     Private Sub ucrChkTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTransform.ControlValueChanged
         'todo. can this "toggling" be done in another way?
         ucrInputTransform.Visible = ucrChkTransform.Checked
-    End Sub
-
-    Private Sub ucrChkExtraRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExtraRows.ControlValueChanged
-        ucrNudBefore.Visible = ucrChkExtraRows.Checked
-        ucrNudAfter.Visible = ucrChkExtraRows.Checked
-        lblBefore.Visible = ucrChkExtraRows.Checked
-        lblAfter.Visible = ucrChkExtraRows.Checked
     End Sub
 
     Public ReadOnly Property NoDecimals As Boolean

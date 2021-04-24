@@ -96,7 +96,6 @@ Public Class sdgCommentForDataEntry
 
         clsGetKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
         clsGetKey.AddParameter("key_name", Chr(34) & "key" & Chr(34), iPosition:=0)
-
         clsCommentsList.SetRCommand("list")
 
         clsList.SetRCommand("list")
@@ -126,9 +125,7 @@ Public Class sdgCommentForDataEntry
         strSelectedColumn = ""
         bUseSelectedPosition = False
     End Sub
-    Public Sub Reset()
-        ucrInputComment.ResetText()
-    End Sub
+
     Public Sub SetRfunctions(clsNewSaveDataEntry As RFunction)
         clsSaveDataEntry = clsNewSaveDataEntry
         EnableDisableAddComment()
@@ -171,6 +168,9 @@ Public Class sdgCommentForDataEntry
         EnableDisableAddComment()
     End Sub
 
+    Public Sub ClearInputComment()
+        ucrInputComment.ResetText()
+    End Sub
     Public Sub ClearComments()
         If bClearComments Then
             clsList.ClearParameters()

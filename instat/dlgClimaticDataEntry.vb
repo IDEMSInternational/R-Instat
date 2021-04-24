@@ -77,6 +77,7 @@ Public Class dlgClimaticDataEntry
 
         ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
         ucrInputSelectStation.strQuotes = ""
+  
 
         ucrReceiverDate.Selector = ucrSelectorClimaticDataEntry
         ucrReceiverDate.SetClimaticType("date")
@@ -117,10 +118,6 @@ Public Class dlgClimaticDataEntry
         ucrInputSelectStation.bFirstLevelDefault = True
         lblNbCommentEntered.Visible = False
         lblNbRowsChanged1.Visible = False
-        'ucrChkDefaultValue.Checked = False
-        'ucrChkAllowTrace.Checked = False
-        'ucrChkTransform.Checked = False
-        'ucrInputTransform.SetName(10)
 
         clsGetDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
         clsGetDataEntry.AddParameter("type", Chr(34) & "month" & Chr(34), iPosition:=6)
@@ -145,7 +142,8 @@ Public Class dlgClimaticDataEntry
         ucrReceiverDate.SetRCode(clsGetDataEntry, bReset)
         ucrReceiverElements.SetRCode(clsGetDataEntry, bReset)
         ucrReceiverViewVariables.SetRCode(clsGetDataEntry, bReset)
-        'ucrInputSelectStation.SetRCode(clsGetDataEntry, bReset)
+        ucrInputSelectStation.SetRCode(clsGetDataEntry, bReset)
+
         ucrStartDate.SetRCode(clsGetDataEntry, bReset)
         ucrEndDate.SetRCode(clsGetDataEntry, bReset)
         If bReset Then
@@ -171,7 +169,7 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         sdgClimaticDataEntry.Reset()
-        sdgCommentForDataEntry.Reset()
+        sdgCommentForDataEntry.ClearInputComment()
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
@@ -315,13 +313,4 @@ Public Class dlgClimaticDataEntry
         sdgClimaticDataEntryOptions.ShowDialog()
         bChange = True 'todo. is it always true
     End Sub
-    'Private Sub ucrChkDefaultValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefaultValue.ControlValueChanged
-    '    'todo. can this "toggling" be done in another way?
-    '    ' ucrInputDefaultValue.Visible = ucrChkDefaultValue.Checked
-    'End Sub
-
-    'Private Sub ucrChkTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTransform.ControlValueChanged
-    '    'todo. can this "toggling" be done in another way?
-    '    'ucrInputTransform.Visible = ucrChkTransform.Checked
-    'End Sub
 End Class
