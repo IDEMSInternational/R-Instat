@@ -25,7 +25,7 @@ Public Class sdgCommentForDataEntry
     Private bReset As Boolean = True
     Private bClearComments As Boolean
     Public clsList As RFunction
-    Private clsCommentsList As New RFunction
+    Private clsCommentsList As RFunction
     Private clsSaveDataEntry As RFunction
     Private clsGetKey As RFunction
     Private iNumComments As Integer = 0
@@ -164,9 +164,6 @@ Public Class sdgCommentForDataEntry
     Public Function NbCommentEntered() As Integer
         Return iNumComments
     End Function
-    Public Sub ResetCommentNumber()
-        iNumComments = 0
-    End Sub
 
     Private Sub ucrInputComment_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComment.ControlContentsChanged
         EnableDisableAddComment()
