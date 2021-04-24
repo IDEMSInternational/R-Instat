@@ -44,6 +44,7 @@ Public Class dlgClimaticDataEntry
         autoTranslate(Me)
         ucrBase.OKEnabled(False)
         SetNumberCommentEnteredText(sdgCommentForDataEntry.NbCommentEntered)
+        SetNumberRowsChangedText(sdgClimaticDataEntry.NRowsChanged)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -75,9 +76,7 @@ Public Class dlgClimaticDataEntry
         ucrReceiverStation.SetIncludedDataTypes({"factor"})
         ucrReceiverStation.strSelectorHeading = "Factors"
 
-        'ucrInputSelectStation.SetParameter(New RParameter("station_name", 6))
         ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
-        'ucrInputSelectStation.AddQuotesIfUnrecognised = False
         ucrInputSelectStation.strQuotes = ""
 
         ucrReceiverDate.Selector = ucrSelectorClimaticDataEntry
