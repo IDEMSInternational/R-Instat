@@ -23,8 +23,9 @@ Public Class sdgCommentForDataEntry
     Private strSelectedColumn As String = ""
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bClearComments As Boolean
     Public clsList As RFunction
-    Private clsCommentsList As New RFunction
+    Private clsCommentsList As RFunction
     Private clsSaveDataEntry As RFunction
     Private clsGetKey As RFunction
     Private iNumComments As Integer = 0
@@ -98,6 +99,7 @@ Public Class sdgCommentForDataEntry
         clsCommentsList.SetRCommand("list")
 
         clsList.SetRCommand("list")
+        bClearComments = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -161,16 +163,16 @@ Public Class sdgCommentForDataEntry
     Public Function NbCommentEntered() As Integer
         Return iNumComments
     End Function
-    Public Sub ResetCommentNumber()
-        iNumComments = 0
-    End Sub
 
-    Private Sub ucrInputComment_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComment.ControlValueChanged
+    Private Sub ucrInputComment_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComment.ControlContentsChanged
         EnableDisableAddComment()
     End Sub
 
     Public Sub ClearComments()
-        clsList.ClearParameters()
+        If bClearComments Then
+            clsList.ClearParameters()
+            iNumComments = 0
+        End If
     End Sub
 
     Private Sub ucrSelectorAddComment_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorAddComment.ControlValueChanged
