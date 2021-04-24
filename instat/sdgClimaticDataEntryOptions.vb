@@ -18,6 +18,7 @@ Imports instat
 Imports instat.Translations
 Public Class sdgClimaticDataEntryOptions
     Private bFirstLoad As Boolean = True
+    Private bMissing As Boolean = True
     Private Sub sdgClimaticDataEntryOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseControls()
@@ -91,7 +92,7 @@ Public Class sdgClimaticDataEntryOptions
     End Property
     Public ReadOnly Property MissingValueAsNA As Boolean
         Get
-            Return ucrChkMissingValues.Checked
+            Return bMissing
         End Get
     End Property
 
@@ -121,4 +122,8 @@ Public Class sdgClimaticDataEntryOptions
             Return If(String.IsNullOrEmpty(ucrInputTransform.GetValue), 0, ucrInputTransform.GetValue)
         End Get
     End Property
+
+    Private Sub ucrChkMissingValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMissingValues.ControlValueChanged
+        bMissing = ucrChkMissingValues.Checked
+    End Sub
 End Class
