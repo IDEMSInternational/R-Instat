@@ -104,7 +104,6 @@ Public Class dlgClimaticDataEntry
         ucrEndDate.SetParameter(New RParameter("end_date", iNewPosition:=9))
         ucrEndDate.SetParameterIsRDate()
 
-
         ttCmdCheckData.SetToolTip(cmdCheckData, "Data checking facilities not yet implemented")
         cmdCheckData.Enabled = False
     End Sub
@@ -117,13 +116,12 @@ Public Class dlgClimaticDataEntry
         ucrSelectorClimaticDataEntry.Reset()
         ucrReceiverElements.SetMeAsReceiver()
         ucrInputSelectStation.bFirstLevelDefault = True
+        lblNbRowsChanged1.Visible = False
+        lblNbCommentEntered.Visible = False
         'ucrChkDefaultValue.Checked = False
         'ucrChkAllowTrace.Checked = False
         'ucrChkTransform.Checked = False
         'ucrInputTransform.SetName(10)
-
-        lblNbRowsChanged1.Visible = False
-        lblNbCommentEntered.Visible = False
 
         clsGetDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
         clsGetDataEntry.AddParameter("type", Chr(34) & "month" & Chr(34), iPosition:=6)
@@ -193,8 +191,6 @@ Public Class dlgClimaticDataEntry
         Dim bSetup As Boolean
         Dim bShow As Boolean
 
-        sdgCommentForDataEntry.ResetCommentNumber()
-
         strDataFrameName = ucrSelectorClimaticDataEntry.strCurrentDataFrame
         strStationColumnName = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
         strStationSelected = ucrInputSelectStation.GetValue()
@@ -202,6 +198,8 @@ Public Class dlgClimaticDataEntry
         lstElementsColumnNames = ucrReceiverElements.GetVariableNamesList(bWithQuotes:=False).ToList
         lstVariablesColumnNames = ucrReceiverViewVariables.GetVariableNamesList(bWithQuotes:=False).ToList
         dfEditData = GetSelectedDataFrame()
+
+        sdgCommentForDataEntry.ResetCommentNumber()
 
         If dfEditData Is Nothing Then
             MsgBox("No available data for this selection. Modify dates and try again.")
@@ -295,14 +293,18 @@ Public Class dlgClimaticDataEntry
     End Sub
 
     Private Sub SetNumberRowsChangedText(nval As Integer)
-        lblNbRowsChanged1.Visible = True
-        lblNbRowsChanged1.ForeColor = Color.Red
-        lblNbRowsChanged1.Text = nval & " row(s) entered"
+        If nval > 0 Then
+            lblNbRowsChanged1.Visible = True
+            lblNbRowsChanged1.ForeColor = Color.Red
+            lblNbRowsChanged1.Text = nval & " row(s) entered"
+        End If
     End Sub
     Private Sub SetNumberCommentEnteredText(nval As Integer)
-        lblNbCommentEntered.Visible = True
-        lblNbCommentEntered.ForeColor = Color.Red
-        lblNbCommentEntered.Text = nval & " comment(s) entered"
+        If nval > 0 Then
+            lblNbCommentEntered.Visible = True
+            lblNbCommentEntered.ForeColor = Color.Red
+            lblNbCommentEntered.Text = nval & " comment(s) entered"
+        End If
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click

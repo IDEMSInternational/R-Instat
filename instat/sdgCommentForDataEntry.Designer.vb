@@ -22,6 +22,7 @@ Partial Class sdgCommentForDataEntry
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgCommentForDataEntry))
         Me.rdoColumn = New System.Windows.Forms.RadioButton()
         Me.rdoDataFrame = New System.Windows.Forms.RadioButton()
@@ -37,6 +38,7 @@ Partial Class sdgCommentForDataEntry
         Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
         Me.cmdAddComment = New System.Windows.Forms.Button()
+        Me.ttcmdAddComment = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
         'rdoColumn
@@ -143,6 +145,12 @@ Partial Class sdgCommentForDataEntry
         Me.cmdAddComment.Name = "cmdAddComment"
         Me.cmdAddComment.UseVisualStyleBackColor = True
         '
+        'ttcmdAddComment
+        '
+        Me.ttcmdAddComment.AutoPopDelay = 10000
+        Me.ttcmdAddComment.InitialDelay = 500
+        Me.ttcmdAddComment.ReshowDelay = 100
+        '
         'sdgCommentForDataEntry
         '
         resources.ApplyResources(Me, "$this")
@@ -184,4 +192,5 @@ Partial Class sdgCommentForDataEntry
     Friend WithEvents ucrReceiverColumn As ucrReceiverSingle
     Friend WithEvents lblRow As Label
     Friend WithEvents cmdAddComment As Button
+    Friend WithEvents ttcmdAddComment As ToolTip
 End Class
