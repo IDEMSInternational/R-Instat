@@ -39,7 +39,7 @@ Public Class sdgClimaticDataEntryOptions
         ucrInputDefaultValue.SetText("0")
         ucrInputDefaultValue.Visible = False
 
-        ucrChkMissingValues.SetText("Missing Shown as NA")
+        ucrChkMissingValues.SetText("Missing values shown as NA")
 
         ucrChkNoDecimal.SetText("No Decimal")
 

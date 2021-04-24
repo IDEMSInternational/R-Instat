@@ -117,62 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;ucrChkAllowTrace.Name" xml:space="preserve">
-    <value>ucrChkAllowTrace</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAllowTrace.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAllowTrace.Parent" xml:space="preserve">
-    <value>grpRestrictEntry</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAllowTrace.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrChkNoDecimal.Name" xml:space="preserve">
-    <value>ucrChkNoDecimal</value>
-  </data>
-  <data name="&gt;&gt;ucrChkNoDecimal.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkNoDecimal.Parent" xml:space="preserve">
-    <value>grpRestrictEntry</value>
-  </data>
-  <data name="&gt;&gt;ucrChkNoDecimal.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="grpRestrictEntry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 63</value>
-  </data>
-  <data name="grpRestrictEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 40</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="grpRestrictEntry.TabIndex" type="System.Int32, mscorlib">
-    <value>90</value>
-  </data>
-  <data name="grpRestrictEntry.Text" xml:space="preserve">
-    <value>Restrict Entry:</value>
-  </data>
-  <data name="&gt;&gt;grpRestrictEntry.Name" xml:space="preserve">
-    <value>grpRestrictEntry</value>
-  </data>
-  <data name="&gt;&gt;grpRestrictEntry.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpRestrictEntry.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpRestrictEntry.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <data name="ucrChkAllowTrace.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 14</value>
   </data>
   <data name="ucrChkAllowTrace.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 20</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrChkAllowTrace.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
@@ -208,6 +160,30 @@
   </data>
   <data name="&gt;&gt;ucrChkNoDecimal.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="grpRestrictEntry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 63</value>
+  </data>
+  <data name="grpRestrictEntry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 40</value>
+  </data>
+  <data name="grpRestrictEntry.TabIndex" type="System.Int32, mscorlib">
+    <value>90</value>
+  </data>
+  <data name="grpRestrictEntry.Text" xml:space="preserve">
+    <value>Restrict Entry:</value>
+  </data>
+  <data name="&gt;&gt;grpRestrictEntry.Name" xml:space="preserve">
+    <value>grpRestrictEntry</value>
+  </data>
+  <data name="&gt;&gt;grpRestrictEntry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpRestrictEntry.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpRestrictEntry.ZOrder" xml:space="preserve">
+    <value>9</value>
   </data>
   <metadata name="ttucrChkDefaultValue.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -280,7 +256,7 @@
     <value>12, 138</value>
   </data>
   <data name="ucrChkMissingValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 20</value>
+    <value>181, 20</value>
   </data>
   <data name="ucrChkMissingValues.TabIndex" type="System.Int32, mscorlib">
     <value>100</value>

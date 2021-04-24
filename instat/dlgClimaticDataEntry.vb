@@ -44,7 +44,6 @@ Public Class dlgClimaticDataEntry
         autoTranslate(Me)
         ucrBase.OKEnabled(False)
         SetNumberCommentEnteredText(sdgCommentForDataEntry.NbCommentEntered)
-        SetNumberRowsChangedText(sdgClimaticDataEntry.NRowsChanged)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -289,6 +288,7 @@ Public Class dlgClimaticDataEntry
         bChange = True
         bSubdialogFirstLoad = True
         sdgCommentForDataEntry.ClearComments()
+        SetNumberRowsChangedText(0)
     End Sub
 
     Private Sub SetNumberRowsChangedText(nval As Integer)
