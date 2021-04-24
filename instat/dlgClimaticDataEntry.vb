@@ -43,6 +43,8 @@ Public Class dlgClimaticDataEntry
         bReset = False
         autoTranslate(Me)
         ucrBase.OKEnabled(False)
+        SetNumberRowsChangedText(sdgClimaticDataEntry.NRowsChanged)
+        SetNumberCommentEnteredText(sdgCommentForDataEntry.NbCommentEntered)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -106,8 +108,6 @@ Public Class dlgClimaticDataEntry
 
         ttCmdCheckData.SetToolTip(cmdCheckData, "Data checking facilities not yet implemented")
         cmdCheckData.Enabled = False
-        SetNumberRowsChangedText(0)
-        SetNumberCommentEnteredText(0)
     End Sub
 
     Private Sub SetDefaults()
@@ -291,8 +291,7 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
-        'sdgCommentForDataEntry.ClearComments()
-        sdgCommentForDataEntry.ResetCommentNumber()
+        sdgCommentForDataEntry.ClearComments()
         sdgClimaticDataEntry.Reset()
     End Sub
 

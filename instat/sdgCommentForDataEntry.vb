@@ -23,6 +23,7 @@ Public Class sdgCommentForDataEntry
     Private strSelectedColumn As String = ""
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private bClearComments As Boolean
     Public clsList As RFunction
     Private clsCommentsList As New RFunction
     Private clsSaveDataEntry As RFunction
@@ -94,10 +95,12 @@ Public Class sdgCommentForDataEntry
         ucrReceiverColumn.SetMeAsReceiver()
 
         clsGetKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
+        clsGetKey.AddParameter("key_name", Chr(34) & "key" & Chr(34), iPosition:=0)
 
         clsCommentsList.SetRCommand("list")
 
         clsList.SetRCommand("list")
+        bClearComments = True
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -133,10 +136,10 @@ Public Class sdgCommentForDataEntry
         If Not ucrInputComment.IsEmpty Then
             Dim expTemp As SymbolicExpression
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKey.ToScript(), bSilent:=True)
-            If expTemp Is Nothing Then
-                cmdAddComment.Enabled = False
-            Else
+            If expTemp IsNot Nothing Then
                 cmdAddComment.Enabled = True
+            Else
+                cmdAddComment.Enabled = False
             End If
         End If
     End Sub
@@ -165,14 +168,16 @@ Public Class sdgCommentForDataEntry
         iNumComments = 0
     End Sub
 
-    Private Sub ucrInputComment_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputComment.ControlValueChanged
+    Private Sub ucrInputComment_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComment.ControlContentsChanged
         EnableDisableAddComment()
     End Sub
 
     Public Sub ClearComments()
-        clsList.ClearParameters()
+        If bClearComments Then
+            clsList.ClearParameters()
+            iNumComments = 0
+        End If
     End Sub
-
     Private Sub ucrSelectorAddComment_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorAddComment.ControlValueChanged
         clsGetKey.AddParameter("data_name", Chr(34) & ucrSelectorAddComment.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
     End Sub
