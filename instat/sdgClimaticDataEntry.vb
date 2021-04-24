@@ -113,7 +113,6 @@ Public Class sdgClimaticDataEntry
     Public Function GetRowNamesChangedAsRVectorString() As String
         Return "c(" & String.Join(",", dctRowsChanged.Values.ToArray) & ")"
     End Function
-
     Public Function NRowsChanged() As Integer
         Return dctRowsChanged.Count
     End Function
@@ -187,17 +186,27 @@ Public Class sdgClimaticDataEntry
                         dfValue = ""
                     End If
                 End If
-                If bDefaultValue AndAlso Not bNonEditableCell AndAlso dfValue = "NA" Then
+                If bDefaultValue AndAlso Not bNonEditableCell Then
                     dfValue = strDefaultValue
                 End If
 
                 grdCurrentWorkSheet.Item(row:=i, col:=j) = dfValue
+
+                If bDefaultValue AndAlso Not bNonEditableCell Then
+                    grdCurrentWorkSheet.GetCell(i, j).Style.BackColor = Color.LightYellow
+                End If
 
                 If bNonEditableCell Then
                     grdCurrentWorkSheet.GetCell(i, j).IsReadOnly = True
                 End If
             Next
             grdCurrentWorkSheet.RowHeaders.Item(i).Text = dfEditData.RowNames(i)
+        Next
+
+        For i As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
+            If bDefaultValue Then
+                AddChangedRow(i)
+            End If
         Next
 
         'if entry by month then, add the monthly totals rows and set the calculated totals

@@ -51,6 +51,7 @@ Partial Class dlgClimaticDataEntry
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblNbRowsChanged1 = New System.Windows.Forms.Label()
         Me.ucrInputSelectStation = New instat.ucrInputFactorLevels()
+        Me.lblNbCommentEntered = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'rdoAdd
@@ -347,11 +348,21 @@ Partial Class dlgClimaticDataEntry
         Me.ucrInputSelectStation.Size = New System.Drawing.Size(126, 21)
         Me.ucrInputSelectStation.TabIndex = 91
         '
+        'lblNbCommentEntered
+        '
+        Me.lblNbCommentEntered.AutoSize = True
+        Me.lblNbCommentEntered.Location = New System.Drawing.Point(7, 429)
+        Me.lblNbCommentEntered.Name = "lblNbCommentEntered"
+        Me.lblNbCommentEntered.Size = New System.Drawing.Size(39, 13)
+        Me.lblNbCommentEntered.TabIndex = 92
+        Me.lblNbCommentEntered.Text = "Label4"
+        '
         'dlgClimaticDataEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(411, 520)
+        Me.Controls.Add(Me.lblNbCommentEntered)
         Me.Controls.Add(Me.ucrInputSelectStation)
         Me.Controls.Add(Me.lblNbRowsChanged1)
         Me.Controls.Add(Me.cmdOptions)
@@ -414,4 +425,5 @@ Partial Class dlgClimaticDataEntry
     Friend WithEvents cmdOptions As Button
     Friend WithEvents lblNbRowsChanged1 As Label
     Friend WithEvents ucrInputSelectStation As ucrInputFactorLevels
+    Friend WithEvents lblNbCommentEntered As Label
 End Class
