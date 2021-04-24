@@ -126,7 +126,9 @@ Public Class sdgCommentForDataEntry
         strSelectedColumn = ""
         bUseSelectedPosition = False
     End Sub
-
+    Public Sub Reset()
+        ucrInputComment.ResetText()
+    End Sub
     Public Sub SetRfunctions(clsNewSaveDataEntry As RFunction)
         clsSaveDataEntry = clsNewSaveDataEntry
         EnableDisableAddComment()

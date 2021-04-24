@@ -172,6 +172,7 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         sdgClimaticDataEntry.Reset()
+        sdgCommentForDataEntry.Reset()
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
