@@ -201,7 +201,6 @@ Public Class dlgClimaticDataEntry
         lstVariablesColumnNames = ucrReceiverViewVariables.GetVariableNamesList(bWithQuotes:=False).ToList
         dfEditData = GetSelectedDataFrame()
 
-        'sdgCommentForDataEntry.ResetCommentNumber()
 
         If dfEditData Is Nothing Then
             MsgBox("No available data for this selection. Modify dates and try again.")
