@@ -106,6 +106,8 @@ Public Class dlgClimaticDataEntry
 
         ttCmdCheckData.SetToolTip(cmdCheckData, "Data checking facilities not yet implemented")
         cmdCheckData.Enabled = False
+        SetNumberRowsChangedText(0)
+        SetNumberCommentEnteredText(0)
     End Sub
 
     Private Sub SetDefaults()
@@ -116,8 +118,8 @@ Public Class dlgClimaticDataEntry
         ucrSelectorClimaticDataEntry.Reset()
         ucrReceiverElements.SetMeAsReceiver()
         ucrInputSelectStation.bFirstLevelDefault = True
-        lblNbRowsChanged1.Visible = False
         lblNbCommentEntered.Visible = False
+        lblNbRowsChanged1.Visible = False
         'ucrChkDefaultValue.Checked = False
         'ucrChkAllowTrace.Checked = False
         'ucrChkTransform.Checked = False
@@ -199,7 +201,7 @@ Public Class dlgClimaticDataEntry
         lstVariablesColumnNames = ucrReceiverViewVariables.GetVariableNamesList(bWithQuotes:=False).ToList
         dfEditData = GetSelectedDataFrame()
 
-        sdgCommentForDataEntry.ResetCommentNumber()
+        'sdgCommentForDataEntry.ResetCommentNumber()
 
         If dfEditData Is Nothing Then
             MsgBox("No available data for this selection. Modify dates and try again.")
@@ -290,6 +292,8 @@ Public Class dlgClimaticDataEntry
         bChange = True
         bSubdialogFirstLoad = True
         'sdgCommentForDataEntry.ClearComments()
+        sdgCommentForDataEntry.ResetCommentNumber()
+        sdgClimaticDataEntry.Reset()
     End Sub
 
     Private Sub SetNumberRowsChangedText(nval As Integer)
@@ -297,6 +301,8 @@ Public Class dlgClimaticDataEntry
             lblNbRowsChanged1.Visible = True
             lblNbRowsChanged1.ForeColor = Color.Red
             lblNbRowsChanged1.Text = nval & " row(s) entered"
+        Else
+            lblNbRowsChanged1.Visible = False
         End If
     End Sub
     Private Sub SetNumberCommentEnteredText(nval As Integer)
@@ -304,6 +310,8 @@ Public Class dlgClimaticDataEntry
             lblNbCommentEntered.Visible = True
             lblNbCommentEntered.ForeColor = Color.Red
             lblNbCommentEntered.Text = nval & " comment(s) entered"
+        Else
+            lblNbCommentEntered.Visible = False
         End If
     End Sub
 
