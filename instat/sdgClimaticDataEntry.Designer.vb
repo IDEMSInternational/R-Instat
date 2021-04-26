@@ -23,6 +23,7 @@ Partial Class sdgClimaticDataEntry
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgClimaticDataEntry))
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
         Me.grdDataEntry = New unvell.ReoGrid.ReoGridControl()
         Me.ucrChkAddFlagFieldData = New instat.ucrCheck()
@@ -40,10 +41,8 @@ Partial Class sdgClimaticDataEntry
         '
         'SplitContainer1
         '
-        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
+        resources.ApplyResources(Me.SplitContainer1, "SplitContainer1")
         Me.SplitContainer1.Name = "SplitContainer1"
-        Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
         'SplitContainer1.Panel1
         '
@@ -56,17 +55,13 @@ Partial Class sdgClimaticDataEntry
         Me.SplitContainer1.Panel2.Controls.Add(Me.cmdTransform)
         Me.SplitContainer1.Panel2.Controls.Add(Me.cmdReset)
         Me.SplitContainer1.Panel2.Controls.Add(Me.ucrSdgBaseButtons)
-        Me.SplitContainer1.Size = New System.Drawing.Size(647, 295)
-        Me.SplitContainer1.SplitterDistance = 251
-        Me.SplitContainer1.TabIndex = 0
         '
         'grdDataEntry
         '
         Me.grdDataEntry.BackColor = System.Drawing.Color.White
         Me.grdDataEntry.ColumnHeaderContextMenuStrip = Nothing
-        Me.grdDataEntry.Dock = System.Windows.Forms.DockStyle.Fill
+        resources.ApplyResources(Me.grdDataEntry, "grdDataEntry")
         Me.grdDataEntry.LeadHeaderContextMenuStrip = Nothing
-        Me.grdDataEntry.Location = New System.Drawing.Point(0, 0)
         Me.grdDataEntry.Name = "grdDataEntry"
         Me.grdDataEntry.RowHeaderContextMenuStrip = Nothing
         Me.grdDataEntry.Script = Nothing
@@ -75,58 +70,35 @@ Partial Class sdgClimaticDataEntry
         Me.grdDataEntry.SheetTabVisible = True
         Me.grdDataEntry.SheetTabWidth = 154
         Me.grdDataEntry.ShowScrollEndSpacing = True
-        Me.grdDataEntry.Size = New System.Drawing.Size(647, 251)
-        Me.grdDataEntry.TabIndex = 3
-        Me.grdDataEntry.Text = "Variables"
         '
         'ucrChkAddFlagFieldData
         '
         Me.ucrChkAddFlagFieldData.Checked = False
-        Me.ucrChkAddFlagFieldData.Enabled = False
-        Me.ucrChkAddFlagFieldData.Location = New System.Drawing.Point(185, 10)
+        resources.ApplyResources(Me.ucrChkAddFlagFieldData, "ucrChkAddFlagFieldData")
         Me.ucrChkAddFlagFieldData.Name = "ucrChkAddFlagFieldData"
-        Me.ucrChkAddFlagFieldData.Size = New System.Drawing.Size(146, 20)
-        Me.ucrChkAddFlagFieldData.TabIndex = 91
         '
         'cmdComment
         '
-        Me.cmdComment.Enabled = False
-        Me.cmdComment.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdComment.Location = New System.Drawing.Point(337, 7)
+        resources.ApplyResources(Me.cmdComment, "cmdComment")
         Me.cmdComment.Name = "cmdComment"
-        Me.cmdComment.Size = New System.Drawing.Size(90, 24)
-        Me.cmdComment.TabIndex = 90
-        Me.cmdComment.Text = "Comment"
         Me.cmdComment.UseVisualStyleBackColor = True
         '
         'cmdTransform
         '
-        Me.cmdTransform.Enabled = False
-        Me.cmdTransform.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdTransform.Location = New System.Drawing.Point(431, 6)
+        resources.ApplyResources(Me.cmdTransform, "cmdTransform")
         Me.cmdTransform.Name = "cmdTransform"
-        Me.cmdTransform.Size = New System.Drawing.Size(104, 24)
-        Me.cmdTransform.TabIndex = 89
-        Me.cmdTransform.Text = "Transform"
         Me.cmdTransform.UseVisualStyleBackColor = True
         '
         'cmdReset
         '
-        Me.cmdReset.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdReset.Location = New System.Drawing.Point(564, 8)
+        resources.ApplyResources(Me.cmdReset, "cmdReset")
         Me.cmdReset.Name = "cmdReset"
-        Me.cmdReset.Size = New System.Drawing.Size(72, 24)
-        Me.cmdReset.TabIndex = 88
-        Me.cmdReset.Text = "Reset"
         Me.cmdReset.UseVisualStyleBackColor = True
         '
         'ucrSdgBaseButtons
         '
-        Me.ucrSdgBaseButtons.Location = New System.Drawing.Point(33, 5)
-        Me.ucrSdgBaseButtons.Margin = New System.Windows.Forms.Padding(4)
+        resources.ApplyResources(Me.ucrSdgBaseButtons, "ucrSdgBaseButtons")
         Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
-        Me.ucrSdgBaseButtons.Size = New System.Drawing.Size(144, 30)
-        Me.ucrSdgBaseButtons.TabIndex = 87
         '
         'ttCmdReset
         '
@@ -142,13 +114,10 @@ Partial Class sdgClimaticDataEntry
         '
         'sdgClimaticDataEntry
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(647, 295)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Name = "sdgClimaticDataEntry"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Climatic Data Entry"
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).EndInit()

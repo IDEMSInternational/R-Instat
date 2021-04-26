@@ -28,6 +28,10 @@ Partial Class sdgClimaticDataEntryOptions
         Me.ucrChkAllowTrace = New instat.ucrCheck()
         Me.ucrChkNoDecimal = New instat.ucrCheck()
         Me.ttucrChkDefaultValue = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblBefore = New System.Windows.Forms.Label()
+        Me.lblAfter = New System.Windows.Forms.Label()
+        Me.ttucrChkTransform = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrChkMissingValues = New instat.ucrCheck()
         Me.ucrChkExtraRows = New instat.ucrCheck()
         Me.ucrNudAfter = New instat.ucrNud()
         Me.ucrNudBefore = New instat.ucrNud()
@@ -36,9 +40,6 @@ Partial Class sdgClimaticDataEntryOptions
         Me.ucrInputTransform = New instat.ucrInputComboBox()
         Me.ucrChkDefaultValue = New instat.ucrCheck()
         Me.ucrChkTransform = New instat.ucrCheck()
-        Me.lblBefore = New System.Windows.Forms.Label()
-        Me.lblAfter = New System.Windows.Forms.Label()
-        Me.ttucrChkTransform = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpRestrictEntry.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -67,6 +68,28 @@ Partial Class sdgClimaticDataEntryOptions
         Me.ttucrChkDefaultValue.AutoPopDelay = 10000
         Me.ttucrChkDefaultValue.InitialDelay = 500
         Me.ttucrChkDefaultValue.ReshowDelay = 100
+        '
+        'lblBefore
+        '
+        resources.ApplyResources(Me.lblBefore, "lblBefore")
+        Me.lblBefore.Name = "lblBefore"
+        '
+        'lblAfter
+        '
+        resources.ApplyResources(Me.lblAfter, "lblAfter")
+        Me.lblAfter.Name = "lblAfter"
+        '
+        'ttucrChkTransform
+        '
+        Me.ttucrChkTransform.AutoPopDelay = 10000
+        Me.ttucrChkTransform.InitialDelay = 500
+        Me.ttucrChkTransform.ReshowDelay = 100
+        '
+        'ucrChkMissingValues
+        '
+        Me.ucrChkMissingValues.Checked = False
+        resources.ApplyResources(Me.ucrChkMissingValues, "ucrChkMissingValues")
+        Me.ucrChkMissingValues.Name = "ucrChkMissingValues"
         '
         'ucrChkExtraRows
         '
@@ -127,26 +150,11 @@ Partial Class sdgClimaticDataEntryOptions
         resources.ApplyResources(Me.ucrChkTransform, "ucrChkTransform")
         Me.ucrChkTransform.Name = "ucrChkTransform"
         '
-        'lblBefore
-        '
-        resources.ApplyResources(Me.lblBefore, "lblBefore")
-        Me.lblBefore.Name = "lblBefore"
-        '
-        'lblAfter
-        '
-        resources.ApplyResources(Me.lblAfter, "lblAfter")
-        Me.lblAfter.Name = "lblAfter"
-        '
-        'ttucrChkTransform
-        '
-        Me.ttucrChkTransform.AutoPopDelay = 10000
-        Me.ttucrChkTransform.InitialDelay = 500
-        Me.ttucrChkTransform.ReshowDelay = 100
-        '
         'sdgClimaticDataEntryOptions
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkMissingValues)
         Me.Controls.Add(Me.lblAfter)
         Me.Controls.Add(Me.lblBefore)
         Me.Controls.Add(Me.ucrChkExtraRows)
@@ -183,4 +191,5 @@ Partial Class sdgClimaticDataEntryOptions
     Friend WithEvents lblBefore As Label
     Friend WithEvents lblAfter As Label
     Friend WithEvents ttucrChkTransform As ToolTip
+    Friend WithEvents ucrChkMissingValues As ucrCheck
 End Class

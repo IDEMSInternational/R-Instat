@@ -162,7 +162,7 @@
     <value>1</value>
   </data>
   <data name="grpRestrictEntry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 76</value>
+    <value>12, 63</value>
   </data>
   <data name="grpRestrictEntry.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 40</value>
@@ -183,16 +183,107 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpRestrictEntry.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <metadata name="ttucrChkDefaultValue.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="lblBefore.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblBefore.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblBefore.Location" type="System.Drawing.Point, System.Drawing">
+    <value>102, 115</value>
+  </data>
+  <data name="lblBefore.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 13</value>
+  </data>
+  <data name="lblBefore.TabIndex" type="System.Int32, mscorlib">
+    <value>98</value>
+  </data>
+  <data name="lblBefore.Text" xml:space="preserve">
+    <value>Before:</value>
+  </data>
+  <data name="lblBefore.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblBefore.Name" xml:space="preserve">
+    <value>lblBefore</value>
+  </data>
+  <data name="&gt;&gt;lblBefore.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblBefore.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblBefore.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblAfter.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblAfter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblAfter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>197, 115</value>
+  </data>
+  <data name="lblAfter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>32, 13</value>
+  </data>
+  <data name="lblAfter.TabIndex" type="System.Int32, mscorlib">
+    <value>99</value>
+  </data>
+  <data name="lblAfter.Text" xml:space="preserve">
+    <value>After:</value>
+  </data>
+  <data name="lblAfter.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;lblAfter.Name" xml:space="preserve">
+    <value>lblAfter</value>
+  </data>
+  <data name="&gt;&gt;lblAfter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblAfter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblAfter.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <metadata name="ttucrChkTransform.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>116, 17</value>
+  </metadata>
+  <data name="ucrChkMissingValues.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 138</value>
+  </data>
+  <data name="ucrChkMissingValues.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 20</value>
+  </data>
+  <data name="ucrChkMissingValues.TabIndex" type="System.Int32, mscorlib">
+    <value>100</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMissingValues.Name" xml:space="preserve">
+    <value>ucrChkMissingValues</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMissingValues.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMissingValues.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMissingValues.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrChkExtraRows.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="ucrChkExtraRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 122</value>
+    <value>12, 112</value>
   </data>
   <data name="ucrChkExtraRows.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 20</value>
@@ -210,16 +301,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkExtraRows.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrNudAfter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>233, 122</value>
+    <value>233, 112</value>
   </data>
   <data name="ucrNudAfter.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
   </data>
   <data name="ucrNudAfter.TabIndex" type="System.Int32, mscorlib">
     <value>96</value>
+  </data>
+  <data name="ucrNudAfter.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;ucrNudAfter.Name" xml:space="preserve">
     <value>ucrNudAfter</value>
@@ -231,16 +325,19 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudAfter.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrNudBefore.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 122</value>
+    <value>143, 112</value>
   </data>
   <data name="ucrNudBefore.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
   </data>
   <data name="ucrNudBefore.TabIndex" type="System.Int32, mscorlib">
     <value>95</value>
+  </data>
+  <data name="ucrNudBefore.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;ucrNudBefore.Name" xml:space="preserve">
     <value>ucrNudBefore</value>
@@ -252,12 +349,11 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudBefore.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrSdgPICSARainfalbuttons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 242</value>
+    <value>85, 165</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSdgPICSARainfalbuttons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
@@ -277,13 +373,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSdgPICSARainfalbuttons.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrInputDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 49</value>
+    <value>102, 36</value>
   </data>
   <data name="ucrInputDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 21</value>
+    <value>94, 21</value>
   </data>
   <data name="ucrInputDefaultValue.TabIndex" type="System.Int32, mscorlib">
     <value>92</value>
@@ -298,10 +394,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputDefaultValue.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="ucrInputTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 19</value>
+    <value>102, 6</value>
   </data>
   <data name="ucrInputTransform.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -322,10 +418,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputTransform.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ucrChkDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 50</value>
+    <value>12, 37</value>
   </data>
   <data name="ucrChkDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 20</value>
@@ -343,10 +439,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkDefaultValue.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrChkTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 21</value>
+    <value>12, 8</value>
   </data>
   <data name="ucrChkTransform.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 20</value>
@@ -364,68 +460,8 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkTransform.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
-  <data name="lblBefore.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblBefore.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 125</value>
-  </data>
-  <data name="lblBefore.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
-  </data>
-  <data name="lblBefore.TabIndex" type="System.Int32, mscorlib">
-    <value>98</value>
-  </data>
-  <data name="lblBefore.Text" xml:space="preserve">
-    <value>Before:</value>
-  </data>
-  <data name="&gt;&gt;lblBefore.Name" xml:space="preserve">
-    <value>lblBefore</value>
-  </data>
-  <data name="&gt;&gt;lblBefore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblBefore.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblBefore.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="lblAfter.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblAfter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblAfter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>197, 125</value>
-  </data>
-  <data name="lblAfter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 13</value>
-  </data>
-  <data name="lblAfter.TabIndex" type="System.Int32, mscorlib">
-    <value>99</value>
-  </data>
-  <data name="lblAfter.Text" xml:space="preserve">
-    <value>After:</value>
-  </data>
-  <data name="&gt;&gt;lblAfter.Name" xml:space="preserve">
-    <value>lblAfter</value>
-  </data>
-  <data name="&gt;&gt;lblAfter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblAfter.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblAfter.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="ttucrChkTransform.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>116, 17</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -433,7 +469,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>436, 280</value>
+    <value>304, 203</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

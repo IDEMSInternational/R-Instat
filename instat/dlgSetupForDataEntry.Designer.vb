@@ -23,6 +23,7 @@ Partial Class dlgSetupForDataEntry
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSetupForDataEntry))
+
         Me.rdoNew = New System.Windows.Forms.RadioButton()
         Me.rdoAddFlags = New System.Windows.Forms.RadioButton()
         Me.lblStation = New System.Windows.Forms.Label()
@@ -293,6 +294,8 @@ Partial Class dlgSetupForDataEntry
         resources.ApplyResources(Me.ucrChkAddKey, "ucrChkAddKey")
         Me.ucrChkAddKey.Name = "ucrChkAddKey"
         '
+        Me.SuspendLayout()
+        '
         'dlgSetupForDataEntry
         '
         resources.ApplyResources(Me, "$this")
@@ -361,4 +364,9 @@ Partial Class dlgSetupForDataEntry
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblDate As Label
     Friend WithEvents ucrChkAddKey As ucrCheck
+
+        Me.ResumeLayout(False)
+
+    End Sub
+
 End Class
