@@ -103,7 +103,11 @@ Public Class sdgCommentForDataEntry
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, clsCommentsList, bReset)
+        ucrSelectorAddComment.AddAdditionalCodeParameterPair(clsGetKey, ucrSelectorAddComment.GetParameter(), iAdditionalPairNo:=1)
+        ucrSelectorAddComment.SetRCode(clsCommentsList, bReset)
+        ucrInputComment.SetRCode(clsCommentsList, bReset)
+        ucrInputRow.SetRCode(clsCommentsList, bReset)
+        ucrReceiverColumn.SetRCode(clsCommentsList, bReset)
     End Sub
 
     Private Sub SetDefaultPosition()
@@ -176,8 +180,5 @@ Public Class sdgCommentForDataEntry
             clsList.ClearParameters()
             iNumComments = 0
         End If
-    End Sub
-    Private Sub ucrSelectorAddComment_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorAddComment.ControlValueChanged
-        clsGetKey.AddParameter("data_name", Chr(34) & ucrSelectorAddComment.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
     End Sub
 End Class
