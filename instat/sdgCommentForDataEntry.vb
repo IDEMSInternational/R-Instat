@@ -27,7 +27,7 @@ Public Class sdgCommentForDataEntry
     Public clsList As RFunction
     Private clsCommentsList As RFunction
     Private clsSaveDataEntry As RFunction
-    Private clsGetKey As RFunction
+    Private clsGetKey As New RFunction
     Private iNumComments As Integer = 0
 
     Private Sub sdgCommentForDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -79,7 +79,7 @@ Public Class sdgCommentForDataEntry
 
         ucrInputComment.SetParameter(New RParameter("comment", iNewPosition:=3))
 
-        ttcmdAddComment.SetToolTip(cmdAddComment, "This is Enable when the key exits in the data frame and the input comment is not empty.")
+        ttcmdAddComment.SetToolTip(cmdAddComment, "This is enabled when the key exists in the data frame and the input comment is not empty.")
     End Sub
 
     Private Sub SetDefaults()
@@ -90,12 +90,10 @@ Public Class sdgCommentForDataEntry
         ucrSelectorAddComment.Reset()
         ucrInputComment.IsMultiline = True
 
-        cmdAddComment.Enabled = False
-
         ucrReceiverColumn.SetMeAsReceiver()
 
         clsGetKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
-        clsGetKey.AddParameter("key_name", Chr(34) & "key" & Chr(34), iPosition:=0)
+
         clsCommentsList.SetRCommand("list")
 
         clsList.SetRCommand("list")
@@ -136,15 +134,9 @@ Public Class sdgCommentForDataEntry
     End Sub
 
     Private Sub EnableDisableAddComment()
-        If Not ucrInputComment.IsEmpty Then
-            Dim expTemp As SymbolicExpression
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKey.ToScript(), bSilent:=True)
-            If expTemp IsNot Nothing Then
-                cmdAddComment.Enabled = True
-            Else
-                cmdAddComment.Enabled = False
-            End If
-        End If
+        Dim expTemp As SymbolicExpression
+        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKey.ToScript(), bSilent:=True)
+        cmdAddComment.Enabled = expTemp IsNot Nothing AndAlso Not ucrInputComment.IsEmpty
     End Sub
 
     Public Sub SetPosition(strDataFrame As String, Optional strRow As String = "", Optional strColumn As String = "")
@@ -175,6 +167,7 @@ Public Class sdgCommentForDataEntry
     Public Sub ClearInputComment()
         ucrInputComment.ResetText()
     End Sub
+
     Public Sub ClearComments()
         If bClearComments Then
             clsList.ClearParameters()
