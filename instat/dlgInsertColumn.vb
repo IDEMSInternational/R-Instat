@@ -75,7 +75,8 @@ Public Class dlgInsertColumn
         ucrNudNumberOfColumns.SetMinMax(1, Integer.MaxValue)
 
         ucrInputDefaultValue.SetParameter(New RParameter("col_data", 5))
-        ucrInputDefaultValue.SetRDefault("NA")
+        ucrInputDefaultValue.AddQuotesIfUnrecognised = False
+
 
         ucrPnlInsertColumns.SetParameter(New RParameter("before", 3))
         ucrPnlInsertColumns.AddRadioButton(rdoAtStart, "TRUE")
@@ -111,6 +112,8 @@ Public Class dlgInsertColumn
         ucrNudNumberOfRows.SetLinkedDisplayControl(lblNumberOfRowsToInsert)
         ucrNudStartRow.SetLinkedDisplayControl(lblStartPos)
         ucrReceiverColumnsToInsert.SetLinkedDisplayControl(lblColumn)
+
+        ttColumnDefaultValue.SetToolTip(ucrInputDefaultValue.txtInput, "Include the quotes if the default value is a string, e.g. ""small""")
     End Sub
 
     Private Sub SetDefaults()
@@ -127,6 +130,8 @@ Public Class dlgInsertColumn
         clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsInsertColumnFunction.AddParameter("use_col_name_as_prefix", "TRUE")
         clsInsertColumnFunction.AddParameter("before", "FALSE")
+        clsInsertColumnFunction.AddParameter("col_data", "NA")
+
 
         clsInsertRowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
         clsInsertRowFunction.AddParameter("before", "FALSE")

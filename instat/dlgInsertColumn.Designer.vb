@@ -38,6 +38,7 @@ Partial Class dlgInsertColumn
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgInsertColumn))
         Me.lblStartPos = New System.Windows.Forms.Label()
         Me.lblNumberOfRowsToInsert = New System.Windows.Forms.Label()
@@ -66,6 +67,7 @@ Partial Class dlgInsertColumn
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrNudNumberOfRows = New instat.ucrNud()
         Me.ucrNudStartRow = New instat.ucrNud()
+        Me.ttColumnDefaultValue = New System.Windows.Forms.ToolTip(Me.components)
         Me.grpInsert.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -101,6 +103,7 @@ Partial Class dlgInsertColumn
         'ucrInputBeforeAfter
         '
         Me.ucrInputBeforeAfter.AddQuotesIfUnrecognised = True
+        Me.ucrInputBeforeAfter.GetSetSelectedIndex = -1
         Me.ucrInputBeforeAfter.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputBeforeAfter, "ucrInputBeforeAfter")
         Me.ucrInputBeforeAfter.Name = "ucrInputBeforeAfter"
@@ -326,4 +329,5 @@ Partial Class dlgInsertColumn
     Friend WithEvents ucrInputPrefixForNewColumn As ucrInputTextBox
     Friend WithEvents lblColumn As Label
     Friend WithEvents ucrSelectorInsertColumns As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ttColumnDefaultValue As ToolTip
 End Class
