@@ -99,8 +99,6 @@ Public Class dlgSetupForDataEntry
         ucrChkAddFlagVariables.SetText("Add Flag Variables")
 
         ucrChkAddKey.SetText("Add Key")
-        ucrChkAddKey.AddRSyntaxContainsFunctionNamesCondition(True, {frmMain.clsRLink.strInstatDataObject & "$add_key"})
-        ucrChkAddKey.AddRSyntaxContainsFunctionNamesCondition(False, {frmMain.clsRLink.strInstatDataObject & "$add_key"}, False)
 
         ucrReceiverAddFlagVariables.SetParameter(New RParameter("col_names", 1))
         ucrReceiverAddFlagVariables.Selector = ucrSelectorSetupDataEntry
@@ -139,6 +137,7 @@ Public Class dlgSetupForDataEntry
         clsSeqFunction = New RFunction
         clsCAddKeyFunction = New RFunction
         clsGetKey = New RFunction
+        clsAddKey = New RFunction
 
         ucrSelectorSetupDataEntry.Reset()
         ucrReceiverAddFlagVariables.SetMeAsReceiver()
@@ -152,6 +151,8 @@ Public Class dlgSetupForDataEntry
         ucrChkTmin.Checked = False
         ucrChkWS.Checked = False
         ucrChkWD.Checked = False
+        ucrChkAddFlagVariables.Checked = False
+        ucrChkAddKey.Checked = False
         'todo. what should be the default date
         ucrDateFrom.DateValue = Date.Now
         ucrDateTo.DateValue = ucrDateFrom.DateValue.AddMonths(1).AddDays(-1)
@@ -189,11 +190,12 @@ Public Class dlgSetupForDataEntry
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrSelectorSetupDataEntry.AddAdditionalCodeParameterPair(clsGetKey, ucrSelectorSetupDataEntry.GetParameter(), iAdditionalPairNo:=1)
+
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrNewDFName.SetRCode(clsNewDataFrame, bReset)
         ucrSelectorSetupDataEntry.SetRCode(clsAddFlag, bReset)
         ucrReceiverAddFlagVariables.SetRCode(clsAddFlag, bReset)
-        ucrChkAddKey.SetRSyntax(ucrBase.clsRsyntax, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -402,11 +404,7 @@ Public Class dlgSetupForDataEntry
         End If
     End Sub
 
-    Private Sub ucrSelectorSetupDataEntry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorSetupDataEntry.ControlValueChanged
-        clsGetKey.AddParameter("data_name", Chr(34) & ucrSelectorSetupDataEntry.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
-    End Sub
-
-    Private Sub ucrChkPrecip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFlagVariables.ControlValueChanged, ucrChkPrecip.ControlValueChanged, ucrChkSunh.ControlValueChanged, ucrChkTmax.ControlValueChanged, ucrChkTmin.ControlValueChanged, ucrChkWD.ControlValueChanged, ucrChkWS.ControlValueChanged
+    Private Sub ucrChkPrecip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFlagVariables.ControlValueChanged, ucrChkPrecip.ControlValueChanged, ucrChkSunh.ControlValueChanged, ucrChkTmax.ControlValueChanged, ucrChkTmin.ControlValueChanged, ucrChkWD.ControlValueChanged, ucrChkWS.ControlValueChanged, ucrChkAddKey.ControlValueChanged
         AddRemoveParameter()
     End Sub
 

@@ -45,7 +45,6 @@ Partial Class dlgSetupForDataEntry
         Me.lblAddFlagVariables = New System.Windows.Forms.Label()
         Me.lblDate = New System.Windows.Forms.Label()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
-        Me.ucrChkAddKey = New instat.ucrCheck()
         Me.ucrReceiverAddFlagVariables = New instat.ucrReceiverMultiple()
         Me.ucrNewDFName = New instat.ucrSave()
         Me.ucrChkAddFlagVariables = New instat.ucrCheck()
@@ -56,6 +55,7 @@ Partial Class dlgSetupForDataEntry
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorSetupDataEntry = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrChkAddKey = New instat.ucrCheck()
         Me.grpElements.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -214,12 +214,6 @@ Partial Class dlgSetupForDataEntry
         Me.ucrReceiverDate.strNcFilePath = ""
         Me.ucrReceiverDate.ucrSelector = Nothing
         '
-        'ucrChkAddKey
-        '
-        Me.ucrChkAddKey.Checked = False
-        resources.ApplyResources(Me.ucrChkAddKey, "ucrChkAddKey")
-        Me.ucrChkAddKey.Name = "ucrChkAddKey"
-        '
         'ucrReceiverAddFlagVariables
         '
         Me.ucrReceiverAddFlagVariables.frmParent = Me
@@ -293,6 +287,12 @@ Partial Class dlgSetupForDataEntry
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'ucrChkAddKey
+        '
+        Me.ucrChkAddKey.Checked = False
+        resources.ApplyResources(Me.ucrChkAddKey, "ucrChkAddKey")
+        Me.ucrChkAddKey.Name = "ucrChkAddKey"
+        '
         'dlgSetupForDataEntry
         '
         resources.ApplyResources(Me, "$this")
@@ -301,6 +301,7 @@ Partial Class dlgSetupForDataEntry
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.lblAddFlagVariables)
         Me.Controls.Add(Me.ucrNewDFName)
+        Me.Controls.Add(Me.ucrChkAddKey)
         Me.Controls.Add(Me.ucrChkAddFlagVariables)
         Me.Controls.Add(Me.grpElements)
         Me.Controls.Add(Me.ucrDateTo)
@@ -316,7 +317,6 @@ Partial Class dlgSetupForDataEntry
         Me.Controls.Add(Me.rdoNew)
         Me.Controls.Add(Me.rdoAddFlags)
         Me.Controls.Add(Me.ucrPnlOptions)
-        Me.Controls.Add(Me.ucrChkAddKey)
         Me.Controls.Add(Me.ucrReceiverAddFlagVariables)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -358,7 +358,7 @@ Partial Class dlgSetupForDataEntry
     Friend WithEvents ucrNewDFName As ucrSave
     Friend WithEvents lblAddFlagVariables As Label
     Friend WithEvents ucrReceiverAddFlagVariables As ucrReceiverMultiple
-    Friend WithEvents ucrChkAddKey As ucrCheck
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblDate As Label
+    Friend WithEvents ucrChkAddKey As ucrCheck
 End Class

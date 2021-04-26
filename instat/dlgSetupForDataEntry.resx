@@ -157,7 +157,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoNew.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="rdoAddFlags.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -193,7 +193,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoAddFlags.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="lblStation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -223,7 +223,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblStation.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="lblSelectStation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -253,7 +253,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelectStation.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="lblDateTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -286,7 +286,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblDateTo.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="lblDateFrom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -319,7 +319,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblDateFrom.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrInputSpecify3.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 71</value>
@@ -595,7 +595,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpElements.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lblAddFlagVariables.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -690,6 +690,27 @@
   <data name="&gt;&gt;ucrNewDFName.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="ucrChkAddKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 267</value>
+  </data>
+  <data name="ucrChkAddKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 20</value>
+  </data>
+  <data name="ucrChkAddKey.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddKey.Name" xml:space="preserve">
+    <value>ucrChkAddKey</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddKey.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddKey.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAddKey.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="ucrChkAddFlagVariables.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 349</value>
   </data>
@@ -709,7 +730,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkAddFlagVariables.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrDateTo.Location" type="System.Drawing.Point, System.Drawing">
     <value>261, 196</value>
@@ -730,7 +751,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrDateTo.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="ucrDateFrom.Location" type="System.Drawing.Point, System.Drawing">
     <value>261, 155</value>
@@ -751,7 +772,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrDateFrom.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ucrInputSelectStation.Location" type="System.Drawing.Point, System.Drawing">
     <value>261, 112</value>
@@ -772,7 +793,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputSelectStation.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="ucrReceiverStation.Location" type="System.Drawing.Point, System.Drawing">
     <value>261, 71</value>
@@ -796,7 +817,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverStation.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 406</value>
@@ -817,7 +838,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="ucrSelectorSetupDataEntry.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 49</value>
@@ -841,7 +862,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorSetupDataEntry.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>70, 8</value>
@@ -862,27 +883,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="ucrChkAddKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 268</value>
-  </data>
-  <data name="ucrChkAddKey.Size" type="System.Drawing.Size, System.Drawing">
-    <value>89, 20</value>
-  </data>
-  <data name="ucrChkAddKey.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddKey.Name" xml:space="preserve">
-    <value>ucrChkAddKey</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddKey.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddKey.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkAddKey.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
   <data name="ucrReceiverAddFlagVariables.Location" type="System.Drawing.Point, System.Drawing">
