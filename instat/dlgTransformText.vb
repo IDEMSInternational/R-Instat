@@ -392,14 +392,30 @@ Public Class dlgTransformText
 
             End If
 
-            If ucrChkFirstOr.Checked Then
-                ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverFirstWord)
-            ElseIf ucrChkLastOr.Checked Then
-                ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverLastWord)
-            Else
-                ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverTransformText)
+            If ucrChangedControl Is ucrChkFirstOr Then
+                If ucrChkFirstOr.Checked Then
+                    ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverFirstWord)
+                Else
+                    If ucrChkLastOr.Checked Then
+                        ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverLastWord)
+                    Else
+                        ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverTransformText)
+                    End If
+                End If
+            ElseIf ucrChangedControl Is ucrChkLastOr Then
+                If ucrChkLastOr.Checked Then
+                    ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverLastWord)
+                Else
+                    If ucrChkFirstOr.Checked Then
+                        ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverFirstWord)
+                    Else
+                        ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverTransformText)
+                    End If
+                End If
             End If
             changeWordParamValues()
+        Else
+            ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverTransformText)
         End If
         DialogSize()
     End Sub

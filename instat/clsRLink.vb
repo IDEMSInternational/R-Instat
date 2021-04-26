@@ -2360,9 +2360,14 @@ Public Class RLink
                 dlgSplitText.lstScriptsRCodeStructure = lstNewRCodeStructures
                 dlgSplitText.ShowDialog()
             ElseIf strCommentFromDialogue.Contains("transform text column") Then
-
+                'we are to remain with the main code alone .
+                'This dialogue can have a maximum of 3 Assignments before the main code
+                If (lstNewRCodeStructures.Count) >= 2 Then
+                    lstNewRCodeStructures.RemoveRange(0, lstNewRCodeStructures.Count - 1)
+                End If
+                dlgTransformText.lstScriptsRCodeStructure = lstNewRCodeStructures
+                End If
             End If
-        End If
     End Sub
 
     Private Shared Function ProcessSingleRStatement(clsNewRStatement As RScript.clsRStatement) As RCodeStructure
