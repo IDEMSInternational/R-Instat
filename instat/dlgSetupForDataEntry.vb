@@ -183,7 +183,6 @@ Public Class dlgSetupForDataEntry
 
         clsNewDataFrame.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
 
-        ' ucrBase.clsRsyntax.AddToAfterCodes(clsAddKey, iPosition:=0)
         clsAddKey.iCallType = 2
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
