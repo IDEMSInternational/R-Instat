@@ -117,7 +117,7 @@ Public Class dlgClimaticDataEntry
         clsEditDataFrameFunction = New RFunction
         clsGetDataEntryFunction = New RFunction
         clsCommentsListFunction = New RFunction
-        clsListFunction.Clear()
+        clsListFunction = New RFunction
         clsGetKeyFunction = New RFunction
 
         ucrSelectorClimaticDataEntry.Reset()
