@@ -60,7 +60,6 @@ Public Class dlgAddLink
 
         ucrDataSelectorFrom.Reset()
         ucrDataSelectorTo.Reset()
-
         UpdateKeys()
 
         clsAddLink.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_link")
