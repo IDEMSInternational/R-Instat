@@ -2360,4 +2360,8 @@ Public Class frmMain
     Private Sub mnuClimaticFileImportfromClimateDataStore_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportfromClimateDataStore.Click
         dlgImportERA5Data.ShowDialog()
     End Sub
+
+    Private Sub mnuSetupForDataEntry_Click(sender As Object, e As EventArgs) Handles mnuSetupForDataEntry.Click
+        dlgSetupForDataEntry.ShowDialog()
+    End Sub
 End Class
