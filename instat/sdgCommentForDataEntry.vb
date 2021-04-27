@@ -23,10 +23,10 @@ Public Class sdgCommentForDataEntry
     Private ucrBaseSelector As ucrSelector
     Private bControlsInitialised As Boolean = False
     Private bClearComments As Boolean
-    Public clsList As RFunction
-    Private clsCommentsList As RFunction
-    Private clsSaveDataEntry As RFunction
-    Private clsGetKey As New RFunction
+    Private clsListFunction As RFunction
+    Private clsCommentsListFunction As RFunction
+    Private clsSaveDataEntryFunction As RFunction
+    Private clsGetKeyFunction As New RFunction
     Private iNumComments As Integer = 0
 
     Private Sub sdgCommentForDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -98,25 +98,25 @@ Public Class sdgCommentForDataEntry
         If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
             strSelectedDataFrame = ucrBaseSelector.strCurrentDataFrame
             ucrSelectorAddComment.SetDataframe(strSelectedDataFrame, False)
-            clsGetKey.AddParameter("data_name", Chr(34) & strSelectedDataFrame & Chr(34), iPosition:=0)
+            clsGetKeyFunction.AddParameter("data_name", Chr(34) & strSelectedDataFrame & Chr(34), iPosition:=0)
         Else
-            clsGetKey.RemoveParameterByName("data_name")
+            clsGetKeyFunction.RemoveParameterByName("data_name")
         End If
 
-        clsSaveDataEntry = clsNewSaveDataEntry
-        clsGetKey = clsNewGetKey
-        clsCommentsList = clsNewCommentsList
-        clsList = clsNewList
+        clsSaveDataEntryFunction = clsNewSaveDataEntry
+        clsGetKeyFunction = clsNewGetKey
+        clsCommentsListFunction = clsNewCommentsList
+        clsListFunction = clsNewList
 
         strSelectedRow = strRow
         strSelectedColumn = strColumn
 
         SetDefaultPosition()
 
-        ucrSelectorAddComment.SetRCode(clsCommentsList, bReset, bCloneIfNeeded:=True)
-        ucrInputComment.SetRCode(clsCommentsList, bReset, bCloneIfNeeded:=True)
-        ucrInputRow.SetRCode(clsCommentsList, bReset, bCloneIfNeeded:=True)
-        ucrReceiverColumn.SetRCode(clsCommentsList, bReset, bCloneIfNeeded:=True)
+        ucrSelectorAddComment.SetRCode(clsCommentsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputComment.SetRCode(clsCommentsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputRow.SetRCode(clsCommentsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrReceiverColumn.SetRCode(clsCommentsListFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             EnableDisableAddComment()
@@ -126,7 +126,7 @@ Public Class sdgCommentForDataEntry
 
     Private Sub EnableDisableAddComment()
         Dim expTemp As SymbolicExpression
-        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKey.ToScript(), bSilent:=True)
+        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKeyFunction.ToScript(), bSilent:=True)
         cmdAddComment.Enabled = expTemp IsNot Nothing AndAlso Not ucrInputComment.IsEmpty
     End Sub
 
@@ -135,7 +135,7 @@ Public Class sdgCommentForDataEntry
     End Sub
 
     Private Sub cmdAddComment_Click(sender As Object, e As EventArgs) Handles cmdAddComment.Click
-        clsList.AddParameter("C" & iNumComments, clsRFunctionParameter:=clsCommentsList, iPosition:=iNumComments)
+        clsListFunction.AddParameter("C" & iNumComments, clsRFunctionParameter:=clsCommentsListFunction, iPosition:=iNumComments)
         iNumComments = iNumComments + 1
         Me.Close()
     End Sub
@@ -155,7 +155,7 @@ Public Class sdgCommentForDataEntry
 
     Public Sub ClearComments()
         If bClearComments Then
-            clsList.ClearParameters()
+            clsListFunction.ClearParameters()
             iNumComments = 0
         End If
     End Sub

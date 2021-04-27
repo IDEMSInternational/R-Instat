@@ -20,12 +20,12 @@ Imports RDotNet
 Public Class dlgClimaticDataEntry
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsSaveDataEntry As New RFunction
-    Private clsEditDataFrame As New RFunction
-    Private clsGetDataEntry As New RFunction
-    Private clsCommentsList As New RFunction
-    Private clsList As New RFunction
-    Private clsGetKey As New RFunction
+    Private clsSaveDataEntryFunction As New RFunction
+    Private clsEditDataFrameFunction As New RFunction
+    Private clsGetDataEntryFunction As New RFunction
+    Private clsCommentsListFunction As New RFunction
+    Private clsListFunction As New RFunction
+    Private clsGetKeyFunction As New RFunction
     Private strStationColumn As String = ""
     Private ReadOnly strDay As String = "Day"
     Private ReadOnly strMonth As String = "Month"
@@ -113,12 +113,12 @@ Public Class dlgClimaticDataEntry
     End Sub
 
     Private Sub SetDefaults()
-        clsSaveDataEntry = New RFunction
-        clsEditDataFrame = New RFunction
-        clsGetDataEntry = New RFunction
-        clsCommentsList = New RFunction
-        clsList.Clear()
-        clsGetKey = New RFunction
+        clsSaveDataEntryFunction = New RFunction
+        clsEditDataFrameFunction = New RFunction
+        clsGetDataEntryFunction = New RFunction
+        clsCommentsListFunction = New RFunction
+        clsListFunction.Clear()
+        clsGetKeyFunction = New RFunction
 
         ucrSelectorClimaticDataEntry.Reset()
         ucrReceiverElements.SetMeAsReceiver()
@@ -126,20 +126,20 @@ Public Class dlgClimaticDataEntry
         lblNbCommentEntered.Visible = False
         lblNbRowsChanged1.Visible = False
 
-        clsGetDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
-        clsGetDataEntry.AddParameter("type", Chr(34) & "month" & Chr(34), iPosition:=6)
+        clsGetDataEntryFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
+        clsGetDataEntryFunction.AddParameter("type", Chr(34) & "month" & Chr(34), iPosition:=6)
 
-        clsSaveDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$save_data_entry_data")
-        clsSaveDataEntry.AddParameter("new_data", clsRFunctionParameter:=clsEditDataFrame, iPosition:=1)
+        clsSaveDataEntryFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$save_data_entry_data")
+        clsSaveDataEntryFunction.AddParameter("new_data", clsRFunctionParameter:=clsEditDataFrameFunction, iPosition:=1)
 
-        clsEditDataFrame.SetRCommand("data.frame")
-        clsEditDataFrame.SetAssignTo("new_data")
+        clsEditDataFrameFunction.SetRCommand("data.frame")
+        clsEditDataFrameFunction.SetAssignTo("new_data")
 
-        clsGetKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
+        clsGetKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
 
-        clsCommentsList.SetRCommand("list")
+        clsCommentsListFunction.SetRCommand("list")
 
-        clsList.SetRCommand("list")
+        clsListFunction.SetRCommand("list")
 
         bChange = False
         bState = False
@@ -147,22 +147,22 @@ Public Class dlgClimaticDataEntry
         bResetSubdialogs = True
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
         ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSaveDataEntry)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSaveDataEntryFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorClimaticDataEntry.AddAdditionalCodeParameterPair(clsSaveDataEntry, ucrSelectorClimaticDataEntry.GetParameter(), iAdditionalPairNo:=1)
+        ucrSelectorClimaticDataEntry.AddAdditionalCodeParameterPair(clsSaveDataEntryFunction, ucrSelectorClimaticDataEntry.GetParameter(), iAdditionalPairNo:=1)
 
-        ucrInputType.SetRCode(clsGetDataEntry, bReset)
-        ucrSelectorClimaticDataEntry.SetRCode(clsGetDataEntry, bReset)
-        ucrReceiverStation.SetRCode(clsGetDataEntry, bReset)
-        ucrReceiverDate.SetRCode(clsGetDataEntry, bReset)
-        ucrReceiverElements.SetRCode(clsGetDataEntry, bReset)
-        ucrReceiverViewVariables.SetRCode(clsGetDataEntry, bReset)
-        ucrInputSelectStation.SetRCode(clsGetDataEntry, bReset)
+        ucrInputType.SetRCode(clsGetDataEntryFunction, bReset)
+        ucrSelectorClimaticDataEntry.SetRCode(clsGetDataEntryFunction, bReset)
+        ucrReceiverStation.SetRCode(clsGetDataEntryFunction, bReset)
+        ucrReceiverDate.SetRCode(clsGetDataEntryFunction, bReset)
+        ucrReceiverElements.SetRCode(clsGetDataEntryFunction, bReset)
+        ucrReceiverViewVariables.SetRCode(clsGetDataEntryFunction, bReset)
+        ucrInputSelectStation.SetRCode(clsGetDataEntryFunction, bReset)
 
-        ucrStartDate.SetRCode(clsGetDataEntry, bReset)
-        ucrEndDate.SetRCode(clsGetDataEntry, bReset)
+        ucrStartDate.SetRCode(clsGetDataEntryFunction, bReset)
+        ucrEndDate.SetRCode(clsGetDataEntryFunction, bReset)
         If bReset Then
             ' Default start date to 1 Jan 2021. todo change to correct way of getting first date of current year
             ucrStartDate.DateValue = New Date("2021", "1", "1")
@@ -172,7 +172,7 @@ Public Class dlgClimaticDataEntry
 
     Private Sub TestOkEnabled()
         If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty Then
-            ucrBase.OKEnabled(clsSaveDataEntry.ContainsParameter("rows_changed"))
+            ucrBase.OKEnabled(clsSaveDataEntryFunction.ContainsParameter("rows_changed"))
             cmdEnterData.Enabled = True
             If Not ucrReceiverStation.IsEmpty AndAlso ucrInputSelectStation.IsEmpty Then
                 cmdEnterData.Enabled = False
@@ -233,8 +233,8 @@ Public Class dlgClimaticDataEntry
 
         If bShow Then
             If bSetup Then
-                sdgClimaticDataEntry.Setup(dfEditData:=dfEditData, strDataFrameName:=strDataFrameName, clsSaveDataEntry:=clsSaveDataEntry,
-                                         clsEditDataFrame:=clsEditDataFrame, clsNewGetKey:=clsGetKey, clsNewCommentsList:=clsCommentsList, clsNewList:=clsList,
+                sdgClimaticDataEntry.Setup(dfEditData:=dfEditData, strDataFrameName:=strDataFrameName, clsSaveDataEntry:=clsSaveDataEntryFunction,
+                                         clsEditDataFrame:=clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction, clsNewCommentsList:=clsCommentsListFunction, clsNewList:=clsListFunction,
                       strDateName:=strDateColumnName, lstElementsNames:=lstElementsColumnNames, lstViewVariablesNames:=lstVariablesColumnNames,
                                          strStationColumnName:=strStationColumnName,
                                            bDefaultValue:=sdgClimaticDataEntryOptions.UseDefault,
@@ -260,7 +260,7 @@ Public Class dlgClimaticDataEntry
         Dim dfTemp As DataFrame = Nothing
         Dim expTemp As SymbolicExpression
 
-        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataEntry.ToScript(), bSilent:=True)
+        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetDataEntryFunction.ToScript(), bSilent:=True)
         If expTemp IsNot Nothing Then
             dfTemp = expTemp.AsDataFrame()
         End If
@@ -293,18 +293,18 @@ Public Class dlgClimaticDataEntry
     End Sub
 
     Private Sub StationControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrInputSelectStation.ControlValueChanged
-        clsEditDataFrame.RemoveParameterByName(strStationColumn)
-        clsGetDataEntry.AddParameter("station_name", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=6)
+        clsEditDataFrameFunction.RemoveParameterByName(strStationColumn)
+        clsGetDataEntryFunction.AddParameter("station_name", Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=6)
         strStationColumn = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
         If Not strStationColumn = "" AndAlso Not ucrInputSelectStation.GetValue() = "" Then
-            clsEditDataFrame.AddParameter(strStationColumn, Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=0)
+            clsEditDataFrameFunction.AddParameter(strStationColumn, Chr(34) & ucrInputSelectStation.GetValue() & Chr(34), iPosition:=0)
         End If
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
-        clsList.ClearParameters()
+        clsListFunction.ClearParameters()
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
         SetNumberRowsChangedText(0)
     End Sub
