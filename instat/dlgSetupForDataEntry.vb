@@ -180,13 +180,12 @@ Public Class dlgSetupForDataEntry
         clsAddKey.AddParameter("key_name", Chr(34) & "key" & Chr(34), iPosition:=1)
 
         clsCAddKeyFunction.SetRCommand("c")
-        clsCAddKeyFunction.AddParameter("date", Chr(34) & "date" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
 
         clsNewDataFrame.SetAssignTo(ucrNewDFName.GetText(), strTempDataframe:=ucrNewDFName.GetText())
 
-        clsAddKey.iCallType = 2
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
+        clsAddKey.iCallType = 2
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -292,6 +291,13 @@ Public Class dlgSetupForDataEntry
         Else
             clsNewDataFrame.RemoveParameterByName("wd")
         End If
+        If rdoNew.Checked Then
+            clsCAddKeyFunction.AddParameter("date", Chr(34) & "date" & Chr(34), iPosition:=1, bIncludeArgumentName:=False)
+            clsAddKey.AddParameter("data_name", Chr(34) & ucrNewDFName.GetText() & Chr(34), iPosition:=0)
+        Else
+            clsCAddKeyFunction.AddParameter("date", ucrReceiverDate.GetVariableNames(True), iPosition:=1, bIncludeArgumentName:=False)
+            clsAddKey.AddParameter("data_name", Chr(34) & ucrSelectorSetupDataEntry.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
+        End If
     End Sub
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrInputSelectStation.ControlValueChanged
@@ -302,11 +308,15 @@ Public Class dlgSetupForDataEntry
             strStation = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
             clsNewDataFrame.AddParameter(strStation, "as.factor(" & Chr(34) & ucrInputSelectStation.GetValue() & Chr(34) & ")", iPosition:=0)
             ucrNewDFName.SetPrefix(strDaframeName.Replace("'", ""))
+            clsCAddKeyFunction.AddParameter("station", ucrReceiverStation.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
+            clsAddKey.AddParameter("col_names", clsRFunctionParameter:=clsCAddKeyFunction, iPosition:=1)
         Else
+            clsCAddKeyFunction.RemoveParameterByName("station")
+            clsAddKey.RemoveParameterByName("col_names")
             clsNewDataFrame.RemoveParameterByName(strDaframeName.Replace("'", ""))
             strStation = ""
         End If
-
+        AddRemoveParameter()
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -375,6 +385,7 @@ Public Class dlgSetupForDataEntry
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrame)
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddKey, iPosition:=0)
+            clsAddKey.iCallType = 2
             grpElements.Visible = True
             AddRemoveParameter()
         Else
@@ -382,24 +393,23 @@ Public Class dlgSetupForDataEntry
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.35)
             ucrBase.clsRsyntax.SetBaseRFunction(clsAddFlag)
             grpElements.Visible = False
+            AddRemoveParameter()
         End If
     End Sub
 
     Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlValueChanged
-        clsCAddKeyFunction.AddParameter("station", ucrReceiverStation.GetVariableNames(True), iPosition:=0, bIncludeArgumentName:=False)
-        clsAddKey.AddParameter("col_names", clsRFunctionParameter:=clsCAddKeyFunction, iPosition:=1)
-        clsAddKey.AddParameter("data_name", Chr(34) & ucrNewDFName.GetText() & Chr(34), iPosition:=0)
+        AddRemoveParameter()
     End Sub
 
-    Private Sub ucrChkAddKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddKey.ControlValueChanged, ucrReceiverAddFlagVariables.ControlValueChanged
+    Private Sub ucrChkAddKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddKey.ControlValueChanged, ucrPnlOptions.ControlValueChanged
         If ucrChkAddKey.Checked AndAlso rdoAddFlags.Checked Then
             Dim expTemp As SymbolicExpression
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKey.ToScript(), bSilent:=True)
             If expTemp IsNot Nothing Then
                 ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKey)
             Else
-                clsAddKey.AddParameter("data_name", Chr(34) & ucrSelectorSetupDataEntry.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
                 ucrBase.clsRsyntax.AddToAfterCodes(clsAddKey, iPosition:=0)
+                clsAddKey.iCallType = 2
             End If
         End If
     End Sub
@@ -411,4 +421,5 @@ Public Class dlgSetupForDataEntry
     Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverAddFlagVariables.ControlContentsChanged, ucrChkPrecip.ControlContentsChanged, ucrChkSunh.ControlContentsChanged, ucrChkTmax.ControlContentsChanged, ucrChkTmin.ControlContentsChanged, ucrChkWD.ControlContentsChanged, ucrChkWS.ControlContentsChanged, ucrChkSpecify1.ControlContentsChanged, ucrChkSpecify2.ControlContentsChanged, ucrChkSpecify3.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
 End Class
