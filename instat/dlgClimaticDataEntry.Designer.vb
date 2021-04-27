@@ -51,6 +51,7 @@ Partial Class dlgClimaticDataEntry
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblNbRowsChanged1 = New System.Windows.Forms.Label()
         Me.ucrInputSelectStation = New instat.ucrInputFactorLevels()
+        Me.lblNbCommentEntered = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'rdoAdd
@@ -80,7 +81,7 @@ Partial Class dlgClimaticDataEntry
         Me.rdoEdit.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoEdit.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoEdit.Location = New System.Drawing.Point(204, 12)
+        Me.rdoEdit.Location = New System.Drawing.Point(206, 12)
         Me.rdoEdit.Name = "rdoEdit"
         Me.rdoEdit.Size = New System.Drawing.Size(110, 27)
         Me.rdoEdit.TabIndex = 2
@@ -92,7 +93,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.Label1.AutoSize = True
         Me.Label1.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.Label1.Location = New System.Drawing.Point(274, 109)
+        Me.Label1.Location = New System.Drawing.Point(274, 111)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(76, 13)
         Me.Label1.TabIndex = 8
@@ -143,7 +144,7 @@ Partial Class dlgClimaticDataEntry
         'cmdEnterData
         '
         Me.cmdEnterData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdEnterData.Location = New System.Drawing.Point(7, 413)
+        Me.cmdEnterData.Location = New System.Drawing.Point(7, 370)
         Me.cmdEnterData.Name = "cmdEnterData"
         Me.cmdEnterData.Size = New System.Drawing.Size(106, 24)
         Me.cmdEnterData.TabIndex = 20
@@ -164,7 +165,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.lblPeriod.AutoSize = True
         Me.lblPeriod.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblPeriod.Location = New System.Drawing.Point(22, 247)
+        Me.lblPeriod.Location = New System.Drawing.Point(7, 247)
         Me.lblPeriod.Name = "lblPeriod"
         Me.lblPeriod.Size = New System.Drawing.Size(40, 13)
         Me.lblPeriod.TabIndex = 4
@@ -185,7 +186,7 @@ Partial Class dlgClimaticDataEntry
         'cmdCheckData
         '
         Me.cmdCheckData.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdCheckData.Location = New System.Drawing.Point(137, 413)
+        Me.cmdCheckData.Location = New System.Drawing.Point(137, 370)
         Me.cmdCheckData.Name = "cmdCheckData"
         Me.cmdCheckData.Size = New System.Drawing.Size(72, 24)
         Me.cmdCheckData.TabIndex = 21
@@ -212,7 +213,7 @@ Partial Class dlgClimaticDataEntry
         Me.ucrEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.ucrEndDate.Name = "ucrEndDate"
-        Me.ucrEndDate.Size = New System.Drawing.Size(135, 20)
+        Me.ucrEndDate.Size = New System.Drawing.Size(132, 21)
         Me.ucrEndDate.TabIndex = 28
         '
         'ucrStartDate
@@ -223,7 +224,7 @@ Partial Class dlgClimaticDataEntry
         Me.ucrStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.ucrStartDate.Name = "ucrStartDate"
-        Me.ucrStartDate.Size = New System.Drawing.Size(135, 20)
+        Me.ucrStartDate.Size = New System.Drawing.Size(132, 21)
         Me.ucrStartDate.TabIndex = 27
         '
         'ucrInputType
@@ -321,7 +322,7 @@ Partial Class dlgClimaticDataEntry
         'cmdOptions
         '
         Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdOptions.Location = New System.Drawing.Point(10, 337)
+        Me.cmdOptions.Location = New System.Drawing.Point(7, 337)
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.Size = New System.Drawing.Size(106, 24)
         Me.cmdOptions.TabIndex = 89
@@ -331,7 +332,7 @@ Partial Class dlgClimaticDataEntry
         'lblNbRowsChanged1
         '
         Me.lblNbRowsChanged1.AutoSize = True
-        Me.lblNbRowsChanged1.Location = New System.Drawing.Point(254, 47)
+        Me.lblNbRowsChanged1.Location = New System.Drawing.Point(7, 405)
         Me.lblNbRowsChanged1.Name = "lblNbRowsChanged1"
         Me.lblNbRowsChanged1.Size = New System.Drawing.Size(39, 13)
         Me.lblNbRowsChanged1.TabIndex = 90
@@ -347,11 +348,21 @@ Partial Class dlgClimaticDataEntry
         Me.ucrInputSelectStation.Size = New System.Drawing.Size(126, 21)
         Me.ucrInputSelectStation.TabIndex = 91
         '
+        'lblNbCommentEntered
+        '
+        Me.lblNbCommentEntered.AutoSize = True
+        Me.lblNbCommentEntered.Location = New System.Drawing.Point(7, 429)
+        Me.lblNbCommentEntered.Name = "lblNbCommentEntered"
+        Me.lblNbCommentEntered.Size = New System.Drawing.Size(39, 13)
+        Me.lblNbCommentEntered.TabIndex = 92
+        Me.lblNbCommentEntered.Text = "Label4"
+        '
         'dlgClimaticDataEntry
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(411, 520)
+        Me.Controls.Add(Me.lblNbCommentEntered)
         Me.Controls.Add(Me.ucrInputSelectStation)
         Me.Controls.Add(Me.lblNbRowsChanged1)
         Me.Controls.Add(Me.cmdOptions)
@@ -414,4 +425,5 @@ Partial Class dlgClimaticDataEntry
     Friend WithEvents cmdOptions As Button
     Friend WithEvents lblNbRowsChanged1 As Label
     Friend WithEvents ucrInputSelectStation As ucrInputFactorLevels
+    Friend WithEvents lblNbCommentEntered As Label
 End Class

@@ -3862,7 +3862,7 @@ DataSheet$set("public", "get_data_entry_data", function(station, date, elements,
   curr_data
 })
 
-DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed) {
+DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed, ...) {
   if (nrow(new_data) != length(rows_changed)) stop("new_data must have the same number of rows as length of rows_changed.")
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
   for (i in seq_along(rows_changed)) {

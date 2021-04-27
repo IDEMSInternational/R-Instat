@@ -43,6 +43,7 @@ Public Class dlgClimaticDataEntry
         bReset = False
         autoTranslate(Me)
         ucrBase.OKEnabled(False)
+        SetNumberCommentEnteredText(sdgCommentForDataEntry.NbCommentEntered)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -74,10 +75,9 @@ Public Class dlgClimaticDataEntry
         ucrReceiverStation.SetIncludedDataTypes({"factor"})
         ucrReceiverStation.strSelectorHeading = "Factors"
 
-        'ucrInputSelectStation.SetParameter(New RParameter("station_name", 6))
         ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
-        'ucrInputSelectStation.AddQuotesIfUnrecognised = False
         ucrInputSelectStation.strQuotes = ""
+  
 
         ucrReceiverDate.Selector = ucrSelectorClimaticDataEntry
         ucrReceiverDate.SetClimaticType("date")
@@ -104,25 +104,8 @@ Public Class dlgClimaticDataEntry
         ucrEndDate.SetParameter(New RParameter("end_date", iNewPosition:=9))
         ucrEndDate.SetParameterIsRDate()
 
-        'Not yet implemented
-        'ucrChkTransform.SetText("Transform:")
-
-        ''ucrInputTransform.SetItems({"10", "Inch to mm"})
-        'ucrInputTransform.SetItems({"10"}) 'todo. temporary
-        'ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=1) 'temporary`
-        'ucrInputTransform.Visible = False
-
-        'ucrChkDefaultValue.SetText("Default Value")
-        'ucrInputDefaultValue.SetText("0")
-        'ucrInputDefaultValue.Visible = False
-
-        'ucrChkNoDecimal.SetText("No Decimal")
-
-        'ucrChkAllowTrace.SetText("Allow t for Trace")
-
         ttCmdCheckData.SetToolTip(cmdCheckData, "Data checking facilities not yet implemented")
         cmdCheckData.Enabled = False
-        'ttucrChkDefaultValue.SetToolTip(ucrChkDefaultValue, "The data must be defined as climatic to recognise which variable is precipitation.")
     End Sub
 
     Private Sub SetDefaults()
@@ -133,11 +116,7 @@ Public Class dlgClimaticDataEntry
         ucrSelectorClimaticDataEntry.Reset()
         ucrReceiverElements.SetMeAsReceiver()
         ucrInputSelectStation.bFirstLevelDefault = True
-        'ucrChkDefaultValue.Checked = False
-        'ucrChkAllowTrace.Checked = False
-        'ucrChkTransform.Checked = False
-        'ucrInputTransform.SetName(10)
-
+        lblNbCommentEntered.Visible = False
         lblNbRowsChanged1.Visible = False
 
         clsGetDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
@@ -163,7 +142,8 @@ Public Class dlgClimaticDataEntry
         ucrReceiverDate.SetRCode(clsGetDataEntry, bReset)
         ucrReceiverElements.SetRCode(clsGetDataEntry, bReset)
         ucrReceiverViewVariables.SetRCode(clsGetDataEntry, bReset)
-        'ucrInputSelectStation.SetRCode(clsGetDataEntry, bReset)
+        ucrInputSelectStation.SetRCode(clsGetDataEntry, bReset)
+
         ucrStartDate.SetRCode(clsGetDataEntry, bReset)
         ucrEndDate.SetRCode(clsGetDataEntry, bReset)
         If bReset Then
@@ -177,7 +157,7 @@ Public Class dlgClimaticDataEntry
         If Not ucrReceiverDate.IsEmpty AndAlso Not ucrReceiverElements.IsEmpty Then
             ucrBase.OKEnabled(clsSaveDataEntry.ContainsParameter("rows_changed"))
             cmdEnterData.Enabled = True
-            If Not ucrReceiverStation.IsEmpty Then
+            If Not ucrReceiverStation.IsEmpty AndAlso ucrInputSelectStation.IsEmpty Then
                 cmdEnterData.Enabled = False
             End If
         Else
@@ -189,11 +169,12 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         sdgClimaticDataEntry.Reset()
+        sdgCommentForDataEntry.ClearInputComment()
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrInputSelectStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverElements.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -207,7 +188,6 @@ Public Class dlgClimaticDataEntry
         Dim strDataFrameName As String
         Dim bSetup As Boolean
         Dim bShow As Boolean
-
 
         strDataFrameName = ucrSelectorClimaticDataEntry.strCurrentDataFrame
         strStationColumnName = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
@@ -244,10 +224,13 @@ Public Class dlgClimaticDataEntry
                                            bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
                                            bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
                                            bTransform:=sdgClimaticDataEntryOptions.Transform,
-                                           dTranformValue:=sdgClimaticDataEntryOptions.TransformValue)
+                                           dTranformValue:=sdgClimaticDataEntryOptions.TransformValue,
+                                           MissingValueAsNA:=sdgClimaticDataEntryOptions.MissingValueAsNA,
+                                           strEntryType:=ucrInputType.GetText)
             End If
             sdgClimaticDataEntry.ShowDialog()
             SetNumberRowsChangedText(sdgClimaticDataEntry.NRowsChanged)
+            SetNumberCommentEnteredText(sdgCommentForDataEntry.NbCommentEntered)
             bSubdialogFirstLoad = False
             bChange = False
             TestOkEnabled()
@@ -302,25 +285,32 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
+        sdgCommentForDataEntry.ClearComments()
+        SetNumberRowsChangedText(0)
     End Sub
 
     Private Sub SetNumberRowsChangedText(nval As Integer)
-        lblNbRowsChanged1.Visible = True
-        lblNbRowsChanged1.ForeColor = Color.Red
-        lblNbRowsChanged1.Text = nval & " row(s) entered"
+        If nval > 0 Then
+            lblNbRowsChanged1.Visible = True
+            lblNbRowsChanged1.ForeColor = Color.Red
+            lblNbRowsChanged1.Text = nval & " row(s) entered"
+        Else
+            lblNbRowsChanged1.Visible = False
+        End If
+    End Sub
+
+    Private Sub SetNumberCommentEnteredText(nval As Integer)
+        If nval > 0 Then
+            lblNbCommentEntered.Visible = True
+            lblNbCommentEntered.ForeColor = Color.Red
+            lblNbCommentEntered.Text = nval & " comment(s) entered"
+        Else
+            lblNbCommentEntered.Visible = False
+        End If
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgClimaticDataEntryOptions.ShowDialog()
         bChange = True 'todo. is it always true
     End Sub
-    'Private Sub ucrChkDefaultValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefaultValue.ControlValueChanged
-    '    'todo. can this "toggling" be done in another way?
-    '    ' ucrInputDefaultValue.Visible = ucrChkDefaultValue.Checked
-    'End Sub
-
-    'Private Sub ucrChkTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTransform.ControlValueChanged
-    '    'todo. can this "toggling" be done in another way?
-    '    'ucrInputTransform.Visible = ucrChkTransform.Checked
-    'End Sub
 End Class

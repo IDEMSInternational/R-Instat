@@ -18,6 +18,7 @@ Imports instat
 Imports instat.Translations
 Public Class sdgClimaticDataEntryOptions
     Private bFirstLoad As Boolean = True
+    Private bMissing As Boolean = True
     Private Sub sdgClimaticDataEntryOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseControls()
@@ -30,14 +31,15 @@ Public Class sdgClimaticDataEntryOptions
         ucrChkTransform.SetText("Transform:")
         ttucrChkTransform.SetToolTip(ucrChkTransform, "The values written to the data frame are transformed, usually multiplied, by the value given here.")
 
-        'ucrInputTransform.SetItems({"10", "Inch to mm"})
-        ucrInputTransform.SetItems({"0.1", "25.4", "0.254"}) 'todo. temporary
-        ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=0.1) 'temporary`
+        ucrInputTransform.SetItems({"0.1", "25.4", "0.254"})
+        ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=0.1)
         ucrInputTransform.Visible = False
 
-        ucrChkDefaultValue.SetText("Default Value")
+        ucrChkDefaultValue.SetText("Default Value:")
         ucrInputDefaultValue.SetText("0")
         ucrInputDefaultValue.Visible = False
+
+        ucrChkMissingValues.SetText("Missing values shown as NA")
 
         ucrChkNoDecimal.SetText("No Decimal")
 
@@ -51,10 +53,7 @@ Public Class sdgClimaticDataEntryOptions
         ucrChkDefaultValue.Checked = False
         ucrChkAllowTrace.Checked = False
         ucrChkTransform.Checked = False
-        ucrNudBefore.Visible = False
-        ucrNudAfter.Visible = False
-        lblBefore.Visible = False
-        lblAfter.Visible = False
+        ucrChkMissingValues.Checked = True
         ucrInputTransform.GetSetSelectedIndex = 0
     End Sub
 
@@ -68,13 +67,6 @@ Public Class sdgClimaticDataEntryOptions
         ucrInputTransform.Visible = ucrChkTransform.Checked
     End Sub
 
-    Private Sub ucrChkExtraRows_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkExtraRows.ControlValueChanged
-        ucrNudBefore.Visible = ucrChkExtraRows.Checked
-        ucrNudAfter.Visible = ucrChkExtraRows.Checked
-        lblBefore.Visible = ucrChkExtraRows.Checked
-        lblAfter.Visible = ucrChkExtraRows.Checked
-    End Sub
-
     Public ReadOnly Property NoDecimals As Boolean
         Get
             Return ucrChkNoDecimal.Checked
@@ -84,6 +76,11 @@ Public Class sdgClimaticDataEntryOptions
     Public ReadOnly Property UseDefault As Boolean
         Get
             Return ucrChkDefaultValue.Checked
+        End Get
+    End Property
+    Public ReadOnly Property MissingValueAsNA As Boolean
+        Get
+            Return bMissing
         End Get
     End Property
 
@@ -114,6 +111,7 @@ Public Class sdgClimaticDataEntryOptions
         End Get
     End Property
 
-
-
+    Private Sub ucrChkMissingValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMissingValues.ControlValueChanged
+        bMissing = ucrChkMissingValues.Checked
+    End Sub
 End Class
