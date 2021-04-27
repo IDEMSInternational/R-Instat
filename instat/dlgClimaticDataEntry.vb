@@ -23,6 +23,9 @@ Public Class dlgClimaticDataEntry
     Private clsSaveDataEntry As New RFunction
     Private clsEditDataFrame As New RFunction
     Private clsGetDataEntry As New RFunction
+    Private clsCommentsList As New RFunction
+    Private clsList As New RFunction
+    Private clsGetKey As New RFunction
     Private strStationColumn As String = ""
     Private ReadOnly strDay As String = "Day"
     Private ReadOnly strMonth As String = "Month"
@@ -30,6 +33,7 @@ Public Class dlgClimaticDataEntry
     Private bChange As Boolean = False
     Private bSubdialogFirstLoad As Boolean = True
     Private bState As Boolean = False
+    Private bResetSubdialogs As Boolean
 
     Private Sub dlgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -43,7 +47,7 @@ Public Class dlgClimaticDataEntry
         bReset = False
         autoTranslate(Me)
         ucrBase.OKEnabled(False)
-        SetNumberCommentEnteredText(sdgCommentForDataEntry.NbCommentEntered)
+        SetNumberCommentEnteredText(sdgCommentForDataEntry.GetSetNumberOfCommentsEntered)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -77,7 +81,7 @@ Public Class dlgClimaticDataEntry
 
         ucrInputSelectStation.SetFactorReceiver(ucrReceiverStation)
         ucrInputSelectStation.strQuotes = ""
-  
+
 
         ucrReceiverDate.Selector = ucrSelectorClimaticDataEntry
         ucrReceiverDate.SetClimaticType("date")
@@ -112,6 +116,9 @@ Public Class dlgClimaticDataEntry
         clsSaveDataEntry = New RFunction
         clsEditDataFrame = New RFunction
         clsGetDataEntry = New RFunction
+        clsCommentsList = New RFunction
+        clsList.Clear()
+        clsGetKey = New RFunction
 
         ucrSelectorClimaticDataEntry.Reset()
         ucrReceiverElements.SetMeAsReceiver()
@@ -121,16 +128,26 @@ Public Class dlgClimaticDataEntry
 
         clsGetDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_entry_data")
         clsGetDataEntry.AddParameter("type", Chr(34) & "month" & Chr(34), iPosition:=6)
+
         clsSaveDataEntry.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$save_data_entry_data")
         clsSaveDataEntry.AddParameter("new_data", clsRFunctionParameter:=clsEditDataFrame, iPosition:=1)
+
         clsEditDataFrame.SetRCommand("data.frame")
         clsEditDataFrame.SetAssignTo("new_data")
 
-        ucrBase.clsRsyntax.iCallType = 2
-        ucrBase.clsRsyntax.SetBaseRFunction(clsSaveDataEntry)
+        clsGetKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
+
+        clsCommentsList.SetRCommand("list")
+
+        clsList.SetRCommand("list")
+
         bChange = False
         bState = False
         bSubdialogFirstLoad = True
+        bResetSubdialogs = True
+        sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
+        ucrBase.clsRsyntax.iCallType = 2
+        ucrBase.clsRsyntax.SetBaseRFunction(clsSaveDataEntry)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -169,7 +186,6 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         sdgClimaticDataEntry.Reset()
-        sdgCommentForDataEntry.ClearInputComment()
         SetRCodeForControls(True)
         TestOkEnabled()
     End Sub
@@ -217,8 +233,10 @@ Public Class dlgClimaticDataEntry
 
         If bShow Then
             If bSetup Then
-                sdgClimaticDataEntry.Setup(dfEditData, strDataFrameName, clsSaveDataEntry, clsEditDataFrame, strDateColumnName,
-                                           lstElementsColumnNames, lstVariablesColumnNames, strStationColumnName,
+                sdgClimaticDataEntry.Setup(dfEditData:=dfEditData, strDataFrameName:=strDataFrameName, clsSaveDataEntry:=clsSaveDataEntry,
+                                         clsEditDataFrame:=clsEditDataFrame, clsNewGetKey:=clsGetKey, clsNewCommentsList:=clsCommentsList, clsNewList:=clsList,
+                      strDateName:=strDateColumnName, lstElementsNames:=lstElementsColumnNames, lstViewVariablesNames:=lstVariablesColumnNames,
+                                         strStationColumnName:=strStationColumnName,
                                            bDefaultValue:=sdgClimaticDataEntryOptions.UseDefault,
                                            strDefaultValue:=sdgClimaticDataEntryOptions.DefaultValue,
                                            bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
@@ -226,11 +244,12 @@ Public Class dlgClimaticDataEntry
                                            bTransform:=sdgClimaticDataEntryOptions.Transform,
                                            dTranformValue:=sdgClimaticDataEntryOptions.TransformValue,
                                            MissingValueAsNA:=sdgClimaticDataEntryOptions.MissingValueAsNA,
-                                           strEntryType:=ucrInputType.GetText)
+                                           strEntryType:=ucrInputType.GetText, ucrNewBaseSelector:=ucrSelectorClimaticDataEntry, bReset:=bResetSubdialogs)
             End If
             sdgClimaticDataEntry.ShowDialog()
+            bResetSubdialogs = False
             SetNumberRowsChangedText(sdgClimaticDataEntry.NRowsChanged)
-            SetNumberCommentEnteredText(sdgCommentForDataEntry.NbCommentEntered)
+            SetNumberCommentEnteredText(sdgCommentForDataEntry.GetSetNumberOfCommentsEntered)
             bSubdialogFirstLoad = False
             bChange = False
             TestOkEnabled()
@@ -285,7 +304,8 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
-        sdgCommentForDataEntry.ClearComments()
+        clsList.ClearParameters()
+        sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
         SetNumberRowsChangedText(0)
     End Sub
 
@@ -310,7 +330,9 @@ Public Class dlgClimaticDataEntry
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgClimaticDataEntryOptions.SetUpDataEntryOptions(bReset:=bResetSubdialogs)
         sdgClimaticDataEntryOptions.ShowDialog()
+        bResetSubdialogs = False
         bChange = True 'todo. is it always true
     End Sub
 End Class

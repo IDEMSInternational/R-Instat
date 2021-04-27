@@ -14,29 +14,26 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class sdgClimaticDataEntryOptions
-    Private bFirstLoad As Boolean = True
+    Private bControlsInitialised As Boolean = False
     Private bMissing As Boolean = True
+
     Private Sub sdgClimaticDataEntryOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
-            InitialiseControls()
-            SetDefaults()
-            bFirstLoad = False
-        End If
         autoTranslate(Me)
     End Sub
+
     Private Sub InitialiseControls()
         ucrChkTransform.SetText("Transform:")
-        ttucrChkTransform.SetToolTip(ucrChkTransform, "The values written to the data frame are transformed, usually multiplied, by the value given here.")
+        ttucrChkTransform.SetToolTip(ucrChkTransform.chkCheck, "The values written to the data frame are transformed, usually multiplied, by the value given here.")
 
         ucrInputTransform.SetItems({"0.1", "25.4", "0.254"})
-        ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=0.1)
+        ucrInputTransform.SetValidationTypeAsNumeric()
         ucrInputTransform.Visible = False
 
         ucrChkDefaultValue.SetText("Default Value:")
-        ucrInputDefaultValue.SetText("0")
+
+        ucrInputDefaultValue.SetValidationTypeAsNumeric()
         ucrInputDefaultValue.Visible = False
 
         ucrChkMissingValues.SetText("Missing values shown as NA")
@@ -45,26 +42,29 @@ Public Class sdgClimaticDataEntryOptions
 
         ucrChkExtraRows.SetText("Extra Rows")
 
+        ucrChkDefaultValue.AddToLinkedControls(ucrInputDefaultValue, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkTransform.AddToLinkedControls(ucrInputTransform, {True}, bNewLinkedHideIfParameterMissing:=True)
+
         ucrChkAllowTrace.SetText("Allow t for Trace")
-        ttucrChkDefaultValue.SetToolTip(ucrChkDefaultValue, "The data must be defined as climatic to recognise which variable is precipitation.")
+        ttucrChkDefaultValue.SetToolTip(ucrChkDefaultValue.chkCheck, "The data must be defined as climatic to recognise which variable is precipitation.")
+        bControlsInitialised = True
     End Sub
 
-    Private Sub SetDefaults()
-        ucrChkDefaultValue.Checked = False
-        ucrChkAllowTrace.Checked = False
-        ucrChkTransform.Checked = False
+    Public Sub SetUpDataEntryOptions(Optional bReset As Boolean = False)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+
         ucrChkMissingValues.Checked = True
-        ucrInputTransform.GetSetSelectedIndex = 0
-    End Sub
 
-    Private Sub ucrChkDefaultValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefaultValue.ControlValueChanged
-        'todo. can this "toggling" be done in another way?
-        ucrInputDefaultValue.Visible = ucrChkDefaultValue.Checked
-    End Sub
-
-    Private Sub ucrChkTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTransform.ControlValueChanged
-        'todo. can this "toggling" be done in another way?
-        ucrInputTransform.Visible = ucrChkTransform.Checked
+        If bReset Then
+            ucrChkDefaultValue.Checked = False
+            ucrChkAllowTrace.Checked = False
+            ucrChkTransform.Checked = False
+            ucrChkNoDecimal.Checked = False
+            ucrInputDefaultValue.SetText(0)
+            ucrInputTransform.SetText(0.1)
+        End If
     End Sub
 
     Public ReadOnly Property NoDecimals As Boolean
@@ -78,17 +78,16 @@ Public Class sdgClimaticDataEntryOptions
             Return ucrChkDefaultValue.Checked
         End Get
     End Property
+
     Public ReadOnly Property MissingValueAsNA As Boolean
         Get
             Return bMissing
         End Get
     End Property
 
-
-    'todo. why is this a string?
     Public ReadOnly Property DefaultValue As Double
         Get
-            Return If(String.IsNullOrEmpty(ucrInputDefaultValue.GetValue), 0, ucrInputDefaultValue.GetValue)
+            Return ucrInputDefaultValue.GetValue
         End Get
     End Property
 
@@ -106,8 +105,7 @@ Public Class sdgClimaticDataEntryOptions
 
     Public ReadOnly Property TransformValue As Double
         Get
-            'todo. do explicit conversion. Currently ucrInputTransform validation type is number
-            Return If(String.IsNullOrEmpty(ucrInputTransform.GetValue), 0, ucrInputTransform.GetValue)
+            Return ucrInputTransform.GetValue
         End Get
     End Property
 
