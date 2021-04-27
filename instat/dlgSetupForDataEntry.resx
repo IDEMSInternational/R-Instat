@@ -205,13 +205,13 @@
     <value>262, 55</value>
   </data>
   <data name="lblStation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>84, 13</value>
+    <value>43, 13</value>
   </data>
   <data name="lblStation.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
   <data name="lblStation.Text" xml:space="preserve">
-    <value>Station Variable:</value>
+    <value>Station:</value>
   </data>
   <data name="&gt;&gt;lblStation.Name" xml:space="preserve">
     <value>lblStation</value>
@@ -328,7 +328,7 @@
     <value>107, 21</value>
   </data>
   <data name="ucrInputSpecify3.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>19</value>
   </data>
   <data name="&gt;&gt;ucrInputSpecify3.Name" xml:space="preserve">
     <value>ucrInputSpecify3</value>
@@ -349,7 +349,7 @@
     <value>107, 21</value>
   </data>
   <data name="ucrInputSpecify2.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>17</value>
   </data>
   <data name="&gt;&gt;ucrInputSpecify2.Name" xml:space="preserve">
     <value>ucrInputSpecify2</value>
@@ -370,7 +370,7 @@
     <value>107, 21</value>
   </data>
   <data name="ucrInputSpecify1.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrInputSpecify1.Name" xml:space="preserve">
     <value>ucrInputSpecify1</value>
@@ -454,7 +454,7 @@
     <value>89, 20</value>
   </data>
   <data name="ucrChkSpecify3.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="&gt;&gt;ucrChkSpecify3.Name" xml:space="preserve">
     <value>ucrChkSpecify3</value>
@@ -475,7 +475,7 @@
     <value>89, 20</value>
   </data>
   <data name="ucrChkSpecify2.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrChkSpecify2.Name" xml:space="preserve">
     <value>ucrChkSpecify2</value>
@@ -676,7 +676,7 @@
     <value>300, 24</value>
   </data>
   <data name="ucrNewDFName.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>21</value>
   </data>
   <data name="&gt;&gt;ucrNewDFName.Name" xml:space="preserve">
     <value>ucrNewDFName</value>
@@ -697,7 +697,7 @@
     <value>137, 20</value>
   </data>
   <data name="ucrChkAddFlagVariables.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
+    <value>20</value>
   </data>
   <data name="&gt;&gt;ucrChkAddFlagVariables.Name" xml:space="preserve">
     <value>ucrChkAddFlagVariables</value>
