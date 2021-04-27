@@ -26,7 +26,7 @@ Public Class sdgCommentForDataEntry
     Private clsListFunction As RFunction
     Private clsCommentsListFunction As RFunction
     Private clsSaveDataEntryFunction As RFunction
-    Private clsGetKeyFunction As New RFunction
+    Private clsGetKeyFunction As RFunction
     Private iNumComments As Integer = 0
 
     Private Sub sdgCommentForDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -94,7 +94,12 @@ Public Class sdgCommentForDataEntry
             InitialiseControls()
         End If
 
+        clsSaveDataEntryFunction = clsNewSaveDataEntry
+        clsGetKeyFunction = clsNewGetKey
+        clsCommentsListFunction = clsNewCommentsList
+        clsListFunction = clsNewList
         ucrBaseSelector = ucrNewBaseSelector
+
         If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
             strSelectedDataFrame = ucrBaseSelector.strCurrentDataFrame
             ucrSelectorAddComment.SetDataframe(strSelectedDataFrame, False)
@@ -102,11 +107,6 @@ Public Class sdgCommentForDataEntry
         Else
             clsGetKeyFunction.RemoveParameterByName("data_name")
         End If
-
-        clsSaveDataEntryFunction = clsNewSaveDataEntry
-        clsGetKeyFunction = clsNewGetKey
-        clsCommentsListFunction = clsNewCommentsList
-        clsListFunction = clsNewList
 
         strSelectedRow = strRow
         strSelectedColumn = strColumn
@@ -126,8 +126,10 @@ Public Class sdgCommentForDataEntry
 
     Private Sub EnableDisableAddComment()
         Dim expTemp As SymbolicExpression
-        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKeyFunction.ToScript(), bSilent:=True)
-        cmdAddComment.Enabled = expTemp IsNot Nothing AndAlso Not ucrInputComment.IsEmpty
+        If clsGetKeyFunction IsNot Nothing Then
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKeyFunction.ToScript(), bSilent:=True)
+            cmdAddComment.Enabled = expTemp IsNot Nothing AndAlso Not ucrInputComment.IsEmpty
+        End If
     End Sub
 
     Private Sub ucrPnlCellRowColumnDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCellRowColumnDataFrame.ControlValueChanged
