@@ -85,9 +85,13 @@ Public Class sdgClimaticDataEntryOptions
         End Get
     End Property
 
-    Public ReadOnly Property DefaultValue As Double
+    Public ReadOnly Property GetDefaultValue As Double
         Get
-            Return ucrInputDefaultValue.GetValue
+            Dim dTemp As Double
+            If Not Double.TryParse(ucrInputDefaultValue.GetValue, dTemp) Then
+                MsgBox("Developer error: The ucrInputDefaultValue input contains the value '" & ucrInputDefaultValue.GetValue & "'. Cannot convert this to a double.")
+            End If
+            Return dTemp
         End Get
     End Property
 
@@ -103,9 +107,13 @@ Public Class sdgClimaticDataEntryOptions
         End Get
     End Property
 
-    Public ReadOnly Property TransformValue As Double
+    Public ReadOnly Property GetTransformValue As Double
         Get
-            Return ucrInputTransform.GetValue
+            Dim dTemp As Double
+            If Not Double.TryParse(ucrInputTransform.GetValue, dTemp) Then
+                MsgBox("Developer error: The ucrInputTransform combo box contains the value '" & ucrInputTransform.GetValue & "'. Cannot convert this to a double.")
+            End If
+            Return dTemp
         End Get
     End Property
 

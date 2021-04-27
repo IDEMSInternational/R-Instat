@@ -238,11 +238,11 @@ Public Class dlgClimaticDataEntry
                       strDateName:=strDateColumnName, lstElementsNames:=lstElementsColumnNames, lstViewVariablesNames:=lstVariablesColumnNames,
                                          strStationColumnName:=strStationColumnName,
                                            bDefaultValue:=sdgClimaticDataEntryOptions.UseDefault,
-                                           strDefaultValue:=sdgClimaticDataEntryOptions.DefaultValue,
+                                           dDefaultValue:=sdgClimaticDataEntryOptions.GetDefaultValue,
                                            bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
                                            bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
                                            bTransform:=sdgClimaticDataEntryOptions.Transform,
-                                           dTranformValue:=sdgClimaticDataEntryOptions.TransformValue,
+                                           dTranformValue:=sdgClimaticDataEntryOptions.GetTransformValue,
                                            MissingValueAsNA:=sdgClimaticDataEntryOptions.MissingValueAsNA,
                                            strEntryType:=ucrInputType.GetText, ucrNewBaseSelector:=ucrSelectorClimaticDataEntry, bReset:=bResetSubdialogs)
             End If

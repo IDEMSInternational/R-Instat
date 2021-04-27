@@ -130,7 +130,7 @@ Public Class sdgClimaticDataEntry
                      clsEditDataFrame As RFunction, clsNewGetKey As RFunction, clsNewCommentsList As RFunction, clsNewList As RFunction, strDateName As String, lstElementsNames As List(Of String),
                      Optional lstViewVariablesNames As List(Of String) = Nothing,
                      Optional strStationColumnName As String = "", Optional bDefaultValue As Boolean = False,
-                     Optional strDefaultValue As Double = 0, Optional bNoDecimal As Boolean = False,
+                     Optional dDefaultValue As Double = 0, Optional bNoDecimal As Boolean = False,
                      Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False,
                      Optional dTranformValue As Double = 0, Optional MissingValueAsNA As Boolean = False,
                      Optional strEntryType As String = "", Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
