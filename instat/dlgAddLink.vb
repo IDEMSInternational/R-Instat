@@ -60,12 +60,12 @@ Public Class dlgAddLink
 
         ucrDataSelectorFrom.Reset()
         ucrDataSelectorTo.Reset()
-        ucrInputLinkName.SetName("")
 
         UpdateKeys()
 
         clsAddLink.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_link")
         clsAddLink.AddParameter("type", Chr(34) & "keyed_link" & Chr(34), iPosition:=3)
+        clsAddLink.AddParameter("link_name", "link", iPosition:=4)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddLink)
     End Sub
