@@ -917,19 +917,13 @@
   <data name="&gt;&gt;ucrReceiverAddFlagVariables.ZOrder" xml:space="preserve">
     <value>20</value>
   </data>
-=======
-    <value>439, 331</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
 
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
 
     <value>Setup For Data Entry</value>
-
-    <value>dlgSetupForDataEntry</value>
 
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
