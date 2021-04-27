@@ -98,8 +98,6 @@ Public Class dlgSetupForDataEntry
 
         ucrChkAddFlagVariables.SetText("Add Flag Variables")
 
-        ucrChkAddKey.SetText("Add Key")
-
         ucrReceiverAddFlagVariables.SetParameter(New RParameter("col_names", 1))
         ucrReceiverAddFlagVariables.Selector = ucrSelectorSetupDataEntry
         ucrReceiverAddFlagVariables.SetParameterIsString()
@@ -121,7 +119,7 @@ Public Class dlgSetupForDataEntry
         ucrPnlOptions.AddFunctionNamesCondition(rdoAddFlags, frmMain.clsRLink.strInstatDataObject & "$add_flag_fields")
 
         ucrPnlOptions.AddToLinkedControls({ucrInputSelectStation, ucrDateFrom, ucrDateTo, ucrChkAddFlagVariables, ucrNewDFName}, {rdoNew}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverAddFlagVariables, ucrReceiverDate, ucrChkAddKey}, {rdoAddFlags}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrReceiverAddFlagVariables, ucrReceiverDate}, {rdoAddFlags}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputSelectStation.SetLinkedDisplayControl(lblSelectStation)
         ucrDateFrom.SetLinkedDisplayControl(lblDateFrom)
         ucrDateTo.SetLinkedDisplayControl(lblDateTo)
@@ -152,7 +150,6 @@ Public Class dlgSetupForDataEntry
         ucrChkWS.Checked = False
         ucrChkWD.Checked = False
         ucrChkAddFlagVariables.Checked = False
-        ucrChkAddKey.Checked = False
         'todo. what should be the default date
         ucrDateFrom.DateValue = Date.Now
         ucrDateTo.DateValue = ucrDateFrom.DateValue.AddMonths(1).AddDays(-1)
@@ -300,7 +297,7 @@ Public Class dlgSetupForDataEntry
         End If
     End Sub
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrInputSelectStation.ControlValueChanged
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrInputSelectStation.ControlValueChanged, ucrReceiverDate.ControlValueChanged, ucrSelectorSetupDataEntry.ControlValueChanged
         ' This ensures clsNewDataFrame has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
         ' Storing and then removing strSpecify3 as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
         Dim strDaframeName As String = ucrInputSelectStation.GetValue().ToString.Trim(Chr(34)).ToLower.Replace(" ", "_")
@@ -401,20 +398,7 @@ Public Class dlgSetupForDataEntry
         AddRemoveParameter()
     End Sub
 
-    Private Sub ucrChkAddKey_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddKey.ControlValueChanged, ucrPnlOptions.ControlValueChanged
-        If ucrChkAddKey.Checked AndAlso rdoAddFlags.Checked Then
-            Dim expTemp As SymbolicExpression
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKey.ToScript(), bSilent:=True)
-            If expTemp IsNot Nothing Then
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKey)
-            Else
-                ucrBase.clsRsyntax.AddToAfterCodes(clsAddKey, iPosition:=0)
-                clsAddKey.iCallType = 2
-            End If
-        End If
-    End Sub
-
-    Private Sub ucrChkPrecip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFlagVariables.ControlValueChanged, ucrChkPrecip.ControlValueChanged, ucrChkSunh.ControlValueChanged, ucrChkTmax.ControlValueChanged, ucrChkTmin.ControlValueChanged, ucrChkWD.ControlValueChanged, ucrChkWS.ControlValueChanged, ucrChkAddKey.ControlValueChanged
+    Private Sub ucrChkPrecip_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFlagVariables.ControlValueChanged, ucrChkPrecip.ControlValueChanged, ucrChkSunh.ControlValueChanged, ucrChkTmax.ControlValueChanged, ucrChkTmin.ControlValueChanged, ucrChkWD.ControlValueChanged, ucrChkWS.ControlValueChanged
         AddRemoveParameter()
     End Sub
 
@@ -422,4 +406,14 @@ Public Class dlgSetupForDataEntry
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrReceiverAddFlagVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAddFlagVariables.ControlValueChanged
+        Dim expTemp As SymbolicExpression
+        expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKey.ToScript(), bSilent:=True)
+        If expTemp IsNot Nothing Then
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKey)
+        Else
+            ucrBase.clsRsyntax.AddToAfterCodes(clsAddKey, iPosition:=0)
+            clsAddKey.iCallType = 2
+        End If
+    End Sub
 End Class

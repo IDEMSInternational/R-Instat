@@ -23,7 +23,6 @@ Partial Class dlgSetupForDataEntry
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgSetupForDataEntry))
-
         Me.rdoNew = New System.Windows.Forms.RadioButton()
         Me.rdoAddFlags = New System.Windows.Forms.RadioButton()
         Me.lblStation = New System.Windows.Forms.Label()
@@ -56,7 +55,6 @@ Partial Class dlgSetupForDataEntry
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorSetupDataEntry = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrChkAddKey = New instat.ucrCheck()
         Me.grpElements.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -288,14 +286,6 @@ Partial Class dlgSetupForDataEntry
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
-        'ucrChkAddKey
-        '
-        Me.ucrChkAddKey.Checked = False
-        resources.ApplyResources(Me.ucrChkAddKey, "ucrChkAddKey")
-        Me.ucrChkAddKey.Name = "ucrChkAddKey"
-        '
-        Me.SuspendLayout()
-        '
         'dlgSetupForDataEntry
         '
         resources.ApplyResources(Me, "$this")
@@ -304,7 +294,6 @@ Partial Class dlgSetupForDataEntry
         Me.Controls.Add(Me.lblDate)
         Me.Controls.Add(Me.lblAddFlagVariables)
         Me.Controls.Add(Me.ucrNewDFName)
-        Me.Controls.Add(Me.ucrChkAddKey)
         Me.Controls.Add(Me.ucrChkAddFlagVariables)
         Me.Controls.Add(Me.grpElements)
         Me.Controls.Add(Me.ucrDateTo)
@@ -363,7 +352,6 @@ Partial Class dlgSetupForDataEntry
     Friend WithEvents ucrReceiverAddFlagVariables As ucrReceiverMultiple
     Friend WithEvents ucrReceiverDate As ucrReceiverSingle
     Friend WithEvents lblDate As Label
-    Friend WithEvents ucrChkAddKey As ucrCheck
 
 
 
