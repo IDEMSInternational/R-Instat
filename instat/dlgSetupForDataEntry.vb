@@ -118,7 +118,7 @@ Public Class dlgSetupForDataEntry
         ucrPnlOptions.AddFunctionNamesCondition(rdoNew, "data.frame")
         ucrPnlOptions.AddFunctionNamesCondition(rdoAddFlags, frmMain.clsRLink.strInstatDataObject & "$add_flag_fields")
 
-        ucrPnlOptions.AddToLinkedControls({ucrInputSelectStation, ucrDateFrom, ucrDateTo, ucrChkAddFlagVariables, ucrNewDFName}, {rdoNew}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrInputSelectStation, ucrDateFrom, ucrDateTo, ucrChkAddFlagVariables, ucrChkSpecify1, ucrChkSpecify2, ucrChkSpecify3, ucrNewDFName}, {rdoNew}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverAddFlagVariables, ucrReceiverDate}, {rdoAddFlags}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSpecify1.AddToLinkedControls({ucrInputSpecify1}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSpecify2.AddToLinkedControls({ucrInputSpecify2}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -199,9 +199,8 @@ Public Class dlgSetupForDataEntry
 
     Private Sub TestOkEnabled()
         If rdoNew.Checked Then
-            If Not ucrReceiverStation.IsEmpty AndAlso (ucrChkPrecip.Checked OrElse ucrChkSunh.Checked OrElse ucrChkTmax.Checked OrElse ucrChkTmin.Checked OrElse
-            ucrChkWD.Checked OrElse ucrChkWS.Checked OrElse ((ucrChkSpecify1.Checked AndAlso Not ucrInputSpecify1.IsEmpty) OrElse
-                      (ucrChkSpecify2.Checked AndAlso Not ucrInputSpecify2.IsEmpty) OrElse (ucrChkSpecify3.Checked AndAlso Not ucrInputSpecify3.IsEmpty))) Then
+            If Not ucrReceiverStation.IsEmpty AndAlso (ucrChkPrecip.Checked OrElse ucrChkSunh.Checked OrElse ucrChkTmax.Checked OrElse ucrChkTmin.Checked OrElse ucrChkWD.Checked OrElse ucrChkWS.Checked OrElse
+                 (ucrChkSpecify1.Checked AndAlso Not ucrInputSpecify1.IsEmpty) OrElse (ucrChkSpecify2.Checked AndAlso Not ucrInputSpecify2.IsEmpty) OrElse (ucrChkSpecify3.Checked AndAlso Not ucrInputSpecify3.IsEmpty)) Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -396,10 +395,6 @@ Public Class dlgSetupForDataEntry
         AddRemoveParameter()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverAddFlagVariables.ControlContentsChanged, ucrChkPrecip.ControlContentsChanged, ucrChkSunh.ControlContentsChanged, ucrChkTmax.ControlContentsChanged, ucrChkTmin.ControlContentsChanged, ucrChkWD.ControlContentsChanged, ucrChkWS.ControlContentsChanged, ucrChkSpecify1.ControlContentsChanged, ucrChkSpecify2.ControlContentsChanged, ucrChkSpecify3.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrInputSpecify1.ControlContentsChanged, ucrInputSpecify2.ControlContentsChanged, ucrInputSpecify3.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrReceiverAddFlagVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverAddFlagVariables.ControlValueChanged
         Dim expTemp As SymbolicExpression
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKey.ToScript(), bSilent:=True)
@@ -409,6 +404,10 @@ Public Class dlgSetupForDataEntry
             ucrBase.clsRsyntax.AddToAfterCodes(clsAddKey, iPosition:=0)
             clsAddKey.iCallType = 2
         End If
+    End Sub
+
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlContentsChanged, ucrReceiverDate.ControlContentsChanged, ucrReceiverAddFlagVariables.ControlContentsChanged, ucrChkPrecip.ControlContentsChanged, ucrChkSunh.ControlContentsChanged, ucrChkTmax.ControlContentsChanged, ucrChkTmin.ControlContentsChanged, ucrChkWD.ControlContentsChanged, ucrChkWS.ControlContentsChanged, ucrChkSpecify1.ControlContentsChanged, ucrChkSpecify2.ControlContentsChanged, ucrChkSpecify3.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrInputSpecify1.ControlContentsChanged, ucrInputSpecify2.ControlContentsChanged, ucrInputSpecify3.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 
 End Class
