@@ -91,7 +91,7 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub SetDefaults()
-        ResetRFunctions()
+        ResetRCode()
 
         If IsNothing(lstRCodeStructure) Then
             setRFunctionDefaultParameters()
@@ -170,7 +170,7 @@ Public Class dlgSplitText
         clsTextComponentsFixed.AddParameter("n", strParameterValue:=2, iPosition:=2)
     End Sub
 
-    Private Sub ResetRFunctions()
+    Private Sub ResetRCode()
         clsTextComponentsFixed = New RFunction
         clsTextComponentsMaximum = New RFunction
         clsBinaryColumns = New RFunction

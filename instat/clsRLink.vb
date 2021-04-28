@@ -2366,7 +2366,8 @@ Public Class RLink
                     lstNewRCodeStructures.RemoveRange(0, lstNewRCodeStructures.Count - 1)
                 End If
                 dlgTransformText.lstScriptsRCodeStructure = lstNewRCodeStructures
-                End If
+                dlgTransformText.ShowDialog()
+            End If
             End If
     End Sub
 

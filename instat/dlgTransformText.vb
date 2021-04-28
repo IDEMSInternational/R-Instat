@@ -134,6 +134,7 @@ Public Class dlgTransformText
         ucrChkFirstOr.AddParameterIsRFunctionCondition(False, "start", False)
         ucrChkFirstOr.SetText("Or Column")
 
+
         ucrChkLastOr.AddParameterIsRFunctionCondition(True, "end", True)
         ucrChkLastOr.AddParameterIsRFunctionCondition(False, "end", False)
         ucrChkLastOr.SetText("Or Column")
@@ -196,24 +197,46 @@ Public Class dlgTransformText
 
         clsPadFunction.SetPackageName("stringr")
         clsPadFunction.SetRCommand("str_pad")
-        clsPadFunction.AddParameter("width", 1, iPosition:=1)
-        clsPadFunction.AddParameter("side", Chr(34) & "left" & Chr(34), iPosition:=2)
-        clsPadFunction.AddParameter("pad", Chr(34) & " " & Chr(34), iPosition:=3)
 
         clsTrimFunction.SetPackageName("stringr")
         clsTrimFunction.SetRCommand("str_trim")
-        clsTrimFunction.AddParameter("side", Chr(34) & "left" & Chr(34), iPosition:=1)
 
         clsWordsFunction.SetPackageName("stringr")
         clsWordsFunction.SetRCommand("word")
-        clsWordsFunction.AddParameter("start", 1, iPosition:=1)
-        clsWordsFunction.AddParameter("end", 2, iPosition:=2)
 
         clsSubstringFunction.SetPackageName("stringr")
         clsSubstringFunction.SetRCommand("str_sub")
+    End Sub
+
+    Private Sub SetRFunctionDefaultParameters()
+        AddClsTrimFunctionDefaultParameters()
+        AddClsPadFunctionDefaultParameters()
+        AddClsWordsFunctionDefaultParameters()
+        AddClsSubstringFunctionDefaultParameters()
+        ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
+    End Sub
+
+    Private Sub AddClsTrimFunctionDefaultParameters()
+        clsPadFunction.AddParameter("width", 1, iPosition:=1)
+        clsPadFunction.AddParameter("side", Chr(34) & "left" & Chr(34), iPosition:=2)
+        clsPadFunction.AddParameter("pad", Chr(34) & " " & Chr(34), iPosition:=3)
+    End Sub
+
+    Private Sub AddClsPadFunctionDefaultParameters()
+        clsTrimFunction.AddParameter("side", Chr(34) & "left" & Chr(34), iPosition:=1)
+    End Sub
+
+    Private Sub AddClsWordsFunctionDefaultParameters()
+        clsWordsFunction.AddParameter("start", 1, iPosition:=1)
+        clsWordsFunction.AddParameter("end", 2, iPosition:=2)
+    End Sub
+
+    Private Sub AddClsSubstringFunctionDefaultParameters()
         clsSubstringFunction.AddParameter("start", 1, iPosition:=1)
         clsSubstringFunction.AddParameter("end", 2, iPosition:=2)
     End Sub
+
+
     Private Sub SetDefaults()
         ucrNewColName.Reset()
         ucrSelectorForTransformText.Reset()
@@ -223,10 +246,66 @@ Public Class dlgTransformText
         ucrNudLastWord.SetText(2)
 
         ResetRCode()
+        If IsNothing(lstRCodeStructure) Then
+            SetRFunctionDefaultParameters()
+        ElseIf (lstRCodeStructure.count > 1) Then
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf lstRCodeStructure.Count = 1 Then
+            'this dialogue has RFunctions only
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                Dim strRcommand = TryCast(lstRCodeStructure(0), RFunction).strRCommand
+                Select Case strRcommand
+                    'clsConvertFunction is having different strCommands which are : str_to_lower,
+                    'str_to_title and str_to_upper depending on whats selected in the inputTo combobox
+                    'Hence I cannot use the case clsConvertFunction.strRCommand Option
+                    Case "str_to_lower", "str_to_upper", "str_to_title"
+                        clsConvertFunction = lstRCodeStructure(0)
+                        AddClsPadFunctionDefaultParameters()
+                        AddClsSubstringFunctionDefaultParameters()
+                        AddClsTrimFunctionDefaultParameters()
+                        AddClsWordsFunctionDefaultParameters()
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
+                    Case clsLengthFunction.strRCommand
+                        clsLengthFunction = lstRCodeStructure(0)
+                        AddClsPadFunctionDefaultParameters()
+                        AddClsSubstringFunctionDefaultParameters()
+                        AddClsTrimFunctionDefaultParameters()
+                        AddClsWordsFunctionDefaultParameters()
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
+                    Case clsPadFunction.strRCommand
+                        clsPadFunction = lstRCodeStructure(0)
+                        AddClsSubstringFunctionDefaultParameters()
+                        AddClsTrimFunctionDefaultParameters()
+                        AddClsWordsFunctionDefaultParameters()
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
+                    Case clsTrimFunction.strRCommand
+                        clsTrimFunction = lstRCodeStructure(0)
+                        AddClsPadFunctionDefaultParameters()
+                        AddClsSubstringFunctionDefaultParameters()
+                        AddClsWordsFunctionDefaultParameters()
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsTrimFunction)
+                    Case clsWordsFunction.strRCommand
+                        clsWordsFunction = lstRCodeStructure(0)
+                        AddClsPadFunctionDefaultParameters()
+                        AddClsSubstringFunctionDefaultParameters()
+                        AddClsTrimFunctionDefaultParameters()
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
+                    Case clsSubstringFunction.strRCommand
+                        clsSubstringFunction = lstRCodeStructure(0)
+                        AddClsPadFunctionDefaultParameters()
+                        AddClsTrimFunctionDefaultParameters()
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
+                End Select
+            Else
+                SetRFunctionDefaultParameters()
+                MsgBox("Developer error:The Script must be an RFunction")
+            End If
+        End If
+        'Setting lstRcodeStructure to Nothing is important so that the dialogue isnt affected on reopening
+        lstRCodeStructure = Nothing
 
 
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
