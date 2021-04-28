@@ -35,9 +35,11 @@ Public Class sdgClimaticDataEntry
     Private lstNonEditableColumns As New List(Of String)
 
     Private strDataFrameName As String
-    Private clsSaveDataEntry As RFunction
-    Private clsEditDataFrame As RFunction
-    Private clsCommentList As RFunction
+    Private clsSaveDataEntryFunction As RFunction
+    Private clsEditDataFrameFunction As RFunction
+    Private clsGetKeyFunction As RFunction
+    Private clsCommentsListFunction As RFunction
+    Private clsListFunction As RFunction
     Private dfEditData As DataFrame
     Private strDateName As String
     Private lstElementsNames As List(Of String)
@@ -51,8 +53,10 @@ Public Class sdgClimaticDataEntry
     Private bFirstLoad As Boolean = True
     'used to check if current options allow the grid to be editable
     Private bAllowEdits As Boolean = True
+    Private bResetCommentsSubdialog As Boolean
     Private strEntryType As String = ""
     Private iMonthlyTotalsColIndex As Integer
+    Private ucrBaseSelector As ucrSelector
 
     Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -122,16 +126,29 @@ Public Class sdgClimaticDataEntry
         grdCurrentWorkSheet = Nothing
     End Sub
 
-    Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction, clsEditDataFrame As RFunction, strDateName As String, lstElementsNames As List(Of String), Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "", Optional bDefaultValue As Boolean = False, Optional strDefaultValue As Double = 0, Optional bNoDecimal As Boolean = False, Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False, Optional dTranformValue As Double = 0, Optional MissingValueAsNA As Boolean = False, Optional strEntryType As String = "")
+    Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction,
+                     clsEditDataFrame As RFunction, clsNewGetKey As RFunction, clsNewCommentsList As RFunction, clsNewList As RFunction, strDateName As String, lstElementsNames As List(Of String),
+                     Optional lstViewVariablesNames As List(Of String) = Nothing,
+                     Optional strStationColumnName As String = "", Optional bDefaultValue As Boolean = False,
+                     Optional dDefaultValue As Double = 0, Optional bNoDecimal As Boolean = False,
+                     Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False,
+                     Optional dTranformValue As Double = 0, Optional MissingValueAsNA As Boolean = False,
+                     Optional strEntryType As String = "", Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
+
         Dim arrColumnHeaders As String()
+        clsGetKeyFunction = clsNewGetKey
+        clsCommentsListFunction = clsNewCommentsList
+        clsListFunction = clsNewList
 
         grdDataEntry.Worksheets.Clear()
         dctRowsChanged.Clear()
         lstNonEditableColumns.Clear()
+        bResetCommentsSubdialog = bReset
+        ucrBaseSelector = ucrNewBaseSelector
 
         Me.strDataFrameName = strDataFrameName
-        Me.clsSaveDataEntry = clsSaveDataEntry
-        Me.clsEditDataFrame = clsEditDataFrame
+        Me.clsSaveDataEntryFunction = clsSaveDataEntry
+        Me.clsEditDataFrameFunction = clsEditDataFrame
         Me.dfEditData = dfEditData
         Me.strDateName = strDateName
         Me.lstElementsNames = lstElementsNames
@@ -368,24 +385,25 @@ Public Class sdgClimaticDataEntry
 
     Private Sub cmdRefress_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
         If MsgBox("All data entry will be lost. Are you sure you want to continue?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
-            clsSaveDataEntry.RemoveParameterByName("rows_changed")
-            Setup(dfEditData, strDataFrameName, clsSaveDataEntry, clsEditDataFrame, strDateName, lstElementsNames, lstViewVariablesNames, strStationColumnName, bDefaultValue:=False, strDefaultValue, bNoDecimal, bAllowTrace)
+            clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
+            Setup(dfEditData, strDataFrameName, clsSaveDataEntryFunction, clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction,
+                      clsNewCommentsList:=clsCommentsListFunction, clsNewList:=clsListFunction, strDateName, lstElementsNames, lstViewVariablesNames, strStationColumnName, bDefaultValue:=False, strDefaultValue, bNoDecimal, bAllowTrace)
         End If
     End Sub
 
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
         Dim i As Integer
         If NRowsChanged() > 0 Then
-            clsEditDataFrame.AddParameter(strDateName, "as.Date(" & GetRowsChangedAsRVectorString(strDateName, Chr(34)) & ")", iPosition:=1)
+            clsEditDataFrameFunction.AddParameter(strDateName, "as.Date(" & GetRowsChangedAsRVectorString(strDateName, Chr(34)) & ")", iPosition:=1)
             i = 2
             For Each strElementName As String In lstElementsNames
-                clsEditDataFrame.AddParameter(strElementName, GetRowsChangedAsRVectorString(strElementName), iPosition:=i)
+                clsEditDataFrameFunction.AddParameter(strElementName, GetRowsChangedAsRVectorString(strElementName), iPosition:=i)
                 i = i + 1
             Next
-            clsSaveDataEntry.AddParameter("rows_changed", GetRowNamesChangedAsRVectorString(), iPosition:=2)
-            clsSaveDataEntry.AddParameter("comments_list", clsRFunctionParameter:=sdgCommentForDataEntry.clsList, iPosition:=3)
+            clsSaveDataEntryFunction.AddParameter("rows_changed", GetRowNamesChangedAsRVectorString(), iPosition:=2)
+            clsSaveDataEntryFunction.AddParameter("comments_list", clsRFunctionParameter:=clsListFunction, iPosition:=3)
         Else
-            clsSaveDataEntry.RemoveParameterByName("rows_changed")
+            clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
         End If
     End Sub
 
@@ -401,9 +419,11 @@ Public Class sdgClimaticDataEntry
     End Sub
 
     Private Sub cmdComment_Click(sender As Object, e As EventArgs) Handles cmdComment.Click
-        sdgCommentForDataEntry.SetPosition(grdCurrentWorkSheet.Name, GetFirstSelectedRow(), SelectedColumnsAsArray()(0))
-        sdgCommentForDataEntry.SetRfunctions(clsNewSaveDataEntry:=clsSaveDataEntry)
+        sdgCommentForDataEntry.SetUpCommentsSubdialog(clsNewSaveDataEntry:=clsSaveDataEntryFunction, clsNewGetKey:=clsGetKeyFunction,
+                      clsNewCommentsList:=clsCommentsListFunction, clsNewList:=clsListFunction, strDataFrame:=grdCurrentWorkSheet.Name, strRow:=GetFirstSelectedRow(),
+                      strColumn:=SelectedColumnsAsArray()(0), ucrNewBaseSelector:=ucrBaseSelector, bReset:=bResetCommentsSubdialog)
         sdgCommentForDataEntry.ShowDialog()
+        bResetCommentsSubdialog = False
     End Sub
 
     ''' <summary>
