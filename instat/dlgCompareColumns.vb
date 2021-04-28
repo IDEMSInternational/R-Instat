@@ -20,6 +20,8 @@ Public Class dlgCompareColumns
 
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private iDialogHeight As Integer
+    Private iBaseMaxY
     Private clsCompareColumns, clsAbsoluteFunction As New RFunction
     Private clsAsCharacterFunctionOne, clsAsCharacterFunctionTwo, clsSummaryFunction As New RFunction
     Private clsYinXOperator, clsIsEqualToOperator, clsSubtractOperator, clsLessorEqualToOperator As New ROperator
@@ -27,6 +29,8 @@ Public Class dlgCompareColumns
 
     Private Sub dlgCompareColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
+            iDialogHeight = Me.Height
+            iBaseMaxY = ucrBase.Location.Y
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -214,11 +218,17 @@ Public Class dlgCompareColumns
             ucrBase.clsRsyntax.SetBaseRFunction(clsCompareColumns)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
             ucrBase.clsRsyntax.AddToAfterCodes(clsYinXOperator, iPosition:=1)
+            Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
+            ucrSaveLogical.Location = New Point(ucrSaveLogical.Location.X, iBaseMaxY / 1.07)
         ElseIf rdoByRow.Checked Then
             'grpComparisions.Visible = False
             ucrBase.clsRsyntax.SetBaseROperator(clsDummyOperator)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsYinXOperator)
             ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=1)
+            Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight * 0.68)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.62)
+            ucrSaveLogical.Location = New Point(ucrSaveLogical.Location.X, iBaseMaxY / 1.8)
         End If
         CheckDatatype()
     End Sub
