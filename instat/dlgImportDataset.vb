@@ -661,13 +661,13 @@ Public Class dlgImportDataset
             ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
             ucrSaveFile.Hide()
             clsGetFilesList.AddParameter("pattern", Chr(34) & "\\" & strFileExtension & "$" & Chr(34), iPosition:=1)
-            If strFileExtension = ".dly" Then
+            If strFileExtension = ".dly" OrElse strFileExtension = ".dat" Then
                 clsImportMultipleFiles.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
             Else
                 clsImportMultipleFiles.AddParameter("format", Chr(34) & strFileExtension.Substring(1) & Chr(34), iPosition:=1)
             End If
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
-            If strFileExtension = ".txt" OrElse strFileExtension = ".csv" OrElse strFileExtension = ".dly" Then
+            If strFileExtension = ".txt" OrElse strFileExtension = ".csv" OrElse strFileExtension = ".dly" OrElse strFileExtension = ".dat" Then
                 grpCSV.Text = "Import Options"
                 grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
                 grpCSV.Show()
