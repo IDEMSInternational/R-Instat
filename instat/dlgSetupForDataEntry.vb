@@ -228,18 +228,26 @@ Public Class dlgSetupForDataEntry
 
     Private Sub TestOkEnabled()
         Dim bOkEnabled As Boolean
-        If rdoNew.Checked AndAlso (ucrReceiverStation.IsEmpty OrElse Not ucrSaveNewDFName.IsComplete) OrElse Not (
+        If rdoNew.Checked Then
+            If (ucrReceiverStation.IsEmpty OrElse Not ucrSaveNewDFName.IsComplete) OrElse Not (
                 ucrChkPrecip.Checked OrElse ucrChkSunh.Checked OrElse ucrChkTmax.Checked OrElse ucrChkTmin.Checked OrElse
                 ucrChkWD.Checked OrElse ucrChkWS.Checked OrElse ucrChkSpecify1.Checked OrElse
                 ucrChkSpecify2.Checked OrElse ucrChkSpecify3.Checked) Then
-            bOkEnabled = False
-        ElseIf rdoAddFlags.Checked AndAlso (ucrReceiverFlagDate.IsEmpty OrElse ucrReceiverAddFlagVariables.IsEmpty) Then
-            bOkEnabled = False
-        Else
-            bOkEnabled = True
-        End If
-        If (ucrChkSpecify1.Checked AndAlso ucrInputSpecify1.IsEmpty) OrElse
+                bOkEnabled = False
+            Else
+                bOkEnabled = True
+            End If
+            If (ucrChkSpecify1.Checked AndAlso ucrInputSpecify1.IsEmpty) OrElse
                 (ucrChkSpecify2.Checked AndAlso ucrInputSpecify2.IsEmpty) OrElse (ucrChkSpecify3.Checked AndAlso ucrInputSpecify3.IsEmpty) Then
+                bOkEnabled = False
+            End If
+        ElseIf rdoAddFlags.Checked Then
+            If (ucrReceiverFlagDate.IsEmpty OrElse ucrReceiverAddFlagVariables.IsEmpty) Then
+                bOkEnabled = False
+            Else
+                bOkEnabled = True
+            End If
+        Else
             bOkEnabled = False
         End If
         ucrBase.OKEnabled(bOkEnabled)
