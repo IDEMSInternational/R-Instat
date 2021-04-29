@@ -43,10 +43,9 @@ Partial Class dlgSetupForDataEntry
         Me.ucrChkTmax = New instat.ucrCheck()
         Me.ucrChkPrecip = New instat.ucrCheck()
         Me.lblAddFlagVariables = New System.Windows.Forms.Label()
-        Me.lblDate = New System.Windows.Forms.Label()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.lblFlagDate = New System.Windows.Forms.Label()
+        Me.ucrReceiverFlagDate = New instat.ucrReceiverSingle()
         Me.ucrReceiverAddFlagVariables = New instat.ucrReceiverMultiple()
-        Me.ucrNewDFName = New instat.ucrSave()
         Me.ucrChkAddFlagVariables = New instat.ucrCheck()
         Me.ucrDateTo = New instat.ucrDateTimePicker()
         Me.ucrDateFrom = New instat.ucrDateTimePicker()
@@ -55,6 +54,7 @@ Partial Class dlgSetupForDataEntry
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorSetupDataEntry = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrSaveNewDFName = New instat.ucrSave()
         Me.grpElements.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -199,19 +199,19 @@ Partial Class dlgSetupForDataEntry
         resources.ApplyResources(Me.lblAddFlagVariables, "lblAddFlagVariables")
         Me.lblAddFlagVariables.Name = "lblAddFlagVariables"
         '
-        'lblDate
+        'lblFlagDate
         '
-        resources.ApplyResources(Me.lblDate, "lblDate")
-        Me.lblDate.Name = "lblDate"
+        resources.ApplyResources(Me.lblFlagDate, "lblFlagDate")
+        Me.lblFlagDate.Name = "lblFlagDate"
         '
-        'ucrReceiverDate
+        'ucrReceiverFlagDate
         '
-        Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.ucrSelector = Nothing
+        Me.ucrReceiverFlagDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFlagDate, "ucrReceiverFlagDate")
+        Me.ucrReceiverFlagDate.Name = "ucrReceiverFlagDate"
+        Me.ucrReceiverFlagDate.Selector = Nothing
+        Me.ucrReceiverFlagDate.strNcFilePath = ""
+        Me.ucrReceiverFlagDate.ucrSelector = Nothing
         '
         'ucrReceiverAddFlagVariables
         '
@@ -221,11 +221,6 @@ Partial Class dlgSetupForDataEntry
         Me.ucrReceiverAddFlagVariables.Selector = Nothing
         Me.ucrReceiverAddFlagVariables.strNcFilePath = ""
         Me.ucrReceiverAddFlagVariables.ucrSelector = Nothing
-        '
-        'ucrNewDFName
-        '
-        resources.ApplyResources(Me.ucrNewDFName, "ucrNewDFName")
-        Me.ucrNewDFName.Name = "ucrNewDFName"
         '
         'ucrChkAddFlagVariables
         '
@@ -286,14 +281,19 @@ Partial Class dlgSetupForDataEntry
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'ucrSaveNewDFName
+        '
+        resources.ApplyResources(Me.ucrSaveNewDFName, "ucrSaveNewDFName")
+        Me.ucrSaveNewDFName.Name = "ucrSaveNewDFName"
+        '
         'dlgSetupForDataEntry
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrReceiverDate)
-        Me.Controls.Add(Me.lblDate)
+        Me.Controls.Add(Me.ucrReceiverFlagDate)
+        Me.Controls.Add(Me.lblFlagDate)
         Me.Controls.Add(Me.lblAddFlagVariables)
-        Me.Controls.Add(Me.ucrNewDFName)
+        Me.Controls.Add(Me.ucrSaveNewDFName)
         Me.Controls.Add(Me.ucrChkAddFlagVariables)
         Me.Controls.Add(Me.grpElements)
         Me.Controls.Add(Me.ucrDateTo)
@@ -347,12 +347,10 @@ Partial Class dlgSetupForDataEntry
     Friend WithEvents ucrDateFrom As ucrDateTimePicker
     Friend WithEvents lblDateTo As Label
     Friend WithEvents lblDateFrom As Label
-    Friend WithEvents ucrNewDFName As ucrSave
     Friend WithEvents lblAddFlagVariables As Label
     Friend WithEvents ucrReceiverAddFlagVariables As ucrReceiverMultiple
-    Friend WithEvents ucrReceiverDate As ucrReceiverSingle
-    Friend WithEvents lblDate As Label
-
-
+    Friend WithEvents ucrReceiverFlagDate As ucrReceiverSingle
+    Friend WithEvents lblFlagDate As Label
+    Friend WithEvents ucrSaveNewDFName As ucrSave
 
 End Class

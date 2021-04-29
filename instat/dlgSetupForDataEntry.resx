@@ -132,7 +132,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdoNew.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 12</value>
+    <value>95, 12</value>
   </data>
   <data name="rdoNew.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 27</value>
@@ -169,7 +169,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoAddFlags.Location" type="System.Drawing.Point, System.Drawing">
-    <value>208, 12</value>
+    <value>203, 12</value>
   </data>
   <data name="rdoAddFlags.Size" type="System.Drawing.Size, System.Drawing">
     <value>110, 27</value>
@@ -265,7 +265,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 180</value>
+    <value>262, 176</value>
   </data>
   <data name="lblDateTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -298,13 +298,13 @@
     <value>NoControl</value>
   </data>
   <data name="lblDateFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 139</value>
+    <value>262, 137</value>
   </data>
   <data name="lblDateFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>59, 13</value>
   </data>
   <data name="lblDateFrom.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
+    <value>9</value>
   </data>
   <data name="lblDateFrom.Text" xml:space="preserve">
     <value>Date From:</value>
@@ -580,7 +580,7 @@
     <value>381, 95</value>
   </data>
   <data name="grpElements.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="grpElements.Text" xml:space="preserve">
     <value>Elements:</value>
@@ -604,7 +604,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAddFlagVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 137</value>
+    <value>262, 137</value>
   </data>
   <data name="lblAddFlagVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
@@ -627,34 +627,34 @@
   <data name="&gt;&gt;lblAddFlagVariables.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="lblDate.AutoSize" type="System.Boolean, mscorlib">
+  <data name="lblFlagDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
-  <data name="lblDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="lblFlagDate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="lblFlagDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 95</value>
   </data>
-  <data name="lblDate.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="lblFlagDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>33, 13</value>
   </data>
-  <data name="lblDate.TabIndex" type="System.Int32, mscorlib">
+  <data name="lblFlagDate.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
   </data>
-  <data name="lblDate.Text" xml:space="preserve">
+  <data name="lblFlagDate.Text" xml:space="preserve">
     <value>Date:</value>
   </data>
-  <data name="&gt;&gt;lblDate.Name" xml:space="preserve">
-    <value>lblDate</value>
+  <data name="&gt;&gt;lblFlagDate.Name" xml:space="preserve">
+    <value>lblFlagDate</value>
   </data>
-  <data name="&gt;&gt;lblDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;lblFlagDate.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;lblDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;lblFlagDate.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;lblDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;lblFlagDate.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -666,28 +666,28 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>408, 459</value>
   </data>
-  <data name="ucrNewDFName.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrSaveNewDFName.Location" type="System.Drawing.Point, System.Drawing">
     <value>4, 375</value>
   </data>
-  <data name="ucrNewDFName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrSaveNewDFName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
-  <data name="ucrNewDFName.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrSaveNewDFName.Size" type="System.Drawing.Size, System.Drawing">
     <value>300, 24</value>
   </data>
-  <data name="ucrNewDFName.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+  <data name="ucrSaveNewDFName.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
   </data>
-  <data name="&gt;&gt;ucrNewDFName.Name" xml:space="preserve">
-    <value>ucrNewDFName</value>
+  <data name="&gt;&gt;ucrSaveNewDFName.Name" xml:space="preserve">
+    <value>ucrSaveNewDFName</value>
   </data>
-  <data name="&gt;&gt;ucrNewDFName.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrSaveNewDFName.Type" xml:space="preserve">
     <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrNewDFName.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrSaveNewDFName.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrNewDFName.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrSaveNewDFName.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
   <data name="ucrChkAddFlagVariables.Location" type="System.Drawing.Point, System.Drawing">
@@ -697,7 +697,7 @@
     <value>137, 20</value>
   </data>
   <data name="ucrChkAddFlagVariables.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrChkAddFlagVariables.Name" xml:space="preserve">
     <value>ucrChkAddFlagVariables</value>
@@ -712,7 +712,7 @@
     <value>4</value>
   </data>
   <data name="ucrDateTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 196</value>
+    <value>261, 191</value>
   </data>
   <data name="ucrDateTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 20</value>
@@ -733,7 +733,7 @@
     <value>6</value>
   </data>
   <data name="ucrDateFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 155</value>
+    <value>261, 151</value>
   </data>
   <data name="ucrDateFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>135, 20</value>
@@ -805,7 +805,7 @@
     <value>404, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>18</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -900,28 +900,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrReceiverDate.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrReceiverFlagDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>261, 111</value>
   </data>
-  <data name="ucrReceiverDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverFlagDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverDate.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverFlagDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
   </data>
-  <data name="ucrReceiverDate.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrReceiverFlagDate.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverDate.Name" xml:space="preserve">
-    <value>ucrReceiverDate</value>
+  <data name="&gt;&gt;ucrReceiverFlagDate.Name" xml:space="preserve">
+    <value>ucrReceiverFlagDate</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverDate.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverFlagDate.Type" xml:space="preserve">
     <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverFlagDate.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverFlagDate.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
 </root>
