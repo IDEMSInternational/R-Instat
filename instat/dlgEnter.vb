@@ -51,10 +51,10 @@ Public Class dlgEnter
         clsDetach.AddParameter("name", clsRFunctionParameter:=ucrDataFrameEnter.clsCurrDataFrame)
         clsDetach.AddParameter("unload", "TRUE")
         ucrBase.clsRsyntax.SetCommandString("")
-        ucrSaveEnterResultInto.SetSaveTypeAsColumn()
         ucrSaveEnterResultInto.SetPrefix("enter")
-        ucrSaveEnterResultInto.SetIsComboBox()
         ucrSaveEnterResultInto.SetDataFrameSelector(ucrDataFrameEnter)
+        ucrSaveEnterResultInto.SetIsComboBox()
+        ucrSaveEnterResultInto.SetSaveTypeAsColumn()
         ucrSaveEnterResultInto.SetLabelText("Enter Result Into:")
 
         'Adding tooltips for the buttons
