@@ -190,61 +190,61 @@ Public Class Condition
             End If
 
         ElseIf bIsParameterPresent Then
-                Return (bIsPositive = lstValues.Any(Function(x) clsRCode.ContainsParameter(x)))
-            ElseIf bIsFunctionNames Then
-                If TypeOf clsRCode Is RFunction Then
-                    clsTempFunc = CType(clsRCode, RFunction)
-                    Return (bIsPositive = lstValues.Contains(clsTempFunc.strRCommand))
-                Else
-                    Return False
-                End If
-            ElseIf bIsParameterType Then
-                If Not clsRCode.ContainsParameter(strParameterName) Then
-                    Return Not bIsPositive
-                Else
-                    clsTempParam = clsRCode.GetParameter(strParameterName)
-                    Select Case strParameterType
-                        Case "string"
-                            Return (bIsPositive = clsTempParam.bIsString)
-                        Case "RFunction"
-                            Return (bIsPositive = clsTempParam.bIsFunction)
-                        Case "ROperator"
-                            Return (bIsPositive = clsTempParam.bIsOperator)
-                        Case Else
-                            MsgBox("Developer error: strType must be either string, RFunction or ROperator.")
-                            Return False
-                    End Select
-                End If
-            ElseIf bIsParameterValuesRFunctionNames Then
-                If clsParameter IsNot Nothing Then
-                    If clsParameter.strArgumentName = strParameterName Then
-                        clsTempParam = clsParameter
-                    Else
-                        clsTempParam = clsRCode.GetParameter(strParameterName)
-                    End If
-                Else
-                    clsTempParam = clsRCode.GetParameter(strParameterName)
-                End If
-                If Not (clsTempParam IsNot Nothing AndAlso clsTempParam.bIsFunction AndAlso clsTempParam.clsArgumentCodeStructure IsNot Nothing) Then
-                    Return Not bIsPositive
-                End If
-                Return ((bIsPositive = lstValues.Contains(DirectCast(clsTempParam.clsArgumentCodeStructure, RFunction).strRCommand)))
-            ElseIf bIsRSyntaxFunctionNames Then
-                If clsRSyntax IsNot Nothing Then
-                    Return (bIsPositive = lstValues.Any(Function(x) clsRSyntax.GetFunctionNames().Contains(x)))
-                Else
-                    Return Not bIsPositive
-                End If
-            ElseIf bIsRSyntaxContainsCode Then
-                If clsRSyntax IsNot Nothing AndAlso clsRCode IsNot Nothing Then
-                    Return (bIsPositive = clsRSyntax.ContainsCode(clsRCode))
-                Else
-                    Return Not bIsPositive
-                End If
-            ElseIf bIsRCodeRFunction Then
-                Return (bIsPositive = (TypeOf clsRCode Is RFunction))
+            Return (bIsPositive = lstValues.Any(Function(x) clsRCode.ContainsParameter(x)))
+        ElseIf bIsFunctionNames Then
+            If TypeOf clsRCode Is RFunction Then
+                clsTempFunc = CType(clsRCode, RFunction)
+                Return (bIsPositive = lstValues.Contains(clsTempFunc.strRCommand))
             Else
-                Return True
+                Return False
+            End If
+        ElseIf bIsParameterType Then
+            If Not clsRCode.ContainsParameter(strParameterName) Then
+                Return Not bIsPositive
+            Else
+                clsTempParam = clsRCode.GetParameter(strParameterName)
+                Select Case strParameterType
+                    Case "string"
+                        Return (bIsPositive = clsTempParam.bIsString)
+                    Case "RFunction"
+                        Return (bIsPositive = clsTempParam.bIsFunction)
+                    Case "ROperator"
+                        Return (bIsPositive = clsTempParam.bIsOperator)
+                    Case Else
+                        MsgBox("Developer error: strType must be either string, RFunction or ROperator.")
+                        Return False
+                End Select
+            End If
+        ElseIf bIsParameterValuesRFunctionNames Then
+            If clsParameter IsNot Nothing Then
+                If clsParameter.strArgumentName = strParameterName Then
+                    clsTempParam = clsParameter
+                Else
+                    clsTempParam = clsRCode.GetParameter(strParameterName)
+                End If
+            Else
+                clsTempParam = clsRCode.GetParameter(strParameterName)
+            End If
+            If Not (clsTempParam IsNot Nothing AndAlso clsTempParam.bIsFunction AndAlso clsTempParam.clsArgumentCodeStructure IsNot Nothing) Then
+                Return Not bIsPositive
+            End If
+            Return ((bIsPositive = lstValues.Contains(DirectCast(clsTempParam.clsArgumentCodeStructure, RFunction).strRCommand)))
+        ElseIf bIsRSyntaxFunctionNames Then
+            If clsRSyntax IsNot Nothing Then
+                Return (bIsPositive = lstValues.Any(Function(x) clsRSyntax.GetFunctionNames().Contains(x)))
+            Else
+                Return Not bIsPositive
+            End If
+        ElseIf bIsRSyntaxContainsCode Then
+            If clsRSyntax IsNot Nothing AndAlso clsRCode IsNot Nothing Then
+                Return (bIsPositive = clsRSyntax.ContainsCode(clsRCode))
+            Else
+                Return Not bIsPositive
+            End If
+        ElseIf bIsRCodeRFunction Then
+            Return (bIsPositive = (TypeOf clsRCode Is RFunction))
+        Else
+            Return True
         End If
     End Function
 End Class

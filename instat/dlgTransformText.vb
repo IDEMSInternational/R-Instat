@@ -145,6 +145,7 @@ Public Class dlgTransformText
         ucrPnlOperation.AddToLinkedControls(ucrNudLastWord, {rdoWords}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkFirstOr.AddToLinkedControls(ucrReceiverFirstWord, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFirstOr.AddToLinkedControls(ucrNudFirstWord, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLastOr.AddToLinkedControls(ucrReceiverLastWord, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedHideIfParameterMissing:=True)
@@ -265,37 +266,81 @@ Public Class dlgTransformText
                         AddClsTrimFunctionDefaultParameters()
                         AddClsWordsFunctionDefaultParameters()
                         ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
-                    Case clsLengthFunction.strRCommand
-                        clsLengthFunction = lstRCodeStructure(0)
-                        AddClsPadFunctionDefaultParameters()
-                        AddClsSubstringFunctionDefaultParameters()
-                        AddClsTrimFunctionDefaultParameters()
-                        AddClsWordsFunctionDefaultParameters()
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
-                    Case clsPadFunction.strRCommand
-                        clsPadFunction = lstRCodeStructure(0)
-                        AddClsSubstringFunctionDefaultParameters()
-                        AddClsTrimFunctionDefaultParameters()
-                        AddClsWordsFunctionDefaultParameters()
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
-                    Case clsTrimFunction.strRCommand
-                        clsTrimFunction = lstRCodeStructure(0)
-                        AddClsPadFunctionDefaultParameters()
-                        AddClsSubstringFunctionDefaultParameters()
-                        AddClsWordsFunctionDefaultParameters()
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsTrimFunction)
-                    Case clsWordsFunction.strRCommand
-                        clsWordsFunction = lstRCodeStructure(0)
-                        AddClsPadFunctionDefaultParameters()
-                        AddClsSubstringFunctionDefaultParameters()
-                        AddClsTrimFunctionDefaultParameters()
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
-                    Case clsSubstringFunction.strRCommand
-                        clsSubstringFunction = lstRCodeStructure(0)
-                        AddClsPadFunctionDefaultParameters()
-                        AddClsTrimFunctionDefaultParameters()
-                        ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
+                    Case clsLengthFunction.strRCommand, clsPadFunction.strRCommand,
+                         clsTrimFunction.strRCommand, clsWordsFunction.strRCommand,
+                         clsSubstringFunction.strRCommand
+                        Dim clsStringParameter As New RParameter
+                        If Not IsNothing(lstRCodeStructure(0).GetParameter("string")) Then
+                            If (lstRCodeStructure(0).GetParameter("string")).bIsFunction Then
+                                clsStringParameter = lstRCodeStructure(0).GetParameter("string")
+                                clsConvertFunction.AddParameter(clsStringParameter)
+                            End If
+                        End If
+                        Select Case strRcommand
+                            Case clsLengthFunction.strRCommand
+                                clsLengthFunction = lstRCodeStructure(0)
+
+                                clsPadFunction.AddParameter(clsStringParameter)
+                                clsSubstringFunction.AddParameter(clsStringParameter)
+                                clsTrimFunction.AddParameter(clsStringParameter)
+                                clsWordsFunction.AddParameter(clsStringParameter)
+
+                                AddClsPadFunctionDefaultParameters()
+                                AddClsSubstringFunctionDefaultParameters()
+                                AddClsTrimFunctionDefaultParameters()
+                                AddClsWordsFunctionDefaultParameters()
+                                ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
+                            Case clsPadFunction.strRCommand
+                                clsPadFunction = lstRCodeStructure(0)
+
+                                clsLengthFunction.AddParameter(clsStringParameter)
+                                clsSubstringFunction.AddParameter(clsStringParameter)
+                                clsTrimFunction.AddParameter(clsStringParameter)
+                                clsWordsFunction.AddParameter(clsStringParameter)
+
+                                AddClsSubstringFunctionDefaultParameters()
+                                AddClsTrimFunctionDefaultParameters()
+                                AddClsWordsFunctionDefaultParameters()
+                                ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
+                            Case clsTrimFunction.strRCommand
+                                clsTrimFunction = lstRCodeStructure(0)
+
+                                clsLengthFunction.AddParameter(clsStringParameter)
+                                clsSubstringFunction.AddParameter(clsStringParameter)
+                                clsPadFunction.AddParameter(clsStringParameter)
+                                clsWordsFunction.AddParameter(clsStringParameter)
+
+                                AddClsPadFunctionDefaultParameters()
+                                AddClsSubstringFunctionDefaultParameters()
+                                AddClsWordsFunctionDefaultParameters()
+                                ucrBase.clsRsyntax.SetBaseRFunction(clsTrimFunction)
+                            Case clsWordsFunction.strRCommand
+                                clsWordsFunction = lstRCodeStructure(0)
+
+                                clsLengthFunction.AddParameter(clsStringParameter)
+                                clsSubstringFunction.AddParameter(clsStringParameter)
+                                clsPadFunction.AddParameter(clsStringParameter)
+                                clsTrimFunction.AddParameter(clsStringParameter)
+
+                                AddClsPadFunctionDefaultParameters()
+                                AddClsSubstringFunctionDefaultParameters()
+                                AddClsTrimFunctionDefaultParameters()
+                                ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
+                            Case clsSubstringFunction.strRCommand
+                                clsSubstringFunction = lstRCodeStructure(0)
+
+                                clsLengthFunction.AddParameter(clsStringParameter)
+                                clsTrimFunction.AddParameter(clsStringParameter)
+                                clsPadFunction.AddParameter(clsStringParameter)
+                                clsWordsFunction.AddParameter(clsStringParameter)
+
+                                AddClsPadFunctionDefaultParameters()
+                                AddClsTrimFunctionDefaultParameters()
+                                ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
+                        End Select
+
                 End Select
+
             Else
                 SetRFunctionDefaultParameters()
                 MsgBox("Developer error:The Script must be an RFunction")
@@ -492,7 +537,10 @@ Public Class dlgTransformText
                     End If
                 End If
             End If
-            changeWordParamValues()
+            If bRCodeSet Then
+                changeWordParamValues()
+            End If
+
         Else
             ucrSelectorForTransformText.SetCurrentReceiver(ucrReceiverTransformText)
         End If
