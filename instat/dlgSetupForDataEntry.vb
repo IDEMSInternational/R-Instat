@@ -26,7 +26,6 @@ Public Class dlgSetupForDataEntry
     Private clsSeqFunction As New RFunction
     Private clsAddKeyFunction As New RFunction
     Private clsCAddKeyFunction As New RFunction
-    Private clsCheckKeyFunction As RFunction
 
     Private iDialogHeight As Integer
     Private iBaseMaxY As Integer
@@ -61,12 +60,14 @@ Public Class dlgSetupForDataEntry
         ucrSelectorSetupDataEntry.SetParameter(New RParameter("data_name", 0))
         ucrSelectorSetupDataEntry.SetParameterIsString()
 
+        ucrReceiverStation.SetParameter(New RParameter("station", 2))
         ucrReceiverStation.Selector = ucrSelectorSetupDataEntry
         ucrReceiverStation.SetClimaticType("station")
         ucrReceiverStation.SetParameterIsString()
         ucrReceiverStation.bAutoFill = True
         ucrReceiverStation.strSelectorHeading = "Factors"
 
+        ucrReceiverDate.SetParameter(New RParameter("date", 3))
         ucrReceiverDate.Selector = ucrSelectorSetupDataEntry
         ucrReceiverDate.SetClimaticType("date")
         ucrReceiverDate.SetIncludedDataTypes({"Date"})
@@ -137,7 +138,6 @@ Public Class dlgSetupForDataEntry
         clsCFunction = New RFunction
         clsSeqFunction = New RFunction
         clsCAddKeyFunction = New RFunction
-        clsCheckKeyFunction = New RFunction
         clsAddKeyFunction = New RFunction
 
         ucrSelectorSetupDataEntry.Reset()
@@ -156,8 +156,6 @@ Public Class dlgSetupForDataEntry
         'todo. what should be the default date
         ucrDateFrom.DateValue = Date.Now
         ucrDateTo.DateValue = ucrDateFrom.DateValue.AddMonths(1).AddDays(-1)
-
-        clsCheckKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_key") 'todo. add has_key function in add_flag_fields R function.
 
         clsNewDataFrameFunction.SetRCommand("data.frame")
 
@@ -185,15 +183,17 @@ Public Class dlgSetupForDataEntry
         ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrameFunction)
         clsAddKeyFunction.iCallType = 2
+        clsAddFlagFunction.iCallType = 2
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorSetupDataEntry.AddAdditionalCodeParameterPair(clsCheckKeyFunction, ucrSelectorSetupDataEntry.GetParameter(), iAdditionalPairNo:=1)
 
         ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrNewDFName.SetRCode(clsNewDataFrameFunction, bReset)
         ucrSelectorSetupDataEntry.SetRCode(clsAddFlagFunction, bReset)
         ucrReceiverAddFlagVariables.SetRCode(clsAddFlagFunction, bReset)
+        ucrReceiverStation.SetRCode(clsAddFlagFunction, bReset)
+        ucrReceiverDate.SetRCode(clsAddFlagFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -374,7 +374,7 @@ Public Class dlgSetupForDataEntry
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
-        Dim bCheckKey As Boolean
+        ' Dim bCheckKey As Boolean
         If rdoNew.Checked Then
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
@@ -383,17 +383,12 @@ Public Class dlgSetupForDataEntry
             clsAddKeyFunction.iCallType = 2
             grpElements.Visible = True
         Else
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight * 0.8)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.35)
             ucrBase.clsRsyntax.SetBaseRFunction(clsAddFlagFunction)
+            clsAddFlagFunction.iCallType = 2
             grpElements.Visible = False
-            bCheckKey = frmMain.clsRLink.RunInternalScriptGetValue(clsCheckKeyFunction.ToScript()).AsLogical(0)
-            If Not bCheckKey Then
-                ucrBase.clsRsyntax.AddToAfterCodes(clsAddKeyFunction, iPosition:=0)
-                clsAddKeyFunction.iCallType = 2
-            Else
-                ucrBase.clsRsyntax.RemoveFromAfterCodes(clsAddKeyFunction)
-            End If
         End If
         AddRemoveParameter()
     End Sub
