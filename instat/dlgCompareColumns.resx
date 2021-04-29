@@ -180,6 +180,90 @@
   <data name="&gt;&gt;lblSecondColumn.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="&gt;&gt;ucrChkAllValues.Name" xml:space="preserve">
+    <value>ucrChkAllValues</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAllValues.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAllValues.Parent" xml:space="preserve">
+    <value>grpComparisions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAllValues.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkUnion.Name" xml:space="preserve">
+    <value>ucrChkUnion</value>
+  </data>
+  <data name="&gt;&gt;ucrChkUnion.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkUnion.Parent" xml:space="preserve">
+    <value>grpComparisions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkUnion.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIntersection.Name" xml:space="preserve">
+    <value>ucrChkIntersection</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIntersection.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIntersection.Parent" xml:space="preserve">
+    <value>grpComparisions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIntersection.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSecondNotFirst.Name" xml:space="preserve">
+    <value>ucrChkSecondNotFirst</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSecondNotFirst.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSecondNotFirst.Parent" xml:space="preserve">
+    <value>grpComparisions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkSecondNotFirst.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFirstNotSecond.Name" xml:space="preserve">
+    <value>ucrChkFirstNotSecond</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFirstNotSecond.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFirstNotSecond.Parent" xml:space="preserve">
+    <value>grpComparisions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFirstNotSecond.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="grpComparisions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 270</value>
+  </data>
+  <data name="grpComparisions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>271, 154</value>
+  </data>
+  <data name="grpComparisions.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="grpComparisions.Text" xml:space="preserve">
+    <value>Comparisons to Display:</value>
+  </data>
+  <data name="&gt;&gt;grpComparisions.Name" xml:space="preserve">
+    <value>grpComparisions</value>
+  </data>
+  <data name="&gt;&gt;grpComparisions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpComparisions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpComparisions.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="ucrChkAllValues.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 122</value>
   </data>
@@ -284,30 +368,6 @@
   </data>
   <data name="&gt;&gt;ucrChkFirstNotSecond.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="grpComparisions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 270</value>
-  </data>
-  <data name="grpComparisions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 154</value>
-  </data>
-  <data name="grpComparisions.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="grpComparisions.Text" xml:space="preserve">
-    <value>Comparisons to Display:</value>
-  </data>
-  <data name="&gt;&gt;grpComparisions.Name" xml:space="preserve">
-    <value>grpComparisions</value>
-  </data>
-  <data name="&gt;&gt;grpComparisions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpComparisions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpComparisions.ZOrder" xml:space="preserve">
-    <value>7</value>
   </data>
   <data name="lblTolerance.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -463,7 +523,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveLogical.Size" type="System.Drawing.Size, System.Drawing">
-    <value>396, 24</value>
+    <value>280, 22</value>
   </data>
   <data name="ucrSaveLogical.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
