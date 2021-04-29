@@ -162,6 +162,7 @@ Public Class dlgSetupForDataEntry
         clsAddKeyFunction = New RFunction
 
         ucrSelectorSetupDataEntry.Reset()
+        ucrReceiverStation.SetMeAsReceiver()
 
         ucrChkSpecify1.Checked = False
         ucrChkSpecify2.Checked = False
