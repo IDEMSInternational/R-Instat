@@ -42,7 +42,7 @@ Public Class dlgSetupForDataEntry
     ''' <summary> Store the name of the station value selected. </summary>
     Private strStation As String = ""
 
-    Private strDateName As String = "date"
+    Private ReadOnly strDateName As String = "date"
 
     Private Sub dlgSetupForDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
