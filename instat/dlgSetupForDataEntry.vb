@@ -27,8 +27,8 @@ Public Class dlgSetupForDataEntry
     Private clsAddKeyFunction As New RFunction
     Private clsFlagCAddKeyFunction As New RFunction
     Private clsNewCAddKeyFunction As New RFunction
-    Private clsDefaultStartDate As RFunction
-    Private clsDefaultEndDate As RFunction
+    Private clsDefaultStartDateFunction As New RFunction
+    Private clsDefaultEndDateFunction As New RFunction
 
 
     Private iDialogHeight As Integer
