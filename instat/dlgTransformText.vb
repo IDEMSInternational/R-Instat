@@ -145,7 +145,6 @@ Public Class dlgTransformText
         ucrPnlOperation.AddToLinkedControls(ucrNudLastWord, {rdoWords}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkFirstOr.AddToLinkedControls(ucrReceiverFirstWord, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkFirstOr.AddToLinkedControls(ucrNudFirstWord, {False}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkLastOr.AddToLinkedControls(ucrReceiverLastWord, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrPnlOperation.AddToLinkedControls(ucrInputSeparator, {rdoWords}, bNewLinkedHideIfParameterMissing:=True)
