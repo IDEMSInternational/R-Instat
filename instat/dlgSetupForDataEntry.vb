@@ -356,13 +356,11 @@ Public Class dlgSetupForDataEntry
     Private Sub ucrInputSpecify1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify1.ControlValueChanged, ucrChkSpecify1.ControlValueChanged
         ' This ensures clsNewDataFrame has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
         ' Storing and then removing strSpecify3 as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
+        clsNewDataFrameFunction.RemoveParameterByName(strSpecify1)
+        strSpecify1 = ""
         If Not ucrInputSpecify1.IsEmpty AndAlso ucrChkSpecify1.Checked Then
-            clsNewDataFrameFunction.RemoveParameterByName(strSpecify1)
             strSpecify1 = ucrInputSpecify1.GetValue()
             clsNewDataFrameFunction.AddParameter(strSpecify1, "NA_real_", iPosition:=8)
-        Else
-            clsNewDataFrameFunction.RemoveParameterByName(strSpecify1)
-            strSpecify1 = ""
         End If
         AddRemoveFlagParameter()
     End Sub
