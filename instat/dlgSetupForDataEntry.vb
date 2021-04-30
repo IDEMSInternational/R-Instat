@@ -32,6 +32,10 @@ Public Class dlgSetupForDataEntry
     Private iDialogHeight As Integer
     Private iBaseMaxY As Integer
 
+    Private strSpecify1 As String = ""
+    Private strSpecify2 As String = ""
+    Private strSpecify3 As String = ""
+
     Private ReadOnly strDateName As String = "date"
 
     Private Sub dlgSetupForDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -337,35 +341,31 @@ Public Class dlgSetupForDataEntry
     End Sub
 
     Private Sub ucrInputSpecify1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify1.ControlValueChanged, ucrChkSpecify1.ControlValueChanged
-        Dim strSpecify1 As String = ucrInputSpecify1.GetValue()
-
+        clsNewDataFrameFunction.RemoveParameterByName(strSpecify1)
+        strSpecify1 = ""
         If Not ucrInputSpecify1.IsEmpty AndAlso ucrChkSpecify1.Checked Then
-            clsNewDataFrameFunction.RemoveParameterByName(strSpecify1)
+            strSpecify1 = ucrInputSpecify1.GetValue()
             clsNewDataFrameFunction.AddParameter(strSpecify1, "NA_real_", iPosition:=8)
-        Else
-            clsNewDataFrameFunction.RemoveParameterByName(strSpecify1)
         End If
         AddRemoveFlagParameter()
     End Sub
 
     Private Sub ucrInputSpecify2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify2.ControlValueChanged, ucrChkSpecify2.ControlValueChanged
-        Dim strSpecify2 As String = ucrInputSpecify2.GetValue()
-
+        clsNewDataFrameFunction.RemoveParameterByName(strSpecify2)
+        strSpecify2 = ""
         If Not ucrInputSpecify2.IsEmpty AndAlso ucrChkSpecify2.Checked Then
+            strSpecify2 = ucrInputSpecify2.GetValue()
             clsNewDataFrameFunction.AddParameter(strSpecify2, "NA_real_", iPosition:=9)
-        Else
-            clsNewDataFrameFunction.RemoveParameterByName(strSpecify2)
         End If
         AddRemoveFlagParameter()
     End Sub
 
     Private Sub ucrInputSpecify3_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify3.ControlValueChanged, ucrChkSpecify3.ControlValueChanged
-        Dim strSpecify3 As String = ucrInputSpecify3.GetValue()
-
+        clsNewDataFrameFunction.RemoveParameterByName(strSpecify3)
+        strSpecify3 = ""
         If Not ucrInputSpecify3.IsEmpty AndAlso ucrChkSpecify3.Checked Then
+            strSpecify3 = ucrInputSpecify3.GetValue()
             clsNewDataFrameFunction.AddParameter(strSpecify3, "NA_real_", iPosition:=10)
-        Else
-            clsNewDataFrameFunction.RemoveParameterByName(strSpecify3)
         End If
         AddRemoveFlagParameter()
     End Sub
