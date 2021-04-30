@@ -15,7 +15,6 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Imports RDotNet
 Public Class dlgSetupForDataEntry
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
@@ -30,17 +29,8 @@ Public Class dlgSetupForDataEntry
     Private clsDefaultStartDateFunction As New RFunction
     Private clsDefaultEndDateFunction As New RFunction
 
-
     Private iDialogHeight As Integer
     Private iBaseMaxY As Integer
-
-    ''' <summary> Store the name of the specify value entered. </summary>
-    Private strSpecify1 As String = ""
-    Private strSpecify2 As String = ""
-    Private strSpecify3 As String = ""
-
-    ''' <summary> Store the name of the station value selected. </summary>
-    Private strStation As String = ""
 
     Private ReadOnly strDateName As String = "date"
 
@@ -129,13 +119,13 @@ Public Class dlgSetupForDataEntry
         ucrDateTo.SetParameter(New RParameter("to", 1))
         ucrDateTo.SetParameterIsRDate()
 
-        clsDefaultStartDate = New RFunction
-        clsDefaultStartDate.SetRCommand("as.Date")
-        clsDefaultStartDate.AddParameter("x", Chr(34) & Date.Now.ToString("yyy/MM/dd") & Chr(34), iPosition:=0)
+        clsDefaultStartDateFunction = New RFunction
+        clsDefaultStartDateFunction.SetRCommand("as.Date")
+        clsDefaultStartDateFunction.AddParameter("x", Chr(34) & Date.Now.ToString("yyy/MM/dd") & Chr(34), iPosition:=0)
 
-        clsDefaultEndDate = New RFunction
-        clsDefaultEndDate.SetRCommand("as.Date")
-        clsDefaultEndDate.AddParameter("x", Chr(34) & Date.Now.AddMonths(1).ToString("yyy/MM/dd") & Chr(34), iPosition:=0)
+        clsDefaultEndDateFunction = New RFunction
+        clsDefaultEndDateFunction.SetRCommand("as.Date")
+        clsDefaultEndDateFunction.AddParameter("x", Chr(34) & Date.Now.AddMonths(1).ToString("yyy/MM/dd") & Chr(34), iPosition:=0)
 
         ucrPnlOptions.AddToLinkedControls({ucrInputSelectStation, ucrChkAddFlagVariables, ucrChkSpecify1, ucrChkSpecify2, ucrChkSpecify3, ucrSaveNewDFName}, {rdoNew}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls({ucrDateFrom, ucrDateTo}, {rdoNew}, bNewLinkedHideIfParameterMissing:=True)
@@ -163,6 +153,7 @@ Public Class dlgSetupForDataEntry
 
         ucrSelectorSetupDataEntry.Reset()
         ucrReceiverStation.SetMeAsReceiver()
+        clsAddKeyFunction.iCallType = 2
 
         ucrChkSpecify1.Checked = False
         ucrChkSpecify2.Checked = False
@@ -194,8 +185,8 @@ Public Class dlgSetupForDataEntry
         clsCFunction.AddParameter("add", Chr(34) & "add" & Chr(34), iPosition:=2, bIncludeArgumentName:=False)
 
         clsSeqDateFunction.SetRCommand("seq")
-        clsSeqDateFunction.AddParameter("from", clsRFunctionParameter:=clsDefaultStartDate, iPosition:=0)
-        clsSeqDateFunction.AddParameter("to", clsRFunctionParameter:=clsDefaultEndDate, iPosition:=1)
+        clsSeqDateFunction.AddParameter("from", clsRFunctionParameter:=clsDefaultStartDateFunction, iPosition:=0)
+        clsSeqDateFunction.AddParameter("to", clsRFunctionParameter:=clsDefaultEndDateFunction, iPosition:=1)
         clsSeqDateFunction.AddParameter("by", Chr(34) & "day" & Chr(34), iPosition:=2)
 
         clsAddKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_key")
@@ -326,17 +317,15 @@ Public Class dlgSetupForDataEntry
         End If
     End Sub
 
-    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrInputSelectStation.ControlValueChanged, ucrReceiverFlagDate.ControlValueChanged, ucrSelectorSetupDataEntry.ControlValueChanged
-        ' This ensures clsNewDataFrame has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
-        ' Storing and then removing strSpecify3 as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
-        Dim strDaframeName As String = ucrInputSelectStation.GetValue().ToString.Trim(Chr(34)).ToLower.Replace(" ", "_")
+    Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrInputSelectStation.ControlValueChanged
+        Dim strStation As String = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
+        Dim strDaframeName As String = ucrInputSelectStation.GetText.Trim(Chr(34)).ToLower.Replace(" ", "_")
+
         If Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputSelectStation.IsEmpty Then
-            strStation = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
             clsNewDataFrameFunction.AddParameter(strStation, "as.factor(" & Chr(34) & ucrInputSelectStation.GetValue() & Chr(34) & ")", iPosition:=0)
-            ucrSaveNewDFName.SetPrefix(strDaframeName.Replace("'", ""))
+            ucrSaveNewDFName.SetPrefix(strDaframeName)
         Else
-            clsNewDataFrameFunction.RemoveParameterByName(strDaframeName.Replace("'", ""))
-            strStation = ""
+            clsNewDataFrameFunction.RemoveParameterByName(strStation)
         End If
         AddRemoveFlagParameter()
     End Sub
@@ -348,41 +337,35 @@ Public Class dlgSetupForDataEntry
     End Sub
 
     Private Sub ucrInputSpecify1_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify1.ControlValueChanged, ucrChkSpecify1.ControlValueChanged
-        ' This ensures clsNewDataFrame has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
-        ' Storing and then removing strSpecify3 as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
-        clsNewDataFrameFunction.RemoveParameterByName(strSpecify1)
-        strSpecify1 = ""
+        Dim strSpecify1 As String = ucrInputSpecify1.GetValue()
+
         If Not ucrInputSpecify1.IsEmpty AndAlso ucrChkSpecify1.Checked Then
-            strSpecify1 = ucrInputSpecify1.GetValue()
+            clsNewDataFrameFunction.RemoveParameterByName(strSpecify1)
             clsNewDataFrameFunction.AddParameter(strSpecify1, "NA_real_", iPosition:=8)
+        Else
+            clsNewDataFrameFunction.RemoveParameterByName(strSpecify1)
         End If
         AddRemoveFlagParameter()
     End Sub
 
     Private Sub ucrInputSpecify2_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify2.ControlValueChanged, ucrChkSpecify2.ControlValueChanged
-        ' This ensures clsNewDataFrame has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
-        ' Storing and then removing strSpecify2 as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
+        Dim strSpecify2 As String = ucrInputSpecify2.GetValue()
+
         If Not ucrInputSpecify2.IsEmpty AndAlso ucrChkSpecify2.Checked Then
-            clsNewDataFrameFunction.RemoveParameterByName(strSpecify2)
-            strSpecify2 = ucrInputSpecify2.GetValue()
             clsNewDataFrameFunction.AddParameter(strSpecify2, "NA_real_", iPosition:=9)
         Else
             clsNewDataFrameFunction.RemoveParameterByName(strSpecify2)
-            strSpecify2 = ""
         End If
         AddRemoveFlagParameter()
     End Sub
 
     Private Sub ucrInputSpecify3_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputSpecify3.ControlValueChanged, ucrChkSpecify3.ControlValueChanged
-        ' This ensures clsNewDataFrame has the correct parameters. Unlike in most functions, in our use of dplyr::mutate in this case, the parameter name is the selected variable.
-        ' Storing and then removing strSpecify3 as a parameter ensures dplyr::mutate does not keep old parameters when the selected variable is changed.
+        Dim strSpecify3 As String = ucrInputSpecify3.GetValue()
+
         If Not ucrInputSpecify3.IsEmpty AndAlso ucrChkSpecify3.Checked Then
-            clsNewDataFrameFunction.RemoveParameterByName(strSpecify3)
-            strSpecify3 = ucrInputSpecify3.GetValue()
             clsNewDataFrameFunction.AddParameter(strSpecify3, "NA_real_", iPosition:=10)
         Else
             clsNewDataFrameFunction.RemoveParameterByName(strSpecify3)
-            strSpecify3 = ""
         End If
         AddRemoveFlagParameter()
     End Sub
@@ -390,11 +373,10 @@ Public Class dlgSetupForDataEntry
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoNew.Checked Then
             ucrReceiverStation.SetMeAsReceiver()
-            clsAddKeyFunction.iCallType = 2
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             ucrBase.clsRsyntax.SetBaseRFunction(clsNewDataFrameFunction)
-        ElseIf rdoAddFlags.Checked Then
+        Else
             ucrReceiverAddFlagVariables.SetMeAsReceiver()
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight * 0.8)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.35)
