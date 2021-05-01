@@ -2527,7 +2527,7 @@ DataBook$set("public", "get_data_entry_data", function(data_name, station, date,
   self$get_data_objects(data_name)$get_data_entry_data(station = station, date = date, elements = elements, view_variables = view_variables, station_name = station_name, type = type, start_date = start_date, end_date = end_date)
 })
 
-DataBook$set("public", "save_data_entry_data", function(data_name, new_data, rows_changed, comments_list = list()) {
+DataBook$set("public", "save_data_entry_data", function(data_name, new_data, rows_changed, comments_list = list(), add_flags = FALSE, ...) {
   if(!missing(comments_list)){
   for (i in seq_along(comments_list)) {
     com <- comments_list[[i]]
@@ -2540,7 +2540,7 @@ DataBook$set("public", "save_data_entry_data", function(data_name, new_data, row
     self$add_new_comment(data_name = data_name, row = com$row, column = com$column, comment = com$comment)
   }
     }
-  self$get_data_objects(data_name)$save_data_entry_data(new_data = new_data, rows_changed = rows_changed)
+  self$get_data_objects(data_name)$save_data_entry_data(new_data = new_data, rows_changed = rows_changed, add_flags = add_flags)
 }
 )
 
