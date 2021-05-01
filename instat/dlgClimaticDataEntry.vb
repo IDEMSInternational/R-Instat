@@ -146,6 +146,8 @@ Public Class dlgClimaticDataEntry
         bSubdialogFirstLoad = True
         bResetSubdialogs = True
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
+        sdgClimaticDataEntryOptions.GetSetDefaultValue = 0
+        sdgClimaticDataEntryOptions.GetSetTransformValue = 0.1
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsSaveDataEntryFunction)
     End Sub
@@ -238,11 +240,11 @@ Public Class dlgClimaticDataEntry
                       strDateName:=strDateColumnName, lstElementsNames:=lstElementsColumnNames, lstViewVariablesNames:=lstVariablesColumnNames,
                                          strStationColumnName:=strStationColumnName,
                                            bDefaultValue:=sdgClimaticDataEntryOptions.UseDefault,
-                                           dDefaultValue:=sdgClimaticDataEntryOptions.GetDefaultValue,
+                                           dDefaultValue:=sdgClimaticDataEntryOptions.GetSetDefaultValue,
                                            bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
                                            bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
                                            bTransform:=sdgClimaticDataEntryOptions.Transform,
-                                           dTranformValue:=sdgClimaticDataEntryOptions.GetTransformValue,
+                                           dTranformValue:=sdgClimaticDataEntryOptions.GetSetTransformValue,
                                            MissingValueAsNA:=sdgClimaticDataEntryOptions.MissingValueAsNA,
                                            strEntryType:=ucrInputType.GetText, ucrNewBaseSelector:=ucrSelectorClimaticDataEntry, bReset:=bResetSubdialogs)
             End If
