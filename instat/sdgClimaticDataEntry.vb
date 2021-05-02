@@ -42,7 +42,9 @@ Public Class sdgClimaticDataEntry
     Private clsListFunction As RFunction
     Private dfEditData As DataFrame
     Private strDateName As String
+    Private strDateNameToBeRemoved As String
     Private lstElementsNames As List(Of String)
+    Private lstElementsNamesToBeRemoved As New List(Of String)
     Private lstViewVariablesNames As List(Of String)
     Private strStationColumnName As String
     Private dDefaultValue As Double
@@ -120,6 +122,7 @@ Public Class sdgClimaticDataEntry
     Public Function GetRowNamesChangedAsRVectorString() As String
         Return "c(" & String.Join(",", dctRowsChanged.Values.ToArray) & ")"
     End Function
+
     Public Function NRowsChanged() As Integer
         Return dctRowsChanged.Count
     End Function
@@ -404,8 +407,17 @@ Public Class sdgClimaticDataEntry
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
         Dim i As Integer
         If NRowsChanged() > 0 Then
-            clsEditDataFrameFunction.AddParameter(strDateName, "as.Date(" & GetRowsChangedAsRVectorString(strDateName, Chr(34)) & ")", iPosition:=1)
-            i = 2
+
+            clsEditDataFrameFunction.RemoveParameterByName(strDateNameToBeRemoved)
+            clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
+            For Each strElementName As String In lstElementsNamesToBeRemoved
+                clsEditDataFrameFunction.RemoveParameterByName(strElementName)
+            Next
+
+            strDateNameToBeRemoved = strDateName
+            lstElementsNamesToBeRemoved = lstElementsNames
+            clsEditDataFrameFunction.AddParameter(strDateName, "as.Date(" & GetRowsChangedAsRVectorString(strDateName, Chr(34)) & ")", iPosition:=i)
+            i = 1
             For Each strElementName As String In lstElementsNames
                 clsEditDataFrameFunction.AddParameter(strElementName, GetRowsChangedAsRVectorString(strElementName), iPosition:=i)
                 i = i + 1
@@ -413,7 +425,12 @@ Public Class sdgClimaticDataEntry
             clsSaveDataEntryFunction.AddParameter("rows_changed", GetRowNamesChangedAsRVectorString(), iPosition:=2)
             clsSaveDataEntryFunction.AddParameter("comments_list", clsRFunctionParameter:=clsListFunction, iPosition:=3)
         Else
+            clsEditDataFrameFunction.RemoveParameterByName(strDateNameToBeRemoved)
             clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
+            clsSaveDataEntryFunction.RemoveParameterByName("comments_list")
+            For Each strElementName As String In lstElementsNamesToBeRemoved
+                clsEditDataFrameFunction.RemoveParameterByName(strElementName)
+            Next
         End If
     End Sub
 
