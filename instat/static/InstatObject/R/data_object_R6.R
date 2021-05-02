@@ -3878,12 +3878,7 @@ DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed,
       if (paste0(i, "_fl") %in% colnames(changed_data)) {
         flag_col1 <- changed_data[, paste0(i, "_fl")]
         flag_col2 <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
-        for (j in seq_along(flag_col1)) {
-          if (!flag_col1[j] %in% c("edit", "add")) {
-            flag_col1[j] <- flag_col2[j]
-          }
-        }
-        changed_data[, paste0(i, "_fl")] <- flag_col1
+        changed_data[, paste0(i, "_fl")] <- factor(ifelse(flag_col1 %in% c("edit", "add"), as.character(flag_col1), as.character(flag_col2)), levels = c("data", "add", "edit"))
       } else {
         changed_data[, paste0(i, "_fl")] <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
       }
