@@ -415,8 +415,8 @@ Public Class sdgClimaticDataEntry
         If NRowsChanged() > 0 Then
             strDateNameToBeRemoved = strDateName
             lstElementsNamesToBeRemoved = lstElementsNames
-            clsEditDataFrameFunction.AddParameter(strDateName, "as.Date(" & GetRowsChangedAsRVectorString(strDateName, Chr(34)) & ")", iPosition:=i)
-            i = 1
+            clsEditDataFrameFunction.AddParameter(strDateName, "as.Date(" & GetRowsChangedAsRVectorString(strDateName, Chr(34)) & ")", iPosition:=1)
+            i = 2
             For Each strElementName As String In lstElementsNames
                 clsEditDataFrameFunction.AddParameter(strElementName, GetRowsChangedAsRVectorString(strElementName), iPosition:=i)
                 i = i + 1
