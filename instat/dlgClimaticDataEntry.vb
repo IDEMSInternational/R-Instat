@@ -135,7 +135,7 @@ Public Class dlgClimaticDataEntry
         clsEditDataFrameFunction.SetRCommand("data.frame")
         clsEditDataFrameFunction.SetAssignTo("new_data")
 
-        clsGetKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
+        clsGetKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_key")
 
         clsCommentsListFunction.SetRCommand("list")
 
