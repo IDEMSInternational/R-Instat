@@ -3886,6 +3886,10 @@ DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed,
   }
   cat("Values updated in:", length(rows_changed), "row(s)\n")
   self$set_data(changed_data)
+  # Added this line to fix the bug of having the variable names in the metadata changing to NA
+  # This affects factor columns only  - we need to find out why and how to solve it best
+  self$add_defaults_variables_metadata(self$get_column_names())
+  self$data_changed <- TRUE
 })
 
 DataSheet$set("public", "add_flag_fields", function(col_names) {
