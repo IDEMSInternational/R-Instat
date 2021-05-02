@@ -71,10 +71,13 @@ Public Class sdgClimaticDataEntryOptions
         End Get
     End Property
 
-    Public ReadOnly Property UseDefault As Boolean
+    Public Property GetSetDefaultCheckboxState As Boolean
         Get
             Return ucrChkDefaultValue.Checked
         End Get
+        Set(value As Boolean)
+            ucrChkDefaultValue.Checked = value
+        End Set
     End Property
 
     Public ReadOnly Property MissingValueAsNA As Boolean

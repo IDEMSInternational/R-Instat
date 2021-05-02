@@ -239,7 +239,7 @@ Public Class dlgClimaticDataEntry
                                          clsEditDataFrame:=clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction, clsNewCommentsList:=clsCommentsListFunction, clsNewList:=clsListFunction,
                       strDateName:=strDateColumnName, lstElementsNames:=lstElementsColumnNames, lstViewVariablesNames:=lstVariablesColumnNames,
                                          strStationColumnName:=strStationColumnName,
-                                           bDefaultValue:=sdgClimaticDataEntryOptions.UseDefault,
+                                           bDefaultValue:=sdgClimaticDataEntryOptions.GetSetDefaultCheckboxState,
                                            dDefaultValue:=sdgClimaticDataEntryOptions.GetSetDefaultValue,
                                            bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
                                            bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
@@ -306,6 +306,7 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
+        sdgClimaticDataEntryOptions.GetSetDefaultCheckboxState = False
         clsListFunction.ClearParameters()
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
         SetNumberRowsChangedText(0)
