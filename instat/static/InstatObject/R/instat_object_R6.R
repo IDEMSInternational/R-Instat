@@ -904,7 +904,7 @@ DataBook$set("public", "get_next_default_dataframe_name", function(prefix, inclu
 } 
 )
 
-DataBook$set("public", "delete_dataframes", function(data_names) {
+DataBook$set("public", "delete_dataframes", function(data_names, delete_graph_book = TRUE) {
   # TODO need a set or append
   for(name in data_names) {
     private$.data_sheets[[name]] <- NULL
@@ -921,7 +921,7 @@ DataBook$set("public", "delete_dataframes", function(data_names) {
     }
     if(!is.null(private$.last_graph) && private$.last_graph[1] %in% data_names) private$.last_graph <- NULL
   }
-  if (exists(".graph_data_book")) .graph_data_book$delete_dataframes(data_names = data_names)
+  if (delete_graph_book && exists(".graph_data_book")) .graph_data_book$delete_dataframes(data_names = data_names, delete_graph_book = FALSE)
 } 
 )
 
