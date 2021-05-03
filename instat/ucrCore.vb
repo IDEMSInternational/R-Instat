@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat
+Imports instat.Translations
 
 ''' <summary> 
 ''' The R-Instat user interface is implemented using Windows Forms. Windows Forms provides a set of 
@@ -544,13 +545,19 @@ Public Class ucrCore
     End Sub
 
 
-    ''' <summary> Set the Text property of the control(s) inside this control (should only be one). 
-    ''' Implemented different by each VB control. </summary>
+    ''' <summary> 
+    '''    Translates <paramref name="strNewText"/> to the current language and then sets 
+    '''    the `Text` property of the control to the translated text.<para>
+    '''    There should normally only be one associated control. Translations can be bi-directional 
+    '''    (e.g. from English to French or from French to English).
+    '''    If <paramref name="strNewText"/> is already in the current language, or if no translation 
+    '''    can be found, then sets the `Text` property of the control to <paramref name="strNewText"/>.
+    ''' </para></summary>
     ''' 
     ''' <param name="strNewText"> The parameter's String value.</param>
     Public Overridable Sub SetText(strNewText As String)
         For Each ctrTemp In Controls
-            ctrTemp.Text = strNewText
+            ctrTemp.Text = GetTranslation(strNewText)
         Next
     End Sub
 

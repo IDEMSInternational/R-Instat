@@ -338,6 +338,7 @@ Public Class frmEditor
             frmMain.tstatus.Text = "No data loaded"
             lblRowDisplay.Text = ""
         End If
+        autoTranslate(Me)
     End Sub
 
     'TODO discuss validation for cell editing
