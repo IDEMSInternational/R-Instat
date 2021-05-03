@@ -18,7 +18,7 @@ Imports instat.Translations
 Public Class dlgInsertColumn
     Private bFirstload As Boolean = True
     Private bReset As Boolean = True
-    Private clsInsertRowFunction, clsInsertColumnFunction As New RFunction
+    Private clsInsertRowFunction, clsInsertColumnFunction, clsAsNumericFunction As New RFunction
 
     Private Sub dlgInsertColumn_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -74,7 +74,7 @@ Public Class dlgInsertColumn
         ucrNudNumberOfColumns.SetRDefault(1)
         ucrNudNumberOfColumns.SetMinMax(1, Integer.MaxValue)
 
-        ucrInputDefaultValue.SetParameter(New RParameter("col_data", 5))
+        ucrInputDefaultValue.SetParameter(New RParameter("col_data", 0, bNewIncludeArgumentName:=False))
         ucrInputDefaultValue.AddQuotesIfUnrecognised = False
 
 
@@ -119,16 +119,20 @@ Public Class dlgInsertColumn
     Private Sub SetDefaults()
         clsInsertColumnFunction = New RFunction
         clsInsertRowFunction = New RFunction
+        clsAsNumericFunction = New RFunction
 
         ucrSelectorInsertColumns.Reset()
         ucrInputBeforeAfter.Reset()
         ucrInputDefaultValue.Reset()
         ucrInputPrefixForNewColumn.Reset()
 
+        clsAsNumericFunction.SetRCommand("as.numeric")
+        clsAsNumericFunction.AddParameter("col_data", "NA", bIncludeArgumentName:=False, iPosition:=0)
+
         clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsInsertColumnFunction.AddParameter("use_col_name_as_prefix", "TRUE", iPosition:=7)
         clsInsertColumnFunction.AddParameter("before", "FALSE", iPosition:=3)
-        clsInsertColumnFunction.AddParameter("col_data", "NA", iPosition:=5)
+        clsInsertColumnFunction.AddParameter("col_data", clsRFunctionParameter:=clsAsNumericFunction, iPosition:=5)
         clsInsertColumnFunction.AddParameter("col_name", "X", iPosition:=6)
 
         clsInsertRowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
@@ -144,8 +148,9 @@ Public Class dlgInsertColumn
         ucrNudStartRow.SetRCode(clsInsertRowFunction, bReset)
         ucrPnlBeforeAfter.SetRCode(clsInsertRowFunction, bReset)
 
+        ucrInputDefaultValue.SetRCode(clsAsNumericFunction, bReset)
+
         ucrNudNumberOfColumns.SetRCode(clsInsertColumnFunction, bReset)
-        ucrInputDefaultValue.SetRCode(clsInsertColumnFunction, bReset)
         ucrInputPrefixForNewColumn.SetRCode(clsInsertColumnFunction, bReset)
         ucrReceiverColumnsToInsert.SetRCode(clsInsertColumnFunction, bReset)
         ucrSelectorInsertColumns.SetRCode(clsInsertColumnFunction, bReset)
