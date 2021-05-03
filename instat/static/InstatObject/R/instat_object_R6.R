@@ -1183,7 +1183,7 @@ DataBook$set("public","get_keys", function(data_name, key_name) {
 
 # Note: This is a separate functionality to comments as defined in instat_comment.R
 # This is intended to be later integrated together.
-DataBook$set("public","add_new_comment", function(data_name, row, column = "", comment) {
+DataBook$set("public","add_new_comment", function(data_name, row = "", column = "", comment) {
   if (!self$has_key(data_name)) stop("A key must be defined in the data frame to add a comment. Use the Add Key dialog to define a key.")
   if (!".comment" %in% self$get_data_names()) {
     comment_df <- data.frame(sheet = character(0),
@@ -1197,10 +1197,14 @@ DataBook$set("public","add_new_comment", function(data_name, row, column = "", c
   }
   comment_df <- self$get_data_frame(".comment", use_current_filter = FALSE)
   curr_df <- self$get_data_frame(data_name, use_current_filter = FALSE)
+  if(row != ""){
   curr_row <- curr_df[row.names(curr_df) == row, ]
   key <- self$get_keys(data_name)[[1]]
   key_cols <- as.character(key)
   key_vals <- paste(sapply(curr_row[, key_cols], as.character), collapse = "__")
+  } else {
+    key_vals <- ""
+  }
   curr_comments <- comment_df[comment_df$sheet == data_name & comment_df$row == key_vals, ]
   new_id <- 1
   if (nrow(curr_comments) > 0) new_id <- max(curr_comments$id) + 1
@@ -2523,7 +2527,19 @@ DataBook$set("public", "get_data_entry_data", function(data_name, station, date,
   self$get_data_objects(data_name)$get_data_entry_data(station = station, date = date, elements = elements, view_variables = view_variables, station_name = station_name, type = type, start_date = start_date, end_date = end_date)
 })
 
-DataBook$set("public", "save_data_entry_data", function(data_name, new_data, rows_changed) {
+DataBook$set("public", "save_data_entry_data", function(data_name, new_data, rows_changed, comments_list = list()) {
+  if(!missing(comments_list)){
+  for (i in seq_along(comments_list)) {
+    com <- comments_list[[i]]
+    if(!("row" %in% names(com))){
+      com[["row"]] <- ""
+    }
+    if(!("column" %in% names(com))){
+      com[["column"]] <- ""
+    }
+    self$add_new_comment(data_name = data_name, row = com$row, column = com$column, comment = com$comment)
+  }
+    }
   self$get_data_objects(data_name)$save_data_entry_data(new_data = new_data, rows_changed = rows_changed)
 }
 )
@@ -2564,3 +2580,11 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
   }
   close(pb)
 })
+
+DataBook$set("public", "add_flag_fields", function(data_name, col_names, key_column_names) {
+  if (!self$has_key(data_name)) {
+    self$add_key(data_name, key_column_names)
+    }
+  self$get_data_objects(data_name)$add_flag_fields(col_names = col_names)
+}
+)

@@ -4,7 +4,7 @@ Imports instat.Translations
 
 Public Class dlgImportDataset
 
-    Private clsImportFixedWidthText, clsImportCSV, clsImportDAT, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As RFunction
+    Private clsImportFixedWidthText, clsImportCSV, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As RFunction
     Private clsGetExcelSheetNames As RFunction
     Private clsRangeOperator As ROperator
     ''' <summary>   Ensures that any file paths containing special characters (e.g. accents) are 
@@ -328,7 +328,6 @@ Public Class dlgImportDataset
         clsImportExcel = New RFunction
         clsImport = New RFunction
         clsReadRDS = New RFunction
-        clsImportDAT = New RFunction
         clsGetExcelSheetNames = New RFunction
         clsRangeOperator = New ROperator
         clsEnc2Native = New RFunction
@@ -358,13 +357,6 @@ Public Class dlgImportDataset
 
         clsImport.SetPackageName("rio")
         clsImport.SetRCommand("import")
-
-        clsImportDAT.SetPackageName("rio")
-        clsImportDAT.SetRCommand("import")
-        'Needed as rio currently doesn't support .DAT files
-        'https://github.com/leeper/rio/issues/155
-        'This only works if .DAT file is text based, this seems to be common usage
-        clsImportDAT.AddParameter("format", Chr(34) & "txt" & Chr(34))
 
         clsReadRDS.SetRCommand("readRDS")
         clsReadRDS.SetAssignTo("new_RDS")
@@ -400,6 +392,7 @@ Public Class dlgImportDataset
         clsGetFilesList.AddParameter("ignore.case", "TRUE", iPosition:=3)
 
         clsImportMultipleFiles.AddParameter("file", clsRFunctionParameter:=clsGetFilesList, iPosition:=0)
+        clsImportMultipleFiles.AddParameter("stringsAsFactors", "TRUE")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
@@ -465,7 +458,7 @@ Public Class dlgImportDataset
     'Loads the open dialog on load and click
     Public Sub GetFileFromOpenDialog()
         Using dlgOpen As New OpenFileDialog
-            dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html;*.dly|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html|DLY|*.dly|All files|*.*"
+            dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html;*.dly;*.dat|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html|DLY|*.dly|DAT|*.dat|All files|*.*"
             dlgOpen.Multiselect = False
             If bFromLibrary Then
                 dlgOpen.Title = "Import from Library"
@@ -513,21 +506,19 @@ Public Class dlgImportDataset
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportFixedWidthText, New RParameter("file", 0), iAdditionalPairNo:=1)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportCSV, New RParameter("file", 0), iAdditionalPairNo:=2)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportDAT, New RParameter("file", 0), iAdditionalPairNo:=3)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcel, New RParameter("file", 0), iAdditionalPairNo:=4)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsReadRDS, New RParameter("file", 0), iAdditionalPairNo:=5)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsEnc2Native, New RParameter("path", 0, False), iAdditionalPairNo:=6)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("file", 0), iAdditionalPairNo:=7)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsGetFilesList, New RParameter("path", 0), iAdditionalPairNo:=8)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcel, New RParameter("file", 0), iAdditionalPairNo:=3)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsReadRDS, New RParameter("file", 0), iAdditionalPairNo:=4)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsEnc2Native, New RParameter("path", 0, False), iAdditionalPairNo:=5)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("file", 0), iAdditionalPairNo:=6)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsGetFilesList, New RParameter("path", 0), iAdditionalPairNo:=7)
         ucrInputFilePath.SetRCode(clsImport, bReset)
 
         'Save control
         ucrSaveFile.AddAdditionalRCode(clsImportFixedWidthText, iAdditionalPairNo:=1)
         ucrSaveFile.AddAdditionalRCode(clsImportCSV, iAdditionalPairNo:=2)
-        ucrSaveFile.AddAdditionalRCode(clsImportDAT, iAdditionalPairNo:=3)
-        ucrSaveFile.AddAdditionalRCode(clsImportExcel, iAdditionalPairNo:=4)
-        ucrSaveFile.AddAdditionalRCode(clsImportExcelMulti, iAdditionalPairNo:=5)
-        ucrSaveFile.AddAdditionalRCode(clsImportMultipleFiles, iAdditionalPairNo:=6)
+        ucrSaveFile.AddAdditionalRCode(clsImportExcel, iAdditionalPairNo:=3)
+        ucrSaveFile.AddAdditionalRCode(clsImportExcelMulti, iAdditionalPairNo:=4)
+        ucrSaveFile.AddAdditionalRCode(clsImportMultipleFiles, iAdditionalPairNo:=5)
         ucrSaveFile.SetRCode(clsImport, bReset)
 
         'Used by both text and csv functions
@@ -547,6 +538,15 @@ Public Class dlgImportDataset
         ucrNudRowsToSkipCSV.SetRCode(clsImportCSV, bReset)
         ucrNudMaxRowsCSV.SetRCode(clsImportCSV, bReset)
         ucrChkMaxRowsCSV.SetRCode(clsImportCSV, bReset)
+
+        'multiple controls
+        ucrInputSeparatorCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("sep"), iAdditionalPairNo:=1)
+        ucrInputHeadersCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("header"), iAdditionalPairNo:=1)
+        ucrInputDecimalCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("dec"), iAdditionalPairNo:=1)
+        ucrInputEncodingCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("encoding"), iAdditionalPairNo:=1)
+        ucrChkStringsAsFactorsCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("stringsAsFactors"), iAdditionalPairNo:=1)
+        ucrNudRowsToSkipCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("skip"), iAdditionalPairNo:=1)
+        ucrNudMaxRowsCSV.AddAdditionalCodeParameterPair(clsImportMultipleFiles, New RParameter("nrows", strParamValue:=ucrNudMaxRowsCSV.Value), iAdditionalPairNo:=1)
 
         'RDS CONTROLS
         ucrChkImportChangesLogRDS.SetRCode(clsImportRDS, bReset)
@@ -616,9 +616,7 @@ Public Class dlgImportDataset
                 'get the name of the file (without extension), with any special characters removed
                 strFileName = GetCleanFileName(strFilePath)
                 strCurrentDirectory = Path.GetDirectoryName(strFilePath)
-                If Not bFromLibrary Then
-                    strFileExtension = Path.GetExtension(strFilePath).ToLower()
-                End If
+                strFileExtension = Path.GetExtension(strFilePath).ToLower()
             ElseIf Directory.Exists(strFilePath) AndAlso strNewFileExt <> "" Then
                 strCurrentDirectory = strFilePath
                 strFileExtension = strNewFileExt
@@ -655,12 +653,19 @@ Public Class dlgImportDataset
             clsGetFilesList.AddParameter("pattern", Chr(34) & "\\" & strFileExtension & "$" & Chr(34), iPosition:=1)
             If strFileExtension = ".dly" Then
                 clsImportMultipleFiles.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
+            ElseIf strFileExtension = ".dat" Then
+                clsImportMultipleFiles.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
             Else
                 clsImportMultipleFiles.AddParameter("format", Chr(34) & strFileExtension.Substring(1) & Chr(34), iPosition:=1)
             End If
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
+            If strFileExtension = ".txt" OrElse strFileExtension = ".csv" OrElse strFileExtension = ".dly" OrElse strFileExtension = ".dat" Then
+                grpCSV.Text = "Import Options"
+                grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
+                grpCSV.Show()
+            End If
         Else
-            'enable multiple files import for the following files only
+            'don't enable multiple files import for the following files only; .rds, .xlsx, .xls
             ucrChkMultipleFiles.SetVisible(Not (strFileExtension = ".rds" OrElse strFileExtension = ".xlsx" OrElse strFileExtension = ".xls"))
 
             'TODO This needs to be different when RDS is a data frame
@@ -670,9 +675,13 @@ Public Class dlgImportDataset
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
                 clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
                 grpRDS.Show()
-            ElseIf strFileExtension = ".txt" Then
+            ElseIf strFileExtension = ".txt" OrElse strFileExtension = ".dat" Then
                 strFileType = "TXT"
+
                 'add or change format parameter values
+                'Needed as rio currently doesn't support .DAT files
+                'This only works if .DAT file is text based, this seems to be common usage
+                'check https://github.com/leeper/rio/issues/155
                 clsImportCSV.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
                 'by default the textfiles will be imported using the function we use for csv
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
@@ -688,10 +697,6 @@ Public Class dlgImportDataset
                 grpCSV.Text = "Import CSV Options"
                 grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
                 grpCSV.Show()
-            ElseIf strFileExtension = ".dat" Then
-                strFileType = "DAT"
-                clsImportDAT.AddParameter("file", Chr(34) & strFilePathR & Chr(34))
-                ucrBase.clsRsyntax.SetBaseRFunction(clsImportDAT)
             ElseIf strFileExtension = ".xlsx" OrElse strFileExtension = ".xls" Then
                 strFileType = If(strFileExtension = ".xlsx", "XLSX", "XLS")
                 If clbSheets.CheckedItems.Count > 1 Then
@@ -986,10 +991,12 @@ Public Class dlgImportDataset
             clsImportExcel.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringExcel.GetText()))
         ElseIf strFileType = "CSV" Then
             clsImportCSV.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
+            clsImportMultipleFiles.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
         ElseIf strFileType = "TXT" Then
             'for separator we use the function used for csv
             If rdoSeparatortext.Checked Then
                 clsImportCSV.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
+                clsImportMultipleFiles.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
             Else
                 clsImportFixedWidthText.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringText.GetText()), iPosition:=2)
             End If
