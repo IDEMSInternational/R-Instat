@@ -128,7 +128,7 @@ Public Class dlgInsertColumn
         clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsInsertColumnFunction.AddParameter("use_col_name_as_prefix", "TRUE", iPosition:=7)
         clsInsertColumnFunction.AddParameter("before", "FALSE", iPosition:=3)
-        clsInsertColumnFunction.AddParameter("col_data", "NA_real_", iPosition:=5)
+        clsInsertColumnFunction.AddParameter("col_data", "NA", iPosition:=5)
         clsInsertColumnFunction.AddParameter("col_name", "X", iPosition:=6)
 
         clsInsertRowFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$insert_row_in_data")
