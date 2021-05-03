@@ -323,11 +323,11 @@ Public Class dlgSetupForDataEntry
 
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrInputSelectStation.ControlValueChanged
         Dim strStation As String = ucrReceiverStation.GetVariableNames(bWithQuotes:=False)
-        Dim strDaframeName As String = ucrInputSelectStation.GetText.Trim(Chr(34)).ToLower.Replace(" ", "_")
+        Dim strDaframeName As String = ucrInputSelectStation.GetText.Replace(" ", "_").ToLower
 
         If Not ucrReceiverStation.IsEmpty AndAlso Not ucrInputSelectStation.IsEmpty Then
             clsNewDataFrameFunction.AddParameter(strStation, "as.factor(" & Chr(34) & ucrInputSelectStation.GetValue() & Chr(34) & ")", iPosition:=0)
-            ucrSaveNewDFName.SetPrefix(strDaframeName)
+            ucrSaveNewDFName.SetPrefix(strDaframeName.Replace(Chr(39), ""))
         Else
             clsNewDataFrameFunction.RemoveParameterByName(strStation)
         End If
