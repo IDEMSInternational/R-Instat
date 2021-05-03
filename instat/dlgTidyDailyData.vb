@@ -38,9 +38,9 @@ Public Class dlgTidyDailyData
         End If
         SetRCodeforControls(bReset)
         bReset = False
-        autoTranslate(Me)
         TestOkEnabled()
         ColumnstoStackText()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -194,6 +194,7 @@ Public Class dlgTidyDailyData
         ElementGroupStationLocation()
         ColumnstoStackText()
         ChangeCurrentReceiver()
+        autoTranslate(Me)
     End Sub
 
     Private Sub UpdateParameters()
