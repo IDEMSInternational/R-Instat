@@ -74,7 +74,7 @@ Public Class dlgInsertColumn
         ucrNudNumberOfColumns.SetRDefault(1)
         ucrNudNumberOfColumns.SetMinMax(1, Integer.MaxValue)
 
-        ucrInputDefaultValue.SetParameter(New RParameter("col_data", 0, bNewIncludeArgumentName:=False))
+        ucrInputDefaultValue.SetParameter(New RParameter("x", 0))
         ucrInputDefaultValue.AddQuotesIfUnrecognised = False
 
 
@@ -127,7 +127,7 @@ Public Class dlgInsertColumn
         ucrInputPrefixForNewColumn.Reset()
 
         clsAsNumericFunction.SetRCommand("as.numeric")
-        clsAsNumericFunction.AddParameter("col_data", "NA", bIncludeArgumentName:=False, iPosition:=0)
+        clsAsNumericFunction.AddParameter("x", "NA", iPosition:=0)
 
         clsInsertColumnFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
         clsInsertColumnFunction.AddParameter("use_col_name_as_prefix", "TRUE", iPosition:=7)
