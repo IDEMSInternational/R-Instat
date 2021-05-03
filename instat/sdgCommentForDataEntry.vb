@@ -18,8 +18,6 @@ Imports instat.Translations
 Imports RDotNet
 Public Class sdgCommentForDataEntry
     Private strSelectedDataFrame As String = ""
-    Private strSelectedRow As String = ""
-    Private strSelectedColumn As String = ""
     Private ucrBaseSelector As ucrSelector
     Private bControlsInitialised As Boolean = False
     Private bClearComments As Boolean
@@ -71,21 +69,6 @@ Public Class sdgCommentForDataEntry
         ttcmdAddComment.SetToolTip(ucrInputComment.txtInput, "Add Comment button is enabled when the key exists in the data frame and the input comment is not empty.")
     End Sub
 
-    Private Sub SetDefaultPosition()
-        ucrInputRow.SetName(strSelectedRow)
-        If strSelectedColumn <> "" AndAlso strSelectedRow <> "" Then
-            ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
-            rdoCell.Checked = True
-        ElseIf strSelectedColumn <> "" AndAlso strSelectedRow = "" Then
-            ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
-            rdoColumn.Checked = True
-        ElseIf strSelectedColumn = "" AndAlso strSelectedRow <> "" Then
-            rdoRow.Checked = True
-        Else
-            rdoDataFrame.Checked = True
-        End If
-    End Sub
-
     Public Sub SetUpCommentsSubdialog(clsNewSaveDataEntry As RFunction, clsNewGetKey As RFunction,
                       clsNewCommentsList As RFunction, clsNewList As RFunction, strDataFrame As String,
                                       Optional strRow As String = "", Optional strColumn As String = "", Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
@@ -108,15 +91,23 @@ Public Class sdgCommentForDataEntry
             clsGetKeyFunction.RemoveParameterByName("data_name")
         End If
 
-        strSelectedRow = strRow
-        strSelectedColumn = strColumn
-
-        SetDefaultPosition()
-
         ucrSelectorAddComment.SetRCode(clsCommentsListFunction, bReset, bCloneIfNeeded:=True)
         ucrInputComment.SetRCode(clsCommentsListFunction, bReset, bCloneIfNeeded:=True)
         ucrInputRow.SetRCode(clsCommentsListFunction, bReset, bCloneIfNeeded:=True)
         ucrReceiverColumn.SetRCode(clsCommentsListFunction, bReset, bCloneIfNeeded:=True)
+
+        ucrInputRow.SetName(strRow)
+        If strColumn <> "" AndAlso strRow <> "" Then
+            ucrReceiverColumn.Add(strColumn, strSelectedDataFrame)
+            rdoCell.Checked = True
+        ElseIf strColumn <> "" AndAlso strRow = "" Then
+            ucrReceiverColumn.Add(strColumn, strSelectedDataFrame)
+            rdoColumn.Checked = True
+        ElseIf strColumn = "" AndAlso strRow <> "" Then
+            rdoRow.Checked = True
+        Else
+            rdoDataFrame.Checked = True
+        End If
 
         If bReset Then
             EnableDisableAddComment()
@@ -128,7 +119,11 @@ Public Class sdgCommentForDataEntry
         Dim expTemp As SymbolicExpression
         If clsGetKeyFunction IsNot Nothing Then
             expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKeyFunction.ToScript(), bSilent:=True)
-            cmdAddComment.Enabled = expTemp IsNot Nothing AndAlso Not ucrInputComment.IsEmpty
+            If expTemp IsNot Nothing AndAlso expTemp.AsCharacter(0) = "TRUE" AndAlso Not ucrInputComment.IsEmpty Then
+                cmdAddComment.Enabled = True
+            Else
+                cmdAddComment.Enabled = False
+            End If
         End If
     End Sub
 

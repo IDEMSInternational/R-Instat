@@ -42,13 +42,16 @@ Public Class sdgClimaticDataEntry
     Private clsListFunction As RFunction
     Private dfEditData As DataFrame
     Private strDateName As String
+    Private strDateNameToBeRemoved As String
     Private lstElementsNames As List(Of String)
+    Private lstElementsNamesToBeRemoved As New List(Of String)
     Private lstViewVariablesNames As List(Of String)
     Private strStationColumnName As String
-    Private strDefaultValue As Double
+    Private dDefaultValue As Double
     Private bNoDecimal As Boolean
     Private bAllowTrace As Boolean
     Private bTransform As Boolean
+    Private bDefaultValue As Boolean
     Private dTranformValue As Double
     Private bFirstLoad As Boolean = True
     'used to check if current options allow the grid to be editable
@@ -67,7 +70,9 @@ Public Class sdgClimaticDataEntry
     End Sub
 
     Private Sub InitialiseControls()
-        ucrChkAddFlagFieldData.SetText("Add flag field data")
+        ucrChkAddFlagFieldData.SetParameter(New RParameter("add_flags", 2))
+        ucrChkAddFlagFieldData.SetText("Add flag fields")
+        ucrChkAddFlagFieldData.SetRDefault("FALSE")
     End Sub
 
     ''' <summary>
@@ -117,6 +122,7 @@ Public Class sdgClimaticDataEntry
     Public Function GetRowNamesChangedAsRVectorString() As String
         Return "c(" & String.Join(",", dctRowsChanged.Values.ToArray) & ")"
     End Function
+
     Public Function NRowsChanged() As Integer
         Return dctRowsChanged.Count
     End Function
@@ -127,12 +133,11 @@ Public Class sdgClimaticDataEntry
     End Sub
 
     Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction,
-                     clsEditDataFrame As RFunction, clsNewGetKey As RFunction, clsNewCommentsList As RFunction, clsNewList As RFunction, strDateName As String, lstElementsNames As List(Of String),
-                     Optional lstViewVariablesNames As List(Of String) = Nothing,
-                     Optional strStationColumnName As String = "", Optional bDefaultValue As Boolean = False,
-                     Optional dDefaultValue As Double = 0, Optional bNoDecimal As Boolean = False,
-                     Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False,
-                     Optional dTranformValue As Double = 0, Optional MissingValueAsNA As Boolean = False,
+                     clsEditDataFrame As RFunction, clsNewGetKey As RFunction, clsNewCommentsList As RFunction, clsNewList As RFunction,
+                     strDateName As String, lstElementsNames As List(Of String), dTranformValue As Double, dDefaultValue As Double,
+                     Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "",
+                     Optional bDefaultValue As Boolean = False, Optional bNoDecimal As Boolean = False,
+                     Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False, Optional MissingValueAsNA As Boolean = False,
                      Optional strEntryType As String = "", Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
 
         Dim arrColumnHeaders As String()
@@ -154,12 +159,16 @@ Public Class sdgClimaticDataEntry
         Me.lstElementsNames = lstElementsNames
         Me.lstViewVariablesNames = lstViewVariablesNames
         Me.strStationColumnName = strStationColumnName
-        Me.strDefaultValue = strDefaultValue
+        Me.dDefaultValue = dDefaultValue
         Me.bNoDecimal = bNoDecimal
         Me.bAllowTrace = bAllowTrace
         Me.bTransform = bTransform
         Me.dTranformValue = dTranformValue
         Me.strEntryType = strEntryType
+        Me.bDefaultValue = bDefaultValue
+
+
+        ucrChkAddFlagFieldData.SetRCode(clsSaveDataEntryFunction, bReset, bCloneIfNeeded:=True)
 
         bAllowEdits = True
         cmdTransform.Text = "Transform"
@@ -204,7 +213,7 @@ Public Class sdgClimaticDataEntry
                     End If
                 End If
                 If bDefaultValue AndAlso Not bNonEditableCell Then
-                    dfValue = strDefaultValue
+                    dfValue = dDefaultValue
                 End If
 
                 grdCurrentWorkSheet.Item(row:=i, col:=j) = dfValue
@@ -383,17 +392,29 @@ Public Class sdgClimaticDataEntry
         End If
     End Sub
 
-    Private Sub cmdRefress_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
+    Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
         If MsgBox("All data entry will be lost. Are you sure you want to continue?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
             clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
-            Setup(dfEditData, strDataFrameName, clsSaveDataEntryFunction, clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction,
-                      clsNewCommentsList:=clsCommentsListFunction, clsNewList:=clsListFunction, strDateName, lstElementsNames, lstViewVariablesNames, strStationColumnName, bDefaultValue:=False, strDefaultValue, bNoDecimal, bAllowTrace)
+            Setup(dfEditData:=dfEditData, strDataFrameName:=strDataFrameName, clsSaveDataEntry:=clsSaveDataEntryFunction,
+                     clsEditDataFrame:=clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction, clsNewCommentsList:=clsCommentsListFunction,
+                     clsNewList:=clsListFunction,
+                     strDateName:=strDateName, lstElementsNames:=lstElementsNames, dTranformValue:=dTranformValue, dDefaultValue:=dDefaultValue,
+                      lstViewVariablesNames:=lstViewVariablesNames, strStationColumnName:=strStationColumnName,
+                      bDefaultValue:=bDefaultValue)
         End If
     End Sub
 
     Private Sub ucrSdgBaseButtons_ClickReturn(sender As Object, e As EventArgs) Handles ucrSdgBaseButtons.ClickReturn
         Dim i As Integer
+
+        clsEditDataFrameFunction.RemoveParameterByName(strDateNameToBeRemoved)
+        For Each strElementName As String In lstElementsNamesToBeRemoved
+            clsEditDataFrameFunction.RemoveParameterByName(strElementName)
+        Next
+
         If NRowsChanged() > 0 Then
+            strDateNameToBeRemoved = strDateName
+            lstElementsNamesToBeRemoved = lstElementsNames
             clsEditDataFrameFunction.AddParameter(strDateName, "as.Date(" & GetRowsChangedAsRVectorString(strDateName, Chr(34)) & ")", iPosition:=1)
             i = 2
             For Each strElementName As String In lstElementsNames
@@ -404,6 +425,7 @@ Public Class sdgClimaticDataEntry
             clsSaveDataEntryFunction.AddParameter("comments_list", clsRFunctionParameter:=clsListFunction, iPosition:=3)
         Else
             clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
+            clsSaveDataEntryFunction.RemoveParameterByName("comments_list")
         End If
     End Sub
 
