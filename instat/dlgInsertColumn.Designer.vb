@@ -63,11 +63,11 @@ Partial Class dlgInsertColumn
         Me.ucrInputPrefixForNewColumn = New instat.ucrInputTextBox()
         Me.ucrNudNumberOfColumns = New instat.ucrNud()
         Me.ucrPnlColumnsOrRows = New instat.UcrPanel()
-        Me.ucrInputDefaultValue = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrNudNumberOfRows = New instat.ucrNud()
         Me.ucrNudStartRow = New instat.ucrNud()
         Me.ttColumnDefaultValue = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrInputDefaultValue = New instat.ucrInputComboBox()
         Me.grpInsert.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -237,14 +237,6 @@ Partial Class dlgInsertColumn
         resources.ApplyResources(Me.ucrPnlColumnsOrRows, "ucrPnlColumnsOrRows")
         Me.ucrPnlColumnsOrRows.Name = "ucrPnlColumnsOrRows"
         '
-        'ucrInputDefaultValue
-        '
-        Me.ucrInputDefaultValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputDefaultValue.IsMultiline = False
-        Me.ucrInputDefaultValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDefaultValue, "ucrInputDefaultValue")
-        Me.ucrInputDefaultValue.Name = "ucrInputDefaultValue"
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -270,10 +262,19 @@ Partial Class dlgInsertColumn
         Me.ucrNudStartRow.Name = "ucrNudStartRow"
         Me.ucrNudStartRow.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'ucrInputDefaultValue
+        '
+        Me.ucrInputDefaultValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputDefaultValue.GetSetSelectedIndex = -1
+        Me.ucrInputDefaultValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDefaultValue, "ucrInputDefaultValue")
+        Me.ucrInputDefaultValue.Name = "ucrInputDefaultValue"
+        '
         'dlgInsertColumn
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputDefaultValue)
         Me.Controls.Add(Me.lblInputColumnPrefix)
         Me.Controls.Add(Me.ucrInputPrefixForNewColumn)
         Me.Controls.Add(Me.ucrNudNumberOfColumns)
@@ -281,7 +282,6 @@ Partial Class dlgInsertColumn
         Me.Controls.Add(Me.rdoInsertColumns)
         Me.Controls.Add(Me.ucrPnlColumnsOrRows)
         Me.Controls.Add(Me.grpOptions)
-        Me.Controls.Add(Me.ucrInputDefaultValue)
         Me.Controls.Add(Me.lblDefaultValue)
         Me.Controls.Add(Me.lblNumberOfColumnsToInsert)
         Me.Controls.Add(Me.lblStartPos)
@@ -312,7 +312,6 @@ Partial Class dlgInsertColumn
     Friend WithEvents ucrReceiverColumnsToInsert As ucrReceiverSingle
     Friend WithEvents lblNumberOfColumnsToInsert As Label
     Friend WithEvents lblDefaultValue As Label
-    Friend WithEvents ucrInputDefaultValue As ucrInputTextBox
     Friend WithEvents grpOptions As GroupBox
     Friend WithEvents rdoAfter As RadioButton
     Friend WithEvents rdoBefore As RadioButton
@@ -330,4 +329,5 @@ Partial Class dlgInsertColumn
     Friend WithEvents lblColumn As Label
     Friend WithEvents ucrSelectorInsertColumns As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ttColumnDefaultValue As ToolTip
+    Friend WithEvents ucrInputDefaultValue As ucrInputComboBox
 End Class
