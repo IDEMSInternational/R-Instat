@@ -135,7 +135,7 @@ Public Class dlgClimaticDataEntry
         clsEditDataFrameFunction.SetRCommand("data.frame")
         clsEditDataFrameFunction.SetAssignTo("new_data")
 
-        clsGetKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
+        clsGetKeyFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$has_key")
 
         clsCommentsListFunction.SetRCommand("list")
 
@@ -146,6 +146,8 @@ Public Class dlgClimaticDataEntry
         bSubdialogFirstLoad = True
         bResetSubdialogs = True
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
+        sdgClimaticDataEntryOptions.GetSetDefaultValue = 0
+        sdgClimaticDataEntryOptions.GetSetTransformValue = 0.1
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsSaveDataEntryFunction)
     End Sub
@@ -237,12 +239,12 @@ Public Class dlgClimaticDataEntry
                                          clsEditDataFrame:=clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction, clsNewCommentsList:=clsCommentsListFunction, clsNewList:=clsListFunction,
                       strDateName:=strDateColumnName, lstElementsNames:=lstElementsColumnNames, lstViewVariablesNames:=lstVariablesColumnNames,
                                          strStationColumnName:=strStationColumnName,
-                                           bDefaultValue:=sdgClimaticDataEntryOptions.UseDefault,
-                                           dDefaultValue:=sdgClimaticDataEntryOptions.GetDefaultValue,
+                                           bDefaultValue:=sdgClimaticDataEntryOptions.GetSetDefaultCheckboxState,
+                                           dDefaultValue:=sdgClimaticDataEntryOptions.GetSetDefaultValue,
                                            bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
                                            bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
                                            bTransform:=sdgClimaticDataEntryOptions.Transform,
-                                           dTranformValue:=sdgClimaticDataEntryOptions.GetTransformValue,
+                                           dTranformValue:=sdgClimaticDataEntryOptions.GetSetTransformValue,
                                            MissingValueAsNA:=sdgClimaticDataEntryOptions.MissingValueAsNA,
                                            strEntryType:=ucrInputType.GetText, ucrNewBaseSelector:=ucrSelectorClimaticDataEntry, bReset:=bResetSubdialogs)
             End If
@@ -267,8 +269,13 @@ Public Class dlgClimaticDataEntry
         Return dfTemp
     End Function
 
-    Private Sub ucrSelectorClimaticDataEntry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticDataEntry.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverDate.ControlValueChanged, ucrReceiverElements.ControlValueChanged, ucrReceiverViewVariables.ControlValueChanged, ucrInputType.ControlValueChanged, ucrStartDate.ControlValueChanged, ucrEndDate.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+    Private Sub ucrChangedControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverDate.ControlValueChanged, ucrReceiverElements.ControlValueChanged, ucrReceiverViewVariables.ControlValueChanged, ucrInputType.ControlValueChanged, ucrStartDate.ControlValueChanged, ucrEndDate.ControlValueChanged, ucrPnlOptions.ControlValueChanged
         bChange = True
+    End Sub
+
+    Private Sub ucrSelectorClimaticDataEntry_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorClimaticDataEntry.ControlValueChanged
+        bChange = True
+        SetNumberRowsChangedText(0)
     End Sub
 
     Private Sub SetDateOptions()
@@ -304,6 +311,7 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
+        sdgClimaticDataEntryOptions.GetSetDefaultCheckboxState = False
         clsListFunction.ClearParameters()
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
         SetNumberRowsChangedText(0)

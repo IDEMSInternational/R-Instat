@@ -62,8 +62,6 @@ Public Class sdgClimaticDataEntryOptions
             ucrChkAllowTrace.Checked = False
             ucrChkTransform.Checked = False
             ucrChkNoDecimal.Checked = False
-            ucrInputDefaultValue.SetText(0)
-            ucrInputTransform.SetText(0.1)
         End If
     End Sub
 
@@ -73,10 +71,13 @@ Public Class sdgClimaticDataEntryOptions
         End Get
     End Property
 
-    Public ReadOnly Property UseDefault As Boolean
+    Public Property GetSetDefaultCheckboxState As Boolean
         Get
             Return ucrChkDefaultValue.Checked
         End Get
+        Set(value As Boolean)
+            ucrChkDefaultValue.Checked = value
+        End Set
     End Property
 
     Public ReadOnly Property MissingValueAsNA As Boolean
@@ -85,7 +86,7 @@ Public Class sdgClimaticDataEntryOptions
         End Get
     End Property
 
-    Public ReadOnly Property GetDefaultValue As Double
+    Public Property GetSetDefaultValue As Double
         Get
             Dim dTemp As Double
             If Not Double.TryParse(ucrInputDefaultValue.GetValue, dTemp) Then
@@ -93,6 +94,9 @@ Public Class sdgClimaticDataEntryOptions
             End If
             Return dTemp
         End Get
+        Set(value As Double)
+            ucrInputDefaultValue.SetText(value)
+        End Set
     End Property
 
     Public ReadOnly Property AllowTrace As Boolean
@@ -107,7 +111,7 @@ Public Class sdgClimaticDataEntryOptions
         End Get
     End Property
 
-    Public ReadOnly Property GetTransformValue As Double
+    Public Property GetSetTransformValue As Double
         Get
             Dim dTemp As Double
             If Not Double.TryParse(ucrInputTransform.GetValue, dTemp) Then
@@ -115,6 +119,9 @@ Public Class sdgClimaticDataEntryOptions
             End If
             Return dTemp
         End Get
+        Set(value As Double)
+            ucrInputTransform.SetText(value)
+        End Set
     End Property
 
     Private Sub ucrChkMissingValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMissingValues.ControlValueChanged
