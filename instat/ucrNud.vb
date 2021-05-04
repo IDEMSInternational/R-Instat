@@ -163,13 +163,17 @@ Public Class ucrNud
             'If no value reset to a default value
             Value = nudUpDown.Minimum
         Else
-            If Decimal.TryParse(objTemp.ToString, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
-                Value = dNewValue
-            Else
-                MsgBox("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
+            If Not IsNothing(TryCast(objTemp, ROperator)) Then
+                'Remove spaces between characters 
+                objTemp = TryCast(objTemp, ROperator).ToScript.Replace(" ", "")
             End If
-        End If
-        'Ensures Text is set correctly if it has been cleared by user.
-        nudUpDown.Text = Value
+            If Decimal.TryParse(objTemp.ToString, dNewValue) AndAlso dNewValue >= nudUpDown.Minimum AndAlso dNewValue <= nudUpDown.Maximum Then
+                    Value = dNewValue
+                Else
+                    MsgBox("Developer error: The value given cannot be converted to a decimal or is outside the range of the control. Value will be unchanged.")
+                End If
+            End If
+            'Ensures Text is set correctly if it has been cleared by user.
+            nudUpDown.Text = Value
     End Sub
 End Class
