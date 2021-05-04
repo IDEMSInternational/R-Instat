@@ -24,6 +24,8 @@ Partial Class dlgLocatingPointsInShapeFile
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgLocatingPointsInShapeFile))
         Me.grpShapeaFile = New System.Windows.Forms.GroupBox()
+        Me.lblShapeFilePolygon = New System.Windows.Forms.Label()
+        Me.UcrReceiverShapeFilePolygon = New instat.ucrReceiverSingle()
         Me.lblGeometry = New System.Windows.Forms.Label()
         Me.grpStationFile = New System.Windows.Forms.GroupBox()
         Me.lblLongitude = New System.Windows.Forms.Label()
@@ -36,16 +38,33 @@ Partial Class dlgLocatingPointsInShapeFile
         Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
         Me.ucrSelectorStationFile = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSaveNewColumnName = New instat.ucrSave()
+        Me.UcrSavePolygonName = New instat.ucrSave()
         Me.grpShapeaFile.SuspendLayout()
         Me.grpStationFile.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpShapeaFile
         '
+        Me.grpShapeaFile.Controls.Add(Me.lblShapeFilePolygon)
+        Me.grpShapeaFile.Controls.Add(Me.UcrReceiverShapeFilePolygon)
         Me.grpShapeaFile.Controls.Add(Me.lblGeometry)
         resources.ApplyResources(Me.grpShapeaFile, "grpShapeaFile")
         Me.grpShapeaFile.Name = "grpShapeaFile"
         Me.grpShapeaFile.TabStop = False
+        '
+        'lblShapeFilePolygon
+        '
+        resources.ApplyResources(Me.lblShapeFilePolygon, "lblShapeFilePolygon")
+        Me.lblShapeFilePolygon.Name = "lblShapeFilePolygon"
+        '
+        'UcrReceiverShapeFilePolygon
+        '
+        Me.UcrReceiverShapeFilePolygon.frmParent = Me
+        resources.ApplyResources(Me.UcrReceiverShapeFilePolygon, "UcrReceiverShapeFilePolygon")
+        Me.UcrReceiverShapeFilePolygon.Name = "UcrReceiverShapeFilePolygon"
+        Me.UcrReceiverShapeFilePolygon.Selector = Nothing
+        Me.UcrReceiverShapeFilePolygon.strNcFilePath = ""
+        Me.UcrReceiverShapeFilePolygon.ucrSelector = Nothing
         '
         'lblGeometry
         '
@@ -129,10 +148,16 @@ Partial Class dlgLocatingPointsInShapeFile
         resources.ApplyResources(Me.ucrSaveNewColumnName, "ucrSaveNewColumnName")
         Me.ucrSaveNewColumnName.Name = "ucrSaveNewColumnName"
         '
+        'UcrSavePolygonName
+        '
+        resources.ApplyResources(Me.UcrSavePolygonName, "UcrSavePolygonName")
+        Me.UcrSavePolygonName.Name = "UcrSavePolygonName"
+        '
         'dlgLocatingPointsInShapeFile
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.UcrSavePolygonName)
         Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrReceiverGeometry)
@@ -167,4 +192,7 @@ Partial Class dlgLocatingPointsInShapeFile
     Friend WithEvents ucrSaveNewColumnName As ucrSave
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrChkOmitMissing As ucrCheck
+    Friend WithEvents lblShapeFilePolygon As Label
+    Friend WithEvents UcrReceiverShapeFilePolygon As ucrReceiverSingle
+    Friend WithEvents UcrSavePolygonName As ucrSave
 End Class
