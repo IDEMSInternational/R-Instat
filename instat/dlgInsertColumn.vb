@@ -75,7 +75,7 @@ Public Class dlgInsertColumn
         ucrNudNumberOfColumns.SetMinMax(1, Integer.MaxValue)
 
         ucrInputDefaultValue.SetParameter(New RParameter("col_data", 5))
-        ucrInputDefaultValue.SetItems({"NA", "NA_real_"}, bAddConditions:=True, bAddQuotes:=False)
+        ucrInputDefaultValue.SetItems({"NA", "NA_real_", " NA_integer_", " NA_complex_", "NA_character_"})
         ucrInputDefaultValue.AddQuotesIfUnrecognised = False
         ucrInputDefaultValue.bAllowNonConditionValues = True
 
