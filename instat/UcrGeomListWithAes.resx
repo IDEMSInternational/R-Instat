@@ -448,13 +448,13 @@
     <value>7, 159</value>
   </data>
   <data name="lblGgParam6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 13</value>
+    <value>39, 13</value>
   </data>
   <data name="lblGgParam6.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="lblGgParam6.Text" xml:space="preserve">
-    <value>label</value>
+    <value>Label2</value>
   </data>
   <data name="&gt;&gt;lblGgParam6.Name" xml:space="preserve">
     <value>lblGgParam6</value>

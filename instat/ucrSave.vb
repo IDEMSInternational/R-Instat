@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat
+Imports instat.Translations
+
 ''' <summary>   This control allows the user to specify how an object should be saved. 
 '''             <para>
 '''             This control can save the following types of objects: 'column', 'dataframe', 
@@ -168,19 +170,25 @@ Public Class ucrSave
         LabelOrCheckboxSettings()
         UpdateRCode()
     End Sub
+
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets the label to <paramref name="strText"/> and sets the child 
-    '''             controls to the correct enabled/visible state depending on this control's 
-    '''             current state.
-    '''             If the new label overlaps with the combo box then reduces the width of the 
-    '''             combo box and text box.
-    ''' </summary>
-    '''
+    ''' <summary>   
+    '''    Translates <paramref name="strText"/> to the current language and then sets the `Text` 
+    '''    property of the label to the translated text. Also sets the child controls to the correct 
+    '''    enabled/visible state depending on this control's current state. If the new label 
+    '''    overlaps with the combo box then reduces the width of the combo box and text box.
+    '''    <para>
+    '''    Translations can be bi-directional (e.g. from English to French or from French to 
+    '''    English).
+    '''    If <paramref name="strText"/> is already in the current language, or if no translation
+    '''    can be found, then sets the `Text` property of the label to <paramref name="strText"/>.
+    ''' </para></summary>
+    ''' 
     ''' <param name="strText">  The label text. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub SetLabelText(strText As String)
         Dim iTemp As Integer
-        lblSaveText.Text = strText
+        lblSaveText.Text = GetTranslation(strText)
         bShowLabel = True
         bShowCheckBox = False
         LabelOrCheckboxSettings()
@@ -191,6 +199,7 @@ Public Class ucrSave
             ucrInputTextSave.Width = ucrInputComboSave.Width
         End If
     End Sub
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the check box text to <paramref name="strText"/> and sets the child
     '''             controls to the correct enabled/visible state depending on this control's

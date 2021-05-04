@@ -447,6 +447,7 @@ Public Class dlgFitModel
                 lblType.ForeColor = SystemColors.ControlText
             End If
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub GraphAssignTo()

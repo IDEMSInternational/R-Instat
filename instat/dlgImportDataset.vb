@@ -738,6 +738,8 @@ Public Class dlgImportDataset
 
         RefreshFilePreview()
         RefreshFrameView()
+
+        autoTranslate(Me)
     End Sub
 
     Public Sub RefreshFilePreview(Optional strNewFileType As String = "")

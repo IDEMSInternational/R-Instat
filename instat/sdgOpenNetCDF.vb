@@ -252,7 +252,7 @@ Public Class sdgOpenNetCDF
                                 dtpMaxT.Value = dtMax
                             Catch ex As Exception
                                 bShowDimension = False
-                                lstAxesLabels(i).Text = "Could not read time dimension dates from file."
+                                lstAxesLabels(i).Text = GetTranslation("Could not read time dimension dates from file.")
                                 lstAxesDetected(i) = False
                             End Try
                             If bShowDimension Then
@@ -293,9 +293,9 @@ Public Class sdgOpenNetCDF
                         lstFunctions(i).AddParameter("max", dcmMax, bIncludeArgumentName:=False)
                         clsBoundaryListFunction.AddParameter(lstDimNames(iIndex), clsRFunctionParameter:=lstFunctions(i))
                         If lstDimNames(iIndex).ToLower = "x" Then
-                            lstAxesLabels(i).Text = lstDimNames(iIndex) & " (lon) " & ":"
+                            lstAxesLabels(i).Text = lstDimNames(iIndex) & GetTranslation(" (lon) ") & ":"
                         ElseIf lstDimNames(iIndex).ToLower = "y" Then
-                            lstAxesLabels(i).Text = lstDimNames(iIndex) & " (lat) " & ":"
+                            lstAxesLabels(i).Text = lstDimNames(iIndex) & GetTranslation(" (lat) ") & ":"
                         Else
                             lstAxesLabels(i).Text = lstDimNames(iIndex) & ":"
                         End If

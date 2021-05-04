@@ -15,6 +15,8 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.IO
+Imports instat.Translations
+
 Public Class clsRecentFiles
     Public lstRecentDialogs As New List(Of Form)
     Private strRecentFilesPath As String
@@ -142,7 +144,7 @@ Public Class clsRecentFiles
         'then add and display menu items (in reverse order) for dialogs
         For icounter As Integer = lstRecentDialogs.Count - 1 To 0 Step -1
             'creates new toolstripitem, displaying name of the dialog
-            Dim clsItem As New ToolStripMenuItem(lstRecentDialogs(icounter).Text)
+            Dim clsItem As New ToolStripMenuItem(GetTranslation(lstRecentDialogs(icounter).Text))
             'sets the tag
             clsItem.Tag = "Last"
             AddHandler clsItem.Click, AddressOf OnMnuLastRecentDialog_Click
@@ -214,7 +216,7 @@ Public Class clsRecentFiles
                 'if recent files are more than 5 then just the "more" link label and exit loop 
                 If lstRecentOpenedFiles.Count - iCounter >= 5 Then
                     linkMenuItem = New LinkLabel
-                    linkMenuItem.Text = "More ..."
+                    linkMenuItem.Text = GetTranslation("More ...")
                     linkMenuItem.Tag = ""
                     ucrDataViewWindow.InsertRecentFileMenuItems(linkMenuItem)
                     AddHandler linkMenuItem.Click, AddressOf OnMnuRecentOpenedFile_Click
@@ -275,7 +277,9 @@ Public Class clsRecentFiles
     ''' <param name="e"></param>
     Private Sub OnMnuLastRecentDialog_Click(ByVal sender As Object, ByVal e As EventArgs)
         For Each dfTemp As Form In lstRecentDialogs
-            If dfTemp.Text = DirectCast(sender, ToolStripMenuItem).Text Then
+            'Note: Translate both sides of the comparison in case the 2 sides are in different languages.
+            '      This is possible if the language was recently changed.
+            If GetTranslation(dfTemp.Text) = GetTranslation(DirectCast(sender, ToolStripMenuItem).Text) Then
                 dfTemp.ShowDialog()
                 Exit Sub
             End If

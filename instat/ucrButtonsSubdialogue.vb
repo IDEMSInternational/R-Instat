@@ -31,10 +31,6 @@ Public Class ucrButtonsSubdialogue
         Me.ParentForm.Close()
     End Sub
 
-    Private Sub ucrButtonsSubdialogue_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        translateEach(Controls, Me)
-    End Sub
-
     Private Sub HelpContent()
         ' (1) Use HelpNDoc's Help Context number. Not dependent on HelpNDoc.
         If iHelpTopicID > 0 Then
