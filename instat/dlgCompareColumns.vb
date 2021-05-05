@@ -51,10 +51,6 @@ Public Class dlgCompareColumns
         ucrPnlOptions.AddRadioButton(rdoByRow)
         ucrPnlOptions.AddRadioButton(rdoByValue)
 
-        'ucrPnlOptions.AddParameterIsROperatorCondition(rdoByRow, "==")
-        'ucrPnlOptions.AddParameterIsROperatorCondition(rdoByRow, "<=")
-        'ucrPnlOptions.AddFunctionNamesCondition(rdoByValue, {"compare_columns"})
-
         ucrPnlOptions.AddToLinkedControls({ucrChkUnique, ucrChkSort, ucrChkFirstNotSecond}, {rdoByValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkFirstNotSecond.SetLinkedDisplayControl(grpComparisions)
 
@@ -132,7 +128,6 @@ Public Class dlgCompareColumns
         clsDummyOperator = New ROperator
 
         ucrBase.clsRsyntax.ClearCodes()
-        '  ucrInputTolerance.SetText("0")
         rdoByRow.Checked = True
 
         ucrSelectorCompareColumns.Reset()
@@ -169,8 +164,6 @@ Public Class dlgCompareColumns
         ucrReceiverSecond.AddAdditionalCodeParameterPair(clsYinXOperator, New RParameter("left", iNewPosition:=0), iAdditionalPairNo:=1)
         ucrReceiverSecond.AddAdditionalCodeParameterPair(clsAsCharacterFunctionTwo, New RParameter("second", bNewIncludeArgumentName:=False, iNewPosition:=1), iAdditionalPairNo:=2)
         ucrReceiverSecond.AddAdditionalCodeParameterPair(clsSubtractOperator, New RParameter("second", bNewIncludeArgumentName:=False, iNewPosition:=1), iAdditionalPairNo:=3)
-
-        ' ucrPnlOptions.SetRCode(, bReset)
 
         ucrReceiverFirst.SetRCode(clsCompareColumns, bReset)
         ucrReceiverSecond.SetRCode(clsCompareColumns, bReset)
@@ -213,7 +206,6 @@ Public Class dlgCompareColumns
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoByValue.Checked Then
-            'grpComparisions.Visible = True
             ucrInputTolerance.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsCompareColumns)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
@@ -222,7 +214,6 @@ Public Class dlgCompareColumns
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
             ucrSaveLogical.Location = New Point(ucrSaveLogical.Location.X, iBaseMaxY / 1.07)
         ElseIf rdoByRow.Checked Then
-            'grpComparisions.Visible = False
             ucrBase.clsRsyntax.SetBaseROperator(clsDummyOperator)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsYinXOperator)
             ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=1)
@@ -234,7 +225,6 @@ Public Class dlgCompareColumns
     End Sub
 
     Private Sub CheckDatatype()
-        'If bRcodeSet Then
         If Not ucrReceiverSecond.IsEmpty AndAlso Not ucrReceiverFirst.IsEmpty Then
             If {"integer", "numeric"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"integer", "numeric"}.Contains(ucrReceiverSecond.strCurrDataType) Then
                 If rdoByRow.Checked Then
@@ -243,7 +233,6 @@ Public Class dlgCompareColumns
                     clsLessorEqualToOperator.AddParameter("tol", "0", iPosition:=1)
                     clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsLessorEqualToOperator, iPosition:=1)
                     clsDummyOperator = clsLessorEqualToOperator
-                    'ucrBase.clsRsyntax.SetBaseROperator(clsLessorEqualToOperator)
                 End If
             ElseIf ucrReceiverFirst.strCurrDataType = "date" AndAlso ucrReceiverSecond.strCurrDataType = "date" Then
                 If rdoByRow.Checked Then
@@ -251,7 +240,6 @@ Public Class dlgCompareColumns
                     clsLessorEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsAbsoluteFunction, iPosition:=0)
                     clsLessorEqualToOperator.AddParameter("tol", "0", iPosition:=1)
                     clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsLessorEqualToOperator, iPosition:=1)
-                    'ucrBase.clsRsyntax.SetBaseROperator(clsLessorEqualToOperator)
                     clsDummyOperator = clsLessorEqualToOperator
                 End If
             ElseIf {"factor", "character"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"factor", "character"}.Contains(ucrReceiverSecond.strCurrDataType) Then
@@ -272,12 +260,8 @@ Public Class dlgCompareColumns
                 End If
             Else
                 MsgBox("Receivers must have the same data type, OK will not be enabled")
-                'ucrInputTolerance.Visible = False
             End If
         End If
-        'Else
-        'ucrInputTolerance.Visible = False
-        'End If
         TestOkEnabled()
     End Sub
 
