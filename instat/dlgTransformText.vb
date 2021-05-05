@@ -116,16 +116,26 @@ Public Class dlgTransformText
         ucrPnlPad.SetRDefault(Chr(34) & "left" & Chr(34))
 
         'rdoWords
+        ucrNudFirstWord.SetParameter(New RParameter("start", iNewPosition:=1))
+        ucrNudFirstWord.bCanUpdateRCode = False
         ucrNudFirstWord.SetMinMax(Integer.MinValue, Integer.MaxValue)
         ucrNudFirstWord.SetLinkedDisplayControl(lblFirstWord)
 
+        ucrNudLastWord.SetParameter(New RParameter("end", iNewPosition:=1))
+        ucrNudLastWord.bCanUpdateRCode = False
         ucrNudLastWord.SetMinMax(Integer.MinValue, Integer.MaxValue)
         ucrNudLastWord.SetLinkedDisplayControl(lblLastWord)
 
+        ucrReceiverFirstWord.SetParameter(New RParameter("start", iNewPosition:=1))
+        ucrReceiverFirstWord.bCanUpdateRCode = False
+        ucrReceiverFirstWord.SetParameterIsRFunction()
         ucrReceiverFirstWord.Selector = ucrSelectorForTransformText
         ucrReceiverFirstWord.bUseFilteredData = False
         ucrReceiverFirstWord.SetIncludedDataTypes({"numeric"})
 
+        ucrReceiverLastWord.SetParameter(New RParameter("end", iNewPosition:=2))
+        ucrReceiverLastWord.bCanUpdateRCode = False
+        ucrReceiverLastWord.SetParameterIsRFunction()
         ucrReceiverLastWord.Selector = ucrSelectorForTransformText
         ucrReceiverLastWord.bUseFilteredData = False
         ucrReceiverLastWord.SetIncludedDataTypes({"numeric"})
@@ -376,6 +386,11 @@ Public Class dlgTransformText
 
         ucrChkFirstOr.SetRCode(clsWordsFunction, bReset)
         ucrChkLastOr.SetRCode(clsWordsFunction, bReset)
+
+        ucrNudFirstWord.SetRCode(clsWordsFunction, bReset)
+        ucrNudLastWord.SetRCode(clsWordsFunction, bReset)
+        ucrReceiverFirstWord.SetRCode(clsWordsFunction, bReset)
+        ucrReceiverLastWord.SetRCode(clsWordsFunction, bReset)
 
         ucrNewColName.AddAdditionalRCode(clsLengthFunction, iAdditionalPairNo:=1)
         ucrNewColName.AddAdditionalRCode(clsPadFunction, iAdditionalPairNo:=2)

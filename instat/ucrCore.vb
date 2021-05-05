@@ -232,6 +232,9 @@ Public Class ucrCore
     ''' (Currently only implemented for receivers) </summary>
     Protected strValuesToIgnore As String()
 
+    ''' <summary> If true then this control can add or remove parameter to the RCodeStructure </summary>
+    Public bCanUpdateRCode As Boolean = True
+
     ''' <summary> Updates the control, and the linked controls, based upon the values of the 
     '''           parameters in the command-parameter pair list. This ensures that the control’s 
     '''           (and linked controls’) UI elements (text boxes, check boxes etc.) show the 
@@ -448,7 +451,7 @@ Public Class ucrCore
     ''' <param name="bReset"> (Optional) If true then reset the linked controls to their default
     '''                       state (but only if a number of other specified conditions are met). </param>
     Public Overridable Sub UpdateRCode(Optional bReset As Boolean = False)
-        If bAddRemoveParameter Then
+        If bAddRemoveParameter AndAlso bCanUpdateRCode Then
             AddOrRemoveParameter(CanAddParameter())
         End If
         UpdateLinkedControls(bReset)
