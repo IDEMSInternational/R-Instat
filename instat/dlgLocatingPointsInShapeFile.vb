@@ -29,6 +29,7 @@ Public Class dlgLocatingPointsInShapeFile
     'Private clsIfElseFunction As New RFunction
     Private clsDollarOperator As New ROperator
     Private clsOpeningSubsetOperator, clsIsEqualToOperator, clsCompareColumnsdollarOperator, clsClosingSubsetOperator As New ROperator
+    Private clsDummyOperator As ROperator
 
     Private Sub dlgLocatingPointsInShapeFile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -102,6 +103,7 @@ Public Class dlgLocatingPointsInShapeFile
         clsClosingSubsetOperator = New ROperator
         clsIsEqualToOperator = New ROperator
         clsCompareColumnsdollarOperator = New ROperator
+        clsDummyOperator = New ROperator
 
         ucrSelectorShapeFile.Reset()
         ucrSelectorStationFile.Reset()
@@ -160,7 +162,7 @@ Public Class dlgLocatingPointsInShapeFile
 
         clsIsEqualToOperator.SetOperation("==")
 
-        ucrBase.clsRsyntax.SetBaseROperator(clsSubsetOperator)
+        ucrBase.clsRsyntax.SetBaseROperator(clsDummyOperator)
     End Sub
 
     Private Sub SetRCodeForControls(bReset)
@@ -196,10 +198,9 @@ Public Class dlgLocatingPointsInShapeFile
 
     Private Sub UcrReceiverShapeFilePolygon_ControlValueChanged(ucrChangedControl As ucrCore) Handles UcrReceiverShapeFilePolygon.ControlValueChanged
         If Not UcrReceiverShapeFilePolygon.IsEmpty Then
-            ucrBase.clsRsyntax.SetBaseROperator(clsOpeningSubsetOperator)
+            clsDummyOperator = clsOpeningSubsetOperator
         Else
-            ucrBase.clsRsyntax.SetBaseROperator(clsSubsetOperator)
-
+            clsDummyOperator = clsSubsetOperator
         End If
     End Sub
 End Class
