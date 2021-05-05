@@ -90,7 +90,7 @@ Public Class sdgCalculationsSummmary
     Private Sub SetIsSubCalc()
         Dim lstType As New Dictionary(Of String, String)
 
-        Me.Text = "Add Sub Calculation"
+        Me.Text = GetTranslation("Add Sub Calculation")
         lstType.Add("Calculation", Chr(34) & "calculation" & Chr(34))
         lstType.Add("Summary", Chr(34) & "summary" & Chr(34))
         lstType.Add("By", Chr(34) & "by" & Chr(34))
@@ -102,7 +102,7 @@ Public Class sdgCalculationsSummmary
     Private Sub SetIsManipulation()
         Dim lstType As New Dictionary(Of String, String)
 
-        Me.Text = "Add Manipulation"
+        Me.Text = GetTranslation("Add Manipulation")
         lstType.Add("By", Chr(34) & "by" & Chr(34))
         lstType.Add("Filter", Chr(34) & "filter" & Chr(34))
         ucrInputType.SetItems(lstType)
@@ -111,7 +111,7 @@ Public Class sdgCalculationsSummmary
     Private Sub SetIsCalculation()
         Dim lstType As New Dictionary(Of String, String)
 
-        Me.Text = "Add Calculation"
+        Me.Text = GetTranslation("Add Calculation")
         lstType.Add("Calculation", Chr(34) & "calculation" & Chr(34))
         lstType.Add("Summary", Chr(34) & "summary" & Chr(34))
         lstType.Add("By", Chr(34) & "by" & Chr(34))
@@ -234,7 +234,7 @@ Public Class sdgCalculationsSummmary
                 ucrSelectorBy.Visible = True
                 ucrReceiverByOrSort.Visible = True
                 ucrReceiverByOrSort.SetDataType("factor")
-                lblReceiverLabel.Text = "By Factors:"
+                lblReceiverLabel.Text = GetTranslation("By Factors:")
                 lblReceiverLabel.Visible = True
                 ucrCalcSummary.Visible = False
                 clsCalculationFunction.RemoveParameterByName("function_exp")
@@ -261,7 +261,7 @@ Public Class sdgCalculationsSummmary
                 ucrSelectorBy.Visible = True
                 ucrReceiverByOrSort.Visible = True
                 ucrReceiverByOrSort.RemoveIncludedMetadataProperty("class")
-                lblReceiverLabel.Text = "Sort by:"
+                lblReceiverLabel.Text = GetTranslation("Sort by:")
                 lblReceiverLabel.Visible = True
                 ucrCalcSummary.Visible = False
                 clsCalculationFunction.RemoveParameterByName("function_exp")

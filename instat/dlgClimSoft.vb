@@ -90,27 +90,27 @@ Public Class dlgClimSoft
         ucrReceiverMultipleElements.SetLinkedDisplayControl(lblElements)
 
         'include observation data checkbox
-        ucrChkObservationData.Text = "Include Observation Data"
+        ucrChkObservationData.SetText("Include Observation Data")
         ucrChkObservationData.SetParameter(New RParameter("include_observation_data", 4))
         ucrChkObservationData.SetRDefault("FALSE")
 
         'include flags data checkbox
-        ucrChkFlagsData.Text = "Include Observation Flags"
+        ucrChkFlagsData.SetText("Include Observation Flags")
         ucrChkFlagsData.SetParameter(New RParameter("include_observation_flags", 5))
         ucrChkFlagsData.SetRDefault("FALSE")
 
         'include Unstack data checkbox. 
         'parameter attached to it is determined by elements receiver no. of contents. Thus not directly set by the control 
-        ucrChkUnstackData.Text = "Unstack Data"
+        ucrChkUnstackData.SetText("Unstack Data")
         'ucrChkUnstackData.Checked = True
 
         'include elements info checkbox
-        ucrChkElements.Text = "Include Elements Information"
+        ucrChkElements.SetText("Include Elements Information")
         ucrChkElements.SetParameter(New RParameter("include_elements_info", 7))
         ucrChkElements.SetRDefault("FALSE")
 
         'date range checkbox
-        ucrChkDateRange.Text = "Select Date Range"
+        ucrChkDateRange.SetText("Select Date Range")
 
         'start date datepicker
         ucrDtpStartdate.SetParameter(New RParameter("start_date", 8))
@@ -278,6 +278,7 @@ Public Class dlgClimSoft
             lblConnection.ForeColor = Color.Red
             ucrReceiverMultipleStations.Clear()
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrChkDateRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDateRange.ControlValueChanged

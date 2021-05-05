@@ -29,13 +29,13 @@ Public Class dlgClimsoftWizard
     'used to track the position of the selected wizard step
     Private iCurrentStep As Integer = 0
     Private Sub dlgClimsoftWizard_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
         lstWizardSteps.Item(iCurrentStep).Show()
+        autoTranslate(Me)
     End Sub
     Private Sub ucrBase_Load(sender As Object, e As EventArgs) Handles ucrBase.Load
         'todo. temporary. the translation is changing the "Finish" to "Ok"
@@ -264,6 +264,7 @@ Public Class dlgClimsoftWizard
                 parentControls.ucrTxtUserName.Enabled = True
                 parentControls.chkRememberCredentials.Enabled = True
             End If
+            autoTranslate(parentControls)
         End Sub
 
         Private Sub Disconnect()
@@ -416,6 +417,7 @@ Public Class dlgClimsoftWizard
             parentControls.ucrChkObservationData.Text = "Include Observation Data"
             parentControls.ucrChkObservationData.SetRDefault("FALSE")
 
+            autoTranslate(parentControls)
         End Sub
 
         Public Sub SetDefaults()
@@ -574,6 +576,7 @@ Public Class dlgClimsoftWizard
             parentControls.ucrChkDateRange.AddToLinkedControls({parentControls.ucrDtpStartdate, parentControls.ucrDtpEndDate}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
             parentControls.ucrChkDateRange.OnControlValueChanged()
+            autoTranslate(parentControls)
         End Sub
 
         Public Sub SetDefaults()

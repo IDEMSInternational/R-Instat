@@ -87,6 +87,7 @@ Public Class sdgFiltersFromFactor
             cmdSelectAll.Text = "Select All Levels"
             cmdSelectAll.FlatStyle = FlatStyle.Popup
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged
