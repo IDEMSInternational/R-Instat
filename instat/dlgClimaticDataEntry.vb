@@ -32,6 +32,7 @@ Public Class dlgClimaticDataEntry
     Private ReadOnly strRange As String = "Range"
     Private bChange As Boolean = False
     Private bSubdialogFirstLoad As Boolean = True
+    Private bRemoveValueChanged As Boolean = True
     Private bState As Boolean = False
     Private bResetSubdialogs As Boolean
 
@@ -42,6 +43,10 @@ Public Class dlgClimaticDataEntry
         End If
         If bReset Then
             SetDefaults()
+        End If
+        If bRemoveValueChanged Then
+            AddHandler ucrReceiverStation.ControlValueChanged, AddressOf StationControls_ControlValueChanged
+            bRemoveValueChanged = False
         End If
         SetRCodeForControls(bReset)
         bReset = False
