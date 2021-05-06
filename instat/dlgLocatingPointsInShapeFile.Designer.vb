@@ -34,11 +34,11 @@ Partial Class dlgLocatingPointsInShapeFile
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverGeometry = New instat.ucrReceiverSingle()
         Me.ucrSelectorShapeFile = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverShapeFilePolygon = New instat.ucrReceiverSingle()
+        Me.ucrReceiverShapefilePolygon = New instat.ucrReceiverSingle()
         Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
         Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSTationfilePolygon = New instat.ucrReceiverSingle()
         Me.ucrSelectorStationFile = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrReceiverStationFilePolygon = New instat.ucrReceiverSingle()
         Me.ucrSaveNewColumnName = New instat.ucrSave()
         Me.grpShapeaFile.SuspendLayout()
         Me.grpStationFile.SuspendLayout()
@@ -47,7 +47,9 @@ Partial Class dlgLocatingPointsInShapeFile
         'grpShapeaFile
         '
         Me.grpShapeaFile.Controls.Add(Me.lblShapeFilePolygon)
-        Me.grpShapeaFile.Controls.Add(Me.ucrReceiverShapeFilePolygon)
+        Me.grpShapeaFile.Controls.Add(Me.ucrReceiverShapefilePolygon)
+        Me.grpShapeaFile.Controls.Add(Me.ucrSelectorShapeFile)
+        Me.grpShapeaFile.Controls.Add(Me.ucrReceiverGeometry)
         Me.grpShapeaFile.Controls.Add(Me.lblGeometry)
         resources.ApplyResources(Me.grpShapeaFile, "grpShapeaFile")
         Me.grpShapeaFile.Name = "grpShapeaFile"
@@ -65,10 +67,13 @@ Partial Class dlgLocatingPointsInShapeFile
         '
         'grpStationFile
         '
-        Me.grpStationFile.Controls.Add(Me.ucrReceiverStationFilePolygon)
+        Me.grpStationFile.Controls.Add(Me.ucrReceiverSTationfilePolygon)
         Me.grpStationFile.Controls.Add(Me.lblStationFilePolygon)
         Me.grpStationFile.Controls.Add(Me.lblLongitude)
+        Me.grpStationFile.Controls.Add(Me.ucrReceiverLongitude)
         Me.grpStationFile.Controls.Add(Me.lblLatitude)
+        Me.grpStationFile.Controls.Add(Me.ucrReceiverLatitude)
+        Me.grpStationFile.Controls.Add(Me.ucrSelectorStationFile)
         resources.ApplyResources(Me.grpStationFile, "grpStationFile")
         Me.grpStationFile.Name = "grpStationFile"
         Me.grpStationFile.TabStop = False
@@ -116,14 +121,14 @@ Partial Class dlgLocatingPointsInShapeFile
         resources.ApplyResources(Me.ucrSelectorShapeFile, "ucrSelectorShapeFile")
         Me.ucrSelectorShapeFile.Name = "ucrSelectorShapeFile"
         '
-        'ucrReceiverShapeFilePolygon
+        'ucrReceiverShapefilePolygon
         '
-        Me.ucrReceiverShapeFilePolygon.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverShapeFilePolygon, "ucrReceiverShapeFilePolygon")
-        Me.ucrReceiverShapeFilePolygon.Name = "ucrReceiverShapeFilePolygon"
-        Me.ucrReceiverShapeFilePolygon.Selector = Nothing
-        Me.ucrReceiverShapeFilePolygon.strNcFilePath = ""
-        Me.ucrReceiverShapeFilePolygon.ucrSelector = Nothing
+        Me.ucrReceiverShapefilePolygon.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverShapefilePolygon, "ucrReceiverShapefilePolygon")
+        Me.ucrReceiverShapefilePolygon.Name = "ucrReceiverShapefilePolygon"
+        Me.ucrReceiverShapefilePolygon.Selector = Nothing
+        Me.ucrReceiverShapefilePolygon.strNcFilePath = ""
+        Me.ucrReceiverShapefilePolygon.ucrSelector = Nothing
         '
         'ucrReceiverLongitude
         '
@@ -143,6 +148,15 @@ Partial Class dlgLocatingPointsInShapeFile
         Me.ucrReceiverLatitude.strNcFilePath = ""
         Me.ucrReceiverLatitude.ucrSelector = Nothing
         '
+        'ucrReceiverSTationfilePolygon
+        '
+        Me.ucrReceiverSTationfilePolygon.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverSTationfilePolygon, "ucrReceiverSTationfilePolygon")
+        Me.ucrReceiverSTationfilePolygon.Name = "ucrReceiverSTationfilePolygon"
+        Me.ucrReceiverSTationfilePolygon.Selector = Nothing
+        Me.ucrReceiverSTationfilePolygon.strNcFilePath = ""
+        Me.ucrReceiverSTationfilePolygon.ucrSelector = Nothing
+        '
         'ucrSelectorStationFile
         '
         Me.ucrSelectorStationFile.bDropUnusedFilterLevels = False
@@ -150,15 +164,6 @@ Partial Class dlgLocatingPointsInShapeFile
         Me.ucrSelectorStationFile.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorStationFile, "ucrSelectorStationFile")
         Me.ucrSelectorStationFile.Name = "ucrSelectorStationFile"
-        '
-        'ucrReceiverStationFilePolygon
-        '
-        Me.ucrReceiverStationFilePolygon.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverStationFilePolygon, "ucrReceiverStationFilePolygon")
-        Me.ucrReceiverStationFilePolygon.Name = "ucrReceiverStationFilePolygon"
-        Me.ucrReceiverStationFilePolygon.Selector = Nothing
-        Me.ucrReceiverStationFilePolygon.strNcFilePath = ""
-        Me.ucrReceiverStationFilePolygon.ucrSelector = Nothing
         '
         'ucrSaveNewColumnName
         '
@@ -171,12 +176,7 @@ Partial Class dlgLocatingPointsInShapeFile
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrReceiverGeometry)
-        Me.Controls.Add(Me.ucrSelectorShapeFile)
         Me.Controls.Add(Me.grpShapeaFile)
-        Me.Controls.Add(Me.ucrReceiverLongitude)
-        Me.Controls.Add(Me.ucrReceiverLatitude)
-        Me.Controls.Add(Me.ucrSelectorStationFile)
         Me.Controls.Add(Me.grpStationFile)
         Me.Controls.Add(Me.ucrSaveNewColumnName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
@@ -194,7 +194,6 @@ Partial Class dlgLocatingPointsInShapeFile
     Friend WithEvents ucrSelectorShapeFile As ucrSelectorByDataFrameAddRemove
     Friend WithEvents grpShapeaFile As GroupBox
     Friend WithEvents lblGeometry As Label
-    Friend WithEvents ucrReceiverLongitude As ucrReceiverSingle
     Friend WithEvents ucrReceiverLatitude As ucrReceiverSingle
     Friend WithEvents ucrSelectorStationFile As ucrSelectorByDataFrameAddRemove
     Friend WithEvents grpStationFile As GroupBox
@@ -204,7 +203,8 @@ Partial Class dlgLocatingPointsInShapeFile
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrChkOmitMissing As ucrCheck
     Friend WithEvents lblShapeFilePolygon As Label
-    Friend WithEvents ucrReceiverShapeFilePolygon As ucrReceiverSingle
     Friend WithEvents lblStationFilePolygon As Label
-    Friend WithEvents ucrReceiverStationFilePolygon As ucrReceiverSingle
+    Friend WithEvents ucrReceiverLongitude As ucrReceiverSingle
+    Friend WithEvents ucrReceiverShapefilePolygon As ucrReceiverSingle
+    Friend WithEvents ucrReceiverSTationfilePolygon As ucrReceiverSingle
 End Class
