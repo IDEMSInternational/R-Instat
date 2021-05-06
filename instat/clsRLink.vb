@@ -2367,6 +2367,10 @@ Public Class RLink
                 End If
                 dlgTransformText.lstScriptsRCodeStructure = lstNewRCodeStructures
                 dlgTransformText.ShowDialog()
+            ElseIf strCommentFromDialogue.Contains("combine text columns") Then
+                'This dialogue requires only one line of code
+                dlgTransformText.lstScriptsRCodeStructure = lstNewRCodeStructures
+                dlgTransformText.ShowDialog()
             End If
             End If
     End Sub

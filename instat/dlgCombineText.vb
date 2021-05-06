@@ -20,6 +20,7 @@ Public Class dlgCombineText
     Private bReset As Boolean = True
     Private iColumnsUsed As Integer
     Private clsDefaultFunction As New RFunction
+    Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub dlgCombineText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -64,17 +65,35 @@ Public Class dlgCombineText
         iColumnsUsed = 0
     End Sub
 
+    Private Sub SetRFunctionDefaultParameters()
+        clsDefaultFunction.SetPackageName("stringr")
+        clsDefaultFunction.SetRCommand("str_c")
+        clsDefaultFunction.AddParameter("sep", Chr(34) & " " & Chr(34), iPosition:=0)
+        clsDefaultFunction.SetAssignTo(strTemp:=ucrSaveColumn.GetText(), strTempDataframe:=ucrSelectorForCombineText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveColumn.GetText())
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+    End Sub
+
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
         ucrSelectorForCombineText.Reset()
         ucrSaveColumn.Reset()
 
-        clsDefaultFunction.SetPackageName("stringr")
-        clsDefaultFunction.SetRCommand("str_c")
-        clsDefaultFunction.AddParameter("sep", Chr(34) & " " & Chr(34), iPosition:=0)
-        clsDefaultFunction.SetAssignTo(strTemp:=ucrSaveColumn.GetText(), strTempDataframe:=ucrSelectorForCombineText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveColumn.GetText())
+        If IsNothing(lstRCodeStructure) Then
+            SetRFunctionDefaultParameters()
+        ElseIf lstRCodeStructure.Count = 1 Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = "stringr" Then
+                    clsDefaultFunction = lstRCodeStructure(0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+                Else
+                    SetRFunctionDefaultParameters()
+                    MsgBox("Developer error:This Dialogue only uses the ""str_c "" Function")
+                End If
+            End If
+        Else
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        End If
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -122,4 +141,14 @@ Public Class dlgCombineText
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveColumn.ControlContentsChanged, ucrReceiverCombineText.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class
