@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat.Translations
 
 Public Class ucrElementRectControl
     Private bInitialiseControls As Boolean = False
@@ -110,6 +111,6 @@ Public Class ucrElementRectControl
     End Sub
 
     Public Sub SetLabel(strlabel As String)
-        grpElementRect.Text = strlabel
+        grpElementRect.Text = GetTranslation(strlabel)
     End Sub
 End Class

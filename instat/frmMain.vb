@@ -887,7 +887,9 @@ Public Class frmMain
                     System.IO.Directory.CreateDirectory(strAppDataPath)
                 End If
                 If clsRLink IsNot Nothing AndAlso clsRLink.bREngineInitialised Then
-                    clsRecentItems.saveOnClose()
+                    If clsRecentItems IsNot Nothing Then
+                        clsRecentItems.saveOnClose()
+                    End If
                     If clsInstatOptions IsNot Nothing Then
                         SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
                     End If
@@ -932,6 +934,7 @@ Public Class frmMain
             tstatus.Text = strCurrentStatus
             Cursor = Cursors.Default
         End If
+        autoTranslate(Me)
     End Sub
 
     Public Sub DeleteAutoSaveData()
