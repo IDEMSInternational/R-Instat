@@ -23,6 +23,11 @@ Public Class ucrInputFactorLevels
     ''' <summary> Should the first level be selected by default? </summary>
     Public bFirstLevelDefault As Boolean = False
 
+    ''' <summary>
+    ''' holds last selected level displayed by the control
+    ''' </summary>
+    Private strLastSelectedLevel As String = ""
+
     Public Sub New()
 
         ' This call is required by the designer.
@@ -65,11 +70,22 @@ Public Class ucrInputFactorLevels
                 For i As Integer = 0 To strLevels.Count - 1
                     lstLevels.Add(strQuotes & strLevels(i) & strQuotes)
                 Next
+
                 SetItems(lstLevels.ToArray())
-                If bFirstLevelDefault AndAlso lstLevels.Count > 0 Then
+
+                'restore last selected level if its still contained in the new list of retrieved levels
+                If strLastSelectedLevel <> "" AndAlso lstLevels.Contains(strLastSelectedLevel) Then
+                    SetName(strLastSelectedLevel)
+                ElseIf bFirstLevelDefault AndAlso lstLevels.Count > 0 Then
                     GetSetSelectedIndex = 0
                 End If
             End If
+        End If
+    End Sub
+
+    Private Sub ucrInputFactorLevels_ControlValueChanged(ucrChangedControl As ucrCore) Handles Me.ControlValueChanged
+        If Not String.IsNullOrEmpty(GetText) Then
+            strLastSelectedLevel = GetText()
         End If
     End Sub
 End Class
