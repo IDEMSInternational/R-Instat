@@ -47,6 +47,7 @@ Partial Class ucrDataView
         Me.mnuInsertColsBefore = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertColsAfter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteCol = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPaste = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuConvertToFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCovertToOrderedFactors = New System.Windows.Forms.ToolStripMenuItem()
@@ -115,7 +116,7 @@ Partial Class ucrDataView
         Me.linkStartNewDataFrame = New System.Windows.Forms.LinkLabel()
         Me.linkStartOpenFile = New System.Windows.Forms.LinkLabel()
         Me.linkStartOpenLibrary = New System.Windows.Forms.LinkLabel()
-        Me.mnuPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCellPasteRange = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -189,6 +190,12 @@ Partial Class ucrDataView
         Me.mnuDeleteCol.Name = "mnuDeleteCol"
         Me.mnuDeleteCol.Size = New System.Drawing.Size(212, 22)
         Me.mnuDeleteCol.Text = "Delete Column(s)"
+        '
+        'mnuPaste
+        '
+        Me.mnuPaste.Name = "mnuPaste"
+        Me.mnuPaste.Size = New System.Drawing.Size(212, 22)
+        Me.mnuPaste.Text = "Paste"
         '
         'toolStripMenuItem2
         '
@@ -268,9 +275,9 @@ Partial Class ucrDataView
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLebelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuCellPasteRange, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLebelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(213, 336)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(213, 358)
         '
         'ToolStripSeparator3
         '
@@ -713,11 +720,11 @@ Partial Class ucrDataView
         Me.linkStartOpenLibrary.TabStop = True
         Me.linkStartOpenLibrary.Text = "Open from library..."
         '
-        'mnuPaste
+        'mnuCellPasteRange
         '
-        Me.mnuPaste.Name = "mnuPaste"
-        Me.mnuPaste.Size = New System.Drawing.Size(212, 22)
-        Me.mnuPaste.Text = "Delete Column(s)"
+        Me.mnuCellPasteRange.Name = "mnuCellPasteRange"
+        Me.mnuCellPasteRange.Size = New System.Drawing.Size(212, 22)
+        Me.mnuCellPasteRange.Text = "Paste"
         '
         'ucrDataView
         '
@@ -821,4 +828,5 @@ Partial Class ucrDataView
     Friend WithEvents mnuColumnAddComment As ToolStripMenuItem
     Friend WithEvents mnuBottomAddComment As ToolStripMenuItem
     Private WithEvents mnuPaste As ToolStripMenuItem
+    Friend WithEvents mnuCellPasteRange As ToolStripMenuItem
 End Class

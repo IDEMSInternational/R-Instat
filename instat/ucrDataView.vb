@@ -1009,20 +1009,20 @@ Public Class ucrDataView
     '''' </summary>
     '''' <param name="sender"></param>
     '''' <param name="e"></param>
-    'Private Sub mnuCellPasteRange_Click(sender As Object, e As EventArgs) Handles mnuCellPasteRange.Click
-    '    Dim arrAllCurrentColumns As String()
-    '    Dim lstSelectedColumnNames As New List(Of String)
-    '    Dim iStartRowPos As Integer
-    '    'get all columns of current selected data frame
-    '    arrAllCurrentColumns = GetCurrentWorkSheetColumnNames()
-    '    'get columns selected
-    '    For colIndex As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.EndCol
-    '        lstSelectedColumnNames.Add(arrAllCurrentColumns(colIndex))
-    '    Next
-    '    'get starting row position then paste clipboard values
-    '    iStartRowPos = Integer.Parse(grdData.CurrentWorksheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text)
-    '    PasteValuesToDataFrame(lstSelectedColumnNames, iStartRowPos, False)
-    'End Sub
+    Private Sub mnuCellPasteRange_Click(sender As Object, e As EventArgs) Handles mnuCellPasteRange.Click
+        Dim arrAllCurrentColumns As String()
+        Dim lstSelectedColumnNames As New List(Of String)
+        Dim iStartRowPos As Integer
+        'get all columns of current selected data frame
+        arrAllCurrentColumns = GetCurrentWorkSheetColumnNames()
+        'get columns selected
+        For colIndex As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.EndCol
+            lstSelectedColumnNames.Add(arrAllCurrentColumns(colIndex))
+        Next
+        'get starting row position then paste clipboard values
+        iStartRowPos = Integer.Parse(grdData.CurrentWorksheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text)
+        PasteValuesToDataFrame(lstSelectedColumnNames, iStartRowPos, False)
+    End Sub
 
     ''' <summary>
     ''' pastes data from clipboard to data view
