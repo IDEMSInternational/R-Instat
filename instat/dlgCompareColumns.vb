@@ -22,8 +22,8 @@ Public Class dlgCompareColumns
     Private bReset As Boolean = True
     Private iDialogHeight As Integer
     Private iBaseMaxY
-    Private clsCompareColumns, clsAbsoluteFunction As New RFunction
-    Private clsAsCharacterFunctionOne, clsAsCharacterFunctionTwo, clsSummaryFunction As New RFunction
+    Private clsCompareColumnsFunction, clsAbsoluteFunction As New RFunction
+    Private clsFirstAsCharacterFunction, clsSecondAsCharacterFunction, clsSummaryFunction As New RFunction
     Private clsYinXOperator, clsIsEqualToOperator, clsSubtractOperator, clsLessorEqualToOperator As New ROperator
     Private clsDummyOperator As ROperator
 
@@ -116,10 +116,10 @@ Public Class dlgCompareColumns
     End Sub
 
     Private Sub SetDefaults()
-        clsCompareColumns = New RFunction
+        clsCompareColumnsFunction = New RFunction
         clsAbsoluteFunction = New RFunction
-        clsAsCharacterFunctionOne = New RFunction
-        clsAsCharacterFunctionTwo = New RFunction
+        clsFirstAsCharacterFunction = New RFunction
+        clsSecondAsCharacterFunction = New RFunction
         clsSummaryFunction = New RFunction
         clsYinXOperator = New ROperator
         clsIsEqualToOperator = New ROperator
@@ -134,11 +134,11 @@ Public Class dlgCompareColumns
         ucrReceiverFirst.SetMeAsReceiver()
         ucrSaveLogical.Reset()
 
-        clsCompareColumns.SetRCommand("compare_columns")
+        clsCompareColumnsFunction.SetRCommand("compare_columns")
         clsYinXOperator.SetOperation("%in%")
 
-        clsAsCharacterFunctionOne.SetRCommand("as.character")
-        clsAsCharacterFunctionTwo.SetRCommand("as.character")
+        clsFirstAsCharacterFunction.SetRCommand("as.character")
+        clsSecondAsCharacterFunction.SetRCommand("as.character")
 
         clsIsEqualToOperator.SetOperation("==")
 
@@ -158,22 +158,22 @@ Public Class dlgCompareColumns
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverFirst.AddAdditionalCodeParameterPair(clsYinXOperator, New RParameter("right", iNewPosition:=1), iAdditionalPairNo:=1)
-        ucrReceiverFirst.AddAdditionalCodeParameterPair(clsAsCharacterFunctionOne, New RParameter("first", bNewIncludeArgumentName:=False, iNewPosition:=0), iAdditionalPairNo:=2)
+        ucrReceiverFirst.AddAdditionalCodeParameterPair(clsFirstAsCharacterFunction, New RParameter("first", bNewIncludeArgumentName:=False, iNewPosition:=0), iAdditionalPairNo:=2)
         ucrReceiverFirst.AddAdditionalCodeParameterPair(clsSubtractOperator, New RParameter("first", bNewIncludeArgumentName:=False, iNewPosition:=0), iAdditionalPairNo:=3)
 
         ucrReceiverSecond.AddAdditionalCodeParameterPair(clsYinXOperator, New RParameter("left", iNewPosition:=0), iAdditionalPairNo:=1)
-        ucrReceiverSecond.AddAdditionalCodeParameterPair(clsAsCharacterFunctionTwo, New RParameter("second", bNewIncludeArgumentName:=False, iNewPosition:=1), iAdditionalPairNo:=2)
+        ucrReceiverSecond.AddAdditionalCodeParameterPair(clsSecondAsCharacterFunction, New RParameter("second", bNewIncludeArgumentName:=False, iNewPosition:=1), iAdditionalPairNo:=2)
         ucrReceiverSecond.AddAdditionalCodeParameterPair(clsSubtractOperator, New RParameter("second", bNewIncludeArgumentName:=False, iNewPosition:=1), iAdditionalPairNo:=3)
 
-        ucrReceiverFirst.SetRCode(clsCompareColumns, bReset)
-        ucrReceiverSecond.SetRCode(clsCompareColumns, bReset)
-        ucrChkUnique.SetRCode(clsCompareColumns, bReset)
-        ucrChkSort.SetRCode(clsCompareColumns, bReset)
-        ucrChkFirstNotSecond.SetRCode(clsCompareColumns, bReset)
-        ucrChkSecondNotFirst.SetRCode(clsCompareColumns, bReset)
-        ucrChkIntersection.SetRCode(clsCompareColumns, bReset)
-        ucrChkUnion.SetRCode(clsCompareColumns, bReset)
-        ucrChkAllValues.SetRCode(clsCompareColumns, bReset)
+        ucrReceiverFirst.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrReceiverSecond.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkUnique.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkSort.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkFirstNotSecond.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkSecondNotFirst.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkIntersection.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkUnion.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkAllValues.SetRCode(clsCompareColumnsFunction, bReset)
         ucrInputTolerance.SetRCode(clsLessorEqualToOperator, bReset)
 
         ucrSaveLogical.AddAdditionalRCode(clsLessorEqualToOperator, iAdditionalPairNo:=1)
@@ -207,7 +207,7 @@ Public Class dlgCompareColumns
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If rdoByValue.Checked Then
             ucrInputTolerance.Visible = False
-            ucrBase.clsRsyntax.SetBaseRFunction(clsCompareColumns)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCompareColumnsFunction)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
             ucrBase.clsRsyntax.AddToAfterCodes(clsYinXOperator, iPosition:=1)
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
@@ -245,16 +245,16 @@ Public Class dlgCompareColumns
             ElseIf {"factor", "character"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"factor", "character"}.Contains(ucrReceiverSecond.strCurrDataType) Then
                 If rdoByRow.Checked Then
                     ucrInputTolerance.Visible = False
-                    clsIsEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsAsCharacterFunctionOne, iPosition:=0)
-                    clsIsEqualToOperator.AddParameter("second", clsRFunctionParameter:=clsAsCharacterFunctionTwo, iPosition:=1)
+                    clsIsEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsFirstAsCharacterFunction, iPosition:=0)
+                    clsIsEqualToOperator.AddParameter("second", clsRFunctionParameter:=clsSecondAsCharacterFunction, iPosition:=1)
                     clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsIsEqualToOperator, iPosition:=1)
                     clsDummyOperator = clsIsEqualToOperator
                 End If
             ElseIf ucrReceiverFirst.strCurrDataType = "logical" AndAlso ucrReceiverSecond.strCurrDataType = "logical" Then
                 If rdoByRow.Checked Then
                     ucrInputTolerance.Visible = False
-                    clsIsEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsAsCharacterFunctionOne, iPosition:=0)
-                    clsIsEqualToOperator.AddParameter("second", clsRFunctionParameter:=clsAsCharacterFunctionTwo, iPosition:=1)
+                    clsIsEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsFirstAsCharacterFunction, iPosition:=0)
+                    clsIsEqualToOperator.AddParameter("second", clsRFunctionParameter:=clsSecondAsCharacterFunction, iPosition:=1)
                     clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsIsEqualToOperator, iPosition:=1)
                     clsDummyOperator = clsIsEqualToOperator
                 End If
