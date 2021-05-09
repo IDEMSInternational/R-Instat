@@ -151,8 +151,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="TranslateWinForm, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TranslateWinForm.1.0.1\lib\net461\TranslateWinForm.dll</HintPath>
+    <Reference Include="TranslateWinForm, Version=0.1.0.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TranslateWinForm.1.1.0\lib\net461\TranslateWinForm.dll</HintPath>
     </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="unvell.ReoGrid, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -378,6 +378,12 @@
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
     </Compile>
     <Compile Include="sdgClimaticNCMPMetadata.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="sdgCommentForDataEntry.Designer.vb">
+      <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
+    </Compile>
+    <Compile Include="sdgCommentForDataEntry.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="sdgDistributionOptions.Designer.vb">
@@ -2812,6 +2818,9 @@
     <EmbeddedResource Include="sdgClimaticNCMPMetadata.resx">
       <DependentUpon>sdgClimaticNCMPMetadata.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="sdgCommentForDataEntry.resx">
+      <DependentUpon>sdgCommentForDataEntry.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="sdgDistributionOptions.resx">
       <DependentUpon>sdgDistributionOptions.vb</DependentUpon>
     </EmbeddedResource>
@@ -4730,6 +4739,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeomListWithAes.resx">
       <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeomListWithAes.sw-KE.resx">
       <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>

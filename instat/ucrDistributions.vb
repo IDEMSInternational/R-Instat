@@ -187,7 +187,7 @@ Public Class ucrDistributions
             End Select
             If Dist.bIncluded And bUse Then
                 lstCurrentDistributions.Add(Dist)
-                ucrInputDistributions.AddItems({translate(Dist.strNameTag)})
+                ucrInputDistributions.AddItems({GetTranslation(Dist.strNameTag)})
             End If
         Next
         If ucrInputDistributions.cboInput.Items.Count > 0 Then
@@ -683,7 +683,7 @@ Public Class ucrDistributions
             End If
         End If
         If clsNewCurrentDist IsNot Nothing Then
-            ucrInputDistributions.SetName(translate(clsNewCurrentDist.strNameTag))
+            ucrInputDistributions.SetName(GetTranslation(clsNewCurrentDist.strNameTag))
         Else
             If bErrorIfNotFound Then
                 MsgBox("Developer error: Cannot set value of " & Name & " because cannot find a distribution matching the function and parameter given")

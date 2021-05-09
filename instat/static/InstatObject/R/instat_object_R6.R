@@ -50,7 +50,8 @@ DataBook$set("public", "import_data", function(data_tables = list(), data_tables
                                                data_tables_filters = rep(list(list()),length(data_tables)),
                                                imported_from = as.list(rep("",length(data_tables))), 
                                                data_names = NULL,
-                                               messages=TRUE, convert=TRUE, create=TRUE)
+                                               messages=TRUE, convert=TRUE, create=TRUE,
+                                               add_to_graph_book = TRUE)
 {
   if (missing(data_tables) || length(data_tables) == 0) {
     stop("No data found. No data objects can be created.")
@@ -101,7 +102,7 @@ DataBook$set("public", "import_data", function(data_tables = list(), data_tables
                                messages = messages, convert = convert, create = create, 
                                filters = data_tables_filters[[i]])
       # Add this new data object to our list of data objects
-      self$append_data_object(new_data$get_metadata(data_name_label), new_data)
+      self$append_data_object(new_data$get_metadata(data_name_label), new_data, add_to_graph_book = add_to_graph_book)
     }
   }
 }
@@ -284,7 +285,7 @@ DataBook$set("public", "set_objects", function(new_objects) {
 }
 )
 
-DataBook$set("public", "append_data_object", function(name, obj) {
+DataBook$set("public", "append_data_object", function(name, obj, add_to_graph_book = TRUE) {
   if(!is.character(name)) stop("name must be a character")
   # obj could be of old class type 'data_object'
   if(!any(c("data_object", "DataSheet") %in% class(obj))) {
@@ -292,6 +293,11 @@ DataBook$set("public", "append_data_object", function(name, obj) {
   }
   obj$append_to_metadata(data_name_label, name)
   private$.data_sheets[[name]] <- obj
+  if (add_to_graph_book && exists(".graph_data_book")) {
+    dfs <- list(data.frame())
+    names(dfs) <- name
+    .graph_data_book$import_data(data_tables = dfs, add_to_graph_book = FALSE)
+  }
 }
 )
 
@@ -303,7 +309,7 @@ DataBook$set("public", "get_data_objects", function(data_name, as_list = FALSE, 
     if(all(is.character(data_name))) type = "character"
     else if(all(is.numeric(data_name)) && all((data_name %% 1) == 0)) type = "integer"
     else stop("data_name must be of type character or integer")
-    
+
     if(type=="character" && !all(data_name %in% names(private$.data_sheets))) stop(paste(data_name, "not found"))
     if(type=="integer" && (!all(1 <= data_name) || !all(data_name <= length(private$.data_sheets)))) stop(paste(data_name, "not found"))
     if(length(data_name) > 1 || as_list) return(private$.data_sheets[data_name])
@@ -904,7 +910,7 @@ DataBook$set("public", "get_next_default_dataframe_name", function(prefix, inclu
 } 
 )
 
-DataBook$set("public", "delete_dataframes", function(data_names) {
+DataBook$set("public", "delete_dataframes", function(data_names, delete_graph_book = TRUE) {
   # TODO need a set or append
   for(name in data_names) {
     private$.data_sheets[[name]] <- NULL
@@ -921,7 +927,7 @@ DataBook$set("public", "delete_dataframes", function(data_names) {
     }
     if(!is.null(private$.last_graph) && private$.last_graph[1] %in% data_names) private$.last_graph <- NULL
   }
-  if (exists(".graph_data_book")) .graph_data_book$delete_dataframes(data_names = data_names)
+  if (delete_graph_book && exists(".graph_data_book")) .graph_data_book$delete_dataframes(data_names = data_names, delete_graph_book = FALSE)
 } 
 )
 
@@ -2527,8 +2533,20 @@ DataBook$set("public", "get_data_entry_data", function(data_name, station, date,
   self$get_data_objects(data_name)$get_data_entry_data(station = station, date = date, elements = elements, view_variables = view_variables, station_name = station_name, type = type, start_date = start_date, end_date = end_date)
 })
 
-DataBook$set("public", "save_data_entry_data", function(data_name, new_data, rows_changed) {
-  self$get_data_objects(data_name)$save_data_entry_data(new_data = new_data, rows_changed = rows_changed)
+DataBook$set("public", "save_data_entry_data", function(data_name, new_data, rows_changed, comments_list = list(), add_flags = FALSE, ...) {
+  if(!missing(comments_list)){
+  for (i in seq_along(comments_list)) {
+    com <- comments_list[[i]]
+    if(!("row" %in% names(com))){
+      com[["row"]] <- ""
+    }
+    if(!("column" %in% names(com))){
+      com[["column"]] <- ""
+    }
+    self$add_new_comment(data_name = data_name, row = com$row, column = com$column, comment = com$comment)
+  }
+    }
+  self$get_data_objects(data_name)$save_data_entry_data(new_data = new_data, rows_changed = rows_changed, add_flags = add_flags)
 }
 )
 
@@ -2568,3 +2586,11 @@ DataBook$set("public", "import_from_cds", function(user, dataset, elements, star
   }
   close(pb)
 })
+
+DataBook$set("public", "add_flag_fields", function(data_name, col_names, key_column_names) {
+  if (!self$has_key(data_name)) {
+    self$add_key(data_name, key_column_names)
+    }
+  self$get_data_objects(data_name)$add_flag_fields(col_names = col_names)
+}
+)
