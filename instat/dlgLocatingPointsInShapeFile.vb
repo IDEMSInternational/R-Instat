@@ -195,7 +195,7 @@ Public Class dlgLocatingPointsInShapeFile
         TestOKEnabled()
     End Sub
 
-    Private Sub CoreControlsContentsChanged_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrSaveNewColumnName.ControlContentsChanged, ucrReceiverGeometry.ControlContentsChanged
+    Private Sub CoreControlsContentsChanged_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrSaveNewColumnName.ControlContentsChanged, ucrReceiverGeometry.ControlContentsChanged, ucrReceiverShapefilePolygon.ControlContentsChanged, ucrReceiverSTationfilePolygon.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
