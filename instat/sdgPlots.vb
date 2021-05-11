@@ -77,6 +77,7 @@ Public Class sdgPlots
         Dim dctLegendPosition As New Dictionary(Of String, String)
         Dim dctFillOptions As New Dictionary(Of String, String)
         Dim dctColourOptions As New Dictionary(Of String, String)
+        Dim dctAnnotationGeom As New Dictionary(Of String, String)
 
         Dim strThemes As String()
 
@@ -338,6 +339,20 @@ Public Class sdgPlots
         ucrChkDrop.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkDrop.SetText("Drop empty factor levels")
         ucrChkDrop.SetRDefault("TRUE")
+
+        'Annotation
+        ucrInputAnnotationGeoms.SetParameter(New RParameter("geom", iNewPosition:=0))
+        dctAnnotationGeom.Add("text", Chr(34) & "text" & Chr(34))
+        dctAnnotationGeom.Add("rect", Chr(34) & "rect" & Chr(34))
+        dctAnnotationGeom.Add("segment", Chr(34) & "segment" & Chr(34))
+        dctAnnotationGeom.Add("pointrange", Chr(34) & "pointrange" & Chr(34))
+        dctAnnotationGeom.Add("label", Chr(34) & "label" & Chr(34))
+        dctAnnotationGeom.Add("curve", Chr(34) & "curve" & Chr(34))
+        dctAnnotationGeom.Add("linerange", Chr(34) & "linerange" & Chr(34))
+        dctAnnotationGeom.Add("errorbar", Chr(34) & "errorbar" & Chr(34))
+        dctAnnotationGeom.Add("crossbar", Chr(34) & "crossbar" & Chr(34))
+        ucrInputAnnotationGeoms.SetItems(dctAnnotationGeom)
+        ucrInputAnnotationGeoms.SetLinkedDisplayControl(lblAnnotationGeoms)
 
         'Colour
         ucrInputFillScaleColour.SetParameter(New RParameter("option", iNewPosition:=0))
@@ -931,4 +946,5 @@ Public Class sdgPlots
             grpColourScale.Visible = False
         End If
     End Sub
+
 End Class

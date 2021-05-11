@@ -109,6 +109,7 @@ Partial Class sdgPlots
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.tbpColour = New System.Windows.Forms.TabPage()
+        Me.ucrChkAddColour = New instat.ucrCheck()
         Me.ucrChkAddFillScale = New instat.ucrCheck()
         Me.grpColourScale = New System.Windows.Forms.GroupBox()
         Me.ucrChkColourDiscrete = New instat.ucrCheck()
@@ -132,8 +133,22 @@ Partial Class sdgPlots
         Me.lblFillScaleBeginColour = New System.Windows.Forms.Label()
         Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
         Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
+        Me.tbpAnnotation = New System.Windows.Forms.TabPage()
+        Me.ucrInputX = New instat.ucrInputTextBox()
+        Me.ucrInputY = New instat.ucrInputTextBox()
+        Me.ucrInputYmin = New instat.ucrInputTextBox()
+        Me.ucrInputYend = New instat.ucrInputTextBox()
+        Me.ucrInputXend = New instat.ucrInputTextBox()
+        Me.ucrInputXmin = New instat.ucrInputTextBox()
+        Me.lblYend = New System.Windows.Forms.Label()
+        Me.lblXend = New System.Windows.Forms.Label()
+        Me.lblYmin = New System.Windows.Forms.Label()
+        Me.lblXmin = New System.Windows.Forms.Label()
+        Me.lblY = New System.Windows.Forms.Label()
+        Me.lblX = New System.Windows.Forms.Label()
+        Me.lblAnnotationGeoms = New System.Windows.Forms.Label()
+        Me.ucrInputAnnotationGeoms = New instat.ucrInputComboBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkAddColour = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -148,6 +163,7 @@ Partial Class sdgPlots
         Me.tbpColour.SuspendLayout()
         Me.grpColourScale.SuspendLayout()
         Me.grpFillScale.SuspendLayout()
+        Me.tbpAnnotation.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbpPlotsOptions
@@ -160,6 +176,7 @@ Partial Class sdgPlots
         Me.tbpPlotsOptions.Controls.Add(Me.tbpTheme)
         Me.tbpPlotsOptions.Controls.Add(Me.tbpCoordinates)
         Me.tbpPlotsOptions.Controls.Add(Me.tbpColour)
+        Me.tbpPlotsOptions.Controls.Add(Me.tbpAnnotation)
         resources.ApplyResources(Me.tbpPlotsOptions, "tbpPlotsOptions")
         Me.tbpPlotsOptions.Name = "tbpPlotsOptions"
         Me.tbpPlotsOptions.SelectedIndex = 0
@@ -689,6 +706,12 @@ Partial Class sdgPlots
         Me.tbpColour.Name = "tbpColour"
         Me.tbpColour.UseVisualStyleBackColor = True
         '
+        'ucrChkAddColour
+        '
+        Me.ucrChkAddColour.Checked = False
+        resources.ApplyResources(Me.ucrChkAddColour, "ucrChkAddColour")
+        Me.ucrChkAddColour.Name = "ucrChkAddColour"
+        '
         'ucrChkAddFillScale
         '
         Me.ucrChkAddFillScale.Checked = False
@@ -867,16 +890,121 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.lblFillScaleTransparency, "lblFillScaleTransparency")
         Me.lblFillScaleTransparency.Name = "lblFillScaleTransparency"
         '
+        'tbpAnnotation
+        '
+        Me.tbpAnnotation.Controls.Add(Me.ucrInputX)
+        Me.tbpAnnotation.Controls.Add(Me.ucrInputY)
+        Me.tbpAnnotation.Controls.Add(Me.ucrInputYmin)
+        Me.tbpAnnotation.Controls.Add(Me.ucrInputYend)
+        Me.tbpAnnotation.Controls.Add(Me.ucrInputXend)
+        Me.tbpAnnotation.Controls.Add(Me.ucrInputXmin)
+        Me.tbpAnnotation.Controls.Add(Me.lblYend)
+        Me.tbpAnnotation.Controls.Add(Me.lblXend)
+        Me.tbpAnnotation.Controls.Add(Me.lblYmin)
+        Me.tbpAnnotation.Controls.Add(Me.lblXmin)
+        Me.tbpAnnotation.Controls.Add(Me.lblY)
+        Me.tbpAnnotation.Controls.Add(Me.lblX)
+        Me.tbpAnnotation.Controls.Add(Me.lblAnnotationGeoms)
+        Me.tbpAnnotation.Controls.Add(Me.ucrInputAnnotationGeoms)
+        resources.ApplyResources(Me.tbpAnnotation, "tbpAnnotation")
+        Me.tbpAnnotation.Name = "tbpAnnotation"
+        Me.tbpAnnotation.UseVisualStyleBackColor = True
+        '
+        'ucrInputX
+        '
+        Me.ucrInputX.AddQuotesIfUnrecognised = True
+        Me.ucrInputX.IsMultiline = False
+        Me.ucrInputX.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputX, "ucrInputX")
+        Me.ucrInputX.Name = "ucrInputX"
+        '
+        'ucrInputY
+        '
+        Me.ucrInputY.AddQuotesIfUnrecognised = True
+        Me.ucrInputY.IsMultiline = False
+        Me.ucrInputY.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputY, "ucrInputY")
+        Me.ucrInputY.Name = "ucrInputY"
+        '
+        'ucrInputYmin
+        '
+        Me.ucrInputYmin.AddQuotesIfUnrecognised = True
+        Me.ucrInputYmin.IsMultiline = False
+        Me.ucrInputYmin.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYmin, "ucrInputYmin")
+        Me.ucrInputYmin.Name = "ucrInputYmin"
+        '
+        'ucrInputYend
+        '
+        Me.ucrInputYend.AddQuotesIfUnrecognised = True
+        Me.ucrInputYend.IsMultiline = False
+        Me.ucrInputYend.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYend, "ucrInputYend")
+        Me.ucrInputYend.Name = "ucrInputYend"
+        '
+        'ucrInputXend
+        '
+        Me.ucrInputXend.AddQuotesIfUnrecognised = True
+        Me.ucrInputXend.IsMultiline = False
+        Me.ucrInputXend.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXend, "ucrInputXend")
+        Me.ucrInputXend.Name = "ucrInputXend"
+        '
+        'ucrInputXmin
+        '
+        Me.ucrInputXmin.AddQuotesIfUnrecognised = True
+        Me.ucrInputXmin.IsMultiline = False
+        Me.ucrInputXmin.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXmin, "ucrInputXmin")
+        Me.ucrInputXmin.Name = "ucrInputXmin"
+        '
+        'lblYend
+        '
+        resources.ApplyResources(Me.lblYend, "lblYend")
+        Me.lblYend.Name = "lblYend"
+        '
+        'lblXend
+        '
+        resources.ApplyResources(Me.lblXend, "lblXend")
+        Me.lblXend.Name = "lblXend"
+        '
+        'lblYmin
+        '
+        resources.ApplyResources(Me.lblYmin, "lblYmin")
+        Me.lblYmin.Name = "lblYmin"
+        '
+        'lblXmin
+        '
+        resources.ApplyResources(Me.lblXmin, "lblXmin")
+        Me.lblXmin.Name = "lblXmin"
+        '
+        'lblY
+        '
+        resources.ApplyResources(Me.lblY, "lblY")
+        Me.lblY.Name = "lblY"
+        '
+        'lblX
+        '
+        resources.ApplyResources(Me.lblX, "lblX")
+        Me.lblX.Name = "lblX"
+        '
+        'lblAnnotationGeoms
+        '
+        resources.ApplyResources(Me.lblAnnotationGeoms, "lblAnnotationGeoms")
+        Me.lblAnnotationGeoms.Name = "lblAnnotationGeoms"
+        '
+        'ucrInputAnnotationGeoms
+        '
+        Me.ucrInputAnnotationGeoms.AddQuotesIfUnrecognised = True
+        Me.ucrInputAnnotationGeoms.GetSetSelectedIndex = -1
+        Me.ucrInputAnnotationGeoms.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputAnnotationGeoms, "ucrInputAnnotationGeoms")
+        Me.ucrInputAnnotationGeoms.Name = "ucrInputAnnotationGeoms"
+        '
         'ucrBaseSubdialog
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        '
-        'ucrChkAddColour
-        '
-        Me.ucrChkAddColour.Checked = False
-        resources.ApplyResources(Me.ucrChkAddColour, "ucrChkAddColour")
-        Me.ucrChkAddColour.Name = "ucrChkAddColour"
         '
         'sdgPlots
         '
@@ -910,6 +1038,8 @@ Partial Class sdgPlots
         Me.grpColourScale.PerformLayout()
         Me.grpFillScale.ResumeLayout(False)
         Me.grpFillScale.PerformLayout()
+        Me.tbpAnnotation.ResumeLayout(False)
+        Me.tbpAnnotation.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1011,6 +1141,21 @@ Partial Class sdgPlots
     Friend WithEvents ucrChkColourDiscrete As ucrCheck
     Friend WithEvents ucrChkFillDiscrete As ucrCheck
     Friend WithEvents ucrChkAddColour As ucrCheck
+    Friend WithEvents tbpAnnotation As TabPage
+    Friend WithEvents ucrInputAnnotationGeoms As ucrInputComboBox
+    Friend WithEvents lblAnnotationGeoms As Label
+    Friend WithEvents lblY As Label
+    Friend WithEvents lblX As Label
+    Friend WithEvents ucrInputX As ucrInputTextBox
+    Friend WithEvents ucrInputY As ucrInputTextBox
+    Friend WithEvents ucrInputYmin As ucrInputTextBox
+    Friend WithEvents ucrInputYend As ucrInputTextBox
+    Friend WithEvents ucrInputXend As ucrInputTextBox
+    Friend WithEvents ucrInputXmin As ucrInputTextBox
+    Friend WithEvents lblYend As Label
+    Friend WithEvents lblXend As Label
+    Friend WithEvents lblYmin As Label
+    Friend WithEvents lblXmin As Label
 End Class
 
 
