@@ -65,7 +65,6 @@ Public Class dlgOptions
         rtbOutputPreview.Text = strPreviewText
         SetView()
 
-
         ucrNudDigits.SetMinMax(0, 22)
         ucrChkIncludeCommentsbyDefault.SetText("Include Comments by Default")
         ucrChkViewStructuredMenu.SetText("Show Structured Menu")
