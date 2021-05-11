@@ -20,7 +20,7 @@ Public Class dlgStringDistance
     Private bReset As Boolean = True
     Private clsStringDistFunction As New RFunction
     Private clsColumnFunction As New RFunction
-    Private clsCurrentFunction As New RFunction
+    Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub dlgStringDistance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -86,21 +86,46 @@ Public Class dlgStringDistance
         ucrSaveStringDistance.setLinkedReceiver(ucrReceiverStringDistance)
     End Sub
 
-    Private Sub SetDefaults()
+    Private Sub ResetFunctions()
         clsStringDistFunction = New RFunction
         clsColumnFunction = New RFunction
-
-        ucrSelectorStringDistance.Reset()
-        ucrSaveStringDistance.Reset()
-        ucrReceiverStringDistance.SetMeAsReceiver()
 
         clsColumnFunction.SetPackageName("stringdist")
         clsColumnFunction.SetRCommand("stringdist")
 
         clsStringDistFunction.SetPackageName("stringdist")
         clsStringDistFunction.SetRCommand("stringdist")
-        clsCurrentFunction = clsStringDistFunction
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCurrentFunction)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsStringDistFunction)
+    End Sub
+
+    Private Sub SetDefaults()
+        ucrSelectorStringDistance.Reset()
+        ucrSaveStringDistance.Reset()
+        ucrReceiverStringDistance.SetMeAsReceiver()
+
+        ResetFunctions()
+
+        If Not IsNothing(lstRCodeStructure) Then
+            If (lstRCodeStructure.Count > 1) Then
+                MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+            ElseIf lstRCodeStructure.Count = 1 Then
+                If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                    If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction).GetParameter("b")) Then
+                        If TryCast(lstRCodeStructure(0), RFunction).GetParameter("b").bIsFunction Then
+                            clsColumnFunction = lstRCodeStructure(0)
+                            ucrBase.clsRsyntax.SetBaseRFunction(clsColumnFunction)
+                        Else
+                            clsStringDistFunction = lstRCodeStructure(0)
+                            ucrBase.clsRsyntax.SetBaseRFunction(clsStringDistFunction)
+                        End If
+                    Else
+                        MsgBox("Developer error: The RFunction has no parameter b")
+                    End If
+                End If
+            End If
+        End If
+        lstRCodeStructure = Nothing
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -112,9 +137,9 @@ Public Class dlgStringDistance
         ucrInputPatternStringDistance.SetRCode(clsStringDistFunction, bReset)
         ucrInputComboBoxMethod.SetRCode(clsStringDistFunction, bReset)
         ucrSaveStringDistance.SetRCode(clsStringDistFunction, bReset)
-        If bReset Then
-            ucrPnlStringDist.SetRCode(clsCurrentFunction, bReset)
-        End If
+
+        ucrPnlStringDist.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
         ucrReceiverColumn.SetRCode(clsColumnFunction, bReset)
     End Sub
 
@@ -141,15 +166,22 @@ Public Class dlgStringDistance
     Private Sub ucrPnlStringDist_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlStringDist.ControlValueChanged
         ReceiverFocus()
         If rdoColumn.Checked Then
-            clsCurrentFunction = clsColumnFunction
+            ucrBase.clsRsyntax.SetBaseRFunction(clsColumnFunction)
         ElseIf rdoString.Checked Then
-            clsCurrentFunction = clsStringDistFunction
-        Else
+            ucrBase.clsRsyntax.SetBaseRFunction(clsStringDistFunction)
         End If
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCurrentFunction)
     End Sub
 
     Private Sub ucrReceiverStringDistance_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringDistance.ControlContentsChanged, ucrReceiverColumn.ControlContentsChanged, ucrSaveStringDistance.ControlContentsChanged, ucrInputPatternStringDistance.ControlContentsChanged, ucrInputComboBoxMethod.ControlContentsChanged, ucrPnlStringDist.ControlContentsChanged
         TestOkEnabled()
     End Sub
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class

@@ -2369,10 +2369,16 @@ Public Class RLink
                 dlgTransformText.ShowDialog()
             ElseIf strCommentFromDialogue.Contains("combine text columns") Then
                 'This dialogue requires only one line of code
-                dlgTransformText.lstScriptsRCodeStructure = lstNewRCodeStructures
-                dlgTransformText.ShowDialog()
+                dlgCombineText.lstScriptsRCodeStructure = lstNewRCodeStructures
+                dlgCombineText.ShowDialog()
+            ElseIf strCommentFromDialogue.Contains("string distance") Then
+                If (lstNewRCodeStructures.Count) >= 2 Then
+                    lstNewRCodeStructures.RemoveRange(0, lstNewRCodeStructures.Count - 1)
+                End If
+                dlgStringDistance.lstScriptsRCodeStructure = lstNewRCodeStructures
+                dlgStringDistance.ShowDialog()
             End If
-            End If
+        End If
     End Sub
 
     Private Shared Function ProcessSingleRStatement(clsNewRStatement As RScript.clsRStatement) As RCodeStructure

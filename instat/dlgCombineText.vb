@@ -82,7 +82,7 @@ Public Class dlgCombineText
             SetRFunctionDefaultParameters()
         ElseIf lstRCodeStructure.Count = 1 Then
             If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
-                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = "stringr" Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = "str_c" Then
                     clsDefaultFunction = lstRCodeStructure(0)
                     ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
                 Else
@@ -94,6 +94,8 @@ Public Class dlgCombineText
             MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
 
         End If
+        'Setting lstRcodeStructure to Nothing is important so that the dialogue isnt affected on reopening
+        lstRCodeStructure = Nothing
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
