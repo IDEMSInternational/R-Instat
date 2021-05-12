@@ -114,9 +114,15 @@ Public Class dlgStringDistance
                     If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction).GetParameter("b")) Then
                         If TryCast(lstRCodeStructure(0), RFunction).GetParameter("b").bIsFunction Then
                             clsColumnFunction = lstRCodeStructure(0)
+                            If Not IsNothing(clsColumnFunction.GetParameter("a")) Then
+                                clsStringDistFunction.AddParameter(clsColumnFunction.GetParameter("a"))
+                            End If
+                            If Not IsNothing(clsColumnFunction.GetParameter("method")) Then
+                                clsStringDistFunction.AddParameter(clsColumnFunction.GetParameter("method"))
+                            End If
                             ucrBase.clsRsyntax.SetBaseRFunction(clsColumnFunction)
                         Else
-                            clsStringDistFunction = lstRCodeStructure(0)
+                                clsStringDistFunction = lstRCodeStructure(0)
                             ucrBase.clsRsyntax.SetBaseRFunction(clsStringDistFunction)
                         End If
                     Else
