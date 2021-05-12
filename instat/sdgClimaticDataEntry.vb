@@ -174,8 +174,9 @@ Public Class sdgClimaticDataEntry
         ucrChkAddFlagFieldData.SetRCode(clsSaveDataEntryFunction, bReset, bCloneIfNeeded:=True)
 
         bAllowEdits = True
-        cmdTransform.Text = "Transform"
-        cmdTransform.Enabled = bTransform
+        'cmdTransform.Text = "Transform"
+        'cmdTransform.Enabled = bTransform
+        cmdTransform.Enabled = False
 
         If Not strStationColumnName = "" Then
             lstNonEditableColumns.Add(strStationColumnName)
