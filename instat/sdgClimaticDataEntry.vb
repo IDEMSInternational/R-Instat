@@ -47,11 +47,9 @@ Public Class sdgClimaticDataEntry
     Private lstElementsNamesToBeRemoved As New List(Of String)
     Private lstViewVariablesNames As List(Of String)
     Private strStationColumnName As String
-    Private dDefaultValue As Double
     Private bNoDecimal As Boolean
     Private bAllowTrace As Boolean
     Private bTransform As Boolean
-    Private bDefaultValue As Boolean
     Private dTranformValue As Double
     Private bFirstLoad As Boolean = True
     'used to check if current options allow the grid to be editable
@@ -60,6 +58,8 @@ Public Class sdgClimaticDataEntry
     Private strEntryType As String = ""
     Private iMonthlyTotalsColIndex As Integer
     Private ucrBaseSelector As ucrSelector
+    Private strValueTypeToCalculate As String = "sum"
+    Private strDefaultValue As String = "NA"
 
     Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -102,7 +102,9 @@ Public Class sdgClimaticDataEntry
             newValue = grdCurrentWorkSheet.Item(row:=iRowIndex, col:=iColumnIndex)
             'for editable columns
             If bEditableColumn Then
-                If bAllowTrace AndAlso newValue.ToUpper = "T" Then
+                If newValue = "" Then
+                    newValue = "NA"
+                ElseIf bAllowTrace AndAlso newValue.ToUpper = "T" Then
                     newValue = 0.03
                 ElseIf bTransform And IsNumeric(newValue) Then
                     newValue = newValue * dTranformValue
@@ -134,11 +136,13 @@ Public Class sdgClimaticDataEntry
 
     Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction,
                      clsEditDataFrame As RFunction, clsNewGetKey As RFunction, clsNewCommentsList As RFunction, clsNewList As RFunction,
-                     strDateName As String, lstElementsNames As List(Of String), dTranformValue As Double, dDefaultValue As Double,
-                     Optional lstViewVariablesNames As List(Of String) = Nothing, Optional strStationColumnName As String = "",
-                     Optional bDefaultValue As Boolean = False, Optional bNoDecimal As Boolean = False,
-                     Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False, Optional MissingValueAsNA As Boolean = False,
-                     Optional strEntryType As String = "", Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
+                     strDateName As String, lstElementsNames As List(Of String),
+                        strDefaultValue As String, dTranformValue As Double,
+                     Optional lstViewVariablesNames As List(Of String) = Nothing,
+                     Optional strStationColumnName As String = "", Optional bNoDecimal As Boolean = False,
+                     Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False,
+                     Optional strEntryType As String = "", Optional ucrNewBaseSelector As ucrSelector = Nothing,
+                     Optional bReset As Boolean = False)
 
         Dim arrColumnHeaders As String()
         clsGetKeyFunction = clsNewGetKey
@@ -159,13 +163,12 @@ Public Class sdgClimaticDataEntry
         Me.lstElementsNames = lstElementsNames
         Me.lstViewVariablesNames = lstViewVariablesNames
         Me.strStationColumnName = strStationColumnName
-        Me.dDefaultValue = dDefaultValue
+        Me.strDefaultValue = strDefaultValue
         Me.bNoDecimal = bNoDecimal
         Me.bAllowTrace = bAllowTrace
         Me.bTransform = bTransform
         Me.dTranformValue = dTranformValue
         Me.strEntryType = strEntryType
-        Me.bDefaultValue = bDefaultValue
 
 
         ucrChkAddFlagFieldData.SetRCode(clsSaveDataEntryFunction, bReset, bCloneIfNeeded:=True)
@@ -198,41 +201,45 @@ Public Class sdgClimaticDataEntry
 
         Dim dfValue As String
         Dim bNonEditableCell As Boolean
+        Dim bChangedToDefaultValue As Boolean
 
         'set grid rows
         grdCurrentWorkSheet.Rows = dfEditData.RowCount
         For i As Integer = 0 To dfEditData.RowCount - 1
+            'set the grid row header 
+            grdCurrentWorkSheet.RowHeaders.Item(i).Text = dfEditData.RowNames(i)
             For j = 0 To grdCurrentWorkSheet.Columns - 1
                 bNonEditableCell = lstNonEditableColumns.Contains(arrColumnHeaders(j))
                 dfValue = dfEditData.Item(i, j)
+                bChangedToDefaultValue = False
+
+                'convert all "NaN" to R "NA" or set default
                 If dfValue = "NaN" Then
-                    If MissingValueAsNA Then
+                    If bNonEditableCell Then
                         dfValue = "NA"
                     Else
-                        dfValue = ""
+                        dfValue = strDefaultValue
+                        'blsnk defsult is interpreted as NA in R
+                        If Not (strDefaultValue = "NA" OrElse strDefaultValue = "") Then
+                            bChangedToDefaultValue = True
+                        End If
+
                     End If
-                End If
-                If bDefaultValue AndAlso Not bNonEditableCell Then
-                    dfValue = dDefaultValue
                 End If
 
                 grdCurrentWorkSheet.Item(row:=i, col:=j) = dfValue
 
-                If bDefaultValue AndAlso Not bNonEditableCell Then
+                'change color for editable cells that have been set with default value
+                If Not bNonEditableCell AndAlso bChangedToDefaultValue Then
                     grdCurrentWorkSheet.GetCell(i, j).Style.BackColor = Color.LightYellow
+                    AddChangedRow(i) 'add to the list of changed rows
                 End If
-
+                'set non editable cells to read only
                 If bNonEditableCell Then
                     grdCurrentWorkSheet.GetCell(i, j).IsReadOnly = True
                 End If
             Next
-            grdCurrentWorkSheet.RowHeaders.Item(i).Text = dfEditData.RowNames(i)
-        Next
 
-        For i As Integer = 0 To grdCurrentWorkSheet.RowCount - 1
-            If bDefaultValue Then
-                AddChangedRow(i)
-            End If
         Next
 
         'if entry by month then, add the monthly totals rows and set the calculated totals
@@ -241,29 +248,14 @@ Public Class sdgClimaticDataEntry
             grdCurrentWorkSheet.AppendRows(3)
 
             Dim iLastRowIndex As Integer = grdCurrentWorkSheet.Rows - 1
-            iMonthlyTotalsColIndex = Array.IndexOf(arrColumnHeaders, Me.strDateName)
-
-            grdCurrentWorkSheet.Item(row:=iLastRowIndex - 2, col:=iMonthlyTotalsColIndex) = "Sum"
-            grdCurrentWorkSheet.Item(row:=iLastRowIndex - 1, col:=iMonthlyTotalsColIndex) = "Calculated"
-            grdCurrentWorkSheet.Item(row:=iLastRowIndex, col:=iMonthlyTotalsColIndex) = "Difference"
-
-            'set the monthly totals from the set rows
-            For i As Integer = 0 To iLastRowIndex - 3
-                For j = iMonthlyTotalsColIndex + 1 To grdCurrentWorkSheet.Columns - 1
-                    'dont set totals for non editable columns
-                    If Not lstNonEditableColumns.Contains(arrColumnHeaders(j)) Then
-                        SetMonthlyTotalsRows(i, j)
-                    End If
-                Next
-            Next
-
-            'set the non editable cells for the added rows
-            For i As Integer = iLastRowIndex - 3 To iLastRowIndex
+            'set the non editable cells for the added 3 rows
+            For i As Integer = iLastRowIndex - 2 To iLastRowIndex
                 For j = 0 To grdCurrentWorkSheet.Columns - 1
-                    'create the cell by setting the value if it does not exis
+                    'create the cell by setting the value if it does not exist
                     If grdCurrentWorkSheet.GetCell(row:=i, col:=j) Is Nothing Then
                         grdCurrentWorkSheet.Item(row:=i, col:=j) = ""
                     End If
+
                     'all calculated and difference cells should be uneditable
                     If i = iLastRowIndex - 1 OrElse i = iLastRowIndex Then
                         grdCurrentWorkSheet.GetCell(row:=i, col:=j).IsReadOnly = True
@@ -276,7 +268,24 @@ Public Class sdgClimaticDataEntry
                 Next
             Next
 
+            iMonthlyTotalsColIndex = Array.IndexOf(arrColumnHeaders, Me.strDateName)
+            Dim dropDown As New CellTypes.DropdownListCell("Sum", "Mean", "Count", "Count > 0")
+            AddHandler dropDown.SelectedItemChanged, Sub()
+                                                         strValueTypeToCalculate = dropDown.SelectedItem.ToString.ToLower
+                                                         ComputeAndSetMonthlyTotalsForAllColumns()
+                                                     End Sub
 
+            'set the Sum cell drop down and make it editable
+            grdCurrentWorkSheet.Item(row:=iLastRowIndex - 2, col:=iMonthlyTotalsColIndex) = dropDown
+            grdCurrentWorkSheet.Item(row:=iLastRowIndex - 2, col:=iMonthlyTotalsColIndex) = "Sum"
+            Me.strValueTypeToCalculate = "sum"
+            grdCurrentWorkSheet.GetCell(row:=iLastRowIndex - 2, col:=iMonthlyTotalsColIndex).IsReadOnly = False
+
+            grdCurrentWorkSheet.Item(row:=iLastRowIndex - 1, col:=iMonthlyTotalsColIndex) = "Calculated"
+            grdCurrentWorkSheet.Item(row:=iLastRowIndex, col:=iMonthlyTotalsColIndex) = "Difference"
+
+            'set the monthly totals from the set rows
+            ComputeAndSetMonthlyTotalsForAllColumns()
         End If
 
         grdCurrentWorkSheet.SetRangeDataFormat(New RangePosition(0, 0, grdCurrentWorkSheet.Rows, grdCurrentWorkSheet.Columns), DataFormat.CellDataFormatFlag.Text)
@@ -336,8 +345,9 @@ Public Class sdgClimaticDataEntry
 
     Private Sub grdCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrentWorkSheet.BeforeCellKeyDown
         If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-            MsgBox("Deleting cells is disabled." & Environment.NewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
-            e.IsCancelled = True
+            If Not ValidateAndSaveRowChanged(e.Cell.Row, e.Cell.Column, "NA") Then
+                e.IsCancelled = True
+            End If
         End If
     End Sub
 
@@ -347,15 +357,21 @@ Public Class sdgClimaticDataEntry
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
-        Dim bValidValue As Boolean = True
-        Dim newValue As String = e.NewData
-
         If Not bAllowEdits Then
             'todo. set a better feedback message 
             MsgBox("Edits not allowed", MsgBoxStyle.Information, "No edits allowed.")
             e.EndReason = EndEditReason.Cancel
             Exit Sub
         End If
+
+        If Not ValidateAndSaveRowChanged(e.Cell.Row, e.Cell.Column, If(e.NewData = "", "NA", e.NewData)) Then
+            e.EndReason = EndEditReason.Cancel
+            'grdCurrentWorkSheet.FocusPos = New CellPosition(e.Cell.Address)
+        End If
+    End Sub
+
+    Private Function ValidateAndSaveRowChanged(iRow As Integer, iColumn As Integer, newValue As String) As Boolean
+        Dim bValidValue As Boolean = True
 
         If Not IsNumeric(newValue) AndAlso Not newValue = "NA" Then
             If Not (bAllowTrace AndAlso newValue.ToUpper = "T") Then
@@ -369,17 +385,14 @@ Public Class sdgClimaticDataEntry
 
         If bValidValue Then
             'dont add any change in the last 3 rows if entry is by "Month"
-            If Not (strEntryType = "Month" AndAlso e.Cell.Row >= grdCurrentWorkSheet.Rows - 3) Then
-                AddChangedRow(e.Cell.Row)
+            If Not (strEntryType = "Month" AndAlso iRow >= grdCurrentWorkSheet.Rows - 3) Then
+                AddChangedRow(iRow)
             End If
-            SetMonthlyTotalsRows(e.Cell.Row, e.Cell.Column, newValue)
-            grdCurrentWorkSheet.GetCell(e.Cell.Row, e.Cell.Column).Style.BackColor = Color.Yellow
-        Else
-            e.EndReason = EndEditReason.Cancel
-            'grdCurrentWorkSheet.FocusPos = New CellPosition(e.Cell.Address)
+            ComputeAndSetMonthlyTotalsForColumn(iColumn, iRow, newValue)
+            grdCurrentWorkSheet.GetCell(iRow, iColumn).Style.BackColor = Color.Yellow
         End If
-
-    End Sub
+        Return bValidValue
+    End Function
 
     ''' <summary>
     ''' adds the row index changed to the list of rows changes
@@ -398,9 +411,9 @@ Public Class sdgClimaticDataEntry
             Setup(dfEditData:=dfEditData, strDataFrameName:=strDataFrameName, clsSaveDataEntry:=clsSaveDataEntryFunction,
                      clsEditDataFrame:=clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction, clsNewCommentsList:=clsCommentsListFunction,
                      clsNewList:=clsListFunction,
-                     strDateName:=strDateName, lstElementsNames:=lstElementsNames, dTranformValue:=dTranformValue, dDefaultValue:=dDefaultValue,
+                     strDateName:=strDateName, lstElementsNames:=lstElementsNames, dTranformValue:=dTranformValue,
                       lstViewVariablesNames:=lstViewVariablesNames, strStationColumnName:=strStationColumnName,
-                      bDefaultValue:=bDefaultValue)
+                      strDefaultValue:=strDefaultValue)
         End If
     End Sub
 
@@ -448,65 +461,106 @@ Public Class sdgClimaticDataEntry
         bResetCommentsSubdialog = False
     End Sub
 
+
     ''' <summary>
-    ''' sets the monthly totals; the last 3 rows in the grid
+    ''' calculates the monthly totals for all columns
     ''' </summary>
-    ''' <param name="iRowIndexSelected"></param>
-    ''' <param name="iColIndexSelected"></param>
-    ''' <param name="strNewValue"></param>
-    Private Sub SetMonthlyTotalsRows(iRowIndexSelected As Integer, iColIndexSelected As Integer, Optional strNewValue As String = Nothing)
+    Private Sub ComputeAndSetMonthlyTotalsForAllColumns()
         Dim iLastRowIndex As Integer = grdCurrentWorkSheet.Rows - 1
-        Dim strSumValue As String
+        'set the monthly totals for all editable columns
+        For j = iMonthlyTotalsColIndex + 1 To grdCurrentWorkSheet.Columns - 1
+            'dont set totals for non editable columns
+            If Not lstNonEditableColumns.Contains(grdCurrentWorkSheet.ColumnHeaders.Item(j).Text) Then
+                ComputeAndSetMonthlyTotalsForColumn(j)
+            End If
+        Next
+    End Sub
+
+    ''' <summary>
+    ''' sets the calculated monthly totals for a column; the last 2 rows in the grid
+    ''' </summary>
+    ''' <param name="iColIndex"></param>
+    ''' <param name="iRowIndex"></param>
+    ''' <param name="strNewValue"></param>
+    Private Sub ComputeAndSetMonthlyTotalsForColumn(iColIndex As Integer, Optional iRowIndex As Integer = -1, Optional strNewValue As String = Nothing)
+        Dim iLastRowIndex As Integer = grdCurrentWorkSheet.Rows - 1
+        Dim strTotalUserInputValue As String
         Dim strValue As String
         Dim dTotalCalculatedValue As Double
         Dim dDifferenceValue As Double
+        Dim iAllValuesCount As Integer = 0
+        Dim dSumValue As Double
+        Dim iValuesGreaterThan0Count As Integer = 0
+        Dim dValue As Double
 
         'only do monthly totals for columns after the monthly total column
-        'If Me.strEntryType <> "Month" OrElse iColIndexSelected <= iMonthlyTotalsColIndex Then
-        '    Exit Sub
-        'End If
-
-        'only do monthly totals for columns after the monthly total column
-        'also exit if its a "calculated" or "difference" row
-        If Me.strEntryType <> "Month" OrElse iColIndexSelected <= iMonthlyTotalsColIndex OrElse iRowIndexSelected = iLastRowIndex - 1 OrElse iRowIndexSelected = iLastRowIndex Then
+        If Me.strEntryType <> "Month" OrElse iColIndex <= iMonthlyTotalsColIndex Then
             Exit Sub
         End If
 
-        'get user input sum value, if the new value is a "sum" value then just use the new value
-        If iRowIndexSelected = iLastRowIndex - 2 AndAlso strNewValue IsNot Nothing Then
-            strSumValue = strNewValue
+        'get user input monthly total value, if the new value is a "sum" value then just use the new value
+        If iRowIndex = iLastRowIndex - 2 AndAlso strNewValue IsNot Nothing Then
+            strTotalUserInputValue = strNewValue
         Else
-            strSumValue = grdCurrentWorkSheet.Item(row:=iLastRowIndex - 2, col:=iColIndexSelected)
+            strTotalUserInputValue = grdCurrentWorkSheet.Item(row:=iLastRowIndex - 2, col:=iColIndex)
         End If
 
-        'calculate the "calculated" value
+
+
+        'calculate the different "calculated" values.
         For i As Integer = 0 To iLastRowIndex - 3 'exclude the 3 rows; sum, calculated and difference
             'if new value of the current cell row item is there
             'then just use the new value to get the calculated value
-            If iRowIndexSelected = i AndAlso strNewValue IsNot Nothing Then
+            If iRowIndex = i AndAlso strNewValue IsNot Nothing Then
                 strValue = strNewValue
             Else
-                strValue = grdCurrentWorkSheet.Item(row:=i, col:=iColIndexSelected)
+                strValue = grdCurrentWorkSheet.Item(row:=i, col:=iColIndex)
             End If
 
             If IsNumeric(strValue) Then
-                dTotalCalculatedValue = dTotalCalculatedValue + Double.Parse(strValue)
+                dValue = Double.Parse(strValue)
+            Else
+                dValue = 0
             End If
+
+            iAllValuesCount = iAllValuesCount + 1
+            dSumValue = dSumValue + dValue
+            If dValue > 0 Then
+                iValuesGreaterThan0Count = iValuesGreaterThan0Count + 1
+            End If
+
         Next
+
+        'set the required calculated value
+        Select Case strValueTypeToCalculate
+            Case "sum"
+                dTotalCalculatedValue = dSumValue
+            Case "mean"
+                'only calculate mean if changed values > 0
+                dTotalCalculatedValue = If(iAllValuesCount > 0, dSumValue / iAllValuesCount, 0)
+            Case "count"
+                dTotalCalculatedValue = iAllValuesCount
+            Case "count > 0"
+                dTotalCalculatedValue = iValuesGreaterThan0Count
+            Case Else
+                'todo. developer error?? 
+                dTotalCalculatedValue = 0
+        End Select
 
         'set the calculated value and round of to 2 d.p
         dTotalCalculatedValue = Math.Round(dTotalCalculatedValue, 2)
-        grdCurrentWorkSheet.Item(row:=iLastRowIndex - 1, col:=iColIndexSelected) = dTotalCalculatedValue
+        grdCurrentWorkSheet.Item(row:=iLastRowIndex - 1, col:=iColIndex) = dTotalCalculatedValue
 
         'set difference value, only when there is a sum value else remove the difference
-        If IsNumeric(strSumValue) Then
-            dDifferenceValue = Math.Round(Double.Parse(strSumValue) - dTotalCalculatedValue, 2)
-            grdCurrentWorkSheet.Item(row:=iLastRowIndex, col:=iColIndexSelected) = dDifferenceValue
+        If IsNumeric(strTotalUserInputValue) Then
+            dDifferenceValue = Math.Round(Double.Parse(strTotalUserInputValue) - dTotalCalculatedValue, 2)
+            grdCurrentWorkSheet.Item(row:=iLastRowIndex, col:=iColIndex) = dDifferenceValue
             'grdCurrentWorkSheet.GetCell(row:=iLastRowIndex, col:=iColIndexSelected).Style.BackColor = If(dDifferenceValue = 0, Color.LightGreen, Color.White)
         Else
-            grdCurrentWorkSheet.Item(row:=iLastRowIndex, col:=iColIndexSelected) = ""
+            grdCurrentWorkSheet.Item(row:=iLastRowIndex, col:=iColIndex) = ""
             'grdCurrentWorkSheet.GetCell(row:=iLastRowIndex, col:=iColIndexSelected).Style.BackColor = Color.White
         End If
 
     End Sub
+
 End Class

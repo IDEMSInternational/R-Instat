@@ -146,8 +146,7 @@ Public Class dlgClimaticDataEntry
         bSubdialogFirstLoad = True
         bResetSubdialogs = True
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
-        sdgClimaticDataEntryOptions.GetSetDefaultValue = 0
-        sdgClimaticDataEntryOptions.GetSetTransformValue = 0.1
+        sdgClimaticDataEntryOptions.SetDefaults()
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsSaveDataEntryFunction)
     End Sub
@@ -239,13 +238,11 @@ Public Class dlgClimaticDataEntry
                                          clsEditDataFrame:=clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction, clsNewCommentsList:=clsCommentsListFunction, clsNewList:=clsListFunction,
                       strDateName:=strDateColumnName, lstElementsNames:=lstElementsColumnNames, lstViewVariablesNames:=lstVariablesColumnNames,
                                          strStationColumnName:=strStationColumnName,
-                                           bDefaultValue:=sdgClimaticDataEntryOptions.GetSetDefaultCheckboxState,
-                                           dDefaultValue:=sdgClimaticDataEntryOptions.GetSetDefaultValue,
+                                           strDefaultValue:=sdgClimaticDataEntryOptions.DefaultValue,
                                            bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
                                            bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
                                            bTransform:=sdgClimaticDataEntryOptions.Transform,
                                            dTranformValue:=sdgClimaticDataEntryOptions.GetSetTransformValue,
-                                           MissingValueAsNA:=sdgClimaticDataEntryOptions.MissingValueAsNA,
                                            strEntryType:=ucrInputType.GetText, ucrNewBaseSelector:=ucrSelectorClimaticDataEntry, bReset:=bResetSubdialogs)
             End If
             sdgClimaticDataEntry.ShowDialog()
@@ -311,7 +308,7 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
-        sdgClimaticDataEntryOptions.GetSetDefaultCheckboxState = False
+        'sdgClimaticDataEntryOptions.GetSetDefaultCheckboxState = False
         clsListFunction.ClearParameters()
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
         SetNumberRowsChangedText(0)
@@ -338,9 +335,7 @@ Public Class dlgClimaticDataEntry
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgClimaticDataEntryOptions.SetUpDataEntryOptions(bReset:=bResetSubdialogs)
         sdgClimaticDataEntryOptions.ShowDialog()
-        bResetSubdialogs = False
         bChange = True 'todo. is it always true
     End Sub
 End Class

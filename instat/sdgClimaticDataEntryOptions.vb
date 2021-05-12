@@ -17,52 +17,49 @@
 Imports instat.Translations
 Public Class sdgClimaticDataEntryOptions
     Private bControlsInitialised As Boolean = False
-    Private bMissing As Boolean = True
+    Private dctDefaultValues As New Dictionary(Of String, String)
 
     Private Sub sdgClimaticDataEntryOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If Not bControlsInitialised Then
+            InitialiseControls()
+            SetDefaults()
+        End If
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseControls()
         ucrChkTransform.SetText("Transform:")
-        ttucrChkTransform.SetToolTip(ucrChkTransform.chkCheck, "The values written to the data frame are transformed, usually multiplied, by the value given here.")
 
         ucrInputTransform.SetItems({"0.1", "25.4", "0.254"})
         ucrInputTransform.SetValidationTypeAsNumeric()
         ucrInputTransform.Visible = False
 
-        ucrChkDefaultValue.SetText("Default Value:")
+        ucrChkTransform.AddToLinkedControls(ucrInputTransform, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrInputDefaultValue.SetValidationTypeAsNumeric()
-        ucrInputDefaultValue.Visible = False
-
-        ucrChkMissingValues.SetText("Missing values shown as NA")
+        dctDefaultValues.Add("NA", "NA")
+        dctDefaultValues.Add("Blank", "")
+        dctDefaultValues.Add("0", "0")
+        ucrInputDefaultValue.SetItems(dctDefaultValues, bSetCondtions:=False)
+        ucrInputDefaultValue.SetDropDownStyleAsNonEditable()
+        ttDefaultValue.SetToolTip(ucrInputDefaultValue, "Default value for missing values.")
 
         ucrChkNoDecimal.SetText("No Decimal")
 
         ucrChkExtraRows.SetText("Extra Rows")
 
-        ucrChkDefaultValue.AddToLinkedControls(ucrInputDefaultValue, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTransform.AddToLinkedControls(ucrInputTransform, {True}, bNewLinkedHideIfParameterMissing:=True)
-
         ucrChkAllowTrace.SetText("Allow t for Trace")
-        ttucrChkDefaultValue.SetToolTip(ucrChkDefaultValue.chkCheck, "The data must be defined as climatic to recognise which variable is precipitation.")
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetUpDataEntryOptions(Optional bReset As Boolean = False)
+    Public Sub SetDefaults()
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-
-        ucrChkMissingValues.Checked = True
-
-        If bReset Then
-            ucrChkDefaultValue.Checked = False
-            ucrChkAllowTrace.Checked = False
-            ucrChkTransform.Checked = False
-            ucrChkNoDecimal.Checked = False
-        End If
+        ucrInputDefaultValue.GetSetSelectedIndex = 0
+        ucrInputTransform.GetSetSelectedIndex = 0
+        ucrChkAllowTrace.Checked = False
+        ucrChkTransform.Checked = False
+        ucrChkNoDecimal.Checked = False
     End Sub
 
     Public ReadOnly Property NoDecimals As Boolean
@@ -71,32 +68,10 @@ Public Class sdgClimaticDataEntryOptions
         End Get
     End Property
 
-    Public Property GetSetDefaultCheckboxState As Boolean
+    Public ReadOnly Property DefaultValue As String
         Get
-            Return ucrChkDefaultValue.Checked
+            Return dctDefaultValues.Item(ucrInputDefaultValue.GetValue)
         End Get
-        Set(value As Boolean)
-            ucrChkDefaultValue.Checked = value
-        End Set
-    End Property
-
-    Public ReadOnly Property MissingValueAsNA As Boolean
-        Get
-            Return bMissing
-        End Get
-    End Property
-
-    Public Property GetSetDefaultValue As Double
-        Get
-            Dim dTemp As Double
-            If Not Double.TryParse(ucrInputDefaultValue.GetValue, dTemp) Then
-                MsgBox("Developer error: The ucrInputDefaultValue input contains the value '" & ucrInputDefaultValue.GetValue & "'. Cannot convert this to a double.")
-            End If
-            Return dTemp
-        End Get
-        Set(value As Double)
-            ucrInputDefaultValue.SetText(value)
-        End Set
     End Property
 
     Public ReadOnly Property AllowTrace As Boolean
@@ -111,7 +86,7 @@ Public Class sdgClimaticDataEntryOptions
         End Get
     End Property
 
-    Public Property GetSetTransformValue As Double
+    Public ReadOnly Property GetSetTransformValue As Double
         Get
             Dim dTemp As Double
             If Not Double.TryParse(ucrInputTransform.GetValue, dTemp) Then
@@ -119,12 +94,6 @@ Public Class sdgClimaticDataEntryOptions
             End If
             Return dTemp
         End Get
-        Set(value As Double)
-            ucrInputTransform.SetText(value)
-        End Set
     End Property
 
-    Private Sub ucrChkMissingValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMissingValues.ControlValueChanged
-        bMissing = ucrChkMissingValues.Checked
-    End Sub
 End Class
