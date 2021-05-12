@@ -79,7 +79,7 @@ Public Class dlgStringHandling
         ucrSaveStringHandling.SetSaveTypeAsColumn()
         ucrSaveStringHandling.SetDataFrameSelector(ucrSelectorStringHandling.ucrAvailableDataFrames)
         ucrSaveStringHandling.SetIsComboBox()
-        ucrSaveStringHandling.SetLabelText("Prefix for New Column:")
+        ucrSaveStringHandling.SetLabelText("New Column:")
         ucrSaveStringHandling.setLinkedReceiver(ucrReceiverStringHandling) 'added
 
         'ucrChkIncludeRegularExpressions
