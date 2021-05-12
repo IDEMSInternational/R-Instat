@@ -29,16 +29,16 @@ Partial Class sdgClimaticDataEntryOptions
         Me.ucrChkNoDecimal = New instat.ucrCheck()
         Me.ttDefaultValue = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblDefault = New System.Windows.Forms.Label()
+        Me.ucrInputDefaultValue = New instat.ucrInputComboBox()
         Me.lblBefore = New System.Windows.Forms.Label()
         Me.lblAfter = New System.Windows.Forms.Label()
         Me.ttucrChkTransform = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrInputDefaultValue = New instat.ucrInputComboBox()
+        Me.ucrChkTransform = New instat.ucrCheck()
         Me.ucrChkExtraRows = New instat.ucrCheck()
         Me.ucrNudAfter = New instat.ucrNud()
         Me.ucrNudBefore = New instat.ucrNud()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
         Me.ucrInputTransform = New instat.ucrInputComboBox()
-        Me.ucrChkTransform = New instat.ucrCheck()
         Me.grpRestrictEntry.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -74,6 +74,15 @@ Partial Class sdgClimaticDataEntryOptions
         Me.lblDefault.Name = "lblDefault"
         Me.ttDefaultValue.SetToolTip(Me.lblDefault, resources.GetString("lblDefault.ToolTip"))
         '
+        'ucrInputDefaultValue
+        '
+        Me.ucrInputDefaultValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputDefaultValue.GetSetSelectedIndex = -1
+        Me.ucrInputDefaultValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDefaultValue, "ucrInputDefaultValue")
+        Me.ucrInputDefaultValue.Name = "ucrInputDefaultValue"
+        Me.ttDefaultValue.SetToolTip(Me.ucrInputDefaultValue, resources.GetString("ucrInputDefaultValue.ToolTip"))
+        '
         'lblBefore
         '
         resources.ApplyResources(Me.lblBefore, "lblBefore")
@@ -90,14 +99,12 @@ Partial Class sdgClimaticDataEntryOptions
         Me.ttucrChkTransform.InitialDelay = 500
         Me.ttucrChkTransform.ReshowDelay = 100
         '
-        'ucrInputDefaultValue
+        'ucrChkTransform
         '
-        Me.ucrInputDefaultValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputDefaultValue.GetSetSelectedIndex = -1
-        Me.ucrInputDefaultValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDefaultValue, "ucrInputDefaultValue")
-        Me.ucrInputDefaultValue.Name = "ucrInputDefaultValue"
-        Me.ttDefaultValue.SetToolTip(Me.ucrInputDefaultValue, resources.GetString("ucrInputDefaultValue.ToolTip"))
+        Me.ucrChkTransform.Checked = False
+        resources.ApplyResources(Me.ucrChkTransform, "ucrChkTransform")
+        Me.ucrChkTransform.Name = "ucrChkTransform"
+        Me.ttucrChkTransform.SetToolTip(Me.ucrChkTransform, resources.GetString("ucrChkTransform.ToolTip"))
         '
         'ucrChkExtraRows
         '
@@ -137,13 +144,6 @@ Partial Class sdgClimaticDataEntryOptions
         Me.ucrInputTransform.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputTransform, "ucrInputTransform")
         Me.ucrInputTransform.Name = "ucrInputTransform"
-        '
-        'ucrChkTransform
-        '
-        Me.ucrChkTransform.Checked = False
-        resources.ApplyResources(Me.ucrChkTransform, "ucrChkTransform")
-        Me.ucrChkTransform.Name = "ucrChkTransform"
-        Me.ttucrChkTransform.SetToolTip(Me.ucrChkTransform, resources.GetString("ucrChkTransform.ToolTip"))
         '
         'sdgClimaticDataEntryOptions
         '

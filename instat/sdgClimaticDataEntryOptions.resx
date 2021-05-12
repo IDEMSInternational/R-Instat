@@ -117,14 +117,62 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;ucrChkAllowTrace.Name" xml:space="preserve">
+    <value>ucrChkAllowTrace</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAllowTrace.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAllowTrace.Parent" xml:space="preserve">
+    <value>grpRestrictEntry</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAllowTrace.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNoDecimal.Name" xml:space="preserve">
+    <value>ucrChkNoDecimal</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNoDecimal.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNoDecimal.Parent" xml:space="preserve">
+    <value>grpRestrictEntry</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNoDecimal.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="grpRestrictEntry.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 63</value>
+  </data>
+  <data name="grpRestrictEntry.Size" type="System.Drawing.Size, System.Drawing">
+    <value>289, 40</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="grpRestrictEntry.TabIndex" type="System.Int32, mscorlib">
+    <value>90</value>
+  </data>
+  <data name="grpRestrictEntry.Text" xml:space="preserve">
+    <value>Restrict Entry</value>
+  </data>
+  <data name="&gt;&gt;grpRestrictEntry.Name" xml:space="preserve">
+    <value>grpRestrictEntry</value>
+  </data>
+  <data name="&gt;&gt;grpRestrictEntry.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpRestrictEntry.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpRestrictEntry.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
   <data name="ucrChkAllowTrace.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 14</value>
   </data>
   <data name="ucrChkAllowTrace.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 20</value>
   </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrChkAllowTrace.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
   </data>
@@ -161,30 +209,6 @@
   <data name="&gt;&gt;ucrChkNoDecimal.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="grpRestrictEntry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 63</value>
-  </data>
-  <data name="grpRestrictEntry.Size" type="System.Drawing.Size, System.Drawing">
-    <value>289, 40</value>
-  </data>
-  <data name="grpRestrictEntry.TabIndex" type="System.Int32, mscorlib">
-    <value>90</value>
-  </data>
-  <data name="grpRestrictEntry.Text" xml:space="preserve">
-    <value>Restrict Entry</value>
-  </data>
-  <data name="&gt;&gt;grpRestrictEntry.Name" xml:space="preserve">
-    <value>grpRestrictEntry</value>
-  </data>
-  <data name="&gt;&gt;grpRestrictEntry.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpRestrictEntry.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpRestrictEntry.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
   <metadata name="ttDefaultValue.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
@@ -199,13 +223,13 @@
     <value>12, 39</value>
   </data>
   <data name="lblDefault.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 13</value>
+    <value>113, 13</value>
   </data>
   <data name="lblDefault.TabIndex" type="System.Int32, mscorlib">
     <value>102</value>
   </data>
   <data name="lblDefault.Text" xml:space="preserve">
-    <value>Default value:</value>
+    <value>Missing/Default value:</value>
   </data>
   <data name="lblDefault.ToolTip" xml:space="preserve">
     <value>Default value for missing values</value>
@@ -221,6 +245,33 @@
   </data>
   <data name="&gt;&gt;lblDefault.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrInputDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>133, 34</value>
+  </data>
+  <data name="ucrInputDefaultValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrInputDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 21</value>
+  </data>
+  <data name="ucrInputDefaultValue.TabIndex" type="System.Int32, mscorlib">
+    <value>101</value>
+  </data>
+  <data name="ucrInputDefaultValue.ToolTip" xml:space="preserve">
+    <value>Select default value for missing values</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDefaultValue.Name" xml:space="preserve">
+    <value>ucrInputDefaultValue</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDefaultValue.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDefaultValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDefaultValue.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="lblBefore.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -291,32 +342,29 @@
   <metadata name="ttucrChkTransform.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>116, 17</value>
   </metadata>
-  <data name="ucrInputDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 34</value>
+  <data name="ucrChkTransform.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 8</value>
   </data>
-  <data name="ucrInputDefaultValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
+  <data name="ucrChkTransform.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 20</value>
   </data>
-  <data name="ucrInputDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 21</value>
+  <data name="ucrChkTransform.TabIndex" type="System.Int32, mscorlib">
+    <value>88</value>
   </data>
-  <data name="ucrInputDefaultValue.TabIndex" type="System.Int32, mscorlib">
-    <value>101</value>
+  <data name="ucrChkTransform.ToolTip" xml:space="preserve">
+    <value>The values written to the data frame are transformed, usually multiplied, by the value given here.</value>
   </data>
-  <data name="ucrInputDefaultValue.ToolTip" xml:space="preserve">
-    <value>Select default value for missing values</value>
+  <data name="&gt;&gt;ucrChkTransform.Name" xml:space="preserve">
+    <value>ucrChkTransform</value>
   </data>
-  <data name="&gt;&gt;ucrInputDefaultValue.Name" xml:space="preserve">
-    <value>ucrInputDefaultValue</value>
+  <data name="&gt;&gt;ucrChkTransform.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputDefaultValue.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDefaultValue.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkTransform.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrInputDefaultValue.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;ucrChkTransform.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="ucrChkExtraRows.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -415,13 +463,13 @@
     <value>7</value>
   </data>
   <data name="ucrInputTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 6</value>
+    <value>132, 6</value>
   </data>
   <data name="ucrInputTransform.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrInputTransform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 21</value>
+    <value>74, 21</value>
   </data>
   <data name="ucrInputTransform.TabIndex" type="System.Int32, mscorlib">
     <value>91</value>
@@ -437,30 +485,6 @@
   </data>
   <data name="&gt;&gt;ucrInputTransform.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="ucrChkTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 8</value>
-  </data>
-  <data name="ucrChkTransform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 20</value>
-  </data>
-  <data name="ucrChkTransform.TabIndex" type="System.Int32, mscorlib">
-    <value>88</value>
-  </data>
-  <data name="ucrChkTransform.ToolTip" xml:space="preserve">
-    <value>The values written to the data frame are transformed, usually multiplied, by the value given here.</value>
-  </data>
-  <data name="&gt;&gt;ucrChkTransform.Name" xml:space="preserve">
-    <value>ucrChkTransform</value>
-  </data>
-  <data name="&gt;&gt;ucrChkTransform.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkTransform.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkTransform.ZOrder" xml:space="preserve">
-    <value>10</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

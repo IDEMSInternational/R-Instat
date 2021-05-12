@@ -357,12 +357,12 @@ Public Class sdgClimaticDataEntry
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
-        If Not bAllowEdits Then
-            'todo. set a better feedback message 
-            MsgBox("Edits not allowed", MsgBoxStyle.Information, "No edits allowed.")
-            e.EndReason = EndEditReason.Cancel
-            Exit Sub
-        End If
+        'If Not bAllowEdits Then
+        '    'todo. set a better feedback message 
+        '    MsgBox("Edits not allowed", MsgBoxStyle.Information, "No edits allowed.")
+        '    e.EndReason = EndEditReason.Cancel
+        '    Exit Sub
+        'End If
 
         If Not ValidateAndSaveRowChanged(e.Cell.Row, e.Cell.Column, If(e.NewData = "", "NA", e.NewData)) Then
             e.EndReason = EndEditReason.Cancel
@@ -408,12 +408,17 @@ Public Class sdgClimaticDataEntry
     Private Sub cmdReset_Click(sender As Object, e As EventArgs) Handles cmdReset.Click
         If MsgBox("All data entry will be lost. Are you sure you want to continue?", MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
             clsSaveDataEntryFunction.RemoveParameterByName("rows_changed")
+
             Setup(dfEditData:=dfEditData, strDataFrameName:=strDataFrameName, clsSaveDataEntry:=clsSaveDataEntryFunction,
-                     clsEditDataFrame:=clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction, clsNewCommentsList:=clsCommentsListFunction,
-                     clsNewList:=clsListFunction,
-                     strDateName:=strDateName, lstElementsNames:=lstElementsNames, dTranformValue:=dTranformValue,
-                      lstViewVariablesNames:=lstViewVariablesNames, strStationColumnName:=strStationColumnName,
-                      strDefaultValue:=strDefaultValue)
+                             clsEditDataFrame:=clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction,
+                             clsNewCommentsList:=clsCommentsListFunction, clsNewList:=clsListFunction,
+                             strDateName:=strDateName, lstElementsNames:=lstElementsNames, lstViewVariablesNames:=lstViewVariablesNames,
+                             strStationColumnName:=strStationColumnName, strDefaultValue:=sdgClimaticDataEntryOptions.DefaultValue,
+                               bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
+                               bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
+                               bTransform:=sdgClimaticDataEntryOptions.Transform,
+                               dTranformValue:=sdgClimaticDataEntryOptions.GetSetTransformValue,
+                               strEntryType:=strEntryType, ucrNewBaseSelector:=ucrBaseSelector, bReset:=True)
         End If
     End Sub
 
