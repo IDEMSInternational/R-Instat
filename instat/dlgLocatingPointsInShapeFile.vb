@@ -48,6 +48,9 @@ Public Class dlgLocatingPointsInShapeFile
         ucrSelectorStationFile.SetParameter(New RParameter("x", 0))
         ucrSelectorStationFile.SetParameterIsrfunction()
 
+        ucrSelectorShapeFile.SetParameter(New RParameter("y", 1))
+        ucrSelectorShapeFile.SetParameterIsrfunction()
+
         ucrReceiverLongitude.SetParameter(New RParameter("longitude", 0, bNewIncludeArgumentName:=False))
         ucrReceiverLongitude.Selector = ucrSelectorStationFile
         ucrReceiverLongitude.SetParameterIsString()
@@ -80,7 +83,7 @@ Public Class dlgLocatingPointsInShapeFile
         ucrSaveNewColumnName.SetSaveTypeAsColumn()
         ucrSaveNewColumnName.SetDataFrameSelector(ucrSelectorStationFile.ucrAvailableDataFrames)
         ucrSaveNewColumnName.SetIsComboBox()
-        ucrSaveNewColumnName.SetLabelText("New Column Name")
+        ucrSaveNewColumnName.SetLabelText("New Column Name:")
 
     End Sub
 
@@ -166,7 +169,7 @@ Public Class dlgLocatingPointsInShapeFile
         ucrSelectorShapeFile.AddAdditionalCodeParameterPair(clsExtractColumnStIntersectsFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=1)
 
         ucrSelectorStationFile.SetRCode(clsStAsSfFunction, bReset)
-        ucrSelectorShapeFile.SetRCode(clsStIntersectsFunction, bReset)
+        ucrSelectorShapeFile.SetRCode(clsExtractColumnStIntersectsFunction, bReset)
         ucrReceiverLatitude.SetRCode(clsConcFunction, bReset)
         ucrReceiverLongitude.SetRCode(clsConcFunction, bReset)
         ucrReceiverGeometry.SetRCode(clsStCombineFunction, bReset)

@@ -32,12 +32,12 @@ Partial Class dlgLocatingPointsInShapeFile
         Me.lblLatitude = New System.Windows.Forms.Label()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrReceiverGeometry = New instat.ucrReceiverSingle()
-        Me.ucrSelectorShapeFile = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverShapefilePolygon = New instat.ucrReceiverSingle()
+        Me.ucrSelectorShapeFile = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrReceiverGeometry = New instat.ucrReceiverSingle()
+        Me.ucrReceiverSTationfilePolygon = New instat.ucrReceiverSingle()
         Me.ucrReceiverLongitude = New instat.ucrReceiverSingle()
         Me.ucrReceiverLatitude = New instat.ucrReceiverSingle()
-        Me.ucrReceiverSTationfilePolygon = New instat.ucrReceiverSingle()
         Me.ucrSelectorStationFile = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrSaveNewColumnName = New instat.ucrSave()
         Me.grpShapeaFile.SuspendLayout()
@@ -104,23 +104,6 @@ Partial Class dlgLocatingPointsInShapeFile
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrReceiverGeometry
-        '
-        Me.ucrReceiverGeometry.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverGeometry, "ucrReceiverGeometry")
-        Me.ucrReceiverGeometry.Name = "ucrReceiverGeometry"
-        Me.ucrReceiverGeometry.Selector = Nothing
-        Me.ucrReceiverGeometry.strNcFilePath = ""
-        Me.ucrReceiverGeometry.ucrSelector = Nothing
-        '
-        'ucrSelectorShapeFile
-        '
-        Me.ucrSelectorShapeFile.bDropUnusedFilterLevels = False
-        Me.ucrSelectorShapeFile.bShowHiddenColumns = False
-        Me.ucrSelectorShapeFile.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorShapeFile, "ucrSelectorShapeFile")
-        Me.ucrSelectorShapeFile.Name = "ucrSelectorShapeFile"
-        '
         'ucrReceiverShapefilePolygon
         '
         Me.ucrReceiverShapefilePolygon.frmParent = Nothing
@@ -130,23 +113,22 @@ Partial Class dlgLocatingPointsInShapeFile
         Me.ucrReceiverShapefilePolygon.strNcFilePath = ""
         Me.ucrReceiverShapefilePolygon.ucrSelector = Nothing
         '
-        'ucrReceiverLongitude
+        'ucrSelectorShapeFile
         '
-        Me.ucrReceiverLongitude.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverLongitude, "ucrReceiverLongitude")
-        Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
-        Me.ucrReceiverLongitude.Selector = Nothing
-        Me.ucrReceiverLongitude.strNcFilePath = ""
-        Me.ucrReceiverLongitude.ucrSelector = Nothing
+        Me.ucrSelectorShapeFile.bDropUnusedFilterLevels = False
+        Me.ucrSelectorShapeFile.bShowHiddenColumns = False
+        Me.ucrSelectorShapeFile.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorShapeFile, "ucrSelectorShapeFile")
+        Me.ucrSelectorShapeFile.Name = "ucrSelectorShapeFile"
         '
-        'ucrReceiverLatitude
+        'ucrReceiverGeometry
         '
-        Me.ucrReceiverLatitude.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
-        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
-        Me.ucrReceiverLatitude.Selector = Nothing
-        Me.ucrReceiverLatitude.strNcFilePath = ""
-        Me.ucrReceiverLatitude.ucrSelector = Nothing
+        Me.ucrReceiverGeometry.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverGeometry, "ucrReceiverGeometry")
+        Me.ucrReceiverGeometry.Name = "ucrReceiverGeometry"
+        Me.ucrReceiverGeometry.Selector = Nothing
+        Me.ucrReceiverGeometry.strNcFilePath = ""
+        Me.ucrReceiverGeometry.ucrSelector = Nothing
         '
         'ucrReceiverSTationfilePolygon
         '
@@ -156,6 +138,24 @@ Partial Class dlgLocatingPointsInShapeFile
         Me.ucrReceiverSTationfilePolygon.Selector = Nothing
         Me.ucrReceiverSTationfilePolygon.strNcFilePath = ""
         Me.ucrReceiverSTationfilePolygon.ucrSelector = Nothing
+        '
+        'ucrReceiverLongitude
+        '
+        Me.ucrReceiverLongitude.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverLongitude, "ucrReceiverLongitude")
+        Me.ucrReceiverLongitude.Name = "ucrReceiverLongitude"
+        Me.ucrReceiverLongitude.Selector = Nothing
+        Me.ucrReceiverLongitude.strNcFilePath = ""
+        Me.ucrReceiverLongitude.ucrSelector = Nothing
+        '
+        'ucrReceiverLatitude
+        '
+        Me.ucrReceiverLatitude.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverLatitude, "ucrReceiverLatitude")
+        Me.ucrReceiverLatitude.Name = "ucrReceiverLatitude"
+        Me.ucrReceiverLatitude.Selector = Nothing
+        Me.ucrReceiverLatitude.strNcFilePath = ""
+        Me.ucrReceiverLatitude.ucrSelector = Nothing
         '
         'ucrSelectorStationFile
         '
