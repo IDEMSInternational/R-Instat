@@ -114,7 +114,7 @@ Public Class dlgInsertColumn
         ucrNudStartRow.SetLinkedDisplayControl(lblStartPos)
         ucrReceiverColumnsToInsert.SetLinkedDisplayControl(lblColumn)
 
-        ttColumnDefaultValue.SetToolTip(ucrInputDefaultValue.cboInput, "Include the quotes if the default value is a string e.g. "small". Do not include quotes if the default value is logical e.g. TRUE)
+        ttColumnDefaultValue.SetToolTip(ucrInputDefaultValue.cboInput, "Include the quotes if the default value is a string e.g. ""small"". Do not include quotes if the default value is logical e.g. TRUE")
 
     End Sub
 
