@@ -299,8 +299,6 @@ Public Class sdgClimaticDataEntry
 
         SetColumnNames(strDataFrameName, dfEditData.ColumnNames())
 
-        ttCmdReset.SetToolTip(cmdReset, "Clears all data entry.")
-        ttCmdTransformButton.SetToolTip(cmdTransform, "When implemented, this is an option to show the transformed data.")
     End Sub
 
     Public Sub SetColumnNames(strDataFrameName As String, strColumnNames As String())
@@ -345,16 +343,118 @@ Public Class sdgClimaticDataEntry
     End Sub
 
     Private Sub grdCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrentWorkSheet.BeforeCellKeyDown
-        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+        'allow deletes for read only cells
+
+        If Not e.Cell.IsReadOnly AndAlso e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+            'todo. check and get range of selected cells
             If Not ValidateAndSaveRowChanged(e.Cell.Row, e.Cell.Column, "NA") Then
                 e.IsCancelled = True
+
             End If
         End If
     End Sub
 
+    Private Sub grdCurrentWorkSheet_AfterCellKeyDown(sender As Object, e As AfterCellKeyDownEventArgs) Handles grdCurrentWorkSheet.AfterCellKeyDown
+
+    End Sub
+
+
+    Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
+        mnuPaste.Enabled = Not String.IsNullOrEmpty(My.Computer.Clipboard.GetText)
+    End Sub
+
+    Private Sub grdCurrentWorkSheet_AfterCopy(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterCopy
+
+    End Sub
+
+    Private Sub grdCurrentWorkSheet_AfterRangeCopy(sender As Object, e As CopyOrMoveRangeEventArgs) Handles grdCurrentWorkSheet.AfterRangeCopy
+
+    End Sub
+
+    Private Sub grdCurrentWorkSheet_BeforeCopy(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrentWorkSheet.BeforeCopy
+
+    End Sub
+
+    Private Sub grdCurrentWorkSheet_BeforeRangeCopy(sender As Object, e As BeforeCopyOrMoveRangeEventArgs) Handles grdCurrentWorkSheet.BeforeRangeCopy
+
+    End Sub
+
+    Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
+        'grdCurrentWorkSheet.GetPartialGrid(grdCurrentWorkSheet.SelectionRange)
+    End Sub
+
+    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+        PasteIntoColumn()
+    End Sub
     Private Sub grdCurrentWorkSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrentWorkSheet.BeforePaste
-        MsgBox("Pasting not yet implemented.", MsgBoxStyle.Information, "Pasting not implemented.")
-        e.IsCancelled = True
+        'if not successful abort the paste event
+        If Not PasteIntoColumn() Then
+            e.IsCancelled = True
+        End If
+    End Sub
+
+    Private Function PasteIntoColumn() As Boolean
+        If grdCurrentWorkSheet.SelectionRange.Cols > 1 Then
+            MsgBox("Pasting into cells in different columns is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try pasting into one column cells at a time.", MsgBoxStyle.Information, "Cannot paste into multiple cells in different columns")
+            Return False
+        End If
+
+        Dim arrPasteValues As String()
+        Dim lstRowPositions As New List(Of Integer)
+        Dim strClipBoardText As String = My.Computer.Clipboard.GetText
+        Dim iColumnIndex As Integer = grdCurrentWorkSheet.SelectionRange.Col
+        Dim iStartRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row
+        Dim iLastEditableRowIndex As Integer = GetLastEditableRowIndex()
+
+        If String.IsNullOrEmpty(strClipBoardText) Then
+            Return False
+        End If
+        If lstNonEditableColumns.Contains(grdCurrentWorkSheet.ColumnHeaders.Item(iColumnIndex).Text) Then
+            MsgBox("Pasting into uneditable cells is currently disabled." & Environment.NewLine & "Try pasting into one cell at a time.", MsgBoxStyle.Information, "Cannot paste into uneditable cells")
+            Return False
+        End If
+
+        'split the text to be pasted into multiple lines and remove empty entries cause by the return line
+        'try carriage return–linefeed combination
+        arrPasteValues = strClipBoardText.Split({Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries)
+
+        'try line feed only
+        If arrPasteValues.Length = 1 Then
+            arrPasteValues = strClipBoardText.Split({vbLf}, StringSplitOptions.RemoveEmptyEntries)
+        End If
+
+        'try carriage return only
+        If arrPasteValues.Length = 1 Then
+            arrPasteValues = strClipBoardText.Split({vbCr}, StringSplitOptions.RemoveEmptyEntries)
+        End If
+
+        'validate all the values first
+        For index As Integer = 0 To arrPasteValues.Length - 1
+            'abort entry when the value is not valid
+            If Not ValidateValue(arrPasteValues(index).Trim) Then
+                Return False
+            End If
+        Next
+
+        'then save the values if all are valid
+        For index As Integer = 0 To arrPasteValues.Length - 1
+            ValidateAndSaveRowChanged(iStartRowIndex, iColumnIndex, arrPasteValues(index).Trim)
+            'abort entry if pasted rows are more than editable rows
+            If iStartRowIndex >= iLastEditableRowIndex Then
+                Exit For
+            End If
+            iStartRowIndex = iStartRowIndex + 1
+        Next
+
+        Return True
+    End Function
+
+    Private Sub grdCurrentWorkSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrentWorkSheet.BeforeCut
+
+    End Sub
+
+    Private Sub grdCurrentWorkSheet_AfterCut(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterCut
+
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
@@ -372,6 +472,20 @@ Public Class sdgClimaticDataEntry
     End Sub
 
     Private Function ValidateAndSaveRowChanged(iRow As Integer, iColumn As Integer, newValue As String) As Boolean
+        If ValidateValue(newValue) Then
+            'dont add any change in the last 3 rows if entry is by "Month"
+            If Not (strEntryType = "Month" AndAlso iRow >= grdCurrentWorkSheet.Rows - 3) Then
+                AddChangedRow(iRow)
+            End If
+            ComputeAndSetMonthlyTotalsForColumn(iColumn, iRow, newValue)
+            grdCurrentWorkSheet.GetCell(iRow, iColumn).Style.BackColor = Color.Yellow
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
+    Private Function ValidateValue(newValue As String) As Boolean
         Dim bValidValue As Boolean = True
 
         If Not IsNumeric(newValue) AndAlso Not newValue = "NA" Then
@@ -383,17 +497,9 @@ Public Class sdgClimaticDataEntry
             MsgBox("Value should not be decimal otherwise uncheck No Decimal.", MsgBoxStyle.Information, "Not decimal Allowed.")
             bValidValue = False
         End If
-
-        If bValidValue Then
-            'dont add any change in the last 3 rows if entry is by "Month"
-            If Not (strEntryType = "Month" AndAlso iRow >= grdCurrentWorkSheet.Rows - 3) Then
-                AddChangedRow(iRow)
-            End If
-            ComputeAndSetMonthlyTotalsForColumn(iColumn, iRow, newValue)
-            grdCurrentWorkSheet.GetCell(iRow, iColumn).Style.BackColor = Color.Yellow
-        End If
         Return bValidValue
     End Function
+
 
     ''' <summary>
     ''' adds the row index changed to the list of rows changes
@@ -568,5 +674,17 @@ Public Class sdgClimaticDataEntry
         End If
 
     End Sub
+
+
+    Private Function GetLastEditableRowIndex()
+        Dim iLastRowIndex As Integer = grdCurrentWorkSheet.Rows - 1
+
+        If strEntryType = "Month" Then
+            Return iLastRowIndex
+        Else
+            'exclude calculated and difference row
+            Return iLastRowIndex - 2
+        End If
+    End Function
 
 End Class
