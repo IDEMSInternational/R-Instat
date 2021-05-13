@@ -79,12 +79,14 @@ Public Class dlgLocatingPointsInShapeFile
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
         ucrChkOmitMissing.SetRDefault("TRUE")
 
+        ttStationFile.SetToolTip(ucrReceiverStationFilePolygon.txtReceiverSingle, "Name of the Country, County or Ward, if available in the station file")
+        ttStationFile.SetToolTip(ucrReceiverShapeFilePolygon.txtReceiverSingle, "Name of the Country, County or Ward in the shapefile")
+
         ucrSaveNewColumnName.SetPrefix("location")
         ucrSaveNewColumnName.SetSaveTypeAsColumn()
         ucrSaveNewColumnName.SetDataFrameSelector(ucrSelectorStationFile.ucrAvailableDataFrames)
         ucrSaveNewColumnName.SetIsComboBox()
         ucrSaveNewColumnName.SetLabelText("New Column Name:")
-
     End Sub
 
     Private Sub SetDefaults()
@@ -198,19 +200,16 @@ Public Class dlgLocatingPointsInShapeFile
         TestOKEnabled()
     End Sub
 
-    Private Sub CoreControlsContentsChanged_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrSaveNewColumnName.ControlContentsChanged, ucrReceiverGeometry.ControlContentsChanged, ucrReceiverShapefilePolygon.ControlContentsChanged, ucrReceiverSTationfilePolygon.ControlContentsChanged
+    Private Sub CoreControlsContentsChanged_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrSaveNewColumnName.ControlContentsChanged, ucrReceiverGeometry.ControlContentsChanged, ucrReceiverShapeFilePolygon.ControlContentsChanged, ucrReceiverStationFilePolygon.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
-    Private Sub ucrReceiverShapeFilePolygon_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverShapefilePolygon.ControlContentsChanged, ucrReceiverSTationfilePolygon.ControlContentsChanged
-        If Not ucrReceiverShapefilePolygon.IsEmpty AndAlso Not ucrReceiverSTationfilePolygon.IsEmpty Then
-            ucrSaveNewColumnName.SetPrefix("logical_polygon")
+    Private Sub ucrReceiverShapeFilePolygon_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverShapeFilePolygon.ControlContentsChanged, ucrReceiverStationFilePolygon.ControlContentsChanged
+        If Not ucrReceiverShapeFilePolygon.IsEmpty AndAlso Not ucrReceiverStationFilePolygon.IsEmpty Then
             ucrBase.clsRsyntax.SetBaseROperator(clsIsEqualToOperator)
-        ElseIf Not ucrReceiverShapefilePolygon.IsEmpty AndAlso ucrReceiverSTationfilePolygon.IsEmpty Then
-            ucrSaveNewColumnName.SetPrefix("polygon")
+        ElseIf Not ucrReceiverShapeFilePolygon.IsEmpty AndAlso ucrReceiverStationFilePolygon.IsEmpty Then
             ucrBase.clsRsyntax.SetBaseROperator(clsOpeningSubsetOperator)
         Else
-            ucrSaveNewColumnName.SetPrefix("location")
             ucrBase.clsRsyntax.SetBaseROperator(clsSubsetOperator)
         End If
     End Sub
