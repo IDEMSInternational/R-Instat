@@ -94,9 +94,9 @@ Public Class dlgSplitText
         ResetRCode()
 
         If IsNothing(lstRCodeStructure) Then
-            setRFunctionDefaultParameters()
+            SetRFunctionDefaultParameters()
         ElseIf (lstRCodeStructure.Count > 1) Then
-            setRFunctionDefaultParameters()
+            SetRFunctionDefaultParameters()
             MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
         ElseIf (lstRCodeStructure.Count = 1) Then
             If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
@@ -130,7 +130,7 @@ Public Class dlgSplitText
 
                         clsPatternParameter = clsTextComponentsMaximum.GetParameter("pattern").Clone()
                     Case Else
-                        setRFunctionDefaultParameters()
+                        SetRFunctionDefaultParameters()
                         MsgBox("Developer error:The Rfunction does not match any Rfunction in the dialogue")
                 End Select
 
@@ -148,7 +148,7 @@ Public Class dlgSplitText
                     clsTextComponentsFixed.AddParameter(clsPatternParameter)
                 End If
             Else
-                setRFunctionDefaultParameters()
+                SetRFunctionDefaultParameters()
                 MsgBox("Developer error:The Script must be an RFunction")
             End If
         End If
@@ -191,7 +191,7 @@ Public Class dlgSplitText
         clsDummyRFunction.AddParameter("current_Rfunction", "str_split_fixed", iPosition:=0)
     End Sub
 
-    Private Sub setRFunctionDefaultParameters()
+    Private Sub SetRFunctionDefaultParameters()
         AddClsTextComponentsFixedDefaultParameters()
         AddClsTextComponentsMaximumDefaultParameters()
 

@@ -20,7 +20,7 @@ Public Class dlgStringHandling
     Private bReset As Boolean = True
     Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction, clsFixedFunction, clsRegexFunction As New RFunction
     Private iFullWidth As Integer
-`    Private lstRCodeStructure As List(Of RCodeStructure)
+    Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -131,7 +131,7 @@ Public Class dlgStringHandling
         clsReplaceAllFunction.SetPackageName("stringr")
         clsReplaceAllFunction.SetRCommand("str_replace_all")
 
-        clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
+        clsCountFunction.SetAssignTo("count", strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
     End Sub
 
@@ -141,6 +141,11 @@ Public Class dlgStringHandling
 
     Private Sub AddClsRegexFunctionDefaultParameter()
         clsRegexFunction.AddParameter("ignore_case", "TRUE")
+    End Sub
+
+    Private Sub SetRFunctionDefaultParameters()
+        AddclsFixedFunctionDefaultParameter()
+        AddClsRegexFunctionDefaultParameter()
     End Sub
 
     Private Sub SetDefaults()
@@ -162,11 +167,72 @@ Public Class dlgStringHandling
         ucrReceiverForRegexExpression.SetText("")
 
         If IsNothing(lstRCodeStructure) Then
+            SetRFunctionDefaultParameters()
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            SetRFunctionDefaultParameters()
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                Dim strRcommand = TryCast(lstRCodeStructure(0), RFunction).strRCommand
+                Select Case strRcommand
+                    Case clsFixedFunction.strRCommand, clsExtractFunction.strRCommand, clsDetectFunction.strRCommand,
+                         clsLocateFunction.strRCommand, clsReplaceFunction.strRCommand, clsReplaceAllFunction.strRCommand,
+                         clsRegexFunction.strRCommand
+                        If Not (strRcommand = clsRegexFunction.strRCommand OrElse strRcommand = clsFixedFunction.strRCommand) Then
+                            Select Case strRcommand
+                                Case clsCountFunction.strRCommand
+                                    clsCountFunction = lstRCodeStructure(0)
+                                    ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+                                Case clsExtractFunction.strRCommand
+                                    clsExtractFunction = lstRCodeStructure(0)
+                                    ucrBase.clsRsyntax.SetBaseRFunction(clsExtractFunction)
+                                Case clsDetectFunction.strRCommand
+                                    clsDetectFunction = lstRCodeStructure(0)
+                                    ucrBase.clsRsyntax.SetBaseRFunction(clsDetectFunction)
+                                Case clsLocateFunction.strRCommand
+                                    clsLocateFunction = lstRCodeStructure(0)
+                                    ucrBase.clsRsyntax.SetBaseRFunction(clsLocateFunction)
+                                Case clsReplaceFunction.strRCommand
+                                    clsReplaceFunction = lstRCodeStructure(0)
+                                    If Not IsNothing(clsReplaceFunction.GetParameter("replacement")) Then
+                                        clsReplaceAllFunction.AddParameter(clsReplaceFunction.GetParameter("replacement"))
+                                    End If
+                                    ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceFunction)
+                                Case clsReplaceAllFunction.strRCommand
+                                    clsReplaceAllFunction = lstRCodeStructure(0)
+                                    ucrBase.clsRsyntax.SetBaseRFunction(clsReplaceAllFunction)
+                            End Select
+                            SetRFunctionDefaultParameters()
+                        ElseIf clsFixedFunction.strRCommand = strRcommand Then
+                            clsFixedFunction = lstRCodeStructure(0)
+                            ucrBase.clsRsyntax.SetBaseRFunction(clsFixedFunction)
+                        ElseIf clsRegexFunction.strRCommand = strRcommand Then
+                            clsRegexFunction = lstRCodeStructure(0)
+                            ucrBase.clsRsyntax.SetBaseRFunction(clsRegexFunction)
+                        End If
+                        If Not IsNothing(ucrBase.clsRsyntax.clsBaseFunction.GetParameter("pattern")) Then
+                            clsCountFunction.AddParameter(ucrBase.clsRsyntax.clsBaseFunction.GetParameter("pattern"))
+                        End If
+                        If Not IsNothing(ucrBase.clsRsyntax.clsBaseFunction.GetParameter("string")) Then
+                            clsCountFunction.AddParameter(ucrBase.clsRsyntax.clsBaseFunction.GetParameter("string"))
+                        End If
 
+                    Case clsCountFunction.strRCommand
+                        clsCountFunction = lstRCodeStructure(0)
+                        SetRFunctionDefaultParameters()
+                        ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+                    Case Else
+                        SetRFunctionDefaultParameters()
+                        MsgBox("Developer error:The Rfunction does not match any Rfunction in the dialogue")
+                End Select
+            Else
+                SetRFunctionDefaultParameters()
+                MsgBox("Developer error:The Script must be an RFunction")
+            End If
         End If
+        lstRCodeStructure = Nothing
 
         AddRemoveParameters()
-        ChangePrefixName()
         NewColumnName()
     End Sub
 
@@ -206,8 +272,9 @@ Public Class dlgStringHandling
         ucrReceiverStringHandling.SetRCode(clsCountFunction, bReset)
         ucrInputPattern.SetRCode(clsCountFunction, bReset)
         ucrInputReplaceBy.SetRCode(clsReplaceAllFunction, bReset)
-        'ucrPnlStringHandling.SetRCode(clsCountFunction, bReset)
+        ucrPnlStringHandling.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrSaveStringHandling.SetRCode(clsCountFunction, bReset)
+
         'ucrChkIncludeRegularExpressions.SetRCode(clsFixedFunction, bReset)
         'ucrPnlFixedRegex.SetRCode(clsFixedFunction, bReset)
     End Sub
@@ -319,7 +386,7 @@ Public Class dlgStringHandling
                 ucrSaveStringHandling.SetPrefix("replace")
             ElseIf rdoReplaceAll.Checked Then
                 ucrSaveStringHandling.SetPrefix("replace_all")
-            End If
+            End If 
         End If
         If rdoLocate.Checked Then
             ucrSaveStringHandling.SetAssignToBooleans(bTempAssignToIsPrefix:=True)

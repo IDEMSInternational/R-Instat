@@ -2377,6 +2377,10 @@ Public Class RLink
                 End If
                 dlgStringDistance.lstScriptsRCodeStructure = lstNewRCodeStructures
                 dlgStringDistance.ShowDialog()
+            ElseIf strCommentFromDialogue.Contains("string handling") Then
+                lstNewRCodeStructures.RemoveAt(0)
+                dlgStringHandling.lstScriptsRCodeStructure = lstNewRCodeStructures
+                dlgStringHandling.ShowDialog()
             End If
         End If
     End Sub
