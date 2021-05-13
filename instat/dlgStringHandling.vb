@@ -20,6 +20,7 @@ Public Class dlgStringHandling
     Private bReset As Boolean = True
     Private clsCountFunction, clsExtractFunction, clsDetectFunction, clsLocateFunction, clsReplaceFunction, clsReplaceAllFunction, clsFixedFunction, clsRegexFunction As New RFunction
     Private iFullWidth As Integer
+`    Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub dlgStringHandling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -94,17 +95,9 @@ Public Class dlgStringHandling
         'hiding the Regex group box 
         grpRegex.Hide()
         ucrChkIncludeRegularExpressions.Enabled = False
-        'cmdDBackSlah.Visible = False
-        'cmdWBackSlash.Visible = False
-        'cmdBbackSlash.Visible = False
-        'cmdSbackSlash.Visible = False
-        'cmdBackSlashb.Visible = False
-        'cmdBackSlashw.Visible = False
-        'cmdBackSlashs.Visible = False
-        'cmdBackSlashd.Visible = False
     End Sub
 
-    Private Sub SetDefaults()
+    Private Sub ResetRCode()
         clsCountFunction = New RFunction
         clsExtractFunction = New RFunction
         clsDetectFunction = New RFunction
@@ -114,6 +107,44 @@ Public Class dlgStringHandling
         clsFixedFunction = New RFunction
         clsRegexFunction = New RFunction
 
+        clsFixedFunction.SetPackageName("stringr")
+        clsFixedFunction.SetRCommand("fixed")
+
+        clsRegexFunction.SetPackageName("stringr")
+        clsRegexFunction.SetRCommand("regex")
+
+        clsCountFunction.SetPackageName("stringr")
+        clsCountFunction.SetRCommand("str_count")
+
+        clsExtractFunction.SetPackageName("stringr")
+        clsExtractFunction.SetRCommand("str_extract")
+
+        clsDetectFunction.SetPackageName("stringr")
+        clsDetectFunction.SetRCommand("str_detect")
+
+        clsLocateFunction.SetPackageName("stringr")
+        clsLocateFunction.SetRCommand("str_locate")
+
+        clsReplaceFunction.SetPackageName("stringr")
+        clsReplaceFunction.SetRCommand("str_replace")
+
+        clsReplaceAllFunction.SetPackageName("stringr")
+        clsReplaceAllFunction.SetRCommand("str_replace_all")
+
+        clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
+    End Sub
+
+    Private Sub AddclsFixedFunctionDefaultParameter()
+        clsFixedFunction.AddParameter("ignore_case", "FALSE")
+    End Sub
+
+    Private Sub AddClsRegexFunctionDefaultParameter()
+        clsRegexFunction.AddParameter("ignore_case", "TRUE")
+    End Sub
+
+    Private Sub SetDefaults()
+        ResetRCode()
         ucrSelectorStringHandling.Reset()
 
         'temporaryfix
@@ -128,35 +159,15 @@ Public Class dlgStringHandling
         ucrInputPattern.SetName("")
         ucrInputPattern.Reset()
         ucrReceiverForRegexExpression.ResetText()
-
-        clsFixedFunction.SetPackageName("stringr")
-        clsFixedFunction.SetRCommand("fixed")
-        clsFixedFunction.AddParameter("ignore_case", "FALSE")
-
-        clsRegexFunction.SetPackageName("stringr")
-        clsRegexFunction.SetRCommand("regex")
-        clsRegexFunction.AddParameter("ignore_case", "TRUE")
-
         ucrReceiverForRegexExpression.SetText("")
-        AddRemoveParameters()
 
-        clsCountFunction.SetPackageName("stringr")
-        clsCountFunction.SetRCommand("str_count")
-        clsExtractFunction.SetPackageName("stringr")
-        clsExtractFunction.SetRCommand("str_extract")
-        clsDetectFunction.SetPackageName("stringr")
-        clsDetectFunction.SetRCommand("str_detect")
-        clsLocateFunction.SetPackageName("stringr")
-        clsLocateFunction.SetRCommand("str_locate")
-        clsReplaceFunction.SetPackageName("stringr")
-        clsReplaceFunction.SetRCommand("str_replace")
-        clsReplaceAllFunction.SetPackageName("stringr")
-        clsReplaceAllFunction.SetRCommand("str_replace_all")
+        If IsNothing(lstRCodeStructure) Then
+
+        End If
+
+        AddRemoveParameters()
         ChangePrefixName()
-        clsCountFunction.SetAssignTo(ucrSaveStringHandling.GetText, strTempDataframe:=ucrSelectorStringHandling.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveStringHandling.GetText, bAssignToIsPrefix:=True)
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCountFunction)
         NewColumnName()
-        'ChangeSize()
     End Sub
 
     'temporary fix.
@@ -423,4 +434,15 @@ Public Class dlgStringHandling
     Private Sub ucrReceiverStringHandling_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStringHandling.ControlContentsChanged, ucrPnlStringHandling.ControlContentsChanged, ucrInputPattern.ControlContentsChanged, ucrReceiverForRegexExpression.ControlContentsChanged, ucrPnlFixedRegex.ControlContentsChanged, ucrChkIncludeRegularExpressions.ControlContentsChanged, ucrSaveStringHandling.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
+
 End Class
