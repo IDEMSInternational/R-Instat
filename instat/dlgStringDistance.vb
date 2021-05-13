@@ -122,7 +122,10 @@ Public Class dlgStringDistance
                             End If
                             ucrBase.clsRsyntax.SetBaseRFunction(clsColumnFunction)
                         Else
-                                clsStringDistFunction = lstRCodeStructure(0)
+                            clsStringDistFunction = lstRCodeStructure(0)
+                            If Not IsNothing(clsStringDistFunction.GetParameter("method")) Then
+                                clsColumnFunction.AddParameter(clsStringDistFunction.GetParameter("method"))
+                            End If
                             ucrBase.clsRsyntax.SetBaseRFunction(clsStringDistFunction)
                         End If
                     Else
