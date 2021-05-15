@@ -79,8 +79,8 @@ Public Class dlgLocatingPointsInShapeFile
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("FALSE", "TRUE")
         ucrChkOmitMissing.SetRDefault("TRUE")
 
-        ttStationFile.SetToolTip(ucrReceiverStationFilePolygon.txtReceiverSingle, "Name of the Country, County or Ward, if available in the station file")
-        ttStationFile.SetToolTip(ucrReceiverShapeFilePolygon.txtReceiverSingle, "Name of the Country, County or Ward in the shapefile")
+        ttStationFile.SetToolTip(ucrReceiverStationFilePolygon.txtReceiverSingle, "Name of the country, county or ward, if available in the station file")
+        ttStationFile.SetToolTip(ucrReceiverShapeFilePolygon.txtReceiverSingle, "Name of the country, county or ward in the shapefile")
 
         ucrSaveNewColumnName.SetPrefix("location")
         ucrSaveNewColumnName.SetSaveTypeAsColumn()
