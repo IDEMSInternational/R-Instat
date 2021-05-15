@@ -26,8 +26,7 @@ Public Class dlgLocatingPointsInShapeFile
     Private clsStAsIntegerFunction As New RFunction
     Private clsExtractColumnStIntersectsFunction As New RFunction
     Private clsDollarOperator As New ROperator
-    Private clsOpeningSubsetOperator, clsIsEqualToOperator, clsCompareColumnsdollarOperator,
-        clsEqualOpeningSubsetOperator, clsClosingSubsetOperator As New ROperator
+    Private clsOpeningSubsetOperator, clsIsEqualToOperator, clsEqualOpeningSubsetOperator, clsClosingSubsetOperator As New ROperator
 
     Private Sub dlgLocatingPointsInShapeFile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -102,7 +101,6 @@ Public Class dlgLocatingPointsInShapeFile
         clsEqualOpeningSubsetOperator = New ROperator
         clsClosingSubsetOperator = New ROperator
         clsIsEqualToOperator = New ROperator
-        clsCompareColumnsdollarOperator = New ROperator
 
         ucrSelectorShapeFile.Reset()
         ucrSelectorStationFile.Reset()
@@ -200,7 +198,8 @@ Public Class dlgLocatingPointsInShapeFile
         TestOKEnabled()
     End Sub
 
-    Private Sub CoreControlsContentsChanged_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged, ucrSaveNewColumnName.ControlContentsChanged, ucrReceiverGeometry.ControlContentsChanged, ucrReceiverShapeFilePolygon.ControlContentsChanged, ucrReceiverStationFilePolygon.ControlContentsChanged
+    Private Sub CoreControlsContentsChanged_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverLatitude.ControlContentsChanged, ucrReceiverLongitude.ControlContentsChanged,
+        ucrSaveNewColumnName.ControlContentsChanged, ucrReceiverGeometry.ControlContentsChanged, ucrReceiverShapeFilePolygon.ControlContentsChanged, ucrReceiverStationFilePolygon.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
