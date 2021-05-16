@@ -21,7 +21,7 @@ Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
 Public Class sdgClimaticDataEntry
-    Private lstColumnNames As New List(Of KeyValuePair(Of String, String()))
+    'Private lstColumnNames As New List(Of KeyValuePair(Of String, String()))
 
     ''' <summary>
     ''' stores the row indices changed in the grid 
@@ -297,38 +297,7 @@ Public Class sdgClimaticDataEntry
         grdDataEntry.AddWorksheet(grdCurrentWorkSheet)
         grdDataEntry.SheetTabNewButtonVisible = False
 
-        SetColumnNames(strDataFrameName, dfEditData.ColumnNames())
-
     End Sub
-
-    'todo. we may not need this function
-    Private Sub SetColumnNames(strDataFrameName As String, strColumnNames As String())
-        Dim iIndex As Integer
-        iIndex = lstColumnNames.FindIndex(Function(x) x.Key = strDataFrameName)
-        If iIndex <> -1 Then
-            lstColumnNames.RemoveAt(iIndex)
-        End If
-        lstColumnNames.Add(New KeyValuePair(Of String, String())(strDataFrameName, strColumnNames))
-    End Sub
-
-    'todo. we may not need this function
-    Private Function SelectedColumnsAsArray() As String()
-        Dim strSelectedColumns As String()
-        Dim lstCurrentDataColumns As String()
-
-        lstCurrentDataColumns = lstColumnNames.Find(Function(x) x.Key = grdDataEntry.CurrentWorksheet.Name).Value
-
-        If lstColumnNames IsNot Nothing AndAlso lstColumnNames.Count > 0 Then
-            strSelectedColumns = New String(grdDataEntry.CurrentWorksheet.SelectionRange.Cols - 1) {}
-            For i As Integer = 0 To grdDataEntry.CurrentWorksheet.SelectionRange.Cols - 1
-                strSelectedColumns(i) = lstCurrentDataColumns(i + grdDataEntry.CurrentWorksheet.SelectionRange.Col)
-            Next
-            Return strSelectedColumns
-        Else
-            strSelectedColumns = New String() {}
-        End If
-        Return strSelectedColumns
-    End Function
 
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
         mnuPaste.Enabled = Not String.IsNullOrEmpty(My.Computer.Clipboard.GetText)
@@ -559,13 +528,13 @@ Public Class sdgClimaticDataEntry
 
     Private Sub cmdComment_Click(sender As Object, e As EventArgs) Handles cmdComment.Click
         Dim selectedRowheaderText As String = grdCurrentWorkSheet.RowHeaders.Item(grdDataEntry.CurrentWorksheet.SelectionRange.Row).Text
+        Dim selectedColumnHeaderText As String = grdCurrentWorkSheet.ColumnHeaders.Item(grdDataEntry.CurrentWorksheet.SelectionRange.Col).Text
 
         sdgCommentForDataEntry.SetUpCommentsSubdialog(
                       clsNewSaveDataEntry:=clsSaveDataEntryFunction, clsNewGetKey:=clsGetKeyFunction,
                       clsNewCommentsList:=clsCommentsListFunction,
                       clsNewList:=clsListFunction, strDataFrame:=grdCurrentWorkSheet.Name,
-                      strRow:=selectedRowheaderText,
-                      strColumn:=SelectedColumnsAsArray()(0),
+                      strRow:=selectedRowheaderText, strColumn:=selectedColumnHeaderText,
                       ucrNewBaseSelector:=ucrBaseSelector, bReset:=bResetCommentsSubdialog)
         sdgCommentForDataEntry.ShowDialog()
         bResetCommentsSubdialog = False
