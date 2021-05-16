@@ -388,8 +388,9 @@ Public Class sdgClimaticDataEntry
         'then save the values if all are valid
         For index As Integer = 0 To arrPasteValues.Length - 1
             strNewValue = arrPasteValues(index).Trim
-            ValidateAndSaveRowChanged(iStartRowIndex, iColumnIndex, strNewValue)
-            grdCurrentWorkSheet.GetCell(iStartRowIndex, iColumnIndex).Data = strNewValue
+            If ValidateAndSaveRowChanged(iStartRowIndex, iColumnIndex, strNewValue) Then
+                grdCurrentWorkSheet.GetCell(iStartRowIndex, iColumnIndex).Data = strNewValue
+            End If
             'abort entry if pasted rows are more than editable rows
             If iStartRowIndex >= iLastEditableRowIndex Then
                 Exit For
@@ -559,7 +560,8 @@ Public Class sdgClimaticDataEntry
     Private Sub cmdComment_Click(sender As Object, e As EventArgs) Handles cmdComment.Click
         Dim selectedRowheaderText As String = grdCurrentWorkSheet.RowHeaders.Item(grdDataEntry.CurrentWorksheet.SelectionRange.Row).Text
 
-        sdgCommentForDataEntry.SetUpCommentsSubdialog(clsNewSaveDataEntry:=clsSaveDataEntryFunction, clsNewGetKey:=clsGetKeyFunction,
+        sdgCommentForDataEntry.SetUpCommentsSubdialog(
+                      clsNewSaveDataEntry:=clsSaveDataEntryFunction, clsNewGetKey:=clsGetKeyFunction,
                       clsNewCommentsList:=clsCommentsListFunction,
                       clsNewList:=clsListFunction, strDataFrame:=grdCurrentWorkSheet.Name,
                       strRow:=selectedRowheaderText,
