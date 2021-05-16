@@ -31,12 +31,12 @@ Partial Class sdgClimaticDataEntry
         Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPaste = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.ucrChkAddFlagFieldData = New instat.ucrCheck()
         Me.cmdComment = New System.Windows.Forms.Button()
         Me.cmdTransform = New System.Windows.Forms.Button()
         Me.cmdReset = New System.Windows.Forms.Button()
-        Me.ttCmds = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrChkAddFlagFieldData = New instat.ucrCheck()
         Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
+        Me.ttCmds = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.SplitContainer1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
@@ -104,6 +104,12 @@ Partial Class sdgClimaticDataEntry
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
         resources.ApplyResources(Me.ToolStripSeparator5, "ToolStripSeparator5")
         '
+        'ucrChkAddFlagFieldData
+        '
+        Me.ucrChkAddFlagFieldData.Checked = False
+        resources.ApplyResources(Me.ucrChkAddFlagFieldData, "ucrChkAddFlagFieldData")
+        Me.ucrChkAddFlagFieldData.Name = "ucrChkAddFlagFieldData"
+        '
         'cmdComment
         '
         resources.ApplyResources(Me.cmdComment, "cmdComment")
@@ -124,22 +130,16 @@ Partial Class sdgClimaticDataEntry
         Me.ttCmds.SetToolTip(Me.cmdReset, resources.GetString("cmdReset.ToolTip"))
         Me.cmdReset.UseVisualStyleBackColor = True
         '
+        'ucrSdgBaseButtons
+        '
+        resources.ApplyResources(Me.ucrSdgBaseButtons, "ucrSdgBaseButtons")
+        Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
+        '
         'ttCmds
         '
         Me.ttCmds.AutoPopDelay = 10000
         Me.ttCmds.InitialDelay = 500
         Me.ttCmds.ReshowDelay = 100
-        '
-        'ucrChkAddFlagFieldData
-        '
-        Me.ucrChkAddFlagFieldData.Checked = False
-        resources.ApplyResources(Me.ucrChkAddFlagFieldData, "ucrChkAddFlagFieldData")
-        Me.ucrChkAddFlagFieldData.Name = "ucrChkAddFlagFieldData"
-        '
-        'ucrSdgBaseButtons
-        '
-        resources.ApplyResources(Me.ucrSdgBaseButtons, "ucrSdgBaseButtons")
-        Me.ucrSdgBaseButtons.Name = "ucrSdgBaseButtons"
         '
         'sdgClimaticDataEntry
         '

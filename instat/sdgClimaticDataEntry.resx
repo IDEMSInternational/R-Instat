@@ -132,25 +132,31 @@
     <value>374, 18</value>
   </metadata>
   <data name="ToolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>141, 6</value>
+  </data>
+  <data name="mnuCopy.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+C</value>
   </data>
   <data name="mnuCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>144, 22</value>
   </data>
   <data name="mnuCopy.Text" xml:space="preserve">
     <value>Copy</value>
   </data>
+  <data name="mnuPaste.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+V</value>
+  </data>
   <data name="mnuPaste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>144, 22</value>
   </data>
   <data name="mnuPaste.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="ToolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>141, 6</value>
   </data>
   <data name="cellContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 82</value>
+    <value>145, 60</value>
   </data>
   <data name="&gt;&gt;cellContextMenuStrip.Name" xml:space="preserve">
     <value>cellContextMenuStrip</value>
@@ -377,9 +383,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>647, 295</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

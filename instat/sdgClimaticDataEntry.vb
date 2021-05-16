@@ -220,7 +220,7 @@ Public Class sdgClimaticDataEntry
                         dfValue = "NA"
                     Else
                         dfValue = strDefaultValue
-                        'blsnk defsult is interpreted as NA in R
+                        'blank defsult is interpreted as NA in R
                         If Not (strDefaultValue = "NA" OrElse strDefaultValue = "") Then
                             bChangedToDefaultValue = True
                         End If
@@ -301,7 +301,8 @@ Public Class sdgClimaticDataEntry
 
     End Sub
 
-    Public Sub SetColumnNames(strDataFrameName As String, strColumnNames As String())
+    'todo. we may not need this function
+    Private Sub SetColumnNames(strDataFrameName As String, strColumnNames As String())
         Dim iIndex As Integer
         iIndex = lstColumnNames.FindIndex(Function(x) x.Key = strDataFrameName)
         If iIndex <> -1 Then
@@ -310,6 +311,7 @@ Public Class sdgClimaticDataEntry
         lstColumnNames.Add(New KeyValuePair(Of String, String())(strDataFrameName, strColumnNames))
     End Sub
 
+    'todo. we may not need this function
     Private Function SelectedColumnsAsArray() As String()
         Dim strSelectedColumns As String()
         Dim lstCurrentDataColumns As String()
@@ -328,90 +330,34 @@ Public Class sdgClimaticDataEntry
         Return strSelectedColumns
     End Function
 
-    Private Function GetFirstSelectedRow() As String
-        Return grdCurrentWorkSheet.RowHeaders.Item(grdDataEntry.CurrentWorksheet.SelectionRange.Row).Text
-    End Function
-
-    Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
-        ''todo. do this disabling of data entry be done when setting up the grid. Not here
-        'If lstNonEditableColumns.Contains(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text) Then
-        '    e.IsCancelled = True
-        'End If
-        'If InStr(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text, "(view)") Then
-        '    e.IsCancelled = True
-        'End If
-    End Sub
-
-    Private Sub grdCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrentWorkSheet.BeforeCellKeyDown
-        'allow deletes for read only cells
-
-        If Not e.Cell.IsReadOnly AndAlso e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
-            'todo. check and get range of selected cells
-            If Not ValidateAndSaveRowChanged(e.Cell.Row, e.Cell.Column, "NA") Then
-                e.IsCancelled = True
-
-            End If
-        End If
-    End Sub
-
-    Private Sub grdCurrentWorkSheet_AfterCellKeyDown(sender As Object, e As AfterCellKeyDownEventArgs) Handles grdCurrentWorkSheet.AfterCellKeyDown
-
-    End Sub
-
-
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
         mnuPaste.Enabled = Not String.IsNullOrEmpty(My.Computer.Clipboard.GetText)
     End Sub
 
-    Private Sub grdCurrentWorkSheet_AfterCopy(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterCopy
-
-    End Sub
-
-    Private Sub grdCurrentWorkSheet_AfterRangeCopy(sender As Object, e As CopyOrMoveRangeEventArgs) Handles grdCurrentWorkSheet.AfterRangeCopy
-
-    End Sub
-
-    Private Sub grdCurrentWorkSheet_BeforeCopy(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrentWorkSheet.BeforeCopy
-
-    End Sub
-
-    Private Sub grdCurrentWorkSheet_BeforeRangeCopy(sender As Object, e As BeforeCopyOrMoveRangeEventArgs) Handles grdCurrentWorkSheet.BeforeRangeCopy
-
-    End Sub
-
     Private Sub mnuCopy_Click(sender As Object, e As EventArgs) Handles mnuCopy.Click
-        'grdCurrentWorkSheet.GetPartialGrid(grdCurrentWorkSheet.SelectionRange)
+        grdCurrentWorkSheet.Copy()
     End Sub
 
     Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
-        PasteIntoColumn()
-    End Sub
-    Private Sub grdCurrentWorkSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrentWorkSheet.BeforePaste
-        'if not successful abort the paste event
-        If Not PasteIntoColumn() Then
-            e.IsCancelled = True
-        End If
-    End Sub
-
-    Private Function PasteIntoColumn() As Boolean
-        If grdCurrentWorkSheet.SelectionRange.Cols > 1 Then
-            MsgBox("Pasting into cells in different columns is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try pasting into one column cells at a time.", MsgBoxStyle.Information, "Cannot paste into multiple cells in different columns")
-            Return False
-        End If
-
         Dim arrPasteValues As String()
-        Dim lstRowPositions As New List(Of Integer)
         Dim strClipBoardText As String = My.Computer.Clipboard.GetText
         Dim iColumnIndex As Integer = grdCurrentWorkSheet.SelectionRange.Col
         Dim iStartRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row
-        Dim iLastEditableRowIndex As Integer = GetLastEditableRowIndex()
+        Dim iLastEditableRowIndex As Integer
+        Dim strNewValue As String
+
+        If grdCurrentWorkSheet.SelectionRange.Cols > 1 Then
+            MsgBox("Pasting into cells in different columns is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try pasting into one column cells at a time.", MsgBoxStyle.Information, "Cannot paste into multiple cells in different columns")
+            Exit Sub
+        End If
 
         If String.IsNullOrEmpty(strClipBoardText) Then
-            Return False
+            Exit Sub
         End If
+
         If lstNonEditableColumns.Contains(grdCurrentWorkSheet.ColumnHeaders.Item(iColumnIndex).Text) Then
             MsgBox("Pasting into uneditable cells is currently disabled." & Environment.NewLine & "Try pasting into one cell at a time.", MsgBoxStyle.Information, "Cannot paste into uneditable cells")
-            Return False
+            Exit Sub
         End If
 
         'split the text to be pasted into multiple lines and remove empty entries cause by the return line
@@ -432,29 +378,72 @@ Public Class sdgClimaticDataEntry
         For index As Integer = 0 To arrPasteValues.Length - 1
             'abort entry when the value is not valid
             If Not ValidateValue(arrPasteValues(index).Trim) Then
-                Return False
+                Exit Sub
             End If
         Next
 
+        'exclude calculated and difference row if entry type is monthly
+        iLastEditableRowIndex = If(strEntryType = "Month", grdCurrentWorkSheet.Rows - 3, grdCurrentWorkSheet.Rows - 1)
+
         'then save the values if all are valid
         For index As Integer = 0 To arrPasteValues.Length - 1
-            ValidateAndSaveRowChanged(iStartRowIndex, iColumnIndex, arrPasteValues(index).Trim)
+            strNewValue = arrPasteValues(index).Trim
+            ValidateAndSaveRowChanged(iStartRowIndex, iColumnIndex, strNewValue)
+            grdCurrentWorkSheet.GetCell(iStartRowIndex, iColumnIndex).Data = strNewValue
             'abort entry if pasted rows are more than editable rows
             If iStartRowIndex >= iLastEditableRowIndex Then
                 Exit For
             End If
-            iStartRowIndex = iStartRowIndex + 1
+            iStartRowIndex += 1
         Next
-
-        Return True
-    End Function
-
-    Private Sub grdCurrentWorkSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrentWorkSheet.BeforeCut
 
     End Sub
 
-    Private Sub grdCurrentWorkSheet_AfterCut(sender As Object, e As RangeEventArgs) Handles grdCurrentWorkSheet.AfterCut
+    Private Sub grdCurrentWorkSheet_BeforeCut(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrentWorkSheet.BeforeCut
+        MsgBox("Cutting is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try copying and deleting from one column cells at a time.", MsgBoxStyle.Information, "Cannot cut from cells")
+        e.IsCancelled = True
+    End Sub
 
+    Private Sub grdCurrSheet_BeforeCellKeyDown(sender As Object, e As BeforeCellKeyDownEventArgs) Handles grdCurrentWorkSheet.BeforeCellKeyDown
+        If e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Delete OrElse e.KeyCode = unvell.ReoGrid.Interaction.KeyCode.Back Then
+
+            If grdCurrentWorkSheet.SelectionRange.Cols > 1 Then
+                MsgBox("Deleting cells in multiple columns is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try deleting from one column cells at a time.", MsgBoxStyle.Information, "Cannot delete cells in multiple columns")
+                e.IsCancelled = True
+                Exit Sub
+            End If
+
+            If e.Cell.IsReadOnly Then
+                MsgBox("Deleting read only cells is currently disabled.", MsgBoxStyle.Information, "Cannot delete read only cells")
+                e.IsCancelled = True
+                Exit Sub
+            End If
+
+            'delete operation applies to all selected cells for the column
+            Dim iLastEditableRow As Integer = grdCurrentWorkSheet.SelectionRange.Rows - 1
+
+            If strEntryType = "Month" AndAlso iLastEditableRow = grdCurrentWorkSheet.Rows - 1 Then
+                'exclude calculated and difference 
+                iLastEditableRow = iLastEditableRow - 2
+            End If
+
+            For i As Integer = grdCurrentWorkSheet.SelectionRange.Row To iLastEditableRow
+                If Not ValidateAndSaveRowChanged(i, e.Cell.Column, "NA") Then
+                    e.IsCancelled = True
+                End If
+            Next
+
+        End If
+    End Sub
+
+    Private Sub grdCurrSheet_BeforeCellEdit(sender As Object, e As CellBeforeEditEventArgs) Handles grdCurrentWorkSheet.BeforeCellEdit
+        ''todo. do this disabling of data entry be done when setting up the grid. Not here
+        'If lstNonEditableColumns.Contains(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text) Then
+        '    e.IsCancelled = True
+        'End If
+        'If InStr(grdCurrentWorkSheet.ColumnHeaders(e.Cell.Column).Text, "(view)") Then
+        '    e.IsCancelled = True
+        'End If
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrentWorkSheet.AfterCellEdit
@@ -478,7 +467,9 @@ Public Class sdgClimaticDataEntry
                 AddChangedRow(iRow)
             End If
             ComputeAndSetMonthlyTotalsForColumn(iColumn, iRow, newValue)
+
             grdCurrentWorkSheet.GetCell(iRow, iColumn).Style.BackColor = Color.Yellow
+
             Return True
         Else
             Return False
@@ -566,9 +557,14 @@ Public Class sdgClimaticDataEntry
     End Sub
 
     Private Sub cmdComment_Click(sender As Object, e As EventArgs) Handles cmdComment.Click
+        Dim selectedRowheaderText As String = grdCurrentWorkSheet.RowHeaders.Item(grdDataEntry.CurrentWorksheet.SelectionRange.Row).Text
+
         sdgCommentForDataEntry.SetUpCommentsSubdialog(clsNewSaveDataEntry:=clsSaveDataEntryFunction, clsNewGetKey:=clsGetKeyFunction,
-                      clsNewCommentsList:=clsCommentsListFunction, clsNewList:=clsListFunction, strDataFrame:=grdCurrentWorkSheet.Name, strRow:=GetFirstSelectedRow(),
-                      strColumn:=SelectedColumnsAsArray()(0), ucrNewBaseSelector:=ucrBaseSelector, bReset:=bResetCommentsSubdialog)
+                      clsNewCommentsList:=clsCommentsListFunction,
+                      clsNewList:=clsListFunction, strDataFrame:=grdCurrentWorkSheet.Name,
+                      strRow:=selectedRowheaderText,
+                      strColumn:=SelectedColumnsAsArray()(0),
+                      ucrNewBaseSelector:=ucrBaseSelector, bReset:=bResetCommentsSubdialog)
         sdgCommentForDataEntry.ShowDialog()
         bResetCommentsSubdialog = False
     End Sub
@@ -578,7 +574,6 @@ Public Class sdgClimaticDataEntry
     ''' calculates the monthly totals for all columns
     ''' </summary>
     Private Sub ComputeAndSetMonthlyTotalsForAllColumns()
-        Dim iLastRowIndex As Integer = grdCurrentWorkSheet.Rows - 1
         'set the monthly totals for all editable columns
         For j = iMonthlyTotalsColIndex + 1 To grdCurrentWorkSheet.Columns - 1
             'dont set totals for non editable columns
@@ -617,8 +612,6 @@ Public Class sdgClimaticDataEntry
             strTotalUserInputValue = grdCurrentWorkSheet.Item(row:=iLastRowIndex - 2, col:=iColIndex)
         End If
 
-
-
         'calculate the different "calculated" values.
         For i As Integer = 0 To iLastRowIndex - 3 'exclude the 3 rows; sum, calculated and difference
             'if new value of the current cell row item is there
@@ -629,11 +622,7 @@ Public Class sdgClimaticDataEntry
                 strValue = grdCurrentWorkSheet.Item(row:=i, col:=iColIndex)
             End If
 
-            If IsNumeric(strValue) Then
-                dValue = Double.Parse(strValue)
-            Else
-                dValue = 0
-            End If
+            dValue = If(IsNumeric(strValue), Double.Parse(strValue), 0)
 
             iAllValuesCount = iAllValuesCount + 1
             dSumValue = dSumValue + dValue
@@ -674,17 +663,5 @@ Public Class sdgClimaticDataEntry
         End If
 
     End Sub
-
-
-    Private Function GetLastEditableRowIndex()
-        Dim iLastRowIndex As Integer = grdCurrentWorkSheet.Rows - 1
-
-        If strEntryType = "Month" Then
-            Return iLastRowIndex
-        Else
-            'exclude calculated and difference row
-            Return iLastRowIndex - 2
-        End If
-    End Function
 
 End Class
