@@ -164,8 +164,28 @@ Public Class Translations
         '      Therefore we can use the class name as the object name in 'CallByName'.
         Dim strControlsAsCsv As String = ""
         For Each typFormClass As Type In lstFormClasses
+            'TODO
+            If Not typFormClass.Name = "sdgPlots" Then
+                Continue For
+            End If
             Dim frmTemp As Form = CallByName(My.Forms, typFormClass.Name, CallType.Get)
-            strControlsAsCsv &= TranslateWinForm.clsTranslateWinForm.GetControlsAsCsv(frmTemp)
+            Dim strTemp = TranslateWinForm.clsTranslateWinForm.GetControlsAsCsv(frmTemp)
+
+            'Special case for radio buttons in panels: 
+            '  Before the dialog is shown, each radio button is a direct child of the dialog 
+            '  (e.g. 'dlg_Augment_rdoNewDataframe'). After the dialog is shown, the raio button becomes 
+            '  a direct child of its parent panel.
+            '  Therefore, we need to show the dialog before we traverse the dialog's control hierarchy.
+            '  Unfortunately showing the dialog means that it has to be manually closed. So we only 
+            '  show the dialog for this special case to save the developer from having to manually 
+            '  close too many dialogs.
+            '  TODO: launch each dialog in a new thread to avoid need for manual close?
+            If strTemp.ToLower().Contains("pnl") AndAlso strTemp.ToLower().Contains("rdo") Then
+                frmTemp.ShowDialog()
+                strTemp = TranslateWinForm.clsTranslateWinForm.GetControlsAsCsv(frmTemp)
+            End If
+
+            strControlsAsCsv &= strTemp
         Next
 
         'The right mouse button menus for the 6 output windows are not accessible via 
