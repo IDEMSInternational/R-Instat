@@ -124,8 +124,6 @@ Public Class dlgOptions
                 '    ucrInputLanguage.SetText("Kiswahili")
                 'Case "es-ES"
                 '    ucrInputLanguage.SetText("Spanish")
-            Case Else
-                ucrInputLanguage.SetText("English")
         End Select
 
         strPrevLanguageCulture = frmMain.clsInstatOptions.strLanguageCultureCode
@@ -255,10 +253,11 @@ Public Class dlgOptions
                 strCurrLanguageCulture = "en-GB"
             Case "French"
                 strCurrLanguageCulture = "fr-FR"
-            Case "Kiswahili"
-                strCurrLanguageCulture = "sw-KE"
-            Case "Spanish"
-                strCurrLanguageCulture = "es-ES"
+                ' temp disabled as not functioning
+                'Case "Kiswahili"
+                ' strCurrLanguageCulture = "sw-KE"
+                'Case "Spanish"
+                ' strCurrLanguageCulture = "es-ES"
         End Select
         ApplyEnabled(True)
     End Sub
