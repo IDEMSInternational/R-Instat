@@ -134,6 +134,14 @@ Partial Class sdgPlots
         Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
         Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
         Me.tbpAnnotation = New System.Windows.Forms.TabPage()
+        Me.lblSize = New System.Windows.Forms.Label()
+        Me.ucrNudSize = New instat.ucrNud()
+        Me.lblColour = New System.Windows.Forms.Label()
+        Me.ucrInputColour = New instat.ucrInputComboBox()
+        Me.ucrNudAlpha = New instat.ucrNud()
+        Me.lblAlpha = New System.Windows.Forms.Label()
+        Me.lblFill = New System.Windows.Forms.Label()
+        Me.ucrInputFill = New instat.ucrInputComboBox()
         Me.ucrInputX = New instat.ucrInputTextBox()
         Me.ucrInputY = New instat.ucrInputTextBox()
         Me.ucrInputYmin = New instat.ucrInputTextBox()
@@ -149,6 +157,10 @@ Partial Class sdgPlots
         Me.lblAnnotationGeoms = New System.Windows.Forms.Label()
         Me.ucrInputAnnotationGeoms = New instat.ucrInputComboBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrInputXmax = New instat.ucrInputTextBox()
+        Me.ucrInputYmax = New instat.ucrInputTextBox()
+        Me.lblXmax = New System.Windows.Forms.Label()
+        Me.lblYmax = New System.Windows.Forms.Label()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -892,6 +904,18 @@ Partial Class sdgPlots
         '
         'tbpAnnotation
         '
+        Me.tbpAnnotation.Controls.Add(Me.lblYmax)
+        Me.tbpAnnotation.Controls.Add(Me.lblXmax)
+        Me.tbpAnnotation.Controls.Add(Me.ucrInputYmax)
+        Me.tbpAnnotation.Controls.Add(Me.ucrInputXmax)
+        Me.tbpAnnotation.Controls.Add(Me.lblSize)
+        Me.tbpAnnotation.Controls.Add(Me.ucrNudSize)
+        Me.tbpAnnotation.Controls.Add(Me.lblColour)
+        Me.tbpAnnotation.Controls.Add(Me.ucrInputColour)
+        Me.tbpAnnotation.Controls.Add(Me.ucrNudAlpha)
+        Me.tbpAnnotation.Controls.Add(Me.lblAlpha)
+        Me.tbpAnnotation.Controls.Add(Me.lblFill)
+        Me.tbpAnnotation.Controls.Add(Me.ucrInputFill)
         Me.tbpAnnotation.Controls.Add(Me.ucrInputX)
         Me.tbpAnnotation.Controls.Add(Me.ucrInputY)
         Me.tbpAnnotation.Controls.Add(Me.ucrInputYmin)
@@ -909,6 +933,62 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.tbpAnnotation, "tbpAnnotation")
         Me.tbpAnnotation.Name = "tbpAnnotation"
         Me.tbpAnnotation.UseVisualStyleBackColor = True
+        '
+        'lblSize
+        '
+        resources.ApplyResources(Me.lblSize, "lblSize")
+        Me.lblSize.Name = "lblSize"
+        '
+        'ucrNudSize
+        '
+        Me.ucrNudSize.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSize, "ucrNudSize")
+        Me.ucrNudSize.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSize.Name = "ucrNudSize"
+        Me.ucrNudSize.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblColour
+        '
+        resources.ApplyResources(Me.lblColour, "lblColour")
+        Me.lblColour.Name = "lblColour"
+        '
+        'ucrInputColour
+        '
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.GetSetSelectedIndex = -1
+        Me.ucrInputColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputColour, "ucrInputColour")
+        Me.ucrInputColour.Name = "ucrInputColour"
+        '
+        'ucrNudAlpha
+        '
+        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudAlpha, "ucrNudAlpha")
+        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Name = "ucrNudAlpha"
+        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblAlpha
+        '
+        resources.ApplyResources(Me.lblAlpha, "lblAlpha")
+        Me.lblAlpha.Name = "lblAlpha"
+        '
+        'lblFill
+        '
+        resources.ApplyResources(Me.lblFill, "lblFill")
+        Me.lblFill.Name = "lblFill"
+        '
+        'ucrInputFill
+        '
+        Me.ucrInputFill.AddQuotesIfUnrecognised = True
+        Me.ucrInputFill.GetSetSelectedIndex = -1
+        Me.ucrInputFill.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFill, "ucrInputFill")
+        Me.ucrInputFill.Name = "ucrInputFill"
         '
         'ucrInputX
         '
@@ -1005,6 +1085,32 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        '
+        'ucrInputXmax
+        '
+        Me.ucrInputXmax.AddQuotesIfUnrecognised = True
+        Me.ucrInputXmax.IsMultiline = False
+        Me.ucrInputXmax.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXmax, "ucrInputXmax")
+        Me.ucrInputXmax.Name = "ucrInputXmax"
+        '
+        'ucrInputYmax
+        '
+        Me.ucrInputYmax.AddQuotesIfUnrecognised = True
+        Me.ucrInputYmax.IsMultiline = False
+        Me.ucrInputYmax.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYmax, "ucrInputYmax")
+        Me.ucrInputYmax.Name = "ucrInputYmax"
+        '
+        'lblXmax
+        '
+        resources.ApplyResources(Me.lblXmax, "lblXmax")
+        Me.lblXmax.Name = "lblXmax"
+        '
+        'lblYmax
+        '
+        resources.ApplyResources(Me.lblYmax, "lblYmax")
+        Me.lblYmax.Name = "lblYmax"
         '
         'sdgPlots
         '
@@ -1156,6 +1262,18 @@ Partial Class sdgPlots
     Friend WithEvents lblXend As Label
     Friend WithEvents lblYmin As Label
     Friend WithEvents lblXmin As Label
+    Friend WithEvents lblFill As Label
+    Friend WithEvents ucrInputFill As ucrInputComboBox
+    Friend WithEvents ucrNudAlpha As ucrNud
+    Friend WithEvents lblAlpha As Label
+    Friend WithEvents lblColour As Label
+    Friend WithEvents ucrInputColour As ucrInputComboBox
+    Friend WithEvents lblSize As Label
+    Friend WithEvents ucrNudSize As ucrNud
+    Friend WithEvents lblYmax As Label
+    Friend WithEvents lblXmax As Label
+    Friend WithEvents ucrInputYmax As ucrInputTextBox
+    Friend WithEvents ucrInputXmax As ucrInputTextBox
 End Class
 
 
