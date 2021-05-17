@@ -593,12 +593,13 @@ Public Class sdgClimaticDataEntry
                 strValue = grdCurrentWorkSheet.Item(row:=i, col:=iColIndex)
             End If
 
-            dValue = If(IsNumeric(strValue), Double.Parse(strValue), 0)
-
-            iAllValuesCount = iAllValuesCount + 1
-            dSumValue = dSumValue + dValue
-            If dValue > 0 Then
-                iValuesGreaterThan0Count = iValuesGreaterThan0Count + 1
+            If IsNumeric(strValue) Then
+                dValue = Double.Parse(strValue)
+                dSumValue = dSumValue + dValue
+                iAllValuesCount = iAllValuesCount + 1
+                If dValue > 0 Then
+                    iValuesGreaterThan0Count = iValuesGreaterThan0Count + 1
+                End If
             End If
 
         Next
