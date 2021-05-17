@@ -28,14 +28,14 @@ Public Class sdgOpenNetCDF
     'We need to initialise the lists to be empty lists.
     ' If we don't do this then, when we build the translations database, a null reference exception 
     ' is triggered in `sdgOpenNetCDF_Closing()`.
-    Private lstMinTextBoxes As List(Of ucrInputTextBox) = New List(Of ucrInputTextBox)
-    Private lstMaxTextBoxes As List(Of ucrInputTextBox) = New List(Of ucrInputTextBox)
-    Private lstAxesLabels As List(Of Label) = New List(Of Label)
-    Private lstMinLabels As List(Of Label) = New List(Of Label)
-    Private lstMaxLabels As List(Of Label) = New List(Of Label)
-    Private lstDims As List(Of String) = New List(Of String)
-    Private lstAxesDetected As List(Of Boolean) = New List(Of Boolean)
-    Private lstFunctions As List(Of RFunction) = New List(Of RFunction)
+    Private lstMinTextBoxes = New List(Of ucrInputTextBox)
+    Private lstMaxTextBoxes = New List(Of ucrInputTextBox)
+    Private lstAxesLabels = New List(Of Label)
+    Private lstMinLabels = New List(Of Label)
+    Private lstMaxLabels = New List(Of Label)
+    Private lstDims = New List(Of String)
+    Private lstAxesDetected = New List(Of Boolean)
+    Private lstFunctions = New List(Of RFunction)
 
     Private strFilePath As String
     Private dctAxesNames As New Dictionary(Of String, String)
