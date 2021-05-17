@@ -389,18 +389,19 @@ Public Class sdgClimaticDataEntry
                 Exit Sub
             End If
 
-            'delete operation applies to all selected cells for the column
-            Dim iLastEditableRow As Integer = grdCurrentWorkSheet.SelectionRange.Rows - 1
 
-            If strEntryType = "Month" AndAlso iLastEditableRow = grdCurrentWorkSheet.Rows - 1 Then
+            'delete operation applies to all selected cells for the column
+            Dim iEndRow As Integer = grdCurrentWorkSheet.SelectionRange.EndRow
+
+            If strEntryType = "Month" AndAlso grdCurrentWorkSheet.SelectionRange.EndRow = grdCurrentWorkSheet.Rows - 1 Then
                 'exclude calculated and difference 
-                iLastEditableRow = iLastEditableRow - 2
+                iEndRow = iEndRow - 2
             End If
 
-            For i As Integer = grdCurrentWorkSheet.SelectionRange.Row To iLastEditableRow
-                If Not ValidateAndSaveRowChanged(i, e.Cell.Column, "NA") Then
-                    e.IsCancelled = True
-                End If
+            For iRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row To iEndRow
+                'forces the cell to have blank data values 
+                grdCurrentWorkSheet.Item(row:=iRowIndex, col:=e.Cell.Column) = ""
+                ValidateAndSaveRowChanged(iRowIndex, e.Cell.Column, "NA")
             Next
 
         End If
@@ -623,7 +624,7 @@ Public Class sdgClimaticDataEntry
         'set the calculated value and round of to 2 d.p
         dTotalCalculatedValue = Math.Round(dTotalCalculatedValue, 2)
         grdCurrentWorkSheet.Item(row:=iLastRowIndex - 1, col:=iColIndex) = dTotalCalculatedValue
-
+        'grdCurrentWorkSheet.GetCell(row:=iLastRowIndex - 1, col:=iColIndex).Data = dTotalCalculatedValue
         'set difference value, only when there is a sum value else remove the difference
         If IsNumeric(strTotalUserInputValue) Then
             dDifferenceValue = Math.Round(Double.Parse(strTotalUserInputValue) - dTotalCalculatedValue, 2)
