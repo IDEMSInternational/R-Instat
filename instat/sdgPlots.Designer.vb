@@ -134,6 +134,12 @@ Partial Class sdgPlots
         Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
         Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
         Me.tbpAnnotation = New System.Windows.Forms.TabPage()
+        Me.lblLinetype = New System.Windows.Forms.Label()
+        Me.ucrNudLinetype = New instat.ucrNud()
+        Me.lblYmax = New System.Windows.Forms.Label()
+        Me.lblXmax = New System.Windows.Forms.Label()
+        Me.ucrInputYmax = New instat.ucrInputTextBox()
+        Me.ucrInputXmax = New instat.ucrInputTextBox()
         Me.lblSize = New System.Windows.Forms.Label()
         Me.ucrNudSize = New instat.ucrNud()
         Me.lblColour = New System.Windows.Forms.Label()
@@ -149,7 +155,7 @@ Partial Class sdgPlots
         Me.ucrInputXend = New instat.ucrInputTextBox()
         Me.ucrInputXmin = New instat.ucrInputTextBox()
         Me.lblYend = New System.Windows.Forms.Label()
-        Me.lblXend = New System.Windows.Forms.Label()
+        Me.lblCrossbarFatten = New System.Windows.Forms.Label()
         Me.lblYmin = New System.Windows.Forms.Label()
         Me.lblXmin = New System.Windows.Forms.Label()
         Me.lblY = New System.Windows.Forms.Label()
@@ -157,10 +163,10 @@ Partial Class sdgPlots
         Me.lblAnnotationGeoms = New System.Windows.Forms.Label()
         Me.ucrInputAnnotationGeoms = New instat.ucrInputComboBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrInputXmax = New instat.ucrInputTextBox()
-        Me.ucrInputYmax = New instat.ucrInputTextBox()
-        Me.lblXmax = New System.Windows.Forms.Label()
-        Me.lblYmax = New System.Windows.Forms.Label()
+        Me.ucrNudCurvature = New instat.ucrNud()
+        Me.lblCurvature = New System.Windows.Forms.Label()
+        Me.ucrNudCrossbarFatten = New instat.ucrNud()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -904,6 +910,7 @@ Partial Class sdgPlots
         '
         'tbpAnnotation
         '
+        Me.tbpAnnotation.Controls.Add(Me.Label2)
         Me.tbpAnnotation.Controls.Add(Me.lblYmax)
         Me.tbpAnnotation.Controls.Add(Me.lblXmax)
         Me.tbpAnnotation.Controls.Add(Me.ucrInputYmax)
@@ -914,7 +921,6 @@ Partial Class sdgPlots
         Me.tbpAnnotation.Controls.Add(Me.ucrInputColour)
         Me.tbpAnnotation.Controls.Add(Me.ucrNudAlpha)
         Me.tbpAnnotation.Controls.Add(Me.lblAlpha)
-        Me.tbpAnnotation.Controls.Add(Me.lblFill)
         Me.tbpAnnotation.Controls.Add(Me.ucrInputFill)
         Me.tbpAnnotation.Controls.Add(Me.ucrInputX)
         Me.tbpAnnotation.Controls.Add(Me.ucrInputY)
@@ -923,16 +929,63 @@ Partial Class sdgPlots
         Me.tbpAnnotation.Controls.Add(Me.ucrInputXend)
         Me.tbpAnnotation.Controls.Add(Me.ucrInputXmin)
         Me.tbpAnnotation.Controls.Add(Me.lblYend)
-        Me.tbpAnnotation.Controls.Add(Me.lblXend)
         Me.tbpAnnotation.Controls.Add(Me.lblYmin)
         Me.tbpAnnotation.Controls.Add(Me.lblXmin)
         Me.tbpAnnotation.Controls.Add(Me.lblY)
         Me.tbpAnnotation.Controls.Add(Me.lblX)
         Me.tbpAnnotation.Controls.Add(Me.lblAnnotationGeoms)
         Me.tbpAnnotation.Controls.Add(Me.ucrInputAnnotationGeoms)
+        Me.tbpAnnotation.Controls.Add(Me.ucrNudLinetype)
+        Me.tbpAnnotation.Controls.Add(Me.lblLinetype)
+        Me.tbpAnnotation.Controls.Add(Me.lblCurvature)
+        Me.tbpAnnotation.Controls.Add(Me.ucrNudCurvature)
+        Me.tbpAnnotation.Controls.Add(Me.lblFill)
+        Me.tbpAnnotation.Controls.Add(Me.lblCrossbarFatten)
+        Me.tbpAnnotation.Controls.Add(Me.ucrNudCrossbarFatten)
         resources.ApplyResources(Me.tbpAnnotation, "tbpAnnotation")
         Me.tbpAnnotation.Name = "tbpAnnotation"
         Me.tbpAnnotation.UseVisualStyleBackColor = True
+        '
+        'lblLinetype
+        '
+        resources.ApplyResources(Me.lblLinetype, "lblLinetype")
+        Me.lblLinetype.Name = "lblLinetype"
+        '
+        'ucrNudLinetype
+        '
+        Me.ucrNudLinetype.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLinetype.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLinetype, "ucrNudLinetype")
+        Me.ucrNudLinetype.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLinetype.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLinetype.Name = "ucrNudLinetype"
+        Me.ucrNudLinetype.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblYmax
+        '
+        resources.ApplyResources(Me.lblYmax, "lblYmax")
+        Me.lblYmax.Name = "lblYmax"
+        '
+        'lblXmax
+        '
+        resources.ApplyResources(Me.lblXmax, "lblXmax")
+        Me.lblXmax.Name = "lblXmax"
+        '
+        'ucrInputYmax
+        '
+        Me.ucrInputYmax.AddQuotesIfUnrecognised = True
+        Me.ucrInputYmax.IsMultiline = False
+        Me.ucrInputYmax.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYmax, "ucrInputYmax")
+        Me.ucrInputYmax.Name = "ucrInputYmax"
+        '
+        'ucrInputXmax
+        '
+        Me.ucrInputXmax.AddQuotesIfUnrecognised = True
+        Me.ucrInputXmax.IsMultiline = False
+        Me.ucrInputXmax.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXmax, "ucrInputXmax")
+        Me.ucrInputXmax.Name = "ucrInputXmax"
         '
         'lblSize
         '
@@ -1043,10 +1096,10 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.lblYend, "lblYend")
         Me.lblYend.Name = "lblYend"
         '
-        'lblXend
+        'lblCrossbarFatten
         '
-        resources.ApplyResources(Me.lblXend, "lblXend")
-        Me.lblXend.Name = "lblXend"
+        resources.ApplyResources(Me.lblCrossbarFatten, "lblCrossbarFatten")
+        Me.lblCrossbarFatten.Name = "lblCrossbarFatten"
         '
         'lblYmin
         '
@@ -1086,31 +1139,35 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
-        'ucrInputXmax
+        'ucrNudCurvature
         '
-        Me.ucrInputXmax.AddQuotesIfUnrecognised = True
-        Me.ucrInputXmax.IsMultiline = False
-        Me.ucrInputXmax.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputXmax, "ucrInputXmax")
-        Me.ucrInputXmax.Name = "ucrInputXmax"
+        Me.ucrNudCurvature.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCurvature.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudCurvature, "ucrNudCurvature")
+        Me.ucrNudCurvature.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCurvature.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCurvature.Name = "ucrNudCurvature"
+        Me.ucrNudCurvature.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputYmax
+        'lblCurvature
         '
-        Me.ucrInputYmax.AddQuotesIfUnrecognised = True
-        Me.ucrInputYmax.IsMultiline = False
-        Me.ucrInputYmax.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYmax, "ucrInputYmax")
-        Me.ucrInputYmax.Name = "ucrInputYmax"
+        resources.ApplyResources(Me.lblCurvature, "lblCurvature")
+        Me.lblCurvature.Name = "lblCurvature"
         '
-        'lblXmax
+        'ucrNudCrossbarFatten
         '
-        resources.ApplyResources(Me.lblXmax, "lblXmax")
-        Me.lblXmax.Name = "lblXmax"
+        Me.ucrNudCrossbarFatten.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCrossbarFatten.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudCrossbarFatten, "ucrNudCrossbarFatten")
+        Me.ucrNudCrossbarFatten.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudCrossbarFatten.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudCrossbarFatten.Name = "ucrNudCrossbarFatten"
+        Me.ucrNudCrossbarFatten.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblYmax
+        'Label2
         '
-        resources.ApplyResources(Me.lblYmax, "lblYmax")
-        Me.lblYmax.Name = "lblYmax"
+        resources.ApplyResources(Me.Label2, "Label2")
+        Me.Label2.Name = "Label2"
         '
         'sdgPlots
         '
@@ -1259,7 +1316,7 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputXend As ucrInputTextBox
     Friend WithEvents ucrInputXmin As ucrInputTextBox
     Friend WithEvents lblYend As Label
-    Friend WithEvents lblXend As Label
+    Friend WithEvents lblCrossbarFatten As Label
     Friend WithEvents lblYmin As Label
     Friend WithEvents lblXmin As Label
     Friend WithEvents lblFill As Label
@@ -1274,6 +1331,12 @@ Partial Class sdgPlots
     Friend WithEvents lblXmax As Label
     Friend WithEvents ucrInputYmax As ucrInputTextBox
     Friend WithEvents ucrInputXmax As ucrInputTextBox
+    Friend WithEvents lblLinetype As Label
+    Friend WithEvents ucrNudLinetype As ucrNud
+    Friend WithEvents lblCurvature As Label
+    Friend WithEvents ucrNudCurvature As ucrNud
+    Friend WithEvents Label2 As Label
+    Friend WithEvents ucrNudCrossbarFatten As ucrNud
 End Class
 
 

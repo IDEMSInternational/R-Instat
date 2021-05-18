@@ -359,7 +359,7 @@ Public Class sdgPlots
         ucrInputXmin.SetRDefault("NULL")
 
         ucrInputXend.SetParameter(New RParameter("xend", 5))
-        ucrInputXend.SetLinkedDisplayControl(lblXend)
+        ucrInputXend.SetLinkedDisplayControl(lblCrossbarFatten)
         ucrInputXend.SetRDefault("NULL")
 
         ucrInputYend.SetParameter(New RParameter("yend", 6))
@@ -373,6 +373,22 @@ Public Class sdgPlots
         ucrInputYmax.SetParameter(New RParameter("ymax", 8))
         ucrInputYmax.SetLinkedDisplayControl(lblYmax)
         ucrInputYmax.SetRDefault("NULL")
+
+
+        ucrNudLinetype.SetParameter(New RParameter("linetype", 9))
+        ucrNudLinetype.SetMinMax(iNewMin:=1)
+        ucrNudLinetype.SetRDefault(1)
+        ucrNudLinetype.SetLinkedDisplayControl(lblLinetype)
+
+
+        ucrNudCurvature.SetParameter(New RParameter("curvature", 10))
+        ucrNudCurvature.SetRDefault(0.5)
+        ucrNudCurvature.SetLinkedDisplayControl(lblCurvature)
+
+        ucrNudCrossbarFatten.SetParameter(New RParameter("fatten", 10))
+        ucrNudCrossbarFatten.SetMinMax(iNewMin:=0)
+        ucrNudCrossbarFatten.SetRDefault(2.5)
+        ucrNudCrossbarFatten.SetLinkedDisplayControl(lblCrossbarFatten)
 
         ucrInputAnnotationGeoms.SetParameter(New RParameter("geom", iNewPosition:=0))
         dctAnnotationGeom.Add("text", Chr(34) & "text" & Chr(34))
@@ -413,14 +429,12 @@ Public Class sdgPlots
         ucrNudSize.SetLinkedDisplayControl(lblSize)
 
         ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputFill, {"rect", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputX, {"text", "label", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputY, {"text", "label", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputXend, {"text", "label"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputYend, {"text", "label"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputXmin, {"segment", "rect", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputYmin, {"segment", "rect", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputXmax, {"segment", "rect", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputYmax, {"segment", "rect", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputY, ucrInputX}, {"text", "label", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputYend, ucrInputXend}, {"text", "label"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputYmax, ucrInputXmax, ucrInputXmin, ucrInputYmin}, {"segment", "rect", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrNudLinetype, {"segment", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrNudCurvature, {"curve"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+
         'Colour
         ucrInputFillScaleColour.SetParameter(New RParameter("option", iNewPosition:=0))
         dctFillOptions.Add("viridis", Chr(34) & "viridis" & Chr(34))
