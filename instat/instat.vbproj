@@ -1366,6 +1366,12 @@
     <Compile Include="dlgUseModel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="static\InstatObject\R\dlgSelectColumns.Designer.vb">
+      <DependentUpon>dlgSelectColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="static\InstatObject\R\dlgSelectColumns.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ucrAxes.Designer.vb">
       <DependentUpon>ucrAxes.vb</DependentUpon>
     </Compile>
@@ -4600,6 +4606,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUseModel.resx">
       <DependentUpon>dlgUseModel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="static\InstatObject\R\dlgSelectColumns.resx">
+      <DependentUpon>dlgSelectColumns.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrAdditionalLayers.resx">
       <DependentUpon>ucrAdditionalLayers.vb</DependentUpon>
