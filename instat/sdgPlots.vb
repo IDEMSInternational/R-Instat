@@ -408,9 +408,9 @@ Public Class sdgPlots
 
         ucrNudShape.SetParameter(New RParameter("shape", 14))
         ucrNudShape.SetMinMax(1, 255)
-        ucrNudAngle.Increment = 1
-        ucrNudAngle.SetRDefault(1)
-        ucrNudAngle.SetLinkedDisplayControl(lblShape)
+        ucrNudShape.Increment = 1
+        ucrNudShape.SetRDefault(1)
+        ucrNudShape.SetLinkedDisplayControl(lblShape)
 
         ucrInputAnnotationGeoms.SetParameter(New RParameter("geom", iNewPosition:=0))
         dctAnnotationGeom.Add("text", Chr(34) & "text" & Chr(34))
