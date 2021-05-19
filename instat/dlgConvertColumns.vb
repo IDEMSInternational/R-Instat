@@ -20,11 +20,8 @@ Public Class dlgConvertColumns
     Public bFirstLoad As Boolean = True
     Public bToFactorOnly As Boolean = False
     Private bReset As Boolean = True
-    Private bUseSelectedColumn As Boolean = False
-    Private strSelectedColumn As String = ""
-    Public strSelectedDataFrame As String = ""
     Private clsDefaultFunction As New RFunction
-
+    Private lstRCodeStructure As List(Of RCodeStructure)
     Private Sub dlgConvertColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -36,9 +33,6 @@ Public Class dlgConvertColumns
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        If bUseSelectedColumn Then
-            SetDefaultColumn()
-        End If
         ReopenDialog()
         TestOKEnabled()
     End Sub
@@ -55,13 +49,14 @@ Public Class dlgConvertColumns
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 67
 
-        ucrSelectorDataFrameColumns.SetParameter(New RParameter("data_name", 0))
-        ucrSelectorDataFrameColumns.SetParameterIsString()
-
         ucrReceiverColumnsToConvert.SetParameter(New RParameter("col_names", 1))
         ucrReceiverColumnsToConvert.Selector = ucrSelectorDataFrameColumns
         ucrReceiverColumnsToConvert.SetMeAsReceiver()
         ucrReceiverColumnsToConvert.SetParameterIsString()
+
+        ucrSelectorDataFrameColumns.SetParameter(New RParameter("data_name", 0))
+        ucrSelectorDataFrameColumns.SetParameterIsString()
+
 
         ucrPnlConvertTo.SetParameter(New RParameter("to_type", 2))
         ucrPnlConvertTo.AddRadioButton(rdoFactor, Chr(34) & "factor" & Chr(34))
@@ -108,27 +103,38 @@ Public Class dlgConvertColumns
 
     End Sub
 
-    Private Sub SetDefaults()
-        clsDefaultFunction = New RFunction
-
-        ucrSelectorDataFrameColumns.Reset()
-        SetToFactorStatus(bToFactorOnly)
-
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
+    Private Sub SetRFunctionDefaultParameters()
         clsDefaultFunction.AddParameter("to_type", Chr(34) & "factor" & Chr(34))
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
-    Public Sub SetCurrentColumn(strColumn As String, strDataFrame As String)
-        strSelectedColumn = strColumn
-        strSelectedDataFrame = strDataFrame
-        bUseSelectedColumn = True
+    Private Sub ResetFunction()
+        clsDefaultFunction = New RFunction
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
     End Sub
 
-    Private Sub SetDefaultColumn()
-        ucrSelectorDataFrameColumns.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem = strSelectedDataFrame
-        ucrReceiverColumnsToConvert.Add(strSelectedColumn, strSelectedDataFrame)
-        bUseSelectedColumn = False
+
+    Private Sub SetDefaults()
+        ResetFunction()
+        ucrSelectorDataFrameColumns.Reset()
+
+        If IsNothing(lstRCodeStructure) Then
+            SetRFunctionDefaultParameters()
+        ElseIf lstRCodeStructure.count > 1 Then
+            SetRFunctionDefaultParameters()
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf lstRCodeStructure.count = 1 Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If (TryCast(lstRCodeStructure(0), RFunction).strRCommand) = clsDefaultFunction.strRCommand Then
+                    clsDefaultFunction = lstRCodeStructure(0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+                Else
+                    SetRFunctionDefaultParameters()
+                    MsgBox("Developer error: This dialogue requires An RFunction whose command is" & clsDefaultFunction.strRCommand)
+                End If
+            End If
+        End If
+        lstRCodeStructure = Nothing
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -148,6 +154,7 @@ Public Class dlgConvertColumns
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
+        SetToFactorStatus(bToFactorOnly)
         SetDefaults()
         SetRCodeForControls(True)
         TestOKEnabled()
@@ -155,7 +162,9 @@ Public Class dlgConvertColumns
 
     Private Sub SetToFactorStatus(bToFactorOnly As Boolean)
         If bToFactorOnly Then
-            rdoFactor.Checked = True
+            If Not rdoFactor.Checked AndAlso Not rdoOrderedFactor.Checked Then
+                rdoFactor.Checked = True
+            End If
             rdoCharacter.Enabled = False
             rdoInteger.Enabled = False
             rdoNumeric.Enabled = False
@@ -177,4 +186,14 @@ Public Class dlgConvertColumns
             ucrChkIgnoreLabels.SetText("Ignore Labels")
         End If
     End Sub
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
+
 End Class

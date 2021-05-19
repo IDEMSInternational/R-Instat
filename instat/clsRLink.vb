@@ -2346,42 +2346,51 @@ Public Class RLink
         For iRstatement As Integer = 0 To clsRScript.lstRStatements.Count - 1
             'Getting the dialogue am working on by getting the comment 
             If iRstatement = 0 Then
-                If clsRScript.lstRStatements(0).clsAssignment.strPrefix <> "" Then
-                    strCommentFromDialogue = (clsRScript.lstRStatements(0).clsAssignment.strPrefix).ToLower
+                If Not IsNothing(clsRScript.lstRStatements(0).clsAssignment) Then
+                    If clsRScript.lstRStatements(0).clsAssignment.strPrefix <> "" Then
+                        strCommentFromDialogue = (clsRScript.lstRStatements(0).clsAssignment.strPrefix).ToLower
+                    End If
+                ElseIf Not IsNothing(clsRScript.lstRStatements(0).clsElement) Then
+                    If Not IsNothing(TryCast(clsRScript.lstRStatements(0).clsElement, RScript.clsRElementFunction)) Then
+                        If TryCast(clsRScript.lstRStatements(0).clsElement, RScript.clsRElementFunction).lstObjects(0).strPrefix <> "" Then
+                            strCommentFromDialogue = TryCast(clsRScript.lstRStatements(0).clsElement, RScript.clsRElementFunction).lstObjects(0).strPrefix.ToLower
+                        End If
+                    End If
                 End If
             End If
             lstNewRCodeStructures.Add(ProcessSingleRStatement(clsRScript.lstRStatements(iRstatement)))
         Next
 
-        If clsRScript.lstRStatements(0).clsAssignment.strPrefix <> "" Then
-            If strCommentFromDialogue.Contains("split text column") Then
-                'Restricting it to returning the main Rfunction RcodeStructure only
-                lstNewRCodeStructures.RemoveAt(0)
-                dlgSplitText.lstScriptsRCodeStructure = lstNewRCodeStructures
-                dlgSplitText.ShowDialog()
-            ElseIf strCommentFromDialogue.Contains("transform text column") Then
-                'we are to remain with the main code alone .
-                'This dialogue can have a maximum of 3 Assignments before the main code
-                If (lstNewRCodeStructures.Count) >= 2 Then
-                    lstNewRCodeStructures.RemoveRange(0, lstNewRCodeStructures.Count - 1)
-                End If
-                dlgTransformText.lstScriptsRCodeStructure = lstNewRCodeStructures
-                dlgTransformText.ShowDialog()
-            ElseIf strCommentFromDialogue.Contains("combine text columns") Then
-                'This dialogue requires only one line of code
-                dlgCombineText.lstScriptsRCodeStructure = lstNewRCodeStructures
-                dlgCombineText.ShowDialog()
-            ElseIf strCommentFromDialogue.Contains("string distance") Then
-                If (lstNewRCodeStructures.Count) >= 2 Then
-                    lstNewRCodeStructures.RemoveRange(0, lstNewRCodeStructures.Count - 1)
-                End If
-                dlgStringDistance.lstScriptsRCodeStructure = lstNewRCodeStructures
-                dlgStringDistance.ShowDialog()
-            ElseIf strCommentFromDialogue.Contains("string handling") Then
-                lstNewRCodeStructures.RemoveAt(0)
-                dlgStringHandling.lstScriptsRCodeStructure = lstNewRCodeStructures
-                dlgStringHandling.ShowDialog()
+        If strCommentFromDialogue.Contains("split text column") Then
+            'Restricting it to returning the main Rfunction RcodeStructure only
+            lstNewRCodeStructures.RemoveAt(0)
+            dlgSplitText.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgSplitText.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("transform text column") Then
+            'we are to remain with the main code alone .
+            'This dialogue can have a maximum of 3 Assignments before the main code
+            If (lstNewRCodeStructures.Count) >= 2 Then
+                lstNewRCodeStructures.RemoveRange(0, lstNewRCodeStructures.Count - 1)
             End If
+            dlgTransformText.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgTransformText.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("combine text columns") Then
+            'This dialogue requires only one line of code
+            dlgCombineText.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgCombineText.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("string distance") Then
+            If (lstNewRCodeStructures.Count) >= 2 Then
+                lstNewRCodeStructures.RemoveRange(0, lstNewRCodeStructures.Count - 1)
+            End If
+            dlgStringDistance.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgStringDistance.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("string handling") Then
+            lstNewRCodeStructures.RemoveAt(0)
+            dlgStringHandling.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgStringHandling.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("convert columns") Then
+            dlgConvertColumns.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgConvertColumns.ShowDialog()
         End If
     End Sub
 
