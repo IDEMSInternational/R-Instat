@@ -25,7 +25,6 @@ Public Class sdgImportFromClimSoft
     Private bConnected As Boolean
 
     Private Sub sdgImportFromClimSoft_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -35,6 +34,7 @@ Public Class sdgImportFromClimSoft
         'could have been connected through the wizard. So check here
         bConnected = IsConnectionIsActive()
         UpdateConnectionAndControlsState()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
