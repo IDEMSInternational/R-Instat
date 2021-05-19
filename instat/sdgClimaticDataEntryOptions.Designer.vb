@@ -25,20 +25,22 @@ Partial Class sdgClimaticDataEntryOptions
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgClimaticDataEntryOptions))
         Me.grpRestrictEntry = New System.Windows.Forms.GroupBox()
-        Me.ucrChkAllowTrace = New instat.ucrCheck()
-        Me.ucrChkNoDecimal = New instat.ucrCheck()
         Me.ttDefaultValue = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblDefault = New System.Windows.Forms.Label()
-        Me.ucrInputDefaultValue = New instat.ucrInputComboBox()
         Me.lblBefore = New System.Windows.Forms.Label()
         Me.lblAfter = New System.Windows.Forms.Label()
         Me.ttucrChkTransform = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrChkTransform = New instat.ucrCheck()
+        Me.ucrChkIncludeFirstNextMonth = New instat.ucrCheck()
+        Me.ucrChkEditNAOnly = New instat.ucrCheck()
+        Me.ucrInputDefaultValue = New instat.ucrInputComboBox()
         Me.ucrChkExtraRows = New instat.ucrCheck()
         Me.ucrNudAfter = New instat.ucrNud()
         Me.ucrNudBefore = New instat.ucrNud()
         Me.ucrSdgPICSARainfalbuttons = New instat.ucrButtonsSubdialogue()
         Me.ucrInputTransform = New instat.ucrInputComboBox()
+        Me.ucrChkAllowTrace = New instat.ucrCheck()
+        Me.ucrChkNoDecimal = New instat.ucrCheck()
+        Me.ucrChkTransform = New instat.ucrCheck()
         Me.grpRestrictEntry.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -49,18 +51,6 @@ Partial Class sdgClimaticDataEntryOptions
         resources.ApplyResources(Me.grpRestrictEntry, "grpRestrictEntry")
         Me.grpRestrictEntry.Name = "grpRestrictEntry"
         Me.grpRestrictEntry.TabStop = False
-        '
-        'ucrChkAllowTrace
-        '
-        Me.ucrChkAllowTrace.Checked = False
-        resources.ApplyResources(Me.ucrChkAllowTrace, "ucrChkAllowTrace")
-        Me.ucrChkAllowTrace.Name = "ucrChkAllowTrace"
-        '
-        'ucrChkNoDecimal
-        '
-        Me.ucrChkNoDecimal.Checked = False
-        resources.ApplyResources(Me.ucrChkNoDecimal, "ucrChkNoDecimal")
-        Me.ucrChkNoDecimal.Name = "ucrChkNoDecimal"
         '
         'ttDefaultValue
         '
@@ -73,15 +63,6 @@ Partial Class sdgClimaticDataEntryOptions
         resources.ApplyResources(Me.lblDefault, "lblDefault")
         Me.lblDefault.Name = "lblDefault"
         Me.ttDefaultValue.SetToolTip(Me.lblDefault, resources.GetString("lblDefault.ToolTip"))
-        '
-        'ucrInputDefaultValue
-        '
-        Me.ucrInputDefaultValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputDefaultValue.GetSetSelectedIndex = -1
-        Me.ucrInputDefaultValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDefaultValue, "ucrInputDefaultValue")
-        Me.ucrInputDefaultValue.Name = "ucrInputDefaultValue"
-        Me.ttDefaultValue.SetToolTip(Me.ucrInputDefaultValue, resources.GetString("ucrInputDefaultValue.ToolTip"))
         '
         'lblBefore
         '
@@ -99,12 +80,28 @@ Partial Class sdgClimaticDataEntryOptions
         Me.ttucrChkTransform.InitialDelay = 500
         Me.ttucrChkTransform.ReshowDelay = 100
         '
-        'ucrChkTransform
+        'ucrChkIncludeFirstNextMonth
         '
-        Me.ucrChkTransform.Checked = False
-        resources.ApplyResources(Me.ucrChkTransform, "ucrChkTransform")
-        Me.ucrChkTransform.Name = "ucrChkTransform"
-        Me.ttucrChkTransform.SetToolTip(Me.ucrChkTransform, resources.GetString("ucrChkTransform.ToolTip"))
+        Me.ucrChkIncludeFirstNextMonth.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeFirstNextMonth, "ucrChkIncludeFirstNextMonth")
+        Me.ucrChkIncludeFirstNextMonth.Name = "ucrChkIncludeFirstNextMonth"
+        Me.ttucrChkTransform.SetToolTip(Me.ucrChkIncludeFirstNextMonth, resources.GetString("ucrChkIncludeFirstNextMonth.ToolTip"))
+        '
+        'ucrChkEditNAOnly
+        '
+        Me.ucrChkEditNAOnly.Checked = False
+        resources.ApplyResources(Me.ucrChkEditNAOnly, "ucrChkEditNAOnly")
+        Me.ucrChkEditNAOnly.Name = "ucrChkEditNAOnly"
+        Me.ttucrChkTransform.SetToolTip(Me.ucrChkEditNAOnly, resources.GetString("ucrChkEditNAOnly.ToolTip"))
+        '
+        'ucrInputDefaultValue
+        '
+        Me.ucrInputDefaultValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputDefaultValue.GetSetSelectedIndex = -1
+        Me.ucrInputDefaultValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDefaultValue, "ucrInputDefaultValue")
+        Me.ucrInputDefaultValue.Name = "ucrInputDefaultValue"
+        Me.ttDefaultValue.SetToolTip(Me.ucrInputDefaultValue, resources.GetString("ucrInputDefaultValue.ToolTip"))
         '
         'ucrChkExtraRows
         '
@@ -145,10 +142,31 @@ Partial Class sdgClimaticDataEntryOptions
         resources.ApplyResources(Me.ucrInputTransform, "ucrInputTransform")
         Me.ucrInputTransform.Name = "ucrInputTransform"
         '
+        'ucrChkAllowTrace
+        '
+        Me.ucrChkAllowTrace.Checked = False
+        resources.ApplyResources(Me.ucrChkAllowTrace, "ucrChkAllowTrace")
+        Me.ucrChkAllowTrace.Name = "ucrChkAllowTrace"
+        '
+        'ucrChkNoDecimal
+        '
+        Me.ucrChkNoDecimal.Checked = False
+        resources.ApplyResources(Me.ucrChkNoDecimal, "ucrChkNoDecimal")
+        Me.ucrChkNoDecimal.Name = "ucrChkNoDecimal"
+        '
+        'ucrChkTransform
+        '
+        Me.ucrChkTransform.Checked = False
+        resources.ApplyResources(Me.ucrChkTransform, "ucrChkTransform")
+        Me.ucrChkTransform.Name = "ucrChkTransform"
+        Me.ttucrChkTransform.SetToolTip(Me.ucrChkTransform, resources.GetString("ucrChkTransform.ToolTip"))
+        '
         'sdgClimaticDataEntryOptions
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkIncludeFirstNextMonth)
+        Me.Controls.Add(Me.ucrChkEditNAOnly)
         Me.Controls.Add(Me.lblDefault)
         Me.Controls.Add(Me.ucrInputDefaultValue)
         Me.Controls.Add(Me.lblAfter)
@@ -184,4 +202,6 @@ Partial Class sdgClimaticDataEntryOptions
     Friend WithEvents ttucrChkTransform As ToolTip
     Friend WithEvents ucrInputDefaultValue As ucrInputComboBox
     Friend WithEvents lblDefault As Label
+    Friend WithEvents ucrChkEditNAOnly As ucrCheck
+    Friend WithEvents ucrChkIncludeFirstNextMonth As ucrCheck
 End Class

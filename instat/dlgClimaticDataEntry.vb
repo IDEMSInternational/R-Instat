@@ -237,12 +237,13 @@ Public Class dlgClimaticDataEntry
                 sdgClimaticDataEntry.Setup(dfEditData:=dfEditData, strDataFrameName:=strDataFrameName, clsSaveDataEntry:=clsSaveDataEntryFunction,
                                          clsEditDataFrame:=clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction, clsNewCommentsList:=clsCommentsListFunction, clsNewList:=clsListFunction,
                       strDateName:=strDateColumnName, lstElementsNames:=lstElementsColumnNames, lstViewVariablesNames:=lstVariablesColumnNames,
-                                         strStationColumnName:=strStationColumnName,
+                                           strStationColumnName:=strStationColumnName,
+                                           bEditNewDataOnly:=sdgClimaticDataEntryOptions.EditNAOnly,
                                            strDefaultValue:=sdgClimaticDataEntryOptions.DefaultValue,
                                            bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
                                            bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
                                            bTransform:=sdgClimaticDataEntryOptions.Transform,
-                                           dTranformValue:=sdgClimaticDataEntryOptions.GetSetTransformValue,
+                                           dTranformValue:=sdgClimaticDataEntryOptions.TransformValue,
                                            strEntryType:=ucrInputType.GetText, ucrNewBaseSelector:=ucrSelectorClimaticDataEntry, bReset:=bResetSubdialogs)
             End If
             sdgClimaticDataEntry.ShowDialog()
@@ -335,6 +336,7 @@ Public Class dlgClimaticDataEntry
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
+        sdgClimaticDataEntryOptions.Setup(ucrInputType.GetText)
         sdgClimaticDataEntryOptions.ShowDialog()
         bChange = True 'todo. is it always true
     End Sub

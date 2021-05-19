@@ -28,12 +28,13 @@ Public Class sdgClimaticDataEntryOptions
     End Sub
 
     Private Sub InitialiseControls()
-        ucrChkTransform.SetText("Transform:")
+        ucrChkEditNAOnly.SetText("Edit/Add new data(NA) only")
+        ucrChkIncludeFirstNextMonth.SetText("Include first of the next month:")
 
         ucrInputTransform.SetItems({"0.1", "25.4", "0.254"})
         ucrInputTransform.SetValidationTypeAsNumeric()
         ucrInputTransform.Visible = False
-
+        ucrChkTransform.SetText("Transform:")
         ucrChkTransform.AddToLinkedControls(ucrInputTransform, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         dctDefaultValues.Add("NA", "NA")
@@ -60,6 +61,16 @@ Public Class sdgClimaticDataEntryOptions
         ucrChkAllowTrace.Checked = False
         ucrChkTransform.Checked = False
         ucrChkNoDecimal.Checked = False
+        ucrChkEditNAOnly.Checked = False
+        ucrChkIncludeFirstNextMonth.Checked = False
+        ucrChkIncludeFirstNextMonth.Enabled = False
+    End Sub
+
+    Public Sub Setup(strEntryType As String)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+        ucrChkIncludeFirstNextMonth.Enabled = (strEntryType = "Month")
     End Sub
 
     Public ReadOnly Property NoDecimals As Boolean
@@ -86,13 +97,25 @@ Public Class sdgClimaticDataEntryOptions
         End Get
     End Property
 
-    Public ReadOnly Property GetSetTransformValue As Double
+    Public ReadOnly Property TransformValue As Double
         Get
             Dim dTemp As Double
             If Not Double.TryParse(ucrInputTransform.GetValue, dTemp) Then
                 MsgBox("Developer error: The ucrInputTransform combo box contains the value '" & ucrInputTransform.GetValue & "'. Cannot convert this to a double.")
             End If
             Return dTemp
+        End Get
+    End Property
+
+    Public ReadOnly Property EditNAOnly As Boolean
+        Get
+            Return ucrChkEditNAOnly.Checked
+        End Get
+    End Property
+
+    Public ReadOnly Property IncludeFirstNextOfMonth As Boolean
+        Get
+            Return ucrChkIncludeFirstNextMonth.Enabled AndAlso ucrChkIncludeFirstNextMonth.Checked
         End Get
     End Property
 

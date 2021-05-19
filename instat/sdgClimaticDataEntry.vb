@@ -60,6 +60,7 @@ Public Class sdgClimaticDataEntry
     Private ucrBaseSelector As ucrSelector
     Private strValueTypeToCalculate As String = "sum"
     Private strDefaultValue As String = "NA"
+    Private bEditNewDataOnly As Boolean = False
 
     Private Sub sdgClimaticDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -137,11 +138,14 @@ Public Class sdgClimaticDataEntry
     Public Sub Setup(dfEditData As DataFrame, strDataFrameName As String, clsSaveDataEntry As RFunction,
                      clsEditDataFrame As RFunction, clsNewGetKey As RFunction, clsNewCommentsList As RFunction, clsNewList As RFunction,
                      strDateName As String, lstElementsNames As List(Of String),
-                        strDefaultValue As String, dTranformValue As Double,
+                     strEntryType As String, strDefaultValue As String,
+                     bEditNewDataOnly As Boolean,
+                    Optional bTransform As Boolean = False, Optional dTranformValue As Double = 1,
                      Optional lstViewVariablesNames As List(Of String) = Nothing,
-                     Optional strStationColumnName As String = "", Optional bNoDecimal As Boolean = False,
-                     Optional bAllowTrace As Boolean = False, Optional bTransform As Boolean = False,
-                     Optional strEntryType As String = "", Optional ucrNewBaseSelector As ucrSelector = Nothing,
+                     Optional strStationColumnName As String = "",
+                     Optional bNoDecimal As Boolean = False,
+                     Optional bAllowTrace As Boolean = False,
+                     Optional ucrNewBaseSelector As ucrSelector = Nothing,
                      Optional bReset As Boolean = False)
 
         Dim arrColumnHeaders As String()
@@ -169,6 +173,7 @@ Public Class sdgClimaticDataEntry
         Me.bTransform = bTransform
         Me.dTranformValue = dTranformValue
         Me.strEntryType = strEntryType
+        Me.bEditNewDataOnly = bEditNewDataOnly
 
 
         ucrChkAddFlagFieldData.SetRCode(clsSaveDataEntryFunction, bReset, bCloneIfNeeded:=True)
@@ -220,7 +225,7 @@ Public Class sdgClimaticDataEntry
                         dfValue = "NA"
                     Else
                         dfValue = strDefaultValue
-                        'blank defsult is interpreted as NA in R
+                        'blank default is interpreted as NA in R
                         If Not (strDefaultValue = "NA" OrElse strDefaultValue = "") Then
                             bChangedToDefaultValue = True
                         End If
@@ -230,14 +235,19 @@ Public Class sdgClimaticDataEntry
 
                 grdCurrentWorkSheet.Item(row:=i, col:=j) = dfValue
 
-                'change color for editable cells that have been set with default value
+                'tag and change color for editable cells that have been set with default value
                 If Not bNonEditableCell AndAlso bChangedToDefaultValue Then
                     grdCurrentWorkSheet.GetCell(i, j).Style.BackColor = Color.LightYellow
                     AddChangedRow(i) 'add to the list of changed rows
                 End If
+
                 'set non editable cells to read only
                 If bNonEditableCell Then
                     grdCurrentWorkSheet.GetCell(i, j).IsReadOnly = True
+                Else
+                    If dfValue = "NA" OrElse dfValue = "" Then
+                        grdCurrentWorkSheet.GetCell(row:=i, col:=j).Tag = "new"
+                    End If
                 End If
             Next
 
@@ -281,6 +291,7 @@ Public Class sdgClimaticDataEntry
             grdCurrentWorkSheet.Item(row:=iLastRowIndex - 2, col:=iMonthlyTotalsColIndex) = "Sum"
             Me.strValueTypeToCalculate = "sum"
             grdCurrentWorkSheet.GetCell(row:=iLastRowIndex - 2, col:=iMonthlyTotalsColIndex).IsReadOnly = False
+            grdCurrentWorkSheet.GetCell(row:=iLastRowIndex - 2, col:=iMonthlyTotalsColIndex).Tag = "summary"
 
             grdCurrentWorkSheet.Item(row:=iLastRowIndex - 1, col:=iMonthlyTotalsColIndex) = "Calculated"
             grdCurrentWorkSheet.Item(row:=iLastRowIndex, col:=iMonthlyTotalsColIndex) = "Difference"
@@ -314,6 +325,7 @@ Public Class sdgClimaticDataEntry
         Dim iStartRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row
         Dim iLastEditableRowIndex As Integer
         Dim strNewValue As String
+        Dim cell As Cell
 
         If grdCurrentWorkSheet.SelectionRange.Cols > 1 Then
             MsgBox("Pasting into cells in different columns is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try pasting into one column cells at a time.", MsgBoxStyle.Information, "Cannot paste into multiple cells in different columns")
@@ -343,21 +355,29 @@ Public Class sdgClimaticDataEntry
             arrPasteValues = strClipBoardText.Split({vbCr}, StringSplitOptions.RemoveEmptyEntries)
         End If
 
+        'exclude calculated and difference row if entry type is monthly
+        iLastEditableRowIndex = If(strEntryType = "Month", grdCurrentWorkSheet.Rows - 3, grdCurrentWorkSheet.Rows - 1)
+
+        iStartRowIndex = grdCurrentWorkSheet.SelectionRange.Row
+
         'validate all the values first
         For index As Integer = 0 To arrPasteValues.Length - 1
             'abort entry when the value is not valid
-            If Not ValidateValue(arrPasteValues(index).Trim) Then
+            If Not ValidateValue(arrPasteValues(index).Trim, grdCurrentWorkSheet.GetCell(iStartRowIndex, iColumnIndex)) Then
                 Exit Sub
             End If
+            'abort entry if pasted rows are more than editable rows
+            If iStartRowIndex >= iLastEditableRowIndex Then
+                Exit For
+            End If
+            iStartRowIndex += 1
         Next
 
-        'exclude calculated and difference row if entry type is monthly
-        iLastEditableRowIndex = If(strEntryType = "Month", grdCurrentWorkSheet.Rows - 3, grdCurrentWorkSheet.Rows - 1)
 
         'then save the values if all are valid
         For index As Integer = 0 To arrPasteValues.Length - 1
             strNewValue = arrPasteValues(index).Trim
-            If ValidateAndSaveRowChanged(iStartRowIndex, iColumnIndex, strNewValue) Then
+            If ValidateAndSaveValueChanged(iStartRowIndex, iColumnIndex, strNewValue) Then
                 grdCurrentWorkSheet.GetCell(iStartRowIndex, iColumnIndex).Data = strNewValue
             End If
             'abort entry if pasted rows are more than editable rows
@@ -389,7 +409,6 @@ Public Class sdgClimaticDataEntry
                 Exit Sub
             End If
 
-
             'delete operation applies to all selected cells for the column
             Dim iEndRow As Integer = grdCurrentWorkSheet.SelectionRange.EndRow
 
@@ -398,10 +417,19 @@ Public Class sdgClimaticDataEntry
                 iEndRow = iEndRow - 2
             End If
 
+            'validate new delete entries to all cells first
+            For iRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row To iEndRow
+                If Not ValidateValue("", grdCurrentWorkSheet.GetCell(row:=iRowIndex, col:=e.Cell.Column)) Then
+                    e.IsCancelled = True
+                    Exit Sub
+                End If
+            Next
+
+            'if all valid then proceed with saving NA's as the change
             For iRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row To iEndRow
                 'forces the cell to have blank data values 
                 grdCurrentWorkSheet.Item(row:=iRowIndex, col:=e.Cell.Column) = ""
-                ValidateAndSaveRowChanged(iRowIndex, e.Cell.Column, "NA")
+                ValidateAndSaveValueChanged(iRowIndex, e.Cell.Column, "NA")
             Next
 
         End If
@@ -425,41 +453,53 @@ Public Class sdgClimaticDataEntry
         '    Exit Sub
         'End If
 
-        If Not ValidateAndSaveRowChanged(e.Cell.Row, e.Cell.Column, If(e.NewData = "", "NA", e.NewData)) Then
+        If Not ValidateAndSaveValueChanged(e.Cell, If(e.NewData = "", "NA", e.NewData)) Then
             e.EndReason = EndEditReason.Cancel
             'grdCurrentWorkSheet.FocusPos = New CellPosition(e.Cell.Address)
         End If
     End Sub
 
-    Private Function ValidateAndSaveRowChanged(iRow As Integer, iColumn As Integer, newValue As String) As Boolean
-        If ValidateValue(newValue) Then
+    Private Function ValidateAndSaveValueChanged(cell As Cell, newValue As String) As Boolean
+        If ValidateValue(newValue, cell) Then
             'dont add any change in the last 3 rows if entry is by "Month"
-            If Not (strEntryType = "Month" AndAlso iRow >= grdCurrentWorkSheet.Rows - 3) Then
-                AddChangedRow(iRow)
+            If Not (strEntryType = "Month" AndAlso cell.Row >= grdCurrentWorkSheet.Rows - 3) Then
+                AddChangedRow(cell.Row)
             End If
-            ComputeAndSetMonthlyTotalsForColumn(iColumn, iRow, newValue)
+            ComputeAndSetMonthlyTotalsForColumn(iColIndex:=cell.Column, iRowIndex:=cell.Row, newValue)
 
-            grdCurrentWorkSheet.GetCell(iRow, iColumn).Style.BackColor = Color.Yellow
+            cell.Style.BackColor = Color.Yellow
 
             Return True
         Else
             Return False
         End If
+
+
     End Function
 
-    Private Function ValidateValue(newValue As String) As Boolean
-        Dim bValidValue As Boolean = True
+    Private Function ValidateAndSaveValueChanged(iRow As Integer, iColumn As Integer, newValue As String) As Boolean
+        Return ValidateAndSaveValueChanged(grdCurrentWorkSheet.GetCell(row:=iRow, col:=iColumn), newValue)
+    End Function
 
-        If Not IsNumeric(newValue) AndAlso Not newValue = "NA" Then
+    Private Function ValidateValue(newValue As String, Optional grdCell As Cell = Nothing) As Boolean
+
+        'if only NAs allowed then check if cell is allowed to have new value (except summary cells)
+        If grdCell IsNot Nothing AndAlso bEditNewDataOnly AndAlso grdCell.Tag <> "new" AndAlso grdCell.Tag <> "summary" Then
+            MsgBox("Only new values(NAs) entries allowed.", MsgBoxStyle.Information, "Not new value.")
+            Return False
+        End If
+
+        If Not IsNumeric(newValue) AndAlso Not newValue = "NA" AndAlso Not newValue = "" Then
             If Not (bAllowTrace AndAlso newValue.ToUpper = "T") Then
                 MsgBox("Value is not numeric or NA.", MsgBoxStyle.Information, "Not numeric.")
-                bValidValue = False
+                Return False
             End If
         ElseIf bNoDecimal AndAlso newValue.Contains(".") Then
             MsgBox("Value should not be decimal otherwise uncheck No Decimal.", MsgBoxStyle.Information, "Not decimal Allowed.")
-            bValidValue = False
+            Return False
         End If
-        Return bValidValue
+
+        Return True
     End Function
 
 
@@ -482,11 +522,13 @@ Public Class sdgClimaticDataEntry
                              clsEditDataFrame:=clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction,
                              clsNewCommentsList:=clsCommentsListFunction, clsNewList:=clsListFunction,
                              strDateName:=strDateName, lstElementsNames:=lstElementsNames, lstViewVariablesNames:=lstViewVariablesNames,
-                             strStationColumnName:=strStationColumnName, strDefaultValue:=sdgClimaticDataEntryOptions.DefaultValue,
+                             strStationColumnName:=strStationColumnName,
+                             bEditNewDataOnly:=bEditNewDataOnly,
+                             strDefaultValue:=sdgClimaticDataEntryOptions.DefaultValue,
                                bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
                                bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
                                bTransform:=sdgClimaticDataEntryOptions.Transform,
-                               dTranformValue:=sdgClimaticDataEntryOptions.GetSetTransformValue,
+                               dTranformValue:=sdgClimaticDataEntryOptions.TransformValue,
                                strEntryType:=strEntryType, ucrNewBaseSelector:=ucrBaseSelector, bReset:=True)
         End If
     End Sub
