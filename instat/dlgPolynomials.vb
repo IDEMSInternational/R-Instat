@@ -64,6 +64,7 @@ Public Class dlgPolynomials
         ucrSavePoly.SetSaveTypeAsColumn()
         ucrSavePoly.SetDataFrameSelector(ucrSelectorForPolynomial.ucrAvailableDataFrames)
         ucrSavePoly.SetIsComboBox()
+        ucrSavePoly.setLinkedReceiver(ucrReceiverPolynomial)
     End Sub
 
     Private Sub SetDefaults()

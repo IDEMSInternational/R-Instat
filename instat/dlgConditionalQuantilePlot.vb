@@ -229,6 +229,7 @@ Public Class dlgConditionalQuantilePlot
             ucrSavePlot.Location = New Point(ucrSavePlot.Location.X, 401)
             cmdPlotOptions.Text = "Conditional Eval Options"
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrInputLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLegendPosition.ControlValueChanged

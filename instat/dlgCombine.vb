@@ -68,6 +68,7 @@ Public Class dlgCombine
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrSelectorCombineFactors.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("New Column Name:")
+        ucrNewColName.setLinkedReceiver(ucrFactorsReceiver)
 
         'chkbox
         ucrChkDropUnusedLevels.SetParameter(New RParameter("drop", 1))

@@ -48,7 +48,7 @@ Public Class dlgCountinFactor
 
         ' ucrNewColName
         ucrNewColName.SetIsComboBox()
-        ucrNewColName.SetPrefix("Count")
+        ucrNewColName.SetPrefix("count")
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrCountSelector.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("New Column Name:")

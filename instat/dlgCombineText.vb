@@ -60,7 +60,8 @@ Public Class dlgCombineText
         ucrSaveColumn.SetPrefix("Combine")
         ucrSaveColumn.SetSaveTypeAsColumn()
         ucrSaveColumn.SetDataFrameSelector(ucrSelectorForCombineText.ucrAvailableDataFrames)
-        ucrSaveColumn.SetLabelText("Prefix for New Column:")
+        ucrSaveColumn.SetLabelText("New Column:")
+        ucrSaveColumn.setLinkedReceiver(ucrReceiverCombineText)
         iColumnsUsed = 0
     End Sub
 

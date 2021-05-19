@@ -16,6 +16,7 @@
 
 Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
+Imports instat.Translations
 
 Public Class sdgCombineGraphOptions
     Private bFirstLoad As Boolean = True
@@ -128,9 +129,9 @@ Public Class sdgCombineGraphOptions
         clsMatrixFunction.AddParameter("data", strMatrix)
         clsCombineGraph.AddParameter("layout_matrix", clsRFunctionParameter:=clsMatrixFunction)
         If lstNumbers.Distinct.Count = lstGraphs.Items.Count Then
-            txtLayoutMessage.Text = "Ok: Layout contains all graphs"
+            txtLayoutMessage.Text = GetTranslation("Ok: Layout contains all graphs")
         Else
-            txtLayoutMessage.Text = "Layout incomplete: layout must contain all graphs."
+            txtLayoutMessage.Text = GetTranslation("Layout incomplete: layout must contain all graphs.")
         End If
     End Sub
 

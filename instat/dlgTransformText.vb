@@ -177,7 +177,8 @@ Public Class dlgTransformText
         ucrNewColName.SetIsComboBox()
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrSelectorForTransformText.ucrAvailableDataFrames)
-        ucrNewColName.SetLabelText("Column Name:")
+        ucrNewColName.SetLabelText("New Column:")
+        ucrNewColName.setLinkedReceiver(ucrReceiverTransformText)
     End Sub
 
     Private Sub SetDefaults()
