@@ -449,7 +449,14 @@ Public Class ucrReceiver
 
         clsTempParameter = GetParameter()
         If clsTempParameter IsNot Nothing Then
-            If bChangeParameterValue Then
+            If clsTempParameter.bIsFunction Then
+                If clsTempParameter.clsArgumentCodeStructure.ToScript().StartsWith("c(") AndAlso clsTempParameter.clsArgumentCodeStructure.ToScript().EndsWith(")") Then
+                    clsTempParameter.bIsString = True
+                    clsTempParameter.bIsFunction = False
+                    clsTempParameter.strArgumentValue = clsTempParameter.clsArgumentCodeStructure.ToScript()
+                End If
+            End If
+                If bChangeParameterValue Then
                 If bParameterIsString AndAlso clsTempParameter.bIsString Then
                     If strValuesToIgnore Is Nothing OrElse (Not strValuesToIgnore.Contains(clsTempParameter.strArgumentValue)) Then
                         lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.strArgumentValue, strPackageName:=strVariablesListPackageName, strFunctionName:=strVariablesListFunctionName)
