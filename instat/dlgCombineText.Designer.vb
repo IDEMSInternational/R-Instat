@@ -67,6 +67,7 @@ Partial Class dlgCombineText
         'ucrInputSeparator
         '
         Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparator.GetSetSelectedIndex = -1
         Me.ucrInputSeparator.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
         Me.ucrInputSeparator.Name = "ucrInputSeparator"
@@ -82,6 +83,7 @@ Partial Class dlgCombineText
         '
         'ucrSelectorForCombineText
         '
+        Me.ucrSelectorForCombineText.bDropUnusedFilterLevels = False
         Me.ucrSelectorForCombineText.bShowHiddenColumns = False
         Me.ucrSelectorForCombineText.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForCombineText, "ucrSelectorForCombineText")

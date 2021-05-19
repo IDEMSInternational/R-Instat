@@ -64,6 +64,7 @@ Public Class dlgRank
         ucrSaveRank.SetDataFrameSelector(ucrSelectorForRank.ucrAvailableDataFrames)
         ucrSaveRank.SetLabelText("New Column Name:")
         ucrSaveRank.SetIsComboBox()
+        ucrSaveRank.setLinkedReceiver(ucrReceiverRank)
     End Sub
 
     ' Sub that runs only the first time the dialog loads it sets default RFunction as the base function

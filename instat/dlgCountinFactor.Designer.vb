@@ -72,6 +72,7 @@ Partial Class dlgCountinFactor
         '
         'ucrCountSelector
         '
+        Me.ucrCountSelector.bDropUnusedFilterLevels = False
         Me.ucrCountSelector.bShowHiddenColumns = False
         Me.ucrCountSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrCountSelector, "ucrCountSelector")
