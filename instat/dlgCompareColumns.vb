@@ -186,7 +186,14 @@ Public Class dlgCompareColumns
         If ucrReceiverFirst.IsEmpty OrElse ucrReceiverSecond.IsEmpty OrElse Not ucrSaveLogical.IsComplete() Then
             ucrBase.OKEnabled(False)
         Else
-            If ({"integer", "numeric"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"integer", "numeric"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse (ucrReceiverFirst.strCurrDataType = "Date" AndAlso ucrReceiverSecond.strCurrDataType = "Date") OrElse ({"factor", "character"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"factor", "character"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse (ucrReceiverFirst.strCurrDataType = "logical" AndAlso ucrReceiverSecond.strCurrDataType = "logical") Then
+            If ({"integer", "numeric"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso
+                    {"integer", "numeric"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse
+                    (ucrReceiverFirst.strCurrDataType = "Date" AndAlso
+                    ucrReceiverSecond.strCurrDataType = "Date") OrElse
+                    ({"factor", "character"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso
+                        {"factor", "character"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse
+                        (ucrReceiverFirst.strCurrDataType = "logical" AndAlso
+                        ucrReceiverSecond.strCurrDataType = "logical") Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
