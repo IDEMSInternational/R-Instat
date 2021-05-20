@@ -224,7 +224,7 @@ Public Class dlgCompareColumns
             ucrBase.clsRsyntax.AddToAfterCodes(clsYinXOperator, iPosition:=1)
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
-            ucrSaveLogical.Location = New Point(ucrSaveLogical.Location.X, iBaseMaxY)
+            ucrSaveLogical.Location = New Point(ucrSaveLogical.Location.X, iBaseMaxY / 1.07)
         ElseIf rdoByRow.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsDummyOperator)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsYinXOperator)
@@ -237,18 +237,19 @@ Public Class dlgCompareColumns
     End Sub
 
     Private Sub CheckDatatype()
-        If ucrReceiverSecond.IsEmpty OrElse ucrReceiverFirst.IsEmpty OrElse Not rdoByRow.Checked Then
+        If ucrReceiverSecond.IsEmpty OrElse ucrReceiverFirst.IsEmpty Then
             TestOkEnabled()
             Exit Sub
         Else
             If {"integer", "numeric"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"integer", "numeric"}.Contains(ucrReceiverSecond.strCurrDataType) Then
+                If rdoByRow.Checked Then
                     ucrInputTolerance.Visible = True
                     clsLessorEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsAbsoluteFunction, iPosition:=0)
                     clsLessorEqualToOperator.AddParameter("tol", "0", iPosition:=1)
                     clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsLessorEqualToOperator, iPosition:=1)
                     clsDummyOperator = clsLessorEqualToOperator
                 End If
-            ElseIf ucrReceiverFirst.strCurrDataType = "date" AndAlso ucrReceiverSecond.strCurrDataType = "date" Then
+            ElseIf {"Date", "date"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"Date", "date"}.Contains(ucrReceiverSecond.strCurrDataType) Then
                 If rdoByRow.Checked Then
                     ucrInputTolerance.Visible = True
                     clsLessorEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsAbsoluteFunction, iPosition:=0)
@@ -273,7 +274,7 @@ Public Class dlgCompareColumns
                     clsDummyOperator = clsIsEqualToOperator
                 End If
             Else
-                MsgBox("Receivers must have the same data type, OK will not be enabled")
+                    MsgBox("Receivers must have the same data type, OK will not be enabled")
             End If
         End If
         TestOkEnabled()
