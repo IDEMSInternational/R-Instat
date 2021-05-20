@@ -237,7 +237,6 @@ Public Class dlgCompareColumns
             Exit Sub
         Else
             If {"integer", "numeric"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"integer", "numeric"}.Contains(ucrReceiverSecond.strCurrDataType) Then
-                If rdoByRow.Checked Then
                     ucrInputTolerance.Visible = True
                     clsLessorEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsAbsoluteFunction, iPosition:=0)
                     clsLessorEqualToOperator.AddParameter("tol", "0", iPosition:=1)
