@@ -212,7 +212,7 @@ Public Class dlgCompareColumns
             ucrBase.clsRsyntax.AddToAfterCodes(clsYinXOperator, iPosition:=1)
             Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
             ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
-            ucrSaveLogical.Location = New Point(ucrSaveLogical.Location.X, iBaseMaxY / 1.07)
+            ucrSaveLogical.Location = New Point(ucrSaveLogical.Location.X, iBaseMaxY)
         ElseIf rdoByRow.Checked Then
             ucrBase.clsRsyntax.SetBaseROperator(clsDummyOperator)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsYinXOperator)
