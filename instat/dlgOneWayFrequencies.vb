@@ -266,4 +266,8 @@ Public Class dlgOneWayFrequencies
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrNudGroups.ControlContentsChanged, ucrChkGroupData.ControlContentsChanged, ucrReceiverOneWayFreq.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub grpSort_Enter(sender As Object, e As EventArgs) Handles grpSort.Enter
+
+    End Sub
 End Class

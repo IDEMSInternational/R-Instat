@@ -269,4 +269,8 @@ Public Class dlgScatterPlot
     Private Sub ucrVariablesAsFactorForScatter_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
         ' CheckIfNumeric()
     End Sub
+
+    Private Sub ucrSaveScatterPlot_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForScatter.ControlContentsChanged, ucrSaveScatterPlot.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
+
+    End Sub
 End Class

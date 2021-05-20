@@ -70,7 +70,7 @@ Partial Class dlgOpenNetCDF
         'lblFileFolderPath
         '
         Me.lblFileFolderPath.AutoSize = True
-        Me.lblFileFolderPath.Location = New System.Drawing.Point(7, 24)
+        Me.lblFileFolderPath.Location = New System.Drawing.Point(5, 24)
         Me.lblFileFolderPath.Name = "lblFileFolderPath"
         Me.lblFileFolderPath.Size = New System.Drawing.Size(32, 13)
         Me.lblFileFolderPath.TabIndex = 0
@@ -79,7 +79,7 @@ Partial Class dlgOpenNetCDF
         'lblDataFramePrefix
         '
         Me.lblDataFramePrefix.AutoSize = True
-        Me.lblDataFramePrefix.Location = New System.Drawing.Point(10, 137)
+        Me.lblDataFramePrefix.Location = New System.Drawing.Point(5, 137)
         Me.lblDataFramePrefix.Name = "lblDataFramePrefix"
         Me.lblDataFramePrefix.Size = New System.Drawing.Size(114, 13)
         Me.lblDataFramePrefix.TabIndex = 10
@@ -88,9 +88,9 @@ Partial Class dlgOpenNetCDF
         '
         'cmdOptions
         '
-        Me.cmdOptions.Location = New System.Drawing.Point(332, 132)
+        Me.cmdOptions.Location = New System.Drawing.Point(337, 131)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(77, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(72, 23)
         Me.cmdOptions.TabIndex = 12
         Me.cmdOptions.Text = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
@@ -207,9 +207,9 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputPath.AddQuotesIfUnrecognised = True
         Me.ucrInputPath.IsMultiline = False
         Me.ucrInputPath.IsReadOnly = False
-        Me.ucrInputPath.Location = New System.Drawing.Point(40, 20)
+        Me.ucrInputPath.Location = New System.Drawing.Point(58, 20)
         Me.ucrInputPath.Name = "ucrInputPath"
-        Me.ucrInputPath.Size = New System.Drawing.Size(274, 21)
+        Me.ucrInputPath.Size = New System.Drawing.Size(256, 21)
         Me.ucrInputPath.TabIndex = 1
         '
         'ucrInputDataName
@@ -217,16 +217,16 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputDataName.AddQuotesIfUnrecognised = True
         Me.ucrInputDataName.IsMultiline = False
         Me.ucrInputDataName.IsReadOnly = False
-        Me.ucrInputDataName.Location = New System.Drawing.Point(138, 134)
+        Me.ucrInputDataName.Location = New System.Drawing.Point(187, 133)
         Me.ucrInputDataName.Name = "ucrInputDataName"
-        Me.ucrInputDataName.Size = New System.Drawing.Size(188, 21)
+        Me.ucrInputDataName.Size = New System.Drawing.Size(149, 21)
         Me.ucrInputDataName.TabIndex = 11
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 161)
+        Me.ucrBase.Location = New System.Drawing.Point(5, 161)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(410, 53)
+        Me.ucrBase.Size = New System.Drawing.Size(418, 53)
         Me.ucrBase.TabIndex = 13
         '
         'ucrPnlFileDetails
