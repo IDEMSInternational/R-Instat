@@ -232,7 +232,10 @@ Public Class dlgCompareColumns
     End Sub
 
     Private Sub CheckDatatype()
-        If Not ucrReceiverSecond.IsEmpty AndAlso Not ucrReceiverFirst.IsEmpty Then
+        If ucrReceiverSecond.IsEmpty OrElse ucrReceiverFirst.IsEmpty OrElse Not rdoByRow.Checked Then
+            TestOkEnabled()
+            Exit Sub
+        Else
             If {"integer", "numeric"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"integer", "numeric"}.Contains(ucrReceiverSecond.strCurrDataType) Then
                 If rdoByRow.Checked Then
                     ucrInputTolerance.Visible = True
