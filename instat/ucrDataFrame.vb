@@ -260,8 +260,19 @@ Public Class ucrDataFrame
         End If
     End Sub
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary> 
+    '''    Translates <paramref name="strText"/> to the current language and then sets 
+    '''    the `Text` property of the label to the translated text.<para>
+    '''    Translations can be bi-directional (e.g. from English to French or from French to English).
+    '''    If <paramref name="strText"/> is already in the current language, or if no translation 
+    '''    can be found, then sets the `Text` property of the control to <paramref name="strText"/>.
+    ''' </para></summary>
+    ''' 
+    ''' <param name="strText"> The parameter's String value.</param>
+    '''--------------------------------------------------------------------------------------------
     Public Sub SetLabelText(strText As String)
-        lblDataFrame.Text = strText
+        lblDataFrame.Text = GetTranslation(strText)
     End Sub
 
     Private Sub mnuRightClickSetData_Click(sender As Object, e As EventArgs) Handles mnuRightClickSetData.Click

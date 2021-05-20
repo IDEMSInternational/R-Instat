@@ -126,13 +126,13 @@
     <value>244, 45</value>
   </data>
   <data name="lblColumnsToRank.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 13</value>
+    <value>86, 13</value>
   </data>
   <data name="lblColumnsToRank.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="lblColumnsToRank.Text" xml:space="preserve">
-    <value>Columns to Rank:</value>
+    <value>Column to Rank:</value>
   </data>
   <data name="&gt;&gt;lblColumnsToRank.Name" xml:space="preserve">
     <value>lblColumnsToRank</value>
@@ -446,8 +446,12 @@
   <data name="ucrSaveRank.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 284</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrSaveRank.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrSaveRank.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 24</value>
+    <value>271, 22</value>
   </data>
   <data name="ucrSaveRank.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -467,7 +471,6 @@
   <data name="ucrSelectorForRank.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorForRank.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
