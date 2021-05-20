@@ -37,6 +37,7 @@ Public Class sdgPlots
     Public clsYLabFunction As New RFunction
     Public clsScaleColourViridisFunction As New RFunction
     Public clsScaleFillViridisFunction As New RFunction
+    Private clsAnnotateFunction As New RFunction
     Public clsBaseOperator As New ROperator
     Private bControlsInitialised As Boolean = False
     'All the previous RFunctions will eventually be stored as parameters (or parameters of parameters) within the RSyntax building the big Ggplot command "ggplot(...) + geom_..(..) + ... + theme(...) + scales(...) ..."
@@ -87,6 +88,8 @@ Public Class sdgPlots
 
         Dim clsCoordEqualFunc As New RFunction
         Dim clsCoordEqualParam As New RParameter
+
+
 
         ucrBaseSubdialog.iHelpTopicID = 136
         'facets tab  
@@ -342,6 +345,14 @@ Public Class sdgPlots
         ucrChkDrop.SetRDefault("TRUE")
 
         'Annotation
+        ucrChkAnnotation.SetText("Annotation")
+        ucrChkAnnotation.AddParameterPresentCondition(True, "annotate", True)
+        ucrChkAnnotation.AddParameterPresentCondition(False, "annotate", True)
+
+        clsAnnotateFunction.SetPackageName("ggplot2")
+        clsAnnotateFunction.SetRCommand("annotate")
+        clsAnnotateFunction.AddParameter("geom", Chr(34) & "text" & Chr(34), iPosition:=15)
+
         ucrInputX.SetParameter(New RParameter("x", 1))
         ucrInputX.SetLinkedDisplayControl(lblX)
         ucrInputX.SetRDefault("NULL")
@@ -359,7 +370,7 @@ Public Class sdgPlots
         ucrInputXmin.SetRDefault("NULL")
 
         ucrInputXend.SetParameter(New RParameter("xend", 5))
-        ucrInputXend.SetLinkedDisplayControl(lblCrossbarFatten)
+        ucrInputXend.SetLinkedDisplayControl(lblXend)
         ucrInputXend.SetRDefault("NULL")
 
         ucrInputYend.SetParameter(New RParameter("yend", 6))
@@ -412,7 +423,7 @@ Public Class sdgPlots
         ucrNudShape.SetRDefault(1)
         ucrNudShape.SetLinkedDisplayControl(lblShape)
 
-        ucrInputAnnotationGeoms.SetParameter(New RParameter("geom", iNewPosition:=0))
+        ucrInputAnnotationGeoms.SetParameter(New RParameter("geom", iNewPosition:=15))
         dctAnnotationGeom.Add("text", Chr(34) & "text" & Chr(34))
         dctAnnotationGeom.Add("rect", Chr(34) & "rect" & Chr(34))
         dctAnnotationGeom.Add("segment", Chr(34) & "segment" & Chr(34))
@@ -433,20 +444,20 @@ Public Class sdgPlots
         dctAnnotationFill.Add("Violet", Chr(34) & "violet" & Chr(34))
         dctAnnotationFill.Add("White", Chr(34) & "white" & Chr(34))
 
-        ucrInputFill.SetParameter(New RParameter("fill", 2))
+        ucrInputFill.SetParameter(New RParameter("fill", 16))
         ucrInputFill.SetItems(dctAnnotationFill)
         ucrInputFill.SetLinkedDisplayControl(lblFill)
 
-        ucrInputColour.SetParameter(New RParameter("colour", 3))
+        ucrInputColour.SetParameter(New RParameter("colour", 17))
         ucrInputColour.SetItems(dctAnnotationFill)
         ucrInputColour.SetLinkedDisplayControl(lblColour)
 
-        ucrNudAlpha.SetParameter(New RParameter("alpha", iNewPosition:=3))
+        ucrNudAlpha.SetParameter(New RParameter("alpha", iNewPosition:=18))
         ucrNudAlpha.SetMinMax(0, 1)
         ucrNudAlpha.SetLinkedDisplayControl(lblAlpha)
         ucrNudAlpha.SetRDefault(1)
 
-        ucrNudSize.SetParameter(New RParameter("size", 4))
+        ucrNudSize.SetParameter(New RParameter("size", 19))
         ucrNudSize.SetMinMax(iNewMin:=0)
         ucrNudSize.SetLinkedDisplayControl(lblSize)
 
@@ -636,6 +647,9 @@ Public Class sdgPlots
         ucrChkLabeler.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkDrop.SetRCode(clsFacetFunction, bReset, bCloneIfNeeded:=True)
         ucrChkIncludeFacets.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+
+        'Annnotation
+        ucrChkAnnotation.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
 
         'axis controls
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
@@ -1050,6 +1064,16 @@ Public Class sdgPlots
         Else
             clsBaseOperator.RemoveParameterByName("scale_colour")
             grpColourScale.Visible = False
+        End If
+    End Sub
+
+    Private Sub ucrChkAnnotation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAnnotation.ControlValueChanged
+        If ucrChkAnnotation.Checked Then
+            clsBaseOperator.AddParameter("annotate", clsRFunctionParameter:=clsAnnotateFunction, iPosition:=10)
+            grpAnnotation.Visible = True
+        Else
+            clsBaseOperator.RemoveParameterByName("annotate")
+            grpAnnotation.Visible = False
         End If
     End Sub
 End Class

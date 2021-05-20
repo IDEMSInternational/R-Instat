@@ -134,47 +134,49 @@ Partial Class sdgPlots
         Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
         Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
         Me.tbpAnnotation = New System.Windows.Forms.TabPage()
-        Me.lblShape = New System.Windows.Forms.Label()
-        Me.ucrNudShape = New instat.ucrNud()
-        Me.lblAngle = New System.Windows.Forms.Label()
-        Me.ucrNudAngle = New instat.ucrNud()
-        Me.lblLineend = New System.Windows.Forms.Label()
-        Me.ucrInputLineend = New instat.ucrInputComboBox()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.ucrNudAlpha = New instat.ucrNud()
+        Me.lblAlpha = New System.Windows.Forms.Label()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.grpAnnotation = New System.Windows.Forms.GroupBox()
+        Me.lblXend = New System.Windows.Forms.Label()
         Me.lblYmax = New System.Windows.Forms.Label()
-        Me.lblXmax = New System.Windows.Forms.Label()
         Me.ucrInputYmax = New instat.ucrInputTextBox()
+        Me.ucrInputYend = New instat.ucrInputTextBox()
+        Me.ucrInputXend = New instat.ucrInputTextBox()
+        Me.lblYend = New System.Windows.Forms.Label()
+        Me.lblXmax = New System.Windows.Forms.Label()
         Me.ucrInputXmax = New instat.ucrInputTextBox()
+        Me.ucrInputYmin = New instat.ucrInputTextBox()
+        Me.ucrInputXmin = New instat.ucrInputTextBox()
+        Me.lblYmin = New System.Windows.Forms.Label()
+        Me.lblXmin = New System.Windows.Forms.Label()
+        Me.ucrInputFill = New instat.ucrInputComboBox()
+        Me.lblFill = New System.Windows.Forms.Label()
+        Me.ucrNudLinetype = New instat.ucrNud()
+        Me.lblLinetype = New System.Windows.Forms.Label()
+        Me.ucrInputX = New instat.ucrInputTextBox()
+        Me.ucrInputY = New instat.ucrInputTextBox()
+        Me.lblY = New System.Windows.Forms.Label()
+        Me.lblX = New System.Windows.Forms.Label()
         Me.lblSize = New System.Windows.Forms.Label()
         Me.ucrNudSize = New instat.ucrNud()
         Me.lblColour = New System.Windows.Forms.Label()
         Me.ucrInputColour = New instat.ucrInputComboBox()
-        Me.ucrNudAlpha = New instat.ucrNud()
-        Me.lblAlpha = New System.Windows.Forms.Label()
-        Me.ucrInputFill = New instat.ucrInputComboBox()
-        Me.ucrInputX = New instat.ucrInputTextBox()
-        Me.ucrInputY = New instat.ucrInputTextBox()
-        Me.ucrInputYmin = New instat.ucrInputTextBox()
-        Me.ucrInputYend = New instat.ucrInputTextBox()
-        Me.ucrInputXend = New instat.ucrInputTextBox()
-        Me.ucrInputXmin = New instat.ucrInputTextBox()
-        Me.lblYend = New System.Windows.Forms.Label()
-        Me.lblYmin = New System.Windows.Forms.Label()
-        Me.lblXmin = New System.Windows.Forms.Label()
-        Me.lblY = New System.Windows.Forms.Label()
-        Me.lblX = New System.Windows.Forms.Label()
         Me.lblAnnotationGeoms = New System.Windows.Forms.Label()
         Me.ucrInputAnnotationGeoms = New instat.ucrInputComboBox()
-        Me.ucrNudLinetype = New instat.ucrNud()
-        Me.lblCurvature = New System.Windows.Forms.Label()
+        Me.ucrNudAngle = New instat.ucrNud()
+        Me.lblShape = New System.Windows.Forms.Label()
+        Me.ucrNudShape = New instat.ucrNud()
+        Me.lblAngle = New System.Windows.Forms.Label()
+        Me.lblLineend = New System.Windows.Forms.Label()
+        Me.ucrInputLineend = New instat.ucrInputComboBox()
         Me.ucrNudCurvature = New instat.ucrNud()
-        Me.lblFill = New System.Windows.Forms.Label()
-        Me.lblCrossbarFatten = New System.Windows.Forms.Label()
+        Me.lblCurvature = New System.Windows.Forms.Label()
         Me.ucrNudCrossbarFatten = New instat.ucrNud()
-        Me.lblPointrangeFatten = New System.Windows.Forms.Label()
+        Me.lblCrossbarFatten = New System.Windows.Forms.Label()
         Me.ucrNudPointrangeFatten = New instat.ucrNud()
-        Me.lblLinetype = New System.Windows.Forms.Label()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.lblPointrangeFatten = New System.Windows.Forms.Label()
+        Me.ucrChkAnnotation = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -190,6 +192,7 @@ Partial Class sdgPlots
         Me.grpColourScale.SuspendLayout()
         Me.grpFillScale.SuspendLayout()
         Me.tbpAnnotation.SuspendLayout()
+        Me.grpAnnotation.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbpPlotsOptions
@@ -918,107 +921,87 @@ Partial Class sdgPlots
         '
         'tbpAnnotation
         '
-        Me.tbpAnnotation.Controls.Add(Me.ucrNudShape)
-        Me.tbpAnnotation.Controls.Add(Me.lblAngle)
-        Me.tbpAnnotation.Controls.Add(Me.ucrNudAngle)
-        Me.tbpAnnotation.Controls.Add(Me.lblLineend)
-        Me.tbpAnnotation.Controls.Add(Me.ucrInputLineend)
-        Me.tbpAnnotation.Controls.Add(Me.Label2)
-        Me.tbpAnnotation.Controls.Add(Me.lblYmax)
-        Me.tbpAnnotation.Controls.Add(Me.lblXmax)
-        Me.tbpAnnotation.Controls.Add(Me.ucrInputYmax)
-        Me.tbpAnnotation.Controls.Add(Me.ucrInputXmax)
-        Me.tbpAnnotation.Controls.Add(Me.lblSize)
-        Me.tbpAnnotation.Controls.Add(Me.ucrNudSize)
-        Me.tbpAnnotation.Controls.Add(Me.lblColour)
-        Me.tbpAnnotation.Controls.Add(Me.ucrInputColour)
-        Me.tbpAnnotation.Controls.Add(Me.ucrNudAlpha)
-        Me.tbpAnnotation.Controls.Add(Me.lblAlpha)
-        Me.tbpAnnotation.Controls.Add(Me.ucrInputFill)
-        Me.tbpAnnotation.Controls.Add(Me.ucrInputX)
-        Me.tbpAnnotation.Controls.Add(Me.ucrInputY)
-        Me.tbpAnnotation.Controls.Add(Me.ucrInputYmin)
-        Me.tbpAnnotation.Controls.Add(Me.ucrInputYend)
-        Me.tbpAnnotation.Controls.Add(Me.ucrInputXend)
-        Me.tbpAnnotation.Controls.Add(Me.ucrInputXmin)
-        Me.tbpAnnotation.Controls.Add(Me.lblYend)
-        Me.tbpAnnotation.Controls.Add(Me.lblYmin)
-        Me.tbpAnnotation.Controls.Add(Me.lblXmin)
-        Me.tbpAnnotation.Controls.Add(Me.lblY)
-        Me.tbpAnnotation.Controls.Add(Me.lblX)
-        Me.tbpAnnotation.Controls.Add(Me.lblAnnotationGeoms)
-        Me.tbpAnnotation.Controls.Add(Me.ucrInputAnnotationGeoms)
-        Me.tbpAnnotation.Controls.Add(Me.ucrNudLinetype)
-        Me.tbpAnnotation.Controls.Add(Me.lblCurvature)
-        Me.tbpAnnotation.Controls.Add(Me.ucrNudCurvature)
-        Me.tbpAnnotation.Controls.Add(Me.lblFill)
-        Me.tbpAnnotation.Controls.Add(Me.lblCrossbarFatten)
-        Me.tbpAnnotation.Controls.Add(Me.ucrNudCrossbarFatten)
-        Me.tbpAnnotation.Controls.Add(Me.lblPointrangeFatten)
-        Me.tbpAnnotation.Controls.Add(Me.ucrNudPointrangeFatten)
-        Me.tbpAnnotation.Controls.Add(Me.lblLinetype)
-        Me.tbpAnnotation.Controls.Add(Me.lblShape)
+        Me.tbpAnnotation.Controls.Add(Me.ucrChkAnnotation)
+        Me.tbpAnnotation.Controls.Add(Me.grpAnnotation)
         resources.ApplyResources(Me.tbpAnnotation, "tbpAnnotation")
         Me.tbpAnnotation.Name = "tbpAnnotation"
         Me.tbpAnnotation.UseVisualStyleBackColor = True
         '
-        'lblShape
+        'ucrNudAlpha
         '
-        resources.ApplyResources(Me.lblShape, "lblShape")
-        Me.lblShape.Name = "lblShape"
+        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudAlpha, "ucrNudAlpha")
+        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAlpha.Name = "ucrNudAlpha"
+        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrNudShape
+        'lblAlpha
         '
-        Me.ucrNudShape.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShape.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudShape, "ucrNudShape")
-        Me.ucrNudShape.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudShape.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudShape.Name = "ucrNudShape"
-        Me.ucrNudShape.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        resources.ApplyResources(Me.lblAlpha, "lblAlpha")
+        Me.lblAlpha.Name = "lblAlpha"
         '
-        'lblAngle
+        'ucrBaseSubdialog
         '
-        resources.ApplyResources(Me.lblAngle, "lblAngle")
-        Me.lblAngle.Name = "lblAngle"
+        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
-        'ucrNudAngle
+        'grpAnnotation
         '
-        Me.ucrNudAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudAngle, "ucrNudAngle")
-        Me.ucrNudAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAngle.Name = "ucrNudAngle"
-        Me.ucrNudAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.grpAnnotation.Controls.Add(Me.lblCurvature)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudAlpha)
+        Me.grpAnnotation.Controls.Add(Me.lblAlpha)
+        Me.grpAnnotation.Controls.Add(Me.lblLineend)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputLineend)
+        Me.grpAnnotation.Controls.Add(Me.lblAngle)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudAngle)
+        Me.grpAnnotation.Controls.Add(Me.lblShape)
+        Me.grpAnnotation.Controls.Add(Me.lblAnnotationGeoms)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputAnnotationGeoms)
+        Me.grpAnnotation.Controls.Add(Me.lblSize)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudSize)
+        Me.grpAnnotation.Controls.Add(Me.lblColour)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputColour)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputX)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputY)
+        Me.grpAnnotation.Controls.Add(Me.lblY)
+        Me.grpAnnotation.Controls.Add(Me.lblX)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputFill)
+        Me.grpAnnotation.Controls.Add(Me.lblFill)
+        Me.grpAnnotation.Controls.Add(Me.lblXmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputXmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputYmin)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputXmin)
+        Me.grpAnnotation.Controls.Add(Me.lblYmin)
+        Me.grpAnnotation.Controls.Add(Me.lblXmin)
+        Me.grpAnnotation.Controls.Add(Me.lblXend)
+        Me.grpAnnotation.Controls.Add(Me.lblYmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputYmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputYend)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputXend)
+        Me.grpAnnotation.Controls.Add(Me.lblYend)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudLinetype)
+        Me.grpAnnotation.Controls.Add(Me.lblLinetype)
+        Me.grpAnnotation.Controls.Add(Me.lblPointrangeFatten)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudPointrangeFatten)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudCrossbarFatten)
+        Me.grpAnnotation.Controls.Add(Me.lblCrossbarFatten)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudCurvature)
+        Me.grpAnnotation.Controls.Add(Me.ucrNudShape)
+        resources.ApplyResources(Me.grpAnnotation, "grpAnnotation")
+        Me.grpAnnotation.Name = "grpAnnotation"
+        Me.grpAnnotation.TabStop = False
         '
-        'lblLineend
+        'lblXend
         '
-        resources.ApplyResources(Me.lblLineend, "lblLineend")
-        Me.lblLineend.Name = "lblLineend"
-        '
-        'ucrInputLineend
-        '
-        Me.ucrInputLineend.AddQuotesIfUnrecognised = True
-        Me.ucrInputLineend.GetSetSelectedIndex = -1
-        Me.ucrInputLineend.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLineend, "ucrInputLineend")
-        Me.ucrInputLineend.Name = "ucrInputLineend"
-        '
-        'Label2
-        '
-        resources.ApplyResources(Me.Label2, "Label2")
-        Me.Label2.Name = "Label2"
+        resources.ApplyResources(Me.lblXend, "lblXend")
+        Me.lblXend.Name = "lblXend"
         '
         'lblYmax
         '
         resources.ApplyResources(Me.lblYmax, "lblYmax")
         Me.lblYmax.Name = "lblYmax"
-        '
-        'lblXmax
-        '
-        resources.ApplyResources(Me.lblXmax, "lblXmax")
-        Me.lblXmax.Name = "lblXmax"
         '
         'ucrInputYmax
         '
@@ -1028,6 +1011,32 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrInputYmax, "ucrInputYmax")
         Me.ucrInputYmax.Name = "ucrInputYmax"
         '
+        'ucrInputYend
+        '
+        Me.ucrInputYend.AddQuotesIfUnrecognised = True
+        Me.ucrInputYend.IsMultiline = False
+        Me.ucrInputYend.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYend, "ucrInputYend")
+        Me.ucrInputYend.Name = "ucrInputYend"
+        '
+        'ucrInputXend
+        '
+        Me.ucrInputXend.AddQuotesIfUnrecognised = True
+        Me.ucrInputXend.IsMultiline = False
+        Me.ucrInputXend.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXend, "ucrInputXend")
+        Me.ucrInputXend.Name = "ucrInputXend"
+        '
+        'lblYend
+        '
+        resources.ApplyResources(Me.lblYend, "lblYend")
+        Me.lblYend.Name = "lblYend"
+        '
+        'lblXmax
+        '
+        resources.ApplyResources(Me.lblXmax, "lblXmax")
+        Me.lblXmax.Name = "lblXmax"
+        '
         'ucrInputXmax
         '
         Me.ucrInputXmax.AddQuotesIfUnrecognised = True
@@ -1035,6 +1044,86 @@ Partial Class sdgPlots
         Me.ucrInputXmax.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputXmax, "ucrInputXmax")
         Me.ucrInputXmax.Name = "ucrInputXmax"
+        '
+        'ucrInputYmin
+        '
+        Me.ucrInputYmin.AddQuotesIfUnrecognised = True
+        Me.ucrInputYmin.IsMultiline = False
+        Me.ucrInputYmin.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYmin, "ucrInputYmin")
+        Me.ucrInputYmin.Name = "ucrInputYmin"
+        '
+        'ucrInputXmin
+        '
+        Me.ucrInputXmin.AddQuotesIfUnrecognised = True
+        Me.ucrInputXmin.IsMultiline = False
+        Me.ucrInputXmin.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXmin, "ucrInputXmin")
+        Me.ucrInputXmin.Name = "ucrInputXmin"
+        '
+        'lblYmin
+        '
+        resources.ApplyResources(Me.lblYmin, "lblYmin")
+        Me.lblYmin.Name = "lblYmin"
+        '
+        'lblXmin
+        '
+        resources.ApplyResources(Me.lblXmin, "lblXmin")
+        Me.lblXmin.Name = "lblXmin"
+        '
+        'ucrInputFill
+        '
+        Me.ucrInputFill.AddQuotesIfUnrecognised = True
+        Me.ucrInputFill.GetSetSelectedIndex = -1
+        Me.ucrInputFill.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFill, "ucrInputFill")
+        Me.ucrInputFill.Name = "ucrInputFill"
+        '
+        'lblFill
+        '
+        resources.ApplyResources(Me.lblFill, "lblFill")
+        Me.lblFill.Name = "lblFill"
+        '
+        'ucrNudLinetype
+        '
+        Me.ucrNudLinetype.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLinetype.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudLinetype, "ucrNudLinetype")
+        Me.ucrNudLinetype.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudLinetype.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudLinetype.Name = "ucrNudLinetype"
+        Me.ucrNudLinetype.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblLinetype
+        '
+        resources.ApplyResources(Me.lblLinetype, "lblLinetype")
+        Me.lblLinetype.Name = "lblLinetype"
+        '
+        'ucrInputX
+        '
+        Me.ucrInputX.AddQuotesIfUnrecognised = True
+        Me.ucrInputX.IsMultiline = False
+        Me.ucrInputX.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputX, "ucrInputX")
+        Me.ucrInputX.Name = "ucrInputX"
+        '
+        'ucrInputY
+        '
+        Me.ucrInputY.AddQuotesIfUnrecognised = True
+        Me.ucrInputY.IsMultiline = False
+        Me.ucrInputY.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputY, "ucrInputY")
+        Me.ucrInputY.Name = "ucrInputY"
+        '
+        'lblY
+        '
+        resources.ApplyResources(Me.lblY, "lblY")
+        Me.lblY.Name = "lblY"
+        '
+        'lblX
+        '
+        resources.ApplyResources(Me.lblX, "lblX")
+        Me.lblX.Name = "lblX"
         '
         'lblSize
         '
@@ -1064,102 +1153,6 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrInputColour, "ucrInputColour")
         Me.ucrInputColour.Name = "ucrInputColour"
         '
-        'ucrNudAlpha
-        '
-        Me.ucrNudAlpha.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlpha.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudAlpha, "ucrNudAlpha")
-        Me.ucrNudAlpha.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudAlpha.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudAlpha.Name = "ucrNudAlpha"
-        Me.ucrNudAlpha.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'lblAlpha
-        '
-        resources.ApplyResources(Me.lblAlpha, "lblAlpha")
-        Me.lblAlpha.Name = "lblAlpha"
-        '
-        'ucrInputFill
-        '
-        Me.ucrInputFill.AddQuotesIfUnrecognised = True
-        Me.ucrInputFill.GetSetSelectedIndex = -1
-        Me.ucrInputFill.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFill, "ucrInputFill")
-        Me.ucrInputFill.Name = "ucrInputFill"
-        '
-        'ucrInputX
-        '
-        Me.ucrInputX.AddQuotesIfUnrecognised = True
-        Me.ucrInputX.IsMultiline = False
-        Me.ucrInputX.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputX, "ucrInputX")
-        Me.ucrInputX.Name = "ucrInputX"
-        '
-        'ucrInputY
-        '
-        Me.ucrInputY.AddQuotesIfUnrecognised = True
-        Me.ucrInputY.IsMultiline = False
-        Me.ucrInputY.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputY, "ucrInputY")
-        Me.ucrInputY.Name = "ucrInputY"
-        '
-        'ucrInputYmin
-        '
-        Me.ucrInputYmin.AddQuotesIfUnrecognised = True
-        Me.ucrInputYmin.IsMultiline = False
-        Me.ucrInputYmin.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYmin, "ucrInputYmin")
-        Me.ucrInputYmin.Name = "ucrInputYmin"
-        '
-        'ucrInputYend
-        '
-        Me.ucrInputYend.AddQuotesIfUnrecognised = True
-        Me.ucrInputYend.IsMultiline = False
-        Me.ucrInputYend.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYend, "ucrInputYend")
-        Me.ucrInputYend.Name = "ucrInputYend"
-        '
-        'ucrInputXend
-        '
-        Me.ucrInputXend.AddQuotesIfUnrecognised = True
-        Me.ucrInputXend.IsMultiline = False
-        Me.ucrInputXend.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputXend, "ucrInputXend")
-        Me.ucrInputXend.Name = "ucrInputXend"
-        '
-        'ucrInputXmin
-        '
-        Me.ucrInputXmin.AddQuotesIfUnrecognised = True
-        Me.ucrInputXmin.IsMultiline = False
-        Me.ucrInputXmin.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputXmin, "ucrInputXmin")
-        Me.ucrInputXmin.Name = "ucrInputXmin"
-        '
-        'lblYend
-        '
-        resources.ApplyResources(Me.lblYend, "lblYend")
-        Me.lblYend.Name = "lblYend"
-        '
-        'lblYmin
-        '
-        resources.ApplyResources(Me.lblYmin, "lblYmin")
-        Me.lblYmin.Name = "lblYmin"
-        '
-        'lblXmin
-        '
-        resources.ApplyResources(Me.lblXmin, "lblXmin")
-        Me.lblXmin.Name = "lblXmin"
-        '
-        'lblY
-        '
-        resources.ApplyResources(Me.lblY, "lblY")
-        Me.lblY.Name = "lblY"
-        '
-        'lblX
-        '
-        resources.ApplyResources(Me.lblX, "lblX")
-        Me.lblX.Name = "lblX"
-        '
         'lblAnnotationGeoms
         '
         resources.ApplyResources(Me.lblAnnotationGeoms, "lblAnnotationGeoms")
@@ -1173,20 +1166,48 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrInputAnnotationGeoms, "ucrInputAnnotationGeoms")
         Me.ucrInputAnnotationGeoms.Name = "ucrInputAnnotationGeoms"
         '
-        'ucrNudLinetype
+        'ucrNudAngle
         '
-        Me.ucrNudLinetype.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLinetype.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudLinetype, "ucrNudLinetype")
-        Me.ucrNudLinetype.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudLinetype.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudLinetype.Name = "ucrNudLinetype"
-        Me.ucrNudLinetype.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngle.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngle.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudAngle, "ucrNudAngle")
+        Me.ucrNudAngle.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudAngle.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudAngle.Name = "ucrNudAngle"
+        Me.ucrNudAngle.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblCurvature
+        'lblShape
         '
-        resources.ApplyResources(Me.lblCurvature, "lblCurvature")
-        Me.lblCurvature.Name = "lblCurvature"
+        resources.ApplyResources(Me.lblShape, "lblShape")
+        Me.lblShape.Name = "lblShape"
+        '
+        'ucrNudShape
+        '
+        Me.ucrNudShape.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudShape.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudShape, "ucrNudShape")
+        Me.ucrNudShape.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudShape.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudShape.Name = "ucrNudShape"
+        Me.ucrNudShape.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'lblAngle
+        '
+        resources.ApplyResources(Me.lblAngle, "lblAngle")
+        Me.lblAngle.Name = "lblAngle"
+        '
+        'lblLineend
+        '
+        resources.ApplyResources(Me.lblLineend, "lblLineend")
+        Me.lblLineend.Name = "lblLineend"
+        '
+        'ucrInputLineend
+        '
+        Me.ucrInputLineend.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineend.GetSetSelectedIndex = -1
+        Me.ucrInputLineend.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLineend, "ucrInputLineend")
+        Me.ucrInputLineend.Name = "ucrInputLineend"
         '
         'ucrNudCurvature
         '
@@ -1198,15 +1219,10 @@ Partial Class sdgPlots
         Me.ucrNudCurvature.Name = "ucrNudCurvature"
         Me.ucrNudCurvature.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblFill
+        'lblCurvature
         '
-        resources.ApplyResources(Me.lblFill, "lblFill")
-        Me.lblFill.Name = "lblFill"
-        '
-        'lblCrossbarFatten
-        '
-        resources.ApplyResources(Me.lblCrossbarFatten, "lblCrossbarFatten")
-        Me.lblCrossbarFatten.Name = "lblCrossbarFatten"
+        resources.ApplyResources(Me.lblCurvature, "lblCurvature")
+        Me.lblCurvature.Name = "lblCurvature"
         '
         'ucrNudCrossbarFatten
         '
@@ -1218,10 +1234,10 @@ Partial Class sdgPlots
         Me.ucrNudCrossbarFatten.Name = "ucrNudCrossbarFatten"
         Me.ucrNudCrossbarFatten.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblPointrangeFatten
+        'lblCrossbarFatten
         '
-        resources.ApplyResources(Me.lblPointrangeFatten, "lblPointrangeFatten")
-        Me.lblPointrangeFatten.Name = "lblPointrangeFatten"
+        resources.ApplyResources(Me.lblCrossbarFatten, "lblCrossbarFatten")
+        Me.lblCrossbarFatten.Name = "lblCrossbarFatten"
         '
         'ucrNudPointrangeFatten
         '
@@ -1233,15 +1249,16 @@ Partial Class sdgPlots
         Me.ucrNudPointrangeFatten.Name = "ucrNudPointrangeFatten"
         Me.ucrNudPointrangeFatten.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'lblLinetype
+        'lblPointrangeFatten
         '
-        resources.ApplyResources(Me.lblLinetype, "lblLinetype")
-        Me.lblLinetype.Name = "lblLinetype"
+        resources.ApplyResources(Me.lblPointrangeFatten, "lblPointrangeFatten")
+        Me.lblPointrangeFatten.Name = "lblPointrangeFatten"
         '
-        'ucrBaseSubdialog
+        'ucrChkAnnotation
         '
-        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        Me.ucrChkAnnotation.Checked = False
+        resources.ApplyResources(Me.ucrChkAnnotation, "ucrChkAnnotation")
+        Me.ucrChkAnnotation.Name = "ucrChkAnnotation"
         '
         'sdgPlots
         '
@@ -1276,7 +1293,8 @@ Partial Class sdgPlots
         Me.grpFillScale.ResumeLayout(False)
         Me.grpFillScale.PerformLayout()
         Me.tbpAnnotation.ResumeLayout(False)
-        Me.tbpAnnotation.PerformLayout()
+        Me.grpAnnotation.ResumeLayout(False)
+        Me.grpAnnotation.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1379,46 +1397,48 @@ Partial Class sdgPlots
     Friend WithEvents ucrChkFillDiscrete As ucrCheck
     Friend WithEvents ucrChkAddColour As ucrCheck
     Friend WithEvents tbpAnnotation As TabPage
-    Friend WithEvents ucrInputAnnotationGeoms As ucrInputComboBox
-    Friend WithEvents lblAnnotationGeoms As Label
-    Friend WithEvents lblY As Label
-    Friend WithEvents lblX As Label
-    Friend WithEvents ucrInputX As ucrInputTextBox
-    Friend WithEvents ucrInputY As ucrInputTextBox
-    Friend WithEvents ucrInputYmin As ucrInputTextBox
-    Friend WithEvents ucrInputYend As ucrInputTextBox
-    Friend WithEvents ucrInputXend As ucrInputTextBox
-    Friend WithEvents ucrInputXmin As ucrInputTextBox
-    Friend WithEvents lblYend As Label
-    Friend WithEvents lblCrossbarFatten As Label
-    Friend WithEvents lblYmin As Label
-    Friend WithEvents lblXmin As Label
-    Friend WithEvents ucrInputFill As ucrInputComboBox
     Friend WithEvents ucrNudAlpha As ucrNud
     Friend WithEvents lblAlpha As Label
-    Friend WithEvents lblColour As Label
-    Friend WithEvents ucrInputColour As ucrInputComboBox
-    Friend WithEvents lblSize As Label
-    Friend WithEvents ucrNudSize As ucrNud
-    Friend WithEvents lblYmax As Label
-    Friend WithEvents lblXmax As Label
-    Friend WithEvents ucrInputYmax As ucrInputTextBox
-    Friend WithEvents ucrInputXmax As ucrInputTextBox
-    Friend WithEvents lblLinetype As Label
-    Friend WithEvents ucrNudLinetype As ucrNud
+    Friend WithEvents grpAnnotation As GroupBox
     Friend WithEvents lblCurvature As Label
-    Friend WithEvents ucrNudCurvature As ucrNud
-    Friend WithEvents Label2 As Label
-    Friend WithEvents ucrNudCrossbarFatten As ucrNud
-    Friend WithEvents ucrNudPointrangeFatten As ucrNud
-    Friend WithEvents lblFill As Label
-    Friend WithEvents lblPointrangeFatten As Label
     Friend WithEvents lblLineend As Label
     Friend WithEvents ucrInputLineend As ucrInputComboBox
     Friend WithEvents lblAngle As Label
     Friend WithEvents ucrNudAngle As ucrNud
     Friend WithEvents lblShape As Label
+    Friend WithEvents lblAnnotationGeoms As Label
+    Friend WithEvents ucrInputAnnotationGeoms As ucrInputComboBox
+    Friend WithEvents lblSize As Label
+    Friend WithEvents ucrNudSize As ucrNud
+    Friend WithEvents lblColour As Label
+    Friend WithEvents ucrInputColour As ucrInputComboBox
+    Friend WithEvents ucrInputX As ucrInputTextBox
+    Friend WithEvents ucrInputY As ucrInputTextBox
+    Friend WithEvents lblY As Label
+    Friend WithEvents lblX As Label
+    Friend WithEvents ucrInputFill As ucrInputComboBox
+    Friend WithEvents lblFill As Label
+    Friend WithEvents lblXmax As Label
+    Friend WithEvents ucrInputXmax As ucrInputTextBox
+    Friend WithEvents ucrInputYmin As ucrInputTextBox
+    Friend WithEvents ucrInputXmin As ucrInputTextBox
+    Friend WithEvents lblYmin As Label
+    Friend WithEvents lblXmin As Label
+    Friend WithEvents lblXend As Label
+    Friend WithEvents lblYmax As Label
+    Friend WithEvents ucrInputYmax As ucrInputTextBox
+    Friend WithEvents ucrInputYend As ucrInputTextBox
+    Friend WithEvents ucrInputXend As ucrInputTextBox
+    Friend WithEvents lblYend As Label
+    Friend WithEvents ucrNudLinetype As ucrNud
+    Friend WithEvents lblLinetype As Label
+    Friend WithEvents lblPointrangeFatten As Label
+    Friend WithEvents ucrNudPointrangeFatten As ucrNud
+    Friend WithEvents ucrNudCrossbarFatten As ucrNud
+    Friend WithEvents lblCrossbarFatten As Label
+    Friend WithEvents ucrNudCurvature As ucrNud
     Friend WithEvents ucrNudShape As ucrNud
+    Friend WithEvents ucrChkAnnotation As ucrCheck
 End Class
 
 
