@@ -2376,6 +2376,9 @@ Public Class RLink
             dlgTransformText.ShowDialog()
         ElseIf strCommentFromDialogue.Contains("combine text columns") Then
             'This dialogue requires only one line of code
+            If (lstNewRCodeStructures.Count) >= 2 Then
+                lstNewRCodeStructures.RemoveRange(0, lstNewRCodeStructures.Count - 1)
+            End If
             dlgCombineText.lstScriptsRCodeStructure = lstNewRCodeStructures
             dlgCombineText.ShowDialog()
         ElseIf strCommentFromDialogue.Contains("string distance") Then

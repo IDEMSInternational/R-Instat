@@ -20,6 +20,10 @@ Public Class dlgCombineText
     Private bReset As Boolean = True
     Private iColumnsUsed As Integer
     Private clsDefaultFunction As New RFunction
+    Private clsAttach As New RFunction
+    Private clsDetach As New RFunction
+    Private clsColumnOperator As New ROperator
+
     Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub dlgCombineText_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -66,15 +70,40 @@ Public Class dlgCombineText
     End Sub
 
     Private Sub SetRFunctionDefaultParameters()
-        clsDefaultFunction.SetPackageName("stringr")
-        clsDefaultFunction.SetRCommand("str_c")
         clsDefaultFunction.AddParameter("sep", Chr(34) & " " & Chr(34), iPosition:=0)
         clsDefaultFunction.SetAssignTo(strTemp:=ucrSaveColumn.GetText(), strTempDataframe:=ucrSelectorForCombineText.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveColumn.GetText())
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
     End Sub
 
-    Private Sub SetDefaults()
+    Private Sub SetClAttachClsDetachDefaultPArameters()
+        clsAttach.AddParameter("what", clsRFunctionParameter:=ucrSelectorForCombineText.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("name", clsRFunctionParameter:=ucrSelectorForCombineText.ucrAvailableDataFrames.clsCurrDataFrame)
+        clsDetach.AddParameter("unload", "TRUE")
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsAttach)
+        ucrBase.clsRsyntax.AddToAfterCodes(clsDetach)
+    End Sub
+
+    Private Sub ResetFunction()
         clsDefaultFunction = New RFunction
+        clsAttach = New RFunction
+        clsDetach = New RFunction
+        clsColumnOperator = New ROperator
+
+        clsColumnOperator.SetOperation(",")
+
+        clsDetach.SetRCommand("detach")
+
+        clsAttach.SetRCommand("attach")
+
+        clsDefaultFunction.SetPackageName("stringr")
+        clsDefaultFunction.SetRCommand("str_c")
+
+    End Sub
+
+    Private Sub SetDefaults()
+        ResetFunction()
+        SetClAttachClsDetachDefaultPArameters()
+
         ucrSelectorForCombineText.Reset()
         ucrSaveColumn.Reset()
 
@@ -110,10 +139,6 @@ Public Class dlgCombineText
         End If
     End Sub
 
-    Private Sub ReopenDialog()
-        ColumnOrder()
-    End Sub
-
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeforControls(True)
@@ -121,18 +146,23 @@ Public Class dlgCombineText
     End Sub
 
     Private Sub ColumnOrder()
-        Dim lstColumnFunction As List(Of RFunction)
-
-        For i = 1 To iColumnsUsed
-            ucrBase.clsRsyntax.RemoveParameter("X" & i)
-        Next
-
         If Not ucrReceiverCombineText.IsEmpty Then
-            lstColumnFunction = ucrReceiverCombineText.GetVariablesAsList()
-            iColumnsUsed = lstColumnFunction.Count
-            For i = 0 To lstColumnFunction.Count - 1
-                ucrBase.clsRsyntax.AddParameter("X" & i + 1, clsRFunctionParameter:=lstColumnFunction(i), iPosition:=i + 1)
+            Dim icolumnIndex As Integer = 0
+            Dim chrstartCharacters As Char() = {"c", "("}
+            Dim chrendCharacters As Char() = {")"}
+            'removing the "c(" before the list of columns and ")" after thelist of columns 
+            Dim strVariableNames As String = ucrReceiverCombineText.GetVariableNames(False).TrimStart(chrstartCharacters).TrimEnd(chrendCharacters)
+            'Splitting the list of columns using comma
+            Dim strColumns As String() = strVariableNames.Split(New Char() {","})
+
+            clsColumnOperator.ClearParameters()
+            For Each column As String In strColumns
+                clsColumnOperator.AddParameter("col" & icolumnIndex, column, iPosition:=icolumnIndex)
+                icolumnIndex = icolumnIndex + 1
             Next
+            ucrBase.clsRsyntax.AddParameter("columns", clsROperatorParameter:=clsColumnOperator, bIncludeArgumentName:=False)
+        Else
+            ucrBase.clsRsyntax.RemoveParameter("column")
         End If
     End Sub
 
