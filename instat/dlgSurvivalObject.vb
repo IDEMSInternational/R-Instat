@@ -28,7 +28,6 @@ Public Class dlgSurvivalObject
     Private clsCreateObjectScriptPaste As New RFunction
 
     Private Sub dlgSurvivalObject_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -39,6 +38,7 @@ Public Class dlgSurvivalObject
         SetRCodeforControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

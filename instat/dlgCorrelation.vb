@@ -35,9 +35,9 @@ Public Class dlgCorrelation
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         SetDefaultColumn()
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

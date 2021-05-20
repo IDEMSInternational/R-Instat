@@ -239,7 +239,6 @@ Public Class dlgOptions
         cmdCancel.Enabled = False
         cmdHelp.Enabled = False
         SetInstatOptions()
-        autoTranslate(Me)
         SetView() 'needed to ensure that the tree view in the left panel correctly displays translated text
 
         If frmMain.Visible AndAlso strCurrLanguageCulture <> strPrevLanguageCulture Then
@@ -253,6 +252,7 @@ Public Class dlgOptions
         cmdHelp.Enabled = True
         ApplyEnabled(False)
         Cursor = Cursors.Default
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrPnlLanguage_ControlValueChanged() Handles ucrPnlLanguage.ControlValueChanged
