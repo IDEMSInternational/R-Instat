@@ -19,7 +19,6 @@ Public Class dlgMissingData
     Public bFirstLoad As Boolean = True
 
     Private Sub dlgMissingData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -27,6 +26,7 @@ Public Class dlgMissingData
         End If
         TestOKEnabled()
 
+        autoTranslate(Me)
     End Sub
 
     Private Sub TestOKEnabled()

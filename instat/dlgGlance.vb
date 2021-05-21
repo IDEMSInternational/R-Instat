@@ -21,7 +21,6 @@ Public Class dlgGlance
     Private clsMap_df As New RFunction
 
     Private Sub dlgGlance_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bfirstload Then
             InitialiseDialog()
             bfirstload = False
@@ -32,6 +31,7 @@ Public Class dlgGlance
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

@@ -22,8 +22,8 @@ Public Class sdgSelectMonth
     Private clsListCalcFunction As New RFunction
 
     Private Sub sdgSelectMonth_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         InitialiseControls()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseControls()

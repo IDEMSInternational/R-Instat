@@ -39,10 +39,10 @@ Public Class dlgClimaticSummary
         SetRCodeForControls(bReset)
         bRCodeSet = True
         bReset = False
-        autoTranslate(Me)
         WithinYearLabelReceiverLocation()
         SetFactors()
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     ' if within-year is checked, add within-year receiver

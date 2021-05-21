@@ -21,7 +21,6 @@ Public Class dlgRank
     Private bReset As Boolean = True
     Private clsRankFunction As New RFunction
     Private Sub dlgRank_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,6 +31,7 @@ Public Class dlgRank
         SetRCodeForControls(bReset)
         bReset = False
         ' TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

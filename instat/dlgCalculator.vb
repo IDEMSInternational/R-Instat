@@ -30,7 +30,6 @@ Public Class dlgCalculator
 
 
     Private Sub dlgCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             iBasicWidth = Me.Width
@@ -40,6 +39,7 @@ Public Class dlgCalculator
             ReopenDialog()
         End If
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub TestOKEnabled()

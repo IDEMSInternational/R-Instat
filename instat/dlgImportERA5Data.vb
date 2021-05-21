@@ -23,7 +23,6 @@ Public Class dlgImportERA5Data
     Private clsConcLonFunction As New RFunction
     Private clsConcLatFunction As New RFunction
     Private Sub dlgImportERA5Data_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -35,6 +34,7 @@ Public Class dlgImportERA5Data
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

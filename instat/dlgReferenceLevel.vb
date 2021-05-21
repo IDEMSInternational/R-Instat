@@ -21,7 +21,6 @@ Public Class dlgReferenceLevel
     Private bReset As Boolean = True
     Private clsSetRefLevel As New RFunction
     Private Sub dlgReferenceLevel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,6 +31,7 @@ Public Class dlgReferenceLevel
         SetRCodeforControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
