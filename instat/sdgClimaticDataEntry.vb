@@ -325,7 +325,6 @@ Public Class sdgClimaticDataEntry
         Dim iStartRowIndex As Integer = grdCurrentWorkSheet.SelectionRange.Row
         Dim iLastEditableRowIndex As Integer
         Dim strNewValue As String
-        Dim cell As Cell
 
         If grdCurrentWorkSheet.SelectionRange.Cols > 1 Then
             MsgBox("Pasting into cells in different columns is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try pasting into one column cells at a time.", MsgBoxStyle.Information, "Cannot paste into multiple cells in different columns")
@@ -372,7 +371,6 @@ Public Class sdgClimaticDataEntry
             End If
             iStartRowIndex += 1
         Next
-
 
         'then save the values if all are valid
         For index As Integer = 0 To arrPasteValues.Length - 1
@@ -485,7 +483,7 @@ Public Class sdgClimaticDataEntry
 
         'if only NAs allowed then check if cell is allowed to have new value (except summary cells)
         If grdCell IsNot Nothing AndAlso bEditNewDataOnly AndAlso grdCell.Tag <> "new" AndAlso grdCell.Tag <> "summary" Then
-            MsgBox("Only new values(NAs) entries allowed.", MsgBoxStyle.Information, "Not new value.")
+            MsgBox("Previously existing data cannot be changed with the Add option selected.", MsgBoxStyle.Information, "Not new value.")
             Return False
         End If
 

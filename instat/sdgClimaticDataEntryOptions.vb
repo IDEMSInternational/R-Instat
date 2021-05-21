@@ -28,7 +28,7 @@ Public Class sdgClimaticDataEntryOptions
     End Sub
 
     Private Sub InitialiseControls()
-        ucrChkEditNAOnly.SetText("Edit/Add new data(NA) only")
+        ucrChkEditNAOnly.SetText("Add/Edit new data only")
         ucrChkIncludeFirstNextMonth.SetText("Include first of the next month:")
 
         ucrInputTransform.SetItems({"0.1", "25.4", "0.254"})
