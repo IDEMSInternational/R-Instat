@@ -45,9 +45,9 @@ Public Class dlgClimaticDataEntry
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         ucrBase.OKEnabled(False)
         SetNumberCommentEnteredText(sdgCommentForDataEntry.GetSetNumberOfCommentsEntered)
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

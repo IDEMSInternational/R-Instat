@@ -26,7 +26,6 @@ Public Class dlgName
     Private clsDefaultRFunction As New RFunction
 
     Private Sub dlgName_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -39,6 +38,7 @@ Public Class dlgName
         If bUseSelectedColumn Then
             SetSelectedColumn()
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

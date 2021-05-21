@@ -28,10 +28,10 @@ Public Class dlgRatingScales
         If bReset Then
             SetDefaults()
         End If
-        autoTranslate(Me)
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

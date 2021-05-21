@@ -22,7 +22,6 @@ Public Class dlgNon_ParametricOneWayANOVA
     Private clsKruskalWallis As New RFunction
 
     Private Sub dlgNon_ParametricOneWayANOVA_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -33,6 +32,7 @@ Public Class dlgNon_ParametricOneWayANOVA
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
