@@ -31,6 +31,7 @@ Partial Class sdgClimaticDataEntry
         Me.mnuCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPaste = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
+        Me.mnuComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.ucrChkAddFlagFieldData = New instat.ucrCheck()
         Me.cmdComment = New System.Windows.Forms.Button()
         Me.cmdTransform = New System.Windows.Forms.Button()
@@ -80,7 +81,7 @@ Partial Class sdgClimaticDataEntry
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuCopy, Me.mnuPaste, Me.ToolStripSeparator5})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuCopy, Me.mnuPaste, Me.ToolStripSeparator5, Me.mnuComment})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
         resources.ApplyResources(Me.cellContextMenuStrip, "cellContextMenuStrip")
         '
@@ -103,6 +104,11 @@ Partial Class sdgClimaticDataEntry
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
         resources.ApplyResources(Me.ToolStripSeparator5, "ToolStripSeparator5")
+        '
+        'mnuComment
+        '
+        Me.mnuComment.Name = "mnuComment"
+        resources.ApplyResources(Me.mnuComment, "mnuComment")
         '
         'ucrChkAddFlagFieldData
         '
@@ -169,4 +175,5 @@ Partial Class sdgClimaticDataEntry
     Friend WithEvents mnuCopy As ToolStripMenuItem
     Friend WithEvents mnuPaste As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator5 As ToolStripSeparator
+    Friend WithEvents mnuComment As ToolStripMenuItem
 End Class

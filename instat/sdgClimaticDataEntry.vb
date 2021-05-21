@@ -567,7 +567,7 @@ Public Class sdgClimaticDataEntry
         End If
     End Sub
 
-    Private Sub cmdComment_Click(sender As Object, e As EventArgs) Handles cmdComment.Click
+    Private Sub comment_Click(sender As Object, e As EventArgs) Handles cmdComment.Click, mnuComment.Click
         Dim selectedRowheaderText As String = grdCurrentWorkSheet.RowHeaders.Item(grdDataEntry.CurrentWorksheet.SelectionRange.Row).Text
         Dim selectedColumnHeaderText As String = grdCurrentWorkSheet.ColumnHeaders.Item(grdDataEntry.CurrentWorksheet.SelectionRange.Col).Text
 
@@ -580,7 +580,6 @@ Public Class sdgClimaticDataEntry
         sdgCommentForDataEntry.ShowDialog()
         bResetCommentsSubdialog = False
     End Sub
-
 
     ''' <summary>
     ''' calculates the monthly totals for all columns
@@ -676,5 +675,6 @@ Public Class sdgClimaticDataEntry
         End If
 
     End Sub
+
 
 End Class

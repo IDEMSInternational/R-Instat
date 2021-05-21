@@ -132,13 +132,13 @@
     <value>374, 18</value>
   </metadata>
   <data name="ToolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="mnuCopy.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+C</value>
   </data>
   <data name="mnuCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuCopy.Text" xml:space="preserve">
     <value>Copy</value>
@@ -147,16 +147,22 @@
     <value>Ctrl+V</value>
   </data>
   <data name="mnuPaste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="mnuPaste.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="ToolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>141, 6</value>
+    <value>177, 6</value>
+  </data>
+  <data name="mnuComment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuComment.Text" xml:space="preserve">
+    <value>Comment</value>
   </data>
   <data name="cellContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 60</value>
+    <value>181, 104</value>
   </data>
   <data name="&gt;&gt;cellContextMenuStrip.Name" xml:space="preserve">
     <value>cellContextMenuStrip</value>
@@ -413,6 +419,12 @@
   </data>
   <data name="&gt;&gt;ToolStripSeparator5.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuComment.Name" xml:space="preserve">
+    <value>mnuComment</value>
+  </data>
+  <data name="&gt;&gt;mnuComment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ttCmds.Name" xml:space="preserve">
     <value>ttCmds</value>
