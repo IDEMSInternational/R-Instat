@@ -116,7 +116,6 @@ Public Class dlgCompareColumns
         ucrSaveLogical.SetLabelText("Save result for second column:")
         ucrSaveLogical.setLinkedReceiver(ucrReceiverSecond)
 
-
         ucrBase.clsRsyntax.iCallType = 2
     End Sub
 
@@ -192,13 +191,13 @@ Public Class dlgCompareColumns
             ucrBase.OKEnabled(False)
         Else
             If ({"integer", "numeric"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso
-                    {"integer", "numeric"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse
-                    (ucrReceiverFirst.strCurrDataType = "Date" AndAlso
-                    ucrReceiverSecond.strCurrDataType = "Date") OrElse
-                    ({"factor", "character"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso
-                        {"factor", "character"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse
-                        (ucrReceiverFirst.strCurrDataType = "logical" AndAlso
-                        ucrReceiverSecond.strCurrDataType = "logical") Then
+                {"integer", "numeric"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse
+                (ucrReceiverFirst.strCurrDataType = "Date" AndAlso
+                ucrReceiverSecond.strCurrDataType = "Date") OrElse
+                ({"factor", "character"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso
+                {"factor", "character"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse
+                (ucrReceiverFirst.strCurrDataType = "logical" AndAlso
+                ucrReceiverSecond.strCurrDataType = "logical") Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
@@ -274,7 +273,7 @@ Public Class dlgCompareColumns
                     clsDummyOperator = clsIsEqualToOperator
                 End If
             Else
-                    MsgBox("Receivers must have the same data type, OK will not be enabled")
+                MsgBox("Receivers must have the same data type, OK will not be enabled")
             End If
         End If
         TestOkEnabled()
