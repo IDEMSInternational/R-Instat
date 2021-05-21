@@ -146,7 +146,15 @@ Public Class dlgClimaticDataEntry
         bSubdialogFirstLoad = True
         bResetSubdialogs = True
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
-        sdgClimaticDataEntryOptions.SetDefaults()
+        sdgClimaticDataEntryOptions.DefaultValue = "NA"
+        sdgClimaticDataEntryOptions.NoDecimals = False
+        sdgClimaticDataEntryOptions.AllowTrace = False
+        sdgClimaticDataEntryOptions.Transform = False
+        sdgClimaticDataEntryOptions.TransformValue = 0.1
+        sdgClimaticDataEntryOptions.AllowTrace = False
+        sdgClimaticDataEntryOptions.IncludeFirstNextOfMonth = False
+        sdgClimaticDataEntryOptions.EditNAOnly = False
+
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsSaveDataEntryFunction)
     End Sub

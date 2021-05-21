@@ -22,25 +22,24 @@ Public Class sdgClimaticDataEntryOptions
     Private Sub sdgClimaticDataEntryOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not bControlsInitialised Then
             InitialiseControls()
-            SetDefaults()
         End If
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseControls()
         ucrChkEditNAOnly.SetText("Add/Edit new data only")
-        ucrChkIncludeFirstNextMonth.SetText("Include first of the next month:")
+        ucrChkIncludeFirstNextMonth.SetText("Include first of the next month")
 
         ucrInputTransform.SetItems({"0.1", "25.4", "0.254"})
         ucrInputTransform.SetValidationTypeAsNumeric()
         ucrInputTransform.Visible = False
-        ucrChkTransform.SetText("Transform:")
+        ucrChkTransform.SetText("Transform")
         ucrChkTransform.AddToLinkedControls(ucrInputTransform, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         dctDefaultValues.Add("NA", "NA")
         dctDefaultValues.Add("Blank", "")
         dctDefaultValues.Add("0", "0")
-        ucrInputDefaultValue.SetItems(dctDefaultValues, bSetCondtions:=False)
+        ucrInputDefaultValue.SetItems(dctDefaultValues, bSetConditions:=False)
         ucrInputDefaultValue.SetDropDownStyleAsNonEditable()
         ttDefaultValue.SetToolTip(ucrInputDefaultValue, "Default value for missing values.")
 
@@ -52,19 +51,20 @@ Public Class sdgClimaticDataEntryOptions
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetDefaults()
-        If Not bControlsInitialised Then
-            InitialiseControls()
-        End If
-        ucrInputDefaultValue.GetSetSelectedIndex = 0
-        ucrInputTransform.GetSetSelectedIndex = 0
-        ucrChkAllowTrace.Checked = False
-        ucrChkTransform.Checked = False
-        ucrChkNoDecimal.Checked = False
-        ucrChkEditNAOnly.Checked = False
-        ucrChkIncludeFirstNextMonth.Checked = False
-        ucrChkIncludeFirstNextMonth.Enabled = False
-    End Sub
+    'todo. this needs to be changed
+    'Public Sub SetDefaultOptions()
+    '    If Not bControlsInitialised Then
+    '        InitialiseControls()
+    '    End If
+    '    ucrInputDefaultValue.GetSetSelectedIndex = 0
+    '    ucrInputTransform.GetSetSelectedIndex = 0
+    '    ucrChkAllowTrace.Checked = False
+    '    ucrChkTransform.Checked = False
+    '    ucrChkNoDecimal.Checked = False
+    '    ucrChkEditNAOnly.Checked = False
+    '    ucrChkIncludeFirstNextMonth.Checked = False
+    '    ucrChkIncludeFirstNextMonth.Enabled = False
+    'End Sub
 
     Public Sub Setup(strEntryType As String)
         If Not bControlsInitialised Then
@@ -73,31 +73,43 @@ Public Class sdgClimaticDataEntryOptions
         ucrChkIncludeFirstNextMonth.Enabled = (strEntryType = "Month")
     End Sub
 
-    Public ReadOnly Property NoDecimals As Boolean
+    Public Property NoDecimals As Boolean
         Get
             Return ucrChkNoDecimal.Checked
         End Get
+        Set(value As Boolean)
+            ucrChkNoDecimal.Checked = value
+        End Set
     End Property
 
-    Public ReadOnly Property DefaultValue As String
+    Public Property DefaultValue As String
         Get
             Return dctDefaultValues.Item(ucrInputDefaultValue.GetValue)
         End Get
+        Set(value As String)
+            ucrInputDefaultValue.SetName(value)
+        End Set
     End Property
 
-    Public ReadOnly Property AllowTrace As Boolean
+    Public Property AllowTrace As Boolean
         Get
             Return ucrChkAllowTrace.Checked
         End Get
+        Set(value As Boolean)
+            ucrChkAllowTrace.Checked = value
+        End Set
     End Property
 
-    Public ReadOnly Property Transform As Boolean
+    Public Property Transform As Boolean
         Get
             Return ucrChkTransform.Checked
         End Get
+        Set(value As Boolean)
+            ucrChkTransform.Checked = value
+        End Set
     End Property
 
-    Public ReadOnly Property TransformValue As Double
+    Public Property TransformValue As Double
         Get
             Dim dTemp As Double
             If Not Double.TryParse(ucrInputTransform.GetValue, dTemp) Then
@@ -105,18 +117,28 @@ Public Class sdgClimaticDataEntryOptions
             End If
             Return dTemp
         End Get
+        Set(value As Double)
+            ucrInputTransform.SetName(value)
+        End Set
     End Property
 
-    Public ReadOnly Property EditNAOnly As Boolean
+    Public Property EditNAOnly As Boolean
         Get
             Return ucrChkEditNAOnly.Checked
         End Get
+        Set(value As Boolean)
+            ucrChkEditNAOnly.Checked = value
+        End Set
     End Property
 
-    Public ReadOnly Property IncludeFirstNextOfMonth As Boolean
+    Public Property IncludeFirstNextOfMonth As Boolean
         Get
             Return ucrChkIncludeFirstNextMonth.Enabled AndAlso ucrChkIncludeFirstNextMonth.Checked
         End Get
+        Set(value As Boolean)
+            ucrChkIncludeFirstNextMonth.Enabled = value
+            ucrChkIncludeFirstNextMonth.Checked = value
+        End Set
     End Property
 
 End Class
