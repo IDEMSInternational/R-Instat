@@ -173,8 +173,8 @@ Public Class dlgClimaticDataEntry
         ucrStartDate.SetRCode(clsGetDataEntryFunction, bReset)
         ucrEndDate.SetRCode(clsGetDataEntryFunction, bReset)
         If bReset Then
-            ' Default start date to 1 Jan 2021. todo change to correct way of getting first date of current year
-            ucrStartDate.DateValue = New Date("2021", "1", "1")
+            'Default start date to 1 Jan.
+            ucrStartDate.DateValue = New Date(Date.Now.Year, "1", "1")
         End If
         SetDateOptions()
     End Sub
@@ -293,8 +293,13 @@ Public Class dlgClimaticDataEntry
                 ucrEndDate.DateValue = dtStart
                 ucrEndDate.Enabled = False
             Case strMonth
-                ucrStartDate.DateValue = New Date(dtStart.Year, dtStart.Month, 1)
+                If sdgClimaticDataEntryOptions.IncludeFirstNextOfMonth Then
+                    ucrStartDate.DateValue = New Date(dtStart.Year, dtStart.Month, 2)
+                Else
+                    ucrStartDate.DateValue = New Date(dtStart.Year, dtStart.Month, 1)
+                End If
                 ucrEndDate.DateValue = ucrStartDate.DateValue.AddMonths(1).AddDays(-1)
+
                 ucrEndDate.Enabled = False
             Case strRange
                 ucrEndDate.Enabled = True
@@ -346,6 +351,7 @@ Public Class dlgClimaticDataEntry
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgClimaticDataEntryOptions.Setup(ucrInputType.GetText)
         sdgClimaticDataEntryOptions.ShowDialog()
-        bChange = True 'todo. is it always true
+        SetDateOptions()
+        bChange = True
     End Sub
 End Class

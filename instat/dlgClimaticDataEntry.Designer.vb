@@ -68,7 +68,7 @@ Partial Class dlgClimaticDataEntry
         Me.rdoAdd.Name = "rdoAdd"
         Me.rdoAdd.Size = New System.Drawing.Size(110, 27)
         Me.rdoAdd.TabIndex = 1
-        Me.rdoAdd.Text = "Edit/Add"
+        Me.rdoAdd.Text = "Add/Edit"
         Me.rdoAdd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoAdd.UseVisualStyleBackColor = True
         '

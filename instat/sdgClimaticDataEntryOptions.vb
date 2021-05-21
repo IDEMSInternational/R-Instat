@@ -51,21 +51,6 @@ Public Class sdgClimaticDataEntryOptions
         bControlsInitialised = True
     End Sub
 
-    'todo. this needs to be changed
-    'Public Sub SetDefaultOptions()
-    '    If Not bControlsInitialised Then
-    '        InitialiseControls()
-    '    End If
-    '    ucrInputDefaultValue.GetSetSelectedIndex = 0
-    '    ucrInputTransform.GetSetSelectedIndex = 0
-    '    ucrChkAllowTrace.Checked = False
-    '    ucrChkTransform.Checked = False
-    '    ucrChkNoDecimal.Checked = False
-    '    ucrChkEditNAOnly.Checked = False
-    '    ucrChkIncludeFirstNextMonth.Checked = False
-    '    ucrChkIncludeFirstNextMonth.Enabled = False
-    'End Sub
-
     Public Sub Setup(strEntryType As String)
         If Not bControlsInitialised Then
             InitialiseControls()
@@ -84,7 +69,11 @@ Public Class sdgClimaticDataEntryOptions
 
     Public Property DefaultValue As String
         Get
-            Return dctDefaultValues.Item(ucrInputDefaultValue.GetValue)
+            If dctDefaultValues.ContainsKey(ucrInputDefaultValue.GetText) Then
+                Return dctDefaultValues.Item(ucrInputDefaultValue.GetText)
+            Else
+                Return ucrInputDefaultValue.GetText
+            End If
         End Get
         Set(value As String)
             ucrInputDefaultValue.SetName(value)
