@@ -83,7 +83,7 @@ Public Class dlgOptions
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
-        ucrInputLanguage.SetItems({"English", "French", "Spanish", "Kiswahili", "Portugese"})
+        ucrInputLanguage.SetItems({"English", "French", "Portugese"})
     End Sub
 
     Private Sub LoadInstatOptions()
@@ -119,11 +119,6 @@ Public Class dlgOptions
                 ucrInputLanguage.SetText("English")
             Case "fr-FR"
                 ucrInputLanguage.SetText("French")
-                ' temp disabled as not functioning
-                'Case "sw-KE"
-                '    ucrInputLanguage.SetText("Kiswahili")
-                'Case "es-ES"
-                '    ucrInputLanguage.SetText("Spanish")
         End Select
 
         strPrevLanguageCulture = frmMain.clsInstatOptions.strLanguageCultureCode
@@ -253,11 +248,6 @@ Public Class dlgOptions
                 strCurrLanguageCulture = "en-GB"
             Case "French"
                 strCurrLanguageCulture = "fr-FR"
-                ' temp disabled as not functioning
-                'Case "Kiswahili"
-                ' strCurrLanguageCulture = "sw-KE"
-                'Case "Spanish"
-                ' strCurrLanguageCulture = "es-ES"
         End Select
         ApplyEnabled(True)
     End Sub
