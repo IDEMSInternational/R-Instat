@@ -26,7 +26,6 @@ Public Class dlgOneVarUseModel
     Private bPlot As Boolean
 
     Private Sub dlgOneVarUseModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bfirstload Then
             InitialiseDialog()
             bfirstload = False
@@ -37,6 +36,7 @@ Public Class dlgOneVarUseModel
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

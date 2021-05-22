@@ -21,7 +21,6 @@ Public Class dlgPolynomials
     Private clsPolynomial As New RFunction
     Public clsScale As New RFunction
     Private Sub dlgPolynomials_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -31,6 +30,7 @@ Public Class dlgPolynomials
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

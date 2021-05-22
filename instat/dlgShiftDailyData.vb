@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgShiftDailyData
     Public bFirstLoad As Boolean = True
     Private Sub dlgShiftDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -26,6 +25,7 @@ Public Class dlgShiftDailyData
         End If
         TestOKEnabled()
 
+        autoTranslate(Me)
     End Sub
 
     Private Sub TestOKEnabled()

@@ -48,7 +48,6 @@ Public Class dlgOpenSST
     End Sub
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         Me.Show()
         If bFirstLoad Then
             InitialiseDialog()
@@ -60,6 +59,7 @@ Public Class dlgOpenSST
             bStartOpenDialog = False
         End If
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

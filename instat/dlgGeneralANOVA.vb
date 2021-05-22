@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgGeneralANOVA
     Public bFirstLoad As Boolean = True
     Private Sub dlgGeneral_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             SetDefaults()
             InitialiseDialog()
@@ -27,6 +26,7 @@ Public Class dlgGeneralANOVA
             ReopenDialog()
         End If
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub TestOKEnabled()

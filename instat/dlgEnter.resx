@@ -616,7 +616,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnExample.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 16</value>
+    <value>436, 16</value>
   </data>
   <data name="btnExample.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -1593,6 +1593,9 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -1612,13 +1615,13 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverForEnterCalculation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 16</value>
+    <value>69, 16</value>
   </data>
   <data name="ucrReceiverForEnterCalculation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="ucrReceiverForEnterCalculation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 28</value>
+    <value>229, 28</value>
   </data>
   <data name="ucrReceiverForEnterCalculation.TabIndex" type="System.Int32, mscorlib">
     <value>153</value>

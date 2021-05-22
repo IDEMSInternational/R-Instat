@@ -31,11 +31,11 @@ Public Class sdgFiltersFromFactor
     End Sub
 
     Private Sub sdgFiltersFromFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseControls()
             bFirstLoad = False
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseControls()
