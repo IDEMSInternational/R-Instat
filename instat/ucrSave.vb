@@ -895,12 +895,12 @@ Public Class ucrSave
         'if there was a previous linked receiver, then remove the event handler from it
         'prevents multiple unnecessary calls that could be caused by previously linked receivers
         If Me.ucrLinkedReceiver IsNot Nothing Then
-            RemoveHandler Me.ucrLinkedReceiver.ControlValueChanged, AddressOf LinkedReceiverControlValueChanged
+            RemoveHandler Me.ucrLinkedReceiver.ControlValueChanged, LinkedReceiverControlValueChanged
         End If
         Me.ucrLinkedReceiver = ucrLinkedReceiver
-        AddHandler Me.ucrLinkedReceiver.ControlValueChanged, AddressOf LinkedReceiverControlValueChanged
+        AddHandler Me.ucrLinkedReceiver.ControlValueChanged, LinkedReceiverControlValueChanged
         'call event handler to immediately get the values from the new receiver
-        LinkedReceiverControlValueChanged()
+        LinkedReceiverControlValueChanged(Me.ucrLinkedReceiver)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -916,21 +916,21 @@ Public Class ucrSave
     '''             parameters are set to append the column after the final column. </para>
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
-    Private Sub LinkedReceiverControlValueChanged()
-        If Not sdgSaveColumnPosition.bUserSelected Then
-            bInsertColumnBefore = False
-            If ucrLinkedReceiver.IsEmpty Then
-                strAdjacentColumn = ""
-            Else
-                If TypeOf ucrLinkedReceiver Is ucrReceiverMultiple Then
-                    strAdjacentColumn = ucrLinkedReceiver.GetVariableNamesList()(ucrLinkedReceiver.GetVariableNamesList().Length - 1)
-                Else
-                    strAdjacentColumn = ucrLinkedReceiver.GetVariableNames()
-                End If
-            End If
-        End If
-        UpdateAssignTo()
-    End Sub
+    Private ReadOnly LinkedReceiverControlValueChanged As ucrCore.ControlValueChangedEventHandler = Sub(ucrChangedControl As ucrCore)
+                                                                                                        If Not sdgSaveColumnPosition.bUserSelected Then
+                                                                                                            bInsertColumnBefore = False
+                                                                                                            If ucrLinkedReceiver.IsEmpty Then
+                                                                                                                strAdjacentColumn = ""
+                                                                                                            Else
+                                                                                                                If TypeOf ucrLinkedReceiver Is ucrReceiverMultiple Then
+                                                                                                                    strAdjacentColumn = ucrLinkedReceiver.GetVariableNamesList()(ucrLinkedReceiver.GetVariableNamesList().Length - 1)
+                                                                                                                Else
+                                                                                                                    strAdjacentColumn = ucrLinkedReceiver.GetVariableNames()
+                                                                                                                End If
+                                                                                                            End If
+                                                                                                        End If
+                                                                                                        UpdateAssignTo()
+                                                                                                    End Sub
 
     Public Sub SetPositionParametersDirectly(bSetPositionParamsDirectly As Boolean, strReadNameFromParameterName As String)
         Me.bSetPositionParamsDirectly = bSetPositionParamsDirectly
