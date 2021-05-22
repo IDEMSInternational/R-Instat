@@ -34,7 +34,6 @@ Public Class dlgCompare
     Private clsSateliteMinusOperator, clsStationMinusOperator As New ROperator
 
     Private Sub dlgCompare_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -45,6 +44,7 @@ Public Class dlgCompare
         SetRCodeforControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

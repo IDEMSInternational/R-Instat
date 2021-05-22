@@ -18,7 +18,6 @@ Imports instat.Translations
 Public Class dlgDeleteMetadata
     Public bFirstLoad As Boolean = True
     Private Sub dlgDeleteMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             setDefaults()
             InitialiseDialog()
@@ -27,6 +26,7 @@ Public Class dlgDeleteMetadata
             ReopenDialog()
         End If
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub ReopenDialog()

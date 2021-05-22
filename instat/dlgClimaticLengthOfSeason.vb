@@ -23,7 +23,6 @@ Public Class dlgClimaticLengthOfSeason
     Private clsLengthOfSeasonFunction, clsApplyInstatCalcFunction, clsCombinationCalcFunction, clsStartEndStatusFunction, clsIfElseFunction, clsIsNAFunction, clsCombinationListFunction As New RFunction
     Private clsMinusOpertor, clsAndOperator, clsOROperator As New ROperator
     Private Sub dlgClimaticLengthOfSeason_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -33,8 +32,8 @@ Public Class dlgClimaticLengthOfSeason
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

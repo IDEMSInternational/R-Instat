@@ -17,101 +17,88 @@
 Imports instat.Translations
 Public Class sdgClimaticDataEntryOptions
     Private bControlsInitialised As Boolean = False
-    Private bMissing As Boolean = True
+    Private dctDefaultValues As New Dictionary(Of String, String)
 
     Private Sub sdgClimaticDataEntryOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
         autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseControls()
-        ucrChkTransform.SetText("Transform:")
-        ttucrChkTransform.SetToolTip(ucrChkTransform.chkCheck, "The values written to the data frame are transformed, usually multiplied, by the value given here.")
+        ucrChkEditNAOnly.SetText("Add/Edit new data only")
+        ucrChkIncludeFirstNextMonth.SetText("Include first of the next month")
 
         ucrInputTransform.SetItems({"0.1", "25.4", "0.254"})
         ucrInputTransform.SetValidationTypeAsNumeric()
         ucrInputTransform.Visible = False
+        ucrChkTransform.SetText("Transform")
+        ucrChkTransform.AddToLinkedControls(ucrInputTransform, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkDefaultValue.SetText("Default Value:")
-
-        ucrInputDefaultValue.SetValidationTypeAsNumeric()
-        ucrInputDefaultValue.Visible = False
-
-        ucrChkMissingValues.SetText("Missing values shown as NA")
+        dctDefaultValues.Add("NA", "NA")
+        dctDefaultValues.Add("Blank", "")
+        dctDefaultValues.Add("0", "0")
+        ucrInputDefaultValue.SetItems(dctDefaultValues, bSetConditions:=False)
+        ucrInputDefaultValue.SetDropDownStyleAsNonEditable()
+        ttDefaultValue.SetToolTip(ucrInputDefaultValue, "Default value for missing values.")
 
         ucrChkNoDecimal.SetText("No Decimal")
 
         ucrChkExtraRows.SetText("Extra Rows")
 
-        ucrChkDefaultValue.AddToLinkedControls(ucrInputDefaultValue, {True}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTransform.AddToLinkedControls(ucrInputTransform, {True}, bNewLinkedHideIfParameterMissing:=True)
-
         ucrChkAllowTrace.SetText("Allow t for Trace")
-        ttucrChkDefaultValue.SetToolTip(ucrChkDefaultValue.chkCheck, "The data must be defined as climatic to recognise which variable is precipitation.")
         bControlsInitialised = True
     End Sub
 
-    Public Sub SetUpDataEntryOptions(Optional bReset As Boolean = False)
+    Public Sub Setup(strEntryType As String)
         If Not bControlsInitialised Then
             InitialiseControls()
         End If
-
-        ucrChkMissingValues.Checked = True
-
-        If bReset Then
-            ucrChkDefaultValue.Checked = False
-            ucrChkAllowTrace.Checked = False
-            ucrChkTransform.Checked = False
-            ucrChkNoDecimal.Checked = False
-        End If
+        ucrChkIncludeFirstNextMonth.Enabled = (strEntryType = "Month")
     End Sub
 
-    Public ReadOnly Property NoDecimals As Boolean
+    Public Property NoDecimals As Boolean
         Get
             Return ucrChkNoDecimal.Checked
         End Get
-    End Property
-
-    Public Property GetSetDefaultCheckboxState As Boolean
-        Get
-            Return ucrChkDefaultValue.Checked
-        End Get
         Set(value As Boolean)
-            ucrChkDefaultValue.Checked = value
+            ucrChkNoDecimal.Checked = value
         End Set
     End Property
 
-    Public ReadOnly Property MissingValueAsNA As Boolean
+    Public Property DefaultValue As String
         Get
-            Return bMissing
-        End Get
-    End Property
-
-    Public Property GetSetDefaultValue As Double
-        Get
-            Dim dTemp As Double
-            If Not Double.TryParse(ucrInputDefaultValue.GetValue, dTemp) Then
-                MsgBox("Developer error: The ucrInputDefaultValue input contains the value '" & ucrInputDefaultValue.GetValue & "'. Cannot convert this to a double.")
+            If dctDefaultValues.ContainsKey(ucrInputDefaultValue.GetText) Then
+                Return dctDefaultValues.Item(ucrInputDefaultValue.GetText)
+            Else
+                Return ucrInputDefaultValue.GetText
             End If
-            Return dTemp
         End Get
-        Set(value As Double)
-            ucrInputDefaultValue.SetText(value)
+        Set(value As String)
+            ucrInputDefaultValue.SetName(value)
         End Set
     End Property
 
-    Public ReadOnly Property AllowTrace As Boolean
+    Public Property AllowTrace As Boolean
         Get
             Return ucrChkAllowTrace.Checked
         End Get
+        Set(value As Boolean)
+            ucrChkAllowTrace.Checked = value
+        End Set
     End Property
 
-    Public ReadOnly Property Transform As Boolean
+    Public Property Transform As Boolean
         Get
             Return ucrChkTransform.Checked
         End Get
+        Set(value As Boolean)
+            ucrChkTransform.Checked = value
+        End Set
     End Property
 
-    Public Property GetSetTransformValue As Double
+    Public Property TransformValue As Double
         Get
             Dim dTemp As Double
             If Not Double.TryParse(ucrInputTransform.GetValue, dTemp) Then
@@ -120,11 +107,27 @@ Public Class sdgClimaticDataEntryOptions
             Return dTemp
         End Get
         Set(value As Double)
-            ucrInputTransform.SetText(value)
+            ucrInputTransform.SetName(value)
         End Set
     End Property
 
-    Private Sub ucrChkMissingValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMissingValues.ControlValueChanged
-        bMissing = ucrChkMissingValues.Checked
-    End Sub
+    Public Property EditNAOnly As Boolean
+        Get
+            Return ucrChkEditNAOnly.Checked
+        End Get
+        Set(value As Boolean)
+            ucrChkEditNAOnly.Checked = value
+        End Set
+    End Property
+
+    Public Property IncludeFirstNextOfMonth As Boolean
+        Get
+            Return ucrChkIncludeFirstNextMonth.Enabled AndAlso ucrChkIncludeFirstNextMonth.Checked
+        End Get
+        Set(value As Boolean)
+            ucrChkIncludeFirstNextMonth.Enabled = value
+            ucrChkIncludeFirstNextMonth.Checked = value
+        End Set
+    End Property
+
 End Class
