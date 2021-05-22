@@ -850,6 +850,62 @@ DataSheet$set("public", "replace_value_in_data", function(col_names, rows, old_v
 }
 )
 
+DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_pos = 1, first_clip_row_is_header = FALSE, clip_board_text) {
+  #reads data from clipboard and saves it to selected columns
+  #get the clipboard text contents as a data frame
+  clip_tbl <- clipr::read_clip_tbl(x = clip_board_text, header = first_clip_row_is_header)
+  current_tbl <- self$get_data_frame(use_current_filter = FALSE)
+  
+  #check if number of copied columns and selected columns are equal
+  if(ncol(clip_tbl) != length(col_names)){
+    stop(paste("number of columns are not the same.",
+               "Selected columns:", length(col_names), ". Copied columns:", ncol(clip_tbl)) )
+  }
+  
+  #check if copied data rows are more than current data rows
+  if( nrow(clip_tbl) > nrow(current_tbl) ){
+    stop(paste("rows copied cannot be more than number of rows in the data frame.",
+               "Current data frame rows:", nrow(current_tbl), ". Copied rows:", nrow(clip_tbl)) )
+  }
+  
+  #check copied data integrity
+  for(index in seq_along(col_names)){
+    col_data <- current_tbl[, col_names[index]]
+    #get column type of column from the current table using column name
+    col_type <- class(col_data)
+    #check copied data integrity based on the data type expected
+    if (is.factor(col_data)) {
+      #get all the factor levels of the selected column in the current data frame
+      expected_factor_levels <- levels(col_data)
+      #check if all copied data values are contained in the factor levels
+      #if any invalid is found. exit function
+      for(val in clip_tbl[,index]){
+        if(!is.na(val) && !is.element(val,expected_factor_levels)){
+          stop("Invalid column values. Level not found in factor")
+        }
+      }#end inner for loop
+    } else if( !(is.numeric(col_data) || is.logical(col_data) || is.character(col_data)) ) {
+      #clipr support above column types only. So pasting to a column not recognised by clipr may result to unpredictible results 
+      #if not in any of above column types then exit function
+      stop( paste("Cannot paste into columns of type:", col_type) )
+    }#end if  
+  }#end outer for loop
+  
+  #replace values in the selected columns
+  for(index in seq_along(col_names)){
+    #set the row positions and the values
+    rows_to_replace <- c(start_row_pos : (start_row_pos + nrow(clip_tbl) - 1 ))
+    new_values <- clip_tbl[,index]
+    #replace the old values with new values
+    self$replace_value_in_data(col_names = col_names[index], rows = rows_to_replace, new_value = new_values)
+    #rename header if first row of clip data is header. 
+    if(first_clip_row_is_header){
+      self$rename_column_in_data(curr_col_name = col_names[index], new_col_name = colnames(clip_tbl)[index]) 
+    }
+  }#end for loop
+}
+)#end function
+
 DataSheet$set("public", "append_to_metadata", function(property, new_value = "") {
   if(missing(property)) stop("property must be specified.")
   

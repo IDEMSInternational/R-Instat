@@ -45,9 +45,9 @@ Public Class dlgClimaticDataEntry
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         ucrBase.OKEnabled(False)
         SetNumberCommentEnteredText(sdgCommentForDataEntry.GetSetNumberOfCommentsEntered)
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -269,7 +269,7 @@ Public Class dlgClimaticDataEntry
         Return dfTemp
     End Function
 
-    Private Sub ucrChangedControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverDate.ControlValueChanged, ucrReceiverElements.ControlValueChanged, ucrReceiverViewVariables.ControlValueChanged, ucrInputType.ControlValueChanged, ucrStartDate.ControlValueChanged, ucrEndDate.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+    Private Sub ucrChangedControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverDate.ControlValueChanged, ucrReceiverElements.ControlValueChanged, ucrReceiverViewVariables.ControlValueChanged, ucrInputType.ControlValueChanged, ucrStartDate.ControlValueChanged, ucrEndDate.ControlValueChanged, ucrInputSelectStation.ControlValueChanged, ucrPnlOptions.ControlValueChanged
         bChange = True
     End Sub
 

@@ -55,6 +55,7 @@ Public Class dlgRecodeFactor
         ucrSaveNewColumn.SetDataFrameSelector(ucrSelectorForRecode.ucrAvailableDataFrames)
         ucrSaveNewColumn.SetIsComboBox()
         ucrSaveNewColumn.SetLabelText("New Column Name:")
+        ucrSaveNewColumn.setLinkedReceiver(ucrReceiverFactor)
     End Sub
 
     Private Sub SetDefaults()
