@@ -68,7 +68,7 @@ Partial Class dlgClimaticDataEntry
         Me.rdoAdd.Name = "rdoAdd"
         Me.rdoAdd.Size = New System.Drawing.Size(110, 27)
         Me.rdoAdd.TabIndex = 1
-        Me.rdoAdd.Text = "Add"
+        Me.rdoAdd.Text = "Add/Edit"
         Me.rdoAdd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoAdd.UseVisualStyleBackColor = True
         '
@@ -85,7 +85,7 @@ Partial Class dlgClimaticDataEntry
         Me.rdoEdit.Name = "rdoEdit"
         Me.rdoEdit.Size = New System.Drawing.Size(110, 27)
         Me.rdoEdit.TabIndex = 2
-        Me.rdoEdit.Text = "Edit"
+        Me.rdoEdit.Text = "Correct"
         Me.rdoEdit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoEdit.UseVisualStyleBackColor = True
         '
