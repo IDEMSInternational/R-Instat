@@ -35,11 +35,11 @@ Public Class sdgSaveColumnPosition
     Public bRcodeFlag As Boolean = False
 
     Private Sub sdgSaveColumnPosition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bControlsNotInitialised Then
             InitialiseControl()
             bControlsNotInitialised = False
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseControl()

@@ -23,7 +23,6 @@ Public Class dlgInfillMissingValues
     Private clsApproximateFunction, clsAggregateFunction, clsNaLocfFunction, clsSplineFunction, clsNaFillFunction, clsStructTSFunction, clsSetSeedFunction, clsAveFunction, clsPatchClimateElementFunction, clsVisualizeElementNa As New RFunction
     Private clsBracketOperator As New ROperator
     Private Sub dlgInfillMissingValues_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             iDialogHeight = Me.Height
             iBaseMaxY = ucrBase.Location.Y
@@ -36,6 +35,7 @@ Public Class dlgInfillMissingValues
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

@@ -34,7 +34,6 @@ Public Class dlgFromLibrary
     Private clsImportFunction As New RFunction 'the base function that call on import R-Instat function
 
     Private Sub dlgFromLibrary_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -54,6 +53,7 @@ Public Class dlgFromLibrary
         bReset = False
         TestOkEnabled()
         EnableHelp()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

@@ -43,9 +43,9 @@ Public Class dlgMerge
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         SetMergingBy()
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
