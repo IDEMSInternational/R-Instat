@@ -483,7 +483,7 @@ Public Class sdgClimaticDataEntry
 
         'if only NAs allowed then check if cell is allowed to have new value (except summary cells)
         If grdCell IsNot Nothing AndAlso bEditNewDataOnly AndAlso grdCell.Tag <> "new" AndAlso grdCell.Tag <> "summary" Then
-            MsgBox("Previously existing data cannot be changed with the Add option selected.", MsgBoxStyle.Information, "Not new value.")
+            MsgBox("Previously existing data cannot be changed with the Add/Edit new data only option selected in the options subdialog.", MsgBoxStyle.Information, "Not new value.")
             Return False
         End If
 
@@ -522,11 +522,11 @@ Public Class sdgClimaticDataEntry
                              strDateName:=strDateName, lstElementsNames:=lstElementsNames, lstViewVariablesNames:=lstViewVariablesNames,
                              strStationColumnName:=strStationColumnName,
                              bEditNewDataOnly:=bEditNewDataOnly,
-                             strDefaultValue:=sdgClimaticDataEntryOptions.DefaultValue,
-                               bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
-                               bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
-                               bTransform:=sdgClimaticDataEntryOptions.Transform,
-                               dTranformValue:=sdgClimaticDataEntryOptions.TransformValue,
+                             strDefaultValue:=sdgClimaticDataEntryOptions.GetSetDefaultValue,
+                               bNoDecimal:=sdgClimaticDataEntryOptions.GetSetNoDecimals,
+                               bAllowTrace:=sdgClimaticDataEntryOptions.GetSetAllowTrace,
+                               bTransform:=sdgClimaticDataEntryOptions.GetSetTransform,
+                               dTranformValue:=sdgClimaticDataEntryOptions.GetSetTransformValue,
                                strEntryType:=strEntryType, ucrNewBaseSelector:=ucrBaseSelector, bReset:=True)
         End If
     End Sub
