@@ -554,16 +554,4 @@ Public Class dlgClimaticBoxPlot
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverStation.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged, ucrReceiverYear.ControlValueChanged
         AddRemoveFacets()
     End Sub
-
-    Private Sub ucrChkOmitBelow_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkOmitBelow.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrInput_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputYear.ControlValueChanged, ucrInputWithinYear.ControlValueChanged, ucrInputStation.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged
-
-    End Sub
 End Class
