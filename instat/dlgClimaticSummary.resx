@@ -457,7 +457,7 @@
     <value>6, 109</value>
   </data>
   <data name="ucrChkAddDateColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
+    <value>219, 20</value>
   </data>
   <data name="ucrChkAddDateColumn.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -478,7 +478,7 @@
     <value>6, 17</value>
   </data>
   <data name="ucrChkStoreResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
+    <value>255, 20</value>
   </data>
   <data name="ucrChkStoreResults.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -618,6 +618,87 @@
   <data name="&gt;&gt;lblYear.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="rdoStation.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoStation.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoStation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoStation.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 14</value>
+  </data>
+  <data name="rdoStation.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 27</value>
+  </data>
+  <data name="rdoStation.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="rdoStation.Text" xml:space="preserve">
+    <value>Station</value>
+  </data>
+  <data name="rdoStation.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoStation.Name" xml:space="preserve">
+    <value>rdoStation</value>
+  </data>
+  <data name="&gt;&gt;rdoStation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoStation.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoStation.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoDaily.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="rdoDaily.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="rdoDaily.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoDaily.Location" type="System.Drawing.Point, System.Drawing">
+    <value>355, 14</value>
+  </data>
+  <data name="rdoDaily.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 27</value>
+  </data>
+  <data name="rdoDaily.TabIndex" type="System.Int32, mscorlib">
+    <value>23</value>
+  </data>
+  <data name="rdoDaily.Text" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="rdoDaily.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleCenter</value>
+  </data>
+  <data name="&gt;&gt;rdoDaily.Name" xml:space="preserve">
+    <value>rdoDaily</value>
+  </data>
+  <data name="&gt;&gt;rdoDaily.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDaily.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoDaily.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>450, 480</value>
+  </data>
   <data name="ucrInputFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>116, 400</value>
   </data>
@@ -663,110 +744,29 @@
   <data name="&gt;&gt;ucrSelectorVariable.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="ucrReceiverWithinYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>282, 342</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>450, 480</value>
-  </data>
-  <data name="rdoDaily.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoDaily.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoDaily.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoDaily.Location" type="System.Drawing.Point, System.Drawing">
-    <value>355, 14</value>
-  </data>
-  <data name="rdoDaily.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 27</value>
-  </data>
-  <data name="rdoDaily.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="rdoDaily.Text" xml:space="preserve">
-    <value>Daily</value>
-  </data>
-  <data name="rdoDaily.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoDaily.Name" xml:space="preserve">
-    <value>rdoDaily</value>
-  </data>
-  <data name="&gt;&gt;rdoDaily.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoDaily.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoDaily.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="rdoStation.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="rdoStation.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="rdoStation.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="rdoStation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 14</value>
-  </data>
-  <data name="rdoStation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 27</value>
-  </data>
-  <data name="rdoStation.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="rdoStation.Text" xml:space="preserve">
-    <value>Station</value>
-  </data>
-  <data name="rdoStation.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
-  </data>
-  <data name="&gt;&gt;rdoStation.Name" xml:space="preserve">
-    <value>rdoStation</value>
-  </data>
-  <data name="&gt;&gt;rdoStation.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoStation.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;rdoStation.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrReceiverElements.Location" type="System.Drawing.Point, System.Drawing">
-    <value>282, 164</value>
-  </data>
-  <data name="ucrReceiverElements.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverWithinYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>123, 78</value>
+  <data name="ucrReceiverWithinYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
   </data>
-  <data name="ucrReceiverElements.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+  <data name="ucrReceiverWithinYear.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverElements.Name" xml:space="preserve">
-    <value>ucrReceiverElements</value>
+  <data name="&gt;&gt;ucrReceiverWithinYear.Name" xml:space="preserve">
+    <value>ucrReceiverWithinYear</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverElements.Type" xml:space="preserve">
-    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrReceiverWithinYear.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverElements.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverWithinYear.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverElements.ZOrder" xml:space="preserve">
-    <value>2</value>
+  <data name="&gt;&gt;ucrReceiverWithinYear.ZOrder" xml:space="preserve">
+    <value>7</value>
   </data>
   <data name="ucrReceiverDOY.Location" type="System.Drawing.Point, System.Drawing">
     <value>282, 262</value>
@@ -906,6 +906,9 @@
   <data name="&gt;&gt;ucrPnlAnnualWithin.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -918,28 +921,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrReceiverWithinYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>282, 342</value>
+  <data name="ucrReceiverElements.Location" type="System.Drawing.Point, System.Drawing">
+    <value>282, 164</value>
   </data>
-  <data name="ucrReceiverWithinYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverElements.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverWithinYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+  <data name="ucrReceiverElements.Size" type="System.Drawing.Size, System.Drawing">
+    <value>123, 78</value>
   </data>
-  <data name="ucrReceiverWithinYear.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+  <data name="ucrReceiverElements.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverWithinYear.Name" xml:space="preserve">
-    <value>ucrReceiverWithinYear</value>
+  <data name="&gt;&gt;ucrReceiverElements.Name" xml:space="preserve">
+    <value>ucrReceiverElements</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverWithinYear.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrReceiverElements.Type" xml:space="preserve">
+    <value>instat.ucrReceiverMultiple, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverWithinYear.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverElements.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverWithinYear.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;ucrReceiverElements.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
 </root>
