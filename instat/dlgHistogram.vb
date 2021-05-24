@@ -254,12 +254,9 @@ Public Class dlgHistogram
     Private Sub SetOptionsButtonText()
         If rdoHistogram.Checked Then
             cmdHistogramOptions.Text = "Histogram Options"
-            'cmdHistogramOptions.Size = New Size(120, 25)
         ElseIf rdoDensity.Checked Then
-            'cmdHistogramOptions.Size = New Size(120, 25)
             cmdHistogramOptions.Text = "Density Options"
         ElseIf rdoFrequencyPolygon.Checked Then
-            'cmdHistogramOptions.Size = New Size(160, 25)
             cmdHistogramOptions.Text = "Frequency Polygon Options"
         End If
     End Sub
