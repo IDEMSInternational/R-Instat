@@ -176,9 +176,9 @@ Partial Class sdgPlots
         Me.lblCrossbarFatten = New System.Windows.Forms.Label()
         Me.ucrNudCurvature = New instat.ucrNud()
         Me.ucrNudShape = New instat.ucrNud()
-        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.ucrInputLabel = New instat.ucrInputTextBox()
         Me.lblLabel = New System.Windows.Forms.Label()
+        Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -1259,11 +1259,6 @@ Partial Class sdgPlots
         Me.ucrNudShape.Name = "ucrNudShape"
         Me.ucrNudShape.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrBaseSubdialog
-        '
-        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
-        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        '
         'ucrInputLabel
         '
         Me.ucrInputLabel.AddQuotesIfUnrecognised = True
@@ -1276,6 +1271,11 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.lblLabel, "lblLabel")
         Me.lblLabel.Name = "lblLabel"
+        '
+        'ucrBaseSubdialog
+        '
+        resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
+        Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
         '
         'sdgPlots
         '
