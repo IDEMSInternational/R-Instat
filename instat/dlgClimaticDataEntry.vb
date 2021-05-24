@@ -322,7 +322,6 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
-        'sdgClimaticDataEntryOptions.GetSetDefaultCheckboxState = False
         clsListFunction.ClearParameters()
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
         SetNumberRowsChangedText(0)
@@ -349,7 +348,7 @@ Public Class dlgClimaticDataEntry
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgClimaticDataEntryOptions.Setup(ucrInputType.GetText)
+        sdgClimaticDataEntryOptions.SetUpDataEntryOptions(ucrInputType.GetText)
         sdgClimaticDataEntryOptions.ShowDialog()
         SetDateOptions()
         bChange = True
