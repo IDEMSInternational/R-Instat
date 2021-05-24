@@ -211,13 +211,13 @@
     <value>2</value>
   </data>
   <data name="ucrInputExportFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>73, 301</value>
+    <value>142, 301</value>
   </data>
   <data name="ucrInputExportFile.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
   </data>
   <data name="ucrInputExportFile.Size" type="System.Drawing.Size, System.Drawing">
-    <value>251, 21</value>
+    <value>182, 21</value>
   </data>
   <data name="ucrInputExportFile.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>

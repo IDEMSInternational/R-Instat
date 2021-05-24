@@ -43,6 +43,7 @@ Partial Class dlgOneWayFrequencies
         Me.rdoDescendingFrequencies = New System.Windows.Forms.RadioButton()
         Me.rdoAscendingFrequencies = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlSort = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.rdoGraph = New System.Windows.Forms.RadioButton()
@@ -60,7 +61,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeights = New instat.ucrCheck()
         Me.ucrChkFlip = New instat.ucrCheck()
-        Me.ucrPnlSort = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
         Me.grpSort.SuspendLayout()
@@ -97,6 +97,11 @@ Partial Class dlgOneWayFrequencies
         Me.rdoNone.Name = "rdoNone"
         Me.rdoNone.TabStop = True
         Me.rdoNone.UseVisualStyleBackColor = True
+        '
+        'ucrPnlSort
+        '
+        resources.ApplyResources(Me.ucrPnlSort, "ucrPnlSort")
+        Me.ucrPnlSort.Name = "ucrPnlSort"
         '
         'cmdOptions
         '
@@ -217,11 +222,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrChkFlip.Checked = False
         resources.ApplyResources(Me.ucrChkFlip, "ucrChkFlip")
         Me.ucrChkFlip.Name = "ucrChkFlip"
-        '
-        'ucrPnlSort
-        '
-        resources.ApplyResources(Me.ucrPnlSort, "ucrPnlSort")
-        Me.ucrPnlSort.Name = "ucrPnlSort"
         '
         'ucrBase
         '
