@@ -32,7 +32,6 @@ Public Class dlgDisplayDailyData
     Private clsLabelWrapGenFunction As New RFunction
 
     Private Sub dlgDisplayDailyData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         bRCodeSet = False
         If bFirstLoad Then
             iBasicHeight = Me.Height
@@ -49,6 +48,7 @@ Public Class dlgDisplayDailyData
         DialogSize()
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

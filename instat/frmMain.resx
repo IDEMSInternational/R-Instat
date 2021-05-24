@@ -1157,9 +1157,6 @@
   <data name="mnuSetupForDataEntry.Text" xml:space="preserve">
     <value>Setup for Data Entry...</value>
   </data>
-  <data name="mnuSetupForDataEntry.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuTidyandExamineClimaticDataEntry.Size" type="System.Drawing.Size, System.Drawing">
     <value>215, 22</value>
   </data>

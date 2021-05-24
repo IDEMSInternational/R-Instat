@@ -32,10 +32,10 @@ Public Class dlgLabelsLevels
         End If
         SetRCodeforControls(bReset)
         bReset = False
-        autoTranslate(Me)
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

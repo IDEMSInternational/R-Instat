@@ -108,7 +108,8 @@ Public Class dlgCompareColumns
         ucrSaveLogical.SetSaveTypeAsColumn()
         ucrSaveLogical.SetDataFrameSelector(ucrSelectorCompareColumns.ucrAvailableDataFrames)
         ucrSaveLogical.SetIsComboBox()
-        ucrSaveLogical.SetLabelText("New Column Name")
+        ucrSaveLogical.SetLabelText("Save result for second column:")
+        ucrSaveLogical.setLinkedReceiver(ucrReceiverSecond)
 
         ucrBase.clsRsyntax.iCallType = 2
     End Sub

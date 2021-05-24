@@ -33,12 +33,12 @@ Public Class dlgAddComment
             SetDefaults()
         End If
         bReset = False
-        autoTranslate(Me)
         SetRCodeForControls(bReset)
         If bUseSelectedPosition Then
             SetDefaultPosition()
         End If
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
