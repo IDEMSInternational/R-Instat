@@ -333,10 +333,6 @@ Public Class dlgClimaticSummary
         sdgMissingOptions.ShowDialog()
     End Sub
 
-    Private Sub Receivers_controlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverYear.ControlValueChanged, ucrReceiverWithinYear.ControlValueChanged, ucrReceiverStation.ControlValueChanged, ucrReceiverElements.ControlValueChanged
-
-    End Sub
-
     Private Sub ucrReceiverStation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDOY.ControlValueChanged, ucrSelectorVariable.ControlValueChanged, ucrChkAddDateColumn.ControlValueChanged, ucrReceiverDate.ControlValueChanged
         If Not ucrReceiverDOY.IsEmpty Then
             clsDayFilterCalcFromList.AddParameter(ucrSelectorVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strParameterValue:=ucrReceiverDOY.GetVariableNames(), iPosition:=0)
