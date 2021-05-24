@@ -646,7 +646,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>281, 24</value>
+    <value>281, 22</value>
   </data>
   <data name="ucrNewColumnName.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>

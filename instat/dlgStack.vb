@@ -23,7 +23,6 @@ Public Class dlgStack
     Private bReset As Boolean = True
 
     Private Sub dlgStack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -34,6 +33,7 @@ Public Class dlgStack
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

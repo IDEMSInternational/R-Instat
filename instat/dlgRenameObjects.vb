@@ -35,11 +35,11 @@ Public Class dlgRenameObjects
         End If
         SetRCodeforControls(bReset)
         bReset = False
-        autoTranslate(Me)
         TestOKEnabled()
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub ReopenDialog()

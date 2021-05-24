@@ -70,6 +70,7 @@ Partial Class dlgCombine
         'ucrInputSeparator
         '
         Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparator.GetSetSelectedIndex = -1
         Me.ucrInputSeparator.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
         Me.ucrInputSeparator.Name = "ucrInputSeparator"

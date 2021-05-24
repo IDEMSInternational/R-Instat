@@ -168,9 +168,6 @@
   <data name="&gt;&gt;SplitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrChkAddFlagFieldData.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="ucrChkAddFlagFieldData.Location" type="System.Drawing.Point, System.Drawing">
     <value>185, 10</value>
   </data>

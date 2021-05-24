@@ -22,7 +22,6 @@ Public Class dlgColumnStructure
     Private clsColourStructure As New RFunction
     Private bFirstLoad As Boolean = True
     Private Sub ucrSelectorColumnStructures_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -34,6 +33,7 @@ Public Class dlgColumnStructure
         bReset = False
         SetColumnStructureInReceiver()
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

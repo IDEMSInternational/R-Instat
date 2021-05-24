@@ -32,13 +32,13 @@ Partial Class sdgCommentForDataEntry
         Me.lblColumn = New System.Windows.Forms.Label()
         Me.lblRow = New System.Windows.Forms.Label()
         Me.ucrInputRow = New instat.ucrInputTextBox()
-        Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlCellRowColumnDataFrame = New instat.UcrPanel()
         Me.ucrInputComment = New instat.ucrInputTextBox()
         Me.ucrReceiverColumn = New instat.ucrReceiverSingle()
         Me.ucrSdgBaseButtons = New instat.ucrButtonsSubdialogue()
         Me.cmdAddComment = New System.Windows.Forms.Button()
         Me.ttcmdAddComment = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrSelectorAddComment = New instat.ucrSelectorByDataFrameAddRemove()
         Me.SuspendLayout()
         '
         'rdoColumn
@@ -104,14 +104,6 @@ Partial Class sdgCommentForDataEntry
         resources.ApplyResources(Me.ucrInputRow, "ucrInputRow")
         Me.ucrInputRow.Name = "ucrInputRow"
         '
-        'ucrSelectorAddComment
-        '
-        Me.ucrSelectorAddComment.bDropUnusedFilterLevels = False
-        Me.ucrSelectorAddComment.bShowHiddenColumns = False
-        Me.ucrSelectorAddComment.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorAddComment, "ucrSelectorAddComment")
-        Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
-        '
         'ucrPnlCellRowColumnDataFrame
         '
         resources.ApplyResources(Me.ucrPnlCellRowColumnDataFrame, "ucrPnlCellRowColumnDataFrame")
@@ -151,15 +143,23 @@ Partial Class sdgCommentForDataEntry
         Me.ttcmdAddComment.InitialDelay = 500
         Me.ttcmdAddComment.ReshowDelay = 100
         '
+        'ucrSelectorAddComment
+        '
+        Me.ucrSelectorAddComment.bDropUnusedFilterLevels = False
+        Me.ucrSelectorAddComment.bShowHiddenColumns = False
+        Me.ucrSelectorAddComment.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorAddComment, "ucrSelectorAddComment")
+        Me.ucrSelectorAddComment.Name = "ucrSelectorAddComment"
+        '
         'sdgCommentForDataEntry
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSelectorAddComment)
         Me.Controls.Add(Me.cmdAddComment)
         Me.Controls.Add(Me.rdoColumn)
         Me.Controls.Add(Me.rdoDataFrame)
         Me.Controls.Add(Me.ucrInputRow)
-        Me.Controls.Add(Me.ucrSelectorAddComment)
         Me.Controls.Add(Me.rdoCell)
         Me.Controls.Add(Me.rdoRow)
         Me.Controls.Add(Me.ucrPnlCellRowColumnDataFrame)
@@ -182,7 +182,6 @@ Partial Class sdgCommentForDataEntry
     Friend WithEvents rdoColumn As RadioButton
     Friend WithEvents rdoDataFrame As RadioButton
     Friend WithEvents ucrInputRow As ucrInputTextBox
-    Friend WithEvents ucrSelectorAddComment As ucrSelectorByDataFrameAddRemove
     Friend WithEvents rdoCell As RadioButton
     Friend WithEvents rdoRow As RadioButton
     Friend WithEvents ucrPnlCellRowColumnDataFrame As UcrPanel
@@ -193,4 +192,5 @@ Partial Class sdgCommentForDataEntry
     Friend WithEvents lblRow As Label
     Friend WithEvents cmdAddComment As Button
     Friend WithEvents ttcmdAddComment As ToolTip
+    Friend WithEvents ucrSelectorAddComment As ucrSelectorByDataFrameAddRemove
 End Class

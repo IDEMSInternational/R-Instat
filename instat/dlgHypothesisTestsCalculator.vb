@@ -25,7 +25,6 @@ Public Class dlgHypothesisTestsCalculator
     Private strPackageName As String
     Private clsSummary As New RFunction
     Private Sub dlgHypothesisTestsCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -34,6 +33,7 @@ Public Class dlgHypothesisTestsCalculator
         TestOKEnabled()
         SetRcodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

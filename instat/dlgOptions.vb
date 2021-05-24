@@ -36,13 +36,13 @@ Public Class dlgOptions
     Dim clrOutput, clrCommand, clrComment, clrEditor As Color
 
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
         End If
         LoadInstatOptions()
         ApplyEnabled(False)
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -240,6 +240,7 @@ Public Class dlgOptions
         cmdHelp.Enabled = False
         SetInstatOptions()
         autoTranslate(Me)
+        SetView() 'needed to ensure that the tree view in the left panel correctly displays translated text
 
         If frmMain.Visible AndAlso strCurrLanguageCulture <> strPrevLanguageCulture Then
             frmMain.TranslateFrmMainMenu()
