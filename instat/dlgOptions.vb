@@ -119,6 +119,8 @@ Public Class dlgOptions
                 ucrInputLanguage.SetText("English")
             Case "fr-FR"
                 ucrInputLanguage.SetText("French")
+            Case "pt-PT"
+                ucrInputLanguage.SetText("Portugese")
         End Select
 
         strPrevLanguageCulture = frmMain.clsInstatOptions.strLanguageCultureCode
@@ -248,6 +250,8 @@ Public Class dlgOptions
                 strCurrLanguageCulture = "en-GB"
             Case "French"
                 strCurrLanguageCulture = "fr-FR"
+            Case "Portugese"
+                strCurrLanguageCulture = "pt-PT"
         End Select
         ApplyEnabled(True)
     End Sub
@@ -343,10 +347,6 @@ Public Class dlgOptions
             LoadInstatOptions()
             ApplyEnabled(True)
         End If
-    End Sub
-
-    Private Sub AllControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudWaitSeconds.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrNudMaxCols.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged
-
     End Sub
 
     Private Sub ucrPnlGraphDisplay_ControlValueChanged() Handles ucrPnlGraphDisplay.ControlValueChanged
