@@ -251,7 +251,7 @@ Public Class dlgOptions
                 strCurrLanguageCulture = "en-GB"
             Case "French"
                 strCurrLanguageCulture = "fr-FR"
-            Case "Portugese"
+            Case "Portuguese"
                 strCurrLanguageCulture = "pt-PT"
         End Select
         ApplyEnabled(True)
