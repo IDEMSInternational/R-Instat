@@ -483,7 +483,7 @@ Public Class sdgClimaticDataEntry
 
         'if only NAs allowed then check if cell is allowed to have new value (except summary cells)
         If grdCell IsNot Nothing AndAlso bEditNewDataOnly AndAlso grdCell.Tag <> "new" AndAlso grdCell.Tag <> "summary" Then
-            MsgBox("Previously existing data cannot be changed with the Add option selected.", MsgBoxStyle.Information, "Not new value.")
+            MsgBox("Previously existing data cannot be changed with the Add/Edit new data only option selected in the options subdialog.", MsgBoxStyle.Information, "Not new value.")
             Return False
         End If
 
