@@ -522,11 +522,11 @@ Public Class sdgClimaticDataEntry
                              strDateName:=strDateName, lstElementsNames:=lstElementsNames, lstViewVariablesNames:=lstViewVariablesNames,
                              strStationColumnName:=strStationColumnName,
                              bEditNewDataOnly:=bEditNewDataOnly,
-                             strDefaultValue:=sdgClimaticDataEntryOptions.DefaultValue,
-                               bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
-                               bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
-                               bTransform:=sdgClimaticDataEntryOptions.Transform,
-                               dTranformValue:=sdgClimaticDataEntryOptions.TransformValue,
+                             strDefaultValue:=sdgClimaticDataEntryOptions.GetSetDefaultValue,
+                               bNoDecimal:=sdgClimaticDataEntryOptions.GetSetNoDecimals,
+                               bAllowTrace:=sdgClimaticDataEntryOptions.GetSetAllowTrace,
+                               bTransform:=sdgClimaticDataEntryOptions.GetSetTransform,
+                               dTranformValue:=sdgClimaticDataEntryOptions.GetSetTransformValue,
                                strEntryType:=strEntryType, ucrNewBaseSelector:=ucrBaseSelector, bReset:=True)
         End If
     End Sub

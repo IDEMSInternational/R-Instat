@@ -146,14 +146,14 @@ Public Class dlgClimaticDataEntry
         bSubdialogFirstLoad = True
         bResetSubdialogs = True
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
-        sdgClimaticDataEntryOptions.DefaultValue = "NA"
-        sdgClimaticDataEntryOptions.NoDecimals = False
-        sdgClimaticDataEntryOptions.AllowTrace = False
-        sdgClimaticDataEntryOptions.Transform = False
-        sdgClimaticDataEntryOptions.TransformValue = 0.1
-        sdgClimaticDataEntryOptions.AllowTrace = False
-        sdgClimaticDataEntryOptions.IncludeFirstNextOfMonth = False
-        sdgClimaticDataEntryOptions.EditNAOnly = False
+        sdgClimaticDataEntryOptions.GetSetDefaultValue = "NA"
+        sdgClimaticDataEntryOptions.GetSetNoDecimals = False
+        sdgClimaticDataEntryOptions.GetSetAllowTrace = False
+        sdgClimaticDataEntryOptions.GetSetTransform = False
+        sdgClimaticDataEntryOptions.GetSetTransformValue = 0.1
+        sdgClimaticDataEntryOptions.GetSetAllowTrace = False
+        sdgClimaticDataEntryOptions.GetSetIncludeFirstNextOfMonth = False
+        sdgClimaticDataEntryOptions.GetSetEditNAOnly = False
 
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsSaveDataEntryFunction)
@@ -246,12 +246,12 @@ Public Class dlgClimaticDataEntry
                                          clsEditDataFrame:=clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction, clsNewCommentsList:=clsCommentsListFunction, clsNewList:=clsListFunction,
                       strDateName:=strDateColumnName, lstElementsNames:=lstElementsColumnNames, lstViewVariablesNames:=lstVariablesColumnNames,
                                            strStationColumnName:=strStationColumnName,
-                                           bEditNewDataOnly:=sdgClimaticDataEntryOptions.EditNAOnly,
-                                           strDefaultValue:=sdgClimaticDataEntryOptions.DefaultValue,
-                                           bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
-                                           bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
-                                           bTransform:=sdgClimaticDataEntryOptions.Transform,
-                                           dTranformValue:=sdgClimaticDataEntryOptions.TransformValue,
+                                           bEditNewDataOnly:=sdgClimaticDataEntryOptions.GetSetEditNAOnly,
+                                           strDefaultValue:=sdgClimaticDataEntryOptions.GetSetDefaultValue,
+                                           bNoDecimal:=sdgClimaticDataEntryOptions.GetSetNoDecimals,
+                                           bAllowTrace:=sdgClimaticDataEntryOptions.GetSetAllowTrace,
+                                           bTransform:=sdgClimaticDataEntryOptions.GetSetTransform,
+                                           dTranformValue:=sdgClimaticDataEntryOptions.GetSetTransformValue,
                                            strEntryType:=ucrInputType.GetText, ucrNewBaseSelector:=ucrSelectorClimaticDataEntry, bReset:=bResetSubdialogs)
             End If
             sdgClimaticDataEntry.ShowDialog()
@@ -293,7 +293,7 @@ Public Class dlgClimaticDataEntry
                 ucrEndDate.DateValue = dtStart
                 ucrEndDate.Enabled = False
             Case strMonth
-                If sdgClimaticDataEntryOptions.IncludeFirstNextOfMonth Then
+                If sdgClimaticDataEntryOptions.GetSetIncludeFirstNextOfMonth Then
                     ucrStartDate.DateValue = New Date(dtStart.Year, dtStart.Month, 2)
                 Else
                     ucrStartDate.DateValue = New Date(dtStart.Year, dtStart.Month, 1)

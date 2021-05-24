@@ -58,7 +58,7 @@ Public Class sdgClimaticDataEntryOptions
         ucrChkIncludeFirstNextMonth.Enabled = (strEntryType = "Month")
     End Sub
 
-    Public Property NoDecimals As Boolean
+    Public Property GetSetNoDecimals As Boolean
         Get
             Return ucrChkNoDecimal.Checked
         End Get
@@ -67,7 +67,7 @@ Public Class sdgClimaticDataEntryOptions
         End Set
     End Property
 
-    Public Property DefaultValue As String
+    Public Property GetSetDefaultValue As String
         Get
             If dctDefaultValues.ContainsKey(ucrInputDefaultValue.GetText) Then
                 Return dctDefaultValues.Item(ucrInputDefaultValue.GetText)
@@ -80,7 +80,7 @@ Public Class sdgClimaticDataEntryOptions
         End Set
     End Property
 
-    Public Property AllowTrace As Boolean
+    Public Property GetSetAllowTrace As Boolean
         Get
             Return ucrChkAllowTrace.Checked
         End Get
@@ -89,7 +89,7 @@ Public Class sdgClimaticDataEntryOptions
         End Set
     End Property
 
-    Public Property Transform As Boolean
+    Public Property GetSetTransform As Boolean
         Get
             Return ucrChkTransform.Checked
         End Get
@@ -98,7 +98,7 @@ Public Class sdgClimaticDataEntryOptions
         End Set
     End Property
 
-    Public Property TransformValue As Double
+    Public Property GetSetTransformValue As Double
         Get
             Dim dTemp As Double
             If Not Double.TryParse(ucrInputTransform.GetValue, dTemp) Then
@@ -111,7 +111,7 @@ Public Class sdgClimaticDataEntryOptions
         End Set
     End Property
 
-    Public Property EditNAOnly As Boolean
+    Public Property GetSetEditNAOnly As Boolean
         Get
             Return ucrChkEditNAOnly.Checked
         End Get
@@ -120,7 +120,7 @@ Public Class sdgClimaticDataEntryOptions
         End Set
     End Property
 
-    Public Property IncludeFirstNextOfMonth As Boolean
+    Public Property GetSetIncludeFirstNextOfMonth As Boolean
         Get
             Return ucrChkIncludeFirstNextMonth.Enabled AndAlso ucrChkIncludeFirstNextMonth.Checked
         End Get
