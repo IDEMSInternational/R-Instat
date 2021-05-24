@@ -120,7 +120,7 @@ Public Class dlgOptions
             Case "fr-FR"
                 ucrInputLanguage.SetText("French")
             Case "pt-PT"
-                ucrInputLanguage.SetText("Portugese")
+                ucrInputLanguage.SetText("Portuguese")
         End Select
 
         strPrevLanguageCulture = frmMain.clsInstatOptions.strLanguageCultureCode
