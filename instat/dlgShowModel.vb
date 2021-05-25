@@ -194,9 +194,8 @@ Public Class dlgShowModel
     End Sub
 
     Private Sub HideShowSaveControl()
-        If ucrChkEnterValues.Checked AndAlso rdoValues.Checked Then
-            ucrSaveNewColumn.Hide()
-        ElseIf rdoGraph.Checked Then
+        If (ucrChkEnterValues.Checked AndAlso rdoValues.Checked) OrElse
+                rdoGraph.Checked Then
             ucrSaveNewColumn.Hide()
         Else
             ucrSaveNewColumn.Show()
