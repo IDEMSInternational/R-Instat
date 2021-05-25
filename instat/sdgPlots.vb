@@ -688,11 +688,12 @@ Public Class sdgPlots
         ucrNudCrossbarFatten.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrNudPointrangeFatten.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputLineend.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputLabel.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrNudShape.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputAnnotationGeoms.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputFill.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputColour.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputLabel.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
+
 
         'axis controls
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)

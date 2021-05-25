@@ -941,7 +941,6 @@ Partial Class sdgPlots
         Me.grpAnnotation.Controls.Add(Me.ucrNudAlpha)
         Me.grpAnnotation.Controls.Add(Me.lblAlpha)
         Me.grpAnnotation.Controls.Add(Me.lblLineend)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputLineend)
         Me.grpAnnotation.Controls.Add(Me.lblAngle)
         Me.grpAnnotation.Controls.Add(Me.ucrNudAngle)
         Me.grpAnnotation.Controls.Add(Me.lblShape)
@@ -955,7 +954,6 @@ Partial Class sdgPlots
         Me.grpAnnotation.Controls.Add(Me.ucrInputY)
         Me.grpAnnotation.Controls.Add(Me.lblY)
         Me.grpAnnotation.Controls.Add(Me.lblX)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputFill)
         Me.grpAnnotation.Controls.Add(Me.lblFill)
         Me.grpAnnotation.Controls.Add(Me.lblXmax)
         Me.grpAnnotation.Controls.Add(Me.ucrInputXmax)
@@ -977,8 +975,10 @@ Partial Class sdgPlots
         Me.grpAnnotation.Controls.Add(Me.lblCrossbarFatten)
         Me.grpAnnotation.Controls.Add(Me.ucrNudCurvature)
         Me.grpAnnotation.Controls.Add(Me.ucrNudShape)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputLabel)
         Me.grpAnnotation.Controls.Add(Me.lblLabel)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputLabel)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputLineend)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputFill)
         resources.ApplyResources(Me.grpAnnotation, "grpAnnotation")
         Me.grpAnnotation.Name = "grpAnnotation"
         Me.grpAnnotation.TabStop = False
