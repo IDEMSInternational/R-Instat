@@ -63,7 +63,6 @@ Public Class dlgTwoVariableFitModel
     Public StrMedianValue As String = ""
 
     Private Sub dlgTwoVariableFitModel_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -74,6 +73,7 @@ Public Class dlgTwoVariableFitModel
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

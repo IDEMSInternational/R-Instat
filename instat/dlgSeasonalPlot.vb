@@ -83,7 +83,6 @@ Public Class dlgSeasonalPlot
     Private clsYlabFunction As RFunction
 
     Private Sub dlgSeasonalPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitiliseDialog()
             bFirstLoad = False
@@ -95,6 +94,7 @@ Public Class dlgSeasonalPlot
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitiliseDialog()

@@ -486,8 +486,11 @@
   <data name="ucrSaveResults.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 271</value>
   </data>
+  <data name="ucrSaveResults.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrSaveResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>269, 24</value>
+    <value>269, 22</value>
   </data>
   <data name="ucrSaveResults.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -557,9 +560,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

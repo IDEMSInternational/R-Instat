@@ -21,7 +21,6 @@ Public Class dlgDeleteRowsOrColums
     Private clsOperatorRowNames As New ROperator
     Private clsDeleteRows, clsDeleteColumns As RFunction
     Private Sub dlgDeleteRows_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -33,6 +32,7 @@ Public Class dlgDeleteRowsOrColums
         bReset = False
         ReopenDialog()
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

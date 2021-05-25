@@ -47,16 +47,16 @@ Partial Class dlgDuplicateColumns
         Me.rdoConvertToNumeric = New System.Windows.Forms.RadioButton()
         Me.rdoConvertToOrderedFactor = New System.Windows.Forms.RadioButton()
         Me.rdoConvertToFactor = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlConvertTo = New instat.UcrPanel()
         Me.grpFactorToNumericOptions = New System.Windows.Forms.GroupBox()
         Me.rdoConvertDefault = New System.Windows.Forms.RadioButton()
         Me.rdoConvertOrdinals = New System.Windows.Forms.RadioButton()
         Me.rdoConvertLevels = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlConvertFactorToNumericOptions = New instat.UcrPanel()
         Me.ucrChkChangeType = New instat.ucrCheck()
         Me.ucrChkConvertCreateLabels = New instat.ucrCheck()
         Me.ucrChkConvertKeepAttributes = New instat.ucrCheck()
         Me.ucrNudConvertDisplayDecimals = New instat.ucrNud()
-        Me.ucrPnlConvertFactorToNumericOptions = New instat.UcrPanel()
-        Me.ucrPnlConvertTo = New instat.UcrPanel()
         Me.ucrChkConvertSpecifyDecimalsToDisplay = New instat.ucrCheck()
         Me.ucrReceiverDuplicateColumns = New instat.ucrReceiverSingle()
         Me.ucrSelectorForDuplicateColumn = New instat.ucrSelectorByDataFrameAddRemove()
@@ -126,6 +126,11 @@ Partial Class dlgDuplicateColumns
         Me.rdoConvertToFactor.TabStop = True
         Me.rdoConvertToFactor.UseVisualStyleBackColor = True
         '
+        'ucrPnlConvertTo
+        '
+        resources.ApplyResources(Me.ucrPnlConvertTo, "ucrPnlConvertTo")
+        Me.ucrPnlConvertTo.Name = "ucrPnlConvertTo"
+        '
         'grpFactorToNumericOptions
         '
         Me.grpFactorToNumericOptions.Controls.Add(Me.rdoConvertDefault)
@@ -157,6 +162,11 @@ Partial Class dlgDuplicateColumns
         Me.rdoConvertLevels.TabStop = True
         Me.rdoConvertLevels.UseVisualStyleBackColor = True
         '
+        'ucrPnlConvertFactorToNumericOptions
+        '
+        resources.ApplyResources(Me.ucrPnlConvertFactorToNumericOptions, "ucrPnlConvertFactorToNumericOptions")
+        Me.ucrPnlConvertFactorToNumericOptions.Name = "ucrPnlConvertFactorToNumericOptions"
+        '
         'ucrChkChangeType
         '
         Me.ucrChkChangeType.Checked = False
@@ -184,16 +194,6 @@ Partial Class dlgDuplicateColumns
         Me.ucrNudConvertDisplayDecimals.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudConvertDisplayDecimals.Name = "ucrNudConvertDisplayDecimals"
         Me.ucrNudConvertDisplayDecimals.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrPnlConvertFactorToNumericOptions
-        '
-        resources.ApplyResources(Me.ucrPnlConvertFactorToNumericOptions, "ucrPnlConvertFactorToNumericOptions")
-        Me.ucrPnlConvertFactorToNumericOptions.Name = "ucrPnlConvertFactorToNumericOptions"
-        '
-        'ucrPnlConvertTo
-        '
-        resources.ApplyResources(Me.ucrPnlConvertTo, "ucrPnlConvertTo")
-        Me.ucrPnlConvertTo.Name = "ucrPnlConvertTo"
         '
         'ucrChkConvertSpecifyDecimalsToDisplay
         '

@@ -157,12 +157,12 @@ TranslateWinForm
      suitable for importing into a database. </returns>
 --------------------------------------------------------------------------------------------
 </member>
-<member name="M:TranslateWinForm.clsTranslateWinForm.GetDctComponentsFromControl(System.Windows.Forms.Control,System.Collections.Generic.Dictionary{System.String,System.ComponentModel.Component}@)">
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetDctComponentsFromControl(System.Windows.Forms.Control,System.Collections.Generic.Dictionary{System.String,System.ComponentModel.Component}@,System.String)">
 --------------------------------------------------------------------------------------------
  <summary>
     Populates dictionary <paramref name="dctComponents"/> with the control 
     <paramref name="clsControl"/> and its children.    
-    The dictionary can then be used to conveniently translate the menu item text (see other
+    The dictionary can then be used to conveniently translate the control text (see other
     functions and subs in this class).
  </summary>
 
@@ -204,6 +204,25 @@ TranslateWinForm
  <returns>
      If an exception is thrown, then returns the exception text; else returns 'Nothing'.
  </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.GetComponent(System.Collections.Generic.Dictionary{System.String,System.ComponentModel.Component},System.String)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+    Returns the component associated with <paramref name="strComponentName"/> in 
+    <paramref name="dctComponents"/>.
+    If an exact match is not found, then returns a component whose name is a superset of 
+    <paramref name="strComponentName"/>. 
+    If no match is found then returns Nothing.
+ </summary>
+
+ <param name="dctComponents">    The dictionary of translatable components. </param>
+ <param name="strComponentName"> Name of the component to search for. </param>
+
+ <returns>   The component associated with <paramref name="strComponentName"/> in
+    <paramref name="dctComponents"/>. If an exact match is not found, then returns a 
+    component whose name is a superset of <paramref name="strComponentName"/>.
+    If no match is found then returns Nothing. </returns>
 --------------------------------------------------------------------------------------------
 </member>
 <member name="M:TranslateWinForm.clsTranslateWinForm.GetDynamicTranslation(System.String,System.String,System.Data.SQLite.SQLiteConnection)">

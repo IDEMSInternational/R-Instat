@@ -20,7 +20,6 @@ Public Class dlgSeasonalSummary
 
 
     Private Sub dlgSeasonalSummary_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -29,6 +28,7 @@ Public Class dlgSeasonalSummary
         End If
         TestOKEnabled()
 
+        autoTranslate(Me)
     End Sub
 
     Private Sub TestOKEnabled()
