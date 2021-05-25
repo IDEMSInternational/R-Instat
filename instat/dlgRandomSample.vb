@@ -31,7 +31,7 @@ Public Class dlgRandomSample
         If bReset Then
             SetDefaults()
         End If
-        SetRCodeforControls(bReset)
+        SetRCodeForControls(bReset)
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
@@ -55,9 +55,9 @@ Public Class dlgRandomSample
         ucrNudSeed.SetParameter(New RParameter("seed", 0))
         ucrNudSeed.SetMinMax(Integer.MinValue, Integer.MaxValue)
 
-        ucrSaveRandomSamples.SetSaveTypeAsColumn()
-        ucrSaveRandomSamples.SetDataFrameSelector(ucrSelectorRandomSamples)
-        ucrSaveRandomSamples.SetIsComboBox()
+        ucrSaveRandomSample.SetSaveTypeAsColumn()
+        ucrSaveRandomSample.SetDataFrameSelector(ucrSelectorRandomSamples)
+        ucrSaveRandomSample.SetIsComboBox()
     End Sub
 
     Private Sub SetDefaults()
@@ -66,7 +66,7 @@ Public Class dlgRandomSample
         clsDistributionFunction = New RFunction
         ucrBase.clsRsyntax.ClearCodes()
         ucrSelectorRandomSamples.Reset()
-        ucrSaveRandomSamples.Reset()
+        ucrSaveRandomSample.Reset()
         SetNewColumName()
 
         clsSetSeed.SetRCommand("set.seed")
@@ -82,22 +82,22 @@ Public Class dlgRandomSample
         clsMultipleSamplesFunction.AddParameter("expr", clsRFunctionParameter:=clsDistributionFunction)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsMultipleSamplesFunction)
-        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSamples.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSamples.GetText, bAssignToIsPrefix:=True)
+        ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrSaveRandomSample.GetText, strTempDataframe:=ucrSelectorRandomSamples.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveRandomSample.GetText, bAssignToIsPrefix:=True)
         SetDataFrameAndDistributionParameters()
     End Sub
 
-    Private Sub SetRCodeforControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrNudSeed.SetRCode(clsSetSeed, bReset)
         ucrChkSetSeed.SetRCode(clsSetSeed, bReset)
         ucrChkSetSeed.SetRSyntax(ucrBase.clsRsyntax, bReset)
-        ucrSaveRandomSamples.SetRCode(clsMultipleSamplesFunction, bReset)
+        ucrSaveRandomSample.SetRCode(clsMultipleSamplesFunction, bReset)
         ucrNudNumberOfSamples.SetRCode(clsMultipleSamplesFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
         If ((ucrDistWithParameters.bParametersFilled AndAlso ucrNudNumberOfSamples.GetText <> "") AndAlso
            ((Not ucrChkSetSeed.Checked) OrElse (ucrChkSetSeed.Checked AndAlso ucrNudSeed.GetText <> "")) _
-            AndAlso ucrSaveRandomSamples.IsComplete) Then
+            AndAlso ucrSaveRandomSample.IsComplete) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -106,23 +106,23 @@ Public Class dlgRandomSample
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
-        SetRCodeforControls(True)
+        SetRCodeForControls(True)
         TestOKEnabled()
     End Sub
 
     Private Sub SetNewColumName()
         If ucrNudNumberOfSamples.Value = 1 Then
-            ucrSaveRandomSamples.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
-            ucrSaveRandomSamples.SetLabelText("New Column Name:")
-            If Not ucrSaveRandomSamples.bUserTyped Then
-                ucrSaveRandomSamples.SetPrefix("random_sample")
+            ucrSaveRandomSample.SetAssignToBooleans(bTempAssignToIsPrefix:=False)
+            ucrSaveRandomSample.SetLabelText("New Column Name:")
+            If Not ucrSaveRandomSample.bUserTyped Then
+                ucrSaveRandomSample.SetPrefix("random_sample")
             End If
         Else
-            ucrSaveRandomSamples.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
-            ucrSaveRandomSamples.SetLabelText("Prefix for New Columns:")
-            If Not ucrSaveRandomSamples.bUserTyped Then
-                ucrSaveRandomSamples.SetPrefix("")
-                ucrSaveRandomSamples.SetName("random_sample")
+            ucrSaveRandomSample.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
+            ucrSaveRandomSample.SetLabelText("Prefix for New Columns:")
+            If Not ucrSaveRandomSample.bUserTyped Then
+                ucrSaveRandomSample.SetPrefix("")
+                ucrSaveRandomSample.SetName("random_sample")
             End If
         End If
     End Sub
@@ -145,7 +145,7 @@ Public Class dlgRandomSample
         SetNewColumName()
     End Sub
 
-    Private Sub ucrSaveRandomSamples_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSamples.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged
+    Private Sub ucrSaveRandomSample_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveRandomSample.ControlContentsChanged, ucrSelectorRandomSamples.ControlContentsChanged, ucrChkSetSeed.ControlContentsChanged, ucrNudSeed.ControlContentsChanged, ucrSampleSize.ControlContentsChanged
         TestOKEnabled()
     End Sub
 

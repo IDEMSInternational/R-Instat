@@ -22,7 +22,7 @@ Namespace My.Resources
     '''<summary>
     '''  A strongly-typed resource class, for looking up localized strings, etc.
     '''</summary>
-    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0"),  _
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0"),  _
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
@@ -1674,6 +1674,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Generalized Pareto.
+        '''</summary>
+        Friend ReadOnly Property Generalized_Pareto() As String
+            Get
+                Return ResourceManager.GetString("Generalized_Pareto", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Generate new label column from data.
         '''</summary>
         Friend ReadOnly Property Generate_new_label_column_from_data() As String
@@ -1742,6 +1751,15 @@ Namespace My.Resources
         Friend ReadOnly Property Group() As String
             Get
                 Return ResourceManager.GetString("Group", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Gumbel.
+        '''</summary>
+        Friend ReadOnly Property Gumbel() As String
+            Get
+                Return ResourceManager.GetString("Gumbel", resourceCulture)
             End Get
         End Property
         
