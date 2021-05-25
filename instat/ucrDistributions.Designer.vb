@@ -52,6 +52,7 @@ Partial Class ucrDistributions
         'ucrInputDistributions
         '
         Me.ucrInputDistributions.AddQuotesIfUnrecognised = True
+        Me.ucrInputDistributions.GetSetSelectedIndex = -1
         Me.ucrInputDistributions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputDistributions, "ucrInputDistributions")
         Me.ucrInputDistributions.Name = "ucrInputDistributions"
