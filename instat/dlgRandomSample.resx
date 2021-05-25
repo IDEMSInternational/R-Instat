@@ -318,28 +318,28 @@
   <data name="&gt;&gt;ucrNudNumberOfSamples.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ucrSaveRandomSamples.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrSaveRandomSample.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 220</value>
   </data>
-  <data name="ucrSaveRandomSamples.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrSaveRandomSample.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
-  <data name="ucrSaveRandomSamples.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrSaveRandomSample.Size" type="System.Drawing.Size, System.Drawing">
     <value>334, 22</value>
   </data>
-  <data name="ucrSaveRandomSamples.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrSaveRandomSample.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="&gt;&gt;ucrSaveRandomSamples.Name" xml:space="preserve">
-    <value>ucrSaveRandomSamples</value>
+  <data name="&gt;&gt;ucrSaveRandomSample.Name" xml:space="preserve">
+    <value>ucrSaveRandomSample</value>
   </data>
-  <data name="&gt;&gt;ucrSaveRandomSamples.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrSaveRandomSample.Type" xml:space="preserve">
     <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrSaveRandomSamples.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrSaveRandomSample.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrSaveRandomSamples.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrSaveRandomSample.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
