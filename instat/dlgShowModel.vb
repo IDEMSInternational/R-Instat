@@ -25,7 +25,9 @@ Public Class dlgShowModel
     Private clsLabsFunction As New RFunction
     Private clsThemeFunction As New RFunction
     Private clsPipeOperator As New ROperator
-    ' Private clsConcatenateFunction As New RFunction 'This RFunction is needed for automatic passing of p/q parameter for example p = c(0.5).
+    'This RFunction is needed for automatic passing of p/q parameter for example p = c(0.5). The instance of
+    'clsConcatenateFunction are commented out since the function is not used at the moment
+    ' Private clsConcatenateFunction As New RFunction
 
     Private Sub dlgTablePlus_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -224,14 +226,14 @@ Public Class dlgShowModel
         If rdoProbabilities.Checked Then
             clsProbabilitiesFunction.ClearParameters()
             clsProbabilitiesFunction.AddParameter("dist", Chr(34) & ucrDistributionAndParameters.clsCurrDistribution.strRName & Chr(34))
-            For Each clstempparam In ucrDistributionAndParameters.clsCurrRFunction.clsParameters
-                clsProbabilitiesFunction.AddParameter(clstempparam.Clone())
+            For Each clstempParam In ucrDistributionAndParameters.clsCurrRFunction.clsParameters
+                clsProbabilitiesFunction.AddParameter(clstempParam.Clone())
             Next
         Else
             clsQuantilesFunction.ClearParameters()
             clsQuantilesFunction.AddParameter("dist", Chr(34) & ucrDistributionAndParameters.clsCurrDistribution.strRName & Chr(34))
-            For Each clstempparam In ucrDistributionAndParameters.clsCurrRFunction.clsParameters
-                clsQuantilesFunction.AddParameter(clstempparam.Clone())
+            For Each clstempParam In ucrDistributionAndParameters.clsCurrRFunction.clsParameters
+                clsQuantilesFunction.AddParameter(clstempParam.Clone())
             Next
         End If
         DisplayGraphOrValues()

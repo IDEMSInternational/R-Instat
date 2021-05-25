@@ -41,6 +41,7 @@ Public Class Distribution
         strNameTag = strTemp
     End Sub
 
+    'TODO: Use properties (SetGet) instead.
     Public Sub SetRName(strTemp As String)
         strRName = strTemp
     End Sub

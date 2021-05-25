@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSampleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 154</value>
+    <value>276, 155</value>
   </data>
   <data name="lblSampleSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 13</value>
@@ -319,7 +319,7 @@
     <value>1</value>
   </data>
   <data name="ucrSaveRandomSamples.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 218</value>
+    <value>10, 220</value>
   </data>
   <data name="ucrSaveRandomSamples.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
