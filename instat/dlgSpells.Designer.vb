@@ -158,6 +158,7 @@ Partial Class dlgSpells
         'ucrInputCondition
         '
         Me.ucrInputCondition.AddQuotesIfUnrecognised = True
+        Me.ucrInputCondition.GetSetSelectedIndex = -1
         Me.ucrInputCondition.IsReadOnly = False
         Me.ucrInputCondition.Location = New System.Drawing.Point(13, 55)
         Me.ucrInputCondition.Name = "ucrInputCondition"
@@ -197,7 +198,7 @@ Partial Class dlgSpells
         Me.ucrInputNewColumnName.AddQuotesIfUnrecognised = True
         Me.ucrInputNewColumnName.IsMultiline = False
         Me.ucrInputNewColumnName.IsReadOnly = False
-        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(111, 349)
+        Me.ucrInputNewColumnName.Location = New System.Drawing.Point(171, 349)
         Me.ucrInputNewColumnName.Name = "ucrInputNewColumnName"
         Me.ucrInputNewColumnName.Size = New System.Drawing.Size(187, 21)
         Me.ucrInputNewColumnName.TabIndex = 15
@@ -207,7 +208,7 @@ Partial Class dlgSpells
         Me.ucrChkConditional.Checked = False
         Me.ucrChkConditional.Location = New System.Drawing.Point(10, 325)
         Me.ucrChkConditional.Name = "ucrChkConditional"
-        Me.ucrChkConditional.Size = New System.Drawing.Size(288, 20)
+        Me.ucrChkConditional.Size = New System.Drawing.Size(366, 20)
         Me.ucrChkConditional.TabIndex = 13
         '
         'ucrReceiverStation

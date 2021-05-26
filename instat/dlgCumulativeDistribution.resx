@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>243, 220</value>
+    <value>275, 220</value>
   </data>
   <data name="lblFactors.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 13</value>
@@ -316,7 +316,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 294</value>
+    <value>278, 294</value>
   </data>
   <data name="ucrNudBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
@@ -337,7 +337,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputComboScales.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 264</value>
+    <value>278, 264</value>
   </data>
   <data name="ucrInputComboScales.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 26</value>
@@ -457,7 +457,7 @@
     <value>415, 410</value>
   </data>
   <data name="ucrFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>246, 235</value>
+    <value>278, 235</value>
   </data>
   <data name="ucrFactorReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
