@@ -140,7 +140,6 @@ Partial Class sdgPlots
         Me.ucrNudAlpha = New instat.ucrNud()
         Me.lblAlpha = New System.Windows.Forms.Label()
         Me.lblLineend = New System.Windows.Forms.Label()
-        Me.ucrInputLineend = New instat.ucrInputComboBox()
         Me.lblAngle = New System.Windows.Forms.Label()
         Me.ucrNudAngle = New instat.ucrNud()
         Me.lblShape = New System.Windows.Forms.Label()
@@ -154,7 +153,6 @@ Partial Class sdgPlots
         Me.ucrInputY = New instat.ucrInputTextBox()
         Me.lblY = New System.Windows.Forms.Label()
         Me.lblX = New System.Windows.Forms.Label()
-        Me.ucrInputFill = New instat.ucrInputComboBox()
         Me.lblFill = New System.Windows.Forms.Label()
         Me.lblXmax = New System.Windows.Forms.Label()
         Me.ucrInputXmax = New instat.ucrInputTextBox()
@@ -176,9 +174,13 @@ Partial Class sdgPlots
         Me.lblCrossbarFatten = New System.Windows.Forms.Label()
         Me.ucrNudCurvature = New instat.ucrNud()
         Me.ucrNudShape = New instat.ucrNud()
-        Me.ucrInputLabel = New instat.ucrInputTextBox()
         Me.lblLabel = New System.Windows.Forms.Label()
+        Me.ucrInputLabel = New instat.ucrInputTextBox()
+        Me.ucrInputLineend = New instat.ucrInputComboBox()
+        Me.ucrInputFill = New instat.ucrInputComboBox()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrSelectorAnnotation = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkUseDataframe = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -937,6 +939,8 @@ Partial Class sdgPlots
         '
         'grpAnnotation
         '
+        Me.grpAnnotation.Controls.Add(Me.ucrChkUseDataframe)
+        Me.grpAnnotation.Controls.Add(Me.ucrSelectorAnnotation)
         Me.grpAnnotation.Controls.Add(Me.lblCurvature)
         Me.grpAnnotation.Controls.Add(Me.ucrNudAlpha)
         Me.grpAnnotation.Controls.Add(Me.lblAlpha)
@@ -1007,14 +1011,6 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.lblLineend, "lblLineend")
         Me.lblLineend.Name = "lblLineend"
-        '
-        'ucrInputLineend
-        '
-        Me.ucrInputLineend.AddQuotesIfUnrecognised = True
-        Me.ucrInputLineend.GetSetSelectedIndex = -1
-        Me.ucrInputLineend.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLineend, "ucrInputLineend")
-        Me.ucrInputLineend.Name = "ucrInputLineend"
         '
         'lblAngle
         '
@@ -1102,14 +1098,6 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.lblX, "lblX")
         Me.lblX.Name = "lblX"
-        '
-        'ucrInputFill
-        '
-        Me.ucrInputFill.AddQuotesIfUnrecognised = True
-        Me.ucrInputFill.GetSetSelectedIndex = -1
-        Me.ucrInputFill.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFill, "ucrInputFill")
-        Me.ucrInputFill.Name = "ucrInputFill"
         '
         'lblFill
         '
@@ -1259,6 +1247,11 @@ Partial Class sdgPlots
         Me.ucrNudShape.Name = "ucrNudShape"
         Me.ucrNudShape.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
+        'lblLabel
+        '
+        resources.ApplyResources(Me.lblLabel, "lblLabel")
+        Me.lblLabel.Name = "lblLabel"
+        '
         'ucrInputLabel
         '
         Me.ucrInputLabel.AddQuotesIfUnrecognised = True
@@ -1267,15 +1260,40 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrInputLabel, "ucrInputLabel")
         Me.ucrInputLabel.Name = "ucrInputLabel"
         '
-        'lblLabel
+        'ucrInputLineend
         '
-        resources.ApplyResources(Me.lblLabel, "lblLabel")
-        Me.lblLabel.Name = "lblLabel"
+        Me.ucrInputLineend.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineend.GetSetSelectedIndex = -1
+        Me.ucrInputLineend.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLineend, "ucrInputLineend")
+        Me.ucrInputLineend.Name = "ucrInputLineend"
+        '
+        'ucrInputFill
+        '
+        Me.ucrInputFill.AddQuotesIfUnrecognised = True
+        Me.ucrInputFill.GetSetSelectedIndex = -1
+        Me.ucrInputFill.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFill, "ucrInputFill")
+        Me.ucrInputFill.Name = "ucrInputFill"
         '
         'ucrBaseSubdialog
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        '
+        'ucrSelectorAnnotation
+        '
+        Me.ucrSelectorAnnotation.bDropUnusedFilterLevels = False
+        Me.ucrSelectorAnnotation.bShowHiddenColumns = False
+        Me.ucrSelectorAnnotation.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorAnnotation, "ucrSelectorAnnotation")
+        Me.ucrSelectorAnnotation.Name = "ucrSelectorAnnotation"
+        '
+        'ucrChkUseDataframe
+        '
+        Me.ucrChkUseDataframe.Checked = False
+        resources.ApplyResources(Me.ucrChkUseDataframe, "ucrChkUseDataframe")
+        Me.ucrChkUseDataframe.Name = "ucrChkUseDataframe"
         '
         'sdgPlots
         '
@@ -1458,6 +1476,8 @@ Partial Class sdgPlots
     Friend WithEvents ucrChkAnnotation As ucrCheck
     Friend WithEvents lblLabel As Label
     Friend WithEvents ucrInputLabel As ucrInputTextBox
+    Friend WithEvents ucrChkUseDataframe As ucrCheck
+    Friend WithEvents ucrSelectorAnnotation As ucrSelectorByDataFrameAddRemove
 End Class
 
 
