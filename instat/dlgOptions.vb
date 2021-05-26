@@ -84,6 +84,7 @@ Public Class dlgOptions
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
         ucrInputLanguage.SetItems({"English", "French", "Portuguese"})
+        ucrInputLanguage.SetDropDownStyleAsNonEditable()
     End Sub
 
      Private Sub LoadInstatOptions()
