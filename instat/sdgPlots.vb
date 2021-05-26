@@ -347,10 +347,35 @@ Public Class sdgPlots
         'Annotation
         grpAnnotation.Visible = False
 
+        ucrChkUseDataframe.SetText("Use Dataframe")
+
         ucrChkAnnotation.SetText("Annotation")
         ucrChkAnnotation.AddParameterPresentCondition(True, "annotate", True)
         ucrChkAnnotation.AddParameterPresentCondition(False, "annotate", False)
 
+        ucrReceiverX.SetParameter(New RParameter("x", 1))
+        ucrReceiverX.SetParameterIsRFunction()
+        ucrReceiverX.Selector = ucrSelectorAnnotation
+
+        ucrReceiverY.SetParameter(New RParameter("y", 2))
+        ucrReceiverY.SetParameterIsRFunction()
+        ucrReceiverY.Selector = ucrSelectorAnnotation
+
+        ucrReceiverYmin.SetParameter(New RParameter("ymin", 3))
+        ucrReceiverYmin.SetParameterIsRFunction()
+        ucrReceiverYmin.Selector = ucrSelectorAnnotation
+
+        ucrReceiverXmin.SetParameter(New RParameter("xmin", 4))
+        ucrReceiverXmin.SetParameterIsRFunction()
+        ucrReceiverXmin.Selector = ucrSelectorAnnotation
+
+        ucrReceiverXmax.SetParameter(New RParameter("xmax", 7))
+        ucrReceiverXmax.SetParameterIsRFunction()
+        ucrReceiverXmax.Selector = ucrSelectorAnnotation
+
+        ucrReceiverYmax.SetParameter(New RParameter("ymax", 8))
+        ucrReceiverYmax.SetParameterIsRFunction()
+        ucrReceiverYmax.Selector = ucrSelectorAnnotation
 
         ucrInputX.SetParameter(New RParameter("x", 1))
         ucrInputX.SetLinkedDisplayControl(lblX)
@@ -488,6 +513,9 @@ Public Class sdgPlots
         ucrInputAnnotationGeoms.AddToLinkedControls(ucrNudCrossbarFatten, {"crossbar"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrInputAnnotationGeoms.AddToLinkedControls({ucrNudShape, ucrNudPointrangeFatten}, {"pointrange"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLabel, {"text", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrChkUseDataframe, {"rect", "text"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrChkUseDataframe.AddToLinkedControls({ucrReceiverX, ucrReceiverY, ucrReceiverYmin, ucrReceiverXmin, ucrReceiverYmax, ucrReceiverXmax}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkUseDataframe.AddToLinkedControls({ucrInputY, ucrInputX, ucrInputYmax, ucrInputXmax, ucrInputXmin, ucrInputYmin}, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'Colour
         ucrInputFillScaleColour.SetParameter(New RParameter("option", iNewPosition:=0))
         dctFillOptions.Add("viridis", Chr(34) & "viridis" & Chr(34))
@@ -597,9 +625,11 @@ Public Class sdgPlots
         ucrBaseSelector = ucrNewBaseSelector
         If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
             strDataFrame = ucrBaseSelector.strCurrentDataFrame
+            ucrSelectorAnnotation.SetDataframe(strDataFrame, False)
             ucrFacetSelector.SetDataframe(strDataFrame, False)
         End If
 
+        ucrSelectorAnnotation.SetLinkedSelector(ucrBaseSelector)
         ucrFacetSelector.SetLinkedSelector(ucrBaseSelector)
         clsYScaleDateFunction = clsNewYScaleDateFunction
         clsXScaleDateFunction = clsNewXScaleDateFunction
@@ -1118,6 +1148,13 @@ Public Class sdgPlots
         Else
             clsBaseOperator.RemoveParameterByName("annotate")
             grpAnnotation.Visible = False
+        End If
+    End Sub
+    Private Sub ucrChkUseDataframe_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUseDataframe.ControlValueChanged
+        If ucrChkUseDataframe.Checked Then
+            ucrSelectorAnnotation.Visible = True
+        Else
+            ucrSelectorAnnotation.Visible = False
         End If
     End Sub
 End Class

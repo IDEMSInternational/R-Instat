@@ -136,6 +136,8 @@ Partial Class sdgPlots
         Me.tbpAnnotation = New System.Windows.Forms.TabPage()
         Me.ucrChkAnnotation = New instat.ucrCheck()
         Me.grpAnnotation = New System.Windows.Forms.GroupBox()
+        Me.ucrChkUseDataframe = New instat.ucrCheck()
+        Me.ucrSelectorAnnotation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblCurvature = New System.Windows.Forms.Label()
         Me.ucrNudAlpha = New instat.ucrNud()
         Me.lblAlpha = New System.Windows.Forms.Label()
@@ -178,9 +180,13 @@ Partial Class sdgPlots
         Me.ucrInputLabel = New instat.ucrInputTextBox()
         Me.ucrInputLineend = New instat.ucrInputComboBox()
         Me.ucrInputFill = New instat.ucrInputComboBox()
+        Me.ucrReceiverX = New instat.ucrReceiverSingle()
+        Me.ucrReceiverY = New instat.ucrReceiverSingle()
+        Me.ucrReceiverXmin = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYmin = New instat.ucrReceiverSingle()
+        Me.ucrReceiverXmax = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYmax = New instat.ucrReceiverSingle()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrSelectorAnnotation = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkUseDataframe = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -983,9 +989,29 @@ Partial Class sdgPlots
         Me.grpAnnotation.Controls.Add(Me.ucrInputLabel)
         Me.grpAnnotation.Controls.Add(Me.ucrInputLineend)
         Me.grpAnnotation.Controls.Add(Me.ucrInputFill)
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverX)
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverY)
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverXmin)
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverYmin)
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverXmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverYmax)
         resources.ApplyResources(Me.grpAnnotation, "grpAnnotation")
         Me.grpAnnotation.Name = "grpAnnotation"
         Me.grpAnnotation.TabStop = False
+        '
+        'ucrChkUseDataframe
+        '
+        Me.ucrChkUseDataframe.Checked = False
+        resources.ApplyResources(Me.ucrChkUseDataframe, "ucrChkUseDataframe")
+        Me.ucrChkUseDataframe.Name = "ucrChkUseDataframe"
+        '
+        'ucrSelectorAnnotation
+        '
+        Me.ucrSelectorAnnotation.bDropUnusedFilterLevels = False
+        Me.ucrSelectorAnnotation.bShowHiddenColumns = False
+        Me.ucrSelectorAnnotation.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorAnnotation, "ucrSelectorAnnotation")
+        Me.ucrSelectorAnnotation.Name = "ucrSelectorAnnotation"
         '
         'lblCurvature
         '
@@ -1276,24 +1302,64 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrInputFill, "ucrInputFill")
         Me.ucrInputFill.Name = "ucrInputFill"
         '
+        'ucrReceiverX
+        '
+        Me.ucrReceiverX.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverX, "ucrReceiverX")
+        Me.ucrReceiverX.Name = "ucrReceiverX"
+        Me.ucrReceiverX.Selector = Nothing
+        Me.ucrReceiverX.strNcFilePath = ""
+        Me.ucrReceiverX.ucrSelector = Nothing
+        '
+        'ucrReceiverY
+        '
+        Me.ucrReceiverY.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverY, "ucrReceiverY")
+        Me.ucrReceiverY.Name = "ucrReceiverY"
+        Me.ucrReceiverY.Selector = Nothing
+        Me.ucrReceiverY.strNcFilePath = ""
+        Me.ucrReceiverY.ucrSelector = Nothing
+        '
+        'ucrReceiverXmin
+        '
+        Me.ucrReceiverXmin.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverXmin, "ucrReceiverXmin")
+        Me.ucrReceiverXmin.Name = "ucrReceiverXmin"
+        Me.ucrReceiverXmin.Selector = Nothing
+        Me.ucrReceiverXmin.strNcFilePath = ""
+        Me.ucrReceiverXmin.ucrSelector = Nothing
+        '
+        'ucrReceiverYmin
+        '
+        Me.ucrReceiverYmin.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverYmin, "ucrReceiverYmin")
+        Me.ucrReceiverYmin.Name = "ucrReceiverYmin"
+        Me.ucrReceiverYmin.Selector = Nothing
+        Me.ucrReceiverYmin.strNcFilePath = ""
+        Me.ucrReceiverYmin.ucrSelector = Nothing
+        '
+        'ucrReceiverXmax
+        '
+        Me.ucrReceiverXmax.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverXmax, "ucrReceiverXmax")
+        Me.ucrReceiverXmax.Name = "ucrReceiverXmax"
+        Me.ucrReceiverXmax.Selector = Nothing
+        Me.ucrReceiverXmax.strNcFilePath = ""
+        Me.ucrReceiverXmax.ucrSelector = Nothing
+        '
+        'ucrReceiverYmax
+        '
+        Me.ucrReceiverYmax.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverYmax, "ucrReceiverYmax")
+        Me.ucrReceiverYmax.Name = "ucrReceiverYmax"
+        Me.ucrReceiverYmax.Selector = Nothing
+        Me.ucrReceiverYmax.strNcFilePath = ""
+        Me.ucrReceiverYmax.ucrSelector = Nothing
+        '
         'ucrBaseSubdialog
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        '
-        'ucrSelectorAnnotation
-        '
-        Me.ucrSelectorAnnotation.bDropUnusedFilterLevels = False
-        Me.ucrSelectorAnnotation.bShowHiddenColumns = False
-        Me.ucrSelectorAnnotation.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorAnnotation, "ucrSelectorAnnotation")
-        Me.ucrSelectorAnnotation.Name = "ucrSelectorAnnotation"
-        '
-        'ucrChkUseDataframe
-        '
-        Me.ucrChkUseDataframe.Checked = False
-        resources.ApplyResources(Me.ucrChkUseDataframe, "ucrChkUseDataframe")
-        Me.ucrChkUseDataframe.Name = "ucrChkUseDataframe"
         '
         'sdgPlots
         '
@@ -1478,6 +1544,12 @@ Partial Class sdgPlots
     Friend WithEvents ucrInputLabel As ucrInputTextBox
     Friend WithEvents ucrChkUseDataframe As ucrCheck
     Friend WithEvents ucrSelectorAnnotation As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrReceiverX As ucrReceiverSingle
+    Friend WithEvents ucrReceiverY As ucrReceiverSingle
+    Friend WithEvents ucrReceiverXmin As ucrReceiverSingle
+    Friend WithEvents ucrReceiverYmin As ucrReceiverSingle
+    Friend WithEvents ucrReceiverXmax As ucrReceiverSingle
+    Friend WithEvents ucrReceiverYmax As ucrReceiverSingle
 End Class
 
 
