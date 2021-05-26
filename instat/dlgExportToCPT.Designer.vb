@@ -53,6 +53,8 @@ Partial Class dlgExportToCPT
         Me.rdoTwoDFWide = New System.Windows.Forms.RadioButton()
         Me.lblLine = New System.Windows.Forms.Label()
         Me.lblSaveFile = New System.Windows.Forms.Label()
+        Me.lblMissingValues = New System.Windows.Forms.Label()
+        Me.ucrInputCodeMissingValues = New instat.ucrInputTextBox()
         Me.ucrReceiverMultipleStation = New instat.ucrReceiverMultiple()
         Me.ucrSelectorTwoDF = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -65,8 +67,6 @@ Partial Class dlgExportToCPT
         Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrSelectorOneDF = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.lblMissingValues = New System.Windows.Forms.Label()
-        Me.ucrInputCodeMissingValues = New instat.ucrInputTextBox()
         Me.SuspendLayout()
         '
         'lblSaveDataTo
@@ -154,6 +154,19 @@ Partial Class dlgExportToCPT
         '
         resources.ApplyResources(Me.lblSaveFile, "lblSaveFile")
         Me.lblSaveFile.Name = "lblSaveFile"
+        '
+        'lblMissingValues
+        '
+        resources.ApplyResources(Me.lblMissingValues, "lblMissingValues")
+        Me.lblMissingValues.Name = "lblMissingValues"
+        '
+        'ucrInputCodeMissingValues
+        '
+        Me.ucrInputCodeMissingValues.AddQuotesIfUnrecognised = True
+        Me.ucrInputCodeMissingValues.IsMultiline = False
+        Me.ucrInputCodeMissingValues.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputCodeMissingValues, "ucrInputCodeMissingValues")
+        Me.ucrInputCodeMissingValues.Name = "ucrInputCodeMissingValues"
         '
         'ucrReceiverMultipleStation
         '
@@ -251,19 +264,6 @@ Partial Class dlgExportToCPT
         Me.ucrSelectorOneDF.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorOneDF, "ucrSelectorOneDF")
         Me.ucrSelectorOneDF.Name = "ucrSelectorOneDF"
-        '
-        'lblMissingValues
-        '
-        resources.ApplyResources(Me.lblMissingValues, "lblMissingValues")
-        Me.lblMissingValues.Name = "lblMissingValues"
-        '
-        'ucrInputCodeMissingValues
-        '
-        Me.ucrInputCodeMissingValues.AddQuotesIfUnrecognised = True
-        Me.ucrInputCodeMissingValues.IsMultiline = False
-        Me.ucrInputCodeMissingValues.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputCodeMissingValues, "ucrInputCodeMissingValues")
-        Me.ucrInputCodeMissingValues.Name = "ucrInputCodeMissingValues"
         '
         'dlgExportToCPT
         '

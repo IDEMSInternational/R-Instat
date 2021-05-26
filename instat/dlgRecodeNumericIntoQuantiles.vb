@@ -21,7 +21,6 @@ Public Class dlgRecodeNumericIntoQuantiles
     Private iLength As Integer
     Private clsBincodeFunction, clsQuantileFunction, clsSeqFunction As New RFunction
     Private Sub dlgRecodeNumericIntoQuantiles_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -31,6 +30,7 @@ Public Class dlgRecodeNumericIntoQuantiles
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

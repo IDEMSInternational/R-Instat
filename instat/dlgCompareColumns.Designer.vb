@@ -26,11 +26,6 @@ Partial Class dlgCompareColumns
         Me.lblFirstColumn = New System.Windows.Forms.Label()
         Me.lblSecondColumn = New System.Windows.Forms.Label()
         Me.grpComparisions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkAllValues = New instat.ucrCheck()
-        Me.ucrChkUnion = New instat.ucrCheck()
-        Me.ucrChkIntersection = New instat.ucrCheck()
-        Me.ucrChkSecondNotFirst = New instat.ucrCheck()
-        Me.ucrChkFirstNotSecond = New instat.ucrCheck()
         Me.lblTolerance = New System.Windows.Forms.Label()
         Me.rdoByValue = New System.Windows.Forms.RadioButton()
         Me.rdoByRow = New System.Windows.Forms.RadioButton()
@@ -38,6 +33,11 @@ Partial Class dlgCompareColumns
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrSaveLogical = New instat.ucrSave()
         Me.ucrChkSort = New instat.ucrCheck()
+        Me.ucrChkAllValues = New instat.ucrCheck()
+        Me.ucrChkUnion = New instat.ucrCheck()
+        Me.ucrChkIntersection = New instat.ucrCheck()
+        Me.ucrChkSecondNotFirst = New instat.ucrCheck()
+        Me.ucrChkFirstNotSecond = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverSecond = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirst = New instat.ucrReceiverSingle()
@@ -66,36 +66,6 @@ Partial Class dlgCompareColumns
         resources.ApplyResources(Me.grpComparisions, "grpComparisions")
         Me.grpComparisions.Name = "grpComparisions"
         Me.grpComparisions.TabStop = False
-        '
-        'ucrChkAllValues
-        '
-        Me.ucrChkAllValues.Checked = False
-        resources.ApplyResources(Me.ucrChkAllValues, "ucrChkAllValues")
-        Me.ucrChkAllValues.Name = "ucrChkAllValues"
-        '
-        'ucrChkUnion
-        '
-        Me.ucrChkUnion.Checked = False
-        resources.ApplyResources(Me.ucrChkUnion, "ucrChkUnion")
-        Me.ucrChkUnion.Name = "ucrChkUnion"
-        '
-        'ucrChkIntersection
-        '
-        Me.ucrChkIntersection.Checked = False
-        resources.ApplyResources(Me.ucrChkIntersection, "ucrChkIntersection")
-        Me.ucrChkIntersection.Name = "ucrChkIntersection"
-        '
-        'ucrChkSecondNotFirst
-        '
-        Me.ucrChkSecondNotFirst.Checked = False
-        resources.ApplyResources(Me.ucrChkSecondNotFirst, "ucrChkSecondNotFirst")
-        Me.ucrChkSecondNotFirst.Name = "ucrChkSecondNotFirst"
-        '
-        'ucrChkFirstNotSecond
-        '
-        Me.ucrChkFirstNotSecond.Checked = False
-        resources.ApplyResources(Me.ucrChkFirstNotSecond, "ucrChkFirstNotSecond")
-        Me.ucrChkFirstNotSecond.Name = "ucrChkFirstNotSecond"
         '
         'lblTolerance
         '
@@ -148,6 +118,36 @@ Partial Class dlgCompareColumns
         resources.ApplyResources(Me.ucrChkSort, "ucrChkSort")
         Me.ucrChkSort.Name = "ucrChkSort"
         '
+        'ucrChkAllValues
+        '
+        Me.ucrChkAllValues.Checked = False
+        resources.ApplyResources(Me.ucrChkAllValues, "ucrChkAllValues")
+        Me.ucrChkAllValues.Name = "ucrChkAllValues"
+        '
+        'ucrChkUnion
+        '
+        Me.ucrChkUnion.Checked = False
+        resources.ApplyResources(Me.ucrChkUnion, "ucrChkUnion")
+        Me.ucrChkUnion.Name = "ucrChkUnion"
+        '
+        'ucrChkIntersection
+        '
+        Me.ucrChkIntersection.Checked = False
+        resources.ApplyResources(Me.ucrChkIntersection, "ucrChkIntersection")
+        Me.ucrChkIntersection.Name = "ucrChkIntersection"
+        '
+        'ucrChkSecondNotFirst
+        '
+        Me.ucrChkSecondNotFirst.Checked = False
+        resources.ApplyResources(Me.ucrChkSecondNotFirst, "ucrChkSecondNotFirst")
+        Me.ucrChkSecondNotFirst.Name = "ucrChkSecondNotFirst"
+        '
+        'ucrChkFirstNotSecond
+        '
+        Me.ucrChkFirstNotSecond.Checked = False
+        resources.ApplyResources(Me.ucrChkFirstNotSecond, "ucrChkFirstNotSecond")
+        Me.ucrChkFirstNotSecond.Name = "ucrChkFirstNotSecond"
+        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -189,6 +189,7 @@ Partial Class dlgCompareColumns
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.grpComparisions)
         Me.Controls.Add(Me.lblTolerance)
         Me.Controls.Add(Me.ucrInputTolerance)
         Me.Controls.Add(Me.rdoByValue)
@@ -196,7 +197,6 @@ Partial Class dlgCompareColumns
         Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrSaveLogical)
         Me.Controls.Add(Me.ucrChkSort)
-        Me.Controls.Add(Me.grpComparisions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.lblSecondColumn)
         Me.Controls.Add(Me.lblFirstColumn)

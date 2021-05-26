@@ -22,7 +22,6 @@ Public Class dlgBackupManager
     Private strSelectedDataFilePath As String 'holds the selected file path
 
     Private Sub dlgBackupManager_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         'Get the default Auto save Data Folder
         strAutoSaveDataFolderPath = frmMain.strAutoSaveDataFolderPath
         'set selected data file path to empty string
@@ -31,6 +30,7 @@ Public Class dlgBackupManager
         SetButtonStates(False)
         'add to the list of last loaded forms
         frmMain.clsRecentItems.addToMenu(Me)
+        autoTranslate(Me)
     End Sub
 
     'loads the files info's into the listview

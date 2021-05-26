@@ -28,7 +28,6 @@ Public Class dlgSort
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
     Private Sub dlgSort_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -41,6 +40,7 @@ Public Class dlgSort
         If bUseSelectedColumn Then
             SetDefaultColumn()
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

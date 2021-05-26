@@ -21,7 +21,6 @@ Public Class dlgExportRObjects
     Private clsExport As RFunction
 
     Private Sub dlgExportRObjects_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,6 +31,7 @@ Public Class dlgExportRObjects
         SetRCodeForControls(bReset)
         bReset = False
         'TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

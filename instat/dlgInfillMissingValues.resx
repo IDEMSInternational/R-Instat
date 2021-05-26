@@ -402,6 +402,15 @@
   <data name="&gt;&gt;rdoFitMultiple.ZOrder" xml:space="preserve">
     <value>52</value>
   </data>
+  <data name="ucrPnlMethods.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 15</value>
+  </data>
+  <data name="ucrPnlMethods.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 71</value>
+  </data>
+  <data name="ucrPnlMethods.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
   <data name="&gt;&gt;ucrPnlMethods.Name" xml:space="preserve">
     <value>ucrPnlMethods</value>
   </data>
@@ -437,27 +446,6 @@
   </data>
   <data name="&gt;&gt;grpMethods.ZOrder" xml:space="preserve">
     <value>59</value>
-  </data>
-  <data name="ucrPnlMethods.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 15</value>
-  </data>
-  <data name="ucrPnlMethods.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 71</value>
-  </data>
-  <data name="ucrPnlMethods.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.Name" xml:space="preserve">
-    <value>ucrPnlMethods</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.Parent" xml:space="preserve">
-    <value>grpMethods</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlMethods.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
   <data name="&gt;&gt;rdoExtendFill.Name" xml:space="preserve">
     <value>rdoExtendFill</value>
@@ -1039,7 +1027,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>355, 24</value>
   </data>
   <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
@@ -1462,7 +1450,7 @@
     <value>21</value>
   </data>
   <data name="ucrInputNewColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 311</value>
+    <value>157, 311</value>
   </data>
   <data name="ucrInputNewColumnName.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -1549,7 +1537,7 @@
     <value>14, 264</value>
   </data>
   <data name="ucrChkMeanBias.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 20</value>
+    <value>208, 20</value>
   </data>
   <data name="ucrChkMeanBias.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -1967,9 +1955,6 @@
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>58</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

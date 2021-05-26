@@ -892,8 +892,15 @@ Public Class ucrSave
     '''                                     calculation. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub setLinkedReceiver(ucrLinkedReceiver As ucrReceiver)
+        'if there was a previous linked receiver, then remove the event handler from it
+        'prevents multiple unnecessary calls that could be caused by previously linked receivers
+        If Me.ucrLinkedReceiver IsNot Nothing Then
+            RemoveHandler Me.ucrLinkedReceiver.ControlValueChanged, AddressOf LinkedReceiverControlValueChanged
+        End If
         Me.ucrLinkedReceiver = ucrLinkedReceiver
-        AddHandler ucrLinkedReceiver.ControlValueChanged, AddressOf LinkedReceiverControlValueChanged
+        AddHandler Me.ucrLinkedReceiver.ControlValueChanged, AddressOf LinkedReceiverControlValueChanged
+        'call event handler to immediately get the values from the new receiver
+        LinkedReceiverControlValueChanged()
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -912,7 +919,15 @@ Public Class ucrSave
     Private Sub LinkedReceiverControlValueChanged()
         If Not sdgSaveColumnPosition.bUserSelected Then
             bInsertColumnBefore = False
-            strAdjacentColumn = If(Not ucrLinkedReceiver.IsEmpty, ucrLinkedReceiver.GetVariableNames(), "")
+            If ucrLinkedReceiver.IsEmpty Then
+                strAdjacentColumn = ""
+            Else
+                If TypeOf ucrLinkedReceiver Is ucrReceiverMultiple Then
+                    strAdjacentColumn = ucrLinkedReceiver.GetVariableNamesList()(ucrLinkedReceiver.GetVariableNamesList().Length - 1)
+                Else
+                    strAdjacentColumn = ucrLinkedReceiver.GetVariableNames()
+                End If
+            End If
         End If
         UpdateAssignTo()
     End Sub

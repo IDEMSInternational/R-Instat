@@ -20,7 +20,6 @@ Public Class dlgTaylorDiagram
     Private bReset As Boolean = True
     Private clsTaylorDiagramFunction As New RFunction
     Private Sub dlgTaylorDiagram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,6 +31,7 @@ Public Class dlgTaylorDiagram
 
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

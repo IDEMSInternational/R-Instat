@@ -409,7 +409,7 @@
     <value>10, 80</value>
   </data>
   <data name="lblInStepsOf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 13</value>
+    <value>122, 13</value>
   </data>
   <data name="lblInStepsOf.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -698,6 +698,9 @@
   </data>
   <data name="ucrNewColumnName.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 304</value>
+  </data>
+  <data name="ucrNewColumnName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewColumnName.Size" type="System.Drawing.Size, System.Drawing">
     <value>235, 24</value>

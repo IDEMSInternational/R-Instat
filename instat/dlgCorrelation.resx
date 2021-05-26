@@ -121,6 +121,10 @@
   <data name="lblFirstColumn.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblFirstColumn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblFirstColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 75</value>
@@ -149,6 +153,9 @@
   <data name="lblSecondColumn.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblSecondColumn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblSecondColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 127</value>
   </data>
@@ -175,6 +182,9 @@
   </data>
   <data name="rdoKendall.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoKendall.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoKendall.Location" type="System.Drawing.Point, System.Drawing">
     <value>91, 18</value>
@@ -203,6 +213,9 @@
   <data name="rdoPearson.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoPearson.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoPearson.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 18</value>
   </data>
@@ -229,6 +242,9 @@
   </data>
   <data name="rdoSpearman.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoSpearman.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoSpearman.Location" type="System.Drawing.Point, System.Drawing">
     <value>164, 18</value>
@@ -299,6 +315,9 @@
   <data name="&gt;&gt;grpMethod.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
+  <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>286, 330</value>
   </data>
@@ -325,6 +344,9 @@
   </data>
   <data name="rdoCompleteRowsOnly.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoCompleteRowsOnly.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoCompleteRowsOnly.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 18</value>
@@ -353,8 +375,11 @@
   <data name="rdoPairwise.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoPairwise.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoPairwise.Location" type="System.Drawing.Point, System.Drawing">
-    <value>127, 18</value>
+    <value>146, 18</value>
   </data>
   <data name="rdoPairwise.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 17</value>
@@ -402,7 +427,7 @@
     <value>257, 232</value>
   </data>
   <data name="grpMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>199, 45</value>
+    <value>225, 45</value>
   </data>
   <data name="grpMissing.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -424,6 +449,9 @@
   </data>
   <data name="lblConfInterval.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="lblConfInterval.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="lblConfInterval.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 286</value>
@@ -449,12 +477,14 @@
   <data name="&gt;&gt;lblConfInterval.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoTwoColumns.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
   <data name="rdoTwoColumns.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
+  </data>
+  <data name="rdoTwoColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoTwoColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>102, 10</value>
@@ -489,6 +519,9 @@
   <data name="rdoMultipleColumns.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoMultipleColumns.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoMultipleColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>227, 10</value>
   </data>
@@ -516,8 +549,41 @@
   <data name="&gt;&gt;rdoMultipleColumns.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="lblSelectedVariables.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSelectedVariables.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
+    <value>258, 75</value>
+  </data>
+  <data name="lblSelectedVariables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 13</value>
+  </data>
+  <data name="lblSelectedVariables.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblSelectedVariables.Text" xml:space="preserve">
+    <value>Variables:</value>
+  </data>
+  <data name="&gt;&gt;lblSelectedVariables.Name" xml:space="preserve">
+    <value>lblSelectedVariables</value>
+  </data>
+  <data name="&gt;&gt;lblSelectedVariables.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSelectedVariables.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblSelectedVariables.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrSaveModel.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 335</value>
+  </data>
+  <data name="ucrSaveModel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveModel.Size" type="System.Drawing.Size, System.Drawing">
     <value>257, 24</value>
@@ -607,34 +673,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>461, 416</value>
-  </data>
-  <data name="lblSelectedVariables.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 75</value>
-  </data>
-  <data name="lblSelectedVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>53, 13</value>
-  </data>
-  <data name="lblSelectedVariables.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="lblSelectedVariables.Text" xml:space="preserve">
-    <value>Variables:</value>
-  </data>
-  <data name="&gt;&gt;lblSelectedVariables.Name" xml:space="preserve">
-    <value>lblSelectedVariables</value>
-  </data>
-  <data name="&gt;&gt;lblSelectedVariables.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSelectedVariables.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblSelectedVariables.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>487, 416</value>
   </data>
   <data name="ucrReceiverSecondColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 142</value>

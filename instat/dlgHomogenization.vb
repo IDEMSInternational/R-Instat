@@ -22,7 +22,6 @@ Public Class dlgHomogenization
     Private clsCptMeanFunction, clsCptVarianceFunction, clsCptMeanVarianceFunction, clsExcludeNAFunction, clsPlotFunction, clsSummaryFunction, clsSnhtFunction, clsPettittFunction, clsBuishandFunction, clsTapplyFunction, clsCompleteCasesFunction As New RFunction
     Private clsBracketsOperator, clsLeftBracketOperator, clsRightBracketOperator As New ROperator
     Private Sub dlgHomogenization_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -34,6 +33,7 @@ Public Class dlgHomogenization
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
