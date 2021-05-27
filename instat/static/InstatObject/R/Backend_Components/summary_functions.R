@@ -1336,7 +1336,7 @@ SEDI <- function(x, y, frcst.type, obs.type, ...){
 ##TODO:Check if there are summaries that only apply to (Probabilistic-binary) types.
 
 
-DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), n_column_factors = 1, store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, margins = "outer", return_output = TRUE, treat_columns_as_factor = FALSE, page_by = NULL, as_html = TRUE, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
+DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, margins = "outer", return_output = TRUE, treat_columns_as_factor = FALSE, page_by = NULL, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
 # TODO: write in errors
   if(na_level_display == "") stop("na_level_display must be a non empty string")
     # removes "summary_" from beginning of summary function names so that display is nice
@@ -1379,7 +1379,7 @@ if(include_margins && (length(factors) > 0 || length(column_factors) > 0)) {
   margin_item <- length(summaries) * length(columns_to_summarise)
   
   # if outer or summary is run (i.e., if there are margins)
-  if (("outer" %in% margins) || ("summary" %in% margins)){
+  if (("outer" %in% margins)){
     outer_margins <- plyr::ldply(margin_tables)
     
     # Change shape
@@ -1397,16 +1397,23 @@ if(include_margins && (length(factors) > 0 || length(column_factors) > 0)) {
   } else {
     outer_margins <- NULL
   }
-    if ("summary" %in% margins && length(columns_to_summarise) > 1){
-    summary_margins_df <- reshape2::melt(data=data_name, measure.vars=columns_to_summarise, id.vars=factors)
-    self$import_data(data_tables=list(summary_margins_df=summary_margins_df))
+    if ("summary" %in% margins){
     summary_margins <- NULL
-    for(facts in power_sets) {
+    if ("outer" %in% margins){
+    power_sets_summary <- power_sets
+    } else {
+    power_sets_summary <- power_sets[(c(length(power_sets)))]
+	}
+    for(facts in power_sets_summary) {
       if(length(facts) == 0) facts <- c()
+      summary_margins_df <- eval(parse(text = data_name)) %>%
+        dplyr::select(c(factors, columns_to_summarise)) %>%
+        tidyr::pivot_longer(cols = columns_to_summarise)
+      data_book$import_data(data_tables=list(summary_margins_df=summary_margins_df))
       summary_margins[[length(summary_margins) + 1]] <- data_book$calculate_summary(data_name = "summary_margins_df", columns_to_summarise = "value", summaries = summaries, factors = facts, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE)
     }
     summary_margins <- plyr::ldply(summary_margins)
-    
+
     # remove "_value" in them
     for (col in 1:ncol(summary_margins)){
       # TODO: if the colname is the same as a factor, then do nothing
@@ -1430,17 +1437,18 @@ if(include_margins && (length(factors) > 0 || length(column_factors) > 0)) {
   margin_tables_all <- (bind_rows(summary_margins, outer_margins))
 
   margin_tables_all <- margin_tables_all %>%
-    mutate_at(vars(-Value), ~replace(., is.na(.), "(All)"))
+    mutate_at(vars(-Value), ~replace(., is.na(.), margin_name))
   
   shaped_cell_values <- bind_rows(shaped_cell_values, margin_tables_all)
   
   shaped_cell_values <- shaped_cell_values %>%
-    mutate_at(vars(-Value), ~replace(., is.na(.), "(All)"))
+    mutate_at(vars(-Value), ~replace(., is.na(.), margin_name))
   
   shaped_cell_values <- shaped_cell_values %>%
-    mutate_at(vars(-Value), ~as_factor(forcats::fct_relevel(., "(All)", after = Inf)))
+    mutate_at(vars(-Value), ~as_factor(forcats::fct_relevel(., margin_name, after = Inf)))
   
 }
+shaped_cell_values <- shaped_cell_values %>% mutate(Value = round(Value, signif_fig))
 return(shaped_cell_values)
 }
 )
