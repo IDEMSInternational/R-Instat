@@ -714,8 +714,8 @@ Public Class dlgImportDataset
                 strFileType = ""
             End If
             If strFileType <> "" AndAlso strFileType <> "RDS" Then
-                If (strFileType = "XLSX" OrElse strFileType = "XLS") Then
-                    ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
+                If strFileType = "XLSX" OrElse strFileType = "XLS" Then
+                    ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=dctSelectedExcelSheets.Count > 1)
                     Select Case clbSheets.CheckedItems.Count
                         Case Is > 1
                             ucrSaveFile.Hide()
