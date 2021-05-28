@@ -26,7 +26,6 @@ Public Class dlgConvertColumns
     Private clsDefaultFunction As New RFunction
 
     Private Sub dlgConvertColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -41,6 +40,7 @@ Public Class dlgConvertColumns
         End If
         ReopenDialog()
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub ReopenDialog()

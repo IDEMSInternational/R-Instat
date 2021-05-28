@@ -24,7 +24,6 @@ Public Class dlgCorruptionDefineOutputs
     Private clsCorruptionOutputs As New RFunction
 
     Private Sub dlgDefineCorruptionOutputs_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -37,6 +36,7 @@ Public Class dlgCorruptionDefineOutputs
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

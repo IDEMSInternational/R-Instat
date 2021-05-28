@@ -38,11 +38,11 @@ Public Class dlgFindNonnumericValues
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         TestOKEnabled()
         If bUseSelectedColumn Then
             SetSelectedColumn()
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

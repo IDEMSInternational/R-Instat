@@ -23,7 +23,6 @@ Public Class dlgAddLink
     Private clsAddLink As RFunction
 
     Private Sub dlgAddLink_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -36,6 +35,7 @@ Public Class dlgAddLink
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

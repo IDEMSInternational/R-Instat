@@ -1,4 +1,4 @@
-Imports System.IO
+﻿Imports System.IO
 Imports RDotNet
 Imports instat.Translations
 
@@ -61,7 +61,6 @@ Public Class dlgImportDataset
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bDialogLoaded = False
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -113,6 +112,7 @@ Public Class dlgImportDataset
         bDialogLoaded = True
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

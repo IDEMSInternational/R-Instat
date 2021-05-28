@@ -117,6 +117,7 @@ Partial Class dlgHistogram
         'ucrInputStats
         '
         Me.ucrInputStats.AddQuotesIfUnrecognised = True
+        Me.ucrInputStats.GetSetSelectedIndex = -1
         Me.ucrInputStats.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputStats, "ucrInputStats")
         Me.ucrInputStats.Name = "ucrInputStats"

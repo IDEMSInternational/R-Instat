@@ -28,7 +28,6 @@ Public Class dlgOneWayFrequencies
     Public strDefaultColumns() As String = Nothing
 
     Private Sub dlgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -40,6 +39,7 @@ Public Class dlgOneWayFrequencies
         SetDefaultColumn()
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

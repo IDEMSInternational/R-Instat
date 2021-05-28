@@ -29,7 +29,6 @@ Public Class dlgLocatingPointsInShapeFile
     Private clsOpeningSubsetOperator, clsIsEqualToOperator, clsEqualOpeningSubsetOperator, clsClosingSubsetOperator As New ROperator
 
     Private Sub dlgLocatingPointsInShapeFile_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitiliseDialog()
             bFirstLoad = False
@@ -41,6 +40,7 @@ Public Class dlgLocatingPointsInShapeFile
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitiliseDialog()
