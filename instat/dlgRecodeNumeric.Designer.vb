@@ -39,28 +39,21 @@ Partial Class dlgRecodeNumeric
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRecodeNumeric))
-        Me.chkAddLabels = New System.Windows.Forms.CheckBox()
         Me.lblSelectedVariable = New System.Windows.Forms.Label()
         Me.lblBreakPoints = New System.Windows.Forms.Label()
         Me.grpClosedOn = New System.Windows.Forms.GroupBox()
-        Me.rdoLeft = New System.Windows.Forms.RadioButton()
         Me.rdoRight = New System.Windows.Forms.RadioButton()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
-        Me.ucrInputRecode = New instat.ucrInputComboBox()
+        Me.rdoLeft = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlClosedOn = New instat.UcrPanel()
         Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
-        Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSelectorRecode = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrMultipleLabels = New instat.ucrInputTextBox()
-        Me.ucrMultipleNumericRecode = New instat.ucrInputTextBox()
+        Me.ucrInputMultipleLabels = New instat.ucrInputTextBox()
+        Me.ucrInputMultipleNumericRecode = New instat.ucrInputTextBox()
+        Me.ucrChkAddLabel = New instat.ucrCheck()
+        Me.ucrSaveRecodeNumeric = New instat.ucrSave()
         Me.grpClosedOn.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'chkAddLabels
-        '
-        resources.ApplyResources(Me.chkAddLabels, "chkAddLabels")
-        Me.chkAddLabels.Name = "chkAddLabels"
-        Me.chkAddLabels.Tag = "Add_Labels"
-        Me.chkAddLabels.UseVisualStyleBackColor = True
         '
         'lblSelectedVariable
         '
@@ -76,19 +69,13 @@ Partial Class dlgRecodeNumeric
         '
         'grpClosedOn
         '
-        Me.grpClosedOn.Controls.Add(Me.rdoLeft)
         Me.grpClosedOn.Controls.Add(Me.rdoRight)
+        Me.grpClosedOn.Controls.Add(Me.rdoLeft)
+        Me.grpClosedOn.Controls.Add(Me.ucrPnlClosedOn)
         resources.ApplyResources(Me.grpClosedOn, "grpClosedOn")
         Me.grpClosedOn.Name = "grpClosedOn"
         Me.grpClosedOn.TabStop = False
         Me.grpClosedOn.Tag = "Closed_On"
-        '
-        'rdoLeft
-        '
-        resources.ApplyResources(Me.rdoLeft, "rdoLeft")
-        Me.rdoLeft.Name = "rdoLeft"
-        Me.rdoLeft.Tag = "Left"
-        Me.rdoLeft.UseVisualStyleBackColor = True
         '
         'rdoRight
         '
@@ -97,18 +84,17 @@ Partial Class dlgRecodeNumeric
         Me.rdoRight.Tag = "Right"
         Me.rdoRight.UseVisualStyleBackColor = True
         '
-        'lblNewColumnName
+        'rdoLeft
         '
-        resources.ApplyResources(Me.lblNewColumnName, "lblNewColumnName")
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Tag = "New_Column_Name:"
+        resources.ApplyResources(Me.rdoLeft, "rdoLeft")
+        Me.rdoLeft.Name = "rdoLeft"
+        Me.rdoLeft.Tag = "Left"
+        Me.rdoLeft.UseVisualStyleBackColor = True
         '
-        'ucrInputRecode
+        'ucrPnlClosedOn
         '
-        Me.ucrInputRecode.AddQuotesIfUnrecognised = True
-        Me.ucrInputRecode.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputRecode, "ucrInputRecode")
-        Me.ucrInputRecode.Name = "ucrInputRecode"
+        resources.ApplyResources(Me.ucrPnlClosedOn, "ucrPnlClosedOn")
+        Me.ucrPnlClosedOn.Name = "ucrPnlClosedOn"
         '
         'ucrReceiverRecode
         '
@@ -119,49 +105,59 @@ Partial Class dlgRecodeNumeric
         Me.ucrReceiverRecode.strNcFilePath = ""
         Me.ucrReceiverRecode.ucrSelector = Nothing
         '
-        'ucrSelectorForRecode
+        'ucrSelectorRecode
         '
-        Me.ucrSelectorForRecode.bDropUnusedFilterLevels = False
-        Me.ucrSelectorForRecode.bShowHiddenColumns = False
-        Me.ucrSelectorForRecode.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForRecode, "ucrSelectorForRecode")
-        Me.ucrSelectorForRecode.Name = "ucrSelectorForRecode"
+        Me.ucrSelectorRecode.bDropUnusedFilterLevels = False
+        Me.ucrSelectorRecode.bShowHiddenColumns = False
+        Me.ucrSelectorRecode.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorRecode, "ucrSelectorRecode")
+        Me.ucrSelectorRecode.Name = "ucrSelectorRecode"
         '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrMultipleLabels
+        'ucrInputMultipleLabels
         '
-        Me.ucrMultipleLabels.AddQuotesIfUnrecognised = True
-        Me.ucrMultipleLabels.IsMultiline = False
-        Me.ucrMultipleLabels.IsReadOnly = False
-        resources.ApplyResources(Me.ucrMultipleLabels, "ucrMultipleLabels")
-        Me.ucrMultipleLabels.Name = "ucrMultipleLabels"
+        Me.ucrInputMultipleLabels.AddQuotesIfUnrecognised = True
+        Me.ucrInputMultipleLabels.IsMultiline = False
+        Me.ucrInputMultipleLabels.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMultipleLabels, "ucrInputMultipleLabels")
+        Me.ucrInputMultipleLabels.Name = "ucrInputMultipleLabels"
         '
-        'ucrMultipleNumericRecode
+        'ucrInputMultipleNumericRecode
         '
-        Me.ucrMultipleNumericRecode.AddQuotesIfUnrecognised = True
-        Me.ucrMultipleNumericRecode.IsMultiline = False
-        Me.ucrMultipleNumericRecode.IsReadOnly = False
-        resources.ApplyResources(Me.ucrMultipleNumericRecode, "ucrMultipleNumericRecode")
-        Me.ucrMultipleNumericRecode.Name = "ucrMultipleNumericRecode"
+        Me.ucrInputMultipleNumericRecode.AddQuotesIfUnrecognised = True
+        Me.ucrInputMultipleNumericRecode.IsMultiline = False
+        Me.ucrInputMultipleNumericRecode.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMultipleNumericRecode, "ucrInputMultipleNumericRecode")
+        Me.ucrInputMultipleNumericRecode.Name = "ucrInputMultipleNumericRecode"
+        '
+        'ucrChkAddLabel
+        '
+        Me.ucrChkAddLabel.Checked = False
+        resources.ApplyResources(Me.ucrChkAddLabel, "ucrChkAddLabel")
+        Me.ucrChkAddLabel.Name = "ucrChkAddLabel"
+        '
+        'ucrSaveRecodeNumeric
+        '
+        resources.ApplyResources(Me.ucrSaveRecodeNumeric, "ucrSaveRecodeNumeric")
+        Me.ucrSaveRecodeNumeric.Name = "ucrSaveRecodeNumeric"
         '
         'dlgRecodeNumeric
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrMultipleNumericRecode)
-        Me.Controls.Add(Me.ucrMultipleLabels)
-        Me.Controls.Add(Me.ucrInputRecode)
-        Me.Controls.Add(Me.lblNewColumnName)
+        Me.Controls.Add(Me.ucrSaveRecodeNumeric)
+        Me.Controls.Add(Me.ucrChkAddLabel)
+        Me.Controls.Add(Me.ucrInputMultipleNumericRecode)
+        Me.Controls.Add(Me.ucrInputMultipleLabels)
         Me.Controls.Add(Me.grpClosedOn)
         Me.Controls.Add(Me.lblBreakPoints)
         Me.Controls.Add(Me.ucrReceiverRecode)
-        Me.Controls.Add(Me.ucrSelectorForRecode)
+        Me.Controls.Add(Me.ucrSelectorRecode)
         Me.Controls.Add(Me.lblSelectedVariable)
-        Me.Controls.Add(Me.chkAddLabels)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -175,16 +171,16 @@ Partial Class dlgRecodeNumeric
 
     End Sub
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents chkAddLabels As CheckBox
     Friend WithEvents lblSelectedVariable As Label
-    Friend WithEvents ucrSelectorForRecode As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrSelectorRecode As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrReceiverRecode As ucrReceiverSingle
     Friend WithEvents lblBreakPoints As Label
     Friend WithEvents grpClosedOn As GroupBox
-    Friend WithEvents rdoLeft As RadioButton
+    Friend WithEvents ucrInputMultipleLabels As ucrInputTextBox
+    Friend WithEvents ucrInputMultipleNumericRecode As ucrInputTextBox
     Friend WithEvents rdoRight As RadioButton
-    Friend WithEvents lblNewColumnName As Label
-    Friend WithEvents ucrInputRecode As ucrInputComboBox
-    Friend WithEvents ucrMultipleLabels As ucrInputTextBox
-    Friend WithEvents ucrMultipleNumericRecode As ucrInputTextBox
+    Friend WithEvents rdoLeft As RadioButton
+    Friend WithEvents ucrPnlClosedOn As UcrPanel
+    Friend WithEvents ucrChkAddLabel As ucrCheck
+    Friend WithEvents ucrSaveRecodeNumeric As ucrSave
 End Class
