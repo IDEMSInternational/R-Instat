@@ -349,7 +349,7 @@
     <value>10, 256</value>
   </data>
   <data name="ucrChkDropMissingCombinations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 20</value>
+    <value>235, 20</value>
   </data>
   <data name="ucrChkDropMissingCombinations.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>

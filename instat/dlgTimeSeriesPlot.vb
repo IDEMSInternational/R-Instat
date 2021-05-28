@@ -180,7 +180,6 @@ Public Class dlgTimeSeriesPlot
     'Private strGeomParameterNames() As String = {strGeomLineParameterName, strGeomPointParameterName, strGeomHLineParameterName, strGeomTextReferenceParameterName, strGeomTextEstimatesParameterName, strGeomTextComparisonParameterName}
 
     Private Sub dlgTimeSeriesPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -191,6 +190,7 @@ Public Class dlgTimeSeriesPlot
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

@@ -45,9 +45,9 @@ Public Class dlgClimaticDataEntry
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         ucrBase.OKEnabled(False)
         SetNumberCommentEnteredText(sdgCommentForDataEntry.GetSetNumberOfCommentsEntered)
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -146,8 +146,15 @@ Public Class dlgClimaticDataEntry
         bSubdialogFirstLoad = True
         bResetSubdialogs = True
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
-        sdgClimaticDataEntryOptions.GetSetDefaultValue = 0
+        sdgClimaticDataEntryOptions.GetSetDefaultValue = "NA"
+        sdgClimaticDataEntryOptions.GetSetNoDecimals = False
+        sdgClimaticDataEntryOptions.GetSetAllowTrace = False
+        sdgClimaticDataEntryOptions.GetSetTransform = False
         sdgClimaticDataEntryOptions.GetSetTransformValue = 0.1
+        sdgClimaticDataEntryOptions.GetSetAllowTrace = False
+        sdgClimaticDataEntryOptions.GetSetIncludeFirstNextOfMonth = False
+        sdgClimaticDataEntryOptions.GetSetEditNAOnly = False
+
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetBaseRFunction(clsSaveDataEntryFunction)
     End Sub
@@ -166,8 +173,8 @@ Public Class dlgClimaticDataEntry
         ucrStartDate.SetRCode(clsGetDataEntryFunction, bReset)
         ucrEndDate.SetRCode(clsGetDataEntryFunction, bReset)
         If bReset Then
-            ' Default start date to 1 Jan 2021. todo change to correct way of getting first date of current year
-            ucrStartDate.DateValue = New Date("2021", "1", "1")
+            'Default start date to 1 Jan.
+            ucrStartDate.DateValue = New Date(Date.Now.Year, "1", "1")
         End If
         SetDateOptions()
     End Sub
@@ -238,14 +245,13 @@ Public Class dlgClimaticDataEntry
                 sdgClimaticDataEntry.Setup(dfEditData:=dfEditData, strDataFrameName:=strDataFrameName, clsSaveDataEntry:=clsSaveDataEntryFunction,
                                          clsEditDataFrame:=clsEditDataFrameFunction, clsNewGetKey:=clsGetKeyFunction, clsNewCommentsList:=clsCommentsListFunction, clsNewList:=clsListFunction,
                       strDateName:=strDateColumnName, lstElementsNames:=lstElementsColumnNames, lstViewVariablesNames:=lstVariablesColumnNames,
-                                         strStationColumnName:=strStationColumnName,
-                                           bDefaultValue:=sdgClimaticDataEntryOptions.GetSetDefaultCheckboxState,
-                                           dDefaultValue:=sdgClimaticDataEntryOptions.GetSetDefaultValue,
-                                           bNoDecimal:=sdgClimaticDataEntryOptions.NoDecimals,
-                                           bAllowTrace:=sdgClimaticDataEntryOptions.AllowTrace,
-                                           bTransform:=sdgClimaticDataEntryOptions.Transform,
+                                           strStationColumnName:=strStationColumnName,
+                                           bEditNewDataOnly:=sdgClimaticDataEntryOptions.GetSetEditNAOnly,
+                                           strDefaultValue:=sdgClimaticDataEntryOptions.GetSetDefaultValue,
+                                           bNoDecimal:=sdgClimaticDataEntryOptions.GetSetNoDecimals,
+                                           bAllowTrace:=sdgClimaticDataEntryOptions.GetSetAllowTrace,
+                                           bTransform:=sdgClimaticDataEntryOptions.GetSetTransform,
                                            dTranformValue:=sdgClimaticDataEntryOptions.GetSetTransformValue,
-                                           MissingValueAsNA:=sdgClimaticDataEntryOptions.MissingValueAsNA,
                                            strEntryType:=ucrInputType.GetText, ucrNewBaseSelector:=ucrSelectorClimaticDataEntry, bReset:=bResetSubdialogs)
             End If
             sdgClimaticDataEntry.ShowDialog()
@@ -287,8 +293,13 @@ Public Class dlgClimaticDataEntry
                 ucrEndDate.DateValue = dtStart
                 ucrEndDate.Enabled = False
             Case strMonth
-                ucrStartDate.DateValue = New Date(dtStart.Year, dtStart.Month, 1)
+                If sdgClimaticDataEntryOptions.GetSetIncludeFirstNextOfMonth Then
+                    ucrStartDate.DateValue = New Date(dtStart.Year, dtStart.Month, 2)
+                Else
+                    ucrStartDate.DateValue = New Date(dtStart.Year, dtStart.Month, 1)
+                End If
                 ucrEndDate.DateValue = ucrStartDate.DateValue.AddMonths(1).AddDays(-1)
+
                 ucrEndDate.Enabled = False
             Case strRange
                 ucrEndDate.Enabled = True
@@ -311,7 +322,6 @@ Public Class dlgClimaticDataEntry
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         bChange = True
         bSubdialogFirstLoad = True
-        sdgClimaticDataEntryOptions.GetSetDefaultCheckboxState = False
         clsListFunction.ClearParameters()
         sdgCommentForDataEntry.GetSetNumberOfCommentsEntered = 0
         SetNumberRowsChangedText(0)
@@ -338,9 +348,9 @@ Public Class dlgClimaticDataEntry
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgClimaticDataEntryOptions.SetUpDataEntryOptions(bReset:=bResetSubdialogs)
+        sdgClimaticDataEntryOptions.SetUpDataEntryOptions(ucrInputType.GetText)
         sdgClimaticDataEntryOptions.ShowDialog()
-        bResetSubdialogs = False
-        bChange = True 'todo. is it always true
+        SetDateOptions()
+        bChange = True
     End Sub
 End Class

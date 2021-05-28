@@ -36,10 +36,10 @@ Public Class dlgRegularSequence
         If bReset Then
             SetDefaults()
         End If
-        autoTranslate(Me)
         SetDefaultRdo()
         SetRCodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
     End Sub
     'This sub is meant to set the default radiobutton on diffrent places on the Menu.
     Private Sub SetDefaultRdo()
