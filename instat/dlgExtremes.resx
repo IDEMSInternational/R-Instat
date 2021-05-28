@@ -892,7 +892,7 @@
     <value>258, 85</value>
   </data>
   <data name="ucrChkExplanatoryModelForLocationParameter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>231, 17</value>
+    <value>270, 17</value>
   </data>
   <data name="ucrChkExplanatoryModelForLocationParameter.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -916,7 +916,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>520, 378</value>
+    <value>533, 378</value>
   </data>
   <data name="ucrInputExtremes.Location" type="System.Drawing.Point, System.Drawing">
     <value>79, 204</value>

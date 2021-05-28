@@ -87,7 +87,7 @@ Partial Class dlgClimaticLengthOfSeason
         Me.ucrChkLengthofSeason.Checked = False
         Me.ucrChkLengthofSeason.Location = New System.Drawing.Point(19, 247)
         Me.ucrChkLengthofSeason.Name = "ucrChkLengthofSeason"
-        Me.ucrChkLengthofSeason.Size = New System.Drawing.Size(123, 20)
+        Me.ucrChkLengthofSeason.Size = New System.Drawing.Size(188, 20)
         Me.ucrChkLengthofSeason.TabIndex = 9
         '
         'ucrInputTextType
@@ -105,7 +105,7 @@ Partial Class dlgClimaticLengthOfSeason
         Me.ucrInputLengthofSeason.AddQuotesIfUnrecognised = True
         Me.ucrInputLengthofSeason.IsMultiline = False
         Me.ucrInputLengthofSeason.IsReadOnly = False
-        Me.ucrInputLengthofSeason.Location = New System.Drawing.Point(143, 246)
+        Me.ucrInputLengthofSeason.Location = New System.Drawing.Point(213, 246)
         Me.ucrInputLengthofSeason.Name = "ucrInputLengthofSeason"
         Me.ucrInputLengthofSeason.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputLengthofSeason.TabIndex = 10

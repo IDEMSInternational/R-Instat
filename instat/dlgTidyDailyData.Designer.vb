@@ -36,16 +36,17 @@ Partial Class dlgTidyDailyData
         Me.lblColumnstoStack = New System.Windows.Forms.Label()
         Me.lblMultipleElement = New System.Windows.Forms.Label()
         Me.grpElements = New System.Windows.Forms.GroupBox()
-        Me.ucrChkUnstackElements = New instat.ucrCheck()
         Me.lblOr = New System.Windows.Forms.Label()
-        Me.ucrTextBoxElementName = New instat.ucrInputTextBox()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.ucrChkIgnoreInvalid = New instat.ucrCheck()
-        Me.ucrChkSilent = New instat.ucrCheck()
         Me.lblNewDataFrameName = New System.Windows.Forms.Label()
         Me.ttReshapeType = New System.Windows.Forms.ToolTip(Me.components)
+        Me.lblNColumns = New System.Windows.Forms.Label()
         Me.ucrInputNewDataFrame = New instat.ucrInputTextBox()
+        Me.ucrChkIgnoreInvalid = New instat.ucrCheck()
+        Me.ucrChkSilent = New instat.ucrCheck()
+        Me.ucrChkUnstackElements = New instat.ucrCheck()
+        Me.ucrTextBoxElementName = New instat.ucrInputTextBox()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverMultipleStack = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverDayofMonth = New instat.ucrReceiverSingle()
@@ -54,7 +55,6 @@ Partial Class dlgTidyDailyData
         Me.ucrSelectorTidyDailyData = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblNColumns = New System.Windows.Forms.Label()
         Me.grpElements.SuspendLayout()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
@@ -141,33 +141,10 @@ Partial Class dlgTidyDailyData
         Me.grpElements.Name = "grpElements"
         Me.grpElements.TabStop = False
         '
-        'ucrChkUnstackElements
-        '
-        Me.ucrChkUnstackElements.Checked = False
-        resources.ApplyResources(Me.ucrChkUnstackElements, "ucrChkUnstackElements")
-        Me.ucrChkUnstackElements.Name = "ucrChkUnstackElements"
-        '
         'lblOr
         '
         resources.ApplyResources(Me.lblOr, "lblOr")
         Me.lblOr.Name = "lblOr"
-        '
-        'ucrTextBoxElementName
-        '
-        Me.ucrTextBoxElementName.AddQuotesIfUnrecognised = True
-        Me.ucrTextBoxElementName.IsMultiline = False
-        Me.ucrTextBoxElementName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrTextBoxElementName, "ucrTextBoxElementName")
-        Me.ucrTextBoxElementName.Name = "ucrTextBoxElementName"
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'grpOptions
         '
@@ -176,6 +153,25 @@ Partial Class dlgTidyDailyData
         resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
+        '
+        'lblNewDataFrameName
+        '
+        resources.ApplyResources(Me.lblNewDataFrameName, "lblNewDataFrameName")
+        Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
+        '
+        'lblNColumns
+        '
+        resources.ApplyResources(Me.lblNColumns, "lblNColumns")
+        Me.lblNColumns.ForeColor = System.Drawing.Color.Red
+        Me.lblNColumns.Name = "lblNColumns"
+        '
+        'ucrInputNewDataFrame
+        '
+        Me.ucrInputNewDataFrame.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewDataFrame.IsMultiline = False
+        Me.ucrInputNewDataFrame.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNewDataFrame, "ucrInputNewDataFrame")
+        Me.ucrInputNewDataFrame.Name = "ucrInputNewDataFrame"
         '
         'ucrChkIgnoreInvalid
         '
@@ -189,18 +185,28 @@ Partial Class dlgTidyDailyData
         resources.ApplyResources(Me.ucrChkSilent, "ucrChkSilent")
         Me.ucrChkSilent.Name = "ucrChkSilent"
         '
-        'lblNewDataFrameName
+        'ucrChkUnstackElements
         '
-        resources.ApplyResources(Me.lblNewDataFrameName, "lblNewDataFrameName")
-        Me.lblNewDataFrameName.Name = "lblNewDataFrameName"
+        Me.ucrChkUnstackElements.Checked = False
+        resources.ApplyResources(Me.ucrChkUnstackElements, "ucrChkUnstackElements")
+        Me.ucrChkUnstackElements.Name = "ucrChkUnstackElements"
         '
-        'ucrInputNewDataFrame
+        'ucrTextBoxElementName
         '
-        Me.ucrInputNewDataFrame.AddQuotesIfUnrecognised = True
-        Me.ucrInputNewDataFrame.IsMultiline = False
-        Me.ucrInputNewDataFrame.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNewDataFrame, "ucrInputNewDataFrame")
-        Me.ucrInputNewDataFrame.Name = "ucrInputNewDataFrame"
+        Me.ucrTextBoxElementName.AddQuotesIfUnrecognised = True
+        Me.ucrTextBoxElementName.IsMultiline = False
+        Me.ucrTextBoxElementName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrTextBoxElementName, "ucrTextBoxElementName")
+        Me.ucrTextBoxElementName.Name = "ucrTextBoxElementName"
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrReceiverMultipleStack
         '
@@ -264,12 +270,6 @@ Partial Class dlgTidyDailyData
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'lblNColumns
-        '
-        resources.ApplyResources(Me.lblNColumns, "lblNColumns")
-        Me.lblNColumns.ForeColor = System.Drawing.Color.Red
-        Me.lblNColumns.Name = "lblNColumns"
         '
         'dlgTidyDailyData
         '

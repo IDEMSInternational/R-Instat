@@ -45,25 +45,25 @@ Partial Class dlgCorrelation
         Me.rdoKendall = New System.Windows.Forms.RadioButton()
         Me.rdoPearson = New System.Windows.Forms.RadioButton()
         Me.rdoSpearman = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMethod = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.grpMissing = New System.Windows.Forms.GroupBox()
         Me.rdoCompleteRowsOnly = New System.Windows.Forms.RadioButton()
         Me.rdoPairwise = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.lblConfInterval = New System.Windows.Forms.Label()
         Me.rdoTwoColumns = New System.Windows.Forms.RadioButton()
         Me.rdoMultipleColumns = New System.Windows.Forms.RadioButton()
+        Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.ucrSaveModel = New instat.ucrSave()
         Me.ucrNudConfidenceInterval = New instat.ucrNud()
         Me.ucrChkCorrelationMatrix = New instat.ucrCheck()
         Me.ucrPnlColumns = New instat.UcrPanel()
+        Me.ucrPnlMethod = New instat.UcrPanel()
         Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
+        Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.ucrReceiverSecondColumn = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorCorrelation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.grpMethod.SuspendLayout()
         Me.grpMissing.SuspendLayout()
         Me.SuspendLayout()
@@ -114,11 +114,6 @@ Partial Class dlgCorrelation
         Me.rdoSpearman.Tag = "Spearman"
         Me.rdoSpearman.UseVisualStyleBackColor = True
         '
-        'ucrPnlMethod
-        '
-        resources.ApplyResources(Me.ucrPnlMethod, "ucrPnlMethod")
-        Me.ucrPnlMethod.Name = "ucrPnlMethod"
-        '
         'cmdOptions
         '
         resources.ApplyResources(Me.cmdOptions, "cmdOptions")
@@ -152,11 +147,6 @@ Partial Class dlgCorrelation
         Me.rdoPairwise.Tag = "Pairwise"
         Me.rdoPairwise.UseVisualStyleBackColor = True
         '
-        'ucrPnlCompletePairwise
-        '
-        resources.ApplyResources(Me.ucrPnlCompletePairwise, "ucrPnlCompletePairwise")
-        Me.ucrPnlCompletePairwise.Name = "ucrPnlCompletePairwise"
-        '
         'lblConfInterval
         '
         resources.ApplyResources(Me.lblConfInterval, "lblConfInterval")
@@ -181,6 +171,12 @@ Partial Class dlgCorrelation
         Me.rdoMultipleColumns.Name = "rdoMultipleColumns"
         Me.rdoMultipleColumns.TabStop = True
         Me.rdoMultipleColumns.UseVisualStyleBackColor = True
+        '
+        'lblSelectedVariables
+        '
+        resources.ApplyResources(Me.lblSelectedVariables, "lblSelectedVariables")
+        Me.lblSelectedVariables.Name = "lblSelectedVariables"
+        Me.lblSelectedVariables.Tag = ""
         '
         'ucrSaveModel
         '
@@ -208,6 +204,11 @@ Partial Class dlgCorrelation
         resources.ApplyResources(Me.ucrPnlColumns, "ucrPnlColumns")
         Me.ucrPnlColumns.Name = "ucrPnlColumns"
         '
+        'ucrPnlMethod
+        '
+        resources.ApplyResources(Me.ucrPnlMethod, "ucrPnlMethod")
+        Me.ucrPnlMethod.Name = "ucrPnlMethod"
+        '
         'ucrReceiverMultipleColumns
         '
         Me.ucrReceiverMultipleColumns.frmParent = Me
@@ -216,6 +217,11 @@ Partial Class dlgCorrelation
         Me.ucrReceiverMultipleColumns.Selector = Nothing
         Me.ucrReceiverMultipleColumns.strNcFilePath = ""
         Me.ucrReceiverMultipleColumns.ucrSelector = Nothing
+        '
+        'ucrPnlCompletePairwise
+        '
+        resources.ApplyResources(Me.ucrPnlCompletePairwise, "ucrPnlCompletePairwise")
+        Me.ucrPnlCompletePairwise.Name = "ucrPnlCompletePairwise"
         '
         'ucrReceiverSecondColumn
         '
@@ -247,12 +253,6 @@ Partial Class dlgCorrelation
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'lblSelectedVariables
-        '
-        resources.ApplyResources(Me.lblSelectedVariables, "lblSelectedVariables")
-        Me.lblSelectedVariables.Name = "lblSelectedVariables"
-        Me.lblSelectedVariables.Tag = ""
         '
         'dlgCorrelation
         '
