@@ -20,12 +20,9 @@ Public Class dlgPasteNewDataFrame
 
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsPasteFunction As RFunction
-    'used to prevent TestOkEnabled from being called multiple times when loading the dialog. 
-    Private bIsOnDialogLoad As Boolean
+    Private clsAddData, clsDataList, clsPasteFunction As New RFunction
 
     Private Sub dlgPasteNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        bIsOnDialogLoad = True
         autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
@@ -38,7 +35,6 @@ Public Class dlgPasteNewDataFrame
         SetClipBoardDataParameter()
         SetRCodeForControls(bReset)
         bReset = False
-        bIsOnDialogLoad = False
         TestOkEnabled()
     End Sub
 
@@ -51,7 +47,6 @@ Public Class dlgPasteNewDataFrame
         ucrSaveNewDFName.SetLabelText("New Data Frame Name:")
         ucrSaveNewDFName.SetPrefix("data")
 
-        'ucrChkRowHeader.Text = "First row is header"
         ucrChkRowHeader.SetText("First row is header")
         ucrChkRowHeader.SetParameter(New RParameter("header", 1))
 
@@ -60,7 +55,17 @@ Public Class dlgPasteNewDataFrame
     End Sub
 
     Private Sub SetDefaults()
+        clsAddData = New RFunction
+        clsDataList = New RFunction
         clsPasteFunction = New RFunction
+
+        'todo 29/05/2021. this is temporarily done this way because of how
+        'function ConstructAssignTo in clsRCodeStructure is currently implemented.
+        'It doesn't construct assignTo statements correctly
+        clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+        clsAddData.AddParameter("data_tables", clsRFunctionParameter:=clsDataList, iPosition:=0)
+        clsDataList.SetRCommand("list")
+        clsDataList.AddParameter(strParameterName:=ucrSaveNewDFName.GetText, clsRFunctionParameter:=clsPasteFunction)
 
         clsPasteFunction.SetPackageName("clipr")
         clsPasteFunction.SetRCommand("read_clip_tbl")
@@ -70,7 +75,7 @@ Public Class dlgPasteNewDataFrame
         'please note. for some reason,this parameter is not used by clipr if x(data) parameter is specified.
         clsPasteFunction.AddParameter("nrows", 1000, iPosition:=2)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsPasteFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsAddData)
 
         ucrNudPreviewLines.Value = 10
         ucrSaveNewDFName.Reset()
@@ -78,7 +83,8 @@ Public Class dlgPasteNewDataFrame
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrChkRowHeader.SetRCode(clsPasteFunction, bReset)
-        ucrSaveNewDFName.SetRCode(clsPasteFunction, bReset)
+        'todo 29/05/2021. this is temporarily commented out
+        'ucrSaveNewDFName.SetRCode(clsPasteFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -91,10 +97,14 @@ Public Class dlgPasteNewDataFrame
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSaveNewDFName.ControlContentsChanged, ucrChkRowHeader.ControlContentsChanged, ucrNudPreviewLines.ControlContentsChanged
-        If Not bIsOnDialogLoad Then
-            TestOkEnabled()
-        End If
+    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkRowHeader.ControlContentsChanged, ucrNudPreviewLines.ControlContentsChanged
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrSaveNewDFName_ControlValueChangedChanged(ucrchangedControl As ucrCore) Handles ucrSaveNewDFName.ControlValueChanged
+        clsDataList.ClearParameters()
+        clsDataList.AddParameter(strParameterName:=ucrSaveNewDFName.GetText, clsRFunctionParameter:=clsPasteFunction)
+        TestOkEnabled()
     End Sub
 
     Private Sub btnRefreshPreview_Click(sender As Object, e As EventArgs) Handles btnRefreshPreview.Click
@@ -103,8 +113,7 @@ Public Class dlgPasteNewDataFrame
     End Sub
 
     Public Sub SetClipBoardDataParameter()
-        'todo 29/05/2021. this is temporarily commented because of the way function ConstructAssignTo in clsRCodeStructure is currently implemented
-        'clsPasteFunction.AddParameter("x", Chr(34) & My.Computer.Clipboard.GetText & Chr(34), iPosition:=0)
+        clsPasteFunction.AddParameter("x", Chr(34) & My.Computer.Clipboard.GetText & Chr(34), iPosition:=0)
     End Sub
 
     ''' <summary>
@@ -115,10 +124,10 @@ Public Class dlgPasteNewDataFrame
         Dim bValid As Boolean = False
         Dim dfTemp As DataFrame
         Dim expTemp As SymbolicExpression
-        Dim copiedDataRowCount As Integer
+        'Dim copiedDataRowCount As Integer
         Dim clsTempImport As New RFunction
         'split copied data to an array of indivindual lines. Used to validate length of data.
-        Dim arrStrTemp() As String = My.Computer.Clipboard.GetText().Split(New String() {Environment.NewLine}, StringSplitOptions.None)
+        'Dim arrStrTemp() As String = My.Computer.Clipboard.GetText().Split(New String() {Environment.NewLine}, StringSplitOptions.None)
 
         'set feedbcak controls default states
         panelNoDataPreview.Visible = True
@@ -126,27 +135,27 @@ Public Class dlgPasteNewDataFrame
         lblConfirmText.ForeColor = Color.Red
 
         'remove the last element in the array. It's always an empty line and is ignored by clipr
-        If arrStrTemp.Length > 2 Then
-            ReDim Preserve arrStrTemp(arrStrTemp.Length - 2)
-        End If
+        'If arrStrTemp.Length > 2 Then
+        '    ReDim Preserve arrStrTemp(arrStrTemp.Length - 2)
+        'End If
 
         'get the actual row count of the copied data (based on whether the header is selected or not)
-        copiedDataRowCount = If(ucrChkRowHeader.Checked, arrStrTemp.Length - 1, arrStrTemp.Length)
+        'copiedDataRowCount = If(ucrChkRowHeader.Checked, arrStrTemp.Length - 1, arrStrTemp.Length)
 
         'validate allowed number of rows
-        If copiedDataRowCount = 0 Then
-            lblConfirmText.Text = "No copied data detected."
-            Return bValid
-        Else
-            lblConfirmText.Text = "Click Ok to paste data to new data frames."
-        End If
+        'If copiedDataRowCount = 0 Then
+        '    lblConfirmText.Text = "No copied data detected."
+        '    Return bValid
+        'Else
+        '    lblConfirmText.Text = "Click Ok to paste data to new data frames."
+        'End If
 
         'use clipr package to check if structure of data can be pasted to a data frame 
         clsTempImport.SetPackageName("clipr")
         clsTempImport.SetRCommand("read_clip_tbl")
 
         'reconstruct the copied data from the array. No need will just be slower, 
-        'so let clipr use its clipboard functionality. left here for future refernce
+        'so let clipr use its clipboard functionality. commented code left here for future refernce
         'clsTempImport.AddParameter("x", Chr(34) & Strings.Join(arrStrTemp, Environment.NewLine) & Chr(34))
 
         clsTempImport.AddParameter("header", If(ucrChkRowHeader.Checked, "TRUE", "FALSE"))
@@ -162,7 +171,7 @@ Public Class dlgPasteNewDataFrame
                 'try to preview the data
                 frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
                 bValid = True
-                lblConfirmText.Text = lblConfirmText.Text & Environment.NewLine &
+                lblConfirmText.Text = "Click Ok to paste data to new data frames." & Environment.NewLine &
                    "Found: Columns = " & dfTemp.ColumnCount & ", Rows = " & dfTemp.RowCount
                 lblConfirmText.ForeColor = Color.Green
             Catch
@@ -177,6 +186,5 @@ Public Class dlgPasteNewDataFrame
         panelNoDataPreview.Visible = Not bValid
         Return bValid
     End Function
-
 
 End Class

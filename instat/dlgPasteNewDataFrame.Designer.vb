@@ -127,7 +127,7 @@ Partial Class dlgPasteNewDataFrame
         Me.ucrSaveNewDFName.Location = New System.Drawing.Point(10, 256)
         Me.ucrSaveNewDFName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDFName.Name = "ucrSaveNewDFName"
-        Me.ucrSaveNewDFName.Size = New System.Drawing.Size(267, 24)
+        Me.ucrSaveNewDFName.Size = New System.Drawing.Size(246, 24)
         Me.ucrSaveNewDFName.TabIndex = 25
         '
         'panelNoDataPreview
