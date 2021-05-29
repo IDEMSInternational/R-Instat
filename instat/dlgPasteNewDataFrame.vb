@@ -103,7 +103,7 @@ Public Class dlgPasteNewDataFrame
     End Sub
 
     Public Sub SetClipBoardDataParameter()
-        'todo. temporarily commented
+        'todo 29/05/2021. this is temporarily commented because of the way function ConstructAssignTo in clsRCodeStructure is currently implemented
         'clsPasteFunction.AddParameter("x", Chr(34) & My.Computer.Clipboard.GetText & Chr(34), iPosition:=0)
     End Sub
 
