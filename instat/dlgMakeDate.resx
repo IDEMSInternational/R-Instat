@@ -353,7 +353,7 @@ Examples:
     <value>1</value>
   </data>
   <data name="ucrDtpSpecifyOrigin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 110</value>
+    <value>121, 110</value>
   </data>
   <data name="ucrDtpSpecifyOrigin.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
@@ -758,7 +758,7 @@ Examples:
     <value>9</value>
   </data>
   <data name="ucrInputFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 110</value>
+    <value>122, 110</value>
   </data>
   <data name="ucrInputFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
@@ -779,7 +779,7 @@ Examples:
     <value>10</value>
   </data>
   <data name="ucrInputOrigin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 80</value>
+    <value>121, 80</value>
   </data>
   <data name="ucrInputOrigin.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
@@ -1616,7 +1616,7 @@ Examples:
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>237, 24</value>
+    <value>290, 24</value>
   </data>
   <data name="ucrSaveDate.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>

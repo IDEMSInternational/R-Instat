@@ -56,7 +56,7 @@ Partial Class dlgClimaticStationMaps
         '
         Me.cmdPlotOptions.Location = New System.Drawing.Point(10, 263)
         Me.cmdPlotOptions.Name = "cmdPlotOptions"
-        Me.cmdPlotOptions.Size = New System.Drawing.Size(103, 23)
+        Me.cmdPlotOptions.Size = New System.Drawing.Size(167, 23)
         Me.cmdPlotOptions.TabIndex = 12
         Me.cmdPlotOptions.Text = "Plot Options"
         Me.cmdPlotOptions.UseVisualStyleBackColor = True
@@ -65,7 +65,7 @@ Partial Class dlgClimaticStationMaps
         '
         Me.cmdMapOptions.Location = New System.Drawing.Point(10, 322)
         Me.cmdMapOptions.Name = "cmdMapOptions"
-        Me.cmdMapOptions.Size = New System.Drawing.Size(103, 23)
+        Me.cmdMapOptions.Size = New System.Drawing.Size(167, 23)
         Me.cmdMapOptions.TabIndex = 14
         Me.cmdMapOptions.Text = "Map Options"
         Me.cmdMapOptions.UseVisualStyleBackColor = True
@@ -74,7 +74,7 @@ Partial Class dlgClimaticStationMaps
         '
         Me.cmdSFOptions.Location = New System.Drawing.Point(10, 293)
         Me.cmdSFOptions.Name = "cmdSFOptions"
-        Me.cmdSFOptions.Size = New System.Drawing.Size(103, 23)
+        Me.cmdSFOptions.Size = New System.Drawing.Size(167, 23)
         Me.cmdSFOptions.TabIndex = 13
         Me.cmdSFOptions.Text = "SF Options"
         Me.cmdSFOptions.UseVisualStyleBackColor = True
@@ -279,7 +279,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrChkAddPoints.Checked = False
         Me.ucrChkAddPoints.Location = New System.Drawing.Point(231, 107)
         Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
-        Me.ucrChkAddPoints.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkAddPoints.Size = New System.Drawing.Size(120, 20)
         Me.ucrChkAddPoints.TabIndex = 34
         '
         'Label1

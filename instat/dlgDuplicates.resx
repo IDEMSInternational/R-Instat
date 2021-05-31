@@ -129,10 +129,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdoDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>39, 12</value>
+    <value>11, 12</value>
   </data>
   <data name="rdoDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 27</value>
+    <value>135, 27</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoDataFrame.TabIndex" type="System.Int32, mscorlib">
@@ -166,10 +166,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 12</value>
+    <value>144, 12</value>
   </data>
   <data name="rdoSelectedVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 27</value>
+    <value>135, 27</value>
   </data>
   <data name="rdoSelectedVariables.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -295,10 +295,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoSuccessiveValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 12</value>
+    <value>277, 12</value>
   </data>
   <data name="rdoSuccessiveValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 27</value>
+    <value>135, 27</value>
   </data>
   <data name="rdoSuccessiveValues.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -540,6 +540,27 @@
   <data name="&gt;&gt;lblType.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrChkIncludeSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 360</value>
+  </data>
+  <data name="ucrChkIncludeSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>135, 20</value>
+  </data>
+  <data name="ucrChkIncludeSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeSummary.Name" xml:space="preserve">
+    <value>ucrChkIncludeSummary</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeSummary.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeSummary.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkIncludeSummary.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrInputComboType.Location" type="System.Drawing.Point, System.Drawing">
     <value>212, 295</value>
   </data>
@@ -571,28 +592,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>422, 473</value>
-  </data>
-  <data name="ucrChkIncludeSummary.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 360</value>
-  </data>
-  <data name="ucrChkIncludeSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 20</value>
-  </data>
-  <data name="ucrChkIncludeSummary.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeSummary.Name" xml:space="preserve">
-    <value>ucrChkIncludeSummary</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeSummary.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeSummary.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeSummary.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>421, 473</value>
   </data>
   <data name="ucrReceiverForSuccessiveValues.Location" type="System.Drawing.Point, System.Drawing">
     <value>277, 97</value>
@@ -664,10 +664,10 @@
     <value>13</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 8</value>
+    <value>6, 8</value>
   </data>
   <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>397, 36</value>
+    <value>410, 36</value>
   </data>
   <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -728,6 +728,9 @@
   </data>
   <data name="&gt;&gt;ucrSelectorDuplicateswithVariables.ZOrder" xml:space="preserve">
     <value>18</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
