@@ -55,16 +55,21 @@ Partial Class dlgSummaryTables
         Me.ucrSelectorSummaryTables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblSigFigs = New System.Windows.Forms.Label()
         Me.ucrNudSigFigs = New instat.ucrNud()
-        Me.ucrInputPageBy = New instat.ucrInputComboBox()
-        Me.lblPageBy = New System.Windows.Forms.Label()
-        Me.lblColumnFactors = New System.Windows.Forms.Label()
-        Me.ucrChkRowNumbers = New instat.ucrCheck()
-        Me.ucrChkHTMLTable = New instat.ucrCheck()
-        Me.ucrNudColumnFactors = New instat.ucrNud()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
+        Me.ucrChkDisplaySummaryVariablesAsRow = New instat.ucrCheck()
+        Me.ucrChkDisplayVariablesAsRows = New instat.ucrCheck()
+        Me.ucrChkDisplaySummariesAsRow = New instat.ucrCheck()
         Me.ucrInputNA = New instat.ucrInputTextBox()
         Me.lblDisplayNA = New System.Windows.Forms.Label()
+        Me.grpMargin = New System.Windows.Forms.GroupBox()
+        Me.rdoBoth = New System.Windows.Forms.RadioButton()
+        Me.rdoSummary = New System.Windows.Forms.RadioButton()
+        Me.rdoOuter = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMargin = New instat.UcrPanel()
+        Me.lblMarginName = New System.Windows.Forms.Label()
+        Me.ucrInputMarginName = New instat.ucrInputTextBox()
         Me.grpDisplay.SuspendLayout()
+        Me.grpMargin.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblFactors
@@ -176,62 +181,36 @@ Partial Class dlgSummaryTables
         Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
         Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputPageBy
-        '
-        Me.ucrInputPageBy.AddQuotesIfUnrecognised = True
-        Me.ucrInputPageBy.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPageBy, "ucrInputPageBy")
-        Me.ucrInputPageBy.Name = "ucrInputPageBy"
-        '
-        'lblPageBy
-        '
-        resources.ApplyResources(Me.lblPageBy, "lblPageBy")
-        Me.lblPageBy.Name = "lblPageBy"
-        Me.lblPageBy.Tag = "Page by:"
-        '
-        'lblColumnFactors
-        '
-        resources.ApplyResources(Me.lblColumnFactors, "lblColumnFactors")
-        Me.lblColumnFactors.Name = "lblColumnFactors"
-        Me.lblColumnFactors.Tag = "Column_Factors:"
-        '
-        'ucrChkRowNumbers
-        '
-        Me.ucrChkRowNumbers.Checked = False
-        resources.ApplyResources(Me.ucrChkRowNumbers, "ucrChkRowNumbers")
-        Me.ucrChkRowNumbers.Name = "ucrChkRowNumbers"
-        '
-        'ucrChkHTMLTable
-        '
-        Me.ucrChkHTMLTable.Checked = False
-        resources.ApplyResources(Me.ucrChkHTMLTable, "ucrChkHTMLTable")
-        Me.ucrChkHTMLTable.Name = "ucrChkHTMLTable"
-        '
-        'ucrNudColumnFactors
-        '
-        Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudColumnFactors, "ucrNudColumnFactors")
-        Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
-        Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
         'grpDisplay
         '
+        Me.grpDisplay.Controls.Add(Me.ucrChkDisplaySummaryVariablesAsRow)
+        Me.grpDisplay.Controls.Add(Me.ucrChkDisplayVariablesAsRows)
+        Me.grpDisplay.Controls.Add(Me.ucrChkDisplaySummariesAsRow)
         Me.grpDisplay.Controls.Add(Me.ucrInputNA)
         Me.grpDisplay.Controls.Add(Me.lblDisplayNA)
-        Me.grpDisplay.Controls.Add(Me.ucrNudColumnFactors)
-        Me.grpDisplay.Controls.Add(Me.ucrChkHTMLTable)
-        Me.grpDisplay.Controls.Add(Me.ucrChkRowNumbers)
-        Me.grpDisplay.Controls.Add(Me.lblColumnFactors)
-        Me.grpDisplay.Controls.Add(Me.lblPageBy)
-        Me.grpDisplay.Controls.Add(Me.ucrInputPageBy)
         Me.grpDisplay.Controls.Add(Me.ucrNudSigFigs)
         Me.grpDisplay.Controls.Add(Me.lblSigFigs)
         resources.ApplyResources(Me.grpDisplay, "grpDisplay")
         Me.grpDisplay.Name = "grpDisplay"
         Me.grpDisplay.TabStop = False
+        '
+        'ucrChkDisplaySummaryVariablesAsRow
+        '
+        Me.ucrChkDisplaySummaryVariablesAsRow.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplaySummaryVariablesAsRow, "ucrChkDisplaySummaryVariablesAsRow")
+        Me.ucrChkDisplaySummaryVariablesAsRow.Name = "ucrChkDisplaySummaryVariablesAsRow"
+        '
+        'ucrChkDisplayVariablesAsRows
+        '
+        Me.ucrChkDisplayVariablesAsRows.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplayVariablesAsRows, "ucrChkDisplayVariablesAsRows")
+        Me.ucrChkDisplayVariablesAsRows.Name = "ucrChkDisplayVariablesAsRows"
+        '
+        'ucrChkDisplaySummariesAsRow
+        '
+        Me.ucrChkDisplaySummariesAsRow.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplaySummariesAsRow, "ucrChkDisplaySummariesAsRow")
+        Me.ucrChkDisplaySummariesAsRow.Name = "ucrChkDisplaySummariesAsRow"
         '
         'ucrInputNA
         '
@@ -247,10 +226,61 @@ Partial Class dlgSummaryTables
         Me.lblDisplayNA.Name = "lblDisplayNA"
         Me.lblDisplayNA.Tag = ""
         '
+        'grpMargin
+        '
+        Me.grpMargin.Controls.Add(Me.rdoBoth)
+        Me.grpMargin.Controls.Add(Me.rdoSummary)
+        Me.grpMargin.Controls.Add(Me.rdoOuter)
+        Me.grpMargin.Controls.Add(Me.ucrPnlMargin)
+        resources.ApplyResources(Me.grpMargin, "grpMargin")
+        Me.grpMargin.Name = "grpMargin"
+        Me.grpMargin.TabStop = False
+        '
+        'rdoBoth
+        '
+        resources.ApplyResources(Me.rdoBoth, "rdoBoth")
+        Me.rdoBoth.Name = "rdoBoth"
+        Me.rdoBoth.TabStop = True
+        Me.rdoBoth.UseVisualStyleBackColor = True
+        '
+        'rdoSummary
+        '
+        resources.ApplyResources(Me.rdoSummary, "rdoSummary")
+        Me.rdoSummary.Name = "rdoSummary"
+        Me.rdoSummary.TabStop = True
+        Me.rdoSummary.UseVisualStyleBackColor = True
+        '
+        'rdoOuter
+        '
+        resources.ApplyResources(Me.rdoOuter, "rdoOuter")
+        Me.rdoOuter.Name = "rdoOuter"
+        Me.rdoOuter.TabStop = True
+        Me.rdoOuter.UseVisualStyleBackColor = True
+        '
+        'ucrPnlMargin
+        '
+        resources.ApplyResources(Me.ucrPnlMargin, "ucrPnlMargin")
+        Me.ucrPnlMargin.Name = "ucrPnlMargin"
+        '
+        'lblMarginName
+        '
+        resources.ApplyResources(Me.lblMarginName, "lblMarginName")
+        Me.lblMarginName.Name = "lblMarginName"
+        '
+        'ucrInputMarginName
+        '
+        Me.ucrInputMarginName.AddQuotesIfUnrecognised = True
+        Me.ucrInputMarginName.IsMultiline = False
+        Me.ucrInputMarginName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMarginName, "ucrInputMarginName")
+        Me.ucrInputMarginName.Name = "ucrInputMarginName"
+        '
         'dlgSummaryTables
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputMarginName)
+        Me.Controls.Add(Me.lblMarginName)
         Me.Controls.Add(Me.ucrSaveTable)
         Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.ucrChkStoreResults)
@@ -266,12 +296,15 @@ Partial Class dlgSummaryTables
         Me.Controls.Add(Me.ucrChkWeight)
         Me.Controls.Add(Me.lblFactors)
         Me.Controls.Add(Me.ucrSelectorSummaryTables)
+        Me.Controls.Add(Me.grpMargin)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgSummaryTables"
         Me.grpDisplay.ResumeLayout(False)
         Me.grpDisplay.PerformLayout()
+        Me.grpMargin.ResumeLayout(False)
+        Me.grpMargin.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -294,12 +327,16 @@ Partial Class dlgSummaryTables
     Friend WithEvents grpDisplay As GroupBox
     Friend WithEvents ucrInputNA As ucrInputTextBox
     Friend WithEvents lblDisplayNA As Label
-    Friend WithEvents ucrNudColumnFactors As ucrNud
-    Friend WithEvents ucrChkHTMLTable As ucrCheck
-    Friend WithEvents ucrChkRowNumbers As ucrCheck
-    Friend WithEvents lblColumnFactors As Label
-    Friend WithEvents lblPageBy As Label
-    Friend WithEvents ucrInputPageBy As ucrInputComboBox
     Friend WithEvents ucrNudSigFigs As ucrNud
     Friend WithEvents lblSigFigs As Label
+    Friend WithEvents grpMargin As GroupBox
+    Friend WithEvents rdoBoth As RadioButton
+    Friend WithEvents rdoSummary As RadioButton
+    Friend WithEvents rdoOuter As RadioButton
+    Friend WithEvents ucrPnlMargin As UcrPanel
+    Friend WithEvents lblMarginName As Label
+    Friend WithEvents ucrInputMarginName As ucrInputTextBox
+    Friend WithEvents ucrChkDisplaySummaryVariablesAsRow As ucrCheck
+    Friend WithEvents ucrChkDisplayVariablesAsRows As ucrCheck
+    Friend WithEvents ucrChkDisplaySummariesAsRow As ucrCheck
 End Class
