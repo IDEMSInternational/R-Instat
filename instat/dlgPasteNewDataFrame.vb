@@ -137,7 +137,7 @@ Public Class dlgPasteNewDataFrame
 
         'reconstruct the copied data from the array. No need will just be slower, 
         'so let clipr use its clipboard functionality.
-        'commented code left here for future refernce
+        'commented code left here for future reference
         'clsTempImport.AddParameter("x", Chr(34) & Strings.Join(arrStrTemp, Environment.NewLine) & Chr(34))
 
         clsTempImport.AddParameter("header", If(ucrChkRowHeader.Checked, "TRUE", "FALSE"))
