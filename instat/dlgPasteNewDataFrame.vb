@@ -126,7 +126,7 @@ Public Class dlgPasteNewDataFrame
         Dim expTemp As SymbolicExpression
         'Dim copiedDataRowCount As Integer
         Dim clsTempImport As New RFunction
-        'split copied data to an array of indivindual lines. Used to validate length of data.
+        'split copied data to an array of individual lines. Used to validate length of data.
         'Dim arrStrTemp() As String = My.Computer.Clipboard.GetText().Split(New String() {Environment.NewLine}, StringSplitOptions.None)
 
         'set feedback controls default states
