@@ -44,6 +44,7 @@ Public Class dlgSummaryTables
     Private Sub InitialiseDialog()
         ucrInputNA.Enabled = False
         lblDisplayNA.Enabled = False
+        ucrChkStoreResults.Enabled = False
 
         ucrBase.clsRsyntax.iCallType = 4
         ucrBase.iHelpTopicID = 426
@@ -63,10 +64,10 @@ Public Class dlgSummaryTables
         ucrReceiverFactors.Selector = ucrSelectorSummaryTables
         ucrReceiverFactors.SetDataType("factor")
 
-        ucrChkStoreResults.SetParameter(New RParameter("store_results", 5))
-        ucrChkStoreResults.SetText("Store Results in Data Frame")
-        ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkStoreResults.SetRDefault("TRUE")
+        'ucrChkStoreResults.SetParameter(New RParameter("store_results", 5))
+        'ucrChkStoreResults.SetText("Store Results in Data Frame")
+        'ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkStoreResults.SetRDefault("TRUE")
 
         ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 7))
         ucrChkOmitMissing.SetText("Omit Missing Values")
@@ -207,7 +208,6 @@ Public Class dlgSummaryTables
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=2)
-        clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=5)
         clsDefaultFunction.SetAssignTo("summary_table")
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDefaultFunction, iPosition:=0)
@@ -220,7 +220,7 @@ Public Class dlgSummaryTables
         ucrSelectorSummaryTables.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverSummaryCols.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverFactors.SetRCode(clsDefaultFunction, bReset)
-        ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
+        'ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsDefaultFunction, bReset)
         ucrChkDisplayMargins.SetRCode(clsDefaultFunction, bReset)
         ucrPnlMargin.SetRCode(clsDefaultFunction, bReset)
