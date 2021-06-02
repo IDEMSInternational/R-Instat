@@ -69,7 +69,7 @@ Partial Class dlgPasteNewDataFrame
         Me.btnRefreshPreview.Location = New System.Drawing.Point(470, 10)
         Me.btnRefreshPreview.Name = "btnRefreshPreview"
         Me.btnRefreshPreview.Size = New System.Drawing.Size(100, 23)
-        Me.btnRefreshPreview.TabIndex = 19
+        Me.btnRefreshPreview.TabIndex = 3
         Me.btnRefreshPreview.Text = "Refresh Preview"
         Me.btnRefreshPreview.UseVisualStyleBackColor = True
         '
@@ -78,7 +78,7 @@ Partial Class dlgPasteNewDataFrame
         Me.ucrBase.Location = New System.Drawing.Point(10, 289)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
-        Me.ucrBase.TabIndex = 20
+        Me.ucrBase.TabIndex = 5
         '
         'lblLinesToPreview
         '
@@ -100,7 +100,7 @@ Partial Class dlgPasteNewDataFrame
         Me.ucrNudPreviewLines.Minimum = New Decimal(New Integer() {10, 0, 0, 0})
         Me.ucrNudPreviewLines.Name = "ucrNudPreviewLines"
         Me.ucrNudPreviewLines.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudPreviewLines.TabIndex = 23
+        Me.ucrNudPreviewLines.TabIndex = 2
         Me.ucrNudPreviewLines.Value = New Decimal(New Integer() {10, 0, 0, 0})
         '
         'ucrChkRowHeader
@@ -109,7 +109,7 @@ Partial Class dlgPasteNewDataFrame
         Me.ucrChkRowHeader.Location = New System.Drawing.Point(146, 12)
         Me.ucrChkRowHeader.Name = "ucrChkRowHeader"
         Me.ucrChkRowHeader.Size = New System.Drawing.Size(169, 20)
-        Me.ucrChkRowHeader.TabIndex = 21
+        Me.ucrChkRowHeader.TabIndex = 1
         '
         'lblConfirmText
         '
@@ -128,7 +128,7 @@ Partial Class dlgPasteNewDataFrame
         Me.ucrSaveNewDFName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDFName.Name = "ucrSaveNewDFName"
         Me.ucrSaveNewDFName.Size = New System.Drawing.Size(246, 24)
-        Me.ucrSaveNewDFName.TabIndex = 25
+        Me.ucrSaveNewDFName.TabIndex = 4
         '
         'panelNoDataPreview
         '
