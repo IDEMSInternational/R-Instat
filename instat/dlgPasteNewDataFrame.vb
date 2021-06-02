@@ -40,7 +40,7 @@ Public Class dlgPasteNewDataFrame
 
     Private Sub InitialiseDialog()
         'todo. attach the help id later
-        'ucrBase.iHelpTopicID = 332
+        'ucrBase.iHelpTopicID = 
 
         ucrSaveNewDFName.SetIsTextBox()
         ucrSaveNewDFName.SetSaveTypeAsDataFrame()
@@ -50,8 +50,8 @@ Public Class dlgPasteNewDataFrame
         ucrChkRowHeader.SetText("First row is header")
         ucrChkRowHeader.SetParameter(New RParameter("header", 1))
 
+        ucrNudPreviewLines.Minimum = 10
         ucrNudPreviewLines.Maximum = 1000
-
     End Sub
 
     Private Sub SetDefaults()
@@ -124,38 +124,20 @@ Public Class dlgPasteNewDataFrame
         Dim bValid As Boolean = False
         Dim dfTemp As DataFrame
         Dim expTemp As SymbolicExpression
-        'Dim copiedDataRowCount As Integer
         Dim clsTempImport As New RFunction
-        'split copied data to an array of individual lines. Used to validate length of data.
-        'Dim arrStrTemp() As String = My.Computer.Clipboard.GetText().Split(New String() {Environment.NewLine}, StringSplitOptions.None)
 
         'set feedback controls default states
         panelNoDataPreview.Visible = True
         lblConfirmText.Text = ""
         lblConfirmText.ForeColor = Color.Red
 
-        'remove the last element in the array. It's always an empty line and is ignored by clipr
-        'If arrStrTemp.Length > 2 Then
-        '    ReDim Preserve arrStrTemp(arrStrTemp.Length - 2)
-        'End If
-
-        'get the actual row count of the copied data (based on whether the header is selected or not)
-        'copiedDataRowCount = If(ucrChkRowHeader.Checked, arrStrTemp.Length - 1, arrStrTemp.Length)
-
-        'validate allowed number of rows
-        'If copiedDataRowCount = 0 Then
-        '    lblConfirmText.Text = "No copied data detected."
-        '    Return bValid
-        'Else
-        '    lblConfirmText.Text = "Click Ok to paste data to new data frames."
-        'End If
-
         'use clipr package to check if structure of data can be pasted to a data frame 
         clsTempImport.SetPackageName("clipr")
         clsTempImport.SetRCommand("read_clip_tbl")
 
         'reconstruct the copied data from the array. No need will just be slower, 
-        'so let clipr use its clipboard functionality. commented code left here for future refernce
+        'so let clipr use its clipboard functionality.
+        'commented code left here for future refernce
         'clsTempImport.AddParameter("x", Chr(34) & Strings.Join(arrStrTemp, Environment.NewLine) & Chr(34))
 
         clsTempImport.AddParameter("header", If(ucrChkRowHeader.Checked, "TRUE", "FALSE"))
@@ -176,11 +158,9 @@ Public Class dlgPasteNewDataFrame
                 lblConfirmText.ForeColor = Color.Green
             Catch
                 lblConfirmText.Text = "Could not preview data. Cannot be pasted."
-                lblConfirmText.ForeColor = Color.Red
             End Try
         Else
             lblConfirmText.Text = "Could not preview data. Cannot be pasted."
-            lblConfirmText.ForeColor = Color.Red
         End If
 
         panelNoDataPreview.Visible = Not bValid
