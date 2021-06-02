@@ -68,6 +68,8 @@ Partial Class dlgSummaryTables
         Me.ucrPnlMargin = New instat.UcrPanel()
         Me.lblMarginName = New System.Windows.Forms.Label()
         Me.ucrInputMarginName = New instat.ucrInputTextBox()
+        Me.lblColumnFactors = New System.Windows.Forms.Label()
+        Me.ucrNudColumnFactors = New instat.ucrNud()
         Me.grpDisplay.SuspendLayout()
         Me.grpMargin.SuspendLayout()
         Me.SuspendLayout()
@@ -183,6 +185,8 @@ Partial Class dlgSummaryTables
         '
         'grpDisplay
         '
+        Me.grpDisplay.Controls.Add(Me.ucrNudColumnFactors)
+        Me.grpDisplay.Controls.Add(Me.lblColumnFactors)
         Me.grpDisplay.Controls.Add(Me.ucrChkDisplaySummaryVariablesAsRow)
         Me.grpDisplay.Controls.Add(Me.ucrChkDisplayVariablesAsRows)
         Me.grpDisplay.Controls.Add(Me.ucrChkDisplaySummariesAsRow)
@@ -275,6 +279,22 @@ Partial Class dlgSummaryTables
         resources.ApplyResources(Me.ucrInputMarginName, "ucrInputMarginName")
         Me.ucrInputMarginName.Name = "ucrInputMarginName"
         '
+        'lblColumnFactors
+        '
+        resources.ApplyResources(Me.lblColumnFactors, "lblColumnFactors")
+        Me.lblColumnFactors.Name = "lblColumnFactors"
+        Me.lblColumnFactors.Tag = ""
+        '
+        'ucrNudColumnFactors
+        '
+        Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudColumnFactors, "ucrNudColumnFactors")
+        Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
+        Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'dlgSummaryTables
         '
         resources.ApplyResources(Me, "$this")
@@ -339,4 +359,6 @@ Partial Class dlgSummaryTables
     Friend WithEvents ucrChkDisplaySummaryVariablesAsRow As ucrCheck
     Friend WithEvents ucrChkDisplayVariablesAsRows As ucrCheck
     Friend WithEvents ucrChkDisplaySummariesAsRow As ucrCheck
+    Friend WithEvents ucrNudColumnFactors As ucrNud
+    Friend WithEvents lblColumnFactors As Label
 End Class
