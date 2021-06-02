@@ -129,7 +129,7 @@ Public Class dlgPasteNewDataFrame
         'split copied data to an array of indivindual lines. Used to validate length of data.
         'Dim arrStrTemp() As String = My.Computer.Clipboard.GetText().Split(New String() {Environment.NewLine}, StringSplitOptions.None)
 
-        'set feedbcak controls default states
+        'set feedback controls default states
         panelNoDataPreview.Visible = True
         lblConfirmText.Text = ""
         lblConfirmText.ForeColor = Color.Red
