@@ -135,7 +135,7 @@ Partial Class dlgWindrose
         Me.ucrInputCaption.AddQuotesIfUnrecognised = True
         Me.ucrInputCaption.IsMultiline = False
         Me.ucrInputCaption.IsReadOnly = False
-        Me.ucrInputCaption.Location = New System.Drawing.Point(99, 287)
+        Me.ucrInputCaption.Location = New System.Drawing.Point(155, 287)
         Me.ucrInputCaption.Name = "ucrInputCaption"
         Me.ucrInputCaption.Size = New System.Drawing.Size(215, 21)
         Me.ucrInputCaption.TabIndex = 17
@@ -145,7 +145,7 @@ Partial Class dlgWindrose
         Me.ucrInputSubTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputSubTitle.IsMultiline = False
         Me.ucrInputSubTitle.IsReadOnly = False
-        Me.ucrInputSubTitle.Location = New System.Drawing.Point(99, 260)
+        Me.ucrInputSubTitle.Location = New System.Drawing.Point(155, 260)
         Me.ucrInputSubTitle.Name = "ucrInputSubTitle"
         Me.ucrInputSubTitle.Size = New System.Drawing.Size(215, 21)
         Me.ucrInputSubTitle.TabIndex = 16
@@ -155,7 +155,7 @@ Partial Class dlgWindrose
         Me.ucrInputTitle.AddQuotesIfUnrecognised = True
         Me.ucrInputTitle.IsMultiline = False
         Me.ucrInputTitle.IsReadOnly = False
-        Me.ucrInputTitle.Location = New System.Drawing.Point(99, 230)
+        Me.ucrInputTitle.Location = New System.Drawing.Point(155, 230)
         Me.ucrInputTitle.Name = "ucrInputTitle"
         Me.ucrInputTitle.Size = New System.Drawing.Size(215, 21)
         Me.ucrInputTitle.TabIndex = 15
@@ -175,6 +175,7 @@ Partial Class dlgWindrose
         'ucrSaveGraph
         '
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 319)
+        Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(260, 24)
         Me.ucrSaveGraph.TabIndex = 9

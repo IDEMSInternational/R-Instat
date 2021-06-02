@@ -35,7 +35,6 @@ Public Class dlgSpells
     Private strExcludingBetween As String = "Excluding between"
 
     Private Sub dlgSpells_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
@@ -46,6 +45,7 @@ Public Class dlgSpells
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

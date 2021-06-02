@@ -72,7 +72,6 @@ Public Class dlgStartofRains
     Private strWetSpell As String = "wet_spell"
 
     Private Sub dlgStartofRains_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -82,8 +81,8 @@ Public Class dlgStartofRains
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

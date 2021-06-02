@@ -667,7 +667,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudMaxDurationMissingData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 309</value>
+    <value>177, 309</value>
   </data>
   <data name="ucrNudMaxDurationMissingData.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -688,7 +688,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudMaxMissingDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 262</value>
+    <value>177, 262</value>
   </data>
   <data name="ucrNudMaxMissingDays.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -730,7 +730,7 @@
     <value>7</value>
   </data>
   <data name="ucrNudMaxMissingData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 285</value>
+    <value>177, 285</value>
   </data>
   <data name="ucrNudMaxMissingData.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -819,6 +819,9 @@
   <data name="ucrNewColName.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 555</value>
   </data>
+  <data name="ucrNewColName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrNewColName.Size" type="System.Drawing.Size, System.Drawing">
     <value>285, 24</value>
   </data>
@@ -883,7 +886,7 @@
     <value>20</value>
   </data>
   <data name="ucrInputTimeStep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 335</value>
+    <value>177, 335</value>
   </data>
   <data name="ucrInputTimeStep.Size" type="System.Drawing.Size, System.Drawing">
     <value>89, 21</value>

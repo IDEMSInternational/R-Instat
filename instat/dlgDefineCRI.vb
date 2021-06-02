@@ -29,7 +29,6 @@ Public Class dlgCorruptionDefineCRI
     Private strWeightColumn As String = "Weight"
 
     Private Sub dlgDefineCRI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -43,6 +42,7 @@ Public Class dlgCorruptionDefineCRI
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

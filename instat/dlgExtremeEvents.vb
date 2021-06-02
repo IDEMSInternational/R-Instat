@@ -22,7 +22,6 @@ Public Class dlgExtremeEvents
 
 
 
-        autoTranslate(Me)
 
         If bFirstLoad Then
             InitialiseDialog()
@@ -32,6 +31,7 @@ Public Class dlgExtremeEvents
         TestOKEnabled()
 
 
+        autoTranslate(Me)
     End Sub
     Private Sub TestOKEnabled()
 

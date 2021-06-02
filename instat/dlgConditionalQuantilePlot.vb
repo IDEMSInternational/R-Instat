@@ -23,7 +23,6 @@ Public Class dlgConditionalQuantilePlot
     Private clsConditionalQuantileFunction As New RFunction
     Private clsConditionalEvalFunction As New RFunction
     Private Sub dlgConditionalQuantilePlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             iDialogHeight = Me.Height
             iBaseMaxY = ucrBase.Location.Y
@@ -36,6 +35,7 @@ Public Class dlgConditionalQuantilePlot
         SetRcodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

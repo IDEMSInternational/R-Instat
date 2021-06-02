@@ -23,7 +23,6 @@ Public Class dlgViewGraph
     Private strGlobalGraphDisplayOption As String
 
     Private Sub dlgViewGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         strGlobalGraphDisplayOption = frmMain.clsInstatOptions.strGraphDisplayOption
         If bFirstLoad Then
             InitialiseDialog()
@@ -36,6 +35,7 @@ Public Class dlgViewGraph
         SetGraphDisplayType()
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

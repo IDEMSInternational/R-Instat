@@ -56,9 +56,9 @@ Partial Class dlgClimaticNCMPCountRecords
         'cmdStationMetadata
         '
         Me.cmdStationMetadata.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdStationMetadata.Location = New System.Drawing.Point(254, 181)
+        Me.cmdStationMetadata.Location = New System.Drawing.Point(241, 181)
         Me.cmdStationMetadata.Name = "cmdStationMetadata"
-        Me.cmdStationMetadata.Size = New System.Drawing.Size(120, 23)
+        Me.cmdStationMetadata.Size = New System.Drawing.Size(149, 23)
         Me.cmdStationMetadata.TabIndex = 7
         Me.cmdStationMetadata.Text = "Station Metadata"
         Me.cmdStationMetadata.UseVisualStyleBackColor = True
