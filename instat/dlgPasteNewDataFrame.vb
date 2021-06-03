@@ -50,8 +50,7 @@ Public Class dlgPasteNewDataFrame
         ucrChkRowHeader.SetText("First row is header")
         ucrChkRowHeader.SetParameter(New RParameter("header", 1))
 
-        ucrNudPreviewLines.Minimum = 10
-        ucrNudPreviewLines.Maximum = 1000
+        ucrNudPreviewLines.SetMinMax(iNewMin:=10, iNewMax:=1000)
     End Sub
 
     Private Sub SetDefaults()
@@ -61,19 +60,16 @@ Public Class dlgPasteNewDataFrame
 
         'todo 29/05/2021. this is temporarily done this way because of how
         'function ConstructAssignTo in clsRCodeStructure is currently implemented.
-        'It doesn't construct assignTo statements correctly
+        'It doesn't construct "assignTo" statements correctly
         clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
         clsAddData.AddParameter("data_tables", clsRFunctionParameter:=clsDataList, iPosition:=0)
         clsDataList.SetRCommand("list")
-        clsDataList.AddParameter(strParameterName:=ucrSaveNewDFName.GetText, clsRFunctionParameter:=clsPasteFunction)
+        clsDataList.AddParameter(strParameterName:=ucrSaveNewDFName.GetText, clsRFunctionParameter:=clsPasteFunction, iPosition:=0)
 
         clsPasteFunction.SetPackageName("clipr")
         clsPasteFunction.SetRCommand("read_clip_tbl")
         SetClipBoardDataParameter()
         clsPasteFunction.AddParameter("header", "TRUE", iPosition:=1)
-        'copied data could be long, so restrict to 1000 rows only for import. 
-        'please note. for some reason,this parameter is not used by clipr if x(data) parameter is specified.
-        clsPasteFunction.AddParameter("nrows", 1000, iPosition:=2)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsAddData)
 
@@ -87,8 +83,17 @@ Public Class dlgPasteNewDataFrame
         'ucrSaveNewDFName.SetRCode(clsPasteFunction, bReset)
     End Sub
 
-    Private Sub TestOkEnabled()
-        ucrBase.OKEnabled(ucrSaveNewDFName.IsComplete AndAlso ValidateAndPreviewCopiedData())
+    ''' <summary>
+    ''' enables base "OK" and "ToScript" buttons if all entries are valid, disables if not.
+    ''' </summary>
+    ''' <param name="bValidateCopiedData">if true, copied data will also be validated</param>
+    Private Sub TestOkEnabled(Optional bValidateCopiedData As Boolean = True)
+        'validation of copied data isn't necessary for situations like checking the typed data frame name
+        If bValidateCopiedData Then
+            ucrBase.OKEnabled(ucrSaveNewDFName.IsComplete AndAlso ValidateAndPreviewCopiedData())
+        Else
+            ucrBase.OKEnabled(ucrSaveNewDFName.IsComplete)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
@@ -97,13 +102,16 @@ Public Class dlgPasteNewDataFrame
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrChkRowHeader.ControlContentsChanged, ucrNudPreviewLines.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
-    Private Sub ucrSaveNewDFName_ControlValueChangedChanged(ucrchangedControl As ucrCore) Handles ucrSaveNewDFName.ControlValueChanged
+    Private Sub ucrSaveNewDFName_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSaveNewDFName.ControlContentsChanged
         clsDataList.ClearParameters()
         clsDataList.AddParameter(strParameterName:=ucrSaveNewDFName.GetText, clsRFunctionParameter:=clsPasteFunction)
+        'TestOkEnabled called here because validation of copied data is not necessary and may take long for large data
+        TestOkEnabled(bValidateCopiedData:=False)
+    End Sub
+
+    Private Sub ucrControls_ControlValueChangedChanged(ucrchangedControl As ucrCore) Handles ucrChkRowHeader.ControlValueChanged, ucrNudPreviewLines.ControlValueChanged
+        'TestOkEnabled called here because ucrChkRowHeader.ControlContentsChanged event is called before the R code is set by the control
+        'todo. this could be changed if the ucrCheck raising of ControlContentsChanged event is modified
         TestOkEnabled()
     End Sub
 
@@ -113,7 +121,15 @@ Public Class dlgPasteNewDataFrame
     End Sub
 
     Public Sub SetClipBoardDataParameter()
-        clsPasteFunction.AddParameter("x", Chr(34) & My.Computer.Clipboard.GetText & Chr(34), iPosition:=0)
+        'please note addition of this parameter makes the execution of the R code take longer
+        'compared to letting R read from the clipboard.
+        'However this has been added to achieve reproducibility in future
+        Try
+            clsPasteFunction.AddParameter("x", Chr(34) & My.Computer.Clipboard.GetText & Chr(34), iPosition:=0)
+        Catch ex As Exception
+            'this error could be due to large clipboard data 
+            MsgBox("Requested clipboard operation did not succeed. Large data detected")
+        End Try
     End Sub
 
     ''' <summary>
@@ -124,25 +140,16 @@ Public Class dlgPasteNewDataFrame
         Dim bValid As Boolean = False
         Dim dfTemp As DataFrame
         Dim expTemp As SymbolicExpression
-        Dim clsTempImport As New RFunction
+        Dim clsTempImport As RFunction
 
         'set feedback controls default states
         panelNoDataPreview.Visible = True
         lblConfirmText.Text = ""
         lblConfirmText.ForeColor = Color.Red
 
-        'use clipr package to check if structure of data can be pasted to a data frame 
-        clsTempImport.SetPackageName("clipr")
-        clsTempImport.SetRCommand("read_clip_tbl")
-
-        'reconstruct the copied data from the array. No need will just be slower, 
-        'so let clipr use its clipboard functionality.
-        'commented code left here for future reference
-        'clsTempImport.AddParameter("x", Chr(34) & Strings.Join(arrStrTemp, Environment.NewLine) & Chr(34))
-
-        clsTempImport.AddParameter("header", If(ucrChkRowHeader.Checked, "TRUE", "FALSE"))
-        'copied data could be long, so restrict to 10 rows only for preview. 
-        'please note. for some reason,this parameter is not used by clipr if x(data) parameter is specified.
+        'use clipr::read_clip_tbl command to check if structure of data can be pasted to a data frame 
+        clsTempImport = clsPasteFunction.Clone()
+        'limit the rows to those set in the ucrNudPreviewLines control
         clsTempImport.AddParameter("nrows", ucrNudPreviewLines.Value)
 
         'get the data frame produced by clipr data frame
