@@ -45,13 +45,13 @@ Partial Class dlgRecodeNumeric
         Me.rdoRight = New System.Windows.Forms.RadioButton()
         Me.rdoLeft = New System.Windows.Forms.RadioButton()
         Me.ucrPnlClosedOn = New instat.UcrPanel()
+        Me.ucrSaveRecodeNumeric = New instat.ucrSave()
+        Me.ucrChkAddLabel = New instat.ucrCheck()
+        Me.ucrInputMultipleNumericRecode = New instat.ucrInputTextBox()
+        Me.ucrInputMultipleLabels = New instat.ucrInputTextBox()
         Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
         Me.ucrSelectorRecode = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrInputMultipleLabels = New instat.ucrInputTextBox()
-        Me.ucrInputMultipleNumericRecode = New instat.ucrInputTextBox()
-        Me.ucrChkAddLabel = New instat.ucrCheck()
-        Me.ucrSaveRecodeNumeric = New instat.ucrSave()
         Me.grpClosedOn.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -96,6 +96,33 @@ Partial Class dlgRecodeNumeric
         resources.ApplyResources(Me.ucrPnlClosedOn, "ucrPnlClosedOn")
         Me.ucrPnlClosedOn.Name = "ucrPnlClosedOn"
         '
+        'ucrSaveRecodeNumeric
+        '
+        resources.ApplyResources(Me.ucrSaveRecodeNumeric, "ucrSaveRecodeNumeric")
+        Me.ucrSaveRecodeNumeric.Name = "ucrSaveRecodeNumeric"
+        '
+        'ucrChkAddLabel
+        '
+        Me.ucrChkAddLabel.Checked = False
+        resources.ApplyResources(Me.ucrChkAddLabel, "ucrChkAddLabel")
+        Me.ucrChkAddLabel.Name = "ucrChkAddLabel"
+        '
+        'ucrInputMultipleNumericRecode
+        '
+        Me.ucrInputMultipleNumericRecode.AddQuotesIfUnrecognised = True
+        Me.ucrInputMultipleNumericRecode.IsMultiline = False
+        Me.ucrInputMultipleNumericRecode.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMultipleNumericRecode, "ucrInputMultipleNumericRecode")
+        Me.ucrInputMultipleNumericRecode.Name = "ucrInputMultipleNumericRecode"
+        '
+        'ucrInputMultipleLabels
+        '
+        Me.ucrInputMultipleLabels.AddQuotesIfUnrecognised = True
+        Me.ucrInputMultipleLabels.IsMultiline = False
+        Me.ucrInputMultipleLabels.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMultipleLabels, "ucrInputMultipleLabels")
+        Me.ucrInputMultipleLabels.Name = "ucrInputMultipleLabels"
+        '
         'ucrReceiverRecode
         '
         Me.ucrReceiverRecode.frmParent = Me
@@ -117,33 +144,6 @@ Partial Class dlgRecodeNumeric
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrInputMultipleLabels
-        '
-        Me.ucrInputMultipleLabels.AddQuotesIfUnrecognised = True
-        Me.ucrInputMultipleLabels.IsMultiline = False
-        Me.ucrInputMultipleLabels.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMultipleLabels, "ucrInputMultipleLabels")
-        Me.ucrInputMultipleLabels.Name = "ucrInputMultipleLabels"
-        '
-        'ucrInputMultipleNumericRecode
-        '
-        Me.ucrInputMultipleNumericRecode.AddQuotesIfUnrecognised = True
-        Me.ucrInputMultipleNumericRecode.IsMultiline = False
-        Me.ucrInputMultipleNumericRecode.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMultipleNumericRecode, "ucrInputMultipleNumericRecode")
-        Me.ucrInputMultipleNumericRecode.Name = "ucrInputMultipleNumericRecode"
-        '
-        'ucrChkAddLabel
-        '
-        Me.ucrChkAddLabel.Checked = False
-        resources.ApplyResources(Me.ucrChkAddLabel, "ucrChkAddLabel")
-        Me.ucrChkAddLabel.Name = "ucrChkAddLabel"
-        '
-        'ucrSaveRecodeNumeric
-        '
-        resources.ApplyResources(Me.ucrSaveRecodeNumeric, "ucrSaveRecodeNumeric")
-        Me.ucrSaveRecodeNumeric.Name = "ucrSaveRecodeNumeric"
         '
         'dlgRecodeNumeric
         '

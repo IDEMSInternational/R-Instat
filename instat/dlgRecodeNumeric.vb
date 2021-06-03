@@ -19,6 +19,9 @@ Imports instat.Translations
 Public Class dlgRecodeNumeric
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Public strDefaultDataFrame As String = ""
+    Public strDefaultColumn As String = ""
+
     Private clsCutFunction As New RFunction
 
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -31,6 +34,7 @@ Public Class dlgRecodeNumeric
             SetDefaults()
         End If
         SetRCodeForControls(bReset)
+        SetDefaultColumn()
         bReset = False
         TestOKEnabled()
     End Sub
@@ -49,13 +53,13 @@ Public Class dlgRecodeNumeric
         ucrPnlClosedOn.AddRadioButton(rdoRight)
 
         ucrPnlClosedOn.AddParameterValuesCondition(rdoLeft, "right", "FALSE")
-        ucrPnlClosedOn.AddParameterValuesCondition(rdoLeft, "right", "TRUE")
+        ucrPnlClosedOn.AddParameterValuesCondition(rdoRight, "right", "TRUE")
 
         ucrChkAddLabel.SetText("AddLabel")
-        ucrChkAddLabel.AddParameterPresentCondition(True, "label")
-        ucrChkAddLabel.AddParameterPresentCondition(False, "label", False)
+        ucrChkAddLabel.AddParameterPresentCondition(True, "labels")
+        ucrChkAddLabel.AddParameterPresentCondition(False, "labels", False)
 
-        ucrChkAddLabel.AddToLinkedControls(ucrInputMultipleLabels, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddLabel.AddToLinkedControls(ucrInputMultipleLabels, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
 
         ucrInputMultipleLabels.SetValidationTypeAsList()
         ucrInputMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
@@ -83,16 +87,26 @@ Public Class dlgRecodeNumeric
         ucrInputMultipleNumericRecode.SetName("")
 
         ucrInputMultipleLabels.Reset()
-        ucrInputMultipleLabels.SetName("")
         ucrBase.clsRsyntax.SetBaseRFunction(clsCutFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        ucrChkAddLabel.SetRCode(clsCutFunction, bReset)
         ucrReceiverRecode.SetRCode(clsCutFunction, bReset)
         ucrPnlClosedOn.SetRCode(clsCutFunction, bReset)
         ucrSaveRecodeNumeric.SetRCode(clsCutFunction, bReset)
     End Sub
 
+    Private Sub SetDefaultColumn()
+        If strDefaultDataFrame <> "" Then
+            ucrSelectorRecode.SetDataframe(strDefaultDataFrame)
+        End If
+        If strDefaultColumn <> "" Then
+            ucrReceiverRecode.Add(strDefaultColumn, strDefaultDataFrame)
+        End If
+        strDefaultDataFrame = ""
+        strDefaultColumn = ""
+    End Sub
     Private Sub TestOKEnabled()
         Dim iTemp As Integer
 
@@ -160,12 +174,17 @@ Public Class dlgRecodeNumeric
         End If
     End Sub
 
-    Private Sub ucrInputMultipleLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMultipleLabels.ControlValueChanged
-        If Not ucrInputMultipleLabels.IsEmpty() Then
-            ucrBase.clsRsyntax.AddParameter("labels", clsRFunctionParameter:=ucrInputMultipleLabels.clsRList)
+    Private Sub ucrInputMultipleLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMultipleLabels.ControlValueChanged, ucrChkAddLabel.ControlValueChanged
+        If ucrChkAddLabel.Checked Then
+            If Not ucrInputMultipleLabels.IsEmpty() Then
+                clsCutFunction.AddParameter("labels", clsRFunctionParameter:=ucrInputMultipleLabels.clsRList)
+            Else
+                clsCutFunction.RemoveParameterByName("labels")
+            End If
         Else
-            ucrBase.clsRsyntax.RemoveParameter("labels")
+            clsCutFunction.RemoveParameterByName("labels")
         End If
+
     End Sub
 
     Private Sub Controls_ContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRecode.ControlContentsChanged,
