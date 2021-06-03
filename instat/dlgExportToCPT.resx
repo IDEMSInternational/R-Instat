@@ -148,7 +148,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdChooseFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>337, 500</value>
+    <value>364, 502</value>
   </data>
   <data name="cmdChooseFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -528,15 +528,6 @@
   <data name="&gt;&gt;lblSaveFile.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>456, 587</value>
-  </data>
   <data name="lblMissingValues.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -568,7 +559,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputCodeMissingValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 470</value>
+    <value>201, 471</value>
   </data>
   <data name="ucrInputCodeMissingValues.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 21</value>
@@ -587,6 +578,15 @@
   </data>
   <data name="&gt;&gt;ucrInputCodeMissingValues.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>456, 587</value>
   </data>
   <data name="ucrSelectorTwoDF.Location" type="System.Drawing.Point, System.Drawing">
     <value>18, 269</value>
@@ -682,10 +682,10 @@
     <value>13</value>
   </data>
   <data name="ucrInputFilePath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 500</value>
+    <value>141, 502</value>
   </data>
   <data name="ucrInputFilePath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 21</value>
+    <value>214, 21</value>
   </data>
   <data name="ucrInputFilePath.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
