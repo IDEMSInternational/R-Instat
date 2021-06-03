@@ -2329,14 +2329,12 @@ Public Class RLink
         End If
         Return strReconstructedComment
     End Function
-
+    'This is currently implemented to open the dialogue with the comment to the dialogue selected too
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Creates RCodeStructure from the list of Rstatement </summary>
-    '''
     ''' <param name="strNewScript">   Script to be processed</param>
     '''--------------------------------------------------------------------------------------------
-    'This is currently implemented to open the dialogue with the comment to the dialogue selected too
     Public Sub OpenDialogFromScript(strNewScript As String)
         Dim lstNewRCodeStructures As New List(Of RCodeStructure)
         Dim strCommentFromDialogue As String
@@ -2394,6 +2392,10 @@ Public Class RLink
         ElseIf strCommentFromDialogue.Contains("convert columns") Then
             dlgConvertColumns.lstScriptsRCodeStructure = lstNewRCodeStructures
             dlgConvertColumns.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("recode numeric") Then
+            lstNewRCodeStructures.RemoveAt(0)
+            dlgRecodeNumeric.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgRecodeNumeric.ShowDialog()
         End If
     End Sub
 

@@ -252,11 +252,6 @@ Public Class dlgSplitText
         TestOKEnabled()
     End Sub
 
-    Public Sub OpenFromScript(lstNewRcodeStructure As List(Of RCodeStructure))
-        bReset = True
-        lstRCodeStructure = lstNewRcodeStructure
-    End Sub
-
     Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
         Get
             Return lstRCodeStructure

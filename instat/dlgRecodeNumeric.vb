@@ -21,7 +21,7 @@ Public Class dlgRecodeNumeric
     Private bReset As Boolean = True
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumn As String = ""
-
+    Private lstRCodeStructure As List(Of RCodeStructure)
     Private clsCutFunction As New RFunction
 
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -71,23 +71,42 @@ Public Class dlgRecodeNumeric
         ucrSaveRecodeNumeric.SetPrefix("Recode")
         ucrSaveRecodeNumeric.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
     End Sub
-
-    Private Sub SetDefaults()
-        clsCutFunction = New RFunction
-
+    Private Sub SetRFunctionDefaultParameters()
         clsCutFunction.SetRCommand("cut")
         clsCutFunction.AddParameter("include.lowest", "TRUE", iPosition:=0)
         clsCutFunction.AddParameter("right", "TRUE", iPosition:=2)
         clsCutFunction.AddParameter("dig.lab", "10", iPosition:=3)
 
+        ucrBase.clsRsyntax.SetBaseRFunction(clsCutFunction)
+    End Sub
+
+    Private Sub SetDefaults()
+        clsCutFunction = New RFunction
 
         ucrSelectorRecode.Reset()
-
         ucrInputMultipleNumericRecode.Reset()
         ucrInputMultipleNumericRecode.SetName("")
-
         ucrInputMultipleLabels.Reset()
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCutFunction)
+
+        If IsNothing(lstRCodeStructure) Then
+            SetRFunctionDefaultParameters()
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            SetRFunctionDefaultParameters()
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = "cut" Then
+                    clsCutFunction = lstRCodeStructure(0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsCutFunction)
+                Else
+                    MsgBox("Developer error: This dialogue has the ""cut"" function")
+                End If
+            Else
+                    SetRFunctionDefaultParameters()
+                MsgBox("Developer error:The Script must be an RFunction")
+            End If
+        End If
+        lstRCodeStructure = Nothing
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -176,11 +195,7 @@ Public Class dlgRecodeNumeric
 
     Private Sub ucrInputMultipleLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMultipleLabels.ControlValueChanged, ucrChkAddLabel.ControlValueChanged
         If ucrChkAddLabel.Checked Then
-            If Not ucrInputMultipleLabels.IsEmpty() Then
-                clsCutFunction.AddParameter("labels", clsRFunctionParameter:=ucrInputMultipleLabels.clsRList)
-            Else
-                clsCutFunction.RemoveParameterByName("labels")
-            End If
+            clsCutFunction.AddParameter("labels", clsRFunctionParameter:=ucrInputMultipleLabels.clsRList)
         Else
             clsCutFunction.RemoveParameterByName("labels")
         End If
@@ -191,4 +206,14 @@ Public Class dlgRecodeNumeric
             ucrInputMultipleLabels.ControlContentsChanged, ucrInputMultipleNumericRecode.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class
