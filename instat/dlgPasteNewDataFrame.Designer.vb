@@ -75,7 +75,7 @@ Partial Class dlgPasteNewDataFrame
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(10, 289)
+        Me.ucrBase.Location = New System.Drawing.Point(10, 276)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 5
@@ -124,7 +124,7 @@ Partial Class dlgPasteNewDataFrame
         '
         'ucrSaveNewDFName
         '
-        Me.ucrSaveNewDFName.Location = New System.Drawing.Point(10, 256)
+        Me.ucrSaveNewDFName.Location = New System.Drawing.Point(10, 243)
         Me.ucrSaveNewDFName.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDFName.Name = "ucrSaveNewDFName"
         Me.ucrSaveNewDFName.Size = New System.Drawing.Size(246, 24)
@@ -152,7 +152,7 @@ Partial Class dlgPasteNewDataFrame
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(599, 355)
+        Me.ClientSize = New System.Drawing.Size(599, 339)
         Me.Controls.Add(Me.panelNoDataPreview)
         Me.Controls.Add(Me.ucrSaveNewDFName)
         Me.Controls.Add(Me.lblConfirmText)
