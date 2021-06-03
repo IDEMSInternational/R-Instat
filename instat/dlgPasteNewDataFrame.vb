@@ -125,7 +125,14 @@ Public Class dlgPasteNewDataFrame
         'compared to letting R read from the clipboard.
         'However this has been added to achieve reproducibility in future
         Try
-            clsPasteFunction.AddParameter("x", Chr(34) & My.Computer.Clipboard.GetText & Chr(34), iPosition:=0)
+            Dim clipBoardText As String = My.Computer.Clipboard.GetText
+            Dim arrStrTemp() As String = clipBoardText.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
+            If arrStrTemp.Length > 1000 Then
+                MsgBox("Requested clipboard data has more than 1000 rows. Only a maximum of 1000 rows can be pasted")
+                clsPasteFunction.AddParameter("x", Chr(34) & "" & Chr(34), iPosition:=0)
+            Else
+                clsPasteFunction.AddParameter("x", Chr(34) & clipBoardText & Chr(34), iPosition:=0)
+            End If
         Catch ex As Exception
             'this error could be due to large clipboard data 
             MsgBox("Requested clipboard operation did not succeed. Large data detected")
