@@ -19,6 +19,7 @@ Public Class dlgCountinFactor
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
+    Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub dlgCountinFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
         autoTranslate(Me)
@@ -55,17 +56,40 @@ Public Class dlgCountinFactor
         ucrNewColName.setLinkedReceiver(ucrCountReceiver)
     End Sub
 
+    Private Sub SetRFunctionDefaultParameters()
+        clsDefaultFunction.SetPackageName("dae")
+        clsDefaultFunction.SetRCommand("fac.nested")
+        clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrCountSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+    End Sub
+
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
 
         ucrCountSelector.Reset()
         ucrNewColName.Reset()
 
-        clsDefaultFunction.SetPackageName("dae")
-        clsDefaultFunction.SetRCommand("fac.nested")
-        clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrCountSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        If IsNothing(lstRCodeStructure) Then
+            SetRFunctionDefaultParameters()
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            SetRFunctionDefaultParameters()
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = "fac.nested" Then
+                    clsDefaultFunction = lstRCodeStructure(0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+                Else
+                    SetRFunctionDefaultParameters()
+                    MsgBox("Developer error:This dialogue only uses one Function ie ""fac.nested""")
+                End If
+            Else
+                SetRFunctionDefaultParameters()
+                MsgBox("Developer error:The Script must be an RFunction")
+            End If
+        End If
+        lstRCodeStructure = Nothing
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -89,4 +113,13 @@ Public Class dlgCountinFactor
     Private Sub ucrCountReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrCountReceiver.ControlContentsChanged, ucrNewColName.ControlContentsChanged
         TestOkEnabled()
     End Sub
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class
