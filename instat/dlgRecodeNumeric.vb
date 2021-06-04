@@ -23,6 +23,7 @@ Public Class dlgRecodeNumeric
     Public strDefaultColumn As String = ""
     Private lstRCodeStructure As List(Of RCodeStructure)
     Private clsCutFunction As New RFunction
+    Private clsCombineLabelFunction, clsCombineBreaksFunction As New RFunction
 
     Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -61,7 +62,12 @@ Public Class dlgRecodeNumeric
 
         ucrChkAddLabel.AddToLinkedControls(ucrInputMultipleLabels, {True}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
 
+        ucrInputMultipleLabels.SetParameter(New RParameter("label", iNewPosition:=0, bNewIncludeArgumentName:=False))
+        ucrInputMultipleLabels.AddQuotesIfUnrecognised = False
         ucrInputMultipleLabels.SetValidationTypeAsList()
+
+        ucrInputMultipleNumericRecode.SetParameter(New RParameter("breaks", iNewPosition:=0, bNewIncludeArgumentName:=False))
+        ucrInputMultipleNumericRecode.AddQuotesIfUnrecognised = False
         ucrInputMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
 
         ucrSaveRecodeNumeric.SetSaveTypeAsColumn()
@@ -72,16 +78,26 @@ Public Class dlgRecodeNumeric
         ucrSaveRecodeNumeric.SetAssignToBooleans(bTempAssignToIsPrefix:=True)
     End Sub
     Private Sub SetRFunctionDefaultParameters()
-        clsCutFunction.SetRCommand("cut")
         clsCutFunction.AddParameter("include.lowest", "TRUE", iPosition:=0)
         clsCutFunction.AddParameter("right", "TRUE", iPosition:=2)
         clsCutFunction.AddParameter("dig.lab", "10", iPosition:=3)
-
+        clsCutFunction.AddParameter("breaks", clsRFunctionParameter:=clsCombineBreaksFunction, iPosition:=4)
+        clsCutFunction.AddParameter("labels", clsRFunctionParameter:=clsCombineLabelFunction, iPosition:=5)
         ucrBase.clsRsyntax.SetBaseRFunction(clsCutFunction)
     End Sub
 
-    Private Sub SetDefaults()
+    Private Sub ResetFunctions()
         clsCutFunction = New RFunction
+        clsCombineLabelFunction = New RFunction
+        clsCombineBreaksFunction = New RFunction
+
+        clsCombineLabelFunction.SetRCommand("c")
+        clsCombineBreaksFunction.SetRCommand("c")
+        clsCutFunction.SetRCommand("cut")
+    End Sub
+
+    Private Sub SetDefaults()
+        ResetFunctions()
 
         ucrSelectorRecode.Reset()
         ucrInputMultipleNumericRecode.Reset()
@@ -114,6 +130,8 @@ Public Class dlgRecodeNumeric
         ucrReceiverRecode.SetRCode(clsCutFunction, bReset)
         ucrPnlClosedOn.SetRCode(clsCutFunction, bReset)
         ucrSaveRecodeNumeric.SetRCode(clsCutFunction, bReset)
+        ucrInputMultipleNumericRecode.SetRCode(clsCombineBreaksFunction, bReset)
+        ucrInputMultipleLabels.SetRCode(clsCombineLabelFunction, bReset)
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -155,7 +173,6 @@ Public Class dlgRecodeNumeric
         Else
             ValidateBreakPointLabelCount()
         End If
-        ucrBase.clsRsyntax.AddParameter("breaks", clsRFunctionParameter:=ucrInputMultipleNumericRecode.clsRList)
     End Sub
 
     Private Sub ucrMultipleNumericRecode_Validated(sender As Object, e As EventArgs) Handles ucrInputMultipleNumericRecode.Validated, ucrInputMultipleLabels.Validated
@@ -179,10 +196,7 @@ Public Class dlgRecodeNumeric
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-    End Sub
-
-    Private Sub ucrReceiverRecode_SelectionChanged(sender As Object, e As EventArgs) Handles ucrReceiverRecode.SelectionChanged
-        ucrBase.clsRsyntax.AddParameter("x", clsRFunctionParameter:=ucrReceiverRecode.GetVariables())
+        TestOKEnabled()
     End Sub
 
     Private Sub ucrPnlClosedOn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlClosedOn.ControlValueChanged
@@ -191,15 +205,6 @@ Public Class dlgRecodeNumeric
         Else
             ucrBase.clsRsyntax.AddParameter("right", "FALSE")
         End If
-    End Sub
-
-    Private Sub ucrInputMultipleLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMultipleLabels.ControlValueChanged, ucrChkAddLabel.ControlValueChanged
-        If ucrChkAddLabel.Checked Then
-            clsCutFunction.AddParameter("labels", clsRFunctionParameter:=ucrInputMultipleLabels.clsRList)
-        Else
-            clsCutFunction.RemoveParameterByName("labels")
-        End If
-
     End Sub
 
     Private Sub Controls_ContentChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRecode.ControlContentsChanged,

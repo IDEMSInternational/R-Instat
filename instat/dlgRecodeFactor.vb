@@ -21,6 +21,7 @@ Public Class dlgRecodeFactor
     Private bFirstLoad As Boolean = True
     Private clsReplaceFunction, clsRevalueFunction As RFunction
     Private bReset As Boolean = True
+    Private lstRCodeStructure As List(Of RCodeStructure)
     Private Sub dlgRecodeFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -57,23 +58,51 @@ Public Class dlgRecodeFactor
         ucrSaveNewColumn.SetLabelText("New Column Name:")
     End Sub
 
-    Private Sub SetDefaults()
+    Private Sub ResetFunctions()
         clsReplaceFunction = New RFunction
         clsRevalueFunction = New RFunction
+
+        clsRevalueFunction.SetPackageName("plyr")
+        clsRevalueFunction.SetRCommand("revalue")
+
+        clsReplaceFunction.SetRCommand("c")
+    End Sub
+
+    Private Sub SetRFunctionDefaultParameters()
+        clsRevalueFunction.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRevalueFunction)
+    End Sub
+
+    Private Sub SetDefaults()
+        ResetFunctions()
 
         ucrSelectorForRecode.Reset()
         ucrSelectorForRecode.Focus()
         ucrFactorGrid.ResetText()
         ucrSaveNewColumn.Reset()
 
-        clsRevalueFunction.SetPackageName("plyr")
-        clsRevalueFunction.SetRCommand("revalue")
-        clsRevalueFunction.AddParameter("replace", clsRFunctionParameter:=clsReplaceFunction)
+        If IsNothing(lstRCodeStructure) Then
+            SetRFunctionDefaultParameters()
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            SetRFunctionDefaultParameters()
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = "revalue" Then
+                    clsRevalueFunction = lstRCodeStructure(0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsRevalueFunction)
+                Else
+                    SetRFunctionDefaultParameters()
+                    MsgBox("Developer error:This dialogue only uses the Function ""revalue""")
+                End If
+            Else
+                SetRFunctionDefaultParameters()
+                MsgBox("Developer error:The Script must be an RFunction")
+            End If
+        End If
+        lstRCodeStructure = Nothing
+
         clsRevalueFunction.SetAssignTo(strTemp:=ucrSaveNewColumn.GetText(), strTempDataframe:=ucrSelectorForRecode.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrSaveNewColumn.GetText())
-
-        clsReplaceFunction.SetRCommand("c")
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsRevalueFunction)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -128,4 +157,14 @@ Public Class dlgRecodeFactor
     Private Sub ucrReceiverFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrSaveNewColumn.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class

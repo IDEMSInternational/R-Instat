@@ -2400,6 +2400,10 @@ Public Class RLink
             lstNewRCodeStructures.RemoveAt(0)
             dlgCountinFactor.lstScriptsRCodeStructure = lstNewRCodeStructures
             dlgCountinFactor.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("recode factor") Then
+            lstNewRCodeStructures.RemoveAt(0)
+            dlgRecodeFactor.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgRecodeFactor.ShowDialog()
         End If
     End Sub
 
