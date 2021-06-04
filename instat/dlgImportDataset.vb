@@ -16,7 +16,7 @@ Public Class dlgImportDataset
     Private clsFileList As RFunction
     ' Functions for multi Excel sheet impoty
     Private clsImportExcelMulti As RFunction
-    Private clsImportMultipleFiles, clsGetFilesList As RFunction
+    Private clsGetFilesList, clsImportMultipleFiles, clsImportMultipleTextFiles As RFunction
     'functions for importing multiple files
     Private bFirstLoad As Boolean
     Public bFromLibrary As Boolean
@@ -337,8 +337,9 @@ Public Class dlgImportDataset
         clsImportExcelMulti = New RFunction
         clsFileList = New RFunction
 
-        clsImportMultipleFiles = New RFunction
         clsGetFilesList = New RFunction
+        clsImportMultipleFiles = New RFunction
+        clsImportMultipleTextFiles = New RFunction
 
         clsImportFixedWidthText.SetPackageName("readr")
         clsImportFixedWidthText.SetRCommand("read_table")
@@ -383,16 +384,33 @@ Public Class dlgImportDataset
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
 
         'commands for multiple files
-        clsImportMultipleFiles.SetPackageName("rio")
-        clsImportMultipleFiles.SetRCommand("import_list")
-
         clsGetFilesList.SetRCommand("list.files")
         'clsGetFilesList.AddParameter("pattern", Chr(34) & "\\.csv$" & Chr(34), iPosition:=1)
         clsGetFilesList.AddParameter("full.names", "TRUE", iPosition:=2)
         clsGetFilesList.AddParameter("ignore.case", "TRUE", iPosition:=3)
 
+
+        clsImportMultipleFiles.SetPackageName("rio")
+        clsImportMultipleFiles.SetRCommand("import_list")
         clsImportMultipleFiles.AddParameter("file", clsRFunctionParameter:=clsGetFilesList, iPosition:=0)
         clsImportMultipleFiles.AddParameter("stringsAsFactors", "TRUE")
+
+        Dim clsSetNames As New RFunction
+        Dim clsFileNames As New RFunction
+
+        clsFileNames.SetPackageName("tools")
+        clsFileNames.SetRCommand("file_path_sans_ext")
+        clsFileNames.AddParameter("x", clsRFunctionParameter:=clsGetFilesList, iPosition:=0)
+
+        clsSetNames.SetPackageName("stats")
+        clsSetNames.SetRCommand("setNames")
+        clsSetNames.AddParameter("object", clsRFunctionParameter:=clsGetFilesList, iPosition:=0)
+        clsSetNames.AddParameter("nm", clsRFunctionParameter:=clsFileNames, iPosition:=1)
+
+        'clsImportMultipleTextFiles.SetPackageName("base")
+        clsImportMultipleTextFiles.SetRCommand("lapply")
+        clsImportMultipleTextFiles.AddParameter("X", clsRFunctionParameter:=clsSetNames, iPosition:=0)
+        clsImportMultipleTextFiles.AddParameter("FUN", strParameterValue:="readr::read_table", iPosition:=1)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
@@ -519,15 +537,20 @@ Public Class dlgImportDataset
         ucrSaveFile.AddAdditionalRCode(clsImportExcel, iAdditionalPairNo:=3)
         ucrSaveFile.AddAdditionalRCode(clsImportExcelMulti, iAdditionalPairNo:=4)
         ucrSaveFile.AddAdditionalRCode(clsImportMultipleFiles, iAdditionalPairNo:=5)
+        ucrSaveFile.AddAdditionalRCode(clsImportMultipleTextFiles, iAdditionalPairNo:=6)
         ucrSaveFile.SetRCode(clsImport, bReset)
 
         'Used by both text and csv functions
         ucrPanelFixedWidthText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        'TEXT CONTROLS 
+        'TEXT CONTROLS
         ucrChkColumnNamesText.SetRCode(clsImportFixedWidthText, bReset)
         ucrNudRowsToSkipText.SetRCode(clsImportFixedWidthText, bReset)
         ucrNudMaxRowsText.SetRCode(clsImportFixedWidthText, bReset)
         ucrChkMaxRowsText.SetRCode(clsImportFixedWidthText, bReset)
+
+        ucrChkColumnNamesText.AddAdditionalCodeParameterPair(clsImportMultipleTextFiles, New RParameter("col_names"), iAdditionalPairNo:=1)
+        ucrNudRowsToSkipText.AddAdditionalCodeParameterPair(clsImportMultipleTextFiles, New RParameter("skip"), iAdditionalPairNo:=1)
+        ucrNudMaxRowsText.AddAdditionalCodeParameterPair(clsImportMultipleTextFiles, New RParameter("n_max"), iAdditionalPairNo:=1)
 
         'CSV CONTROLS
         ucrInputSeparatorCSV.SetRCode(clsImportCSV, bReset)
@@ -651,19 +674,36 @@ Public Class dlgImportDataset
             ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
             ucrSaveFile.Hide()
             clsGetFilesList.AddParameter("pattern", Chr(34) & "\\" & strFileExtension & "$" & Chr(34), iPosition:=1)
-            If strFileExtension = ".dly" Then
-                clsImportMultipleFiles.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
-            ElseIf strFileExtension = ".dat" Then
-                clsImportMultipleFiles.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
-            Else
-                clsImportMultipleFiles.AddParameter("format", Chr(34) & strFileExtension.Substring(1) & Chr(34), iPosition:=1)
+
+            If {".txt", ".csv", ".dly", ".dat"}.Contains(strFileExtension) Then
+                If strFileExtension = ".dly" Then
+                    clsImportMultipleFiles.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
+                ElseIf strFileExtension = ".dat" Then
+                    clsImportMultipleFiles.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
+                Else
+                    clsImportMultipleFiles.AddParameter("format", Chr(34) & strFileExtension.Substring(1) & Chr(34), iPosition:=1)
+                End If
+
+                If strFileExtension = ".txt" Then
+                    grpCSV.Text = "Import Text Options"
+                    grpCSV.Location = New System.Drawing.Point(9, 99) 'set the location of the groupbox to adjust gaps in the form UI
+                    ucrPanelFixedWidthText.Show()
+                ElseIf strFileExtension = ".csv" OrElse strFileExtension = ".dly" OrElse strFileExtension = ".dat" Then
+                    grpCSV.Text = "Import Options"
+                    grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
+                    grpCSV.Show()
+                End If
+
+                If strFileExtension = ".txt" AndAlso Not rdoSeparatortext.Checked Then
+                    grpText.Show()
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleTextFiles)
+                Else
+                    grpCSV.Show()
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
+                End If
+
             End If
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
-            If strFileExtension = ".txt" OrElse strFileExtension = ".csv" OrElse strFileExtension = ".dly" OrElse strFileExtension = ".dat" Then
-                grpCSV.Text = "Import Options"
-                grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
-                grpCSV.Show()
-            End If
+
         Else
             'don't enable multiple files import for the following files only; .rds, .xlsx, .xls
             ucrChkMultipleFiles.SetVisible(Not (strFileExtension = ".rds" OrElse strFileExtension = ".xlsx" OrElse strFileExtension = ".xls"))
@@ -683,12 +723,16 @@ Public Class dlgImportDataset
                 'This only works if .DAT file is text based, this seems to be common usage
                 'check https://github.com/leeper/rio/issues/155
                 clsImportCSV.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
-                'by default the textfiles will be imported using the function we use for csv
-                ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
                 ucrPanelFixedWidthText.Show()
                 grpCSV.Text = "Import Text Options"
                 grpCSV.Location = New System.Drawing.Point(9, 99) 'set the location of the groupbox to adjust gaps in the form UI
-                grpCSV.Show()
+                If rdoSeparatortext.Checked Then
+                    grpCSV.Show()
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
+                Else
+                    grpText.Show()
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportFixedWidthText)
+                End If
             ElseIf strFileExtension = ".csv" OrElse strFileExtension = ".dly" Then
                 strFileType = "CSV"
                 'add format. forces rio to treat dly files as csv 
@@ -1001,6 +1045,7 @@ Public Class dlgImportDataset
                 clsImportMultipleFiles.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
             Else
                 clsImportFixedWidthText.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringText.GetText()), iPosition:=2)
+                clsImportMultipleTextFiles.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringText.GetText()), iPosition:=2)
             End If
         End If
         RefreshFrameView()
@@ -1013,14 +1058,26 @@ Public Class dlgImportDataset
             If rdoFixedWidthText.Checked OrElse rdoFixedWidthWhiteSpacesText.Checked Then
                 If rdoFixedWidthText.Checked Then
                     clsImportFixedWidthText.SetRCommand("read_table")
+                    clsImportMultipleTextFiles.AddParameter("FUN", strParameterValue:="readr::read_table", iPosition:=1)
                 Else
                     clsImportFixedWidthText.SetRCommand("read_table2")
+                    clsImportMultipleTextFiles.AddParameter("FUN", strParameterValue:="readr::read_table2", iPosition:=1)
                 End If
-                ucrBase.clsRsyntax.SetBaseRFunction(clsImportFixedWidthText)
+                If ucrChkMultipleFiles.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleTextFiles)
+                Else
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportFixedWidthText)
+                End If
+
                 grpText.Visible = True
                 RefreshFilePreview("TXT")
             ElseIf rdoSeparatortext.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
+                If ucrChkMultipleFiles.Checked Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
+                Else
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
+                End If
+
                 grpCSV.Visible = True
                 RefreshFilePreview("CSV")
             End If
