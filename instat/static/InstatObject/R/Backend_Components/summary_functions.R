@@ -1336,7 +1336,7 @@ SEDI <- function(x, y, frcst.type, obs.type, ...){
 ##TODO:Check if there are summaries that only apply to (Probabilistic-binary) types.
 
 
-DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = TRUE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, margins = "outer", return_output = TRUE, treat_columns_as_factor = FALSE, page_by = NULL, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
+DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = FALSE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, margins = "outer", return_output = FALSE, treat_columns_as_factor = FALSE, page_by = NULL, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
 # TODO: write in errors
   if(na_level_display == "") stop("na_level_display must be a non empty string")
     # removes "summary_" from beginning of summary function names so that display is nice
@@ -1354,7 +1354,7 @@ if (treat_columns_as_factor){
   cell_values[["Summary"]] <- rep(rev(summaries_display), each = grps, length.out = nrow(cell_values))
   cell_values[["Summary-Variable"]] <- NULL  
 }
-shaped_cell_values <- cell_values %>% relocate(Value, .after = last_col())
+shaped_cell_values <- cell_values %>% dplyr::relocate(Value, .after = last_col())
 
 #Converts factor columns to character so we can relabel values if needed
 for(i in seq_along(factors)) {
@@ -1378,7 +1378,6 @@ if(include_margins && (length(factors) > 0 || length(column_factors) > 0)) {
   # for outer margins
   margin_item <- length(summaries) * length(columns_to_summarise)
   
-  # if outer or summary is run (i.e., if there are margins)
   if (("outer" %in% margins)){
     outer_margins <- plyr::ldply(margin_tables)
     
@@ -1388,11 +1387,11 @@ if(include_margins && (length(factors) > 0 || length(column_factors) > 0)) {
       names(outer_margins) <- c("Summary-Variable", "Value")
     } else {
       outer_margins <- outer_margins %>%
-        pivot_longer(cols = 1:margin_item, values_to = "Value", names_to = "Summary-Variable") 
+        tidyr::pivot_longer(cols = 1:margin_item, values_to = "Value", names_to = "Summary-Variable") 
     }
     if (treat_columns_as_factor){
       outer_margins <- outer_margins %>%
-        separate(col = "Summary-Variable", into = c("Summary", "Variable"), sep = "_")
+        tidyr::separate(col = "Summary-Variable", into = c("Summary", "Variable"), sep = "_")
     }
   } else {
     outer_margins <- NULL
@@ -1425,30 +1424,30 @@ if(include_margins && (length(factors) > 0 || length(column_factors) > 0)) {
     }
     if (length(factors)>1 || length(columns_to_summarise)>1){
       summary_margins <- summary_margins %>%
-        pivot_longer(cols = !factors, names_to = "Summary", values_to = "Value") 
+        tidyr::pivot_longer(cols = !factors, names_to = "Summary", values_to = "Value") 
     } else {
       summary_margins <- summary_margins %>%
-        pivot_longer(cols = tidyselect::everything(), names_to = "Summary", values_to = "Value") 
+        tidyr::pivot_longer(cols = tidyselect::everything(), names_to = "Summary", values_to = "Value") 
     }
   } else {
     summary_margins <- NULL
   }
   
-  margin_tables_all <- (bind_rows(summary_margins, outer_margins))
+  margin_tables_all <- (dplyr::bind_rows(summary_margins, outer_margins))
 
   margin_tables_all <- margin_tables_all %>%
-    mutate_at(vars(-Value), ~replace(., is.na(.), margin_name))
+    dplyr::mutate_at(vars(-Value), ~replace(., is.na(.), margin_name))
   
-  shaped_cell_values <- bind_rows(shaped_cell_values, margin_tables_all)
-  
-  shaped_cell_values <- shaped_cell_values %>%
-    mutate_at(vars(-Value), ~replace(., is.na(.), margin_name))
+  shaped_cell_values <- dplyr::bind_rows(shaped_cell_values, margin_tables_all)
   
   shaped_cell_values <- shaped_cell_values %>%
-    mutate_at(vars(-Value), ~as_factor(forcats::fct_relevel(., margin_name, after = Inf)))
+    dplyr::mutate_at(vars(-Value), ~replace(., is.na(.), margin_name))
+  
+  shaped_cell_values <- shaped_cell_values %>%
+    dplyr::mutate_at(vars(-Value), ~as_factor(forcats::fct_relevel(., margin_name, after = Inf)))
   
 }
-shaped_cell_values <- shaped_cell_values %>% mutate(Value = round(Value, signif_fig))
+shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(Value = round(Value, signif_fig))
 return(shaped_cell_values)
 }
 )
