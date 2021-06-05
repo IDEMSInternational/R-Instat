@@ -162,25 +162,31 @@ Public Class clsRecentFiles
     ''' <param name="e"></param>
     Private Sub OnMnuRecentOpenedFile_Click(sender As Object, e As EventArgs)
         Dim strFilePath As String = ""
-
+        'if tag is "more" then its more link that was clicked so exit sub
         If TypeOf sender Is ToolStripItem Then
             Dim toolStripItem As ToolStripItem = DirectCast(sender, ToolStripItem)
-            strFilePath = toolStripItem.Tag.ToString().Substring(4) 'exclude MRU:
+            strFilePath = toolStripItem.Tag.ToString().Substring(4) 'exclude MRU: 
             If toolStripItem.OwnerItem Is mnuFile Then
-                UpdateRecentFilesMenuItems(strFilePath.Contains("more"), mnuFile:=mnuFile)
-                mnuFile.ShowDropDown()
+                If strFilePath.Contains("more") Then
+                    UpdateRecentFilesMenuItems(True, mnuFile:=mnuFile)
+                    mnuFile.ShowDropDown()
+                    AddHandler mnuFile.DropDownClosed, AddressOf MenuDropDownClosedAfterMoreClicked
+                    Exit Sub
+                End If
             ElseIf toolStripItem.OwnerItem Is mnuFileIcon Then
-                UpdateRecentFilesMenuItems(strFilePath.Contains("more"), mnuFileIcon:=mnuFileIcon)
-                mnuFileIcon.ShowDropDown()
+                If strFilePath.Contains("more") Then
+                    UpdateRecentFilesMenuItems(strFilePath.Contains("more"), mnuFileIcon:=mnuFileIcon)
+                    mnuFileIcon.ShowDropDown()
+                    AddHandler mnuFileIcon.DropDownClosed, AddressOf MenuDropDownClosedAfterMoreClicked
+                    Exit Sub
+                End If
             End If
         ElseIf TypeOf sender Is LinkLabel Then
             strFilePath = DirectCast(sender, LinkLabel).Tag.ToString()
-            UpdateRecentFilesMenuItems(strFilePath.Contains("more"), ucrDataViewWindow:=ucrDataViewWindow)
-        End If
-
-        'if tag is "more" then its more link that was clicked so exit sub
-        If strFilePath.Contains("more") Then
-            Exit Sub
+            If strFilePath.Contains("more") Then
+                UpdateRecentFilesMenuItems(True, ucrDataViewWindow:=ucrDataViewWindow)
+                Exit Sub
+            End If
         End If
 
         If File.Exists(strFilePath) Then
@@ -344,6 +350,16 @@ Public Class clsRecentFiles
     ''' </summary>
     Public Sub UpdateRecentFilesMenuItems()
         UpdateRecentFilesMenuItems(bShowAll:=False, mnuFile:=mnuFile, mnuFileIcon:=mnuFileIcon, ucrDataViewWindow:=ucrDataViewWindow)
+    End Sub
+
+    Private Sub MenuDropDownClosedAfterMoreClicked(sender As Object, e As EventArgs)
+        If sender Is mnuFile Then
+            RemoveHandler mnuFile.DropDownClosed, AddressOf MenuDropDownClosedAfterMoreClicked
+            UpdateRecentFilesMenuItems(False, mnuFile:=mnuFile)
+        ElseIf sender Is mnuFileIcon Then
+            RemoveHandler mnuFileIcon.DropDownClosed, AddressOf MenuDropDownClosedAfterMoreClicked
+            UpdateRecentFilesMenuItems(False, mnuFileIcon:=mnuFileIcon)
+        End If
     End Sub
 
 End Class
