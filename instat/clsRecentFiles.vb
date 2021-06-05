@@ -352,6 +352,11 @@ Public Class clsRecentFiles
         UpdateRecentFilesMenuItems(bShowAll:=False, mnuFile:=mnuFile, mnuFileIcon:=mnuFileIcon, ucrDataViewWindow:=ucrDataViewWindow)
     End Sub
 
+    ''' <summary>
+    ''' event used to restore the more option when the menu is closed
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Private Sub MenuDropDownClosedAfterMoreClicked(sender As Object, e As EventArgs)
         If sender Is mnuFile Then
             RemoveHandler mnuFile.DropDownClosed, AddressOf MenuDropDownClosedAfterMoreClicked
