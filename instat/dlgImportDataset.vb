@@ -16,7 +16,7 @@ Public Class dlgImportDataset
     Private clsFileList As RFunction
     ' Functions for multi Excel sheet impoty
     Private clsImportExcelMulti As RFunction
-    Private clsGetFilesList, clsImportMultipleFiles, clsImportMultipleTextFiles As RFunction
+    Private clsGetFilesList, clsImportMultipleFiles, clsImportMultipleTextFiles, clsFileNamesWithExt As RFunction
     'functions for importing multiple files
     Private bFirstLoad As Boolean
     Public bFromLibrary As Boolean
@@ -298,9 +298,14 @@ Public Class dlgImportDataset
         ucrPanelFixedWidthText.AddRadioButton(rdoSeparatortext)
         ucrPanelFixedWidthText.AddRadioButton(rdoFixedWidthText)
         ucrPanelFixedWidthText.AddRadioButton(rdoFixedWidthWhiteSpacesText)
-        ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoSeparatortext, {"read_table", "read_table2"}, bNewIsPositive:=False)
-        ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoFixedWidthText, "read_table", bNewIsPositive:=True)
+        ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoSeparatortext, {"read_table", "read_table2", "lapply"}, bNewIsPositive:=False)
+        ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoFixedWidthText, {"read_table", "lapply"}, bNewIsPositive:=True)
         ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoFixedWidthWhiteSpacesText, "read_table2", bNewIsPositive:=True)
+
+        'ucrPanelFixedWidthText.AddParameterValueFunctionNamesCondition(rdoFixedWidthText, "FUN", "read_table", bNewIsPositive:=True)
+        'ucrPanelFixedWidthText.AddParameterValueFunctionNamesCondition(rdoFixedWidthText, "FUN", "read_table2", bNewIsPositive:=False)
+        'ucrPanelFixedWidthText.AddParameterValueFunctionNamesCondition(rdoFixedWidthWhiteSpacesText, "FUN", "read_table2", bNewIsPositive:=True)
+        'ucrPanelFixedWidthText.AddParameterValueFunctionNamesCondition(rdoFixedWidthWhiteSpacesText, "FUN", "read_table", bNewIsPositive:=False)
 
         ucrChkColumnNamesText.SetText("First Row is Column Headers")
         ucrChkColumnNamesText.SetParameter(New RParameter("col_names"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -322,6 +327,9 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsSetNames As New RFunction
+        Dim clsFileNamesWithoutExt As New RFunction
+
         clsImportFixedWidthText = New RFunction
         clsImportCSV = New RFunction
         clsImportRDS = New RFunction
@@ -340,6 +348,7 @@ Public Class dlgImportDataset
         clsGetFilesList = New RFunction
         clsImportMultipleFiles = New RFunction
         clsImportMultipleTextFiles = New RFunction
+        clsFileNamesWithExt = New RFunction
 
         clsImportFixedWidthText.SetPackageName("readr")
         clsImportFixedWidthText.SetRCommand("read_table")
@@ -385,27 +394,26 @@ Public Class dlgImportDataset
 
         'commands for multiple files
         clsGetFilesList.SetRCommand("list.files")
-        'clsGetFilesList.AddParameter("pattern", Chr(34) & "\\.csv$" & Chr(34), iPosition:=1)
         clsGetFilesList.AddParameter("full.names", "TRUE", iPosition:=2)
         clsGetFilesList.AddParameter("ignore.case", "TRUE", iPosition:=3)
-
 
         clsImportMultipleFiles.SetPackageName("rio")
         clsImportMultipleFiles.SetRCommand("import_list")
         clsImportMultipleFiles.AddParameter("file", clsRFunctionParameter:=clsGetFilesList, iPosition:=0)
         clsImportMultipleFiles.AddParameter("stringsAsFactors", "TRUE")
 
-        Dim clsSetNames As New RFunction
-        Dim clsFileNames As New RFunction
+        clsFileNamesWithExt.SetRCommand("list.files")
+        clsFileNamesWithExt.AddParameter("full.names", "FALSE", iPosition:=2)
+        clsFileNamesWithExt.AddParameter("ignore.case", "TRUE", iPosition:=3)
 
-        clsFileNames.SetPackageName("tools")
-        clsFileNames.SetRCommand("file_path_sans_ext")
-        clsFileNames.AddParameter("x", clsRFunctionParameter:=clsGetFilesList, iPosition:=0)
+        clsFileNamesWithoutExt.SetPackageName("tools")
+        clsFileNamesWithoutExt.SetRCommand("file_path_sans_ext")
+        clsFileNamesWithoutExt.AddParameter("x", clsRFunctionParameter:=clsFileNamesWithExt, iPosition:=0)
 
         clsSetNames.SetPackageName("stats")
         clsSetNames.SetRCommand("setNames")
         clsSetNames.AddParameter("object", clsRFunctionParameter:=clsGetFilesList, iPosition:=0)
-        clsSetNames.AddParameter("nm", clsRFunctionParameter:=clsFileNames, iPosition:=1)
+        clsSetNames.AddParameter("nm", clsRFunctionParameter:=clsFileNamesWithoutExt, iPosition:=1)
 
         'clsImportMultipleTextFiles.SetPackageName("base")
         clsImportMultipleTextFiles.SetRCommand("lapply")
@@ -529,6 +537,7 @@ Public Class dlgImportDataset
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsEnc2Native, New RParameter("path", 0, False), iAdditionalPairNo:=5)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("file", 0), iAdditionalPairNo:=6)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsGetFilesList, New RParameter("path", 0), iAdditionalPairNo:=7)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsFileNamesWithExt, New RParameter("path", 0), iAdditionalPairNo:=8)
         ucrInputFilePath.SetRCode(clsImport, bReset)
 
         'Save control
@@ -674,6 +683,7 @@ Public Class dlgImportDataset
             ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
             ucrSaveFile.Hide()
             clsGetFilesList.AddParameter("pattern", Chr(34) & "\\" & strFileExtension & "$" & Chr(34), iPosition:=1)
+            clsFileNamesWithExt.AddParameter("pattern", Chr(34) & "\\" & strFileExtension & "$" & Chr(34), iPosition:=1)
 
             If {".txt", ".csv", ".dly", ".dat"}.Contains(strFileExtension) Then
                 If strFileExtension = ".dly" Then
