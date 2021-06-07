@@ -187,11 +187,11 @@ Public Class dlgSummaryTables
 
         clsummaryVariableHeaderLeftTopFunction.SetPackageName("mmtable2")
         clsummaryVariableHeaderLeftTopFunction.SetRCommand("header_left_top")
-        clsummaryVariableHeaderLeftTopFunction.AddParameter("summary_variable", Chr(34) & "Summary_Variable" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsummaryVariableHeaderLeftTopFunction.AddParameter("summary_variable", "Summary-Variable", iPosition:=0, bIncludeArgumentName:=False)
 
         clsSummaryVariableHeaderTopLeftFunction.SetPackageName("mmtable2")
         clsSummaryVariableHeaderTopLeftFunction.SetRCommand("header_top_left")
-        clsSummaryVariableHeaderTopLeftFunction.AddParameter("summary_variable", Chr(34) & "Summary_Variable" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
+        clsSummaryVariableHeaderTopLeftFunction.AddParameter("summary_variable", "Summary-Variable", iPosition:=0, bIncludeArgumentName:=False)
 
         clsMutableOperator.RemoveParameterByName("summariesVariableLeftTop")
         clsMutableOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)

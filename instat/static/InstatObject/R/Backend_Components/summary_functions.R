@@ -1444,7 +1444,7 @@ if(include_margins && (length(factors) > 0 || length(column_factors) > 0)) {
     dplyr::mutate_at(vars(-Value), ~replace(., is.na(.), margin_name))
   
   shaped_cell_values <- shaped_cell_values %>%
-    dplyr::mutate_at(vars(-Value), ~as_factor(forcats::fct_relevel(., margin_name, after = Inf)))
+    dplyr::mutate_at(vars(-Value), ~forcats::as_factor(forcats::fct_relevel(., margin_name, after = Inf)))
   
 }
 shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(Value = round(Value, signif_fig))
