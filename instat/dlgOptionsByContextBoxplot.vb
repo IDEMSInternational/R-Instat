@@ -372,6 +372,7 @@ Public Class dlgOptionsByContextBoxplot
             clsBoxplotViolinGeom.SetRCommand("geom_violin")
             cmdBoxPlotOptions.Text = "Violin Plot Options"
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub AutoFill()

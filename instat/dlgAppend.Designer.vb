@@ -42,12 +42,12 @@ Partial Class dlgAppend
         Me.lblAppendToDataframe = New System.Windows.Forms.Label()
         Me.lblDataframes = New System.Windows.Forms.Label()
         Me.lblIDColName = New System.Windows.Forms.Label()
+        Me.ucrChkIncludeIDColumn = New instat.ucrCheck()
+        Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrInputIDColName = New instat.ucrInputTextBox()
         Me.ucrReceiverAppendDataframe = New instat.ucrReceiverMultiple()
         Me.ucrSelectorDataframes = New instat.ucrSelectorAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSaveGraph = New instat.ucrSave()
-        Me.ucrChkIncludeIDColumn = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblAppendToDataframe
@@ -64,6 +64,17 @@ Partial Class dlgAppend
         '
         resources.ApplyResources(Me.lblIDColName, "lblIDColName")
         Me.lblIDColName.Name = "lblIDColName"
+        '
+        'ucrChkIncludeIDColumn
+        '
+        Me.ucrChkIncludeIDColumn.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeIDColumn, "ucrChkIncludeIDColumn")
+        Me.ucrChkIncludeIDColumn.Name = "ucrChkIncludeIDColumn"
+        '
+        'ucrSaveGraph
+        '
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
         '
         'ucrInputIDColName
         '
@@ -92,17 +103,6 @@ Partial Class dlgAppend
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrSaveGraph
-        '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        '
-        'ucrChkIncludeIDColumn
-        '
-        Me.ucrChkIncludeIDColumn.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeIDColumn, "ucrChkIncludeIDColumn")
-        Me.ucrChkIncludeIDColumn.Name = "ucrChkIncludeIDColumn"
         '
         'dlgAppend
         '

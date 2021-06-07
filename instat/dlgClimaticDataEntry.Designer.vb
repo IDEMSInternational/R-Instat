@@ -68,7 +68,7 @@ Partial Class dlgClimaticDataEntry
         Me.rdoAdd.Name = "rdoAdd"
         Me.rdoAdd.Size = New System.Drawing.Size(110, 27)
         Me.rdoAdd.TabIndex = 1
-        Me.rdoAdd.Text = "Add"
+        Me.rdoAdd.Text = "Add/Edit"
         Me.rdoAdd.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoAdd.UseVisualStyleBackColor = True
         '
@@ -85,7 +85,7 @@ Partial Class dlgClimaticDataEntry
         Me.rdoEdit.Name = "rdoEdit"
         Me.rdoEdit.Size = New System.Drawing.Size(110, 27)
         Me.rdoEdit.TabIndex = 2
-        Me.rdoEdit.Text = "Edit"
+        Me.rdoEdit.Text = "Correct"
         Me.rdoEdit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.rdoEdit.UseVisualStyleBackColor = True
         '
@@ -209,7 +209,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.ucrEndDate.DateValue = New Date(2021, 3, 27, 16, 14, 1, 560)
         Me.ucrEndDate.Format = "dd MMM yyyy"
-        Me.ucrEndDate.Location = New System.Drawing.Point(74, 305)
+        Me.ucrEndDate.Location = New System.Drawing.Point(92, 305)
         Me.ucrEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.ucrEndDate.Name = "ucrEndDate"
@@ -220,7 +220,7 @@ Partial Class dlgClimaticDataEntry
         '
         Me.ucrStartDate.DateValue = New Date(2021, 3, 27, 16, 14, 1, 567)
         Me.ucrStartDate.Format = "dd MMM yyyy"
-        Me.ucrStartDate.Location = New System.Drawing.Point(74, 276)
+        Me.ucrStartDate.Location = New System.Drawing.Point(92, 276)
         Me.ucrStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
         Me.ucrStartDate.Name = "ucrStartDate"
@@ -232,7 +232,7 @@ Partial Class dlgClimaticDataEntry
         Me.ucrInputType.AddQuotesIfUnrecognised = True
         Me.ucrInputType.GetSetSelectedIndex = -1
         Me.ucrInputType.IsReadOnly = False
-        Me.ucrInputType.Location = New System.Drawing.Point(74, 244)
+        Me.ucrInputType.Location = New System.Drawing.Point(92, 244)
         Me.ucrInputType.Name = "ucrInputType"
         Me.ucrInputType.Size = New System.Drawing.Size(132, 21)
         Me.ucrInputType.TabIndex = 5

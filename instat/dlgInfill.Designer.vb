@@ -44,18 +44,18 @@ Partial Class dlgInfill
         Me.lblLimits = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.lblStartingFrom = New System.Windows.Forms.Label()
-        Me.lblEndDate = New System.Windows.Forms.Label()
-        Me.lblStartDate = New System.Windows.Forms.Label()
-        Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
-        Me.ucrInfillSelector = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkCompleteYears = New instat.ucrCheck()
         Me.ucrChkResort = New instat.ucrCheck()
         Me.ucrInputComboMonth = New instat.ucrInputComboBox()
         Me.ucrInputLimitOptions = New instat.ucrInputComboBox()
         Me.ucrDtpEndDate = New instat.ucrDateTimePicker()
+        Me.lblEndDate = New System.Windows.Forms.Label()
+        Me.lblStartDate = New System.Windows.Forms.Label()
         Me.ucrDtpStartDate = New instat.ucrDateTimePicker()
+        Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
+        Me.ucrInfillSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -95,6 +95,43 @@ Partial Class dlgInfill
         resources.ApplyResources(Me.lblStartingFrom, "lblStartingFrom")
         Me.lblStartingFrom.Name = "lblStartingFrom"
         '
+        'ucrChkCompleteYears
+        '
+        Me.ucrChkCompleteYears.Checked = False
+        resources.ApplyResources(Me.ucrChkCompleteYears, "ucrChkCompleteYears")
+        Me.ucrChkCompleteYears.Name = "ucrChkCompleteYears"
+        '
+        'ucrChkResort
+        '
+        Me.ucrChkResort.Checked = False
+        resources.ApplyResources(Me.ucrChkResort, "ucrChkResort")
+        Me.ucrChkResort.Name = "ucrChkResort"
+        '
+        'ucrInputComboMonth
+        '
+        Me.ucrInputComboMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboMonth.GetSetSelectedIndex = -1
+        Me.ucrInputComboMonth.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputComboMonth, "ucrInputComboMonth")
+        Me.ucrInputComboMonth.Name = "ucrInputComboMonth"
+        '
+        'ucrInputLimitOptions
+        '
+        Me.ucrInputLimitOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputLimitOptions.GetSetSelectedIndex = -1
+        Me.ucrInputLimitOptions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLimitOptions, "ucrInputLimitOptions")
+        Me.ucrInputLimitOptions.Name = "ucrInputLimitOptions"
+        '
+        'ucrDtpEndDate
+        '
+        Me.ucrDtpEndDate.DateValue = New Date(2021, 5, 19, 13, 58, 51, 375)
+        Me.ucrDtpEndDate.Format = "dd MMM yyyy"
+        resources.ApplyResources(Me.ucrDtpEndDate, "ucrDtpEndDate")
+        Me.ucrDtpEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpEndDate.Name = "ucrDtpEndDate"
+        '
         'lblEndDate
         '
         resources.ApplyResources(Me.lblEndDate, "lblEndDate")
@@ -104,6 +141,15 @@ Partial Class dlgInfill
         '
         resources.ApplyResources(Me.lblStartDate, "lblStartDate")
         Me.lblStartDate.Name = "lblStartDate"
+        '
+        'ucrDtpStartDate
+        '
+        Me.ucrDtpStartDate.DateValue = New Date(2021, 5, 19, 13, 58, 51, 387)
+        Me.ucrDtpStartDate.Format = "dd MMM yyyy"
+        resources.ApplyResources(Me.ucrDtpStartDate, "ucrDtpStartDate")
+        Me.ucrDtpStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpStartDate.Name = "ucrDtpStartDate"
         '
         'ucrReceiverFactors
         '
@@ -135,48 +181,6 @@ Partial Class dlgInfill
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrChkCompleteYears
-        '
-        Me.ucrChkCompleteYears.Checked = False
-        resources.ApplyResources(Me.ucrChkCompleteYears, "ucrChkCompleteYears")
-        Me.ucrChkCompleteYears.Name = "ucrChkCompleteYears"
-        '
-        'ucrChkResort
-        '
-        Me.ucrChkResort.Checked = False
-        resources.ApplyResources(Me.ucrChkResort, "ucrChkResort")
-        Me.ucrChkResort.Name = "ucrChkResort"
-        '
-        'ucrInputComboMonth
-        '
-        Me.ucrInputComboMonth.AddQuotesIfUnrecognised = True
-        Me.ucrInputComboMonth.GetSetSelectedIndex = -1
-        Me.ucrInputComboMonth.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputComboMonth, "ucrInputComboMonth")
-        Me.ucrInputComboMonth.Name = "ucrInputComboMonth"
-        '
-        'ucrInputLimitOptions
-        '
-        Me.ucrInputLimitOptions.AddQuotesIfUnrecognised = True
-        Me.ucrInputLimitOptions.GetSetSelectedIndex = -1
-        Me.ucrInputLimitOptions.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLimitOptions, "ucrInputLimitOptions")
-        Me.ucrInputLimitOptions.Name = "ucrInputLimitOptions"
-        '
-        'ucrDtpEndDate
-        '
-        resources.ApplyResources(Me.ucrDtpEndDate, "ucrDtpEndDate")
-        Me.ucrDtpEndDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDtpEndDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDtpEndDate.Name = "ucrDtpEndDate"
-        '
-        'ucrDtpStartDate
-        '
-        resources.ApplyResources(Me.ucrDtpStartDate, "ucrDtpStartDate")
-        Me.ucrDtpStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDtpStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDtpStartDate.Name = "ucrDtpStartDate"
         '
         'dlgInfill
         '

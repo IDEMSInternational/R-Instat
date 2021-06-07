@@ -132,7 +132,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.ucrNudBin.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBin.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudBin.Location = New System.Drawing.Point(91, 265)
+        Me.ucrNudBin.Location = New System.Drawing.Point(165, 265)
         Me.ucrNudBin.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudBin.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudBin.Name = "ucrNudBin"
@@ -175,7 +175,7 @@ Partial Class dlgConditionalQuantilePlot
         Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
         Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
-        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(95, 317)
+        Me.ucrInputLegendPosition.Location = New System.Drawing.Point(165, 317)
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
         Me.ucrInputLegendPosition.Size = New System.Drawing.Size(89, 21)
         Me.ucrInputLegendPosition.TabIndex = 75
@@ -184,7 +184,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.ucrNudColumns.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColumns.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudColumns.Location = New System.Drawing.Point(245, 318)
+        Me.ucrNudColumns.Location = New System.Drawing.Point(315, 318)
         Me.ucrNudColumns.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudColumns.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudColumns.Name = "ucrNudColumns"
@@ -232,7 +232,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.lblColumns.AutoSize = True
         Me.lblColumns.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblColumns.Location = New System.Drawing.Point(188, 321)
+        Me.lblColumns.Location = New System.Drawing.Point(258, 321)
         Me.lblColumns.Name = "lblColumns"
         Me.lblColumns.Size = New System.Drawing.Size(56, 13)
         Me.lblColumns.TabIndex = 82
@@ -371,7 +371,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.ucrNudMinNumPoints.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinNumPoints.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudMinNumPoints.Location = New System.Drawing.Point(148, 291)
+        Me.ucrNudMinNumPoints.Location = New System.Drawing.Point(165, 291)
         Me.ucrNudMinNumPoints.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudMinNumPoints.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudMinNumPoints.Name = "ucrNudMinNumPoints"

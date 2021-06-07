@@ -32,14 +32,15 @@ Partial Class dlgDuplicates
         Me.ttDuplicates = New System.Windows.Forms.ToolTip(Me.components)
         Me.rdoSuccessiveValues = New System.Windows.Forms.RadioButton()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.lblSelectedVariable = New System.Windows.Forms.Label()
+        Me.lblVariablesToDuplicate = New System.Windows.Forms.Label()
+        Me.lblType = New System.Windows.Forms.Label()
+        Me.ucrChkIncludeSummary = New instat.ucrCheck()
         Me.ucrInputOmitValues = New instat.ucrInputTextBox()
         Me.ucrInputTolerance = New instat.ucrInputTextBox()
         Me.ucrChkTolerance = New instat.ucrCheck()
         Me.ucrChkOmitValues = New instat.ucrCheck()
         Me.ucrInputConditions = New instat.ucrInputComboBox()
-        Me.lblSelectedVariable = New System.Windows.Forms.Label()
-        Me.lblVariablesToDuplicate = New System.Windows.Forms.Label()
-        Me.lblType = New System.Windows.Forms.Label()
         Me.ucrInputComboType = New instat.ucrInputComboBox()
         Me.ucrReceiverForSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrReceiverForSuccessiveValues = New instat.ucrReceiverSingle()
@@ -48,7 +49,6 @@ Partial Class dlgDuplicates
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorDuplicateswithVariables = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkIncludeSummary = New instat.ucrCheck()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -114,6 +114,29 @@ Partial Class dlgDuplicates
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
+        'lblSelectedVariable
+        '
+        resources.ApplyResources(Me.lblSelectedVariable, "lblSelectedVariable")
+        Me.lblSelectedVariable.Name = "lblSelectedVariable"
+        Me.lblSelectedVariable.Tag = ""
+        '
+        'lblVariablesToDuplicate
+        '
+        resources.ApplyResources(Me.lblVariablesToDuplicate, "lblVariablesToDuplicate")
+        Me.lblVariablesToDuplicate.Name = "lblVariablesToDuplicate"
+        Me.lblVariablesToDuplicate.Tag = ""
+        '
+        'lblType
+        '
+        resources.ApplyResources(Me.lblType, "lblType")
+        Me.lblType.Name = "lblType"
+        '
+        'ucrChkIncludeSummary
+        '
+        Me.ucrChkIncludeSummary.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeSummary, "ucrChkIncludeSummary")
+        Me.ucrChkIncludeSummary.Name = "ucrChkIncludeSummary"
+        '
         'ucrInputOmitValues
         '
         Me.ucrInputOmitValues.AddQuotesIfUnrecognised = True
@@ -149,23 +172,6 @@ Partial Class dlgDuplicates
         Me.ucrInputConditions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputConditions, "ucrInputConditions")
         Me.ucrInputConditions.Name = "ucrInputConditions"
-        '
-        'lblSelectedVariable
-        '
-        resources.ApplyResources(Me.lblSelectedVariable, "lblSelectedVariable")
-        Me.lblSelectedVariable.Name = "lblSelectedVariable"
-        Me.lblSelectedVariable.Tag = ""
-        '
-        'lblVariablesToDuplicate
-        '
-        resources.ApplyResources(Me.lblVariablesToDuplicate, "lblVariablesToDuplicate")
-        Me.lblVariablesToDuplicate.Name = "lblVariablesToDuplicate"
-        Me.lblVariablesToDuplicate.Tag = ""
-        '
-        'lblType
-        '
-        resources.ApplyResources(Me.lblType, "lblType")
-        Me.lblType.Name = "lblType"
         '
         'ucrInputComboType
         '
@@ -220,12 +226,6 @@ Partial Class dlgDuplicates
         Me.ucrSelectorDuplicateswithVariables.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorDuplicateswithVariables, "ucrSelectorDuplicateswithVariables")
         Me.ucrSelectorDuplicateswithVariables.Name = "ucrSelectorDuplicateswithVariables"
-        '
-        'ucrChkIncludeSummary
-        '
-        Me.ucrChkIncludeSummary.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeSummary, "ucrChkIncludeSummary")
-        Me.ucrChkIncludeSummary.Name = "ucrChkIncludeSummary"
         '
         'dlgDuplicates
         '

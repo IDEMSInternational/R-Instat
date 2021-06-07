@@ -21,7 +21,6 @@ Public Class dlgViewAndRemoveKeys
     Private clsGetKey As New RFunction
     Private clsRemoveKey As New RFunction
     Private Sub dlgViewAndRemoveKeys_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,6 +31,7 @@ Public Class dlgViewAndRemoveKeys
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

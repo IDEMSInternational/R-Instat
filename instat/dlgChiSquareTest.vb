@@ -21,8 +21,8 @@ Public Class dlgChiSquareTest
         ucrReceiverChiSquare.SetMeAsReceiver()
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.clsRsyntax.SetFunction("chisq.test")
-        autoTranslate(Me)
         cboLayoutOfData.Text = "Multiple Data Columns"
+        autoTranslate(Me)
         ucrBase.iHelpTopicID = 175
     End Sub
 

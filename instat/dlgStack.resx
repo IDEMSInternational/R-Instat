@@ -331,13 +331,13 @@
     <value>4</value>
   </data>
   <data name="ucrStackDataInto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 256</value>
+    <value>126, 257</value>
   </data>
   <data name="ucrStackDataInto.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrStackDataInto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 21</value>
+    <value>142, 21</value>
   </data>
   <data name="ucrStackDataInto.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -355,13 +355,13 @@
     <value>5</value>
   </data>
   <data name="ucrFactorInto.Location" type="System.Drawing.Point, System.Drawing">
-    <value>101, 225</value>
+    <value>126, 226</value>
   </data>
   <data name="ucrFactorInto.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrFactorInto.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 21</value>
+    <value>142, 21</value>
   </data>
   <data name="ucrFactorInto.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -458,9 +458,6 @@
   </data>
   <data name="&gt;&gt;ucrReceiverColumnsToBeStack.ZOrder" xml:space="preserve">
     <value>13</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

@@ -23,7 +23,6 @@ Public Class dlgView
     Private bControlsUpdated As Boolean = False
 
     Private Sub dlgView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -34,6 +33,7 @@ Public Class dlgView
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

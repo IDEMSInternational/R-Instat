@@ -43,9 +43,9 @@ Public Class dlgMerge
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         SetMergingBy()
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -59,7 +59,7 @@ Public Class dlgMerge
         dctJoinTypes.Add("Inner Join", "inner_join")
         dctJoinTypes.Add("Semi Join", "semi_join")
         dctJoinTypes.Add("Anti Join", "anti_join")
-        ucrInputJoinType.SetItems(dctItemParameterValuePairs:=dctJoinTypes, bSetCondtions:=False)
+        ucrInputJoinType.SetItems(dctItemParameterValuePairs:=dctJoinTypes, bSetConditions:=False)
 
         dctJoinTexts.Add("Full Join", "Include all rows and all columns from both data frames. Where there are not matching values, returns NA for the one missing.")
         dctJoinTexts.Add("Left Join", "Include all rows from the 1st data frame, and all columns from both data frames." & Environment.NewLine & "Rows in the 1st data frame with no match in the second data frame will have NA values in the new columns." & Environment.NewLine & "If there are multiple matches, all combinations of the matches are included.")

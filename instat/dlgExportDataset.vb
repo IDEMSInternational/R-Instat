@@ -126,6 +126,7 @@ Public Class dlgExportDataset
             lblConfirm.Text = "Files with the same names will be overwritten." & Environment.NewLine & "Click Ok to Confirm the Export."
         End If
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
 
