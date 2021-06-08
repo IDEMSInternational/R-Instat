@@ -164,18 +164,20 @@ Public Class clsRecentFiles
         Dim strFilePath As String = ""
         'if tag is "more" then its more link that was clicked so exit sub
         If TypeOf sender Is ToolStripItem Then
+            Dim bIsMoreLink As Boolean
             Dim toolStripItem As ToolStripItem = DirectCast(sender, ToolStripItem)
-            strFilePath = toolStripItem.Tag.ToString().Substring(4) 'exclude MRU: 
+            strFilePath = toolStripItem.Tag.ToString()
+            bIsMoreLink = (strFilePath = "MRU:more")
             If toolStripItem.OwnerItem Is mnuFile Then
-                If strFilePath.Contains("more") Then
+                If bIsMoreLink Then
                     UpdateRecentFilesMenuItems(True, mnuFile:=mnuFile)
                     mnuFile.ShowDropDown()
                     AddHandler mnuFile.DropDownClosed, AddressOf MenuDropDownClosedAfterMoreClicked
                     Exit Sub
                 End If
             ElseIf toolStripItem.OwnerItem Is mnuFileIcon Then
-                If strFilePath.Contains("more") Then
-                    UpdateRecentFilesMenuItems(strFilePath.Contains("more"), mnuFileIcon:=mnuFileIcon)
+                If bIsMoreLink Then
+                    UpdateRecentFilesMenuItems(True, mnuFileIcon:=mnuFileIcon)
                     mnuFileIcon.ShowDropDown()
                     AddHandler mnuFileIcon.DropDownClosed, AddressOf MenuDropDownClosedAfterMoreClicked
                     Exit Sub
@@ -183,7 +185,7 @@ Public Class clsRecentFiles
             End If
         ElseIf TypeOf sender Is LinkLabel Then
             strFilePath = DirectCast(sender, LinkLabel).Tag.ToString()
-            If strFilePath.Contains("more") Then
+            If strFilePath = "more" Then
                 UpdateRecentFilesMenuItems(True, ucrDataViewWindow:=ucrDataViewWindow)
                 Exit Sub
             End If
@@ -226,14 +228,14 @@ Public Class clsRecentFiles
     ''' <param name="mnuFile"></param>
     ''' <param name="mnuFileIcon"></param>
     ''' <param name="ucrDataViewWindow"></param>
-    Public Sub UpdateRecentFilesMenuItems(bShowAll As Boolean, Optional mnuFile As ToolStripMenuItem = Nothing, Optional mnuFileIcon As ToolStripSplitButton = Nothing, Optional ucrDataViewWindow As ucrDataView = Nothing)
-        'exit sub if file toolstrip or file icon toolstrip or data view are not initialised
+    Public Sub UpdateRecentFilesMenuItems(bShowAll As Boolean, Optional mnuFile As ToolStripMenuItem = Nothing,
+                                          Optional mnuFileIcon As ToolStripSplitButton = Nothing,
+                                          Optional ucrDataViewWindow As ucrDataView = Nothing)
+        'exit sub if file toolstrip, file icon toolstrip and data view are not initialised
         If mnuFile Is Nothing AndAlso mnuFileIcon Is Nothing AndAlso ucrDataViewWindow Is Nothing Then
             Exit Sub
         End If
 
-        Dim strPath As String
-        Dim strFileName As String
 
         If mnuFile IsNot Nothing Then
             'remove all recent files from the menu items
@@ -258,17 +260,14 @@ Public Class clsRecentFiles
         End If
 
         'then add and displays items (_in reverse order) for recent files
-        Dim clsItem As ToolStripMenuItem
-        Dim clsItemIcon As ToolStripMenuItem
-        Dim linkMenuItem As LinkLabel
         For iCounter As Integer = lstRecentOpenedFiles.Count - 1 To 0 Step -1
             Try
-                strPath = lstRecentOpenedFiles(iCounter)
-                strFileName = Path.GetFileName(strPath)
+                Dim strPath As String = lstRecentOpenedFiles(iCounter)
+                Dim strFileName As String = Path.GetFileName(strPath)
 
                 'create new ToolStripItem, displaying the name of the file...
                 If mnuFile IsNot Nothing Then
-                    clsItem = New ToolStripMenuItem(strFileName)
+                    Dim clsItem As ToolStripMenuItem = New ToolStripMenuItem(strFileName)
                     clsItem.ToolTipText = strPath
                     'set the tag - will be used to identify the ToolStripItem as an most recent(MRU) item 
                     'and contains the full path so it can be opened later
@@ -280,16 +279,16 @@ Public Class clsRecentFiles
                 End If
 
                 If mnuFileIcon IsNot Nothing Then
-                    clsItemIcon = New ToolStripMenuItem(strFileName)
-                    clsItemIcon.ToolTipText = strPath
-                    clsItemIcon.Tag = "MRU:" & strPath
-                    AddHandler clsItemIcon.Click, AddressOf OnMnuRecentOpenedFile_Click
-                    mnuFileIcon.DropDownItems.Insert(mnuFileIcon.DropDownItems.Count, clsItemIcon)
+                    Dim clsItem As ToolStripMenuItem = New ToolStripMenuItem(strFileName)
+                    clsItem.ToolTipText = strPath
+                    clsItem.Tag = "MRU:" & strPath
+                    AddHandler clsItem.Click, AddressOf OnMnuRecentOpenedFile_Click
+                    mnuFileIcon.DropDownItems.Insert(mnuFileIcon.DropDownItems.Count, clsItem)
                 End If
 
                 If ucrDataViewWindow IsNot Nothing Then
                     'set and insert the data view window recent files menu items
-                    linkMenuItem = New LinkLabel
+                    Dim linkMenuItem As LinkLabel = New LinkLabel
                     linkMenuItem.Text = strFileName
                     linkMenuItem.Tag = strPath 'path used when the link is clicked
                     'attach link click event handler for opening the file
@@ -301,7 +300,7 @@ Public Class clsRecentFiles
                     'if recent files are more than 5 then just the "more" link label and exit loop 
                     If lstRecentOpenedFiles.Count - iCounter >= 5 Then
                         If mnuFile IsNot Nothing Then
-                            clsItem = New ToolStripMenuItem(GetTranslation("More ..."))
+                            Dim clsItem As ToolStripMenuItem = New ToolStripMenuItem(GetTranslation("More ..."))
                             clsItem.ToolTipText = GetTranslation("More ...")
                             clsItem.Tag = "MRU:more"
                             AddHandler clsItem.Click, AddressOf OnMnuRecentOpenedFile_Click
@@ -309,15 +308,15 @@ Public Class clsRecentFiles
                         End If
 
                         If mnuFileIcon IsNot Nothing Then
-                            clsItemIcon = New ToolStripMenuItem(GetTranslation("More ..."))
-                            clsItemIcon.ToolTipText = GetTranslation("More ...")
-                            clsItemIcon.Tag = "MRU:more"
-                            AddHandler clsItemIcon.Click, AddressOf OnMnuRecentOpenedFile_Click
-                            mnuFileIcon.DropDownItems.Insert(mnuFileIcon.DropDownItems.Count, clsItemIcon)
+                            Dim clsItem As ToolStripMenuItem = New ToolStripMenuItem(GetTranslation("More ..."))
+                            clsItem.ToolTipText = GetTranslation("More ...")
+                            clsItem.Tag = "MRU:more"
+                            AddHandler clsItem.Click, AddressOf OnMnuRecentOpenedFile_Click
+                            mnuFileIcon.DropDownItems.Insert(mnuFileIcon.DropDownItems.Count, clsItem)
                         End If
 
                         If ucrDataViewWindow IsNot Nothing Then
-                            linkMenuItem = New LinkLabel
+                            Dim linkMenuItem As LinkLabel = New LinkLabel
                             linkMenuItem.Text = GetTranslation("More ...")
                             linkMenuItem.Tag = "more"
                             AddHandler linkMenuItem.Click, AddressOf OnMnuRecentOpenedFile_Click
