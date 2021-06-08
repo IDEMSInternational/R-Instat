@@ -136,6 +136,10 @@ Partial Class sdgPlots
         Me.tbpAnnotation = New System.Windows.Forms.TabPage()
         Me.ucrChkAnnotation = New instat.ucrCheck()
         Me.grpAnnotation = New System.Windows.Forms.GroupBox()
+        Me.ucrInputRectXmin = New instat.ucrInputTextBox()
+        Me.ucrInputRectXmax = New instat.ucrInputTextBox()
+        Me.ucrInputRectYmax = New instat.ucrInputTextBox()
+        Me.ucrInputRectYmin = New instat.ucrInputTextBox()
         Me.ucrChkUseDataframe = New instat.ucrCheck()
         Me.ucrSelectorAnnotation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblCurvature = New System.Windows.Forms.Label()
@@ -945,6 +949,14 @@ Partial Class sdgPlots
         '
         'grpAnnotation
         '
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverYmin)
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverXmin)
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverYmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverXmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputRectXmin)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputRectXmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputRectYmax)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputRectYmin)
         Me.grpAnnotation.Controls.Add(Me.ucrChkUseDataframe)
         Me.grpAnnotation.Controls.Add(Me.ucrSelectorAnnotation)
         Me.grpAnnotation.Controls.Add(Me.lblCurvature)
@@ -991,13 +1003,41 @@ Partial Class sdgPlots
         Me.grpAnnotation.Controls.Add(Me.ucrInputFill)
         Me.grpAnnotation.Controls.Add(Me.ucrReceiverX)
         Me.grpAnnotation.Controls.Add(Me.ucrReceiverY)
-        Me.grpAnnotation.Controls.Add(Me.ucrReceiverXmin)
-        Me.grpAnnotation.Controls.Add(Me.ucrReceiverYmin)
-        Me.grpAnnotation.Controls.Add(Me.ucrReceiverXmax)
-        Me.grpAnnotation.Controls.Add(Me.ucrReceiverYmax)
         resources.ApplyResources(Me.grpAnnotation, "grpAnnotation")
         Me.grpAnnotation.Name = "grpAnnotation"
         Me.grpAnnotation.TabStop = False
+        '
+        'ucrInputRectXmin
+        '
+        Me.ucrInputRectXmin.AddQuotesIfUnrecognised = True
+        Me.ucrInputRectXmin.IsMultiline = False
+        Me.ucrInputRectXmin.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputRectXmin, "ucrInputRectXmin")
+        Me.ucrInputRectXmin.Name = "ucrInputRectXmin"
+        '
+        'ucrInputRectXmax
+        '
+        Me.ucrInputRectXmax.AddQuotesIfUnrecognised = True
+        Me.ucrInputRectXmax.IsMultiline = False
+        Me.ucrInputRectXmax.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputRectXmax, "ucrInputRectXmax")
+        Me.ucrInputRectXmax.Name = "ucrInputRectXmax"
+        '
+        'ucrInputRectYmax
+        '
+        Me.ucrInputRectYmax.AddQuotesIfUnrecognised = True
+        Me.ucrInputRectYmax.IsMultiline = False
+        Me.ucrInputRectYmax.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputRectYmax, "ucrInputRectYmax")
+        Me.ucrInputRectYmax.Name = "ucrInputRectYmax"
+        '
+        'ucrInputRectYmin
+        '
+        Me.ucrInputRectYmin.AddQuotesIfUnrecognised = True
+        Me.ucrInputRectYmin.IsMultiline = False
+        Me.ucrInputRectYmin.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputRectYmin, "ucrInputRectYmin")
+        Me.ucrInputRectYmin.Name = "ucrInputRectYmin"
         '
         'ucrChkUseDataframe
         '
@@ -1550,6 +1590,10 @@ Partial Class sdgPlots
     Friend WithEvents ucrReceiverYmin As ucrReceiverSingle
     Friend WithEvents ucrReceiverXmax As ucrReceiverSingle
     Friend WithEvents ucrReceiverYmax As ucrReceiverSingle
+    Friend WithEvents ucrInputRectXmin As ucrInputTextBox
+    Friend WithEvents ucrInputRectXmax As ucrInputTextBox
+    Friend WithEvents ucrInputRectYmax As ucrInputTextBox
+    Friend WithEvents ucrInputRectYmin As ucrInputTextBox
 End Class
 
 
