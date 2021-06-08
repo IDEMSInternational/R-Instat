@@ -77,8 +77,8 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddParameterPresentCondition(rdoBarChart, "coordpolar", False)
 
         ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrInputBarChartPosition, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputBarChartPosition.SetLinkedDisplayControl(lblPosition)
+        ucrPnlOptions.AddToLinkedControls(ucrInputBarChartPositions, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputBarChartPositions.SetLinkedDisplayControl(lblPosition)
         ucrPnlOptions.AddToLinkedControls({ucrReceiverByFactor}, {rdoBarChart}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
 
@@ -126,23 +126,24 @@ Public Class dlgBarAndPieChart
         ucrChkFlipCoordinates.SetText("Flip Coordinates")
         ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        ucrInputYValue.SetParameter(New RParameter("stat", 0))
+
+        ucrInputYValues.SetParameter(New RParameter("stat", 0))
         dctStatOptions.Add("Count", Chr(34) & "count" & Chr(34))
         dctStatOptions.Add("Variable", Chr(34) & "identity" & Chr(34))
-        ucrInputYValue.SetItems(dctStatOptions)
-        ucrInputYValue.SetDropDownStyleAsNonEditable()
-        ucrInputYValue.SetRDefault(Chr(34) & "count" & Chr(34))
+        ucrInputYValues.SetItems(dctStatOptions)
+        ucrInputYValues.SetDropDownStyleAsNonEditable()
+        ucrInputYValues.SetRDefault(Chr(34) & "count" & Chr(34))
 
-        ucrInputBarChartPosition.SetParameter(New RParameter("position", 0))
+        ucrInputBarChartPositions.SetParameter(New RParameter("position", 0))
         dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
         dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
         dctPositionPairs.Add("Identity", Chr(34) & "identity" & Chr(34))
         dctPositionPairs.Add("Jitter", Chr(34) & "jitter" & Chr(34))
         dctPositionPairs.Add("Fill", Chr(34) & "fill" & Chr(34))
         dctPositionPairs.Add("Stack in reverse", "position_stack(reverse = TRUE)")
-        ucrInputBarChartPosition.SetItems(dctPositionPairs)
-        ucrInputBarChartPosition.SetDropDownStyleAsNonEditable()
-        ucrInputBarChartPosition.SetRDefault(Chr(34) & "stack" & Chr(34))
+        ucrInputBarChartPositions.SetItems(dctPositionPairs)
+        ucrInputBarChartPositions.SetDropDownStyleAsNonEditable()
+        ucrInputBarChartPositions.SetRDefault(Chr(34) & "stack" & Chr(34))
 
     End Sub
 
@@ -214,8 +215,8 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
         ucrPnlOptions.SetRCode(clsBaseOperator, bReset)
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
-        ucrInputBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
-        ucrInputYValue.SetRCode(clsRgeomBarFunction, bReset)
+        ucrInputBarChartPositions.SetRCode(clsRgeomBarFunction, bReset)
+        ucrInputYValues.SetRCode(clsRgeomBarFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -270,7 +271,7 @@ Public Class dlgBarAndPieChart
             ucrReceiverByFactor.Clear()
         End If
         'Allows for sync with the layer parameters
-        ucrInputBarChartPosition.SetRCode(clsRgeomBarFunction, bReset)
+        ucrInputBarChartPositions.SetRCode(clsRgeomBarFunction, bReset)
         TestOkEnabled()
     End Sub
 
@@ -340,8 +341,9 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub setColumnChartOption()
-        If ucrInputYValue.GetValue = "Variable" Then
+        If ucrInputYValues.GetValue = "Variable" Then
             lblPosition.Visible = False
+            ucrInputBarChartPositions.Visible = False
             ucrReceiverY.SetVisible(True)
             ucrReceiverY.SetMeAsReceiver()
             ucrReceiverY.AddOrRemoveParameter(True)
@@ -350,15 +352,24 @@ Public Class dlgBarAndPieChart
             ucrReceiverFirst.SetMeAsReceiver()
             ucrReceiverY.AddOrRemoveParameter(False)
             lblPosition.Visible = rdoBarChart.Checked
+            ucrInputBarChartPositions.Visible = rdoBarChart.Checked
         End If
     End Sub
 
-    Private Sub ucrInputYValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputYValue.ControlValueChanged
+    Private Sub ucrInputYValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputYValues.ControlValueChanged
         setColumnChartOption()
         TestOkEnabled()
     End Sub
 
     Private Sub CoreControls_ContentsChanged() Handles ucrReceiverFirst.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub CoreControls_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveBar.ControlContentsChanged, ucrReceiverY.ControlContentsChanged, ucrReceiverFirst.ControlContentsChanged
+
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+
     End Sub
 End Class

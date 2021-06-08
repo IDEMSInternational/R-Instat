@@ -50,9 +50,9 @@ Partial Class dlgBarAndPieChart
         Me.lblYvariable = New System.Windows.Forms.Label()
         Me.cmdColumnChartOptions = New System.Windows.Forms.Button()
         Me.lblYValue = New System.Windows.Forms.Label()
-        Me.ucrInputYValue = New instat.ucrInputComboBox()
+        Me.ucrInputBarChartPositions = New instat.ucrInputComboBox()
+        Me.ucrInputYValues = New instat.ucrInputComboBox()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
-        Me.ucrInputBarChartPosition = New instat.ucrInputComboBox()
         Me.ucrSaveBar = New instat.ucrSave()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
         Me.ucrReceiverByFactor = New instat.ucrReceiverSingle()
@@ -141,13 +141,21 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.lblYValue, "lblYValue")
         Me.lblYValue.Name = "lblYValue"
         '
-        'ucrInputYValue
+        'ucrInputBarChartPositions
         '
-        Me.ucrInputYValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputYValue.GetSetSelectedIndex = -1
-        Me.ucrInputYValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYValue, "ucrInputYValue")
-        Me.ucrInputYValue.Name = "ucrInputYValue"
+        Me.ucrInputBarChartPositions.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarChartPositions.GetSetSelectedIndex = -1
+        Me.ucrInputBarChartPositions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputBarChartPositions, "ucrInputBarChartPositions")
+        Me.ucrInputBarChartPositions.Name = "ucrInputBarChartPositions"
+        '
+        'ucrInputYValues
+        '
+        Me.ucrInputYValues.AddQuotesIfUnrecognised = True
+        Me.ucrInputYValues.GetSetSelectedIndex = -1
+        Me.ucrInputYValues.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputYValues, "ucrInputYValues")
+        Me.ucrInputYValues.Name = "ucrInputYValues"
         '
         'ucrReceiverY
         '
@@ -157,14 +165,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrReceiverY.Selector = Nothing
         Me.ucrReceiverY.strNcFilePath = ""
         Me.ucrReceiverY.ucrSelector = Nothing
-        '
-        'ucrInputBarChartPosition
-        '
-        Me.ucrInputBarChartPosition.AddQuotesIfUnrecognised = True
-        Me.ucrInputBarChartPosition.GetSetSelectedIndex = -1
-        Me.ucrInputBarChartPosition.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputBarChartPosition, "ucrInputBarChartPosition")
-        Me.ucrInputBarChartPosition.Name = "ucrInputBarChartPosition"
         '
         'ucrSaveBar
         '
@@ -217,13 +217,13 @@ Partial Class dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrInputYValue)
+        Me.Controls.Add(Me.ucrInputBarChartPositions)
+        Me.Controls.Add(Me.ucrInputYValues)
         Me.Controls.Add(Me.lblYValue)
         Me.Controls.Add(Me.cmdColumnChartOptions)
         Me.Controls.Add(Me.lblYvariable)
         Me.Controls.Add(Me.ucrReceiverY)
         Me.Controls.Add(Me.lblPosition)
-        Me.Controls.Add(Me.ucrInputBarChartPosition)
         Me.Controls.Add(Me.ucrSaveBar)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.Controls.Add(Me.rdoBarChart)
@@ -262,11 +262,11 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents rdoPieChart As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents cmdBarChartOptions As Button
-    Friend WithEvents ucrInputBarChartPosition As ucrInputComboBox
     Friend WithEvents lblPosition As Label
     Friend WithEvents lblYvariable As Label
     Friend WithEvents ucrReceiverY As ucrReceiverSingle
     Friend WithEvents cmdColumnChartOptions As Button
-    Friend WithEvents ucrInputYValue As ucrInputComboBox
     Friend WithEvents lblYValue As Label
+    Friend WithEvents ucrInputYValues As ucrInputComboBox
+    Friend WithEvents ucrInputBarChartPositions As ucrInputComboBox
 End Class
