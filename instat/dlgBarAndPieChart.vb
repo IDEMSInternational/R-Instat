@@ -56,8 +56,8 @@ Public Class dlgBarAndPieChart
 
         bReset = False
         ChangeLabel()
-        autoTranslate(Me)
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -337,12 +337,11 @@ Public Class dlgBarAndPieChart
         SetDialogOptions()
         ChangeLabel()
         setColumnChartOption()
-        TestOkEnabled()
-        autoTranslate(Me)
     End Sub
 
     Private Sub setColumnChartOption()
         If ucrInputYValue.GetValue = "Variable" Then
+            lblPosition.Visible = False
             ucrReceiverY.SetVisible(True)
             ucrReceiverY.SetMeAsReceiver()
             ucrReceiverY.AddOrRemoveParameter(True)
@@ -350,6 +349,7 @@ Public Class dlgBarAndPieChart
             ucrReceiverY.SetVisible(False)
             ucrReceiverFirst.SetMeAsReceiver()
             ucrReceiverY.AddOrRemoveParameter(False)
+            lblPosition.Visible = rdoBarChart.Checked
         End If
     End Sub
 

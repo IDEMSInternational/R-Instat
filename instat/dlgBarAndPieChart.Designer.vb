@@ -144,6 +144,7 @@ Partial Class dlgBarAndPieChart
         'ucrInputYValue
         '
         Me.ucrInputYValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputYValue.GetSetSelectedIndex = -1
         Me.ucrInputYValue.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputYValue, "ucrInputYValue")
         Me.ucrInputYValue.Name = "ucrInputYValue"
@@ -160,6 +161,7 @@ Partial Class dlgBarAndPieChart
         'ucrInputBarChartPosition
         '
         Me.ucrInputBarChartPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarChartPosition.GetSetSelectedIndex = -1
         Me.ucrInputBarChartPosition.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputBarChartPosition, "ucrInputBarChartPosition")
         Me.ucrInputBarChartPosition.Name = "ucrInputBarChartPosition"
