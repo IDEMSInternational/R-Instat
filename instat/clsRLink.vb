@@ -2404,6 +2404,9 @@ Public Class RLink
             lstNewRCodeStructures.RemoveAt(0)
             dlgRecodeFactor.lstScriptsRCodeStructure = lstNewRCodeStructures
             dlgRecodeFactor.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("combine factors") Then
+            dlgCombine.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgCombine.ShowDialog()
         End If
     End Sub
 

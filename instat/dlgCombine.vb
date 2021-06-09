@@ -18,7 +18,8 @@ Imports instat.Translations
 Public Class dlgCombine
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-
+    Private lstRCodeStructure As List(Of RCodeStructure)
+    Dim clsDefaultFunction As New RFunction
     Private Sub dlgCombine_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -76,15 +77,36 @@ Public Class dlgCombine
         ucrChkDropUnusedLevels.SetRDefault("FALSE")
     End Sub
 
-    Private Sub SetDefaults()
-        Dim clsDefaultFunction As New RFunction
-        ucrSelectorCombineFactors.Reset()
-        ucrNewColName.Reset()
-
+    Private Sub ResetFunction()
+        clsDefaultFunction = New RFunction
         clsDefaultFunction.SetRCommand("interaction")
-        clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
+
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+    End Sub
+
+    Private Sub SetDefaults()
+        ResetFunction()
+        ucrSelectorCombineFactors.Reset()
+        ucrNewColName.Reset()
+        If IsNothing(lstRCodeStructure) Then
+
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = clsDefaultFunction.strRCommand Then
+                    clsDefaultFunction = lstRCodeStructure(0)
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+                Else
+                    MsgBox("This dialogue only uses the ""interaction"" function")
+                End If
+            Else
+                MsgBox("Developer error:The Script must be an RFunction")
+            End If
+        End If
+        lstRCodeStructure = Nothing
+        clsDefaultFunction.SetAssignTo(strTemp:=ucrNewColName.GetText(), strTempDataframe:=ucrSelectorCombineFactors.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColName.GetText())
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -108,4 +130,14 @@ Public Class dlgCombine
     Private Sub ucrFactorsReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFactorsReceiver.ControlContentsChanged, ucrNewColName.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class
