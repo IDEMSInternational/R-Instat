@@ -297,7 +297,8 @@ Public Class clsRecentFiles
                 End If
 
                 If Not bShowAll Then
-                    'if recent files are more than 5 then just the "more" link label and exit loop 
+                    'if recent files are more than 5 then display the "more" link label and exit loop 
+
                     If lstRecentOpenedFiles.Count - iCounter >= 5 Then
                         If mnuFile IsNot Nothing Then
                             Dim clsItem As ToolStripMenuItem = New ToolStripMenuItem(GetTranslation("More ..."))
