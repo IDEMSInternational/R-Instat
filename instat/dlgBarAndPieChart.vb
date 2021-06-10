@@ -86,9 +86,9 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.SetParameter(New RParameter("data", 0))
         ucrBarChartSelector.SetParameterIsrfunction()
 
-        ucrVariablesAsFactorForBarChart.SetParameter(New RParameter("x", 0))
+        'ucrVariablesAsFactorForBarChart.SetParameter(New RParameter("x", 0))
         ucrVariablesAsFactorForBarChart.SetParameterIsString()
-        ucrVariablesAsFactorForBarChart.bWithQuotes = False
+        'ucrVariablesAsFactorForBarChart.bWithQuotes = False
         ucrVariablesAsFactorForBarChart.Selector = ucrBarChartSelector
         ucrVariablesAsFactorForBarChart.SetFactorReceiver(ucrReceiverByFactor)
         ucrVariablesAsFactorForBarChart.strSelectorHeading = "Variables"
@@ -98,7 +98,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverX.Selector = ucrBarChartSelector
         ucrReceiverX.strSelectorHeading = "X Variable"
         'ucrReceiverX.SetParameter(New RParameter("x", 0))
-        ucrReceiverX.bWithQuotes = False
+        'ucrReceiverX.bWithQuotes = False
         ucrReceiverX.SetParameterIsString()
 
         ucrReceiverByFactor.Selector = ucrBarChartSelector
@@ -302,23 +302,23 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub ChangeParameterName()
+        clsBarAesFunction.RemoveParameterByName("x")
+        clsBarAesFunction.RemoveParameterByName("y")
         If rdoValue.Checked Then
-            ucrVariablesAsFactorForBarChart.ChangeParameterName("y")
-            ucrReceiverX.Add(clsBarAesFunction.GetParameter("x").strArgumentValue)
-            ElseIf rdoFrequency.Checked Then
-            ucrVariablesAsFactorForBarChart.ChangeParameterName("x")
+            'ucrVariablesAsFactorForBarChart.ChangeParameterName("y")
+            clsBarAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=1)
+            clsBarAesFunction.AddParameter("y", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=2)
+        ElseIf rdoFrequency.Checked Then
+            'ucrVariablesAsFactorForBarChart.ChangeParameterName("x")
+            clsBarAesFunction.AddParameter("x", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
         End If
     End Sub
-    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged
+    Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged
         SetDialogOptions()
         ChangeParameterName()
     End Sub
 
-    Private Sub CoreControls_ContentsChanged() Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
+    Private Sub CoreControls_ContentsChanged() Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
         TestOkEnabled()
-    End Sub
-
-    Private Sub CoreControls_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
-
     End Sub
 End Class

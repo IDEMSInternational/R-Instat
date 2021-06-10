@@ -133,7 +133,7 @@
     <value>103, 13</value>
   </data>
   <data name="lblByFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="lblByFactor.Text" xml:space="preserve">
     <value>By Factor (Optional):</value>
@@ -160,7 +160,7 @@
     <value>121, 25</value>
   </data>
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>11</value>
+    <value>13</value>
   </data>
   <data name="cmdOptions.Text" xml:space="preserve">
     <value>Plot Options</value>
@@ -319,7 +319,7 @@
     <value>47, 13</value>
   </data>
   <data name="lblPosition.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="lblPosition.Text" xml:space="preserve">
     <value>Position:</value>
@@ -346,7 +346,7 @@
     <value>121, 25</value>
   </data>
   <data name="cmdColumnChartOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="cmdColumnChartOptions.Text" xml:space="preserve">
     <value>Column Chart Options</value>
@@ -370,7 +370,7 @@
     <value>92, 21</value>
   </data>
   <data name="ucrInputBarChartPositions.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="&gt;&gt;ucrInputBarChartPositions.Name" xml:space="preserve">
     <value>ucrInputBarChartPositions</value>
@@ -394,7 +394,7 @@
     <value>255, 24</value>
   </data>
   <data name="ucrSaveBar.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="&gt;&gt;ucrSaveBar.Name" xml:space="preserve">
     <value>ucrSaveBar</value>
@@ -415,7 +415,7 @@
     <value>166, 20</value>
   </data>
   <data name="ucrChkFlipCoordinates.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrChkFlipCoordinates.Name" xml:space="preserve">
     <value>ucrChkFlipCoordinates</value>
@@ -451,7 +451,7 @@
     <value>58, 13</value>
   </data>
   <data name="lblXvariable.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
+    <value>6</value>
   </data>
   <data name="lblXvariable.Text" xml:space="preserve">
     <value>X Variable:</value>
@@ -478,7 +478,7 @@
     <value>120, 21</value>
   </data>
   <data name="ucrReceiverX.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
+    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrReceiverX.Name" xml:space="preserve">
     <value>ucrReceiverX</value>
@@ -580,7 +580,7 @@
     <value>410, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="&gt;&gt;ucrBase.Name" xml:space="preserve">
     <value>ucrBase</value>
@@ -637,7 +637,7 @@
     <value>120, 20</value>
   </data>
   <data name="ucrReceiverByFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="&gt;&gt;ucrReceiverByFactor.Name" xml:space="preserve">
     <value>ucrReceiverByFactor</value>
