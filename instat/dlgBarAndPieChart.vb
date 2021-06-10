@@ -86,9 +86,7 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.SetParameter(New RParameter("data", 0))
         ucrBarChartSelector.SetParameterIsrfunction()
 
-        'ucrVariablesAsFactorForBarChart.SetParameter(New RParameter("x", 0))
         ucrVariablesAsFactorForBarChart.SetParameterIsString()
-        'ucrVariablesAsFactorForBarChart.bWithQuotes = False
         ucrVariablesAsFactorForBarChart.Selector = ucrBarChartSelector
         ucrVariablesAsFactorForBarChart.SetFactorReceiver(ucrReceiverByFactor)
         ucrVariablesAsFactorForBarChart.strSelectorHeading = "Variables"
@@ -97,8 +95,6 @@ Public Class dlgBarAndPieChart
 
         ucrReceiverX.Selector = ucrBarChartSelector
         ucrReceiverX.strSelectorHeading = "X Variable"
-        'ucrReceiverX.SetParameter(New RParameter("x", 0))
-        'ucrReceiverX.bWithQuotes = False
         ucrReceiverX.SetParameterIsString()
 
         ucrReceiverByFactor.Selector = ucrBarChartSelector
