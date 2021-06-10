@@ -259,7 +259,7 @@ Public Class clsRecentFiles
             ucrDataViewWindow.ClearRecentFileMenuItems()
         End If
 
-        'then add and displays items (_in reverse order) for recent files
+        'then add and display items (in reverse order) for recent files
         For iCounter As Integer = lstRecentOpenedFiles.Count - 1 To 0 Step -1
             Try
                 Dim strPath As String = lstRecentOpenedFiles(iCounter)
