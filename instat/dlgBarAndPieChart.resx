@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 221</value>
+    <value>252, 255</value>
   </data>
   <data name="lblByFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 13</value>
@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblByFactor.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>12</value>
   </data>
   <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="cmdPieChartOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -202,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdPieChartOptions.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>17</value>
   </data>
   <data name="rdoPieChart.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -241,7 +241,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoPieChart.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="rdoValue.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -277,7 +277,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoValue.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="cmdBarChartOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -304,7 +304,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdBarChartOptions.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>16</value>
   </data>
   <data name="lblPosition.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -313,7 +313,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 265</value>
+    <value>252, 297</value>
   </data>
   <data name="lblPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -334,7 +334,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblPosition.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="cmdColumnChartOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -361,7 +361,157 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdColumnChartOptions.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
+  </data>
+  <data name="ucrInputBarChartPositions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 313</value>
+  </data>
+  <data name="ucrInputBarChartPositions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>92, 21</value>
+  </data>
+  <data name="ucrInputBarChartPositions.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrInputBarChartPositions.Name" xml:space="preserve">
+    <value>ucrInputBarChartPositions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputBarChartPositions.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputBarChartPositions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputBarChartPositions.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrSaveBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 328</value>
+  </data>
+  <data name="ucrSaveBar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrSaveBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>255, 24</value>
+  </data>
+  <data name="ucrSaveBar.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveBar.Name" xml:space="preserve">
+    <value>ucrSaveBar</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveBar.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveBar.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveBar.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrChkFlipCoordinates.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 302</value>
+  </data>
+  <data name="ucrChkFlipCoordinates.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 20</value>
+  </data>
+  <data name="ucrChkFlipCoordinates.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFlipCoordinates.Name" xml:space="preserve">
+    <value>ucrChkFlipCoordinates</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFlipCoordinates.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFlipCoordinates.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkFlipCoordinates.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>415, 411</value>
+  </data>
+  <data name="lblXvariable.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblXvariable.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblXvariable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 212</value>
+  </data>
+  <data name="lblXvariable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>58, 13</value>
+  </data>
+  <data name="lblXvariable.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="lblXvariable.Text" xml:space="preserve">
+    <value>X Variable:</value>
+  </data>
+  <data name="&gt;&gt;lblXvariable.Name" xml:space="preserve">
+    <value>lblXvariable</value>
+  </data>
+  <data name="&gt;&gt;lblXvariable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblXvariable.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblXvariable.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrReceiverX.Location" type="System.Drawing.Point, System.Drawing">
+    <value>255, 226</value>
+  </data>
+  <data name="ucrReceiverX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverX.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 21</value>
+  </data>
+  <data name="ucrReceiverX.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverX.Name" xml:space="preserve">
+    <value>ucrReceiverX</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverX.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverX.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrVariablesAsFactorForBarChart.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 62</value>
+  </data>
+  <data name="ucrVariablesAsFactorForBarChart.Size" type="System.Drawing.Size, System.Drawing">
+    <value>125, 136</value>
+  </data>
+  <data name="ucrVariablesAsFactorForBarChart.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrVariablesAsFactorForBarChart.Name" xml:space="preserve">
+    <value>ucrVariablesAsFactorForBarChart</value>
+  </data>
+  <data name="&gt;&gt;ucrVariablesAsFactorForBarChart.Type" xml:space="preserve">
+    <value>instat.ucrVariablesAsFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrVariablesAsFactorForBarChart.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrVariablesAsFactorForBarChart.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="rdoFrequency.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -397,106 +547,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoFrequency.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 411</value>
-  </data>
-  <data name="ucrInputBarChartPositions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 281</value>
-  </data>
-  <data name="ucrInputBarChartPositions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 21</value>
-  </data>
-  <data name="ucrInputBarChartPositions.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBarChartPositions.Name" xml:space="preserve">
-    <value>ucrInputBarChartPositions</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBarChartPositions.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBarChartPositions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputBarChartPositions.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrSaveBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 328</value>
-  </data>
-  <data name="ucrSaveBar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ucrSaveBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
-  </data>
-  <data name="ucrSaveBar.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveBar.Name" xml:space="preserve">
-    <value>ucrSaveBar</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveBar.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveBar.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveBar.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrChkFlipCoordinates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 302</value>
-  </data>
-  <data name="ucrChkFlipCoordinates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 20</value>
-  </data>
-  <data name="ucrChkFlipCoordinates.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFlipCoordinates.Name" xml:space="preserve">
-    <value>ucrChkFlipCoordinates</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFlipCoordinates.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFlipCoordinates.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkFlipCoordinates.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrReceiverByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 236</value>
-  </data>
-  <data name="ucrReceiverByFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverByFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
-  </data>
-  <data name="ucrReceiverByFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverByFactor.Name" xml:space="preserve">
-    <value>ucrReceiverByFactor</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverByFactor.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverByFactor.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverByFactor.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>3</value>
   </data>
   <data name="ucrBarChartSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 41</value>
@@ -520,7 +571,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBarChartSelector.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>14</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 358</value>
@@ -541,7 +592,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>15</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>47, 6</value>
@@ -562,10 +613,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>18</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -579,25 +627,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrVariablesAsFactorForBarChart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 62</value>
+  <data name="ucrReceiverByFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 270</value>
   </data>
-  <data name="ucrVariablesAsFactorForBarChart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 136</value>
+  <data name="ucrReceiverByFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrVariablesAsFactorForBarChart.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
+  <data name="ucrReceiverByFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
   </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForBarChart.Name" xml:space="preserve">
-    <value>ucrVariablesAsFactorForBarChart</value>
+  <data name="ucrReceiverByFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
   </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForBarChart.Type" xml:space="preserve">
-    <value>instat.ucrVariablesAsFactor, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrReceiverByFactor.Name" xml:space="preserve">
+    <value>ucrReceiverByFactor</value>
   </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForBarChart.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverByFactor.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverByFactor.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrVariablesAsFactorForBarChart.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;ucrReceiverByFactor.ZOrder" xml:space="preserve">
+    <value>13</value>
   </data>
 </root>

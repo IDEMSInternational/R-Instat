@@ -77,16 +77,16 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddFunctionNamesCondition(rdoValue, "coordpolar")
         ucrPnlOptions.AddFunctionNamesCondition(rdoPieChart, "coordpolar")
 
-        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls(ucrInputBarChartPositions, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrReceiverByFactor}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrInputBarChartPositions, ucrReceiverByFactor}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrReceiverX, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
+        ucrReceiverX.SetLinkedDisplayControl(lblXvariable)
         ucrInputBarChartPositions.SetLinkedDisplayControl(lblPosition)
 
         ucrBarChartSelector.SetParameter(New RParameter("data", 0))
         ucrBarChartSelector.SetParameterIsrfunction()
 
-        ucrVariablesAsFactorForBarChart.SetParameter(New RParameter("y", 1))
+        ucrVariablesAsFactorForBarChart.SetParameter(New RParameter("x", 0))
         ucrVariablesAsFactorForBarChart.SetParameterIsString()
         ucrVariablesAsFactorForBarChart.bWithQuotes = False
         ucrVariablesAsFactorForBarChart.Selector = ucrBarChartSelector
@@ -94,6 +94,12 @@ Public Class dlgBarAndPieChart
         ucrVariablesAsFactorForBarChart.strSelectorHeading = "Variables"
         ucrVariablesAsFactorForBarChart.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrVariablesAsFactorForBarChart.bAddParameterIfEmpty = True
+
+        ucrReceiverX.Selector = ucrBarChartSelector
+        ucrReceiverX.strSelectorHeading = "X Variable"
+        'ucrReceiverX.SetParameter(New RParameter("x", 0))
+        ucrReceiverX.bWithQuotes = False
+        ucrReceiverX.SetParameterIsString()
 
         ucrReceiverByFactor.Selector = ucrBarChartSelector
         ucrReceiverByFactor.SetIncludedDataTypes({"factor"})
@@ -196,6 +202,7 @@ Public Class dlgBarAndPieChart
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrVariablesAsFactorForBarChart.SetRCode(clsBarAesFunction, bReset)
+        ucrReceiverX.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
         ucrSaveBar.SetRCode(clsBaseOperator, bReset)
         ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
@@ -204,10 +211,18 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub TestOkEnabled()
-        If (Not ucrSaveBar.IsComplete) OrElse (ucrVariablesAsFactorForBarChart.IsEmpty) Then
-            ucrBase.OKEnabled(False)
-        Else
-            ucrBase.OKEnabled(True)
+        If rdoFrequency.Checked Then
+            If Not ucrSaveBar.IsComplete OrElse ucrVariablesAsFactorForBarChart.IsEmpty Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
+        ElseIf rdoValue.Checked Then
+            If Not ucrSaveBar.IsComplete OrElse ucrVariablesAsFactorForBarChart.IsEmpty OrElse ucrReceiverX.IsEmpty Then
+                ucrBase.OKEnabled(False)
+            Else
+                ucrBase.OKEnabled(True)
+            End If
         End If
     End Sub
 
@@ -288,9 +303,10 @@ Public Class dlgBarAndPieChart
 
     Private Sub ChangeParameterName()
         If rdoValue.Checked Then
-            ucrVariablesAsFactorForBarChart.ChangeParameterName("x")
-        ElseIf rdoFrequency.Checked Then
             ucrVariablesAsFactorForBarChart.ChangeParameterName("y")
+            ucrReceiverX.Add(clsBarAesFunction.GetParameter("x").strArgumentValue)
+            ElseIf rdoFrequency.Checked Then
+            ucrVariablesAsFactorForBarChart.ChangeParameterName("x")
         End If
     End Sub
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged
@@ -302,4 +318,7 @@ Public Class dlgBarAndPieChart
         TestOkEnabled()
     End Sub
 
+    Private Sub CoreControls_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrSaveBar.ControlContentsChanged
+
+    End Sub
 End Class
