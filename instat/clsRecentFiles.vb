@@ -225,9 +225,9 @@ Public Class clsRecentFiles
     ''' updates menu toolstrip and ucrDataView to show the recent files opened
     ''' </summary>
     ''' <param name="bShowAll"></param>
-    ''' <param name="mnuFile"></param>
-    ''' <param name="mnuFileIcon"></param>
-    ''' <param name="ucrDataViewWindow"></param>
+    ''' <param name="mnuFile"> file menuToolStripMenuItem that will be updated with the list of recent files opened</param>
+    ''' <param name="mnuFileIcon">file ToolStripSplitButton that will be updated with the list of recent files opened</param>
+    ''' <param name="ucrDataViewWindow">ucrDataView that will be updated with the list of recent files opened</param>
     Public Sub UpdateRecentFilesMenuItems(bShowAll As Boolean, Optional mnuFile As ToolStripMenuItem = Nothing,
                                           Optional mnuFileIcon As ToolStripSplitButton = Nothing,
                                           Optional ucrDataViewWindow As ucrDataView = Nothing)
@@ -235,7 +235,6 @@ Public Class clsRecentFiles
         If mnuFile Is Nothing AndAlso mnuFileIcon Is Nothing AndAlso ucrDataViewWindow Is Nothing Then
             Exit Sub
         End If
-
 
         If mnuFile IsNot Nothing Then
             'remove all recent files from the menu items
