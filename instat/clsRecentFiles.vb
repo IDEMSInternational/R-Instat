@@ -269,7 +269,7 @@ Public Class clsRecentFiles
                 If mnuFile IsNot Nothing Then
                     Dim clsItem As ToolStripMenuItem = New ToolStripMenuItem(strFileName)
                     clsItem.ToolTipText = strPath
-                    'set the tag - will be used to identify the ToolStripItem as an most recent(MRU) item 
+                    'set the tag - will be used to identify the ToolStripItem as a most recent(MRU) item 
                     'and contains the full path so it can be opened later
                     clsItem.Tag = "MRU:" & strPath
                     'hook into the click event handler so we can open the file later...
