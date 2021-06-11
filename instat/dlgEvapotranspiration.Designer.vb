@@ -223,6 +223,7 @@ Partial Class dlgEvapotranspiration
         'ucrInputMissingMethod
         '
         Me.ucrInputMissingMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMissingMethod.GetSetSelectedIndex = -1
         Me.ucrInputMissingMethod.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputMissingMethod, "ucrInputMissingMethod")
         Me.ucrInputMissingMethod.Name = "ucrInputMissingMethod"
@@ -240,6 +241,7 @@ Partial Class dlgEvapotranspiration
         'ucrInputSolar
         '
         Me.ucrInputSolar.AddQuotesIfUnrecognised = True
+        Me.ucrInputSolar.GetSetSelectedIndex = -1
         Me.ucrInputSolar.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSolar, "ucrInputSolar")
         Me.ucrInputSolar.Name = "ucrInputSolar"
@@ -256,6 +258,7 @@ Partial Class dlgEvapotranspiration
         'ucrInputCrop
         '
         Me.ucrInputCrop.AddQuotesIfUnrecognised = True
+        Me.ucrInputCrop.GetSetSelectedIndex = -1
         Me.ucrInputCrop.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCrop, "ucrInputCrop")
         Me.ucrInputCrop.Name = "ucrInputCrop"
@@ -282,6 +285,7 @@ Partial Class dlgEvapotranspiration
         'ucrInputTimeStep
         '
         Me.ucrInputTimeStep.AddQuotesIfUnrecognised = True
+        Me.ucrInputTimeStep.GetSetSelectedIndex = -1
         Me.ucrInputTimeStep.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputTimeStep, "ucrInputTimeStep")
         Me.ucrInputTimeStep.Name = "ucrInputTimeStep"

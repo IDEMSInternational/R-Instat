@@ -164,7 +164,6 @@ Public Class ucrReceiver
     End Sub
 
     Private Sub ucrReceiver_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        translateEach(Controls, Me)
         If bFirstLoad Then
             frmParent = ParentForm
             'Remove this line so that single/multiple code can run things on first load as well

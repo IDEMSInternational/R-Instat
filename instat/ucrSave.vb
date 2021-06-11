@@ -14,6 +14,8 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 Imports instat
+Imports instat.Translations
+
 ''' <summary>   This control allows the user to specify how an object should be saved. 
 '''             <para>
 '''             This control can save the following types of objects: 'column', 'dataframe', 
@@ -168,19 +170,25 @@ Public Class ucrSave
         LabelOrCheckboxSettings()
         UpdateRCode()
     End Sub
+
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Sets the label to <paramref name="strText"/> and sets the child 
-    '''             controls to the correct enabled/visible state depending on this control's 
-    '''             current state.
-    '''             If the new label overlaps with the combo box then reduces the width of the 
-    '''             combo box and text box.
-    ''' </summary>
-    '''
+    ''' <summary>   
+    '''    Translates <paramref name="strText"/> to the current language and then sets the `Text` 
+    '''    property of the label to the translated text. Also sets the child controls to the correct 
+    '''    enabled/visible state depending on this control's current state. If the new label 
+    '''    overlaps with the combo box then reduces the width of the combo box and text box.
+    '''    <para>
+    '''    Translations can be bi-directional (e.g. from English to French or from French to 
+    '''    English).
+    '''    If <paramref name="strText"/> is already in the current language, or if no translation
+    '''    can be found, then sets the `Text` property of the label to <paramref name="strText"/>.
+    ''' </para></summary>
+    ''' 
     ''' <param name="strText">  The label text. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub SetLabelText(strText As String)
         Dim iTemp As Integer
-        lblSaveText.Text = strText
+        lblSaveText.Text = GetTranslation(strText)
         bShowLabel = True
         bShowCheckBox = False
         LabelOrCheckboxSettings()
@@ -191,6 +199,7 @@ Public Class ucrSave
             ucrInputTextSave.Width = ucrInputComboSave.Width
         End If
     End Sub
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Sets the check box text to <paramref name="strText"/> and sets the child
     '''             controls to the correct enabled/visible state depending on this control's
@@ -883,8 +892,15 @@ Public Class ucrSave
     '''                                     calculation. </param>
     '''--------------------------------------------------------------------------------------------
     Public Sub setLinkedReceiver(ucrLinkedReceiver As ucrReceiver)
+        'if there was a previous linked receiver, then remove the event handler from it
+        'prevents multiple unnecessary calls that could be caused by previously linked receivers
+        If Me.ucrLinkedReceiver IsNot Nothing Then
+            RemoveHandler Me.ucrLinkedReceiver.ControlValueChanged, AddressOf LinkedReceiverControlValueChanged
+        End If
         Me.ucrLinkedReceiver = ucrLinkedReceiver
-        AddHandler ucrLinkedReceiver.ControlValueChanged, AddressOf LinkedReceiverControlValueChanged
+        AddHandler Me.ucrLinkedReceiver.ControlValueChanged, AddressOf LinkedReceiverControlValueChanged
+        'call event handler to immediately get the values from the new receiver
+        LinkedReceiverControlValueChanged(Me.ucrLinkedReceiver)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -900,10 +916,18 @@ Public Class ucrSave
     '''             parameters are set to append the column after the final column. </para>
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
-    Private Sub LinkedReceiverControlValueChanged()
+    Private Sub LinkedReceiverControlValueChanged(ucrChangedControl As ucrCore)
         If Not sdgSaveColumnPosition.bUserSelected Then
             bInsertColumnBefore = False
-            strAdjacentColumn = If(Not ucrLinkedReceiver.IsEmpty, ucrLinkedReceiver.GetVariableNames(), "")
+            If ucrLinkedReceiver.IsEmpty Then
+                strAdjacentColumn = ""
+            Else
+                If TypeOf ucrLinkedReceiver Is ucrReceiverMultiple Then
+                    strAdjacentColumn = ucrLinkedReceiver.GetVariableNamesList()(ucrLinkedReceiver.GetVariableNamesList().Length - 1)
+                Else
+                    strAdjacentColumn = ucrLinkedReceiver.GetVariableNames()
+                End If
+            End If
         End If
         UpdateAssignTo()
     End Sub

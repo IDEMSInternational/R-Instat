@@ -69,11 +69,9 @@ Public Class dlgBoxplot
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        SetOptionsButtonstext()
         autoTranslate(Me)
         TestOkEnabled()
-
-        SetOptionsButtonstext()
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -378,6 +376,7 @@ Public Class dlgBoxplot
         'hence i have to force it to update properly after this if statement
         clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsCurrGeomFunc, iPosition:=2)
         SetOptionsButtonstext()
+        autoTranslate(Me)
     End Sub
 
     Private Sub SetOptionsButtonstext()

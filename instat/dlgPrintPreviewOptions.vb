@@ -167,8 +167,8 @@ Public Class dlgPrintPreviewOptions
 
     Private Sub dlgPrintPreviewOptions_Load(sender As Object, e As EventArgs) Handles Me.Load
         sheetPreview = frmEditor.grdData.CurrentWorksheet
-        autoTranslate(Me)
         setDefaults()
+        autoTranslate(Me)
     End Sub
 
     Private Sub setDefaults()

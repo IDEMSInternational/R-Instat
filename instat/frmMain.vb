@@ -887,7 +887,9 @@ Public Class frmMain
                     System.IO.Directory.CreateDirectory(strAppDataPath)
                 End If
                 If clsRLink IsNot Nothing AndAlso clsRLink.bREngineInitialised Then
-                    clsRecentItems.saveOnClose()
+                    If clsRecentItems IsNot Nothing Then
+                        clsRecentItems.saveOnClose()
+                    End If
                     If clsInstatOptions IsNot Nothing Then
                         SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
                     End If
@@ -932,6 +934,7 @@ Public Class frmMain
             tstatus.Text = strCurrentStatus
             Cursor = Cursors.Default
         End If
+        autoTranslate(Me)
     End Sub
 
     Public Sub DeleteAutoSaveData()
@@ -2359,5 +2362,13 @@ Public Class frmMain
 
     Private Sub mnuClimaticFileImportfromClimateDataStore_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportfromClimateDataStore.Click
         dlgImportERA5Data.ShowDialog()
+    End Sub
+
+    Private Sub mnuSetupForDataEntry_Click(sender As Object, e As EventArgs) Handles mnuSetupForDataEntry.Click
+        dlgSetupForDataEntry.ShowDialog()
+    End Sub
+
+    Private Sub mnuEditPasteNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNewDataFrame.Click
+        dlgPasteNewDataFrame.ShowDialog()
     End Sub
 End Class

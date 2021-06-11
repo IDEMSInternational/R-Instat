@@ -32,7 +32,6 @@ Public Class dlgOneVarFitModel
     Private ReadOnly strSeparator As String = "---------------------"
 
     Private Sub dlgOneVarFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         bRCodeSet = False
         If bFirstload Then
             InitialiseDialog()
@@ -45,6 +44,7 @@ Public Class dlgOneVarFitModel
         bRCodeSet = True
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

@@ -51,6 +51,8 @@ Partial Class dlgClimdexIndices
         Me.lblIndicesSelectedOutOf = New System.Windows.Forms.Label()
         Me.lblSelectedIndices = New System.Windows.Forms.Label()
         Me.lblTotalIndices = New System.Windows.Forms.Label()
+        Me.lblDate = New System.Windows.Forms.Label()
+        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrPnlAnnualMonthly = New instat.UcrPanel()
         Me.ucrReceiverYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
@@ -61,8 +63,6 @@ Partial Class dlgClimdexIndices
         Me.ucrReceiverTmax = New instat.ucrReceiverSingle()
         Me.ucrSelectorClimdex = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblDate = New System.Windows.Forms.Label()
-        Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblTmax
@@ -148,6 +148,21 @@ Partial Class dlgClimdexIndices
         Me.lblTotalIndices.Name = "lblTotalIndices"
         Me.lblTotalIndices.Tag = ""
         '
+        'lblDate
+        '
+        resources.ApplyResources(Me.lblDate, "lblDate")
+        Me.lblDate.Name = "lblDate"
+        Me.lblDate.Tag = ""
+        '
+        'ucrReceiverDate
+        '
+        Me.ucrReceiverDate.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
+        Me.ucrReceiverDate.Name = "ucrReceiverDate"
+        Me.ucrReceiverDate.Selector = Nothing
+        Me.ucrReceiverDate.strNcFilePath = ""
+        Me.ucrReceiverDate.ucrSelector = Nothing
+        '
         'ucrPnlAnnualMonthly
         '
         resources.ApplyResources(Me.ucrPnlAnnualMonthly, "ucrPnlAnnualMonthly")
@@ -225,21 +240,6 @@ Partial Class dlgClimdexIndices
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'lblDate
-        '
-        resources.ApplyResources(Me.lblDate, "lblDate")
-        Me.lblDate.Name = "lblDate"
-        Me.lblDate.Tag = ""
-        '
-        'ucrReceiverDate
-        '
-        Me.ucrReceiverDate.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverDate, "ucrReceiverDate")
-        Me.ucrReceiverDate.Name = "ucrReceiverDate"
-        Me.ucrReceiverDate.Selector = Nothing
-        Me.ucrReceiverDate.strNcFilePath = ""
-        Me.ucrReceiverDate.ucrSelector = Nothing
         '
         'dlgClimdexIndices
         '

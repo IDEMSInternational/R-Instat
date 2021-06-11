@@ -406,7 +406,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblIndicesSelectedOutOf.Location" type="System.Drawing.Point, System.Drawing">
-    <value>163, 361</value>
+    <value>100, 361</value>
   </data>
   <data name="lblIndicesSelectedOutOf.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 13</value>
@@ -483,36 +483,6 @@
   <data name="&gt;&gt;lblTotalIndices.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="ucrPnlAnnualMonthly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>105, 8</value>
-  </data>
-  <data name="ucrPnlAnnualMonthly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>228, 36</value>
-  </data>
-  <data name="ucrPnlAnnualMonthly.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlAnnualMonthly.Name" xml:space="preserve">
-    <value>ucrPnlAnnualMonthly</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlAnnualMonthly.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlAnnualMonthly.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlAnnualMonthly.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>417, 440</value>
-  </data>
   <data name="lblDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -543,29 +513,59 @@
   <data name="&gt;&gt;lblDate.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrReceiverDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 118</value>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
-  <data name="ucrReceiverDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>417, 440</value>
   </data>
-  <data name="ucrReceiverDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+  <data name="ucrPnlAnnualMonthly.Location" type="System.Drawing.Point, System.Drawing">
+    <value>105, 8</value>
   </data>
-  <data name="ucrReceiverDate.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
+  <data name="ucrPnlAnnualMonthly.Size" type="System.Drawing.Size, System.Drawing">
+    <value>228, 36</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverDate.Name" xml:space="preserve">
-    <value>ucrReceiverDate</value>
+  <data name="ucrPnlAnnualMonthly.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverDate.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrPnlAnnualMonthly.Name" xml:space="preserve">
+    <value>ucrPnlAnnualMonthly</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrPnlAnnualMonthly.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlAnnualMonthly.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverDate.ZOrder" xml:space="preserve">
-    <value>1</value>
+  <data name="&gt;&gt;ucrPnlAnnualMonthly.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrReceiverYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 157</value>
+  </data>
+  <data name="ucrReceiverYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverYear.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverYear.Name" xml:space="preserve">
+    <value>ucrReceiverYear</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverYear.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverYear.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverYear.ZOrder" xml:space="preserve">
+    <value>10</value>
   </data>
   <data name="ucrReceiverMonth.Location" type="System.Drawing.Point, System.Drawing">
     <value>252, 197</value>
@@ -595,7 +595,7 @@
     <value>10, 282</value>
   </data>
   <data name="ucrChkSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>107, 20</value>
+    <value>239, 20</value>
   </data>
   <data name="ucrChkSave.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -753,6 +753,9 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>23</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -765,28 +768,28 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="ucrReceiverYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 157</value>
+  <data name="ucrReceiverDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>252, 118</value>
   </data>
-  <data name="ucrReceiverYear.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrReceiverDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
-  <data name="ucrReceiverYear.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrReceiverDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 20</value>
   </data>
-  <data name="ucrReceiverYear.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
+  <data name="ucrReceiverDate.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverYear.Name" xml:space="preserve">
-    <value>ucrReceiverYear</value>
+  <data name="&gt;&gt;ucrReceiverDate.Name" xml:space="preserve">
+    <value>ucrReceiverDate</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverYear.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverDate.Type" xml:space="preserve">
     <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverYear.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrReceiverDate.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrReceiverYear.ZOrder" xml:space="preserve">
-    <value>10</value>
+  <data name="&gt;&gt;ucrReceiverDate.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
 </root>

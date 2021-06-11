@@ -37,7 +37,6 @@ Public Class dlgUseGraph
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
 
     Private Sub dlgUseGraph_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -48,6 +47,7 @@ Public Class dlgUseGraph
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

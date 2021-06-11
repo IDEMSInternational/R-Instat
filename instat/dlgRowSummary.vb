@@ -69,6 +69,7 @@ Public Class dlgRowSummary
         ucrSaveResults.SetDataFrameSelector(ucrSelectorForRowSummaries.ucrAvailableDataFrames)
         ucrSaveResults.SetLabelText("New Column Name:")
         ucrSaveResults.SetIsComboBox()
+        ucrSaveResults.setLinkedReceiver(ucrReceiverForRowSummaries)
     End Sub
 
     Private Sub SetDefaults()

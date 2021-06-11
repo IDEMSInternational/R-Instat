@@ -48,13 +48,8 @@ Partial Class dlgOptions
         Me.trOptions = New System.Windows.Forms.TreeView()
         Me.tbcOptions = New System.Windows.Forms.TabControl()
         Me.tbpLanguages = New System.Windows.Forms.TabPage()
-        Me.pnLanguages = New System.Windows.Forms.Panel()
-        Me.grpLanguage = New System.Windows.Forms.GroupBox()
-        Me.rdoSpanish = New System.Windows.Forms.RadioButton()
-        Me.rdoEnglish = New System.Windows.Forms.RadioButton()
-        Me.rdoFrench = New System.Windows.Forms.RadioButton()
-        Me.rdoKiswahili = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlLanguage = New instat.UcrPanel()
+        Me.lblLanguage = New System.Windows.Forms.Label()
+        Me.ucrInputLanguage = New instat.ucrInputComboBox()
         Me.tbpComments = New System.Windows.Forms.TabPage()
         Me.pnComments = New System.Windows.Forms.Panel()
         Me.ucrInputComment = New instat.ucrInputTextBox()
@@ -109,6 +104,7 @@ Partial Class dlgOptions
         Me.rdoDisplayinOutputWindow = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphDisplay = New instat.UcrPanel()
         Me.tbpTailoredMenus = New System.Windows.Forms.TabPage()
+        Me.ucrChkViewStructuredMenu = New instat.ucrCheck()
         Me.ucrChkViewOptionsByContextMenu = New instat.ucrCheck()
         Me.ucrChkViewProcurementMenu = New instat.ucrCheck()
         Me.ucrChkViewClimaticMenu = New instat.ucrCheck()
@@ -121,15 +117,12 @@ Partial Class dlgOptions
         Me.ucrInputPort = New instat.ucrInputTextBox()
         Me.ucrInputHost = New instat.ucrInputTextBox()
         Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
-        Me.ucrChkViewStructuredMenu = New instat.ucrCheck()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
         Me.spltControls.SuspendLayout()
         Me.tbcOptions.SuspendLayout()
         Me.tbpLanguages.SuspendLayout()
-        Me.pnLanguages.SuspendLayout()
-        Me.grpLanguage.SuspendLayout()
         Me.tbpComments.SuspendLayout()
         Me.pnComments.SuspendLayout()
         Me.tbpImport.SuspendLayout()
@@ -221,60 +214,25 @@ Partial Class dlgOptions
         '
         'tbpLanguages
         '
-        Me.tbpLanguages.Controls.Add(Me.pnLanguages)
+        Me.tbpLanguages.Controls.Add(Me.lblLanguage)
+        Me.tbpLanguages.Controls.Add(Me.ucrInputLanguage)
         resources.ApplyResources(Me.tbpLanguages, "tbpLanguages")
         Me.tbpLanguages.Name = "tbpLanguages"
         Me.tbpLanguages.Tag = "Languages"
         Me.tbpLanguages.UseVisualStyleBackColor = True
         '
-        'pnLanguages
+        'lblLanguage
         '
-        resources.ApplyResources(Me.pnLanguages, "pnLanguages")
-        Me.pnLanguages.Controls.Add(Me.grpLanguage)
-        Me.pnLanguages.Name = "pnLanguages"
+        resources.ApplyResources(Me.lblLanguage, "lblLanguage")
+        Me.lblLanguage.Name = "lblLanguage"
         '
-        'grpLanguage
+        'ucrInputLanguage
         '
-        Me.grpLanguage.Controls.Add(Me.rdoSpanish)
-        Me.grpLanguage.Controls.Add(Me.rdoEnglish)
-        Me.grpLanguage.Controls.Add(Me.rdoFrench)
-        Me.grpLanguage.Controls.Add(Me.rdoKiswahili)
-        Me.grpLanguage.Controls.Add(Me.ucrPnlLanguage)
-        resources.ApplyResources(Me.grpLanguage, "grpLanguage")
-        Me.grpLanguage.Name = "grpLanguage"
-        Me.grpLanguage.TabStop = False
-        '
-        'rdoSpanish
-        '
-        resources.ApplyResources(Me.rdoSpanish, "rdoSpanish")
-        Me.rdoSpanish.Name = "rdoSpanish"
-        Me.rdoSpanish.UseVisualStyleBackColor = True
-        '
-        'rdoEnglish
-        '
-        resources.ApplyResources(Me.rdoEnglish, "rdoEnglish")
-        Me.rdoEnglish.Name = "rdoEnglish"
-        Me.rdoEnglish.Tag = "English"
-        Me.rdoEnglish.UseVisualStyleBackColor = True
-        '
-        'rdoFrench
-        '
-        resources.ApplyResources(Me.rdoFrench, "rdoFrench")
-        Me.rdoFrench.Name = "rdoFrench"
-        Me.rdoFrench.Tag = "French"
-        Me.rdoFrench.UseVisualStyleBackColor = True
-        '
-        'rdoKiswahili
-        '
-        resources.ApplyResources(Me.rdoKiswahili, "rdoKiswahili")
-        Me.rdoKiswahili.Name = "rdoKiswahili"
-        Me.rdoKiswahili.Tag = "Kiswahili"
-        Me.rdoKiswahili.UseVisualStyleBackColor = True
-        '
-        'ucrPnlLanguage
-        '
-        resources.ApplyResources(Me.ucrPnlLanguage, "ucrPnlLanguage")
-        Me.ucrPnlLanguage.Name = "ucrPnlLanguage"
+        Me.ucrInputLanguage.AddQuotesIfUnrecognised = True
+        Me.ucrInputLanguage.GetSetSelectedIndex = -1
+        Me.ucrInputLanguage.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputLanguage, "ucrInputLanguage")
+        Me.ucrInputLanguage.Name = "ucrInputLanguage"
         '
         'tbpComments
         '
@@ -664,6 +622,12 @@ Partial Class dlgOptions
         Me.tbpTailoredMenus.Name = "tbpTailoredMenus"
         Me.tbpTailoredMenus.UseVisualStyleBackColor = True
         '
+        'ucrChkViewStructuredMenu
+        '
+        Me.ucrChkViewStructuredMenu.Checked = False
+        resources.ApplyResources(Me.ucrChkViewStructuredMenu, "ucrChkViewStructuredMenu")
+        Me.ucrChkViewStructuredMenu.Name = "ucrChkViewStructuredMenu"
+        '
         'ucrChkViewOptionsByContextMenu
         '
         Me.ucrChkViewOptionsByContextMenu.Checked = False
@@ -748,12 +712,6 @@ Partial Class dlgOptions
         resources.ApplyResources(Me.ucrInputDatabaseName, "ucrInputDatabaseName")
         Me.ucrInputDatabaseName.Name = "ucrInputDatabaseName"
         '
-        'ucrChkViewStructuredMenu
-        '
-        Me.ucrChkViewStructuredMenu.Checked = False
-        resources.ApplyResources(Me.ucrChkViewStructuredMenu, "ucrChkViewStructuredMenu")
-        Me.ucrChkViewStructuredMenu.Name = "ucrChkViewStructuredMenu"
-        '
         'dlgOptions
         '
         resources.ApplyResources(Me, "$this")
@@ -775,9 +733,6 @@ Partial Class dlgOptions
         Me.tbcOptions.ResumeLayout(False)
         Me.tbpLanguages.ResumeLayout(False)
         Me.tbpLanguages.PerformLayout()
-        Me.pnLanguages.ResumeLayout(False)
-        Me.grpLanguage.ResumeLayout(False)
-        Me.grpLanguage.PerformLayout()
         Me.tbpComments.ResumeLayout(False)
         Me.pnComments.ResumeLayout(False)
         Me.pnComments.PerformLayout()
@@ -815,12 +770,6 @@ Partial Class dlgOptions
     Friend WithEvents cmdApply As Button
     Friend WithEvents tbcOptions As TabControl
     Friend WithEvents tbpLanguages As TabPage
-    Friend WithEvents pnLanguages As Panel
-    Friend WithEvents grpLanguage As GroupBox
-    Friend WithEvents rdoSpanish As RadioButton
-    Friend WithEvents rdoEnglish As RadioButton
-    Friend WithEvents rdoKiswahili As RadioButton
-    Friend WithEvents rdoFrench As RadioButton
     Friend WithEvents tbpComments As TabPage
     Friend WithEvents pnComments As Panel
     Friend WithEvents lblComment As Label
@@ -866,7 +815,6 @@ Partial Class dlgOptions
     Friend WithEvents ucrChkIncludeDefaultParams As ucrCheck
     Friend WithEvents ucrNudMaxRows As ucrNud
     Friend WithEvents ucrPnlGraphDisplay As UcrPanel
-    Friend WithEvents ucrPnlLanguage As UcrPanel
     Friend WithEvents ucrInputComment As ucrInputTextBox
     Friend WithEvents ucrNudMaxCols As ucrNud
     Friend WithEvents lblMaxCols As Label
@@ -892,4 +840,6 @@ Partial Class dlgOptions
     Friend WithEvents lblHost As Label
     Friend WithEvents lblDatabaseName As Label
     Friend WithEvents ucrChkViewStructuredMenu As ucrCheck
+    Friend WithEvents lblLanguage As Label
+    Friend WithEvents ucrInputLanguage As ucrInputComboBox
 End Class

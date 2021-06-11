@@ -208,7 +208,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputMergingBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 93</value>
+    <value>99, 93</value>
   </data>
   <data name="ucrInputMergingBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>278, 52</value>
@@ -253,7 +253,7 @@
     <value>3</value>
   </data>
   <data name="ucrInputJoinType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>87, 65</value>
+    <value>99, 65</value>
   </data>
   <data name="ucrInputJoinType.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -346,10 +346,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdColumnOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 150</value>
+    <value>245, 150</value>
   </data>
   <data name="cmdColumnOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 23</value>
+    <value>132, 23</value>
   </data>
   <data name="cmdColumnOptions.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

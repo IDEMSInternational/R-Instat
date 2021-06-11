@@ -23,7 +23,6 @@ Public Class dlgConditionalQuantilePlot
     Private clsConditionalQuantileFunction As New RFunction
     Private clsConditionalEvalFunction As New RFunction
     Private Sub dlgConditionalQuantilePlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             iDialogHeight = Me.Height
             iBaseMaxY = ucrBase.Location.Y
@@ -36,6 +35,7 @@ Public Class dlgConditionalQuantilePlot
         SetRcodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -229,6 +229,7 @@ Public Class dlgConditionalQuantilePlot
             ucrSavePlot.Location = New Point(ucrSavePlot.Location.X, 401)
             cmdPlotOptions.Text = "Conditional Eval Options"
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrInputLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLegendPosition.ControlValueChanged
