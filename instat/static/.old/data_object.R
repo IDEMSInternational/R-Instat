@@ -683,7 +683,7 @@ data_obj$methods(get_data_type = function(col_name = "") {
   }
   
   if(is.factor(data[[col_name]]) & (length(levels(data[[col_name]]))==2)){
-    type = "2 level factor"
+    type = "two level factor"
   }
   
   if(is.factor(data[[col_name]]) & (length(levels(data[[col_name]]))>2)){

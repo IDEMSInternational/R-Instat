@@ -46,7 +46,6 @@ Public Class dlgRestrict
     End Sub
 
     Private Sub dlgRestrict_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -56,6 +55,7 @@ Public Class dlgRestrict
         If bAutoOpenSubDialog Then
             OpenNewFilterSubDialog()
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -97,12 +97,10 @@ Public Class dlgRestrict
         If bIsSubsetDialog Then
             rdoApplyAsFilter.Enabled = False
             rdoApplyAsSubset.Checked = True
-            'TODO translate
             Me.Text = "Subset"
         Else
             rdoApplyAsFilter.Enabled = True
             rdoApplyAsFilter.Checked = True
-            'TODO translate
             Me.Text = "Filter"
         End If
     End Sub
@@ -208,6 +206,7 @@ Public Class dlgRestrict
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrNewDataFrameName_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDataFrameName.ControlContentsChanged

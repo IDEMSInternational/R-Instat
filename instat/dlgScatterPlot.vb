@@ -42,13 +42,14 @@ Public Class dlgScatterPlot
     Private clsCoordPolarStartOperator As New ROperator
     Private clsXScaleDateFunction As New RFunction
     Private clsYScaleDateFunction As New RFunction
+    Private clsScaleFillViridisFunction As New RFunction
+    Private clsScaleColourViridisFunction As New RFunction
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strGeomSmoothParameterName As String = "geom_smooth"
     Private strGeomParameterNames() As String = {strFirstParameterName, strGeomSmoothParameterName}
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -60,6 +61,7 @@ Public Class dlgScatterPlot
         bReset = False
         TestOkEnabled()
         CheckIfNumeric()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -170,6 +172,8 @@ Public Class dlgScatterPlot
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
         clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
+        clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
+        clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
 
         clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
 
@@ -205,7 +209,7 @@ Public Class dlgScatterPlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewGlobalAesFunction:=clsRaesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction, clsNewFacetFunction:=clsFacetsFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewThemeFunction:=clsThemeFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrSelectorForScatter, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewGlobalAesFunction:=clsRaesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction, clsNewFacetFunction:=clsFacetsFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrSelectorForScatter, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub

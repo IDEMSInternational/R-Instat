@@ -22,7 +22,6 @@ Public Class dlgColourbyProperty
     Private bReset As Boolean = True
 
     Private Sub dlgColourbyProperty_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -33,6 +32,7 @@ Public Class dlgColourbyProperty
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

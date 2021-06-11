@@ -29,7 +29,6 @@ Public Class dlgRegularSequence
     Public bNumericIsDefault As Boolean
 
     Private Sub dlgRegularSequence_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -40,6 +39,7 @@ Public Class dlgRegularSequence
         SetDefaultRdo()
         SetRCodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
     End Sub
     'This sub is meant to set the default radiobutton on diffrent places on the Menu.
     Private Sub SetDefaultRdo()

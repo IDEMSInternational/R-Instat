@@ -36,13 +36,13 @@ Public Class dlgOptions
     Dim clrOutput, clrCommand, clrComment, clrEditor As Color
 
     Private Sub dlgOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
         End If
         LoadInstatOptions()
         ApplyEnabled(False)
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -63,6 +63,7 @@ Public Class dlgOptions
         rtbCommandPreview.Text = strPreviewText
         rtbCommentPreview.Text = strPreviewText
         rtbOutputPreview.Text = strPreviewText
+
         SetView()
 
         ucrChkRecogniseRDSFile.SetText("Recognise RDS File")
@@ -92,9 +93,33 @@ Public Class dlgOptions
         ucrPnlLanguage.AddRadioButton(rdoEnglish)
         ucrPnlLanguage.AddRadioButton(rdoSpanish)
         ucrPnlLanguage.AddRadioButton(rdoFrench)
+
+        SetView()
+
+        ucrNudDigits.SetMinMax(0, 22)
+        ucrChkIncludeCommentsbyDefault.SetText("Include Comments by Default")
+        ucrChkViewStructuredMenu.SetText("Show Structured Menu")
+        ucrChkViewClimaticMenu.SetText("Show Climatic Menu")
+        ucrChkViewProcurementMenu.SetText("Show Procurement Menu")
+        ucrChkViewOptionsByContextMenu.SetText("Show Options By Context Menu")
+        ucrChkShowRCommandsinOutputWindow.SetText(" Show R Commands in Output Window")
+        ucrChkShowSignifStars.SetText("Show stars on summary tables for coefficients")
+        ucrChkShowDataonGrid.SetText("Display dialog's selected data frame in grid")
+        ucrChkIncludeDefaultParams.SetText("Include Default Parameter Values in R Commands")
+        ucrChkAutoSave.SetText("Auto save a backup of data")
+        ucrChkShowWaitDialog.SetText("Show waiting dialog when command takes longer than")
+        ucrChkAutoSave.AddToLinkedControls(ucrNudAutoSaveMinutes, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudAutoSaveMinutes.SetLinkedDisplayControl(lblMinutes)
+        ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinOutputWindow)
+        ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
+        ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
+        ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
+        ucrInputLanguage.SetItems({"English", "French", "Portuguese"})
+        ucrInputLanguage.SetDropDownStyleAsNonEditable()
+
     End Sub
 
-    Private Sub LoadInstatOptions()
+     Private Sub LoadInstatOptions()
         ucrChkIncludeDefaultParams.Checked = frmMain.clsInstatOptions.bIncludeRDefaultParameters
         ucrChkAutoSave.Checked = frmMain.clsInstatOptions.bAutoSaveData
         SetOutputFont(frmMain.clsInstatOptions.fntOutput, frmMain.clsInstatOptions.clrOutput)
@@ -124,17 +149,13 @@ Public Class dlgOptions
         ucrInputUserName.SetName(frmMain.clsInstatOptions.strClimsoftUsername)
         Select Case frmMain.clsInstatOptions.strLanguageCultureCode
             Case "en-GB"
-                rdoEnglish.Checked = True
+                ucrInputLanguage.SetText("English")
             Case "fr-FR"
-                rdoFrench.Checked = True
-            Case "sw-KE"
-                rdoKiswahili.Checked = True
-                ' temp disabled as not functioning
-                'Case "es-ES"
-                '    rdoSpanish.Checked = True
-            Case Else
-                rdoEnglish.Checked = True
+                ucrInputLanguage.SetText("French")
+            Case "pt-PT"
+                ucrInputLanguage.SetText("Portuguese")
         End Select
+
         strPrevLanguageCulture = frmMain.clsInstatOptions.strLanguageCultureCode
 
         If frmMain.clsInstatOptions.strGraphDisplayOption = "view_output_window" Then
@@ -242,6 +263,7 @@ Public Class dlgOptions
         cmdHelp.Enabled = False
         SetInstatOptions()
         autoTranslate(Me)
+        SetView() 'needed to ensure that the tree view in the left panel correctly displays translated text
 
         If frmMain.Visible AndAlso strCurrLanguageCulture <> strPrevLanguageCulture Then
             frmMain.TranslateFrmMainMenu()
@@ -253,23 +275,26 @@ Public Class dlgOptions
         cmdCancel.Enabled = True
         cmdHelp.Enabled = True
         ApplyEnabled(False)
+
         Cursor = Cursors.Default
         RecogniseFile()
+
+        Cursor = Cursors.Default
+
     End Sub
 
-    Private Sub ucrPnlLanguage_ControlValueChanged() Handles ucrPnlLanguage.ControlValueChanged
-        If rdoKiswahili.Checked Then
-            strCurrLanguageCulture = "sw-KE"
-        ElseIf rdoFrench.Checked Then
-            strCurrLanguageCulture = "fr-FR"
-        ElseIf rdoEnglish.Checked Then
-            strCurrLanguageCulture = "en-GB"
-        ElseIf rdoSpanish.Checked Then
-            strCurrLanguageCulture = "es-ES"
-        End If
+    Private Sub ucrInputLanguage_ControlValueChanged() Handles ucrInputLanguage.ControlValueChanged
+        Select Case ucrInputLanguage.GetText
+            Case "English"
+                strCurrLanguageCulture = "en-GB"
+            Case "French"
+                strCurrLanguageCulture = "fr-FR"
+            Case "Portuguese"
+                strCurrLanguageCulture = "pt-PT"
+        End Select
         ApplyEnabled(True)
     End Sub
-
+  
     Private Sub cmdScriptChange_Click(sender As Object, e As EventArgs) Handles cmdCommandFormat.Click
         dlgFont.ShowColor = True
         dlgFont.MaxSize = 50
@@ -324,6 +349,7 @@ Public Class dlgOptions
 
     End Sub
 
+
     Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged, ucrChkRecogniseRDSFile.ControlValueChanged
         ApplyEnabled(True)
     End Sub
@@ -338,6 +364,11 @@ Public Class dlgOptions
             My.Computer.Registry.ClassesRoot.DeleteSubKey(".RDS")
         End If
     End Sub
+
+    Private Sub AllControls_ControlValueChanged() Handles ucrNudMaxCols.ControlValueChanged, ucrNudAutoSaveMinutes.ControlValueChanged, ucrNudPreviewRows.ControlValueChanged, ucrInputComment.ControlContentsChanged, ucrChkIncludeCommentsbyDefault.ControlValueChanged, ucrNudMaxRows.ControlValueChanged, ucrChkIncludeDefaultParams.ControlValueChanged, ucrChkShowRCommandsinOutputWindow.ControlValueChanged, ucrNudDigits.ControlValueChanged, ucrChkShowSignifStars.ControlValueChanged, ucrChkShowDataonGrid.ControlValueChanged, ucrChkAutoSave.ControlValueChanged, ucrChkShowWaitDialog.ControlValueChanged, ucrNudWaitSeconds.ControlValueChanged, ucrChkViewClimaticMenu.ControlValueChanged, ucrChkViewStructuredMenu.ControlValueChanged, ucrChkViewProcurementMenu.ControlValueChanged, ucrChkViewOptionsByContextMenu.ControlValueChanged, ucrInputDatabaseName.ControlValueChanged, ucrInputHost.ControlValueChanged, ucrInputPort.ControlValueChanged, ucrInputUserName.ControlValueChanged
+        ApplyEnabled(True)
+    End Sub
+
     Private Sub ApplyEnabled(bEnable As Boolean)
         cmdApply.Enabled = bEnable
         cmdOk.Enabled = bEnable
@@ -350,6 +381,7 @@ Public Class dlgOptions
         rtbOutputPreview.Font = fntOutput
         rtbOutputPreview.SelectionColor = clrOutput
         rtbOutputPreview.SelectionLength = 0
+
     End Sub
 
     Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
@@ -379,6 +411,33 @@ Public Class dlgOptions
 
     Private Sub ucrPnlGraphDisplay_ControlValueChanged() Handles ucrPnlGraphDisplay.ControlValueChanged
         If rdoDisplayinOutputWindow.Checked Then
+
+    End Sub
+
+    Private Sub cmdHelp_Click(sender As Object, e As EventArgs) Handles cmdHelp.Click
+        Help.ShowHelp(Me.Parent, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "336")
+    End Sub
+
+    Private Sub ucrChkAutoSave_ControlValueChanged() Handles ucrChkAutoSave.ControlValueChanged
+        If ucrChkAutoSave.Checked Then
+            lblEvery.Visible = True
+        Else
+            lblEvery.Visible = False
+        End If
+    End Sub
+
+    Private Sub cmdFactoryReset_Click(sender As Object, e As EventArgs) Handles cmdFactoryReset.Click
+        Dim msgFactoryReset = MsgBox("Are you sure you want to reset to factory defaults?", MessageBoxButtons.YesNo, "Factory Reset")
+        If msgFactoryReset = DialogResult.Yes Then
+            frmMain.clsInstatOptions = New InstatOptions(False)
+            LoadInstatOptions()
+            ApplyEnabled(True)
+        End If
+    End Sub
+
+    Private Sub ucrPnlGraphDisplay_ControlValueChanged() Handles ucrPnlGraphDisplay.ControlValueChanged
+        If rdoDisplayinOutputWindow.Checked Then
+
             strGraphDisplayOption = "view_output_window"
         ElseIf rdoDisplayinSeparateWindows.Checked Then
             strGraphDisplayOption = "view_separate_window"

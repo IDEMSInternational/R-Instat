@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports instat.Translations
 
 Public Class ucrGridUnit
 
@@ -84,8 +85,8 @@ Public Class ucrGridUnit
         AddRemoveElementLineAxis()
     End Sub
 
-    Public Sub setlabel(strlabel As String)
-        grpUnits.Text = strlabel
+    Public Sub setLabel(strlabel As String)
+        grpUnits.Text = GetTranslation(strlabel)
     End Sub
 
 End Class

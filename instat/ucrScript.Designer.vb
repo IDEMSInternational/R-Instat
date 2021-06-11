@@ -57,7 +57,7 @@ Partial Class ucrScript
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdRun = New System.Windows.Forms.Button()
-        Me.lblHeader = New System.Windows.Forms.Label()
+        Me.lblHeaderScript = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
@@ -193,24 +193,24 @@ Partial Class ucrScript
         Me.cmdRun.Text = "Run All"
         Me.cmdRun.UseVisualStyleBackColor = True
         '
-        'lblHeader
+        'lblHeaderScript
         '
-        Me.lblHeader.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
-        Me.lblHeader.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblHeader.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.lblHeader.ForeColor = System.Drawing.SystemColors.Control
-        Me.lblHeader.Location = New System.Drawing.Point(3, 0)
-        Me.lblHeader.Name = "lblHeader"
-        Me.lblHeader.Size = New System.Drawing.Size(405, 20)
-        Me.lblHeader.TabIndex = 8
-        Me.lblHeader.Text = "Script Window"
-        Me.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblHeaderScript.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.lblHeaderScript.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblHeaderScript.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblHeaderScript.ForeColor = System.Drawing.SystemColors.Control
+        Me.lblHeaderScript.Location = New System.Drawing.Point(3, 0)
+        Me.lblHeaderScript.Name = "lblHeaderScript"
+        Me.lblHeaderScript.Size = New System.Drawing.Size(405, 20)
+        Me.lblHeaderScript.TabIndex = 8
+        Me.lblHeaderScript.Text = "Script Window"
+        Me.lblHeaderScript.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'tlpTableContainer
         '
         Me.tlpTableContainer.ColumnCount = 1
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.tlpTableContainer.Controls.Add(Me.lblHeader, 0, 0)
+        Me.tlpTableContainer.Controls.Add(Me.lblHeaderScript, 0, 0)
         Me.tlpTableContainer.Controls.Add(Me.txtScript, 0, 2)
         Me.tlpTableContainer.Controls.Add(Me.cmdRun, 0, 1)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
@@ -241,7 +241,7 @@ Partial Class ucrScript
 
     Friend WithEvents txtScript As TextBox
     Friend WithEvents cmdRun As Button
-    Friend WithEvents lblHeader As Label
+    Friend WithEvents lblHeaderScript As Label
     Friend WithEvents tlpTableContainer As TableLayoutPanel
     Friend WithEvents mnuContextScript As ContextMenuStrip
     Friend WithEvents mnuRunSelectedText As ToolStripMenuItem

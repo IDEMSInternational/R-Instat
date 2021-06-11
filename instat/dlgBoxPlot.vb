@@ -36,6 +36,8 @@ Public Class dlgBoxplot
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
     Private clsThemeFunction As New RFunction
+    Private clsScaleFillViridisFunction As New RFunction
+    Private clsScaleColourViridisFunction As New RFunction
     Private dctThemeFunctions As Dictionary(Of String, RFunction)
     Private bResetSubdialog As Boolean = True
     Private bResetBoxLayerSubdialog As Boolean = True
@@ -67,11 +69,9 @@ Public Class dlgBoxplot
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        SetOptionsButtonstext()
         autoTranslate(Me)
         TestOkEnabled()
-
-        SetOptionsButtonstext()
-
     End Sub
 
     Private Sub InitialiseDialog()
@@ -257,6 +257,11 @@ Public Class dlgBoxplot
         clsCoordPolarStartOperator = GgplotDefaults.clsCoordPolarStartOperator.Clone()
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
         clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
+        clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
+        clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
+        clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
+        clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
+
         dctThemeFunctions = New Dictionary(Of String, RFunction)(GgplotDefaults.dctThemeFunctions)
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorBoxPlot.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -300,7 +305,11 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction, clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=ucrSelectorBoxPlot, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXScalecontinuousFunction:=clsXScaleContinuousFunction,
+                          clsNewYScalecontinuousFunction:=clsYScaleContinuousFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
+                          clsNewFacetFunction:=clsRFacetFunction, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction,
+                          clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bNewEnableDiscrete:=False,
+                          ucrNewBaseSelector:=ucrSelectorBoxPlot, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
 
@@ -367,6 +376,7 @@ Public Class dlgBoxplot
         'hence i have to force it to update properly after this if statement
         clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsCurrGeomFunc, iPosition:=2)
         SetOptionsButtonstext()
+        autoTranslate(Me)
     End Sub
 
     Private Sub SetOptionsButtonstext()
@@ -408,6 +418,7 @@ Public Class dlgBoxplot
             clsBaseOperator.RemoveParameterByName(strStatSummaryParameterName)
         End If
     End Sub
+
 
     'this code is commented out but will work once we get the feature of linking controls with the contents of a receiver
     'Private Sub SwapFactors()

@@ -25,6 +25,11 @@ Imports System.ComponentModel
 Public Class ucrDataView
     'Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
+    ' Number of rows with and without the current filter (the same if no filter applied)
+    Private iRowCountFull As Integer
+    Private iRowCountFilter As Integer
+    Private iColumnCount As Integer
+    Private clsGetColumnsFromData As New RFunction
     Private clsAppendVariablesMetaData As New RFunction
     Private clsUnhideAllColumns As New RFunction
     Private clsInsertColumns As New RFunction
@@ -59,6 +64,19 @@ Public Class ucrDataView
         SetRFunctions()
     End Sub
 
+    ''' <summary>
+    ''' Run any R operation/command from the grid by passing a Function which will run the R operation/command.
+    ''' This wrapper ensures consistency in what is done before and after running an R command.
+    ''' </summary>
+    ''' <param name="action">A function that will run an R operation/command, usually from GridROperations.</param>
+    Private Sub RunRCommand(action As Action)
+        Cursor = Cursors.WaitCursor
+        grdData.Enabled = False
+        action()
+        grdData.Enabled = True
+        Cursor = Cursors.Default
+    End Sub
+
     'Protected Overrides Sub OnFormClosing(ByVal e As FormClosingEventArgs)
     '    MyBase.OnFormClosing(e)
     '    If Not e.Cancel AndAlso e.CloseReason = CloseReason.UserClosing Then
@@ -68,6 +86,7 @@ Public Class ucrDataView
     'End Sub
 
     Private Sub SetRFunctions()
+        clsGetColumnsFromData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsAppendVariablesMetaData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$append_to_variables_metadata")
         clsColumnNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_column_names")
         clsInsertColumns.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_columns_to_data")
@@ -318,8 +337,6 @@ Public Class ucrDataView
     End Sub
 
     Public Sub UpdateCurrentWorksheet()
-        Dim iRowCount As Integer
-        Dim iColumnCount As Integer
 
         grdCurrSheet = grdData.CurrentWorksheet
         If grdCurrSheet IsNot Nothing AndAlso frmMain.clsRLink.GetDataFrameNames().Contains(grdCurrSheet.Name) Then
@@ -329,18 +346,19 @@ Public Class ucrDataView
             grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
             grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
             grdCurrSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToFillSerial, False)
-            iRowCount = frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, True)
+            iRowCountFull = frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, False)
+            iRowCountFilter = frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, True)
             iColumnCount = frmMain.clsRLink.GetDataFrameColumnCount(grdCurrSheet.Name)
-            lblRowDisplay.Text = "Showing " & grdCurrSheet.RowCount & " of " & iRowCount & " rows"
+            lblRowDisplay.Text = "Showing " & grdCurrSheet.RowCount & " of " & iRowCountFilter & " rows"
             strFilterName = frmMain.clsRLink.RunInternalScriptGetValue(clsGetCurrentFilterName.ToScript(), bSilent:=True).AsCharacter(0)
             If frmMain.clsRLink.RunInternalScriptGetValue(clsFilterApplied.ToScript()).AsLogical(0) Then
-                lblRowDisplay.Text = lblRowDisplay.Text & " (" & frmMain.clsRLink.GetDataFrameLength(grdCurrSheet.Name, False) & ")" & "|Active filter:" & strFilterName
+                lblRowDisplay.Text = lblRowDisplay.Text & " (" & iRowCountFull & ")" & " | Active filter: " & strFilterName
             End If
             lblRowDisplay.Text = lblRowDisplay.Text & " | Showing " & grdCurrSheet.ColumnCount & " of " & iColumnCount & " columns"
             'hide startup menu items
             panelSectionsAll.Visible = False
         Else
-            frmMain.tstatus.Text = "No data loaded"
+            frmMain.tstatus.Text = GetTranslation("No data loaded")
             lblRowDisplay.Text = ""
             'show startup menu items
             panelSectionsAll.Visible = True
@@ -452,12 +470,6 @@ Public Class ucrDataView
     Private Sub MoveOrCopySheet_Click(sender As Object, e As EventArgs) Handles CopySheet.Click
         dlgCopyDataFrame.SetCurrentDataframe(grdCurrSheet.Name)
         dlgCopyDataFrame.ShowDialog()
-    End Sub
-
-    Private Sub mnuConvertVariate_Click(sender As Object, e As EventArgs) Handles mnuConvertVariate.Click
-        clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
-        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
-        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
     End Sub
 
     Private Sub mnuLevelsLabels_Click(sender As Object, e As EventArgs) Handles mnuLevelsLabels.Click
@@ -583,6 +595,7 @@ Public Class ucrDataView
 
     Private Sub UpdateRFunctionDataFrameParameters()
         If grdCurrSheet IsNot Nothing Then
+            clsGetColumnsFromData.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsAppendVariablesMetaData.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsColumnNames.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
             clsInsertColumns.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34), iPosition:=0)
@@ -651,12 +664,26 @@ Public Class ucrDataView
     End Sub
 
     Private Sub grdCurrSheet_BeforePaste(sender As Object, e As BeforeRangeOperationEventArgs) Handles grdCurrSheet.BeforePaste
-        e.IsCancelled = True
-        If Not e.Range.IsSingleCell Then
-            MsgBox("Pasting multiple cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "Try pasting one cell at a time.", MsgBoxStyle.Information, "Cannot paste multiple cells")
-        Else
-            ReplaceValueInData(Clipboard.GetText(), e.Range.Row, e.Range.Col)
+        e.IsCancelled = True 'prevents pasted data from being added directly into the data view 
+        Dim arrAllCurrentColumns As String()
+        Dim lstSelectedColumnNames As New List(Of String)
+        Dim iStartRowPos As Integer
+        'get all columns of current selected data frame
+        arrAllCurrentColumns = GetCurrentWorkSheetColumnNames()
+        'validate columns
+        If e.Range.EndCol >= arrAllCurrentColumns.Length Then
+            'this happens when Ctrl + V is pressed and the data to be pasted has more columns
+            'than columns between start and end column 
+            MsgBox("Columns copied are more than the current data frame columns.", MsgBoxStyle.Critical, "Excess Columns")
+            Exit Sub
         End If
+        'get selected columns
+        For colIndex As Integer = e.Range.Col To e.Range.EndCol
+            lstSelectedColumnNames.Add(arrAllCurrentColumns(colIndex))
+        Next
+        'get starting row position then paste clipboard values
+        iStartRowPos = Integer.Parse(grdData.CurrentWorksheet.RowHeaders.Item(e.Range.Row).Text)
+        PasteValuesToDataFrame(lstSelectedColumnNames, iStartRowPos, False)
     End Sub
 
     ' Not currently working. Bug with reogrid reported here:
@@ -670,10 +697,6 @@ Public Class ucrDataView
             MsgBox("Deleting cells is currently disabled. This feature will be included in future versions." & Environment.NewLine & "To remove a cell's value, replace the value with NA.", MsgBoxStyle.Information, "Cannot delete cells.")
             e.IsCancelled = True
         End If
-    End Sub
-
-    Private Sub mnuCellCopyRange_Click(sender As Object, e As EventArgs) Handles mnuCellCopyRange.Click
-        grdData.CurrentWorksheet.Copy()
     End Sub
 
     Private Sub ViewSheet_Click(sender As Object, e As EventArgs) Handles ViewSheet.Click
@@ -702,12 +725,17 @@ Public Class ucrDataView
         dlgDuplicateColumns.ShowDialog()
     End Sub
 
+    Private Function GetFirstSelectedRow() As String
+        Return grdCurrSheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text
+    End Function
+
     Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
+        dlgAddComment.SetPosition(grdCurrSheet.Name, GetFirstSelectedRow())
         dlgAddComment.ShowDialog()
     End Sub
 
-    Private Sub AddCommentToolStripMenuItem_Click(sender As Object, e As EventArgs)
-        dlgAddComment.SetCurrentColumn(SelectedColumnsAsArray()(0), grdCurrSheet.Name)
+    Private Sub mnuComment_Click(sender As Object, e As EventArgs) Handles mnuComment.Click
+        dlgAddComment.SetPosition(grdCurrSheet.Name, GetFirstSelectedRow(), SelectedColumnsAsArray()(0))
         dlgAddComment.ShowDialog()
     End Sub
 
@@ -751,12 +779,12 @@ Public Class ucrDataView
         If iSelectedCols = 1 Then
             strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
             mnuLevelsLabels.Enabled = (strType.Contains("factor"))
-            mnuDeleteCol.Text = "Delete Column"
-            mnuInsertColsBefore.Text = "Insert 1 Column Before"
-            mnuInsertColsAfter.Text = "Insert 1 Column After"
+            mnuDeleteCol.Text = GetTranslation("Delete Column")
+            mnuInsertColsBefore.Text = GetTranslation("Insert 1 Column Before")
+            mnuInsertColsAfter.Text = GetTranslation("Insert 1 Column After")
         Else
             mnuLevelsLabels.Enabled = False
-            mnuDeleteCol.Text = "Delete Columns"
+            mnuDeleteCol.Text = GetTranslation("Delete Columns")
             mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If
@@ -780,14 +808,6 @@ Public Class ucrDataView
 
     Private Sub mnuReorderColumns_Click(sender As Object, e As EventArgs) Handles mnuReorderColumns.Click
         dlgReorderColumns.ShowDialog()
-    End Sub
-
-    Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuCellHelp.Click
-        Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "134")
-    End Sub
-
-    Private Sub lblHeader_Click(sender As Object, e As EventArgs) Handles lblHeader.Click
-
     End Sub
 
     Private Sub mnuRenameColumn_Click(sender As Object, e As EventArgs) Handles mnuRenameColumn.Click
@@ -828,10 +848,8 @@ Public Class ucrDataView
         RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Logical")
     End Sub
 
-    Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click
-        clsConvertTo.AddParameter("col_names", SelectedColumns(), iPosition:=1)
-        clsConvertTo.AddParameter("to_type", Chr(34) & "numeric" & Chr(34), iPosition:=2)
-        RunScriptFromDataView(clsConvertTo.ToScript(), strComment:="Right click menu: Convert Column(s) To Numeric")
+    Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click, mnuConvertVariate.Click
+        RunRCommand(Sub() GridROperations.ConvertToNumeric(grdCurrSheet.Name, SelectedColumnsAsArray, iRowCountFull))
     End Sub
 
     Private Sub mnuLebelsLevel_Click(sender As Object, e As EventArgs) Handles mnuLebelsLevel.Click
@@ -955,6 +973,104 @@ Public Class ucrDataView
     End Sub
 
     Private Sub cellContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles cellContextMenuStrip.Opening
+        Dim iSelectedCols As Integer
+        Dim strColumns() As String
+        Dim strType As String
+
+        strColumns = SelectedColumnsAsArray()
+        If strColumns IsNot Nothing AndAlso strColumns.Count > 0 Then
+            iSelectedCols = grdData.CurrentWorksheet.SelectionRange.Cols
+            strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
+            mnuLebelsLevel.Enabled = (iSelectedCols = 1 AndAlso strType.Contains("factor"))
+        Else
+            MsgBox("Developer error: SelectedColumnsAsArray() expected to return an array with at least one element.")
+            mnuLebelsLevel.Enabled =  False
+        End If
         mnuRemoveCurrentFilters.Enabled = Not String.Equals(strFilterName, strNoFilter)
     End Sub
+
+    Private Sub mnuColumnAddComment_Click(sender As Object, e As EventArgs) Handles mnuColumnAddComment.Click
+        dlgAddComment.SetPosition(strDataFrame:=grdCurrSheet.Name, strColumn:=SelectedColumnsAsArray()(0))
+        dlgAddComment.ShowDialog()
+    End Sub
+
+    Private Sub mnuBottomAddComment_Click(sender As Object, e As EventArgs) Handles mnuBottomAddComment.Click
+        dlgAddComment.SetPosition(strDataFrame:=grdCurrSheet.Name)
+        dlgAddComment.ShowDialog()
+    End Sub
+
+    Private Sub mnuPaste_Click(sender As Object, e As EventArgs) Handles mnuPaste.Click
+        PasteValuesToDataFrame(SelectedColumnsAsArray(), 1, False)
+    End Sub
+
+    '''' <summary>
+    '''' event raised on menu toolstrip click
+    '''' paste data starting from selected cells
+    '''' </summary>
+    '''' <param name="sender"></param>
+    '''' <param name="e"></param>
+    Private Sub mnuCellPasteRange_Click(sender As Object, e As EventArgs) Handles mnuCellPasteRange.Click
+        Dim arrAllCurrentColumns As String()
+        Dim lstSelectedColumnNames As New List(Of String)
+        Dim iStartRowPos As Integer
+        'get all columns of current selected data frame
+        arrAllCurrentColumns = GetCurrentWorkSheetColumnNames()
+        'get columns selected
+        For colIndex As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.EndCol
+            lstSelectedColumnNames.Add(arrAllCurrentColumns(colIndex))
+        Next
+        'get starting row position then paste clipboard values
+        iStartRowPos = Integer.Parse(grdData.CurrentWorksheet.RowHeaders.Item(grdData.CurrentWorksheet.SelectionRange.Row).Text)
+        PasteValuesToDataFrame(lstSelectedColumnNames, iStartRowPos, False)
+    End Sub
+
+    ''' <summary>
+    ''' pastes data from clipboard to data view
+    ''' </summary>
+    ''' <param name="lstColumnNames">column names to paste data into</param>
+    ''' <param name="startRowPos">starting row position. This starts at postion 1</param>
+    ''' <param name="firstClipRowHeader">flag indicating whether first row of clipboard data is a header</param>
+    Private Sub PasteValuesToDataFrame(lstColumnNames As IEnumerable(Of String), startRowPos As String, firstClipRowHeader As Boolean)
+        Dim clsPasteValues As New RFunction
+        Dim strColNamesVec As String = ""
+        Dim strClipBoardText As String = My.Computer.Clipboard.GetText
+
+        If String.IsNullOrEmpty(strClipBoardText) Then
+            MsgBox("No data available for pasting.", MsgBoxStyle.Information, "No Data")
+            Exit Sub
+        End If
+        'warn user action cannot be undone
+        If DialogResult.No = MsgBox("Are you sure you want to paste to these column(s)?" & Environment.NewLine &
+                            "This action cannot be undone.", MessageBoxButtons.YesNo, "Paste Data") Then
+            Exit Sub
+        End If
+
+        'construct R vector command for new row values
+        For i As Integer = 0 To lstColumnNames.Count - 1
+            strColNamesVec = strColNamesVec & Chr(34) & lstColumnNames(i) & Chr(34)
+            If i = lstColumnNames.Count - 1 Then
+                Exit For
+            End If
+            strColNamesVec = strColNamesVec & ", "
+        Next
+        strColNamesVec = "c(" & strColNamesVec & ")"
+
+        'add R parameters and run the command
+        clsPasteValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$paste_from_clipboard")
+        clsPasteValues.AddParameter("data_name", Chr(34) & grdCurrSheet.Name & Chr(34))
+        clsPasteValues.AddParameter("col_names", strColNamesVec)
+        clsPasteValues.AddParameter("start_row_pos", startRowPos)
+        clsPasteValues.AddParameter("first_clip_row_is_header", If(firstClipRowHeader, "TRUE", "FALSE"))
+        clsPasteValues.AddParameter("clip_board_text", Chr(34) & strClipBoardText & Chr(34))
+        RunScriptFromDataView(clsPasteValues.ToScript(), strComment:="Paste values in Data")
+    End Sub
+
+    ''' <summary>
+    ''' gets column names of current worksheet
+    ''' </summary>
+    ''' <returns>array of column names</returns>
+    Private Function GetCurrentWorkSheetColumnNames() As String()
+        'get all columns of current selected data frame
+        Return lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value
+    End Function
 End Class

@@ -39,11 +39,18 @@ Partial Class dlgGeneralForGraphics
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgGeneralForGraphics))
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrSaveGraph = New instat.ucrSaveGraph()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.SuspendLayout()
+        '
+        'cmdOptions
+        '
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrAdditionalLayers
         '
@@ -59,13 +66,6 @@ Partial Class dlgGeneralForGraphics
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'cmdOptions
-        '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'dlgGeneralForGraphics
         '

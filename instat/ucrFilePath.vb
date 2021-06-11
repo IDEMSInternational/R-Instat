@@ -15,6 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports System.IO
+Imports instat.Translations
 
 '''--------------------------------------------------------------------------------------------
 ''' <summary>
@@ -53,7 +54,7 @@ Public Class ucrFilePath
             Return btnBrowse.Text
         End Get
         Set(ByVal value As String)
-            btnBrowse.Text = value
+            btnBrowse.Text = GetTranslation(value)
         End Set
     End Property
 
@@ -71,7 +72,7 @@ Public Class ucrFilePath
             Return lblName.Text
         End Get
         Set(ByVal value As String)
-            lblName.Text = value
+            lblName.Text = GetTranslation(value)
         End Set
     End Property
 

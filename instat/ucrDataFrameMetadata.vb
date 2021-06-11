@@ -214,4 +214,9 @@ Public Class ucrDataFrameMetadata
     Private Sub rowRightClickMenu_Opening(sender As Object, e As EventArgs) Handles rowRightClickMenu.Opening
         hideSheet.Enabled = (grdMetaData.CurrentWorksheet.RowCount > 1)
     End Sub
+
+    Private Sub mnuAddComment_Click(sender As Object, e As EventArgs) Handles mnuAddComment.Click
+        dlgAddComment.SetPosition(strDataFrame:=grdCurrSheet.Name)
+        dlgAddComment.ShowDialog()
+    End Sub
 End Class

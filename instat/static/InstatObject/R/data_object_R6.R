@@ -493,7 +493,7 @@ DataSheet$set("public", "get_calculation_names", function(as_list = FALSE, exclu
 }
 )
 
-DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column, num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
+DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data, use_col_name_as_prefix = FALSE, hidden = FALSE, before, adjacent_column = "", num_cols, require_correct_length = TRUE, keep_existing_position = TRUE) {
   # Column name must be character
   if(!is.character(col_name)) stop("Column name must be of type: character")
   if(missing(num_cols)) {
@@ -531,7 +531,7 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
   
   replaced <- FALSE
   previous_length = self$get_column_count()
-  if(!missing(adjacent_column) && !adjacent_column %in% self$get_column_names()) stop(adjacent_column, "not found in the data")
+  if(adjacent_column != "" && !adjacent_column %in% self$get_column_names()) stop(adjacent_column, "not found in the data")
  
   new_col_names <- c()
   for(i in 1:num_cols) {
@@ -561,14 +561,14 @@ DataSheet$set("public", "add_columns_to_data", function(col_name = "", col_data,
   
   # If replacing existing columns and not repositioning them, or before and adjacent_column column positioning parameters are missing
   # then do not reposition.
-  if((replaced && keep_existing_position) || (missing(before) && missing(adjacent_column))) return()
+  if((replaced && keep_existing_position) || (missing(before) && adjacent_column == "")) return()
 
   # Get the adjacent position to be used in appending the new column names
   if(before) {
-    if(missing(adjacent_column)) adjacent_position <- 0
+    if(adjacent_column == "") adjacent_position <- 0
     else adjacent_position <- which(self$get_column_names() == adjacent_column) - 1
   } else {
-      if(missing(adjacent_column)) adjacent_position <- self$get_column_count()
+      if(adjacent_column == "") adjacent_position <- self$get_column_count()
       else adjacent_position <- which(self$get_column_names() == adjacent_column)
   }
 
@@ -849,6 +849,62 @@ DataSheet$set("public", "replace_value_in_data", function(col_names, rows, old_v
   self$variables_metadata_changed <- TRUE
 }
 )
+
+DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_pos = 1, first_clip_row_is_header = FALSE, clip_board_text) {
+  #reads data from clipboard and saves it to selected columns
+  #get the clipboard text contents as a data frame
+  clip_tbl <- clipr::read_clip_tbl(x = clip_board_text, header = first_clip_row_is_header)
+  current_tbl <- self$get_data_frame(use_current_filter = FALSE)
+  
+  #check if number of copied columns and selected columns are equal
+  if(ncol(clip_tbl) != length(col_names)){
+    stop(paste("number of columns are not the same.",
+               "Selected columns:", length(col_names), ". Copied columns:", ncol(clip_tbl)) )
+  }
+  
+  #check if copied data rows are more than current data rows
+  if( nrow(clip_tbl) > nrow(current_tbl) ){
+    stop(paste("rows copied cannot be more than number of rows in the data frame.",
+               "Current data frame rows:", nrow(current_tbl), ". Copied rows:", nrow(clip_tbl)) )
+  }
+  
+  #check copied data integrity
+  for(index in seq_along(col_names)){
+    col_data <- current_tbl[, col_names[index]]
+    #get column type of column from the current table using column name
+    col_type <- class(col_data)
+    #check copied data integrity based on the data type expected
+    if (is.factor(col_data)) {
+      #get all the factor levels of the selected column in the current data frame
+      expected_factor_levels <- levels(col_data)
+      #check if all copied data values are contained in the factor levels
+      #if any invalid is found. exit function
+      for(val in clip_tbl[,index]){
+        if(!is.na(val) && !is.element(val,expected_factor_levels)){
+          stop("Invalid column values. Level not found in factor")
+        }
+      }#end inner for loop
+    } else if( !(is.numeric(col_data) || is.logical(col_data) || is.character(col_data)) ) {
+      #clipr support above column types only. So pasting to a column not recognised by clipr may result to unpredictible results 
+      #if not in any of above column types then exit function
+      stop( paste("Cannot paste into columns of type:", col_type) )
+    }#end if  
+  }#end outer for loop
+  
+  #replace values in the selected columns
+  for(index in seq_along(col_names)){
+    #set the row positions and the values
+    rows_to_replace <- c(start_row_pos : (start_row_pos + nrow(clip_tbl) - 1 ))
+    new_values <- clip_tbl[,index]
+    #replace the old values with new values
+    self$replace_value_in_data(col_names = col_names[index], rows = rows_to_replace, new_value = new_values)
+    #rename header if first row of clip data is header. 
+    if(first_clip_row_is_header){
+      self$rename_column_in_data(curr_col_name = col_names[index], new_col_name = colnames(clip_tbl)[index]) 
+    }
+  }#end for loop
+}
+)#end function
 
 DataSheet$set("public", "append_to_metadata", function(property, new_value = "") {
   if(missing(property)) stop("property must be specified.")
@@ -1189,7 +1245,8 @@ DataSheet$set("public", "convert_column_to_type", function(col_names = c(), to_t
     }
     else if(to_type == "numeric") {
       if(ignore_labels) {
-        new_col <- as.numeric(curr_col)
+        if (is.factor(curr_col)) new_col <- as.numeric(levels(curr_col))[curr_col]
+        else new_col <- as.numeric(curr_col)
       }
       else {
         if(self$is_variables_metadata(labels_label, col_name) && !is.numeric(curr_col)) {
@@ -1391,11 +1448,11 @@ DataSheet$set("public", "get_data_type", function(col_name = "") {
     stop(paste(col_name, "is not a column in", self$get_metadata(data_name_label)))
   }
   type = ""
-  curr_col <- self$get_columns_from_data(col_name, use_current_filter = FALSE)
+  curr_col <- self$get_columns_from_data(col_name, use_current_filter = TRUE)
   if(is.character(curr_col)) {
     type = "character"
   }
-  else if(is.logical(private$data[[col_name]])) {
+  else if(is.logical(curr_col)) {
     type = "logical"
   }
   else if(lubridate::is.Date(private$data[[col_name]])){
@@ -1403,19 +1460,22 @@ DataSheet$set("public", "get_data_type", function(col_name = "") {
     #we can add options for other forms of dates serch as POSIXct, POSIXlt, Date, chron, yearmon, yearqtr, zoo, zooreg, timeDate, xts, its, ti, jul, timeSeries, and fts objects.
     type = "Date"
   }
-  else if(is.numeric(private$data[[col_name]])) {
+  else if(is.numeric(curr_col)) {
     #TODO vectors with integer values but stored as numeric will return numeric.
     #     Is that desirable?
-    if(is.integer(private$data[[col_name]])) {
-      if(all(private$data[[col_name]]>0)) {
-        type = "positive integer"
+      if(is.binary(curr_col)){
+        type = "two level numeric"
       }
-      else type = "integer"
-    }
-    else type = "numeric"
+      else if(all(curr_col == as.integer(curr_col))) {
+        if(all(curr_col>0)) {
+          type = "positive integer"
+        }
+        else type = "integer"
+      }
+      else type = "numeric"
   }
   else if(is.factor(curr_col)) {
-    if(length(levels(curr_col))==2) type = "two level factor"
+    if(nlevels(curr_col) == 2 || nlevels(factor(curr_col)) == 2) type = "two level factor"
     else if(length(levels(curr_col))>2) type = "multilevel factor"
     else type = "factor"
   }
@@ -1657,18 +1717,21 @@ DataSheet$set("public", "add_object", function(object, object_name) {
   if(object_name %in% names(private$objects)) message("An object called ", object_name, " already exists. It will be replaced.")
   private$objects[[object_name]] <- object
   self$append_to_changes(list(Added_object, object_name))
-  if(any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair") %in% class(object))) {
+  if(any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair", "recordedplot") %in% class(object))) {
     private$.last_graph <- object_name
   }
 }
 )
 
-DataSheet$set("public", "get_objects", function(object_name, type = "", force_as_list = FALSE) {
+DataSheet$set("public", "get_objects", function(object_name, type = "", force_as_list = FALSE, silent = FALSE) {
   curr_objects = private$objects[self$get_object_names(type = type)]
   if(length(curr_objects) == 0) return(curr_objects)
   if(missing(object_name)) return(curr_objects)
   if(!is.character(object_name)) stop("object_name must be a character")
-  if(!all(object_name %in% names(curr_objects))) stop(object_name, " not found in objects")
+  if(!all(object_name %in% names(curr_objects))) {
+    if (silent) return(NULL)
+    else stop(object_name, " not found in objects")
+  }
   if(length(object_name) == 1) {
     if(force_as_list) return(curr_objects[object_name])
     else return(curr_objects[[object_name]])
@@ -1681,7 +1744,7 @@ DataSheet$set("public", "get_object_names", function(type = "", as_list = FALSE,
   if(type == "") out = names(private$objects)
   else {
     if(type == model_label) out = names(private$objects)[!sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "htmlTable", "Surv") %in% class(x)))]
-    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair") %in% class(x)))]
+    else if(type == graph_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("ggplot", "gg", "gtable", "grob", "ggmultiplot", "ggsurv", "ggsurvplot", "openair", "recordedplot") %in% class(x)))]
     else if(type == surv_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("Surv") %in% class(x)))]
     else if(type == table_label) out = names(private$objects)[sapply(private$objects, function(x) any(c("htmlTable", "data.frame", "list") %in% class(x)))]
     else stop("type: ", type, " not recognised")
@@ -1813,12 +1876,15 @@ DataSheet$set("public", "add_key", function(col_names, key_name) {
   }
   else {
     if(missing(key_name)) key_name <- next_default_item("key", names(private$keys))
-    if(key_name %in% names(private$keys)) warning("A key called ", key_name, " already exists. It wil be replaced.")
+    if(key_name %in% names(private$keys)) warning("A key called", key_name, "already exists. It will be replaced.")
     private$keys[[key_name]] <- col_names
     self$append_to_variables_metadata(col_names, is_key_label, TRUE)
     if(length(private$keys) == 1) self$append_to_variables_metadata(setdiff(self$get_column_names(), col_names), is_key_label, FALSE)
     self$append_to_metadata(is_linkable, TRUE)
     self$append_to_metadata(next_default_item(key_label, names(self$get_metadata())), paste(col_names, collapse = ","))
+    cat(paste("Key name:", key_name),
+        paste("Key columns:", paste(private$keys[[key_name]], collapse = ", ")),
+        sep = "\n")
   }
 }
 )
@@ -1836,8 +1902,10 @@ DataSheet$set("public", "has_key", function() {
 DataSheet$set("public", "get_keys", function(key_name) {
   if(!missing(key_name)) {
     if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
-    return(private$keys[[key_name]])
-  }
+    cat(paste("Key name:", key_name),
+        paste("Key columns:", paste(private$keys[[key_name]], collapse = ", ")),
+        sep = "\n")
+      }
   else return(private$keys)
 }
 )
@@ -1845,6 +1913,7 @@ DataSheet$set("public", "get_keys", function(key_name) {
 DataSheet$set("public", "remove_key", function(key_name) {
   if(!key_name %in% names(private$keys)) stop(key_name, " not found.")
   private$keys[[key_name]] <- NULL
+  cat("Key removed:", key_name)
 }
 )
 
@@ -2713,7 +2782,7 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
     }
     full_dates <- seq(min_date, max_date, by = "day")
     if(length(full_dates) > length(date_col)) {
-      cat("Adding", (length(full_dates) - length(date_col)), "rows for date gaps", "\n")
+      cat("Added", (length(full_dates) - length(date_col)), "rows to extend data and fill date gaps", "\n")
       full_dates <- data.frame(full_dates)
       names(full_dates) <- date_name
       by <- date_name
@@ -2753,7 +2822,7 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
     for(j in 1:nrow(date_ranges)) {
       full_dates <- seq(date_ranges$min_date[j], date_ranges$max_date[j], by = "day")
       if(length(full_dates) > date_lengths[[2]][j]) {
-        cat(paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), ": Adding", (length(full_dates) - date_lengths[[2]][j]), "rows for date gaps", "\n")
+        cat(paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), ": Added", (length(full_dates) - date_lengths[[2]][j]), "rows to extend data and fill date gaps", "\n")
         merge_required <- TRUE
       }
       full_dates <- data.frame(full_dates)
@@ -3819,5 +3888,70 @@ DataSheet$set("public", "visualize_element_na", function(element_col_name, eleme
   }
   else {
     return(plt)
+  }
+})
+
+DataSheet$set("public", "get_data_entry_data", function(station, date, elements, view_variables, station_name, type, start_date, end_date) {
+  cols <- c(date, elements)
+  if (!missing(view_variables)) cols <- c(cols, view_variables)
+  if (!missing(station)) cols <- c(station, cols)
+  curr_data <- self$get_columns_from_data(cols)
+  col_names <- c(date, elements)
+  if (!missing(station)) col_names <- c(station, col_names)
+  if (!missing(view_variables)) col_names <- c(col_names, paste(view_variables, "(view)"))
+  names(curr_data) <- col_names
+  
+  if (!missing(station)) curr_data <- curr_data[curr_data[[station]] == station_name, ]
+  if (type == "day") {
+    curr_data <- curr_data[curr_data[[date]] == start_date, ]
+  } else if (type == "month") {
+    if (lubridate::day(start_date) != 1) warning("type = 'month' but start_date is not 1st of the month.")
+    curr_data <- curr_data[curr_data[[date]] >= start_date & curr_data[[date]] <= (start_date + months(1) - 1), ]
+  } else if (type == "range") {
+    curr_data <- curr_data[curr_data[[date]] >= start_date & curr_data[[date]] <= end_date, ]
+  }
+  if (nrow(curr_data) == 0) stop("No data in range.")
+  # Convert to character to they display correctly in VB grid.
+  curr_data[[date]] <- as.character(curr_data[[date]])
+  if (!missing(view_variables) && date %in% view_variables) curr_data[[paste(date, "(view)")]] <- as.character(curr_data[[paste(date, "(view)")]])
+  if (!missing(station)) curr_data[[station]] <- as.character(curr_data[[station]])
+  curr_data
+})
+
+DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed, add_flags = FALSE, ...) {
+  if (nrow(new_data) != length(rows_changed)) stop("new_data must have the same number of rows as length of rows_changed.")
+  curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  changed_data <- curr_data
+  for (i in seq_along(rows_changed)) {
+    for (k in seq_along(names(new_data))) {
+      changed_data[rows_changed[i], names(new_data)[k]] <- new_data[i, names(new_data)[k]]
+    }
+  }
+  if (add_flags) {
+    for (i in names(new_data)[-c(1:2)]) {
+      col1 <- curr_data[, i]
+      col2 <- changed_data[, i]
+      if (paste0(i, "_fl") %in% colnames(changed_data)) {
+        flag_col1 <- changed_data[, paste0(i, "_fl")]
+        flag_col2 <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
+        changed_data[, paste0(i, "_fl")] <- factor(ifelse(flag_col1 %in% c("edit", "add"), as.character(flag_col1), as.character(flag_col2)), levels = c("data", "add", "edit"))
+      } else {
+        changed_data[, paste0(i, "_fl")] <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
+      }
+    }
+  }
+  cat("Values updated in:", length(rows_changed), "row(s)\n")
+  self$set_data(changed_data)
+  # Added this line to fix the bug of having the variable names in the metadata changing to NA
+  # This affects factor columns only  - we need to find out why and how to solve it best
+  self$add_defaults_variables_metadata(self$get_column_names())
+  self$data_changed <- TRUE
+})
+
+DataSheet$set("public", "add_flag_fields", function(col_names) {
+  curr_data <- self$get_columns_from_data(col_names, force_as_data_frame = TRUE)
+  for (i in colnames(curr_data)) {
+    col_data <- factor(ifelse(is.na(curr_data[, i]), NA_real_, "data"), levels = c("data", "edit", "add"))
+    self$add_columns_to_data(col_data = col_data, col_name = paste0(i, "_fl"))
   }
 })

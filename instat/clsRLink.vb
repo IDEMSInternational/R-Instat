@@ -60,6 +60,9 @@ Public Class RLink
     ''' <summary>   The instat data book object. </summary> 
     Public strInstatDataObject As String = "data_book" 'TODO SJL 23/04/20 make private constant?
 
+    ''' <summary> The name of the graph data book used for storing graphs. </summary>
+    Private strGraphDataBook As String = ".graph_data_book"
+
     ''' <summary>   Name of the data book class. </summary>
     Public strDataBookClassName As String = "DataBook" 'TODO SJL 23/04/20 make private constant?
 
@@ -159,13 +162,13 @@ Public Class RLink
     Private strRVersionMajorRequired As String = "4"
 
     ''' <summary>   The R version minor required. </summary>
-    Private strRVersionMinorRequired As String = "0"
+    Private strRVersionMinorRequired As String = "1"
 
     ''' <summary>   The R version required. </summary>
     Private strRVersionRequired As String = strRVersionMajorRequired & "." & strRVersionMinorRequired & ".0"
 
     ''' <summary>   The R bundled version. </summary>
-    Private strRBundledVersion As String = "4.0.3"
+    Private strRBundledVersion As String = "4.1.0"
 
 
     '''--------------------------------------------------------------------------------------------
@@ -2263,7 +2266,8 @@ Public Class RLink
         Dim clsCreateIO As New ROperator
 
         clsRm.SetRCommand("rm")
-        clsRm.AddParameter("x", strInstatDataObject)
+        clsRm.AddParameter("0", strInstatDataObject, iPosition:=0, bIncludeArgumentName:=False)
+        clsRm.AddParameter("1", strGraphDataBook, iPosition:=1, bIncludeArgumentName:=False)
 
         clsCreateIO.SetOperation("<-")
         clsCreateIO.AddParameter("left", strInstatDataObject, iPosition:=0)

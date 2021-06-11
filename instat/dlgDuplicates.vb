@@ -164,6 +164,7 @@ Public Class dlgDuplicates
         clsSummaryFunction.iCallType = 2
 
         clsSubsetCol.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        ucrBase.clsRsyntax.ClearCodes()
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:=ucrNewColumnName.GetText, strTempDataframe:=ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempColumn:=ucrNewColumnName.GetText)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDuplicated2)
         ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=0)
@@ -194,6 +195,7 @@ Public Class dlgDuplicates
         If bReset Then
             ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         End If
+        AddDataFrameForGetColumnsFunction()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -233,6 +235,11 @@ Public Class dlgDuplicates
 
     Private Sub ucrPnlOptions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         SetDataFrameOrColumns()
+        If rdoSelectedVariables.Checked Then
+            ucrNewColumnName.setLinkedReceiver(ucrReceiverForSelectedVariables)
+        ElseIf rdoSuccessiveValues.Checked Then
+            ucrNewColumnName.setLinkedReceiver(ucrReceiverForSuccessiveValues)
+        End If
     End Sub
 
     Private Sub ucrChkIncludeSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeSummary.ControlValueChanged
@@ -280,10 +287,13 @@ Public Class dlgDuplicates
         SetBaseFunction()
     End Sub
 
+    Private Sub AddDataFrameForGetColumnsFunction()
+        clsGetColumnsFunction.AddParameter(strParameterName:="data_name", strParameterValue:=Chr(34) & ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34), iPosition:=0)
+    End Sub
 
     Private Sub ucrSelectorDuplicateswithVariables_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorDuplicateswithVariables.ControlValueChanged
         SetDataFrameOrColumns()
-        clsGetColumnsFunction.AddParameter(strParameterName:="data_name", strParameterValue:=Chr(34) & ucrSelectorDuplicateswithVariables.ucrAvailableDataFrames.cboAvailableDataFrames.SelectedItem & Chr(34), iPosition:=0)
+        AddDataFrameForGetColumnsFunction()
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged

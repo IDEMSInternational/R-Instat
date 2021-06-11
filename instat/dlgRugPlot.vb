@@ -37,6 +37,8 @@ Public Class dlgRugPlot
     Private clsCoordPolarStartOperator As New ROperator
     Private clsXScaleDateFunction As New RFunction
     Private clsYScaleDateFunction As New RFunction
+    Private clsScaleFillViridisFunction As New RFunction
+    Private clsScaleColourViridisFunction As New RFunction
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomrug"
     Private strGeomParameterNames() As String = {strFirstParameterName}
@@ -132,6 +134,8 @@ Public Class dlgRugPlot
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
         clsXScaleDateFunction = GgplotDefaults.clsXScaleDateFunction.Clone()
         clsYScaleDateFunction = GgplotDefaults.clsYScaleDateFunction.Clone()
+        clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
+        clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -167,7 +171,7 @@ Public Class dlgRugPlot
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
-        sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrRugPlotSelector, strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
+        sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewGlobalAesFunction:=clsRaesFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrRugPlotSelector, strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub

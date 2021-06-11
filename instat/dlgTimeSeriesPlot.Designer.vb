@@ -91,7 +91,7 @@ Partial Class dlgTimeSeriesPlot
         Me.ucrChkIncludePoints.Checked = False
         Me.ucrChkIncludePoints.Location = New System.Drawing.Point(10, 253)
         Me.ucrChkIncludePoints.Name = "ucrChkIncludePoints"
-        Me.ucrChkIncludePoints.Size = New System.Drawing.Size(147, 20)
+        Me.ucrChkIncludePoints.Size = New System.Drawing.Size(272, 20)
         Me.ucrChkIncludePoints.TabIndex = 10
         '
         'ucrChkIncludeMeanLines
@@ -99,7 +99,7 @@ Partial Class dlgTimeSeriesPlot
         Me.ucrChkIncludeMeanLines.Checked = False
         Me.ucrChkIncludeMeanLines.Location = New System.Drawing.Point(10, 290)
         Me.ucrChkIncludeMeanLines.Name = "ucrChkIncludeMeanLines"
-        Me.ucrChkIncludeMeanLines.Size = New System.Drawing.Size(147, 20)
+        Me.ucrChkIncludeMeanLines.Size = New System.Drawing.Size(272, 20)
         Me.ucrChkIncludeMeanLines.TabIndex = 11
         '
         'ucrChkNAValues
@@ -115,13 +115,13 @@ Partial Class dlgTimeSeriesPlot
         Me.ucrChkIncludeLineOfBestFit.Checked = False
         Me.ucrChkIncludeLineOfBestFit.Location = New System.Drawing.Point(10, 327)
         Me.ucrChkIncludeLineOfBestFit.Name = "ucrChkIncludeLineOfBestFit"
-        Me.ucrChkIncludeLineOfBestFit.Size = New System.Drawing.Size(147, 20)
+        Me.ucrChkIncludeLineOfBestFit.Size = New System.Drawing.Size(260, 20)
         Me.ucrChkIncludeLineOfBestFit.TabIndex = 16
         '
         'ucrChkWithSE
         '
         Me.ucrChkWithSE.Checked = False
-        Me.ucrChkWithSE.Location = New System.Drawing.Point(163, 327)
+        Me.ucrChkWithSE.Location = New System.Drawing.Point(276, 327)
         Me.ucrChkWithSE.Name = "ucrChkWithSE"
         Me.ucrChkWithSE.Size = New System.Drawing.Size(135, 20)
         Me.ucrChkWithSE.TabIndex = 17

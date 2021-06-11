@@ -299,6 +299,7 @@ Public Class frmMain
         mnuViewDataFrameMetadata.Checked = False
         mnuViewColumnMetadata.Checked = False
         mnuViewScriptWindow.Checked = False
+        mnuViewSwapDataAndMetadata.Checked = False
         mnuLogWindow.Checked = False
         mnuScriptWindow.Checked = False
         mnuColumnMetadat.Checked = False
@@ -450,7 +451,7 @@ Public Class frmMain
     End Sub
 
     Private Sub UpdateLayout()
-        If Not mnuViewDataView.Checked AndAlso Not mnuViewOutputWindow.Checked AndAlso Not mnuViewColumnMetadata.Checked AndAlso Not mnuViewDataFrameMetadata.Checked AndAlso Not mnuViewLog.Checked AndAlso Not mnuViewScriptWindow.Checked Then
+        If Not mnuViewDataView.Checked AndAlso Not mnuViewOutputWindow.Checked AndAlso Not mnuViewColumnMetadata.Checked AndAlso Not mnuViewDataFrameMetadata.Checked AndAlso Not mnuViewLog.Checked AndAlso Not mnuViewScriptWindow.Checked AndAlso Not mnuViewSwapDataAndMetadata.Checked Then
             splOverall.Hide()
         Else
             splOverall.Show()
@@ -463,7 +464,6 @@ Public Class frmMain
             End If
             If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked OrElse mnuViewLog.Checked OrElse mnuViewScriptWindow.Checked Then
                 splOverall.Panel1Collapsed = False
-
                 If mnuViewColumnMetadata.Checked OrElse mnuViewDataFrameMetadata.Checked Then
                     splExtraWindows.Panel1Collapsed = False
                     splMetadata.Panel1Collapsed = Not mnuViewColumnMetadata.Checked
@@ -471,7 +471,6 @@ Public Class frmMain
                 Else
                     splExtraWindows.Panel1Collapsed = True
                 End If
-
                 If mnuViewLog.Checked OrElse mnuViewScriptWindow.Checked Then
                     splExtraWindows.Panel2Collapsed = False
                     splLogScript.Panel1Collapsed = Not mnuViewLog.Checked
@@ -481,6 +480,17 @@ Public Class frmMain
                 End If
             Else
                 splOverall.Panel1Collapsed = True
+            End If
+            If mnuViewSwapDataAndMetadata.Checked AndAlso mnuViewDataView.Checked Then
+                splDataOutput.Panel1.Controls.Add(ucrColumnMeta)
+                splMetadata.Panel1.Controls.Add(ucrDataViewer)
+                If Not mnuViewColumnMetadata.Checked Then
+                    mnuViewColumnMetadata.Checked = True
+                    mnuViewDataView.Checked = False
+                End If
+            Else
+                splDataOutput.Panel1.Controls.Add(ucrDataViewer)
+                splMetadata.Panel1.Controls.Add(ucrColumnMeta)
             End If
         End If
         mnuTbDataView.Checked = mnuViewDataView.Checked
@@ -877,7 +887,9 @@ Public Class frmMain
                     System.IO.Directory.CreateDirectory(strAppDataPath)
                 End If
                 If clsRLink IsNot Nothing AndAlso clsRLink.bREngineInitialised Then
-                    clsRecentItems.saveOnClose()
+                    If clsRecentItems IsNot Nothing Then
+                        clsRecentItems.saveOnClose()
+                    End If
                     If clsInstatOptions IsNot Nothing Then
                         SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
                     End If
@@ -922,6 +934,7 @@ Public Class frmMain
             tstatus.Text = strCurrentStatus
             Cursor = Cursors.Default
         End If
+        autoTranslate(Me)
     End Sub
 
     Public Sub DeleteAutoSaveData()
@@ -1240,11 +1253,11 @@ Public Class frmMain
         dlgInventoryPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateFileImportFromClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportFromClimSoft.Click
+    Private Sub mnuClimateFileImportfromClimSoft_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportfromClimSoft.Click
         dlgClimSoft.ShowDialog()
     End Sub
 
-    Private Sub mnuClimateFileImportFromClimSoftWizard_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportFromClimSoftWizard.Click
+    Private Sub mnuClimateFileImportfromClimSoftWizard_Click(sender As Object, e As EventArgs) Handles mnuClimateFileImportfromClimSoftWizard.Click
         dlgClimsoftWizard.ShowDialog()
     End Sub
 
@@ -1925,7 +1938,7 @@ Public Class frmMain
         dlgAnonymiseIDColumn.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticFileOpenandTidyShapefile_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileOpenandTidyShapefile.Click
+    Private Sub mnuClimaticFileImportandTidyShapefile_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportandTidyShapefile.Click
         dlgImportShapeFiles.ShowDialog()
     End Sub
 
@@ -1998,10 +2011,6 @@ Public Class frmMain
 
     Private Sub mnuClimaticPrepareSPI_Click(sender As Object, e As EventArgs) Handles mnuClimaticPrepareSPI.Click
         dlgSPI.ShowDialog()
-    End Sub
-
-    Private Sub mnuClimaticMapping_Click(sender As Object, e As EventArgs) Handles mnuClimaticMapping.Click
-        dlgClimaticStationMaps.ShowDialog()
     End Sub
 
     Private Sub mnuHelpWindows_Click(sender As Object, e As EventArgs) Handles mnuHelpWindows.Click
@@ -2303,6 +2312,18 @@ Public Class frmMain
         dlgClimaticNCMPSummaryFile.ShowDialog()
     End Sub
 
+    Private Sub mnuViewSwapDataAndMetadata_Click(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.Click
+        mnuViewSwapDataAndMetadata.Checked = Not mnuViewSwapDataAndMetadata.Checked
+        UpdateLayout()
+    End Sub
+
+    Private Sub mnuViewSwapDataAndMetadata_CheckStateChanged(sender As Object, e As EventArgs) Handles mnuViewSwapDataAndMetadata.CheckStateChanged
+        If Not mnuViewSwapDataAndMetadata.Checked AndAlso Not mnuViewDataView.Checked AndAlso mnuViewColumnMetadata.Checked Then
+            mnuViewColumnMetadata.Checked = False
+            mnuViewDataView.Checked = True
+        End If
+    End Sub
+
     Private Sub frmMain_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
         If Me.WindowState = FormWindowState.Maximized Then
             isMaximised = True
@@ -2319,11 +2340,35 @@ Public Class frmMain
         dlgCircularDensityPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticDataEntry_Click(sender As Object, e As EventArgs) Handles mnuClimaticDataEntry.Click
+    Private Sub mnuTidyandExamineClimaticDataEntry_Click(sender As Object, e As EventArgs) Handles mnuTidyandExamineClimaticDataEntry.Click
         dlgClimaticDataEntry.ShowDialog()
     End Sub
+
     Private Sub mnuStructuredCircularOtherRosePlots_Click(sender As Object, e As EventArgs) Handles mnuStructuredCircularOtherRosePlots.Click
         dlgOtherRosePlots.ShowDialog()
+    End Sub
 
+    Private Sub mnuClimaticMappingMap_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingMap.Click
+        dlgClimaticStationMaps.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticMappingCheckStations_Click(sender As Object, e As EventArgs) Handles mnuClimaticMappingCheckStationLocations.Click
+        dlgLocatingPointsInShapeFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticCheckDataCheckStationLocations_Click(sender As Object, e As EventArgs) Handles mnuClimaticCheckDataCheckStationLocations.Click
+        dlgLocatingPointsInShapeFile.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticFileImportfromClimateDataStore_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportfromClimateDataStore.Click
+        dlgImportERA5Data.ShowDialog()
+    End Sub
+
+    Private Sub mnuSetupForDataEntry_Click(sender As Object, e As EventArgs) Handles mnuSetupForDataEntry.Click
+        dlgSetupForDataEntry.ShowDialog()
+    End Sub
+
+    Private Sub mnuEditPasteNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNewDataFrame.Click
+        dlgPasteNewDataFrame.ShowDialog()
     End Sub
 End Class

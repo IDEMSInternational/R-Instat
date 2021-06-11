@@ -45,13 +45,12 @@ Partial Class dlgRecodeNumeric
         Me.grpClosedOn = New System.Windows.Forms.GroupBox()
         Me.rdoLeft = New System.Windows.Forms.RadioButton()
         Me.rdoRight = New System.Windows.Forms.RadioButton()
-        Me.lblNewColumnName = New System.Windows.Forms.Label()
-        Me.ucrInputRecode = New instat.ucrInputComboBox()
+        Me.ucrSaveRecode = New instat.ucrSave()
+        Me.ucrMultipleNumericRecode = New instat.ucrInputTextBox()
+        Me.ucrMultipleLabels = New instat.ucrInputTextBox()
         Me.ucrReceiverRecode = New instat.ucrReceiverSingle()
         Me.ucrSelectorForRecode = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrMultipleLabels = New instat.ucrInputTextBox()
-        Me.ucrMultipleNumericRecode = New instat.ucrInputTextBox()
         Me.grpClosedOn.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -97,18 +96,26 @@ Partial Class dlgRecodeNumeric
         Me.rdoRight.Tag = "Right"
         Me.rdoRight.UseVisualStyleBackColor = True
         '
-        'lblNewColumnName
+        'ucrSaveRecode
         '
-        resources.ApplyResources(Me.lblNewColumnName, "lblNewColumnName")
-        Me.lblNewColumnName.Name = "lblNewColumnName"
-        Me.lblNewColumnName.Tag = "New_Column_Name:"
+        resources.ApplyResources(Me.ucrSaveRecode, "ucrSaveRecode")
+        Me.ucrSaveRecode.Name = "ucrSaveRecode"
         '
-        'ucrInputRecode
+        'ucrMultipleNumericRecode
         '
-        Me.ucrInputRecode.AddQuotesIfUnrecognised = True
-        Me.ucrInputRecode.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputRecode, "ucrInputRecode")
-        Me.ucrInputRecode.Name = "ucrInputRecode"
+        Me.ucrMultipleNumericRecode.AddQuotesIfUnrecognised = True
+        Me.ucrMultipleNumericRecode.IsMultiline = False
+        Me.ucrMultipleNumericRecode.IsReadOnly = False
+        resources.ApplyResources(Me.ucrMultipleNumericRecode, "ucrMultipleNumericRecode")
+        Me.ucrMultipleNumericRecode.Name = "ucrMultipleNumericRecode"
+        '
+        'ucrMultipleLabels
+        '
+        Me.ucrMultipleLabels.AddQuotesIfUnrecognised = True
+        Me.ucrMultipleLabels.IsMultiline = False
+        Me.ucrMultipleLabels.IsReadOnly = False
+        resources.ApplyResources(Me.ucrMultipleLabels, "ucrMultipleLabels")
+        Me.ucrMultipleLabels.Name = "ucrMultipleLabels"
         '
         'ucrReceiverRecode
         '
@@ -132,30 +139,13 @@ Partial Class dlgRecodeNumeric
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrMultipleLabels
-        '
-        Me.ucrMultipleLabels.AddQuotesIfUnrecognised = True
-        Me.ucrMultipleLabels.IsMultiline = False
-        Me.ucrMultipleLabels.IsReadOnly = False
-        resources.ApplyResources(Me.ucrMultipleLabels, "ucrMultipleLabels")
-        Me.ucrMultipleLabels.Name = "ucrMultipleLabels"
-        '
-        'ucrMultipleNumericRecode
-        '
-        Me.ucrMultipleNumericRecode.AddQuotesIfUnrecognised = True
-        Me.ucrMultipleNumericRecode.IsMultiline = False
-        Me.ucrMultipleNumericRecode.IsReadOnly = False
-        resources.ApplyResources(Me.ucrMultipleNumericRecode, "ucrMultipleNumericRecode")
-        Me.ucrMultipleNumericRecode.Name = "ucrMultipleNumericRecode"
-        '
         'dlgRecodeNumeric
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveRecode)
         Me.Controls.Add(Me.ucrMultipleNumericRecode)
         Me.Controls.Add(Me.ucrMultipleLabels)
-        Me.Controls.Add(Me.ucrInputRecode)
-        Me.Controls.Add(Me.lblNewColumnName)
         Me.Controls.Add(Me.grpClosedOn)
         Me.Controls.Add(Me.lblBreakPoints)
         Me.Controls.Add(Me.ucrReceiverRecode)
@@ -183,8 +173,7 @@ Partial Class dlgRecodeNumeric
     Friend WithEvents grpClosedOn As GroupBox
     Friend WithEvents rdoLeft As RadioButton
     Friend WithEvents rdoRight As RadioButton
-    Friend WithEvents lblNewColumnName As Label
-    Friend WithEvents ucrInputRecode As ucrInputComboBox
     Friend WithEvents ucrMultipleLabels As ucrInputTextBox
     Friend WithEvents ucrMultipleNumericRecode As ucrInputTextBox
+    Friend WithEvents ucrSaveRecode As ucrSave
 End Class
