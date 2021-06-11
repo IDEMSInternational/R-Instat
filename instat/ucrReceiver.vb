@@ -464,7 +464,12 @@ Public Class ucrReceiver
                 ElseIf bParameterIsRFunction AndAlso clsTempParameter.bIsFunction Then
                     clsTempDataParameter = clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction)
                     If clsTempDataParameter IsNot Nothing Then
-                        lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue, strPackageName:="", strFunctionName:="c")
+                        If Not IsNothing(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue) And Not clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue = "" Then
+                            lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue, strPackageName:="", strFunctionName:="c")
+                        ElseIf IsNothing(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).strArgumentValue) Then
+                            lstCurrentVariables = ExtractItemsFromRList(clsTempParameter.clsArgumentCodeStructure.GetParameter(strItemsParameterNameInRFunction).clsArgumentCodeStructure.ToScript, strPackageName:="", strFunctionName:="c")
+                        End If
+
                     End If
                     'TODO Should this the same for other item types?
                     If strType = "column" Then

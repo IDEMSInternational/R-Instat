@@ -21,6 +21,7 @@ Public Class dlgLabelsLevels
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
+    Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub dlgLabels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -59,13 +60,37 @@ Public Class dlgLabelsLevels
         ucrSelectorForLabels.SetParameterIsString()
 
         ucrChkIncludeLevelNumbers.SetText("Include Level Numbers")
+        ucrChkIncludeLevelNumbers.AddParameterPresentCondition(True, "new_levels")
+        ucrChkIncludeLevelNumbers.AddParameterPresentCondition(False, "new_levels", False)
+    End Sub
+
+    Private Sub ResetFunction()
+        clsViewLabels = New RFunction
+        clsViewLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
     End Sub
 
     Private Sub SetDefaults()
-        clsViewLabels = New RFunction
+        ResetFunction()
         ucrSelectorForLabels.Reset()
         ucrSelectorForLabels.Focus()
-        clsViewLabels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_levels")
+
+        If IsNothing(lstRCodeStructure) Then
+
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = "data_book$set_factor_levels" Then
+                    clsViewLabels = lstRCodeStructure(0)
+                Else
+                    MsgBox("This dialogue uses the ""data_book$set_factor_levels"" function only")
+                End If
+            Else
+                MsgBox("Developer error:The Script must be an RFunction")
+            End If
+        End If
+        lstRCodeStructure = Nothing
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsViewLabels)
         AddLevelButtonEnabled()
     End Sub
@@ -84,7 +109,6 @@ Public Class dlgLabelsLevels
 
     Private Sub SetRCodeforControls(bReset As Boolean)
         SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -123,4 +147,14 @@ Public Class dlgLabelsLevels
             clsViewLabels.RemoveParameterByName("new_levels")
         End If
     End Sub
+
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class

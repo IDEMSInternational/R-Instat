@@ -19,6 +19,8 @@ Public Class dlgDummyVariables
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDummyFunction As New RFunction
+    Private lstRCodeStructure As List(Of RCodeStructure)
+
     Private Sub dlgIndicatorVariable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -71,15 +73,33 @@ Public Class dlgDummyVariables
         'ucrSaveDummy.SetIsComboBox()
     End Sub
 
-    Private Sub SetDefaults()
+    Private Sub ResetFunction()
         clsDummyFunction = New RFunction
-
-        'reset
-        ucrSelectorDummyVariable.Reset()
-
-        'set default function
         clsDummyFunction.SetPackageName("dummies")
         clsDummyFunction.SetRCommand("dummy")
+    End Sub
+
+    Private Sub SetDefaults()
+        ResetFunction()
+        ucrSelectorDummyVariable.Reset()
+
+        If IsNothing(lstRCodeStructure) Then
+
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = "dummy" Then
+                    clsDummyFunction = lstRCodeStructure(0)
+                Else
+                    MsgBox("This dialogue uses the ""dummy"" function only")
+                End If
+            Else
+                    MsgBox("Developer error:The Script must be an RFunction")
+            End If
+        End If
+        lstRCodeStructure = Nothing
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsDummyFunction)
         ucrBase.clsRsyntax.SetAssignTo(strAssignToName:="dummy", strTempDataframe:=ucrSelectorDummyVariable.ucrAvailableDataFrames.cboAvailableDataFrames.Text, bAssignToColumnWithoutNames:=True)
     End Sub
@@ -118,4 +138,14 @@ Public Class dlgDummyVariables
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged, ucrChkWithXVariable.ControlContentsChanged, ucrVariateReceiver.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class

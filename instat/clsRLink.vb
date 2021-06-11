@@ -2407,6 +2407,14 @@ Public Class RLink
         ElseIf strCommentFromDialogue.Contains("combine factors") Then
             dlgCombine.lstScriptsRCodeStructure = lstNewRCodeStructures
             dlgCombine.ShowDialog()
+            dlgRecodeFactor.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("dummy variable") Then
+            lstNewRCodeStructures.RemoveAt(0)
+            dlgDummyVariables.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgDummyVariables.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("labels/levels") Then
+            dlgLabelsLevels.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgLabelsLevels.ShowDialog()
         End If
     End Sub
 
