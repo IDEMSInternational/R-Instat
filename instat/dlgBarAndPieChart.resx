@@ -367,7 +367,7 @@
     <value>252, 313</value>
   </data>
   <data name="ucrInputBarChartPositions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>92, 21</value>
+    <value>120, 21</value>
   </data>
   <data name="ucrInputBarChartPositions.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -469,7 +469,7 @@
     <value>0</value>
   </data>
   <data name="ucrReceiverX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 226</value>
+    <value>252, 226</value>
   </data>
   <data name="ucrReceiverX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
