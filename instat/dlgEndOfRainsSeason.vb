@@ -148,7 +148,6 @@ Public Class dlgEndOfRainsSeason
 #End Region
 
     Private Sub dlgEndOfRainsSeason_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
@@ -159,6 +158,7 @@ Public Class dlgEndOfRainsSeason
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

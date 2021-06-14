@@ -18,13 +18,13 @@ Imports instat.Translations
 Public Class dlgSunshine
     Public bFirstLoad As Boolean = True
     Private Sub dlgSunshine_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 432

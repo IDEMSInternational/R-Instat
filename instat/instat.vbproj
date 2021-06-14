@@ -151,8 +151,8 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="TranslateWinForm, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\TranslateWinForm.1.0.1\lib\net461\TranslateWinForm.dll</HintPath>
+    <Reference Include="TranslateWinForm, Version=0.1.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\TranslateWinForm.1.1.2\lib\net461\TranslateWinForm.dll</HintPath>
     </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="unvell.ReoGrid, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -330,6 +330,12 @@
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgSeasonalPlot.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgSelectColumns.Designer.vb">
+      <DependentUpon>dlgSelectColumns.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSelectColumns.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgSetupForDataEntry.Designer.vb">
@@ -2794,6 +2800,9 @@
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgSelectColumns.resx">
+      <DependentUpon>dlgSelectColumns.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgSetupForDataEntry.resx">
       <DependentUpon>dlgSetupForDataEntry.vb</DependentUpon>
     </EmbeddedResource>
@@ -4739,6 +4748,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeomListWithAes.resx">
       <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ucrGeomListWithAes.sw-KE.resx">
       <DependentUpon>ucrGeomListWithAes.vb</DependentUpon>

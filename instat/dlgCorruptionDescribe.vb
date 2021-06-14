@@ -18,13 +18,13 @@ Imports instat.Translations
 Public Class dlgCorruptionDescribe
     Public bFirstLoad As Boolean = True
     Private Sub dlgCorruptionDescribe_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

@@ -113,6 +113,7 @@ Partial Class dlgCumulativeDistribution
         'ucrInputComboScales
         '
         Me.ucrInputComboScales.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboScales.GetSetSelectedIndex = -1
         Me.ucrInputComboScales.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboScales, "ucrInputComboScales")
         Me.ucrInputComboScales.Name = "ucrInputComboScales"

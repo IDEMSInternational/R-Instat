@@ -397,7 +397,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 19</value>
+    <value>67, 19</value>
   </data>
   <data name="ucrInputType.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -448,7 +448,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudKernelShift.Location" type="System.Drawing.Point, System.Drawing">
-    <value>45, 46</value>
+    <value>67, 46</value>
   </data>
   <data name="ucrNudKernelShift.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -565,7 +565,7 @@
     <value>10, 337</value>
   </data>
   <data name="ucrChkOmitMissingValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 20</value>
+    <value>256, 20</value>
   </data>
   <data name="ucrChkOmitMissingValues.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>

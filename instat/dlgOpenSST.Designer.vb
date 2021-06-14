@@ -43,10 +43,6 @@ Partial Class dlgOpenSST
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
         Me.lblSSTName = New System.Windows.Forms.Label()
         Me.grpCSV = New System.Windows.Forms.GroupBox()
-        Me.ucrInputNAStrings = New instat.ucrInputTextBox()
-        Me.ucrInputDecimal = New instat.ucrInputComboBox()
-        Me.ucrInputSeparator = New instat.ucrInputComboBox()
-        Me.ucrInputEncoding = New instat.ucrInputComboBox()
         Me.lblEncoding = New System.Windows.Forms.Label()
         Me.nudSkip = New System.Windows.Forms.NumericUpDown()
         Me.lblSeparator = New System.Windows.Forms.Label()
@@ -56,11 +52,15 @@ Partial Class dlgOpenSST
         Me.chkStringsAsFactors = New System.Windows.Forms.CheckBox()
         Me.nudDataFrom = New System.Windows.Forms.NumericUpDown()
         Me.lblDataFromRow = New System.Windows.Forms.Label()
+        Me.lblLocationName = New System.Windows.Forms.Label()
+        Me.ucrInputNameLocation = New instat.ucrInputTextBox()
+        Me.ucrInputNAStrings = New instat.ucrInputTextBox()
+        Me.ucrInputDecimal = New instat.ucrInputComboBox()
+        Me.ucrInputSeparator = New instat.ucrInputComboBox()
+        Me.ucrInputEncoding = New instat.ucrInputComboBox()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputName = New instat.ucrInputTextBox()
         Me.ucrBaseOpenSST = New instat.ucrButtons()
-        Me.lblLocationName = New System.Windows.Forms.Label()
-        Me.ucrInputNameLocation = New instat.ucrInputTextBox()
         Me.grpCSV.SuspendLayout()
         CType(Me.nudSkip, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.nudDataFrom, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -100,35 +100,6 @@ Partial Class dlgOpenSST
         Me.grpCSV.Controls.Add(Me.chkStringsAsFactors)
         Me.grpCSV.Name = "grpCSV"
         Me.grpCSV.TabStop = False
-        '
-        'ucrInputNAStrings
-        '
-        Me.ucrInputNAStrings.AddQuotesIfUnrecognised = True
-        Me.ucrInputNAStrings.IsMultiline = False
-        Me.ucrInputNAStrings.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNAStrings, "ucrInputNAStrings")
-        Me.ucrInputNAStrings.Name = "ucrInputNAStrings"
-        '
-        'ucrInputDecimal
-        '
-        Me.ucrInputDecimal.AddQuotesIfUnrecognised = True
-        Me.ucrInputDecimal.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDecimal, "ucrInputDecimal")
-        Me.ucrInputDecimal.Name = "ucrInputDecimal"
-        '
-        'ucrInputSeparator
-        '
-        Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
-        Me.ucrInputSeparator.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
-        Me.ucrInputSeparator.Name = "ucrInputSeparator"
-        '
-        'ucrInputEncoding
-        '
-        Me.ucrInputEncoding.AddQuotesIfUnrecognised = True
-        Me.ucrInputEncoding.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputEncoding, "ucrInputEncoding")
-        Me.ucrInputEncoding.Name = "ucrInputEncoding"
         '
         'lblEncoding
         '
@@ -184,6 +155,52 @@ Partial Class dlgOpenSST
         Me.lblDataFromRow.Name = "lblDataFromRow"
         Me.lblDataFromRow.Tag = "Data_From_Row:"
         '
+        'lblLocationName
+        '
+        resources.ApplyResources(Me.lblLocationName, "lblLocationName")
+        Me.lblLocationName.Name = "lblLocationName"
+        Me.lblLocationName.Tag = "Location_Data_Frame_Name:"
+        '
+        'ucrInputNameLocation
+        '
+        Me.ucrInputNameLocation.AddQuotesIfUnrecognised = True
+        Me.ucrInputNameLocation.IsMultiline = False
+        Me.ucrInputNameLocation.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNameLocation, "ucrInputNameLocation")
+        Me.ucrInputNameLocation.Name = "ucrInputNameLocation"
+        '
+        'ucrInputNAStrings
+        '
+        Me.ucrInputNAStrings.AddQuotesIfUnrecognised = True
+        Me.ucrInputNAStrings.IsMultiline = False
+        Me.ucrInputNAStrings.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNAStrings, "ucrInputNAStrings")
+        Me.ucrInputNAStrings.Name = "ucrInputNAStrings"
+        '
+        'ucrInputDecimal
+        '
+        Me.ucrInputDecimal.AddQuotesIfUnrecognised = True
+        Me.ucrInputDecimal.GetSetSelectedIndex = -1
+        Me.ucrInputDecimal.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDecimal, "ucrInputDecimal")
+        Me.ucrInputDecimal.Name = "ucrInputDecimal"
+        '
+        'ucrInputSeparator
+        '
+        Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparator.GetSetSelectedIndex = -1
+        Me.ucrInputSeparator.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
+        Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        '
+        'ucrInputEncoding
+        '
+        Me.ucrInputEncoding.AddQuotesIfUnrecognised = True
+        Me.ucrInputEncoding.GetSetSelectedIndex = -1
+        Me.ucrInputEncoding.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputEncoding, "ucrInputEncoding")
+        Me.ucrInputEncoding.Name = "ucrInputEncoding"
+        '
         'ucrInputFilePath
         '
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
@@ -204,20 +221,6 @@ Partial Class dlgOpenSST
         '
         resources.ApplyResources(Me.ucrBaseOpenSST, "ucrBaseOpenSST")
         Me.ucrBaseOpenSST.Name = "ucrBaseOpenSST"
-        '
-        'lblLocationName
-        '
-        resources.ApplyResources(Me.lblLocationName, "lblLocationName")
-        Me.lblLocationName.Name = "lblLocationName"
-        Me.lblLocationName.Tag = "Location_Data_Frame_Name:"
-        '
-        'ucrInputNameLocation
-        '
-        Me.ucrInputNameLocation.AddQuotesIfUnrecognised = True
-        Me.ucrInputNameLocation.IsMultiline = False
-        Me.ucrInputNameLocation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNameLocation, "ucrInputNameLocation")
-        Me.ucrInputNameLocation.Name = "ucrInputNameLocation"
         '
         'dlgOpenSST
         '

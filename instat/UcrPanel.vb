@@ -43,7 +43,7 @@ Public Class UcrPanel
 
     Public Sub AddRadioButton(rdoTemp As RadioButton, Optional strValue As String = "")
         AddRadioButtonRange({rdoTemp})
-        If strValue <> "" Then
+        If strValue <> "" AndAlso Not IsNothing(GetParameter()) Then
             dctRadioButtonValues.Add(rdoTemp, strValue)
             AddParameterValuesCondition(rdoTemp, GetParameter().strArgumentName, strValue)
         End If

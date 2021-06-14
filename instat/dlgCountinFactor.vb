@@ -21,7 +21,6 @@ Public Class dlgCountinFactor
     Private clsDefaultFunction As New RFunction
 
     Private Sub dlgCountinFactor_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,6 +31,7 @@ Public Class dlgCountinFactor
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -48,7 +48,7 @@ Public Class dlgCountinFactor
 
         ' ucrNewColName
         ucrNewColName.SetIsComboBox()
-        ucrNewColName.SetPrefix("Count")
+        ucrNewColName.SetPrefix("count")
         ucrNewColName.SetSaveTypeAsColumn()
         ucrNewColName.SetDataFrameSelector(ucrCountSelector.ucrAvailableDataFrames)
         ucrNewColName.SetLabelText("New Column Name:")

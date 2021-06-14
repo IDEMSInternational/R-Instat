@@ -22,7 +22,6 @@ Public Class dlgImportOpenRefine
     Private clsImportFunction As New RFunction
 
     Private Sub dlgImportOpenRefine_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -32,6 +31,7 @@ Public Class dlgImportOpenRefine
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
