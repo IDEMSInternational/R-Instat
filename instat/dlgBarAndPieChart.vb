@@ -247,19 +247,11 @@ Public Class dlgBarAndPieChart
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeomBarFunction, clsNewGlobalAesFunc:=clsBarAesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrBarChartSelector, bApplyAesGlobally:=True, bReset:=bResetBarLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetBarLayerSubdialog = False
-        For Each clsParam In clsBarAesFunction.clsParameters
-            If clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForBarChart.bSingleVariable) Then
-                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
-                    ucrVariablesAsFactorForBarChart.Clear()
-                Else ucrVariablesAsFactorForBarChart.Add(clsParam.strArgumentValue)
-                End If
-            ElseIf clsParam.strArgumentName = "x" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForBarChart.bSingleVariable) Then
-                If clsParam.strArgumentValue = (Chr(34) & Chr(34)) Then
-                    ucrVariablesAsFactorForBarChart.Clear()
-                Else ucrVariablesAsFactorForBarChart.Add(clsParam.strArgumentValue)
-                End If
-            End If
-        Next
+        If clsBarAesFunction.ContainsParameter("x") Then
+            ucrVariablesAsFactorForBarChart.Add(clsBarAesFunction.GetParameter("x").strArgumentValue)
+        Else
+            ucrVariablesAsFactorForBarChart.Clear()
+        End If
         If clsBarAesFunction.ContainsParameter("fill") Then
             ucrReceiverByFactor.Add(clsBarAesFunction.GetParameter("fill").strArgumentValue)
         Else
