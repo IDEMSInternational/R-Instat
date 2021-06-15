@@ -354,87 +354,45 @@ Public Class sdgPlots
         ucrChkAnnotation.AddParameterPresentCondition(False, "annotate", False)
 
         ucrChkUseDataframe.SetText("Use Dataframe")
-        ucrChkUseDataframe.AddParameterIsRFunctionCondition({True}, "x")
-        ucrChkUseDataframe.AddParameterIsRFunctionCondition({False}, "x", False)
 
-        ucrReceiverX.SetParameter(New RParameter("x", 1))
         ucrReceiverX.SetParameterIsRFunction()
         ucrReceiverX.Selector = ucrSelectorAnnotation
 
-        ucrReceiverY.SetParameter(New RParameter("y", 2))
         ucrReceiverY.SetParameterIsRFunction()
         ucrReceiverY.Selector = ucrSelectorAnnotation
 
-        ucrReceiverYmin.SetParameter(New RParameter("ymin", 15))
-        ucrReceiverYmin.SetParameterIsRFunction()
-        ucrReceiverYmin.Selector = ucrSelectorAnnotation
-
-        ucrReceiverXmin.SetParameter(New RParameter("xmin", 4))
         ucrReceiverXmin.SetParameterIsRFunction()
         ucrReceiverXmin.Selector = ucrSelectorAnnotation
 
-        ucrReceiverXmax.SetParameter(New RParameter("xmax", 7))
+        ucrReceiverYmin.SetParameterIsRFunction()
+        ucrReceiverYmin.Selector = ucrSelectorAnnotation
+
         ucrReceiverXmax.SetParameterIsRFunction()
         ucrReceiverXmax.Selector = ucrSelectorAnnotation
 
-        ucrReceiverYmax.SetParameter(New RParameter("ymax", 8))
+        ucrReceiverXend.SetParameterIsRFunction()
+        ucrReceiverXend.Selector = ucrSelectorAnnotation
+
+        ucrReceiverYend.SetParameterIsRFunction()
+        ucrReceiverYend.Selector = ucrSelectorAnnotation
+
         ucrReceiverYmax.SetParameterIsRFunction()
         ucrReceiverYmax.Selector = ucrSelectorAnnotation
 
-        ucrInputX.SetParameter(New RParameter("x", 1))
-        ucrInputX.SetLinkedDisplayControl(lblX)
-        ucrInputX.SetRDefault("NULL")
         ucrInputX.AddQuotesIfUnrecognised = False
 
-        ucrInputY.SetParameter(New RParameter("y", 2))
-        ucrInputY.SetLinkedDisplayControl(lblY)
-        ucrInputY.SetRDefault("NULL")
         ucrInputY.AddQuotesIfUnrecognised = False
 
-        ucrInputYmin.SetParameter(New RParameter("ymin", 3))
-        ucrInputYmin.SetLinkedDisplayControl(lblYmin)
-        ucrInputYmin.SetRDefault("NULL")
         ucrInputYmin.AddQuotesIfUnrecognised = False
 
-        ucrInputXmin.SetParameter(New RParameter("xmin", 4))
-        ucrInputXmin.SetLinkedDisplayControl(lblXmin)
-        ucrInputXmin.SetRDefault("NULL")
         ucrInputXmin.AddQuotesIfUnrecognised = False
 
-        ucrInputXend.SetParameter(New RParameter("xend", 5))
-        ucrInputXend.SetLinkedDisplayControl(lblXend)
-        ucrInputXend.SetRDefault("NULL")
         ucrInputXend.AddQuotesIfUnrecognised = False
 
-        ucrInputYend.SetParameter(New RParameter("yend", 6))
-        ucrInputYend.SetLinkedDisplayControl(lblYend)
-        ucrInputYend.SetRDefault("NULL")
         ucrInputYend.AddQuotesIfUnrecognised = False
 
-        ucrInputXmax.SetParameter(New RParameter("xmax", 7))
-        ucrInputXmax.SetLinkedDisplayControl(lblXmax)
-        ucrInputXmax.SetRDefault("NULL")
         ucrInputXmax.AddQuotesIfUnrecognised = False
 
-        ucrInputRectXmax.SetParameter(New RParameter("xmax", 7))
-        ucrInputRectXmax.SetRDefault("NULL")
-        ucrInputRectXmax.AddQuotesIfUnrecognised = False
-
-        ucrInputRectXmin.SetParameter(New RParameter("xmin", 4))
-        ucrInputRectXmin.SetRDefault("NULL")
-        ucrInputRectXmin.AddQuotesIfUnrecognised = False
-
-        ucrInputRectYmax.SetParameter(New RParameter("ymax", 8))
-        ucrInputRectYmax.SetRDefault("NULL")
-        ucrInputRectYmax.AddQuotesIfUnrecognised = False
-
-        ucrInputRectYmin.SetParameter(New RParameter("ymin", 3))
-        ucrInputRectYmin.SetRDefault("NULL")
-        ucrInputRectYmin.AddQuotesIfUnrecognised = False
-
-        ucrInputYmax.SetParameter(New RParameter("ymax", 8))
-        ucrInputYmax.SetLinkedDisplayControl(lblYmax)
-        ucrInputYmax.SetRDefault("NULL")
         ucrInputYmax.AddQuotesIfUnrecognised = False
 
         ucrNudLinetype.SetParameter(New RParameter("linetype", 9))
@@ -522,19 +480,14 @@ Public Class sdgPlots
         ucrInputLabel.SetLinkedDisplayControl(lblLabel)
         ucrInputLabel.SetRDefault("")
 
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputFill, {"rect", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputY, ucrInputX}, {"text", "curve", "segment", "label", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputYend, ucrInputXend}, {"segment", "curve", "text", "label"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputYmax, ucrInputXmax, ucrInputXmin, ucrInputYmin}, {"text", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrNudLinetype, {"segment", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls({ucrNudCurvature, ucrNudAngle}, {"curve"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLineend, {"segment"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrNudCrossbarFatten, {"crossbar"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls({ucrNudShape, ucrNudPointrangeFatten}, {"pointrange"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLabel, {"text", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrChkUseDataframe, {"rect"}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkUseDataframe.AddToLinkedControls({ucrInputRectYmin, ucrInputRectYmax, ucrInputRectXmin, ucrInputRectXmax}, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkUseDataframe.AddToLinkedControls({ucrReceiverXmax, ucrReceiverXmin, ucrReceiverYmax, ucrReceiverYmin}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputFill, {"rect", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrNudLinetype, {"segment", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls({ucrNudCurvature, ucrNudAngle}, {"curve"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLineend, {"segment"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrNudCrossbarFatten, {"crossbar"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls({ucrNudShape, ucrNudPointrangeFatten}, {"pointrange"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLabel, {"text", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrChkUseDataframe, {"rect", "text"}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkUseDataframe.AddToLinkedControls(ucrSelectorAnnotation, {True}, bNewLinkedHideIfParameterMissing:=True)
 
         'Colour
@@ -649,8 +602,6 @@ Public Class sdgPlots
             ucrSelectorAnnotation.SetDataframe(strDataFrame, False)
             ucrFacetSelector.SetDataframe(strDataFrame, False)
         End If
-
-        ucrSelectorAnnotation.SetLinkedSelector(ucrBaseSelector)
         ucrFacetSelector.SetLinkedSelector(ucrBaseSelector)
         clsYScaleDateFunction = clsNewYScaleDateFunction
         clsXScaleDateFunction = clsNewXScaleDateFunction
@@ -723,36 +674,9 @@ Public Class sdgPlots
 
         'Annnotation
         ucrChkAnnotation.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
-        ucrInputX.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputY.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputXmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputYmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputYmin.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputXmin.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputXend.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputYend.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrNudAlpha.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrNudSize.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudLinetype.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudAngle.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudCurvature.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudCrossbarFatten.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudPointrangeFatten.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputLineend.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputLabel.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrNudShape.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputFill.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputColour.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrReceiverY.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrReceiverX.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrReceiverXmin.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrReceiverXmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrReceiverYmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrReceiverYmin.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputRectXmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputRectXmin.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputRectYmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
-        ucrInputRectYmin.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputAnnotationGeoms.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         'axis controls
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
@@ -801,6 +725,20 @@ Public Class sdgPlots
         ucrChkColourDiscrete.Enabled = bNewEnableDiscrete
         ucrChkFillDiscrete.Enabled = bNewEnableDiscrete
 
+        If bReset Then
+            ucrChkUseDataframe.Checked = False
+
+            ucrSelectorAnnotation.Reset()
+            ucrInputX.SetText("NULL")
+            ucrInputY.SetText("NULL")
+            ucrInputYend.SetText("NULL")
+            ucrInputXend.SetText("NULL")
+            ucrInputXmin.SetText("NULL")
+            ucrInputXmax.SetText("NULL")
+            ucrInputYmax.SetText("NULL")
+            ucrInputYmin.SetText("NULL")
+            AnnotationInputVisibilityAndEnableControl()
+        End If
     End Sub
 
     Private Sub SetFacetParameters()
@@ -1178,5 +1116,299 @@ Public Class sdgPlots
             clsBaseOperator.RemoveParameterByName("annotate")
             grpAnnotation.Visible = False
         End If
+    End Sub
+
+    Private Sub Rect_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAnnotationGeoms.ControlValueChanged,
+        ucrChkUseDataframe.ControlValueChanged, ucrReceiverYmin.ControlValueChanged, ucrReceiverXmin.ControlValueChanged,
+        ucrReceiverXmax.ControlValueChanged, ucrReceiverYmax.ControlValueChanged, ucrInputXmax.ControlValueChanged,
+        ucrInputXmin.ControlValueChanged, ucrInputYmax.ControlValueChanged, ucrInputYmin.ControlValueChanged,
+        ucrReceiverX.ControlValueChanged, ucrReceiverY.ControlValueChanged, ucrInputXend.ControlContentsChanged,
+        ucrInputYend.ControlValueChanged, ucrReceiverXend.ControlValueChanged, ucrReceiverYend.ControlValueChanged
+
+        AnnotationInputVisibilityAndEnableControl()
+
+        Select Case ucrInputAnnotationGeoms.GetText()
+            Case "linerange", "errorbar", "crossbar", "pointrange", "rect", "text"
+                ucrInputXmax.Enabled = True
+                ucrInputXmin.Enabled = True
+                ucrInputYmin.Enabled = True
+                ucrInputYmax.Enabled = True
+                Select Case ucrInputAnnotationGeoms.GetText()
+                    Case "linerange", "errorbar", "crossbar", "pointrange"
+                        AddRemoveXYMinMaxParameters()
+                    Case "rect", "text"
+                        TestXYMinControlOptions()
+                End Select
+            Case Else
+                ucrInputXmax.Enabled = False
+                ucrInputXmin.Enabled = False
+                ucrInputYmin.Enabled = False
+                ucrInputYmax.Enabled = False
+                clsAnnotateFunction.RemoveParameterByName("ymin")
+                clsAnnotateFunction.RemoveParameterByName("xmin")
+                clsAnnotateFunction.RemoveParameterByName("xmax")
+                clsAnnotateFunction.RemoveParameterByName("ymax")
+        End Select
+        TextXYControlOptions()
+        TestXYendControlOptions()
+    End Sub
+
+    Private Sub TestXYMinControlOptions()
+        If ucrChkUseDataframe.Checked Then
+            If ucrInputAnnotationGeoms.GetText() = "rect" Then
+                ucrReceiverXmin.SetMeAsReceiver()
+            Else
+                ucrReceiverX.SetMeAsReceiver()
+            End If
+
+            If Not ucrReceiverYmin.IsEmpty Then
+                'when the textbox empty the parameter is not updated.Removing the parameter before updating is the temporary fix
+                clsAnnotateFunction.RemoveParameterByName("ymin")
+                clsAnnotateFunction.AddParameter("ymin", clsRFunctionParameter:=ucrReceiverYmin.GetVariables, iPosition:=3)
+            Else
+                clsAnnotateFunction.RemoveParameterByName("ymin")
+            End If
+
+            If Not ucrReceiverXmin.IsEmpty Then
+                'when the textbox empty the parameter is not updated.Removing the parameter before updating is the temporary fix
+                clsAnnotateFunction.RemoveParameterByName("xmin")
+                clsAnnotateFunction.AddParameter("xmin", clsRFunctionParameter:=ucrReceiverXmin.GetVariables, iPosition:=4)
+            Else
+                clsAnnotateFunction.RemoveParameterByName("xmin")
+            End If
+
+            If Not ucrReceiverXmax.IsEmpty Then
+                'when the textbox empty the parameter is not updated.Removing the parameter before updating is the temporary fix
+                clsAnnotateFunction.RemoveParameterByName("xmax")
+                clsAnnotateFunction.AddParameter("xmax", clsRFunctionParameter:=ucrReceiverXmax.GetVariables, iPosition:=7)
+            Else
+                clsAnnotateFunction.RemoveParameterByName("xmax")
+            End If
+
+            If Not ucrReceiverYmax.IsEmpty Then
+                'when the textbox empty the parameter is not updated.Removing the parameter before updating is the temporary fix
+                clsAnnotateFunction.RemoveParameterByName("ymax")
+                clsAnnotateFunction.AddParameter("ymax", clsRFunctionParameter:=ucrReceiverYmax.GetVariables, iPosition:=8)
+            Else
+                clsAnnotateFunction.RemoveParameterByName("ymax")
+            End If
+        Else
+            AddRemoveXYMinMaxParameters()
+        End If
+    End Sub
+
+    Private Sub AddRemoveXYMinMaxParameters()
+        If Not ucrInputYmin.GetText() = "NULL" Then
+            'when the textbox empty the parameter is not updated.Removing the parameter before updating is the temporary fix
+            clsAnnotateFunction.RemoveParameterByName("ymin")
+            clsAnnotateFunction.AddParameter("ymin", ucrInputYmin.GetText(), iPosition:=3)
+        Else
+            clsAnnotateFunction.RemoveParameterByName("ymin")
+        End If
+
+        If Not ucrInputXmin.GetText() = "NULL" Then
+            'when the textbox empty the parameter is not updated.Removing the parameter before updating is the temporary fix
+            clsAnnotateFunction.RemoveParameterByName("xmin")
+            clsAnnotateFunction.AddParameter("xmin", ucrInputXmin.GetText, iPosition:=4)
+        Else
+            clsAnnotateFunction.RemoveParameterByName("xmin")
+        End If
+
+        If Not ucrInputXmax.GetText() = "NULL" Then
+            'when the textbox empty the parameter is not updated.Removing the parameter before updating is the temporary fix
+            clsAnnotateFunction.RemoveParameterByName("xmax")
+            clsAnnotateFunction.AddParameter("xmax", ucrInputXmax.GetText(), iPosition:=7)
+        Else
+            clsAnnotateFunction.RemoveParameterByName("xmax")
+        End If
+
+        If Not ucrInputYmax.GetText() = "NULL" Then
+            'when the textbox empty the parameter is not updated.Removing the parameter before updating is the temporary fix
+            clsAnnotateFunction.RemoveParameterByName("ymax")
+            clsAnnotateFunction.AddParameter("ymax", ucrInputYmax.GetText(), iPosition:=8)
+        Else
+            clsAnnotateFunction.RemoveParameterByName("ymax")
+        End If
+    End Sub
+
+    Private Sub TestXYendControlOptions()
+        Select Case ucrInputAnnotationGeoms.GetText()
+            Case "segment", "curve", "label"
+                AddRemoveXYEndParameter()
+            Case "text"
+                If ucrChkUseDataframe.Checked Then
+                    If Not ucrReceiverXend.IsEmpty Then
+                        clsAnnotateFunction.AddParameter("xend", clsRFunctionParameter:=ucrReceiverXend.GetVariables, iPosition:=5)
+                    Else
+                        clsAnnotateFunction.RemoveParameterByName("xend")
+                    End If
+                    If Not ucrReceiverYend.IsEmpty Then
+                        clsAnnotateFunction.AddParameter("yend", clsRFunctionParameter:=ucrReceiverYend.GetVariables, iPosition:=6)
+                    Else
+                        clsAnnotateFunction.RemoveParameterByName("yend")
+                    End If
+                Else
+                    AddRemoveXYEndParameter()
+                End If
+            Case Else
+                clsAnnotateFunction.RemoveParameterByName("xend")
+                clsAnnotateFunction.RemoveParameterByName("yend")
+        End Select
+    End Sub
+    Private Sub AddRemoveXYEndParameter()
+        If Not ucrInputXend.GetText() = "NULL" Then
+            'when the textbox empty the parameter is not updated.Removing the parameter before updating is the temporary fix
+            clsAnnotateFunction.RemoveParameterByName("xend")
+            clsAnnotateFunction.AddParameter("xend", strParameterValue:=ucrInputXend.GetText(), iPosition:=5)
+        Else
+            clsAnnotateFunction.RemoveParameterByName("xend")
+        End If
+
+        If Not ucrInputYend.GetText() = "NULL" Then
+            'when the textbox empty the parameter is not updated.Removing the parameter before updating is the temporary fix
+            clsAnnotateFunction.RemoveParameterByName("yend")
+            clsAnnotateFunction.AddParameter("yend", ucrInputYend.GetText(), iPosition:=6)
+        Else
+            clsAnnotateFunction.RemoveParameterByName("yend")
+        End If
+    End Sub
+
+    Private Sub TextXYControlOptions()
+        Select Case ucrInputAnnotationGeoms.GetText()
+            Case "curve", "segment", "label", "linerange", "errorbar", "crossbar", "pointrange"
+                AddRemoveXYParameter()
+
+            Case "text"
+                If ucrChkUseDataframe.Checked Then
+                    If Not ucrReceiverX.IsEmpty Then
+                        clsAnnotateFunction.AddParameter("x", clsRFunctionParameter:=ucrReceiverX.GetVariables, iPosition:=1)
+                    Else
+                        clsAnnotateFunction.RemoveParameterByName("x")
+                    End If
+                    If Not ucrReceiverY.IsEmpty Then
+                        clsAnnotateFunction.AddParameter("y", clsRFunctionParameter:=ucrReceiverY.GetVariables, iPosition:=2)
+                    Else
+                        clsAnnotateFunction.RemoveParameterByName("y")
+                    End If
+                Else
+                    AddRemoveXYParameter()
+                End If
+            Case Else
+                clsAnnotateFunction.RemoveParameterByName("x")
+                clsAnnotateFunction.RemoveParameterByName("y")
+        End Select
+    End Sub
+
+    Private Sub AddRemoveXYParameter()
+        If Not ucrInputX.GetText() = "NULL" Then
+            'when the textbox empty the parameter is not updated.Removing the parameter before updating is the temporary fix
+            clsAnnotateFunction.RemoveParameterByName("x")
+            clsAnnotateFunction.AddParameter("x", ucrInputX.GetText(), iPosition:=1)
+        Else
+            clsAnnotateFunction.RemoveParameterByName("x")
+        End If
+
+        If Not ucrInputY.GetText() = "NULL" Then
+            'when the textbox empty the parameter is not updated.Removing the parameter before updating is the temporary fix
+            clsAnnotateFunction.RemoveParameterByName("y")
+            clsAnnotateFunction.AddParameter("y", ucrInputY.GetText(), iPosition:=2)
+        Else
+            clsAnnotateFunction.RemoveParameterByName("y")
+        End If
+    End Sub
+
+    Private Sub AnnotationInputVisibilityAndEnableControl()
+        Dim bVisible As Boolean = ucrInputAnnotationGeoms.GetText = "text" AndAlso Not ucrChkUseDataframe.Checked
+        Select Case ucrInputAnnotationGeoms.GetText
+            Case "curve", "segment", "label", "linerange", "errorbar", "crossbar", "pointrange", "text"
+                ucrInputX.Enabled = True
+                ucrInputY.Enabled = True
+                ucrReceiverX.Enabled = True
+                ucrReceiverY.Enabled = True
+                Select Case ucrInputAnnotationGeoms.GetText
+                    Case "curve", "segment", "label", "linerange", "errorbar", "crossbar", "pointrange"
+                        ucrInputX.Visible = True
+                        ucrInputY.Visible = True
+                        ucrReceiverX.Visible = False
+                        ucrReceiverY.Visible = False
+                    Case "text"
+                        ucrInputX.Visible = bVisible
+                        ucrInputY.Visible = bVisible
+                        ucrReceiverX.Visible = Not bVisible
+                        ucrReceiverY.Visible = Not bVisible
+                End Select
+            Case Else
+                ucrInputX.Enabled = False
+                ucrInputY.Enabled = False
+                ucrReceiverX.Enabled = False
+                ucrReceiverY.Enabled = False
+        End Select
+
+        Select Case ucrInputAnnotationGeoms.GetText
+            Case "segment", "curve", "label", "text"
+                ucrInputYend.Enabled = True
+                ucrInputXend.Enabled = True
+                ucrReceiverXend.Enabled = True
+                ucrReceiverYend.Enabled = True
+                Select Case ucrInputAnnotationGeoms.GetText
+                    Case "segment", "curve", "label"
+                        ucrInputYend.Visible = True
+                        ucrInputXend.Visible = True
+                        ucrReceiverXend.Visible = False
+                        ucrReceiverYend.Visible = False
+                    Case "text"
+                        ucrInputYend.Visible = bVisible
+                        ucrInputXend.Visible = bVisible
+                        ucrReceiverXend.Visible = Not bVisible
+                        ucrReceiverYend.Visible = Not bVisible
+                End Select
+            Case Else
+                ucrInputYend.Enabled = False
+                ucrInputXend.Enabled = False
+                ucrReceiverXend.Enabled = False
+                ucrReceiverYend.Enabled = False
+        End Select
+
+        Select Case ucrInputAnnotationGeoms.GetText()
+            Case "linerange", "errorbar", "crossbar", "pointrange", "rect", "text"
+                ucrInputXmin.Enabled = True
+                ucrInputXmax.Enabled = True
+                ucrInputYmax.Enabled = True
+                ucrInputYmin.Enabled = True
+                ucrReceiverXmin.Enabled = True
+                ucrReceiverXmax.Enabled = True
+                ucrReceiverYmax.Enabled = True
+                ucrReceiverYmin.Enabled = True
+                Select Case ucrInputAnnotationGeoms.GetText()
+                    Case "linerange", "errorbar", "crossbar", "pointrange"
+                        ucrInputXmin.Visible = True
+                        ucrInputXmax.Visible = True
+                        ucrInputYmax.Visible = True
+                        ucrInputYmin.Visible = True
+                        ucrReceiverXmin.Visible = False
+                        ucrReceiverXmax.Visible = False
+                        ucrReceiverYmax.Visible = False
+                        ucrReceiverYmin.Visible = False
+                    Case "rect", "text"
+                        Dim bMinMaxVisible = Not ucrChkUseDataframe.Checked AndAlso (ucrInputAnnotationGeoms.GetText() = "text" OrElse ucrInputAnnotationGeoms.GetText() = "rect")
+                        ucrInputXmin.Visible = bMinMaxVisible
+                        ucrInputXmax.Visible = bMinMaxVisible
+                        ucrInputYmax.Visible = bMinMaxVisible
+                        ucrInputYmin.Visible = bMinMaxVisible
+                        ucrReceiverXmin.Visible = Not bMinMaxVisible
+                        ucrReceiverXmax.Visible = Not bMinMaxVisible
+                        ucrReceiverYmax.Visible = Not bMinMaxVisible
+                        ucrReceiverYmin.Visible = Not bMinMaxVisible
+                End Select
+            Case Else
+                ucrInputXmin.Enabled = False
+                ucrInputXmax.Enabled = False
+                ucrInputYmax.Enabled = False
+                ucrInputYmin.Enabled = False
+                ucrReceiverXmin.Enabled = False
+                ucrReceiverXmax.Enabled = False
+                ucrReceiverYmax.Enabled = False
+                ucrReceiverYmin.Enabled = False
+        End Select
     End Sub
 End Class

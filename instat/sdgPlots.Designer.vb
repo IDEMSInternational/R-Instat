@@ -136,10 +136,12 @@ Partial Class sdgPlots
         Me.tbpAnnotation = New System.Windows.Forms.TabPage()
         Me.ucrChkAnnotation = New instat.ucrCheck()
         Me.grpAnnotation = New System.Windows.Forms.GroupBox()
-        Me.ucrInputRectXmin = New instat.ucrInputTextBox()
-        Me.ucrInputRectXmax = New instat.ucrInputTextBox()
-        Me.ucrInputRectYmax = New instat.ucrInputTextBox()
-        Me.ucrInputRectYmin = New instat.ucrInputTextBox()
+        Me.ucrReceiverYend = New instat.ucrReceiverSingle()
+        Me.ucrReceiverXend = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYmin = New instat.ucrReceiverSingle()
+        Me.ucrReceiverXmin = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYmax = New instat.ucrReceiverSingle()
+        Me.ucrReceiverXmax = New instat.ucrReceiverSingle()
         Me.ucrChkUseDataframe = New instat.ucrCheck()
         Me.ucrSelectorAnnotation = New instat.ucrSelectorByDataFrameAddRemove()
         Me.lblCurvature = New System.Windows.Forms.Label()
@@ -155,8 +157,6 @@ Partial Class sdgPlots
         Me.ucrNudSize = New instat.ucrNud()
         Me.lblColour = New System.Windows.Forms.Label()
         Me.ucrInputColour = New instat.ucrInputComboBox()
-        Me.ucrInputX = New instat.ucrInputTextBox()
-        Me.ucrInputY = New instat.ucrInputTextBox()
         Me.lblY = New System.Windows.Forms.Label()
         Me.lblX = New System.Windows.Forms.Label()
         Me.lblFill = New System.Windows.Forms.Label()
@@ -184,12 +184,10 @@ Partial Class sdgPlots
         Me.ucrInputLabel = New instat.ucrInputTextBox()
         Me.ucrInputLineend = New instat.ucrInputComboBox()
         Me.ucrInputFill = New instat.ucrInputComboBox()
+        Me.ucrInputY = New instat.ucrInputTextBox()
+        Me.ucrInputX = New instat.ucrInputTextBox()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
-        Me.ucrReceiverXmin = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYmin = New instat.ucrReceiverSingle()
-        Me.ucrReceiverXmax = New instat.ucrReceiverSingle()
-        Me.ucrReceiverYmax = New instat.ucrReceiverSingle()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
@@ -949,14 +947,12 @@ Partial Class sdgPlots
         '
         'grpAnnotation
         '
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverYend)
+        Me.grpAnnotation.Controls.Add(Me.ucrReceiverXend)
         Me.grpAnnotation.Controls.Add(Me.ucrReceiverYmin)
         Me.grpAnnotation.Controls.Add(Me.ucrReceiverXmin)
         Me.grpAnnotation.Controls.Add(Me.ucrReceiverYmax)
         Me.grpAnnotation.Controls.Add(Me.ucrReceiverXmax)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputRectXmin)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputRectXmax)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputRectYmax)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputRectYmin)
         Me.grpAnnotation.Controls.Add(Me.ucrChkUseDataframe)
         Me.grpAnnotation.Controls.Add(Me.ucrSelectorAnnotation)
         Me.grpAnnotation.Controls.Add(Me.lblCurvature)
@@ -972,8 +968,6 @@ Partial Class sdgPlots
         Me.grpAnnotation.Controls.Add(Me.ucrNudSize)
         Me.grpAnnotation.Controls.Add(Me.lblColour)
         Me.grpAnnotation.Controls.Add(Me.ucrInputColour)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputX)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputY)
         Me.grpAnnotation.Controls.Add(Me.lblY)
         Me.grpAnnotation.Controls.Add(Me.lblX)
         Me.grpAnnotation.Controls.Add(Me.lblFill)
@@ -1001,43 +995,67 @@ Partial Class sdgPlots
         Me.grpAnnotation.Controls.Add(Me.ucrInputLabel)
         Me.grpAnnotation.Controls.Add(Me.ucrInputLineend)
         Me.grpAnnotation.Controls.Add(Me.ucrInputFill)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputY)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputX)
         Me.grpAnnotation.Controls.Add(Me.ucrReceiverX)
         Me.grpAnnotation.Controls.Add(Me.ucrReceiverY)
         resources.ApplyResources(Me.grpAnnotation, "grpAnnotation")
         Me.grpAnnotation.Name = "grpAnnotation"
         Me.grpAnnotation.TabStop = False
         '
-        'ucrInputRectXmin
+        'ucrReceiverYend
         '
-        Me.ucrInputRectXmin.AddQuotesIfUnrecognised = True
-        Me.ucrInputRectXmin.IsMultiline = False
-        Me.ucrInputRectXmin.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputRectXmin, "ucrInputRectXmin")
-        Me.ucrInputRectXmin.Name = "ucrInputRectXmin"
+        Me.ucrReceiverYend.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverYend, "ucrReceiverYend")
+        Me.ucrReceiverYend.Name = "ucrReceiverYend"
+        Me.ucrReceiverYend.Selector = Nothing
+        Me.ucrReceiverYend.strNcFilePath = ""
+        Me.ucrReceiverYend.ucrSelector = Nothing
         '
-        'ucrInputRectXmax
+        'ucrReceiverXend
         '
-        Me.ucrInputRectXmax.AddQuotesIfUnrecognised = True
-        Me.ucrInputRectXmax.IsMultiline = False
-        Me.ucrInputRectXmax.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputRectXmax, "ucrInputRectXmax")
-        Me.ucrInputRectXmax.Name = "ucrInputRectXmax"
+        Me.ucrReceiverXend.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverXend, "ucrReceiverXend")
+        Me.ucrReceiverXend.Name = "ucrReceiverXend"
+        Me.ucrReceiverXend.Selector = Nothing
+        Me.ucrReceiverXend.strNcFilePath = ""
+        Me.ucrReceiverXend.ucrSelector = Nothing
         '
-        'ucrInputRectYmax
+        'ucrReceiverYmin
         '
-        Me.ucrInputRectYmax.AddQuotesIfUnrecognised = True
-        Me.ucrInputRectYmax.IsMultiline = False
-        Me.ucrInputRectYmax.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputRectYmax, "ucrInputRectYmax")
-        Me.ucrInputRectYmax.Name = "ucrInputRectYmax"
+        Me.ucrReceiverYmin.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverYmin, "ucrReceiverYmin")
+        Me.ucrReceiverYmin.Name = "ucrReceiverYmin"
+        Me.ucrReceiverYmin.Selector = Nothing
+        Me.ucrReceiverYmin.strNcFilePath = ""
+        Me.ucrReceiverYmin.ucrSelector = Nothing
         '
-        'ucrInputRectYmin
+        'ucrReceiverXmin
         '
-        Me.ucrInputRectYmin.AddQuotesIfUnrecognised = True
-        Me.ucrInputRectYmin.IsMultiline = False
-        Me.ucrInputRectYmin.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputRectYmin, "ucrInputRectYmin")
-        Me.ucrInputRectYmin.Name = "ucrInputRectYmin"
+        Me.ucrReceiverXmin.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverXmin, "ucrReceiverXmin")
+        Me.ucrReceiverXmin.Name = "ucrReceiverXmin"
+        Me.ucrReceiverXmin.Selector = Nothing
+        Me.ucrReceiverXmin.strNcFilePath = ""
+        Me.ucrReceiverXmin.ucrSelector = Nothing
+        '
+        'ucrReceiverYmax
+        '
+        Me.ucrReceiverYmax.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverYmax, "ucrReceiverYmax")
+        Me.ucrReceiverYmax.Name = "ucrReceiverYmax"
+        Me.ucrReceiverYmax.Selector = Nothing
+        Me.ucrReceiverYmax.strNcFilePath = ""
+        Me.ucrReceiverYmax.ucrSelector = Nothing
+        '
+        'ucrReceiverXmax
+        '
+        Me.ucrReceiverXmax.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverXmax, "ucrReceiverXmax")
+        Me.ucrReceiverXmax.Name = "ucrReceiverXmax"
+        Me.ucrReceiverXmax.Selector = Nothing
+        Me.ucrReceiverXmax.strNcFilePath = ""
+        Me.ucrReceiverXmax.ucrSelector = Nothing
         '
         'ucrChkUseDataframe
         '
@@ -1138,22 +1156,6 @@ Partial Class sdgPlots
         Me.ucrInputColour.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputColour, "ucrInputColour")
         Me.ucrInputColour.Name = "ucrInputColour"
-        '
-        'ucrInputX
-        '
-        Me.ucrInputX.AddQuotesIfUnrecognised = True
-        Me.ucrInputX.IsMultiline = False
-        Me.ucrInputX.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputX, "ucrInputX")
-        Me.ucrInputX.Name = "ucrInputX"
-        '
-        'ucrInputY
-        '
-        Me.ucrInputY.AddQuotesIfUnrecognised = True
-        Me.ucrInputY.IsMultiline = False
-        Me.ucrInputY.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputY, "ucrInputY")
-        Me.ucrInputY.Name = "ucrInputY"
         '
         'lblY
         '
@@ -1342,6 +1344,22 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrInputFill, "ucrInputFill")
         Me.ucrInputFill.Name = "ucrInputFill"
         '
+        'ucrInputY
+        '
+        Me.ucrInputY.AddQuotesIfUnrecognised = True
+        Me.ucrInputY.IsMultiline = False
+        Me.ucrInputY.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputY, "ucrInputY")
+        Me.ucrInputY.Name = "ucrInputY"
+        '
+        'ucrInputX
+        '
+        Me.ucrInputX.AddQuotesIfUnrecognised = True
+        Me.ucrInputX.IsMultiline = False
+        Me.ucrInputX.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputX, "ucrInputX")
+        Me.ucrInputX.Name = "ucrInputX"
+        '
         'ucrReceiverX
         '
         Me.ucrReceiverX.frmParent = Nothing
@@ -1359,42 +1377,6 @@ Partial Class sdgPlots
         Me.ucrReceiverY.Selector = Nothing
         Me.ucrReceiverY.strNcFilePath = ""
         Me.ucrReceiverY.ucrSelector = Nothing
-        '
-        'ucrReceiverXmin
-        '
-        Me.ucrReceiverXmin.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverXmin, "ucrReceiverXmin")
-        Me.ucrReceiverXmin.Name = "ucrReceiverXmin"
-        Me.ucrReceiverXmin.Selector = Nothing
-        Me.ucrReceiverXmin.strNcFilePath = ""
-        Me.ucrReceiverXmin.ucrSelector = Nothing
-        '
-        'ucrReceiverYmin
-        '
-        Me.ucrReceiverYmin.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverYmin, "ucrReceiverYmin")
-        Me.ucrReceiverYmin.Name = "ucrReceiverYmin"
-        Me.ucrReceiverYmin.Selector = Nothing
-        Me.ucrReceiverYmin.strNcFilePath = ""
-        Me.ucrReceiverYmin.ucrSelector = Nothing
-        '
-        'ucrReceiverXmax
-        '
-        Me.ucrReceiverXmax.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverXmax, "ucrReceiverXmax")
-        Me.ucrReceiverXmax.Name = "ucrReceiverXmax"
-        Me.ucrReceiverXmax.Selector = Nothing
-        Me.ucrReceiverXmax.strNcFilePath = ""
-        Me.ucrReceiverXmax.ucrSelector = Nothing
-        '
-        'ucrReceiverYmax
-        '
-        Me.ucrReceiverYmax.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverYmax, "ucrReceiverYmax")
-        Me.ucrReceiverYmax.Name = "ucrReceiverYmax"
-        Me.ucrReceiverYmax.Selector = Nothing
-        Me.ucrReceiverYmax.strNcFilePath = ""
-        Me.ucrReceiverYmax.ucrSelector = Nothing
         '
         'ucrBaseSubdialog
         '
@@ -1590,10 +1572,8 @@ Partial Class sdgPlots
     Friend WithEvents ucrReceiverYmin As ucrReceiverSingle
     Friend WithEvents ucrReceiverXmax As ucrReceiverSingle
     Friend WithEvents ucrReceiverYmax As ucrReceiverSingle
-    Friend WithEvents ucrInputRectXmin As ucrInputTextBox
-    Friend WithEvents ucrInputRectXmax As ucrInputTextBox
-    Friend WithEvents ucrInputRectYmax As ucrInputTextBox
-    Friend WithEvents ucrInputRectYmin As ucrInputTextBox
+    Friend WithEvents ucrReceiverYend As ucrReceiverSingle
+    Friend WithEvents ucrReceiverXend As ucrReceiverSingle
 End Class
 
 
