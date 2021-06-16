@@ -300,4 +300,8 @@ Public Class dlgVisualizeData
     Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVisualizeData.ControlContentsChanged, ucrSelectorVisualizeData.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrNudMaximumSize.ControlValueChanged, ucrNudSamplingFunction.ControlValueChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub rdoSelectedColumn_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSelectedColumn.CheckedChanged
+
+    End Sub
 End Class
