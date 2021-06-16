@@ -291,6 +291,61 @@ Public Class ucrGeom
 
         lstAllGeoms.Add(clsgeom_statvalleys)
 
+        Dim clsgeom_density_ridges As New Geoms
+
+        clsgeom_density_ridges.SetGeomPackage("ggridges")
+        clsgeom_density_ridges.strGeomName = "geom_density_ridges"
+        'Mandatory Aesthetics
+        clsgeom_density_ridges.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_density_ridges.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_density_ridges.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+
+        'adding layer parameters
+        clsgeom_density_ridges.AddLayerParameter("stat", "list", Chr(34) & "density_ridges" & Chr(34), lstParameterStrings:={Chr(34) & "density_ridges" & Chr(34), Chr(34) & "binline" & Chr(34)})
+        clsgeom_density_ridges.AddLayerParameter("position", "list", Chr(34) & "points_sina" & Chr(34), lstParameterStrings:={Chr(34) & "points_sina" & Chr(34), Chr(34) & "points_jitter" & Chr(34), Chr(34) & "raincloud" & Chr(34)})
+        clsgeom_density_ridges.AddLayerParameter("panel_scaling", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_density_ridges.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_density_ridges)
+
+        Dim clsgeom_density_ridges2 As New Geoms
+
+        clsgeom_density_ridges2.SetGeomPackage("ggridges")
+        clsgeom_density_ridges2.strGeomName = "geom_density_ridges2"
+        'Mandatory Aesthetics
+        clsgeom_density_ridges2.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_density_ridges2.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_density_ridges2.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+
+        'adding layer parameters
+        clsgeom_density_ridges2.AddLayerParameter("stat", "list", Chr(34) & "density_ridges" & Chr(34), lstParameterStrings:={Chr(34) & "density_ridges" & Chr(34), Chr(34) & "binline" & Chr(34)})
+        clsgeom_density_ridges2.AddLayerParameter("position", "list", Chr(34) & "points_sina" & Chr(34), lstParameterStrings:={Chr(34) & "points_sina" & Chr(34)})
+        clsgeom_density_ridges2.AddLayerParameter("panel_scaling", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges2.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges2.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_density_ridges2.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_density_ridges2)
+
+        Dim clsgeom_density_ridges_gradient As New Geoms
+
+        clsgeom_density_ridges_gradient.SetGeomPackage("ggridges")
+        clsgeom_density_ridges_gradient.strGeomName = "geom_density_ridges_gradient"
+        'Mandatory Aesthetics
+        clsgeom_density_ridges_gradient.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_density_ridges_gradient.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_density_ridges_gradient.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+
+        'adding layer parameters
+        clsgeom_density_ridges_gradient.AddLayerParameter("stat", "list", Chr(34) & "density_ridges" & Chr(34), lstParameterStrings:={Chr(34) & "density_ridges" & Chr(34), Chr(34) & "binline" & Chr(34)})
+        clsgeom_density_ridges_gradient.AddLayerParameter("position", "list", Chr(34) & "points_sina" & Chr(34), lstParameterStrings:={Chr(34) & "points_sina" & Chr(34)})
+        clsgeom_density_ridges_gradient.AddLayerParameter("panel_scaling", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges_gradient.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges_gradient.AddLayerParameter("gradient_lwd", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_density_ridges_gradient.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_density_ridges_gradient.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_density_ridges_gradient)
+
 
         'Global comments:
         'WARNING: Most of the comments describing the parameters have been copied from the ggplot2 documentation: http://docs.ggplot2.org/current/
