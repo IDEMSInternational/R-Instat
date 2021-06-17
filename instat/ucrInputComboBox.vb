@@ -88,12 +88,19 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsTypeAsKeys()
+        strItemsType = "Keys"
+        FillItemTypes()
+    End Sub
+
     Private Sub FillItemTypes()
         Select Case strItemsType
             Case "Columns"
                 If ucrDataFrameSelector IsNot Nothing Then
                     frmMain.clsRLink.FillColumnNames(ucrDataFrameSelector.cboAvailableDataFrames.Text, cboColumns:=cboInput)
                 End If
+            Case "Keys"
+                  'TODO not yet implemented
             Case "Data Frames"
                 'TODO not yet implemented
             Case "Models"

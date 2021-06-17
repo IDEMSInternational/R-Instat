@@ -405,6 +405,11 @@ Public Class ucrSave
                 ucrInputComboSave.SetItemsTypeAsTables()
                 ucrInputTextSave.SetDefaultTypeAsTable()
                 btnColumnPosition.Visible = False
+            Case "key"
+                ucrInputComboSave.SetDefaultTypeAsKey()
+                ucrInputComboSave.SetItemsTypeAsKeys()
+                ucrInputTextSave.SetDefaultTypeAsKey()
+                btnColumnPosition.Visible = False
             Case Else
                 MsgBox("Developer error: unrecognised save type: " & strType)
         End Select
@@ -527,16 +532,24 @@ Public Class ucrSave
     '''                         position variables. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub UpdateRCode(Optional bReset As Boolean = False)
-        UpdateAssignTo()
-        'the control's R code has changed so ensure that the linked controls stay consistent
-        UpdateLinkedControls(bReset)
+        If strSaveType = "Key" Then
+            MyBase.UpdateRCode()
+        Else
+            UpdateAssignTo()
+            'the control's R code has changed so ensure that the linked controls stay consistent
+            UpdateLinkedControls(bReset)
+        End If
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Updates the control's 'assign to' variables and column position variables. 
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
     Protected Overrides Sub UpdateAllParameters()
-        UpdateAssignTo()
+        If strSaveType = "Key" Then
+            MyBase.UpdateAllParameters()
+        Else
+            UpdateAssignTo()
+        End If
         ' TODO SJL 16/06/20 Name ‘UpdateAllParameters’ is misleading, parent function does what the name says, this function doesn’t. Ask Danny's advice?
     End Sub
     '''--------------------------------------------------------------------------------------------
@@ -913,4 +926,8 @@ Public Class ucrSave
         Me.strReadNameFromParameterName = strReadNameFromParameterName
         UpdateAssignTo()
     End Sub
+
+    Public Overrides Function IsRDefault() As Boolean
+        Return GetParameter() IsNot Nothing AndAlso GetParameter().strArgumentValue IsNot Nothing
+    End Function
 End Class
