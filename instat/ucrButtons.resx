@@ -271,10 +271,10 @@
     <value>2</value>
   </data>
   <data name="txtComment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 1</value>
+    <value>90, 1</value>
   </data>
   <data name="txtComment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 20</value>
+    <value>308, 20</value>
   </data>
   <data name="txtComment.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

@@ -1140,6 +1140,10 @@ Public Class dlgImportDataset
         End If
     End Sub
 
+    Private Sub ucrChkMultipleFiles_Load(sender As Object, e As EventArgs) Handles ucrChkMultipleFiles.Load
+
+    End Sub
+
     Private Sub ucrChkRange_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkRange.ControlValueChanged
         If ucrChkRange.Checked Then
             clsImportExcel.AddParameter("range", clsROperatorParameter:=clsRangeOperator)

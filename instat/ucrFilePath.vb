@@ -289,5 +289,7 @@ Public Class ucrFilePath
 
     End Sub
 
+    Private Sub ucrInputFilePath_Load(sender As Object, e As EventArgs) Handles ucrInputFilePath.Load
 
+    End Sub
 End Class

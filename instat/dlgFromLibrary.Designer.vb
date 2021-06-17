@@ -63,6 +63,7 @@ Partial Class dlgFromLibrary
         '
         Me.lstCollection.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmDatasets, Me.clmDesc})
         Me.lstCollection.FullRowSelect = True
+        Me.lstCollection.HideSelection = False
         resources.ApplyResources(Me.lstCollection, "lstCollection")
         Me.lstCollection.MultiSelect = False
         Me.lstCollection.Name = "lstCollection"
@@ -118,6 +119,7 @@ Partial Class dlgFromLibrary
         'ucrInputPackages
         '
         Me.ucrInputPackages.AddQuotesIfUnrecognised = True
+        Me.ucrInputPackages.GetSetSelectedIndex = -1
         Me.ucrInputPackages.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputPackages, "ucrInputPackages")
         Me.ucrInputPackages.Name = "ucrInputPackages"
