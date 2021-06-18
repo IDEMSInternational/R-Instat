@@ -170,54 +170,6 @@
   <data name="&gt;&gt;lblKeyColumns.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblKeyName.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblKeyName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 208</value>
-  </data>
-  <data name="lblKeyName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>59, 13</value>
-  </data>
-  <data name="lblKeyName.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="lblKeyName.Text" xml:space="preserve">
-    <value>Key Name:</value>
-  </data>
-  <data name="&gt;&gt;lblKeyName.Name" xml:space="preserve">
-    <value>lblKeyName</value>
-  </data>
-  <data name="&gt;&gt;lblKeyName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblKeyName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblKeyName.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrInputKeyName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 204</value>
-  </data>
-  <data name="ucrInputKeyName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>182, 21</value>
-  </data>
-  <data name="ucrInputKeyName.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrInputKeyName.Name" xml:space="preserve">
-    <value>ucrInputKeyName</value>
-  </data>
-  <data name="&gt;&gt;ucrInputKeyName.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputKeyName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputKeyName.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrInputCheckInput.Location" type="System.Drawing.Point, System.Drawing">
     <value>114, 232</value>
   </data>
@@ -258,7 +210,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="ucrSelectorKeyColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -283,7 +235,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorKeyColumns.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -293,6 +245,30 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>418, 321</value>
+  </data>
+  <data name="ucrSaveKey.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 197</value>
+  </data>
+  <data name="ucrSaveKey.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrSaveKey.Size" type="System.Drawing.Size, System.Drawing">
+    <value>403, 27</value>
+  </data>
+  <data name="ucrSaveKey.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveKey.Name" xml:space="preserve">
+    <value>ucrSaveKey</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveKey.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveKey.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveKey.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
@@ -328,6 +304,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverKeyColumns.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
 </root>

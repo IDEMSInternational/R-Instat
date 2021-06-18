@@ -438,6 +438,11 @@ Public Class ucrSave
     Public Sub SetSaveTypeAsTable()
         SetSaveType("table")
     End Sub
+
+    Public Sub SetSaveTypeAsKey()
+        SetSaveType("key")
+    End Sub
+
     ''' <summary>   Resets this control to its default values.  </summary>
     Public Sub Reset()
         SetDefaults()
@@ -532,7 +537,7 @@ Public Class ucrSave
     '''                         position variables. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub UpdateRCode(Optional bReset As Boolean = False)
-        If strSaveType = "Key" Then
+        If strSaveType = "key" Then
             MyBase.UpdateRCode()
         Else
             UpdateAssignTo()
@@ -545,7 +550,7 @@ Public Class ucrSave
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
     Protected Overrides Sub UpdateAllParameters()
-        If strSaveType = "Key" Then
+        If strSaveType = "key" Then
             MyBase.UpdateAllParameters()
         Else
             UpdateAssignTo()
@@ -787,7 +792,11 @@ Public Class ucrSave
         'TODO SJL 15/05/20 
         '   - The name is quite confusing. Rename?
         '   - If we made 'UpdateAssignTo' public then we could remove this function
-        UpdateAssignTo(Not bAdd)
+        If strSaveType = "key" Then
+            MyBase.AddOrRemoveParameter(bAdd)
+        Else
+            UpdateAssignTo(Not bAdd)
+        End If
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Adds <paramref name="clsNewRCode"/> to the control's command-parameter 
@@ -928,6 +937,6 @@ Public Class ucrSave
     End Sub
 
     Public Overrides Function IsRDefault() As Boolean
-        Return GetParameter() IsNot Nothing AndAlso GetParameter().strArgumentValue IsNot Nothing
+        Return lstAllRParameters(0) IsNot Nothing AndAlso lstAllRParameters(0).strArgumentValue IsNot Nothing
     End Function
 End Class

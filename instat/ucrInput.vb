@@ -197,7 +197,9 @@ Public Class ucrInput
                 End If
             ElseIf strDefaultType = "Key" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
-
+                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetKeyNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
+                Else
+                    SetName("")
                 End If
             End If
         End If

@@ -1931,6 +1931,28 @@ Public Class RLink
         Return lstSurvNames
     End Function
 
+    Public Function GetKeyNames(Optional strDataFrameName As String = "") As List(Of String)
+        Dim lstKeyNames As New List(Of String)
+        Dim clsGetKeyNames As New RFunction
+        Dim expKeyNames As SymbolicExpression
+        Dim vecKeys As GenericVector
+
+        clsGetKeyNames.SetRCommand(strInstatDataObject & "$get_key_names")
+        clsGetKeyNames.AddParameter("as_list", "TRUE", iPosition:=0)
+
+        If strDataFrameName <> "" Then
+            clsGetKeyNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        expKeyNames = RunInternalScriptGetValue(clsGetKeyNames.ToScript(), bSilent:=True)
+        If expKeyNames IsNot Nothing AndAlso Not expKeyNames.Type = Internals.SymbolicExpressionType.Null Then
+            vecKeys = expKeyNames.AsList
+            For i = 0 To vecKeys.Count - 1
+                lstKeyNames.Add(vecKeys.Names(i))
+            Next
+        End If
+        Return lstKeyNames
+    End Function
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets the data type of the <paramref name="strColumnName"/> column in the 
     '''             <paramref name="strDataFrameName"/> data frame. </summary>
