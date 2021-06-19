@@ -931,4 +931,5 @@ Public Class sdgPlots
             grpColourScale.Visible = False
         End If
     End Sub
+
 End Class

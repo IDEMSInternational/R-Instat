@@ -109,6 +109,7 @@ Partial Class sdgPlots
         Me.ucrChkSameScale = New instat.ucrCheck()
         Me.ucrChkHorizontalPlot = New instat.ucrCheck()
         Me.tbpColour = New System.Windows.Forms.TabPage()
+        Me.ucrChkAddColour = New instat.ucrCheck()
         Me.ucrChkAddFillScale = New instat.ucrCheck()
         Me.grpColourScale = New System.Windows.Forms.GroupBox()
         Me.ucrChkColourDiscrete = New instat.ucrCheck()
@@ -133,7 +134,6 @@ Partial Class sdgPlots
         Me.lblFillScaleColourPalettte = New System.Windows.Forms.Label()
         Me.lblFillScaleTransparency = New System.Windows.Forms.Label()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
-        Me.ucrChkAddColour = New instat.ucrCheck()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -689,6 +689,12 @@ Partial Class sdgPlots
         Me.tbpColour.Name = "tbpColour"
         Me.tbpColour.UseVisualStyleBackColor = True
         '
+        'ucrChkAddColour
+        '
+        Me.ucrChkAddColour.Checked = False
+        resources.ApplyResources(Me.ucrChkAddColour, "ucrChkAddColour")
+        Me.ucrChkAddColour.Name = "ucrChkAddColour"
+        '
         'ucrChkAddFillScale
         '
         Me.ucrChkAddFillScale.Checked = False
@@ -871,12 +877,6 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        '
-        'ucrChkAddColour
-        '
-        Me.ucrChkAddColour.Checked = False
-        resources.ApplyResources(Me.ucrChkAddColour, "ucrChkAddColour")
-        Me.ucrChkAddColour.Name = "ucrChkAddColour"
         '
         'sdgPlots
         '

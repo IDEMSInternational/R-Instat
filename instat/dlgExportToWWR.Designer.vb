@@ -122,9 +122,9 @@ Partial Class dlgExportToWWR
         Me.lblPrecipitation.AutoSize = True
         Me.lblPrecipitation.Location = New System.Drawing.Point(6, 139)
         Me.lblPrecipitation.Name = "lblPrecipitation"
-        Me.lblPrecipitation.Size = New System.Drawing.Size(110, 13)
+        Me.lblPrecipitation.Size = New System.Drawing.Size(107, 13)
         Me.lblPrecipitation.TabIndex = 17
-        Me.lblPrecipitation.Text = " 5. Total Precipitation:"
+        Me.lblPrecipitation.Text = "5. Total Precipitation:"
         '
         'lblMeanDailyMaxAirTemperature
         '
@@ -148,7 +148,7 @@ Partial Class dlgExportToWWR
         '
         Me.cmdStationMetadata.Location = New System.Drawing.Point(258, 72)
         Me.cmdStationMetadata.Name = "cmdStationMetadata"
-        Me.cmdStationMetadata.Size = New System.Drawing.Size(120, 23)
+        Me.cmdStationMetadata.Size = New System.Drawing.Size(141, 23)
         Me.cmdStationMetadata.TabIndex = 5
         Me.cmdStationMetadata.Text = "Station Metadata"
         Me.cmdStationMetadata.UseVisualStyleBackColor = True
@@ -206,7 +206,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverMeanRelativeHumidity
         '
-        Me.ucrReceiverMeanRelativeHumidity.frmParent = Nothing
+        Me.ucrReceiverMeanRelativeHumidity.frmParent = Me
         Me.ucrReceiverMeanRelativeHumidity.Location = New System.Drawing.Point(233, 114)
         Me.ucrReceiverMeanRelativeHumidity.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMeanRelativeHumidity.Name = "ucrReceiverMeanRelativeHumidity"
@@ -218,7 +218,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverPrecipitation
         '
-        Me.ucrReceiverPrecipitation.frmParent = Nothing
+        Me.ucrReceiverPrecipitation.frmParent = Me
         Me.ucrReceiverPrecipitation.Location = New System.Drawing.Point(9, 155)
         Me.ucrReceiverPrecipitation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverPrecipitation.Name = "ucrReceiverPrecipitation"
@@ -230,7 +230,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverMeanMonthlyAirTemperature
         '
-        Me.ucrReceiverMeanMonthlyAirTemperature.frmParent = Nothing
+        Me.ucrReceiverMeanMonthlyAirTemperature.frmParent = Me
         Me.ucrReceiverMeanMonthlyAirTemperature.Location = New System.Drawing.Point(9, 114)
         Me.ucrReceiverMeanMonthlyAirTemperature.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMeanMonthlyAirTemperature.Name = "ucrReceiverMeanMonthlyAirTemperature"
@@ -242,7 +242,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverMeanSeaLevelPressure
         '
-        Me.ucrReceiverMeanSeaLevelPressure.frmParent = Nothing
+        Me.ucrReceiverMeanSeaLevelPressure.frmParent = Me
         Me.ucrReceiverMeanSeaLevelPressure.Location = New System.Drawing.Point(9, 73)
         Me.ucrReceiverMeanSeaLevelPressure.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMeanSeaLevelPressure.Name = "ucrReceiverMeanSeaLevelPressure"
@@ -254,7 +254,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverMeanDailyMinAirTemperature
         '
-        Me.ucrReceiverMeanDailyMinAirTemperature.frmParent = Nothing
+        Me.ucrReceiverMeanDailyMinAirTemperature.frmParent = Me
         Me.ucrReceiverMeanDailyMinAirTemperature.Location = New System.Drawing.Point(233, 73)
         Me.ucrReceiverMeanDailyMinAirTemperature.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMeanDailyMinAirTemperature.Name = "ucrReceiverMeanDailyMinAirTemperature"
@@ -266,7 +266,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverMeanDailyMaxAirTemperature
         '
-        Me.ucrReceiverMeanDailyMaxAirTemperature.frmParent = Nothing
+        Me.ucrReceiverMeanDailyMaxAirTemperature.frmParent = Me
         Me.ucrReceiverMeanDailyMaxAirTemperature.Location = New System.Drawing.Point(233, 32)
         Me.ucrReceiverMeanDailyMaxAirTemperature.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMeanDailyMaxAirTemperature.Name = "ucrReceiverMeanDailyMaxAirTemperature"
@@ -278,7 +278,7 @@ Partial Class dlgExportToWWR
         '
         'ucrReceiverMeanStationPressure
         '
-        Me.ucrReceiverMeanStationPressure.frmParent = Nothing
+        Me.ucrReceiverMeanStationPressure.frmParent = Me
         Me.ucrReceiverMeanStationPressure.Location = New System.Drawing.Point(9, 32)
         Me.ucrReceiverMeanStationPressure.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMeanStationPressure.Name = "ucrReceiverMeanStationPressure"

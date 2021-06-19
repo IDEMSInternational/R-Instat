@@ -129,10 +129,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdoTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 12</value>
+    <value>275, 12</value>
   </data>
   <data name="rdoTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 29</value>
+    <value>124, 29</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoTable.TabIndex" type="System.Int32, mscorlib">
@@ -172,10 +172,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 12</value>
+    <value>31, 12</value>
   </data>
   <data name="rdoGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 29</value>
+    <value>124, 29</value>
   </data>
   <data name="rdoGraph.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -913,10 +913,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoGraphByYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>154, 12</value>
+    <value>153, 12</value>
   </data>
   <data name="rdoGraphByYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 29</value>
+    <value>124, 29</value>
   </data>
   <data name="rdoGraphByYear.TabIndex" type="System.Int32, mscorlib">
     <value>23</value>
@@ -1078,7 +1078,7 @@
     <value>10</value>
   </data>
   <data name="ucrInputComboZero.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 403</value>
+    <value>155, 403</value>
   </data>
   <data name="ucrInputComboZero.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 21</value>
@@ -1099,7 +1099,7 @@
     <value>11</value>
   </data>
   <data name="ucrInputComboMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 378</value>
+    <value>155, 378</value>
   </data>
   <data name="ucrInputComboMissing.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 21</value>
@@ -1120,7 +1120,7 @@
     <value>12</value>
   </data>
   <data name="ucrInputComboTrace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>119, 427</value>
+    <value>155, 427</value>
   </data>
   <data name="ucrInputComboTrace.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 21</value>
@@ -1144,7 +1144,7 @@
     <value>10, 380</value>
   </data>
   <data name="ucrChkMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>141, 20</value>
   </data>
   <data name="ucrChkMissing.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1165,7 +1165,7 @@
     <value>10, 405</value>
   </data>
   <data name="ucrChkZero.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>141, 20</value>
   </data>
   <data name="ucrChkZero.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1186,7 +1186,7 @@
     <value>10, 428</value>
   </data>
   <data name="ucrChkTrace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>141, 20</value>
   </data>
   <data name="ucrChkTrace.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1300,13 +1300,13 @@
     <value>25</value>
   </data>
   <data name="ucrPnlFrequencyDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>54, 12</value>
+    <value>30, 12</value>
   </data>
   <data name="ucrPnlFrequencyDisplay.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrPnlFrequencyDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 29</value>
+    <value>370, 29</value>
   </data>
   <data name="ucrPnlFrequencyDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

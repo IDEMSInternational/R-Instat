@@ -271,21 +271,19 @@ Public Class ucrButtons
         autoTranslate(Me.ParentForm)
         frmMain.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
 
-        If cmdLanguage.FlatStyle = FlatStyle.Popup Then
-            cmdLanguage.FlatStyle = FlatStyle.Flat
-        Else
-            cmdLanguage.FlatStyle = FlatStyle.Popup
-        End If
+        'If cmdLanguage.FlatStyle = FlatStyle.Popup Then
+        '    cmdLanguage.FlatStyle = FlatStyle.Flat
+        'Else
+        '    cmdLanguage.FlatStyle = FlatStyle.Popup
+        'End If
     End Sub
-
-    Private iMyCode As Integer = 0
 
     Private Sub AddButtonInCommentTextbox()
         Dim btnMoreComment As New Button
         'add the button to the comment textbox first
         txtComment.Controls.Clear()
         txtComment.Controls.Add(btnMoreComment)
-        
+
         'then set the  button properties
         btnMoreComment.Text = ":::" 'temp. This will be shown as centered ... An image as below commended code is preferred
         'btn.Image = Image.FromFile("C:\patowhiz\3dots.png")

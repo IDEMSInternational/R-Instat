@@ -1021,7 +1021,7 @@
     <value>11, 412</value>
   </data>
   <data name="ucrChkDoNotImport.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 20</value>
+    <value>347, 20</value>
   </data>
   <data name="ucrChkDoNotImport.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>

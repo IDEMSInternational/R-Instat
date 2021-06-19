@@ -994,7 +994,7 @@
     <value>14, 328</value>
   </data>
   <data name="ucrChkFlipCoordinates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 20</value>
+    <value>224, 20</value>
   </data>
   <data name="ucrChkFlipCoordinates.TabIndex" type="System.Int32, mscorlib">
     <value>58</value>
