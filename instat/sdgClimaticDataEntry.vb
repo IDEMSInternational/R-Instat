@@ -633,6 +633,9 @@ Public Class sdgClimaticDataEntry
                 strValue = grdCurrentWorkSheet.Item(row:=i, col:=iColIndex)
             End If
 
+            If strValue.ToUpper = "T" Then
+                strValue = 0
+            End If
             If IsNumeric(strValue) Then
                 dValue = Double.Parse(strValue)
                 dSumValue = dSumValue + dValue
