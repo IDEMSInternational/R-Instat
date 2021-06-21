@@ -557,6 +557,16 @@ Public Class ucrSave
         End If
         ' TODO SJL 16/06/20 Name ‘UpdateAllParameters’ is misleading, parent function does what the name says, this function doesn’t. Ask Danny's advice?
     End Sub
+
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If bIsComboBox Then
+            clsTempParam.SetArgumentValue(Chr(34) & ucrInputComboSave.GetText & Chr(34))
+        Else
+            clsTempParam.SetArgumentValue(Chr(34) & ucrInputTextSave.GetText & Chr(34))
+        End If
+    End Sub
+
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   TODO SJL 13/05/20 Same as parent function - remove?. </summary>
     '''
@@ -660,37 +670,39 @@ Public Class ucrSave
     '''                                 overridden function. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
-        Dim clsMainRCode As RCodeStructure = GetRCode()
-        Dim strControlValue As String = ""
+        If Not strSaveType = "key" Then
+            Dim clsMainRCode As RCodeStructure = GetRCode()
+            Dim strControlValue As String = ""
 
-        If clsMainRCode IsNot Nothing Then
-            If String.IsNullOrEmpty(strReadNameFromParameterName) Then
-                If clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned Then
-                    strControlValue = If(clsMainRCode.strAssignTo IsNot Nothing, clsMainRCode.strAssignTo, "")
-                End If
-            Else
-                If clsMainRCode.GetParameter(strReadNameFromParameterName) IsNot Nothing Then
-                    strControlValue = clsMainRCode.GetParameter(strReadNameFromParameterName).strArgumentValue
-                    strControlValue = If(strControlValue IsNot Nothing, strControlValue.Replace("""", ""), "")
-                End If
-            End If
-
-            If bIsComboBox Then
-                ucrInputComboSave.SetName(strControlValue)
-                ucrInputTextSave.SetName("")
-            Else
-                ucrInputTextSave.SetName(strControlValue)
-                ucrInputComboSave.SetName("")
-            End If
-
-            If bShowCheckBox Then
-                If GetText() = strAssignToIfUnchecked Then
-                    ucrChkSave.Checked = False
+            If clsMainRCode IsNot Nothing Then
+                If String.IsNullOrEmpty(strReadNameFromParameterName) Then
+                    If clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned Then
+                        strControlValue = If(clsMainRCode.strAssignTo IsNot Nothing, clsMainRCode.strAssignTo, "")
+                    End If
                 Else
-                    ucrChkSave.Checked = (clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned)
+                    If clsMainRCode.GetParameter(strReadNameFromParameterName) IsNot Nothing Then
+                        strControlValue = clsMainRCode.GetParameter(strReadNameFromParameterName).strArgumentValue
+                        strControlValue = If(strControlValue IsNot Nothing, strControlValue.Replace("""", ""), "")
+                    End If
                 End If
+
+                If bIsComboBox Then
+                    ucrInputComboSave.SetName(strControlValue)
+                    ucrInputTextSave.SetName("")
+                Else
+                    ucrInputTextSave.SetName(strControlValue)
+                    ucrInputComboSave.SetName("")
+                End If
+
+                If bShowCheckBox Then
+                    If GetText() = strAssignToIfUnchecked Then
+                        ucrChkSave.Checked = False
+                    Else
+                        ucrChkSave.Checked = (clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned)
+                    End If
+                End If
+                UpdateLinkedControls()
             End If
-            UpdateLinkedControls()
         End If
     End Sub
     '''--------------------------------------------------------------------------------------------
@@ -793,7 +805,7 @@ Public Class ucrSave
         '   - The name is quite confusing. Rename?
         '   - If we made 'UpdateAssignTo' public then we could remove this function
         If strSaveType = "key" Then
-            MyBase.AddOrRemoveParameter(bAdd)
+            MyBase.AddOrRemoveParameter(True)
         Else
             UpdateAssignTo(Not bAdd)
         End If
@@ -935,8 +947,4 @@ Public Class ucrSave
         Me.strReadNameFromParameterName = strReadNameFromParameterName
         UpdateAssignTo()
     End Sub
-
-    Public Overrides Function IsRDefault() As Boolean
-        Return lstAllRParameters(0) IsNot Nothing AndAlso lstAllRParameters(0).strArgumentValue IsNot Nothing
-    End Function
 End Class
