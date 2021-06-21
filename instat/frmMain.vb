@@ -94,9 +94,13 @@ Public Class frmMain
 
         ucrDataViewer.StartupMenuItemsVisibility(False)
         InitialiseOutputWindow()
-        clsGrids.SetDataViewer(ucrDataViewer)
-        clsGrids.SetMetadata(ucrDataFrameMeta.grdMetaData)
-        clsGrids.SetVariablesMetadata(ucrColumnMeta.grdVariables)
+        ' clsGrids.SetDataViewer(ucrDataViewer)
+        ' clsGrids.SetMetadata(ucrDataFrameMeta.grdMetaData)
+        ' clsGrids.SetVariablesMetadata(ucrColumnMeta.grdVariables)
+
+        ucrDataViewer.DataBook = New clsDataBook(clsRLink)
+        ucrColumnMeta.DataBook = ucrDataViewer.DataBook
+        ucrDataFrameMeta.DataBook = ucrDataViewer.DataBook
 
         clsRLink.SetLog(ucrLogWindow.txtLog)
 
@@ -166,6 +170,12 @@ Public Class frmMain
         End Try
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
+    End Sub
+
+    Public Sub UpdateAllGrids()
+        ucrDataViewer.RefreshGridData()
+        ucrColumnMeta.RefreshGridData()
+        ucrDataFrameMeta.RefreshGridData()
     End Sub
 
     ' TODO This is used instead of autoTranslate so that split container isn't shifted

@@ -49,6 +49,15 @@ Public Class clsGridLink
     End Sub
 
     Public Sub UpdateGrids()
+        'TODO remove this sub and whole class if possible
+
+        frmMain.ucrDataViewer.RefreshGridData()
+        frmMain.ucrColumnMeta.RefreshGridData()
+        frmMain.ucrDataFrameMeta.RefreshGridData()
+        Exit Sub
+
+
+
         Dim bRDataChanged As Boolean
         Dim bRMetadataChanged As Boolean
         Dim bRVariablesMetadataChanged As Boolean
@@ -212,7 +221,7 @@ Public Class clsGridLink
                                 Else
                                     FillSheet(dfTemp, strDataName, grdData, bInstatObjectDataFrame:=True, bIncludeDataTypes:=True, iNewPosition:=i, bFilterApplied:=False, bCheckFreezeColumns:=True)
                                 End If
-                                ucrDataViewer.SetColumnNames(strDataName, dfTemp.ColumnNames())
+                                '  ucrDataViewer.SetColumnNames(strDataName, dfTemp.ColumnNames())
                                 clsSetDataFramesChanged.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
                                 clsSetDataFramesChanged.AddParameter("new_val", "FALSE")
                                 frmMain.clsRLink.RunInternalScript(clsSetDataFramesChanged.ToScript(), bSilent:=True)

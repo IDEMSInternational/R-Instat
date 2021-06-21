@@ -15,9 +15,13 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
 Public Class ucrDataFrameMetadata
+    'should not be public - testing only
+    Public DataBook As clsDataBook
+
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
     Public strPreviousCellText As String
     Private lstNonEditableColumns As New List(Of String)
@@ -39,6 +43,50 @@ Public Class ucrDataFrameMetadata
         grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowSheetTabControl, False)
         grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, True)
         grdMetaData.SheetTabNewButtonVisible = False
+    End Sub
+
+    Private Sub StartWait()
+        Cursor = Cursors.WaitCursor
+        grdMetaData.Enabled = False
+    End Sub
+    Private Sub EndWait()
+        grdMetaData.Enabled = True
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub RefreshWorksheet()
+        AddColumns()
+        AddRowData()
+    End Sub
+
+    Private Sub AddColumns()
+        Dim workSheetColumnHeader As ColumnHeader
+        grdCurrSheet.Columns = DataBook.clsDataFrameMetaData.ColumnCount
+        For i = 0 To DataBook.clsDataFrameMetaData.ColumnCount - 1
+            workSheetColumnHeader = grdCurrSheet.ColumnHeaders(i)
+            workSheetColumnHeader.Text = DataBook.clsDataFrameMetaData.ColumnName(i)
+        Next
+    End Sub
+
+    Private Sub AddRowData()
+        Dim rngDataRange As RangePosition
+
+        grdCurrSheet.Rows = DataBook.clsDataFrameMetaData.RowCount
+        rngDataRange = New RangePosition(0, 0, grdCurrSheet.Rows, grdCurrSheet.Columns)
+        grdCurrSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
+
+        For i = 0 To DataBook.clsDataFrameMetaData.RowCount - 1
+            For j = 0 To grdCurrSheet.Columns - 1
+                grdCurrSheet(row:=i, col:=j) = DataBook.clsDataFrameMetaData.Data(i, j)
+            Next
+            grdCurrSheet.RowHeaders.Item(i).Text = DataBook.clsDataFrameMetaData.RowName(i)
+        Next
+    End Sub
+
+    Public Sub RefreshGridData()
+        If DataBook?.clsDataFrameMetaData IsNot Nothing Then
+            RefreshWorksheet()
+        End If
     End Sub
 
     Private Sub grdMetaData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdMetaData.CurrentWorksheetChanged, Me.Load, grdMetaData.WorksheetInserted

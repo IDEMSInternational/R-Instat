@@ -1048,7 +1048,7 @@ Public Class RLink
         End If
         AppendToAutoSaveLog(strScriptWithComment & Environment.NewLine)
         If bUpdateGrids Then
-            frmMain.clsGrids.UpdateGrids()
+            frmMain.UpdateAllGrids()
         End If
     End Sub
 

@@ -66,6 +66,7 @@ Partial Class ucrDataView
         Me.mnuRenameColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDuplColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuReorderColumn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCellPasteRange = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuConvertToFact = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertToOrderedFactor = New System.Windows.Forms.ToolStripMenuItem()
@@ -97,7 +98,6 @@ Partial Class ucrDataView
         Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.reorderSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewSheet = New System.Windows.Forms.ToolStripMenuItem()
-        Me.lblRowDisplay = New System.Windows.Forms.Label()
         Me.lblHeaderDataView = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
         Me.pnlDataContainer = New System.Windows.Forms.Panel()
@@ -116,7 +116,17 @@ Partial Class ucrDataView
         Me.linkStartNewDataFrame = New System.Windows.Forms.LinkLabel()
         Me.linkStartOpenFile = New System.Windows.Forms.LinkLabel()
         Me.linkStartOpenLibrary = New System.Windows.Forms.LinkLabel()
-        Me.mnuCellPasteRange = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblColFirst = New System.Windows.Forms.Label()
+        Me.lblColDisplay = New System.Windows.Forms.Label()
+        Me.lblColNext = New System.Windows.Forms.Label()
+        Me.lblColBack = New System.Windows.Forms.Label()
+        Me.lblRowLast = New System.Windows.Forms.Label()
+        Me.lblRowFirst = New System.Windows.Forms.Label()
+        Me.lblRowDisplay = New System.Windows.Forms.Label()
+        Me.lblRowNext = New System.Windows.Forms.Label()
+        Me.lblColLast = New System.Windows.Forms.Label()
+        Me.lblRowBack = New System.Windows.Forms.Label()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -127,6 +137,7 @@ Partial Class ucrDataView
         Me.panelSectionRecent.SuspendLayout()
         Me.panelSectionHelp.SuspendLayout()
         Me.panelSectionStart.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'grdData
@@ -277,7 +288,7 @@ Partial Class ucrDataView
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuCellPasteRange, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLebelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(213, 358)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(213, 336)
         '
         'ToolStripSeparator3
         '
@@ -301,6 +312,12 @@ Partial Class ucrDataView
         Me.mnuReorderColumn.Name = "mnuReorderColumn"
         Me.mnuReorderColumn.Size = New System.Drawing.Size(212, 22)
         Me.mnuReorderColumn.Text = "Reorder Column(s)..."
+        '
+        'mnuCellPasteRange
+        '
+        Me.mnuCellPasteRange.Name = "mnuCellPasteRange"
+        Me.mnuCellPasteRange.Size = New System.Drawing.Size(212, 22)
+        Me.mnuCellPasteRange.Text = "Paste"
         '
         'ToolStripSeparator5
         '
@@ -488,17 +505,6 @@ Partial Class ucrDataView
         Me.ViewSheet.Size = New System.Drawing.Size(162, 22)
         Me.ViewSheet.Text = "View Data Frame"
         '
-        'lblRowDisplay
-        '
-        Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblRowDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
-        Me.lblRowDisplay.Location = New System.Drawing.Point(3, 480)
-        Me.lblRowDisplay.Name = "lblRowDisplay"
-        Me.lblRowDisplay.Size = New System.Drawing.Size(438, 20)
-        Me.lblRowDisplay.TabIndex = 4
-        Me.lblRowDisplay.Text = "Label1"
-        Me.lblRowDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
         'lblHeaderDataView
         '
         Me.lblHeaderDataView.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
@@ -517,8 +523,8 @@ Partial Class ucrDataView
         Me.tlpTableContainer.ColumnCount = 1
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Controls.Add(Me.lblHeaderDataView, 0, 0)
-        Me.tlpTableContainer.Controls.Add(Me.lblRowDisplay, 0, 2)
         Me.tlpTableContainer.Controls.Add(Me.pnlDataContainer, 0, 1)
+        Me.tlpTableContainer.Controls.Add(Me.TableLayoutPanel1, 0, 2)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
@@ -720,11 +726,152 @@ Partial Class ucrDataView
         Me.linkStartOpenLibrary.TabStop = True
         Me.linkStartOpenLibrary.Text = "Open from library..."
         '
-        'mnuCellPasteRange
+        'TableLayoutPanel1
         '
-        Me.mnuCellPasteRange.Name = "mnuCellPasteRange"
-        Me.mnuCellPasteRange.Size = New System.Drawing.Size(212, 22)
-        Me.mnuCellPasteRange.Text = "Paste"
+        Me.TableLayoutPanel1.AutoSize = True
+        Me.TableLayoutPanel1.ColumnCount = 12
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.lblColFirst, 7, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblColDisplay, 6, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblColNext, 9, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblColBack, 8, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblRowLast, 5, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblRowFirst, 2, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblRowDisplay, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblRowNext, 4, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblColLast, 10, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.lblRowBack, 3, 0)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 480)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(444, 20)
+        Me.TableLayoutPanel1.TabIndex = 8
+        '
+        'lblColFirst
+        '
+        Me.lblColFirst.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblColFirst.Location = New System.Drawing.Point(288, 0)
+        Me.lblColFirst.Name = "lblColFirst"
+        Me.lblColFirst.Size = New System.Drawing.Size(10, 20)
+        Me.lblColFirst.TabIndex = 15
+        Me.lblColFirst.Text = "«"
+        Me.lblColFirst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblColDisplay
+        '
+        Me.lblColDisplay.AutoSize = True
+        Me.lblColDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblColDisplay.Location = New System.Drawing.Point(225, 0)
+        Me.lblColDisplay.Name = "lblColDisplay"
+        Me.lblColDisplay.Size = New System.Drawing.Size(57, 20)
+        Me.lblColDisplay.TabIndex = 14
+        Me.lblColDisplay.Text = "Label1"
+        Me.lblColDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblColNext
+        '
+        Me.lblColNext.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblColNext.Location = New System.Drawing.Point(320, 0)
+        Me.lblColNext.Name = "lblColNext"
+        Me.lblColNext.Size = New System.Drawing.Size(10, 20)
+        Me.lblColNext.TabIndex = 13
+        Me.lblColNext.Text = ">"
+        Me.lblColNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblColBack
+        '
+        Me.lblColBack.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColBack.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblColBack.Location = New System.Drawing.Point(304, 0)
+        Me.lblColBack.Name = "lblColBack"
+        Me.lblColBack.Size = New System.Drawing.Size(10, 20)
+        Me.lblColBack.TabIndex = 12
+        Me.lblColBack.Text = "<"
+        Me.lblColBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblRowLast
+        '
+        Me.lblRowLast.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblRowLast.Location = New System.Drawing.Point(209, 0)
+        Me.lblRowLast.Name = "lblRowLast"
+        Me.lblRowLast.Size = New System.Drawing.Size(10, 20)
+        Me.lblRowLast.TabIndex = 11
+        Me.lblRowLast.Text = "»"
+        Me.lblRowLast.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblRowFirst
+        '
+        Me.lblRowFirst.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowFirst.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblRowFirst.Location = New System.Drawing.Point(161, 0)
+        Me.lblRowFirst.Name = "lblRowFirst"
+        Me.lblRowFirst.Size = New System.Drawing.Size(10, 20)
+        Me.lblRowFirst.TabIndex = 10
+        Me.lblRowFirst.Text = "«"
+        Me.lblRowFirst.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblRowDisplay
+        '
+        Me.lblRowDisplay.AutoSize = True
+        Me.lblRowDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowDisplay.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblRowDisplay.Location = New System.Drawing.Point(98, 0)
+        Me.lblRowDisplay.Name = "lblRowDisplay"
+        Me.lblRowDisplay.Size = New System.Drawing.Size(57, 20)
+        Me.lblRowDisplay.TabIndex = 9
+        Me.lblRowDisplay.Text = "Label1"
+        Me.lblRowDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
+        'lblRowNext
+        '
+        Me.lblRowNext.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowNext.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblRowNext.Location = New System.Drawing.Point(193, 0)
+        Me.lblRowNext.Name = "lblRowNext"
+        Me.lblRowNext.Size = New System.Drawing.Size(10, 20)
+        Me.lblRowNext.TabIndex = 8
+        Me.lblRowNext.Text = ">"
+        Me.lblRowNext.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblColLast
+        '
+        Me.lblColLast.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblColLast.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblColLast.Location = New System.Drawing.Point(336, 0)
+        Me.lblColLast.Name = "lblColLast"
+        Me.lblColLast.Size = New System.Drawing.Size(10, 20)
+        Me.lblColLast.TabIndex = 7
+        Me.lblColLast.Text = "»"
+        Me.lblColLast.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblRowBack
+        '
+        Me.lblRowBack.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblRowBack.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!)
+        Me.lblRowBack.Location = New System.Drawing.Point(177, 0)
+        Me.lblRowBack.Name = "lblRowBack"
+        Me.lblRowBack.Size = New System.Drawing.Size(10, 20)
+        Me.lblRowBack.TabIndex = 5
+        Me.lblRowBack.Text = "<"
+        Me.lblRowBack.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ucrDataView
         '
@@ -739,6 +886,7 @@ Partial Class ucrDataView
         Me.rowContextMenuStrip.ResumeLayout(False)
         Me.statusColumnMenu.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
+        Me.tlpTableContainer.PerformLayout()
         Me.pnlDataContainer.ResumeLayout(False)
         Me.panelSectionsAll.ResumeLayout(False)
         Me.panelSectionRecent.ResumeLayout(False)
@@ -747,6 +895,8 @@ Partial Class ucrDataView
         Me.panelSectionHelp.PerformLayout()
         Me.panelSectionStart.ResumeLayout(False)
         Me.panelSectionStart.PerformLayout()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanel1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -783,7 +933,6 @@ Partial Class ucrDataView
     Friend WithEvents ViewSheet As ToolStripMenuItem
     Friend WithEvents mnuCovertToOrderedFactors As ToolStripMenuItem
     Friend WithEvents mnuDuplicateColumn As ToolStripMenuItem
-    Friend WithEvents lblRowDisplay As Label
     Friend WithEvents mnuAddComment As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents lblHeaderDataView As Label
@@ -829,4 +978,15 @@ Partial Class ucrDataView
     Friend WithEvents mnuBottomAddComment As ToolStripMenuItem
     Private WithEvents mnuPaste As ToolStripMenuItem
     Friend WithEvents mnuCellPasteRange As ToolStripMenuItem
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents lblColLast As Label
+    Friend WithEvents lblRowBack As Label
+    Friend WithEvents lblColFirst As Label
+    Friend WithEvents lblColDisplay As Label
+    Friend WithEvents lblColNext As Label
+    Friend WithEvents lblColBack As Label
+    Friend WithEvents lblRowLast As Label
+    Friend WithEvents lblRowFirst As Label
+    Friend WithEvents lblRowDisplay As Label
+    Friend WithEvents lblRowNext As Label
 End Class

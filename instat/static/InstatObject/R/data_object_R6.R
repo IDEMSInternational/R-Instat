@@ -253,7 +253,7 @@ DataSheet$set("public", "set_metadata_changed", function(new_val) {
 }
 )
 
-DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, ...) {
+DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE, include_hidden_columns = TRUE, use_current_filter = TRUE, filter_name = "", stack_data = FALSE, remove_attr = FALSE, retain_attr = FALSE, max_cols, max_rows, drop_unused_filter_levels = FALSE, start_row,start_col, ...) {
   if(!stack_data) {
     if(!include_hidden_columns && self$is_variables_metadata(is_hidden_label)) {
       hidden <- self$get_variables_metadata(property = is_hidden_label)
@@ -300,7 +300,37 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
         }
       }
     }
+    if (!missing(start_col) && start_col < ncol(out)) #out <- out[start_col:max_cols]
+    {
+        if (!missing(max_cols))
+        {
+            if (max_cols + start_col > ncol(out)){
+                out <- out[start_col:ncol(out)]
+            }
+            else{
+                out <- out[start_col:(start_col+max_cols)]
+            }
+       }
+       else{
+            out <- out[start_col:ncol(out)]
+        }
+    }
+    else
     if(!missing(max_cols) && max_cols < ncol(out)) out <- out[1:max_cols]
+    if (!missing(start_row) && start_row < nrow(out)) {
+        if (!missing(max_rows)){
+            if (max_rows + start_row > nrow(out)){
+                out <- out[start_row:nrow(out), ]
+            }
+            else{
+                out <- out[start_row:(start_row + max_rows), ]
+            }
+        }
+        else{
+            out <- out[start_row:nrow(out), ]
+        }
+    }
+    else 
     if(!missing(max_rows) && max_rows < nrow(out)) {
       #for data frames with 1 col use slice because out[1:max_rows, ] will return a vector
       if(ncol(out) == 1){
