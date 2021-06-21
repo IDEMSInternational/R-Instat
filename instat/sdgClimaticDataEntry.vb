@@ -106,6 +106,7 @@ Public Class sdgClimaticDataEntry
                 If newValue = "" Then
                     newValue = "NA"
                 ElseIf bAllowTrace AndAlso newValue.ToUpper = "T" Then
+                    'assume trace values to be 0.03 (for R-Instat uses) here
                     newValue = 0.03
                 ElseIf bTransform And IsNumeric(newValue) Then
                     newValue = newValue * dTranformValue
@@ -633,6 +634,7 @@ Public Class sdgClimaticDataEntry
                 strValue = grdCurrentWorkSheet.Item(row:=i, col:=iColIndex)
             End If
 
+            'assume trace values to be 0 (for data entry uses) here
             If strValue.ToUpper = "T" Then
                 strValue = 0
             End If
