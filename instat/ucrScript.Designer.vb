@@ -56,11 +56,17 @@ Partial Class ucrScript
         Me.mnuClearContents = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuHelp = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdRun = New System.Windows.Forms.Button()
         Me.lblHeaderScript = New System.Windows.Forms.Label()
         Me.tlpTableContainer = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cmdClear = New System.Windows.Forms.Button()
+        Me.cmdRunAll = New System.Windows.Forms.Button()
+        Me.cmdRun = New System.Windows.Forms.Button()
+        Me.tooltiptScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtScript
@@ -73,7 +79,7 @@ Partial Class ucrScript
         Me.txtScript.Name = "txtScript"
         Me.txtScript.ScrollBars = System.Windows.Forms.ScrollBars.Both
         Me.txtScript.ShortcutsEnabled = False
-        Me.txtScript.Size = New System.Drawing.Size(405, 255)
+        Me.txtScript.Size = New System.Drawing.Size(405, 235)
         Me.txtScript.TabIndex = 0
         Me.txtScript.WordWrap = False
         '
@@ -183,16 +189,6 @@ Partial Class ucrScript
         Me.mnuHelp.Size = New System.Drawing.Size(229, 22)
         Me.mnuHelp.Text = "Help"
         '
-        'cmdRun
-        '
-        Me.cmdRun.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmdRun.Location = New System.Drawing.Point(3, 23)
-        Me.cmdRun.Name = "cmdRun"
-        Me.cmdRun.Size = New System.Drawing.Size(405, 27)
-        Me.cmdRun.TabIndex = 1
-        Me.cmdRun.Text = "Run All"
-        Me.cmdRun.UseVisualStyleBackColor = True
-        '
         'lblHeaderScript
         '
         Me.lblHeaderScript.BackColor = System.Drawing.Color.FromArgb(CType(CType(35, Byte), Integer), CType(CType(105, Byte), Integer), CType(CType(190, Byte), Integer))
@@ -212,17 +208,69 @@ Partial Class ucrScript
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Controls.Add(Me.lblHeaderScript, 0, 0)
         Me.tlpTableContainer.Controls.Add(Me.txtScript, 0, 2)
-        Me.tlpTableContainer.Controls.Add(Me.cmdRun, 0, 1)
+        Me.tlpTableContainer.Controls.Add(Me.Panel1, 0, 3)
+        Me.tlpTableContainer.Controls.Add(Me.Panel2, 0, 1)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
-        Me.tlpTableContainer.RowCount = 3
+        Me.tlpTableContainer.RowCount = 4
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.tlpTableContainer.Size = New System.Drawing.Size(411, 314)
         Me.tlpTableContainer.TabIndex = 9
+        '
+        'Panel1
+        '
+        Me.Panel1.Location = New System.Drawing.Point(3, 297)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(200, 14)
+        Me.Panel1.TabIndex = 9
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.cmdClear)
+        Me.Panel2.Controls.Add(Me.cmdRunAll)
+        Me.Panel2.Controls.Add(Me.cmdRun)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 23)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(405, 27)
+        Me.Panel2.TabIndex = 10
+        '
+        'cmdClear
+        '
+        Me.cmdClear.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.cmdClear.Location = New System.Drawing.Point(351, 1)
+        Me.cmdClear.Name = "cmdClear"
+        Me.cmdClear.Size = New System.Drawing.Size(51, 23)
+        Me.cmdClear.TabIndex = 4
+        Me.cmdClear.Text = "Clear"
+        Me.tooltiptScriptWindow.SetToolTip(Me.cmdClear, "Clear all the contents of the script window")
+        Me.cmdClear.UseVisualStyleBackColor = True
+        '
+        'cmdRunAll
+        '
+        Me.cmdRunAll.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.cmdRunAll.Location = New System.Drawing.Point(297, 1)
+        Me.cmdRunAll.Name = "cmdRunAll"
+        Me.cmdRunAll.Size = New System.Drawing.Size(51, 23)
+        Me.cmdRunAll.TabIndex = 3
+        Me.cmdRunAll.Text = "Run All"
+        Me.tooltiptScriptWindow.SetToolTip(Me.cmdRunAll, "Run all lines")
+        Me.cmdRunAll.UseVisualStyleBackColor = True
+        '
+        'cmdRun
+        '
+        Me.cmdRun.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.cmdRun.Location = New System.Drawing.Point(243, 1)
+        Me.cmdRun.Name = "cmdRun"
+        Me.cmdRun.Size = New System.Drawing.Size(51, 23)
+        Me.cmdRun.TabIndex = 2
+        Me.cmdRun.Text = "Run"
+        Me.tooltiptScriptWindow.SetToolTip(Me.cmdRun, "Run the current line or selection." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Ctrl + Enter)")
+        Me.cmdRun.UseVisualStyleBackColor = True
         '
         'ucrScript
         '
@@ -235,12 +283,12 @@ Partial Class ucrScript
         Me.mnuContextScript.ResumeLayout(False)
         Me.tlpTableContainer.ResumeLayout(False)
         Me.tlpTableContainer.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents txtScript As TextBox
-    Friend WithEvents cmdRun As Button
     Friend WithEvents lblHeaderScript As Label
     Friend WithEvents tlpTableContainer As TableLayoutPanel
     Friend WithEvents mnuContextScript As ContextMenuStrip
@@ -259,4 +307,10 @@ Partial Class ucrScript
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents mnuHelp As ToolStripMenuItem
     Friend WithEvents mnuRedo As ToolStripMenuItem
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents cmdRunAll As Button
+    Friend WithEvents cmdRun As Button
+    Friend WithEvents tooltiptScriptWindow As ToolTip
+    Friend WithEvents cmdClear As Button
 End Class

@@ -33,8 +33,24 @@ Public Class ucrScript
         txtScript.SelectAll()
     End Sub
 
-    Private Sub cmdRun_Click(sender As Object, e As EventArgs) Handles cmdRun.Click
+    Private Sub cmdRunAll_Click(sender As Object, e As EventArgs) Handles cmdRunAll.Click
         RunAllText()
+    End Sub
+
+    Private Sub cmdRunCurrentLine_Click(sender As Object, e As EventArgs) Handles cmdRun.Click
+        'temporarily disable the button incase its a long operation
+        cmdRun.Enabled = False
+        txtScript.Focus()
+        If txtScript.SelectionLength > 0 Then
+            RunSelectedText()
+        Else
+            RunCurrentLine()
+        End If
+        cmdRun.Enabled = True
+    End Sub
+
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        ClearContents()
     End Sub
 
     Private Sub RunAllText()
@@ -45,33 +61,13 @@ Public Class ucrScript
         End If
     End Sub
 
-    Public Sub AppendText(strText As String)
-        txtScript.Text = txtScript.Text & Environment.NewLine & strText
-        txtScript.SelectionStart = txtScript.Text.Length
-        txtScript.ScrollToCaret()
-        txtScript.Refresh()
-    End Sub
-
-    Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
-        If txtScript.TextLength > 0 Then
-            If MessageBox.Show("Are you sure you want to clear the contents of the script window?" & Me.Text,
-                               "Clear " & Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
-                bUserTextChanged = True
-                'This was preferred over txtScript.Clear() , to support undo
-                txtScript.Focus()
-                txtScript.SelectAll()
-                SendKeys.Send("{BACKSPACE}")
-            End If
-        End If
-    End Sub
-
-    Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
+    Private Sub RunSelectedText()
         If txtScript.SelectionLength > 0 Then
             RunText(txtScript.SelectedText)
         End If
     End Sub
 
-    Private Sub mnuRunCurrentLine_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLine.Click
+    Private Sub RunCurrentLine()
         Static strScriptCmd As String = "" 'static so that script can be added to with successive calls of this function
 
         If txtScript.TextLength > 0 Then
@@ -86,6 +82,38 @@ Public Class ucrScript
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub ClearContents()
+        If txtScript.TextLength > 0 Then
+            If MessageBox.Show("Are you sure you want to clear the contents of the script window?" & Me.Text,
+                               "Clear " & Me.Text, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                bUserTextChanged = True
+                'This was preferred over txtScript.Clear() , to support undo
+                txtScript.Focus()
+                txtScript.SelectAll()
+                SendKeys.Send("{BACKSPACE}")
+            End If
+        End If
+    End Sub
+
+    Public Sub AppendText(strText As String)
+        txtScript.Text = txtScript.Text & Environment.NewLine & strText
+        txtScript.SelectionStart = txtScript.Text.Length
+        txtScript.ScrollToCaret()
+        txtScript.Refresh()
+    End Sub
+
+    Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
+        ClearContents()
+    End Sub
+
+    Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
+        RunSelectedText()
+    End Sub
+
+    Private Sub mnuRunCurrentLine_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLine.Click
+        RunCurrentLine()
     End Sub
 
     Private Function RunText(strText As String) As String
@@ -174,9 +202,9 @@ Public Class ucrScript
     End Sub
 
     Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
-        mnuRunCurrentLine.ShortcutKeys = Keys.Enter Or Keys.Control
+        mnuRunCurrentLine.ShortcutKeys = Keys.Enter Or Keys.Control 'todo. remove this here
         txtScript.WordWrap = False
-        cmdRun.Enabled = (txtScript.TextLength > 0)
+        cmdRunAll.Enabled = (txtScript.TextLength > 0)
         mnuRedo.Enabled = False 'this is only enabled when undo operation is done.
     End Sub
 
@@ -238,7 +266,7 @@ Public Class ucrScript
     End Sub
 
     Private Sub txtScript_TextChanged(sender As Object, e As EventArgs) Handles txtScript.TextChanged
-        cmdRun.Enabled = (txtScript.TextLength > 0)
+        cmdRunAll.Enabled = (txtScript.TextLength > 0)
         'Only enabled undo if the text was changed directly by the user.  
 
         If bUserTextChanged AndAlso Not mnuUndo.Enabled Then
@@ -257,5 +285,6 @@ Public Class ucrScript
     Private Sub mnuHelp_Click(sender As Object, e As EventArgs) Handles mnuHelp.Click
         Help.ShowHelp(Me, frmMain.strStaticPath & "\" & frmMain.strHelpFilePath, HelpNavigator.TopicId, "542")
     End Sub
+
 
 End Class
