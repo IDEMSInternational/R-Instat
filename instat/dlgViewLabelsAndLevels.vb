@@ -19,6 +19,7 @@ Public Class dlgViewFactorLabels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsViewFunction, clsSelect As RFunction
+    Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub dlgLabelAndLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
@@ -85,23 +86,51 @@ Public Class dlgViewFactorLabels
         ucrChkSortByName.SetRDefault("FALSE")
     End Sub
 
-    Private Sub SetDefaults()
+    Private Sub ResetRCode()
         clsViewFunction = New RFunction
         clsSelect = New RFunction
 
-        'Reset
-        ucrSelectorViewLabelsAndLevels.Reset()
-        'Defining the function
         clsViewFunction.SetPackageName("sjPlot")
         clsViewFunction.SetRCommand("view_df")
 
         clsSelect.SetPackageName("dplyr")
         clsSelect.SetRCommand("select")
+    End Sub
 
+    Private Sub SetDefaults()
+        ResetRCode()
+        ucrSelectorViewLabelsAndLevels.Reset()
+
+        If IsNothing(lstRCodeStructure) Then
+            AddlsViewFunctionDefaultParameters()
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            AddlsViewFunctionDefaultParameters()
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If (TryCast(lstRCodeStructure(0), RFunction).strRCommand) = "view_df" Then
+                    clsViewFunction = lstRCodeStructure(0)
+                    If Not IsNothing(clsViewFunction.GetParameter("x")) Then
+                        clsSelect = clsViewFunction.GetParameter("x").clsArgumentCodeStructure
+                    End If
+                Else
+                    AddlsViewFunctionDefaultParameters()
+                    MsgBox("This dialogue uses the ""view_df"" only RFunction")
+                End If
+            Else
+                AddlsViewFunctionDefaultParameters()
+                MsgBox("Developer error:The Script must be an RFunction")
+            End If
+        End If
+        lstRCodeStructure = Nothing
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunction)
+    End Sub
+
+    Private Sub AddlsViewFunctionDefaultParameters()
         clsViewFunction.AddParameter("x", clsRFunctionParameter:=clsSelect)
         clsViewFunction.AddParameter("show.frq", "TRUE")
         clsViewFunction.AddParameter("show.id", "FALSE")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsViewFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -135,4 +164,14 @@ Public Class dlgViewFactorLabels
     Private Sub ucrReceiverFactorColumns_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVariables.ControlContentsChanged, ucrChkShowFrequencies.ControlContentsChanged, ucrChkShowLabels.ControlContentsChanged, ucrChkShowPercentage.ControlContentsChanged, ucrChkShowType.ControlContentsChanged, ucrChkShowValues.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class
