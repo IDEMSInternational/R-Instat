@@ -638,6 +638,7 @@ Public Class sdgClimaticDataEntry
             If strValue.ToUpper = "T" Then
                 strValue = 0
             End If
+
             If IsNumeric(strValue) Then
                 dValue = Double.Parse(strValue)
                 dSumValue = dSumValue + dValue
