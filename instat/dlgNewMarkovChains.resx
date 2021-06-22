@@ -505,7 +505,7 @@
     <value>8</value>
   </data>
   <data name="ucrInputMarkovType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>84, 71</value>
+    <value>98, 71</value>
   </data>
   <data name="ucrInputMarkovType.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 21</value>
@@ -607,7 +607,7 @@
     <value>3</value>
   </data>
   <data name="nudOrderTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 45</value>
+    <value>146, 45</value>
   </data>
   <data name="nudOrderTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 20</value>
@@ -628,7 +628,7 @@
     <value>4</value>
   </data>
   <data name="nudOrderFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 19</value>
+    <value>146, 19</value>
   </data>
   <data name="nudOrderFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 20</value>
@@ -652,7 +652,7 @@
     <value>219, 197</value>
   </data>
   <data name="grpOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 99</value>
+    <value>203, 99</value>
   </data>
   <data name="grpOrder.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>

@@ -204,6 +204,7 @@ Partial Class dlgConversions
         'ucrInputFromTemperature
         '
         Me.ucrInputFromTemperature.AddQuotesIfUnrecognised = True
+        Me.ucrInputFromTemperature.GetSetSelectedIndex = -1
         Me.ucrInputFromTemperature.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputFromTemperature, "ucrInputFromTemperature")
         Me.ucrInputFromTemperature.Name = "ucrInputFromTemperature"
@@ -222,6 +223,7 @@ Partial Class dlgConversions
         'ucrInputToWindSpeed
         '
         Me.ucrInputToWindSpeed.AddQuotesIfUnrecognised = True
+        Me.ucrInputToWindSpeed.GetSetSelectedIndex = -1
         Me.ucrInputToWindSpeed.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputToWindSpeed, "ucrInputToWindSpeed")
         Me.ucrInputToWindSpeed.Name = "ucrInputToWindSpeed"
@@ -240,6 +242,7 @@ Partial Class dlgConversions
         'ucrInputToTemperature
         '
         Me.ucrInputToTemperature.AddQuotesIfUnrecognised = True
+        Me.ucrInputToTemperature.GetSetSelectedIndex = -1
         Me.ucrInputToTemperature.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputToTemperature, "ucrInputToTemperature")
         Me.ucrInputToTemperature.Name = "ucrInputToTemperature"
@@ -252,6 +255,7 @@ Partial Class dlgConversions
         'ucrInputFromWindSpeed
         '
         Me.ucrInputFromWindSpeed.AddQuotesIfUnrecognised = True
+        Me.ucrInputFromWindSpeed.GetSetSelectedIndex = -1
         Me.ucrInputFromWindSpeed.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputFromWindSpeed, "ucrInputFromWindSpeed")
         Me.ucrInputFromWindSpeed.Name = "ucrInputFromWindSpeed"
@@ -259,6 +263,7 @@ Partial Class dlgConversions
         'ucrInputFromPrecipitation
         '
         Me.ucrInputFromPrecipitation.AddQuotesIfUnrecognised = True
+        Me.ucrInputFromPrecipitation.GetSetSelectedIndex = -1
         Me.ucrInputFromPrecipitation.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputFromPrecipitation, "ucrInputFromPrecipitation")
         Me.ucrInputFromPrecipitation.Name = "ucrInputFromPrecipitation"
@@ -266,6 +271,7 @@ Partial Class dlgConversions
         'ucrInputToPrecipitation
         '
         Me.ucrInputToPrecipitation.AddQuotesIfUnrecognised = True
+        Me.ucrInputToPrecipitation.GetSetSelectedIndex = -1
         Me.ucrInputToPrecipitation.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputToPrecipitation, "ucrInputToPrecipitation")
         Me.ucrInputToPrecipitation.Name = "ucrInputToPrecipitation"

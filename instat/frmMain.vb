@@ -2367,4 +2367,8 @@ Public Class frmMain
     Private Sub mnuSetupForDataEntry_Click(sender As Object, e As EventArgs) Handles mnuSetupForDataEntry.Click
         dlgSetupForDataEntry.ShowDialog()
     End Sub
+
+    Private Sub mnuEditPasteNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNewDataFrame.Click
+        dlgPasteNewDataFrame.ShowDialog()
+    End Sub
 End Class
