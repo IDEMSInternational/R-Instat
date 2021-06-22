@@ -44,9 +44,9 @@ Partial Class dlgImportShapeFiles
         'cmdBrowse
         '
         Me.cmdBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdBrowse.Location = New System.Drawing.Point(313, 18)
+        Me.cmdBrowse.Location = New System.Drawing.Point(291, 18)
         Me.cmdBrowse.Name = "cmdBrowse"
-        Me.cmdBrowse.Size = New System.Drawing.Size(75, 23)
+        Me.cmdBrowse.Size = New System.Drawing.Size(122, 23)
         Me.cmdBrowse.TabIndex = 2
         Me.cmdBrowse.Text = "Browse"
         Me.cmdBrowse.UseVisualStyleBackColor = True
@@ -54,9 +54,9 @@ Partial Class dlgImportShapeFiles
         'cmdLibrary
         '
         Me.cmdLibrary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdLibrary.Location = New System.Drawing.Point(313, 60)
+        Me.cmdLibrary.Location = New System.Drawing.Point(291, 60)
         Me.cmdLibrary.Name = "cmdLibrary"
-        Me.cmdLibrary.Size = New System.Drawing.Size(75, 23)
+        Me.cmdLibrary.Size = New System.Drawing.Size(122, 23)
         Me.cmdLibrary.TabIndex = 3
         Me.cmdLibrary.Text = "From Library"
         Me.cmdLibrary.UseVisualStyleBackColor = True
@@ -91,10 +91,10 @@ Partial Class dlgImportShapeFiles
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(54, 18)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(49, 18)
         Me.ucrInputFilePath.Margin = New System.Windows.Forms.Padding(9, 12, 9, 12)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(247, 23)
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(239, 23)
         Me.ucrInputFilePath.TabIndex = 1
         '
         'dlgImportShapeFiles

@@ -900,7 +900,7 @@ Public Class ucrSave
         Me.ucrLinkedReceiver = ucrLinkedReceiver
         AddHandler Me.ucrLinkedReceiver.ControlValueChanged, AddressOf LinkedReceiverControlValueChanged
         'call event handler to immediately get the values from the new receiver
-        LinkedReceiverControlValueChanged()
+        LinkedReceiverControlValueChanged(Me.ucrLinkedReceiver)
     End Sub
 
     '''--------------------------------------------------------------------------------------------
@@ -916,7 +916,7 @@ Public Class ucrSave
     '''             parameters are set to append the column after the final column. </para>
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
-    Private Sub LinkedReceiverControlValueChanged()
+    Private Sub LinkedReceiverControlValueChanged(ucrChangedControl As ucrCore)
         If Not sdgSaveColumnPosition.bUserSelected Then
             bInsertColumnBefore = False
             If ucrLinkedReceiver.IsEmpty Then

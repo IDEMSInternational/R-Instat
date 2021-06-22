@@ -56,9 +56,9 @@ Partial Class dlgClimaticNCMPVariogram
         'cmdStationMetadata
         '
         Me.cmdStationMetadata.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdStationMetadata.Location = New System.Drawing.Point(254, 181)
+        Me.cmdStationMetadata.Location = New System.Drawing.Point(233, 181)
         Me.cmdStationMetadata.Name = "cmdStationMetadata"
-        Me.cmdStationMetadata.Size = New System.Drawing.Size(120, 23)
+        Me.cmdStationMetadata.Size = New System.Drawing.Size(160, 23)
         Me.cmdStationMetadata.TabIndex = 7
         Me.cmdStationMetadata.Text = "Station Metadata"
         Me.cmdStationMetadata.UseVisualStyleBackColor = True
@@ -153,7 +153,7 @@ Partial Class dlgClimaticNCMPVariogram
         'cmdChooseFile
         '
         Me.cmdChooseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdChooseFile.Location = New System.Drawing.Point(334, 243)
+        Me.cmdChooseFile.Location = New System.Drawing.Point(339, 243)
         Me.cmdChooseFile.Name = "cmdChooseFile"
         Me.cmdChooseFile.Size = New System.Drawing.Size(75, 23)
         Me.cmdChooseFile.TabIndex = 14
@@ -172,9 +172,9 @@ Partial Class dlgClimaticNCMPVariogram
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(92, 244)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(166, 244)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(236, 21)
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(171, 21)
         Me.ucrInputFilePath.TabIndex = 13
         '
         'ucrReceiverMonth
@@ -236,7 +236,7 @@ Partial Class dlgClimaticNCMPVariogram
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(415, 326)
+        Me.ClientSize = New System.Drawing.Size(420, 326)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdChooseFile)
         Me.Controls.Add(Me.ucrInputFilePath)

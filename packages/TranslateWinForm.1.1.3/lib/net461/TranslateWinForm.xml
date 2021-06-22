@@ -191,8 +191,9 @@ TranslateWinForm
      to <paramref name="strLanguage"/>.
      Opens database <paramref name="strDataSource"/> and reads in all translations for the 
      <paramref name="strControlName"/> control for target language <paramref name="strLanguage"/>.
-     For each translation in the database, attempts to find the corresponding control or menu 
-     item in <paramref name="dctComponents"/>. If found, then it translates the text to the target language.
+     For each translation in the database, attempts to find the corresponding component in 
+     <paramref name="dctComponents"/>. If found, then it translates the text to the target 
+     language. If a component has a tool tip, then it also translates the tool tip.
  </summary>
 
  <param name="dctComponents">    [in,out] The dictionary of translatable components. </param>
@@ -204,6 +205,24 @@ TranslateWinForm
  <returns>
      If an exception is thrown, then returns the exception text; else returns 'Nothing'.
  </returns>
+--------------------------------------------------------------------------------------------
+</member>
+<member name="M:TranslateWinForm.clsTranslateWinForm.TranslateToolTip(System.Collections.Generic.List{System.Windows.Forms.ToolTip},System.ComponentModel.Component,System.String,System.Data.SQLite.SQLiteConnection)">
+--------------------------------------------------------------------------------------------
+ <summary>   
+   
+  If <paramref name="clsComponent"/> has a tool tip, then converts the tool tip into 
+  <paramref name="strLanguage"/>.
+  For controls, it searches in <paramref name="lstToolTips"/> for the control's tool tip. 
+  Tool bar buttons are not controls and their tool tips are not stored in 
+  <paramref name="lstToolTips"/>. Therefore, for tool bar buttons, if the tool bar button 
+  has tool tip text, then it translates the tool tip text directly.
+ </summary>
+
+ <param name="lstToolTips">      The tool tip object(s) that ay contain <paramref name="clsComponent"/>'s tool tip text. </param>
+ <param name="clsComponent">     The component that may have tool tip text. </param>
+ <param name="strLanguage">      The language code to translate to (e.g. 'fr' for French). </param>
+ <param name="clsConnection">    An open connection to the SQLite translation database. </param>
 --------------------------------------------------------------------------------------------
 </member>
 <member name="M:TranslateWinForm.clsTranslateWinForm.GetComponent(System.Collections.Generic.Dictionary{System.String,System.ComponentModel.Component},System.String)">

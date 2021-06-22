@@ -181,7 +181,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>232, 200</value>
+    <value>242, 200</value>
   </data>
   <data name="cmdSummaries.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 23</value>
@@ -271,7 +271,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoCustomised.Location" type="System.Drawing.Point, System.Drawing">
-    <value>147, 203</value>
+    <value>157, 203</value>
   </data>
   <data name="rdoCustomised.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 17</value>

@@ -87,6 +87,7 @@ Partial Class dlgNewMarkovChains
         '
         'ucrSelectorMarkovChains
         '
+        Me.ucrSelectorMarkovChains.bDropUnusedFilterLevels = False
         Me.ucrSelectorMarkovChains.bShowHiddenColumns = False
         Me.ucrSelectorMarkovChains.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorMarkovChains, "ucrSelectorMarkovChains")
@@ -151,6 +152,7 @@ Partial Class dlgNewMarkovChains
         'ucrInputExcludeSep
         '
         Me.ucrInputExcludeSep.AddQuotesIfUnrecognised = True
+        Me.ucrInputExcludeSep.GetSetSelectedIndex = -1
         Me.ucrInputExcludeSep.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputExcludeSep, "ucrInputExcludeSep")
         Me.ucrInputExcludeSep.Name = "ucrInputExcludeSep"
@@ -205,6 +207,7 @@ Partial Class dlgNewMarkovChains
         'ucrInputMarkovType
         '
         Me.ucrInputMarkovType.AddQuotesIfUnrecognised = True
+        Me.ucrInputMarkovType.GetSetSelectedIndex = -1
         Me.ucrInputMarkovType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputMarkovType, "ucrInputMarkovType")
         Me.ucrInputMarkovType.Name = "ucrInputMarkovType"
@@ -237,6 +240,7 @@ Partial Class dlgNewMarkovChains
         'ucrInputInteractions
         '
         Me.ucrInputInteractions.AddQuotesIfUnrecognised = True
+        Me.ucrInputInteractions.GetSetSelectedIndex = -1
         Me.ucrInputInteractions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputInteractions, "ucrInputInteractions")
         Me.ucrInputInteractions.Name = "ucrInputInteractions"
@@ -263,6 +267,7 @@ Partial Class dlgNewMarkovChains
         'ucrInputOptions
         '
         Me.ucrInputOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputOptions.GetSetSelectedIndex = -1
         Me.ucrInputOptions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputOptions, "ucrInputOptions")
         Me.ucrInputOptions.Name = "ucrInputOptions"
@@ -287,6 +292,7 @@ Partial Class dlgNewMarkovChains
         'ucrInputSaveModel
         '
         Me.ucrInputSaveModel.AddQuotesIfUnrecognised = True
+        Me.ucrInputSaveModel.GetSetSelectedIndex = -1
         Me.ucrInputSaveModel.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSaveModel, "ucrInputSaveModel")
         Me.ucrInputSaveModel.Name = "ucrInputSaveModel"

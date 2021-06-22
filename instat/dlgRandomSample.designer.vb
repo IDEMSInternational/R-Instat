@@ -48,7 +48,7 @@ Partial Class dlgRandomSample
         Me.ucrChkSetSeed = New instat.ucrCheck()
         Me.ucrNudSeed = New instat.ucrNud()
         Me.ucrNudNumberOfSamples = New instat.ucrNud()
-        Me.ucrSaveRandomSamples = New instat.ucrSave()
+        Me.ucrSaveRandomSample = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblSampleSize
@@ -112,16 +112,16 @@ Partial Class dlgRandomSample
         Me.ucrNudNumberOfSamples.Name = "ucrNudNumberOfSamples"
         Me.ucrNudNumberOfSamples.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrSaveRandomSamples
+        'ucrSaveRandomSample
         '
-        resources.ApplyResources(Me.ucrSaveRandomSamples, "ucrSaveRandomSamples")
-        Me.ucrSaveRandomSamples.Name = "ucrSaveRandomSamples"
+        resources.ApplyResources(Me.ucrSaveRandomSample, "ucrSaveRandomSample")
+        Me.ucrSaveRandomSample.Name = "ucrSaveRandomSample"
         '
         'dlgRandomSample
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrSaveRandomSamples)
+        Me.Controls.Add(Me.ucrSaveRandomSample)
         Me.Controls.Add(Me.ucrNudNumberOfSamples)
         Me.Controls.Add(Me.ucrNudSeed)
         Me.Controls.Add(Me.ucrChkSetSeed)
@@ -148,5 +148,5 @@ Partial Class dlgRandomSample
     Friend WithEvents ucrChkSetSeed As ucrCheck
     Friend WithEvents ucrNudSeed As ucrNud
     Friend WithEvents ucrNudNumberOfSamples As ucrNud
-    Friend WithEvents ucrSaveRandomSamples As ucrSave
+    Friend WithEvents ucrSaveRandomSample As ucrSave
 End Class

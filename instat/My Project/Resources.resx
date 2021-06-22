@@ -1645,4 +1645,10 @@
   <data name="lastgraph" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lastgraph.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Generalized_Pareto" xml:space="preserve">
+    <value>Generalized Pareto</value>
+  </data>
+  <data name="Gumbel" xml:space="preserve">
+    <value>Gumbel</value>
+  </data>
 </root>
