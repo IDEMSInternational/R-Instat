@@ -48,7 +48,7 @@ Public Class clsGridLink
         iMaxCols = 30
     End Sub
 
-    Public Sub UpdateGrids()
+    Private Sub UpdateGrids()
         'TODO remove this sub and whole class if possible
 
         frmMain.ucrDataViewer.RefreshGridData()

@@ -66,6 +66,7 @@ Public Class ucrColumnMetadata
     Private Sub RefreshWorksheet(fillWorkSheet As Worksheet, dataFrame As clsDataFrame)
         AddColumns(dataFrame, fillWorkSheet)
         AddRowData(dataFrame, fillWorkSheet)
+        UpdateWorksheetStyle(fillWorkSheet)
     End Sub
 
     Private Sub AddColumns(dataFramePage As clsDataFrame, workSheet As Worksheet)
@@ -88,6 +89,21 @@ Public Class ucrColumnMetadata
             RefreshWorksheet(fillWorkSheet, clsDataFrame)
         Next
 
+    End Sub
+
+    Public Sub UpdateAllWorksheetStyles()
+        For Each worksheet In grdVariables.Worksheets
+            UpdateWorksheetStyle(worksheet)
+        Next
+    End Sub
+
+    Private Sub UpdateWorksheetStyle(fillWorkSheet As Worksheet)
+        fillWorkSheet.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
+                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
+                                .TextColor = frmMain.clsInstatOptions.clrEditor,
+                                .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                                .FontName = frmMain.clsInstatOptions.fntEditor.Name
+                                })
     End Sub
 
     Private Sub AddRowData(dataFrame As clsDataFrame, workSheet As Worksheet)

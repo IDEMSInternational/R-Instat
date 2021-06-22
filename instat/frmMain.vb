@@ -178,6 +178,12 @@ Public Class frmMain
         ucrDataFrameMeta.RefreshGridData()
     End Sub
 
+    Public Sub UpdateFontsOnlyOnAllGrids()
+        ucrDataViewer.UpdateAllWorksheetStyles()
+        ucrColumnMeta.UpdateAllWorksheetStyles()
+        ucrDataFrameMeta.UpdateAllWorksheetStyles()
+    End Sub
+
     ' TODO This is used instead of autoTranslate so that split container isn't shifted
     ' Need to fix this so that all of frmMain can be translated
     Public Sub TranslateFrmMainMenu()

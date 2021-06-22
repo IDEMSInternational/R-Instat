@@ -40,6 +40,22 @@ Public Class ucrDataView
         AddColumns(dataFrame.VisiblePage, fillWorkSheet)
         AddRowData(dataFrame, fillWorkSheet)
         UpdateNavigationButtons()
+        UpdateWorksheetStyle(fillWorkSheet)
+    End Sub
+
+    Public Sub UpdateAllWorksheetStyles()
+        For Each worksheet In grdData.Worksheets
+            UpdateWorksheetStyle(worksheet)
+        Next
+    End Sub
+
+    Private Sub UpdateWorksheetStyle(fillWorkSheet As Worksheet)
+        fillWorkSheet.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
+                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
+                                .TextColor = frmMain.clsInstatOptions.clrEditor,
+                                .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                                .FontName = frmMain.clsInstatOptions.fntEditor.Name
+                                })
     End Sub
 
     Private Function GetCurrentDataFrameFocus() As clsDataFrame

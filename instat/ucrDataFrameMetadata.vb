@@ -57,6 +57,7 @@ Public Class ucrDataFrameMetadata
     Private Sub RefreshWorksheet()
         AddColumns()
         AddRowData()
+        UpdateWorksheetStyle(grdCurrSheet)
     End Sub
 
     Private Sub AddColumns()
@@ -88,6 +89,22 @@ Public Class ucrDataFrameMetadata
             RefreshWorksheet()
         End If
     End Sub
+
+    Public Sub UpdateAllWorksheetStyles()
+        UpdateWorksheetStyle(grdCurrSheet)
+    End Sub
+
+    Private Sub UpdateWorksheetStyle(fillWorkSheet As Worksheet)
+        Exit Sub
+
+        fillWorkSheet.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
+                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
+                                .TextColor = frmMain.clsInstatOptions.clrEditor,
+                                .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                                .FontName = frmMain.clsInstatOptions.fntEditor.Name
+                                })
+    End Sub
+
 
     Private Sub grdMetaData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdMetaData.CurrentWorksheetChanged, Me.Load, grdMetaData.WorksheetInserted
         grdCurrSheet = grdMetaData.CurrentWorksheet
