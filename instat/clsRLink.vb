@@ -2420,6 +2420,9 @@ Public Class RLink
             lstNewRCodeStructures.RemoveAt(0)
             dlgViewFactorLabels.lstScriptsRCodeStructure = lstNewRCodeStructures
             dlgViewFactorLabels.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("reorder levels") Then
+            dlgReorderLevels.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgReorderLevels.ShowDialog()
         End If
     End Sub
 

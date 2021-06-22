@@ -19,6 +19,7 @@ Public Class dlgReorderLevels
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsReorder As New RFunction
+    Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub dlgReorderLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -56,10 +57,27 @@ Public Class dlgReorderLevels
 
     Private Sub SetDefaults()
         clsReorder = New RFunction
-        'reset
-        ucrSelectorFactorLevelsToReorder.Reset()
-        ' Set default function
         clsReorder.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels")
+
+        ucrSelectorFactorLevelsToReorder.Reset()
+
+        If IsNothing(lstRCodeStructure) Then
+            'continue as normal
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels" Then
+                    clsReorder = lstRCodeStructure(0)
+                Else
+                    MsgBox("This dilogue use  the" & frmMain.clsRLink.strInstatDataObject & "$reorder_factor_levels" & "Rfunction only")
+                End If
+            Else
+                MsgBox("This dilogue use an Rfunction only")
+            End If
+        End If
+        lstRCodeStructure = Nothing
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsReorder)
     End Sub
 
@@ -84,4 +102,14 @@ Public Class dlgReorderLevels
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class

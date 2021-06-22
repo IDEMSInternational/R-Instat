@@ -112,6 +112,16 @@ Public Class dlgViewFactorLabels
                     clsViewFunction = lstRCodeStructure(0)
                     If Not IsNothing(clsViewFunction.GetParameter("x")) Then
                         clsSelect = clsViewFunction.GetParameter("x").clsArgumentCodeStructure
+                        For Each clsRParameter In clsSelect.clsParameters
+                            If Not IsNothing(clsRParameter.clsArgumentCodeStructure) Then
+                                If Not IsNothing(TryCast(clsRParameter.clsArgumentCodeStructure, RFunction)) Then
+                                    If TryCast(clsRParameter.clsArgumentCodeStructure, RFunction).strRCommand = "c" Then
+                                        clsRParameter.strArgumentName = "x"
+                                        Exit For
+                                    End If
+                                End If
+                            End If
+                        Next
                     End If
                 Else
                     AddlsViewFunctionDefaultParameters()

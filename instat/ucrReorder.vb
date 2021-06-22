@@ -239,9 +239,14 @@ Public Class ucrReorder
         Dim clsMainParameter As RParameter
 
         clsMainParameter = GetParameter()
-        If clsMainParameter IsNot Nothing AndAlso clsMainParameter.bIsString AndAlso clsMainParameter.strArgumentValue IsNot Nothing Then
-            lstCurrentVariables = ExtractItemsFromRList(clsMainParameter.strArgumentValue)
-            SetToValue(lstCurrentVariables)
+        If clsMainParameter IsNot Nothing Then
+            If clsMainParameter.bIsString AndAlso clsMainParameter.strArgumentValue IsNot Nothing Then
+                lstCurrentVariables = ExtractItemsFromRList(clsMainParameter.strArgumentValue)
+                SetToValue(lstCurrentVariables)
+            ElseIf clsMainParameter.bIsFunction AndAlso (clsMainParameter.clsArgumentCodeStructure.ToScript().StartsWith("c")) Then
+                lstCurrentVariables = ExtractItemsFromRList(clsMainParameter.clsArgumentCodeStructure.ToScript())
+                SetToValue(lstCurrentVariables)
+            End If
         End If
     End Sub
 
