@@ -85,6 +85,7 @@ Public Class ucrDataFrameMetadata
     End Sub
 
     Public Sub RefreshGridData()
+
         If DataBook?.clsDataFrameMetaData IsNot Nothing Then
             RefreshWorksheet()
         End If
