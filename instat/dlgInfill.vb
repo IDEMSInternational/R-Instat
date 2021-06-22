@@ -123,19 +123,14 @@ Public Class dlgInfill
     End Sub
 
     Private Sub ucrInputLimitOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLimitOptions.ControlValueChanged, ucrDtpStartDate.ControlValueChanged, ucrDtpEndDate.ControlValueChanged
-        If ucrInputLimitOptions.GetText = "Fixed Limits" Then
-            clsDefaultFunction.AddParameter("start_date", clsRFunctionParameter:=ucrDtpStartDate.ValueAsRDate, iPosition:=3)
-            clsDefaultFunction.AddParameter("end_date", clsRFunctionParameter:=ucrDtpEndDate.ValueAsRDate, iPosition:=4)
-        ElseIf ucrInputLimitOptions.GetText = "Fixed Start Limit" Then
-            clsDefaultFunction.RemoveParameterByName("end_date")
-            clsDefaultFunction.AddParameter("start_date", clsRFunctionParameter:=ucrDtpStartDate.ValueAsRDate, iPosition:=3)
-        ElseIf ucrInputLimitOptions.GetText = "Fixed End Limit" Then
-            clsDefaultFunction.RemoveParameterByName("start_date")
-            clsDefaultFunction.AddParameter("end_date", clsRFunctionParameter:=ucrDtpEndDate.ValueAsRDate, iPosition:=4)
-        Else
-            clsDefaultFunction.RemoveParameterByName("start_date")
-            clsDefaultFunction.RemoveParameterByName("end_date")
-        End If
+        clsDefaultFunction.RemoveParameterByName("start_date")
+        clsDefaultFunction.RemoveParameterByName("end_date")
+        Select Case ucrInputLimitOptions.GetText
+            Case "Fixed Limits", "Fixed Start Limit"
+                clsDefaultFunction.AddParameter("start_date", clsRFunctionParameter:=ucrDtpStartDate.ValueAsRDate, iPosition:=3)
+            Case "Fixed Limits", "Fixed End Limit"
+                clsDefaultFunction.AddParameter("end_date", clsRFunctionParameter:=ucrDtpEndDate.ValueAsRDate, iPosition:=4)
+        End Select
     End Sub
 
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
