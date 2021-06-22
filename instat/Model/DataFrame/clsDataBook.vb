@@ -83,25 +83,25 @@ Public Class clsDataBook
 
     Public Sub UpdateGrids()
         Dim listOfDataFrames As List(Of String)
-        Dim gridTab As clsDataFrame
+        Dim dataFrame As clsDataFrame
         If HasDataChanged() Then
             listOfDataFrames = GetDataFrameNames()
             DeleteOldGridTabs(listOfDataFrames)
-            For Each DataFrame In listOfDataFrames
-                gridTab = GetGridTab(DataFrame)
-                gridTab.RefreshData()
+            For Each strDataFrameName In listOfDataFrames
+                dataFrame = GetOrCreateDataFrame(strDataFrameName)
+                dataFrame.RefreshData()
             Next
             _clsDataFrameMetaData.RefreshData()
         End If
     End Sub
 
-    Protected Function GetGridTab(gridTabName As String) As clsDataFrame
-        Dim gridTab As clsDataFrame
-        gridTab = _dataFrames.Where(Function(x) x.Name = gridTabName).SingleOrDefault
-        If gridTab Is Nothing Then
-            gridTab = CreateNewGridTab(gridTabName)
+    Protected Function GetOrCreateDataFrame(strDataFrameName As String) As clsDataFrame
+        Dim dataFrame As clsDataFrame
+        dataFrame = _dataFrames.Where(Function(x) x.Name = strDataFrameName).SingleOrDefault
+        If dataFrame Is Nothing Then
+            dataFrame = CreateNewGridTab(strDataFrameName)
         End If
-        Return gridTab
+        Return dataFrame
     End Function
 
 

@@ -85,7 +85,6 @@ Public Class ucrDataFrameMetadata
     End Sub
 
     Public Sub RefreshGridData()
-
         If DataBook?.clsDataFrameMetaData IsNot Nothing Then
             RefreshWorksheet()
         End If
@@ -96,14 +95,15 @@ Public Class ucrDataFrameMetadata
     End Sub
 
     Private Sub UpdateWorksheetStyle(fillWorkSheet As Worksheet)
-        Exit Sub
-
-        fillWorkSheet.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
+        'This should be changed to make sure that InstatOptions is created before any grids
+        If frmMain.clsInstatOptions IsNot Nothing Then
+            fillWorkSheet.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
                                 .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
                                 .TextColor = frmMain.clsInstatOptions.clrEditor,
                                 .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
                                 .FontName = frmMain.clsInstatOptions.fntEditor.Name
                                 })
+        End If
     End Sub
 
 

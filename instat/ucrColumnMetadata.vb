@@ -329,13 +329,13 @@ Public Class ucrColumnMetadata
 
     Private Sub mnuConvertText_Click(sender As Object, e As EventArgs) Handles mnuConvertText.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToText(GetSelectedColumnNames())
+        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToText(GetSelectedDataFrameColumnNames())
         EndWait()
     End Sub
 
     Private Sub mnuConvertToLogical_Click(sender As Object, e As EventArgs) Handles mnuConvertToLogical.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToLogical(GetSelectedColumnNames())
+        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToLogical(GetSelectedDataFrameColumnNames())
         EndWait()
     End Sub
 
@@ -359,36 +359,50 @@ Public Class ucrColumnMetadata
         Cursor = Cursors.Default
     End Sub
 
-    Private Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
-        Dim lstColumns As List(Of clsColumnHeaderDisplay) = New List(Of clsColumnHeaderDisplay)
-        For i As Integer = grdVariables.CurrentWorksheet.SelectionRange.Col To grdVariables.CurrentWorksheet.SelectionRange.Col + grdVariables.CurrentWorksheet.SelectionRange.Cols - 1
-            lstColumns.Add(GetCurrentDataFrameFocus().VisiblePage.lstColumns(i))
+    'Private Function GetSelectedDataFrameColumns() As List(Of clsColumnHeaderDisplay)
+    '    Dim lstColumns As List(Of clsColumnHeaderDisplay) = New List(Of clsColumnHeaderDisplay)
+    '    For i As Integer = grdVariables.CurrentWorksheet.SelectionRange.Col To grdVariables.CurrentWorksheet.SelectionRange.Col + grdVariables.CurrentWorksheet.SelectionRange.Cols - 1
+    '        lstColumns.Add(GetCurrentDataFrameFocus().clsColumnMetaData..VisiblePage.lstColumns(i))
+    '    Next
+    '    Return lstColumns
+
+    '    Dim lstSelectedVars As New List(Of String)
+
+    '    For i As Integer = grdVariables.CurrentWorksheet.SelectionRange.Row To grdVariables.CurrentWorksheet.SelectionRange.Row + grdVariables.CurrentWorksheet.SelectionRange.Rows - 1
+    '        lstSelectedVars.Add(grdVariables.CurrentWorksheet(i, 0))
+    '    Next
+    '    Return lstSelectedVars.ToArray
+
+    'End Function
+    Private Function GetSelectedDataFrameColumnNames() As List(Of String)
+        Dim lstColumns As List(Of String) = New List(Of String)
+        For i As Integer = grdVariables.CurrentWorksheet.SelectionRange.Row To grdVariables.CurrentWorksheet.SelectionRange.Row + grdVariables.CurrentWorksheet.SelectionRange.Rows - 1
+            lstColumns.Add(grdVariables.CurrentWorksheet(i, 0))
         Next
         Return lstColumns
-    End Function
-    Private Function GetSelectedColumnNames() As List(Of String)
-        Return GetSelectedColumns().Select(Function(x) x.Name).ToList()
+
+        '  Return GetSelectedDataFrameColumns().Select(Function(x) x.Name).ToList()
     End Function
 
-    Private Function GetFirstSelectedColumnName() As String
-        Return GetSelectedColumns().FirstOrDefault().Name
-    End Function
+    'Private Function GetFirstSelectedDataFrameColumnName() As String
+    '    Return GetSelectedDataFrameColumns().FirstOrDefault().Name
+    'End Function
 
-    Private Function GetLastSelectedColumnName() As String
-        Return GetSelectedColumns().LastOrDefault().Name
-    End Function
+    'Private Function GetLastSelectedDataFrameColumnName() As String
+    '    Return GetSelectedDataFrameColumns().LastOrDefault().Name
+    'End Function
 
     Private Function IsOnlyOneColumnSeleted() As Boolean
         Return grdVariables.CurrentWorksheet.SelectionRange.Cols = 1
     End Function
-    Private Function IsFirstSelectedColumnAFactor() As Boolean
-        Return GetSelectedColumns().FirstOrDefault().IsFactor
+    Private Function IsFirstSelectedDataFrameColumnAFactor() As Boolean
+        Return False 'GetSelectedDataFrameColumns().FirstOrDefault().IsFactor
     End Function
 
 
     Private Sub mnuCovertToOrderedFactors_Click(sender As Object, e As EventArgs) Handles mnuCovertToOrderedFactors.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToOrderedFactor(GetSelectedColumnNames())
+        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToOrderedFactor(GetSelectedDataFrameColumnNames())
         EndWait()
     End Sub
 
@@ -405,7 +419,7 @@ Public Class ucrColumnMetadata
 
     Private Sub mnuConvertToFactor_Click(sender As Object, e As EventArgs) Handles mnuConvertToFactor.Click
         StartWait()
-        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToFactor(GetSelectedColumnNames())
+        GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToFactor(GetSelectedDataFrameColumnNames())
         EndWait()
     End Sub
 
@@ -439,13 +453,13 @@ Public Class ucrColumnMetadata
     End Function
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
-        If grdVariables.CurrentWorksheet.SelectionRange.Cols = grdVariables.CurrentWorksheet.ColumnCount Then
+        If grdVariables.CurrentWorksheet.SelectionRange.Rows = grdVariables.CurrentWorksheet.RowCount Then
             MsgBox("Cannot delete all visible columns." & Environment.NewLine & "Use Prepare > Data Object > Delete Data Frame if you wish to delete the data.", MsgBoxStyle.Information, "Cannot Delete All Columns")
         Else
             Dim deleteCol = MsgBox("Are you sure you want to delete these column(s)?" & Environment.NewLine & "This action cannot be undone.", MessageBoxButtons.YesNo, "Delete Column")
             If deleteCol = DialogResult.Yes Then
                 StartWait()
-                GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteColumn(GetSelectedColumnNames())
+                GetCurrentDataFrameFocus().clsPrepareFunctions.DeleteColumn(GetSelectedDataFrameColumnNames())
                 EndWait()
             End If
         End If
@@ -476,7 +490,7 @@ Public Class ucrColumnMetadata
 
     Private Sub columnContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles columnContextMenuStrip.Opening
         If IsOnlyOneColumnSeleted() Then
-            mnuLevelsLabels.Enabled = IsFirstSelectedColumnAFactor()
+            mnuLevelsLabels.Enabled = IsFirstSelectedDataFrameColumnAFactor()
             mnuDeleteCol.Text = GetTranslation("Delete Column")
             mnuInsertColsBefore.Text = GetTranslation("Insert 1 Column Before")
             mnuInsertColsAfter.Text = GetTranslation("Insert 1 Column After")
@@ -501,7 +515,7 @@ Public Class ucrColumnMetadata
 
     Private Sub mnuDeleteLabels_Click(sender As Object, e As EventArgs) Handles mnuDeleteLabels.Click
         StartWait()
-        DataBook.DataFrames.Where(Function(x) x.Name = grdCurrSheet.Name).FirstOrDefault.clsPrepareFunctions.AppendToVariablesMetadata(GetSelectedColumnNames)
+        DataBook.DataFrames.Where(Function(x) x.Name = grdCurrSheet.Name).FirstOrDefault.clsPrepareFunctions.AppendToVariablesMetadata(GetSelectedDataFrameColumnNames)
         EndWait()
     End Sub
 

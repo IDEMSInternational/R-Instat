@@ -26,9 +26,9 @@ Public Class clsPrepareFunctionsForGrids
     Public Sub DeleteColumn(lstColumnNames As List(Of String))
         Dim clsDeleteColumns As New RFunction
         clsDeleteColumns.SetRCommand(_RLink.strInstatDataObject & "$remove_columns_in_data")
-        clsDeleteColumns.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34), iPosition:=0)
-        clsDeleteColumns.AddParameter("cols", _RLink.GetListAsRString(lstColumnNames), iPosition:=1)
-        _RLink.RunScript(clsDeleteColumns.ToScript(), "Right click menu: Delete Column(s)")
+        clsDeleteColumns.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
+        clsDeleteColumns.AddParameter("cols", _RLink.GetListAsRString(lstColumnNames))
+        _RLink.RunScript(clsDeleteColumns.ToScript(), strComment:="Right click menu: Delete Column(s)")
     End Sub
 
     Public Sub ConvertToText(lstColumnNames As List(Of String))
@@ -146,6 +146,17 @@ Public Class clsPrepareFunctionsForGrids
         _RLink.RunScript(clsAppendVariablesMetaData.ToScript(), strComment:="Removed value labels")
     End Sub
 
+
+    Public Sub PasteValues(strClipBoardText As String, lstColumnNames As List(Of String), strStartRow As String)
+        Dim clsPasteValues As New RFunction
+        clsPasteValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$paste_from_clipboard")
+        clsPasteValues.AddParameter("data_name", Chr(34) & _strDataFrame & Chr(34))
+        clsPasteValues.AddParameter("col_names", _RLink.GetListAsRString(lstColumnNames))
+        clsPasteValues.AddParameter("start_row_pos", strStartRow)
+        clsPasteValues.AddParameter("first_clip_row_is_header", "FALSE")
+        clsPasteValues.AddParameter("clip_board_text", Chr(34) & strClipBoardText & Chr(34))
+        _RLink.RunScript(clsPasteValues.ToScript(), strComment:="Paste values in Data")
+    End Sub
 
     'Private Function ConvertNamesToRParameterString(lstNames As List(Of String)) As String
     '    Dim strCols As String
