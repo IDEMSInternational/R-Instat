@@ -538,7 +538,7 @@ Public Class ucrSave
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub UpdateRCode(Optional bReset As Boolean = False)
         If strSaveType = "key" Then
-            MyBase.UpdateRCode()
+            MyBase.UpdateRCode(bReset)
         Else
             UpdateAssignTo()
             'the control's R code has changed so ensure that the linked controls stay consistent
@@ -701,9 +701,10 @@ Public Class ucrSave
                         ucrChkSave.Checked = (clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned)
                     End If
                 End If
-                UpdateLinkedControls()
+
             End If
         End If
+        UpdateLinkedControls()
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Returns true if the name to save the object to is defined, else returns false. 
@@ -784,7 +785,11 @@ Public Class ucrSave
         '    - Should this function return boolean? The parent function in ucrCore has no return type! Is this good coding practice?
         '    - The parent function returns true if the control has a paremter that is not yet included in the R command. Why is this control different?
         '    - Is the condition for bToBeAssigned correct?
-        Return ((Not GetRCode().bIsAssigned AndAlso Not GetRCode().bToBeAssigned) AndAlso strSaveType <> "")
+        If strSaveType = "key" Then
+            MyBase.CanUpdate()
+        Else
+            Return ((Not GetRCode().bIsAssigned AndAlso Not GetRCode().bToBeAssigned) AndAlso strSaveType <> "")
+        End If
     End Function
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   If <paramref name="bAdd"/> is true then sets the R code 'assign to'

@@ -100,7 +100,10 @@ Public Class ucrInputComboBox
                     frmMain.clsRLink.FillColumnNames(ucrDataFrameSelector.cboAvailableDataFrames.Text, cboColumns:=cboInput)
                 End If
             Case "Keys"
-                  'TODO not yet implemented
+                If ucrDataFrameSelector IsNot Nothing Then
+                    cboInput.Items.Clear()
+                    cboInput.Items.AddRange(frmMain.clsRLink.GetKeyNames(ucrDataFrameSelector.cboAvailableDataFrames.Text).ToArray)
+                End If
             Case "Data Frames"
                 'TODO not yet implemented
             Case "Models"

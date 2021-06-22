@@ -1931,11 +1931,17 @@ Public Class RLink
         Return lstSurvNames
     End Function
 
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's keys. </summary>
+    '''
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
+    '''
+    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's survs. </returns>
+    '''--------------------------------------------------------------------------------------------
     Public Function GetKeyNames(Optional strDataFrameName As String = "") As List(Of String)
         Dim lstKeyNames As New List(Of String)
         Dim clsGetKeyNames As New RFunction
         Dim expKeyNames As SymbolicExpression
-        Dim chrKeys As CharacterVector
 
         clsGetKeyNames.SetRCommand(strInstatDataObject & "$get_key_names")
 
@@ -1944,9 +1950,7 @@ Public Class RLink
         End If
         expKeyNames = RunInternalScriptGetValue(clsGetKeyNames.ToScript(), bSilent:=True)
         If expKeyNames IsNot Nothing AndAlso Not expKeyNames.Type = Internals.SymbolicExpressionType.Null Then
-            For i = 0 To chrKeys.Count - 1
-                lstKeyNames.Add(chrKeys(i).ToString)
-            Next
+            lstKeyNames = expKeyNames.AsCharacter.ToArray.ToList
         End If
         Return lstKeyNames
     End Function

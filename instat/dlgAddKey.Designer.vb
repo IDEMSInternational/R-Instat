@@ -41,11 +41,11 @@ Partial Class dlgAddKey
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgAddKey))
         Me.cmdCheckUnique = New System.Windows.Forms.Button()
         Me.lblKeyColumns = New System.Windows.Forms.Label()
+        Me.ucrSaveKey = New instat.ucrSave()
         Me.ucrInputCheckInput = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorKeyColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverKeyColumns = New instat.ucrReceiverMultiple()
-        Me.ucrSaveKey = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'cmdCheckUnique
@@ -58,6 +58,11 @@ Partial Class dlgAddKey
         '
         resources.ApplyResources(Me.lblKeyColumns, "lblKeyColumns")
         Me.lblKeyColumns.Name = "lblKeyColumns"
+        '
+        'ucrSaveKey
+        '
+        resources.ApplyResources(Me.ucrSaveKey, "ucrSaveKey")
+        Me.ucrSaveKey.Name = "ucrSaveKey"
         '
         'ucrInputCheckInput
         '
@@ -88,11 +93,6 @@ Partial Class dlgAddKey
         Me.ucrReceiverKeyColumns.Selector = Nothing
         Me.ucrReceiverKeyColumns.strNcFilePath = ""
         Me.ucrReceiverKeyColumns.ucrSelector = Nothing
-        '
-        'ucrSaveKey
-        '
-        resources.ApplyResources(Me.ucrSaveKey, "ucrSaveKey")
-        Me.ucrSaveKey.Name = "ucrSaveKey"
         '
         'dlgAddKey
         '
