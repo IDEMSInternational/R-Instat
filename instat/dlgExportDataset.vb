@@ -123,8 +123,7 @@ Public Class dlgExportDataset
                 strCommand = strCommand & "rio::export( x = data_book$get_data_frame(data_name=""" & strItem & """), file = """ & ucrFilePath.FilePath & "/" & strItem & GetSelectedExtension(cboFileType.SelectedItem) & """)" & Environment.NewLine
             Next
             ucrBase.clsRsyntax.SetCommandString(strCommand)
-            'lblConfirm.Text = GetTranslation("Files with the same names will be overwritten." & Environment.NewLine & "Click Ok to Confirm the Export.")
-            lblConfirm.Text = GetTranslation("Files with the same names will be overwritten.") & Environment.NewLine & GetTranslation("Click Ok to Confirm the Export.")
+            lblConfirm.Text = GetTranslation("Files with the same names will be overwritten." & Environment.NewLine & "Click Ok to Confirm the Export.")
         End If
         TestOkEnabled()
     End Sub
