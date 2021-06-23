@@ -368,12 +368,12 @@
     <Compile Include="frmConvertToNumeric.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Model\DataFrame\clsColumnMetaData.vb" />
-    <Compile Include="Model\DataFrame\clsDataBook.vb" />
-    <Compile Include="Model\DataFrame\clsDataFrame.vb" />
-    <Compile Include="Model\DataFrame\clsDataFrameFilter.vb" />
-    <Compile Include="Model\DataFrame\clsDataFrameMetaData.vb" />
-    <Compile Include="Model\DataFrame\clsDataFramePage.vb" />
+    <Compile Include="Model\DataBook\clsColumnMetaData.vb" />
+    <Compile Include="Model\DataBook\clsDataBook.vb" />
+    <Compile Include="Model\DataBook\clsDataFrame.vb" />
+    <Compile Include="Model\DataBook\clsDataFrameFilter.vb" />
+    <Compile Include="Model\DataBook\clsDataFrameMetaData.vb" />
+    <Compile Include="Model\DataBook\clsDataFramePage.vb" />
     <Compile Include="Model\RCommand\clsPrepareFunctionsForGrids.vb" />
     <Compile Include="Record\clsColumnHeaderDisplay.vb" />
     <Compile Include="sdgClimaticDataEntry.Designer.vb">

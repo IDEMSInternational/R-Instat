@@ -308,7 +308,7 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
                 out <- out[start_col:ncol(out)]
             }
             else{
-                out <- out[start_col:(start_col+max_cols)]
+                out <- out[start_col:(start_col + max_cols)]
             }
        }
        else{

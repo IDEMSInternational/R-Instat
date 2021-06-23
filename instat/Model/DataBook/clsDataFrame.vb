@@ -11,10 +11,14 @@ Public Class clsDataFrame
     Protected _totalRowCount As Integer
     Protected _totalColumnCount As Integer
 
+
+
+
     ''' <summary>
     ''' 
     ''' </summary>
     ''' <returns></returns>
+    ''' 
     Public ReadOnly Property Filter() As clsDataFrameFilter
         Get
             Return _clsFilter
