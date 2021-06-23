@@ -197,7 +197,7 @@ load_R_Instat_packages <- function() {
   # wakefield because many functions do not work without loading (https://github.com/trinker/wakefield/issues/11)
   # latticeExtra because conditionalQuantile key positions work well when latticeExtra is loaded
   # texmex loaded because of extreme value distributions 
-  packs_to_load <- c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield", "circular", "latticeExtra", "texmex")
+  packs_to_load <- c("plyr", "tidyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield", "circular", "latticeExtra", "texmex")
   for(pack in packs_to_load) {
     try(library(pack, character.only = TRUE))
   }
