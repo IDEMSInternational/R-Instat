@@ -32,6 +32,7 @@ Partial Class dlgWindPollutionRose
         Me.lblWindDirection = New System.Windows.Forms.Label()
         Me.lblWindSpeed = New System.Windows.Forms.Label()
         Me.lblPollutant = New System.Windows.Forms.Label()
+        Me.ucrChkCompareTwoSets = New instat.ucrCheck()
         Me.ucrReceiverFacetOne = New instat.ucrReceiverSingle()
         Me.ucrReceiverFacetTwo = New instat.ucrReceiverSingle()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
@@ -46,7 +47,6 @@ Partial Class dlgWindPollutionRose
         Me.ucrReceiverWindDirection2 = New instat.ucrReceiverSingle()
         Me.ucrSelectorWindPollutionRose = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkCompareTwoSets = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblFacetTwo
@@ -139,6 +139,14 @@ Partial Class dlgWindPollutionRose
         Me.lblPollutant.TabIndex = 7
         Me.lblPollutant.Text = "Pollutant (Optional):"
         '
+        'ucrChkCompareTwoSets
+        '
+        Me.ucrChkCompareTwoSets.Checked = False
+        Me.ucrChkCompareTwoSets.Location = New System.Drawing.Point(257, 207)
+        Me.ucrChkCompareTwoSets.Name = "ucrChkCompareTwoSets"
+        Me.ucrChkCompareTwoSets.Size = New System.Drawing.Size(155, 20)
+        Me.ucrChkCompareTwoSets.TabIndex = 9
+        '
         'ucrReceiverFacetOne
         '
         Me.ucrReceiverFacetOne.frmParent = Me
@@ -188,9 +196,9 @@ Partial Class dlgWindPollutionRose
         Me.ucrInputStatistic.AddQuotesIfUnrecognised = True
         Me.ucrInputStatistic.GetSetSelectedIndex = -1
         Me.ucrInputStatistic.IsReadOnly = False
-        Me.ucrInputStatistic.Location = New System.Drawing.Point(78, 240)
+        Me.ucrInputStatistic.Location = New System.Drawing.Point(71, 240)
         Me.ucrInputStatistic.Name = "ucrInputStatistic"
-        Me.ucrInputStatistic.Size = New System.Drawing.Size(99, 21)
+        Me.ucrInputStatistic.Size = New System.Drawing.Size(109, 21)
         Me.ucrInputStatistic.TabIndex = 21
         '
         'ucrInputColor
@@ -198,9 +206,9 @@ Partial Class dlgWindPollutionRose
         Me.ucrInputColor.AddQuotesIfUnrecognised = True
         Me.ucrInputColor.GetSetSelectedIndex = -1
         Me.ucrInputColor.IsReadOnly = False
-        Me.ucrInputColor.Location = New System.Drawing.Point(78, 210)
+        Me.ucrInputColor.Location = New System.Drawing.Point(70, 211)
         Me.ucrInputColor.Name = "ucrInputColor"
-        Me.ucrInputColor.Size = New System.Drawing.Size(99, 21)
+        Me.ucrInputColor.Size = New System.Drawing.Size(109, 21)
         Me.ucrInputColor.TabIndex = 19
         '
         'ucrChkPaddle
@@ -288,14 +296,6 @@ Partial Class dlgWindPollutionRose
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 24
-        '
-        'ucrChkCompareTwoSets
-        '
-        Me.ucrChkCompareTwoSets.Checked = False
-        Me.ucrChkCompareTwoSets.Location = New System.Drawing.Point(257, 207)
-        Me.ucrChkCompareTwoSets.Name = "ucrChkCompareTwoSets"
-        Me.ucrChkCompareTwoSets.Size = New System.Drawing.Size(155, 20)
-        Me.ucrChkCompareTwoSets.TabIndex = 9
         '
         'dlgWindPollutionRose
         '

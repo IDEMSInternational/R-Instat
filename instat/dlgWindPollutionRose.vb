@@ -19,7 +19,6 @@ Imports instat.Translations
 Public Class dlgWindPollutionRose
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private bRcodeSet As Boolean = False
     'Functions 
     Private clsPollutionRoseFunction As RFunction
 
@@ -79,9 +78,9 @@ Public Class dlgWindPollutionRose
         ucrChkPaddle.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
         ucrInputStatistic.SetParameter(New RParameter("statistic", 8))
-        dctStatistic.Add("prop.count", Chr(34) & "prop.count" & Chr(34))
-        dctStatistic.Add("prop.mean", Chr(34) & "prop.mean" & Chr(34))
-        dctStatistic.Add("abs.count", Chr(34) & "abs.count" & Chr(34))
+        dctStatistic.Add("Proportion count", Chr(34) & "prop.count" & Chr(34))
+        dctStatistic.Add("Proportion mean", Chr(34) & "prop.mean" & Chr(34))
+        dctStatistic.Add("Absolute count", Chr(34) & "abs.count" & Chr(34))
         ucrInputStatistic.SetItems(dctStatistic)
         ucrInputStatistic.SetDropDownStyleAsNonEditable()
 
@@ -105,7 +104,7 @@ Public Class dlgWindPollutionRose
         ucrReceiverWindSpeed2.SetLinkedDisplayControl(lblWindSpeed2)
         ucrChkCompareTwoSets.AddToLinkedControls({ucrReceiverWindDirection2, ucrReceiverWindSpeed2}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrSaveGraph.SetPrefix("wind_pollution_rose")
+        ucrSaveGraph.SetPrefix("pollution_rose_plot")
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetCheckBoxText("Save Graph")
