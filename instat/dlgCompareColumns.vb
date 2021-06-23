@@ -20,11 +20,17 @@ Public Class dlgCompareColumns
 
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsCompareColumns As New RFunction
-    Private clsYinXOperator As New ROperator
+    Private iDialogHeight As Integer
+    Private iBaseMaxY
+    Private clsCompareColumnsFunction, clsAbsoluteFunction As New RFunction
+    Private clsFirstAsCharacterFunction, clsSecondAsCharacterFunction, clsSummaryFunction As New RFunction
+    Private clsYinXOperator, clsIsEqualToOperator, clsSubtractOperator, clsLessorEqualToOperator As New ROperator
+    Private clsDummyOperator As ROperator
 
     Private Sub dlgCompareColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
+            iDialogHeight = Me.Height
+            iBaseMaxY = ucrBase.Location.Y
             InitialiseDialog()
             bFirstLoad = False
         End If
@@ -39,7 +45,15 @@ Public Class dlgCompareColumns
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim dctTolerance As New Dictionary(Of String, String)
         ucrBase.iHelpTopicID = 546
+
+        ucrPnlOptions.AddRadioButton(rdoByRow)
+        ucrPnlOptions.AddRadioButton(rdoByValue)
+
+        ucrPnlOptions.AddToLinkedControls({ucrChkUnique, ucrChkSort, ucrChkFirstNotSecond}, {rdoByValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkFirstNotSecond.SetLinkedDisplayControl(grpComparisions)
+
         ucrReceiverFirst.SetParameter(New RParameter("x", 0))
         ucrReceiverFirst.Selector = ucrSelectorCompareColumns
         ucrReceiverFirst.SetParameterIsRFunction()
@@ -53,6 +67,16 @@ Public Class dlgCompareColumns
         ucrReceiverSecond.bAttachedToPrimaryDataFrame = False
         ucrReceiverSecond.bOnlyLinkedToPrimaryDataFrames = False
         ucrReceiverSecond.bIncludeDataFrameInAssignment = True
+
+        ucrInputTolerance.SetParameter(New RParameter("tol", 1))
+        dctTolerance.Add("0", "0")
+        dctTolerance.Add("0.005", "0.005")
+        dctTolerance.Add("0.0000000001", "0.0000000001")
+        ucrInputTolerance.SetItems(dctTolerance)
+        ucrInputTolerance.SetValidationTypeAsNumeric()
+        ucrInputTolerance.AddQuotesIfUnrecognised = False
+        ucrInputTolerance.SetLinkedDisplayControl(lblTolerance)
+        ucrInputTolerance.bAllowNonConditionValues = True
 
         ucrChkUnique.SetParameter(New RParameter("use_unique", 2), bNewChangeParameterValue:=True)
         ucrChkUnique.SetText("Use unique values for comparison")
@@ -82,52 +106,102 @@ Public Class dlgCompareColumns
         ucrChkAllValues.SetText("All values if columns are equal")
         ucrChkAllValues.SetRDefault("TRUE")
 
-        ' Not setting data frame selector or prefix here because we need save control only linked to data frame of second selector which is not yet implemented
-        ucrSaveLogical.SetCheckBoxText("Save logical values for second column")
+        ucrSaveLogical.SetPrefix("compare")
         ucrSaveLogical.SetSaveTypeAsColumn()
-        ucrSaveLogical.SetIsTextBox()
-        ' This ensures the assign text is correctly cleared when resetting
-        ucrSaveLogical.bUpdateRCodeFromControl = False
+        ucrSaveLogical.SetDataFrameSelector(ucrSelectorCompareColumns.ucrAvailableDataFrames)
+        ucrSaveLogical.SetIsComboBox()
+
+        ucrSaveLogical.SetLabelText("New Column Name:")
+
+        ucrSaveLogical.SetLabelText("Save result for second column:")
+        ucrSaveLogical.setLinkedReceiver(ucrReceiverSecond)
+
+        ucrBase.clsRsyntax.iCallType = 2
     End Sub
 
     Private Sub SetDefaults()
-        clsCompareColumns = New RFunction
+        clsCompareColumnsFunction = New RFunction
+        clsAbsoluteFunction = New RFunction
+        clsFirstAsCharacterFunction = New RFunction
+        clsSecondAsCharacterFunction = New RFunction
+        clsSummaryFunction = New RFunction
         clsYinXOperator = New ROperator
+        clsIsEqualToOperator = New ROperator
+        clsSubtractOperator = New ROperator
+        clsLessorEqualToOperator = New ROperator
+        clsDummyOperator = New ROperator
 
         ucrBase.clsRsyntax.ClearCodes()
+        rdoByRow.Checked = True
 
         ucrSelectorCompareColumns.Reset()
         ucrReceiverFirst.SetMeAsReceiver()
         ucrSaveLogical.Reset()
 
-        clsCompareColumns.SetRCommand("compare_columns")
+        clsCompareColumnsFunction.SetRCommand("compare_columns")
         clsYinXOperator.SetOperation("%in%")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCompareColumns)
-        ucrBase.clsRsyntax.iCallType = 2
+
+        clsFirstAsCharacterFunction.SetRCommand("as.character")
+        clsSecondAsCharacterFunction.SetRCommand("as.character")
+
+        clsIsEqualToOperator.SetOperation("==")
+
+        clsSubtractOperator.SetOperation("-")
+
+        clsAbsoluteFunction.SetRCommand("abs")
+        clsAbsoluteFunction.AddParameter("x", clsROperatorParameter:=clsSubtractOperator, iPosition:=0)
+
+        clsLessorEqualToOperator.SetOperation("<=")
+        clsLessorEqualToOperator.AddParameter("tol", 0, iPosition:=1)
+
+        clsSummaryFunction.SetRCommand("summary")
+        clsSummaryFunction.iCallType = 2
+
+        ucrBase.clsRsyntax.SetBaseROperator(clsDummyOperator)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverFirst.AddAdditionalCodeParameterPair(clsYinXOperator, New RParameter("right", iNewPosition:=1), iAdditionalPairNo:=1)
+        ucrReceiverFirst.AddAdditionalCodeParameterPair(clsFirstAsCharacterFunction, New RParameter("first", bNewIncludeArgumentName:=False, iNewPosition:=0), iAdditionalPairNo:=2)
+        ucrReceiverFirst.AddAdditionalCodeParameterPair(clsSubtractOperator, New RParameter("first", bNewIncludeArgumentName:=False, iNewPosition:=0), iAdditionalPairNo:=3)
+
         ucrReceiverSecond.AddAdditionalCodeParameterPair(clsYinXOperator, New RParameter("left", iNewPosition:=0), iAdditionalPairNo:=1)
+        ucrReceiverSecond.AddAdditionalCodeParameterPair(clsSecondAsCharacterFunction, New RParameter("second", bNewIncludeArgumentName:=False, iNewPosition:=1), iAdditionalPairNo:=2)
+        ucrReceiverSecond.AddAdditionalCodeParameterPair(clsSubtractOperator, New RParameter("second", bNewIncludeArgumentName:=False, iNewPosition:=1), iAdditionalPairNo:=3)
 
-        ucrReceiverFirst.SetRCode(clsCompareColumns, bReset)
-        ucrReceiverSecond.SetRCode(clsCompareColumns, bReset)
-        ucrChkUnique.SetRCode(clsCompareColumns, bReset)
-        ucrChkSort.SetRCode(clsCompareColumns, bReset)
-        ucrChkFirstNotSecond.SetRCode(clsCompareColumns, bReset)
-        ucrChkSecondNotFirst.SetRCode(clsCompareColumns, bReset)
-        ucrChkIntersection.SetRCode(clsCompareColumns, bReset)
-        ucrChkUnion.SetRCode(clsCompareColumns, bReset)
-        ucrChkAllValues.SetRCode(clsCompareColumns, bReset)
+        ucrReceiverFirst.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrReceiverSecond.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkUnique.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkSort.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkFirstNotSecond.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkSecondNotFirst.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkIntersection.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkUnion.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrChkAllValues.SetRCode(clsCompareColumnsFunction, bReset)
+        ucrInputTolerance.SetRCode(clsLessorEqualToOperator, bReset)
 
-        ucrSaveLogical.SetRCode(clsYinXOperator, bReset)
+        ucrSaveLogical.AddAdditionalRCode(clsLessorEqualToOperator, iAdditionalPairNo:=1)
+        ucrSaveLogical.AddAdditionalRCode(clsYinXOperator, iAdditionalPairNo:=2)
+        ucrSaveLogical.SetRCode(clsIsEqualToOperator, bReset)
     End Sub
 
+
     Private Sub TestOkEnabled()
-        If Not ucrReceiverFirst.IsEmpty AndAlso Not ucrReceiverSecond.IsEmpty AndAlso ucrSaveLogical.IsComplete() Then
-            ucrBase.OKEnabled(True)
-        Else
+        If ucrReceiverFirst.IsEmpty OrElse ucrReceiverSecond.IsEmpty OrElse Not ucrSaveLogical.IsComplete() Then
             ucrBase.OKEnabled(False)
+        Else
+            If ({"integer", "numeric"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso
+                {"integer", "numeric"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse
+                (ucrReceiverFirst.strCurrDataType = "Date" AndAlso
+                ucrReceiverSecond.strCurrDataType = "Date") OrElse
+                ({"factor", "character"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso
+                {"factor", "character"}.Contains(ucrReceiverSecond.strCurrDataType)) OrElse
+                (ucrReceiverFirst.strCurrDataType = "logical" AndAlso
+                ucrReceiverSecond.strCurrDataType = "logical") Then
+                ucrBase.OKEnabled(True)
+            Else
+                ucrBase.OKEnabled(False)
+            End If
         End If
     End Sub
 
@@ -141,26 +215,71 @@ Public Class dlgCompareColumns
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverSecond_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSecond.ControlValueChanged
-        ' Needs to be done manually because data frame name should only be the data frame name from the second receiver's variable.
-        ucrSaveLogical.SetGlobalDataName(ucrReceiverSecond.GetDataName())
-    End Sub
-
-    Private Sub ucrSaveLogical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveLogical.ControlValueChanged
-        If ucrSaveLogical.ucrChkSave.Checked Then
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        If rdoByValue.Checked Then
+            ucrInputTolerance.Visible = False
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCompareColumnsFunction)
+            ucrBase.clsRsyntax.RemoveFromAfterCodes(clsSummaryFunction)
             ucrBase.clsRsyntax.AddToAfterCodes(clsYinXOperator, iPosition:=1)
-        Else
+            Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY)
+            ucrSaveLogical.Location = New Point(ucrSaveLogical.Location.X, iBaseMaxY / 1.07)
+        ElseIf rdoByRow.Checked Then
+            ucrBase.clsRsyntax.SetBaseROperator(clsDummyOperator)
             ucrBase.clsRsyntax.RemoveFromAfterCodes(clsYinXOperator)
+            ucrBase.clsRsyntax.AddToAfterCodes(clsSummaryFunction, iPosition:=1)
+            Me.Size = New System.Drawing.Size(Me.Width, iDialogHeight * 0.68)
+            ucrBase.Location = New Point(ucrBase.Location.X, iBaseMaxY / 1.62)
+            ucrSaveLogical.Location = New Point(ucrSaveLogical.Location.X, iBaseMaxY / 1.8)
         End If
+        CheckDatatype()
     End Sub
 
-    Private Sub ucrReceiverFirst_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirst.ControlValueChanged
-        If Not ucrSaveLogical.bUserTyped Then
-            If ucrReceiverFirst.IsEmpty Then
-                ucrSaveLogical.SetName("")
+    Private Sub CheckDatatype()
+        If ucrReceiverSecond.IsEmpty OrElse ucrReceiverFirst.IsEmpty Then
+            TestOkEnabled()
+            Exit Sub
+        Else
+            If {"integer", "numeric"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"integer", "numeric"}.Contains(ucrReceiverSecond.strCurrDataType) Then
+                If rdoByRow.Checked Then
+                    ucrInputTolerance.Visible = True
+                    clsLessorEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsAbsoluteFunction, iPosition:=0)
+                    clsLessorEqualToOperator.AddParameter("tol", "0", iPosition:=1)
+                    clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsLessorEqualToOperator, iPosition:=1)
+                    clsDummyOperator = clsLessorEqualToOperator
+                End If
+            ElseIf {"Date", "date"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"Date", "date"}.Contains(ucrReceiverSecond.strCurrDataType) Then
+                If rdoByRow.Checked Then
+                    ucrInputTolerance.Visible = True
+                    clsLessorEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsAbsoluteFunction, iPosition:=0)
+                    clsLessorEqualToOperator.AddParameter("tol", "0", iPosition:=1)
+                    clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsLessorEqualToOperator, iPosition:=1)
+                    clsDummyOperator = clsLessorEqualToOperator
+                End If
+            ElseIf {"factor", "character"}.Contains(ucrReceiverFirst.strCurrDataType) AndAlso {"factor", "character"}.Contains(ucrReceiverSecond.strCurrDataType) Then
+                If rdoByRow.Checked Then
+                    ucrInputTolerance.Visible = False
+                    clsIsEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsFirstAsCharacterFunction, iPosition:=0)
+                    clsIsEqualToOperator.AddParameter("second", clsRFunctionParameter:=clsSecondAsCharacterFunction, iPosition:=1)
+                    clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsIsEqualToOperator, iPosition:=1)
+                    clsDummyOperator = clsIsEqualToOperator
+                End If
+            ElseIf ucrReceiverFirst.strCurrDataType = "logical" AndAlso ucrReceiverSecond.strCurrDataType = "logical" Then
+                If rdoByRow.Checked Then
+                    ucrInputTolerance.Visible = False
+                    clsIsEqualToOperator.AddParameter("first", clsRFunctionParameter:=clsFirstAsCharacterFunction, iPosition:=0)
+                    clsIsEqualToOperator.AddParameter("second", clsRFunctionParameter:=clsSecondAsCharacterFunction, iPosition:=1)
+                    clsSummaryFunction.AddParameter("object", clsROperatorParameter:=clsIsEqualToOperator, iPosition:=1)
+                    clsDummyOperator = clsIsEqualToOperator
+                End If
             Else
-                ucrSaveLogical.SetName("in_" & ucrReceiverFirst.GetVariableNames(False))
+                MsgBox("Receivers must have the same data type, OK will not be enabled")
             End If
         End If
+        TestOkEnabled()
+    End Sub
+
+    Private Sub ucrReceiverFirst_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirst.ControlValueChanged, ucrReceiverSecond.ControlValueChanged
+        CheckDatatype()
     End Sub
 End Class

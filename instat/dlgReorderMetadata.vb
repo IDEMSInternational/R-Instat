@@ -19,7 +19,6 @@ Public Class dlgReorderMetadata
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private Sub dlgReorderMetadata_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -31,6 +30,7 @@ Public Class dlgReorderMetadata
         bReset = False
         ReopenDialog()
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)

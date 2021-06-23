@@ -35,12 +35,12 @@ Public Class sdgDataOptions
     End Sub
 
     Private Sub sdgDataOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
             bFirstLoad = False
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

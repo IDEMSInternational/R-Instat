@@ -35,11 +35,11 @@ Public Class sdgSaveColumnPosition
     Public bRcodeFlag As Boolean = False
 
     Private Sub sdgSaveColumnPosition_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bControlsNotInitialised Then
             InitialiseControl()
             bControlsNotInitialised = False
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseControl()
@@ -114,13 +114,13 @@ Public Class sdgSaveColumnPosition
             ucrSelectorColumns.Visible = False
             ucrReceiverColumn.Visible = False
             lblColumns.Visible = False
-            grpColumnPosition.Text = "New column will be at the: "
+            grpColumnPosition.Text = GetTranslation("New column will be at the: ")
         ElseIf rdoEnd.Checked Then
             clsColPosFunction.RemoveParameterByName("adjacent_column")
             ucrSelectorColumns.Visible = False
             ucrReceiverColumn.Visible = False
             lblColumns.Visible = False
-            grpColumnPosition.Text = "New column will be at the: "
+            grpColumnPosition.Text = GetTranslation("New column will be at the: ")
         ElseIf rdoBefore.Checked Then
             If Not ucrReceiverColumn.IsEmpty Then
                 clsColPosFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrReceiverColumn.GetVariableNames())
@@ -130,7 +130,7 @@ Public Class sdgSaveColumnPosition
             ucrSelectorColumns.Visible = True
             ucrReceiverColumn.Visible = True
             lblColumns.Visible = True
-            grpColumnPosition.Text = "New column will be: "
+            grpColumnPosition.Text = GetTranslation("New column will be: ")
         ElseIf rdoAfter.Checked Then
             If Not ucrReceiverColumn.IsEmpty Then
                 clsColPosFunction.AddParameter(strParameterName:="adjacent_column", strParameterValue:=ucrReceiverColumn.GetVariableNames())
@@ -140,7 +140,7 @@ Public Class sdgSaveColumnPosition
             ucrSelectorColumns.Visible = True
             ucrReceiverColumn.Visible = True
             lblColumns.Visible = True
-            grpColumnPosition.Text = "New column will be: "
+            grpColumnPosition.Text = GetTranslation("New column will be: ")
         End If
     End Sub
 

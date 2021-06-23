@@ -113,6 +113,7 @@ Partial Class dlgPolynomials
         '
         'ucrSelectorForPolynomial
         '
+        Me.ucrSelectorForPolynomial.bDropUnusedFilterLevels = False
         Me.ucrSelectorForPolynomial.bShowHiddenColumns = False
         Me.ucrSelectorForPolynomial.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForPolynomial, "ucrSelectorForPolynomial")

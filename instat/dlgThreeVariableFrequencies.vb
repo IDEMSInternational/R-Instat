@@ -25,7 +25,6 @@ Public Class dlgThreeVariableFrequencies
     Private iMaxGraphGroupX As Integer
 
     Private Sub dlgThreeVariableFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             iMaxGraphGroupX = grpFreqTypeGraph.Location.X
@@ -38,6 +37,7 @@ Public Class dlgThreeVariableFrequencies
         ReopenDialog()
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub ReopenDialog()

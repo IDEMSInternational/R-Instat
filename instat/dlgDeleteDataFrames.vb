@@ -23,7 +23,6 @@ Public Class dlgDeleteDataFrames
     Private strSelectedDataFrame As String = ""
 
     Private Sub dlgDeleteDataFrames_Load(sender As Object, e As EventArgs) Handles Me.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -38,6 +37,7 @@ Public Class dlgDeleteDataFrames
         SetRCodeForControls(bReset)
         bReset = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

@@ -72,7 +72,7 @@ Public Class ucrDistributionsWithParameters
             clsCurrRFunction.RemoveParameterByName("size")
             lstCurrArguments.Clear()
             For i = 0 To clsCurrDistribution.clsParameters.Count - 1
-                lstParameterLabels(i).Text = translate(clsCurrDistribution.clsParameters(i).strNameTag)
+                lstParameterLabels(i).Text = GetTranslation(clsCurrDistribution.clsParameters(i).strNameTag)
                 lstCurrArguments.Add(clsCurrDistribution.clsParameters(i).strArgumentName)
                 If clsCurrDistribution.clsParameters(i).bHasDefault Then
                     lstParameterInputTextBoxes(i).SetName(clsCurrDistribution.clsParameters(i).strDefaultValue)

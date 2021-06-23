@@ -850,6 +850,62 @@ DataSheet$set("public", "replace_value_in_data", function(col_names, rows, old_v
 }
 )
 
+DataSheet$set("public", "paste_from_clipboard", function(col_names, start_row_pos = 1, first_clip_row_is_header = FALSE, clip_board_text) {
+  #reads data from clipboard and saves it to selected columns
+  #get the clipboard text contents as a data frame
+  clip_tbl <- clipr::read_clip_tbl(x = clip_board_text, header = first_clip_row_is_header)
+  current_tbl <- self$get_data_frame(use_current_filter = FALSE)
+  
+  #check if number of copied columns and selected columns are equal
+  if(ncol(clip_tbl) != length(col_names)){
+    stop(paste("number of columns are not the same.",
+               "Selected columns:", length(col_names), ". Copied columns:", ncol(clip_tbl)) )
+  }
+  
+  #check if copied data rows are more than current data rows
+  if( nrow(clip_tbl) > nrow(current_tbl) ){
+    stop(paste("rows copied cannot be more than number of rows in the data frame.",
+               "Current data frame rows:", nrow(current_tbl), ". Copied rows:", nrow(clip_tbl)) )
+  }
+  
+  #check copied data integrity
+  for(index in seq_along(col_names)){
+    col_data <- current_tbl[, col_names[index]]
+    #get column type of column from the current table using column name
+    col_type <- class(col_data)
+    #check copied data integrity based on the data type expected
+    if (is.factor(col_data)) {
+      #get all the factor levels of the selected column in the current data frame
+      expected_factor_levels <- levels(col_data)
+      #check if all copied data values are contained in the factor levels
+      #if any invalid is found. exit function
+      for(val in clip_tbl[,index]){
+        if(!is.na(val) && !is.element(val,expected_factor_levels)){
+          stop("Invalid column values. Level not found in factor")
+        }
+      }#end inner for loop
+    } else if( !(is.numeric(col_data) || is.logical(col_data) || is.character(col_data)) ) {
+      #clipr support above column types only. So pasting to a column not recognised by clipr may result to unpredictible results 
+      #if not in any of above column types then exit function
+      stop( paste("Cannot paste into columns of type:", col_type) )
+    }#end if  
+  }#end outer for loop
+  
+  #replace values in the selected columns
+  for(index in seq_along(col_names)){
+    #set the row positions and the values
+    rows_to_replace <- c(start_row_pos : (start_row_pos + nrow(clip_tbl) - 1 ))
+    new_values <- clip_tbl[,index]
+    #replace the old values with new values
+    self$replace_value_in_data(col_names = col_names[index], rows = rows_to_replace, new_value = new_values)
+    #rename header if first row of clip data is header. 
+    if(first_clip_row_is_header){
+      self$rename_column_in_data(curr_col_name = col_names[index], new_col_name = colnames(clip_tbl)[index]) 
+    }
+  }#end for loop
+}
+)#end function
+
 DataSheet$set("public", "append_to_metadata", function(property, new_value = "") {
   if(missing(property)) stop("property must be specified.")
   
@@ -2743,6 +2799,9 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
       col_name <- factors[i]
       col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
     }
+    all_factors <- self$get_columns_from_data(factors, use_current_filter = FALSE)
+    first_factor <- self$get_columns_from_data(factors[1], use_current_filter = FALSE)
+    if(dplyr::n_distinct(interaction(all_factors, drop = TRUE))!= dplyr::n_distinct(first_factor)) stop("The multiple factor variables are not in sync. Should have same number of levels.")
     grouped_data <- self$get_data_frame(use_current_filter = FALSE) %>% dplyr::group_by_(.dots = col_names_exp)
     date_ranges <- grouped_data %>% dplyr::summarise_(.dots = setNames(list(lazyeval::interp(~ min(var), var = as.name(date_name)), lazyeval::interp(~ max(var), var = as.name(date_name))), c("min_date", "max_date")))
     date_lengths <- grouped_data %>% dplyr::summarise(count = n())
@@ -2765,8 +2824,8 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
     full_dates_list <- list()
     for(j in 1:nrow(date_ranges)) {
       full_dates <- seq(date_ranges$min_date[j], date_ranges$max_date[j], by = "day")
-      if(length(full_dates) > date_lengths[[2]][j]) {
-        cat(paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), ": Added", (length(full_dates) - date_lengths[[2]][j]), "rows to extend data and fill date gaps", "\n")
+      if(length(full_dates) > date_lengths[,"count"][j,]) {
+        cat(paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), ": Added", (length(full_dates) - unlist(date_lengths[,"count"][j,])), "rows to extend data and fill date gaps", "\n")
         merge_required <- TRUE
       }
       full_dates <- data.frame(full_dates)
@@ -3862,15 +3921,40 @@ DataSheet$set("public", "get_data_entry_data", function(station, date, elements,
   curr_data
 })
 
-DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed) {
+DataSheet$set("public", "save_data_entry_data", function(new_data, rows_changed, add_flags = FALSE, ...) {
   if (nrow(new_data) != length(rows_changed)) stop("new_data must have the same number of rows as length of rows_changed.")
   curr_data <- self$get_data_frame(use_current_filter = FALSE)
+  changed_data <- curr_data
   for (i in seq_along(rows_changed)) {
     for (k in seq_along(names(new_data))) {
-      curr_data[rows_changed[i], names(new_data)[k]] <- new_data[i, names(new_data)[k]]
+      changed_data[rows_changed[i], names(new_data)[k]] <- new_data[i, names(new_data)[k]]
+    }
+  }
+  if (add_flags) {
+    for (i in names(new_data)[-c(1:2)]) {
+      col1 <- curr_data[, i]
+      col2 <- changed_data[, i]
+      if (paste0(i, "_fl") %in% colnames(changed_data)) {
+        flag_col1 <- changed_data[, paste0(i, "_fl")]
+        flag_col2 <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
+        changed_data[, paste0(i, "_fl")] <- factor(ifelse(flag_col1 %in% c("edit", "add"), as.character(flag_col1), as.character(flag_col2)), levels = c("data", "add", "edit"))
+      } else {
+        changed_data[, paste0(i, "_fl")] <- factor(x = ifelse(is.na(col1) & !is.na(col2), "add", ifelse(!is.na(col1) & is.na(col2), "edit", ifelse(col1 == col2, "data", "edit"))), levels = c("data", "add", "edit"))
+      }
     }
   }
   cat("Values updated in:", length(rows_changed), "row(s)\n")
-  self$set_data(curr_data)
-}
-)
+  self$set_data(changed_data)
+  # Added this line to fix the bug of having the variable names in the metadata changing to NA
+  # This affects factor columns only  - we need to find out why and how to solve it best
+  self$add_defaults_variables_metadata(self$get_column_names())
+  self$data_changed <- TRUE
+})
+
+DataSheet$set("public", "add_flag_fields", function(col_names) {
+  curr_data <- self$get_columns_from_data(col_names, force_as_data_frame = TRUE)
+  for (i in colnames(curr_data)) {
+    col_data <- factor(ifelse(is.na(curr_data[, i]), NA_real_, "data"), levels = c("data", "edit", "add"))
+    self$add_columns_to_data(col_data = col_data, col_name = paste0(i, "_fl"))
+  }
+})
