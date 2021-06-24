@@ -76,8 +76,8 @@ Partial Class dlgInfill
         '
         'grpOptions
         '
+        Me.grpOptions.Controls.Add(Me.ucrDtpStartDate)
         Me.grpOptions.Controls.Add(Me.lblStartingFrom)
-        Me.grpOptions.Controls.Add(Me.ucrChkCompleteYears)
         Me.grpOptions.Controls.Add(Me.ucrChkResort)
         Me.grpOptions.Controls.Add(Me.ucrInputComboMonth)
         Me.grpOptions.Controls.Add(Me.ucrInputLimitOptions)
@@ -85,7 +85,7 @@ Partial Class dlgInfill
         Me.grpOptions.Controls.Add(Me.lblLimits)
         Me.grpOptions.Controls.Add(Me.lblEndDate)
         Me.grpOptions.Controls.Add(Me.lblStartDate)
-        Me.grpOptions.Controls.Add(Me.ucrDtpStartDate)
+        Me.grpOptions.Controls.Add(Me.ucrChkCompleteYears)
         resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False

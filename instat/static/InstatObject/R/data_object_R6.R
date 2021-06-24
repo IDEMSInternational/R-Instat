@@ -2799,6 +2799,9 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
       col_name <- factors[i]
       col_names_exp[[i]] <- lazyeval::interp(~ var, var = as.name(col_name))
     }
+    all_factors <- self$get_columns_from_data(factors, use_current_filter = FALSE)
+    first_factor <- self$get_columns_from_data(factors[1], use_current_filter = FALSE)
+    if(dplyr::n_distinct(interaction(all_factors, drop = TRUE))!= dplyr::n_distinct(first_factor)) stop("The multiple factor variables are not in sync. Should have same number of levels.")
     grouped_data <- self$get_data_frame(use_current_filter = FALSE) %>% dplyr::group_by_(.dots = col_names_exp)
     date_ranges <- grouped_data %>% dplyr::summarise_(.dots = setNames(list(lazyeval::interp(~ min(var), var = as.name(date_name)), lazyeval::interp(~ max(var), var = as.name(date_name))), c("min_date", "max_date")))
     date_lengths <- grouped_data %>% dplyr::summarise(count = n())
@@ -2821,8 +2824,8 @@ DataSheet$set("public","infill_missing_dates", function(date_name, factors, star
     full_dates_list <- list()
     for(j in 1:nrow(date_ranges)) {
       full_dates <- seq(date_ranges$min_date[j], date_ranges$max_date[j], by = "day")
-      if(length(full_dates) > date_lengths[[2]][j]) {
-        cat(paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), ": Added", (length(full_dates) - date_lengths[[2]][j]), "rows to extend data and fill date gaps", "\n")
+      if(length(full_dates) > date_lengths[,"count"][j,]) {
+        cat(paste(unlist(date_ranges[1:length(factors)][j, ]), collapse = "-"), ": Added", (length(full_dates) - unlist(date_lengths[,"count"][j,])), "rows to extend data and fill date gaps", "\n")
         merge_required <- TRUE
       }
       full_dates <- data.frame(full_dates)
