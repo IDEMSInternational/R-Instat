@@ -39,34 +39,26 @@ Partial Class dlgBarAndPieChart
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgBarAndPieChart))
-        Me.lblVariable = New System.Windows.Forms.Label()
         Me.lblByFactor = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdPieChartOptions = New System.Windows.Forms.Button()
         Me.rdoPieChart = New System.Windows.Forms.RadioButton()
-        Me.rdoBarChart = New System.Windows.Forms.RadioButton()
+        Me.rdoValue = New System.Windows.Forms.RadioButton()
         Me.cmdBarChartOptions = New System.Windows.Forms.Button()
         Me.lblPosition = New System.Windows.Forms.Label()
-        Me.lblYvariable = New System.Windows.Forms.Label()
         Me.cmdColumnChartOptions = New System.Windows.Forms.Button()
-        Me.lblYValue = New System.Windows.Forms.Label()
-        Me.ucrInputYValue = New instat.ucrInputComboBox()
-        Me.ucrReceiverY = New instat.ucrReceiverSingle()
-        Me.ucrInputBarChartPosition = New instat.ucrInputComboBox()
+        Me.ucrInputBarChartPositions = New instat.ucrInputComboBox()
         Me.ucrSaveBar = New instat.ucrSave()
         Me.ucrChkFlipCoordinates = New instat.ucrCheck()
         Me.ucrReceiverByFactor = New instat.ucrReceiverSingle()
-        Me.ucrReceiverFirst = New instat.ucrReceiverSingle()
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.rdoFrequency = New System.Windows.Forms.RadioButton()
+        Me.ucrVariablesAsFactorForBarChart = New instat.ucrVariablesAsFactor()
+        Me.lblXvariable = New System.Windows.Forms.Label()
+        Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
-        '
-        'lblVariable
-        '
-        resources.ApplyResources(Me.lblVariable, "lblVariable")
-        Me.lblVariable.Name = "lblVariable"
-        Me.lblVariable.Tag = "Variable:"
         '
         'lblByFactor
         '
@@ -100,17 +92,17 @@ Partial Class dlgBarAndPieChart
         Me.rdoPieChart.Tag = "Pie_Chart"
         Me.rdoPieChart.UseVisualStyleBackColor = False
         '
-        'rdoBarChart
+        'rdoValue
         '
-        resources.ApplyResources(Me.rdoBarChart, "rdoBarChart")
-        Me.rdoBarChart.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoBarChart.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBarChart.FlatAppearance.BorderSize = 2
-        Me.rdoBarChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBarChart.Name = "rdoBarChart"
-        Me.rdoBarChart.TabStop = True
-        Me.rdoBarChart.Tag = "Bar_Chart"
-        Me.rdoBarChart.UseVisualStyleBackColor = False
+        resources.ApplyResources(Me.rdoValue, "rdoValue")
+        Me.rdoValue.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoValue.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoValue.FlatAppearance.BorderSize = 2
+        Me.rdoValue.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoValue.Name = "rdoValue"
+        Me.rdoValue.TabStop = True
+        Me.rdoValue.Tag = "Value"
+        Me.rdoValue.UseVisualStyleBackColor = False
         '
         'cmdBarChartOptions
         '
@@ -124,11 +116,6 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.lblPosition, "lblPosition")
         Me.lblPosition.Name = "lblPosition"
         '
-        'lblYvariable
-        '
-        resources.ApplyResources(Me.lblYvariable, "lblYvariable")
-        Me.lblYvariable.Name = "lblYvariable"
-        '
         'cmdColumnChartOptions
         '
         resources.ApplyResources(Me.cmdColumnChartOptions, "cmdColumnChartOptions")
@@ -136,33 +123,13 @@ Partial Class dlgBarAndPieChart
         Me.cmdColumnChartOptions.Tag = "Column_Chart_Options"
         Me.cmdColumnChartOptions.UseVisualStyleBackColor = True
         '
-        'lblYValue
+        'ucrInputBarChartPositions
         '
-        resources.ApplyResources(Me.lblYValue, "lblYValue")
-        Me.lblYValue.Name = "lblYValue"
-        '
-        'ucrInputYValue
-        '
-        Me.ucrInputYValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputYValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputYValue, "ucrInputYValue")
-        Me.ucrInputYValue.Name = "ucrInputYValue"
-        '
-        'ucrReceiverY
-        '
-        Me.ucrReceiverY.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverY, "ucrReceiverY")
-        Me.ucrReceiverY.Name = "ucrReceiverY"
-        Me.ucrReceiverY.Selector = Nothing
-        Me.ucrReceiverY.strNcFilePath = ""
-        Me.ucrReceiverY.ucrSelector = Nothing
-        '
-        'ucrInputBarChartPosition
-        '
-        Me.ucrInputBarChartPosition.AddQuotesIfUnrecognised = True
-        Me.ucrInputBarChartPosition.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputBarChartPosition, "ucrInputBarChartPosition")
-        Me.ucrInputBarChartPosition.Name = "ucrInputBarChartPosition"
+        Me.ucrInputBarChartPositions.AddQuotesIfUnrecognised = True
+        Me.ucrInputBarChartPositions.GetSetSelectedIndex = -1
+        Me.ucrInputBarChartPositions.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputBarChartPositions, "ucrInputBarChartPositions")
+        Me.ucrInputBarChartPositions.Name = "ucrInputBarChartPositions"
         '
         'ucrSaveBar
         '
@@ -184,15 +151,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrReceiverByFactor.strNcFilePath = ""
         Me.ucrReceiverByFactor.ucrSelector = Nothing
         '
-        'ucrReceiverFirst
-        '
-        Me.ucrReceiverFirst.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverFirst, "ucrReceiverFirst")
-        Me.ucrReceiverFirst.Name = "ucrReceiverFirst"
-        Me.ucrReceiverFirst.Selector = Nothing
-        Me.ucrReceiverFirst.strNcFilePath = ""
-        Me.ucrReceiverFirst.ucrSelector = Nothing
-        '
         'ucrBarChartSelector
         '
         Me.ucrBarChartSelector.bDropUnusedFilterLevels = False
@@ -211,26 +169,60 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'rdoFrequency
+        '
+        resources.ApplyResources(Me.rdoFrequency, "rdoFrequency")
+        Me.rdoFrequency.BackColor = System.Drawing.SystemColors.Control
+        Me.rdoFrequency.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFrequency.FlatAppearance.BorderSize = 2
+        Me.rdoFrequency.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFrequency.Name = "rdoFrequency"
+        Me.rdoFrequency.TabStop = True
+        Me.rdoFrequency.Tag = "Frequency"
+        Me.rdoFrequency.UseVisualStyleBackColor = False
+        '
+        'ucrVariablesAsFactorForBarChart
+        '
+        Me.ucrVariablesAsFactorForBarChart.frmParent = Me
+        resources.ApplyResources(Me.ucrVariablesAsFactorForBarChart, "ucrVariablesAsFactorForBarChart")
+        Me.ucrVariablesAsFactorForBarChart.Name = "ucrVariablesAsFactorForBarChart"
+        Me.ucrVariablesAsFactorForBarChart.Selector = Nothing
+        Me.ucrVariablesAsFactorForBarChart.strNcFilePath = ""
+        Me.ucrVariablesAsFactorForBarChart.ucrSelector = Nothing
+        Me.ucrVariablesAsFactorForBarChart.ucrVariableSelector = Nothing
+        '
+        'lblXvariable
+        '
+        resources.ApplyResources(Me.lblXvariable, "lblXvariable")
+        Me.lblXvariable.Name = "lblXvariable"
+        '
+        'ucrReceiverX
+        '
+        Me.ucrReceiverX.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverX, "ucrReceiverX")
+        Me.ucrReceiverX.Name = "ucrReceiverX"
+        Me.ucrReceiverX.Selector = Nothing
+        Me.ucrReceiverX.strNcFilePath = ""
+        Me.ucrReceiverX.ucrSelector = Nothing
+        '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrInputYValue)
-        Me.Controls.Add(Me.lblYValue)
+        Me.Controls.Add(Me.lblXvariable)
+        Me.Controls.Add(Me.ucrReceiverX)
+        Me.Controls.Add(Me.ucrVariablesAsFactorForBarChart)
+        Me.Controls.Add(Me.rdoFrequency)
+        Me.Controls.Add(Me.ucrInputBarChartPositions)
         Me.Controls.Add(Me.cmdColumnChartOptions)
-        Me.Controls.Add(Me.lblYvariable)
-        Me.Controls.Add(Me.ucrReceiverY)
         Me.Controls.Add(Me.lblPosition)
-        Me.Controls.Add(Me.ucrInputBarChartPosition)
         Me.Controls.Add(Me.ucrSaveBar)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
-        Me.Controls.Add(Me.rdoBarChart)
+        Me.Controls.Add(Me.rdoValue)
         Me.Controls.Add(Me.rdoPieChart)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblByFactor)
-        Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrReceiverByFactor)
-        Me.Controls.Add(Me.ucrReceiverFirst)
         Me.Controls.Add(Me.ucrBarChartSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdBarChartOptions)
@@ -248,23 +240,21 @@ Partial Class dlgBarAndPieChart
 
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrBarChartSelector As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents ucrReceiverFirst As ucrReceiverSingle
     Friend WithEvents ucrReceiverByFactor As ucrReceiverSingle
-    Friend WithEvents lblVariable As Label
     Friend WithEvents lblByFactor As Label
     Friend WithEvents cmdOptions As Button
     Friend WithEvents cmdPieChartOptions As Button
     Friend WithEvents ucrSaveBar As ucrSave
     Friend WithEvents ucrChkFlipCoordinates As ucrCheck
-    Friend WithEvents rdoBarChart As RadioButton
+    Friend WithEvents rdoValue As RadioButton
     Friend WithEvents rdoPieChart As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents cmdBarChartOptions As Button
-    Friend WithEvents ucrInputBarChartPosition As ucrInputComboBox
     Friend WithEvents lblPosition As Label
-    Friend WithEvents lblYvariable As Label
-    Friend WithEvents ucrReceiverY As ucrReceiverSingle
     Friend WithEvents cmdColumnChartOptions As Button
-    Friend WithEvents ucrInputYValue As ucrInputComboBox
-    Friend WithEvents lblYValue As Label
+    Friend WithEvents ucrInputBarChartPositions As ucrInputComboBox
+    Friend WithEvents rdoFrequency As RadioButton
+    Friend WithEvents ucrVariablesAsFactorForBarChart As ucrVariablesAsFactor
+    Friend WithEvents lblXvariable As Label
+    Friend WithEvents ucrReceiverX As ucrReceiverSingle
 End Class
