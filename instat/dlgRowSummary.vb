@@ -121,4 +121,8 @@ Public Class dlgRowSummary
             clsApplyFunction.RemoveParameterByName("na.rm")
         End If
     End Sub
+
+    Private Sub rdoMinimum_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMinimum.CheckedChanged
+
+    End Sub
 End Class

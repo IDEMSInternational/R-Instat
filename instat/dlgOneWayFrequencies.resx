@@ -253,7 +253,7 @@
     <value>10, 228</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 23</value>
+    <value>96, 23</value>
   </data>
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -550,7 +550,7 @@
     <value>435, 447</value>
   </data>
   <data name="ucrNudGroups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 279</value>
+    <value>142, 277</value>
   </data>
   <data name="ucrNudGroups.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -595,7 +595,7 @@
     <value>10, 280</value>
   </data>
   <data name="ucrChkGroupData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 20</value>
+    <value>145, 20</value>
   </data>
   <data name="ucrChkGroupData.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -613,13 +613,13 @@
     <value>8</value>
   </data>
   <data name="ucrReceiverWeights.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 256</value>
+    <value>142, 254</value>
   </data>
   <data name="ucrReceiverWeights.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverWeights.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>90, 20</value>
   </data>
   <data name="ucrReceiverWeights.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -640,7 +640,7 @@
     <value>10, 256</value>
   </data>
   <data name="ucrChkWeights.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 20</value>
+    <value>145, 20</value>
   </data>
   <data name="ucrChkWeights.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -661,7 +661,7 @@
     <value>10, 304</value>
   </data>
   <data name="ucrChkFlip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 20</value>
+    <value>210, 20</value>
   </data>
   <data name="ucrChkFlip.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -722,6 +722,9 @@
   </data>
   <data name="&gt;&gt;ucrSelectorOneWayFreq.ZOrder" xml:space="preserve">
     <value>16</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

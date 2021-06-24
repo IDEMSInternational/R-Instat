@@ -164,4 +164,16 @@ Public Class dlgRandomSample
             ucrBase.clsRsyntax.RemoveFromBeforeCodes(clsSetSeed)
         End If
     End Sub
+
+    Private Sub ucrDistWithParameters_ParameterChanged(ucrChangedControl As ucrCore) Handles ucrDistWithParameters.ControlContentsChanged
+
+    End Sub
+
+    Private Sub ucrSaveRandomSample_Load(sender As Object, e As EventArgs) Handles ucrSaveRandomSample.Load
+
+    End Sub
+
+    Private Sub ucrDistWithParameters_Load(sender As Object, e As EventArgs) Handles ucrDistWithParameters.Load
+
+    End Sub
 End Class

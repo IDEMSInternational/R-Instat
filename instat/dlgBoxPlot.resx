@@ -123,10 +123,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 268</value>
+    <value>8, 268</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 25</value>
+    <value>151, 25</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
@@ -211,10 +211,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdBoxPlotOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 237</value>
+    <value>8, 237</value>
   </data>
   <data name="cmdBoxPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 25</value>
+    <value>151, 25</value>
   </data>
   <data name="cmdBoxPlotOptions.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -349,7 +349,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblJitter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 352</value>
+    <value>149, 349</value>
   </data>
   <data name="lblJitter.Size" type="System.Drawing.Size, System.Drawing">
     <value>32, 13</value>
@@ -379,7 +379,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTransparency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>206, 352</value>
+    <value>243, 349</value>
   </data>
   <data name="lblTransparency.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
@@ -403,7 +403,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudTransparency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>288, 349</value>
+    <value>324, 345</value>
   </data>
   <data name="ucrNudTransparency.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -424,7 +424,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudJitter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>140, 349</value>
+    <value>187, 345</value>
   </data>
   <data name="ucrNudJitter.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -448,7 +448,7 @@
     <value>10, 349</value>
   </data>
   <data name="ucrChkAddPoints.Size" type="System.Drawing.Size, System.Drawing">
-    <value>93, 20</value>
+    <value>137, 20</value>
   </data>
   <data name="ucrChkAddPoints.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -472,7 +472,7 @@
     <value>254, 287</value>
   </data>
   <data name="ucrChkSwapParameters.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>166, 20</value>
   </data>
   <data name="ucrChkSwapParameters.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -538,7 +538,7 @@
     <value>10, 299</value>
   </data>
   <data name="ucrChkVarWidth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 20</value>
+    <value>180, 20</value>
   </data>
   <data name="ucrChkVarWidth.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>

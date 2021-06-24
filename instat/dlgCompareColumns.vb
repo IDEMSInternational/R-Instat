@@ -185,6 +185,17 @@ Public Class dlgCompareColumns
         ucrSaveLogical.SetRCode(clsIsEqualToOperator, bReset)
     End Sub
 
+    Private Sub ucrChkUnique_Load(sender As Object, e As EventArgs) Handles ucrChkUnique.Load
+
+    End Sub
+
+    Private Sub ucrChkSort_Load(sender As Object, e As EventArgs) Handles ucrChkSort.Load
+
+    End Sub
+
+    Private Sub ucrSaveLogical_Load(sender As Object, e As EventArgs) Handles ucrSaveLogical.Load
+
+    End Sub
 
     Private Sub TestOkEnabled()
         If ucrReceiverFirst.IsEmpty OrElse ucrReceiverSecond.IsEmpty OrElse Not ucrSaveLogical.IsComplete() Then

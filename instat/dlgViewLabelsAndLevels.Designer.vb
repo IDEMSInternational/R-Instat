@@ -41,17 +41,17 @@ Partial Class dlgViewFactorLabels
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgViewFactorLabels))
         Me.lblFactorColumns = New System.Windows.Forms.Label()
         Me.grpSummaryStatistics = New System.Windows.Forms.GroupBox()
+        Me.ucrChkShowPercentage = New instat.ucrCheck()
+        Me.ucrChkShowFrequencies = New instat.ucrCheck()
+        Me.ucrChkShowMissingValues = New instat.ucrCheck()
         Me.grpDisplayOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkSortByName = New instat.ucrCheck()
+        Me.ucrChkAlternateColour = New instat.ucrCheck()
+        Me.ucrChkShowId = New instat.ucrCheck()
         Me.grpLabels = New System.Windows.Forms.GroupBox()
         Me.ucrChkShowType = New instat.ucrCheck()
         Me.ucrChkShowValues = New instat.ucrCheck()
         Me.ucrChkShowLabels = New instat.ucrCheck()
-        Me.ucrChkSortByName = New instat.ucrCheck()
-        Me.ucrChkAlternateColour = New instat.ucrCheck()
-        Me.ucrChkShowId = New instat.ucrCheck()
-        Me.ucrChkShowPercentage = New instat.ucrCheck()
-        Me.ucrChkShowFrequencies = New instat.ucrCheck()
-        Me.ucrChkShowMissingValues = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorViewLabelsAndLevels = New instat.ucrSelectorByDataFrameAddRemove()
@@ -74,6 +74,24 @@ Partial Class dlgViewFactorLabels
         Me.grpSummaryStatistics.Name = "grpSummaryStatistics"
         Me.grpSummaryStatistics.TabStop = False
         '
+        'ucrChkShowPercentage
+        '
+        Me.ucrChkShowPercentage.Checked = False
+        resources.ApplyResources(Me.ucrChkShowPercentage, "ucrChkShowPercentage")
+        Me.ucrChkShowPercentage.Name = "ucrChkShowPercentage"
+        '
+        'ucrChkShowFrequencies
+        '
+        Me.ucrChkShowFrequencies.Checked = False
+        resources.ApplyResources(Me.ucrChkShowFrequencies, "ucrChkShowFrequencies")
+        Me.ucrChkShowFrequencies.Name = "ucrChkShowFrequencies"
+        '
+        'ucrChkShowMissingValues
+        '
+        Me.ucrChkShowMissingValues.Checked = False
+        resources.ApplyResources(Me.ucrChkShowMissingValues, "ucrChkShowMissingValues")
+        Me.ucrChkShowMissingValues.Name = "ucrChkShowMissingValues"
+        '
         'grpDisplayOptions
         '
         Me.grpDisplayOptions.Controls.Add(Me.ucrChkSortByName)
@@ -82,6 +100,24 @@ Partial Class dlgViewFactorLabels
         resources.ApplyResources(Me.grpDisplayOptions, "grpDisplayOptions")
         Me.grpDisplayOptions.Name = "grpDisplayOptions"
         Me.grpDisplayOptions.TabStop = False
+        '
+        'ucrChkSortByName
+        '
+        Me.ucrChkSortByName.Checked = False
+        resources.ApplyResources(Me.ucrChkSortByName, "ucrChkSortByName")
+        Me.ucrChkSortByName.Name = "ucrChkSortByName"
+        '
+        'ucrChkAlternateColour
+        '
+        Me.ucrChkAlternateColour.Checked = False
+        resources.ApplyResources(Me.ucrChkAlternateColour, "ucrChkAlternateColour")
+        Me.ucrChkAlternateColour.Name = "ucrChkAlternateColour"
+        '
+        'ucrChkShowId
+        '
+        Me.ucrChkShowId.Checked = False
+        resources.ApplyResources(Me.ucrChkShowId, "ucrChkShowId")
+        Me.ucrChkShowId.Name = "ucrChkShowId"
         '
         'grpLabels
         '
@@ -110,42 +146,6 @@ Partial Class dlgViewFactorLabels
         resources.ApplyResources(Me.ucrChkShowLabels, "ucrChkShowLabels")
         Me.ucrChkShowLabels.Name = "ucrChkShowLabels"
         '
-        'ucrChkSortByName
-        '
-        Me.ucrChkSortByName.Checked = False
-        resources.ApplyResources(Me.ucrChkSortByName, "ucrChkSortByName")
-        Me.ucrChkSortByName.Name = "ucrChkSortByName"
-        '
-        'ucrChkAlternateColour
-        '
-        Me.ucrChkAlternateColour.Checked = False
-        resources.ApplyResources(Me.ucrChkAlternateColour, "ucrChkAlternateColour")
-        Me.ucrChkAlternateColour.Name = "ucrChkAlternateColour"
-        '
-        'ucrChkShowId
-        '
-        Me.ucrChkShowId.Checked = False
-        resources.ApplyResources(Me.ucrChkShowId, "ucrChkShowId")
-        Me.ucrChkShowId.Name = "ucrChkShowId"
-        '
-        'ucrChkShowPercentage
-        '
-        Me.ucrChkShowPercentage.Checked = False
-        resources.ApplyResources(Me.ucrChkShowPercentage, "ucrChkShowPercentage")
-        Me.ucrChkShowPercentage.Name = "ucrChkShowPercentage"
-        '
-        'ucrChkShowFrequencies
-        '
-        Me.ucrChkShowFrequencies.Checked = False
-        resources.ApplyResources(Me.ucrChkShowFrequencies, "ucrChkShowFrequencies")
-        Me.ucrChkShowFrequencies.Name = "ucrChkShowFrequencies"
-        '
-        'ucrChkShowMissingValues
-        '
-        Me.ucrChkShowMissingValues.Checked = False
-        resources.ApplyResources(Me.ucrChkShowMissingValues, "ucrChkShowMissingValues")
-        Me.ucrChkShowMissingValues.Name = "ucrChkShowMissingValues"
-        '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
@@ -162,6 +162,7 @@ Partial Class dlgViewFactorLabels
         '
         'ucrSelectorViewLabelsAndLevels
         '
+        Me.ucrSelectorViewLabelsAndLevels.bDropUnusedFilterLevels = False
         Me.ucrSelectorViewLabelsAndLevels.bShowHiddenColumns = False
         Me.ucrSelectorViewLabelsAndLevels.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorViewLabelsAndLevels, "ucrSelectorViewLabelsAndLevels")

@@ -244,7 +244,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 19</value>
+    <value>197, 19</value>
   </data>
   <data name="rdoCount.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 17</value>
@@ -334,7 +334,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoNumberofMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 42</value>
+    <value>196, 42</value>
   </data>
   <data name="rdoNumberofMissing.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 17</value>
