@@ -198,7 +198,7 @@ load_R_Instat_packages <- function() {
   # latticeExtra because conditionalQuantile key positions work well when latticeExtra is loaded
   # texmex loaded because of extreme value distributions 
   # tidyr loaded because unite() function is required by mmtable() function from mmtable2 package 
-  # purrr loaded because map_int() function is required  by header_top_left() and header_left_top() functions from mmtable2 package 
+  # purrr loaded because map_int() function is required  by mutatate() fuction from dplyr package
   packs_to_load <- c("purrr", "plyr", "tidyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield", "circular", "latticeExtra", "texmex")
   for(pack in packs_to_load) {
     try(library(pack, character.only = TRUE))
