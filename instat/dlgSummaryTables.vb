@@ -26,6 +26,7 @@ Public Class dlgSummaryTables
             clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction,
             clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
     Private clsDummyFunction As New RFunction
+    Private clsGetDataframe As New RFunction
     Private clsMutableOperator, clsColumnOperator As New ROperator
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -46,7 +47,7 @@ Public Class dlgSummaryTables
         lblDisplayNA.Enabled = False
         ucrChkStoreResults.Enabled = False
 
-        ucrBase.clsRsyntax.iCallType = 4
+        ucrBase.clsRsyntax.iCallType = 0
         ucrBase.iHelpTopicID = 426
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
@@ -98,9 +99,8 @@ Public Class dlgSummaryTables
         ucrInputMarginName.SetLinkedDisplayControl(lblMarginName)
 
         ucrChkSummaries.SetParameter(New RParameter("treat_columns_as_factor", 9))
+        ucrChkSummaries.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkSummaries.SetText("Treat Summary Columns as a Further Factor")
-        ucrChkSummaries.AddParameterValuesCondition(True, "treat_columns_as_factor", "FALSE")
-        ucrChkSummaries.AddParameterValuesCondition(False, "treat_columns_as_factor", "FALSE", False)
 
         ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 6))
         ucrNudSigFigs.SetMinMax(0, 22)
@@ -120,7 +120,7 @@ Public Class dlgSummaryTables
         ucrInputNA.SetParameter(New RParameter("na_display", 8))
         ucrInputNA.SetRDefault(Chr(34) & Chr(34))
 
-        ucrSaveTable.SetPrefix("summ_table")
+        ucrSaveTable.SetPrefix("summary_table")
         ucrSaveTable.SetSaveTypeAsTable()
         ucrSaveTable.SetDataFrameSelector(ucrSelectorSummaryTables.ucrAvailableDataFrames)
         ucrSaveTable.SetIsComboBox()
@@ -149,6 +149,7 @@ Public Class dlgSummaryTables
         clsDummyFunction = New RFunction
         clsMutableOperator = New ROperator
         clsColumnOperator = New ROperator
+        clsGetDataframe = New RFunction
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -181,11 +182,11 @@ Public Class dlgSummaryTables
 
         clsummaryVariableHeaderLeftTopFunction.SetPackageName("mmtable2")
         clsummaryVariableHeaderLeftTopFunction.SetRCommand("header_left_top")
-        clsummaryVariableHeaderLeftTopFunction.AddParameter("summary_variable", "Summary-Variable", iPosition:=0, bIncludeArgumentName:=False)
+        clsummaryVariableHeaderLeftTopFunction.AddParameter("summary_variable", Chr(39) & "Summary-Variable" & Chr(39), iPosition:=0, bIncludeArgumentName:=False)
 
         clsSummaryVariableHeaderTopLeftFunction.SetPackageName("mmtable2")
         clsSummaryVariableHeaderTopLeftFunction.SetRCommand("header_top_left")
-        clsSummaryVariableHeaderTopLeftFunction.AddParameter("summary_variable", "Summary-Variable", iPosition:=0, bIncludeArgumentName:=False)
+        clsSummaryVariableHeaderTopLeftFunction.AddParameter("summary_variable", Chr(39) & "Summary-Variable" & Chr(39), iPosition:=0, bIncludeArgumentName:=False)
 
         clsMutableFunction.SetPackageName("mmtable2")
         clsMutableFunction.SetRCommand("mmtable")
@@ -203,7 +204,11 @@ Public Class dlgSummaryTables
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=2)
         clsDefaultFunction.SetAssignTo("summary_table")
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsDefaultFunction, iPosition:=0)
+        clsGetDataframe = ucrSelectorSummaryTables.ucrAvailableDataFrames.clsCurrDataFrame
+        clsGetDataframe.SetAssignTo(ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataframe, iPosition:=0)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsDefaultFunction, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseROperator(clsMutableOperator)
         clsMutableOperator.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
         bResetSubdialog = True
