@@ -33,6 +33,7 @@ Public Class dlgWindPollutionRose
         End If
         SetRcodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
         TestOkEnabled()
     End Sub
 
