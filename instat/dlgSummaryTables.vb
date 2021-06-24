@@ -59,37 +59,31 @@ Public Class dlgSummaryTables
         ucrReceiverSummaryCols.SetDataType("numeric")
         ucrReceiverSummaryCols.SetParameterIsString()
 
-        ucrReceiverFactors.SetParameter(New RParameter("factors", 3))
+        ucrReceiverFactors.SetParameter(New RParameter("factors", 2))
         ucrReceiverFactors.SetParameterIsString()
         ucrReceiverFactors.Selector = ucrSelectorSummaryTables
         ucrReceiverFactors.SetDataType("factor")
 
-        'ucrChkStoreResults.SetParameter(New RParameter("store_results", 5))
-        'ucrChkStoreResults.SetText("Store Results in Data Frame")
-        'ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        'ucrChkStoreResults.SetRDefault("TRUE")
-
-        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 7))
+        ucrChkOmitMissing.SetParameter(New RParameter("na.rm", 3))
         ucrChkOmitMissing.SetText("Omit Missing Values")
         ucrChkOmitMissing.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkOmitMissing.SetRDefault("FALSE")
 
-        ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 9))
+        ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 4))
         ucrChkDisplayMargins.SetText("Display Outer Margins")
         ucrChkDisplayMargins.SetRDefault("FALSE")
 
         ucrChkDisplaySummariesAsRow.SetText("Display Summaries As Rows")
-        ucrChkDisplayVariablesAsRows.SetText("Display Variables As Rows")
+        ucrChkDisplaySummariesAsRow.AddParameterPresentCondition(True, "summariesLeftTop")
+        ucrChkDisplaySummariesAsRow.AddParameterPresentCondition(False, "summariesLeftTop", False)
+
         ucrChkDisplaySummaryVariablesAsRow.SetText("Display Summary_Variables As Rows")
+        ucrChkDisplaySummaryVariablesAsRow.AddParameterPresentCondition(True, "summariesVariableLeftTop")
+        ucrChkDisplaySummaryVariablesAsRow.AddParameterPresentCondition(False, "summariesVariableLeftTop", False)
 
-        ucrChkDisplaySummariesAsRow.AddParameterPresentCondition(True, "summaries")
-        ucrChkDisplaySummariesAsRow.AddParameterPresentCondition(False, "summaries", False)
-
-        ucrChkDisplaySummaryVariablesAsRow.AddParameterPresentCondition(True, "summ_variables")
-        ucrChkDisplaySummaryVariablesAsRow.AddParameterPresentCondition(False, "summ_variables", False)
-
-        ucrChkDisplayVariablesAsRows.AddParameterPresentCondition(True, "variables")
-        ucrChkDisplayVariablesAsRows.AddParameterPresentCondition(False, "variables", False)
+        ucrChkDisplayVariablesAsRows.SetText("Display Variables As Rows")
+        ucrChkDisplayVariablesAsRows.AddParameterPresentCondition(True, "variablesLeftTop")
+        ucrChkDisplayVariablesAsRows.AddParameterPresentCondition(False, "variablesLeftTop", False)
 
         ucrNudColumnFactors.SetLinkedDisplayControl(lblColumnFactors)
         ucrNudColumnFactors.SetMinMax(iNewMin:=0)
@@ -100,19 +94,19 @@ Public Class dlgSummaryTables
         ucrPnlMargin.AddRadioButton(rdoBoth)
         ucrPnlMargin.SetLinkedDisplayControl(grpMargin)
 
-        ucrInputMarginName.SetParameter(New RParameter("margin_name", iNewPosition:=10))
+        ucrInputMarginName.SetParameter(New RParameter("margin_name", iNewPosition:=5))
         ucrInputMarginName.SetLinkedDisplayControl(lblMarginName)
 
+        ucrChkSummaries.SetParameter(New RParameter("treat_columns_as_factor", 9))
         ucrChkSummaries.SetText("Treat Summary Columns as a Further Factor")
+        ucrChkSummaries.AddParameterValuesCondition(True, "treat_columns_as_factor", "FALSE")
+        ucrChkSummaries.AddParameterValuesCondition(False, "treat_columns_as_factor", "FALSE", False)
 
-        ucrChkSummaries.AddParameterPresentCondition(True, "singleDisplay")
-        ucrChkSummaries.AddParameterPresentCondition(False, "singleDisplay", False)
-
-        ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 14))
+        ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 6))
         ucrNudSigFigs.SetMinMax(0, 22)
         ucrNudSigFigs.SetRDefault(2)
 
-        ucrReceiverWeights.SetParameter(New RParameter("weights", 17))
+        ucrReceiverWeights.SetParameter(New RParameter("weights", 7))
         ucrReceiverWeights.SetParameterIsString()
         ucrReceiverWeights.Selector = ucrSelectorSummaryTables
         ucrReceiverWeights.SetDataType("numeric")
@@ -123,7 +117,7 @@ Public Class dlgSummaryTables
         'Not yet implemented
         ucrChkWeight.Enabled = False
 
-        ucrInputNA.SetParameter(New RParameter("na_display", 15))
+        ucrInputNA.SetParameter(New RParameter("na_display", 8))
         ucrInputNA.SetRDefault(Chr(34) & Chr(34))
 
         ucrSaveTable.SetPrefix("summ_table")
@@ -193,20 +187,19 @@ Public Class dlgSummaryTables
         clsSummaryVariableHeaderTopLeftFunction.SetRCommand("header_top_left")
         clsSummaryVariableHeaderTopLeftFunction.AddParameter("summary_variable", "Summary-Variable", iPosition:=0, bIncludeArgumentName:=False)
 
-        clsMutableOperator.RemoveParameterByName("summariesVariableLeftTop")
-        clsMutableOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
-
         clsMutableFunction.SetPackageName("mmtable2")
         clsMutableFunction.SetRCommand("mmtable")
         clsMutableFunction.AddParameter("data", "summary_table", iPosition:=0)
         clsMutableFunction.AddParameter("table_data", "Value", iPosition:=1)
 
         clsMutableOperator.AddParameter("mutableFunc", clsRFunctionParameter:=clsMutableFunction, iPosition:=0)
+        clsMutableOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
 
         clsSummariesList.SetRCommand("c")
         clsSummariesList.AddParameter("summary_mean", Chr(34) & "summary_mean" & Chr(34), bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
+        clsDefaultFunction.AddParameter("treat_columns_as_factor", "FALSE", iPosition:=9)
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=2)
         clsDefaultFunction.SetAssignTo("summary_table")
 
@@ -220,19 +213,18 @@ Public Class dlgSummaryTables
         ucrSelectorSummaryTables.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverSummaryCols.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverFactors.SetRCode(clsDefaultFunction, bReset)
-        'ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
         ucrChkOmitMissing.SetRCode(clsDefaultFunction, bReset)
         ucrChkDisplayMargins.SetRCode(clsDefaultFunction, bReset)
         ucrPnlMargin.SetRCode(clsDefaultFunction, bReset)
         ucrInputMarginName.SetRCode(clsDefaultFunction, bReset)
-        ucrChkSummaries.SetRCode(clsDummyFunction, bReset)
+        ucrChkSummaries.SetRCode(clsDefaultFunction, bReset)
         ucrNudSigFigs.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverWeights.SetRCode(clsDefaultFunction, bReset)
         ucrChkWeight.SetRCode(clsDefaultFunction, bReset)
         ucrInputNA.SetRCode(clsDefaultFunction, bReset)
-        ucrChkDisplaySummariesAsRow.SetRCode(clsDummyFunction, bReset)
-        ucrChkDisplaySummaryVariablesAsRow.SetRCode(clsDummyFunction, bReset)
-        ucrChkDisplayVariablesAsRows.SetRCode(clsDummyFunction, bReset)
+        ucrChkDisplaySummariesAsRow.SetRCode(clsMutableOperator, bReset)
+        ucrChkDisplaySummaryVariablesAsRow.SetRCode(clsMutableOperator, bReset)
+        ucrChkDisplayVariablesAsRows.SetRCode(clsMutableOperator, bReset)
         ucrSaveTable.SetRCode(clsMutableOperator, bReset)
     End Sub
 
@@ -282,7 +274,7 @@ Public Class dlgSummaryTables
             If rdoOuter.Checked Then
                 clsDefaultFunction.AddParameter("margins", Chr(34) & "outer" & Chr(34), iPosition:=8)
             ElseIf rdoBoth.Checked Then
-                clsDefaultFunction.AddParameter("margins", "c(""outer"",""sumary"")", iPosition:=8)
+                clsDefaultFunction.AddParameter("margins", "c(""outer"",""summary"")", iPosition:=8)
             ElseIf rdoSummary.Checked Then
                 clsDefaultFunction.AddParameter("margins", Chr(34) & "summary" & Chr(34), iPosition:=8)
             End If
@@ -298,23 +290,18 @@ Public Class dlgSummaryTables
             If ucrChkDisplaySummariesAsRow.Checked Then
                 clsMutableOperator.RemoveParameterByName("summariesTopLeft")
                 clsMutableOperator.AddParameter("summariesLeftTop", clsRFunctionParameter:=clsSummariesHeaderLeftTopFunction, iPosition:=1)
-                clsDummyFunction.AddParameter("summaries", "summaries", iPosition:=0)
             Else
                 clsMutableOperator.RemoveParameterByName("summariesLeftTop")
                 clsMutableOperator.AddParameter("summariesTopLeft", clsRFunctionParameter:=clsSummariesHeaderTopLeftFunction, iPosition:=1)
-                clsDummyFunction.RemoveParameterByName("summaries")
             End If
 
             If ucrChkDisplayVariablesAsRows.Checked Then
                 clsMutableOperator.RemoveParameterByName("variablesTopLeft")
                 clsMutableOperator.AddParameter("variablesLeftTop", clsRFunctionParameter:=clsVariableHeaderLeftTopFunction, iPosition:=1)
-                clsDummyFunction.AddParameter("variables", "variables", iPosition:=1)
             Else
                 clsMutableOperator.RemoveParameterByName("variablesLeftTop")
                 clsMutableOperator.AddParameter("variablesTopLeft", clsRFunctionParameter:=clsVariableHeaderTopLeftFunction, iPosition:=1)
-                clsDummyFunction.RemoveParameterByName("variables")
             End If
-            clsDummyFunction.AddParameter("singleDisplay", "singleDisplay", iPosition:=1)
         Else
             clsMutableOperator.RemoveParameterByName("summariesTopLeft")
             clsMutableOperator.RemoveParameterByName("summariesLeftTop")
@@ -323,13 +310,10 @@ Public Class dlgSummaryTables
             If ucrChkDisplaySummaryVariablesAsRow.Checked Then
                 clsMutableOperator.RemoveParameterByName("summariesVariableTopLeft")
                 clsMutableOperator.AddParameter("summariesVariableLeftTop", clsRFunctionParameter:=clsummaryVariableHeaderLeftTopFunction, iPosition:=1)
-                clsDummyFunction.AddParameter("summ_variables", "summ_variables", iPosition:=2)
             Else
                 clsMutableOperator.RemoveParameterByName("summariesVariableLeftTop")
                 clsMutableOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
-                clsDummyFunction.RemoveParameterByName("summ_variables")
             End If
-            clsDummyFunction.RemoveParameterByName("singleDisplay")
         End If
     End Sub
 
