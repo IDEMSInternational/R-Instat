@@ -303,7 +303,7 @@
     <value>17</value>
   </data>
   <data name="ucrInputSeparator.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 139</value>
+    <value>73, 139</value>
   </data>
   <data name="ucrInputSeparator.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 23</value>
@@ -382,10 +382,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoTrim.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 12</value>
+    <value>252, 4</value>
   </data>
   <data name="rdoTrim.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 27</value>
+    <value>83, 43</value>
   </data>
   <data name="rdoTrim.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -415,10 +415,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoWords.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 12</value>
+    <value>333, 4</value>
   </data>
   <data name="rdoWords.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 27</value>
+    <value>83, 43</value>
   </data>
   <data name="rdoWords.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -448,10 +448,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoSubstring.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 12</value>
+    <value>414, 4</value>
   </data>
   <data name="rdoSubstring.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 27</value>
+    <value>83, 43</value>
   </data>
   <data name="rdoSubstring.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -481,10 +481,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoPad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>171, 12</value>
+    <value>171, 4</value>
   </data>
   <data name="rdoPad.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 27</value>
+    <value>83, 43</value>
   </data>
   <data name="rdoPad.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -514,10 +514,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 12</value>
+    <value>90, 4</value>
   </data>
   <data name="rdoLength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 27</value>
+    <value>83, 43</value>
   </data>
   <data name="rdoLength.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -547,10 +547,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoConvertCase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 12</value>
+    <value>10, 4</value>
   </data>
   <data name="rdoConvertCase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 27</value>
+    <value>83, 43</value>
   </data>
   <data name="rdoConvertCase.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -580,7 +580,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewColName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 22</value>
+    <value>331, 22</value>
   </data>
   <data name="ucrNewColName.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -703,7 +703,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudLastWord.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 84</value>
+    <value>96, 84</value>
   </data>
   <data name="ucrNudLastWord.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -772,7 +772,7 @@
     <value>8</value>
   </data>
   <data name="ucrNudTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 50</value>
+    <value>95, 50</value>
   </data>
   <data name="ucrNudTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -844,7 +844,7 @@
     <value>11</value>
   </data>
   <data name="ucrNudFirstWord.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 23</value>
+    <value>95, 23</value>
   </data>
   <data name="ucrNudFirstWord.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -865,7 +865,7 @@
     <value>12</value>
   </data>
   <data name="ucrNudFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 23</value>
+    <value>95, 23</value>
   </data>
   <data name="ucrNudFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
