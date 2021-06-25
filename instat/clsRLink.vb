@@ -2423,6 +2423,19 @@ Public Class RLink
         ElseIf strCommentFromDialogue.Contains("reorder levels") Then
             dlgReorderLevels.lstScriptsRCodeStructure = lstNewRCodeStructures
             dlgReorderLevels.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("reference level") Then
+            dlgReferenceLevel.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgReferenceLevel.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("remove unused levels") Then
+            dlgRemoveUnusedLevels.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgRemoveUnusedLevels.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("contrasts") Then
+            dlgContrasts.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgContrasts.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("factor data frame") Then
+            lstNewRCodeStructures.RemoveAt(0)
+            dlgFactorDataFrame.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgFactorDataFrame.ShowDialog()
         End If
     End Sub
 

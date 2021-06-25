@@ -25,7 +25,7 @@ Public Class dlgContrasts
     Public bReset As Boolean = True
     Public clsNlevels, clsFactorColumn, clsContractMatrix, clsSetContrast As New RFunction
     Private iFullWidth As Integer
-
+    Private lstRCodeStructure As List(Of RCodeStructure)
     Public Sub New()
 
         ' This call is required by the designer.
@@ -53,12 +53,6 @@ Public Class dlgContrasts
         bReset = False
         autoTranslate(Me)
         TestOKEnabled()
-    End Sub
-
-    Private Sub SetRCodeforControls(bReset As Boolean)
-        ucrSelectorForContrast.SetRCode(clsSetContrast, bReset)
-        ucrReceiverForContrasts.SetRCode(clsSetContrast, bReset)
-        ucrInputContrastName.SetRCode(clsSetContrast, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
@@ -93,27 +87,53 @@ Public Class dlgContrasts
         ucrReceiverForContrasts.SetParameterIsString()
 
     End Sub
-
-    Private Sub SetDefaults()
+    Private Sub ResetFUnctions()
         clsContractMatrix = New RFunction
         clsNlevels = New RFunction
         clsFactorColumn = New RFunction
         clsSetContrast = New RFunction
 
-        grdCurrSheet.Reset()
+        clsNlevels.SetRCommand("nlevels")
+        clsContractMatrix.SetRCommand("matrix")
+        clsFactorColumn.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
+        clsSetContrast.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_contrasts_of_factor")
+    End Sub
+    Private Sub SetDefaults()
+        ResetFUnctions()
 
+        grdCurrSheet.Reset()
         ucrInputContrastName.Reset()
         ucrSelectorForContrast.Reset()
 
         clsSetContrast.AddParameter("new_contrasts", Chr(34) & "contr.treatment" & Chr(34))
 
-        clsNlevels.SetRCommand("nlevels")
-        clsContractMatrix.SetRCommand("matrix")
-        clsFactorColumn.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
-        clsSetContrast.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_contrasts_of_factor")
+        If IsNothing(lstRCodeStructure) Then
+            'continue as normal
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = frmMain.clsRLink.strInstatDataObject & "$set_contrasts_of_factor" Then
+                    clsSetContrast = lstRCodeStructure(0)
+                Else
+                    MsgBox("Developer error: The dialogue on accepts the" & frmMain.clsRLink.strInstatDataObject & "$set_contrasts_of_factor" & " RFunctions")
+                End If
+            Else
+                MsgBox("Developer error: The dialogue on accepts RFunctions")
+            End If
+        End If
+        lstRCodeStructure = Nothing
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSetContrast)
     End Sub
+
+
+    Private Sub SetRCodeforControls(bReset As Boolean)
+        ucrSelectorForContrast.SetRCode(clsSetContrast, bReset)
+        ucrReceiverForContrasts.SetRCode(clsSetContrast, bReset)
+        ucrInputContrastName.SetRCode(clsSetContrast, bReset)
+    End Sub
+
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
@@ -225,4 +245,13 @@ Public Class dlgContrasts
         IsEmptyCells()
         TestOKEnabled()
     End Sub
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class

@@ -20,6 +20,7 @@ Public Class dlgReferenceLevel
     Public strDefaultDataFrame As String = ""
     Private bReset As Boolean = True
     Private clsSetRefLevel As New RFunction
+    Private lstRCodeStructure As List(Of RCodeStructure)
     Private Sub dlgReferenceLevel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
         If bFirstLoad Then
@@ -56,9 +57,25 @@ Public Class dlgReferenceLevel
 
     Private Sub SetDefaults()
         clsSetRefLevel = New RFunction
-        ucrSelectorForReferenceLevels.Reset()
 
         clsSetRefLevel.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$set_factor_reference_level")
+        ucrSelectorForReferenceLevels.Reset()
+
+        If IsNothing(lstRCodeStructure) Then
+            'continue as normal
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = frmMain.clsRLink.strInstatDataObject & "$set_factor_reference_level" Then
+                    clsSetRefLevel = lstRCodeStructure(0)
+                Else
+                    MsgBox("Developer Error:This dialogue only allows Functions")
+                End If
+            End If
+        End If
+        lstRCodeStructure = Nothing
+
         ucrBase.clsRsyntax.SetBaseRFunction(clsSetRefLevel)
     End Sub
 
@@ -90,4 +107,14 @@ Public Class dlgReferenceLevel
     Private Sub ucrReceiverReferenceLevels_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverReferenceLevels.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class

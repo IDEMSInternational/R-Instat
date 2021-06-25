@@ -22,6 +22,7 @@ Public Class dlgRemoveUnusedLevels
     Private bReset As Boolean = True
     Private clsUnusedLevels, clstable, clsSum, clsFactorColumn As New RFunction
     Private clsTableOperation As New ROperator
+    Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub dlgRemoveUnusedLevels_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -57,29 +58,50 @@ Public Class dlgRemoveUnusedLevels
         ucrReceiverFactorColumn.SetParameterIsString()
     End Sub
 
-    Private Sub SetDefaults()
+    Private Sub ResetFunctions()
         clsUnusedLevels = New RFunction
         clstable = New RFunction
         clsFactorColumn = New RFunction
         clsSum = New RFunction
 
-        ucrSelectorFactorColumn.Reset()
-        ucrInputUnusedLevels.SetName("")
-        ucrInputUnusedLevels.Reset()
-
         clstable.SetRCommand("table")
         clsSum.SetRCommand("sum")
         clsFactorColumn.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_columns_from_data")
         clsUnusedLevels.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$drop_unused_factor_levels")
+    End Sub
+
+    Private Sub SetDefaults()
+        ResetFunctions()
+        ucrSelectorFactorColumn.Reset()
+        ucrInputUnusedLevels.SetName("")
+        ucrInputUnusedLevels.Reset()
+
+        If IsNothing(lstRCodeStructure) Then
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = frmMain.clsRLink.strInstatDataObject & "$drop_unused_factor_levels" Then
+                    clsUnusedLevels = lstRCodeStructure(0)
+                    If Not IsNothing(clsUnusedLevels.GetParameter("data_name")) Then
+                        clsFactorColumn.AddParameter(clsUnusedLevels.GetParameter("data_name"))
+                    End If
+                    If Not IsNothing(clsUnusedLevels.GetParameter("col_name")) Then
+                        clsFactorColumn.AddParameter(clsUnusedLevels.GetParameter("col_name"))
+                    End If
+                End If
+                Else
+                MsgBox("Developer error:The dialogue only accepts Rfunctions")
+            End If
+        End If
+        lstRCodeStructure = Nothing
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsUnusedLevels)
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-
         ucrSelectorFactorColumn.AddAdditionalCodeParameterPair(clsFactorColumn, ucrSelectorFactorColumn.GetParameter, iAdditionalPairNo:=1)
         ucrReceiverFactorColumn.AddAdditionalCodeParameterPair(clsFactorColumn, ucrReceiverFactorColumn.GetParameter, iAdditionalPairNo:=1)
-
         ucrSelectorFactorColumn.SetRCode(clsUnusedLevels, bReset)
         ucrReceiverFactorColumn.SetRCode(clsUnusedLevels, bReset)
     End Sub
@@ -138,4 +160,13 @@ Public Class dlgRemoveUnusedLevels
             ucrInputUnusedLevels.ResetText()
         End If
     End Sub
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class

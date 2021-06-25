@@ -18,6 +18,7 @@ Imports instat.Translations
 Public Class dlgFactorDataFrame
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
+    Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub ucrSelectorFactorDataFrame_Load(sender As Object, e As EventArgs) Handles ucrSelectorFactorDataFrame.Load
         If bFirstLoad Then
@@ -66,18 +67,28 @@ Public Class dlgFactorDataFrame
     Private Sub SetDefaults()
         Dim clsDefaultFunction As New RFunction
 
+        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
         ucrInputFactorNames.Reset()
         ucrSelectorFactorDataFrame.Reset()
         ucrInputFactorNames.ResetText()
 
-        clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame")
+        If IsNothing(lstRCodeStructure) Then
+            'continue as normal 
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            MsgBox("Developer error: List of RCodeStructure must have only one RFunction")
+        ElseIf (lstRCodeStructure.Count = 1) Then
+            If Not IsNothing(TryCast(lstRCodeStructure(0), RFunction)) Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame" Then
+                    clsDefaultFunction = lstRCodeStructure(0)
+                Else
+                    MsgBox("Developer error: This Dialogue only accepts the" & frmMain.clsRLink.strInstatDataObject & "$create_factor_data_frame" & "RFunction")
+                End If
+            End If
+        End If
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction.Clone())
 
         CheckAutoName()
-    End Sub
-
-    Private Sub ReopenDialog()
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -111,4 +122,13 @@ Public Class dlgFactorDataFrame
             ucrInputFactorNames.SetName(ucrReceiverFactorDataFrame.GetVariableNames(False))
         End If
     End Sub
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class
