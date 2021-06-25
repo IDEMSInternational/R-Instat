@@ -154,6 +154,10 @@ Public Class dlgRandomSubsets
         End If
     End Sub
 
+    Private Sub ucrNewDataFrame_Load(sender As Object, e As EventArgs) Handles ucrNewDataFrame.Load
+
+    End Sub
+
     Private Sub ucrSelectorRandomSubsets_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorRandomSubsets.ControlValueChanged
         NewDefaultName()
         ReplaceParameters()

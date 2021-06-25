@@ -37,7 +37,7 @@ Partial Class sdgMissingOptions
         '
         Me.ucrBase.Location = New System.Drawing.Point(91, 139)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBase.Size = New System.Drawing.Size(158, 30)
         Me.ucrBase.TabIndex = 0
         '
         'ucrInputPercentage
@@ -57,7 +57,7 @@ Partial Class sdgMissingOptions
         Me.ucrChkMinNumNonMissing.Location = New System.Drawing.Point(9, 41)
         Me.ucrChkMinNumNonMissing.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkMinNumNonMissing.Name = "ucrChkMinNumNonMissing"
-        Me.ucrChkMinNumNonMissing.Size = New System.Drawing.Size(227, 20)
+        Me.ucrChkMinNumNonMissing.Size = New System.Drawing.Size(258, 20)
         Me.ucrChkMinNumNonMissing.TabIndex = 11
         '
         'ucrNudNumberNotMissing
@@ -101,7 +101,7 @@ Partial Class sdgMissingOptions
         Me.ucrChkMaxNumMissing.Location = New System.Drawing.Point(9, 12)
         Me.ucrChkMaxNumMissing.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkMaxNumMissing.Name = "ucrChkMaxNumMissing"
-        Me.ucrChkMaxNumMissing.Size = New System.Drawing.Size(227, 20)
+        Me.ucrChkMaxNumMissing.Size = New System.Drawing.Size(258, 20)
         Me.ucrChkMaxNumMissing.TabIndex = 9
         '
         'ucrChkMaxPercMissing
@@ -110,7 +110,7 @@ Partial Class sdgMissingOptions
         Me.ucrChkMaxPercMissing.Location = New System.Drawing.Point(9, 70)
         Me.ucrChkMaxPercMissing.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkMaxPercMissing.Name = "ucrChkMaxPercMissing"
-        Me.ucrChkMaxPercMissing.Size = New System.Drawing.Size(227, 20)
+        Me.ucrChkMaxPercMissing.Size = New System.Drawing.Size(258, 20)
         Me.ucrChkMaxPercMissing.TabIndex = 13
         '
         'ucrNudNumber

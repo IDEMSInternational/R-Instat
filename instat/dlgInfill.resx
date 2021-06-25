@@ -208,28 +208,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblLimits.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrDtpStartDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 45</value>
-  </data>
-  <data name="ucrDtpStartDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 20</value>
-  </data>
-  <data name="ucrDtpStartDate.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpStartDate.Name" xml:space="preserve">
-    <value>ucrDtpStartDate</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpStartDate.Type" xml:space="preserve">
-    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpStartDate.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrDtpStartDate.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>5</value>
   </data>
   <data name="lblStartingFrom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -238,7 +217,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblStartingFrom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>155, 50</value>
+    <value>218, 49</value>
   </data>
   <data name="lblStartingFrom.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
@@ -259,13 +238,13 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblStartingFrom.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="ucrChkResort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 19</value>
+    <value>176, 21</value>
   </data>
   <data name="ucrChkResort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 20</value>
+    <value>250, 20</value>
   </data>
   <data name="ucrChkResort.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -280,10 +259,10 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkResort.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="ucrInputComboMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 46</value>
+    <value>293, 46</value>
   </data>
   <data name="ucrInputComboMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>92, 21</value>
@@ -301,7 +280,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrInputComboMonth.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="ucrInputLimitOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>44, 19</value>
@@ -322,10 +301,10 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrInputLimitOptions.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="ucrDtpEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 72</value>
+    <value>102, 73</value>
   </data>
   <data name="ucrDtpEndDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 20</value>
@@ -343,7 +322,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;ucrDtpEndDate.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="lblEndDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -373,7 +352,7 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblEndDate.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="lblStartDate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -403,13 +382,34 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblStartDate.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrDtpStartDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>102, 47</value>
+  </data>
+  <data name="ucrDtpStartDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 20</value>
+  </data>
+  <data name="ucrDtpStartDate.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.Name" xml:space="preserve">
+    <value>ucrDtpStartDate</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="ucrChkCompleteYears.Location" type="System.Drawing.Point, System.Drawing">
     <value>16, 47</value>
   </data>
   <data name="ucrChkCompleteYears.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 20</value>
+    <value>271, 20</value>
   </data>
   <data name="ucrChkCompleteYears.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -430,7 +430,7 @@
     <value>9, 196</value>
   </data>
   <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>428, 104</value>
+    <value>429, 104</value>
   </data>
   <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -457,7 +457,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>441, 363</value>
+    <value>450, 363</value>
   </data>
   <data name="ucrReceiverDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>278, 31</value>

@@ -136,4 +136,12 @@ Public Class dlgInfill
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDate.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrDtpStartDate_Load(sender As Object, e As EventArgs) Handles ucrDtpStartDate.Load
+
+    End Sub
+
+    Private Sub lblStartingFrom_Click(sender As Object, e As EventArgs) Handles lblStartingFrom.Click
+
+    End Sub
 End Class

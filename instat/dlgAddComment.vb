@@ -143,4 +143,8 @@ Public Class dlgAddComment
     Private Sub Control_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverColumn.ControlContentsChanged, ucrInputRow.ControlContentsChanged, ucrInputComment.ControlContentsChanged, ucrPnlCellRowColumnDataFrame.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Sub ucrInputComment_Load(sender As Object, e As EventArgs) Handles ucrInputComment.Load
+
+    End Sub
 End Class
