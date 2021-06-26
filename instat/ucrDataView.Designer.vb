@@ -114,9 +114,9 @@ Partial Class ucrDataView
         Me.linkHelpRInstatWebsite = New System.Windows.Forms.LinkLabel()
         Me.panelSectionStart = New System.Windows.Forms.Panel()
         Me.lblStart = New System.Windows.Forms.Label()
-        Me.linkStartNewDataFrame = New System.Windows.Forms.LinkLabel()
-        Me.linkStartOpenFile = New System.Windows.Forms.LinkLabel()
-        Me.linkStartOpenLibrary = New System.Windows.Forms.LinkLabel()
+        Me.linkStartNewdataframe = New System.Windows.Forms.LinkLabel()
+        Me.linkStartImportFile = New System.Windows.Forms.LinkLabel()
+        Me.linkStartImportLibrary = New System.Windows.Forms.LinkLabel()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -668,9 +668,9 @@ Partial Class ucrDataView
         'panelSectionStart
         '
         Me.panelSectionStart.Controls.Add(Me.lblStart)
-        Me.panelSectionStart.Controls.Add(Me.linkStartNewDataFrame)
-        Me.panelSectionStart.Controls.Add(Me.linkStartOpenFile)
-        Me.panelSectionStart.Controls.Add(Me.linkStartOpenLibrary)
+        Me.panelSectionStart.Controls.Add(Me.linkStartNewdataframe)
+        Me.panelSectionStart.Controls.Add(Me.linkStartImportFile)
+        Me.panelSectionStart.Controls.Add(Me.linkStartImportLibrary)
         Me.panelSectionStart.Location = New System.Drawing.Point(28, 20)
         Me.panelSectionStart.Name = "panelSectionStart"
         Me.panelSectionStart.Size = New System.Drawing.Size(374, 96)
@@ -687,44 +687,44 @@ Partial Class ucrDataView
         Me.lblStart.TabIndex = 0
         Me.lblStart.Text = "Start"
         '
-        'linkStartNewDataFrame
+        'linkStartNewdataframe
         '
-        Me.linkStartNewDataFrame.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkStartNewDataFrame.AutoSize = True
-        Me.linkStartNewDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkStartNewDataFrame.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartNewDataFrame.Location = New System.Drawing.Point(7, 37)
-        Me.linkStartNewDataFrame.Name = "linkStartNewDataFrame"
-        Me.linkStartNewDataFrame.Size = New System.Drawing.Size(91, 13)
-        Me.linkStartNewDataFrame.TabIndex = 3
-        Me.linkStartNewDataFrame.TabStop = True
-        Me.linkStartNewDataFrame.Text = "New data frame..."
+        Me.linkStartNewdataframe.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkStartNewdataframe.AutoSize = True
+        Me.linkStartNewdataframe.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkStartNewdataframe.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkStartNewdataframe.Location = New System.Drawing.Point(7, 37)
+        Me.linkStartNewdataframe.Name = "linkStartNewdataframe"
+        Me.linkStartNewdataframe.Size = New System.Drawing.Size(91, 13)
+        Me.linkStartNewdataframe.TabIndex = 3
+        Me.linkStartNewdataframe.TabStop = True
+        Me.linkStartNewdataframe.Text = "New data frame..."
         '
-        'linkStartOpenFile
+        'linkStartImportFile
         '
-        Me.linkStartOpenFile.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkStartOpenFile.AutoSize = True
-        Me.linkStartOpenFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkStartOpenFile.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartOpenFile.Location = New System.Drawing.Point(7, 56)
-        Me.linkStartOpenFile.Name = "linkStartOpenFile"
-        Me.linkStartOpenFile.Size = New System.Drawing.Size(84, 13)
-        Me.linkStartOpenFile.TabIndex = 4
-        Me.linkStartOpenFile.TabStop = True
-        Me.linkStartOpenFile.Text = "Import from file..."
+        Me.linkStartImportFile.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkStartImportFile.AutoSize = True
+        Me.linkStartImportFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkStartImportFile.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkStartImportFile.Location = New System.Drawing.Point(7, 56)
+        Me.linkStartImportFile.Name = "linkStartImportFile"
+        Me.linkStartImportFile.Size = New System.Drawing.Size(84, 13)
+        Me.linkStartImportFile.TabIndex = 4
+        Me.linkStartImportFile.TabStop = True
+        Me.linkStartImportFile.Text = "Import from file..."
         '
-        'linkStartOpenLibrary
+        'linkStartImportLibrary
         '
-        Me.linkStartOpenLibrary.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkStartOpenLibrary.AutoSize = True
-        Me.linkStartOpenLibrary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkStartOpenLibrary.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartOpenLibrary.Location = New System.Drawing.Point(7, 75)
-        Me.linkStartOpenLibrary.Name = "linkStartOpenLibrary"
-        Me.linkStartOpenLibrary.Size = New System.Drawing.Size(98, 13)
-        Me.linkStartOpenLibrary.TabIndex = 5
-        Me.linkStartOpenLibrary.TabStop = True
-        Me.linkStartOpenLibrary.Text = "Import from library..."
+        Me.linkStartImportLibrary.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkStartImportLibrary.AutoSize = True
+        Me.linkStartImportLibrary.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkStartImportLibrary.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkStartImportLibrary.Location = New System.Drawing.Point(7, 75)
+        Me.linkStartImportLibrary.Name = "linkStartImportLibrary"
+        Me.linkStartImportLibrary.Size = New System.Drawing.Size(98, 13)
+        Me.linkStartImportLibrary.TabIndex = 5
+        Me.linkStartImportLibrary.TabStop = True
+        Me.linkStartImportLibrary.Text = "Import from library..."
         '
         'ucrDataView
         '
@@ -810,9 +810,9 @@ Partial Class ucrDataView
     Private WithEvents mnuFilters As ToolStripMenuItem
     Private WithEvents mnuRemoveCurrentFilters As ToolStripMenuItem
     Friend WithEvents panelSectionsAll As Panel
-    Friend WithEvents linkStartOpenLibrary As LinkLabel
-    Friend WithEvents linkStartOpenFile As LinkLabel
-    Friend WithEvents linkStartNewDataFrame As LinkLabel
+    Friend WithEvents linkStartImportLibrary As LinkLabel
+    Friend WithEvents linkStartImportFile As LinkLabel
+    Friend WithEvents linkStartNewdataframe As LinkLabel
     Friend WithEvents lblHelp As Label
     Friend WithEvents lblRecent As Label
     Friend WithEvents lblStart As Label

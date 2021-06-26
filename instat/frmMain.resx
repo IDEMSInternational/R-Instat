@@ -1025,10 +1025,10 @@
   <metadata name="SaveFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>638, 56</value>
   </metadata>
-  <data name="mnuClimaticFileOpensst.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuClimaticFileImportSST.Size" type="System.Drawing.Size, System.Drawing">
     <value>282, 22</value>
   </data>
-  <data name="mnuClimaticFileOpensst.Text" xml:space="preserve">
+  <data name="mnuClimaticFileImportSST.Text" xml:space="preserve">
     <value>Import SST...</value>
   </data>
   <data name="mnuClimaticFileImportfromIRIDataLibrary.Size" type="System.Drawing.Size, System.Drawing">
@@ -1070,14 +1070,14 @@
   <data name="mnuClimateFileImportfromClimSoftWizard.Text" xml:space="preserve">
     <value>Import from Climsoft Wizard...</value>
   </data>
-  <data name="mnuClimaticFileImportFromCliData.Enabled" type="System.Boolean, mscorlib">
+  <data name="mnuClimaticFileImportfromCliData.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="mnuClimaticFileImportFromCliData.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuClimaticFileImportfromCliData.Size" type="System.Drawing.Size, System.Drawing">
     <value>282, 22</value>
   </data>
-  <data name="mnuClimaticFileImportFromCliData.Text" xml:space="preserve">
-    <value>Import From CLIDATA...</value>
+  <data name="mnuClimaticFileImportfromCliData.Text" xml:space="preserve">
+    <value>Import from CLIDATA...</value>
   </data>
   <data name="ToolStripSeparator15.Size" type="System.Drawing.Size, System.Drawing">
     <value>279, 6</value>
@@ -2781,40 +2781,40 @@
   <data name="mnuFileNewDataFrame.Text" xml:space="preserve">
     <value>New Data Frame...</value>
   </data>
-  <data name="mnuFileOpenFromFile.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+  <data name="mnuFileImportFromFile.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+O</value>
   </data>
-  <data name="mnuFileOpenFromFile.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuFileImportFromFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 22</value>
   </data>
-  <data name="mnuFileOpenFromFile.Text" xml:space="preserve">
+  <data name="mnuFileImportFromFile.Text" xml:space="preserve">
     <value>Import From File...</value>
   </data>
-  <data name="mnuFileOpenFromLibrary.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuFileImportFromLibrary.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 22</value>
   </data>
-  <data name="mnuFileOpenFromLibrary.Text" xml:space="preserve">
+  <data name="mnuFileImportFromLibrary.Text" xml:space="preserve">
     <value>Import From Library...</value>
   </data>
   <data name="ToolStripSeparator35.Size" type="System.Drawing.Size, System.Drawing">
     <value>229, 6</value>
   </data>
-  <data name="mnuFileOpenFromODK.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuFileImportFromODK.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 22</value>
   </data>
-  <data name="mnuFileOpenFromODK.Text" xml:space="preserve">
+  <data name="mnuFileImportFromODK.Text" xml:space="preserve">
     <value>Import From ODK...</value>
   </data>
-  <data name="mnuFileOpenFromCSPRO.Enabled" type="System.Boolean, mscorlib">
+  <data name="mnuFileImportFromCSPRO.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="mnuFileOpenFromCSPRO.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuFileImportFromCSPRO.Size" type="System.Drawing.Size, System.Drawing">
     <value>232, 22</value>
   </data>
-  <data name="mnuFileOpenFromCSPRO.Text" xml:space="preserve">
+  <data name="mnuFileImportFromCSPRO.Text" xml:space="preserve">
     <value>Import From CSPRO...</value>
   </data>
-  <data name="mnuFileOpenFromCSPRO.Visible" type="System.Boolean, mscorlib">
+  <data name="mnuFileImportFromCSPRO.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <data name="mnuFileImportFromDatabases.Enabled" type="System.Boolean, mscorlib">
@@ -2834,9 +2834,6 @@
   </data>
   <data name="mnuFileImportandTidyNetCDFFile.Text" xml:space="preserve">
     <value>Import and Tidy NetCDF File...</value>
-  </data>
-  <data name="ToolStripSeparator27.Size" type="System.Drawing.Size, System.Drawing">
-    <value>229, 6</value>
   </data>
   <data name="mnuFileConvert.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -6477,9 +6474,6 @@
         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>R-Instat</value>
   </data>
@@ -7341,10 +7335,10 @@
   <data name="&gt;&gt;mnuClimaticFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticFileOpensst.Name" xml:space="preserve">
-    <value>mnuClimaticFileOpensst</value>
+  <data name="&gt;&gt;mnuClimaticFileImportSST.Name" xml:space="preserve">
+    <value>mnuClimaticFileImportSST</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticFileOpensst.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimaticFileImportSST.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuClimaticFileImportfromIRIDataLibrary.Name" xml:space="preserve">
@@ -7389,10 +7383,10 @@
   <data name="&gt;&gt;mnuClimateFileImportfromClimSoftWizard.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticFileImportFromCliData.Name" xml:space="preserve">
-    <value>mnuClimaticFileImportFromCliData</value>
+  <data name="&gt;&gt;mnuClimaticFileImportfromCliData.Name" xml:space="preserve">
+    <value>mnuClimaticFileImportfromCliData</value>
   </data>
-  <data name="&gt;&gt;mnuClimaticFileImportFromCliData.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuClimaticFileImportfromCliData.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator15.Name" xml:space="preserve">
@@ -8619,16 +8613,16 @@
   <data name="&gt;&gt;mnuFileNewDataFrame.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuFileOpenFromFile.Name" xml:space="preserve">
-    <value>mnuFileOpenFromFile</value>
+  <data name="&gt;&gt;mnuFileImportFromFile.Name" xml:space="preserve">
+    <value>mnuFileImportFromFile</value>
   </data>
-  <data name="&gt;&gt;mnuFileOpenFromFile.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuFileImportFromFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuFileOpenFromLibrary.Name" xml:space="preserve">
-    <value>mnuFileOpenFromLibrary</value>
+  <data name="&gt;&gt;mnuFileImportFromLibrary.Name" xml:space="preserve">
+    <value>mnuFileImportFromLibrary</value>
   </data>
-  <data name="&gt;&gt;mnuFileOpenFromLibrary.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuFileImportFromLibrary.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;ToolStripSeparator35.Name" xml:space="preserve">
@@ -8637,16 +8631,16 @@
   <data name="&gt;&gt;ToolStripSeparator35.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuFileOpenFromODK.Name" xml:space="preserve">
-    <value>mnuFileOpenFromODK</value>
+  <data name="&gt;&gt;mnuFileImportFromODK.Name" xml:space="preserve">
+    <value>mnuFileImportFromODK</value>
   </data>
-  <data name="&gt;&gt;mnuFileOpenFromODK.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuFileImportFromODK.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mnuFileOpenFromCSPRO.Name" xml:space="preserve">
-    <value>mnuFileOpenFromCSPRO</value>
+  <data name="&gt;&gt;mnuFileImportFromCSPRO.Name" xml:space="preserve">
+    <value>mnuFileImportFromCSPRO</value>
   </data>
-  <data name="&gt;&gt;mnuFileOpenFromCSPRO.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuFileImportFromCSPRO.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuFileImportFromDatabases.Name" xml:space="preserve">
@@ -8660,12 +8654,6 @@
   </data>
   <data name="&gt;&gt;mnuFileImportandTidyNetCDFFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator27.Name" xml:space="preserve">
-    <value>ToolStripSeparator27</value>
-  </data>
-  <data name="&gt;&gt;ToolStripSeparator27.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuFileConvert.Name" xml:space="preserve">
     <value>mnuFileConvert</value>
