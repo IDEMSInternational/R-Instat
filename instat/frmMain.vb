@@ -1112,7 +1112,7 @@ Public Class frmMain
     End Sub
 
 
-    Private Sub mnuDescribeSpecificScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificScatterPlot.Click
+    Private Sub mnuDescribeSpecificScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificPointPlot.Click
         dlgScatterPlot.ShowDialog()
     End Sub
 
@@ -1120,11 +1120,11 @@ Public Class frmMain
         dlgLinePlot.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeSpecificHistogram_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificHistogram.Click
+    Private Sub mnuDescribeSpecificHistogram_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificHistogramDensityFrequencyPlot.Click
         dlgHistogram.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeSpecificBoxplot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBoxplot.Click
+    Private Sub mnuDescribeSpecificBoxplot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBoxplotJitterViolinPlot.Click
         dlgBoxplot.ShowDialog()
     End Sub
 
@@ -1136,7 +1136,7 @@ Public Class frmMain
         dlgRugPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeSpecificBarChart_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBarChart.Click
+    Private Sub mnuDescribeSpecificBarChart_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBarPieChart.Click
         dlgBarAndPieChart.ShowDialog()
     End Sub
 

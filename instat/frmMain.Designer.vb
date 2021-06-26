@@ -61,13 +61,13 @@ Partial Class frmMain
         Me.mnuDescribeSpecificSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificMultipleResponse = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator26 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuDescribeSpecificScatterPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificPointPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificLinePlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificHistogram = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificBoxplot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificHistogramDensityFrequencyPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificBoxplotJitterViolinPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificDotPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificRugPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificBarChart = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificBarPieChart = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificCummulativeDistribution = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificParallelCoordinatePlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificMosaic = New System.Windows.Forms.ToolStripMenuItem()
@@ -783,7 +783,7 @@ Partial Class frmMain
         '
         'mnuDescribeSpecific
         '
-        Me.mnuDescribeSpecific.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificScatterPlot, Me.mnuDescribeSpecificLinePlot, Me.mnuDescribeSpecificHistogram, Me.mnuDescribeSpecificBoxplot, Me.mnuDescribeSpecificDotPlot, Me.mnuDescribeSpecificRugPlot, Me.mnuDescribeSpecificBarChart, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot, Me.mnuDescribeSpecificMosaic})
+        Me.mnuDescribeSpecific.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificPointPlot, Me.mnuDescribeSpecificLinePlot, Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, Me.mnuDescribeSpecificBoxplotJitterViolinPlot, Me.mnuDescribeSpecificDotPlot, Me.mnuDescribeSpecificRugPlot, Me.mnuDescribeSpecificBarPieChart, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot, Me.mnuDescribeSpecificMosaic})
         Me.mnuDescribeSpecific.Name = "mnuDescribeSpecific"
         resources.ApplyResources(Me.mnuDescribeSpecific, "mnuDescribeSpecific")
         Me.mnuDescribeSpecific.Tag = "Table_Dialogs"
@@ -811,11 +811,11 @@ Partial Class frmMain
         Me.ToolStripSeparator26.Name = "ToolStripSeparator26"
         resources.ApplyResources(Me.ToolStripSeparator26, "ToolStripSeparator26")
         '
-        'mnuDescribeSpecificScatterPlot
+        'mnuDescribeSpecificPointPlot
         '
-        Me.mnuDescribeSpecificScatterPlot.Name = "mnuDescribeSpecificScatterPlot"
-        resources.ApplyResources(Me.mnuDescribeSpecificScatterPlot, "mnuDescribeSpecificScatterPlot")
-        Me.mnuDescribeSpecificScatterPlot.Tag = "Scatter_Plot..."
+        Me.mnuDescribeSpecificPointPlot.Name = "mnuDescribeSpecificPointPlot"
+        resources.ApplyResources(Me.mnuDescribeSpecificPointPlot, "mnuDescribeSpecificPointPlot")
+        Me.mnuDescribeSpecificPointPlot.Tag = "Point_Plot..."
         '
         'mnuDescribeSpecificLinePlot
         '
@@ -823,17 +823,17 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuDescribeSpecificLinePlot, "mnuDescribeSpecificLinePlot")
         Me.mnuDescribeSpecificLinePlot.Tag = "Line_Plot..."
         '
-        'mnuDescribeSpecificHistogram
+        'mnuDescribeSpecificHistogramDensityFrequencyPlot
         '
-        Me.mnuDescribeSpecificHistogram.Name = "mnuDescribeSpecificHistogram"
-        resources.ApplyResources(Me.mnuDescribeSpecificHistogram, "mnuDescribeSpecificHistogram")
-        Me.mnuDescribeSpecificHistogram.Tag = "Histogram..."
+        Me.mnuDescribeSpecificHistogramDensityFrequencyPlot.Name = "mnuDescribeSpecificHistogramDensityFrequencyPlot"
+        resources.ApplyResources(Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, "mnuDescribeSpecificHistogramDensityFrequencyPlot")
+        Me.mnuDescribeSpecificHistogramDensityFrequencyPlot.Tag = "Histogram..."
         '
-        'mnuDescribeSpecificBoxplot
+        'mnuDescribeSpecificBoxplotJitterViolinPlot
         '
-        Me.mnuDescribeSpecificBoxplot.Name = "mnuDescribeSpecificBoxplot"
-        resources.ApplyResources(Me.mnuDescribeSpecificBoxplot, "mnuDescribeSpecificBoxplot")
-        Me.mnuDescribeSpecificBoxplot.Tag = "Boxplot..."
+        Me.mnuDescribeSpecificBoxplotJitterViolinPlot.Name = "mnuDescribeSpecificBoxplotJitterViolinPlot"
+        resources.ApplyResources(Me.mnuDescribeSpecificBoxplotJitterViolinPlot, "mnuDescribeSpecificBoxplotJitterViolinPlot")
+        Me.mnuDescribeSpecificBoxplotJitterViolinPlot.Tag = "Boxplot..."
         '
         'mnuDescribeSpecificDotPlot
         '
@@ -846,11 +846,11 @@ Partial Class frmMain
         Me.mnuDescribeSpecificRugPlot.Name = "mnuDescribeSpecificRugPlot"
         resources.ApplyResources(Me.mnuDescribeSpecificRugPlot, "mnuDescribeSpecificRugPlot")
         '
-        'mnuDescribeSpecificBarChart
+        'mnuDescribeSpecificBarPieChart
         '
-        Me.mnuDescribeSpecificBarChart.Name = "mnuDescribeSpecificBarChart"
-        resources.ApplyResources(Me.mnuDescribeSpecificBarChart, "mnuDescribeSpecificBarChart")
-        Me.mnuDescribeSpecificBarChart.Tag = "Bar_Chart"
+        Me.mnuDescribeSpecificBarPieChart.Name = "mnuDescribeSpecificBarPieChart"
+        resources.ApplyResources(Me.mnuDescribeSpecificBarPieChart, "mnuDescribeSpecificBarPieChart")
+        Me.mnuDescribeSpecificBarPieChart.Tag = "Bar_Chart"
         '
         'mnuDescribeSpecificCummulativeDistribution
         '
@@ -4470,13 +4470,13 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticDescribe As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareSummary As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator26 As ToolStripSeparator
-    Friend WithEvents mnuDescribeSpecificScatterPlot As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecificPointPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificLinePlot As ToolStripMenuItem
-    Friend WithEvents mnuDescribeSpecificHistogram As ToolStripMenuItem
-    Friend WithEvents mnuDescribeSpecificBoxplot As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecificHistogramDensityFrequencyPlot As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecificBoxplotJitterViolinPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificDotPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificRugPlot As ToolStripMenuItem
-    Friend WithEvents mnuDescribeSpecificBarChart As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecificBarPieChart As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnDateMakeDate As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnDateMakeTime As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnDateUseTime As ToolStripMenuItem
