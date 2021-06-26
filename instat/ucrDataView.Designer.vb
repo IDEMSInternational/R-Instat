@@ -66,6 +66,7 @@ Partial Class ucrDataView
         Me.mnuRenameColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDuplColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuReorderColumn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCellPasteRange = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuConvertToFact = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertToOrderedFactor = New System.Windows.Forms.ToolStripMenuItem()
@@ -116,7 +117,6 @@ Partial Class ucrDataView
         Me.linkStartNewDataFrame = New System.Windows.Forms.LinkLabel()
         Me.linkStartOpenFile = New System.Windows.Forms.LinkLabel()
         Me.linkStartOpenLibrary = New System.Windows.Forms.LinkLabel()
-        Me.mnuCellPasteRange = New System.Windows.Forms.ToolStripMenuItem()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -277,7 +277,7 @@ Partial Class ucrDataView
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuCellPasteRange, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLebelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(213, 358)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(213, 336)
         '
         'ToolStripSeparator3
         '
@@ -301,6 +301,12 @@ Partial Class ucrDataView
         Me.mnuReorderColumn.Name = "mnuReorderColumn"
         Me.mnuReorderColumn.Size = New System.Drawing.Size(212, 22)
         Me.mnuReorderColumn.Text = "Reorder Column(s)..."
+        '
+        'mnuCellPasteRange
+        '
+        Me.mnuCellPasteRange.Name = "mnuCellPasteRange"
+        Me.mnuCellPasteRange.Size = New System.Drawing.Size(212, 22)
+        Me.mnuCellPasteRange.Text = "Paste"
         '
         'ToolStripSeparator5
         '
@@ -689,10 +695,10 @@ Partial Class ucrDataView
         Me.linkStartNewDataFrame.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkStartNewDataFrame.Location = New System.Drawing.Point(7, 37)
         Me.linkStartNewDataFrame.Name = "linkStartNewDataFrame"
-        Me.linkStartNewDataFrame.Size = New System.Drawing.Size(96, 13)
+        Me.linkStartNewDataFrame.Size = New System.Drawing.Size(91, 13)
         Me.linkStartNewDataFrame.TabIndex = 3
         Me.linkStartNewDataFrame.TabStop = True
-        Me.linkStartNewDataFrame.Text = "New Data Frame..."
+        Me.linkStartNewDataFrame.Text = "New data frame..."
         '
         'linkStartOpenFile
         '
@@ -702,10 +708,10 @@ Partial Class ucrDataView
         Me.linkStartOpenFile.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkStartOpenFile.Location = New System.Drawing.Point(7, 56)
         Me.linkStartOpenFile.Name = "linkStartOpenFile"
-        Me.linkStartOpenFile.Size = New System.Drawing.Size(81, 13)
+        Me.linkStartOpenFile.Size = New System.Drawing.Size(84, 13)
         Me.linkStartOpenFile.TabIndex = 4
         Me.linkStartOpenFile.TabStop = True
-        Me.linkStartOpenFile.Text = "Open from file..."
+        Me.linkStartOpenFile.Text = "Import from file..."
         '
         'linkStartOpenLibrary
         '
@@ -715,16 +721,10 @@ Partial Class ucrDataView
         Me.linkStartOpenLibrary.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
         Me.linkStartOpenLibrary.Location = New System.Drawing.Point(7, 75)
         Me.linkStartOpenLibrary.Name = "linkStartOpenLibrary"
-        Me.linkStartOpenLibrary.Size = New System.Drawing.Size(95, 13)
+        Me.linkStartOpenLibrary.Size = New System.Drawing.Size(98, 13)
         Me.linkStartOpenLibrary.TabIndex = 5
         Me.linkStartOpenLibrary.TabStop = True
-        Me.linkStartOpenLibrary.Text = "Open from library..."
-        '
-        'mnuCellPasteRange
-        '
-        Me.mnuCellPasteRange.Name = "mnuCellPasteRange"
-        Me.mnuCellPasteRange.Size = New System.Drawing.Size(212, 22)
-        Me.mnuCellPasteRange.Text = "Paste"
+        Me.linkStartOpenLibrary.Text = "Import from library..."
         '
         'ucrDataView
         '
