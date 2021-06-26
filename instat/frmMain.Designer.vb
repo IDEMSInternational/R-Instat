@@ -363,6 +363,7 @@ Partial Class frmMain
         Me.mnuEditCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditCopySpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditPasteNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.stsStrip = New System.Windows.Forms.StatusStrip()
@@ -658,7 +659,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuEditPasteNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2464,6 +2464,12 @@ Partial Class frmMain
         Me.mnuEditPaste.Name = "mnuEditPaste"
         Me.mnuEditPaste.Tag = "Paste"
         '
+        'mnuEditPasteNewDataFrame
+        '
+        Me.mnuEditPasteNewDataFrame.Name = "mnuEditPasteNewDataFrame"
+        resources.ApplyResources(Me.mnuEditPasteNewDataFrame, "mnuEditPasteNewDataFrame")
+        Me.mnuEditPasteNewDataFrame.Tag = "Paste"
+        '
         'mnuEditSelectAll
         '
         Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
@@ -2694,7 +2700,7 @@ Partial Class frmMain
         '
         Me.mnuFileOpenFromFile.Name = "mnuFileOpenFromFile"
         resources.ApplyResources(Me.mnuFileOpenFromFile, "mnuFileOpenFromFile")
-        Me.mnuFileOpenFromFile.Tag = "Open_From_File"
+        Me.mnuFileOpenFromFile.Tag = "Import_From_File"
         '
         'mnuFileOpenFromLibrary
         '
@@ -4166,12 +4172,6 @@ Partial Class frmMain
         '
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
-        '
-        'mnuEditPasteNewDataFrame
-        '
-        Me.mnuEditPasteNewDataFrame.Name = "mnuEditPasteNewDataFrame"
-        resources.ApplyResources(Me.mnuEditPasteNewDataFrame, "mnuEditPasteNewDataFrame")
-        Me.mnuEditPasteNewDataFrame.Tag = "Paste"
         '
         'frmMain
         '
