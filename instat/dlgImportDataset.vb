@@ -1002,7 +1002,7 @@ Public Class dlgImportDataset
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
         'add the item to the MRU (Most Recently Used) list...
-        'only add if its a file that was selected, don't folder paths
+        'only add if its a file that was selected, don't add if folder path was selected
         If Not bFolder Then
             frmMain.clsRecentItems.addToMenu(strFilePathSystem)
         End If
