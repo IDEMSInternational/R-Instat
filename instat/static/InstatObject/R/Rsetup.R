@@ -42,7 +42,7 @@ packs <- c("abind", "agricolae", "agridat",
            "hydroGOF", "hydroTSM", "imputeTS", "ini", 
            "insight", "intervals", "isoband", "jpeg", 
            "jquerylib", "jsonlite", "Kendall", "KernSmooth", 
-           "keyring", "klaR", "knitr", "labeling", 
+           "keyring", "klaR", "knitr", "labeling", "lemon", 
            "labelled", "Lahman", "later", "lattice", 
            "latticeExtra", "lazyeval", "leaflet.providers", 
            "leaflet", "leaps", "lifecycle", "lme4", 
@@ -198,7 +198,7 @@ load_R_Instat_packages <- function() {
   # latticeExtra because conditionalQuantile key positions work well when latticeExtra is loaded
   # texmex loaded because of extreme value distributions 
   # tidyr loaded because unite() function is required by mmtable() function from mmtable2 package 
-  packs_to_load <- c("plyr", "tidyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield", "circular", "latticeExtra", "texmex")
+  packs_to_load <- c("plyr", "tidyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield", "circular", "latticeExtra", "lemon", "texmex")
   for(pack in packs_to_load) {
     try(library(pack, character.only = TRUE))
   }
