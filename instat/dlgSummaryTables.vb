@@ -25,7 +25,6 @@ Public Class dlgSummaryTables
     Private clsSummariesHeaderLeftTopFunction, clsSummariesHeaderTopLeftFunction,
             clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction,
             clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
-    Private clsDummyFunction As New RFunction
     Private clsGetDataframe As New RFunction
     Private clsMutableOperator, clsColumnOperator As New ROperator
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -47,7 +46,7 @@ Public Class dlgSummaryTables
         lblDisplayNA.Enabled = False
         ucrChkStoreResults.Enabled = False
 
-        ucrBase.clsRsyntax.iCallType = 0
+        ucrBase.clsRsyntax.iCallType = 4
         ucrBase.iHelpTopicID = 426
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
@@ -146,7 +145,6 @@ Public Class dlgSummaryTables
         clsVariableHeaderTopLeftFunction = New RFunction
         clsummaryVariableHeaderLeftTopFunction = New RFunction
         clsSummaryVariableHeaderTopLeftFunction = New RFunction
-        clsDummyFunction = New RFunction
         clsMutableOperator = New ROperator
         clsColumnOperator = New ROperator
         clsGetDataframe = New RFunction
