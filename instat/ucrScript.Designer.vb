@@ -241,8 +241,7 @@ Partial Class ucrScript
         '
         'cmdClear
         '
-        Me.cmdClear.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.cmdClear.Location = New System.Drawing.Point(351, 1)
+        Me.cmdClear.Location = New System.Drawing.Point(110, 1)
         Me.cmdClear.Name = "cmdClear"
         Me.cmdClear.Size = New System.Drawing.Size(51, 23)
         Me.cmdClear.TabIndex = 4
@@ -252,8 +251,7 @@ Partial Class ucrScript
         '
         'cmdRunAll
         '
-        Me.cmdRunAll.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.cmdRunAll.Location = New System.Drawing.Point(297, 1)
+        Me.cmdRunAll.Location = New System.Drawing.Point(56, 1)
         Me.cmdRunAll.Name = "cmdRunAll"
         Me.cmdRunAll.Size = New System.Drawing.Size(51, 23)
         Me.cmdRunAll.TabIndex = 3
@@ -263,8 +261,7 @@ Partial Class ucrScript
         '
         'cmdRun
         '
-        Me.cmdRun.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.cmdRun.Location = New System.Drawing.Point(243, 1)
+        Me.cmdRun.Location = New System.Drawing.Point(2, 1)
         Me.cmdRun.Name = "cmdRun"
         Me.cmdRun.Size = New System.Drawing.Size(51, 23)
         Me.cmdRun.TabIndex = 2
