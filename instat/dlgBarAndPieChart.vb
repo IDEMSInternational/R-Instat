@@ -275,13 +275,13 @@ Public Class dlgBarAndPieChart
 
     Private Sub TestOkEnabled()
         If rdoFrequency.Checked Then
-            If Not ucrSaveBar.IsComplete AndAlso ucrVariablesAsFactorForBarChart.IsEmpty Then
+            If Not ucrSaveBar.IsComplete OrElse ucrVariablesAsFactorForBarChart.IsEmpty Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
             End If
         Else
-            If Not ucrSaveBar.IsComplete AndAlso ucrVariablesAsFactorForBarChart.IsEmpty AndAlso ucrReceiverX.IsEmpty Then
+            If Not ucrSaveBar.IsComplete OrElse ucrVariablesAsFactorForBarChart.IsEmpty OrElse ucrReceiverX.IsEmpty Then
                 ucrBase.OKEnabled(False)
             Else
                 ucrBase.OKEnabled(True)
@@ -412,7 +412,7 @@ Public Class dlgBarAndPieChart
     Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverX.ControlValueChanged
         AddRemoveParameter()
     End Sub
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+    Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
