@@ -375,15 +375,17 @@ Public Class dlgBarAndPieChart
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged
         SetDialogOptions()
         ChangeParameterName()
-        AddRemoveParameter()
     End Sub
-    Private Sub AddRemoveParameter()
+
+    Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrPnlOptions.ControlValueChanged
         clsBaseOperator.RemoveParameterByName("geom_bar1")
         clsBaseOperator.RemoveParameterByName("geom_bar2")
         clsBaseOperator.RemoveParameterByName("scale_y_symmetric")
         clsAesFunction1.RemoveParameterByName("y")
         clsAesFunction2.RemoveParameterByName("y")
         clsRgeomBarFunction2.RemoveParameterByName("aes")
+        ucrInputBarChartPositions.Enabled = True
+        clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
         If ucrChkBacktoback.Checked Then
             ucrInputBarChartPositions.Enabled = False
             clsBaseOperator.RemoveParameterByName("geom_bar")
@@ -404,13 +406,8 @@ Public Class dlgBarAndPieChart
                 clsAesFunction1.AddParameter("y", "..count..*(-1)", iPosition:=0)
                 clsRgeomBarFunction1.AddParameter("aes", clsRFunctionParameter:=clsAesFunction1, iPosition:=1, bIncludeArgumentName:=False)
             End If
-        Else
-            ucrInputBarChartPositions.Enabled = True
-            clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
+
         End If
-    End Sub
-    Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverX.ControlValueChanged
-        AddRemoveParameter()
     End Sub
     Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOkEnabled()
