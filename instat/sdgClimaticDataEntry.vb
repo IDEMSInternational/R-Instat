@@ -636,7 +636,7 @@ Public Class sdgClimaticDataEntry
 
             'assume trace values to be 0 (for data entry uses) here
             If strValue.ToUpper = "T" Then
-                strValue = 0
+                strValue = "0"
             End If
 
             If IsNumeric(strValue) Then
