@@ -271,7 +271,7 @@
     <value>10, 76</value>
   </data>
   <data name="ucrChkCopyToClipboard.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>207, 20</value>
   </data>
   <data name="ucrChkCopyToClipboard.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
