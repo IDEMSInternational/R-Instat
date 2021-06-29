@@ -1082,11 +1082,11 @@ DataBook$set("public","copy_data_frame", function(data_name, new_name, label = "
 } 
 )
 
-DataBook$set("public","copy_to_clipboard", function(content, data_name, col_name) {
+DataBook$set("public","copy_to_clipboard", function(content, data_name, col_names) {
   if(!missing(content)){
     clipr::write_clip(content = content)
-  }else if(!missing(col_name) && !missing(data_name)){
-    col_data_obj <- self$get_columns_from_data(data_name, col_name)
+  }else if(!missing(col_names) && !missing(data_name)){
+    col_data_obj <- self$get_columns_from_data(data_name, col_names)
     clipr::write_clip(content = col_data_obj)
   }else if(!missing(data_name)){ 
     data_frame_obj <- self$get_data_frame(data_name)
