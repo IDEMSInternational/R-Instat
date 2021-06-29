@@ -45,6 +45,7 @@ Partial Class dlgCopyDataFrame
         Me.ucrInputNewDataFrameName = New instat.ucrInputTextBox()
         Me.ucrDataFrameCopySheets = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkCopyToClipboard = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblLabel
@@ -76,6 +77,7 @@ Partial Class dlgCopyDataFrame
         '
         'ucrDataFrameCopySheets
         '
+        Me.ucrDataFrameCopySheets.bDropUnusedFilterLevels = False
         Me.ucrDataFrameCopySheets.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrDataFrameCopySheets, "ucrDataFrameCopySheets")
         Me.ucrDataFrameCopySheets.Name = "ucrDataFrameCopySheets"
@@ -85,10 +87,17 @@ Partial Class dlgCopyDataFrame
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrChkCopyToClipboard
+        '
+        Me.ucrChkCopyToClipboard.Checked = False
+        resources.ApplyResources(Me.ucrChkCopyToClipboard, "ucrChkCopyToClipboard")
+        Me.ucrChkCopyToClipboard.Name = "ucrChkCopyToClipboard"
+        '
         'dlgCopyDataFrame
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkCopyToClipboard)
         Me.Controls.Add(Me.ucrInputLabel)
         Me.Controls.Add(Me.lblLabel)
         Me.Controls.Add(Me.ucrInputNewDataFrameName)
@@ -110,4 +119,5 @@ Partial Class dlgCopyDataFrame
     Friend WithEvents lblLabel As Label
     Friend WithEvents ucrInputNewDataFrameName As ucrInputTextBox
     Friend WithEvents lblNewName As Label
+    Friend WithEvents ucrChkCopyToClipboard As ucrCheck
 End Class

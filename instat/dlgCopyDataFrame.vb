@@ -44,8 +44,15 @@ Public Class dlgCopyDataFrame
         'ucrNewName
         ucrInputNewDataFrameName.SetParameter(New RParameter("new_name", 1))
         ucrInputNewDataFrameName.SetValidationTypeAsRVariable()
+        ucrInputNewDataFrameName.SetLinkedDisplayControl(lblNewName)
 
         ucrInputLabel.SetParameter(New RParameter("label", 2))
+        ucrInputLabel.SetLinkedDisplayControl(lblLabel)
+
+        ucrChkCopyToClipboard.SetText("Copy to clipboard")
+        ucrChkCopyToClipboard.SetParameter(New RParameter("copy_to_clipboard", 3))
+        ucrChkCopyToClipboard.AddToLinkedControls({ucrInputNewDataFrameName, ucrInputLabel}, objValues:={False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
     End Sub
 
     Private Sub SetDefaults()
@@ -58,6 +65,7 @@ Public Class dlgCopyDataFrame
         CheckAutoName()
 
         clsCopySheet.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
+        clsCopySheet.AddParameter("copy_to_clipboard", "FALSE", iPosition:=3)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsCopySheet)
     End Sub
@@ -67,10 +75,11 @@ Public Class dlgCopyDataFrame
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrInputNewDataFrameName.IsEmpty) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "")) AndAlso (Not ucrDataFrameCopySheets.cboAvailableDataFrames.Items.Contains(ucrInputNewDataFrameName.GetText)) Then
-            ucrBase.OKEnabled(True)
+
+        If ucrChkCopyToClipboard.Checked Then
+            ucrBase.OKEnabled(ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "")
         Else
-            ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(((Not ucrInputNewDataFrameName.IsEmpty) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "")) AndAlso (Not ucrDataFrameCopySheets.cboAvailableDataFrames.Items.Contains(ucrInputNewDataFrameName.GetText)))
         End If
     End Sub
 
@@ -95,7 +104,7 @@ Public Class dlgCopyDataFrame
         CheckAutoName()
     End Sub
 
-    Private Sub Control_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged
+    Private Sub Control_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged, ucrChkCopyToClipboard.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

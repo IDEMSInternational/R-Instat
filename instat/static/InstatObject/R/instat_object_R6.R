@@ -1062,20 +1062,40 @@ DataBook$set("public","get_data_type", function(data_name, col_name) {
 } 
 )
 
-DataBook$set("public","copy_data_frame", function(data_name, new_name, label = "") {
-  if(new_name %in% names(private$.data_sheets)) stop("Cannot copy data frame since ", new_name, " is an existing data frame.")
-  curr_obj <- self$get_data_objects(data_name)$clone(deep = TRUE)
-  
-  if(missing(new_name)) new_name <- next_default_item(data_name, self$get_data_names())
-  self$append_data_object(new_name, curr_obj)
-  new_data_obj <- self$get_data_objects(new_name)
-  new_data_obj$data_changed <- TRUE
-  new_data_obj$set_data_changed(TRUE)
-  if(label != "") {
-    new_data_obj$append_to_metadata(property = "label" , new_val = label)
-    new_data_obj$set_metadata_changed(TRUE)
+DataBook$set("public","copy_data_frame", function(data_name, new_name, label = "", copy_to_clipboard = FALSE) {
+  if(copy_to_clipboard){
+    self$copy_to_clipboard(data_name = data_name)
+  }else{
+    if(new_name %in% names(private$.data_sheets)) stop("Cannot copy data frame since ", new_name, " is an existing data frame.")
+    curr_obj <- self$get_data_objects(data_name)$clone(deep = TRUE)
+    
+    if(missing(new_name)) new_name <- next_default_item(data_name, self$get_data_names())
+    self$append_data_object(new_name, curr_obj)
+    new_data_obj <- self$get_data_objects(new_name)
+    new_data_obj$data_changed <- TRUE
+    new_data_obj$set_data_changed(TRUE)
+    if(label != "") {
+      new_data_obj$append_to_metadata(property = "label" , new_val = label)
+      new_data_obj$set_metadata_changed(TRUE)
+    }
   }
 } 
+)
+
+DataBook$set("public","copy_to_clipboard", function(content, data_name, col_name) {
+  if(!missing(content)){
+    clipr::write_clip(content = content)
+  }else if(!missing(col_name) && !missing(data_name)){
+    col_data_obj <- self$get_columns_from_data(data_name, col_name)
+    clipr::write_clip(content = col_data_obj)
+  }else if(!missing(data_name)){ 
+    data_frame_obj <- self$get_data_frame(data_name)
+    clipr::write_clip(content = data_frame_obj)
+  }else{
+    stop("Nothing to copy to clipboard")
+  }
+
+}
 )
 
 DataBook$set("public","set_hidden_columns", function(data_name, col_names = c()) {
