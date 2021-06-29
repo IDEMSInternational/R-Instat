@@ -284,13 +284,6 @@ Public Class ucrDataView
     '    End Try
     'End Sub
 
-    Public Sub CopyRange()
-        Try
-            grdData.CurrentWorksheet.Copy()
-        Catch
-            MessageBox.Show("Cannot copy the current selection.")
-        End Try
-    End Sub
 
     'Private Sub pasteRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles pasteRangeToolStripMenuItem.Click
     '    Try
@@ -1074,15 +1067,19 @@ Public Class ucrDataView
         Return lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value
     End Function
 
-    Private Sub CopyData()
-        CopyData(bCopyColumn:=grdData.CurrentWorksheet.SelectionRange.EndRow = 1000)
+    Public Sub CopyRange()
+        Try
+            CopyData(bColumns:=grdData.CurrentWorksheet.SelectionRange.Rows = 1000)
+        Catch
+            MessageBox.Show("Cannot copy the current selection.")
+        End Try
     End Sub
 
-    Private Sub CopyData(bCopyColumn As Boolean)
+    Private Sub CopyData(bColumns As Boolean)
         Dim clsCopyValues As New RFunction
         clsCopyValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_to_clipboard")
 
-        If bCopyColumn Then
+        If bColumns Then
             Dim lstColumnNames As String() = SelectedColumnsAsArray()
             Dim strColNamesVec As String = ""
             'construct R vector command for new row values
@@ -1098,12 +1095,31 @@ Public Class ucrDataView
             clsCopyValues.AddParameter("data_name", Chr(34) & grdData.CurrentWorksheet.Name & Chr(34))
             clsCopyValues.AddParameter("col_names", strColNamesVec)
         Else
-            Dim strContent As String = ""
+            Dim strAllContent As String = ""
+            Dim strRowContent As String
+            Dim iEndRow As Integer = grdData.CurrentWorksheet.SelectionRange.EndRow
+            Dim iEndCol As Integer = grdData.CurrentWorksheet.SelectionRange.EndCol
 
+            'construct the copied range data
+            For iRowIndex As Integer = grdData.CurrentWorksheet.SelectionRange.Row To iEndRow
+                strRowContent = ""
+                For iColIndex As Integer = grdData.CurrentWorksheet.SelectionRange.Col To iEndCol
+                    If strRowContent = "" Then
+                        strRowContent = grdData.CurrentWorksheet.GetCell(row:=iRowIndex, col:=iColIndex).DisplayText
+                    Else
+                        strRowContent = strRowContent & vbTab & grdData.CurrentWorksheet.GetCell(row:=iRowIndex, col:=iColIndex).DisplayText
+                    End If
+                Next
+                strAllContent = strAllContent & strRowContent
+                If iRowIndex < iEndRow Then
+                    strAllContent = strAllContent & Environment.NewLine
+                End If
+            Next
 
+            clsCopyValues.AddParameter("content", Chr(34) & strAllContent & Chr(34))
         End If
 
-        RunScriptFromDataView(clsCopyValues.ToScript(), strComment:="Copy values to Clipboard")
+        RunScriptFromDataView(clsCopyValues.ToScript(), strComment:="Copy values to clipboard")
 
     End Sub
 End Class
