@@ -46,7 +46,7 @@ Public Class dlgSummaryTables
         lblDisplayNA.Enabled = False
         ucrChkStoreResults.Enabled = False
 
-        ucrBase.clsRsyntax.iCallType = 4
+        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 426
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
 
