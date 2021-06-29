@@ -1073,4 +1073,37 @@ Public Class ucrDataView
         'get all columns of current selected data frame
         Return lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value
     End Function
+
+    Private Sub CopyData()
+        CopyData(bCopyColumn:=grdData.CurrentWorksheet.SelectionRange.EndRow = 1000)
+    End Sub
+
+    Private Sub CopyData(bCopyColumn As Boolean)
+        Dim clsCopyValues As New RFunction
+        clsCopyValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_to_clipboard")
+
+        If bCopyColumn Then
+            Dim lstColumnNames As String() = SelectedColumnsAsArray()
+            Dim strColNamesVec As String = ""
+            'construct R vector command for new row values
+            For i As Integer = 0 To lstColumnNames.Count - 1
+                strColNamesVec = strColNamesVec & Chr(34) & lstColumnNames(i) & Chr(34)
+                If i = lstColumnNames.Count - 1 Then
+                    Exit For
+                End If
+                strColNamesVec = strColNamesVec & ", "
+            Next
+            strColNamesVec = "c(" & strColNamesVec & ")"
+
+            clsCopyValues.AddParameter("data_name", Chr(34) & grdData.CurrentWorksheet.Name & Chr(34))
+            clsCopyValues.AddParameter("col_names", strColNamesVec)
+        Else
+            Dim strContent As String = ""
+
+
+        End If
+
+        RunScriptFromDataView(clsCopyValues.ToScript(), strComment:="Copy values to Clipboard")
+
+    End Sub
 End Class
