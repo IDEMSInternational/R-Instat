@@ -41,11 +41,15 @@ Partial Class dlgCopyDataFrame
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgCopyDataFrame))
         Me.lblLabel = New System.Windows.Forms.Label()
         Me.lblNewName = New System.Windows.Forms.Label()
+        Me.ucrChkCopyToClipboard = New instat.ucrCheck()
         Me.ucrInputLabel = New instat.ucrInputTextBox()
         Me.ucrInputNewDataFrameName = New instat.ucrInputTextBox()
         Me.ucrDataFrameCopySheets = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkCopyToClipboard = New instat.ucrCheck()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.rdoDataFrameMetadata = New System.Windows.Forms.RadioButton()
+        Me.rdoColumnsMetadata = New System.Windows.Forms.RadioButton()
+        Me.rdoDataFrame = New System.Windows.Forms.RadioButton()
         Me.SuspendLayout()
         '
         'lblLabel
@@ -58,6 +62,12 @@ Partial Class dlgCopyDataFrame
         resources.ApplyResources(Me.lblNewName, "lblNewName")
         Me.lblNewName.Name = "lblNewName"
         Me.lblNewName.Tag = "New_Name"
+        '
+        'ucrChkCopyToClipboard
+        '
+        Me.ucrChkCopyToClipboard.Checked = False
+        resources.ApplyResources(Me.ucrChkCopyToClipboard, "ucrChkCopyToClipboard")
+        Me.ucrChkCopyToClipboard.Name = "ucrChkCopyToClipboard"
         '
         'ucrInputLabel
         '
@@ -87,16 +97,40 @@ Partial Class dlgCopyDataFrame
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrChkCopyToClipboard
+        'ucrPnlOptions
         '
-        Me.ucrChkCopyToClipboard.Checked = False
-        resources.ApplyResources(Me.ucrChkCopyToClipboard, "ucrChkCopyToClipboard")
-        Me.ucrChkCopyToClipboard.Name = "ucrChkCopyToClipboard"
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        '
+        'rdoDataFrameMetadata
+        '
+        resources.ApplyResources(Me.rdoDataFrameMetadata, "rdoDataFrameMetadata")
+        Me.rdoDataFrameMetadata.Name = "rdoDataFrameMetadata"
+        Me.rdoDataFrameMetadata.TabStop = True
+        Me.rdoDataFrameMetadata.UseVisualStyleBackColor = True
+        '
+        'rdoColumnsMetadata
+        '
+        resources.ApplyResources(Me.rdoColumnsMetadata, "rdoColumnsMetadata")
+        Me.rdoColumnsMetadata.Name = "rdoColumnsMetadata"
+        Me.rdoColumnsMetadata.TabStop = True
+        Me.rdoColumnsMetadata.UseVisualStyleBackColor = True
+        '
+        'rdoDataFrame
+        '
+        resources.ApplyResources(Me.rdoDataFrame, "rdoDataFrame")
+        Me.rdoDataFrame.Name = "rdoDataFrame"
+        Me.rdoDataFrame.TabStop = True
+        Me.rdoDataFrame.UseVisualStyleBackColor = True
         '
         'dlgCopyDataFrame
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.rdoDataFrameMetadata)
+        Me.Controls.Add(Me.rdoColumnsMetadata)
+        Me.Controls.Add(Me.rdoDataFrame)
+        Me.Controls.Add(Me.ucrPnlOptions)
         Me.Controls.Add(Me.ucrChkCopyToClipboard)
         Me.Controls.Add(Me.ucrInputLabel)
         Me.Controls.Add(Me.lblLabel)
@@ -120,4 +154,8 @@ Partial Class dlgCopyDataFrame
     Friend WithEvents ucrInputNewDataFrameName As ucrInputTextBox
     Friend WithEvents lblNewName As Label
     Friend WithEvents ucrChkCopyToClipboard As ucrCheck
+    Friend WithEvents ucrPnlOptions As UcrPanel
+    Friend WithEvents rdoDataFrameMetadata As RadioButton
+    Friend WithEvents rdoColumnsMetadata As RadioButton
+    Friend WithEvents rdoDataFrame As RadioButton
 End Class

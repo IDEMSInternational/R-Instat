@@ -1069,7 +1069,7 @@ Public Class ucrDataView
 
     Public Sub CopyRange()
         Try
-            CopyData(bColumns:=grdData.CurrentWorksheet.SelectionRange.Rows = 1000)
+            CopyData(bColumns:=grdData.CurrentWorksheet.SelectionRange.Rows = grdData.CurrentWorksheet.Rows)
         Catch
             MessageBox.Show("Cannot copy the current selection.")
         End Try
@@ -1077,7 +1077,6 @@ Public Class ucrDataView
 
     Private Sub CopyData(bColumns As Boolean)
         Dim clsCopyValues As New RFunction
-        clsCopyValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_to_clipboard")
 
         If bColumns Then
             Dim lstColumnNames As String() = SelectedColumnsAsArray()
@@ -1092,8 +1091,10 @@ Public Class ucrDataView
             Next
             strColNamesVec = "c(" & strColNamesVec & ")"
 
-            clsCopyValues.AddParameter("data_name", Chr(34) & grdData.CurrentWorksheet.Name & Chr(34))
-            clsCopyValues.AddParameter("col_names", strColNamesVec)
+            clsCopyValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_columns")
+            clsCopyValues.AddParameter("data_name", Chr(34) & grdData.CurrentWorksheet.Name & Chr(34), iPosition:=0)
+            clsCopyValues.AddParameter("col_names", strColNamesVec, iPosition:=1)
+            clsCopyValues.AddParameter("copy_to_clipboard", "TRUE", iPosition:=2)
         Else
             Dim strAllContent As String = ""
             Dim strRowContent As String
@@ -1116,7 +1117,8 @@ Public Class ucrDataView
                 End If
             Next
 
-            clsCopyValues.AddParameter("content", Chr(34) & strAllContent & Chr(34))
+            clsCopyValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_to_clipboard")
+            clsCopyValues.AddParameter("content", Chr(34) & strAllContent & Chr(34), iPosition:=0)
         End If
 
         RunScriptFromDataView(clsCopyValues.ToScript(), strComment:="Copy values to clipboard")
