@@ -167,13 +167,13 @@ Public Class dlgPasteNewDataFrame
                 'try to preview the data
                 frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
                 bValid = True
-                lblConfirmText.Text = "Click Ok to paste data to new data frames."
+                lblConfirmText.Text = GetTranslation("Click Ok to paste data to new data frames.")
                 lblConfirmText.ForeColor = Color.Green
             Catch
-                lblConfirmText.Text = "Could not preview data. Cannot be pasted."
+                lblConfirmText.Text = GetTranslation("Could not preview data. Cannot be pasted.")
             End Try
         Else
-            lblConfirmText.Text = "Could not preview data. Cannot be pasted."
+            lblConfirmText.Text = GetTranslation("Could not preview data. Cannot be pasted.")
         End If
 
         panelNoDataPreview.Visible = Not bValid
