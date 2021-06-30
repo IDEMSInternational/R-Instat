@@ -885,15 +885,15 @@ Public Class ucrDataView
         frmMain.bDataSaved = False
     End Sub
 
-    Private Sub linkNewDataFrame_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartNewDataFrame.LinkClicked
+    Private Sub linkNewDataFrame_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartNewdataframe.LinkClicked
         dlgNewDataFrame.ShowDialog()
     End Sub
 
-    Private Sub linkOpenFile_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenFile.LinkClicked
+    Private Sub linkOpenFile_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartImportFile.LinkClicked
         dlgImportDataset.ShowDialog()
     End Sub
 
-    Private Sub linkOpenLibrary_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenLibrary.LinkClicked
+    Private Sub linkOpenLibrary_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartImportLibrary.LinkClicked
         dlgFromLibrary.ShowDialog()
     End Sub
 
