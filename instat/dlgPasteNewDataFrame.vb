@@ -20,10 +20,9 @@ Public Class dlgPasteNewDataFrame
 
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Private clsAddData, clsDataList, clsPasteFunction As New RFunction
+    Private clsAddDataFunction, clsDataListFunction, clsPasteFunction As New RFunction
 
     Private Sub dlgPasteNewDataFrame_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -36,6 +35,7 @@ Public Class dlgPasteNewDataFrame
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -54,24 +54,24 @@ Public Class dlgPasteNewDataFrame
     End Sub
 
     Private Sub SetDefaults()
-        clsAddData = New RFunction
-        clsDataList = New RFunction
+        clsAddDataFunction = New RFunction
+        clsDataListFunction = New RFunction
         clsPasteFunction = New RFunction
 
         'todo 29/05/2021. this is temporarily done this way because of how
         'function ConstructAssignTo in clsRCodeStructure is currently implemented.
         'It doesn't construct "assignTo" statements correctly
-        clsAddData.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
-        clsAddData.AddParameter("data_tables", clsRFunctionParameter:=clsDataList, iPosition:=0)
-        clsDataList.SetRCommand("list")
-        clsDataList.AddParameter(strParameterName:=ucrSaveNewDFName.GetText, clsRFunctionParameter:=clsPasteFunction, iPosition:=0)
+        clsAddDataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_data")
+        clsAddDataFunction.AddParameter("data_tables", clsRFunctionParameter:=clsDataListFunction, iPosition:=0)
+        clsDataListFunction.SetRCommand("list")
+        clsDataListFunction.AddParameter(strParameterName:=ucrSaveNewDFName.GetText, clsRFunctionParameter:=clsPasteFunction, iPosition:=0)
 
         clsPasteFunction.SetPackageName("clipr")
         clsPasteFunction.SetRCommand("read_clip_tbl")
         SetClipBoardDataParameter()
         clsPasteFunction.AddParameter("header", "TRUE", iPosition:=1)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsAddData)
+        ucrBase.clsRsyntax.SetBaseRFunction(clsAddDataFunction)
 
         ucrNudPreviewLines.Value = 10
         ucrSaveNewDFName.Reset()
@@ -103,8 +103,8 @@ Public Class dlgPasteNewDataFrame
     End Sub
 
     Private Sub ucrSaveNewDFName_ControlContentsChanged(ucrchangedControl As ucrCore) Handles ucrSaveNewDFName.ControlContentsChanged
-        clsDataList.ClearParameters()
-        clsDataList.AddParameter(strParameterName:=ucrSaveNewDFName.GetText, clsRFunctionParameter:=clsPasteFunction)
+        clsDataListFunction.ClearParameters()
+        clsDataListFunction.AddParameter(strParameterName:=ucrSaveNewDFName.GetText, clsRFunctionParameter:=clsPasteFunction)
         'TestOkEnabled called here because validation of copied data is not necessary and may take long for large data
         TestOkEnabled(bValidateCopiedData:=False)
     End Sub
@@ -120,7 +120,7 @@ Public Class dlgPasteNewDataFrame
         TestOkEnabled()
     End Sub
 
-    Public Sub SetClipBoardDataParameter()
+    Private Sub SetClipBoardDataParameter()
         'please note addition of this parameter makes the execution of the R code take longer
         'compared to letting R read from the clipboard.
         'However this has been added to achieve reproducibility in future
