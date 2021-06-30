@@ -977,7 +977,7 @@ Public Class ucrDataView
             mnuLebelsLevel.Enabled = (iSelectedCols = 1 AndAlso strType.Contains("factor"))
         Else
             MsgBox("Developer error: SelectedColumnsAsArray() expected to return an array with at least one element.")
-            mnuLebelsLevel.Enabled =  False
+            mnuLebelsLevel.Enabled = False
         End If
         mnuRemoveCurrentFilters.Enabled = Not String.Equals(strFilterName, strNoFilter)
     End Sub
