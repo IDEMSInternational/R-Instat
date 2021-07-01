@@ -321,14 +321,29 @@
   <metadata name="colRowNum.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="colRowNum.HeaderText" xml:space="preserve">
+    <value>No.</value>
+  </data>
+  <data name="colRowNum.Width" type="System.Int32, mscorlib">
+    <value>40</value>
+  </data>
   <metadata name="colName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="colName.HeaderText" xml:space="preserve">
+    <value>Column Name</value>
+  </data>
+  <data name="colName.Width" type="System.Int32, mscorlib">
+    <value>130</value>
+  </data>
   <metadata name="colExpression.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="colExpression.HeaderText" xml:space="preserve">
+    <value>Expression</value>
+  </data>
   <data name="dataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 84</value>
+    <value>9, 84</value>
   </data>
   <data name="dataGridView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -350,30 +365,6 @@
   </data>
   <data name="&gt;&gt;dataGridView.ZOrder" xml:space="preserve">
     <value>6</value>
-  </data>
-  <metadata name="colRowNum.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colRowNum.HeaderText" xml:space="preserve">
-    <value>No.</value>
-  </data>
-  <data name="colRowNum.Width" type="System.Int32, mscorlib">
-    <value>40</value>
-  </data>
-  <metadata name="colName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colName.HeaderText" xml:space="preserve">
-    <value>Column Name</value>
-  </data>
-  <data name="colName.Width" type="System.Int32, mscorlib">
-    <value>130</value>
-  </data>
-  <metadata name="colExpression.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="colExpression.HeaderText" xml:space="preserve">
-    <value>Expression</value>
   </data>
   <metadata name="mnuStripCommand.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -547,7 +538,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputCommand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 84</value>
+    <value>9, 84</value>
   </data>
   <data name="ucrInputCommand.Size" type="System.Drawing.Size, System.Drawing">
     <value>417, 159</value>
@@ -616,13 +607,13 @@
     <value>12</value>
   </data>
   <data name="ucrNudCols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 140</value>
+    <value>141, 143</value>
   </data>
   <data name="ucrNudCols.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNudCols.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 20</value>
+    <value>60, 20</value>
   </data>
   <data name="ucrNudCols.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>

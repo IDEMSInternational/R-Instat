@@ -430,6 +430,10 @@ Public Class dlgNewDataFrame
 
     End Sub
 
+    Private Sub ucrNudRows_Load(sender As Object, e As EventArgs) Handles ucrNudRows.Load
+
+    End Sub
+
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles btnTry.Click
         Dim bValid As Boolean = False
         Dim vecOutput As CharacterVector
