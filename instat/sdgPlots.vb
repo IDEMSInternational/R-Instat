@@ -352,27 +352,35 @@ Public Class sdgPlots
         ucrChkAnnotation.AddParameterPresentCondition(False, "annotate", False)
 
         ucrInputX.SetParameter(New RParameter("x", 0))
+        ucrInputX.SetRDefault("NULL")
         ucrInputX.AddQuotesIfUnrecognised = False
 
         ucrInputY.SetParameter(New RParameter("y", 1))
+        ucrInputY.SetRDefault("NULL")
         ucrInputY.AddQuotesIfUnrecognised = False
 
         ucrInputYmin.SetParameter(New RParameter("ymin", 2))
+        ucrInputYmin.SetRDefault("NULL")
         ucrInputYmin.AddQuotesIfUnrecognised = False
 
         ucrInputXmin.SetParameter(New RParameter("xmin", 3))
+        ucrInputXmin.SetRDefault("NULL")
         ucrInputXmin.AddQuotesIfUnrecognised = False
 
         ucrInputXend.SetParameter(New RParameter("xend", 4))
+        ucrInputXend.SetRDefault("NULL")
         ucrInputXend.AddQuotesIfUnrecognised = False
 
         ucrInputYend.SetParameter(New RParameter("yend", 5))
+        ucrInputYend.SetRDefault("NULL")
         ucrInputYend.AddQuotesIfUnrecognised = False
 
         ucrInputXmax.SetParameter(New RParameter("xmax", 6))
+        ucrInputXmax.SetRDefault("NULL")
         ucrInputXmax.AddQuotesIfUnrecognised = False
 
         ucrInputYmax.SetParameter(New RParameter("ymax", 7))
+        ucrInputYmax.SetRDefault("NULL")
         ucrInputYmax.AddQuotesIfUnrecognised = False
 
         ucrNudLinetype.SetParameter(New RParameter("linetype", 8))
@@ -460,6 +468,9 @@ Public Class sdgPlots
         ucrInputLabel.SetLinkedDisplayControl(lblLabel)
         ucrInputLabel.SetRDefault("")
 
+        ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputXmin, ucrInputXmax, ucrInputYmin, ucrInputYmax}, {"rect", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputY, ucrInputX}, {"text", "label", "segment", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputXend, ucrInputYend}, {"text", "label", "segment", "curve"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
         ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputFill, {"rect", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
         ucrInputAnnotationGeoms.AddToLinkedControls(ucrNudLinetype, {"segment", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
         ucrInputAnnotationGeoms.AddToLinkedControls({ucrNudCurvature, ucrNudAngle}, {"curve"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
@@ -654,6 +665,14 @@ Public Class sdgPlots
         ucrNudAlpha.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrNudSize.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputColour.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputX.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputY.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputYmin.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputXmin.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputXend.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputYend.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputXmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputYmax.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputAnnotationGeoms.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         'axis controls
         ucrXAxis.SetRCodeForControl(bIsXAxis:=True, strNewAxisType:=GetAxisType(True), clsNewXYlabTitleFunction:=clsXLabFunction, clsNewXYScaleContinuousFunction:=clsXScalecontinuousFunction, clsNewXYScaleDateFunction:=clsXScaleDateFunction, clsNewBaseOperator:=clsBaseOperator, bReset:=bReset, bCloneIfNeeded:=True)
