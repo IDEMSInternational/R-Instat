@@ -2351,9 +2351,16 @@ Public Class RLink
                     End If
                 ElseIf Not IsNothing(clsRScript.lstRStatements(0).clsElement) Then
                     If Not IsNothing(TryCast(clsRScript.lstRStatements(0).clsElement, RScript.clsRElementFunction)) Then
-                        If TryCast(clsRScript.lstRStatements(0).clsElement, RScript.clsRElementFunction).lstObjects(0).strPrefix <> "" Then
-                            strCommentFromDialogue = TryCast(clsRScript.lstRStatements(0).clsElement, RScript.clsRElementFunction).lstObjects(0).strPrefix.ToLower
+                        If Not IsNothing((TryCast(clsRScript.lstRStatements(0).clsElement, RScript.clsRElementFunction)).lstObjects) Then
+                            If TryCast(clsRScript.lstRStatements(0).clsElement, RScript.clsRElementFunction).lstObjects(0).strPrefix <> "" Then
+                                strCommentFromDialogue = TryCast(clsRScript.lstRStatements(0).clsElement, RScript.clsRElementFunction).lstObjects(0).strPrefix.ToLower
+                            End If
+                        Else
+                            If TryCast(clsRScript.lstRStatements(0).clsElement, RScript.clsRElementFunction).strPrefix <> "" Then
+                                strCommentFromDialogue = TryCast(clsRScript.lstRStatements(0).clsElement, RScript.clsRElementFunction).strPrefix.ToLower
+                            End If
                         End If
+
                     End If
                 End If
             End If
@@ -2436,6 +2443,9 @@ Public Class RLink
             lstNewRCodeStructures.RemoveAt(0)
             dlgFactorDataFrame.lstScriptsRCodeStructure = lstNewRCodeStructures
             dlgFactorDataFrame.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("regular sequence") Then
+            dlgRegularSequence.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgRegularSequence.ShowDialog()
         End If
     End Sub
 
