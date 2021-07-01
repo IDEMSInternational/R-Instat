@@ -239,6 +239,8 @@ Public Class dlgOptions
             frmMain.TranslateFrmMainMenu()
         End If
         strPrevLanguageCulture = strCurrLanguageCulture
+
+        frmMain.EnableVisible(frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB")
         'disables the command after running it
         cmdApply.Enabled = True
         cmdOk.Enabled = True
