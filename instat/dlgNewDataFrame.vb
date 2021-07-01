@@ -426,6 +426,10 @@ Public Class dlgNewDataFrame
 
     End Sub
 
+    Private Sub dataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridView.CellContentClick
+
+    End Sub
+
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles btnTry.Click
         Dim bValid As Boolean = False
         Dim vecOutput As CharacterVector

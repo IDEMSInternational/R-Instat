@@ -642,6 +642,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputYSpecifyUpperLimitDateMonth
         '
         Me.ucrInputYSpecifyUpperLimitDateMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputYSpecifyUpperLimitDateMonth.GetSetSelectedIndex = -1
         Me.ucrInputYSpecifyUpperLimitDateMonth.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputYSpecifyUpperLimitDateMonth, "ucrInputYSpecifyUpperLimitDateMonth")
         Me.ucrInputYSpecifyUpperLimitDateMonth.Name = "ucrInputYSpecifyUpperLimitDateMonth"
@@ -657,6 +658,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputYSpecifyLowerLimitDateMonth
         '
         Me.ucrInputYSpecifyLowerLimitDateMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputYSpecifyLowerLimitDateMonth.GetSetSelectedIndex = -1
         Me.ucrInputYSpecifyLowerLimitDateMonth.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputYSpecifyLowerLimitDateMonth, "ucrInputYSpecifyLowerLimitDateMonth")
         Me.ucrInputYSpecifyLowerLimitDateMonth.Name = "ucrInputYSpecifyLowerLimitDateMonth"
@@ -689,6 +691,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputStartMonth
         '
         Me.ucrInputStartMonth.AddQuotesIfUnrecognised = True
+        Me.ucrInputStartMonth.GetSetSelectedIndex = -1
         Me.ucrInputStartMonth.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputStartMonth, "ucrInputStartMonth")
         Me.ucrInputStartMonth.Name = "ucrInputStartMonth"
@@ -720,6 +723,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputDateBreakTime
         '
         Me.ucrInputDateBreakTime.AddQuotesIfUnrecognised = True
+        Me.ucrInputDateBreakTime.GetSetSelectedIndex = -1
         Me.ucrInputDateBreakTime.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputDateBreakTime, "ucrInputDateBreakTime")
         Me.ucrInputDateBreakTime.Name = "ucrInputDateBreakTime"
@@ -733,6 +737,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputDateDisplayFormat
         '
         Me.ucrInputDateDisplayFormat.AddQuotesIfUnrecognised = True
+        Me.ucrInputDateDisplayFormat.GetSetSelectedIndex = -1
         Me.ucrInputDateDisplayFormat.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputDateDisplayFormat, "ucrInputDateDisplayFormat")
         Me.ucrInputDateDisplayFormat.Name = "ucrInputDateDisplayFormat"
@@ -876,6 +881,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputHLineType
         '
         Me.ucrInputHLineType.AddQuotesIfUnrecognised = True
+        Me.ucrInputHLineType.GetSetSelectedIndex = -1
         Me.ucrInputHLineType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputHLineType, "ucrInputHLineType")
         Me.ucrInputHLineType.Name = "ucrInputHLineType"
@@ -883,6 +889,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputHLineColour
         '
         Me.ucrInputHLineColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputHLineColour.GetSetSelectedIndex = -1
         Me.ucrInputHLineColour.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputHLineColour, "ucrInputHLineColour")
         Me.ucrInputHLineColour.Name = "ucrInputHLineColour"
@@ -958,6 +965,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputTercilesLabelType
         '
         Me.ucrInputTercilesLabelType.AddQuotesIfUnrecognised = True
+        Me.ucrInputTercilesLabelType.GetSetSelectedIndex = -1
         Me.ucrInputTercilesLabelType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputTercilesLabelType, "ucrInputTercilesLabelType")
         Me.ucrInputTercilesLabelType.Name = "ucrInputTercilesLabelType"
@@ -973,6 +981,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputMedianLabelType
         '
         Me.ucrInputMedianLabelType.AddQuotesIfUnrecognised = True
+        Me.ucrInputMedianLabelType.GetSetSelectedIndex = -1
         Me.ucrInputMedianLabelType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputMedianLabelType, "ucrInputMedianLabelType")
         Me.ucrInputMedianLabelType.Name = "ucrInputMedianLabelType"
@@ -1000,6 +1009,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputMeanLabelType
         '
         Me.ucrInputMeanLabelType.AddQuotesIfUnrecognised = True
+        Me.ucrInputMeanLabelType.GetSetSelectedIndex = -1
         Me.ucrInputMeanLabelType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputMeanLabelType, "ucrInputMeanLabelType")
         Me.ucrInputMeanLabelType.Name = "ucrInputMeanLabelType"
@@ -1085,6 +1095,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputMinorGridLineLinetype
         '
         Me.ucrInputMinorGridLineLinetype.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinorGridLineLinetype.GetSetSelectedIndex = -1
         Me.ucrInputMinorGridLineLinetype.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputMinorGridLineLinetype, "ucrInputMinorGridLineLinetype")
         Me.ucrInputMinorGridLineLinetype.Name = "ucrInputMinorGridLineLinetype"
@@ -1092,6 +1103,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputMinorGridLineColour
         '
         Me.ucrInputMinorGridLineColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputMinorGridLineColour.GetSetSelectedIndex = -1
         Me.ucrInputMinorGridLineColour.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputMinorGridLineColour, "ucrInputMinorGridLineColour")
         Me.ucrInputMinorGridLineColour.Name = "ucrInputMinorGridLineColour"
@@ -1127,6 +1139,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputBorderLinetype
         '
         Me.ucrInputBorderLinetype.AddQuotesIfUnrecognised = True
+        Me.ucrInputBorderLinetype.GetSetSelectedIndex = -1
         Me.ucrInputBorderLinetype.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputBorderLinetype, "ucrInputBorderLinetype")
         Me.ucrInputBorderLinetype.Name = "ucrInputBorderLinetype"
@@ -1134,6 +1147,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputBorderColour
         '
         Me.ucrInputBorderColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputBorderColour.GetSetSelectedIndex = -1
         Me.ucrInputBorderColour.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputBorderColour, "ucrInputBorderColour")
         Me.ucrInputBorderColour.Name = "ucrInputBorderColour"
@@ -1197,6 +1211,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputMajorGridLineLinetype
         '
         Me.ucrInputMajorGridLineLinetype.AddQuotesIfUnrecognised = True
+        Me.ucrInputMajorGridLineLinetype.GetSetSelectedIndex = -1
         Me.ucrInputMajorGridLineLinetype.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputMajorGridLineLinetype, "ucrInputMajorGridLineLinetype")
         Me.ucrInputMajorGridLineLinetype.Name = "ucrInputMajorGridLineLinetype"
@@ -1204,6 +1219,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputMajorGridLineColour
         '
         Me.ucrInputMajorGridLineColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputMajorGridLineColour.GetSetSelectedIndex = -1
         Me.ucrInputMajorGridLineColour.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputMajorGridLineColour, "ucrInputMajorGridLineColour")
         Me.ucrInputMajorGridLineColour.Name = "ucrInputMajorGridLineColour"
@@ -1235,6 +1251,7 @@ Partial Class sdgPICSARainfallGraph
         'UcrInputPnlBackgroundFill
         '
         Me.UcrInputPnlBackgroundFill.AddQuotesIfUnrecognised = True
+        Me.UcrInputPnlBackgroundFill.GetSetSelectedIndex = -1
         Me.UcrInputPnlBackgroundFill.IsReadOnly = False
         resources.ApplyResources(Me.UcrInputPnlBackgroundFill, "UcrInputPnlBackgroundFill")
         Me.UcrInputPnlBackgroundFill.Name = "UcrInputPnlBackgroundFill"
@@ -1242,6 +1259,7 @@ Partial Class sdgPICSARainfallGraph
         'UcrInputPnlBackgroundLinetype
         '
         Me.UcrInputPnlBackgroundLinetype.AddQuotesIfUnrecognised = True
+        Me.UcrInputPnlBackgroundLinetype.GetSetSelectedIndex = -1
         Me.UcrInputPnlBackgroundLinetype.IsReadOnly = False
         resources.ApplyResources(Me.UcrInputPnlBackgroundLinetype, "UcrInputPnlBackgroundLinetype")
         Me.UcrInputPnlBackgroundLinetype.Name = "UcrInputPnlBackgroundLinetype"
@@ -1249,6 +1267,7 @@ Partial Class sdgPICSARainfallGraph
         'UcrInputPnlBackgroundColour
         '
         Me.UcrInputPnlBackgroundColour.AddQuotesIfUnrecognised = True
+        Me.UcrInputPnlBackgroundColour.GetSetSelectedIndex = -1
         Me.UcrInputPnlBackgroundColour.IsReadOnly = False
         resources.ApplyResources(Me.UcrInputPnlBackgroundColour, "UcrInputPnlBackgroundColour")
         Me.UcrInputPnlBackgroundColour.Name = "UcrInputPnlBackgroundColour"
@@ -1292,6 +1311,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputXaxisOptions
         '
         Me.ucrInputXaxisOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputXaxisOptions.GetSetSelectedIndex = -1
         Me.ucrInputXaxisOptions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputXaxisOptions, "ucrInputXaxisOptions")
         Me.ucrInputXaxisOptions.Name = "ucrInputXaxisOptions"
@@ -1315,6 +1335,7 @@ Partial Class sdgPICSARainfallGraph
         'ucrInputYaxisOptions
         '
         Me.ucrInputYaxisOptions.AddQuotesIfUnrecognised = True
+        Me.ucrInputYaxisOptions.GetSetSelectedIndex = -1
         Me.ucrInputYaxisOptions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputYaxisOptions, "ucrInputYaxisOptions")
         Me.ucrInputYaxisOptions.Name = "ucrInputYaxisOptions"

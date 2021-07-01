@@ -3925,7 +3925,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrSdgPICSARainfalbuttons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>151, 30</value>
   </data>
   <data name="ucrSdgPICSARainfalbuttons.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

@@ -391,10 +391,10 @@
     <value>2</value>
   </data>
   <data name="ucrBaseSdgClimSoft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>103, 189</value>
+    <value>52, 192</value>
   </data>
   <data name="ucrBaseSdgClimSoft.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>159, 30</value>
   </data>
   <data name="ucrBaseSdgClimSoft.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

@@ -219,7 +219,7 @@
     <value>grdLayout</value>
   </data>
   <data name="&gt;&gt;grdLayout.Type" xml:space="preserve">
-    <value>unvell.ReoGrid.ReoGridControl, unvell.ReoGrid, Version=2.0.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>unvell.ReoGrid.ReoGridControl, unvell.ReoGrid, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grdLayout.Parent" xml:space="preserve">
     <value>tbpLayout</value>
@@ -598,10 +598,10 @@
     <value>1</value>
   </data>
   <data name="ucrsdgLayoutBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 427</value>
+    <value>120, 426</value>
   </data>
   <data name="ucrsdgLayoutBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>156, 30</value>
   </data>
   <data name="ucrsdgLayoutBase.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

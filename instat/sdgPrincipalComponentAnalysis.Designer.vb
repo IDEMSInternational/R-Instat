@@ -192,6 +192,7 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         'ucrSelectorFactor
         '
+        Me.ucrSelectorFactor.bDropUnusedFilterLevels = False
         Me.ucrSelectorFactor.bShowHiddenColumns = False
         Me.ucrSelectorFactor.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorFactor, "ucrSelectorFactor")
@@ -356,6 +357,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'ucrInputLabel2
         '
         Me.ucrInputLabel2.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabel2.GetSetSelectedIndex = -1
         Me.ucrInputLabel2.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLabel2, "ucrInputLabel2")
         Me.ucrInputLabel2.Name = "ucrInputLabel2"
@@ -363,6 +365,7 @@ Partial Class sdgPrincipalComponentAnalysis
         'ucrInputLabel1
         '
         Me.ucrInputLabel1.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabel1.GetSetSelectedIndex = -1
         Me.ucrInputLabel1.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLabel1, "ucrInputLabel1")
         Me.ucrInputLabel1.Name = "ucrInputLabel1"

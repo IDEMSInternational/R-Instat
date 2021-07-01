@@ -98,6 +98,7 @@ Partial Class sdgCountryColouredMapOptions
         'ucrInputCommonRegions
         '
         Me.ucrInputCommonRegions.AddQuotesIfUnrecognised = True
+        Me.ucrInputCommonRegions.GetSetSelectedIndex = -1
         Me.ucrInputCommonRegions.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCommonRegions, "ucrInputCommonRegions")
         Me.ucrInputCommonRegions.Name = "ucrInputCommonRegions"
