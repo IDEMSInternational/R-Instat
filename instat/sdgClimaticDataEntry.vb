@@ -373,6 +373,7 @@ Public Class sdgClimaticDataEntry
             iStartRowIndex += 1
         Next
 
+        iStartRowIndex = grdCurrentWorkSheet.SelectionRange.Row
         'then save the values if all are valid
         For index As Integer = 0 To arrPasteValues.Length - 1
             strNewValue = arrPasteValues(index).Trim
