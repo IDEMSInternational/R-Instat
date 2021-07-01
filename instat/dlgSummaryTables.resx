@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 45</value>
+    <value>296, 45</value>
   </data>
   <data name="lblFactors.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
@@ -150,7 +150,7 @@
     <value>True</value>
   </data>
   <data name="lblSummaryColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 174</value>
+    <value>296, 179</value>
   </data>
   <data name="lblSummaryColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 13</value>
@@ -174,7 +174,7 @@
     <value>9</value>
   </data>
   <data name="cmdSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>287, 472</value>
+    <value>299, 472</value>
   </data>
   <data name="cmdSummaries.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 23</value>
@@ -205,7 +205,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>286, 24</value>
   </data>
   <data name="ucrSaveTable.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -226,7 +226,7 @@
     <value>10, 281</value>
   </data>
   <data name="ucrChkOmitMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
+    <value>181, 20</value>
   </data>
   <data name="ucrChkOmitMissing.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -247,7 +247,7 @@
     <value>10, 255</value>
   </data>
   <data name="ucrChkStoreResults.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
+    <value>286, 20</value>
   </data>
   <data name="ucrChkStoreResults.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -289,7 +289,7 @@
     <value>10, 229</value>
   </data>
   <data name="ucrChkSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 20</value>
+    <value>286, 20</value>
   </data>
   <data name="ucrChkSummaries.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -310,7 +310,7 @@
     <value>10, 501</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>435, 52</value>
+    <value>409, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -334,16 +334,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>415, 560</value>
-  </data>
-  <data name="ucrInputNA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 138</value>
-  </data>
-  <data name="ucrInputNA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 21</value>
-  </data>
-  <data name="ucrInputNA.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>427, 560</value>
   </data>
   <data name="&gt;&gt;ucrInputNA.Name" xml:space="preserve">
     <value>ucrInputNA</value>
@@ -357,21 +348,6 @@
   <data name="&gt;&gt;ucrInputNA.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lblDisplayNA.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblDisplayNA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 141</value>
-  </data>
-  <data name="lblDisplayNA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
-  </data>
-  <data name="lblDisplayNA.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="lblDisplayNA.Text" xml:space="preserve">
-    <value>Display NA as:</value>
-  </data>
   <data name="&gt;&gt;lblDisplayNA.Name" xml:space="preserve">
     <value>lblDisplayNA</value>
   </data>
@@ -383,15 +359,6 @@
   </data>
   <data name="&gt;&gt;lblDisplayNA.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="ucrNudColumnFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>165, 114</value>
-  </data>
-  <data name="ucrNudColumnFactors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudColumnFactors.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
   </data>
   <data name="&gt;&gt;ucrNudColumnFactors.Name" xml:space="preserve">
     <value>ucrNudColumnFactors</value>
@@ -405,15 +372,6 @@
   <data name="&gt;&gt;ucrNudColumnFactors.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="ucrChkHTMLTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 45</value>
-  </data>
-  <data name="ucrChkHTMLTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
-  </data>
-  <data name="ucrChkHTMLTable.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
   <data name="&gt;&gt;ucrChkHTMLTable.Name" xml:space="preserve">
     <value>ucrChkHTMLTable</value>
   </data>
@@ -425,15 +383,6 @@
   </data>
   <data name="&gt;&gt;ucrChkHTMLTable.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="ucrChkRowNumbers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 19</value>
-  </data>
-  <data name="ucrChkRowNumbers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
-  </data>
-  <data name="ucrChkRowNumbers.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrChkRowNumbers.Name" xml:space="preserve">
     <value>ucrChkRowNumbers</value>
@@ -447,21 +396,6 @@
   <data name="&gt;&gt;ucrChkRowNumbers.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="lblColumnFactors.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblColumnFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 116</value>
-  </data>
-  <data name="lblColumnFactors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 13</value>
-  </data>
-  <data name="lblColumnFactors.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="lblColumnFactors.Text" xml:space="preserve">
-    <value>Column Factors:</value>
-  </data>
   <data name="&gt;&gt;lblColumnFactors.Name" xml:space="preserve">
     <value>lblColumnFactors</value>
   </data>
@@ -473,21 +407,6 @@
   </data>
   <data name="&gt;&gt;lblColumnFactors.ZOrder" xml:space="preserve">
     <value>5</value>
-  </data>
-  <data name="lblPageBy.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblPageBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 68</value>
-  </data>
-  <data name="lblPageBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>49, 13</value>
-  </data>
-  <data name="lblPageBy.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="lblPageBy.Text" xml:space="preserve">
-    <value>Page by:</value>
   </data>
   <data name="&gt;&gt;lblPageBy.Name" xml:space="preserve">
     <value>lblPageBy</value>
@@ -501,15 +420,6 @@
   <data name="&gt;&gt;lblPageBy.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="ucrInputPageBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>138, 66</value>
-  </data>
-  <data name="ucrInputPageBy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 21</value>
-  </data>
-  <data name="ucrInputPageBy.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
   <data name="&gt;&gt;ucrInputPageBy.Name" xml:space="preserve">
     <value>ucrInputPageBy</value>
   </data>
@@ -522,15 +432,6 @@
   <data name="&gt;&gt;ucrInputPageBy.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="ucrNudSigFigs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>165, 90</value>
-  </data>
-  <data name="ucrNudSigFigs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudSigFigs.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
   <data name="&gt;&gt;ucrNudSigFigs.Name" xml:space="preserve">
     <value>ucrNudSigFigs</value>
   </data>
@@ -542,21 +443,6 @@
   </data>
   <data name="&gt;&gt;ucrNudSigFigs.ZOrder" xml:space="preserve">
     <value>8</value>
-  </data>
-  <data name="lblSigFigs.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblSigFigs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 92</value>
-  </data>
-  <data name="lblSigFigs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 13</value>
-  </data>
-  <data name="lblSigFigs.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="lblSigFigs.Text" xml:space="preserve">
-    <value>Significant Figures:</value>
   </data>
   <data name="&gt;&gt;lblSigFigs.Name" xml:space="preserve">
     <value>lblSigFigs</value>
@@ -571,7 +457,7 @@
     <value>9</value>
   </data>
   <data name="grpDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 297</value>
+    <value>195, 297</value>
   </data>
   <data name="grpDisplay.Size" type="System.Drawing.Size, System.Drawing">
     <value>224, 169</value>
@@ -595,7 +481,7 @@
     <value>5</value>
   </data>
   <data name="ucrReceiverFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 60</value>
+    <value>299, 58</value>
   </data>
   <data name="ucrReceiverFactors.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -700,7 +586,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverSummaryCols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>264, 189</value>
+    <value>299, 192</value>
   </data>
   <data name="ucrReceiverSummaryCols.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -722,5 +608,239 @@
   </data>
   <data name="&gt;&gt;ucrReceiverSummaryCols.ZOrder" xml:space="preserve">
     <value>8</value>
+  </data>
+  <data name="lblSigFigs.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblSigFigs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 92</value>
+  </data>
+  <data name="lblSigFigs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>96, 13</value>
+  </data>
+  <data name="lblSigFigs.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblSigFigs.Text" xml:space="preserve">
+    <value>Significant Figures:</value>
+  </data>
+  <data name="&gt;&gt;lblSigFigs.Name" xml:space="preserve">
+    <value>lblSigFigs</value>
+  </data>
+  <data name="&gt;&gt;lblSigFigs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSigFigs.Parent" xml:space="preserve">
+    <value>grpDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblSigFigs.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="ucrNudSigFigs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>165, 90</value>
+  </data>
+  <data name="ucrNudSigFigs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudSigFigs.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSigFigs.Name" xml:space="preserve">
+    <value>ucrNudSigFigs</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSigFigs.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSigFigs.Parent" xml:space="preserve">
+    <value>grpDisplay</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSigFigs.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrInputPageBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 66</value>
+  </data>
+  <data name="ucrInputPageBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 21</value>
+  </data>
+  <data name="ucrInputPageBy.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPageBy.Name" xml:space="preserve">
+    <value>ucrInputPageBy</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPageBy.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPageBy.Parent" xml:space="preserve">
+    <value>grpDisplay</value>
+  </data>
+  <data name="&gt;&gt;ucrInputPageBy.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="lblPageBy.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblPageBy.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 68</value>
+  </data>
+  <data name="lblPageBy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>49, 13</value>
+  </data>
+  <data name="lblPageBy.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="lblPageBy.Text" xml:space="preserve">
+    <value>Page by:</value>
+  </data>
+  <data name="&gt;&gt;lblPageBy.Name" xml:space="preserve">
+    <value>lblPageBy</value>
+  </data>
+  <data name="&gt;&gt;lblPageBy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblPageBy.Parent" xml:space="preserve">
+    <value>grpDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblPageBy.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblColumnFactors.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblColumnFactors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 116</value>
+  </data>
+  <data name="lblColumnFactors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 13</value>
+  </data>
+  <data name="lblColumnFactors.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblColumnFactors.Text" xml:space="preserve">
+    <value>Column Factors:</value>
+  </data>
+  <data name="&gt;&gt;lblColumnFactors.Name" xml:space="preserve">
+    <value>lblColumnFactors</value>
+  </data>
+  <data name="&gt;&gt;lblColumnFactors.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblColumnFactors.Parent" xml:space="preserve">
+    <value>grpDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblColumnFactors.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrChkRowNumbers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 19</value>
+  </data>
+  <data name="ucrChkRowNumbers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 20</value>
+  </data>
+  <data name="ucrChkRowNumbers.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRowNumbers.Name" xml:space="preserve">
+    <value>ucrChkRowNumbers</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRowNumbers.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRowNumbers.Parent" xml:space="preserve">
+    <value>grpDisplay</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRowNumbers.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrChkHTMLTable.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 45</value>
+  </data>
+  <data name="ucrChkHTMLTable.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 20</value>
+  </data>
+  <data name="ucrChkHTMLTable.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrChkHTMLTable.Name" xml:space="preserve">
+    <value>ucrChkHTMLTable</value>
+  </data>
+  <data name="&gt;&gt;ucrChkHTMLTable.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkHTMLTable.Parent" xml:space="preserve">
+    <value>grpDisplay</value>
+  </data>
+  <data name="&gt;&gt;ucrChkHTMLTable.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrNudColumnFactors.Location" type="System.Drawing.Point, System.Drawing">
+    <value>165, 114</value>
+  </data>
+  <data name="ucrNudColumnFactors.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudColumnFactors.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrNudColumnFactors.Name" xml:space="preserve">
+    <value>ucrNudColumnFactors</value>
+  </data>
+  <data name="&gt;&gt;ucrNudColumnFactors.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudColumnFactors.Parent" xml:space="preserve">
+    <value>grpDisplay</value>
+  </data>
+  <data name="&gt;&gt;ucrNudColumnFactors.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrInputNA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>138, 138</value>
+  </data>
+  <data name="ucrInputNA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 21</value>
+  </data>
+  <data name="ucrInputNA.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrInputNA.Name" xml:space="preserve">
+    <value>ucrInputNA</value>
+  </data>
+  <data name="&gt;&gt;ucrInputNA.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputNA.Parent" xml:space="preserve">
+    <value>grpDisplay</value>
+  </data>
+  <data name="&gt;&gt;ucrInputNA.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblDisplayNA.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDisplayNA.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 141</value>
+  </data>
+  <data name="lblDisplayNA.Size" type="System.Drawing.Size, System.Drawing">
+    <value>76, 13</value>
+  </data>
+  <data name="lblDisplayNA.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblDisplayNA.Text" xml:space="preserve">
+    <value>Display NA as:</value>
+  </data>
+  <data name="&gt;&gt;lblDisplayNA.Name" xml:space="preserve">
+    <value>lblDisplayNA</value>
+  </data>
+  <data name="&gt;&gt;lblDisplayNA.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDisplayNA.Parent" xml:space="preserve">
+    <value>grpDisplay</value>
+  </data>
+  <data name="&gt;&gt;lblDisplayNA.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
 </root>

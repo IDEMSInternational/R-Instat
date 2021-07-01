@@ -254,6 +254,10 @@ Public Class dlgSummaryTables
         TestOKEnabled()
     End Sub
 
+    Private Sub lblFactors_Click(sender As Object, e As EventArgs) Handles lblFactors.Click
+
+    End Sub
+
     Private Sub SetMaxColumnFactors()
         ucrNudColumnFactors.Maximum = Math.Max(1, ucrReceiverFactors.lstSelectedVariables.Items.Count)
     End Sub

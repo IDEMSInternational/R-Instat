@@ -179,6 +179,7 @@ Partial Class dlgSummaryTables
         'ucrInputPageBy
         '
         Me.ucrInputPageBy.AddQuotesIfUnrecognised = True
+        Me.ucrInputPageBy.GetSetSelectedIndex = -1
         Me.ucrInputPageBy.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputPageBy, "ucrInputPageBy")
         Me.ucrInputPageBy.Name = "ucrInputPageBy"
