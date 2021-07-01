@@ -126,13 +126,13 @@
     <value>244, 45</value>
   </data>
   <data name="lblColumnsToRank.Size" type="System.Drawing.Size, System.Drawing">
-    <value>86, 13</value>
+    <value>45, 13</value>
   </data>
   <data name="lblColumnsToRank.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="lblColumnsToRank.Text" xml:space="preserve">
-    <value>Column to Rank:</value>
+    <value>Column:</value>
   </data>
   <data name="&gt;&gt;lblColumnsToRank.Name" xml:space="preserve">
     <value>lblColumnsToRank</value>
@@ -145,102 +145,6 @@
   </data>
   <data name="&gt;&gt;lblColumnsToRank.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="&gt;&gt;rdoRandom.Name" xml:space="preserve">
-    <value>rdoRandom</value>
-  </data>
-  <data name="&gt;&gt;rdoRandom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoRandom.Parent" xml:space="preserve">
-    <value>grpTies</value>
-  </data>
-  <data name="&gt;&gt;rdoRandom.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rdoFirst.Name" xml:space="preserve">
-    <value>rdoFirst</value>
-  </data>
-  <data name="&gt;&gt;rdoFirst.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoFirst.Parent" xml:space="preserve">
-    <value>grpTies</value>
-  </data>
-  <data name="&gt;&gt;rdoFirst.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;rdoMaximum.Name" xml:space="preserve">
-    <value>rdoMaximum</value>
-  </data>
-  <data name="&gt;&gt;rdoMaximum.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoMaximum.Parent" xml:space="preserve">
-    <value>grpTies</value>
-  </data>
-  <data name="&gt;&gt;rdoMaximum.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;rdoMinimum.Name" xml:space="preserve">
-    <value>rdoMinimum</value>
-  </data>
-  <data name="&gt;&gt;rdoMinimum.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoMinimum.Parent" xml:space="preserve">
-    <value>grpTies</value>
-  </data>
-  <data name="&gt;&gt;rdoMinimum.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;rdoAverage.Name" xml:space="preserve">
-    <value>rdoAverage</value>
-  </data>
-  <data name="&gt;&gt;rdoAverage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoAverage.Parent" xml:space="preserve">
-    <value>grpTies</value>
-  </data>
-  <data name="&gt;&gt;rdoAverage.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlTies.Name" xml:space="preserve">
-    <value>ucrPnlTies</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlTies.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlTies.Parent" xml:space="preserve">
-    <value>grpTies</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlTies.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="grpTies.Location" type="System.Drawing.Point, System.Drawing">
-    <value>244, 83</value>
-  </data>
-  <data name="grpTies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 135</value>
-  </data>
-  <data name="grpTies.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="grpTies.Text" xml:space="preserve">
-    <value>Ties</value>
-  </data>
-  <data name="&gt;&gt;grpTies.Name" xml:space="preserve">
-    <value>grpTies</value>
-  </data>
-  <data name="&gt;&gt;grpTies.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpTies.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpTies.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="rdoRandom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -397,6 +301,30 @@
   </data>
   <data name="&gt;&gt;ucrPnlTies.ZOrder" xml:space="preserve">
     <value>5</value>
+  </data>
+  <data name="grpTies.Location" type="System.Drawing.Point, System.Drawing">
+    <value>244, 83</value>
+  </data>
+  <data name="grpTies.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 135</value>
+  </data>
+  <data name="grpTies.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="grpTies.Text" xml:space="preserve">
+    <value>Ties</value>
+  </data>
+  <data name="&gt;&gt;grpTies.Name" xml:space="preserve">
+    <value>grpTies</value>
+  </data>
+  <data name="&gt;&gt;grpTies.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpTies.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpTies.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="rdoKeptAsMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 18</value>

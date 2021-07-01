@@ -219,10 +219,11 @@ Partial Class dlgVisualizeData
         '
         'ucrSaveGraph
         '
+        Me.ucrSaveGraph.ForeColor = System.Drawing.Color.Black
         Me.ucrSaveGraph.Location = New System.Drawing.Point(11, 321)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(282, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(325, 24)
         Me.ucrSaveGraph.TabIndex = 17
         '
         'ucrSelectorVisualizeData

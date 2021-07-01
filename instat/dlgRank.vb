@@ -106,4 +106,8 @@ Public Class dlgRank
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverRank.ControlContentsChanged, ucrSaveRank.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Sub lblColumnsToRank_Click(sender As Object, e As EventArgs) Handles lblColumnsToRank.Click
+
+    End Sub
 End Class

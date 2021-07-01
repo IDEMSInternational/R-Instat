@@ -225,7 +225,7 @@
     <value>526, 369</value>
   </data>
   <data name="ucrInputDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>219, 258</value>
+    <value>235, 258</value>
   </data>
   <data name="ucrInputDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 21</value>
@@ -270,7 +270,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputPrefixForNewColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 286</value>
+    <value>235, 285</value>
   </data>
   <data name="ucrInputPrefixForNewColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 21</value>
@@ -291,7 +291,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudNumberOfColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 233</value>
+    <value>235, 232</value>
   </data>
   <data name="ucrNudNumberOfColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>

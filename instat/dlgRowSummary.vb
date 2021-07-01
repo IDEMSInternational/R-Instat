@@ -125,4 +125,8 @@ Public Class dlgRowSummary
     Private Sub rdoMinimum_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMinimum.CheckedChanged
 
     End Sub
+
+    Private Sub lblSelected_Click(sender As Object, e As EventArgs) Handles lblSelected.Click
+
+    End Sub
 End Class
