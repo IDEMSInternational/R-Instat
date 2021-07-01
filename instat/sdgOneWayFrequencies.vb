@@ -23,6 +23,10 @@ Public Class sdgOneWayFrequencies
         autoTranslate(Me)
     End Sub
 
+    Private Sub tbpTable_Click(sender As Object, e As EventArgs) Handles tbpTable.Click
+
+    End Sub
+
     Public Sub InitialiseControls()
         Dim dctVerticalPositionLabel As New Dictionary(Of String, String)
         Dim dctHorizontalPositionLabel As New Dictionary(Of String, String)
