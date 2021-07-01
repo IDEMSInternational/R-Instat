@@ -42,7 +42,6 @@ Partial Class dlgBarAndPieChart
         Me.lblByFactor = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdPieChartOptions = New System.Windows.Forms.Button()
-        Me.rdoPieChart = New System.Windows.Forms.RadioButton()
         Me.rdoValue = New System.Windows.Forms.RadioButton()
         Me.cmdBarChartOptions = New System.Windows.Forms.Button()
         Me.lblPosition = New System.Windows.Forms.Label()
@@ -58,6 +57,8 @@ Partial Class dlgBarAndPieChart
         Me.ucrVariablesAsFactorForBarChart = New instat.ucrVariablesAsFactor()
         Me.lblXvariable = New System.Windows.Forms.Label()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
+        Me.ucrChkBacktoback = New instat.ucrCheck()
+        Me.ucrChkPolarCoordinates = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblByFactor
@@ -79,18 +80,6 @@ Partial Class dlgBarAndPieChart
         Me.cmdPieChartOptions.Name = "cmdPieChartOptions"
         Me.cmdPieChartOptions.Tag = "Pie_Chart_Options"
         Me.cmdPieChartOptions.UseVisualStyleBackColor = True
-        '
-        'rdoPieChart
-        '
-        resources.ApplyResources(Me.rdoPieChart, "rdoPieChart")
-        Me.rdoPieChart.BackColor = System.Drawing.SystemColors.Control
-        Me.rdoPieChart.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoPieChart.FlatAppearance.BorderSize = 2
-        Me.rdoPieChart.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoPieChart.Name = "rdoPieChart"
-        Me.rdoPieChart.TabStop = True
-        Me.rdoPieChart.Tag = "Pie_Chart"
-        Me.rdoPieChart.UseVisualStyleBackColor = False
         '
         'rdoValue
         '
@@ -205,10 +194,24 @@ Partial Class dlgBarAndPieChart
         Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.ucrSelector = Nothing
         '
+        'ucrChkBacktoback
+        '
+        Me.ucrChkBacktoback.Checked = False
+        resources.ApplyResources(Me.ucrChkBacktoback, "ucrChkBacktoback")
+        Me.ucrChkBacktoback.Name = "ucrChkBacktoback"
+        '
+        'ucrChkPolarCoordinates
+        '
+        Me.ucrChkPolarCoordinates.Checked = False
+        resources.ApplyResources(Me.ucrChkPolarCoordinates, "ucrChkPolarCoordinates")
+        Me.ucrChkPolarCoordinates.Name = "ucrChkPolarCoordinates"
+        '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkPolarCoordinates)
+        Me.Controls.Add(Me.ucrChkBacktoback)
         Me.Controls.Add(Me.lblXvariable)
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.ucrVariablesAsFactorForBarChart)
@@ -219,7 +222,6 @@ Partial Class dlgBarAndPieChart
         Me.Controls.Add(Me.ucrSaveBar)
         Me.Controls.Add(Me.ucrChkFlipCoordinates)
         Me.Controls.Add(Me.rdoValue)
-        Me.Controls.Add(Me.rdoPieChart)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.lblByFactor)
         Me.Controls.Add(Me.ucrReceiverByFactor)
@@ -247,7 +249,6 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrSaveBar As ucrSave
     Friend WithEvents ucrChkFlipCoordinates As ucrCheck
     Friend WithEvents rdoValue As RadioButton
-    Friend WithEvents rdoPieChart As RadioButton
     Friend WithEvents ucrPnlOptions As UcrPanel
     Friend WithEvents cmdBarChartOptions As Button
     Friend WithEvents lblPosition As Label
@@ -257,4 +258,6 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrVariablesAsFactorForBarChart As ucrVariablesAsFactor
     Friend WithEvents lblXvariable As Label
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
+    Friend WithEvents ucrChkBacktoback As ucrCheck
+    Friend WithEvents ucrChkPolarCoordinates As ucrCheck
 End Class
