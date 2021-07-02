@@ -73,11 +73,14 @@ Public Class Translations
     End Sub
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   TODO Gets a translation. </summary>
+    ''' <summary>   
+    '''     Returns <paramref name="strText"/> translated into the current language (e.g. French). 
+    ''' </summary>
     '''
-    ''' <param name="strText">  The text. </param>
+    ''' <param name="strText">  The text to translate. </param>
     '''
-    ''' <returns>   The translation. </returns>
+    ''' <returns>   <paramref name="strText"/> translated into the current language (e.g. French). 
+    '''             </returns>
     '''--------------------------------------------------------------------------------------------
     Public Shared Function GetTranslation(strText As String) As String
         If String.IsNullOrEmpty(strText) Then
@@ -164,10 +167,6 @@ Public Class Translations
         '      Therefore we can use the class name as the object name in 'CallByName'.
         Dim strControlsAsCsv As String = ""
         For Each typFormClass As Type In lstFormClasses
-            'TODO
-            If Not typFormClass.Name = "sdgPlots" Then
-                Continue For
-            End If
             Dim frmTemp As Form = CallByName(My.Forms, typFormClass.Name, CallType.Get)
             Dim strTemp = TranslateWinForm.clsTranslateWinForm.GetControlsAsCsv(frmTemp)
 
