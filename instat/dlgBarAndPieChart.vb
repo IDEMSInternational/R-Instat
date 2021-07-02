@@ -309,4 +309,16 @@ Public Class dlgBarAndPieChart
     Private Sub CoreControls_ContentsChanged() Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+
+    End Sub
+
+    Private Sub CoreControls_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged
+
+    End Sub
+
+    Private Sub cmdColumnChartOptions_Click(sender As Object, e As EventArgs) Handles cmdColumnChartOptions.Click
+
+    End Sub
 End Class

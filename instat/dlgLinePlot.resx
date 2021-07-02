@@ -181,7 +181,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 237</value>
+    <value>10, 233</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 23</value>
@@ -208,7 +208,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdLineOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 208</value>
+    <value>9, 202</value>
   </data>
   <data name="cmdLineOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>148, 23</value>

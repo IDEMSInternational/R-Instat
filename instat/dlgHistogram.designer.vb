@@ -43,7 +43,7 @@ Partial Class dlgHistogram
         Me.cmdHistogramOptions = New System.Windows.Forms.Button()
         Me.rdoHistogram = New System.Windows.Forms.RadioButton()
         Me.rdoDensity = New System.Windows.Forms.RadioButton()
-        Me.rdoFrequencyPolygon = New System.Windows.Forms.RadioButton()
+        Me.rdoFrequency = New System.Windows.Forms.RadioButton()
         Me.lblfactor = New System.Windows.Forms.Label()
         Me.lblStats = New System.Windows.Forms.Label()
         Me.ucrInputStats = New instat.ucrInputComboBox()
@@ -92,16 +92,16 @@ Partial Class dlgHistogram
         Me.rdoDensity.Tag = "Density"
         Me.rdoDensity.UseVisualStyleBackColor = True
         '
-        'rdoFrequencyPolygon
+        'rdoFrequency
         '
-        resources.ApplyResources(Me.rdoFrequencyPolygon, "rdoFrequencyPolygon")
-        Me.rdoFrequencyPolygon.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoFrequencyPolygon.FlatAppearance.BorderSize = 2
-        Me.rdoFrequencyPolygon.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoFrequencyPolygon.Name = "rdoFrequencyPolygon"
-        Me.rdoFrequencyPolygon.TabStop = True
-        Me.rdoFrequencyPolygon.Tag = "Frequency_Polygon"
-        Me.rdoFrequencyPolygon.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoFrequency, "rdoFrequency")
+        Me.rdoFrequency.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFrequency.FlatAppearance.BorderSize = 2
+        Me.rdoFrequency.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoFrequency.Name = "rdoFrequency"
+        Me.rdoFrequency.TabStop = True
+        Me.rdoFrequency.Tag = "Frequency"
+        Me.rdoFrequency.UseVisualStyleBackColor = True
         '
         'lblfactor
         '
@@ -180,15 +180,15 @@ Partial Class dlgHistogram
         Me.Controls.Add(Me.ucrSaveHist)
         Me.Controls.Add(Me.ucrVariablesAsFactorforHist)
         Me.Controls.Add(Me.ucrFactorReceiver)
-        Me.Controls.Add(Me.rdoFrequencyPolygon)
+        Me.Controls.Add(Me.rdoFrequency)
         Me.Controls.Add(Me.rdoDensity)
         Me.Controls.Add(Me.rdoHistogram)
-        Me.Controls.Add(Me.cmdHistogramOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrHistogramSelector)
         Me.Controls.Add(Me.lblfactor)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlOptions)
+        Me.Controls.Add(Me.cmdHistogramOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -204,7 +204,7 @@ Partial Class dlgHistogram
     Friend WithEvents cmdHistogramOptions As Button
     Friend WithEvents rdoHistogram As RadioButton
     Friend WithEvents rdoDensity As RadioButton
-    Friend WithEvents rdoFrequencyPolygon As RadioButton
+    Friend WithEvents rdoFrequency As RadioButton
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblfactor As Label
     Friend WithEvents ucrVariablesAsFactorforHist As ucrVariablesAsFactor

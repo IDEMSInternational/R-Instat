@@ -126,7 +126,7 @@
     <value>10, 229</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 25</value>
+    <value>147, 25</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
@@ -214,13 +214,13 @@
     <value>10, 198</value>
   </data>
   <data name="cmdScatterPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 25</value>
+    <value>147, 25</value>
   </data>
   <data name="cmdScatterPlotOptions.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="cmdScatterPlotOptions.Text" xml:space="preserve">
-    <value>Point Plot Options</value>
+    <value>Point Options</value>
   </data>
   <data name="&gt;&gt;cmdScatterPlotOptions.Name" xml:space="preserve">
     <value>cmdScatterPlotOptions</value>
