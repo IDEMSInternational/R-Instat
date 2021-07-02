@@ -44,6 +44,22 @@ Partial Class dlgScatterPlot
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.cmdScatterPlotOptions = New System.Windows.Forms.Button()
         Me.lblVariable = New System.Windows.Forms.Label()
+        Me.rdoSegments = New System.Windows.Forms.RadioButton()
+        Me.rdoPoints = New System.Windows.Forms.RadioButton()
+        Me.lblXStart = New System.Windows.Forms.Label()
+        Me.lblXEnd = New System.Windows.Forms.Label()
+        Me.lblYEnd = New System.Windows.Forms.Label()
+        Me.lblYStart = New System.Windows.Forms.Label()
+        Me.grpLollipopType = New System.Windows.Forms.GroupBox()
+        Me.rdoDiagonal = New System.Windows.Forms.RadioButton()
+        Me.rdoDouble = New System.Windows.Forms.RadioButton()
+        Me.rdoSimple = New System.Windows.Forms.RadioButton()
+        Me.ucrChkAddPoints = New instat.ucrCheck()
+        Me.ucrReceiverYEnd = New instat.ucrReceiverSingle()
+        Me.ucrReceiverYStart = New instat.ucrReceiverSingle()
+        Me.ucrReceiverXEnd = New instat.ucrReceiverSingle()
+        Me.ucrReceiverXStart = New instat.ucrReceiverSingle()
+        Me.ucrPnlType = New instat.UcrPanel()
         Me.ucrReceiverLabel = New instat.ucrReceiverSingle()
         Me.ucrChkWithSE = New instat.ucrCheck()
         Me.ucrChkLineofBestFit = New instat.ucrCheck()
@@ -53,6 +69,8 @@ Partial Class dlgScatterPlot
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrChkHorizontal = New instat.ucrCheck()
+        Me.grpLollipopType.SuspendLayout()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -85,6 +103,127 @@ Partial Class dlgScatterPlot
         '
         resources.ApplyResources(Me.lblVariable, "lblVariable")
         Me.lblVariable.Name = "lblVariable"
+        '
+        'rdoSegments
+        '
+        resources.ApplyResources(Me.rdoSegments, "rdoSegments")
+        Me.rdoSegments.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSegments.FlatAppearance.BorderSize = 2
+        Me.rdoSegments.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoSegments.Name = "rdoSegments"
+        Me.rdoSegments.TabStop = True
+        Me.rdoSegments.UseVisualStyleBackColor = True
+        '
+        'rdoPoints
+        '
+        resources.ApplyResources(Me.rdoPoints, "rdoPoints")
+        Me.rdoPoints.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPoints.FlatAppearance.BorderSize = 2
+        Me.rdoPoints.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPoints.Name = "rdoPoints"
+        Me.rdoPoints.TabStop = True
+        Me.rdoPoints.UseVisualStyleBackColor = True
+        '
+        'lblXStart
+        '
+        resources.ApplyResources(Me.lblXStart, "lblXStart")
+        Me.lblXStart.Name = "lblXStart"
+        Me.lblXStart.Tag = "X_Variable:"
+        '
+        'lblXEnd
+        '
+        resources.ApplyResources(Me.lblXEnd, "lblXEnd")
+        Me.lblXEnd.Name = "lblXEnd"
+        Me.lblXEnd.Tag = "X_Variable:"
+        '
+        'lblYEnd
+        '
+        resources.ApplyResources(Me.lblYEnd, "lblYEnd")
+        Me.lblYEnd.Name = "lblYEnd"
+        Me.lblYEnd.Tag = "X_Variable:"
+        '
+        'lblYStart
+        '
+        resources.ApplyResources(Me.lblYStart, "lblYStart")
+        Me.lblYStart.Name = "lblYStart"
+        Me.lblYStart.Tag = "X_Variable:"
+        '
+        'grpLollipopType
+        '
+        Me.grpLollipopType.Controls.Add(Me.rdoDiagonal)
+        Me.grpLollipopType.Controls.Add(Me.rdoDouble)
+        Me.grpLollipopType.Controls.Add(Me.rdoSimple)
+        resources.ApplyResources(Me.grpLollipopType, "grpLollipopType")
+        Me.grpLollipopType.Name = "grpLollipopType"
+        Me.grpLollipopType.TabStop = False
+        '
+        'rdoDiagonal
+        '
+        resources.ApplyResources(Me.rdoDiagonal, "rdoDiagonal")
+        Me.rdoDiagonal.Name = "rdoDiagonal"
+        Me.rdoDiagonal.TabStop = True
+        Me.rdoDiagonal.UseVisualStyleBackColor = True
+        '
+        'rdoDouble
+        '
+        resources.ApplyResources(Me.rdoDouble, "rdoDouble")
+        Me.rdoDouble.Name = "rdoDouble"
+        Me.rdoDouble.TabStop = True
+        Me.rdoDouble.UseVisualStyleBackColor = True
+        '
+        'rdoSimple
+        '
+        resources.ApplyResources(Me.rdoSimple, "rdoSimple")
+        Me.rdoSimple.Name = "rdoSimple"
+        Me.rdoSimple.TabStop = True
+        Me.rdoSimple.UseVisualStyleBackColor = True
+        '
+        'ucrChkAddPoints
+        '
+        Me.ucrChkAddPoints.Checked = False
+        resources.ApplyResources(Me.ucrChkAddPoints, "ucrChkAddPoints")
+        Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
+        '
+        'ucrReceiverYEnd
+        '
+        Me.ucrReceiverYEnd.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverYEnd, "ucrReceiverYEnd")
+        Me.ucrReceiverYEnd.Name = "ucrReceiverYEnd"
+        Me.ucrReceiverYEnd.Selector = Nothing
+        Me.ucrReceiverYEnd.strNcFilePath = ""
+        Me.ucrReceiverYEnd.ucrSelector = Nothing
+        '
+        'ucrReceiverYStart
+        '
+        Me.ucrReceiverYStart.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverYStart, "ucrReceiverYStart")
+        Me.ucrReceiverYStart.Name = "ucrReceiverYStart"
+        Me.ucrReceiverYStart.Selector = Nothing
+        Me.ucrReceiverYStart.strNcFilePath = ""
+        Me.ucrReceiverYStart.ucrSelector = Nothing
+        '
+        'ucrReceiverXEnd
+        '
+        Me.ucrReceiverXEnd.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverXEnd, "ucrReceiverXEnd")
+        Me.ucrReceiverXEnd.Name = "ucrReceiverXEnd"
+        Me.ucrReceiverXEnd.Selector = Nothing
+        Me.ucrReceiverXEnd.strNcFilePath = ""
+        Me.ucrReceiverXEnd.ucrSelector = Nothing
+        '
+        'ucrReceiverXStart
+        '
+        Me.ucrReceiverXStart.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverXStart, "ucrReceiverXStart")
+        Me.ucrReceiverXStart.Name = "ucrReceiverXStart"
+        Me.ucrReceiverXStart.Selector = Nothing
+        Me.ucrReceiverXStart.strNcFilePath = ""
+        Me.ucrReceiverXStart.ucrSelector = Nothing
+        '
+        'ucrPnlType
+        '
+        resources.ApplyResources(Me.ucrPnlType, "ucrPnlType")
+        Me.ucrPnlType.Name = "ucrPnlType"
         '
         'ucrReceiverLabel
         '
@@ -153,10 +292,30 @@ Partial Class dlgScatterPlot
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrChkHorizontal
+        '
+        Me.ucrChkHorizontal.Checked = False
+        resources.ApplyResources(Me.ucrChkHorizontal, "ucrChkHorizontal")
+        Me.ucrChkHorizontal.Name = "ucrChkHorizontal"
+        '
         'dlgScatterPlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkHorizontal)
+        Me.Controls.Add(Me.ucrChkAddPoints)
+        Me.Controls.Add(Me.grpLollipopType)
+        Me.Controls.Add(Me.ucrReceiverYEnd)
+        Me.Controls.Add(Me.lblYEnd)
+        Me.Controls.Add(Me.ucrReceiverYStart)
+        Me.Controls.Add(Me.lblYStart)
+        Me.Controls.Add(Me.ucrReceiverXEnd)
+        Me.Controls.Add(Me.lblXEnd)
+        Me.Controls.Add(Me.ucrReceiverXStart)
+        Me.Controls.Add(Me.lblXStart)
+        Me.Controls.Add(Me.rdoSegments)
+        Me.Controls.Add(Me.rdoPoints)
+        Me.Controls.Add(Me.ucrPnlType)
         Me.Controls.Add(Me.lblVariable)
         Me.Controls.Add(Me.ucrReceiverLabel)
         Me.Controls.Add(Me.ucrChkWithSE)
@@ -175,6 +334,8 @@ Partial Class dlgScatterPlot
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgScatterPlot"
+        Me.grpLollipopType.ResumeLayout(False)
+        Me.grpLollipopType.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -194,4 +355,21 @@ Partial Class dlgScatterPlot
     Friend WithEvents ucrChkWithSE As ucrCheck
     Friend WithEvents lblVariable As Label
     Friend WithEvents ucrReceiverLabel As ucrReceiverSingle
+    Friend WithEvents rdoSegments As RadioButton
+    Friend WithEvents rdoPoints As RadioButton
+    Friend WithEvents ucrPnlType As UcrPanel
+    Friend WithEvents ucrReceiverYEnd As ucrReceiverSingle
+    Friend WithEvents lblYEnd As Label
+    Friend WithEvents ucrReceiverYStart As ucrReceiverSingle
+    Friend WithEvents lblYStart As Label
+    Friend WithEvents ucrReceiverXEnd As ucrReceiverSingle
+    Friend WithEvents lblXEnd As Label
+    Friend WithEvents ucrReceiverXStart As ucrReceiverSingle
+    Friend WithEvents lblXStart As Label
+    Friend WithEvents grpLollipopType As GroupBox
+    Friend WithEvents ucrChkAddPoints As ucrCheck
+    Friend WithEvents rdoDiagonal As RadioButton
+    Friend WithEvents rdoDouble As RadioButton
+    Friend WithEvents rdoSimple As RadioButton
+    Friend WithEvents ucrChkHorizontal As ucrCheck
 End Class
