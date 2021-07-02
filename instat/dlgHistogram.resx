@@ -325,7 +325,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputStats.Location" type="System.Drawing.Point, System.Drawing">
-    <value>53, 300</value>
+    <value>85, 305</value>
   </data>
   <data name="ucrInputStats.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -349,13 +349,13 @@
     <value>1</value>
   </data>
   <data name="ucrChkPercentages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 306</value>
+    <value>247, 301</value>
   </data>
   <data name="ucrChkPercentages.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrChkPercentages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>173, 20</value>
   </data>
   <data name="ucrChkPercentages.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -379,7 +379,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrSaveHist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>343, 24</value>
   </data>
   <data name="ucrSaveHist.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>

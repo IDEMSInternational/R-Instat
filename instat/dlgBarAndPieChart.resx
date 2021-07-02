@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 255</value>
+    <value>254, 231</value>
   </data>
   <data name="lblByFactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>103, 13</value>
@@ -157,7 +157,7 @@
     <value>10, 262</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 25</value>
+    <value>148, 25</value>
   </data>
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -313,7 +313,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 297</value>
+    <value>254, 264</value>
   </data>
   <data name="lblPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 13</value>
@@ -343,7 +343,7 @@
     <value>10, 231</value>
   </data>
   <data name="cmdColumnChartOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 25</value>
+    <value>148, 25</value>
   </data>
   <data name="cmdColumnChartOptions.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -364,7 +364,7 @@
     <value>5</value>
   </data>
   <data name="ucrInputBarChartPositions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 313</value>
+    <value>257, 280</value>
   </data>
   <data name="ucrInputBarChartPositions.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 21</value>
@@ -391,7 +391,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>346, 24</value>
   </data>
   <data name="ucrSaveBar.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -445,7 +445,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblXvariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 212</value>
+    <value>254, 197</value>
   </data>
   <data name="lblXvariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -469,7 +469,7 @@
     <value>0</value>
   </data>
   <data name="ucrReceiverX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 226</value>
+    <value>257, 210</value>
   </data>
   <data name="ucrReceiverX.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -628,7 +628,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 270</value>
+    <value>257, 244</value>
   </data>
   <data name="ucrReceiverByFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

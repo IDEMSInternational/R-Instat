@@ -220,7 +220,7 @@
     <value>8</value>
   </data>
   <data name="cmdScatterPlotOptions.Text" xml:space="preserve">
-    <value>Scatter Plot Options</value>
+    <value>Point Plot Options</value>
   </data>
   <data name="&gt;&gt;cmdScatterPlotOptions.Name" xml:space="preserve">
     <value>cmdScatterPlotOptions</value>
@@ -457,7 +457,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Scatter Plot</value>
+    <value>Point Plot</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgScatterPlot</value>
