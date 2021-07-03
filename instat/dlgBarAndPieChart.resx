@@ -399,6 +399,9 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>415, 460</value>
   </data>
+  <data name="ucrChkPolarCoordinates.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="ucrChkPolarCoordinates.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 351</value>
   </data>
