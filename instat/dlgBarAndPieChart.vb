@@ -377,6 +377,10 @@ Public Class dlgBarAndPieChart
         ChangeParameterName()
     End Sub
 
+    Private Sub ucrVariablesAsFactorForBarChart_ControlContentsChanged() Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+        ucrChkBacktoback.Enabled = If(ucrVariablesAsFactorForBarChart.ucrMultipleVariables.GetCurrentItemTypes.Count > 1, True, False)
+    End Sub
+
     Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrPnlOptions.ControlValueChanged
         clsBaseOperator.RemoveParameterByName("geom_bar1")
         clsBaseOperator.RemoveParameterByName("geom_bar2")
