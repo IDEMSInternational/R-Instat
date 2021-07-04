@@ -139,6 +139,38 @@ Public Class ucrDataFrameMetadata
     Public Sub CopyRange()
         Try
             grdMetaData.CurrentWorksheet.Copy()
+
+            Dim clsCopyValues As New RFunction
+            Dim strAllContent As String = ""
+            Dim strRowContent As String
+            Dim strCellContent As String
+            Dim iEndRow As Integer = grdMetaData.CurrentWorksheet.SelectionRange.EndRow
+            Dim iEndCol As Integer = grdMetaData.CurrentWorksheet.SelectionRange.EndCol
+            Dim iStartCol As Integer = grdMetaData.CurrentWorksheet.SelectionRange.Col
+
+            'construct the copied range data
+            For iRowIndex As Integer = grdMetaData.CurrentWorksheet.SelectionRange.Row To iEndRow
+                strRowContent = ""
+                For iColIndex As Integer = iStartCol To iEndCol
+                    strCellContent = grdMetaData.CurrentWorksheet.GetCell(row:=iRowIndex, col:=iColIndex).DisplayText
+                    If strCellContent = "NA" Then
+                        strCellContent = ""
+                    End If
+                    If iColIndex = iStartCol Then
+                        strRowContent = strCellContent
+                    Else
+                        strRowContent = strRowContent & vbTab & strCellContent
+                    End If
+                Next
+                strAllContent = strAllContent & strRowContent
+                If iRowIndex < iEndRow Then
+                    strAllContent = strAllContent & Environment.NewLine
+                End If
+            Next
+
+            clsCopyValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_to_clipboard")
+            clsCopyValues.AddParameter("content", Chr(34) & strAllContent & Chr(34), iPosition:=0)
+            RunScriptFromDataFrameMetadata(clsCopyValues.ToScript(), strComment:="Copy data frame metadata values to clipboard")
         Catch
             MessageBox.Show("Cannot copy the current selection.")
         End Try
