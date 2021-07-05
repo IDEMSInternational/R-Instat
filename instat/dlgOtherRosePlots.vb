@@ -23,7 +23,6 @@ Public Class dlgOtherRosePlots
     Private clsOtherRosePlots As New RFunction
 
     Private Sub dlgOtherRosePlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitiliseDialog()
             bFirstLoad = False
@@ -35,6 +34,7 @@ Public Class dlgOtherRosePlots
         SetRCodeForControls(bReset)
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitiliseDialog()

@@ -614,6 +614,7 @@ Public Class dlgDescribeTwoVarGraph
                 clsGlobalAes = GgplotDefaults.clsAesFunction.Clone()
             End If
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrReceiverFirstVars_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstVars.ControlValueChanged

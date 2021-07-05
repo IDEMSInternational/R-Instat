@@ -76,10 +76,9 @@ Public Class dlgClimaticBoxPlot
             AutoFill()
         End If
         bReset = False
+        SetOptionsButtonsText()
         autoTranslate(Me)
         TestOKEnabled()
-
-        SetOptionsButtonstext()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -367,10 +366,11 @@ Public Class dlgClimaticBoxPlot
         End If
         UpdateParameters()
         AddRemoveFacets()
-        SetOptionsButtonstext()
+        SetOptionsButtonsText()
+        autoTranslate(Me)
     End Sub
 
-    Private Sub SetOptionsButtonstext()
+    Private Sub SetOptionsButtonsText()
         If rdoBoxplot.Checked Then
             cmdBoxPlotOptions.Text = "Boxplot Options"
         ElseIf rdoJitter.Checked Then

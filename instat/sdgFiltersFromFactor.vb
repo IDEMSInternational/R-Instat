@@ -31,11 +31,11 @@ Public Class sdgFiltersFromFactor
     End Sub
 
     Private Sub sdgFiltersFromFactor_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseControls()
             bFirstLoad = False
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseControls()
@@ -87,6 +87,7 @@ Public Class sdgFiltersFromFactor
             cmdSelectAll.Text = "Select All Levels"
             cmdSelectAll.FlatStyle = FlatStyle.Popup
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrReceiverFactor_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlValueChanged

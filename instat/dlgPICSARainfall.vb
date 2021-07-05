@@ -124,9 +124,9 @@ Public Class dlgPICSARainfall
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         XAxisDataTypeCheck()
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

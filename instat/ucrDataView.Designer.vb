@@ -47,6 +47,7 @@ Partial Class ucrDataView
         Me.mnuInsertColsBefore = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuInsertColsAfter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDeleteCol = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPaste = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuConvertToFactor = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuCovertToOrderedFactors = New System.Windows.Forms.ToolStripMenuItem()
@@ -57,6 +58,7 @@ Partial Class ucrDataView
         Me.mnuLevelsLabels = New System.Windows.Forms.ToolStripMenuItem()
         Me.toolStripMenuItem21 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuSort = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuColumnAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClearColumnFilter = New System.Windows.Forms.ToolStripMenuItem()
         Me.cellContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -64,6 +66,7 @@ Partial Class ucrDataView
         Me.mnuRenameColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDuplColumn = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuReorderColumn = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuCellPasteRange = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator5 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuConvertToFact = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuConvertToOrderedFactor = New System.Windows.Forms.ToolStripMenuItem()
@@ -89,6 +92,7 @@ Partial Class ucrDataView
         Me.statusColumnMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.deleteDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.renameSheet = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuBottomAddComment = New System.Windows.Forms.ToolStripMenuItem()
         Me.HideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.unhideSheet = New System.Windows.Forms.ToolStripMenuItem()
         Me.CopySheet = New System.Windows.Forms.ToolStripMenuItem()
@@ -110,11 +114,9 @@ Partial Class ucrDataView
         Me.linkHelpRInstatWebsite = New System.Windows.Forms.LinkLabel()
         Me.panelSectionStart = New System.Windows.Forms.Panel()
         Me.lblStart = New System.Windows.Forms.Label()
-        Me.linkStartNewDataFrame = New System.Windows.Forms.LinkLabel()
-        Me.linkStartOpenFile = New System.Windows.Forms.LinkLabel()
-        Me.linkStartOpenLibrary = New System.Windows.Forms.LinkLabel()
-        Me.mnuColumnAddComment = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuBottomAddComment = New System.Windows.Forms.ToolStripMenuItem()
+        Me.linkStartNewdataframe = New System.Windows.Forms.LinkLabel()
+        Me.linkStartImportFile = New System.Windows.Forms.LinkLabel()
+        Me.linkStartImportLibrary = New System.Windows.Forms.LinkLabel()
         Me.columnContextMenuStrip.SuspendLayout()
         Me.cellContextMenuStrip.SuspendLayout()
         Me.rowContextMenuStrip.SuspendLayout()
@@ -149,9 +151,9 @@ Partial Class ucrDataView
         'columnContextMenuStrip
         '
         Me.columnContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.mnuLevelsLabels, Me.toolStripMenuItem21, Me.mnuSort, Me.mnuColumnAddComment, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
+        Me.columnContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuColumnRename, Me.mnuDuplicateColumn, Me.mnuReorderColumns, Me.mnuInsertColsBefore, Me.mnuInsertColsAfter, Me.mnuDeleteCol, Me.mnuPaste, Me.toolStripMenuItem2, Me.mnuConvertToFactor, Me.mnuCovertToOrderedFactors, Me.mnuConvertText, Me.mnuConvertToLogical, Me.mnuConvertVariate, Me.ToolStripSeparator1, Me.mnuLevelsLabels, Me.toolStripMenuItem21, Me.mnuSort, Me.mnuColumnAddComment, Me.mnuColumnFilter, Me.mnuClearColumnFilter})
         Me.columnContextMenuStrip.Name = "columnContextMenuStrip"
-        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 374)
+        Me.columnContextMenuStrip.Size = New System.Drawing.Size(213, 396)
         '
         'mnuColumnRename
         '
@@ -188,6 +190,12 @@ Partial Class ucrDataView
         Me.mnuDeleteCol.Name = "mnuDeleteCol"
         Me.mnuDeleteCol.Size = New System.Drawing.Size(212, 22)
         Me.mnuDeleteCol.Text = "Delete Column(s)"
+        '
+        'mnuPaste
+        '
+        Me.mnuPaste.Name = "mnuPaste"
+        Me.mnuPaste.Size = New System.Drawing.Size(212, 22)
+        Me.mnuPaste.Text = "Paste"
         '
         'toolStripMenuItem2
         '
@@ -246,6 +254,12 @@ Partial Class ucrDataView
         Me.mnuSort.Size = New System.Drawing.Size(212, 22)
         Me.mnuSort.Text = "Sort..."
         '
+        'mnuColumnAddComment
+        '
+        Me.mnuColumnAddComment.Name = "mnuColumnAddComment"
+        Me.mnuColumnAddComment.Size = New System.Drawing.Size(212, 22)
+        Me.mnuColumnAddComment.Text = "Add Comment..."
+        '
         'mnuColumnFilter
         '
         Me.mnuColumnFilter.Name = "mnuColumnFilter"
@@ -261,9 +275,9 @@ Partial Class ucrDataView
         'cellContextMenuStrip
         '
         Me.cellContextMenuStrip.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLebelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
+        Me.cellContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripSeparator3, Me.mnuRenameColumn, Me.mnuDuplColumn, Me.mnuReorderColumn, Me.mnuCellPasteRange, Me.ToolStripSeparator5, Me.mnuConvertToFact, Me.mnuConvertToOrderedFactor, Me.mnuConvertToCharacter, Me.mnuConvertToLogic, Me.mnuConvertToNumeric, Me.ToolStripSeparator6, Me.mnuLebelsLevel, Me.ToolStripSeparator7, Me.mnuSorts, Me.mnuComment, Me.mnuFilters, Me.mnuRemoveCurrentFilters})
         Me.cellContextMenuStrip.Name = "cellContextMenuStrip"
-        Me.cellContextMenuStrip.Size = New System.Drawing.Size(213, 314)
+        Me.cellContextMenuStrip.Size = New System.Drawing.Size(213, 336)
         '
         'ToolStripSeparator3
         '
@@ -287,6 +301,12 @@ Partial Class ucrDataView
         Me.mnuReorderColumn.Name = "mnuReorderColumn"
         Me.mnuReorderColumn.Size = New System.Drawing.Size(212, 22)
         Me.mnuReorderColumn.Text = "Reorder Column(s)..."
+        '
+        'mnuCellPasteRange
+        '
+        Me.mnuCellPasteRange.Name = "mnuCellPasteRange"
+        Me.mnuCellPasteRange.Size = New System.Drawing.Size(212, 22)
+        Me.mnuCellPasteRange.Text = "Paste"
         '
         'ToolStripSeparator5
         '
@@ -423,49 +443,55 @@ Partial Class ucrDataView
         Me.statusColumnMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.statusColumnMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.deleteDataFrame, Me.renameSheet, Me.mnuBottomAddComment, Me.HideSheet, Me.unhideSheet, Me.CopySheet, Me.reorderSheet, Me.ViewSheet})
         Me.statusColumnMenu.Name = "statusColumnMenu"
-        Me.statusColumnMenu.Size = New System.Drawing.Size(181, 202)
+        Me.statusColumnMenu.Size = New System.Drawing.Size(163, 180)
         '
         'deleteDataFrame
         '
         Me.deleteDataFrame.Name = "deleteDataFrame"
-        Me.deleteDataFrame.Size = New System.Drawing.Size(180, 22)
+        Me.deleteDataFrame.Size = New System.Drawing.Size(162, 22)
         Me.deleteDataFrame.Text = "Delete..."
         '
         'renameSheet
         '
         Me.renameSheet.Name = "renameSheet"
-        Me.renameSheet.Size = New System.Drawing.Size(180, 22)
+        Me.renameSheet.Size = New System.Drawing.Size(162, 22)
         Me.renameSheet.Text = "Rename..."
+        '
+        'mnuBottomAddComment
+        '
+        Me.mnuBottomAddComment.Name = "mnuBottomAddComment"
+        Me.mnuBottomAddComment.Size = New System.Drawing.Size(162, 22)
+        Me.mnuBottomAddComment.Text = "Add Comment..."
         '
         'HideSheet
         '
         Me.HideSheet.Name = "HideSheet"
-        Me.HideSheet.Size = New System.Drawing.Size(180, 22)
+        Me.HideSheet.Size = New System.Drawing.Size(162, 22)
         Me.HideSheet.Text = "Hide"
         '
         'unhideSheet
         '
         Me.unhideSheet.Name = "unhideSheet"
-        Me.unhideSheet.Size = New System.Drawing.Size(180, 22)
+        Me.unhideSheet.Size = New System.Drawing.Size(162, 22)
         Me.unhideSheet.Text = "Unhide..."
         '
         'CopySheet
         '
         Me.CopySheet.Name = "CopySheet"
-        Me.CopySheet.Size = New System.Drawing.Size(180, 22)
+        Me.CopySheet.Size = New System.Drawing.Size(162, 22)
         Me.CopySheet.Text = "Copy..."
         '
         'reorderSheet
         '
         Me.reorderSheet.Enabled = False
         Me.reorderSheet.Name = "reorderSheet"
-        Me.reorderSheet.Size = New System.Drawing.Size(180, 22)
+        Me.reorderSheet.Size = New System.Drawing.Size(162, 22)
         Me.reorderSheet.Text = "Reorder..."
         '
         'ViewSheet
         '
         Me.ViewSheet.Name = "ViewSheet"
-        Me.ViewSheet.Size = New System.Drawing.Size(180, 22)
+        Me.ViewSheet.Size = New System.Drawing.Size(162, 22)
         Me.ViewSheet.Text = "View Data Frame"
         '
         'lblRowDisplay
@@ -642,9 +668,9 @@ Partial Class ucrDataView
         'panelSectionStart
         '
         Me.panelSectionStart.Controls.Add(Me.lblStart)
-        Me.panelSectionStart.Controls.Add(Me.linkStartNewDataFrame)
-        Me.panelSectionStart.Controls.Add(Me.linkStartOpenFile)
-        Me.panelSectionStart.Controls.Add(Me.linkStartOpenLibrary)
+        Me.panelSectionStart.Controls.Add(Me.linkStartNewdataframe)
+        Me.panelSectionStart.Controls.Add(Me.linkStartImportFile)
+        Me.panelSectionStart.Controls.Add(Me.linkStartImportLibrary)
         Me.panelSectionStart.Location = New System.Drawing.Point(28, 20)
         Me.panelSectionStart.Name = "panelSectionStart"
         Me.panelSectionStart.Size = New System.Drawing.Size(374, 96)
@@ -661,56 +687,44 @@ Partial Class ucrDataView
         Me.lblStart.TabIndex = 0
         Me.lblStart.Text = "Start"
         '
-        'linkStartNewDataFrame
+        'linkStartNewdataframe
         '
-        Me.linkStartNewDataFrame.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkStartNewDataFrame.AutoSize = True
-        Me.linkStartNewDataFrame.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkStartNewDataFrame.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartNewDataFrame.Location = New System.Drawing.Point(7, 37)
-        Me.linkStartNewDataFrame.Name = "linkStartNewDataFrame"
-        Me.linkStartNewDataFrame.Size = New System.Drawing.Size(96, 13)
-        Me.linkStartNewDataFrame.TabIndex = 3
-        Me.linkStartNewDataFrame.TabStop = True
-        Me.linkStartNewDataFrame.Text = "New Data Frame..."
+        Me.linkStartNewdataframe.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkStartNewdataframe.AutoSize = True
+        Me.linkStartNewdataframe.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkStartNewdataframe.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkStartNewdataframe.Location = New System.Drawing.Point(7, 37)
+        Me.linkStartNewdataframe.Name = "linkStartNewdataframe"
+        Me.linkStartNewdataframe.Size = New System.Drawing.Size(91, 13)
+        Me.linkStartNewdataframe.TabIndex = 3
+        Me.linkStartNewdataframe.TabStop = True
+        Me.linkStartNewdataframe.Text = "New data frame..."
         '
-        'linkStartOpenFile
+        'linkStartImportFile
         '
-        Me.linkStartOpenFile.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkStartOpenFile.AutoSize = True
-        Me.linkStartOpenFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkStartOpenFile.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartOpenFile.Location = New System.Drawing.Point(7, 56)
-        Me.linkStartOpenFile.Name = "linkStartOpenFile"
-        Me.linkStartOpenFile.Size = New System.Drawing.Size(81, 13)
-        Me.linkStartOpenFile.TabIndex = 4
-        Me.linkStartOpenFile.TabStop = True
-        Me.linkStartOpenFile.Text = "Open from file..."
+        Me.linkStartImportFile.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkStartImportFile.AutoSize = True
+        Me.linkStartImportFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkStartImportFile.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkStartImportFile.Location = New System.Drawing.Point(7, 56)
+        Me.linkStartImportFile.Name = "linkStartImportFile"
+        Me.linkStartImportFile.Size = New System.Drawing.Size(84, 13)
+        Me.linkStartImportFile.TabIndex = 4
+        Me.linkStartImportFile.TabStop = True
+        Me.linkStartImportFile.Text = "Import from file..."
         '
-        'linkStartOpenLibrary
+        'linkStartImportLibrary
         '
-        Me.linkStartOpenLibrary.ActiveLinkColor = System.Drawing.Color.Blue
-        Me.linkStartOpenLibrary.AutoSize = True
-        Me.linkStartOpenLibrary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.linkStartOpenLibrary.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
-        Me.linkStartOpenLibrary.Location = New System.Drawing.Point(7, 75)
-        Me.linkStartOpenLibrary.Name = "linkStartOpenLibrary"
-        Me.linkStartOpenLibrary.Size = New System.Drawing.Size(95, 13)
-        Me.linkStartOpenLibrary.TabIndex = 5
-        Me.linkStartOpenLibrary.TabStop = True
-        Me.linkStartOpenLibrary.Text = "Open from library..."
-        '
-        'mnuColumnAddComment
-        '
-        Me.mnuColumnAddComment.Name = "mnuColumnAddComment"
-        Me.mnuColumnAddComment.Size = New System.Drawing.Size(212, 22)
-        Me.mnuColumnAddComment.Text = "Add Comment..."
-        '
-        'mnuBottomAddComment
-        '
-        Me.mnuBottomAddComment.Name = "mnuBottomAddComment"
-        Me.mnuBottomAddComment.Size = New System.Drawing.Size(180, 22)
-        Me.mnuBottomAddComment.Text = "Add Comment..."
+        Me.linkStartImportLibrary.ActiveLinkColor = System.Drawing.Color.Blue
+        Me.linkStartImportLibrary.AutoSize = True
+        Me.linkStartImportLibrary.ImeMode = System.Windows.Forms.ImeMode.NoControl
+        Me.linkStartImportLibrary.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline
+        Me.linkStartImportLibrary.Location = New System.Drawing.Point(7, 75)
+        Me.linkStartImportLibrary.Name = "linkStartImportLibrary"
+        Me.linkStartImportLibrary.Size = New System.Drawing.Size(98, 13)
+        Me.linkStartImportLibrary.TabIndex = 5
+        Me.linkStartImportLibrary.TabStop = True
+        Me.linkStartImportLibrary.Text = "Import from library..."
         '
         'ucrDataView
         '
@@ -796,9 +810,9 @@ Partial Class ucrDataView
     Private WithEvents mnuFilters As ToolStripMenuItem
     Private WithEvents mnuRemoveCurrentFilters As ToolStripMenuItem
     Friend WithEvents panelSectionsAll As Panel
-    Friend WithEvents linkStartOpenLibrary As LinkLabel
-    Friend WithEvents linkStartOpenFile As LinkLabel
-    Friend WithEvents linkStartNewDataFrame As LinkLabel
+    Friend WithEvents linkStartImportLibrary As LinkLabel
+    Friend WithEvents linkStartImportFile As LinkLabel
+    Friend WithEvents linkStartNewdataframe As LinkLabel
     Friend WithEvents lblHelp As Label
     Friend WithEvents lblRecent As Label
     Friend WithEvents lblStart As Label
@@ -813,4 +827,6 @@ Partial Class ucrDataView
     Friend WithEvents mnuComment As ToolStripMenuItem
     Friend WithEvents mnuColumnAddComment As ToolStripMenuItem
     Friend WithEvents mnuBottomAddComment As ToolStripMenuItem
+    Private WithEvents mnuPaste As ToolStripMenuItem
+    Friend WithEvents mnuCellPasteRange As ToolStripMenuItem
 End Class

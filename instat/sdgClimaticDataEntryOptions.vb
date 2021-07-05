@@ -14,104 +14,120 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class sdgClimaticDataEntryOptions
-    Private bFirstLoad As Boolean = True
-    Private bMissing As Boolean = True
+    Private dctDefaultValues As New Dictionary(Of String, String)
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+
+        ' Add any initialization after the InitializeComponent() call.
+        InitialiseControls()
+    End Sub
     Private Sub sdgClimaticDataEntryOptions_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
-            InitialiseControls()
-            SetDefaults()
-            bFirstLoad = False
-        End If
         autoTranslate(Me)
     End Sub
+
     Private Sub InitialiseControls()
-        ucrChkTransform.SetText("Transform:")
-        ttucrChkTransform.SetToolTip(ucrChkTransform, "The values written to the data frame are transformed, usually multiplied, by the value given here.")
+        ucrChkEditNAOnly.SetText("Add/Edit new data only")
+        ucrChkIncludeFirstNextMonth.SetText("Include first of the next month")
 
         ucrInputTransform.SetItems({"0.1", "25.4", "0.254"})
-        ucrInputTransform.SetValidationTypeAsNumeric(dcmMin:=0.1)
+        ucrInputTransform.SetValidationTypeAsNumeric()
         ucrInputTransform.Visible = False
+        ucrChkTransform.SetText("Transform")
+        ucrChkTransform.AddToLinkedControls(ucrInputTransform, {True}, bNewLinkedHideIfParameterMissing:=True)
 
-        ucrChkDefaultValue.SetText("Default Value:")
-        ucrInputDefaultValue.SetText("0")
-        ucrInputDefaultValue.Visible = False
-
-        ucrChkMissingValues.SetText("Missing values shown as NA")
+        dctDefaultValues.Add("NA", "NA")
+        dctDefaultValues.Add("Blank", "")
+        dctDefaultValues.Add("0", "0")
+        ucrInputDefaultValue.SetItems(dctDefaultValues, bSetConditions:=False)
+        ucrInputDefaultValue.SetDropDownStyleAsNonEditable()
+        ttDefaultValue.SetToolTip(ucrInputDefaultValue.cboInput, "Default value for missing values.")
 
         ucrChkNoDecimal.SetText("No Decimal")
 
         ucrChkExtraRows.SetText("Extra Rows")
 
         ucrChkAllowTrace.SetText("Allow t for Trace")
-        ttucrChkDefaultValue.SetToolTip(ucrChkDefaultValue, "The data must be defined as climatic to recognise which variable is precipitation.")
     End Sub
 
-    Private Sub SetDefaults()
-        ucrChkDefaultValue.Checked = False
-        ucrChkAllowTrace.Checked = False
-        ucrChkTransform.Checked = False
-        ucrChkMissingValues.Checked = True
-        ucrInputTransform.GetSetSelectedIndex = 0
+    Public Sub SetUpDataEntryOptions(strEntryType As String)
+        ucrChkIncludeFirstNextMonth.Enabled = (strEntryType = "Month")
     End Sub
 
-    Private Sub ucrChkDefaultValue_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDefaultValue.ControlValueChanged
-        'todo. can this "toggling" be done in another way?
-        ucrInputDefaultValue.Visible = ucrChkDefaultValue.Checked
-    End Sub
-
-    Private Sub ucrChkTransform_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkTransform.ControlValueChanged
-        'todo. can this "toggling" be done in another way?
-        ucrInputTransform.Visible = ucrChkTransform.Checked
-    End Sub
-
-    Public ReadOnly Property NoDecimals As Boolean
+    Public Property GetSetNoDecimals As Boolean
         Get
             Return ucrChkNoDecimal.Checked
         End Get
+        Set(value As Boolean)
+            ucrChkNoDecimal.Checked = value
+        End Set
     End Property
 
-    Public ReadOnly Property UseDefault As Boolean
+    Public Property GetSetDefaultValue As String
         Get
-            Return ucrChkDefaultValue.Checked
+            If dctDefaultValues.ContainsKey(ucrInputDefaultValue.GetText) Then
+                Return dctDefaultValues.Item(ucrInputDefaultValue.GetText)
+            Else
+                Return ucrInputDefaultValue.GetText
+            End If
         End Get
-    End Property
-    Public ReadOnly Property MissingValueAsNA As Boolean
-        Get
-            Return bMissing
-        End Get
-    End Property
-
-
-    'todo. why is this a string?
-    Public ReadOnly Property DefaultValue As Double
-        Get
-            Return If(String.IsNullOrEmpty(ucrInputDefaultValue.GetValue), 0, ucrInputDefaultValue.GetValue)
-        End Get
+        Set(value As String)
+            ucrInputDefaultValue.SetName(value)
+        End Set
     End Property
 
-    Public ReadOnly Property AllowTrace As Boolean
+    Public Property GetSetAllowTrace As Boolean
         Get
             Return ucrChkAllowTrace.Checked
         End Get
+        Set(value As Boolean)
+            ucrChkAllowTrace.Checked = value
+        End Set
     End Property
 
-    Public ReadOnly Property Transform As Boolean
+    Public Property GetSetTransform As Boolean
         Get
             Return ucrChkTransform.Checked
         End Get
+        Set(value As Boolean)
+            ucrChkTransform.Checked = value
+        End Set
     End Property
 
-    Public ReadOnly Property TransformValue As Double
+    Public Property GetSetTransformValue As Double
         Get
-            'todo. do explicit conversion. Currently ucrInputTransform validation type is number
-            Return If(String.IsNullOrEmpty(ucrInputTransform.GetValue), 0, ucrInputTransform.GetValue)
+            Dim dTemp As Double
+            If Not Double.TryParse(ucrInputTransform.GetValue, dTemp) Then
+                MsgBox("Developer error: The ucrInputTransform combo box contains the value '" & ucrInputTransform.GetValue & "'. Cannot convert this to a double.")
+            End If
+            Return dTemp
         End Get
+        Set(value As Double)
+            ucrInputTransform.SetName(value)
+        End Set
     End Property
 
-    Private Sub ucrChkMissingValues_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkMissingValues.ControlValueChanged
-        bMissing = ucrChkMissingValues.Checked
-    End Sub
+    Public Property GetSetEditNAOnly As Boolean
+        Get
+            Return ucrChkEditNAOnly.Checked
+        End Get
+        Set(value As Boolean)
+            ucrChkEditNAOnly.Checked = value
+        End Set
+    End Property
+
+    Public Property GetSetIncludeFirstNextOfMonth As Boolean
+        Get
+            Return ucrChkIncludeFirstNextMonth.Enabled AndAlso ucrChkIncludeFirstNextMonth.Checked
+        End Get
+        Set(value As Boolean)
+            ucrChkIncludeFirstNextMonth.Enabled = value
+            ucrChkIncludeFirstNextMonth.Checked = value
+        End Set
+    End Property
+
 End Class

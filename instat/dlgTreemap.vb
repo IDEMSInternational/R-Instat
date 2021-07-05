@@ -316,6 +316,7 @@ Public Class dlgTreemap
             SetPipeAssignTo()
             WeightControls()
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrInputLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLabel.ControlValueChanged

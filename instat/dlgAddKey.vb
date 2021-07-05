@@ -25,7 +25,6 @@ Public Class dlgAddKey
     Private bUniqueChecked As Boolean = False
 
     Private Sub dlgAddKey_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -38,6 +37,7 @@ Public Class dlgAddKey
         bReset = False
         bUniqueChecked = False
         TestOKEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

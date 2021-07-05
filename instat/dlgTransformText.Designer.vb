@@ -146,6 +146,7 @@ Partial Class dlgTransformText
         'ucrInputSeparator
         '
         Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparator.GetSetSelectedIndex = -1
         Me.ucrInputSeparator.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
         Me.ucrInputSeparator.Name = "ucrInputSeparator"
@@ -184,6 +185,7 @@ Partial Class dlgTransformText
         'ucrInputPad
         '
         Me.ucrInputPad.AddQuotesIfUnrecognised = True
+        Me.ucrInputPad.GetSetSelectedIndex = -1
         Me.ucrInputPad.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputPad, "ucrInputPad")
         Me.ucrInputPad.Name = "ucrInputPad"
@@ -271,6 +273,7 @@ Partial Class dlgTransformText
         'ucrInputTo
         '
         Me.ucrInputTo.AddQuotesIfUnrecognised = True
+        Me.ucrInputTo.GetSetSelectedIndex = -1
         Me.ucrInputTo.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputTo, "ucrInputTo")
         Me.ucrInputTo.Name = "ucrInputTo"

@@ -224,12 +224,13 @@ Partial Class dlgPICSACrops
         Me.ucrChkRequirePlantingDays.Checked = False
         Me.ucrChkRequirePlantingDays.Location = New System.Drawing.Point(6, 18)
         Me.ucrChkRequirePlantingDays.Name = "ucrChkRequirePlantingDays"
-        Me.ucrChkRequirePlantingDays.Size = New System.Drawing.Size(204, 20)
+        Me.ucrChkRequirePlantingDays.Size = New System.Drawing.Size(286, 20)
         Me.ucrChkRequirePlantingDays.TabIndex = 39
         '
         'ucrInputCropLengths
         '
         Me.ucrInputCropLengths.AddQuotesIfUnrecognised = True
+        Me.ucrInputCropLengths.GetSetSelectedIndex = -1
         Me.ucrInputCropLengths.IsReadOnly = False
         Me.ucrInputCropLengths.Location = New System.Drawing.Point(172, 126)
         Me.ucrInputCropLengths.Name = "ucrInputCropLengths"
@@ -239,6 +240,7 @@ Partial Class dlgPICSACrops
         'ucrInputWaterAmounts
         '
         Me.ucrInputWaterAmounts.AddQuotesIfUnrecognised = True
+        Me.ucrInputWaterAmounts.GetSetSelectedIndex = -1
         Me.ucrInputWaterAmounts.IsReadOnly = False
         Me.ucrInputWaterAmounts.Location = New System.Drawing.Point(172, 89)
         Me.ucrInputWaterAmounts.Name = "ucrInputWaterAmounts"
@@ -248,6 +250,7 @@ Partial Class dlgPICSACrops
         'ucrInputPlantingDates
         '
         Me.ucrInputPlantingDates.AddQuotesIfUnrecognised = True
+        Me.ucrInputPlantingDates.GetSetSelectedIndex = -1
         Me.ucrInputPlantingDates.IsReadOnly = False
         Me.ucrInputPlantingDates.Location = New System.Drawing.Point(172, 51)
         Me.ucrInputPlantingDates.Name = "ucrInputPlantingDates"
@@ -267,7 +270,7 @@ Partial Class dlgPICSACrops
         Me.ucrChkPrintDataProp.Checked = False
         Me.ucrChkPrintDataProp.Location = New System.Drawing.Point(188, 358)
         Me.ucrChkPrintDataProp.Name = "ucrChkPrintDataProp"
-        Me.ucrChkPrintDataProp.Size = New System.Drawing.Size(164, 20)
+        Me.ucrChkPrintDataProp.Size = New System.Drawing.Size(255, 20)
         Me.ucrChkPrintDataProp.TabIndex = 36
         '
         'ucrReceiverRainfall

@@ -811,7 +811,7 @@
     <value>5</value>
   </data>
   <data name="ucrInputUserID.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 16</value>
+    <value>68, 16</value>
   </data>
   <data name="ucrInputUserID.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 21</value>
@@ -832,7 +832,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputAPIKey.Location" type="System.Drawing.Point, System.Drawing">
-    <value>58, 43</value>
+    <value>67, 43</value>
   </data>
   <data name="ucrInputAPIKey.Size" type="System.Drawing.Size, System.Drawing">
     <value>222, 21</value>
@@ -973,7 +973,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdBrowse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>337, 383</value>
+    <value>351, 383</value>
   </data>
   <data name="cmdBrowse.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 23</value>
@@ -997,10 +997,10 @@
     <value>2</value>
   </data>
   <data name="ucrInputFilePath.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 385</value>
+    <value>202, 385</value>
   </data>
   <data name="ucrInputFilePath.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 21</value>
+    <value>148, 21</value>
   </data>
   <data name="ucrInputFilePath.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1039,7 +1039,7 @@
     <value>10</value>
   </data>
   <data name="ucrInputNewDataFrameName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 440</value>
+    <value>201, 440</value>
   </data>
   <data name="ucrInputNewDataFrameName.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 21</value>
@@ -1060,7 +1060,7 @@
     <value>11</value>
   </data>
   <data name="ucrInputElement.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 107</value>
+    <value>80, 107</value>
   </data>
   <data name="ucrInputElement.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 21</value>
@@ -1081,7 +1081,7 @@
     <value>13</value>
   </data>
   <data name="ucrInputData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>71, 81</value>
+    <value>80, 81</value>
   </data>
   <data name="ucrInputData.Size" type="System.Drawing.Size, System.Drawing">
     <value>221, 21</value>

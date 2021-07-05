@@ -29,23 +29,17 @@ Partial Class dlgCompare
         Me.lblWithinYear = New System.Windows.Forms.Label()
         Me.rdoAnomalies = New System.Windows.Forms.RadioButton()
         Me.rdoDifferences = New System.Windows.Forms.RadioButton()
-        Me.lblSateliteAnomalies = New System.Windows.Forms.Label()
-        Me.lblStationAnomalies = New System.Windows.Forms.Label()
+        Me.ucrSaveSecondCol = New instat.ucrSave()
+        Me.ucrSaveFirstCol = New instat.ucrSave()
         Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverStationElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrReceiverSateliteElement = New instat.ucrReceiverSingle()
-        Me.ucrInputStationAnomalies = New instat.ucrInputTextBox()
-        Me.ucrInputSateliteAnomalies = New instat.ucrInputTextBox()
-        Me.ucrChkBias = New instat.ucrCheck()
-        Me.ucrInputAbsDev = New instat.ucrInputTextBox()
-        Me.ucrInputBias = New instat.ucrInputTextBox()
         Me.ucrNudMovingAverage = New instat.ucrNud()
         Me.ucrPnlCompare = New instat.UcrPanel()
         Me.ucrChkMovingAverage = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorCompare = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkAbsDev = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'lblStation
@@ -88,15 +82,15 @@ Partial Class dlgCompare
         Me.rdoDifferences.TabStop = True
         Me.rdoDifferences.UseVisualStyleBackColor = True
         '
-        'lblSateliteAnomalies
+        'ucrSaveSecondCol
         '
-        resources.ApplyResources(Me.lblSateliteAnomalies, "lblSateliteAnomalies")
-        Me.lblSateliteAnomalies.Name = "lblSateliteAnomalies"
+        resources.ApplyResources(Me.ucrSaveSecondCol, "ucrSaveSecondCol")
+        Me.ucrSaveSecondCol.Name = "ucrSaveSecondCol"
         '
-        'lblStationAnomalies
+        'ucrSaveFirstCol
         '
-        resources.ApplyResources(Me.lblStationAnomalies, "lblStationAnomalies")
-        Me.lblStationAnomalies.Name = "lblStationAnomalies"
+        resources.ApplyResources(Me.ucrSaveFirstCol, "ucrSaveFirstCol")
+        Me.ucrSaveFirstCol.Name = "ucrSaveFirstCol"
         '
         'ucrReceiverWithinYear
         '
@@ -134,44 +128,6 @@ Partial Class dlgCompare
         Me.ucrReceiverSateliteElement.strNcFilePath = ""
         Me.ucrReceiverSateliteElement.ucrSelector = Nothing
         '
-        'ucrInputStationAnomalies
-        '
-        Me.ucrInputStationAnomalies.AddQuotesIfUnrecognised = True
-        Me.ucrInputStationAnomalies.IsMultiline = False
-        Me.ucrInputStationAnomalies.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputStationAnomalies, "ucrInputStationAnomalies")
-        Me.ucrInputStationAnomalies.Name = "ucrInputStationAnomalies"
-        '
-        'ucrInputSateliteAnomalies
-        '
-        Me.ucrInputSateliteAnomalies.AddQuotesIfUnrecognised = True
-        Me.ucrInputSateliteAnomalies.IsMultiline = False
-        Me.ucrInputSateliteAnomalies.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSateliteAnomalies, "ucrInputSateliteAnomalies")
-        Me.ucrInputSateliteAnomalies.Name = "ucrInputSateliteAnomalies"
-        '
-        'ucrChkBias
-        '
-        Me.ucrChkBias.Checked = False
-        resources.ApplyResources(Me.ucrChkBias, "ucrChkBias")
-        Me.ucrChkBias.Name = "ucrChkBias"
-        '
-        'ucrInputAbsDev
-        '
-        Me.ucrInputAbsDev.AddQuotesIfUnrecognised = True
-        Me.ucrInputAbsDev.IsMultiline = False
-        Me.ucrInputAbsDev.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputAbsDev, "ucrInputAbsDev")
-        Me.ucrInputAbsDev.Name = "ucrInputAbsDev"
-        '
-        'ucrInputBias
-        '
-        Me.ucrInputBias.AddQuotesIfUnrecognised = True
-        Me.ucrInputBias.IsMultiline = False
-        Me.ucrInputBias.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputBias, "ucrInputBias")
-        Me.ucrInputBias.Name = "ucrInputBias"
-        '
         'ucrNudMovingAverage
         '
         Me.ucrNudMovingAverage.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
@@ -206,30 +162,18 @@ Partial Class dlgCompare
         resources.ApplyResources(Me.ucrSelectorCompare, "ucrSelectorCompare")
         Me.ucrSelectorCompare.Name = "ucrSelectorCompare"
         '
-        'ucrChkAbsDev
-        '
-        Me.ucrChkAbsDev.Checked = False
-        resources.ApplyResources(Me.ucrChkAbsDev, "ucrChkAbsDev")
-        Me.ucrChkAbsDev.Name = "ucrChkAbsDev"
-        '
         'dlgCompare
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveSecondCol)
+        Me.Controls.Add(Me.ucrSaveFirstCol)
         Me.Controls.Add(Me.ucrReceiverWithinYear)
         Me.Controls.Add(Me.ucrReceiverStationElement)
         Me.Controls.Add(Me.ucrReceiverStation)
         Me.Controls.Add(Me.ucrReceiverSateliteElement)
-        Me.Controls.Add(Me.lblStationAnomalies)
-        Me.Controls.Add(Me.lblSateliteAnomalies)
-        Me.Controls.Add(Me.ucrInputStationAnomalies)
-        Me.Controls.Add(Me.ucrInputSateliteAnomalies)
         Me.Controls.Add(Me.lblStationElement)
         Me.Controls.Add(Me.lblSateliteElement)
-        Me.Controls.Add(Me.ucrChkAbsDev)
-        Me.Controls.Add(Me.ucrChkBias)
-        Me.Controls.Add(Me.ucrInputAbsDev)
-        Me.Controls.Add(Me.ucrInputBias)
         Me.Controls.Add(Me.ucrNudMovingAverage)
         Me.Controls.Add(Me.rdoAnomalies)
         Me.Controls.Add(Me.rdoDifferences)
@@ -259,16 +203,10 @@ Partial Class dlgCompare
     Friend WithEvents rdoDifferences As RadioButton
     Friend WithEvents ucrPnlCompare As UcrPanel
     Friend WithEvents ucrNudMovingAverage As ucrNud
-    Friend WithEvents ucrChkBias As ucrCheck
-    Friend WithEvents ucrInputAbsDev As ucrInputTextBox
-    Friend WithEvents ucrInputBias As ucrInputTextBox
-    Friend WithEvents ucrInputStationAnomalies As ucrInputTextBox
-    Friend WithEvents ucrInputSateliteAnomalies As ucrInputTextBox
-    Friend WithEvents lblSateliteAnomalies As Label
-    Friend WithEvents lblStationAnomalies As Label
     Friend WithEvents ucrReceiverSateliteElement As ucrReceiverSingle
     Friend WithEvents ucrReceiverWithinYear As ucrReceiverSingle
     Friend WithEvents ucrReceiverStationElement As ucrReceiverSingle
     Friend WithEvents ucrReceiverStation As ucrReceiverSingle
-    Friend WithEvents ucrChkAbsDev As ucrCheck
+    Friend WithEvents ucrSaveFirstCol As ucrSave
+    Friend WithEvents ucrSaveSecondCol As ucrSave
 End Class

@@ -51,7 +51,6 @@ Public Class dlgScatterPlot
     Private strGeomParameterNames() As String = {strFirstParameterName, strGeomSmoothParameterName}
 
     Private Sub dlgScatterPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -63,6 +62,7 @@ Public Class dlgScatterPlot
         bReset = False
         TestOkEnabled()
         CheckIfNumeric()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

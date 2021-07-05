@@ -1,22 +1,19 @@
-Imports System.IO
+﻿Imports System.IO
 Imports RDotNet
 Imports instat.Translations
 
 Public Class dlgImportDataset
 
-    Private clsImportFixedWidthText, clsImportCSV, clsImportDAT, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As RFunction
+    Private clsImportFixedWidthText, clsImportCSV, clsImportRDS, clsReadRDS, clsImportExcel, clsImport As RFunction
     Private clsGetExcelSheetNames As RFunction
     Private clsRangeOperator As ROperator
     ''' <summary>   Ensures that any file paths containing special characters (e.g. accents) are 
     '''             correctly encoded.
     '''             </summary>
     Private clsEnc2Native As RFunction
-    ' Functions for multi file import
-    Private clsLapply As RFunction
-    Private clsFileList As RFunction
     ' Functions for multi Excel sheet impoty
     Private clsImportExcelMulti As RFunction
-    Private clsImportMultipleFiles, clsGetFilesList As RFunction
+    Private clsGetFilesList, clsImportMultipleFiles, clsImportMultipleTextFiles, clsFileNamesWithExt As RFunction
     'functions for importing multiple files
     Private bFirstLoad As Boolean
     Public bFromLibrary As Boolean
@@ -35,7 +32,7 @@ Public Class dlgImportDataset
     Private bDialogLoaded As Boolean
     Private iDataFrameCount As Integer
     Private bMultiFiles As Boolean
-
+    Private bFolder As Boolean = False
     Private strFileName As String
 
     Private bSupressCheckAllSheets As Boolean = False
@@ -61,7 +58,6 @@ Public Class dlgImportDataset
 
     Private Sub dlgImportDataset_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         bDialogLoaded = False
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             SetDefaults()
@@ -113,6 +109,7 @@ Public Class dlgImportDataset
         bDialogLoaded = True
         bReset = False
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -298,9 +295,11 @@ Public Class dlgImportDataset
         ucrPanelFixedWidthText.AddRadioButton(rdoSeparatortext)
         ucrPanelFixedWidthText.AddRadioButton(rdoFixedWidthText)
         ucrPanelFixedWidthText.AddRadioButton(rdoFixedWidthWhiteSpacesText)
-        ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoSeparatortext, {"read_table", "read_table2"}, bNewIsPositive:=False)
-        ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoFixedWidthText, "read_table", bNewIsPositive:=True)
-        ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoFixedWidthWhiteSpacesText, "read_table2", bNewIsPositive:=True)
+
+        'todo. commented temporarily until we are able to add an OR condition for the panel; for multiple files function
+        'ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoSeparatortext, {"read_table", "read_table2"}, bNewIsPositive:=False)
+        'ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoFixedWidthText, {"read_table"}, bNewIsPositive:=True)
+        'ucrPanelFixedWidthText.AddFunctionNamesCondition(rdoFixedWidthWhiteSpacesText, {"read_table2"}, bNewIsPositive:=True)
 
         ucrChkColumnNamesText.SetText("First Row is Column Headers")
         ucrChkColumnNamesText.SetParameter(New RParameter("col_names"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
@@ -322,24 +321,25 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub SetDefaults()
+        Dim clsSetNames As New RFunction
+        Dim clsFileNamesWithoutExt As New RFunction
+
         clsImportFixedWidthText = New RFunction
         clsImportCSV = New RFunction
         clsImportRDS = New RFunction
         clsImportExcel = New RFunction
         clsImport = New RFunction
         clsReadRDS = New RFunction
-        clsImportDAT = New RFunction
         clsGetExcelSheetNames = New RFunction
         clsRangeOperator = New ROperator
         clsEnc2Native = New RFunction
 
-        clsLapply = New RFunction
-
         clsImportExcelMulti = New RFunction
-        clsFileList = New RFunction
 
-        clsImportMultipleFiles = New RFunction
         clsGetFilesList = New RFunction
+        clsImportMultipleFiles = New RFunction
+        clsImportMultipleTextFiles = New RFunction
+        clsFileNamesWithExt = New RFunction
 
         clsImportFixedWidthText.SetPackageName("readr")
         clsImportFixedWidthText.SetRCommand("read_table")
@@ -359,13 +359,6 @@ Public Class dlgImportDataset
         clsImport.SetPackageName("rio")
         clsImport.SetRCommand("import")
 
-        clsImportDAT.SetPackageName("rio")
-        clsImportDAT.SetRCommand("import")
-        'Needed as rio currently doesn't support .DAT files
-        'https://github.com/leeper/rio/issues/155
-        'This only works if .DAT file is text based, this seems to be common usage
-        clsImportDAT.AddParameter("format", Chr(34) & "txt" & Chr(34))
-
         clsReadRDS.SetRCommand("readRDS")
         clsReadRDS.SetAssignTo("new_RDS")
 
@@ -379,28 +372,38 @@ Public Class dlgImportDataset
         'special characters(e.g.accents) are correctly encoded
         clsGetExcelSheetNames.AddParameter("path", "", clsEnc2Native, Nothing, Nothing, True, 0)
 
-        clsLapply.SetRCommand("lappy")
-        clsLapply.AddParameter("X", clsRFunctionParameter:=clsFileList, iPosition:=0)
-
         clsImportExcelMulti.SetPackageName("rio")
         clsImportExcelMulti.SetRCommand("import_list")
         clsImportExcelMulti.AddParameter("guess_max", "Inf", iPosition:=6)
 
-        clsFileList.SetRCommand("c")
-
         clsImportRDS.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$import_RDS")
 
         'commands for multiple files
-        clsImportMultipleFiles.SetPackageName("rio")
-        clsImportMultipleFiles.SetRCommand("import_list")
-
         clsGetFilesList.SetRCommand("list.files")
-        'clsGetFilesList.AddParameter("pattern", Chr(34) & "\\.csv$" & Chr(34), iPosition:=1)
         clsGetFilesList.AddParameter("full.names", "TRUE", iPosition:=2)
         clsGetFilesList.AddParameter("ignore.case", "TRUE", iPosition:=3)
 
+        clsImportMultipleFiles.SetPackageName("rio")
+        clsImportMultipleFiles.SetRCommand("import_list")
         clsImportMultipleFiles.AddParameter("file", clsRFunctionParameter:=clsGetFilesList, iPosition:=0)
         clsImportMultipleFiles.AddParameter("stringsAsFactors", "TRUE")
+
+        clsFileNamesWithExt.SetRCommand("list.files")
+        clsFileNamesWithExt.AddParameter("full.names", "FALSE", iPosition:=2)
+        clsFileNamesWithExt.AddParameter("ignore.case", "TRUE", iPosition:=3)
+
+        clsFileNamesWithoutExt.SetPackageName("tools")
+        clsFileNamesWithoutExt.SetRCommand("file_path_sans_ext")
+        clsFileNamesWithoutExt.AddParameter("x", clsRFunctionParameter:=clsFileNamesWithExt, iPosition:=0)
+
+        clsSetNames.SetPackageName("stats")
+        clsSetNames.SetRCommand("setNames")
+        clsSetNames.AddParameter("object", clsRFunctionParameter:=clsGetFilesList, iPosition:=0)
+        clsSetNames.AddParameter("nm", clsRFunctionParameter:=clsFileNamesWithoutExt, iPosition:=1)
+
+        clsImportMultipleTextFiles.SetRCommand("lapply")
+        clsImportMultipleTextFiles.AddParameter("X", clsRFunctionParameter:=clsSetNames, iPosition:=0)
+        clsImportMultipleTextFiles.AddParameter("FUN", strParameterValue:="readr::read_table", iPosition:=1)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
@@ -429,6 +432,8 @@ Public Class dlgImportDataset
         GridPreviewVisible(False)
         ucrSaveFile.Hide()
         ucrChkMultipleFiles.Checked = False
+        'todo. temporarily done this until when we can add OR conditions for the panel
+        rdoSeparatortext.Checked = True
     End Sub
 
     'Private Sub ucrInputName_NameChanged() Handles ucrInputName.ControlValueChanged
@@ -448,7 +453,7 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub TestOkEnabled()
-        If ucrChkMultipleFiles.Checked Then
+        If bFolder Then
             ucrBase.OKEnabled(GetDirectoryFiles(False).Count > 0)
         Else
             If (ucrSaveFile.IsComplete OrElse strFileType = "RDS") AndAlso bCanImport Then
@@ -466,7 +471,7 @@ Public Class dlgImportDataset
     'Loads the open dialog on load and click
     Public Sub GetFileFromOpenDialog()
         Using dlgOpen As New OpenFileDialog
-            dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html;*.dly|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html|DLY|*.dly|All files|*.*"
+            dlgOpen.Filter = "All Data files|*.csv;*.txt;*.xls;*.xlsx;*.RDS;*.sav;*.tsv;*.csvy;*.feather;*.psv;*.RData;*.json;*.yml;*.dta;*.dbf;*.arff;*.R;*.sas7bdat;*.xpt;*.mtp;*.rec;*.syd;*.dif;*.ods;*.xml;*.html;*.dly;*.dat|Comma separated files|*.csv|Text data file|*.txt|Excel files|*.xls;*.xlsx|R Data Structure files|*.RDS|SPSS files|*.sav|Tab separated files|*.tsv|CSV with a YAML metadata header|*.csvy|Feather R/Python interchange format|*.feather|Pipe separates files|*.psv|Saved R objects|*.RData|JSON|*.json|YAML|*.yml|Stata files|*.dta|XBASE database files|*.dbf|Weka Attribute-Relation File Format|*.arff|R syntax object|*.R|SAS Files|*.sas7bdat|SAS XPORT|*.xpt|Minitab Files|*.mtp|Epiinfo Files|*.rec|Systat Files|*.syd|Data Interchange Format|*.dif|OpenDocument Spreadsheet|*.ods|Shallow XML documents|*.xml|Single-table HTML documents|*.html|DLY|*.dly|DAT|*.dat|All files|*.*"
             dlgOpen.Multiselect = False
             If bFromLibrary Then
                 dlgOpen.Title = "Import from Library"
@@ -514,30 +519,36 @@ Public Class dlgImportDataset
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportFixedWidthText, New RParameter("file", 0), iAdditionalPairNo:=1)
         ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportCSV, New RParameter("file", 0), iAdditionalPairNo:=2)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportDAT, New RParameter("file", 0), iAdditionalPairNo:=3)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcel, New RParameter("file", 0), iAdditionalPairNo:=4)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsReadRDS, New RParameter("file", 0), iAdditionalPairNo:=5)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsEnc2Native, New RParameter("path", 0, False), iAdditionalPairNo:=6)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("file", 0), iAdditionalPairNo:=7)
-        ucrInputFilePath.AddAdditionalCodeParameterPair(clsGetFilesList, New RParameter("path", 0), iAdditionalPairNo:=8)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcel, New RParameter("file", 0), iAdditionalPairNo:=3)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsReadRDS, New RParameter("file", 0), iAdditionalPairNo:=4)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsEnc2Native, New RParameter("path", 0, False), iAdditionalPairNo:=5)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsImportExcelMulti, New RParameter("file", 0), iAdditionalPairNo:=6)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsGetFilesList, New RParameter("path", 0), iAdditionalPairNo:=7)
+        ucrInputFilePath.AddAdditionalCodeParameterPair(clsFileNamesWithExt, New RParameter("path", 0), iAdditionalPairNo:=8)
         ucrInputFilePath.SetRCode(clsImport, bReset)
 
         'Save control
         ucrSaveFile.AddAdditionalRCode(clsImportFixedWidthText, iAdditionalPairNo:=1)
         ucrSaveFile.AddAdditionalRCode(clsImportCSV, iAdditionalPairNo:=2)
-        ucrSaveFile.AddAdditionalRCode(clsImportDAT, iAdditionalPairNo:=3)
-        ucrSaveFile.AddAdditionalRCode(clsImportExcel, iAdditionalPairNo:=4)
-        ucrSaveFile.AddAdditionalRCode(clsImportExcelMulti, iAdditionalPairNo:=5)
-        ucrSaveFile.AddAdditionalRCode(clsImportMultipleFiles, iAdditionalPairNo:=6)
+        ucrSaveFile.AddAdditionalRCode(clsImportExcel, iAdditionalPairNo:=3)
+        ucrSaveFile.AddAdditionalRCode(clsImportExcelMulti, iAdditionalPairNo:=4)
+        ucrSaveFile.AddAdditionalRCode(clsImportMultipleFiles, iAdditionalPairNo:=5)
+        ucrSaveFile.AddAdditionalRCode(clsImportMultipleTextFiles, iAdditionalPairNo:=6)
         ucrSaveFile.SetRCode(clsImport, bReset)
 
+        'todo. commented temporarily until we are able to add an OR condition for the panel
         'Used by both text and csv functions
-        ucrPanelFixedWidthText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        'TEXT CONTROLS 
+        'ucrPanelFixedWidthText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+
+        'TEXT CONTROLS
         ucrChkColumnNamesText.SetRCode(clsImportFixedWidthText, bReset)
         ucrNudRowsToSkipText.SetRCode(clsImportFixedWidthText, bReset)
         ucrNudMaxRowsText.SetRCode(clsImportFixedWidthText, bReset)
         ucrChkMaxRowsText.SetRCode(clsImportFixedWidthText, bReset)
+
+        ucrChkColumnNamesText.AddAdditionalCodeParameterPair(clsImportMultipleTextFiles, New RParameter("col_names"), iAdditionalPairNo:=1)
+        ucrNudRowsToSkipText.AddAdditionalCodeParameterPair(clsImportMultipleTextFiles, New RParameter("skip"), iAdditionalPairNo:=1)
+        ucrNudMaxRowsText.AddAdditionalCodeParameterPair(clsImportMultipleTextFiles, New RParameter("n_max"), iAdditionalPairNo:=1)
 
         'CSV CONTROLS
         ucrInputSeparatorCSV.SetRCode(clsImportCSV, bReset)
@@ -612,8 +623,7 @@ Public Class dlgImportDataset
     End Sub
 
     Public Sub SetControlsFromFile(strFilePath As String, Optional strNewFileExt As String = "")
-        'Dim strFileExt As String
-        Dim bFolder As Boolean = False
+        bFolder = False
 
         If strFilePath <> "" Then
             If bFromLibrary Then
@@ -661,21 +671,41 @@ Public Class dlgImportDataset
             ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
             ucrSaveFile.Hide()
             clsGetFilesList.AddParameter("pattern", Chr(34) & "\\" & strFileExtension & "$" & Chr(34), iPosition:=1)
-            If strFileExtension = ".dly" Then
-                clsImportMultipleFiles.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
-            Else
-                clsImportMultipleFiles.AddParameter("format", Chr(34) & strFileExtension.Substring(1) & Chr(34), iPosition:=1)
+            clsFileNamesWithExt.AddParameter("pattern", Chr(34) & "\\" & strFileExtension & "$" & Chr(34), iPosition:=1)
+
+            If {".txt", ".csv", ".dly", ".dat"}.Contains(strFileExtension) Then
+                If strFileExtension = ".dly" Then
+                    clsImportMultipleFiles.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
+                ElseIf strFileExtension = ".dat" Then
+                    clsImportMultipleFiles.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
+                Else
+                    clsImportMultipleFiles.AddParameter("format", Chr(34) & strFileExtension.Substring(1) & Chr(34), iPosition:=1)
+                End If
+
+                If strFileExtension = ".txt" Then
+                    grpCSV.Text = "Import Text Options"
+                    grpCSV.Location = New System.Drawing.Point(9, 99) 'set the location of the groupbox to adjust gaps in the form UI
+                    ucrPanelFixedWidthText.Show()
+                ElseIf strFileExtension = ".csv" OrElse strFileExtension = ".dly" OrElse strFileExtension = ".dat" Then
+                    grpCSV.Text = "Import Options"
+                    grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
+                    grpCSV.Show()
+                End If
+
+                If strFileExtension = ".txt" AndAlso Not rdoSeparatortext.Checked Then
+                    grpText.Show()
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleTextFiles)
+                Else
+                    grpCSV.Show()
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
+                End If
+
             End If
-            ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
-            If strFileExtension = ".txt" OrElse strFileExtension = ".csv" OrElse strFileExtension = ".dly" Then
-                grpCSV.Text = "Import Options"
-                grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
-                grpCSV.Show()
-            End If
+
         Else
             'don't enable multiple files import for the following files only; .rds, .xlsx, .xls
             ucrChkMultipleFiles.SetVisible(Not (strFileExtension = ".rds" OrElse strFileExtension = ".xlsx" OrElse strFileExtension = ".xls"))
-
+            ucrChkMultipleFiles.Checked = False
             'TODO This needs to be different when RDS is a data frame
             'need to be able to detect RDS as data.frame/Instat Object
             If strFileExtension = ".rds" Then
@@ -683,16 +713,24 @@ Public Class dlgImportDataset
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportRDS)
                 clsImportRDS.AddParameter("data_RDS", clsRFunctionParameter:=clsReadRDS)
                 grpRDS.Show()
-            ElseIf strFileExtension = ".txt" Then
+            ElseIf strFileExtension = ".txt" OrElse strFileExtension = ".dat" Then
                 strFileType = "TXT"
+
                 'add or change format parameter values
+                'Needed as rio currently doesn't support .DAT files
+                'This only works if .DAT file is text based, this seems to be common usage
+                'check https://github.com/leeper/rio/issues/155
                 clsImportCSV.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
-                'by default the textfiles will be imported using the function we use for csv
-                ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
                 ucrPanelFixedWidthText.Show()
                 grpCSV.Text = "Import Text Options"
                 grpCSV.Location = New System.Drawing.Point(9, 99) 'set the location of the groupbox to adjust gaps in the form UI
-                grpCSV.Show()
+                If rdoSeparatortext.Checked Then
+                    grpCSV.Show()
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
+                Else
+                    grpText.Show()
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportFixedWidthText)
+                End If
             ElseIf strFileExtension = ".csv" OrElse strFileExtension = ".dly" Then
                 strFileType = "CSV"
                 'add format. forces rio to treat dly files as csv 
@@ -701,10 +739,6 @@ Public Class dlgImportDataset
                 grpCSV.Text = "Import CSV Options"
                 grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
                 grpCSV.Show()
-            ElseIf strFileExtension = ".dat" Then
-                strFileType = "DAT"
-                clsImportDAT.AddParameter("file", Chr(34) & strFilePathR & Chr(34))
-                ucrBase.clsRsyntax.SetBaseRFunction(clsImportDAT)
             ElseIf strFileExtension = ".xlsx" OrElse strFileExtension = ".xls" Then
                 strFileType = If(strFileExtension = ".xlsx", "XLSX", "XLS")
                 If clbSheets.CheckedItems.Count > 1 Then
@@ -722,8 +756,8 @@ Public Class dlgImportDataset
                 strFileType = ""
             End If
             If strFileType <> "" AndAlso strFileType <> "RDS" Then
-                If (strFileType = "XLSX" OrElse strFileType = "XLS") Then
-                    ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=True)
+                If strFileType = "XLSX" OrElse strFileType = "XLS" Then
+                    ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=dctSelectedExcelSheets.Count > 1)
                     Select Case clbSheets.CheckedItems.Count
                         Case Is > 1
                             ucrSaveFile.Hide()
@@ -746,6 +780,8 @@ Public Class dlgImportDataset
 
         RefreshFilePreview()
         RefreshFrameView()
+
+        autoTranslate(Me)
     End Sub
 
     Public Sub RefreshFilePreview(Optional strNewFileType As String = "")
@@ -755,7 +791,7 @@ Public Class dlgImportDataset
                 strNewFileType = strFileType
             End If
 
-            If ucrChkMultipleFiles.Checked Then
+            If bFolder Then
                 Dim lstFileNames As List(Of String) = GetDirectoryFiles(True)
                 lblTextFilePreview.Text = If(lstFileNames.Count = 0, "No Files found", "Files found: " & lstFileNames.Count)
                 txtTextFilePreview.Text = ""
@@ -810,7 +846,7 @@ Public Class dlgImportDataset
             lblImportingSheets.Hide()
             lblImportingSheets.Text = ""
             bValid = False
-            If Not ucrChkMultipleFiles.Checked AndAlso {"TXT", "CSV", "XLSX", "XLS"}.Contains(strFileType) AndAlso Not ucrInputFilePath.IsEmpty() Then
+            If Not bFolder AndAlso {"TXT", "CSV", "XLSX", "XLS"}.Contains(strFileType) AndAlso Not ucrInputFilePath.IsEmpty() Then
                 If strFileType = "TXT" Then
                     If rdoSeparatortext.Checked Then
                         'for separator we use the function used for csv
@@ -965,9 +1001,9 @@ Public Class dlgImportDataset
     End Sub
 
     Private Sub ucrBase_ClickOk(sender As Object, e As EventArgs) Handles ucrBase.ClickOk
-        ' add the item to the MRU (Most Recently Used) list...
-        'only add if its a file that was selected
-        If Not ucrChkMultipleFiles.Checked Then
+        'add the item to the MRU (Most Recently Used) list...
+        'only add if its a file that was selected, don't add if folder path was selected
+        If Not bFolder Then
             frmMain.clsRecentItems.addToMenu(strFilePathSystem)
         End If
 
@@ -1007,26 +1043,41 @@ Public Class dlgImportDataset
                 clsImportMultipleFiles.AddParameter("na.strings", GetMissingValueRString(ucrInputMissingValueStringCSV.GetText()), iPosition:=2)
             Else
                 clsImportFixedWidthText.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringText.GetText()), iPosition:=2)
+                clsImportMultipleTextFiles.AddParameter("na", GetMissingValueRString(ucrInputMissingValueStringText.GetText()), iPosition:=2)
             End If
         End If
         RefreshFrameView()
     End Sub
 
-    Private Sub UcrPanelFixedWidthText_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPanelFixedWidthText.ControlValueChanged
+    'todo. This event could be changed to UcrPanelFixedWidthText_ControlValueChanged
+    'when OR conditions are supported by ucrPanels 
+    Private Sub UcrPanelFixedWidthText_RadiosChanged(sender As Object, e As EventArgs) Handles rdoSeparatortext.CheckedChanged, rdoFixedWidthText.CheckedChanged, rdoFixedWidthWhiteSpacesText.CheckedChanged
         If strFileType = "TXT" Then
             grpCSV.Visible = False
             grpText.Visible = False
             If rdoFixedWidthText.Checked OrElse rdoFixedWidthWhiteSpacesText.Checked Then
                 If rdoFixedWidthText.Checked Then
                     clsImportFixedWidthText.SetRCommand("read_table")
+                    clsImportMultipleTextFiles.AddParameter("FUN", strParameterValue:="readr::read_table", iPosition:=1)
                 Else
                     clsImportFixedWidthText.SetRCommand("read_table2")
+                    clsImportMultipleTextFiles.AddParameter("FUN", strParameterValue:="readr::read_table2", iPosition:=1)
                 End If
-                ucrBase.clsRsyntax.SetBaseRFunction(clsImportFixedWidthText)
+                If bFolder Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleTextFiles)
+                Else
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportFixedWidthText)
+                End If
+
                 grpText.Visible = True
                 RefreshFilePreview("TXT")
             ElseIf rdoSeparatortext.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
+                If bFolder Then
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportMultipleFiles)
+                Else
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSV)
+                End If
+
                 grpCSV.Visible = True
                 RefreshFilePreview("CSV")
             End If

@@ -38,7 +38,6 @@ Public Class dlgParallelCoordinatePlot
     Private clsAnnotateFunction As New RFunction
 
     Private Sub dlgParallelCoordinatePlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstload Then
             InitialiseDialog()
             bFirstload = False
@@ -48,8 +47,8 @@ Public Class dlgParallelCoordinatePlot
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
         TestOkEnabled()
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

@@ -45,7 +45,7 @@ Partial Class dlgClimaticNCMPSummaryFile
         'cmdChooseFile
         '
         Me.cmdChooseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdChooseFile.Location = New System.Drawing.Point(333, 187)
+        Me.cmdChooseFile.Location = New System.Drawing.Point(336, 187)
         Me.cmdChooseFile.Name = "cmdChooseFile"
         Me.cmdChooseFile.Size = New System.Drawing.Size(75, 23)
         Me.cmdChooseFile.TabIndex = 6
@@ -57,9 +57,9 @@ Partial Class dlgClimaticNCMPSummaryFile
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(91, 188)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(161, 188)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(236, 21)
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(174, 21)
         Me.ucrInputFilePath.TabIndex = 5
         '
         'ucrSelectorA6

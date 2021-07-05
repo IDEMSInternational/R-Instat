@@ -128,6 +128,48 @@
   <data name="SplitContainer1.Orientation" type="System.Windows.Forms.Orientation, System.Windows.Forms">
     <value>Horizontal</value>
   </data>
+  <metadata name="cellContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>374, 18</value>
+  </metadata>
+  <data name="ToolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 6</value>
+  </data>
+  <data name="mnuCopy.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+C</value>
+  </data>
+  <data name="mnuCopy.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuCopy.Text" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="mnuPaste.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
+    <value>Ctrl+V</value>
+  </data>
+  <data name="mnuPaste.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuPaste.Text" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="ToolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 6</value>
+  </data>
+  <data name="mnuComment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="mnuComment.Text" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="cellContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
+    <value>181, 104</value>
+  </data>
+  <data name="&gt;&gt;cellContextMenuStrip.Name" xml:space="preserve">
+    <value>cellContextMenuStrip</value>
+  </data>
+  <data name="&gt;&gt;cellContextMenuStrip.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="grdDataEntry.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
@@ -167,9 +209,6 @@
   </data>
   <data name="&gt;&gt;SplitContainer1.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="ucrChkAddFlagFieldData.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
   </data>
   <data name="ucrChkAddFlagFieldData.Location" type="System.Drawing.Point, System.Drawing">
     <value>185, 10</value>
@@ -237,6 +276,12 @@
   <data name="cmdTransform.Text" xml:space="preserve">
     <value>Transform</value>
   </data>
+  <metadata name="ttCmds.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="cmdTransform.ToolTip" xml:space="preserve">
+    <value>When implemented, this is an option to show the transformed data.</value>
+  </data>
   <data name="&gt;&gt;cmdTransform.Name" xml:space="preserve">
     <value>cmdTransform</value>
   </data>
@@ -263,6 +308,9 @@
   </data>
   <data name="cmdReset.Text" xml:space="preserve">
     <value>Reset</value>
+  </data>
+  <data name="cmdReset.ToolTip" xml:space="preserve">
+    <value>Clears all data entry.</value>
   </data>
   <data name="&gt;&gt;cmdReset.Name" xml:space="preserve">
     <value>cmdReset</value>
@@ -331,14 +379,8 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;SplitContainer1.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
-  <metadata name="ttCmdReset.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <metadata name="ttCmdTransformButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>161, 17</value>
-  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -354,16 +396,40 @@
   <data name="$this.Text" xml:space="preserve">
     <value>Climatic Data Entry</value>
   </data>
-  <data name="&gt;&gt;ttCmdReset.Name" xml:space="preserve">
-    <value>ttCmdReset</value>
+  <data name="&gt;&gt;ToolStripSeparator3.Name" xml:space="preserve">
+    <value>ToolStripSeparator3</value>
   </data>
-  <data name="&gt;&gt;ttCmdReset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;ToolStripSeparator3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;ttCmdTransformButton.Name" xml:space="preserve">
-    <value>ttCmdTransformButton</value>
+  <data name="&gt;&gt;mnuCopy.Name" xml:space="preserve">
+    <value>mnuCopy</value>
   </data>
-  <data name="&gt;&gt;ttCmdTransformButton.Type" xml:space="preserve">
+  <data name="&gt;&gt;mnuCopy.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuPaste.Name" xml:space="preserve">
+    <value>mnuPaste</value>
+  </data>
+  <data name="&gt;&gt;mnuPaste.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator5.Name" xml:space="preserve">
+    <value>ToolStripSeparator5</value>
+  </data>
+  <data name="&gt;&gt;ToolStripSeparator5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuComment.Name" xml:space="preserve">
+    <value>mnuComment</value>
+  </data>
+  <data name="&gt;&gt;mnuComment.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ttCmds.Name" xml:space="preserve">
+    <value>ttCmds</value>
+  </data>
+  <data name="&gt;&gt;ttCmds.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

@@ -17,36 +17,21 @@
 Imports instat.Translations
 Imports RDotNet
 Public Class sdgCommentForDataEntry
-    Private bUseSelectedPosition As Boolean = False
     Private strSelectedDataFrame As String = ""
-    Private strSelectedRow As String = ""
-    Private strSelectedColumn As String = ""
-    Private bFirstLoad As Boolean = True
-    Private bReset As Boolean = True
+    Private ucrBaseSelector As ucrSelector
+    Private bControlsInitialised As Boolean = False
     Private bClearComments As Boolean
-    Public clsList As RFunction
-    Private clsCommentsList As RFunction
-    Private clsSaveDataEntry As RFunction
-    Private clsGetKey As RFunction
+    Private clsListFunction As RFunction
+    Private clsCommentsListFunction As RFunction
+    Private clsSaveDataEntryFunction As RFunction
+    Private clsGetKeyFunction As RFunction
     Private iNumComments As Integer = 0
 
     Private Sub sdgCommentForDataEntry_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
-            InitialiseDialog()
-            bFirstLoad = False
-        End If
-        If bReset Then
-            SetDefaults()
-        End If
-        bReset = False
         autoTranslate(Me)
-        SetRCodeForControls(bReset)
-        If bUseSelectedPosition Then
-            SetDefaultPosition()
-        End If
     End Sub
 
-    Private Sub InitialiseDialog()
+    Private Sub InitialiseControls()
         ucrPnlCellRowColumnDataFrame.AddRadioButton(rdoCell)
         ucrPnlCellRowColumnDataFrame.AddRadioButton(rdoRow)
         ucrPnlCellRowColumnDataFrame.AddRadioButton(rdoColumn)
@@ -60,7 +45,6 @@ Public Class sdgCommentForDataEntry
         ucrPnlCellRowColumnDataFrame.AddParameterPresentCondition(rdoRow, "column", False)
         ucrPnlCellRowColumnDataFrame.AddParameterPresentCondition(rdoDataFrame, "column", False)
         ucrPnlCellRowColumnDataFrame.AddParameterPresentCondition(rdoDataFrame, "row", False)
-
 
         ucrPnlCellRowColumnDataFrame.AddToLinkedControls(ucrReceiverColumn, {rdoCell, rdoColumn}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrPnlCellRowColumnDataFrame.AddToLinkedControls(ucrInputRow, {rdoCell, rdoRow}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
@@ -76,70 +60,66 @@ Public Class sdgCommentForDataEntry
         ucrReceiverColumn.Selector = ucrSelectorAddComment
         ucrReceiverColumn.SetParameter(New RParameter("column", iNewPosition:=2))
         ucrReceiverColumn.SetParameterIsString()
-
-        ucrInputComment.SetParameter(New RParameter("comment", iNewPosition:=3))
-
-        ttcmdAddComment.SetToolTip(cmdAddComment, "This is Enable when the key exits in the data frame and the input comment is not empty.")
-    End Sub
-
-    Private Sub SetDefaults()
-        clsCommentsList = New RFunction
-        clsList = New RFunction
-        clsGetKey = New RFunction
-
-        ucrSelectorAddComment.Reset()
-        ucrInputComment.IsMultiline = True
-
-        cmdAddComment.Enabled = False
-
         ucrReceiverColumn.SetMeAsReceiver()
 
-        clsGetKey.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_keys")
-        clsGetKey.AddParameter("key_name", Chr(34) & "key" & Chr(34), iPosition:=0)
-        clsCommentsList.SetRCommand("list")
+        ucrInputComment.SetParameter(New RParameter("comment", iNewPosition:=3))
+        ucrInputComment.IsMultiline = True
+        bControlsInitialised = True
 
-        clsList.SetRCommand("list")
-        bClearComments = True
+        ttcmdAddComment.SetToolTip(ucrInputComment.txtInput, "Add Comment button is enabled when the key exists in the data frame and the input comment is not empty.")
     End Sub
 
-    Private Sub SetRCodeForControls(bReset As Boolean)
-        ucrSelectorAddComment.AddAdditionalCodeParameterPair(clsGetKey, ucrSelectorAddComment.GetParameter(), iAdditionalPairNo:=1)
-        ucrSelectorAddComment.SetRCode(clsCommentsList, bReset)
-        ucrInputComment.SetRCode(clsCommentsList, bReset)
-        ucrInputRow.SetRCode(clsCommentsList, bReset)
-        ucrReceiverColumn.SetRCode(clsCommentsList, bReset)
-    End Sub
+    Public Sub SetUpCommentsSubdialog(clsNewSaveDataEntry As RFunction, clsNewGetKey As RFunction,
+                      clsNewCommentsList As RFunction, clsNewList As RFunction, strDataFrame As String,
+                                      Optional strRow As String = "", Optional strColumn As String = "", Optional ucrNewBaseSelector As ucrSelector = Nothing, Optional bReset As Boolean = False)
 
-    Private Sub SetDefaultPosition()
-        ucrSelectorAddComment.SetDataframe(strSelectedDataFrame)
-        ucrInputRow.SetName(strSelectedRow)
-        If strSelectedColumn <> "" AndAlso strSelectedRow <> "" Then
-            ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
+        If Not bControlsInitialised Then
+            InitialiseControls()
+        End If
+
+        clsSaveDataEntryFunction = clsNewSaveDataEntry
+        clsGetKeyFunction = clsNewGetKey
+        clsCommentsListFunction = clsNewCommentsList
+        clsListFunction = clsNewList
+        ucrBaseSelector = ucrNewBaseSelector
+
+        If ucrBaseSelector IsNot Nothing AndAlso ucrBaseSelector.strCurrentDataFrame <> "" Then
+            strSelectedDataFrame = ucrBaseSelector.strCurrentDataFrame
+            ucrSelectorAddComment.SetDataframe(strSelectedDataFrame, False)
+            clsGetKeyFunction.AddParameter("data_name", Chr(34) & strSelectedDataFrame & Chr(34), iPosition:=0)
+        Else
+            clsGetKeyFunction.RemoveParameterByName("data_name")
+        End If
+
+        ucrSelectorAddComment.SetRCode(clsCommentsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputComment.SetRCode(clsCommentsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrInputRow.SetRCode(clsCommentsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrReceiverColumn.SetRCode(clsCommentsListFunction, bReset, bCloneIfNeeded:=True)
+
+        ucrInputRow.SetName(strRow)
+        If strColumn <> "" AndAlso strRow <> "" Then
+            ucrReceiverColumn.Add(strColumn, strSelectedDataFrame)
             rdoCell.Checked = True
-        ElseIf strSelectedColumn <> "" AndAlso strSelectedRow = "" Then
-            ucrReceiverColumn.Add(strSelectedColumn, strSelectedDataFrame)
+        ElseIf strColumn <> "" AndAlso strRow = "" Then
+            ucrReceiverColumn.Add(strColumn, strSelectedDataFrame)
             rdoColumn.Checked = True
-        ElseIf strSelectedColumn = "" AndAlso strSelectedRow <> "" Then
+        ElseIf strColumn = "" AndAlso strRow <> "" Then
             rdoRow.Checked = True
         Else
             rdoDataFrame.Checked = True
         End If
-        strSelectedDataFrame = ""
-        strSelectedRow = ""
-        strSelectedColumn = ""
-        bUseSelectedPosition = False
-    End Sub
 
-    Public Sub SetRfunctions(clsNewSaveDataEntry As RFunction)
-        clsSaveDataEntry = clsNewSaveDataEntry
-        EnableDisableAddComment()
+        If bReset Then
+            EnableDisableAddComment()
+            iNumComments = 0
+        End If
     End Sub
 
     Private Sub EnableDisableAddComment()
-        If Not ucrInputComment.IsEmpty Then
-            Dim expTemp As SymbolicExpression
-            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKey.ToScript(), bSilent:=True)
-            If expTemp IsNot Nothing Then
+        Dim expTemp As SymbolicExpression
+        If clsGetKeyFunction IsNot Nothing Then
+            expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsGetKeyFunction.ToScript(), bSilent:=True)
+            If expTemp IsNot Nothing AndAlso expTemp.AsCharacter(0) = "TRUE" AndAlso Not ucrInputComment.IsEmpty Then
                 cmdAddComment.Enabled = True
             Else
                 cmdAddComment.Enabled = False
@@ -147,37 +127,32 @@ Public Class sdgCommentForDataEntry
         End If
     End Sub
 
-    Public Sub SetPosition(strDataFrame As String, Optional strRow As String = "", Optional strColumn As String = "")
-        strSelectedDataFrame = strDataFrame
-        strSelectedRow = strRow
-        strSelectedColumn = strColumn
-        bUseSelectedPosition = True
-    End Sub
-
     Private Sub ucrPnlCellRowColumnDataFrame_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlCellRowColumnDataFrame.ControlValueChanged
         ucrSelectorAddComment.ShowColumnSelector(rdoCell.Checked OrElse rdoColumn.Checked)
     End Sub
 
     Private Sub cmdAddComment_Click(sender As Object, e As EventArgs) Handles cmdAddComment.Click
-        clsList.AddParameter("C" & iNumComments, clsRFunctionParameter:=clsCommentsList, iPosition:=iNumComments)
+        clsListFunction.AddParameter("C" & iNumComments, clsRFunctionParameter:=clsCommentsListFunction, iPosition:=iNumComments)
         iNumComments = iNumComments + 1
         Me.Close()
     End Sub
 
-    Public Function NbCommentEntered() As Integer
-        Return iNumComments
-    End Function
+    Public Property GetSetNumberOfCommentsEntered As Integer
+        Get
+            Return iNumComments
+        End Get
+        Set(value As Integer)
+            iNumComments = value
+        End Set
+    End Property
 
     Private Sub ucrInputComment_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputComment.ControlContentsChanged
         EnableDisableAddComment()
     End Sub
 
-    Public Sub ClearInputComment()
-        ucrInputComment.ResetText()
-    End Sub
     Public Sub ClearComments()
         If bClearComments Then
-            clsList.ClearParameters()
+            clsListFunction.ClearParameters()
             iNumComments = 0
         End If
     End Sub

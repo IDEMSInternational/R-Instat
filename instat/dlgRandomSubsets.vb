@@ -21,7 +21,6 @@ Public Class dlgRandomSubsets
     Private clsDataFrame, clsSetSeed, clsSample, clsReplicate As New RFunction
 
     Private Sub dlgRandomSubsets_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        autoTranslate(Me)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -31,6 +30,7 @@ Public Class dlgRandomSubsets
         End If
         SetRCodeForControls(bReset)
         bReset = False
+        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()

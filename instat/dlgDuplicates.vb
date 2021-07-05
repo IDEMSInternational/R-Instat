@@ -235,6 +235,11 @@ Public Class dlgDuplicates
 
     Private Sub ucrPnlOptions_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         SetDataFrameOrColumns()
+        If rdoSelectedVariables.Checked Then
+            ucrNewColumnName.setLinkedReceiver(ucrReceiverForSelectedVariables)
+        ElseIf rdoSuccessiveValues.Checked Then
+            ucrNewColumnName.setLinkedReceiver(ucrReceiverForSuccessiveValues)
+        End If
     End Sub
 
     Private Sub ucrChkIncludeSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeSummary.ControlValueChanged

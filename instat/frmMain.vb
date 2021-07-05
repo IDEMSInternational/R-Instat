@@ -438,11 +438,11 @@ Public Class frmMain
         Me.Close()
     End Sub
 
-    Private Sub mnuFileOpenFromFile_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromFile.Click
+    Private Sub mnuFileOpenFromFile_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromFile.Click
         dlgImportDataset.ShowDialog()
     End Sub
 
-    Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromLibrary.Click
+    Private Sub mnuFileOpenFromLibrary_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromLibrary.Click
         dlgFromLibrary.ShowDialog()
     End Sub
 
@@ -887,7 +887,9 @@ Public Class frmMain
                     System.IO.Directory.CreateDirectory(strAppDataPath)
                 End If
                 If clsRLink IsNot Nothing AndAlso clsRLink.bREngineInitialised Then
-                    clsRecentItems.saveOnClose()
+                    If clsRecentItems IsNot Nothing Then
+                        clsRecentItems.saveOnClose()
+                    End If
                     If clsInstatOptions IsNot Nothing Then
                         SaveInstatOptions(Path.Combine(strAppDataPath, strInstatOptionsFile))
                     End If
@@ -932,6 +934,7 @@ Public Class frmMain
             tstatus.Text = strCurrentStatus
             Cursor = Cursors.Default
         End If
+        autoTranslate(Me)
     End Sub
 
     Public Sub DeleteAutoSaveData()
@@ -1053,11 +1056,11 @@ Public Class frmMain
         dlgDescribeTwoVarGraph.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticFileOpensst_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileOpensst.Click
+    Private Sub mnuClimaticFileOpensst_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportSST.Click
         dlgOpenSST.ShowDialog()
     End Sub
 
-    Private Sub mnuFileOpenFromODK_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromODK.Click
+    Private Sub mnuFileOpenFromODK_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromODK.Click
         dlgImportFromODK.ShowDialog()
     End Sub
 
@@ -1109,7 +1112,7 @@ Public Class frmMain
     End Sub
 
 
-    Private Sub mnuDescribeSpecificScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificScatterPlot.Click
+    Private Sub mnuDescribeSpecificScatterPlot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificPointPlot.Click
         dlgScatterPlot.ShowDialog()
     End Sub
 
@@ -1117,11 +1120,11 @@ Public Class frmMain
         dlgLinePlot.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeSpecificHistogram_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificHistogram.Click
+    Private Sub mnuDescribeSpecificHistogram_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificHistogramDensityFrequencyPlot.Click
         dlgHistogram.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeSpecificBoxplot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBoxplot.Click
+    Private Sub mnuDescribeSpecificBoxplot_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBoxplotJitterViolinPlot.Click
         dlgBoxplot.ShowDialog()
     End Sub
 
@@ -1133,7 +1136,7 @@ Public Class frmMain
         dlgRugPlot.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeSpecificBarChart_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBarChart.Click
+    Private Sub mnuDescribeSpecificBarChart_Click(sender As Object, e As EventArgs) Handles mnuDescribeSpecificBarPieChart.Click
         dlgBarAndPieChart.ShowDialog()
     End Sub
 
@@ -1258,7 +1261,7 @@ Public Class frmMain
         dlgClimsoftWizard.ShowDialog()
     End Sub
 
-    Private Sub mnuClimaticFileImportFromCliData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportFromCliData.Click
+    Private Sub mnuClimaticFileImportFromCliData_Click(sender As Object, e As EventArgs) Handles mnuClimaticFileImportfromCliData.Click
         dlgCliData.ShowDialog()
     End Sub
 
@@ -1355,7 +1358,7 @@ Public Class frmMain
         dlgTwoWayFrequencies.ShowDialog()
     End Sub
 
-    Private Sub mnuFileOpenFromCSPRO_Click(sender As Object, e As EventArgs) Handles mnuFileOpenFromCSPRO.Click
+    Private Sub mnuFileOpenFromCSPRO_Click(sender As Object, e As EventArgs) Handles mnuFileImportFromCSPRO.Click
         dlgImportFromCSPRO.ShowDialog()
     End Sub
 
@@ -2363,5 +2366,9 @@ Public Class frmMain
 
     Private Sub mnuSetupForDataEntry_Click(sender As Object, e As EventArgs) Handles mnuSetupForDataEntry.Click
         dlgSetupForDataEntry.ShowDialog()
+    End Sub
+
+    Private Sub mnuEditPasteNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNewDataFrame.Click
+        dlgPasteNewDataFrame.ShowDialog()
     End Sub
 End Class

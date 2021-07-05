@@ -458,12 +458,12 @@ Public Class ucrColumnMetadata
         If iSelectedCols = 1 Then
             strType = frmMain.clsRLink.GetColumnType(grdCurrSheet.Name, strColumns(0))
             mnuLevelsLabels.Enabled = (strType.Contains("factor"))
-            mnuDeleteCol.Text = "Delete Column"
-            mnuInsertColsBefore.Text = "Insert 1 Column Before"
-            mnuInsertColsAfter.Text = "Insert 1 Column After"
+            mnuDeleteCol.Text = GetTranslation("Delete Column")
+            mnuInsertColsBefore.Text = GetTranslation("Insert 1 Column Before")
+            mnuInsertColsAfter.Text = GetTranslation("Insert 1 Column After")
         Else
             mnuLevelsLabels.Enabled = False
-            mnuDeleteCol.Text = "Delete Columns"
+            mnuDeleteCol.Text = GetTranslation("Delete Columns")
             mnuInsertColsBefore.Text = "Insert " & iSelectedCols & " Columns Before"
             mnuInsertColsAfter.Text = "Insert " & iSelectedCols & " Columns After"
         End If

@@ -160,7 +160,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoColumn.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="rdoDataFrame.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -202,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoDataFrame.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="rdoCell.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -391,30 +391,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputRow.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="ucrSelectorAddComment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 44</value>
-  </data>
-  <data name="ucrSelectorAddComment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrSelectorAddComment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 180</value>
-  </data>
-  <data name="ucrSelectorAddComment.TabIndex" type="System.Int32, mscorlib">
-    <value>94</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorAddComment.Name" xml:space="preserve">
-    <value>ucrSelectorAddComment</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorAddComment.Type" xml:space="preserve">
-    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorAddComment.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorAddComment.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <data name="ucrPnlCellRowColumnDataFrame.Location" type="System.Drawing.Point, System.Drawing">
@@ -468,6 +444,30 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>418, 328</value>
   </data>
+  <data name="ucrSelectorAddComment.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 39</value>
+  </data>
+  <data name="ucrSelectorAddComment.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorAddComment.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 188</value>
+  </data>
+  <data name="ucrSelectorAddComment.TabIndex" type="System.Int32, mscorlib">
+    <value>102</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorAddComment.Name" xml:space="preserve">
+    <value>ucrSelectorAddComment</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorAddComment.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorAddComment.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorAddComment.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="cmdAddComment.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -493,7 +493,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdAddComment.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrSdgBaseButtons.Location" type="System.Drawing.Point, System.Drawing">
     <value>178, 291</value>

@@ -243,6 +243,7 @@ Public Class dlgNewDataFrame
             dataGridView.Visible = False
             ucrBase.clsRsyntax.SetBaseRFunction(clsEmptyOverallFunction)
         End If
+        autoTranslate(Me)
     End Sub
 
     Private Sub ucrNewDFName_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlValueChanged
