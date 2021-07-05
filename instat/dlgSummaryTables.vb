@@ -99,7 +99,7 @@ Public Class dlgSummaryTables
 
         ucrChkSummaries.SetParameter(New RParameter("treat_columns_as_factor", 9))
         ucrChkSummaries.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkSummaries.SetText("Treat Summary Columns as a Further Factor")
+        ucrChkSummaries.SetText("Treat Summaries as a Further Factor")
 
         ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 6))
         ucrNudSigFigs.SetMinMax(0, 22)
@@ -152,7 +152,7 @@ Public Class dlgSummaryTables
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
         ucrSaveTable.Reset()
-        ucrNudColumnFactors.SetText(2)
+        ucrNudColumnFactors.SetText(1)
 
         ucrBase.clsRsyntax.lstBeforeCodes.Clear()
 
