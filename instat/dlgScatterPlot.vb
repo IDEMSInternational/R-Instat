@@ -75,6 +75,11 @@ Public Class dlgScatterPlot
         ucrPnlType.AddRadioButton(rdoPoints)
         ucrPnlType.AddRadioButton(rdoSegments)
 
+        'ucrPnlPlotType.SetParameter()
+        ucrPnlPlotType.AddRadioButton(rdoSimple)
+        ucrPnlPlotType.AddRadioButton(rdoDouble)
+        ucrPnlPlotType.AddRadioButton(rdoDiagonal)
+
         ucrPnlType.AddFunctionNamesCondition(rdoPoints, "")
         ucrPnlType.AddFunctionNamesCondition(rdoSegments, "")
 
@@ -165,13 +170,13 @@ Public Class dlgScatterPlot
 
         ucrChkAddPoints.SetParameter(New RParameter("first_point", 1))
         ucrChkAddPoints.SetText("Add Points")
-        ucrChkAddPoints.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkAddPoints.SetRDefault("TRUE")
+        'ucrChkAddPoints.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        ucrChkAddPoints.Checked = True
 
         ucrChkHorizontal.SetParameter(New RParameter("coord_flip", 1))
         ucrChkHorizontal.SetText("Horizontal Orientation")
-        ucrChkHorizontal.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkHorizontal.SetRDefault("FALSE")
+        'ucrChkHorizontal.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+        'ucrChkHorizontal.SetRDefault("FALSE")
 
         ucrSaveScatterPlot.SetPrefix("scatterplot")
         ucrSaveScatterPlot.SetSaveTypeAsGraph()
@@ -200,6 +205,7 @@ Public Class dlgScatterPlot
         clsFlipCoordinateFunction = New RFunction
 
         rdoPoints.Checked = True
+        rdoSimple.Checked = True
 
         ucrSelectorForScatter.Reset()
         ucrSelectorForScatter.SetGgplotFunction(clsBaseOperator)
@@ -297,8 +303,7 @@ Public Class dlgScatterPlot
         ucrReceiverYStart.AddAdditionalCodeParameterPair(clsFirstPointaesFunction, New RParameter("y", 2), iAdditionalPairNo:=1)
         ucrReceiverYStart.AddAdditionalCodeParameterPair(clsSecondPointaesFunction, New RParameter("y", 2), iAdditionalPairNo:=2)
 
-        ucrChkAddPoints.AddAdditionalCodeParameterPair(clsSecondPlusOperator, New RParameter("first_point", 0), iAdditionalPairNo:=1)
-        ucrChkAddPoints.AddAdditionalCodeParameterPair(clsThirdPlusOperator, New RParameter("first_point", 0), iAdditionalPairNo:=2)
+        'ucrChkAddPoints.AddAdditionalCodeParameterPair(clsThirdPlusOperator, New RParameter("first_point", 0), iAdditionalPairNo:=2)
 
         ucrSelectorForScatter.SetRCode(clsRggplotFunction, bReset)
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
@@ -314,8 +319,8 @@ Public Class dlgScatterPlot
         ucrReceiverYStart.SetRCode(clsSegmentaesFunction, bReset)
         ucrReceiverYEnd.SetRCode(clsSegmentaesFunction, bReset)
 
-        ucrChkHorizontal.SetRCode(clsThirdPlusOperator, bReset)
-        ucrChkAddPoints.SetRCode(clsFirstggPointFunction, bReset)
+        'ucrChkHorizontal.SetRCode(clsThirdPlusOperator, bReset)
+        'ucrChkAddPoints.SetRCode(clsFirstPlusOperator, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -396,7 +401,7 @@ Public Class dlgScatterPlot
         ' CheckIfNumeric()
     End Sub
 
-    Private Sub ucrPnlType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlValueChanged
+    Private Sub ucrPnlType_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlType.ControlValueChanged, ucrChkAddPoints.ControlValueChanged, ucrChkHorizontal.ControlValueChanged, ucrPnlPlotType.ControlValueChanged
         If rdoSegments.Checked Then
             cmdScatterPlotOptions.Visible = False
             cmdOptions.Visible = False
@@ -411,11 +416,7 @@ Public Class dlgScatterPlot
                 ucrSaveScatterPlot.SetPrefix("lollipop")
             End If
 
-            clsRggplotFunction.RemoveParameterByName("mapping")
-            clsBaseOperator.RemoveParameterByName(strFirstParameterName)
-
             If Not ucrChkAddPoints.Checked Then
-                clsBaseOperator.RemoveParameterByName("first_plus")
                 If Not ucrChkHorizontal.Checked Then
                     clsBaseOperator.RemoveParameterByName("third_plus")
                     clsBaseOperator.AddParameter("segment", clsRFunctionParameter:=clsSegmentggplotFunction, iPosition:=1)
@@ -428,11 +429,8 @@ Public Class dlgScatterPlot
                     clsThirdPlusOperator.AddParameter("segment", clsRFunctionParameter:=clsSegmentggplotFunction, iPosition:=0)
                     clsThirdPlusOperator.AddParameter("coord_flip", clsRFunctionParameter:=clsFlipCoordinateFunction, iPosition:=1)
                 End If
+                clsBaseOperator.RemoveParameterByName("first_plus")
             Else
-                clsBaseOperator.RemoveParameterByName("segment")
-                clsBaseOperator.RemoveParameterByName("third_plus")
-                clsBaseOperator.AddParameter("first_plus", clsROperatorParameter:=clsFirstPlusOperator, iPosition:=1)
-                clsFirstPlusOperator.AddParameter("segment", clsRFunctionParameter:=clsSegmentggplotFunction, iPosition:=0)
                 If rdoSimple.Checked Then
                     clsFirstPlusOperator.RemoveParameterByName("second_plus")
                     If Not ucrChkHorizontal.Checked Then
@@ -448,22 +446,35 @@ Public Class dlgScatterPlot
                         clsThirdPlusOperator.AddParameter("coord_flip", clsRFunctionParameter:=clsFlipCoordinateFunction, iPosition:=1)
                     End If
                 Else
+                    clsFirstPlusOperator.RemoveParameterByName("first_point")
+                    clsFirstPlusOperator.RemoveParameterByName("third_plus")
                     clsFirstPlusOperator.AddParameter("second_plus", clsROperatorParameter:=clsSecondPlusOperator, iPosition:=1)
                     clsSecondPlusOperator.AddParameter("first_point", clsRFunctionParameter:=clsFirstggPointFunction, iPosition:=0)
-                    If Not ucrChkHorizontal.Checked Then
+                    If rdoDouble.Checked Then
+                        If Not ucrChkHorizontal.Checked Then
+                            clsSecondPlusOperator.RemoveParameterByName("third_plus")
+                            clsSecondPlusOperator.AddParameter("second_point", clsRFunctionParameter:=clsSecondggPointFunction, iPosition:=1)
+                        Else
+                            clsSecondPlusOperator.RemoveParameterByName("second_point")
+                            clsSecondPlusOperator.AddParameter("third_plus", clsROperatorParameter:=clsThirdPlusOperator, iPosition:=1)
+
+                            clsThirdPlusOperator.RemoveParameterByName("segment")
+                            clsThirdPlusOperator.RemoveParameterByName("first_point")
+                            clsThirdPlusOperator.AddParameter("second_point", clsRFunctionParameter:=clsSecondggPointFunction, iPosition:=0)
+                            clsThirdPlusOperator.AddParameter("coord_flip", clsRFunctionParameter:=clsFlipCoordinateFunction, iPosition:=1)
+                        End If
+                    ElseIf rdoDiagonal.Checked Then
                         clsSecondPlusOperator.RemoveParameterByName("third_plus")
                         clsSecondPlusOperator.AddParameter("second_point", clsRFunctionParameter:=clsSecondggPointFunction, iPosition:=1)
-                    Else
-                        clsSecondPlusOperator.RemoveParameterByName("second_point")
-                        clsSecondPlusOperator.AddParameter("third_plus", clsROperatorParameter:=clsThirdPlusOperator, iPosition:=1)
-
-                        clsThirdPlusOperator.RemoveParameterByName("segment")
-                        clsThirdPlusOperator.RemoveParameterByName("first_point")
-                        clsThirdPlusOperator.AddParameter("second_point", clsRFunctionParameter:=clsSecondggPointFunction, iPosition:=0)
-                        clsThirdPlusOperator.AddParameter("coord_flip", clsRFunctionParameter:=clsFlipCoordinateFunction, iPosition:=1)
                     End If
                 End If
+                clsBaseOperator.RemoveParameterByName("segment")
+                clsBaseOperator.RemoveParameterByName("third_plus")
+                clsBaseOperator.AddParameter("first_plus", clsROperatorParameter:=clsFirstPlusOperator, iPosition:=1)
+                clsFirstPlusOperator.AddParameter("segment", clsRFunctionParameter:=clsSegmentggplotFunction, iPosition:=0)
             End If
+            clsRggplotFunction.RemoveParameterByName("mapping")
+            clsBaseOperator.RemoveParameterByName(strFirstParameterName)
         Else
             grpLollipopType.Visible = False
             cmdScatterPlotOptions.Visible = True

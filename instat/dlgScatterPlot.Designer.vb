@@ -70,6 +70,7 @@ Partial Class dlgScatterPlot
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrChkHorizontal = New instat.ucrCheck()
+        Me.ucrPnlPlotType = New instat.UcrPanel()
         Me.grpLollipopType.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -153,6 +154,7 @@ Partial Class dlgScatterPlot
         Me.grpLollipopType.Controls.Add(Me.rdoDiagonal)
         Me.grpLollipopType.Controls.Add(Me.rdoDouble)
         Me.grpLollipopType.Controls.Add(Me.rdoSimple)
+        Me.grpLollipopType.Controls.Add(Me.ucrPnlPlotType)
         resources.ApplyResources(Me.grpLollipopType, "grpLollipopType")
         Me.grpLollipopType.Name = "grpLollipopType"
         Me.grpLollipopType.TabStop = False
@@ -298,6 +300,11 @@ Partial Class dlgScatterPlot
         resources.ApplyResources(Me.ucrChkHorizontal, "ucrChkHorizontal")
         Me.ucrChkHorizontal.Name = "ucrChkHorizontal"
         '
+        'ucrPnlPlotType
+        '
+        resources.ApplyResources(Me.ucrPnlPlotType, "ucrPnlPlotType")
+        Me.ucrPnlPlotType.Name = "ucrPnlPlotType"
+        '
         'dlgScatterPlot
         '
         resources.ApplyResources(Me, "$this")
@@ -372,4 +379,5 @@ Partial Class dlgScatterPlot
     Friend WithEvents rdoDouble As RadioButton
     Friend WithEvents rdoSimple As RadioButton
     Friend WithEvents ucrChkHorizontal As ucrCheck
+    Friend WithEvents ucrPnlPlotType As UcrPanel
 End Class

@@ -546,6 +546,27 @@
   <data name="&gt;&gt;rdoSimple.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrPnlPlotType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 18</value>
+  </data>
+  <data name="ucrPnlPlotType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>131, 62</value>
+  </data>
+  <data name="ucrPnlPlotType.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlPlotType.Name" xml:space="preserve">
+    <value>ucrPnlPlotType</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlPlotType.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlPlotType.Parent" xml:space="preserve">
+    <value>grpLollipopType</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlPlotType.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="grpLollipopType.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 238</value>
   </data>
