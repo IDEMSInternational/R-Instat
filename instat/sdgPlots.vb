@@ -79,7 +79,6 @@ Public Class sdgPlots
         Dim dctFillOptions As New Dictionary(Of String, String)
         Dim dctColourOptions As New Dictionary(Of String, String)
         Dim dctAnnotationGeom As New Dictionary(Of String, String)
-        Dim dctAnnotationFill As New Dictionary(Of String, String)
 
         Dim strThemes As String()
 
@@ -433,21 +432,11 @@ Public Class sdgPlots
         ucrInputAnnotationGeoms.SetItems(dctAnnotationGeom)
         ucrInputAnnotationGeoms.SetLinkedDisplayControl(lblAnnotationGeoms)
 
-        dctAnnotationFill.Add("Black", Chr(34) & "black" & Chr(34))
-        dctAnnotationFill.Add("Red", Chr(34) & "red" & Chr(34))
-        dctAnnotationFill.Add("Blue", Chr(34) & "blue" & Chr(34))
-        dctAnnotationFill.Add("Yellow", Chr(34) & "yellow" & Chr(34))
-        dctAnnotationFill.Add("Green", Chr(34) & "green" & Chr(34))
-        dctAnnotationFill.Add("Violet", Chr(34) & "violet" & Chr(34))
-        dctAnnotationFill.Add("White", Chr(34) & "white" & Chr(34))
-
         ucrInputFill.SetParameter(New RParameter("fill", 16))
-        ucrInputFill.SetItems(dctAnnotationFill)
         ucrInputFill.SetRDefault(Chr(34) & "black" & Chr(34))
         ucrInputFill.SetLinkedDisplayControl(lblFill)
 
         ucrInputColour.SetParameter(New RParameter("colour", 17))
-        ucrInputColour.SetItems(dctAnnotationFill)
         ucrInputColour.SetLinkedDisplayControl(lblColour)
         ucrInputColour.SetRDefault(Chr(34) & "black" & Chr(34))
 
@@ -1098,5 +1087,25 @@ Public Class sdgPlots
             clsBaseOperator.RemoveParameterByName("annotate")
             grpAnnotation.Visible = False
         End If
+    End Sub
+
+    Private Sub ucrChkIncludeFacets_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeFacets.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged, ucr1stFactorReceiver.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrChkFreeSpace_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeSpace.ControlValueChanged
+
+    End Sub
+
+    Private Sub chkScales_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScalesY.ControlValueChanged, ucrChkFreeScalesX.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrPnlHorizonatalVertical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHorizonatalVertical.ControlValueChanged, ucrChkMargin.ControlValueChanged
+
+    End Sub
+
+    Private Sub LabsControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
+
     End Sub
 End Class

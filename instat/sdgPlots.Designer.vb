@@ -80,7 +80,6 @@ Partial Class sdgPlots
         Me.ucrYAxis = New instat.ucrAxes()
         Me.tbpTheme = New System.Windows.Forms.TabPage()
         Me.cmdSimpleOptions = New System.Windows.Forms.Button()
-        Me.urChkSelectTheme = New instat.ucrCheck()
         Me.grpCommonOptions = New System.Windows.Forms.GroupBox()
         Me.ucrNudYaxisMarkSize = New instat.ucrNud()
         Me.ucrNudXaxisMarkSize = New instat.ucrNud()
@@ -96,6 +95,7 @@ Partial Class sdgPlots
         Me.ucrChkLegendPosition = New instat.ucrCheck()
         Me.lblFont = New System.Windows.Forms.Label()
         Me.cmdAllOptions = New System.Windows.Forms.Button()
+        Me.urChkSelectTheme = New instat.ucrCheck()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.tbpCoordinates = New System.Windows.Forms.TabPage()
         Me.grpPolarCordinates = New System.Windows.Forms.GroupBox()
@@ -136,6 +136,7 @@ Partial Class sdgPlots
         Me.tbpAnnotation = New System.Windows.Forms.TabPage()
         Me.ucrChkAnnotation = New instat.ucrCheck()
         Me.grpAnnotation = New System.Windows.Forms.GroupBox()
+        Me.ucrInputColour = New instat.ucrColors()
         Me.lblCurvature = New System.Windows.Forms.Label()
         Me.ucrNudAlpha = New instat.ucrNud()
         Me.lblAlpha = New System.Windows.Forms.Label()
@@ -148,7 +149,6 @@ Partial Class sdgPlots
         Me.lblSize = New System.Windows.Forms.Label()
         Me.ucrNudSize = New instat.ucrNud()
         Me.lblColour = New System.Windows.Forms.Label()
-        Me.ucrInputColour = New instat.ucrInputComboBox()
         Me.lblY = New System.Windows.Forms.Label()
         Me.lblX = New System.Windows.Forms.Label()
         Me.lblFill = New System.Windows.Forms.Label()
@@ -175,11 +175,11 @@ Partial Class sdgPlots
         Me.lblLabel = New System.Windows.Forms.Label()
         Me.ucrInputLabel = New instat.ucrInputTextBox()
         Me.ucrInputLineend = New instat.ucrInputComboBox()
-        Me.ucrInputFill = New instat.ucrInputComboBox()
         Me.ucrInputY = New instat.ucrInputTextBox()
         Me.ucrInputX = New instat.ucrInputTextBox()
         Me.ucrReceiverY = New instat.ucrReceiverSingle()
         Me.ucrBaseSubdialog = New instat.ucrButtonsSubdialogue()
+        Me.ucrInputFill = New instat.ucrColors()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpFacet.SuspendLayout()
         Me.tbpLayers.SuspendLayout()
@@ -497,10 +497,10 @@ Partial Class sdgPlots
         'tbpTheme
         '
         Me.tbpTheme.Controls.Add(Me.cmdSimpleOptions)
-        Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
         Me.tbpTheme.Controls.Add(Me.grpCommonOptions)
         Me.tbpTheme.Controls.Add(Me.lblFont)
         Me.tbpTheme.Controls.Add(Me.cmdAllOptions)
+        Me.tbpTheme.Controls.Add(Me.urChkSelectTheme)
         Me.tbpTheme.Controls.Add(Me.ucrInputThemes)
         resources.ApplyResources(Me.tbpTheme, "tbpTheme")
         Me.tbpTheme.Name = "tbpTheme"
@@ -512,12 +512,6 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.cmdSimpleOptions, "cmdSimpleOptions")
         Me.cmdSimpleOptions.Name = "cmdSimpleOptions"
         Me.cmdSimpleOptions.UseVisualStyleBackColor = True
-        '
-        'urChkSelectTheme
-        '
-        Me.urChkSelectTheme.Checked = False
-        resources.ApplyResources(Me.urChkSelectTheme, "urChkSelectTheme")
-        Me.urChkSelectTheme.Name = "urChkSelectTheme"
         '
         'grpCommonOptions
         '
@@ -641,6 +635,12 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.cmdAllOptions, "cmdAllOptions")
         Me.cmdAllOptions.Name = "cmdAllOptions"
         Me.cmdAllOptions.UseVisualStyleBackColor = True
+        '
+        'urChkSelectTheme
+        '
+        Me.urChkSelectTheme.Checked = False
+        resources.ApplyResources(Me.urChkSelectTheme, "urChkSelectTheme")
+        Me.urChkSelectTheme.Name = "urChkSelectTheme"
         '
         'ucrInputThemes
         '
@@ -938,6 +938,8 @@ Partial Class sdgPlots
         '
         'grpAnnotation
         '
+        Me.grpAnnotation.Controls.Add(Me.ucrInputFill)
+        Me.grpAnnotation.Controls.Add(Me.ucrInputColour)
         Me.grpAnnotation.Controls.Add(Me.lblCurvature)
         Me.grpAnnotation.Controls.Add(Me.ucrNudAlpha)
         Me.grpAnnotation.Controls.Add(Me.lblAlpha)
@@ -950,7 +952,6 @@ Partial Class sdgPlots
         Me.grpAnnotation.Controls.Add(Me.lblSize)
         Me.grpAnnotation.Controls.Add(Me.ucrNudSize)
         Me.grpAnnotation.Controls.Add(Me.lblColour)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputColour)
         Me.grpAnnotation.Controls.Add(Me.lblY)
         Me.grpAnnotation.Controls.Add(Me.lblX)
         Me.grpAnnotation.Controls.Add(Me.lblFill)
@@ -977,13 +978,20 @@ Partial Class sdgPlots
         Me.grpAnnotation.Controls.Add(Me.lblLabel)
         Me.grpAnnotation.Controls.Add(Me.ucrInputLabel)
         Me.grpAnnotation.Controls.Add(Me.ucrInputLineend)
-        Me.grpAnnotation.Controls.Add(Me.ucrInputFill)
         Me.grpAnnotation.Controls.Add(Me.ucrInputY)
         Me.grpAnnotation.Controls.Add(Me.ucrInputX)
         Me.grpAnnotation.Controls.Add(Me.ucrReceiverY)
         resources.ApplyResources(Me.grpAnnotation, "grpAnnotation")
         Me.grpAnnotation.Name = "grpAnnotation"
         Me.grpAnnotation.TabStop = False
+        '
+        'ucrInputColour
+        '
+        Me.ucrInputColour.AddQuotesIfUnrecognised = True
+        Me.ucrInputColour.GetSetSelectedIndex = -1
+        Me.ucrInputColour.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputColour, "ucrInputColour")
+        Me.ucrInputColour.Name = "ucrInputColour"
         '
         'lblCurvature
         '
@@ -1062,14 +1070,6 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.lblColour, "lblColour")
         Me.lblColour.Name = "lblColour"
-        '
-        'ucrInputColour
-        '
-        Me.ucrInputColour.AddQuotesIfUnrecognised = True
-        Me.ucrInputColour.GetSetSelectedIndex = -1
-        Me.ucrInputColour.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputColour, "ucrInputColour")
-        Me.ucrInputColour.Name = "ucrInputColour"
         '
         'lblY
         '
@@ -1250,14 +1250,6 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.ucrInputLineend, "ucrInputLineend")
         Me.ucrInputLineend.Name = "ucrInputLineend"
         '
-        'ucrInputFill
-        '
-        Me.ucrInputFill.AddQuotesIfUnrecognised = True
-        Me.ucrInputFill.GetSetSelectedIndex = -1
-        Me.ucrInputFill.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFill, "ucrInputFill")
-        Me.ucrInputFill.Name = "ucrInputFill"
-        '
         'ucrInputY
         '
         Me.ucrInputY.AddQuotesIfUnrecognised = True
@@ -1287,6 +1279,14 @@ Partial Class sdgPlots
         '
         resources.ApplyResources(Me.ucrBaseSubdialog, "ucrBaseSubdialog")
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
+        '
+        'ucrInputFill
+        '
+        Me.ucrInputFill.AddQuotesIfUnrecognised = True
+        Me.ucrInputFill.GetSetSelectedIndex = -1
+        Me.ucrInputFill.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFill, "ucrInputFill")
+        Me.ucrInputFill.Name = "ucrInputFill"
         '
         'sdgPlots
         '
@@ -1439,12 +1439,10 @@ Partial Class sdgPlots
     Friend WithEvents lblSize As Label
     Friend WithEvents ucrNudSize As ucrNud
     Friend WithEvents lblColour As Label
-    Friend WithEvents ucrInputColour As ucrInputComboBox
     Friend WithEvents ucrInputX As ucrInputTextBox
     Friend WithEvents ucrInputY As ucrInputTextBox
     Friend WithEvents lblY As Label
     Friend WithEvents lblX As Label
-    Friend WithEvents ucrInputFill As ucrInputComboBox
     Friend WithEvents lblFill As Label
     Friend WithEvents lblXmax As Label
     Friend WithEvents ucrInputXmax As ucrInputTextBox
@@ -1470,6 +1468,8 @@ Partial Class sdgPlots
     Friend WithEvents ucrNudLinetype As ucrNud
     Friend WithEvents lblLinetype As Label
     Friend WithEvents ucrReceiverY As ucrReceiverSingle
+    Friend WithEvents ucrInputColour As ucrColors
+    Friend WithEvents ucrInputFill As ucrColors
 End Class
 
 
