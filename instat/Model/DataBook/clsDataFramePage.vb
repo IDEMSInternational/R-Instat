@@ -1,19 +1,33 @@
-﻿Imports RDotNet
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports RDotNet
+
+''' <summary>
+''' Holds a subset dataset for the dataframe
+''' </summary>
 Public Class clsDataFramePage
-
     Private _intRowStart As Integer
     Private _intColumnStart As Integer
     Private _intTotalRowCount As Integer
     Private _intTotalColumnCount As Integer
-    Private _intNoOfColumnPages As Integer
-    Private _intNoOfRowPages As Integer
     Private _strDataFrameName As String
-
     Private _RLink As RLink
     Private _dataFrame As DataFrame
-
-    Protected _lstColumns As List(Of clsColumnHeaderDisplay)
+    Private _lstColumns As List(Of clsColumnHeaderDisplay)
 
     Private ReadOnly Property intColumnIncrements As Integer
         Get
@@ -25,65 +39,86 @@ Public Class clsDataFramePage
             Return frmMain.clsInstatOptions.iMaxRows
         End Get
     End Property
-
-
+    ''' <summary>
+    ''' List of columns within the visible page
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property lstColumns() As List(Of clsColumnHeaderDisplay)
         Get
             Return _lstColumns
         End Get
     End Property
-
+    ''' <summary>
+    ''' Starting row of the visible page
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property intStartRow As Integer
         Get
             Return _intRowStart
         End Get
     End Property
+    ''' <summary>
+    ''' End row of the visible page
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property intEndRow As Integer
         Get
             Return _intRowStart + _dataFrame.RowCount - 1
         End Get
     End Property
-
+    ''' <summary>
+    ''' Start column of the visible page
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property intStartColumn As Integer
         Get
             Return _intColumnStart
         End Get
     End Property
+    ''' <summary>
+    ''' End column of the visible page
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property intEndColumn As Integer
         Get
             Return _intColumnStart + _dataFrame.ColumnCount - 1
         End Get
     End Property
-
-
+    ''' <summary>
+    ''' Contents of the dataframe for a given cell
+    ''' </summary>
+    ''' <param name="row"></param>
+    ''' <param name="column"></param>
+    ''' <returns></returns>
     Public ReadOnly Property Data(row As Integer, column As Integer) As Object
         Get
             Return _dataFrame(row, column)
         End Get
     End Property
+    ''' <summary>
+    ''' Row name of the dataframe for a given row
+    ''' </summary>
+    ''' <param name="row"></param>
+    ''' <returns></returns>
     Public ReadOnly Property RowName(row As Integer) As String
         Get
             Return _dataFrame.RowNames(row)
         End Get
     End Property
-
-    Public ReadOnly Property ColumnName(column As Integer) As String
-        Get
-            Return _dataFrame.ColumnNames(column)
-        End Get
-    End Property
+    ''' <summary>
+    ''' Total number of rows for the visible page
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property DisplayedRowCount As Integer
         Get
             Return _dataFrame.RowCount
         End Get
     End Property
-
-    Public ReadOnly Property DisplayedColumnCount() As Integer
-        Get
-            Return _dataFrame.ColumnCount
-        End Get
-    End Property
-
+    ''' <summary>
+    ''' Create a new instance of a dataframe page
+    ''' </summary>
+    ''' <param name="rLink"></param>
+    ''' <param name="strDataFrameName"></param>
     Public Sub New(rLink As RLink, strDataFrameName As String)
         _RLink = rLink
         _strDataFrameName = strDataFrameName
@@ -91,8 +126,10 @@ Public Class clsDataFramePage
         _intColumnStart = 1
         _intRowStart = 1
     End Sub
-
-
+    ''' <summary>
+    ''' Refreshes data. Note: always refreshes regardless whether dataset has changed.
+    ''' </summary>
+    ''' <returns></returns>
     Public Function RefreshData()
         _dataFrame = GetDataFrameFromRCommand()
         If _dataFrame IsNot Nothing Then
@@ -100,13 +137,25 @@ Public Class clsDataFramePage
         End If
         Return _dataFrame IsNot Nothing 'Returns a success value
     End Function
-
-    Public Sub CreatePages(intTotalColumns As Integer, intTotalRows As Integer)
+    ''' <summary>
+    ''' Update the total rows and columns for the dataset so paging can be set
+    ''' </summary>
+    ''' <param name="intTotalColumns"></param>
+    ''' <param name="intTotalRows"></param>
+    Public Sub SetTotalRowAndColumnCounts(intTotalColumns As Integer, intTotalRows As Integer)
         _intTotalRowCount = intTotalRows
         _intTotalColumnCount = intTotalColumns
-        _intNoOfRowPages = Math.Ceiling(_intTotalRowCount / intRowIncrements)
-        _intNoOfColumnPages = Math.Ceiling(_intTotalColumnCount / intColumnIncrements)
     End Sub
+
+    Private Function GetNoOfRowPages() As Integer
+        'Needs to be a function as the number of increments can be changed through options 
+        Return Math.Ceiling(_intTotalRowCount / intRowIncrements)
+    End Function
+
+    Private Function GetNoOfColumnPages() As Integer
+        'Needs to be a function as the number of increments can be changed through options 
+        Return Math.Ceiling(_intTotalColumnCount / intColumnIncrements)
+    End Function
 
     Private Function GetDataFrameFromRCommand() As DataFrame
         Dim clsGetDataFrame As New RFunction
@@ -116,9 +165,9 @@ Public Class clsDataFramePage
         clsGetDataFrame.AddParameter("include_hidden_columns", "FALSE")
         clsGetDataFrame.AddParameter("use_current_filter", "TRUE")
         clsGetDataFrame.AddParameter("max_cols", intColumnIncrements)
-        clsGetDataFrame.AddParameter("max_rows", intRowIncrements - 1)
+        clsGetDataFrame.AddParameter("max_rows", intRowIncrements)
         clsGetDataFrame.AddParameter("start_row", _intRowStart)
-        clsGetDataFrame.AddParameter("start_cols", _intColumnStart)
+        clsGetDataFrame.AddParameter("start_col", _intColumnStart)
         clsGetDataFrame.AddParameter("data_name", Chr(34) & _strDataFrameName & Chr(34))
         expTemp = _RLink.RunInternalScriptGetValue(clsGetDataFrame.ToScript(), bSilent:=True)
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
@@ -155,24 +204,31 @@ Public Class clsDataFramePage
     End Function
     Private Function GetColumnDispayDetails(strHeaderName As String, strHeaderType As String) As clsColumnHeaderDisplay
         Dim columnHeader As clsColumnHeaderDisplay
-        columnHeader = New clsColumnHeaderDisplay With {.Name = strHeaderName, .IsFactor = False, .Colour = Color.DarkBlue, .BackGroundColour = Nothing}
+        columnHeader = New clsColumnHeaderDisplay With
+                            {
+                                .Name = strHeaderName,
+                                .TypeShortCode = "",
+                                .IsFactor = False,
+                                .Colour = Color.DarkBlue,
+                                .BackGroundColour = Nothing
+                            }
         If strHeaderType.Contains("factor") AndAlso strHeaderType.Contains("ordered") Then
-            columnHeader.Name &= " (O.F)"
+            columnHeader.TypeShortCode = "(O.F)"
             columnHeader.Colour = Color.Blue
             columnHeader.IsFactor = True
         ElseIf strHeaderType.Contains("factor") Then
-            columnHeader.Name &= " (F)"
+            columnHeader.TypeShortCode = "(F)"
             columnHeader.Colour = Color.Blue
             columnHeader.IsFactor = True
         ElseIf strHeaderType.Contains("character") Then
-            columnHeader.Name &= " (C)"
+            columnHeader.TypeShortCode = "(C)"
         ElseIf strHeaderType.Contains("Date") OrElse strHeaderType.Contains("POSIXct") OrElse strHeaderType.Contains("POSIXt") OrElse strHeaderType.Contains("hms") OrElse strHeaderType.Contains("difftime") OrElse strHeaderType.Contains("Duration") OrElse strHeaderType.Contains("Period") OrElse strHeaderType.Contains("Interval") Then
-            columnHeader.Name &= " (D)"
+            columnHeader.TypeShortCode = "(D)"
         ElseIf strHeaderType.Contains("logical") Then
-            columnHeader.Name &= " (L)"
+            columnHeader.TypeShortCode = "(L)"
             ' Structured columns e.g. "circular" are coded with "(S)"
         ElseIf strHeaderType.Contains("circular") Then
-            columnHeader.Name &= " (S)"
+            columnHeader.TypeShortCode = "(S)"
             ' Types of data for specific Application areas e.g. survival are coded with "(A)"
             ' No examples implemented yet.
             'ElseIf strType.Contains() Then
@@ -211,61 +267,101 @@ Public Class clsDataFramePage
             Return Nothing
         End If
     End Function
-
+    ''' <summary>
+    ''' Does a next page exist for rows
+    ''' </summary>
+    ''' <returns></returns>
     Public Function CanLoadNextRowPage() As Boolean
-        Return _intRowStart + intRowIncrements < _intTotalRowCount
+        Return intEndRow < _intTotalRowCount
     End Function
+    ''' <summary>
+    ''' Load the next row page
+    ''' </summary>
     Public Sub LoadNextRowPage()
-        If _intRowStart + intRowIncrements < _intTotalRowCount Then
+        If CanLoadNextRowPage() Then
             _intRowStart += intRowIncrements
             _dataFrame = GetDataFrameFromRCommand()
         End If
     End Sub
+    ''' <summary>
+    ''' Does a previous page exist for rows
+    ''' </summary>
+    ''' <returns></returns>
     Public Function CanLoadPreviousRowPage() As Boolean
         Return _intRowStart - intRowIncrements >= 0
     End Function
+    ''' <summary>
+    ''' Load the previous row page
+    ''' </summary>
     Public Sub LoadPreviousRowPage()
         If _intRowStart - intRowIncrements >= 0 Then
             _intRowStart -= intRowIncrements
             _dataFrame = GetDataFrameFromRCommand()
         End If
     End Sub
-
+    ''' <summary>
+    ''' Load last row page
+    ''' </summary>
     Public Sub LoadLastRowPage()
-        _intRowStart = (intRowIncrements * (_intNoOfRowPages - 1)) + 1
+        _intRowStart = (intRowIncrements * (GetNoOfRowPages() - 1)) + 1
         _dataFrame = GetDataFrameFromRCommand()
     End Sub
+    ''' <summary>
+    ''' Load first row page
+    ''' </summary>
     Public Sub LoadFirstRowPage()
         _intRowStart = 1
         _dataFrame = GetDataFrameFromRCommand()
     End Sub
-
+    ''' <summary>
+    ''' Does the next column page exist
+    ''' </summary>
+    ''' <returns></returns>
     Public Function CanLoadNextColumnPage() As Boolean
-        Return _intColumnStart + intColumnIncrements < _intTotalColumnCount
+        Return intEndColumn < _intTotalColumnCount
     End Function
+    ''' <summary>
+    ''' Load the next column page
+    ''' </summary>
     Public Sub LoadNextColumnPage()
-        If _intColumnStart + intColumnIncrements < _intTotalColumnCount Then
+        If CanLoadNextColumnPage() Then
             _intColumnStart += intColumnIncrements
             _dataFrame = GetDataFrameFromRCommand()
+            SetHeaders()
         End If
     End Sub
+    ''' <summary>
+    ''' Does the previous column page exist
+    ''' </summary>
+    ''' <returns></returns>
     Public Function CanLoadPreviousColumnPage() As Boolean
         Return _intColumnStart - intColumnIncrements >= 0
     End Function
+    ''' <summary>
+    ''' Load previous column page
+    ''' </summary>
     Public Sub LoadPreviousColumnPage()
         If _intColumnStart - intColumnIncrements >= 0 Then
             _intColumnStart -= intColumnIncrements
             _dataFrame = GetDataFrameFromRCommand()
+            SetHeaders()
         End If
     End Sub
-
+    ''' <summary>
+    ''' Load last column page
+    ''' </summary>
     Public Sub LoadLastColumnPage()
-        _intColumnStart = (intColumnIncrements * (_intNoOfColumnPages - 1)) + 1
+        _intColumnStart = (intColumnIncrements * (GetNoOfColumnPages() - 1)) + 1
         _dataFrame = GetDataFrameFromRCommand()
+        SetHeaders()
     End Sub
+    ''' <summary>
+    ''' Load first column page
+    ''' </summary>
     Public Sub LoadFirstColumnPage()
         _intColumnStart = 1
         _dataFrame = GetDataFrameFromRCommand()
+        SetHeaders()
     End Sub
 
 

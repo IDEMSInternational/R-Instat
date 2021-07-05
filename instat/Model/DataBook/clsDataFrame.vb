@@ -1,90 +1,136 @@
-﻿Imports RDotNet
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+
+Imports RDotNet
+
+''' <summary>
+''' Holds data for the dataframe so that it can be displayed. 
+''' </summary>
 Public Class clsDataFrame
     Private _clsPrepareFunctions As clsPrepareFunctionsForGrids
     Private _clsVisiblePage As clsDataFramePage
     Private _clsColumnMetaData As clsColumnMetaData
     Private _clsFilter As clsDataFrameFilter
-    Protected _name As String
-    Protected _RLink As RLink
-    '  Protected _columnHeaders As List(Of clsColumnHeaderDisplay)
-    Protected _totalRowCount As Integer
-    Protected _totalColumnCount As Integer
-
-
-
-
+    Private _strName As String
+    Private _RLink As RLink
+    Private _intTotalRowCount As Integer
+    Private _intTotalColumnCount As Integer
     ''' <summary>
-    ''' 
+    ''' Filter information
     ''' </summary>
     ''' <returns></returns>
-    ''' 
     Public ReadOnly Property Filter() As clsDataFrameFilter
         Get
             Return _clsFilter
         End Get
     End Property
+    ''' <summary>
+    ''' Simple R functions that can be called from the gird
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property clsPrepareFunctions As clsPrepareFunctionsForGrids
         Get
             Return _clsPrepareFunctions
         End Get
     End Property
-
+    ''' <summary>
+    ''' Column meta data for the dataframe
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property clsColumnMetaData As clsColumnMetaData
         Get
             Return _clsColumnMetaData
         End Get
     End Property
-
+    ''' <summary>
+    ''' Name of the dataframe
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property Name() As String
         Get
-            Return _name
+            Return _strName
         End Get
     End Property
+    ''' <summary>
+    ''' Returns the data in a specific cell as an object
+    ''' </summary>
+    ''' <param name="row"></param>
+    ''' <param name="column"></param>
+    ''' <returns></returns>
     Public ReadOnly Property Data(row As Integer, column As Integer) As Object
         Get
             Return _clsVisiblePage.Data(row, column)
         End Get
     End Property
+    ''' <summary>
+    ''' Returns the row name for a specific row
+    ''' </summary>
+    ''' <param name="row"></param>
+    ''' <returns></returns>
     Public ReadOnly Property RowName(row As Integer) As String
         Get
             Return _clsVisiblePage.RowName(row)
         End Get
     End Property
+    ''' <summary>
+    ''' Returns how many rows are contained in the visible page 
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property DisplayedRowCount As Integer
         Get
             Return _clsVisiblePage.DisplayedRowCount
         End Get
     End Property
+    ''' <summary>
+    ''' Returns the total rows for the dataframe
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property TotalRowCount() As Integer
         Get
-            Return _totalRowCount
+            Return _intTotalRowCount
         End Get
     End Property
+    ''' <summary>
+    ''' Returns the total column count for the dataframe
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property TotalColumnCount() As Integer
         Get
-            Return _totalColumnCount
+            Return _intTotalColumnCount
         End Get
     End Property
-
-
-
-    'Public ReadOnly Property ColumnHeaders() As List(Of clsColumnHeaderDisplay)
-    '    Get
-    '        Return _columnHeaders
-    '    End Get
-    'End Property
-
+    ''' <summary>
+    ''' Returns a subset of the dataframe
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property VisiblePage() As clsDataFramePage
         Get
             Return _clsVisiblePage
         End Get
     End Property
 
+    ''' <summary>
+    ''' Creates a new dataframe from the given name
+    ''' </summary>
+    ''' <param name="rLink"></param>
+    ''' <param name="name"></param>
     Public Sub New(rLink As RLink, name As String)
         _RLink = rLink
-        '_columnHeaders = New List(Of clsColumnHeaderDisplay)
-        _name = name
+        _strName = name
         _clsPrepareFunctions = New clsPrepareFunctionsForGrids(rLink, name)
         _clsVisiblePage = New clsDataFramePage(rLink, name)
         _clsFilter = New clsDataFrameFilter(rLink, name)
@@ -96,7 +142,7 @@ Public Class clsDataFrame
         Dim expTemp As SymbolicExpression
 
         clsDataChanged.SetRCommand(_RLink.strInstatDataObject & "$get_data_changed")
-        clsDataChanged.AddParameter("data_name", Chr(34) & _name & Chr(34))
+        clsDataChanged.AddParameter("data_name", Chr(34) & _strName & Chr(34))
         expTemp = _RLink.RunInternalScriptGetValue(clsDataChanged.ToScript())
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
             Return expTemp.AsLogical(0)
@@ -104,23 +150,16 @@ Public Class clsDataFrame
             Return False
         End If
     End Function
-
+    ''' <summary>
+    ''' Updates datframe where data has changed 
+    ''' </summary>
     Public Sub RefreshData()
-
-        ' _dataFrame = GetDataFrameFromRCommand()
-        ' _clsVisablePage.RefreshData()
         If HasDataChanged() Then
             If _clsVisiblePage.RefreshData() Then
-                _totalRowCount = _RLink.GetDataFrameLength(_name, False)
-                _totalColumnCount = _RLink.GetDataFrameColumnCount(_name)
-                _clsVisiblePage.CreatePages(_totalColumnCount, _totalRowCount)
+                _intTotalRowCount = _RLink.GetDataFrameLength(_strName, False)
+                _intTotalColumnCount = _RLink.GetDataFrameColumnCount(_strName)
+                _clsVisiblePage.SetTotalRowAndColumnCounts(_intTotalColumnCount, _intTotalRowCount)
                 _clsFilter.RefreshData()
-
-                '    SetHeaders()
-
-                'Not sure what to do here
-                'ucrDataViewer.SetColumnNames(strDataName, dfTemp.ColumnNames())
-
                 ResetDataFramesChanged()
             End If
         End If
@@ -130,73 +169,9 @@ Public Class clsDataFrame
     Private Sub ResetDataFramesChanged()
         Dim clsSetDataFramesChanged As New RFunction
         clsSetDataFramesChanged.SetRCommand(_RLink.strInstatDataObject & "$set_data_frames_changed")
-        clsSetDataFramesChanged.AddParameter("data_name", Chr(34) & _name & Chr(34))
+        clsSetDataFramesChanged.AddParameter("data_name", Chr(34) & _strName & Chr(34))
         clsSetDataFramesChanged.AddParameter("new_val", "FALSE")
         _RLink.RunInternalScript(clsSetDataFramesChanged.ToScript(), bSilent:=True)
     End Sub
-
-    'Protected Overridable Sub SetHeaders()
-    '    Dim lstColumnNames As List(Of String)
-    '    lstColumnNames = _dataFrame.ColumnNames.ToList
-    '    For i = 0 To lstColumnNames.Count - 1
-    '        _columnHeaders.Add(New clsColumnHeaderRecord(name:=lstColumnNames(i), colour:=Color.DarkBlue, backgroundColour:=Nothing))
-    '    Next
-    'End Sub
-
-
-
-
-
-
-
-
-    Protected Sub FillData()
-        Dim clsSetDataFramesChanged As New RFunction
-        clsSetDataFramesChanged.SetRCommand(_RLink.strInstatDataObject & "$set_data_frames_changed")
-        ' _dataFrame = GetDataFrameFromRCommand()
-        ' _clsVisablePage.RefreshData()
-        If _clsVisiblePage.RefreshData() Then
-            _totalRowCount = _RLink.GetDataFrameLength(_name, False)
-            _totalColumnCount = _RLink.GetDataFrameColumnCount(_name)
-            _clsVisiblePage.CreatePages(_totalColumnCount, _totalRowCount)
-            _clsFilter.RefreshData()
-            '    SetHeaders()
-
-            'Not sure what to do here
-            'ucrDataViewer.SetColumnNames(strDataName, dfTemp.ColumnNames())
-
-            clsSetDataFramesChanged.AddParameter("data_name", Chr(34) & _name & Chr(34))
-            clsSetDataFramesChanged.AddParameter("new_val", "FALSE")
-            _RLink.RunInternalScript(clsSetDataFramesChanged.ToScript(), bSilent:=True)
-        End If
-    End Sub
-
-
-    'Public Sub LoadNextRowPage()
-    '    _clsVisablePage.LoadNextRowPage()
-
-    '    'If _intRowStart + intRowIncrements < _totalRowCount Then
-    '    '    _intRowStart += intRowIncrements
-    '    '    '_dataFrame = GetDataFrameFromRCommand()
-    '    'End If
-    'End Sub
-
-    'Public Sub LoadPreviousRowPage()
-    '    'If _intRowStart - intRowIncrements >= 0 Then
-    '    '    _intRowStart -= intRowIncrements
-    '    '    ' _dataFrame = GetDataFrameFromRCommand()
-    '    'End If
-    'End Sub
-
-    'Public Sub LoadLastRowPage()
-    '    'Dim intPages As Integer
-    '    'intPages = Math.Ceiling(_totalRowCount / intRowIncrements)
-    '    '_intRowStart = intRowIncrements * (intPages - 1)
-    '    ''_dataFrame = GetDataFrameFromRCommand()
-    'End Sub
-    'Public Sub LoadFirstRowPage()
-    '    _intRowStart = 1
-    '    ' _dataFrame = GetDataFrameFromRCommand()
-    'End Sub
 
 End Class

@@ -300,7 +300,7 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
         }
       }
     }
-    if (!missing(start_col) && start_col < ncol(out)) #out <- out[start_col:max_cols]
+    if (!missing(start_col) && start_col <= ncol(out)) #out <- out[start_col:max_cols]
     {
         if (!missing(max_cols))
         {
@@ -308,7 +308,7 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
                 out <- out[start_col:ncol(out)]
             }
             else{
-                out <- out[start_col:(start_col + max_cols)]
+                out <- out[start_col:(start_col + max_cols - 1)]
             }
        }
        else{
@@ -317,17 +317,38 @@ DataSheet$set("public", "get_data_frame", function(convert_to_character = FALSE,
     }
     else
     if(!missing(max_cols) && max_cols < ncol(out)) out <- out[1:max_cols]
-    if (!missing(start_row) && start_row < nrow(out)) {
+    if (!missing(start_row) && start_row <= nrow(out)) {
         if (!missing(max_rows)){
             if (max_rows + start_row > nrow(out)){
-                out <- out[start_row:nrow(out), ]
+                if(ncol(out) == 1){
+                   rnames <- row.names(out)[start_row:nrow(out)]
+                    out <- as.data.frame(dplyr::slice(out,start_row:nrow(out)))
+                    row.names(out) <- rnames
+                } 
+                else { 
+                    out <- out[start_row:nrow(out), ]
+                }
             }
             else{
-                out <- out[start_row:(start_row + max_rows), ]
+                if(ncol(out) == 1){
+                    rnames <- row.names(out)[start_row:(start_row + max_rows - 1)]
+                    out <- as.data.frame(dplyr::slice(out,start_row:(start_row + max_rows - 1)))
+                    row.names(out) <- rnames
+                } 
+                else { 
+                    out <- out[start_row:(start_row + max_rows - 1), ]
+                }
             }
         }
         else{
-            out <- out[start_row:nrow(out), ]
+            if(ncol(out) == 1){
+                rnames <- row.names(out)[start_row:nrow(out)]
+                out <- as.data.frame(dplyr::slice(out,start_row:nrow(out)))
+                row.names(out) <- rnames
+            } 
+            else { 
+                out <- out[start_row:nrow(out), ]
+            }
         }
     }
     else 

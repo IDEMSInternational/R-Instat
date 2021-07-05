@@ -1,11 +1,33 @@
-﻿Imports RDotNet
+﻿' R- Instat
+' Copyright (C) 2015-2017
+'
+' This program is free software: you can redistribute it and/or modify
+' it under the terms of the GNU General Public License as published by
+' the Free Software Foundation, either version 3 of the License, or
+' (at your option) any later version.
+'
+' This program is distributed in the hope that it will be useful,
+' but WITHOUT ANY WARRANTY; without even the implied warranty of
+' MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+' GNU General Public License for more details.
+'
+' You should have received a copy of the GNU General Public License 
+' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+Imports RDotNet
+
+''' <summary>
+''' Holds the dataframes and metadata.
+''' </summary>
 Public Class clsDataBook
     Private _RLink As RLink
     Private _dataFrames As List(Of clsDataFrame)
     Private _clsDataFrameMetaData As clsDataFrameMetaData
-    ' Protected _currentFocus As clsDataFrame
 
+    ''' <summary>
+    ''' Holds all the dataframes within the databook
+    ''' </summary>
+    ''' <returns></returns>
     Public Property DataFrames() As List(Of clsDataFrame)
         Get
             Return _dataFrames
@@ -14,49 +36,47 @@ Public Class clsDataBook
             _dataFrames = value
         End Set
     End Property
-
+    ''' <summary>
+    ''' Holds the MetaData at a dataframe level. 
+    ''' Use the metadata at a dataframe level for any column metadata
+    ''' </summary>
+    ''' <returns></returns>
     Public ReadOnly Property clsDataFrameMetaData As clsDataFrameMetaData
         Get
             Return _clsDataFrameMetaData
         End Get
     End Property
 
-    'Public ReadOnly Property CurrentDataFrameFocus As clsDataFrame
-    '    Get
-    '        Return _currentFocus
-    '    End Get
-    'End Property
-
+    ''' <summary>
+    ''' Creates a new instance. RLink must be passed to make sure R-commands can be run
+    ''' </summary>
+    ''' <param name="rLink"></param>
     Public Sub New(rLink As RLink)
         _RLink = rLink
         _dataFrames = New List(Of clsDataFrame)
         _clsDataFrameMetaData = New clsDataFrameMetaData(rLink)
     End Sub
 
-    Protected Function HasDataChanged() As Boolean
+    Private Function HasDataChanged() As Boolean
         Dim clsDataChanged As New RFunction
         Dim expTemp As SymbolicExpression
 
         If Not _RLink.bInstatObjectExists Then
             Return False
         End If
-        'TODO can this be used for individual dataframes - possibly using data_name
         clsDataChanged.SetRCommand(_RLink.strInstatDataObject & "$get_data_changed")
         expTemp = _RLink.RunInternalScriptGetValue(clsDataChanged.ToScript())
         If expTemp IsNot Nothing AndAlso expTemp.Type <> Internals.SymbolicExpressionType.Null Then
             Return expTemp.AsLogical(0)
         Else
-            'raise error
             Return False
-            'If Not bMessageShown Then
-            '    MsgBox("Error: Could not retrieve data frames from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
-            '    bMessageShown = True
-            'End If
-            'bRDataChanged = False
         End If
     End Function
 
-
+    ''' <summary>
+    ''' Runs the R command to hide a dataframe of the given name
+    ''' </summary>
+    ''' <param name="dataFrameName"></param>
     Public Sub HideDataFrame(dataFrameName As String)
         Dim clsHideDataFrame As New RFunction
         clsHideDataFrame.SetRCommand(_RLink.strInstatDataObject & "$append_to_dataframe_metadata")
@@ -66,27 +86,38 @@ Public Class clsDataBook
         _RLink.RunScript(clsHideDataFrame.ToScript(), strComment:="Right click menu: Hide Data Frame")
     End Sub
 
-    Protected Function CreateNewGridTab(strDataFrameName As String) As clsDataFrame
+    Private Function CreateNewGridTab(strDataFrameName As String) As clsDataFrame
         Dim dataframe As New clsDataFrame(_RLink, strDataFrameName)
         _dataFrames.Add(dataframe)
         Return dataframe
     End Function
 
+    ''' <summary>
+    ''' Gets the dataframe within the databook corresponding to the given name
+    ''' </summary>
+    ''' <param name="strName"></param>
+    ''' <returns></returns>
     Public Function GetDataFrame(strName As String) As clsDataFrame
         Return _dataFrames.Where(Function(x) x.Name = strName).FirstOrDefault
     End Function
-
+    ''' <summary>
+    ''' Gets the Column Metadata for the dataframe name given
+    ''' </summary>
+    ''' <param name="strName"></param>
+    ''' <returns></returns>
     Public Function GetColumnMetaData(strName As String) As clsColumnMetaData
         Return _dataFrames.Where(Function(x) x.Name = strName).FirstOrDefault().clsColumnMetaData
     End Function
 
-
-    Public Sub UpdateGrids()
+    ''' <summary>
+    ''' Updates all the dataframes and metadata where the data has changed
+    ''' </summary>
+    Public Sub RefreshData()
         Dim listOfDataFrames As List(Of String)
         Dim dataFrame As clsDataFrame
         If HasDataChanged() Then
             listOfDataFrames = GetDataFrameNames()
-            DeleteOldGridTabs(listOfDataFrames)
+            DeleteOldDataFrames(listOfDataFrames)
             For Each strDataFrameName In listOfDataFrames
                 dataFrame = GetOrCreateDataFrame(strDataFrameName)
                 dataFrame.RefreshData()
@@ -95,7 +126,7 @@ Public Class clsDataBook
         End If
     End Sub
 
-    Protected Function GetOrCreateDataFrame(strDataFrameName As String) As clsDataFrame
+    Private Function GetOrCreateDataFrame(strDataFrameName As String) As clsDataFrame
         Dim dataFrame As clsDataFrame
         dataFrame = _dataFrames.Where(Function(x) x.Name = strDataFrameName).SingleOrDefault
         If dataFrame Is Nothing Then
@@ -104,9 +135,7 @@ Public Class clsDataBook
         Return dataFrame
     End Function
 
-
-
-    Private Sub DeleteOldGridTabs(currentDataFrames As List(Of String))
+    Private Sub DeleteOldDataFrames(currentDataFrames As List(Of String))
         Dim gridTab As clsDataFrame
         For i = _dataFrames.Count - 1 To 0 Step -1
             gridTab = _dataFrames(i)
@@ -116,19 +145,12 @@ Public Class clsDataBook
         Next
     End Sub
 
-    Private Sub ReOrderGridTabs()
-        'Not sure if we need this?
-    End Sub
-
-
-
-
     Private Function GetDataFrameNames() As List(Of String)
         Dim clsGetDataFrameNames As New RFunction
         Dim expTemp As SymbolicExpression
         Dim listOfDataFrames As New List(Of String)
 
-        clsGetDataFrameNames.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_data_names")
+        clsGetDataFrameNames.SetRCommand(_RLink.strInstatDataObject & "$get_data_names")
         clsGetDataFrameNames.AddParameter("include_hidden", "FALSE")
 
         expTemp = _RLink.RunInternalScriptGetValue(clsGetDataFrameNames.ToScript(), bSilent:=True)
@@ -136,17 +158,7 @@ Public Class clsDataBook
             For i = 0 To expTemp.AsList.Length - 1
                 listOfDataFrames.Add(expTemp.AsList.AsCharacter(i))
             Next
-        Else
-            ' raise an error here that can be displayed later 
-
-            'If Not bMessageShown Then
-
-            '    MsgBox("Error: Could not retrieve data frames from R. Data displayed in spreadsheet may not be up to date." & Environment.NewLine & "We strongly suggest restarting R-Instat before continuing.", MsgBoxStyle.Exclamation, "Cannot retrieve data")
-            '    bMessageShown = True
-            'End If
-            '  lstDataNames = Nothing
         End If
-
         Return listOfDataFrames
     End Function
 

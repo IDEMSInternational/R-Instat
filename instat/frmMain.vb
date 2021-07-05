@@ -38,6 +38,7 @@ Public Class frmMain
     Private ctrActive As Control
     Private WithEvents timer As New System.Windows.Forms.Timer
     Private iAutoSaveDataMilliseconds As Integer
+    Private clsDataBook As clsDataBook
 
     Public strAutoSaveDataFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_data_auto_save")
     Public strAutoSaveLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_log_auto_save")
@@ -94,13 +95,12 @@ Public Class frmMain
 
         ucrDataViewer.StartupMenuItemsVisibility(False)
         InitialiseOutputWindow()
-        ' clsGrids.SetDataViewer(ucrDataViewer)
-        ' clsGrids.SetMetadata(ucrDataFrameMeta.grdMetaData)
-        ' clsGrids.SetVariablesMetadata(ucrColumnMeta.grdVariables)
 
-        ucrDataViewer.DataBook = New clsDataBook(clsRLink)
-        ucrColumnMeta.DataBook = ucrDataViewer.DataBook
-        ucrDataFrameMeta.DataBook = ucrDataViewer.DataBook
+        clsDataBook = New clsDataBook(clsRLink)
+
+        ucrDataViewer.SetDataBook(clsDataBook)
+        ucrColumnMeta.SetDataBook(clsDataBook)
+        ucrDataFrameMeta.SetDataBook(clsDataBook)
 
         clsRLink.SetLog(ucrLogWindow.txtLog)
 

@@ -116,7 +116,7 @@ Partial Class ucrDataView
         Me.linkStartNewDataFrame = New System.Windows.Forms.LinkLabel()
         Me.linkStartOpenFile = New System.Windows.Forms.LinkLabel()
         Me.linkStartOpenLibrary = New System.Windows.Forms.LinkLabel()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TblPanPageDisplay = New System.Windows.Forms.TableLayoutPanel()
         Me.lblColFirst = New System.Windows.Forms.Label()
         Me.lblColDisplay = New System.Windows.Forms.Label()
         Me.lblColNext = New System.Windows.Forms.Label()
@@ -137,7 +137,7 @@ Partial Class ucrDataView
         Me.panelSectionRecent.SuspendLayout()
         Me.panelSectionHelp.SuspendLayout()
         Me.panelSectionStart.SuspendLayout()
-        Me.TableLayoutPanel1.SuspendLayout()
+        Me.TblPanPageDisplay.SuspendLayout()
         Me.SuspendLayout()
         '
         'grdData
@@ -524,7 +524,7 @@ Partial Class ucrDataView
         Me.tlpTableContainer.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.tlpTableContainer.Controls.Add(Me.lblHeaderDataView, 0, 0)
         Me.tlpTableContainer.Controls.Add(Me.pnlDataContainer, 0, 1)
-        Me.tlpTableContainer.Controls.Add(Me.TableLayoutPanel1, 0, 2)
+        Me.tlpTableContainer.Controls.Add(Me.TblPanPageDisplay, 0, 2)
         Me.tlpTableContainer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlpTableContainer.Location = New System.Drawing.Point(0, 0)
         Me.tlpTableContainer.Name = "tlpTableContainer"
@@ -726,40 +726,40 @@ Partial Class ucrDataView
         Me.linkStartOpenLibrary.TabStop = True
         Me.linkStartOpenLibrary.Text = "Open from library..."
         '
-        'TableLayoutPanel1
+        'TblPanPageDisplay
         '
-        Me.TableLayoutPanel1.AutoSize = True
-        Me.TableLayoutPanel1.ColumnCount = 12
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.lblColFirst, 7, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblColDisplay, 6, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblColNext, 9, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblColBack, 8, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblRowLast, 5, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblRowFirst, 2, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblRowDisplay, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblRowNext, 4, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblColLast, 10, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblRowBack, 3, 0)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 480)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(0)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 1
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(444, 20)
-        Me.TableLayoutPanel1.TabIndex = 8
+        Me.TblPanPageDisplay.AutoSize = True
+        Me.TblPanPageDisplay.ColumnCount = 12
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle())
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 16.0!))
+        Me.TblPanPageDisplay.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColFirst, 7, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColDisplay, 6, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColNext, 9, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColBack, 8, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowLast, 5, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowFirst, 2, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowDisplay, 1, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowNext, 4, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblColLast, 10, 0)
+        Me.TblPanPageDisplay.Controls.Add(Me.lblRowBack, 3, 0)
+        Me.TblPanPageDisplay.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TblPanPageDisplay.Location = New System.Drawing.Point(0, 480)
+        Me.TblPanPageDisplay.Margin = New System.Windows.Forms.Padding(0)
+        Me.TblPanPageDisplay.Name = "TblPanPageDisplay"
+        Me.TblPanPageDisplay.RowCount = 1
+        Me.TblPanPageDisplay.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TblPanPageDisplay.Size = New System.Drawing.Size(444, 20)
+        Me.TblPanPageDisplay.TabIndex = 8
         '
         'lblColFirst
         '
@@ -895,8 +895,8 @@ Partial Class ucrDataView
         Me.panelSectionHelp.PerformLayout()
         Me.panelSectionStart.ResumeLayout(False)
         Me.panelSectionStart.PerformLayout()
-        Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.TableLayoutPanel1.PerformLayout()
+        Me.TblPanPageDisplay.ResumeLayout(False)
+        Me.TblPanPageDisplay.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -978,7 +978,7 @@ Partial Class ucrDataView
     Friend WithEvents mnuBottomAddComment As ToolStripMenuItem
     Private WithEvents mnuPaste As ToolStripMenuItem
     Friend WithEvents mnuCellPasteRange As ToolStripMenuItem
-    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents TblPanPageDisplay As TableLayoutPanel
     Friend WithEvents lblColLast As Label
     Friend WithEvents lblRowBack As Label
     Friend WithEvents lblColFirst As Label

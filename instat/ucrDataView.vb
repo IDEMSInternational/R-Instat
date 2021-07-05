@@ -27,13 +27,19 @@ Public Class ucrDataView
     'Public clearFilter As unvell.ReoGrid.Data.AutoColumnFilter
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
 
-    'should not be public - testing only
-    Public DataBook As clsDataBook
+    Private _clsDataBook As clsDataBook
 
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
         ' Add any initialization after the InitializeComponent() call.
+    End Sub
+
+    ''' <summary>
+    ''' Sets the databook to be used throughout the form
+    ''' </summary>
+    Public Sub SetDataBook(clsDataBook As clsDataBook)
+        _clsDataBook = clsDataBook
     End Sub
 
     Private Sub ucrDataView_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -71,17 +77,21 @@ Public Class ucrDataView
     End Sub
 
     Private Sub UpdateNavigationButtons()
+        lblColFirst.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadPreviousColumnPage(), False)
         lblColBack.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadPreviousColumnPage(), False)
         lblColNext.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadNextColumnPage(), False)
+        lblColLast.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadNextColumnPage(), False)
+        lblRowFirst.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadPreviousRowPage(), False)
         lblRowBack.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadPreviousRowPage(), False)
         lblRowNext.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadNextRowPage(), False)
+        lblRowLast.Enabled = If(GetCurrentDataFrameFocus()?.VisiblePage?.CanLoadNextRowPage(), False)
     End Sub
 
     Private Sub AddAndUpdateWorksheets(grid As ReoGridControl)
         'This should use existing worksheets rather than re adding
         Dim fillWorkSheet As Worksheet
         ' grid.Worksheets.Clear()
-        For Each clsDataFrame In DataBook.DataFrames
+        For Each clsDataFrame In _clsDataBook.DataFrames
             fillWorkSheet = grid.Worksheets.Where(Function(x) x.Name = clsDataFrame.Name).FirstOrDefault
             If fillWorkSheet Is Nothing Then
                 fillWorkSheet = grid.CreateWorksheet(clsDataFrame.Name)
@@ -94,7 +104,7 @@ Public Class ucrDataView
 
     Private Sub RemoveOldWorksheets(grid As ReoGridControl)
         For i = grid.Worksheets.Count - 1 To 0 Step -1
-            If DataBook.DataFrames.Where(Function(x) x.Name = grid.Worksheets(index:=i).Name).Count = 0 Then
+            If _clsDataBook.DataFrames.Where(Function(x) x.Name = grid.Worksheets(index:=i).Name).Count = 0 Then
                 grid.RemoveWorksheet(i)
             End If
         Next
@@ -105,7 +115,7 @@ Public Class ucrDataView
         workSheet.Columns = dataFramePage.lstColumns.Count
         For i = 0 To dataFramePage.lstColumns.Count - 1
             workSheetColumnHeader = workSheet.ColumnHeaders(i)
-            workSheetColumnHeader.Text = dataFramePage.lstColumns(i).Name
+            workSheetColumnHeader.Text = dataFramePage.lstColumns(i).DisplayName
             workSheetColumnHeader.TextColor = dataFramePage.lstColumns(i).Colour
             workSheetColumnHeader.Style.BackColor = dataFramePage.lstColumns(i).BackGroundColour
         Next
@@ -136,8 +146,8 @@ Public Class ucrDataView
     End Sub
 
     Public Sub RefreshGridData()
-        If DataBook IsNot Nothing Then
-            DataBook.UpdateGrids()
+        If _clsDataBook IsNot Nothing Then
+            _clsDataBook.RefreshData()
             AddAndUpdateWorksheets(grdData)
             RemoveOldWorksheets(grdData)
             grdData.Visible = Not grdData.Worksheets.Count = 0
@@ -145,22 +155,8 @@ Public Class ucrDataView
     End Sub
 
     Private Function GetCurrentDataFrameFocus() As clsDataFrame
-        Return DataBook.GetDataFrame(grdCurrSheet.Name)
+        Return _clsDataBook.GetDataFrame(grdCurrSheet.Name)
     End Function
-
-    ''' <summary>
-    ''' Run any R operation/command from the grid by passing a Function which will run the R operation/command.
-    ''' This wrapper ensures consistency in what is done before and after running an R command.
-    ''' </summary>
-    ''' <param name="action">A function that will run an R operation/command, usually from GridROperations.</param>
-    Private Sub RunRCommand(action As Action)
-        Cursor = Cursors.WaitCursor
-        grdData.Enabled = False
-        action()
-        grdData.Enabled = True
-        Cursor = Cursors.Default
-    End Sub
-
 
     Private Sub mnuDeleteCol_Click(sender As Object, e As EventArgs) Handles mnuDeleteCol.Click
         If grdData.CurrentWorksheet.SelectionRange.Cols = grdData.CurrentWorksheet.ColumnCount Then
@@ -235,7 +231,7 @@ Public Class ucrDataView
 
     Public Sub UpdateCurrentWorksheet()
         grdCurrSheet = grdData.CurrentWorksheet
-        If grdCurrSheet IsNot Nothing AndAlso DataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
+        If grdCurrSheet IsNot Nothing AndAlso _clsDataBook IsNot Nothing AndAlso GetCurrentDataFrameFocus() IsNot Nothing Then
             frmMain.strCurrentDataFrame = grdCurrSheet.Name
             frmMain.tstatus.Text = grdCurrSheet.Name
             grdCurrSheet.SelectionForwardDirection = unvell.ReoGrid.SelectionForwardDirection.Down
@@ -245,9 +241,10 @@ Public Class ucrDataView
             UpdateNavigationButtons()
             'hide startup menu items
             panelSectionsAll.Visible = False
+            TblPanPageDisplay.Visible = True
         Else
             frmMain.tstatus.Text = GetTranslation("No data loaded")
-            lblRowDisplay.Text = ""
+            TblPanPageDisplay.Visible = False
             'show startup menu items
             panelSectionsAll.Visible = True
         End If
@@ -256,14 +253,14 @@ Public Class ucrDataView
     Private Sub SetDisplayLabels()
         If GetCurrentDataFrameFocus().Filter.bApplied Then
             lblRowDisplay.Text = "Showing rows " & GetCurrentDataFrameFocus().VisiblePage.intStartRow & " to " & GetCurrentDataFrameFocus().VisiblePage.intEndRow &
-                                 " of " & GetCurrentDataFrameFocus().Filter.intFilteredRowCount & " rows" &
+                                 " of " & GetCurrentDataFrameFocus().Filter.intFilteredRowCount &
                                  " (" & GetCurrentDataFrameFocus().TotalRowCount & ")" & " | Active filter: " & GetCurrentDataFrameFocus().Filter.strName
         Else
             lblRowDisplay.Text = "Showing rows " & GetCurrentDataFrameFocus().VisiblePage.intStartRow & " to " & GetCurrentDataFrameFocus().VisiblePage.intEndRow &
-                                 " of " & GetCurrentDataFrameFocus().TotalRowCount & " rows"
+                                 " of " & GetCurrentDataFrameFocus().TotalRowCount
         End If
         lblColDisplay.Text = "columns " & GetCurrentDataFrameFocus().VisiblePage.intStartColumn & " to " & GetCurrentDataFrameFocus().VisiblePage.intEndColumn &
-                            " of " & GetCurrentDataFrameFocus().TotalColumnCount & " columns"
+                            " of " & GetCurrentDataFrameFocus().TotalColumnCount
 
     End Sub
 
@@ -275,20 +272,59 @@ Public Class ucrDataView
     End Sub
 
     Private Sub grdCurrSheet_AfterCellEdit(sender As Object, e As CellAfterEditEventArgs) Handles grdCurrSheet.AfterCellEdit
-        ReplaceValueInData(e.NewData.ToString(), e.Cell.Row, e.Cell.Column)
+        ReplaceValueInData(e.NewData.ToString(),
+                           GetCurrentDataFrameFocus().VisiblePage.lstColumns(e.Cell.Column).Name,
+                           GetCurrentDataFrameFocus().VisiblePage.RowName(e.Cell.Row))
         e.EndReason = unvell.ReoGrid.EndEditReason.Cancel
     End Sub
 
-    Private Sub ReplaceValueInData(strNewValue As String, iRow As Integer, iCol As Integer)
-        Dim strReturnMessage As String = ""
-        Dim bSuccess As Boolean
-        StartWait()
-        bSuccess = GetCurrentDataFrameFocus().clsPrepareFunctions.ReplaceValueInData(strNewValue, iRow, iCol, strReturnMessage)
-        EndWait()
-        If Not bSuccess Then
-            MsgBox(strReturnMessage, MsgBoxStyle.Exclamation, "Invalid Value")
-        End If
+    Private Sub ReplaceValueInData(strNewValue As String, strColumnName As String, strRowText As String)
+        Dim dblValue As Double
+        Dim iValue As Integer
+        Dim bWithQuotes As Boolean
+        Dim bValid As Boolean = False
 
+        If strNewValue = "NA" Then
+            bWithQuotes = False
+            bValid = True
+        Else
+            Select Case GetCurrentDataFrameFocus().clsPrepareFunctions.GetDataTypeLabel(strColumnName)
+                Case "factor"
+                    If Not GetCurrentDataFrameFocus().clsPrepareFunctions.GetColumnFactorLevels(strColumnName).Contains(strNewValue) Then
+                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: factor. Values must be an existing level of this factor column.", MsgBoxStyle.Exclamation, "Invalid Value")
+                    Else
+                        bWithQuotes = True
+                        bValid = True
+                    End If
+                Case "numeric"
+                    If Double.TryParse(strNewValue, dblValue) Then
+                        bWithQuotes = False
+                        bValid = True
+                    Else
+                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: numeric. Values must be numeric.", MsgBoxStyle.Exclamation, "Invalid Value")
+                    End If
+                Case "integer"
+                    If Integer.TryParse(strNewValue, iValue) Then
+                        bWithQuotes = False
+                        bValid = True
+                    Else
+                        MsgBox("Invalid value: '" & strNewValue & "'" & Environment.NewLine & "This column is: integer. Values must be integer.", MsgBoxStyle.Exclamation, "Invalid Value")
+                    End If
+                Case Else
+                    If Double.TryParse(strNewValue, dblValue) OrElse strNewValue = "TRUE" OrElse strNewValue = "FALSE" Then
+                        bWithQuotes = False
+                        bValid = True
+                    Else
+                        bWithQuotes = True
+                        bValid = True
+                    End If
+            End Select
+        End If
+        If bValid Then
+            StartWait()
+            GetCurrentDataFrameFocus().clsPrepareFunctions.ReplaceValueInData(strNewValue, strColumnName, strRowText, bWithQuotes)
+            EndWait()
+        End If
     End Sub
 
     Private Sub renameSheet_Click(sender As Object, e As EventArgs) Handles renameSheet.Click
@@ -302,17 +338,14 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuLevelsLabels_Click(sender As Object, e As EventArgs) Handles mnuLevelsLabels.Click
-        If IsOnlyOneColumnSeleted() Then
-            If IsFirstSelectedColumnAFactor() Then
-                dlgLabelsLevels.SetCurrentColumn(GetCurrentDataFrameFocus().VisiblePage.lstColumns(0).Name, grdCurrSheet.Name)
-            End If
+        If IsFirstSelectedColumnAFactor() Then
+            dlgLabelsLevels.SetCurrentColumn(GetFirstSelectedColumnName(), grdCurrSheet.Name)
         End If
         dlgLabelsLevels.ShowDialog()
     End Sub
 
     Private Function GetSelectedColumns() As List(Of clsColumnHeaderDisplay)
         Dim lstColumns As List(Of clsColumnHeaderDisplay) = New List(Of clsColumnHeaderDisplay)
-        'TODO paging - may need to know start column
         For i As Integer = grdData.CurrentWorksheet.SelectionRange.Col To grdData.CurrentWorksheet.SelectionRange.Col + grdData.CurrentWorksheet.SelectionRange.Cols - 1
             lstColumns.Add(GetCurrentDataFrameFocus().VisiblePage.lstColumns(i))
         Next
@@ -505,14 +538,6 @@ Public Class ucrDataView
         End If
     End Sub
 
-    Private Sub RunScriptFromDataView(strScript As String, Optional iCallType As Integer = 0, Optional strComment As String = "", Optional bSeparateThread As Boolean = True, Optional bShowWaitDialogOverride As Nullable(Of Boolean) = Nothing)
-        Cursor = Cursors.WaitCursor
-        grdData.Enabled = False
-        frmMain.clsRLink.RunScript(strScript:=strScript, iCallType:=iCallType, strComment:=strComment, bSeparateThread:=bSeparateThread, bShowWaitDialogOverride:=bShowWaitDialogOverride)
-        grdData.Enabled = True
-        Cursor = Cursors.Default
-    End Sub
-
     Private Sub columnContextMenuStrip_Opening(sender As Object, e As CancelEventArgs) Handles columnContextMenuStrip.Opening
         If IsOnlyOneColumnSeleted() Then
             mnuLevelsLabels.Enabled = IsFirstSelectedColumnAFactor()
@@ -530,7 +555,7 @@ Public Class ucrDataView
 
     Private Sub HideSheet_Click(sender As Object, e As EventArgs) Handles HideSheet.Click
         StartWait()
-        DataBook.HideDataFrame(grdCurrSheet.Name)
+        _clsDataBook.HideDataFrame(grdCurrSheet.Name)
         EndWait()
     End Sub
 
@@ -585,16 +610,36 @@ Public Class ucrDataView
     End Sub
 
     Private Sub mnuConvertToNumeric_Click(sender As Object, e As EventArgs) Handles mnuConvertToNumeric.Click, mnuConvertVariate.Click
-        'TODO Move this command from GridOperations 
-        RunRCommand(Sub() GridROperations.ConvertToNumeric(grdCurrSheet.Name, GetSelectedColumns().Select(Function(x) x.Name), GetCurrentDataFrameFocus().TotalRowCount))
+        Dim intNonNumericValues As Integer
+        For Each strColumn In GetSelectedColumnNames()
+            intNonNumericValues = GetCurrentDataFrameFocus().clsPrepareFunctions.GetAmountOfNonNumericValuesInColumn(strColumn)
+            If intNonNumericValues = 0 Then
+                GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+            ElseIf intNonNumericValues = GetCurrentDataFrameFocus().TotalRowCount Then
+                GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
+            Else
+                frmConvertToNumeric.SetDataFrameName(GetCurrentDataFrameFocus().Name)
+                frmConvertToNumeric.SetColumnName(strColumn)
+                frmConvertToNumeric.SetNonNumeric(intNonNumericValues)
+                frmConvertToNumeric.ShowDialog()
+                ' Yes for "normal" convert and No for "labelled" convert
+                If frmConvertToNumeric.DialogResult = DialogResult.Yes Then
+                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, True)
+                ElseIf frmConvertToNumeric.DialogResult = DialogResult.No Then
+                    GetCurrentDataFrameFocus().clsPrepareFunctions.ConvertToNumeric(strColumn, False)
+                ElseIf frmConvertToNumeric.DialogResult = DialogResult.Cancel Then
+                    Continue For
+                End If
+            End If
+        Next
     End Sub
 
     Private Sub mnuLebelsLevel_Click(sender As Object, e As EventArgs) Handles mnuLebelsLevel.Click
-        If IsOnlyOneColumnSeleted() Then
-            If IsFirstSelectedColumnAFactor() Then
+        ' If IsOnlyOneColumnSeleted() Then
+        If IsFirstSelectedColumnAFactor() Then
                 dlgLabelsLevels.SetCurrentColumn(GetFirstSelectedColumnName, grdCurrSheet.Name)
             End If
-        End If
+        '  End If
         dlgLabelsLevels.ShowDialog()
     End Sub
 
