@@ -22,7 +22,7 @@ Public Class dlgScatterPlot
     Private clsLocalRaesFunction As New RFunction
     Private clsBaseOperator As New ROperator
     Private clsFirstPlusOperator, clsSecondPlusOperator, clsThirdPlusOperator As New ROperator
-    Private clsLollipopggplotFunction, clsSegmentggplotFunction, clsFirstggPointFunction, clsSecondggPointFunction, clsSegmentaesFunction, clsFirstPointaesFunction, clsSecondPointaesFunction, clsFlipCoordinateFunction As New RFunction
+    Private clsLollipopggplotFunction, clsSegmentggplotFunction, clsFirstggPointFunction, clsSecondggPointFunction, clsSegmentaesFunction, clsFirstPointaesFunction, clsSecondPointaesFunction, clsFlipCoordinateFunction, clsDiagonalaesFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private bResetSubdialog As Boolean = True
@@ -153,7 +153,7 @@ Public Class dlgScatterPlot
         ucrReceiverXStart.SetParameterIsString()
         ucrReceiverXStart.bWithQuotes = False
 
-        ucrReceiverXEnd.SetParameter(New RParameter("xend", 1))
+        ucrReceiverXEnd.SetParameter(New RParameter("xend", 4))
         ucrReceiverXEnd.Selector = ucrSelectorForScatter
         ucrReceiverXEnd.SetParameterIsString()
         ucrReceiverXEnd.bWithQuotes = False
@@ -203,6 +203,7 @@ Public Class dlgScatterPlot
         clsFirstPointaesFunction = New RFunction
         clsSecondPointaesFunction = New RFunction
         clsFlipCoordinateFunction = New RFunction
+        clsDiagonalaesFunction = New RFunction
 
         rdoPoints.Checked = True
         rdoSimple.Checked = True
@@ -266,7 +267,8 @@ Public Class dlgScatterPlot
 
         clsSegmentggplotFunction.SetPackageName("ggplot2")
         clsSegmentggplotFunction.SetRCommand("geom_segment")
-        clsSegmentggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsSegmentaesFunction, bIncludeArgumentName:=False, iPosition:=1)
+        clsSegmentggplotFunction.RemoveParameterByPosition(1)
+        clsSegmentggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsSegmentaesFunction, bIncludeArgumentName:=False, iPosition:=0)
 
         clsSegmentaesFunction.SetPackageName("ggplot2")
         clsSegmentaesFunction.SetRCommand("aes")
@@ -284,8 +286,13 @@ Public Class dlgScatterPlot
 
         clsSecondPointaesFunction.SetPackageName("ggplot2")
         clsSecondPointaesFunction.SetRCommand("aes")
+        clsSecondPointaesFunction.RemoveParameterByPosition(2)
 
         clsFlipCoordinateFunction.SetRCommand("coord_flip")
+
+        clsDiagonalaesFunction.SetPackageName("ggplot2")
+        clsDiagonalaesFunction.SetRCommand("aes")
+
 
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorForScatter.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
@@ -297,11 +304,17 @@ Public Class dlgScatterPlot
         'ucrSelectorForScatter.AddAdditionalCodeParameterPair(clsFirstggPointFunction, New RParameter("data", 0), iAdditionalPairNo:=3)
         'ucrSelectorForScatter.AddAdditionalCodeParameterPair(clsSecondggPointFunction, New RParameter("data", 0), iAdditionalPairNo:=4)
 
-        ucrReceiverXStart.AddAdditionalCodeParameterPair(clsFirstPointaesFunction, New RParameter("x", 0), iAdditionalPairNo:=1)
-        ucrReceiverXStart.AddAdditionalCodeParameterPair(clsSecondPointaesFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrReceiverXStart.AddAdditionalCodeParameterPair(clsSegmentaesFunction, New RParameter("xend", 1), iAdditionalPairNo:=1)
+        ucrReceiverXStart.AddAdditionalCodeParameterPair(clsFirstPointaesFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
+        ucrReceiverXStart.AddAdditionalCodeParameterPair(clsSecondPointaesFunction, New RParameter("x", 0), iAdditionalPairNo:=3)
 
-        ucrReceiverYStart.AddAdditionalCodeParameterPair(clsFirstPointaesFunction, New RParameter("y", 2), iAdditionalPairNo:=1)
-        ucrReceiverYStart.AddAdditionalCodeParameterPair(clsSecondPointaesFunction, New RParameter("y", 2), iAdditionalPairNo:=2)
+        ucrReceiverXStart.AddAdditionalCodeParameterPair(clsDiagonalaesFunction, New RParameter("x", 0), iAdditionalPairNo:=4)
+        ucrReceiverXEnd.AddAdditionalCodeParameterPair(clsDiagonalaesFunction, New RParameter("xend", 1), iAdditionalPairNo:=1)
+        ucrReceiverYStart.AddAdditionalCodeParameterPair(clsDiagonalaesFunction, New RParameter("y", 2), iAdditionalPairNo:=1)
+        ucrReceiverYEnd.AddAdditionalCodeParameterPair(clsDiagonalaesFunction, New RParameter("yend", 3), iAdditionalPairNo:=1)
+
+        ucrReceiverYStart.AddAdditionalCodeParameterPair(clsFirstPointaesFunction, New RParameter("y", 1), iAdditionalPairNo:=2)
+        ucrReceiverYEnd.AddAdditionalCodeParameterPair(clsSecondPointaesFunction, New RParameter("y", 1), iAdditionalPairNo:=2)
 
         'ucrChkAddPoints.AddAdditionalCodeParameterPair(clsThirdPlusOperator, New RParameter("first_point", 0), iAdditionalPairNo:=2)
 
@@ -415,7 +428,6 @@ Public Class dlgScatterPlot
             If Not ucrSaveScatterPlot.bUserTyped Then
                 ucrSaveScatterPlot.SetPrefix("lollipop")
             End If
-
             If Not ucrChkAddPoints.Checked Then
                 If Not ucrChkHorizontal.Checked Then
                     clsBaseOperator.RemoveParameterByName("third_plus")
@@ -466,6 +478,10 @@ Public Class dlgScatterPlot
                     ElseIf rdoDiagonal.Checked Then
                         clsSecondPlusOperator.RemoveParameterByName("third_plus")
                         clsSecondPlusOperator.AddParameter("second_point", clsRFunctionParameter:=clsSecondggPointFunction, iPosition:=1)
+                        clsSegmentggplotFunction.RemoveParameterByPosition(0)
+                        clsSegmentggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsDiagonalaesFunction, bIncludeArgumentName:=False, iPosition:=1)
+                        clsSecondPointaesFunction.RemoveParameter(ucrReceiverXStart.GetParameter())
+                        ucrReceiverXEnd.AddAdditionalCodeParameterPair(clsSecondPointaesFunction, New RParameter("x", 0), iAdditionalPairNo:=2)
                     End If
                 End If
                 clsBaseOperator.RemoveParameterByName("segment")
