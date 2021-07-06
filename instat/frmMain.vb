@@ -176,15 +176,6 @@ Public Class frmMain
             strCurrLang = Me.clsInstatOptions.strLanguageCultureCode
         End If
 
-        If Me.clsInstatOptions IsNot Nothing Then
-            If Me.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
-                cmdLanguage.Visible = True
-            Else
-                cmdLanguage.Visible = False
-            End If
-            strCurrLang = Me.clsInstatOptions.strLanguageCultureCode
-        End If
-
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 
