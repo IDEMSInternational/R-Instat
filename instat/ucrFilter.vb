@@ -72,7 +72,7 @@ Public Class ucrFilter
         lstFilters.Columns.Add("Condition")
         ucrInputFilterName.SetItemsTypeAsFilters()
         ucrInputFilterName.SetDataFrameSelector(ucrSelectorForFitler.ucrAvailableDataFrames)
-        ucrInputFilterName.SetPrefix("Filter")
+        ucrInputFilterName.SetPrefix("filter")
         ucrInputFilterName.SetDefaultTypeAsFilter()
         ucrSelectorForFitler.btnDataOptions.Visible = False
         ucrLogicalCombobox.SetItems({"TRUE", "FALSE"})
