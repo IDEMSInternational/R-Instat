@@ -194,7 +194,7 @@ Public Class frmMain
         translateMenu(mnuBar.Items, Me)
     End Sub
 
-    Public Sub EnableVisible(bVisble As Boolean)
+    Public Sub EnableVisible(bVisible As Boolean)
         cmdLanguage.Visible = bVisble
     End Sub
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
