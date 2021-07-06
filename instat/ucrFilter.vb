@@ -213,9 +213,9 @@ Public Class ucrFilter
             End If
         End If
         If Not String.IsNullOrEmpty(strCondition) Then
-            clsCurrentConditionView.AddParameter("condition", strCondition.Replace(Chr(34), Chr(39)))
             clsCurrentConditionList.AddParameter("value", strCondition)
         End If
+        clsCurrentConditionView.AddParameter("condition", strCondition.Replace(Chr(34), Chr(39)))
         clsConditionsList.AddParameter("C" & clsConditionsList.clsParameters.Count, clsRFunctionParameter:=(clsCurrentConditionList))
         lviCondition = New ListViewItem({ucrFilterByReceiver.GetVariableNames(), clsCurrentConditionView.strOperation & " " & strCondition})
         lstFilters.Items.Add(lviCondition)
