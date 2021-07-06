@@ -167,15 +167,6 @@ Public Class frmMain
             MsgBox(ex.Message)
         End Try
 
-        If Me.clsInstatOptions IsNot Nothing Then
-            If Me.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
-                cmdLanguage.Visible = True
-            Else
-                cmdLanguage.Visible = False
-            End If
-            strCurrLang = Me.clsInstatOptions.strLanguageCultureCode
-        End If
-
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 
@@ -185,8 +176,8 @@ Public Class frmMain
         translateMenu(mnuBar.Items, Me)
     End Sub
 
-    Public Sub EnableVisible(bVisible As Boolean)
-        cmdLanguage.Visible = bVisble
+    Public Sub EnableVisibleLanButton(bVisible As Boolean)
+        cmdLanguage.Visible = bVisible
     End Sub
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
         mnuFile.Enabled = bEnabled
