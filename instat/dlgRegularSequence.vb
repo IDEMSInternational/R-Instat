@@ -24,6 +24,7 @@ Public Class dlgRegularSequence
     Private clsSeqDateFunction As New RFunction
     Private bUpdateBy As Boolean = False
     Private clsByDateOperator As New ROperator
+    Private clsHyphenOperator As New ROperator
     Private clsDefaultStartDate As RFunction
     Private clsDefaultEndDate As RFunction
     Public bNumericIsDefault As Boolean
@@ -64,7 +65,7 @@ Public Class dlgRegularSequence
         ucrInputTo.AddQuotesIfUnrecognised = False
         ucrInputTo.SetValidationTypeAsNumeric()
 
-        ucrInputInStepsOf.SetParameter(New RParameter("by", 2))
+        ucrInputInStepsOf.SetParameter(New RParameter("param2", 1))
         ucrInputInStepsOf.AddQuotesIfUnrecognised = False
         ucrInputInStepsOf.SetValidationTypeAsNumeric(dcmMin:=0, bIncludeMin:=False)
 
@@ -119,19 +120,31 @@ Public Class dlgRegularSequence
     Private Sub ResetRCode()
         clsRepFunction = New RFunction
         clsSeqFunction = New RFunction
-        clsByDateOperator = New ROperator
         clsSeqDateFunction = New RFunction
         clsDefaultStartDate = New RFunction
         clsDefaultEndDate = New RFunction
+
+        clsByDateOperator = New ROperator
+        clsHyphenOperator = New ROperator
+
+        clsByDateOperator.SetOperation(" ")
+
+        clsHyphenOperator.SetOperation("-")
+        clsHyphenOperator.bSpaceAroundOperation = False
+        clsHyphenOperator.bBrackets = False
 
         clsDefaultStartDate.SetRCommand("as.Date")
         clsDefaultEndDate.SetRCommand("as.Date")
         clsSeqFunction.SetRCommand("seq")
         clsRepFunction.SetRCommand("rep")
-        clsByDateOperator.SetOperation(" ")
         clsSeqDateFunction.SetRCommand("seq.Date")
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
+    End Sub
+
+    Private Sub AddClsHyphenDefaultParameter()
+        clsHyphenOperator.AddParameter("param1", "", iPosition:=0)
+        clsHyphenOperator.AddParameter("param2", "1", iPosition:=1)
     End Sub
 
     Private Sub AddClsSeqFunctionDefaultParameters()
@@ -148,8 +161,8 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub AddClsByDateOperatorDefaultParameters()
-        clsByDateOperator.AddParameter("number", 1, iPosition:=0)
         clsByDateOperator.AddParameter("period", "days", iPosition:=1)
+        clsByDateOperator.bBrackets = False
         clsByDateOperator.bToScriptAsRString = True
         clsByDateOperator.bSpaceAroundOperation = False
     End Sub
@@ -176,6 +189,7 @@ Public Class dlgRegularSequence
         AddClsRepFunctionDefaultParameters()
         AddClsSeqDateFunctionDefaultParameters()
         AddClsSeqFunctionDefaultParameters()
+        AddClsHyphenDefaultParameter()
     End Sub
 
     Private Sub SetDefaults()
@@ -201,6 +215,7 @@ Public Class dlgRegularSequence
                         AddClsDefaultStartDateDefaultParameters()
                         AddClsRepFunctionDefaultParameters()
                         AddClsSeqFunctionDefaultParameters()
+                        AddClsHyphenDefaultParameter()
                         ucrBase.clsRsyntax.SetBaseRFunction(clsSeqDateFunction)
                     Case clsSeqFunction.strRCommand
                         AddClsSeqFunctionDefaultParameters()
@@ -209,6 +224,7 @@ Public Class dlgRegularSequence
                         AddClsDefaultStartDateDefaultParameters()
                         AddClsRepFunctionDefaultParameters()
                         AddClsSeqDateFunctionDefaultParameters()
+                        AddClsHyphenDefaultParameter()
                         clsSeqFunction = lstRCodeStructure(0)
                         ucrBase.clsRsyntax.SetBaseRFunction(clsSeqFunction)
                     Case clsRepFunction.strRCommand
@@ -218,6 +234,7 @@ Public Class dlgRegularSequence
                         AddClsDefaultStartDateDefaultParameters()
                         AddClsSeqDateFunctionDefaultParameters()
                         AddClsSeqFunctionDefaultParameters()
+                        AddClsHyphenDefaultParameter()
                         clsRepFunction = lstRCodeStructure(0)
                         ucrBase.clsRsyntax.SetBaseRFunction(clsRepFunction)
                     Case Else
@@ -254,37 +271,17 @@ Public Class dlgRegularSequence
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        Dim strBy As String
-        Dim dcmBy As Decimal
-
         bUpdateBy = False
         ucrNudRepeatValues.AddAdditionalCodeParameterPair(clsSeqDateFunction, ucrNudRepeatValues.GetParameter(), iAdditionalPairNo:=1)
-
         ucrDateTimePickerFrom.SetRCode(clsSeqDateFunction, bReset)
         ucrDateTimePickerTo.SetRCode(clsSeqDateFunction, bReset)
         ucrInputComboDatesBy.SetRCode(clsByDateOperator, bReset)
-
-        'Set to base function so that control is set correctly
         ucrNewColumnName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-
         ucrPnlSequenceType.SetRCode(clsRepFunction, bReset)
         ucrInputFrom.SetRCode(clsSeqFunction, bReset)
         ucrInputTo.SetRCode(clsSeqFunction, bReset)
         ucrNudRepeatValues.SetRCode(clsRepFunction, bReset)
-        If clsSeqFunction.ContainsParameter("by") Then
-            strBy = clsSeqFunction.GetParameter("by").strArgumentValue
-            If strBy IsNot Nothing Then
-                If Decimal.TryParse(strBy, dcmBy) Then
-                    ucrInputInStepsOf.SetName(Math.Abs(dcmBy))
-                Else
-                    ucrInputInStepsOf.SetName("")
-                End If
-            Else
-                ucrInputInStepsOf.SetName("")
-            End If
-        Else
-            ucrInputInStepsOf.SetName("")
-        End If
+        ucrInputInStepsOf.SetRCode(clsHyphenOperator, bReset)
         bUpdateBy = True
         CheckSequenceLength()
     End Sub
@@ -312,10 +309,6 @@ Public Class dlgRegularSequence
             ucrBase.OKEnabled(False)
         End If
     End Sub
-
-
-
-
 
     Private Sub SetBaseFunction()
         If ucrNudRepeatValues.Value = 1 Then
@@ -403,15 +396,11 @@ Public Class dlgRegularSequence
             Dim dcmTo As Decimal
             Dim dcmFrom As Decimal
 
-            If Not ucrInputTo.IsEmpty AndAlso Not ucrInputFrom.IsEmpty Then
-                If Decimal.TryParse(ucrInputTo.GetText, dcmTo) AndAlso Decimal.TryParse(ucrInputFrom.GetText, dcmFrom) Then
-                    If dcmTo >= dcmFrom Then
-                        clsSeqFunction.AddParameter("by", ucrInputInStepsOf.GetText())
-                    Else
-                        clsSeqFunction.AddParameter("by", "-" & ucrInputInStepsOf.GetText())
-                    End If
+            If Decimal.TryParse(ucrInputTo.GetText, dcmTo) AndAlso Decimal.TryParse(ucrInputFrom.GetText, dcmFrom) Then
+                If dcmTo >= dcmFrom Then
+                    clsSeqFunction.AddParameter("by", ucrInputInStepsOf.GetText(), iPosition:=2)
                 Else
-                    clsSeqFunction.RemoveParameterByName("by")
+                    clsSeqFunction.AddParameter("by", clsROperatorParameter:=clsHyphenOperator, iPosition:=2)
                 End If
             Else
                 clsSeqFunction.RemoveParameterByName("by")
@@ -425,7 +414,7 @@ Public Class dlgRegularSequence
             If ucrDateTimePickerTo.DateValue >= ucrDateTimePickerFrom.DateValue Then
                 clsByDateOperator.AddParameter("number", ucrInputInStepsOf.GetText(), iPosition:=0)
             Else
-                clsByDateOperator.AddParameter("number", "-" & ucrInputInStepsOf.GetText(), iPosition:=0)
+                clsByDateOperator.AddParameter("number", clsROperatorParameter:=clsHyphenOperator, iPosition:=0)
             End If
             CheckSequenceLength()
         End If
