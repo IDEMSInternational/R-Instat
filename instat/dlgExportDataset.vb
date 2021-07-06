@@ -113,7 +113,7 @@ Public Class dlgExportDataset
         'if no or single data frame selected or save as single checked then just set the base function to the default
         If ucrReceiverMultipleDataFrames.GetVariableNamesList().Length <= 1 OrElse chkSaveAsSingleFile.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
-            lblConfirm.Text = "Click Ok to Confirm the Export."
+            lblConfirm.Text = GetTranslation("Click Ok to Confirm the Export.")
         Else
             'else, create a string command for exporting separate files to a directory.
             'note, as of 09/09/2020 rio didn't support exporting separate files in 1 command see issue #5590
@@ -123,10 +123,9 @@ Public Class dlgExportDataset
                 strCommand = strCommand & "rio::export( x = data_book$get_data_frame(data_name=""" & strItem & """), file = """ & ucrFilePath.FilePath & "/" & strItem & GetSelectedExtension(cboFileType.SelectedItem) & """)" & Environment.NewLine
             Next
             ucrBase.clsRsyntax.SetCommandString(strCommand)
-            lblConfirm.Text = "Files with the same names will be overwritten." & Environment.NewLine & "Click Ok to Confirm the Export."
+            lblConfirm.Text = GetTranslation("Files with the same names will be overwritten." & Environment.NewLine & "Click Ok to Confirm the Export.")
         End If
         TestOkEnabled()
-        autoTranslate(Me)
     End Sub
 
 
