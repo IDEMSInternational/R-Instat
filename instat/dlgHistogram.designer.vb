@@ -54,6 +54,7 @@ Partial Class dlgHistogram
         Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrChkRidges = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -170,10 +171,17 @@ Partial Class dlgHistogram
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'ucrChkRidges
+        '
+        Me.ucrChkRidges.Checked = False
+        resources.ApplyResources(Me.ucrChkRidges, "ucrChkRidges")
+        Me.ucrChkRidges.Name = "ucrChkRidges"
+        '
         'dlgHistogram
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkRidges)
         Me.Controls.Add(Me.lblStats)
         Me.Controls.Add(Me.ucrInputStats)
         Me.Controls.Add(Me.ucrChkPercentages)
@@ -183,12 +191,12 @@ Partial Class dlgHistogram
         Me.Controls.Add(Me.rdoFrequencyPolygon)
         Me.Controls.Add(Me.rdoDensity)
         Me.Controls.Add(Me.rdoHistogram)
-        Me.Controls.Add(Me.cmdHistogramOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrHistogramSelector)
         Me.Controls.Add(Me.lblfactor)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlOptions)
+        Me.Controls.Add(Me.cmdHistogramOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -213,4 +221,5 @@ Partial Class dlgHistogram
     Friend WithEvents ucrInputStats As ucrInputComboBox
     Friend WithEvents ucrChkPercentages As ucrCheck
     Friend WithEvents lblStats As Label
+    Friend WithEvents ucrChkRidges As ucrCheck
 End Class
