@@ -1668,19 +1668,22 @@ DataSheet$set("public", "remove_current_filter", function() {
 )
 
 DataSheet$set("public", "filter_string", function(filter_name) {
-  if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
+  if (!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
   curr_filter <- self$get_filter(filter_name)
-  out = "("
-  i = 1
-  for(condition in curr_filter$filter_conditions) {
-    if(i != 1) out = paste(out, curr_filter$parameters[["and_or"]])
-    out = paste0(out, " (", condition[["column"]], " ", condition[["operation"]])
-    if(condition[["operation"]] == "%in%") out = paste0(out, " c(", paste(paste0("'", condition[["value"]], "'"), collapse = ","), ")")
-    else out = paste(out, condition[["value"]])
-    out = paste0(out , ")")
-    i = i + 1
+  out <- "("
+  i <- 1
+  for (condition in curr_filter$filter_conditions) {
+    if (i != 1) out <- paste(out, curr_filter$parameters[["and_or"]])
+    out <- ifelse(!curr_filter$parameters[["not"]], paste0(out, " (", condition[["column"]], " ", condition[["operation"]]), paste0(out, " !(", condition[["column"]], " ", condition[["operation"]]))
+    if (condition[["operation"]] == "%in%") {
+      out <- paste0(out, " c(", paste(paste0("'", condition[["value"]], "'"), collapse = ","), ")")
+    } else {
+      out <- paste(out, condition[["value"]])
+    }
+    out <- paste0(out, ")")
+    i <- i + 1
   }
-  out = paste(out, ")")
+  out <- paste(out, ")")
   return(out)
 }
 )
