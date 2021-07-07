@@ -48,7 +48,6 @@ Partial Class ucrFilter
         Me.lblFilterBy = New System.Windows.Forms.Label()
         Me.cmdClearConditions = New System.Windows.Forms.Button()
         Me.mcdEditCondition = New System.Windows.Forms.Button()
-        Me.cmdRemoveCondition = New System.Windows.Forms.Button()
         Me.lblNewFilterName = New System.Windows.Forms.Label()
         Me.grpNumeric = New System.Windows.Forms.GroupBox()
         Me.cmdClear = New System.Windows.Forms.Button()
@@ -81,6 +80,7 @@ Partial Class ucrFilter
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
         Me.cmdCombineWithAndOr = New System.Windows.Forms.Button()
         Me.ttpCombineWithAndOr = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrChkNot = New instat.ucrCheck()
         Me.grpNumeric.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -133,13 +133,6 @@ Partial Class ucrFilter
         Me.mcdEditCondition.Name = "mcdEditCondition"
         Me.mcdEditCondition.Tag = "Edit_Condition"
         Me.mcdEditCondition.UseVisualStyleBackColor = True
-        '
-        'cmdRemoveCondition
-        '
-        resources.ApplyResources(Me.cmdRemoveCondition, "cmdRemoveCondition")
-        Me.cmdRemoveCondition.Name = "cmdRemoveCondition"
-        Me.cmdRemoveCondition.Tag = "Remove_Condition"
-        Me.cmdRemoveCondition.UseVisualStyleBackColor = True
         '
         'lblNewFilterName
         '
@@ -304,6 +297,8 @@ Partial Class ucrFilter
         '
         'ucrDatePicker
         '
+        Me.ucrDatePicker.DateValue = New Date(2021, 7, 7, 8, 39, 9, 171)
+        Me.ucrDatePicker.Format = "dd MMM yyyy"
         resources.ApplyResources(Me.ucrDatePicker, "ucrDatePicker")
         Me.ucrDatePicker.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDatePicker.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
@@ -366,10 +361,17 @@ Partial Class ucrFilter
         Me.cmdCombineWithAndOr.Tag = "Clear_Conditions"
         Me.cmdCombineWithAndOr.UseVisualStyleBackColor = True
         '
+        'ucrChkNot
+        '
+        Me.ucrChkNot.Checked = False
+        resources.ApplyResources(Me.ucrChkNot, "ucrChkNot")
+        Me.ucrChkNot.Name = "ucrChkNot"
+        '
         'ucrFilter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkNot)
         Me.Controls.Add(Me.cmdCombineWithAndOr)
         Me.Controls.Add(Me.ucrReceiverExpression)
         Me.Controls.Add(Me.grpNumeric)
@@ -377,7 +379,6 @@ Partial Class ucrFilter
         Me.Controls.Add(Me.ucrDatePicker)
         Me.Controls.Add(Me.ucrInputFilterName)
         Me.Controls.Add(Me.lblNewFilterName)
-        Me.Controls.Add(Me.cmdRemoveCondition)
         Me.Controls.Add(Me.mcdEditCondition)
         Me.Controls.Add(Me.cmdClearConditions)
         Me.Controls.Add(Me.lblFilterBy)
@@ -411,7 +412,6 @@ Partial Class ucrFilter
     Friend WithEvents lblFilterBy As Label
     Friend WithEvents cmdClearConditions As Button
     Friend WithEvents mcdEditCondition As Button
-    Friend WithEvents cmdRemoveCondition As Button
     Friend WithEvents lblNewFilterName As Label
     Friend WithEvents ucrInputFilterName As ucrInputComboBox
     Friend WithEvents ucrDatePicker As ucrDateTimePicker
@@ -439,4 +439,5 @@ Partial Class ucrFilter
     Friend WithEvents ucrReceiverExpression As ucrReceiverExpression
     Friend WithEvents cmdCombineWithAndOr As Button
     Friend WithEvents ttpCombineWithAndOr As ToolTip
+    Friend WithEvents ucrChkNot As ucrCheck
 End Class
