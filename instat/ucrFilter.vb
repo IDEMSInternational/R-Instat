@@ -25,6 +25,7 @@ Public Class ucrFilter
     Public Event FilterChanged()
     Public strDefaultColumn = ""
     Public strDefaultDataFrame = ""
+    Private strNot As String = ""
 
     Public Sub New()
         ' This call is required by the designer.
@@ -78,6 +79,7 @@ Public Class ucrFilter
         ucrLogicalCombobox.SetItems({"TRUE", "FALSE"})
         ucrLogicalCombobox.SetDropDownStyleAsNonEditable()
         ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (year > 1990) & (year < 2021) they have all to be TRUE.")
+        ucrChkNot.SetText("Add Not (!)")
     End Sub
 
     Private Sub SetDefaults()
@@ -85,6 +87,7 @@ Public Class ucrFilter
         ucrLogicalCombobox.SetName("TRUE")
         ucrFilterByReceiver.SetMeAsReceiver()
         VariableTypeProperties()
+        HideUnhideNotCheckBox()
     End Sub
 
     Private Sub VariableTypeProperties()
@@ -174,6 +177,7 @@ Public Class ucrFilter
     Private Sub ucrFilterOperation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFilterOperation.ControlContentsChanged
         VariableTypeProperties()
         CheckAddEnabled()
+        HideUnhideNotCheckBox()
     End Sub
 
     Private Sub ucrReceiverExpression_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpression.ControlContentsChanged
@@ -226,7 +230,7 @@ Public Class ucrFilter
         End If
         lstFilters.Columns(0).Width = -2
         lstFilters.Columns(1).Width = -2
-        ucrFilterPreview.SetName(clsFilterView.ToScript())
+        ucrFilterPreview.SetName(strNot & clsFilterView.ToScript())
         ucrFilterByReceiver.Clear()
         ucrReceiverExpression.AddtoCombobox(ucrReceiverExpression.GetText)
         RaiseEvent FilterChanged()
@@ -392,5 +396,20 @@ Public Class ucrFilter
             ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (sunhrs >14) | (sunhrs <0) then just one need be TRUE.")
         End If
         ucrFilterPreview.SetName(clsFilterView.ToScript())
+    End Sub
+
+    Private Sub ucrChkNot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNot.ControlValueChanged
+        If ucrChkNot.Checked Then
+            strNot = "!"
+            clsFilterFunction.AddParameter("not", "TRUE", iPosition:=4)
+        Else
+            strNot = ""
+            clsFilterFunction.RemoveParameterByName("not")
+        End If
+        ucrFilterPreview.SetName(strNot & clsFilterView.ToScript())
+    End Sub
+
+    Private Sub HideUnhideNotCheckBox()
+        ucrChkNot.Visible = ucrFilterOperation.GetText.Contains(">") OrElse ucrFilterOperation.GetText.Contains(">=") OrElse ucrFilterOperation.GetText.Contains("<") OrElse ucrFilterOperation.GetText.Contains("<=")
     End Sub
 End Class
