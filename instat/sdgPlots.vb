@@ -452,6 +452,7 @@ Public Class sdgPlots
         ucrNudSize.Increment = 0.1
         ucrNudSize.DecimalPlaces = 1
         ucrNudSize.SetLinkedDisplayControl(lblSize)
+        ucrNudSize.SetRDefault(0.5)
 
         ucrInputLabel.SetParameter(New RParameter("label", 20))
         ucrInputLabel.SetLinkedDisplayControl(lblLabel)
@@ -1087,25 +1088,5 @@ Public Class sdgPlots
             clsBaseOperator.RemoveParameterByName("annotate")
             grpAnnotation.Visible = False
         End If
-    End Sub
-
-    Private Sub ucrChkIncludeFacets_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkIncludeFacets.ControlValueChanged, ucr2ndFactorReceiver.ControlValueChanged, ucr1stFactorReceiver.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrChkFreeSpace_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeSpace.ControlValueChanged
-
-    End Sub
-
-    Private Sub chkScales_CheckedChanged(ucrChangedControl As ucrCore) Handles ucrChkFreeScalesY.ControlValueChanged, ucrChkFreeScalesX.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrPnlHorizonatalVertical_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlHorizonatalVertical.ControlValueChanged, ucrChkMargin.ControlValueChanged
-
-    End Sub
-
-    Private Sub LabsControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputGraphTitle.ControlValueChanged, ucrInputGraphSubTitle.ControlValueChanged, ucrInputGraphCaption.ControlValueChanged
-
     End Sub
 End Class
