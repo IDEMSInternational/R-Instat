@@ -83,7 +83,7 @@ Public Class dlgOptions
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinRViewer)
         ucrPnlGraphDisplay.AddRadioButton(rdoDisplayinSeparateWindows)
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
-        ucrInputLanguage.SetItems({"English", "French", "Portuguese"})
+        ucrInputLanguage.SetItems({"English", "French", "Portuguese", "Kiswahili"})
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
     End Sub
 
@@ -122,6 +122,8 @@ Public Class dlgOptions
                 ucrInputLanguage.SetText("French")
             Case "pt-PT"
                 ucrInputLanguage.SetText("Portuguese")
+            Case "sw-KE"
+                ucrInputLanguage.SetText("Kiswahili")
         End Select
 
         strPrevLanguageCulture = frmMain.clsInstatOptions.strLanguageCultureCode
@@ -237,6 +239,9 @@ Public Class dlgOptions
             frmMain.TranslateFrmMainMenu()
         End If
         strPrevLanguageCulture = strCurrLanguageCulture
+
+        frmMain.SetLanButtonVisibility(frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB")
+
         'disables the command after running it
         cmdApply.Enabled = True
         cmdOk.Enabled = True
@@ -254,6 +259,8 @@ Public Class dlgOptions
                 strCurrLanguageCulture = "fr-FR"
             Case "Portuguese"
                 strCurrLanguageCulture = "pt-PT"
+            Case "Kiswahili"
+                strCurrLanguageCulture = "sw-KE"
         End Select
         ApplyEnabled(True)
     End Sub

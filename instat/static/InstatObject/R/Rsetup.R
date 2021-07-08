@@ -197,7 +197,9 @@ load_R_Instat_packages <- function() {
   # wakefield because many functions do not work without loading (https://github.com/trinker/wakefield/issues/11)
   # latticeExtra because conditionalQuantile key positions work well when latticeExtra is loaded
   # texmex loaded because of extreme value distributions 
-  packs_to_load <- c("plyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield", "circular", "latticeExtra", "texmex")
+  # tidyr loaded because unite() function is required by mmtable() function from mmtable2 package 
+  # purrr loaded because map_int() is required  by function(s) such as header_top_left() from mmtable2 package
+  packs_to_load <- c("purrr", "plyr", "tidyr", "dplyr", "ggplot2", "ggthemes", "svglite", "ggfortify", "PCICt", "sp", "ggmosaic", "wakefield", "circular", "latticeExtra", "texmex")
   for(pack in packs_to_load) {
     try(library(pack, character.only = TRUE))
   }
