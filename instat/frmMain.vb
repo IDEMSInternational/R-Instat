@@ -176,9 +176,10 @@ Public Class frmMain
         translateMenu(mnuBar.Items, Me)
     End Sub
 
-    Public Sub EnableVisibleLanButton(bVisible As Boolean)
+    Public Sub SetLanButtonVisibility(bVisible As Boolean)
         cmdLanguage.Visible = bVisible
     End Sub
+
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
         mnuFile.Enabled = bEnabled
         mnuEdit.Enabled = bEnabled
