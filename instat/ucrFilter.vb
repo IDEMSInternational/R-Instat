@@ -184,7 +184,7 @@ Public Class ucrFilter
         CheckAddEnabled()
     End Sub
 
-    Private Sub cmdAddFilter_Click(sender As Object, e As EventArgs) Handles cmdAddCondition.Click
+    Private Sub cmdAddCondition_Click(sender As Object, e As EventArgs) Handles cmdAddCondition.Click
         Dim clsCurrentOperator As New ROperator
         Dim clsCurrentConditionListFunction As New RFunction
         Dim lviCondition As ListViewItem
