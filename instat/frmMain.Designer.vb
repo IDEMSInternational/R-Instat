@@ -643,21 +643,22 @@ Partial Class frmMain
         Me.ExportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
-        Me.splMetadata = New System.Windows.Forms.SplitContainer()
-        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
-        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
         Me.splLogScript = New System.Windows.Forms.SplitContainer()
-        Me.ucrLogWindow = New instat.ucrLog()
-        Me.ucrScriptWindow = New instat.ucrScript()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
-        Me.ucrDataViewer = New instat.ucrDataView()
-        Me.ucrOutput = New instat.ucrOutputWindow()
         Me.mnuRViewer = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPlotly = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdLanguage = New System.Windows.Forms.Button()
+        Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
+        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
+        Me.ucrLogWindow = New instat.ucrLog()
+        Me.ucrScriptWindow = New instat.ucrScript()
+        Me.ucrDataViewer = New instat.ucrDataView()
+        Me.ucrOutput = New instat.ucrOutputWindow()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -669,10 +670,6 @@ Partial Class frmMain
         Me.splExtraWindows.Panel1.SuspendLayout()
         Me.splExtraWindows.Panel2.SuspendLayout()
         Me.splExtraWindows.SuspendLayout()
-        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splMetadata.Panel1.SuspendLayout()
-        Me.splMetadata.Panel2.SuspendLayout()
-        Me.splMetadata.SuspendLayout()
         CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splLogScript.Panel1.SuspendLayout()
         Me.splLogScript.Panel2.SuspendLayout()
@@ -681,6 +678,10 @@ Partial Class frmMain
         Me.splDataOutput.Panel1.SuspendLayout()
         Me.splDataOutput.Panel2.SuspendLayout()
         Me.splDataOutput.SuspendLayout()
+        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splMetadata.Panel1.SuspendLayout()
+        Me.splMetadata.Panel2.SuspendLayout()
+        Me.splMetadata.SuspendLayout()
         Me.SuspendLayout()
         '
         'mnuDescribe
@@ -4051,33 +4052,6 @@ Partial Class frmMain
         Me.splExtraWindows.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splExtraWindows.Panel2.Controls.Add(Me.splLogScript)
         '
-        'splMetadata
-        '
-        Me.splMetadata.BackColor = System.Drawing.Color.LightGray
-        resources.ApplyResources(Me.splMetadata, "splMetadata")
-        Me.splMetadata.Name = "splMetadata"
-        '
-        'splMetadata.Panel1
-        '
-        Me.splMetadata.Panel1.Controls.Add(Me.ucrColumnMeta)
-        '
-        'splMetadata.Panel2
-        '
-        Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
-        Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
-        '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -4094,19 +4068,6 @@ Partial Class frmMain
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
         '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Tag = "Script_Window"
-        '
         'splDataOutput
         '
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
@@ -4122,20 +4083,6 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
-        '
-        'ucrDataViewer
-        '
-        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
-        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataViewer, "ucrDataViewer")
-        Me.ucrDataViewer.Name = "ucrDataViewer"
-        Me.ucrDataViewer.Tag = "Data_View"
-        '
-        'ucrOutput
-        '
-        Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrOutput, "ucrOutput")
-        Me.ucrOutput.Name = "ucrOutput"
         '
         'mnuRViewer
         '
@@ -4167,10 +4114,72 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
+        'cmdLanguage
+        '
+        resources.ApplyResources(Me.cmdLanguage, "cmdLanguage")
+        Me.cmdLanguage.Name = "cmdLanguage"
+        Me.cmdLanguage.Tag = ""
+        Me.cmdLanguage.UseVisualStyleBackColor = True
+        '
+        'splMetadata
+        '
+        Me.splMetadata.BackColor = System.Drawing.Color.LightGray
+        resources.ApplyResources(Me.splMetadata, "splMetadata")
+        Me.splMetadata.Name = "splMetadata"
+        '
+        'splMetadata.Panel1
+        '
+        Me.splMetadata.Panel1.Controls.Add(Me.ucrColumnMeta)
+        '
+        'splMetadata.Panel2
+        '
+        Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
+        Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
+        '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Tag = "Script_Window"
+        '
+        'ucrDataViewer
+        '
+        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
+        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataViewer, "ucrDataViewer")
+        Me.ucrDataViewer.Name = "ucrDataViewer"
+        Me.ucrDataViewer.Tag = "Data_View"
+        '
+        'ucrOutput
+        '
+        Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrOutput, "ucrOutput")
+        Me.ucrOutput.Name = "ucrOutput"
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdLanguage)
         Me.Controls.Add(Me.splOverall)
         Me.Controls.Add(Me.stsStrip)
         Me.Controls.Add(Me.Tool_strip)
@@ -4193,10 +4202,6 @@ Partial Class frmMain
         Me.splExtraWindows.Panel2.ResumeLayout(False)
         CType(Me.splExtraWindows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splExtraWindows.ResumeLayout(False)
-        Me.splMetadata.Panel1.ResumeLayout(False)
-        Me.splMetadata.Panel2.ResumeLayout(False)
-        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.splMetadata.ResumeLayout(False)
         Me.splLogScript.Panel1.ResumeLayout(False)
         Me.splLogScript.Panel2.ResumeLayout(False)
         CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4205,6 +4210,10 @@ Partial Class frmMain
         Me.splDataOutput.Panel2.ResumeLayout(False)
         CType(Me.splDataOutput, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splDataOutput.ResumeLayout(False)
+        Me.splMetadata.Panel1.ResumeLayout(False)
+        Me.splMetadata.Panel2.ResumeLayout(False)
+        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splMetadata.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4832,4 +4841,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticFileImportfromClimateDataStore As ToolStripMenuItem
     Friend WithEvents mnuSetupForDataEntry As ToolStripMenuItem
     Friend WithEvents mnuEditPasteNewDataFrame As ToolStripMenuItem
+    Friend WithEvents cmdLanguage As Button
 End Class
