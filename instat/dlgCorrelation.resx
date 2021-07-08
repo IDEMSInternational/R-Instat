@@ -180,6 +180,78 @@
   <data name="&gt;&gt;lblSecondColumn.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
+  <data name="&gt;&gt;rdoKendall.Name" xml:space="preserve">
+    <value>rdoKendall</value>
+  </data>
+  <data name="&gt;&gt;rdoKendall.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoKendall.Parent" xml:space="preserve">
+    <value>grpMethod</value>
+  </data>
+  <data name="&gt;&gt;rdoKendall.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rdoPearson.Name" xml:space="preserve">
+    <value>rdoPearson</value>
+  </data>
+  <data name="&gt;&gt;rdoPearson.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoPearson.Parent" xml:space="preserve">
+    <value>grpMethod</value>
+  </data>
+  <data name="&gt;&gt;rdoPearson.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rdoSpearman.Name" xml:space="preserve">
+    <value>rdoSpearman</value>
+  </data>
+  <data name="&gt;&gt;rdoSpearman.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSpearman.Parent" xml:space="preserve">
+    <value>grpMethod</value>
+  </data>
+  <data name="&gt;&gt;rdoSpearman.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMethod.Name" xml:space="preserve">
+    <value>ucrPnlMethod</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMethod.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMethod.Parent" xml:space="preserve">
+    <value>grpMethod</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlMethod.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpMethod.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 232</value>
+  </data>
+  <data name="grpMethod.Size" type="System.Drawing.Size, System.Drawing">
+    <value>246, 45</value>
+  </data>
+  <data name="grpMethod.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="grpMethod.Text" xml:space="preserve">
+    <value>Method</value>
+  </data>
+  <data name="&gt;&gt;grpMethod.Name" xml:space="preserve">
+    <value>grpMethod</value>
+  </data>
+  <data name="&gt;&gt;grpMethod.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpMethod.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpMethod.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
   <data name="rdoKendall.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -291,30 +363,6 @@
   <data name="&gt;&gt;ucrPnlMethod.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="grpMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 232</value>
-  </data>
-  <data name="grpMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 45</value>
-  </data>
-  <data name="grpMethod.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="grpMethod.Text" xml:space="preserve">
-    <value>Method</value>
-  </data>
-  <data name="&gt;&gt;grpMethod.Name" xml:space="preserve">
-    <value>grpMethod</value>
-  </data>
-  <data name="&gt;&gt;grpMethod.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpMethod.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpMethod.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
   <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -349,7 +397,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoCompleteRowsOnly.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 18</value>
+    <value>6, 23</value>
   </data>
   <data name="rdoCompleteRowsOnly.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 17</value>
@@ -379,7 +427,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoPairwise.Location" type="System.Drawing.Point, System.Drawing">
-    <value>146, 18</value>
+    <value>6, 46</value>
   </data>
   <data name="rdoPairwise.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 17</value>
@@ -403,10 +451,10 @@
     <value>1</value>
   </data>
   <data name="ucrPnlCompletePairwise.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 16</value>
+    <value>6, 16</value>
   </data>
   <data name="ucrPnlCompletePairwise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 24</value>
+    <value>152, 49</value>
   </data>
   <data name="ucrPnlCompletePairwise.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -424,10 +472,10 @@
     <value>2</value>
   </data>
   <data name="grpMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 232</value>
+    <value>261, 232</value>
   </data>
   <data name="grpMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>225, 45</value>
+    <value>167, 71</value>
   </data>
   <data name="grpMissing.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -487,7 +535,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoTwoColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 10</value>
+    <value>119, 10</value>
   </data>
   <data name="rdoTwoColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 27</value>
@@ -523,7 +571,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoMultipleColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>227, 10</value>
+    <value>243, 10</value>
   </data>
   <data name="rdoMultipleColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 27</value>
@@ -556,7 +604,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 75</value>
+    <value>255, 75</value>
   </data>
   <data name="lblSelectedVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
@@ -586,7 +634,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>257, 24</value>
+    <value>270, 24</value>
   </data>
   <data name="ucrSaveModel.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -628,7 +676,7 @@
     <value>9, 309</value>
   </data>
   <data name="ucrChkCorrelationMatrix.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 20</value>
+    <value>280, 20</value>
   </data>
   <data name="ucrChkCorrelationMatrix.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -673,7 +721,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>487, 416</value>
+    <value>436, 416</value>
   </data>
   <data name="ucrReceiverSecondColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 142</value>
@@ -748,7 +796,7 @@
     <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 361</value>
+    <value>14, 361</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>

@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 11</value>
+    <value>279, 11</value>
   </data>
   <data name="lblSelectedVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 13</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSummariseBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 181</value>
+    <value>276, 184</value>
   </data>
   <data name="lblSummariseBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>76, 13</value>
@@ -184,10 +184,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMissingOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 113</value>
+    <value>186, 104</value>
   </data>
   <data name="cmdMissingOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 26</value>
+    <value>80, 37</value>
   </data>
   <data name="cmdMissingOptions.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -253,7 +253,7 @@
     <value>6, 117</value>
   </data>
   <data name="ucrChkOmitMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>130, 20</value>
+    <value>182, 20</value>
   </data>
   <data name="ucrChkOmitMissing.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -316,7 +316,7 @@
     <value>10, 196</value>
   </data>
   <data name="grpOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>249, 145</value>
+    <value>266, 156</value>
   </data>
   <data name="grpOptions.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -340,10 +340,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 302</value>
+    <value>279, 300</value>
   </data>
   <data name="cmdSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 23</value>
+    <value>133, 23</value>
   </data>
   <data name="cmdSummaries.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -367,10 +367,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdProportionsPercentages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 328</value>
+    <value>279, 329</value>
   </data>
   <data name="cmdProportionsPercentages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>143, 23</value>
+    <value>133, 23</value>
   </data>
   <data name="cmdProportionsPercentages.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -391,7 +391,7 @@
     <value>2</value>
   </data>
   <data name="ucrChkWeights.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 134</value>
+    <value>280, 127</value>
   </data>
   <data name="ucrChkWeights.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 20</value>
@@ -421,7 +421,7 @@
     <value>416, 418</value>
   </data>
   <data name="ucrReceiverByFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 196</value>
+    <value>279, 197</value>
   </data>
   <data name="ucrReceiverByFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -445,7 +445,7 @@
     <value>5</value>
   </data>
   <data name="ucrReceiverSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 26</value>
+    <value>280, 24</value>
   </data>
   <data name="ucrReceiverSelectedVariables.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -517,7 +517,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Column Statistics</value>
+    <value>Column Summaries</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgColumnStats</value>
@@ -526,7 +526,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverWeights.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 157</value>
+    <value>279, 150</value>
   </data>
   <data name="ucrReceiverWeights.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

@@ -146,4 +146,8 @@ Public Class dlgGeneralForGraphics
         'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
         TestOKEnabled()
     End Sub
+
+    Private Sub ucrSaveGraph_Load(sender As Object, e As EventArgs) Handles ucrSaveGraph.Load
+
+    End Sub
 End Class

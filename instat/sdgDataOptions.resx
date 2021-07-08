@@ -232,7 +232,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoForDialog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 19</value>
+    <value>154, 19</value>
   </data>
   <data name="rdoForDialog.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 17</value>
@@ -524,9 +524,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>375, 351</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

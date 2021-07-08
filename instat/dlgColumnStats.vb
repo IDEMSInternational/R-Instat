@@ -228,6 +228,18 @@ Public Class dlgColumnStats
         sdgMissingOptions.ShowDialog()
     End Sub
 
+    Private Sub ucrChkOmitMissing_Load(sender As Object, e As EventArgs) Handles ucrChkOmitMissing.Load
+
+    End Sub
+
+    Private Sub ucrChkWeights_Load(sender As Object, e As EventArgs) Handles ucrChkWeights.Load
+
+    End Sub
+
+    Private Sub lblSummariseBy_Click(sender As Object, e As EventArgs) Handles lblSummariseBy.Click
+
+    End Sub
+
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
         TestOKEnabled()
     End Sub

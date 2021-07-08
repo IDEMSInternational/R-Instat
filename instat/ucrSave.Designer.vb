@@ -61,6 +61,7 @@ Partial Class ucrSave
         '
         Me.ucrInputComboSave.AddQuotesIfUnrecognised = True
         resources.ApplyResources(Me.ucrInputComboSave, "ucrInputComboSave")
+        Me.ucrInputComboSave.GetSetSelectedIndex = -1
         Me.ucrInputComboSave.IsReadOnly = False
         Me.ucrInputComboSave.Name = "ucrInputComboSave"
         '

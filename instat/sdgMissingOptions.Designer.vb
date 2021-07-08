@@ -35,7 +35,7 @@ Partial Class sdgMissingOptions
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(91, 139)
+        Me.ucrBase.Location = New System.Drawing.Point(94, 134)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(142, 30)
         Me.ucrBase.TabIndex = 0
@@ -45,7 +45,7 @@ Partial Class sdgMissingOptions
         Me.ucrInputPercentage.AddQuotesIfUnrecognised = True
         Me.ucrInputPercentage.IsMultiline = False
         Me.ucrInputPercentage.IsReadOnly = False
-        Me.ucrInputPercentage.Location = New System.Drawing.Point(268, 67)
+        Me.ucrInputPercentage.Location = New System.Drawing.Point(280, 68)
         Me.ucrInputPercentage.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
         Me.ucrInputPercentage.Name = "ucrInputPercentage"
         Me.ucrInputPercentage.Size = New System.Drawing.Size(50, 21)
@@ -64,7 +64,7 @@ Partial Class sdgMissingOptions
         '
         Me.ucrNudNumberNotMissing.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumberNotMissing.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumberNotMissing.Location = New System.Drawing.Point(268, 41)
+        Me.ucrNudNumberNotMissing.Location = New System.Drawing.Point(280, 36)
         Me.ucrNudNumberNotMissing.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudNumberNotMissing.Maximum = New Decimal(New Integer() {340, 0, 0, 0})
         Me.ucrNudNumberNotMissing.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -77,7 +77,7 @@ Partial Class sdgMissingOptions
         '
         Me.ucrNudConsecutive.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudConsecutive.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudConsecutive.Location = New System.Drawing.Point(268, 99)
+        Me.ucrNudConsecutive.Location = New System.Drawing.Point(280, 100)
         Me.ucrNudConsecutive.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudConsecutive.Maximum = New Decimal(New Integer() {340, 0, 0, 0})
         Me.ucrNudConsecutive.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -89,10 +89,10 @@ Partial Class sdgMissingOptions
         'ucrChkConsecutiveMissing
         '
         Me.ucrChkConsecutiveMissing.Checked = False
-        Me.ucrChkConsecutiveMissing.Location = New System.Drawing.Point(9, 99)
+        Me.ucrChkConsecutiveMissing.Location = New System.Drawing.Point(9, 100)
         Me.ucrChkConsecutiveMissing.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkConsecutiveMissing.Name = "ucrChkConsecutiveMissing"
-        Me.ucrChkConsecutiveMissing.Size = New System.Drawing.Size(258, 20)
+        Me.ucrChkConsecutiveMissing.Size = New System.Drawing.Size(305, 20)
         Me.ucrChkConsecutiveMissing.TabIndex = 15
         '
         'ucrChkMaxNumMissing
@@ -110,14 +110,14 @@ Partial Class sdgMissingOptions
         Me.ucrChkMaxPercMissing.Location = New System.Drawing.Point(9, 70)
         Me.ucrChkMaxPercMissing.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkMaxPercMissing.Name = "ucrChkMaxPercMissing"
-        Me.ucrChkMaxPercMissing.Size = New System.Drawing.Size(227, 20)
+        Me.ucrChkMaxPercMissing.Size = New System.Drawing.Size(305, 20)
         Me.ucrChkMaxPercMissing.TabIndex = 13
         '
         'ucrNudNumber
         '
         Me.ucrNudNumber.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNumber.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNumber.Location = New System.Drawing.Point(268, 14)
+        Me.ucrNudNumber.Location = New System.Drawing.Point(280, 6)
         Me.ucrNudNumber.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrNudNumber.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNumber.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
@@ -130,7 +130,7 @@ Partial Class sdgMissingOptions
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(324, 176)
+        Me.ClientSize = New System.Drawing.Size(336, 165)
         Me.Controls.Add(Me.ucrInputPercentage)
         Me.Controls.Add(Me.ucrChkMinNumNonMissing)
         Me.Controls.Add(Me.ucrNudNumberNotMissing)

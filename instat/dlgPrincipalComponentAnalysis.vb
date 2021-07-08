@@ -23,6 +23,11 @@ Public Class dlgPrincipalComponentAnalysis
     Private clsREigenValues, clsREigenVectors, clsRRotation, clsRRotationCoord, clsRRotationEig As New RFunction
     Private clsRScreePlotFunction, clsRThemeMinimal, clsRVariablesPlotFunction, clsRVariablesPlotTheme, clsRIndividualsPlotFunction, clsRIndividualsPlotTheme, clsRBiplotFunction, clsRBiplotTheme, clsRBarPlotFunction As New RFunction
     Private clsRFactor, clsRMelt, clsRBarPlotGeom, clsRBarPlotAes, clsRBarPlotFacet, clsRVariablesPlotFunctionValue, clsRIndividualsFunctionValue, clsRBiplotFunctionValue As New RFunction
+
+    Private Sub ucrSaveResult_Load(sender As Object, e As EventArgs) Handles ucrSaveResult.Load
+
+    End Sub
+
     Private clsRScreePlot, clsRVariablesPlot, clsRIndividualsPlot, clsRBiplot As New RSyntax
     Dim clsRBarPlot, clsRBarPlot0, clsBaseOperator As New ROperator
     ' call all classes in the sub dialog

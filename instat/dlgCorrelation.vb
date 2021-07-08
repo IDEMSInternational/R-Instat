@@ -239,6 +239,18 @@ Public Class dlgCorrelation
         bResetSubdialog = False
     End Sub
 
+    Private Sub rdoPairwise_CheckedChanged(sender As Object, e As EventArgs) Handles rdoPairwise.CheckedChanged
+
+    End Sub
+
+    Private Sub ucrPnlCompletePairwise_Load(sender As Object, e As EventArgs) Handles ucrPnlCompletePairwise.Load
+
+    End Sub
+
+    Private Sub rdoMultipleColumns_CheckedChanged(sender As Object, e As EventArgs) Handles rdoMultipleColumns.CheckedChanged
+
+    End Sub
+
     Private Sub ucrBase_BeforeClickOk(sender As Object, e As EventArgs) Handles ucrBase.BeforeClickOk
         If rdoTwoColumns.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsCorrelationTestFunction)
