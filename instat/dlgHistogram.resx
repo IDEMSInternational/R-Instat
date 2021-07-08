@@ -223,7 +223,7 @@
     <value>2</value>
   </data>
   <data name="rdoDensity.Text" xml:space="preserve">
-    <value>Density</value>
+    <value>Density/Ridges</value>
   </data>
   <data name="rdoDensity.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>

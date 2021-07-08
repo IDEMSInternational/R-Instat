@@ -25,7 +25,6 @@ Public Class dlgHistogram
     Private clsRaesFunction As New RFunction
     Private clsLabsFunction As New RFunction
     Private clsXlabsFunction As New RFunction
-    Private clsRidgesAesFunction As New RFunction
     Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
@@ -47,7 +46,6 @@ Public Class dlgHistogram
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
     Private strGeomParameterNames() As String = {strFirstParameterName}
-
 
     Private Sub dlgHistogram_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -101,6 +99,7 @@ Public Class dlgHistogram
         ucrInputStats.AddToLinkedControls(ucrChkPercentages, {"Fractions"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
 
         ucrPnlOptions.AddToLinkedControls({ucrChkRidges}, {rdoDensity}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkRidges.AddToLinkedControls(ucrInputStats, {"FALSE"}, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
 
         ucrChkPercentages.SetText("percentages")
         ucrChkPercentages.AddParameterPresentCondition(True, "scale")
@@ -133,7 +132,6 @@ Public Class dlgHistogram
         clsRaesFunction = New RFunction
         clsHistAesFunction = New RFunction
         clsPercentage = New RFunction
-        clsRidgesAesFunction = New RFunction
         ucrHistogramSelector.Reset()
         ucrHistogramSelector.SetGgplotFunction(clsBaseOperator)
         ucrSaveHist.Reset()
@@ -161,9 +159,6 @@ Public Class dlgHistogram
         clsRgeomPlotFunction.SetRCommand("geom_histogram")
         clsRgeomPlotFunction.AddParameter("mapping", clsRFunctionParameter:=clsHistAesFunction)
 
-        clsRidgesAesFunction.SetPackageName("ggplot2")
-        clsRidgesAesFunction.SetRCommand("aes")
-
         clsPercentage.SetPackageName("scales")
         clsPercentage.SetRCommand("percent_format")
 
@@ -190,8 +185,8 @@ Public Class dlgHistogram
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrVariablesAsFactorforHist.AddAdditionalCodeParameterPair(clsRidgesAesFunction, New RParameter("x", iNewPosition:=0), iAdditionalPairNo:=1)
-        ucrFactorReceiver.AddAdditionalCodeParameterPair(clsRidgesAesFunction, New RParameter("y", iNewPosition:=1), iAdditionalPairNo:=1)
+        'ucrVariablesAsFactorforHist.AddAdditionalCodeParameterPair(clsHistAesFunction, New RParameter("x", iNewPosition:=1), iAdditionalPairNo:=1)
+        'ucrFactorReceiver.AddAdditionalCodeParameterPair(clsHistAesFunction, New RParameter("y", iNewPosition:=2), iAdditionalPairNo:=1)
 
         ucrVariablesAsFactorforHist.SetRCode(clsRaesFunction, bReset)
         ucrInputStats.SetRCode(clsHistAesFunction, bReset)
@@ -230,11 +225,7 @@ Public Class dlgHistogram
             End If
         Next
         'this is here because of the subdialog 
-        If ucrChkRidges.Checked Then
-            clsRgeomPlotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRidgesAesFunction)
-        Else
-            clsRgeomPlotFunction.AddParameter("mapping", clsRFunctionParameter:=clsHistAesFunction)
-        End If
+        clsRgeomPlotFunction.AddParameter("mapping", clsRFunctionParameter:=clsHistAesFunction)
         TestOkEnabled()
     End Sub
 
@@ -246,6 +237,9 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub SetDialogOptions()
+        clsHistAesFunction.RemoveParameterByPosition(1)
+        clsHistAesFunction.RemoveParameterByPosition(2)
+        clsHistAesFunction.AddParameter("y", "stat(count)", iPosition:=0)
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         If rdoHistogram.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_histogram")
@@ -255,9 +249,11 @@ Public Class dlgHistogram
             End If
         ElseIf rdoDensity.Checked Then
             If ucrChkRidges.Checked Then
+                clsHistAesFunction.RemoveParameterByPosition(0)
+                clsHistAesFunction.AddParameter("x", clsRFunctionParameter:=ucrVariablesAsFactorforHist.GetVariables(), iPosition:=1)
+                clsHistAesFunction.AddParameter("y", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=2)
                 clsRgeomPlotFunction.SetPackageName("ggridges")
                 clsRgeomPlotFunction.SetRCommand("geom_density_ridges")
-                clsRgeomPlotFunction.AddParameter("mapping", clsRFunctionParameter:=clsRidgesAesFunction)
                 ucrFactorReceiver.ChangeParameterName("y")
                 If Not ucrSaveHist.bUserTyped Then
                     ucrSaveHist.SetPrefix("density_ridges")
@@ -285,10 +281,8 @@ Public Class dlgHistogram
             cmdHistogramOptions.Text = "Histogram Options"
         ElseIf rdoDensity.Checked Then
             If ucrChkRidges.Checked Then
-                ucrInputStats.Visible = False
                 cmdHistogramOptions.Text = "Density Ridges Options"
             Else
-                ucrInputStats.Visible = True
                 cmdHistogramOptions.Text = "Density Options"
             End If
         ElseIf rdoFrequencyPolygon.Checked Then
@@ -307,7 +301,7 @@ Public Class dlgHistogram
         End If
     End Sub
 
-    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkRidges.ControlValueChanged
+    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlContentsChanged, ucrVariablesAsFactorforHist.ControlContentsChanged
         SetDialogOptions()
     End Sub
 
