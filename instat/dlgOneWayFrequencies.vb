@@ -266,4 +266,12 @@ Public Class dlgOneWayFrequencies
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrNudGroups.ControlContentsChanged, ucrChkGroupData.ControlContentsChanged, ucrReceiverOneWayFreq.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrNudGroups_Load(sender As Object, e As EventArgs) Handles ucrNudGroups.Load
+
+    End Sub
+
+    Private Sub ucrReceiverWeights_Load(sender As Object, e As EventArgs) Handles ucrReceiverWeights.Load
+
+    End Sub
 End Class

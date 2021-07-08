@@ -59,7 +59,7 @@ Partial Class dlgOpenNetCDF
         '
         'cmdBrowseFile
         '
-        Me.cmdBrowseFile.Location = New System.Drawing.Point(320, 19)
+        Me.cmdBrowseFile.Location = New System.Drawing.Point(309, 19)
         Me.cmdBrowseFile.Name = "cmdBrowseFile"
         Me.cmdBrowseFile.Size = New System.Drawing.Size(132, 23)
         Me.cmdBrowseFile.TabIndex = 2
@@ -97,7 +97,7 @@ Partial Class dlgOpenNetCDF
         '
         'cmdDetails
         '
-        Me.cmdDetails.Location = New System.Drawing.Point(314, 100)
+        Me.cmdDetails.Location = New System.Drawing.Point(309, 100)
         Me.cmdDetails.Name = "cmdDetails"
         Me.cmdDetails.Size = New System.Drawing.Size(138, 23)
         Me.cmdDetails.TabIndex = 4
@@ -112,7 +112,7 @@ Partial Class dlgOpenNetCDF
         Me.rdoShort.FlatAppearance.BorderSize = 2
         Me.rdoShort.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoShort.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoShort.Location = New System.Drawing.Point(521, 13)
+        Me.rdoShort.Location = New System.Drawing.Point(503, 13)
         Me.rdoShort.Name = "rdoShort"
         Me.rdoShort.Size = New System.Drawing.Size(76, 27)
         Me.rdoShort.TabIndex = 6
@@ -128,7 +128,7 @@ Partial Class dlgOpenNetCDF
         Me.rdoMedium.FlatAppearance.BorderSize = 2
         Me.rdoMedium.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoMedium.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoMedium.Location = New System.Drawing.Point(594, 13)
+        Me.rdoMedium.Location = New System.Drawing.Point(576, 13)
         Me.rdoMedium.Name = "rdoMedium"
         Me.rdoMedium.Size = New System.Drawing.Size(76, 27)
         Me.rdoMedium.TabIndex = 7
@@ -144,7 +144,7 @@ Partial Class dlgOpenNetCDF
         Me.rdoLong.FlatAppearance.BorderSize = 2
         Me.rdoLong.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoLong.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoLong.Location = New System.Drawing.Point(668, 13)
+        Me.rdoLong.Location = New System.Drawing.Point(650, 13)
         Me.rdoLong.Name = "rdoLong"
         Me.rdoLong.Size = New System.Drawing.Size(76, 27)
         Me.rdoLong.TabIndex = 8
@@ -155,7 +155,7 @@ Partial Class dlgOpenNetCDF
         '
         'cmdFromLibrary
         '
-        Me.cmdFromLibrary.Location = New System.Drawing.Point(320, 73)
+        Me.cmdFromLibrary.Location = New System.Drawing.Point(309, 73)
         Me.cmdFromLibrary.Name = "cmdFromLibrary"
         Me.cmdFromLibrary.Size = New System.Drawing.Size(132, 23)
         Me.cmdFromLibrary.TabIndex = 3
@@ -165,7 +165,7 @@ Partial Class dlgOpenNetCDF
         '
         'cmdBrowseFolder
         '
-        Me.cmdBrowseFolder.Location = New System.Drawing.Point(320, 46)
+        Me.cmdBrowseFolder.Location = New System.Drawing.Point(309, 46)
         Me.cmdBrowseFolder.Name = "cmdBrowseFolder"
         Me.cmdBrowseFolder.Size = New System.Drawing.Size(132, 23)
         Me.cmdBrowseFolder.TabIndex = 14
@@ -197,7 +197,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputFileDetails.AddQuotesIfUnrecognised = True
         Me.ucrInputFileDetails.IsMultiline = True
         Me.ucrInputFileDetails.IsReadOnly = True
-        Me.ucrInputFileDetails.Location = New System.Drawing.Point(473, 46)
+        Me.ucrInputFileDetails.Location = New System.Drawing.Point(452, 46)
         Me.ucrInputFileDetails.Name = "ucrInputFileDetails"
         Me.ucrInputFileDetails.Size = New System.Drawing.Size(320, 159)
         Me.ucrInputFileDetails.TabIndex = 9
@@ -207,7 +207,7 @@ Partial Class dlgOpenNetCDF
         Me.ucrInputPath.AddQuotesIfUnrecognised = True
         Me.ucrInputPath.IsMultiline = False
         Me.ucrInputPath.IsReadOnly = False
-        Me.ucrInputPath.Location = New System.Drawing.Point(58, 20)
+        Me.ucrInputPath.Location = New System.Drawing.Point(51, 21)
         Me.ucrInputPath.Name = "ucrInputPath"
         Me.ucrInputPath.Size = New System.Drawing.Size(256, 21)
         Me.ucrInputPath.TabIndex = 1
@@ -231,7 +231,7 @@ Partial Class dlgOpenNetCDF
         '
         'ucrPnlFileDetails
         '
-        Me.ucrPnlFileDetails.Location = New System.Drawing.Point(506, 11)
+        Me.ucrPnlFileDetails.Location = New System.Drawing.Point(488, 11)
         Me.ucrPnlFileDetails.Name = "ucrPnlFileDetails"
         Me.ucrPnlFileDetails.Size = New System.Drawing.Size(254, 30)
         Me.ucrPnlFileDetails.TabIndex = 0
@@ -241,7 +241,7 @@ Partial Class dlgOpenNetCDF
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(799, 217)
+        Me.ClientSize = New System.Drawing.Size(778, 217)
         Me.Controls.Add(Me.lblFilesFound)
         Me.Controls.Add(Me.lblNFiles)
         Me.Controls.Add(Me.cmdBrowseFolder)

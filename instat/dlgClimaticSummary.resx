@@ -129,10 +129,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="rdoAnnual.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 14</value>
+    <value>71, 14</value>
   </data>
   <data name="rdoAnnual.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 27</value>
+    <value>67, 27</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoAnnual.TabIndex" type="System.Int32, mscorlib">
@@ -166,7 +166,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoWithinYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>269, 14</value>
+    <value>222, 14</value>
   </data>
   <data name="rdoWithinYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 27</value>
@@ -202,7 +202,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoAnnualWithinYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>183, 14</value>
+    <value>136, 14</value>
   </data>
   <data name="rdoAnnualWithinYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 27</value>
@@ -631,7 +631,7 @@
     <value>12, 14</value>
   </data>
   <data name="rdoStation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 27</value>
+    <value>61, 27</value>
   </data>
   <data name="rdoStation.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -664,7 +664,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoDaily.Location" type="System.Drawing.Point, System.Drawing">
-    <value>355, 14</value>
+    <value>308, 14</value>
   </data>
   <data name="rdoDaily.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 27</value>
@@ -697,7 +697,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>450, 480</value>
+    <value>414, 480</value>
   </data>
   <data name="ucrInputFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
     <value>116, 400</value>
@@ -889,7 +889,7 @@
     <value>9, 10</value>
   </data>
   <data name="ucrPnlAnnualWithin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>434, 35</value>
+    <value>396, 35</value>
   </data>
   <data name="ucrPnlAnnualWithin.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -905,9 +905,6 @@
   </data>
   <data name="&gt;&gt;ucrPnlAnnualWithin.ZOrder" xml:space="preserve">
     <value>23</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

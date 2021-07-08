@@ -165,6 +165,10 @@ Public Class dlgClimaticLengthOfSeason
         ucrChkType.SetRCode(clsCombinationListFunction, bReset)
     End Sub
 
+    Private Sub ucrChkLengthofSeason_Load(sender As Object, e As EventArgs) Handles ucrChkLengthofSeason.Load
+
+    End Sub
+
     Private Sub TestOKEnabled()
         Dim bOkEnabled As Boolean
         If ucrChkLengthofSeason.Checked Then
@@ -179,7 +183,7 @@ Public Class dlgClimaticLengthOfSeason
                 bOkEnabled = False
             End If
         End If
-            ucrBase.OKEnabled(bOkEnabled)
+        ucrBase.OKEnabled(bOkEnabled)
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

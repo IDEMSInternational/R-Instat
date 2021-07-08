@@ -126,7 +126,7 @@
     <value>6, 65</value>
   </data>
   <data name="rdoDescendingFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 17</value>
+    <value>147, 17</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoDescendingFrequencies.TabIndex" type="System.Int32, mscorlib">
@@ -154,7 +154,7 @@
     <value>6, 43</value>
   </data>
   <data name="rdoAscendingFrequencies.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 17</value>
+    <value>147, 17</value>
   </data>
   <data name="rdoAscendingFrequencies.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -205,7 +205,7 @@
     <value>3, 14</value>
   </data>
   <data name="ucrPnlSort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 69</value>
+    <value>150, 69</value>
   </data>
   <data name="ucrPnlSort.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -223,10 +223,10 @@
     <value>3</value>
   </data>
   <data name="grpSort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 185</value>
+    <value>261, 185</value>
   </data>
   <data name="grpSort.Size" type="System.Drawing.Size, System.Drawing">
-    <value>167, 88</value>
+    <value>159, 88</value>
   </data>
   <data name="grpSort.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -280,7 +280,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 64</value>
+    <value>261, 64</value>
   </data>
   <data name="lblSelectedVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -313,7 +313,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>186, 10</value>
+    <value>168, 10</value>
   </data>
   <data name="rdoGraph.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 28</value>
@@ -349,7 +349,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 10</value>
+    <value>70, 10</value>
   </data>
   <data name="rdoTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 28</value>
@@ -385,7 +385,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoBoth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>284, 10</value>
+    <value>266, 10</value>
   </data>
   <data name="rdoBoth.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 28</value>
@@ -493,10 +493,10 @@
     <value>2</value>
   </data>
   <data name="grpOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 275</value>
+    <value>261, 275</value>
   </data>
   <data name="grpOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 75</value>
+    <value>159, 75</value>
   </data>
   <data name="grpOutput.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -547,10 +547,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>467, 447</value>
+    <value>426, 447</value>
   </data>
   <data name="ucrNudGroups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 279</value>
+    <value>135, 279</value>
   </data>
   <data name="ucrNudGroups.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -571,7 +571,7 @@
     <value>5</value>
   </data>
   <data name="ucrPnlFrequencies.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 6</value>
+    <value>61, 6</value>
   </data>
   <data name="ucrPnlFrequencies.Size" type="System.Drawing.Size, System.Drawing">
     <value>315, 35</value>
@@ -595,7 +595,7 @@
     <value>10, 280</value>
   </data>
   <data name="ucrChkGroupData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>156, 20</value>
+    <value>121, 20</value>
   </data>
   <data name="ucrChkGroupData.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -613,7 +613,7 @@
     <value>8</value>
   </data>
   <data name="ucrReceiverWeights.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 256</value>
+    <value>135, 256</value>
   </data>
   <data name="ucrReceiverWeights.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -640,7 +640,7 @@
     <value>10, 256</value>
   </data>
   <data name="ucrChkWeights.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 20</value>
+    <value>121, 20</value>
   </data>
   <data name="ucrChkWeights.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -723,6 +723,9 @@
   <data name="&gt;&gt;ucrSelectorOneWayFreq.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -736,7 +739,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverOneWayFreq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>296, 79</value>
+    <value>261, 79</value>
   </data>
   <data name="ucrReceiverOneWayFreq.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

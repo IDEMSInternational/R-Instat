@@ -565,7 +565,7 @@
     <value>69, 14</value>
   </data>
   <data name="lblWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 15</value>
+    <value>111, 15</value>
   </data>
   <data name="lblWindSpeed.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -592,7 +592,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>476, 640</value>
+    <value>431, 640</value>
   </data>
   <data name="rdoHargreavesSamani.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -604,7 +604,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoHargreavesSamani.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 12</value>
+    <value>209, 12</value>
   </data>
   <data name="rdoHargreavesSamani.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 27</value>
@@ -640,7 +640,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoPenmanMonteith.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 12</value>
+    <value>102, 12</value>
   </data>
   <data name="rdoPenmanMonteith.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 27</value>
@@ -865,7 +865,7 @@
     <value>19</value>
   </data>
   <data name="ucrPnlMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 10</value>
+    <value>88, 10</value>
   </data>
   <data name="ucrPnlMethod.Size" type="System.Drawing.Size, System.Drawing">
     <value>243, 41</value>
@@ -1087,7 +1087,7 @@
     <value>218, 363</value>
   </data>
   <data name="grpWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 97</value>
+    <value>204, 97</value>
   </data>
   <data name="grpWindSpeed.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
