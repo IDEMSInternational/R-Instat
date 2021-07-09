@@ -4735,16 +4735,16 @@
     <value>Log Window</value>
   </data>
   <data name="cmdLanguage.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Popup</value>
+    <value>Flat</value>
   </data>
   <data name="cmdLanguage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>608, 27</value>
+    <value>608, 22</value>
   </data>
   <data name="cmdLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 29</value>
+    <value>38, 38</value>
   </data>
   <data name="cmdLanguage.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>

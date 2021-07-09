@@ -4135,7 +4135,7 @@ Partial Class frmMain
         '
         Me.cmdLanguage.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ActiveCaption
         resources.ApplyResources(Me.cmdLanguage, "cmdLanguage")
-        Me.cmdLanguage.ForeColor = System.Drawing.SystemColors.ActiveCaption
+        Me.cmdLanguage.ForeColor = System.Drawing.Color.White
         Me.cmdLanguage.Image = Global.instat.My.Resources.Resources.lan_btn
         Me.cmdLanguage.Name = "cmdLanguage"
         Me.cmdLanguage.Tag = ""
