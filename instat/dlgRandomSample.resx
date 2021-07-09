@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSampleSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 155</value>
+    <value>273, 155</value>
   </data>
   <data name="lblSampleSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 13</value>
@@ -144,7 +144,7 @@
     <value>6</value>
   </data>
   <data name="lblNumberofSamples.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 128</value>
+    <value>273, 129</value>
   </data>
   <data name="lblNumberofSamples.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 13</value>
@@ -189,7 +189,7 @@
     <value>4</value>
   </data>
   <data name="ucrSelectorRandomSamples.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 10</value>
+    <value>13, 10</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorRandomSamples.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
@@ -256,10 +256,10 @@
     <value>9</value>
   </data>
   <data name="ucrChkSetSeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>276, 101</value>
+    <value>275, 101</value>
   </data>
   <data name="ucrChkSetSeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>124, 20</value>
   </data>
   <data name="ucrChkSetSeed.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

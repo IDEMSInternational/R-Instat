@@ -22,6 +22,15 @@ Public Class dlgOneVarFitModel
     Private clsRplotFunction, clsRplotPPCompFunction, clsRplotCdfCompFunction, clsRplotQqCompFunction, clsRplotDensCompFunction As New RFunction
     Private clsBionomialFunction, clsProportionFunction, clsSignTestFunction, clsTtestFunction, clsWilcoxonFunction, clsZTestFunction, clsBartelFunction, clsBrFunction, clsRunsFunction, clsSenFunction, clsSerialCorrFunction, clsSnhFunction, clsAdFunction, clsCvmFunction, clsLillieFunction, clsPearsonFunction, clsSfFunction As New RFunction
     Private clsMeanCIFunction, clsMedianCIFunction, clsNormCIFunction, clsQuantileCIFunction, clsSdCIFunction, clsVarCIFunction As New RFunction
+
+    Private Sub lblCIMethods_Click(sender As Object, e As EventArgs) Handles lblCIMethods.Click
+
+    End Sub
+
+    Private Sub lblQMethod_Click(sender As Object, e As EventArgs) Handles lblQMethod.Click
+
+    End Sub
+
     Private clsGetFactorLevelFunction, clsConvertToColumnTypeFunction, clsColumnNameFunction As New RFunction
     Private WithEvents ucrDistribution As ucrDistributions
     Private bFirstload As Boolean = True
