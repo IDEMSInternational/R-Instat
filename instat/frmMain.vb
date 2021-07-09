@@ -167,6 +167,17 @@ Public Class frmMain
             MsgBox(ex.Message)
         End Try
 
+        If Me.clsInstatOptions IsNot Nothing Then
+            If Me.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+                cmdLanguage.Visible = True
+            Else
+                cmdLanguage.Visible = False
+            End If
+            strCurrLang = Me.clsInstatOptions.strLanguageCultureCode
+        End If
+
+        ttLanButton.SetToolTip(cmdLanguage, "Changes the menu language to English, and from English")
+
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 

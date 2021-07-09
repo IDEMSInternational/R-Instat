@@ -4734,20 +4734,20 @@
   <data name="mnuLogFile.ToolTipText" xml:space="preserve">
     <value>Log Window</value>
   </data>
+  <data name="cmdLanguage.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Popup</value>
+  </data>
   <data name="cmdLanguage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>623, 29</value>
+    <value>608, 27</value>
   </data>
   <data name="cmdLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 24</value>
+    <value>35, 29</value>
   </data>
   <data name="cmdLanguage.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
-  </data>
-  <data name="cmdLanguage.Text" xml:space="preserve">
-    <value>Lang</value>
   </data>
   <data name="&gt;&gt;cmdLanguage.Name" xml:space="preserve">
     <value>cmdLanguage</value>
@@ -4761,11 +4761,14 @@
   <data name="&gt;&gt;cmdLanguage.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <metadata name="ttLanButton.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>216, 43</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
+    <value>82</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -10136,6 +10139,12 @@
   </data>
   <data name="&gt;&gt;mnuLogFile.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;ttLanButton.Name" xml:space="preserve">
+    <value>ttLanButton</value>
+  </data>
+  <data name="&gt;&gt;ttLanButton.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolTip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>frmMain</value>

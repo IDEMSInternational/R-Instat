@@ -38,6 +38,7 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.mnuDescribe = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeOneVariable = New System.Windows.Forms.ToolStripMenuItem()
@@ -643,6 +644,7 @@ Partial Class frmMain
         Me.ExportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
+        Me.splMetadata = New System.Windows.Forms.SplitContainer()
         Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.mnuRViewer = New System.Windows.Forms.ToolStripMenuItem()
@@ -652,7 +654,7 @@ Partial Class frmMain
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmdLanguage = New System.Windows.Forms.Button()
-        Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.ttLanButton = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
         Me.ucrLogWindow = New instat.ucrLog()
@@ -670,6 +672,10 @@ Partial Class frmMain
         Me.splExtraWindows.Panel1.SuspendLayout()
         Me.splExtraWindows.Panel2.SuspendLayout()
         Me.splExtraWindows.SuspendLayout()
+        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splMetadata.Panel1.SuspendLayout()
+        Me.splMetadata.Panel2.SuspendLayout()
+        Me.splMetadata.SuspendLayout()
         CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splLogScript.Panel1.SuspendLayout()
         Me.splLogScript.Panel2.SuspendLayout()
@@ -678,10 +684,6 @@ Partial Class frmMain
         Me.splDataOutput.Panel1.SuspendLayout()
         Me.splDataOutput.Panel2.SuspendLayout()
         Me.splDataOutput.SuspendLayout()
-        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splMetadata.Panel1.SuspendLayout()
-        Me.splMetadata.Panel2.SuspendLayout()
-        Me.splMetadata.SuspendLayout()
         Me.SuspendLayout()
         '
         'mnuDescribe
@@ -4052,6 +4054,21 @@ Partial Class frmMain
         Me.splExtraWindows.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splExtraWindows.Panel2.Controls.Add(Me.splLogScript)
         '
+        'splMetadata
+        '
+        Me.splMetadata.BackColor = System.Drawing.Color.LightGray
+        resources.ApplyResources(Me.splMetadata, "splMetadata")
+        Me.splMetadata.Name = "splMetadata"
+        '
+        'splMetadata.Panel1
+        '
+        Me.splMetadata.Panel1.Controls.Add(Me.ucrColumnMeta)
+        '
+        'splMetadata.Panel2
+        '
+        Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
+        Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
+        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -4116,25 +4133,19 @@ Partial Class frmMain
         '
         'cmdLanguage
         '
+        Me.cmdLanguage.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ActiveCaption
         resources.ApplyResources(Me.cmdLanguage, "cmdLanguage")
+        Me.cmdLanguage.ForeColor = System.Drawing.SystemColors.ActiveCaption
+        Me.cmdLanguage.Image = Global.instat.My.Resources.Resources.lan_btn
         Me.cmdLanguage.Name = "cmdLanguage"
         Me.cmdLanguage.Tag = ""
         Me.cmdLanguage.UseVisualStyleBackColor = True
         '
-        'splMetadata
+        'ttLanButton
         '
-        Me.splMetadata.BackColor = System.Drawing.Color.LightGray
-        resources.ApplyResources(Me.splMetadata, "splMetadata")
-        Me.splMetadata.Name = "splMetadata"
-        '
-        'splMetadata.Panel1
-        '
-        Me.splMetadata.Panel1.Controls.Add(Me.ucrColumnMeta)
-        '
-        'splMetadata.Panel2
-        '
-        Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
-        Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
+        Me.ttLanButton.AutoPopDelay = 10000
+        Me.ttLanButton.InitialDelay = 500
+        Me.ttLanButton.ReshowDelay = 100
         '
         'ucrColumnMeta
         '
@@ -4202,6 +4213,10 @@ Partial Class frmMain
         Me.splExtraWindows.Panel2.ResumeLayout(False)
         CType(Me.splExtraWindows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splExtraWindows.ResumeLayout(False)
+        Me.splMetadata.Panel1.ResumeLayout(False)
+        Me.splMetadata.Panel2.ResumeLayout(False)
+        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splMetadata.ResumeLayout(False)
         Me.splLogScript.Panel1.ResumeLayout(False)
         Me.splLogScript.Panel2.ResumeLayout(False)
         CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4210,10 +4225,6 @@ Partial Class frmMain
         Me.splDataOutput.Panel2.ResumeLayout(False)
         CType(Me.splDataOutput, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splDataOutput.ResumeLayout(False)
-        Me.splMetadata.Panel1.ResumeLayout(False)
-        Me.splMetadata.Panel2.ResumeLayout(False)
-        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.splMetadata.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4842,4 +4853,5 @@ Partial Class frmMain
     Friend WithEvents mnuSetupForDataEntry As ToolStripMenuItem
     Friend WithEvents mnuEditPasteNewDataFrame As ToolStripMenuItem
     Friend WithEvents cmdLanguage As Button
+    Friend WithEvents ttLanButton As ToolTip
 End Class
