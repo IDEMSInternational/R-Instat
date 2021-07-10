@@ -169,14 +169,12 @@ Public Class frmMain
 
         If Me.clsInstatOptions IsNot Nothing Then
             If Me.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
-                cmdLanguage.Visible = True
+                mnuTbLan.Visible = True
             Else
-                cmdLanguage.Visible = False
+                mnuTbLan.Visible = False
             End If
             strCurrLang = Me.clsInstatOptions.strLanguageCultureCode
         End If
-
-        ttLanButton.SetToolTip(cmdLanguage, "Changes the menu language to English, and from English")
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
@@ -188,7 +186,7 @@ Public Class frmMain
     End Sub
 
     Public Sub SetLanButtonVisibility(bVisible As Boolean)
-        cmdLanguage.Visible = bVisible
+        mnuTbLan.Visible = bVisible
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -2389,7 +2387,7 @@ Public Class frmMain
         dlgPasteNewDataFrame.ShowDialog()
     End Sub
 
-    Private Sub cmdLanguage_Click(sender As Object, e As EventArgs) Handles cmdLanguage.Click
+    Private Sub mnuTbLan_Click(sender As Object, e As EventArgs) Handles mnuTbLan.Click
         If strCurrLang <> "en-GB" Then
             strCurrLang = "en-GB"
         Else
@@ -2401,4 +2399,5 @@ Public Class frmMain
         translateMenu(mnuBar.Items, Me)
         Me.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
     End Sub
+
 End Class

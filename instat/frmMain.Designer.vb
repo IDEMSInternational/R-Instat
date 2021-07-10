@@ -38,7 +38,6 @@ Partial Class frmMain
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.mnuDescribe = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeOneVariable = New System.Windows.Forms.ToolStripMenuItem()
@@ -396,6 +395,7 @@ Partial Class frmMain
         Me.mnuTbResetLayout = New System.Windows.Forms.ToolStripButton()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbHelp = New System.Windows.Forms.ToolStripButton()
+        Me.mnuTbLan = New System.Windows.Forms.ToolStripButton()
         Me.mnuBar = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
@@ -653,8 +653,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdLanguage = New System.Windows.Forms.Button()
-        Me.ttLanButton = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
         Me.ucrLogWindow = New instat.ucrLog()
@@ -2496,7 +2494,7 @@ Partial Class frmMain
         Me.Tool_strip.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.Tool_strip.ImageScalingSize = New System.Drawing.Size(30, 30)
-        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbEditLastDialog, Me.mnuTbLast10Dialogs, Me.mnuLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp})
+        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbEditLastDialog, Me.mnuTbLast10Dialogs, Me.mnuLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.mnuTbLan})
         resources.ApplyResources(Me.Tool_strip, "Tool_strip")
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -2672,6 +2670,14 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuTbHelp, "mnuTbHelp")
         Me.mnuTbHelp.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbHelp.Name = "mnuTbHelp"
+        '
+        'mnuTbLan
+        '
+        Me.mnuTbLan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbLan.Image = Global.instat.My.Resources.Resources.lan_btn
+        resources.ApplyResources(Me.mnuTbLan, "mnuTbLan")
+        Me.mnuTbLan.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
+        Me.mnuTbLan.Name = "mnuTbLan"
         '
         'mnuBar
         '
@@ -4131,22 +4137,6 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
-        'cmdLanguage
-        '
-        Me.cmdLanguage.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.ActiveCaption
-        resources.ApplyResources(Me.cmdLanguage, "cmdLanguage")
-        Me.cmdLanguage.ForeColor = System.Drawing.Color.White
-        Me.cmdLanguage.Image = Global.instat.My.Resources.Resources.lan_btn
-        Me.cmdLanguage.Name = "cmdLanguage"
-        Me.cmdLanguage.Tag = ""
-        Me.cmdLanguage.UseVisualStyleBackColor = True
-        '
-        'ttLanButton
-        '
-        Me.ttLanButton.AutoPopDelay = 10000
-        Me.ttLanButton.InitialDelay = 500
-        Me.ttLanButton.ReshowDelay = 100
-        '
         'ucrColumnMeta
         '
         Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -4190,7 +4180,6 @@ Partial Class frmMain
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.cmdLanguage)
         Me.Controls.Add(Me.splOverall)
         Me.Controls.Add(Me.stsStrip)
         Me.Controls.Add(Me.Tool_strip)
@@ -4852,6 +4841,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticFileImportfromClimateDataStore As ToolStripMenuItem
     Friend WithEvents mnuSetupForDataEntry As ToolStripMenuItem
     Friend WithEvents mnuEditPasteNewDataFrame As ToolStripMenuItem
-    Friend WithEvents cmdLanguage As Button
-    Friend WithEvents ttLanButton As ToolTip
+    Friend WithEvents mnuTbLan As ToolStripButton
 End Class
