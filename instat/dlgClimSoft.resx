@@ -334,7 +334,7 @@
     <value>6, 8, 6, 8</value>
   </data>
   <data name="ucrChkElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 20</value>
+    <value>230, 20</value>
   </data>
   <data name="ucrChkElements.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>

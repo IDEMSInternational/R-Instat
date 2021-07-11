@@ -50,7 +50,7 @@ Partial Class dlgVisualizeData
         Me.rdoVisDat.FlatAppearance.BorderSize = 2
         Me.rdoVisDat.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoVisDat.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoVisDat.Location = New System.Drawing.Point(60, 11)
+        Me.rdoVisDat.Location = New System.Drawing.Point(65, 11)
         Me.rdoVisDat.Name = "rdoVisDat"
         Me.rdoVisDat.Size = New System.Drawing.Size(100, 28)
         Me.rdoVisDat.TabIndex = 1
@@ -66,7 +66,7 @@ Partial Class dlgVisualizeData
         Me.rdoVisMiss.FlatAppearance.BorderSize = 2
         Me.rdoVisMiss.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoVisMiss.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoVisMiss.Location = New System.Drawing.Point(156, 11)
+        Me.rdoVisMiss.Location = New System.Drawing.Point(161, 11)
         Me.rdoVisMiss.Name = "rdoVisMiss"
         Me.rdoVisMiss.Size = New System.Drawing.Size(100, 28)
         Me.rdoVisMiss.TabIndex = 2
@@ -82,7 +82,7 @@ Partial Class dlgVisualizeData
         Me.rdoVisGuess.FlatAppearance.BorderSize = 2
         Me.rdoVisGuess.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoVisGuess.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoVisGuess.Location = New System.Drawing.Point(252, 11)
+        Me.rdoVisGuess.Location = New System.Drawing.Point(257, 11)
         Me.rdoVisGuess.Name = "rdoVisGuess"
         Me.rdoVisGuess.Size = New System.Drawing.Size(100, 28)
         Me.rdoVisGuess.TabIndex = 3
@@ -212,7 +212,7 @@ Partial Class dlgVisualizeData
         '
         'ucrPnlVisualizeData
         '
-        Me.ucrPnlVisualizeData.Location = New System.Drawing.Point(44, 1)
+        Me.ucrPnlVisualizeData.Location = New System.Drawing.Point(49, 1)
         Me.ucrPnlVisualizeData.Name = "ucrPnlVisualizeData"
         Me.ucrPnlVisualizeData.Size = New System.Drawing.Size(324, 46)
         Me.ucrPnlVisualizeData.TabIndex = 0

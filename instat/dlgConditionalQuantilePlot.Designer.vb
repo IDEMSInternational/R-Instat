@@ -383,7 +383,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 480)
+        Me.ClientSize = New System.Drawing.Size(415, 480)
         Me.Controls.Add(Me.ucrNudMinNumPoints)
         Me.Controls.Add(Me.ucrReceiverStatistics)
         Me.Controls.Add(Me.lblVarPredicted)

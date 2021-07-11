@@ -181,10 +181,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoHistogram.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 12</value>
+    <value>40, 12</value>
   </data>
   <data name="rdoHistogram.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 28</value>
+    <value>100, 28</value>
   </data>
   <data name="rdoHistogram.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -214,10 +214,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoDensity.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 12</value>
+    <value>138, 12</value>
   </data>
   <data name="rdoDensity.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 28</value>
+    <value>97, 28</value>
   </data>
   <data name="rdoDensity.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -247,7 +247,7 @@
     <value>Flat</value>
   </data>
   <data name="rdoFrequencyPolygon.Location" type="System.Drawing.Point, System.Drawing">
-    <value>294, 12</value>
+    <value>233, 12</value>
   </data>
   <data name="rdoFrequencyPolygon.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 28</value>
@@ -403,7 +403,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>448, 436</value>
+    <value>417, 428</value>
   </data>
   <data name="ucrFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>247, 231</value>
@@ -478,13 +478,13 @@
     <value>13</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 11</value>
+    <value>36, 11</value>
   </data>
   <data name="ucrPnlOptions.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>433, 30</value>
+    <value>347, 30</value>
   </data>
   <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

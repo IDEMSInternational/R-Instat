@@ -66,7 +66,7 @@ Partial Class dlgExportToWWR
         'lblMeanDailyMinAirTemperature
         '
         Me.lblMeanDailyMinAirTemperature.AutoSize = True
-        Me.lblMeanDailyMinAirTemperature.Location = New System.Drawing.Point(223, 57)
+        Me.lblMeanDailyMinAirTemperature.Location = New System.Drawing.Point(225, 57)
         Me.lblMeanDailyMinAirTemperature.Name = "lblMeanDailyMinAirTemperature"
         Me.lblMeanDailyMinAirTemperature.Size = New System.Drawing.Size(173, 13)
         Me.lblMeanDailyMinAirTemperature.TabIndex = 21
@@ -129,7 +129,7 @@ Partial Class dlgExportToWWR
         'lblMeanDailyMaxAirTemperature
         '
         Me.lblMeanDailyMaxAirTemperature.AutoSize = True
-        Me.lblMeanDailyMaxAirTemperature.Location = New System.Drawing.Point(223, 16)
+        Me.lblMeanDailyMaxAirTemperature.Location = New System.Drawing.Point(225, 16)
         Me.lblMeanDailyMaxAirTemperature.Name = "lblMeanDailyMaxAirTemperature"
         Me.lblMeanDailyMaxAirTemperature.Size = New System.Drawing.Size(176, 13)
         Me.lblMeanDailyMaxAirTemperature.TabIndex = 19
@@ -138,7 +138,7 @@ Partial Class dlgExportToWWR
         'lblMeanRelativeHumidity
         '
         Me.lblMeanRelativeHumidity.AutoSize = True
-        Me.lblMeanRelativeHumidity.Location = New System.Drawing.Point(223, 98)
+        Me.lblMeanRelativeHumidity.Location = New System.Drawing.Point(225, 98)
         Me.lblMeanRelativeHumidity.Name = "lblMeanRelativeHumidity"
         Me.lblMeanRelativeHumidity.Size = New System.Drawing.Size(160, 13)
         Me.lblMeanRelativeHumidity.TabIndex = 23
@@ -207,7 +207,7 @@ Partial Class dlgExportToWWR
         'ucrReceiverMeanRelativeHumidity
         '
         Me.ucrReceiverMeanRelativeHumidity.frmParent = Me
-        Me.ucrReceiverMeanRelativeHumidity.Location = New System.Drawing.Point(226, 114)
+        Me.ucrReceiverMeanRelativeHumidity.Location = New System.Drawing.Point(228, 114)
         Me.ucrReceiverMeanRelativeHumidity.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMeanRelativeHumidity.Name = "ucrReceiverMeanRelativeHumidity"
         Me.ucrReceiverMeanRelativeHumidity.Selector = Nothing
@@ -255,7 +255,7 @@ Partial Class dlgExportToWWR
         'ucrReceiverMeanDailyMinAirTemperature
         '
         Me.ucrReceiverMeanDailyMinAirTemperature.frmParent = Me
-        Me.ucrReceiverMeanDailyMinAirTemperature.Location = New System.Drawing.Point(226, 73)
+        Me.ucrReceiverMeanDailyMinAirTemperature.Location = New System.Drawing.Point(228, 73)
         Me.ucrReceiverMeanDailyMinAirTemperature.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMeanDailyMinAirTemperature.Name = "ucrReceiverMeanDailyMinAirTemperature"
         Me.ucrReceiverMeanDailyMinAirTemperature.Selector = Nothing
@@ -267,7 +267,7 @@ Partial Class dlgExportToWWR
         'ucrReceiverMeanDailyMaxAirTemperature
         '
         Me.ucrReceiverMeanDailyMaxAirTemperature.frmParent = Me
-        Me.ucrReceiverMeanDailyMaxAirTemperature.Location = New System.Drawing.Point(226, 32)
+        Me.ucrReceiverMeanDailyMaxAirTemperature.Location = New System.Drawing.Point(228, 32)
         Me.ucrReceiverMeanDailyMaxAirTemperature.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMeanDailyMaxAirTemperature.Name = "ucrReceiverMeanDailyMaxAirTemperature"
         Me.ucrReceiverMeanDailyMaxAirTemperature.Selector = Nothing

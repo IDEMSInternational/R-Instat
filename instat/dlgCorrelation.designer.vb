@@ -45,10 +45,12 @@ Partial Class dlgCorrelation
         Me.rdoKendall = New System.Windows.Forms.RadioButton()
         Me.rdoPearson = New System.Windows.Forms.RadioButton()
         Me.rdoSpearman = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlMethod = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.grpMissing = New System.Windows.Forms.GroupBox()
         Me.rdoCompleteRowsOnly = New System.Windows.Forms.RadioButton()
         Me.rdoPairwise = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.lblConfInterval = New System.Windows.Forms.Label()
         Me.rdoTwoColumns = New System.Windows.Forms.RadioButton()
         Me.rdoMultipleColumns = New System.Windows.Forms.RadioButton()
@@ -57,9 +59,7 @@ Partial Class dlgCorrelation
         Me.ucrNudConfidenceInterval = New instat.ucrNud()
         Me.ucrChkCorrelationMatrix = New instat.ucrCheck()
         Me.ucrPnlColumns = New instat.UcrPanel()
-        Me.ucrPnlMethod = New instat.UcrPanel()
         Me.ucrReceiverMultipleColumns = New instat.ucrReceiverMultiple()
-        Me.ucrPnlCompletePairwise = New instat.UcrPanel()
         Me.ucrReceiverSecondColumn = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirstColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorCorrelation = New instat.ucrSelectorByDataFrameAddRemove()
@@ -114,6 +114,11 @@ Partial Class dlgCorrelation
         Me.rdoSpearman.Tag = "Spearman"
         Me.rdoSpearman.UseVisualStyleBackColor = True
         '
+        'ucrPnlMethod
+        '
+        resources.ApplyResources(Me.ucrPnlMethod, "ucrPnlMethod")
+        Me.ucrPnlMethod.Name = "ucrPnlMethod"
+        '
         'cmdOptions
         '
         resources.ApplyResources(Me.cmdOptions, "cmdOptions")
@@ -146,6 +151,11 @@ Partial Class dlgCorrelation
         Me.rdoPairwise.Name = "rdoPairwise"
         Me.rdoPairwise.Tag = "Pairwise"
         Me.rdoPairwise.UseVisualStyleBackColor = True
+        '
+        'ucrPnlCompletePairwise
+        '
+        resources.ApplyResources(Me.ucrPnlCompletePairwise, "ucrPnlCompletePairwise")
+        Me.ucrPnlCompletePairwise.Name = "ucrPnlCompletePairwise"
         '
         'lblConfInterval
         '
@@ -204,11 +214,6 @@ Partial Class dlgCorrelation
         resources.ApplyResources(Me.ucrPnlColumns, "ucrPnlColumns")
         Me.ucrPnlColumns.Name = "ucrPnlColumns"
         '
-        'ucrPnlMethod
-        '
-        resources.ApplyResources(Me.ucrPnlMethod, "ucrPnlMethod")
-        Me.ucrPnlMethod.Name = "ucrPnlMethod"
-        '
         'ucrReceiverMultipleColumns
         '
         Me.ucrReceiverMultipleColumns.frmParent = Me
@@ -217,11 +222,6 @@ Partial Class dlgCorrelation
         Me.ucrReceiverMultipleColumns.Selector = Nothing
         Me.ucrReceiverMultipleColumns.strNcFilePath = ""
         Me.ucrReceiverMultipleColumns.ucrSelector = Nothing
-        '
-        'ucrPnlCompletePairwise
-        '
-        resources.ApplyResources(Me.ucrPnlCompletePairwise, "ucrPnlCompletePairwise")
-        Me.ucrPnlCompletePairwise.Name = "ucrPnlCompletePairwise"
         '
         'ucrReceiverSecondColumn
         '

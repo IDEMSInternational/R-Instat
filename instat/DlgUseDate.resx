@@ -197,7 +197,7 @@ Year (366)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShiftYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 236</value>
+    <value>67, 236</value>
   </data>
   <data name="lblShiftYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 13</value>
@@ -330,7 +330,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShiftNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 262</value>
+    <value>14, 262</value>
   </data>
   <data name="lblShiftNumeric.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -396,7 +396,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShiftAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 290</value>
+    <value>14, 290</value>
   </data>
   <data name="lblShiftAbbr.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 13</value>
@@ -462,7 +462,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShift.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 318</value>
+    <value>14, 318</value>
   </data>
   <data name="lblShift.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -1113,7 +1113,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftYearName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 316</value>
+    <value>77, 316</value>
   </data>
   <data name="ucrChkShiftYearName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1167,7 +1167,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftYearNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 262</value>
+    <value>77, 262</value>
   </data>
   <data name="ucrChkShiftYearNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1519,9 +1519,6 @@ Year (365)</value>
   </data>
   <data name="&gt;&gt;ucrSelectorUseDate.ZOrder" xml:space="preserve">
     <value>28</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

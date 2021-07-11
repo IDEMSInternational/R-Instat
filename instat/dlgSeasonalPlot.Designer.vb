@@ -399,7 +399,7 @@ Partial Class dlgSeasonalPlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(439, 521)
+        Me.ClientSize = New System.Drawing.Size(421, 521)
         Me.Controls.Add(Me.ucrInputEstimatesSummary)
         Me.Controls.Add(Me.lblEstimatesSummary)
         Me.Controls.Add(Me.lblEstimates)
