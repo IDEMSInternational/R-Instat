@@ -18,14 +18,14 @@ Imports instat
 
 Public Class ucrFilter
     Public bFirstLoad As Boolean
-    Public clsFilterView As ROperator
+    Public clsFilterOperator As ROperator
     Public clsFilterFunction As RFunction
     Private clsConditionsList As RFunction
     Public bFilterDefined As Boolean
     Public Event FilterChanged()
     Public strDefaultColumn = ""
     Public strDefaultDataFrame = ""
-    Private strNot As String = ""
+    Private AddNot As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -34,8 +34,9 @@ Public Class ucrFilter
         ' Add any initialization after the InitializeComponent() call.
         bFirstLoad = True
         bFilterDefined = False
-        clsFilterView = New ROperator
-        clsFilterView.strOperation = "&"
+        clsFilterOperator = New ROperator
+        clsFilterOperator.strOperation = "&"
+        clsFilterOperator.bAllBrackets = True
         clsFilterFunction = New RFunction
         clsFilterFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_filter")
         clsConditionsList = New RFunction
@@ -68,7 +69,7 @@ Public Class ucrFilter
         ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
         ucrFactorLevels.SetIncludeLevels(False)
         ucrFactorLevels.bIncludeNA = True
-        clsFilterView.bForceIncludeOperation = False
+        clsFilterOperator.bForceIncludeOperation = False
         lstFilters.Columns.Add("Variable")
         lstFilters.Columns.Add("Condition")
         ucrInputFilterName.SetItemsTypeAsFilters()
@@ -79,7 +80,8 @@ Public Class ucrFilter
         ucrLogicalCombobox.SetItems({"TRUE", "FALSE"})
         ucrLogicalCombobox.SetDropDownStyleAsNonEditable()
         ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (year > 1990) & (year < 2021) they have all to be TRUE.")
-        ucrChkNot.SetText("Add Not (!)")
+        ucrChkNotForEachCondition.SetText("Add Not (!) for each")
+        ucrChkNotForAllConditions.SetText("Add Not (!) for all")
     End Sub
 
     Private Sub SetDefaults()
@@ -223,14 +225,14 @@ Public Class ucrFilter
         clsConditionsList.AddParameter("C" & clsConditionsList.clsParameters.Count, clsRFunctionParameter:=(clsCurrentConditionListFunction))
         lviCondition = New ListViewItem({ucrFilterByReceiver.GetVariableNames(), clsCurrentOperator.strOperation & " " & strCondition})
         lstFilters.Items.Add(lviCondition)
-        If clsFilterView.clsParameters.Count = 0 Then
-            clsFilterView.AddParameter(iPosition:=0, clsROperatorParameter:=(clsCurrentOperator))
+        If clsFilterOperator.clsParameters.Count = 0 Then
+            clsFilterOperator.AddParameter(iPosition:=0, strParameterValue:="(" & clsCurrentOperator.ToScript & ")")
         Else
-            clsFilterView.AddParameter(strParameterName:="Condition" & clsFilterView.clsParameters.Count - 1, clsROperatorParameter:=(clsCurrentOperator))
+            clsFilterOperator.AddParameter(strParameterName:="Condition" & clsFilterOperator.clsParameters.Count - 1, strParameterValue:="(" & clsCurrentOperator.ToScript & ")")
         End If
         lstFilters.Columns(0).Width = -2
         lstFilters.Columns(1).Width = -2
-        ucrFilterPreview.SetName(strNot & clsFilterView.ToScript())
+        UpdateFilterPreview()
         ucrFilterByReceiver.Clear()
         ucrReceiverExpression.AddtoCombobox(ucrReceiverExpression.GetText)
         RaiseEvent FilterChanged()
@@ -269,10 +271,10 @@ Public Class ucrFilter
     End Sub
 
     Private Sub ClearConditions()
-        clsFilterView.ClearParameters()
+        clsFilterOperator.ClearParameters()
         clsConditionsList.ClearParameters()
         lstFilters.Items.Clear()
-        ucrFilterPreview.SetName("")
+        UpdateFilterPreview()
         RaiseEvent FilterChanged()
     End Sub
 
@@ -385,31 +387,38 @@ Public Class ucrFilter
     ''' <param name="e"> Not used. </param>
     Private Sub cmdCombineWithAndOr_Click(sender As Object, e As EventArgs) Handles cmdCombineWithAndOr.Click
         If cmdCombineWithAndOr.Text.Contains("All combined with |") Then
-            clsFilterView.strOperation = "&"
+            clsFilterOperator.strOperation = "&"
             clsFilterFunction.AddParameter("and_or", Chr(34) & "&" & Chr(34), iPosition:=3)
             cmdCombineWithAndOr.Text = " All combined with &&"
             ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (year > 1990) & (year < 2021) they have all to be TRUE.")
         Else
-            clsFilterView.strOperation = "|"
+            clsFilterOperator.strOperation = "|"
             clsFilterFunction.AddParameter("and_or", Chr(34) & "|" & Chr(34), iPosition:=3)
             cmdCombineWithAndOr.Text = "All combined with |"
             ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (sunhrs >14) | (sunhrs <0) then just one need be TRUE.")
         End If
-        ucrFilterPreview.SetName(clsFilterView.ToScript())
+        UpdateFilterPreview()
     End Sub
 
-    Private Sub ucrChkNot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNot.ControlValueChanged
-        If ucrChkNot.Checked Then
-            strNot = "!"
+    Private Sub ucrChkNotForEachCondition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNotForEachCondition.ControlValueChanged
+        AddNot = ucrChkNotForEachCondition.Checked
+        If AddNot Then
             clsFilterFunction.AddParameter("not", "TRUE", iPosition:=4)
         Else
-            strNot = ""
             clsFilterFunction.RemoveParameterByName("not")
         End If
-        ucrFilterPreview.SetName(strNot & clsFilterView.ToScript())
+        UpdateFilterPreview()
+    End Sub
+
+    Private Sub UpdateFilterPreview()
+        If AddNot Then
+            ucrFilterPreview.SetName(clsFilterOperator.ToScript().Replace("(", "!("))
+        Else
+            ucrFilterPreview.SetName(clsFilterOperator.ToScript().Replace("!(", "("))
+        End If
     End Sub
 
     Private Sub HideUnhideNotCheckBox()
-        ucrChkNot.Visible = ucrFilterOperation.GetText.Contains(">") OrElse ucrFilterOperation.GetText.Contains(">=") OrElse ucrFilterOperation.GetText.Contains("<") OrElse ucrFilterOperation.GetText.Contains("<=")
+        ucrChkNotForEachCondition.Visible = ucrFilterOperation.GetText.Contains(">") OrElse ucrFilterOperation.GetText.Contains(">=") OrElse ucrFilterOperation.GetText.Contains("<") OrElse ucrFilterOperation.GetText.Contains("<=")
     End Sub
 End Class

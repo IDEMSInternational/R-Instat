@@ -69,6 +69,9 @@ Partial Class ucrFilter
         Me.cmd2 = New System.Windows.Forms.Button()
         Me.cmd0 = New System.Windows.Forms.Button()
         Me.cmd1 = New System.Windows.Forms.Button()
+        Me.cmdCombineWithAndOr = New System.Windows.Forms.Button()
+        Me.ttpCombineWithAndOr = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrChkNotForEachCondition = New instat.ucrCheck()
         Me.ucrReceiverExpression = New instat.ucrReceiverExpression()
         Me.ucrLogicalCombobox = New instat.ucrInputComboBox()
         Me.ucrDatePicker = New instat.ucrDateTimePicker()
@@ -78,9 +81,7 @@ Partial Class ucrFilter
         Me.ucrFactorLevels = New instat.ucrFactor()
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.cmdCombineWithAndOr = New System.Windows.Forms.Button()
-        Me.ttpCombineWithAndOr = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrChkNot = New instat.ucrCheck()
+        Me.ucrChkNotForAllConditions = New instat.ucrCheck()
         Me.grpNumeric.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -278,6 +279,19 @@ Partial Class ucrFilter
         Me.cmd1.Name = "cmd1"
         Me.cmd1.UseVisualStyleBackColor = True
         '
+        'cmdCombineWithAndOr
+        '
+        resources.ApplyResources(Me.cmdCombineWithAndOr, "cmdCombineWithAndOr")
+        Me.cmdCombineWithAndOr.Name = "cmdCombineWithAndOr"
+        Me.cmdCombineWithAndOr.Tag = "Clear_Conditions"
+        Me.cmdCombineWithAndOr.UseVisualStyleBackColor = True
+        '
+        'ucrChkNotForEachCondition
+        '
+        Me.ucrChkNotForEachCondition.Checked = False
+        resources.ApplyResources(Me.ucrChkNotForEachCondition, "ucrChkNotForEachCondition")
+        Me.ucrChkNotForEachCondition.Name = "ucrChkNotForEachCondition"
+        '
         'ucrReceiverExpression
         '
         Me.ucrReceiverExpression.frmParent = Nothing
@@ -354,24 +368,16 @@ Partial Class ucrFilter
         resources.ApplyResources(Me.ucrSelectorForFitler, "ucrSelectorForFitler")
         Me.ucrSelectorForFitler.Name = "ucrSelectorForFitler"
         '
-        'cmdCombineWithAndOr
+        'ucrChkNotForAllConditions
         '
-        resources.ApplyResources(Me.cmdCombineWithAndOr, "cmdCombineWithAndOr")
-        Me.cmdCombineWithAndOr.Name = "cmdCombineWithAndOr"
-        Me.cmdCombineWithAndOr.Tag = "Clear_Conditions"
-        Me.cmdCombineWithAndOr.UseVisualStyleBackColor = True
-        '
-        'ucrChkNot
-        '
-        Me.ucrChkNot.Checked = False
-        resources.ApplyResources(Me.ucrChkNot, "ucrChkNot")
-        Me.ucrChkNot.Name = "ucrChkNot"
+        Me.ucrChkNotForAllConditions.Checked = False
+        resources.ApplyResources(Me.ucrChkNotForAllConditions, "ucrChkNotForAllConditions")
+        Me.ucrChkNotForAllConditions.Name = "ucrChkNotForAllConditions"
         '
         'ucrFilter
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrChkNot)
         Me.Controls.Add(Me.cmdCombineWithAndOr)
         Me.Controls.Add(Me.ucrReceiverExpression)
         Me.Controls.Add(Me.grpNumeric)
@@ -392,6 +398,8 @@ Partial Class ucrFilter
         Me.Controls.Add(Me.ucrFactorLevels)
         Me.Controls.Add(Me.ucrFilterByReceiver)
         Me.Controls.Add(Me.ucrSelectorForFitler)
+        Me.Controls.Add(Me.ucrChkNotForAllConditions)
+        Me.Controls.Add(Me.ucrChkNotForEachCondition)
         Me.Name = "ucrFilter"
         Me.grpNumeric.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -439,5 +447,6 @@ Partial Class ucrFilter
     Friend WithEvents ucrReceiverExpression As ucrReceiverExpression
     Friend WithEvents cmdCombineWithAndOr As Button
     Friend WithEvents ttpCombineWithAndOr As ToolTip
-    Friend WithEvents ucrChkNot As ucrCheck
+    Friend WithEvents ucrChkNotForEachCondition As ucrCheck
+    Friend WithEvents ucrChkNotForAllConditions As ucrCheck
 End Class
