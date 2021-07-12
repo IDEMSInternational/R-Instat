@@ -319,7 +319,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>286, 330</value>
+    <value>333, 330</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 25</value>
@@ -586,7 +586,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>257, 24</value>
+    <value>320, 22</value>
   </data>
   <data name="ucrSaveModel.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>

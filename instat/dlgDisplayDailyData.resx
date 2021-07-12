@@ -1036,7 +1036,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 24</value>
+    <value>320, 24</value>
   </data>
   <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

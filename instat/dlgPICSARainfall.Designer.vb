@@ -157,7 +157,7 @@ Partial Class dlgPICSARainfall
         Me.ucrSave.Location = New System.Drawing.Point(9, 337)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
-        Me.ucrSave.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSave.Size = New System.Drawing.Size(320, 24)
         Me.ucrSave.TabIndex = 25
         '
         'ucrSelectorPICSARainfall

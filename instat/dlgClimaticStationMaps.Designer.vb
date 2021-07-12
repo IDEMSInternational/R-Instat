@@ -84,7 +84,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrSaveMap.Location = New System.Drawing.Point(8, 356)
         Me.ucrSaveMap.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveMap.Name = "ucrSaveMap"
-        Me.ucrSaveMap.Size = New System.Drawing.Size(244, 24)
+        Me.ucrSaveMap.Size = New System.Drawing.Size(320, 22)
         Me.ucrSaveMap.TabIndex = 15
         '
         'ucrBase

@@ -101,6 +101,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'ucrSelectorPCA
         '
+        Me.ucrSelectorPCA.bDropUnusedFilterLevels = False
         Me.ucrSelectorPCA.bShowHiddenColumns = False
         Me.ucrSelectorPCA.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorPCA, "ucrSelectorPCA")

@@ -122,7 +122,7 @@
     <value>133, 34</value>
   </data>
   <data name="ucrChkTwoDigitYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>88, 20</value>
+    <value>120, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrChkTwoDigitYear.TabIndex" type="System.Int32, mscorlib">
@@ -243,107 +243,17 @@
   <data name="&gt;&gt;lblYearTwo.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="ucrReceiverYearTwo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 34</value>
-  </data>
-  <data name="ucrReceiverYearTwo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverYearTwo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 20</value>
-  </data>
-  <data name="ucrReceiverYearTwo.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverYearTwo.Name" xml:space="preserve">
-    <value>ucrReceiverYearTwo</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverYearTwo.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverYearTwo.Parent" xml:space="preserve">
-    <value>grpTwoColumns</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverYearTwo.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="lblDayofYear.AutoSize" type="System.Boolean, mscorlib">
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>27</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
   </data>
-  <data name="lblDayofYear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblDayofYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 86</value>
-  </data>
-  <data name="lblDayofYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>66, 13</value>
-  </data>
-  <data name="lblDayofYear.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="lblDayofYear.Text" xml:space="preserve">
-    <value>Day of Year:</value>
-  </data>
-  <data name="&gt;&gt;lblDayofYear.Name" xml:space="preserve">
-    <value>lblDayofYear</value>
-  </data>
-  <data name="&gt;&gt;lblDayofYear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblDayofYear.Parent" xml:space="preserve">
-    <value>grpTwoColumns</value>
-  </data>
-  <data name="&gt;&gt;lblDayofYear.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="ucrReceiverDayTwo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 101</value>
-  </data>
-  <data name="ucrReceiverDayTwo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverDayTwo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 20</value>
-  </data>
-  <data name="ucrReceiverDayTwo.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverDayTwo.Name" xml:space="preserve">
-    <value>ucrReceiverDayTwo</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverDayTwo.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverDayTwo.Parent" xml:space="preserve">
-    <value>grpTwoColumns</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverDayTwo.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="grpTwoColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 51</value>
-  </data>
-  <data name="grpTwoColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 139</value>
-  </data>
-  <data name="grpTwoColumns.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="grpTwoColumns.Text" xml:space="preserve">
-    <value>Two Columns</value>
-  </data>
-  <data name="&gt;&gt;grpTwoColumns.Name" xml:space="preserve">
-    <value>grpTwoColumns</value>
-  </data>
-  <data name="&gt;&gt;grpTwoColumns.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpTwoColumns.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpTwoColumns.ZOrder" xml:space="preserve">
-    <value>8</value>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>512, 477</value>
   </data>
   <data name="txtTextDateFormats.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 17</value>
@@ -1537,6 +1447,33 @@ Examples:
   <data name="&gt;&gt;grpThreeColumns.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="cmdHelp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
+    <value>406, 389</value>
+  </data>
+  <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 22</value>
+  </data>
+  <data name="cmdHelp.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="cmdHelp.Text" xml:space="preserve">
+    <value>Help...</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.Name" xml:space="preserve">
+    <value>cmdHelp</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdHelp.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="rdoThreeColumns.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
@@ -1645,36 +1582,6 @@ Examples:
   <data name="&gt;&gt;rdoSingleColumn.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="cmdHelp.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>406, 389</value>
-  </data>
-  <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 22</value>
-  </data>
-  <data name="cmdHelp.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="cmdHelp.Text" xml:space="preserve">
-    <value>Help...</value>
-  </data>
-  <data name="&gt;&gt;cmdHelp.Name" xml:space="preserve">
-    <value>cmdHelp</value>
-  </data>
-  <data name="&gt;&gt;cmdHelp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdHelp.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdHelp.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <metadata name="ttMakeDate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
   <data name="ucrPnlDate.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 4</value>
   </data>
@@ -1765,18 +1672,6 @@ Examples:
   <data name="&gt;&gt;ucrSelectorMakeDate.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>27</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>512, 477</value>
-  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -1795,4 +1690,109 @@ Examples:
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="ucrReceiverYearTwo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 34</value>
+  </data>
+  <data name="ucrReceiverYearTwo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverYearTwo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 20</value>
+  </data>
+  <data name="ucrReceiverYearTwo.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverYearTwo.Name" xml:space="preserve">
+    <value>ucrReceiverYearTwo</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverYearTwo.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverYearTwo.Parent" xml:space="preserve">
+    <value>grpTwoColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverYearTwo.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="lblDayofYear.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDayofYear.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDayofYear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 86</value>
+  </data>
+  <data name="lblDayofYear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>66, 13</value>
+  </data>
+  <data name="lblDayofYear.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="lblDayofYear.Text" xml:space="preserve">
+    <value>Day of Year:</value>
+  </data>
+  <data name="&gt;&gt;lblDayofYear.Name" xml:space="preserve">
+    <value>lblDayofYear</value>
+  </data>
+  <data name="&gt;&gt;lblDayofYear.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDayofYear.Parent" xml:space="preserve">
+    <value>grpTwoColumns</value>
+  </data>
+  <data name="&gt;&gt;lblDayofYear.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="ucrReceiverDayTwo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 101</value>
+  </data>
+  <data name="ucrReceiverDayTwo.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverDayTwo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>95, 20</value>
+  </data>
+  <data name="ucrReceiverDayTwo.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverDayTwo.Name" xml:space="preserve">
+    <value>ucrReceiverDayTwo</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverDayTwo.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverDayTwo.Parent" xml:space="preserve">
+    <value>grpTwoColumns</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverDayTwo.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="grpTwoColumns.Location" type="System.Drawing.Point, System.Drawing">
+    <value>238, 51</value>
+  </data>
+  <data name="grpTwoColumns.Size" type="System.Drawing.Size, System.Drawing">
+    <value>259, 139</value>
+  </data>
+  <data name="grpTwoColumns.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="grpTwoColumns.Text" xml:space="preserve">
+    <value>Two Columns</value>
+  </data>
+  <data name="&gt;&gt;grpTwoColumns.Name" xml:space="preserve">
+    <value>grpTwoColumns</value>
+  </data>
+  <data name="&gt;&gt;grpTwoColumns.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpTwoColumns.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpTwoColumns.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <metadata name="ttMakeDate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

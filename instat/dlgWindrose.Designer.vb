@@ -177,7 +177,7 @@ Partial Class dlgWindrose
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 319)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(260, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(320, 24)
         Me.ucrSaveGraph.TabIndex = 9
         '
         'ucrNudNoOfColumns

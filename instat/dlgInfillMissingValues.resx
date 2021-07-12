@@ -1792,7 +1792,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveNewColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 25</value>
+    <value>320, 24</value>
   </data>
   <data name="ucrSaveNewColumn.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>

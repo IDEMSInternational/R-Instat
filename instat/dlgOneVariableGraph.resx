@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>259, 45</value>
+    <value>248, 44</value>
   </data>
   <data name="lblSelectedVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
@@ -349,7 +349,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>320, 24</value>
   </data>
   <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>

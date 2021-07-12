@@ -379,7 +379,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrSaveHist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>320, 24</value>
   </data>
   <data name="ucrSaveHist.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>

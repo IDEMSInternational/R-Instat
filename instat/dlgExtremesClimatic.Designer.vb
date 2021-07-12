@@ -704,7 +704,7 @@ Partial Class dlgExtremesClimatic
         Me.ucrSaveThresholdPlot.Location = New System.Drawing.Point(8, 468)
         Me.ucrSaveThresholdPlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveThresholdPlot.Name = "ucrSaveThresholdPlot"
-        Me.ucrSaveThresholdPlot.Size = New System.Drawing.Size(316, 24)
+        Me.ucrSaveThresholdPlot.Size = New System.Drawing.Size(320, 24)
         Me.ucrSaveThresholdPlot.TabIndex = 19
         '
         'ucrSaveMrlPlot

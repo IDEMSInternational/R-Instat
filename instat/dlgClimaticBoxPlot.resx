@@ -712,7 +712,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSavePlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>320, 24</value>
   </data>
   <data name="ucrSavePlot.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>

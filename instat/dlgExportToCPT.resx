@@ -370,7 +370,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoOneDF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 7</value>
+    <value>14, 7</value>
   </data>
   <data name="rdoOneDF.Size" type="System.Drawing.Size, System.Drawing">
     <value>132, 27</value>
@@ -406,7 +406,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoTwoDFLong.Location" type="System.Drawing.Point, System.Drawing">
-    <value>147, 7</value>
+    <value>145, 7</value>
   </data>
   <data name="rdoTwoDFLong.Size" type="System.Drawing.Size, System.Drawing">
     <value>136, 27</value>
@@ -442,7 +442,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoTwoDFWide.Location" type="System.Drawing.Point, System.Drawing">
-    <value>282, 7</value>
+    <value>280, 7</value>
   </data>
   <data name="rdoTwoDFWide.Size" type="System.Drawing.Size, System.Drawing">
     <value>141, 27</value>
@@ -505,7 +505,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSaveFile.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 505</value>
+    <value>8, 505</value>
   </data>
   <data name="lblSaveFile.Size" type="System.Drawing.Size, System.Drawing">
     <value>69, 13</value>
@@ -535,7 +535,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMissingValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 474</value>
+    <value>8, 474</value>
   </data>
   <data name="lblMissingValues.Size" type="System.Drawing.Size, System.Drawing">
     <value>122, 13</value>
@@ -586,7 +586,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>438, 587</value>
+    <value>432, 587</value>
   </data>
   <data name="ucrSelectorTwoDF.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 269</value>
@@ -613,7 +613,7 @@
     <value>9</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 529</value>
+    <value>8, 529</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -751,7 +751,7 @@
     <value>23</value>
   </data>
   <data name="ucrPnlNoOfDF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 3</value>
+    <value>6, 3</value>
   </data>
   <data name="ucrPnlNoOfDF.Size" type="System.Drawing.Size, System.Drawing">
     <value>418, 36</value>
