@@ -25,7 +25,6 @@ Public Class ucrFilter
     Public Event FilterChanged()
     Public strDefaultColumn = ""
     Public strDefaultDataFrame = ""
-    Private AddNot As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -400,25 +399,37 @@ Public Class ucrFilter
         UpdateFilterPreview()
     End Sub
 
-    Private Sub ucrChkNotForEachCondition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNotForEachCondition.ControlValueChanged
-        AddNot = ucrChkNotForEachCondition.Checked
-        If AddNot Then
-            clsFilterFunction.AddParameter("not", "TRUE", iPosition:=4)
+    Private Sub ucrChkNotForEachCondition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNotForEachCondition.ControlValueChanged, ucrChkNotForAllConditions.ControlValueChanged
+        If ucrChkNotForEachCondition.Checked Then
+            ucrChkNotForAllConditions.Checked = False
+            clsFilterFunction.AddParameter("inner_not", "TRUE", iPosition:=4)
         Else
-            clsFilterFunction.RemoveParameterByName("not")
+            clsFilterFunction.RemoveParameterByName("inner_not")
+        End If
+
+        If ucrChkNotForAllConditions.Checked Then
+            ucrChkNotForEachCondition.Checked = False
+            clsFilterFunction.AddParameter("outer_not", "TRUE", iPosition:=4)
+        Else
+            clsFilterFunction.RemoveParameterByName("outer_not")
         End If
         UpdateFilterPreview()
     End Sub
 
     Private Sub UpdateFilterPreview()
-        If AddNot Then
-            ucrFilterPreview.SetName(clsFilterOperator.ToScript().Replace("(", "!("))
+        Dim strFilter = clsFilterOperator.ToScript()
+        If ucrChkNotForEachCondition.Checked Then
+            ucrFilterPreview.SetName(strFilter.Replace("(", "!("))
+        ElseIf ucrChkNotForAllConditions.Checked Then
+            strFilter = ((strFilter.Replace("(", "")).Replace(")", "")).Replace("!", "")
+            ucrFilterPreview.SetName("!(" & strFilter & ")")
         Else
-            ucrFilterPreview.SetName(clsFilterOperator.ToScript().Replace("!(", "("))
+            ucrFilterPreview.SetName(strFilter.Replace("!(", "("))
         End If
     End Sub
 
     Private Sub HideUnhideNotCheckBox()
         ucrChkNotForEachCondition.Visible = ucrFilterOperation.GetText.Contains(">") OrElse ucrFilterOperation.GetText.Contains(">=") OrElse ucrFilterOperation.GetText.Contains("<") OrElse ucrFilterOperation.GetText.Contains("<=")
+        ucrChkNotForAllConditions.Visible = ucrFilterOperation.GetText.Contains(">") OrElse ucrFilterOperation.GetText.Contains(">=") OrElse ucrFilterOperation.GetText.Contains("<") OrElse ucrFilterOperation.GetText.Contains("<=")
     End Sub
 End Class
