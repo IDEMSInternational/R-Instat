@@ -1606,34 +1606,49 @@ DataSheet$set("public", "get_filter", function(filter_name) {
 
 DataSheet$set("public", "get_filter_as_logical", function(filter_name) {
   curr_filter <- self$get_filter(filter_name)
-  i = 1
-  if(length(curr_filter$filter_conditions) ==  0) out <- rep(TRUE, nrow(self$get_data_frame(use_current_filter = FALSE)))
-  else {
-    result = matrix(nrow = nrow(self$get_data_frame(use_current_filter = FALSE)), ncol = length(curr_filter$filter_conditions))
-    for(condition in curr_filter$filter_conditions) {
+  i <- 1
+  if (length(curr_filter$filter_conditions) == 0) {
+    out <- rep(TRUE, nrow(self$get_data_frame(use_current_filter = FALSE)))
+  } else {
+    result <- matrix(nrow = nrow(self$get_data_frame(use_current_filter = FALSE)), ncol = length(curr_filter$filter_conditions))
+    for (condition in curr_filter$filter_conditions) {
       # Prevents crash if column no longer exists
       # TODO still shows filter is applied
-      if(!condition[["column"]] %in% self$get_column_names()) return(TRUE)
-      if(condition[["operation"]] == "is.na" || condition[["operation"]] == "! is.na") {
+      if (!condition[["column"]] %in% self$get_column_names()) {
+        return(TRUE)
+      }
+      if (condition[["operation"]] == "is.na" || condition[["operation"]] == "! is.na") {
         col_is_na <- is.na(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE))
-        if(condition[["operation"]] == "is.na") result[ ,i] <- col_is_na
-        else result[ ,i] <- !col_is_na
+        if (condition[["operation"]] == "is.na") {
+          result[, i] <- col_is_na
+        } else {
+          result[, i] <- !col_is_na
+        }
       }
       else {
         func <- match.fun(condition[["operation"]])
-        if(any(is.na(condition[["value"]])) && condition[["operation"]] != "%in%") stop("Cannot create a filter on missing values with operation: ", condition[["operation"]])
-        else 
+        if (any(is.na(condition[["value"]])) && condition[["operation"]] != "%in%") {
+          stop("Cannot create a filter on missing values with operation: ", condition[["operation"]])
+        } else {
           logical_vec <- func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
-          if(!curr_filter$parameters[["not"]]) result[ ,i] <- logical_vec
-          else result[ ,i] <- !logical_vec
+        }
+        if (!curr_filter$parameters[["not"]]) {
+          result[, i] <- logical_vec
+        } else {
+          result[, i] <- !logical_vec
+        }
       }
-      i = i + 1
+      i <- i + 1
     }
-    and_or <- curr_filter$parameters[["and_or"]] 
-    if(is.null(and_or)) and_or <- "&"
-    if(and_or == "&") out <- apply(result, 1, all) 
-    else if (and_or == "|") out <- apply(result, 1, any)
-    else stop(and_or, " should be & or |.")
+    and_or <- curr_filter$parameters[["and_or"]]
+    if (is.null(and_or)) and_or <- "&"
+    if (and_or == "&") {
+      out <- apply(result, 1, all)
+    } else if (and_or == "|") {
+      out <- apply(result, 1, any)
+    } else {
+      stop(and_or, " should be & or |.")
+    }
     out[is.na(out)] <- !curr_filter$parameters[["na.rm"]]
   }
   return(out)
