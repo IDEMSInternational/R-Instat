@@ -1537,7 +1537,7 @@ DataSheet$set("public", "set_protected_columns", function(col_names) {
 }
 )
 
-DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE, is_no_filter = FALSE, and_or = "&", not = FALSE) {
+DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace = TRUE, set_as_current = FALSE, na.rm = TRUE, is_no_filter = FALSE, and_or = "&", inner_not = FALSE, outer_not = FALSE) {
   if(missing(filter)) stop("filter is required")
   if(filter_name == "") filter_name = next_default_item("Filter", names(private$filters))
   
@@ -1552,7 +1552,7 @@ DataSheet$set("public", "add_filter", function(filter, filter_name = "", replace
   }
   else {
     if(filter_name %in% names(private$filters)) message("A filter named ", filter_name, " already exists. It will be replaced by the new filter.")
-    filter_calc = calculation$new(type = "filter", filter_conditions = filter, name = filter_name, parameters = list(na.rm = na.rm, is_no_filter = is_no_filter, and_or = and_or, not = not))
+    filter_calc = calculation$new(type = "filter", filter_conditions = filter, name = filter_name, parameters = list(na.rm = na.rm, is_no_filter = is_no_filter, and_or = and_or, inner_not = inner_not, outer_not = outer_not))
     private$filters[[filter_name]] <- filter_calc
     self$append_to_changes(list(Added_filter, filter_name))
     if(set_as_current) {
@@ -1607,53 +1607,64 @@ DataSheet$set("public", "get_filter", function(filter_name) {
 DataSheet$set("public", "get_filter_as_logical", function(filter_name) {
   curr_filter <- self$get_filter(filter_name)
   i <- 1
-  if (length(curr_filter$filter_conditions) == 0) {
-    out <- rep(TRUE, nrow(self$get_data_frame(use_current_filter = FALSE)))
+  if (!curr_filter$parameters[["outer_not"]]) {
+    if (length(curr_filter$filter_conditions) == 0) {
+      out <- rep(TRUE, nrow(self$get_data_frame(use_current_filter = FALSE)))
+    } else {
+      result <- matrix(nrow = nrow(self$get_data_frame(use_current_filter = FALSE)), ncol = length(curr_filter$filter_conditions))
+      for (condition in curr_filter$filter_conditions) {
+        # Prevents crash if column no longer exists
+        # TODO still shows filter is applied
+        if (!condition[["column"]] %in% self$get_column_names()) {
+          return(TRUE)
+        }
+        if (condition[["operation"]] == "is.na" || condition[["operation"]] == "! is.na") {
+          col_is_na <- is.na(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE))
+          if (condition[["operation"]] == "is.na") {
+            result[, i] <- col_is_na
+          } else {
+            result[, i] <- !col_is_na
+          }
+        }
+        else {
+          func <- match.fun(condition[["operation"]])
+          if (any(is.na(condition[["value"]])) && condition[["operation"]] != "%in%") {
+            stop("Cannot create a filter on missing values with operation: ", condition[["operation"]])
+          } else {
+            logical_vec <- func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
+          }
+          if (!curr_filter$parameters[["inner_not"]]) {
+            result[, i] <- logical_vec
+          } else {
+            result[, i] <- !logical_vec
+          }
+        }
+        i <- i + 1
+      }
+      and_or <- curr_filter$parameters[["and_or"]]
+      if (is.null(and_or)) and_or <- "&"
+      if (and_or == "&") {
+        out <- apply(result, 1, all)
+      } else if (and_or == "|") {
+        out <- apply(result, 1, any)
+      } else {
+        stop(and_or, " should be & or |.")
+      }
+      out[is.na(out)] <- !curr_filter$parameters[["na.rm"]]
+    }
   } else {
-    result <- matrix(nrow = nrow(self$get_data_frame(use_current_filter = FALSE)), ncol = length(curr_filter$filter_conditions))
+    dat <- self$get_data_frame(use_current_filter = FALSE)
+    str_out <- "("
     for (condition in curr_filter$filter_conditions) {
-      # Prevents crash if column no longer exists
-      # TODO still shows filter is applied
-      if (!condition[["column"]] %in% self$get_column_names()) {
-        return(TRUE)
-      }
-      if (condition[["operation"]] == "is.na" || condition[["operation"]] == "! is.na") {
-        col_is_na <- is.na(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE))
-        if (condition[["operation"]] == "is.na") {
-          result[, i] <- col_is_na
-        } else {
-          result[, i] <- !col_is_na
-        }
-      }
-      else {
-        func <- match.fun(condition[["operation"]])
-        if (any(is.na(condition[["value"]])) && condition[["operation"]] != "%in%") {
-          stop("Cannot create a filter on missing values with operation: ", condition[["operation"]])
-        } else {
-          logical_vec <- func(self$get_columns_from_data(condition[["column"]], use_current_filter = FALSE), condition[["value"]])
-        }
-        if (!curr_filter$parameters[["not"]]) {
-          result[, i] <- logical_vec
-        } else {
-          result[, i] <- !logical_vec
-        }
-      }
+      str_out <- paste0(str_out, paste0("dat", "$", condition[["column"]], condition[["operation"]], condition[["value"]]))
+      if (i != length(curr_filter$filter_conditions)) str_out <- paste0(str_out, curr_filter$parameters[["and_or"]])
       i <- i + 1
     }
-    and_or <- curr_filter$parameters[["and_or"]]
-    if (is.null(and_or)) and_or <- "&"
-    if (and_or == "&") {
-      out <- apply(result, 1, all)
-    } else if (and_or == "|") {
-      out <- apply(result, 1, any)
-    } else {
-      stop(and_or, " should be & or |.")
-    }
-    out[is.na(out)] <- !curr_filter$parameters[["na.rm"]]
+    str_out <- paste0("!", str_out, ")")
+    out <- eval(parse(text = str_out))
   }
   return(out)
-}
-)
+})
 
 DataSheet$set("public", "get_filter_column_names", function(filter_name) {
   curr_filter <- self$get_filter(filter_name)
@@ -1689,7 +1700,7 @@ DataSheet$set("public", "filter_string", function(filter_name) {
   i <- 1
   for (condition in curr_filter$filter_conditions) {
     if (i != 1) out <- paste(out, curr_filter$parameters[["and_or"]])
-    out <- ifelse(!curr_filter$parameters[["not"]], paste0(out, " (", condition[["column"]], " ", condition[["operation"]]), paste0(out, " !(", condition[["column"]], " ", condition[["operation"]]))
+    out <- ifelse(!curr_filter$parameters[["inner_not"]], paste0(out, " (", condition[["column"]], " ", condition[["operation"]]), paste0(out, " !(", condition[["column"]], " ", condition[["operation"]]))
     if (condition[["operation"]] == "%in%") {
       out <- paste0(out, " c(", paste(paste0("'", condition[["value"]], "'"), collapse = ","), ")")
     } else {
@@ -1699,6 +1710,10 @@ DataSheet$set("public", "filter_string", function(filter_name) {
     i <- i + 1
   }
   out <- paste(out, ")")
+  if(curr_filter$parameters[["outer_not"]]) {
+    out <- gsub("[!()]", "", out)
+    out <- paste0("!(", out, ")")
+    }
   return(out)
 }
 )
