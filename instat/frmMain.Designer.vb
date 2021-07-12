@@ -395,6 +395,7 @@ Partial Class frmMain
         Me.mnuTbResetLayout = New System.Windows.Forms.ToolStripButton()
         Me.separator3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbHelp = New System.Windows.Forms.ToolStripButton()
+        Me.mnuTbLan = New System.Windows.Forms.ToolStripButton()
         Me.mnuBar = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
@@ -643,6 +644,7 @@ Partial Class frmMain
         Me.ExportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
+        Me.splMetadata = New System.Windows.Forms.SplitContainer()
         Me.splLogScript = New System.Windows.Forms.SplitContainer()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
         Me.mnuRViewer = New System.Windows.Forms.ToolStripMenuItem()
@@ -651,8 +653,6 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.cmdLanguage = New System.Windows.Forms.Button()
-        Me.splMetadata = New System.Windows.Forms.SplitContainer()
         Me.ucrColumnMeta = New instat.ucrColumnMetadata()
         Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
         Me.ucrLogWindow = New instat.ucrLog()
@@ -670,6 +670,10 @@ Partial Class frmMain
         Me.splExtraWindows.Panel1.SuspendLayout()
         Me.splExtraWindows.Panel2.SuspendLayout()
         Me.splExtraWindows.SuspendLayout()
+        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splMetadata.Panel1.SuspendLayout()
+        Me.splMetadata.Panel2.SuspendLayout()
+        Me.splMetadata.SuspendLayout()
         CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splLogScript.Panel1.SuspendLayout()
         Me.splLogScript.Panel2.SuspendLayout()
@@ -678,10 +682,6 @@ Partial Class frmMain
         Me.splDataOutput.Panel1.SuspendLayout()
         Me.splDataOutput.Panel2.SuspendLayout()
         Me.splDataOutput.SuspendLayout()
-        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splMetadata.Panel1.SuspendLayout()
-        Me.splMetadata.Panel2.SuspendLayout()
-        Me.splMetadata.SuspendLayout()
         Me.SuspendLayout()
         '
         'mnuDescribe
@@ -2494,7 +2494,7 @@ Partial Class frmMain
         Me.Tool_strip.BackColor = System.Drawing.SystemColors.ControlLightLight
         Me.Tool_strip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.Tool_strip.ImageScalingSize = New System.Drawing.Size(30, 30)
-        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbEditLastDialog, Me.mnuTbLast10Dialogs, Me.mnuLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp})
+        Me.Tool_strip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuTbOpen, Me.mnuTbOpenFromLibrary, Me.mnuTbSave, Me.toolStripSeparator, Me.mnuTbCopy, Me.mnuTbPaste, Me.separator1, Me.mnuTbEditLastDialog, Me.mnuTbLast10Dialogs, Me.mnuLastGraph, Me.separator2, Me.mnuTbDataView, Me.mnuTbOutput, Me.mnuMetadata, Me.mnuTbLog, Me.mnuTbResetLayout, Me.separator3, Me.mnuTbHelp, Me.mnuTbLan})
         resources.ApplyResources(Me.Tool_strip, "Tool_strip")
         Me.Tool_strip.Name = "Tool_strip"
         Me.Tool_strip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
@@ -2670,6 +2670,14 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuTbHelp, "mnuTbHelp")
         Me.mnuTbHelp.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbHelp.Name = "mnuTbHelp"
+        '
+        'mnuTbLan
+        '
+        Me.mnuTbLan.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbLan.Image = Global.instat.My.Resources.Resources.lan_btn
+        resources.ApplyResources(Me.mnuTbLan, "mnuTbLan")
+        Me.mnuTbLan.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
+        Me.mnuTbLan.Name = "mnuTbLan"
         '
         'mnuBar
         '
@@ -4052,6 +4060,21 @@ Partial Class frmMain
         Me.splExtraWindows.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splExtraWindows.Panel2.Controls.Add(Me.splLogScript)
         '
+        'splMetadata
+        '
+        Me.splMetadata.BackColor = System.Drawing.Color.LightGray
+        resources.ApplyResources(Me.splMetadata, "splMetadata")
+        Me.splMetadata.Name = "splMetadata"
+        '
+        'splMetadata.Panel1
+        '
+        Me.splMetadata.Panel1.Controls.Add(Me.ucrColumnMeta)
+        '
+        'splMetadata.Panel2
+        '
+        Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
+        Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
+        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -4114,28 +4137,6 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
-        'cmdLanguage
-        '
-        resources.ApplyResources(Me.cmdLanguage, "cmdLanguage")
-        Me.cmdLanguage.Name = "cmdLanguage"
-        Me.cmdLanguage.Tag = ""
-        Me.cmdLanguage.UseVisualStyleBackColor = True
-        '
-        'splMetadata
-        '
-        Me.splMetadata.BackColor = System.Drawing.Color.LightGray
-        resources.ApplyResources(Me.splMetadata, "splMetadata")
-        Me.splMetadata.Name = "splMetadata"
-        '
-        'splMetadata.Panel1
-        '
-        Me.splMetadata.Panel1.Controls.Add(Me.ucrColumnMeta)
-        '
-        'splMetadata.Panel2
-        '
-        Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
-        Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
-        '
         'ucrColumnMeta
         '
         Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
@@ -4179,7 +4180,6 @@ Partial Class frmMain
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.cmdLanguage)
         Me.Controls.Add(Me.splOverall)
         Me.Controls.Add(Me.stsStrip)
         Me.Controls.Add(Me.Tool_strip)
@@ -4202,6 +4202,10 @@ Partial Class frmMain
         Me.splExtraWindows.Panel2.ResumeLayout(False)
         CType(Me.splExtraWindows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splExtraWindows.ResumeLayout(False)
+        Me.splMetadata.Panel1.ResumeLayout(False)
+        Me.splMetadata.Panel2.ResumeLayout(False)
+        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splMetadata.ResumeLayout(False)
         Me.splLogScript.Panel1.ResumeLayout(False)
         Me.splLogScript.Panel2.ResumeLayout(False)
         CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4210,10 +4214,6 @@ Partial Class frmMain
         Me.splDataOutput.Panel2.ResumeLayout(False)
         CType(Me.splDataOutput, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splDataOutput.ResumeLayout(False)
-        Me.splMetadata.Panel1.ResumeLayout(False)
-        Me.splMetadata.Panel2.ResumeLayout(False)
-        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.splMetadata.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4841,5 +4841,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticFileImportfromClimateDataStore As ToolStripMenuItem
     Friend WithEvents mnuSetupForDataEntry As ToolStripMenuItem
     Friend WithEvents mnuEditPasteNewDataFrame As ToolStripMenuItem
-    Friend WithEvents cmdLanguage As Button
+    Friend WithEvents mnuTbLan As ToolStripButton
 End Class

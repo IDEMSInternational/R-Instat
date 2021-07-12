@@ -2347,7 +2347,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;stsStrip.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <metadata name="Tool_strip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 95</value>
@@ -2739,6 +2739,15 @@
   <data name="mnuTbHelp.Text" xml:space="preserve">
     <value>He&amp;lp</value>
   </data>
+  <data name="mnuTbLan.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="mnuTbLan.Size" type="System.Drawing.Size, System.Drawing">
+    <value>34, 34</value>
+  </data>
+  <data name="mnuTbLan.ToolTipText" xml:space="preserve">
+    <value>Changes the menu language to English, and from English</value>
+  </data>
   <data name="Tool_strip.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 24</value>
   </data>
@@ -2764,7 +2773,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;Tool_strip.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <metadata name="mnuBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>122, 95</value>
@@ -4237,7 +4246,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;mnuBar.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="ExportToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>126, 22</value>
@@ -4678,7 +4687,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;splOverall.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="mnuRViewer.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
@@ -4734,38 +4743,11 @@
   <data name="mnuLogFile.ToolTipText" xml:space="preserve">
     <value>Log Window</value>
   </data>
-  <data name="cmdLanguage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>623, 29</value>
-  </data>
-  <data name="cmdLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>35, 24</value>
-  </data>
-  <data name="cmdLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
-  </data>
-  <data name="cmdLanguage.Text" xml:space="preserve">
-    <value>Lang</value>
-  </data>
-  <data name="&gt;&gt;cmdLanguage.Name" xml:space="preserve">
-    <value>cmdLanguage</value>
-  </data>
-  <data name="&gt;&gt;cmdLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdLanguage.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;cmdLanguage.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>25</value>
+    <value>82</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
     <value>6, 13</value>
@@ -8629,6 +8611,12 @@
     <value>mnuTbHelp</value>
   </data>
   <data name="&gt;&gt;mnuTbHelp.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuTbLan.Name" xml:space="preserve">
+    <value>mnuTbLan</value>
+  </data>
+  <data name="&gt;&gt;mnuTbLan.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuFile.Name" xml:space="preserve">
