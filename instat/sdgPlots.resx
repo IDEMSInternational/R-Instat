@@ -2467,7 +2467,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAlpha.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 134</value>
+    <value>26, 135</value>
   </data>
   <data name="lblAlpha.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 13</value>
@@ -2527,7 +2527,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>26, 210</value>
+    <value>26, 208</value>
   </data>
   <data name="lblAngle.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 13</value>
