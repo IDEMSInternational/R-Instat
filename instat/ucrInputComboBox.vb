@@ -93,6 +93,11 @@ Public Class ucrInputComboBox
         FillItemTypes()
     End Sub
 
+    Public Sub SetItemsTypeAsLinks()
+        strItemsType = "Links"
+        FillItemTypes()
+    End Sub
+
     Private Sub FillItemTypes()
         Select Case strItemsType
             Case "Columns"

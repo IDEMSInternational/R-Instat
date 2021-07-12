@@ -136,12 +136,4 @@ Public Class dlgAddKey
     Private Sub AllControls_ControlContentsChanged() Handles ucrSaveKey.ControlContentsChanged, ucrReceiverKeyColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
-    Private Sub AllControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrSaveKey.ControlContentsChanged, ucrReceiverKeyColumns.ControlContentsChanged
-
-    End Sub
-
-    Private Sub ucrReceiverKeyColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverKeyColumns.ControlValueChanged
-
-    End Sub
 End Class

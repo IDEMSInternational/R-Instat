@@ -130,6 +130,11 @@ Public Class ucrInput
         SetDefaultName()
     End Sub
 
+    Public Sub SetDefaultTypeAsLink()
+        strDefaultType = "Link"
+        SetDefaultName()
+    End Sub
+
     Public Sub SetValidationTypeAsRVariable()
         strValidationType = "RVariable"
         SetDefaultName()
@@ -198,6 +203,12 @@ Public Class ucrInput
             ElseIf strDefaultType = "Key" Then
                 If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
                     SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetKeyNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
+                Else
+                    SetName("")
+                End If
+            ElseIf strDefaultType = "Link" Then
+                If ucrDataFrameSelector IsNot Nothing AndAlso ucrDataFrameSelector.cboAvailableDataFrames.Text <> "" Then
+                    SetName(frmMain.clsRLink.GetNextDefault(strDefaultPrefix, frmMain.clsRLink.GetLinkNames(ucrDataFrameSelector.cboAvailableDataFrames.Text)))
                 Else
                     SetName("")
                 End If

@@ -1955,6 +1955,31 @@ Public Class RLink
         Return lstKeyNames
     End Function
 
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's links. </summary>
+    '''
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
+    '''
+    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's survs. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function GetLinkNames(Optional strDataFrameName As String = "") As List(Of String)
+        Dim lstLinkNames As New List(Of String)
+        Dim clsGetLinkNames As New RFunction
+        Dim expLinkNames As SymbolicExpression
+
+        clsGetLinkNames.SetRCommand(strInstatDataObject & "$get_link_names")
+
+        If strDataFrameName <> "" Then
+            clsGetLinkNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        expLinkNames = RunInternalScriptGetValue(clsGetLinkNames.ToScript(), bSilent:=True)
+        If expLinkNames IsNot Nothing AndAlso Not expLinkNames.Type = Internals.SymbolicExpressionType.Null Then
+            lstLinkNames = expLinkNames.AsCharacter.ToArray.ToList
+        End If
+        Return lstLinkNames
+    End Function
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets the data type of the <paramref name="strColumnName"/> column in the 
     '''             <paramref name="strDataFrameName"/> data frame. </summary>

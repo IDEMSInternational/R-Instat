@@ -410,6 +410,11 @@ Public Class ucrSave
                 ucrInputComboSave.SetItemsTypeAsKeys()
                 ucrInputTextSave.SetDefaultTypeAsKey()
                 btnColumnPosition.Visible = False
+            Case "link"
+                ucrInputComboSave.SetDefaultTypeAsLink()
+                ucrInputComboSave.SetItemsTypeAsLinks()
+                ucrInputTextSave.SetDefaultTypeAsLink()
+                btnColumnPosition.Visible = False
             Case Else
                 MsgBox("Developer error: unrecognised save type: " & strType)
         End Select
@@ -438,11 +443,14 @@ Public Class ucrSave
     Public Sub SetSaveTypeAsTable()
         SetSaveType("table")
     End Sub
-
+    ''' <summary>   Sets save type as key. </summary>
     Public Sub SetSaveTypeAsKey()
         SetSaveType("key")
     End Sub
-
+    ''' <summary>   Sets save type as link. </summary>
+    Public Sub SetSaveTypeAsLink()
+        SetSaveType("link")
+    End Sub
     ''' <summary>   Resets this control to its default values.  </summary>
     Public Sub Reset()
         SetDefaults()
@@ -537,7 +545,7 @@ Public Class ucrSave
     '''                         position variables. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub UpdateRCode(Optional bReset As Boolean = False)
-        If strSaveType = "key" Then
+        If strSaveType = "key" OrElse strSaveType = "link" Then
             MyBase.UpdateRCode(bReset)
         Else
             UpdateAssignTo()
@@ -550,7 +558,7 @@ Public Class ucrSave
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
     Protected Overrides Sub UpdateAllParameters()
-        If strSaveType = "key" Then
+        If strSaveType = "key" OrElse strSaveType = "link" Then
             MyBase.UpdateAllParameters()
         Else
             UpdateAssignTo()
@@ -670,7 +678,7 @@ Public Class ucrSave
     '''                                 overridden function. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
-        If Not strSaveType = "key" Then
+        If Not strSaveType = "key" AndAlso Not strSaveType = "link" Then
             Dim clsMainRCode As RCodeStructure = GetRCode()
             Dim strControlValue As String = ""
 
@@ -785,8 +793,8 @@ Public Class ucrSave
         '    - Should this function return boolean? The parent function in ucrCore has no return type! Is this good coding practice?
         '    - The parent function returns true if the control has a paremter that is not yet included in the R command. Why is this control different?
         '    - Is the condition for bToBeAssigned correct?
-        If strSaveType = "key" Then
-            MyBase.CanUpdate()
+        If strSaveType = "key" OrElse strSaveType = "link" Then
+            Return MyBase.CanUpdate()
         Else
             Return ((Not GetRCode().bIsAssigned AndAlso Not GetRCode().bToBeAssigned) AndAlso strSaveType <> "")
         End If
@@ -809,7 +817,7 @@ Public Class ucrSave
         'TODO SJL 15/05/20 
         '   - The name is quite confusing. Rename?
         '   - If we made 'UpdateAssignTo' public then we could remove this function
-        If strSaveType = "key" Then
+        If strSaveType = "key" OrElse strSaveType = "link" Then
             MyBase.AddOrRemoveParameter(True)
         Else
             UpdateAssignTo(Not bAdd)
