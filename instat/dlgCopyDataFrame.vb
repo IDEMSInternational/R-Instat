@@ -27,7 +27,7 @@ Public Class dlgCopyDataFrame
         TestOKEnabled()
     End Sub
 
-    Private Sub Setupcontrols()
+    Private Sub SetControls()
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
