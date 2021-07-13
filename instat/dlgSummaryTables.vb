@@ -189,7 +189,7 @@ Public Class dlgSummaryTables
         clsMutableFunction.SetPackageName("mmtable2")
         clsMutableFunction.SetRCommand("mmtable")
         clsMutableFunction.AddParameter("data", "summary_table", iPosition:=0)
-        clsMutableFunction.AddParameter("table_data", "value", iPosition:=1)
+        clsMutableFunction.AddParameter("cells", "value", iPosition:=1)
 
         clsMutableOperator.AddParameter("mutableFunc", clsRFunctionParameter:=clsMutableFunction, iPosition:=0)
         clsMutableOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
