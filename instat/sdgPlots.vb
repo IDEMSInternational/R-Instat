@@ -465,12 +465,11 @@ Public Class sdgPlots
         ucrNudSize.SetLinkedDisplayControl(lblSize)
         ucrNudSize.SetRDefault(0.5)
 
-        ucrInputLabel.SetParameter(New RParameter("label", 20))
         ucrInputLabel.SetLinkedDisplayControl(lblLabel)
-        ucrInputLabel.SetRDefault("")
+        ucrInputLabel.SetValidationTypeAsList()
 
         ucrChkParse.SetText("Parse")
-        ucrChkParse.SetParameter(New RParameter("parse", 21))
+        ucrChkParse.SetParameter(New RParameter("parse", 20))
         ucrChkParse.SetRDefault("FALSE")
         ucrChkParse.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
@@ -483,7 +482,7 @@ Public Class sdgPlots
         ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLineend, {"segment"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
         ucrInputAnnotationGeoms.AddToLinkedControls(ucrNudCrossbarFatten, {"crossbar"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
         ucrInputAnnotationGeoms.AddToLinkedControls({ucrNudShape, ucrNudPointrangeFatten}, {"pointrange"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
-        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLabel, {"text", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedUpdateFunction:=True)
+        ucrInputAnnotationGeoms.AddToLinkedControls(ucrInputLabel, {"text", "label"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="")
 
         'Colour
         ucrInputFillScaleColour.SetParameter(New RParameter("option", iNewPosition:=0))
@@ -1139,5 +1138,23 @@ Public Class sdgPlots
                     ucrChkParse.Location = New Point(ucrChkParse.Location.X, 228)
             End Select
         End If
+        AddLabelParameter()
+    End Sub
+
+    Private Sub ucrInputLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLabel.ControlValueChanged
+        AddLabelParameter()
+    End Sub
+    Private Sub AddLabelParameter()
+        Select Case ucrInputAnnotationGeoms.GetText
+            Case "text", "label"
+                If ucrInputLabel.GetText <> "" AndAlso ucrInputLabel.clsRList.clsParameters.Count > 1 Then
+                    clsAnnotateFunction.AddParameter("label", clsRFunctionParameter:=ucrInputLabel.clsRList, iPosition:=21)
+                Else
+                    clsAnnotateFunction.RemoveParameterByName("label")
+                    clsAnnotateFunction.AddParameter("label", Chr(34) & ucrInputLabel.GetText & Chr(34), iPosition:=21)
+                End If
+            Case Else
+                clsAnnotateFunction.RemoveParameterByName("label")
+        End Select
     End Sub
 End Class
