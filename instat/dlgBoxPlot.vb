@@ -91,10 +91,10 @@ Public Class dlgBoxplot
         ucrPnlPlots.AddFunctionNamesCondition(rdoBoxplotTufte, {"geom_boxplot", "geom_tufteboxplot"})
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
-        ucrPnlPlots.AddToLinkedControls(ucrChkVarWidth, {rdoBoxplotTufte}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPlots.AddToLinkedControls(ucrChkAddPoints, {rdoBoxplotTufte, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPlots.AddToLinkedControls({ucrChkTufte}, {rdoBoxplotTufte}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTufte.AddToLinkedControls({ucrSecondFactorReceiver}, {"FALSE"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkTufte.AddToLinkedControls(ucrChkVarWidth, {"FALSE"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorBoxPlot.SetParameter(New RParameter("data", 0))
         ucrSelectorBoxPlot.SetParameterIsrfunction()
@@ -160,8 +160,8 @@ Public Class dlgBoxplot
         ucrNudTransparency.SetRDefault(1)
 
         ucrChkTufte.SetText("Tufte Box plots")
-        ucrChkTufte.AddFunctionNamesCondition(True, "geom_tufteboxplot")
         ucrChkTufte.AddFunctionNamesCondition(False, "geom_tufteboxplot", False)
+        ucrChkTufte.AddFunctionNamesCondition(True, "geom_tufteboxplot")
 
         ucrSaveBoxplot.SetPrefix("boxplot")
         ucrSaveBoxplot.SetIsComboBox()
@@ -223,6 +223,9 @@ Public Class dlgBoxplot
 
         clsTufteBoxplotFunc.SetPackageName("ggthemes")
         clsTufteBoxplotFunc.SetRCommand("geom_tufteboxplot")
+        clsTufteBoxplotFunc.AddParameter("stat", Chr(34) & "boxplot" & Chr(34), iPosition:=0)
+        clsTufteBoxplotFunc.AddParameter("median.type", Chr(34) & "line" & Chr(34), iPosition:=1)
+        clsTufteBoxplotFunc.AddParameter("coef ", "1.5", iPosition:=14)
 
         clsViolinplotFunc.SetPackageName("ggplot2")
         clsViolinplotFunc.SetRCommand("geom_violin")
@@ -256,7 +259,6 @@ Public Class dlgBoxplot
         clsStatSummary.AddParameter("geom", Chr(34) & "line" & Chr(34))
         clsStatSummary.AddParameter("group", 1)
         clsStatSummary.AddParameter("color", Chr(34) & "blue" & Chr(34))
-        clsStatSummary.AddParameter("size", 1.5)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -288,7 +290,6 @@ Public Class dlgBoxplot
 
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrChkVarWidth.SetRCode(clsBoxplotFunc, bReset)
-        'ucrChkVarWidth.SetRCode(clsTufteBoxplotFunc, bReset)
         'passes in +cordflip
         ucrChkHorizontalBoxplot.SetRCode(clsBaseOperator, bReset)
         ucrVariablesAsFactorForBoxplot.SetRCode(clsRaesFunction, bReset)
@@ -302,6 +303,7 @@ Public Class dlgBoxplot
         ucrChkGrouptoConnect.SetRCode(clsBaseOperator, bReset)
         ucrPnlPlots.SetRCode(clsCurrGeomFunc, bReset)
 
+        ucrChkTufte.SetRCode(clsCurrGeomFunc, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -370,11 +372,13 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub SetGeomPrefixFillColourAes()
-        'Sets geom function, fill and colour aesthetics and ucrsave prefix
+        'Sets geom function, fill and colour aesthetics, ucrsave prefix and stat summary parameters
+        clsStatSummary.AddParameter("size", 1.5)
         If rdoBoxplotTufte.Checked Then
             If ucrChkTufte.Checked Then
                 ucrSaveBoxplot.SetPrefix("tufte_boxplot")
                 clsCurrGeomFunc = clsTufteBoxplotFunc
+                clsStatSummary.AddParameter("size", 0.7)
             Else
                 ucrSaveBoxplot.SetPrefix("boxplot")
                 ucrSecondFactorReceiver.ChangeParameterName("fill")
@@ -440,6 +444,14 @@ Public Class dlgBoxplot
         Else
             clsBaseOperator.RemoveParameterByName(strStatSummaryParameterName)
         End If
+    End Sub
+
+    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged, ucrChkTufte.ControlContentsChanged
+
+    End Sub
+
+    Private Sub ucrVariablesAsFactorForBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBoxplot.ControlContentsChanged
+
     End Sub
 
 
