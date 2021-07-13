@@ -164,32 +164,32 @@ Public Class dlgSummaryTables
 
         clsSummariesHeaderLeftTopFunction.SetPackageName("mmtable2")
         clsSummariesHeaderLeftTopFunction.SetRCommand("header_left_top")
-        clsSummariesHeaderLeftTopFunction.AddParameter("summary", "Summary", iPosition:=0, bIncludeArgumentName:=False)
+        clsSummariesHeaderLeftTopFunction.AddParameter("summary", "summary", iPosition:=0, bIncludeArgumentName:=False)
 
         clsSummariesHeaderTopLeftFunction.SetPackageName("mmtable2")
         clsSummariesHeaderTopLeftFunction.SetRCommand("header_top_left")
-        clsSummariesHeaderTopLeftFunction.AddParameter("summary", "Summary", iPosition:=0, bIncludeArgumentName:=False)
+        clsSummariesHeaderTopLeftFunction.AddParameter("summary", "summary", iPosition:=0, bIncludeArgumentName:=False)
 
         clsVariableHeaderLeftTopFunction.SetPackageName("mmtable2")
         clsVariableHeaderLeftTopFunction.SetRCommand("header_left_top")
-        clsVariableHeaderLeftTopFunction.AddParameter("variable", "Variable", iPosition:=0, bIncludeArgumentName:=False)
+        clsVariableHeaderLeftTopFunction.AddParameter("variable", "variable", iPosition:=0, bIncludeArgumentName:=False)
 
         clsVariableHeaderTopLeftFunction.SetPackageName("mmtable2")
         clsVariableHeaderTopLeftFunction.SetRCommand("header_top_left")
-        clsVariableHeaderTopLeftFunction.AddParameter("variable", "Variable", iPosition:=0, bIncludeArgumentName:=False)
+        clsVariableHeaderTopLeftFunction.AddParameter("variable", "variable", iPosition:=0, bIncludeArgumentName:=False)
 
         clsummaryVariableHeaderLeftTopFunction.SetPackageName("mmtable2")
         clsummaryVariableHeaderLeftTopFunction.SetRCommand("header_left_top")
-        clsummaryVariableHeaderLeftTopFunction.AddParameter("summary_variable", Chr(39) & "Summary-Variable" & Chr(39), iPosition:=0, bIncludeArgumentName:=False)
+        clsummaryVariableHeaderLeftTopFunction.AddParameter("summary_variable", Chr(39) & "summary-variable" & Chr(39), iPosition:=0, bIncludeArgumentName:=False)
 
         clsSummaryVariableHeaderTopLeftFunction.SetPackageName("mmtable2")
         clsSummaryVariableHeaderTopLeftFunction.SetRCommand("header_top_left")
-        clsSummaryVariableHeaderTopLeftFunction.AddParameter("summary_variable", Chr(39) & "Summary-Variable" & Chr(39), iPosition:=0, bIncludeArgumentName:=False)
+        clsSummaryVariableHeaderTopLeftFunction.AddParameter("summary_variable", Chr(39) & "summary-variable" & Chr(39), iPosition:=0, bIncludeArgumentName:=False)
 
         clsMutableFunction.SetPackageName("mmtable2")
         clsMutableFunction.SetRCommand("mmtable")
         clsMutableFunction.AddParameter("data", "summary_table", iPosition:=0)
-        clsMutableFunction.AddParameter("table_data", "Value", iPosition:=1)
+        clsMutableFunction.AddParameter("table_data", "value", iPosition:=1)
 
         clsMutableOperator.AddParameter("mutableFunc", clsRFunctionParameter:=clsMutableFunction, iPosition:=0)
         clsMutableOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)

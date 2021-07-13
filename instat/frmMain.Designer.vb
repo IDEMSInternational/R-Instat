@@ -61,13 +61,13 @@ Partial Class frmMain
         Me.mnuDescribeSpecificSummary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificMultipleResponse = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator26 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuDescribeSpecificScatterPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificPointPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificLinePlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificHistogram = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificBoxplot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificHistogramDensityFrequencyPlot = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificBoxplotJitterViolinPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificDotPlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificRugPlot = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuDescribeSpecificBarChart = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeSpecificBarPieChart = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificCummulativeDistribution = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificParallelCoordinatePlot = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDescribeSpecificMosaic = New System.Windows.Forms.ToolStripMenuItem()
@@ -182,7 +182,7 @@ Partial Class frmMain
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
         Me.mnuClimatic = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticFileOpensst = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileImportSST = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileImportfromIRIDataLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileImportfromClimateDataStore = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimaticFileImportandTidyNetCDF = New System.Windows.Forms.ToolStripMenuItem()
@@ -190,7 +190,7 @@ Partial Class frmMain
         Me.ToolStripSeparator20 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimateFileImportfromClimSoft = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuClimateFileImportfromClimSoftWizard = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuClimaticFileImportFromCliData = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuClimaticFileImportfromCliData = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuClimaticFileExportToCPT = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuExportToWWRToolStrip = New System.Windows.Forms.ToolStripMenuItem()
@@ -363,6 +363,7 @@ Partial Class frmMain
         Me.mnuEditCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditCopySpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuEditPasteNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
         Me.stsStrip = New System.Windows.Forms.StatusStrip()
@@ -397,14 +398,13 @@ Partial Class frmMain
         Me.mnuBar = New System.Windows.Forms.MenuStrip()
         Me.mnuFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileOpenFromFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileOpenFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileImportFromFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileImportFromLibrary = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripSeparator35 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuFileOpenFromODK = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuFileOpenFromCSPRO = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileImportFromODK = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuFileImportFromCSPRO = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportFromDatabases = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuFileImportandTidyNetCDFFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator27 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileConvert = New System.Windows.Forms.ToolStripMenuItem()
         Me.tlSeparatorFile = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuFileExport = New System.Windows.Forms.ToolStripMenuItem()
@@ -643,22 +643,22 @@ Partial Class frmMain
         Me.ExportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
-        Me.splMetadata = New System.Windows.Forms.SplitContainer()
-        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
-        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
         Me.splLogScript = New System.Windows.Forms.SplitContainer()
-        Me.ucrLogWindow = New instat.ucrLog()
-        Me.ucrScriptWindow = New instat.ucrScript()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
-        Me.ucrDataViewer = New instat.ucrDataView()
-        Me.ucrOutput = New instat.ucrOutputWindow()
         Me.mnuRViewer = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPlotly = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuEditPasteNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
+        Me.cmdLanguage = New System.Windows.Forms.Button()
+        Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
+        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
+        Me.ucrLogWindow = New instat.ucrLog()
+        Me.ucrScriptWindow = New instat.ucrScript()
+        Me.ucrDataViewer = New instat.ucrDataView()
+        Me.ucrOutput = New instat.ucrOutputWindow()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -670,10 +670,6 @@ Partial Class frmMain
         Me.splExtraWindows.Panel1.SuspendLayout()
         Me.splExtraWindows.Panel2.SuspendLayout()
         Me.splExtraWindows.SuspendLayout()
-        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.splMetadata.Panel1.SuspendLayout()
-        Me.splMetadata.Panel2.SuspendLayout()
-        Me.splMetadata.SuspendLayout()
         CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.splLogScript.Panel1.SuspendLayout()
         Me.splLogScript.Panel2.SuspendLayout()
@@ -682,6 +678,10 @@ Partial Class frmMain
         Me.splDataOutput.Panel1.SuspendLayout()
         Me.splDataOutput.Panel2.SuspendLayout()
         Me.splDataOutput.SuspendLayout()
+        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.splMetadata.Panel1.SuspendLayout()
+        Me.splMetadata.Panel2.SuspendLayout()
+        Me.splMetadata.SuspendLayout()
         Me.SuspendLayout()
         '
         'mnuDescribe
@@ -784,7 +784,7 @@ Partial Class frmMain
         '
         'mnuDescribeSpecific
         '
-        Me.mnuDescribeSpecific.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificScatterPlot, Me.mnuDescribeSpecificLinePlot, Me.mnuDescribeSpecificHistogram, Me.mnuDescribeSpecificBoxplot, Me.mnuDescribeSpecificDotPlot, Me.mnuDescribeSpecificRugPlot, Me.mnuDescribeSpecificBarChart, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot, Me.mnuDescribeSpecificMosaic})
+        Me.mnuDescribeSpecific.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeSpecificFrequency, Me.mnuDescribeSpecificSummary, Me.mnuDescribeSpecificMultipleResponse, Me.ToolStripSeparator26, Me.mnuDescribeSpecificPointPlot, Me.mnuDescribeSpecificLinePlot, Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, Me.mnuDescribeSpecificBoxplotJitterViolinPlot, Me.mnuDescribeSpecificDotPlot, Me.mnuDescribeSpecificRugPlot, Me.mnuDescribeSpecificBarPieChart, Me.mnuDescribeSpecificCummulativeDistribution, Me.mnuDescribeSpecificParallelCoordinatePlot, Me.mnuDescribeSpecificMosaic})
         Me.mnuDescribeSpecific.Name = "mnuDescribeSpecific"
         resources.ApplyResources(Me.mnuDescribeSpecific, "mnuDescribeSpecific")
         Me.mnuDescribeSpecific.Tag = "Table_Dialogs"
@@ -812,11 +812,11 @@ Partial Class frmMain
         Me.ToolStripSeparator26.Name = "ToolStripSeparator26"
         resources.ApplyResources(Me.ToolStripSeparator26, "ToolStripSeparator26")
         '
-        'mnuDescribeSpecificScatterPlot
+        'mnuDescribeSpecificPointPlot
         '
-        Me.mnuDescribeSpecificScatterPlot.Name = "mnuDescribeSpecificScatterPlot"
-        resources.ApplyResources(Me.mnuDescribeSpecificScatterPlot, "mnuDescribeSpecificScatterPlot")
-        Me.mnuDescribeSpecificScatterPlot.Tag = "Scatter_Plot..."
+        Me.mnuDescribeSpecificPointPlot.Name = "mnuDescribeSpecificPointPlot"
+        resources.ApplyResources(Me.mnuDescribeSpecificPointPlot, "mnuDescribeSpecificPointPlot")
+        Me.mnuDescribeSpecificPointPlot.Tag = "Point_Plot..."
         '
         'mnuDescribeSpecificLinePlot
         '
@@ -824,17 +824,17 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuDescribeSpecificLinePlot, "mnuDescribeSpecificLinePlot")
         Me.mnuDescribeSpecificLinePlot.Tag = "Line_Plot..."
         '
-        'mnuDescribeSpecificHistogram
+        'mnuDescribeSpecificHistogramDensityFrequencyPlot
         '
-        Me.mnuDescribeSpecificHistogram.Name = "mnuDescribeSpecificHistogram"
-        resources.ApplyResources(Me.mnuDescribeSpecificHistogram, "mnuDescribeSpecificHistogram")
-        Me.mnuDescribeSpecificHistogram.Tag = "Histogram..."
+        Me.mnuDescribeSpecificHistogramDensityFrequencyPlot.Name = "mnuDescribeSpecificHistogramDensityFrequencyPlot"
+        resources.ApplyResources(Me.mnuDescribeSpecificHistogramDensityFrequencyPlot, "mnuDescribeSpecificHistogramDensityFrequencyPlot")
+        Me.mnuDescribeSpecificHistogramDensityFrequencyPlot.Tag = "Histogram..."
         '
-        'mnuDescribeSpecificBoxplot
+        'mnuDescribeSpecificBoxplotJitterViolinPlot
         '
-        Me.mnuDescribeSpecificBoxplot.Name = "mnuDescribeSpecificBoxplot"
-        resources.ApplyResources(Me.mnuDescribeSpecificBoxplot, "mnuDescribeSpecificBoxplot")
-        Me.mnuDescribeSpecificBoxplot.Tag = "Boxplot..."
+        Me.mnuDescribeSpecificBoxplotJitterViolinPlot.Name = "mnuDescribeSpecificBoxplotJitterViolinPlot"
+        resources.ApplyResources(Me.mnuDescribeSpecificBoxplotJitterViolinPlot, "mnuDescribeSpecificBoxplotJitterViolinPlot")
+        Me.mnuDescribeSpecificBoxplotJitterViolinPlot.Tag = "Boxplot..."
         '
         'mnuDescribeSpecificDotPlot
         '
@@ -847,11 +847,11 @@ Partial Class frmMain
         Me.mnuDescribeSpecificRugPlot.Name = "mnuDescribeSpecificRugPlot"
         resources.ApplyResources(Me.mnuDescribeSpecificRugPlot, "mnuDescribeSpecificRugPlot")
         '
-        'mnuDescribeSpecificBarChart
+        'mnuDescribeSpecificBarPieChart
         '
-        Me.mnuDescribeSpecificBarChart.Name = "mnuDescribeSpecificBarChart"
-        resources.ApplyResources(Me.mnuDescribeSpecificBarChart, "mnuDescribeSpecificBarChart")
-        Me.mnuDescribeSpecificBarChart.Tag = "Bar_Chart"
+        Me.mnuDescribeSpecificBarPieChart.Name = "mnuDescribeSpecificBarPieChart"
+        resources.ApplyResources(Me.mnuDescribeSpecificBarPieChart, "mnuDescribeSpecificBarPieChart")
+        Me.mnuDescribeSpecificBarPieChart.Tag = "Bar_Chart"
         '
         'mnuDescribeSpecificCummulativeDistribution
         '
@@ -1475,14 +1475,14 @@ Partial Class frmMain
         '
         'mnuClimaticFile
         '
-        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileOpensst, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportfromClimateDataStore, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileImportandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportfromClimSoft, Me.mnuClimateFileImportfromClimSoftWizard, Me.mnuClimaticFileImportFromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip})
+        Me.mnuClimaticFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuClimaticFileImportSST, Me.mnuClimaticFileImportfromIRIDataLibrary, Me.mnuClimaticFileImportfromClimateDataStore, Me.mnuClimaticFileImportandTidyNetCDF, Me.mnuClimaticFileImportandTidyShapefile, Me.ToolStripSeparator20, Me.mnuClimateFileImportfromClimSoft, Me.mnuClimateFileImportfromClimSoftWizard, Me.mnuClimaticFileImportfromCliData, Me.ToolStripSeparator15, Me.mnuClimaticFileExportToCPT, Me.mnuExportToWWRToolStrip})
         Me.mnuClimaticFile.Name = "mnuClimaticFile"
         resources.ApplyResources(Me.mnuClimaticFile, "mnuClimaticFile")
         '
-        'mnuClimaticFileOpensst
+        'mnuClimaticFileImportSST
         '
-        Me.mnuClimaticFileOpensst.Name = "mnuClimaticFileOpensst"
-        resources.ApplyResources(Me.mnuClimaticFileOpensst, "mnuClimaticFileOpensst")
+        Me.mnuClimaticFileImportSST.Name = "mnuClimaticFileImportSST"
+        resources.ApplyResources(Me.mnuClimaticFileImportSST, "mnuClimaticFileImportSST")
         '
         'mnuClimaticFileImportfromIRIDataLibrary
         '
@@ -1519,10 +1519,10 @@ Partial Class frmMain
         Me.mnuClimateFileImportfromClimSoftWizard.Name = "mnuClimateFileImportfromClimSoftWizard"
         resources.ApplyResources(Me.mnuClimateFileImportfromClimSoftWizard, "mnuClimateFileImportfromClimSoftWizard")
         '
-        'mnuClimaticFileImportFromCliData
+        'mnuClimaticFileImportfromCliData
         '
-        resources.ApplyResources(Me.mnuClimaticFileImportFromCliData, "mnuClimaticFileImportFromCliData")
-        Me.mnuClimaticFileImportFromCliData.Name = "mnuClimaticFileImportFromCliData"
+        resources.ApplyResources(Me.mnuClimaticFileImportfromCliData, "mnuClimaticFileImportfromCliData")
+        Me.mnuClimaticFileImportfromCliData.Name = "mnuClimaticFileImportfromCliData"
         '
         'ToolStripSeparator15
         '
@@ -2464,6 +2464,12 @@ Partial Class frmMain
         Me.mnuEditPaste.Name = "mnuEditPaste"
         Me.mnuEditPaste.Tag = "Paste"
         '
+        'mnuEditPasteNewDataFrame
+        '
+        Me.mnuEditPasteNewDataFrame.Name = "mnuEditPasteNewDataFrame"
+        resources.ApplyResources(Me.mnuEditPasteNewDataFrame, "mnuEditPasteNewDataFrame")
+        Me.mnuEditPasteNewDataFrame.Tag = "Paste"
+        '
         'mnuEditSelectAll
         '
         Me.mnuEditSelectAll.Name = "mnuEditSelectAll"
@@ -2679,7 +2685,7 @@ Partial Class frmMain
         '
         'mnuFile
         '
-        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileOpenFromFile, Me.mnuFileOpenFromLibrary, Me.ToolStripSeparator35, Me.mnuFileOpenFromODK, Me.mnuFileOpenFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportandTidyNetCDFFile, Me.ToolStripSeparator27, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
+        Me.mnuFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuFileNewDataFrame, Me.mnuFileImportFromFile, Me.mnuFileImportFromLibrary, Me.ToolStripSeparator35, Me.mnuFileImportFromODK, Me.mnuFileImportFromCSPRO, Me.mnuFileImportFromDatabases, Me.mnuFileImportandTidyNetCDFFile, Me.mnuFileConvert, Me.tlSeparatorFile, Me.mnuFileSave, Me.mnuFileSaveAs, Me.mnuFileExport, Me.mnuFilePrint, Me.mnuFilePrintPreview, Me.tlSeparatorFile3, Me.mnuFileCloseData, Me.ToolStripSeparator8, Me.mnuFIleExit})
         Me.mnuFile.Name = "mnuFile"
         resources.ApplyResources(Me.mnuFile, "mnuFile")
         Me.mnuFile.Tag = "File"
@@ -2690,32 +2696,32 @@ Partial Class frmMain
         resources.ApplyResources(Me.mnuFileNewDataFrame, "mnuFileNewDataFrame")
         Me.mnuFileNewDataFrame.Tag = "New_Data_Frame"
         '
-        'mnuFileOpenFromFile
+        'mnuFileImportFromFile
         '
-        Me.mnuFileOpenFromFile.Name = "mnuFileOpenFromFile"
-        resources.ApplyResources(Me.mnuFileOpenFromFile, "mnuFileOpenFromFile")
-        Me.mnuFileOpenFromFile.Tag = "Open_From_File"
+        Me.mnuFileImportFromFile.Name = "mnuFileImportFromFile"
+        resources.ApplyResources(Me.mnuFileImportFromFile, "mnuFileImportFromFile")
+        Me.mnuFileImportFromFile.Tag = "Import_From_File"
         '
-        'mnuFileOpenFromLibrary
+        'mnuFileImportFromLibrary
         '
-        Me.mnuFileOpenFromLibrary.Name = "mnuFileOpenFromLibrary"
-        resources.ApplyResources(Me.mnuFileOpenFromLibrary, "mnuFileOpenFromLibrary")
-        Me.mnuFileOpenFromLibrary.Tag = "Open_From_Library"
+        Me.mnuFileImportFromLibrary.Name = "mnuFileImportFromLibrary"
+        resources.ApplyResources(Me.mnuFileImportFromLibrary, "mnuFileImportFromLibrary")
+        Me.mnuFileImportFromLibrary.Tag = "Open_From_Library"
         '
         'ToolStripSeparator35
         '
         Me.ToolStripSeparator35.Name = "ToolStripSeparator35"
         resources.ApplyResources(Me.ToolStripSeparator35, "ToolStripSeparator35")
         '
-        'mnuFileOpenFromODK
+        'mnuFileImportFromODK
         '
-        Me.mnuFileOpenFromODK.Name = "mnuFileOpenFromODK"
-        resources.ApplyResources(Me.mnuFileOpenFromODK, "mnuFileOpenFromODK")
+        Me.mnuFileImportFromODK.Name = "mnuFileImportFromODK"
+        resources.ApplyResources(Me.mnuFileImportFromODK, "mnuFileImportFromODK")
         '
-        'mnuFileOpenFromCSPRO
+        'mnuFileImportFromCSPRO
         '
-        resources.ApplyResources(Me.mnuFileOpenFromCSPRO, "mnuFileOpenFromCSPRO")
-        Me.mnuFileOpenFromCSPRO.Name = "mnuFileOpenFromCSPRO"
+        resources.ApplyResources(Me.mnuFileImportFromCSPRO, "mnuFileImportFromCSPRO")
+        Me.mnuFileImportFromCSPRO.Name = "mnuFileImportFromCSPRO"
         '
         'mnuFileImportFromDatabases
         '
@@ -2726,11 +2732,6 @@ Partial Class frmMain
         '
         Me.mnuFileImportandTidyNetCDFFile.Name = "mnuFileImportandTidyNetCDFFile"
         resources.ApplyResources(Me.mnuFileImportandTidyNetCDFFile, "mnuFileImportandTidyNetCDFFile")
-        '
-        'ToolStripSeparator27
-        '
-        Me.ToolStripSeparator27.Name = "ToolStripSeparator27"
-        resources.ApplyResources(Me.ToolStripSeparator27, "ToolStripSeparator27")
         '
         'mnuFileConvert
         '
@@ -4051,33 +4052,6 @@ Partial Class frmMain
         Me.splExtraWindows.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splExtraWindows.Panel2.Controls.Add(Me.splLogScript)
         '
-        'splMetadata
-        '
-        Me.splMetadata.BackColor = System.Drawing.Color.LightGray
-        resources.ApplyResources(Me.splMetadata, "splMetadata")
-        Me.splMetadata.Name = "splMetadata"
-        '
-        'splMetadata.Panel1
-        '
-        Me.splMetadata.Panel1.Controls.Add(Me.ucrColumnMeta)
-        '
-        'splMetadata.Panel2
-        '
-        Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
-        Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
-        '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -4094,19 +4068,6 @@ Partial Class frmMain
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
         '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Tag = "Script_Window"
-        '
         'splDataOutput
         '
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
@@ -4122,20 +4083,6 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
-        '
-        'ucrDataViewer
-        '
-        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
-        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataViewer, "ucrDataViewer")
-        Me.ucrDataViewer.Name = "ucrDataViewer"
-        Me.ucrDataViewer.Tag = "Data_View"
-        '
-        'ucrOutput
-        '
-        Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrOutput, "ucrOutput")
-        Me.ucrOutput.Name = "ucrOutput"
         '
         'mnuRViewer
         '
@@ -4167,16 +4114,72 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
-        'mnuEditPasteNewDataFrame
+        'cmdLanguage
         '
-        Me.mnuEditPasteNewDataFrame.Name = "mnuEditPasteNewDataFrame"
-        resources.ApplyResources(Me.mnuEditPasteNewDataFrame, "mnuEditPasteNewDataFrame")
-        Me.mnuEditPasteNewDataFrame.Tag = "Paste"
+        resources.ApplyResources(Me.cmdLanguage, "cmdLanguage")
+        Me.cmdLanguage.Name = "cmdLanguage"
+        Me.cmdLanguage.Tag = ""
+        Me.cmdLanguage.UseVisualStyleBackColor = True
+        '
+        'splMetadata
+        '
+        Me.splMetadata.BackColor = System.Drawing.Color.LightGray
+        resources.ApplyResources(Me.splMetadata, "splMetadata")
+        Me.splMetadata.Name = "splMetadata"
+        '
+        'splMetadata.Panel1
+        '
+        Me.splMetadata.Panel1.Controls.Add(Me.ucrColumnMeta)
+        '
+        'splMetadata.Panel2
+        '
+        Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
+        Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
+        '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Tag = "Script_Window"
+        '
+        'ucrDataViewer
+        '
+        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
+        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataViewer, "ucrDataViewer")
+        Me.ucrDataViewer.Name = "ucrDataViewer"
+        Me.ucrDataViewer.Tag = "Data_View"
+        '
+        'ucrOutput
+        '
+        Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrOutput, "ucrOutput")
+        Me.ucrOutput.Name = "ucrOutput"
         '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdLanguage)
         Me.Controls.Add(Me.splOverall)
         Me.Controls.Add(Me.stsStrip)
         Me.Controls.Add(Me.Tool_strip)
@@ -4199,10 +4202,6 @@ Partial Class frmMain
         Me.splExtraWindows.Panel2.ResumeLayout(False)
         CType(Me.splExtraWindows, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splExtraWindows.ResumeLayout(False)
-        Me.splMetadata.Panel1.ResumeLayout(False)
-        Me.splMetadata.Panel2.ResumeLayout(False)
-        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.splMetadata.ResumeLayout(False)
         Me.splLogScript.Panel1.ResumeLayout(False)
         Me.splLogScript.Panel2.ResumeLayout(False)
         CType(Me.splLogScript, System.ComponentModel.ISupportInitialize).EndInit()
@@ -4211,6 +4210,10 @@ Partial Class frmMain
         Me.splDataOutput.Panel2.ResumeLayout(False)
         CType(Me.splDataOutput, System.ComponentModel.ISupportInitialize).EndInit()
         Me.splDataOutput.ResumeLayout(False)
+        Me.splMetadata.Panel1.ResumeLayout(False)
+        Me.splMetadata.Panel2.ResumeLayout(False)
+        CType(Me.splMetadata, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.splMetadata.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -4267,8 +4270,8 @@ Partial Class frmMain
     Private WithEvents mnuBar As MenuStrip
     Friend WithEvents mnuFile As ToolStripMenuItem
     Friend WithEvents mnuFileNewDataFrame As ToolStripMenuItem
-    Friend WithEvents mnuFileOpenFromFile As ToolStripMenuItem
-    Friend WithEvents mnuFileOpenFromLibrary As ToolStripMenuItem
+    Friend WithEvents mnuFileImportFromFile As ToolStripMenuItem
+    Friend WithEvents mnuFileImportFromLibrary As ToolStripMenuItem
     Friend WithEvents tlSeparatorFile As ToolStripSeparator
     Friend WithEvents mnuPrepare As ToolStripMenuItem
     Friend WithEvents mnuPrepareDataFrame As ToolStripMenuItem
@@ -4457,9 +4460,9 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticClimateMethodsAdditionalWaterBalance As ToolStripMenuItem
     Friend WithEvents mnuClimateMethodsCreateClimateObject As ToolStripMenuItem
     Friend WithEvents mnuClimaticFile As ToolStripMenuItem
-    Friend WithEvents mnuClimaticFileOpensst As ToolStripMenuItem
+    Friend WithEvents mnuClimaticFileImportSST As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnGenerateEnter As ToolStripMenuItem
-    Friend WithEvents mnuFileOpenFromODK As ToolStripMenuItem
+    Friend WithEvents mnuFileImportFromODK As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator25 As ToolStripSeparator
     Friend WithEvents mnuPrepareColumnDate As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnDateGenerateDate As ToolStripMenuItem
@@ -4476,19 +4479,18 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticDescribe As ToolStripMenuItem
     Friend WithEvents mnuClimaticPrepareSummary As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator26 As ToolStripSeparator
-    Friend WithEvents mnuDescribeSpecificScatterPlot As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecificPointPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificLinePlot As ToolStripMenuItem
-    Friend WithEvents mnuDescribeSpecificHistogram As ToolStripMenuItem
-    Friend WithEvents mnuDescribeSpecificBoxplot As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecificHistogramDensityFrequencyPlot As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecificBoxplotJitterViolinPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificDotPlot As ToolStripMenuItem
     Friend WithEvents mnuDescribeSpecificRugPlot As ToolStripMenuItem
-    Friend WithEvents mnuDescribeSpecificBarChart As ToolStripMenuItem
+    Friend WithEvents mnuDescribeSpecificBarPieChart As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnDateMakeDate As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnDateMakeTime As ToolStripMenuItem
     Friend WithEvents mnuPrepareColumnDateUseTime As ToolStripMenuItem
     Friend WithEvents mnuPrepareCheckDataExportOpenRefine As ToolStripMenuItem
     Friend WithEvents mnuPrepareCheckDataImportOpenRefine As ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator27 As ToolStripSeparator
     Friend WithEvents ToolStripSeparator8 As ToolStripSeparator
     Friend WithEvents mnuHelpHelpIntroduction As ToolStripMenuItem
     Friend WithEvents mnuHelpHistFAQ As ToolStripMenuItem
@@ -4505,7 +4507,7 @@ Partial Class frmMain
     Friend WithEvents mnuhelpGuidesMore As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileExportToCPT As ToolStripMenuItem
     Friend WithEvents mnuClimateFileImportfromClimSoft As ToolStripMenuItem
-    Friend WithEvents mnuClimaticFileImportFromCliData As ToolStripMenuItem
+    Friend WithEvents mnuClimaticFileImportfromCliData As ToolStripMenuItem
     Friend WithEvents mnuCimaticPrepareTransform As ToolStripMenuItem
     Friend WithEvents mnuClimaticCheckData As ToolStripMenuItem
     Friend WithEvents mnuClimaticDescribeRainfall As ToolStripMenuItem
@@ -4564,7 +4566,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator34 As ToolStripSeparator
     Friend WithEvents ToolStripMenuItem1 As ToolStripMenuItem
     Friend WithEvents mnuDescribeTwoVariablesFrequencies As ToolStripMenuItem
-    Friend WithEvents mnuFileOpenFromCSPRO As ToolStripMenuItem
+    Friend WithEvents mnuFileImportFromCSPRO As ToolStripMenuItem
     Friend WithEvents mnuFileImportFromDatabases As ToolStripMenuItem
     Friend WithEvents mnuClimaticFileImportandTidyNetCDF As ToolStripMenuItem
     Friend WithEvents mnuProcurementPrepareRecodeNumericIntoQuantiles As ToolStripMenuItem
@@ -4839,4 +4841,5 @@ Partial Class frmMain
     Friend WithEvents mnuClimaticFileImportfromClimateDataStore As ToolStripMenuItem
     Friend WithEvents mnuSetupForDataEntry As ToolStripMenuItem
     Friend WithEvents mnuEditPasteNewDataFrame As ToolStripMenuItem
+    Friend WithEvents cmdLanguage As Button
 End Class

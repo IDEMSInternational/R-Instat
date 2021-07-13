@@ -1336,73 +1336,77 @@ SEDI <- function(x, y, frcst.type, obs.type, ...){
 ##TODO:Check if there are summaries that only apply to (Probabilistic-binary) types.
 
 
-DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = FALSE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, margins = "outer", return_output = FALSE, treat_columns_as_factor = FALSE, page_by = NULL, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
-# TODO: write in errors
+DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = store_results, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, margins = "outer", return_output = FALSE, treat_columns_as_factor = FALSE, page_by = NULL, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
+  # TODO: write in errors
   if(na_level_display == "") stop("na_level_display must be a non empty string")
-    # removes "summary_" from beginning of summary function names so that display is nice
+  # removes "summary_" from beginning of summary function names so that display is nice
   summaries_display <- sapply(summaries, function(x) ifelse(startsWith(x, "summary_"), substring(x, 9), x))
   
-cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE)
-for(i in seq_along(factors)) {
-  levels(cell_values[[i]]) <- c(levels(cell_values[[i]]), na_level_display)
-  cell_values[[i]][is.na(cell_values[[i]])] <- na_level_display
-}
-grps <- nrow(cell_values)
-cell_values <- reshape2:::melt.data.frame(cell_values, id.vars = factors, variable.name = "Summary-Variable", value.name = "Value")
-if (treat_columns_as_factor){
-  cell_values[["Variable"]] <- rep(rev(columns_to_summarise), each = nrow(cell_values)/length(columns_to_summarise))
-  cell_values[["Summary"]] <- rep(rev(summaries_display), each = grps, length.out = nrow(cell_values))
-  cell_values[["Summary-Variable"]] <- NULL  
-}
-shaped_cell_values <- cell_values %>% dplyr::relocate(Value, .after = last_col())
+  # todo: add in code to store results if store_results = TRUE on the dialog
+  # only give this option if there is 1 column factor.
+  if(!store_results) save <- 0
+  else save <- 2
 
-#Converts factor columns to character so we can relabel values if needed
-for(i in seq_along(factors)) {
-  shaped_cell_values[[i]] <- as.character(shaped_cell_values[[i]])
-}
-if(include_margins && (length(factors) > 0 || length(column_factors) > 0)) {
-  margin_tables <- list()
-  power_sets <- rje::powerSet(factors)
-  # We could need last set if only have row or column factors
-  power_sets_outer <- power_sets[-(c(length(power_sets)))]
+  cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE)
+  for(i in seq_along(factors)) {
+    levels(cell_values[[i]]) <- c(levels(cell_values[[i]]), na_level_display)
+    cell_values[[i]][is.na(cell_values[[i]])] <- na_level_display
+  }
+  grps <- nrow(cell_values)
+  cell_values <- reshape2:::melt.data.frame(cell_values, id.vars = factors, variable.name = "summary-variable", value.name = "value")
   if (treat_columns_as_factor){
-    order_names <- unique(paste(shaped_cell_values$Summary, shaped_cell_values$Variable, sep = "_"))
-  } else {
-    order_names <- unique(shaped_cell_values$Summary)
+    cell_values[["variable"]] <- rep(rev(columns_to_summarise), each = nrow(cell_values)/length(columns_to_summarise))
+    cell_values[["summary"]] <- rep(rev(summaries_display), each = grps, length.out = nrow(cell_values))
+    cell_values[["summary-variable"]] <- NULL  
   }
-  for(facts in power_sets_outer) {
-    if(length(facts) == 0) facts <- c()
-    margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE)
-    margin_tables[[length(margin_tables)]] <- margin_tables[[length(margin_tables)]] %>% dplyr::select(c(all_of(facts), order_names))
-  }
-  # for outer margins
-  margin_item <- length(summaries) * length(columns_to_summarise)
+  shaped_cell_values <- cell_values %>% dplyr::relocate(value, .after = last_col())
   
-  if (("outer" %in% margins)){
-    outer_margins <- plyr::ldply(margin_tables)
-    
-    # Change shape
-    if (length(margin_tables) == 1){
-      outer_margins <- plyr::ldply(margin_tables[[1]])
-      names(outer_margins) <- c("Summary-Variable", "Value")
-    } else {
-      outer_margins <- outer_margins %>%
-        tidyr::pivot_longer(cols = 1:margin_item, values_to = "Value", names_to = "Summary-Variable") 
-    }
-    if (treat_columns_as_factor){
-      outer_margins <- outer_margins %>%
-        tidyr::separate(col = "Summary-Variable", into = c("Summary", "Variable"), sep = "_")
-    }
-  } else {
-    outer_margins <- NULL
+  #Converts factor columns to character so we can relabel values if needed
+  for(i in seq_along(factors)) {
+    shaped_cell_values[[i]] <- as.character(shaped_cell_values[[i]])
   }
-    if ("summary" %in% margins){
+  if(include_margins) {
+    margin_tables <- list()
+    power_sets <- rje::powerSet(factors)
+    # We could need last set if only have row or column factors
+    power_sets_outer <- power_sets[-(c(length(power_sets)))]
+    if (treat_columns_as_factor){
+      order_names <- unique(paste(shaped_cell_values$summary, shaped_cell_values$variable, sep = "_"))
+    } else {
+      order_names <- unique(shaped_cell_values$summary)
+    }
+    for(facts in power_sets_outer) {
+      if(length(facts) == 0) facts <- c()
+      margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE)
+      margin_tables[[length(margin_tables)]] <- margin_tables[[length(margin_tables)]] %>% dplyr::select(c(all_of(facts), order_names))
+    }
+    # for outer margins
+    margin_item <- length(summaries) * length(columns_to_summarise)
+    
+    if (("outer" %in% margins) && (length(factors) > 0)){
+      outer_margins <- plyr::ldply(margin_tables)
+      # Change shape
+      if (length(margin_tables) == 1){
+        outer_margins <- plyr::ldply(margin_tables[[1]])
+        names(outer_margins) <- c("summary-variable", "value")
+      } else {
+        outer_margins <- outer_margins %>%
+          tidyr::pivot_longer(cols = 1:margin_item, values_to = "value", names_to = "summary-variable") 
+      }
+      if (treat_columns_as_factor){
+        outer_margins <- outer_margins %>%
+          tidyr::separate(col = "summary-variable", into = c("summary", "variable"), sep = "_")
+      }
+    } else {
+      outer_margins <- NULL
+    }
+    if ("summary" %in% margins || ("outer" %in% margins && length(factors) == 0)){
     summary_margins <- NULL
     if ("outer" %in% margins){
-    power_sets_summary <- power_sets
+      power_sets_summary <- power_sets
     } else {
-    power_sets_summary <- power_sets[(c(length(power_sets)))]
-	}
+      power_sets_summary <- power_sets[(c(length(power_sets)))]
+    }
     for(facts in power_sets_summary) {
       if(length(facts) == 0) facts <- c()
       summary_margins_df <- eval(parse(text = data_name)) %>%
@@ -1412,42 +1416,41 @@ if(include_margins && (length(factors) > 0 || length(column_factors) > 0)) {
       summary_margins[[length(summary_margins) + 1]] <- data_book$calculate_summary(data_name = "summary_margins_df", columns_to_summarise = "value", summaries = summaries, factors = facts, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE)
     }
     summary_margins <- plyr::ldply(summary_margins)
-
-    # remove "_value" in them
-    for (col in 1:ncol(summary_margins)){
-      # TODO: if the colname is the same as a factor, then do nothing
-      if (treat_columns_as_factor){
+     
+    if (treat_columns_as_factor){
+      # remove "_value" in them
+      for (col in 1:ncol(summary_margins)){
         colnames(summary_margins)[col] <-  sub("_value", "", colnames(summary_margins)[col])
-      } else {
+      }
+      summary_margins <- summary_margins %>%
+          tidyr::pivot_longer(cols = !factors, names_to = "summary", values_to = "value") 
+    } else {
+      for (col in 1:ncol(summary_margins)){
+        # TODO: if the colname is the same as a factor, then do nothing
         colnames(summary_margins)[col] <-  sub("_value", "_all", colnames(summary_margins)[col])
       }
-    }
-    if (length(factors)>1 || length(columns_to_summarise)>1){
-      summary_margins <- summary_margins %>%
-        tidyr::pivot_longer(cols = !factors, names_to = "Summary", values_to = "Value") 
-    } else {
-      summary_margins <- summary_margins %>%
-        tidyr::pivot_longer(cols = tidyselect::everything(), names_to = "Summary", values_to = "Value") 
+        summary_margins <- summary_margins %>%
+          tidyr::pivot_longer(cols = !factors, names_to = "summary-variable", values_to = "value")
     }
   } else {
     summary_margins <- NULL
   }
-  
-  margin_tables_all <- (dplyr::bind_rows(summary_margins, outer_margins))
-
-  margin_tables_all <- margin_tables_all %>%
-    dplyr::mutate_at(vars(-Value), ~replace(., is.na(.), margin_name))
-  
-  shaped_cell_values <- dplyr::bind_rows(shaped_cell_values, margin_tables_all)
-  
-  shaped_cell_values <- shaped_cell_values %>%
-    dplyr::mutate_at(vars(-Value), ~replace(., is.na(.), margin_name))
-  
-  shaped_cell_values <- shaped_cell_values %>%
-    dplyr::mutate_at(vars(-Value), ~forcats::as_factor(forcats::fct_relevel(., margin_name, after = Inf)))
-  
+  if (!is.null(summary_margins) || !is.null(outer_margins)){
+    margin_tables_all <- (dplyr::bind_rows(summary_margins, outer_margins))
+    
+    margin_tables_all <- margin_tables_all %>%
+      dplyr::mutate_at(vars(-value), ~replace(., is.na(.), margin_name))
+    
+    shaped_cell_values <- dplyr::bind_rows(shaped_cell_values, margin_tables_all)
+    
+    shaped_cell_values <- shaped_cell_values %>%
+      dplyr::mutate_at(vars(-value), ~replace(., is.na(.), margin_name))
+    
+    shaped_cell_values <- shaped_cell_values %>%
+      dplyr::mutate_at(vars(-value), ~forcats::as_factor(forcats::fct_relevel(., margin_name, after = Inf)))
+  }
 }
-shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(Value = round(Value, signif_fig))
+shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(value = round(value, signif_fig))
 return(shaped_cell_values)
 }
 )
