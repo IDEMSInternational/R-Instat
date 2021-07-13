@@ -1656,7 +1656,7 @@ DataSheet$set("public", "get_filter_as_logical", function(filter_name) {
     dat <- self$get_data_frame(use_current_filter = FALSE)
     str_out <- "("
     for (condition in curr_filter$filter_conditions) {
-      str_out <- paste0(str_out, paste0("dat", "$", condition[["column"]], condition[["operation"]], condition[["value"]]))
+      str_out <- paste0(str_out, paste0("dat", "$", condition[["column"]], condition[["operation"]], ifelse(is.numeric(condition[["value"]]), condition[["value"]], paste0("'", condition[["value"]], "'"))))
       if (i != length(curr_filter$filter_conditions)) str_out <- paste0(str_out, curr_filter$parameters[["and_or"]])
       i <- i + 1
     }
@@ -1710,13 +1710,12 @@ DataSheet$set("public", "filter_string", function(filter_name) {
     i <- i + 1
   }
   out <- paste(out, ")")
-  if(curr_filter$parameters[["outer_not"]]) {
+  if (curr_filter$parameters[["outer_not"]]) {
     out <- gsub("[!()]", "", out)
     out <- paste0("!(", out, ")")
-    }
+  }
   return(out)
-}
-)
+})
 
 DataSheet$set("public", "get_filter_as_instat_calculation", function(filter_name) {
   if(!filter_name %in% names(private$filters)) stop(filter_name, " not found.")
