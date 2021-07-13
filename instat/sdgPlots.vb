@@ -469,6 +469,11 @@ Public Class sdgPlots
         ucrInputLabel.SetLinkedDisplayControl(lblLabel)
         ucrInputLabel.SetRDefault("")
 
+        ucrChkParse.SetText("Parse")
+        ucrChkParse.SetParameter(New RParameter("parse", 21))
+        ucrChkParse.SetRDefault("FALSE")
+        ucrChkParse.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
+
         ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputXmin, ucrInputXmax, ucrInputYmin, ucrInputYmax}, {"rect", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputY, ucrInputX}, {"text", "label", "segment", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputXend, ucrInputYend}, {"segment", "curve"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
@@ -663,6 +668,7 @@ Public Class sdgPlots
 
         'Annnotation
         ucrChkAnnotation.SetRCode(clsBaseOperator, bReset, bCloneIfNeeded:=True)
+        ucrChkParse.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrNudAlpha.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrNudSize.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
         ucrInputColour.SetRCode(clsAnnotateFunction, bReset, bCloneIfNeeded:=True)
@@ -1101,10 +1107,6 @@ Public Class sdgPlots
     End Sub
 
     Private Sub ucrInputAnnotationGeoms_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAnnotationGeoms.ControlValueChanged
-        FillLocation()
-    End Sub
-
-    Private Sub FillLocation()
         If bControlsInitialised Then
             If ucrInputAnnotationGeoms.GetText = "rect" OrElse ucrInputAnnotationGeoms.GetText = "label" Then
                 ucrInputFill.Location = New Point(ucrInputFill.Location.X, iSizeYPosition)
@@ -1115,7 +1117,7 @@ Public Class sdgPlots
                 lblAlpha.Location = New Point((65 - lblAlpha.Size.Width), 159)
                 If ucrInputAnnotationGeoms.GetText = "label" Then
                     ucrInputLabel.Location = New Point(ucrInputLabel.Location.X, iFillYPositon)
-                    lblLabel.Location = New Point((lblLabel.Size.Width), 183)
+                    lblLabel.Location = New Point((65 - lblLabel.Size.Width), 183)
                 End If
             Else
                 ucrInputFill.Location = New Point(ucrInputFill.Location.X, iFillYPositon)
@@ -1125,8 +1127,17 @@ Public Class sdgPlots
                 lblFill.Location = New Point((65 - lblFill.Size.Width), 183)
                 lblSize.Location = New Point((65 - lblSize.Size.Width), 111)
                 lblAlpha.Location = New Point((65 - lblAlpha.Size.Width), 135)
-                lblLabel.Location = New Point((lblLabel.Size.Width), 159)
+                lblLabel.Location = New Point((65 - lblLabel.Size.Width), 159)
             End If
+
+            Select Case ucrInputAnnotationGeoms.GetText
+                Case "text", "rect", "linerange", "errorbar"
+                    ucrChkParse.Location = New Point(ucrChkParse.Location.X, 179)
+                Case "label", "crossbar", "segment"
+                    ucrChkParse.Location = New Point(ucrChkParse.Location.X, 204)
+                Case "pointrange", "curve"
+                    ucrChkParse.Location = New Point(ucrChkParse.Location.X, 228)
+            End Select
         End If
     End Sub
 End Class

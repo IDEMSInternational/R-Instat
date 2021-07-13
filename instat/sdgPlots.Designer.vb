@@ -136,6 +136,7 @@ Partial Class sdgPlots
         Me.tbpAnnotation = New System.Windows.Forms.TabPage()
         Me.ucrChkAnnotation = New instat.ucrCheck()
         Me.grpAnnotation = New System.Windows.Forms.GroupBox()
+        Me.ucrChkParse = New instat.ucrCheck()
         Me.ucrInputFill = New instat.ucrColors()
         Me.ucrInputColour = New instat.ucrColors()
         Me.lblCurvature = New System.Windows.Forms.Label()
@@ -938,6 +939,7 @@ Partial Class sdgPlots
         '
         'grpAnnotation
         '
+        Me.grpAnnotation.Controls.Add(Me.ucrChkParse)
         Me.grpAnnotation.Controls.Add(Me.ucrInputFill)
         Me.grpAnnotation.Controls.Add(Me.ucrInputColour)
         Me.grpAnnotation.Controls.Add(Me.lblCurvature)
@@ -984,6 +986,12 @@ Partial Class sdgPlots
         resources.ApplyResources(Me.grpAnnotation, "grpAnnotation")
         Me.grpAnnotation.Name = "grpAnnotation"
         Me.grpAnnotation.TabStop = False
+        '
+        'ucrChkParse
+        '
+        Me.ucrChkParse.Checked = False
+        resources.ApplyResources(Me.ucrChkParse, "ucrChkParse")
+        Me.ucrChkParse.Name = "ucrChkParse"
         '
         'ucrInputFill
         '
@@ -1470,6 +1478,7 @@ Partial Class sdgPlots
     Friend WithEvents ucrReceiverY As ucrReceiverSingle
     Friend WithEvents ucrInputColour As ucrColors
     Friend WithEvents ucrInputFill As ucrColors
+    Friend WithEvents ucrChkParse As ucrCheck
 End Class
 
 
