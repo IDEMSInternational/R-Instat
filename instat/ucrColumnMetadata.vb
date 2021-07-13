@@ -238,29 +238,27 @@ Public Class ucrColumnMetadata
         Try
             Dim clsCopyValues As New RFunction
             Dim strAllContent As String = ""
-            Dim strRowContent As String
-            Dim strCellContent As String
             Dim iEndRow As Integer = grdVariables.CurrentWorksheet.SelectionRange.EndRow
             Dim iEndCol As Integer = grdVariables.CurrentWorksheet.SelectionRange.EndCol
             Dim iStartCol As Integer = grdVariables.CurrentWorksheet.SelectionRange.Col
 
             'construct the copied range data
             For iRowIndex As Integer = grdVariables.CurrentWorksheet.SelectionRange.Row To iEndRow
-                strRowContent = ""
+                Dim strRowContent As String = ""
                 For iColIndex As Integer = iStartCol To iEndCol
-                    strCellContent = grdVariables.CurrentWorksheet.GetCell(row:=iRowIndex, col:=iColIndex).DisplayText
+                    Dim strCellContent As String = grdVariables.CurrentWorksheet.GetCell(row:=iRowIndex, col:=iColIndex).DisplayText
                     If strCellContent = "NA" Then
                         strCellContent = ""
                     End If
                     If iColIndex = iStartCol Then
                         strRowContent = strCellContent
                     Else
-                        strRowContent = strRowContent & vbTab & strCellContent
+                        strRowContent &= vbTab & strCellContent
                     End If
                 Next
-                strAllContent = strAllContent & strRowContent
+                strAllContent &= strRowContent
                 If iRowIndex < iEndRow Then
-                    strAllContent = strAllContent & Environment.NewLine
+                    strAllContent &= Environment.NewLine
                 End If
             Next
 

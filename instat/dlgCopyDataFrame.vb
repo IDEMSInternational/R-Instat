@@ -22,7 +22,7 @@ Public Class dlgCopyDataFrame
     Private clsCopyColumnMetadataFunction As New RFunction
     Private clsCopyDataFrameMetadataFunction As New RFunction
     Private Sub dlgCopyDataFrame_Load(sender As Object, e As EventArgs) Handles Me.Load
-        Setupcontrols()
+        SetControls()
         autoTranslate(Me)
         TestOKEnabled()
     End Sub
@@ -122,7 +122,7 @@ Public Class dlgCopyDataFrame
     End Sub
 
     Public Sub SetCurrentDataframe(strDataFrame As String)
-        Setupcontrols()
+        SetControls()
         ucrDataFrameCopySheets.SetDataframe(strDataFrame)
     End Sub
 

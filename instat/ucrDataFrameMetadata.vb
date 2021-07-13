@@ -142,29 +142,27 @@ Public Class ucrDataFrameMetadata
 
             Dim clsCopyValues As New RFunction
             Dim strAllContent As String = ""
-            Dim strRowContent As String
-            Dim strCellContent As String
             Dim iEndRow As Integer = grdMetaData.CurrentWorksheet.SelectionRange.EndRow
             Dim iEndCol As Integer = grdMetaData.CurrentWorksheet.SelectionRange.EndCol
             Dim iStartCol As Integer = grdMetaData.CurrentWorksheet.SelectionRange.Col
 
             'construct the copied range data
             For iRowIndex As Integer = grdMetaData.CurrentWorksheet.SelectionRange.Row To iEndRow
-                strRowContent = ""
+                Dim strRowContent As String = ""
                 For iColIndex As Integer = iStartCol To iEndCol
-                    strCellContent = grdMetaData.CurrentWorksheet.GetCell(row:=iRowIndex, col:=iColIndex).DisplayText
+                    Dim strCellContent As String = grdMetaData.CurrentWorksheet.GetCell(row:=iRowIndex, col:=iColIndex).DisplayText
                     If strCellContent = "NA" Then
                         strCellContent = ""
                     End If
                     If iColIndex = iStartCol Then
                         strRowContent = strCellContent
                     Else
-                        strRowContent = strRowContent & vbTab & strCellContent
+                        strRowContent &= vbTab & strCellContent
                     End If
                 Next
-                strAllContent = strAllContent & strRowContent
+                strAllContent &= strRowContent
                 If iRowIndex < iEndRow Then
-                    strAllContent = strAllContent & Environment.NewLine
+                    strAllContent &= Environment.NewLine
                 End If
             Next
 
