@@ -267,11 +267,4 @@ Public Class dlgOneWayFrequencies
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrNudGroups_Load(sender As Object, e As EventArgs) Handles ucrNudGroups.Load
-
-    End Sub
-
-    Private Sub ucrReceiverWeights_Load(sender As Object, e As EventArgs) Handles ucrReceiverWeights.Load
-
-    End Sub
 End Class

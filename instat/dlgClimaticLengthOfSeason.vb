@@ -22,6 +22,7 @@ Public Class dlgClimaticLengthOfSeason
 
     Private clsLengthOfSeasonFunction, clsApplyInstatCalcFunction, clsCombinationCalcFunction, clsStartEndStatusFunction, clsIfElseFunction, clsIsNAFunction, clsCombinationListFunction As New RFunction
     Private clsMinusOpertor, clsAndOperator, clsOROperator As New ROperator
+
     Private Sub dlgClimaticLengthOfSeason_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -163,10 +164,6 @@ Public Class dlgClimaticLengthOfSeason
         ucrInputTextType.SetRCode(clsStartEndStatusFunction, bReset)
         ucrChkLengthofSeason.SetRCode(clsCombinationListFunction, bReset)
         ucrChkType.SetRCode(clsCombinationListFunction, bReset)
-    End Sub
-
-    Private Sub ucrChkLengthofSeason_Load(sender As Object, e As EventArgs) Handles ucrChkLengthofSeason.Load
-
     End Sub
 
     Private Sub TestOKEnabled()

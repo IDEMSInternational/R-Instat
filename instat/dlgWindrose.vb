@@ -177,11 +177,4 @@ Public Class dlgWindrose
         TestOkEnabled()
     End Sub
 
-    Private Sub ucrReceiverFacet_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFacet.ControlValueChanged
-
-    End Sub
-
-    Private Sub ucrWindRoseSelector_DataFrameChanged(ucrChangedControl As ucrCore) Handles ucrWindRoseSelector.ControlValueChanged
-
-    End Sub
 End Class
