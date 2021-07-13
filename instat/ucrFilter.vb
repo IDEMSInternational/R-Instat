@@ -79,7 +79,7 @@ Public Class ucrFilter
         ucrLogicalCombobox.SetItems({"TRUE", "FALSE"})
         ucrLogicalCombobox.SetDropDownStyleAsNonEditable()
         ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (year > 1990) & (year < 2021) they have all to be TRUE.")
-        ucrChkNotForEachCondition.SetText("Add Not (!) for each")
+        'ucrChkNotForEachCondition.SetText("Add Not (!) for each") TODO: Instances of this checkbox are commented out because adding NOT for all conditions might not be useful! Consider enabling when edit condition/filter is possible 
         ucrChkNotForAllConditions.SetText("Add Not (!) for all")
     End Sub
 
@@ -88,7 +88,6 @@ Public Class ucrFilter
         ucrLogicalCombobox.SetName("TRUE")
         ucrFilterByReceiver.SetMeAsReceiver()
         VariableTypeProperties()
-        HideUnhideNotCheckBox()
     End Sub
 
     Private Sub VariableTypeProperties()
@@ -178,7 +177,6 @@ Public Class ucrFilter
     Private Sub ucrFilterOperation_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrFilterOperation.ControlContentsChanged
         VariableTypeProperties()
         CheckAddEnabled()
-        HideUnhideNotCheckBox()
     End Sub
 
     Private Sub ucrReceiverExpression_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverExpression.ControlContentsChanged
@@ -400,15 +398,15 @@ Public Class ucrFilter
     End Sub
 
     Private Sub ucrChkNotForEachCondition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNotForEachCondition.ControlValueChanged, ucrChkNotForAllConditions.ControlValueChanged
-        If ucrChkNotForEachCondition.Checked Then
-            ucrChkNotForAllConditions.Checked = False
-            clsFilterFunction.AddParameter("inner_not", "TRUE", iPosition:=4)
-        Else
-            clsFilterFunction.RemoveParameterByName("inner_not")
-        End If
+        'If ucrChkNotForEachCondition.Checked Then
+        'ucrChkNotForAllConditions.Checked = False
+        'clsFilterFunction.AddParameter("inner_not", "TRUE", iPosition:=4)
+        'Else
+        'clsFilterFunction.RemoveParameterByName("inner_not")
+        'End If
 
         If ucrChkNotForAllConditions.Checked Then
-            ucrChkNotForEachCondition.Checked = False
+            'ucrChkNotForEachCondition.Checked = False
             clsFilterFunction.AddParameter("outer_not", "TRUE", iPosition:=4)
         Else
             clsFilterFunction.RemoveParameterByName("outer_not")
@@ -418,18 +416,14 @@ Public Class ucrFilter
 
     Private Sub UpdateFilterPreview()
         Dim strFilter = clsFilterOperator.ToScript()
-        If ucrChkNotForEachCondition.Checked Then
-            ucrFilterPreview.SetName(strFilter.Replace("(", "!("))
-        ElseIf ucrChkNotForAllConditions.Checked Then
-            strFilter = ((strFilter.Replace("(", "")).Replace(")", "")).Replace("!", "")
-            ucrFilterPreview.SetName("!(" & strFilter & ")")
-        Else
-            ucrFilterPreview.SetName(strFilter.Replace("!(", "("))
+        'If ucrChkNotForEachCondition.Checked Then
+        'strFilter = strFilter.Replace("(", "!(")
+        'Else
+        'strFilter = strFilter.Replace("!(", "(")
+        'End if
+        If ucrChkNotForAllConditions.Checked Then
+            strFilter = "!(" & strFilter.Replace("(", "").Replace(")", "").Replace("!", "") & ")"
         End If
-    End Sub
-
-    Private Sub HideUnhideNotCheckBox()
-        ucrChkNotForEachCondition.Visible = ucrFilterOperation.GetText.Contains(">") OrElse ucrFilterOperation.GetText.Contains(">=") OrElse ucrFilterOperation.GetText.Contains("<") OrElse ucrFilterOperation.GetText.Contains("<=")
-        ucrChkNotForAllConditions.Visible = ucrFilterOperation.GetText.Contains(">") OrElse ucrFilterOperation.GetText.Contains(">=") OrElse ucrFilterOperation.GetText.Contains("<") OrElse ucrFilterOperation.GetText.Contains("<=")
+        ucrFilterPreview.SetName(strFilter)
     End Sub
 End Class

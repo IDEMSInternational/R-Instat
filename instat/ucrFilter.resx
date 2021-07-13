@@ -1023,27 +1023,6 @@
   <metadata name="ttpCombineWithAndOr.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="ucrChkNotForEachCondition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>277, 227</value>
-  </data>
-  <data name="ucrChkNotForEachCondition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 20</value>
-  </data>
-  <data name="ucrChkNotForEachCondition.TabIndex" type="System.Int32, mscorlib">
-    <value>183</value>
-  </data>
-  <data name="&gt;&gt;ucrChkNotForEachCondition.Name" xml:space="preserve">
-    <value>ucrChkNotForEachCondition</value>
-  </data>
-  <data name="&gt;&gt;ucrChkNotForEachCondition.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkNotForEachCondition.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkNotForEachCondition.ZOrder" xml:space="preserve">
-    <value>21</value>
-  </data>
   <data name="ucrReceiverExpression.Location" type="System.Drawing.Point, System.Drawing">
     <value>456, 42</value>
   </data>
@@ -1283,6 +1262,30 @@
   </data>
   <data name="&gt;&gt;ucrChkNotForAllConditions.ZOrder" xml:space="preserve">
     <value>20</value>
+  </data>
+  <data name="ucrChkNotForEachCondition.Location" type="System.Drawing.Point, System.Drawing">
+    <value>277, 227</value>
+  </data>
+  <data name="ucrChkNotForEachCondition.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 20</value>
+  </data>
+  <data name="ucrChkNotForEachCondition.TabIndex" type="System.Int32, mscorlib">
+    <value>183</value>
+  </data>
+  <data name="ucrChkNotForEachCondition.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNotForEachCondition.Name" xml:space="preserve">
+    <value>ucrChkNotForEachCondition</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNotForEachCondition.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNotForEachCondition.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkNotForEachCondition.ZOrder" xml:space="preserve">
+    <value>21</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

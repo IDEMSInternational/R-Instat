@@ -71,7 +71,6 @@ Partial Class ucrFilter
         Me.cmd1 = New System.Windows.Forms.Button()
         Me.cmdCombineWithAndOr = New System.Windows.Forms.Button()
         Me.ttpCombineWithAndOr = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ucrChkNotForEachCondition = New instat.ucrCheck()
         Me.ucrReceiverExpression = New instat.ucrReceiverExpression()
         Me.ucrLogicalCombobox = New instat.ucrInputComboBox()
         Me.ucrDatePicker = New instat.ucrDateTimePicker()
@@ -82,6 +81,7 @@ Partial Class ucrFilter
         Me.ucrFilterByReceiver = New instat.ucrReceiverSingle()
         Me.ucrSelectorForFitler = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkNotForAllConditions = New instat.ucrCheck()
+        Me.ucrChkNotForEachCondition = New instat.ucrCheck()
         Me.grpNumeric.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -286,12 +286,6 @@ Partial Class ucrFilter
         Me.cmdCombineWithAndOr.Tag = "Clear_Conditions"
         Me.cmdCombineWithAndOr.UseVisualStyleBackColor = True
         '
-        'ucrChkNotForEachCondition
-        '
-        Me.ucrChkNotForEachCondition.Checked = False
-        resources.ApplyResources(Me.ucrChkNotForEachCondition, "ucrChkNotForEachCondition")
-        Me.ucrChkNotForEachCondition.Name = "ucrChkNotForEachCondition"
-        '
         'ucrReceiverExpression
         '
         Me.ucrReceiverExpression.frmParent = Nothing
@@ -373,6 +367,12 @@ Partial Class ucrFilter
         Me.ucrChkNotForAllConditions.Checked = False
         resources.ApplyResources(Me.ucrChkNotForAllConditions, "ucrChkNotForAllConditions")
         Me.ucrChkNotForAllConditions.Name = "ucrChkNotForAllConditions"
+        '
+        'ucrChkNotForEachCondition
+        '
+        Me.ucrChkNotForEachCondition.Checked = False
+        resources.ApplyResources(Me.ucrChkNotForEachCondition, "ucrChkNotForEachCondition")
+        Me.ucrChkNotForEachCondition.Name = "ucrChkNotForEachCondition"
         '
         'ucrFilter
         '
