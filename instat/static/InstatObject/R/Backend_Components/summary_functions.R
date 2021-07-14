@@ -1336,7 +1336,7 @@ SEDI <- function(x, y, frcst.type, obs.type, ...){
 ##TODO:Check if there are summaries that only apply to (Probabilistic-binary) types.
 
 
-DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_results = FALSE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, margins = "outer", return_output = FALSE, treat_columns_as_factor = FALSE, page_by = NULL, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
+DataBook$set("public", "summary_table", function(data_name, columns_to_summarise = NULL, summaries, factors = c(), store_table = FALSE, store_results = FALSE, drop = TRUE, na.rm = FALSE, summary_name = NA, include_margins = FALSE, margins = "outer", return_output = FALSE, treat_columns_as_factor = FALSE, page_by = NULL, signif_fig = 2, na_display = "", na_level_display = "NA", weights = NULL, caption = NULL, result_names = NULL, percentage_type = "none", perc_total_columns = NULL, perc_total_factors = c(), perc_total_filter = NULL, perc_decimal = FALSE, margin_name = "(All)", additional_filter, ...) {
   # TODO: write in errors
   if(na_level_display == "") stop("na_level_display must be a non empty string")
   # removes "summary_" from beginning of summary function names so that display is nice
@@ -1347,7 +1347,7 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
   if(!store_results) save <- 0
   else save <- 2
 
-  cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE)
+  cell_values <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = factors, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, ...)
   for(i in seq_along(factors)) {
     levels(cell_values[[i]]) <- c(levels(cell_values[[i]]), na_level_display)
     cell_values[[i]][is.na(cell_values[[i]])] <- na_level_display
@@ -1377,7 +1377,7 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
     }
     for(facts in power_sets_outer) {
       if(length(facts) == 0) facts <- c()
-      margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE)
+      margin_tables[[length(margin_tables) + 1]] <- self$calculate_summary(data_name = data_name, columns_to_summarise = columns_to_summarise, summaries = summaries, factors = facts, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, ...)
       margin_tables[[length(margin_tables)]] <- margin_tables[[length(margin_tables)]] %>% dplyr::select(c(all_of(facts), order_names))
     }
     # for outer margins
@@ -1413,7 +1413,8 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
         dplyr::select(c(factors, columns_to_summarise)) %>%
         tidyr::pivot_longer(cols = columns_to_summarise)
       data_book$import_data(data_tables=list(summary_margins_df=summary_margins_df))
-      summary_margins[[length(summary_margins) + 1]] <- data_book$calculate_summary(data_name = "summary_margins_df", columns_to_summarise = "value", summaries = summaries, factors = facts, store_results = store_results, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE)
+      summary_margins[[length(summary_margins) + 1]] <- data_book$calculate_summary(data_name = "summary_margins_df", columns_to_summarise = "value", summaries = summaries, factors = facts, store_results = FALSE, drop = drop, na.rm = na.rm, return_output = TRUE, weights = weights, result_names = result_names, percentage_type = percentage_type, perc_total_columns = perc_total_columns, perc_total_factors = perc_total_factors, perc_total_filter = perc_total_filter, perc_decimal = perc_decimal, margin_name = margin_name, additional_filter = additional_filter, perc_return_all = FALSE, ...)
+      data_book$delete_dataframes(data_names = "summary_margins_df")
     }
     summary_margins <- plyr::ldply(summary_margins)
      
@@ -1451,6 +1452,9 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
   }
 }
 shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(value = round(value, signif_fig))
+if (store_table == TRUE){
+      data_book$import_data(data_tables=list(shaped_cell_values=shaped_cell_values))
+}
 return(shaped_cell_values)
 }
 )
