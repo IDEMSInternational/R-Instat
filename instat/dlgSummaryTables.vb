@@ -44,7 +44,7 @@ Public Class dlgSummaryTables
     Private Sub InitialiseDialog()
         ucrInputNA.Enabled = False
         lblDisplayNA.Enabled = False
-        ucrChkStoreResults.Enabled = False
+        ucrChkStoreResults.Visible = False
 
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 426
@@ -58,6 +58,8 @@ Public Class dlgSummaryTables
         ucrReceiverSummaryCols.Selector = ucrSelectorSummaryTables
         ucrReceiverSummaryCols.SetDataType("numeric")
         ucrReceiverSummaryCols.SetParameterIsString()
+
+        ucrChkStoreResults.SetText("Store Output")
 
         ucrReceiverFactors.SetParameter(New RParameter("factors", 2))
         ucrReceiverFactors.SetParameterIsString()
@@ -232,7 +234,7 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactors.IsEmpty AndAlso ucrSaveTable.IsComplete AndAlso ucrNudSigFigs.GetText <> "" AndAlso (Not ucrChkWeight.Checked OrElse (ucrChkWeight.Checked AndAlso Not ucrReceiverWeights.IsEmpty)) AndAlso Not ucrReceiverSummaryCols.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
+        If ucrSaveTable.IsComplete AndAlso ucrNudSigFigs.GetText <> "" AndAlso (Not ucrChkWeight.Checked OrElse (ucrChkWeight.Checked AndAlso Not ucrReceiverWeights.IsEmpty)) AndAlso Not ucrReceiverSummaryCols.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -320,7 +322,21 @@ Public Class dlgSummaryTables
         End If
     End Sub
 
-    Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged, ucrNudColumnFactors.ControlValueChanged
+    Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged
+        If ucrReceiverFactors.GetCount = 1 Then
+            ucrChkStoreResults.Visible = True
+        Else
+            ucrChkStoreResults.Visible = False
+        End If
+        AddMutableFunctions()
+        AddRemoveStoreParameter()
+    End Sub
+
+    Private Sub ucrNudColumnFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrNudColumnFactors.ControlValueChanged
+        AddMutableFunctions()
+    End Sub
+
+    Private Sub AddMutableFunctions()
         Dim iColumn As Integer = 0
         Dim iNumberOfColumns As Integer = ucrNudColumnFactors.GetText()
         clsColumnOperator.ClearParameters()
@@ -342,6 +358,22 @@ Public Class dlgSummaryTables
                 iColumn = iColumn + 1
             Next
             clsMutableOperator.AddParameter("columnOp", clsROperatorParameter:=clsColumnOperator)
+        End If
+    End Sub
+
+    Private Sub ucrChkStoreResults_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkStoreResults.ControlValueChanged
+        AddRemoveStoreParameter()
+    End Sub
+
+    Private Sub AddRemoveStoreParameter()
+        If ucrChkStoreResults.Visible Then
+            If ucrChkStoreResults.Checked Then
+                clsDefaultFunction.AddParameter("store_table", "TRUE", iPosition:=13)
+            Else
+                clsDefaultFunction.AddParameter("store_table", "FALSE", iPosition:=13)
+            End If
+        Else
+            clsDefaultFunction.RemoveParameterByName("store_table")
         End If
     End Sub
 End Class
