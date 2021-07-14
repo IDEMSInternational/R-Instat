@@ -28,6 +28,7 @@ Public Class dlgUnstack
 
     Private iReceiverMaxY As Integer
     Private iReceiverLabelMaxY As Integer
+    Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub dlgunstack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -101,7 +102,7 @@ Public Class dlgUnstack
         ucrMultipleColumnsReceiver.SetLinkedDisplayControl(lblMultipleColumns)
     End Sub
 
-    Private Sub SetDefaults()
+    Private Sub ResetRCode()
         clsDcastFunction = New RFunction
         clsSelectFunction = New RFunction
         clsUnstackedOperator = New ROperator
@@ -109,31 +110,69 @@ Public Class dlgUnstack
         clsFormula = New ROperator
         clsCarryColumnsOperator = New ROperator
 
-        ucrSelectorForUnstack.Reset()
-        ucrNewDFName.Reset()
-        ucrReceiverFactorToUnstackby.SetMeAsReceiver()
-
-        ' Operations
         clsFormula.SetOperation("~")
         clsFormula.bBrackets = False
+
         clsCarryColumnsOperator.bBrackets = False
         clsCarryColumnsOperator.SetOperation("+")
 
         clsDcastFunction.SetPackageName("reshape2")
         clsDcastFunction.SetRCommand("dcast")
-        clsDcastFunction.AddParameter("formula", clsROperatorParameter:=clsFormula, iPosition:=1)
 
         clsSelectFunction.SetPackageName("dplyr")
         clsSelectFunction.SetRCommand("select")
-        clsSelectFunction.AddParameter("comma", clsROperatorParameter:=clsCommaOperator, bIncludeArgumentName:=False)
 
         clsCommaOperator.SetOperation(",")
+
         clsUnstackedOperator.SetOperation("%>%")
-        clsUnstackedOperator.AddParameter("left", clsRFunctionParameter:=clsDcastFunction, iPosition:=0)
-        clsUnstackedOperator.AddParameter("right", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
 
         clsBaseRCode = clsDcastFunction
+    End Sub
+
+    Private Sub SetRCodeDefaultParameters()
+        clsDcastFunction.AddParameter("formula", clsROperatorParameter:=clsFormula, iPosition:=1)
+        clsSelectFunction.AddParameter("comma", clsROperatorParameter:=clsCommaOperator, bIncludeArgumentName:=False)
+        clsUnstackedOperator.AddParameter("left", clsRFunctionParameter:=clsDcastFunction, iPosition:=0)
+        clsUnstackedOperator.AddParameter("right", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDcastFunction)
+    End Sub
+
+    Private Sub SetDefaults()
+        ucrSelectorForUnstack.Reset()
+        ucrNewDFName.Reset()
+        ucrReceiverFactorToUnstackby.SetMeAsReceiver()
+        If IsNothing(lstRCodeStructure) Then
+            SetRCodeDefaultParameters()
+        ElseIf (lstRCodeStructure.Count > 1) Then
+            SetRCodeDefaultParameters()
+            MsgBox("Developer error: Only one RCodestructure required")
+        ElseIf (lstRCodeStructure.Count = 0) Then
+            If TypeOf (lstRCodeStructure(0)) Is RFunction Then
+                If TryCast(lstRCodeStructure(0), RFunction).strRCommand = clsDcastFunction.strRCommand Then
+                    clsDcastFunction = lstRCodeStructure(0)
+                Else
+                    SetRCodeDefaultParameters()
+                    MsgBox("Developer error: This dialogue recognizes the " & Chr(39) & "reshape2: dcast" & Chr(39) & "function only")
+                End If
+            ElseIf TypeOf (lstRCodeStructure(0)) Is ROperator Then
+                If TryCast(lstRCodeStructure(0), ROperator).strOperation = clsUnstackedOperator.strOperation Then
+                    For Each clsParameter In TryCast(lstRCodeStructure(0), ROperator).clsParameters
+                        If clsParameter.bIsFunction AndAlso Not IsNothing(clsParameter.clsArgumentCodeStructure) Then
+                            If TryCast(clsParameter.clsArgumentCodeStructure, RFunction).strRCommand = clsDcastFunction.strRCommand Then
+                                clsParameter.strArgumentName = "left"
+                            ElseIf TryCast(clsParameter.clsArgumentCodeStructure, RFunction).strRCommand = clsSelectFunction.strRCommand Then
+                                clsParameter.strArgumentName = "right"
+                            End If
+
+
+                        End If
+                    Next
+
+                End If
+            End If
+        End If
+
+
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
@@ -224,4 +263,14 @@ Public Class dlgUnstack
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrNewDFName.ControlContentsChanged, ucrReceiverFactorToUnstackby.ControlContentsChanged, ucrReceiverCarryColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class

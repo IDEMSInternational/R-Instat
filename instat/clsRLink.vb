@@ -2446,6 +2446,10 @@ Public Class RLink
         ElseIf strCommentFromDialogue.Contains("regular sequence") Then
             dlgRegularSequence.lstScriptsRCodeStructure = lstNewRCodeStructures
             dlgRegularSequence.ShowDialog()
+        ElseIf strCommentFromDialogue.Contains("unstack columns") Then
+            lstNewRCodeStructures.RemoveAt(0)
+            dlgUnstack.lstScriptsRCodeStructure = lstNewRCodeStructures
+            dlgUnstack.ShowDialog()
         End If
     End Sub
 
