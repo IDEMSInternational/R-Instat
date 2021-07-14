@@ -388,6 +388,7 @@ Public Class clsGridLink
             fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, False)
         Else
             fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, True)
+            fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
             If iRowMax <> -1 Then
                 fillWorkSheet.Rows = Math.Min(iRowMax, dfTemp.RowCount)
             Else
