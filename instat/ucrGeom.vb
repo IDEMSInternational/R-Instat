@@ -765,6 +765,12 @@ Public Class ucrGeom
         clsgeom_density_ridges.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_density_ridges.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_density_ridges.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges.AddLayerParameter("jittered_points", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges.AddLayerParameter("alpha", "numeric", "0.7", lstParameterStrings:={1, 0})
+        clsgeom_density_ridges.AddLayerParameter("scale", "numeric", "1")
+        clsgeom_density_ridges.AddLayerParameter("point_shape", "editablelist", "|", lstParameterStrings:={"|", "/", "$", "#", "*", "?", "!"})
+        clsgeom_density_ridges.AddLayerParameter("point_size", "numeric", "3")
+        clsgeom_density_ridges.AddLayerParameter("point_alpha", "numeric", "1", lstParameterStrings:={1, 0})
         lstAllGeoms.Add(clsgeom_density_ridges)
 
         Dim clsgeom_density_ridges2 As New Geoms
@@ -838,6 +844,25 @@ Public Class ucrGeom
         clsgeom_density_ridges_gradient.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_density_ridges_gradient.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
         lstAllGeoms.Add(clsgeom_density_ridges_gradient)
+
+        Dim clsscale_fill_viridis_c As New Geoms
+
+        clsscale_fill_viridis_c.SetGeomPackage("ggplot2")
+        clsscale_fill_viridis_c.strGeomName = "scale_fill_viridis_c"
+        'Other Aesthetics
+        clsscale_fill_viridis_c.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsscale_fill_viridis_c.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
+        'adding layer parameters
+        clsscale_fill_viridis_c.AddLayerParameter("alpha", "numeric", "0.7", lstParameterStrings:={1, 0})
+        clsscale_fill_viridis_c.AddLayerParameter("begin", "numeric", "0", lstParameterStrings:={1, 0})
+        clsscale_fill_viridis_c.AddLayerParameter("end", "numeric", "1", lstParameterStrings:={1, 0})
+        clsscale_fill_viridis_c.AddLayerParameter("panel_scaling", "list", "1", lstParameterStrings:={"1", "-1"})
+        clsscale_fill_viridis_c.AddLayerParameter("option", "list", Chr(34) & "cividis" & Chr(34), lstParameterStrings:={Chr(34) & "cividis" & Chr(34), Chr(34) & "magma" & Chr(34), Chr(34) & "inferno" & Chr(34), Chr(34) & "plasma" & Chr(34), Chr(34) & "viridis" & Chr(34)})
+        clsscale_fill_viridis_c.AddLayerParameter("values",  "numeric", "0", lstParameterStrings:={1, 0})
+        clsscale_fill_viridis_c.AddLayerParameter("Space", "list", Chr(34) & "Lab" & Chr(34), lstParameterStrings:={Chr(34) & "Lab" & Chr(34)})
+        clsscale_fill_viridis_c.AddLayerParameter("na.value", "list", Chr(34) & "grey50" & Chr(34), lstParameterStrings:={Chr(34) & "grey50" & Chr(34)})
+        clsscale_fill_viridis_c.AddLayerParameter("guide", "list", Chr(34) & "colourbar" & Chr(34), lstParameterStrings:={Chr(34) & "colourbar" & Chr(34)})
+        lstAllGeoms.Add(clsscale_fill_viridis_c)
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
 
@@ -1847,7 +1872,7 @@ Public Class ucrGeom
         clsgeom_tufteboxplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
 
         'Layer parameters
-        clsgeom_tufteboxplot.AddLayerParameter("stat", "editablelist", Chr(34) & "fivenumber" & Chr(34), lstParameterStrings:={Chr(34) & "fivenumber" & Chr(34)})
+        clsgeom_tufteboxplot.AddLayerParameter("stat", "editablelist", Chr(34) & "boxplot" & Chr(34), lstParameterStrings:={Chr(34) & "boxplot" & Chr(34),Chr(34) & "fivenumber" & Chr(34)})
         clsgeom_tufteboxplot.AddLayerParameter("position", "editablelist", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "dodge" & Chr(34)})
         clsgeom_tufteboxplot.AddLayerParameter("outlier.colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_tufteboxplot.AddLayerParameter("outlier.shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strShapePoint)
