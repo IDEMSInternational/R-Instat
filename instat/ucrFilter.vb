@@ -80,7 +80,7 @@ Public Class ucrFilter
         ucrLogicalCombobox.SetDropDownStyleAsNonEditable()
         ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (year > 1990) & (year < 2021) they have all to be TRUE.")
         'ucrChkNotForEachCondition.SetText("Add Not (!) for each") TODO: Instances of this checkbox are commented out because adding NOT for all conditions might not be useful! Consider enabling when edit condition/filter is possible 
-        ucrChkNotForAllConditions.SetText("Add Not (!) for all")
+        ucrChkNotForAllConditions.SetText("Add Not")
     End Sub
 
     Private Sub SetDefaults()
