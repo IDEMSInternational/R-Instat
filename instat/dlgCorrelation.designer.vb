@@ -259,7 +259,6 @@ Partial Class dlgCorrelation
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.lblSelectedVariables)
-        Me.Controls.Add(Me.ucrSaveModel)
         Me.Controls.Add(Me.ucrNudConfidenceInterval)
         Me.Controls.Add(Me.ucrChkCorrelationMatrix)
         Me.Controls.Add(Me.rdoTwoColumns)
@@ -276,6 +275,7 @@ Partial Class dlgCorrelation
         Me.Controls.Add(Me.ucrReceiverFirstColumn)
         Me.Controls.Add(Me.ucrSelectorCorrelation)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrSaveModel)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

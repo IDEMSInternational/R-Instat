@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 11</value>
+    <value>279, 15</value>
   </data>
   <data name="lblSelectedVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 13</value>
@@ -184,7 +184,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdMissingOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>186, 104</value>
+    <value>184, 104</value>
   </data>
   <data name="cmdMissingOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>80, 37</value>
@@ -391,7 +391,7 @@
     <value>2</value>
   </data>
   <data name="ucrChkWeights.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 127</value>
+    <value>280, 135</value>
   </data>
   <data name="ucrChkWeights.Size" type="System.Drawing.Size, System.Drawing">
     <value>119, 20</value>
@@ -418,7 +418,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>416, 418</value>
+    <value>421, 418</value>
   </data>
   <data name="ucrReceiverByFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>279, 197</value>
@@ -427,7 +427,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverByFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 100</value>
+    <value>133, 100</value>
   </data>
   <data name="ucrReceiverByFactor.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -445,13 +445,13 @@
     <value>5</value>
   </data>
   <data name="ucrReceiverSelectedVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>280, 24</value>
+    <value>280, 31</value>
   </data>
   <data name="ucrReceiverSelectedVariables.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverSelectedVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 100</value>
+    <value>132, 100</value>
   </data>
   <data name="ucrReceiverSelectedVariables.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -513,6 +513,9 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -526,7 +529,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverWeights.Location" type="System.Drawing.Point, System.Drawing">
-    <value>279, 150</value>
+    <value>280, 158</value>
   </data>
   <data name="ucrReceiverWeights.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

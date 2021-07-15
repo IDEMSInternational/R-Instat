@@ -150,7 +150,7 @@
     <value>10, 201</value>
   </data>
   <data name="cmdGraphOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>146, 23</value>
   </data>
   <data name="cmdGraphOptions.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -169,6 +169,78 @@
   </data>
   <data name="&gt;&gt;cmdGraphOptions.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="&gt;&gt;rdoSingleGraphs.Name" xml:space="preserve">
+    <value>rdoSingleGraphs</value>
+  </data>
+  <data name="&gt;&gt;rdoSingleGraphs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSingleGraphs.Parent" xml:space="preserve">
+    <value>grpOutput</value>
+  </data>
+  <data name="&gt;&gt;rdoSingleGraphs.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rdoCombine.Name" xml:space="preserve">
+    <value>rdoCombine</value>
+  </data>
+  <data name="&gt;&gt;rdoCombine.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCombine.Parent" xml:space="preserve">
+    <value>grpOutput</value>
+  </data>
+  <data name="&gt;&gt;rdoCombine.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rdoFacets.Name" xml:space="preserve">
+    <value>rdoFacets</value>
+  </data>
+  <data name="&gt;&gt;rdoFacets.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoFacets.Parent" xml:space="preserve">
+    <value>grpOutput</value>
+  </data>
+  <data name="&gt;&gt;rdoFacets.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOutput.Name" xml:space="preserve">
+    <value>ucrPnlOutput</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOutput.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOutput.Parent" xml:space="preserve">
+    <value>grpOutput</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOutput.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="grpOutput.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 172</value>
+  </data>
+  <data name="grpOutput.Size" type="System.Drawing.Size, System.Drawing">
+    <value>142, 91</value>
+  </data>
+  <data name="grpOutput.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="grpOutput.Text" xml:space="preserve">
+    <value>Output</value>
+  </data>
+  <data name="&gt;&gt;grpOutput.Name" xml:space="preserve">
+    <value>grpOutput</value>
+  </data>
+  <data name="&gt;&gt;grpOutput.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpOutput.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpOutput.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="rdoSingleGraphs.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -266,30 +338,6 @@
   <data name="&gt;&gt;ucrPnlOutput.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="grpOutput.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 172</value>
-  </data>
-  <data name="grpOutput.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 91</value>
-  </data>
-  <data name="grpOutput.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="grpOutput.Text" xml:space="preserve">
-    <value>Output</value>
-  </data>
-  <data name="&gt;&gt;grpOutput.Name" xml:space="preserve">
-    <value>grpOutput</value>
-  </data>
-  <data name="&gt;&gt;grpOutput.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpOutput.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpOutput.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="ucrChkFlip.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 238</value>
   </data>
@@ -349,7 +397,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>347, 24</value>
+    <value>314, 24</value>
   </data>
   <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
