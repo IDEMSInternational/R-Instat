@@ -388,7 +388,6 @@ Public Class clsGridLink
             fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, False)
         Else
             fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_AllowAdjustRowHeight, True)
-            fillWorkSheet.SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
             If iRowMax <> -1 Then
                 fillWorkSheet.Rows = Math.Min(iRowMax, dfTemp.RowCount)
             Else
@@ -584,5 +583,6 @@ Public Class clsGridLink
         shtCurrent.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
                                 .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName, .TextColor = clrText, .FontSize = fntText.Size, .FontName = fntText.Name
                                 })
+        shtCurrent.SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
     End Sub
 End Class
