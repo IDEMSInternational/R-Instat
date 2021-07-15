@@ -169,7 +169,8 @@ Public Class ucrGeom
         Dim clsgeom_tufteboxplot As New Geoms
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
-
+        Dim clsgeom_lollipop As New Geoms
+        Dim clsgeom_dumbbell As New Geoms
         Dim clsgeom_stat_density_ridges As New Geoms
         Dim clsgeom_statECDF As New Geoms
 
@@ -1893,6 +1894,61 @@ Public Class ucrGeom
         lstAllGeoms.Add(clsgeom_tufteboxplot)
 
 
+        clsgeom_dumbbell.SetGeomName("geom_dumbbell")
+        clsgeom_dumbbell.SetGeomPackage("ggalt")
+
+        'Mandatory Aesthetics
+        clsgeom_dumbbell.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_dumbbell.AddAesParameter("y", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_dumbbell.AddAesParameter("xend", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_dumbbell.AddAesParameter("yend", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+
+        'Optional Aesthetics
+        clsgeom_dumbbell.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
+        clsgeom_dumbbell.AddAesParameter("group", strIncludedDataTypes:={"factor"})
+
+        'Layer parameters
+        clsgeom_dumbbell.AddLayerParameter("colour_x", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_dumbbell.AddLayerParameter("colour_xend", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_dumbbell.AddLayerParameter("size_x", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_dumbbell.AddLayerParameter("size_xend", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_dumbbell.AddLayerParameter("dot_guide", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"}) 'If True Then, a leading dotted line will be placed before the left-most dumbbell point.
+        clsgeom_dumbbell.AddLayerParameter("dot_guide_colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_dumbbell.AddLayerParameter("dot_guide_size", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_dumbbell.AddLayerParameter("na.rm", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_dumbbell.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_dumbbell.AddLayerParameter("inherit.aes", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+
+        lstAllGeoms.Add(clsgeom_dumbbell)
+
+
+        clsgeom_lollipop.SetGeomName("geom_lollipop")
+        clsgeom_lollipop.SetGeomPackage("ggalt")
+
+        'Mandatory Aesthetics
+        clsgeom_lollipop.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_lollipop.AddAesParameter("y", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+
+        'Optional Aesthetics
+        clsgeom_lollipop.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("group", strIncludedDataTypes:={"factor"})
+        clsgeom_lollipop.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("stroke", strIncludedDataTypes:={"factor", "numeric"})
+
+        'Layer parameters
+        clsgeom_lollipop.AddLayerParameter("horizontal", "boolean", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_lollipop.AddLayerParameter("point.colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_lollipop.AddLayerParameter("point.size", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_lollipop.AddLayerParameter("na.rm", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_lollipop.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_lollipop.AddLayerParameter("inherit.aes", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+
+        lstAllGeoms.Add(clsgeom_lollipop)
 
         clsgeom_violin.strGeomName = "geom_violin"
         'Mandatory Aesthetics
