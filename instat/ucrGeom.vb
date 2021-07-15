@@ -469,6 +469,7 @@ Public Class ucrGeom
         clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={1}) 'Question to be discussed: This parameter is setting the length of the whiskers as a multiple of the IQR. When giving a negative value, the whiskers are simply of length 0. Also the window showing the graph doesn't adapt to the whiskers' length, which means they are simply cut when too long.
         clsgeom_boxplot.AddLayerParameter("outlier.shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strBoxShapePoint) 'Warning: there are other symbols that we can add here 
         clsgeom_boxplot.AddLayerParameter("outlier.colour", "colour", "NULL")
+        clsgeom_boxplot.AddLayerParameter("outlier.size", "numeric", "1.5", lstParameterStrings:={1, 0})
         clsgeom_boxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Outlier.stroke parameter gives the size of the outliers. It cannot be negative, this would trigger an error in R.
         clsgeom_boxplot.AddLayerParameter("fatten", "numeric", "2", lstParameterStrings:={0, 1, 5})
         'Global Layer parameters
@@ -1874,8 +1875,9 @@ Public Class ucrGeom
         'Layer parameters
         clsgeom_tufteboxplot.AddLayerParameter("stat", "editablelist", Chr(34) & "boxplot" & Chr(34), lstParameterStrings:={Chr(34) & "boxplot" & Chr(34),Chr(34) & "fivenumber" & Chr(34)})
         clsgeom_tufteboxplot.AddLayerParameter("position", "editablelist", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "dodge" & Chr(34)})
-        clsgeom_tufteboxplot.AddLayerParameter("outlier.colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_tufteboxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={1}) 'Question to be discussed: This parameter is setting the length of the whiskers as a multiple of the IQR. When giving a negative value, the whiskers are simply of length 0. Also the window showing the graph doesn't adapt to the whiskers' length, which means they are simply cut when too long.
         clsgeom_tufteboxplot.AddLayerParameter("outlier.shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strShapePoint)
+        clsgeom_tufteboxplot.AddLayerParameter("outlier.colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_tufteboxplot.AddLayerParameter("outlier.size", "numeric", "1.5", lstParameterStrings:={1, 0})
         clsgeom_tufteboxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={1, 0})
         clsgeom_tufteboxplot.AddLayerParameter("voffset", "numeric", "0.01", lstParameterStrings:={2, 0})
