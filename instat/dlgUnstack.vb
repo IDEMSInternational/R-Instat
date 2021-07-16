@@ -138,6 +138,7 @@ Public Class dlgUnstack
     End Sub
 
     Private Sub SetDefaults()
+        ResetRCode()
         ucrSelectorForUnstack.Reset()
         ucrNewDFName.Reset()
         ucrReceiverFactorToUnstackby.SetMeAsReceiver()
@@ -146,10 +147,21 @@ Public Class dlgUnstack
         ElseIf (lstRCodeStructure.Count > 1) Then
             SetRCodeDefaultParameters()
             MsgBox("Developer error: Only one RCodestructure required")
-        ElseIf (lstRCodeStructure.Count = 0) Then
+        ElseIf (lstRCodeStructure.Count = 1) Then
             If TypeOf (lstRCodeStructure(0)) Is RFunction Then
                 If TryCast(lstRCodeStructure(0), RFunction).strRCommand = clsDcastFunction.strRCommand Then
                     clsDcastFunction = lstRCodeStructure(0)
+                    If Not IsNothing(clsDcastFunction.GetParameter("formula")) Then
+                        If clsDcastFunction.GetParameter("formula").bIsOperator Then
+                            clsFormula = clsDcastFunction.GetParameter("formula").clsArgumentCodeStructure
+                            For Each clsParameter In clsFormula.clsParameters
+                                If clsParameter.Position = 1 Then
+                                    clsParameter.strArgumentName = "right"
+                                End If
+                            Next
+                        End If
+                    End If
+                    ucrBase.clsRsyntax.SetBaseRFunction(clsDcastFunction)
                 Else
                     SetRCodeDefaultParameters()
                     MsgBox("Developer error: This dialogue recognizes the " & Chr(39) & "reshape2: dcast" & Chr(39) & "function only")
@@ -162,17 +174,15 @@ Public Class dlgUnstack
                                 clsParameter.strArgumentName = "left"
                             ElseIf TryCast(clsParameter.clsArgumentCodeStructure, RFunction).strRCommand = clsSelectFunction.strRCommand Then
                                 clsParameter.strArgumentName = "right"
+                                'In the clsSelectFunction we have the comma operator thats gets parameter form the ucrReceiverCarryColumns
+                                ' and ucrReceiverFactorToUnstackby .Distinguishing betwenn parameters for the two controls whn having the function is now 
+                                'difficult
                             End If
-
-
                         End If
                     Next
-
                 End If
             End If
         End If
-
-
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
