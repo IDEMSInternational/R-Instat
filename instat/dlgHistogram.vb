@@ -71,11 +71,11 @@ Public Class dlgHistogram
         ucrBase.iHelpTopicID = 435
 
         ucrPnlOptions.AddRadioButton(rdoHistogram)
-        ucrPnlOptions.AddRadioButton(rdoDensity)
+        ucrPnlOptions.AddRadioButton(rdoDensity_ridges)
         ucrPnlOptions.AddRadioButton(rdoFrequencyPolygon)
 
         ucrPnlOptions.AddFunctionNamesCondition(rdoHistogram, "geom_histogram")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoDensity, {"geom_density", "geom_density_ridges"})
+        ucrPnlOptions.AddFunctionNamesCondition(rdoDensity_ridges, {"geom_density", "geom_density_ridges"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoFrequencyPolygon, "geom_freqpoly")
 
         ucrHistogramSelector.SetParameter(New RParameter("data", 0))
@@ -98,7 +98,7 @@ Public Class dlgHistogram
         ucrInputStats.SetLinkedDisplayControl(lblStats)
         ucrInputStats.AddToLinkedControls(ucrChkPercentages, {"Fractions"}, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=False)
 
-        ucrPnlOptions.AddToLinkedControls({ucrChkRidges}, {rdoDensity}, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkRidges}, {rdoDensity_ridges}, bNewLinkedHideIfParameterMissing:=True)
         ucrChkRidges.AddToLinkedControls(ucrInputStats, {"FALSE"}, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=False)
 
         ucrChkPercentages.SetText("percentages")
@@ -185,9 +185,6 @@ Public Class dlgHistogram
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        'ucrVariablesAsFactorforHist.AddAdditionalCodeParameterPair(clsHistAesFunction, New RParameter("x", iNewPosition:=1), iAdditionalPairNo:=1)
-        'ucrFactorReceiver.AddAdditionalCodeParameterPair(clsHistAesFunction, New RParameter("y", iNewPosition:=2), iAdditionalPairNo:=1)
-
         ucrVariablesAsFactorforHist.SetRCode(clsRaesFunction, bReset)
         ucrInputStats.SetRCode(clsHistAesFunction, bReset)
         ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
@@ -220,7 +217,7 @@ Public Class dlgHistogram
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorforHist.bSingleVariable) Then
                 ucrVariablesAsFactorforHist.Add(clsParam.strArgumentValue)
-            ElseIf (clsParam.strArgumentName = "fill" AndAlso rdoHistogram.Checked) OrElse (clsParam.strArgumentName = "colour" AndAlso (rdoFrequencyPolygon.Checked OrElse rdoDensity.Checked)) Then
+            ElseIf (clsParam.strArgumentName = "fill" AndAlso rdoHistogram.Checked) OrElse (clsParam.strArgumentName = "colour" AndAlso (rdoFrequencyPolygon.Checked OrElse rdoDensity_ridges.Checked)) Then
                 ucrFactorReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
@@ -237,8 +234,8 @@ Public Class dlgHistogram
     End Sub
 
     Private Sub SetDialogOptions()
-        clsHistAesFunction.RemoveParameterByPosition(1)
-        clsHistAesFunction.RemoveParameterByPosition(2)
+        clsHistAesFunction.RemoveParameterByName("x")
+        clsHistAesFunction.RemoveParameterByName("y")
         clsHistAesFunction.AddParameter("y", "stat(count)", iPosition:=0)
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         If rdoHistogram.Checked Then
@@ -247,9 +244,9 @@ Public Class dlgHistogram
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("histogram")
             End If
-        ElseIf rdoDensity.Checked Then
+        ElseIf rdoDensity_ridges.Checked Then
             If ucrChkRidges.Checked Then
-                clsHistAesFunction.RemoveParameterByPosition(0)
+                clsHistAesFunction.RemoveParameterByName("y")
                 clsHistAesFunction.AddParameter("x", clsRFunctionParameter:=ucrVariablesAsFactorforHist.GetVariables(), iPosition:=1)
                 clsHistAesFunction.AddParameter("y", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=2)
                 clsRgeomPlotFunction.SetPackageName("ggridges")
@@ -279,7 +276,7 @@ Public Class dlgHistogram
     Private Sub SetOptionsButtonText()
         If rdoHistogram.Checked Then
             cmdHistogramOptions.Text = "Histogram Options"
-        ElseIf rdoDensity.Checked Then
+        ElseIf rdoDensity_ridges.Checked Then
             If ucrChkRidges.Checked Then
                 cmdHistogramOptions.Text = "Density Ridges Options"
             Else
@@ -325,9 +322,9 @@ Public Class dlgHistogram
         End If
     End Sub
 
-    Private Sub rdoDensity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles rdoDensity.KeyPress
+    Private Sub rdoDensity_KeyPress(sender As Object, e As KeyPressEventArgs) Handles rdoDensity_ridges.KeyPress
         If e.KeyChar = vbCr Then
-            rdoDensity.Checked = True
+            rdoDensity_ridges.Checked = True
         End If
     End Sub
 

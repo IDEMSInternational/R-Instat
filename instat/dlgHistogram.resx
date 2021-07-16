@@ -207,37 +207,40 @@
   <data name="&gt;&gt;rdoHistogram.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="rdoDensity.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+  <data name="rdoDensity_ridges.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
-  <data name="rdoDensity.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="rdoDensity_ridges.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="rdoDensity.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoDensity_ridges.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoDensity_ridges.Location" type="System.Drawing.Point, System.Drawing">
     <value>151, 12</value>
   </data>
-  <data name="rdoDensity.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoDensity_ridges.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 28</value>
   </data>
-  <data name="rdoDensity.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoDensity_ridges.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="rdoDensity.Text" xml:space="preserve">
+  <data name="rdoDensity_ridges.Text" xml:space="preserve">
     <value>Density/Ridges</value>
   </data>
-  <data name="rdoDensity.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="rdoDensity_ridges.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;rdoDensity.Name" xml:space="preserve">
-    <value>rdoDensity</value>
+  <data name="&gt;&gt;rdoDensity_ridges.Name" xml:space="preserve">
+    <value>rdoDensity_ridges</value>
   </data>
-  <data name="&gt;&gt;rdoDensity.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoDensity_ridges.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoDensity.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoDensity_ridges.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rdoDensity.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoDensity_ridges.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
   <data name="rdoFrequencyPolygon.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
