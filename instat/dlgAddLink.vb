@@ -81,7 +81,8 @@ Public Class dlgAddLink
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrDataSelectorFrom.cboAvailableDataFrames.Text <> "" AndAlso ucrDataSelectorTo.cboAvailableDataFrames.Text <> "" AndAlso Not ucrSaveLink.ucrInputTextSave.IsEmpty AndAlso Not ucrInputSelectedKey.IsEmpty AndAlso IsSelectionValidKey() Then
+        If ucrDataSelectorFrom.cboAvailableDataFrames.Text <> "" AndAlso ucrDataSelectorTo.cboAvailableDataFrames.Text <> "" AndAlso
+             ucrSaveLink.IsComplete AndAlso Not ucrInputSelectedKey.IsEmpty AndAlso IsSelectionValidKey() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)

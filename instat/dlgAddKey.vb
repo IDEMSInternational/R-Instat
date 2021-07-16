@@ -79,7 +79,8 @@ Public Class dlgAddKey
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrReceiverKeyColumns.IsEmpty()) AndAlso (Not ucrSaveKey.ucrInputTextSave.IsEmpty())) AndAlso bUniqueChecked Then
+        If ((Not ucrReceiverKeyColumns.IsEmpty()) AndAlso ucrSaveKey.IsComplete) AndAlso bUniqueChecked Then
+
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)

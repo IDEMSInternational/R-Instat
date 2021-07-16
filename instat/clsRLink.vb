@@ -1939,22 +1939,8 @@ Public Class RLink
     ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's survs. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetKeyNames(Optional strDataFrameName As String = "") As List(Of String)
-        Dim lstKeyNames As New List(Of String)
-        Dim clsGetKeyNames As New RFunction
-        Dim expKeyNames As SymbolicExpression
-
-        clsGetKeyNames.SetRCommand(strInstatDataObject & "$get_key_names")
-
-        If strDataFrameName <> "" Then
-            clsGetKeyNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        End If
-        expKeyNames = RunInternalScriptGetValue(clsGetKeyNames.ToScript(), bSilent:=True)
-        If expKeyNames IsNot Nothing AndAlso Not expKeyNames.Type = Internals.SymbolicExpressionType.Null Then
-            lstKeyNames = expKeyNames.AsCharacter.ToArray.ToList
-        End If
-        Return lstKeyNames
+        Return GetNames(strDataFrameName, "$get_key_names")
     End Function
-
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's links. </summary>
@@ -1964,21 +1950,26 @@ Public Class RLink
     ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's survs. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetLinkNames(Optional strDataFrameName As String = "") As List(Of String)
-        Dim lstLinkNames As New List(Of String)
-        Dim clsGetLinkNames As New RFunction
-        Dim expLinkNames As SymbolicExpression
+        Return GetNames(strDataFrameName, "$get_link_names")
+    End Function
 
-        clsGetLinkNames.SetRCommand(strInstatDataObject & "$get_link_names")
+    Private Function GetNames(strDataFrameName As String, strRCommand As String) As List(Of String)
+        Dim lstNames As New List(Of String)
+        Dim clsGetNames As New RFunction
+        Dim expNames As SymbolicExpression
+
+        clsGetNames.SetRCommand(strInstatDataObject & strRCommand)
 
         If strDataFrameName <> "" Then
-            clsGetLinkNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+            clsGetNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
         End If
-        expLinkNames = RunInternalScriptGetValue(clsGetLinkNames.ToScript(), bSilent:=True)
-        If expLinkNames IsNot Nothing AndAlso Not expLinkNames.Type = Internals.SymbolicExpressionType.Null Then
-            lstLinkNames = expLinkNames.AsCharacter.ToArray.ToList
+        expNames = RunInternalScriptGetValue(clsGetNames.ToScript(), bSilent:=True)
+        If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
+            lstNames = expNames.AsCharacter.ToArray.ToList
         End If
-        Return lstLinkNames
+        Return lstNames
     End Function
+
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets the data type of the <paramref name="strColumnName"/> column in the 
