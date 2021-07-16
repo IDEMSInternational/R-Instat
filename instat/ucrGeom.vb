@@ -918,18 +918,18 @@ Public Class ucrGeom
         clsgeom_dumbbell.SetGeomPackage("ggalt")
 
         'Mandatory Aesthetics
-        clsgeom_dumbbell.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_dumbbell.AddAesParameter("y", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
-        clsgeom_dumbbell.AddAesParameter("xend", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
+        clsgeom_dumbbell.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_dumbbell.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_dumbbell.AddAesParameter("xend", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
 
         'Optional Aesthetics
         'In the geom_dimbbell, yend is given as a mandatory aesthetic but in running the function it is not mandatory so am including it under optional aesthetics
-        clsgeom_dumbbell.AddAesParameter("yend", strIncludedDataTypes:={"factor"})
+        clsgeom_dumbbell.AddAesParameter("yend", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_dumbbell.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_dumbbell.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_dumbbell.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
-        clsgeom_dumbbell.AddAesParameter("linetype", strIncludedDataTypes:={"factor"})
-        clsgeom_dumbbell.AddAesParameter("group", strIncludedDataTypes:={"factor"})
+        clsgeom_dumbbell.AddAesParameter("linetype", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("group", strIncludedDataTypes:={"factor", "numeric"})
 
         'Layer parameters
         clsgeom_dumbbell.AddLayerParameter("colour_x", "colour", Chr(34) & "black" & Chr(34))
@@ -1308,14 +1308,14 @@ Public Class ucrGeom
         clsgeom_lollipop.SetGeomPackage("ggalt")
 
         'Mandatory Aesthetics
-        clsgeom_lollipop.AddAesParameter("x", strIncludedDataTypes:={"numeric"}, bIsMandatory:=True)
-        clsgeom_lollipop.AddAesParameter("y", strIncludedDataTypes:={"factor"}, bIsMandatory:=True)
+        clsgeom_lollipop.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_lollipop.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
 
         'Optional Aesthetics
         clsgeom_lollipop.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_lollipop.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_lollipop.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
-        clsgeom_lollipop.AddAesParameter("group", strIncludedDataTypes:={"factor"})
+        clsgeom_lollipop.AddAesParameter("group", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_lollipop.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
         clsgeom_lollipop.AddAesParameter("stroke", strIncludedDataTypes:={"factor", "numeric"})
 
