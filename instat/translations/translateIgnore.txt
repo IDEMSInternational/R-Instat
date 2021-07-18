@@ -67,6 +67,6 @@
 # In the 'New data Frame' Dialog, the user may enter the 'New Data Frame Name'. 
 # This is a literal that should not be translated.
 # Fixes issue #6581
-# TODO Can we assume that the name the user specifies for sving should never be translated 
+# TODO Can we assume that the name the user specifies for saving should never be translated 
 #      in any dialog (e.g. '%_ucrInputTextSave%')?
 dlgNewDataFrame_%_ucrInputTextSave%
