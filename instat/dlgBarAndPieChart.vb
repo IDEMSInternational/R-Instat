@@ -482,7 +482,7 @@ Public Class dlgBarAndPieChart
         clsBaseOperator.RemoveParameterByName("coordpolar")
         ucrChkBacktoback.Enabled = True
         ChangeParameterName()
-        If Not rdoDonut.Checked Then
+        If Not rdoDonut.Checked OrElse Not ucrChkPolarCoordinates.Checked Then
             clsBaseOperator.RemoveParameterByName("xlim")
         End If
         If Not rdoDonut.Checked OrElse Not rdoPie.Checked Then
