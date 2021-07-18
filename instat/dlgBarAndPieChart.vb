@@ -183,14 +183,12 @@ Public Class dlgBarAndPieChart
         ucrSaveBar.Reset()
         bResetSubdialog = True
         bResetBarLayerSubdialog = True
-        ucrChkFlipCoordinates.Checked = False
         ucrChkPolarCoordinates.Checked = False
         ucrChkBacktoback.Checked = False
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
-
 
         clsPolarCoordFunction.SetPackageName("ggplot2")
         clsPolarCoordFunction.SetRCommand("coord_polar")
