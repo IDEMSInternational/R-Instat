@@ -409,8 +409,7 @@ Public Class dlgImportDataset
         SetDefaults()
         SetRCodeForControls(True)
         SetDialogStateFromFile("")
-        'TryGridPreview()
-        'TestOkEnabled()
+        TestOkEnabled()
     End Sub
 
     Private Sub TestOkEnabled()
@@ -1081,7 +1080,6 @@ Public Class dlgImportDataset
     ''' <returns></returns>
     Private Function GetMissingValueRString(strText As String) As String
         Dim arrStr() As String = strText.Split(",")
-
         Dim strRmissingValueString As String = ""
         For Each strTemp As String In arrStr
             If strRmissingValueString = "" Then
@@ -1097,10 +1095,8 @@ Public Class dlgImportDataset
     Private Function GetDirectoryFiles(bOnlyCleanedFileNames As Boolean) As List(Of String)
         Dim lstFileNames As New List(Of String)
         Dim arrFilePathsAndNames() As String
-
         If strFilePathSystem <> "" AndAlso Directory.Exists(strFilePathSystem) Then
             arrFilePathsAndNames = Directory.GetFiles(strFilePathSystem, "*" & strFileExtension)
-
             If bOnlyCleanedFileNames Then
                 For Each strFilePathName As String In arrFilePathsAndNames
                     lstFileNames.Add(GetCleanFileName(strFilePathName))
@@ -1108,7 +1104,6 @@ Public Class dlgImportDataset
             Else
                 lstFileNames.AddRange(arrFilePathsAndNames)
             End If
-
         End If
         Return lstFileNames
     End Function
