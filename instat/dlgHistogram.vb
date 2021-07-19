@@ -185,9 +185,7 @@ Public Class dlgHistogram
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
-        ucrVariablesAsFactorforHist.SetRCode(clsRaesFunction, bReset)
         ucrInputStats.SetRCode(clsHistAesFunction, bReset)
-        ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
         ucrSaveHist.SetRCode(clsBaseOperator, bReset)
         ucrHistogramSelector.SetRCode(clsRggplotFunction, bReset)
         ucrPnlOptions.SetRCode(clsRgeomPlotFunction, bReset)
@@ -298,7 +296,7 @@ Public Class dlgHistogram
         End If
     End Sub
 
-    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkRidges.ControlValueChanged, ucrFactorReceiver.ControlContentsChanged, ucrVariablesAsFactorforHist.ControlContentsChanged
+    Private Sub ucrPnlOptions_Control() Handles ucrPnlOptions.ControlValueChanged, ucrChkRidges.ControlValueChanged
         SetDialogOptions()
     End Sub
 
@@ -341,5 +339,18 @@ Public Class dlgHistogram
     Private Sub ucrFactorReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrFactorReceiver.ControlValueChanged
         clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
+        If Not ucrFactorReceiver.IsEmpty Then
+            clsRaesFunction.AddParameter("fill", ucrFactorReceiver.GetVariableNames(False), iPosition:=1)
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+        End If
+    End Sub
+
+    Private Sub ucrVariablesAsFactorforHist_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorforHist.ControlValueChanged
+        If Not ucrVariablesAsFactorforHist.IsEmpty Then
+            clsRaesFunction.AddParameter("x", ucrVariablesAsFactorforHist.GetVariableNames(False), iPosition:=0)
+        Else
+            clsRaesFunction.RemoveParameterByName("x")
+        End If
     End Sub
 End Class
