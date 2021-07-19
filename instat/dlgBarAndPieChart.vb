@@ -87,17 +87,14 @@ Public Class dlgBarAndPieChart
         ucrPnlOptions.AddFunctionNamesCondition(rdoFrequency, "coordpolar")
         ucrPnlOptions.AddFunctionNamesCondition(rdoValue, "coordpolar")
 
-        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrInputBarChartPositions, ucrReceiverByFactor}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkFlipCoordinates, ucrChkPolarCoordinates, ucrInputBarChartPositions, ucrReceiverByFactor}, {rdoFrequency, rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrReceiverX, {rdoValue}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrReceiverByFactor.SetLinkedDisplayControl(lblByFactor)
         ucrReceiverX.SetLinkedDisplayControl(lblXvariable)
         ucrInputBarChartPositions.SetLinkedDisplayControl(lblPosition)
 
-
-        ucrPnlPolar.AddRadioButton(rdoX)
-        ucrPnlPolar.AddRadioButton(rdoY)
-        ucrPnlPolar.AddRadioButton(rdoDonut)
         ucrPnlPolar.AddRadioButton(rdoPie)
+        ucrPnlPolar.AddRadioButton(rdoDonut)
 
         ucrBarChartSelector.SetParameter(New RParameter("data", 0, bNewIncludeArgumentName:=False))
         ucrBarChartSelector.SetParameterIsrfunction()
@@ -142,7 +139,8 @@ Public Class dlgBarAndPieChart
 
         ucrChkBacktoback.SetText("Back to back")
 
-        ucrChkPolarCoordinates.SetText("Polar coordinates") 'Not yet implemented
+        ucrChkPolarCoordinates.SetText("Polar")
+        ucrChkPolarCoordinates.AddToLinkedControls({ucrPnlPolar}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrInputBarChartPositions.SetParameter(New RParameter("position", 0))
         dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
@@ -185,6 +183,7 @@ Public Class dlgBarAndPieChart
         bResetBarLayerSubdialog = True
         ucrChkPolarCoordinates.Checked = False
         ucrChkBacktoback.Checked = False
+        rdoPie.Checked = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -316,7 +315,6 @@ Public Class dlgBarAndPieChart
         SetDefaults()
         SetRCodeForControls(True)
         TestOkEnabled()
-
     End Sub
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
@@ -429,12 +427,10 @@ Public Class dlgBarAndPieChart
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged
         SetDialogOptions()
         ChangeParameterName()
-
     End Sub
 
     Private Sub ucrReceiverByFactor_ControlContentsChanged() Handles ucrReceiverByFactor.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         ucrChkBacktoback.Enabled = If(Not ucrReceiverByFactor.IsEmpty, True, False)
-
     End Sub
 
     Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrPnlOptions.ControlValueChanged
@@ -493,11 +489,7 @@ Public Class dlgBarAndPieChart
             ucrChkBacktoback.Checked = Not ucrChkPolarCoordinates.Checked
             clsRggplotFunction.RemoveParameterByName("mapping")
             clsRggplotFunction.AddParameter("aes", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1, bIncludeArgumentName:=False)
-            If rdoX.Checked Then
-                clsPolarCoordFunction.AddParameter("1", Chr(34) & "x" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-            ElseIf rdoY.Checked Then
-                clsPolarCoordFunction.AddParameter("1", Chr(34) & "y" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-            ElseIf rdoDonut.Checked Then
+            If rdoDonut.Checked Then
                 clsPolarCoordFunction.AddParameter("1", Chr(34) & "y" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
                 clsPieAesFunction.AddParameter("x", 2, iPosition:=1)
                 clsBaseOperator.AddParameter("xlim", clsRFunctionParameter:=clsXLimFunction, iPosition:=4, bIncludeArgumentName:=False)
@@ -513,7 +505,6 @@ Public Class dlgBarAndPieChart
 
     Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkBacktoback.ControlContentsChanged, ucrChkPolarCoordinates.ControlContentsChanged
         TestOkEnabled()
-
     End Sub
 
 End Class

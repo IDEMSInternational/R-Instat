@@ -48,7 +48,10 @@ Partial Class dlgBarAndPieChart
         Me.cmdColumnChartOptions = New System.Windows.Forms.Button()
         Me.rdoFrequency = New System.Windows.Forms.RadioButton()
         Me.lblXvariable = New System.Windows.Forms.Label()
+        Me.rdoPie = New System.Windows.Forms.RadioButton()
+        Me.rdoDonut = New System.Windows.Forms.RadioButton()
         Me.ucrChkPolarCoordinates = New instat.ucrCheck()
+        Me.ucrPnlPolar = New instat.UcrPanel()
         Me.ucrChkBacktoback = New instat.ucrCheck()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrVariablesAsFactorForBarChart = New instat.ucrVariablesAsFactor()
@@ -59,13 +62,6 @@ Partial Class dlgBarAndPieChart
         Me.ucrBarChartSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.grpPolar = New System.Windows.Forms.GroupBox()
-        Me.rdoPie = New System.Windows.Forms.RadioButton()
-        Me.rdoDonut = New System.Windows.Forms.RadioButton()
-        Me.rdoY = New System.Windows.Forms.RadioButton()
-        Me.rdoX = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlPolar = New instat.UcrPanel()
-        Me.grpPolar.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblByFactor
@@ -136,11 +132,30 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.lblXvariable, "lblXvariable")
         Me.lblXvariable.Name = "lblXvariable"
         '
+        'rdoPie
+        '
+        resources.ApplyResources(Me.rdoPie, "rdoPie")
+        Me.rdoPie.Name = "rdoPie"
+        Me.rdoPie.TabStop = True
+        Me.rdoPie.UseVisualStyleBackColor = True
+        '
+        'rdoDonut
+        '
+        resources.ApplyResources(Me.rdoDonut, "rdoDonut")
+        Me.rdoDonut.Name = "rdoDonut"
+        Me.rdoDonut.TabStop = True
+        Me.rdoDonut.UseVisualStyleBackColor = True
+        '
         'ucrChkPolarCoordinates
         '
         Me.ucrChkPolarCoordinates.Checked = False
         resources.ApplyResources(Me.ucrChkPolarCoordinates, "ucrChkPolarCoordinates")
         Me.ucrChkPolarCoordinates.Name = "ucrChkPolarCoordinates"
+        '
+        'ucrPnlPolar
+        '
+        resources.ApplyResources(Me.ucrPnlPolar, "ucrPnlPolar")
+        Me.ucrPnlPolar.Name = "ucrPnlPolar"
         '
         'ucrChkBacktoback
         '
@@ -213,56 +228,14 @@ Partial Class dlgBarAndPieChart
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
-        'grpPolar
-        '
-        Me.grpPolar.Controls.Add(Me.rdoPie)
-        Me.grpPolar.Controls.Add(Me.rdoDonut)
-        Me.grpPolar.Controls.Add(Me.rdoY)
-        Me.grpPolar.Controls.Add(Me.rdoX)
-        Me.grpPolar.Controls.Add(Me.ucrPnlPolar)
-        resources.ApplyResources(Me.grpPolar, "grpPolar")
-        Me.grpPolar.Name = "grpPolar"
-        Me.grpPolar.TabStop = False
-        '
-        'rdoPie
-        '
-        resources.ApplyResources(Me.rdoPie, "rdoPie")
-        Me.rdoPie.Name = "rdoPie"
-        Me.rdoPie.TabStop = True
-        Me.rdoPie.UseVisualStyleBackColor = True
-        '
-        'rdoDonut
-        '
-        resources.ApplyResources(Me.rdoDonut, "rdoDonut")
-        Me.rdoDonut.Name = "rdoDonut"
-        Me.rdoDonut.TabStop = True
-        Me.rdoDonut.UseVisualStyleBackColor = True
-        '
-        'rdoY
-        '
-        resources.ApplyResources(Me.rdoY, "rdoY")
-        Me.rdoY.Name = "rdoY"
-        Me.rdoY.TabStop = True
-        Me.rdoY.UseVisualStyleBackColor = True
-        '
-        'rdoX
-        '
-        resources.ApplyResources(Me.rdoX, "rdoX")
-        Me.rdoX.Name = "rdoX"
-        Me.rdoX.TabStop = True
-        Me.rdoX.UseVisualStyleBackColor = True
-        '
-        'ucrPnlPolar
-        '
-        resources.ApplyResources(Me.ucrPnlPolar, "ucrPnlPolar")
-        Me.ucrPnlPolar.Name = "ucrPnlPolar"
-        '
         'dlgBarAndPieChart
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpPolar)
+        Me.Controls.Add(Me.rdoDonut)
+        Me.Controls.Add(Me.rdoPie)
         Me.Controls.Add(Me.ucrChkPolarCoordinates)
+        Me.Controls.Add(Me.ucrPnlPolar)
         Me.Controls.Add(Me.ucrChkBacktoback)
         Me.Controls.Add(Me.lblXvariable)
         Me.Controls.Add(Me.ucrReceiverX)
@@ -287,8 +260,6 @@ Partial Class dlgBarAndPieChart
         Me.MinimizeBox = False
         Me.Name = "dlgBarAndPieChart"
         Me.Tag = "Bar_and_Pie_Chart"
-        Me.grpPolar.ResumeLayout(False)
-        Me.grpPolar.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -314,10 +285,7 @@ Partial Class dlgBarAndPieChart
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents ucrChkBacktoback As ucrCheck
     Friend WithEvents ucrChkPolarCoordinates As ucrCheck
-    Friend WithEvents grpPolar As GroupBox
     Friend WithEvents ucrPnlPolar As UcrPanel
-    Friend WithEvents rdoPie As RadioButton
     Friend WithEvents rdoDonut As RadioButton
-    Friend WithEvents rdoY As RadioButton
-    Friend WithEvents rdoX As RadioButton
+    Friend WithEvents rdoPie As RadioButton
 End Class
