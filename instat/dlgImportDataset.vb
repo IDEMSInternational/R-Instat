@@ -75,11 +75,8 @@ Public Class dlgImportDataset
             End If
         End If
 
-        'temprary fix for autotranslate(me) translating this to Label1. Can be removed after that
-        'ucrSaveFile.SetLabelText("New Data Frame Name:")
         bReset = False
         TestOkEnabled()
-        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -87,7 +84,6 @@ Public Class dlgImportDataset
         Dim dctucrInputEncodingCSV As New Dictionary(Of String, String)
         Dim dctucrInputDecimalCSV As New Dictionary(Of String, String)
         Dim dctucrInputHeadersCSV As New Dictionary(Of String, String)
-
 
         ucrBase.iHelpTopicID = 11
 
@@ -114,52 +110,38 @@ Public Class dlgImportDataset
         ucrNudPreviewLines.Value = 10
 
         '##############################################################
-
         'RDS Controls
 
         ucrChkImportChangesLogRDS.SetText("Import changes log")
         ucrChkImportChangesLogRDS.SetParameter(New RParameter("include_logs"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkImportChangesLogRDS.SetRDefault("TRUE")
-        'ucrChkImportChangesLog.AddParameterPresentCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
-        'ucrChkImportChangesLog.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$import_RDS", False)
 
         ucrChkKeepExistingDataRDS.SetText("Keep existing data frames")
         ucrChkKeepExistingDataRDS.SetParameter(New RParameter("keep_existing"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkKeepExistingDataRDS.SetRDefault("TRUE")
-        'ucrChkExistingData.AddParameterPresentCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
-        'ucrChkExistingData.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$import_RDS", False)
 
         ucrChkImportMetadataRDS.SetText("Import metadata")
         ucrChkImportMetadataRDS.SetParameter(New RParameter("include_metadata"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkImportMetadataRDS.SetRDefault("TRUE")
-        'ucrChkImportMetadata.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
-        'ucrChkImportMetadata.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$import_RDS", False)
 
         ucrChkImportObjectsRDS.SetText("Import objects")
         ucrChkImportObjectsRDS.SetParameter(New RParameter("include_objects"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkImportObjectsRDS.SetRDefault("TRUE")
 
-        'ucrChkImportObjects.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
-        'ucrChkImportObjects.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$import_RDS", False)
 
         ucrChkImportFiltersRDS.SetText("Import filters")
         ucrChkImportFiltersRDS.SetParameter(New RParameter("include_filters"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkImportFiltersRDS.SetRDefault("TRUE")
-        'ucrChkImportFilters.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
 
         ucrChkImportCalculationsRDS.SetText("Import calculations")
         ucrChkImportCalculationsRDS.SetParameter(New RParameter("include_calculations"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkImportCalculationsRDS.SetRDefault("TRUE")
-        'ucrChkImportCalculations.AddFunctionNamesCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")
-        'ucrChkImportCalculations.AddFunctionNamesCondition(False, frmMain.clsRLink.strInstatDataObject & "$import_RDS", False)
 
         ucrChkOverwriteRDS.SetText("Overwrite existing if duplicates found")
         ucrChkOverwriteRDS.SetParameter(New RParameter("overwrite_existing"), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkOverwriteRDS.SetRDefault("FALSE")
-        'ucrChkOverWrite.AddParameterPresentCondition(True, frmMain.clsRLink.strInstatDataObject & "$import_RDS")      
 
         '##############################################################
-
         'CSV Controls
 
         ucrChkStringsAsFactorsCSV.SetText("Convert Strings to Factor Columns")
@@ -377,38 +359,22 @@ Public Class dlgImportDataset
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsImport)
 
-        strFilePathSystem = ""
-        strCurrentDirectory = ""
-        strFilePathR = ""
-        strFileExtension = ""
 
         dctSelectedExcelSheets.Clear()
         clbSheets.Items.Clear() 'reset this here. Not set by R code
         ucrInputMissingValueStringExcel.SetName("") 'reset this here. Not set by R code 
         ucrInputMissingValueStringCSV.SetName("") 'reset this here. Not set by R code 
         ucrInputMissingValueStringText.SetName("") 'reset this here. Not set by R code 
-
         ucrNudPreviewLines.Value = 10
-
-        ucrPanelFixedWidthText.Hide()
-        grpText.Hide()
-        grpCSV.Hide()
-        grpRDS.Hide()
-        ExcelSheetsPreviewVisible(False)
-        TextPreviewVisible(False)
-        lblNoPreview.Hide()
-        lblCannotImport.Hide()
-        GridPreviewVisible(False)
-        ucrSaveFile.Hide()
-        ucrChkMultipleFiles.Checked = False
         'todo. temporarily done this until when we can add OR conditions for the panel
+        ucrChkMultipleFiles.Checked = False
         rdoSeparatortext.Checked = True
+        SetDialogStateFromFile("")
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
-        SetDialogStateFromFile("")
         TestOkEnabled()
     End Sub
 
@@ -1113,10 +1079,12 @@ Public Class dlgImportDataset
     End Function
 
     Private Function IsCSVFileFormat() As Boolean
+        'dly are well read as csv files when using rio package
         Return {".csv", ".dly"}.Contains(strFileExtension)
     End Function
 
     Private Function IsTextFileFormat() As Boolean
+        '.dat are well read as text files by readr pakage
         Return {".txt", ".dat"}.Contains(strFileExtension)
     End Function
 
