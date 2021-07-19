@@ -606,7 +606,9 @@ Public Class dlgImportDataset
                 'add or change format parameter values. forces rio to treat .dat files as text files 
                 'needed as rio currently doesn't support .DAT files. Only works if .DAT file is text based,
                 'this seems to be common usage, check https://github.com/leeper/rio/issues/155
-                clsImportCSVFileFormats.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
+                If strFileExtension = ".dat" Then
+                    clsImportCSVFileFormats.AddParameter("format", Chr(34) & "txt" & Chr(34), iPosition:=1)
+                End If
                 ucrPanelFixedWidthText.Show()
                 grpCSV.Text = "Import Text Options"
                 grpCSV.Location = New Point(9, 99) 'set the location of the groupbox to adjust gaps in the form UI
@@ -619,7 +621,9 @@ Public Class dlgImportDataset
                 End If
             ElseIf IsCSVFileFormat() Then
                 'add or change format parameter values. forces rio to treat .dly files as csv files
-                clsImportCSVFileFormats.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
+                If strFileExtension = ".dly" Then
+                    clsImportCSVFileFormats.AddParameter("format", Chr(34) & "csv" & Chr(34), iPosition:=1)
+                End If
                 ucrBase.clsRsyntax.SetBaseRFunction(clsImportCSVFileFormats)
                 grpCSV.Text = "Import CSV Options"
                 grpCSV.Location = New System.Drawing.Point(9, 50) 'set the location of the groupbox to adjust gaps in the form UI
@@ -757,19 +761,22 @@ Public Class dlgImportDataset
         clsAsCharacterFunc.SetRCommand("convert_to_character_matrix")
         clsAsCharacterFunc.AddParameter("data", clsRFunctionParameter:=clsTempImport)
         expTemp = frmMain.clsRLink.RunInternalScriptGetValue(clsAsCharacterFunc.ToScript(), bSilent:=True)
-        dfTemp = expTemp?.AsDataFrame
         Try
-            grdDataPreview.Worksheets.Clear()
-            frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
-            grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
-            grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
-            GridPreviewVisible(True)
-            LinesToPreviewVisible(True)
-            cmdRefreshPreview.Enabled = True
-            bCanImport = True
+            dfTemp = expTemp?.AsDataFrame
+            If dfTemp IsNot Nothing Then
+                grdDataPreview.Worksheets.Clear()
+                frmMain.clsGrids.FillSheet(dfTemp, "temp", grdDataPreview, bIncludeDataTypes:=False, iColMax:=frmMain.clsGrids.iMaxCols)
+                grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_DragSelectionToMoveCells, False)
+                grdDataPreview.CurrentWorksheet.SetSettings(unvell.ReoGrid.WorksheetSettings.Edit_Readonly, True)
+                GridPreviewVisible(True)
+                LinesToPreviewVisible(True)
+                cmdRefreshPreview.Enabled = True
+                bCanImport = True
+            Else
+                'if no data frame is returned
+                lblCannotImport.Show()
+            End If
         Catch ex As Exception
-            'if no data frame is returned
-            lblCannotImport.Show()
         End Try
 
     End Sub
@@ -1080,7 +1087,7 @@ Public Class dlgImportDataset
 
     Private Function IsCSVFileFormat() As Boolean
         'dly are well read as csv files when using rio package
-        Return {".csv", ".dly"}.Contains(strFileExtension)
+        Return {".csv", ".dly", ".tsv"}.Contains(strFileExtension)
     End Function
 
     Private Function IsTextFileFormat() As Boolean
