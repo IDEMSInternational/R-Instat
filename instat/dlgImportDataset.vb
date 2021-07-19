@@ -671,14 +671,14 @@ Public Class dlgImportDataset
                 ucrSaveFile.Show()
                 Select Case clbSheets.CheckedItems.Count
                     Case 1
-                        ucrSaveFile.SetName(GetCleanFileName(dctSelectedExcelSheets.Values.First(), True), bSilent:=True)
+                        ucrSaveFile.SetName(GetCleanFileName(dctSelectedExcelSheets.Values.First()), bSilent:=True)
                     Case Else
-                        ucrSaveFile.SetName(GetCleanFileName(strFileName, True), bSilent:=True)
+                        ucrSaveFile.SetName(GetCleanFileName(strFileName), bSilent:=True)
                 End Select
             ElseIf Not {".rds", ""}.Contains(strFileExtension) Then
                 ucrSaveFile.SetAssignToBooleans(bTempDataFrameList:=False)
                 ucrSaveFile.Show()
-                ucrSaveFile.SetName(GetCleanFileName(strFileName, True), bSilent:=True)
+                ucrSaveFile.SetName(GetCleanFileName(strFileName), bSilent:=True)
             End If
 
         End If
@@ -959,13 +959,13 @@ Public Class dlgImportDataset
         ElseIf dctSelectedExcelSheets.Count = 1 Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcel)
             clsImportExcel.AddParameter("which", dctSelectedExcelSheets.Keys.First())
-            ucrSaveFile.SetName(GetCleanFileName(dctSelectedExcelSheets.Values.First(), True), bSilent:=True)
+            ucrSaveFile.SetName(GetCleanFileName(dctSelectedExcelSheets.Values.First()), bSilent:=True)
             ucrSaveFile.Show()
             ucrSaveFile.SetDataFrameNames("")
         Else
             ucrBase.clsRsyntax.SetBaseRFunction(clsImportExcelMulti)
             clsImportExcelMulti.AddParameter("which", "c(" & String.Join(",", dctSelectedExcelSheets.Keys) & ")")
-            ucrSaveFile.SetName(GetCleanFileName(strFileName, True), bSilent:=True)
+            ucrSaveFile.SetName(GetCleanFileName(strFileName), bSilent:=True)
             ucrSaveFile.Hide()
             ucrSaveFile.SetDataFrameNames(lstTempDataFrameNames:=dctSelectedExcelSheets.Values.ToList())
         End If
@@ -1061,16 +1061,12 @@ Public Class dlgImportDataset
     '''             If the cleaned name is an empty string then returns 'defaultCleanFileName'.
     ''' </returns>
     '''--------------------------------------------------------------------------------------------
-    Private Function GetCleanFileName(strFilePathTmp As String, Optional bValidRName As Boolean = False) As String
+    Private Function GetCleanFileName(strFilePathTmp As String) As String
         Dim strCleanFileName As String = System.Text.RegularExpressions.Regex.Replace(Path.GetFileNameWithoutExtension(strFilePathTmp), "[^A-Za-z0-9_\-]", "")
         If String.IsNullOrEmpty(strCleanFileName) Then
             strCleanFileName = "defaultCleanFileName"
-        Else
-            If bValidRName Then
-                strCleanFileName = frmMain.clsRLink.MakeValidText(strCleanFileName)
-            End If
         End If
-        Return strCleanFileName
+        Return frmMain.clsRLink.MakeValidText(strCleanFileName)
     End Function
 
     ''' <summary>
@@ -1127,9 +1123,6 @@ Public Class dlgImportDataset
     Private Function IsExcelFileFormat() As Boolean
         Return {".xlsx", ".xls"}.Contains(strFileExtension)
     End Function
-
-
-
 
 
 End Class
