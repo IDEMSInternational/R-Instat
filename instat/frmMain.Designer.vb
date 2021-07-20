@@ -363,6 +363,7 @@ Partial Class frmMain
         Me.mnuEditCopy = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditCopySpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuPasteSpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditPasteNewDataFrame = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuEditSelectAll = New System.Windows.Forms.ToolStripMenuItem()
         Me.FolderBrowserDialog1 = New System.Windows.Forms.FolderBrowserDialog()
@@ -373,8 +374,12 @@ Partial Class frmMain
         Me.mnuTbOpenFromLibrary = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbSave = New System.Windows.Forms.ToolStripButton()
         Me.toolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuTbCopy = New System.Windows.Forms.ToolStripButton()
-        Me.mnuTbPaste = New System.Windows.Forms.ToolStripButton()
+        Me.mnuTbCopy = New System.Windows.Forms.ToolStripSplitButton()
+        Me.mnuSubTbCopy = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSubTbCopySpecial = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuTbPaste = New System.Windows.Forms.ToolStripSplitButton()
+        Me.mnuSubTbPaste = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuSubTbPasteSpecial = New System.Windows.Forms.ToolStripMenuItem()
         Me.separator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.mnuTbEditLastDialog = New System.Windows.Forms.ToolStripButton()
         Me.mnuTbLast10Dialogs = New System.Windows.Forms.ToolStripDropDownButton()
@@ -645,20 +650,20 @@ Partial Class frmMain
         Me.splOverall = New System.Windows.Forms.SplitContainer()
         Me.splExtraWindows = New System.Windows.Forms.SplitContainer()
         Me.splMetadata = New System.Windows.Forms.SplitContainer()
+        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
+        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
         Me.splLogScript = New System.Windows.Forms.SplitContainer()
+        Me.ucrLogWindow = New instat.ucrLog()
+        Me.ucrScriptWindow = New instat.ucrScript()
         Me.splDataOutput = New System.Windows.Forms.SplitContainer()
+        Me.ucrDataViewer = New instat.ucrDataView()
+        Me.ucrOutput = New instat.ucrOutputWindow()
         Me.mnuRViewer = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuPlotly = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuColumnMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ucrColumnMeta = New instat.ucrColumnMetadata()
-        Me.ucrDataFrameMeta = New instat.ucrDataFrameMetadata()
-        Me.ucrLogWindow = New instat.ucrLog()
-        Me.ucrScriptWindow = New instat.ucrScript()
-        Me.ucrDataViewer = New instat.ucrDataView()
-        Me.ucrOutput = New instat.ucrOutputWindow()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -2418,7 +2423,7 @@ Partial Class frmMain
         '
         'mnuEdit
         '
-        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditFindNext, Me.mnuEditReplace, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuEditPasteNewDataFrame, Me.mnuEditSelectAll})
+        Me.mnuEdit.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuEditFind, Me.mnuEditFindNext, Me.mnuEditReplace, Me.mnuEditCut, Me.mnuEditCopy, Me.mnuEditCopySpecial, Me.mnuEditPaste, Me.mnuPasteSpecial, Me.mnuEditPasteNewDataFrame, Me.mnuEditSelectAll})
         Me.mnuEdit.Name = "mnuEdit"
         resources.ApplyResources(Me.mnuEdit, "mnuEdit")
         Me.mnuEdit.Tag = "Edit"
@@ -2454,15 +2459,21 @@ Partial Class frmMain
         '
         'mnuEditCopySpecial
         '
-        resources.ApplyResources(Me.mnuEditCopySpecial, "mnuEditCopySpecial")
         Me.mnuEditCopySpecial.Name = "mnuEditCopySpecial"
+        resources.ApplyResources(Me.mnuEditCopySpecial, "mnuEditCopySpecial")
         Me.mnuEditCopySpecial.Tag = "Copy_Special"
         '
         'mnuEditPaste
         '
-        resources.ApplyResources(Me.mnuEditPaste, "mnuEditPaste")
         Me.mnuEditPaste.Name = "mnuEditPaste"
+        resources.ApplyResources(Me.mnuEditPaste, "mnuEditPaste")
         Me.mnuEditPaste.Tag = "Paste"
+        '
+        'mnuPasteSpecial
+        '
+        Me.mnuPasteSpecial.Name = "mnuPasteSpecial"
+        resources.ApplyResources(Me.mnuPasteSpecial, "mnuPasteSpecial")
+        Me.mnuPasteSpecial.Tag = "Paste"
         '
         'mnuEditPasteNewDataFrame
         '
@@ -2531,18 +2542,38 @@ Partial Class frmMain
         'mnuTbCopy
         '
         Me.mnuTbCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mnuTbCopy.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuSubTbCopy, Me.mnuSubTbCopySpecial})
         Me.mnuTbCopy.Image = Global.instat.My.Resources.Resources.copy2
         resources.ApplyResources(Me.mnuTbCopy, "mnuTbCopy")
-        Me.mnuTbCopy.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
         Me.mnuTbCopy.Name = "mnuTbCopy"
+        '
+        'mnuSubTbCopy
+        '
+        Me.mnuSubTbCopy.Name = "mnuSubTbCopy"
+        resources.ApplyResources(Me.mnuSubTbCopy, "mnuSubTbCopy")
+        '
+        'mnuSubTbCopySpecial
+        '
+        Me.mnuSubTbCopySpecial.Name = "mnuSubTbCopySpecial"
+        resources.ApplyResources(Me.mnuSubTbCopySpecial, "mnuSubTbCopySpecial")
         '
         'mnuTbPaste
         '
         Me.mnuTbPaste.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        resources.ApplyResources(Me.mnuTbPaste, "mnuTbPaste")
+        Me.mnuTbPaste.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuSubTbPaste, Me.mnuSubTbPasteSpecial})
         Me.mnuTbPaste.Image = Global.instat.My.Resources.Resources.paste2
-        Me.mnuTbPaste.Margin = New System.Windows.Forms.Padding(2, 1, 2, 2)
+        resources.ApplyResources(Me.mnuTbPaste, "mnuTbPaste")
         Me.mnuTbPaste.Name = "mnuTbPaste"
+        '
+        'mnuSubTbPaste
+        '
+        Me.mnuSubTbPaste.Name = "mnuSubTbPaste"
+        resources.ApplyResources(Me.mnuSubTbPaste, "mnuSubTbPaste")
+        '
+        'mnuSubTbPasteSpecial
+        '
+        Me.mnuSubTbPasteSpecial.Name = "mnuSubTbPasteSpecial"
+        resources.ApplyResources(Me.mnuSubTbPasteSpecial, "mnuSubTbPasteSpecial")
         '
         'separator1
         '
@@ -4075,6 +4106,18 @@ Partial Class frmMain
         Me.splMetadata.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splMetadata.Panel2.Controls.Add(Me.ucrDataFrameMeta)
         '
+        'ucrColumnMeta
+        '
+        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
+        Me.ucrColumnMeta.Name = "ucrColumnMeta"
+        '
+        'ucrDataFrameMeta
+        '
+        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
+        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
+        '
         'splLogScript
         '
         Me.splLogScript.BackColor = System.Drawing.Color.LightGray
@@ -4091,6 +4134,19 @@ Partial Class frmMain
         Me.splLogScript.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splLogScript.Panel2.Controls.Add(Me.ucrScriptWindow)
         '
+        'ucrLogWindow
+        '
+        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
+        Me.ucrLogWindow.Name = "ucrLogWindow"
+        '
+        'ucrScriptWindow
+        '
+        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
+        Me.ucrScriptWindow.Name = "ucrScriptWindow"
+        Me.ucrScriptWindow.Tag = "Script_Window"
+        '
         'splDataOutput
         '
         Me.splDataOutput.BackColor = System.Drawing.Color.LightGray
@@ -4106,6 +4162,20 @@ Partial Class frmMain
         '
         Me.splDataOutput.Panel2.BackColor = System.Drawing.SystemColors.Control
         Me.splDataOutput.Panel2.Controls.Add(Me.ucrOutput)
+        '
+        'ucrDataViewer
+        '
+        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
+        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrDataViewer, "ucrDataViewer")
+        Me.ucrDataViewer.Name = "ucrDataViewer"
+        Me.ucrDataViewer.Tag = "Data_View"
+        '
+        'ucrOutput
+        '
+        Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        resources.ApplyResources(Me.ucrOutput, "ucrOutput")
+        Me.ucrOutput.Name = "ucrOutput"
         '
         'mnuRViewer
         '
@@ -4136,45 +4206,6 @@ Partial Class frmMain
         '
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
-        '
-        'ucrColumnMeta
-        '
-        Me.ucrColumnMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrColumnMeta, "ucrColumnMeta")
-        Me.ucrColumnMeta.Name = "ucrColumnMeta"
-        '
-        'ucrDataFrameMeta
-        '
-        Me.ucrDataFrameMeta.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataFrameMeta, "ucrDataFrameMeta")
-        Me.ucrDataFrameMeta.Name = "ucrDataFrameMeta"
-        '
-        'ucrLogWindow
-        '
-        Me.ucrLogWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrLogWindow, "ucrLogWindow")
-        Me.ucrLogWindow.Name = "ucrLogWindow"
-        '
-        'ucrScriptWindow
-        '
-        Me.ucrScriptWindow.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrScriptWindow, "ucrScriptWindow")
-        Me.ucrScriptWindow.Name = "ucrScriptWindow"
-        Me.ucrScriptWindow.Tag = "Script_Window"
-        '
-        'ucrDataViewer
-        '
-        Me.ucrDataViewer.BackColor = System.Drawing.SystemColors.Control
-        Me.ucrDataViewer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrDataViewer, "ucrDataViewer")
-        Me.ucrDataViewer.Name = "ucrDataViewer"
-        Me.ucrDataViewer.Tag = "Data_View"
-        '
-        'ucrOutput
-        '
-        Me.ucrOutput.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        resources.ApplyResources(Me.ucrOutput, "ucrOutput")
-        Me.ucrOutput.Name = "ucrOutput"
         '
         'frmMain
         '
@@ -4261,8 +4292,6 @@ Partial Class frmMain
     Private WithEvents Tool_strip As ToolStrip
     Friend WithEvents mnuTbSave As ToolStripButton
     Friend WithEvents toolStripSeparator As ToolStripSeparator
-    Friend WithEvents mnuTbCopy As ToolStripButton
-    Friend WithEvents mnuTbPaste As ToolStripButton
     Friend WithEvents separator1 As ToolStripSeparator
     Friend WithEvents mnuTbEditLastDialog As ToolStripButton
     Friend WithEvents separator2 As ToolStripSeparator
@@ -4738,11 +4767,8 @@ Partial Class frmMain
     Friend WithEvents mnuScriptWindow As ToolStripMenuItem
     Friend WithEvents mnuLogWindow As ToolStripMenuItem
     Friend WithEvents mnuMetadata As ToolStripSplitButton
-    Friend WithEvents mnuLastGraph As ToolStripSplitButton
     Friend WithEvents mnuColumnMetadat As ToolStripMenuItem
     Friend WithEvents mnuDataFrameMetadat As ToolStripMenuItem
-    Friend WithEvents mnuViewer As ToolStripMenuItem
-    Friend WithEvents mnuploty As ToolStripMenuItem
     Friend WithEvents mnuRViewer As ToolStripMenuItem
     Friend WithEvents mnuPlotly As ToolStripMenuItem
     Friend WithEvents mnuColumnMetadata As ToolStripMenuItem
@@ -4842,4 +4868,14 @@ Partial Class frmMain
     Friend WithEvents mnuSetupForDataEntry As ToolStripMenuItem
     Friend WithEvents mnuEditPasteNewDataFrame As ToolStripMenuItem
     Friend WithEvents mnuTbLan As ToolStripButton
+    Friend WithEvents mnuPasteSpecial As ToolStripMenuItem
+    Friend WithEvents mnuTbCopy As ToolStripSplitButton
+    Friend WithEvents mnuSubTbCopy As ToolStripMenuItem
+    Friend WithEvents mnuSubTbCopySpecial As ToolStripMenuItem
+    Friend WithEvents mnuTbPaste As ToolStripSplitButton
+    Friend WithEvents mnuSubTbPaste As ToolStripMenuItem
+    Friend WithEvents mnuSubTbPasteSpecial As ToolStripMenuItem
+    Friend WithEvents mnuLastGraph As ToolStripSplitButton
+    Friend WithEvents mnuViewer As ToolStripMenuItem
+    Friend WithEvents mnuploty As ToolStripMenuItem
 End Class
