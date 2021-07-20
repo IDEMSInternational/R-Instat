@@ -130,13 +130,13 @@
     <value>252, 255</value>
   </data>
   <data name="lblByFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 13</value>
+    <value>76, 13</value>
   </data>
   <data name="lblByFactor.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="lblByFactor.Text" xml:space="preserve">
-    <value>By Factor (Optional):</value>
+    <value>By Factor (Fill):</value>
   </data>
   <data name="&gt;&gt;lblByFactor.Name" xml:space="preserve">
     <value>lblByFactor</value>
@@ -397,7 +397,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoPie.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 352</value>
+    <value>184, 352</value>
   </data>
   <data name="rdoPie.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 17</value>
@@ -427,7 +427,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoDonut.Location" type="System.Drawing.Point, System.Drawing">
-    <value>207, 352</value>
+    <value>115, 352</value>
   </data>
   <data name="rdoDonut.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 17</value>
@@ -698,9 +698,6 @@
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>22</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

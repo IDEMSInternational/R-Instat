@@ -43,6 +43,8 @@ Public Class dlgBarAndPieChart
     Private clsYlabFunction As New RFunction
     Private clsXScalecontinuousFunction As New RFunction
     Private clsYScalecontinuousFunction As New RFunction
+    Private clsScaleXdiscretFunction As New RFunction
+    Private clsExpansionFunction As New RFunction
     Private clsRFacetFunction As New RFunction
     Private clsThemeFuction As New RFunction
     Private dctThemeFunctions As New Dictionary(Of String, RFunction)
@@ -174,6 +176,8 @@ Public Class dlgBarAndPieChart
         clsScaleYSymmetricFunction = New RFunction
         clsPolarCoordFunction = New RFunction
         clsXLimFunction = New RFunction
+        clsScaleXdiscretFunction = New RFunction
+        clsExpansionFunction = New RFunction
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
@@ -188,6 +192,12 @@ Public Class dlgBarAndPieChart
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
+
+        clsScaleXdiscretFunction.SetRCommand("scale_x_discrete")
+        clsScaleXdiscretFunction.AddParameter("expand", clsRFunctionParameter:=clsExpansionFunction, iPosition:=0)
+
+        clsExpansionFunction.SetRCommand("expansion")
+        clsExpansionFunction.AddParameter("add", "c(" & 2 & "," & 0 & ")", iPosition:=0)
 
         clsPolarCoordFunction.SetPackageName("ggplot2")
         clsPolarCoordFunction.SetRCommand("coord_polar")
@@ -480,6 +490,7 @@ Public Class dlgBarAndPieChart
         ChangeParameterName()
         If Not rdoDonut.Checked OrElse Not ucrChkPolarCoordinates.Checked Then
             clsBaseOperator.RemoveParameterByName("xlim")
+            clsBaseOperator.RemoveParameterByName("scale")
         End If
         If Not rdoDonut.Checked OrElse Not rdoPie.Checked Then
             ChangeParameterName()
@@ -493,6 +504,7 @@ Public Class dlgBarAndPieChart
                 clsPolarCoordFunction.AddParameter("1", Chr(34) & "y" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
                 clsPieAesFunction.AddParameter("x", 2, iPosition:=1)
                 clsBaseOperator.AddParameter("xlim", clsRFunctionParameter:=clsXLimFunction, iPosition:=4, bIncludeArgumentName:=False)
+                clsBaseOperator.AddParameter("scale", clsRFunctionParameter:=clsScaleXdiscretFunction, iPosition:=5, bIncludeArgumentName:=False)
             ElseIf rdoPie.Checked Then
                 clsPolarCoordFunction.AddParameter("1", Chr(34) & "y" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
                 clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=1)
