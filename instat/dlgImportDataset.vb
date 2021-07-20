@@ -382,9 +382,9 @@ Public Class dlgImportDataset
         If bImportFromFolder Then
             ucrBase.OKEnabled(GetDirectoryFiles(False).Count > 0)
         Else
-            If IsExcelFileFormat() AndAlso bCanImport Then
-                ucrBase.OKEnabled(dctSelectedExcelSheets.Count > 0)
-            ElseIf ucrSaveFile.IsComplete AndAlso bCanImport Then
+            If IsExcelFileFormat() Then
+                ucrBase.OKEnabled(dctSelectedExcelSheets.Count > 0 AndAlso bCanImport)
+            ElseIf (ucrSaveFile.IsComplete OrElse strFileExtension = ".rds") AndAlso bCanImport Then
                 ucrBase.OKEnabled(True)
             Else
                 ucrBase.OKEnabled(False)
