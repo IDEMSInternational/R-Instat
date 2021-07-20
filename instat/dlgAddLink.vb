@@ -49,10 +49,16 @@ Public Class dlgAddLink
         ucrDataSelectorTo.SetParameter(New RParameter("to_data_frame", 1))
         ucrDataSelectorTo.SetParameterIsString()
 
-        ucrInputLinkName.SetParameter(New RParameter("link_name", 4))
         lvwLinkViewBox.Columns.Add("Name", 80, HorizontalAlignment.Left)
         lvwLinkViewBox.Columns.Add("Columns", 150, HorizontalAlignment.Left)
         ucrInputSelectedKey.IsReadOnly = True
+
+        ucrSaveLink.SetParameter(New RParameter("link_name", 4))
+        ucrSaveLink.SetSaveTypeAsLink()
+        ucrSaveLink.SetDataFrameSelector(ucrDataSelectorFrom)
+        ucrSaveLink.SetLabelText("Link Name:")
+        ucrSaveLink.SetIsTextBox()
+        ucrSaveLink.SetPrefix("link")
     End Sub
 
     Private Sub SetDefaults()
@@ -60,7 +66,7 @@ Public Class dlgAddLink
 
         ucrDataSelectorFrom.Reset()
         ucrDataSelectorTo.Reset()
-        ucrInputLinkName.SetName("")
+        ucrSaveLink.Reset()
 
         UpdateKeys()
 
@@ -75,7 +81,8 @@ Public Class dlgAddLink
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrDataSelectorFrom.cboAvailableDataFrames.Text <> "" AndAlso ucrDataSelectorTo.cboAvailableDataFrames.Text <> "" AndAlso Not ucrInputLinkName.IsEmpty AndAlso Not ucrInputSelectedKey.IsEmpty AndAlso IsSelectionValidKey() Then
+        If ucrDataSelectorFrom.cboAvailableDataFrames.Text <> "" AndAlso ucrDataSelectorTo.cboAvailableDataFrames.Text <> "" AndAlso
+             ucrSaveLink.IsComplete AndAlso Not ucrInputSelectedKey.IsEmpty AndAlso IsSelectionValidKey() Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -166,7 +173,7 @@ Public Class dlgAddLink
         UpdateKeys()
     End Sub
 
-    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrDataSelectorTo.ControlContentsChanged, ucrInputLinkName.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
+    Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataSelectorFrom.ControlContentsChanged, ucrDataSelectorTo.ControlContentsChanged, ucrInputSelectedKey.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class

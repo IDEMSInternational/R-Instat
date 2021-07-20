@@ -583,5 +583,6 @@ Public Class clsGridLink
         shtCurrent.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
                                 .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName, .TextColor = clrText, .FontSize = fntText.Size, .FontName = fntText.Name
                                 })
+        shtCurrent.SetSettings(unvell.ReoGrid.WorksheetSettings.View_AllowCellTextOverflow, False)
     End Sub
 End Class
