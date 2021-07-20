@@ -335,6 +335,12 @@
     <Compile Include="dlgPasteNewDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPasteSpecial.Designer.vb">
+      <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPasteSpecial.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSeasonalPlot.Designer.vb">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </Compile>
@@ -2778,6 +2784,9 @@
     <EmbeddedResource Include="dlgConditionalQuantilePlot.resx">
       <DependentUpon>dlgConditionalQuantilePlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySpecial.resx">
+      <DependentUpon>dlgCopySpecial.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayTopN.resx">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
@@ -2805,6 +2814,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPasteNewDataFrame.resx">
       <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPasteSpecial.resx">
+      <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
