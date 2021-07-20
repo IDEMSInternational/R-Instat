@@ -52,8 +52,8 @@ Partial Class sdgLayerOptions
         '
         'tbcLayers
         '
-        Me.tbcLayers.Controls.Add(Me.tbpAesthetics)
         Me.tbcLayers.Controls.Add(Me.tbpGeomParameters)
+        Me.tbcLayers.Controls.Add(Me.tbpAesthetics)
         resources.ApplyResources(Me.tbcLayers, "tbcLayers")
         Me.tbcLayers.Name = "tbcLayers"
         Me.tbcLayers.SelectedIndex = 0
