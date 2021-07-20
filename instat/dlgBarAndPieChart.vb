@@ -434,10 +434,8 @@ Public Class dlgBarAndPieChart
                 clsBarAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
                 clsPieAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
             Else
-                clsBarAesFunction.AddParameter("y", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
-                clsPieAesFunction.AddParameter("y", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
-                clsBarAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
-                clsPieAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
+                clsBarAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
+                clsPieAesFunction.AddParameter("fill", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
             End If
 
         End If
