@@ -40,35 +40,23 @@ Partial Class sdgLayerOptions
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgLayerOptions))
         Me.tbcLayers = New System.Windows.Forms.TabControl()
-        Me.tbpAesthetics = New System.Windows.Forms.TabPage()
-        Me.ucrGeomWithAes = New instat.ucrGeomListWithParameters()
         Me.tbpGeomParameters = New System.Windows.Forms.TabPage()
         Me.ucrLayerParameter = New instat.ucrLayerParameters()
+        Me.tbpAesthetics = New System.Windows.Forms.TabPage()
+        Me.ucrGeomWithAes = New instat.ucrGeomListWithParameters()
         Me.ucrSdgLayerBase = New instat.ucrButtonsSubdialogue()
         Me.tbcLayers.SuspendLayout()
-        Me.tbpAesthetics.SuspendLayout()
         Me.tbpGeomParameters.SuspendLayout()
+        Me.tbpAesthetics.SuspendLayout()
         Me.SuspendLayout()
         '
         'tbcLayers
         '
-        Me.tbcLayers.Controls.Add(Me.tbpGeomParameters)
         Me.tbcLayers.Controls.Add(Me.tbpAesthetics)
+        Me.tbcLayers.Controls.Add(Me.tbpGeomParameters)
         resources.ApplyResources(Me.tbcLayers, "tbcLayers")
         Me.tbcLayers.Name = "tbcLayers"
         Me.tbcLayers.SelectedIndex = 0
-        '
-        'tbpAesthetics
-        '
-        Me.tbpAesthetics.Controls.Add(Me.ucrGeomWithAes)
-        resources.ApplyResources(Me.tbpAesthetics, "tbpAesthetics")
-        Me.tbpAesthetics.Name = "tbpAesthetics"
-        Me.tbpAesthetics.UseVisualStyleBackColor = True
-        '
-        'ucrGeomWithAes
-        '
-        resources.ApplyResources(Me.ucrGeomWithAes, "ucrGeomWithAes")
-        Me.ucrGeomWithAes.Name = "ucrGeomWithAes"
         '
         'tbpGeomParameters
         '
@@ -82,6 +70,18 @@ Partial Class sdgLayerOptions
         resources.ApplyResources(Me.ucrLayerParameter, "ucrLayerParameter")
         Me.ucrLayerParameter.Name = "ucrLayerParameter"
         Me.ucrLayerParameter.ucrGeomWithAes = Nothing
+        '
+        'tbpAesthetics
+        '
+        Me.tbpAesthetics.Controls.Add(Me.ucrGeomWithAes)
+        resources.ApplyResources(Me.tbpAesthetics, "tbpAesthetics")
+        Me.tbpAesthetics.Name = "tbpAesthetics"
+        Me.tbpAesthetics.UseVisualStyleBackColor = True
+        '
+        'ucrGeomWithAes
+        '
+        resources.ApplyResources(Me.ucrGeomWithAes, "ucrGeomWithAes")
+        Me.ucrGeomWithAes.Name = "ucrGeomWithAes"
         '
         'ucrSdgLayerBase
         '
@@ -99,8 +99,8 @@ Partial Class sdgLayerOptions
         Me.MinimizeBox = False
         Me.Name = "sdgLayerOptions"
         Me.tbcLayers.ResumeLayout(False)
-        Me.tbpAesthetics.ResumeLayout(False)
         Me.tbpGeomParameters.ResumeLayout(False)
+        Me.tbpAesthetics.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
