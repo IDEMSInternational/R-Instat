@@ -26,7 +26,6 @@ Public Class dlgBarAndPieChart
     Private clsSubsetFunction1 As New RFunction
     Private clsSubsetFunction2 As New RFunction
     Private clsPolarCoordFunction As New RFunction
-    Private clsXLimFunction As New RFunction
     Private clsScaleYSymmetricFunction As New RFunction
     Private clsAesFunction1 As New RFunction
     Private clsAesFunction2 As New RFunction
@@ -115,7 +114,7 @@ Public Class dlgBarAndPieChart
         ucrReceiverByFactor.Selector = ucrBarChartSelector
         ucrReceiverByFactor.SetIncludedDataTypes({"factor"})
         ucrReceiverByFactor.strSelectorHeading = "Factors"
-        ucrReceiverByFactor.SetParameter(New RParameter("fill", 1))
+        ucrReceiverByFactor.SetParameter(New RParameter("fill", 2))
         ucrReceiverByFactor.bWithQuotes = False
         ucrReceiverByFactor.SetParameterIsString()
 
@@ -175,7 +174,6 @@ Public Class dlgBarAndPieChart
         clsAesFunction2 = New RFunction
         clsScaleYSymmetricFunction = New RFunction
         clsPolarCoordFunction = New RFunction
-        clsXLimFunction = New RFunction
         clsScaleXdiscretFunction = New RFunction
         clsExpansionFunction = New RFunction
 
@@ -205,7 +203,7 @@ Public Class dlgBarAndPieChart
 
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
-        clsRgeomBarFunction.AddParameter("position", Chr(34) & "dodge" & Chr(34), iPosition:=0)
+        clsRgeomBarFunction.AddParameter("position", Chr(34) & "fill" & Chr(34), iPosition:=0)
         clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
 
         clsRggplotFunction.SetPackageName("ggplot2")
@@ -214,10 +212,6 @@ Public Class dlgBarAndPieChart
 
         clsBarAesFunction.SetPackageName("ggplot2")
         clsBarAesFunction.SetRCommand("aes")
-
-        clsXLimFunction.SetRCommand("xlim")
-        clsXLimFunction.AddParameter("1", 0.2, iPosition:=0, bIncludeArgumentName:=False)
-        clsXLimFunction.AddParameter("2", 2.5, iPosition:=1, bIncludeArgumentName:=False)
 
         clsPieAesFunction.SetPackageName("ggplot2")
         clsPieAesFunction.SetRCommand("aes")
@@ -294,6 +288,7 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.AddAdditionalCodeParameterPair(clsSubsetFunction1, ucrBarChartSelector.GetParameter(), iAdditionalPairNo:=1)
         ucrBarChartSelector.AddAdditionalCodeParameterPair(clsSubsetFunction2, ucrBarChartSelector.GetParameter(), iAdditionalPairNo:=2)
         ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsPieAesFunction, ucrReceiverByFactor.GetParameter(), iAdditionalPairNo:=1)
+        ucrVariablesAsFactorForBarChart.AddAdditionalCodeParameterPair(clsPieAesFunction, ucrVariablesAsFactorForBarChart.GetParameter(), iAdditionalPairNo:=1)
         ucrVariablesAsFactorForBarChart.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverX.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
@@ -432,6 +427,21 @@ Public Class dlgBarAndPieChart
             clsRgeomBarFunction2.RemoveParameterByName("stat")
         End If
 
+        If Not ucrVariablesAsFactorForBarChart.bSingleVariable Then
+            If rdoFrequency.Checked Then
+                clsBarAesFunction.AddParameter("x", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0)
+                clsPieAesFunction.AddParameter("x", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0)
+                clsBarAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
+                clsPieAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
+            Else
+                clsBarAesFunction.AddParameter("y", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
+                clsPieAesFunction.AddParameter("y", ucrReceiverByFactor.GetVariableNames(False), iPosition:=2)
+                clsBarAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
+                clsPieAesFunction.AddParameter("fill", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=1)
+            End If
+
+        End If
+
     End Sub
 
     Private Sub ucrPnlOptions_ControlValueChanged() Handles ucrPnlOptions.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged
@@ -489,7 +499,6 @@ Public Class dlgBarAndPieChart
         ucrChkBacktoback.Enabled = True
         ChangeParameterName()
         If Not rdoDonut.Checked OrElse Not ucrChkPolarCoordinates.Checked Then
-            clsBaseOperator.RemoveParameterByName("xlim")
             clsBaseOperator.RemoveParameterByName("scale")
         End If
         If Not rdoDonut.Checked OrElse Not rdoPie.Checked Then
@@ -502,12 +511,9 @@ Public Class dlgBarAndPieChart
             clsRggplotFunction.AddParameter("aes", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1, bIncludeArgumentName:=False)
             If rdoDonut.Checked Then
                 clsPolarCoordFunction.AddParameter("1", Chr(34) & "y" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-                clsPieAesFunction.AddParameter("x", 2, iPosition:=1)
-                clsBaseOperator.AddParameter("xlim", clsRFunctionParameter:=clsXLimFunction, iPosition:=4, bIncludeArgumentName:=False)
-                clsBaseOperator.AddParameter("scale", clsRFunctionParameter:=clsScaleXdiscretFunction, iPosition:=5, bIncludeArgumentName:=False)
+                clsBaseOperator.AddParameter("scale", clsRFunctionParameter:=clsScaleXdiscretFunction, iPosition:=4, bIncludeArgumentName:=False)
             ElseIf rdoPie.Checked Then
                 clsPolarCoordFunction.AddParameter("1", Chr(34) & "y" & Chr(34), iPosition:=0, bIncludeArgumentName:=False)
-                clsPieAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=1)
             Else
                 clsPolarCoordFunction.AddParameter("1", "", iPosition:=0, bIncludeArgumentName:=False)
             End If
