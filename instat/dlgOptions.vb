@@ -250,6 +250,7 @@ Public Class dlgOptions
         cmdCancel.Enabled = True
         cmdHelp.Enabled = True
         ApplyEnabled(False)
+        SetVisibleLanButton()
         Cursor = Cursors.Default
     End Sub
 
