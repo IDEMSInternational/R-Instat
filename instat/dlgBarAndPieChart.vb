@@ -96,6 +96,8 @@ Public Class dlgBarAndPieChart
 
         ucrPnlPolar.AddRadioButton(rdoPie)
         ucrPnlPolar.AddRadioButton(rdoDonut)
+        ucrPnlPolar.AddFunctionNamesCondition(rdoPie, "coordpolar")
+        ucrPnlPolar.AddFunctionNamesCondition(rdoDonut, "coordpolar")
 
         ucrBarChartSelector.SetParameter(New RParameter("data", 0, bNewIncludeArgumentName:=False))
         ucrBarChartSelector.SetParameterIsrfunction()
@@ -139,9 +141,11 @@ Public Class dlgBarAndPieChart
         ucrChkFlipCoordinates.SetParameter(clsCoordFlipParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
         ucrChkBacktoback.SetText("Back to back")
+        ucrChkBacktoback.AddToLinkedControls(ucrInputBarChartPositions, {False}, bNewLinkedChangeParameterValue:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
         ucrChkPolarCoordinates.SetText("Polar")
         ucrChkPolarCoordinates.AddToLinkedControls({ucrPnlPolar}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkPolarCoordinates.AddToLinkedControls(ucrChkBacktoback, {False}, bNewLinkedChangeParameterValue:=True, bNewLinkedDisabledIfParameterMissing:=True)
 
         ucrInputBarChartPositions.SetParameter(New RParameter("position", 0))
         dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
@@ -183,9 +187,6 @@ Public Class dlgBarAndPieChart
         ucrSaveBar.Reset()
         bResetSubdialog = True
         bResetBarLayerSubdialog = True
-        ucrChkPolarCoordinates.Checked = False
-        ucrChkBacktoback.Checked = False
-        rdoPie.Checked = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -289,12 +290,17 @@ Public Class dlgBarAndPieChart
         ucrBarChartSelector.AddAdditionalCodeParameterPair(clsSubsetFunction2, ucrBarChartSelector.GetParameter(), iAdditionalPairNo:=2)
         ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsPieAesFunction, ucrReceiverByFactor.GetParameter(), iAdditionalPairNo:=1)
         ucrVariablesAsFactorForBarChart.AddAdditionalCodeParameterPair(clsPieAesFunction, ucrVariablesAsFactorForBarChart.GetParameter(), iAdditionalPairNo:=1)
+        ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsIsEqualToOperator1, New RParameter("left", 0), iAdditionalPairNo:=1)
+        ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsIsEqualToOperator2, New RParameter("left", 0), iAdditionalPairNo:=2)
+        ucrReceiverByFactor.AddAdditionalCodeParameterPair(clsLevelsFunction, New RParameter("1", 0, bNewIncludeArgumentName:=False), iAdditionalPairNo:=3)
         ucrVariablesAsFactorForBarChart.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverX.SetRCode(clsBarAesFunction, bReset)
         ucrReceiverByFactor.SetRCode(clsBarAesFunction, bReset)
         ucrSaveBar.SetRCode(clsBaseOperator, bReset)
         ucrBarChartSelector.SetRCode(clsRggplotFunction, bReset)
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
+        ucrChkBacktoback.SetRCode(clsRgeomBarFunction1, bReset)
+        ucrChkPolarCoordinates.SetRCode(clsPolarCoordFunction, bReset)
         ucrInputBarChartPositions.SetRCode(clsRgeomBarFunction, bReset)
 
     End Sub
@@ -372,9 +378,6 @@ Public Class dlgBarAndPieChart
             cmdPieChartOptions.Visible = False
             cmdBarChartOptions.Visible = True
             cmdColumnChartOptions.Visible = False
-            'If Not clsBaseOperator.ContainsParameter("geom_bar") Then
-            '    clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
-            'End If
             clsRgeomBarFunction.RemoveParameterByName("width")
             clsBaseOperator.RemoveParameter(clsRCoordPolarParam)
             clsBaseOperator.RemoveParameterByName("geom_col")
@@ -451,6 +454,12 @@ Public Class dlgBarAndPieChart
         ucrChkBacktoback.Enabled = If(Not ucrReceiverByFactor.IsEmpty, True, False)
     End Sub
 
+    Private Sub ucrReceiverX_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+        If Not ucrReceiverX.Visible Then
+            ucrVariablesAsFactorForBarChart.SetMeAsReceiver()
+        End If
+    End Sub
+
     Private Sub ucrChkBacktoback_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkBacktoback.ControlValueChanged, ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrPnlOptions.ControlValueChanged
         clsBaseOperator.RemoveParameterByName("geom_bar1")
         clsBaseOperator.RemoveParameterByName("geom_bar2")
@@ -458,21 +467,15 @@ Public Class dlgBarAndPieChart
         clsAesFunction1.RemoveParameterByName("y")
         clsAesFunction2.RemoveParameterByName("y")
         clsRgeomBarFunction2.RemoveParameterByName("aes")
-        ucrInputBarChartPositions.Enabled = True
         ucrChkPolarCoordinates.Enabled = True
         clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
         clsRggplotFunction.AddParameter("mapping", clsRFunctionParameter:=clsBarAesFunction, iPosition:=1)
         ucrChkBacktoback.Enabled = True
         clsRggplotFunction.RemoveParameterByName("aes")
-        'ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         If ucrChkBacktoback.Checked Then
-            ucrInputBarChartPositions.Enabled = False
             ucrChkPolarCoordinates.Enabled = False
             ucrChkPolarCoordinates.Checked = Not ucrChkBacktoback.Checked
             clsBaseOperator.RemoveParameterByName("geom_bar")
-            clsIsEqualToOperator1.AddParameter("left", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0)
-            clsIsEqualToOperator2.AddParameter("left", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0)
-            clsLevelsFunction.AddParameter("1", ucrReceiverByFactor.GetVariableNames(False), iPosition:=0, bIncludeArgumentName:=False)
             clsSubsetFunction1.AddParameter("1", clsROperatorParameter:=clsIsEqualToOperator1, iPosition:=1, bIncludeArgumentName:=False)
             clsSubsetFunction2.AddParameter("1", clsROperatorParameter:=clsIsEqualToOperator2, iPosition:=1, bIncludeArgumentName:=False)
             clsBaseOperator.AddParameter("geom_bar2", clsRFunctionParameter:=clsRgeomBarFunction2, iPosition:=1)
@@ -494,7 +497,6 @@ Public Class dlgBarAndPieChart
 
     Private Sub ucrChkPolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPolarCoordinates.ControlValueChanged, ucrPnlPolar.ControlValueChanged
         clsBaseOperator.RemoveParameterByName("coordpolar")
-        ucrChkBacktoback.Enabled = True
         ChangeParameterName()
         If Not rdoDonut.Checked OrElse Not ucrChkPolarCoordinates.Checked Then
             clsBaseOperator.RemoveParameterByName("scale")
@@ -503,7 +505,6 @@ Public Class dlgBarAndPieChart
             ChangeParameterName()
         End If
         If ucrChkPolarCoordinates.Checked Then
-            ucrChkBacktoback.Enabled = False
             ucrChkBacktoback.Checked = Not ucrChkPolarCoordinates.Checked
             clsRggplotFunction.RemoveParameterByName("mapping")
             clsRggplotFunction.AddParameter("aes", clsRFunctionParameter:=clsPieAesFunction, iPosition:=1, bIncludeArgumentName:=False)
