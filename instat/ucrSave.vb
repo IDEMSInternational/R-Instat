@@ -414,6 +414,16 @@ Public Class ucrSave
                 ucrInputComboSave.SetItemsTypeAsTables()
                 ucrInputTextSave.SetDefaultTypeAsTable()
                 btnColumnPosition.Visible = False
+            Case "key"
+                ucrInputComboSave.SetDefaultTypeAsKey()
+                ucrInputComboSave.SetItemsTypeAsKeys()
+                ucrInputTextSave.SetDefaultTypeAsKey()
+                btnColumnPosition.Visible = False
+            Case "link"
+                ucrInputComboSave.SetDefaultTypeAsLink()
+                ucrInputComboSave.SetItemsTypeAsLinks()
+                ucrInputTextSave.SetDefaultTypeAsLink()
+                btnColumnPosition.Visible = False
             Case Else
                 MsgBox("Developer error: unrecognised save type: " & strType)
         End Select
@@ -441,6 +451,14 @@ Public Class ucrSave
     ''' <summary>   Sets save type as table. </summary>
     Public Sub SetSaveTypeAsTable()
         SetSaveType("table")
+    End Sub
+    ''' <summary>   Sets save type as key. </summary>
+    Public Sub SetSaveTypeAsKey()
+        SetSaveType("key")
+    End Sub
+    ''' <summary>   Sets save type as link. </summary>
+    Public Sub SetSaveTypeAsLink()
+        SetSaveType("link")
     End Sub
     ''' <summary>   Resets this control to its default values.  </summary>
     Public Sub Reset()
@@ -536,18 +554,36 @@ Public Class ucrSave
     '''                         position variables. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub UpdateRCode(Optional bReset As Boolean = False)
-        UpdateAssignTo()
-        'the control's R code has changed so ensure that the linked controls stay consistent
-        UpdateLinkedControls(bReset)
+        If strSaveType = "key" OrElse strSaveType = "link" Then
+            MyBase.UpdateRCode(bReset)
+        Else
+            UpdateAssignTo()
+            'the control's R code has changed so ensure that the linked controls stay consistent
+            UpdateLinkedControls(bReset)
+        End If
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Updates the control's 'assign to' variables and column position variables. 
     '''             </summary>
     '''--------------------------------------------------------------------------------------------
     Protected Overrides Sub UpdateAllParameters()
-        UpdateAssignTo()
+        If strSaveType = "key" OrElse strSaveType = "link" Then
+            MyBase.UpdateAllParameters()
+        Else
+            UpdateAssignTo()
+        End If
         ' TODO SJL 16/06/20 Name ‘UpdateAllParameters’ is misleading, parent function does what the name says, this function doesn’t. Ask Danny's advice?
     End Sub
+
+    Public Overrides Sub UpdateParameter(clsTempParam As RParameter)
+        If bIsComboBox Then
+            clsTempParam.SetArgumentValue(Chr(34) & ucrInputComboSave.GetText & Chr(34))
+        Else
+            clsTempParam.SetArgumentValue(Chr(34) & ucrInputTextSave.GetText & Chr(34))
+        End If
+    End Sub
+
+
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   TODO SJL 13/05/20 Same as parent function - remove?. </summary>
     '''
@@ -651,38 +687,41 @@ Public Class ucrSave
     '''                                 overridden function. </param>
     '''--------------------------------------------------------------------------------------------
     Public Overrides Sub UpdateControl(Optional bReset As Boolean = False, Optional bCloneIfNeeded As Boolean = False)
-        Dim clsMainRCode As RCodeStructure = GetRCode()
-        Dim strControlValue As String = ""
+        If Not strSaveType = "key" AndAlso Not strSaveType = "link" Then
+            Dim clsMainRCode As RCodeStructure = GetRCode()
+            Dim strControlValue As String = ""
 
-        If clsMainRCode IsNot Nothing Then
-            If String.IsNullOrEmpty(strReadNameFromParameterName) Then
-                If clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned Then
-                    strControlValue = If(clsMainRCode.strAssignTo IsNot Nothing, clsMainRCode.strAssignTo, "")
-                End If
-            Else
-                If clsMainRCode.GetParameter(strReadNameFromParameterName) IsNot Nothing Then
-                    strControlValue = clsMainRCode.GetParameter(strReadNameFromParameterName).strArgumentValue
-                    strControlValue = If(strControlValue IsNot Nothing, strControlValue.Replace("""", ""), "")
-                End If
-            End If
-
-            If bIsComboBox Then
-                ucrInputComboSave.SetName(strControlValue)
-                ucrInputTextSave.SetName("")
-            Else
-                ucrInputTextSave.SetName(strControlValue)
-                ucrInputComboSave.SetName("")
-            End If
-
-            If bShowCheckBox Then
-                If GetText() = strAssignToIfUnchecked Then
-                    ucrChkSave.Checked = False
+            If clsMainRCode IsNot Nothing Then
+                If String.IsNullOrEmpty(strReadNameFromParameterName) Then
+                    If clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned Then
+                        strControlValue = If(clsMainRCode.strAssignTo IsNot Nothing, clsMainRCode.strAssignTo, "")
+                    End If
                 Else
-                    ucrChkSave.Checked = (clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned)
+                    If clsMainRCode.GetParameter(strReadNameFromParameterName) IsNot Nothing Then
+                        strControlValue = clsMainRCode.GetParameter(strReadNameFromParameterName).strArgumentValue
+                        strControlValue = If(strControlValue IsNot Nothing, strControlValue.Replace("""", ""), "")
+                    End If
                 End If
+
+                If bIsComboBox Then
+                    ucrInputComboSave.SetName(strControlValue)
+                    ucrInputTextSave.SetName("")
+                Else
+                    ucrInputTextSave.SetName(strControlValue)
+                    ucrInputComboSave.SetName("")
+                End If
+
+                If bShowCheckBox Then
+                    If GetText() = strAssignToIfUnchecked Then
+                        ucrChkSave.Checked = False
+                    Else
+                        ucrChkSave.Checked = (clsMainRCode.bToBeAssigned OrElse clsMainRCode.bIsAssigned)
+                    End If
+                End If
+
             End If
-            UpdateLinkedControls()
         End If
+        UpdateLinkedControls()
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Returns true if the name to save the object to is defined, else returns false. 
@@ -763,7 +802,11 @@ Public Class ucrSave
         '    - Should this function return boolean? The parent function in ucrCore has no return type! Is this good coding practice?
         '    - The parent function returns true if the control has a paremter that is not yet included in the R command. Why is this control different?
         '    - Is the condition for bToBeAssigned correct?
-        Return ((Not GetRCode().bIsAssigned AndAlso Not GetRCode().bToBeAssigned) AndAlso strSaveType <> "")
+        If strSaveType = "key" OrElse strSaveType = "link" Then
+            Return MyBase.CanUpdate()
+        Else
+            Return ((Not GetRCode().bIsAssigned AndAlso Not GetRCode().bToBeAssigned) AndAlso strSaveType <> "")
+        End If
     End Function
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   If <paramref name="bAdd"/> is true then sets the R code 'assign to'
@@ -783,7 +826,11 @@ Public Class ucrSave
         'TODO SJL 15/05/20 
         '   - The name is quite confusing. Rename?
         '   - If we made 'UpdateAssignTo' public then we could remove this function
-        UpdateAssignTo(Not bAdd)
+        If strSaveType = "key" OrElse strSaveType = "link" Then
+            MyBase.AddOrRemoveParameter(True)
+        Else
+            UpdateAssignTo(Not bAdd)
+        End If
     End Sub
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Adds <paramref name="clsNewRCode"/> to the control's command-parameter 
