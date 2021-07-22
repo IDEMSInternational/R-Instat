@@ -191,6 +191,7 @@ Public Class dlgHistogram
         ucrPnlOptions.SetRCode(clsRgeomPlotFunction, bReset)
         ucrChkPercentages.SetRCode(clsYScalecontinuousFunction, bReset)
         ucrChkRidges.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrChkRidges.SetRCode(clsHistAesFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
