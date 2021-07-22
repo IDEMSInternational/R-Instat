@@ -349,8 +349,6 @@ Public Class sdgPlots
         ucrChkDrop.SetRDefault("TRUE")
 
         'Annotation
-        grpAnnotation.Visible = False
-
         ucrChkAnnotation.SetText("Annotation")
         ucrChkAnnotation.AddParameterPresentCondition(True, "annotate", True)
         ucrChkAnnotation.AddParameterPresentCondition(False, "annotate", False)
