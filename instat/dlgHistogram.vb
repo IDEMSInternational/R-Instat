@@ -191,6 +191,8 @@ Public Class dlgHistogram
         ucrPnlOptions.SetRCode(clsRgeomPlotFunction, bReset)
         ucrChkPercentages.SetRCode(clsYScalecontinuousFunction, bReset)
         ucrChkRidges.SetRCode(clsRgeomPlotFunction, bReset)
+        ucrFactorReceiver.SetRCode(clsRaesFunction, bReset)
+        ucrVariablesAsFactorforHist.SetRCode(clsRaesFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -215,7 +217,7 @@ Public Class dlgHistogram
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorforHist.bSingleVariable) Then
                 ucrVariablesAsFactorforHist.Add(clsParam.strArgumentValue)
-            ElseIf (clsParam.strArgumentName = "fill" AndAlso rdoHistogram.Checked) OrElse (clsParam.strArgumentName = "colour" AndAlso (rdoFrequencyPolygon.Checked OrElse rdoDensity_ridges.Checked)) Then
+            ElseIf (clsParam.strArgumentName = "fill" AndAlso rdoHistogram.Checked) OrElse (clsParam.strArgumentName = "colour" AndAlso (rdoFrequencyPolygon.Checked OrElse (rdoDensity_ridges.Checked AndAlso Not ucrChkRidges.Checked))) OrElse (clsParam.strArgumentName = "y" AndAlso (rdoDensity_ridges.Checked AndAlso ucrChkRidges.Checked)) Then
                 ucrFactorReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
