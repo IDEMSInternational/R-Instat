@@ -59,7 +59,6 @@ Public Class dlgHistogram
 
         SetRCodeForControls(bReset)
         bReset = False
-        SetOptionsButtonText()
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
@@ -239,6 +238,7 @@ Public Class dlgHistogram
         clsHistAesFunction.AddParameter("y", "stat(count)", iPosition:=0)
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         If rdoHistogram.Checked Then
+            cmdHistogramOptions.Text = "Histogram Options"
             clsRgeomPlotFunction.SetRCommand("geom_histogram")
             ucrFactorReceiver.ChangeParameterName("fill")
             If Not ucrSaveHist.bUserTyped Then
@@ -246,6 +246,7 @@ Public Class dlgHistogram
             End If
         ElseIf rdoDensity_ridges.Checked Then
             If ucrChkRidges.Checked Then
+                cmdHistogramOptions.Text = "Density Ridges Options"
                 clsHistAesFunction.RemoveParameterByName("y")
                 clsHistAesFunction.AddParameter("x", clsRFunctionParameter:=ucrVariablesAsFactorforHist.GetVariables(), iPosition:=1)
                 clsHistAesFunction.AddParameter("y", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=2)
@@ -256,6 +257,7 @@ Public Class dlgHistogram
                     ucrSaveHist.SetPrefix("density_ridges")
                 End If
             Else
+                cmdHistogramOptions.Text = "Density Options"
                 clsRgeomPlotFunction.SetRCommand("geom_density")
                 ucrFactorReceiver.ChangeParameterName("colour")
                 If Not ucrSaveHist.bUserTyped Then
@@ -263,28 +265,14 @@ Public Class dlgHistogram
                 End If
             End If
         ElseIf rdoFrequencyPolygon.Checked Then
+            cmdHistogramOptions.Text = "Frequency Polygon Options"
             clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
             ucrFactorReceiver.ChangeParameterName("colour")
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("frequency_polygon")
             End If
         End If
-        SetOptionsButtonText()
         autoTranslate(Me)
-    End Sub
-
-    Private Sub SetOptionsButtonText()
-        If rdoHistogram.Checked Then
-            cmdHistogramOptions.Text = "Histogram Options"
-        ElseIf rdoDensity_ridges.Checked Then
-            If ucrChkRidges.Checked Then
-                cmdHistogramOptions.Text = "Density Ridges Options"
-            Else
-                cmdHistogramOptions.Text = "Density Options"
-            End If
-        ElseIf rdoFrequencyPolygon.Checked Then
-            cmdHistogramOptions.Text = "Frequency Polygon Options"
-        End If
     End Sub
 
 
