@@ -441,7 +441,8 @@ Public Class sdgPlots
         dctAnnotationGeom.Add("errorbar", Chr(34) & "errorbar" & Chr(34))
         dctAnnotationGeom.Add("crossbar", Chr(34) & "crossbar" & Chr(34))
         ucrInputAnnotationGeoms.SetItems(dctAnnotationGeom)
-        ucrInputAnnotationGeoms.SetLinkedDisplayControl(lblAnnotationGeoms)
+        ucrInputAnnotationGeoms.SetLinkedDisplayControl(New List(Of Control)({lblAnnotationGeoms, grpAnnotation}))
+
 
         ucrInputFill.SetParameter(New RParameter("fill", 16))
         ucrInputFill.SetRDefault(Chr(34) & "black" & Chr(34))
@@ -473,6 +474,7 @@ Public Class sdgPlots
         ucrChkParse.SetRDefault("FALSE")
         ucrChkParse.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
+        ucrChkAnnotation.AddToLinkedControls(ucrInputAnnotationGeoms, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputXmin, ucrInputXmax, ucrInputYmin, ucrInputYmax}, {"rect", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputY, ucrInputX}, {"text", "label", "segment", "curve", "linerange", "errorbar", "crossbar", "pointrange"}, bNewLinkedDisabledIfParameterMissing:=True, bNewLinkedAddRemoveParameter:=True)
         ucrInputAnnotationGeoms.AddToLinkedControls({ucrInputXend, ucrInputYend}, {"segment", "curve"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedDisabledIfParameterMissing:=True)
@@ -932,7 +934,7 @@ Public Class sdgPlots
         AddRemoveLabs()
     End Sub
 
-    Private Sub ucrChkNoOfRowsOrColumns_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrChkNoOfRowsOrColumns_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNoOfRowsOrColumns.ControlValueChanged
         SetFacetParameters()
     End Sub
 
@@ -958,7 +960,7 @@ Public Class sdgPlots
         End If
     End Function
 
-    Private Sub cmdAllOptions_Click(sender As Object, e As EventArgs)
+    Private Sub cmdAllOptions_Click(sender As Object, e As EventArgs) Handles cmdAllOptions.Click
         sdgThemes.SetRCode(clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
         Me.SendToBack()
         sdgThemes.ShowDialog()
@@ -1020,23 +1022,23 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ElementXAxisTextControls_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ElementXAxisTextControls_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXaxisAngle.ControlValueChanged, ucrNudXAngle.ControlValueChanged, ucrChkXaxisTickMarkLabelSize.ControlValueChanged, ucrNudXaxisMarkSize.ControlValueChanged
         AddRemoveXElementAxisText()
     End Sub
 
-    Private Sub ucrChkXaxisSize_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrChkXaxisSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkXaxisSize.ControlValueChanged, ucrNudXSize.ControlValueChanged
         AddRemoveXElementTitle()
     End Sub
 
-    Private Sub ucrChkYaxisTickMarkLabelSize_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrChkYaxisTickMarkLabelSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYaxisTickMarkLabelSize.ControlValueChanged, ucrNudYaxisMarkSize.ControlValueChanged
         AddRemoveYElementAxisText()
     End Sub
 
-    Private Sub ucrChkYaxisSize_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrChkYaxisSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkYaxisSize.ControlValueChanged, ucrNudYSize.ControlValueChanged
         AddRemoveYElementAxisTitle()
     End Sub
 
-    Private Sub ucrChkLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrChkLegendPosition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkLegendPosition.ControlValueChanged
         AddRemoveTheme()
     End Sub
 
@@ -1060,14 +1062,14 @@ Public Class sdgPlots
         ucrChkXaxisTickMarkLabelSize.SetRCode(clsXElementText, bReset, bCloneIfNeeded:=True)
     End Sub
 
-    Private Sub cmdSimpleOptions_Click(sender As Object, e As EventArgs)
+    Private Sub cmdSimpleOptions_Click(sender As Object, e As EventArgs) Handles cmdSimpleOptions.Click
         sdgThemesSub.SetRCode(clsBaseOperator, clsNewThemesFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, bReset:=bResetThemes)
         Me.SendToBack()
         sdgThemesSub.ShowDialog()
         SetRcodeForCommonThemesControls(False)
     End Sub
 
-    Private Sub ucrChkUsePolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrChkUsePolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkUsePolarCoordinates.ControlValueChanged
         If ucrChkUsePolarCoordinates.Checked Then
             clsBaseOperator.AddParameter("coord_polar", clsRFunctionParameter:=clsCoordPolarFunc, iPosition:=20)
         Else
@@ -1075,7 +1077,7 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrChkAddFillScale_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrChkAddFillScale_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddFillScale.ControlValueChanged
         If ucrChkAddFillScale.Checked Then
             clsBaseOperator.AddParameter("scale_fill", clsRFunctionParameter:=clsScaleFillViridisFunction, iPosition:=3)
             grpFillScale.Visible = True
@@ -1085,7 +1087,7 @@ Public Class sdgPlots
         End If
     End Sub
 
-    Private Sub ucrChkAddColour_ControlValueChanged(ucrChangedControl As ucrCore)
+    Private Sub ucrChkAddColour_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddColour.ControlValueChanged
         If ucrChkAddColour.Checked Then
             clsBaseOperator.AddParameter("scale_colour", clsRFunctionParameter:=clsScaleColourViridisFunction, iPosition:=8)
             grpColourScale.Visible = True
@@ -1098,16 +1100,14 @@ Public Class sdgPlots
     Private Sub ucrChkAnnotation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAnnotation.ControlValueChanged
         If ucrChkAnnotation.Checked Then
             clsBaseOperator.AddParameter("annotate", clsRFunctionParameter:=clsAnnotateFunction, iPosition:=10)
-            grpAnnotation.Visible = True
         Else
             clsBaseOperator.RemoveParameterByName("annotate")
-            grpAnnotation.Visible = False
         End If
     End Sub
 
     Private Sub ucrInputAnnotationGeoms_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputAnnotationGeoms.ControlValueChanged
-        If bControlsInitialised Then
-            If ucrInputAnnotationGeoms.GetText = "rect" OrElse ucrInputAnnotationGeoms.GetText = "label" Then
+        Select Case ucrInputAnnotationGeoms.GetText
+            Case "rect", "label"
                 ucrInputFill.Location = New Point(ucrInputFill.Location.X, iSizeYPosition)
                 ucrNudSize.Location = New Point(ucrNudSize.Location.X, iAlphaYPosition)
                 ucrNudAlpha.Location = New Point(ucrNudAlpha.Location.X, iLabelYposition)
@@ -1118,7 +1118,7 @@ Public Class sdgPlots
                     ucrInputLabel.Location = New Point(ucrInputLabel.Location.X, iFillYPositon)
                     lblLabel.Location = New Point((65 - lblLabel.Size.Width), 183)
                 End If
-            Else
+            Case "crossbar", "segment", "pointrange", "curve", "text", "linerange", "errorbar"
                 ucrInputFill.Location = New Point(ucrInputFill.Location.X, iFillYPositon)
                 ucrNudSize.Location = New Point(ucrNudSize.Location.X, iSizeYPosition)
                 ucrNudAlpha.Location = New Point(ucrNudAlpha.Location.X, iAlphaYPosition)
@@ -1127,23 +1127,23 @@ Public Class sdgPlots
                 lblSize.Location = New Point((65 - lblSize.Size.Width), 111)
                 lblAlpha.Location = New Point((65 - lblAlpha.Size.Width), 135)
                 lblLabel.Location = New Point((65 - lblLabel.Size.Width), 159)
-            End If
+        End Select
 
-            Select Case ucrInputAnnotationGeoms.GetText
-                Case "text", "rect", "linerange", "errorbar"
-                    ucrChkParse.Location = New Point(ucrChkParse.Location.X, 179)
-                Case "label", "crossbar", "segment"
-                    ucrChkParse.Location = New Point(ucrChkParse.Location.X, 204)
-                Case "pointrange", "curve"
-                    ucrChkParse.Location = New Point(ucrChkParse.Location.X, 228)
-            End Select
-        End If
+        Select Case ucrInputAnnotationGeoms.GetText
+            Case "text", "rect", "linerange", "errorbar"
+                ucrChkParse.Location = New Point(ucrChkParse.Location.X, 179)
+            Case "label", "crossbar", "segment"
+                ucrChkParse.Location = New Point(ucrChkParse.Location.X, 204)
+            Case "pointrange", "curve"
+                ucrChkParse.Location = New Point(ucrChkParse.Location.X, 228)
+        End Select
         AddLabelParameter()
     End Sub
 
     Private Sub ucrInputLabel_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputLabel.ControlValueChanged
         AddLabelParameter()
     End Sub
+
     Private Sub AddLabelParameter()
         Select Case ucrInputAnnotationGeoms.GetText
             Case "text", "label"
