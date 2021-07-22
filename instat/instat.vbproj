@@ -272,6 +272,12 @@
     <Compile Include="dlgConditionalQuantilePlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCopySpecial.Designer.vb">
+      <DependentUpon>dlgCopySpecial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopySpecial.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDisplayTopN.Designer.vb">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
     </Compile>
@@ -367,6 +373,11 @@
     </Compile>
     <Compile Include="frmConvertToNumeric.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="sdgClimaticDataEntry.Designer.vb">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
@@ -2452,11 +2463,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
       <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -4558,9 +4564,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.sw-KE.resx">
       <SubType>Designer</SubType>
@@ -4992,6 +4998,7 @@
     <None Include="Resources\reset3.png" />
     <None Include="Resources\help2.png" />
     <None Include="Resources\lastgraph.png" />
+    <None Include="Resources\lan_btn.png" />
     <Content Include="Resources\rinstat_icon_Hih_icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

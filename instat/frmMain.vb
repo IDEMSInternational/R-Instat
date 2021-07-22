@@ -65,6 +65,8 @@ Public Class frmMain
     ''' it's set to true by dlgSaveAs dialog and save menu when data has been successfully saved 
     ''' </summary>
     Public Property bDataSaved As Boolean = False
+
+    Private strCurrLang As String
     Public Sub New()
 
         ' This call is required by the designer.
@@ -165,6 +167,15 @@ Public Class frmMain
             MsgBox(ex.Message)
         End Try
 
+        If Me.clsInstatOptions IsNot Nothing Then
+            If Me.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+                mnuTbLan.Visible = True
+            Else
+                mnuTbLan.Visible = False
+            End If
+            strCurrLang = Me.clsInstatOptions.strLanguageCultureCode
+        End If
+
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 
@@ -172,6 +183,10 @@ Public Class frmMain
     ' Need to fix this so that all of frmMain can be translated
     Public Sub TranslateFrmMainMenu()
         translateMenu(mnuBar.Items, Me)
+    End Sub
+
+    Public Sub SetLanButtonVisibility(bVisible As Boolean)
+        mnuTbLan.Visible = bVisible
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -875,7 +890,7 @@ Public Class frmMain
         dlgOneVariableGraph.ShowDialog()
     End Sub
 
-    Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         Dim bClose As DialogResult = DialogResult.Yes
 
         If e.CloseReason = CloseReason.UserClosing Then
@@ -2324,7 +2339,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub frmMain_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
+    Private Sub frmMain_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Resize
         If Me.WindowState = FormWindowState.Maximized Then
             isMaximised = True
         End If
@@ -2371,4 +2386,18 @@ Public Class frmMain
     Private Sub mnuEditPasteNewDataFrame_Click(sender As Object, e As EventArgs) Handles mnuEditPasteNewDataFrame.Click
         dlgPasteNewDataFrame.ShowDialog()
     End Sub
+
+    Private Sub mnuTbLan_Click(sender As Object, e As EventArgs) Handles mnuTbLan.Click
+        If strCurrLang <> "en-GB" Then
+            strCurrLang = "en-GB"
+        Else
+            strCurrLang = Me.clsInstatOptions.strLanguageCultureCode
+        End If
+
+        Dim strConfiguredLanguage As String = Me.clsInstatOptions.strLanguageCultureCode
+        Me.clsInstatOptions.strLanguageCultureCode = strCurrLang
+        translateMenu(mnuBar.Items, Me)
+        Me.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
+    End Sub
+
 End Class
