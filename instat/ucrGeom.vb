@@ -169,10 +169,29 @@ Public Class ucrGeom
         Dim clsgeom_tufteboxplot As New Geoms
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
-
+        Dim clsgeom_lollipop As New Geoms
+        Dim clsgeom_dumbbell As New Geoms
         Dim clsgeom_stat_density_ridges As New Geoms
         Dim clsgeom_statECDF As New Geoms
+        Dim clsscale_fill_viridis_c As New Geoms
 
+        clsscale_fill_viridis_c.SetGeomPackage("ggplot2")
+        clsscale_fill_viridis_c.strGeomName = "scale_fill_viridis_c"
+        'Other Aesthetics
+        clsscale_fill_viridis_c.AddAesParameter("fill", strIncludedDataTypes:=({"factor", "numeric"}))
+        clsscale_fill_viridis_c.AddAesParameter("colour", strIncludedDataTypes:=({"factor", "numeric"}))
+        'adding layer parameters
+        clsscale_fill_viridis_c.AddLayerParameter("alpha", "numeric", "0.7", lstParameterStrings:={1, 0})
+        clsscale_fill_viridis_c.AddLayerParameter("begin", "numeric", "0", lstParameterStrings:={1, 0})
+        clsscale_fill_viridis_c.AddLayerParameter("end", "numeric", "1", lstParameterStrings:={1, 0})
+        clsscale_fill_viridis_c.AddLayerParameter("panel_scaling", "list", "1", lstParameterStrings:={"1", "-1"})
+        clsscale_fill_viridis_c.AddLayerParameter("option", "list", Chr(34) & "cividis" & Chr(34), lstParameterStrings:={Chr(34) & "cividis" & Chr(34), Chr(34) & "magma" & Chr(34), Chr(34) & "inferno" & Chr(34), Chr(34) & "plasma" & Chr(34), Chr(34) & "viridis" & Chr(34)})
+        clsscale_fill_viridis_c.AddLayerParameter("values", "numeric", "0", lstParameterStrings:={1, 0})
+        clsscale_fill_viridis_c.AddLayerParameter("Space", "list", Chr(34) & "Lab" & Chr(34), lstParameterStrings:={Chr(34) & "Lab" & Chr(34)})
+        clsscale_fill_viridis_c.AddLayerParameter("na.value", "list", Chr(34) & "grey50" & Chr(34), lstParameterStrings:={Chr(34) & "grey50" & Chr(34)})
+        clsscale_fill_viridis_c.AddLayerParameter("guide", "list", Chr(34) & "colourbar" & Chr(34), lstParameterStrings:={Chr(34) & "colourbar" & Chr(34)})
+
+        lstAllGeoms.Add(clsscale_fill_viridis_c)
 
 
         clsgeom_stat_density_ridges.SetGeomPackage("ggridges")
@@ -469,6 +488,7 @@ Public Class ucrGeom
         clsgeom_boxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={1}) 'Question to be discussed: This parameter is setting the length of the whiskers as a multiple of the IQR. When giving a negative value, the whiskers are simply of length 0. Also the window showing the graph doesn't adapt to the whiskers' length, which means they are simply cut when too long.
         clsgeom_boxplot.AddLayerParameter("outlier.shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strBoxShapePoint) 'Warning: there are other symbols that we can add here 
         clsgeom_boxplot.AddLayerParameter("outlier.colour", "colour", "NULL")
+        clsgeom_boxplot.AddLayerParameter("outlier.size", "numeric", "1.5", lstParameterStrings:={1, 0})
         clsgeom_boxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Outlier.stroke parameter gives the size of the outliers. It cannot be negative, this would trigger an error in R.
         clsgeom_boxplot.AddLayerParameter("fatten", "numeric", "2", lstParameterStrings:={0, 1, 5})
         'Global Layer parameters
@@ -765,6 +785,12 @@ Public Class ucrGeom
         clsgeom_density_ridges.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_density_ridges.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_density_ridges.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges.AddLayerParameter("jittered_points", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_density_ridges.AddLayerParameter("alpha", "numeric", "0.7", lstParameterStrings:={1, 0})
+        clsgeom_density_ridges.AddLayerParameter("scale", "numeric", "1")
+        clsgeom_density_ridges.AddLayerParameter("point_shape", "editablelist", "|", lstParameterStrings:={"|", "/", "$", "#", "*", "?", "!"})
+        clsgeom_density_ridges.AddLayerParameter("point_size", "numeric", "3")
+        clsgeom_density_ridges.AddLayerParameter("point_alpha", "numeric", "1", lstParameterStrings:={1, 0})
         lstAllGeoms.Add(clsgeom_density_ridges)
 
         Dim clsgeom_density_ridges2 As New Geoms
@@ -837,7 +863,9 @@ Public Class ucrGeom
         clsgeom_density_ridges_gradient.AddLayerParameter("gradient_lwd", "numeric", "0.5", lstParameterStrings:={1, 0})
         clsgeom_density_ridges_gradient.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_density_ridges_gradient.AddLayerParameter("inherit.aes", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+
         lstAllGeoms.Add(clsgeom_density_ridges_gradient)
+
 
         clsgeom_dotplot.strGeomName = "geom_dotplot"
 
@@ -884,6 +912,39 @@ Public Class ucrGeom
         clsgeom_dotplot.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1}) 'Warning: varies transparence of fill AND outline.
 
         lstAllGeoms.Add(clsgeom_dotplot)
+
+
+        clsgeom_dumbbell.SetGeomName("geom_dumbbell")
+        clsgeom_dumbbell.SetGeomPackage("ggalt")
+
+        'Mandatory Aesthetics
+        clsgeom_dumbbell.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_dumbbell.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_dumbbell.AddAesParameter("xend", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+
+        'Optional Aesthetics
+        'In the geom_dimbbell, yend is given as a mandatory aesthetic but in running the function it is not mandatory so am including it under optional aesthetics
+        clsgeom_dumbbell.AddAesParameter("yend", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("linetype", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_dumbbell.AddAesParameter("group", strIncludedDataTypes:={"factor", "numeric"})
+
+        'Layer parameters
+        clsgeom_dumbbell.AddLayerParameter("colour_x", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_dumbbell.AddLayerParameter("colour_xend", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_dumbbell.AddLayerParameter("size_x", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_dumbbell.AddLayerParameter("size_xend", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_dumbbell.AddLayerParameter("dot_guide", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"}) 'If True Then, a leading dotted line will be placed before the left-most dumbbell point.
+        clsgeom_dumbbell.AddLayerParameter("dot_guide_colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_dumbbell.AddLayerParameter("dot_guide_size", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_dumbbell.AddLayerParameter("na.rm", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_dumbbell.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_dumbbell.AddLayerParameter("inherit.aes", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+
+        lstAllGeoms.Add(clsgeom_dumbbell)
+
 
         clsgeom_encircle.SetGeomPackage("ggalt")
         clsgeom_encircle.SetGeomName("geom_encircle")
@@ -1241,6 +1302,32 @@ Public Class ucrGeom
         ''adding layer parameters
         'clsgeom_map.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34))
         'lstAllGeoms.Add(clsgeom_map)
+
+
+        clsgeom_lollipop.SetGeomName("geom_lollipop")
+        clsgeom_lollipop.SetGeomPackage("ggalt")
+
+        'Mandatory Aesthetics
+        clsgeom_lollipop.AddAesParameter("x", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+        clsgeom_lollipop.AddAesParameter("y", strIncludedDataTypes:={"factor", "numeric"}, bIsMandatory:=True)
+
+        'Optional Aesthetics
+        clsgeom_lollipop.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("fill", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("group", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_lollipop.AddAesParameter("stroke", strIncludedDataTypes:={"factor", "numeric"})
+
+        'Layer parameters
+        clsgeom_lollipop.AddLayerParameter("horizontal", "boolean", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_lollipop.AddLayerParameter("point.colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_lollipop.AddLayerParameter("point.size", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_lollipop.AddLayerParameter("na.rm", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_lollipop.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_lollipop.AddLayerParameter("inherit.aes", "boolean", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+
+        lstAllGeoms.Add(clsgeom_lollipop)
 
         clsgeom_path.strGeomName = "geom_path"
         'mandatory
@@ -1847,10 +1934,11 @@ Public Class ucrGeom
         clsgeom_tufteboxplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
 
         'Layer parameters
-        clsgeom_tufteboxplot.AddLayerParameter("stat", "editablelist", Chr(34) & "fivenumber" & Chr(34), lstParameterStrings:={Chr(34) & "fivenumber" & Chr(34)})
+        clsgeom_tufteboxplot.AddLayerParameter("stat", "editablelist", Chr(34) & "boxplot" & Chr(34), lstParameterStrings:={Chr(34) & "boxplot" & Chr(34),Chr(34) & "fivenumber" & Chr(34)})
         clsgeom_tufteboxplot.AddLayerParameter("position", "editablelist", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "dodge" & Chr(34)})
-        clsgeom_tufteboxplot.AddLayerParameter("outlier.colour", "colour", Chr(34) & "black" & Chr(34))
+        clsgeom_tufteboxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={1}) 'Question to be discussed: This parameter is setting the length of the whiskers as a multiple of the IQR. When giving a negative value, the whiskers are simply of length 0. Also the window showing the graph doesn't adapt to the whiskers' length, which means they are simply cut when too long.
         clsgeom_tufteboxplot.AddLayerParameter("outlier.shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strShapePoint)
+        clsgeom_tufteboxplot.AddLayerParameter("outlier.colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_tufteboxplot.AddLayerParameter("outlier.size", "numeric", "1.5", lstParameterStrings:={1, 0})
         clsgeom_tufteboxplot.AddLayerParameter("outlier.stroke", "numeric", "0.5", lstParameterStrings:={1, 0})
         clsgeom_tufteboxplot.AddLayerParameter("voffset", "numeric", "0.01", lstParameterStrings:={2, 0})
@@ -1864,7 +1952,6 @@ Public Class ucrGeom
         clsgeom_tufteboxplot.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
 
         lstAllGeoms.Add(clsgeom_tufteboxplot)
-
 
 
         clsgeom_violin.strGeomName = "geom_violin"
