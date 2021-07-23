@@ -93,7 +93,6 @@ Public Class dlgBoxplot
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
         ucrPnlPlots.AddToLinkedControls(ucrChkAddPoints, {rdoBoxplotTufte, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlPlots.AddToLinkedControls({ucrChkTufte}, {rdoBoxplotTufte}, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkTufte.AddToLinkedControls({ucrSecondFactorReceiver}, {"FALSE"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTufte.AddToLinkedControls(ucrChkVarWidth, {"FALSE"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorBoxPlot.SetParameter(New RParameter("data", 0))
@@ -183,8 +182,6 @@ Public Class dlgBoxplot
         ucrChkGrouptoConnect.AddParameterPresentCondition(False, strStatSummaryParameterName, False)
         'this control exists but diabled for now
         ucrChkSwapParameters.SetText("swap Parameters")
-
-        'ucrSecondFactorReceiver.AddToLinkedControls(ucrChkSwapParameters, {ucrSecondFactorReceiver.IsEmpty = False}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -379,6 +376,7 @@ Public Class dlgBoxplot
                 ucrSaveBoxplot.SetPrefix("tufte_boxplot")
                 clsCurrGeomFunc = clsTufteBoxplotFunc
                 clsStatSummary.AddParameter("size", 0.7)
+                ucrSecondFactorReceiver.ChangeParameterName("colour")
             Else
                 ucrSaveBoxplot.SetPrefix("boxplot")
                 ucrSecondFactorReceiver.ChangeParameterName("fill")
