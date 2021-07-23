@@ -141,34 +141,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdSpecifyLink.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="lblLinkName.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblLinkName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 239</value>
-  </data>
-  <data name="lblLinkName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
-  </data>
-  <data name="lblLinkName.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="lblLinkName.Text" xml:space="preserve">
-    <value>Link Name:</value>
-  </data>
-  <data name="&gt;&gt;lblLinkName.Name" xml:space="preserve">
-    <value>lblLinkName</value>
-  </data>
-  <data name="&gt;&gt;lblLinkName.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblLinkName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblLinkName.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblFrom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -195,7 +168,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFrom.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="lblTo.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -222,7 +195,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTo.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lblKeys.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -249,7 +222,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblKeys.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lvwLinkViewBox.Location" type="System.Drawing.Point, System.Drawing">
     <value>168, 45</value>
@@ -270,28 +243,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lvwLinkViewBox.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="ucrInputLinkName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 235</value>
-  </data>
-  <data name="ucrInputLinkName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 21</value>
-  </data>
-  <data name="ucrInputLinkName.TabIndex" type="System.Int32, mscorlib">
-    <value>10</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLinkName.Name" xml:space="preserve">
-    <value>ucrInputLinkName</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLinkName.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLinkName.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrInputLinkName.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="ucrDataSelectorTo.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 93</value>
@@ -316,7 +268,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrDataSelectorTo.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="ucrDataSelectorFrom.Location" type="System.Drawing.Point, System.Drawing">
     <value>15, 27</value>
@@ -340,7 +292,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrDataSelectorFrom.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 262</value>
@@ -361,7 +313,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="lblSelectedKey.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -388,7 +340,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelectedKey.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrInputSelectedKey.Location" type="System.Drawing.Point, System.Drawing">
     <value>92, 208</value>
@@ -409,6 +361,30 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputSelectedKey.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrSaveLink.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 232</value>
+  </data>
+  <data name="ucrSaveLink.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrSaveLink.Size" type="System.Drawing.Size, System.Drawing">
+    <value>267, 26</value>
+  </data>
+  <data name="ucrSaveLink.TabIndex" type="System.Int32, mscorlib">
+    <value>12</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveLink.Name" xml:space="preserve">
+    <value>ucrSaveLink</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveLink.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveLink.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrSaveLink.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
