@@ -236,7 +236,35 @@ Public Class ucrColumnMetadata
 
     Public Sub CopyRange()
         Try
-            grdVariables.CurrentWorksheet.Copy()
+            Dim clsCopyValues As New RFunction
+            Dim strAllContent As String = ""
+            Dim iEndRow As Integer = grdVariables.CurrentWorksheet.SelectionRange.EndRow
+            Dim iEndCol As Integer = grdVariables.CurrentWorksheet.SelectionRange.EndCol
+            Dim iStartCol As Integer = grdVariables.CurrentWorksheet.SelectionRange.Col
+
+            'construct the copied range data
+            For iRowIndex As Integer = grdVariables.CurrentWorksheet.SelectionRange.Row To iEndRow
+                Dim strRowContent As String = ""
+                For iColIndex As Integer = iStartCol To iEndCol
+                    Dim strCellContent As String = grdVariables.CurrentWorksheet.GetCell(row:=iRowIndex, col:=iColIndex).DisplayText
+                    If strCellContent = "NA" Then
+                        strCellContent = ""
+                    End If
+                    If iColIndex = iStartCol Then
+                        strRowContent = strCellContent
+                    Else
+                        strRowContent &= vbTab & strCellContent
+                    End If
+                Next
+                strAllContent &= strRowContent
+                If iRowIndex < iEndRow Then
+                    strAllContent &= Environment.NewLine
+                End If
+            Next
+
+            clsCopyValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_to_clipboard")
+            clsCopyValues.AddParameter("content", Chr(34) & strAllContent & Chr(34), iPosition:=0)
+            RunScriptFromColumnMetadata(clsCopyValues.ToScript(), strComment:="Copy column metadata values to clipboard")
         Catch
             MessageBox.Show("Cannot copy the current selection.")
         End Try
