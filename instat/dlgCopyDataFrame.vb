@@ -18,9 +18,16 @@ Imports instat.Translations
 Public Class dlgCopyDataFrame
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
-    Dim strSelectedDataFrame As String = ""
-    Private clsCopySheet As New RFunction
+    Private clsCopyDataFrameFunction As New RFunction
+    Private clsCopyColumnMetadataFunction As New RFunction
+    Private clsCopyDataFrameMetadataFunction As New RFunction
     Private Sub dlgCopyDataFrame_Load(sender As Object, e As EventArgs) Handles Me.Load
+        SetControls()
+        autoTranslate(Me)
+        TestOKEnabled()
+    End Sub
+
+    Private Sub SetControls()
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -30,8 +37,6 @@ Public Class dlgCopyDataFrame
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        autoTranslate(Me)
-        TestOKEnabled()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -44,12 +49,29 @@ Public Class dlgCopyDataFrame
         'ucrNewName
         ucrInputNewDataFrameName.SetParameter(New RParameter("new_name", 1))
         ucrInputNewDataFrameName.SetValidationTypeAsRVariable()
+        ucrInputNewDataFrameName.SetLinkedDisplayControl(lblNewName)
 
         ucrInputLabel.SetParameter(New RParameter("label", 2))
+        ucrInputLabel.SetLinkedDisplayControl(lblLabel)
+
+        ucrChkCopyToClipboard.SetText("Copy to clipboard")
+        ucrChkCopyToClipboard.SetParameter(New RParameter("copy_to_clipboard", 3))
+        ucrChkCopyToClipboard.SetRDefault("FALSE")
+        ucrChkCopyToClipboard.AddToLinkedControls({ucrInputNewDataFrameName, ucrInputLabel}, objValues:={False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkCopyToClipboard.AddToLinkedControls({ucrPnlOptions}, objValues:={True}, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrPnlOptions.AddRadioButton(rdoDataFrame)
+        ucrPnlOptions.AddRadioButton(rdoColumnsMetadata)
+        ucrPnlOptions.AddRadioButton(rdoDataFrameMetadata)
+        ucrPnlOptions.AddFunctionNamesCondition(rdoDataFrame, frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoColumnsMetadata, frmMain.clsRLink.strInstatDataObject & "$copy_col_metadata_to_clipboard")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoDataFrameMetadata, frmMain.clsRLink.strInstatDataObject & "$copy_data_frame_metadata_to_clipboard")
     End Sub
 
     Private Sub SetDefaults()
-        clsCopySheet = New RFunction
+        clsCopyDataFrameFunction = New RFunction
+        clsCopyColumnMetadataFunction = New RFunction
+        clsCopyDataFrameMetadataFunction = New RFunction
 
         ucrInputNewDataFrameName.Reset()
         ucrDataFrameCopySheets.Reset()
@@ -57,20 +79,33 @@ Public Class dlgCopyDataFrame
         ucrInputLabel.SetName("")
         CheckAutoName()
 
-        clsCopySheet.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
+        clsCopyDataFrameFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame")
+        clsCopyDataFrameFunction.AddParameter("copy_to_clipboard", "FALSE", iPosition:=3)
 
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCopySheet)
+        clsCopyColumnMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_col_metadata_to_clipboard")
+
+        clsCopyDataFrameMetadataFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_data_frame_metadata_to_clipboard")
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsCopyDataFrameFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrDataFrameCopySheets.AddAdditionalCodeParameterPair(clsCopyColumnMetadataFunction, New RParameter("data_name", 0), iAdditionalPairNo:=1)
+        ucrDataFrameCopySheets.AddAdditionalCodeParameterPair(clsCopyDataFrameMetadataFunction, New RParameter("data_name", 0), iAdditionalPairNo:=2)
+        ucrDataFrameCopySheets.SetRCode(clsCopyDataFrameFunction, bReset)
+
+        ucrInputNewDataFrameName.SetRCode(clsCopyDataFrameFunction, bReset)
+        ucrInputLabel.SetRCode(clsCopyDataFrameFunction, bReset)
+        ucrChkCopyToClipboard.SetRCode(clsCopyDataFrameFunction, bReset)
+
+        ucrPnlOptions.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrInputNewDataFrameName.IsEmpty) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "")) AndAlso (Not ucrDataFrameCopySheets.cboAvailableDataFrames.Items.Contains(ucrInputNewDataFrameName.GetText)) Then
-            ucrBase.OKEnabled(True)
+        If ucrChkCopyToClipboard.Checked Then
+            ucrBase.OKEnabled(ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "")
         Else
-            ucrBase.OKEnabled(False)
+            ucrBase.OKEnabled(((Not ucrInputNewDataFrameName.IsEmpty) AndAlso (ucrDataFrameCopySheets.cboAvailableDataFrames.Text <> "")) AndAlso (Not ucrDataFrameCopySheets.cboAvailableDataFrames.Items.Contains(ucrInputNewDataFrameName.GetText)))
         End If
     End Sub
 
@@ -87,15 +122,31 @@ Public Class dlgCopyDataFrame
     End Sub
 
     Public Sub SetCurrentDataframe(strDataFrame As String)
-        strSelectedDataFrame = strDataFrame
-        ucrDataFrameCopySheets.SetDataframe(strSelectedDataFrame)
+        SetControls()
+        ucrDataFrameCopySheets.SetDataframe(strDataFrame)
     End Sub
 
     Private Sub ucrDataFrameToRename_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlValueChanged
         CheckAutoName()
     End Sub
 
-    Private Sub Control_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged
+    Private Sub Control_ContentsChanged(ucrChangedControl As ucrCore) Handles ucrDataFrameCopySheets.ControlContentsChanged, ucrInputNewDataFrameName.ControlContentsChanged, ucrChkCopyToClipboard.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
+        If Not ucrChkCopyToClipboard.Checked OrElse rdoDataFrame.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCopyDataFrameFunction)
+        ElseIf rdoColumnsMetadata.Checked Then
+            'todo. temporarily added here because this control's parameter pair condition is not updated
+            'until when a selection change event is raised
+            clsCopyColumnMetadataFunction.AddParameter("data_name", strParameterValue:=Chr(34) & ucrDataFrameCopySheets.strCurrDataFrame & Chr(34), iPosition:=0)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCopyColumnMetadataFunction)
+        ElseIf rdoDataFrameMetadata.Checked Then
+            'todo. temporarily added here because this control's parameter pair condition is not updated
+            'until when a selection change event is raised
+            clsCopyDataFrameMetadataFunction.AddParameter("data_name", strParameterValue:=Chr(34) & ucrDataFrameCopySheets.strCurrDataFrame & Chr(34), iPosition:=0)
+            ucrBase.clsRsyntax.SetBaseRFunction(clsCopyDataFrameMetadataFunction)
+        End If
     End Sub
 End Class
