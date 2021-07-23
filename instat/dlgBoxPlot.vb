@@ -45,6 +45,7 @@ Public Class dlgBoxplot
 
     'Adding new function s
     Private clsBoxplotFunc As New RFunction
+    Private clsTufteBoxplotFunc As New RFunction
     Private clsJitterplotFunc As New RFunction
     Private clsViolinplotFunc As New RFunction
     Private clsCurrGeomFunc As New RFunction
@@ -70,7 +71,6 @@ Public Class dlgBoxplot
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        SetOptionsButtonstext()
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
@@ -85,14 +85,15 @@ Public Class dlgBoxplot
         ucrBase.clsRsyntax.iCallType = 3
 
         ucrPnlPlots.AddRadioButton(rdoViolin)
-        ucrPnlPlots.AddRadioButton(rdoBoxplot)
+        ucrPnlPlots.AddRadioButton(rdoBoxplotTufte)
         ucrPnlPlots.AddRadioButton(rdoJitter)
 
-        ucrPnlPlots.AddFunctionNamesCondition(rdoBoxplot, "geom_boxplot")
+        ucrPnlPlots.AddFunctionNamesCondition(rdoBoxplotTufte, {"geom_boxplot", "geom_tufteboxplot"})
         ucrPnlPlots.AddFunctionNamesCondition(rdoJitter, "geom_jitter")
         ucrPnlPlots.AddFunctionNamesCondition(rdoViolin, "geom_violin")
-        ucrPnlPlots.AddToLinkedControls(ucrChkVarWidth, {rdoBoxplot}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlPlots.AddToLinkedControls(ucrChkAddPoints, {rdoBoxplot, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls(ucrChkAddPoints, {rdoBoxplotTufte, rdoViolin}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlPlots.AddToLinkedControls({ucrChkTufte}, {rdoBoxplotTufte}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkTufte.AddToLinkedControls(ucrChkVarWidth, {"FALSE"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorBoxPlot.SetParameter(New RParameter("data", 0))
         ucrSelectorBoxPlot.SetParameterIsrfunction()
@@ -113,6 +114,7 @@ Public Class dlgBoxplot
         ucrByFactorsReceiver.bWithQuotes = False
         ucrByFactorsReceiver.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrByFactorsReceiver.bAddParameterIfEmpty = True
+        ucrSecondFactorReceiver.SetLinkedDisplayControl(lblByFactors)
 
         ucrSecondFactorReceiver.SetParameter(New RParameter("fill", 2))
         ucrSecondFactorReceiver.Selector = ucrSelectorBoxPlot
@@ -120,6 +122,7 @@ Public Class dlgBoxplot
         ucrSecondFactorReceiver.strSelectorHeading = "Factors"
         ucrSecondFactorReceiver.SetParameterIsString()
         ucrSecondFactorReceiver.bWithQuotes = False
+        ucrSecondFactorReceiver.SetLinkedDisplayControl(lblBySecondFactor)
 
         ucrChkVarWidth.SetParameter(New RParameter("varwidth", 0))
         ucrChkVarWidth.SetText("Variable Width")
@@ -155,6 +158,10 @@ Public Class dlgBoxplot
         ucrNudTransparency.SetLinkedDisplayControl(lblTransparency)
         ucrNudTransparency.SetRDefault(1)
 
+        ucrChkTufte.SetText("Tufte Box plots")
+        ucrChkTufte.AddFunctionNamesCondition(False, "geom_tufteboxplot", False)
+        ucrChkTufte.AddFunctionNamesCondition(True, "geom_tufteboxplot")
+
         ucrSaveBoxplot.SetPrefix("boxplot")
         ucrSaveBoxplot.SetIsComboBox()
         ucrSaveBoxplot.SetCheckBoxText("Save Graph")
@@ -175,8 +182,6 @@ Public Class dlgBoxplot
         ucrChkGrouptoConnect.AddParameterPresentCondition(False, strStatSummaryParameterName, False)
         'this control exists but diabled for now
         ucrChkSwapParameters.SetText("swap Parameters")
-
-        'ucrSecondFactorReceiver.AddToLinkedControls(ucrChkSwapParameters, {ucrSecondFactorReceiver.IsEmpty = False}, bNewLinkedHideIfParameterMissing:=True)
     End Sub
 
     Private Sub SetDefaults()
@@ -189,6 +194,7 @@ Public Class dlgBoxplot
 
         'Setting up new functions
         clsBoxplotFunc = New RFunction
+        clsTufteBoxplotFunc = New RFunction
         clsJitterplotFunc = New RFunction
         clsViolinplotFunc = New RFunction
 
@@ -212,6 +218,12 @@ Public Class dlgBoxplot
         clsBoxplotFunc.AddParameter("varwidth", "FALSE", iPosition:=0)
         clsBoxplotFunc.AddParameter("outlier.colour", Chr(34) & "red" & Chr(34), iPosition:=1)
 
+        clsTufteBoxplotFunc.SetPackageName("ggthemes")
+        clsTufteBoxplotFunc.SetRCommand("geom_tufteboxplot")
+        clsTufteBoxplotFunc.AddParameter("stat", Chr(34) & "boxplot" & Chr(34), iPosition:=0)
+        clsTufteBoxplotFunc.AddParameter("median.type", Chr(34) & "line" & Chr(34), iPosition:=1)
+        clsTufteBoxplotFunc.AddParameter("coef ", "1.5", iPosition:=14)
+
         clsViolinplotFunc.SetPackageName("ggplot2")
         clsViolinplotFunc.SetRCommand("geom_violin")
 
@@ -229,7 +241,6 @@ Public Class dlgBoxplot
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsBoxplotFunc, iPosition:=2)
-        'clsBaseOperator.AddParameter(strStatSummaryParameterName, clsRFunctionParameter:=clsStatSummary, iPosition:=3)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -237,14 +248,13 @@ Public Class dlgBoxplot
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
-        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
 
         clsStatSummary.SetPackageName("ggplot2")
         clsStatSummary.SetRCommand("stat_summary")
-        clsStatSummary.AddParameter("geom", Chr(34) & "line" & Chr(34))
-        clsStatSummary.AddParameter("group", 1)
-        clsStatSummary.AddParameter("color", Chr(34) & "blue" & Chr(34))
-        clsStatSummary.AddParameter("size", 1.5)
+        clsStatSummary.AddParameter("geom", Chr(34) & "line" & Chr(34), iPosition:=0)
+        clsStatSummary.AddParameter("group", 1, iPosition:=1)
+        clsStatSummary.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -290,6 +300,7 @@ Public Class dlgBoxplot
         ucrChkGrouptoConnect.SetRCode(clsBaseOperator, bReset)
         ucrPnlPlots.SetRCode(clsCurrGeomFunc, bReset)
 
+        ucrChkTufte.SetRCode(clsCurrGeomFunc, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -358,17 +369,29 @@ Public Class dlgBoxplot
     End Sub
 
     Private Sub SetGeomPrefixFillColourAes()
-        'Sets geom function, fill and colour aesthetics and ucrsave prefix
-        If rdoBoxplot.Checked Then
-            ucrSaveBoxplot.SetPrefix("boxplot")
-            ucrSecondFactorReceiver.ChangeParameterName("fill")
-            clsCurrGeomFunc = clsBoxplotFunc
+        'Sets geom function, fill and colour aesthetics, ucrsave prefix and stat summary parameters
+        clsStatSummary.AddParameter("size", 1.5, iPosition:=3)
+        If rdoBoxplotTufte.Checked Then
+            If ucrChkTufte.Checked Then
+                cmdBoxPlotOptions.Text = "Tufte Boxplot Options"
+                ucrSaveBoxplot.SetPrefix("tufte_boxplot")
+                clsCurrGeomFunc = clsTufteBoxplotFunc
+                clsStatSummary.AddParameter("size", 0.7, iPosition:=3)
+                ucrSecondFactorReceiver.ChangeParameterName("colour")
+            Else
+                cmdBoxPlotOptions.Text = "Boxplot Options"
+                ucrSaveBoxplot.SetPrefix("boxplot")
+                ucrSecondFactorReceiver.ChangeParameterName("fill")
+                clsCurrGeomFunc = clsBoxplotFunc
+            End If
 
         ElseIf rdoJitter.Checked Then
+            cmdBoxPlotOptions.Text = "Jitter Options"
             ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
             clsCurrGeomFunc = clsJitterplotFunc
         Else
+            cmdBoxPlotOptions.Text = "Violin Options"
             ucrSaveBoxplot.SetPrefix("violin")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             clsCurrGeomFunc = clsViolinplotFunc
@@ -377,18 +400,7 @@ Public Class dlgBoxplot
         'does Not Update() properly when readio buttons are changed
         'hence i have to force it to update properly after this if statement
         clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsCurrGeomFunc, iPosition:=2)
-        SetOptionsButtonstext()
         autoTranslate(Me)
-    End Sub
-
-    Private Sub SetOptionsButtonstext()
-        If rdoBoxplot.Checked Then
-            cmdBoxPlotOptions.Text = "Boxplot Options"
-        ElseIf rdoJitter.Checked Then
-            cmdBoxPlotOptions.Text = "Jitter Options"
-        Else
-            cmdBoxPlotOptions.Text = "Violin Options"
-        End If
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
@@ -405,7 +417,7 @@ Public Class dlgBoxplot
         TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
-    Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged
+    Private Sub ucrPnlPlots_ControlValueChanged() Handles ucrPnlPlots.ControlValueChanged, ucrChkTufte.ControlContentsChanged
         SetGeomPrefixFillColourAes()
     End Sub
 
@@ -420,7 +432,6 @@ Public Class dlgBoxplot
             clsBaseOperator.RemoveParameterByName(strStatSummaryParameterName)
         End If
     End Sub
-
 
     'this code is commented out but will work once we get the feature of linking controls with the contents of a receiver
     'Private Sub SwapFactors()
