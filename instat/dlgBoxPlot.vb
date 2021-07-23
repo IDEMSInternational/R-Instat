@@ -70,7 +70,6 @@ Public Class dlgBoxplot
         End If
         SetRCodeForControls(bReset)
         bReset = False
-        SetOptionsButtonstext()
         autoTranslate(Me)
         TestOkEnabled()
     End Sub
@@ -241,7 +240,6 @@ Public Class dlgBoxplot
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
         clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsBoxplotFunc, iPosition:=2)
-        'clsBaseOperator.AddParameter(strStatSummaryParameterName, clsRFunctionParameter:=clsStatSummary, iPosition:=3)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -249,13 +247,13 @@ Public Class dlgBoxplot
 
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
-        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34))
+        clsRaesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
 
         clsStatSummary.SetPackageName("ggplot2")
         clsStatSummary.SetRCommand("stat_summary")
-        clsStatSummary.AddParameter("geom", Chr(34) & "line" & Chr(34))
-        clsStatSummary.AddParameter("group", 1)
-        clsStatSummary.AddParameter("color", Chr(34) & "blue" & Chr(34))
+        clsStatSummary.AddParameter("geom", Chr(34) & "line" & Chr(34), iPosition:=0)
+        clsStatSummary.AddParameter("group", 1, iPosition:=1)
+        clsStatSummary.AddParameter("color", Chr(34) & "blue" & Chr(34), iPosition:=2)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -370,24 +368,28 @@ Public Class dlgBoxplot
 
     Private Sub SetGeomPrefixFillColourAes()
         'Sets geom function, fill and colour aesthetics, ucrsave prefix and stat summary parameters
-        clsStatSummary.AddParameter("size", 1.5)
+        clsStatSummary.AddParameter("size", 1.5, iPosition:=3)
         If rdoBoxplotTufte.Checked Then
             If ucrChkTufte.Checked Then
+                cmdBoxPlotOptions.Text = "Tufte Boxplot Options"
                 ucrSaveBoxplot.SetPrefix("tufte_boxplot")
                 clsCurrGeomFunc = clsTufteBoxplotFunc
-                clsStatSummary.AddParameter("size", 0.7)
+                clsStatSummary.AddParameter("size", 0.7, iPosition:=3)
                 ucrSecondFactorReceiver.ChangeParameterName("colour")
             Else
+                cmdBoxPlotOptions.Text = "Boxplot Options"
                 ucrSaveBoxplot.SetPrefix("boxplot")
                 ucrSecondFactorReceiver.ChangeParameterName("fill")
                 clsCurrGeomFunc = clsBoxplotFunc
             End If
 
         ElseIf rdoJitter.Checked Then
+            cmdBoxPlotOptions.Text = "Jitter Options"
             ucrSaveBoxplot.SetPrefix("jitter")
             ucrSecondFactorReceiver.ChangeParameterName("colour")
             clsCurrGeomFunc = clsJitterplotFunc
         Else
+            cmdBoxPlotOptions.Text = "Violin Options"
             ucrSaveBoxplot.SetPrefix("violin")
             ucrSecondFactorReceiver.ChangeParameterName("fill")
             clsCurrGeomFunc = clsViolinplotFunc
@@ -396,22 +398,7 @@ Public Class dlgBoxplot
         'does Not Update() properly when readio buttons are changed
         'hence i have to force it to update properly after this if statement
         clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsCurrGeomFunc, iPosition:=2)
-        SetOptionsButtonstext()
         autoTranslate(Me)
-    End Sub
-
-    Private Sub SetOptionsButtonstext()
-        If rdoBoxplotTufte.Checked Then
-            If ucrChkTufte.Checked Then
-                cmdBoxPlotOptions.Text = "Tufte Boxplot Options"
-            Else
-                cmdBoxPlotOptions.Text = "Boxplot Options"
-            End If
-        ElseIf rdoJitter.Checked Then
-            cmdBoxPlotOptions.Text = "Jitter Options"
-        Else
-            cmdBoxPlotOptions.Text = "Violin Options"
-        End If
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
@@ -443,15 +430,6 @@ Public Class dlgBoxplot
             clsBaseOperator.RemoveParameterByName(strStatSummaryParameterName)
         End If
     End Sub
-
-    Private Sub ucrPnlPlots_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPlots.ControlValueChanged, ucrChkTufte.ControlContentsChanged
-
-    End Sub
-
-    Private Sub ucrVariablesAsFactorForBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBoxplot.ControlContentsChanged
-
-    End Sub
-
 
     'this code is commented out but will work once we get the feature of linking controls with the contents of a receiver
     'Private Sub SwapFactors()
