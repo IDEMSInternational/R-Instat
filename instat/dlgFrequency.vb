@@ -19,7 +19,7 @@ Public Class dlgFrequency
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
-    '    Private clsSummaryCount As New RFunction
+    Private clsMmtableFunction As New RFunction
     Private bResetSubdialog As Boolean = False
     Private lstCheckboxes As New List(Of ucrCheck)
     Private bRCodeSet As Boolean = True
@@ -40,7 +40,7 @@ Public Class dlgFrequency
 
     Private Sub InitialiseDialog()
         Dim dctPercentageType As New Dictionary(Of String, String)
-        ucrBase.clsRsyntax.iCallType = 4
+        ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 425
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -63,28 +63,14 @@ Public Class dlgFrequency
         ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkStoreResults.SetRDefault("TRUE")
 
-        '8: summary_name = NA
-
         ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 9))
         ucrChkDisplayMargins.SetText("Display Margins")
         ucrChkDisplayMargins.SetRDefault("FALSE")
 
-        'ucrChkPrintOutput.SetParameter(New RParameter("return_output", 10))
-        'ucrChkPrintOutput.SetText("Print to Output Window")
-        'ucrChkPrintOutput.SetRDefault("TRUE")
-
         ' For the page_by option:
         ucrInputPageBy.Enabled = False ' Temporary, not yet implemented in R function
-        'ucrInputPageBy.SetParameter(New RParameter("page_by", 12))
-        'temp added to prevent developer error while disabled
+
         ucrInputPageBy.bIsActiveRControl = False
-        'dctPageBy.Add("None", "NULL")
-        'dctPageBy.Add("Variables", Chr(34) & "variables" & Chr(34))
-        'dctPageBy.Add("Summaries", Chr(34) & "summaries" & Chr(34))
-        'dctPageBy.Add("Variables and Summaries", "c(" & Chr(34) & "variables" & Chr(34) & "," & Chr(34) & "summaries" & Chr(34) & ")")
-        'dctPageBy.Add("Default", Chr(34) & "default" & Chr(34))
-        'ucrInputPageBy.SetItems(dctPageBy)
-        'ucrInputPageBy.SetRDefault(Chr(34) & "default" & Chr(34))
 
         ucrChkHTMLTable.SetParameter(New RParameter("as_html", 13))
         ucrChkHTMLTable.SetText("HTML Table")
@@ -140,22 +126,23 @@ Public Class dlgFrequency
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
-        '        clsSummaryCount = New RFunction
+        clsMMtableFunction = New RFunction
+
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorFrequency.Reset()
         ucrSaveTable.Reset()
-
-        '        clsSummaryCount.SetRCommand("c")
-        '        clsSummaryCount.AddParameter("count_label", "count_label", bIncludeArgumentName:=False) ' TODO decide which default(s) to use?
+        clsMMtableFunction.SetPackageName("mmtable2")
+        clsMmtableFunction.SetRCommand("mmtable")
+        clsMmtableFunction.AddParameter("data", "frequency_table", iPosition:=0)
+        clsMmtableFunction.AddParameter("cells", "value", iPosition:=1)
 
         clsDefaultFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$summary_table")
         clsDefaultFunction.AddParameter("summaries", "count_label", iPosition:=2) 'clsRFunctionParameter:=clsSummaryCount, iPosition:=2)
         clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=5)
         clsDefaultFunction.AddParameter("rnames", "FALSE", iPosition:=18)
         clsDefaultFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorFrequency.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
+        clsDefaultFunction.SetAssignTo("frequency_table")
         bResetSubdialog = True
     End Sub
 
