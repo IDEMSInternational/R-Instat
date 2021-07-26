@@ -1932,6 +1932,46 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's keys. </summary>
+    '''
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
+    '''
+    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's survs. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function GetKeyNames(Optional strDataFrameName As String = "") As List(Of String)
+        Return GetNames(strDataFrameName, "$get_key_names")
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's links. </summary>
+    '''
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
+    '''
+    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's survs. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function GetLinkNames(Optional strDataFrameName As String = "") As List(Of String)
+        Return GetNames(strDataFrameName, "$get_link_names")
+    End Function
+
+    Private Function GetNames(strDataFrameName As String, strRCommand As String) As List(Of String)
+        Dim lstNames As New List(Of String)
+        Dim clsGetNames As New RFunction
+        Dim expNames As SymbolicExpression
+
+        clsGetNames.SetRCommand(strInstatDataObject & strRCommand)
+
+        If strDataFrameName <> "" Then
+            clsGetNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        expNames = RunInternalScriptGetValue(clsGetNames.ToScript(), bSilent:=True)
+        If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
+            lstNames = expNames.AsCharacter.ToArray.ToList
+        End If
+        Return lstNames
+    End Function
+
+
+    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets the data type of the <paramref name="strColumnName"/> column in the 
     '''             <paramref name="strDataFrameName"/> data frame. </summary>
     '''

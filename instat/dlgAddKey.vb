@@ -54,16 +54,19 @@ Public Class dlgAddKey
         ucrReceiverKeyColumns.Selector = ucrSelectorKeyColumns
         ucrReceiverKeyColumns.SetMeAsReceiver()
 
-        ucrInputKeyName.SetParameter(New RParameter("key_name", 2))
-        ucrInputKeyName.SetValidationTypeAsRVariable()
+        ucrSaveKey.SetParameter(New RParameter("key_name", 2))
+        ucrSaveKey.SetSaveTypeAsKey()
+        ucrSaveKey.SetDataFrameSelector(ucrSelectorKeyColumns.ucrAvailableDataFrames)
+        ucrSaveKey.SetLabelText("Key:")
+        ucrSaveKey.SetIsTextBox()
+        ucrSaveKey.SetPrefix("key")
     End Sub
 
     Private Sub SetDefaults()
         clsDefaultRFunction = New RFunction
 
         ucrSelectorKeyColumns.Reset()
-        ucrInputKeyName.SetName("")
-        ucrInputKeyName.Reset()
+        ucrSaveKey.Reset()
         ucrInputCheckInput.Reset()
         bUniqueChecked = False
 
@@ -76,7 +79,8 @@ Public Class dlgAddKey
     End Sub
 
     Private Sub TestOKEnabled()
-        If ((Not ucrReceiverKeyColumns.IsEmpty()) AndAlso (Not ucrInputKeyName.IsEmpty())) AndAlso bUniqueChecked Then
+        If ((Not ucrReceiverKeyColumns.IsEmpty()) AndAlso ucrSaveKey.IsComplete) AndAlso bUniqueChecked Then
+
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -130,7 +134,7 @@ Public Class dlgAddKey
         ucrInputCheckInput.txtInput.BackColor = SystemColors.Window
     End Sub
 
-    Private Sub AllControls_ControlContentsChanged() Handles ucrInputKeyName.ControlContentsChanged, ucrReceiverKeyColumns.ControlContentsChanged
+    Private Sub AllControls_ControlContentsChanged() Handles ucrSaveKey.ControlContentsChanged, ucrReceiverKeyColumns.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
