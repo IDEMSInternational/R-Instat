@@ -196,7 +196,7 @@ Public Class dlgHistogram
 
     Private Sub TestOkEnabled()
         'Tests when ok can be enabled
-        If ucrVariablesAsFactorforHist.IsEmpty OrElse Not ucrSaveHist.IsComplete OrElse (ucrChkRidges.Checked AndAlso ucrFactorReceiver.IsEmpty) Then
+        If ucrVariablesAsFactorforHist.IsEmpty OrElse Not ucrSaveHist.IsComplete OrElse (ucrChkRidges.Checked AndAlso (ucrFactorReceiver.IsEmpty OrElse ucrFactorReceiver.Enabled = False)) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
@@ -241,55 +241,45 @@ Public Class dlgHistogram
             cmdHistogramOptions.Text = "Histogram Options"
             clsRgeomPlotFunction.SetRCommand("geom_histogram")
             clsRaesFunction.RemoveParameterByName("colour")
-            clsRaesFunction.RemoveParameterByName("y")
             If Not ucrFactorReceiver.IsEmpty Then
                 clsRaesFunction.AddParameter("fill", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=1)
             Else
                 clsRaesFunction.RemoveParameterByName("fill")
             End If
             If Not ucrSaveHist.bUserTyped Then
-                    ucrSaveHist.SetPrefix("histogram")
-                End If
-            ElseIf rdoDensity_ridges.Checked Then
+                ucrSaveHist.SetPrefix("histogram")
+            End If
+        Else
+            clsRaesFunction.RemoveParameterByName("fill")
+            If Not ucrFactorReceiver.IsEmpty Then
+                clsRaesFunction.AddParameter("colour", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=1)
+            Else
+                clsRaesFunction.RemoveParameterByName("colour")
+            End If
+            If rdoDensity_ridges.Checked Then
                 If ucrChkRidges.Checked Then
                     cmdHistogramOptions.Text = "Density Ridges Options"
                     clsHistAesFunction.RemoveParameterByName("y")
                     clsHistAesFunction.AddParameter("x", clsRFunctionParameter:=ucrVariablesAsFactorforHist.GetVariables(), iPosition:=1)
                     clsHistAesFunction.AddParameter("y", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=2)
                     clsRgeomPlotFunction.SetPackageName("ggridges")
-                clsRgeomPlotFunction.SetRCommand("geom_density_ridges")
-                clsRaesFunction.RemoveParameterByName("fill")
-                    clsRaesFunction.RemoveParameterByName("colour")
-                    clsRaesFunction.AddParameter("y", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=1)
+                    clsRgeomPlotFunction.SetRCommand("geom_density_ridges")
                     If Not ucrSaveHist.bUserTyped Then
                         ucrSaveHist.SetPrefix("density_ridges")
                     End If
                 Else
                     cmdHistogramOptions.Text = "Density Options"
-                clsRgeomPlotFunction.SetRCommand("geom_density")
-                clsRaesFunction.RemoveParameterByName("fill")
-                    clsRaesFunction.RemoveParameterByName("y")
-                If Not ucrFactorReceiver.IsEmpty Then
-                    clsRaesFunction.AddParameter("colour", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=1)
-                Else
-                    clsRaesFunction.RemoveParameterByName("colour")
+                    clsRgeomPlotFunction.SetRCommand("geom_density")
+                    If Not ucrSaveHist.bUserTyped Then
+                        ucrSaveHist.SetPrefix("density")
+                    End If
                 End If
-                If Not ucrSaveHist.bUserTyped Then
-                    ucrSaveHist.SetPrefix("density")
-                End If
-            End If
             ElseIf rdoFrequencyPolygon.Checked Then
                 cmdHistogramOptions.Text = "Frequency Polygon Options"
-            clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
-            clsRaesFunction.RemoveParameterByName("fill")
-            clsRaesFunction.RemoveParameterByName("y")
-            If Not ucrFactorReceiver.IsEmpty Then
-                clsRaesFunction.AddParameter("colour", clsRFunctionParameter:=ucrFactorReceiver.GetVariables(), iPosition:=1)
-            Else
-                clsRaesFunction.RemoveParameterByName("colour")
-            End If
-            If Not ucrSaveHist.bUserTyped Then
-                ucrSaveHist.SetPrefix("frequency_polygon")
+                clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
+                If Not ucrSaveHist.bUserTyped Then
+                    ucrSaveHist.SetPrefix("frequency_polygon")
+                End If
             End If
         End If
         autoTranslate(Me)
