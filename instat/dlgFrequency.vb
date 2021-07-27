@@ -20,7 +20,9 @@ Public Class dlgFrequency
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
     Private clsMmtableFunction As New RFunction
+    Private clsHeaderTopLeftFunction As New RFunction
     Private clsFrequencyOperator As New ROperator
+    Private clsMmtableOperator As New ROperator
     Private bResetSubdialog As Boolean = False
     Private lstCheckboxes As New List(Of ucrCheck)
     Private bRCodeSet As Boolean = True
@@ -115,15 +117,22 @@ Public Class dlgFrequency
 
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
-        clsMMtableFunction = New RFunction
+        clsMmtableFunction = New RFunction
+        clsHeaderTopLeftFunction = New RFunction
         clsFrequencyOperator = New ROperator
+        clsMmtableOperator = New ROperator
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorFrequency.Reset()
         ucrSaveTable.Reset()
 
+        clsMmtableOperator.SetOperation("+")
+
         clsFrequencyOperator.SetOperation("+")
         clsFrequencyOperator.AddParameter("mmtable2", clsRFunctionParameter:=clsMmtableFunction, iPosition:=0)
+
+        clsHeaderTopLeftFunction.SetPackageName("mmtable2")
+        clsHeaderTopLeftFunction.SetRCommand("header_top_left")
 
         clsMmtableFunction.SetPackageName("mmtable2")
         clsMmtableFunction.SetRCommand("mmtable")
@@ -187,6 +196,25 @@ Public Class dlgFrequency
     Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged
         If bRCodeSet Then
             SetMaxColumnFactors()
+        End If
+        If ucrReceiverFactors.GetCount() > 0 Then
+            clsFrequencyOperator.RemoveParameterByName("tops")
+            clsHeaderTopLeftFunction.AddParameter("factorOne", ucrReceiverFactors.GetVariableNamesAsList().Item(0), iPosition:=0)
+            clsMmtableOperator.AddParameter("leftTop", clsRFunctionParameter:=clsHeaderTopLeftFunction, iPosition:=1)
+            If ucrReceiverFactors.GetCount() > 1 Then
+                Dim iCount As Integer = 0
+                For Each StrVariableName As String In ucrReceiverFactors.GetVariableNamesAsList()
+                    If iCount >= 1 Then
+                        Dim clsHeaderLeftTopFunction As New RFunction
+                        clsHeaderLeftTopFunction.SetPackageName("mmtable2")
+                        clsHeaderLeftTopFunction.SetRCommand("header_left_top")
+                        clsHeaderLeftTopFunction.AddParameter("icount", ucrReceiverFactors.GetVariableNamesAsList().Item(iCount), iPosition:=iCount - 1)
+                        clsMmtableOperator.AddParameter("icount", clsRFunctionParameter:=clsHeaderLeftTopFunction, iPosition:=iCount)
+                    End If
+                    iCount += 1
+                Next
+            End If
+            clsFrequencyOperator.AddParameter("tops", clsROperatorParameter:=clsMmtableOperator, iPosition:=1)
         End If
     End Sub
 
