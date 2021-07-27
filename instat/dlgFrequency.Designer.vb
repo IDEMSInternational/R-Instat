@@ -42,15 +42,10 @@ Partial Class dlgFrequency
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.lblColumnFactors = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.lblDisplayNA = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ucrNudSigFigs = New instat.ucrNud()
         Me.ucrNudColumnFactors = New instat.ucrNud()
-        Me.ucrInputNA = New instat.ucrInputTextBox()
         Me.ucrChkRowNumbers = New instat.ucrCheck()
-        Me.lblPageBy = New System.Windows.Forms.Label()
-        Me.ucrInputPageBy = New instat.ucrInputComboBox()
-        Me.ucrChkHTMLTable = New instat.ucrCheck()
         Me.lblSigFigs = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
         Me.lblFactorsAsPercentage = New System.Windows.Forms.Label()
@@ -88,23 +83,12 @@ Partial Class dlgFrequency
         Me.cmdOptions.Name = "cmdOptions"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'lblDisplayNA
-        '
-        resources.ApplyResources(Me.lblDisplayNA, "lblDisplayNA")
-        Me.lblDisplayNA.Name = "lblDisplayNA"
-        Me.lblDisplayNA.Tag = ""
-        '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.ucrNudSigFigs)
         Me.GroupBox1.Controls.Add(Me.ucrNudColumnFactors)
         Me.GroupBox1.Controls.Add(Me.lblColumnFactors)
-        Me.GroupBox1.Controls.Add(Me.ucrInputNA)
         Me.GroupBox1.Controls.Add(Me.ucrChkRowNumbers)
-        Me.GroupBox1.Controls.Add(Me.lblPageBy)
-        Me.GroupBox1.Controls.Add(Me.lblDisplayNA)
-        Me.GroupBox1.Controls.Add(Me.ucrInputPageBy)
-        Me.GroupBox1.Controls.Add(Me.ucrChkHTMLTable)
         Me.GroupBox1.Controls.Add(Me.lblSigFigs)
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
@@ -130,38 +114,11 @@ Partial Class dlgFrequency
         Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
         Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputNA
-        '
-        Me.ucrInputNA.AddQuotesIfUnrecognised = True
-        Me.ucrInputNA.IsMultiline = False
-        Me.ucrInputNA.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNA, "ucrInputNA")
-        Me.ucrInputNA.Name = "ucrInputNA"
-        '
         'ucrChkRowNumbers
         '
         Me.ucrChkRowNumbers.Checked = False
         resources.ApplyResources(Me.ucrChkRowNumbers, "ucrChkRowNumbers")
         Me.ucrChkRowNumbers.Name = "ucrChkRowNumbers"
-        '
-        'lblPageBy
-        '
-        resources.ApplyResources(Me.lblPageBy, "lblPageBy")
-        Me.lblPageBy.Name = "lblPageBy"
-        Me.lblPageBy.Tag = "Page by:"
-        '
-        'ucrInputPageBy
-        '
-        Me.ucrInputPageBy.AddQuotesIfUnrecognised = True
-        Me.ucrInputPageBy.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPageBy, "ucrInputPageBy")
-        Me.ucrInputPageBy.Name = "ucrInputPageBy"
-        '
-        'ucrChkHTMLTable
-        '
-        Me.ucrChkHTMLTable.Checked = False
-        resources.ApplyResources(Me.ucrChkHTMLTable, "ucrChkHTMLTable")
-        Me.ucrChkHTMLTable.Name = "ucrChkHTMLTable"
         '
         'lblSigFigs
         '
@@ -308,14 +265,9 @@ Partial Class dlgFrequency
     Friend WithEvents UcrCheck1 As ucrCheck
     Friend WithEvents ucrChkStoreResults As ucrCheck
     Friend WithEvents ucrNudSigFigs As ucrNud
-    Friend WithEvents ucrChkHTMLTable As ucrCheck
-    Friend WithEvents ucrInputNA As ucrInputTextBox
-    Friend WithEvents lblDisplayNA As Label
     Friend WithEvents ucrSaveTable As ucrSave
     Friend WithEvents ucrChkRowNumbers As ucrCheck
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents lblPageBy As Label
-    Friend WithEvents ucrInputPageBy As ucrInputComboBox
     Friend WithEvents lblSigFigs As Label
     Friend WithEvents ucrChkPercentageProportion As ucrCheck
     Friend WithEvents grpDisplay As GroupBox

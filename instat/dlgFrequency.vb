@@ -20,6 +20,7 @@ Public Class dlgFrequency
     Private bReset As Boolean = True
     Private clsDefaultFunction As New RFunction
     Private clsMmtableFunction As New RFunction
+    Private clsFrequencyOperator As New ROperator
     Private bResetSubdialog As Boolean = False
     Private lstCheckboxes As New List(Of ucrCheck)
     Private bRCodeSet As Boolean = True
@@ -67,21 +68,9 @@ Public Class dlgFrequency
         ucrChkDisplayMargins.SetText("Display Margins")
         ucrChkDisplayMargins.SetRDefault("FALSE")
 
-        ' For the page_by option:
-        ucrInputPageBy.Enabled = False ' Temporary, not yet implemented in R function
-
-        ucrInputPageBy.bIsActiveRControl = False
-
-        ucrChkHTMLTable.SetParameter(New RParameter("as_html", 13))
-        ucrChkHTMLTable.SetText("HTML Table")
-        ucrChkHTMLTable.SetRDefault("TRUE")
-
         ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 14))
         ucrNudSigFigs.SetMinMax(0, 22)
         ucrNudSigFigs.SetRDefault(2)
-
-        ucrInputNA.SetParameter(New RParameter("na_display", 15))
-        ucrInputNA.SetRDefault(Chr(34) & Chr(34))
 
         '16: na_level_display = "NA"
 
@@ -127,12 +116,16 @@ Public Class dlgFrequency
     Private Sub SetDefaults()
         clsDefaultFunction = New RFunction
         clsMMtableFunction = New RFunction
-
+        clsFrequencyOperator = New ROperator
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorFrequency.Reset()
         ucrSaveTable.Reset()
-        clsMMtableFunction.SetPackageName("mmtable2")
+
+        clsFrequencyOperator.SetOperation("+")
+        clsFrequencyOperator.AddParameter("mmtable2", clsRFunctionParameter:=clsMmtableFunction, iPosition:=0)
+
+        clsMmtableFunction.SetPackageName("mmtable2")
         clsMmtableFunction.SetRCommand("mmtable")
         clsMmtableFunction.AddParameter("data", "frequency_table", iPosition:=0)
         clsMmtableFunction.AddParameter("cells", "value", iPosition:=1)
@@ -143,6 +136,8 @@ Public Class dlgFrequency
         clsDefaultFunction.AddParameter("rnames", "FALSE", iPosition:=18)
         clsDefaultFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorFrequency.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
         clsDefaultFunction.SetAssignTo("frequency_table")
+
+        ucrBase.clsRsyntax.SetBaseROperator(clsFrequencyOperator)
         bResetSubdialog = True
     End Sub
 
@@ -192,14 +187,6 @@ Public Class dlgFrequency
     Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged
         If bRCodeSet Then
             SetMaxColumnFactors()
-        End If
-    End Sub
-
-    Private Sub ucrChkHTMLTable_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkHTMLTable.ControlValueChanged
-        If ucrChkHTMLTable.Checked Then
-            ucrBase.clsRsyntax.iCallType = 4
-        Else
-            ucrBase.clsRsyntax.iCallType = 2
         End If
     End Sub
 
