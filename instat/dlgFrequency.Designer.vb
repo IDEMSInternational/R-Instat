@@ -40,12 +40,9 @@ Partial Class dlgFrequency
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgFrequency))
         Me.lblFactors = New System.Windows.Forms.Label()
-        Me.lblColumnFactors = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.ucrNudSigFigs = New instat.ucrNud()
-        Me.ucrNudColumnFactors = New instat.ucrNud()
-        Me.ucrChkRowNumbers = New instat.ucrCheck()
         Me.lblSigFigs = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
         Me.lblFactorsAsPercentage = New System.Windows.Forms.Label()
@@ -71,12 +68,6 @@ Partial Class dlgFrequency
         Me.lblFactors.Name = "lblFactors"
         Me.lblFactors.Tag = "Factors:"
         '
-        'lblColumnFactors
-        '
-        resources.ApplyResources(Me.lblColumnFactors, "lblColumnFactors")
-        Me.lblColumnFactors.Name = "lblColumnFactors"
-        Me.lblColumnFactors.Tag = "Column_Factors"
-        '
         'cmdOptions
         '
         resources.ApplyResources(Me.cmdOptions, "cmdOptions")
@@ -86,9 +77,6 @@ Partial Class dlgFrequency
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.ucrNudSigFigs)
-        Me.GroupBox1.Controls.Add(Me.ucrNudColumnFactors)
-        Me.GroupBox1.Controls.Add(Me.lblColumnFactors)
-        Me.GroupBox1.Controls.Add(Me.ucrChkRowNumbers)
         Me.GroupBox1.Controls.Add(Me.lblSigFigs)
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
@@ -103,22 +91,6 @@ Partial Class dlgFrequency
         Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
         Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudColumnFactors
-        '
-        Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudColumnFactors, "ucrNudColumnFactors")
-        Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
-        Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkRowNumbers
-        '
-        Me.ucrChkRowNumbers.Checked = False
-        resources.ApplyResources(Me.ucrChkRowNumbers, "ucrChkRowNumbers")
-        Me.ucrChkRowNumbers.Name = "ucrChkRowNumbers"
         '
         'lblSigFigs
         '
@@ -258,15 +230,12 @@ Partial Class dlgFrequency
     Friend WithEvents lblFactors As Label
     Friend WithEvents ucrReceiverSingle As ucrReceiverSingle
     Friend WithEvents ucrChkWeights As ucrCheck
-    Friend WithEvents ucrNudColumnFactors As ucrNud
-    Friend WithEvents lblColumnFactors As Label
     Friend WithEvents ucrChkDisplayMargins As ucrCheck
     Friend WithEvents cmdOptions As Button
     Friend WithEvents UcrCheck1 As ucrCheck
     Friend WithEvents ucrChkStoreResults As ucrCheck
     Friend WithEvents ucrNudSigFigs As ucrNud
     Friend WithEvents ucrSaveTable As ucrSave
-    Friend WithEvents ucrChkRowNumbers As ucrCheck
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents lblSigFigs As Label
     Friend WithEvents ucrChkPercentageProportion As ucrCheck
