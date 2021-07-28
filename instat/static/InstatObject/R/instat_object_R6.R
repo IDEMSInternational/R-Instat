@@ -1022,8 +1022,14 @@ DataBook$set("public", "reorder_dataframes", function(data_frames_order) {
 } 
 )
 
-DataBook$set("public", "copy_columns", function(data_name, col_names = "") {
-  self$get_data_objects(data_name)$copy_columns(col_names = col_names)
+DataBook$set("public", "copy_columns", function(data_name, col_names = "", copy_to_clipboard = FALSE) {
+  if(copy_to_clipboard){
+    col_data_obj <- self$get_columns_from_data(data_name = data_name, col_names = col_names, force_as_data_frame = TRUE)
+    self$copy_to_clipboard(content = col_data_obj)
+  }else{
+    self$get_data_objects(data_name)$copy_columns(col_names = col_names)
+  }
+
 } 
 )
 
@@ -1062,20 +1068,47 @@ DataBook$set("public","get_data_type", function(data_name, col_name) {
 } 
 )
 
-DataBook$set("public","copy_data_frame", function(data_name, new_name, label = "") {
-  if(new_name %in% names(private$.data_sheets)) stop("Cannot copy data frame since ", new_name, " is an existing data frame.")
-  curr_obj <- self$get_data_objects(data_name)$clone(deep = TRUE)
-  
-  if(missing(new_name)) new_name <- next_default_item(data_name, self$get_data_names())
-  self$append_data_object(new_name, curr_obj)
-  new_data_obj <- self$get_data_objects(new_name)
-  new_data_obj$data_changed <- TRUE
-  new_data_obj$set_data_changed(TRUE)
-  if(label != "") {
-    new_data_obj$append_to_metadata(property = "label" , new_val = label)
-    new_data_obj$set_metadata_changed(TRUE)
+DataBook$set("public","copy_data_frame", function(data_name, new_name, label = "", copy_to_clipboard = FALSE) {
+  if(copy_to_clipboard){ 
+    self$copy_to_clipboard(content = self$get_data_frame(data_name))
+  }else{
+    if(new_name %in% names(private$.data_sheets)) stop("Cannot copy data frame since ", new_name, " is an existing data frame.")
+    curr_obj <- self$get_data_objects(data_name)$clone(deep = TRUE)
+    
+    if(missing(new_name)) new_name <- next_default_item(data_name, self$get_data_names())
+    self$append_data_object(new_name, curr_obj)
+    new_data_obj <- self$get_data_objects(new_name)
+    new_data_obj$data_changed <- TRUE
+    new_data_obj$set_data_changed(TRUE)
+    if(label != "") {
+      new_data_obj$append_to_metadata(property = "label" , new_val = label)
+      new_data_obj$set_metadata_changed(TRUE)
+    }
   }
 } 
+)
+
+DataBook$set("public","copy_col_metadata_to_clipboard", function(data_name, property_names) {
+  if(missing(property_names)){
+    self$copy_to_clipboard(content = self$get_variables_metadata(data_name = data_name))
+  }else{
+    self$copy_to_clipboard(content = self$get_variables_metadata(data_name = data_name, property = property_names))
+  }
+}
+)
+
+DataBook$set("public","copy_data_frame_metadata_to_clipboard", function(data_name, property_names) {
+  if(missing(property_names)){
+    self$copy_to_clipboard(content = self$get_data_frame_metadata(data_name = data_name))
+  }else{
+    self$copy_to_clipboard(content = self$get_data_frame_metadata(data_name = data_name, label = property_names))
+  }
+}
+)
+
+DataBook$set("public","copy_to_clipboard", function(content) {
+  clipr::write_clip(content = content)
+}
 )
 
 DataBook$set("public","set_hidden_columns", function(data_name, col_names = c()) {
