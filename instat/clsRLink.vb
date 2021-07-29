@@ -2039,31 +2039,6 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets names of the columns of the corruption components in 
-    '''             the <paramref name="strDataName"/> data frame. </summary>
-    '''
-    ''' <param name="strDataName">  The data frame name. </param>
-    '''
-    ''' <returns>   The names of the columns of the corruption components in
-    '''             the <paramref name="strDataName"/> data frame. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetCorruptionComponentsColumnNames(strDataName As String) As String()
-        Dim clsGetComponents As New RFunction
-        Dim strColumn() As String
-        Dim expColumn As SymbolicExpression
-
-        clsGetComponents.SetRCommand(strInstatDataObject & "$get_CRI_component_column_names")
-        clsGetComponents.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-        expColumn = RunInternalScriptGetValue(clsGetComponents.ToScript(), bSilent:=True)
-        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
-            strColumn = expColumn.AsCharacter.ToArray
-        Else
-            strColumn = Nothing
-        End If
-        Return strColumn
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets climatic column of type. </summary>
     '''
     ''' <param name="strDataName">  The data frame name. </param>
@@ -2089,6 +2064,19 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets names of the columns of the corruption components in 
+    '''             the <paramref name="strDataName"/> data frame. </summary>
+    '''
+    ''' <param name="strDataName">  The data frame name. </param>
+    '''
+    ''' <returns>   The names of the columns of the corruption components in
+    '''             the <paramref name="strDataName"/> data frame. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function GetCorruptionComponentsColumnNames(strDataName As String) As String()
+        Return GetColumnNames(strDataName, "$get_CRI_component_column_names")
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets CRI column names. </summary>
     '''
     ''' <param name="strDataName">  The data frame name. </param>
@@ -2096,19 +2084,7 @@ Public Class RLink
     ''' <returns>   The CRI column names. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetCRIColumnNames(strDataName As String) As String()
-        Dim clsGetColumnName As New RFunction
-        Dim strColumn() As String
-        Dim expColumn As SymbolicExpression
-
-        clsGetColumnName.SetRCommand(strInstatDataObject & "$get_CRI_column_names")
-        clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-        expColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript(), bSilent:=True)
-        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
-            strColumn = expColumn.AsCharacter.ToArray()
-        Else
-            strColumn = Nothing
-        End If
-        Return strColumn
+        Return GetColumnNames(strDataName, "$get_CRI_column_names")
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -2119,12 +2095,16 @@ Public Class RLink
     ''' <returns>   The red flag column names. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetRedFlagColumnNames(strDataName As String) As String()
+        Return GetColumnNames(strDataName, "$get_red_flag_column_names")
+    End Function
+
+    Private Function GetColumnNames(strDataFrameName As String, strRCommand As String) As String()
         Dim clsGetColumnName As New RFunction
         Dim strColumn() As String
         Dim expColumn As SymbolicExpression
 
-        clsGetColumnName.SetRCommand(strInstatDataObject & "$get_red_flag_column_names")
-        clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        clsGetColumnName.SetRCommand(strInstatDataObject & strRCommand)
+        clsGetColumnName.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
         expColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript(), bSilent:=True)
         If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
             strColumn = expColumn.AsCharacter.ToArray()
