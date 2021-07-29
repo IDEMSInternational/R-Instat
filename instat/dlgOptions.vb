@@ -373,7 +373,6 @@ Public Class dlgOptions
         autoTranslate(Me)
         SetView()
         frmMain.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
-
     End Sub
 
     Private Sub ucrPnlGraphDisplay_ControlValueChanged() Handles ucrPnlGraphDisplay.ControlValueChanged
