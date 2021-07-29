@@ -37,6 +37,7 @@ Public Class dlgDuplicateColumns
     Public strSelectedDataFrame As String = ""
     Private bUseSelectedColumn As Boolean = False
     Private strSelectedColumn As String = ""
+    Private lstRCodeStructure As List(Of RCodeStructure)
 
     Private Sub dlgDuplicateColumns_Load(sender As Object, e As EventArgs) Handles Me.Load
         If bFirstLoad Then
@@ -130,6 +131,14 @@ Public Class dlgDuplicateColumns
         ucrSelectorForDuplicateColumn.Reset()
         ucrSaveColumn.Reset()
 
+        If IsNothing(lstRCodeStructure) Then
+
+        ElseIf (lstRCodeStructure.Count > 1) Then
+
+        ElseIf (lstRCodeStructure.Count = 1) Then
+
+        End If
+        lstRCodeStructure = Nothing
 
         'set up convert function
         clsConvertFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$convert_column_to_type")
@@ -146,7 +155,7 @@ Public Class dlgDuplicateColumns
     End Sub
 
     Private Sub SetRCodeforControls(bReset As Boolean)
-
+        ucrSelectorForDuplicateColumn.AddAdditionalCodeParameterPair(clsConvertFunction, New RParameter("data_name", iNewPosition:=0), iAdditionalPairNo:=1)
         ucrSelectorForDuplicateColumn.SetRCode(clsDuplicateFunction, bReset)
         ucrReceiverDuplicateColumns.SetRCode(clsDuplicateFunction, bReset)
 
@@ -207,10 +216,6 @@ Public Class dlgDuplicateColumns
         End If
     End Sub
 
-    Private Sub ucrSelectorForDuplicateColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorForDuplicateColumn.ControlValueChanged
-        'change the data_name parameter value of the Convert Function with the new value of the selector
-        clsConvertFunction.AddParameter("data_name", Chr(34) & ucrSelectorForDuplicateColumn.strCurrentDataFrame & Chr(34), iPosition:=0)
-    End Sub
     Private Sub ucrSaveColumn_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSaveColumn.ControlValueChanged
         clsConvertFunction.AddParameter("col_names", Chr(34) & ucrSaveColumn.GetText & Chr(34), iPosition:=1)
     End Sub
@@ -219,5 +224,13 @@ Public Class dlgDuplicateColumns
         TestOKEnabled()
     End Sub
 
-
+    Public Property lstScriptsRCodeStructure As List(Of RCodeStructure)
+        Get
+            Return lstRCodeStructure
+        End Get
+        Set(lstNewRCodeStructure As List(Of RCodeStructure))
+            lstRCodeStructure = lstNewRCodeStructure
+            bReset = True
+        End Set
+    End Property
 End Class
