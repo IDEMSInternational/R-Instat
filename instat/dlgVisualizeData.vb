@@ -97,7 +97,7 @@ Public Class dlgVisualizeData
 
 
         ucrChkAdjustSize.SetText("Adjust size of variable names:")
-        ucrChkAdjustSize.AddToLinkedControls(ucrNudAdjustSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1, bNewLinkedChangeParameterValue:=True)
+        ucrChkAdjustSize.AddToLinkedControls(ucrNudAdjustSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrNudAdjustSize.SetParameter(New RParameter("size", 0))
         ucrNudAdjustSize.DecimalPlaces = 1
         ucrNudAdjustSize.Increment = 0.1
@@ -333,5 +333,4 @@ Public Class dlgVisualizeData
     Private Sub ucrCore_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverVisualizeData.ControlContentsChanged, ucrSelectorVisualizeData.ControlContentsChanged, ucrPnlSelectData.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrNudMaximumSize.ControlValueChanged, ucrNudSamplingFunction.ControlValueChanged
         TestOkEnabled()
     End Sub
-
 End Class
