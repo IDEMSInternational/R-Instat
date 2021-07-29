@@ -14,7 +14,6 @@
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-Imports instat
 Imports instat.Translations
 Public Class dlgSummaryTables
     Private bFirstload As Boolean = True
@@ -25,7 +24,7 @@ Public Class dlgSummaryTables
     Private clsSummariesHeaderLeftTopFunction, clsSummariesHeaderTopLeftFunction,
             clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction,
             clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
-    Private clsGetDataframe As New RFunction
+    Private clsGetDataframeFunction As New RFunction
     Private clsMutableOperator, clsColumnOperator As New ROperator
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -42,9 +41,6 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub InitialiseDialog()
-        ucrInputNA.Enabled = False
-        lblDisplayNA.Enabled = False
-
         ucrBase.clsRsyntax.iCallType = 2
         ucrBase.iHelpTopicID = 426
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -61,7 +57,7 @@ Public Class dlgSummaryTables
         ucrChkStoreResults.SetText("Store Output")
         ucrChkStoreResults.SetParameter(New RParameter("store_table", 13))
         ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkStoreResults.SetRDefault("False")
+        ucrChkStoreResults.SetRDefault("FALSE")
 
         ucrReceiverFactors.SetParameter(New RParameter("factors", 2))
         ucrReceiverFactors.SetParameterIsString()
@@ -93,9 +89,10 @@ Public Class dlgSummaryTables
         ucrNudColumnFactors.SetMinMax(iNewMin:=0)
         ucrNudColumnFactors.Increment = 1
 
-        ucrPnlMargin.AddRadioButton(rdoOuter)
-        ucrPnlMargin.AddRadioButton(rdoSummary)
-        ucrPnlMargin.AddRadioButton(rdoBoth)
+        ucrPnlMargin.SetParameter(New RParameter("margins", iNewPosition:=8))
+        ucrPnlMargin.AddRadioButton(rdoOuter, Chr(34) & "outer" & Chr(34))
+        ucrPnlMargin.AddRadioButton(rdoSummary, Chr(34) & "summary" & Chr(34))
+        ucrPnlMargin.AddRadioButton(rdoBoth, "c(""outer"",""summary"")")
         ucrPnlMargin.SetLinkedDisplayControl(grpMargin)
 
         ucrInputMarginName.SetParameter(New RParameter("margin_name", iNewPosition:=5))
@@ -119,9 +116,6 @@ Public Class dlgSummaryTables
         ucrChkWeight.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         'Not yet implemented
         ucrChkWeight.Enabled = False
-
-        ucrInputNA.SetParameter(New RParameter("na_display", 8))
-        ucrInputNA.SetRDefault(Chr(34) & Chr(34))
 
         ucrSaveTable.SetPrefix("summary_table")
         ucrSaveTable.SetSaveTypeAsTable()
@@ -151,7 +145,7 @@ Public Class dlgSummaryTables
         clsSummaryVariableHeaderTopLeftFunction = New RFunction
         clsMutableOperator = New ROperator
         clsColumnOperator = New ROperator
-        clsGetDataframe = New RFunction
+        clsGetDataframeFunction = New RFunction
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -168,27 +162,27 @@ Public Class dlgSummaryTables
 
         clsSummariesHeaderLeftTopFunction.SetPackageName("mmtable2")
         clsSummariesHeaderLeftTopFunction.SetRCommand("header_left_top")
-        clsSummariesHeaderLeftTopFunction.AddParameter("summary", "summary", iPosition:=0, bIncludeArgumentName:=False)
+        clsSummariesHeaderLeftTopFunction.AddParameter("variable", "summary", iPosition:=0)
 
         clsSummariesHeaderTopLeftFunction.SetPackageName("mmtable2")
         clsSummariesHeaderTopLeftFunction.SetRCommand("header_top_left")
-        clsSummariesHeaderTopLeftFunction.AddParameter("summary", "summary", iPosition:=0, bIncludeArgumentName:=False)
+        clsSummariesHeaderTopLeftFunction.AddParameter("variable", "summary", iPosition:=0)
 
         clsVariableHeaderLeftTopFunction.SetPackageName("mmtable2")
         clsVariableHeaderLeftTopFunction.SetRCommand("header_left_top")
-        clsVariableHeaderLeftTopFunction.AddParameter("variable", "variable", iPosition:=0, bIncludeArgumentName:=False)
+        clsVariableHeaderLeftTopFunction.AddParameter("variable", "variable", iPosition:=0)
 
         clsVariableHeaderTopLeftFunction.SetPackageName("mmtable2")
         clsVariableHeaderTopLeftFunction.SetRCommand("header_top_left")
-        clsVariableHeaderTopLeftFunction.AddParameter("variable", "variable", iPosition:=0, bIncludeArgumentName:=False)
+        clsVariableHeaderTopLeftFunction.AddParameter("variable", "variable", iPosition:=0)
 
         clsummaryVariableHeaderLeftTopFunction.SetPackageName("mmtable2")
         clsummaryVariableHeaderLeftTopFunction.SetRCommand("header_left_top")
-        clsummaryVariableHeaderLeftTopFunction.AddParameter("summary_variable", Chr(39) & "summary-variable" & Chr(39), iPosition:=0, bIncludeArgumentName:=False)
+        clsummaryVariableHeaderLeftTopFunction.AddParameter("variable", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
 
         clsSummaryVariableHeaderTopLeftFunction.SetPackageName("mmtable2")
         clsSummaryVariableHeaderTopLeftFunction.SetRCommand("header_top_left")
-        clsSummaryVariableHeaderTopLeftFunction.AddParameter("summary_variable", Chr(39) & "summary-variable" & Chr(39), iPosition:=0, bIncludeArgumentName:=False)
+        clsSummaryVariableHeaderTopLeftFunction.AddParameter("variable", Chr(39) & "summary-variable" & Chr(39), iPosition:=0)
 
         clsMutableFunction.SetPackageName("mmtable2")
         clsMutableFunction.SetRCommand("mmtable")
@@ -206,10 +200,10 @@ Public Class dlgSummaryTables
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=2)
         clsDefaultFunction.SetAssignTo("summary_table")
 
-        clsGetDataframe = ucrSelectorSummaryTables.ucrAvailableDataFrames.clsCurrDataFrame
-        clsGetDataframe.SetAssignTo(ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
+        clsGetDataframeFunction = ucrSelectorSummaryTables.ucrAvailableDataFrames.clsCurrDataFrame
+        clsGetDataframeFunction.SetAssignTo(ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataframe, iPosition:=0)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataframeFunction, iPosition:=0)
         ucrBase.clsRsyntax.AddToBeforeCodes(clsDefaultFunction, iPosition:=1)
         ucrBase.clsRsyntax.SetBaseROperator(clsMutableOperator)
         clsMutableOperator.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
@@ -228,7 +222,6 @@ Public Class dlgSummaryTables
         ucrNudSigFigs.SetRCode(clsDefaultFunction, bReset)
         ucrReceiverWeights.SetRCode(clsDefaultFunction, bReset)
         ucrChkWeight.SetRCode(clsDefaultFunction, bReset)
-        ucrInputNA.SetRCode(clsDefaultFunction, bReset)
         ucrChkDisplaySummariesAsRow.SetRCode(clsMutableOperator, bReset)
         ucrChkDisplaySummaryVariablesAsRow.SetRCode(clsMutableOperator, bReset)
         ucrChkDisplayVariablesAsRows.SetRCode(clsMutableOperator, bReset)
@@ -277,49 +270,30 @@ Public Class dlgSummaryTables
         TestOKEnabled()
     End Sub
 
-    Private Sub Margin_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlMargin.ControlValueChanged, ucrChkDisplayMargins.ControlValueChanged
-        If ucrChkDisplayMargins.Checked Then
-            If rdoOuter.Checked Then
-                clsDefaultFunction.AddParameter("margins", Chr(34) & "outer" & Chr(34), iPosition:=8)
-            ElseIf rdoBoth.Checked Then
-                clsDefaultFunction.AddParameter("margins", "c(""outer"",""summary"")", iPosition:=8)
-            ElseIf rdoSummary.Checked Then
-                clsDefaultFunction.AddParameter("margins", Chr(34) & "summary" & Chr(34), iPosition:=8)
-            End If
-        Else
-            clsDefaultFunction.RemoveParameterByName("margins")
-        End If
-    End Sub
-
     Private Sub Display_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplaySummariesAsRow.ControlValueChanged, ucrChkDisplayVariablesAsRows.ControlValueChanged, ucrChkDisplaySummaryVariablesAsRow.ControlValueChanged, ucrChkSummaries.ControlValueChanged
+        clsMutableOperator.RemoveParameterByName("summariesTopLeft")
+        clsMutableOperator.RemoveParameterByName("summariesLeftTop")
+        clsMutableOperator.RemoveParameterByName("variablesTopLeft")
+        clsMutableOperator.RemoveParameterByName("variablesLeftTop")
+        clsMutableOperator.RemoveParameterByName("summariesVariableTopLeft")
+        clsMutableOperator.RemoveParameterByName("summariesVariableLeftTop")
+
         If ucrChkSummaries.Checked Then
-            clsMutableOperator.RemoveParameterByName("summariesVariableTopLeft")
-            clsMutableOperator.RemoveParameterByName("summariesVariableLeftTop")
             If ucrChkDisplaySummariesAsRow.Checked Then
-                clsMutableOperator.RemoveParameterByName("summariesTopLeft")
                 clsMutableOperator.AddParameter("summariesLeftTop", clsRFunctionParameter:=clsSummariesHeaderLeftTopFunction, iPosition:=1)
             Else
-                clsMutableOperator.RemoveParameterByName("summariesLeftTop")
                 clsMutableOperator.AddParameter("summariesTopLeft", clsRFunctionParameter:=clsSummariesHeaderTopLeftFunction, iPosition:=1)
             End If
 
             If ucrChkDisplayVariablesAsRows.Checked Then
-                clsMutableOperator.RemoveParameterByName("variablesTopLeft")
                 clsMutableOperator.AddParameter("variablesLeftTop", clsRFunctionParameter:=clsVariableHeaderLeftTopFunction, iPosition:=1)
             Else
-                clsMutableOperator.RemoveParameterByName("variablesLeftTop")
                 clsMutableOperator.AddParameter("variablesTopLeft", clsRFunctionParameter:=clsVariableHeaderTopLeftFunction, iPosition:=1)
             End If
         Else
-            clsMutableOperator.RemoveParameterByName("summariesTopLeft")
-            clsMutableOperator.RemoveParameterByName("summariesLeftTop")
-            clsMutableOperator.RemoveParameterByName("variablesTopLeft")
-            clsMutableOperator.RemoveParameterByName("variablesLeftTop")
             If ucrChkDisplaySummaryVariablesAsRow.Checked Then
-                clsMutableOperator.RemoveParameterByName("summariesVariableTopLeft")
                 clsMutableOperator.AddParameter("summariesVariableLeftTop", clsRFunctionParameter:=clsummaryVariableHeaderLeftTopFunction, iPosition:=1)
             Else
-                clsMutableOperator.RemoveParameterByName("summariesVariableLeftTop")
                 clsMutableOperator.AddParameter("summariesVariableTopLeft", clsRFunctionParameter:=clsSummaryVariableHeaderTopLeftFunction, iPosition:=1)
             End If
         End If
@@ -339,13 +313,13 @@ Public Class dlgSummaryTables
                     Dim clsHeaderLeftFunction As New RFunction
                     clsHeaderLeftFunction.SetPackageName("mmtable2")
                     clsHeaderLeftFunction.SetRCommand("header_top_left")
-                    clsHeaderLeftFunction.AddParameter("column", strcolumn, iPosition:=0, bIncludeArgumentName:=False)
+                    clsHeaderLeftFunction.AddParameter("variable", strcolumn, iPosition:=0)
                     clsColumnOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderLeftFunction, iPosition:=iColumn)
                 Else
                     Dim clsHeaderTopFunction As New RFunction
                     clsHeaderTopFunction.SetPackageName("mmtable2")
                     clsHeaderTopFunction.SetRCommand("header_left_top")
-                    clsHeaderTopFunction.AddParameter("column", strcolumn, iPosition:=0, bIncludeArgumentName:=False)
+                    clsHeaderTopFunction.AddParameter("variable", strcolumn, iPosition:=0)
                     clsColumnOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderTopFunction, iPosition:=iColumn)
                 End If
                 iColumn = iColumn + 1

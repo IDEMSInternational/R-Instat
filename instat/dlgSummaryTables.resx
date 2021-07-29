@@ -205,7 +205,7 @@
     <value>grpDisplay</value>
   </data>
   <data name="&gt;&gt;lblSigFigs.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
   <data name="ucrNudColumnFactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 49</value>
@@ -321,57 +321,6 @@
   <data name="&gt;&gt;ucrChkDisplaySummariesAsRow.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="ucrInputNA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 122</value>
-  </data>
-  <data name="ucrInputNA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 21</value>
-  </data>
-  <data name="ucrInputNA.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNA.Name" xml:space="preserve">
-    <value>ucrInputNA</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNA.Type" xml:space="preserve">
-    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNA.Parent" xml:space="preserve">
-    <value>grpDisplay</value>
-  </data>
-  <data name="&gt;&gt;ucrInputNA.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="lblDisplayNA.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblDisplayNA.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblDisplayNA.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 125</value>
-  </data>
-  <data name="lblDisplayNA.Size" type="System.Drawing.Size, System.Drawing">
-    <value>76, 13</value>
-  </data>
-  <data name="lblDisplayNA.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="lblDisplayNA.Text" xml:space="preserve">
-    <value>Display NA as:</value>
-  </data>
-  <data name="&gt;&gt;lblDisplayNA.Name" xml:space="preserve">
-    <value>lblDisplayNA</value>
-  </data>
-  <data name="&gt;&gt;lblDisplayNA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblDisplayNA.Parent" xml:space="preserve">
-    <value>grpDisplay</value>
-  </data>
-  <data name="&gt;&gt;lblDisplayNA.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
   <data name="ucrNudSigFigs.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 22</value>
   </data>
@@ -391,7 +340,7 @@
     <value>grpDisplay</value>
   </data>
   <data name="&gt;&gt;ucrNudSigFigs.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="grpDisplay.Location" type="System.Drawing.Point, System.Drawing">
     <value>187, 297</value>
@@ -582,6 +531,36 @@
   <data name="&gt;&gt;lblMarginName.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="lblVariables.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblVariables.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblVariables.Location" type="System.Drawing.Point, System.Drawing">
+    <value>287, 174</value>
+  </data>
+  <data name="lblVariables.Size" type="System.Drawing.Size, System.Drawing">
+    <value>56, 13</value>
+  </data>
+  <data name="lblVariables.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="lblVariables.Text" xml:space="preserve">
+    <value>Variables :</value>
+  </data>
+  <data name="&gt;&gt;lblVariables.Name" xml:space="preserve">
+    <value>lblVariables</value>
+  </data>
+  <data name="&gt;&gt;lblVariables.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblVariables.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblVariables.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrInputMarginName.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 327</value>
   </data>
@@ -740,36 +719,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>443, 560</value>
-  </data>
-  <data name="lblVariables.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblVariables.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>287, 174</value>
-  </data>
-  <data name="lblVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>56, 13</value>
-  </data>
-  <data name="lblVariables.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="lblVariables.Text" xml:space="preserve">
-    <value>Variables :</value>
-  </data>
-  <data name="&gt;&gt;lblVariables.Name" xml:space="preserve">
-    <value>lblVariables</value>
-  </data>
-  <data name="&gt;&gt;lblVariables.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblVariables.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblVariables.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="ucrReceiverFactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>287, 60</value>

@@ -44,12 +44,12 @@ Partial Class dlgSummaryTables
         Me.lblSigFigs = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
         Me.lblColumnFactors = New System.Windows.Forms.Label()
-        Me.lblDisplayNA = New System.Windows.Forms.Label()
         Me.grpMargin = New System.Windows.Forms.GroupBox()
         Me.rdoBoth = New System.Windows.Forms.RadioButton()
         Me.rdoSummary = New System.Windows.Forms.RadioButton()
         Me.rdoOuter = New System.Windows.Forms.RadioButton()
         Me.lblMarginName = New System.Windows.Forms.Label()
+        Me.lblVariables = New System.Windows.Forms.Label()
         Me.ucrInputMarginName = New instat.ucrInputTextBox()
         Me.ucrSaveTable = New instat.ucrSave()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
@@ -59,7 +59,6 @@ Partial Class dlgSummaryTables
         Me.ucrChkDisplaySummaryVariablesAsRow = New instat.ucrCheck()
         Me.ucrChkDisplayVariablesAsRows = New instat.ucrCheck()
         Me.ucrChkDisplaySummariesAsRow = New instat.ucrCheck()
-        Me.ucrInputNA = New instat.ucrInputTextBox()
         Me.ucrNudSigFigs = New instat.ucrNud()
         Me.ucrChkSummaries = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
@@ -69,7 +68,6 @@ Partial Class dlgSummaryTables
         Me.ucrChkWeight = New instat.ucrCheck()
         Me.ucrSelectorSummaryTables = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrPnlMargin = New instat.UcrPanel()
-        Me.lblVariables = New System.Windows.Forms.Label()
         Me.grpDisplay.SuspendLayout()
         Me.grpMargin.SuspendLayout()
         Me.SuspendLayout()
@@ -99,8 +97,6 @@ Partial Class dlgSummaryTables
         Me.grpDisplay.Controls.Add(Me.ucrChkDisplaySummaryVariablesAsRow)
         Me.grpDisplay.Controls.Add(Me.ucrChkDisplayVariablesAsRows)
         Me.grpDisplay.Controls.Add(Me.ucrChkDisplaySummariesAsRow)
-        Me.grpDisplay.Controls.Add(Me.ucrInputNA)
-        Me.grpDisplay.Controls.Add(Me.lblDisplayNA)
         Me.grpDisplay.Controls.Add(Me.ucrNudSigFigs)
         Me.grpDisplay.Controls.Add(Me.lblSigFigs)
         resources.ApplyResources(Me.grpDisplay, "grpDisplay")
@@ -112,12 +108,6 @@ Partial Class dlgSummaryTables
         resources.ApplyResources(Me.lblColumnFactors, "lblColumnFactors")
         Me.lblColumnFactors.Name = "lblColumnFactors"
         Me.lblColumnFactors.Tag = ""
-        '
-        'lblDisplayNA
-        '
-        resources.ApplyResources(Me.lblDisplayNA, "lblDisplayNA")
-        Me.lblDisplayNA.Name = "lblDisplayNA"
-        Me.lblDisplayNA.Tag = ""
         '
         'grpMargin
         '
@@ -154,6 +144,12 @@ Partial Class dlgSummaryTables
         '
         resources.ApplyResources(Me.lblMarginName, "lblMarginName")
         Me.lblMarginName.Name = "lblMarginName"
+        '
+        'lblVariables
+        '
+        resources.ApplyResources(Me.lblVariables, "lblVariables")
+        Me.lblVariables.Name = "lblVariables"
+        Me.lblVariables.Tag = ""
         '
         'ucrInputMarginName
         '
@@ -213,14 +209,6 @@ Partial Class dlgSummaryTables
         Me.ucrChkDisplaySummariesAsRow.Checked = False
         resources.ApplyResources(Me.ucrChkDisplaySummariesAsRow, "ucrChkDisplaySummariesAsRow")
         Me.ucrChkDisplaySummariesAsRow.Name = "ucrChkDisplaySummariesAsRow"
-        '
-        'ucrInputNA
-        '
-        Me.ucrInputNA.AddQuotesIfUnrecognised = True
-        Me.ucrInputNA.IsMultiline = False
-        Me.ucrInputNA.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNA, "ucrInputNA")
-        Me.ucrInputNA.Name = "ucrInputNA"
         '
         'ucrNudSigFigs
         '
@@ -289,12 +277,6 @@ Partial Class dlgSummaryTables
         resources.ApplyResources(Me.ucrPnlMargin, "ucrPnlMargin")
         Me.ucrPnlMargin.Name = "ucrPnlMargin"
         '
-        'lblVariables
-        '
-        resources.ApplyResources(Me.lblVariables, "lblVariables")
-        Me.lblVariables.Name = "lblVariables"
-        Me.lblVariables.Tag = ""
-        '
         'dlgSummaryTables
         '
         resources.ApplyResources(Me, "$this")
@@ -344,8 +326,6 @@ Partial Class dlgSummaryTables
     Friend WithEvents ucrChkStoreResults As ucrCheck
     Friend WithEvents ucrSaveTable As ucrSave
     Friend WithEvents grpDisplay As GroupBox
-    Friend WithEvents ucrInputNA As ucrInputTextBox
-    Friend WithEvents lblDisplayNA As Label
     Friend WithEvents ucrNudSigFigs As ucrNud
     Friend WithEvents lblSigFigs As Label
     Friend WithEvents grpMargin As GroupBox
