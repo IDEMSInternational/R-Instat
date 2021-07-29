@@ -1448,7 +1448,7 @@ shaped_cell_values <- dplyr::bind_rows(shaped_cell_values, margin_tables_all) %>
   }
 }
 shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(value = round(value, signif_fig))
-if (store_table == TRUE){
+if (store_table){
       data_book$import_data(data_tables=list(shaped_cell_values=shaped_cell_values))
 }
 return(shaped_cell_values)
