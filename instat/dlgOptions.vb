@@ -44,7 +44,6 @@ Public Class dlgOptions
         LoadInstatOptions()
         ApplyEnabled(False)
         autoTranslate(Me)
-        SetVisibleLanButton()
     End Sub
 
     Private Sub InitialiseDialog()
@@ -87,6 +86,8 @@ Public Class dlgOptions
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
         ucrInputLanguage.SetItems({"English", "French", "Portuguese", "Kiswahili"})
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
+
+        SetVisibleLanButton()
     End Sub
 
      Private Sub LoadInstatOptions()
