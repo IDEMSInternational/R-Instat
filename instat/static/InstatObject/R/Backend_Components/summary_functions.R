@@ -1442,13 +1442,9 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
     margin_tables_all <- margin_tables_all %>%
       dplyr::mutate_at(vars(-value), ~replace(., is.na(.), margin_name))
     
-    shaped_cell_values <- dplyr::bind_rows(shaped_cell_values, margin_tables_all)
-    
-    shaped_cell_values <- shaped_cell_values %>%
-      dplyr::mutate_at(vars(-value), ~replace(., is.na(.), margin_name))
-    
-    shaped_cell_values <- shaped_cell_values %>%
-      dplyr::mutate_at(vars(-value), ~forcats::as_factor(forcats::fct_relevel(., margin_name, after = Inf)))
+shaped_cell_values <- dplyr::bind_rows(shaped_cell_values, margin_tables_all) %>%
+  dplyr::mutate_at(vars(-value), ~replace(., is.na(.), margin_name)) %>%
+  dplyr::mutate_at(vars(-value), ~forcats::as_factor(forcats::fct_relevel(., margin_name, after = Inf)))
   }
 }
 shaped_cell_values <- shaped_cell_values %>% dplyr::mutate(value = round(value, signif_fig))
