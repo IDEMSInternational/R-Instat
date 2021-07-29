@@ -300,10 +300,6 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged, ucrNudColumnFactors.ControlValueChanged
-        AddMutableFunctions()
-    End Sub
-
-    Private Sub AddMutableFunctions()
         Dim iColumn As Integer = 0
         Dim iNumberOfColumns As Integer = ucrNudColumnFactors.GetText()
         clsColumnOperator.ClearParameters()
