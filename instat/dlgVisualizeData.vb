@@ -85,24 +85,20 @@ Public Class dlgVisualizeData
 
         ucrNudMaximumSize.DecimalPlaces = 1
         ucrNudMaximumSize.Increment = 0.1
-        ucrNudMaximumSize.Minimum = 0.1
-        ucrNudMaximumSize.Maximum = Integer.MaxValue
+        ucrNudMaximumSize.SetMinMax(0.1, Integer.MaxValue)
 
         ' Not yet implemented
         ucrNudSamplingFunction.SetParameter(New RParameter("prob", 2))
+        ucrNudSamplingFunction.SetMinMax(0.01, 1)
         ucrNudSamplingFunction.DecimalPlaces = 2
         ucrNudSamplingFunction.Increment = 0.01
-        ucrNudSamplingFunction.Minimum = 0.01
-        ucrNudSamplingFunction.Maximum = 1
-
 
         ucrChkAdjustSize.SetText("Adjust size of variable names:")
         ucrChkAdjustSize.AddToLinkedControls(ucrNudAdjustSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=1)
         ucrNudAdjustSize.SetParameter(New RParameter("size", 0))
+        ucrNudAdjustSize.SetMinMax(0.1, 15)
         ucrNudAdjustSize.DecimalPlaces = 1
         ucrNudAdjustSize.Increment = 0.1
-        ucrNudAdjustSize.Minimum = 0.1
-        ucrNudAdjustSize.Maximum = 15
         ucrChkAdjustSize.AddParameterPresentCondition(True, "size")
         ucrChkAdjustSize.AddParameterPresentCondition(False, "size", False)
 
