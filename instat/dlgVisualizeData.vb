@@ -83,9 +83,9 @@ Public Class dlgVisualizeData
         ucrInputComboboxPalette.SetDropDownStyleAsNonEditable()
         ucrInputComboboxPalette.SetItems(dctPalette)
 
+        ucrNudMaximumSize.SetMinMax(0.1, Integer.MaxValue)
         ucrNudMaximumSize.DecimalPlaces = 1
         ucrNudMaximumSize.Increment = 0.1
-        ucrNudMaximumSize.SetMinMax(0.1, Integer.MaxValue)
 
         ' Not yet implemented
         ucrNudSamplingFunction.SetParameter(New RParameter("prob", 2))
