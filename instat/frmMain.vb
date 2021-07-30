@@ -167,6 +167,15 @@ Public Class frmMain
             MsgBox(ex.Message)
         End Try
 
+        If Me.clsInstatOptions IsNot Nothing Then
+            If Me.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+                mnuTbLan.Visible = True
+            Else
+                mnuTbLan.Visible = False
+            End If
+            strCurrLang = Me.clsInstatOptions.strLanguageCultureCode
+        End If
+
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
 
@@ -177,7 +186,7 @@ Public Class frmMain
     End Sub
 
     Public Sub SetLanButtonVisibility(bVisible As Boolean)
-        cmdLanguage.Visible = bVisible
+        mnuTbLan.Visible = bVisible
     End Sub
 
     Private Sub SetMainMenusEnabled(bEnabled As Boolean)
@@ -593,10 +602,6 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuTbCopy_Click(sender As Object, e As EventArgs) Handles mnuTbCopy.Click
-        mnuEditCopy_Click(sender, e)
-    End Sub
-
     Private Sub mnuHelpHelp_Click(sender As Object, e As EventArgs)
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TableOfContents, "")
     End Sub
@@ -743,22 +748,6 @@ Public Class frmMain
             ElseIf ctrActive.Equals(ucrScriptWindow) Then
                 ucrScriptWindow.SelectAllText()
             End If
-        End If
-    End Sub
-
-    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click
-        If ctrActive.Equals(ucrDataViewer) Then
-            ucrDataViewer.CopyRange()
-        ElseIf ctrActive.Equals(ucrOutput) Then
-            ucrOutput.CopyContent()
-        ElseIf ctrActive.Equals(ucrColumnMeta) Then
-            ucrColumnMeta.CopyRange()
-        ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
-            ucrDataFrameMeta.CopyRange()
-        ElseIf ctrActive.Equals(ucrLogWindow) Then
-            ucrLogWindow.CopyText()
-        ElseIf ctrActive.Equals(ucrScriptWindow) Then
-            ucrScriptWindow.CopyText()
         End If
     End Sub
 
@@ -2378,7 +2367,7 @@ Public Class frmMain
         dlgPasteNewDataFrame.ShowDialog()
     End Sub
 
-    Private Sub cmdLanguage_Click(sender As Object, e As EventArgs) Handles cmdLanguage.Click
+    Private Sub mnuTbLan_Click(sender As Object, e As EventArgs) Handles mnuTbLan.Click
         If strCurrLang <> "en-GB" Then
             strCurrLang = "en-GB"
         Else
@@ -2390,4 +2379,33 @@ Public Class frmMain
         translateMenu(mnuBar.Items, Me)
         Me.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
     End Sub
+
+    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click, mnuTbCopy.ButtonClick, mnuSubTbCopy.Click
+        If ctrActive.Equals(ucrDataViewer) Then
+            ucrDataViewer.CopyRange()
+        ElseIf ctrActive.Equals(ucrOutput) Then
+            ucrOutput.CopyContent()
+        ElseIf ctrActive.Equals(ucrColumnMeta) Then
+            ucrColumnMeta.CopyRange()
+        ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
+            ucrDataFrameMeta.CopyRange()
+        ElseIf ctrActive.Equals(ucrLogWindow) Then
+            ucrLogWindow.CopyText()
+        ElseIf ctrActive.Equals(ucrScriptWindow) Then
+            ucrScriptWindow.CopyText()
+        End If
+    End Sub
+
+    Private Sub mnuEditCopySpecial_Click(sender As Object, e As EventArgs) Handles mnuEditCopySpecial.Click, mnuSubTbCopySpecial.Click
+        dlgCopySpecial.ShowDialog()
+    End Sub
+
+    Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuEditPaste.Click, mnuTbPaste.ButtonClick, mnuSubTbPaste.Click
+        'todo. add public paste functions for the ucrDataViewer, ucrColumnMeta and ucrDataFrameMeta grids
+    End Sub
+
+    Private Sub mnuPasteSpecial_Click(sender As Object, e As EventArgs) Handles mnuPasteSpecial.Click, mnuSubTbPasteSpecial.Click
+        dlgPasteSpecial.ShowDialog()
+    End Sub
+
 End Class

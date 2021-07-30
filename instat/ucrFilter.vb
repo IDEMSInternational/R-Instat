@@ -18,7 +18,7 @@ Imports instat
 
 Public Class ucrFilter
     Public bFirstLoad As Boolean
-    Public clsFilterView As ROperator
+    Public clsFilterOperator As ROperator
     Public clsFilterFunction As RFunction
     Private clsConditionsList As RFunction
     Public bFilterDefined As Boolean
@@ -33,8 +33,9 @@ Public Class ucrFilter
         ' Add any initialization after the InitializeComponent() call.
         bFirstLoad = True
         bFilterDefined = False
-        clsFilterView = New ROperator
-        clsFilterView.strOperation = "&"
+        clsFilterOperator = New ROperator
+        clsFilterOperator.strOperation = "&"
+        clsFilterOperator.bAllBrackets = True
         clsFilterFunction = New RFunction
         clsFilterFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$add_filter")
         clsConditionsList = New RFunction
@@ -67,17 +68,19 @@ Public Class ucrFilter
         ucrFactorLevels.SetReceiver(ucrFilterByReceiver)
         ucrFactorLevels.SetIncludeLevels(False)
         ucrFactorLevels.bIncludeNA = True
-        clsFilterView.bForceIncludeOperation = False
+        clsFilterOperator.bForceIncludeOperation = False
         lstFilters.Columns.Add("Variable")
         lstFilters.Columns.Add("Condition")
         ucrInputFilterName.SetItemsTypeAsFilters()
         ucrInputFilterName.SetDataFrameSelector(ucrSelectorForFitler.ucrAvailableDataFrames)
-        ucrInputFilterName.SetPrefix("Filter")
+        ucrInputFilterName.SetPrefix("filter")
         ucrInputFilterName.SetDefaultTypeAsFilter()
         ucrSelectorForFitler.btnDataOptions.Visible = False
         ucrLogicalCombobox.SetItems({"TRUE", "FALSE"})
         ucrLogicalCombobox.SetDropDownStyleAsNonEditable()
         ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (year > 1990) & (year < 2021) they have all to be TRUE.")
+        'ucrChkNotForEachCondition.SetText("Add Not (!) for each") TODO: Instances of this checkbox are commented out because adding NOT for all conditions might not be useful! Consider enabling when edit condition/filter is possible 
+        ucrChkNotForAllConditions.SetText("Add Not")
     End Sub
 
     Private Sub SetDefaults()
@@ -180,23 +183,23 @@ Public Class ucrFilter
         CheckAddEnabled()
     End Sub
 
-    Private Sub cmdAddFilter_Click(sender As Object, e As EventArgs) Handles cmdAddCondition.Click
-        Dim clsCurrentConditionView As New ROperator
-        Dim clsCurrentConditionList As New RFunction
+    Private Sub cmdAddCondition_Click(sender As Object, e As EventArgs) Handles cmdAddCondition.Click
+        Dim clsCurrentOperator As New ROperator
+        Dim clsCurrentConditionListFunction As New RFunction
         Dim lviCondition As ListViewItem
         Dim strCondition As String
         Dim clsDateFunction As RFunction
 
-        clsCurrentConditionList.SetRCommand("list")
-        clsCurrentConditionView.AddParameter(iPosition:=0, strParameterValue:=ucrFilterByReceiver.GetVariableNames(False))
-        clsCurrentConditionList.AddParameter("column", ucrFilterByReceiver.GetVariableNames())
+        clsCurrentConditionListFunction.SetRCommand("list")
+        clsCurrentOperator.AddParameter(iPosition:=0, strParameterValue:=ucrFilterByReceiver.GetVariableNames(False))
+        clsCurrentConditionListFunction.AddParameter("column", ucrFilterByReceiver.GetVariableNames())
         If ucrFilterByReceiver.strCurrDataType.Contains("factor") Then
-            clsCurrentConditionView.SetOperation("%in%")
-            clsCurrentConditionList.AddParameter("operation", Chr(34) & "%in%" & Chr(34))
+            clsCurrentOperator.SetOperation("%in%")
+            clsCurrentConditionListFunction.AddParameter("operation", Chr(34) & "%in%" & Chr(34))
             strCondition = ucrFactorLevels.GetSelectedLevels()
         Else
-            clsCurrentConditionView.SetOperation(ucrFilterOperation.GetText())
-            clsCurrentConditionList.AddParameter("operation", Chr(34) & ucrFilterOperation.GetText() & Chr(34))
+            clsCurrentOperator.SetOperation(ucrFilterOperation.GetText())
+            clsCurrentConditionListFunction.AddParameter("operation", Chr(34) & ucrFilterOperation.GetText() & Chr(34))
             If ucrFilterOperation.GetText() = "is.na" OrElse ucrFilterOperation.GetText() = "! is.na" Then
                 strCondition = ""
             Else
@@ -213,20 +216,20 @@ Public Class ucrFilter
             End If
         End If
         If Not String.IsNullOrEmpty(strCondition) Then
-            clsCurrentConditionView.AddParameter("condition", strCondition.Replace(Chr(34), Chr(39)))
-            clsCurrentConditionList.AddParameter("value", strCondition)
+            clsCurrentConditionListFunction.AddParameter("value", strCondition)
         End If
-        clsConditionsList.AddParameter("C" & clsConditionsList.clsParameters.Count, clsRFunctionParameter:=(clsCurrentConditionList))
-        lviCondition = New ListViewItem({ucrFilterByReceiver.GetVariableNames(), clsCurrentConditionView.strOperation & " " & strCondition})
+        clsCurrentOperator.AddParameter("condition", strCondition.Replace(Chr(34), Chr(39)))
+        clsConditionsList.AddParameter("C" & clsConditionsList.clsParameters.Count, clsRFunctionParameter:=(clsCurrentConditionListFunction))
+        lviCondition = New ListViewItem({ucrFilterByReceiver.GetVariableNames(), clsCurrentOperator.strOperation & " " & strCondition})
         lstFilters.Items.Add(lviCondition)
-        If clsFilterView.clsParameters.Count = 0 Then
-            clsFilterView.AddParameter(iPosition:=0, clsROperatorParameter:=(clsCurrentConditionView))
+        If clsFilterOperator.clsParameters.Count = 0 Then
+            clsFilterOperator.AddParameter(iPosition:=0, strParameterValue:="(" & clsCurrentOperator.ToScript & ")")
         Else
-            clsFilterView.AddParameter(strParameterName:="Condition" & clsFilterView.clsParameters.Count - 1, clsROperatorParameter:=(clsCurrentConditionView))
+            clsFilterOperator.AddParameter(strParameterName:="Condition" & clsFilterOperator.clsParameters.Count - 1, strParameterValue:="(" & clsCurrentOperator.ToScript & ")")
         End If
         lstFilters.Columns(0).Width = -2
         lstFilters.Columns(1).Width = -2
-        ucrFilterPreview.SetName(clsFilterView.ToScript())
+        UpdateFilterPreview()
         ucrFilterByReceiver.Clear()
         ucrReceiverExpression.AddtoCombobox(ucrReceiverExpression.GetText)
         RaiseEvent FilterChanged()
@@ -265,10 +268,10 @@ Public Class ucrFilter
     End Sub
 
     Private Sub ClearConditions()
-        clsFilterView.ClearParameters()
+        clsFilterOperator.ClearParameters()
         clsConditionsList.ClearParameters()
         lstFilters.Items.Clear()
-        ucrFilterPreview.SetName("")
+        UpdateFilterPreview()
         RaiseEvent FilterChanged()
     End Sub
 
@@ -372,7 +375,7 @@ Public Class ucrFilter
     ''' <summary> Handles event triggered when cmdCombineWithAndOr Button is clicked.
     ''' The purpose of this button is to change the filter operator to either AND(&amp;) or OR(|).
     ''' The user clicks the button to trigger a change in the operator. 
-    ''' This subroutine changes the oparator, passes "and_or" parameter into clsFilterFunction, 
+    ''' This subroutine changes the operator, passes "and_or" parameter into clsFilterFunction, 
     ''' updates the button label and set the tooltip text for the button.
     ''' Filter preview is also updated.
     ''' Button text and the tooltip displayed on hover is changed whenever the button is clicked.
@@ -381,16 +384,46 @@ Public Class ucrFilter
     ''' <param name="e"> Not used. </param>
     Private Sub cmdCombineWithAndOr_Click(sender As Object, e As EventArgs) Handles cmdCombineWithAndOr.Click
         If cmdCombineWithAndOr.Text.Contains("All combined with |") Then
-            clsFilterView.strOperation = "&"
+            clsFilterOperator.strOperation = "&"
             clsFilterFunction.AddParameter("and_or", Chr(34) & "&" & Chr(34), iPosition:=3)
             cmdCombineWithAndOr.Text = " All combined with &&"
             ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (year > 1990) & (year < 2021) they have all to be TRUE.")
         Else
-            clsFilterView.strOperation = "|"
+            clsFilterOperator.strOperation = "|"
             clsFilterFunction.AddParameter("and_or", Chr(34) & "|" & Chr(34), iPosition:=3)
             cmdCombineWithAndOr.Text = "All combined with |"
             ttpCombineWithAndOr.SetToolTip(cmdCombineWithAndOr, "With more than one condition, e.g. (sunhrs >14) | (sunhrs <0) then just one need be TRUE.")
         End If
-        ucrFilterPreview.SetName(clsFilterView.ToScript())
+        UpdateFilterPreview()
+    End Sub
+
+    Private Sub ucrChkNotForEachCondition_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkNotForEachCondition.ControlValueChanged, ucrChkNotForAllConditions.ControlValueChanged
+        'If ucrChkNotForEachCondition.Checked Then
+        'ucrChkNotForAllConditions.Checked = False
+        'clsFilterFunction.AddParameter("inner_not", "TRUE", iPosition:=4)
+        'Else
+        'clsFilterFunction.RemoveParameterByName("inner_not")
+        'End If
+
+        If ucrChkNotForAllConditions.Checked Then
+            'ucrChkNotForEachCondition.Checked = False
+            clsFilterFunction.AddParameter("outer_not", "TRUE", iPosition:=4)
+        Else
+            clsFilterFunction.RemoveParameterByName("outer_not")
+        End If
+        UpdateFilterPreview()
+    End Sub
+
+    Private Sub UpdateFilterPreview()
+        Dim strFilter = clsFilterOperator.ToScript()
+        'If ucrChkNotForEachCondition.Checked Then
+        'strFilter = strFilter.Replace("(", "!(")
+        'Else
+        'strFilter = strFilter.Replace("!(", "(")
+        'End if
+        If ucrChkNotForAllConditions.Checked Then
+            strFilter = "!(" & strFilter.Replace("(", "").Replace(")", "").Replace("!", "") & ")"
+        End If
+        ucrFilterPreview.SetName(strFilter)
     End Sub
 End Class

@@ -24,7 +24,6 @@ Public Class dlgSummaryTables
     Private clsSummariesHeaderLeftTopFunction, clsSummariesHeaderTopLeftFunction,
             clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction,
             clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
-    Private clsGetDataframeFunction As New RFunction
     Private clsMutableOperator, clsColumnOperator As New ROperator
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
@@ -145,7 +144,6 @@ Public Class dlgSummaryTables
         clsSummaryVariableHeaderTopLeftFunction = New RFunction
         clsMutableOperator = New ROperator
         clsColumnOperator = New ROperator
-        clsGetDataframeFunction = New RFunction
 
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorSummaryTables.Reset()
@@ -200,11 +198,7 @@ Public Class dlgSummaryTables
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList, iPosition:=2)
         clsDefaultFunction.SetAssignTo("summary_table")
 
-        clsGetDataframeFunction = ucrSelectorSummaryTables.ucrAvailableDataFrames.clsCurrDataFrame
-        clsGetDataframeFunction.SetAssignTo(ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text)
-
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsGetDataframeFunction, iPosition:=0)
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsDefaultFunction, iPosition:=1)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsDefaultFunction, iPosition:=0)
         ucrBase.clsRsyntax.SetBaseROperator(clsMutableOperator)
         clsMutableOperator.SetAssignTo("last_table", strTempDataframe:=ucrSelectorSummaryTables.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
         bResetSubdialog = True
