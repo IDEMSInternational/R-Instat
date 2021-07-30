@@ -1244,6 +1244,7 @@ Public Class ucrGeom
         clsgeom_label.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         lstAllGeoms.Add(clsgeom_label)
 
+        clsgeom_label_repel.SetGeomPackage("ggrepel")
         clsgeom_label_repel.SetGeomName("geom_label_repel")
         'Adding aesthetics parameters
         'Mandatory Aesthetics
@@ -1877,6 +1878,7 @@ Public Class ucrGeom
         clsgeom_text.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         lstAllGeoms.Add(clsgeom_text)
 
+        clsgeom_text_repel.SetGeomPackage("ggrepel")
         clsgeom_text_repel.SetGeomName("geom_text_repel")
         'Adding aesthetics parameters
         'Mandatory Aesthetics
