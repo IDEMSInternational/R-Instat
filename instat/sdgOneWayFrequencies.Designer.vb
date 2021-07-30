@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class sdgOneWayFrequencies
+Partial Class sdgFrequencies
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -38,7 +38,7 @@ Partial Class sdgOneWayFrequencies
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgOneWayFrequencies))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(sdgFrequencies))
         Me.tbpOneWayFrequencies = New System.Windows.Forms.TabControl()
         Me.tbpTable = New System.Windows.Forms.TabPage()
         Me.grpTableOptions = New System.Windows.Forms.GroupBox()
@@ -306,7 +306,7 @@ Partial Class sdgOneWayFrequencies
         resources.ApplyResources(Me.ucrBaseOneWayFrequencies, "ucrBaseOneWayFrequencies")
         Me.ucrBaseOneWayFrequencies.Name = "ucrBaseOneWayFrequencies"
         '
-        'sdgOneWayFrequencies
+        'sdgFrequencies
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -315,7 +315,7 @@ Partial Class sdgOneWayFrequencies
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "sdgOneWayFrequencies"
+        Me.Name = "sdgFrequencies"
         Me.tbpOneWayFrequencies.ResumeLayout(False)
         Me.tbpTable.ResumeLayout(False)
         Me.grpTableOptions.ResumeLayout(False)

@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgOneWayFrequencies
+Partial Class dlgFrequencies
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -38,7 +38,7 @@ Partial Class dlgOneWayFrequencies
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgOneWayFrequencies))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgFrequencies))
         Me.grpSort = New System.Windows.Forms.GroupBox()
         Me.rdoDescendingFrequencies = New System.Windows.Forms.RadioButton()
         Me.rdoAscendingFrequencies = New System.Windows.Forms.RadioButton()
@@ -236,7 +236,7 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.ucrSelectorOneWayFreq, "ucrSelectorOneWayFreq")
         Me.ucrSelectorOneWayFreq.Name = "ucrSelectorOneWayFreq"
         '
-        'dlgOneWayFrequencies
+        'dlgFrequencies
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -260,7 +260,7 @@ Partial Class dlgOneWayFrequencies
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgOneWayFrequencies"
+        Me.Name = "dlgFrequencies"
         Me.grpSort.ResumeLayout(False)
         Me.grpOutput.ResumeLayout(False)
         Me.grpOutput.PerformLayout()
