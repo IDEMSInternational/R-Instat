@@ -123,7 +123,6 @@ Public Class dlgSummaryTables
         ucrSaveTable.SetCheckBoxText("Save Table")
         ucrSaveTable.SetAssignToIfUncheckedValue("last_table")
 
-
         ucrChkSummaries.AddToLinkedControls({ucrChkDisplaySummariesAsRow, ucrChkDisplayVariablesAsRows}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkSummaries.AddToLinkedControls(ucrChkDisplaySummaryVariablesAsRow, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
@@ -224,7 +223,7 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub TestOKEnabled()
-        If ucrSaveTable.IsComplete AndAlso ucrNudSigFigs.GetText <> "" AndAlso (Not ucrChkWeight.Checked OrElse (ucrChkWeight.Checked AndAlso Not ucrReceiverWeights.IsEmpty)) AndAlso Not ucrReceiverSummaryCols.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
+        If ucrSaveTable.IsComplete AndAlso ucrNudColumnFactors.GetText() <> "" AndAlso ucrNudSigFigs.GetText <> "" AndAlso (Not ucrChkWeight.Checked OrElse (ucrChkWeight.Checked AndAlso Not ucrReceiverWeights.IsEmpty)) AndAlso Not ucrReceiverSummaryCols.IsEmpty AndAlso Not clsSummariesList.clsParameters.Count = 0 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -260,7 +259,7 @@ Public Class dlgSummaryTables
         End If
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrSaveTable.ControlContentsChanged, ucrChkWeight.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged, ucrReceiverSummaryCols.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrSaveTable.ControlContentsChanged, ucrChkWeight.ControlContentsChanged, ucrReceiverWeights.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged, ucrReceiverSummaryCols.ControlContentsChanged, ucrNudColumnFactors.ControlValueChanged
         TestOKEnabled()
     End Sub
 
@@ -294,21 +293,26 @@ Public Class dlgSummaryTables
     End Sub
 
     Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged, ucrNudColumnFactors.ControlValueChanged
+        Dim clsHeaderLeftFunction As New RFunction
+        Dim clsHeaderTopFunction As New RFunction
         Dim iColumn As Integer = 0
-        Dim iNumberOfColumns As Integer = ucrNudColumnFactors.GetText()
+        Dim iNumberOfColumns As Integer
+
+        clsHeaderLeftFunction.SetPackageName("mmtable2")
+        clsHeaderLeftFunction.SetRCommand("header_top_left")
+
+        clsHeaderTopFunction.SetPackageName("mmtable2")
+        clsHeaderTopFunction.SetRCommand("header_left_top")
+
         clsColumnOperator.ClearParameters()
-        If Not ucrReceiverFactors.IsEmpty Then
+
+        If Not ucrReceiverFactors.IsEmpty AndAlso ucrNudColumnFactors.GetText() <> "" Then
+            iNumberOfColumns = ucrNudColumnFactors.GetText()
             For Each strcolumn As String In ucrReceiverFactors.GetVariableNamesAsList
                 If (iColumn + 1) <= iNumberOfColumns Then
-                    Dim clsHeaderLeftFunction As New RFunction
-                    clsHeaderLeftFunction.SetPackageName("mmtable2")
-                    clsHeaderLeftFunction.SetRCommand("header_top_left")
                     clsHeaderLeftFunction.AddParameter("variable", strcolumn, iPosition:=0)
                     clsColumnOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderLeftFunction, iPosition:=iColumn)
                 Else
-                    Dim clsHeaderTopFunction As New RFunction
-                    clsHeaderTopFunction.SetPackageName("mmtable2")
-                    clsHeaderTopFunction.SetRCommand("header_left_top")
                     clsHeaderTopFunction.AddParameter("variable", strcolumn, iPosition:=0)
                     clsColumnOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderTopFunction, iPosition:=iColumn)
                 End If
