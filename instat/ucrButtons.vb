@@ -271,11 +271,11 @@ Public Class ucrButtons
         autoTranslate(Me.ParentForm)
         frmMain.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
 
-        'If cmdLanguage.FlatStyle = FlatStyle.Popup Then
-        '    cmdLanguage.FlatStyle = FlatStyle.Flat
-        'Else
-        '    cmdLanguage.FlatStyle = FlatStyle.Popup
-        'End If
+        If cmdLanguage.FlatStyle = FlatStyle.Popup Then
+            cmdLanguage.FlatStyle = FlatStyle.Flat
+        Else
+            cmdLanguage.FlatStyle = FlatStyle.Popup
+        End If
     End Sub
 
     Private Sub AddButtonInCommentTextbox()
