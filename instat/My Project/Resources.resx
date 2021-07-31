@@ -117,13 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="arrows_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrows_up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Density" xml:space="preserve">
     <value>Density</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="scriptwindow" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\script.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -145,6 +142,9 @@
   <data name="First" xml:space="preserve">
     <value>First</value>
   </data>
+  <data name="BoxPlot" xml:space="preserve">
+    <value>Boxplot...</value>
+  </data>
   <data name="Site" xml:space="preserve">
     <value>Site</value>
   </data>
@@ -153,6 +153,9 @@
   </data>
   <data name="Recall" xml:space="preserve">
     <value>Recall</value>
+  </data>
+  <data name="Quasibinomial" xml:space="preserve">
+    <value>Quasibinomial</value>
   </data>
   <data name="Selected_variables2" xml:space="preserve">
     <value>Selected variables</value>
@@ -178,8 +181,8 @@
   <data name="legend_bty" xml:space="preserve">
     <value>legend bty</value>
   </data>
-  <data name="Climatic" xml:space="preserve">
-    <value>Climatic</value>
+  <data name="Combine_Factors" xml:space="preserve">
+    <value>Combine Factors</value>
   </data>
   <data name="Append" xml:space="preserve">
     <value>Append</value>
@@ -211,11 +214,11 @@
   <data name="arrows_down" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrows_down.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="a" xml:space="preserve">
+    <value>a</value>
+  </data>
   <data name="StemLeaf" xml:space="preserve">
     <value>Stem and Leaf...</value>
-  </data>
-  <data name="None" xml:space="preserve">
-    <value>None</value>
   </data>
   <data name="Restrict_Options" xml:space="preserve">
     <value>Restrict Options</value>
@@ -223,8 +226,8 @@
   <data name="Cumulative_Frequency" xml:space="preserve">
     <value>Cumulative Frequency</value>
   </data>
-  <data name="Top" xml:space="preserve">
-    <value>Top</value>
+  <data name="Generalized_Pareto" xml:space="preserve">
+    <value>Generalized Pareto</value>
   </data>
   <data name="Rename_sheets" xml:space="preserve">
     <value>Rename sheets</value>
@@ -262,9 +265,6 @@
   <data name="Label" xml:space="preserve">
     <value>Label</value>
   </data>
-  <data name="Plot_window" xml:space="preserve">
-    <value>Plot window</value>
-  </data>
   <data name="BoxPlot_Options" xml:space="preserve">
     <value>BoxPlot Options</value>
   </data>
@@ -276,9 +276,6 @@
   </data>
   <data name="New_worksheet" xml:space="preserve">
     <value>New worksheet</value>
-  </data>
-  <data name="Water_Balance" xml:space="preserve">
-    <value>Water Balance</value>
   </data>
   <data name="arrows_bottom" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\arrows_bottom.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -319,6 +316,9 @@
   <data name="Make_Factor_an_Ordinary_Variable" xml:space="preserve">
     <value>Make Factor an Ordinary Variable</value>
   </data>
+  <data name="Cliboxplot" xml:space="preserve">
+    <value>Cliboxplot</value>
+  </data>
   <data name="Selected" xml:space="preserve">
     <value>Selected</value>
   </data>
@@ -349,20 +349,26 @@
   <data name="Export_as" xml:space="preserve">
     <value>Export_as</value>
   </data>
+  <data name="Days" xml:space="preserve">
+    <value>Days</value>
+  </data>
   <data name="Print_Preview" xml:space="preserve">
     <value>Print Preview</value>
   </data>
   <data name="Mean1" xml:space="preserve">
     <value>Mean</value>
   </data>
-  <data name="Bernouli" xml:space="preserve">
-    <value>Bernouli</value>
+  <data name="Dummy_Variables" xml:space="preserve">
+    <value>Dummy Variables</value>
   </data>
   <data name="columnmetadata" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\columnmetadata.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Filter" xml:space="preserve">
     <value>Filter</value>
+  </data>
+  <data name="Duplicate_copy_columns" xml:space="preserve">
+    <value>Duplicate(copy columns)</value>
   </data>
   <data name="Make_Factor" xml:space="preserve">
     <value>Make Factor</value>
@@ -373,8 +379,8 @@
   <data name="Unused_levels" xml:space="preserve">
     <value>Unused levels</value>
   </data>
-  <data name="Reference_levels" xml:space="preserve">
-    <value>Reference levels</value>
+  <data name="Day_Month" xml:space="preserve">
+    <value>Day Month</value>
   </data>
   <data name="Station_name" xml:space="preserve">
     <value>Station name</value>
@@ -397,6 +403,9 @@
   <data name="Print" xml:space="preserve">
     <value>Print</value>
   </data>
+  <data name="Exponential1" xml:space="preserve">
+    <value>Exponential</value>
+  </data>
   <data name="New_Value" xml:space="preserve">
     <value>New Value</value>
   </data>
@@ -405,6 +414,9 @@
   </data>
   <data name="Population_Failures" xml:space="preserve">
     <value>Population Failures</value>
+  </data>
+  <data name="Dot_Plot_Options" xml:space="preserve">
+    <value>Dot Plot Options</value>
   </data>
   <data name="Display_daily" xml:space="preserve">
     <value>Display daily</value>
@@ -448,6 +460,9 @@
   <data name="Drop_Unused_Levels" xml:space="preserve">
     <value>Drop Unused Levels </value>
   </data>
+  <data name="Earliest_day" xml:space="preserve">
+    <value>Earliest day</value>
+  </data>
   <data name="Oxygen-Icons.org-Oxygen-Actions-window-duplicate" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Oxygen-Icons.org-Oxygen-Actions-window-duplicate.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -472,6 +487,9 @@
   <data name="Height" xml:space="preserve">
     <value>Height</value>
   </data>
+  <data name="With_Replacement" xml:space="preserve">
+    <value>With Replacement</value>
+  </data>
   <data name="Probability_Plot" xml:space="preserve">
     <value>Probability Plot</value>
   </data>
@@ -487,20 +505,23 @@
   <data name="Matching_column" xml:space="preserve">
     <value>Matching column</value>
   </data>
-  <data name="Weibull" xml:space="preserve">
-    <value>Weibull</value>
+  <data name="Summary_Statistics" xml:space="preserve">
+    <value>Summary Statistics</value>
   </data>
   <data name="Meanlog" xml:space="preserve">
     <value>Meanlog</value>
   </data>
-  <data name="Convert_to" xml:space="preserve">
-    <value>Convert to</value>
+  <data name="Bar_Chart" xml:space="preserve">
+    <value>Bar Chart</value>
   </data>
   <data name="Normal" xml:space="preserve">
     <value>Normal</value>
   </data>
   <data name="Lock" xml:space="preserve">
     <value>Lock</value>
+  </data>
+  <data name="b" xml:space="preserve">
+    <value>b</value>
   </data>
   <data name="End_of_the_Rains" xml:space="preserve">
     <value>End of the Rains</value>
@@ -547,9 +568,6 @@
   <data name="Attach_to_existing_label_column1" xml:space="preserve">
     <value>Attach to existing label column</value>
   </data>
-  <data name="Paomedia-Small-N-Flat-Window-layout" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Paomedia-Small-N-Flat-Window-layout.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Prepare" xml:space="preserve">
     <value>Prepare</value>
   </data>
@@ -574,12 +592,6 @@
   <data name="Replace" xml:space="preserve">
     <value>Replace</value>
   </data>
-  <data name="Multinomial" xml:space="preserve">
-    <value>Multinomial</value>
-  </data>
-  <data name="By_factors" xml:space="preserve">
-    <value>By_factor(s)</value>
-  </data>
   <data name="Weights1" xml:space="preserve">
     <value>Weights</value>
   </data>
@@ -601,11 +613,11 @@
   <data name="Interractions" xml:space="preserve">
     <value>Interractions</value>
   </data>
+  <data name="Lognormal" xml:space="preserve">
+    <value>Lognormal</value>
+  </data>
   <data name="Simple_Regression_Options" xml:space="preserve">
     <value>Simple Regression Options</value>
-  </data>
-  <data name="Level_to_be_omitted" xml:space="preserve">
-    <value>Level to be omitted</value>
   </data>
   <data name="Rain_count" xml:space="preserve">
     <value>Rain count</value>
@@ -621,12 +633,6 @@
   </data>
   <data name="Columns_To_Transpose" xml:space="preserve">
     <value>Columns To Transpose</value>
-  </data>
-  <data name="Export_for_PICSA" xml:space="preserve">
-    <value>Export for PICSA</value>
-  </data>
-  <data name="Stack_data_into" xml:space="preserve">
-    <value>Stack data into</value>
   </data>
   <data name="Undo" xml:space="preserve">
     <value>Undo</value>
@@ -651,6 +657,9 @@
   </data>
   <data name="Manipulate" xml:space="preserve">
     <value>Manipulate</value>
+  </data>
+  <data name="lastgraph" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lastgraph.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Earilest_Day" xml:space="preserve">
     <value>Earilest Day</value>
@@ -700,8 +709,8 @@
   <data name="Select_All" xml:space="preserve">
     <value>Select All</value>
   </data>
-  <data name="Dummy_Variables" xml:space="preserve">
-    <value>Dummy Variables</value>
+  <data name="dataview" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dataview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Stack" xml:space="preserve">
     <value>Stack</value>
@@ -717,6 +726,9 @@
   </data>
   <data name="Pie_Chart_Options" xml:space="preserve">
     <value>Pie Chart Options</value>
+  </data>
+  <data name="script2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\script2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Missing" xml:space="preserve">
     <value>Missing</value>
@@ -766,11 +778,14 @@
   <data name="Gamma_With_Shape_and_Rate" xml:space="preserve">
     <value>Gamma With Shape and Rate</value>
   </data>
+  <data name="Factor" xml:space="preserve">
+    <value>Factor</value>
+  </data>
   <data name="Command_and_Output_Window" xml:space="preserve">
     <value>Command and Output Window</value>
   </data>
-  <data name="dataview" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\dataview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Weibull" xml:space="preserve">
+    <value>Weibull</value>
   </data>
   <data name="Poisson" xml:space="preserve">
     <value>Poisson</value>
@@ -781,8 +796,8 @@
   <data name="Factors" xml:space="preserve">
     <value>Factors</value>
   </data>
-  <data name="Median" xml:space="preserve">
-    <value>Median</value>
+  <data name="DF_2" xml:space="preserve">
+    <value>DF 2</value>
   </data>
   <data name="Standard_deviation" xml:space="preserve">
     <value>St. Dev</value>
@@ -814,9 +829,6 @@
   <data name="Output_for_CDT" xml:space="preserve">
     <value>Output for CDT</value>
   </data>
-  <data name="Additional" xml:space="preserve">
-    <value>Additional</value>
-  </data>
   <data name="Omit_value" xml:space="preserve">
     <value>Omit value</value>
   </data>
@@ -828,9 +840,6 @@
   </data>
   <data name="Three_Summaries" xml:space="preserve">
     <value>Three Summaries</value>
-  </data>
-  <data name="Font" xml:space="preserve">
-    <value>Font Ctrl+T</value>
   </data>
   <data name="Factor_into" xml:space="preserve">
     <value>Factor into</value>
@@ -907,6 +916,9 @@
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="Unstack" xml:space="preserve">
+    <value>Unstack</value>
+  </data>
   <data name="Unstack_Decast" xml:space="preserve">
     <value>Unstack/Decast</value>
   </data>
@@ -915,9 +927,6 @@
   </data>
   <data name="Import_daily_data" xml:space="preserve">
     <value>Import daily data</value>
-  </data>
-  <data name="Save_results_in" xml:space="preserve">
-    <value>Save results in</value>
   </data>
   <data name="Minimum1" xml:space="preserve">
     <value>Minimum</value>
@@ -945,6 +954,9 @@
   </data>
   <data name="F" xml:space="preserve">
     <value>F</value>
+  </data>
+  <data name="Reorder" xml:space="preserve">
+    <value>Reorder</value>
   </data>
   <data name="Open" xml:space="preserve">
     <value>Open</value>
@@ -985,23 +997,20 @@
   <data name="Number_of_Rain_Days" xml:space="preserve">
     <value>Number of Rain Days</value>
   </data>
+  <data name="Include_Facets" xml:space="preserve">
+    <value>Include Facets</value>
+  </data>
   <data name="Script" xml:space="preserve">
     <value>Script</value>
   </data>
   <data name="Data_View" xml:space="preserve">
     <value>Data View</value>
   </data>
-  <data name="last10dialogs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\last10dialogs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Run_Worksheet_Editor" xml:space="preserve">
     <value>Run Worksheet Editor F7</value>
   </data>
   <data name="Legend_position" xml:space="preserve">
     <value>Legend position</value>
-  </data>
-  <data name="Reset" xml:space="preserve">
-    <value>Reset</value>
   </data>
   <data name="Selected_Column" xml:space="preserve">
     <value>Selected Column</value>
@@ -1018,14 +1027,14 @@
   <data name="Random_Subsets" xml:space="preserve">
     <value>Random Subsets</value>
   </data>
-  <data name="Earliest_day" xml:space="preserve">
-    <value>Earliest day</value>
+  <data name="Export_for_PICSA" xml:space="preserve">
+    <value>Export for PICSA</value>
   </data>
-  <data name="DF_2" xml:space="preserve">
-    <value>DF 2</value>
+  <data name="Level_to_be_omitted" xml:space="preserve">
+    <value>Level to be omitted</value>
   </data>
-  <data name="Day_Month" xml:space="preserve">
-    <value>Day Month</value>
+  <data name="Additional" xml:space="preserve">
+    <value>Additional</value>
   </data>
   <data name="Bar_Chart_Options" xml:space="preserve">
     <value>Bar Chart Options</value>
@@ -1042,14 +1051,11 @@
   <data name="Process" xml:space="preserve">
     <value>Process</value>
   </data>
-  <data name="Paste" xml:space="preserve">
-    <value>Paste</value>
-  </data>
-  <data name="Cumulative_exceedance" xml:space="preserve">
-    <value>Cumulative exceedance</value>
-  </data>
   <data name="Rain_Statistics" xml:space="preserve">
     <value>Rain Statistics</value>
+  </data>
+  <data name="Missing_values" xml:space="preserve">
+    <value>Missing values</value>
   </data>
   <data name="DotPlot" xml:space="preserve">
     <value>Dotplot...</value>
@@ -1062,12 +1068,6 @@
   </data>
   <data name="Shape_2" xml:space="preserve">
     <value>Shape 2</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="Delete_sheet" xml:space="preserve">
-    <value>Delete sheet</value>
   </data>
   <data name="Shape" xml:space="preserve">
     <value>Shape</value>
@@ -1093,6 +1093,9 @@
   <data name="Manage" xml:space="preserve">
     <value>Manage</value>
   </data>
+  <data name="Level_Omitted" xml:space="preserve">
+    <value>Level Omitted</value>
+  </data>
   <data name="Two" xml:space="preserve">
     <value>Two</value>
   </data>
@@ -1105,9 +1108,6 @@
   <data name="Find1" xml:space="preserve">
     <value>Find Ctrl+F</value>
   </data>
-  <data name="DF_1" xml:space="preserve">
-    <value>DF 1</value>
-  </data>
   <data name="Carlosjj-Microsoft-Office-2013-Excel" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Carlosjj-Microsoft-Office-2013-Excel.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -1117,17 +1117,20 @@
   <data name="Options" xml:space="preserve">
     <value>Options</value>
   </data>
+  <data name="Gumbel" xml:space="preserve">
+    <value>Gumbel</value>
+  </data>
   <data name="UseGraph" xml:space="preserve">
     <value>Use Graph...</value>
   </data>
   <data name="Row_statistics1" xml:space="preserve">
     <value>Row statistics</value>
   </data>
-  <data name="Quasibinomial" xml:space="preserve">
-    <value>Quasibinomial</value>
+  <data name="Convert_to" xml:space="preserve">
+    <value>Convert to</value>
   </data>
-  <data name="Exclude" xml:space="preserve">
-    <value>Exclude</value>
+  <data name="Canonical_Correlations" xml:space="preserve">
+    <value>Canonical Correlations</value>
   </data>
   <data name="Colour_rainbow" xml:space="preserve">
     <value>Colour rainbow</value>
@@ -1141,20 +1144,17 @@
   <data name="Ascending" xml:space="preserve">
     <value>Ascending</value>
   </data>
-  <data name="Clear1" xml:space="preserve">
-    <value>Clear Del</value>
+  <data name="Sort" xml:space="preserve">
+    <value>Sort</value>
   </data>
   <data name="Sample_Size" xml:space="preserve">
     <value>Sample Size</value>
   </data>
-  <data name="With_Replacement" xml:space="preserve">
-    <value>With Replacement</value>
+  <data name="Stack_data_into" xml:space="preserve">
+    <value>Stack data into</value>
   </data>
   <data name="Legend_label" xml:space="preserve">
     <value>Legend label</value>
-  </data>
-  <data name="Y_Variable" xml:space="preserve">
-    <value>Y Variable</value>
   </data>
   <data name="Analysis_of_Variance" xml:space="preserve">
     <value>Analysis of Variance</value>
@@ -1186,14 +1186,14 @@
   <data name="Select_All1" xml:space="preserve">
     <value>Select All ctrls+A </value>
   </data>
-  <data name="b" xml:space="preserve">
-    <value>b</value>
+  <data name="Clear1" xml:space="preserve">
+    <value>Clear Del</value>
   </data>
   <data name="Regular_Sequence" xml:space="preserve">
     <value>Regular Sequence</value>
   </data>
-  <data name="Factor" xml:space="preserve">
-    <value>Factor</value>
+  <data name="Delete_sheet" xml:space="preserve">
+    <value>Delete sheet</value>
   </data>
   <data name="Chart_Type" xml:space="preserve">
     <value>Chart Type</value>
@@ -1201,11 +1201,11 @@
   <data name="BarCharts" xml:space="preserve">
     <value>Bar Charts...</value>
   </data>
+  <data name="Reference_levels" xml:space="preserve">
+    <value>Reference levels</value>
+  </data>
   <data name="Equal_To" xml:space="preserve">
     <value>Equal To</value>
-  </data>
-  <data name="Diversity" xml:space="preserve">
-    <value>Diversity</value>
   </data>
   <data name="openfromlibrary" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\openfromlibrary.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -1216,6 +1216,9 @@
   <data name="Cumulative_Exceedence" xml:space="preserve">
     <value>Cumulative Exceedence</value>
   </data>
+  <data name="View_Edit_Text" xml:space="preserve">
+    <value>View/Edit Text</value>
+  </data>
   <data name="Variate" xml:space="preserve">
     <value>Variate</value>
   </data>
@@ -1225,11 +1228,14 @@
   <data name="Into" xml:space="preserve">
     <value>Into</value>
   </data>
-  <data name="Unstack" xml:space="preserve">
-    <value>Unstack</value>
+  <data name="Plot_window" xml:space="preserve">
+    <value>Plot window</value>
   </data>
   <data name="Copy_result_into_a_new_column" xml:space="preserve">
     <value>Copy result into a new column</value>
+  </data>
+  <data name="Category_Factor" xml:space="preserve">
+    <value>Category Factor</value>
   </data>
   <data name="von_mises" xml:space="preserve">
     <value>von Mises</value>
@@ -1237,11 +1243,11 @@
   <data name="Make_variable_into_a_factor" xml:space="preserve">
     <value>Make variable into a factor</value>
   </data>
-  <data name="Calculations" xml:space="preserve">
-    <value>Calculations</value>
+  <data name="arrows_up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrows_up.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Treatment_factor" xml:space="preserve">
-    <value>Treatment factor</value>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
   </data>
   <data name="Points" xml:space="preserve">
     <value>Points</value>
@@ -1273,6 +1279,9 @@
   <data name="Threashold" xml:space="preserve">
     <value>Threashold</value>
   </data>
+  <data name="Gamma" xml:space="preserve">
+    <value>Gamma</value>
+  </data>
   <data name="Column_Name" xml:space="preserve">
     <value>Column Name</value>
   </data>
@@ -1282,8 +1291,8 @@
   <data name="Regression" xml:space="preserve">
     <value>Regression</value>
   </data>
-  <data name="Bar_Chart" xml:space="preserve">
-    <value>Bar Chart</value>
+  <data name="Cumulative_exceedance" xml:space="preserve">
+    <value>Cumulative exceedance</value>
   </data>
   <data name="Transpose_Columns" xml:space="preserve">
     <value>Transpose Columns</value>
@@ -1291,8 +1300,8 @@
   <data name="Oxygen-Icons.org-Oxygen-Status-dialog-error" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Oxygen-Icons.org-Oxygen-Status-dialog-error.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Summary_Statistics" xml:space="preserve">
-    <value>Summary Statistics</value>
+  <data name="Median" xml:space="preserve">
+    <value>Median</value>
   </data>
   <data name="Save_As" xml:space="preserve">
     <value>Save As</value>
@@ -1323,9 +1332,6 @@
   </data>
   <data name="Statistcs_required" xml:space="preserve">
     <value>Statistcs required</value>
-  </data>
-  <data name="Non_Parametric" xml:space="preserve">
-    <value>Non-Parametric</value>
   </data>
   <data name="Maximum_Capacity" xml:space="preserve">
     <value>Maximum Capacity</value>
@@ -1369,17 +1375,23 @@
   <data name="Gamma_With_Shape_and_Mean" xml:space="preserve">
     <value>Gamma With Shape and Mean</value>
   </data>
+  <data name="Monthly_Summaries" xml:space="preserve">
+    <value>Monthly Summaries</value>
+  </data>
   <data name="Row_summary" xml:space="preserve">
     <value>Row summary</value>
   </data>
   <data name="Gamma_With_Shape_and_Scale" xml:space="preserve">
     <value>Gamma With Shape and Scale</value>
   </data>
+  <data name="Data_file" xml:space="preserve">
+    <value>Data file</value>
+  </data>
   <data name="Edit" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="Days" xml:space="preserve">
-    <value>Days</value>
+  <data name="Water_Balance" xml:space="preserve">
+    <value>Water Balance</value>
   </data>
   <data name="Range_Start" xml:space="preserve">
     <value>Range Start</value>
@@ -1393,6 +1405,9 @@
   <data name="Weight" xml:space="preserve">
     <value>Weight</value>
   </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
+  </data>
   <data name="Missing_Data" xml:space="preserve">
     <value>Missing Data</value>
   </data>
@@ -1402,11 +1417,11 @@
   <data name="Not_Yet_Implemented" xml:space="preserve">
     <value>Not Yet Implemented</value>
   </data>
-  <data name="Combine_Factors" xml:space="preserve">
-    <value>Combine Factors</value>
+  <data name="Font" xml:space="preserve">
+    <value>Font Ctrl+T</value>
   </data>
-  <data name="Cliboxplot" xml:space="preserve">
-    <value>Cliboxplot</value>
+  <data name="Paomedia-Small-N-Flat-Window-layout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Paomedia-Small-N-Flat-Window-layout.ico;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Four" xml:space="preserve">
     <value>Four</value>
@@ -1414,23 +1429,23 @@
   <data name="Unlock" xml:space="preserve">
     <value>Unlock</value>
   </data>
-  <data name="Category_Factor" xml:space="preserve">
-    <value>Category Factor</value>
+  <data name="Bernouli" xml:space="preserve">
+    <value>Bernouli</value>
   </data>
-  <data name="No" xml:space="preserve">
-    <value>No</value>
+  <data name="Column_Statistics" xml:space="preserve">
+    <value>Column Statistics</value>
   </data>
-  <data name="Lognormal" xml:space="preserve">
-    <value>Lognormal</value>
+  <data name="Save_results_in" xml:space="preserve">
+    <value>Save results in</value>
   </data>
-  <data name="Missing_values" xml:space="preserve">
-    <value>Missing values</value>
+  <data name="DF_1" xml:space="preserve">
+    <value>DF 1</value>
   </data>
   <data name="No_Distribution" xml:space="preserve">
     <value>No Distribution</value>
   </data>
-  <data name="Data_file" xml:space="preserve">
-    <value>Data file</value>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
   </data>
   <data name="Write_back_to_the_data" xml:space="preserve">
     <value>Write back to the data</value>
@@ -1447,8 +1462,8 @@
   <data name="Graphics" xml:space="preserve">
     <value>Graphics</value>
   </data>
-  <data name="Level_Omitted" xml:space="preserve">
-    <value>Level Omitted</value>
+  <data name="Multinomial" xml:space="preserve">
+    <value>Multinomial</value>
   </data>
   <data name="Factor_Variable" xml:space="preserve">
     <value>Factor Variable</value>
@@ -1459,14 +1474,14 @@
   <data name="Polynomials" xml:space="preserve">
     <value>Polynomials</value>
   </data>
-  <data name="Monthly_Summaries" xml:space="preserve">
-    <value>Monthly Summaries</value>
+  <data name="Exclude" xml:space="preserve">
+    <value>Exclude</value>
   </data>
   <data name="One" xml:space="preserve">
     <value>One</value>
   </data>
-  <data name="Dot_Plot_Options" xml:space="preserve">
-    <value>Dot Plot Options</value>
+  <data name="Top" xml:space="preserve">
+    <value>Top</value>
   </data>
   <data name="Second_Factor_Optional" xml:space="preserve">
     <value>Second Factor(Optional)</value>
@@ -1495,9 +1510,6 @@
   <data name="Geometric" xml:space="preserve">
     <value>Geometric</value>
   </data>
-  <data name="Number_of_Cases" xml:space="preserve">
-    <value>Number of Cases</value>
-  </data>
   <data name="Rank" xml:space="preserve">
     <value>Rank</value>
   </data>
@@ -1510,17 +1522,14 @@
   <data name="Counts_Totals" xml:space="preserve">
     <value>Counts Totals</value>
   </data>
-  <data name="BoxPlot" xml:space="preserve">
-    <value>Boxplot...</value>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
   </data>
   <data name="Seasonal_Summary_Rain" xml:space="preserve">
     <value>Seasonal Summary Rain</value>
   </data>
-  <data name="Sort" xml:space="preserve">
-    <value>Sort</value>
-  </data>
-  <data name="Display" xml:space="preserve">
-    <value>Display</value>
+  <data name="Diversity" xml:space="preserve">
+    <value>Diversity</value>
   </data>
   <data name="Second_Factor" xml:space="preserve">
     <value>Second Factor</value>
@@ -1543,8 +1552,8 @@
   <data name="Probability" xml:space="preserve">
     <value>Probability</value>
   </data>
-  <data name="script2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\script2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="last10dialogs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\last10dialogs.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Within" xml:space="preserve">
     <value>Within</value>
@@ -1558,11 +1567,11 @@
   <data name="Change_Format_Month" xml:space="preserve">
     <value>Change Format Month</value>
   </data>
-  <data name="View_Edit_Text" xml:space="preserve">
-    <value>View/Edit Text</value>
+  <data name="Paste" xml:space="preserve">
+    <value>Paste</value>
   </data>
-  <data name="Include_Facets" xml:space="preserve">
-    <value>Include Facets</value>
+  <data name="Calculations" xml:space="preserve">
+    <value>Calculations</value>
   </data>
   <data name="Strings_as_factors" xml:space="preserve">
     <value>Strings as factors</value>
@@ -1573,14 +1582,14 @@
   <data name="Mean" xml:space="preserve">
     <value>Mean</value>
   </data>
-  <data name="Column_Statistics" xml:space="preserve">
-    <value>Column Statistics</value>
+  <data name="Number_of_Cases" xml:space="preserve">
+    <value>Number of Cases</value>
   </data>
   <data name="Variable_width" xml:space="preserve">
     <value>Variable width</value>
   </data>
-  <data name="Canonical_Correlations" xml:space="preserve">
-    <value>Canonical Correlations</value>
+  <data name="Display" xml:space="preserve">
+    <value>Display</value>
   </data>
   <data name="Restrict_data_values" xml:space="preserve">
     <value>Restrict data values</value>
@@ -1588,14 +1597,14 @@
   <data name="copy2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\copy2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Input_File" xml:space="preserve">
-    <value>Input File</value>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
   </data>
-  <data name="Exponential1" xml:space="preserve">
-    <value>Exponential</value>
+  <data name="Non_Parametric" xml:space="preserve">
+    <value>Non-Parametric</value>
   </data>
-  <data name="Duplicate_copy_columns" xml:space="preserve">
-    <value>Duplicate(copy columns)</value>
+  <data name="Treatment_factor" xml:space="preserve">
+    <value>Treatment factor</value>
   </data>
   <data name="Encoding" xml:space="preserve">
     <value>Encoding</value>
@@ -1603,8 +1612,8 @@
   <data name="Separator" xml:space="preserve">
     <value>Separator</value>
   </data>
-  <data name="Gamma" xml:space="preserve">
-    <value>Gamma</value>
+  <data name="Input_File" xml:space="preserve">
+    <value>Input File</value>
   </data>
   <data name="Interested_variable" xml:space="preserve">
     <value>Interested variable</value>
@@ -1612,8 +1621,8 @@
   <data name="Population_Successes" xml:space="preserve">
     <value>Population Successes</value>
   </data>
-  <data name="a" xml:space="preserve">
-    <value>a</value>
+  <data name="Y_Variable" xml:space="preserve">
+    <value>Y Variable</value>
   </data>
   <data name="Load_Graph" xml:space="preserve">
     <value>Load Graph</value>
@@ -1621,8 +1630,8 @@
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>
   </data>
-  <data name="Reorder" xml:space="preserve">
-    <value>Reorder</value>
+  <data name="Climatic" xml:space="preserve">
+    <value>Climatic</value>
   </data>
   <data name="Make_Result_as_a_factor" xml:space="preserve">
     <value>Make Result as a factor</value>
@@ -1636,19 +1645,13 @@
   <data name="Select_and_Stack" xml:space="preserve">
     <value>Select and Stack</value>
   </data>
-  <data name="Help" xml:space="preserve">
-    <value>Help</value>
+  <data name="By_factors" xml:space="preserve">
+    <value>By_factor(s)</value>
   </data>
   <data name="Data_Manipulation" xml:space="preserve">
     <value>Data Manipulation</value>
   </data>
-  <data name="lastgraph" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lastgraph.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Generalized_Pareto" xml:space="preserve">
-    <value>Generalized Pareto</value>
-  </data>
-  <data name="Gumbel" xml:space="preserve">
-    <value>Gumbel</value>
+  <data name="lan_btn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lan_btn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

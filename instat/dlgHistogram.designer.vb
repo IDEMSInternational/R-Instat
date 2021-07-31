@@ -42,7 +42,7 @@ Partial Class dlgHistogram
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.cmdHistogramOptions = New System.Windows.Forms.Button()
         Me.rdoHistogram = New System.Windows.Forms.RadioButton()
-        Me.rdoDensity = New System.Windows.Forms.RadioButton()
+        Me.rdoDensity_ridges = New System.Windows.Forms.RadioButton()
         Me.rdoFrequencyPolygon = New System.Windows.Forms.RadioButton()
         Me.lblfactor = New System.Windows.Forms.Label()
         Me.lblStats = New System.Windows.Forms.Label()
@@ -54,6 +54,7 @@ Partial Class dlgHistogram
         Me.ucrHistogramSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrChkRidges = New instat.ucrCheck()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -81,16 +82,16 @@ Partial Class dlgHistogram
         Me.rdoHistogram.Tag = "Histogram"
         Me.rdoHistogram.UseVisualStyleBackColor = True
         '
-        'rdoDensity
+        'rdoDensity_ridges
         '
-        resources.ApplyResources(Me.rdoDensity, "rdoDensity")
-        Me.rdoDensity.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDensity.FlatAppearance.BorderSize = 2
-        Me.rdoDensity.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoDensity.Name = "rdoDensity"
-        Me.rdoDensity.TabStop = True
-        Me.rdoDensity.Tag = "Density"
-        Me.rdoDensity.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoDensity_ridges, "rdoDensity_ridges")
+        Me.rdoDensity_ridges.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDensity_ridges.FlatAppearance.BorderSize = 2
+        Me.rdoDensity_ridges.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoDensity_ridges.Name = "rdoDensity_ridges"
+        Me.rdoDensity_ridges.TabStop = True
+        Me.rdoDensity_ridges.Tag = "Density"
+        Me.rdoDensity_ridges.UseVisualStyleBackColor = True
         '
         'rdoFrequencyPolygon
         '
@@ -170,10 +171,17 @@ Partial Class dlgHistogram
         resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
         '
+        'ucrChkRidges
+        '
+        Me.ucrChkRidges.Checked = False
+        resources.ApplyResources(Me.ucrChkRidges, "ucrChkRidges")
+        Me.ucrChkRidges.Name = "ucrChkRidges"
+        '
         'dlgHistogram
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkRidges)
         Me.Controls.Add(Me.lblStats)
         Me.Controls.Add(Me.ucrInputStats)
         Me.Controls.Add(Me.ucrChkPercentages)
@@ -181,14 +189,14 @@ Partial Class dlgHistogram
         Me.Controls.Add(Me.ucrVariablesAsFactorforHist)
         Me.Controls.Add(Me.ucrFactorReceiver)
         Me.Controls.Add(Me.rdoFrequencyPolygon)
-        Me.Controls.Add(Me.rdoDensity)
+        Me.Controls.Add(Me.rdoDensity_ridges)
         Me.Controls.Add(Me.rdoHistogram)
-        Me.Controls.Add(Me.cmdHistogramOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrHistogramSelector)
         Me.Controls.Add(Me.lblfactor)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlOptions)
+        Me.Controls.Add(Me.cmdHistogramOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -203,7 +211,7 @@ Partial Class dlgHistogram
     Friend WithEvents cmdOptions As Button
     Friend WithEvents cmdHistogramOptions As Button
     Friend WithEvents rdoHistogram As RadioButton
-    Friend WithEvents rdoDensity As RadioButton
+    Friend WithEvents rdoDensity_ridges As RadioButton
     Friend WithEvents rdoFrequencyPolygon As RadioButton
     Friend WithEvents ucrFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblfactor As Label
@@ -213,4 +221,5 @@ Partial Class dlgHistogram
     Friend WithEvents ucrInputStats As ucrInputComboBox
     Friend WithEvents ucrChkPercentages As ucrCheck
     Friend WithEvents lblStats As Label
+    Friend WithEvents ucrChkRidges As ucrCheck
 End Class

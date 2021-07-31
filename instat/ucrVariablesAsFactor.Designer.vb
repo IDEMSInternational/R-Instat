@@ -46,8 +46,8 @@ Partial Class ucrVariablesAsFactor
         '
         'ucrMultipleVariables
         '
-        Me.ucrMultipleVariables.frmParent = Nothing
         resources.ApplyResources(Me.ucrMultipleVariables, "ucrMultipleVariables")
+        Me.ucrMultipleVariables.frmParent = Nothing
         Me.ucrMultipleVariables.Name = "ucrMultipleVariables"
         Me.ucrMultipleVariables.Selector = Nothing
         Me.ucrMultipleVariables.strNcFilePath = ""
@@ -55,8 +55,8 @@ Partial Class ucrVariablesAsFactor
         '
         'ucrSingleVariable
         '
-        Me.ucrSingleVariable.frmParent = Nothing
         resources.ApplyResources(Me.ucrSingleVariable, "ucrSingleVariable")
+        Me.ucrSingleVariable.frmParent = Nothing
         Me.ucrSingleVariable.Name = "ucrSingleVariable"
         Me.ucrSingleVariable.Selector = Nothing
         Me.ucrSingleVariable.strNcFilePath = ""
