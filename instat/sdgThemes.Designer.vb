@@ -384,6 +384,7 @@ Partial Class sdgThemes
         'ucrInputLegendJustification
         '
         Me.ucrInputLegendJustification.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendJustification.GetSetSelectedIndex = -1
         Me.ucrInputLegendJustification.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLegendJustification, "ucrInputLegendJustification")
         Me.ucrInputLegendJustification.Name = "ucrInputLegendJustification"
@@ -391,6 +392,7 @@ Partial Class sdgThemes
         'ucrInputLegendBox
         '
         Me.ucrInputLegendBox.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendBox.GetSetSelectedIndex = -1
         Me.ucrInputLegendBox.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLegendBox, "ucrInputLegendBox")
         Me.ucrInputLegendBox.Name = "ucrInputLegendBox"
@@ -398,6 +400,7 @@ Partial Class sdgThemes
         'ucrInputLegendPosition
         '
         Me.ucrInputLegendPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendPosition.GetSetSelectedIndex = -1
         Me.ucrInputLegendPosition.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLegendPosition, "ucrInputLegendPosition")
         Me.ucrInputLegendPosition.Name = "ucrInputLegendPosition"
@@ -405,6 +408,7 @@ Partial Class sdgThemes
         'ucrInputLegendDirection
         '
         Me.ucrInputLegendDirection.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendDirection.GetSetSelectedIndex = -1
         Me.ucrInputLegendDirection.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLegendDirection, "ucrInputLegendDirection")
         Me.ucrInputLegendDirection.Name = "ucrInputLegendDirection"
@@ -412,6 +416,7 @@ Partial Class sdgThemes
         'ucrInputLegendBoxJust
         '
         Me.ucrInputLegendBoxJust.AddQuotesIfUnrecognised = True
+        Me.ucrInputLegendBoxJust.GetSetSelectedIndex = -1
         Me.ucrInputLegendBoxJust.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLegendBoxJust, "ucrInputLegendBoxJust")
         Me.ucrInputLegendBoxJust.Name = "ucrInputLegendBoxJust"

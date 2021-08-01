@@ -1252,7 +1252,7 @@
     <value>86, 460</value>
   </data>
   <data name="ucrButtonsSdgPlotRegion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>159, 30</value>
   </data>
   <data name="ucrButtonsSdgPlotRegion.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
