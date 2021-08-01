@@ -527,12 +527,4 @@ Public Class sdgCalculationsSummmary
         Next
         Return Nothing
     End Function
-
-    Private Sub rdoDoNotSave_CheckedChanged(sender As Object, e As EventArgs) Handles rdoDoNotSave.CheckedChanged
-
-    End Sub
-
-    Private Sub ucrDefineFilter_Load(sender As Object, e As EventArgs) Handles ucrDefineFilter.Load
-
-    End Sub
 End Class

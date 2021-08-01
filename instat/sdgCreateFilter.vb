@@ -48,8 +48,4 @@ Public Class sdgCreateFilter
             End If
         End If
     End Sub
-
-    Private Sub ucrCreateFilter_Load(sender As Object, e As EventArgs) Handles ucrCreateFilter.Load
-
-    End Sub
 End Class

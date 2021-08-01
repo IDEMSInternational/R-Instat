@@ -228,14 +228,6 @@ Public Class dlgColumnStats
         sdgMissingOptions.ShowDialog()
     End Sub
 
-    Private Sub ucrChkPrintOutput_Load(sender As Object, e As EventArgs) Handles ucrChkPrintOutput.Load
-
-    End Sub
-
-    Private Sub ucrReceiverSelectedVariables_Load(sender As Object, e As EventArgs) Handles ucrReceiverSelectedVariables.Load
-
-    End Sub
-
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrChkPrintOutput.ControlContentsChanged, ucrChkStoreResults.ControlContentsChanged
         TestOKEnabled()
     End Sub
