@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.IO
 Imports System.Reflection
 
 Public Class Translations
@@ -46,6 +47,11 @@ Public Class Translations
         ' The 'WriteCsvFile' function call below should normally be commented out. 
         ' It only needs be uncommented and executed once, prior to each new release.
         'WriteCsvFile()
+
+        ' The 'SetTranslateIgnore' function call below should normally be commented out.
+        ' It only needs be uncommented when the 'translateIgnore.txt' file is updated, and the 
+        ' changes need to be applied to the database.
+        SetTranslateIgnore()
 
         If IsNothing(tsCollection) OrElse IsNothing(ctrParent) OrElse IsNothing(TryCast(ctrParent, Form)) Then
             Exit Sub
@@ -218,6 +224,61 @@ Public Class Translations
         'accidentally in the release version. 
         MsgBox("The form controls' translation text was written to: " & strPath &
                ". The application will now exit.", MsgBoxStyle.Exclamation)
+        System.Windows.Forms.Application.Exit()
+    End Sub
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   
+    '''    Writes a CSV file that can be imported into the `TranslateWinForm` library database. 
+    '''    This sub should be executed prior to each release to ensure that the `TranslateWinForm` 
+    '''    database contains all the translatable text for the new release.
+    '''    <para>
+    '''    The CSV file contains the identifiers and associated text of each form, control and menu 
+    '''    item in the application.     Please note that `ucrCheck` and `ucrInput` controls are 
+    '''    specifically excluded. This is because the text for these controls is set dynamically 
+    '''    at runtime.
+    '''    </para><para>
+    '''    This sub uses the `Reflection` package to automatically identify and traverse all the 
+    '''    forms, menus and controls in the current release. This information can also be found by 
+    '''    parsing the application source code files (e.g. the `resx` or `xlf` files). However, 
+    '''    we considered the `Reflection` package to be a simpler and less error-prone solution.
+    '''    </para>
+    ''' </summary>
+    '''--------------------------------------------------------------------------------------------
+    Private Shared Sub SetTranslateIgnore()
+
+        Dim lstIgnore As New List(Of String)
+        Dim lstIgnoreNegations As New List(Of String)
+
+        'For each line in the ignore file
+        Dim strDesktopPath As String = Environment.GetFolderPath(Environment.SpecialFolder.Desktop)
+        Dim strFileName As String = "translateIgnore.txt"
+        Dim strPath As String = System.IO.Path.Combine(strDesktopPath, strFileName)
+        Using clsReader As New StreamReader(strPath)
+            Do While clsReader.Peek() >= 0
+                Dim strIgnoreFileLine = clsReader.ReadLine().Trim()
+                If String.IsNullOrEmpty(strIgnoreFileLine) Then
+                    Continue Do
+                End If
+
+                Select Case (strIgnoreFileLine(0))
+                    Case "#"
+                        'Ignore comment lines
+                    Case "!"
+                        'Add negation pattern to negation list
+                        lstIgnoreNegations.Add(strIgnoreFileLine)
+                    Case Else
+                        'Add pattern to ignore list
+                        lstIgnore.Add(strIgnoreFileLine)
+                End Select
+            Loop
+        End Using
+
+        'This sub should only be used by developers to create the translation ignore file.
+        'Therefore, exit the application with a message to ensure that this sub is not run 
+        'accidentally in the release version. 
+        MsgBox("The " & strPath &
+               " ignore file was processed. The application will now exit.", MsgBoxStyle.Exclamation)
         System.Windows.Forms.Application.Exit()
     End Sub
 
