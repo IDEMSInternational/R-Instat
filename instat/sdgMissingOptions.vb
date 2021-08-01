@@ -87,8 +87,4 @@ Public Class sdgMissingOptions
             clsSummaryFunction.RemoveParameterByName("na_type")
         End If
     End Sub
-
-    Private Sub ucrNudNumber_Load(sender As Object, e As EventArgs) Handles ucrNudNumber.Load
-
-    End Sub
 End Class

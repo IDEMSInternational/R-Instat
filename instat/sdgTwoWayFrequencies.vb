@@ -170,11 +170,6 @@ Public Class sdgTwoWayFrequencies
             clsTwoWayGraphFreq.RemoveParameterByName("show.values")
         End If
     End Sub
-
-    Private Sub ucrInputVerticalLabels_Load(sender As Object, e As EventArgs) Handles ucrInputVerticalLabels.Load
-
-    End Sub
-
     Private Sub InitialiseTabs()
         For i = 0 To tbpTwoWayFrequencies.TabCount - 1
             tbpTwoWayFrequencies.SelectedIndex = i
