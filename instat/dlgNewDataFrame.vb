@@ -422,18 +422,6 @@ Public Class dlgNewDataFrame
         frm.Show()
     End Sub
 
-    Private Sub ucrInputCommand_Load(sender As Object, e As EventArgs) Handles ucrInputCommand.Load
-
-    End Sub
-
-    Private Sub dataGridView_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles dataGridView.CellContentClick
-
-    End Sub
-
-    Private Sub ucrNudRows_Load(sender As Object, e As EventArgs) Handles ucrNudRows.Load
-
-    End Sub
-
     Private Sub cmdTry_Click(sender As Object, e As EventArgs) Handles btnTry.Click
         Dim bValid As Boolean = False
         Dim vecOutput As CharacterVector

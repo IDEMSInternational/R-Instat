@@ -292,10 +292,6 @@ Public Class dlgOpenNetCDF
         autoTranslate(Me)
     End Sub
 
-    Private Sub ucrPnlFileDetails_Load(sender As Object, e As EventArgs) Handles ucrPnlFileDetails.Load
-
-    End Sub
-
     Public Sub FileDetails()
         Dim strScript As String
         Dim vecDetails As CharacterVector
