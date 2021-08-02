@@ -38,6 +38,7 @@ Partial Class sdgParallelPlots
         'ucrInputMissing
         '
         Me.ucrInputMissing.AddQuotesIfUnrecognised = True
+        Me.ucrInputMissing.GetSetSelectedIndex = -1
         Me.ucrInputMissing.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputMissing, "ucrInputMissing")
         Me.ucrInputMissing.Name = "ucrInputMissing"
@@ -45,6 +46,7 @@ Partial Class sdgParallelPlots
         'ucrInputOrder
         '
         Me.ucrInputOrder.AddQuotesIfUnrecognised = True
+        Me.ucrInputOrder.GetSetSelectedIndex = -1
         Me.ucrInputOrder.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputOrder, "ucrInputOrder")
         Me.ucrInputOrder.Name = "ucrInputOrder"

@@ -87,6 +87,7 @@ Partial Class sdgOneVarGraph
         'ucrInputCategorical
         '
         Me.ucrInputCategorical.AddQuotesIfUnrecognised = True
+        Me.ucrInputCategorical.GetSetSelectedIndex = -1
         Me.ucrInputCategorical.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputCategorical, "ucrInputCategorical")
         Me.ucrInputCategorical.Name = "ucrInputCategorical"
@@ -94,6 +95,7 @@ Partial Class sdgOneVarGraph
         'ucrInputNumeric
         '
         Me.ucrInputNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrInputNumeric.GetSetSelectedIndex = -1
         Me.ucrInputNumeric.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputNumeric, "ucrInputNumeric")
         Me.ucrInputNumeric.Name = "ucrInputNumeric"

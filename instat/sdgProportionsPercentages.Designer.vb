@@ -134,6 +134,7 @@ Partial Class sdgProportionsPercentages
         '
         'ucrSelectorProportionsPercentiles
         '
+        Me.ucrSelectorProportionsPercentiles.bDropUnusedFilterLevels = False
         Me.ucrSelectorProportionsPercentiles.bShowHiddenColumns = False
         Me.ucrSelectorProportionsPercentiles.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorProportionsPercentiles, "ucrSelectorProportionsPercentiles")

@@ -125,6 +125,7 @@ Partial Class sdgCorrPlot
         '
         'ucrSelectorFactor
         '
+        Me.ucrSelectorFactor.bDropUnusedFilterLevels = False
         Me.ucrSelectorFactor.bShowHiddenColumns = False
         Me.ucrSelectorFactor.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorFactor, "ucrSelectorFactor")
@@ -154,6 +155,7 @@ Partial Class sdgCorrPlot
         'ucrInputComboGeom
         '
         Me.ucrInputComboGeom.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboGeom.GetSetSelectedIndex = -1
         Me.ucrInputComboGeom.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboGeom, "ucrInputComboGeom")
         Me.ucrInputComboGeom.Name = "ucrInputComboGeom"

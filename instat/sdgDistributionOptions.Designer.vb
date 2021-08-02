@@ -33,6 +33,12 @@ Partial Class sdgDistributionOptions
         Me.lblCaption = New System.Windows.Forms.Label()
         Me.ucrInputGraphCaption = New instat.ucrInputTextBox()
         Me.tbpXAxis = New System.Windows.Forms.TabPage()
+        Me.lblXAxisTitle = New System.Windows.Forms.Label()
+        Me.rdoXAxisSpecifyTitle = New System.Windows.Forms.RadioButton()
+        Me.rdoXAxisNoTitle = New System.Windows.Forms.RadioButton()
+        Me.rdoXAxisAuto = New System.Windows.Forms.RadioButton()
+        Me.ucrInputXAxisLabel = New instat.ucrInputTextBox()
+        Me.ucrPnlXAxis = New instat.UcrPanel()
         Me.tbpYAxis = New System.Windows.Forms.TabPage()
         Me.lblYAxisTitle = New System.Windows.Forms.Label()
         Me.rdoYAxisSpecifyTitle = New System.Windows.Forms.RadioButton()
@@ -44,12 +50,6 @@ Partial Class sdgDistributionOptions
         Me.lblSelectTheme = New System.Windows.Forms.Label()
         Me.ucrInputThemes = New instat.ucrInputComboBox()
         Me.lblFont = New System.Windows.Forms.Label()
-        Me.lblXAxisTitle = New System.Windows.Forms.Label()
-        Me.rdoXAxisSpecifyTitle = New System.Windows.Forms.RadioButton()
-        Me.rdoXAxisNoTitle = New System.Windows.Forms.RadioButton()
-        Me.rdoXAxisAuto = New System.Windows.Forms.RadioButton()
-        Me.ucrInputXAxisLabel = New instat.ucrInputTextBox()
-        Me.ucrPnlXAxis = New instat.UcrPanel()
         Me.tbpPlotsOptions.SuspendLayout()
         Me.tbpTitles.SuspendLayout()
         Me.tbpXAxis.SuspendLayout()
@@ -136,6 +136,45 @@ Partial Class sdgDistributionOptions
         Me.tbpXAxis.Name = "tbpXAxis"
         Me.tbpXAxis.UseVisualStyleBackColor = True
         '
+        'lblXAxisTitle
+        '
+        resources.ApplyResources(Me.lblXAxisTitle, "lblXAxisTitle")
+        Me.lblXAxisTitle.Name = "lblXAxisTitle"
+        '
+        'rdoXAxisSpecifyTitle
+        '
+        resources.ApplyResources(Me.rdoXAxisSpecifyTitle, "rdoXAxisSpecifyTitle")
+        Me.rdoXAxisSpecifyTitle.Name = "rdoXAxisSpecifyTitle"
+        Me.rdoXAxisSpecifyTitle.TabStop = True
+        Me.rdoXAxisSpecifyTitle.UseVisualStyleBackColor = True
+        '
+        'rdoXAxisNoTitle
+        '
+        resources.ApplyResources(Me.rdoXAxisNoTitle, "rdoXAxisNoTitle")
+        Me.rdoXAxisNoTitle.Name = "rdoXAxisNoTitle"
+        Me.rdoXAxisNoTitle.TabStop = True
+        Me.rdoXAxisNoTitle.UseVisualStyleBackColor = True
+        '
+        'rdoXAxisAuto
+        '
+        resources.ApplyResources(Me.rdoXAxisAuto, "rdoXAxisAuto")
+        Me.rdoXAxisAuto.Name = "rdoXAxisAuto"
+        Me.rdoXAxisAuto.TabStop = True
+        Me.rdoXAxisAuto.UseVisualStyleBackColor = True
+        '
+        'ucrInputXAxisLabel
+        '
+        Me.ucrInputXAxisLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputXAxisLabel.IsMultiline = False
+        Me.ucrInputXAxisLabel.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputXAxisLabel, "ucrInputXAxisLabel")
+        Me.ucrInputXAxisLabel.Name = "ucrInputXAxisLabel"
+        '
+        'ucrPnlXAxis
+        '
+        resources.ApplyResources(Me.ucrPnlXAxis, "ucrPnlXAxis")
+        Me.ucrPnlXAxis.Name = "ucrPnlXAxis"
+        '
         'tbpYAxis
         '
         Me.tbpYAxis.Controls.Add(Me.lblYAxisTitle)
@@ -214,45 +253,6 @@ Partial Class sdgDistributionOptions
         '
         resources.ApplyResources(Me.lblFont, "lblFont")
         Me.lblFont.Name = "lblFont"
-        '
-        'lblXAxisTitle
-        '
-        resources.ApplyResources(Me.lblXAxisTitle, "lblXAxisTitle")
-        Me.lblXAxisTitle.Name = "lblXAxisTitle"
-        '
-        'rdoXAxisSpecifyTitle
-        '
-        resources.ApplyResources(Me.rdoXAxisSpecifyTitle, "rdoXAxisSpecifyTitle")
-        Me.rdoXAxisSpecifyTitle.Name = "rdoXAxisSpecifyTitle"
-        Me.rdoXAxisSpecifyTitle.TabStop = True
-        Me.rdoXAxisSpecifyTitle.UseVisualStyleBackColor = True
-        '
-        'rdoXAxisNoTitle
-        '
-        resources.ApplyResources(Me.rdoXAxisNoTitle, "rdoXAxisNoTitle")
-        Me.rdoXAxisNoTitle.Name = "rdoXAxisNoTitle"
-        Me.rdoXAxisNoTitle.TabStop = True
-        Me.rdoXAxisNoTitle.UseVisualStyleBackColor = True
-        '
-        'rdoXAxisAuto
-        '
-        resources.ApplyResources(Me.rdoXAxisAuto, "rdoXAxisAuto")
-        Me.rdoXAxisAuto.Name = "rdoXAxisAuto"
-        Me.rdoXAxisAuto.TabStop = True
-        Me.rdoXAxisAuto.UseVisualStyleBackColor = True
-        '
-        'ucrInputXAxisLabel
-        '
-        Me.ucrInputXAxisLabel.AddQuotesIfUnrecognised = True
-        Me.ucrInputXAxisLabel.IsMultiline = False
-        Me.ucrInputXAxisLabel.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputXAxisLabel, "ucrInputXAxisLabel")
-        Me.ucrInputXAxisLabel.Name = "ucrInputXAxisLabel"
-        '
-        'ucrPnlXAxis
-        '
-        resources.ApplyResources(Me.ucrPnlXAxis, "ucrPnlXAxis")
-        Me.ucrPnlXAxis.Name = "ucrPnlXAxis"
         '
         'sdgDistributionOptions
         '

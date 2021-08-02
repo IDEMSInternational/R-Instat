@@ -269,6 +269,21 @@
   <data name="&gt;&gt;ucrChkFittedModel.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="rdoPartial.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoPartial.Location" type="System.Drawing.Point, System.Drawing">
+    <value>14, 16</value>
+  </data>
+  <data name="rdoPartial.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 17</value>
+  </data>
+  <data name="rdoPartial.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoPartial.Text" xml:space="preserve">
+    <value>Partial</value>
+  </data>
   <data name="&gt;&gt;rdoPartial.Name" xml:space="preserve">
     <value>rdoPartial</value>
   </data>
@@ -280,6 +295,21 @@
   </data>
   <data name="&gt;&gt;rdoPartial.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="rdo1.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdo1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>88, 16</value>
+  </data>
+  <data name="rdo1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 17</value>
+  </data>
+  <data name="rdo1.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="rdo1.Text" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="&gt;&gt;rdo1.Name" xml:space="preserve">
     <value>rdo1</value>
@@ -293,6 +323,21 @@
   <data name="&gt;&gt;rdo1.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="rdo2.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdo2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>139, 16</value>
+  </data>
+  <data name="rdo2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>31, 17</value>
+  </data>
+  <data name="rdo2.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdo2.Text" xml:space="preserve">
+    <value>2</value>
+  </data>
   <data name="&gt;&gt;rdo2.Name" xml:space="preserve">
     <value>rdo2</value>
   </data>
@@ -304,6 +349,15 @@
   </data>
   <data name="&gt;&gt;rdo2.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="ucrPnlPartial12.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="ucrPnlPartial12.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 27</value>
+  </data>
+  <data name="ucrPnlPartial12.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
   </data>
   <data name="&gt;&gt;ucrPnlPartial12.Name" xml:space="preserve">
     <value>ucrPnlPartial12</value>
@@ -392,6 +446,21 @@
   <data name="&gt;&gt;lblGraphicsSignLevel.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="rdoContrast.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoContrast.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 43</value>
+  </data>
+  <data name="rdoContrast.Size" type="System.Drawing.Size, System.Drawing">
+    <value>64, 17</value>
+  </data>
+  <data name="rdoContrast.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoContrast.Text" xml:space="preserve">
+    <value>Contrast</value>
+  </data>
   <data name="&gt;&gt;rdoContrast.Name" xml:space="preserve">
     <value>rdoContrast</value>
   </data>
@@ -404,6 +473,21 @@
   <data name="&gt;&gt;rdoContrast.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="rdoConditional.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoConditional.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 19</value>
+  </data>
+  <data name="rdoConditional.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 17</value>
+  </data>
+  <data name="rdoConditional.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoConditional.Text" xml:space="preserve">
+    <value>Conditional</value>
+  </data>
   <data name="&gt;&gt;rdoConditional.Name" xml:space="preserve">
     <value>rdoConditional</value>
   </data>
@@ -415,6 +499,15 @@
   </data>
   <data name="&gt;&gt;rdoConditional.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ucrPnlPlotType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 13</value>
+  </data>
+  <data name="ucrPnlPlotType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 56</value>
+  </data>
+  <data name="ucrPnlPlotType.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrPnlPlotType.Name" xml:space="preserve">
     <value>ucrPnlPlotType</value>
@@ -452,6 +545,21 @@
   <data name="&gt;&gt;grpPlotType.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
+  <data name="rdoResponse.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoResponse.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 42</value>
+  </data>
+  <data name="rdoResponse.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 17</value>
+  </data>
+  <data name="rdoResponse.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoResponse.Text" xml:space="preserve">
+    <value>Response</value>
+  </data>
   <data name="&gt;&gt;rdoResponse.Name" xml:space="preserve">
     <value>rdoResponse</value>
   </data>
@@ -464,6 +572,21 @@
   <data name="&gt;&gt;rdoResponse.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="rdoLinear.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoLinear.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 18</value>
+  </data>
+  <data name="rdoLinear.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 17</value>
+  </data>
+  <data name="rdoLinear.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="rdoLinear.Text" xml:space="preserve">
+    <value>Linear</value>
+  </data>
   <data name="&gt;&gt;rdoLinear.Name" xml:space="preserve">
     <value>rdoLinear</value>
   </data>
@@ -475,6 +598,15 @@
   </data>
   <data name="&gt;&gt;rdoLinear.ZOrder" xml:space="preserve">
     <value>1</value>
+  </data>
+  <data name="ucrPnlScale.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="ucrPnlScale.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 56</value>
+  </data>
+  <data name="ucrPnlScale.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrPnlScale.Name" xml:space="preserve">
     <value>ucrPnlScale</value>
@@ -764,258 +896,6 @@
   </data>
   <data name="&gt;&gt;tbGraphics.ZOrder" xml:space="preserve">
     <value>1</value>
-  </data>
-  <data name="rdoPartial.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoPartial.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 16</value>
-  </data>
-  <data name="rdoPartial.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 17</value>
-  </data>
-  <data name="rdoPartial.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="rdoPartial.Text" xml:space="preserve">
-    <value>Partial</value>
-  </data>
-  <data name="&gt;&gt;rdoPartial.Name" xml:space="preserve">
-    <value>rdoPartial</value>
-  </data>
-  <data name="&gt;&gt;rdoPartial.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoPartial.Parent" xml:space="preserve">
-    <value>grpRugs</value>
-  </data>
-  <data name="&gt;&gt;rdoPartial.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="rdo1.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdo1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>88, 16</value>
-  </data>
-  <data name="rdo1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 17</value>
-  </data>
-  <data name="rdo1.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="rdo1.Text" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;rdo1.Name" xml:space="preserve">
-    <value>rdo1</value>
-  </data>
-  <data name="&gt;&gt;rdo1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdo1.Parent" xml:space="preserve">
-    <value>grpRugs</value>
-  </data>
-  <data name="&gt;&gt;rdo1.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="rdo2.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdo2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>139, 16</value>
-  </data>
-  <data name="rdo2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>31, 17</value>
-  </data>
-  <data name="rdo2.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="rdo2.Text" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;rdo2.Name" xml:space="preserve">
-    <value>rdo2</value>
-  </data>
-  <data name="&gt;&gt;rdo2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdo2.Parent" xml:space="preserve">
-    <value>grpRugs</value>
-  </data>
-  <data name="&gt;&gt;rdo2.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrPnlPartial12.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="ucrPnlPartial12.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 27</value>
-  </data>
-  <data name="ucrPnlPartial12.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlPartial12.Name" xml:space="preserve">
-    <value>ucrPnlPartial12</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlPartial12.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlPartial12.Parent" xml:space="preserve">
-    <value>grpRugs</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlPartial12.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="rdoContrast.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoContrast.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 43</value>
-  </data>
-  <data name="rdoContrast.Size" type="System.Drawing.Size, System.Drawing">
-    <value>64, 17</value>
-  </data>
-  <data name="rdoContrast.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="rdoContrast.Text" xml:space="preserve">
-    <value>Contrast</value>
-  </data>
-  <data name="&gt;&gt;rdoContrast.Name" xml:space="preserve">
-    <value>rdoContrast</value>
-  </data>
-  <data name="&gt;&gt;rdoContrast.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoContrast.Parent" xml:space="preserve">
-    <value>grpPlotType</value>
-  </data>
-  <data name="&gt;&gt;rdoContrast.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="rdoConditional.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoConditional.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 19</value>
-  </data>
-  <data name="rdoConditional.Size" type="System.Drawing.Size, System.Drawing">
-    <value>77, 17</value>
-  </data>
-  <data name="rdoConditional.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="rdoConditional.Text" xml:space="preserve">
-    <value>Conditional</value>
-  </data>
-  <data name="&gt;&gt;rdoConditional.Name" xml:space="preserve">
-    <value>rdoConditional</value>
-  </data>
-  <data name="&gt;&gt;rdoConditional.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoConditional.Parent" xml:space="preserve">
-    <value>grpPlotType</value>
-  </data>
-  <data name="&gt;&gt;rdoConditional.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrPnlPlotType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>2, 13</value>
-  </data>
-  <data name="ucrPnlPlotType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 56</value>
-  </data>
-  <data name="ucrPnlPlotType.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlPlotType.Name" xml:space="preserve">
-    <value>ucrPnlPlotType</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlPlotType.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlPlotType.Parent" xml:space="preserve">
-    <value>grpPlotType</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlPlotType.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="rdoResponse.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoResponse.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 42</value>
-  </data>
-  <data name="rdoResponse.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 17</value>
-  </data>
-  <data name="rdoResponse.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="rdoResponse.Text" xml:space="preserve">
-    <value>Response</value>
-  </data>
-  <data name="&gt;&gt;rdoResponse.Name" xml:space="preserve">
-    <value>rdoResponse</value>
-  </data>
-  <data name="&gt;&gt;rdoResponse.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoResponse.Parent" xml:space="preserve">
-    <value>grpScale</value>
-  </data>
-  <data name="&gt;&gt;rdoResponse.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="rdoLinear.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="rdoLinear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 18</value>
-  </data>
-  <data name="rdoLinear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>54, 17</value>
-  </data>
-  <data name="rdoLinear.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="rdoLinear.Text" xml:space="preserve">
-    <value>Linear</value>
-  </data>
-  <data name="&gt;&gt;rdoLinear.Name" xml:space="preserve">
-    <value>rdoLinear</value>
-  </data>
-  <data name="&gt;&gt;rdoLinear.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoLinear.Parent" xml:space="preserve">
-    <value>grpScale</value>
-  </data>
-  <data name="&gt;&gt;rdoLinear.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrPnlScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="ucrPnlScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 56</value>
-  </data>
-  <data name="ucrPnlScale.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlScale.Name" xml:space="preserve">
-    <value>ucrPnlScale</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlScale.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlScale.Parent" xml:space="preserve">
-    <value>grpScale</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlScale.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="ucrNudConfLevel.Location" type="System.Drawing.Point, System.Drawing">
     <value>145, 114</value>
@@ -1345,7 +1225,7 @@
     <value>106, 347</value>
   </data>
   <data name="ucrSdgButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>160, 30</value>
   </data>
   <data name="ucrSdgButtons.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

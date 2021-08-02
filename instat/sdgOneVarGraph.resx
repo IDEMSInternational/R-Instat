@@ -403,13 +403,13 @@
     <value>1</value>
   </data>
   <data name="ucrButtonsOneVarGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 181</value>
+    <value>45, 181</value>
   </data>
   <data name="ucrButtonsOneVarGraph.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>8, 7, 8, 7</value>
   </data>
   <data name="ucrButtonsOneVarGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 30</value>
+    <value>157, 30</value>
   </data>
   <data name="ucrButtonsOneVarGraph.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
