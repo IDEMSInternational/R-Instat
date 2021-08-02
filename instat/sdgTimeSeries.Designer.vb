@@ -172,7 +172,7 @@ Partial Class sdgTimeSeries
         '
         'ucrButtonsSummaries
         '
-        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(87, 306)
+        Me.ucrButtonsSummaries.Location = New System.Drawing.Point(87, 312)
         Me.ucrButtonsSummaries.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         Me.ucrButtonsSummaries.Size = New System.Drawing.Size(150, 31)

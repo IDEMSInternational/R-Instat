@@ -1930,7 +1930,7 @@
     <value>197, 307</value>
   </data>
   <data name="ucrButtonsInventoryplot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>159, 30</value>
   </data>
   <data name="ucrButtonsInventoryplot.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

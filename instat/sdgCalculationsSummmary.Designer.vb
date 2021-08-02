@@ -176,12 +176,14 @@ Partial Class sdgCalculationsSummmary
         'ucrInputType
         '
         Me.ucrInputType.AddQuotesIfUnrecognised = True
+        Me.ucrInputType.GetSetSelectedIndex = -1
         Me.ucrInputType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputType, "ucrInputType")
         Me.ucrInputType.Name = "ucrInputType"
         '
         'ucrSelectorBy
         '
+        Me.ucrSelectorBy.bDropUnusedFilterLevels = False
         Me.ucrSelectorBy.bShowHiddenColumns = False
         Me.ucrSelectorBy.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorBy, "ucrSelectorBy")
@@ -264,6 +266,7 @@ Partial Class sdgCalculationsSummmary
         '
         'lstSubCalcs
         '
+        Me.lstSubCalcs.HideSelection = False
         resources.ApplyResources(Me.lstSubCalcs, "lstSubCalcs")
         Me.lstSubCalcs.Name = "lstSubCalcs"
         Me.lstSubCalcs.UseCompatibleStateImageBehavior = False
