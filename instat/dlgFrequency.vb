@@ -57,20 +57,20 @@ Public Class dlgFrequency
         ucrChkStoreResults.SetParameter(New RParameter("store_results", 5))
         ucrChkStoreResults.SetText("Store Results in Data Frame")
         ucrChkStoreResults.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkStoreResults.SetRDefault("TRUE")
+        ucrChkStoreResults.SetRDefault("FALSE")
 
         ucrChkDisplayMargins.SetParameter(New RParameter("include_margins", 9))
         ucrChkDisplayMargins.SetText("Display Margins")
         ucrChkDisplayMargins.SetRDefault("FALSE")
 
+        ucrChkDisplayMargins.AddToLinkedControls(ucrInputMarginName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="All")
+
+        ucrInputMarginName.SetParameter(New RParameter("margin_name", iNewPosition:=5))
+        ucrInputMarginName.SetLinkedDisplayControl(lblMarginName)
+
         ucrNudSigFigs.SetParameter(New RParameter("signif_fig", 14))
         ucrNudSigFigs.SetMinMax(0, 22)
         ucrNudSigFigs.SetRDefault(2)
-
-        ucrChkWeights.Enabled = False ' Temporary, parameter position = 17, name = "weights"
-        ucrChkWeights.SetText("Weights")
-        ucrChkWeights.SetRDefault("NULL")
-        ucrChkWeights.AddToLinkedControls(ucrReceiverSingle, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrChkDisplayAsPercentage.SetParameter(New RParameter("percentage_type", 21))
         ucrChkDisplayAsPercentage.SetText("As Percentages")
@@ -108,6 +108,7 @@ Public Class dlgFrequency
         ucrReceiverFactors.SetMeAsReceiver()
         ucrSelectorFrequency.Reset()
         ucrSaveTable.Reset()
+        ucrBase.clsRsyntax.lstBeforeCodes.Clear()
 
         clsMmtableOperator.SetOperation("+")
 
@@ -126,18 +127,24 @@ Public Class dlgFrequency
         clsDefaultFunction.AddParameter("summaries", "count_label", iPosition:=2) 'clsRFunctionParameter:=clsSummaryCount, iPosition:=2)
         clsDefaultFunction.AddParameter("store_results", "FALSE", iPosition:=5)
         clsDefaultFunction.AddParameter("rnames", "FALSE", iPosition:=18)
-        clsDefaultFunction.SetAssignTo("last_table", strTempDataframe:=ucrSelectorFrequency.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempTable:="last_table")
         clsDefaultFunction.SetAssignTo("frequency_table")
 
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsDefaultFunction, 0)
         ucrBase.clsRsyntax.SetBaseROperator(clsFrequencyOperator)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
-        SetRCode(Me, ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrInputMarginName.SetRCode(clsDefaultFunction, bReset)
+        ucrReceiverFactors.SetRCode(clsDefaultFunction, bReset)
+        ucrChkDisplayMargins.SetRCode(clsDefaultFunction, bReset)
+        ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
+        ucrSelectorFrequency.SetRCode(clsDefaultFunction, bReset)
+        ucrNudSigFigs.SetRCode(clsDefaultFunction, bReset)
+        ucrSaveTable.SetRCode(clsFrequencyOperator, bReset)
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverFactors.IsEmpty AndAlso ucrSaveTable.IsComplete AndAlso ucrNudSigFigs.GetText <> "" AndAlso (Not ucrChkWeights.Checked OrElse (ucrChkWeights.Checked AndAlso Not ucrReceiverSingle.IsEmpty)) AndAlso Not ucrReceiverFactors.IsEmpty Then 'AndAlso Not clsSummaryCount.clsParameters.Count = 0 Then
+        If Not ucrReceiverFactors.IsEmpty AndAlso ucrSaveTable.IsComplete AndAlso ucrNudSigFigs.GetText <> "" AndAlso Not ucrReceiverFactors.IsEmpty Then 'AndAlso Not clsSummaryCount.clsParameters.Count = 0 Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -150,10 +157,8 @@ Public Class dlgFrequency
         TestOKEnabled()
     End Sub
 
-    Private Sub SettingReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkWeights.ControlValueChanged, ucrChkDisplayAsPercentage.ControlValueChanged, ucrChkWeights.ControlValueChanged
-        If ucrChkWeights.Checked Then
-            ucrReceiverSingle.SetMeAsReceiver()
-        ElseIf ucrChkDisplayAsPercentage.Checked Then
+    Private Sub SettingReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkDisplayAsPercentage.ControlValueChanged
+        If ucrChkDisplayAsPercentage.Checked Then
             ucrReceiverMultiplePercentages.SetMeAsReceiver()
         Else
             ucrReceiverFactors.SetMeAsReceiver()
@@ -161,19 +166,19 @@ Public Class dlgFrequency
     End Sub
 
     Private Sub ucrReceiverFactors_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlValueChanged
+        clsFrequencyOperator.RemoveParameterByName("tops")
+        clsMmtableOperator.ClearParameters()
         If ucrReceiverFactors.GetCount() > 0 Then
-            clsFrequencyOperator.RemoveParameterByName("tops")
-            clsMmtableOperator.ClearParameters()
-            clsHeaderTopLeftFunction.AddParameter("factorOne", ucrReceiverFactors.GetVariableNamesAsList().Item(0), iPosition:=0)
+            clsHeaderTopLeftFunction.AddParameter("variable", ucrReceiverFactors.GetVariableNamesAsList().Item(0), iPosition:=0)
             clsMmtableOperator.AddParameter("leftTop", clsRFunctionParameter:=clsHeaderTopLeftFunction, iPosition:=0)
             If ucrReceiverFactors.GetCount() > 1 Then
                 Dim iCount As Integer = 0
                 For Each StrVariableName As String In ucrReceiverFactors.GetVariableNamesAsList()
+                    Dim clsHeaderLeftTopFunction As New RFunction
+                    clsHeaderLeftTopFunction.SetPackageName("mmtable2")
+                    clsHeaderLeftTopFunction.SetRCommand("header_left_top")
                     If iCount >= 1 Then
-                        Dim clsHeaderLeftTopFunction As New RFunction
-                        clsHeaderLeftTopFunction.SetPackageName("mmtable2")
-                        clsHeaderLeftTopFunction.SetRCommand("header_left_top")
-                        clsHeaderLeftTopFunction.AddParameter("icount", ucrReceiverFactors.GetVariableNamesAsList().Item(iCount), iPosition:=iCount - 1)
+                        clsHeaderLeftTopFunction.AddParameter("variable", ucrReceiverFactors.GetVariableNamesAsList().Item(iCount), iPosition:=iCount - 1)
                         clsMmtableOperator.AddParameter("icount", clsRFunctionParameter:=clsHeaderLeftTopFunction, iPosition:=iCount)
                     End If
                     iCount += 1
@@ -183,7 +188,7 @@ Public Class dlgFrequency
         End If
     End Sub
 
-    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrSaveTable.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrReceiverSingle.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged
+    Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged, ucrSaveTable.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
