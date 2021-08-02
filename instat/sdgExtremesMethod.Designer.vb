@@ -80,9 +80,9 @@ Partial Class sdgExtremesMethod
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(44, 124)
+        Me.ucrBase.Location = New System.Drawing.Point(39, 124)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBase.Size = New System.Drawing.Size(157, 30)
         Me.ucrBase.TabIndex = 5
         '
         'ucrPanelExtreme

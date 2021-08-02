@@ -790,10 +790,10 @@
     <value>0</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 216</value>
+    <value>49, 216</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>160, 30</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

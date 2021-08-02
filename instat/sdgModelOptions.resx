@@ -429,10 +429,10 @@
     <value>0</value>
   </data>
   <data name="ucrButtonsSDGModelOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>60, 170</value>
+    <value>45, 167</value>
   </data>
   <data name="ucrButtonsSDGModelOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>159, 30</value>
   </data>
   <data name="ucrButtonsSDGModelOptions.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

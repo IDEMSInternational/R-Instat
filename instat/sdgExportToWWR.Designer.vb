@@ -107,9 +107,9 @@ Partial Class sdgExportToWWR
         '
         'ucrButtonsSdg
         '
-        Me.ucrButtonsSdg.Location = New System.Drawing.Point(127, 367)
+        Me.ucrButtonsSdg.Location = New System.Drawing.Point(113, 371)
         Me.ucrButtonsSdg.Name = "ucrButtonsSdg"
-        Me.ucrButtonsSdg.Size = New System.Drawing.Size(142, 30)
+        Me.ucrButtonsSdg.Size = New System.Drawing.Size(154, 30)
         Me.ucrButtonsSdg.TabIndex = 17
         '
         'ucrReceiverStationHeight

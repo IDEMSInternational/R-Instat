@@ -1447,7 +1447,7 @@ DataSheet$set("public", "get_data_type", function(col_name = "") {
   if(!(col_name %in% self$get_column_names())) {
     stop(paste(col_name, "is not a column in", self$get_metadata(data_name_label)))
   }
-  type = ""
+  type <- ""
   curr_col <- self$get_columns_from_data(col_name, use_current_filter = TRUE)
   if(is.character(curr_col)) {
     type = "character"
@@ -1455,6 +1455,7 @@ DataSheet$set("public", "get_data_type", function(col_name = "") {
   else if(is.logical(curr_col)) {
     type = "logical"
   }
+  # Question: Why is the using private$data[[col_name]] instead of curr_col?
   else if(lubridate::is.Date(private$data[[col_name]])){
     # #TODO
     #we can add options for other forms of dates serch as POSIXct, POSIXlt, Date, chron, yearmon, yearqtr, zoo, zooreg, timeDate, xts, its, ti, jul, timeSeries, and fts objects.
@@ -1463,11 +1464,11 @@ DataSheet$set("public", "get_data_type", function(col_name = "") {
   else if(is.numeric(curr_col)) {
     #TODO vectors with integer values but stored as numeric will return numeric.
     #     Is that desirable?
-      if(is.binary(curr_col)){
+      if(is.binary(curr_col)) {
         type = "two level numeric"
       }
-      else if(all(curr_col == as.integer(curr_col))) {
-        if(all(curr_col>0)) {
+      else if(all(curr_col == as.integer(curr_col), na.rm = TRUE)) {
+        if(all(curr_col > 0, na.rm = TRUE)) {
           type = "positive integer"
         }
         else type = "integer"
@@ -1476,7 +1477,7 @@ DataSheet$set("public", "get_data_type", function(col_name = "") {
   }
   else if(is.factor(curr_col)) {
     if(nlevels(curr_col) == 2 || nlevels(factor(curr_col)) == 2) type = "two level factor"
-    else if(length(levels(curr_col))>2) type = "multilevel factor"
+    else if(length(levels(curr_col)) > 2) type = "multilevel factor"
     else type = "factor"
   }
   return(type)
