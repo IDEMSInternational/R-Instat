@@ -117,6 +117,7 @@ Partial Class dlgOptions
         Me.ucrInputPort = New instat.ucrInputTextBox()
         Me.ucrInputHost = New instat.ucrInputTextBox()
         Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
+        Me.cmdLanguage = New System.Windows.Forms.Button()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -712,10 +713,18 @@ Partial Class dlgOptions
         resources.ApplyResources(Me.ucrInputDatabaseName, "ucrInputDatabaseName")
         Me.ucrInputDatabaseName.Name = "ucrInputDatabaseName"
         '
+        'cmdLanguage
+        '
+        resources.ApplyResources(Me.cmdLanguage, "cmdLanguage")
+        Me.cmdLanguage.Name = "cmdLanguage"
+        Me.cmdLanguage.Tag = ""
+        Me.cmdLanguage.UseVisualStyleBackColor = True
+        '
         'dlgOptions
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdLanguage)
         Me.Controls.Add(Me.cmdApply)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdCancel)
@@ -842,4 +851,5 @@ Partial Class dlgOptions
     Friend WithEvents ucrChkViewStructuredMenu As ucrCheck
     Friend WithEvents lblLanguage As Label
     Friend WithEvents ucrInputLanguage As ucrInputComboBox
+    Friend WithEvents cmdLanguage As Button
 End Class

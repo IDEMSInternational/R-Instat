@@ -1138,7 +1138,7 @@
     <value>11, 122</value>
   </data>
   <data name="ucrChkGreatCircleDist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 20</value>
+    <value>464, 20</value>
   </data>
   <data name="ucrChkGreatCircleDist.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1159,7 +1159,7 @@
     <value>11, 96</value>
   </data>
   <data name="ucrChkIncludeRequestedPoints.Size" type="System.Drawing.Size, System.Drawing">
-    <value>295, 20</value>
+    <value>501, 20</value>
   </data>
   <data name="ucrChkIncludeRequestedPoints.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1180,7 +1180,7 @@
     <value>11, 18</value>
   </data>
   <data name="ucrChkOnlyDataVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 20</value>
+    <value>464, 20</value>
   </data>
   <data name="ucrChkOnlyDataVariables.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1201,7 +1201,7 @@
     <value>11, 44</value>
   </data>
   <data name="ucrChkKeepRawTime.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 20</value>
+    <value>501, 20</value>
   </data>
   <data name="ucrChkKeepRawTime.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1222,7 +1222,7 @@
     <value>11, 70</value>
   </data>
   <data name="ucrChkIncludeMetadata.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 20</value>
+    <value>501, 20</value>
   </data>
   <data name="ucrChkIncludeMetadata.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1291,7 +1291,7 @@
     <value>295, 433</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>229, 30</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

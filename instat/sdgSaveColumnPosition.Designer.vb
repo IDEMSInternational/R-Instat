@@ -139,10 +139,10 @@ Partial Class sdgSaveColumnPosition
         '
         'ucrBaseSubdialog
         '
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(107, 265)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(103, 270)
         Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(153, 30)
         Me.ucrBaseSubdialog.TabIndex = 7
         '
         'ucrChkKeepExistingPos

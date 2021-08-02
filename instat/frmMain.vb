@@ -602,10 +602,6 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub mnuTbCopy_Click(sender As Object, e As EventArgs) Handles mnuTbCopy.Click
-        mnuEditCopy_Click(sender, e)
-    End Sub
-
     Private Sub mnuHelpHelp_Click(sender As Object, e As EventArgs)
         Help.ShowHelp(Me, strStaticPath & "\" & strHelpFilePath, HelpNavigator.TableOfContents, "")
     End Sub
@@ -752,22 +748,6 @@ Public Class frmMain
             ElseIf ctrActive.Equals(ucrScriptWindow) Then
                 ucrScriptWindow.SelectAllText()
             End If
-        End If
-    End Sub
-
-    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click
-        If ctrActive.Equals(ucrDataViewer) Then
-            ucrDataViewer.CopyRange()
-        ElseIf ctrActive.Equals(ucrOutput) Then
-            ucrOutput.CopyContent()
-        ElseIf ctrActive.Equals(ucrColumnMeta) Then
-            ucrColumnMeta.CopyRange()
-        ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
-            ucrDataFrameMeta.CopyRange()
-        ElseIf ctrActive.Equals(ucrLogWindow) Then
-            ucrLogWindow.CopyText()
-        ElseIf ctrActive.Equals(ucrScriptWindow) Then
-            ucrScriptWindow.CopyText()
         End If
     End Sub
 
@@ -2398,6 +2378,34 @@ Public Class frmMain
         Me.clsInstatOptions.strLanguageCultureCode = strCurrLang
         translateMenu(mnuBar.Items, Me)
         Me.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
+    End Sub
+
+    Private Sub mnuEditCopy_Click(sender As Object, e As EventArgs) Handles mnuEditCopy.Click, mnuTbCopy.ButtonClick, mnuSubTbCopy.Click
+        If ctrActive.Equals(ucrDataViewer) Then
+            ucrDataViewer.CopyRange()
+        ElseIf ctrActive.Equals(ucrOutput) Then
+            ucrOutput.CopyContent()
+        ElseIf ctrActive.Equals(ucrColumnMeta) Then
+            ucrColumnMeta.CopyRange()
+        ElseIf ctrActive.Equals(ucrDataFrameMeta) Then
+            ucrDataFrameMeta.CopyRange()
+        ElseIf ctrActive.Equals(ucrLogWindow) Then
+            ucrLogWindow.CopyText()
+        ElseIf ctrActive.Equals(ucrScriptWindow) Then
+            ucrScriptWindow.CopyText()
+        End If
+    End Sub
+
+    Private Sub mnuEditCopySpecial_Click(sender As Object, e As EventArgs) Handles mnuEditCopySpecial.Click, mnuSubTbCopySpecial.Click
+        dlgCopySpecial.ShowDialog()
+    End Sub
+
+    Private Sub mnuEditPaste_Click(sender As Object, e As EventArgs) Handles mnuEditPaste.Click, mnuTbPaste.ButtonClick, mnuSubTbPaste.Click
+        'todo. add public paste functions for the ucrDataViewer, ucrColumnMeta and ucrDataFrameMeta grids
+    End Sub
+
+    Private Sub mnuPasteSpecial_Click(sender As Object, e As EventArgs) Handles mnuPasteSpecial.Click, mnuSubTbPasteSpecial.Click
+        dlgPasteSpecial.ShowDialog()
     End Sub
 
 End Class
