@@ -49,6 +49,7 @@ Public Class dlgFrequency
 
         'Temporary disable the weight controls
         ucrChkWeight.Enabled = False
+        grpMargin.Enabled = False
         ucrChkWeight.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
         ucrSelectorFrequency.SetParameter(New RParameter("data_name", 0))
@@ -69,11 +70,11 @@ Public Class dlgFrequency
         ucrChkDisplayMargins.SetText("Display Margins")
         ucrChkDisplayMargins.SetRDefault("FALSE")
 
-        ucrPnlMargin.SetParameter(New RParameter("margins", iNewPosition:=4))
-        ucrPnlMargin.AddRadioButton(rdoOuter, Chr(34) & "outer" & Chr(34))
-        ucrPnlMargin.AddRadioButton(rdoSummary, Chr(34) & "summary" & Chr(34))
-        ucrPnlMargin.AddRadioButton(rdoBoth, "c(""outer"",""summary"")")
-        ucrPnlMargin.SetLinkedDisplayControl(grpMargin)
+        'ucrPnlMargin.SetParameter(New RParameter("margins", iNewPosition:=4))
+        'ucrPnlMargin.AddRadioButton(rdoOuter, Chr(34) & "outer" & Chr(34))
+        'ucrPnlMargin.AddRadioButton(rdoSummary, Chr(34) & "summary" & Chr(34))
+        'ucrPnlMargin.AddRadioButton(rdoBoth, "c(""outer"",""summary"")")
+        'ucrPnlMargin.SetLinkedDisplayControl(grpMargin)
 
         ucrInputMarginName.SetParameter(New RParameter("margin_name", iNewPosition:=5))
         ucrInputMarginName.SetLinkedDisplayControl(lblMarginName)
@@ -99,7 +100,7 @@ Public Class dlgFrequency
         ucrChkPercentageProportion.SetRDefault("FALSE")
 
         ucrChkDisplayAsPercentage.AddToLinkedControls(ucrChkPercentageProportion, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkDisplayMargins.AddToLinkedControls({ucrPnlMargin}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoOuter)
+        'ucrChkDisplayMargins.AddToLinkedControls({ucrPnlMargin}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoOuter)
         ucrChkDisplayMargins.AddToLinkedControls(ucrInputMarginName, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="All")
         ucrChkTreatColumnAsFactor.AddToLinkedControls({ucrChkDisplaySummariesAsRow, ucrChkDisplayVariablesAsRows}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrChkTreatColumnAsFactor.AddToLinkedControls(ucrChkDisplaySummaryVariablesAsRow, {False}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
@@ -200,7 +201,7 @@ Public Class dlgFrequency
         ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
         ucrSelectorFrequency.SetRCode(clsDefaultFunction, bReset)
         ucrNudSigFigs.SetRCode(clsDefaultFunction, bReset)
-        ucrPnlMargin.SetRCode(clsDefaultFunction, bReset)
+        'ucrPnlMargin.SetRCode(clsDefaultFunction, bReset)
         ucrChkTreatColumnAsFactor.SetRCode(clsDefaultFunction, bReset)
         ucrChkDisplaySummariesAsRow.SetRCode(clsFrequencyOperator, bReset)
         ucrChkDisplaySummaryVariablesAsRow.SetRCode(clsFrequencyOperator, bReset)
