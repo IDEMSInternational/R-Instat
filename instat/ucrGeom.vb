@@ -1735,7 +1735,7 @@ Public Class ucrGeom
         clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "lm" & Chr(34), Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
         'formula has to be an input and we dont have that currently. its passed in like this formula= y ~ x or  formula= y ~ poly(x, 2) or formula= y ~ log(x) so the user has to type in stuff
         clsgeom_smooth.AddLayerParameter("formula", "editablelist", "y ~ x", lstParameterStrings:={"y ~ x", "y ~ poly(x, 2)", "y ~ log(x)", " y ~ splines::bs(x,3)"})
-        clsgeom_smooth.AddLayerParameter("se", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_smooth.AddLayerParameter("se ", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_smooth.AddLayerParameter("method.args", "editablelist", "list()", lstParameterStrings:={"list()"})
         clsgeom_smooth.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_smooth.AddLayerParameter("na.rm", "boolean", "FALSE")
@@ -1748,6 +1748,8 @@ Public Class ucrGeom
         clsgeom_smooth.AddLayerParameter("span", "numeric", "0.3", lstParameterStrings:={2, 0, 1})
         clsgeom_smooth.AddLayerParameter("fullrange", "boolean", "FALSE")
         clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95", lstParameterStrings:={2, 0, 1})
+        clsgeom_smooth.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
+        clsgeom_smooth.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
 
         'method.args is a list of methods passed into the moddeling function
         'its passed in like this** method.args = list(family = "binomial") we currently dont have this too. 
