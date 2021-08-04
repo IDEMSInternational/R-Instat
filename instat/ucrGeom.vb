@@ -1281,13 +1281,6 @@ Public Class ucrGeom
         clsgeom_label_repel.AddLayerParameter("ylim", "numeric", "1", lstParameterStrings:={2})
         clsgeom_label_repel.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         clsgeom_label_repel.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
-        clsgeom_label_repel.AddLayerParameter("force", "numeric", "1", lstParameterStrings:={2})
-        clsgeom_label_repel.AddLayerParameter("force_pull", "numeric", "1", lstParameterStrings:={2})
-        clsgeom_label_repel.AddLayerParameter("seed", "editablelist", "NA", lstParameterStrings:={"NA"})
-        clsgeom_label_repel.AddLayerParameter("verbose", "list", "False", lstParameterStrings:={"True", "False"})
-        clsgeom_label_repel.AddLayerParameter("inherit.aes", "list", "True", lstParameterStrings:={"True", "False"})
-        clsgeom_label_repel.AddLayerParameter("direction", "list", "c( ""both"", Chr(34) & ""x"" & Chr(34), Chr(34) & ""y"")", lstParameterStrings:={"c( ""both"", Chr(34) & ""x"" & Chr(34), Chr(34) & ""y"")", Chr(34) & "both" & Chr(34), Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34)})
-
         lstAllGeoms.Add(clsgeom_label_repel)
 
         clsgeom_line.SetGeomName("geom_line")
@@ -1915,10 +1908,6 @@ Public Class ucrGeom
         clsgeom_text_repel.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
         clsgeom_text_repel.AddLayerParameter("force", "numeric", "1", lstParameterStrings:={2})
         clsgeom_text_repel.AddLayerParameter("force_pull", "numeric", "1", lstParameterStrings:={2})
-        clsgeom_text_repel.AddLayerParameter("direction", "list", "c( ""both"", Chr(34) & ""x"" & Chr(34), Chr(34) & ""y"")", lstParameterStrings:={"c( ""both"", Chr(34) & ""x"" & Chr(34), Chr(34) & ""y"")", Chr(34) & "both" & Chr(34), Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34)})
-        clsgeom_text_repel.AddLayerParameter("seed", "editablelist", "NA", lstParameterStrings:={"NA"})
-        clsgeom_text_repel.AddLayerParameter("verbose", "list", "False", lstParameterStrings:={"True", "False"})
-        clsgeom_text_repel.AddLayerParameter("inherit.aes", "list", "True", lstParameterStrings:={"True", "False"})
         lstAllGeoms.Add(clsgeom_text_repel)
 
         clsgeom_tile.strGeomName = "geom_tile"
