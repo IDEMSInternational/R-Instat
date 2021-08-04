@@ -283,7 +283,7 @@
     <value>8, 7, 8, 7</value>
   </data>
   <data name="ucrChkFreeScaleAxisforFacets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>215, 20</value>
   </data>
   <data name="ucrChkFreeScaleAxisforFacets.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -307,7 +307,7 @@
     <value>8, 7, 8, 7</value>
   </data>
   <data name="ucrChkSpecifyLayout.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>216, 20</value>
   </data>
   <data name="ucrChkSpecifyLayout.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

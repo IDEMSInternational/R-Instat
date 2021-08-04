@@ -114,7 +114,7 @@ Partial Class dlgImportShapeFiles
         Me.MinimizeBox = False
         Me.Name = "dlgImportShapeFiles"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Import and Tidy Shapefiles"
+        Me.Text = "Import Shapefiles"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

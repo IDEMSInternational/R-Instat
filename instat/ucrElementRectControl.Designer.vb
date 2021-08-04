@@ -68,6 +68,7 @@ Partial Class ucrElementRectControl
         'ucrRectFill
         '
         Me.ucrRectFill.AddQuotesIfUnrecognised = True
+        Me.ucrRectFill.GetSetSelectedIndex = -1
         Me.ucrRectFill.IsReadOnly = False
         resources.ApplyResources(Me.ucrRectFill, "ucrRectFill")
         Me.ucrRectFill.Name = "ucrRectFill"
@@ -75,6 +76,7 @@ Partial Class ucrElementRectControl
         'ucrRectColors
         '
         Me.ucrRectColors.AddQuotesIfUnrecognised = True
+        Me.ucrRectColors.GetSetSelectedIndex = -1
         Me.ucrRectColors.IsReadOnly = False
         resources.ApplyResources(Me.ucrRectColors, "ucrRectColors")
         Me.ucrRectColors.Name = "ucrRectColors"
@@ -116,6 +118,7 @@ Partial Class ucrElementRectControl
         'ucrInputRectLineType
         '
         Me.ucrInputRectLineType.AddQuotesIfUnrecognised = True
+        Me.ucrInputRectLineType.GetSetSelectedIndex = -1
         Me.ucrInputRectLineType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputRectLineType, "ucrInputRectLineType")
         Me.ucrInputRectLineType.Name = "ucrInputRectLineType"

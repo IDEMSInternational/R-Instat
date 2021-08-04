@@ -94,7 +94,7 @@ Partial Class dlgVisualizeData
         'rdoWholeDataFrame
         '
         Me.rdoWholeDataFrame.AutoSize = True
-        Me.rdoWholeDataFrame.Location = New System.Drawing.Point(268, 69)
+        Me.rdoWholeDataFrame.Location = New System.Drawing.Point(260, 69)
         Me.rdoWholeDataFrame.Name = "rdoWholeDataFrame"
         Me.rdoWholeDataFrame.Size = New System.Drawing.Size(80, 17)
         Me.rdoWholeDataFrame.TabIndex = 6
@@ -104,7 +104,7 @@ Partial Class dlgVisualizeData
         '
         'rdoSelectedColumn
         '
-        Me.rdoSelectedColumn.Location = New System.Drawing.Point(268, 92)
+        Me.rdoSelectedColumn.Location = New System.Drawing.Point(260, 92)
         Me.rdoSelectedColumn.Name = "rdoSelectedColumn"
         Me.rdoSelectedColumn.Size = New System.Drawing.Size(174, 24)
         Me.rdoSelectedColumn.TabIndex = 7
@@ -193,7 +193,7 @@ Partial Class dlgVisualizeData
         'ucrReceiverVisualizeData
         '
         Me.ucrReceiverVisualizeData.frmParent = Me
-        Me.ucrReceiverVisualizeData.Location = New System.Drawing.Point(268, 119)
+        Me.ucrReceiverVisualizeData.Location = New System.Drawing.Point(260, 119)
         Me.ucrReceiverVisualizeData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVisualizeData.Name = "ucrReceiverVisualizeData"
         Me.ucrReceiverVisualizeData.Selector = Nothing
@@ -221,7 +221,7 @@ Partial Class dlgVisualizeData
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 321)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(282, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(338, 24)
         Me.ucrSaveGraph.TabIndex = 17
         '
         'ucrSelectorVisualizeData
