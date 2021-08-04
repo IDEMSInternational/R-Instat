@@ -156,7 +156,7 @@ Partial Class dlgVisualizeData
         Me.ucrChkAdjustSize.Location = New System.Drawing.Point(10, 321)
         Me.ucrChkAdjustSize.Name = "ucrChkAdjustSize"
         Me.ucrChkAdjustSize.Size = New System.Drawing.Size(157, 20)
-        Me.ucrChkAdjustSize.TabIndex = 18
+        Me.ucrChkAdjustSize.TabIndex = 17
         '
         'ucrNudSamplingFunction
         '
@@ -232,7 +232,7 @@ Partial Class dlgVisualizeData
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
         Me.ucrSaveGraph.Size = New System.Drawing.Size(282, 20)
-        Me.ucrSaveGraph.TabIndex = 17
+        Me.ucrSaveGraph.TabIndex = 19
         '
         'ucrSelectorVisualizeData
         '
@@ -261,7 +261,7 @@ Partial Class dlgVisualizeData
         Me.ucrNudAdjustSize.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudAdjustSize.Name = "ucrNudAdjustSize"
         Me.ucrNudAdjustSize.Size = New System.Drawing.Size(50, 20)
-        Me.ucrNudAdjustSize.TabIndex = 19
+        Me.ucrNudAdjustSize.TabIndex = 18
         Me.ucrNudAdjustSize.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'dlgVisualizeData

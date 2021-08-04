@@ -320,9 +320,10 @@ Public Class dlgVisualizeData
     End Sub
 
     Private Sub ucrChkAdjustSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAdjustSize.ControlValueChanged
-        clsBaseOperator.RemoveParameterByName("right")
         If ucrChkAdjustSize.Checked Then
             clsBaseOperator.AddParameter("right", clsRFunctionParameter:=clsThemeFunction, iPosition:=1)
+        Else
+            clsBaseOperator.RemoveParameterByName("right")
         End If
     End Sub
 
