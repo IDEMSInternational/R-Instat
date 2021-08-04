@@ -144,7 +144,6 @@ Partial Class dlgVisualizeData
         'lblSampling
         '
         Me.lblSampling.AutoSize = True
-        Me.lblSampling.Location = New System.Drawing.Point(196, 241)
         Me.lblSampling.Location = New System.Drawing.Point(188, 242)
         Me.lblSampling.Name = "lblSampling"
         Me.lblSampling.Size = New System.Drawing.Size(94, 13)
@@ -269,10 +268,9 @@ Partial Class dlgVisualizeData
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 427)
+        Me.ClientSize = New System.Drawing.Size(418, 432)
         Me.Controls.Add(Me.ucrNudAdjustSize)
         Me.Controls.Add(Me.ucrChkAdjustSize)
-        Me.ClientSize = New System.Drawing.Size(418, 408)
         Me.Controls.Add(Me.lblSampling)
         Me.Controls.Add(Me.ucrNudSamplingFunction)
         Me.Controls.Add(Me.ucrNudMaximumSize)
