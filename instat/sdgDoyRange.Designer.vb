@@ -217,6 +217,7 @@ Partial Class sdgDoyRange
         '
         'ucrSelectorDoy
         '
+        Me.ucrSelectorDoy.bDropUnusedFilterLevels = False
         Me.ucrSelectorDoy.bShowHiddenColumns = False
         Me.ucrSelectorDoy.bUseCurrentFilter = True
         Me.ucrSelectorDoy.Location = New System.Drawing.Point(10, 9)
@@ -227,9 +228,9 @@ Partial Class sdgDoyRange
         '
         'ucrBaseSub
         '
-        Me.ucrBaseSub.Location = New System.Drawing.Point(222, 318)
+        Me.ucrBaseSub.Location = New System.Drawing.Point(213, 324)
         Me.ucrBaseSub.Name = "ucrBaseSub"
-        Me.ucrBaseSub.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBaseSub.Size = New System.Drawing.Size(156, 30)
         Me.ucrBaseSub.TabIndex = 3
         '
         'sdgDoyRange

@@ -58,6 +58,7 @@ Partial Class sdgDescribeTwoVarGraph
         'ucrNumericByNumeric
         '
         Me.ucrNumericByNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrNumericByNumeric.GetSetSelectedIndex = -1
         Me.ucrNumericByNumeric.IsReadOnly = False
         resources.ApplyResources(Me.ucrNumericByNumeric, "ucrNumericByNumeric")
         Me.ucrNumericByNumeric.Name = "ucrNumericByNumeric"
@@ -77,6 +78,7 @@ Partial Class sdgDescribeTwoVarGraph
         'ucrNumericByCategorical
         '
         Me.ucrNumericByCategorical.AddQuotesIfUnrecognised = True
+        Me.ucrNumericByCategorical.GetSetSelectedIndex = -1
         Me.ucrNumericByCategorical.IsReadOnly = False
         resources.ApplyResources(Me.ucrNumericByCategorical, "ucrNumericByCategorical")
         Me.ucrNumericByCategorical.Name = "ucrNumericByCategorical"
@@ -90,6 +92,7 @@ Partial Class sdgDescribeTwoVarGraph
         'ucrCategoricalByCategorical
         '
         Me.ucrCategoricalByCategorical.AddQuotesIfUnrecognised = True
+        Me.ucrCategoricalByCategorical.GetSetSelectedIndex = -1
         Me.ucrCategoricalByCategorical.IsReadOnly = False
         resources.ApplyResources(Me.ucrCategoricalByCategorical, "ucrCategoricalByCategorical")
         Me.ucrCategoricalByCategorical.Name = "ucrCategoricalByCategorical"
@@ -103,6 +106,7 @@ Partial Class sdgDescribeTwoVarGraph
         'ucrCategoricalByNumeric
         '
         Me.ucrCategoricalByNumeric.AddQuotesIfUnrecognised = True
+        Me.ucrCategoricalByNumeric.GetSetSelectedIndex = -1
         Me.ucrCategoricalByNumeric.IsReadOnly = False
         resources.ApplyResources(Me.ucrCategoricalByNumeric, "ucrCategoricalByNumeric")
         Me.ucrCategoricalByNumeric.Name = "ucrCategoricalByNumeric"

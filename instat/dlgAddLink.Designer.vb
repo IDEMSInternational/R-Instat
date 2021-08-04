@@ -40,17 +40,16 @@ Partial Class dlgAddLink
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgAddLink))
         Me.cmdSpecifyLink = New System.Windows.Forms.Button()
-        Me.lblLinkName = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblKeys = New System.Windows.Forms.Label()
         Me.lvwLinkViewBox = New System.Windows.Forms.ListView()
-        Me.ucrInputLinkName = New instat.ucrInputTextBox()
         Me.ucrDataSelectorTo = New instat.ucrDataFrame()
         Me.ucrDataSelectorFrom = New instat.ucrDataFrame()
         Me.ucrBase = New instat.ucrButtons()
         Me.lblSelectedKey = New System.Windows.Forms.Label()
         Me.ucrInputSelectedKey = New instat.ucrInputTextBox()
+        Me.ucrSaveLink = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'cmdSpecifyLink
@@ -58,11 +57,6 @@ Partial Class dlgAddLink
         resources.ApplyResources(Me.cmdSpecifyLink, "cmdSpecifyLink")
         Me.cmdSpecifyLink.Name = "cmdSpecifyLink"
         Me.cmdSpecifyLink.UseVisualStyleBackColor = True
-        '
-        'lblLinkName
-        '
-        resources.ApplyResources(Me.lblLinkName, "lblLinkName")
-        Me.lblLinkName.Name = "lblLinkName"
         '
         'lblFrom
         '
@@ -87,14 +81,6 @@ Partial Class dlgAddLink
         Me.lvwLinkViewBox.Name = "lvwLinkViewBox"
         Me.lvwLinkViewBox.UseCompatibleStateImageBehavior = False
         Me.lvwLinkViewBox.View = System.Windows.Forms.View.Details
-        '
-        'ucrInputLinkName
-        '
-        Me.ucrInputLinkName.AddQuotesIfUnrecognised = True
-        Me.ucrInputLinkName.IsMultiline = False
-        Me.ucrInputLinkName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputLinkName, "ucrInputLinkName")
-        Me.ucrInputLinkName.Name = "ucrInputLinkName"
         '
         'ucrDataSelectorTo
         '
@@ -128,18 +114,22 @@ Partial Class dlgAddLink
         resources.ApplyResources(Me.ucrInputSelectedKey, "ucrInputSelectedKey")
         Me.ucrInputSelectedKey.Name = "ucrInputSelectedKey"
         '
+        'ucrSaveLink
+        '
+        resources.ApplyResources(Me.ucrSaveLink, "ucrSaveLink")
+        Me.ucrSaveLink.Name = "ucrSaveLink"
+        '
         'dlgAddLink
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveLink)
         Me.Controls.Add(Me.ucrInputSelectedKey)
         Me.Controls.Add(Me.lblSelectedKey)
         Me.Controls.Add(Me.lblKeys)
         Me.Controls.Add(Me.lblTo)
         Me.Controls.Add(Me.lblFrom)
         Me.Controls.Add(Me.lvwLinkViewBox)
-        Me.Controls.Add(Me.lblLinkName)
-        Me.Controls.Add(Me.ucrInputLinkName)
         Me.Controls.Add(Me.cmdSpecifyLink)
         Me.Controls.Add(Me.ucrDataSelectorTo)
         Me.Controls.Add(Me.ucrDataSelectorFrom)
@@ -157,12 +147,11 @@ Partial Class dlgAddLink
     Friend WithEvents ucrDataSelectorFrom As ucrDataFrame
     Friend WithEvents ucrDataSelectorTo As ucrDataFrame
     Friend WithEvents cmdSpecifyLink As Button
-    Friend WithEvents ucrInputLinkName As ucrInputTextBox
-    Friend WithEvents lblLinkName As Label
     Friend WithEvents lblFrom As Label
     Friend WithEvents lblTo As Label
     Friend WithEvents lblKeys As Label
     Friend WithEvents lvwLinkViewBox As ListView
     Friend WithEvents lblSelectedKey As Label
     Friend WithEvents ucrInputSelectedKey As ucrInputTextBox
+    Friend WithEvents ucrSaveLink As ucrSave
 End Class

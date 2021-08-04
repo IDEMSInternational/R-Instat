@@ -144,7 +144,7 @@
     <value>4</value>
   </data>
   <data name="cmdCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>160, 26</value>
+    <value>158, 26</value>
   </data>
   <data name="cmdCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -196,10 +196,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>241, 26</value>
+    <value>237, 26</value>
   </data>
   <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 23</value>
+    <value>84, 23</value>
   </data>
   <data name="cmdHelp.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -220,7 +220,7 @@
     <value>7</value>
   </data>
   <data name="cmdPaste.Location" type="System.Drawing.Point, System.Drawing">
-    <value>323, 26</value>
+    <value>327, 26</value>
   </data>
   <data name="cmdPaste.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -271,10 +271,10 @@
     <value>2</value>
   </data>
   <data name="txtComment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>82, 1</value>
+    <value>90, 1</value>
   </data>
   <data name="txtComment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>316, 20</value>
+    <value>312, 20</value>
   </data>
   <data name="txtComment.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -295,7 +295,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>281, 26</value>
+    <value>286, 26</value>
   </data>
   <data name="cmdLanguage.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 23</value>

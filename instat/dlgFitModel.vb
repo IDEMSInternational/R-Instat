@@ -428,8 +428,10 @@ Public Class dlgFitModel
                 strVariableType = ucrFamily.strDataType
                 If strVariableType.Contains("positive integer") Then
                     strVariableType = "positive integer"
+                ElseIf strVariableType.Contains("integer") Then
+                    strVariableType = "integer"
                 ElseIf strVariableType.Contains("two level numeric") OrElse strVariableType.Contains("two level factor") Then
-                    strVariableType = "binary"
+                        strVariableType = "binary"
                 ElseIf strVariableType.Contains("numeric") Then
                     strVariableType = "numeric"
                 ElseIf strVariableType.Contains("logical") Then

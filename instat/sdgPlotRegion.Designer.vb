@@ -328,6 +328,7 @@ Partial Class sdgPlotRegion
         'ucrInputPlotCapitals
         '
         Me.ucrInputPlotCapitals.AddQuotesIfUnrecognised = True
+        Me.ucrInputPlotCapitals.GetSetSelectedIndex = -1
         Me.ucrInputPlotCapitals.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputPlotCapitals, "ucrInputPlotCapitals")
         Me.ucrInputPlotCapitals.Name = "ucrInputPlotCapitals"

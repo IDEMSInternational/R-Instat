@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblLabel.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>6</value>
   </data>
   <data name="lblNewName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -178,7 +178,28 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblNewName.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>8</value>
+  </data>
+  <data name="ucrChkCopyToClipboard.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 76</value>
+  </data>
+  <data name="ucrChkCopyToClipboard.Size" type="System.Drawing.Size, System.Drawing">
+    <value>207, 20</value>
+  </data>
+  <data name="ucrChkCopyToClipboard.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCopyToClipboard.Name" xml:space="preserve">
+    <value>ucrChkCopyToClipboard</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCopyToClipboard.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCopyToClipboard.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCopyToClipboard.ZOrder" xml:space="preserve">
+    <value>4</value>
   </data>
   <data name="ucrInputLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>251, 92</value>
@@ -199,7 +220,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputLabel.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>5</value>
   </data>
   <data name="ucrInputNewDataFrameName.Location" type="System.Drawing.Point, System.Drawing">
     <value>251, 32</value>
@@ -220,7 +241,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputNewDataFrameName.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>7</value>
   </data>
   <data name="ucrDataFrameCopySheets.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 12</value>
@@ -244,10 +265,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrDataFrameCopySheets.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>9</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 144</value>
+    <value>11, 192</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -265,7 +286,118 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>10</value>
+  </data>
+  <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 98</value>
+  </data>
+  <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>235, 77</value>
+  </data>
+  <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Name" xml:space="preserve">
+    <value>ucrPnlOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="rdoDataFrameMetadata.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDataFrameMetadata.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoDataFrameMetadata.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 148</value>
+  </data>
+  <data name="rdoDataFrameMetadata.Size" type="System.Drawing.Size, System.Drawing">
+    <value>124, 17</value>
+  </data>
+  <data name="rdoDataFrameMetadata.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="rdoDataFrameMetadata.Text" xml:space="preserve">
+    <value>Data frame metadata</value>
+  </data>
+  <data name="&gt;&gt;rdoDataFrameMetadata.Name" xml:space="preserve">
+    <value>rdoDataFrameMetadata</value>
+  </data>
+  <data name="&gt;&gt;rdoDataFrameMetadata.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDataFrameMetadata.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoDataFrameMetadata.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="rdoColumnsMetadata.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoColumnsMetadata.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoColumnsMetadata.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 125</value>
+  </data>
+  <data name="rdoColumnsMetadata.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 17</value>
+  </data>
+  <data name="rdoColumnsMetadata.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="rdoColumnsMetadata.Text" xml:space="preserve">
+    <value>Columns metadata</value>
+  </data>
+  <data name="&gt;&gt;rdoColumnsMetadata.Name" xml:space="preserve">
+    <value>rdoColumnsMetadata</value>
+  </data>
+  <data name="&gt;&gt;rdoColumnsMetadata.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoColumnsMetadata.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoColumnsMetadata.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="rdoDataFrame.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="rdoDataFrame.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoDataFrame.Location" type="System.Drawing.Point, System.Drawing">
+    <value>32, 102</value>
+  </data>
+  <data name="rdoDataFrame.Size" type="System.Drawing.Size, System.Drawing">
+    <value>77, 17</value>
+  </data>
+  <data name="rdoDataFrame.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="rdoDataFrame.Text" xml:space="preserve">
+    <value>Data frame</value>
+  </data>
+  <data name="&gt;&gt;rdoDataFrame.Name" xml:space="preserve">
+    <value>rdoDataFrame</value>
+  </data>
+  <data name="&gt;&gt;rdoDataFrame.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoDataFrame.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;rdoDataFrame.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -274,7 +406,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>424, 201</value>
+    <value>424, 254</value>
   </data>
   <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

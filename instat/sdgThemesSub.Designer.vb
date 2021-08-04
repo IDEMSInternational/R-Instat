@@ -373,6 +373,7 @@ Partial Class sdgThemesSub
         'UcrInputComboBox1
         '
         Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
+        Me.UcrInputComboBox1.GetSetSelectedIndex = -1
         Me.UcrInputComboBox1.IsReadOnly = False
         Me.UcrInputComboBox1.Location = New System.Drawing.Point(59, 51)
         Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
@@ -400,7 +401,7 @@ Partial Class sdgThemesSub
         '
         Me.ucrBaseSubdialog.Location = New System.Drawing.Point(182, 494)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(148, 30)
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(157, 30)
         Me.ucrBaseSubdialog.TabIndex = 2
         '
         'sdgThemesSub

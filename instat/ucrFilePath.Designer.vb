@@ -49,19 +49,19 @@ Partial Class ucrFilePath
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = True
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(77, 2)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(136, 3)
         Me.ucrInputFilePath.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        Me.ucrInputFilePath.Size = New System.Drawing.Size(260, 23)
+        Me.ucrInputFilePath.Size = New System.Drawing.Size(194, 23)
         Me.ucrInputFilePath.TabIndex = 2
         '
         'btnBrowse
         '
         Me.btnBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnBrowse.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.btnBrowse.Location = New System.Drawing.Point(338, 1)
+        Me.btnBrowse.Location = New System.Drawing.Point(330, 1)
         Me.btnBrowse.Name = "btnBrowse"
-        Me.btnBrowse.Size = New System.Drawing.Size(50, 23)
+        Me.btnBrowse.Size = New System.Drawing.Size(62, 23)
         Me.btnBrowse.TabIndex = 3
         Me.btnBrowse.Text = "Browse"
         Me.btnBrowse.UseVisualStyleBackColor = True
