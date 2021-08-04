@@ -42,6 +42,9 @@ Partial Class dlgFrequency
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.ucrNudColumnFactors = New instat.ucrNud()
+        Me.ucrChkDisplaySummariesAsRow = New instat.ucrCheck()
+        Me.lblColumnFactors = New System.Windows.Forms.Label()
         Me.ucrNudSigFigs = New instat.ucrNud()
         Me.lblSigFigs = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
@@ -58,20 +61,8 @@ Partial Class dlgFrequency
         Me.ucrSelectorFrequency = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.UcrCheck1 = New instat.ucrCheck()
-        Me.grpMargin = New System.Windows.Forms.GroupBox()
-        Me.rdoBoth = New System.Windows.Forms.RadioButton()
-        Me.rdoSummary = New System.Windows.Forms.RadioButton()
-        Me.rdoOuter = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlMargin = New instat.UcrPanel()
-        Me.ucrChkTreatColumnAsFactor = New instat.ucrCheck()
-        Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
-        Me.ucrChkWeight = New instat.ucrCheck()
-        Me.ucrChkDisplaySummaryVariablesAsRow = New instat.ucrCheck()
-        Me.ucrChkDisplayVariablesAsRows = New instat.ucrCheck()
-        Me.ucrChkDisplaySummariesAsRow = New instat.ucrCheck()
         Me.GroupBox1.SuspendLayout()
         Me.grpDisplay.SuspendLayout()
-        Me.grpMargin.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblFactors
@@ -88,14 +79,36 @@ Partial Class dlgFrequency
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.ucrNudColumnFactors)
         Me.GroupBox1.Controls.Add(Me.ucrChkDisplaySummariesAsRow)
-        Me.GroupBox1.Controls.Add(Me.ucrChkDisplayVariablesAsRows)
-        Me.GroupBox1.Controls.Add(Me.ucrChkDisplaySummaryVariablesAsRow)
+        Me.GroupBox1.Controls.Add(Me.lblColumnFactors)
         Me.GroupBox1.Controls.Add(Me.ucrNudSigFigs)
         Me.GroupBox1.Controls.Add(Me.lblSigFigs)
         resources.ApplyResources(Me.GroupBox1, "GroupBox1")
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
+        '
+        'ucrNudColumnFactors
+        '
+        Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudColumnFactors, "ucrNudColumnFactors")
+        Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
+        Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkDisplaySummariesAsRow
+        '
+        Me.ucrChkDisplaySummariesAsRow.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplaySummariesAsRow, "ucrChkDisplaySummariesAsRow")
+        Me.ucrChkDisplaySummariesAsRow.Name = "ucrChkDisplaySummariesAsRow"
+        '
+        'lblColumnFactors
+        '
+        resources.ApplyResources(Me.lblColumnFactors, "lblColumnFactors")
+        Me.lblColumnFactors.Name = "lblColumnFactors"
+        Me.lblColumnFactors.Tag = ""
         '
         'ucrNudSigFigs
         '
@@ -208,89 +221,10 @@ Partial Class dlgFrequency
         resources.ApplyResources(Me.UcrCheck1, "UcrCheck1")
         Me.UcrCheck1.Name = "UcrCheck1"
         '
-        'grpMargin
-        '
-        Me.grpMargin.Controls.Add(Me.rdoBoth)
-        Me.grpMargin.Controls.Add(Me.rdoSummary)
-        Me.grpMargin.Controls.Add(Me.rdoOuter)
-        Me.grpMargin.Controls.Add(Me.ucrPnlMargin)
-        resources.ApplyResources(Me.grpMargin, "grpMargin")
-        Me.grpMargin.Name = "grpMargin"
-        Me.grpMargin.TabStop = False
-        '
-        'rdoBoth
-        '
-        resources.ApplyResources(Me.rdoBoth, "rdoBoth")
-        Me.rdoBoth.Name = "rdoBoth"
-        Me.rdoBoth.TabStop = True
-        Me.rdoBoth.UseVisualStyleBackColor = True
-        '
-        'rdoSummary
-        '
-        resources.ApplyResources(Me.rdoSummary, "rdoSummary")
-        Me.rdoSummary.Name = "rdoSummary"
-        Me.rdoSummary.TabStop = True
-        Me.rdoSummary.UseVisualStyleBackColor = True
-        '
-        'rdoOuter
-        '
-        resources.ApplyResources(Me.rdoOuter, "rdoOuter")
-        Me.rdoOuter.Name = "rdoOuter"
-        Me.rdoOuter.TabStop = True
-        Me.rdoOuter.UseVisualStyleBackColor = True
-        '
-        'ucrPnlMargin
-        '
-        resources.ApplyResources(Me.ucrPnlMargin, "ucrPnlMargin")
-        Me.ucrPnlMargin.Name = "ucrPnlMargin"
-        '
-        'ucrChkTreatColumnAsFactor
-        '
-        Me.ucrChkTreatColumnAsFactor.Checked = False
-        resources.ApplyResources(Me.ucrChkTreatColumnAsFactor, "ucrChkTreatColumnAsFactor")
-        Me.ucrChkTreatColumnAsFactor.Name = "ucrChkTreatColumnAsFactor"
-        '
-        'ucrReceiverWeights
-        '
-        Me.ucrReceiverWeights.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverWeights, "ucrReceiverWeights")
-        Me.ucrReceiverWeights.Name = "ucrReceiverWeights"
-        Me.ucrReceiverWeights.Selector = Nothing
-        Me.ucrReceiverWeights.strNcFilePath = ""
-        Me.ucrReceiverWeights.ucrSelector = Nothing
-        '
-        'ucrChkWeight
-        '
-        Me.ucrChkWeight.Checked = False
-        resources.ApplyResources(Me.ucrChkWeight, "ucrChkWeight")
-        Me.ucrChkWeight.Name = "ucrChkWeight"
-        '
-        'ucrChkDisplaySummaryVariablesAsRow
-        '
-        Me.ucrChkDisplaySummaryVariablesAsRow.Checked = False
-        resources.ApplyResources(Me.ucrChkDisplaySummaryVariablesAsRow, "ucrChkDisplaySummaryVariablesAsRow")
-        Me.ucrChkDisplaySummaryVariablesAsRow.Name = "ucrChkDisplaySummaryVariablesAsRow"
-        '
-        'ucrChkDisplayVariablesAsRows
-        '
-        Me.ucrChkDisplayVariablesAsRows.Checked = False
-        resources.ApplyResources(Me.ucrChkDisplayVariablesAsRows, "ucrChkDisplayVariablesAsRows")
-        Me.ucrChkDisplayVariablesAsRows.Name = "ucrChkDisplayVariablesAsRows"
-        '
-        'ucrChkDisplaySummariesAsRow
-        '
-        Me.ucrChkDisplaySummariesAsRow.Checked = False
-        resources.ApplyResources(Me.ucrChkDisplaySummariesAsRow, "ucrChkDisplaySummariesAsRow")
-        Me.ucrChkDisplaySummariesAsRow.Name = "ucrChkDisplaySummariesAsRow"
-        '
         'dlgFrequency
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrReceiverWeights)
-        Me.Controls.Add(Me.ucrChkWeight)
-        Me.Controls.Add(Me.ucrChkTreatColumnAsFactor)
-        Me.Controls.Add(Me.grpMargin)
         Me.Controls.Add(Me.ucrInputMarginName)
         Me.Controls.Add(Me.lblMarginName)
         Me.Controls.Add(Me.GroupBox1)
@@ -311,8 +245,6 @@ Partial Class dlgFrequency
         Me.GroupBox1.PerformLayout()
         Me.grpDisplay.ResumeLayout(False)
         Me.grpDisplay.PerformLayout()
-        Me.grpMargin.ResumeLayout(False)
-        Me.grpMargin.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -337,15 +269,7 @@ Partial Class dlgFrequency
     Friend WithEvents ucrChkDisplayAsPercentage As ucrCheck
     Friend WithEvents ucrInputMarginName As ucrInputTextBox
     Friend WithEvents lblMarginName As Label
-    Friend WithEvents grpMargin As GroupBox
-    Friend WithEvents rdoBoth As RadioButton
-    Friend WithEvents rdoSummary As RadioButton
-    Friend WithEvents rdoOuter As RadioButton
-    Friend WithEvents ucrPnlMargin As UcrPanel
-    Friend WithEvents ucrChkTreatColumnAsFactor As ucrCheck
-    Friend WithEvents ucrReceiverWeights As ucrReceiverSingle
-    Friend WithEvents ucrChkWeight As ucrCheck
-    Friend WithEvents ucrChkDisplayVariablesAsRows As ucrCheck
-    Friend WithEvents ucrChkDisplaySummaryVariablesAsRow As ucrCheck
     Friend WithEvents ucrChkDisplaySummariesAsRow As ucrCheck
+    Friend WithEvents ucrNudColumnFactors As ucrNud
+    Friend WithEvents lblColumnFactors As Label
 End Class
