@@ -106,10 +106,9 @@ Partial Class dlgVisualizeData
         '
         'rdoSelectedColumn
         '
-        Me.rdoSelectedColumn.AutoSize = True
         Me.rdoSelectedColumn.Location = New System.Drawing.Point(268, 92)
         Me.rdoSelectedColumn.Name = "rdoSelectedColumn"
-        Me.rdoSelectedColumn.Size = New System.Drawing.Size(113, 17)
+        Me.rdoSelectedColumn.Size = New System.Drawing.Size(174, 24)
         Me.rdoSelectedColumn.TabIndex = 7
         Me.rdoSelectedColumn.TabStop = True
         Me.rdoSelectedColumn.Text = "Selected Variables"
@@ -146,6 +145,7 @@ Partial Class dlgVisualizeData
         '
         Me.lblSampling.AutoSize = True
         Me.lblSampling.Location = New System.Drawing.Point(196, 241)
+        Me.lblSampling.Location = New System.Drawing.Point(188, 242)
         Me.lblSampling.Name = "lblSampling"
         Me.lblSampling.Size = New System.Drawing.Size(94, 13)
         Me.lblSampling.TabIndex = 9
@@ -272,6 +272,7 @@ Partial Class dlgVisualizeData
         Me.ClientSize = New System.Drawing.Size(419, 427)
         Me.Controls.Add(Me.ucrNudAdjustSize)
         Me.Controls.Add(Me.ucrChkAdjustSize)
+        Me.ClientSize = New System.Drawing.Size(418, 408)
         Me.Controls.Add(Me.lblSampling)
         Me.Controls.Add(Me.ucrNudSamplingFunction)
         Me.Controls.Add(Me.ucrNudMaximumSize)

@@ -35,9 +35,9 @@ Partial Class sdgMissingOptions
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(91, 139)
+        Me.ucrBase.Location = New System.Drawing.Point(81, 145)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBase.Size = New System.Drawing.Size(155, 30)
         Me.ucrBase.TabIndex = 0
         '
         'ucrInputPercentage

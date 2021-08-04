@@ -690,7 +690,7 @@ Public Class dlgTwoVariableFitModel
             If Not ucrReceiverResponse.IsEmpty Then
                 ucrDistributionChoice.RecieverDatatype(ucrSelectorSimpleReg.ucrAvailableDataFrames.cboAvailableDataFrames.Text, ucrReceiverResponse.GetVariableNames(bWithQuotes:=False))
                 clsFormulaOperator.AddParameter("y", ucrReceiverResponse.GetVariableNames(False), iPosition:=0)
-                If Not ucrDistributionChoice.strDataType = "numeric" Then
+                If Not (ucrDistributionChoice.strDataType = "numeric" OrElse ucrDistributionChoice.strDataType = "integer") Then
                     If ucrDistributionChoice.lstCurrentDistributions.Count = 0 Then
                         ucrDistributionChoice.ucrInputDistributions.SetName("")
                         ucrDistributionChoice.Enabled = False

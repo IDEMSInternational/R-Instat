@@ -778,13 +778,13 @@
     <value>0</value>
   </data>
   <data name="ucrBaseSubDialogue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 297</value>
+    <value>89, 297</value>
   </data>
   <data name="ucrBaseSubDialogue.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
   </data>
   <data name="ucrBaseSubDialogue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>152, 30</value>
   </data>
   <data name="ucrBaseSubDialogue.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
