@@ -2110,12 +2110,15 @@ Public Class RLink
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets specific column names from the <paramref name="strDataFrameName"/> data 
-    '''             frame  as specified by the <paramref name="strRCommand"/> RFunction command name. </summary>
+    '''             frame as specified by the <paramref name="strRCommand"/> RFunction command name. 
+    '''             </summary>
     '''
     ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
-    ''' <param name="strRCommand">(Optional)The  Rfunction's command name that specifies the column names to get.</param>
+    ''' <param name="strRCommand"> (Optional)The Rfunction's command name that specifies the column 
+    '''                            names to get.</param>
     '''
-    ''' <returns>   The column names of the <paramref name="strDataFrameName"/> data frame as specifed by <paramref name="strRCommand"/> RFunction command. </returns>
+    ''' <returns>   The column names of the <paramref name="strDataFrameName"/> data frame as 
+    '''             specifed by <paramref name="strRCommand"/> RFunction command. </returns>
     '''--------------------------------------------------------------------------------------------
     Private Function GetColumnNames(strDataFrameName As String, strRCommand As String) As String()
         Dim clsGetColumnName As New RFunction
