@@ -1874,12 +1874,14 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets the table,filter,graph,key,surv or link names of the <paramref name="strDataFrameName"/> data frame's depending on the <paramref name="strRCommand"/> . </summary>
+    ''' <summary>   Gets the table, filter, graph, key, surv or link names of the <paramref name="strDataFrameName"/> 
+    '''             data frame depending on the <paramref name="strRCommand"/>. </summary>
     '''
     ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
     ''' <param name="strRCommand">(Optional)The name of the Rfunction command.</param>
     '''
-    ''' <returns>   The table,filter,graph,key,surv or link names of the <paramref name="strDataFrameName"/> data frame. </returns>
+    ''' <returns>   The table,filter,graph,key,surv or link names of the <paramref name="strDataFrameName"/> 
+    '''             data frame. </returns>
     '''--------------------------------------------------------------------------------------------
     Private Function GetNames(strDataFrameName As String, strRCommand As String) As List(Of String)
         Dim lstNames As New List(Of String)
@@ -2107,7 +2109,8 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets specific column names from the <paramref name="strDataFrameName"/> data frame  as specified by the <paramref name="strRCommand"/> RFunction command name. </summary>
+    ''' <summary>   Gets specific column names from the <paramref name="strDataFrameName"/> data 
+    '''             frame  as specified by the <paramref name="strRCommand"/> RFunction command name. </summary>
     '''
     ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
     ''' <param name="strRCommand">(Optional)The  Rfunction's command name that specifies the column names to get.</param>
