@@ -74,6 +74,7 @@ Partial Class dlgUseGraph
         '
         'ucrGraphsSelector
         '
+        Me.ucrGraphsSelector.bDropUnusedFilterLevels = False
         Me.ucrGraphsSelector.bShowHiddenColumns = False
         Me.ucrGraphsSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrGraphsSelector, "ucrGraphsSelector")

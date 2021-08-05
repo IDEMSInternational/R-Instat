@@ -472,7 +472,7 @@
     <value>10, 14</value>
   </data>
   <data name="ucrChkProportionsPercentages.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 20</value>
+    <value>343, 20</value>
   </data>
   <data name="ucrChkProportionsPercentages.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

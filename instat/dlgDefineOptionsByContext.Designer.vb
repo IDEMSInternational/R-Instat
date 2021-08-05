@@ -327,7 +327,7 @@ Partial Class dlgDefineOptionsByContext
         Me.grpIDs.Controls.Add(Me.ucrReceiverID1)
         Me.grpIDs.Location = New System.Drawing.Point(10, 206)
         Me.grpIDs.Name = "grpIDs"
-        Me.grpIDs.Size = New System.Drawing.Size(136, 187)
+        Me.grpIDs.Size = New System.Drawing.Size(121, 187)
         Me.grpIDs.TabIndex = 3
         Me.grpIDs.TabStop = False
         Me.grpIDs.Text = "IDs"
@@ -357,7 +357,7 @@ Partial Class dlgDefineOptionsByContext
         Me.ucrReceiverIDOther.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverIDOther.Name = "ucrReceiverIDOther"
         Me.ucrReceiverIDOther.Selector = Nothing
-        Me.ucrReceiverIDOther.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverIDOther.Size = New System.Drawing.Size(104, 100)
         Me.ucrReceiverIDOther.strNcFilePath = ""
         Me.ucrReceiverIDOther.TabIndex = 3
         Me.ucrReceiverIDOther.ucrSelector = Nothing
@@ -369,7 +369,7 @@ Partial Class dlgDefineOptionsByContext
         Me.ucrReceiverID1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverID1.Name = "ucrReceiverID1"
         Me.ucrReceiverID1.Selector = Nothing
-        Me.ucrReceiverID1.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverID1.Size = New System.Drawing.Size(104, 20)
         Me.ucrReceiverID1.strNcFilePath = ""
         Me.ucrReceiverID1.TabIndex = 1
         Me.ucrReceiverID1.ucrSelector = Nothing
@@ -379,9 +379,9 @@ Partial Class dlgDefineOptionsByContext
         Me.ucrInputKeyCheck.AddQuotesIfUnrecognised = True
         Me.ucrInputKeyCheck.IsMultiline = False
         Me.ucrInputKeyCheck.IsReadOnly = False
-        Me.ucrInputKeyCheck.Location = New System.Drawing.Point(91, 440)
+        Me.ucrInputKeyCheck.Location = New System.Drawing.Point(104, 440)
         Me.ucrInputKeyCheck.Name = "ucrInputKeyCheck"
-        Me.ucrInputKeyCheck.Size = New System.Drawing.Size(317, 21)
+        Me.ucrInputKeyCheck.Size = New System.Drawing.Size(304, 21)
         Me.ucrInputKeyCheck.TabIndex = 10
         '
         'ucrInputKeyColumns
@@ -389,9 +389,9 @@ Partial Class dlgDefineOptionsByContext
         Me.ucrInputKeyColumns.AddQuotesIfUnrecognised = True
         Me.ucrInputKeyColumns.IsMultiline = False
         Me.ucrInputKeyColumns.IsReadOnly = False
-        Me.ucrInputKeyColumns.Location = New System.Drawing.Point(91, 409)
+        Me.ucrInputKeyColumns.Location = New System.Drawing.Point(104, 409)
         Me.ucrInputKeyColumns.Name = "ucrInputKeyColumns"
-        Me.ucrInputKeyColumns.Size = New System.Drawing.Size(317, 21)
+        Me.ucrInputKeyColumns.Size = New System.Drawing.Size(304, 21)
         Me.ucrInputKeyColumns.TabIndex = 7
         '
         'lblKeyColumns
@@ -427,9 +427,9 @@ Partial Class dlgDefineOptionsByContext
         Me.grpBlockingVariables.Controls.Add(Me.lblBlockingOther)
         Me.grpBlockingVariables.Controls.Add(Me.ucrReceiverBlockingOther)
         Me.grpBlockingVariables.Controls.Add(Me.ucrReceiverBlocking1)
-        Me.grpBlockingVariables.Location = New System.Drawing.Point(156, 206)
+        Me.grpBlockingVariables.Location = New System.Drawing.Point(137, 206)
         Me.grpBlockingVariables.Name = "grpBlockingVariables"
-        Me.grpBlockingVariables.Size = New System.Drawing.Size(136, 187)
+        Me.grpBlockingVariables.Size = New System.Drawing.Size(158, 187)
         Me.grpBlockingVariables.TabIndex = 4
         Me.grpBlockingVariables.TabStop = False
         Me.grpBlockingVariables.Text = "Blocking Variables"
@@ -455,11 +455,11 @@ Partial Class dlgDefineOptionsByContext
         'ucrReceiverBlockingOther
         '
         Me.ucrReceiverBlockingOther.frmParent = Me
-        Me.ucrReceiverBlockingOther.Location = New System.Drawing.Point(8, 78)
+        Me.ucrReceiverBlockingOther.Location = New System.Drawing.Point(9, 78)
         Me.ucrReceiverBlockingOther.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverBlockingOther.Name = "ucrReceiverBlockingOther"
         Me.ucrReceiverBlockingOther.Selector = Nothing
-        Me.ucrReceiverBlockingOther.Size = New System.Drawing.Size(120, 100)
+        Me.ucrReceiverBlockingOther.Size = New System.Drawing.Size(140, 100)
         Me.ucrReceiverBlockingOther.strNcFilePath = ""
         Me.ucrReceiverBlockingOther.TabIndex = 3
         Me.ucrReceiverBlockingOther.ucrSelector = Nothing
@@ -467,11 +467,11 @@ Partial Class dlgDefineOptionsByContext
         'ucrReceiverBlocking1
         '
         Me.ucrReceiverBlocking1.frmParent = Me
-        Me.ucrReceiverBlocking1.Location = New System.Drawing.Point(8, 34)
+        Me.ucrReceiverBlocking1.Location = New System.Drawing.Point(9, 34)
         Me.ucrReceiverBlocking1.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverBlocking1.Name = "ucrReceiverBlocking1"
         Me.ucrReceiverBlocking1.Selector = Nothing
-        Me.ucrReceiverBlocking1.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverBlocking1.Size = New System.Drawing.Size(140, 20)
         Me.ucrReceiverBlocking1.strNcFilePath = ""
         Me.ucrReceiverBlocking1.TabIndex = 1
         Me.ucrReceiverBlocking1.ucrSelector = Nothing

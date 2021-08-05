@@ -30,28 +30,28 @@ Partial Class dlgCompareTreatmentLines
         Me.lblTreatment2 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lblContext3 = New System.Windows.Forms.Label()
-        Me.lblContext2 = New System.Windows.Forms.Label()
-        Me.lblContext1 = New System.Windows.Forms.Label()
-        Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.lblHlineValue = New System.Windows.Forms.Label()
-        Me.lblTransparency = New System.Windows.Forms.Label()
-        Me.rdoLines = New System.Windows.Forms.RadioButton()
-        Me.rdoPoints = New System.Windows.Forms.RadioButton()
-        Me.ucrPnlCompareType = New instat.UcrPanel()
-        Me.ucrChkIncludeMeanLine = New instat.ucrCheck()
-        Me.ucrChkIncludeSmoothLine = New instat.ucrCheck()
-        Me.ucrChkBoxplotOnlyComplete = New instat.ucrCheck()
-        Me.ucrInputHlineValue = New instat.ucrInputTextBox()
-        Me.ucrChkIncludeHline = New instat.ucrCheck()
-        Me.ucrNudTransparency = New instat.ucrNud()
-        Me.ucrChkIncludeBoxplot = New instat.ucrCheck()
-        Me.ucrChkColourByDifference = New instat.ucrCheck()
         Me.ucrInputContext3 = New instat.ucrInputComboBox()
         Me.ucrReceiverContext3 = New instat.ucrReceiverSingle()
+        Me.lblContext2 = New System.Windows.Forms.Label()
+        Me.lblContext1 = New System.Windows.Forms.Label()
         Me.ucrInputContext2 = New instat.ucrInputComboBox()
         Me.ucrReceiverContext2 = New instat.ucrReceiverSingle()
         Me.ucrInputContext1 = New instat.ucrInputComboBox()
         Me.ucrReceiverContext1 = New instat.ucrReceiverSingle()
+        Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkIncludeMeanLine = New instat.ucrCheck()
+        Me.ucrChkIncludeSmoothLine = New instat.ucrCheck()
+        Me.ucrChkBoxplotOnlyComplete = New instat.ucrCheck()
+        Me.ucrInputHlineValue = New instat.ucrInputTextBox()
+        Me.lblHlineValue = New System.Windows.Forms.Label()
+        Me.ucrChkIncludeHline = New instat.ucrCheck()
+        Me.lblTransparency = New System.Windows.Forms.Label()
+        Me.ucrNudTransparency = New instat.ucrNud()
+        Me.ucrChkIncludeBoxplot = New instat.ucrCheck()
+        Me.ucrChkColourByDifference = New instat.ucrCheck()
+        Me.rdoLines = New System.Windows.Forms.RadioButton()
+        Me.rdoPoints = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlCompareType = New instat.UcrPanel()
         Me.ucrInputFactorOption2 = New instat.ucrInputFactorLevels()
         Me.ucrInputFactorOption1 = New instat.ucrInputFactorLevels()
         Me.ucrReceiverID = New instat.ucrReceiverSingle()
@@ -109,6 +109,23 @@ Partial Class dlgCompareTreatmentLines
         resources.ApplyResources(Me.lblContext3, "lblContext3")
         Me.lblContext3.Name = "lblContext3"
         '
+        'ucrInputContext3
+        '
+        Me.ucrInputContext3.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext3.GetSetSelectedIndex = -1
+        Me.ucrInputContext3.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputContext3, "ucrInputContext3")
+        Me.ucrInputContext3.Name = "ucrInputContext3"
+        '
+        'ucrReceiverContext3
+        '
+        Me.ucrReceiverContext3.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverContext3, "ucrReceiverContext3")
+        Me.ucrReceiverContext3.Name = "ucrReceiverContext3"
+        Me.ucrReceiverContext3.Selector = Nothing
+        Me.ucrReceiverContext3.strNcFilePath = ""
+        Me.ucrReceiverContext3.ucrSelector = Nothing
+        '
         'lblContext2
         '
         resources.ApplyResources(Me.lblContext2, "lblContext2")
@@ -118,6 +135,40 @@ Partial Class dlgCompareTreatmentLines
         '
         resources.ApplyResources(Me.lblContext1, "lblContext1")
         Me.lblContext1.Name = "lblContext1"
+        '
+        'ucrInputContext2
+        '
+        Me.ucrInputContext2.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext2.GetSetSelectedIndex = -1
+        Me.ucrInputContext2.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputContext2, "ucrInputContext2")
+        Me.ucrInputContext2.Name = "ucrInputContext2"
+        '
+        'ucrReceiverContext2
+        '
+        Me.ucrReceiverContext2.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverContext2, "ucrReceiverContext2")
+        Me.ucrReceiverContext2.Name = "ucrReceiverContext2"
+        Me.ucrReceiverContext2.Selector = Nothing
+        Me.ucrReceiverContext2.strNcFilePath = ""
+        Me.ucrReceiverContext2.ucrSelector = Nothing
+        '
+        'ucrInputContext1
+        '
+        Me.ucrInputContext1.AddQuotesIfUnrecognised = True
+        Me.ucrInputContext1.GetSetSelectedIndex = -1
+        Me.ucrInputContext1.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputContext1, "ucrInputContext1")
+        Me.ucrInputContext1.Name = "ucrInputContext1"
+        '
+        'ucrReceiverContext1
+        '
+        Me.ucrReceiverContext1.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverContext1, "ucrReceiverContext1")
+        Me.ucrReceiverContext1.Name = "ucrReceiverContext1"
+        Me.ucrReceiverContext1.Selector = Nothing
+        Me.ucrReceiverContext1.strNcFilePath = ""
+        Me.ucrReceiverContext1.ucrSelector = Nothing
         '
         'grpOptions
         '
@@ -134,39 +185,6 @@ Partial Class dlgCompareTreatmentLines
         resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
-        '
-        'lblHlineValue
-        '
-        resources.ApplyResources(Me.lblHlineValue, "lblHlineValue")
-        Me.lblHlineValue.Name = "lblHlineValue"
-        '
-        'lblTransparency
-        '
-        resources.ApplyResources(Me.lblTransparency, "lblTransparency")
-        Me.lblTransparency.Name = "lblTransparency"
-        '
-        'rdoLines
-        '
-        resources.ApplyResources(Me.rdoLines, "rdoLines")
-        Me.rdoLines.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoLines.FlatAppearance.BorderSize = 2
-        Me.rdoLines.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoLines.Name = "rdoLines"
-        Me.rdoLines.UseVisualStyleBackColor = True
-        '
-        'rdoPoints
-        '
-        resources.ApplyResources(Me.rdoPoints, "rdoPoints")
-        Me.rdoPoints.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoPoints.FlatAppearance.BorderSize = 2
-        Me.rdoPoints.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoPoints.Name = "rdoPoints"
-        Me.rdoPoints.UseVisualStyleBackColor = True
-        '
-        'ucrPnlCompareType
-        '
-        resources.ApplyResources(Me.ucrPnlCompareType, "ucrPnlCompareType")
-        Me.ucrPnlCompareType.Name = "ucrPnlCompareType"
         '
         'ucrChkIncludeMeanLine
         '
@@ -194,11 +212,21 @@ Partial Class dlgCompareTreatmentLines
         resources.ApplyResources(Me.ucrInputHlineValue, "ucrInputHlineValue")
         Me.ucrInputHlineValue.Name = "ucrInputHlineValue"
         '
+        'lblHlineValue
+        '
+        resources.ApplyResources(Me.lblHlineValue, "lblHlineValue")
+        Me.lblHlineValue.Name = "lblHlineValue"
+        '
         'ucrChkIncludeHline
         '
         Me.ucrChkIncludeHline.Checked = False
         resources.ApplyResources(Me.ucrChkIncludeHline, "ucrChkIncludeHline")
         Me.ucrChkIncludeHline.Name = "ucrChkIncludeHline"
+        '
+        'lblTransparency
+        '
+        resources.ApplyResources(Me.lblTransparency, "lblTransparency")
+        Me.lblTransparency.Name = "lblTransparency"
         '
         'ucrNudTransparency
         '
@@ -222,57 +250,33 @@ Partial Class dlgCompareTreatmentLines
         resources.ApplyResources(Me.ucrChkColourByDifference, "ucrChkColourByDifference")
         Me.ucrChkColourByDifference.Name = "ucrChkColourByDifference"
         '
-        'ucrInputContext3
+        'rdoLines
         '
-        Me.ucrInputContext3.AddQuotesIfUnrecognised = True
-        Me.ucrInputContext3.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputContext3, "ucrInputContext3")
-        Me.ucrInputContext3.Name = "ucrInputContext3"
+        resources.ApplyResources(Me.rdoLines, "rdoLines")
+        Me.rdoLines.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoLines.FlatAppearance.BorderSize = 2
+        Me.rdoLines.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoLines.Name = "rdoLines"
+        Me.rdoLines.UseVisualStyleBackColor = True
         '
-        'ucrReceiverContext3
+        'rdoPoints
         '
-        Me.ucrReceiverContext3.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverContext3, "ucrReceiverContext3")
-        Me.ucrReceiverContext3.Name = "ucrReceiverContext3"
-        Me.ucrReceiverContext3.Selector = Nothing
-        Me.ucrReceiverContext3.strNcFilePath = ""
-        Me.ucrReceiverContext3.ucrSelector = Nothing
+        resources.ApplyResources(Me.rdoPoints, "rdoPoints")
+        Me.rdoPoints.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPoints.FlatAppearance.BorderSize = 2
+        Me.rdoPoints.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoPoints.Name = "rdoPoints"
+        Me.rdoPoints.UseVisualStyleBackColor = True
         '
-        'ucrInputContext2
+        'ucrPnlCompareType
         '
-        Me.ucrInputContext2.AddQuotesIfUnrecognised = True
-        Me.ucrInputContext2.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputContext2, "ucrInputContext2")
-        Me.ucrInputContext2.Name = "ucrInputContext2"
-        '
-        'ucrReceiverContext2
-        '
-        Me.ucrReceiverContext2.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverContext2, "ucrReceiverContext2")
-        Me.ucrReceiverContext2.Name = "ucrReceiverContext2"
-        Me.ucrReceiverContext2.Selector = Nothing
-        Me.ucrReceiverContext2.strNcFilePath = ""
-        Me.ucrReceiverContext2.ucrSelector = Nothing
-        '
-        'ucrInputContext1
-        '
-        Me.ucrInputContext1.AddQuotesIfUnrecognised = True
-        Me.ucrInputContext1.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputContext1, "ucrInputContext1")
-        Me.ucrInputContext1.Name = "ucrInputContext1"
-        '
-        'ucrReceiverContext1
-        '
-        Me.ucrReceiverContext1.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverContext1, "ucrReceiverContext1")
-        Me.ucrReceiverContext1.Name = "ucrReceiverContext1"
-        Me.ucrReceiverContext1.Selector = Nothing
-        Me.ucrReceiverContext1.strNcFilePath = ""
-        Me.ucrReceiverContext1.ucrSelector = Nothing
+        resources.ApplyResources(Me.ucrPnlCompareType, "ucrPnlCompareType")
+        Me.ucrPnlCompareType.Name = "ucrPnlCompareType"
         '
         'ucrInputFactorOption2
         '
         Me.ucrInputFactorOption2.AddQuotesIfUnrecognised = True
+        Me.ucrInputFactorOption2.GetSetSelectedIndex = -1
         Me.ucrInputFactorOption2.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputFactorOption2, "ucrInputFactorOption2")
         Me.ucrInputFactorOption2.Name = "ucrInputFactorOption2"
@@ -280,6 +284,7 @@ Partial Class dlgCompareTreatmentLines
         'ucrInputFactorOption1
         '
         Me.ucrInputFactorOption1.AddQuotesIfUnrecognised = True
+        Me.ucrInputFactorOption1.GetSetSelectedIndex = -1
         Me.ucrInputFactorOption1.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputFactorOption1, "ucrInputFactorOption1")
         Me.ucrInputFactorOption1.Name = "ucrInputFactorOption1"

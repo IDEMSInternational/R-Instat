@@ -158,7 +158,6 @@ Partial Class sdgPrincipalComponentAnalysis
         '
         Me.grpScree.Controls.Add(Me.ucrReceiverFactor)
         Me.grpScree.Controls.Add(Me.lblFactorVariable)
-        Me.grpScree.Controls.Add(Me.ucrSelectorFactor)
         Me.grpScree.Controls.Add(Me.grpVariablePlot)
         Me.grpScree.Controls.Add(Me.lblLabel)
         Me.grpScree.Controls.Add(Me.GrpIndividualPlot)
@@ -171,6 +170,7 @@ Partial Class sdgPrincipalComponentAnalysis
         Me.grpScree.Controls.Add(Me.lblDim)
         Me.grpScree.Controls.Add(Me.ucrInputLabel2)
         Me.grpScree.Controls.Add(Me.ucrInputLabel1)
+        Me.grpScree.Controls.Add(Me.ucrSelectorFactor)
         resources.ApplyResources(Me.grpScree, "grpScree")
         Me.grpScree.Name = "grpScree"
         Me.grpScree.TabStop = False

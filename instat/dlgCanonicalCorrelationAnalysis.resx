@@ -209,8 +209,12 @@
   <data name="ucrSaveResult.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 290</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrSaveResult.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrSaveResult.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>278, 24</value>
   </data>
   <data name="ucrSaveResult.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -230,7 +234,6 @@
   <data name="ucrReceiverYVariables.Location" type="System.Drawing.Point, System.Drawing">
     <value>266, 183</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrReceiverYVariables.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
