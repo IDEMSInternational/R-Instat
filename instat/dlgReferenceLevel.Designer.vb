@@ -39,30 +39,18 @@ Partial Class dlgReferenceLevel
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgReferenceLevel))
-        Me.ucrBase = New instat.ucrButtons()
         Me.lblFactorSelected = New System.Windows.Forms.Label()
-        Me.ucrSelectorForReferenceLevels = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverReferenceLevels = New instat.ucrReceiverSingle()
+        Me.ucrSelectorForReferenceLevels = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrFactorReferenceLevels = New instat.ucrFactor()
+        Me.ucrBase = New instat.ucrButtons()
         Me.SuspendLayout()
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
         '
         'lblFactorSelected
         '
         resources.ApplyResources(Me.lblFactorSelected, "lblFactorSelected")
         Me.lblFactorSelected.Name = "lblFactorSelected"
         Me.lblFactorSelected.Tag = "Factor_Selected:"
-        '
-        'ucrSelectorForReferenceLevels
-        '
-        Me.ucrSelectorForReferenceLevels.bShowHiddenColumns = False
-        Me.ucrSelectorForReferenceLevels.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrSelectorForReferenceLevels, "ucrSelectorForReferenceLevels")
-        Me.ucrSelectorForReferenceLevels.Name = "ucrSelectorForReferenceLevels"
         '
         'ucrReceiverReferenceLevels
         '
@@ -73,6 +61,14 @@ Partial Class dlgReferenceLevel
         Me.ucrReceiverReferenceLevels.strNcFilePath = ""
         Me.ucrReceiverReferenceLevels.ucrSelector = Nothing
         '
+        'ucrSelectorForReferenceLevels
+        '
+        Me.ucrSelectorForReferenceLevels.bDropUnusedFilterLevels = False
+        Me.ucrSelectorForReferenceLevels.bShowHiddenColumns = False
+        Me.ucrSelectorForReferenceLevels.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrSelectorForReferenceLevels, "ucrSelectorForReferenceLevels")
+        Me.ucrSelectorForReferenceLevels.Name = "ucrSelectorForReferenceLevels"
+        '
         'ucrFactorReferenceLevels
         '
         resources.ApplyResources(Me.ucrFactorReferenceLevels, "ucrFactorReferenceLevels")
@@ -81,6 +77,11 @@ Partial Class dlgReferenceLevel
         Me.ucrFactorReferenceLevels.Name = "ucrFactorReferenceLevels"
         Me.ucrFactorReferenceLevels.shtCurrSheet = Nothing
         Me.ucrFactorReferenceLevels.ucrChkLevels = Nothing
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgReferenceLevel
         '

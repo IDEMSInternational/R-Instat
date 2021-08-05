@@ -146,78 +146,6 @@
   <data name="&gt;&gt;lblDegree.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;rdoCentred.Name" xml:space="preserve">
-    <value>rdoCentred</value>
-  </data>
-  <data name="&gt;&gt;rdoCentred.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoCentred.Parent" xml:space="preserve">
-    <value>grpType</value>
-  </data>
-  <data name="&gt;&gt;rdoCentred.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rdoOrthogonal.Name" xml:space="preserve">
-    <value>rdoOrthogonal</value>
-  </data>
-  <data name="&gt;&gt;rdoOrthogonal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoOrthogonal.Parent" xml:space="preserve">
-    <value>grpType</value>
-  </data>
-  <data name="&gt;&gt;rdoOrthogonal.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;rdoSimple.Name" xml:space="preserve">
-    <value>rdoSimple</value>
-  </data>
-  <data name="&gt;&gt;rdoSimple.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoSimple.Parent" xml:space="preserve">
-    <value>grpType</value>
-  </data>
-  <data name="&gt;&gt;rdoSimple.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlType.Name" xml:space="preserve">
-    <value>ucrPnlType</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlType.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlType.Parent" xml:space="preserve">
-    <value>grpType</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlType.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="grpType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>248, 119</value>
-  </data>
-  <data name="grpType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 98</value>
-  </data>
-  <data name="grpType.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="grpType.Text" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="&gt;&gt;grpType.Name" xml:space="preserve">
-    <value>grpType</value>
-  </data>
-  <data name="&gt;&gt;grpType.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpType.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpType.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoCentred.Anchor" type="System.Windows.Forms.AnchorStyles, System.Windows.Forms">
     <value>Top, Left, Right</value>
@@ -330,6 +258,30 @@
   <data name="&gt;&gt;ucrPnlType.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="grpType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>248, 119</value>
+  </data>
+  <data name="grpType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 98</value>
+  </data>
+  <data name="grpType.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="grpType.Text" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="&gt;&gt;grpType.Name" xml:space="preserve">
+    <value>grpType</value>
+  </data>
+  <data name="&gt;&gt;grpType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpType.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpType.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrNudDegree.Location" type="System.Drawing.Point, System.Drawing">
     <value>318, 90</value>
   </data>
@@ -358,7 +310,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSavePoly.Size" type="System.Drawing.Size, System.Drawing">
-    <value>280, 22</value>
+    <value>358, 22</value>
   </data>
   <data name="ucrSavePoly.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>

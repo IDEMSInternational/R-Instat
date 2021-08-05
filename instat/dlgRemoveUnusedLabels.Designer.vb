@@ -55,6 +55,7 @@ Partial Class dlgRemoveUnusedLabels
         '
         'ucrDataFrame
         '
+        Me.ucrDataFrame.bDropUnusedFilterLevels = False
         Me.ucrDataFrame.bUseCurrentFilter = True
         Me.ucrDataFrame.Location = New System.Drawing.Point(2, 2)
         Me.ucrDataFrame.Margin = New System.Windows.Forms.Padding(0)
@@ -68,17 +69,20 @@ Partial Class dlgRemoveUnusedLabels
         Me.ucrAddRemove.Location = New System.Drawing.Point(2, 59)
         Me.ucrAddRemove.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrAddRemove.Name = "ucrAddRemove"
-        Me.ucrAddRemove.Size = New System.Drawing.Size(203, 127)
+        Me.ucrAddRemove.Size = New System.Drawing.Size(217, 146)
         Me.ucrAddRemove.TabIndex = 2
         '
         'ucrSelectedVariable
         '
+        Me.ucrSelectedVariable.frmParent = Me
         Me.ucrSelectedVariable.Location = New System.Drawing.Point(234, 103)
         Me.ucrSelectedVariable.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectedVariable.Name = "ucrSelectedVariable"
         Me.ucrSelectedVariable.Selector = Nothing
         Me.ucrSelectedVariable.Size = New System.Drawing.Size(106, 26)
+        Me.ucrSelectedVariable.strNcFilePath = ""
         Me.ucrSelectedVariable.TabIndex = 3
+        Me.ucrSelectedVariable.ucrSelector = Nothing
         '
         'lblSelectedVariable
         '
