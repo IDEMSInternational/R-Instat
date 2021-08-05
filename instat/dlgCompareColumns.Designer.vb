@@ -29,15 +29,15 @@ Partial Class dlgCompareColumns
         Me.lblTolerance = New System.Windows.Forms.Label()
         Me.rdoByValue = New System.Windows.Forms.RadioButton()
         Me.rdoByRow = New System.Windows.Forms.RadioButton()
-        Me.ucrInputTolerance = New instat.ucrInputComboBox()
-        Me.ucrPnlOptions = New instat.UcrPanel()
-        Me.ucrSaveLogical = New instat.ucrSave()
-        Me.ucrChkSort = New instat.ucrCheck()
         Me.ucrChkAllValues = New instat.ucrCheck()
         Me.ucrChkUnion = New instat.ucrCheck()
         Me.ucrChkIntersection = New instat.ucrCheck()
         Me.ucrChkSecondNotFirst = New instat.ucrCheck()
         Me.ucrChkFirstNotSecond = New instat.ucrCheck()
+        Me.ucrInputTolerance = New instat.ucrInputComboBox()
+        Me.ucrPnlOptions = New instat.UcrPanel()
+        Me.ucrSaveLogical = New instat.ucrSave()
+        Me.ucrChkSort = New instat.ucrCheck()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverSecond = New instat.ucrReceiverSingle()
         Me.ucrReceiverFirst = New instat.ucrReceiverSingle()
@@ -94,30 +94,6 @@ Partial Class dlgCompareColumns
         Me.rdoByRow.Tag = ""
         Me.rdoByRow.UseVisualStyleBackColor = True
         '
-        'ucrInputTolerance
-        '
-        Me.ucrInputTolerance.AddQuotesIfUnrecognised = True
-        Me.ucrInputTolerance.GetSetSelectedIndex = -1
-        Me.ucrInputTolerance.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputTolerance, "ucrInputTolerance")
-        Me.ucrInputTolerance.Name = "ucrInputTolerance"
-        '
-        'ucrPnlOptions
-        '
-        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
-        Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        '
-        'ucrSaveLogical
-        '
-        resources.ApplyResources(Me.ucrSaveLogical, "ucrSaveLogical")
-        Me.ucrSaveLogical.Name = "ucrSaveLogical"
-        '
-        'ucrChkSort
-        '
-        Me.ucrChkSort.Checked = False
-        resources.ApplyResources(Me.ucrChkSort, "ucrChkSort")
-        Me.ucrChkSort.Name = "ucrChkSort"
-        '
         'ucrChkAllValues
         '
         Me.ucrChkAllValues.Checked = False
@@ -147,6 +123,30 @@ Partial Class dlgCompareColumns
         Me.ucrChkFirstNotSecond.Checked = False
         resources.ApplyResources(Me.ucrChkFirstNotSecond, "ucrChkFirstNotSecond")
         Me.ucrChkFirstNotSecond.Name = "ucrChkFirstNotSecond"
+        '
+        'ucrInputTolerance
+        '
+        Me.ucrInputTolerance.AddQuotesIfUnrecognised = True
+        Me.ucrInputTolerance.GetSetSelectedIndex = -1
+        Me.ucrInputTolerance.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTolerance, "ucrInputTolerance")
+        Me.ucrInputTolerance.Name = "ucrInputTolerance"
+        '
+        'ucrPnlOptions
+        '
+        resources.ApplyResources(Me.ucrPnlOptions, "ucrPnlOptions")
+        Me.ucrPnlOptions.Name = "ucrPnlOptions"
+        '
+        'ucrSaveLogical
+        '
+        resources.ApplyResources(Me.ucrSaveLogical, "ucrSaveLogical")
+        Me.ucrSaveLogical.Name = "ucrSaveLogical"
+        '
+        'ucrChkSort
+        '
+        Me.ucrChkSort.Checked = False
+        resources.ApplyResources(Me.ucrChkSort, "ucrChkSort")
+        Me.ucrChkSort.Name = "ucrChkSort"
         '
         'ucrBase
         '

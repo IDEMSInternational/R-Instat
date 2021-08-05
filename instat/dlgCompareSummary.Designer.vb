@@ -140,7 +140,7 @@ Partial Class dlgCompareSummary
         Me.ucrChkIgnoreMissing.Checked = False
         Me.ucrChkIgnoreMissing.Location = New System.Drawing.Point(10, 307)
         Me.ucrChkIgnoreMissing.Name = "ucrChkIgnoreMissing"
-        Me.ucrChkIgnoreMissing.Size = New System.Drawing.Size(197, 20)
+        Me.ucrChkIgnoreMissing.Size = New System.Drawing.Size(274, 20)
         Me.ucrChkIgnoreMissing.TabIndex = 13
         '
         'ucrPnlObservationType
@@ -209,7 +209,7 @@ Partial Class dlgCompareSummary
         Me.ucrChkStoreResults.Checked = False
         Me.ucrChkStoreResults.Location = New System.Drawing.Point(10, 255)
         Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        Me.ucrChkStoreResults.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkStoreResults.Size = New System.Drawing.Size(273, 20)
         Me.ucrChkStoreResults.TabIndex = 11
         '
         'dlgCompareSummary

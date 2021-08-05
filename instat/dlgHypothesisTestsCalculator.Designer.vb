@@ -1528,12 +1528,13 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrSaveResult.Location = New System.Drawing.Point(10, 397)
         Me.ucrSaveResult.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveResult.Name = "ucrSaveResult"
-        Me.ucrSaveResult.Size = New System.Drawing.Size(277, 24)
+        Me.ucrSaveResult.Size = New System.Drawing.Size(294, 24)
         Me.ucrSaveResult.TabIndex = 14
         '
         'ucrInputComboRPackage
         '
         Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboRPackage.GetSetSelectedIndex = -1
         Me.ucrInputComboRPackage.IsReadOnly = False
         Me.ucrInputComboRPackage.Location = New System.Drawing.Point(308, 51)
         Me.ucrInputComboRPackage.Margin = New System.Windows.Forms.Padding(7, 6, 7, 6)
@@ -1556,7 +1557,7 @@ Partial Class dlgHypothesisTestsCalculator
         Me.ucrChkBy.Location = New System.Drawing.Point(165, 264)
         Me.ucrChkBy.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrChkBy.Name = "ucrChkBy"
-        Me.ucrChkBy.Size = New System.Drawing.Size(84, 20)
+        Me.ucrChkBy.Size = New System.Drawing.Size(166, 20)
         Me.ucrChkBy.TabIndex = 8
         '
         'ucrSelectorColumn
@@ -1582,11 +1583,11 @@ Partial Class dlgHypothesisTestsCalculator
         'ucrReceiverForTestColumn
         '
         Me.ucrReceiverForTestColumn.frmParent = Me
-        Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(41, 25)
+        Me.ucrReceiverForTestColumn.Location = New System.Drawing.Point(55, 25)
         Me.ucrReceiverForTestColumn.Margin = New System.Windows.Forms.Padding(2, 3, 2, 3)
         Me.ucrReceiverForTestColumn.Name = "ucrReceiverForTestColumn"
         Me.ucrReceiverForTestColumn.Selector = Nothing
-        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(390, 27)
+        Me.ucrReceiverForTestColumn.Size = New System.Drawing.Size(376, 27)
         Me.ucrReceiverForTestColumn.strNcFilePath = ""
         Me.ucrReceiverForTestColumn.TabIndex = 1
         Me.ucrReceiverForTestColumn.ucrSelector = Nothing

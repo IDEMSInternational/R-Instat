@@ -91,11 +91,11 @@ Partial Class dlgTidy
         Me.Controls.Add(Me.rdoNewDataFrame)
         Me.Controls.Add(Me.rdoDisplayInOutput)
         Me.Controls.Add(Me.ucrPnlOptions)
-        Me.Controls.Add(Me.ucrSaveNewDataFrame)
         Me.Controls.Add(Me.ucrModelReceiver)
         Me.Controls.Add(Me.lblModels)
         Me.Controls.Add(Me.ucrModelSelector)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrSaveNewDataFrame)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

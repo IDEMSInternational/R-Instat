@@ -74,6 +74,7 @@ Partial Class dlgCombineforGraphics
         '
         'ucrCombineGraphSelector
         '
+        Me.ucrCombineGraphSelector.bDropUnusedFilterLevels = False
         Me.ucrCombineGraphSelector.bShowHiddenColumns = False
         Me.ucrCombineGraphSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrCombineGraphSelector, "ucrCombineGraphSelector")

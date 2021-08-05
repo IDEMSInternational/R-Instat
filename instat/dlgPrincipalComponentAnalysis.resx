@@ -144,10 +144,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblExplanatoryVariables.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="cmdPCAOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>310, 254</value>
+    <value>309, 254</value>
   </data>
   <data name="cmdPCAOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>96, 23</value>
@@ -168,7 +168,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdPCAOptions.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="lblComponents.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -195,7 +195,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblComponents.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="ucrChkScaleData.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 228</value>
@@ -219,10 +219,14 @@
     <value>0</value>
   </data>
   <data name="ucrSaveResult.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 254</value>
+    <value>10, 256</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrSaveResult.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveResult.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>292, 24</value>
   </data>
   <data name="ucrSaveResult.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -237,7 +241,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveResult.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>8</value>
   </data>
   <data name="ucrNudNumberOfComp.Location" type="System.Drawing.Point, System.Drawing">
     <value>137, 202</value>
@@ -258,7 +262,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudNumberOfComp.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -272,7 +276,6 @@
   <data name="ucrSelectorPCA.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorPCA.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
@@ -292,7 +295,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorPCA.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 283</value>
@@ -313,7 +316,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -349,6 +352,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverMultiplePCA.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
 </root>
