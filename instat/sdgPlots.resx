@@ -119,10 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrChkDrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 358</value>
+    <value>273, 269</value>
   </data>
   <data name="ucrChkDrop.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 20</value>
+    <value>156, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrChkDrop.TabIndex" type="System.Int32, mscorlib">
@@ -141,7 +141,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudNumberofRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 254</value>
+    <value>169, 252</value>
   </data>
   <data name="ucrNudNumberofRows.Size" type="System.Drawing.Size, System.Drawing">
     <value>46, 20</value>
@@ -165,7 +165,7 @@
     <value>7, 254</value>
   </data>
   <data name="ucrChkNoOfRowsOrColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>146, 20</value>
+    <value>156, 20</value>
   </data>
   <data name="ucrChkNoOfRowsOrColumns.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -186,7 +186,7 @@
     <value>8, 13</value>
   </data>
   <data name="ucrChkIncludeFacets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>278, 20</value>
+    <value>121, 20</value>
   </data>
   <data name="ucrChkIncludeFacets.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -204,10 +204,10 @@
     <value>3</value>
   </data>
   <data name="ucrChkLabeler.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 332</value>
+    <value>273, 245</value>
   </data>
   <data name="ucrChkLabeler.Size" type="System.Drawing.Size, System.Drawing">
-    <value>268, 20</value>
+    <value>220, 20</value>
   </data>
   <data name="ucrChkLabeler.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -225,10 +225,10 @@
     <value>4</value>
   </data>
   <data name="ucrChkFreeSpace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 306</value>
+    <value>273, 221</value>
   </data>
   <data name="ucrChkFreeSpace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 20</value>
+    <value>100, 20</value>
   </data>
   <data name="ucrChkFreeSpace.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -246,10 +246,10 @@
     <value>5</value>
   </data>
   <data name="ucrChkFreeScalesY.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 280</value>
+    <value>273, 197</value>
   </data>
   <data name="ucrChkFreeScalesY.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 20</value>
+    <value>100, 20</value>
   </data>
   <data name="ucrChkFreeScalesY.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -267,10 +267,10 @@
     <value>6</value>
   </data>
   <data name="ucrChkFreeScalesX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 254</value>
+    <value>273, 173</value>
   </data>
   <data name="ucrChkFreeScalesX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 20</value>
+    <value>100, 20</value>
   </data>
   <data name="ucrChkFreeScalesX.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -288,10 +288,10 @@
     <value>7</value>
   </data>
   <data name="ucrChkMargin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 227</value>
+    <value>273, 149</value>
   </data>
   <data name="ucrChkMargin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 20</value>
+    <value>100, 20</value>
   </data>
   <data name="ucrChkMargin.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -400,7 +400,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFactor2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>310, 99</value>
+    <value>274, 99</value>
   </data>
   <data name="lblFactor2.Size" type="System.Drawing.Size, System.Drawing">
     <value>109, 13</value>
@@ -430,7 +430,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFactor1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>310, 44</value>
+    <value>272, 44</value>
   </data>
   <data name="lblFactor1.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 13</value>
@@ -454,7 +454,7 @@
     <value>13</value>
   </data>
   <data name="ucr2ndFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 112</value>
+    <value>273, 114</value>
   </data>
   <data name="ucr2ndFactorReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -478,7 +478,7 @@
     <value>14</value>
   </data>
   <data name="ucr1stFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 57</value>
+    <value>273, 59</value>
   </data>
   <data name="ucr1stFactorReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -691,7 +691,7 @@
     <value>6, 75</value>
   </data>
   <data name="ucrChkOverwriteLegendTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 20</value>
+    <value>100, 20</value>
   </data>
   <data name="ucrChkOverwriteLegendTitle.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -712,7 +712,7 @@
     <value>6, 51</value>
   </data>
   <data name="ucrChkDisplayLegendTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>287, 20</value>
+    <value>100, 20</value>
   </data>
   <data name="ucrChkDisplayLegendTitle.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -730,10 +730,10 @@
     <value>1</value>
   </data>
   <data name="ucrInputLegend.Location" type="System.Drawing.Point, System.Drawing">
-    <value>149, 74</value>
+    <value>133, 74</value>
   </data>
   <data name="ucrInputLegend.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 21</value>
+    <value>160, 21</value>
   </data>
   <data name="ucrInputLegend.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -1093,7 +1093,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudYaxisMarkSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 205</value>
+    <value>246, 205</value>
   </data>
   <data name="ucrNudYaxisMarkSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1114,7 +1114,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudXaxisMarkSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 169</value>
+    <value>246, 169</value>
   </data>
   <data name="ucrNudXaxisMarkSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1135,7 +1135,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudYSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 133</value>
+    <value>246, 133</value>
   </data>
   <data name="ucrNudYSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1156,7 +1156,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudXSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 97</value>
+    <value>246, 97</value>
   </data>
   <data name="ucrNudXSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1177,7 +1177,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudXAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 61</value>
+    <value>246, 61</value>
   </data>
   <data name="ucrNudXAngle.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1198,7 +1198,7 @@
     <value>4</value>
   </data>
   <data name="ucrInputLegendPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>283, 25</value>
+    <value>246, 25</value>
   </data>
   <data name="ucrInputLegendPosition.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -1222,7 +1222,7 @@
     <value>6, 205</value>
   </data>
   <data name="ucrChkYaxisTickMarkLabelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>234, 20</value>
   </data>
   <data name="ucrChkYaxisTickMarkLabelSize.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1243,7 +1243,7 @@
     <value>6, 169</value>
   </data>
   <data name="ucrChkXaxisTickMarkLabelSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>234, 20</value>
   </data>
   <data name="ucrChkXaxisTickMarkLabelSize.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1264,7 +1264,7 @@
     <value>6, 133</value>
   </data>
   <data name="ucrChkYaxisSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>234, 20</value>
   </data>
   <data name="ucrChkYaxisSize.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -1285,7 +1285,7 @@
     <value>6, 97</value>
   </data>
   <data name="ucrChkXaxisSize.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>234, 20</value>
   </data>
   <data name="ucrChkXaxisSize.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1306,7 +1306,7 @@
     <value>6, 61</value>
   </data>
   <data name="ucrChkXaxisAngle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>234, 20</value>
   </data>
   <data name="ucrChkXaxisAngle.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1327,7 +1327,7 @@
     <value>6, 25</value>
   </data>
   <data name="ucrChkLegendPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>204, 20</value>
   </data>
   <data name="ucrChkLegendPosition.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1471,7 +1471,7 @@
     <value>5</value>
   </data>
   <data name="ucrInputPolarCoordinates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 43</value>
+    <value>103, 43</value>
   </data>
   <data name="ucrInputPolarCoordinates.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 21</value>
@@ -1552,7 +1552,7 @@
     <value>12, 19</value>
   </data>
   <data name="ucrChkUsePolarCoordinates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 20</value>
+    <value>147, 20</value>
   </data>
   <data name="ucrChkUsePolarCoordinates.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -1576,7 +1576,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPi.Location" type="System.Drawing.Point, System.Drawing">
-    <value>191, 99</value>
+    <value>138, 100</value>
   </data>
   <data name="lblPi.Size" type="System.Drawing.Size, System.Drawing">
     <value>15, 13</value>
@@ -1603,7 +1603,7 @@
     <value>12, 70</value>
   </data>
   <data name="ucrChkDirectionAnticlockwise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>262, 20</value>
+    <value>155, 20</value>
   </data>
   <data name="ucrChkDirectionAnticlockwise.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -1621,7 +1621,7 @@
     <value>5</value>
   </data>
   <data name="ucrInputStartingAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>141, 96</value>
+    <value>92, 95</value>
   </data>
   <data name="ucrInputStartingAngle.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 21</value>
@@ -1669,7 +1669,7 @@
     <value>13, 41</value>
   </data>
   <data name="ucrChkSameScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 20</value>
+    <value>233, 20</value>
   </data>
   <data name="ucrChkSameScale.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -1690,7 +1690,7 @@
     <value>13, 15</value>
   </data>
   <data name="ucrChkHorizontalPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>290, 20</value>
+    <value>233, 20</value>
   </data>
   <data name="ucrChkHorizontalPlot.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -1738,7 +1738,7 @@
     <value>23, 210</value>
   </data>
   <data name="ucrChkAddColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>349, 20</value>
+    <value>243, 20</value>
   </data>
   <data name="ucrChkAddColour.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -1780,7 +1780,7 @@
     <value>7, 125</value>
   </data>
   <data name="ucrChkColourDiscrete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 20</value>
+    <value>246, 20</value>
   </data>
   <data name="ucrChkColourDiscrete.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -1798,7 +1798,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudColourScaleTransparency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 50</value>
+    <value>222, 45</value>
   </data>
   <data name="ucrNudColourScaleTransparency.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1819,7 +1819,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputColourScalePalette.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 19</value>
+    <value>222, 19</value>
   </data>
   <data name="ucrInputColourScalePalette.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -1840,7 +1840,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudColourScaleMapEnds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 100</value>
+    <value>222, 97</value>
   </data>
   <data name="ucrNudColourScaleMapEnds.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1861,7 +1861,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudColourScaleMapBegins.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 76</value>
+    <value>222, 71</value>
   </data>
   <data name="ucrNudColourScaleMapBegins.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1885,7 +1885,7 @@
     <value>7, 145</value>
   </data>
   <data name="ucrChkColourScaleReverseOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 18</value>
+    <value>246, 18</value>
   </data>
   <data name="ucrChkColourScaleReverseOrder.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2050,7 +2050,7 @@
     <value>7, 119</value>
   </data>
   <data name="ucrChkFillDiscrete.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 20</value>
+    <value>299, 20</value>
   </data>
   <data name="ucrChkFillDiscrete.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -2068,7 +2068,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudFillScaleTransparency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 46</value>
+    <value>222, 42</value>
   </data>
   <data name="ucrNudFillScaleTransparency.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 21</value>
@@ -2089,7 +2089,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudFillScaleMapEnds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 98</value>
+    <value>222, 94</value>
   </data>
   <data name="ucrNudFillScaleMapEnds.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 22</value>
@@ -2110,7 +2110,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudFillScaleMapBegins.Location" type="System.Drawing.Point, System.Drawing">
-    <value>332, 73</value>
+    <value>222, 68</value>
   </data>
   <data name="ucrNudFillScaleMapBegins.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 27</value>
@@ -2131,7 +2131,7 @@
     <value>3</value>
   </data>
   <data name="ucrInputFillScaleColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 12</value>
+    <value>222, 16</value>
   </data>
   <data name="ucrInputFillScaleColour.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 24</value>
@@ -2155,7 +2155,7 @@
     <value>7, 139</value>
   </data>
   <data name="ucrChkFillScaleReverseColourOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>375, 20</value>
+    <value>222, 20</value>
   </data>
   <data name="ucrChkFillScaleReverseColourOrder.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -2390,9 +2390,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>517, 502</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

@@ -133,7 +133,7 @@
     <value>3</value>
   </data>
   <data name="rdoDescendingFrequencies.Text" xml:space="preserve">
-    <value>Descending</value>
+    <value>Descending Frequencies</value>
   </data>
   <data name="&gt;&gt;rdoDescendingFrequencies.Name" xml:space="preserve">
     <value>rdoDescendingFrequencies</value>
@@ -160,7 +160,7 @@
     <value>2</value>
   </data>
   <data name="rdoAscendingFrequencies.Text" xml:space="preserve">
-    <value>Ascending</value>
+    <value>Ascending Frequencies</value>
   </data>
   <data name="&gt;&gt;rdoAscendingFrequencies.Name" xml:space="preserve">
     <value>rdoAscendingFrequencies</value>
@@ -253,7 +253,7 @@
     <value>10, 228</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 23</value>
+    <value>87, 23</value>
   </data>
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -280,16 +280,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 66</value>
+    <value>258, 64</value>
   </data>
   <data name="lblSelectedVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
+    <value>93, 13</value>
   </data>
   <data name="lblSelectedVariable.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="lblSelectedVariable.Text" xml:space="preserve">
-    <value>Selected Variables:</value>
+    <value>Selected Variable:</value>
   </data>
   <data name="&gt;&gt;lblSelectedVariable.Name" xml:space="preserve">
     <value>lblSelectedVariable</value>
@@ -523,7 +523,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 24</value>
+    <value>254, 24</value>
   </data>
   <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -550,7 +550,7 @@
     <value>435, 447</value>
   </data>
   <data name="ucrNudGroups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 280</value>
+    <value>131, 279</value>
   </data>
   <data name="ucrNudGroups.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -595,7 +595,7 @@
     <value>10, 280</value>
   </data>
   <data name="ucrChkGroupData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
+    <value>115, 20</value>
   </data>
   <data name="ucrChkGroupData.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -613,13 +613,13 @@
     <value>8</value>
   </data>
   <data name="ucrReceiverWeights.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 256</value>
+    <value>131, 256</value>
   </data>
   <data name="ucrReceiverWeights.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverWeights.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 20</value>
+    <value>120, 20</value>
   </data>
   <data name="ucrReceiverWeights.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -640,7 +640,7 @@
     <value>10, 256</value>
   </data>
   <data name="ucrChkWeights.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 20</value>
+    <value>114, 20</value>
   </data>
   <data name="ucrChkWeights.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -661,7 +661,7 @@
     <value>10, 304</value>
   </data>
   <data name="ucrChkFlip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 20</value>
+    <value>145, 20</value>
   </data>
   <data name="ucrChkFlip.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -727,10 +727,10 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Frequencies</value>
+    <value>One Way Frequencies</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgFrequencies</value>
+    <value>dlgOneWayFrequencies</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

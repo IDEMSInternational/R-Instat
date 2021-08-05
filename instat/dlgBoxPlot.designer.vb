@@ -237,7 +237,6 @@ Partial Class dlgBoxplot
         'ucrInputSummaries
         '
         Me.ucrInputSummaries.AddQuotesIfUnrecognised = True
-        Me.ucrInputSummaries.GetSetSelectedIndex = -1
         Me.ucrInputSummaries.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSummaries, "ucrInputSummaries")
         Me.ucrInputSummaries.Name = "ucrInputSummaries"

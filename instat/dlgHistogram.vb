@@ -73,11 +73,11 @@ Public Class dlgHistogram
 
         ucrPnlOptions.AddRadioButton(rdoHistogram)
         ucrPnlOptions.AddRadioButton(rdoDensity)
-        ucrPnlOptions.AddRadioButton(rdoFrequency)
+        ucrPnlOptions.AddRadioButton(rdoFrequencyPolygon)
 
         ucrPnlOptions.AddFunctionNamesCondition(rdoHistogram, "geom_histogram")
         ucrPnlOptions.AddFunctionNamesCondition(rdoDensity, "geom_density")
-        ucrPnlOptions.AddFunctionNamesCondition(rdoFrequency, "geom_freqpoly")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoFrequencyPolygon, "geom_freqpoly")
 
         ucrHistogramSelector.SetParameter(New RParameter("data", 0))
         ucrHistogramSelector.SetParameterIsrfunction()
@@ -212,7 +212,7 @@ Public Class dlgHistogram
         For Each clsParam In clsRaesFunction.clsParameters
             If clsParam.strArgumentName = "x" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorforHist.bSingleVariable) Then
                 ucrVariablesAsFactorforHist.Add(clsParam.strArgumentValue)
-            ElseIf (clsParam.strArgumentName = "fill" AndAlso rdoHistogram.Checked) OrElse (clsParam.strArgumentName = "colour" AndAlso (rdoFrequency.Checked OrElse rdoDensity.Checked)) Then
+            ElseIf (clsParam.strArgumentName = "fill" AndAlso rdoHistogram.Checked) OrElse (clsParam.strArgumentName = "colour" AndAlso (rdoFrequencyPolygon.Checked OrElse rdoDensity.Checked)) Then
                 ucrFactorReceiver.Add(clsParam.strArgumentValue)
             End If
         Next
@@ -240,7 +240,7 @@ Public Class dlgHistogram
             If Not ucrSaveHist.bUserTyped Then
                 ucrSaveHist.SetPrefix("density")
             End If
-        ElseIf rdoFrequency.Checked Then
+        ElseIf rdoFrequencyPolygon.Checked Then
             clsRgeomPlotFunction.SetRCommand("geom_freqpoly")
             ucrFactorReceiver.ChangeParameterName("colour")
             If Not ucrSaveHist.bUserTyped Then
@@ -256,8 +256,8 @@ Public Class dlgHistogram
             cmdHistogramOptions.Text = "Histogram Options"
         ElseIf rdoDensity.Checked Then
             cmdHistogramOptions.Text = "Density Options"
-        ElseIf rdoFrequency.Checked Then
-            cmdHistogramOptions.Text = "Frequency Options"
+        ElseIf rdoFrequencyPolygon.Checked Then
+            cmdHistogramOptions.Text = "Frequency Polygon Options"
         End If
     End Sub
 
@@ -302,9 +302,9 @@ Public Class dlgHistogram
         End If
     End Sub
 
-    Private Sub rdoFrequencyPolygon_KeyPress(sender As Object, e As KeyPressEventArgs) Handles rdoFrequency.KeyPress
+    Private Sub rdoFrequencyPolygon_KeyPress(sender As Object, e As KeyPressEventArgs) Handles rdoFrequencyPolygon.KeyPress
         If e.KeyChar = vbCr Then
-            rdoFrequency.Checked = True
+            rdoFrequencyPolygon.Checked = True
         End If
     End Sub
 
