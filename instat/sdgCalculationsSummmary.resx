@@ -118,28 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="ucrDefineFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 55</value>
-  </data>
-  <data name="ucrDefineFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>770, 359</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="ucrDefineFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
-  <data name="&gt;&gt;ucrDefineFilter.Name" xml:space="preserve">
-    <value>ucrDefineFilter</value>
-  </data>
-  <data name="&gt;&gt;ucrDefineFilter.Type" xml:space="preserve">
-    <value>instat.ucrFilter, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrDefineFilter.Parent" xml:space="preserve">
-    <value>tbMain</value>
-  </data>
-  <data name="&gt;&gt;ucrDefineFilter.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrReceiverByOrSort.Location" type="System.Drawing.Point, System.Drawing">
     <value>239, 143</value>
   </data>
@@ -150,6 +128,7 @@
   <data name="ucrReceiverByOrSort.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 100</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrReceiverByOrSort.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
   </data>
@@ -163,7 +142,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;ucrReceiverByOrSort.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>0</value>
   </data>
   <data name="ucrInputCalculationName.Location" type="System.Drawing.Point, System.Drawing">
     <value>373, 439</value>
@@ -184,7 +163,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;ucrInputCalculationName.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>1</value>
   </data>
   <data name="lblReceiverLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -211,7 +190,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;lblReceiverLabel.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="ucrInputResultName.Location" type="System.Drawing.Point, System.Drawing">
     <value>102, 439</value>
@@ -232,7 +211,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;ucrInputResultName.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="lblResultName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -259,7 +238,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;lblResultName.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="lblCalcName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -286,7 +265,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;lblCalcName.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="rdoSaveCalcAndResult.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -313,13 +292,13 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;rdoSaveCalcAndResult.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="rdoSaveCalculation.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="rdoSaveCalculation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>230, 476</value>
+    <value>186, 476</value>
   </data>
   <data name="rdoSaveCalculation.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 17</value>
@@ -340,13 +319,13 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;rdoSaveCalculation.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="rdoDoNotSave.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="rdoDoNotSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>420, 476</value>
+    <value>330, 476</value>
   </data>
   <data name="rdoDoNotSave.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 17</value>
@@ -367,7 +346,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;rdoDoNotSave.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="lblType.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -394,7 +373,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;lblType.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="ucrInputType.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 28</value>
@@ -415,7 +394,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;ucrInputType.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="ucrSelectorBy.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 114</value>
@@ -439,28 +418,7 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;ucrSelectorBy.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="ucrPnlSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 466</value>
-  </data>
-  <data name="ucrPnlSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>520, 38</value>
-  </data>
-  <data name="ucrPnlSave.TabIndex" type="System.Int32, mscorlib">
-    <value>20</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlSave.Name" xml:space="preserve">
-    <value>ucrPnlSave</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlSave.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlSave.Parent" xml:space="preserve">
-    <value>tbMain</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlSave.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="ucrCalcSummary.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 50</value>
@@ -481,6 +439,48 @@
     <value>tbMain</value>
   </data>
   <data name="&gt;&gt;ucrCalcSummary.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="ucrDefineFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 55</value>
+  </data>
+  <data name="ucrDefineFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>770, 359</value>
+  </data>
+  <data name="ucrDefineFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ucrDefineFilter.Name" xml:space="preserve">
+    <value>ucrDefineFilter</value>
+  </data>
+  <data name="&gt;&gt;ucrDefineFilter.Type" xml:space="preserve">
+    <value>instat.ucrFilter, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDefineFilter.Parent" xml:space="preserve">
+    <value>tbMain</value>
+  </data>
+  <data name="&gt;&gt;ucrDefineFilter.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="ucrPnlSave.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 466</value>
+  </data>
+  <data name="ucrPnlSave.Size" type="System.Drawing.Size, System.Drawing">
+    <value>427, 38</value>
+  </data>
+  <data name="ucrPnlSave.TabIndex" type="System.Int32, mscorlib">
+    <value>20</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlSave.Name" xml:space="preserve">
+    <value>ucrPnlSave</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlSave.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlSave.Parent" xml:space="preserve">
+    <value>tbMain</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlSave.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="tbMain.Location" type="System.Drawing.Point, System.Drawing">
@@ -509,225 +509,6 @@
   </data>
   <data name="&gt;&gt;tbMain.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrManipulations.Name" xml:space="preserve">
-    <value>ucrManipulations</value>
-  </data>
-  <data name="&gt;&gt;ucrManipulations.Type" xml:space="preserve">
-    <value>instat.ucrReorder, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrManipulations.Parent" xml:space="preserve">
-    <value>tbManipulations</value>
-  </data>
-  <data name="&gt;&gt;ucrManipulations.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cmdManipDuplicate.Name" xml:space="preserve">
-    <value>cmdManipDuplicate</value>
-  </data>
-  <data name="&gt;&gt;cmdManipDuplicate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdManipDuplicate.Parent" xml:space="preserve">
-    <value>tbManipulations</value>
-  </data>
-  <data name="&gt;&gt;cmdManipDuplicate.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cmdManipDelete.Name" xml:space="preserve">
-    <value>cmdManipDelete</value>
-  </data>
-  <data name="&gt;&gt;cmdManipDelete.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdManipDelete.Parent" xml:space="preserve">
-    <value>tbManipulations</value>
-  </data>
-  <data name="&gt;&gt;cmdManipDelete.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;lblManipulations.Name" xml:space="preserve">
-    <value>lblManipulations</value>
-  </data>
-  <data name="&gt;&gt;lblManipulations.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblManipulations.Parent" xml:space="preserve">
-    <value>tbManipulations</value>
-  </data>
-  <data name="&gt;&gt;lblManipulations.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;cmdManipEdit.Name" xml:space="preserve">
-    <value>cmdManipEdit</value>
-  </data>
-  <data name="&gt;&gt;cmdManipEdit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdManipEdit.Parent" xml:space="preserve">
-    <value>tbManipulations</value>
-  </data>
-  <data name="&gt;&gt;cmdManipEdit.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;cmdManipAdd.Name" xml:space="preserve">
-    <value>cmdManipAdd</value>
-  </data>
-  <data name="&gt;&gt;cmdManipAdd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdManipAdd.Parent" xml:space="preserve">
-    <value>tbManipulations</value>
-  </data>
-  <data name="&gt;&gt;cmdManipAdd.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tbManipulations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tbManipulations.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbManipulations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>795, 507</value>
-  </data>
-  <data name="tbManipulations.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="tbManipulations.Text" xml:space="preserve">
-    <value>Manipulations</value>
-  </data>
-  <data name="&gt;&gt;tbManipulations.Name" xml:space="preserve">
-    <value>tbManipulations</value>
-  </data>
-  <data name="&gt;&gt;tbManipulations.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbManipulations.Parent" xml:space="preserve">
-    <value>tbSummaryCalcs</value>
-  </data>
-  <data name="&gt;&gt;tbManipulations.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;lstSubCalcs.Name" xml:space="preserve">
-    <value>lstSubCalcs</value>
-  </data>
-  <data name="&gt;&gt;lstSubCalcs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ListView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lstSubCalcs.Parent" xml:space="preserve">
-    <value>tbSubCalcs</value>
-  </data>
-  <data name="&gt;&gt;lstSubCalcs.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcDuplicate.Name" xml:space="preserve">
-    <value>cmdSubCalcDuplicate</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcDuplicate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcDuplicate.Parent" xml:space="preserve">
-    <value>tbSubCalcs</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcDuplicate.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcDelete.Name" xml:space="preserve">
-    <value>cmdSubCalcDelete</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcDelete.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcDelete.Parent" xml:space="preserve">
-    <value>tbSubCalcs</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcDelete.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcAdd.Name" xml:space="preserve">
-    <value>cmdSubCalcAdd</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcAdd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcAdd.Parent" xml:space="preserve">
-    <value>tbSubCalcs</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcAdd.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;lblSubCalcs.Name" xml:space="preserve">
-    <value>lblSubCalcs</value>
-  </data>
-  <data name="&gt;&gt;lblSubCalcs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblSubCalcs.Parent" xml:space="preserve">
-    <value>tbSubCalcs</value>
-  </data>
-  <data name="&gt;&gt;lblSubCalcs.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcEdit.Name" xml:space="preserve">
-    <value>cmdSubCalcEdit</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcEdit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcEdit.Parent" xml:space="preserve">
-    <value>tbSubCalcs</value>
-  </data>
-  <data name="&gt;&gt;cmdSubCalcEdit.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="tbSubCalcs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tbSubCalcs.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbSubCalcs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>795, 507</value>
-  </data>
-  <data name="tbSubCalcs.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tbSubCalcs.Text" xml:space="preserve">
-    <value>Sub Calculations</value>
-  </data>
-  <data name="&gt;&gt;tbSubCalcs.Name" xml:space="preserve">
-    <value>tbSubCalcs</value>
-  </data>
-  <data name="&gt;&gt;tbSubCalcs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbSubCalcs.Parent" xml:space="preserve">
-    <value>tbSummaryCalcs</value>
-  </data>
-  <data name="&gt;&gt;tbSubCalcs.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="tbSummaryCalcs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="tbSummaryCalcs.Size" type="System.Drawing.Size, System.Drawing">
-    <value>803, 533</value>
-  </data>
-  <data name="tbSummaryCalcs.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tbSummaryCalcs.Name" xml:space="preserve">
-    <value>tbSummaryCalcs</value>
-  </data>
-  <data name="&gt;&gt;tbSummaryCalcs.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbSummaryCalcs.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tbSummaryCalcs.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="ucrManipulations.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 32</value>
@@ -873,6 +654,33 @@
   <data name="&gt;&gt;cmdManipAdd.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="tbManipulations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbManipulations.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbManipulations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>795, 507</value>
+  </data>
+  <data name="tbManipulations.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="tbManipulations.Text" xml:space="preserve">
+    <value>Manipulations</value>
+  </data>
+  <data name="&gt;&gt;tbManipulations.Name" xml:space="preserve">
+    <value>tbManipulations</value>
+  </data>
+  <data name="&gt;&gt;tbManipulations.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbManipulations.Parent" xml:space="preserve">
+    <value>tbSummaryCalcs</value>
+  </data>
+  <data name="&gt;&gt;tbManipulations.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="lstSubCalcs.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 33</value>
   </data>
@@ -1017,11 +825,59 @@
   <data name="&gt;&gt;cmdSubCalcEdit.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
+  <data name="tbSubCalcs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="tbSubCalcs.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="tbSubCalcs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>795, 507</value>
+  </data>
+  <data name="tbSubCalcs.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="tbSubCalcs.Text" xml:space="preserve">
+    <value>Sub Calculations</value>
+  </data>
+  <data name="&gt;&gt;tbSubCalcs.Name" xml:space="preserve">
+    <value>tbSubCalcs</value>
+  </data>
+  <data name="&gt;&gt;tbSubCalcs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbSubCalcs.Parent" xml:space="preserve">
+    <value>tbSummaryCalcs</value>
+  </data>
+  <data name="&gt;&gt;tbSubCalcs.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tbSummaryCalcs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="tbSummaryCalcs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>803, 533</value>
+  </data>
+  <data name="tbSummaryCalcs.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbSummaryCalcs.Name" xml:space="preserve">
+    <value>tbSummaryCalcs</value>
+  </data>
+  <data name="&gt;&gt;tbSummaryCalcs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbSummaryCalcs.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;tbSummaryCalcs.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrBaseSubDialog.Location" type="System.Drawing.Point, System.Drawing">
     <value>332, 533</value>
   </data>
   <data name="ucrBaseSubDialog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 30</value>
+    <value>142, 30</value>
   </data>
   <data name="ucrBaseSubDialog.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

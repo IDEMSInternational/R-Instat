@@ -304,8 +304,6 @@ Partial Class ucrFilter
         '
         'ucrDatePicker
         '
-        Me.ucrDatePicker.DateValue = New Date(2021, 7, 1, 11, 18, 0, 573)
-        Me.ucrDatePicker.Format = "dd MMM yyyy"
         resources.ApplyResources(Me.ucrDatePicker, "ucrDatePicker")
         Me.ucrDatePicker.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDatePicker.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)

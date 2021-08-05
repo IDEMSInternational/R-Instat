@@ -160,7 +160,7 @@
     <value>278, 64</value>
   </data>
   <data name="cmdAddCondition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 45</value>
+    <value>110, 29</value>
   </data>
   <data name="cmdAddCondition.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -184,7 +184,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdToggleSelectAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>659, 369</value>
+    <value>674, 363</value>
   </data>
   <data name="cmdToggleSelectAll.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 23</value>
@@ -292,7 +292,7 @@
     <value>277, 298</value>
   </data>
   <data name="cmdClearConditions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 29</value>
+    <value>110, 29</value>
   </data>
   <data name="cmdClearConditions.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -322,7 +322,7 @@
     <value>277, 230</value>
   </data>
   <data name="mcdEditCondition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 29</value>
+    <value>110, 29</value>
   </data>
   <data name="mcdEditCondition.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -352,7 +352,7 @@
     <value>277, 264</value>
   </data>
   <data name="cmdRemoveCondition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 29</value>
+    <value>110, 29</value>
   </data>
   <data name="cmdRemoveCondition.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -628,7 +628,7 @@
     <value>18</value>
   </data>
   <data name="grpNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>457, 71</value>
+    <value>398, 66</value>
   </data>
   <data name="grpNumeric.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -1321,7 +1321,7 @@
     <value>4</value>
   </data>
   <data name="ucrInputFilterName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 363</value>
+    <value>100, 364</value>
   </data>
   <data name="ucrInputFilterName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
@@ -1345,13 +1345,13 @@
     <value>5</value>
   </data>
   <data name="ucrFilterPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 337</value>
+    <value>100, 337</value>
   </data>
   <data name="ucrFilterPreview.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>7, 6, 7, 6</value>
   </data>
   <data name="ucrFilterPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>258, 21</value>
+    <value>280, 21</value>
   </data>
   <data name="ucrFilterPreview.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -1396,13 +1396,13 @@
     <value>True</value>
   </data>
   <data name="ucrFactorLevels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>456, 65</value>
+    <value>398, 65</value>
   </data>
   <data name="ucrFactorLevels.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrFactorLevels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>296, 297</value>
+    <value>354, 297</value>
   </data>
   <data name="ucrFactorLevels.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1477,7 +1477,7 @@
     <value>277, 196</value>
   </data>
   <data name="cmdCombineWithAndOr.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 29</value>
+    <value>110, 29</value>
   </data>
   <data name="cmdCombineWithAndOr.TabIndex" type="System.Int32, mscorlib">
     <value>182</value>
