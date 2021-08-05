@@ -113,6 +113,7 @@ Partial Class sdgCorruptionCalculatedColumns
         '
         'ucrCalculatedColumnsSelector
         '
+        Me.ucrCalculatedColumnsSelector.bDropUnusedFilterLevels = False
         Me.ucrCalculatedColumnsSelector.bShowHiddenColumns = False
         Me.ucrCalculatedColumnsSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrCalculatedColumnsSelector, "ucrCalculatedColumnsSelector")

@@ -54,6 +54,7 @@ Partial Class sdgFactorDataFrame
         '
         'ucrSelectorSubDlgFactorDatafrme
         '
+        Me.ucrSelectorSubDlgFactorDatafrme.bDropUnusedFilterLevels = False
         Me.ucrSelectorSubDlgFactorDatafrme.bShowHiddenColumns = False
         Me.ucrSelectorSubDlgFactorDatafrme.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorSubDlgFactorDatafrme, "ucrSelectorSubDlgFactorDatafrme")

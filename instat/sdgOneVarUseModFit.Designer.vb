@@ -139,6 +139,7 @@ Partial Class sdgOneVarUseModFit
         'ucrInputQuantiles
         '
         Me.ucrInputQuantiles.AddQuotesIfUnrecognised = True
+        Me.ucrInputQuantiles.GetSetSelectedIndex = -1
         Me.ucrInputQuantiles.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputQuantiles, "ucrInputQuantiles")
         Me.ucrInputQuantiles.Name = "ucrInputQuantiles"

@@ -232,10 +232,10 @@
     <value>478, 414</value>
   </data>
   <data name="ucrSubBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 379</value>
+    <value>159, 381</value>
   </data>
   <data name="ucrSubBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>159, 30</value>
   </data>
   <data name="ucrSubBase.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
