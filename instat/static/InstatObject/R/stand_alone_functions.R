@@ -2315,6 +2315,28 @@ other_rose_plots <- function(data, type1_col_name, type2_col_name, date_col_name
   }
 }
 
+#This function creates a wrapper around windRose and pollutionRose functions from openair package
+wind_pollution_rose <- function(mydata, date_name, pollutant, type1_col_name, type2_col_name, ...) {
+  type <-  "default"
+  if (!missing(type1_col_name) && !missing(type2_col_name)) {
+    type <- c(type1_col_name, type2_col_name)
+  }
+  if (missing(type1_col_name) && !missing(type2_col_name)) {
+    type <- type2_col_name
+  }
+  if (!missing(type1_col_name) && missing(type2_col_name)) {
+    type <- type1_col_name
+  }
+  if (!("date" %in% colnames(mydata))) {
+    mydata <- dplyr::rename(mydata, date = !!date_name)
+  }
+  if (missing(pollutant)) {
+    openair::windRose(mydata = mydata, type = type, ...)
+  } else {
+    openair::pollutionRose(mydata = mydata, type = type, pollutant, ...)
+  }
+}
+
 n_non_numeric <- function(x) {
   x <- as.character(x)
   sum(is.na(x) != is.na(suppressWarnings(as.numeric(x))))

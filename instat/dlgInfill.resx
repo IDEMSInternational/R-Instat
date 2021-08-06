@@ -210,6 +210,27 @@
   <data name="&gt;&gt;lblLimits.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="ucrDtpStartDate.Location" type="System.Drawing.Point, System.Drawing">
+    <value>71, 45</value>
+  </data>
+  <data name="ucrDtpStartDate.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 20</value>
+  </data>
+  <data name="ucrDtpStartDate.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.Name" xml:space="preserve">
+    <value>ucrDtpStartDate</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.Type" xml:space="preserve">
+    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrDtpStartDate.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="lblStartingFrom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -238,27 +259,6 @@
     <value>grpOptions</value>
   </data>
   <data name="&gt;&gt;lblStartingFrom.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkCompleteYears.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 47</value>
-  </data>
-  <data name="ucrChkCompleteYears.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 20</value>
-  </data>
-  <data name="ucrChkCompleteYears.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCompleteYears.Name" xml:space="preserve">
-    <value>ucrChkCompleteYears</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCompleteYears.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCompleteYears.Parent" xml:space="preserve">
-    <value>grpOptions</value>
-  </data>
-  <data name="&gt;&gt;ucrChkCompleteYears.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="ucrChkResort.Location" type="System.Drawing.Point, System.Drawing">
@@ -325,7 +325,7 @@
     <value>4</value>
   </data>
   <data name="ucrDtpEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 72</value>
+    <value>71, 72</value>
   </data>
   <data name="ucrDtpEndDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 20</value>
@@ -352,7 +352,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblEndDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 76</value>
+    <value>12, 76</value>
   </data>
   <data name="lblEndDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 13</value>
@@ -405,25 +405,25 @@
   <data name="&gt;&gt;lblStartDate.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="ucrDtpStartDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>77, 45</value>
+  <data name="ucrChkCompleteYears.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 47</value>
   </data>
-  <data name="ucrDtpStartDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 20</value>
+  <data name="ucrChkCompleteYears.Size" type="System.Drawing.Size, System.Drawing">
+    <value>194, 20</value>
   </data>
-  <data name="ucrDtpStartDate.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
+  <data name="ucrChkCompleteYears.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
   </data>
-  <data name="&gt;&gt;ucrDtpStartDate.Name" xml:space="preserve">
-    <value>ucrDtpStartDate</value>
+  <data name="&gt;&gt;ucrChkCompleteYears.Name" xml:space="preserve">
+    <value>ucrChkCompleteYears</value>
   </data>
-  <data name="&gt;&gt;ucrDtpStartDate.Type" xml:space="preserve">
-    <value>instat.ucrDateTimePicker, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  <data name="&gt;&gt;ucrChkCompleteYears.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrDtpStartDate.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkCompleteYears.Parent" xml:space="preserve">
     <value>grpOptions</value>
   </data>
-  <data name="&gt;&gt;ucrDtpStartDate.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkCompleteYears.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
   <data name="grpOptions.Location" type="System.Drawing.Point, System.Drawing">

@@ -260,7 +260,13 @@ Public Class dlgFromLibrary
         End If
 
         If strRClass = "list" Then
-            clsImportFunction.AddParameter("data_tables", strParameterValue:=strSelectedDataName)
+            'some lists could be supplied in formats that R-Instat doesn't directly recognise as data frames
+            'so always explicitly coerce the supplied list of data to type data.frame
+            Dim clsLApplyFunction As New RFunction
+            clsLApplyFunction.SetRCommand("lapply")
+            clsLApplyFunction.AddParameter("X", strParameterValue:=strSelectedDataName, iPosition:=0)
+            clsLApplyFunction.AddParameter("FUN", strParameterValue:="data.frame", iPosition:=1)
+            clsImportFunction.AddParameter("data_tables", clsRFunctionParameter:=clsLApplyFunction, iPosition:=0)
         Else
             Dim clsListFunction As New RFunction 'defines the list function. list(x=x)
             Dim clsListParameterFunction As New RFunction 'defines the function that act as list parameters e.g list(y=fortify.zoo(x))

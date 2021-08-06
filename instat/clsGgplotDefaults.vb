@@ -148,6 +148,18 @@ Public Class GgplotDefaults
         End Get
     End Property
 
+    Public Shared ReadOnly Property clsAnnotateFunction As RFunction
+        Get
+            Dim clsAnnotateTempFunc As New RFunction
+
+            clsAnnotateTempFunc.SetPackageName("ggplot2")
+            clsAnnotateTempFunc.SetRCommand("annotate")
+            clsAnnotateTempFunc.AddParameter("geom", Chr(34) & "text" & Chr(34), iPosition:=15)
+
+            Return clsAnnotateTempFunc
+        End Get
+    End Property
+
     Public Shared ReadOnly Property clsAesFunction As RFunction
         Get
             Dim clslocalAesTempFunc As New RFunction
