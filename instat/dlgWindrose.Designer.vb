@@ -96,9 +96,9 @@ Partial Class dlgWindrose
         '
         'cmdWindroseOptions
         '
-        Me.cmdWindroseOptions.Location = New System.Drawing.Point(10, 201)
+        Me.cmdWindroseOptions.Location = New System.Drawing.Point(10, 198)
         Me.cmdWindroseOptions.Name = "cmdWindroseOptions"
-        Me.cmdWindroseOptions.Size = New System.Drawing.Size(105, 23)
+        Me.cmdWindroseOptions.Size = New System.Drawing.Size(148, 23)
         Me.cmdWindroseOptions.TabIndex = 11
         Me.cmdWindroseOptions.Text = "Windrose Options"
         Me.cmdWindroseOptions.UseVisualStyleBackColor = True
@@ -177,7 +177,7 @@ Partial Class dlgWindrose
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 319)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(260, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(319, 24)
         Me.ucrSaveGraph.TabIndex = 9
         '
         'ucrNudNoOfColumns

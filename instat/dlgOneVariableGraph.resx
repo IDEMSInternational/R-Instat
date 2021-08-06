@@ -150,7 +150,7 @@
     <value>10, 201</value>
   </data>
   <data name="cmdGraphOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>145, 23</value>
   </data>
   <data name="cmdGraphOptions.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -294,7 +294,7 @@
     <value>10, 238</value>
   </data>
   <data name="ucrChkFlip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 20</value>
+    <value>210, 20</value>
   </data>
   <data name="ucrChkFlip.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>

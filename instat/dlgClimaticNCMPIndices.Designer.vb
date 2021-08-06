@@ -289,7 +289,7 @@ Partial Class dlgClimaticNCMPIndices
         Me.ucrSaveIndices.Location = New System.Drawing.Point(10, 276)
         Me.ucrSaveIndices.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveIndices.Name = "ucrSaveIndices"
-        Me.ucrSaveIndices.Size = New System.Drawing.Size(289, 22)
+        Me.ucrSaveIndices.Size = New System.Drawing.Size(320, 24)
         Me.ucrSaveIndices.TabIndex = 1
         '
         'ucrBase

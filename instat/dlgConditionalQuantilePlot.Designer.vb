@@ -57,7 +57,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         'ucrBase
         '
-        Me.ucrBase.Location = New System.Drawing.Point(9, 428)
+        Me.ucrBase.Location = New System.Drawing.Point(7, 437)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(410, 52)
         Me.ucrBase.TabIndex = 0
@@ -142,10 +142,10 @@ Partial Class dlgConditionalQuantilePlot
         '
         'ucrSavePlot
         '
-        Me.ucrSavePlot.Location = New System.Drawing.Point(9, 401)
+        Me.ucrSavePlot.Location = New System.Drawing.Point(9, 413)
         Me.ucrSavePlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlot.Name = "ucrSavePlot"
-        Me.ucrSavePlot.Size = New System.Drawing.Size(251, 24)
+        Me.ucrSavePlot.Size = New System.Drawing.Size(320, 22)
         Me.ucrSavePlot.TabIndex = 72
         '
         'lblTypes
@@ -282,7 +282,7 @@ Partial Class dlgConditionalQuantilePlot
         'ucrReceiverMultiplePred
         '
         Me.ucrReceiverMultiplePred.frmParent = Me
-        Me.ucrReceiverMultiplePred.Location = New System.Drawing.Point(282, 314)
+        Me.ucrReceiverMultiplePred.Location = New System.Drawing.Point(282, 309)
         Me.ucrReceiverMultiplePred.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMultiplePred.Name = "ucrReceiverMultiplePred"
         Me.ucrReceiverMultiplePred.Selector = Nothing
@@ -349,7 +349,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.lblVarPredicted.AutoSize = True
         Me.lblVarPredicted.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblVarPredicted.Location = New System.Drawing.Point(284, 293)
+        Me.lblVarPredicted.Location = New System.Drawing.Point(284, 288)
         Me.lblVarPredicted.Name = "lblVarPredicted"
         Me.lblVarPredicted.Size = New System.Drawing.Size(130, 13)
         Me.lblVarPredicted.TabIndex = 10
@@ -383,7 +383,7 @@ Partial Class dlgConditionalQuantilePlot
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(423, 480)
+        Me.ClientSize = New System.Drawing.Size(415, 490)
         Me.Controls.Add(Me.ucrNudMinNumPoints)
         Me.Controls.Add(Me.ucrReceiverStatistics)
         Me.Controls.Add(Me.lblVarPredicted)

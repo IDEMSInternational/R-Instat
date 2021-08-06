@@ -121,6 +121,10 @@
   <data name="lblSelected.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblSelected.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelected.Location" type="System.Drawing.Point, System.Drawing">
     <value>248, 80</value>
@@ -146,6 +150,9 @@
   <data name="&gt;&gt;lblSelected.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
+  <data name="rdoDispSepOutputWindow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoDispSepOutputWindow.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 238</value>
   </data>
@@ -169,6 +176,9 @@
   </data>
   <data name="&gt;&gt;rdoDispSepOutputWindow.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="rdoDispOutputWindow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoDispOutputWindow.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 261</value>
@@ -197,6 +207,9 @@
   <data name="rdoBottom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoBottom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoBottom.Location" type="System.Drawing.Point, System.Drawing">
     <value>325, 301</value>
   </data>
@@ -223,6 +236,9 @@
   </data>
   <data name="rdoTop.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoTop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoTop.Location" type="System.Drawing.Point, System.Drawing">
     <value>325, 278</value>
@@ -251,6 +267,9 @@
   <data name="lblDisplayFrom.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblDisplayFrom.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblDisplayFrom.Location" type="System.Drawing.Point, System.Drawing">
     <value>248, 279</value>
   </data>
@@ -278,6 +297,9 @@
   <data name="lblNumberofRows.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblNumberofRows.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblNumberofRows.Location" type="System.Drawing.Point, System.Drawing">
     <value>248, 258</value>
   </data>
@@ -301,6 +323,9 @@
   </data>
   <data name="&gt;&gt;lblNumberofRows.ZOrder" xml:space="preserve">
     <value>12</value>
+  </data>
+  <data name="rdoHTMLOutputWindow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoHTMLOutputWindow.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 284</value>
@@ -326,18 +351,20 @@
   <data name="&gt;&gt;rdoHTMLOutputWindow.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="rdoViewAll.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
   <data name="rdoViewAll.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoViewAll.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoViewAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 12</value>
+    <value>67, 6</value>
   </data>
   <data name="rdoViewAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 28</value>
+    <value>140, 34</value>
   </data>
   <data name="rdoViewAll.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -366,11 +393,14 @@
   <data name="rdoViewSelectedColumnsRows.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
+  <data name="rdoViewSelectedColumnsRows.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoViewSelectedColumnsRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>194, 12</value>
+    <value>207, 6</value>
   </data>
   <data name="rdoViewSelectedColumnsRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 28</value>
+    <value>143, 34</value>
   </data>
   <data name="rdoViewSelectedColumnsRows.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -394,10 +424,10 @@
     <value>1</value>
   </data>
   <data name="ucrPnlViewData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>70, 8</value>
+    <value>56, 5</value>
   </data>
   <data name="ucrPnlViewData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 35</value>
+    <value>298, 35</value>
   </data>
   <data name="ucrPnlViewData.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -596,6 +626,9 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>19</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

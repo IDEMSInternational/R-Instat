@@ -88,6 +88,7 @@ Partial Class dlgCanonicalCorrelationAnalysis
         '
         'ucrSelectorCCA
         '
+        Me.ucrSelectorCCA.bDropUnusedFilterLevels = False
         Me.ucrSelectorCCA.bShowHiddenColumns = False
         Me.ucrSelectorCCA.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorCCA, "ucrSelectorCCA")

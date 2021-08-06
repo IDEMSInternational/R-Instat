@@ -75,7 +75,7 @@ Partial Class dlgCompareSummary
         Me.rdoContinuous.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoContinuous.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoContinuous.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoContinuous.Location = New System.Drawing.Point(62, 12)
+        Me.rdoContinuous.Location = New System.Drawing.Point(67, 12)
         Me.rdoContinuous.Name = "rdoContinuous"
         Me.rdoContinuous.Size = New System.Drawing.Size(98, 27)
         Me.rdoContinuous.TabIndex = 1
@@ -92,7 +92,7 @@ Partial Class dlgCompareSummary
         Me.rdoCategorical.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoCategorical.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoCategorical.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoCategorical.Location = New System.Drawing.Point(254, 12)
+        Me.rdoCategorical.Location = New System.Drawing.Point(259, 12)
         Me.rdoCategorical.Name = "rdoCategorical"
         Me.rdoCategorical.Size = New System.Drawing.Size(98, 27)
         Me.rdoCategorical.TabIndex = 3
@@ -109,7 +109,7 @@ Partial Class dlgCompareSummary
         Me.rdoBinary.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoBinary.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoBinary.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoBinary.Location = New System.Drawing.Point(158, 12)
+        Me.rdoBinary.Location = New System.Drawing.Point(163, 12)
         Me.rdoBinary.Name = "rdoBinary"
         Me.rdoBinary.Size = New System.Drawing.Size(98, 27)
         Me.rdoBinary.TabIndex = 2
@@ -140,12 +140,12 @@ Partial Class dlgCompareSummary
         Me.ucrChkIgnoreMissing.Checked = False
         Me.ucrChkIgnoreMissing.Location = New System.Drawing.Point(10, 307)
         Me.ucrChkIgnoreMissing.Name = "ucrChkIgnoreMissing"
-        Me.ucrChkIgnoreMissing.Size = New System.Drawing.Size(197, 20)
+        Me.ucrChkIgnoreMissing.Size = New System.Drawing.Size(274, 20)
         Me.ucrChkIgnoreMissing.TabIndex = 13
         '
         'ucrPnlObservationType
         '
-        Me.ucrPnlObservationType.Location = New System.Drawing.Point(58, 4)
+        Me.ucrPnlObservationType.Location = New System.Drawing.Point(63, 4)
         Me.ucrPnlObservationType.Name = "ucrPnlObservationType"
         Me.ucrPnlObservationType.Size = New System.Drawing.Size(300, 50)
         Me.ucrPnlObservationType.TabIndex = 0
@@ -209,7 +209,7 @@ Partial Class dlgCompareSummary
         Me.ucrChkStoreResults.Checked = False
         Me.ucrChkStoreResults.Location = New System.Drawing.Point(10, 255)
         Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        Me.ucrChkStoreResults.Size = New System.Drawing.Size(148, 20)
+        Me.ucrChkStoreResults.Size = New System.Drawing.Size(273, 20)
         Me.ucrChkStoreResults.TabIndex = 11
         '
         'dlgCompareSummary

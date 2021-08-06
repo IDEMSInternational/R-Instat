@@ -88,6 +88,7 @@ Partial Class sdgCalculationsSummmary
         '
         'tbMain
         '
+        Me.tbMain.Controls.Add(Me.ucrDefineFilter)
         Me.tbMain.Controls.Add(Me.ucrReceiverByOrSort)
         Me.tbMain.Controls.Add(Me.ucrInputCalculationName)
         Me.tbMain.Controls.Add(Me.lblReceiverLabel)
@@ -100,9 +101,8 @@ Partial Class sdgCalculationsSummmary
         Me.tbMain.Controls.Add(Me.lblType)
         Me.tbMain.Controls.Add(Me.ucrInputType)
         Me.tbMain.Controls.Add(Me.ucrSelectorBy)
-        Me.tbMain.Controls.Add(Me.ucrCalcSummary)
-        Me.tbMain.Controls.Add(Me.ucrDefineFilter)
         Me.tbMain.Controls.Add(Me.ucrPnlSave)
+        Me.tbMain.Controls.Add(Me.ucrCalcSummary)
         resources.ApplyResources(Me.tbMain, "tbMain")
         Me.tbMain.Name = "tbMain"
         Me.tbMain.UseVisualStyleBackColor = True

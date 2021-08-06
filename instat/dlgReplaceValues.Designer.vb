@@ -229,6 +229,7 @@ Partial Class dlgReplaceValues
         '
         'ucrSelectorReplace
         '
+        Me.ucrSelectorReplace.bDropUnusedFilterLevels = False
         Me.ucrSelectorReplace.bShowHiddenColumns = False
         Me.ucrSelectorReplace.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorReplace, "ucrSelectorReplace")

@@ -69,6 +69,7 @@ Partial Class dlgCalculateTreatmentDifferences
         'ucrInputFactorOption2
         '
         Me.ucrInputFactorOption2.AddQuotesIfUnrecognised = True
+        Me.ucrInputFactorOption2.GetSetSelectedIndex = -1
         Me.ucrInputFactorOption2.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputFactorOption2, "ucrInputFactorOption2")
         Me.ucrInputFactorOption2.Name = "ucrInputFactorOption2"
@@ -76,6 +77,7 @@ Partial Class dlgCalculateTreatmentDifferences
         'ucrInputFactorOption1
         '
         Me.ucrInputFactorOption1.AddQuotesIfUnrecognised = True
+        Me.ucrInputFactorOption1.GetSetSelectedIndex = -1
         Me.ucrInputFactorOption1.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputFactorOption1, "ucrInputFactorOption1")
         Me.ucrInputFactorOption1.Name = "ucrInputFactorOption1"

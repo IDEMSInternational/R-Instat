@@ -33,11 +33,11 @@ Partial Class dlgTreemap
         Me.lblFill = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
         Me.lblTextColour = New System.Windows.Forms.Label()
+        Me.ucrColourText = New instat.ucrColors()
         Me.lblTileColour = New System.Windows.Forms.Label()
+        Me.ucrColourTile = New instat.ucrColors()
         Me.lblSummary = New System.Windows.Forms.Label()
         Me.ucrInputSummary = New instat.ucrInputComboBox()
-        Me.ucrColourText = New instat.ucrColors()
-        Me.ucrColourTile = New instat.ucrColors()
         Me.ucrReceiverFill = New instat.ucrReceiverSingle()
         Me.ucrInputSymbol = New instat.ucrInputTextBox()
         Me.ucrInputLabel = New instat.ucrInputComboBox()
@@ -125,10 +125,26 @@ Partial Class dlgTreemap
         resources.ApplyResources(Me.lblTextColour, "lblTextColour")
         Me.lblTextColour.Name = "lblTextColour"
         '
+        'ucrColourText
+        '
+        Me.ucrColourText.AddQuotesIfUnrecognised = True
+        Me.ucrColourText.GetSetSelectedIndex = -1
+        Me.ucrColourText.IsReadOnly = False
+        resources.ApplyResources(Me.ucrColourText, "ucrColourText")
+        Me.ucrColourText.Name = "ucrColourText"
+        '
         'lblTileColour
         '
         resources.ApplyResources(Me.lblTileColour, "lblTileColour")
         Me.lblTileColour.Name = "lblTileColour"
+        '
+        'ucrColourTile
+        '
+        Me.ucrColourTile.AddQuotesIfUnrecognised = True
+        Me.ucrColourTile.GetSetSelectedIndex = -1
+        Me.ucrColourTile.IsReadOnly = False
+        resources.ApplyResources(Me.ucrColourTile, "ucrColourTile")
+        Me.ucrColourTile.Name = "ucrColourTile"
         '
         'lblSummary
         '
@@ -138,23 +154,10 @@ Partial Class dlgTreemap
         'ucrInputSummary
         '
         Me.ucrInputSummary.AddQuotesIfUnrecognised = True
+        Me.ucrInputSummary.GetSetSelectedIndex = -1
         Me.ucrInputSummary.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSummary, "ucrInputSummary")
         Me.ucrInputSummary.Name = "ucrInputSummary"
-        '
-        'ucrColourText
-        '
-        Me.ucrColourText.AddQuotesIfUnrecognised = True
-        Me.ucrColourText.IsReadOnly = False
-        resources.ApplyResources(Me.ucrColourText, "ucrColourText")
-        Me.ucrColourText.Name = "ucrColourText"
-        '
-        'ucrColourTile
-        '
-        Me.ucrColourTile.AddQuotesIfUnrecognised = True
-        Me.ucrColourTile.IsReadOnly = False
-        resources.ApplyResources(Me.ucrColourTile, "ucrColourTile")
-        Me.ucrColourTile.Name = "ucrColourTile"
         '
         'ucrReceiverFill
         '
@@ -176,6 +179,7 @@ Partial Class dlgTreemap
         'ucrInputLabel
         '
         Me.ucrInputLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputLabel.GetSetSelectedIndex = -1
         Me.ucrInputLabel.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLabel, "ucrInputLabel")
         Me.ucrInputLabel.Name = "ucrInputLabel"
