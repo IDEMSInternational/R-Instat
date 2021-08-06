@@ -122,7 +122,7 @@
     <value>133, 34</value>
   </data>
   <data name="ucrChkTwoDigitYear.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>88, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrChkTwoDigitYear.TabIndex" type="System.Int32, mscorlib">
@@ -253,7 +253,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>512, 477</value>
+    <value>517, 477</value>
   </data>
   <data name="txtTextDateFormats.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 17</value>
@@ -329,7 +329,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="lblUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 144</value>
+    <value>111, 144</value>
   </data>
   <data name="lblUnits.Size" type="System.Drawing.Size, System.Drawing">
     <value>34, 13</value>
@@ -353,7 +353,7 @@ Examples:
     <value>1</value>
   </data>
   <data name="ucrDtpSpecifyOrigin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 109</value>
+    <value>121, 110</value>
   </data>
   <data name="ucrDtpSpecifyOrigin.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
@@ -374,7 +374,7 @@ Examples:
     <value>2</value>
   </data>
   <data name="ucrInputUnits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 140</value>
+    <value>145, 140</value>
   </data>
   <data name="ucrInputUnits.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 21</value>
@@ -622,6 +622,9 @@ Examples:
   <data name="&gt;&gt;grpFormatField.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="rdoSpecifyFormat.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="rdoSpecifyFormat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -629,7 +632,7 @@ Examples:
     <value>15, 110</value>
   </data>
   <data name="rdoSpecifyFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 17</value>
+    <value>95, 17</value>
   </data>
   <data name="rdoSpecifyFormat.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -679,6 +682,9 @@ Examples:
   <data name="&gt;&gt;rdoOrigin.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="rdoDefaultFormat.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
   <data name="rdoDefaultFormat.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
@@ -686,7 +692,7 @@ Examples:
     <value>15, 52</value>
   </data>
   <data name="rdoDefaultFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 17</value>
+    <value>94, 17</value>
   </data>
   <data name="rdoDefaultFormat.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -710,7 +716,7 @@ Examples:
     <value>8, 47</value>
   </data>
   <data name="ucrPnlFormat.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 88</value>
+    <value>99, 88</value>
   </data>
   <data name="ucrPnlFormat.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -752,7 +758,7 @@ Examples:
     <value>9</value>
   </data>
   <data name="ucrInputFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 110</value>
+    <value>122, 110</value>
   </data>
   <data name="ucrInputFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
@@ -773,7 +779,7 @@ Examples:
     <value>10</value>
   </data>
   <data name="ucrInputOrigin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 80</value>
+    <value>121, 80</value>
   </data>
   <data name="ucrInputOrigin.Size" type="System.Drawing.Size, System.Drawing">
     <value>128, 21</value>
@@ -1124,7 +1130,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="lblYearFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 50</value>
+    <value>148, 50</value>
   </data>
   <data name="lblYearFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 13</value>
@@ -1154,7 +1160,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="lblMonthFormat.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 141</value>
+    <value>148, 141</value>
   </data>
   <data name="lblMonthFormat.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 13</value>
@@ -1178,7 +1184,7 @@ Examples:
     <value>11</value>
   </data>
   <data name="ucrInputMonthOption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 158</value>
+    <value>151, 158</value>
   </data>
   <data name="ucrInputMonthOption.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 21</value>
@@ -1199,7 +1205,7 @@ Examples:
     <value>12</value>
   </data>
   <data name="ucrInputYearOption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>129, 67</value>
+    <value>151, 67</value>
   </data>
   <data name="ucrInputYearOption.Size" type="System.Drawing.Size, System.Drawing">
     <value>99, 21</value>
@@ -1427,7 +1433,7 @@ Examples:
     <value>238, 51</value>
   </data>
   <data name="grpThreeColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 292</value>
+    <value>267, 292</value>
   </data>
   <data name="grpThreeColumns.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -1484,7 +1490,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="rdoThreeColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 8</value>
+    <value>324, 8</value>
   </data>
   <data name="rdoThreeColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 28</value>
@@ -1520,7 +1526,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="rdoTwoColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>193, 8</value>
+    <value>189, 8</value>
   </data>
   <data name="rdoTwoColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 28</value>
@@ -1556,7 +1562,7 @@ Examples:
     <value>NoControl</value>
   </data>
   <data name="rdoSingleColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>58, 8</value>
+    <value>54, 8</value>
   </data>
   <data name="rdoSingleColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 28</value>
@@ -1583,7 +1589,7 @@ Examples:
     <value>5</value>
   </data>
   <data name="ucrPnlDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 4</value>
+    <value>10, 4</value>
   </data>
   <data name="ucrPnlDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>495, 35</value>
@@ -1772,7 +1778,7 @@ Examples:
     <value>238, 51</value>
   </data>
   <data name="grpTwoColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 139</value>
+    <value>267, 139</value>
   </data>
   <data name="grpTwoColumns.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

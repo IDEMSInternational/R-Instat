@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -330,7 +330,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpFacet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>684, 423</value>
+    <value>499, 423</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tbpFacet.TabIndex" type="System.Int32, mscorlib">
@@ -370,7 +370,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpLayers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>684, 423</value>
+    <value>499, 423</value>
   </data>
   <data name="tbpLayers.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -2844,38 +2844,11 @@
   <data name="&gt;&gt;ucrInputGraphTitle.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="tbpTitles.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tbpTitles.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbpTitles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>684, 423</value>
-  </data>
-  <data name="tbpTitles.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="tbpTitles.Text" xml:space="preserve">
-    <value>Titles</value>
-  </data>
-  <data name="&gt;&gt;tbpTitles.Name" xml:space="preserve">
-    <value>tbpTitles</value>
-  </data>
-  <data name="&gt;&gt;tbpTitles.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpTitles.Parent" xml:space="preserve">
-    <value>tbpPlotsOptions</value>
-  </data>
-  <data name="&gt;&gt;tbpTitles.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="ucrXAxis.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 1</value>
   </data>
   <data name="ucrXAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>684, 334</value>
+    <value>512, 322</value>
   </data>
   <data name="ucrXAxis.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2898,8 +2871,6 @@
   <data name="ucrYAxis.Size" type="System.Drawing.Size, System.Drawing">
     <value>496, 329</value>
   </data>
-  <data name="tbpXAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>658, 423</value>
   <data name="ucrYAxis.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
@@ -3017,8 +2988,6 @@
   <data name="&gt;&gt;ucrChkYaxisTickMarkLabelSize.Name" xml:space="preserve">
     <value>ucrChkYaxisTickMarkLabelSize</value>
   </data>
-  <data name="ucrYAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>658, 334</value>
   <data name="&gt;&gt;ucrChkYaxisTickMarkLabelSize.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
@@ -3043,8 +3012,6 @@
   <data name="&gt;&gt;ucrChkYaxisSize.Name" xml:space="preserve">
     <value>ucrChkYaxisSize</value>
   </data>
-  <data name="tbpYAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>658, 423</value>
   <data name="&gt;&gt;ucrChkYaxisSize.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
@@ -3540,8 +3507,6 @@
   <data name="&gt;&gt;ucrInputStartingAngle.Type" xml:space="preserve">
     <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="tbpTheme.Size" type="System.Drawing.Size, System.Drawing">
-    <value>684, 423</value>
   <data name="&gt;&gt;ucrInputStartingAngle.Parent" xml:space="preserve">
     <value>grpPolarCordinates</value>
   </data>
@@ -3573,7 +3538,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputPolarCoordinates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 43</value>
+    <value>103, 43</value>
   </data>
   <data name="ucrInputPolarCoordinates.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 21</value>
@@ -3681,7 +3646,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPi.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 100</value>
+    <value>138, 100</value>
   </data>
   <data name="lblPi.Size" type="System.Drawing.Size, System.Drawing">
     <value>15, 13</value>
@@ -3726,7 +3691,7 @@
     <value>5</value>
   </data>
   <data name="ucrInputStartingAngle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 95</value>
+    <value>92, 95</value>
   </data>
   <data name="ucrInputStartingAngle.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 21</value>
@@ -3787,33 +3752,6 @@
   </data>
   <data name="&gt;&gt;ucrChkHorizontalPlot.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="tbpCoordinates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tbpCoordinates.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbpCoordinates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>684, 423</value>
-  </data>
-  <data name="tbpCoordinates.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
-  <data name="tbpCoordinates.Text" xml:space="preserve">
-    <value>Coordinates</value>
-  </data>
-  <data name="&gt;&gt;tbpCoordinates.Name" xml:space="preserve">
-    <value>tbpCoordinates</value>
-  </data>
-  <data name="&gt;&gt;tbpCoordinates.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpCoordinates.Parent" xml:space="preserve">
-    <value>tbpPlotsOptions</value>
-  </data>
-  <data name="&gt;&gt;tbpCoordinates.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
   <data name="ucrChkAddColour.Location" type="System.Drawing.Point, System.Drawing">
     <value>23, 210</value>
@@ -4023,7 +3961,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudColourScaleTransparency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 45</value>
+    <value>222, 45</value>
   </data>
   <data name="ucrNudColourScaleTransparency.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -4065,7 +4003,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudColourScaleMapEnds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 97</value>
+    <value>222, 97</value>
   </data>
   <data name="ucrNudColourScaleMapEnds.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -4086,7 +4024,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudColourScaleMapBegins.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 71</value>
+    <value>222, 71</value>
   </data>
   <data name="ucrNudColourScaleMapBegins.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -4413,7 +4351,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudFillScaleTransparency.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 42</value>
+    <value>222, 42</value>
   </data>
   <data name="ucrNudFillScaleTransparency.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 21</value>
@@ -4434,7 +4372,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudFillScaleMapEnds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 94</value>
+    <value>222, 94</value>
   </data>
   <data name="ucrNudFillScaleMapEnds.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 22</value>
@@ -4455,7 +4393,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudFillScaleMapBegins.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 68</value>
+    <value>222, 68</value>
   </data>
   <data name="ucrNudFillScaleMapBegins.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 27</value>
@@ -4637,80 +4575,8 @@
   <data name="&gt;&gt;lblFillScaleTransparency.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
-  <data name="grpFillScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 30</value>
-  </data>
-  <data name="grpFillScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>388, 163</value>
-  </data>
-  <data name="grpFillScale.TabIndex" type="System.Int32, mscorlib">
-    <value>23</value>
-  </data>
-  <data name="grpFillScale.Text" xml:space="preserve">
-    <value>Fill Scale</value>
-  </data>
-  <data name="&gt;&gt;grpFillScale.Name" xml:space="preserve">
-    <value>grpFillScale</value>
-  </data>
-  <data name="&gt;&gt;grpFillScale.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpFillScale.Parent" xml:space="preserve">
-    <value>tbpColour</value>
-  </data>
-  <data name="&gt;&gt;grpFillScale.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="tbpColour.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 22</value>
-  </data>
-  <data name="tbpColour.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>3, 3, 3, 3</value>
-  </data>
-  <data name="tbpColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>684, 423</value>
-  </data>
-  <data name="tbpColour.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="tbpColour.Text" xml:space="preserve">
-    <value>Colour</value>
-  </data>
-  <data name="&gt;&gt;tbpColour.Name" xml:space="preserve">
-    <value>tbpColour</value>
-  </data>
-  <data name="&gt;&gt;tbpColour.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpColour.Parent" xml:space="preserve">
-    <value>tbpPlotsOptions</value>
-  </data>
-  <data name="&gt;&gt;tbpColour.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="tbpPlotsOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>1, 3</value>
-  </data>
-  <data name="tbpPlotsOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>666, 449</value>
-  </data>
-  <data name="tbpPlotsOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;tbpPlotsOptions.Name" xml:space="preserve">
-    <value>tbpPlotsOptions</value>
-  </data>
-  <data name="&gt;&gt;tbpPlotsOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbpPlotsOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;tbpPlotsOptions.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
   <data name="ucrBaseSubdialog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 458</value>
+    <value>164, 458</value>
   </data>
   <data name="ucrBaseSubdialog.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 28</value>
@@ -4737,7 +4603,6 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>668, 502</value>
     <value>521, 502</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">

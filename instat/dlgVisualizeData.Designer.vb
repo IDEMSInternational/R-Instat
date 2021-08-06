@@ -50,7 +50,7 @@ Partial Class dlgVisualizeData
         Me.rdoVisDat.FlatAppearance.BorderSize = 2
         Me.rdoVisDat.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoVisDat.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoVisDat.Location = New System.Drawing.Point(65, 11)
+        Me.rdoVisDat.Location = New System.Drawing.Point(60, 11)
         Me.rdoVisDat.Name = "rdoVisDat"
         Me.rdoVisDat.Size = New System.Drawing.Size(100, 28)
         Me.rdoVisDat.TabIndex = 1
@@ -66,7 +66,7 @@ Partial Class dlgVisualizeData
         Me.rdoVisMiss.FlatAppearance.BorderSize = 2
         Me.rdoVisMiss.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoVisMiss.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoVisMiss.Location = New System.Drawing.Point(161, 11)
+        Me.rdoVisMiss.Location = New System.Drawing.Point(156, 11)
         Me.rdoVisMiss.Name = "rdoVisMiss"
         Me.rdoVisMiss.Size = New System.Drawing.Size(100, 28)
         Me.rdoVisMiss.TabIndex = 2
@@ -82,7 +82,7 @@ Partial Class dlgVisualizeData
         Me.rdoVisGuess.FlatAppearance.BorderSize = 2
         Me.rdoVisGuess.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoVisGuess.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.rdoVisGuess.Location = New System.Drawing.Point(257, 11)
+        Me.rdoVisGuess.Location = New System.Drawing.Point(252, 11)
         Me.rdoVisGuess.Name = "rdoVisGuess"
         Me.rdoVisGuess.Size = New System.Drawing.Size(100, 28)
         Me.rdoVisGuess.TabIndex = 3
@@ -94,7 +94,7 @@ Partial Class dlgVisualizeData
         'rdoWholeDataFrame
         '
         Me.rdoWholeDataFrame.AutoSize = True
-        Me.rdoWholeDataFrame.Location = New System.Drawing.Point(257, 69)
+        Me.rdoWholeDataFrame.Location = New System.Drawing.Point(268, 69)
         Me.rdoWholeDataFrame.Name = "rdoWholeDataFrame"
         Me.rdoWholeDataFrame.Size = New System.Drawing.Size(80, 17)
         Me.rdoWholeDataFrame.TabIndex = 6
@@ -105,7 +105,7 @@ Partial Class dlgVisualizeData
         'rdoSelectedColumn
         '
         Me.rdoSelectedColumn.AutoSize = True
-        Me.rdoSelectedColumn.Location = New System.Drawing.Point(257, 92)
+        Me.rdoSelectedColumn.Location = New System.Drawing.Point(268, 92)
         Me.rdoSelectedColumn.Name = "rdoSelectedColumn"
         Me.rdoSelectedColumn.Size = New System.Drawing.Size(113, 17)
         Me.rdoSelectedColumn.TabIndex = 7
@@ -143,7 +143,7 @@ Partial Class dlgVisualizeData
         'lblSampling
         '
         Me.lblSampling.AutoSize = True
-        Me.lblSampling.Location = New System.Drawing.Point(201, 241)
+        Me.lblSampling.Location = New System.Drawing.Point(205, 241)
         Me.lblSampling.Name = "lblSampling"
         Me.lblSampling.Size = New System.Drawing.Size(94, 13)
         Me.lblSampling.TabIndex = 9
@@ -194,7 +194,7 @@ Partial Class dlgVisualizeData
         'ucrReceiverVisualizeData
         '
         Me.ucrReceiverVisualizeData.frmParent = Me
-        Me.ucrReceiverVisualizeData.Location = New System.Drawing.Point(260, 119)
+        Me.ucrReceiverVisualizeData.Location = New System.Drawing.Point(268, 119)
         Me.ucrReceiverVisualizeData.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverVisualizeData.Name = "ucrReceiverVisualizeData"
         Me.ucrReceiverVisualizeData.Selector = Nothing
@@ -205,14 +205,14 @@ Partial Class dlgVisualizeData
         '
         'ucrPnlSelectData
         '
-        Me.ucrPnlSelectData.Location = New System.Drawing.Point(245, 69)
+        Me.ucrPnlSelectData.Location = New System.Drawing.Point(256, 69)
         Me.ucrPnlSelectData.Name = "ucrPnlSelectData"
-        Me.ucrPnlSelectData.Size = New System.Drawing.Size(142, 49)
+        Me.ucrPnlSelectData.Size = New System.Drawing.Size(132, 49)
         Me.ucrPnlSelectData.TabIndex = 5
         '
         'ucrPnlVisualizeData
         '
-        Me.ucrPnlVisualizeData.Location = New System.Drawing.Point(49, 1)
+        Me.ucrPnlVisualizeData.Location = New System.Drawing.Point(44, 1)
         Me.ucrPnlVisualizeData.Name = "ucrPnlVisualizeData"
         Me.ucrPnlVisualizeData.Size = New System.Drawing.Size(324, 46)
         Me.ucrPnlVisualizeData.TabIndex = 0
@@ -222,7 +222,7 @@ Partial Class dlgVisualizeData
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 321)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(320, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(282, 24)
         Me.ucrSaveGraph.TabIndex = 17
         '
         'ucrSelectorVisualizeData

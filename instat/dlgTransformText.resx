@@ -580,7 +580,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewColName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>322, 22</value>
+    <value>280, 22</value>
   </data>
   <data name="ucrNewColName.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>

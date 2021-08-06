@@ -253,7 +253,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoCumulative.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 14</value>
+    <value>119, 14</value>
   </data>
   <data name="rdoCumulative.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 27</value>
@@ -289,7 +289,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoExceedance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>215, 14</value>
+    <value>203, 14</value>
   </data>
   <data name="rdoExceedance.Size" type="System.Drawing.Size, System.Drawing">
     <value>86, 27</value>
@@ -361,10 +361,10 @@
     <value>None</value>
   </data>
   <data name="ucrPnlOption.Location" type="System.Drawing.Point, System.Drawing">
-    <value>123, 9</value>
+    <value>101, 9</value>
   </data>
   <data name="ucrPnlOption.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 38</value>
+    <value>211, 38</value>
   </data>
   <data name="ucrPnlOption.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -430,7 +430,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveCumDist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 24</value>
+    <value>255, 25</value>
   </data>
   <data name="ucrSaveCumDist.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>

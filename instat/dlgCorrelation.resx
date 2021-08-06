@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoKendall.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 18</value>
+    <value>91, 18</value>
   </data>
   <data name="rdoKendall.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 17</value>
@@ -217,7 +217,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoPearson.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 18</value>
+    <value>15, 18</value>
   </data>
   <data name="rdoPearson.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 17</value>
@@ -247,7 +247,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoSpearman.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 18</value>
+    <value>164, 18</value>
   </data>
   <data name="rdoSpearman.Size" type="System.Drawing.Size, System.Drawing">
     <value>73, 17</value>
@@ -271,10 +271,10 @@
     <value>2</value>
   </data>
   <data name="ucrPnlMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 16</value>
+    <value>8, 16</value>
   </data>
   <data name="ucrPnlMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 24</value>
+    <value>229, 24</value>
   </data>
   <data name="ucrPnlMethod.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -292,10 +292,10 @@
     <value>3</value>
   </data>
   <data name="grpMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 232</value>
+    <value>9, 232</value>
   </data>
   <data name="grpMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>215, 45</value>
+    <value>246, 45</value>
   </data>
   <data name="grpMethod.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -319,7 +319,7 @@
     <value>NoControl</value>
   </data>
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>333, 330</value>
+    <value>286, 330</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 25</value>
@@ -379,7 +379,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoPairwise.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 18</value>
+    <value>146, 18</value>
   </data>
   <data name="rdoPairwise.Size" type="System.Drawing.Size, System.Drawing">
     <value>64, 17</value>
@@ -406,7 +406,7 @@
     <value>3, 16</value>
   </data>
   <data name="ucrPnlCompletePairwise.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 24</value>
+    <value>189, 24</value>
   </data>
   <data name="ucrPnlCompletePairwise.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -424,10 +424,10 @@
     <value>2</value>
   </data>
   <data name="grpMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>223, 232</value>
+    <value>257, 232</value>
   </data>
   <data name="grpMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>239, 45</value>
+    <value>225, 45</value>
   </data>
   <data name="grpMissing.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -454,7 +454,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblConfInterval.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 286</value>
+    <value>6, 286</value>
   </data>
   <data name="lblConfInterval.Size" type="System.Drawing.Size, System.Drawing">
     <value>102, 13</value>
@@ -487,7 +487,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoTwoColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>114, 10</value>
+    <value>102, 10</value>
   </data>
   <data name="rdoTwoColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 27</value>
@@ -523,7 +523,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoMultipleColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>239, 10</value>
+    <value>227, 10</value>
   </data>
   <data name="rdoMultipleColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>127, 27</value>
@@ -580,13 +580,13 @@
     <value>0</value>
   </data>
   <data name="ucrSaveModel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 335</value>
+    <value>9, 335</value>
   </data>
   <data name="ucrSaveModel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>320, 22</value>
+    <value>257, 24</value>
   </data>
   <data name="ucrSaveModel.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -625,7 +625,7 @@
     <value>2</value>
   </data>
   <data name="ucrChkCorrelationMatrix.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 309</value>
+    <value>9, 309</value>
   </data>
   <data name="ucrChkCorrelationMatrix.Size" type="System.Drawing.Size, System.Drawing">
     <value>171, 20</value>
@@ -646,7 +646,7 @@
     <value>3</value>
   </data>
   <data name="ucrPnlColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>98, 6</value>
+    <value>86, 6</value>
   </data>
   <data name="ucrPnlColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>284, 36</value>
@@ -673,7 +673,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>466, 416</value>
+    <value>487, 416</value>
   </data>
   <data name="ucrReceiverSecondColumn.Location" type="System.Drawing.Point, System.Drawing">
     <value>258, 142</value>
@@ -724,7 +724,7 @@
     <value>15</value>
   </data>
   <data name="ucrSelectorCorrelation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 40</value>
+    <value>10, 40</value>
   </data>
   <data name="ucrSelectorCorrelation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -748,7 +748,7 @@
     <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 361</value>
+    <value>9, 361</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
