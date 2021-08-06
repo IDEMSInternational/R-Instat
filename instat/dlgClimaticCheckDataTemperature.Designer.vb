@@ -72,6 +72,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlType = New instat.UcrPanel()
         Me.grpLogicalCalculatedColumns = New System.Windows.Forms.GroupBox()
+        Me.grpLogicalCalculatedColumns.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblStation
@@ -401,6 +402,7 @@ Partial Class dlgClimaticCheckDataTemperature
         '
         'grpLogicalCalculatedColumns
         '
+        Me.grpLogicalCalculatedColumns.Controls.Add(Me.ucrChkIncludeCalculatedColumns)
         resources.ApplyResources(Me.grpLogicalCalculatedColumns, "grpLogicalCalculatedColumns")
         Me.grpLogicalCalculatedColumns.Name = "grpLogicalCalculatedColumns"
         Me.grpLogicalCalculatedColumns.TabStop = False
@@ -412,7 +414,6 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.Controls.Add(Me.lblCoeff)
         Me.Controls.Add(Me.ucrNudCoeff)
         Me.Controls.Add(Me.ucrChkIncludeLogicalColumns)
-        Me.Controls.Add(Me.ucrChkIncludeCalculatedColumns)
         Me.Controls.Add(Me.ucrChkRangeElement2)
         Me.Controls.Add(Me.lblNudRangeElement2Max)
         Me.Controls.Add(Me.lblNudRangeElement1Max)
@@ -460,6 +461,7 @@ Partial Class dlgClimaticCheckDataTemperature
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgClimaticCheckDataTemperature"
+        Me.grpLogicalCalculatedColumns.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

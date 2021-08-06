@@ -251,7 +251,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoAnomalies.Location" type="System.Drawing.Point, System.Drawing">
-    <value>212, 12</value>
+    <value>213, 12</value>
   </data>
   <data name="rdoAnomalies.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 27</value>
@@ -287,7 +287,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoDifferences.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 12</value>
+    <value>117, 12</value>
   </data>
   <data name="rdoDifferences.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 27</value>
@@ -320,7 +320,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveSecondCol.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 22</value>
+    <value>320, 24</value>
   </data>
   <data name="ucrSaveSecondCol.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -368,7 +368,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>425, 431</value>
+    <value>415, 427</value>
   </data>
   <data name="ucrReceiverStationElement.Location" type="System.Drawing.Point, System.Drawing">
     <value>261, 153</value>
@@ -464,7 +464,7 @@
     <value>8</value>
   </data>
   <data name="ucrPnlCompare.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 8</value>
+    <value>101, 8</value>
   </data>
   <data name="ucrPnlCompare.Size" type="System.Drawing.Size, System.Drawing">
     <value>225, 35</value>
