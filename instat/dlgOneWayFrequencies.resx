@@ -133,7 +133,7 @@
     <value>3</value>
   </data>
   <data name="rdoDescendingFrequencies.Text" xml:space="preserve">
-    <value>Descending</value>
+    <value>Descending Frequencies</value>
   </data>
   <data name="&gt;&gt;rdoDescendingFrequencies.Name" xml:space="preserve">
     <value>rdoDescendingFrequencies</value>
@@ -160,7 +160,7 @@
     <value>2</value>
   </data>
   <data name="rdoAscendingFrequencies.Text" xml:space="preserve">
-    <value>Ascending</value>
+    <value>Ascending Frequencies</value>
   </data>
   <data name="&gt;&gt;rdoAscendingFrequencies.Name" xml:space="preserve">
     <value>rdoAscendingFrequencies</value>
@@ -253,13 +253,13 @@
     <value>10, 228</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>151, 23</value>
+    <value>87, 23</value>
   </data>
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
   </data>
   <data name="cmdOptions.Text" xml:space="preserve">
-    <value>Frequency Options</value>
+    <value>Options</value>
   </data>
   <data name="&gt;&gt;cmdOptions.Name" xml:space="preserve">
     <value>cmdOptions</value>
@@ -280,16 +280,16 @@
     <value>NoControl</value>
   </data>
   <data name="lblSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 63</value>
+    <value>258, 64</value>
   </data>
   <data name="lblSelectedVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>98, 13</value>
+    <value>93, 13</value>
   </data>
   <data name="lblSelectedVariable.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
   </data>
   <data name="lblSelectedVariable.Text" xml:space="preserve">
-    <value>Selected Variables:</value>
+    <value>Selected Variable:</value>
   </data>
   <data name="&gt;&gt;lblSelectedVariable.Name" xml:space="preserve">
     <value>lblSelectedVariable</value>
@@ -727,7 +727,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Frequencies</value>
+    <value>One Way Frequencies</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgOneWayFrequencies</value>
