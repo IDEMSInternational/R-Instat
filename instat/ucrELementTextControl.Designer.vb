@@ -84,6 +84,7 @@ Partial Class ucrELementTextControl
         'ucrTextColors
         '
         Me.ucrTextColors.AddQuotesIfUnrecognised = True
+        Me.ucrTextColors.GetSetSelectedIndex = -1
         Me.ucrTextColors.IsReadOnly = False
         resources.ApplyResources(Me.ucrTextColors, "ucrTextColors")
         Me.ucrTextColors.Name = "ucrTextColors"
@@ -189,6 +190,7 @@ Partial Class ucrELementTextControl
         'ucrInputTextFace
         '
         Me.ucrInputTextFace.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextFace.GetSetSelectedIndex = -1
         Me.ucrInputTextFace.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputTextFace, "ucrInputTextFace")
         Me.ucrInputTextFace.Name = "ucrInputTextFace"
@@ -196,6 +198,7 @@ Partial Class ucrELementTextControl
         'ucrInputTextFamily
         '
         Me.ucrInputTextFamily.AddQuotesIfUnrecognised = True
+        Me.ucrInputTextFamily.GetSetSelectedIndex = -1
         Me.ucrInputTextFamily.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputTextFamily, "ucrInputTextFamily")
         Me.ucrInputTextFamily.Name = "ucrInputTextFamily"
