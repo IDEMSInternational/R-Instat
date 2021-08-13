@@ -13,6 +13,7 @@
 '
 ' You should have received a copy of the GNU General Public License 
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
+Imports System.Data.SQLite
 Imports System.IO
 Imports System.Reflection
 
@@ -229,24 +230,11 @@ Public Class Translations
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   
-    '''    Writes a CSV file that can be imported into the `TranslateWinForm` library database. 
-    '''    This sub should be executed prior to each release to ensure that the `TranslateWinForm` 
-    '''    database contains all the translatable text for the new release.
-    '''    <para>
-    '''    The CSV file contains the identifiers and associated text of each form, control and menu 
-    '''    item in the application.     Please note that `ucrCheck` and `ucrInput` controls are 
-    '''    specifically excluded. This is because the text for these controls is set dynamically 
-    '''    at runtime.
-    '''    </para><para>
-    '''    This sub uses the `Reflection` package to automatically identify and traverse all the 
-    '''    forms, menus and controls in the current release. This information can also be found by 
-    '''    parsing the application source code files (e.g. the `resx` or `xlf` files). However, 
-    '''    we considered the `Reflection` package to be a simpler and less error-prone solution.
-    '''    </para>
+    '''    TODO
     ''' </summary>
     '''--------------------------------------------------------------------------------------------
     Private Shared Sub SetTranslateIgnore()
-
+        Dim iRowsUpdated As Integer = 0
         Dim lstIgnore As New List(Of String)
         Dim lstIgnoreNegations As New List(Of String)
 
@@ -274,7 +262,70 @@ Public Class Translations
             Loop
         End Using
 
-        'This sub should only be used by developers to create the translation ignore file.
+        'If the ignore file contained at least one pattern
+        If lstIgnore.Count > 0 OrElse lstIgnoreNegations.Count > 0 Then
+
+            'create the SQL command to update the database
+            Dim strSqlUpdate As String = "UPDATE form_controls SET id_text = 'DoNotTranslate' WHERE "
+
+            If lstIgnore.Count > 0 Then
+                strSqlUpdate &= "("
+                For iListPos As Integer = 0 To lstIgnore.Count - 1
+                    strSqlUpdate &= If(iListPos > 0, " OR ", "")
+                    strSqlUpdate &= "control_name LIKE '" & lstIgnore.Item(iListPos) & "'"
+                Next iListPos
+                strSqlUpdate &= ")"
+            End If
+
+            strSqlUpdate &= If(lstIgnore.Count > 0 AndAlso lstIgnoreNegations.Count > 0, " AND ", "")
+
+            If lstIgnoreNegations.Count > 0 Then
+                strSqlUpdate &= "NOT ("
+                For iListPos As Integer = 0 To lstIgnoreNegations.Count - 1
+                    strSqlUpdate &= If(iListPos > 0, " OR ", "")
+                    strSqlUpdate &= "control_name LIKE '" & lstIgnoreNegations.Item(iListPos) & "'"
+                Next iListPos
+                strSqlUpdate &= ")"
+            End If
+
+            'execute the SQL command
+
+            'Dim con As New SqlConnection(Connection_String)
+            'Dim cmd As New SqlCommand(strSqlUpdate, con)
+            'Using con
+            '    con.Open()
+            '    Dim iRowsUpdated As Integer = cmd.ExecuteNonQuery()
+            'End Using
+
+            'Using conn As New SqlConnection(connetionString)
+            '    Using cmd As New SqlCommand(strSqlUpdate, conn)
+            '        cmd.CommandType = CommandType.Text
+            '        conn.Open()
+            '        Dim i As Integer = cmd.ExecuteNonQuery()
+            '        conn.Close()
+            '    End Using
+            'End Using
+
+            Try
+                'connect to the SQLite database that contains the translations
+                Dim clsBuilder As New SQLiteConnectionStringBuilder With {
+                    .FailIfMissing = True,
+                    .DataSource = GetDbPath()}
+                Using clsConnection As New SQLiteConnection(clsBuilder.ConnectionString)
+                    Using clsSqliteCmd As New SQLiteCommand(strSqlUpdate)
+                        clsConnection.Open()
+                        iRowsUpdated = clsSqliteCmd.ExecuteNonQuery()
+                        clsConnection.Close()
+                    End Using
+                End Using
+            Catch e As Exception
+                MsgBox(e.Message & Environment.NewLine &
+                       "An error occured processing ignore file: " & strPath, MsgBoxStyle.Exclamation)
+            End Try
+
+        End If
+
+        'This sub should only be used by developers to process the translation ignore file.
         'Therefore, exit the application with a message to ensure that this sub is not run 
         'accidentally in the release version. 
         MsgBox("The " & strPath &

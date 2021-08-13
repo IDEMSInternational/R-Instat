@@ -27,7 +27,7 @@
 #     - An exclamation point ('!') at the start of the line negates the pattern. Any control in that 
 #       pattern that was previously excluded (ignored) becomes included again. 
 #       This is similar to negation in the Git ignore file (see https://git-scm.com/docs/gitignore 
-#       for a deeper expalantion of negation).
+#       for a deeper explanation of negation).
 #       Negation can be useful if you want to ignore a group of controls with a few specific exceptions. 
 #       For example, the lines below ignore all the controls in the 'dlgBarChart' dialog apart from 
 #       the 'lblTitle' label:
