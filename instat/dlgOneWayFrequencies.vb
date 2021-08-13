@@ -27,7 +27,7 @@ Public Class dlgOneWayFrequencies
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
 
-    Private Sub dlgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub dlgOneWayFrequencies_Load(sender As Object, e As EventArgs)
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -62,8 +62,8 @@ Public Class dlgOneWayFrequencies
 
         ucrPnlSort.SetParameter(New RParameter("sort.frq", 2))
         ucrPnlSort.AddRadioButton(rdoNone, Chr(34) & "none" & Chr(34))
-        ucrPnlSort.AddRadioButton(rdoAscendingFrequencies, Chr(34) & "asc" & Chr(34))
-        ucrPnlSort.AddRadioButton(rdoDescendingFrequencies, Chr(34) & "desc" & Chr(34))
+        ucrPnlSort.AddRadioButton(rdoAscending, Chr(34) & "asc" & Chr(34))
+        ucrPnlSort.AddRadioButton(rdoDescending, Chr(34) & "desc" & Chr(34))
         ucrPnlSort.SetRDefault(Chr(34) & "none" & Chr(34))
 
         ucrChkWeights.SetText("Weights")

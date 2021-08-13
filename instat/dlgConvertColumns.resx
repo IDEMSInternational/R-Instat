@@ -568,7 +568,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudDisplayDecimals.Location" type="System.Drawing.Point, System.Drawing">
-    <value>253, 316</value>
+    <value>242, 316</value>
   </data>
   <data name="ucrNudDisplayDecimals.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -662,9 +662,6 @@
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>10</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

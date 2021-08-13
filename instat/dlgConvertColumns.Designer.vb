@@ -47,17 +47,17 @@ Partial Class dlgConvertColumns
         Me.rdoNumeric = New System.Windows.Forms.RadioButton()
         Me.rdoOrderedFactor = New System.Windows.Forms.RadioButton()
         Me.rdoFactor = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlConvertTo = New instat.UcrPanel()
         Me.rdoConvertOrdinals = New System.Windows.Forms.RadioButton()
         Me.grpFactorToNumericOptions = New System.Windows.Forms.GroupBox()
         Me.rdoDefault = New System.Windows.Forms.RadioButton()
         Me.rdoConvertLevels = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlFactorToNumericOptions = New instat.UcrPanel()
         Me.ucrChkIgnoreLabels = New instat.ucrCheck()
         Me.ucrChkCreateLabels = New instat.ucrCheck()
-        Me.ucrPnlFactorToNumericOptions = New instat.UcrPanel()
         Me.ucrChkKeepAttributes = New instat.ucrCheck()
         Me.ucrNudDisplayDecimals = New instat.ucrNud()
         Me.ucrChkSpecifyDecimalsToDisplay = New instat.ucrCheck()
-        Me.ucrPnlConvertTo = New instat.UcrPanel()
         Me.ucrSelectorDataFrameColumns = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverColumnsToConvert = New instat.ucrReceiverMultiple()
         Me.ucrBase = New instat.ucrButtons()
@@ -126,6 +126,11 @@ Partial Class dlgConvertColumns
         Me.rdoFactor.TabStop = True
         Me.rdoFactor.UseVisualStyleBackColor = True
         '
+        'ucrPnlConvertTo
+        '
+        resources.ApplyResources(Me.ucrPnlConvertTo, "ucrPnlConvertTo")
+        Me.ucrPnlConvertTo.Name = "ucrPnlConvertTo"
+        '
         'rdoConvertOrdinals
         '
         resources.ApplyResources(Me.rdoConvertOrdinals, "rdoConvertOrdinals")
@@ -157,6 +162,11 @@ Partial Class dlgConvertColumns
         Me.rdoConvertLevels.TabStop = True
         Me.rdoConvertLevels.UseVisualStyleBackColor = True
         '
+        'ucrPnlFactorToNumericOptions
+        '
+        resources.ApplyResources(Me.ucrPnlFactorToNumericOptions, "ucrPnlFactorToNumericOptions")
+        Me.ucrPnlFactorToNumericOptions.Name = "ucrPnlFactorToNumericOptions"
+        '
         'ucrChkIgnoreLabels
         '
         Me.ucrChkIgnoreLabels.Checked = False
@@ -168,11 +178,6 @@ Partial Class dlgConvertColumns
         Me.ucrChkCreateLabels.Checked = False
         resources.ApplyResources(Me.ucrChkCreateLabels, "ucrChkCreateLabels")
         Me.ucrChkCreateLabels.Name = "ucrChkCreateLabels"
-        '
-        'ucrPnlFactorToNumericOptions
-        '
-        resources.ApplyResources(Me.ucrPnlFactorToNumericOptions, "ucrPnlFactorToNumericOptions")
-        Me.ucrPnlFactorToNumericOptions.Name = "ucrPnlFactorToNumericOptions"
         '
         'ucrChkKeepAttributes
         '
@@ -195,11 +200,6 @@ Partial Class dlgConvertColumns
         Me.ucrChkSpecifyDecimalsToDisplay.Checked = False
         resources.ApplyResources(Me.ucrChkSpecifyDecimalsToDisplay, "ucrChkSpecifyDecimalsToDisplay")
         Me.ucrChkSpecifyDecimalsToDisplay.Name = "ucrChkSpecifyDecimalsToDisplay"
-        '
-        'ucrPnlConvertTo
-        '
-        resources.ApplyResources(Me.ucrPnlConvertTo, "ucrPnlConvertTo")
-        Me.ucrPnlConvertTo.Name = "ucrPnlConvertTo"
         '
         'ucrSelectorDataFrameColumns
         '
