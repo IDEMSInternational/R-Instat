@@ -27,7 +27,7 @@ Public Class dlgOneWayFrequencies
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
 
-    Private Sub dlgOneWayFrequencies_Load(sender As Object, e As EventArgs)
+    Private Sub dlgOneWayFrequencies_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
