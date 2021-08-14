@@ -119,7 +119,6 @@ Public Class dlgColumnStats
         clsDefaultFunction.AddParameter("summaries", clsRFunctionParameter:=clsSummariesList)
         'Prevents an error if user chooses non count summaries with no columns to summarise
         clsDefaultFunction.AddParameter("silent", "TRUE")
-        clsDefaultFunction.AddParameter("seed", 0, iPosition:=11)
         ucrBase.clsRsyntax.SetBaseRFunction(clsDefaultFunction)
         bResetSubdialog = True
     End Sub

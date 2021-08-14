@@ -171,7 +171,7 @@ Public Class sdgSummaries
         ucrChkCount.AddToLinkedControls(ucrInputCountValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkQuantile.AddToLinkedControls(ucrInputQuantile, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkSample.AddToLinkedControls(ucrChkSetseed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrChkSetseed.AddToLinkedControls(ucrNudSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkSetseed.AddToLinkedControls(ucrNudSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
 
         ucrInputN.SetLinkedDisplayControl(lblInputN)
         ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
