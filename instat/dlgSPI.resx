@@ -499,7 +499,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 24</value>
+    <value>320, 24</value>
   </data>
   <data name="ucrSaveModel.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -523,7 +523,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveIndex.Size" type="System.Drawing.Size, System.Drawing">
-    <value>256, 24</value>
+    <value>320, 24</value>
   </data>
   <data name="ucrSaveIndex.TabIndex" type="System.Int32, mscorlib">
     <value>17</value>
@@ -613,7 +613,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>420, 478</value>
+    <value>412, 478</value>
   </data>
   <data name="ucrReceiverMonth.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 174</value>

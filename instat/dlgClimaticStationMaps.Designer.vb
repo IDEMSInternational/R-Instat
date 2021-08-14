@@ -84,7 +84,7 @@ Partial Class dlgClimaticStationMaps
         Me.ucrSaveMap.Location = New System.Drawing.Point(8, 356)
         Me.ucrSaveMap.Margin = New System.Windows.Forms.Padding(6, 8, 6, 8)
         Me.ucrSaveMap.Name = "ucrSaveMap"
-        Me.ucrSaveMap.Size = New System.Drawing.Size(244, 24)
+        Me.ucrSaveMap.Size = New System.Drawing.Size(320, 22)
         Me.ucrSaveMap.TabIndex = 15
         '
         'ucrBase
@@ -339,7 +339,7 @@ Partial Class dlgClimaticStationMaps
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(756, 456)
+        Me.ClientSize = New System.Drawing.Size(756, 441)
         Me.Controls.Add(Me.grpMapOutline)
         Me.Controls.Add(Me.grpPoints)
         Me.Controls.Add(Me.cmdSFOptions)

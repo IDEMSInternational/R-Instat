@@ -184,7 +184,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoViolin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>293, 12</value>
+    <value>291, 12</value>
   </data>
   <data name="rdoViolin.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 27</value>
@@ -220,7 +220,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoJitter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 12</value>
+    <value>173, 12</value>
   </data>
   <data name="rdoJitter.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 27</value>
@@ -256,7 +256,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoBoxplot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 12</value>
+    <value>55, 12</value>
   </data>
   <data name="rdoBoxplot.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 27</value>
@@ -439,7 +439,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>475, 469</value>
+    <value>455, 469</value>
   </data>
   <data name="ucrReceiverYear.Location" type="System.Drawing.Point, System.Drawing">
     <value>245, 242</value>
@@ -664,7 +664,7 @@
     <value>15</value>
   </data>
   <data name="ucrPnlPlots.Location" type="System.Drawing.Point, System.Drawing">
-    <value>50, 8</value>
+    <value>48, 8</value>
   </data>
   <data name="ucrPnlPlots.Size" type="System.Drawing.Size, System.Drawing">
     <value>372, 35</value>
@@ -712,7 +712,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSavePlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>320, 24</value>
   </data>
   <data name="ucrSavePlot.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>

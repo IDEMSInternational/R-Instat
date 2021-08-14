@@ -322,7 +322,7 @@
     <value>9</value>
   </data>
   <data name="ucrInputSpecify3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 71</value>
+    <value>262, 70</value>
   </data>
   <data name="ucrInputSpecify3.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 21</value>
@@ -343,7 +343,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputSpecify2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 47</value>
+    <value>262, 44</value>
   </data>
   <data name="ucrInputSpecify2.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 21</value>
@@ -364,7 +364,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputSpecify1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>262, 20</value>
+    <value>262, 18</value>
   </data>
   <data name="ucrInputSpecify1.Size" type="System.Drawing.Size, System.Drawing">
     <value>107, 21</value>
@@ -694,7 +694,7 @@
     <value>4, 349</value>
   </data>
   <data name="ucrChkAddFlagVariables.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 20</value>
+    <value>177, 20</value>
   </data>
   <data name="ucrChkAddFlagVariables.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>

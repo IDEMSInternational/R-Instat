@@ -163,7 +163,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDayinYear366.Location" type="System.Drawing.Point, System.Drawing">
-    <value>184, 229</value>
+    <value>160, 229</value>
   </data>
   <data name="lblDayinYear366.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 26</value>
@@ -197,7 +197,7 @@ Year (366)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShiftYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>86, 236</value>
+    <value>67, 236</value>
   </data>
   <data name="lblShiftYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>29, 13</value>
@@ -230,7 +230,7 @@ Year (366)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShiftMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 236</value>
+    <value>112, 236</value>
   </data>
   <data name="lblShiftMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>37, 13</value>
@@ -263,7 +263,7 @@ Year (366)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShiftPentad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>371, 236</value>
+    <value>347, 236</value>
   </data>
   <data name="lblShiftPentad.Size" type="System.Drawing.Size, System.Drawing">
     <value>41, 13</value>
@@ -296,7 +296,7 @@ Year (366)</value>
     <value>NoControl</value>
   </data>
   <data name="lblDayInYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 229</value>
+    <value>223, 229</value>
   </data>
   <data name="lblDayInYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 26</value>
@@ -330,7 +330,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShiftNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 262</value>
+    <value>14, 262</value>
   </data>
   <data name="lblShiftNumeric.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -363,7 +363,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShiftQuarter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>311, 236</value>
+    <value>287, 236</value>
   </data>
   <data name="lblShiftQuarter.Size" type="System.Drawing.Size, System.Drawing">
     <value>42, 13</value>
@@ -396,7 +396,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShiftAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 290</value>
+    <value>14, 290</value>
   </data>
   <data name="lblShiftAbbr.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 13</value>
@@ -429,7 +429,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShiftDekad.Location" type="System.Drawing.Point, System.Drawing">
-    <value>425, 236</value>
+    <value>401, 236</value>
   </data>
   <data name="lblShiftDekad.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 13</value>
@@ -462,7 +462,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblShift.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 318</value>
+    <value>14, 318</value>
   </data>
   <data name="lblShift.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -486,7 +486,7 @@ Year (365)</value>
     <value>20</value>
   </data>
   <data name="ucrChkDaysInMonthNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>419, 35</value>
+    <value>399, 35</value>
   </data>
   <data name="ucrChkDaysInMonthNum.Size" type="System.Drawing.Size, System.Drawing">
     <value>15, 15</value>
@@ -513,7 +513,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblDaysInMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>389, 12</value>
+    <value>369, 12</value>
   </data>
   <data name="lblDaysInMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 13</value>
@@ -540,7 +540,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkWeekName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 89</value>
+    <value>145, 89</value>
   </data>
   <data name="ucrChkWeekName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -573,7 +573,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblDayInMonth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>76, 12</value>
+    <value>48, 12</value>
   </data>
   <data name="lblDayInMonth.Size" type="System.Drawing.Size, System.Drawing">
     <value>70, 13</value>
@@ -600,7 +600,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkDayInMonthNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>104, 35</value>
+    <value>76, 35</value>
   </data>
   <data name="ucrChkDayInMonthNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -633,7 +633,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 36</value>
+    <value>6, 36</value>
   </data>
   <data name="lblNumeric.Size" type="System.Drawing.Size, System.Drawing">
     <value>49, 13</value>
@@ -660,7 +660,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkWeekAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 62</value>
+    <value>145, 62</value>
   </data>
   <data name="ucrChkWeekAbbr.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -693,7 +693,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblWeek.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 12</value>
+    <value>133, 12</value>
   </data>
   <data name="lblWeek.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
@@ -720,7 +720,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkWeekdayName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 89</value>
+    <value>210, 89</value>
   </data>
   <data name="ucrChkWeekdayName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -753,7 +753,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblWeekDay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>214, 12</value>
+    <value>186, 12</value>
   </data>
   <data name="lblWeekDay.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -780,7 +780,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkWeekdayAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 62</value>
+    <value>210, 62</value>
   </data>
   <data name="ucrChkWeekdayAbbr.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -813,7 +813,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 92</value>
+    <value>6, 92</value>
   </data>
   <data name="lblName.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 13</value>
@@ -840,7 +840,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkWeekNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 35</value>
+    <value>145, 35</value>
   </data>
   <data name="ucrChkWeekNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -873,7 +873,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblLeapYear.Location" type="System.Drawing.Point, System.Drawing">
-    <value>309, 12</value>
+    <value>281, 12</value>
   </data>
   <data name="lblLeapYear.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -900,7 +900,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkWeekdayNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 35</value>
+    <value>210, 35</value>
   </data>
   <data name="ucrChkWeekdayNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -927,7 +927,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkLeapYearNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>326, 35</value>
+    <value>298, 35</value>
   </data>
   <data name="ucrChkLeapYearNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -960,7 +960,7 @@ Year (365)</value>
     <value>NoControl</value>
   </data>
   <data name="lblAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 64</value>
+    <value>6, 64</value>
   </data>
   <data name="lblAbbr.Size" type="System.Drawing.Size, System.Drawing">
     <value>35, 13</value>
@@ -987,7 +987,7 @@ Year (365)</value>
     <value>9, 337</value>
   </data>
   <data name="GroupBox2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>475, 117</value>
+    <value>458, 117</value>
   </data>
   <data name="GroupBox2.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -1092,7 +1092,7 @@ Year (365)</value>
     <value>9, 191</value>
   </data>
   <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>475, 147</value>
+    <value>458, 147</value>
   </data>
   <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1113,7 +1113,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftYearName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 316</value>
+    <value>77, 316</value>
   </data>
   <data name="ucrChkShiftYearName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1140,7 +1140,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftPentadAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>383, 289</value>
+    <value>359, 289</value>
   </data>
   <data name="ucrChkShiftPentadAbbr.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1167,7 +1167,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftYearNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>93, 262</value>
+    <value>77, 262</value>
   </data>
   <data name="ucrChkShiftYearNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1194,7 +1194,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftDekadAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 289</value>
+    <value>417, 289</value>
   </data>
   <data name="ucrChkShiftDekadAbbr.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1221,7 +1221,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftMonthAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 289</value>
+    <value>127, 289</value>
   </data>
   <data name="ucrChkShiftMonthAbbr.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1248,7 +1248,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftMonthName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 316</value>
+    <value>127, 316</value>
   </data>
   <data name="ucrChkShiftMonthName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1275,7 +1275,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftQuarterAbbr.Location" type="System.Drawing.Point, System.Drawing">
-    <value>325, 289</value>
+    <value>301, 289</value>
   </data>
   <data name="ucrChkShiftQuarterAbbr.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1302,7 +1302,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftDekadNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>441, 262</value>
+    <value>417, 262</value>
   </data>
   <data name="ucrChkShiftDekadNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1329,7 +1329,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftQuarterNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>325, 262</value>
+    <value>301, 262</value>
   </data>
   <data name="ucrChkShiftQuarterNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1356,7 +1356,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkDayInYearNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 262</value>
+    <value>243, 262</value>
   </data>
   <data name="ucrChkDayInYearNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1383,7 +1383,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftMonthNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>151, 262</value>
+    <value>127, 262</value>
   </data>
   <data name="ucrChkShiftMonthNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1410,7 +1410,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftDayInYearNum366.Location" type="System.Drawing.Point, System.Drawing">
-    <value>209, 262</value>
+    <value>185, 262</value>
   </data>
   <data name="ucrChkShiftDayInYearNum366.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1437,7 +1437,7 @@ Year (365)</value>
     <value>None</value>
   </data>
   <data name="ucrChkShiftPentadNum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>383, 262</value>
+    <value>359, 262</value>
   </data>
   <data name="ucrChkShiftPentadNum.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -1470,7 +1470,7 @@ Year (365)</value>
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>489, 516</value>
+    <value>472, 516</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 461</value>
@@ -1519,9 +1519,6 @@ Year (365)</value>
   </data>
   <data name="&gt;&gt;ucrSelectorUseDate.ZOrder" xml:space="preserve">
     <value>28</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

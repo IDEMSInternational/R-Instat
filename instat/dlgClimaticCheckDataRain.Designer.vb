@@ -34,13 +34,13 @@ Partial Class dlgClimaticCheckDataRain
         Me.lblRainDays = New System.Windows.Forms.Label()
         Me.lblSkewnessWeight = New System.Windows.Forms.Label()
         Me.grpLogicalCalculatedColumns = New System.Windows.Forms.GroupBox()
-        Me.ucrChkLogicalColumns = New instat.ucrCheck()
-        Me.ucrChkCalculatedColumns = New instat.ucrCheck()
         Me.lblCoeff = New System.Windows.Forms.Label()
         Me.cmdOmitMonths = New System.Windows.Forms.Button()
         Me.lblThreshold = New System.Windows.Forms.Label()
         Me.lblMissingThreshold = New System.Windows.Forms.Label()
         Me.lblThresholdmm = New System.Windows.Forms.Label()
+        Me.lblGreater = New System.Windows.Forms.Label()
+        Me.ucrInputSameValue = New instat.ucrInputTextBox()
         Me.ucrInputThreshold = New instat.ucrInputTextBox()
         Me.ucrInputThresholdValue = New instat.ucrInputTextBox()
         Me.ucrNudCoeff = New instat.ucrNud()
@@ -62,8 +62,8 @@ Partial Class dlgClimaticCheckDataRain
         Me.ucrReceiverStation = New instat.ucrReceiverSingle()
         Me.ucrSelectorRain = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.lblGreater = New System.Windows.Forms.Label()
-        Me.ucrInputSameValue = New instat.ucrInputTextBox()
+        Me.ucrChkLogicalColumns = New instat.ucrCheck()
+        Me.ucrChkCalculatedColumns = New instat.ucrCheck()
         Me.grpLogicalCalculatedColumns.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -125,18 +125,6 @@ Partial Class dlgClimaticCheckDataRain
         Me.grpLogicalCalculatedColumns.Name = "grpLogicalCalculatedColumns"
         Me.grpLogicalCalculatedColumns.TabStop = False
         '
-        'ucrChkLogicalColumns
-        '
-        Me.ucrChkLogicalColumns.Checked = False
-        resources.ApplyResources(Me.ucrChkLogicalColumns, "ucrChkLogicalColumns")
-        Me.ucrChkLogicalColumns.Name = "ucrChkLogicalColumns"
-        '
-        'ucrChkCalculatedColumns
-        '
-        Me.ucrChkCalculatedColumns.Checked = False
-        resources.ApplyResources(Me.ucrChkCalculatedColumns, "ucrChkCalculatedColumns")
-        Me.ucrChkCalculatedColumns.Name = "ucrChkCalculatedColumns"
-        '
         'lblCoeff
         '
         resources.ApplyResources(Me.lblCoeff, "lblCoeff")
@@ -162,6 +150,19 @@ Partial Class dlgClimaticCheckDataRain
         '
         resources.ApplyResources(Me.lblThresholdmm, "lblThresholdmm")
         Me.lblThresholdmm.Name = "lblThresholdmm"
+        '
+        'lblGreater
+        '
+        resources.ApplyResources(Me.lblGreater, "lblGreater")
+        Me.lblGreater.Name = "lblGreater"
+        '
+        'ucrInputSameValue
+        '
+        Me.ucrInputSameValue.AddQuotesIfUnrecognised = True
+        Me.ucrInputSameValue.IsMultiline = False
+        Me.ucrInputSameValue.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSameValue, "ucrInputSameValue")
+        Me.ucrInputSameValue.Name = "ucrInputSameValue"
         '
         'ucrInputThreshold
         '
@@ -332,18 +333,17 @@ Partial Class dlgClimaticCheckDataRain
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'lblGreater
+        'ucrChkLogicalColumns
         '
-        resources.ApplyResources(Me.lblGreater, "lblGreater")
-        Me.lblGreater.Name = "lblGreater"
+        Me.ucrChkLogicalColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkLogicalColumns, "ucrChkLogicalColumns")
+        Me.ucrChkLogicalColumns.Name = "ucrChkLogicalColumns"
         '
-        'ucrInputSameValue
+        'ucrChkCalculatedColumns
         '
-        Me.ucrInputSameValue.AddQuotesIfUnrecognised = True
-        Me.ucrInputSameValue.IsMultiline = False
-        Me.ucrInputSameValue.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSameValue, "ucrInputSameValue")
-        Me.ucrInputSameValue.Name = "ucrInputSameValue"
+        Me.ucrChkCalculatedColumns.Checked = False
+        resources.ApplyResources(Me.ucrChkCalculatedColumns, "ucrChkCalculatedColumns")
+        Me.ucrChkCalculatedColumns.Name = "ucrChkCalculatedColumns"
         '
         'dlgClimaticCheckDataRain
         '
