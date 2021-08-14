@@ -62,6 +62,7 @@ Partial Class sdgSummaries
         Me.ucrChkOrderBy = New instat.ucrCheck()
         Me.lblOrderBy = New System.Windows.Forms.Label()
         Me.grpPosition = New System.Windows.Forms.GroupBox()
+        Me.ucrChkSample = New instat.ucrCheck()
         Me.ucrInputN = New instat.ucrInputTextBox()
         Me.lblInputN = New System.Windows.Forms.Label()
         Me.ucrChkFirst = New instat.ucrCheck()
@@ -161,6 +162,7 @@ Partial Class sdgSummaries
         Me.tbSummaries = New System.Windows.Forms.TabControl()
         Me.ttVerificationSummaries = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrButtonsSummaries = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkSampleReplace = New instat.ucrCheck()
         Me.tbCircular.SuspendLayout()
         Me.grpCircScale.SuspendLayout()
         Me.grpCircLocation.SuspendLayout()
@@ -333,6 +335,8 @@ Partial Class sdgSummaries
         '
         'grpPosition
         '
+        Me.grpPosition.Controls.Add(Me.ucrChkSampleReplace)
+        Me.grpPosition.Controls.Add(Me.ucrChkSample)
         Me.grpPosition.Controls.Add(Me.ucrInputN)
         Me.grpPosition.Controls.Add(Me.lblInputN)
         Me.grpPosition.Controls.Add(Me.ucrChkFirst)
@@ -341,6 +345,12 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.grpPosition, "grpPosition")
         Me.grpPosition.Name = "grpPosition"
         Me.grpPosition.TabStop = False
+        '
+        'ucrChkSample
+        '
+        Me.ucrChkSample.Checked = False
+        resources.ApplyResources(Me.ucrChkSample, "ucrChkSample")
+        Me.ucrChkSample.Name = "ucrChkSample"
         '
         'ucrInputN
         '
@@ -1052,6 +1062,12 @@ Partial Class sdgSummaries
         resources.ApplyResources(Me.ucrButtonsSummaries, "ucrButtonsSummaries")
         Me.ucrButtonsSummaries.Name = "ucrButtonsSummaries"
         '
+        'ucrChkSampleReplace
+        '
+        Me.ucrChkSampleReplace.Checked = False
+        resources.ApplyResources(Me.ucrChkSampleReplace, "ucrChkSampleReplace")
+        Me.ucrChkSampleReplace.Name = "ucrChkSampleReplace"
+        '
         'sdgSummaries
         '
         resources.ApplyResources(Me, "$this")
@@ -1215,4 +1231,6 @@ Partial Class sdgSummaries
     Friend WithEvents ucrChkP80 As ucrCheck
     Friend WithEvents ucrChkP40 As ucrCheck
     Friend WithEvents ucrChkP30 As ucrCheck
+    Friend WithEvents ucrChkSample As ucrCheck
+    Friend WithEvents ucrChkSampleReplace As ucrCheck
 End Class
