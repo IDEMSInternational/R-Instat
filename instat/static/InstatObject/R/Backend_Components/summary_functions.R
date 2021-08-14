@@ -1003,6 +1003,11 @@ summary_n_distinct<- function(x, na.rm = FALSE, ...) {
   return(dplyr::n_distinct(x = x, na.rm = na.rm))
 }
 
+# sample function
+summary_sample <- function(x, replace = FALSE, ...){
+  return(sample(x = x, size = 1, replace = replace))
+}
+
 #Proportions functions
 proportion_calc <- function(x, prop_test = "==", prop_value, As_percentage = FALSE, na.rm = FALSE, na_type = "", ... ){ 
   if(na.rm && na_type != "" && !na_check(x, na_type = na_type, ...)) return(NA)
