@@ -1004,7 +1004,8 @@ summary_n_distinct<- function(x, na.rm = FALSE, ...) {
 }
 
 # sample function
-summary_sample <- function(x, replace = FALSE, ...){
+summary_sample <- function(x, replace = FALSE, seed, ...){
+  if(!missing(seed)) set.seed(seed = seed)
   return(sample(x = x, size = 1, replace = replace))
 }
 
