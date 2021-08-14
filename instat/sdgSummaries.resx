@@ -819,29 +819,53 @@
   <data name="&gt;&gt;lblOrderBy.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ucrChkSampleReplace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 45</value>
+  <data name="ucrChkSetseed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>166, 45</value>
   </data>
-  <data name="ucrChkSampleReplace.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+  <data name="ucrChkSetseed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
   </data>
-  <data name="ucrChkSampleReplace.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrChkSetseed.Size" type="System.Drawing.Size, System.Drawing">
     <value>101, 20</value>
   </data>
-  <data name="ucrChkSampleReplace.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
+  <data name="ucrChkSetseed.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
   </data>
-  <data name="&gt;&gt;ucrChkSampleReplace.Name" xml:space="preserve">
-    <value>ucrChkSampleReplace</value>
+  <data name="&gt;&gt;ucrChkSetseed.Name" xml:space="preserve">
+    <value>ucrChkSetseed</value>
   </data>
-  <data name="&gt;&gt;ucrChkSampleReplace.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkSetseed.Type" xml:space="preserve">
     <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrChkSampleReplace.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkSetseed.Parent" xml:space="preserve">
     <value>grpPosition</value>
   </data>
-  <data name="&gt;&gt;ucrChkSampleReplace.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkSetseed.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrNudSeed.Location" type="System.Drawing.Point, System.Drawing">
+    <value>273, 45</value>
+  </data>
+  <data name="ucrNudSeed.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrNudSeed.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudSeed.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSeed.Name" xml:space="preserve">
+    <value>ucrNudSeed</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSeed.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSeed.Parent" xml:space="preserve">
+    <value>grpPosition</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSeed.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="ucrChkSample.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 45</value>
@@ -850,7 +874,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrChkSample.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>113, 20</value>
   </data>
   <data name="ucrChkSample.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -865,7 +889,7 @@
     <value>grpPosition</value>
   </data>
   <data name="&gt;&gt;ucrChkSample.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrInputN.Location" type="System.Drawing.Point, System.Drawing">
     <value>233, 19</value>
@@ -889,7 +913,7 @@
     <value>grpPosition</value>
   </data>
   <data name="&gt;&gt;ucrInputN.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lblInputN.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -919,7 +943,7 @@
     <value>grpPosition</value>
   </data>
   <data name="&gt;&gt;lblInputN.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrChkFirst.Location" type="System.Drawing.Point, System.Drawing">
     <value>8, 19</value>
@@ -943,7 +967,7 @@
     <value>grpPosition</value>
   </data>
   <data name="&gt;&gt;ucrChkFirst.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrChkLast.Location" type="System.Drawing.Point, System.Drawing">
     <value>309, 19</value>
@@ -967,7 +991,7 @@
     <value>grpPosition</value>
   </data>
   <data name="&gt;&gt;ucrChkLast.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrChknth.Location" type="System.Drawing.Point, System.Drawing">
     <value>166, 21</value>
@@ -991,7 +1015,7 @@
     <value>grpPosition</value>
   </data>
   <data name="&gt;&gt;ucrChknth.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="grpPosition.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 6</value>

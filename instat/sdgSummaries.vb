@@ -170,7 +170,8 @@ Public Class sdgSummaries
         ucrChkCount.AddToLinkedControls(ucrInputComboCountTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkCount.AddToLinkedControls(ucrInputCountValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkQuantile.AddToLinkedControls(ucrInputQuantile, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
-        ucrChkSample.AddToLinkedControls(ucrChkSampleReplace, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True)
+        ucrChkSample.AddToLinkedControls(ucrChkSetseed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSetseed.AddToLinkedControls(ucrNudSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
 
         ucrInputN.SetLinkedDisplayControl(lblInputN)
         ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
@@ -319,10 +320,11 @@ Public Class sdgSummaries
         ucrChkSample.SetParameter(New RParameter("summary_sample", 64), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_sample" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkSample.SetText("Sample")
 
-        ucrChkSampleReplace.SetParameter(New RParameter("replace", 11))
-        ucrChkSampleReplace.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkSampleReplace.SetText("Replace")
-        ucrChkSampleReplace.SetRDefault("FALSE")
+        ucrChkSetseed.SetText("Set seed")
+        ucrChkSetseed.AddParameterPresentCondition(True, "seed")
+        ucrChkSetseed.AddParameterPresentCondition(False, "seed", False)
+
+        ucrNudSeed.SetParameter(New RParameter("seed", 11))
 
         lstVerifCheckboxes.AddRange({ucrChkCorrelations, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency})
 
@@ -406,7 +408,8 @@ Public Class sdgSummaries
         ucrInputN.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputQuantile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputJmia.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
-        ucrChkSampleReplace.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudSeed.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkSetseed.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkCount.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkProportion.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
