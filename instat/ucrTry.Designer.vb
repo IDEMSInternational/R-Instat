@@ -40,7 +40,7 @@ Partial Class ucrTry
         Me.ucrInputTryMessage.AddQuotesIfUnrecognised = True
         Me.ucrInputTryMessage.IsMultiline = False
         Me.ucrInputTryMessage.IsReadOnly = False
-        Me.ucrInputTryMessage.Location = New System.Drawing.Point(89, 4)
+        Me.ucrInputTryMessage.Location = New System.Drawing.Point(89, 6)
         Me.ucrInputTryMessage.Name = "ucrInputTryMessage"
         Me.ucrInputTryMessage.Size = New System.Drawing.Size(297, 21)
         Me.ucrInputTryMessage.TabIndex = 3

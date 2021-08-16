@@ -67,7 +67,7 @@ Partial Class dlgImportShapeFiles
         Me.ucrChkSplitGeometry.Location = New System.Drawing.Point(7, 89)
         Me.ucrChkSplitGeometry.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrChkSplitGeometry.Name = "ucrChkSplitGeometry"
-        Me.ucrChkSplitGeometry.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkSplitGeometry.Size = New System.Drawing.Size(150, 20)
         Me.ucrChkSplitGeometry.TabIndex = 5
         '
         'ucrSaveDataframeName
@@ -101,7 +101,7 @@ Partial Class dlgImportShapeFiles
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(419, 183)
+        Me.ClientSize = New System.Drawing.Size(419, 174)
         Me.Controls.Add(Me.ucrChkSplitGeometry)
         Me.Controls.Add(Me.ucrSaveDataframeName)
         Me.Controls.Add(Me.cmdLibrary)
@@ -114,7 +114,7 @@ Partial Class dlgImportShapeFiles
         Me.MinimizeBox = False
         Me.Name = "dlgImportShapeFiles"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Import and Tidy Shapefiles"
+        Me.Text = "Import Shapefiles"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 

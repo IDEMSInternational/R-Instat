@@ -80,12 +80,12 @@ Partial Class dlgAugment
         Me.ucrPnlOptions.Location = New System.Drawing.Point(10, 198)
         Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(155, 106)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(209, 106)
         Me.ucrPnlOptions.TabIndex = 8
         '
         'ucrSaveNewDataFrame
         '
-        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(174, 278)
+        Me.ucrSaveNewDataFrame.Location = New System.Drawing.Point(235, 278)
         Me.ucrSaveNewDataFrame.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveNewDataFrame.Name = "ucrSaveNewDataFrame"
         Me.ucrSaveNewDataFrame.Size = New System.Drawing.Size(158, 26)

@@ -43,15 +43,15 @@ Partial Class dlgInfill
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblLimits = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrDtpStartDate = New instat.ucrDateTimePicker()
         Me.lblStartingFrom = New System.Windows.Forms.Label()
-        Me.ucrChkCompleteYears = New instat.ucrCheck()
         Me.ucrChkResort = New instat.ucrCheck()
         Me.ucrInputComboMonth = New instat.ucrInputComboBox()
         Me.ucrInputLimitOptions = New instat.ucrInputComboBox()
         Me.ucrDtpEndDate = New instat.ucrDateTimePicker()
         Me.lblEndDate = New System.Windows.Forms.Label()
         Me.lblStartDate = New System.Windows.Forms.Label()
-        Me.ucrDtpStartDate = New instat.ucrDateTimePicker()
+        Me.ucrChkCompleteYears = New instat.ucrCheck()
         Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
         Me.ucrReceiverDate = New instat.ucrReceiverSingle()
         Me.ucrInfillSelector = New instat.ucrSelectorByDataFrameAddRemove()
@@ -76,7 +76,6 @@ Partial Class dlgInfill
         '
         'grpOptions
         '
-        Me.grpOptions.Controls.Add(Me.ucrDtpStartDate)
         Me.grpOptions.Controls.Add(Me.lblStartingFrom)
         Me.grpOptions.Controls.Add(Me.ucrChkResort)
         Me.grpOptions.Controls.Add(Me.ucrInputComboMonth)
@@ -85,21 +84,25 @@ Partial Class dlgInfill
         Me.grpOptions.Controls.Add(Me.lblLimits)
         Me.grpOptions.Controls.Add(Me.lblEndDate)
         Me.grpOptions.Controls.Add(Me.lblStartDate)
+        Me.grpOptions.Controls.Add(Me.ucrDtpStartDate)
         Me.grpOptions.Controls.Add(Me.ucrChkCompleteYears)
         resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
+        'ucrDtpStartDate
+        '
+        Me.ucrDtpStartDate.DateValue = New Date(2021, 5, 19, 13, 58, 51, 387)
+        Me.ucrDtpStartDate.Format = "dd MMM yyyy"
+        resources.ApplyResources(Me.ucrDtpStartDate, "ucrDtpStartDate")
+        Me.ucrDtpStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpStartDate.Name = "ucrDtpStartDate"
+        '
         'lblStartingFrom
         '
         resources.ApplyResources(Me.lblStartingFrom, "lblStartingFrom")
         Me.lblStartingFrom.Name = "lblStartingFrom"
-        '
-        'ucrChkCompleteYears
-        '
-        Me.ucrChkCompleteYears.Checked = False
-        resources.ApplyResources(Me.ucrChkCompleteYears, "ucrChkCompleteYears")
-        Me.ucrChkCompleteYears.Name = "ucrChkCompleteYears"
         '
         'ucrChkResort
         '
@@ -142,14 +145,11 @@ Partial Class dlgInfill
         resources.ApplyResources(Me.lblStartDate, "lblStartDate")
         Me.lblStartDate.Name = "lblStartDate"
         '
-        'ucrDtpStartDate
+        'ucrChkCompleteYears
         '
-        Me.ucrDtpStartDate.DateValue = New Date(2021, 5, 19, 13, 58, 51, 387)
-        Me.ucrDtpStartDate.Format = "dd MMM yyyy"
-        resources.ApplyResources(Me.ucrDtpStartDate, "ucrDtpStartDate")
-        Me.ucrDtpStartDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDtpStartDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDtpStartDate.Name = "ucrDtpStartDate"
+        Me.ucrChkCompleteYears.Checked = False
+        resources.ApplyResources(Me.ucrChkCompleteYears, "ucrChkCompleteYears")
+        Me.ucrChkCompleteYears.Name = "ucrChkCompleteYears"
         '
         'ucrReceiverFactors
         '

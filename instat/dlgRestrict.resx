@@ -119,10 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdDefineNewFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 95</value>
+    <value>249, 88</value>
   </data>
   <data name="cmdDefineNewFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>129, 30</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdDefineNewFilter.TabIndex" type="System.Int32, mscorlib">
@@ -229,10 +229,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdFilterFromFactors.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 131</value>
+    <value>249, 123</value>
   </data>
   <data name="cmdFilterFromFactors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>129, 38</value>
   </data>
   <data name="cmdFilterFromFactors.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -259,10 +259,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdEditFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 167</value>
+    <value>249, 167</value>
   </data>
   <data name="cmdEditFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 23</value>
+    <value>129, 23</value>
   </data>
   <data name="cmdEditFilter.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -310,7 +310,7 @@
     <value>174, 22</value>
   </data>
   <data name="rdoApplyAsSubset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 17</value>
+    <value>190, 17</value>
   </data>
   <data name="rdoApplyAsSubset.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

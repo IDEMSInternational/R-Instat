@@ -122,7 +122,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrNudWhiteSpace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 147</value>
+    <value>140, 147</value>
   </data>
   <data name="ucrNudWhiteSpace.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -144,7 +144,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudGraphicsCLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 121</value>
+    <value>140, 121</value>
   </data>
   <data name="ucrNudGraphicsCLevel.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -165,7 +165,7 @@
     <value>1</value>
   </data>
   <data name="ucrChkRugs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 179</value>
+    <value>126, 178</value>
   </data>
   <data name="ucrChkRugs.Size" type="System.Drawing.Size, System.Drawing">
     <value>113, 20</value>
@@ -252,7 +252,7 @@
     <value>10, 7</value>
   </data>
   <data name="ucrChkFittedModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 20</value>
+    <value>263, 20</value>
   </data>
   <data name="ucrChkFittedModel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -673,10 +673,10 @@
     <value>0</value>
   </data>
   <data name="ucrChkCooksDistance.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 67</value>
+    <value>6, 145</value>
   </data>
   <data name="ucrChkCooksDistance.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 20</value>
+    <value>273, 20</value>
   </data>
   <data name="ucrChkCooksDistance.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -697,7 +697,7 @@
     <value>6, 21</value>
   </data>
   <data name="ucrChkResidualsFitted.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 20</value>
+    <value>273, 20</value>
   </data>
   <data name="ucrChkResidualsFitted.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -715,10 +715,10 @@
     <value>1</value>
   </data>
   <data name="ucrChkScaleLocation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 44</value>
+    <value>6, 119</value>
   </data>
   <data name="ucrChkScaleLocation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>108, 20</value>
+    <value>273, 20</value>
   </data>
   <data name="ucrChkScaleLocation.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -739,7 +739,7 @@
     <value>6, 44</value>
   </data>
   <data name="ucrChkResidualsLeverage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 20</value>
+    <value>273, 20</value>
   </data>
   <data name="ucrChkResidualsLeverage.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -757,10 +757,10 @@
     <value>3</value>
   </data>
   <data name="ucrChkQQ.Location" type="System.Drawing.Point, System.Drawing">
-    <value>177, 21</value>
+    <value>6, 93</value>
   </data>
   <data name="ucrChkQQ.Size" type="System.Drawing.Size, System.Drawing">
-    <value>94, 20</value>
+    <value>273, 20</value>
   </data>
   <data name="ucrChkQQ.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -781,7 +781,7 @@
     <value>6, 67</value>
   </data>
   <data name="ucrChkCooksDistanceLeverage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 20</value>
+    <value>273, 20</value>
   </data>
   <data name="ucrChkCooksDistanceLeverage.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -802,7 +802,7 @@
     <value>6, 14</value>
   </data>
   <data name="grpIndividualPlots.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 95</value>
+    <value>285, 174</value>
   </data>
   <data name="grpIndividualPlots.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -898,7 +898,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudConfLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>145, 114</value>
+    <value>165, 111</value>
   </data>
   <data name="ucrNudConfLevel.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -922,7 +922,7 @@
     <value>147, 37</value>
   </data>
   <data name="ucrChkPvalues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 20</value>
+    <value>180, 20</value>
   </data>
   <data name="ucrChkPvalues.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -943,7 +943,7 @@
     <value>10, 64</value>
   </data>
   <data name="ucrChkEstimates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 20</value>
+    <value>232, 20</value>
   </data>
   <data name="ucrChkEstimates.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -964,7 +964,7 @@
     <value>10, 91</value>
   </data>
   <data name="ucrChkConfLimits.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 20</value>
+    <value>232, 20</value>
   </data>
   <data name="ucrChkConfLimits.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1006,7 +1006,7 @@
     <value>10, 10</value>
   </data>
   <data name="ucrChkModel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>113, 20</value>
+    <value>232, 20</value>
   </data>
   <data name="ucrChkModel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

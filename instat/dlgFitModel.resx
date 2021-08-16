@@ -154,10 +154,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdModelOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>395, 286</value>
+    <value>376, 286</value>
   </data>
   <data name="cmdModelOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 23</value>
+    <value>124, 23</value>
   </data>
   <data name="cmdModelOptions.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -211,10 +211,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdDisplayOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>395, 314</value>
+    <value>376, 314</value>
   </data>
   <data name="cmdDisplayOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>105, 23</value>
+    <value>124, 23</value>
   </data>
   <data name="cmdDisplayOptions.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -850,10 +850,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>136, 199</value>
+    <value>159, 199</value>
   </data>
   <data name="lblType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>102, 16</value>
+    <value>79, 16</value>
   </data>
   <data name="lblType.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -928,7 +928,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrModelName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 24</value>
+    <value>302, 24</value>
   </data>
   <data name="ucrModelName.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -976,10 +976,10 @@
     <value>510, 401</value>
   </data>
   <data name="ucrInputModelPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 287</value>
+    <value>106, 287</value>
   </data>
   <data name="ucrInputModelPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>297, 21</value>
+    <value>261, 21</value>
   </data>
   <data name="ucrInputModelPreview.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>

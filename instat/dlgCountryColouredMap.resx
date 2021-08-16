@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblCountry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 44</value>
+    <value>236, 59</value>
   </data>
   <data name="lblCountry.Size" type="System.Drawing.Size, System.Drawing">
     <value>54, 13</value>
@@ -150,7 +150,7 @@
     <value>True</value>
   </data>
   <data name="lblColourBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>235, 95</value>
+    <value>236, 105</value>
   </data>
   <data name="lblColourBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>55, 13</value>
@@ -174,10 +174,14 @@
     <value>4</value>
   </data>
   <data name="ucrSaveMap.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 256</value>
+    <value>10, 264</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrSaveMap.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveMap.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 24</value>
+    <value>314, 24</value>
   </data>
   <data name="ucrSaveMap.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -204,7 +208,7 @@
     <value>425, 354</value>
   </data>
   <data name="cmdMapOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 146</value>
+    <value>237, 155</value>
   </data>
   <data name="cmdMapOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>121, 23</value>
@@ -234,7 +238,7 @@
     <value>10, 227</value>
   </data>
   <data name="cmdPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="cmdPlotOptions.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -261,7 +265,7 @@
     <value>10, 198</value>
   </data>
   <data name="cmdPolygonOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="cmdPolygonOptions.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -282,9 +286,8 @@
     <value>2</value>
   </data>
   <data name="ucrReceiverCountry.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 60</value>
+    <value>238, 75</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrReceiverCountry.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
@@ -364,7 +367,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverColourBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>238, 108</value>
+    <value>238, 120</value>
   </data>
   <data name="ucrReceiverColourBy.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

@@ -73,8 +73,8 @@ Partial Class dlgGeneralForGraphics
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrAdditionalLayers)
-        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrSaveGraph)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

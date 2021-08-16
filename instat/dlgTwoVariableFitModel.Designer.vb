@@ -109,9 +109,9 @@ Partial Class dlgTwoVariableFitModel
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(341, 413)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(325, 413)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.Size = New System.Drawing.Size(110, 23)
+        Me.cmdDisplayOptions.Size = New System.Drawing.Size(131, 23)
         Me.cmdDisplayOptions.TabIndex = 16
         Me.cmdDisplayOptions.Tag = "Display_Options..."
         Me.cmdDisplayOptions.Text = "Display Options..."
@@ -120,9 +120,9 @@ Partial Class dlgTwoVariableFitModel
         'cmdModelOptions
         '
         Me.cmdModelOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdModelOptions.Location = New System.Drawing.Point(341, 385)
+        Me.cmdModelOptions.Location = New System.Drawing.Point(325, 385)
         Me.cmdModelOptions.Name = "cmdModelOptions"
-        Me.cmdModelOptions.Size = New System.Drawing.Size(110, 23)
+        Me.cmdModelOptions.Size = New System.Drawing.Size(131, 23)
         Me.cmdModelOptions.TabIndex = 15
         Me.cmdModelOptions.Tag = "Model_Options..."
         Me.cmdModelOptions.Text = "Model Options..."
@@ -229,7 +229,7 @@ Partial Class dlgTwoVariableFitModel
         '
         Me.cmdExplanatoryFunction.Location = New System.Drawing.Point(268, 186)
         Me.cmdExplanatoryFunction.Name = "cmdExplanatoryFunction"
-        Me.cmdExplanatoryFunction.Size = New System.Drawing.Size(103, 23)
+        Me.cmdExplanatoryFunction.Size = New System.Drawing.Size(122, 23)
         Me.cmdExplanatoryFunction.TabIndex = 10
         Me.cmdExplanatoryFunction.Text = "Function..."
         Me.cmdExplanatoryFunction.UseVisualStyleBackColor = True
@@ -271,7 +271,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrSaveModels.Location = New System.Drawing.Point(10, 415)
         Me.ucrSaveModels.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveModels.Name = "ucrSaveModels"
-        Me.ucrSaveModels.Size = New System.Drawing.Size(258, 24)
+        Me.ucrSaveModels.Size = New System.Drawing.Size(309, 24)
         Me.ucrSaveModels.TabIndex = 14
         '
         'ucrChkConvertToVariate
@@ -279,7 +279,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrChkConvertToVariate.Checked = False
         Me.ucrChkConvertToVariate.Location = New System.Drawing.Point(270, 122)
         Me.ucrChkConvertToVariate.Name = "ucrChkConvertToVariate"
-        Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(120, 20)
+        Me.ucrChkConvertToVariate.Size = New System.Drawing.Size(160, 20)
         Me.ucrChkConvertToVariate.TabIndex = 6
         '
         'ucrReceiverExplanatory
@@ -289,7 +289,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrReceiverExplanatory.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverExplanatory.Name = "ucrReceiverExplanatory"
         Me.ucrReceiverExplanatory.Selector = Nothing
-        Me.ucrReceiverExplanatory.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverExplanatory.Size = New System.Drawing.Size(122, 20)
         Me.ucrReceiverExplanatory.strNcFilePath = ""
         Me.ucrReceiverExplanatory.TabIndex = 8
         Me.ucrReceiverExplanatory.ucrSelector = Nothing
@@ -329,7 +329,7 @@ Partial Class dlgTwoVariableFitModel
         Me.ucrModelPreview.AddQuotesIfUnrecognised = True
         Me.ucrModelPreview.IsMultiline = False
         Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(97, 386)
+        Me.ucrModelPreview.Location = New System.Drawing.Point(115, 386)
         Me.ucrModelPreview.Name = "ucrModelPreview"
         Me.ucrModelPreview.Size = New System.Drawing.Size(204, 21)
         Me.ucrModelPreview.TabIndex = 13
@@ -374,7 +374,7 @@ Partial Class dlgTwoVariableFitModel
         'lblNullHypothesis
         '
         Me.lblNullHypothesis.AutoSize = True
-        Me.lblNullHypothesis.Location = New System.Drawing.Point(236, 265)
+        Me.lblNullHypothesis.Location = New System.Drawing.Point(238, 265)
         Me.lblNullHypothesis.Name = "lblNullHypothesis"
         Me.lblNullHypothesis.Size = New System.Drawing.Size(83, 13)
         Me.lblNullHypothesis.TabIndex = 89

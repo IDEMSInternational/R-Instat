@@ -41,14 +41,14 @@ Partial Class dlgRandomSample
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRandomSample))
         Me.lblSampleSize = New System.Windows.Forms.Label()
         Me.lblNumberofSamples = New System.Windows.Forms.Label()
+        Me.ucrSaveRandomSample = New instat.ucrSave()
+        Me.ucrNudNumberOfSamples = New instat.ucrNud()
+        Me.ucrNudSeed = New instat.ucrNud()
+        Me.ucrChkSetSeed = New instat.ucrCheck()
         Me.ucrSampleSize = New instat.ucrDataFrameLength()
         Me.ucrSelectorRandomSamples = New instat.ucrDataFrame()
         Me.ucrDistWithParameters = New instat.ucrDistributionsWithParameters()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrChkSetSeed = New instat.ucrCheck()
-        Me.ucrNudSeed = New instat.ucrNud()
-        Me.ucrNudNumberOfSamples = New instat.ucrNud()
-        Me.ucrSaveRandomSample = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblSampleSize
@@ -62,6 +62,37 @@ Partial Class dlgRandomSample
         resources.ApplyResources(Me.lblNumberofSamples, "lblNumberofSamples")
         Me.lblNumberofSamples.Name = "lblNumberofSamples"
         Me.lblNumberofSamples.Tag = "Number_of_Samples:"
+        '
+        'ucrSaveRandomSample
+        '
+        resources.ApplyResources(Me.ucrSaveRandomSample, "ucrSaveRandomSample")
+        Me.ucrSaveRandomSample.Name = "ucrSaveRandomSample"
+        '
+        'ucrNudNumberOfSamples
+        '
+        Me.ucrNudNumberOfSamples.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfSamples.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudNumberOfSamples, "ucrNudNumberOfSamples")
+        Me.ucrNudNumberOfSamples.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudNumberOfSamples.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudNumberOfSamples.Name = "ucrNudNumberOfSamples"
+        Me.ucrNudNumberOfSamples.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrNudSeed
+        '
+        Me.ucrNudSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSeed, "ucrNudSeed")
+        Me.ucrNudSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSeed.Name = "ucrNudSeed"
+        Me.ucrNudSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkSetSeed
+        '
+        Me.ucrChkSetSeed.Checked = False
+        resources.ApplyResources(Me.ucrChkSetSeed, "ucrChkSetSeed")
+        Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
         '
         'ucrSampleSize
         '
@@ -85,37 +116,6 @@ Partial Class dlgRandomSample
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrChkSetSeed
-        '
-        Me.ucrChkSetSeed.Checked = False
-        resources.ApplyResources(Me.ucrChkSetSeed, "ucrChkSetSeed")
-        Me.ucrChkSetSeed.Name = "ucrChkSetSeed"
-        '
-        'ucrNudSeed
-        '
-        Me.ucrNudSeed.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSeed.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSeed, "ucrNudSeed")
-        Me.ucrNudSeed.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSeed.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSeed.Name = "ucrNudSeed"
-        Me.ucrNudSeed.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrNudNumberOfSamples
-        '
-        Me.ucrNudNumberOfSamples.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberOfSamples.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudNumberOfSamples, "ucrNudNumberOfSamples")
-        Me.ucrNudNumberOfSamples.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudNumberOfSamples.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudNumberOfSamples.Name = "ucrNudNumberOfSamples"
-        Me.ucrNudNumberOfSamples.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrSaveRandomSample
-        '
-        resources.ApplyResources(Me.ucrSaveRandomSample, "ucrSaveRandomSample")
-        Me.ucrSaveRandomSample.Name = "ucrSaveRandomSample"
         '
         'dlgRandomSample
         '
