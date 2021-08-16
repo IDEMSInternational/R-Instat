@@ -153,6 +153,9 @@ Public Class dlgFrequency
         ucrChkDisplayMargins.SetRCode(clsDefaultFunction, bReset)
         ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
         ucrSelectorFrequency.SetRCode(clsDefaultFunction, bReset)
+        ucrChkPercentageProportion.SetRCode(clsDefaultFunction, bReset)
+        ucrChkDisplayAsPercentage.SetRCode(clsDefaultFunction, bReset)
+        ucrReceiverMultiplePercentages.SetRCode(clsDefaultFunction, bReset)
         ucrNudSigFigs.SetRCode(clsDefaultFunction, bReset)
         ucrSaveTable.SetRCode(clsFrequencyOperator, bReset)
     End Sub
