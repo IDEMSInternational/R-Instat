@@ -42,21 +42,21 @@ Partial Class dlgFrequency
         Me.lblFactors = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.ucrNudColumnFactors = New instat.ucrNud()
-        Me.ucrChkDisplaySummariesAsRow = New instat.ucrCheck()
         Me.lblColumnFactors = New System.Windows.Forms.Label()
-        Me.ucrNudSigFigs = New instat.ucrNud()
         Me.lblSigFigs = New System.Windows.Forms.Label()
         Me.grpDisplay = New System.Windows.Forms.GroupBox()
         Me.lblFactorsAsPercentage = New System.Windows.Forms.Label()
-        Me.ucrReceiverMultiplePercentages = New instat.ucrReceiverMultiple()
-        Me.ucrChkPercentageProportion = New instat.ucrCheck()
-        Me.ucrChkDisplayAsPercentage = New instat.ucrCheck()
         Me.lblMarginName = New System.Windows.Forms.Label()
         Me.ucrInputMarginName = New instat.ucrInputTextBox()
+        Me.ucrNudColumnFactors = New instat.ucrNud()
+        Me.ucrChkDisplaySummariesAsRow = New instat.ucrCheck()
+        Me.ucrNudSigFigs = New instat.ucrNud()
         Me.ucrSaveTable = New instat.ucrSave()
         Me.ucrChkDisplayMargins = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
+        Me.ucrReceiverMultiplePercentages = New instat.ucrReceiverMultiple()
+        Me.ucrChkPercentageProportion = New instat.ucrCheck()
+        Me.ucrChkDisplayAsPercentage = New instat.ucrCheck()
         Me.ucrReceiverFactors = New instat.ucrReceiverMultiple()
         Me.ucrSelectorFrequency = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -88,37 +88,11 @@ Partial Class dlgFrequency
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.TabStop = False
         '
-        'ucrNudColumnFactors
-        '
-        Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudColumnFactors, "ucrNudColumnFactors")
-        Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
-        Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
-        '
-        'ucrChkDisplaySummariesAsRow
-        '
-        Me.ucrChkDisplaySummariesAsRow.Checked = False
-        resources.ApplyResources(Me.ucrChkDisplaySummariesAsRow, "ucrChkDisplaySummariesAsRow")
-        Me.ucrChkDisplaySummariesAsRow.Name = "ucrChkDisplaySummariesAsRow"
-        '
         'lblColumnFactors
         '
         resources.ApplyResources(Me.lblColumnFactors, "lblColumnFactors")
         Me.lblColumnFactors.Name = "lblColumnFactors"
         Me.lblColumnFactors.Tag = ""
-        '
-        'ucrNudSigFigs
-        '
-        Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudSigFigs, "ucrNudSigFigs")
-        Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
-        Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'lblSigFigs
         '
@@ -142,27 +116,6 @@ Partial Class dlgFrequency
         Me.lblFactorsAsPercentage.Name = "lblFactorsAsPercentage"
         Me.lblFactorsAsPercentage.Tag = "Factors as Percentage:"
         '
-        'ucrReceiverMultiplePercentages
-        '
-        Me.ucrReceiverMultiplePercentages.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiverMultiplePercentages, "ucrReceiverMultiplePercentages")
-        Me.ucrReceiverMultiplePercentages.Name = "ucrReceiverMultiplePercentages"
-        Me.ucrReceiverMultiplePercentages.Selector = Nothing
-        Me.ucrReceiverMultiplePercentages.strNcFilePath = ""
-        Me.ucrReceiverMultiplePercentages.ucrSelector = Nothing
-        '
-        'ucrChkPercentageProportion
-        '
-        Me.ucrChkPercentageProportion.Checked = False
-        resources.ApplyResources(Me.ucrChkPercentageProportion, "ucrChkPercentageProportion")
-        Me.ucrChkPercentageProportion.Name = "ucrChkPercentageProportion"
-        '
-        'ucrChkDisplayAsPercentage
-        '
-        Me.ucrChkDisplayAsPercentage.Checked = False
-        resources.ApplyResources(Me.ucrChkDisplayAsPercentage, "ucrChkDisplayAsPercentage")
-        Me.ucrChkDisplayAsPercentage.Name = "ucrChkDisplayAsPercentage"
-        '
         'lblMarginName
         '
         resources.ApplyResources(Me.lblMarginName, "lblMarginName")
@@ -175,6 +128,32 @@ Partial Class dlgFrequency
         Me.ucrInputMarginName.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputMarginName, "ucrInputMarginName")
         Me.ucrInputMarginName.Name = "ucrInputMarginName"
+        '
+        'ucrNudColumnFactors
+        '
+        Me.ucrNudColumnFactors.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnFactors.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudColumnFactors, "ucrNudColumnFactors")
+        Me.ucrNudColumnFactors.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudColumnFactors.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudColumnFactors.Name = "ucrNudColumnFactors"
+        Me.ucrNudColumnFactors.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkDisplaySummariesAsRow
+        '
+        Me.ucrChkDisplaySummariesAsRow.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplaySummariesAsRow, "ucrChkDisplaySummariesAsRow")
+        Me.ucrChkDisplaySummariesAsRow.Name = "ucrChkDisplaySummariesAsRow"
+        '
+        'ucrNudSigFigs
+        '
+        Me.ucrNudSigFigs.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSigFigs.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSigFigs, "ucrNudSigFigs")
+        Me.ucrNudSigFigs.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSigFigs.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSigFigs.Name = "ucrNudSigFigs"
+        Me.ucrNudSigFigs.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'ucrSaveTable
         '
@@ -192,6 +171,27 @@ Partial Class dlgFrequency
         Me.ucrChkStoreResults.Checked = False
         resources.ApplyResources(Me.ucrChkStoreResults, "ucrChkStoreResults")
         Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
+        '
+        'ucrReceiverMultiplePercentages
+        '
+        Me.ucrReceiverMultiplePercentages.frmParent = Nothing
+        resources.ApplyResources(Me.ucrReceiverMultiplePercentages, "ucrReceiverMultiplePercentages")
+        Me.ucrReceiverMultiplePercentages.Name = "ucrReceiverMultiplePercentages"
+        Me.ucrReceiverMultiplePercentages.Selector = Nothing
+        Me.ucrReceiverMultiplePercentages.strNcFilePath = ""
+        Me.ucrReceiverMultiplePercentages.ucrSelector = Nothing
+        '
+        'ucrChkPercentageProportion
+        '
+        Me.ucrChkPercentageProportion.Checked = False
+        resources.ApplyResources(Me.ucrChkPercentageProportion, "ucrChkPercentageProportion")
+        Me.ucrChkPercentageProportion.Name = "ucrChkPercentageProportion"
+        '
+        'ucrChkDisplayAsPercentage
+        '
+        Me.ucrChkDisplayAsPercentage.Checked = False
+        resources.ApplyResources(Me.ucrChkDisplayAsPercentage, "ucrChkDisplayAsPercentage")
+        Me.ucrChkDisplayAsPercentage.Name = "ucrChkDisplayAsPercentage"
         '
         'ucrReceiverFactors
         '
