@@ -43,6 +43,10 @@ Partial Class dlgOpenSST
         Me.lblFileOpenPath = New System.Windows.Forms.Label()
         Me.lblSSTName = New System.Windows.Forms.Label()
         Me.grpCSV = New System.Windows.Forms.GroupBox()
+        Me.ucrInputNAStrings = New instat.ucrInputTextBox()
+        Me.ucrInputDecimal = New instat.ucrInputComboBox()
+        Me.ucrInputSeparator = New instat.ucrInputComboBox()
+        Me.ucrInputEncoding = New instat.ucrInputComboBox()
         Me.lblEncoding = New System.Windows.Forms.Label()
         Me.nudSkip = New System.Windows.Forms.NumericUpDown()
         Me.lblSeparator = New System.Windows.Forms.Label()
@@ -54,10 +58,6 @@ Partial Class dlgOpenSST
         Me.lblDataFromRow = New System.Windows.Forms.Label()
         Me.lblLocationName = New System.Windows.Forms.Label()
         Me.ucrInputNameLocation = New instat.ucrInputTextBox()
-        Me.ucrInputNAStrings = New instat.ucrInputTextBox()
-        Me.ucrInputDecimal = New instat.ucrInputComboBox()
-        Me.ucrInputSeparator = New instat.ucrInputComboBox()
-        Me.ucrInputEncoding = New instat.ucrInputComboBox()
         Me.ucrInputFilePath = New instat.ucrInputTextBox()
         Me.ucrInputName = New instat.ucrInputTextBox()
         Me.ucrBaseOpenSST = New instat.ucrButtons()
@@ -100,6 +100,38 @@ Partial Class dlgOpenSST
         Me.grpCSV.Controls.Add(Me.chkStringsAsFactors)
         Me.grpCSV.Name = "grpCSV"
         Me.grpCSV.TabStop = False
+        '
+        'ucrInputNAStrings
+        '
+        Me.ucrInputNAStrings.AddQuotesIfUnrecognised = True
+        Me.ucrInputNAStrings.IsMultiline = False
+        Me.ucrInputNAStrings.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNAStrings, "ucrInputNAStrings")
+        Me.ucrInputNAStrings.Name = "ucrInputNAStrings"
+        '
+        'ucrInputDecimal
+        '
+        Me.ucrInputDecimal.AddQuotesIfUnrecognised = True
+        Me.ucrInputDecimal.GetSetSelectedIndex = -1
+        Me.ucrInputDecimal.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputDecimal, "ucrInputDecimal")
+        Me.ucrInputDecimal.Name = "ucrInputDecimal"
+        '
+        'ucrInputSeparator
+        '
+        Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
+        Me.ucrInputSeparator.GetSetSelectedIndex = -1
+        Me.ucrInputSeparator.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
+        Me.ucrInputSeparator.Name = "ucrInputSeparator"
+        '
+        'ucrInputEncoding
+        '
+        Me.ucrInputEncoding.AddQuotesIfUnrecognised = True
+        Me.ucrInputEncoding.GetSetSelectedIndex = -1
+        Me.ucrInputEncoding.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputEncoding, "ucrInputEncoding")
+        Me.ucrInputEncoding.Name = "ucrInputEncoding"
         '
         'lblEncoding
         '
@@ -168,38 +200,6 @@ Partial Class dlgOpenSST
         Me.ucrInputNameLocation.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputNameLocation, "ucrInputNameLocation")
         Me.ucrInputNameLocation.Name = "ucrInputNameLocation"
-        '
-        'ucrInputNAStrings
-        '
-        Me.ucrInputNAStrings.AddQuotesIfUnrecognised = True
-        Me.ucrInputNAStrings.IsMultiline = False
-        Me.ucrInputNAStrings.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNAStrings, "ucrInputNAStrings")
-        Me.ucrInputNAStrings.Name = "ucrInputNAStrings"
-        '
-        'ucrInputDecimal
-        '
-        Me.ucrInputDecimal.AddQuotesIfUnrecognised = True
-        Me.ucrInputDecimal.GetSetSelectedIndex = -1
-        Me.ucrInputDecimal.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputDecimal, "ucrInputDecimal")
-        Me.ucrInputDecimal.Name = "ucrInputDecimal"
-        '
-        'ucrInputSeparator
-        '
-        Me.ucrInputSeparator.AddQuotesIfUnrecognised = True
-        Me.ucrInputSeparator.GetSetSelectedIndex = -1
-        Me.ucrInputSeparator.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSeparator, "ucrInputSeparator")
-        Me.ucrInputSeparator.Name = "ucrInputSeparator"
-        '
-        'ucrInputEncoding
-        '
-        Me.ucrInputEncoding.AddQuotesIfUnrecognised = True
-        Me.ucrInputEncoding.GetSetSelectedIndex = -1
-        Me.ucrInputEncoding.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputEncoding, "ucrInputEncoding")
-        Me.ucrInputEncoding.Name = "ucrInputEncoding"
         '
         'ucrInputFilePath
         '

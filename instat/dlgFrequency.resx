@@ -177,6 +177,87 @@
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
+  <data name="&gt;&gt;ucrNudSigFigs.Name" xml:space="preserve">
+    <value>ucrNudSigFigs</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSigFigs.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSigFigs.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSigFigs.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;ucrNudColumnFactors.Name" xml:space="preserve">
+    <value>ucrNudColumnFactors</value>
+  </data>
+  <data name="&gt;&gt;ucrNudColumnFactors.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudColumnFactors.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;ucrNudColumnFactors.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;lblSigFigs.Name" xml:space="preserve">
+    <value>lblSigFigs</value>
+  </data>
+  <data name="&gt;&gt;lblSigFigs.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblSigFigs.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;lblSigFigs.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="GroupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>265, 194</value>
+  </data>
+  <data name="GroupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>186, 192</value>
+  </data>
+  <data name="GroupBox1.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="GroupBox1.Text" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Name" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrNudSigFigs.Location" type="System.Drawing.Point, System.Drawing">
+    <value>129, 98</value>
+  </data>
+  <data name="ucrNudSigFigs.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudSigFigs.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSigFigs.Name" xml:space="preserve">
+    <value>ucrNudSigFigs</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSigFigs.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSigFigs.Parent" xml:space="preserve">
+    <value>GroupBox1</value>
+  </data>
+  <data name="&gt;&gt;ucrNudSigFigs.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrNudColumnFactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>129, 48</value>
   </data>
@@ -586,10 +667,10 @@
     <value>1</value>
   </data>
   <data name="ucrChkPercentageProportion.Location" type="System.Drawing.Point, System.Drawing">
-    <value>14, 166</value>
+    <value>5, 171</value>
   </data>
   <data name="ucrChkPercentageProportion.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 20</value>
+    <value>160, 15</value>
   </data>
   <data name="ucrChkPercentageProportion.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -631,7 +712,7 @@
     <value>253, 213</value>
   </data>
   <data name="grpDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>155, 192</value>
+    <value>174, 221</value>
   </data>
   <data name="grpDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

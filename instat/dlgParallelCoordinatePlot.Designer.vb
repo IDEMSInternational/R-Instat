@@ -102,6 +102,7 @@ Partial Class dlgParallelCoordinatePlot
         'ucrInputScale
         '
         Me.ucrInputScale.AddQuotesIfUnrecognised = True
+        Me.ucrInputScale.GetSetSelectedIndex = -1
         Me.ucrInputScale.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputScale, "ucrInputScale")
         Me.ucrInputScale.Name = "ucrInputScale"

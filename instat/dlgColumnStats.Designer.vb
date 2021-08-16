@@ -42,6 +42,7 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lblSummariseBy = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.cmdMissingOptions = New System.Windows.Forms.Button()
         Me.ucrChkOriginalLevel = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
@@ -55,7 +56,6 @@ Partial Class dlgColumnStats
         Me.ucrReceiverSelectedVariables = New instat.ucrReceiverMultiple()
         Me.ucrSelectorForColumnStatistics = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
-        Me.cmdMissingOptions = New System.Windows.Forms.Button()
         Me.grpOptions.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -80,6 +80,13 @@ Partial Class dlgColumnStats
         resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
+        '
+        'cmdMissingOptions
+        '
+        resources.ApplyResources(Me.cmdMissingOptions, "cmdMissingOptions")
+        Me.cmdMissingOptions.Name = "cmdMissingOptions"
+        Me.cmdMissingOptions.Tag = "MissingOptions"
+        Me.cmdMissingOptions.UseVisualStyleBackColor = True
         '
         'ucrChkOriginalLevel
         '
@@ -170,13 +177,6 @@ Partial Class dlgColumnStats
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
-        '
-        'cmdMissingOptions
-        '
-        resources.ApplyResources(Me.cmdMissingOptions, "cmdMissingOptions")
-        Me.cmdMissingOptions.Name = "cmdMissingOptions"
-        Me.cmdMissingOptions.Tag = "MissingOptions"
-        Me.cmdMissingOptions.UseVisualStyleBackColor = True
         '
         'dlgColumnStats
         '

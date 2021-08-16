@@ -130,13 +130,13 @@
     <value>250, 45</value>
   </data>
   <data name="lblSelected.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 13</value>
+    <value>53, 13</value>
   </data>
   <data name="lblSelected.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
   <data name="lblSelected.Text" xml:space="preserve">
-    <value>Rows to Summarise:</value>
+    <value>Variables:</value>
   </data>
   <data name="&gt;&gt;lblSelected.Name" xml:space="preserve">
     <value>lblSelected</value>
@@ -176,6 +176,138 @@
   </data>
   <data name="&gt;&gt;cmdUserDefined.ZOrder" xml:space="preserve">
     <value>3</value>
+  </data>
+  <data name="&gt;&gt;rdoMinimum.Name" xml:space="preserve">
+    <value>rdoMinimum</value>
+  </data>
+  <data name="&gt;&gt;rdoMinimum.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoMinimum.Parent" xml:space="preserve">
+    <value>grpStatistic</value>
+  </data>
+  <data name="&gt;&gt;rdoMinimum.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;rdoMaximum.Name" xml:space="preserve">
+    <value>rdoMaximum</value>
+  </data>
+  <data name="&gt;&gt;rdoMaximum.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoMaximum.Parent" xml:space="preserve">
+    <value>grpStatistic</value>
+  </data>
+  <data name="&gt;&gt;rdoMaximum.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rdoCount.Name" xml:space="preserve">
+    <value>rdoCount</value>
+  </data>
+  <data name="&gt;&gt;rdoCount.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCount.Parent" xml:space="preserve">
+    <value>grpStatistic</value>
+  </data>
+  <data name="&gt;&gt;rdoCount.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;rdoMean.Name" xml:space="preserve">
+    <value>rdoMean</value>
+  </data>
+  <data name="&gt;&gt;rdoMean.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoMean.Parent" xml:space="preserve">
+    <value>grpStatistic</value>
+  </data>
+  <data name="&gt;&gt;rdoMean.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;rdoStandardDeviation.Name" xml:space="preserve">
+    <value>rdoStandardDeviation</value>
+  </data>
+  <data name="&gt;&gt;rdoStandardDeviation.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoStandardDeviation.Parent" xml:space="preserve">
+    <value>grpStatistic</value>
+  </data>
+  <data name="&gt;&gt;rdoStandardDeviation.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;rdoNumberofMissing.Name" xml:space="preserve">
+    <value>rdoNumberofMissing</value>
+  </data>
+  <data name="&gt;&gt;rdoNumberofMissing.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoNumberofMissing.Parent" xml:space="preserve">
+    <value>grpStatistic</value>
+  </data>
+  <data name="&gt;&gt;rdoNumberofMissing.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;rdoMedian.Name" xml:space="preserve">
+    <value>rdoMedian</value>
+  </data>
+  <data name="&gt;&gt;rdoMedian.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoMedian.Parent" xml:space="preserve">
+    <value>grpStatistic</value>
+  </data>
+  <data name="&gt;&gt;rdoMedian.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;rdoSum.Name" xml:space="preserve">
+    <value>rdoSum</value>
+  </data>
+  <data name="&gt;&gt;rdoSum.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSum.Parent" xml:space="preserve">
+    <value>grpStatistic</value>
+  </data>
+  <data name="&gt;&gt;rdoSum.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelStatistics.Name" xml:space="preserve">
+    <value>ucrPanelStatistics</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelStatistics.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelStatistics.Parent" xml:space="preserve">
+    <value>grpStatistic</value>
+  </data>
+  <data name="&gt;&gt;ucrPanelStatistics.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="grpStatistic.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 195</value>
+  </data>
+  <data name="grpStatistic.Size" type="System.Drawing.Size, System.Drawing">
+    <value>398, 70</value>
+  </data>
+  <data name="grpStatistic.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="grpStatistic.Text" xml:space="preserve">
+    <value>Row Statistic</value>
+  </data>
+  <data name="&gt;&gt;grpStatistic.Name" xml:space="preserve">
+    <value>grpStatistic</value>
+  </data>
+  <data name="&gt;&gt;grpStatistic.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpStatistic.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpStatistic.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="rdoMinimum.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -244,7 +376,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 19</value>
+    <value>197, 19</value>
   </data>
   <data name="rdoCount.Size" type="System.Drawing.Size, System.Drawing">
     <value>53, 17</value>
@@ -334,7 +466,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoNumberofMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>204, 42</value>
+    <value>196, 42</value>
   </data>
   <data name="rdoNumberofMissing.Size" type="System.Drawing.Size, System.Drawing">
     <value>112, 17</value>
@@ -438,35 +570,11 @@
   <data name="&gt;&gt;ucrPanelStatistics.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="grpStatistic.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 195</value>
-  </data>
-  <data name="grpStatistic.Size" type="System.Drawing.Size, System.Drawing">
-    <value>398, 70</value>
-  </data>
-  <data name="grpStatistic.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="grpStatistic.Text" xml:space="preserve">
-    <value>Row Statistic</value>
-  </data>
-  <data name="&gt;&gt;grpStatistic.Name" xml:space="preserve">
-    <value>grpStatistic</value>
-  </data>
-  <data name="&gt;&gt;grpStatistic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpStatistic.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpStatistic.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="ucrChkIgnoreMissingValues.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 175</value>
+    <value>230, 170</value>
   </data>
   <data name="ucrChkIgnoreMissingValues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 20</value>
+    <value>190, 20</value>
   </data>
   <data name="ucrChkIgnoreMissingValues.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -538,7 +646,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>418, 357</value>
+    <value>419, 357</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 300</value>

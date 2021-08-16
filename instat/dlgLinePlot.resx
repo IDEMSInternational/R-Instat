@@ -181,10 +181,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 237</value>
+    <value>10, 233</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -208,10 +208,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdLineOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 208</value>
+    <value>9, 202</value>
   </data>
   <data name="cmdLineOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 23</value>
+    <value>148, 23</value>
   </data>
   <data name="cmdLineOptions.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -292,10 +292,10 @@
     <value>0</value>
   </data>
   <data name="ucrChkValley.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 340</value>
+    <value>161, 340</value>
   </data>
   <data name="ucrChkValley.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>194, 20</value>
   </data>
   <data name="ucrChkValley.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -316,7 +316,7 @@
     <value>9, 340</value>
   </data>
   <data name="ucrChkPeak.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>165, 20</value>
   </data>
   <data name="ucrChkPeak.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -343,10 +343,10 @@
     <value>417, 458</value>
   </data>
   <data name="ucrChkWithSE.Location" type="System.Drawing.Point, System.Drawing">
-    <value>162, 314</value>
+    <value>249, 314</value>
   </data>
   <data name="ucrChkWithSE.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 20</value>
+    <value>194, 20</value>
   </data>
   <data name="ucrChkWithSE.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -367,7 +367,7 @@
     <value>9, 314</value>
   </data>
   <data name="ucrChkLineofBestFit.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 24</value>
+    <value>234, 24</value>
   </data>
   <data name="ucrChkLineofBestFit.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -388,7 +388,7 @@
     <value>9, 288</value>
   </data>
   <data name="ucrChkPoints.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 24</value>
+    <value>227, 24</value>
   </data>
   <data name="ucrChkPoints.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -412,7 +412,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>254, 24</value>
+    <value>346, 24</value>
   </data>
   <data name="ucrSave.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>

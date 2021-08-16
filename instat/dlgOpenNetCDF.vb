@@ -286,7 +286,7 @@ Public Class dlgOpenNetCDF
             Me.Size = New Size(iExpandedWidth, Me.Height)
             cmdDetails.Text = "Hide Details <<"
         Else
-            Me.Size = New Size(iExpandedWidth / 1.8, Me.Height)
+            Me.Size = New Size(iExpandedWidth / 1.7, Me.Height)
             cmdDetails.Text = "Show Details >>"
         End If
         autoTranslate(Me)

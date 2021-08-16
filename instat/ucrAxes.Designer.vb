@@ -314,6 +314,7 @@ Partial Class ucrAxes
         'ucrInputTransformation
         '
         Me.ucrInputTransformation.AddQuotesIfUnrecognised = True
+        Me.ucrInputTransformation.GetSetSelectedIndex = -1
         Me.ucrInputTransformation.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputTransformation, "ucrInputTransformation")
         Me.ucrInputTransformation.Name = "ucrInputTransformation"
@@ -321,6 +322,7 @@ Partial Class ucrAxes
         'ucrInputPosition
         '
         Me.ucrInputPosition.AddQuotesIfUnrecognised = True
+        Me.ucrInputPosition.GetSetSelectedIndex = -1
         Me.ucrInputPosition.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputPosition, "ucrInputPosition")
         Me.ucrInputPosition.Name = "ucrInputPosition"
@@ -413,6 +415,7 @@ Partial Class ucrAxes
         'ucrInputComboDateLabel
         '
         Me.ucrInputComboDateLabel.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboDateLabel.GetSetSelectedIndex = -1
         Me.ucrInputComboDateLabel.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboDateLabel, "ucrInputComboDateLabel")
         Me.ucrInputComboDateLabel.Name = "ucrInputComboDateLabel"
@@ -426,6 +429,7 @@ Partial Class ucrAxes
         'ucrInputComboDateBreak
         '
         Me.ucrInputComboDateBreak.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboDateBreak.GetSetSelectedIndex = -1
         Me.ucrInputComboDateBreak.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboDateBreak, "ucrInputComboDateBreak")
         Me.ucrInputComboDateBreak.Name = "ucrInputComboDateBreak"
@@ -452,6 +456,8 @@ Partial Class ucrAxes
         '
         'ucrDtpLowerLimit
         '
+        Me.ucrDtpLowerLimit.DateValue = New Date(2021, 6, 19, 11, 15, 36, 159)
+        Me.ucrDtpLowerLimit.Format = "dd MMM yyyy"
         resources.ApplyResources(Me.ucrDtpLowerLimit, "ucrDtpLowerLimit")
         Me.ucrDtpLowerLimit.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDtpLowerLimit.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
@@ -459,6 +465,8 @@ Partial Class ucrAxes
         '
         'ucrDtpUpperLimit
         '
+        Me.ucrDtpUpperLimit.DateValue = New Date(2021, 6, 19, 11, 15, 36, 170)
+        Me.ucrDtpUpperLimit.Format = "dd MMM yyyy"
         resources.ApplyResources(Me.ucrDtpUpperLimit, "ucrDtpUpperLimit")
         Me.ucrDtpUpperLimit.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
         Me.ucrDtpUpperLimit.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
@@ -479,6 +487,7 @@ Partial Class ucrAxes
         'ucrInputAxisType
         '
         Me.ucrInputAxisType.AddQuotesIfUnrecognised = True
+        Me.ucrInputAxisType.GetSetSelectedIndex = -1
         Me.ucrInputAxisType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputAxisType, "ucrInputAxisType")
         Me.ucrInputAxisType.Name = "ucrInputAxisType"

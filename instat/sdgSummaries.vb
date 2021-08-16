@@ -170,6 +170,8 @@ Public Class sdgSummaries
         ucrChkCount.AddToLinkedControls(ucrInputComboCountTest, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="==")
         ucrChkCount.AddToLinkedControls(ucrInputCountValue, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
         ucrChkQuantile.AddToLinkedControls(ucrInputQuantile, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=0)
+        ucrChkSample.AddToLinkedControls(ucrChkSetseed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkSetseed.AddToLinkedControls(ucrNudSeed, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
 
         ucrInputN.SetLinkedDisplayControl(lblInputN)
         ucrNudFraction.SetLinkedDisplayControl(lblFractionTrimmed)
@@ -315,6 +317,15 @@ Public Class sdgSummaries
 
         ucrChkSelectAll.SetText("Select all")
 
+        ucrChkSample.SetParameter(New RParameter("summary_sample", 64), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "summary_sample" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
+        ucrChkSample.SetText("Sample")
+
+        ucrChkSetseed.SetText("Set seed")
+        ucrChkSetseed.AddParameterPresentCondition(True, "seed")
+        ucrChkSetseed.AddParameterPresentCondition(False, "seed", False)
+
+        ucrNudSeed.SetParameter(New RParameter("seed", 11))
+
         lstVerifCheckboxes.AddRange({ucrChkCorrelations, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency})
 
         ucrChkP10.SetParameter(New RParameter("p10", 64), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "p10" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
@@ -330,7 +341,7 @@ Public Class sdgSummaries
         ucrChkP80.SetParameter(New RParameter("p80", 74), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "p80" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
         ucrChkP90.SetParameter(New RParameter("p90", 75), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:=Chr(34) & "p90" & Chr(34), strNewValueIfUnchecked:=Chr(34) & Chr(34))
 
-        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkP10, ucrChkP20, ucrChkP25, ucrChkP30, ucrChkP33, ucrChkP40, ucrChkP60, ucrChkP67, ucrChkP70, ucrChkP75, ucrChkP80, ucrChkP90, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkCircMean, ucrChkCircMedian, ucrChkMin, ucrChkMedianH, ucrChkMax, ucrChkQ1, ucrChkQ3, ucrChkQuantile, ucrChkSd, ucrChkVar, ucrChkAngVar, ucrChkAngDev, ucrChkrho, ucrChkCircRange, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency})
+        lstCheckboxes.AddRange({ucrChkNTotal, ucrChkNonMissing, ucrChkNMissing, ucrChkMean, ucrChkMinimum, ucrChkMode, ucrChkMaximum, ucrChkMedian, ucrChkStdDev, ucrChkVariance, ucrChkRange, ucrChkSum, ucrChkP10, ucrChkP20, ucrChkP25, ucrChkP30, ucrChkP33, ucrChkP40, ucrChkP60, ucrChkP67, ucrChkP70, ucrChkP75, ucrChkP80, ucrChkP90, ucrChkMedianAbsoluteDeviation, ucrChkKurtosis, ucrChkCoefficientOfVariation, ucrChkSkewness, ucrChkMc, ucrChkQn, ucrChkSn, ucrChkCorrelations, ucrChkCovariance, ucrChkFirst, ucrChkLast, ucrChknth, ucrChkn_distinct, ucrChkTrimmedMean, ucrChkPercentile, ucrChkProportion, ucrChkCount, ucrChkStandardErrorOfMean, ucrChkCircMean, ucrChkCircMedian, ucrChkMin, ucrChkMedianH, ucrChkMax, ucrChkQ1, ucrChkQ3, ucrChkQuantile, ucrChkSd, ucrChkVar, ucrChkAngVar, ucrChkAngDev, ucrChkrho, ucrChkCircRange, ucrChkCoefDetermination, ucrChkCoefPersistence, ucrChkIndexOfAgreement, ucrChkKlingGuptaEfficiency, ucrChkMeanAbsoluteError, ucrChkModifiedIndexOfAgreement, ucrChkMeanError, ucrChkModNashSutcliffeEff, ucrChkMeanSquaredError, ucrChkNormRootMeanSquaredError, ucrChkNashSutcliffeEfficiency, ucrChkPercentBias, ucrChkRelativeIndexOfAgreement, ucrChkRootMeanSquaredError, ucrChkRelativeNashSutcliffeEff, ucrChkRatioOfStandardDeviation, ucrChkRatioOfRootMeanSquaredError, ucrChkSumOfSquaredResiduals, ucrChkVolumetricEfficiency, ucrChkSample})
         For Each ctrTemp As ucrCheck In lstCheckboxes
             ctrTemp.SetParameterIncludeArgumentName(False)
             ctrTemp.SetRDefault(Chr(34) & Chr(34))
@@ -397,6 +408,8 @@ Public Class sdgSummaries
         ucrInputN.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputQuantile.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
         ucrInputJmia.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrNudSeed.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkSetseed.SetRCode(clsDefaultFunction, bReset, bCloneIfNeeded:=True)
 
         ucrChkCount.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkProportion.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
@@ -473,6 +486,7 @@ Public Class sdgSummaries
         ucrChkRatioOfRootMeanSquaredError.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkSumOfSquaredResiduals.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
         ucrChkVolumetricEfficiency.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
+        ucrChkSample.SetRCode(clsListFunction, bReset, bCloneIfNeeded:=True)
 
         If bReset Then
             ucrSelectorSecondVariable.Reset()
