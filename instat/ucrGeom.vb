@@ -1735,7 +1735,7 @@ Public Class ucrGeom
         clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "lm" & Chr(34), Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
         'formula has to be an input and we dont have that currently. its passed in like this formula= y ~ x or  formula= y ~ poly(x, 2) or formula= y ~ log(x) so the user has to type in stuff
         clsgeom_smooth.AddLayerParameter("formula", "editablelist", "y ~ x", lstParameterStrings:={"y ~ x", "y ~ poly(x, 2)", "y ~ log(x)", "y ~ splines::bs(x,3)"})
-        clsgeom_smooth.AddLayerParameter("se ", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_smooth.AddLayerParameter("se ", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"}) 'We add space after parameter name se ("se ") for correct labeling, if the space is omitted, vb labels "se" as "ifelse" but when the space is included "se " is correctly labelled as "se". 
         clsgeom_smooth.AddLayerParameter("method.args", "editablelist", "list()", lstParameterStrings:={"list()"})
         clsgeom_smooth.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_smooth.AddLayerParameter("na.rm", "boolean", "FALSE")
