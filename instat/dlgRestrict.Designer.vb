@@ -149,7 +149,6 @@ Partial Class dlgRestrict
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cmdFilterFromFactors)
         Me.Controls.Add(Me.cmdEditFilter)
-        Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.Controls.Add(Me.grpApplyOptions)
         Me.Controls.Add(Me.ucrInputFilterPreview)
         Me.Controls.Add(Me.lblFilterPreview)
@@ -158,6 +157,7 @@ Partial Class dlgRestrict
         Me.Controls.Add(Me.ucrSelectorFilter)
         Me.Controls.Add(Me.cmdDefineNewFilter)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrNewDataFrameName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

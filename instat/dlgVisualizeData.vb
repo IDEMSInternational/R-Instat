@@ -26,8 +26,11 @@ Public Class dlgVisualizeData
     Private clsFilterFunction As New RFunction
     Private clsAsLogicalFunction As New RFunction
     Private clsRBinonFunction As New RFunction
+    Private clsElementTextFunction As New RFunction
+    Private clsThemeFunction As New RFunction
     Private clsNRowFunction As New RFunction
     Private clsPipeOperator As New ROperator
+    Private clsBaseOperator As New ROperator
 
     Private Sub dlgVisualizeData_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -80,17 +83,24 @@ Public Class dlgVisualizeData
         ucrInputComboboxPalette.SetDropDownStyleAsNonEditable()
         ucrInputComboboxPalette.SetItems(dctPalette)
 
+        ucrNudMaximumSize.SetMinMax(0.1, Integer.MaxValue)
         ucrNudMaximumSize.DecimalPlaces = 1
         ucrNudMaximumSize.Increment = 0.1
-        ucrNudMaximumSize.Minimum = 0.1
-        ucrNudMaximumSize.Maximum = Integer.MaxValue
 
         ' Not yet implemented
         ucrNudSamplingFunction.SetParameter(New RParameter("prob", 2))
+        ucrNudSamplingFunction.SetMinMax(0.01, 1)
         ucrNudSamplingFunction.DecimalPlaces = 2
         ucrNudSamplingFunction.Increment = 0.01
-        ucrNudSamplingFunction.Minimum = 0.01
-        ucrNudSamplingFunction.Maximum = 1
+
+        ucrChkAdjustSize.SetText("Adjust size of variable names:")
+        ucrChkAdjustSize.AddToLinkedControls(ucrNudAdjustSize, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=5)
+        ucrNudAdjustSize.SetParameter(New RParameter("size", 0))
+        ucrNudAdjustSize.SetMinMax(0.1, 15)
+        ucrNudAdjustSize.DecimalPlaces = 1
+        ucrNudAdjustSize.Increment = 0.1
+        ucrChkAdjustSize.AddParameterPresentCondition(True, "size")
+        ucrChkAdjustSize.AddParameterPresentCondition(False, "size", False)
 
         ucrReceiverVisualizeData.SetParameter(New RParameter("x", 0))
         ucrReceiverVisualizeData.SetParameterIsRFunction()
@@ -124,12 +134,22 @@ Public Class dlgVisualizeData
         clsRBinonFunction = New RFunction
         clsAsLogicalFunction = New RFunction
         clsNRowFunction = New RFunction
+        clsElementTextFunction = New RFunction
+        clsThemeFunction = New RFunction
+        clsBaseOperator = New ROperator
 
         clsPipeOperator = New ROperator
         ucrSelectorVisualizeData.Reset()
         ucrSaveGraph.Reset()
 
         clsCurrBaseFunction = clsVisDatFunction
+
+        clsThemeFunction.SetPackageName("ggplot2")
+        clsThemeFunction.SetRCommand("theme")
+        clsThemeFunction.AddParameter("axis.text.x", clsRFunctionParameter:=clsElementTextFunction, iPosition:=0)
+
+        clsElementTextFunction.SetPackageName("ggplot2")
+        clsElementTextFunction.SetRCommand("element_text")
 
         clsVisDatFunction.SetPackageName("visdat")
         clsVisDatFunction.SetRCommand("vis_dat")
@@ -168,27 +188,29 @@ Public Class dlgVisualizeData
         clsVisGuessFunction.SetRCommand("vis_guess")
         clsVisGuessFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorVisualizeData.ucrAvailableDataFrames.clsCurrDataFrame, bIncludeArgumentName:=False, iPosition:=0)
 
-        clsCurrBaseFunction.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCurrBaseFunction)
+        clsBaseOperator.SetOperation("+")
+        clsBaseOperator.AddParameter("left", clsRFunctionParameter:=clsCurrBaseFunction, iPosition:=0)
+
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrSelectorVisualizeData.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("x", 0), 1)
         ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("x", 0), 2)
-        ucrReceiverVisualizeData.AddAdditionalCodeParameterPair(clsPipeOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), 3)
-        ucrSelectorVisualizeData.AddAdditionalCodeParameterPair(clsPipeOperator, New RParameter("left", 0, bNewIncludeArgumentName:=False), 1)
-        ucrSaveGraph.AddAdditionalRCode(clsVisMissFunction, iAdditionalPairNo:=1)
-        ucrSaveGraph.AddAdditionalRCode(clsVisGuessFunction, iAdditionalPairNo:=2)
         ucrInputComboboxPalette.AddAdditionalCodeParameterPair(clsVisGuessFunction, New RParameter("palette", 1), iAdditionalPairNo:=1)
         ucrChkSortVariables.AddAdditionalCodeParameterPair(clsVisMissFunction, New RParameter("sort_miss", 2), iAdditionalPairNo:=1)
+
 
         ucrPnlSelectData.SetRCode(clsCurrBaseFunction, bReset)
         ucrPnlVisualizeData.SetRCode(clsCurrBaseFunction, bReset)
         ucrReceiverVisualizeData.SetRCode(clsVisDatFunction, bReset)
         ucrSelectorVisualizeData.SetRCode(clsNRowFunction, bReset)
-        ucrSaveGraph.SetRCode(clsVisDatFunction, bReset)
+        ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
         ucrInputComboboxPalette.SetRCode(clsVisDatFunction, bReset)
         ucrChkSortVariables.SetRCode(clsVisDatFunction)
+        ucrNudAdjustSize.SetRCode(clsElementTextFunction, bReset)
+        ucrChkAdjustSize.SetRCode(clsElementTextFunction, bReset)
         ucrNudSamplingFunction.SetRCode(clsRBinonFunction, bReset)
     End Sub
 
@@ -219,7 +241,7 @@ Public Class dlgVisualizeData
             ucrSaveGraph.SetPrefix("vis_guess")
             clsCurrBaseFunction = clsVisGuessFunction
         End If
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCurrBaseFunction)
+        ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         AddRemoveDataHideOptionsButtons()
     End Sub
 
@@ -294,6 +316,14 @@ Public Class dlgVisualizeData
                 clsVisGuessFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0, bIncludeArgumentName:=False)
                 clsVisMissFunction.AddParameter("data", clsROperatorParameter:=clsPipeOperator, iPosition:=0, bIncludeArgumentName:=False)
             End If
+        End If
+    End Sub
+
+    Private Sub ucrChkAdjustSize_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAdjustSize.ControlValueChanged
+        If ucrChkAdjustSize.Checked Then
+            clsBaseOperator.AddParameter("right", clsRFunctionParameter:=clsThemeFunction, iPosition:=1)
+        Else
+            clsBaseOperator.RemoveParameterByName("right")
         End If
     End Sub
 

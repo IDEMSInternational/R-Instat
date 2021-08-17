@@ -66,6 +66,7 @@ Partial Class dlgOneVarCompareModels
         '
         'ucrSelectorOneVarCompModels
         '
+        Me.ucrSelectorOneVarCompModels.bDropUnusedFilterLevels = False
         Me.ucrSelectorOneVarCompModels.bShowHiddenColumns = False
         Me.ucrSelectorOneVarCompModels.bUseCurrentFilter = True
         Me.ucrSelectorOneVarCompModels.Location = New System.Drawing.Point(10, 10)
@@ -76,9 +77,9 @@ Partial Class dlgOneVarCompareModels
         '
         'cmdDisplayObjects
         '
-        Me.cmdDisplayObjects.Location = New System.Drawing.Point(307, 176)
+        Me.cmdDisplayObjects.Location = New System.Drawing.Point(283, 176)
         Me.cmdDisplayObjects.Name = "cmdDisplayObjects"
-        Me.cmdDisplayObjects.Size = New System.Drawing.Size(101, 23)
+        Me.cmdDisplayObjects.Size = New System.Drawing.Size(125, 23)
         Me.cmdDisplayObjects.TabIndex = 3
         Me.cmdDisplayObjects.Text = "Display Objects..."
         Me.cmdDisplayObjects.UseVisualStyleBackColor = True

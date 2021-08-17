@@ -91,7 +91,7 @@ Partial Class dlgPICSARainfall
         Me.cmdOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdOptions.Location = New System.Drawing.Point(9, 231)
         Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Size = New System.Drawing.Size(119, 23)
+        Me.cmdOptions.Size = New System.Drawing.Size(126, 23)
         Me.cmdOptions.TabIndex = 28
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.Text = "Plot Options"
@@ -103,7 +103,7 @@ Partial Class dlgPICSARainfall
         Me.cmdPICSAOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
         Me.cmdPICSAOptions.Location = New System.Drawing.Point(9, 201)
         Me.cmdPICSAOptions.Name = "cmdPICSAOptions"
-        Me.cmdPICSAOptions.Size = New System.Drawing.Size(119, 23)
+        Me.cmdPICSAOptions.Size = New System.Drawing.Size(126, 23)
         Me.cmdPICSAOptions.TabIndex = 21
         Me.cmdPICSAOptions.Tag = ""
         Me.cmdPICSAOptions.Text = "PICSA Options"
@@ -149,7 +149,7 @@ Partial Class dlgPICSARainfall
         Me.ucrChkPoints.Checked = False
         Me.ucrChkPoints.Location = New System.Drawing.Point(9, 307)
         Me.ucrChkPoints.Name = "ucrChkPoints"
-        Me.ucrChkPoints.Size = New System.Drawing.Size(100, 24)
+        Me.ucrChkPoints.Size = New System.Drawing.Size(151, 24)
         Me.ucrChkPoints.TabIndex = 22
         '
         'ucrSave
@@ -157,7 +157,7 @@ Partial Class dlgPICSARainfall
         Me.ucrSave.Location = New System.Drawing.Point(9, 337)
         Me.ucrSave.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSave.Name = "ucrSave"
-        Me.ucrSave.Size = New System.Drawing.Size(254, 24)
+        Me.ucrSave.Size = New System.Drawing.Size(320, 24)
         Me.ucrSave.TabIndex = 25
         '
         'ucrSelectorPICSARainfall

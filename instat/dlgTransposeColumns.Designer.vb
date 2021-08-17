@@ -69,6 +69,7 @@ Partial Class dlgTransposeColumns
         '
         'ucrSelectorTransposeColumns
         '
+        Me.ucrSelectorTransposeColumns.bDropUnusedFilterLevels = False
         Me.ucrSelectorTransposeColumns.bShowHiddenColumns = False
         Me.ucrSelectorTransposeColumns.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorTransposeColumns, "ucrSelectorTransposeColumns")

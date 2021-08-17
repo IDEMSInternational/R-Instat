@@ -29,7 +29,6 @@ Partial Class dlgCircularDensityPlot
         Me.lblKernel = New System.Windows.Forms.Label()
         Me.lblBandWidth = New System.Windows.Forms.Label()
         Me.lblVariable = New System.Windows.Forms.Label()
-        Me.lblCircularOptions = New System.Windows.Forms.Label()
         Me.lblBins = New System.Windows.Forms.Label()
         Me.ucrInputUnits = New instat.ucrInputComboBox()
         Me.ucrPnlOptions = New instat.UcrPanel()
@@ -48,7 +47,7 @@ Partial Class dlgCircularDensityPlot
         'lblUnits
         '
         Me.lblUnits.AutoSize = True
-        Me.lblUnits.Location = New System.Drawing.Point(269, 221)
+        Me.lblUnits.Location = New System.Drawing.Point(237, 225)
         Me.lblUnits.Name = "lblUnits"
         Me.lblUnits.Size = New System.Drawing.Size(34, 13)
         Me.lblUnits.TabIndex = 30
@@ -62,9 +61,9 @@ Partial Class dlgCircularDensityPlot
         Me.rdoScatterPlot.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoScatterPlot.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoScatterPlot.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoScatterPlot.Location = New System.Drawing.Point(289, 11)
+        Me.rdoScatterPlot.Location = New System.Drawing.Point(266, 2)
         Me.rdoScatterPlot.Name = "rdoScatterPlot"
-        Me.rdoScatterPlot.Size = New System.Drawing.Size(110, 28)
+        Me.rdoScatterPlot.Size = New System.Drawing.Size(110, 47)
         Me.rdoScatterPlot.TabIndex = 28
         Me.rdoScatterPlot.TabStop = True
         Me.rdoScatterPlot.Tag = "ScatterOPlot"
@@ -80,9 +79,9 @@ Partial Class dlgCircularDensityPlot
         Me.rdoDensity.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoDensity.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoDensity.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoDensity.Location = New System.Drawing.Point(70, 11)
+        Me.rdoDensity.Location = New System.Drawing.Point(41, 2)
         Me.rdoDensity.Name = "rdoDensity"
-        Me.rdoDensity.Size = New System.Drawing.Size(101, 28)
+        Me.rdoDensity.Size = New System.Drawing.Size(101, 47)
         Me.rdoDensity.TabIndex = 27
         Me.rdoDensity.TabStop = True
         Me.rdoDensity.Tag = "Density"
@@ -98,9 +97,9 @@ Partial Class dlgCircularDensityPlot
         Me.rdoRosePlot.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
         Me.rdoRosePlot.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.rdoRosePlot.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.rdoRosePlot.Location = New System.Drawing.Point(167, 11)
+        Me.rdoRosePlot.Location = New System.Drawing.Point(142, 2)
         Me.rdoRosePlot.Name = "rdoRosePlot"
-        Me.rdoRosePlot.Size = New System.Drawing.Size(124, 28)
+        Me.rdoRosePlot.Size = New System.Drawing.Size(124, 47)
         Me.rdoRosePlot.TabIndex = 26
         Me.rdoRosePlot.TabStop = True
         Me.rdoRosePlot.Tag = "RosePlot"
@@ -111,7 +110,7 @@ Partial Class dlgCircularDensityPlot
         'lblKernel
         '
         Me.lblKernel.AutoSize = True
-        Me.lblKernel.Location = New System.Drawing.Point(269, 194)
+        Me.lblKernel.Location = New System.Drawing.Point(237, 198)
         Me.lblKernel.Name = "lblKernel"
         Me.lblKernel.Size = New System.Drawing.Size(43, 13)
         Me.lblKernel.TabIndex = 24
@@ -120,7 +119,7 @@ Partial Class dlgCircularDensityPlot
         'lblBandWidth
         '
         Me.lblBandWidth.AutoSize = True
-        Me.lblBandWidth.Location = New System.Drawing.Point(270, 247)
+        Me.lblBandWidth.Location = New System.Drawing.Point(237, 247)
         Me.lblBandWidth.Name = "lblBandWidth"
         Me.lblBandWidth.Size = New System.Drawing.Size(63, 13)
         Me.lblBandWidth.TabIndex = 22
@@ -135,19 +134,10 @@ Partial Class dlgCircularDensityPlot
         Me.lblVariable.TabIndex = 18
         Me.lblVariable.Text = "Variable:"
         '
-        'lblCircularOptions
-        '
-        Me.lblCircularOptions.AutoSize = True
-        Me.lblCircularOptions.Location = New System.Drawing.Point(21, 19)
-        Me.lblCircularOptions.Name = "lblCircularOptions"
-        Me.lblCircularOptions.Size = New System.Drawing.Size(45, 13)
-        Me.lblCircularOptions.TabIndex = 31
-        Me.lblCircularOptions.Text = "Circular:"
-        '
         'lblBins
         '
         Me.lblBins.AutoSize = True
-        Me.lblBins.Location = New System.Drawing.Point(272, 247)
+        Me.lblBins.Location = New System.Drawing.Point(237, 247)
         Me.lblBins.Name = "lblBins"
         Me.lblBins.Size = New System.Drawing.Size(62, 13)
         Me.lblBins.TabIndex = 33
@@ -165,10 +155,10 @@ Partial Class dlgCircularDensityPlot
         '
         'ucrPnlOptions
         '
-        Me.ucrPnlOptions.Location = New System.Drawing.Point(58, 10)
+        Me.ucrPnlOptions.Location = New System.Drawing.Point(36, -2)
         Me.ucrPnlOptions.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlOptions.Name = "ucrPnlOptions"
-        Me.ucrPnlOptions.Size = New System.Drawing.Size(348, 30)
+        Me.ucrPnlOptions.Size = New System.Drawing.Size(348, 57)
         Me.ucrPnlOptions.TabIndex = 25
         '
         'ucrInputComboKernel
@@ -184,17 +174,17 @@ Partial Class dlgCircularDensityPlot
         'ucrChkOmitMissing
         '
         Me.ucrChkOmitMissing.Checked = False
-        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(10, 257)
+        Me.ucrChkOmitMissing.Location = New System.Drawing.Point(5, 257)
         Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
         Me.ucrChkOmitMissing.Size = New System.Drawing.Size(170, 20)
         Me.ucrChkOmitMissing.TabIndex = 20
         '
         'ucrSaveDensity
         '
-        Me.ucrSaveDensity.Location = New System.Drawing.Point(10, 297)
+        Me.ucrSaveDensity.Location = New System.Drawing.Point(5, 297)
         Me.ucrSaveDensity.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveDensity.Name = "ucrSaveDensity"
-        Me.ucrSaveDensity.Size = New System.Drawing.Size(249, 21)
+        Me.ucrSaveDensity.Size = New System.Drawing.Size(308, 21)
         Me.ucrSaveDensity.TabIndex = 19
         '
         'ucrReceiverVariable
@@ -214,7 +204,7 @@ Partial Class dlgCircularDensityPlot
         Me.ucrSelectorDataFrame.bDropUnusedFilterLevels = False
         Me.ucrSelectorDataFrame.bShowHiddenColumns = False
         Me.ucrSelectorDataFrame.bUseCurrentFilter = True
-        Me.ucrSelectorDataFrame.Location = New System.Drawing.Point(10, 50)
+        Me.ucrSelectorDataFrame.Location = New System.Drawing.Point(10, 60)
         Me.ucrSelectorDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorDataFrame.Name = "ucrSelectorDataFrame"
         Me.ucrSelectorDataFrame.Size = New System.Drawing.Size(210, 180)
@@ -251,7 +241,7 @@ Partial Class dlgCircularDensityPlot
         '
         Me.ucrNudShrink.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudShrink.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudShrink.Location = New System.Drawing.Point(340, 275)
+        Me.ucrNudShrink.Location = New System.Drawing.Point(360, 272)
         Me.ucrNudShrink.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudShrink.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudShrink.Name = "ucrNudShrink"
@@ -262,7 +252,7 @@ Partial Class dlgCircularDensityPlot
         'lblShrink
         '
         Me.lblShrink.AutoSize = True
-        Me.lblShrink.Location = New System.Drawing.Point(269, 282)
+        Me.lblShrink.Location = New System.Drawing.Point(237, 279)
         Me.lblShrink.Name = "lblShrink"
         Me.lblShrink.Size = New System.Drawing.Size(43, 13)
         Me.lblShrink.TabIndex = 35
@@ -275,7 +265,6 @@ Partial Class dlgCircularDensityPlot
         Me.ClientSize = New System.Drawing.Size(420, 389)
         Me.Controls.Add(Me.lblShrink)
         Me.Controls.Add(Me.ucrNudShrink)
-        Me.Controls.Add(Me.lblCircularOptions)
         Me.Controls.Add(Me.lblUnits)
         Me.Controls.Add(Me.ucrInputUnits)
         Me.Controls.Add(Me.rdoScatterPlot)
@@ -321,7 +310,6 @@ Partial Class dlgCircularDensityPlot
     Friend WithEvents lblVariable As Label
     Friend WithEvents ucrReceiverVariable As ucrReceiverSingle
     Friend WithEvents ucrSelectorDataFrame As ucrSelectorByDataFrameAddRemove
-    Friend WithEvents lblCircularOptions As Label
     Friend WithEvents ucrInputBins As ucrInputTextBox
     Friend WithEvents lblBins As Label
     Friend WithEvents lblShrink As Label

@@ -341,6 +341,12 @@
     <Compile Include="dlgPasteSpecial.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPivotTable.Designer.vb">
+      <DependentUpon>dlgPivotTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPivotTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSeasonalPlot.Designer.vb">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </Compile>
@@ -2817,6 +2823,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPasteSpecial.resx">
       <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPivotTable.resx">
+      <DependentUpon>dlgPivotTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
