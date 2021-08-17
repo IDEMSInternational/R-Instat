@@ -428,6 +428,7 @@ Partial Class dlgModelling
         'ucrInputComboRPackage
         '
         Me.ucrInputComboRPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboRPackage.GetSetSelectedIndex = -1
         Me.ucrInputComboRPackage.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputComboRPackage, "ucrInputComboRPackage")
         Me.ucrInputComboRPackage.Name = "ucrInputComboRPackage"

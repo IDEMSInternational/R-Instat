@@ -46,16 +46,16 @@ Partial Class dlgClimSoft
         Me.lblStartDate = New System.Windows.Forms.Label()
         Me.lblEndDate = New System.Windows.Forms.Label()
         Me.ttClimsoft = New System.Windows.Forms.ToolTip(Me.components)
-        Me.lblConnection = New System.Windows.Forms.Label()
         Me.ucrChkUnstackData = New instat.ucrCheck()
         Me.ucrChkFlagsData = New instat.ucrCheck()
         Me.ucrChkElements = New instat.ucrCheck()
-        Me.ucrComboBoxElements = New instat.ucrInputComboBox()
-        Me.ucrComboBoxStations = New instat.ucrInputComboBox()
         Me.ucrChkDateRange = New instat.ucrCheck()
         Me.ucrDtpEndDate = New instat.ucrDateTimePicker()
         Me.ucrDtpStartdate = New instat.ucrDateTimePicker()
         Me.ucrChkObservationData = New instat.ucrCheck()
+        Me.lblConnection = New System.Windows.Forms.Label()
+        Me.ucrComboBoxElements = New instat.ucrInputComboBox()
+        Me.ucrComboBoxStations = New instat.ucrInputComboBox()
         Me.ucrSelectorForClimSoft = New instat.ucrSelectorAddRemove()
         Me.ucrReceiverMultipleElements = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMultipleStations = New instat.ucrReceiverMultiple()
@@ -88,12 +88,6 @@ Partial Class dlgClimSoft
         resources.ApplyResources(Me.lblEndDate, "lblEndDate")
         Me.lblEndDate.Name = "lblEndDate"
         '
-        'lblConnection
-        '
-        resources.ApplyResources(Me.lblConnection, "lblConnection")
-        Me.lblConnection.ForeColor = System.Drawing.Color.Red
-        Me.lblConnection.Name = "lblConnection"
-        '
         'ucrChkUnstackData
         '
         Me.ucrChkUnstackData.Checked = True
@@ -114,22 +108,6 @@ Partial Class dlgClimSoft
         resources.ApplyResources(Me.ucrChkElements, "ucrChkElements")
         Me.ucrChkElements.Name = "ucrChkElements"
         Me.ttClimsoft.SetToolTip(Me.ucrChkElements, resources.GetString("ucrChkElements.ToolTip"))
-        '
-        'ucrComboBoxElements
-        '
-        Me.ucrComboBoxElements.AddQuotesIfUnrecognised = True
-        Me.ucrComboBoxElements.GetSetSelectedIndex = -1
-        Me.ucrComboBoxElements.IsReadOnly = False
-        resources.ApplyResources(Me.ucrComboBoxElements, "ucrComboBoxElements")
-        Me.ucrComboBoxElements.Name = "ucrComboBoxElements"
-        '
-        'ucrComboBoxStations
-        '
-        Me.ucrComboBoxStations.AddQuotesIfUnrecognised = True
-        Me.ucrComboBoxStations.GetSetSelectedIndex = -1
-        Me.ucrComboBoxStations.IsReadOnly = False
-        resources.ApplyResources(Me.ucrComboBoxStations, "ucrComboBoxStations")
-        Me.ucrComboBoxStations.Name = "ucrComboBoxStations"
         '
         'ucrChkDateRange
         '
@@ -164,6 +142,28 @@ Partial Class dlgClimSoft
         resources.ApplyResources(Me.ucrChkObservationData, "ucrChkObservationData")
         Me.ucrChkObservationData.Name = "ucrChkObservationData"
         Me.ttClimsoft.SetToolTip(Me.ucrChkObservationData, resources.GetString("ucrChkObservationData.ToolTip"))
+        '
+        'lblConnection
+        '
+        resources.ApplyResources(Me.lblConnection, "lblConnection")
+        Me.lblConnection.ForeColor = System.Drawing.Color.Red
+        Me.lblConnection.Name = "lblConnection"
+        '
+        'ucrComboBoxElements
+        '
+        Me.ucrComboBoxElements.AddQuotesIfUnrecognised = True
+        Me.ucrComboBoxElements.GetSetSelectedIndex = -1
+        Me.ucrComboBoxElements.IsReadOnly = False
+        resources.ApplyResources(Me.ucrComboBoxElements, "ucrComboBoxElements")
+        Me.ucrComboBoxElements.Name = "ucrComboBoxElements"
+        '
+        'ucrComboBoxStations
+        '
+        Me.ucrComboBoxStations.AddQuotesIfUnrecognised = True
+        Me.ucrComboBoxStations.GetSetSelectedIndex = -1
+        Me.ucrComboBoxStations.IsReadOnly = False
+        resources.ApplyResources(Me.ucrComboBoxStations, "ucrComboBoxStations")
+        Me.ucrComboBoxStations.Name = "ucrComboBoxStations"
         '
         'ucrSelectorForClimSoft
         '

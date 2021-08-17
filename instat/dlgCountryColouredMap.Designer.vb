@@ -70,6 +70,7 @@ Partial Class dlgCountryColouredMap
         '
         'ucrSelectorCountryColouredMap
         '
+        Me.ucrSelectorCountryColouredMap.bDropUnusedFilterLevels = False
         Me.ucrSelectorCountryColouredMap.bShowHiddenColumns = False
         Me.ucrSelectorCountryColouredMap.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorCountryColouredMap, "ucrSelectorCountryColouredMap")

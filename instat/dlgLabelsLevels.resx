@@ -147,10 +147,10 @@
     <value>3</value>
   </data>
   <data name="cmdAddLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 287</value>
+    <value>82, 287</value>
   </data>
   <data name="cmdAddLevel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>96, 23</value>
+    <value>168, 23</value>
   </data>
   <data name="cmdAddLevel.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -171,10 +171,10 @@
     <value>1</value>
   </data>
   <data name="ucrChkIncludeLevelNumbers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 316</value>
+    <value>82, 316</value>
   </data>
   <data name="ucrChkIncludeLevelNumbers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>135, 20</value>
+    <value>168, 20</value>
   </data>
   <data name="ucrChkIncludeLevelNumbers.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>

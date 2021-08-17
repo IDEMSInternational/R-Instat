@@ -101,6 +101,7 @@ Partial Class dlgPrincipalComponentAnalysis
         '
         'ucrSelectorPCA
         '
+        Me.ucrSelectorPCA.bDropUnusedFilterLevels = False
         Me.ucrSelectorPCA.bShowHiddenColumns = False
         Me.ucrSelectorPCA.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorPCA, "ucrSelectorPCA")
@@ -116,7 +117,6 @@ Partial Class dlgPrincipalComponentAnalysis
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrChkScaleData)
-        Me.Controls.Add(Me.ucrSaveResult)
         Me.Controls.Add(Me.ucrNudNumberOfComp)
         Me.Controls.Add(Me.lblComponents)
         Me.Controls.Add(Me.cmdPCAOptions)
@@ -124,6 +124,7 @@ Partial Class dlgPrincipalComponentAnalysis
         Me.Controls.Add(Me.ucrReceiverMultiplePCA)
         Me.Controls.Add(Me.ucrSelectorPCA)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrSaveResult)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

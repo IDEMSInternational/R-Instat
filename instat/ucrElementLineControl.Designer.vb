@@ -68,6 +68,7 @@ Partial Class ucrElementLineControl
         'ucrLineColors
         '
         Me.ucrLineColors.AddQuotesIfUnrecognised = True
+        Me.ucrLineColors.GetSetSelectedIndex = -1
         Me.ucrLineColors.IsReadOnly = False
         resources.ApplyResources(Me.ucrLineColors, "ucrLineColors")
         Me.ucrLineColors.Name = "ucrLineColors"
@@ -99,6 +100,7 @@ Partial Class ucrElementLineControl
         'ucrInputLineLineEnd
         '
         Me.ucrInputLineLineEnd.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineLineEnd.GetSetSelectedIndex = -1
         Me.ucrInputLineLineEnd.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLineLineEnd, "ucrInputLineLineEnd")
         Me.ucrInputLineLineEnd.Name = "ucrInputLineLineEnd"
@@ -116,6 +118,7 @@ Partial Class ucrElementLineControl
         'ucrInputLineLineType
         '
         Me.ucrInputLineLineType.AddQuotesIfUnrecognised = True
+        Me.ucrInputLineLineType.GetSetSelectedIndex = -1
         Me.ucrInputLineLineType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLineLineType, "ucrInputLineLineType")
         Me.ucrInputLineLineType.Name = "ucrInputLineLineType"

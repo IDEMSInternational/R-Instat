@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblDistributionParameters.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 45</value>
+    <value>2, 43</value>
   </data>
   <data name="lblDistributionParameters.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 13</value>
@@ -243,7 +243,7 @@
     <value>4</value>
   </data>
   <data name="ucrInputParameter1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 64</value>
+    <value>143, 67</value>
   </data>
   <data name="ucrInputParameter1.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 21</value>
@@ -264,7 +264,7 @@
     <value>3</value>
   </data>
   <data name="ucrInputParameter2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 93</value>
+    <value>143, 95</value>
   </data>
   <data name="ucrInputParameter2.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 21</value>
@@ -285,7 +285,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputParameter3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 120</value>
+    <value>143, 122</value>
   </data>
   <data name="ucrInputParameter3.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 21</value>
@@ -306,7 +306,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputParameter4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>143, 147</value>
+    <value>143, 148</value>
   </data>
   <data name="ucrInputParameter4.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 21</value>

@@ -46,6 +46,7 @@ Partial Class ucrSaveGraph
         'ucrInputGraphName
         '
         Me.ucrInputGraphName.AddQuotesIfUnrecognised = True
+        Me.ucrInputGraphName.GetSetSelectedIndex = -1
         Me.ucrInputGraphName.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputGraphName, "ucrInputGraphName")
         Me.ucrInputGraphName.Name = "ucrInputGraphName"

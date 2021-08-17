@@ -148,8 +148,8 @@ Partial Class sdgOneVarGraph
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrButtonsOneVarGraph)
         Me.Controls.Add(Me.tbcOneVarGraph)
+        Me.Controls.Add(Me.ucrButtonsOneVarGraph)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

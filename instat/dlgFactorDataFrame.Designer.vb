@@ -51,7 +51,7 @@ Partial Class dlgFactorDataFrame
         'lblSelectedFactor
         '
         Me.lblSelectedFactor.AutoSize = True
-        Me.lblSelectedFactor.Location = New System.Drawing.Point(253, 34)
+        Me.lblSelectedFactor.Location = New System.Drawing.Point(235, 36)
         Me.lblSelectedFactor.Name = "lblSelectedFactor"
         Me.lblSelectedFactor.Size = New System.Drawing.Size(85, 13)
         Me.lblSelectedFactor.TabIndex = 1
@@ -60,7 +60,7 @@ Partial Class dlgFactorDataFrame
         'lblFactorNames
         '
         Me.lblFactorNames.AutoSize = True
-        Me.lblFactorNames.Location = New System.Drawing.Point(249, 81)
+        Me.lblFactorNames.Location = New System.Drawing.Point(235, 80)
         Me.lblFactorNames.Name = "lblFactorNames"
         Me.lblFactorNames.Size = New System.Drawing.Size(121, 13)
         Me.lblFactorNames.TabIndex = 3
@@ -69,7 +69,7 @@ Partial Class dlgFactorDataFrame
         'ucrChkAddCurrentContrasts
         '
         Me.ucrChkAddCurrentContrasts.Checked = False
-        Me.ucrChkAddCurrentContrasts.Location = New System.Drawing.Point(251, 149)
+        Me.ucrChkAddCurrentContrasts.Location = New System.Drawing.Point(238, 149)
         Me.ucrChkAddCurrentContrasts.Name = "ucrChkAddCurrentContrasts"
         Me.ucrChkAddCurrentContrasts.Size = New System.Drawing.Size(165, 20)
         Me.ucrChkAddCurrentContrasts.TabIndex = 6
@@ -77,16 +77,17 @@ Partial Class dlgFactorDataFrame
         'ucrChkReplaceIfAlreadyExists
         '
         Me.ucrChkReplaceIfAlreadyExists.Checked = False
-        Me.ucrChkReplaceIfAlreadyExists.Location = New System.Drawing.Point(251, 123)
+        Me.ucrChkReplaceIfAlreadyExists.Location = New System.Drawing.Point(238, 123)
         Me.ucrChkReplaceIfAlreadyExists.Name = "ucrChkReplaceIfAlreadyExists"
         Me.ucrChkReplaceIfAlreadyExists.Size = New System.Drawing.Size(165, 20)
         Me.ucrChkReplaceIfAlreadyExists.TabIndex = 5
         '
         'ucrInputFactorNames
         '
+        Me.ucrInputFactorNames.AddQuotesIfUnrecognised = True
         Me.ucrInputFactorNames.IsMultiline = False
         Me.ucrInputFactorNames.IsReadOnly = False
-        Me.ucrInputFactorNames.Location = New System.Drawing.Point(251, 96)
+        Me.ucrInputFactorNames.Location = New System.Drawing.Point(238, 96)
         Me.ucrInputFactorNames.Name = "ucrInputFactorNames"
         Me.ucrInputFactorNames.Size = New System.Drawing.Size(120, 21)
         Me.ucrInputFactorNames.TabIndex = 4
@@ -101,15 +102,18 @@ Partial Class dlgFactorDataFrame
         'ucrReceiverFactorDataFrame
         '
         Me.ucrReceiverFactorDataFrame.frmParent = Me
-        Me.ucrReceiverFactorDataFrame.Location = New System.Drawing.Point(252, 49)
+        Me.ucrReceiverFactorDataFrame.Location = New System.Drawing.Point(238, 49)
         Me.ucrReceiverFactorDataFrame.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverFactorDataFrame.Name = "ucrReceiverFactorDataFrame"
         Me.ucrReceiverFactorDataFrame.Selector = Nothing
         Me.ucrReceiverFactorDataFrame.Size = New System.Drawing.Size(120, 20)
+        Me.ucrReceiverFactorDataFrame.strNcFilePath = ""
         Me.ucrReceiverFactorDataFrame.TabIndex = 2
+        Me.ucrReceiverFactorDataFrame.ucrSelector = Nothing
         '
         'ucrSelectorFactorDataFrame
         '
+        Me.ucrSelectorFactorDataFrame.bDropUnusedFilterLevels = False
         Me.ucrSelectorFactorDataFrame.bShowHiddenColumns = False
         Me.ucrSelectorFactorDataFrame.bUseCurrentFilter = True
         Me.ucrSelectorFactorDataFrame.Location = New System.Drawing.Point(10, 10)

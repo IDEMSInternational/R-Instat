@@ -35,8 +35,9 @@ Partial Class dlgHelpVignettes
         'ucrInputComboPackage
         '
         Me.ucrInputComboPackage.AddQuotesIfUnrecognised = True
+        Me.ucrInputComboPackage.GetSetSelectedIndex = -1
         Me.ucrInputComboPackage.IsReadOnly = False
-        Me.ucrInputComboPackage.Location = New System.Drawing.Point(133, 58)
+        Me.ucrInputComboPackage.Location = New System.Drawing.Point(175, 62)
         Me.ucrInputComboPackage.Name = "ucrInputComboPackage"
         Me.ucrInputComboPackage.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputComboPackage.TabIndex = 4
@@ -51,7 +52,7 @@ Partial Class dlgHelpVignettes
         'lblPackage
         '
         Me.lblPackage.AutoSize = True
-        Me.lblPackage.Location = New System.Drawing.Point(23, 62)
+        Me.lblPackage.Location = New System.Drawing.Point(20, 62)
         Me.lblPackage.Name = "lblPackage"
         Me.lblPackage.Size = New System.Drawing.Size(84, 13)
         Me.lblPackage.TabIndex = 3
@@ -103,7 +104,7 @@ Partial Class dlgHelpVignettes
         Me.ucrInputFunctionName.AddQuotesIfUnrecognised = True
         Me.ucrInputFunctionName.IsMultiline = False
         Me.ucrInputFunctionName.IsReadOnly = False
-        Me.ucrInputFunctionName.Location = New System.Drawing.Point(133, 99)
+        Me.ucrInputFunctionName.Location = New System.Drawing.Point(175, 100)
         Me.ucrInputFunctionName.Name = "ucrInputFunctionName"
         Me.ucrInputFunctionName.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputFunctionName.TabIndex = 6
@@ -113,7 +114,7 @@ Partial Class dlgHelpVignettes
         Me.ucrChkFunction.Checked = False
         Me.ucrChkFunction.Location = New System.Drawing.Point(23, 100)
         Me.ucrChkFunction.Name = "ucrChkFunction"
-        Me.ucrChkFunction.Size = New System.Drawing.Size(107, 20)
+        Me.ucrChkFunction.Size = New System.Drawing.Size(146, 20)
         Me.ucrChkFunction.TabIndex = 5
         '
         'dlgHelpVignettes

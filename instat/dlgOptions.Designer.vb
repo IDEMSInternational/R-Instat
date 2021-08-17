@@ -127,7 +127,6 @@ Partial Class dlgOptions
         Me.tbpComments.SuspendLayout()
         Me.pnComments.SuspendLayout()
         Me.tbpImport.SuspendLayout()
-        Me.pnImportData.SuspendLayout()
         Me.tbpOutputWindow.SuspendLayout()
         Me.grpROptions.SuspendLayout()
         Me.pnFormatOptions.SuspendLayout()
@@ -266,6 +265,8 @@ Partial Class dlgOptions
         '
         'tbpImport
         '
+        Me.tbpImport.Controls.Add(Me.lblPreviewRows)
+        Me.tbpImport.Controls.Add(Me.ucrNudPreviewRows)
         Me.tbpImport.Controls.Add(Me.pnImportData)
         resources.ApplyResources(Me.tbpImport, "tbpImport")
         Me.tbpImport.Name = "tbpImport"
@@ -274,8 +275,6 @@ Partial Class dlgOptions
         'pnImportData
         '
         resources.ApplyResources(Me.pnImportData, "pnImportData")
-        Me.pnImportData.Controls.Add(Me.ucrNudPreviewRows)
-        Me.pnImportData.Controls.Add(Me.lblPreviewRows)
         Me.pnImportData.Name = "pnImportData"
         '
         'ucrNudPreviewRows
@@ -747,8 +746,6 @@ Partial Class dlgOptions
         Me.pnComments.PerformLayout()
         Me.tbpImport.ResumeLayout(False)
         Me.tbpImport.PerformLayout()
-        Me.pnImportData.ResumeLayout(False)
-        Me.pnImportData.PerformLayout()
         Me.tbpOutputWindow.ResumeLayout(False)
         Me.tbpOutputWindow.PerformLayout()
         Me.grpROptions.ResumeLayout(False)

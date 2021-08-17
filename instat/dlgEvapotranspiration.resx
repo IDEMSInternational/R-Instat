@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblTmax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 154</value>
+    <value>291, 154</value>
   </data>
   <data name="lblTmax.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
@@ -151,7 +151,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTmin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>299, 107</value>
+    <value>291, 107</value>
   </data>
   <data name="lblTmin.Size" type="System.Drawing.Size, System.Drawing">
     <value>39, 14</value>
@@ -178,7 +178,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblHumidityMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 195</value>
+    <value>293, 195</value>
   </data>
   <data name="lblHumidityMax.Size" type="System.Drawing.Size, System.Drawing">
     <value>78, 17</value>
@@ -205,10 +205,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblHumidityMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 240</value>
+    <value>294, 240</value>
   </data>
   <data name="lblHumidityMin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 17</value>
+    <value>77, 17</value>
   </data>
   <data name="lblHumidityMin.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -232,7 +232,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTimeStep.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 336</value>
+    <value>5, 336</value>
   </data>
   <data name="lblTimeStep.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 20</value>
@@ -259,7 +259,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 523</value>
+    <value>5, 523</value>
   </data>
   <data name="lblCrop.Size" type="System.Drawing.Size, System.Drawing">
     <value>31, 20</value>
@@ -286,7 +286,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 64</value>
+    <value>293, 64</value>
   </data>
   <data name="lblDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 13</value>
@@ -310,10 +310,10 @@
     <value>18</value>
   </data>
   <data name="ucrChkInterpMissingEntries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 56</value>
+    <value>6, 56</value>
   </data>
   <data name="ucrChkInterpMissingEntries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 20</value>
+    <value>188, 20</value>
   </data>
   <data name="ucrChkInterpMissingEntries.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -331,7 +331,7 @@
     <value>0</value>
   </data>
   <data name="ucrChkInterpMissingDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 31</value>
+    <value>6, 31</value>
   </data>
   <data name="ucrChkInterpMissingDays.Size" type="System.Drawing.Size, System.Drawing">
     <value>168, 20</value>
@@ -352,7 +352,7 @@
     <value>1</value>
   </data>
   <data name="grpMissingDataOpts.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 362</value>
+    <value>5, 362</value>
   </data>
   <data name="grpMissingDataOpts.Size" type="System.Drawing.Size, System.Drawing">
     <value>200, 98</value>
@@ -379,10 +379,10 @@
     <value>NoControl</value>
   </data>
   <data name="lblMissingMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 496</value>
+    <value>5, 496</value>
   </data>
   <data name="lblMissingMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 20</value>
+    <value>107, 20</value>
   </data>
   <data name="lblMissingMethod.TabIndex" type="System.Int32, mscorlib">
     <value>28</value>
@@ -406,7 +406,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMaxMissingDays.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 262</value>
+    <value>5, 262</value>
   </data>
   <data name="lblMaxMissingDays.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 20</value>
@@ -433,7 +433,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMaxDurationMissingData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 285</value>
+    <value>5, 285</value>
   </data>
   <data name="lblMaxDurationMissingData.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 17</value>
@@ -460,7 +460,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMaxPerctMissindData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>15, 309</value>
+    <value>5, 309</value>
   </data>
   <data name="lblMaxPerctMissindData.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 19</value>
@@ -487,7 +487,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSolar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 469</value>
+    <value>5, 469</value>
   </data>
   <data name="lblSolar.Size" type="System.Drawing.Size, System.Drawing">
     <value>38, 18</value>
@@ -514,7 +514,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblRadiation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>301, 288</value>
+    <value>293, 288</value>
   </data>
   <data name="lblRadiation.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 14</value>
@@ -565,7 +565,7 @@
     <value>69, 14</value>
   </data>
   <data name="lblWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>75, 15</value>
+    <value>111, 15</value>
   </data>
   <data name="lblWindSpeed.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -592,7 +592,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>476, 640</value>
+    <value>422, 640</value>
   </data>
   <data name="rdoHargreavesSamani.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -604,7 +604,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoHargreavesSamani.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 12</value>
+    <value>207, 12</value>
   </data>
   <data name="rdoHargreavesSamani.Size" type="System.Drawing.Size, System.Drawing">
     <value>114, 27</value>
@@ -640,7 +640,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoPenmanMonteith.Location" type="System.Drawing.Point, System.Drawing">
-    <value>144, 12</value>
+    <value>100, 12</value>
   </data>
   <data name="rdoPenmanMonteith.Size" type="System.Drawing.Size, System.Drawing">
     <value>108, 27</value>
@@ -709,7 +709,7 @@
     <value>4</value>
   </data>
   <data name="ucrInputMissingMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 493</value>
+    <value>123, 493</value>
   </data>
   <data name="ucrInputMissingMethod.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -751,7 +751,7 @@
     <value>8</value>
   </data>
   <data name="ucrInputSolar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 466</value>
+    <value>132, 466</value>
   </data>
   <data name="ucrInputSolar.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -772,7 +772,7 @@
     <value>12</value>
   </data>
   <data name="ucrReceiverRadiation.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 304</value>
+    <value>294, 304</value>
   </data>
   <data name="ucrReceiverRadiation.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -796,7 +796,7 @@
     <value>14</value>
   </data>
   <data name="ucrInputCrop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 520</value>
+    <value>132, 520</value>
   </data>
   <data name="ucrInputCrop.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -817,13 +817,13 @@
     <value>15</value>
   </data>
   <data name="ucrNewColName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 555</value>
+    <value>5, 555</value>
   </data>
   <data name="ucrNewColName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewColName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 24</value>
+    <value>388, 24</value>
   </data>
   <data name="ucrNewColName.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -841,7 +841,7 @@
     <value>16</value>
   </data>
   <data name="ucrReceiverDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 79</value>
+    <value>294, 79</value>
   </data>
   <data name="ucrReceiverDate.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -865,10 +865,10 @@
     <value>19</value>
   </data>
   <data name="ucrPnlMethod.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 10</value>
+    <value>94, 10</value>
   </data>
   <data name="ucrPnlMethod.Size" type="System.Drawing.Size, System.Drawing">
-    <value>243, 41</value>
+    <value>232, 41</value>
   </data>
   <data name="ucrPnlMethod.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -907,7 +907,7 @@
     <value>23</value>
   </data>
   <data name="ucrReceiverHumidityMin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 259</value>
+    <value>294, 259</value>
   </data>
   <data name="ucrReceiverHumidityMin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -931,7 +931,7 @@
     <value>25</value>
   </data>
   <data name="ucrReceiverHumidityMax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 214</value>
+    <value>294, 214</value>
   </data>
   <data name="ucrReceiverHumidityMax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -955,7 +955,7 @@
     <value>27</value>
   </data>
   <data name="ucrReceiverTmin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 124</value>
+    <value>294, 124</value>
   </data>
   <data name="ucrReceiverTmin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -979,7 +979,7 @@
     <value>29</value>
   </data>
   <data name="ucrReceiverTmax.Location" type="System.Drawing.Point, System.Drawing">
-    <value>302, 169</value>
+    <value>294, 169</value>
   </data>
   <data name="ucrReceiverTmax.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1003,7 +1003,7 @@
     <value>31</value>
   </data>
   <data name="ucrSelectorEvapotranspiration.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 65</value>
+    <value>5, 65</value>
   </data>
   <data name="ucrSelectorEvapotranspiration.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1027,7 +1027,7 @@
     <value>32</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 583</value>
+    <value>5, 583</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -1051,7 +1051,7 @@
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Evapotraspiration</value>
+    <value>Evapotranspiration</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgEvapotranspiration</value>
@@ -1084,10 +1084,10 @@
     <value>2</value>
   </data>
   <data name="grpWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>218, 363</value>
+    <value>213, 363</value>
   </data>
   <data name="grpWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 97</value>
+    <value>204, 97</value>
   </data>
   <data name="grpWindSpeed.TabIndex" type="System.Int32, mscorlib">
     <value>25</value>
