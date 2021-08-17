@@ -49,7 +49,7 @@ Partial Class dlgSplitText
         Me.ucrPnlSplitText = New instat.UcrPanel()
         Me.ucrSaveColumn = New instat.ucrSave()
         Me.ucrNudPieces = New instat.ucrNud()
-        Me.ucrInputPattern = New instat.ucrInputComboBox()
+        Me.ucrInputSplitByPattern = New instat.ucrInputComboBox()
         Me.ucrReceiverSplitTextColumn = New instat.ucrReceiverSingle()
         Me.ucrSelectorSplitTextColumn = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
@@ -128,13 +128,13 @@ Partial Class dlgSplitText
         Me.ucrNudPieces.Name = "ucrNudPieces"
         Me.ucrNudPieces.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
-        'ucrInputPattern
+        'ucrInputSplitByPattern
         '
-        Me.ucrInputPattern.AddQuotesIfUnrecognised = True
-        Me.ucrInputPattern.GetSetSelectedIndex = -1
-        Me.ucrInputPattern.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputPattern, "ucrInputPattern")
-        Me.ucrInputPattern.Name = "ucrInputPattern"
+        Me.ucrInputSplitByPattern.AddQuotesIfUnrecognised = True
+        Me.ucrInputSplitByPattern.GetSetSelectedIndex = -1
+        Me.ucrInputSplitByPattern.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSplitByPattern, "ucrInputSplitByPattern")
+        Me.ucrInputSplitByPattern.Name = "ucrInputSplitByPattern"
         '
         'ucrReceiverSplitTextColumn
         '
@@ -174,7 +174,7 @@ Partial Class dlgSplitText
         Me.Controls.Add(Me.ucrPnlSplitText)
         Me.Controls.Add(Me.ucrSaveColumn)
         Me.Controls.Add(Me.ucrNudPieces)
-        Me.Controls.Add(Me.ucrInputPattern)
+        Me.Controls.Add(Me.ucrInputSplitByPattern)
         Me.Controls.Add(Me.ucrReceiverSplitTextColumn)
         Me.Controls.Add(Me.lblNumberofPiecesToReturn)
         Me.Controls.Add(Me.lblSplitBy)
@@ -198,7 +198,7 @@ Partial Class dlgSplitText
     Friend WithEvents lblSplitBy As Label
     Friend WithEvents lblNumberofPiecesToReturn As Label
     Friend WithEvents ucrReceiverSplitTextColumn As ucrReceiverSingle
-    Friend WithEvents ucrInputPattern As ucrInputComboBox
+    Friend WithEvents ucrInputSplitByPattern As ucrInputComboBox
     Friend WithEvents ucrSaveColumn As ucrSave
     Friend WithEvents ucrNudPieces As ucrNud
     Friend WithEvents rdoTextComponents As RadioButton

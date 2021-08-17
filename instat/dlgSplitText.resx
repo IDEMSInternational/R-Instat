@@ -408,25 +408,25 @@
   <data name="&gt;&gt;ucrNudPieces.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="ucrInputPattern.Location" type="System.Drawing.Point, System.Drawing">
-    <value>257, 124</value>
+  <data name="ucrInputSplitByPattern.Location" type="System.Drawing.Point, System.Drawing">
+    <value>260, 124</value>
   </data>
-  <data name="ucrInputPattern.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrInputSplitByPattern.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
   </data>
-  <data name="ucrInputPattern.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrInputSplitByPattern.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
   </data>
-  <data name="&gt;&gt;ucrInputPattern.Name" xml:space="preserve">
-    <value>ucrInputPattern</value>
+  <data name="&gt;&gt;ucrInputSplitByPattern.Name" xml:space="preserve">
+    <value>ucrInputSplitByPattern</value>
   </data>
-  <data name="&gt;&gt;ucrInputPattern.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputSplitByPattern.Type" xml:space="preserve">
     <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputPattern.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputSplitByPattern.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrInputPattern.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputSplitByPattern.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -503,6 +503,9 @@
   </data>
   <data name="&gt;&gt;ucrPnlTextComponents.ZOrder" xml:space="preserve">
     <value>14</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

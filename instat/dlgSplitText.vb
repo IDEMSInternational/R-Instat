@@ -65,7 +65,7 @@ Public Class dlgSplitText
         ucrReceiverSplitTextColumn.SetMeAsReceiver()
         ucrReceiverSplitTextColumn.bUseFilteredData = False
 
-        ucrInputPattern.SetParameter(New RParameter("pattern", 1))
+        ucrInputSplitByPattern.SetParameter(New RParameter("pattern", 1))
         dctPatternPairs.Add("Space ( )", Chr(34) & " " & Chr(34))
         dctPatternPairs.Add("Period .", "stringr::fixed(" & Chr(34) & "." & Chr(34) & ")")
         dctPatternPairs.Add("Comma ,", Chr(34) & "," & Chr(34))
@@ -73,9 +73,9 @@ Public Class dlgSplitText
         dctPatternPairs.Add("Semicolon ;", Chr(34) & ";" & Chr(34))
         dctPatternPairs.Add("Hyphen -", Chr(34) & "-" & Chr(34))
         dctPatternPairs.Add("Underscore _", Chr(34) & "_" & Chr(34))
-        ucrInputPattern.SetItems(dctPatternPairs)
+        ucrInputSplitByPattern.SetItems(dctPatternPairs)
         'ucrInputPattern.SetRDefault(Chr(34) & " " & Chr(34)) 'This is the default for clsTextComponents
-        ucrInputPattern.bAllowNonConditionValues = True
+        ucrInputSplitByPattern.bAllowNonConditionValues = True
 
         ucrNudPieces.SetParameter(New RParameter("n", 2))
         ucrNudPieces.SetMinMax(2, Integer.MaxValue)
@@ -118,10 +118,10 @@ Public Class dlgSplitText
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("string", 0), iAdditionalPairNo:=1)
         ucrReceiverSplitTextColumn.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("var", 0), iAdditionalPairNo:=2)
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("pattern", 1), iAdditionalPairNo:=1)
-        ucrInputPattern.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("split.char", 1), iAdditionalPairNo:=2)
+        ucrInputSplitByPattern.AddAdditionalCodeParameterPair(clsTextComponentsMaximum, New RParameter("pattern", 1), iAdditionalPairNo:=1)
+        ucrInputSplitByPattern.AddAdditionalCodeParameterPair(clsBinaryColumns, New RParameter("split.char", 1), iAdditionalPairNo:=2)
         ucrReceiverSplitTextColumn.SetRCode(clsTextComponentsFixed, bReset)
-        ucrInputPattern.SetRCode(clsTextComponentsFixed, bReset)
+        ucrInputSplitByPattern.SetRCode(clsTextComponentsFixed, bReset)
         ucrNudPieces.SetRCode(clsTextComponentsFixed, bReset)
         ucrPnlSplitText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrPnlTextComponents.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
@@ -129,7 +129,7 @@ Public Class dlgSplitText
     End Sub
 
     Private Sub TestOKEnabled()
-        If Not ucrReceiverSplitTextColumn.IsEmpty() AndAlso Not ucrInputPattern.IsEmpty AndAlso ((rdoTextComponents.Checked AndAlso ucrNudPieces.GetText <> "" AndAlso ucrSaveColumn.IsComplete()) OrElse rdoBinaryColumns.Checked) Then
+        If Not ucrReceiverSplitTextColumn.IsEmpty() AndAlso Not ucrInputSplitByPattern.IsEmpty AndAlso ((rdoTextComponents.Checked AndAlso ucrNudPieces.GetText <> "" AndAlso ucrSaveColumn.IsComplete()) OrElse rdoBinaryColumns.Checked) Then
             ucrBase.OKEnabled(True)
         Else
             ucrBase.OKEnabled(False)
@@ -161,7 +161,7 @@ Public Class dlgSplitText
             ucrBase.clsRsyntax.SetBaseRFunction(clsTextComponentsMaximum)
         End If
     End Sub
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputPattern.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrPnlSplitText.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrInputSplitByPattern.ControlContentsChanged, ucrReceiverSplitTextColumn.ControlContentsChanged, ucrNudPieces.ControlContentsChanged, ucrSaveColumn.ControlContentsChanged, ucrPnlSplitText.ControlContentsChanged
         TestOKEnabled()
     End Sub
 End Class
