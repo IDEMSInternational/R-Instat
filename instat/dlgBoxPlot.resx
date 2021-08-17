@@ -207,31 +207,31 @@
   <data name="&gt;&gt;lblBySecondFactor.ZOrder" xml:space="preserve">
     <value>19</value>
   </data>
-  <data name="cmdBoxPlotOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdBoxOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdBoxPlotOptions.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdBoxOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 237</value>
   </data>
-  <data name="cmdBoxPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="cmdBoxOptions.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 25</value>
   </data>
-  <data name="cmdBoxPlotOptions.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdBoxOptions.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
-  <data name="cmdBoxPlotOptions.Text" xml:space="preserve">
+  <data name="cmdBoxOptions.Text" xml:space="preserve">
     <value>Box Options</value>
   </data>
-  <data name="&gt;&gt;cmdBoxPlotOptions.Name" xml:space="preserve">
-    <value>cmdBoxPlotOptions</value>
+  <data name="&gt;&gt;cmdBoxOptions.Name" xml:space="preserve">
+    <value>cmdBoxOptions</value>
   </data>
-  <data name="&gt;&gt;cmdBoxPlotOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdBoxOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmdBoxPlotOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdBoxOptions.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cmdBoxPlotOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdBoxOptions.ZOrder" xml:space="preserve">
     <value>16</value>
   </data>
   <data name="rdoBoxplotTufte.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">

@@ -89,4 +89,8 @@ Public Class dlgCountinFactor
     Private Sub ucrCountReceiver_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrCountReceiver.ControlContentsChanged, ucrNewColName.ControlContentsChanged
         TestOkEnabled()
     End Sub
+
+    Private Sub ucrNewColName_Load(sender As Object, e As EventArgs) Handles ucrNewColName.Load
+
+    End Sub
 End Class

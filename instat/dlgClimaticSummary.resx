@@ -405,31 +405,31 @@
   <data name="&gt;&gt;lblWithinYear.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
-  <data name="cmdMissingOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdMissingOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 83</value>
+  <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>217, 83</value>
   </data>
-  <data name="cmdMissingOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 26</value>
+  <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 26</value>
   </data>
-  <data name="cmdMissingOptions.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
   </data>
-  <data name="cmdMissingOptions.Text" xml:space="preserve">
-    <value>Missing Options</value>
+  <data name="cmdOptions.Text" xml:space="preserve">
+    <value>Options</value>
   </data>
-  <data name="&gt;&gt;cmdMissingOptions.Name" xml:space="preserve">
-    <value>cmdMissingOptions</value>
+  <data name="&gt;&gt;cmdOptions.Name" xml:space="preserve">
+    <value>cmdOptions</value>
   </data>
-  <data name="&gt;&gt;cmdMissingOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmdMissingOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdOptions.Parent" xml:space="preserve">
     <value>grpOptions</value>
   </data>
-  <data name="&gt;&gt;cmdMissingOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="ucrChkOmitMissing.Location" type="System.Drawing.Point, System.Drawing">
@@ -905,9 +905,6 @@
   </data>
   <data name="&gt;&gt;ucrPnlAnnualWithin.ZOrder" xml:space="preserve">
     <value>23</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

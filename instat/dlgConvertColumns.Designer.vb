@@ -229,7 +229,6 @@ Partial Class dlgConvertColumns
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.ucrChkIgnoreLabels)
         Me.Controls.Add(Me.ucrChkCreateLabels)
-        Me.Controls.Add(Me.grpFactorToNumericOptions)
         Me.Controls.Add(Me.ucrChkKeepAttributes)
         Me.Controls.Add(Me.ucrNudDisplayDecimals)
         Me.Controls.Add(Me.ucrChkSpecifyDecimalsToDisplay)
@@ -238,6 +237,7 @@ Partial Class dlgConvertColumns
         Me.Controls.Add(Me.lblColumnsToConvert)
         Me.Controls.Add(Me.ucrReceiverColumnsToConvert)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.grpFactorToNumericOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
