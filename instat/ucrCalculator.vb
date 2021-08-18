@@ -2383,9 +2383,9 @@ Public Class ucrCalculator
 
     Private Sub cmdStarts_Click(sender As Object, e As EventArgs) Handles cmdStarts.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_starts(string = , pattern = argument, negate = FALSE)", 38)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_starts(string = , pattern = argument, negate = FALSE)", 38)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_starts()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_starts()", 1)
         End If
     End Sub
 
@@ -2399,17 +2399,17 @@ Public Class ucrCalculator
 
     Private Sub cmdRemove1_Click(sender As Object, e As EventArgs) Handles cmdRemove1.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove(string = , pattern = argument)", 22)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove(string = , pattern = argument)", 22)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove()", 1)
         End If
     End Sub
 
     Private Sub cmdRemove2_Click(sender As Object, e As EventArgs) Handles cmdRemove2.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove_all(string = , pattern = argument)", 22)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove_all(string = , pattern = argument)", 22)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove_all()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove_all()", 1)
         End If
     End Sub
 

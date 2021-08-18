@@ -394,6 +394,8 @@ Partial Class ucrCalculator
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
+        Me.cmdGlue = New System.Windows.Forms.Button()
+        Me.cmdLenth = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1302,6 +1304,8 @@ Partial Class ucrCalculator
         '
         'grpStrings
         '
+        Me.grpStrings.Controls.Add(Me.cmdLenth)
+        Me.grpStrings.Controls.Add(Me.cmdGlue)
         Me.grpStrings.Controls.Add(Me.cmdStarts)
         Me.grpStrings.Controls.Add(Me.cmdReplace2)
         Me.grpStrings.Controls.Add(Me.cmdReplace)
@@ -2167,6 +2171,7 @@ Partial Class ucrCalculator
         Me.grpWakefield.Controls.Add(Me.cmdValid)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
         Me.grpWakefield.Controls.Add(Me.cmdString)
+        Me.grpWakefield.Controls.Add(Me.grpLogical)
         Me.grpWakefield.Controls.Add(Me.cmdState)
         Me.grpWakefield.Controls.Add(Me.cmdSpeed)
         Me.grpWakefield.Controls.Add(Me.cmdSmokes)
@@ -2884,6 +2889,18 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
+        'cmdGlue
+        '
+        resources.ApplyResources(Me.cmdGlue, "cmdGlue")
+        Me.cmdGlue.Name = "cmdGlue"
+        Me.cmdGlue.UseVisualStyleBackColor = True
+        '
+        'cmdLenth
+        '
+        resources.ApplyResources(Me.cmdLenth, "cmdLenth")
+        Me.cmdLenth.Name = "cmdLenth"
+        Me.cmdLenth.UseVisualStyleBackColor = True
+        '
         'ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
@@ -2893,7 +2910,6 @@ Partial Class ucrCalculator
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpTransform)
@@ -3287,4 +3303,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdTime As Button
     Friend WithEvents cmdDateTime As Button
     Friend WithEvents cmdPm As Button
+    Friend WithEvents cmdLenth As Button
+    Friend WithEvents cmdGlue As Button
 End Class
