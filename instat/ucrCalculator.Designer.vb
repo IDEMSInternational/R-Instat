@@ -389,13 +389,14 @@ Partial Class ucrCalculator
         Me.cmdD = New System.Windows.Forms.Button()
         Me.cmdCp = New System.Windows.Forms.Button()
         Me.cmdBr2 = New System.Windows.Forms.Button()
+        Me.cmdGlue = New System.Windows.Forms.Button()
+        Me.cmdLenth = New System.Windows.Forms.Button()
         Me.ucrSaveResultInto = New instat.ucrSave()
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdGlue = New System.Windows.Forms.Button()
-        Me.cmdLenth = New System.Windows.Forms.Button()
+        Me.cmdTrunck = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -1304,6 +1305,7 @@ Partial Class ucrCalculator
         '
         'grpStrings
         '
+        Me.grpStrings.Controls.Add(Me.cmdTrunck)
         Me.grpStrings.Controls.Add(Me.cmdLenth)
         Me.grpStrings.Controls.Add(Me.cmdGlue)
         Me.grpStrings.Controls.Add(Me.cmdStarts)
@@ -2854,6 +2856,18 @@ Partial Class ucrCalculator
         Me.cmdBr2.Name = "cmdBr2"
         Me.cmdBr2.UseVisualStyleBackColor = True
         '
+        'cmdGlue
+        '
+        resources.ApplyResources(Me.cmdGlue, "cmdGlue")
+        Me.cmdGlue.Name = "cmdGlue"
+        Me.cmdGlue.UseVisualStyleBackColor = True
+        '
+        'cmdLenth
+        '
+        resources.ApplyResources(Me.cmdLenth, "cmdLenth")
+        Me.cmdLenth.Name = "cmdLenth"
+        Me.cmdLenth.UseVisualStyleBackColor = True
+        '
         'ucrSaveResultInto
         '
         resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
@@ -2889,17 +2903,11 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
         '
-        'cmdGlue
+        'cmdTrunck
         '
-        resources.ApplyResources(Me.cmdGlue, "cmdGlue")
-        Me.cmdGlue.Name = "cmdGlue"
-        Me.cmdGlue.UseVisualStyleBackColor = True
-        '
-        'cmdLenth
-        '
-        resources.ApplyResources(Me.cmdLenth, "cmdLenth")
-        Me.cmdLenth.Name = "cmdLenth"
-        Me.cmdLenth.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdTrunck, "cmdTrunck")
+        Me.cmdTrunck.Name = "cmdTrunck"
+        Me.cmdTrunck.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
@@ -3305,4 +3313,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdPm As Button
     Friend WithEvents cmdLenth As Button
     Friend WithEvents cmdGlue As Button
+    Friend WithEvents cmdTrunck As Button
 End Class
