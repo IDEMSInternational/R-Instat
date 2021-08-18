@@ -35,6 +35,7 @@ Public Class dlgPivotTable
     End Sub
 
     Private Sub InitialiseDialog()
+        Dim strOrder As String() = {"Given", "Reverse", "Ascending", "Descending"}
         ucrBase.clsRsyntax.iCallType = 2
 
         ucrSelectorPivot.SetParameter(New RParameter("data", iNewPosition:=0))
@@ -54,6 +55,10 @@ Public Class dlgPivotTable
         ucrChkIncludeSubTotals.SetParameter(New RParameter("subtotals", iNewPosition:=3))
         ucrChkIncludeSubTotals.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkIncludeSubTotals.SetRDefault("FALSE")
+
+        ucrInputAdditionalRowOrder.SetItems(strOrder)
+        ucrInputInitialColumnOrder.SetItems(strOrder)
+        ucrInputInitialRowOrder.SetItems(strOrder)
     End Sub
 
 
@@ -63,7 +68,7 @@ Public Class dlgPivotTable
         ucrReceiverInitialRowFactor.SetMeAsReceiver()
 
         clsRPivotTable.SetRCommand("rpivotTable")
-
+        ucrBase.clsRsyntax.SetBaseRFunction(clsRPivotTable)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -73,7 +78,11 @@ Public Class dlgPivotTable
     End Sub
 
     Private Sub TestOkEnabled()
-
+        If ucrInputInitialRowOrder.IsEmpty OrElse ucrInputInitialColumnOrder.IsEmpty Then
+            ucrBase.OKEnabled(False)
+        Else
+            ucrBase.OKEnabled(True)
+        End If
     End Sub
 
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset

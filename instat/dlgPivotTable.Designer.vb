@@ -30,9 +30,9 @@ Partial Class dlgPivotTable
         Me.ttSelectedVariable = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrReceiverSelectedVariable = New instat.ucrReceiverMultiple()
         Me.ucrChkSelectedVariable = New instat.ucrCheck()
-        Me.UcrInputComboBox2 = New instat.ucrInputComboBox()
-        Me.UcrInputComboBox1 = New instat.ucrInputComboBox()
-        Me.ucrInputSummaries = New instat.ucrInputComboBox()
+        Me.ucrInputInitialColumnOrder = New instat.ucrInputComboBox()
+        Me.ucrInputAdditionalRowOrder = New instat.ucrInputComboBox()
+        Me.ucrInputInitialRowOrder = New instat.ucrInputComboBox()
         Me.ucrReceiveradditionalRowFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverInitialColumnFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverInitialRowFactor = New instat.ucrReceiverSingle()
@@ -74,29 +74,29 @@ Partial Class dlgPivotTable
         resources.ApplyResources(Me.ucrChkSelectedVariable, "ucrChkSelectedVariable")
         Me.ucrChkSelectedVariable.Name = "ucrChkSelectedVariable"
         '
-        'UcrInputComboBox2
+        'ucrInputInitialColumnOrder
         '
-        Me.UcrInputComboBox2.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox2.GetSetSelectedIndex = -1
-        Me.UcrInputComboBox2.IsReadOnly = False
-        resources.ApplyResources(Me.UcrInputComboBox2, "UcrInputComboBox2")
-        Me.UcrInputComboBox2.Name = "UcrInputComboBox2"
+        Me.ucrInputInitialColumnOrder.AddQuotesIfUnrecognised = True
+        Me.ucrInputInitialColumnOrder.GetSetSelectedIndex = -1
+        Me.ucrInputInitialColumnOrder.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputInitialColumnOrder, "ucrInputInitialColumnOrder")
+        Me.ucrInputInitialColumnOrder.Name = "ucrInputInitialColumnOrder"
         '
-        'UcrInputComboBox1
+        'ucrInputAdditionalRowOrder
         '
-        Me.UcrInputComboBox1.AddQuotesIfUnrecognised = True
-        Me.UcrInputComboBox1.GetSetSelectedIndex = -1
-        Me.UcrInputComboBox1.IsReadOnly = False
-        resources.ApplyResources(Me.UcrInputComboBox1, "UcrInputComboBox1")
-        Me.UcrInputComboBox1.Name = "UcrInputComboBox1"
+        Me.ucrInputAdditionalRowOrder.AddQuotesIfUnrecognised = True
+        Me.ucrInputAdditionalRowOrder.GetSetSelectedIndex = -1
+        Me.ucrInputAdditionalRowOrder.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputAdditionalRowOrder, "ucrInputAdditionalRowOrder")
+        Me.ucrInputAdditionalRowOrder.Name = "ucrInputAdditionalRowOrder"
         '
-        'ucrInputSummaries
+        'ucrInputInitialRowOrder
         '
-        Me.ucrInputSummaries.AddQuotesIfUnrecognised = True
-        Me.ucrInputSummaries.GetSetSelectedIndex = -1
-        Me.ucrInputSummaries.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSummaries, "ucrInputSummaries")
-        Me.ucrInputSummaries.Name = "ucrInputSummaries"
+        Me.ucrInputInitialRowOrder.AddQuotesIfUnrecognised = True
+        Me.ucrInputInitialRowOrder.GetSetSelectedIndex = -1
+        Me.ucrInputInitialRowOrder.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputInitialRowOrder, "ucrInputInitialRowOrder")
+        Me.ucrInputInitialRowOrder.Name = "ucrInputInitialRowOrder"
         '
         'ucrReceiveradditionalRowFactor
         '
@@ -151,9 +151,9 @@ Partial Class dlgPivotTable
         Me.Controls.Add(Me.ucrChkIncludeSubTotals)
         Me.Controls.Add(Me.ucrReceiverSelectedVariable)
         Me.Controls.Add(Me.ucrChkSelectedVariable)
-        Me.Controls.Add(Me.UcrInputComboBox2)
-        Me.Controls.Add(Me.UcrInputComboBox1)
-        Me.Controls.Add(Me.ucrInputSummaries)
+        Me.Controls.Add(Me.ucrInputInitialColumnOrder)
+        Me.Controls.Add(Me.ucrInputAdditionalRowOrder)
+        Me.Controls.Add(Me.ucrInputInitialRowOrder)
         Me.Controls.Add(Me.lblAdditionalRowFactor)
         Me.Controls.Add(Me.ucrReceiveradditionalRowFactor)
         Me.Controls.Add(Me.lblInitialColumnFactor)
@@ -180,9 +180,9 @@ Partial Class dlgPivotTable
     Friend WithEvents ucrReceiveradditionalRowFactor As ucrReceiverSingle
     Friend WithEvents lblInitialColumnFactor As Label
     Friend WithEvents ucrReceiverInitialColumnFactor As ucrReceiverSingle
-    Friend WithEvents UcrInputComboBox2 As ucrInputComboBox
-    Friend WithEvents UcrInputComboBox1 As ucrInputComboBox
-    Friend WithEvents ucrInputSummaries As ucrInputComboBox
+    Friend WithEvents ucrInputInitialColumnOrder As ucrInputComboBox
+    Friend WithEvents ucrInputAdditionalRowOrder As ucrInputComboBox
+    Friend WithEvents ucrInputInitialRowOrder As ucrInputComboBox
     Friend WithEvents ucrChkSelectedVariable As ucrCheck
     Friend WithEvents ttSelectedVariable As ToolTip
     Friend WithEvents ucrReceiverSelectedVariable As ucrReceiverMultiple

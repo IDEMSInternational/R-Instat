@@ -264,67 +264,67 @@
   <data name="&gt;&gt;ucrChkSelectedVariable.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="UcrInputComboBox2.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrInputInitialColumnOrder.Location" type="System.Drawing.Point, System.Drawing">
     <value>379, 103</value>
   </data>
-  <data name="UcrInputComboBox2.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrInputInitialColumnOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 21</value>
   </data>
-  <data name="UcrInputComboBox2.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrInputInitialColumnOrder.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
   </data>
-  <data name="&gt;&gt;UcrInputComboBox2.Name" xml:space="preserve">
-    <value>UcrInputComboBox2</value>
+  <data name="&gt;&gt;ucrInputInitialColumnOrder.Name" xml:space="preserve">
+    <value>ucrInputInitialColumnOrder</value>
   </data>
-  <data name="&gt;&gt;UcrInputComboBox2.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputInitialColumnOrder.Type" xml:space="preserve">
     <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrInputComboBox2.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputInitialColumnOrder.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;UcrInputComboBox2.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputInitialColumnOrder.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="UcrInputComboBox1.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrInputAdditionalRowOrder.Location" type="System.Drawing.Point, System.Drawing">
     <value>379, 147</value>
   </data>
-  <data name="UcrInputComboBox1.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrInputAdditionalRowOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 21</value>
   </data>
-  <data name="UcrInputComboBox1.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrInputAdditionalRowOrder.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
   </data>
-  <data name="&gt;&gt;UcrInputComboBox1.Name" xml:space="preserve">
-    <value>UcrInputComboBox1</value>
+  <data name="&gt;&gt;ucrInputAdditionalRowOrder.Name" xml:space="preserve">
+    <value>ucrInputAdditionalRowOrder</value>
   </data>
-  <data name="&gt;&gt;UcrInputComboBox1.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputAdditionalRowOrder.Type" xml:space="preserve">
     <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;UcrInputComboBox1.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputAdditionalRowOrder.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;UcrInputComboBox1.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputAdditionalRowOrder.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
-  <data name="ucrInputSummaries.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="ucrInputInitialRowOrder.Location" type="System.Drawing.Point, System.Drawing">
     <value>379, 57</value>
   </data>
-  <data name="ucrInputSummaries.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="ucrInputInitialRowOrder.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 21</value>
   </data>
-  <data name="ucrInputSummaries.TabIndex" type="System.Int32, mscorlib">
+  <data name="ucrInputInitialRowOrder.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
   </data>
-  <data name="&gt;&gt;ucrInputSummaries.Name" xml:space="preserve">
-    <value>ucrInputSummaries</value>
+  <data name="&gt;&gt;ucrInputInitialRowOrder.Name" xml:space="preserve">
+    <value>ucrInputInitialRowOrder</value>
   </data>
-  <data name="&gt;&gt;ucrInputSummaries.Type" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputInitialRowOrder.Type" xml:space="preserve">
     <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputSummaries.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputInitialRowOrder.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrInputSummaries.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;ucrInputInitialRowOrder.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
   <data name="ucrReceiveradditionalRowFactor.Location" type="System.Drawing.Point, System.Drawing">
@@ -443,9 +443,6 @@
   </data>
   <data name="&gt;&gt;ucrSelectorPivot.ZOrder" xml:space="preserve">
     <value>13</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
