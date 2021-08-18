@@ -250,10 +250,11 @@ Public Class dlgHistogram
         clsHistAesFunction.AddParameter("y", "stat(count)", iPosition:=0)
         clsRgeomPlotFunction.SetPackageName("ggplot2")
         If rdoHistogram.Checked Then
-            cmdHistogramOptions.Text = "Histogram Options"
             If ucrChkDisplayAsDotPlot.Checked Then
+                cmdHistogramOptions.Text = "Dotplot  Options"
                 clsRgeomPlotFunction.SetRCommand("geom_dotplot")
             Else
+                cmdHistogramOptions.Text = "Histogram Options"
                 clsRgeomPlotFunction.SetRCommand("geom_histogram")
             End If
             ucrFactorReceiver.ChangeParameterName("fill")
