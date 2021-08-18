@@ -391,12 +391,12 @@ Partial Class ucrCalculator
         Me.cmdBr2 = New System.Windows.Forms.Button()
         Me.cmdGlue = New System.Windows.Forms.Button()
         Me.cmdLenth = New System.Windows.Forms.Button()
+        Me.cmdTrunck = New System.Windows.Forms.Button()
         Me.ucrSaveResultInto = New instat.ucrSave()
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
         Me.ucrSelectorForCalculations = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverForCalculation = New instat.ucrReceiverExpression()
-        Me.cmdTrunck = New System.Windows.Forms.Button()
         Me.grpBasic.SuspendLayout()
         Me.grpDates.SuspendLayout()
         Me.grpTransform.SuspendLayout()
@@ -2868,6 +2868,12 @@ Partial Class ucrCalculator
         Me.cmdLenth.Name = "cmdLenth"
         Me.cmdLenth.UseVisualStyleBackColor = True
         '
+        'cmdTrunck
+        '
+        resources.ApplyResources(Me.cmdTrunck, "cmdTrunck")
+        Me.cmdTrunck.Name = "cmdTrunck"
+        Me.cmdTrunck.UseVisualStyleBackColor = True
+        '
         'ucrSaveResultInto
         '
         resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
@@ -2902,12 +2908,6 @@ Partial Class ucrCalculator
         Me.ucrReceiverForCalculation.Selector = Nothing
         Me.ucrReceiverForCalculation.strNcFilePath = ""
         Me.ucrReceiverForCalculation.ucrSelector = Nothing
-        '
-        'cmdTrunck
-        '
-        resources.ApplyResources(Me.cmdTrunck, "cmdTrunck")
-        Me.cmdTrunck.Name = "cmdTrunck"
-        Me.cmdTrunck.UseVisualStyleBackColor = True
         '
         'ucrCalculator
         '
