@@ -166,6 +166,9 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdTan, " tangent of angle in radians. For example tan(pi/4) = sin(pi/4)/cos(pi/4) = tan(rad(45)) = 1")
         ttCalculator.SetToolTip(cmdAtan, "angle corresponding to a given tangent (in the range 0 to pi). For example atan(1) = 0..7854 (= pi/4); deg(atan(1)) = 45.")
 
+        ttCalculator.SetToolTip(cmdUpper, "Change to upper case. For example str_to_upper("“Dr. Foster”") gives "“DR. FOSTER"”")
+        ttCalculator.SetToolTip(cmdLower, "Change to upper case. For example str_to_lower("“Dr. Foster"”) gives “"dr. foster”"")
+
     End Sub
 
     Public Sub Reset()
