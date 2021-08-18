@@ -2788,7 +2788,7 @@ Public Class ucrCalculator
 
     Private Sub cmdGlue_Click(sender As Object, e As EventArgs) Handles cmdGlue.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_glue(.sep = "" , .envir = parent.frame())", 26)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_glue(.sep = """" , .envir = parent.frame())", 28)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_glue()", 1)
         End If
@@ -2796,7 +2796,7 @@ Public Class ucrCalculator
 
     Private Sub cmdLenth_Click(sender As Object, e As EventArgs) Handles cmdLenth.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_length(string)", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_length(string="""")", 2)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_length()", 1)
         End If
@@ -2804,9 +2804,13 @@ Public Class ucrCalculator
 
     Private Sub cmdTrunck_Click(sender As Object, e As EventArgs) Handles cmdTrunck.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_trunc(string = , width = , side = c(""right"" , ""left"", ""center"") , ""ellipsis"" = )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_trunc(string = """" , width = , side = c(""right"" , ""left"", ""center"") , ellipsis ="""" )", 67)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_trunc()", 1)
         End If
+    End Sub
+
+    Private Sub ucrSelectorForCalculations_Load(sender As Object, e As EventArgs) Handles ucrSelectorForCalculations.Load
+
     End Sub
 End Class
