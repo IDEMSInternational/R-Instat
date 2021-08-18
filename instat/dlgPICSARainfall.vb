@@ -257,7 +257,7 @@ Public Class dlgPICSARainfall
         clsPasteUpperTercileY = New RFunction
         clsFormatUpperTercileY = New RFunction
 
-        ucrInputStation.SetText(strNone)
+        ucrInputStation.SetName(strNone)
         ucrInputStation.bUpdateRCodeFromControl = True
 
         clsDatePeriodOperator = New ROperator
