@@ -167,7 +167,9 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdAtan, "angle corresponding to a given tangent (in the range 0 to pi). For example atan(1) = 0..7854 (= pi/4); deg(atan(1)) = 45.")
 
         ttCalculator.SetToolTip(cmdUpper, "Change to upper case. For example str_to_upper("“Dr. Foster”") gives "“DR. FOSTER"”")
-        ttCalculator.SetToolTip(cmdLower, "Change to upper case. For example str_to_lower("“Dr. Foster"”) gives “"dr. foster”"")
+        ttCalculator.SetToolTip(cmdLower, "Change to lower case. For example str_to_lower("“Dr. Foster"”) gives “"dr. foster”"")
+        ttCalculator.SetToolTip(cmdTitle, "Change first letter of each word. For example str_to_title(""dr. foster"") gives ""Dr. Foster""")
+        ttCalculator.SetToolTip(cmdTrim, "Deletes white space round a text. For example, str_trim(""  shower   of rain  "") gives "“shower   of rain”"")
 
     End Sub
 
