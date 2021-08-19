@@ -169,6 +169,9 @@ Partial Class ucrCalculator
         Me.cmdSum = New System.Windows.Forms.Button()
         Me.cmdVar = New System.Windows.Forms.Button()
         Me.grpStrings = New System.Windows.Forms.GroupBox()
+        Me.cmdTrunck = New System.Windows.Forms.Button()
+        Me.cmdLenth = New System.Windows.Forms.Button()
+        Me.cmdGlue = New System.Windows.Forms.Button()
         Me.cmdStarts = New System.Windows.Forms.Button()
         Me.cmdReplace2 = New System.Windows.Forms.Button()
         Me.cmdReplace = New System.Windows.Forms.Button()
@@ -389,9 +392,6 @@ Partial Class ucrCalculator
         Me.cmdD = New System.Windows.Forms.Button()
         Me.cmdCp = New System.Windows.Forms.Button()
         Me.cmdBr2 = New System.Windows.Forms.Button()
-        Me.cmdGlue = New System.Windows.Forms.Button()
-        Me.cmdLenth = New System.Windows.Forms.Button()
-        Me.cmdTrunck = New System.Windows.Forms.Button()
         Me.ucrSaveResultInto = New instat.ucrSave()
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
@@ -1334,6 +1334,24 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpStrings, "grpStrings")
         Me.grpStrings.Name = "grpStrings"
         Me.grpStrings.TabStop = False
+        '
+        'cmdTrunck
+        '
+        resources.ApplyResources(Me.cmdTrunck, "cmdTrunck")
+        Me.cmdTrunck.Name = "cmdTrunck"
+        Me.cmdTrunck.UseVisualStyleBackColor = True
+        '
+        'cmdLenth
+        '
+        resources.ApplyResources(Me.cmdLenth, "cmdLenth")
+        Me.cmdLenth.Name = "cmdLenth"
+        Me.cmdLenth.UseVisualStyleBackColor = True
+        '
+        'cmdGlue
+        '
+        resources.ApplyResources(Me.cmdGlue, "cmdGlue")
+        Me.cmdGlue.Name = "cmdGlue"
+        Me.cmdGlue.UseVisualStyleBackColor = True
         '
         'cmdStarts
         '
@@ -2855,24 +2873,6 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.cmdBr2, "cmdBr2")
         Me.cmdBr2.Name = "cmdBr2"
         Me.cmdBr2.UseVisualStyleBackColor = True
-        '
-        'cmdGlue
-        '
-        resources.ApplyResources(Me.cmdGlue, "cmdGlue")
-        Me.cmdGlue.Name = "cmdGlue"
-        Me.cmdGlue.UseVisualStyleBackColor = True
-        '
-        'cmdLenth
-        '
-        resources.ApplyResources(Me.cmdLenth, "cmdLenth")
-        Me.cmdLenth.Name = "cmdLenth"
-        Me.cmdLenth.UseVisualStyleBackColor = True
-        '
-        'cmdTrunck
-        '
-        resources.ApplyResources(Me.cmdTrunck, "cmdTrunck")
-        Me.cmdTrunck.Name = "cmdTrunck"
-        Me.cmdTrunck.UseVisualStyleBackColor = True
         '
         'ucrSaveResultInto
         '

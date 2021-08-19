@@ -181,7 +181,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdExtract, "Extract a matching string. For example, str_extract(c(""nose"",""lip"",""eye""),""e"") gives e NA e FALSE TRUE""")
         ttCalculator.SetToolTip(cmdExtract2, "Extract all matching strings. For example, str_extract_all(c(""nose"",""lip"",""eye""),""e"") gives e NA e, e""")
         ttCalculator.SetToolTip(cmdGlue, "Format and combine strings with glue. For example, (with survey data) str_glue(“"Village {village}, with fertilizer {fert*10}kg.”") gives Village SABEY, with fertilizer 0kg. etc""")
-        ttCalculator.SetToolTip(cmdLength, "Length of a string. For example, str_length("“Usain Bolt”") gives 10""")
+        ttCalculator.SetToolTip(cmdLenth, "Length of a string. For example, str_length("“Usain Bolt”") gives 10""")
         ttCalculator.SetToolTip(cmdLocate, "Start and end position of pattern in a string. For example, stringr::str_locate(c(""nose"",""lip"",""eye""),""e"") gives 4, 4 NA 1, 1""")
         ttCalculator.SetToolTip(cmdLocate2, "All start and end positions . For example, stringr::str_locate_all(c(""nose"",""lip"",""eye""),""e"") gives 4, 4 NA 1, 1  3, 3""")
         ttCalculator.SetToolTip(cmdRemove1, "Remove pattern . For example, str_remove(c(""nose"",""lip"",""eye""),""e"") gives "“nos"” “"lip"” “"ye”"")
@@ -189,7 +189,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdReplace, "Extract substring. For example, str_replace(c(""nose"",""ear"",""eye""),""e"",""y"") gives "“nosy"” "“yar"” “"yye”"")
         ttCalculator.SetToolTip(cmdReplace2, "Replace all patterns. For example, str_replace_all(c(""nose"",""ear"",""eye""),""e"",""y"") gives “"nosy”" “"yar"” “"yyy”"")
         ttCalculator.SetToolTip(cmdStarts, " Detect a starting match. For example, str_starts(c(""nose"",""ear"",""eye""),""e"") gives FALSE TRUE TRUE")
-        ttCalculator.SetToolTip(cmdTrunc, "Truncate strings. For example, str_trunc("“Katumani"”,7) gives “"Katu…"”; 8 gives “"Katumani”"")
+        ttCalculator.SetToolTip(cmdTrunck, "Truncate strings. For example, str_trunc("“Katumani"”,7) gives “"Katu…"”; 8 gives “"Katumani”"")
 
     End Sub
 
