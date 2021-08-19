@@ -226,9 +226,9 @@ Partial Class dlgVisualizeData
         '
         'ucrPnlSelectData
         '
-        Me.ucrPnlSelectData.Location = New System.Drawing.Point(256, 69)
+        Me.ucrPnlSelectData.Location = New System.Drawing.Point(258, 69)
         Me.ucrPnlSelectData.Name = "ucrPnlSelectData"
-        Me.ucrPnlSelectData.Size = New System.Drawing.Size(132, 49)
+        Me.ucrPnlSelectData.Size = New System.Drawing.Size(142, 49)
         Me.ucrPnlSelectData.TabIndex = 5
         '
         'ucrPnlVisualizeData
