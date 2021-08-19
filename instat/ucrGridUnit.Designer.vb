@@ -97,6 +97,7 @@ Partial Class ucrGridUnit
         'ucrInputUnits
         '
         Me.ucrInputUnits.AddQuotesIfUnrecognised = True
+        Me.ucrInputUnits.GetSetSelectedIndex = -1
         Me.ucrInputUnits.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputUnits, "ucrInputUnits")
         Me.ucrInputUnits.Name = "ucrInputUnits"
