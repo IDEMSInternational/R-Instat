@@ -166,6 +166,31 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdTan, " tangent of angle in radians. For example tan(pi/4) = sin(pi/4)/cos(pi/4) = tan(rad(45)) = 1")
         ttCalculator.SetToolTip(cmdAtan, "angle corresponding to a given tangent (in the range 0 to pi). For example atan(1) = 0..7854 (= pi/4); deg(atan(1)) = 45.")
 
+        ttCalculator.SetToolTip(cmdUpper, "Change to upper case. For example str_to_upper("“Dr. Foster”") gives "“DR. FOSTER"”")
+        ttCalculator.SetToolTip(cmdLower, "Change to lower case. For example str_to_lower("“Dr. Foster"”) gives “"dr. foster”"")
+        ttCalculator.SetToolTip(cmdTitle, "Change first letter of each word. For example str_to_title(""dr. foster"") gives ""Dr. Foster""")
+        ttCalculator.SetToolTip(cmdTrim, "Deletes white space round a text. For example, str_trim(""  shower   of rain  "") gives ""shower   of rain""")
+        ttCalculator.SetToolTip(cmdSquishb, "Deletes excess white space For example, str_squish(“"shower    of rain  "“) gives “"shower of rain”"")
+        ttCalculator.SetToolTip(cmdPad, "Make string a fixed width. For example, str_pad(“"science”",12,”"right”") gives "“science     "“")
+        ttCalculator.SetToolTip(cmdOrder, "Give numeric order. For exampled, str_order(c(""11"",""a"",""tree"",""5""),num=TRUE) gives 4,1,2,3""")
+        ttCalculator.SetToolTip(cmdSort, "Sort the strings. For example, str_sort(c(""11"",""a"",""tree"",""5""),numeric=TRUE) gives ""5""    ""11""   ""a""    ""tree""")
+        ttCalculator.SetToolTip(cmdCombine, "Join multiple strings. For example, :str_c(""letter: "",c(""d"",""o"",""g"")) gives ""letter: d"" ""letter: o"" ""letter: g""")
+        ttCalculator.SetToolTip(cmdCountstrings, " The number of matches. For example, str_count(c(""nose"",""lip"",""eye""),""e"") gives 1 0 2""")
+        ttCalculator.SetToolTip(cmdDetect, " Detect a match. For example, str_detect(c(""nose"",""lip"",""eye""),""e"") gives TRUE FALSE TRUE""")
+        ttCalculator.SetToolTip(cmdEnd, "Detect a match. For example, str_detect(c(""nose"",""lip"",""eye""),""e"") gives TRUE FALSE TRUE """)
+        ttCalculator.SetToolTip(cmdExtract, "Extract a matching string. For example, str_extract(c(""nose"",""lip"",""eye""),""e"") gives e NA e FALSE TRUE""")
+        ttCalculator.SetToolTip(cmdExtract2, "Extract all matching strings. For example, str_extract_all(c(""nose"",""lip"",""eye""),""e"") gives e NA e, e""")
+        ttCalculator.SetToolTip(cmdGlue, "Format and combine strings with glue. For example, (with survey data) str_glue(“"Village {village}, with fertilizer {fert*10}kg.”") gives Village SABEY, with fertilizer 0kg. etc""")
+        ttCalculator.SetToolTip(cmdLength, "Length of a string. For example, str_length("“Usain Bolt”") gives 10""")
+        ttCalculator.SetToolTip(cmdLocate, "Start and end position of pattern in a string. For example, stringr::str_locate(c(""nose"",""lip"",""eye""),""e"") gives 4, 4 NA 1, 1""")
+        ttCalculator.SetToolTip(cmdLocate2, "All start and end positions . For example, stringr::str_locate_all(c(""nose"",""lip"",""eye""),""e"") gives 4, 4 NA 1, 1  3, 3""")
+        ttCalculator.SetToolTip(cmdRemove1, "Remove pattern . For example, str_remove(c(""nose"",""lip"",""eye""),""e"") gives "“nos"” “"lip"” “"ye”"")
+        ttCalculator.SetToolTip(cmdRemove2, "Remove all occurrences of pattern. For example, str_remove_all(c(""nose"",""lip"",""eye""),""e"") gives “"nos"” “"lip”" “"y”"")
+        ttCalculator.SetToolTip(cmdReplace, "Extract substring. For example, str_replace(c(""nose"",""ear"",""eye""),""e"",""y"") gives "“nosy"” "“yar"” “"yye”"")
+        ttCalculator.SetToolTip(cmdReplace2, "Replace all patterns. For example, str_replace_all(c(""nose"",""ear"",""eye""),""e"",""y"") gives “"nosy”" “"yar"” “"yyy”"")
+        ttCalculator.SetToolTip(cmdStarts, " Detect a starting match. For example, str_starts(c(""nose"",""ear"",""eye""),""e"") gives FALSE TRUE TRUE")
+        ttCalculator.SetToolTip(cmdTrunc, "Truncate strings. For example, str_trunc("“Katumani"”,7) gives “"Katu…"”; 8 gives “"Katumani”"")
+
     End Sub
 
     Public Sub Reset()
@@ -2383,9 +2408,9 @@ Public Class ucrCalculator
 
     Private Sub cmdStarts_Click(sender As Object, e As EventArgs) Handles cmdStarts.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_starts(string = , pattern = argument, negate = FALSE)", 38)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_starts(string = , pattern = argument, negate = FALSE)", 38)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_starts()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_starts()", 1)
         End If
     End Sub
 
@@ -2399,17 +2424,17 @@ Public Class ucrCalculator
 
     Private Sub cmdRemove1_Click(sender As Object, e As EventArgs) Handles cmdRemove1.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove(string = , pattern = argument)", 22)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove(string = , pattern = argument)", 22)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove()", 1)
         End If
     End Sub
 
     Private Sub cmdRemove2_Click(sender As Object, e As EventArgs) Handles cmdRemove2.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove_all(string = , pattern = argument)", 22)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove_all(string = , pattern = argument)", 22)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_remove_all()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove_all()", 1)
         End If
     End Sub
 
@@ -2761,4 +2786,31 @@ Public Class ucrCalculator
         RaiseEvent SaveNameChanged()
     End Sub
 
+    Private Sub cmdGlue_Click(sender As Object, e As EventArgs) Handles cmdGlue.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_glue(.sep = """" , .envir = parent.frame())", 28)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_glue()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdLenth_Click(sender As Object, e As EventArgs) Handles cmdLenth.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_length(string="""")", 2)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_length()", 1)
+        End If
+    End Sub
+
+    Private Sub cmdTrunck_Click(sender As Object, e As EventArgs) Handles cmdTrunck.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_trunc(string = """" , width = , side = c(""right"" , ""left"", ""center"") , ellipsis ="""" )", 67)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_trunc()", 1)
+        End If
+    End Sub
+
+    Private Sub ucrSelectorForCalculations_Load(sender As Object, e As EventArgs) Handles ucrSelectorForCalculations.Load
+
+    End Sub
 End Class

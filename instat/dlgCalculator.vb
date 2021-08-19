@@ -144,7 +144,7 @@ Public Class dlgCalculator
             Case "Summary"
                 Me.Width = iBasicWidth * 1.46
             Case "Strings (Character Columns)"
-                Me.Width = iBasicWidth * 1.49
+                Me.Width = iBasicWidth * 1.6
             Case "Factor"
                 Me.Width = iBasicWidth * 1.4
             Case "Probability"
