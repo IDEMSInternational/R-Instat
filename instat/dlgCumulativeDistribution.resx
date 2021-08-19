@@ -430,7 +430,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveCumDist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>324, 25</value>
+    <value>320, 24</value>
   </data>
   <data name="ucrSaveCumDist.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
