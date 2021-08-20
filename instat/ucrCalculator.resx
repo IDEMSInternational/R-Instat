@@ -1384,7 +1384,7 @@
     <value>18</value>
   </data>
   <data name="grpDates.Location" type="System.Drawing.Point, System.Drawing">
-    <value>433, 60</value>
+    <value>434, 61</value>
   </data>
   <data name="grpDates.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
     <value>No</value>
@@ -1408,7 +1408,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpDates.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>0</value>
   </data>
   <data name="cmdNasplin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -3100,7 +3100,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpProbabilty.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>3</value>
   </data>
   <data name="cmdKurtosis.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4009,7 +4009,34 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpSummary.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>2</value>
+  </data>
+  <data name="cmdEnds.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdEnds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>120, 73</value>
+  </data>
+  <data name="cmdEnds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 30</value>
+  </data>
+  <data name="cmdEnds.TabIndex" type="System.Int32, mscorlib">
+    <value>164</value>
+  </data>
+  <data name="cmdEnds.Text" xml:space="preserve">
+    <value>ends</value>
+  </data>
+  <data name="&gt;&gt;cmdEnds.Name" xml:space="preserve">
+    <value>cmdEnds</value>
+  </data>
+  <data name="&gt;&gt;cmdEnds.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdEnds.Parent" xml:space="preserve">
+    <value>grpStrings</value>
+  </data>
+  <data name="&gt;&gt;cmdEnds.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="cmdTrunck.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4042,7 +4069,7 @@
     <value>grpStrings</value>
   </data>
   <data name="&gt;&gt;cmdTrunck.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="cmdLenth.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4075,7 +4102,7 @@
     <value>grpStrings</value>
   </data>
   <data name="&gt;&gt;cmdLenth.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="cmdGlue.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4108,7 +4135,7 @@
     <value>grpStrings</value>
   </data>
   <data name="&gt;&gt;cmdGlue.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="cmdStarts.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4141,7 +4168,7 @@
     <value>grpStrings</value>
   </data>
   <data name="&gt;&gt;cmdStarts.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="cmdReplace2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4174,7 +4201,7 @@
     <value>grpStrings</value>
   </data>
   <data name="&gt;&gt;cmdReplace2.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="cmdReplace.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4207,7 +4234,7 @@
     <value>grpStrings</value>
   </data>
   <data name="&gt;&gt;cmdReplace.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="cmdRemove2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4240,7 +4267,7 @@
     <value>grpStrings</value>
   </data>
   <data name="&gt;&gt;cmdRemove2.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="cmdRemove1.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4273,7 +4300,7 @@
     <value>grpStrings</value>
   </data>
   <data name="&gt;&gt;cmdRemove1.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="cmdLocate2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4306,7 +4333,7 @@
     <value>grpStrings</value>
   </data>
   <data name="&gt;&gt;cmdLocate2.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="cmdExtract2.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -4339,39 +4366,6 @@
     <value>grpStrings</value>
   </data>
   <data name="&gt;&gt;cmdExtract2.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="cmdEnd.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="cmdEnd.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="cmdEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 73</value>
-  </data>
-  <data name="cmdEnd.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 3, 2, 3</value>
-  </data>
-  <data name="cmdEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 30</value>
-  </data>
-  <data name="cmdEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>152</value>
-  </data>
-  <data name="cmdEnd.Text" xml:space="preserve">
-    <value>ends</value>
-  </data>
-  <data name="&gt;&gt;cmdEnd.Name" xml:space="preserve">
-    <value>cmdEnd</value>
-  </data>
-  <data name="&gt;&gt;cmdEnd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;cmdEnd.Parent" xml:space="preserve">
-    <value>grpStrings</value>
-  </data>
-  <data name="&gt;&gt;cmdEnd.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
   <data name="cmdEncodeb.Font" type="System.Drawing.Font, System.Drawing">
@@ -4882,7 +4876,7 @@
     <value>186</value>
   </data>
   <data name="grpStrings.Text" xml:space="preserve">
-    <value>Strings (Character Columns)</value>
+    <value>Test/Strings (Character Columns)</value>
   </data>
   <data name="&gt;&gt;grpStrings.Name" xml:space="preserve">
     <value>grpStrings</value>
@@ -5911,7 +5905,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpLogical.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>9</value>
   </data>
   <data name="cmdAtan2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -8317,7 +8311,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpWakefield.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="cmdCircular.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -8800,7 +8794,7 @@
     <value>15</value>
   </data>
   <data name="grpCircular.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 60</value>
+    <value>430, 61</value>
   </data>
   <data name="grpCircular.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -8827,7 +8821,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpCircular.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>5</value>
   </data>
   <data name="cmdShuffle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -10747,7 +10741,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpHydroGOF.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>6</value>
   </data>
   <data name="ucrSaveResultInto.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 311</value>
@@ -10879,7 +10873,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>878, 457</value>
+    <value>1077, 457</value>
   </data>
   <data name="&gt;&gt;ttCalculator.Name" xml:space="preserve">
     <value>ttCalculator</value>

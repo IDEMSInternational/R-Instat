@@ -54,7 +54,7 @@ Public Class ucrCalculator
     End Sub
 
     Public Sub InitialiseControls()
-        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF"}) ' "Rows" is a temp. name
+        ucrInputCalOptions.SetItems({"Basic", "Maths", "Logical and Symbols", "Summary", "Test/Strings (Character Columns)", "Factor", "Probability", "Dates/Times", "Transform", "Wakefield", "Circular", "hydroGOF"}) ' "Rows" is a temp. name
         ucrInputCalOptions.SetDropDownStyleAsNonEditable()
         ucrReceiverForCalculation.Selector = ucrSelectorForCalculations
 
@@ -177,7 +177,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdCombine, "Join multiple strings. For example, :str_c(""letter: "",c(""d"",""o"",""g"")) gives ""letter: d"" ""letter: o"" ""letter: g""")
         ttCalculator.SetToolTip(cmdCountstrings, " The number of matches. For example, str_count(c(""nose"",""lip"",""eye""),""e"") gives 1 0 2""")
         ttCalculator.SetToolTip(cmdDetect, " Detect a match. For example, str_detect(c(""nose"",""lip"",""eye""),""e"") gives TRUE FALSE TRUE""")
-        ttCalculator.SetToolTip(cmdEnd, " Detect an ending match. For example, str_ends(c(""nose"",""lip"",""ear""),""e"") gives TRUE FALSE TRUE")
+        ttCalculator.SetToolTip(cmdEnds, " Detect an ending match. For example, str_ends(c(""nose"",""lip"",""ear""),""e"") gives TRUE FALSE TRUE")
         ttCalculator.SetToolTip(cmdExtract, "Extract a matching string. For example, str_extract(c(""nose"",""lip"",""eye""),""e"") gives e NA e FALSE TRUE""")
         ttCalculator.SetToolTip(cmdExtract2, "Extract all matching strings. For example, str_extract_all(c(""nose"",""lip"",""eye""),""e"") gives e NA e, e""")
         ttCalculator.SetToolTip(cmdGlue, "Format and combine strings with glue. For example, (with survey data) str_glue(“"Village {village}, with fertilizer {fert*10}kg.”") gives Village SABEY, with fertilizer 0kg. etc""")
@@ -355,7 +355,7 @@ Public Class ucrCalculator
                 grpModifier.Visible = False
                 grpSymbols.Visible = False
                 grpHydroGOF.Visible = False
-            Case "Strings (Character Columns)"
+            Case "Test/Strings (Character Columns)"
                 grpDates.Visible = False
                 grpStrings.Visible = True
                 grpFactor.Visible = False
@@ -2416,14 +2416,6 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdEnd_Click(sender As Object, e As EventArgs) Handles cmdEnd.Click
-        If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_ends(string = , pattern = , negate = FALSE)", 39)
-        Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_ends()", 1)
-        End If
-    End Sub
-
     Private Sub cmdRemove1_Click(sender As Object, e As EventArgs) Handles cmdRemove1.Click
         If chkShowParameters.Checked Then
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove(string = , pattern = )", 22)
@@ -2812,4 +2804,11 @@ Public Class ucrCalculator
         End If
     End Sub
 
+    Private Sub cmdEnds_Click(sender As Object, e As EventArgs) Handles cmdEnds.Click
+        If chkShowParameters.Checked Then
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_ends(string = , pattern = , negate = FALSE)", 39)
+        Else
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_ends()", 1)
+        End If
+    End Sub
 End Class

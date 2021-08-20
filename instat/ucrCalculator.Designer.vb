@@ -179,7 +179,6 @@ Partial Class ucrCalculator
         Me.cmdRemove1 = New System.Windows.Forms.Button()
         Me.cmdLocate2 = New System.Windows.Forms.Button()
         Me.cmdExtract2 = New System.Windows.Forms.Button()
-        Me.cmdEnd = New System.Windows.Forms.Button()
         Me.cmdEncodeb = New System.Windows.Forms.Button()
         Me.cmdSquishb = New System.Windows.Forms.Button()
         Me.cmdSub = New System.Windows.Forms.Button()
@@ -392,6 +391,7 @@ Partial Class ucrCalculator
         Me.cmdD = New System.Windows.Forms.Button()
         Me.cmdCp = New System.Windows.Forms.Button()
         Me.cmdBr2 = New System.Windows.Forms.Button()
+        Me.cmdEnds = New System.Windows.Forms.Button()
         Me.ucrSaveResultInto = New instat.ucrSave()
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
@@ -1305,6 +1305,7 @@ Partial Class ucrCalculator
         '
         'grpStrings
         '
+        Me.grpStrings.Controls.Add(Me.cmdEnds)
         Me.grpStrings.Controls.Add(Me.cmdTrunck)
         Me.grpStrings.Controls.Add(Me.cmdLenth)
         Me.grpStrings.Controls.Add(Me.cmdGlue)
@@ -1315,7 +1316,6 @@ Partial Class ucrCalculator
         Me.grpStrings.Controls.Add(Me.cmdRemove1)
         Me.grpStrings.Controls.Add(Me.cmdLocate2)
         Me.grpStrings.Controls.Add(Me.cmdExtract2)
-        Me.grpStrings.Controls.Add(Me.cmdEnd)
         Me.grpStrings.Controls.Add(Me.cmdEncodeb)
         Me.grpStrings.Controls.Add(Me.cmdSquishb)
         Me.grpStrings.Controls.Add(Me.cmdSub)
@@ -1401,13 +1401,6 @@ Partial Class ucrCalculator
         Me.cmdExtract2.Name = "cmdExtract2"
         Me.cmdExtract2.Tag = ""
         Me.cmdExtract2.UseVisualStyleBackColor = True
-        '
-        'cmdEnd
-        '
-        resources.ApplyResources(Me.cmdEnd, "cmdEnd")
-        Me.cmdEnd.Name = "cmdEnd"
-        Me.cmdEnd.Tag = ""
-        Me.cmdEnd.UseVisualStyleBackColor = True
         '
         'cmdEncodeb
         '
@@ -2873,6 +2866,12 @@ Partial Class ucrCalculator
         Me.cmdBr2.Name = "cmdBr2"
         Me.cmdBr2.UseVisualStyleBackColor = True
         '
+        'cmdEnds
+        '
+        resources.ApplyResources(Me.cmdEnds, "cmdEnds")
+        Me.cmdEnds.Name = "cmdEnds"
+        Me.cmdEnds.UseVisualStyleBackColor = True
+        '
         'ucrSaveResultInto
         '
         resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
@@ -2912,16 +2911,16 @@ Partial Class ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpHydroGOF)
-        Me.Controls.Add(Me.grpFactor)
-        Me.Controls.Add(Me.grpCircular)
-        Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpLogical)
-        Me.Controls.Add(Me.grpSummary)
         Me.Controls.Add(Me.grpDates)
+        Me.Controls.Add(Me.grpFactor)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpProbabilty)
+        Me.Controls.Add(Me.grpWakefield)
+        Me.Controls.Add(Me.grpCircular)
+        Me.Controls.Add(Me.grpHydroGOF)
         Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpTransform)
-        Me.Controls.Add(Me.grpProbabilty)
+        Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.ucrSaveResultInto)
         Me.Controls.Add(Me.ucrTryCalculator)
         Me.Controls.Add(Me.grpStrings)
@@ -3254,7 +3253,6 @@ Partial Class ucrCalculator
     Friend WithEvents cmdEncodeb As Button
     Friend WithEvents cmdSquishb As Button
     Friend WithEvents cmdExtract2 As Button
-    Friend WithEvents cmdEnd As Button
     Friend WithEvents cmdLocate2 As Button
     Friend WithEvents cmdRemove2 As Button
     Friend WithEvents cmdRemove1 As Button
@@ -3314,4 +3312,5 @@ Partial Class ucrCalculator
     Friend WithEvents cmdLenth As Button
     Friend WithEvents cmdGlue As Button
     Friend WithEvents cmdTrunck As Button
+    Friend WithEvents cmdEnds As Button
 End Class
