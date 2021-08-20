@@ -309,7 +309,7 @@ Public Class ucrCalculator
                 grpMaths.Visible = True
                 grpLogical.Visible = False
                 grpBasic.Visible = True
-                grpStrings.Visible = False
+                grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
@@ -327,7 +327,7 @@ Public Class ucrCalculator
                 grpLogical.Visible = True
                 grpMaths.Visible = False
                 grpBasic.Visible = True
-                grpStrings.Visible = False
+                grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpHydroGOF.Visible = False
                 iHelpCalcID = 127
@@ -346,7 +346,7 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 iHelpCalcID = 128
                 Me.Size = New Size(iBasicWidth * 1.51, iBaseHeight)
-                grpStrings.Visible = False
+                grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpProbabilty.Visible = False
                 grpTransform.Visible = False
@@ -357,7 +357,7 @@ Public Class ucrCalculator
                 grpHydroGOF.Visible = False
             Case "Test/Strings (Character Columns)"
                 grpDates.Visible = False
-                grpStrings.Visible = True
+                grpTestString.Visible = True
                 grpFactor.Visible = False
                 grpSummary.Visible = False
                 grpLogical.Visible = False
@@ -379,7 +379,7 @@ Public Class ucrCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpBasic.Visible = True
-                grpStrings.Visible = False
+                grpTestString.Visible = False
                 iHelpCalcID = 127
                 Me.Size = New Size(iBasicWidth * 1.44, iBaseHeight)
                 grpProbabilty.Visible = False
@@ -392,7 +392,7 @@ Public Class ucrCalculator
             Case "Probability"
                 grpDates.Visible = False
                 grpProbabilty.Visible = True
-                grpStrings.Visible = False
+                grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpSummary.Visible = False
                 grpLogical.Visible = False
@@ -409,7 +409,7 @@ Public Class ucrCalculator
             Case "Dates/Times"
                 grpDates.Visible = True
                 grpProbabilty.Visible = False
-                grpStrings.Visible = False
+                grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpSummary.Visible = False
                 grpLogical.Visible = False
@@ -430,7 +430,7 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
-                grpStrings.Visible = False
+                grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpTransform.Visible = True
                 grpCircular.Visible = False
@@ -446,7 +446,7 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
-                grpStrings.Visible = False
+                grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpTransform.Visible = False
                 grpCircular.Visible = False
@@ -462,7 +462,7 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
-                grpStrings.Visible = False
+                grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpTransform.Visible = False
                 grpWakefield.Visible = False
@@ -479,7 +479,7 @@ Public Class ucrCalculator
                 grpBasic.Visible = True
                 grpLogical.Visible = False
                 grpMaths.Visible = False
-                grpStrings.Visible = False
+                grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpTransform.Visible = False
                 grpWakefield.Visible = False
@@ -496,7 +496,7 @@ Public Class ucrCalculator
                 grpLogical.Visible = False
                 grpMaths.Visible = False
                 grpTransform.Visible = False
-                grpStrings.Visible = False
+                grpTestString.Visible = False
                 grpFactor.Visible = False
                 grpCircular.Visible = False
                 grpWakefield.Visible = False

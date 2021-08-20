@@ -168,7 +168,7 @@ Partial Class ucrCalculator
         Me.cmdLength = New System.Windows.Forms.Button()
         Me.cmdSum = New System.Windows.Forms.Button()
         Me.cmdVar = New System.Windows.Forms.Button()
-        Me.grpStrings = New System.Windows.Forms.GroupBox()
+        Me.grpTestString = New System.Windows.Forms.GroupBox()
         Me.cmdTrunck = New System.Windows.Forms.Button()
         Me.cmdLenth = New System.Windows.Forms.Button()
         Me.cmdGlue = New System.Windows.Forms.Button()
@@ -402,7 +402,7 @@ Partial Class ucrCalculator
         Me.grpTransform.SuspendLayout()
         Me.grpProbabilty.SuspendLayout()
         Me.grpSummary.SuspendLayout()
-        Me.grpStrings.SuspendLayout()
+        Me.grpTestString.SuspendLayout()
         Me.grpLogical.SuspendLayout()
         Me.grpMaths.SuspendLayout()
         Me.grpWakefield.SuspendLayout()
@@ -1303,37 +1303,37 @@ Partial Class ucrCalculator
         Me.cmdVar.Name = "cmdVar"
         Me.cmdVar.UseVisualStyleBackColor = True
         '
-        'grpStrings
+        'grpTestString
         '
-        Me.grpStrings.Controls.Add(Me.cmdEnds)
-        Me.grpStrings.Controls.Add(Me.cmdTrunck)
-        Me.grpStrings.Controls.Add(Me.cmdLenth)
-        Me.grpStrings.Controls.Add(Me.cmdGlue)
-        Me.grpStrings.Controls.Add(Me.cmdStarts)
-        Me.grpStrings.Controls.Add(Me.cmdReplace2)
-        Me.grpStrings.Controls.Add(Me.cmdReplace)
-        Me.grpStrings.Controls.Add(Me.cmdRemove2)
-        Me.grpStrings.Controls.Add(Me.cmdRemove1)
-        Me.grpStrings.Controls.Add(Me.cmdLocate2)
-        Me.grpStrings.Controls.Add(Me.cmdExtract2)
-        Me.grpStrings.Controls.Add(Me.cmdEncodeb)
-        Me.grpStrings.Controls.Add(Me.cmdSquishb)
-        Me.grpStrings.Controls.Add(Me.cmdSub)
-        Me.grpStrings.Controls.Add(Me.cmdCombine)
-        Me.grpStrings.Controls.Add(Me.cmdDetect)
-        Me.grpStrings.Controls.Add(Me.cmdTrim)
-        Me.grpStrings.Controls.Add(Me.cmdTitle)
-        Me.grpStrings.Controls.Add(Me.cmdLower)
-        Me.grpStrings.Controls.Add(Me.cmdUpper)
-        Me.grpStrings.Controls.Add(Me.cmdSort)
-        Me.grpStrings.Controls.Add(Me.cmdOrder)
-        Me.grpStrings.Controls.Add(Me.cmdPad)
-        Me.grpStrings.Controls.Add(Me.cmdExtract)
-        Me.grpStrings.Controls.Add(Me.cmdCountstrings)
-        Me.grpStrings.Controls.Add(Me.cmdLocate)
-        resources.ApplyResources(Me.grpStrings, "grpStrings")
-        Me.grpStrings.Name = "grpStrings"
-        Me.grpStrings.TabStop = False
+        Me.grpTestString.Controls.Add(Me.cmdEnds)
+        Me.grpTestString.Controls.Add(Me.cmdTrunck)
+        Me.grpTestString.Controls.Add(Me.cmdLenth)
+        Me.grpTestString.Controls.Add(Me.cmdGlue)
+        Me.grpTestString.Controls.Add(Me.cmdStarts)
+        Me.grpTestString.Controls.Add(Me.cmdReplace2)
+        Me.grpTestString.Controls.Add(Me.cmdReplace)
+        Me.grpTestString.Controls.Add(Me.cmdRemove2)
+        Me.grpTestString.Controls.Add(Me.cmdRemove1)
+        Me.grpTestString.Controls.Add(Me.cmdLocate2)
+        Me.grpTestString.Controls.Add(Me.cmdExtract2)
+        Me.grpTestString.Controls.Add(Me.cmdEncodeb)
+        Me.grpTestString.Controls.Add(Me.cmdSquishb)
+        Me.grpTestString.Controls.Add(Me.cmdSub)
+        Me.grpTestString.Controls.Add(Me.cmdCombine)
+        Me.grpTestString.Controls.Add(Me.cmdDetect)
+        Me.grpTestString.Controls.Add(Me.cmdTrim)
+        Me.grpTestString.Controls.Add(Me.cmdTitle)
+        Me.grpTestString.Controls.Add(Me.cmdLower)
+        Me.grpTestString.Controls.Add(Me.cmdUpper)
+        Me.grpTestString.Controls.Add(Me.cmdSort)
+        Me.grpTestString.Controls.Add(Me.cmdOrder)
+        Me.grpTestString.Controls.Add(Me.cmdPad)
+        Me.grpTestString.Controls.Add(Me.cmdExtract)
+        Me.grpTestString.Controls.Add(Me.cmdCountstrings)
+        Me.grpTestString.Controls.Add(Me.cmdLocate)
+        resources.ApplyResources(Me.grpTestString, "grpTestString")
+        Me.grpTestString.Name = "grpTestString"
+        Me.grpTestString.TabStop = False
         '
         'cmdTrunck
         '
@@ -2912,18 +2912,18 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpDates)
-        Me.Controls.Add(Me.grpFactor)
-        Me.Controls.Add(Me.grpSummary)
-        Me.Controls.Add(Me.grpProbabilty)
-        Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpHydroGOF)
-        Me.Controls.Add(Me.grpMaths)
-        Me.Controls.Add(Me.grpTransform)
+        Me.Controls.Add(Me.grpFactor)
+        Me.Controls.Add(Me.grpCircular)
+        Me.Controls.Add(Me.grpWakefield)
         Me.Controls.Add(Me.grpLogical)
+        Me.Controls.Add(Me.grpMaths)
+        Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpTransform)
+        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.ucrSaveResultInto)
         Me.Controls.Add(Me.ucrTryCalculator)
-        Me.Controls.Add(Me.grpStrings)
+        Me.Controls.Add(Me.grpTestString)
         Me.Controls.Add(Me.grpSymbols)
         Me.Controls.Add(Me.grpModifier)
         Me.Controls.Add(Me.cmdHelp)
@@ -2939,7 +2939,7 @@ Partial Class ucrCalculator
         Me.grpTransform.ResumeLayout(False)
         Me.grpProbabilty.ResumeLayout(False)
         Me.grpSummary.ResumeLayout(False)
-        Me.grpStrings.ResumeLayout(False)
+        Me.grpTestString.ResumeLayout(False)
         Me.grpLogical.ResumeLayout(False)
         Me.grpMaths.ResumeLayout(False)
         Me.grpWakefield.ResumeLayout(False)
@@ -2995,7 +2995,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdpmax As Button
     Friend WithEvents cmdLead As Button
     Friend WithEvents cmdLag As Button
-    Friend WithEvents grpStrings As GroupBox
+    Friend WithEvents grpTestString As GroupBox
     Friend WithEvents cmdSub As Button
     Friend WithEvents cmdCombine As Button
     Friend WithEvents cmdDetect As Button
