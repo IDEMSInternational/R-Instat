@@ -182,7 +182,7 @@ Partial Class ucrCalculator
         Me.cmdEnd = New System.Windows.Forms.Button()
         Me.cmdEncodeb = New System.Windows.Forms.Button()
         Me.cmdSquishb = New System.Windows.Forms.Button()
-        Me.cmdSplit = New System.Windows.Forms.Button()
+        Me.cmdSub = New System.Windows.Forms.Button()
         Me.cmdCombine = New System.Windows.Forms.Button()
         Me.cmdDetect = New System.Windows.Forms.Button()
         Me.cmdTrim = New System.Windows.Forms.Button()
@@ -1318,7 +1318,7 @@ Partial Class ucrCalculator
         Me.grpStrings.Controls.Add(Me.cmdEnd)
         Me.grpStrings.Controls.Add(Me.cmdEncodeb)
         Me.grpStrings.Controls.Add(Me.cmdSquishb)
-        Me.grpStrings.Controls.Add(Me.cmdSplit)
+        Me.grpStrings.Controls.Add(Me.cmdSub)
         Me.grpStrings.Controls.Add(Me.cmdCombine)
         Me.grpStrings.Controls.Add(Me.cmdDetect)
         Me.grpStrings.Controls.Add(Me.cmdTrim)
@@ -1421,12 +1421,12 @@ Partial Class ucrCalculator
         Me.cmdSquishb.Name = "cmdSquishb"
         Me.cmdSquishb.UseVisualStyleBackColor = True
         '
-        'cmdSplit
+        'cmdSub
         '
-        resources.ApplyResources(Me.cmdSplit, "cmdSplit")
-        Me.cmdSplit.Name = "cmdSplit"
-        Me.cmdSplit.Tag = ""
-        Me.cmdSplit.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdSub, "cmdSub")
+        Me.cmdSub.Name = "cmdSub"
+        Me.cmdSub.Tag = ""
+        Me.cmdSub.UseVisualStyleBackColor = True
         '
         'cmdCombine
         '
@@ -2191,7 +2191,6 @@ Partial Class ucrCalculator
         Me.grpWakefield.Controls.Add(Me.cmdValid)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
         Me.grpWakefield.Controls.Add(Me.cmdString)
-        Me.grpWakefield.Controls.Add(Me.grpLogical)
         Me.grpWakefield.Controls.Add(Me.cmdState)
         Me.grpWakefield.Controls.Add(Me.cmdSpeed)
         Me.grpWakefield.Controls.Add(Me.cmdSmokes)
@@ -2913,13 +2912,14 @@ Partial Class ucrCalculator
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpDates)
         Me.Controls.Add(Me.grpHydroGOF)
         Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
         Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpMaths)
+        Me.Controls.Add(Me.grpLogical)
         Me.Controls.Add(Me.grpSummary)
+        Me.Controls.Add(Me.grpDates)
+        Me.Controls.Add(Me.grpMaths)
         Me.Controls.Add(Me.grpTransform)
         Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.ucrSaveResultInto)
@@ -2997,7 +2997,7 @@ Partial Class ucrCalculator
     Friend WithEvents cmdLead As Button
     Friend WithEvents cmdLag As Button
     Friend WithEvents grpStrings As GroupBox
-    Friend WithEvents cmdSplit As Button
+    Friend WithEvents cmdSub As Button
     Friend WithEvents cmdCombine As Button
     Friend WithEvents cmdDetect As Button
     Friend WithEvents cmdTrim As Button

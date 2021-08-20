@@ -177,7 +177,7 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdCombine, "Join multiple strings. For example, :str_c(""letter: "",c(""d"",""o"",""g"")) gives ""letter: d"" ""letter: o"" ""letter: g""")
         ttCalculator.SetToolTip(cmdCountstrings, " The number of matches. For example, str_count(c(""nose"",""lip"",""eye""),""e"") gives 1 0 2""")
         ttCalculator.SetToolTip(cmdDetect, " Detect a match. For example, str_detect(c(""nose"",""lip"",""eye""),""e"") gives TRUE FALSE TRUE""")
-        ttCalculator.SetToolTip(cmdEnd, "Detect a match. For example, str_detect(c(""nose"",""lip"",""eye""),""e"") gives TRUE FALSE TRUE """)
+        ttCalculator.SetToolTip(cmdEnd, " Detect an ending match. For example, str_ends(c(""nose"",""lip"",""ear""),""e"") gives TRUE FALSE TRUE")
         ttCalculator.SetToolTip(cmdExtract, "Extract a matching string. For example, str_extract(c(""nose"",""lip"",""eye""),""e"") gives e NA e FALSE TRUE""")
         ttCalculator.SetToolTip(cmdExtract2, "Extract all matching strings. For example, str_extract_all(c(""nose"",""lip"",""eye""),""e"") gives e NA e, e""")
         ttCalculator.SetToolTip(cmdGlue, "Format and combine strings with glue. For example, (with survey data) str_glue(“"Village {village}, with fertilizer {fert*10}kg.”") gives Village SABEY, with fertilizer 0kg. etc""")
@@ -190,6 +190,8 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdReplace2, "Replace all patterns. For example, str_replace_all(c(""nose"",""ear"",""eye""),""e"",""y"") gives “"nosy”" “"yar"” “"yyy”"")
         ttCalculator.SetToolTip(cmdStarts, " Detect a starting match. For example, str_starts(c(""nose"",""ear"",""eye""),""e"") gives FALSE TRUE TRUE")
         ttCalculator.SetToolTip(cmdTrunck, "Truncate strings. For example, str_trunc("“Katumani"”,7) gives “"Katu…"”; 8 gives “"Katumani”"")
+        ttCalculator.SetToolTip(cmdSub, "Extract substring. For example,str_sub(""Kakamega County"",1,8) ""gives"" ""Kakamega.""  ""-6 gives"" "“County""")
+        ttCalculator.SetToolTip(cmdEncodeb, "Specify the encoding of a string")
 
     End Sub
 
@@ -800,7 +802,7 @@ Public Class ucrCalculator
 
     Private Sub cmdPad_Click(sender As Object, e As EventArgs) Handles cmdPad.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_pad(string= , width= , side = c('left', 'right', 'both'), pad= )", 52)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_pad(string = , width = , side = c('left', 'right', 'both') , pad = )", 56)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_pad()", 1)
         End If
@@ -808,7 +810,7 @@ Public Class ucrCalculator
 
     Private Sub cmdOrder_Click(sender As Object, e As EventArgs) Handles cmdOrder.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_order(x= , decreasing = FALSE, na_last = TRUE)", 38)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_order(x = , decreasing = FALSE , na_last = TRUE)", 40)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_order()", 1)
         End If
@@ -816,7 +818,7 @@ Public Class ucrCalculator
 
     Private Sub cmdSort_Click(sender As Object, e As EventArgs) Handles cmdSort.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_sort(x= , decreasing = FALSE, na_last = TRUE, locale = ' ')", 51)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_sort(x= , decreasing = FALSE , na_last = TRUE , locale = ' ')", 53)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_sort()", 1)
         End If
@@ -857,7 +859,7 @@ Public Class ucrCalculator
 
     Private Sub cmdDetect_Click(sender As Object, e As EventArgs) Handles cmdDetect.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_detect(string = , pattern = argument)", 22)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_detect(string = , pattern = , negate = FALSE)", 32)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_detect()", 1)
         End If
@@ -1020,11 +1022,11 @@ Public Class ucrCalculator
         End If
     End Sub
 
-    Private Sub cmdSplit_Click(sender As Object, e As EventArgs) Handles cmdSplit.Click
+    Private Sub cmdSplit_Click(sender As Object, e As EventArgs) Handles cmdSub.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_split(string = , pattern = argument, n = )", 28)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_sub(string="""", start = 1L, end = -1L)", 25)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_split()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_sub()", 1)
         End If
     End Sub
 
@@ -2408,7 +2410,7 @@ Public Class ucrCalculator
 
     Private Sub cmdStarts_Click(sender As Object, e As EventArgs) Handles cmdStarts.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_starts(string = , pattern = argument, negate = FALSE)", 38)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_starts(string = , pattern = , negate = FALSE)", 38)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_starts()", 1)
         End If
@@ -2416,15 +2418,15 @@ Public Class ucrCalculator
 
     Private Sub cmdEnd_Click(sender As Object, e As EventArgs) Handles cmdEnd.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_ends(string = , pattern = argument, negate = FALSE)", 38)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_ends(string = , pattern = , negate = FALSE)", 39)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_ends()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_ends()", 1)
         End If
     End Sub
 
     Private Sub cmdRemove1_Click(sender As Object, e As EventArgs) Handles cmdRemove1.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove(string = , pattern = argument)", 22)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove(string = , pattern = )", 22)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove()", 1)
         End If
@@ -2432,7 +2434,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRemove2_Click(sender As Object, e As EventArgs) Handles cmdRemove2.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove_all(string = , pattern = argument)", 22)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove_all(string = , pattern = )", 22)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove_all()", 1)
         End If
@@ -2440,41 +2442,41 @@ Public Class ucrCalculator
 
     Private Sub cmdSquishb_Click(sender As Object, e As EventArgs) Handles cmdSquishb.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_squish(string = )", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_squish(string = )", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_squish()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_squish()", 1)
         End If
     End Sub
 
     Private Sub cmdEncodeb_Click(sender As Object, e As EventArgs) Handles cmdEncodeb.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_conv(string = , encoding = )", 15)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_conv(string = , encoding = )", 15)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_conv()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_conv()", 1)
         End If
     End Sub
 
     Private Sub cmdExtract2_Click(sender As Object, e As EventArgs) Handles cmdExtract2.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_extract_all(string = , pattern = , simplify = FALSE)", 32)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_extract_all(string = , pattern = , simplify = FALSE)", 32)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_extract_all()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_extract_all()", 1)
         End If
     End Sub
 
     Private Sub cmdLocate2_Click(sender As Object, e As EventArgs) Handles cmdLocate2.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_locate_all(string = , pattern = )", 14)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_locate_all(string = , pattern = )", 14)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_locate_all()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_locate_all()", 1)
         End If
     End Sub
 
     Private Sub cmdReplace2_Click(sender As Object, e As EventArgs) Handles cmdReplace2.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_replace_all(string = , pattern = , replacement = )", 30)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_replace_all(string = , pattern = , replacement = )", 30)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("str_replace_all()", 1)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_replace_all()", 1)
         End If
     End Sub
 
@@ -2804,13 +2806,10 @@ Public Class ucrCalculator
 
     Private Sub cmdTrunck_Click(sender As Object, e As EventArgs) Handles cmdTrunck.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_trunc(string = """" , width = , side = c(""right"" , ""left"", ""center"") , ellipsis ="""" )", 67)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_trunc(string =  , width = , side = c(""right"" , ""left"", ""center"") , ellipsis =  )", 63)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_trunc()", 1)
         End If
     End Sub
 
-    Private Sub ucrSelectorForCalculations_Load(sender As Object, e As EventArgs) Handles ucrSelectorForCalculations.Load
-
-    End Sub
 End Class
