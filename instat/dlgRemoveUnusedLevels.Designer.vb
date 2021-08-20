@@ -73,6 +73,7 @@ Partial Class dlgRemoveUnusedLevels
         '
         'ucrSelectorFactorColumn
         '
+        Me.ucrSelectorFactorColumn.bDropUnusedFilterLevels = False
         Me.ucrSelectorFactorColumn.bShowHiddenColumns = False
         Me.ucrSelectorFactorColumn.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorFactorColumn, "ucrSelectorFactorColumn")

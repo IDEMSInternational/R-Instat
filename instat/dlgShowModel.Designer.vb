@@ -109,7 +109,7 @@ Partial Class dlgShowModel
         '
         'cmdDistributionOptions
         '
-        Me.cmdDistributionOptions.Location = New System.Drawing.Point(388, 248)
+        Me.cmdDistributionOptions.Location = New System.Drawing.Point(385, 248)
         Me.cmdDistributionOptions.Name = "cmdDistributionOptions"
         Me.cmdDistributionOptions.Size = New System.Drawing.Size(100, 25)
         Me.cmdDistributionOptions.TabIndex = 12
@@ -166,7 +166,7 @@ Partial Class dlgShowModel
         Me.ucrChkEnterValues.Checked = False
         Me.ucrChkEnterValues.Location = New System.Drawing.Point(9, 265)
         Me.ucrChkEnterValues.Name = "ucrChkEnterValues"
-        Me.ucrChkEnterValues.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkEnterValues.Size = New System.Drawing.Size(224, 20)
         Me.ucrChkEnterValues.TabIndex = 10
         '
         'ucrPnlDistributionType
@@ -181,14 +181,14 @@ Partial Class dlgShowModel
         Me.ucrInputValuesOrProbabilities.AddQuotesIfUnrecognised = True
         Me.ucrInputValuesOrProbabilities.GetSetSelectedIndex = -1
         Me.ucrInputValuesOrProbabilities.IsReadOnly = False
-        Me.ucrInputValuesOrProbabilities.Location = New System.Drawing.Point(246, 73)
+        Me.ucrInputValuesOrProbabilities.Location = New System.Drawing.Point(246, 74)
         Me.ucrInputValuesOrProbabilities.Name = "ucrInputValuesOrProbabilities"
         Me.ucrInputValuesOrProbabilities.Size = New System.Drawing.Size(137, 21)
         Me.ucrInputValuesOrProbabilities.TabIndex = 5
         '
         'ucrDistributionAndParameters
         '
-        Me.ucrDistributionAndParameters.Location = New System.Drawing.Point(248, 98)
+        Me.ucrDistributionAndParameters.Location = New System.Drawing.Point(241, 101)
         Me.ucrDistributionAndParameters.Name = "ucrDistributionAndParameters"
         Me.ucrDistributionAndParameters.Size = New System.Drawing.Size(247, 147)
         Me.ucrDistributionAndParameters.TabIndex = 6

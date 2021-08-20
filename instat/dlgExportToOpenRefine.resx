@@ -175,7 +175,7 @@
     <value>10, 86</value>
   </data>
   <data name="ucrChkOpenBrowser.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>172, 20</value>
   </data>
   <data name="ucrChkOpenBrowser.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -214,7 +214,7 @@
     <value>3</value>
   </data>
   <data name="ucrInputDatasetName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>115, 59</value>
+    <value>169, 59</value>
   </data>
   <data name="ucrInputDatasetName.Size" type="System.Drawing.Size, System.Drawing">
     <value>149, 21</value>

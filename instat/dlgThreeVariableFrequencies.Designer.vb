@@ -50,15 +50,16 @@ Partial Class dlgThreeVariableFrequencies
         Me.rdoCell = New System.Windows.Forms.RadioButton()
         Me.rdoCount = New System.Windows.Forms.RadioButton()
         Me.grpFreqTypeTable = New System.Windows.Forms.GroupBox()
-        Me.lblGroupsby = New System.Windows.Forms.Label()
-        Me.grpFreqTypeGraph = New System.Windows.Forms.GroupBox()
-        Me.rdoBoth = New System.Windows.Forms.RadioButton()
-        Me.ucrSaveGraph = New instat.ucrSave()
-        Me.ucrReceiverGroupBy2nd = New instat.ucrReceiverSingle()
         Me.ucrChkRow = New instat.ucrCheck()
         Me.ucrChkCount = New instat.ucrCheck()
         Me.ucrChkColumn = New instat.ucrCheck()
         Me.ucrChkCell = New instat.ucrCheck()
+        Me.lblGroupsby = New System.Windows.Forms.Label()
+        Me.grpFreqTypeGraph = New System.Windows.Forms.GroupBox()
+        Me.ucrPnlFreqType = New instat.UcrPanel()
+        Me.rdoBoth = New System.Windows.Forms.RadioButton()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrReceiverGroupBy2nd = New instat.ucrReceiverSingle()
         Me.ucrReceiverGroupsBy1st = New instat.ucrReceiverSingle()
         Me.ucrReceiverWeights = New instat.ucrReceiverSingle()
         Me.ucrChkWeights = New instat.ucrCheck()
@@ -68,7 +69,6 @@ Partial Class dlgThreeVariableFrequencies
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorThreeVariableFrequencies = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkFlip = New instat.ucrCheck()
-        Me.ucrPnlFreqType = New instat.UcrPanel()
         Me.grpFreqTypeTable.SuspendLayout()
         Me.grpFreqTypeGraph.SuspendLayout()
         Me.SuspendLayout()
@@ -152,6 +152,30 @@ Partial Class dlgThreeVariableFrequencies
         Me.grpFreqTypeTable.Name = "grpFreqTypeTable"
         Me.grpFreqTypeTable.TabStop = False
         '
+        'ucrChkRow
+        '
+        Me.ucrChkRow.Checked = False
+        resources.ApplyResources(Me.ucrChkRow, "ucrChkRow")
+        Me.ucrChkRow.Name = "ucrChkRow"
+        '
+        'ucrChkCount
+        '
+        Me.ucrChkCount.Checked = False
+        resources.ApplyResources(Me.ucrChkCount, "ucrChkCount")
+        Me.ucrChkCount.Name = "ucrChkCount"
+        '
+        'ucrChkColumn
+        '
+        Me.ucrChkColumn.Checked = False
+        resources.ApplyResources(Me.ucrChkColumn, "ucrChkColumn")
+        Me.ucrChkColumn.Name = "ucrChkColumn"
+        '
+        'ucrChkCell
+        '
+        Me.ucrChkCell.Checked = False
+        resources.ApplyResources(Me.ucrChkCell, "ucrChkCell")
+        Me.ucrChkCell.Name = "ucrChkCell"
+        '
         'lblGroupsby
         '
         resources.ApplyResources(Me.lblGroupsby, "lblGroupsby")
@@ -167,6 +191,11 @@ Partial Class dlgThreeVariableFrequencies
         resources.ApplyResources(Me.grpFreqTypeGraph, "grpFreqTypeGraph")
         Me.grpFreqTypeGraph.Name = "grpFreqTypeGraph"
         Me.grpFreqTypeGraph.TabStop = False
+        '
+        'ucrPnlFreqType
+        '
+        resources.ApplyResources(Me.ucrPnlFreqType, "ucrPnlFreqType")
+        Me.ucrPnlFreqType.Name = "ucrPnlFreqType"
         '
         'rdoBoth
         '
@@ -191,30 +220,6 @@ Partial Class dlgThreeVariableFrequencies
         Me.ucrReceiverGroupBy2nd.Selector = Nothing
         Me.ucrReceiverGroupBy2nd.strNcFilePath = ""
         Me.ucrReceiverGroupBy2nd.ucrSelector = Nothing
-        '
-        'ucrChkRow
-        '
-        Me.ucrChkRow.Checked = False
-        resources.ApplyResources(Me.ucrChkRow, "ucrChkRow")
-        Me.ucrChkRow.Name = "ucrChkRow"
-        '
-        'ucrChkCount
-        '
-        Me.ucrChkCount.Checked = False
-        resources.ApplyResources(Me.ucrChkCount, "ucrChkCount")
-        Me.ucrChkCount.Name = "ucrChkCount"
-        '
-        'ucrChkColumn
-        '
-        Me.ucrChkColumn.Checked = False
-        resources.ApplyResources(Me.ucrChkColumn, "ucrChkColumn")
-        Me.ucrChkColumn.Name = "ucrChkColumn"
-        '
-        'ucrChkCell
-        '
-        Me.ucrChkCell.Checked = False
-        resources.ApplyResources(Me.ucrChkCell, "ucrChkCell")
-        Me.ucrChkCell.Name = "ucrChkCell"
         '
         'ucrReceiverGroupsBy1st
         '
@@ -282,16 +287,10 @@ Partial Class dlgThreeVariableFrequencies
         resources.ApplyResources(Me.ucrChkFlip, "ucrChkFlip")
         Me.ucrChkFlip.Name = "ucrChkFlip"
         '
-        'ucrPnlFreqType
-        '
-        resources.ApplyResources(Me.ucrPnlFreqType, "ucrPnlFreqType")
-        Me.ucrPnlFreqType.Name = "ucrPnlFreqType"
-        '
         'dlgThreeVariableFrequencies
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.rdoBoth)
         Me.Controls.Add(Me.ucrReceiverGroupBy2nd)
         Me.Controls.Add(Me.lblGroupsby)
@@ -309,9 +308,10 @@ Partial Class dlgThreeVariableFrequencies
         Me.Controls.Add(Me.ucrPnlFrequencyDisplay)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorThreeVariableFrequencies)
-        Me.Controls.Add(Me.ucrChkFlip)
         Me.Controls.Add(Me.grpFreqTypeGraph)
         Me.Controls.Add(Me.ucrReceiverWeights)
+        Me.Controls.Add(Me.ucrSaveGraph)
+        Me.Controls.Add(Me.ucrChkFlip)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

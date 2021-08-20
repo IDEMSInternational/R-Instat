@@ -697,7 +697,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveConversions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>230, 24</value>
+    <value>320, 24</value>
   </data>
   <data name="ucrSaveConversions.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -871,10 +871,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoWindSpeed.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 17</value>
+    <value>225, 17</value>
   </data>
   <data name="rdoWindSpeed.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 28</value>
+    <value>110, 28</value>
   </data>
   <data name="rdoWindSpeed.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -934,10 +934,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoRain.Location" type="System.Drawing.Point, System.Drawing">
-    <value>64, 17</value>
+    <value>76, 17</value>
   </data>
   <data name="rdoRain.Size" type="System.Drawing.Size, System.Drawing">
-    <value>91, 28</value>
+    <value>62, 28</value>
   </data>
   <data name="rdoRain.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -997,7 +997,7 @@
     <value>NoControl</value>
   </data>
   <data name="rdoTemperature.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 17</value>
+    <value>136, 17</value>
   </data>
   <data name="rdoTemperature.Size" type="System.Drawing.Size, System.Drawing">
     <value>91, 28</value>
@@ -1045,7 +1045,7 @@
     <value>7</value>
   </data>
   <data name="ucrPnlElements.Location" type="System.Drawing.Point, System.Drawing">
-    <value>64, 12</value>
+    <value>72, 12</value>
   </data>
   <data name="ucrPnlElements.Size" type="System.Drawing.Size, System.Drawing">
     <value>269, 40</value>

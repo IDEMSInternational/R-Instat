@@ -72,9 +72,9 @@ Partial Class dlgTwoVariableUseModel
         '
         Me.cmdPredict.Enabled = False
         Me.cmdPredict.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdPredict.Location = New System.Drawing.Point(300, 168)
+        Me.cmdPredict.Location = New System.Drawing.Point(278, 168)
         Me.cmdPredict.Name = "cmdPredict"
-        Me.cmdPredict.Size = New System.Drawing.Size(110, 23)
+        Me.cmdPredict.Size = New System.Drawing.Size(132, 23)
         Me.cmdPredict.TabIndex = 3
         Me.cmdPredict.Tag = "Predict..."
         Me.cmdPredict.Text = "Predict..."
@@ -83,9 +83,9 @@ Partial Class dlgTwoVariableUseModel
         'cmdDisplayOptions
         '
         Me.cmdDisplayOptions.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(300, 197)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(278, 197)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.Size = New System.Drawing.Size(110, 23)
+        Me.cmdDisplayOptions.Size = New System.Drawing.Size(132, 23)
         Me.cmdDisplayOptions.TabIndex = 6
         Me.cmdDisplayOptions.Tag = "Display_Options..."
         Me.cmdDisplayOptions.Text = "Display Options..."
@@ -96,9 +96,9 @@ Partial Class dlgTwoVariableUseModel
         Me.ucrModel.AddQuotesIfUnrecognised = True
         Me.ucrModel.IsMultiline = False
         Me.ucrModel.IsReadOnly = False
-        Me.ucrModel.Location = New System.Drawing.Point(97, 199)
+        Me.ucrModel.Location = New System.Drawing.Point(118, 198)
         Me.ucrModel.Name = "ucrModel"
-        Me.ucrModel.Size = New System.Drawing.Size(158, 21)
+        Me.ucrModel.Size = New System.Drawing.Size(154, 21)
         Me.ucrModel.TabIndex = 5
         '
         'ucrReceiverUseModel
@@ -115,6 +115,7 @@ Partial Class dlgTwoVariableUseModel
         '
         'ucrSelectorUseModel
         '
+        Me.ucrSelectorUseModel.bDropUnusedFilterLevels = False
         Me.ucrSelectorUseModel.bShowHiddenColumns = False
         Me.ucrSelectorUseModel.bUseCurrentFilter = True
         Me.ucrSelectorUseModel.Location = New System.Drawing.Point(10, 10)

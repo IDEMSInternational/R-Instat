@@ -379,7 +379,6 @@ Partial Class ucrFilter
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.cmdCombineWithAndOr)
-        Me.Controls.Add(Me.ucrReceiverExpression)
         Me.Controls.Add(Me.grpNumeric)
         Me.Controls.Add(Me.ucrLogicalCombobox)
         Me.Controls.Add(Me.ucrDatePicker)
@@ -400,6 +399,7 @@ Partial Class ucrFilter
         Me.Controls.Add(Me.ucrSelectorForFitler)
         Me.Controls.Add(Me.ucrChkNotForAllConditions)
         Me.Controls.Add(Me.ucrChkNotForEachCondition)
+        Me.Controls.Add(Me.ucrReceiverExpression)
         Me.Name = "ucrFilter"
         Me.grpNumeric.ResumeLayout(False)
         Me.ResumeLayout(False)

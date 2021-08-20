@@ -340,10 +340,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoFitSingle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 7</value>
+    <value>124, 7</value>
   </data>
   <data name="rdoFitSingle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 27</value>
+    <value>107, 27</value>
   </data>
   <data name="rdoFitSingle.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -376,16 +376,16 @@
     <value>NoControl</value>
   </data>
   <data name="rdoFitMultiple.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 7</value>
+    <value>229, 7</value>
   </data>
   <data name="rdoFitMultiple.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 27</value>
+    <value>107, 27</value>
   </data>
   <data name="rdoFitMultiple.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
   <data name="rdoFitMultiple.Text" xml:space="preserve">
-    <value>Fit Multiple</value>
+    <value>Ajuster a multiple</value>
   </data>
   <data name="rdoFitMultiple.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
@@ -446,66 +446,6 @@
   </data>
   <data name="&gt;&gt;grpMethods.ZOrder" xml:space="preserve">
     <value>59</value>
-  </data>
-  <data name="&gt;&gt;rdoExtendFill.Name" xml:space="preserve">
-    <value>rdoExtendFill</value>
-  </data>
-  <data name="&gt;&gt;rdoExtendFill.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoExtendFill.Parent" xml:space="preserve">
-    <value>grpStartEnd</value>
-  </data>
-  <data name="&gt;&gt;rdoExtendFill.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;rdoLeaveAsMissing.Name" xml:space="preserve">
-    <value>rdoLeaveAsMissing</value>
-  </data>
-  <data name="&gt;&gt;rdoLeaveAsMissing.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoLeaveAsMissing.Parent" xml:space="preserve">
-    <value>grpStartEnd</value>
-  </data>
-  <data name="&gt;&gt;rdoLeaveAsMissing.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStartEnd.Name" xml:space="preserve">
-    <value>ucrPnlStartEnd</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStartEnd.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStartEnd.Parent" xml:space="preserve">
-    <value>grpStartEnd</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlStartEnd.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="grpStartEnd.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 295</value>
-  </data>
-  <data name="grpStartEnd.Size" type="System.Drawing.Size, System.Drawing">
-    <value>183, 66</value>
-  </data>
-  <data name="grpStartEnd.TabIndex" type="System.Int32, mscorlib">
-    <value>22</value>
-  </data>
-  <data name="grpStartEnd.Text" xml:space="preserve">
-    <value>Start and End</value>
-  </data>
-  <data name="&gt;&gt;grpStartEnd.Name" xml:space="preserve">
-    <value>grpStartEnd</value>
-  </data>
-  <data name="&gt;&gt;grpStartEnd.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpStartEnd.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpStartEnd.ZOrder" xml:space="preserve">
-    <value>48</value>
   </data>
   <data name="rdoExtendFill.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -587,6 +527,30 @@
   </data>
   <data name="&gt;&gt;ucrPnlStartEnd.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="grpStartEnd.Location" type="System.Drawing.Point, System.Drawing">
+    <value>228, 295</value>
+  </data>
+  <data name="grpStartEnd.Size" type="System.Drawing.Size, System.Drawing">
+    <value>183, 66</value>
+  </data>
+  <data name="grpStartEnd.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
+  </data>
+  <data name="grpStartEnd.Text" xml:space="preserve">
+    <value>Start and End</value>
+  </data>
+  <data name="&gt;&gt;grpStartEnd.Name" xml:space="preserve">
+    <value>grpStartEnd</value>
+  </data>
+  <data name="&gt;&gt;grpStartEnd.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpStartEnd.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpStartEnd.ZOrder" xml:space="preserve">
+    <value>48</value>
   </data>
   <data name="lblValue.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -841,7 +805,7 @@
     <value>19, 7</value>
   </data>
   <data name="rdoDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 27</value>
+    <value>107, 27</value>
   </data>
   <data name="rdoDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>44</value>
@@ -874,10 +838,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoShow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>298, 7</value>
+    <value>334, 7</value>
   </data>
   <data name="rdoShow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>95, 27</value>
+    <value>107, 27</value>
   </data>
   <data name="rdoShow.TabIndex" type="System.Int32, mscorlib">
     <value>45</value>
@@ -1072,7 +1036,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>421, 514</value>
+    <value>454, 514</value>
   </data>
   <data name="lblPercentCount.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -1828,7 +1792,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveNewColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>302, 25</value>
+    <value>320, 24</value>
   </data>
   <data name="ucrSaveNewColumn.TabIndex" type="System.Int32, mscorlib">
     <value>29</value>
@@ -1939,7 +1903,7 @@
     <value>15, 7</value>
   </data>
   <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>378, 27</value>
+    <value>432, 27</value>
   </data>
   <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

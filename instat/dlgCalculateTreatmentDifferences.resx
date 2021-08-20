@@ -205,7 +205,7 @@
     <value>272, 164</value>
   </data>
   <data name="ucrInputFactorOption2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>120, 21</value>
   </data>
   <data name="ucrInputFactorOption2.TabIndex" type="System.Int32, mscorlib">
     <value>24</value>
@@ -226,7 +226,7 @@
     <value>272, 122</value>
   </data>
   <data name="ucrInputFactorOption1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>120, 21</value>
   </data>
   <data name="ucrInputFactorOption1.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -255,8 +255,11 @@
   <data name="ucrSaveDataFrame.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 408</value>
   </data>
+  <data name="ucrSaveDataFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrSaveDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>259, 24</value>
+    <value>399, 24</value>
   </data>
   <data name="ucrSaveDataFrame.TabIndex" type="System.Int32, mscorlib">
     <value>31</value>
@@ -273,15 +276,6 @@
   <data name="&gt;&gt;ucrSaveDataFrame.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="ucrInputCategoryColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 176</value>
-  </data>
-  <data name="ucrInputCategoryColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 21</value>
-  </data>
-  <data name="ucrInputCategoryColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>19</value>
-  </data>
   <data name="&gt;&gt;ucrInputCategoryColumn.Name" xml:space="preserve">
     <value>ucrInputCategoryColumn</value>
   </data>
@@ -293,24 +287,6 @@
   </data>
   <data name="&gt;&gt;ucrInputCategoryColumn.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="lblCategoryColumn.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblCategoryColumn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblCategoryColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 178</value>
-  </data>
-  <data name="lblCategoryColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 13</value>
-  </data>
-  <data name="lblCategoryColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="lblCategoryColumn.Text" xml:space="preserve">
-    <value>Category Column:</value>
   </data>
   <data name="&gt;&gt;lblCategoryColumn.Name" xml:space="preserve">
     <value>lblCategoryColumn</value>
@@ -324,15 +300,6 @@
   <data name="&gt;&gt;lblCategoryColumn.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ucrInputDiffName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 28</value>
-  </data>
-  <data name="ucrInputDiffName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 21</value>
-  </data>
-  <data name="ucrInputDiffName.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
   <data name="&gt;&gt;ucrInputDiffName.Name" xml:space="preserve">
     <value>ucrInputDiffName</value>
   </data>
@@ -344,24 +311,6 @@
   </data>
   <data name="&gt;&gt;ucrInputDiffName.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="lblDiffName.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblDiffName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblDiffName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 30</value>
-  </data>
-  <data name="lblDiffName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 13</value>
-  </data>
-  <data name="lblDiffName.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="lblDiffName.Text" xml:space="preserve">
-    <value>Difference Column:</value>
   </data>
   <data name="&gt;&gt;lblDiffName.Name" xml:space="preserve">
     <value>lblDiffName</value>
@@ -375,15 +324,6 @@
   <data name="&gt;&gt;lblDiffName.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrInputLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 128</value>
-  </data>
-  <data name="ucrInputLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 42</value>
-  </data>
-  <data name="ucrInputLabels.TabIndex" type="System.Int32, mscorlib">
-    <value>15</value>
-  </data>
   <data name="&gt;&gt;ucrInputLabels.Name" xml:space="preserve">
     <value>ucrInputLabels</value>
   </data>
@@ -395,24 +335,6 @@
   </data>
   <data name="&gt;&gt;ucrInputLabels.ZOrder" xml:space="preserve">
     <value>4</value>
-  </data>
-  <data name="lblLabels.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblLabels.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblLabels.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 130</value>
-  </data>
-  <data name="lblLabels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>41, 13</value>
-  </data>
-  <data name="lblLabels.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="lblLabels.Text" xml:space="preserve">
-    <value>Labels:</value>
   </data>
   <data name="&gt;&gt;lblLabels.Name" xml:space="preserve">
     <value>lblLabels</value>
@@ -426,15 +348,6 @@
   <data name="&gt;&gt;lblLabels.ZOrder" xml:space="preserve">
     <value>5</value>
   </data>
-  <data name="ucrInputBreakPoints.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 98</value>
-  </data>
-  <data name="ucrInputBreakPoints.Size" type="System.Drawing.Size, System.Drawing">
-    <value>147, 21</value>
-  </data>
-  <data name="ucrInputBreakPoints.TabIndex" type="System.Int32, mscorlib">
-    <value>7</value>
-  </data>
   <data name="&gt;&gt;ucrInputBreakPoints.Name" xml:space="preserve">
     <value>ucrInputBreakPoints</value>
   </data>
@@ -447,24 +360,6 @@
   <data name="&gt;&gt;ucrInputBreakPoints.ZOrder" xml:space="preserve">
     <value>6</value>
   </data>
-  <data name="lblBreakPoints.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblBreakPoints.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblBreakPoints.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 100</value>
-  </data>
-  <data name="lblBreakPoints.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 13</value>
-  </data>
-  <data name="lblBreakPoints.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="lblBreakPoints.Text" xml:space="preserve">
-    <value>Break Points:</value>
-  </data>
   <data name="&gt;&gt;lblBreakPoints.Name" xml:space="preserve">
     <value>lblBreakPoints</value>
   </data>
@@ -476,15 +371,6 @@
   </data>
   <data name="&gt;&gt;lblBreakPoints.ZOrder" xml:space="preserve">
     <value>7</value>
-  </data>
-  <data name="ucrChkCalculateDiffCategories.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 70</value>
-  </data>
-  <data name="ucrChkCalculateDiffCategories.Size" type="System.Drawing.Size, System.Drawing">
-    <value>221, 20</value>
-  </data>
-  <data name="ucrChkCalculateDiffCategories.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
   </data>
   <data name="&gt;&gt;ucrChkCalculateDiffCategories.Name" xml:space="preserve">
     <value>ucrChkCalculateDiffCategories</value>
@@ -772,6 +658,231 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverID.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="ucrInputCategoryColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 176</value>
+  </data>
+  <data name="ucrInputCategoryColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>101, 21</value>
+  </data>
+  <data name="ucrInputCategoryColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCategoryColumn.Name" xml:space="preserve">
+    <value>ucrInputCategoryColumn</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCategoryColumn.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCategoryColumn.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputCategoryColumn.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="lblCategoryColumn.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblCategoryColumn.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblCategoryColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 178</value>
+  </data>
+  <data name="lblCategoryColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>90, 13</value>
+  </data>
+  <data name="lblCategoryColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="lblCategoryColumn.Text" xml:space="preserve">
+    <value>Category Column:</value>
+  </data>
+  <data name="&gt;&gt;lblCategoryColumn.Name" xml:space="preserve">
+    <value>lblCategoryColumn</value>
+  </data>
+  <data name="&gt;&gt;lblCategoryColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblCategoryColumn.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;lblCategoryColumn.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="ucrInputDiffName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>126, 28</value>
+  </data>
+  <data name="ucrInputDiffName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 21</value>
+  </data>
+  <data name="ucrInputDiffName.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDiffName.Name" xml:space="preserve">
+    <value>ucrInputDiffName</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDiffName.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDiffName.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDiffName.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="lblDiffName.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblDiffName.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblDiffName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 30</value>
+  </data>
+  <data name="lblDiffName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 13</value>
+  </data>
+  <data name="lblDiffName.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblDiffName.Text" xml:space="preserve">
+    <value>Difference Column:</value>
+  </data>
+  <data name="&gt;&gt;lblDiffName.Name" xml:space="preserve">
+    <value>lblDiffName</value>
+  </data>
+  <data name="&gt;&gt;lblDiffName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblDiffName.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;lblDiffName.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="ucrInputLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 128</value>
+  </data>
+  <data name="ucrInputLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 42</value>
+  </data>
+  <data name="ucrInputLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLabels.Name" xml:space="preserve">
+    <value>ucrInputLabels</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLabels.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLabels.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLabels.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblLabels.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLabels.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblLabels.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 130</value>
+  </data>
+  <data name="lblLabels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>41, 13</value>
+  </data>
+  <data name="lblLabels.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
+  </data>
+  <data name="lblLabels.Text" xml:space="preserve">
+    <value>Labels:</value>
+  </data>
+  <data name="&gt;&gt;lblLabels.Name" xml:space="preserve">
+    <value>lblLabels</value>
+  </data>
+  <data name="&gt;&gt;lblLabels.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLabels.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;lblLabels.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="ucrInputBreakPoints.Location" type="System.Drawing.Point, System.Drawing">
+    <value>95, 98</value>
+  </data>
+  <data name="ucrInputBreakPoints.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 21</value>
+  </data>
+  <data name="ucrInputBreakPoints.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;ucrInputBreakPoints.Name" xml:space="preserve">
+    <value>ucrInputBreakPoints</value>
+  </data>
+  <data name="&gt;&gt;ucrInputBreakPoints.Type" xml:space="preserve">
+    <value>instat.ucrInputTextBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputBreakPoints.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrInputBreakPoints.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblBreakPoints.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblBreakPoints.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblBreakPoints.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 100</value>
+  </data>
+  <data name="lblBreakPoints.Size" type="System.Drawing.Size, System.Drawing">
+    <value>70, 13</value>
+  </data>
+  <data name="lblBreakPoints.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="lblBreakPoints.Text" xml:space="preserve">
+    <value>Break Points:</value>
+  </data>
+  <data name="&gt;&gt;lblBreakPoints.Name" xml:space="preserve">
+    <value>lblBreakPoints</value>
+  </data>
+  <data name="&gt;&gt;lblBreakPoints.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblBreakPoints.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;lblBreakPoints.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="ucrChkCalculateDiffCategories.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 70</value>
+  </data>
+  <data name="ucrChkCalculateDiffCategories.Size" type="System.Drawing.Size, System.Drawing">
+    <value>221, 20</value>
+  </data>
+  <data name="ucrChkCalculateDiffCategories.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCalculateDiffCategories.Name" xml:space="preserve">
+    <value>ucrChkCalculateDiffCategories</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCalculateDiffCategories.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCalculateDiffCategories.Parent" xml:space="preserve">
+    <value>grpOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkCalculateDiffCategories.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
 </root>

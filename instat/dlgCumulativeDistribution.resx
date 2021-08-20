@@ -154,10 +154,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdPlotOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 236</value>
+    <value>10, 238</value>
   </data>
   <data name="cmdPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>119, 23</value>
+    <value>150, 23</value>
   </data>
   <data name="cmdPlotOptions.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -430,7 +430,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveCumDist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 25</value>
+    <value>320, 24</value>
   </data>
   <data name="ucrSaveCumDist.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>

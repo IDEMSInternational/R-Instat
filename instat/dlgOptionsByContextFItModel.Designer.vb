@@ -54,8 +54,9 @@ Partial Class dlgOptionsByContextFitModel
         'ucrSaveModel
         '
         Me.ucrSaveModel.Location = New System.Drawing.Point(10, 403)
+        Me.ucrSaveModel.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveModel.Name = "ucrSaveModel"
-        Me.ucrSaveModel.Size = New System.Drawing.Size(255, 24)
+        Me.ucrSaveModel.Size = New System.Drawing.Size(319, 24)
         Me.ucrSaveModel.TabIndex = 15
         '
         'ucrChkConvertToNumeric
@@ -80,9 +81,9 @@ Partial Class dlgOptionsByContextFitModel
         '
         'cmdModelOptions
         '
-        Me.cmdModelOptions.Location = New System.Drawing.Point(421, 374)
+        Me.cmdModelOptions.Location = New System.Drawing.Point(415, 374)
         Me.cmdModelOptions.Name = "cmdModelOptions"
-        Me.cmdModelOptions.Size = New System.Drawing.Size(122, 23)
+        Me.cmdModelOptions.Size = New System.Drawing.Size(120, 23)
         Me.cmdModelOptions.TabIndex = 13
         Me.cmdModelOptions.Tag = "Model_Options"
         Me.cmdModelOptions.Text = "Model Options..."
@@ -103,16 +104,16 @@ Partial Class dlgOptionsByContextFitModel
         Me.ucrModelPreview.AddQuotesIfUnrecognised = True
         Me.ucrModelPreview.IsMultiline = False
         Me.ucrModelPreview.IsReadOnly = False
-        Me.ucrModelPreview.Location = New System.Drawing.Point(92, 376)
+        Me.ucrModelPreview.Location = New System.Drawing.Point(120, 376)
         Me.ucrModelPreview.Name = "ucrModelPreview"
-        Me.ucrModelPreview.Size = New System.Drawing.Size(322, 21)
+        Me.ucrModelPreview.Size = New System.Drawing.Size(289, 21)
         Me.ucrModelPreview.TabIndex = 12
         '
         'cmdDisplayOptions
         '
-        Me.cmdDisplayOptions.Location = New System.Drawing.Point(421, 403)
+        Me.cmdDisplayOptions.Location = New System.Drawing.Point(415, 403)
         Me.cmdDisplayOptions.Name = "cmdDisplayOptions"
-        Me.cmdDisplayOptions.Size = New System.Drawing.Size(122, 23)
+        Me.cmdDisplayOptions.Size = New System.Drawing.Size(120, 23)
         Me.cmdDisplayOptions.TabIndex = 14
         Me.cmdDisplayOptions.Tag = "Display_Options"
         Me.cmdDisplayOptions.Text = "Display Options..."
