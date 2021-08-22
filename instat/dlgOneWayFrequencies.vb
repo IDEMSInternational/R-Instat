@@ -70,6 +70,7 @@ Public Class dlgOneWayFrequencies
         ucrChkWeights.SetParameter(ucrReceiverWeights.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkWeights.AddToLinkedControls(ucrReceiverWeights, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
 
+
         ucrPnlFrequencies.AddRadioButton(rdoTable)
         ucrPnlFrequencies.AddRadioButton(rdoGraph)
         ucrPnlFrequencies.AddRadioButton(rdoBoth)
