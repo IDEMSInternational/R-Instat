@@ -42,7 +42,7 @@ Partial Class dlgColumnStats
         Me.lblSelectedVariables = New System.Windows.Forms.Label()
         Me.lblSummariseBy = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.cmdMissingOptions = New System.Windows.Forms.Button()
+        Me.cmdOptions = New System.Windows.Forms.Button()
         Me.ucrChkOriginalLevel = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
@@ -71,7 +71,7 @@ Partial Class dlgColumnStats
         '
         'grpOptions
         '
-        Me.grpOptions.Controls.Add(Me.cmdMissingOptions)
+        Me.grpOptions.Controls.Add(Me.cmdOptions)
         Me.grpOptions.Controls.Add(Me.ucrChkOriginalLevel)
         Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
@@ -81,12 +81,12 @@ Partial Class dlgColumnStats
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
-        'cmdMissingOptions
+        'cmdOptions
         '
-        resources.ApplyResources(Me.cmdMissingOptions, "cmdMissingOptions")
-        Me.cmdMissingOptions.Name = "cmdMissingOptions"
-        Me.cmdMissingOptions.Tag = "MissingOptions"
-        Me.cmdMissingOptions.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
         '
         'ucrChkOriginalLevel
         '
@@ -220,5 +220,5 @@ Partial Class dlgColumnStats
     Friend WithEvents ucrChkOriginalLevel As ucrCheck
     Friend WithEvents ucrChkWeights As ucrCheck
     Friend WithEvents ucrReceiverWeights As ucrReceiverSingle
-    Friend WithEvents cmdMissingOptions As Button
+    Friend WithEvents cmdOptions As Button
 End Class

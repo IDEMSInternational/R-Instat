@@ -49,18 +49,18 @@ Partial Class dlgClimaticSummary
         Me.cmdSummary = New System.Windows.Forms.Button()
         Me.lblWithinYear = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.cmdMissingOptions = New System.Windows.Forms.Button()
+        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.ucrChkOmitMissing = New instat.ucrCheck()
+        Me.ucrChkAddDateColumn = New instat.ucrCheck()
+        Me.ucrChkStoreResults = New instat.ucrCheck()
+        Me.ucrChkPrintOutput = New instat.ucrCheck()
+        Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
         Me.cmdDoyRange = New System.Windows.Forms.Button()
         Me.lblYear = New System.Windows.Forms.Label()
         Me.rdoStation = New System.Windows.Forms.RadioButton()
         Me.rdoDaily = New System.Windows.Forms.RadioButton()
         Me.ucrReceiverElements = New instat.ucrReceiverMultiple()
         Me.ucrInputFilterPreview = New instat.ucrInputTextBox()
-        Me.ucrChkOmitMissing = New instat.ucrCheck()
-        Me.ucrChkAddDateColumn = New instat.ucrCheck()
-        Me.ucrChkStoreResults = New instat.ucrCheck()
-        Me.ucrChkPrintOutput = New instat.ucrCheck()
-        Me.ucrChkDropUnusedLevels = New instat.ucrCheck()
         Me.ucrSelectorVariable = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrReceiverWithinYear = New instat.ucrReceiverSingle()
         Me.ucrReceiverDOY = New instat.ucrReceiverSingle()
@@ -136,7 +136,7 @@ Partial Class dlgClimaticSummary
         '
         'grpOptions
         '
-        Me.grpOptions.Controls.Add(Me.cmdMissingOptions)
+        Me.grpOptions.Controls.Add(Me.cmdOptions)
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
         Me.grpOptions.Controls.Add(Me.ucrChkAddDateColumn)
         Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
@@ -146,12 +146,42 @@ Partial Class dlgClimaticSummary
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
-        'cmdMissingOptions
+        'cmdOptions
         '
-        resources.ApplyResources(Me.cmdMissingOptions, "cmdMissingOptions")
-        Me.cmdMissingOptions.Name = "cmdMissingOptions"
-        Me.cmdMissingOptions.Tag = "MissingOptions"
-        Me.cmdMissingOptions.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
+        Me.cmdOptions.Name = "cmdOptions"
+        Me.cmdOptions.Tag = "Options"
+        Me.cmdOptions.UseVisualStyleBackColor = True
+        '
+        'ucrChkOmitMissing
+        '
+        Me.ucrChkOmitMissing.Checked = False
+        resources.ApplyResources(Me.ucrChkOmitMissing, "ucrChkOmitMissing")
+        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
+        '
+        'ucrChkAddDateColumn
+        '
+        Me.ucrChkAddDateColumn.Checked = False
+        resources.ApplyResources(Me.ucrChkAddDateColumn, "ucrChkAddDateColumn")
+        Me.ucrChkAddDateColumn.Name = "ucrChkAddDateColumn"
+        '
+        'ucrChkStoreResults
+        '
+        Me.ucrChkStoreResults.Checked = False
+        resources.ApplyResources(Me.ucrChkStoreResults, "ucrChkStoreResults")
+        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
+        '
+        'ucrChkPrintOutput
+        '
+        Me.ucrChkPrintOutput.Checked = False
+        resources.ApplyResources(Me.ucrChkPrintOutput, "ucrChkPrintOutput")
+        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
+        '
+        'ucrChkDropUnusedLevels
+        '
+        Me.ucrChkDropUnusedLevels.Checked = False
+        resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
+        Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
         '
         'cmdDoyRange
         '
@@ -201,36 +231,6 @@ Partial Class dlgClimaticSummary
         Me.ucrInputFilterPreview.IsReadOnly = True
         resources.ApplyResources(Me.ucrInputFilterPreview, "ucrInputFilterPreview")
         Me.ucrInputFilterPreview.Name = "ucrInputFilterPreview"
-        '
-        'ucrChkOmitMissing
-        '
-        Me.ucrChkOmitMissing.Checked = False
-        resources.ApplyResources(Me.ucrChkOmitMissing, "ucrChkOmitMissing")
-        Me.ucrChkOmitMissing.Name = "ucrChkOmitMissing"
-        '
-        'ucrChkAddDateColumn
-        '
-        Me.ucrChkAddDateColumn.Checked = False
-        resources.ApplyResources(Me.ucrChkAddDateColumn, "ucrChkAddDateColumn")
-        Me.ucrChkAddDateColumn.Name = "ucrChkAddDateColumn"
-        '
-        'ucrChkStoreResults
-        '
-        Me.ucrChkStoreResults.Checked = False
-        resources.ApplyResources(Me.ucrChkStoreResults, "ucrChkStoreResults")
-        Me.ucrChkStoreResults.Name = "ucrChkStoreResults"
-        '
-        'ucrChkPrintOutput
-        '
-        Me.ucrChkPrintOutput.Checked = False
-        resources.ApplyResources(Me.ucrChkPrintOutput, "ucrChkPrintOutput")
-        Me.ucrChkPrintOutput.Name = "ucrChkPrintOutput"
-        '
-        'ucrChkDropUnusedLevels
-        '
-        Me.ucrChkDropUnusedLevels.Checked = False
-        resources.ApplyResources(Me.ucrChkDropUnusedLevels, "ucrChkDropUnusedLevels")
-        Me.ucrChkDropUnusedLevels.Name = "ucrChkDropUnusedLevels"
         '
         'ucrSelectorVariable
         '
@@ -359,7 +359,7 @@ Partial Class dlgClimaticSummary
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents ucrChkAddDateColumn As ucrCheck
     Friend WithEvents ucrChkOmitMissing As ucrCheck
-    Friend WithEvents cmdMissingOptions As Button
+    Friend WithEvents cmdOptions As Button
     Friend WithEvents ucrReceiverElements As ucrReceiverMultiple
     Friend WithEvents rdoStation As RadioButton
     Friend WithEvents rdoDaily As RadioButton

@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblColumnsTostack.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="lblStackDataInto.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblStackDataInto.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="lblFactorInto.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -208,7 +208,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactorInto.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="lblSets.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -289,7 +289,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveNewDataName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>248, 20</value>
+    <value>332, 20</value>
   </data>
   <data name="ucrSaveNewDataName.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -304,7 +304,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveNewDataName.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>13</value>
   </data>
   <data name="ucrChkCarryColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>288, 159</value>
@@ -328,7 +328,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkCarryColumns.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="ucrStackDataInto.Location" type="System.Drawing.Point, System.Drawing">
     <value>126, 257</value>
@@ -352,7 +352,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrStackDataInto.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="ucrFactorInto.Location" type="System.Drawing.Point, System.Drawing">
     <value>126, 226</value>
@@ -376,7 +376,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFactorInto.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -409,7 +409,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorStack.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 316</value>
@@ -433,7 +433,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="ucrReceiverColumnsToBeStack.Location" type="System.Drawing.Point, System.Drawing">
     <value>288, 60</value>
@@ -457,7 +457,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverColumnsToBeStack.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -493,6 +493,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrColumnsToCarryReceiver.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
 </root>

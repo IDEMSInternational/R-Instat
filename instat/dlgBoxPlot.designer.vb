@@ -42,7 +42,7 @@ Partial Class dlgBoxplot
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
-        Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
+        Me.cmdBoxOptions = New System.Windows.Forms.Button()
         Me.rdoBoxplotTufte = New System.Windows.Forms.RadioButton()
         Me.rdoJitter = New System.Windows.Forms.RadioButton()
         Me.rdoViolin = New System.Windows.Forms.RadioButton()
@@ -85,12 +85,12 @@ Partial Class dlgBoxplot
         Me.lblBySecondFactor.Name = "lblBySecondFactor"
         Me.lblBySecondFactor.Tag = "By_Second_Factor:"
         '
-        'cmdBoxPlotOptions
+        'cmdBoxOptions
         '
-        resources.ApplyResources(Me.cmdBoxPlotOptions, "cmdBoxPlotOptions")
-        Me.cmdBoxPlotOptions.Name = "cmdBoxPlotOptions"
-        Me.cmdBoxPlotOptions.Tag = "Boxplot_Options"
-        Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdBoxOptions, "cmdBoxOptions")
+        Me.cmdBoxOptions.Name = "cmdBoxOptions"
+        Me.cmdBoxOptions.Tag = "Box_Options"
+        Me.cmdBoxOptions.UseVisualStyleBackColor = True
         '
         'rdoBoxplotTufte
         '
@@ -269,7 +269,7 @@ Partial Class dlgBoxplot
         Me.Controls.Add(Me.rdoJitter)
         Me.Controls.Add(Me.rdoBoxplotTufte)
         Me.Controls.Add(Me.ucrVariablesAsFactorForBoxplot)
-        Me.Controls.Add(Me.cmdBoxPlotOptions)
+        Me.Controls.Add(Me.cmdBoxOptions)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
         Me.Controls.Add(Me.ucrSelectorBoxPlot)
         Me.Controls.Add(Me.lblBySecondFactor)
@@ -296,7 +296,7 @@ Partial Class dlgBoxplot
     Friend WithEvents ucrSelectorBoxPlot As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSecondFactorReceiver As ucrReceiverSingle
     Friend WithEvents lblBySecondFactor As Label
-    Friend WithEvents cmdBoxPlotOptions As Button
+    Friend WithEvents cmdBoxOptions As Button
     Friend WithEvents ucrVariablesAsFactorForBoxplot As ucrVariablesAsFactor
     Friend WithEvents rdoBoxplotTufte As RadioButton
     Friend WithEvents rdoJitter As RadioButton

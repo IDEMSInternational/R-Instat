@@ -330,6 +330,10 @@ Public Class dlgTransformText
         End If
     End Sub
 
+    Private Sub rdoSubstring_CheckedChanged(sender As Object, e As EventArgs) Handles rdoSubstring.CheckedChanged
+
+    End Sub
+
     Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrInputTo.ControlValueChanged
         If bRCodeSet Then
             If rdoLength.Checked Then
