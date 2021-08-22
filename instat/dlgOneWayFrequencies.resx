@@ -118,33 +118,33 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rdoDescendingFrequencies.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoDescending.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="rdoDescendingFrequencies.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoDescending.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 65</value>
   </data>
-  <data name="rdoDescendingFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoDescending.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 17</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rdoDescendingFrequencies.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoDescending.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="rdoDescendingFrequencies.Text" xml:space="preserve">
+  <data name="rdoDescending.Text" xml:space="preserve">
     <value>Descending Frequencies</value>
   </data>
-  <data name="&gt;&gt;rdoDescendingFrequencies.Name" xml:space="preserve">
-    <value>rdoDescendingFrequencies</value>
+  <data name="&gt;&gt;rdoDescending.Name" xml:space="preserve">
+    <value>rdoDescending</value>
   </data>
-  <data name="&gt;&gt;rdoDescendingFrequencies.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoDescending.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoDescendingFrequencies.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoDescending.Parent" xml:space="preserve">
     <value>grpSort</value>
   </data>
-  <data name="&gt;&gt;rdoDescendingFrequencies.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoDescending.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="rdoAscending.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
