@@ -147,31 +147,31 @@
   <data name="&gt;&gt;rdoDescendingFrequencies.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdoAscendingFrequencies.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoAscending.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdoAscendingFrequencies.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoAscending.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 43</value>
   </data>
-  <data name="rdoAscendingFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoAscending.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 17</value>
   </data>
-  <data name="rdoAscendingFrequencies.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoAscending.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="rdoAscendingFrequencies.Text" xml:space="preserve">
+  <data name="rdoAscending.Text" xml:space="preserve">
     <value>Ascending Frequencies</value>
   </data>
-  <data name="&gt;&gt;rdoAscendingFrequencies.Name" xml:space="preserve">
-    <value>rdoAscendingFrequencies</value>
+  <data name="&gt;&gt;rdoAscending.Name" xml:space="preserve">
+    <value>rdoAscending</value>
   </data>
-  <data name="&gt;&gt;rdoAscendingFrequencies.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoAscending.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoAscendingFrequencies.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoAscending.Parent" xml:space="preserve">
     <value>grpSort</value>
   </data>
-  <data name="&gt;&gt;rdoAscendingFrequencies.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoAscending.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="rdoNone.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">

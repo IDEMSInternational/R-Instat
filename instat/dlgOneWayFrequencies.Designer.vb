@@ -41,7 +41,7 @@ Partial Class dlgOneWayFrequencies
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgOneWayFrequencies))
         Me.grpSort = New System.Windows.Forms.GroupBox()
         Me.rdoDescendingFrequencies = New System.Windows.Forms.RadioButton()
-        Me.rdoAscendingFrequencies = New System.Windows.Forms.RadioButton()
+        Me.rdoAscending = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.ucrPnlSort = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
@@ -70,7 +70,7 @@ Partial Class dlgOneWayFrequencies
         'grpSort
         '
         Me.grpSort.Controls.Add(Me.rdoDescendingFrequencies)
-        Me.grpSort.Controls.Add(Me.rdoAscendingFrequencies)
+        Me.grpSort.Controls.Add(Me.rdoAscending)
         Me.grpSort.Controls.Add(Me.rdoNone)
         Me.grpSort.Controls.Add(Me.ucrPnlSort)
         resources.ApplyResources(Me.grpSort, "grpSort")
@@ -84,12 +84,12 @@ Partial Class dlgOneWayFrequencies
         Me.rdoDescendingFrequencies.TabStop = True
         Me.rdoDescendingFrequencies.UseVisualStyleBackColor = True
         '
-        'rdoAscendingFrequencies
+        'rdoAscending
         '
-        resources.ApplyResources(Me.rdoAscendingFrequencies, "rdoAscendingFrequencies")
-        Me.rdoAscendingFrequencies.Name = "rdoAscendingFrequencies"
-        Me.rdoAscendingFrequencies.TabStop = True
-        Me.rdoAscendingFrequencies.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoAscending, "rdoAscending")
+        Me.rdoAscending.Name = "rdoAscending"
+        Me.rdoAscending.TabStop = True
+        Me.rdoAscending.UseVisualStyleBackColor = True
         '
         'rdoNone
         '
@@ -273,7 +273,7 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grpSort As GroupBox
     Friend WithEvents rdoDescendingFrequencies As RadioButton
-    Friend WithEvents rdoAscendingFrequencies As RadioButton
+    Friend WithEvents rdoAscending As RadioButton
     Friend WithEvents rdoNone As RadioButton
     Friend WithEvents ucrPnlSort As UcrPanel
     Friend WithEvents cmdOptions As Button
