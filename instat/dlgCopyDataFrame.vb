@@ -136,6 +136,7 @@ Public Class dlgCopyDataFrame
 
     Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
         If Not ucrChkCopyToClipboard.Checked OrElse rdoDataFrame.Checked Then
+            clsCopyDataFrameFunction.AddParameter("data_name", strParameterValue:=Chr(34) & ucrDataFrameCopySheets.strCurrDataFrame & Chr(34), iPosition:=0)
             ucrBase.clsRsyntax.SetBaseRFunction(clsCopyDataFrameFunction)
         ElseIf rdoColumnsMetadata.Checked Then
             'todo. temporarily added here because this control's parameter pair condition is not updated

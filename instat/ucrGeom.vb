@@ -163,12 +163,14 @@ Public Class ucrGeom
         Dim clsgeom_spoke As New Geoms
         Dim clsgeom_step As New Geoms
         Dim clsgeom_text As New Geoms
+        Dim clsgeom_text_repel As New Geoms
         Dim clsgeom_tile As New Geoms
         Dim clsgeom_treemap As New Geoms
         Dim clsgeom_treemap_text As New Geoms
         Dim clsgeom_tufteboxplot As New Geoms
         Dim clsgeom_violin As New Geoms
         Dim clsgeom_vline As New Geoms
+        Dim clsgeom_label_repel As New Geoms
         Dim clsgeom_lollipop As New Geoms
         Dim clsgeom_dumbbell As New Geoms
         Dim clsgeom_stat_density_ridges As New Geoms
@@ -1242,6 +1244,44 @@ Public Class ucrGeom
         clsgeom_label.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         lstAllGeoms.Add(clsgeom_label)
 
+        clsgeom_label_repel.SetGeomPackage("ggrepel")
+        clsgeom_label_repel.SetGeomName("geom_label_repel")
+        'Adding aesthetics parameters
+        'Mandatory Aesthetics
+        clsgeom_label_repel.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_label_repel.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_label_repel.AddAesParameter("label", strIncludedDataTypes:={"numeric", "factor", "character", "Date"}, bIsMandatory:=True)
+        'Optional aesthetics
+        clsgeom_label_repel.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_label_repel.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_label_repel.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        'Further aestheticscould be
+        clsgeom_label_repel.AddAesParameter("family", strIncludedDataTypes:={"factor"})
+        clsgeom_label_repel.AddAesParameter("fontface", strIncludedDataTypes:={"factor"})
+        clsgeom_label_repel.AddAesParameter("lineheight", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_label_repel.AddAesParameter("hjust", strIncludedDataTypes:={"numeric"})
+        clsgeom_label_repel.AddAesParameter("vjust", strIncludedDataTypes:={"numeric"})
+        clsgeom_label_repel.AddAesParameter("angle", strIncludedDataTypes:={"factor", "numeric"})
+        'Adding layer parameters
+        'Geom_text_repel Parameters
+        clsgeom_label_repel.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), "position_dodge(width = 0.9)", Chr(34) & "dodge2" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_label_repel.AddLayerParameter("parse", "boolean", "FALSE")
+        clsgeom_label_repel.AddLayerParameter("box.padding", "numeric", "0.25", lstParameterStrings:={2, 0})
+        clsgeom_label_repel.AddLayerParameter("point.padding", "numeric", "0", lstParameterStrings:={2, 0})
+        clsgeom_label_repel.AddLayerParameter("label.size", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_label_repel.AddLayerParameter("label.r", "numeric", "0.15", lstParameterStrings:={2, 0})
+        clsgeom_label_repel.AddLayerParameter("min.segment.length", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_label_repel.AddLayerParameter("arrow", "editablelist", "arrow()", lstParameterStrings:={"arrow()"})
+        clsgeom_label_repel.AddLayerParameter("max.time", "numeric", "0.5")
+        clsgeom_label_repel.AddLayerParameter("max.iter", "numeric", "1000", lstParameterStrings:={0, 1})
+        clsgeom_label_repel.AddLayerParameter("max.overlaps", "numeric", "10", lstParameterStrings:={0, 1})
+        clsgeom_label_repel.AddLayerParameter("nudge_x", "numeric", "0", lstParameterStrings:={2})
+        clsgeom_label_repel.AddLayerParameter("nudge_y", "numeric", "0", lstParameterStrings:={2})
+        clsgeom_label_repel.AddLayerParameter("xlim", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_label_repel.AddLayerParameter("ylim", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_label_repel.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_label_repel.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        lstAllGeoms.Add(clsgeom_label_repel)
 
         clsgeom_line.SetGeomName("geom_line")
         'x and y are mandatory, but these are autofilled by "" when no variable is mapped. "Partially mandatory"
@@ -1831,6 +1871,45 @@ Public Class ucrGeom
         clsgeom_text.AddLayerParameter("alpha", "numeric", "1", lstParameterStrings:={2, 0, 1})
         lstAllGeoms.Add(clsgeom_text)
 
+        clsgeom_text_repel.SetGeomPackage("ggrepel")
+        clsgeom_text_repel.SetGeomName("geom_text_repel")
+        'Adding aesthetics parameters
+        'Mandatory Aesthetics
+        clsgeom_text_repel.AddAesParameter("x", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_text_repel.AddAesParameter("y", strIncludedDataTypes:={"numeric", "factor"}, bIsMandatory:=True)
+        clsgeom_text_repel.AddAesParameter("label", strIncludedDataTypes:={"numeric", "factor", "character", "Date"}, bIsMandatory:=True)
+        'Optional aesthetics
+        clsgeom_text_repel.AddAesParameter("colour", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_text_repel.AddAesParameter("size", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_text_repel.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
+        'Further aesthetics include
+        clsgeom_text_repel.AddAesParameter("family", strIncludedDataTypes:={"factor"})
+        clsgeom_text_repel.AddAesParameter("fontface", strIncludedDataTypes:={"factor"})
+        clsgeom_text_repel.AddAesParameter("lineheight", strIncludedDataTypes:={"factor", "numeric"})
+        clsgeom_text_repel.AddAesParameter("hjust", strIncludedDataTypes:={"numeric"})
+        clsgeom_text_repel.AddAesParameter("vjust", strIncludedDataTypes:={"numeric"})
+        clsgeom_text_repel.AddAesParameter("angle", strIncludedDataTypes:={"factor", "numeric"})
+        'Adding layer parameters
+        'Geom_text_repel Parameters
+        clsgeom_text_repel.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), "position_dodge(width = 0.9)", Chr(34) & "dodge2" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)})
+        clsgeom_text_repel.AddLayerParameter("parse", "boolean", "FALSE")
+        clsgeom_text_repel.AddLayerParameter("box.padding", "numeric", "0.25", lstParameterStrings:={2, 0})
+        clsgeom_text_repel.AddLayerParameter("point.padding", "numeric", "0", lstParameterStrings:={2, 0})
+        clsgeom_text_repel.AddLayerParameter("min.segment.length", "numeric", "0.5", lstParameterStrings:={1, 0})
+        clsgeom_text_repel.AddLayerParameter("arrow", "editablelist", "arrow()", lstParameterStrings:={"arrow()"})
+        clsgeom_text_repel.AddLayerParameter("max.time", "numeric", "0.5")
+        clsgeom_text_repel.AddLayerParameter("max.iter", "numeric", "1000", lstParameterStrings:={0, 1})
+        clsgeom_text_repel.AddLayerParameter("max.overlaps", "numeric", "10", lstParameterStrings:={0, 1})
+        clsgeom_text_repel.AddLayerParameter("nudge_x", "numeric", "0", lstParameterStrings:={2})
+        clsgeom_text_repel.AddLayerParameter("nudge_y", "numeric", "0", lstParameterStrings:={2})
+        clsgeom_text_repel.AddLayerParameter("xlim", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_text_repel.AddLayerParameter("ylim", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_text_repel.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
+        clsgeom_text_repel.AddLayerParameter("na.rm", "list", "FALSE", lstParameterStrings:={"TRUE", "FALSE"})
+        clsgeom_text_repel.AddLayerParameter("force", "numeric", "1", lstParameterStrings:={2})
+        clsgeom_text_repel.AddLayerParameter("force_pull", "numeric", "1", lstParameterStrings:={2})
+        lstAllGeoms.Add(clsgeom_text_repel)
+
         clsgeom_tile.strGeomName = "geom_tile"
 
         'Mandatory Aesthetics 
@@ -1934,7 +2013,7 @@ Public Class ucrGeom
         clsgeom_tufteboxplot.AddAesParameter("alpha", strIncludedDataTypes:={"factor", "numeric"})
 
         'Layer parameters
-        clsgeom_tufteboxplot.AddLayerParameter("stat", "editablelist", Chr(34) & "boxplot" & Chr(34), lstParameterStrings:={Chr(34) & "boxplot" & Chr(34),Chr(34) & "fivenumber" & Chr(34)})
+        clsgeom_tufteboxplot.AddLayerParameter("stat", "editablelist", Chr(34) & "boxplot" & Chr(34), lstParameterStrings:={Chr(34) & "boxplot" & Chr(34), Chr(34) & "fivenumber" & Chr(34)})
         clsgeom_tufteboxplot.AddLayerParameter("position", "editablelist", Chr(34) & "dodge" & Chr(34), lstParameterStrings:={Chr(34) & "dodge" & Chr(34)})
         clsgeom_tufteboxplot.AddLayerParameter("coef", "numeric", "1.5", lstParameterStrings:={1}) 'Question to be discussed: This parameter is setting the length of the whiskers as a multiple of the IQR. When giving a negative value, the whiskers are simply of length 0. Also the window showing the graph doesn't adapt to the whiskers' length, which means they are simply cut when too long.
         clsgeom_tufteboxplot.AddLayerParameter("outlier.shape", "list", Chr(34) & "circle" & Chr(34), lstParameterStrings:=strShapePoint)
