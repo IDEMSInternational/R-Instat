@@ -169,6 +169,7 @@ Partial Class ucrCalculator
         Me.cmdSum = New System.Windows.Forms.Button()
         Me.cmdVar = New System.Windows.Forms.Button()
         Me.grpTestString = New System.Windows.Forms.GroupBox()
+        Me.cmdEnds = New System.Windows.Forms.Button()
         Me.cmdTrunck = New System.Windows.Forms.Button()
         Me.cmdLenth = New System.Windows.Forms.Button()
         Me.cmdGlue = New System.Windows.Forms.Button()
@@ -391,7 +392,6 @@ Partial Class ucrCalculator
         Me.cmdD = New System.Windows.Forms.Button()
         Me.cmdCp = New System.Windows.Forms.Button()
         Me.cmdBr2 = New System.Windows.Forms.Button()
-        Me.cmdEnds = New System.Windows.Forms.Button()
         Me.ucrSaveResultInto = New instat.ucrSave()
         Me.ucrTryCalculator = New instat.ucrTry()
         Me.ucrInputCalOptions = New instat.ucrInputComboBox()
@@ -572,7 +572,10 @@ Partial Class ucrCalculator
         '
         'grpDates
         '
+        Me.grpDates.Controls.Add(Me.grpSummary)
         Me.grpDates.Controls.Add(Me.cmdPm)
+        Me.grpDates.Controls.Add(Me.grpHydroGOF)
+        Me.grpDates.Controls.Add(Me.grpMaths)
         Me.grpDates.Controls.Add(Me.cmdTime)
         Me.grpDates.Controls.Add(Me.cmdDateTime)
         Me.grpDates.Controls.Add(Me.cmdQuarter)
@@ -714,6 +717,7 @@ Partial Class ucrCalculator
         '
         Me.grpTransform.Controls.Add(Me.cmdNasplin)
         Me.grpTransform.Controls.Add(Me.cmdNaapprox)
+        Me.grpTransform.Controls.Add(Me.grpProbabilty)
         Me.grpTransform.Controls.Add(Me.cmdNaest)
         Me.grpTransform.Controls.Add(Me.cmdNafill)
         Me.grpTransform.Controls.Add(Me.cmdMovmin)
@@ -1105,6 +1109,7 @@ Partial Class ucrCalculator
         '
         Me.grpSummary.Controls.Add(Me.cmdKurtosis)
         Me.grpSummary.Controls.Add(Me.cmdMode1)
+        Me.grpSummary.Controls.Add(Me.grpTransform)
         Me.grpSummary.Controls.Add(Me.cmdMode)
         Me.grpSummary.Controls.Add(Me.cmdFirst)
         Me.grpSummary.Controls.Add(Me.cmdLast)
@@ -1334,6 +1339,12 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me.grpTestString, "grpTestString")
         Me.grpTestString.Name = "grpTestString"
         Me.grpTestString.TabStop = False
+        '
+        'cmdEnds
+        '
+        resources.ApplyResources(Me.cmdEnds, "cmdEnds")
+        Me.cmdEnds.Name = "cmdEnds"
+        Me.cmdEnds.UseVisualStyleBackColor = True
         '
         'cmdTrunck
         '
@@ -2181,6 +2192,7 @@ Partial Class ucrCalculator
         '
         Me.grpWakefield.Controls.Add(Me.cmdLinkert7)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Year)
+        Me.grpWakefield.Controls.Add(Me.grpLogical)
         Me.grpWakefield.Controls.Add(Me.cmdValid)
         Me.grpWakefield.Controls.Add(Me.cmdWakefield_Upper)
         Me.grpWakefield.Controls.Add(Me.cmdString)
@@ -2426,6 +2438,7 @@ Partial Class ucrCalculator
         '
         Me.grpFactor.Controls.Add(Me.cmdShuffle)
         Me.grpFactor.Controls.Add(Me.cmdShift)
+        Me.grpFactor.Controls.Add(Me.grpWakefield)
         Me.grpFactor.Controls.Add(Me.cmdReverse)
         Me.grpFactor.Controls.Add(Me.cmdReorder)
         Me.grpFactor.Controls.Add(Me.cmdRelevel)
@@ -2716,6 +2729,7 @@ Partial Class ucrCalculator
         'grpHydroGOF
         '
         Me.grpHydroGOF.Controls.Add(Me.cmdVE)
+        Me.grpHydroGOF.Controls.Add(Me.grpFactor)
         Me.grpHydroGOF.Controls.Add(Me.cmdSsq)
         Me.grpHydroGOF.Controls.Add(Me.cmdRsr)
         Me.grpHydroGOF.Controls.Add(Me.cmdRSD)
@@ -2866,12 +2880,6 @@ Partial Class ucrCalculator
         Me.cmdBr2.Name = "cmdBr2"
         Me.cmdBr2.UseVisualStyleBackColor = True
         '
-        'cmdEnds
-        '
-        resources.ApplyResources(Me.cmdEnds, "cmdEnds")
-        Me.cmdEnds.Name = "cmdEnds"
-        Me.cmdEnds.UseVisualStyleBackColor = True
-        '
         'ucrSaveResultInto
         '
         resources.ApplyResources(Me.ucrSaveResultInto, "ucrSaveResultInto")
@@ -2912,15 +2920,7 @@ Partial Class ucrCalculator
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.Controls.Add(Me.grpDates)
-        Me.Controls.Add(Me.grpHydroGOF)
-        Me.Controls.Add(Me.grpFactor)
         Me.Controls.Add(Me.grpCircular)
-        Me.Controls.Add(Me.grpWakefield)
-        Me.Controls.Add(Me.grpLogical)
-        Me.Controls.Add(Me.grpMaths)
-        Me.Controls.Add(Me.grpSummary)
-        Me.Controls.Add(Me.grpTransform)
-        Me.Controls.Add(Me.grpProbabilty)
         Me.Controls.Add(Me.ucrSaveResultInto)
         Me.Controls.Add(Me.ucrTryCalculator)
         Me.Controls.Add(Me.grpTestString)

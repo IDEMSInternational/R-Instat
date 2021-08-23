@@ -177,13 +177,13 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdCombine, "Join multiple strings. For example, :str_c(""letter: "",c(""d"",""o"",""g"")) gives ""letter: d"" ""letter: o"" ""letter: g""")
         ttCalculator.SetToolTip(cmdCountstrings, " The number of matches. For example, str_count(c(""nose"",""lip"",""eye""),""e"") gives 1 0 2""")
         ttCalculator.SetToolTip(cmdDetect, " Detect a match. For example, str_detect(c(""nose"",""lip"",""eye""),""e"") gives TRUE FALSE TRUE""")
-        ttCalculator.SetToolTip(cmdEnds, " Detect an ending match. For example, str_ends(c(""nose"",""lip"",""ear""),""e"") gives TRUE FALSE TRUE")
-        ttCalculator.SetToolTip(cmdExtract, "Extract a matching string. For example, str_extract(c(""nose"",""lip"",""eye""),""e"") gives e NA e FALSE TRUE""")
+        ttCalculator.SetToolTip(cmdEnds, " Detect an ending match. For example, str_ends(c(""nose"",""lip"",""eye""),""e"") gives TRUE FALSE TRUE")
+        ttCalculator.SetToolTip(cmdExtract, "Extract a matching string. For example, str_extract(c(""nose"",""lip"",""eye""),""e"") gives e NA e")
         ttCalculator.SetToolTip(cmdExtract2, "Extract all matching strings. For example, str_extract_all(c(""nose"",""lip"",""eye""),""e"") gives e NA e, e""")
         ttCalculator.SetToolTip(cmdGlue, "Format and combine strings with glue. For example, (with survey data) str_glue(“"Village {village}, with fertilizer {fert*10}kg.”") gives Village SABEY, with fertilizer 0kg. etc""")
         ttCalculator.SetToolTip(cmdLenth, "Length of a string. For example, str_length("“Usain Bolt”") gives 10""")
-        ttCalculator.SetToolTip(cmdLocate, "Start and end position of pattern in a string. For example, stringr::str_locate(c(""nose"",""lip"",""eye""),""e"") gives 4, 4 NA 1, 1""")
-        ttCalculator.SetToolTip(cmdLocate2, "All start and end positions . For example, stringr::str_locate_all(c(""nose"",""lip"",""eye""),""e"") gives 4, 4 NA 1, 1  3, 3""")
+        ttCalculator.SetToolTip(cmdLocate, "Start and end position of pattern in a string. For example, str_locate(c(""nose"",""lip"",""eye""),""e"") gives 4, 4 NA 1, 1""")
+        ttCalculator.SetToolTip(cmdLocate2, "All start and end positions . For example, str_locate_all(c(""nose"",""lip"",""eye""),""e"") gives 4, 4 NA 1, 1  3, 3""")
         ttCalculator.SetToolTip(cmdRemove1, "Remove pattern . For example, str_remove(c(""nose"",""lip"",""eye""),""e"") gives "“nos"” “"lip"” “"ye”"")
         ttCalculator.SetToolTip(cmdRemove2, "Remove all occurrences of pattern. For example, str_remove_all(c(""nose"",""lip"",""eye""),""e"") gives “"nos"” “"lip”" “"y”"")
         ttCalculator.SetToolTip(cmdReplace, "Extract substring. For example, str_replace(c(""nose"",""ear"",""eye""),""e"",""y"") gives "“nosy"” "“yar"” “"yye”"")
@@ -192,6 +192,31 @@ Public Class ucrCalculator
         ttCalculator.SetToolTip(cmdTrunck, "Truncate strings. For example, str_trunc("“Katumani"”,7) gives “"Katu…"”; 8 gives “"Katumani”"")
         ttCalculator.SetToolTip(cmdSub, "Extract substring. For example,str_sub(""Kakamega County"",1,8) ""gives"" ""Kakamega.""  ""-6 gives"" "“County""")
         ttCalculator.SetToolTip(cmdEncodeb, "Specify the encoding of a string")
+
+        ttCalculator.SetToolTip(cmdBoundary, "Count words or sentences, rather than characters. For example, str_count("“In a shower of rain”", boundary("“word"”) gives 5")
+        ttCalculator.SetToolTip(cmdCollate, " Compare patterns literally – no regex. For example, str_detect(""rss"",coll(""r.s"")) is FALSE")
+        ttCalculator.SetToolTip(cmdFixed, "like collate, but only if all strings are ASCII characters.")
+        ttCalculator.SetToolTip(cmdRegex, "The default in comparing patterns. For example, str_detect(""rss"",""r.s"") or str_detect("“rss"”,regex("“r.s”")) gives TRUE, because ‘.’ Matches any character.")
+        ttCalculator.SetToolTip(cmdAny1, " Matches any character. For example,str_count(c(“"rss"”,""r.s.t""),""."") gives 3 5.  Using \\. Gives 0 2 ")
+        ttCalculator.SetToolTip(cmdbegin, " Start of the string. For example, str_count(c(""rss"",""r.s.t""),""^r\\."") gives 0 1")
+        ttCalculator.SetToolTip(cmdEnd1, "End of the string. For example, str_count(c(""rss"",""r.s.t""),""s$"") gives 1 0")
+        ttCalculator.SetToolTip(cmdDigit, "Digit (0 to 9), For example, str_replace_all(c(""rs5"",""r19s20t""),""[^\\d]"","") gives 5 1920")
+        ttCalculator.SetToolTip(cmdSpace, "space. For example. str_remove_all(c(""r ss"",""r s t""),""\\s"") gives "“rss"” “"rst"”")
+        ttCalculator.SetToolTip(cmdOr1, "or. For example, str_count(c(""rss"", ""rsstt""),""[st]"") gives 2 4")
+        ttCalculator.SetToolTip(cmdNot1, "not any. For example, str_remove_all(c(""rs5"",""r19s20t""),""[^\\d]"") gives 5 1920")
+        ttCalculator.SetToolTip(cmdOr3, "or. For example, str_count(c(""-abc"",""67""),""-|\\d"") gives 1 2")
+        ttCalculator.SetToolTip(cmdOr2, "n times. For example, str_count(c(""bt"",""bat"",""boot"",""boat""),""b[ao]{1}t"") gives 0 1 0 0")
+        ttCalculator.SetToolTip(cmdNumbers, "between. For example, str_count(c(""bt"",""bat"",""boot"",""boat""),""b[ao]{0,2}t"") gives 1 1 1 1")
+        ttCalculator.SetToolTip(cmdZeroOrOne, "0 or 1 times. For example, str_count(c(""bt"",""bat"",""boot"",""boat""),""b[ao]?t"") gives 1 1 0 0 ")
+        ttCalculator.SetToolTip(cmdPlusOne, "1 or more times. For example, str_count(c(""bt"",""bat"",""boot"",""boat""),""b[ao]+t"") gives 0 1 1 1")
+        ttCalculator.SetToolTip(cmdZero, "0 or more times. For example, str_count(c(""bt"",""bat"",""boot"",""boat""),""b[ao]*t"") gives 1 1 1 1 ")
+        ttCalculator.SetToolTip(cmdEscape, "Escape (with +*.? etc). For example, str_detect(c(""b$t"",""bat?"",""3*4""),""[\\?\\$\\*]"") gives TRUE TRUE TRUE")
+        ttCalculator.SetToolTip(cmdPlusZero, "range of values. For example, str_count(c(""b$t"",""Bat?""),""[a-zA-Z]"") gives 2 3")
+
+
+
+
+
 
     End Sub
 
@@ -321,7 +346,7 @@ Public Class ucrCalculator
                 grpHydroGOF.Visible = False
                 iHelpCalcID = 126
                 Me.Size = New Size(iBasicWidth * 1.38, iBaseHeight)
-            Case "Logical and Symbols"
+            Case "Logical And Symbols"
                 grpDates.Visible = False
                 grpSummary.Visible = False
                 grpLogical.Visible = True
@@ -682,15 +707,15 @@ Public Class ucrCalculator
 
     Private Sub cmdMiss_Click(sender As Object, e As EventArgs) Handles cmdMiss.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(is.na(x= ))", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(Is.na(x= ))", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(is.na())", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(Is.na())", 2)
         End If
     End Sub
 
     Private Sub cmdSum_Click(sender As Object, e As EventArgs) Handles cmdSum.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(x = , na.rm = False)", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum()", 1)
         End If
@@ -698,7 +723,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMean_Click(sender As Object, e As EventArgs) Handles cmdMean.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(x = , trim = 0 , na.rm = FALSE)", 28)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean(x = , trim = 0 , na.rm = False)", 28)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("mean()", 1)
         End If
@@ -706,7 +731,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMax_Click(sender As Object, e As EventArgs) Handles cmdMax.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max(x = , na.rm = False)", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("max()", 1)
         End If
@@ -714,7 +739,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMin_Click(sender As Object, e As EventArgs) Handles cmdMin.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min(x = , na.rm = False)", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("min()", 1)
         End If
@@ -722,7 +747,7 @@ Public Class ucrCalculator
 
     Private Sub cmdMedian_Click(sender As Object, e As EventArgs) Handles cmdMedian.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median(x = , na.rm = False)", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("median()", 1)
         End If
@@ -730,7 +755,7 @@ Public Class ucrCalculator
 
     Private Sub cmdVar_Click(sender As Object, e As EventArgs) Handles cmdVar.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var(x = , y = NULL, na.rm = FALSE)", 27)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var(x = , y = NULL, na.rm = False)", 27)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("var()", 1)
         End If
@@ -738,7 +763,7 @@ Public Class ucrCalculator
 
     Private Sub cmdSd_Click(sender As Object, e As EventArgs) Handles cmdSd.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sd(x = , na.rm = FALSE)", 17)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sd(x = , na.rm = False)", 17)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sd()", 1)
         End If
@@ -746,7 +771,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRange_Click(sender As Object, e As EventArgs) Handles cmdRange.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("range(x = , na.rm = FALSE, finite = FALSE)", 33)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("range(x = , na.rm = False, finite = False)", 33)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("range()", 1)
         End If
@@ -754,7 +779,7 @@ Public Class ucrCalculator
 
     Private Sub cmdQuantile_Click(sender As Object, e As EventArgs) Handles cmdQuantile.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x = , probs = 0.5, na.rm = FALSE, names = FALSE, type=7)", 53)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile(x = , probs = 0.5, na.rm = False, names = False, type=7)", 53)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("quantile()", 1)
         End If
@@ -762,7 +787,7 @@ Public Class ucrCalculator
 
     Private Sub cmdIQR_Click(sender As Object, e As EventArgs) Handles cmdIQR.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("IQR(x = , na.rm = FALSE, type = 7)", 27)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("IQR(x = , na.rm = False, type = 7)", 27)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("IQR()", 1)
         End If
@@ -859,7 +884,7 @@ Public Class ucrCalculator
 
     Private Sub cmdDetect_Click(sender As Object, e As EventArgs) Handles cmdDetect.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_detect(string = , pattern = , negate = FALSE)", 32)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_detect(string = , pattern = , negate = FALSE)", 31)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_detect()", 1)
         End If
@@ -2410,7 +2435,7 @@ Public Class ucrCalculator
 
     Private Sub cmdStarts_Click(sender As Object, e As EventArgs) Handles cmdStarts.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_starts(string = , pattern = , negate = FALSE)", 38)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_starts(string = , pattern = , negate = FALSE)", 30)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_starts()", 1)
         End If
@@ -2418,7 +2443,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRemove1_Click(sender As Object, e As EventArgs) Handles cmdRemove1.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove(string = , pattern = )", 22)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove(string = , pattern = )", 14)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove()", 1)
         End If
@@ -2426,7 +2451,7 @@ Public Class ucrCalculator
 
     Private Sub cmdRemove2_Click(sender As Object, e As EventArgs) Handles cmdRemove2.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove_all(string = , pattern = )", 22)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove_all(string = , pattern = )", 14)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_remove_all()", 1)
         End If
@@ -2517,11 +2542,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdDigit_Click(sender As Object, e As EventArgs) Handles cmdDigit.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\d")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\\d")
     End Sub
 
     Private Sub cmdSpace_Click(sender As Object, e As EventArgs) Handles cmdSpace.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\s")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("\\s")
     End Sub
 
     Private Sub cmdOr1_Click(sender As Object, e As EventArgs) Handles cmdOr1.Click
