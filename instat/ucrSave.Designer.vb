@@ -83,11 +83,17 @@ Partial Class ucrSave
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+
         Me.Controls.Add(Me.ucrInputComboSave)
+
         Me.Controls.Add(Me.ucrInputTextSave)
+
         Me.Controls.Add(Me.lblSaveText)
+
         Me.Controls.Add(Me.ucrChkSave)
+
         Me.Controls.Add(Me.btnColumnPosition)
+
         Me.Name = "ucrSave"
         Me.ResumeLayout(False)
         Me.PerformLayout()
