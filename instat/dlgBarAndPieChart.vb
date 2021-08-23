@@ -578,7 +578,7 @@ Public Class dlgBarAndPieChart
         ElseIf ucrInputBarChartPositions.GetText = "Jitter" Then
             clsGeomTextFunction.AddParameter("position", "position_jitter(width=0.9)", iPosition:=2)
         ElseIf ucrInputBarChartPositions.GetText = "Stack in reverse" Then
-            clsGeomTextFunction.AddParameter("position", "position_stack(vjust=0.5)", iPosition:=2)
+            clsGeomTextFunction.AddParameter("position", "position_stack(vjust=0.5, reverse = TRUE)", iPosition:=2)
         Else
             clsGeomTextFunction.AddParameter("position", "position_identity()", iPosition:=2)
         End If
