@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -83,11 +83,11 @@ Partial Class ucrSave
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrInputComboSave)
+        Me.Controls.Add(Me.ucrInputTextSave)
         Me.Controls.Add(Me.lblSaveText)
         Me.Controls.Add(Me.ucrChkSave)
-        Me.Controls.Add(Me.ucrInputTextSave)
         Me.Controls.Add(Me.btnColumnPosition)
-        Me.Controls.Add(Me.ucrInputComboSave)
         Me.Name = "ucrSave"
         Me.ResumeLayout(False)
         Me.PerformLayout()
