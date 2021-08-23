@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -19,7 +19,7 @@ Partial Class ucrSave
     Inherits instat.ucrCore
 
     'UserControl overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()>
+    <System.Diagnostics.DebuggerNonUserCode()> _
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -83,17 +83,11 @@ Partial Class ucrSave
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-
         Me.Controls.Add(Me.ucrInputComboSave)
-
         Me.Controls.Add(Me.ucrInputTextSave)
-
         Me.Controls.Add(Me.lblSaveText)
-
         Me.Controls.Add(Me.ucrChkSave)
-
         Me.Controls.Add(Me.btnColumnPosition)
-
         Me.Name = "ucrSave"
         Me.ResumeLayout(False)
         Me.PerformLayout()
