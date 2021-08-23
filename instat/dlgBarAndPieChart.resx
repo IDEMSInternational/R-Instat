@@ -154,10 +154,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 262</value>
+    <value>11, 262</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 25</value>
+    <value>166, 25</value>
   </data>
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -244,10 +244,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdBarChartOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 231</value>
+    <value>11, 231</value>
   </data>
   <data name="cmdBarChartOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 25</value>
+    <value>166, 25</value>
   </data>
   <data name="cmdBarChartOptions.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -301,10 +301,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdColumnChartOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 231</value>
+    <value>11, 231</value>
   </data>
   <data name="cmdColumnChartOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 25</value>
+    <value>165, 25</value>
   </data>
   <data name="cmdColumnChartOptions.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
