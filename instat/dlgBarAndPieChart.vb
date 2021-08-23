@@ -569,22 +569,22 @@ Public Class dlgBarAndPieChart
     End Sub
 
     Private Sub SetGeomTextOptions()
+        If ucrInputBarChartPositions.GetText = "Dodge" Then
+            clsGeomTextFunction.AddParameter("position", "position_dodge(width=0.9)", iPosition:=2)
+        ElseIf ucrInputBarChartPositions.GetText = "Fill" Then
+            clsGeomTextFunction.AddParameter("position", "position_fill(vjust=0.9)", iPosition:=2)
+        ElseIf ucrInputBarChartPositions.GetText = "Stack" Then
+            clsGeomTextFunction.AddParameter("position", "position_stack(vjust=0.9)", iPosition:=2)
+        ElseIf ucrInputBarChartPositions.GetText = "Jitter" Then
+            clsGeomTextFunction.AddParameter("position", "position_jitter(width=0.9)", iPosition:=2)
+        ElseIf ucrInputBarChartPositions.GetText = "Stack in reverse" Then
+            clsGeomTextFunction.AddParameter("position", "position_stack(vjust=0.5)", iPosition:=2)
+        Else
+            clsGeomTextFunction.AddParameter("position", "position_identity()", iPosition:=2)
+        End If
         If rdoFrequency.Checked Then
             clsGeomTextFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=0)
             clsLabelAesFunction.AddParameter("label", "..count..", iPosition:=0)
-            If ucrInputBarChartPositions.GetText = "Dodge" Then
-                clsGeomTextFunction.AddParameter("position", "position_dodge(width=0.9)", iPosition:=2)
-            ElseIf ucrInputBarChartPositions.GetText = "Fill" Then
-                clsGeomTextFunction.AddParameter("position", "position_fill(vjust=0.9)", iPosition:=2)
-            ElseIf ucrInputBarChartPositions.GetText = "Stack" Then
-                clsGeomTextFunction.AddParameter("position", "position_stack(vjust=0.9)", iPosition:=2)
-            ElseIf ucrInputBarChartPositions.GetText = "Jitter" Then
-                clsGeomTextFunction.AddParameter("position", "position_jitter(width=0.9)", iPosition:=2)
-            ElseIf ucrInputBarChartPositions.GetText = "Stack in reverse" Then
-                clsGeomTextFunction.AddParameter("position", "position_stack(vjust=0.5)", iPosition:=2)
-            Else
-                clsGeomTextFunction.AddParameter("position", "position_identity()", iPosition:=2)
-            End If
         Else
             clsGeomTextFunction.RemoveParameterByName("stat")
             clsLabelAesFunction.AddParameter("label", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
