@@ -2836,4 +2836,5 @@ Public Class ucrCalculator
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::str_ends()", 1)
         End If
     End Sub
+
 End Class
