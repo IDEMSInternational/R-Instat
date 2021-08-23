@@ -49,7 +49,7 @@ Partial Class dlgClimaticSummary
         Me.cmdSummary = New System.Windows.Forms.Button()
         Me.lblWithinYear = New System.Windows.Forms.Label()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
-        Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.cmdMissingOptions = New System.Windows.Forms.Button()
         Me.ucrChkOmitMissing = New instat.ucrCheck()
         Me.ucrChkAddDateColumn = New instat.ucrCheck()
         Me.ucrChkStoreResults = New instat.ucrCheck()
@@ -136,7 +136,7 @@ Partial Class dlgClimaticSummary
         '
         'grpOptions
         '
-        Me.grpOptions.Controls.Add(Me.cmdOptions)
+        Me.grpOptions.Controls.Add(Me.cmdMissingOptions)
         Me.grpOptions.Controls.Add(Me.ucrChkOmitMissing)
         Me.grpOptions.Controls.Add(Me.ucrChkAddDateColumn)
         Me.grpOptions.Controls.Add(Me.ucrChkStoreResults)
@@ -146,12 +146,12 @@ Partial Class dlgClimaticSummary
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
         '
-        'cmdOptions
+        'cmdMissingOptions
         '
-        resources.ApplyResources(Me.cmdOptions, "cmdOptions")
-        Me.cmdOptions.Name = "cmdOptions"
-        Me.cmdOptions.Tag = "Options"
-        Me.cmdOptions.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdMissingOptions, "cmdMissingOptions")
+        Me.cmdMissingOptions.Name = "cmdMissingOptions"
+        Me.cmdMissingOptions.Tag = "MissingOptions"
+        Me.cmdMissingOptions.UseVisualStyleBackColor = True
         '
         'ucrChkOmitMissing
         '
@@ -359,7 +359,7 @@ Partial Class dlgClimaticSummary
     Friend WithEvents ucrReceiverYear As ucrReceiverSingle
     Friend WithEvents ucrChkAddDateColumn As ucrCheck
     Friend WithEvents ucrChkOmitMissing As ucrCheck
-    Friend WithEvents cmdOptions As Button
+    Friend WithEvents cmdMissingOptions As Button
     Friend WithEvents ucrReceiverElements As ucrReceiverMultiple
     Friend WithEvents rdoStation As RadioButton
     Friend WithEvents rdoDaily As RadioButton

@@ -133,7 +133,7 @@
     <value>3</value>
   </data>
   <data name="rdoDescending.Text" xml:space="preserve">
-    <value>Descending Frequencies</value>
+    <value>Descending</value>
   </data>
   <data name="&gt;&gt;rdoDescending.Name" xml:space="preserve">
     <value>rdoDescending</value>
@@ -160,7 +160,7 @@
     <value>2</value>
   </data>
   <data name="rdoAscending.Text" xml:space="preserve">
-    <value>Ascending Frequencies</value>
+    <value>Ascending</value>
   </data>
   <data name="&gt;&gt;rdoAscending.Name" xml:space="preserve">
     <value>rdoAscending</value>
