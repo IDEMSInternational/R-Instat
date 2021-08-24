@@ -2698,7 +2698,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpFactor.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>2</value>
   </data>
   <data name="cmdLinkert7.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 6.25pt</value>
@@ -4351,7 +4351,7 @@
     <value>54</value>
   </data>
   <data name="grpWakefield.Location" type="System.Drawing.Point, System.Drawing">
-    <value>434, 56</value>
+    <value>430, 63</value>
   </data>
   <data name="grpWakefield.Size" type="System.Drawing.Size, System.Drawing">
     <value>434, 345</value>
@@ -4372,7 +4372,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpWakefield.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>4</value>
   </data>
   <data name="cmdAtan2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -5074,7 +5074,7 @@
     <value>22</value>
   </data>
   <data name="grpMaths.Location" type="System.Drawing.Point, System.Drawing">
-    <value>430, 61</value>
+    <value>431, 61</value>
   </data>
   <data name="grpMaths.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
@@ -5101,7 +5101,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpMaths.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>6</value>
   </data>
   <data name="cmdKurtosis.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt</value>
@@ -6010,7 +6010,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpSummary.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="cmdNasplin.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -8719,7 +8719,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpLogical.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
   <data name="cmdEnds.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -8755,13 +8755,13 @@
     <value>NoControl</value>
   </data>
   <data name="cmdTrunck.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 131</value>
+    <value>246, 131</value>
   </data>
   <data name="cmdTrunck.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>
   </data>
   <data name="cmdTrunck.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 30</value>
+    <value>52, 30</value>
   </data>
   <data name="cmdTrunck.TabIndex" type="System.Int32, mscorlib">
     <value>163</value>
@@ -10111,7 +10111,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpCircular.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>3</value>
   </data>
   <data name="cmdRegex.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>

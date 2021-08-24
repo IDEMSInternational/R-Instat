@@ -2507,7 +2507,7 @@ Public Class ucrCalculator
 
     Private Sub cmdCollate_Click(sender As Object, e As EventArgs) Handles cmdCollate.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::coll(), ignore_case = FALSE, locale = ""en"")", 51)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::count(pattern = , stringr::coll(), ignore_case = FALSE, locale = ""en"")", 55)
         Else
             ucrReceiverForCalculation.AddToReceiverAtCursorPosition("stringr::coll()", 1)
         End If
@@ -2530,7 +2530,7 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdAny1_Click(sender As Object, e As EventArgs) Handles cmdAny1.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(".")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition(".", 1)
     End Sub
 
     Private Sub cmdbegin_Click(sender As Object, e As EventArgs) Handles cmdbegin.Click
@@ -2554,11 +2554,11 @@ Public Class ucrCalculator
     End Sub
 
     Private Sub cmdNot1_Click(sender As Object, e As EventArgs) Handles cmdNot1.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[^ ]", 2)
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("[^ ]", 3)
     End Sub
 
     Private Sub cmdOr3_Click(sender As Object, e As EventArgs) Handles cmdOr3.Click
-        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("|")
+        ucrReceiverForCalculation.AddToReceiverAtCursorPosition("|", 1)
     End Sub
 
     Private Sub cmdOr2_Click(sender As Object, e As EventArgs) Handles cmdOr2.Click
