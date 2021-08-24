@@ -30,15 +30,13 @@ Partial Class dlgPivotTable
         Me.ttSelectedVariable = New System.Windows.Forms.ToolTip(Me.components)
         Me.ucrReceiverSelectedVariable = New instat.ucrReceiverMultiple()
         Me.ucrChkSelectedVariable = New instat.ucrCheck()
-        Me.ucrInputInitialColumnOrder = New instat.ucrInputComboBox()
-        Me.ucrInputAdditionalRowOrder = New instat.ucrInputComboBox()
-        Me.ucrInputInitialRowOrder = New instat.ucrInputComboBox()
         Me.ucrReceiveradditionalRowFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverInitialColumnFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverInitialRowFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorPivot = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrChkIncludeSubTotals = New instat.ucrCheck()
+        Me.ucrSavePivot = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblInitialRowFactor
@@ -73,30 +71,6 @@ Partial Class dlgPivotTable
         Me.ucrChkSelectedVariable.Checked = False
         resources.ApplyResources(Me.ucrChkSelectedVariable, "ucrChkSelectedVariable")
         Me.ucrChkSelectedVariable.Name = "ucrChkSelectedVariable"
-        '
-        'ucrInputInitialColumnOrder
-        '
-        Me.ucrInputInitialColumnOrder.AddQuotesIfUnrecognised = True
-        Me.ucrInputInitialColumnOrder.GetSetSelectedIndex = -1
-        Me.ucrInputInitialColumnOrder.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputInitialColumnOrder, "ucrInputInitialColumnOrder")
-        Me.ucrInputInitialColumnOrder.Name = "ucrInputInitialColumnOrder"
-        '
-        'ucrInputAdditionalRowOrder
-        '
-        Me.ucrInputAdditionalRowOrder.AddQuotesIfUnrecognised = True
-        Me.ucrInputAdditionalRowOrder.GetSetSelectedIndex = -1
-        Me.ucrInputAdditionalRowOrder.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputAdditionalRowOrder, "ucrInputAdditionalRowOrder")
-        Me.ucrInputAdditionalRowOrder.Name = "ucrInputAdditionalRowOrder"
-        '
-        'ucrInputInitialRowOrder
-        '
-        Me.ucrInputInitialRowOrder.AddQuotesIfUnrecognised = True
-        Me.ucrInputInitialRowOrder.GetSetSelectedIndex = -1
-        Me.ucrInputInitialRowOrder.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputInitialRowOrder, "ucrInputInitialRowOrder")
-        Me.ucrInputInitialRowOrder.Name = "ucrInputInitialRowOrder"
         '
         'ucrReceiveradditionalRowFactor
         '
@@ -144,16 +118,19 @@ Partial Class dlgPivotTable
         resources.ApplyResources(Me.ucrChkIncludeSubTotals, "ucrChkIncludeSubTotals")
         Me.ucrChkIncludeSubTotals.Name = "ucrChkIncludeSubTotals"
         '
+        'ucrSavePivot
+        '
+        resources.ApplyResources(Me.ucrSavePivot, "ucrSavePivot")
+        Me.ucrSavePivot.Name = "ucrSavePivot"
+        '
         'dlgPivotTable
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSavePivot)
         Me.Controls.Add(Me.ucrChkIncludeSubTotals)
         Me.Controls.Add(Me.ucrReceiverSelectedVariable)
         Me.Controls.Add(Me.ucrChkSelectedVariable)
-        Me.Controls.Add(Me.ucrInputInitialColumnOrder)
-        Me.Controls.Add(Me.ucrInputAdditionalRowOrder)
-        Me.Controls.Add(Me.ucrInputInitialRowOrder)
         Me.Controls.Add(Me.lblAdditionalRowFactor)
         Me.Controls.Add(Me.ucrReceiveradditionalRowFactor)
         Me.Controls.Add(Me.lblInitialColumnFactor)
@@ -180,11 +157,9 @@ Partial Class dlgPivotTable
     Friend WithEvents ucrReceiveradditionalRowFactor As ucrReceiverSingle
     Friend WithEvents lblInitialColumnFactor As Label
     Friend WithEvents ucrReceiverInitialColumnFactor As ucrReceiverSingle
-    Friend WithEvents ucrInputInitialColumnOrder As ucrInputComboBox
-    Friend WithEvents ucrInputAdditionalRowOrder As ucrInputComboBox
-    Friend WithEvents ucrInputInitialRowOrder As ucrInputComboBox
     Friend WithEvents ucrChkSelectedVariable As ucrCheck
     Friend WithEvents ttSelectedVariable As ToolTip
     Friend WithEvents ucrReceiverSelectedVariable As ucrReceiverMultiple
     Friend WithEvents ucrChkIncludeSubTotals As ucrCheck
+    Friend WithEvents ucrSavePivot As ucrSave
 End Class
