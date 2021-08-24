@@ -2408,4 +2408,7 @@ Public Class frmMain
         dlgPasteSpecial.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeThreeVariablePivotTable_Click(sender As Object, e As EventArgs)
+        dlgPivotTable.ShowDialog()
+    End Sub
 End Class
