@@ -40,9 +40,15 @@ Partial Class dlgGeneralForGraphics
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgGeneralForGraphics))
         Me.cmdOptions = New System.Windows.Forms.Button()
+        Me.lblXVariable = New System.Windows.Forms.Label()
+        Me.lblFillOrColor = New System.Windows.Forms.Label()
+        Me.ucrVariablesAsFactorForGraphics = New instat.ucrVariablesAsFactor()
+        Me.ucrFillOrColourReceiver = New instat.ucrReceiverSingle()
+        Me.ucrReceiverX = New instat.ucrReceiverSingle()
+        Me.ucrGraphicsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
-        Me.ucrSaveGraph = New instat.ucrSaveGraph()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrSave = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -52,40 +58,101 @@ Partial Class dlgGeneralForGraphics
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
+        'lblXVariable
+        '
+        resources.ApplyResources(Me.lblXVariable, "lblXVariable")
+        Me.lblXVariable.Name = "lblXVariable"
+        Me.lblXVariable.Tag = "X_Variable:"
+        '
+        'lblFillOrColor
+        '
+        resources.ApplyResources(Me.lblFillOrColor, "lblFillOrColor")
+        Me.lblFillOrColor.Name = "lblFillOrColor"
+        Me.lblFillOrColor.Tag = "Fill_Colour:"
+        '
+        'ucrVariablesAsFactorForGraphics
+        '
+        Me.ucrVariablesAsFactorForGraphics.frmParent = Me
+        resources.ApplyResources(Me.ucrVariablesAsFactorForGraphics, "ucrVariablesAsFactorForGraphics")
+        Me.ucrVariablesAsFactorForGraphics.Name = "ucrVariablesAsFactorForGraphics"
+        Me.ucrVariablesAsFactorForGraphics.Selector = Nothing
+        Me.ucrVariablesAsFactorForGraphics.strNcFilePath = ""
+        Me.ucrVariablesAsFactorForGraphics.ucrSelector = Nothing
+        Me.ucrVariablesAsFactorForGraphics.ucrVariableSelector = Nothing
+        '
+        'ucrFillOrColourReceiver
+        '
+        Me.ucrFillOrColourReceiver.frmParent = Me
+        resources.ApplyResources(Me.ucrFillOrColourReceiver, "ucrFillOrColourReceiver")
+        Me.ucrFillOrColourReceiver.Name = "ucrFillOrColourReceiver"
+        Me.ucrFillOrColourReceiver.Selector = Nothing
+        Me.ucrFillOrColourReceiver.strNcFilePath = ""
+        Me.ucrFillOrColourReceiver.ucrSelector = Nothing
+        '
+        'ucrReceiverX
+        '
+        Me.ucrReceiverX.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverX, "ucrReceiverX")
+        Me.ucrReceiverX.Name = "ucrReceiverX"
+        Me.ucrReceiverX.Selector = Nothing
+        Me.ucrReceiverX.strNcFilePath = ""
+        Me.ucrReceiverX.ucrSelector = Nothing
+        '
+        'ucrGraphicsSelector
+        '
+        Me.ucrGraphicsSelector.bDropUnusedFilterLevels = False
+        Me.ucrGraphicsSelector.bShowHiddenColumns = False
+        Me.ucrGraphicsSelector.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrGraphicsSelector, "ucrGraphicsSelector")
+        Me.ucrGraphicsSelector.Name = "ucrGraphicsSelector"
+        '
         'ucrAdditionalLayers
         '
         resources.ApplyResources(Me.ucrAdditionalLayers, "ucrAdditionalLayers")
         Me.ucrAdditionalLayers.Name = "ucrAdditionalLayers"
-        '
-        'ucrSaveGraph
-        '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
         '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
+        'ucrSave
+        '
+        resources.ApplyResources(Me.ucrSave, "ucrSave")
+        Me.ucrSave.Name = "ucrSave"
+        '
         'dlgGeneralForGraphics
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSave)
+        Me.Controls.Add(Me.lblFillOrColor)
+        Me.Controls.Add(Me.lblXVariable)
+        Me.Controls.Add(Me.ucrVariablesAsFactorForGraphics)
+        Me.Controls.Add(Me.ucrFillOrColourReceiver)
+        Me.Controls.Add(Me.ucrReceiverX)
+        Me.Controls.Add(Me.ucrGraphicsSelector)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrAdditionalLayers)
         Me.Controls.Add(Me.ucrBase)
-        Me.Controls.Add(Me.ucrSaveGraph)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgGeneralForGraphics"
         Me.Tag = "General "
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrSaveGraph As ucrSaveGraph
     Friend WithEvents ucrAdditionalLayers As ucrAdditionalLayers
     Friend WithEvents cmdOptions As Button
+    Friend WithEvents ucrGraphicsSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents ucrVariablesAsFactorForGraphics As ucrVariablesAsFactor
+    Friend WithEvents ucrFillOrColourReceiver As ucrReceiverSingle
+    Friend WithEvents ucrReceiverX As ucrReceiverSingle
+    Friend WithEvents lblXVariable As Label
+    Friend WithEvents lblFillOrColor As Label
+    Friend WithEvents ucrSave As ucrSave
 End Class
