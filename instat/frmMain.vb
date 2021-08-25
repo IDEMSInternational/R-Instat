@@ -2408,4 +2408,7 @@ Public Class frmMain
         dlgPasteSpecial.ShowDialog()
     End Sub
 
+    Private Sub mnuDescribeTwodavriablesPivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwodavriablesPivotTable.Click
+        dlgPivotTable.ShowDialog()
+    End Sub
 End Class

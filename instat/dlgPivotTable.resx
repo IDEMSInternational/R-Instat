@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblInitialRowFactor.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>6</value>
   </data>
   <data name="lblInitialColumnFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -178,52 +178,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblInitialColumnFactor.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="lblAdditionalRowFactor.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblAdditionalRowFactor.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblAdditionalRowFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 133</value>
-  </data>
-  <data name="lblAdditionalRowFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 13</value>
-  </data>
-  <data name="lblAdditionalRowFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="lblAdditionalRowFactor.Text" xml:space="preserve">
-    <value>Additional Row Factor:</value>
-  </data>
-  <data name="&gt;&gt;lblAdditionalRowFactor.Name" xml:space="preserve">
-    <value>lblAdditionalRowFactor</value>
-  </data>
-  <data name="&gt;&gt;lblAdditionalRowFactor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblAdditionalRowFactor.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblAdditionalRowFactor.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
   <metadata name="ttSelectedVariable.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>418, 450</value>
-  </data>
   <data name="ucrSavePivot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 355</value>
+    <value>9, 331</value>
   </data>
   <data name="ucrSavePivot.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -267,6 +228,15 @@
   <data name="&gt;&gt;ucrChkIncludeSubTotals.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>418, 419</value>
+  </data>
   <data name="ucrChkSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
     <value>256, 197</value>
   </data>
@@ -287,30 +257,6 @@
   </data>
   <data name="&gt;&gt;ucrChkSelectedVariable.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="ucrReceiveradditionalRowFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>256, 148</value>
-  </data>
-  <data name="ucrReceiveradditionalRowFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiveradditionalRowFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
-  </data>
-  <data name="ucrReceiveradditionalRowFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiveradditionalRowFactor.Name" xml:space="preserve">
-    <value>ucrReceiveradditionalRowFactor</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiveradditionalRowFactor.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiveradditionalRowFactor.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiveradditionalRowFactor.ZOrder" xml:space="preserve">
-    <value>5</value>
   </data>
   <data name="ucrReceiverInitialColumnFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>256, 103</value>
@@ -334,7 +280,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverInitialColumnFactor.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>5</value>
   </data>
   <data name="ucrReceiverInitialRowFactor.Location" type="System.Drawing.Point, System.Drawing">
     <value>256, 58</value>
@@ -358,10 +304,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverInitialRowFactor.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>7</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 386</value>
+    <value>9, 362</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -379,7 +325,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="ucrSelectorPivot.Location" type="System.Drawing.Point, System.Drawing">
     <value>9, 9</value>
@@ -403,13 +349,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorPivot.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
+  </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>dlgPivotTable</value>
+    <value>Pivot Table</value>
   </data>
   <data name="&gt;&gt;ttSelectedVariable.Name" xml:space="preserve">
     <value>ttSelectedVariable</value>

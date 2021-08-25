@@ -26,17 +26,15 @@ Partial Class dlgPivotTable
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgPivotTable))
         Me.lblInitialRowFactor = New System.Windows.Forms.Label()
         Me.lblInitialColumnFactor = New System.Windows.Forms.Label()
-        Me.lblAdditionalRowFactor = New System.Windows.Forms.Label()
         Me.ttSelectedVariable = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ucrSavePivot = New instat.ucrSave()
+        Me.ucrChkIncludeSubTotals = New instat.ucrCheck()
         Me.ucrReceiverSelectedVariable = New instat.ucrReceiverMultiple()
         Me.ucrChkSelectedVariable = New instat.ucrCheck()
-        Me.ucrReceiveradditionalRowFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverInitialColumnFactor = New instat.ucrReceiverSingle()
         Me.ucrReceiverInitialRowFactor = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorPivot = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkIncludeSubTotals = New instat.ucrCheck()
-        Me.ucrSavePivot = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'lblInitialRowFactor
@@ -51,11 +49,16 @@ Partial Class dlgPivotTable
         Me.lblInitialColumnFactor.Name = "lblInitialColumnFactor"
         Me.lblInitialColumnFactor.Tag = "Initial Column Factor:"
         '
-        'lblAdditionalRowFactor
+        'ucrSavePivot
         '
-        resources.ApplyResources(Me.lblAdditionalRowFactor, "lblAdditionalRowFactor")
-        Me.lblAdditionalRowFactor.Name = "lblAdditionalRowFactor"
-        Me.lblAdditionalRowFactor.Tag = "Additional Row Factor"
+        resources.ApplyResources(Me.ucrSavePivot, "ucrSavePivot")
+        Me.ucrSavePivot.Name = "ucrSavePivot"
+        '
+        'ucrChkIncludeSubTotals
+        '
+        Me.ucrChkIncludeSubTotals.Checked = False
+        resources.ApplyResources(Me.ucrChkIncludeSubTotals, "ucrChkIncludeSubTotals")
+        Me.ucrChkIncludeSubTotals.Name = "ucrChkIncludeSubTotals"
         '
         'ucrReceiverSelectedVariable
         '
@@ -71,15 +74,6 @@ Partial Class dlgPivotTable
         Me.ucrChkSelectedVariable.Checked = False
         resources.ApplyResources(Me.ucrChkSelectedVariable, "ucrChkSelectedVariable")
         Me.ucrChkSelectedVariable.Name = "ucrChkSelectedVariable"
-        '
-        'ucrReceiveradditionalRowFactor
-        '
-        Me.ucrReceiveradditionalRowFactor.frmParent = Me
-        resources.ApplyResources(Me.ucrReceiveradditionalRowFactor, "ucrReceiveradditionalRowFactor")
-        Me.ucrReceiveradditionalRowFactor.Name = "ucrReceiveradditionalRowFactor"
-        Me.ucrReceiveradditionalRowFactor.Selector = Nothing
-        Me.ucrReceiveradditionalRowFactor.strNcFilePath = ""
-        Me.ucrReceiveradditionalRowFactor.ucrSelector = Nothing
         '
         'ucrReceiverInitialColumnFactor
         '
@@ -112,17 +106,6 @@ Partial Class dlgPivotTable
         resources.ApplyResources(Me.ucrSelectorPivot, "ucrSelectorPivot")
         Me.ucrSelectorPivot.Name = "ucrSelectorPivot"
         '
-        'ucrChkIncludeSubTotals
-        '
-        Me.ucrChkIncludeSubTotals.Checked = False
-        resources.ApplyResources(Me.ucrChkIncludeSubTotals, "ucrChkIncludeSubTotals")
-        Me.ucrChkIncludeSubTotals.Name = "ucrChkIncludeSubTotals"
-        '
-        'ucrSavePivot
-        '
-        resources.ApplyResources(Me.ucrSavePivot, "ucrSavePivot")
-        Me.ucrSavePivot.Name = "ucrSavePivot"
-        '
         'dlgPivotTable
         '
         resources.ApplyResources(Me, "$this")
@@ -131,8 +114,6 @@ Partial Class dlgPivotTable
         Me.Controls.Add(Me.ucrChkIncludeSubTotals)
         Me.Controls.Add(Me.ucrReceiverSelectedVariable)
         Me.Controls.Add(Me.ucrChkSelectedVariable)
-        Me.Controls.Add(Me.lblAdditionalRowFactor)
-        Me.Controls.Add(Me.ucrReceiveradditionalRowFactor)
         Me.Controls.Add(Me.lblInitialColumnFactor)
         Me.Controls.Add(Me.ucrReceiverInitialColumnFactor)
         Me.Controls.Add(Me.lblInitialRowFactor)
@@ -153,8 +134,6 @@ Partial Class dlgPivotTable
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents lblInitialRowFactor As Label
     Friend WithEvents ucrReceiverInitialRowFactor As ucrReceiverSingle
-    Friend WithEvents lblAdditionalRowFactor As Label
-    Friend WithEvents ucrReceiveradditionalRowFactor As ucrReceiverSingle
     Friend WithEvents lblInitialColumnFactor As Label
     Friend WithEvents ucrReceiverInitialColumnFactor As ucrReceiverSingle
     Friend WithEvents ucrChkSelectedVariable As ucrCheck

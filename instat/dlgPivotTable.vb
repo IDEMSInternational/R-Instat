@@ -16,6 +16,7 @@
 Imports instat.Translations
 Public Class dlgPivotTable
     Private bFirstLoad As Boolean = True
+    Private bRcodeSet As Boolean = False
     Private bReset As Boolean = True
     Private clsRPivotTable, clsSelectFunction,
         clsConcatenateFunction, clsGetObjectFunction As New RFunction
@@ -86,6 +87,7 @@ Public Class dlgPivotTable
         ucrBase.clsRsyntax.ClearCodes()
 
         clsGetObjectFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$get_objects")
+        clsGetObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
 
         clsPipeOperator.SetOperation("%>%")
         clsPipeOperator.AddParameter("columns", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
@@ -107,12 +109,14 @@ Public Class dlgPivotTable
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
+        bRcodeSet = False
         ucrSelectorPivot.SetRCode(clsPipeOperator, bReset)
         ucrReceiverInitialColumnFactor.SetRCode(clsRPivotTable, bReset)
         ucrReceiverInitialRowFactor.SetRCode(clsRPivotTable, bReset)
         ucrSavePivot.SetRCode(clsRPivotTable, bReset)
         ucrChkSelectedVariable.SetRCode(clsRPivotTable, bReset)
         ucrChkIncludeSubTotals.SetRCode(clsRPivotTable, bReset)
+        bRcodeSet = True
     End Sub
 
     Private Sub TestOkEnabled()
@@ -148,7 +152,7 @@ Public Class dlgPivotTable
     End Sub
 
     Private Sub ucrSelectorPivot_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrSelectorPivot.ControlValueChanged
-        clsGetObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorPivot.ucrAvailableDataFrames.strCurrDataFrame & Chr(34), iPosition:=0)
+        clsGetObjectFunction.AddParameter("data_name", Chr(34) & ucrSelectorPivot.ucrAvailableDataFrames.cboAvailableDataFrames.Text & Chr(34), iPosition:=0)
         ChangeDataParameterValue()
     End Sub
 
@@ -162,27 +166,29 @@ Public Class dlgPivotTable
     End Sub
     Private Sub ReceiversChanged(ucrChangedControls As ucrCore) Handles ucrReceiverInitialColumnFactor.ControlValueChanged,
             ucrReceiverInitialRowFactor.ControlValueChanged, ucrReceiverSelectedVariable.ControlValueChanged
-        If ucrChkSelectedVariable.Checked Then
-            clsConcatenateFunction.ClearParameters()
-            Dim iCount As Integer = 2
-            If Not ucrReceiverInitialColumnFactor.IsEmpty Then
-                clsConcatenateFunction.AddParameter("column", ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-            End If
-            If Not ucrReceiverInitialRowFactor.IsEmpty Then
-                If clsConcatenateFunction.GetParameter("column").strArgumentValue <> ucrReceiverInitialRowFactor.GetVariableNames(bWithQuotes:=False) Then
-                    clsConcatenateFunction.AddParameter("row", ucrReceiverInitialRowFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
+        If bRcodeSet Then
+            If ucrChkSelectedVariable.Checked Then
+                clsConcatenateFunction.ClearParameters()
+                Dim iCount As Integer = 2
+                If Not ucrReceiverInitialColumnFactor.IsEmpty Then
+                    clsConcatenateFunction.AddParameter("column", ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
                 End If
-            End If
-            For Each strItem In ucrReceiverSelectedVariable.GetVariableNamesList(bWithQuotes:=False)
-                If strItem <> ucrReceiverInitialRowFactor.GetVariableNames(bWithQuotes:=False) AndAlso ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False) Then
-                    clsConcatenateFunction.AddParameter(strItem, strItem, bIncludeArgumentName:=False, iPosition:=iCount)
-                    iCount += 1
+                If Not ucrReceiverInitialRowFactor.IsEmpty Then
+                    If clsConcatenateFunction.GetParameter("column").strArgumentValue <> ucrReceiverInitialRowFactor.GetVariableNames(bWithQuotes:=False) Then
+                        clsConcatenateFunction.AddParameter("row", ucrReceiverInitialRowFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
+                    End If
                 End If
-            Next
+                For Each strItem In ucrReceiverSelectedVariable.GetVariableNamesList(bWithQuotes:=False)
+                    If strItem <> ucrReceiverInitialRowFactor.GetVariableNames(bWithQuotes:=False) AndAlso strItem <> ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False) Then
+                        clsConcatenateFunction.AddParameter(strItem, strItem, bIncludeArgumentName:=False, iPosition:=iCount)
+                        iCount += 1
+                    End If
+                Next
+            End If
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged, ucrReceiveradditionalRowFactor.ControlContentsChanged,
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverSelectedVariable.ControlContentsChanged,
             ucrReceiverInitialColumnFactor.ControlContentsChanged, ucrReceiverInitialRowFactor.ControlContentsChanged, ucrChkSelectedVariable.ControlContentsChanged, ucrSavePivot.ControlContentsChanged
         TestOkEnabled()
     End Sub

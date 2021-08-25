@@ -664,6 +664,7 @@ Partial Class frmMain
         Me.mnuDataFrameMetadata = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuScriptFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLogFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuDescribeTwodavriablesPivotTable = New System.Windows.Forms.ToolStripMenuItem()
         Me.stsStrip.SuspendLayout()
         Me.Tool_strip.SuspendLayout()
         Me.mnuBar.SuspendLayout()
@@ -732,7 +733,7 @@ Partial Class frmMain
         '
         'mnuDescribeTwoVariables
         '
-        Me.mnuDescribeTwoVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesGraph, Me.ToolStripSeparator34, Me.mnuDescribeTwoVariablesFrequencies})
+        Me.mnuDescribeTwoVariables.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuDescribeTwoVariablesSummarise, Me.mnuDescribeTwoVariablesGraph, Me.ToolStripSeparator34, Me.mnuDescribeTwoVariablesFrequencies, Me.mnuDescribeTwodavriablesPivotTable})
         Me.mnuDescribeTwoVariables.Name = "mnuDescribeTwoVariables"
         resources.ApplyResources(Me.mnuDescribeTwoVariables, "mnuDescribeTwoVariables")
         Me.mnuDescribeTwoVariables.Tag = "Two_Variables"
@@ -4207,6 +4208,11 @@ Partial Class frmMain
         Me.mnuLogFile.Name = "mnuLogFile"
         resources.ApplyResources(Me.mnuLogFile, "mnuLogFile")
         '
+        'mnuDescribeTwodavriablesPivotTable
+        '
+        Me.mnuDescribeTwodavriablesPivotTable.Name = "mnuDescribeTwodavriablesPivotTable"
+        resources.ApplyResources(Me.mnuDescribeTwodavriablesPivotTable, "mnuDescribeTwodavriablesPivotTable")
+        '
         'frmMain
         '
         resources.ApplyResources(Me, "$this")
@@ -4878,4 +4884,5 @@ Partial Class frmMain
     Friend WithEvents mnuLastGraph As ToolStripSplitButton
     Friend WithEvents mnuViewer As ToolStripMenuItem
     Friend WithEvents mnuploty As ToolStripMenuItem
+    Friend WithEvents mnuDescribeTwodavriablesPivotTable As ToolStripMenuItem
 End Class
