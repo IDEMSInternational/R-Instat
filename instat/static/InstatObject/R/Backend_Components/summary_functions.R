@@ -1371,9 +1371,9 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
   shaped_cell_values <- cell_values %>% dplyr::relocate(value, .after = last_col())
 
   # Converts factor columns to character so we can relabel values if needed
-  for (i in seq_along(factors)) {
-    shaped_cell_values[[i]] <- as.character(shaped_cell_values[[i]])
-  }
+  #for (i in seq_along(factors)) {
+    #shaped_cell_values[[i]] <- as.character(shaped_cell_values[[i]])
+  #}
   if (include_margins) {
     margin_tables <- list()
     power_sets <- rje::powerSet(factors)
