@@ -84,4 +84,8 @@ Public Class dlgReorderLevels
     Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactor.ControlContentsChanged
         TestOKEnabled()
     End Sub
+
+    Private Sub grpProperty_Enter(sender As Object, e As EventArgs) Handles grpProperty.Enter
+
+    End Sub
 End Class
