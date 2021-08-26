@@ -74,6 +74,8 @@ Public Class sdgPlots
     'See bLayersDefaultIsGolobal below.
     Private dctTheta As New Dictionary(Of String, String)
 
+    Public bChecked As Boolean = False
+
     Private Sub sdgPlots_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         autoTranslate(Me)
     End Sub
@@ -789,14 +791,6 @@ Public Class sdgPlots
                 End If
             End If
         End If
-    End Sub
-
-    Public Sub CheckedUcrIncludeFacets()
-        ucrChkIncludeFacets.Checked = True
-    End Sub
-
-    Public Sub UnCheckedUcrIncludeFacets()
-        ucrChkIncludeFacets.Checked = False
     End Sub
 
     Public Sub DisableLayersTab()

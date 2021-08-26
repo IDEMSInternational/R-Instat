@@ -123,10 +123,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 211</value>
+    <value>6, 401</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 25</value>
+    <value>137, 25</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
@@ -211,10 +211,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdFacets.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 242</value>
+    <value>146, 401</value>
   </data>
   <data name="cmdFacets.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 25</value>
+    <value>110, 25</value>
   </data>
   <data name="cmdFacets.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -238,10 +238,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdTheme.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 273</value>
+    <value>258, 401</value>
   </data>
   <data name="cmdTheme.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 25</value>
+    <value>110, 25</value>
   </data>
   <data name="cmdTheme.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -262,7 +262,7 @@
     <value>0</value>
   </data>
   <data name="ucrSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 493</value>
+    <value>6, 434</value>
   </data>
   <data name="ucrSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -292,7 +292,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>416, 579</value>
+    <value>416, 519</value>
   </data>
   <data name="ucrFillOrColourReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 246</value>
@@ -367,7 +367,7 @@
     <value>8</value>
   </data>
   <data name="ucrAdditionalLayers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 303</value>
+    <value>6, 213</value>
   </data>
   <data name="ucrAdditionalLayers.Size" type="System.Drawing.Size, System.Drawing">
     <value>218, 182</value>
@@ -388,7 +388,7 @@
     <value>10</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 523</value>
+    <value>6, 464</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 53</value>

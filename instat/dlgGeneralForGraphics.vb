@@ -172,6 +172,7 @@ Public Class dlgGeneralForGraphics
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -206,10 +207,8 @@ Public Class dlgGeneralForGraphics
                           clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
                           clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
                           clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, bReset:=bResetSubdialog)
-        sdgPlots.CheckedUcrIncludeFacets()
         sdgPlots.tbpPlotsOptions.SelectedIndex = 0
         sdgPlots.ShowDialog()
-        sdgPlots.UnCheckedUcrIncludeFacets()
         bResetOptionsSubdialog = False
         sdgPlots.EnableLayersTab()
     End Sub
