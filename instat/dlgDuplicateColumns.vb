@@ -218,8 +218,4 @@ Public Class dlgDuplicateColumns
     Private Sub CoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverDuplicateColumns.ControlContentsChanged, ucrPnlConvertTo.ControlContentsChanged, ucrNudConvertDisplayDecimals.ControlContentsChanged, ucrChkConvertSpecifyDecimalsToDisplay.ControlContentsChanged, ucrChkChangeType.ControlContentsChanged
         TestOKEnabled()
     End Sub
-
-    Private Sub ucrChkConvertSpecifyDecimalsToDisplay_Load(sender As Object, e As EventArgs) Handles ucrChkConvertSpecifyDecimalsToDisplay.Load
-
-    End Sub
 End Class

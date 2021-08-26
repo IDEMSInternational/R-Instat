@@ -178,7 +178,4 @@ Public Class dlgConvertColumns
         End If
     End Sub
 
-    Private Sub ucrChkSpecifyDecimalsToDisplay_Load(sender As Object, e As EventArgs) Handles ucrChkSpecifyDecimalsToDisplay.Load
-
-    End Sub
 End Class

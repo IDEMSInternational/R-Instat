@@ -433,10 +433,6 @@ Public Class dlgBoxplot
         End If
     End Sub
 
-    Private Sub ucrVariablesAsFactorForBoxplot_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBoxplot.ControlContentsChanged
-
-    End Sub
-
     'this code is commented out but will work once we get the feature of linking controls with the contents of a receiver
     'Private Sub SwapFactors()
     '    If ucrChkSwapParameters.Checked Then
