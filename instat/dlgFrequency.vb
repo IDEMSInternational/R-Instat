@@ -210,7 +210,7 @@ Public Class dlgFrequency
                 End If
                 iColumn = iColumn + 1
             Next
-            clsFrequencyOperator.AddParameter("columnOp", clsROperatorParameter:=clsMmtableOperator)
+            clsFrequencyOperator.AddParameter("columnOp", clsROperatorParameter:=clsMmtableOperator, iPosition:=1)
         End If
     End Sub
 End Class
