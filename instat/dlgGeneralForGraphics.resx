@@ -123,10 +123,10 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>159, 213</value>
+    <value>6, 211</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 34</value>
+    <value>158, 25</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
@@ -145,7 +145,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>9</value>
   </data>
   <data name="lblXVariable.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblXVariable.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>4</value>
   </data>
   <data name="lblFillOrColor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -205,19 +205,64 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFillOrColor.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="cmdFacets.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdFacets.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 242</value>
+  </data>
+  <data name="cmdFacets.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 25</value>
+  </data>
+  <data name="cmdFacets.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="cmdFacets.Text" xml:space="preserve">
+    <value>Facets</value>
+  </data>
+  <data name="&gt;&gt;cmdFacets.Name" xml:space="preserve">
+    <value>cmdFacets</value>
+  </data>
+  <data name="&gt;&gt;cmdFacets.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdFacets.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdFacets.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+  <data name="cmdTheme.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>416, 492</value>
+  <data name="cmdTheme.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 273</value>
+  </data>
+  <data name="cmdTheme.Size" type="System.Drawing.Size, System.Drawing">
+    <value>158, 25</value>
+  </data>
+  <data name="cmdTheme.TabIndex" type="System.Int32, mscorlib">
+    <value>19</value>
+  </data>
+  <data name="cmdTheme.Text" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="&gt;&gt;cmdTheme.Name" xml:space="preserve">
+    <value>cmdTheme</value>
+  </data>
+  <data name="&gt;&gt;cmdTheme.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdTheme.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdTheme.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrSave.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 401</value>
+    <value>6, 493</value>
   </data>
   <data name="ucrSave.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -238,7 +283,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSave.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>2</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>416, 579</value>
   </data>
   <data name="ucrFillOrColourReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 246</value>
@@ -262,7 +316,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFillOrColourReceiver.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>6</value>
   </data>
   <data name="ucrReceiverX.Location" type="System.Drawing.Point, System.Drawing">
     <value>262, 198</value>
@@ -286,7 +340,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverX.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>7</value>
   </data>
   <data name="ucrGraphicsSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 14</value>
@@ -310,13 +364,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrGraphicsSelector.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>8</value>
   </data>
   <data name="ucrAdditionalLayers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 202</value>
+    <value>4, 303</value>
   </data>
   <data name="ucrAdditionalLayers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>218, 194</value>
+    <value>218, 182</value>
   </data>
   <data name="ucrAdditionalLayers.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -331,10 +385,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrAdditionalLayers.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>10</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 433</value>
+    <value>6, 523</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 53</value>
@@ -352,7 +406,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>11</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -385,6 +439,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrVariablesAsFactorForGraphics.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>5</value>
   </data>
 </root>

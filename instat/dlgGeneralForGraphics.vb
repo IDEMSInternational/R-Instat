@@ -18,7 +18,6 @@ Imports instat.Translations
 
 Public Class dlgGeneralForGraphics
     Public clsGgplotFunction As RFunction
-    Private clsRgeomlineplotFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private lstLayerComplete As New List(Of Boolean)
@@ -49,12 +48,7 @@ Public Class dlgGeneralForGraphics
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
 
-    'Parameter names for geoms
-    Private strFirstParameterName As String = "geomfunc"
-    Private strgeomSmoothParameterName As String = "geom_smooth"
-    Private strPeaksPointsParameterName As String = "stat_peaks"
-    Private strValleysPointsParameterName As String = "stat_valleys"
-    Private strGeomParameterNames() As String = {strFirstParameterName, strgeomSmoothParameterName, strPeaksPointsParameterName, strValleysPointsParameterName}
+    'Private strGeomParameterNames() As String = {strFirstParameterName, strgeomSmoothParameterName, strPeaksPointsParameterName, strValleysPointsParameterName}
 
     Private Sub dlgGeneralForGraphics_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -116,7 +110,6 @@ Public Class dlgGeneralForGraphics
     Private Sub SetDefaults()
         clsGgplotFunction = New RFunction
         clsGlobalAesFunction = New RFunction
-        clsRgeomlineplotFunction = New RFunction
         clsBaseOperator = New ROperator
 
         ucrSave.Reset()
@@ -129,7 +122,6 @@ Public Class dlgGeneralForGraphics
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsGgplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsRgeomlineplotFunction, iPosition:=2)
 
         clsGgplotFunction.SetPackageName("ggplot2")
         clsGgplotFunction.SetRCommand("ggplot")
@@ -140,8 +132,6 @@ Public Class dlgGeneralForGraphics
         clsGlobalAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
         clsGlobalAesFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=1)
 
-        clsRgeomlineplotFunction.SetPackageName("ggplot2")
-        clsRgeomlineplotFunction.SetRCommand("geom_line")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -164,7 +154,7 @@ Public Class dlgGeneralForGraphics
         clsBaseOperator.bExcludeAssignedFunctionOutput = False
 
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-        ucrAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsGgplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=ucrGraphicsSelector.strCurrentDataFrame, strMainDialogGeomParameterNames:=strGeomParameterNames, bReset:=True)
+        ucrAdditionalLayers.SetRCodeForControl(clsNewBaseOperator:=clsBaseOperator, clsRNewggplotFunc:=clsGgplotFunction, clsNewAesFunc:=clsGlobalAesFunction, strNewGlobalDataFrame:=ucrGraphicsSelector.strCurrentDataFrame, bReset:=True)
 
         sdgPlots.Reset()
         'Warning/to be discussed: sdgPlots doesn't work like sdgLayerOptions. Information actually stays on the dialogue, as it cannot be editted on the general for graphics (yet) I think that sdgPlots should work like LayerOptions and be filled in at load, thanks to a setup function and setsettings sub. 
@@ -207,6 +197,35 @@ Public Class dlgGeneralForGraphics
     Private Sub ucrAdditionalLayers_NumberOfLayersChanged() Handles ucrAdditionalLayers.NumberOfLayersChanged
         'When the number of Layers in the lstLayers on ucrAdditionalLayers need to check if OK is enabled on dlgGeneralForGraphics.
         'TestOKEnabled()
+    End Sub
+
+    Private Sub cmdFacets_Click(sender As Object, e As EventArgs) Handles cmdFacets.Click
+        sdgPlots.DisableLayersTab()
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction,
+                          clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
+                          clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
+                          clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
+                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, bReset:=bResetSubdialog)
+        sdgPlots.CheckedUcrIncludeFacets()
+        sdgPlots.tbpPlotsOptions.SelectedIndex = 0
+        sdgPlots.ShowDialog()
+        sdgPlots.UnCheckedUcrIncludeFacets()
+        bResetOptionsSubdialog = False
+        sdgPlots.EnableLayersTab()
+    End Sub
+
+    Private Sub cmdTheme_Click(sender As Object, e As EventArgs) Handles cmdTheme.Click
+        sdgPlots.DisableLayersTab()
+        sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction,
+                          clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewLabsFunction:=clsLabsFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewYLabTitleFunction:=clsYlabsFunction,
+                          clsNewFacetFunction:=clsFacetsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction,
+                          clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, ucrNewBaseSelector:=sdgLayerOptions.ucrGeomWithAes.ucrGeomWithAesSelector, clsNewAnnotateFunction:=clsAnnotateFunction,
+                          clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, bReset:=bResetSubdialog)
+        sdgPlots.tbpPlotsOptions.SelectedIndex = 5
+        sdgPlots.ShowDialog()
+        sdgPlots.tbpPlotsOptions.SelectedIndex = 0
+        bResetOptionsSubdialog = False
+        sdgPlots.EnableLayersTab()
     End Sub
 
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForGraphics.ControlContentsChanged, ucrSave.ControlContentsChanged

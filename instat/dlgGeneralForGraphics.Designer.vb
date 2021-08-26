@@ -19,7 +19,7 @@ Partial Class dlgGeneralForGraphics
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -36,19 +36,21 @@ Partial Class dlgGeneralForGraphics
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgGeneralForGraphics))
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblFillOrColor = New System.Windows.Forms.Label()
+        Me.cmdFacets = New System.Windows.Forms.Button()
+        Me.cmdTheme = New System.Windows.Forms.Button()
+        Me.ucrSave = New instat.ucrSave()
         Me.ucrVariablesAsFactorForGraphics = New instat.ucrVariablesAsFactor()
         Me.ucrFillOrColourReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
         Me.ucrGraphicsSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrAdditionalLayers = New instat.ucrAdditionalLayers()
         Me.ucrBase = New instat.ucrButtons()
-        Me.ucrSave = New instat.ucrSave()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -69,6 +71,25 @@ Partial Class dlgGeneralForGraphics
         resources.ApplyResources(Me.lblFillOrColor, "lblFillOrColor")
         Me.lblFillOrColor.Name = "lblFillOrColor"
         Me.lblFillOrColor.Tag = "Fill_Colour:"
+        '
+        'cmdFacets
+        '
+        resources.ApplyResources(Me.cmdFacets, "cmdFacets")
+        Me.cmdFacets.Name = "cmdFacets"
+        Me.cmdFacets.Tag = "Facets"
+        Me.cmdFacets.UseVisualStyleBackColor = True
+        '
+        'cmdTheme
+        '
+        resources.ApplyResources(Me.cmdTheme, "cmdTheme")
+        Me.cmdTheme.Name = "cmdTheme"
+        Me.cmdTheme.Tag = "Theme"
+        Me.cmdTheme.UseVisualStyleBackColor = True
+        '
+        'ucrSave
+        '
+        resources.ApplyResources(Me.ucrSave, "ucrSave")
+        Me.ucrSave.Name = "ucrSave"
         '
         'ucrVariablesAsFactorForGraphics
         '
@@ -116,15 +137,12 @@ Partial Class dlgGeneralForGraphics
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'ucrSave
-        '
-        resources.ApplyResources(Me.ucrSave, "ucrSave")
-        Me.ucrSave.Name = "ucrSave"
-        '
         'dlgGeneralForGraphics
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdTheme)
+        Me.Controls.Add(Me.cmdFacets)
         Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.lblFillOrColor)
         Me.Controls.Add(Me.lblXVariable)
@@ -155,4 +173,6 @@ Partial Class dlgGeneralForGraphics
     Friend WithEvents lblXVariable As Label
     Friend WithEvents lblFillOrColor As Label
     Friend WithEvents ucrSave As ucrSave
+    Friend WithEvents cmdTheme As Button
+    Friend WithEvents cmdFacets As Button
 End Class
