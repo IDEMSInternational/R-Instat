@@ -183,7 +183,7 @@ Public Class dlgFrequency
     End Sub
 
     Private Sub ucrCoreControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFactors.ControlContentsChanged,
-        ucrSaveTable.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged, ucrNudColumnFactors.ControlValueChanged
+        ucrSaveTable.ControlContentsChanged, ucrNudSigFigs.ControlContentsChanged, ucrNudColumnFactors.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
