@@ -707,9 +707,9 @@ Public Class ucrCalculator
 
     Private Sub cmdMiss_Click(sender As Object, e As EventArgs) Handles cmdMiss.Click
         If chkShowParameters.Checked Then
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(Is.na(x= ))", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(is.na(x= ))", 2)
         Else
-            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(Is.na())", 2)
+            ucrReceiverForCalculation.AddToReceiverAtCursorPosition("sum(is.na())", 2)
         End If
     End Sub
 
