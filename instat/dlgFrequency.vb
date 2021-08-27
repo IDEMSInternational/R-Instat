@@ -200,7 +200,6 @@ Public Class dlgFrequency
         Dim iNumberOfColumns As Integer
         clsMmtableOperator.ClearParameters()
 
-
         iNumberOfColumns = ucrNudColumnFactors.GetText()
         For Each strcolumn As String In ucrReceiverFactors.GetVariableNamesAsList
             If (iColumn) <= iNumberOfColumns Then
