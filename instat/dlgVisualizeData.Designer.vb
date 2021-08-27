@@ -126,7 +126,7 @@ Partial Class dlgVisualizeData
         'lblMillionDataPoints
         '
         Me.lblMillionDataPoints.AutoSize = True
-        Me.lblMillionDataPoints.Location = New System.Drawing.Point(165, 296)
+        Me.lblMillionDataPoints.Location = New System.Drawing.Point(162, 296)
         Me.lblMillionDataPoints.Name = "lblMillionDataPoints"
         Me.lblMillionDataPoints.Size = New System.Drawing.Size(94, 13)
         Me.lblMillionDataPoints.TabIndex = 16
@@ -144,7 +144,7 @@ Partial Class dlgVisualizeData
         'lblSampling
         '
         Me.lblSampling.AutoSize = True
-        Me.lblSampling.Location = New System.Drawing.Point(188, 242)
+        Me.lblSampling.Location = New System.Drawing.Point(191, 244)
         Me.lblSampling.Name = "lblSampling"
         Me.lblSampling.Size = New System.Drawing.Size(94, 13)
         Me.lblSampling.TabIndex = 9
@@ -174,7 +174,7 @@ Partial Class dlgVisualizeData
         '
         Me.ucrNudSamplingFunction.DecimalPlaces = New Decimal(New Integer() {1, 0, 0, 0})
         Me.ucrNudSamplingFunction.Increment = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudSamplingFunction.Location = New System.Drawing.Point(338, 238)
+        Me.ucrNudSamplingFunction.Location = New System.Drawing.Point(330, 242)
         Me.ucrNudSamplingFunction.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudSamplingFunction.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudSamplingFunction.Name = "ucrNudSamplingFunction"
@@ -243,7 +243,7 @@ Partial Class dlgVisualizeData
         Me.ucrSaveGraph.Location = New System.Drawing.Point(10, 353)
         Me.ucrSaveGraph.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        Me.ucrSaveGraph.Size = New System.Drawing.Size(338, 24)
+        Me.ucrSaveGraph.Size = New System.Drawing.Size(319, 24)
         Me.ucrSaveGraph.TabIndex = 17
         '
         'ucrSelectorVisualizeData
