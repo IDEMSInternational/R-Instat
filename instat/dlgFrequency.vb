@@ -202,7 +202,7 @@ Public Class dlgFrequency
 
         iNumberOfColumns = ucrNudColumnFactors.GetText()
         For Each strcolumn As String In ucrReceiverFactors.GetVariableNamesAsList
-            If (iColumn) <= iNumberOfColumns Then
+            If iColumn <= iNumberOfColumns Then
                 Dim clsHeaderLeftFunction As New RFunction
                 clsHeaderLeftFunction.SetPackageName("mmtable2")
                 clsHeaderLeftFunction.SetRCommand("header_top_left")
