@@ -208,7 +208,7 @@ Public Class dlgFrequency
                     clsHeaderTopFunction.AddParameter("variable", strcolumn, iPosition:=0)
                     clsMmtableOperator.AddParameter(strcolumn, clsRFunctionParameter:=clsHeaderTopFunction, iPosition:=iColumn)
                 End If
-                iColumn = iColumn + 1
+                iColumn += 1
             Next
             clsFrequencyOperator.AddParameter("columnOp", clsROperatorParameter:=clsMmtableOperator, iPosition:=1)
         End If
