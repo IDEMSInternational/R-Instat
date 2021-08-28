@@ -269,7 +269,6 @@ Partial Class dlgBoxplot
         Me.Controls.Add(Me.rdoJitter)
         Me.Controls.Add(Me.rdoBoxplotTufte)
         Me.Controls.Add(Me.ucrVariablesAsFactorForBoxplot)
-        Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
         Me.Controls.Add(Me.ucrSelectorBoxPlot)
         Me.Controls.Add(Me.lblBySecondFactor)
@@ -278,6 +277,7 @@ Partial Class dlgBoxplot
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlPlots)
+        Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Cursor = System.Windows.Forms.Cursors.Default
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False

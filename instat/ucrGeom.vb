@@ -1756,10 +1756,10 @@ Public Class ucrGeom
 
 
         clsgeom_smooth.strGeomName = "geom_smooth"
-        ' mandatory
+        'Mandatory Aesthetics 
         clsgeom_smooth.AddAesParameter("x", bIsMandatory:=True)
         clsgeom_smooth.AddAesParameter("y", bIsMandatory:=True)
-        ' optional 
+        'Optional Aesthetics 
         clsgeom_smooth.AddAesParameter("alpha")
         clsgeom_smooth.AddAesParameter("colour")
         clsgeom_smooth.AddAesParameter("fill")
@@ -1768,24 +1768,28 @@ Public Class ucrGeom
         clsgeom_smooth.AddAesParameter("size")
         clsgeom_smooth.AddAesParameter("weight")
 
-        'add  layer parameter
+        'Add  layer parameters
         ''****Not sure how many positions exist for geom_smooth
         clsgeom_smooth.AddLayerParameter("position", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "jitter" & Chr(34)})
         'Can we have  stack, DoDragDrop, fill positions here)
         clsgeom_smooth.AddLayerParameter("method", "list", Chr(34) & "lm" & Chr(34), lstParameterStrings:={Chr(34) & "lm" & Chr(34), Chr(34) & "glm" & Chr(34), Chr(34) & "gam" & Chr(34), Chr(34) & "loess" & Chr(34), Chr(34) & "rlm" & Chr(34)})
         'formula has to be an input and we dont have that currently. its passed in like this formula= y ~ x or  formula= y ~ poly(x, 2) or formula= y ~ log(x) so the user has to type in stuff
-        clsgeom_smooth.AddLayerParameter("formula", "editablelist", Chr(34) & "y ~ x" & Chr(34), lstParameterStrings:={Chr(34) & "y ~ x" & Chr(34), Chr(34) & "y ~ poly(x, 2)" & Chr(34), Chr(34) & "y ~ log(x)" & Chr(34), Chr(34) & " y ~ splines::bs(x,3)" & Chr(34)})
-        clsgeom_smooth.AddLayerParameter("se", "boolean", "TRUE")
+        clsgeom_smooth.AddLayerParameter("formula", "editablelist", "y ~ x", lstParameterStrings:={"y ~ x", "y ~ poly(x, 2)", "y ~ log(x)", "y ~ splines::bs(x,3)"})
+        clsgeom_smooth.AddLayerParameter("se ", "list", "TRUE", lstParameterStrings:={"TRUE", "FALSE"}) 'We add space after parameter name se ("se ") for correct labeling, if the space is omitted, vb labels "se" as "ifelse" but when the space is included "se " is correctly labelled as "se". 
+        clsgeom_smooth.AddLayerParameter("method.args", "editablelist", "list()", lstParameterStrings:={"list()"})
         clsgeom_smooth.AddLayerParameter("colour", "colour", Chr(34) & "black" & Chr(34))
         clsgeom_smooth.AddLayerParameter("na.rm", "boolean", "FALSE")
+        clsgeom_smooth.AddLayerParameter("orientation", "list", "NA", lstParameterStrings:={"NA", Chr(34) & "x" & Chr(34), Chr(34) & "y" & Chr(34)})
         clsgeom_smooth.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
         'geom and stat are missing here as we dont know how to override the default connection between geom_smooth and stat_smooth
         'you can have stat_smooth or geom_smooth. I am not sure how we can do that from here, changing the smothing function
 
         clsgeom_smooth.AddLayerParameter("n", "numeric", "0")
-        clsgeom_smooth.AddLayerParameter("span", "numeric", "0", lstParameterStrings:={1, 0, 1})
+        clsgeom_smooth.AddLayerParameter("span", "numeric", "0.3", lstParameterStrings:={2, 0, 1})
         clsgeom_smooth.AddLayerParameter("fullrange", "boolean", "FALSE")
         clsgeom_smooth.AddLayerParameter("level", "numeric", "0.95", lstParameterStrings:={2, 0, 1})
+        clsgeom_smooth.AddLayerParameter("size", "numeric", "0.5", lstParameterStrings:={1, 0}) 'Note: negative size gives size 0 in general, but 'Warning: sometimesgive errors...
+        clsgeom_smooth.AddLayerParameter("linetype", "list", Chr(34) & "blank" & Chr(34), lstParameterStrings:=strLineType)
 
         'method.args is a list of methods passed into the moddeling function
         'its passed in like this** method.args = list(family = "binomial") we currently dont have this too. 
@@ -1856,7 +1860,7 @@ Public Class ucrGeom
         clsgeom_text.AddLayerParameter("parse", "boolean", "FALSE") 'If TRUE, the labels will be parsed into expressions and displayed as described in ?plotmath
         'Global Layer parameters
         clsgeom_text.AddLayerParameter("show.legend", "list", "TRUE", lstParameterStrings:={"NA", "TRUE", "FALSE"})
-        clsgeom_text.AddLayerParameter("position", "editablelist", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "stack" & Chr(34), "position_dodge(width = 0.9)", Chr(34) & "dodge2" & Chr(34), Chr(34) & "jitter" & Chr(34), Chr(34) & "fill" & Chr(34)}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
+        clsgeom_text.AddLayerParameter("position", "editablelist", "position_identity()", lstParameterStrings:={"position_identity()", "position_stack(vjust = 0.9)", "position_stack(vjust = 0.5, reverse = TRUE)", "position_dodge(width = 0.9)", "position_jitter(width = 0.9)", "position_fill(vjust = 0.9)"}) 'Warning/Task: really need to specify values for width in position_dodge, as "dodge" doesn't have default values for this geom (sends a warning). This is necessary if you want to get the labels on top of dodged bars for instance... For the moment added position_jitterdodge() that works fine.
         'Warning: cannot use both position and nudge_x;nudge_y !!! Doesn't crash the software...
         clsgeom_text.AddLayerParameter("stat", "list", Chr(34) & "identity" & Chr(34), lstParameterStrings:={Chr(34) & "identity" & Chr(34), Chr(34) & "bin" & Chr(34), Chr(34) & "count" & Chr(34), Chr(34) & "density" & Chr(34), Chr(34) & "sum" & Chr(34), Chr(34) & "unique" & Chr(34)}) 'Warning: stat count cannot be used with y aesthetic !!! 'Warning: summary and ecdf is source of errors.
         'Aesthetics as layer parameters.
