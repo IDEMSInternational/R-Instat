@@ -15,9 +15,12 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
+Imports unvell.ReoGrid
 Imports unvell.ReoGrid.Events
 
 Public Class ucrDataFrameMetadata
+    Private _clsDataBook As clsDataBook
+
     Public WithEvents grdCurrSheet As unvell.ReoGrid.Worksheet
     Public strPreviousCellText As String
     Private lstNonEditableColumns As New List(Of String)
@@ -40,6 +43,75 @@ Public Class ucrDataFrameMetadata
         grdMetaData.SetSettings(unvell.ReoGrid.WorkbookSettings.View_ShowHorScroll, True)
         grdMetaData.SheetTabNewButtonVisible = False
     End Sub
+
+    ''' <summary>
+    ''' Sets the databook to be used throughout the form
+    ''' </summary>
+    Public Sub SetDataBook(clsDataBook As clsDataBook)
+        _clsDataBook = clsDataBook
+    End Sub
+
+    Private Sub StartWait()
+        Cursor = Cursors.WaitCursor
+        grdMetaData.Enabled = False
+    End Sub
+    Private Sub EndWait()
+        grdMetaData.Enabled = True
+        Cursor = Cursors.Default
+    End Sub
+
+    Private Sub RefreshWorksheet()
+        AddColumns()
+        AddRowData()
+        UpdateWorksheetStyle(grdCurrSheet)
+    End Sub
+
+    Private Sub AddColumns()
+        Dim workSheetColumnHeader As ColumnHeader
+        grdCurrSheet.Columns = _clsDataBook.clsDataFrameMetaData.ColumnCount
+        For i = 0 To _clsDataBook.clsDataFrameMetaData.ColumnCount - 1
+            workSheetColumnHeader = grdCurrSheet.ColumnHeaders(i)
+            workSheetColumnHeader.Text = _clsDataBook.clsDataFrameMetaData.ColumnName(i)
+        Next
+    End Sub
+
+    Private Sub AddRowData()
+        Dim rngDataRange As RangePosition
+
+        grdCurrSheet.Rows = _clsDataBook.clsDataFrameMetaData.RowCount
+        rngDataRange = New RangePosition(0, 0, grdCurrSheet.Rows, grdCurrSheet.Columns)
+        grdCurrSheet.SetRangeDataFormat(rngDataRange, DataFormat.CellDataFormatFlag.Text)
+
+        For i = 0 To _clsDataBook.clsDataFrameMetaData.RowCount - 1
+            For j = 0 To grdCurrSheet.Columns - 1
+                grdCurrSheet(row:=i, col:=j) = _clsDataBook.clsDataFrameMetaData.Data(i, j)
+            Next
+            grdCurrSheet.RowHeaders.Item(i).Text = _clsDataBook.clsDataFrameMetaData.RowName(i)
+        Next
+    End Sub
+
+    Public Sub RefreshGridData()
+        If _clsDataBook?.clsDataFrameMetaData IsNot Nothing Then
+            RefreshWorksheet()
+        End If
+    End Sub
+
+    Public Sub UpdateAllWorksheetStyles()
+        UpdateWorksheetStyle(grdCurrSheet)
+    End Sub
+
+    Private Sub UpdateWorksheetStyle(fillWorkSheet As Worksheet)
+        'This should be changed to make sure that InstatOptions is created before any grids
+        If frmMain.clsInstatOptions IsNot Nothing Then
+            fillWorkSheet.SetRangeStyles(RangePosition.EntireRange, New WorksheetRangeStyle() With {
+                                .Flag = PlainStyleFlag.TextColor Or PlainStyleFlag.FontSize Or PlainStyleFlag.FontName,
+                                .TextColor = frmMain.clsInstatOptions.clrEditor,
+                                .FontSize = frmMain.clsInstatOptions.fntEditor.Size,
+                                .FontName = frmMain.clsInstatOptions.fntEditor.Name
+                                })
+        End If
+    End Sub
+
 
     Private Sub grdMetaData_CurrentWorksheetChanged(sender As Object, e As EventArgs) Handles grdMetaData.CurrentWorksheetChanged, Me.Load, grdMetaData.WorksheetInserted
         grdCurrSheet = grdMetaData.CurrentWorksheet
@@ -139,36 +211,6 @@ Public Class ucrDataFrameMetadata
     Public Sub CopyRange()
         Try
             grdMetaData.CurrentWorksheet.Copy()
-
-            Dim clsCopyValues As New RFunction
-            Dim strAllContent As String = ""
-            Dim iEndRow As Integer = grdMetaData.CurrentWorksheet.SelectionRange.EndRow
-            Dim iEndCol As Integer = grdMetaData.CurrentWorksheet.SelectionRange.EndCol
-            Dim iStartCol As Integer = grdMetaData.CurrentWorksheet.SelectionRange.Col
-
-            'construct the copied range data
-            For iRowIndex As Integer = grdMetaData.CurrentWorksheet.SelectionRange.Row To iEndRow
-                Dim strRowContent As String = ""
-                For iColIndex As Integer = iStartCol To iEndCol
-                    Dim strCellContent As String = grdMetaData.CurrentWorksheet.GetCell(row:=iRowIndex, col:=iColIndex).DisplayText
-                    If strCellContent = "NA" Then
-                        strCellContent = ""
-                    End If
-                    If iColIndex = iStartCol Then
-                        strRowContent = strCellContent
-                    Else
-                        strRowContent &= vbTab & strCellContent
-                    End If
-                Next
-                strAllContent &= strRowContent
-                If iRowIndex < iEndRow Then
-                    strAllContent &= Environment.NewLine
-                End If
-            Next
-
-            clsCopyValues.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_to_clipboard")
-            clsCopyValues.AddParameter("content", Chr(34) & strAllContent & Chr(34), iPosition:=0)
-            RunScriptFromDataFrameMetadata(clsCopyValues.ToScript(), strComment:="Copy data frame metadata values to clipboard")
         Catch
             MessageBox.Show("Cannot copy the current selection.")
         End Try

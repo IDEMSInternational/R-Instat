@@ -184,11 +184,17 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="clsBlockReader.vb" />
+    <Compile Include="Model\DataFrame\clsColumnMetaData.vb" />
     <Compile Include="clsCompareTwoOptionsLines.vb" />
     <Compile Include="clsCompareTwoOptionsPoints.vb" />
     <Compile Include="clsCondition.vb" />
     <Compile Include="clsCustomColourTable.vb" />
     <Compile Include="clsCustomRenderer.vb" />
+    <Compile Include="Model\DataFrame\clsDataBook.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrame.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrameFilter.vb" />
+    <Compile Include="Model\DataFrame\clsDataFrameMetaData.vb" />
+    <Compile Include="Model\DataFrame\clsDataFramePage.vb" />
     <Compile Include="clsGgplotDefaults.vb" />
     <Compile Include="clsGridROperations.vb" />
     <Compile Include="clsInstatOptionsDefaults.vb" />
@@ -399,11 +405,13 @@
     <Compile Include="frmConvertToNumeric.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Model\RCommand\clsPrepareFunctionsForGrids.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Record\clsColumnHeaderDisplay.vb" />
     <Compile Include="sdgClimaticDataEntry.Designer.vb">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
     </Compile>

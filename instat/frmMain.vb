@@ -38,6 +38,7 @@ Public Class frmMain
     Private ctrActive As Control
     Private WithEvents timer As New System.Windows.Forms.Timer
     Private iAutoSaveDataMilliseconds As Integer
+    Private clsDataBook As clsDataBook
 
     Public strAutoSaveDataFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_data_auto_save")
     Public strAutoSaveLogFolderPath As String = Path.Combine(Path.GetTempPath, "R-Instat_log_auto_save")
@@ -96,9 +97,11 @@ Public Class frmMain
 
         ucrDataViewer.StartupMenuItemsVisibility(False)
         InitialiseOutputWindow()
-        clsGrids.SetDataViewer(ucrDataViewer)
-        clsGrids.SetMetadata(ucrDataFrameMeta.grdMetaData)
-        clsGrids.SetVariablesMetadata(ucrColumnMeta.grdVariables)
+        clsDataBook = New clsDataBook(clsRLink)
+
+        ucrDataViewer.SetDataBook(clsDataBook)
+        ucrColumnMeta.SetDataBook(clsDataBook)
+        ucrDataFrameMeta.SetDataBook(clsDataBook)
 
         clsRLink.SetLog(ucrLogWindow.txtLog)
 
@@ -177,6 +180,18 @@ Public Class frmMain
         End If
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
+    End Sub
+
+    Public Sub UpdateAllGrids()
+        ucrDataViewer.RefreshGridData()
+        ucrColumnMeta.RefreshGridData()
+        ucrDataFrameMeta.RefreshGridData()
+    End Sub
+
+    Public Sub UpdateFontsOnlyOnAllGrids()
+        ucrDataViewer.UpdateAllWorksheetStyles()
+        ucrColumnMeta.UpdateAllWorksheetStyles()
+        ucrDataFrameMeta.UpdateAllWorksheetStyles()
     End Sub
 
     ' TODO This is used instead of autoTranslate so that split container isn't shifted
