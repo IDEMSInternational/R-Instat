@@ -145,7 +145,7 @@
     <value>1</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 281</value>
+    <value>9, 279</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
     <value>410, 52</value>
@@ -169,7 +169,7 @@
     <value>3, 14</value>
   </data>
   <data name="ucrPnlOverallOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>273, 166</value>
+    <value>352, 166</value>
   </data>
   <data name="ucrPnlOverallOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -193,16 +193,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>522, 336</value>
-  </data>
-  <data name="ucrChkAsNumeric.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 213</value>
-  </data>
-  <data name="ucrChkAsNumeric.Size" type="System.Drawing.Size, System.Drawing">
-    <value>188, 20</value>
-  </data>
-  <data name="ucrChkAsNumeric.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
+    <value>601, 336</value>
   </data>
   <data name="&gt;&gt;ucrChkAsNumeric.Name" xml:space="preserve">
     <value>ucrChkAsNumeric</value>
@@ -215,6 +206,258 @@
   </data>
   <data name="&gt;&gt;ucrChkAsNumeric.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="&gt;&gt;rdoSortDescending.Name" xml:space="preserve">
+    <value>rdoSortDescending</value>
+  </data>
+  <data name="&gt;&gt;rdoSortDescending.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSortDescending.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;rdoSortDescending.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;rdoSortAscending.Name" xml:space="preserve">
+    <value>rdoSortAscending</value>
+  </data>
+  <data name="&gt;&gt;rdoSortAscending.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSortAscending.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;rdoSortAscending.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlSortOptions.Name" xml:space="preserve">
+    <value>ucrPnlSortOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlSortOptions.Type" xml:space="preserve">
+    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlSortOptions.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;ucrPnlSortOptions.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrNewColumnName.Name" xml:space="preserve">
+    <value>ucrNewColumnName</value>
+  </data>
+  <data name="&gt;&gt;ucrNewColumnName.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNewColumnName.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;ucrNewColumnName.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;rdoSortbyRowNames.Name" xml:space="preserve">
+    <value>rdoSortbyRowNames</value>
+  </data>
+  <data name="&gt;&gt;rdoSortbyRowNames.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSortbyRowNames.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;rdoSortbyRowNames.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;rdoResetintoPositiveIntegers.Name" xml:space="preserve">
+    <value>rdoResetintoPositiveIntegers</value>
+  </data>
+  <data name="&gt;&gt;rdoResetintoPositiveIntegers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoResetintoPositiveIntegers.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;rdoResetintoPositiveIntegers.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="&gt;&gt;rdoSetRowNamesFromColumn.Name" xml:space="preserve">
+    <value>rdoSetRowNamesFromColumn</value>
+  </data>
+  <data name="&gt;&gt;rdoSetRowNamesFromColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSetRowNamesFromColumn.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;rdoSetRowNamesFromColumn.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="&gt;&gt;rdoCopyRowNamesIntoFirstColumn.Name" xml:space="preserve">
+    <value>rdoCopyRowNamesIntoFirstColumn</value>
+  </data>
+  <data name="&gt;&gt;rdoCopyRowNamesIntoFirstColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCopyRowNamesIntoFirstColumn.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;rdoCopyRowNamesIntoFirstColumn.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="grpboxOptionsforRowNamesorNumbercols.Location" type="System.Drawing.Point, System.Drawing">
+    <value>228, 34</value>
+  </data>
+  <data name="grpboxOptionsforRowNamesorNumbercols.Size" type="System.Drawing.Size, System.Drawing">
+    <value>361, 241</value>
+  </data>
+  <data name="grpboxOptionsforRowNamesorNumbercols.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="grpboxOptionsforRowNamesorNumbercols.Text" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="&gt;&gt;grpboxOptionsforRowNamesorNumbercols.Name" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;grpboxOptionsforRowNamesorNumbercols.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpboxOptionsforRowNamesorNumbercols.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;grpboxOptionsforRowNamesorNumbercols.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Row Names Or Numbers</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>dlgRowNamesOrNumbers</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ucrReceiverRowNames.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 92</value>
+  </data>
+  <data name="ucrReceiverRowNames.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrReceiverRowNames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>120, 20</value>
+  </data>
+  <data name="ucrReceiverRowNames.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverRowNames.Name" xml:space="preserve">
+    <value>ucrReceiverRowNames</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverRowNames.Type" xml:space="preserve">
+    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverRowNames.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;ucrReceiverRowNames.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="rdoCopyRowNamesIntoFirstColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 19</value>
+  </data>
+  <data name="rdoCopyRowNamesIntoFirstColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>267, 17</value>
+  </data>
+  <data name="rdoCopyRowNamesIntoFirstColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="rdoCopyRowNamesIntoFirstColumn.Text" xml:space="preserve">
+    <value>Copy Row Names into Column</value>
+  </data>
+  <data name="&gt;&gt;rdoCopyRowNamesIntoFirstColumn.Name" xml:space="preserve">
+    <value>rdoCopyRowNamesIntoFirstColumn</value>
+  </data>
+  <data name="&gt;&gt;rdoCopyRowNamesIntoFirstColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoCopyRowNamesIntoFirstColumn.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;rdoCopyRowNamesIntoFirstColumn.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="rdoSetRowNamesFromColumn.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 72</value>
+  </data>
+  <data name="rdoSetRowNamesFromColumn.Size" type="System.Drawing.Size, System.Drawing">
+    <value>267, 17</value>
+  </data>
+  <data name="rdoSetRowNamesFromColumn.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="rdoSetRowNamesFromColumn.Text" xml:space="preserve">
+    <value>Set Row Names from Column</value>
+  </data>
+  <data name="&gt;&gt;rdoSetRowNamesFromColumn.Name" xml:space="preserve">
+    <value>rdoSetRowNamesFromColumn</value>
+  </data>
+  <data name="&gt;&gt;rdoSetRowNamesFromColumn.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSetRowNamesFromColumn.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;rdoSetRowNamesFromColumn.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="rdoResetintoPositiveIntegers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 127</value>
+  </data>
+  <data name="rdoResetintoPositiveIntegers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>267, 17</value>
+  </data>
+  <data name="rdoResetintoPositiveIntegers.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="rdoResetintoPositiveIntegers.Text" xml:space="preserve">
+    <value>Reset Row Names to Positive Integers</value>
+  </data>
+  <data name="&gt;&gt;rdoResetintoPositiveIntegers.Name" xml:space="preserve">
+    <value>rdoResetintoPositiveIntegers</value>
+  </data>
+  <data name="&gt;&gt;rdoResetintoPositiveIntegers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoResetintoPositiveIntegers.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;rdoResetintoPositiveIntegers.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="rdoSortbyRowNames.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 156</value>
+  </data>
+  <data name="rdoSortbyRowNames.Size" type="System.Drawing.Size, System.Drawing">
+    <value>267, 17</value>
+  </data>
+  <data name="rdoSortbyRowNames.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="rdoSortbyRowNames.Text" xml:space="preserve">
+    <value>Sort by Row Names</value>
+  </data>
+  <data name="&gt;&gt;rdoSortbyRowNames.Name" xml:space="preserve">
+    <value>rdoSortbyRowNames</value>
+  </data>
+  <data name="&gt;&gt;rdoSortbyRowNames.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;rdoSortbyRowNames.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;rdoSortbyRowNames.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="rdoSortDescending.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -270,6 +513,51 @@
   <data name="&gt;&gt;rdoSortAscending.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrNewColumnName.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 44</value>
+  </data>
+  <data name="ucrNewColumnName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrNewColumnName.Size" type="System.Drawing.Size, System.Drawing">
+    <value>343, 21</value>
+  </data>
+  <data name="ucrNewColumnName.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrNewColumnName.Name" xml:space="preserve">
+    <value>ucrNewColumnName</value>
+  </data>
+  <data name="&gt;&gt;ucrNewColumnName.Type" xml:space="preserve">
+    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNewColumnName.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;ucrNewColumnName.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrChkAsNumeric.Location" type="System.Drawing.Point, System.Drawing">
+    <value>24, 213</value>
+  </data>
+  <data name="ucrChkAsNumeric.Size" type="System.Drawing.Size, System.Drawing">
+    <value>188, 20</value>
+  </data>
+  <data name="ucrChkAsNumeric.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAsNumeric.Name" xml:space="preserve">
+    <value>ucrChkAsNumeric</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAsNumeric.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAsNumeric.Parent" xml:space="preserve">
+    <value>grpboxOptionsforRowNamesorNumbercols</value>
+  </data>
+  <data name="&gt;&gt;ucrChkAsNumeric.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrPnlSortOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 171</value>
   </data>
@@ -290,185 +578,5 @@
   </data>
   <data name="&gt;&gt;ucrPnlSortOptions.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="ucrNewColumnName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 42</value>
-  </data>
-  <data name="ucrNewColumnName.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>4, 5, 4, 5</value>
-  </data>
-  <data name="ucrNewColumnName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>206, 21</value>
-  </data>
-  <data name="ucrNewColumnName.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="&gt;&gt;ucrNewColumnName.Name" xml:space="preserve">
-    <value>ucrNewColumnName</value>
-  </data>
-  <data name="&gt;&gt;ucrNewColumnName.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNewColumnName.Parent" xml:space="preserve">
-    <value>grpboxOptionsforRowNamesorNumbercols</value>
-  </data>
-  <data name="&gt;&gt;ucrNewColumnName.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="rdoSortbyRowNames.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 156</value>
-  </data>
-  <data name="rdoSortbyRowNames.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 17</value>
-  </data>
-  <data name="rdoSortbyRowNames.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="rdoSortbyRowNames.Text" xml:space="preserve">
-    <value>Sort by Row Names</value>
-  </data>
-  <data name="&gt;&gt;rdoSortbyRowNames.Name" xml:space="preserve">
-    <value>rdoSortbyRowNames</value>
-  </data>
-  <data name="&gt;&gt;rdoSortbyRowNames.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoSortbyRowNames.Parent" xml:space="preserve">
-    <value>grpboxOptionsforRowNamesorNumbercols</value>
-  </data>
-  <data name="&gt;&gt;rdoSortbyRowNames.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="rdoResetintoPositiveIntegers.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 127</value>
-  </data>
-  <data name="rdoResetintoPositiveIntegers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 17</value>
-  </data>
-  <data name="rdoResetintoPositiveIntegers.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="rdoResetintoPositiveIntegers.Text" xml:space="preserve">
-    <value>Reset Row Names to Positive Integers</value>
-  </data>
-  <data name="&gt;&gt;rdoResetintoPositiveIntegers.Name" xml:space="preserve">
-    <value>rdoResetintoPositiveIntegers</value>
-  </data>
-  <data name="&gt;&gt;rdoResetintoPositiveIntegers.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoResetintoPositiveIntegers.Parent" xml:space="preserve">
-    <value>grpboxOptionsforRowNamesorNumbercols</value>
-  </data>
-  <data name="&gt;&gt;rdoResetintoPositiveIntegers.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="rdoSetRowNamesFromColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 72</value>
-  </data>
-  <data name="rdoSetRowNamesFromColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 17</value>
-  </data>
-  <data name="rdoSetRowNamesFromColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="rdoSetRowNamesFromColumn.Text" xml:space="preserve">
-    <value>Set Row Names from Column</value>
-  </data>
-  <data name="&gt;&gt;rdoSetRowNamesFromColumn.Name" xml:space="preserve">
-    <value>rdoSetRowNamesFromColumn</value>
-  </data>
-  <data name="&gt;&gt;rdoSetRowNamesFromColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoSetRowNamesFromColumn.Parent" xml:space="preserve">
-    <value>grpboxOptionsforRowNamesorNumbercols</value>
-  </data>
-  <data name="&gt;&gt;rdoSetRowNamesFromColumn.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="rdoCopyRowNamesIntoFirstColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 19</value>
-  </data>
-  <data name="rdoCopyRowNamesIntoFirstColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>267, 17</value>
-  </data>
-  <data name="rdoCopyRowNamesIntoFirstColumn.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="rdoCopyRowNamesIntoFirstColumn.Text" xml:space="preserve">
-    <value>Copy Row Names into Column</value>
-  </data>
-  <data name="&gt;&gt;rdoCopyRowNamesIntoFirstColumn.Name" xml:space="preserve">
-    <value>rdoCopyRowNamesIntoFirstColumn</value>
-  </data>
-  <data name="&gt;&gt;rdoCopyRowNamesIntoFirstColumn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;rdoCopyRowNamesIntoFirstColumn.Parent" xml:space="preserve">
-    <value>grpboxOptionsforRowNamesorNumbercols</value>
-  </data>
-  <data name="&gt;&gt;rdoCopyRowNamesIntoFirstColumn.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="grpboxOptionsforRowNamesorNumbercols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>228, 34</value>
-  </data>
-  <data name="grpboxOptionsforRowNamesorNumbercols.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 241</value>
-  </data>
-  <data name="grpboxOptionsforRowNamesorNumbercols.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="grpboxOptionsforRowNamesorNumbercols.Text" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="&gt;&gt;grpboxOptionsforRowNamesorNumbercols.Name" xml:space="preserve">
-    <value>grpboxOptionsforRowNamesorNumbercols</value>
-  </data>
-  <data name="&gt;&gt;grpboxOptionsforRowNamesorNumbercols.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpboxOptionsforRowNamesorNumbercols.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;grpboxOptionsforRowNamesorNumbercols.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
-    <value>CenterScreen</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Row Names Or Numbers</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>dlgRowNamesOrNumbers</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ucrReceiverRowNames.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 92</value>
-  </data>
-  <data name="ucrReceiverRowNames.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrReceiverRowNames.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
-  </data>
-  <data name="ucrReceiverRowNames.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverRowNames.Name" xml:space="preserve">
-    <value>ucrReceiverRowNames</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverRowNames.Type" xml:space="preserve">
-    <value>instat.ucrReceiverSingle, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverRowNames.Parent" xml:space="preserve">
-    <value>grpboxOptionsforRowNamesorNumbercols</value>
-  </data>
-  <data name="&gt;&gt;ucrReceiverRowNames.ZOrder" xml:space="preserve">
-    <value>9</value>
   </data>
 </root>

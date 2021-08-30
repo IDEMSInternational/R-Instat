@@ -376,7 +376,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewDataFrameName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>264, 24</value>
+    <value>315, 24</value>
   </data>
   <data name="ucrNewDataFrameName.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
