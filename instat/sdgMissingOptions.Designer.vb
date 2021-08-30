@@ -145,7 +145,7 @@ Partial Class sdgMissingOptions
         Me.MinimizeBox = False
         Me.Name = "sdgMissingOptions"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Missing Options"
+        Me.Text = "Options for Missing Values"
         Me.ResumeLayout(False)
 
     End Sub

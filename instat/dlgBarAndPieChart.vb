@@ -56,6 +56,9 @@ Public Class dlgBarAndPieChart
     Private clsYScaleDateFunction As New RFunction
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
+    Private clsGeomTextFunction As New RFunction
+    Private clsLabelAesFunction As New RFunction
+    Private clsAnnotateFunction As New RFunction
 
     Private Sub dlgBarAndPieChart_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -77,6 +80,9 @@ Public Class dlgBarAndPieChart
         Dim clsRCoordPolarFunction As New RFunction
         Dim dctPositionPairs As New Dictionary(Of String, String)
         Dim dctStatOptions As New Dictionary(Of String, String)
+        Dim dctLabelColours As New Dictionary(Of String, String)
+        Dim dctLabelPositions As New Dictionary(Of String, String)
+        Dim dctLabelSizes As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -121,7 +127,6 @@ Public Class dlgBarAndPieChart
         ucrSaveBar.SetPrefix("bar")
         ucrSaveBar.SetAssignToIfUncheckedValue("last_graph")
 
-
         clsCoordFlipFunc.SetPackageName("ggplot2")
         clsCoordFlipFunc.SetRCommand("coord_flip")
         clsCoordFlipParam.SetArgumentName("coord_flip")
@@ -144,16 +149,42 @@ Public Class dlgBarAndPieChart
         ucrPnlPolar.AddRadioButton(rdoDonut)
 
         ucrInputBarChartPositions.SetParameter(New RParameter("position", 0))
-        dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
         dctPositionPairs.Add("Dodge", Chr(34) & "dodge" & Chr(34))
+        dctPositionPairs.Add("Fill", Chr(34) & "fill" & Chr(34))
+        dctPositionPairs.Add("Stack", Chr(34) & "stack" & Chr(34))
         dctPositionPairs.Add("Identity", Chr(34) & "identity" & Chr(34))
         dctPositionPairs.Add("Jitter", Chr(34) & "jitter" & Chr(34))
-        dctPositionPairs.Add("Fill", Chr(34) & "fill" & Chr(34))
         dctPositionPairs.Add("Stack in reverse", "position_stack(reverse = TRUE)")
         ucrInputBarChartPositions.SetItems(dctPositionPairs)
         ucrInputBarChartPositions.SetDropDownStyleAsNonEditable()
         ucrInputBarChartPositions.SetRDefault(Chr(34) & "stack" & Chr(34))
 
+        ucrInputLabelColour.SetParameter(New RParameter("colour", 4))
+        dctLabelColours.Add("Black", Chr(34) & "black" & Chr(34))
+        dctLabelColours.Add("White", Chr(34) & "white" & Chr(34))
+        ucrInputLabelColour.SetItems(dctLabelColours)
+        ucrInputLabelColour.bAllowNonConditionValues = True
+
+        ucrInputLabelPosition.SetParameter(New RParameter("vjust", 2))
+        dctLabelPositions.Add("Out", "-0.25")
+        dctLabelPositions.Add("In", "5")
+        ucrInputLabelPosition.SetItems(dctLabelPositions)
+        ucrInputLabelPosition.SetDropDownStyleAsNonEditable()
+
+        ucrInputLabelSize.SetParameter(New RParameter("size", 5))
+        dctLabelSizes.Add("Default", "4")
+        dctLabelSizes.Add("Small", "3")
+        dctLabelSizes.Add("Big", "7")
+        ucrInputLabelSize.SetItems(dctLabelSizes)
+        ucrInputLabelSize.SetDropDownStyleAsNonEditable()
+
+        ucrChkAddLabels.SetText("Add Labels")
+        ucrChkAddLabels.AddParameterPresentCondition(True, "geom_text")
+        ucrChkAddLabels.AddParameterPresentCondition(False, "geom_text", False)
+        ucrChkAddLabels.AddToLinkedControls({ucrInputLabelPosition, ucrInputLabelSize, ucrInputLabelColour}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrInputLabelColour.SetLinkedDisplayControl(lblLabelColour)
+        ucrInputLabelPosition.SetLinkedDisplayControl(lblLabelPosition)
+        ucrInputLabelSize.SetLinkedDisplayControl(lblLabelSize)
     End Sub
 
     Private Sub SetDefaults()
@@ -176,6 +207,8 @@ Public Class dlgBarAndPieChart
         clsPolarCoordFunction = New RFunction
         clsScaleXdiscretFunction = New RFunction
         clsExpansionFunction = New RFunction
+        clsGeomTextFunction = New RFunction
+        clsLabelAesFunction = New RFunction
 
         ucrBarChartSelector.Reset()
         ucrBarChartSelector.SetGgplotFunction(clsBaseOperator)
@@ -202,7 +235,7 @@ Public Class dlgBarAndPieChart
 
         clsRgeomBarFunction.SetPackageName("ggplot2")
         clsRgeomBarFunction.SetRCommand("geom_bar")
-        clsRgeomBarFunction.AddParameter("position", Chr(34) & "fill" & Chr(34), iPosition:=0)
+        clsRgeomBarFunction.AddParameter("position", Chr(34) & "dodge" & Chr(34), iPosition:=0)
         clsRgeomBarFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=1)
 
         clsRggplotFunction.SetPackageName("ggplot2")
@@ -257,6 +290,16 @@ Public Class dlgBarAndPieChart
         clsScaleYSymmetricFunction.SetPackageName("lemon")
         clsScaleYSymmetricFunction.SetRCommand("scale_y_symmetric")
 
+        clsGeomTextFunction.SetPackageName("ggplot2")
+        clsGeomTextFunction.SetRCommand("geom_text")
+        clsGeomTextFunction.AddParameter("mapping", clsRFunctionParameter:=clsLabelAesFunction, iPosition:=1)
+        clsGeomTextFunction.AddParameter("colour", "black", iPosition:=4)
+        clsGeomTextFunction.AddParameter("vjust", "-0.25", iPosition:=2)
+        clsGeomTextFunction.AddParameter("size", "4", iPosition:=5)
+
+        clsLabelAesFunction.SetPackageName("ggplot2")
+        clsLabelAesFunction.SetRCommand("aes")
+
         clsLabsFunction = GgplotDefaults.clsDefaultLabs.Clone()
         clsXlabFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
         clsYlabFunction = GgplotDefaults.clsYlabTitleFunction.Clone()
@@ -273,6 +316,7 @@ Public Class dlgBarAndPieChart
         clsLocalRaesFunction = GgplotDefaults.clsAesFunction.Clone()
         clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
+        clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
         clsScaleColourViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
         clsScaleFillViridisFunction.AddParameter("discrete", "TRUE", iPosition:=5)
 
@@ -298,7 +342,10 @@ Public Class dlgBarAndPieChart
         ucrChkFlipCoordinates.SetRCode(clsBaseOperator, bReset)
         ucrChkBacktoback.SetRCode(clsScaleYSymmetricFunction, bReset)
         ucrInputBarChartPositions.SetRCode(clsRgeomBarFunction, bReset)
-
+        ucrInputLabelColour.SetRCode(clsGeomTextFunction, bReset)
+        ucrChkAddLabels.SetRCode(clsBaseOperator, bReset)
+        ucrInputLabelPosition.SetRCode(clsGeomTextFunction, bReset)
+        ucrInputLabelSize.SetRCode(clsGeomTextFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -326,9 +373,9 @@ Public Class dlgBarAndPieChart
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         If rdoValue.Checked Or rdoFrequency.Checked Then
-            sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewGlobalAesFunction:=clsBarAesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrBarChartSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog, bNewEnableDiscrete:=False)
+            sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewGlobalAesFunction:=clsBarAesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrBarChartSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction, bReset:=bResetSubdialog, bNewEnableDiscrete:=False)
         Else
-            sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewGlobalAesFunction:=clsPieAesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrBarChartSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
+            sdgPlots.SetRCode(clsNewOperator:=clsBaseOperator, clsNewGlobalAesFunction:=clsPieAesFunction, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewThemeFunction:=clsThemeFuction, dctNewThemeFunctions:=dctThemeFunctions, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXlabFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewFacetFunction:=clsRFacetFunction, ucrNewBaseSelector:=ucrBarChartSelector, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, clsNewAnnotateFunction:=clsAnnotateFunction, bReset:=bResetSubdialog)
         End If
         sdgPlots.ShowDialog()
         bResetSubdialog = False
@@ -489,7 +536,7 @@ Public Class dlgBarAndPieChart
             End If
         End If
         ChangeParameterName()
-
+        SetGeomTextOptions()
     End Sub
 
     Private Sub ucrChkPolarCoordinates_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPolarCoordinates.ControlValueChanged, ucrPnlPolar.ControlValueChanged
@@ -513,8 +560,42 @@ Public Class dlgBarAndPieChart
 
     End Sub
 
+    Private Sub ucrChkAddLabels_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkAddLabels.ControlValueChanged
+        If ucrChkAddLabels.Checked Then
+            clsBaseOperator.AddParameter("geom_text", clsRFunctionParameter:=clsGeomTextFunction, iPosition:=5)
+        Else
+            clsBaseOperator.RemoveParameterByName("geom_text")
+        End If
+    End Sub
+
+    Private Sub SetGeomTextOptions()
+        If ucrInputBarChartPositions.GetText = "Dodge" Then
+            clsGeomTextFunction.AddParameter("position", "position_dodge(width = 0.9)", iPosition:=2)
+        ElseIf ucrInputBarChartPositions.GetText = "Fill" Then
+            clsGeomTextFunction.AddParameter("position", "position_fill(vjust = 0.9)", iPosition:=2)
+        ElseIf ucrInputBarChartPositions.GetText = "Stack" Then
+            clsGeomTextFunction.AddParameter("position", "position_stack(vjust = 0.9)", iPosition:=2)
+        ElseIf ucrInputBarChartPositions.GetText = "Jitter" Then
+            clsGeomTextFunction.AddParameter("position", "position_jitter(width = 0.9)", iPosition:=2)
+        ElseIf ucrInputBarChartPositions.GetText = "Stack in reverse" Then
+            clsGeomTextFunction.AddParameter("position", "position_stack(vjust = 0.5, reverse = TRUE)", iPosition:=2)
+        Else
+            clsGeomTextFunction.AddParameter("position", "position_identity()", iPosition:=2)
+        End If
+        If rdoFrequency.Checked Then
+            clsGeomTextFunction.AddParameter("stat", Chr(34) & "count" & Chr(34), iPosition:=0)
+            clsLabelAesFunction.AddParameter("label", "..count..", iPosition:=0)
+        Else
+            clsGeomTextFunction.RemoveParameterByName("stat")
+            clsLabelAesFunction.AddParameter("label", ucrVariablesAsFactorForBarChart.GetVariableNames(False), iPosition:=0)
+        End If
+    End Sub
+
+    Private Sub ucrInputBarChartPositions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputBarChartPositions.ControlValueChanged
+        SetGeomTextOptions()
+    End Sub
+
     Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkBacktoback.ControlContentsChanged, ucrChkPolarCoordinates.ControlContentsChanged
         TestOkEnabled()
     End Sub
-
 End Class
