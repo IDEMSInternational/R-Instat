@@ -312,7 +312,7 @@ Public Class Translations
                     .FailIfMissing = True,
                     .DataSource = GetDbPath()}
                 Using clsConnection As New SQLiteConnection(clsBuilder.ConnectionString)
-                    Using clsSqliteCmd As New SQLiteCommand(strSqlUpdate)
+                    Using clsSqliteCmd As New SQLiteCommand(strSqlUpdate, clsConnection)
                         clsConnection.Open()
                         iRowsUpdated = clsSqliteCmd.ExecuteNonQuery()
                         clsConnection.Close()
