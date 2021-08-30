@@ -87,10 +87,14 @@ Public Class dlgOneWayFrequencies
         ucrPnlFrequencies.AddToLinkedControls(ucrSaveGraph, {rdoGraph, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlFrequencies.AddToLinkedControls(ucrPnlOutput, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOutput.SetLinkedDisplayControl(grpOutput)
+        ucrPnlFrequencies.AddToLinkedControls(ucrChkMinFreq, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
+
 
         ucrNudGroups.SetParameter(New RParameter("auto.grp", 9))
         ucrNudGroups.SetMinMax(2, 100)
         ucrNudGroups.Increment = 5
+
+        ucrChkMinFreq.SetText("Min Frequency")
 
         ucrChkGroupData.SetParameter(ucrNudGroups.GetParameter(), bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
         ucrChkGroupData.SetText("Group Data")
