@@ -117,7 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ucrChkShowNa.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 53</value>
+  </data>
+  <data name="ucrChkShowNa.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 20</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrChkShowNa.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShowNa.Name" xml:space="preserve">
+    <value>ucrChkShowNa</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShowNa.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShowNa.Parent" xml:space="preserve">
+    <value>grpTableOptions</value>
+  </data>
+  <data name="&gt;&gt;ucrChkShowNa.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="lblTableTitle.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -125,9 +147,8 @@
   <data name="lblTableTitle.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblTableTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 56</value>
+    <value>12, 86</value>
   </data>
   <data name="lblTableTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 13</value>
@@ -148,10 +169,10 @@
     <value>grpTableOptions</value>
   </data>
   <data name="&gt;&gt;lblTableTitle.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrInputTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>97, 56</value>
+    <value>97, 86</value>
   </data>
   <data name="ucrInputTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -169,7 +190,7 @@
     <value>grpTableOptions</value>
   </data>
   <data name="&gt;&gt;ucrInputTitle.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrChkShowStrings.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 22</value>
@@ -190,13 +211,13 @@
     <value>grpTableOptions</value>
   </data>
   <data name="&gt;&gt;ucrChkShowStrings.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="grpTableOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 6</value>
   </data>
   <data name="grpTableOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 101</value>
+    <value>236, 157</value>
   </data>
   <data name="grpTableOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -916,7 +937,7 @@
     <value>Frequencies Options</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>sdgFrequencies</value>
+    <value>sdgOneWayFrequencies</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

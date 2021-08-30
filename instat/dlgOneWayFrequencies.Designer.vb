@@ -63,6 +63,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrPnlSort = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrChkMinFreq = New instat.ucrCheck()
         Me.grpSort.SuspendLayout()
         Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
@@ -236,10 +237,17 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.ucrSelectorOneWayFreq, "ucrSelectorOneWayFreq")
         Me.ucrSelectorOneWayFreq.Name = "ucrSelectorOneWayFreq"
         '
+        'ucrChkMinFreq
+        '
+        Me.ucrChkMinFreq.Checked = False
+        resources.ApplyResources(Me.ucrChkMinFreq, "ucrChkMinFreq")
+        Me.ucrChkMinFreq.Name = "ucrChkMinFreq"
+        '
         'dlgOneWayFrequencies
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkMinFreq)
         Me.Controls.Add(Me.grpOutput)
         Me.Controls.Add(Me.ucrSaveGraph)
         Me.Controls.Add(Me.ucrReceiverOneWayFreq)
@@ -293,4 +301,5 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents rdoAsHtml As RadioButton
     Friend WithEvents rdoAsText As RadioButton
     Friend WithEvents ucrPnlOutput As UcrPanel
+    Friend WithEvents ucrChkMinFreq As ucrCheck
 End Class

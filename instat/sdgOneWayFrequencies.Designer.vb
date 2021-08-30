@@ -70,6 +70,7 @@ Partial Class sdgOneWayFrequencies
         Me.rdoBar = New System.Windows.Forms.RadioButton()
         Me.ucrPnlGraphType = New instat.UcrPanel()
         Me.ucrBaseOneWayFrequencies = New instat.ucrButtonsSubdialogue()
+        Me.ucrChkShowNa = New instat.ucrCheck()
         Me.tbpOneWayFrequencies.SuspendLayout()
         Me.tbpTable.SuspendLayout()
         Me.grpTableOptions.SuspendLayout()
@@ -95,6 +96,7 @@ Partial Class sdgOneWayFrequencies
         '
         'grpTableOptions
         '
+        Me.grpTableOptions.Controls.Add(Me.ucrChkShowNa)
         Me.grpTableOptions.Controls.Add(Me.lblTableTitle)
         Me.grpTableOptions.Controls.Add(Me.ucrInputTitle)
         Me.grpTableOptions.Controls.Add(Me.ucrChkShowStrings)
@@ -306,6 +308,12 @@ Partial Class sdgOneWayFrequencies
         resources.ApplyResources(Me.ucrBaseOneWayFrequencies, "ucrBaseOneWayFrequencies")
         Me.ucrBaseOneWayFrequencies.Name = "ucrBaseOneWayFrequencies"
         '
+        'ucrChkShowNa
+        '
+        Me.ucrChkShowNa.Checked = False
+        resources.ApplyResources(Me.ucrChkShowNa, "ucrChkShowNa")
+        Me.ucrChkShowNa.Name = "ucrChkShowNa"
+        '
         'sdgOneWayFrequencies
         '
         resources.ApplyResources(Me, "$this")
@@ -360,4 +368,5 @@ Partial Class sdgOneWayFrequencies
     Friend WithEvents lblColor As Label
     Friend WithEvents lblSize As Label
     Friend WithEvents ucrNudSize As ucrNud
+    Friend WithEvents ucrChkShowNa As ucrCheck
 End Class
