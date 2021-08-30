@@ -191,11 +191,12 @@ Public Class dlgLinePlot
         ucrPnlOptions.AddFunctionNamesCondition(rdoSmoothing, "geom_smooth")
 
         ucrInputOrientation.SetParameter(New RParameter("orientation", 2))
+        dctOrientationOptions.Add("NA", "NA")
         dctOrientationOptions.Add("X", Chr(34) & "x" & Chr(34))
         dctOrientationOptions.Add("Y", Chr(34) & "y" & Chr(34))
         ucrInputOrientation.SetItems(dctOrientationOptions)
         ucrInputOrientation.SetDropDownStyleAsNonEditable()
-        ucrInputOrientation.SetRDefault(Chr(34) & "x" & Chr(34))
+        ucrInputOrientation.SetRDefault("NA")
 
 
         ucrInputMethod.SetParameter(New RParameter("method", 3))
@@ -354,6 +355,7 @@ Public Class dlgLinePlot
             End If
         Next
         ucrInputMethod.SetRCode(clsOptionsFunction, bReset)
+        ucrInputOrientation.SetRCode(clsOptionsFunction, bReset)
         TestOkEnabled()
     End Sub
 
