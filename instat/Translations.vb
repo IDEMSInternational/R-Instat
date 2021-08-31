@@ -289,28 +289,18 @@ Public Class Translations
             End If
 
             'execute the SQL command
-
-            'Dim con As New SqlConnection(Connection_String)
-            'Dim cmd As New SqlCommand(strSqlUpdate, con)
-            'Using con
-            '    con.Open()
-            '    Dim iRowsUpdated As Integer = cmd.ExecuteNonQuery()
-            'End Using
-
-            'Using conn As New SqlConnection(connetionString)
-            '    Using cmd As New SqlCommand(strSqlUpdate, conn)
-            '        cmd.CommandType = CommandType.Text
-            '        conn.Open()
-            '        Dim i As Integer = cmd.ExecuteNonQuery()
-            '        conn.Close()
-            '    End Using
-            'End Using
-
             Try
-                'connect to the SQLite database that contains the translations
+                'specify the path of the SQLite database that contains the translations (2 levels up from the execution folder)
+                Dim strDbPath As String = Directory.GetParent(Application.StartupPath).FullName
+                strDbPath = Directory.GetParent(strDbPath).FullName
+                'strDbPath = String.Concat(strDbPath, "\translations")
+                strDbPath = Path.Combine(strDbPath, "translations")
+                strDbPath = Path.Combine(strDbPath, "rInstatTranslations.db")
+
+                'connect to the database and execute the SQL command
                 Dim clsBuilder As New SQLiteConnectionStringBuilder With {
                     .FailIfMissing = True,
-                    .DataSource = GetDbPath()}
+                    .DataSource = strDbPath}
                 Using clsConnection As New SQLiteConnection(clsBuilder.ConnectionString)
                     Using clsSqliteCmd As New SQLiteCommand(strSqlUpdate, clsConnection)
                         clsConnection.Open()
@@ -330,7 +320,7 @@ Public Class Translations
         'accidentally in the release version. 
         MsgBox("The " & strPath &
                " ignore file was processed. The application will now exit.", MsgBoxStyle.Exclamation)
-        System.Windows.Forms.Application.Exit()
+        Application.Exit()
     End Sub
 
 End Class
