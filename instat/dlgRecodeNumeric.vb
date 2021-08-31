@@ -41,7 +41,7 @@ Public Class dlgRecodeNumeric
         ucrBase.iHelpTopicID = 43
 
         ucrReceiverRecode.SetParameter(New RParameter("x", iNewPosition:=2))
-        ucrReceiverRecode.SetParameterIsString()
+        ucrReceiverRecode.SetParameterIsRFunction()
         ucrReceiverRecode.Selector = ucrSelectorForRecode
         ucrReceiverRecode.SetIncludedDataTypes({"numeric"})
         ucrReceiverRecode.strSelectorHeading = "Numerics"
@@ -98,6 +98,7 @@ Public Class dlgRecodeNumeric
         ucrReceiverRecode.SetRCode(clsCutFunction, bReset)
         ucrSaveRecode.SetRCode(clsCutFunction, bReset)
         ucrChkAddLabels.SetRCode(clsCutFunction, bReset)
+        ucrPnlClosedOn.SetRCode(clsCutFunction, bReset)
     End Sub
 
 
