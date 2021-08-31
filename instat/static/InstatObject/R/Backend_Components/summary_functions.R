@@ -1370,6 +1370,9 @@ DataBook$set("public", "summary_table", function(data_name, columns_to_summarise
   }
   shaped_cell_values <- cell_values %>% dplyr::relocate(value, .after = last_col())
 
+  for (i in seq_along(factors)) {
+    levels(shaped_cell_values[[i]]) <- c(levels(shaped_cell_values[[i]]), margin_name) 
+  }
   if (include_margins) {
     margin_tables <- list()
     power_sets <- rje::powerSet(factors)
