@@ -19,12 +19,10 @@ Public Class dlgRecodeNumeric
     Public bFirstLoad As Boolean = True
     Private bReset As Boolean = True
     Private clsCutFunction As New RFunction
-
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumn As String = ""
 
-    Private Sub dlgOneVarFitModel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+    Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
             bFirstLoad = False
@@ -36,17 +34,7 @@ Public Class dlgRecodeNumeric
         bReset = False
         TestOKEnabled()
         autoTranslate(Me)
-    End Sub
-    Private Sub dlgRecode_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If bFirstLoad Then
-            InitialiseDialog()
-            SetDefaults()
-            bFirstLoad = False
-        End If
         SetDefaultColumn()
-        TestOKEnabled()
-
-        autoTranslate(Me)
     End Sub
 
     Private Sub InitialiseDialog()
@@ -79,33 +67,6 @@ Public Class dlgRecodeNumeric
         ucrMultipleNumericRecode.SetValidationTypeAsNumericList(bNewAllowInf:=True)
     End Sub
 
-    Private Sub SetDefaults()
-        clsCutFunction = New RFunction
-
-        ucrReceiverRecode.SetMeAsReceiver()
-
-        clsCutFunction.SetRCommand("cut")
-        clsCutFunction.AddParameter("include.lowest", "TRUE", iPosition:=0)
-        clsCutFunction.AddParameter("dig.lab", "10", iPosition:=1)
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsCutFunction)
-
-        ucrInputMultipleLabels.Visible = False
-        ucrSelectorForRecode.Reset()
-        ucrSelectorForRecode.Focus()
-        ucrSaveRecode.Reset()
-        ucrMultipleNumericRecode.Reset()
-        ucrMultipleNumericRecode.SetName("")
-        ucrInputMultipleLabels.Reset()
-        ucrInputMultipleLabels.SetName("")
-        TestOKEnabled()
-    End Sub
-
-    Private Sub SetRCodeForControls(bReset)
-        ucrSaveRecode.SetRCode(clsCutFunction, bReset)
-    End Sub
-
-
     Private Sub SetDefaultColumn()
         If strDefaultDataFrame <> "" Then
             ucrSelectorForRecode.SetDataframe(strDefaultDataFrame)
@@ -117,12 +78,34 @@ Public Class dlgRecodeNumeric
         strDefaultDataFrame = ""
         strDefaultColumn = ""
     End Sub
+    Private Sub SetDefaults()
+        clsCutFunction = New RFunction
+
+        ucrSelectorForRecode.Reset()
+        ucrSaveRecode.Reset()
+        ucrReceiverRecode.SetMeAsReceiver()
+        ucrMultipleNumericRecode.SetName("")
+        ucrInputMultipleLabels.SetName("")
+
+        clsCutFunction.SetRCommand("cut")
+        clsCutFunction.AddParameter("include.lowest", "TRUE", iPosition:=0)
+        clsCutFunction.AddParameter("dig.lab", "10", iPosition:=1)
+
+        ucrBase.clsRsyntax.SetBaseRFunction(clsCutFunction)
+    End Sub
+
+    Private Sub SetRCodeForControls(bReset)
+        ucrReceiverRecode.SetRCode(clsCutFunction, bReset)
+        ucrSaveRecode.SetRCode(clsCutFunction, bReset)
+        ucrChkAddLabels.SetRCode(clsCutFunction, bReset)
+    End Sub
+
 
     Private Sub TestOKEnabled()
         Dim iTemp As Integer
 
         If Not ucrReceiverRecode.IsEmpty() AndAlso Not ucrMultipleNumericRecode.IsEmpty AndAlso ucrSaveRecode.IsComplete Then
-            If chkAddLabels.Checked AndAlso Not ucrInputMultipleLabels.IsEmpty Then
+            If ucrChkAddLabels.Checked AndAlso Not ucrInputMultipleLabels.IsEmpty Then
                 If (ucrMultipleNumericRecode.clsRList.clsParameters.Count > 1 AndAlso (Not ucrInputMultipleLabels.clsRList.clsParameters.Count <> ucrMultipleNumericRecode.clsRList.clsParameters.Count - 1)) OrElse (ucrMultipleNumericRecode.clsRList.clsParameters.Count = 1 AndAlso Integer.TryParse(ucrMultipleNumericRecode.clsRList.clsParameters(0).strArgumentValue, iTemp) AndAlso iTemp = ucrInputMultipleLabels.clsRList.clsParameters.Count) Then
                     ucrBase.OKEnabled(True)
                 Else
@@ -147,12 +130,10 @@ Public Class dlgRecodeNumeric
             ValidateBreakPointLabelCount()
         End If
         ucrBase.clsRsyntax.AddParameter("breaks", clsRFunctionParameter:=ucrMultipleNumericRecode.clsRList)
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrMultipleLabels_NameChanged() Handles ucrInputMultipleLabels.NameChanged
         AddLabelsParameter()
-        TestOKEnabled()
     End Sub
 
     Private Sub ucrMultipleNumericRecode_Validated(sender As Object, e As EventArgs) Handles ucrMultipleNumericRecode.Validated, ucrInputMultipleLabels.Validated
@@ -182,9 +163,11 @@ Public Class dlgRecodeNumeric
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOKEnabled()
     End Sub
 
-    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrMultipleNumericRecode.ControlContentsChanged, ucrInputMultipleLabels.ControlContentsChanged
+    Private Sub ucrControls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrMultipleNumericRecode.ControlContentsChanged, ucrInputMultipleLabels.ControlContentsChanged, ucrReceiverRecode.ControlContentsChanged,
+            ucrSaveRecode.ControlContentsChanged, ucrChkAddLabels.ControlContentsChanged
         TestOKEnabled()
     End Sub
 
@@ -194,6 +177,5 @@ Public Class dlgRecodeNumeric
         Else
             clsCutFunction.RemoveParameterByName("labels")
         End If
-        TestOKEnabled()
     End Sub
 End Class
