@@ -59,6 +59,7 @@ Partial Class dlgReorderColumns
         '
         'ucrDataFrameSelect
         '
+        Me.ucrDataFrameSelect.bDropUnusedFilterLevels = False
         Me.ucrDataFrameSelect.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrDataFrameSelect, "ucrDataFrameSelect")
         Me.ucrDataFrameSelect.Name = "ucrDataFrameSelect"
