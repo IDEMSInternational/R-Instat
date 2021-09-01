@@ -113,7 +113,6 @@ Public Class dlgPICSARainfall
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
 
-
     Private Sub dlgPCSARainfall_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -190,6 +189,7 @@ Public Class dlgPICSARainfall
         ucrSave.SetDataFrameSelector(ucrSelectorPICSARainfall.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
     End Sub
+
     Private Sub SetDefaults()
         Dim clsPanelBackgroundElementRect As New RFunction
         Dim clsXElementLabels As New RFunction
@@ -257,7 +257,7 @@ Public Class dlgPICSARainfall
         clsPasteUpperTercileY = New RFunction
         clsFormatUpperTercileY = New RFunction
 
-        ucrInputStation.SetText(strNone)
+        ucrInputStation.SetName(strNone)
         ucrInputStation.bUpdateRCodeFromControl = True
 
         clsDatePeriodOperator = New ROperator
@@ -635,6 +635,7 @@ Public Class dlgPICSARainfall
             ucrBase.OKEnabled(True)
         End If
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -673,6 +674,7 @@ Public Class dlgPICSARainfall
         End If
         UpdateParameters()
         AddRemoveFacets()
+        AddRemoveGroupBy()
     End Sub
 
     Private Sub UpdateParameters()
@@ -745,6 +747,7 @@ Public Class dlgPICSARainfall
             clsFacetOperator.RemoveParameterByName("right")
         End If
     End Sub
+
     Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged() Handles ucrVariablesAsFactorForPicsa.ControlValueChanged
         TempOptionsDisabledInMultipleVariablesCase()
     End Sub
@@ -808,9 +811,11 @@ Public Class dlgPICSARainfall
             clsGeomLine.AddParameter("colour", Chr(34) & "blue" & Chr(34))
         End If
     End Sub
+
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
         XAxisDataTypeCheck()
     End Sub
+
     Private Sub XAxisDataTypeCheck()
         If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
             clsGeomLine.AddParameter("group", 1)
