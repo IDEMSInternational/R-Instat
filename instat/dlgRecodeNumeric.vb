@@ -90,6 +90,7 @@ Public Class dlgRecodeNumeric
         clsCutFunction.SetRCommand("cut")
         clsCutFunction.AddParameter("include.lowest", "TRUE", iPosition:=0)
         clsCutFunction.AddParameter("dig.lab", "10", iPosition:=1)
+        clsCutFunction.AddParameter("right", "FALSE", iPosition:=3)
 
         ucrBase.clsRsyntax.SetBaseRFunction(clsCutFunction)
     End Sub
