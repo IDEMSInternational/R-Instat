@@ -342,80 +342,90 @@ Public Class dlgTransformText
         End If
     End Sub
 
-    Private Sub ucrPnl_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged, ucrInputTo.ControlValueChanged
-        If bRCodeSet Then
-            If rdoLength.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
-            ElseIf rdoPad.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
-            ElseIf rdoTrim.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsTrimFunction)
-            ElseIf rdoWords.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
-            ElseIf rdoSubstring.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
-            ElseIf rdoConvertCase.Checked Then
-                ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
-                Select Case ucrInputTo.GetText
-                    Case "Lower"
-                        ucrBase.clsRsyntax.SetFunction("str_to_lower")
-                    Case "Upper"
-                        ucrBase.clsRsyntax.SetFunction("str_to_upper")
-                    Case "Title"
-                        ucrBase.clsRsyntax.SetFunction("str_to_title")
-                End Select
-            End If
-        End If
+    Private Sub ucrPnlOperation_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOperation.ControlValueChanged
         If rdoPad.Checked Then
             rdoSquish.Visible = False
         ElseIf rdoTrim.Checked Then
             rdoSquish.Visible = True
         End If
-    End Sub
 
-    Private Sub ucrWordsTab_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirstOr.ControlValueChanged, ucrChkLastOr.ControlValueChanged,
-        ucrPnlOperation.ControlValueChanged, ucrReceiverFirstWord.ControlValueChanged, ucrReceiverLastWord.ControlValueChanged, ucrNudFirstWord.ControlValueChanged,
-        ucrNudLastWord.ControlValueChanged
         If rdoWords.Checked Then
             ucrNudFirstWord.Visible = True
             ucrNudLastWord.Visible = True
-
-            If ucrSelectorForTransformText.CurrentReceiver Is ucrReceiverFirstWord Then
-                If ucrChkLastOr.Checked Then
-                    ucrReceiverLastWord.SetMeAsReceiver()
-                End If
-            ElseIf ucrSelectorForTransformText.CurrentReceiver Is ucrReceiverLastWord Then
-                If ucrChkFirstOr.Checked Then
-                    ucrReceiverFirstWord.SetMeAsReceiver()
-                End If
-            Else
-                If ucrChkFirstOr.Checked Then
-                    ucrReceiverFirstWord.SetMeAsReceiver()
-                ElseIf ucrChkLastOr.Checked Then
-                    ucrReceiverLastWord.SetMeAsReceiver()
-                End If
-            End If
-
-            If Not ucrChkFirstOr.Checked AndAlso Not ucrChkLastOr.Checked Then
-                ucrReceiverTransformText.SetMeAsReceiver()
-            End If
-            If ucrChkFirstOr.Checked Then
-                clsWordsFunction.AddParameter("start", clsRFunctionParameter:=ucrReceiverFirstWord.GetVariables(), iPosition:=1)
-            Else
-                clsWordsFunction.AddParameter("start", strParameterValue:=ucrNudFirstWord.Value, iPosition:=1)
-            End If
-
-            If ucrChkLastOr.Checked Then
-                clsWordsFunction.AddParameter("end", clsRFunctionParameter:=ucrReceiverLastWord.GetVariables(), iPosition:=2)
-            Else
-                clsWordsFunction.AddParameter("end", strParameterValue:=ucrNudLastWord.Value, iPosition:=2)
-            End If
         Else
-            ucrReceiverTransformText.SetMeAsReceiver()
             ucrNudFirstWord.Visible = False
             ucrNudLastWord.Visible = False
+            ucrReceiverTransformText.SetMeAsReceiver()
         End If
+        ChangeBaseFunction()
         DialogSize()
+    End Sub
+
+    Private Sub ucrInputTo_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputTo.ControlValueChanged
+        ChangeBaseFunction()
+    End Sub
+
+    Private Sub LastAndFirstWord_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirstOr.ControlValueChanged, ucrChkLastOr.ControlValueChanged
+        If ucrChangedControl Is ucrChkFirstOr AndAlso ucrChkFirstOr.Checked Then
+            ucrReceiverFirstWord.SetMeAsReceiver()
+        ElseIf ucrChkLastOr.Checked AndAlso ucrChangedControl Is ucrChkFirstOr Then
+            ucrReceiverLastWord.SetMeAsReceiver()
+        ElseIf ucrChangedControl Is ucrChkLastOr AndAlso ucrChkLastOr.Checked Then
+            ucrReceiverLastWord.SetMeAsReceiver()
+        ElseIf ucrChangedControl Is ucrChkLastOr AndAlso ucrChkFirstOr.Checked Then
+            ucrReceiverFirstWord.SetMeAsReceiver()
+        Else
+            ucrReceiverTransformText.SetMeAsReceiver()
+        End If
+
+        AddRemoveStartAndEndParameters()
+    End Sub
+
+    Private Sub ReceiverAndNuds_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstWord.ControlValueChanged, ucrReceiverLastWord.ControlValueChanged,
+            ucrNudFirstWord.ControlValueChanged, ucrNudLastWord.ControlValueChanged
+        AddRemoveStartAndEndParameters()
+    End Sub
+
+    Private Sub ChangeBaseFunction()
+        If rdoLength.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsLengthFunction)
+        ElseIf rdoPad.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
+        ElseIf rdoTrim.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsTrimFunction)
+        ElseIf rdoWords.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
+        ElseIf rdoSubstring.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsSubstringFunction)
+        ElseIf rdoConvertCase.Checked Then
+            ucrBase.clsRsyntax.SetBaseRFunction(clsConvertFunction)
+            Select Case ucrInputTo.GetText
+                Case "Lower"
+                    ucrBase.clsRsyntax.SetFunction("str_to_lower")
+                Case "Upper"
+                    ucrBase.clsRsyntax.SetFunction("str_to_upper")
+                Case "Title"
+                    ucrBase.clsRsyntax.SetFunction("str_to_title")
+            End Select
+        End If
+    End Sub
+
+    Private Sub AddRemoveStartAndEndParameters()
+        If ucrChkFirstOr.Checked Then
+            clsWordsFunction.AddParameter("start", clsRFunctionParameter:=ucrReceiverFirstWord.GetVariables(), iPosition:=1)
+        Else
+            clsWordsFunction.AddParameter("start", strParameterValue:=ucrNudFirstWord.Value, iPosition:=1)
+        End If
+
+        If ucrChkLastOr.Checked Then
+            clsWordsFunction.AddParameter("end", clsRFunctionParameter:=ucrReceiverLastWord.GetVariables(), iPosition:=2)
+        Else
+            clsWordsFunction.AddParameter("end", strParameterValue:=ucrNudLastWord.Value, iPosition:=2)
+        End If
+    End Sub
+
+    Private Sub SwitchReceivers()
+
     End Sub
 
     Private Sub ucrReceiver_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverTransformText.ControlValueChanged
