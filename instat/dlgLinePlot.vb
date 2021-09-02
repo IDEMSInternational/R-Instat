@@ -157,6 +157,16 @@ Public Class dlgLinePlot
         ucrSave.SetCheckBoxText("Save Graph")
         ucrSave.SetDataFrameSelector(ucrLinePlotSelector.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
+
+        ucrPnlStepOrPath.AddRadioButton(rdoStep)
+        ucrPnlStepOrPath.AddRadioButton(rdoPath)
+        ucrPnlStepOrPath.AddFunctionNamesCondition(rdoPath, "geom_path")
+        ucrPnlStepOrPath.AddFunctionNamesCondition(rdoStep, "geom_step")
+        ucrChkPathOrStep.AddToLinkedControls(ucrPnlStepOrPath, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+
+        ucrChkPathOrStep.SetText("Use path or step")
+        ucrChkPathOrStep.AddFunctionNamesCondition(True, {"geom_step", "geom_path"})
+        ucrChkPathOrStep.AddFunctionNamesCondition(False, {"geom_step", "geom_path"}, False)
     End Sub
 
     Private Sub SetDefaults()
@@ -171,6 +181,7 @@ Public Class dlgLinePlot
         ucrVariablesAsFactorForLinePlot.SetMeAsReceiver()
         bResetSubdialog = True
         bResetLineLayerSubdialog = True
+        rdoPath.Checked = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -227,6 +238,7 @@ Public Class dlgLinePlot
         'set Rcode for checkboxes
         ucrChkPeak.SetRCode(clsBaseOperator, bReset)
         ucrChkValley.SetRCode(clsBaseOperator, bReset)
+        ucrChkPathOrStep.SetRCode(clsRgeomlineplotFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -299,10 +311,6 @@ Public Class dlgLinePlot
         TempOptionsDisabledInMultipleVariablesCase()
     End Sub
 
-    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged
-        TestOkEnabled()
-    End Sub
-
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged, ucrFactorOptionalReceiver.ControlValueChanged
         SetGroupParam()
     End Sub
@@ -319,5 +327,24 @@ Public Class dlgLinePlot
         Else
             clsRaesFunction.RemoveParameterByName("group")
         End If
+    End Sub
+
+    Private Sub ucrChkPathOrStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPathOrStep.ControlValueChanged, ucrPnlStepOrPath.ControlValueChanged
+        If ucrChkPathOrStep.Checked Then
+            If rdoStep.Checked Then
+                ucrSave.SetPrefix("stepplot")
+                clsRgeomlineplotFunction.SetRCommand("geom_step")
+            Else
+                ucrSave.SetPrefix("pathplot")
+                clsRgeomlineplotFunction.SetRCommand("geom_path")
+            End If
+        Else
+            ucrSave.SetPrefix("lineplot")
+            clsRgeomlineplotFunction.SetRCommand("geom_line")
+        End If
+    End Sub
+
+    Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged
+        TestOkEnabled()
     End Sub
 End Class

@@ -369,15 +369,6 @@
   <metadata name="mnuStripCommand.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="mnuStripCommand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 114</value>
-  </data>
-  <data name="&gt;&gt;mnuStripCommand.Name" xml:space="preserve">
-    <value>mnuStripCommand</value>
-  </data>
-  <data name="&gt;&gt;mnuStripCommand.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="mnuItemCut.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+X</value>
   </data>
@@ -422,6 +413,15 @@
   </data>
   <data name="SelectAllToolStripMenuItem.Text" xml:space="preserve">
     <value>Select All</value>
+  </data>
+  <data name="mnuStripCommand.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 114</value>
+  </data>
+  <data name="&gt;&gt;mnuStripCommand.Name" xml:space="preserve">
+    <value>mnuStripCommand</value>
+  </data>
+  <data name="&gt;&gt;mnuStripCommand.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="lblCommand.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -589,7 +589,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewDFName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>373, 24</value>
+    <value>416, 24</value>
   </data>
   <data name="ucrNewDFName.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -655,7 +655,7 @@
     <value>14</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>11, 318</value>
+    <value>20, 318</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
