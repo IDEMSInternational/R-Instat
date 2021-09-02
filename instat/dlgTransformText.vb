@@ -231,9 +231,19 @@ Public Class dlgTransformText
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRCodeSet = False
         ucrPnlPad.AddAdditionalCodeParameterPair(clsPadFunction, clsNewRParameter:=New RParameter("side", 2), iAdditionalPairNo:=1)
+        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsLengthFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=1)
+        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsPadFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=2)
+        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsTrimFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=3)
+        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsWordsFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=4)
+        ucrReceiverTransformText.AddAdditionalCodeParameterPair(clsSubstringFunction, clsNewRParameter:=New RParameter("string", 0), iAdditionalPairNo:=5)
+        ucrNewColName.AddAdditionalRCode(clsLengthFunction, iAdditionalPairNo:=1)
+        ucrNewColName.AddAdditionalRCode(clsPadFunction, iAdditionalPairNo:=2)
+        ucrNewColName.AddAdditionalRCode(clsTrimFunction, iAdditionalPairNo:=3)
+        ucrNewColName.AddAdditionalRCode(clsWordsFunction, iAdditionalPairNo:=4)
+        ucrNewColName.AddAdditionalRCode(clsSubstringFunction, iAdditionalPairNo:=5)
 
-        ucrReceiverTransformText.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
-        ucrNewColName.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
+        ucrReceiverTransformText.SetRCode(clsConvertFunction, bReset)
+        ucrNewColName.SetRCode(clsConvertFunction, bReset)
         ucrPnlOperation.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
         ucrInputTo.SetRCode(clsConvertFunction, bReset)
         ucrInputPad.SetRCode(clsPadFunction, bReset)
@@ -353,16 +363,16 @@ Public Class dlgTransformText
                         ucrBase.clsRsyntax.SetFunction("str_to_title")
                 End Select
             End If
-            TestOkEnabled()
-            SetRCodeForControls(False)
         End If
     End Sub
 
-    Private Sub ucrWordsTab_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirstOr.ControlValueChanged, ucrChkLastOr.ControlValueChanged, ucrPnlOperation.ControlValueChanged
+    Private Sub ucrWordsTab_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkFirstOr.ControlValueChanged, ucrChkLastOr.ControlValueChanged,
+        ucrPnlOperation.ControlValueChanged, ucrReceiverFirstWord.ControlValueChanged, ucrReceiverLastWord.ControlValueChanged, ucrNudFirstWord.ControlValueChanged,
+        ucrNudLastWord.ControlValueChanged
         If rdoWords.Checked Then
             ucrNudFirstWord.Visible = True
             ucrNudLastWord.Visible = True
-            'activate the Word receivers respectively
+
             If ucrSelectorForTransformText.CurrentReceiver Is ucrReceiverFirstWord Then
                 If ucrChkLastOr.Checked Then
                     ucrReceiverLastWord.SetMeAsReceiver()
@@ -378,9 +388,20 @@ Public Class dlgTransformText
                     ucrReceiverLastWord.SetMeAsReceiver()
                 End If
             End If
-            'if no checkbox is checked then activate the ucrReceiverTransformText to be the receiver
+
             If Not ucrChkFirstOr.Checked AndAlso Not ucrChkLastOr.Checked Then
                 ucrReceiverTransformText.SetMeAsReceiver()
+            End If
+            If ucrChkFirstOr.Checked Then
+                clsWordsFunction.AddParameter("start", clsRFunctionParameter:=ucrReceiverFirstWord.GetVariables(), iPosition:=1)
+            Else
+                clsWordsFunction.AddParameter("start", strParameterValue:=ucrNudFirstWord.Value, iPosition:=1)
+            End If
+
+            If ucrChkLastOr.Checked Then
+                clsWordsFunction.AddParameter("end", clsRFunctionParameter:=ucrReceiverLastWord.GetVariables(), iPosition:=2)
+            Else
+                clsWordsFunction.AddParameter("end", strParameterValue:=ucrNudLastWord.Value, iPosition:=2)
             End If
         Else
             ucrReceiverTransformText.SetMeAsReceiver()
@@ -394,31 +415,11 @@ Public Class dlgTransformText
         NewDefaultName()
     End Sub
 
-    Private Sub ucrReceiverTransformText_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstWord.ControlContentsChanged, ucrNudWidth.ControlContentsChanged, ucrNudFirstWord.ControlContentsChanged, ucrNudLastWord.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged, ucrReceiverLastWord.ControlContentsChanged, ucrReceiverTransformText.ControlContentsChanged, ucrPnlOperation.ControlContentsChanged, ucrInputPad.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrInputSeparator.ControlContentsChanged, ucrInputTo.ControlContentsChanged, ucrChkFirstOr.ControlContentsChanged, ucrChkLastOr.ControlContentsChanged
+    Private Sub controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverFirstWord.ControlContentsChanged, ucrNudWidth.ControlContentsChanged,
+        ucrNudFirstWord.ControlContentsChanged, ucrNudLastWord.ControlContentsChanged, ucrNudFrom.ControlContentsChanged, ucrNudTo.ControlContentsChanged,
+        ucrReceiverLastWord.ControlContentsChanged, ucrReceiverTransformText.ControlContentsChanged, ucrPnlOperation.ControlContentsChanged, ucrPnlPad.ControlContentsChanged,
+        ucrInputPad.ControlContentsChanged, ucrNewColName.ControlContentsChanged, ucrInputSeparator.ControlContentsChanged, ucrInputTo.ControlContentsChanged,
+        ucrChkFirstOr.ControlContentsChanged, ucrChkLastOr.ControlContentsChanged
         TestOkEnabled()
-        'if rdoWords.Checked change word parametervalues everytime changes are detected on 
-        'ucrReceiverFirstWord, ucrReceiverLastWord, ucrNudFirstWord, ucrNudLastWord
-        If rdoWords.Checked Then
-            changeWordParamValues()
-        End If
     End Sub
-
-    'adds & changes the clsWordsFunction parameters manually
-    Private Sub changeWordParamValues()
-        'Am passing the parameter "start" & "end" manually because its values can come from either
-        'a ucrReceiver or a ucrNud. The type also changes from Rfunction to String respectively.
-        'passing them through the controls causes an error due to ucrNuds
-        If ucrChkFirstOr.Checked Then
-            clsWordsFunction.AddParameter("start", clsRFunctionParameter:=ucrReceiverFirstWord.GetVariables(), iPosition:=1)
-        Else
-            clsWordsFunction.AddParameter("start", strParameterValue:=ucrNudFirstWord.Value, iPosition:=1)
-        End If
-
-        If ucrChkLastOr.Checked Then
-            clsWordsFunction.AddParameter("end", clsRFunctionParameter:=ucrReceiverLastWord.GetVariables(), iPosition:=2)
-        Else
-            clsWordsFunction.AddParameter("end", strParameterValue:=ucrNudLastWord.Value, iPosition:=2)
-        End If
-    End Sub
-
 End Class
