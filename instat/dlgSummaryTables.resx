@@ -148,13 +148,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactors.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="cmdSummaries.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="cmdSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>287, 472</value>
+    <value>287, 487</value>
   </data>
   <data name="cmdSummaries.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 23</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdSummaries.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblSigFigs.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -343,10 +343,10 @@
     <value>5</value>
   </data>
   <data name="grpDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>187, 297</value>
+    <value>118, 357</value>
   </data>
   <data name="grpDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>244, 148</value>
+    <value>194, 124</value>
   </data>
   <data name="grpDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -364,7 +364,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpDisplay.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="rdoBoth.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -460,7 +460,7 @@
     <value>0, 18</value>
   </data>
   <data name="ucrPnlMargin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>131, 65</value>
+    <value>91, 65</value>
   </data>
   <data name="ucrPnlMargin.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -481,7 +481,7 @@
     <value>3, 354</value>
   </data>
   <data name="grpMargin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 91</value>
+    <value>98, 91</value>
   </data>
   <data name="grpMargin.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -499,7 +499,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpMargin.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="lblMarginName.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -529,7 +529,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblMarginName.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lblVariables.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -559,7 +559,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblVariables.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrInputMarginName.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 327</value>
@@ -580,10 +580,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputMarginName.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrSaveTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 472</value>
+    <value>10, 487</value>
   </data>
   <data name="ucrSaveTable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -604,7 +604,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveTable.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="ucrChkOmitMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 279</value>
@@ -625,7 +625,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkOmitMissing.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ucrChkStoreResults.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 254</value>
@@ -646,7 +646,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkStoreResults.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrChkDisplayMargins.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 304</value>
@@ -667,7 +667,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkDisplayMargins.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="ucrChkSummaries.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 229</value>
@@ -688,13 +688,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkSummaries.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 501</value>
+    <value>10, 517</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>435, 52</value>
+    <value>425, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -709,7 +709,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -718,7 +718,28 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>443, 560</value>
+    <value>523, 572</value>
+  </data>
+  <data name="UcrReorder1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>318, 318</value>
+  </data>
+  <data name="UcrReorder1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 156</value>
+  </data>
+  <data name="UcrReorder1.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;UcrReorder1.Name" xml:space="preserve">
+    <value>UcrReorder1</value>
+  </data>
+  <data name="&gt;&gt;UcrReorder1.Type" xml:space="preserve">
+    <value>instat.ucrReorder, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;UcrReorder1.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;UcrReorder1.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="ucrReceiverFactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>287, 60</value>
@@ -742,7 +763,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFactors.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="ucrReceiverWeights.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 206</value>
@@ -766,7 +787,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverWeights.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="ucrChkWeight.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 204</value>
@@ -787,7 +808,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkWeight.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="ucrSelectorSummaryTables.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -811,10 +832,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorSummaryTables.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
+    <value>17</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -850,6 +868,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverSummaryCols.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
 </root>
