@@ -22,7 +22,6 @@ Public Class dlgPivotTable
         clsConcatenateFunction, clsGetObjectFunction As New RFunction
     Private clsPipeOperator As New ROperator
 
-
     Private Sub dlgBoxPlot_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
             InitialiseDialog()
@@ -105,7 +104,6 @@ Public Class dlgPivotTable
 
         ucrBase.clsRsyntax.AddToBeforeCodes(clsRPivotTable, 1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectFunction)
-
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
@@ -156,7 +154,6 @@ Public Class dlgPivotTable
         ChangeDataParameterValue()
     End Sub
 
-    Private su
     Private Sub ChangeDataParameterValue()
         If ucrChkSelectedVariable.Checked Then
             clsRPivotTable.AddParameter("data", "data_selected", iPosition:=0)
@@ -164,17 +161,26 @@ Public Class dlgPivotTable
             clsRPivotTable.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         End If
     End Sub
+
     Private Sub ReceiversChanged(ucrChangedControls As ucrCore) Handles ucrReceiverInitialColumnFactor.ControlValueChanged,
             ucrReceiverInitialRowFactor.ControlValueChanged, ucrReceiverSelectedVariable.ControlValueChanged
         If bRcodeSet Then
             If ucrChkSelectedVariable.Checked Then
                 clsConcatenateFunction.ClearParameters()
                 Dim iCount As Integer = 2
-                If Not ucrReceiverInitialColumnFactor.IsEmpty Then
-                    clsConcatenateFunction.AddParameter("column", ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
-                End If
-                If Not ucrReceiverInitialRowFactor.IsEmpty Then
-                    If clsConcatenateFunction.GetParameter("column").strArgumentValue <> ucrReceiverInitialRowFactor.GetVariableNames(bWithQuotes:=False) Then
+                'To avoid repeating the same column in the c() function eg c("fert"."fert")
+                If Not ucrReceiverInitialColumnFactor.IsEmpty AndAlso Not ucrReceiverInitialRowFactor.IsEmpty Then
+                    If ucrReceiverInitialRowFactor.GetVariableNames(bWithQuotes:=False) <> ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False) Then
+                        clsConcatenateFunction.AddParameter("column", ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+                        clsConcatenateFunction.AddParameter("row", ucrReceiverInitialRowFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
+                    Else
+                        clsConcatenateFunction.AddParameter("column", ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+                    End If
+                Else
+                    If Not ucrReceiverInitialColumnFactor.IsEmpty Then
+                        clsConcatenateFunction.AddParameter("column", ucrReceiverInitialColumnFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=0)
+                    End If
+                    If Not ucrReceiverInitialRowFactor.IsEmpty Then
                         clsConcatenateFunction.AddParameter("row", ucrReceiverInitialRowFactor.GetVariableNames(bWithQuotes:=False), bIncludeArgumentName:=False, iPosition:=1)
                     End If
                 End If
