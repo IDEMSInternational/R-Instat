@@ -129,6 +129,7 @@ Public Class dlgThreeVariableModelling
 
         ucrSelectorThreeVariableModelling.Reset()
         ucrReceiverResponse.SetMeAsReceiver()
+        ucrChkConvertToNumeric.Visible = False
 
         ucrBase.clsRsyntax.ClearCodes()
 
