@@ -159,7 +159,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.lblSets)
         Me.Controls.Add(Me.ucrNudNoSets)
         Me.Controls.Add(Me.ucrChkStackMultipleSets)
-        Me.Controls.Add(Me.ucrSaveNewDataName)
         Me.Controls.Add(Me.ucrChkCarryColumns)
         Me.Controls.Add(Me.ucrStackDataInto)
         Me.Controls.Add(Me.ucrFactorInto)
@@ -170,6 +169,7 @@ Partial Class dlgStack
         Me.Controls.Add(Me.lblStackDataInto)
         Me.Controls.Add(Me.lblColumnsTostack)
         Me.Controls.Add(Me.ucrReceiverColumnsToBeStack)
+        Me.Controls.Add(Me.ucrSaveNewDataName)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
