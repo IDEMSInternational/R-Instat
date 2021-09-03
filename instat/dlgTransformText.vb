@@ -244,6 +244,7 @@ Public Class dlgTransformText
         ucrNewColName.AddAdditionalRCode(clsTrimFunction, iAdditionalPairNo:=3)
         ucrNewColName.AddAdditionalRCode(clsWordsFunction, iAdditionalPairNo:=4)
         ucrNewColName.AddAdditionalRCode(clsSubstringFunction, iAdditionalPairNo:=5)
+        ucrNewColName.AddAdditionalRCode(clsSquishFunction, iAdditionalPairNo:=6)
 
         ucrReceiverTransformText.SetRCode(clsConvertFunction, bReset)
         ucrNewColName.SetRCode(clsConvertFunction, bReset)
@@ -392,7 +393,12 @@ Public Class dlgTransformText
         ElseIf rdoPad.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsPadFunction)
         ElseIf rdoTrim.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsTrimFunction)
+            If rdoSquish.Checked Then
+                ucrBase.clsRsyntax.SetBaseRFunction(clsSquishFunction)
+            Else
+                ucrBase.clsRsyntax.SetBaseRFunction(clsTrimFunction)
+            End If
+
         ElseIf rdoWords.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsWordsFunction)
         ElseIf rdoSubstring.Checked Then
@@ -440,4 +446,17 @@ Public Class dlgTransformText
         TestOkEnabled()
     End Sub
 
+    Private Sub ucrPnlPad_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlPad.ControlValueChanged
+        ChangeBaseFunction()
+        If rdoLeftPad.Checked Then
+            clsPadFunction.AddParameter("side", Chr(34) & "left" & Chr(34), iPosition:=2)
+            clsTrimFunction.AddParameter("side", Chr(34) & "left" & Chr(34), iPosition:=2)
+        ElseIf rdoRightPad.Checked Then
+            clsPadFunction.AddParameter("side", Chr(34) & "right" & Chr(34), iPosition:=2)
+            clsTrimFunction.AddParameter("side", Chr(34) & "right" & Chr(34), iPosition:=2)
+        ElseIf rdoBothPad.Checked Then
+            clsPadFunction.AddParameter("side", Chr(34) & "both" & Chr(34), iPosition:=2)
+            clsTrimFunction.AddParameter("side", Chr(34) & "both" & Chr(34), iPosition:=2)
+        End If
+    End Sub
 End Class
