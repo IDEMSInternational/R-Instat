@@ -103,7 +103,7 @@ Partial Class dlgCircular
         'ucrPnlUnits
         '
         Me.ucrPnlUnits.Location = New System.Drawing.Point(3, 16)
-        Me.ucrPnlUnits.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrPnlUnits.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlUnits.Name = "ucrPnlUnits"
         Me.ucrPnlUnits.Size = New System.Drawing.Size(93, 67)
         Me.ucrPnlUnits.TabIndex = 0
@@ -160,7 +160,7 @@ Partial Class dlgCircular
         'ucrPnlModulo
         '
         Me.ucrPnlModulo.Location = New System.Drawing.Point(10, 11)
-        Me.ucrPnlModulo.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrPnlModulo.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrPnlModulo.Name = "ucrPnlModulo"
         Me.ucrPnlModulo.Size = New System.Drawing.Size(93, 67)
         Me.ucrPnlModulo.TabIndex = 3
@@ -168,7 +168,7 @@ Partial Class dlgCircular
         'ucrSaveCircularColumn
         '
         Me.ucrSaveCircularColumn.Location = New System.Drawing.Point(10, 314)
-        Me.ucrSaveCircularColumn.Margin = New System.Windows.Forms.Padding(5, 5, 5, 5)
+        Me.ucrSaveCircularColumn.Margin = New System.Windows.Forms.Padding(5)
         Me.ucrSaveCircularColumn.Name = "ucrSaveCircularColumn"
         Me.ucrSaveCircularColumn.Size = New System.Drawing.Size(255, 22)
         Me.ucrSaveCircularColumn.TabIndex = 6
@@ -199,7 +199,7 @@ Partial Class dlgCircular
         'ucrBase
         '
         Me.ucrBase.Location = New System.Drawing.Point(10, 341)
-        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ucrBase.Margin = New System.Windows.Forms.Padding(4)
         Me.ucrBase.Name = "ucrBase"
         Me.ucrBase.Size = New System.Drawing.Size(403, 52)
         Me.ucrBase.TabIndex = 0
@@ -217,12 +217,12 @@ Partial Class dlgCircular
         Me.Controls.Add(Me.ucrSelectorCircular)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "dlgCircular"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "Convert to Circular"
+        Me.Text = "histogram"
         Me.grpUnits.ResumeLayout(False)
         Me.grpUnits.PerformLayout()
         Me.grpModulo.ResumeLayout(False)

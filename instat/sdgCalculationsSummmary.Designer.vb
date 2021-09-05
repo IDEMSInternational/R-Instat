@@ -88,6 +88,7 @@ Partial Class sdgCalculationsSummmary
         '
         'tbMain
         '
+        Me.tbMain.Controls.Add(Me.ucrDefineFilter)
         Me.tbMain.Controls.Add(Me.ucrReceiverByOrSort)
         Me.tbMain.Controls.Add(Me.ucrInputCalculationName)
         Me.tbMain.Controls.Add(Me.lblReceiverLabel)
@@ -100,9 +101,8 @@ Partial Class sdgCalculationsSummmary
         Me.tbMain.Controls.Add(Me.lblType)
         Me.tbMain.Controls.Add(Me.ucrInputType)
         Me.tbMain.Controls.Add(Me.ucrSelectorBy)
-        Me.tbMain.Controls.Add(Me.ucrCalcSummary)
-        Me.tbMain.Controls.Add(Me.ucrDefineFilter)
         Me.tbMain.Controls.Add(Me.ucrPnlSave)
+        Me.tbMain.Controls.Add(Me.ucrCalcSummary)
         resources.ApplyResources(Me.tbMain, "tbMain")
         Me.tbMain.Name = "tbMain"
         Me.tbMain.UseVisualStyleBackColor = True
@@ -176,12 +176,14 @@ Partial Class sdgCalculationsSummmary
         'ucrInputType
         '
         Me.ucrInputType.AddQuotesIfUnrecognised = True
+        Me.ucrInputType.GetSetSelectedIndex = -1
         Me.ucrInputType.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputType, "ucrInputType")
         Me.ucrInputType.Name = "ucrInputType"
         '
         'ucrSelectorBy
         '
+        Me.ucrSelectorBy.bDropUnusedFilterLevels = False
         Me.ucrSelectorBy.bShowHiddenColumns = False
         Me.ucrSelectorBy.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorBy, "ucrSelectorBy")
@@ -264,6 +266,7 @@ Partial Class sdgCalculationsSummmary
         '
         'lstSubCalcs
         '
+        Me.lstSubCalcs.HideSelection = False
         resources.ApplyResources(Me.lstSubCalcs, "lstSubCalcs")
         Me.lstSubCalcs.Name = "lstSubCalcs"
         Me.lstSubCalcs.UseCompatibleStateImageBehavior = False

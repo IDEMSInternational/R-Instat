@@ -208,10 +208,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoCell.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 12</value>
+    <value>10, 3</value>
   </data>
   <data name="rdoCell.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>100, 42</value>
   </data>
   <data name="rdoCell.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -247,10 +247,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoRow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>108, 12</value>
+    <value>108, 3</value>
   </data>
   <data name="rdoRow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>100, 42</value>
   </data>
   <data name="rdoRow.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -274,10 +274,10 @@
     <value>5</value>
   </data>
   <data name="ucrPnlCellRowColumnDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-4, 12</value>
+    <value>-4, 1</value>
   </data>
   <data name="ucrPnlCellRowColumnDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>422, 29</value>
+    <value>422, 44</value>
   </data>
   <data name="ucrPnlCellRowColumnDataFrame.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -295,10 +295,10 @@
     <value>6</value>
   </data>
   <data name="ucrInputComment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>72, 239</value>
+    <value>83, 239</value>
   </data>
   <data name="ucrInputComment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>336, 47</value>
+    <value>325, 47</value>
   </data>
   <data name="ucrInputComment.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -340,10 +340,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>206, 12</value>
+    <value>206, 3</value>
   </data>
   <data name="rdoColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>100, 42</value>
   </data>
   <data name="rdoColumn.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -382,10 +382,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>304, 12</value>
+    <value>304, 3</value>
   </data>
   <data name="rdoDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>100, 42</value>
   </data>
   <data name="rdoDataFrame.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>

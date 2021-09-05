@@ -643,10 +643,10 @@
     <value>0</value>
   </data>
   <data name="ucrButtonsSDGVarTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>65, 306</value>
+    <value>56, 318</value>
   </data>
   <data name="ucrButtonsSDGVarTransform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>155, 30</value>
   </data>
   <data name="ucrButtonsSDGVarTransform.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>

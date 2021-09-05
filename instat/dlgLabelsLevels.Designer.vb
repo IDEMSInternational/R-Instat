@@ -86,6 +86,7 @@ Partial Class dlgLabelsLevels
         '
         'ucrSelectorForLabels
         '
+        Me.ucrSelectorForLabels.bDropUnusedFilterLevels = False
         Me.ucrSelectorForLabels.bShowHiddenColumns = False
         Me.ucrSelectorForLabels.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorForLabels, "ucrSelectorForLabels")

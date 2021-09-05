@@ -148,7 +148,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblYvariable.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>11</value>
   </data>
   <data name="lblFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -178,7 +178,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblFactor.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>9</value>
   </data>
   <data name="cmdBarChartOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -187,13 +187,13 @@
     <value>10, 228</value>
   </data>
   <data name="cmdBarChartOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 23</value>
+    <value>149, 23</value>
   </data>
   <data name="cmdBarChartOptions.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
   <data name="cmdBarChartOptions.Text" xml:space="preserve">
-    <value>Bar Chart Options</value>
+    <value>Bar Options</value>
   </data>
   <data name="&gt;&gt;cmdBarChartOptions.Name" xml:space="preserve">
     <value>cmdBarChartOptions</value>
@@ -205,7 +205,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdBarChartOptions.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>17</value>
   </data>
   <data name="cmdOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -214,7 +214,7 @@
     <value>10, 257</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 23</value>
+    <value>149, 23</value>
   </data>
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -262,7 +262,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSecondFactor.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>8</value>
   </data>
   <data name="cmdPieChartOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -271,13 +271,13 @@
     <value>10, 228</value>
   </data>
   <data name="cmdPieChartOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 23</value>
+    <value>149, 23</value>
   </data>
   <data name="cmdPieChartOptions.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
   </data>
   <data name="cmdPieChartOptions.Text" xml:space="preserve">
-    <value>Pie Chart Options</value>
+    <value>Pie Options</value>
   </data>
   <data name="&gt;&gt;cmdPieChartOptions.Name" xml:space="preserve">
     <value>cmdPieChartOptions</value>
@@ -289,7 +289,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdPieChartOptions.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>18</value>
   </data>
   <data name="rdoBarChart.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -301,10 +301,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoBarChart.Location" type="System.Drawing.Point, System.Drawing">
-    <value>49, 10</value>
+    <value>38, 10</value>
   </data>
   <data name="rdoBarChart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 27</value>
+    <value>121, 27</value>
   </data>
   <data name="rdoBarChart.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -340,7 +340,7 @@
     <value>157, 10</value>
   </data>
   <data name="rdoPieChart.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 27</value>
+    <value>127, 27</value>
   </data>
   <data name="rdoPieChart.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -376,10 +376,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoTable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>265, 10</value>
+    <value>280, 10</value>
   </data>
   <data name="rdoTable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 27</value>
+    <value>99, 27</value>
   </data>
   <data name="rdoTable.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -430,7 +430,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveSummaryBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>257, 24</value>
+    <value>329, 24</value>
   </data>
   <data name="ucrSaveSummaryBar.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -532,7 +532,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverFactor.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>12</value>
   </data>
   <data name="ucrReceiverYVariable.Location" type="System.Drawing.Point, System.Drawing">
     <value>259, 75</value>
@@ -556,7 +556,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverYVariable.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>13</value>
   </data>
   <data name="ucrSummaryBarSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 40</value>
@@ -565,7 +565,7 @@
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrSummaryBarSelector.Size" type="System.Drawing.Size, System.Drawing">
-    <value>242, 192</value>
+    <value>242, 185</value>
   </data>
   <data name="ucrSummaryBarSelector.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -580,7 +580,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSummaryBarSelector.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>14</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 322</value>
@@ -601,7 +601,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>15</value>
   </data>
   <data name="ucrPnlOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>38, 3</value>
@@ -622,7 +622,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>16</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -658,6 +658,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverSecondFactor.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>10</value>
   </data>
 </root>

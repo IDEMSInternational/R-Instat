@@ -52,26 +52,26 @@ Partial Class dlgImportGriddedData
         Me.rdoEntireRange = New System.Windows.Forms.RadioButton()
         Me.lblTo = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
-        Me.grpLocationRange = New System.Windows.Forms.GroupBox()
-        Me.rdoPoint = New System.Windows.Forms.RadioButton()
-        Me.rdoArea = New System.Windows.Forms.RadioButton()
-        Me.lblMinLon = New System.Windows.Forms.Label()
-        Me.lblMinLat = New System.Windows.Forms.Label()
-        Me.lblSaveDownloadedFileTo = New System.Windows.Forms.Label()
-        Me.ucrInputNewDataFrameName = New instat.ucrInputTextBox()
-        Me.ucrChkDontImportData = New instat.ucrCheck()
         Me.ucrDtpMinDate = New instat.ucrDateTimePicker()
         Me.ucrDtpMaxDate = New instat.ucrDateTimePicker()
         Me.ucrPnlDateRange = New instat.UcrPanel()
-        Me.ucrInputFilePath = New instat.ucrInputTextBox()
-        Me.ucrInputData = New instat.ucrInputComboBox()
-        Me.ucrInputSource = New instat.ucrInputComboBox()
-        Me.ucrBase = New instat.ucrButtons()
+        Me.grpLocationRange = New System.Windows.Forms.GroupBox()
+        Me.rdoPoint = New System.Windows.Forms.RadioButton()
+        Me.rdoArea = New System.Windows.Forms.RadioButton()
         Me.ucrPnlLocationRange = New instat.UcrPanel()
+        Me.lblMinLon = New System.Windows.Forms.Label()
+        Me.lblMinLat = New System.Windows.Forms.Label()
         Me.ucrInputMinLon = New instat.ucrInputTextBox()
         Me.ucrInputMinLat = New instat.ucrInputTextBox()
         Me.ucrInputMaxLat = New instat.ucrInputTextBox()
         Me.ucrInputMaxLon = New instat.ucrInputTextBox()
+        Me.lblSaveDownloadedFileTo = New System.Windows.Forms.Label()
+        Me.ucrInputNewDataFrameName = New instat.ucrInputTextBox()
+        Me.ucrChkDontImportData = New instat.ucrCheck()
+        Me.ucrInputFilePath = New instat.ucrInputTextBox()
+        Me.ucrInputData = New instat.ucrInputComboBox()
+        Me.ucrInputSource = New instat.ucrInputComboBox()
+        Me.ucrBase = New instat.ucrButtons()
         Me.grpDateRange.SuspendLayout()
         Me.grpLocationRange.SuspendLayout()
         Me.SuspendLayout()
@@ -164,6 +164,29 @@ Partial Class dlgImportGriddedData
         resources.ApplyResources(Me.lblFrom, "lblFrom")
         Me.lblFrom.Name = "lblFrom"
         '
+        'ucrDtpMinDate
+        '
+        Me.ucrDtpMinDate.DateValue = New Date(2021, 5, 18, 13, 18, 46, 901)
+        Me.ucrDtpMinDate.Format = "dd MMM yyyy"
+        resources.ApplyResources(Me.ucrDtpMinDate, "ucrDtpMinDate")
+        Me.ucrDtpMinDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpMinDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpMinDate.Name = "ucrDtpMinDate"
+        '
+        'ucrDtpMaxDate
+        '
+        Me.ucrDtpMaxDate.DateValue = New Date(2021, 5, 18, 13, 18, 46, 931)
+        Me.ucrDtpMaxDate.Format = "dd MMM yyyy"
+        resources.ApplyResources(Me.ucrDtpMaxDate, "ucrDtpMaxDate")
+        Me.ucrDtpMaxDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
+        Me.ucrDtpMaxDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
+        Me.ucrDtpMaxDate.Name = "ucrDtpMaxDate"
+        '
+        'ucrPnlDateRange
+        '
+        resources.ApplyResources(Me.ucrPnlDateRange, "ucrPnlDateRange")
+        Me.ucrPnlDateRange.Name = "ucrPnlDateRange"
+        '
         'grpLocationRange
         '
         Me.grpLocationRange.Controls.Add(Me.rdoPoint)
@@ -207,6 +230,11 @@ Partial Class dlgImportGriddedData
         Me.rdoArea.Tag = ""
         Me.rdoArea.UseVisualStyleBackColor = False
         '
+        'ucrPnlLocationRange
+        '
+        resources.ApplyResources(Me.ucrPnlLocationRange, "ucrPnlLocationRange")
+        Me.ucrPnlLocationRange.Name = "ucrPnlLocationRange"
+        '
         'lblMinLon
         '
         resources.ApplyResources(Me.lblMinLon, "lblMinLon")
@@ -216,82 +244,6 @@ Partial Class dlgImportGriddedData
         '
         resources.ApplyResources(Me.lblMinLat, "lblMinLat")
         Me.lblMinLat.Name = "lblMinLat"
-        '
-        'lblSaveDownloadedFileTo
-        '
-        resources.ApplyResources(Me.lblSaveDownloadedFileTo, "lblSaveDownloadedFileTo")
-        Me.lblSaveDownloadedFileTo.Name = "lblSaveDownloadedFileTo"
-        '
-        'ucrInputNewDataFrameName
-        '
-        Me.ucrInputNewDataFrameName.AddQuotesIfUnrecognised = True
-        Me.ucrInputNewDataFrameName.IsMultiline = False
-        Me.ucrInputNewDataFrameName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputNewDataFrameName, "ucrInputNewDataFrameName")
-        Me.ucrInputNewDataFrameName.Name = "ucrInputNewDataFrameName"
-        '
-        'ucrChkDontImportData
-        '
-        Me.ucrChkDontImportData.Checked = False
-        resources.ApplyResources(Me.ucrChkDontImportData, "ucrChkDontImportData")
-        Me.ucrChkDontImportData.Name = "ucrChkDontImportData"
-        '
-        'ucrDtpMinDate
-        '
-        Me.ucrDtpMinDate.DateValue = New Date(2021, 5, 18, 13, 18, 46, 901)
-        Me.ucrDtpMinDate.Format = "dd MMM yyyy"
-        resources.ApplyResources(Me.ucrDtpMinDate, "ucrDtpMinDate")
-        Me.ucrDtpMinDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDtpMinDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDtpMinDate.Name = "ucrDtpMinDate"
-        '
-        'ucrDtpMaxDate
-        '
-        Me.ucrDtpMaxDate.DateValue = New Date(2021, 5, 18, 13, 18, 46, 931)
-        Me.ucrDtpMaxDate.Format = "dd MMM yyyy"
-        resources.ApplyResources(Me.ucrDtpMaxDate, "ucrDtpMaxDate")
-        Me.ucrDtpMaxDate.MaxDate = New Date(9998, 12, 31, 0, 0, 0, 0)
-        Me.ucrDtpMaxDate.MinDate = New Date(1753, 1, 1, 0, 0, 0, 0)
-        Me.ucrDtpMaxDate.Name = "ucrDtpMaxDate"
-        '
-        'ucrPnlDateRange
-        '
-        resources.ApplyResources(Me.ucrPnlDateRange, "ucrPnlDateRange")
-        Me.ucrPnlDateRange.Name = "ucrPnlDateRange"
-        '
-        'ucrInputFilePath
-        '
-        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
-        Me.ucrInputFilePath.IsMultiline = False
-        Me.ucrInputFilePath.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
-        Me.ucrInputFilePath.Name = "ucrInputFilePath"
-        '
-        'ucrInputData
-        '
-        Me.ucrInputData.AddQuotesIfUnrecognised = True
-        Me.ucrInputData.GetSetSelectedIndex = -1
-        Me.ucrInputData.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputData, "ucrInputData")
-        Me.ucrInputData.Name = "ucrInputData"
-        '
-        'ucrInputSource
-        '
-        Me.ucrInputSource.AddQuotesIfUnrecognised = True
-        Me.ucrInputSource.GetSetSelectedIndex = -1
-        Me.ucrInputSource.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSource, "ucrInputSource")
-        Me.ucrInputSource.Name = "ucrInputSource"
-        '
-        'ucrBase
-        '
-        resources.ApplyResources(Me.ucrBase, "ucrBase")
-        Me.ucrBase.Name = "ucrBase"
-        '
-        'ucrPnlLocationRange
-        '
-        resources.ApplyResources(Me.ucrPnlLocationRange, "ucrPnlLocationRange")
-        Me.ucrPnlLocationRange.Name = "ucrPnlLocationRange"
         '
         'ucrInputMinLon
         '
@@ -324,6 +276,54 @@ Partial Class dlgImportGriddedData
         Me.ucrInputMaxLon.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputMaxLon, "ucrInputMaxLon")
         Me.ucrInputMaxLon.Name = "ucrInputMaxLon"
+        '
+        'lblSaveDownloadedFileTo
+        '
+        resources.ApplyResources(Me.lblSaveDownloadedFileTo, "lblSaveDownloadedFileTo")
+        Me.lblSaveDownloadedFileTo.Name = "lblSaveDownloadedFileTo"
+        '
+        'ucrInputNewDataFrameName
+        '
+        Me.ucrInputNewDataFrameName.AddQuotesIfUnrecognised = True
+        Me.ucrInputNewDataFrameName.IsMultiline = False
+        Me.ucrInputNewDataFrameName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputNewDataFrameName, "ucrInputNewDataFrameName")
+        Me.ucrInputNewDataFrameName.Name = "ucrInputNewDataFrameName"
+        '
+        'ucrChkDontImportData
+        '
+        Me.ucrChkDontImportData.Checked = False
+        resources.ApplyResources(Me.ucrChkDontImportData, "ucrChkDontImportData")
+        Me.ucrChkDontImportData.Name = "ucrChkDontImportData"
+        '
+        'ucrInputFilePath
+        '
+        Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
+        Me.ucrInputFilePath.IsMultiline = False
+        Me.ucrInputFilePath.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFilePath, "ucrInputFilePath")
+        Me.ucrInputFilePath.Name = "ucrInputFilePath"
+        '
+        'ucrInputData
+        '
+        Me.ucrInputData.AddQuotesIfUnrecognised = True
+        Me.ucrInputData.GetSetSelectedIndex = -1
+        Me.ucrInputData.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputData, "ucrInputData")
+        Me.ucrInputData.Name = "ucrInputData"
+        '
+        'ucrInputSource
+        '
+        Me.ucrInputSource.AddQuotesIfUnrecognised = True
+        Me.ucrInputSource.GetSetSelectedIndex = -1
+        Me.ucrInputSource.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSource, "ucrInputSource")
+        Me.ucrInputSource.Name = "ucrInputSource"
+        '
+        'ucrBase
+        '
+        resources.ApplyResources(Me.ucrBase, "ucrBase")
+        Me.ucrBase.Name = "ucrBase"
         '
         'dlgImportGriddedData
         '

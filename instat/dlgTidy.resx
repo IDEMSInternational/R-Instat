@@ -151,16 +151,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblModels.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="ucrSaveNewDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 237</value>
+    <value>237, 237</value>
   </data>
   <data name="ucrSaveNewDataFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveNewDataFrame.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 34</value>
+    <value>164, 34</value>
   </data>
   <data name="ucrSaveNewDataFrame.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveNewDataFrame.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>7</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -247,7 +247,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>157, 81</value>
+    <value>210, 81</value>
   </data>
   <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -286,7 +286,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrModelSelector.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 294</value>
@@ -310,7 +310,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -349,6 +349,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrModelReceiver.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
 </root>

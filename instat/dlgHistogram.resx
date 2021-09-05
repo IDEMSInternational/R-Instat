@@ -126,7 +126,7 @@
     <value>10, 267</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 25</value>
+    <value>150, 25</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
@@ -154,7 +154,7 @@
     <value>10, 236</value>
   </data>
   <data name="cmdHistogramOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>185, 25</value>
+    <value>150, 25</value>
   </data>
   <data name="cmdHistogramOptions.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -172,7 +172,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdHistogramOptions.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>15</value>
   </data>
   <data name="rdoHistogram.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -205,40 +205,43 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoHistogram.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
-  <data name="rdoDensity.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+  <data name="rdoDensity_ridges.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
   </data>
-  <data name="rdoDensity.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+  <data name="rdoDensity_ridges.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
   </data>
-  <data name="rdoDensity.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoDensity_ridges.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="rdoDensity_ridges.Location" type="System.Drawing.Point, System.Drawing">
     <value>151, 12</value>
   </data>
-  <data name="rdoDensity.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoDensity_ridges.Size" type="System.Drawing.Size, System.Drawing">
     <value>145, 28</value>
   </data>
-  <data name="rdoDensity.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoDensity_ridges.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="rdoDensity.Text" xml:space="preserve">
-    <value>Density</value>
+  <data name="rdoDensity_ridges.Text" xml:space="preserve">
+    <value>Density/Ridges</value>
   </data>
-  <data name="rdoDensity.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+  <data name="rdoDensity_ridges.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
   </data>
-  <data name="&gt;&gt;rdoDensity.Name" xml:space="preserve">
-    <value>rdoDensity</value>
+  <data name="&gt;&gt;rdoDensity_ridges.Name" xml:space="preserve">
+    <value>rdoDensity_ridges</value>
   </data>
-  <data name="&gt;&gt;rdoDensity.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoDensity_ridges.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoDensity.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoDensity_ridges.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;rdoDensity.ZOrder" xml:space="preserve">
-    <value>7</value>
+  <data name="&gt;&gt;rdoDensity_ridges.ZOrder" xml:space="preserve">
+    <value>8</value>
   </data>
   <data name="rdoFrequencyPolygon.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -271,13 +274,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;rdoFrequencyPolygon.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="lblfactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblfactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 216</value>
+    <value>249, 225</value>
   </data>
   <data name="lblfactor.Size" type="System.Drawing.Size, System.Drawing">
     <value>85, 13</value>
@@ -301,16 +304,16 @@
     <value>12</value>
   </data>
   <data name="lblStats.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 308</value>
+    <value>10, 306</value>
   </data>
   <data name="lblStats.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 18</value>
+    <value>83, 18</value>
   </data>
   <data name="lblStats.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
   </data>
   <data name="lblStats.Text" xml:space="preserve">
-    <value>Stats</value>
+    <value>merge</value>
   </data>
   <data name="&gt;&gt;lblStats.Name" xml:space="preserve">
     <value>lblStats</value>
@@ -322,10 +325,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblStats.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="ucrInputStats.Location" type="System.Drawing.Point, System.Drawing">
-    <value>53, 300</value>
+    <value>101, 305</value>
   </data>
   <data name="ucrInputStats.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>5, 5, 5, 5</value>
@@ -346,10 +349,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrInputStats.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="ucrChkPercentages.Location" type="System.Drawing.Point, System.Drawing">
-    <value>199, 306</value>
+    <value>250, 305</value>
   </data>
   <data name="ucrChkPercentages.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
@@ -370,7 +373,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkPercentages.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ucrSaveHist.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 342</value>
@@ -379,7 +382,7 @@
     <value>5, 5, 5, 5</value>
   </data>
   <data name="ucrSaveHist.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>322, 24</value>
   </data>
   <data name="ucrSaveHist.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -394,7 +397,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSaveHist.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -405,8 +408,32 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>448, 436</value>
   </data>
+  <data name="ucrChkRidges.Location" type="System.Drawing.Point, System.Drawing">
+    <value>250, 277</value>
+  </data>
+  <data name="ucrChkRidges.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 4, 4, 4</value>
+  </data>
+  <data name="ucrChkRidges.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 20</value>
+  </data>
+  <data name="ucrChkRidges.TabIndex" type="System.Int32, mscorlib">
+    <value>15</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRidges.Name" xml:space="preserve">
+    <value>ucrChkRidges</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRidges.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRidges.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkRidges.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrFactorReceiver.Location" type="System.Drawing.Point, System.Drawing">
-    <value>247, 231</value>
+    <value>250, 241</value>
   </data>
   <data name="ucrFactorReceiver.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -427,7 +454,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrFactorReceiver.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="ucrHistogramSelector.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 48</value>
@@ -535,6 +562,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrVariablesAsFactorforHist.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
 </root>

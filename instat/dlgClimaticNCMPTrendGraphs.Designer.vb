@@ -55,7 +55,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         'cmdStationMetadata
         '
         Me.cmdStationMetadata.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdStationMetadata.Location = New System.Drawing.Point(264, 167)
+        Me.cmdStationMetadata.Location = New System.Drawing.Point(309, 164)
         Me.cmdStationMetadata.Name = "cmdStationMetadata"
         Me.cmdStationMetadata.Size = New System.Drawing.Size(120, 23)
         Me.cmdStationMetadata.TabIndex = 7
@@ -66,7 +66,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         Me.lblYearA2.AutoSize = True
         Me.lblYearA2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYearA2.Location = New System.Drawing.Point(262, 70)
+        Me.lblYearA2.Location = New System.Drawing.Point(307, 67)
         Me.lblYearA2.Name = "lblYearA2"
         Me.lblYearA2.Size = New System.Drawing.Size(32, 13)
         Me.lblYearA2.TabIndex = 3
@@ -76,7 +76,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         Me.lblMonthA2.AutoSize = True
         Me.lblMonthA2.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMonthA2.Location = New System.Drawing.Point(262, 114)
+        Me.lblMonthA2.Location = New System.Drawing.Point(307, 111)
         Me.lblMonthA2.Name = "lblMonthA2"
         Me.lblMonthA2.Size = New System.Drawing.Size(40, 13)
         Me.lblMonthA2.TabIndex = 5
@@ -86,7 +86,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         Me.lblYearA4.AutoSize = True
         Me.lblYearA4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblYearA4.Location = New System.Drawing.Point(262, 221)
+        Me.lblYearA4.Location = New System.Drawing.Point(307, 230)
         Me.lblYearA4.Name = "lblYearA4"
         Me.lblYearA4.Size = New System.Drawing.Size(32, 13)
         Me.lblYearA4.TabIndex = 10
@@ -96,7 +96,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         Me.lblMonthA4.AutoSize = True
         Me.lblMonthA4.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblMonthA4.Location = New System.Drawing.Point(262, 265)
+        Me.lblMonthA4.Location = New System.Drawing.Point(307, 274)
         Me.lblMonthA4.Name = "lblMonthA4"
         Me.lblMonthA4.Size = New System.Drawing.Size(40, 13)
         Me.lblMonthA4.TabIndex = 12
@@ -125,7 +125,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         'cmdChooseFile
         '
         Me.cmdChooseFile.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.cmdChooseFile.Location = New System.Drawing.Point(409, 397)
+        Me.cmdChooseFile.Location = New System.Drawing.Point(402, 397)
         Me.cmdChooseFile.Name = "cmdChooseFile"
         Me.cmdChooseFile.Size = New System.Drawing.Size(75, 23)
         Me.cmdChooseFile.TabIndex = 18
@@ -152,9 +152,9 @@ Partial Class dlgClimaticNCMPTrendGraphs
         Me.grpOptions.Controls.Add(Me.lblNYB)
         Me.grpOptions.Controls.Add(Me.ucrNudNYEA)
         Me.grpOptions.Controls.Add(Me.lblNYER)
-        Me.grpOptions.Location = New System.Drawing.Point(236, 312)
+        Me.grpOptions.Location = New System.Drawing.Point(227, 312)
         Me.grpOptions.Name = "grpOptions"
-        Me.grpOptions.Size = New System.Drawing.Size(293, 66)
+        Me.grpOptions.Size = New System.Drawing.Size(286, 66)
         Me.grpOptions.TabIndex = 14
         Me.grpOptions.TabStop = False
         Me.grpOptions.Text = "Options"
@@ -173,7 +173,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         Me.ucrNudNYBA.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYBA.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYBA.Location = New System.Drawing.Point(235, 14)
+        Me.ucrNudNYBA.Location = New System.Drawing.Point(228, 14)
         Me.ucrNudNYBA.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNYBA.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYBA.Name = "ucrNudNYBA"
@@ -229,7 +229,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         Me.ucrNudNYEA.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYEA.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.ucrNudNYEA.Location = New System.Drawing.Point(235, 40)
+        Me.ucrNudNYEA.Location = New System.Drawing.Point(228, 40)
         Me.ucrNudNYEA.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
         Me.ucrNudNYEA.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
         Me.ucrNudNYEA.Name = "ucrNudNYEA"
@@ -241,7 +241,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         Me.lblStation.AutoSize = True
         Me.lblStation.ImeMode = System.Windows.Forms.ImeMode.NoControl
-        Me.lblStation.Location = New System.Drawing.Point(262, 28)
+        Me.lblStation.Location = New System.Drawing.Point(307, 25)
         Me.lblStation.Name = "lblStation"
         Me.lblStation.Size = New System.Drawing.Size(43, 13)
         Me.lblStation.TabIndex = 1
@@ -252,7 +252,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         Me.ucrInputFilePath.AddQuotesIfUnrecognised = True
         Me.ucrInputFilePath.IsMultiline = False
         Me.ucrInputFilePath.IsReadOnly = False
-        Me.ucrInputFilePath.Location = New System.Drawing.Point(169, 398)
+        Me.ucrInputFilePath.Location = New System.Drawing.Point(162, 398)
         Me.ucrInputFilePath.Name = "ucrInputFilePath"
         Me.ucrInputFilePath.Size = New System.Drawing.Size(237, 21)
         Me.ucrInputFilePath.TabIndex = 17
@@ -267,7 +267,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         'ucrReceiverStation
         '
         Me.ucrReceiverStation.frmParent = Me
-        Me.ucrReceiverStation.Location = New System.Drawing.Point(263, 43)
+        Me.ucrReceiverStation.Location = New System.Drawing.Point(308, 40)
         Me.ucrReceiverStation.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverStation.Name = "ucrReceiverStation"
         Me.ucrReceiverStation.Selector = Nothing
@@ -279,7 +279,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         'ucrReceiverMonthA4
         '
         Me.ucrReceiverMonthA4.frmParent = Me
-        Me.ucrReceiverMonthA4.Location = New System.Drawing.Point(263, 280)
+        Me.ucrReceiverMonthA4.Location = New System.Drawing.Point(308, 289)
         Me.ucrReceiverMonthA4.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMonthA4.Name = "ucrReceiverMonthA4"
         Me.ucrReceiverMonthA4.Selector = Nothing
@@ -291,7 +291,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         'ucrReceiverYearA4
         '
         Me.ucrReceiverYearA4.frmParent = Me
-        Me.ucrReceiverYearA4.Location = New System.Drawing.Point(263, 236)
+        Me.ucrReceiverYearA4.Location = New System.Drawing.Point(308, 245)
         Me.ucrReceiverYearA4.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYearA4.Name = "ucrReceiverYearA4"
         Me.ucrReceiverYearA4.Selector = Nothing
@@ -314,7 +314,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         'ucrReceiverMonthA2
         '
         Me.ucrReceiverMonthA2.frmParent = Me
-        Me.ucrReceiverMonthA2.Location = New System.Drawing.Point(263, 129)
+        Me.ucrReceiverMonthA2.Location = New System.Drawing.Point(308, 126)
         Me.ucrReceiverMonthA2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverMonthA2.Name = "ucrReceiverMonthA2"
         Me.ucrReceiverMonthA2.Selector = Nothing
@@ -326,7 +326,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         'ucrReceiverYearA2
         '
         Me.ucrReceiverYearA2.frmParent = Me
-        Me.ucrReceiverYearA2.Location = New System.Drawing.Point(263, 85)
+        Me.ucrReceiverYearA2.Location = New System.Drawing.Point(308, 82)
         Me.ucrReceiverYearA2.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrReceiverYearA2.Name = "ucrReceiverYearA2"
         Me.ucrReceiverYearA2.Selector = Nothing
@@ -350,7 +350,7 @@ Partial Class dlgClimaticNCMPTrendGraphs
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(534, 483)
+        Me.ClientSize = New System.Drawing.Size(517, 483)
         Me.Controls.Add(Me.ucrInputFilePath)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.cmdChooseFile)

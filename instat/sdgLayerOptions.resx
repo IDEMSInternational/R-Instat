@@ -238,10 +238,10 @@
     <value>0</value>
   </data>
   <data name="ucrSdgLayerBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>173, 524</value>
+    <value>173, 525</value>
   </data>
   <data name="ucrSdgLayerBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>158, 30</value>
   </data>
   <data name="ucrSdgLayerBase.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

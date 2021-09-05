@@ -122,7 +122,7 @@
     <value>344, 621</value>
   </data>
   <data name="ucrBaseSubdialogue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>156, 30</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrBaseSubdialogue.TabIndex" type="System.Int32, mscorlib">
@@ -780,14 +780,14 @@
     <value>1</value>
   </data>
   <data name="ucrInputLegendJustification.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 126</value>
+    <value>152, 126</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrInputLegendJustification.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>21, 17, 21, 17</value>
   </data>
   <data name="ucrInputLegendJustification.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>105, 21</value>
   </data>
   <data name="ucrInputLegendJustification.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -805,13 +805,13 @@
     <value>0</value>
   </data>
   <data name="ucrInputLegendBox.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 98</value>
+    <value>152, 98</value>
   </data>
   <data name="ucrInputLegendBox.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>21, 17, 21, 17</value>
   </data>
   <data name="ucrInputLegendBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>105, 21</value>
   </data>
   <data name="ucrInputLegendBox.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -829,13 +829,13 @@
     <value>1</value>
   </data>
   <data name="ucrInputLegendPosition.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 19</value>
+    <value>152, 19</value>
   </data>
   <data name="ucrInputLegendPosition.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>21, 17, 21, 17</value>
   </data>
   <data name="ucrInputLegendPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>105, 21</value>
   </data>
   <data name="ucrInputLegendPosition.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -853,13 +853,13 @@
     <value>2</value>
   </data>
   <data name="ucrInputLegendDirection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 45</value>
+    <value>152, 45</value>
   </data>
   <data name="ucrInputLegendDirection.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>21, 17, 21, 17</value>
   </data>
   <data name="ucrInputLegendDirection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>105, 21</value>
   </data>
   <data name="ucrInputLegendDirection.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -877,13 +877,13 @@
     <value>3</value>
   </data>
   <data name="ucrInputLegendBoxJust.Location" type="System.Drawing.Point, System.Drawing">
-    <value>120, 71</value>
+    <value>177, 71</value>
   </data>
   <data name="ucrInputLegendBoxJust.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>21, 17, 21, 17</value>
   </data>
   <data name="ucrInputLegendBoxJust.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>80, 21</value>
   </data>
   <data name="ucrInputLegendBoxJust.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -904,7 +904,7 @@
     <value>6, 128</value>
   </data>
   <data name="ucrChkLegendJustification.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 20</value>
+    <value>147, 20</value>
   </data>
   <data name="ucrChkLegendJustification.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -925,7 +925,7 @@
     <value>6, 100</value>
   </data>
   <data name="ucrChkLegendBox.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 20</value>
+    <value>147, 20</value>
   </data>
   <data name="ucrChkLegendBox.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -946,7 +946,7 @@
     <value>6, 21</value>
   </data>
   <data name="urChkLegendPosition.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 20</value>
+    <value>147, 20</value>
   </data>
   <data name="urChkLegendPosition.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -967,7 +967,7 @@
     <value>6, 47</value>
   </data>
   <data name="ucrChkLegendDirection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 20</value>
+    <value>147, 20</value>
   </data>
   <data name="ucrChkLegendDirection.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -988,7 +988,7 @@
     <value>6, 73</value>
   </data>
   <data name="urChkLegendBoxJust.Size" type="System.Drawing.Size, System.Drawing">
-    <value>122, 20</value>
+    <value>165, 20</value>
   </data>
   <data name="urChkLegendBoxJust.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -1594,7 +1594,7 @@
     <value>2</value>
   </data>
   <data name="ucrTickLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 10</value>
+    <value>6, 23</value>
   </data>
   <data name="ucrTickLength.Size" type="System.Drawing.Size, System.Drawing">
     <value>258, 122</value>
@@ -1615,10 +1615,10 @@
     <value>0</value>
   </data>
   <data name="grpTickLength.Location" type="System.Drawing.Point, System.Drawing">
-    <value>538, 27</value>
+    <value>541, 27</value>
   </data>
   <data name="grpTickLength.Size" type="System.Drawing.Size, System.Drawing">
-    <value>272, 137</value>
+    <value>272, 151</value>
   </data>
   <data name="grpTickLength.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1777,7 +1777,7 @@
     <value>2</value>
   </data>
   <data name="grpPlotMargin.Text" xml:space="preserve">
-    <value>Plot Margin</value>
+    <value>Margin</value>
   </data>
   <data name="&gt;&gt;grpPlotMargin.Name" xml:space="preserve">
     <value>grpPlotMargin</value>
@@ -1822,7 +1822,7 @@
     <value>1</value>
   </data>
   <data name="grpPlotBackground.Text" xml:space="preserve">
-    <value>Plot Background </value>
+    <value>Background </value>
   </data>
   <data name="&gt;&gt;grpPlotBackground.Name" xml:space="preserve">
     <value>grpPlotBackground</value>

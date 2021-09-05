@@ -125,6 +125,7 @@ Partial Class dlgRandomSubsets
         '
         'ucrSelectorRandomSubsets
         '
+        Me.ucrSelectorRandomSubsets.bDropUnusedFilterLevels = False
         Me.ucrSelectorRandomSubsets.bShowHiddenColumns = False
         Me.ucrSelectorRandomSubsets.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorRandomSubsets, "ucrSelectorRandomSubsets")
@@ -149,12 +150,12 @@ Partial Class dlgRandomSubsets
         Me.Controls.Add(Me.ucrNudSetSeed)
         Me.Controls.Add(Me.ucrNudNumberOfColumns)
         Me.Controls.Add(Me.ucrNudSampleSize)
-        Me.Controls.Add(Me.ucrNewDataFrame)
         Me.Controls.Add(Me.lblNumberOfColumns)
         Me.Controls.Add(Me.lblSampleSize)
         Me.Controls.Add(Me.lblSelected)
         Me.Controls.Add(Me.ucrSelectorRandomSubsets)
         Me.Controls.Add(Me.ucrBase)
+        Me.Controls.Add(Me.ucrNewDataFrame)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

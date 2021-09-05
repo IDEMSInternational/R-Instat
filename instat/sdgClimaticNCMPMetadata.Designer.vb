@@ -36,7 +36,7 @@ Partial Class sdgClimaticNCMPMetadata
         '
         Me.ucrBase.Location = New System.Drawing.Point(124, 200)
         Me.ucrBase.Name = "ucrBase"
-        Me.ucrBase.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBase.Size = New System.Drawing.Size(156, 30)
         Me.ucrBase.TabIndex = 7
         '
         'lblStation

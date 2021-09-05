@@ -225,7 +225,7 @@
     <value>526, 369</value>
   </data>
   <data name="ucrInputDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>219, 258</value>
+    <value>235, 258</value>
   </data>
   <data name="ucrInputDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
     <value>105, 21</value>
@@ -270,7 +270,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputPrefixForNewColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 286</value>
+    <value>235, 285</value>
   </data>
   <data name="ucrInputPrefixForNewColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>163, 21</value>
@@ -291,7 +291,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudNumberOfColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 233</value>
+    <value>235, 232</value>
   </data>
   <data name="ucrNudNumberOfColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -319,10 +319,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoInsertRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>267, 12</value>
+    <value>269, 12</value>
   </data>
   <data name="rdoInsertRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>130, 28</value>
   </data>
   <data name="rdoInsertRows.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -352,10 +352,10 @@
     <value>Flat</value>
   </data>
   <data name="rdoInsertColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>169, 12</value>
+    <value>134, 12</value>
   </data>
   <data name="rdoInsertColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 28</value>
+    <value>135, 28</value>
   </data>
   <data name="rdoInsertColumns.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -379,10 +379,10 @@
     <value>5</value>
   </data>
   <data name="ucrPnlColumnsOrRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>161, 12</value>
+    <value>128, 12</value>
   </data>
   <data name="ucrPnlColumnsOrRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>214, 37</value>
+    <value>292, 37</value>
   </data>
   <data name="ucrPnlColumnsOrRows.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

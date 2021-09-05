@@ -40,7 +40,7 @@ Partial Class dlgClimaticNCMPCountRecords
         Me.ucrSaveCountRecords.Location = New System.Drawing.Point(10, 251)
         Me.ucrSaveCountRecords.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSaveCountRecords.Name = "ucrSaveCountRecords"
-        Me.ucrSaveCountRecords.Size = New System.Drawing.Size(289, 22)
+        Me.ucrSaveCountRecords.Size = New System.Drawing.Size(320, 24)
         Me.ucrSaveCountRecords.TabIndex = 10
         '
         'ucrSelectorForA4

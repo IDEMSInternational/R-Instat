@@ -220,7 +220,7 @@ Partial Class dlgSurvivalObject
         Me.ucrInputOrigin.AddQuotesIfUnrecognised = True
         Me.ucrInputOrigin.IsMultiline = False
         Me.ucrInputOrigin.IsReadOnly = False
-        Me.ucrInputOrigin.Location = New System.Drawing.Point(317, 247)
+        Me.ucrInputOrigin.Location = New System.Drawing.Point(328, 247)
         Me.ucrInputOrigin.Name = "ucrInputOrigin"
         Me.ucrInputOrigin.Size = New System.Drawing.Size(79, 21)
         Me.ucrInputOrigin.TabIndex = 20
@@ -299,7 +299,7 @@ Partial Class dlgSurvivalObject
         Me.ucrChkModifyEvent.Checked = False
         Me.ucrChkModifyEvent.Location = New System.Drawing.Point(404, 171)
         Me.ucrChkModifyEvent.Name = "ucrChkModifyEvent"
-        Me.ucrChkModifyEvent.Size = New System.Drawing.Size(99, 20)
+        Me.ucrChkModifyEvent.Size = New System.Drawing.Size(189, 20)
         Me.ucrChkModifyEvent.TabIndex = 14
         '
         'lblModifyEvent

@@ -605,8 +605,6 @@ Partial Class dlgMakeDate
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.grpSingleColumn)
-        Me.Controls.Add(Me.grpThreeColumns)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.rdoThreeColumns)
         Me.Controls.Add(Me.rdoTwoColumns)
@@ -616,6 +614,8 @@ Partial Class dlgMakeDate
         Me.Controls.Add(Me.grpTwoColumns)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorMakeDate)
+        Me.Controls.Add(Me.grpSingleColumn)
+        Me.Controls.Add(Me.grpThreeColumns)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

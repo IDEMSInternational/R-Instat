@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelectedVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>261, 45</value>
+    <value>258, 46</value>
   </data>
   <data name="lblSelectedVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 14</value>
@@ -145,16 +145,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblSelectedVariable.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="lblMaxSum.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblMaxSum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 238</value>
+    <value>10, 236</value>
   </data>
   <data name="lblMaxSum.Size" type="System.Drawing.Size, System.Drawing">
-    <value>187, 13</value>
+    <value>187, 19</value>
   </data>
   <data name="lblMaxSum.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -172,7 +172,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblMaxSum.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>11</value>
   </data>
   <data name="cmdSummaries.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -181,10 +181,10 @@
     <value>NoControl</value>
   </data>
   <data name="cmdSummaries.Location" type="System.Drawing.Point, System.Drawing">
-    <value>242, 200</value>
+    <value>261, 197</value>
   </data>
   <data name="cmdSummaries.Size" type="System.Drawing.Size, System.Drawing">
-    <value>116, 23</value>
+    <value>120, 23</value>
   </data>
   <data name="cmdSummaries.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -202,7 +202,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdSummaries.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="lblSummaries.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -295,7 +295,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudMaxSum.Location" type="System.Drawing.Point, System.Drawing">
-    <value>205, 235</value>
+    <value>261, 235</value>
   </data>
   <data name="ucrNudMaxSum.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -313,13 +313,13 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrNudMaxSum.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="ucrChkOmitMissing.Location" type="System.Drawing.Point, System.Drawing">
     <value>14, 235</value>
   </data>
   <data name="ucrChkOmitMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>166, 20</value>
+    <value>241, 20</value>
   </data>
   <data name="ucrChkOmitMissing.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -334,7 +334,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrChkOmitMissing.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="ucrSelectorOneVarSummarise.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
@@ -358,7 +358,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorOneVarSummarise.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -388,7 +388,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="ucrPnlSummaries.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 192</value>
@@ -409,7 +409,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlSummaries.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
@@ -445,6 +445,6 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrReceiverOneVarSummarise.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
 </root>

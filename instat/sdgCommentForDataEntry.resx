@@ -502,7 +502,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrSdgBaseButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 30</value>
+    <value>155, 30</value>
   </data>
   <data name="ucrSdgBaseButtons.TabIndex" type="System.Int32, mscorlib">
     <value>88</value>

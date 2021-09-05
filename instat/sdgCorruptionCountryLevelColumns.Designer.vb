@@ -91,6 +91,7 @@ Partial Class sdgCorruptionCountryLevelColumns
         '
         'ucrCountryLevelSelector
         '
+        Me.ucrCountryLevelSelector.bDropUnusedFilterLevels = False
         Me.ucrCountryLevelSelector.bShowHiddenColumns = False
         Me.ucrCountryLevelSelector.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrCountryLevelSelector, "ucrCountryLevelSelector")

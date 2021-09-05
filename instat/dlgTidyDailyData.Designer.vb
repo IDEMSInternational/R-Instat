@@ -36,17 +36,17 @@ Partial Class dlgTidyDailyData
         Me.lblColumnstoStack = New System.Windows.Forms.Label()
         Me.lblMultipleElement = New System.Windows.Forms.Label()
         Me.grpElements = New System.Windows.Forms.GroupBox()
+        Me.ucrChkUnstackElements = New instat.ucrCheck()
         Me.lblOr = New System.Windows.Forms.Label()
+        Me.ucrTextBoxElementName = New instat.ucrInputTextBox()
+        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.grpOptions = New System.Windows.Forms.GroupBox()
+        Me.ucrChkIgnoreInvalid = New instat.ucrCheck()
+        Me.ucrChkSilent = New instat.ucrCheck()
         Me.lblNewDataFrameName = New System.Windows.Forms.Label()
         Me.ttReshapeType = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblNColumns = New System.Windows.Forms.Label()
         Me.ucrInputNewDataFrame = New instat.ucrInputTextBox()
-        Me.ucrChkIgnoreInvalid = New instat.ucrCheck()
-        Me.ucrChkSilent = New instat.ucrCheck()
-        Me.ucrChkUnstackElements = New instat.ucrCheck()
-        Me.ucrTextBoxElementName = New instat.ucrInputTextBox()
-        Me.ucrReceiverElement = New instat.ucrReceiverSingle()
         Me.ucrReceiverMultipleStack = New instat.ucrReceiverMultiple()
         Me.ucrReceiverMonth = New instat.ucrReceiverSingle()
         Me.ucrReceiverDayofMonth = New instat.ucrReceiverSingle()
@@ -141,10 +141,33 @@ Partial Class dlgTidyDailyData
         Me.grpElements.Name = "grpElements"
         Me.grpElements.TabStop = False
         '
+        'ucrChkUnstackElements
+        '
+        Me.ucrChkUnstackElements.Checked = False
+        resources.ApplyResources(Me.ucrChkUnstackElements, "ucrChkUnstackElements")
+        Me.ucrChkUnstackElements.Name = "ucrChkUnstackElements"
+        '
         'lblOr
         '
         resources.ApplyResources(Me.lblOr, "lblOr")
         Me.lblOr.Name = "lblOr"
+        '
+        'ucrTextBoxElementName
+        '
+        Me.ucrTextBoxElementName.AddQuotesIfUnrecognised = True
+        Me.ucrTextBoxElementName.IsMultiline = False
+        Me.ucrTextBoxElementName.IsReadOnly = False
+        resources.ApplyResources(Me.ucrTextBoxElementName, "ucrTextBoxElementName")
+        Me.ucrTextBoxElementName.Name = "ucrTextBoxElementName"
+        '
+        'ucrReceiverElement
+        '
+        Me.ucrReceiverElement.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
+        Me.ucrReceiverElement.Name = "ucrReceiverElement"
+        Me.ucrReceiverElement.Selector = Nothing
+        Me.ucrReceiverElement.strNcFilePath = ""
+        Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'grpOptions
         '
@@ -153,6 +176,18 @@ Partial Class dlgTidyDailyData
         resources.ApplyResources(Me.grpOptions, "grpOptions")
         Me.grpOptions.Name = "grpOptions"
         Me.grpOptions.TabStop = False
+        '
+        'ucrChkIgnoreInvalid
+        '
+        Me.ucrChkIgnoreInvalid.Checked = False
+        resources.ApplyResources(Me.ucrChkIgnoreInvalid, "ucrChkIgnoreInvalid")
+        Me.ucrChkIgnoreInvalid.Name = "ucrChkIgnoreInvalid"
+        '
+        'ucrChkSilent
+        '
+        Me.ucrChkSilent.Checked = False
+        resources.ApplyResources(Me.ucrChkSilent, "ucrChkSilent")
+        Me.ucrChkSilent.Name = "ucrChkSilent"
         '
         'lblNewDataFrameName
         '
@@ -172,41 +207,6 @@ Partial Class dlgTidyDailyData
         Me.ucrInputNewDataFrame.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputNewDataFrame, "ucrInputNewDataFrame")
         Me.ucrInputNewDataFrame.Name = "ucrInputNewDataFrame"
-        '
-        'ucrChkIgnoreInvalid
-        '
-        Me.ucrChkIgnoreInvalid.Checked = False
-        resources.ApplyResources(Me.ucrChkIgnoreInvalid, "ucrChkIgnoreInvalid")
-        Me.ucrChkIgnoreInvalid.Name = "ucrChkIgnoreInvalid"
-        '
-        'ucrChkSilent
-        '
-        Me.ucrChkSilent.Checked = False
-        resources.ApplyResources(Me.ucrChkSilent, "ucrChkSilent")
-        Me.ucrChkSilent.Name = "ucrChkSilent"
-        '
-        'ucrChkUnstackElements
-        '
-        Me.ucrChkUnstackElements.Checked = False
-        resources.ApplyResources(Me.ucrChkUnstackElements, "ucrChkUnstackElements")
-        Me.ucrChkUnstackElements.Name = "ucrChkUnstackElements"
-        '
-        'ucrTextBoxElementName
-        '
-        Me.ucrTextBoxElementName.AddQuotesIfUnrecognised = True
-        Me.ucrTextBoxElementName.IsMultiline = False
-        Me.ucrTextBoxElementName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrTextBoxElementName, "ucrTextBoxElementName")
-        Me.ucrTextBoxElementName.Name = "ucrTextBoxElementName"
-        '
-        'ucrReceiverElement
-        '
-        Me.ucrReceiverElement.frmParent = Nothing
-        resources.ApplyResources(Me.ucrReceiverElement, "ucrReceiverElement")
-        Me.ucrReceiverElement.Name = "ucrReceiverElement"
-        Me.ucrReceiverElement.Selector = Nothing
-        Me.ucrReceiverElement.strNcFilePath = ""
-        Me.ucrReceiverElement.ucrSelector = Nothing
         '
         'ucrReceiverMultipleStack
         '

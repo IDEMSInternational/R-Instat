@@ -131,7 +131,7 @@ Partial Class dlgTimeSeriesPlot
         Me.ucrSavePlot.Location = New System.Drawing.Point(10, 385)
         Me.ucrSavePlot.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrSavePlot.Name = "ucrSavePlot"
-        Me.ucrSavePlot.Size = New System.Drawing.Size(272, 34)
+        Me.ucrSavePlot.Size = New System.Drawing.Size(320, 24)
         Me.ucrSavePlot.TabIndex = 15
         '
         'ucrReceiverFacetBy
