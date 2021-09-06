@@ -305,6 +305,12 @@
     <Compile Include="dlgImportERA5Data.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgImportt.Designer.vb">
+      <DependentUpon>dlgImportt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgImportt.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgInfillMissingValues.Designer.vb">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>
     </Compile>
@@ -2805,6 +2811,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgImportERA5Data.resx">
       <DependentUpon>dlgImportERA5Data.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgImportt.resx">
+      <DependentUpon>dlgImportt.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgInfillMissingValues.resx">
       <DependentUpon>dlgInfillMissingValues.vb</DependentUpon>

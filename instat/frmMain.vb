@@ -2408,4 +2408,11 @@ Public Class frmMain
         dlgPasteSpecial.ShowDialog()
     End Sub
 
+    Private Sub ImportToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ImportToolStripMenuItem.Click
+        dlgImportt.ShowDialog()
+    End Sub
+
+    Private Sub mnuClimaticTidyandExamineCompareColumn_Click(sender As Object, e As EventArgs) Handles mnuClimaticTidyandExamineCompareColumn.Click
+        dlgCompareColumns.ShowDialog()
+    End Sub
 End Class
