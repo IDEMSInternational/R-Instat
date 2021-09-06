@@ -1804,23 +1804,7 @@ Public Class RLink
     ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's models. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetModelNames(Optional strDataFrameName As String = "") As List(Of String)
-        Dim chrModelNames As CharacterVector
-        Dim lstModelNames As New List(Of String)
-        Dim clsGetModelNames As New RFunction
-        Dim expModelNames As SymbolicExpression
-
-        clsGetModelNames.SetRCommand(strInstatDataObject & "$get_model_names")
-        If strDataFrameName <> "" Then
-            clsGetModelNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        End If
-        expModelNames = RunInternalScriptGetValue(clsGetModelNames.ToScript(), bSilent:=True)
-        If expModelNames IsNot Nothing AndAlso Not expModelNames.Type = Internals.SymbolicExpressionType.Null Then
-            chrModelNames = expModelNames.AsCharacter()
-            If chrModelNames.Length > 0 Then
-                lstModelNames.AddRange(chrModelNames)
-            End If
-        End If
-        Return lstModelNames
+        Return GetNames(strDataFrameName, "$get_model_names")
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -1831,23 +1815,7 @@ Public Class RLink
     ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's tables. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetTableNames(Optional strDataFrameName As String = "") As List(Of String)
-        Dim chrTableNames As CharacterVector
-        Dim lstTableNames As New List(Of String)
-        Dim clsGetTableNames As New RFunction
-        Dim expTableNames As SymbolicExpression
-
-        clsGetTableNames.SetRCommand(strInstatDataObject & "$get_table_names")
-        If strDataFrameName <> "" Then
-            clsGetTableNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        End If
-        expTableNames = RunInternalScriptGetValue(clsGetTableNames.ToScript(), bSilent:=True)
-        If expTableNames IsNot Nothing AndAlso Not expTableNames.Type = Internals.SymbolicExpressionType.Null Then
-            chrTableNames = expTableNames.AsCharacter()
-            If chrTableNames.Length > 0 Then
-                lstTableNames.AddRange(chrTableNames)
-            End If
-        End If
-        Return lstTableNames
+        Return GetNames(strDataFrameName, "$get_table_names")
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -1858,23 +1826,7 @@ Public Class RLink
     ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's filters. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetFilterNames(strDataFrameName As String) As List(Of String)
-        Dim expFilterNames As SymbolicExpression
-        Dim chrFilterNames As CharacterVector
-        Dim lstFilterNames As New List(Of String)
-        Dim clsGetFilterNames As New RFunction
-
-        clsGetFilterNames.SetRCommand(strInstatDataObject & "$get_filter_names")
-        If strDataFrameName <> "" Then
-            clsGetFilterNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        End If
-        expFilterNames = RunInternalScriptGetValue(clsGetFilterNames.ToScript(), bSilent:=True)
-        If expFilterNames IsNot Nothing AndAlso Not expFilterNames.Type = Internals.SymbolicExpressionType.Null Then
-            chrFilterNames = expFilterNames.AsCharacter()
-            If chrFilterNames.Length > 0 Then
-                lstFilterNames.AddRange(chrFilterNames)
-            End If
-        End If
-        Return lstFilterNames
+        Return GetNames(strDataFrameName, "$get_filter_names")
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -1885,23 +1837,7 @@ Public Class RLink
     ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's graphs. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetGraphNames(Optional strDataFrameName As String = "") As List(Of String)
-        Dim chrGraphNames As CharacterVector
-        Dim lstGraphNames As New List(Of String)
-        Dim clsGetGraphNames As New RFunction
-        Dim expGraphNames As SymbolicExpression
-
-        clsGetGraphNames.SetRCommand(strInstatDataObject & "$get_graph_names")
-        If strDataFrameName <> "" Then
-            clsGetGraphNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        End If
-        expGraphNames = RunInternalScriptGetValue(clsGetGraphNames.ToScript(), bSilent:=True)
-        If expGraphNames IsNot Nothing AndAlso Not expGraphNames.Type = Internals.SymbolicExpressionType.Null Then
-            chrGraphNames = expGraphNames.AsCharacter()
-            If chrGraphNames.Length > 0 Then
-                lstGraphNames.AddRange(chrGraphNames)
-            End If
-        End If
-        Return lstGraphNames
+        Return GetNames(strDataFrameName, "$get_graph_names")
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -1912,24 +1848,58 @@ Public Class RLink
     ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's survs. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetSurvNames(Optional strDataFrameName As String = "") As List(Of String)
-        Dim chrSurvNames As CharacterVector
-        Dim lstSurvNames As New List(Of String)
-        Dim clsGetSurvNames As New RFunction
-        Dim expSurvNames As SymbolicExpression
-
-        clsGetSurvNames.SetRCommand(strInstatDataObject & "$get_surv_names")
-        If strDataFrameName <> "" Then
-            clsGetSurvNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
-        End If
-        expSurvNames = RunInternalScriptGetValue(clsGetSurvNames.ToScript(), bSilent:=True)
-        If expSurvNames IsNot Nothing AndAlso Not expSurvNames.Type = Internals.SymbolicExpressionType.Null Then
-            chrSurvNames = expSurvNames.AsCharacter()
-            If chrSurvNames.Length > 0 Then
-                lstSurvNames.AddRange(chrSurvNames)
-            End If
-        End If
-        Return lstSurvNames
+        Return GetNames(strDataFrameName, "$get_surv_names")
     End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's keys. </summary>
+    '''
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
+    '''
+    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's survs. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function GetKeyNames(Optional strDataFrameName As String = "") As List(Of String)
+        Return GetNames(strDataFrameName, "$get_key_names")
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets the names of the <paramref name="strDataFrameName"/> data frame's links. </summary>
+    '''
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
+    '''
+    ''' <returns>   The names of the <paramref name="strDataFrameName"/> data frame's survs. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function GetLinkNames(Optional strDataFrameName As String = "") As List(Of String)
+        Return GetNames(strDataFrameName, "$get_link_names")
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets the table, filter, graph, key, surv or link names of the <paramref name="strDataFrameName"/> 
+    '''             data frame depending on the <paramref name="strRCommand"/>. </summary>
+    '''
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
+    ''' <param name="strRCommand">(Optional)The name of the Rfunction command.</param>
+    '''
+    ''' <returns>   The table,filter,graph,key,surv or link names of the <paramref name="strDataFrameName"/> 
+    '''             data frame. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function GetNames(strDataFrameName As String, strRCommand As String) As List(Of String)
+        Dim lstNames As New List(Of String)
+        Dim clsGetNames As New RFunction
+        Dim expNames As SymbolicExpression
+
+        clsGetNames.SetRCommand(strInstatDataObject & strRCommand)
+
+        If strDataFrameName <> "" Then
+            clsGetNames.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
+        End If
+        expNames = RunInternalScriptGetValue(clsGetNames.ToScript(), bSilent:=True)
+        If expNames IsNot Nothing AndAlso Not expNames.Type = Internals.SymbolicExpressionType.Null Then
+            lstNames = expNames.AsCharacter.ToArray.ToList
+        End If
+        Return lstNames
+    End Function
+
 
     '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets the data type of the <paramref name="strColumnName"/> column in the 
@@ -2079,31 +2049,6 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
-    ''' <summary>   Gets names of the columns of the corruption components in 
-    '''             the <paramref name="strDataName"/> data frame. </summary>
-    '''
-    ''' <param name="strDataName">  The data frame name. </param>
-    '''
-    ''' <returns>   The names of the columns of the corruption components in
-    '''             the <paramref name="strDataName"/> data frame. </returns>
-    '''--------------------------------------------------------------------------------------------
-    Public Function GetCorruptionComponentsColumnNames(strDataName As String) As String()
-        Dim clsGetComponents As New RFunction
-        Dim strColumn() As String
-        Dim expColumn As SymbolicExpression
-
-        clsGetComponents.SetRCommand(strInstatDataObject & "$get_CRI_component_column_names")
-        clsGetComponents.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-        expColumn = RunInternalScriptGetValue(clsGetComponents.ToScript(), bSilent:=True)
-        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
-            strColumn = expColumn.AsCharacter.ToArray
-        Else
-            strColumn = Nothing
-        End If
-        Return strColumn
-    End Function
-
-    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets climatic column of type. </summary>
     '''
     ''' <param name="strDataName">  The data frame name. </param>
@@ -2129,6 +2074,19 @@ Public Class RLink
     End Function
 
     '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets names of the columns of the corruption components in 
+    '''             the <paramref name="strDataName"/> data frame. </summary>
+    '''
+    ''' <param name="strDataName">  The data frame name. </param>
+    '''
+    ''' <returns>   The names of the columns of the corruption components in
+    '''             the <paramref name="strDataName"/> data frame. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Public Function GetCorruptionComponentsColumnNames(strDataName As String) As String()
+        Return GetColumnNames(strDataName, "$get_CRI_component_column_names")
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
     ''' <summary>   Gets CRI column names. </summary>
     '''
     ''' <param name="strDataName">  The data frame name. </param>
@@ -2136,19 +2094,7 @@ Public Class RLink
     ''' <returns>   The CRI column names. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetCRIColumnNames(strDataName As String) As String()
-        Dim clsGetColumnName As New RFunction
-        Dim strColumn() As String
-        Dim expColumn As SymbolicExpression
-
-        clsGetColumnName.SetRCommand(strInstatDataObject & "$get_CRI_column_names")
-        clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
-        expColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript(), bSilent:=True)
-        If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
-            strColumn = expColumn.AsCharacter.ToArray()
-        Else
-            strColumn = Nothing
-        End If
-        Return strColumn
+        Return GetColumnNames(strDataName, "$get_CRI_column_names")
     End Function
 
     '''--------------------------------------------------------------------------------------------
@@ -2159,12 +2105,28 @@ Public Class RLink
     ''' <returns>   The red flag column names. </returns>
     '''--------------------------------------------------------------------------------------------
     Public Function GetRedFlagColumnNames(strDataName As String) As String()
+        Return GetColumnNames(strDataName, "$get_red_flag_column_names")
+    End Function
+
+    '''--------------------------------------------------------------------------------------------
+    ''' <summary>   Gets specific column names from the <paramref name="strDataFrameName"/> data 
+    '''             frame as specified by the <paramref name="strRCommand"/> RFunction command name. 
+    '''             </summary>
+    '''
+    ''' <param name="strDataFrameName"> (Optional) The data frame name. </param>
+    ''' <param name="strRCommand"> (Optional)The Rfunction's command name that specifies the column 
+    '''                            names to get.</param>
+    '''
+    ''' <returns>   The column names of the <paramref name="strDataFrameName"/> data frame as 
+    '''             specifed by <paramref name="strRCommand"/> RFunction command. </returns>
+    '''--------------------------------------------------------------------------------------------
+    Private Function GetColumnNames(strDataFrameName As String, strRCommand As String) As String()
         Dim clsGetColumnName As New RFunction
         Dim strColumn() As String
         Dim expColumn As SymbolicExpression
 
-        clsGetColumnName.SetRCommand(strInstatDataObject & "$get_red_flag_column_names")
-        clsGetColumnName.AddParameter("data_name", Chr(34) & strDataName & Chr(34))
+        clsGetColumnName.SetRCommand(strInstatDataObject & strRCommand)
+        clsGetColumnName.AddParameter("data_name", Chr(34) & strDataFrameName & Chr(34))
         expColumn = RunInternalScriptGetValue(clsGetColumnName.ToScript(), bSilent:=True)
         If expColumn IsNot Nothing AndAlso Not expColumn.Type = Internals.SymbolicExpressionType.Null Then
             strColumn = expColumn.AsCharacter.ToArray()

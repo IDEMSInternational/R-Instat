@@ -175,7 +175,7 @@
     <value>10, 196</value>
   </data>
   <data name="ucrChkShowSummary.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 20</value>
+    <value>350, 20</value>
   </data>
   <data name="ucrChkShowSummary.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -208,7 +208,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveColumn.Size" type="System.Drawing.Size, System.Drawing">
-    <value>350, 21</value>
+    <value>288, 21</value>
   </data>
   <data name="ucrSaveColumn.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>

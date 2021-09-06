@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,60 +118,60 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rdoDescendingFrequencies.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoDescending.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="rdoDescendingFrequencies.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoDescending.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 65</value>
   </data>
-  <data name="rdoDescendingFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoDescending.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 17</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="rdoDescendingFrequencies.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoDescending.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="rdoDescendingFrequencies.Text" xml:space="preserve">
-    <value>Descending Frequencies</value>
+  <data name="rdoDescending.Text" xml:space="preserve">
+    <value>Descending</value>
   </data>
-  <data name="&gt;&gt;rdoDescendingFrequencies.Name" xml:space="preserve">
-    <value>rdoDescendingFrequencies</value>
+  <data name="&gt;&gt;rdoDescending.Name" xml:space="preserve">
+    <value>rdoDescending</value>
   </data>
-  <data name="&gt;&gt;rdoDescendingFrequencies.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoDescending.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoDescendingFrequencies.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoDescending.Parent" xml:space="preserve">
     <value>grpSort</value>
   </data>
-  <data name="&gt;&gt;rdoDescendingFrequencies.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoDescending.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="rdoAscendingFrequencies.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="rdoAscending.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="rdoAscendingFrequencies.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="rdoAscending.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 43</value>
   </data>
-  <data name="rdoAscendingFrequencies.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="rdoAscending.Size" type="System.Drawing.Size, System.Drawing">
     <value>155, 17</value>
   </data>
-  <data name="rdoAscendingFrequencies.TabIndex" type="System.Int32, mscorlib">
+  <data name="rdoAscending.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
   </data>
-  <data name="rdoAscendingFrequencies.Text" xml:space="preserve">
-    <value>Ascending Frequencies</value>
+  <data name="rdoAscending.Text" xml:space="preserve">
+    <value>Ascending</value>
   </data>
-  <data name="&gt;&gt;rdoAscendingFrequencies.Name" xml:space="preserve">
-    <value>rdoAscendingFrequencies</value>
+  <data name="&gt;&gt;rdoAscending.Name" xml:space="preserve">
+    <value>rdoAscending</value>
   </data>
-  <data name="&gt;&gt;rdoAscendingFrequencies.Type" xml:space="preserve">
+  <data name="&gt;&gt;rdoAscending.Type" xml:space="preserve">
     <value>System.Windows.Forms.RadioButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;rdoAscendingFrequencies.Parent" xml:space="preserve">
+  <data name="&gt;&gt;rdoAscending.Parent" xml:space="preserve">
     <value>grpSort</value>
   </data>
-  <data name="&gt;&gt;rdoAscendingFrequencies.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;rdoAscending.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
   <data name="rdoNone.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -253,7 +253,7 @@
     <value>10, 228</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>87, 23</value>
+    <value>96, 23</value>
   </data>
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -547,10 +547,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>435, 447</value>
+    <value>435, 448</value>
   </data>
   <data name="ucrNudGroups.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 279</value>
+    <value>142, 277</value>
   </data>
   <data name="ucrNudGroups.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -595,7 +595,7 @@
     <value>10, 280</value>
   </data>
   <data name="ucrChkGroupData.Size" type="System.Drawing.Size, System.Drawing">
-    <value>115, 20</value>
+    <value>145, 20</value>
   </data>
   <data name="ucrChkGroupData.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -613,13 +613,13 @@
     <value>8</value>
   </data>
   <data name="ucrReceiverWeights.Location" type="System.Drawing.Point, System.Drawing">
-    <value>131, 256</value>
+    <value>142, 254</value>
   </data>
   <data name="ucrReceiverWeights.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>
   <data name="ucrReceiverWeights.Size" type="System.Drawing.Size, System.Drawing">
-    <value>120, 20</value>
+    <value>90, 20</value>
   </data>
   <data name="ucrReceiverWeights.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -640,7 +640,7 @@
     <value>10, 256</value>
   </data>
   <data name="ucrChkWeights.Size" type="System.Drawing.Size, System.Drawing">
-    <value>114, 20</value>
+    <value>145, 20</value>
   </data>
   <data name="ucrChkWeights.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -661,7 +661,7 @@
     <value>10, 304</value>
   </data>
   <data name="ucrChkFlip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>145, 20</value>
+    <value>210, 20</value>
   </data>
   <data name="ucrChkFlip.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>

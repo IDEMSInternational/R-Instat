@@ -132,13 +132,13 @@
     <value>374, 18</value>
   </metadata>
   <data name="ToolStripSeparator3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>141, 6</value>
   </data>
   <data name="mnuCopy.ShortcutKeys" type="System.Windows.Forms.Keys, System.Windows.Forms">
     <value>Ctrl+C</value>
   </data>
   <data name="mnuCopy.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>144, 22</value>
   </data>
   <data name="mnuCopy.Text" xml:space="preserve">
     <value>Copy</value>
@@ -147,22 +147,22 @@
     <value>Ctrl+V</value>
   </data>
   <data name="mnuPaste.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>144, 22</value>
   </data>
   <data name="mnuPaste.Text" xml:space="preserve">
     <value>Paste</value>
   </data>
   <data name="ToolStripSeparator5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 6</value>
+    <value>141, 6</value>
   </data>
   <data name="mnuComment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>144, 22</value>
   </data>
   <data name="mnuComment.Text" xml:space="preserve">
     <value>Comment</value>
   </data>
   <data name="cellContextMenuStrip.Size" type="System.Drawing.Size, System.Drawing">
-    <value>181, 104</value>
+    <value>145, 82</value>
   </data>
   <data name="&gt;&gt;cellContextMenuStrip.Name" xml:space="preserve">
     <value>cellContextMenuStrip</value>
@@ -325,13 +325,13 @@
     <value>3</value>
   </data>
   <data name="ucrSdgBaseButtons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>33, 5</value>
+    <value>13, 6</value>
   </data>
   <data name="ucrSdgBaseButtons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrSdgBaseButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 30</value>
+    <value>154, 30</value>
   </data>
   <data name="ucrSdgBaseButtons.TabIndex" type="System.Int32, mscorlib">
     <value>87</value>

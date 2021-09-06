@@ -141,7 +141,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudColumns.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 46</value>
+    <value>123, 46</value>
   </data>
   <data name="ucrNudColumns.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -162,7 +162,7 @@
     <value>1</value>
   </data>
   <data name="ucrNudRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 20</value>
+    <value>123, 20</value>
   </data>
   <data name="ucrNudRows.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -219,7 +219,7 @@
     <value>grdLayout</value>
   </data>
   <data name="&gt;&gt;grdLayout.Type" xml:space="preserve">
-    <value>unvell.ReoGrid.ReoGridControl, unvell.ReoGrid, Version=2.0.1.0, Culture=neutral, PublicKeyToken=null</value>
+    <value>unvell.ReoGrid.ReoGridControl, unvell.ReoGrid, Version=2.1.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grdLayout.Parent" xml:space="preserve">
     <value>tbpLayout</value>
@@ -358,7 +358,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputLeft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 105</value>
+    <value>71, 102</value>
   </data>
   <data name="ucrInputLeft.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -379,7 +379,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputRight.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 75</value>
+    <value>71, 75</value>
   </data>
   <data name="ucrInputRight.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -400,7 +400,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputBottom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 47</value>
+    <value>71, 48</value>
   </data>
   <data name="ucrInputBottom.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -421,7 +421,7 @@
     <value>2</value>
   </data>
   <data name="ucrInputTop.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 20</value>
+    <value>71, 20</value>
   </data>
   <data name="ucrInputTop.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -598,10 +598,10 @@
     <value>1</value>
   </data>
   <data name="ucrsdgLayoutBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>117, 427</value>
+    <value>120, 426</value>
   </data>
   <data name="ucrsdgLayoutBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>156, 30</value>
   </data>
   <data name="ucrsdgLayoutBase.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>

@@ -119,7 +119,7 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="cmdApply.Location" type="System.Drawing.Point, System.Drawing">
-    <value>396, 324</value>
+    <value>384, 324</value>
   </data>
   <data name="cmdApply.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -141,10 +141,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdApply.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="cmdHelp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>477, 324</value>
+    <value>465, 324</value>
   </data>
   <data name="cmdHelp.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -165,10 +165,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdHelp.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="cmdCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>315, 324</value>
+    <value>303, 324</value>
   </data>
   <data name="cmdCancel.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -189,10 +189,10 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdCancel.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="cmdOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>234, 324</value>
+    <value>222, 324</value>
   </data>
   <data name="cmdOk.Size" type="System.Drawing.Size, System.Drawing">
     <value>75, 23</value>
@@ -213,7 +213,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdOk.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="spltControls.Location" type="System.Drawing.Point, System.Drawing">
     <value>5, 1</value>
@@ -342,21 +342,6 @@
   <data name="&gt;&gt;spltControls.Panel1.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="lblLanguage.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>9, 18</value>
-  </data>
-  <data name="lblLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>61, 13</value>
-  </data>
-  <data name="lblLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="lblLanguage.Text" xml:space="preserve">
-    <value>Language :</value>
-  </data>
   <data name="&gt;&gt;lblLanguage.Name" xml:space="preserve">
     <value>lblLanguage</value>
   </data>
@@ -368,15 +353,6 @@
   </data>
   <data name="&gt;&gt;lblLanguage.ZOrder" xml:space="preserve">
     <value>0</value>
-  </data>
-  <data name="ucrInputLanguage.Location" type="System.Drawing.Point, System.Drawing">
-    <value>75, 15</value>
-  </data>
-  <data name="ucrInputLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>110, 21</value>
-  </data>
-  <data name="ucrInputLanguage.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
   </data>
   <data name="&gt;&gt;ucrInputLanguage.Name" xml:space="preserve">
     <value>ucrInputLanguage</value>
@@ -609,6 +585,21 @@
   <data name="&gt;&gt;tbpEditor.ZOrder" xml:space="preserve">
     <value>4</value>
   </data>
+  <data name="lblWaitSeconds.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblWaitSeconds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>403, 46</value>
+  </data>
+  <data name="lblWaitSeconds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>47, 13</value>
+  </data>
+  <data name="lblWaitSeconds.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="lblWaitSeconds.Text" xml:space="preserve">
+    <value>seconds</value>
+  </data>
   <data name="&gt;&gt;lblWaitSeconds.Name" xml:space="preserve">
     <value>lblWaitSeconds</value>
   </data>
@@ -620,6 +611,15 @@
   </data>
   <data name="&gt;&gt;lblWaitSeconds.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrChkShowWaitDialog.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 47</value>
+  </data>
+  <data name="ucrChkShowWaitDialog.Size" type="System.Drawing.Size, System.Drawing">
+    <value>337, 20</value>
+  </data>
+  <data name="ucrChkShowWaitDialog.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
   </data>
   <data name="&gt;&gt;ucrChkShowWaitDialog.Name" xml:space="preserve">
     <value>ucrChkShowWaitDialog</value>
@@ -633,6 +633,15 @@
   <data name="&gt;&gt;ucrChkShowWaitDialog.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrNudWaitSeconds.Location" type="System.Drawing.Point, System.Drawing">
+    <value>349, 45</value>
+  </data>
+  <data name="ucrNudWaitSeconds.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudWaitSeconds.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
   <data name="&gt;&gt;ucrNudWaitSeconds.Name" xml:space="preserve">
     <value>ucrNudWaitSeconds</value>
   </data>
@@ -644,6 +653,15 @@
   </data>
   <data name="&gt;&gt;ucrNudWaitSeconds.ZOrder" xml:space="preserve">
     <value>2</value>
+  </data>
+  <data name="ucrChkIncludeDefaultParams.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 20</value>
+  </data>
+  <data name="ucrChkIncludeDefaultParams.Size" type="System.Drawing.Size, System.Drawing">
+    <value>398, 21</value>
+  </data>
+  <data name="ucrChkIncludeDefaultParams.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
   </data>
   <data name="&gt;&gt;ucrChkIncludeDefaultParams.Name" xml:space="preserve">
     <value>ucrChkIncludeDefaultParams</value>
@@ -1210,7 +1228,55 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;spltControls.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
+  </data>
+  <data name="lblLanguage.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 18</value>
+  </data>
+  <data name="lblLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>61, 13</value>
+  </data>
+  <data name="lblLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="lblLanguage.Text" xml:space="preserve">
+    <value>Language :</value>
+  </data>
+  <data name="&gt;&gt;lblLanguage.Name" xml:space="preserve">
+    <value>lblLanguage</value>
+  </data>
+  <data name="&gt;&gt;lblLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblLanguage.Parent" xml:space="preserve">
+    <value>tbpLanguages</value>
+  </data>
+  <data name="&gt;&gt;lblLanguage.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrInputLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>75, 15</value>
+  </data>
+  <data name="ucrInputLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>110, 21</value>
+  </data>
+  <data name="ucrInputLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLanguage.Name" xml:space="preserve">
+    <value>ucrInputLanguage</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLanguage.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLanguage.Parent" xml:space="preserve">
+    <value>tbpLanguages</value>
+  </data>
+  <data name="&gt;&gt;ucrInputLanguage.ZOrder" xml:space="preserve">
+    <value>1</value>
   </data>
   <data name="pnComments.AutoSizeMode" type="System.Windows.Forms.AutoSizeMode, System.Windows.Forms">
     <value>GrowAndShrink</value>
@@ -1243,7 +1309,7 @@
     <value>10, 10</value>
   </data>
   <data name="pnComments.Size" type="System.Drawing.Size, System.Drawing">
-    <value>338, 29</value>
+    <value>391, 29</value>
   </data>
   <data name="pnComments.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1261,10 +1327,10 @@
     <value>0</value>
   </data>
   <data name="ucrInputComment.Location" type="System.Drawing.Point, System.Drawing">
-    <value>58, 5</value>
+    <value>96, 5</value>
   </data>
   <data name="ucrInputComment.Size" type="System.Drawing.Size, System.Drawing">
-    <value>277, 21</value>
+    <value>292, 21</value>
   </data>
   <data name="ucrInputComment.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1411,7 +1477,7 @@
     <value>10, 168</value>
   </data>
   <data name="ucrChkShowRCommandsinOutputWindow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>388, 20</value>
   </data>
   <data name="ucrChkShowRCommandsinOutputWindow.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -1432,7 +1498,7 @@
     <value>10, 145</value>
   </data>
   <data name="ucrChkIncludeCommentsbyDefault.Size" type="System.Drawing.Size, System.Drawing">
-    <value>271, 20</value>
+    <value>391, 20</value>
   </data>
   <data name="ucrChkIncludeCommentsbyDefault.TabIndex" type="System.Int32, mscorlib">
     <value>26</value>
@@ -1531,7 +1597,7 @@
     <value>0</value>
   </data>
   <data name="ucrNudDigits.Location" type="System.Drawing.Point, System.Drawing">
-    <value>152, 21</value>
+    <value>177, 23</value>
   </data>
   <data name="ucrNudDigits.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -1714,10 +1780,10 @@
     <value>3</value>
   </data>
   <data name="rtbCommentPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 89</value>
+    <value>124, 89</value>
   </data>
   <data name="rtbCommentPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 26</value>
+    <value>147, 26</value>
   </data>
   <data name="rtbCommentPreview.TabIndex" type="System.Int32, mscorlib">
     <value>22</value>
@@ -1738,10 +1804,10 @@
     <value>0</value>
   </data>
   <data name="rtbOutputPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 49</value>
+    <value>124, 49</value>
   </data>
   <data name="rtbOutputPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 26</value>
+    <value>147, 26</value>
   </data>
   <data name="rtbOutputPreview.TabIndex" type="System.Int32, mscorlib">
     <value>21</value>
@@ -1762,10 +1828,10 @@
     <value>1</value>
   </data>
   <data name="rtbCommandPreview.Location" type="System.Drawing.Point, System.Drawing">
-    <value>100, 9</value>
+    <value>124, 9</value>
   </data>
   <data name="rtbCommandPreview.Size" type="System.Drawing.Size, System.Drawing">
-    <value>171, 26</value>
+    <value>147, 26</value>
   </data>
   <data name="rtbCommandPreview.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -2040,110 +2106,20 @@
   <data name="&gt;&gt;lblFont.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="lblWaitSeconds.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblWaitSeconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>357, 50</value>
-  </data>
-  <data name="lblWaitSeconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>47, 13</value>
-  </data>
-  <data name="lblWaitSeconds.TabIndex" type="System.Int32, mscorlib">
-    <value>8</value>
-  </data>
-  <data name="lblWaitSeconds.Text" xml:space="preserve">
-    <value>seconds</value>
-  </data>
-  <data name="&gt;&gt;lblWaitSeconds.Name" xml:space="preserve">
-    <value>lblWaitSeconds</value>
-  </data>
-  <data name="&gt;&gt;lblWaitSeconds.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblWaitSeconds.Parent" xml:space="preserve">
-    <value>tbpCommands</value>
-  </data>
-  <data name="&gt;&gt;lblWaitSeconds.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkShowWaitDialog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 47</value>
-  </data>
-  <data name="ucrChkShowWaitDialog.Size" type="System.Drawing.Size, System.Drawing">
-    <value>293, 20</value>
-  </data>
-  <data name="ucrChkShowWaitDialog.TabIndex" type="System.Int32, mscorlib">
-    <value>6</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowWaitDialog.Name" xml:space="preserve">
-    <value>ucrChkShowWaitDialog</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowWaitDialog.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowWaitDialog.Parent" xml:space="preserve">
-    <value>tbpCommands</value>
-  </data>
-  <data name="&gt;&gt;ucrChkShowWaitDialog.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ucrNudWaitSeconds.Location" type="System.Drawing.Point, System.Drawing">
-    <value>305, 47</value>
-  </data>
-  <data name="ucrNudWaitSeconds.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudWaitSeconds.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrNudWaitSeconds.Name" xml:space="preserve">
-    <value>ucrNudWaitSeconds</value>
-  </data>
-  <data name="&gt;&gt;ucrNudWaitSeconds.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudWaitSeconds.Parent" xml:space="preserve">
-    <value>tbpCommands</value>
-  </data>
-  <data name="&gt;&gt;ucrNudWaitSeconds.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <data name="ucrChkIncludeDefaultParams.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 20</value>
-  </data>
-  <data name="ucrChkIncludeDefaultParams.Size" type="System.Drawing.Size, System.Drawing">
-    <value>261, 21</value>
-  </data>
-  <data name="ucrChkIncludeDefaultParams.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeDefaultParams.Name" xml:space="preserve">
-    <value>ucrChkIncludeDefaultParams</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeDefaultParams.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeDefaultParams.Parent" xml:space="preserve">
-    <value>tbpCommands</value>
-  </data>
-  <data name="&gt;&gt;ucrChkIncludeDefaultParams.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
   <data name="lblEvery.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblEvery.Location" type="System.Drawing.Point, System.Drawing">
-    <value>255, 104</value>
+    <value>236, 102</value>
   </data>
   <data name="lblEvery.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 13</value>
+    <value>33, 13</value>
   </data>
   <data name="lblEvery.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="lblEvery.Text" xml:space="preserve">
-    <value>Every</value>
+    <value>every</value>
   </data>
   <data name="&gt;&gt;lblEvery.Name" xml:space="preserve">
     <value>lblEvery</value>
@@ -2161,16 +2137,16 @@
     <value>True</value>
   </data>
   <data name="lblMinutes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>362, 104</value>
+    <value>341, 102</value>
   </data>
   <data name="lblMinutes.Size" type="System.Drawing.Size, System.Drawing">
-    <value>44, 13</value>
+    <value>43, 13</value>
   </data>
   <data name="lblMinutes.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
   </data>
   <data name="lblMinutes.Text" xml:space="preserve">
-    <value>Minutes</value>
+    <value>minutes</value>
   </data>
   <data name="&gt;&gt;lblMinutes.Name" xml:space="preserve">
     <value>lblMinutes</value>
@@ -2188,7 +2164,7 @@
     <value>13, 104</value>
   </data>
   <data name="ucrChkAutoSave.Size" type="System.Drawing.Size, System.Drawing">
-    <value>236, 20</value>
+    <value>217, 20</value>
   </data>
   <data name="ucrChkAutoSave.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2209,7 +2185,7 @@
     <value>13, 78</value>
   </data>
   <data name="ucrChkShowDataonGrid.Size" type="System.Drawing.Size, System.Drawing">
-    <value>257, 20</value>
+    <value>393, 20</value>
   </data>
   <data name="ucrChkShowDataonGrid.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2227,7 +2203,7 @@
     <value>3</value>
   </data>
   <data name="ucrNudAutoSaveMinutes.Location" type="System.Drawing.Point, System.Drawing">
-    <value>305, 104</value>
+    <value>285, 99</value>
   </data>
   <data name="ucrNudAutoSaveMinutes.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -2248,7 +2224,7 @@
     <value>4</value>
   </data>
   <data name="ucrNudMaxCols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>221, 41</value>
+    <value>268, 41</value>
   </data>
   <data name="ucrNudMaxCols.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -2296,7 +2272,7 @@
     <value>6</value>
   </data>
   <data name="ucrNudMaxRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>220, 15</value>
+    <value>268, 15</value>
   </data>
   <data name="ucrNudMaxRows.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -2395,10 +2371,10 @@
     <value>1</value>
   </data>
   <data name="ucrWorkingDirectory.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 17</value>
+    <value>138, 17</value>
   </data>
   <data name="ucrWorkingDirectory.Size" type="System.Drawing.Size, System.Drawing">
-    <value>282, 21</value>
+    <value>255, 21</value>
   </data>
   <data name="ucrWorkingDirectory.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2500,7 +2476,7 @@
     <value>0, 3</value>
   </data>
   <data name="ucrPnlGraphDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>169, 66</value>
+    <value>365, 66</value>
   </data>
   <data name="ucrPnlGraphDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -2521,7 +2497,7 @@
     <value>7, 12</value>
   </data>
   <data name="ucrChkViewStructuredMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 20</value>
+    <value>378, 20</value>
   </data>
   <data name="ucrChkViewStructuredMenu.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -2542,7 +2518,7 @@
     <value>7, 90</value>
   </data>
   <data name="ucrChkViewOptionsByContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 20</value>
+    <value>413, 20</value>
   </data>
   <data name="ucrChkViewOptionsByContextMenu.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -2563,7 +2539,7 @@
     <value>7, 64</value>
   </data>
   <data name="ucrChkViewProcurementMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 20</value>
+    <value>413, 20</value>
   </data>
   <data name="ucrChkViewProcurementMenu.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2584,7 +2560,7 @@
     <value>7, 38</value>
   </data>
   <data name="ucrChkViewClimaticMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 20</value>
+    <value>407, 20</value>
   </data>
   <data name="ucrChkViewClimaticMenu.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -2722,7 +2698,7 @@
     <value>3</value>
   </data>
   <data name="ucrInputUserName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 102</value>
+    <value>168, 96</value>
   </data>
   <data name="ucrInputUserName.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -2743,7 +2719,7 @@
     <value>4</value>
   </data>
   <data name="ucrInputPort.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 75</value>
+    <value>168, 69</value>
   </data>
   <data name="ucrInputPort.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -2764,7 +2740,7 @@
     <value>5</value>
   </data>
   <data name="ucrInputHost.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 48</value>
+    <value>168, 43</value>
   </data>
   <data name="ucrInputHost.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -2785,7 +2761,7 @@
     <value>6</value>
   </data>
   <data name="ucrInputDatabaseName.Location" type="System.Drawing.Point, System.Drawing">
-    <value>99, 21</value>
+    <value>168, 17</value>
   </data>
   <data name="ucrInputDatabaseName.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -2804,6 +2780,33 @@
   </data>
   <data name="&gt;&gt;ucrInputDatabaseName.ZOrder" xml:space="preserve">
     <value>7</value>
+  </data>
+  <data name="cmdLanguage.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="cmdLanguage.Location" type="System.Drawing.Point, System.Drawing">
+    <value>545, 324</value>
+  </data>
+  <data name="cmdLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>37, 23</value>
+  </data>
+  <data name="cmdLanguage.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="cmdLanguage.Text" xml:space="preserve">
+    <value>Lang</value>
+  </data>
+  <data name="&gt;&gt;cmdLanguage.Name" xml:space="preserve">
+    <value>cmdLanguage</value>
+  </data>
+  <data name="&gt;&gt;cmdLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmdLanguage.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;cmdLanguage.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

@@ -65,6 +65,7 @@ Public Class dlgPICSARainfall
     Private clsAsDateUpperTercileY As New RFunction
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
+    Private clsAnnotateFunction As New RFunction
 
     Private strMeanName As String = ".mean_y"
     Private strMedianName As String = ".median_y"
@@ -111,7 +112,6 @@ Public Class dlgPICSARainfall
     Private clsAsNumeric As New RFunction
     Private clsCoordPolarFunction As New RFunction
     Private clsCoordPolarStartOperator As New ROperator
-
 
     Private Sub dlgPCSARainfall_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstLoad Then
@@ -189,6 +189,7 @@ Public Class dlgPICSARainfall
         ucrSave.SetDataFrameSelector(ucrSelectorPICSARainfall.ucrAvailableDataFrames)
         ucrSave.SetAssignToIfUncheckedValue("last_graph")
     End Sub
+
     Private Sub SetDefaults()
         Dim clsPanelBackgroundElementRect As New RFunction
         Dim clsXElementLabels As New RFunction
@@ -256,7 +257,7 @@ Public Class dlgPICSARainfall
         clsPasteUpperTercileY = New RFunction
         clsFormatUpperTercileY = New RFunction
 
-        ucrInputStation.SetText(strNone)
+        ucrInputStation.SetName(strNone)
         ucrInputStation.bUpdateRCodeFromControl = True
 
         clsDatePeriodOperator = New ROperator
@@ -271,6 +272,7 @@ Public Class dlgPICSARainfall
         clsYScalecontinuousFunction = GgplotDefaults.clsYScalecontinuousFunction.Clone()
         clsScaleFillViridisFunction = GgplotDefaults.clsScaleFillViridisFunction
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
+        clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
         clsYScalecontinuousFunction.AddParameter("limits", clsRFunctionParameter:=clsCLimitsYContinuous, iPosition:=3)
         clsCLimitsYContinuous.SetRCommand("c")
@@ -633,6 +635,7 @@ Public Class dlgPICSARainfall
             ucrBase.OKEnabled(True)
         End If
     End Sub
+
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
@@ -671,6 +674,7 @@ Public Class dlgPICSARainfall
         End If
         UpdateParameters()
         AddRemoveFacets()
+        AddRemoveGroupBy()
     End Sub
 
     Private Sub UpdateParameters()
@@ -743,6 +747,7 @@ Public Class dlgPICSARainfall
             clsFacetOperator.RemoveParameterByName("right")
         End If
     End Sub
+
     Private Sub ucrVariablesAsFactorForPicsa_ControlValueChanged() Handles ucrVariablesAsFactorForPicsa.ControlValueChanged
         TempOptionsDisabledInMultipleVariablesCase()
     End Sub
@@ -757,7 +762,9 @@ Public Class dlgPICSARainfall
 
     Private Sub cmdOptions_Click(sender As Object, e As EventArgs) Handles cmdOptions.Click
         sdgPlots.SetRCode(clsNewOperator:=ucrBase.clsRsyntax.clsBaseOperator, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction,
-     clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction, clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bReset:=bResetSubdialog)
+                          clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction, clsNewXLabsTitleFunction:=clsXLabsFunction, clsNewYLabTitleFunction:=clsYLabsFunction, clsNewLabsFunction:=clsLabsFunction,
+                          clsNewFacetFunction:=clsFacetFunction, clsNewThemeFunction:=clsThemeFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction, clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, dctNewThemeFunctions:=dctThemeFunctions,
+                          clsNewAnnotateFunction:=clsAnnotateFunction, clsNewGlobalAesFunction:=clsRaesFunction, ucrNewBaseSelector:=ucrSelectorPICSARainfall, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
         'AddRemoveGroupByAndHlines()
@@ -804,9 +811,11 @@ Public Class dlgPICSARainfall
             clsGeomLine.AddParameter("colour", Chr(34) & "blue" & Chr(34))
         End If
     End Sub
+
     Private Sub ucrReceiverX_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlValueChanged
         XAxisDataTypeCheck()
     End Sub
+
     Private Sub XAxisDataTypeCheck()
         If Not ucrReceiverX.IsEmpty AndAlso ucrReceiverX.strCurrDataType.Contains("factor") Then
             clsGeomLine.AddParameter("group", 1)

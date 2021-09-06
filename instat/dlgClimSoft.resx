@@ -123,7 +123,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="btnEstablishConnection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 8</value>
+    <value>8, 8</value>
   </data>
   <data name="btnEstablishConnection.Size" type="System.Drawing.Size, System.Drawing">
     <value>142, 23</value>
@@ -154,7 +154,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblElements.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 194</value>
+    <value>256, 194</value>
   </data>
   <data name="lblElements.Size" type="System.Drawing.Size, System.Drawing">
     <value>98, 13</value>
@@ -184,7 +184,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblStations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 38</value>
+    <value>256, 38</value>
   </data>
   <data name="lblStations.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -273,38 +273,8 @@
   <metadata name="ttClimsoft.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="lblConnection.AutoSize" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="lblConnection.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblConnection.Location" type="System.Drawing.Point, System.Drawing">
-    <value>156, 14</value>
-  </data>
-  <data name="lblConnection.Size" type="System.Drawing.Size, System.Drawing">
-    <value>78, 13</value>
-  </data>
-  <data name="lblConnection.TabIndex" type="System.Int32, mscorlib">
-    <value>16</value>
-  </data>
-  <data name="lblConnection.Text" xml:space="preserve">
-    <value>No Connection</value>
-  </data>
-  <data name="&gt;&gt;lblConnection.Name" xml:space="preserve">
-    <value>lblConnection</value>
-  </data>
-  <data name="&gt;&gt;lblConnection.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;lblConnection.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;lblConnection.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="ucrChkUnstackData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 235</value>
+    <value>8, 235</value>
   </data>
   <data name="ucrChkUnstackData.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -331,7 +301,7 @@
     <value>0</value>
   </data>
   <data name="ucrChkFlagsData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 212</value>
+    <value>8, 212</value>
   </data>
   <data name="ucrChkFlagsData.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -358,13 +328,13 @@
     <value>1</value>
   </data>
   <data name="ucrChkElements.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 258</value>
+    <value>8, 258</value>
   </data>
   <data name="ucrChkElements.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
   </data>
   <data name="ucrChkElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>178, 20</value>
+    <value>230, 20</value>
   </data>
   <data name="ucrChkElements.TabIndex" type="System.Int32, mscorlib">
     <value>10</value>
@@ -384,56 +354,8 @@
   <data name="&gt;&gt;ucrChkElements.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ucrComboBoxElements.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 210</value>
-  </data>
-  <data name="ucrComboBoxElements.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrComboBoxElements.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
-  </data>
-  <data name="ucrComboBoxElements.TabIndex" type="System.Int32, mscorlib">
-    <value>5</value>
-  </data>
-  <data name="&gt;&gt;ucrComboBoxElements.Name" xml:space="preserve">
-    <value>ucrComboBoxElements</value>
-  </data>
-  <data name="&gt;&gt;ucrComboBoxElements.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrComboBoxElements.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrComboBoxElements.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="ucrComboBoxStations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 53</value>
-  </data>
-  <data name="ucrComboBoxStations.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>9, 12, 9, 12</value>
-  </data>
-  <data name="ucrComboBoxStations.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
-  </data>
-  <data name="ucrComboBoxStations.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrComboBoxStations.Name" xml:space="preserve">
-    <value>ucrComboBoxStations</value>
-  </data>
-  <data name="&gt;&gt;ucrComboBoxStations.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrComboBoxStations.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrComboBoxStations.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="ucrChkDateRange.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 283</value>
+    <value>8, 283</value>
   </data>
   <data name="ucrChkDateRange.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -514,7 +436,7 @@
     <value>8</value>
   </data>
   <data name="ucrChkObservationData.Location" type="System.Drawing.Point, System.Drawing">
-    <value>13, 188</value>
+    <value>8, 188</value>
   </data>
   <data name="ucrChkObservationData.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>6, 8, 6, 8</value>
@@ -540,8 +462,86 @@
   <data name="&gt;&gt;ucrChkObservationData.ZOrder" xml:space="preserve">
     <value>9</value>
   </data>
+  <data name="lblConnection.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="lblConnection.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblConnection.Location" type="System.Drawing.Point, System.Drawing">
+    <value>153, 14</value>
+  </data>
+  <data name="lblConnection.Size" type="System.Drawing.Size, System.Drawing">
+    <value>78, 13</value>
+  </data>
+  <data name="lblConnection.TabIndex" type="System.Int32, mscorlib">
+    <value>16</value>
+  </data>
+  <data name="lblConnection.Text" xml:space="preserve">
+    <value>No Connection</value>
+  </data>
+  <data name="&gt;&gt;lblConnection.Name" xml:space="preserve">
+    <value>lblConnection</value>
+  </data>
+  <data name="&gt;&gt;lblConnection.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;lblConnection.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;lblConnection.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="ucrComboBoxElements.Location" type="System.Drawing.Point, System.Drawing">
+    <value>259, 210</value>
+  </data>
+  <data name="ucrComboBoxElements.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrComboBoxElements.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrComboBoxElements.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxElements.Name" xml:space="preserve">
+    <value>ucrComboBoxElements</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxElements.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxElements.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxElements.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="ucrComboBoxStations.Location" type="System.Drawing.Point, System.Drawing">
+    <value>256, 53</value>
+  </data>
+  <data name="ucrComboBoxStations.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>9, 12, 9, 12</value>
+  </data>
+  <data name="ucrComboBoxStations.Size" type="System.Drawing.Size, System.Drawing">
+    <value>137, 21</value>
+  </data>
+  <data name="ucrComboBoxStations.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxStations.Name" xml:space="preserve">
+    <value>ucrComboBoxStations</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxStations.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxStations.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrComboBoxStations.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="ucrSelectorForClimSoft.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 43</value>
+    <value>8, 43</value>
   </data>
   <data name="ucrSelectorForClimSoft.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -571,10 +571,10 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>430, 459</value>
+    <value>408, 459</value>
   </data>
   <data name="ucrReceiverMultipleStations.Location" type="System.Drawing.Point, System.Drawing">
-    <value>260, 77</value>
+    <value>256, 77</value>
   </data>
   <data name="ucrReceiverMultipleStations.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -598,13 +598,13 @@
     <value>16</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 402</value>
+    <value>8, 402</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>410, 52</value>
+    <value>399, 52</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -640,7 +640,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverMultipleElements.Location" type="System.Drawing.Point, System.Drawing">
-    <value>263, 234</value>
+    <value>259, 234</value>
   </data>
   <data name="ucrReceiverMultipleElements.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

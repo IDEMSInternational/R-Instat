@@ -212,8 +212,6 @@ Partial Class dlgSummaryBarOrPieChart
         Me.Controls.Add(Me.ucrSaveSummaryBar)
         Me.Controls.Add(Me.rdoBarChart)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.cmdPieChartOptions)
-        Me.Controls.Add(Me.cmdBarChartOptions)
         Me.Controls.Add(Me.lblSecondFactor)
         Me.Controls.Add(Me.lblFactor)
         Me.Controls.Add(Me.ucrReceiverSecondFactor)
@@ -223,6 +221,8 @@ Partial Class dlgSummaryBarOrPieChart
         Me.Controls.Add(Me.ucrSummaryBarSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlOptions)
+        Me.Controls.Add(Me.cmdBarChartOptions)
+        Me.Controls.Add(Me.cmdPieChartOptions)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

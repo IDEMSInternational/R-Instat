@@ -29,6 +29,7 @@ Public Class dlgOptions
     Private strGraphDisplayOption As String
     Private Panels As New List(Of Panel)()
     Private VisiblePanel As Panel = Nothing
+    Private strCurrLang As String
     'Define the Fonts dialog (only one)
     Dim dlgFont As New FontDialog
     Dim bFirstLoad As Boolean = True
@@ -85,6 +86,8 @@ Public Class dlgOptions
         ucrInputLanguage.SetLinkedDisplayControl(lblLanguage)
         ucrInputLanguage.SetItems({"English", "French", "Portuguese", "Kiswahili"})
         ucrInputLanguage.SetDropDownStyleAsNonEditable()
+
+        SetVisibleLanButton()
     End Sub
 
      Private Sub LoadInstatOptions()
@@ -239,12 +242,16 @@ Public Class dlgOptions
             frmMain.TranslateFrmMainMenu()
         End If
         strPrevLanguageCulture = strCurrLanguageCulture
+
+        frmMain.SetLanButtonVisibility(frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB")
+
         'disables the command after running it
         cmdApply.Enabled = True
         cmdOk.Enabled = True
         cmdCancel.Enabled = True
         cmdHelp.Enabled = True
         ApplyEnabled(False)
+        SetVisibleLanButton()
         Cursor = Cursors.Default
     End Sub
 
@@ -355,6 +362,20 @@ Public Class dlgOptions
         End If
     End Sub
 
+    Private Sub cmdLanguage_Click(sender As Object, e As EventArgs) Handles cmdLanguage.Click
+        If strCurrLang <> "en-GB" Then
+            strCurrLang = "en-GB"
+        Else
+            strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+        End If
+
+        Dim strConfiguredLanguage As String = frmMain.clsInstatOptions.strLanguageCultureCode
+        frmMain.clsInstatOptions.strLanguageCultureCode = strCurrLang
+        autoTranslate(Me)
+        SetView()
+        frmMain.clsInstatOptions.strLanguageCultureCode = strConfiguredLanguage
+    End Sub
+
     Private Sub ucrPnlGraphDisplay_ControlValueChanged() Handles ucrPnlGraphDisplay.ControlValueChanged
         If rdoDisplayinOutputWindow.Checked Then
             strGraphDisplayOption = "view_output_window"
@@ -365,6 +386,18 @@ Public Class dlgOptions
         End If
         ApplyEnabled(True)
     End Sub
+
+    Private Sub SetVisibleLanButton()
+        If frmMain.clsInstatOptions IsNot Nothing Then
+            If frmMain.clsInstatOptions.strLanguageCultureCode <> "en-GB" Then
+                cmdLanguage.Visible = True
+            Else
+                cmdLanguage.Visible = False
+            End If
+            strCurrLang = frmMain.clsInstatOptions.strLanguageCultureCode
+        End If
+    End Sub
+
     Private Sub SetCommandFont(fntNew As Font, clrNew As Color)
         fntCommand = fntNew
         clrCommand = clrNew

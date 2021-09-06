@@ -284,13 +284,6 @@ Public Class ucrDataView
     '    End Try
     'End Sub
 
-    Public Sub CopyRange()
-        Try
-            grdData.CurrentWorksheet.Copy()
-        Catch
-            MessageBox.Show("Cannot copy the current selection.")
-        End Try
-    End Sub
 
     'Private Sub pasteRangeToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles pasteRangeToolStripMenuItem.Click
     '    Try
@@ -885,15 +878,15 @@ Public Class ucrDataView
         frmMain.bDataSaved = False
     End Sub
 
-    Private Sub linkNewDataFrame_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartNewDataFrame.LinkClicked
+    Private Sub linkNewDataFrame_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartNewdataframe.LinkClicked
         dlgNewDataFrame.ShowDialog()
     End Sub
 
-    Private Sub linkOpenFile_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenFile.LinkClicked
+    Private Sub linkOpenFile_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartImportFile.LinkClicked
         dlgImportDataset.ShowDialog()
     End Sub
 
-    Private Sub linkOpenLibrary_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartOpenLibrary.LinkClicked
+    Private Sub linkOpenLibrary_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkStartImportLibrary.LinkClicked
         dlgFromLibrary.ShowDialog()
     End Sub
 
@@ -984,7 +977,7 @@ Public Class ucrDataView
             mnuLebelsLevel.Enabled = (iSelectedCols = 1 AndAlso strType.Contains("factor"))
         Else
             MsgBox("Developer error: SelectedColumnsAsArray() expected to return an array with at least one element.")
-            mnuLebelsLevel.Enabled =  False
+            mnuLebelsLevel.Enabled = False
         End If
         mnuRemoveCurrentFilters.Enabled = Not String.Equals(strFilterName, strNoFilter)
     End Sub
@@ -1073,4 +1066,41 @@ Public Class ucrDataView
         'get all columns of current selected data frame
         Return lstColumnNames.Find(Function(x) x.Key = grdData.CurrentWorksheet.Name).Value
     End Function
+
+    Public Sub CopyRange()
+        Try
+            Dim clsCopyValuesFunction As New RFunction
+            Dim strAllContent As String = ""
+            Dim iEndRow As Integer = grdData.CurrentWorksheet.SelectionRange.EndRow
+            Dim iEndCol As Integer = grdData.CurrentWorksheet.SelectionRange.EndCol
+            Dim iStartCol As Integer = grdData.CurrentWorksheet.SelectionRange.Col
+
+            'construct the copied range data
+            For iRowIndex As Integer = grdData.CurrentWorksheet.SelectionRange.Row To iEndRow
+                Dim strRowContent As String = ""
+                For iColIndex As Integer = iStartCol To iEndCol
+                    Dim strCellContent As String = grdData.CurrentWorksheet.GetCell(row:=iRowIndex, col:=iColIndex).DisplayText
+                    If strCellContent = "NA" Then
+                        strCellContent = ""
+                    End If
+                    If iColIndex = iStartCol Then
+                        strRowContent = strCellContent
+                    Else
+                        strRowContent &= vbTab & strCellContent
+                    End If
+                Next
+                strAllContent &= strRowContent
+                If iRowIndex < iEndRow Then
+                    strAllContent &= Environment.NewLine
+                End If
+            Next
+
+            clsCopyValuesFunction.SetRCommand(frmMain.clsRLink.strInstatDataObject & "$copy_to_clipboard")
+            clsCopyValuesFunction.AddParameter("content", Chr(34) & strAllContent & Chr(34), iPosition:=0)
+            RunScriptFromDataView(clsCopyValuesFunction.ToScript(), strComment:="Copy data view values to clipboard")
+        Catch
+            MessageBox.Show("Cannot copy the current selection.")
+        End Try
+    End Sub
+
 End Class

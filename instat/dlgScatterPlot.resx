@@ -126,7 +126,7 @@
     <value>10, 229</value>
   </data>
   <data name="cmdOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 25</value>
+    <value>147, 25</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="cmdOptions.TabIndex" type="System.Int32, mscorlib">
@@ -154,7 +154,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblFactorOptional.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 222</value>
+    <value>328, 224</value>
   </data>
   <data name="lblFactorOptional.Size" type="System.Drawing.Size, System.Drawing">
     <value>111, 13</value>
@@ -184,7 +184,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblXVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 173</value>
+    <value>328, 175</value>
   </data>
   <data name="lblXVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>58, 13</value>
@@ -207,31 +207,31 @@
   <data name="&gt;&gt;lblXVariable.ZOrder" xml:space="preserve">
     <value>12</value>
   </data>
-  <data name="cmdScatterPlotOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+  <data name="cmdPointOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
-  <data name="cmdScatterPlotOptions.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="cmdPointOptions.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 198</value>
   </data>
-  <data name="cmdScatterPlotOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>190, 25</value>
+  <data name="cmdPointOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>147, 25</value>
   </data>
-  <data name="cmdScatterPlotOptions.TabIndex" type="System.Int32, mscorlib">
+  <data name="cmdPointOptions.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
   </data>
-  <data name="cmdScatterPlotOptions.Text" xml:space="preserve">
-    <value>Scatter Plot Options</value>
+  <data name="cmdPointOptions.Text" xml:space="preserve">
+    <value>Point Options</value>
   </data>
-  <data name="&gt;&gt;cmdScatterPlotOptions.Name" xml:space="preserve">
-    <value>cmdScatterPlotOptions</value>
+  <data name="&gt;&gt;cmdPointOptions.Name" xml:space="preserve">
+    <value>cmdPointOptions</value>
   </data>
-  <data name="&gt;&gt;cmdScatterPlotOptions.Type" xml:space="preserve">
+  <data name="&gt;&gt;cmdPointOptions.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;cmdScatterPlotOptions.Parent" xml:space="preserve">
+  <data name="&gt;&gt;cmdPointOptions.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;cmdScatterPlotOptions.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;cmdPointOptions.ZOrder" xml:space="preserve">
     <value>7</value>
   </data>
   <data name="lblVariable.AutoSize" type="System.Boolean, mscorlib">
@@ -241,7 +241,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVariable.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 271</value>
+    <value>328, 273</value>
   </data>
   <data name="lblVariable.Size" type="System.Drawing.Size, System.Drawing">
     <value>125, 13</value>
@@ -271,7 +271,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>473, 368</value>
+    <value>474, 368</value>
   </data>
   <data name="ucrChkWithSE.Location" type="System.Drawing.Point, System.Drawing">
     <value>187, 260</value>
@@ -322,7 +322,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveScatterPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>255, 24</value>
+    <value>312, 24</value>
   </data>
   <data name="ucrSaveScatterPlot.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -453,11 +453,14 @@
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
     <value>13</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Scatter Plot</value>
+    <value>Point Plot</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>dlgScatterPlot</value>
@@ -466,7 +469,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverLabel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>328, 286</value>
+    <value>328, 289</value>
   </data>
   <data name="ucrReceiverLabel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

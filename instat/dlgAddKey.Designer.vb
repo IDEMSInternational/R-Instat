@@ -41,8 +41,7 @@ Partial Class dlgAddKey
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgAddKey))
         Me.cmdCheckUnique = New System.Windows.Forms.Button()
         Me.lblKeyColumns = New System.Windows.Forms.Label()
-        Me.lblKeyName = New System.Windows.Forms.Label()
-        Me.ucrInputKeyName = New instat.ucrInputTextBox()
+        Me.ucrSaveKey = New instat.ucrSave()
         Me.ucrInputCheckInput = New instat.ucrInputTextBox()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorKeyColumns = New instat.ucrSelectorByDataFrameAddRemove()
@@ -60,18 +59,10 @@ Partial Class dlgAddKey
         resources.ApplyResources(Me.lblKeyColumns, "lblKeyColumns")
         Me.lblKeyColumns.Name = "lblKeyColumns"
         '
-        'lblKeyName
+        'ucrSaveKey
         '
-        resources.ApplyResources(Me.lblKeyName, "lblKeyName")
-        Me.lblKeyName.Name = "lblKeyName"
-        '
-        'ucrInputKeyName
-        '
-        Me.ucrInputKeyName.AddQuotesIfUnrecognised = True
-        Me.ucrInputKeyName.IsMultiline = False
-        Me.ucrInputKeyName.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputKeyName, "ucrInputKeyName")
-        Me.ucrInputKeyName.Name = "ucrInputKeyName"
+        resources.ApplyResources(Me.ucrSaveKey, "ucrSaveKey")
+        Me.ucrSaveKey.Name = "ucrSaveKey"
         '
         'ucrInputCheckInput
         '
@@ -88,6 +79,7 @@ Partial Class dlgAddKey
         '
         'ucrSelectorKeyColumns
         '
+        Me.ucrSelectorKeyColumns.bDropUnusedFilterLevels = False
         Me.ucrSelectorKeyColumns.bShowHiddenColumns = False
         Me.ucrSelectorKeyColumns.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorKeyColumns, "ucrSelectorKeyColumns")
@@ -106,11 +98,10 @@ Partial Class dlgAddKey
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrInputKeyName)
+        Me.Controls.Add(Me.ucrSaveKey)
         Me.Controls.Add(Me.lblKeyColumns)
         Me.Controls.Add(Me.ucrInputCheckInput)
         Me.Controls.Add(Me.cmdCheckUnique)
-        Me.Controls.Add(Me.lblKeyName)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrSelectorKeyColumns)
         Me.Controls.Add(Me.ucrReceiverKeyColumns)
@@ -128,6 +119,5 @@ Partial Class dlgAddKey
     Friend WithEvents cmdCheckUnique As System.Windows.Forms.Button
     Friend WithEvents ucrInputCheckInput As instat.ucrInputTextBox
     Friend WithEvents lblKeyColumns As System.Windows.Forms.Label
-    Friend WithEvents lblKeyName As Label
-    Friend WithEvents ucrInputKeyName As ucrInputTextBox
+    Friend WithEvents ucrSaveKey As ucrSave
 End Class

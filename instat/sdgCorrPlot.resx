@@ -227,6 +227,15 @@
   <data name="&gt;&gt;rdoScatterPlotMatrix.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="ucrPnlGraphType.Location" type="System.Drawing.Point, System.Drawing">
+    <value>6, 15</value>
+  </data>
+  <data name="ucrPnlGraphType.Size" type="System.Drawing.Size, System.Drawing">
+    <value>318, 46</value>
+  </data>
+  <data name="ucrPnlGraphType.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
   <data name="&gt;&gt;ucrPnlGraphType.Name" xml:space="preserve">
     <value>ucrPnlGraphType</value>
   </data>
@@ -262,27 +271,6 @@
   </data>
   <data name="&gt;&gt;GroupBox1.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="ucrPnlGraphType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 15</value>
-  </data>
-  <data name="ucrPnlGraphType.Size" type="System.Drawing.Size, System.Drawing">
-    <value>318, 46</value>
-  </data>
-  <data name="ucrPnlGraphType.TabIndex" type="System.Int32, mscorlib">
-    <value>0</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlGraphType.Name" xml:space="preserve">
-    <value>ucrPnlGraphType</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlGraphType.Type" xml:space="preserve">
-    <value>instat.UcrPanel, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlGraphType.Parent" xml:space="preserve">
-    <value>GroupBox1</value>
-  </data>
-  <data name="&gt;&gt;ucrPnlGraphType.ZOrder" xml:space="preserve">
-    <value>4</value>
   </data>
   <data name="lblFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -345,6 +333,18 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>366, 362</value>
   </data>
+  <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 303</value>
+  </data>
+  <data name="ucrSaveGraph.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
+  <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
+    <value>346, 24</value>
+  </data>
+  <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
   <data name="&gt;&gt;ucrSaveGraph.Name" xml:space="preserve">
     <value>ucrSaveGraph</value>
   </data>
@@ -356,6 +356,15 @@
   </data>
   <data name="&gt;&gt;ucrSaveGraph.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="ucrBaseSdgCorrPlot.Location" type="System.Drawing.Point, System.Drawing">
+    <value>111, 327</value>
+  </data>
+  <data name="ucrBaseSdgCorrPlot.Size" type="System.Drawing.Size, System.Drawing">
+    <value>152, 30</value>
+  </data>
+  <data name="ucrBaseSdgCorrPlot.TabIndex" type="System.Int32, mscorlib">
+    <value>14</value>
   </data>
   <data name="&gt;&gt;ucrBaseSdgCorrPlot.Name" xml:space="preserve">
     <value>ucrBaseSdgCorrPlot</value>
@@ -593,47 +602,5 @@
   </data>
   <data name="&gt;&gt;grpOptions.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 303</value>
-  </data>
-  <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 24</value>
-  </data>
-  <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveGraph.Name" xml:space="preserve">
-    <value>ucrSaveGraph</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveGraph.Type" xml:space="preserve">
-    <value>instat.ucrSave, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveGraph.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrSaveGraph.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrBaseSdgCorrPlot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>111, 327</value>
-  </data>
-  <data name="ucrBaseSdgCorrPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
-  </data>
-  <data name="ucrBaseSdgCorrPlot.TabIndex" type="System.Int32, mscorlib">
-    <value>14</value>
-  </data>
-  <data name="&gt;&gt;ucrBaseSdgCorrPlot.Name" xml:space="preserve">
-    <value>ucrBaseSdgCorrPlot</value>
-  </data>
-  <data name="&gt;&gt;ucrBaseSdgCorrPlot.Type" xml:space="preserve">
-    <value>instat.ucrButtonsSubdialogue, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrBaseSdgCorrPlot.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrBaseSdgCorrPlot.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
 </root>

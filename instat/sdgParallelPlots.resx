@@ -119,10 +119,10 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ucrBaseSdgParallelPlot.Location" type="System.Drawing.Point, System.Drawing">
-    <value>40, 83</value>
+    <value>29, 89</value>
   </data>
   <data name="ucrBaseSdgParallelPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>153, 30</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrBaseSdgParallelPlot.TabIndex" type="System.Int32, mscorlib">
@@ -141,10 +141,10 @@
     <value>4</value>
   </data>
   <data name="ucrInputMissing.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 18</value>
+    <value>74, 18</value>
   </data>
   <data name="ucrInputMissing.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>127, 21</value>
   </data>
   <data name="ucrInputMissing.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -162,10 +162,10 @@
     <value>3</value>
   </data>
   <data name="ucrInputOrder.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 45</value>
+    <value>74, 47</value>
   </data>
   <data name="ucrInputOrder.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>128, 21</value>
   </data>
   <data name="ucrInputOrder.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>

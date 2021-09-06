@@ -140,7 +140,6 @@ Partial Class dlgOneVariableSummarise
         Me.Controls.Add(Me.rdoCustomised)
         Me.Controls.Add(Me.rdoDefault)
         Me.Controls.Add(Me.lblSummaries)
-        Me.Controls.Add(Me.lblMaxSum)
         Me.Controls.Add(Me.ucrNudMaxSum)
         Me.Controls.Add(Me.ucrChkOmitMissing)
         Me.Controls.Add(Me.ucrSelectorOneVarSummarise)
@@ -149,6 +148,7 @@ Partial Class dlgOneVariableSummarise
         Me.Controls.Add(Me.lblSelectedVariable)
         Me.Controls.Add(Me.cmdSummaries)
         Me.Controls.Add(Me.ucrPnlSummaries)
+        Me.Controls.Add(Me.lblMaxSum)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False

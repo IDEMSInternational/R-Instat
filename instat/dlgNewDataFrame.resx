@@ -343,7 +343,7 @@
     <value>Expression</value>
   </data>
   <data name="dataGridView.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 83</value>
+    <value>9, 84</value>
   </data>
   <data name="dataGridView.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
@@ -457,13 +457,13 @@
     <value>NoControl</value>
   </data>
   <data name="btnExample.Location" type="System.Drawing.Point, System.Drawing">
-    <value>69, 54</value>
+    <value>83, 54</value>
   </data>
   <data name="btnExample.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 2, 2, 2</value>
   </data>
   <data name="btnExample.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 22</value>
+    <value>166, 22</value>
   </data>
   <data name="btnExample.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -520,7 +520,7 @@
     <value>2, 3, 2, 3</value>
   </data>
   <data name="ucrInputTryMessage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>293, 22</value>
+    <value>335, 22</value>
   </data>
   <data name="ucrInputTryMessage.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -538,7 +538,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputCommand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 83</value>
+    <value>9, 84</value>
   </data>
   <data name="ucrInputCommand.Size" type="System.Drawing.Size, System.Drawing">
     <value>417, 159</value>
@@ -589,7 +589,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNewDFName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>300, 24</value>
+    <value>416, 24</value>
   </data>
   <data name="ucrNewDFName.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -607,13 +607,13 @@
     <value>12</value>
   </data>
   <data name="ucrNudCols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>121, 140</value>
+    <value>141, 143</value>
   </data>
   <data name="ucrNudCols.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNudCols.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>60, 20</value>
   </data>
   <data name="ucrNudCols.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -631,13 +631,13 @@
     <value>13</value>
   </data>
   <data name="ucrNudRows.Location" type="System.Drawing.Point, System.Drawing">
-    <value>124, 97</value>
+    <value>124, 99</value>
   </data>
   <data name="ucrNudRows.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrNudRows.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
+    <value>77, 20</value>
   </data>
   <data name="ucrNudRows.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -655,13 +655,13 @@
     <value>14</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 318</value>
+    <value>20, 318</value>
   </data>
   <data name="ucrBase.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>399, 48</value>
+    <value>416, 57</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>15</value>
@@ -689,9 +689,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>439, 378</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

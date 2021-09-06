@@ -244,7 +244,7 @@
     <value>9, 22</value>
   </data>
   <data name="rdoChooseProperty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>104, 24</value>
+    <value>144, 24</value>
   </data>
   <data name="rdoChooseProperty.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -268,7 +268,7 @@
     <value>9, 49</value>
   </data>
   <data name="rdoDefineNewProperty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 24</value>
+    <value>167, 24</value>
   </data>
   <data name="rdoDefineNewProperty.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -289,10 +289,10 @@
     <value>1</value>
   </data>
   <data name="grpProperty.Location" type="System.Drawing.Point, System.Drawing">
-    <value>254, 193</value>
+    <value>238, 193</value>
   </data>
   <data name="grpProperty.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 80</value>
+    <value>182, 80</value>
   </data>
   <data name="grpProperty.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -313,10 +313,10 @@
     <value>3</value>
   </data>
   <data name="ucrNewValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 244</value>
+    <value>111, 244</value>
   </data>
   <data name="ucrNewValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>140, 29</value>
+    <value>121, 29</value>
   </data>
   <data name="ucrNewValue.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -334,10 +334,10 @@
     <value>4</value>
   </data>
   <data name="ucrCurrentValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>92, 213</value>
+    <value>111, 213</value>
   </data>
   <data name="ucrCurrentValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>118, 21</value>
   </data>
   <data name="ucrCurrentValue.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -430,7 +430,7 @@
     <value>254, 73</value>
   </data>
   <data name="lblChooseColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 30</value>
+    <value>166, 30</value>
   </data>
   <data name="lblChooseColumns.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

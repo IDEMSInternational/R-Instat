@@ -162,7 +162,7 @@ Public Class ucrDistributions
                                 If Dist.bTwoLevelFactor Then
                                     bUse = True
                                 End If
-                            Case "numeric"
+                            Case "numeric", "integer"
                                 If Dist.bNumeric Then
                                     bUse = True
                                 End If
