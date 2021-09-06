@@ -24,8 +24,8 @@ Public Class dlgGeneralForGraphics
     'list of completed layers.
     Private iLayerIndex As Integer
     'current layer
-    Public clsGlobalAesFunction As RFunction
-    Public clsBaseOperator As ROperator
+    Private clsGlobalAesFunction As New RFunction
+    Private clsBaseOperator As ROperator
     Private strGlobalDataFrame As String
     Public bDataFrameSet As Boolean
     Private bResetOptionsSubdialog As Boolean = True
@@ -75,7 +75,6 @@ Public Class dlgGeneralForGraphics
         ucrGraphicsSelector.SetParameter(New RParameter("data", 0))
         ucrGraphicsSelector.SetParameterIsrfunction()
 
-        ucrVariablesAsFactorForGraphics.SetParameter(New RParameter("y", 1))
         ucrVariablesAsFactorForGraphics.SetFactorReceiver(ucrFillOrColourReceiver)
         ucrVariablesAsFactorForGraphics.Selector = ucrGraphicsSelector
         ucrVariablesAsFactorForGraphics.strSelectorHeading = "Variables"
@@ -84,7 +83,6 @@ Public Class dlgGeneralForGraphics
         ucrVariablesAsFactorForGraphics.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrVariablesAsFactorForGraphics.bAddParameterIfEmpty = True
 
-        ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.Selector = ucrGraphicsSelector
         ucrReceiverX.strSelectorHeading = "Variables"
         ucrReceiverX.bWithQuotes = False
@@ -92,7 +90,6 @@ Public Class dlgGeneralForGraphics
         ucrReceiverX.SetValuesToIgnore({Chr(34) & Chr(34)})
         ucrReceiverX.bAddParameterIfEmpty = True
 
-        ucrFillOrColourReceiver.SetParameter(New RParameter("colour", 2))
         ucrFillOrColourReceiver.Selector = ucrGraphicsSelector
         ucrFillOrColourReceiver.SetIncludedDataTypes({"factor"})
         ucrFillOrColourReceiver.strSelectorHeading = "Factors"
@@ -129,8 +126,8 @@ Public Class dlgGeneralForGraphics
 
         clsGlobalAesFunction.SetPackageName("ggplot2")
         clsGlobalAesFunction.SetRCommand("aes")
-        clsGlobalAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
-        clsGlobalAesFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=1)
+        'clsGlobalAesFunction.AddParameter("x", Chr(34) & Chr(34), iPosition:=0)
+        'clsGlobalAesFunction.AddParameter("y", Chr(34) & Chr(34), iPosition:=1)
 
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
@@ -161,7 +158,7 @@ Public Class dlgGeneralForGraphics
         TestOKEnabled()
     End Sub
 
-    Public Sub SetRCodeForControls(bReset As Boolean)
+    Private Sub SetRCodeForControls(bReset As Boolean)
         ucrGraphicsSelector.SetRCode(clsGgplotFunction, bReset)
         ucrVariablesAsFactorForGraphics.SetRCode(clsGlobalAesFunction, bReset)
         ucrReceiverX.SetRCode(clsGlobalAesFunction, bReset)
@@ -225,6 +222,28 @@ Public Class dlgGeneralForGraphics
         sdgPlots.tbpPlotsOptions.SelectedIndex = 0
         bResetOptionsSubdialog = False
         sdgPlots.EnableLayersTab()
+    End Sub
+
+    Private Sub AddRemoveParameter()
+        If Not ucrReceiverX.IsEmpty Then
+            clsGlobalAesFunction.AddParameter("x", ucrReceiverX.GetVariableNames(False), iPosition:=0)
+        Else
+            clsGlobalAesFunction.RemoveParameterByName("x")
+        End If
+        If Not ucrVariablesAsFactorForGraphics.IsEmpty Then
+            clsGlobalAesFunction.AddParameter("y", ucrVariablesAsFactorForGraphics.GetVariableNames(False), iPosition:=1)
+        Else
+            clsGlobalAesFunction.RemoveParameterByName("y")
+        End If
+        If Not ucrFillOrColourReceiver.IsEmpty Then
+            clsGlobalAesFunction.AddParameter("colour", ucrFillOrColourReceiver.GetVariableNames(False), iPosition:=2)
+        Else
+            clsGlobalAesFunction.RemoveParameterByName("colour")
+        End If
+    End Sub
+
+    Private Sub ucrVariablesAsFactorForGraphics_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForGraphics.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrFillOrColourReceiver.ControlValueChanged
+        AddRemoveParameter()
     End Sub
 
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForGraphics.ControlContentsChanged, ucrSave.ControlContentsChanged
