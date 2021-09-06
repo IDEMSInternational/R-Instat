@@ -164,7 +164,6 @@ Public Class dlgPivotTable
 
     Private Sub ReceiversChanged(ucrChangedControls As ucrCore) Handles ucrReceiverInitialColumnFactor.ControlValueChanged,
             ucrReceiverInitialRowFactor.ControlValueChanged, ucrReceiverSelectedVariable.ControlValueChanged
-
         If Not bRcodeSet OrElse Not ucrChkSelectedVariable.Checked Then
             Exit Sub
         End If
