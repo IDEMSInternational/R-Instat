@@ -516,8 +516,50 @@
   <data name="&gt;&gt;grpOutput.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrNudMinFreq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>142, 328</value>
+  </data>
+  <data name="ucrNudMinFreq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 20</value>
+  </data>
+  <data name="ucrNudMinFreq.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMinFreq.Name" xml:space="preserve">
+    <value>ucrNudMinFreq</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMinFreq.Type" xml:space="preserve">
+    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMinFreq.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrNudMinFreq.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ucrChkMinFrq.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 328</value>
+  </data>
+  <data name="ucrChkMinFrq.Size" type="System.Drawing.Size, System.Drawing">
+    <value>210, 20</value>
+  </data>
+  <data name="ucrChkMinFrq.TabIndex" type="System.Int32, mscorlib">
+    <value>17</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMinFrq.Name" xml:space="preserve">
+    <value>ucrChkMinFrq</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMinFrq.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMinFrq.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrChkMinFrq.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
   <data name="ucrSaveGraph.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 353</value>
+    <value>10, 352</value>
   </data>
   <data name="ucrSaveGraph.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -548,48 +590,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>435, 448</value>
-  </data>
-  <data name="ucrNudMinFreq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>142, 325</value>
-  </data>
-  <data name="ucrNudMinFreq.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 20</value>
-  </data>
-  <data name="ucrNudMinFreq.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;ucrNudMinFreq.Name" xml:space="preserve">
-    <value>ucrNudMinFreq</value>
-  </data>
-  <data name="&gt;&gt;ucrNudMinFreq.Type" xml:space="preserve">
-    <value>instat.ucrNud, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrNudMinFreq.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrNudMinFreq.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <data name="ucrChkMinFrq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 325</value>
-  </data>
-  <data name="ucrChkMinFrq.Size" type="System.Drawing.Size, System.Drawing">
-    <value>210, 20</value>
-  </data>
-  <data name="ucrChkMinFrq.TabIndex" type="System.Int32, mscorlib">
-    <value>17</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMinFrq.Name" xml:space="preserve">
-    <value>ucrChkMinFrq</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMinFrq.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMinFrq.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkMinFrq.ZOrder" xml:space="preserve">
-    <value>1</value>
   </data>
   <data name="ucrNudGroups.Location" type="System.Drawing.Point, System.Drawing">
     <value>142, 277</value>

@@ -51,6 +51,8 @@ Partial Class dlgOneWayFrequencies
         Me.grpOutput = New System.Windows.Forms.GroupBox()
         Me.rdoAsHtml = New System.Windows.Forms.RadioButton()
         Me.rdoAsText = New System.Windows.Forms.RadioButton()
+        Me.ucrNudMinFreq = New instat.ucrNud()
+        Me.ucrChkMinFrq = New instat.ucrCheck()
         Me.ucrPnlOutput = New instat.UcrPanel()
         Me.ucrSaveGraph = New instat.ucrSave()
         Me.ucrReceiverOneWayFreq = New instat.ucrReceiverMultiple()
@@ -63,8 +65,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrPnlSort = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
-        Me.ucrChkMinFrq = New instat.ucrCheck()
-        Me.ucrNudMinFreq = New instat.ucrNud()
         Me.grpSort.SuspendLayout()
         Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
@@ -159,6 +159,22 @@ Partial Class dlgOneWayFrequencies
         Me.rdoAsText.Name = "rdoAsText"
         Me.rdoAsText.UseVisualStyleBackColor = True
         '
+        'ucrNudMinFreq
+        '
+        Me.ucrNudMinFreq.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinFreq.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudMinFreq, "ucrNudMinFreq")
+        Me.ucrNudMinFreq.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudMinFreq.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudMinFreq.Name = "ucrNudMinFreq"
+        Me.ucrNudMinFreq.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
+        'ucrChkMinFrq
+        '
+        Me.ucrChkMinFrq.Checked = False
+        resources.ApplyResources(Me.ucrChkMinFrq, "ucrChkMinFrq")
+        Me.ucrChkMinFrq.Name = "ucrChkMinFrq"
+        '
         'ucrPnlOutput
         '
         resources.ApplyResources(Me.ucrPnlOutput, "ucrPnlOutput")
@@ -237,22 +253,6 @@ Partial Class dlgOneWayFrequencies
         Me.ucrSelectorOneWayFreq.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectorOneWayFreq, "ucrSelectorOneWayFreq")
         Me.ucrSelectorOneWayFreq.Name = "ucrSelectorOneWayFreq"
-        '
-        'ucrChkMinFrq
-        '
-        Me.ucrChkMinFrq.Checked = False
-        resources.ApplyResources(Me.ucrChkMinFrq, "ucrChkMinFrq")
-        Me.ucrChkMinFrq.Name = "ucrChkMinFrq"
-        '
-        'ucrNudMinFreq
-        '
-        Me.ucrNudMinFreq.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinFreq.Increment = New Decimal(New Integer() {1, 0, 0, 0})
-        resources.ApplyResources(Me.ucrNudMinFreq, "ucrNudMinFreq")
-        Me.ucrNudMinFreq.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
-        Me.ucrNudMinFreq.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
-        Me.ucrNudMinFreq.Name = "ucrNudMinFreq"
-        Me.ucrNudMinFreq.Value = New Decimal(New Integer() {0, 0, 0, 0})
         '
         'dlgOneWayFrequencies
         '

@@ -38,6 +38,9 @@ Public Class sdgOneWayFrequencies
         ucrChkShowStrings.SetParameter(New RParameter("show.strings", 7), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
         ucrChkShowStrings.SetText("Show Strings")
 
+        ucrChkShowNa.SetText("Show NA")
+        ucrChkShowNa.SetParameter(New RParameter("show.na", 11), bNewChangeParameterValue:=True, bNewAddRemoveParameter:=True, strNewValueIfChecked:="TRUE", strNewValueIfUnchecked:="FALSE")
+
         'Graph Only
         ucrPnlGraphType.SetParameter(New RParameter("type", 4))
         ucrPnlGraphType.AddRadioButton(rdoBar, Chr(34) & "bar" & Chr(34))
@@ -132,6 +135,7 @@ Public Class sdgOneWayFrequencies
         ucrInputGraphTitle.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
         ucrInputColor.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
         ucrNudSize.SetRCode(clsOneWayGraphFreq, bReset, bCloneIfNeeded:=True)
+        ucrChkShowNa.SetRCode(clsOneWayTableFreq, bReset, bCloneIfNeeded:=True)
         If bReset Then
             tbpOneWayFrequencies.SelectedIndex = 0
         End If
