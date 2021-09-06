@@ -2408,7 +2408,7 @@ Public Class frmMain
         dlgPasteSpecial.ShowDialog()
     End Sub
 
-    Private Sub mnuDescribeTwodavriablesPivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwodavriablesPivotTable.Click
+    Private Sub mnuDescribeTwoVariablesPivotTable_Click(sender As Object, e As EventArgs) Handles mnuDescribeTwoVariablesPivotTable.Click
         dlgPivotTable.ShowDialog()
     End Sub
 End Class

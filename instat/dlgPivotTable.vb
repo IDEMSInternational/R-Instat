@@ -18,7 +18,7 @@ Public Class dlgPivotTable
     Private bFirstLoad As Boolean = True
     Private bRcodeSet As Boolean = False
     Private bReset As Boolean = True
-    Private clsRPivotTable, clsSelectFunction,
+    Private clsRPivotTableFunction, clsSelectFunction,
         clsConcatenateFunction, clsGetObjectFunction As New RFunction
     Private clsPipeOperator As New ROperator
 
@@ -74,7 +74,7 @@ Public Class dlgPivotTable
     End Sub
 
     Private Sub SetDefaults()
-        clsRPivotTable = New RFunction
+        clsRPivotTableFunction = New RFunction
         clsSelectFunction = New RFunction
         clsConcatenateFunction = New RFunction
         clsPipeOperator = New ROperator
@@ -92,9 +92,9 @@ Public Class dlgPivotTable
         clsPipeOperator.AddParameter("columns", clsRFunctionParameter:=clsSelectFunction, iPosition:=1)
         clsPipeOperator.SetAssignTo("data_selected")
 
-        clsRPivotTable.SetPackageName("rpivotTable")
-        clsRPivotTable.SetRCommand("rpivotTable")
-        clsRPivotTable.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+        clsRPivotTableFunction.SetPackageName("rpivotTable")
+        clsRPivotTableFunction.SetRCommand("rpivotTable")
+        clsRPivotTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
 
         clsSelectFunction.SetPackageName("dplyr")
         clsSelectFunction.SetRCommand("select")
@@ -102,18 +102,18 @@ Public Class dlgPivotTable
 
         clsConcatenateFunction.SetRCommand("c")
 
-        ucrBase.clsRsyntax.AddToBeforeCodes(clsRPivotTable, 1)
+        ucrBase.clsRsyntax.AddToBeforeCodes(clsRPivotTableFunction, 1)
         ucrBase.clsRsyntax.SetBaseRFunction(clsGetObjectFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         bRcodeSet = False
         ucrSelectorPivot.SetRCode(clsPipeOperator, bReset)
-        ucrReceiverInitialColumnFactor.SetRCode(clsRPivotTable, bReset)
-        ucrReceiverInitialRowFactor.SetRCode(clsRPivotTable, bReset)
-        ucrSavePivot.SetRCode(clsRPivotTable, bReset)
-        ucrChkSelectedVariable.SetRCode(clsRPivotTable, bReset)
-        ucrChkIncludeSubTotals.SetRCode(clsRPivotTable, bReset)
+        ucrReceiverInitialColumnFactor.SetRCode(clsRPivotTableFunction, bReset)
+        ucrReceiverInitialRowFactor.SetRCode(clsRPivotTableFunction, bReset)
+        ucrSavePivot.SetRCode(clsRPivotTableFunction, bReset)
+        ucrChkSelectedVariable.SetRCode(clsRPivotTableFunction, bReset)
+        ucrChkIncludeSubTotals.SetRCode(clsRPivotTableFunction, bReset)
         bRcodeSet = True
     End Sub
 
@@ -156,9 +156,9 @@ Public Class dlgPivotTable
 
     Private Sub ChangeDataParameterValue()
         If ucrChkSelectedVariable.Checked Then
-            clsRPivotTable.AddParameter("data", "data_selected", iPosition:=0)
+            clsRPivotTableFunction.AddParameter("data", "data_selected", iPosition:=0)
         Else
-            clsRPivotTable.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
+            clsRPivotTableFunction.AddParameter("data", clsRFunctionParameter:=ucrSelectorPivot.ucrAvailableDataFrames.clsCurrDataFrame, iPosition:=0)
         End If
     End Sub
 

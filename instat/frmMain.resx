@@ -172,10 +172,10 @@
   <data name="mnuDescribeTwoVariablesFrequencies.Text" xml:space="preserve">
     <value>Frequencies...</value>
   </data>
-  <data name="mnuDescribeTwodavriablesPivotTable.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="mnuDescribeTwoVariablesPivotTable.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
-  <data name="mnuDescribeTwodavriablesPivotTable.Text" xml:space="preserve">
+  <data name="mnuDescribeTwoVariablesPivotTable.Text" xml:space="preserve">
     <value>Pivot Table...</value>
   </data>
   <data name="mnuDescribeTwoVariables.Size" type="System.Drawing.Size, System.Drawing">
@@ -6594,6 +6594,12 @@
   <data name="&gt;&gt;mnuDescribeTwoVariablesFrequencies.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;mnuDescribeTwoVariablesPivotTable.Name" xml:space="preserve">
+    <value>mnuDescribeTwoVariablesPivotTable</value>
+  </data>
+  <data name="&gt;&gt;mnuDescribeTwoVariablesPivotTable.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;mnuDescribeThreeVariable.Name" xml:space="preserve">
     <value>mnuDescribeThreeVariable</value>
   </data>
@@ -10186,12 +10192,6 @@
     <value>mnuLogFile</value>
   </data>
   <data name="&gt;&gt;mnuLogFile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuDescribeTwodavriablesPivotTable.Name" xml:space="preserve">
-    <value>mnuDescribeTwodavriablesPivotTable</value>
-  </data>
-  <data name="&gt;&gt;mnuDescribeTwodavriablesPivotTable.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
