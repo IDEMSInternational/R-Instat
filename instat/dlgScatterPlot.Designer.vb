@@ -42,7 +42,7 @@ Partial Class dlgScatterPlot
         Me.cmdOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblXVariable = New System.Windows.Forms.Label()
-        Me.cmdScatterPlotOptions = New System.Windows.Forms.Button()
+        Me.cmdPointOptions = New System.Windows.Forms.Button()
         Me.lblVariable = New System.Windows.Forms.Label()
         Me.ucrReceiverLabel = New instat.ucrReceiverSingle()
         Me.ucrChkWithSE = New instat.ucrCheck()
@@ -74,12 +74,12 @@ Partial Class dlgScatterPlot
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Tag = "X_Variable:"
         '
-        'cmdScatterPlotOptions
+        'cmdPointOptions
         '
-        resources.ApplyResources(Me.cmdScatterPlotOptions, "cmdScatterPlotOptions")
-        Me.cmdScatterPlotOptions.Name = "cmdScatterPlotOptions"
-        Me.cmdScatterPlotOptions.Tag = "ScatterPlot_Options"
-        Me.cmdScatterPlotOptions.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdPointOptions, "cmdPointOptions")
+        Me.cmdPointOptions.Name = "cmdPointOptions"
+        Me.cmdPointOptions.Tag = "Point_Options"
+        Me.cmdPointOptions.UseVisualStyleBackColor = True
         '
         'lblVariable
         '
@@ -164,7 +164,7 @@ Partial Class dlgScatterPlot
         Me.Controls.Add(Me.ucrSaveScatterPlot)
         Me.Controls.Add(Me.ucrSelectorForScatter)
         Me.Controls.Add(Me.ucrVariablesAsFactorForScatter)
-        Me.Controls.Add(Me.cmdScatterPlotOptions)
+        Me.Controls.Add(Me.cmdPointOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrFactorOptionalReceiver)
         Me.Controls.Add(Me.lblFactorOptional)
@@ -186,7 +186,7 @@ Partial Class dlgScatterPlot
     Friend WithEvents lblFactorOptional As Label
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents lblXVariable As Label
-    Friend WithEvents cmdScatterPlotOptions As Button
+    Friend WithEvents cmdPointOptions As Button
     Friend WithEvents ucrVariablesAsFactorForScatter As ucrVariablesAsFactor
     Friend WithEvents ucrSelectorForScatter As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrSaveScatterPlot As ucrSave

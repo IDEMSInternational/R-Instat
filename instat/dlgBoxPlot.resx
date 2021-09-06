@@ -145,7 +145,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdOptions.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>21</value>
   </data>
   <data name="lblByFactors.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -175,7 +175,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblByFactors.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>19</value>
   </data>
   <data name="lblBySecondFactor.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -205,7 +205,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblBySecondFactor.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>18</value>
   </data>
   <data name="cmdBoxPlotOptions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
@@ -232,7 +232,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;cmdBoxPlotOptions.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>24</value>
   </data>
   <data name="rdoBoxplotTufte.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -649,7 +649,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSecondFactorReceiver.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>16</value>
   </data>
   <data name="ucrSelectorBoxPlot.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 50</value>
@@ -673,7 +673,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrSelectorBoxPlot.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>17</value>
   </data>
   <data name="ucrByFactorsReceiver.Location" type="System.Drawing.Point, System.Drawing">
     <value>275, 220</value>
@@ -697,7 +697,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrByFactorsReceiver.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>20</value>
   </data>
   <data name="ucrBase.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 430</value>
@@ -718,7 +718,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrBase.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>22</value>
   </data>
   <data name="ucrPnlPlots.Location" type="System.Drawing.Point, System.Drawing">
     <value>7, 12</value>
@@ -739,7 +739,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ucrPnlPlots.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>23</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
