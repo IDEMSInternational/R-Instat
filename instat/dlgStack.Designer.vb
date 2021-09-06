@@ -43,6 +43,9 @@ Partial Class dlgStack
         Me.lblStackDataInto = New System.Windows.Forms.Label()
         Me.lblFactorInto = New System.Windows.Forms.Label()
         Me.lblSets = New System.Windows.Forms.Label()
+        Me.rdoGather = New System.Windows.Forms.RadioButton()
+        Me.rdoUnnest = New System.Windows.Forms.RadioButton()
+        Me.ucrPnlStack = New instat.UcrPanel()
         Me.ucrNudNoSets = New instat.ucrNud()
         Me.ucrChkStackMultipleSets = New instat.ucrCheck()
         Me.ucrSaveNewDataName = New instat.ucrSave()
@@ -53,6 +56,7 @@ Partial Class dlgStack
         Me.ucrSelectorStack = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrReceiverColumnsToBeStack = New instat.ucrReceiverMultiple()
+        Me.ucrReceiverTextColumn = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'lblColumnsTostack
@@ -77,6 +81,29 @@ Partial Class dlgStack
         '
         resources.ApplyResources(Me.lblSets, "lblSets")
         Me.lblSets.Name = "lblSets"
+        '
+        'rdoGather
+        '
+        resources.ApplyResources(Me.rdoGather, "rdoGather")
+        Me.rdoGather.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGather.FlatAppearance.BorderSize = 2
+        Me.rdoGather.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoGather.Name = "rdoGather"
+        Me.rdoGather.UseVisualStyleBackColor = True
+        '
+        'rdoUnnest
+        '
+        resources.ApplyResources(Me.rdoUnnest, "rdoUnnest")
+        Me.rdoUnnest.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoUnnest.FlatAppearance.BorderSize = 2
+        Me.rdoUnnest.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoUnnest.Name = "rdoUnnest"
+        Me.rdoUnnest.UseVisualStyleBackColor = True
+        '
+        'ucrPnlStack
+        '
+        resources.ApplyResources(Me.ucrPnlStack, "ucrPnlStack")
+        Me.ucrPnlStack.Name = "ucrPnlStack"
         '
         'ucrNudNoSets
         '
@@ -152,10 +179,24 @@ Partial Class dlgStack
         Me.ucrReceiverColumnsToBeStack.strNcFilePath = ""
         Me.ucrReceiverColumnsToBeStack.ucrSelector = Nothing
         '
+        'ucrReceiverTextColumn
+        '
+        Me.ucrReceiverTextColumn.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverTextColumn, "ucrReceiverTextColumn")
+        Me.ucrReceiverTextColumn.Name = "ucrReceiverTextColumn"
+        Me.ucrReceiverTextColumn.Selector = Nothing
+        Me.ucrReceiverTextColumn.strNcFilePath = ""
+        Me.ucrReceiverTextColumn.ucrSelector = Nothing
+        '
         'dlgStack
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrReceiverColumnsToBeStack)
+        Me.Controls.Add(Me.ucrReceiverTextColumn)
+        Me.Controls.Add(Me.rdoUnnest)
+        Me.Controls.Add(Me.rdoGather)
+        Me.Controls.Add(Me.ucrPnlStack)
         Me.Controls.Add(Me.lblSets)
         Me.Controls.Add(Me.ucrNudNoSets)
         Me.Controls.Add(Me.ucrChkStackMultipleSets)
@@ -169,7 +210,6 @@ Partial Class dlgStack
         Me.Controls.Add(Me.lblFactorInto)
         Me.Controls.Add(Me.lblStackDataInto)
         Me.Controls.Add(Me.lblColumnsTostack)
-        Me.Controls.Add(Me.ucrReceiverColumnsToBeStack)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -193,4 +233,8 @@ Partial Class dlgStack
     Friend WithEvents ucrNudNoSets As ucrNud
     Friend WithEvents ucrChkStackMultipleSets As ucrCheck
     Friend WithEvents lblSets As Label
+    Friend WithEvents ucrPnlStack As UcrPanel
+    Friend WithEvents rdoUnnest As RadioButton
+    Friend WithEvents rdoGather As RadioButton
+    Friend WithEvents ucrReceiverTextColumn As ucrReceiverSingle
 End Class

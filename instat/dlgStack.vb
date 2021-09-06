@@ -16,9 +16,9 @@
 
 Imports instat.Translations
 Public Class dlgStack
-    Private clsMeltFunction As New RFunction
     Private clsReshapeFunction As RFunction
     Private clsSplitColumnsInGroups As RFunction
+    Private clsUnnestTokensFunction As RFunction
     Private bFirstLoad As Boolean = True
     Private bReset As Boolean = True
 
@@ -39,7 +39,7 @@ Public Class dlgStack
     Private Sub InitialiseDialog()
         ucrBase.iHelpTopicID = 57
 
-        ucrSelectorStack.SetParameter(New RParameter("data", 0))
+        ucrSelectorStack.SetParameter(New RParameter("tbl", 0))
         ucrSelectorStack.SetParameterIsrfunction()
 
         ucrColumnsToCarryReceiver.SetParameter(New RParameter("id.vars", 1))
@@ -82,6 +82,14 @@ Public Class dlgStack
         ucrNudNoSets.Minimum = 2
         ucrNudNoSets.SetLinkedDisplayControl(lblSets)
 
+        ucrReceiverTextColumn.SetParameterIsRFunction()
+        ucrReceiverTextColumn.SetParameter(New RParameter("input", 0))
+        ucrReceiverTextColumn.strCurrDataType = "character"
+
+
+        ucrPnlStack.AddRadioButton(rdoUnnest)
+
+
         ucrSaveNewDataName.SetSaveTypeAsDataFrame()
         ucrSaveNewDataName.SetDataFrameSelector(ucrSelectorStack.ucrAvailableDataFrames)
         ucrSaveNewDataName.SetLabelText("New Data Frame Name:")
@@ -89,19 +97,15 @@ Public Class dlgStack
     End Sub
 
     Private Sub SetDefaults()
-        clsMeltFunction = New RFunction
         clsReshapeFunction = New RFunction
         clsSplitColumnsInGroups = New RFunction
+
 
         ucrSelectorStack.Reset()
         ucrSaveNewDataName.Reset()
         ucrReceiverColumnsToBeStack.SetMeAsReceiver()
 
-        clsMeltFunction.SetPackageName("reshape2")
-        clsMeltFunction.SetRCommand("melt")
-        clsMeltFunction.AddParameter("id.vars", "NULL")
 
-        clsMeltFunction.SetAssignTo(ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked", strTempDataframe:=ucrSelectorStack.ucrAvailableDataFrames.cboAvailableDataFrames.Text & "_stacked")
 
         clsReshapeFunction.SetPackageName("stats")
         clsReshapeFunction.SetRCommand("reshape")
@@ -113,27 +117,22 @@ Public Class dlgStack
         clsSplitColumnsInGroups.AddParameter("num", 2, iPosition:=1)
 
         clsReshapeFunction.AddParameter("varying", clsRFunctionParameter:=clsSplitColumnsInGroups, iPosition:=1)
-
-        ucrBase.clsRsyntax.SetBaseRFunction(clsMeltFunction)
     End Sub
 
     Private Sub SetRCodeForControls(bReset As Boolean)
         ucrReceiverColumnsToBeStack.AddAdditionalCodeParameterPair(clsSplitColumnsInGroups, New RParameter("items", 0), iAdditionalPairNo:=1)
         ucrFactorInto.AddAdditionalCodeParameterPair(clsReshapeFunction, New RParameter("timevar", 3), iAdditionalPairNo:=1)
-        ucrSelectorStack.AddAdditionalCodeParameterPair(clsReshapeFunction, ucrSelectorStack.GetParameter(), iAdditionalPairNo:=1)
+        ucrSelectorStack.AddAdditionalCodeParameterPair(clsReshapeFunction, New RParameter("data", 0), iAdditionalPairNo:=1)
         ucrSaveNewDataName.AddAdditionalRCode(clsReshapeFunction, iAdditionalPairNo:=1)
+
 
         ucrChkStackMultipleSets.SetRCode(ucrBase.clsRsyntax.clsBaseFunction, bReset)
 
         ucrNudNoSets.SetRCode(clsSplitColumnsInGroups, bReset)
 
-        ucrSelectorStack.SetRCode(clsMeltFunction, bReset)
-        ucrReceiverColumnsToBeStack.SetRCode(clsMeltFunction, bReset)
-        ucrColumnsToCarryReceiver.SetRCode(clsMeltFunction, bReset)
-        ucrChkCarryColumns.SetRCode(clsMeltFunction, bReset)
-        ucrFactorInto.SetRCode(clsMeltFunction, bReset)
-        ucrStackDataInto.SetRCode(clsMeltFunction, bReset)
-        ucrSaveNewDataName.SetRCode(clsMeltFunction, bReset)
+        ucrReceiverTextColumn.SetRCode(clsUnnestTokensFunction, bReset)
+        ucrSelectorStack.SetRCode(clsUnnestTokensFunction, bReset)
+
 
         If bReset Then
             SetCarryColumnsOptions()
@@ -185,11 +184,11 @@ Public Class dlgStack
         If ucrChkCarryColumns.Checked Then
             ucrColumnsToCarryReceiver.SetMeAsReceiver()
             If Not ucrColumnsToCarryReceiver.IsEmpty() Then
-                clsMeltFunction.AddParameter("id.vars", ucrColumnsToCarryReceiver.GetVariableNames())
+                'clsGatherFunction.AddParameter("id.vars", ucrColumnsToCarryReceiver.GetVariableNames())
             End If
         Else
             ucrReceiverColumnsToBeStack.SetMeAsReceiver()
-            clsMeltFunction.AddParameter("id.vars", "NULL")
+            'clsGatherFunction.AddParameter("id.vars", "NULL")
         End If
     End Sub
 
@@ -220,8 +219,12 @@ Public Class dlgStack
                 clsReshapeFunction.AddParameter("timevar", Chr(34) & ucrFactorInto.GetText() & Chr(34))
             End If
         Else
-            ucrBase.clsRsyntax.SetBaseRFunction(clsMeltFunction)
+            'ucrBase.clsRsyntax.SetBaseRFunction(clsGatherFunction)
         End If
         TestOKEnabled()
+    End Sub
+
+    Private Sub ucrStackDataInto_Load(sender As Object, e As EventArgs) Handles ucrStackDataInto.Load
+
     End Sub
 End Class
