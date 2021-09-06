@@ -164,8 +164,9 @@ Public Class dlgPivotTable
 
     Private Sub ReceiversChanged(ucrChangedControls As ucrCore) Handles ucrReceiverInitialColumnFactor.ControlValueChanged,
             ucrReceiverInitialRowFactor.ControlValueChanged, ucrReceiverSelectedVariable.ControlValueChanged
-        If bRcodeSet Then
-            If ucrChkSelectedVariable.Checked Then
+        If Not bRcodeSet OrElse Not ucrChkSelectedVariable.Checked Then
+            Exit Sub
+        End If
                 clsConcatenateFunction.ClearParameters()
                 Dim iCount As Integer = 2
                 'To avoid repeating the same column in the c() function eg c("fert"."fert")
