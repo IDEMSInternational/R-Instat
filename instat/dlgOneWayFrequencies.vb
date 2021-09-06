@@ -98,6 +98,13 @@ Public Class dlgOneWayFrequencies
         ucrChkGroupData.AddParameterPresentCondition(True, "auto.group")
         ucrChkGroupData.AddParameterPresentCondition(False, "auto.group", False)
 
+        ucrChkMinFrq.SetText("Min Frequency")
+        ucrChkMinFrq.AddToLinkedControls(ucrNudMinFreq, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=0)
+
+        ucrNudMinFreq.SetParameter(New RParameter("min.frq", 10))
+        ucrNudMinFreq.SetMinMax(0, 1000)
+
+
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 10))
         ucrChkFlip.SetText("Flip Coordinates")
         ucrChkFlip.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
