@@ -74,7 +74,6 @@ Public Class dlgLinePlot
         Dim clsGeomLineParameter As New RParameter
         Dim clsPeaksParam As New RParameter
         Dim clsValleysParam As New RParameter
-        Dim dctOrientationOptions As New Dictionary(Of String, String)
         Dim dctMethodOptions As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
@@ -157,7 +156,6 @@ Public Class dlgLinePlot
         ucrChkValley.SetText("Add Valleys")
         ucrChkValley.SetParameter(clsValleysParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-
         ucrChkWithSE.SetText("With Standard Error")
         ucrChkWithSE.SetParameter(New RParameter("se", 1))
         ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
@@ -166,7 +164,6 @@ Public Class dlgLinePlot
         ucrChkAddSE.SetText("With Standard Error")
         ucrChkAddSE.SetParameter(New RParameter("se", 1))
         ucrChkAddSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
-        ucrChkAddSE.SetRDefault("TRUE")
 
         ucrSave.SetPrefix("lineplot")
         ucrSave.SetIsComboBox()
@@ -187,31 +184,30 @@ Public Class dlgLinePlot
 
         ucrPnlOptions.AddRadioButton(rdoSmoothing)
         ucrPnlOptions.AddRadioButton(rdoLine)
-        ucrPnlOptions.AddFunctionNamesCondition(rdoLine, "geom_line")
+        ucrPnlOptions.AddFunctionNamesCondition(rdoLine, {"geom_line", "geom_path", "geom_step"})
         ucrPnlOptions.AddFunctionNamesCondition(rdoSmoothing, "geom_smooth")
 
-        ucrInputOrientation.SetParameter(New RParameter("orientation", 2))
-        dctOrientationOptions.Add("NA", "NA")
-        dctOrientationOptions.Add("X", Chr(34) & "x" & Chr(34))
-        dctOrientationOptions.Add("Y", Chr(34) & "y" & Chr(34))
-        ucrInputOrientation.SetItems(dctOrientationOptions)
-        ucrInputOrientation.SetDropDownStyleAsNonEditable()
-        ucrInputOrientation.SetRDefault("NA")
-
-
         ucrInputMethod.SetParameter(New RParameter("method", 3))
-        dctMethodOptions.Add("Loess", Chr(34) & "loess" & Chr(34))
-        dctMethodOptions.Add("Linear", Chr(34) & "lm" & Chr(34))
-        dctMethodOptions.Add("GLM", Chr(34) & "glm" & Chr(34))
-        dctMethodOptions.Add("GAM", Chr(34) & "gam" & Chr(34))
-        dctMethodOptions.Add("RLM", "MASS::rlm")
+        dctMethodOptions.Add("loess", Chr(34) & "loess" & Chr(34))
+        dctMethodOptions.Add("linear", Chr(34) & "lm" & Chr(34))
+        dctMethodOptions.Add("glm", Chr(34) & "glm" & Chr(34))
+        dctMethodOptions.Add("gam", Chr(34) & "gam" & Chr(34))
+        dctMethodOptions.Add("rlm", "MASS::rlm")
         ucrInputMethod.SetItems(dctMethodOptions)
         ucrInputMethod.SetDropDownStyleAsNonEditable()
         ucrInputMethod.SetRDefault(Chr(34) & "loess" & Chr(34))
 
-        ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrPnlStepOrPath, ucrChkPeak, ucrChkValley, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrChkAddLine, ucrChkAddSE, ucrInputOrientation, ucrInputMethod}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrInputOrientation.SetLinkedDisplayControl(lblOrientation)
+        ucrNudSpan.SetParameter(New RParameter("span", 4))
+        ucrNudSpan.SetMinMax(0, Integer.MaxValue)
+        ucrNudSpan.Increment = 0.05
+        ucrNudSpan.DecimalPlaces = 2
+
+        ucrInputMethod.AddToLinkedControls(ucrNudSpan, {"loess"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrNudSpan.SetLinkedDisplayControl(lblSpan)
+
+        ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkPeak, ucrChkValley, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkAddLine, ucrInputMethod}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls(ucrChkAddSE, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="FALSE")
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
     End Sub
 
@@ -244,6 +240,8 @@ Public Class dlgLinePlot
 
         clsOptionsFunction.SetPackageName("ggplot2")
         clsOptionsFunction.SetRCommand("geom_line")
+        clsOptionsFunction.AddParameter("span", 0.75, iPosition:=4)
+        clsOptionsFunction.AddParameter("se", "FALSE", iPosition:=1)
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -287,8 +285,8 @@ Public Class dlgLinePlot
         ucrChkValley.SetRCode(clsBaseOperator, bReset)
         ucrChkPathOrStep.SetRCode(clsOptionsFunction, bReset)
         ucrPnlOptions.SetRCode(clsOptionsFunction, bReset)
-        ucrInputOrientation.SetRCode(clsOptionsFunction, bReset)
         ucrInputMethod.SetRCode(clsOptionsFunction, bReset)
+        ucrNudSpan.SetRCode(clsOptionsFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -307,10 +305,10 @@ Public Class dlgLinePlot
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
         If ucrVariablesAsFactorForLinePlot.bSingleVariable Then
-            cmdLineOptions.Enabled = True
+            cmdLinePathStepSmoothOptions.Enabled = True
             cmdOptions.Enabled = True
         Else
-            cmdLineOptions.Enabled = False
+            cmdLinePathStepSmoothOptions.Enabled = False
             cmdOptions.Enabled = False
         End If
     End Sub
@@ -326,7 +324,7 @@ Public Class dlgLinePlot
         bResetSubdialog = False
     End Sub
 
-    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLineOptions.Click
+    Private Sub cmdLineOptions_Click(sender As Object, e As EventArgs) Handles cmdLinePathStepSmoothOptions.Click
         sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsOptionsFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrLinePlotSelector, bApplyAesGlobally:=True, bReset:=bResetLineLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetLineLayerSubdialog = False
@@ -355,7 +353,6 @@ Public Class dlgLinePlot
             End If
         Next
         ucrInputMethod.SetRCode(clsOptionsFunction, bReset)
-        ucrInputOrientation.SetRCode(clsOptionsFunction, bReset)
         TestOkEnabled()
     End Sub
 
@@ -381,17 +378,17 @@ Public Class dlgLinePlot
         End If
     End Sub
 
-    Private Sub SetGraphPrefix()
+    Private Sub SetGraphPrefixAndRcommand()
         If rdoLine.Checked Then
             If ucrChkPathOrStep.Checked Then
                 If rdoStep.Checked Then
                     ucrSave.SetPrefix("stepplot")
                     clsOptionsFunction.SetRCommand("geom_step")
-                Else
+                ElseIf rdoPath.Checked Then
                     ucrSave.SetPrefix("pathplot")
                     clsOptionsFunction.SetRCommand("geom_path")
                 End If
-            Else
+            ElseIf rdoLine.Checked Then
                 ucrSave.SetPrefix("lineplot")
                 clsOptionsFunction.SetRCommand("geom_line")
             End If
@@ -401,12 +398,25 @@ Public Class dlgLinePlot
         End If
     End Sub
 
-    Private Sub ucrChkPathOrStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPathOrStep.ControlValueChanged, ucrPnlStepOrPath.ControlValueChanged
-        SetGraphPrefix()
+    Private Sub SetOptionButtonText()
+        If rdoLine.Checked Then
+            If ucrChkPathOrStep.Checked Then
+                If rdoStep.Checked Then
+                    cmdLinePathStepSmoothOptions.Text = GetTranslation("Step options")
+                ElseIf rdoPath.Checked Then
+                    cmdLinePathStepSmoothOptions.Text = GetTranslation("Path options")
+                End If
+            ElseIf rdoLine.Checked Then
+                cmdLinePathStepSmoothOptions.Text = GetTranslation("Line options")
+            End If
+        ElseIf rdoSmoothing.Checked Then
+            cmdLinePathStepSmoothOptions.Text = GetTranslation("Smooth options")
+        End If
     End Sub
 
-    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrPnlOptions.ControlValueChanged
-        SetGraphPrefix()
+    Private Sub ucrChkPathOrStep_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrChkPathOrStep.ControlValueChanged, ucrPnlStepOrPath.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+        SetGraphPrefixAndRcommand()
+        SetOptionButtonText()
     End Sub
 
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged

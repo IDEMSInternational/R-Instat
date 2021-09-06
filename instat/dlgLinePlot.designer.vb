@@ -42,14 +42,20 @@ Partial Class dlgLinePlot
         Me.lblXVariable = New System.Windows.Forms.Label()
         Me.lblAvailable = New System.Windows.Forms.Label()
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.cmdLineOptions = New System.Windows.Forms.Button()
+        Me.cmdLinePathStepSmoothOptions = New System.Windows.Forms.Button()
         Me.lblFactorOptional = New System.Windows.Forms.Label()
         Me.lblGroupLine = New System.Windows.Forms.Label()
         Me.rdoPath = New System.Windows.Forms.RadioButton()
         Me.rdoStep = New System.Windows.Forms.RadioButton()
         Me.rdoLine = New System.Windows.Forms.RadioButton()
         Me.rdoSmoothing = New System.Windows.Forms.RadioButton()
+        Me.lblMethod = New System.Windows.Forms.Label()
+        Me.lblSpan = New System.Windows.Forms.Label()
+        Me.ucrNudSpan = New instat.ucrNud()
         Me.ucrChkAddLine = New instat.ucrCheck()
+        Me.ucrChkAddPoints = New instat.ucrCheck()
+        Me.ucrInputMethod = New instat.ucrInputComboBox()
+        Me.ucrChkAddSE = New instat.ucrCheck()
         Me.ucrPnlOptions = New instat.UcrPanel()
         Me.ucrPnlStepOrPath = New instat.UcrPanel()
         Me.ucrChkPathOrStep = New instat.ucrCheck()
@@ -58,18 +64,12 @@ Partial Class dlgLinePlot
         Me.ucrReceiverGroup = New instat.ucrReceiverSingle()
         Me.ucrChkWithSE = New instat.ucrCheck()
         Me.ucrChkLineofBestFit = New instat.ucrCheck()
-        Me.ucrChkAddPoints = New instat.ucrCheck()
         Me.ucrSave = New instat.ucrSave()
         Me.ucrVariablesAsFactorForLinePlot = New instat.ucrVariablesAsFactor()
         Me.ucrLinePlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.ucrChkAddSE = New instat.ucrCheck()
-        Me.ucrInputOrientation = New instat.ucrInputComboBox()
-        Me.lblOrientation = New System.Windows.Forms.Label()
-        Me.lblMethod = New System.Windows.Forms.Label()
-        Me.ucrInputMethod = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'lblXVariable
@@ -90,12 +90,12 @@ Partial Class dlgLinePlot
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'cmdLineOptions
+        'cmdLinePathStepSmoothOptions
         '
-        resources.ApplyResources(Me.cmdLineOptions, "cmdLineOptions")
-        Me.cmdLineOptions.Name = "cmdLineOptions"
-        Me.cmdLineOptions.Tag = "Line_Options"
-        Me.cmdLineOptions.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.cmdLinePathStepSmoothOptions, "cmdLinePathStepSmoothOptions")
+        Me.cmdLinePathStepSmoothOptions.Name = "cmdLinePathStepSmoothOptions"
+        Me.cmdLinePathStepSmoothOptions.Tag = "Line_Options"
+        Me.cmdLinePathStepSmoothOptions.UseVisualStyleBackColor = True
         '
         'lblFactorOptional
         '
@@ -146,11 +146,51 @@ Partial Class dlgLinePlot
         Me.rdoSmoothing.Tag = "Smooth"
         Me.rdoSmoothing.UseVisualStyleBackColor = False
         '
+        'lblMethod
+        '
+        resources.ApplyResources(Me.lblMethod, "lblMethod")
+        Me.lblMethod.Name = "lblMethod"
+        '
+        'lblSpan
+        '
+        resources.ApplyResources(Me.lblSpan, "lblSpan")
+        Me.lblSpan.Name = "lblSpan"
+        '
+        'ucrNudSpan
+        '
+        Me.ucrNudSpan.DecimalPlaces = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Increment = New Decimal(New Integer() {1, 0, 0, 0})
+        resources.ApplyResources(Me.ucrNudSpan, "ucrNudSpan")
+        Me.ucrNudSpan.Maximum = New Decimal(New Integer() {100, 0, 0, 0})
+        Me.ucrNudSpan.Minimum = New Decimal(New Integer() {0, 0, 0, 0})
+        Me.ucrNudSpan.Name = "ucrNudSpan"
+        Me.ucrNudSpan.Value = New Decimal(New Integer() {0, 0, 0, 0})
+        '
         'ucrChkAddLine
         '
         Me.ucrChkAddLine.Checked = False
         resources.ApplyResources(Me.ucrChkAddLine, "ucrChkAddLine")
         Me.ucrChkAddLine.Name = "ucrChkAddLine"
+        '
+        'ucrChkAddPoints
+        '
+        Me.ucrChkAddPoints.Checked = False
+        resources.ApplyResources(Me.ucrChkAddPoints, "ucrChkAddPoints")
+        Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
+        '
+        'ucrInputMethod
+        '
+        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
+        Me.ucrInputMethod.GetSetSelectedIndex = -1
+        Me.ucrInputMethod.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputMethod, "ucrInputMethod")
+        Me.ucrInputMethod.Name = "ucrInputMethod"
+        '
+        'ucrChkAddSE
+        '
+        Me.ucrChkAddSE.Checked = False
+        resources.ApplyResources(Me.ucrChkAddSE, "ucrChkAddSE")
+        Me.ucrChkAddSE.Name = "ucrChkAddSE"
         '
         'ucrPnlOptions
         '
@@ -201,12 +241,6 @@ Partial Class dlgLinePlot
         resources.ApplyResources(Me.ucrChkLineofBestFit, "ucrChkLineofBestFit")
         Me.ucrChkLineofBestFit.Name = "ucrChkLineofBestFit"
         '
-        'ucrChkAddPoints
-        '
-        Me.ucrChkAddPoints.Checked = False
-        resources.ApplyResources(Me.ucrChkAddPoints, "ucrChkAddPoints")
-        Me.ucrChkAddPoints.Name = "ucrChkAddPoints"
-        '
         'ucrSave
         '
         resources.ApplyResources(Me.ucrSave, "ucrSave")
@@ -253,48 +287,17 @@ Partial Class dlgLinePlot
         Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.ucrSelector = Nothing
         '
-        'ucrChkAddSE
-        '
-        Me.ucrChkAddSE.Checked = False
-        resources.ApplyResources(Me.ucrChkAddSE, "ucrChkAddSE")
-        Me.ucrChkAddSE.Name = "ucrChkAddSE"
-        '
-        'ucrInputOrientation
-        '
-        Me.ucrInputOrientation.AddQuotesIfUnrecognised = True
-        Me.ucrInputOrientation.GetSetSelectedIndex = -1
-        Me.ucrInputOrientation.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputOrientation, "ucrInputOrientation")
-        Me.ucrInputOrientation.Name = "ucrInputOrientation"
-        '
-        'lblOrientation
-        '
-        resources.ApplyResources(Me.lblOrientation, "lblOrientation")
-        Me.lblOrientation.Name = "lblOrientation"
-        '
-        'lblMethod
-        '
-        resources.ApplyResources(Me.lblMethod, "lblMethod")
-        Me.lblMethod.Name = "lblMethod"
-        '
-        'ucrInputMethod
-        '
-        Me.ucrInputMethod.AddQuotesIfUnrecognised = True
-        Me.ucrInputMethod.GetSetSelectedIndex = -1
-        Me.ucrInputMethod.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputMethod, "ucrInputMethod")
-        Me.ucrInputMethod.Name = "ucrInputMethod"
-        '
         'dlgLinePlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblSpan)
+        Me.Controls.Add(Me.ucrNudSpan)
+        Me.Controls.Add(Me.ucrChkAddLine)
+        Me.Controls.Add(Me.ucrChkAddPoints)
         Me.Controls.Add(Me.lblMethod)
         Me.Controls.Add(Me.ucrInputMethod)
-        Me.Controls.Add(Me.lblOrientation)
-        Me.Controls.Add(Me.ucrInputOrientation)
         Me.Controls.Add(Me.ucrChkAddSE)
-        Me.Controls.Add(Me.ucrChkAddLine)
         Me.Controls.Add(Me.rdoSmoothing)
         Me.Controls.Add(Me.rdoLine)
         Me.Controls.Add(Me.ucrPnlOptions)
@@ -308,10 +311,9 @@ Partial Class dlgLinePlot
         Me.Controls.Add(Me.ucrReceiverGroup)
         Me.Controls.Add(Me.ucrChkWithSE)
         Me.Controls.Add(Me.ucrChkLineofBestFit)
-        Me.Controls.Add(Me.ucrChkAddPoints)
         Me.Controls.Add(Me.ucrSave)
         Me.Controls.Add(Me.ucrVariablesAsFactorForLinePlot)
-        Me.Controls.Add(Me.cmdLineOptions)
+        Me.Controls.Add(Me.cmdLinePathStepSmoothOptions)
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrLinePlotSelector)
         Me.Controls.Add(Me.ucrBase)
@@ -335,7 +337,7 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents ucrLinePlotSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents cmdOptions As Button
-    Friend WithEvents cmdLineOptions As Button
+    Friend WithEvents cmdLinePathStepSmoothOptions As Button
     Friend WithEvents lblFactorOptional As Label
     Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
     Friend WithEvents ucrVariablesAsFactorForLinePlot As ucrVariablesAsFactor
@@ -356,8 +358,8 @@ Partial Class dlgLinePlot
     Friend WithEvents rdoLine As RadioButton
     Friend WithEvents ucrChkAddLine As ucrCheck
     Friend WithEvents ucrChkAddSE As ucrCheck
-    Friend WithEvents ucrInputOrientation As ucrInputComboBox
-    Friend WithEvents lblOrientation As Label
     Friend WithEvents lblMethod As Label
     Friend WithEvents ucrInputMethod As ucrInputComboBox
+    Friend WithEvents lblSpan As Label
+    Friend WithEvents ucrNudSpan As ucrNud
 End Class
