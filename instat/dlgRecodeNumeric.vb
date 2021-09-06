@@ -144,9 +144,9 @@ Public Class dlgRecodeNumeric
 
     Private Sub AddLabelsParameter()
         If Not ucrInputMultipleLabels.IsEmpty() Then
-            ucrBase.clsRsyntax.AddParameter("labels", clsRFunctionParameter:=ucrInputMultipleLabels.clsRList)
+            clsCutFunction.AddParameter("labels", clsRFunctionParameter:=ucrInputMultipleLabels.clsRList)
         Else
-            ucrBase.clsRsyntax.RemoveParameter("labels")
+            clsCutFunction.RemoveParameterByName("labels")
         End If
     End Sub
 
