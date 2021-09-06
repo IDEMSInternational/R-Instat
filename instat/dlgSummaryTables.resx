@@ -343,10 +343,10 @@
     <value>5</value>
   </data>
   <data name="grpDisplay.Location" type="System.Drawing.Point, System.Drawing">
-    <value>118, 357</value>
+    <value>114, 357</value>
   </data>
   <data name="grpDisplay.Size" type="System.Drawing.Size, System.Drawing">
-    <value>194, 124</value>
+    <value>169, 124</value>
   </data>
   <data name="grpDisplay.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -538,7 +538,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblVariables.Location" type="System.Drawing.Point, System.Drawing">
-    <value>287, 174</value>
+    <value>287, 193</value>
   </data>
   <data name="lblVariables.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 13</value>
@@ -561,11 +561,32 @@
   <data name="&gt;&gt;lblVariables.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="ucrReorderSummary.Location" type="System.Drawing.Point, System.Drawing">
+    <value>286, 313</value>
+  </data>
+  <data name="ucrReorderSummary.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 168</value>
+  </data>
+  <data name="ucrReorderSummary.TabIndex" type="System.Int32, mscorlib">
+    <value>18</value>
+  </data>
+  <data name="&gt;&gt;ucrReorderSummary.Name" xml:space="preserve">
+    <value>ucrReorderSummary</value>
+  </data>
+  <data name="&gt;&gt;ucrReorderSummary.Type" xml:space="preserve">
+    <value>instat.ucrReorder, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrReorderSummary.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrReorderSummary.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="ucrInputMarginName.Location" type="System.Drawing.Point, System.Drawing">
     <value>109, 327</value>
   </data>
   <data name="ucrInputMarginName.Size" type="System.Drawing.Size, System.Drawing">
-    <value>70, 21</value>
+    <value>99, 21</value>
   </data>
   <data name="ucrInputMarginName.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -720,27 +741,6 @@
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>523, 572</value>
   </data>
-  <data name="UcrReorder1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>318, 318</value>
-  </data>
-  <data name="UcrReorder1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 156</value>
-  </data>
-  <data name="UcrReorder1.TabIndex" type="System.Int32, mscorlib">
-    <value>18</value>
-  </data>
-  <data name="&gt;&gt;UcrReorder1.Name" xml:space="preserve">
-    <value>UcrReorder1</value>
-  </data>
-  <data name="&gt;&gt;UcrReorder1.Type" xml:space="preserve">
-    <value>instat.ucrReorder, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;UcrReorder1.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;UcrReorder1.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ucrReceiverFactors.Location" type="System.Drawing.Point, System.Drawing">
     <value>287, 60</value>
   </data>
@@ -834,6 +834,9 @@
   <data name="&gt;&gt;ucrSelectorSummaryTables.ZOrder" xml:space="preserve">
     <value>17</value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
   </data>
@@ -847,7 +850,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverSummaryCols.Location" type="System.Drawing.Point, System.Drawing">
-    <value>287, 189</value>
+    <value>287, 208</value>
   </data>
   <data name="ucrReceiverSummaryCols.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>

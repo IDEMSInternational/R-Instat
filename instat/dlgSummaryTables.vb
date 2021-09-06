@@ -25,6 +25,7 @@ Public Class dlgSummaryTables
             clsVariableHeaderLeftTopFunction, clsVariableHeaderTopLeftFunction,
             clsummaryVariableHeaderLeftTopFunction, clsSummaryVariableHeaderTopLeftFunction As New RFunction
     Private clsMutableOperator, clsColumnOperator As New ROperator
+
     Private Sub dlgNewSummaryTables_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If bFirstload Then
             InitialiseDialog()
@@ -242,6 +243,7 @@ Public Class dlgSummaryTables
         sdgSummaries.bEnable2VariableTab = False
         sdgSummaries.ShowDialog()
         sdgSummaries.bEnable2VariableTab = True
+        FillListView()
         TestOKEnabled()
     End Sub
 
@@ -320,5 +322,32 @@ Public Class dlgSummaryTables
             Next
             clsMutableOperator.AddParameter("columnOp", clsROperatorParameter:=clsColumnOperator)
         End If
+    End Sub
+
+    Private Sub FillListView()
+        If clsSummariesList.clsParameters.Count > 0 Then
+            ucrReorderSummary.lstAvailableData.Clear()
+            ucrReorderSummary.lstAvailableData.Columns.Add("Summaries")
+            ucrReorderSummary.lstAvailableData.Columns(0).Width = -2
+            For i = 0 To clsSummariesList.clsParameters.Count - 1
+                ucrReorderSummary.lstAvailableData.Items.Add(clsSummariesList.clsParameters(i).strArgumentName)
+            Next
+        Else
+            ucrReorderSummary.lstAvailableData.Items.Clear()
+        End If
+    End Sub
+
+    Private Sub ucrReorderSummary_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReorderSummary.ControlValueChanged
+        Dim lstOrderedSummaries As New List(Of RParameter)
+        Dim iparameterIposition As Integer = 0
+        For i = 0 To ucrReorderSummary.lstAvailableData.Items.Count - 1
+            lstOrderedSummaries.Add(clsSummariesList.GetParameter(ucrReorderSummary.lstAvailableData.Items(i).Text))
+        Next
+
+        clsSummariesList.ClearParameters()
+        For Each clsParameter In lstOrderedSummaries
+            clsSummariesList.AddParameter(clsParameter.strArgumentName, clsParameter.strArgumentValue, iPosition:=iparameterIposition)
+            iparameterIposition = iparameterIposition + 1
+        Next
     End Sub
 End Class
