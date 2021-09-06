@@ -99,10 +99,15 @@ Public Class dlgOneWayFrequencies
         ucrChkGroupData.AddParameterPresentCondition(False, "auto.group", False)
 
         ucrChkMinFrq.SetText("Min Frequency")
-        ucrChkMinFrq.AddToLinkedControls(ucrNudMinFreq, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, objNewDefaultState:=0)
+        ucrChkMinFrq.AddToLinkedControls(ucrNudMinFreq, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkMinFrq.AddParameterPresentCondition(True, "min.frq", True)
+        ucrChkMinFrq.AddParameterPresentCondition(False, "min.frq", False)
+
+        ucrPnlFrequencies.AddToLinkedControls(ucrChkMinFrq, {rdoTable}, bNewLinkedHideIfParameterMissing:=True)
 
         ucrNudMinFreq.SetParameter(New RParameter("min.frq", 10))
         ucrNudMinFreq.SetMinMax(0, 1000)
+        ucrNudMinFreq.SetRDefault(0)
 
 
         ucrChkFlip.SetParameter(New RParameter("coord.flip", 10))
@@ -174,6 +179,9 @@ Public Class dlgOneWayFrequencies
         ucrChkGroupData.SetRCode(clsSjMiscFrq, bReset)
         ucrNudGroups.SetRCode(clsSjMiscFrq, bReset)
         ucrSaveGraph.SetRCode(clsAsGGplot, bReset)
+        ucrNudMinFreq.SetRCode(clsSjMiscFrq, bReset)
+        ucrChkMinFrq.SetRCode(clsSjMiscFrq, bReset)
+
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -270,7 +278,7 @@ Public Class dlgOneWayFrequencies
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrNudGroups.ControlContentsChanged, ucrChkGroupData.ControlContentsChanged, ucrReceiverOneWayFreq.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrNudGroups.ControlContentsChanged, ucrChkGroupData.ControlContentsChanged, ucrReceiverOneWayFreq.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrNudMinFreq.ControlValueChanged, ucrChkMinFrq.ControlValueChanged
         TestOkEnabled()
     End Sub
 
