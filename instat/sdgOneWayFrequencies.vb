@@ -77,6 +77,7 @@ Public Class sdgOneWayFrequencies
         ucrInputHorizontalLabels.SetItems(dctHorizontalPositionLabel)
         ucrInputHorizontalLabels.SetRDefault(Chr(34) & "center" & Chr(34))
         ucrInputHorizontalLabels.bUpdateRCodeFromControl = False
+        ucrInputHorizontalLabels.SetDropDownStyleAsNonEditable()
 
         'Graph Only
         ucrInputVerticalLabels.SetParameter(New RParameter("vjust", 12))
@@ -90,6 +91,7 @@ Public Class sdgOneWayFrequencies
         ucrInputVerticalLabels.SetItems(dctVerticalPositionLabel)
         ucrInputVerticalLabels.SetRDefault(Chr(34) & "bottom" & Chr(34))
         ucrInputVerticalLabels.bUpdateRCodeFromControl = False
+        ucrInputVerticalLabels.SetDropDownStyleAsNonEditable()
 
         ucrInputColor.SetParameter(New RParameter("geom.colors", 13))
         dctColors.Add("Blue", Chr(34) & "blue" & Chr(34))
