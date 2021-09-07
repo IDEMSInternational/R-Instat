@@ -24,6 +24,7 @@ Public Class dlgOneWayFrequencies
     Private clsPlotGrid As New RFunction
     Private clsSjPlotList As New RFunction
     Private clsAsGGplot As New RFunction
+    Private clsAsDataFrame As New RFunction
     Public strDefaultDataFrame As String = ""
     Public strDefaultColumns() As String = Nothing
 
@@ -88,6 +89,14 @@ Public Class dlgOneWayFrequencies
         ucrPnlFrequencies.AddToLinkedControls(ucrPnlOutput, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOutput.SetLinkedDisplayControl(grpOutput)
 
+        ucrPnlFrequencies.AddToLinkedControls(ucrSaveDataFrame, {rdoTable, rdoBoth}, bNewLinkedHideIfParameterMissing:=True)
+        ucrSaveDataFrame.SetPrefix("one_way_freq_table")
+        ucrSaveDataFrame.SetSaveTypeAsDataFrame()
+        ucrSaveDataFrame.SetDataFrameSelector(ucrSelectorOneWayFreq.ucrAvailableDataFrames)
+        ucrSaveDataFrame.SetCheckBoxText("Save Table")
+        ucrSaveDataFrame.SetIsComboBox()
+        ucrSaveDataFrame.SetAssignToIfUncheckedValue("last_table")
+
         ucrNudGroups.SetParameter(New RParameter("auto.grp", 9))
         ucrNudGroups.SetMinMax(2, 100)
         ucrNudGroups.Increment = 5
@@ -128,10 +137,16 @@ Public Class dlgOneWayFrequencies
         clsSjPlot = New RFunction
         clsPlotGrid = New RFunction
         clsAsGGplot = New RFunction
+        clsAsDataFrame = New RFunction
 
         ucrSelectorOneWayFreq.Reset()
         ucrReceiverOneWayFreq.SetMeAsReceiver()
         ucrSaveGraph.Reset()
+        ucrSaveDataFrame.Reset()
+
+
+        clsAsDataFrame.SetRCommand("as.data.frame")
+        clsAsDataFrame.AddParameter("x", clsRFunctionParameter:=clsSjMiscFrq, iPosition:=0)
 
         clsPlotGrid.SetPackageName("sjPlot")
         clsPlotGrid.SetRCommand("plot_grid")
@@ -182,6 +197,8 @@ Public Class dlgOneWayFrequencies
         ucrNudMinFreq.SetRCode(clsSjMiscFrq, bReset)
         ucrChkMinFrq.SetRCode(clsSjMiscFrq, bReset)
 
+        ucrSaveDataFrame.SetRCode(clsAsDataFrame, bReset)
+
     End Sub
 
     Private Sub SetDefaultColumn()
@@ -198,7 +215,7 @@ Public Class dlgOneWayFrequencies
     End Sub
 
     Private Sub TestOkEnabled()
-        If Not ucrReceiverOneWayFreq.IsEmpty() AndAlso ((ucrChkGroupData.Checked AndAlso ucrNudGroups.GetText <> "") OrElse Not ucrChkGroupData.Checked) AndAlso ucrSaveGraph.IsComplete() Then
+        If Not ucrReceiverOneWayFreq.IsEmpty() AndAlso ((ucrChkGroupData.Checked AndAlso ucrNudGroups.GetText <> "") OrElse Not ucrChkGroupData.Checked) AndAlso ucrSaveGraph.IsComplete() AndAlso ucrSaveDataFrame.IsComplete() Then
             If ucrChkWeights.Checked Then
                 If Not ucrReceiverWeights.IsEmpty Then
                     ucrBase.OKEnabled(True)
@@ -261,12 +278,13 @@ Public Class dlgOneWayFrequencies
 
     Private Sub SetBaseFunction()
         If rdoTable.Checked OrElse rdoBoth.Checked Then
-            ucrBase.clsRsyntax.SetBaseRFunction(clsSjMiscFrq)
+            ucrBase.clsRsyntax.SetBaseRFunction(If(ucrSaveDataFrame.IsComplete, clsAsDataFrame, clsSjMiscFrq))
             ucrBase.clsRsyntax.iCallType = 2
         ElseIf rdoGraph.Checked Then
             ucrBase.clsRsyntax.SetBaseRFunction(clsAsGGplot)
             ucrBase.clsRsyntax.iCallType = 3
         End If
+
     End Sub
 
     Private Sub ucrReceiverOneWayFreq_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrReceiverOneWayFreq.ControlValueChanged
@@ -278,7 +296,7 @@ Public Class dlgOneWayFrequencies
         End If
     End Sub
 
-    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrNudGroups.ControlContentsChanged, ucrChkGroupData.ControlContentsChanged, ucrReceiverOneWayFreq.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrNudMinFreq.ControlValueChanged, ucrChkMinFrq.ControlValueChanged
+    Private Sub Controls_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverWeights.ControlContentsChanged, ucrChkWeights.ControlContentsChanged, ucrNudGroups.ControlContentsChanged, ucrChkGroupData.ControlContentsChanged, ucrReceiverOneWayFreq.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrNudMinFreq.ControlValueChanged, ucrChkMinFrq.ControlValueChanged, ucrSaveDataFrame.ControlValueChanged
         TestOkEnabled()
     End Sub
 

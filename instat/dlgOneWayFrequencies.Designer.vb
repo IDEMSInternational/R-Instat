@@ -65,6 +65,7 @@ Partial Class dlgOneWayFrequencies
         Me.ucrPnlSort = New instat.UcrPanel()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrSelectorOneWayFreq = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSaveDataFrame = New instat.ucrSave()
         Me.grpSort.SuspendLayout()
         Me.grpOutput.SuspendLayout()
         Me.SuspendLayout()
@@ -254,10 +255,16 @@ Partial Class dlgOneWayFrequencies
         resources.ApplyResources(Me.ucrSelectorOneWayFreq, "ucrSelectorOneWayFreq")
         Me.ucrSelectorOneWayFreq.Name = "ucrSelectorOneWayFreq"
         '
+        'ucrSaveDataFrame
+        '
+        resources.ApplyResources(Me.ucrSaveDataFrame, "ucrSaveDataFrame")
+        Me.ucrSaveDataFrame.Name = "ucrSaveDataFrame"
+        '
         'dlgOneWayFrequencies
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrSaveDataFrame)
         Me.Controls.Add(Me.ucrNudMinFreq)
         Me.Controls.Add(Me.ucrChkMinFrq)
         Me.Controls.Add(Me.grpOutput)
@@ -315,4 +322,5 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrPnlOutput As UcrPanel
     Friend WithEvents ucrNudMinFreq As ucrNud
     Friend WithEvents ucrChkMinFrq As ucrCheck
+    Friend WithEvents ucrSaveDataFrame As ucrSave
 End Class
