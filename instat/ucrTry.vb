@@ -148,7 +148,7 @@ Public Class ucrTry
                             End If
 
                             'todo. for data frames output, length is expected to be > 0
-                            'todo. not sure if other output types will have length > 0
+                            'todo SJL. not sure if other output types will have length > 0
                             'todo. as at 07/08/2021. this block is only being used by dlgNewDataframe ONLY
                             bValid = strVecOutput.Length > 0
                             'don't break the if, we probably want to loop through to the last command checking validity? 
