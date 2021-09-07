@@ -604,7 +604,7 @@
     <value>256, 377</value>
   </data>
   <data name="ucrInputLollipopColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>57, 21</value>
+    <value>93, 21</value>
   </data>
   <data name="ucrInputLollipopColour.TabIndex" type="System.Int32, mscorlib">
     <value>32</value>
@@ -995,9 +995,6 @@
   </data>
   <data name="&gt;&gt;ucrPnlOptions.ZOrder" xml:space="preserve">
     <value>34</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>

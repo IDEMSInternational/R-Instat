@@ -183,7 +183,7 @@ Public Class dlgBarAndPieChart
         ucrChkAddLabels.SetText("Add Labels")
         ucrChkAddLabels.AddParameterPresentCondition(True, "geom_text")
         ucrChkAddLabels.AddParameterPresentCondition(False, "geom_text", False)
-        ucrChkAddLabels.AddToLinkedControls({ucrInputLabelPosition, ucrInputLabelSize, ucrInputLabelColour}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddLabels.AddToLinkedControls({ucrInputLabelPosition, ucrInputLabelSize, ucrInputLabelColour}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrInputLabelColour.SetLinkedDisplayControl(lblLabelColour)
         ucrInputLabelPosition.SetLinkedDisplayControl(lblLabelPosition)
         ucrInputLabelSize.SetLinkedDisplayControl(lblLabelSize)
@@ -193,7 +193,7 @@ Public Class dlgBarAndPieChart
         dctLollipopColours.Add("White", Chr(34) & "white" & Chr(34))
         ucrInputLollipopColour.SetItems(dctLollipopColours)
         ucrInputLollipopColour.bAllowNonConditionValues = True
-        ucrInputLollipopColour.SetRDefault("steelblue")
+        ucrInputLollipopColour.SetRDefault(Chr(34) & "steelblue" & Chr(34))
 
         ucrNudLollipopSize.SetParameter(New RParameter("point.size", 1))
         ucrNudLollipopSize.DecimalPlaces = 0
@@ -634,5 +634,17 @@ Public Class dlgBarAndPieChart
 
     Private Sub ucrSaveBar_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlContentsChanged, ucrReceiverByFactor.ControlContentsChanged, ucrSaveBar.ControlContentsChanged, ucrReceiverX.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged, ucrChkBacktoback.ControlContentsChanged, ucrChkPolarCoordinates.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrPnlOptions_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrVariablesAsFactorForBarChart.ControlValueChanged, ucrReceiverX.ControlValueChanged, ucrReceiverByFactor.ControlValueChanged, ucrPnlOptions.ControlValueChanged
+
+    End Sub
+
+    Private Sub ucrReceiverX_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverX.ControlContentsChanged
+
+    End Sub
+
+    Private Sub ucrReceiverByFactor_ControlContentsChanged(ucrChangedControl As ucrCore) Handles ucrReceiverByFactor.ControlContentsChanged, ucrPnlOptions.ControlContentsChanged
+
     End Sub
 End Class
