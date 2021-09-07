@@ -129,6 +129,8 @@ Public Class dlgSummaryTables
 
         ucrChkDisplayMargins.AddToLinkedControls({ucrInputMarginName}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="All")
         ucrChkDisplayMargins.AddToLinkedControls({ucrPnlMargin}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:=rdoOuter)
+
+        ucrReorderSummary.bDataIsSummaries = True
     End Sub
 
     Private Sub SetDefaults()
@@ -221,6 +223,7 @@ Public Class dlgSummaryTables
         ucrChkDisplayVariablesAsRows.SetRCode(clsMutableOperator, bReset)
         ucrChkStoreResults.SetRCode(clsDefaultFunction, bReset)
         ucrSaveTable.SetRCode(clsMutableOperator, bReset)
+        FillListView()
     End Sub
 
     Private Sub TestOKEnabled()
@@ -345,6 +348,7 @@ Public Class dlgSummaryTables
         Next
 
         clsSummariesList.ClearParameters()
+        'Changing the parameter positions
         For Each clsParameter In lstOrderedSummaries
             clsSummariesList.AddParameter(clsParameter.strArgumentName, clsParameter.strArgumentValue, iPosition:=iparameterIposition)
             iparameterIposition = iparameterIposition + 1
