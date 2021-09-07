@@ -190,10 +190,20 @@ Public Class dlgBarAndPieChart
 
         ucrInputLollipopColour.SetParameter(New RParameter("point.colour", 0))
         dctLollipopColours.Add("SteelBlue", Chr(34) & "steelBlue" & Chr(34))
+        dctLollipopColours.Add("Black", Chr(34) & "black" & Chr(34))
         dctLollipopColours.Add("White", Chr(34) & "white" & Chr(34))
+        dctLollipopColours.Add("Blue", Chr(34) & "blue" & Chr(34))
+        dctLollipopColours.Add("Red", Chr(34) & "red" & Chr(34))
+        dctLollipopColours.Add("Yellow", Chr(34) & "yellow" & Chr(34))
+        dctLollipopColours.Add("Purple", Chr(34) & "purple" & Chr(34))
+        dctLollipopColours.Add("Green", Chr(34) & "green" & Chr(34))
+        dctLollipopColours.Add("Orange", Chr(34) & "orange" & Chr(34))
+        dctLollipopColours.Add("Grey", Chr(34) & "grey" & Chr(34))
+        dctLollipopColours.Add("Brown", Chr(34) & "brown" & Chr(34))
+        dctLollipopColours.Add("Pink", Chr(34) & "pink" & Chr(34))
         ucrInputLollipopColour.SetItems(dctLollipopColours)
         ucrInputLollipopColour.bAllowNonConditionValues = True
-        ucrInputLollipopColour.SetRDefault(Chr(34) & "steelblue" & Chr(34))
+        ucrInputLollipopColour.SetRDefault(Chr(34) & "blue" & Chr(34))
 
         ucrNudLollipopSize.SetParameter(New RParameter("point.size", 1))
         ucrNudLollipopSize.DecimalPlaces = 0
@@ -202,8 +212,8 @@ Public Class dlgBarAndPieChart
         ucrNudLollipopSize.Maximum = 15
 
         ucrChkLollipop.SetText("Lollipop")
-        ucrChkLollipop.SetParameter(New RParameter("horizontal", 2))
-        ucrChkLollipop.SetValueIfChecked("TRUE")
+        ucrChkLollipop.AddParameterPresentCondition(True, "geom_lollipop")
+        ucrChkLollipop.AddParameterPresentCondition(False, "geom_lollipop", False)
         ucrChkLollipop.AddToLinkedControls({ucrNudLollipopSize, ucrInputLollipopColour}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrNudLollipopSize.SetLinkedDisplayControl(lblLollipopSize)
         ucrInputLollipopColour.SetLinkedDisplayControl(lblLollipopColour)
