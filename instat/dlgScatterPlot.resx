@@ -268,7 +268,7 @@
     <value>10, 287</value>
   </data>
   <data name="ucrChkAddRugPlot.Size" type="System.Drawing.Size, System.Drawing">
-    <value>118, 20</value>
+    <value>110, 20</value>
   </data>
   <data name="ucrChkAddRugPlot.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -295,10 +295,10 @@
     <value>474, 404</value>
   </data>
   <data name="ucrInputSides.Location" type="System.Drawing.Point, System.Drawing">
-    <value>252, 287</value>
+    <value>246, 287</value>
   </data>
   <data name="ucrInputSides.Size" type="System.Drawing.Size, System.Drawing">
-    <value>60, 21</value>
+    <value>73, 21</value>
   </data>
   <data name="ucrInputSides.TabIndex" type="System.Int32, mscorlib">
     <value>16</value>
@@ -322,7 +322,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblSides.Location" type="System.Drawing.Point, System.Drawing">
-    <value>214, 291</value>
+    <value>208, 291</value>
   </data>
   <data name="lblSides.Size" type="System.Drawing.Size, System.Drawing">
     <value>36, 13</value>
@@ -349,7 +349,7 @@
     <value>True</value>
   </data>
   <data name="lblSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>126, 291</value>
+    <value>120, 291</value>
   </data>
   <data name="lblSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>30, 13</value>
@@ -373,7 +373,7 @@
     <value>2</value>
   </data>
   <data name="ucrNudSize.Location" type="System.Drawing.Point, System.Drawing">
-    <value>158, 287</value>
+    <value>152, 287</value>
   </data>
   <data name="ucrNudSize.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>

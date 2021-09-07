@@ -170,7 +170,6 @@ Public Class dlgScatterPlot
         clsRggplotFunction = New RFunction
         clsRScatterGeomFunction = New RFunction
         clsRaesFunction = New RFunction
-        clsGeomRugFunction = New RFunction
 
         ucrSelectorForScatter.Reset()
         ucrSelectorForScatter.SetGgplotFunction(clsBaseOperator)
