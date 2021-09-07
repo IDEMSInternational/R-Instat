@@ -78,6 +78,7 @@ Public Class dlgRecodeNumeric
         strDefaultDataFrame = ""
         strDefaultColumn = ""
     End Sub
+
     Private Sub SetDefaults()
         clsCutFunction = New RFunction
 
