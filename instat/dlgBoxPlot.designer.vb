@@ -43,11 +43,14 @@ Partial Class dlgBoxplot
         Me.lblByFactors = New System.Windows.Forms.Label()
         Me.lblBySecondFactor = New System.Windows.Forms.Label()
         Me.cmdBoxPlotOptions = New System.Windows.Forms.Button()
-        Me.rdoBoxplot = New System.Windows.Forms.RadioButton()
+        Me.rdoBoxplotTufte = New System.Windows.Forms.RadioButton()
         Me.rdoJitter = New System.Windows.Forms.RadioButton()
         Me.rdoViolin = New System.Windows.Forms.RadioButton()
         Me.lblJitter = New System.Windows.Forms.Label()
         Me.lblTransparency = New System.Windows.Forms.Label()
+        Me.ucrChkTufte = New instat.ucrCheck()
+        Me.ucrInputSummaries = New instat.ucrInputComboBox()
+        Me.ucrChkGrouptoConnect = New instat.ucrCheck()
         Me.ucrNudTransparency = New instat.ucrNud()
         Me.ucrNudJitter = New instat.ucrNud()
         Me.ucrChkAddPoints = New instat.ucrCheck()
@@ -61,8 +64,6 @@ Partial Class dlgBoxplot
         Me.ucrByFactorsReceiver = New instat.ucrReceiverSingle()
         Me.ucrBase = New instat.ucrButtons()
         Me.ucrPnlPlots = New instat.UcrPanel()
-        Me.ucrChkGrouptoConnect = New instat.ucrCheck()
-        Me.ucrInputSummaries = New instat.ucrInputComboBox()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -91,15 +92,15 @@ Partial Class dlgBoxplot
         Me.cmdBoxPlotOptions.Tag = "Boxplot_Options"
         Me.cmdBoxPlotOptions.UseVisualStyleBackColor = True
         '
-        'rdoBoxplot
+        'rdoBoxplotTufte
         '
-        resources.ApplyResources(Me.rdoBoxplot, "rdoBoxplot")
-        Me.rdoBoxplot.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBoxplot.FlatAppearance.BorderSize = 2
-        Me.rdoBoxplot.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.rdoBoxplot.Name = "rdoBoxplot"
-        Me.rdoBoxplot.TabStop = True
-        Me.rdoBoxplot.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoBoxplotTufte, "rdoBoxplotTufte")
+        Me.rdoBoxplotTufte.FlatAppearance.BorderColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBoxplotTufte.FlatAppearance.BorderSize = 2
+        Me.rdoBoxplotTufte.FlatAppearance.CheckedBackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.rdoBoxplotTufte.Name = "rdoBoxplotTufte"
+        Me.rdoBoxplotTufte.TabStop = True
+        Me.rdoBoxplotTufte.UseVisualStyleBackColor = True
         '
         'rdoJitter
         '
@@ -132,6 +133,26 @@ Partial Class dlgBoxplot
         resources.ApplyResources(Me.lblTransparency, "lblTransparency")
         Me.lblTransparency.Name = "lblTransparency"
         Me.lblTransparency.Tag = "By_Factor:"
+        '
+        'ucrChkTufte
+        '
+        Me.ucrChkTufte.Checked = False
+        resources.ApplyResources(Me.ucrChkTufte, "ucrChkTufte")
+        Me.ucrChkTufte.Name = "ucrChkTufte"
+        '
+        'ucrInputSummaries
+        '
+        Me.ucrInputSummaries.AddQuotesIfUnrecognised = True
+        Me.ucrInputSummaries.GetSetSelectedIndex = -1
+        Me.ucrInputSummaries.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputSummaries, "ucrInputSummaries")
+        Me.ucrInputSummaries.Name = "ucrInputSummaries"
+        '
+        'ucrChkGrouptoConnect
+        '
+        Me.ucrChkGrouptoConnect.Checked = False
+        resources.ApplyResources(Me.ucrChkGrouptoConnect, "ucrChkGrouptoConnect")
+        Me.ucrChkGrouptoConnect.Name = "ucrChkGrouptoConnect"
         '
         'ucrNudTransparency
         '
@@ -228,23 +249,11 @@ Partial Class dlgBoxplot
         resources.ApplyResources(Me.ucrPnlPlots, "ucrPnlPlots")
         Me.ucrPnlPlots.Name = "ucrPnlPlots"
         '
-        'ucrChkGrouptoConnect
-        '
-        Me.ucrChkGrouptoConnect.Checked = False
-        resources.ApplyResources(Me.ucrChkGrouptoConnect, "ucrChkGrouptoConnect")
-        Me.ucrChkGrouptoConnect.Name = "ucrChkGrouptoConnect"
-        '
-        'ucrInputSummaries
-        '
-        Me.ucrInputSummaries.AddQuotesIfUnrecognised = True
-        Me.ucrInputSummaries.IsReadOnly = False
-        resources.ApplyResources(Me.ucrInputSummaries, "ucrInputSummaries")
-        Me.ucrInputSummaries.Name = "ucrInputSummaries"
-        '
         'dlgBoxplot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrChkTufte)
         Me.Controls.Add(Me.ucrInputSummaries)
         Me.Controls.Add(Me.ucrChkGrouptoConnect)
         Me.Controls.Add(Me.ucrNudTransparency)
@@ -258,9 +267,8 @@ Partial Class dlgBoxplot
         Me.Controls.Add(Me.ucrChkVarWidth)
         Me.Controls.Add(Me.rdoViolin)
         Me.Controls.Add(Me.rdoJitter)
-        Me.Controls.Add(Me.rdoBoxplot)
+        Me.Controls.Add(Me.rdoBoxplotTufte)
         Me.Controls.Add(Me.ucrVariablesAsFactorForBoxplot)
-        Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Controls.Add(Me.ucrSecondFactorReceiver)
         Me.Controls.Add(Me.ucrSelectorBoxPlot)
         Me.Controls.Add(Me.lblBySecondFactor)
@@ -269,6 +277,7 @@ Partial Class dlgBoxplot
         Me.Controls.Add(Me.cmdOptions)
         Me.Controls.Add(Me.ucrBase)
         Me.Controls.Add(Me.ucrPnlPlots)
+        Me.Controls.Add(Me.cmdBoxPlotOptions)
         Me.Cursor = System.Windows.Forms.Cursors.Default
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
@@ -289,7 +298,7 @@ Partial Class dlgBoxplot
     Friend WithEvents lblBySecondFactor As Label
     Friend WithEvents cmdBoxPlotOptions As Button
     Friend WithEvents ucrVariablesAsFactorForBoxplot As ucrVariablesAsFactor
-    Friend WithEvents rdoBoxplot As RadioButton
+    Friend WithEvents rdoBoxplotTufte As RadioButton
     Friend WithEvents rdoJitter As RadioButton
     Friend WithEvents rdoViolin As RadioButton
     Friend WithEvents ucrSaveBoxplot As ucrSave
@@ -304,4 +313,5 @@ Partial Class dlgBoxplot
     Friend WithEvents ucrChkAddPoints As ucrCheck
     Friend WithEvents ucrInputSummaries As ucrInputComboBox
     Friend WithEvents ucrChkGrouptoConnect As ucrCheck
+    Friend WithEvents ucrChkTufte As ucrCheck
 End Class

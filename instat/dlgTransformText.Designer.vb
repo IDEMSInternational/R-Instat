@@ -125,10 +125,8 @@ Partial Class dlgTransformText
         Me.grpParameters.Controls.Add(Me.lblToSubstring)
         Me.grpParameters.Controls.Add(Me.lblLastWord)
         Me.grpParameters.Controls.Add(Me.lblPad)
-        Me.grpParameters.Controls.Add(Me.ucrNudTo)
         Me.grpParameters.Controls.Add(Me.ucrReceiverFirstWord)
         Me.grpParameters.Controls.Add(Me.rdoBothPad)
-        Me.grpParameters.Controls.Add(Me.ucrNudFirstWord)
         Me.grpParameters.Controls.Add(Me.ucrNudFrom)
         Me.grpParameters.Controls.Add(Me.rdoRightPad)
         Me.grpParameters.Controls.Add(Me.rdoLeftPad)
@@ -139,6 +137,8 @@ Partial Class dlgTransformText
         Me.grpParameters.Controls.Add(Me.ucrInputTo)
         Me.grpParameters.Controls.Add(Me.lblWidth)
         Me.grpParameters.Controls.Add(Me.lblTo)
+        Me.grpParameters.Controls.Add(Me.ucrNudFirstWord)
+        Me.grpParameters.Controls.Add(Me.ucrNudTo)
         resources.ApplyResources(Me.grpParameters, "grpParameters")
         Me.grpParameters.Name = "grpParameters"
         Me.grpParameters.TabStop = False

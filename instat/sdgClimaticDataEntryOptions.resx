@@ -222,6 +222,33 @@
   <data name="&gt;&gt;lblDefault.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="ucrInputDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
+    <value>130, 10</value>
+  </data>
+  <data name="ucrInputDefaultValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>5, 5, 5, 5</value>
+  </data>
+  <data name="ucrInputDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
+    <value>73, 21</value>
+  </data>
+  <data name="ucrInputDefaultValue.TabIndex" type="System.Int32, mscorlib">
+    <value>101</value>
+  </data>
+  <data name="ucrInputDefaultValue.ToolTip" xml:space="preserve">
+    <value>Select default value for missing values</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDefaultValue.Name" xml:space="preserve">
+    <value>ucrInputDefaultValue</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDefaultValue.Type" xml:space="preserve">
+    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDefaultValue.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ucrInputDefaultValue.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="lblBefore.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -339,32 +366,29 @@
   <data name="&gt;&gt;ucrChkEditNAOnly.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ucrInputDefaultValue.Location" type="System.Drawing.Point, System.Drawing">
-    <value>130, 10</value>
+  <data name="ucrChkTransform.Location" type="System.Drawing.Point, System.Drawing">
+    <value>12, 70</value>
   </data>
-  <data name="ucrInputDefaultValue.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>5, 5, 5, 5</value>
+  <data name="ucrChkTransform.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 20</value>
   </data>
-  <data name="ucrInputDefaultValue.Size" type="System.Drawing.Size, System.Drawing">
-    <value>73, 21</value>
+  <data name="ucrChkTransform.TabIndex" type="System.Int32, mscorlib">
+    <value>88</value>
   </data>
-  <data name="ucrInputDefaultValue.TabIndex" type="System.Int32, mscorlib">
-    <value>101</value>
+  <data name="ucrChkTransform.ToolTip" xml:space="preserve">
+    <value>The values written to the data frame are transformed, usually multiplied, by the value given here.</value>
   </data>
-  <data name="ucrInputDefaultValue.ToolTip" xml:space="preserve">
-    <value>Select default value for missing values</value>
+  <data name="&gt;&gt;ucrChkTransform.Name" xml:space="preserve">
+    <value>ucrChkTransform</value>
   </data>
-  <data name="&gt;&gt;ucrInputDefaultValue.Name" xml:space="preserve">
-    <value>ucrInputDefaultValue</value>
+  <data name="&gt;&gt;ucrChkTransform.Type" xml:space="preserve">
+    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
   </data>
-  <data name="&gt;&gt;ucrInputDefaultValue.Type" xml:space="preserve">
-    <value>instat.ucrInputComboBox, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrInputDefaultValue.Parent" xml:space="preserve">
+  <data name="&gt;&gt;ucrChkTransform.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;ucrInputDefaultValue.ZOrder" xml:space="preserve">
-    <value>3</value>
+  <data name="&gt;&gt;ucrChkTransform.ZOrder" xml:space="preserve">
+    <value>12</value>
   </data>
   <data name="ucrChkExtraRows.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -439,13 +463,13 @@
     <value>8</value>
   </data>
   <data name="ucrSdgPICSARainfalbuttons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>80, 210</value>
+    <value>71, 210</value>
   </data>
   <data name="ucrSdgPICSARainfalbuttons.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrSdgPICSARainfalbuttons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>144, 30</value>
+    <value>158, 30</value>
   </data>
   <data name="ucrSdgPICSARainfalbuttons.TabIndex" type="System.Int32, mscorlib">
     <value>93</value>
@@ -486,30 +510,6 @@
   <data name="&gt;&gt;ucrInputTransform.ZOrder" xml:space="preserve">
     <value>10</value>
   </data>
-  <data name="ucrChkTransform.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 70</value>
-  </data>
-  <data name="ucrChkTransform.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 20</value>
-  </data>
-  <data name="ucrChkTransform.TabIndex" type="System.Int32, mscorlib">
-    <value>88</value>
-  </data>
-  <data name="ucrChkTransform.ToolTip" xml:space="preserve">
-    <value>The values written to the data frame are transformed, usually multiplied, by the value given here.</value>
-  </data>
-  <data name="&gt;&gt;ucrChkTransform.Name" xml:space="preserve">
-    <value>ucrChkTransform</value>
-  </data>
-  <data name="&gt;&gt;ucrChkTransform.Type" xml:space="preserve">
-    <value>instat.ucrCheck, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrChkTransform.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ucrChkTransform.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -518,9 +518,6 @@
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>304, 247</value>
-  </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>

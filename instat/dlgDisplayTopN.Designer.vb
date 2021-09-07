@@ -69,6 +69,7 @@ Partial Class dlgDisplayTopN
         'ucrInputDisplay
         '
         Me.ucrInputDisplay.AddQuotesIfUnrecognised = True
+        Me.ucrInputDisplay.GetSetSelectedIndex = -1
         Me.ucrInputDisplay.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputDisplay, "ucrInputDisplay")
         Me.ucrInputDisplay.Name = "ucrInputDisplay"
@@ -81,6 +82,7 @@ Partial Class dlgDisplayTopN
         'ucrInputLayout
         '
         Me.ucrInputLayout.AddQuotesIfUnrecognised = True
+        Me.ucrInputLayout.GetSetSelectedIndex = -1
         Me.ucrInputLayout.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputLayout, "ucrInputLayout")
         Me.ucrInputLayout.Name = "ucrInputLayout"
@@ -93,6 +95,7 @@ Partial Class dlgDisplayTopN
         'ucrInputOrder
         '
         Me.ucrInputOrder.AddQuotesIfUnrecognised = True
+        Me.ucrInputOrder.GetSetSelectedIndex = -1
         Me.ucrInputOrder.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputOrder, "ucrInputOrder")
         Me.ucrInputOrder.Name = "ucrInputOrder"
@@ -216,6 +219,7 @@ Partial Class dlgDisplayTopN
         'ucrInputSummary
         '
         Me.ucrInputSummary.AddQuotesIfUnrecognised = True
+        Me.ucrInputSummary.GetSetSelectedIndex = -1
         Me.ucrInputSummary.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputSummary, "ucrInputSummary")
         Me.ucrInputSummary.Name = "ucrInputSummary"

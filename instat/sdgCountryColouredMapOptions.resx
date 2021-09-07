@@ -187,7 +187,7 @@
     <value>1</value>
   </data>
   <data name="ucrInputCommonRegions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>113, 75</value>
+    <value>129, 73</value>
   </data>
   <data name="ucrInputCommonRegions.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -211,7 +211,7 @@
     <value>True</value>
   </data>
   <data name="lblCommonRegions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>16, 78</value>
+    <value>6, 75</value>
   </data>
   <data name="lblCommonRegions.Size" type="System.Drawing.Size, System.Drawing">
     <value>93, 13</value>
@@ -580,7 +580,7 @@
     <value>102, 217</value>
   </data>
   <data name="ucrBase.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>156, 30</value>
   </data>
   <data name="ucrBase.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>

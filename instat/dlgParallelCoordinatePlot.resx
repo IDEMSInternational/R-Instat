@@ -301,7 +301,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveGraph.Size" type="System.Drawing.Size, System.Drawing">
-    <value>260, 24</value>
+    <value>324, 24</value>
   </data>
   <data name="ucrSaveGraph.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -343,7 +343,7 @@
     <value>9, 318</value>
   </data>
   <data name="ucrChkPoints.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>210, 20</value>
   </data>
   <data name="ucrChkPoints.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -364,7 +364,7 @@
     <value>9, 292</value>
   </data>
   <data name="ucrChkBoxplots.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>210, 20</value>
   </data>
   <data name="ucrChkBoxplots.TabIndex" type="System.Int32, mscorlib">
     <value>11</value>
@@ -382,10 +382,10 @@
     <value>4</value>
   </data>
   <data name="ucrInputScale.Location" type="System.Drawing.Point, System.Drawing">
-    <value>48, 265</value>
+    <value>66, 265</value>
   </data>
   <data name="ucrInputScale.Size" type="System.Drawing.Size, System.Drawing">
-    <value>137, 21</value>
+    <value>89, 21</value>
   </data>
   <data name="ucrInputScale.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>

@@ -106,6 +106,7 @@ Public Class sdgClimaticDataEntry
                 If newValue = "" Then
                     newValue = "NA"
                 ElseIf bAllowTrace AndAlso newValue.ToUpper = "T" Then
+                    'assume trace values to be 0.03 (for R-Instat uses) here
                     newValue = 0.03
                 ElseIf bTransform And IsNumeric(newValue) Then
                     newValue = newValue * dTranformValue
@@ -372,6 +373,7 @@ Public Class sdgClimaticDataEntry
             iStartRowIndex += 1
         Next
 
+        iStartRowIndex = grdCurrentWorkSheet.SelectionRange.Row
         'then save the values if all are valid
         For index As Integer = 0 To arrPasteValues.Length - 1
             strNewValue = arrPasteValues(index).Trim
@@ -631,6 +633,11 @@ Public Class sdgClimaticDataEntry
                 strValue = strNewValue
             Else
                 strValue = grdCurrentWorkSheet.Item(row:=i, col:=iColIndex)
+            End If
+
+            'assume trace values to be 0 (for data entry uses) here
+            If strValue.ToUpper = "T" Then
+                strValue = "0"
             End If
 
             If IsNumeric(strValue) Then

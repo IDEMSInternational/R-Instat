@@ -117,6 +117,7 @@ Partial Class dlgOptions
         Me.ucrInputPort = New instat.ucrInputTextBox()
         Me.ucrInputHost = New instat.ucrInputTextBox()
         Me.ucrInputDatabaseName = New instat.ucrInputTextBox()
+        Me.cmdLanguage = New System.Windows.Forms.Button()
         CType(Me.spltControls, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.spltControls.Panel1.SuspendLayout()
         Me.spltControls.Panel2.SuspendLayout()
@@ -126,7 +127,6 @@ Partial Class dlgOptions
         Me.tbpComments.SuspendLayout()
         Me.pnComments.SuspendLayout()
         Me.tbpImport.SuspendLayout()
-        Me.pnImportData.SuspendLayout()
         Me.tbpOutputWindow.SuspendLayout()
         Me.grpROptions.SuspendLayout()
         Me.pnFormatOptions.SuspendLayout()
@@ -265,6 +265,8 @@ Partial Class dlgOptions
         '
         'tbpImport
         '
+        Me.tbpImport.Controls.Add(Me.lblPreviewRows)
+        Me.tbpImport.Controls.Add(Me.ucrNudPreviewRows)
         Me.tbpImport.Controls.Add(Me.pnImportData)
         resources.ApplyResources(Me.tbpImport, "tbpImport")
         Me.tbpImport.Name = "tbpImport"
@@ -273,8 +275,6 @@ Partial Class dlgOptions
         'pnImportData
         '
         resources.ApplyResources(Me.pnImportData, "pnImportData")
-        Me.pnImportData.Controls.Add(Me.ucrNudPreviewRows)
-        Me.pnImportData.Controls.Add(Me.lblPreviewRows)
         Me.pnImportData.Name = "pnImportData"
         '
         'ucrNudPreviewRows
@@ -712,10 +712,18 @@ Partial Class dlgOptions
         resources.ApplyResources(Me.ucrInputDatabaseName, "ucrInputDatabaseName")
         Me.ucrInputDatabaseName.Name = "ucrInputDatabaseName"
         '
+        'cmdLanguage
+        '
+        resources.ApplyResources(Me.cmdLanguage, "cmdLanguage")
+        Me.cmdLanguage.Name = "cmdLanguage"
+        Me.cmdLanguage.Tag = ""
+        Me.cmdLanguage.UseVisualStyleBackColor = True
+        '
         'dlgOptions
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.cmdLanguage)
         Me.Controls.Add(Me.cmdApply)
         Me.Controls.Add(Me.cmdHelp)
         Me.Controls.Add(Me.cmdCancel)
@@ -738,8 +746,6 @@ Partial Class dlgOptions
         Me.pnComments.PerformLayout()
         Me.tbpImport.ResumeLayout(False)
         Me.tbpImport.PerformLayout()
-        Me.pnImportData.ResumeLayout(False)
-        Me.pnImportData.PerformLayout()
         Me.tbpOutputWindow.ResumeLayout(False)
         Me.tbpOutputWindow.PerformLayout()
         Me.grpROptions.ResumeLayout(False)
@@ -842,4 +848,5 @@ Partial Class dlgOptions
     Friend WithEvents ucrChkViewStructuredMenu As ucrCheck
     Friend WithEvents lblLanguage As Label
     Friend WithEvents ucrInputLanguage As ucrInputComboBox
+    Friend WithEvents cmdLanguage As Button
 End Class

@@ -222,6 +222,7 @@ Partial Class sdgTwoWayFrequencies
         'ucrInputHorizontalLabels
         '
         Me.ucrInputHorizontalLabels.AddQuotesIfUnrecognised = True
+        Me.ucrInputHorizontalLabels.GetSetSelectedIndex = -1
         Me.ucrInputHorizontalLabels.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputHorizontalLabels, "ucrInputHorizontalLabels")
         Me.ucrInputHorizontalLabels.Name = "ucrInputHorizontalLabels"
@@ -229,6 +230,7 @@ Partial Class sdgTwoWayFrequencies
         'ucrInputVerticalLabels
         '
         Me.ucrInputVerticalLabels.AddQuotesIfUnrecognised = True
+        Me.ucrInputVerticalLabels.GetSetSelectedIndex = -1
         Me.ucrInputVerticalLabels.IsReadOnly = False
         resources.ApplyResources(Me.ucrInputVerticalLabels, "ucrInputVerticalLabels")
         Me.ucrInputVerticalLabels.Name = "ucrInputVerticalLabels"

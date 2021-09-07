@@ -127,7 +127,7 @@
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblColumn.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 80</value>
+    <value>263, 80</value>
   </data>
   <data name="lblColumn.Size" type="System.Drawing.Size, System.Drawing">
     <value>45, 13</value>
@@ -157,7 +157,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblReplaceBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 168</value>
+    <value>264, 168</value>
   </data>
   <data name="lblReplaceBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>65, 13</value>
@@ -187,7 +187,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblPattern.Location" type="System.Drawing.Point, System.Drawing">
-    <value>251, 122</value>
+    <value>264, 122</value>
   </data>
   <data name="lblPattern.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 13</value>
@@ -220,10 +220,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoCount.Location" type="System.Drawing.Point, System.Drawing">
-    <value>24, 12</value>
+    <value>10, 4</value>
   </data>
   <data name="rdoCount.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 27</value>
+    <value>86, 41</value>
   </data>
   <data name="rdoCount.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -256,10 +256,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoReplace.Location" type="System.Drawing.Point, System.Drawing">
-    <value>336, 12</value>
+    <value>328, 4</value>
   </data>
   <data name="rdoReplace.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 27</value>
+    <value>80, 41</value>
   </data>
   <data name="rdoReplace.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -292,10 +292,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoLocate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>258, 12</value>
+    <value>250, 4</value>
   </data>
   <data name="rdoLocate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 27</value>
+    <value>80, 41</value>
   </data>
   <data name="rdoLocate.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -328,10 +328,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoExtract.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 12</value>
+    <value>172, 4</value>
   </data>
   <data name="rdoExtract.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 27</value>
+    <value>80, 41</value>
   </data>
   <data name="rdoExtract.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -364,10 +364,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoDetect.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 12</value>
+    <value>94, 4</value>
   </data>
   <data name="rdoDetect.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 27</value>
+    <value>80, 41</value>
   </data>
   <data name="rdoDetect.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -400,10 +400,10 @@
     <value>NoControl</value>
   </data>
   <data name="rdoReplaceAll.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 12</value>
+    <value>404, 4</value>
   </data>
   <data name="rdoReplaceAll.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 27</value>
+    <value>85, 41</value>
   </data>
   <data name="rdoReplaceAll.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1240,7 +1240,7 @@
     <value>4, 5, 4, 5</value>
   </data>
   <data name="ucrSaveStringHandling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>285, 22</value>
+    <value>366, 22</value>
   </data>
   <data name="ucrSaveStringHandling.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -1288,7 +1288,7 @@
     <value>6</value>
   </data>
   <data name="ucrReceiverStringHandling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 95</value>
+    <value>261, 95</value>
   </data>
   <data name="ucrReceiverStringHandling.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
@@ -1312,7 +1312,7 @@
     <value>13</value>
   </data>
   <data name="ucrInputReplaceBy.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 183</value>
+    <value>261, 183</value>
   </data>
   <data name="ucrInputReplaceBy.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 20</value>
@@ -1333,7 +1333,7 @@
     <value>17</value>
   </data>
   <data name="ucrInputPattern.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 139</value>
+    <value>261, 139</value>
   </data>
   <data name="ucrInputPattern.Size" type="System.Drawing.Size, System.Drawing">
     <value>158, 20</value>
@@ -1399,10 +1399,10 @@
     <value>20</value>
   </data>
   <data name="ucrPnlStringHandling.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 8</value>
+    <value>10, 1</value>
   </data>
   <data name="ucrPnlStringHandling.Size" type="System.Drawing.Size, System.Drawing">
-    <value>493, 39</value>
+    <value>532, 46</value>
   </data>
   <data name="ucrPnlStringHandling.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1432,7 +1432,7 @@
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="ucrReceiverForRegexExpression.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 139</value>
+    <value>261, 139</value>
   </data>
   <data name="ucrReceiverForRegexExpression.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>2, 3, 2, 3</value>

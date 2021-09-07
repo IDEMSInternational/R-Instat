@@ -64,6 +64,7 @@ Partial Class dlgMetadata
         '
         'ucrSelectByMetadata
         '
+        Me.ucrSelectByMetadata.bDropUnusedFilterLevels = False
         Me.ucrSelectByMetadata.bShowHiddenColumns = False
         Me.ucrSelectByMetadata.bUseCurrentFilter = True
         resources.ApplyResources(Me.ucrSelectByMetadata, "ucrSelectByMetadata")

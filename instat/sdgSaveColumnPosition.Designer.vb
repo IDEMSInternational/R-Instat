@@ -131,18 +131,18 @@ Partial Class sdgSaveColumnPosition
         Me.ucrSelectorColumns.bDropUnusedFilterLevels = False
         Me.ucrSelectorColumns.bShowHiddenColumns = False
         Me.ucrSelectorColumns.bUseCurrentFilter = True
-        Me.ucrSelectorColumns.Location = New System.Drawing.Point(6, 71)
+        Me.ucrSelectorColumns.Location = New System.Drawing.Point(9, 71)
         Me.ucrSelectorColumns.Margin = New System.Windows.Forms.Padding(0)
         Me.ucrSelectorColumns.Name = "ucrSelectorColumns"
-        Me.ucrSelectorColumns.Size = New System.Drawing.Size(210, 180)
+        Me.ucrSelectorColumns.Size = New System.Drawing.Size(212, 180)
         Me.ucrSelectorColumns.TabIndex = 13
         '
         'ucrBaseSubdialog
         '
-        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(107, 265)
+        Me.ucrBaseSubdialog.Location = New System.Drawing.Point(103, 270)
         Me.ucrBaseSubdialog.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.ucrBaseSubdialog.Name = "ucrBaseSubdialog"
-        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(142, 30)
+        Me.ucrBaseSubdialog.Size = New System.Drawing.Size(153, 30)
         Me.ucrBaseSubdialog.TabIndex = 7
         '
         'ucrChkKeepExistingPos
@@ -150,7 +150,7 @@ Partial Class sdgSaveColumnPosition
         Me.ucrChkKeepExistingPos.Checked = False
         Me.ucrChkKeepExistingPos.Location = New System.Drawing.Point(227, 155)
         Me.ucrChkKeepExistingPos.Name = "ucrChkKeepExistingPos"
-        Me.ucrChkKeepExistingPos.Size = New System.Drawing.Size(100, 20)
+        Me.ucrChkKeepExistingPos.Size = New System.Drawing.Size(126, 20)
         Me.ucrChkKeepExistingPos.TabIndex = 16
         '
         'sdgSaveColumnPosition

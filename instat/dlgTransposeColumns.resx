@@ -156,7 +156,7 @@
     <value>10, 197</value>
   </data>
   <data name="ucrChkNameNewColumns.Size" type="System.Drawing.Size, System.Drawing">
-    <value>148, 20</value>
+    <value>210, 20</value>
   </data>
   <data name="ucrChkNameNewColumns.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -176,8 +176,12 @@
   <data name="ucrNewDataframe.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 223</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ucrNewDataframe.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
+  </data>
   <data name="ucrNewDataframe.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 24</value>
+    <value>360, 24</value>
   </data>
   <data name="ucrNewDataframe.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -197,7 +201,6 @@
   <data name="ucrSelectorTransposeColumns.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorTransposeColumns.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>

@@ -150,7 +150,7 @@
     <value>True</value>
   </data>
   <data name="rdoSpecifyTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 21</value>
+    <value>93, 21</value>
   </data>
   <data name="rdoSpecifyTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>83, 17</value>
@@ -177,7 +177,7 @@
     <value>True</value>
   </data>
   <data name="rdoNoTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>153, 21</value>
+    <value>214, 21</value>
   </data>
   <data name="rdoNoTitle.Size" type="System.Drawing.Size, System.Drawing">
     <value>62, 17</value>
@@ -249,10 +249,10 @@
     <value>4</value>
   </data>
   <data name="ucrPnlAxisTitle.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 18</value>
+    <value>5, 18</value>
   </data>
   <data name="ucrPnlAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>209, 23</value>
+    <value>290, 23</value>
   </data>
   <data name="ucrPnlAxisTitle.TabIndex" type="System.Int32, mscorlib">
     <value>19</value>
@@ -273,7 +273,7 @@
     <value>3, 1</value>
   </data>
   <data name="grpAxisTitle.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 83</value>
+    <value>301, 83</value>
   </data>
   <data name="grpAxisTitle.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -339,7 +339,7 @@
     <value>True</value>
   </data>
   <data name="rdoMajorBreaksSeq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 21</value>
+    <value>98, 21</value>
   </data>
   <data name="rdoMajorBreaksSeq.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 17</value>
@@ -366,7 +366,7 @@
     <value>True</value>
   </data>
   <data name="rdoMajorBreaksCustom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 21</value>
+    <value>179, 21</value>
   </data>
   <data name="rdoMajorBreaksCustom.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 17</value>
@@ -414,16 +414,16 @@
     <value>True</value>
   </data>
   <data name="rdoMajorBreaksNone.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 21</value>
+    <value>278, 21</value>
   </data>
   <data name="rdoMajorBreaksNone.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 17</value>
+    <value>56, 17</value>
   </data>
   <data name="rdoMajorBreaksNone.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
   <data name="rdoMajorBreaksNone.Text" xml:space="preserve">
-    <value>None</value>
+    <value>Aucun</value>
   </data>
   <data name="&gt;&gt;rdoMajorBreaksNone.Name" xml:space="preserve">
     <value>rdoMajorBreaksNone</value>
@@ -591,7 +591,7 @@
     <value>3, 19</value>
   </data>
   <data name="ucrPnlMajorBreaks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 23</value>
+    <value>335, 23</value>
   </data>
   <data name="ucrPnlMajorBreaks.TabIndex" type="System.Int32, mscorlib">
     <value>18</value>
@@ -630,10 +630,10 @@
     <value>13</value>
   </data>
   <data name="grpMajorBreaks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 29</value>
+    <value>310, 29</value>
   </data>
   <data name="grpMajorBreaks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>253, 162</value>
+    <value>354, 162</value>
   </data>
   <data name="grpMajorBreaks.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -921,7 +921,7 @@
     <value>True</value>
   </data>
   <data name="rdoScalesCustom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>79, 20</value>
+    <value>137, 20</value>
   </data>
   <data name="rdoScalesCustom.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 17</value>
@@ -975,7 +975,7 @@
     <value>6, 17</value>
   </data>
   <data name="ucrPnlScales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>127, 23</value>
+    <value>233, 23</value>
   </data>
   <data name="ucrPnlScales.TabIndex" type="System.Int32, mscorlib">
     <value>20</value>
@@ -996,7 +996,7 @@
     <value>3, 90</value>
   </data>
   <data name="grpScales.Size" type="System.Drawing.Size, System.Drawing">
-    <value>241, 228</value>
+    <value>274, 228</value>
   </data>
   <data name="grpScales.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -1246,7 +1246,7 @@
     <value>3, 90</value>
   </data>
   <data name="grpScaleXDate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>246, 153</value>
+    <value>301, 153</value>
   </data>
   <data name="grpScaleXDate.TabIndex" type="System.Int32, mscorlib">
     <value>34</value>
@@ -1267,7 +1267,7 @@
     <value>0</value>
   </data>
   <data name="ucrInputAxisType.Location" type="System.Drawing.Point, System.Drawing">
-    <value>365, 7</value>
+    <value>527, 7</value>
   </data>
   <data name="ucrInputAxisType.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -1291,7 +1291,7 @@
     <value>True</value>
   </data>
   <data name="rdoMinorBreaksSeq.Location" type="System.Drawing.Point, System.Drawing">
-    <value>56, 20</value>
+    <value>98, 20</value>
   </data>
   <data name="rdoMinorBreaksSeq.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 17</value>
@@ -1318,7 +1318,7 @@
     <value>True</value>
   </data>
   <data name="rdoMinorBreaksCustom.Location" type="System.Drawing.Point, System.Drawing">
-    <value>135, 20</value>
+    <value>179, 20</value>
   </data>
   <data name="rdoMinorBreaksCustom.Size" type="System.Drawing.Size, System.Drawing">
     <value>60, 17</value>
@@ -1342,7 +1342,7 @@
     <value>7</value>
   </data>
   <data name="ucrInputMinorBreaksInStepsOf.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 97</value>
+    <value>126, 97</value>
   </data>
   <data name="ucrInputMinorBreaksInStepsOf.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 21</value>
@@ -1363,7 +1363,7 @@
     <value>10</value>
   </data>
   <data name="ucrInputMinorBreaksTo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>74, 71</value>
+    <value>126, 71</value>
   </data>
   <data name="ucrInputMinorBreaksTo.Size" type="System.Drawing.Size, System.Drawing">
     <value>47, 21</value>
@@ -1510,7 +1510,7 @@
     <value>6, 16</value>
   </data>
   <data name="ucrPnlMinorBreaks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>245, 23</value>
+    <value>332, 23</value>
   </data>
   <data name="ucrPnlMinorBreaks.TabIndex" type="System.Int32, mscorlib">
     <value>27</value>
@@ -1558,7 +1558,7 @@
     <value>True</value>
   </data>
   <data name="rdoMinorBreaksNone.Location" type="System.Drawing.Point, System.Drawing">
-    <value>200, 20</value>
+    <value>278, 20</value>
   </data>
   <data name="rdoMinorBreaksNone.Size" type="System.Drawing.Size, System.Drawing">
     <value>51, 17</value>
@@ -1582,10 +1582,10 @@
     <value>1</value>
   </data>
   <data name="grpMinorBreaks.Location" type="System.Drawing.Point, System.Drawing">
-    <value>250, 197</value>
+    <value>310, 197</value>
   </data>
   <data name="grpMinorBreaks.Size" type="System.Drawing.Size, System.Drawing">
-    <value>252, 121</value>
+    <value>354, 121</value>
   </data>
   <data name="grpMinorBreaks.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
@@ -1612,7 +1612,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 334</value>
+    <value>667, 334</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ucrAxes</value>

@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -61,15 +61,16 @@ Partial Class ucrSave
         '
         Me.ucrInputComboSave.AddQuotesIfUnrecognised = True
         resources.ApplyResources(Me.ucrInputComboSave, "ucrInputComboSave")
+        Me.ucrInputComboSave.GetSetSelectedIndex = -1
         Me.ucrInputComboSave.IsReadOnly = False
         Me.ucrInputComboSave.Name = "ucrInputComboSave"
         '
         'ucrInputTextSave
         '
         Me.ucrInputTextSave.AddQuotesIfUnrecognised = True
-        resources.ApplyResources(Me.ucrInputTextSave, "ucrInputTextSave")
         Me.ucrInputTextSave.IsMultiline = False
         Me.ucrInputTextSave.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputTextSave, "ucrInputTextSave")
         Me.ucrInputTextSave.Name = "ucrInputTextSave"
         '
         'btnColumnPosition
@@ -82,8 +83,8 @@ Partial Class ucrSave
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Controls.Add(Me.ucrInputTextSave)
         Me.Controls.Add(Me.ucrInputComboSave)
+        Me.Controls.Add(Me.ucrInputTextSave)
         Me.Controls.Add(Me.lblSaveText)
         Me.Controls.Add(Me.ucrChkSave)
         Me.Controls.Add(Me.btnColumnPosition)

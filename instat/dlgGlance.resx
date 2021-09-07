@@ -187,7 +187,7 @@
     <value>414, 348</value>
   </data>
   <data name="ucrSaveNewDataFrame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>166, 249</value>
+    <value>228, 245</value>
   </data>
   <data name="ucrSaveNewDataFrame.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>4, 5, 4, 5</value>
@@ -277,7 +277,7 @@
     <value>4, 4, 4, 4</value>
   </data>
   <data name="ucrPnlOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>154, 68</value>
+    <value>221, 68</value>
   </data>
   <data name="ucrPnlOptions.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>

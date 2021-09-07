@@ -1,4 +1,4 @@
-﻿' R- Instat
+' R- Instat
 ' Copyright (C) 2015-2017
 '
 ' This program is free software: you can redistribute it and/or modify
@@ -40,8 +40,8 @@ Partial Class dlgOneWayFrequencies
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgOneWayFrequencies))
         Me.grpSort = New System.Windows.Forms.GroupBox()
-        Me.rdoDescendingFrequencies = New System.Windows.Forms.RadioButton()
-        Me.rdoAscendingFrequencies = New System.Windows.Forms.RadioButton()
+        Me.rdoDescending = New System.Windows.Forms.RadioButton()
+        Me.rdoAscending = New System.Windows.Forms.RadioButton()
         Me.rdoNone = New System.Windows.Forms.RadioButton()
         Me.ucrPnlSort = New instat.UcrPanel()
         Me.cmdOptions = New System.Windows.Forms.Button()
@@ -69,27 +69,27 @@ Partial Class dlgOneWayFrequencies
         '
         'grpSort
         '
-        Me.grpSort.Controls.Add(Me.rdoDescendingFrequencies)
-        Me.grpSort.Controls.Add(Me.rdoAscendingFrequencies)
+        Me.grpSort.Controls.Add(Me.rdoDescending)
+        Me.grpSort.Controls.Add(Me.rdoAscending)
         Me.grpSort.Controls.Add(Me.rdoNone)
         Me.grpSort.Controls.Add(Me.ucrPnlSort)
         resources.ApplyResources(Me.grpSort, "grpSort")
         Me.grpSort.Name = "grpSort"
         Me.grpSort.TabStop = False
         '
-        'rdoDescendingFrequencies
+        'rdoDescending
         '
-        resources.ApplyResources(Me.rdoDescendingFrequencies, "rdoDescendingFrequencies")
-        Me.rdoDescendingFrequencies.Name = "rdoDescendingFrequencies"
-        Me.rdoDescendingFrequencies.TabStop = True
-        Me.rdoDescendingFrequencies.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoDescending, "rdoDescending")
+        Me.rdoDescending.Name = "rdoDescending"
+        Me.rdoDescending.TabStop = True
+        Me.rdoDescending.UseVisualStyleBackColor = True
         '
-        'rdoAscendingFrequencies
+        'rdoAscending
         '
-        resources.ApplyResources(Me.rdoAscendingFrequencies, "rdoAscendingFrequencies")
-        Me.rdoAscendingFrequencies.Name = "rdoAscendingFrequencies"
-        Me.rdoAscendingFrequencies.TabStop = True
-        Me.rdoAscendingFrequencies.UseVisualStyleBackColor = True
+        resources.ApplyResources(Me.rdoAscending, "rdoAscending")
+        Me.rdoAscending.Name = "rdoAscending"
+        Me.rdoAscending.TabStop = True
+        Me.rdoAscending.UseVisualStyleBackColor = True
         '
         'rdoNone
         '
@@ -272,8 +272,8 @@ Partial Class dlgOneWayFrequencies
     Friend WithEvents ucrSelectorOneWayFreq As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
     Friend WithEvents grpSort As GroupBox
-    Friend WithEvents rdoDescendingFrequencies As RadioButton
-    Friend WithEvents rdoAscendingFrequencies As RadioButton
+    Friend WithEvents rdoDescending As RadioButton
+    Friend WithEvents rdoAscending As RadioButton
     Friend WithEvents rdoNone As RadioButton
     Friend WithEvents ucrPnlSort As UcrPanel
     Friend WithEvents cmdOptions As Button

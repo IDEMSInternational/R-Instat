@@ -115,6 +115,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="DotNetZip, Version=1.15.0.0, Culture=neutral, PublicKeyToken=6583c7c814667745, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetZip.1.15.0\lib\net40\DotNetZip.dll</HintPath>
+    </Reference>
     <Reference Include="DynamicInterop, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\DynamicInterop.0.9.1\lib\netstandard2.0\DynamicInterop.dll</HintPath>
     </Reference>
@@ -155,8 +158,8 @@
       <HintPath>..\packages\TranslateWinForm.1.1.3\lib\net461\TranslateWinForm.dll</HintPath>
     </Reference>
     <Reference Include="UIAutomationProvider" />
-    <Reference Include="unvell.ReoGrid, Version=2.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\unvell.ReoGrid.dll.2.1.0.0\lib\20\unvell.ReoGrid.dll</HintPath>
+    <Reference Include="unvell.ReoGrid, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\unvell.ReoGrid.dll.3.0.0\lib\net40\unvell.ReoGrid.dll</HintPath>
     </Reference>
     <Reference Include="unvell.ReoScript, Version=1.5.0.0, Culture=neutral, PublicKeyToken=85339a558a3a0c58, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -272,10 +275,32 @@
     <Compile Include="dlgConditionalQuantilePlot.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgCopySheet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dlgCopySheet.resx</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopySheet.sw-KE.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dlgCopySheet.sw-KE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopySpecial.Designer.vb">
+      <DependentUpon>dlgCopySpecial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCopySpecial.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgDisplayTopN.Designer.vb">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
     </Compile>
     <Compile Include="dlgDisplayTopN.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgExportForClimsoft.Designer.vb">
+      <DependentUpon>dlgExportForClimsoft.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgExportForClimsoft.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgExportToWWR.Designer.vb">
@@ -326,6 +351,18 @@
     <Compile Include="dlgPasteNewDataFrame.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgPasteSpecial.Designer.vb">
+      <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPasteSpecial.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dlgPivotTable.Designer.vb">
+      <DependentUpon>dlgPivotTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgPivotTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="dlgSeasonalPlot.Designer.vb">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
     </Compile>
@@ -367,6 +404,11 @@
     </Compile>
     <Compile Include="frmConvertToNumeric.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="sdgClimaticDataEntry.Designer.vb">
       <DependentUpon>sdgClimaticDataEntry.vb</DependentUpon>
@@ -2453,11 +2495,6 @@
       <DependentUpon>Application.myapp</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="My Project\Resources.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="My Project\Settings.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -2769,9 +2806,15 @@
     <EmbeddedResource Include="dlgConditionalQuantilePlot.resx">
       <DependentUpon>dlgConditionalQuantilePlot.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dlgCopySpecial.resx">
+      <DependentUpon>dlgCopySpecial.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dlgDisplayTopN.resx">
       <DependentUpon>dlgDisplayTopN.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgExportForClimsoft.resx">
+      <DependentUpon>dlgExportForClimsoft.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgExportToWWR.resx">
       <DependentUpon>dlgExportToWWR.vb</DependentUpon>
@@ -2796,6 +2839,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgPasteNewDataFrame.resx">
       <DependentUpon>dlgPasteNewDataFrame.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPasteSpecial.resx">
+      <DependentUpon>dlgPasteSpecial.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgPivotTable.resx">
+      <DependentUpon>dlgPivotTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgSeasonalPlot.resx">
       <DependentUpon>dlgSeasonalPlot.vb</DependentUpon>
@@ -4558,9 +4607,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.sw-KE.resx">
       <SubType>Designer</SubType>
@@ -4992,6 +5041,7 @@
     <None Include="Resources\reset3.png" />
     <None Include="Resources\help2.png" />
     <None Include="Resources\lastgraph.png" />
+    <None Include="Resources\lan_btn.png" />
     <Content Include="Resources\rinstat_icon_Hih_icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

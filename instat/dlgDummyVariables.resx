@@ -121,6 +121,10 @@
   <data name="lblSelected.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="lblSelected.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="lblSelected.Location" type="System.Drawing.Point, System.Drawing">
     <value>284, 45</value>
@@ -149,8 +153,11 @@
   <data name="lblVariate.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="lblVariate.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="lblVariate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>212, 211</value>
+    <value>196, 211</value>
   </data>
   <data name="lblVariate.Size" type="System.Drawing.Size, System.Drawing">
     <value>43, 13</value>
@@ -175,6 +182,9 @@
   </data>
   <data name="rdoLevelNumber.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoLevelNumber.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoLevelNumber.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 89</value>
@@ -203,6 +213,9 @@
   <data name="rdoLast.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoLast.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoLast.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 66</value>
   </data>
@@ -230,6 +243,9 @@
   <data name="rdoFirst.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
+  <data name="rdoFirst.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="rdoFirst.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 43</value>
   </data>
@@ -256,6 +272,9 @@
   </data>
   <data name="rdoNone.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
+  </data>
+  <data name="rdoNone.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
   </data>
   <data name="rdoNone.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 20</value>
@@ -330,7 +349,7 @@
     <value>10, 211</value>
   </data>
   <data name="ucrChkWithXVariable.Size" type="System.Drawing.Size, System.Drawing">
-    <value>128, 20</value>
+    <value>164, 20</value>
   </data>
   <data name="ucrChkWithXVariable.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -350,7 +369,6 @@
   <data name="ucrSelectorDummyVariable.Location" type="System.Drawing.Point, System.Drawing">
     <value>10, 10</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrSelectorDummyVariable.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
     <value>0, 0, 0, 0</value>
   </data>

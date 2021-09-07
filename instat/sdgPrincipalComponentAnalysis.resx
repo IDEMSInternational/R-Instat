@@ -122,7 +122,7 @@
     <value>10, 66</value>
   </data>
   <data name="ucrChkRotation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>361, 20</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="ucrChkRotation.TabIndex" type="System.Int32, mscorlib">
@@ -144,7 +144,7 @@
     <value>10, 40</value>
   </data>
   <data name="ucrChkEigenvectors.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>361, 20</value>
   </data>
   <data name="ucrChkEigenvectors.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -165,7 +165,7 @@
     <value>10, 14</value>
   </data>
   <data name="ucrChkEigenvalues.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 20</value>
+    <value>361, 20</value>
   </data>
   <data name="ucrChkEigenvalues.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -315,30 +315,6 @@
   <data name="&gt;&gt;lblFactorVariable.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <data name="ucrSelectorFactor.Location" type="System.Drawing.Point, System.Drawing">
-    <value>6, 19</value>
-  </data>
-  <data name="ucrSelectorFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>0, 0, 0, 0</value>
-  </data>
-  <data name="ucrSelectorFactor.Size" type="System.Drawing.Size, System.Drawing">
-    <value>224, 180</value>
-  </data>
-  <data name="ucrSelectorFactor.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorFactor.Name" xml:space="preserve">
-    <value>ucrSelectorFactor</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorFactor.Type" xml:space="preserve">
-    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorFactor.Parent" xml:space="preserve">
-    <value>grpScree</value>
-  </data>
-  <data name="&gt;&gt;ucrSelectorFactor.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
   <data name="rdoTextVariables.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -463,7 +439,7 @@
     <value>grpScree</value>
   </data>
   <data name="&gt;&gt;grpVariablePlot.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>2</value>
   </data>
   <data name="lblLabel.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -490,7 +466,7 @@
     <value>grpScree</value>
   </data>
   <data name="&gt;&gt;lblLabel.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="rdoTextIndividual.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -616,7 +592,7 @@
     <value>grpScree</value>
   </data>
   <data name="&gt;&gt;GrpIndividualPlot.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="lblChoice.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -643,13 +619,13 @@
     <value>grpScree</value>
   </data>
   <data name="&gt;&gt;lblChoice.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="ucrChkIncludePercentage.Location" type="System.Drawing.Point, System.Drawing">
     <value>6, 122</value>
   </data>
   <data name="ucrChkIncludePercentage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>138, 20</value>
+    <value>158, 20</value>
   </data>
   <data name="ucrChkIncludePercentage.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -664,10 +640,10 @@
     <value>grpScree</value>
   </data>
   <data name="&gt;&gt;ucrChkIncludePercentage.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="ucrNudDim2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>180, 122</value>
+    <value>235, 122</value>
   </data>
   <data name="ucrNudDim2.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -685,10 +661,10 @@
     <value>grpScree</value>
   </data>
   <data name="&gt;&gt;ucrNudDim2.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="ucrNudDim1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>109, 122</value>
+    <value>170, 122</value>
   </data>
   <data name="ucrNudDim1.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 20</value>
@@ -706,7 +682,7 @@
     <value>grpScree</value>
   </data>
   <data name="&gt;&gt;ucrNudDim1.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="rdoBar.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -832,7 +808,7 @@
     <value>grpScree</value>
   </data>
   <data name="&gt;&gt;grpGeom.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="lblChoiceScree.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -856,7 +832,7 @@
     <value>grpScree</value>
   </data>
   <data name="&gt;&gt;lblChoiceScree.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="lblDim.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -883,10 +859,10 @@
     <value>grpScree</value>
   </data>
   <data name="&gt;&gt;lblDim.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="ucrInputLabel2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 148</value>
+    <value>83, 148</value>
   </data>
   <data name="ucrInputLabel2.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -904,10 +880,10 @@
     <value>grpScree</value>
   </data>
   <data name="&gt;&gt;ucrInputLabel2.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="ucrInputLabel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>57, 148</value>
+    <value>83, 148</value>
   </data>
   <data name="ucrInputLabel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>137, 21</value>
@@ -925,6 +901,30 @@
     <value>grpScree</value>
   </data>
   <data name="&gt;&gt;ucrInputLabel1.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="ucrSelectorFactor.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 19</value>
+  </data>
+  <data name="ucrSelectorFactor.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>0, 0, 0, 0</value>
+  </data>
+  <data name="ucrSelectorFactor.Size" type="System.Drawing.Size, System.Drawing">
+    <value>224, 180</value>
+  </data>
+  <data name="ucrSelectorFactor.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFactor.Name" xml:space="preserve">
+    <value>ucrSelectorFactor</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFactor.Type" xml:space="preserve">
+    <value>instat.ucrSelectorByDataFrameAddRemove, instat, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFactor.Parent" xml:space="preserve">
+    <value>grpScree</value>
+  </data>
+  <data name="&gt;&gt;ucrSelectorFactor.ZOrder" xml:space="preserve">
     <value>14</value>
   </data>
   <data name="grpScree.Location" type="System.Drawing.Point, System.Drawing">
@@ -1036,7 +1036,7 @@
     <value>6, 14</value>
   </data>
   <data name="ucrPnlGraphics.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 120</value>
+    <value>389, 120</value>
   </data>
   <data name="ucrPnlGraphics.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1129,10 +1129,10 @@
     <value>0</value>
   </data>
   <data name="ucrSdgButtons.Location" type="System.Drawing.Point, System.Drawing">
-    <value>147, 385</value>
+    <value>130, 385</value>
   </data>
   <data name="ucrSdgButtons.Size" type="System.Drawing.Size, System.Drawing">
-    <value>142, 30</value>
+    <value>153, 30</value>
   </data>
   <data name="ucrSdgButtons.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
