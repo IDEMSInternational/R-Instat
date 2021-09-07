@@ -529,7 +529,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpFacet.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 423</value>
+    <value>669, 423</value>
   </data>
   <data name="tbpFacet.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
@@ -577,7 +577,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpLayers.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 423</value>
+    <value>669, 423</value>
   </data>
   <data name="tbpLayers.TabIndex" type="System.Int32, mscorlib">
     <value>4</value>
@@ -928,7 +928,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpTitles.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 423</value>
+    <value>669, 423</value>
   </data>
   <data name="tbpTitles.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
@@ -976,7 +976,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpXAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 423</value>
+    <value>669, 423</value>
   </data>
   <data name="tbpXAxis.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -1000,7 +1000,7 @@
     <value>0, 1</value>
   </data>
   <data name="ucrYAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>505, 416</value>
+    <value>669, 416</value>
   </data>
   <data name="ucrYAxis.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -1024,7 +1024,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpYAxis.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 423</value>
+    <value>669, 423</value>
   </data>
   <data name="tbpYAxis.TabIndex" type="System.Int32, mscorlib">
     <value>6</value>
@@ -1450,7 +1450,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpTheme.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 423</value>
+    <value>669, 423</value>
   </data>
   <data name="tbpTheme.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -1717,7 +1717,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpCoordinates.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 423</value>
+    <value>669, 423</value>
   </data>
   <data name="tbpCoordinates.TabIndex" type="System.Int32, mscorlib">
     <value>7</value>
@@ -2326,7 +2326,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpColour.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 423</value>
+    <value>669, 423</value>
   </data>
   <data name="tbpColour.TabIndex" type="System.Int32, mscorlib">
     <value>8</value>
@@ -3514,7 +3514,7 @@
     <value>3, 3, 3, 3</value>
   </data>
   <data name="tbpAnnotation.Size" type="System.Drawing.Size, System.Drawing">
-    <value>510, 423</value>
+    <value>669, 423</value>
   </data>
   <data name="tbpAnnotation.TabIndex" type="System.Int32, mscorlib">
     <value>9</value>
@@ -3538,7 +3538,7 @@
     <value>7, 3</value>
   </data>
   <data name="tbpPlotsOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>518, 449</value>
+    <value>677, 449</value>
   </data>
   <data name="tbpPlotsOptions.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -3556,7 +3556,7 @@
     <value>1</value>
   </data>
   <data name="ucrBaseSubdialog.Location" type="System.Drawing.Point, System.Drawing">
-    <value>164, 472</value>
+    <value>249, 472</value>
   </data>
   <data name="ucrBaseSubdialog.Size" type="System.Drawing.Size, System.Drawing">
     <value>160, 28</value>
@@ -3583,7 +3583,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>528, 502</value>
+    <value>687, 502</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterParent</value>
