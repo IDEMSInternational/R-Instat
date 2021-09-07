@@ -541,7 +541,7 @@ Public Class RCodeStructure
             arrScriptParts = frmMain.clsRLink.GetRunnableCommandLines(strTemp)
             If arrScriptParts.Length > 1 Then
                 're-assemble the string, apart from the last line
-                strReconstructed = String.Join(Environment.NewLine, arrScriptParts, 0, arrScriptParts.Length - 2)
+                strReconstructed = String.Join(Environment.NewLine, arrScriptParts, 0, arrScriptParts.Length - 1)
                 'assign the last line of the multi-line string
                 strReconstructed = strReconstructed & Environment.NewLine & strAssignTo & " <- " & arrScriptParts.Last
             Else
