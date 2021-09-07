@@ -45,6 +45,8 @@ Public Class dlgLinePlot
     Private clsScaleFillViridisFunction As New RFunction
     Private clsScaleColourViridisFunction As New RFunction
     Private clsAnnotateFunction As New RFunction
+    Private clsListFunction As New RFunction
+    Private clsFormulaFunction As New RFunction
 
     'Parameter names for geoms
     Private strFirstParameterName As String = "geomfunc"
@@ -75,6 +77,7 @@ Public Class dlgLinePlot
         Dim clsPeaksParam As New RParameter
         Dim clsValleysParam As New RParameter
         Dim dctMethodOptions As New Dictionary(Of String, String)
+        Dim dctFamilyOptions As New Dictionary(Of String, String)
 
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
@@ -156,12 +159,12 @@ Public Class dlgLinePlot
         ucrChkValley.SetText("Add Valleys")
         ucrChkValley.SetParameter(clsValleysParam, bNewChangeParameterValue:=False, bNewAddRemoveParameter:=True)
 
-        ucrChkWithSE.SetText("With Standard Error")
+        ucrChkWithSE.SetText("Add SE")
         ucrChkWithSE.SetParameter(New RParameter("se", 1))
         ucrChkWithSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
         ucrChkWithSE.SetRDefault("TRUE")
 
-        ucrChkAddSE.SetText("With Standard Error")
+        ucrChkAddSE.SetText("Add SE")
         ucrChkAddSE.SetParameter(New RParameter("se", 1))
         ucrChkAddSE.SetValuesCheckedAndUnchecked("TRUE", "FALSE")
 
@@ -205,10 +208,30 @@ Public Class dlgLinePlot
         ucrInputMethod.AddToLinkedControls(ucrNudSpan, {"loess"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrNudSpan.SetLinkedDisplayControl(lblSpan)
 
+        ucrInputFormula.SetParameter(New RParameter("formula", 3))
+        ucrInputFormula.SetItems({"y ~ x", "y ~ poly(x, 2)", "y ~ log(x)", "y ~ splines::bs(x,3)"})
+
+        ucrFamilyInput.SetParameter(New RParameter("family", 4))
+        dctFamilyOptions.Add("Binomial", Chr(34) & "binomial" & Chr(34))
+        dctFamilyOptions.Add("Gaussian", Chr(34) & "gaussian" & Chr(34))
+        dctFamilyOptions.Add("Poisson", Chr(34) & "poisson" & Chr(34))
+        dctFamilyOptions.Add("Gamma", Chr(34) & "gamma" & Chr(34))
+        dctFamilyOptions.Add("Inverse.gaussian", Chr(34) & "inverse.gaussian" & Chr(34))
+        dctFamilyOptions.Add("Guasi", Chr(34) & "quasi" & Chr(34))
+        dctFamilyOptions.Add("Quasibinomial", Chr(34) & "quasibinomial" & Chr(34))
+        dctFamilyOptions.Add("Quasipoisson", Chr(34) & "quasipoisson" & Chr(34))
+        ucrFamilyInput.SetItems(dctFamilyOptions)
+        ucrFamilyInput.SetDropDownStyleAsNonEditable()
+        ucrFamilyInput.SetRDefault(Chr(34) & "binomial" & Chr(34))
+
+        ucrInputMethod.AddToLinkedControls(ucrFamilyInput, {"gam", "glm"}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrFamilyInput.SetLinkedDisplayControl(lblFamily)
+
         ucrPnlOptions.AddToLinkedControls({ucrChkPathOrStep, ucrChkPeak, ucrChkValley, ucrChkWithSE, ucrChkLineofBestFit}, {rdoLine}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
-        ucrPnlOptions.AddToLinkedControls({ucrChkAddLine, ucrInputMethod}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
+        ucrPnlOptions.AddToLinkedControls({ucrChkAddLine, ucrInputMethod, ucrInputFormula}, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrPnlOptions.AddToLinkedControls(ucrChkAddSE, {rdoSmoothing}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True, bNewLinkedChangeToDefaultState:=True, objNewDefaultState:="FALSE")
         ucrInputMethod.SetLinkedDisplayControl(lblMethod)
+        ucrInputFormula.SetLinkedDisplayControl(lblFormula)
     End Sub
 
     Private Sub SetDefaults()
@@ -216,6 +239,7 @@ Public Class dlgLinePlot
         clsOptionsFunction = New RFunction
         clsRaesFunction = New RFunction
         clsBaseOperator = New ROperator
+        clsListFunction = New RFunction
 
         ucrLinePlotSelector.Reset()
         ucrLinePlotSelector.SetGgplotFunction(clsBaseOperator)
@@ -224,6 +248,8 @@ Public Class dlgLinePlot
         bResetSubdialog = True
         bResetLineLayerSubdialog = True
         rdoPath.Checked = True
+
+        ucrInputFormula.SetText("y ~ x")
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
@@ -261,12 +287,13 @@ Public Class dlgLinePlot
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
+        clsListFunction.SetRCommand("list")
+
         clsGeomSmoothFunc.AddParameter("se", "FALSE", iPosition:=1)
         clsBaseOperator.RemoveParameterByName("geom_point")
         clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrLinePlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
         TempOptionsDisabledInMultipleVariablesCase()
-        TestOkEnabled()
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
@@ -287,6 +314,7 @@ Public Class dlgLinePlot
         ucrPnlOptions.SetRCode(clsOptionsFunction, bReset)
         ucrInputMethod.SetRCode(clsOptionsFunction, bReset)
         ucrNudSpan.SetRCode(clsOptionsFunction, bReset)
+        ucrFamilyInput.SetRCode(clsListFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
@@ -301,6 +329,7 @@ Public Class dlgLinePlot
     Private Sub ucrBase_ClickReset(sender As Object, e As EventArgs) Handles ucrBase.ClickReset
         SetDefaults()
         SetRCodeForControls(True)
+        TestOkEnabled()
     End Sub
 
     Private Sub TempOptionsDisabledInMultipleVariablesCase()
@@ -421,5 +450,21 @@ Public Class dlgLinePlot
 
     Private Sub AllControl_ControlContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrVariablesAsFactorForLinePlot.ControlContentsChanged, ucrSave.ControlContentsChanged
         TestOkEnabled()
+    End Sub
+
+    Private Sub ucrInputMethod_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputMethod.ControlValueChanged
+        If ucrInputMethod.GetText = "glm" OrElse ucrInputMethod.GetText = "gam" Then
+            clsOptionsFunction.AddParameter("method.args", clsRFunctionParameter:=clsListFunction, iPosition:=2)
+        Else
+            clsOptionsFunction.RemoveParameterByName("method.args")
+        End If
+    End Sub
+
+    Private Sub ucrInputFormula_ControlValueChanged(ucrChangedControl As ucrCore) Handles ucrInputFormula.ControlValueChanged
+        If ucrInputFormula.GetText <> "" Then
+            clsOptionsFunction.AddParameter("formula", ucrInputFormula.GetText, iPosition:=1)
+        Else
+            clsOptionsFunction.RemoveParameterByName("formula")
+        End If
     End Sub
 End Class

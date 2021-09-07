@@ -51,6 +51,10 @@ Partial Class dlgLinePlot
         Me.rdoSmoothing = New System.Windows.Forms.RadioButton()
         Me.lblMethod = New System.Windows.Forms.Label()
         Me.lblSpan = New System.Windows.Forms.Label()
+        Me.lblFamily = New System.Windows.Forms.Label()
+        Me.lblFormula = New System.Windows.Forms.Label()
+        Me.ucrInputFormula = New instat.ucrInputComboBox()
+        Me.ucrFamilyInput = New instat.ucrInputComboBox()
         Me.ucrNudSpan = New instat.ucrNud()
         Me.ucrChkAddLine = New instat.ucrCheck()
         Me.ucrChkAddPoints = New instat.ucrCheck()
@@ -155,6 +159,32 @@ Partial Class dlgLinePlot
         '
         resources.ApplyResources(Me.lblSpan, "lblSpan")
         Me.lblSpan.Name = "lblSpan"
+        '
+        'lblFamily
+        '
+        resources.ApplyResources(Me.lblFamily, "lblFamily")
+        Me.lblFamily.Name = "lblFamily"
+        '
+        'lblFormula
+        '
+        resources.ApplyResources(Me.lblFormula, "lblFormula")
+        Me.lblFormula.Name = "lblFormula"
+        '
+        'ucrInputFormula
+        '
+        Me.ucrInputFormula.AddQuotesIfUnrecognised = True
+        Me.ucrInputFormula.GetSetSelectedIndex = -1
+        Me.ucrInputFormula.IsReadOnly = False
+        resources.ApplyResources(Me.ucrInputFormula, "ucrInputFormula")
+        Me.ucrInputFormula.Name = "ucrInputFormula"
+        '
+        'ucrFamilyInput
+        '
+        Me.ucrFamilyInput.AddQuotesIfUnrecognised = True
+        Me.ucrFamilyInput.GetSetSelectedIndex = -1
+        Me.ucrFamilyInput.IsReadOnly = False
+        resources.ApplyResources(Me.ucrFamilyInput, "ucrFamilyInput")
+        Me.ucrFamilyInput.Name = "ucrFamilyInput"
         '
         'ucrNudSpan
         '
@@ -291,6 +321,10 @@ Partial Class dlgLinePlot
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.lblFormula)
+        Me.Controls.Add(Me.ucrInputFormula)
+        Me.Controls.Add(Me.lblFamily)
+        Me.Controls.Add(Me.ucrFamilyInput)
         Me.Controls.Add(Me.lblSpan)
         Me.Controls.Add(Me.ucrNudSpan)
         Me.Controls.Add(Me.ucrChkAddLine)
@@ -362,4 +396,8 @@ Partial Class dlgLinePlot
     Friend WithEvents ucrInputMethod As ucrInputComboBox
     Friend WithEvents lblSpan As Label
     Friend WithEvents ucrNudSpan As ucrNud
+    Friend WithEvents ucrFamilyInput As ucrInputComboBox
+    Friend WithEvents lblFamily As Label
+    Friend WithEvents lblFormula As Label
+    Friend WithEvents ucrInputFormula As ucrInputComboBox
 End Class
