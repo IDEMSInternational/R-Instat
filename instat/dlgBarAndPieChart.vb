@@ -183,7 +183,7 @@ Public Class dlgBarAndPieChart
         ucrChkAddLabels.SetText("Add Labels")
         ucrChkAddLabels.AddParameterPresentCondition(True, "geom_text")
         ucrChkAddLabels.AddParameterPresentCondition(False, "geom_text", False)
-        ucrChkAddLabels.AddToLinkedControls({ucrInputLabelPosition, ucrInputLabelSize, ucrInputLabelColour}, {True}, bNewLinkedHideIfParameterMissing:=True)
+        ucrChkAddLabels.AddToLinkedControls({ucrInputLabelPosition, ucrInputLabelSize, ucrInputLabelColour}, {True}, bNewLinkedAddRemoveParameter:=True, bNewLinkedHideIfParameterMissing:=True)
         ucrInputLabelColour.SetLinkedDisplayControl(lblLabelColour)
         ucrInputLabelPosition.SetLinkedDisplayControl(lblLabelPosition)
         ucrInputLabelSize.SetLinkedDisplayControl(lblLabelSize)
@@ -521,6 +521,7 @@ Public Class dlgBarAndPieChart
             cmdBarChartOptions.Text = "Lollipop Options"
             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsGeomLollipopFunction, iPosition:=2)
         Else
+            cmdBarChartOptions.Text = "Bar Chart Options"
             clsBaseOperator.AddParameter("geom_bar", clsRFunctionParameter:=clsRgeomBarFunction, iPosition:=2)
         End If
 
