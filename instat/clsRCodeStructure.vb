@@ -548,7 +548,6 @@ Public Class RCodeStructure
                 'else if string has only one line, then assign to the whole string
                 strReconstructed = strAssignTo & " <- " & strTemp
             End If
-
         End If
         Return strReconstructed
     End Function
