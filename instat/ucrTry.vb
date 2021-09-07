@@ -137,9 +137,9 @@ Public Class ucrTry
 
                     Dim bValid As Boolean = False
                     If RunCommandAsMultipleLines Then
-                        Dim lstScriptCommandLines As List(Of String) = frmMain.clsRLink.GetRunnableCommandLines(strTemp)
+                        Dim arrScriptCommandLines As String() = frmMain.clsRLink.GetRunnableCommandLines(strTemp)
 
-                        For Each str As String In lstScriptCommandLines
+                        For Each str As String In arrScriptCommandLines
                             strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(str, bSilent:=True)
                             'any command line that throws an error means the entire script code is not valid
                             If strVecOutput Is Nothing Then

@@ -395,24 +395,25 @@ Public Class RLink
 
     ''' <summary>
     ''' extracts all the complete runnable R commands from the passed script R command string
+    ''' the command lines returned are re-formatted in a format that the R.Net engine can execute
     ''' </summary>
     ''' <param name="strScript">R script command. Can be a multiline script command</param>
-    ''' <returns>a list that contains individual complete runnable R scripts</returns>
-    Public Function GetRunnableCommandLines(strScript As String) As List(Of String)
+    ''' <returns>an array that contains individual complete runnable R scripts</returns>
+    Public Function GetRunnableCommandLines(strScript As String) As String()
         Dim lstRunnableCommandLines As New List(Of String)
-        Dim lstScriptCommands As List(Of String) = strScript.Split(New String() {Environment.NewLine, vbLf}, StringSplitOptions.RemoveEmptyEntries).ToList
+        Dim arrScriptCommands As String() = strScript.Split(New String() {Environment.NewLine, vbLf}, StringSplitOptions.RemoveEmptyEntries)
         Dim strSplitScriptCmd As String = ""
 
-        For Each str As String In lstScriptCommands
-            strSplitScriptCmd &= str
+        For Each str As String In arrScriptCommands
+            'trim the script command parts (for nice formatting)
+            strSplitScriptCmd &= str.Trim()
             If Not IsRunnableScript(strSplitScriptCmd) Then
                 Continue For
             End If
-
             lstRunnableCommandLines.Add(strSplitScriptCmd)
             strSplitScriptCmd = ""
         Next
-        Return lstRunnableCommandLines
+        Return lstRunnableCommandLines.ToArray
     End Function
 
     ''' <summary>
