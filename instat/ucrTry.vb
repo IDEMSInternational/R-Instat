@@ -26,6 +26,7 @@ Public Class ucrTry
     Private clsRSyntax As RSyntax
     Private bstrVecOutput As Boolean
     Private arrAssociatedControls As ucrCore()
+    Public Property RunCommandAsMultipleLines As Boolean = False
 
     Public Sub New()
         ' This call is required by the designer.
@@ -58,6 +59,11 @@ Public Class ucrTry
         bIsCommand = True
     End Sub
 
+    Public Sub ClearTryText()
+        ucrInputTryMessage.SetName("")
+        ucrInputTryMessage.txtInput.BackColor = Color.White
+    End Sub
+
     Private Sub setToCommandOrModel()
         If bIsCommand Then
             CommandModel = "Command"
@@ -80,7 +86,7 @@ Public Class ucrTry
     Private Sub TryScript()
         Dim strTempScript As String = ""
         Dim strErrorDetail As String = ""
-        Dim strVecOutput As CharacterVector
+        Dim strVecOutput As CharacterVector = Nothing
 
         Dim lstScripts As New List(Of String)
         Dim strBeforeAfterScript As String
@@ -97,7 +103,7 @@ Public Class ucrTry
             setToCommandOrModel()
             If Not IsNothing(ucrReceiverScript) AndAlso ucrReceiverScript.IsEmpty() Then
                 ucrInputTryMessage.SetName("")
-            ElseIf IsNothing(ucrReceiverScript) AndAlso CheckForEmptyInputControl Then
+            ElseIf IsNothing(ucrReceiverScript) AndAlso CheckForEmptyInputControl() Then
                 ucrInputTryMessage.SetName("")
             Else
                 For Each clsTempCode In clsRSyntax.lstBeforeCodes
@@ -116,31 +122,50 @@ Public Class ucrTry
                     frmMain.clsRLink.RunInternalScript(strTempScript, bSilent:=True)
                 End If
 
+                Dim strCommandString As String = ""
                 If clsRSyntax.bUseBaseFunction Then
                     clsMainCode = clsRSyntax.clsBaseFunction.Clone()
                 ElseIf clsRSyntax.bUseBaseOperator Then
                     clsMainCode = clsRSyntax.clsBaseOperator.Clone()
                 ElseIf clsRSyntax.bUseCommandString Then
                     clsMainCode = clsRSyntax.clsBaseCommandString.Clone()
+                    strCommandString = clsRSyntax.strCommandString
                 End If
                 If clsMainCode IsNot Nothing Then
                     clsMainCode.RemoveAssignTo()
-                    strTemp = clsMainCode.ToScript(strScript, clsRSyntax.strCommandString)
-                    strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTemp, bSilent:=True, strError:=strErrorDetail)
-                    If strVecOutput IsNot Nothing Then
-                        If bstrVecOutput Then
-                            If strVecOutput.Length > 1 Then
-                                ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5) & "...")
-                            Else
-                                ucrInputTryMessage.SetName(Mid(strVecOutput(0), 5))
-                            End If
-                        Else
-                            If strVecOutput.Length > 1 Then
-                                ucrInputTryMessage.SetName(CommandModel & " runs without error")
-                                ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
-                            End If
-                        End If
+                    strTemp = clsMainCode.ToScript(strScript, strCommandString)
 
+                    Dim bValid As Boolean = False
+                    If RunCommandAsMultipleLines Then
+                        Dim lstScriptCommandLines As List(Of String) = frmMain.clsRLink.GetRunnableCommandLines(strTemp)
+
+                        For Each str As String In lstScriptCommandLines
+                            strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(str, bSilent:=True)
+                            'any command line that throws an error means the entire script code is not valid
+                            If strVecOutput Is Nothing Then
+                                bValid = False
+                                Exit For
+                            End If
+
+                            'todo. for data frames output, length is expected to be > 0
+                            'todo. not sure if other output types will have length > 0
+                            'todo. as at 07/08/2021. this block is only being used by dlgNewDataframe ONLY
+                            bValid = strVecOutput.Length > 0
+                            'don't break the if, we probably want to loop through to the last command checking validity? 
+                        Next
+                    Else
+                        strVecOutput = frmMain.clsRLink.RunInternalScriptGetOutput(strTemp, bSilent:=True, strError:=strErrorDetail)
+                        bValid = strVecOutput IsNot Nothing
+                    End If
+
+                    If bValid Then
+                        If bstrVecOutput Then
+                            ucrInputTryMessage.SetName(If(strVecOutput.Length > 1, Mid(strVecOutput(0), 5) & "...", Mid(strVecOutput(0), 5)))
+                            ucrInputTryMessage.txtInput.BackColor = Color.White
+                        Else
+                            ucrInputTryMessage.SetName(CommandModel & " runs without error")
+                            ucrInputTryMessage.txtInput.BackColor = Color.LightGreen
+                        End If
                     Else
                         ucrInputTryMessage.SetName(CommandModel & " produced an error or no output to display.")
                         ucrInputTryMessage.txtInput.BackColor = Color.LightCoral
