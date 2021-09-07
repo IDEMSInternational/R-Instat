@@ -202,8 +202,8 @@ Public Class dlgBarAndPieChart
         ucrNudLollipopSize.Maximum = 15
 
         ucrChkLollipop.SetText("Lollipop")
-        ucrChkLollipop.AddParameterPresentCondition(True, "geom_lollipop")
-        ucrChkLollipop.AddParameterPresentCondition(False, "geom_lollipop", False)
+        ucrChkLollipop.SetParameter(New RParameter("horizontal", 2))
+        ucrChkLollipop.SetValueIfChecked("TRUE")
         ucrChkLollipop.AddToLinkedControls({ucrNudLollipopSize, ucrInputLollipopColour}, {True}, bNewLinkedHideIfParameterMissing:=True)
         ucrNudLollipopSize.SetLinkedDisplayControl(lblLollipopSize)
         ucrInputLollipopColour.SetLinkedDisplayControl(lblLollipopColour)
