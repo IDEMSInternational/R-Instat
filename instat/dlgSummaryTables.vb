@@ -350,7 +350,8 @@ Public Class dlgSummaryTables
         clsSummariesList.ClearParameters()
         'Changing the parameter positions
         For Each clsParameter In lstOrderedSummaries
-            clsSummariesList.AddParameter(clsParameter.strArgumentName, clsParameter.strArgumentValue, iPosition:=iparameterIposition)
+            clsParameter.Position = iparameterIposition
+            clsSummariesList.AddParameter(clsParameter)
             iparameterIposition = iparameterIposition + 1
         Next
     End Sub
