@@ -33,26 +33,6 @@ Public Class ucrScript
         txtScript.SelectAll()
     End Sub
 
-    Private Sub cmdRunAll_Click(sender As Object, e As EventArgs) Handles cmdRunAll.Click
-        RunAllText()
-    End Sub
-
-    Private Sub cmdRunCurrentLine_Click(sender As Object, e As EventArgs) Handles cmdRun.Click
-        'temporarily disable the button incase its a long operation
-        cmdRun.Enabled = False
-        txtScript.Focus()
-        If txtScript.SelectionLength > 0 Then
-            RunSelectedText()
-        Else
-            RunCurrentLine()
-        End If
-        cmdRun.Enabled = True
-    End Sub
-
-    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
-        ClearContents()
-    End Sub
-
     Private Sub RunAllText()
         If txtScript.TextLength > 0 Then
             If MsgBox("Are you sure you want to run the entire contents of the script window?", MessageBoxButtons.YesNo, "Run All") = MsgBoxResult.Yes Then
@@ -104,24 +84,58 @@ Public Class ucrScript
         txtScript.Refresh()
     End Sub
 
-    Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
-        ClearContents()
-    End Sub
-
-    Private Sub mnuRunSelectedText_Click(sender As Object, e As EventArgs) Handles mnuRunSelectedText.Click
-        RunSelectedText()
-    End Sub
-
-    Private Sub mnuRunCurrentLine_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLine.Click
-        RunCurrentLine()
-    End Sub
-
     Private Function RunText(strText As String) As String
         If strText <> "" Then
             strText = frmMain.clsRLink.RunScriptFromWindow(strNewScript:=strText, strNewComment:=strComment)
         End If
         Return strText
     End Function
+
+    Private Sub cmdRunAll_Click(sender As Object, e As EventArgs) Handles cmdRunAll.Click
+        'temporarily disable the buttons incase its a long operation
+        cmdRunLineSelection.Enabled = False
+        cmdRunAll.Enabled = False
+        RunAllText()
+        cmdRunLineSelection.Enabled = True
+        cmdRunAll.Enabled = True
+    End Sub
+
+    Private Sub cmdRunLineSelection_Click(sender As Object, e As EventArgs) Handles cmdRunLineSelection.Click
+        'temporarily disable the buttons incase its a long operation
+        cmdRunLineSelection.Enabled = False
+        cmdRunAll.Enabled = False
+        txtScript.Focus()
+        If txtScript.SelectionLength > 0 Then
+            RunSelectedText()
+        Else
+            RunCurrentLine()
+        End If
+        cmdRunLineSelection.Enabled = True
+        cmdRunAll.Enabled = True
+    End Sub
+
+    Private Sub mnuRunCurrentLine_Click(sender As Object, e As EventArgs) Handles mnuRunCurrentLineSelection.Click
+        'temporarily disable the buttons incase its a long operation
+        cmdRunLineSelection.Enabled = False
+        cmdRunAll.Enabled = False
+        txtScript.Focus()
+        If txtScript.SelectionLength > 0 Then
+            RunSelectedText()
+        Else
+            RunCurrentLine()
+        End If
+        cmdRunLineSelection.Enabled = True
+        cmdRunAll.Enabled = True
+    End Sub
+
+    Private Sub cmdClear_Click(sender As Object, e As EventArgs) Handles cmdClear.Click
+        ClearContents()
+    End Sub
+
+    Private Sub mnuClearContents_Click(sender As Object, e As EventArgs) Handles mnuClearContents.Click
+        ClearContents()
+    End Sub
+
 
     Private Sub mnuOpenScript_Click(sender As Object, e As EventArgs) Handles mnuOpenScriptasFile.Click
         Dim strScriptFilename As String = ""
@@ -202,7 +216,9 @@ Public Class ucrScript
     End Sub
 
     Private Sub ucrScript_Load(sender As Object, e As EventArgs) Handles Me.Load
-        mnuRunCurrentLine.ShortcutKeys = Keys.Enter Or Keys.Control 'todo. remove this here
+        'todo. how can this be done through the visual studio properties panel?
+        mnuRunCurrentLineSelection.ShortcutKeys = Keys.Enter Or Keys.Control
+
         txtScript.WordWrap = False
         cmdRunAll.Enabled = (txtScript.TextLength > 0)
         mnuRedo.Enabled = False 'this is only enabled when undo operation is done.
@@ -213,24 +229,22 @@ Public Class ucrScript
             mnuOpenScriptasFile.Enabled = True
             mnuClearContents.Enabled = True
             mnuSaveScript.Enabled = True
-            mnuRunCurrentLine.Enabled = True
+            mnuRunCurrentLineSelection.Enabled = True
             mnuRunAllText.Enabled = True
         Else
             mnuOpenScriptasFile.Enabled = False
             mnuClearContents.Enabled = False
             mnuSaveScript.Enabled = False
-            mnuRunCurrentLine.Enabled = False
+            mnuRunCurrentLineSelection.Enabled = False
             mnuRunAllText.Enabled = False
         End If
 
         If txtScript.SelectionLength > 0 Then
             mnuCopy.Enabled = True
             mnuCut.Enabled = True
-            mnuRunSelectedText.Enabled = True
         Else
             mnuCopy.Enabled = False
             mnuCut.Enabled = False
-            mnuRunSelectedText.Enabled = False
         End If
 
     End Sub

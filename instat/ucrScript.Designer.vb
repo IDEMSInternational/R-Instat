@@ -47,8 +47,7 @@ Partial Class ucrScript
         Me.mnuUndo = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRedo = New System.Windows.Forms.ToolStripMenuItem()
         Me.RToolStripMenuItem = New System.Windows.Forms.ToolStripSeparator()
-        Me.mnuRunCurrentLine = New System.Windows.Forms.ToolStripMenuItem()
-        Me.mnuRunSelectedText = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mnuRunCurrentLineSelection = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuRunAllText = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuOpenScriptasFile = New System.Windows.Forms.ToolStripMenuItem()
         Me.mnuLoadScriptFromFile = New System.Windows.Forms.ToolStripMenuItem()
@@ -62,7 +61,7 @@ Partial Class ucrScript
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.cmdClear = New System.Windows.Forms.Button()
         Me.cmdRunAll = New System.Windows.Forms.Button()
-        Me.cmdRun = New System.Windows.Forms.Button()
+        Me.cmdRunLineSelection = New System.Windows.Forms.Button()
         Me.tooltiptScriptWindow = New System.Windows.Forms.ToolTip(Me.components)
         Me.mnuContextScript.SuspendLayout()
         Me.tlpTableContainer.SuspendLayout()
@@ -86,36 +85,36 @@ Partial Class ucrScript
         'mnuContextScript
         '
         Me.mnuContextScript.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuUndo, Me.mnuRedo, Me.RToolStripMenuItem, Me.mnuRunCurrentLine, Me.mnuRunSelectedText, Me.mnuRunAllText, Me.mnuOpenScriptasFile, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.mnuClearContents, Me.ToolStripSeparator1, Me.mnuHelp})
+        Me.mnuContextScript.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuCut, Me.mnuCopy, Me.mnuPaste, Me.mnuUndo, Me.mnuRedo, Me.RToolStripMenuItem, Me.mnuRunCurrentLineSelection, Me.mnuRunAllText, Me.mnuOpenScriptasFile, Me.mnuLoadScriptFromFile, Me.mnuSaveScript, Me.mnuClearContents, Me.ToolStripSeparator1, Me.mnuHelp})
         Me.mnuContextScript.Name = "mnuContextLogFile"
-        Me.mnuContextScript.Size = New System.Drawing.Size(230, 302)
+        Me.mnuContextScript.Size = New System.Drawing.Size(217, 280)
         '
         'mnuCut
         '
         Me.mnuCut.Name = "mnuCut"
         Me.mnuCut.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.mnuCut.Size = New System.Drawing.Size(229, 22)
+        Me.mnuCut.Size = New System.Drawing.Size(216, 22)
         Me.mnuCut.Text = "Cut"
         '
         'mnuCopy
         '
         Me.mnuCopy.Name = "mnuCopy"
         Me.mnuCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.mnuCopy.Size = New System.Drawing.Size(229, 22)
+        Me.mnuCopy.Size = New System.Drawing.Size(216, 22)
         Me.mnuCopy.Text = "Copy"
         '
         'mnuPaste
         '
         Me.mnuPaste.Name = "mnuPaste"
         Me.mnuPaste.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.V), System.Windows.Forms.Keys)
-        Me.mnuPaste.Size = New System.Drawing.Size(229, 22)
+        Me.mnuPaste.Size = New System.Drawing.Size(216, 22)
         Me.mnuPaste.Text = "Paste"
         '
         'mnuUndo
         '
         Me.mnuUndo.Name = "mnuUndo"
         Me.mnuUndo.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.mnuUndo.Size = New System.Drawing.Size(229, 22)
+        Me.mnuUndo.Size = New System.Drawing.Size(216, 22)
         Me.mnuUndo.Text = "Undo"
         '
         'mnuRedo
@@ -123,70 +122,62 @@ Partial Class ucrScript
         Me.mnuRedo.Name = "mnuRedo"
         Me.mnuRedo.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
             Or System.Windows.Forms.Keys.Z), System.Windows.Forms.Keys)
-        Me.mnuRedo.Size = New System.Drawing.Size(229, 22)
+        Me.mnuRedo.Size = New System.Drawing.Size(216, 22)
         Me.mnuRedo.Text = "Redo"
         '
         'RToolStripMenuItem
         '
         Me.RToolStripMenuItem.Name = "RToolStripMenuItem"
-        Me.RToolStripMenuItem.Size = New System.Drawing.Size(226, 6)
+        Me.RToolStripMenuItem.Size = New System.Drawing.Size(213, 6)
         '
-        'mnuRunCurrentLine
+        'mnuRunCurrentLineSelection
         '
-        Me.mnuRunCurrentLine.Name = "mnuRunCurrentLine"
-        Me.mnuRunCurrentLine.Size = New System.Drawing.Size(229, 22)
-        Me.mnuRunCurrentLine.Text = "Run Current Line"
-        '
-        'mnuRunSelectedText
-        '
-        Me.mnuRunSelectedText.Name = "mnuRunSelectedText"
-        Me.mnuRunSelectedText.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-            Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.mnuRunSelectedText.Size = New System.Drawing.Size(229, 22)
-        Me.mnuRunSelectedText.Text = "Run Selected Text"
+        Me.mnuRunCurrentLineSelection.Name = "mnuRunCurrentLineSelection"
+        Me.mnuRunCurrentLineSelection.Size = New System.Drawing.Size(216, 22)
+        Me.mnuRunCurrentLineSelection.Text = "Run Current Line/Selection"
         '
         'mnuRunAllText
         '
         Me.mnuRunAllText.Name = "mnuRunAllText"
         Me.mnuRunAllText.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
             Or System.Windows.Forms.Keys.R), System.Windows.Forms.Keys)
-        Me.mnuRunAllText.Size = New System.Drawing.Size(229, 22)
+        Me.mnuRunAllText.Size = New System.Drawing.Size(216, 22)
         Me.mnuRunAllText.Text = "Run All Text"
         '
         'mnuOpenScriptasFile
         '
         Me.mnuOpenScriptasFile.Name = "mnuOpenScriptasFile"
-        Me.mnuOpenScriptasFile.Size = New System.Drawing.Size(229, 22)
+        Me.mnuOpenScriptasFile.Size = New System.Drawing.Size(216, 22)
         Me.mnuOpenScriptasFile.Text = "Open Script as File"
         '
         'mnuLoadScriptFromFile
         '
         Me.mnuLoadScriptFromFile.Name = "mnuLoadScriptFromFile"
-        Me.mnuLoadScriptFromFile.Size = New System.Drawing.Size(229, 22)
+        Me.mnuLoadScriptFromFile.Size = New System.Drawing.Size(216, 22)
         Me.mnuLoadScriptFromFile.Text = "Load Script from File..."
         '
         'mnuSaveScript
         '
         Me.mnuSaveScript.Name = "mnuSaveScript"
-        Me.mnuSaveScript.Size = New System.Drawing.Size(229, 22)
+        Me.mnuSaveScript.Size = New System.Drawing.Size(216, 22)
         Me.mnuSaveScript.Text = "Save Script..."
         '
         'mnuClearContents
         '
         Me.mnuClearContents.Name = "mnuClearContents"
         Me.mnuClearContents.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.L), System.Windows.Forms.Keys)
-        Me.mnuClearContents.Size = New System.Drawing.Size(229, 22)
+        Me.mnuClearContents.Size = New System.Drawing.Size(216, 22)
         Me.mnuClearContents.Text = "Clear Script"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(226, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(213, 6)
         '
         'mnuHelp
         '
         Me.mnuHelp.Name = "mnuHelp"
-        Me.mnuHelp.Size = New System.Drawing.Size(229, 22)
+        Me.mnuHelp.Size = New System.Drawing.Size(216, 22)
         Me.mnuHelp.Text = "Help"
         '
         'lblHeaderScript
@@ -232,7 +223,7 @@ Partial Class ucrScript
         '
         Me.Panel2.Controls.Add(Me.cmdClear)
         Me.Panel2.Controls.Add(Me.cmdRunAll)
-        Me.Panel2.Controls.Add(Me.cmdRun)
+        Me.Panel2.Controls.Add(Me.cmdRunLineSelection)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 23)
         Me.Panel2.Name = "Panel2"
@@ -259,15 +250,15 @@ Partial Class ucrScript
         Me.tooltiptScriptWindow.SetToolTip(Me.cmdRunAll, "Run all lines")
         Me.cmdRunAll.UseVisualStyleBackColor = True
         '
-        'cmdRun
+        'cmdRunLineSelection
         '
-        Me.cmdRun.Location = New System.Drawing.Point(2, 1)
-        Me.cmdRun.Name = "cmdRun"
-        Me.cmdRun.Size = New System.Drawing.Size(51, 23)
-        Me.cmdRun.TabIndex = 2
-        Me.cmdRun.Text = "Run"
-        Me.tooltiptScriptWindow.SetToolTip(Me.cmdRun, "Run the current line or selection." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Ctrl + Enter)")
-        Me.cmdRun.UseVisualStyleBackColor = True
+        Me.cmdRunLineSelection.Location = New System.Drawing.Point(2, 1)
+        Me.cmdRunLineSelection.Name = "cmdRunLineSelection"
+        Me.cmdRunLineSelection.Size = New System.Drawing.Size(51, 23)
+        Me.cmdRunLineSelection.TabIndex = 2
+        Me.cmdRunLineSelection.Text = "Run"
+        Me.tooltiptScriptWindow.SetToolTip(Me.cmdRunLineSelection, "Run the current line or selection." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "(Ctrl + Enter)")
+        Me.cmdRunLineSelection.UseVisualStyleBackColor = True
         '
         'ucrScript
         '
@@ -289,7 +280,6 @@ Partial Class ucrScript
     Friend WithEvents lblHeaderScript As Label
     Friend WithEvents tlpTableContainer As TableLayoutPanel
     Friend WithEvents mnuContextScript As ContextMenuStrip
-    Friend WithEvents mnuRunSelectedText As ToolStripMenuItem
     Friend WithEvents mnuClearContents As ToolStripMenuItem
     Friend WithEvents mnuOpenScriptasFile As ToolStripMenuItem
     Friend WithEvents mnuSaveScript As ToolStripMenuItem
@@ -300,14 +290,14 @@ Partial Class ucrScript
     Friend WithEvents mnuUndo As ToolStripMenuItem
     Friend WithEvents RToolStripMenuItem As ToolStripSeparator
     Friend WithEvents mnuRunAllText As ToolStripMenuItem
-    Friend WithEvents mnuRunCurrentLine As ToolStripMenuItem
+    Friend WithEvents mnuRunCurrentLineSelection As ToolStripMenuItem
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents mnuHelp As ToolStripMenuItem
     Friend WithEvents mnuRedo As ToolStripMenuItem
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents cmdRunAll As Button
-    Friend WithEvents cmdRun As Button
+    Friend WithEvents cmdRunLineSelection As Button
     Friend WithEvents tooltiptScriptWindow As ToolTip
     Friend WithEvents cmdClear As Button
 End Class
