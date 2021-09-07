@@ -15,7 +15,7 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 <Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class dlgRugPlot
+Partial Class dlgHeatMap
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -38,17 +38,17 @@ Partial Class dlgRugPlot
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgRugPlot))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgHeatMap))
         Me.cmdOptions = New System.Windows.Forms.Button()
-        Me.cmdRugPlotOptions = New System.Windows.Forms.Button()
-        Me.lblFactorOptional = New System.Windows.Forms.Label()
+        Me.cmdHeatMapOptions = New System.Windows.Forms.Button()
         Me.lblXVariable = New System.Windows.Forms.Label()
-        Me.ucrSaveGraph = New instat.ucrSave()
-        Me.ucrVariablesAsFactorForRugPlot = New instat.ucrVariablesAsFactor()
-        Me.ucrFactorOptionalReceiver = New instat.ucrReceiverSingle()
         Me.ucrReceiverX = New instat.ucrReceiverSingle()
-        Me.ucrRugPlotSelector = New instat.ucrSelectorByDataFrameAddRemove()
+        Me.ucrSaveGraph = New instat.ucrSave()
+        Me.ucrHeatMapSelector = New instat.ucrSelectorByDataFrameAddRemove()
         Me.ucrBase = New instat.ucrButtons()
+        Me.ucrVariableAsFactorForHeatMap = New instat.ucrVariablesAsFactor()
+        Me.lblFill = New System.Windows.Forms.Label()
+        Me.ucrReceiverFill = New instat.ucrReceiverSingle()
         Me.SuspendLayout()
         '
         'cmdOptions
@@ -58,48 +58,18 @@ Partial Class dlgRugPlot
         Me.cmdOptions.Tag = "Options"
         Me.cmdOptions.UseVisualStyleBackColor = True
         '
-        'cmdRugPlotOptions
+        'cmdHeatMapOptions
         '
-        resources.ApplyResources(Me.cmdRugPlotOptions, "cmdRugPlotOptions")
-        Me.cmdRugPlotOptions.Name = "cmdRugPlotOptions"
-        Me.cmdRugPlotOptions.Tag = "Rug_Plot_Options"
-        Me.cmdRugPlotOptions.UseVisualStyleBackColor = True
-        '
-        'lblFactorOptional
-        '
-        resources.ApplyResources(Me.lblFactorOptional, "lblFactorOptional")
-        Me.lblFactorOptional.Name = "lblFactorOptional"
-        Me.lblFactorOptional.Tag = "By_Variable_Optional:"
+        resources.ApplyResources(Me.cmdHeatMapOptions, "cmdHeatMapOptions")
+        Me.cmdHeatMapOptions.Name = "cmdHeatMapOptions"
+        Me.cmdHeatMapOptions.Tag = "Heat_Map_Options"
+        Me.cmdHeatMapOptions.UseVisualStyleBackColor = True
         '
         'lblXVariable
         '
         resources.ApplyResources(Me.lblXVariable, "lblXVariable")
         Me.lblXVariable.Name = "lblXVariable"
         Me.lblXVariable.Tag = "X_Variable:"
-        '
-        'ucrSaveGraph
-        '
-        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
-        Me.ucrSaveGraph.Name = "ucrSaveGraph"
-        '
-        'ucrVariablesAsFactorForRugPlot
-        '
-        Me.ucrVariablesAsFactorForRugPlot.frmParent = Me
-        resources.ApplyResources(Me.ucrVariablesAsFactorForRugPlot, "ucrVariablesAsFactorForRugPlot")
-        Me.ucrVariablesAsFactorForRugPlot.Name = "ucrVariablesAsFactorForRugPlot"
-        Me.ucrVariablesAsFactorForRugPlot.Selector = Nothing
-        Me.ucrVariablesAsFactorForRugPlot.strNcFilePath = ""
-        Me.ucrVariablesAsFactorForRugPlot.ucrSelector = Nothing
-        Me.ucrVariablesAsFactorForRugPlot.ucrVariableSelector = Nothing
-        '
-        'ucrFactorOptionalReceiver
-        '
-        Me.ucrFactorOptionalReceiver.frmParent = Me
-        resources.ApplyResources(Me.ucrFactorOptionalReceiver, "ucrFactorOptionalReceiver")
-        Me.ucrFactorOptionalReceiver.Name = "ucrFactorOptionalReceiver"
-        Me.ucrFactorOptionalReceiver.Selector = Nothing
-        Me.ucrFactorOptionalReceiver.strNcFilePath = ""
-        Me.ucrFactorOptionalReceiver.ucrSelector = Nothing
         '
         'ucrReceiverX
         '
@@ -110,49 +80,79 @@ Partial Class dlgRugPlot
         Me.ucrReceiverX.strNcFilePath = ""
         Me.ucrReceiverX.ucrSelector = Nothing
         '
-        'ucrRugPlotSelector
+        'ucrSaveGraph
         '
-        Me.ucrRugPlotSelector.bDropUnusedFilterLevels = False
-        Me.ucrRugPlotSelector.bShowHiddenColumns = False
-        Me.ucrRugPlotSelector.bUseCurrentFilter = True
-        resources.ApplyResources(Me.ucrRugPlotSelector, "ucrRugPlotSelector")
-        Me.ucrRugPlotSelector.Name = "ucrRugPlotSelector"
+        resources.ApplyResources(Me.ucrSaveGraph, "ucrSaveGraph")
+        Me.ucrSaveGraph.Name = "ucrSaveGraph"
+        '
+        'ucrHeatMapSelector
+        '
+        Me.ucrHeatMapSelector.bDropUnusedFilterLevels = False
+        Me.ucrHeatMapSelector.bShowHiddenColumns = False
+        Me.ucrHeatMapSelector.bUseCurrentFilter = True
+        resources.ApplyResources(Me.ucrHeatMapSelector, "ucrHeatMapSelector")
+        Me.ucrHeatMapSelector.Name = "ucrHeatMapSelector"
         '
         'ucrBase
         '
         resources.ApplyResources(Me.ucrBase, "ucrBase")
         Me.ucrBase.Name = "ucrBase"
         '
-        'dlgRugPlot
+        'ucrVariableAsFactorForHeatMap
+        '
+        Me.ucrVariableAsFactorForHeatMap.frmParent = Me
+        resources.ApplyResources(Me.ucrVariableAsFactorForHeatMap, "ucrVariableAsFactorForHeatMap")
+        Me.ucrVariableAsFactorForHeatMap.Name = "ucrVariableAsFactorForHeatMap"
+        Me.ucrVariableAsFactorForHeatMap.Selector = Nothing
+        Me.ucrVariableAsFactorForHeatMap.strNcFilePath = ""
+        Me.ucrVariableAsFactorForHeatMap.ucrSelector = Nothing
+        Me.ucrVariableAsFactorForHeatMap.ucrVariableSelector = Nothing
+        '
+        'lblFill
+        '
+        resources.ApplyResources(Me.lblFill, "lblFill")
+        Me.lblFill.Name = "lblFill"
+        Me.lblFill.Tag = "fill"
+        '
+        'ucrReceiverFill
+        '
+        Me.ucrReceiverFill.frmParent = Me
+        resources.ApplyResources(Me.ucrReceiverFill, "ucrReceiverFill")
+        Me.ucrReceiverFill.Name = "ucrReceiverFill"
+        Me.ucrReceiverFill.Selector = Nothing
+        Me.ucrReceiverFill.strNcFilePath = ""
+        Me.ucrReceiverFill.ucrSelector = Nothing
+        '
+        'dlgHeatMap
         '
         resources.ApplyResources(Me, "$this")
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.Controls.Add(Me.ucrVariableAsFactorForHeatMap)
+        Me.Controls.Add(Me.lblFill)
+        Me.Controls.Add(Me.ucrReceiverFill)
         Me.Controls.Add(Me.ucrReceiverX)
         Me.Controls.Add(Me.ucrSaveGraph)
-        Me.Controls.Add(Me.ucrVariablesAsFactorForRugPlot)
-        Me.Controls.Add(Me.ucrFactorOptionalReceiver)
-        Me.Controls.Add(Me.lblFactorOptional)
         Me.Controls.Add(Me.lblXVariable)
         Me.Controls.Add(Me.cmdOptions)
-        Me.Controls.Add(Me.cmdRugPlotOptions)
-        Me.Controls.Add(Me.ucrRugPlotSelector)
+        Me.Controls.Add(Me.cmdHeatMapOptions)
+        Me.Controls.Add(Me.ucrHeatMapSelector)
         Me.Controls.Add(Me.ucrBase)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "dlgRugPlot"
+        Me.Name = "dlgHeatMap"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents cmdOptions As Button
-    Friend WithEvents cmdRugPlotOptions As Button
-    Friend WithEvents ucrRugPlotSelector As ucrSelectorByDataFrameAddRemove
+    Friend WithEvents cmdHeatMapOptions As Button
+    Friend WithEvents ucrHeatMapSelector As ucrSelectorByDataFrameAddRemove
     Friend WithEvents ucrBase As ucrButtons
-    Friend WithEvents ucrVariablesAsFactorForRugPlot As ucrVariablesAsFactor
-    Friend WithEvents ucrFactorOptionalReceiver As ucrReceiverSingle
-    Friend WithEvents lblFactorOptional As Label
     Friend WithEvents ucrReceiverX As ucrReceiverSingle
     Friend WithEvents lblXVariable As Label
     Friend WithEvents ucrSaveGraph As ucrSave
+    Friend WithEvents ucrVariableAsFactorForHeatMap As ucrVariablesAsFactor
+    Friend WithEvents lblFill As Label
+    Friend WithEvents ucrReceiverFill As ucrReceiverSingle
 End Class

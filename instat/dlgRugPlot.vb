@@ -15,9 +15,9 @@
 ' along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Imports instat.Translations
-Public Class dlgRugPlot
+Public Class dlgHeatMap
     Private clsRggplotFunction As New RFunction
-    Private clsRgeom_RugPlotFunction As New RFunction
+    Private clsRgeom_TileFunction As New RFunction
     Private clsRaesFunction As New RFunction
     Private bFirstLoad As Boolean = True
     Private clsBaseOperator As New ROperator
@@ -64,52 +64,54 @@ Public Class dlgRugPlot
         ucrBase.clsRsyntax.bExcludeAssignedFunctionOutput = False
         ucrBase.clsRsyntax.iCallType = 3
 
-        ucrRugPlotSelector.SetParameter(New RParameter("data", 0))
-        ucrRugPlotSelector.SetParameterIsrfunction()
-
-        ucrVariablesAsFactorForRugPlot.SetParameter(New RParameter("y", 1))
-        ucrVariablesAsFactorForRugPlot.SetParameterIsString()
-        ucrVariablesAsFactorForRugPlot.SetFactorReceiver(ucrFactorOptionalReceiver)
-        ucrVariablesAsFactorForRugPlot.Selector = ucrRugPlotSelector
-        ucrVariablesAsFactorForRugPlot.strSelectorHeading = "Variables"
-        ucrVariablesAsFactorForRugPlot.bWithQuotes = False
+        ucrHeatMapSelector.SetParameter(New RParameter("data", 0))
+        ucrHeatMapSelector.SetParameterIsrfunction()
 
         ucrReceiverX.SetParameter(New RParameter("x", 0))
         ucrReceiverX.SetParameterIsString()
-        ucrReceiverX.Selector = ucrRugPlotSelector
-        ucrReceiverX.strSelectorHeading = "Variables"
+        ucrReceiverX.Selector = ucrHeatMapSelector
         ucrReceiverX.bWithQuotes = False
+        ucrReceiverX.SetIncludedDataTypes({"factor"})
 
-        ucrFactorOptionalReceiver.SetParameter(New RParameter("colour", 2))
-        ucrFactorOptionalReceiver.Selector = ucrRugPlotSelector
-        ucrFactorOptionalReceiver.strSelectorHeading = "Variables"
-        ucrFactorOptionalReceiver.bWithQuotes = False
-        ucrFactorOptionalReceiver.SetParameterIsString()
+        ucrVariableAsFactorForHeatMap.SetParameter(New RParameter("y", 1))
+        ucrVariableAsFactorForHeatMap.Selector = ucrHeatMapSelector
+        ucrVariableAsFactorForHeatMap.strSelectorHeading = "Varibles"
+        ucrVariableAsFactorForHeatMap.SetParameterIsString()
+        ucrVariableAsFactorForHeatMap.bWithQuotes = False
+        ucrVariableAsFactorForHeatMap.SetIncludedDataTypes({"factor"})
+        ucrVariableAsFactorForHeatMap.SetValuesToIgnore({Chr(34) & Chr(34)})
+        ucrVariableAsFactorForHeatMap.bAddParameterIfEmpty = True
 
-        ucrSaveGraph.SetPrefix("rugplot")
+        ucrReceiverFill.SetParameter(New RParameter("fill", 2))
+        ucrReceiverFill.SetParameterIsString()
+        ucrReceiverFill.Selector = ucrHeatMapSelector
+        ucrReceiverFill.bWithQuotes = False
+        ucrReceiverFill.SetIncludedDataTypes({"numeric"})
+
+        ucrSaveGraph.SetPrefix("heatmap")
         ucrSaveGraph.SetSaveTypeAsGraph()
         ucrSaveGraph.SetIsComboBox()
         ucrSaveGraph.SetCheckBoxText("Save Graph")
-        ucrSaveGraph.SetDataFrameSelector(ucrRugPlotSelector.ucrAvailableDataFrames)
+        ucrSaveGraph.SetDataFrameSelector(ucrHeatMapSelector.ucrAvailableDataFrames)
         ucrSaveGraph.SetAssignToIfUncheckedValue("last_graph")
     End Sub
 
     Private Sub SetDefaults()
         clsRaesFunction = New RFunction
         clsRggplotFunction = New RFunction
-        clsRgeom_RugPlotFunction = New RFunction
+        clsRgeom_TileFunction = New RFunction
         clsBaseOperator = New ROperator
 
         ucrSaveGraph.Reset()
-        ucrVariablesAsFactorForRugPlot.SetMeAsReceiver()
-        ucrRugPlotSelector.Reset()
-        ucrRugPlotSelector.SetGgplotFunction(clsBaseOperator)
+        ucrVariableAsFactorForHeatMap.SetMeAsReceiver()
+        ucrHeatMapSelector.Reset()
+        ucrHeatMapSelector.SetGgplotFunction(clsBaseOperator)
         bResetSubdialog = True
         bResetRugLayerSubdialog = True
 
         clsBaseOperator.SetOperation("+")
         clsBaseOperator.AddParameter("ggplot", clsRFunctionParameter:=clsRggplotFunction, iPosition:=0)
-        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsRgeom_RugPlotFunction, iPosition:=2)
+        clsBaseOperator.AddParameter(strFirstParameterName, clsRFunctionParameter:=clsRgeom_TileFunction, iPosition:=1)
 
         clsRggplotFunction.SetPackageName("ggplot2")
         clsRggplotFunction.SetRCommand("ggplot")
@@ -118,8 +120,8 @@ Public Class dlgRugPlot
         clsRaesFunction.SetPackageName("ggplot2")
         clsRaesFunction.SetRCommand("aes")
 
-        clsRgeom_RugPlotFunction.SetPackageName("ggplot2")
-        clsRgeom_RugPlotFunction.SetRCommand("geom_rug")
+        clsRgeom_TileFunction.SetPackageName("ggplot2")
+        clsRgeom_TileFunction.SetRCommand("geom_tile")
 
         clsBaseOperator.AddParameter(GgplotDefaults.clsDefaultThemeParameter.Clone())
         clsXlabsFunction = GgplotDefaults.clsXlabTitleFunction.Clone()
@@ -139,30 +141,28 @@ Public Class dlgRugPlot
         clsScaleColourViridisFunction = GgplotDefaults.clsScaleColorViridisFunction
         clsAnnotateFunction = GgplotDefaults.clsAnnotateFunction
 
-        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrRugPlotSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
+        clsBaseOperator.SetAssignTo("last_graph", strTempDataframe:=ucrHeatMapSelector.ucrAvailableDataFrames.cboAvailableDataFrames.Text, strTempGraph:="last_graph")
         ucrBase.clsRsyntax.SetBaseROperator(clsBaseOperator)
-
     End Sub
 
     Public Sub SetRCodeForControls(bReset As Boolean)
         ucrSaveGraph.SetRCode(clsBaseOperator, bReset)
-        ucrRugPlotSelector.SetRCode(clsRggplotFunction, bReset)
+        ucrHeatMapSelector.SetRCode(clsRggplotFunction, bReset)
 
         ucrReceiverX.SetRCode(clsRaesFunction, bReset)
-        ucrFactorOptionalReceiver.SetRCode(clsRaesFunction, bReset)
-        ucrVariablesAsFactorForRugPlot.SetRCode(clsRaesFunction, bReset)
+        ucrVariableAsFactorForHeatMap.SetRCode(clsRaesFunction, bReset)
+        ucrReceiverFill.SetRCode(clsRaesFunction, bReset)
     End Sub
 
     Private Sub TestOkEnabled()
-        ' Tests when OK is enabled
-        If (Not ucrSaveGraph.IsComplete) OrElse (ucrVariablesAsFactorForRugPlot.IsEmpty AndAlso ucrReceiverX.IsEmpty()) Then
+        If (Not ucrSaveGraph.IsComplete) OrElse (ucrReceiverX.IsEmpty() OrElse ucrVariableAsFactorForHeatMap.IsEmpty()) Then
             ucrBase.OKEnabled(False)
         Else
             ucrBase.OKEnabled(True)
         End If
     End Sub
 
-    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariablesAsFactorForRugPlot.ControlContentsChanged
+    Private Sub AllControlsContentsChanged() Handles ucrReceiverX.ControlContentsChanged, ucrSaveGraph.ControlContentsChanged, ucrVariableAsFactorForHeatMap.ControlContentsChanged
         TestOkEnabled()
     End Sub
 
@@ -176,25 +176,24 @@ Public Class dlgRugPlot
         sdgPlots.SetRCode(clsBaseOperator, clsNewYScalecontinuousFunction:=clsYScalecontinuousFunction, clsNewXScalecontinuousFunction:=clsXScalecontinuousFunction,
                           clsNewGlobalAesFunction:=clsRaesFunction, clsNewXLabsTitleFunction:=clsXlabsFunction, clsNewScaleFillViridisFunction:=clsScaleFillViridisFunction,
                           clsNewScaleColourViridisFunction:=clsScaleColourViridisFunction, clsNewYLabTitleFunction:=clsYlabFunction, clsNewLabsFunction:=clsLabsFunction,
-                          clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrRugPlotSelector,
+                          clsNewFacetFunction:=clsRFacetFunction, clsNewThemeFunction:=clsThemeFunction, dctNewThemeFunctions:=dctThemeFunctions, ucrNewBaseSelector:=ucrHeatMapSelector,
                           strMainDialogGeomParameterNames:=strGeomParameterNames, clsNewCoordPolarFunction:=clsCoordPolarFunction, clsNewCoordPolarStartOperator:=clsCoordPolarStartOperator,
                            clsNewAnnotateFunction:=clsAnnotateFunction, clsNewXScaleDateFunction:=clsXScaleDateFunction, clsNewYScaleDateFunction:=clsYScaleDateFunction, bReset:=bResetSubdialog)
         sdgPlots.ShowDialog()
         bResetSubdialog = False
     End Sub
-
-    Private Sub cmdRugPlotOptions_Click(sender As Object, e As EventArgs) Handles cmdRugPlotOptions.Click
+    Private Sub cmdHeatMapOptions_Click(sender As Object, e As EventArgs) Handles cmdHeatMapOptions.Click
         ''''''' i wonder if all this will be needed for the new system
-        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeom_RugPlotFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrRugPlotSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
+        sdgLayerOptions.SetupLayer(clsNewGgPlot:=clsRggplotFunction, clsNewGeomFunc:=clsRgeom_TileFunction, clsNewGlobalAesFunc:=clsRaesFunction, clsNewLocalAes:=clsLocalRaesFunction, bFixGeom:=True, ucrNewBaseSelector:=ucrHeatMapSelector, bApplyAesGlobally:=True, bReset:=bResetRugLayerSubdialog)
         sdgLayerOptions.ShowDialog()
         bResetRugLayerSubdialog = False
         For Each clsParam In clsRaesFunction.clsParameters
-            If clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariablesAsFactorForRugPlot.bSingleVariable) Then
-                ucrVariablesAsFactorForRugPlot.Add(clsParam.strArgumentValue)
+            If clsParam.strArgumentName = "y" AndAlso (clsParam.strArgumentValue <> "value" OrElse ucrVariableAsFactorForHeatMap.bSingleVariable) Then
+                ucrVariableAsFactorForHeatMap.Add(clsParam.strArgumentValue)
             ElseIf clsParam.strArgumentName = "x" Then
                 ucrReceiverX.Add(clsParam.strArgumentValue)
-            ElseIf clsParam.strArgumentName = "colour" Then
-                ucrFactorOptionalReceiver.Add(clsParam.strArgumentValue)
+            ElseIf clsParam.strArgumentName = "fill" Then
+                ucrReceiverFill.Add(clsParam.strArgumentValue)
             End If
         Next
     End Sub
