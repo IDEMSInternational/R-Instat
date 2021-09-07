@@ -313,7 +313,7 @@ Imports RDotNet
     Public Sub SetFormatEditor(fntNew As Font, clrNew As Color)
         fntEditor = fntNew
         clrEditor = clrNew
-        frmMain.clsGrids.SetFormatDataView(fntEditor, clrEditor)
+        frmMain.UpdateFontsOnlyOnAllGrids()
     End Sub
 
     Public Sub SetPreviewRows(intlines As Integer)

@@ -181,13 +181,17 @@ Public Class frmMain
 
         isMaximised = True 'Need to get the windowstate when the application is loaded
     End Sub
-
+    ''' <summary>
+    ''' Updates data view, column meta and data frame meta grids.
+    ''' </summary>
     Public Sub UpdateAllGrids()
         ucrDataViewer.RefreshGridData()
         ucrColumnMeta.RefreshGridData()
         ucrDataFrameMeta.RefreshGridData()
     End Sub
-
+    ''' <summary>
+    ''' Updates styles on data view, column meta and data frame meta grids.
+    ''' </summary>
     Public Sub UpdateFontsOnlyOnAllGrids()
         ucrDataViewer.UpdateAllWorksheetStyles()
         ucrColumnMeta.UpdateAllWorksheetStyles()
